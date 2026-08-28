@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10243e">
+<title>TifloAcosta App</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Saltar al contenido principal</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <p class="brand" aria-label="TifloAcosta">TifloAcosta</p>
+    <div class="language-switch" role="group" aria-label="Idioma / Language">
+      <button type="button" id="lang-es" aria-pressed="true">Español</button>
+      <button type="button" id="lang-en" aria-pressed="false">English</button>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="wrap" tabindex="-1">
+  <h1>TifloAcosta App</h1>
+  <p id="intro">Recursos de accesibilidad y tecnología, organizados para llegar a ellos sin perderse por el camino.</p>
+
+  <section aria-labelledby="search-heading">
+    <h2 id="search-heading">Buscar recursos</h2>
+    <form id="search-form" role="search">
+      <label for="search">Título o palabra clave</label>
+      <div class="search-row">
+        <input id="search" type="search" autocomplete="off" placeholder="Por ejemplo: VoiceOver, Android, WhatsApp…">
+        <button type="submit" id="search-button">Buscar</button>
+      </div>
+    </form>
+  </section>
+
+  <section aria-labelledby="news-heading">
+    <div class="section-head">
+      <h2 id="news-heading">Novedades</h2>
+      <p id="news-count" class="muted"></p>
+    </div>
+    <div id="news-list" class="news-list"></div>
+  </section>
+
+  <section aria-labelledby="explore-heading">
+    <h2 id="explore-heading">Explorar recursos</h2>
+    <label for="category">Categoría</label>
+    <select id="category">
+      <option value="">Seleccionar una categoría</option>
+    </select>
+    <div class="inline-actions">
+      <button type="button" id="favorites-button">Ver favoritos</button>
+      <button type="button" id="clear-results" hidden>Limpiar resultados</button>
+    </div>
+    <p id="result-status" class="muted" role="status" aria-live="polite"></p>
+    <div id="resource-results" class="resource-list" hidden></div>
+  </section>
+
+  <section aria-labelledby="more-heading">
+    <h2 id="more-heading">Más de TifloAcosta</h2>
+    <label for="more-select">Elegir una opción</label>
+    <select id="more-select">
+      <option value="">Seleccionar</option>
+      <option value="videos">Vídeos</option>
+      <option value="book">Libro</option>
+      <option value="community">Comunidad</option>
+      <option value="social">Redes sociales</option>
+      <option value="library">Biblioteca completa</option>
+      <option value="install">Instalar la app</option>
+      <option value="notifications">Notificaciones</option>
+    </select>
+    <div id="more-panel" class="panel" hidden tabindex="-1"></div>
+    <noscript><p>Esta prueba necesita JavaScript activado para mostrar los recursos y guardar las preferencias.</p></noscript>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p id="footer-text">TifloAcosta App · Versión 0.3 de prueba accesible.</p>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

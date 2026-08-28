@@ -15,7 +15,7 @@
     contactInstagram: $('#contact-instagram'), contactFacebookChannel: $('#contact-facebook-channel'), contactFacebookPersonal: $('#contact-facebook-personal'),
     contactYoutube: $('#contact-youtube'), contactSpotify: $('#contact-spotify'), contactApplePodcasts: $('#contact-apple-podcasts'),
     contactIvoox: $('#contact-ivoox'), contactPodimo: $('#contact-podimo'), contactRadio: $('#contact-radio'),
-    configHeading: $('#config-heading'), accessibilityHeading: $('#accessibility-heading'), settingsPanel: $('#settings-panel'),
+    configHeading: $('#config-heading'), settingsToggle: $('#settings-toggle'), accessibilityHeading: $('#accessibility-heading'), settingsPanel: $('#settings-panel'),
     settingsIntro: $('#settings-intro'), settingsForm: $('#settings-form'), textLegend: $('#setting-text-legend'),
     textLabel: $('#setting-text-label'), textSize: $('#setting-text-size'), themeLegend: $('#setting-theme-legend'),
     themeLabel: $('#setting-theme-label'), theme: $('#setting-theme'), spacingLegend: $('#setting-spacing-legend'),
@@ -38,7 +38,7 @@
       found: n => `${n} recurso${n === 1 ? '' : 's'} encontrado${n === 1 ? '' : 's'}.`, categoryFound: (cat,n) => `Categoría ${cat}. ${n} recurso${n === 1 ? '' : 's'} encontrado${n === 1 ? '' : 's'}.`, favFound: n => `${n} favorito${n === 1 ? '' : 's'}.`,
       noResults: 'No hay recursos que coincidan.', noFavorites: 'Todavía no hay favoritos guardados.', newBadge: 'Nuevo', open: 'Abrir recurso', addFav: 'Añadir a favoritos', removeFav: 'Quitar de favoritos',
       settings: {
-        title: 'Ajustes de visualización y accesibilidad', intro: 'La app respeta el tamaño y el modo de color del sistema. Además, puedes guardar aquí preferencias propias para TifloAcosta.',
+        title: 'Ajustes de visualización y accesibilidad', toggle: 'Opciones de configuración visual', intro: 'La app respeta el tamaño y el modo de color del sistema. Además, puedes guardar aquí preferencias propias para TifloAcosta.',
         textLegend: 'Tamaño del texto', textLabel: 'Tamaño', textOptions: { normal:'Predeterminado', large:'Grande', xlarge:'Muy grande', max:'Máximo' },
         themeLegend: 'Color y contraste', themeLabel: 'Perfil de contraste', themeOptions: { auto:'Seguir el sistema', light:'Alto contraste claro', dark:'Alto contraste oscuro' },
         spacingLegend: 'Espaciado', spacingLabel: 'Separación entre líneas', spacingOptions: { normal:'Normal', comfortable:'Cómoda', wide:'Amplia' },
@@ -52,7 +52,7 @@
         library: '<h3>Biblioteca completa</h3><p><a class="button-link" href="https://drive.google.com/drive/folders/1qUy0-ESqWhmIbYC00gpIdHHMZCPla_1r">Carpeta completa en español</a></p><p><a class="button-link" href="https://drive.google.com/drive/folders/1fVQp_eDGWoVO_fp7xFGdPllXMMWZalvx?usp=sharing">Carpeta completa en inglés</a></p><p><a class="button-link" href="https://tifloacosta.wixsite.com/tifloacosta-recursos">Página pública de recursos</a></p>',
         install: '<h3>Instalar la app</h3><p>En iPhone o iPad, abre TifloAcosta App en Safari y utiliza Compartir > Añadir a pantalla de inicio. En navegadores compatibles de otros sistemas puede aparecer una opción equivalente de instalación.</p>',
         notifications: '<h3>Notificaciones</h3><p>La estructura está preparada para incorporar avisos de nuevos contenidos después de publicar la PWA y comprobar su accesibilidad instalada.</p>'
-      }, footer: 'TifloAcosta App · Versión 0.7 de prueba accesible.'
+      }, footer: 'TifloAcosta App · Versión 0.8 de prueba accesible.'
     },
     en: {
       intro: 'Accessibility and technology resources, organized so you can reach what you need without getting lost along the way.',
@@ -67,7 +67,7 @@
       found: n => `${n} resource${n === 1 ? '' : 's'} found.`, categoryFound: (cat,n) => `${cat} category. ${n} resource${n === 1 ? '' : 's'} found.`, favFound: n => `${n} favorite${n === 1 ? '' : 's'}.`,
       noResults: 'No matching resources were found.', noFavorites: 'No favorites have been saved yet.', newBadge: 'New', open: 'Open resource', addFav: 'Add to favorites', removeFav: 'Remove from favorites',
       settings: {
-        title: 'Display and accessibility settings', intro: 'The app respects your system text size and color mode. You can also save TifloAcosta-specific preferences here.',
+        title: 'Display and accessibility settings', toggle: 'Visual settings options', intro: 'The app respects your system text size and color mode. You can also save TifloAcosta-specific preferences here.',
         textLegend: 'Text size', textLabel: 'Size', textOptions: { normal:'Default', large:'Large', xlarge:'Extra large', max:'Maximum' },
         themeLegend: 'Color and contrast', themeLabel: 'Contrast profile', themeOptions: { auto:'Follow system', light:'High contrast light', dark:'High contrast dark' },
         spacingLegend: 'Spacing', spacingLabel: 'Line spacing', spacingOptions: { normal:'Normal', comfortable:'Comfortable', wide:'Wide' },
@@ -81,7 +81,7 @@
         library: '<h3>Full library</h3><p><a class="button-link" href="https://drive.google.com/drive/folders/1qUy0-ESqWhmIbYC00gpIdHHMZCPla_1r">Full Spanish folder</a></p><p><a class="button-link" href="https://drive.google.com/drive/folders/1fVQp_eDGWoVO_fp7xFGdPllXMMWZalvx?usp=sharing">Full English folder</a></p><p><a class="button-link" href="https://tifloacosta.wixsite.com/tifloacosta-recursos">Public resources page</a></p>',
         install: '<h3>Install the app</h3><p>On iPhone or iPad, open TifloAcosta App in Safari and use Share > Add to Home Screen. Compatible browsers on other systems may offer an equivalent install option.</p>',
         notifications: '<h3>Notifications</h3><p>The structure is ready for new-content alerts after the PWA is published and its installed accessibility has been verified.</p>'
-      }, footer: 'TifloAcosta App · Accessible test version 0.7.'
+      }, footer: 'TifloAcosta App · Accessible test version 0.8.'
     }
   };
 
@@ -143,6 +143,7 @@
 
   function localizeSettings() {
     const s=copy[lang].settings;
+    els.settingsToggle.textContent=s.toggle;
     els.settingsIntro.textContent=s.intro;
     els.textLegend.textContent=s.textLegend;
     els.textLabel.textContent=s.textLabel;
@@ -158,6 +159,12 @@
     els.bold.checked=Boolean(prefs.bold);
     els.settingsReset.textContent=s.reset;
     els.settingsStatus.textContent='';
+  }
+
+  function toggleSettings() {
+    const willExpand = els.settingsToggle.getAttribute('aria-expanded') !== 'true';
+    els.settingsToggle.setAttribute('aria-expanded', String(willExpand));
+    els.settingsPanel.hidden = !willExpand;
   }
 
   function saveDisplaySettings(message) {
@@ -200,6 +207,7 @@
   function applyLanguage(){const c=copy[lang];document.documentElement.lang=lang;localStorage.setItem('tifloLang',lang);els.langEs.setAttribute('aria-pressed',String(lang==='es'));els.langEn.setAttribute('aria-pressed',String(lang==='en'));els.intro.textContent=c.intro;els.searchHeading.textContent=c.searchHeading;els.search.previousElementSibling.textContent=c.searchLabel;els.search.placeholder=c.placeholder;els.searchButton.textContent=c.searchButton;els.newsHeading.textContent=c.news;els.exploreHeading.textContent=c.explore;els.category.previousElementSibling.textContent=c.categoryLabel;els.favoritesButton.textContent=c.favorites;els.clearResults.textContent=c.clear;els.moreHeading.textContent=c.more;els.moreSelect.previousElementSibling.textContent=c.moreLabel;els.configHeading.textContent=c.configuration;els.accessibilityHeading.textContent=c.accessibility;els.footer.textContent=c.footer;renderCategories();renderMoreOptions();renderNews();localizeContact();localizeSettings();clearResults();showMore('');}
 
   els.langEs.addEventListener('click',()=>{lang='es';applyLanguage();});els.langEn.addEventListener('click',()=>{lang='en';applyLanguage();});els.searchForm.addEventListener('submit',e=>{e.preventDefault();searchResources();});els.category.addEventListener('change',()=>showCategory(els.category.value));els.favoritesButton.addEventListener('click',showFavorites);els.clearResults.addEventListener('click',clearResults);els.moreSelect.addEventListener('change',()=>showMore(els.moreSelect.value));
+  els.settingsToggle.addEventListener('click',toggleSettings);
   els.settingsForm.addEventListener('submit',e=>e.preventDefault());
   els.textSize.addEventListener('change',()=>saveDisplaySettings(copy[lang].settings.saved));
   els.theme.addEventListener('change',()=>saveDisplaySettings(copy[lang].settings.saved));

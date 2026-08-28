@@ -1,6 +1,7 @@
 (() => {
   'use strict';
 
+  const APP_VERSION = '0.9';
   const data = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];
   const $ = (selector) => document.querySelector(selector);
 
@@ -21,7 +22,8 @@
     themeLabel: $('#setting-theme-label'), theme: $('#setting-theme'), spacingLegend: $('#setting-spacing-legend'),
     spacingLabel: $('#setting-spacing-label'), spacing: $('#setting-spacing'), boldLegend: $('#setting-bold-legend'),
     bold: $('#setting-bold'), boldLabel: $('#setting-bold-label'), settingsReset: $('#settings-reset'),
-    settingsStatus: $('#settings-status'), footer: $('#footer-text')
+    settingsStatus: $('#settings-status'), updateHeading: $('#update-heading'), appVersion: $('#app-version'),
+    updateButton: $('#app-update'), updateStatus: $('#app-update-status'), footer: $('#footer-text')
   };
 
   const copy = {
@@ -44,6 +46,11 @@
         spacingLegend: 'Espaciado', spacingLabel: 'Separación entre líneas', spacingOptions: { normal:'Normal', comfortable:'Cómoda', wide:'Amplia' },
         boldLegend: 'Legibilidad', boldLabel: 'Usar texto reforzado', reset: 'Restablecer ajustes', saved: 'Preferencias guardadas.', resetDone: 'Ajustes restablecidos.'
       },
+      update: {
+        heading: 'Actualización', version: `Versión actual: ${APP_VERSION}`, button: 'Actualizar aplicación',
+        checking: 'Comprobando la versión disponible…', reloading: 'Actualización preparada. Recargando TifloAcosta…',
+        done: `Aplicación actualizada. Versión ${APP_VERSION}.`, error: 'No se pudo actualizar. Comprueba la conexión a Internet e inténtalo de nuevo.'
+      },
       panels: {
         videos: '<h3>Vídeos</h3><p>La sección de vídeos se incorporará como área propia, con acceso sencillo al contenido de TifloAcosta y sin llenar la portada de reproductores.</p><p><a class="button-link" href="https://www.youtube.com/results?search_query=Canal+TifloAcosta">Buscar Canal TifloAcosta en YouTube</a></p>',
         book: '<h3>Libro</h3><p>Aquí se incorporará el acceso directo a la información y compra del libro de TifloAcosta. El enlace definitivo se añadirá cuando configuremos esta sección.</p>',
@@ -52,7 +59,7 @@
         library: '<h3>Biblioteca completa</h3><p><a class="button-link" href="https://drive.google.com/drive/folders/1qUy0-ESqWhmIbYC00gpIdHHMZCPla_1r">Carpeta completa en español</a></p><p><a class="button-link" href="https://drive.google.com/drive/folders/1fVQp_eDGWoVO_fp7xFGdPllXMMWZalvx?usp=sharing">Carpeta completa en inglés</a></p><p><a class="button-link" href="https://tifloacosta.wixsite.com/tifloacosta-recursos">Página pública de recursos</a></p>',
         install: '<h3>Instalar la app</h3><p>En iPhone o iPad, abre TifloAcosta App en Safari y utiliza Compartir > Añadir a pantalla de inicio. En navegadores compatibles de otros sistemas puede aparecer una opción equivalente de instalación.</p>',
         notifications: '<h3>Notificaciones</h3><p>La estructura está preparada para incorporar avisos de nuevos contenidos después de publicar la PWA y comprobar su accesibilidad instalada.</p>'
-      }, footer: 'TifloAcosta App · Versión 0.8 de prueba accesible.'
+      }, footer: 'TifloAcosta App · Versión 0.9 de prueba accesible.'
     },
     en: {
       intro: 'Accessibility and technology resources, organized so you can reach what you need without getting lost along the way.',
@@ -73,6 +80,11 @@
         spacingLegend: 'Spacing', spacingLabel: 'Line spacing', spacingOptions: { normal:'Normal', comfortable:'Comfortable', wide:'Wide' },
         boldLegend: 'Readability', boldLabel: 'Use stronger text', reset: 'Reset settings', saved: 'Preferences saved.', resetDone: 'Settings reset.'
       },
+      update: {
+        heading: 'Update', version: `Current version: ${APP_VERSION}`, button: 'Update application',
+        checking: 'Checking the available version…', reloading: 'Update prepared. Reloading TifloAcosta…',
+        done: `Application updated. Version ${APP_VERSION}.`, error: 'The app could not be updated. Check your internet connection and try again.'
+      },
       panels: {
         videos: '<h3>Videos</h3><p>The video area will be added as its own section, with simple access to TifloAcosta content and without filling the home screen with players.</p><p><a class="button-link" href="https://www.youtube.com/results?search_query=Canal+TifloAcosta">Find Canal TifloAcosta on YouTube</a></p>',
         book: '<h3>Book</h3><p>This area will provide direct access to information and purchasing options for the TifloAcosta book. The final link will be added when this section is configured.</p>',
@@ -81,7 +93,7 @@
         library: '<h3>Full library</h3><p><a class="button-link" href="https://drive.google.com/drive/folders/1qUy0-ESqWhmIbYC00gpIdHHMZCPla_1r">Full Spanish folder</a></p><p><a class="button-link" href="https://drive.google.com/drive/folders/1fVQp_eDGWoVO_fp7xFGdPllXMMWZalvx?usp=sharing">Full English folder</a></p><p><a class="button-link" href="https://tifloacosta.wixsite.com/tifloacosta-recursos">Public resources page</a></p>',
         install: '<h3>Install the app</h3><p>On iPhone or iPad, open TifloAcosta App in Safari and use Share > Add to Home Screen. Compatible browsers on other systems may offer an equivalent install option.</p>',
         notifications: '<h3>Notifications</h3><p>The structure is ready for new-content alerts after the PWA is published and its installed accessibility has been verified.</p>'
-      }, footer: 'TifloAcosta App · Accessible test version 0.8.'
+      }, footer: 'TifloAcosta App · Accessible test version 0.9.'
     }
   };
 
@@ -204,7 +216,59 @@
     els.contactRadio.textContent=l.radio;
   }
 
-  function applyLanguage(){const c=copy[lang];document.documentElement.lang=lang;localStorage.setItem('tifloLang',lang);els.langEs.setAttribute('aria-pressed',String(lang==='es'));els.langEn.setAttribute('aria-pressed',String(lang==='en'));els.intro.textContent=c.intro;els.searchHeading.textContent=c.searchHeading;els.search.previousElementSibling.textContent=c.searchLabel;els.search.placeholder=c.placeholder;els.searchButton.textContent=c.searchButton;els.newsHeading.textContent=c.news;els.exploreHeading.textContent=c.explore;els.category.previousElementSibling.textContent=c.categoryLabel;els.favoritesButton.textContent=c.favorites;els.clearResults.textContent=c.clear;els.moreHeading.textContent=c.more;els.moreSelect.previousElementSibling.textContent=c.moreLabel;els.configHeading.textContent=c.configuration;els.accessibilityHeading.textContent=c.accessibility;els.footer.textContent=c.footer;renderCategories();renderMoreOptions();renderNews();localizeContact();localizeSettings();clearResults();showMore('');}
+  function localizeUpdate() {
+    const u=copy[lang].update;
+    els.updateHeading.textContent=u.heading;
+    els.appVersion.textContent=u.version;
+    els.updateButton.textContent=u.button;
+    if(!els.updateStatus.dataset.persist) els.updateStatus.textContent='';
+  }
+
+  async function forceUpdateApplication() {
+    const u=copy[lang].update;
+    els.updateButton.disabled=true;
+    els.updateStatus.dataset.persist='true';
+    els.updateStatus.textContent=u.checking;
+    try {
+      const checkUrl=new URL('./index.html', location.href);
+      checkUrl.searchParams.set('update_check', String(Date.now()));
+      const response=await fetch(checkUrl.href, { cache:'no-store' });
+      if(!response.ok) throw new Error(`Update check failed: ${response.status}`);
+
+      if('serviceWorker' in navigator) {
+        const appScope=new URL('./', location.href).href;
+        const registrations=await navigator.serviceWorker.getRegistrations();
+        await Promise.all(registrations.filter(reg=>reg.scope===appScope).map(reg=>reg.unregister()));
+      }
+
+      if('caches' in window) {
+        const keys=await caches.keys();
+        await Promise.all(keys.filter(key=>key.startsWith('tifloacosta-app-')).map(key=>caches.delete(key)));
+      }
+
+      els.updateStatus.textContent=u.reloading;
+      const nextUrl=new URL('./', location.href);
+      nextUrl.searchParams.set('tiflo_updated','1');
+      nextUrl.searchParams.set('t',String(Date.now()));
+      location.replace(nextUrl.href);
+    } catch(error) {
+      els.updateStatus.textContent=u.error;
+      els.updateButton.disabled=false;
+    }
+  }
+
+  function announceCompletedUpdate() {
+    const params=new URLSearchParams(location.search);
+    if(params.get('tiflo_updated')!=='1') return;
+    els.updateStatus.dataset.persist='true';
+    els.updateStatus.textContent=copy[lang].update.done;
+    params.delete('tiflo_updated');
+    params.delete('t');
+    const clean=`${location.pathname}${params.toString()?`?${params.toString()}`:''}${location.hash}`;
+    if(history.replaceState) history.replaceState(null,'',clean);
+  }
+
+  function applyLanguage(){const c=copy[lang];document.documentElement.lang=lang;localStorage.setItem('tifloLang',lang);els.langEs.setAttribute('aria-pressed',String(lang==='es'));els.langEn.setAttribute('aria-pressed',String(lang==='en'));els.intro.textContent=c.intro;els.searchHeading.textContent=c.searchHeading;els.search.previousElementSibling.textContent=c.searchLabel;els.search.placeholder=c.placeholder;els.searchButton.textContent=c.searchButton;els.newsHeading.textContent=c.news;els.exploreHeading.textContent=c.explore;els.category.previousElementSibling.textContent=c.categoryLabel;els.favoritesButton.textContent=c.favorites;els.clearResults.textContent=c.clear;els.moreHeading.textContent=c.more;els.moreSelect.previousElementSibling.textContent=c.moreLabel;els.configHeading.textContent=c.configuration;els.accessibilityHeading.textContent=c.accessibility;els.footer.textContent=c.footer;renderCategories();renderMoreOptions();renderNews();localizeContact();localizeSettings();localizeUpdate();clearResults();showMore('');}
 
   els.langEs.addEventListener('click',()=>{lang='es';applyLanguage();});els.langEn.addEventListener('click',()=>{lang='en';applyLanguage();});els.searchForm.addEventListener('submit',e=>{e.preventDefault();searchResources();});els.category.addEventListener('change',()=>showCategory(els.category.value));els.favoritesButton.addEventListener('click',showFavorites);els.clearResults.addEventListener('click',clearResults);els.moreSelect.addEventListener('change',()=>showMore(els.moreSelect.value));
   els.settingsToggle.addEventListener('click',toggleSettings);
@@ -214,6 +278,7 @@
   els.spacing.addEventListener('change',()=>saveDisplaySettings(copy[lang].settings.saved));
   els.bold.addEventListener('change',()=>saveDisplaySettings(copy[lang].settings.saved));
   els.settingsReset.addEventListener('click',resetDisplaySettings);
+  els.updateButton.addEventListener('click',forceUpdateApplication);
   if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').then(reg=>reg.update()).catch(()=>{}));}
-  applyPrefs();applyLanguage();
+  applyPrefs();applyLanguage();announceCompletedUpdate();
 })();

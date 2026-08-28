@@ -4,11 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10243e">
+<meta name="tifloacosta-version" content="0.9">
 <title>TifloAcosta App</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=0.9">
 </head>
 <body>
 <a class="skip-link" href="#main">Saltar al contenido principal</a>
@@ -148,16 +149,23 @@
         <p id="settings-status" class="muted" role="status" aria-live="polite"></p>
       </form>
     </div>
+
+    <h3 id="update-heading">Actualización</h3>
+    <div class="panel" aria-labelledby="update-heading">
+      <p id="app-version">Versión actual: 0.9</p>
+      <button id="app-update" type="button">Actualizar aplicación</button>
+      <p id="app-update-status" class="muted" role="status" aria-live="polite"></p>
+    </div>
   </section>
 </main>
 
 <footer class="site-footer">
   <div class="wrap">
-    <p id="footer-text">TifloAcosta App · Versión 0.8 de prueba accesible.</p>
+    <p id="footer-text">TifloAcosta App · Versión 0.9 de prueba accesible.</p>
   </div>
 </footer>
 
-<script src="data.js"></script>
-<script src="app.js"></script>
+<script src="data.js?v=0.9"></script>
+<script src="app.js?v=0.9"></script>
 </body>
 </html>

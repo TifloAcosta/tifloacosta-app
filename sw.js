@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v0-6';
+const CACHE = 'tifloacosta-app-v0-7';
 const SHELL = [
   './',
   './index.html',

@@ -91,6 +91,10 @@ a { color: var(--accent); text-decoration-thickness: .12em; text-underline-offse
 .panel p:first-child { margin-top: 0; }
 .panel p:last-child { margin-bottom: 0; }
 .panel ul { padding-left: 1.3rem; }
+
+.contact-links { list-style: none; padding: 0; margin: .65rem 0 1.25rem; display: flex; flex-wrap: wrap; gap: .65rem; }
+.contact-links li { margin: 0; }
+
 .settings-panel { margin-top: .5rem; }
 .settings-form { display: grid; gap: 1rem; }
 .settings-form fieldset { border: 2px solid var(--border); border-radius: .55rem; padding: .85rem; margin: 0; }

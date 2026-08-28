@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10243e">
-<meta name="tifloacosta-version" content="0.9">
+<meta name="tifloacosta-version" content="0.10">
 <title>TifloAcosta App</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
-<link rel="stylesheet" href="styles.css?v=0.9">
+<link rel="stylesheet" href="styles.css?v=0.10">
 </head>
 <body>
 <a class="skip-link" href="#main">Saltar al contenido principal</a>
@@ -66,12 +66,31 @@
     <select id="more-select">
       <option value="">Seleccionar</option>
       <option value="videos">Vídeos</option>
-      <option value="book">Libro</option>
       <option value="library">Biblioteca completa</option>
       <option value="notifications">Notificaciones</option>
     </select>
     <div id="more-panel" class="panel" hidden tabindex="-1"></div>
     <noscript><p>Esta prueba necesita JavaScript activado para mostrar los recursos y guardar las preferencias.</p></noscript>
+  </section>
+
+  <section id="book-section" class="book-section" aria-labelledby="book-heading">
+    <h2 id="book-heading">Mi libro</h2>
+    <div class="book-layout">
+      <figure class="book-figure">
+        <img id="book-cover" class="book-cover" src="book-cover.jpg" alt="Portada del libro La vida vista desde donde estoy, de Tony Acosta">
+      </figure>
+      <div class="book-copy">
+        <h3 id="book-title">La vida vista desde donde estoy</h3>
+        <p id="book-subtitle" class="book-subtitle">Reflexiones desde una forma propia de estar en el mundo.</p>
+        <p id="book-description">Una colección de textos sobre la infancia, la ceguera, la memoria, la amistad, la dignidad, los miedos, la vida sencilla y esas pequeñas cosas que a veces entendemos mejor cuando dejamos de correr.</p>
+        <p id="book-description-2">No es un manual ni unas memorias al uso. Es, sencillamente, mi manera de mirar algunas de las cosas que nos pasan a todos.</p>
+        <div class="book-actions">
+          <a class="button-link" id="book-buy-print" href="https://www.amazon.es/s?k=9798185909218&i=stripbooks" target="_blank" rel="noopener noreferrer">Comprar en Amazon</a>
+          <a class="button-link" id="book-buy-kindle" href="https://www.amazon.es/s?k=La+vida+vista+desde+donde+estoy+Tony+Acosta&i=digital-text" target="_blank" rel="noopener noreferrer">Comprar la edición Kindle</a>
+        </div>
+        <p id="book-kindle-note" class="muted book-note">Para evitar problemas de compra en móviles, la edición Kindle se abre en la web de Amazon. Después de comprarla, podrás acceder al libro desde Kindle.</p>
+      </div>
+    </div>
   </section>
 
   <section aria-labelledby="contact-heading">
@@ -152,7 +171,7 @@
 
     <h3 id="update-heading">Actualización</h3>
     <div class="panel" aria-labelledby="update-heading">
-      <p id="app-version">Versión actual: 0.9</p>
+      <p id="app-version">Versión actual: 0.10</p>
       <button id="app-update" type="button">Actualizar aplicación</button>
       <p id="app-update-status" class="muted" role="status" aria-live="polite"></p>
     </div>
@@ -161,11 +180,11 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <p id="footer-text">TifloAcosta App · Versión 0.9 de prueba accesible.</p>
+    <p id="footer-text">TifloAcosta App · Versión 0.10 de prueba accesible.</p>
   </div>
 </footer>
 
-<script src="data.js?v=0.9"></script>
-<script src="app.js?v=0.9"></script>
+<script src="data.js?v=0.10"></script>
+<script src="app.js?v=0.10"></script>
 </body>
 </html>

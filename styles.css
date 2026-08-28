@@ -110,3 +110,12 @@ a { color: var(--accent); text-decoration-thickness: .12em; text-underline-offse
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
 }
+
+.book-layout { display: grid; grid-template-columns: minmax(9rem, 14rem) minmax(0, 1fr); gap: 1.25rem; align-items: start; }
+.book-figure { margin: 0; }
+.book-cover { display: block; width: 100%; max-width: 14rem; height: auto; border-radius: .5rem; border: 2px solid var(--border); }
+.book-copy h3 { margin-top: 0; }
+.book-subtitle { font-weight: 700; }
+.book-actions { display: flex; flex-wrap: wrap; gap: .65rem; margin: 1rem 0 .75rem; }
+.book-note { max-width: 48rem; }
+@media (max-width: 38rem) { .book-layout { grid-template-columns: 1fr; } .book-cover { max-width: 11rem; } }

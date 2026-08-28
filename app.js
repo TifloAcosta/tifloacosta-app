@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = '0.9';
+  const APP_VERSION = '0.10';
   const data = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];
   const $ = (selector) => document.querySelector(selector);
 
@@ -11,6 +11,9 @@
     newsCount: $('#news-count'), newsList: $('#news-list'), exploreHeading: $('#explore-heading'), category: $('#category'),
     favoritesButton: $('#favorites-button'), clearResults: $('#clear-results'), resultStatus: $('#result-status'), results: $('#resource-results'),
     moreHeading: $('#more-heading'), moreSelect: $('#more-select'), morePanel: $('#more-panel'),
+    bookHeading: $('#book-heading'), bookCover: $('#book-cover'), bookTitle: $('#book-title'), bookSubtitle: $('#book-subtitle'),
+    bookDescription: $('#book-description'), bookDescription2: $('#book-description-2'), bookBuyPrint: $('#book-buy-print'),
+    bookBuyKindle: $('#book-buy-kindle'), bookKindleNote: $('#book-kindle-note'),
     contactHeading: $('#contact-heading'), contactDirectHeading: $('#contact-direct-heading'), contactFollowHeading: $('#contact-follow-heading'),
     contactPodcastHeading: $('#contact-podcast-heading'), contactWhatsapp: $('#contact-whatsapp'), contactEmail: $('#contact-email'),
     contactInstagram: $('#contact-instagram'), contactFacebookChannel: $('#contact-facebook-channel'), contactFacebookPersonal: $('#contact-facebook-personal'),
@@ -34,9 +37,17 @@
       explore: 'Explorar recursos', categoryLabel: 'Categoría', categoryPlaceholder: 'Seleccionar una categoría', favorites: 'Ver favoritos', clear: 'Limpiar resultados',
       configuration: 'Configuración', accessibility: 'Accesibilidad visual',
       more: 'Más de TifloAcosta', moreLabel: 'Elegir una opción', morePlaceholder: 'Seleccionar',
+      book: {
+        heading: 'Mi libro', title: 'La vida vista desde donde estoy', subtitle: 'Reflexiones desde una forma propia de estar en el mundo.',
+        description: 'Una colección de textos sobre la infancia, la ceguera, la memoria, la amistad, la dignidad, los miedos, la vida sencilla y esas pequeñas cosas que a veces entendemos mejor cuando dejamos de correr.',
+        description2: 'No es un manual ni unas memorias al uso. Es, sencillamente, mi manera de mirar algunas de las cosas que nos pasan a todos.',
+        coverAlt: 'Portada del libro La vida vista desde donde estoy, de Tony Acosta', buyPrint: 'Comprar en Amazon', buyKindle: 'Comprar la edición Kindle',
+        kindleNote: 'Para evitar problemas de compra en móviles, la edición Kindle se abre en la web de Amazon. Después de comprarla, podrás acceder al libro desde Kindle.',
+        printUrl: 'https://www.amazon.es/s?k=9798185909218&i=stripbooks', kindleUrl: 'https://www.amazon.es/s?k=La+vida+vista+desde+donde+estoy+Tony+Acosta&i=digital-text'
+      },
       contact: 'Contacto y redes', contactDirect: 'Contacto', contactFollow: 'Sígueme', contactPodcast: 'Escucha el podcast',
       contactLabels: { whatsapp: 'Contactar por WhatsApp', email: 'Enviar correo electrónico', instagram: 'Instagram', facebookChannel: 'Facebook — Canal TifloAcosta', facebookPersonal: 'Facebook — Tony Acosta', youtube: 'YouTube — Canal TifloAcosta', spotify: 'Spotify', applePodcasts: 'Apple Podcasts', ivoox: 'iVoox', podimo: 'Podimo', radio: 'radio.es' },
-      moreOptions: { videos: 'Vídeos', book: 'Libro', community: 'Comunidad', social: 'Redes sociales', library: 'Biblioteca completa', install: 'Instalar la app', notifications: 'Notificaciones' },
+      moreOptions: { videos: 'Vídeos', community: 'Comunidad', social: 'Redes sociales', library: 'Biblioteca completa', install: 'Instalar la app', notifications: 'Notificaciones' },
       found: n => `${n} recurso${n === 1 ? '' : 's'} encontrado${n === 1 ? '' : 's'}.`, categoryFound: (cat,n) => `Categoría ${cat}. ${n} recurso${n === 1 ? '' : 's'} encontrado${n === 1 ? '' : 's'}.`, favFound: n => `${n} favorito${n === 1 ? '' : 's'}.`,
       noResults: 'No hay recursos que coincidan.', noFavorites: 'Todavía no hay favoritos guardados.', newBadge: 'Nuevo', open: 'Abrir recurso', addFav: 'Añadir a favoritos', removeFav: 'Quitar de favoritos',
       settings: {
@@ -53,13 +64,12 @@
       },
       panels: {
         videos: '<h3>Vídeos</h3><p>La sección de vídeos se incorporará como área propia, con acceso sencillo al contenido de TifloAcosta y sin llenar la portada de reproductores.</p><p><a class="button-link" href="https://www.youtube.com/results?search_query=Canal+TifloAcosta">Buscar Canal TifloAcosta en YouTube</a></p>',
-        book: '<h3>Libro</h3><p>Aquí se incorporará el acceso directo a la información y compra del libro de TifloAcosta. El enlace definitivo se añadirá cuando configuremos esta sección.</p>',
         community: '<h3>Comunidad</h3><p>Esta sección reunirá la información para formar parte de la comunidad TifloAcosta y acceder a sus materiales.</p>',
         social: '<h3>Redes sociales</h3><p>Aquí agruparemos los canales y redes oficiales de TifloAcosta sin recargar la pantalla principal.</p>',
         library: '<h3>Biblioteca completa</h3><p><a class="button-link" href="https://drive.google.com/drive/folders/1qUy0-ESqWhmIbYC00gpIdHHMZCPla_1r">Carpeta completa en español</a></p><p><a class="button-link" href="https://drive.google.com/drive/folders/1fVQp_eDGWoVO_fp7xFGdPllXMMWZalvx?usp=sharing">Carpeta completa en inglés</a></p><p><a class="button-link" href="https://tifloacosta.wixsite.com/tifloacosta-recursos">Página pública de recursos</a></p>',
         install: '<h3>Instalar la app</h3><p>En iPhone o iPad, abre TifloAcosta App en Safari y utiliza Compartir > Añadir a pantalla de inicio. En navegadores compatibles de otros sistemas puede aparecer una opción equivalente de instalación.</p>',
         notifications: '<h3>Notificaciones</h3><p>La estructura está preparada para incorporar avisos de nuevos contenidos después de publicar la PWA y comprobar su accesibilidad instalada.</p>'
-      }, footer: 'TifloAcosta App · Versión 0.9 de prueba accesible.'
+      }, footer: 'TifloAcosta App · Versión 0.10 de prueba accesible.'
     },
     en: {
       intro: 'Accessibility and technology resources, organized so you can reach what you need without getting lost along the way.',
@@ -68,9 +78,17 @@
       explore: 'Explore resources', categoryLabel: 'Category', categoryPlaceholder: 'Select a category', favorites: 'View favorites', clear: 'Clear results',
       configuration: 'Settings', accessibility: 'Visual accessibility',
       more: 'More from TifloAcosta', moreLabel: 'Choose an option', morePlaceholder: 'Select',
+      book: {
+        heading: 'My book', title: 'La vida vista desde donde estoy', subtitle: 'Reflexiones desde una forma propia de estar en el mundo.',
+        description: 'A collection of reflections on childhood, blindness, memory, friendship, dignity, fear, everyday life, and the small things we sometimes understand better when we stop rushing.',
+        description2: 'It is not a manual or a conventional memoir. It is simply my way of looking at some of the things that happen to all of us. The book is currently available in Spanish.',
+        coverAlt: 'Cover of La vida vista desde donde estoy by Tony Acosta', buyPrint: 'Buy on Amazon', buyKindle: 'Buy the Kindle edition',
+        kindleNote: 'To avoid mobile purchase issues, the Kindle edition opens on the Amazon website. After purchasing it, you can access the book from Kindle.',
+        printUrl: 'https://www.amazon.com/s?k=9798185909218&i=stripbooks', kindleUrl: 'https://www.amazon.com/s?k=La+vida+vista+desde+donde+estoy+Tony+Acosta&i=digital-text'
+      },
       contact: 'Contact and social', contactDirect: 'Contact', contactFollow: 'Follow TifloAcosta', contactPodcast: 'Listen to the podcast',
       contactLabels: { whatsapp: 'Contact on WhatsApp', email: 'Send email', instagram: 'Instagram', facebookChannel: 'Facebook — Canal TifloAcosta', facebookPersonal: 'Facebook — Tony Acosta', youtube: 'YouTube — Canal TifloAcosta', spotify: 'Spotify', applePodcasts: 'Apple Podcasts', ivoox: 'iVoox', podimo: 'Podimo', radio: 'radio.es' },
-      moreOptions: { videos: 'Videos', book: 'Book', community: 'Community', social: 'Social media', library: 'Full library', install: 'Install the app', notifications: 'Notifications' },
+      moreOptions: { videos: 'Videos', community: 'Community', social: 'Social media', library: 'Full library', install: 'Install the app', notifications: 'Notifications' },
       found: n => `${n} resource${n === 1 ? '' : 's'} found.`, categoryFound: (cat,n) => `${cat} category. ${n} resource${n === 1 ? '' : 's'} found.`, favFound: n => `${n} favorite${n === 1 ? '' : 's'}.`,
       noResults: 'No matching resources were found.', noFavorites: 'No favorites have been saved yet.', newBadge: 'New', open: 'Open resource', addFav: 'Add to favorites', removeFav: 'Remove from favorites',
       settings: {
@@ -87,13 +105,12 @@
       },
       panels: {
         videos: '<h3>Videos</h3><p>The video area will be added as its own section, with simple access to TifloAcosta content and without filling the home screen with players.</p><p><a class="button-link" href="https://www.youtube.com/results?search_query=Canal+TifloAcosta">Find Canal TifloAcosta on YouTube</a></p>',
-        book: '<h3>Book</h3><p>This area will provide direct access to information and purchasing options for the TifloAcosta book. The final link will be added when this section is configured.</p>',
         community: '<h3>Community</h3><p>This area will explain how to join the TifloAcosta community and access its materials.</p>',
         social: '<h3>Social media</h3><p>This area will group TifloAcosta’s official channels and social profiles without cluttering the home screen.</p>',
         library: '<h3>Full library</h3><p><a class="button-link" href="https://drive.google.com/drive/folders/1qUy0-ESqWhmIbYC00gpIdHHMZCPla_1r">Full Spanish folder</a></p><p><a class="button-link" href="https://drive.google.com/drive/folders/1fVQp_eDGWoVO_fp7xFGdPllXMMWZalvx?usp=sharing">Full English folder</a></p><p><a class="button-link" href="https://tifloacosta.wixsite.com/tifloacosta-recursos">Public resources page</a></p>',
         install: '<h3>Install the app</h3><p>On iPhone or iPad, open TifloAcosta App in Safari and use Share > Add to Home Screen. Compatible browsers on other systems may offer an equivalent install option.</p>',
         notifications: '<h3>Notifications</h3><p>The structure is ready for new-content alerts after the PWA is published and its installed accessibility has been verified.</p>'
-      }, footer: 'TifloAcosta App · Accessible test version 0.9.'
+      }, footer: 'TifloAcosta App · Accessible test version 0.10.'
     }
   };
 
@@ -194,8 +211,23 @@
     els.settingsStatus.textContent=copy[lang].settings.resetDone;
   }
 
-  function renderMoreOptions(){const c=copy[lang],values=['','videos','book','library'];if(!isStandalone()) values.push('install');values.push('notifications');els.moreSelect.innerHTML='';values.forEach(v=>option(els.moreSelect,v,v?c.moreOptions[v]:c.morePlaceholder));}
+  function renderMoreOptions(){const c=copy[lang],values=['','videos','library'];if(!isStandalone()) values.push('install');values.push('notifications');els.moreSelect.innerHTML='';values.forEach(v=>option(els.moreSelect,v,v?c.moreOptions[v]:c.morePlaceholder));}
   function showMore(value){if(!value){els.morePanel.hidden=true;els.morePanel.innerHTML='';return;}els.morePanel.hidden=false;els.morePanel.innerHTML=copy[lang].panels[value];}
+
+  function localizeBook(){
+    const b=copy[lang].book;
+    els.bookHeading.textContent=b.heading;
+    els.bookTitle.textContent=b.title;
+    els.bookSubtitle.textContent=b.subtitle;
+    els.bookDescription.textContent=b.description;
+    els.bookDescription2.textContent=b.description2;
+    els.bookCover.alt=b.coverAlt;
+    els.bookBuyPrint.textContent=b.buyPrint;
+    els.bookBuyPrint.href=b.printUrl;
+    els.bookBuyKindle.textContent=b.buyKindle;
+    els.bookBuyKindle.href=b.kindleUrl;
+    els.bookKindleNote.textContent=b.kindleNote;
+  }
 
   function localizeContact(){
     const c=copy[lang], l=c.contactLabels;
@@ -268,7 +300,7 @@
     if(history.replaceState) history.replaceState(null,'',clean);
   }
 
-  function applyLanguage(){const c=copy[lang];document.documentElement.lang=lang;localStorage.setItem('tifloLang',lang);els.langEs.setAttribute('aria-pressed',String(lang==='es'));els.langEn.setAttribute('aria-pressed',String(lang==='en'));els.intro.textContent=c.intro;els.searchHeading.textContent=c.searchHeading;els.search.previousElementSibling.textContent=c.searchLabel;els.search.placeholder=c.placeholder;els.searchButton.textContent=c.searchButton;els.newsHeading.textContent=c.news;els.exploreHeading.textContent=c.explore;els.category.previousElementSibling.textContent=c.categoryLabel;els.favoritesButton.textContent=c.favorites;els.clearResults.textContent=c.clear;els.moreHeading.textContent=c.more;els.moreSelect.previousElementSibling.textContent=c.moreLabel;els.configHeading.textContent=c.configuration;els.accessibilityHeading.textContent=c.accessibility;els.footer.textContent=c.footer;renderCategories();renderMoreOptions();renderNews();localizeContact();localizeSettings();localizeUpdate();clearResults();showMore('');}
+  function applyLanguage(){const c=copy[lang];document.documentElement.lang=lang;localStorage.setItem('tifloLang',lang);els.langEs.setAttribute('aria-pressed',String(lang==='es'));els.langEn.setAttribute('aria-pressed',String(lang==='en'));els.intro.textContent=c.intro;els.searchHeading.textContent=c.searchHeading;els.search.previousElementSibling.textContent=c.searchLabel;els.search.placeholder=c.placeholder;els.searchButton.textContent=c.searchButton;els.newsHeading.textContent=c.news;els.exploreHeading.textContent=c.explore;els.category.previousElementSibling.textContent=c.categoryLabel;els.favoritesButton.textContent=c.favorites;els.clearResults.textContent=c.clear;els.moreHeading.textContent=c.more;els.moreSelect.previousElementSibling.textContent=c.moreLabel;els.configHeading.textContent=c.configuration;els.accessibilityHeading.textContent=c.accessibility;els.footer.textContent=c.footer;renderCategories();renderMoreOptions();renderNews();localizeBook();localizeContact();localizeSettings();localizeUpdate();clearResults();showMore('');}
 
   els.langEs.addEventListener('click',()=>{lang='es';applyLanguage();});els.langEn.addEventListener('click',()=>{lang='en';applyLanguage();});els.searchForm.addEventListener('submit',e=>{e.preventDefault();searchResources();});els.category.addEventListener('change',()=>showCategory(els.category.value));els.favoritesButton.addEventListener('click',showFavorites);els.clearResults.addEventListener('click',clearResults);els.moreSelect.addEventListener('change',()=>showMore(els.moreSelect.value));
   els.settingsToggle.addEventListener('click',toggleSettings);

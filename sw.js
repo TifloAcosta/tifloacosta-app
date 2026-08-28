@@ -1,12 +1,13 @@
-const CACHE = 'tifloacosta-app-v0-9';
+const CACHE = 'tifloacosta-app-v0-10';
 const SHELL = [
   './',
   './index.html',
-  './styles.css?v=0.9',
-  './data.js?v=0.9',
-  './app.js?v=0.9',
+  './styles.css?v=0.10',
+  './data.js?v=0.10',
+  './app.js?v=0.10',
   './offline.html',
   './manifest.webmanifest',
+  './book-cover.jpg',
   './icons/icon-192.png',
   './icons/icon-512.png'
 ];

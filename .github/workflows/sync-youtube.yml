@@ -1,4 +1,4 @@
-      name: Sync YouTube catalog
+fname: Sync YouTube catalog
 
 on:
   schedule:
@@ -240,4 +240,4 @@ jobs:
       - name: Deploy Pages
         if: steps.changes.outputs.changed == 'true'
         id: deployment
-                uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v4

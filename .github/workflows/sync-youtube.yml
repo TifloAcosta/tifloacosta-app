@@ -1,0 +1,243 @@
+      name: Sync YouTube catalog
+
+on:
+  schedule:
+    - cron: '17,47 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  sync-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Synchronize YouTube catalog
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+
+          const API = 'https://www.googleapis.com/youtube/v3';
+          const apiKey = process.env.YOUTUBE_API_KEY;
+          const handle = '@tifloacosta';
+          const maxExcerpt = 350;
+
+          if (!apiKey) {
+            console.error('YOUTUBE_API_KEY is not configured.');
+            process.exit(1);
+          }
+
+          const stopwords = new Set([
+            'a','al','algo','and','con','como','cómo','de','del','el','en','es','esta','este',
+            'for','from','how','la','las','lo','los','of','on','para','por','que','qué','se',
+            'sin','the','to','tu','un','una','usar','use','using','y','your'
+          ]);
+
+          function fold(text = '') {
+            return String(text).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+          }
+
+          function words(text = '') {
+            return fold(text).match(/[\p{L}\p{N}]+/gu)?.filter(w => w.length > 2 && !stopwords.has(w)) || [];
+          }
+
+          function cleanDescription(raw = '') {
+            const urlRe = /https?:\/\/\S+/gi;
+            const emailRe = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi;
+            const hashtagOnlyRe = /^(?:\s*#[\p{L}\p{N}_-]+\s*)+$/u;
+            const noiseRe = /\b(suscr[ií]bete|subscribe|s[ií]gueme|follow me|instagram|facebook|whatsapp|donar|donate|apoya el canal|support the channel|comparte|share this|correo)\b/i;
+            return String(raw)
+              .replace(/\r/g, '')
+              .split('\n')
+              .map(line => line.trim().replace(urlRe, '').replace(emailRe, '').trim())
+              .filter(line => line && !hashtagOnlyRe.test(line) && !noiseRe.test(line))
+              .join('\n')
+              .replace(/[ \t]+/g, ' ')
+              .replace(/\n{3,}/g, '\n\n')
+              .trim();
+          }
+
+          function scoreParagraph(titleWords, paragraph) {
+            const paragraphWords = new Set(words(paragraph));
+            let score = 0;
+            for (const word of titleWords) if (paragraphWords.has(word)) score += 2;
+            score += Math.min(paragraph.length / 200, 1);
+            return score;
+          }
+
+          function truncateAtWord(text, maxLength) {
+            if (text.length <= maxLength) return text.trim();
+            const room = Math.max(1, maxLength - 1);
+            const slice = text.slice(0, room + 1);
+            const cut = slice.lastIndexOf(' ');
+            const base = (cut > 0 ? slice.slice(0, cut) : slice.slice(0, room)).trim();
+            return `${base}…`;
+          }
+
+          function buildExcerpt(title, clean) {
+            const paragraphs = String(clean).split(/\n{2,}|\n/).map(p => p.trim()).filter(Boolean);
+            if (!paragraphs.length) return '';
+            const titleWords = words(title);
+            const chosen = paragraphs
+              .map((paragraph, index) => ({ paragraph, index, score: scoreParagraph(titleWords, paragraph) }))
+              .sort((a, b) => b.score - a.score || a.index - b.index)[0].paragraph;
+
+            const sentences = chosen.match(/[^.!?]+[.!?]+(?:[”"')\]]+)?|[^.!?]+$/g)?.map(s => s.trim()).filter(Boolean) || [];
+            let out = '';
+            for (const sentence of sentences) {
+              const next = out ? `${out} ${sentence}` : sentence;
+              if (next.length <= maxExcerpt) out = next;
+              else break;
+            }
+            return out || truncateAtWord(chosen, maxExcerpt);
+          }
+
+          function apiUrl(resource, params) {
+            const url = new URL(`${API}/${resource}`);
+            for (const [key, value] of Object.entries(params)) {
+              if (value !== undefined && value !== null && value !== '') url.searchParams.set(key, String(value));
+            }
+            return url;
+          }
+
+          async function getJson(url) {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`YouTube API request failed with status ${response.status}`);
+            return response.json();
+          }
+
+          function comparable(catalog) {
+            return JSON.stringify({
+              channelHandle: catalog.channelHandle || '',
+              channelUrl: catalog.channelUrl || '',
+              count: Array.isArray(catalog.videos) ? catalog.videos.length : 0,
+              videos: Array.isArray(catalog.videos) ? catalog.videos : []
+            });
+          }
+
+          async function main() {
+            const channel = await getJson(apiUrl('channels', {
+              part: 'contentDetails',
+              forHandle: handle,
+              key: apiKey
+            }));
+
+            const uploadsId = channel.items?.[0]?.contentDetails?.relatedPlaylists?.uploads;
+            if (!uploadsId) throw new Error(`No uploads playlist found for ${handle}`);
+
+            const videos = [];
+            let pageToken = '';
+            do {
+              const page = await getJson(apiUrl('playlistItems', {
+                part: 'snippet,contentDetails',
+                playlistId: uploadsId,
+                maxResults: 50,
+                pageToken: pageToken || undefined,
+                key: apiKey
+              }));
+
+              for (const item of page.items || []) {
+                const snippet = item.snippet || {};
+                const id = item.contentDetails?.videoId;
+                const title = String(snippet.title || '').trim();
+                if (!id || !title || /^(deleted video|private video)$/i.test(title)) continue;
+                const description = cleanDescription(snippet.description || '');
+                videos.push({
+                  id,
+                  title,
+                  publishedAt: item.contentDetails?.videoPublishedAt || snippet.publishedAt || '',
+                  description,
+                  excerpt: buildExcerpt(title, description),
+                  thumbnail: snippet.thumbnails?.medium?.url || snippet.thumbnails?.high?.url || snippet.thumbnails?.default?.url || '',
+                  url: `https://www.youtube.com/watch?v=${id}`
+                });
+              }
+
+              pageToken = page.nextPageToken || '';
+            } while (pageToken);
+
+            videos.sort((a, b) => String(b.publishedAt).localeCompare(String(a.publishedAt)) || String(a.id).localeCompare(String(b.id)));
+
+            const catalog = {
+              channelHandle: handle,
+              channelUrl: 'https://www.youtube.com/@tifloacosta',
+              count: videos.length,
+              videos
+            };
+
+            let existing = null;
+            try { existing = JSON.parse(fs.readFileSync('videos.json', 'utf8')); } catch {}
+
+            if (existing && comparable(existing) === comparable(catalog)) {
+              console.log(`YouTube catalog unchanged: ${videos.length} videos.`);
+              return;
+            }
+
+            const output = { generatedAt: new Date().toISOString(), ...catalog };
+            fs.writeFileSync('videos.json', `${JSON.stringify(output, null, 2)}\n`, 'utf8');
+            console.log(`YouTube catalog updated: ${videos.length} videos.`);
+          }
+
+          main().catch(error => {
+            console.error(`YouTube synchronization failed: ${error.message || error}`);
+            process.exit(1);
+          });
+          NODE
+
+      - name: Detect catalog changes
+        id: changes
+        shell: bash
+        run: |
+          if git diff --quiet -- videos.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit catalog
+        if: steps.changes.outputs.changed == 'true'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add videos.json
+          git commit -m "chore: sync YouTube catalog"
+          git push
+
+      - name: Configure Pages
+        if: steps.changes.outputs.changed == 'true'
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        if: steps.changes.outputs.changed == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy Pages
+        if: steps.changes.outputs.changed == 'true'
+        id: deployment
+                uses: actions/deploy-pages@v4

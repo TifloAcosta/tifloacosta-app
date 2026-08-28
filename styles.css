@@ -91,10 +91,7 @@ a { color: var(--accent); text-decoration-thickness: .12em; text-underline-offse
 .panel p:first-child { margin-top: 0; }
 .panel p:last-child { margin-bottom: 0; }
 .panel ul { padding-left: 1.3rem; }
-.settings-disclosure { border: 2px solid var(--border); border-radius: .6rem; background: var(--surface); }
-.settings-disclosure > summary { cursor: pointer; font-weight: 800; padding: .9rem 1rem; }
-.settings-disclosure[open] > summary { border-bottom: 1px solid var(--border); }
-.settings-disclosure .panel { margin-top: 0; border-left: 0; background: transparent; }
+.settings-panel { margin-top: .5rem; }
 .settings-form { display: grid; gap: 1rem; }
 .settings-form fieldset { border: 2px solid var(--border); border-radius: .55rem; padding: .85rem; margin: 0; }
 .settings-form legend { font-weight: 800; padding-inline: .3rem; }

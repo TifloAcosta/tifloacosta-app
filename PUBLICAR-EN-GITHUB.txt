@@ -1,4 +1,4 @@
-TifloAcosta App v0.3 — paquete preparado para GitHub Pages
+TifloAcosta App v0.4 — paquete preparado para GitHub Pages
 
 1. No subas el ZIP. Descomprímelo.
 2. En el repositorio de GitHub sube el CONTENIDO de esta carpeta a la raíz del repositorio.

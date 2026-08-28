@@ -1,4 +1,4 @@
-TifloAcosta App PWA v0.3
+TifloAcosta App PWA v0.4
 
 Objetivo de esta versión:
 - Portada compacta y pensada para lector de pantalla.
@@ -18,4 +18,4 @@ Prueba local:
 Nota:
 Para instalarla realmente como PWA en iPhone, Android, Windows o Mac debe publicarse mediante HTTPS.
 
-Novedades v0.3: portada con tres novedades reales y ajustes guardables de tamaño de texto, contraste, espaciado y texto reforzado.
+Novedades v0.4: portada con tres novedades reales y ajustes guardables de tamaño de texto, contraste, espaciado y texto reforzado.

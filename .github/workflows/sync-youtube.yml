@@ -1,5 +1,4 @@
-fname: Sync YouTube catalog
-
+name: Sync YouTube catalog
 on:
   schedule:
     - cron: '17,47 * * * *'

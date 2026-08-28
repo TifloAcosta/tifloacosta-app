@@ -59,11 +59,6 @@
     <div id="resource-results" class="resource-list" hidden></div>
   </section>
 
-  <section aria-labelledby="accessibility-heading">
-    <h2 id="accessibility-heading">Accesibilidad visual</h2>
-    <div id="settings-panel" class="panel settings-panel"></div>
-  </section>
-
   <section aria-labelledby="more-heading">
     <h2 id="more-heading">Más de TifloAcosta</h2>
     <label for="more-select">Elegir una opción</label>
@@ -79,11 +74,60 @@
     <div id="more-panel" class="panel" hidden tabindex="-1"></div>
     <noscript><p>Esta prueba necesita JavaScript activado para mostrar los recursos y guardar las preferencias.</p></noscript>
   </section>
+
+  <section aria-labelledby="config-heading">
+    <h2 id="config-heading">Configuración</h2>
+    <div id="settings-panel" class="panel settings-panel" aria-labelledby="accessibility-heading">
+      <h3 id="accessibility-heading">Accesibilidad visual</h3>
+      <p id="settings-intro">La app respeta el tamaño y el modo de color del sistema. Además, puedes guardar aquí preferencias propias para TifloAcosta.</p>
+      <form id="settings-form" class="settings-form">
+        <fieldset>
+          <legend id="setting-text-legend">Tamaño del texto</legend>
+          <label id="setting-text-label" for="setting-text-size">Tamaño</label>
+          <select id="setting-text-size">
+            <option value="normal">Predeterminado</option>
+            <option value="large">Grande</option>
+            <option value="xlarge">Muy grande</option>
+            <option value="max">Máximo</option>
+          </select>
+        </fieldset>
+        <fieldset>
+          <legend id="setting-theme-legend">Color y contraste</legend>
+          <label id="setting-theme-label" for="setting-theme">Perfil de contraste</label>
+          <select id="setting-theme">
+            <option value="auto">Seguir el sistema</option>
+            <option value="light">Alto contraste claro</option>
+            <option value="dark">Alto contraste oscuro</option>
+          </select>
+        </fieldset>
+        <fieldset>
+          <legend id="setting-spacing-legend">Espaciado</legend>
+          <label id="setting-spacing-label" for="setting-spacing">Separación entre líneas</label>
+          <select id="setting-spacing">
+            <option value="normal">Normal</option>
+            <option value="comfortable">Cómoda</option>
+            <option value="wide">Amplia</option>
+          </select>
+        </fieldset>
+        <fieldset>
+          <legend id="setting-bold-legend">Legibilidad</legend>
+          <div class="check-row">
+            <input id="setting-bold" type="checkbox">
+            <label id="setting-bold-label" for="setting-bold">Usar texto reforzado</label>
+          </div>
+        </fieldset>
+        <div class="settings-actions">
+          <button id="settings-reset" type="button">Restablecer ajustes</button>
+        </div>
+        <p id="settings-status" class="muted" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
 </main>
 
 <footer class="site-footer">
   <div class="wrap">
-    <p id="footer-text">TifloAcosta App · Versión 0.5 de prueba accesible.</p>
+    <p id="footer-text">TifloAcosta App · Versión 0.6 de prueba accesible.</p>
   </div>
 </footer>
 

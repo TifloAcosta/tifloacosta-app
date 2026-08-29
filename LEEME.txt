@@ -1,0 +1,25 @@
+TifloAcosta App v0.12 — integración GoatCounter
+
+Archivos incluidos:
+- index.html
+- videos.html
+
+Qué cambia:
+Solo se añade el código oficial de GoatCounter antes del cierre </body> en ambas páginas.
+
+Qué no cambia:
+- diseño
+- accesibilidad
+- búsquedas
+- vídeos
+- versión 0.12
+- service worker
+- manifest
+- estilos
+- scripts propios
+
+Para publicar:
+Subir index.html y videos.html a la raíz del repositorio TifloAcosta/tifloacosta-app y sustituir los existentes.
+
+Cuenta de analítica:
+https://tifloacosta.goatcounter.com

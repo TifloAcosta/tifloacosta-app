@@ -18,6 +18,7 @@
     controlsHeading: $('#video-controls-heading'),
     form: $('#video-search-form'),
     search: $('#video-search'),
+    searchLabel: $('#video-search-label'),
     searchButton: $('#video-search-button'),
     clearButton: $('#video-clear'),
     sortLabel: $('#video-sort-label'),
@@ -149,7 +150,7 @@
     els.intro.textContent = c.intro;
     els.channel.textContent = c.channel;
     els.controlsHeading.textContent = c.controlsHeading;
-    els.search.previousElementSibling.textContent = c.searchLabel;
+    els.searchLabel.textContent = c.searchLabel;
     els.search.placeholder = c.placeholder;
     els.searchButton.textContent = c.searchButton;
     els.clearButton.textContent = c.clearButton;

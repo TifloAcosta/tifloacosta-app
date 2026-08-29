@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10243e">
+<meta name="tifloacosta-version" content="0.11">
+<title>Vídeos de TifloAcosta</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="styles.css?v=0.11">
+</head>
+<body>
+<a class="skip-link" href="#main">Saltar al contenido principal</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <p class="brand" aria-label="TifloAcosta">TifloAcosta</p>
+    <div class="language-switch" role="group" aria-label="Idioma / Language">
+      <button type="button" id="lang-es" aria-pressed="true">Español</button>
+      <button type="button" id="lang-en" aria-pressed="false">English</button>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="wrap" tabindex="-1">
+  <p><a id="back-home" class="back-link" href="index.html">Volver a TifloAcosta App</a></p>
+  <h1 id="videos-heading">Vídeos de TifloAcosta</h1>
+  <p id="videos-intro">Catálogo de los vídeos públicos del Canal TifloAcosta, actualizado automáticamente. Los títulos y las descripciones se muestran tal como fueron publicados en YouTube.</p>
+  <p><a id="youtube-channel" class="button-link" href="https://www.youtube.com/@tifloacosta">Abrir Canal TifloAcosta en YouTube</a></p>
+
+  <section aria-labelledby="video-controls-heading">
+    <h2 id="video-controls-heading">Buscar y ordenar</h2>
+    <form id="video-search-form" role="search">
+      <label for="video-search">Título o palabras de la descripción</label>
+      <div class="search-row">
+        <input id="video-search" type="search" autocomplete="off" placeholder="Por ejemplo: VoiceOver, Android, WhatsApp…">
+        <button id="video-search-button" type="submit">Buscar</button>
+        <button id="video-clear" type="button">Limpiar búsqueda</button>
+      </div>
+    </form>
+    <div class="video-sort-control">
+      <label id="video-sort-label" for="video-sort">Orden</label>
+      <select id="video-sort">
+        <option value="newest">Más recientes primero</option>
+        <option value="oldest">Más antiguos primero</option>
+      </select>
+    </div>
+  </section>
+
+  <section aria-labelledby="video-results-heading">
+    <h2 id="video-results-heading" tabindex="-1">Resultados</h2>
+    <p id="video-status" class="muted" role="status" aria-live="polite">Cargando catálogo de vídeos…</p>
+    <div id="video-list" class="video-list"></div>
+    <nav id="video-pagination" class="pagination" aria-label="Paginación de vídeos" hidden>
+      <button id="video-prev" type="button">Anterior</button>
+      <p id="video-page" class="page-indicator" aria-live="off"></p>
+      <button id="video-next" type="button">Siguiente</button>
+    </nav>
+  </section>
+
+  <noscript><p>Necesitas JavaScript activado para buscar, ordenar y paginar el catálogo de vídeos.</p></noscript>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p id="footer-text">TifloAcosta App · Versión 0.11 de prueba accesible.</p>
+  </div>
+</footer>
+
+<script src="videos-core.js?v=0.11"></script>
+<script src="videos.js?v=0.11"></script>
+</body>
+</html>

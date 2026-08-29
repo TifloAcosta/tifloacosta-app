@@ -119,3 +119,17 @@ a { color: var(--accent); text-decoration-thickness: .12em; text-underline-offse
 .book-actions { display: flex; flex-wrap: wrap; gap: .65rem; margin: 1rem 0 .75rem; }
 .book-note { max-width: 48rem; }
 @media (max-width: 38rem) { .book-layout { grid-template-columns: 1fr; } .book-cover { max-width: 11rem; } }
+
+
+/* v0.11 — Catálogo de vídeos */
+.back-link { font-weight: 700; }
+.video-sort-control { margin-top: 1rem; max-width: 24rem; }
+.video-list { display: grid; gap: 1rem; margin-top: 1rem; }
+.video-card { border: 2px solid var(--border); border-radius: .6rem; padding: 1rem; background: var(--surface); }
+.video-card h3 { margin: .85rem 0 .35rem; }
+.video-thumbnail { display: block; width: 100%; max-width: 20rem; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: .45rem; }
+.video-meta { margin: .25rem 0 .65rem; color: var(--muted); }
+.video-description { margin: 0 0 1rem; }
+.pagination { display: flex; gap: .75rem; align-items: center; justify-content: space-between; flex-wrap: wrap; margin-top: 1.25rem; }
+.page-indicator { margin: 0; font-weight: 700; }
+@media (min-width: 52rem) { .video-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

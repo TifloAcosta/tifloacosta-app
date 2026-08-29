@@ -1,10 +1,14 @@
-const CACHE = 'tifloacosta-app-v0-10';
+const CACHE = 'tifloacosta-app-v0-11';
 const SHELL = [
   './',
   './index.html',
-  './styles.css?v=0.10',
-  './data.js?v=0.10',
-  './app.js?v=0.10',
+  './styles.css?v=0.11',
+  './data.js?v=0.11',
+  './app.js?v=0.11',
+  './videos.html',
+  './videos-core.js?v=0.11',
+  './videos.js?v=0.11',
+  './videos.json',
   './offline.html',
   './manifest.webmanifest',
   './book-cover.jpg',
@@ -58,7 +62,8 @@ self.addEventListener('fetch', event => {
 
   const liveContent = event.request.mode === 'navigate' ||
     event.request.destination === 'script' ||
-    event.request.destination === 'style';
+    event.request.destination === 'style' ||
+    url.pathname.endsWith('/videos.json');
 
   event.respondWith(liveContent ? networkFirst(event.request) : cacheFirst(event.request));
 });

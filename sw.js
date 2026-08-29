@@ -1,19 +1,24 @@
-const CACHE = 'tifloacosta-app-v0-11-2';
+const CACHE = 'tifloacosta-app-v0-12-0';
 const SHELL = [
   './',
   './index.html',
-  './styles.css?v=0.11',
-  './data.js?v=0.11',
-  './app.js?v=0.11',
+  './styles.css?v=0.12',
+  './data.js?v=0.12',
+  './app.js?v=0.12',
   './videos.html',
-  './videos-core.js?v=0.11',
-  './videos.js?v=0.11.2',
+  './videos-core.js?v=0.12',
+  './videos.js?v=0.12',
   './videos.json',
   './offline.html',
   './manifest.webmanifest',
   './book-cover.jpg',
-  './icons/icon-192.png',
-  './icons/icon-512.png'
+  './tifloacosta-icon-192.png',
+  './tifloacosta-icon-512.png',
+  './tifloacosta-maskable-192.png',
+  './tifloacosta-maskable-512.png',
+  './tifloacosta-apple-touch-icon.png',
+  './tifloacosta-favicon.ico',
+  './tifloacosta-simbolo-blanco.svg'
 ];
 
 self.addEventListener('install', event => {

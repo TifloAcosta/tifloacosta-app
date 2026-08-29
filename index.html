@@ -3,19 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#10243e">
-<meta name="tifloacosta-version" content="0.11">
+<meta name="theme-color" content="#0D2B45">
+<meta name="tifloacosta-version" content="0.12">
 <title>TifloAcosta App</title>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icons/icon-192.png">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
-<link rel="stylesheet" href="styles.css?v=0.11">
+<link rel="icon" href="tifloacosta-favicon.ico">
+<link rel="apple-touch-icon" href="tifloacosta-apple-touch-icon.png">
+<link rel="stylesheet" href="styles.css?v=0.12">
 </head>
 <body>
 <a class="skip-link" href="#main">Saltar al contenido principal</a>
 <header class="site-header">
   <div class="wrap header-row">
-    <p class="brand" aria-label="TifloAcosta">TifloAcosta</p>
+    <a class="brand" href="index.html" aria-label="TifloAcosta, inicio">
+      <img class="brand-mark" src="tifloacosta-simbolo-blanco.svg" alt="" aria-hidden="true" width="48" height="48">
+      <span class="brand-name">TifloAcosta</span>
+    </a>
     <div class="language-switch" role="group" aria-label="Idioma / Language">
       <button type="button" id="lang-es" aria-pressed="true">Español</button>
       <button type="button" id="lang-en" aria-pressed="false">English</button>
@@ -24,8 +27,10 @@
 </header>
 
 <main id="main" class="wrap" tabindex="-1">
-  <h1>TifloAcosta App</h1>
-  <p id="intro">Recursos de accesibilidad y tecnología, organizados para llegar a ellos sin perderse por el camino.</p>
+  <section class="hero" aria-labelledby="app-heading">
+    <h1 id="app-heading">TifloAcosta App</h1>
+    <p id="intro">Recursos de accesibilidad y tecnología, organizados para llegar a ellos sin perderse por el camino.</p>
+  </section>
 
   <section aria-labelledby="search-heading">
     <h2 id="search-heading">Buscar recursos</h2>
@@ -171,7 +176,7 @@
 
     <h3 id="update-heading">Actualización</h3>
     <div class="panel" aria-labelledby="update-heading">
-      <p id="app-version">Versión actual: 0.11</p>
+      <p id="app-version">Versión actual: 0.12</p>
       <button id="app-update" type="button">Actualizar aplicación</button>
       <p id="app-update-status" class="muted" role="status" aria-live="polite"></p>
     </div>
@@ -180,11 +185,11 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <p id="footer-text">TifloAcosta App · Versión 0.11 de prueba accesible.</p>
+    <p id="footer-text">TifloAcosta App · Versión 0.12 de prueba accesible.</p>
   </div>
 </footer>
 
-<script src="data.js?v=0.11"></script>
-<script src="app.js?v=0.11"></script>
+<script src="data.js?v=0.12"></script>
+<script src="app.js?v=0.12"></script>
 </body>
 </html>

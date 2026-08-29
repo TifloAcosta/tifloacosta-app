@@ -3,19 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#10243e">
-<meta name="tifloacosta-version" content="0.11">
+<meta name="theme-color" content="#0D2B45">
+<meta name="tifloacosta-version" content="0.12">
 <title>Vídeos de TifloAcosta</title>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icons/icon-192.png">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
-<link rel="stylesheet" href="styles.css?v=0.11">
+<link rel="icon" href="tifloacosta-favicon.ico">
+<link rel="apple-touch-icon" href="tifloacosta-apple-touch-icon.png">
+<link rel="stylesheet" href="styles.css?v=0.12">
 </head>
 <body>
 <a class="skip-link" href="#main">Saltar al contenido principal</a>
 <header class="site-header">
   <div class="wrap header-row">
-    <p class="brand" aria-label="TifloAcosta">TifloAcosta</p>
+    <a class="brand" href="index.html" aria-label="TifloAcosta, inicio">
+      <img class="brand-mark" src="tifloacosta-simbolo-blanco.svg" alt="" aria-hidden="true" width="48" height="48">
+      <span class="brand-name">TifloAcosta</span>
+    </a>
     <div class="language-switch" role="group" aria-label="Idioma / Language">
       <button type="button" id="lang-es" aria-pressed="true">Español</button>
       <button type="button" id="lang-en" aria-pressed="false">English</button>
@@ -25,9 +28,11 @@
 
 <main id="main" class="wrap" tabindex="-1">
   <p><a id="back-home" class="back-link" href="index.html">Volver a TifloAcosta App</a></p>
-  <h1 id="videos-heading">Vídeos de TifloAcosta</h1>
-  <p id="videos-intro">Catálogo de los vídeos públicos del Canal TifloAcosta, actualizado automáticamente. Los títulos y las descripciones se muestran tal como fueron publicados en YouTube.</p>
-  <p><a id="youtube-channel" class="button-link" href="https://www.youtube.com/@tifloacosta">Abrir Canal TifloAcosta en YouTube</a></p>
+  <section class="hero video-hero" aria-labelledby="videos-heading">
+    <h1 id="videos-heading">Vídeos de TifloAcosta</h1>
+    <p id="videos-intro">Catálogo de los vídeos públicos del Canal TifloAcosta, actualizado automáticamente. Los títulos y las descripciones se muestran tal como fueron publicados en YouTube.</p>
+    <p><a id="youtube-channel" class="button-link" href="https://www.youtube.com/@tifloacosta">Abrir Canal TifloAcosta en YouTube</a></p>
+  </section>
 
   <section aria-labelledby="video-controls-heading">
     <h2 id="video-controls-heading">Buscar y ordenar</h2>
@@ -64,11 +69,11 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <p id="footer-text">TifloAcosta App · Versión 0.11 de prueba accesible.</p>
+    <p id="footer-text">TifloAcosta App · Versión 0.12 de prueba accesible.</p>
   </div>
 </footer>
 
-<script src="videos-core.js?v=0.11"></script>
-<script src="videos.js?v=0.11.2"></script>
+<script src="videos-core.js?v=0.12"></script>
+<script src="videos.js?v=0.12"></script>
 </body>
 </html>

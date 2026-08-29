@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = '0.11';
+  const APP_VERSION = '0.12';
   const data = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];
   const $ = (selector) => document.querySelector(selector);
 
@@ -69,7 +69,7 @@
         library: '<h3>Biblioteca completa</h3><p><a class="button-link" href="https://drive.google.com/drive/folders/1qUy0-ESqWhmIbYC00gpIdHHMZCPla_1r">Carpeta completa en español</a></p><p><a class="button-link" href="https://drive.google.com/drive/folders/1fVQp_eDGWoVO_fp7xFGdPllXMMWZalvx?usp=sharing">Carpeta completa en inglés</a></p><p><a class="button-link" href="https://tifloacosta.wixsite.com/tifloacosta-recursos">Página pública de recursos</a></p>',
         install: '<h3>Instalar la app</h3><p>En iPhone o iPad, abre TifloAcosta App en Safari y utiliza Compartir > Añadir a pantalla de inicio. En navegadores compatibles de otros sistemas puede aparecer una opción equivalente de instalación.</p>',
         notifications: '<h3>Notificaciones</h3><p>La estructura está preparada para incorporar avisos de nuevos contenidos después de publicar la PWA y comprobar su accesibilidad instalada.</p>'
-      }, footer: 'TifloAcosta App · Versión 0.11 de prueba accesible.'
+      }, footer: 'TifloAcosta App · Versión 0.12 de prueba accesible.'
     },
     en: {
       intro: 'Accessibility and technology resources, organized so you can reach what you need without getting lost along the way.',
@@ -110,7 +110,7 @@
         library: '<h3>Full library</h3><p><a class="button-link" href="https://drive.google.com/drive/folders/1qUy0-ESqWhmIbYC00gpIdHHMZCPla_1r">Full Spanish folder</a></p><p><a class="button-link" href="https://drive.google.com/drive/folders/1fVQp_eDGWoVO_fp7xFGdPllXMMWZalvx?usp=sharing">Full English folder</a></p><p><a class="button-link" href="https://tifloacosta.wixsite.com/tifloacosta-recursos">Public resources page</a></p>',
         install: '<h3>Install the app</h3><p>On iPhone or iPad, open TifloAcosta App in Safari and use Share > Add to Home Screen. Compatible browsers on other systems may offer an equivalent install option.</p>',
         notifications: '<h3>Notifications</h3><p>The structure is ready for new-content alerts after the PWA is published and its installed accessibility has been verified.</p>'
-      }, footer: 'TifloAcosta App · Accessible test version 0.11.'
+      }, footer: 'TifloAcosta App · Accessible test version 0.12.'
     }
   };
 

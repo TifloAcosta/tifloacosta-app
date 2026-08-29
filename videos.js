@@ -53,8 +53,7 @@
       status: (n, page, pages) => `${n} vídeo${n === 1 ? '' : 's'}. Página ${page} de ${pages}.`,
       noResults: 'No hay vídeos que coincidan con la búsqueda.',
       published: date => `Publicado el ${date}`,
-      watch: 'Ver en YouTube',
-      watchLabel: title => `Ver “${title}” en YouTube`,
+      play: 'Reproducir',
       previous: 'Anterior',
       next: 'Siguiente',
       page: (page, pages) => `Página ${page} de ${pages}`,
@@ -81,8 +80,7 @@
       status: (n, page, pages) => `${n} video${n === 1 ? '' : 's'}. Page ${page} of ${pages}.`,
       noResults: 'No videos match your search.',
       published: date => `Published ${date}`,
-      watch: 'Watch on YouTube',
-      watchLabel: title => `Watch “${title}” on YouTube`,
+      play: 'Play',
       previous: 'Previous',
       next: 'Next',
       page: (page, pages) => `Page ${page} of ${pages}`,
@@ -218,8 +216,8 @@
     const link = document.createElement('a');
     link.className = 'button-link';
     link.href = video.url || `https://www.youtube.com/watch?v=${encodeURIComponent(video.id || '')}`;
-    link.textContent = c.watch;
-    link.setAttribute('aria-label', c.watchLabel(video.title || c.watch));
+    link.textContent = c.play;
+    link.setAttribute('aria-label', c.play);
     article.append(link);
 
     return article;

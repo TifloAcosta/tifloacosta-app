@@ -1,11 +1,8 @@
 name: Sync YouTube catalog
 
 on:
-  push:
-    paths:
-      - '.github/workflows/sync-youtube.yml'
-  schedule:
-    - cron: '17,47 * * * *'
+        schedule:
+        cron: '17,47 * * * *'
   workflow_dispatch:
 
 permissions:

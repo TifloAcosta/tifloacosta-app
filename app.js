@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = '0.12';
+  const APP_VERSION = '0.13';
   const data = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];
   const $ = (selector) => document.querySelector(selector);
 
@@ -47,7 +47,7 @@
       },
       contact: 'Contacto y redes', contactDirect: 'Contacto', contactFollow: 'Sígueme', contactPodcast: 'Escucha el podcast',
       contactLabels: { whatsapp: 'Contactar por WhatsApp', email: 'Enviar correo electrónico', instagram: 'Instagram', facebookChannel: 'Facebook — Canal TifloAcosta', facebookPersonal: 'Facebook — Tony Acosta', youtube: 'YouTube — Canal TifloAcosta', spotify: 'Spotify', applePodcasts: 'Apple Podcasts', ivoox: 'iVoox', podimo: 'Podimo', radio: 'radio.es' },
-      moreOptions: { videos: 'Vídeos', community: 'Comunidad', social: 'Redes sociales', library: 'Biblioteca completa', install: 'Instalar la app', notifications: 'Notificaciones' },
+      moreOptions: { videos: 'Vídeos', community: 'Comunidad', social: 'Redes sociales', library: 'Biblioteca completa', install: 'Instalar la app' },
       found: n => `${n} recurso${n === 1 ? '' : 's'} encontrado${n === 1 ? '' : 's'}.`, categoryFound: (cat,n) => `Categoría ${cat}. ${n} recurso${n === 1 ? '' : 's'} encontrado${n === 1 ? '' : 's'}.`, favFound: n => `${n} favorito${n === 1 ? '' : 's'}.`,
       noResults: 'No hay recursos que coincidan.', noFavorites: 'Todavía no hay favoritos guardados.', newBadge: 'Nuevo', open: 'Abrir recurso', addFav: 'Añadir a favoritos', removeFav: 'Quitar de favoritos',
       settings: {
@@ -68,8 +68,7 @@
         social: '<h3>Redes sociales</h3><p>Aquí agruparemos los canales y redes oficiales de TifloAcosta sin recargar la pantalla principal.</p>',
         library: '<h3>Biblioteca completa</h3><p><a class="button-link" href="https://drive.google.com/drive/folders/1qUy0-ESqWhmIbYC00gpIdHHMZCPla_1r">Carpeta completa en español</a></p><p><a class="button-link" href="https://drive.google.com/drive/folders/1fVQp_eDGWoVO_fp7xFGdPllXMMWZalvx?usp=sharing">Carpeta completa en inglés</a></p><p><a class="button-link" href="https://tifloacosta.wixsite.com/tifloacosta-recursos">Página pública de recursos</a></p>',
         install: '<h3>Instalar la app</h3><p>En iPhone o iPad, abre TifloAcosta App en Safari y utiliza Compartir > Añadir a pantalla de inicio. En navegadores compatibles de otros sistemas puede aparecer una opción equivalente de instalación.</p>',
-        notifications: '<h3>Notificaciones</h3><p>La estructura está preparada para incorporar avisos de nuevos contenidos después de publicar la PWA y comprobar su accesibilidad instalada.</p>'
-      }, footer: 'TifloAcosta App · Versión 0.12 de prueba accesible.'
+      }, footer: 'TifloAcosta App · Versión 0.13 de prueba accesible.'
     },
     en: {
       intro: 'Accessibility and technology resources, organized so you can reach what you need without getting lost along the way.',
@@ -88,7 +87,7 @@
       },
       contact: 'Contact and social', contactDirect: 'Contact', contactFollow: 'Follow TifloAcosta', contactPodcast: 'Listen to the podcast',
       contactLabels: { whatsapp: 'Contact on WhatsApp', email: 'Send email', instagram: 'Instagram', facebookChannel: 'Facebook — Canal TifloAcosta', facebookPersonal: 'Facebook — Tony Acosta', youtube: 'YouTube — Canal TifloAcosta', spotify: 'Spotify', applePodcasts: 'Apple Podcasts', ivoox: 'iVoox', podimo: 'Podimo', radio: 'radio.es' },
-      moreOptions: { videos: 'Videos', community: 'Community', social: 'Social media', library: 'Full library', install: 'Install the app', notifications: 'Notifications' },
+      moreOptions: { videos: 'Videos', community: 'Community', social: 'Social media', library: 'Full library', install: 'Install the app' },
       found: n => `${n} resource${n === 1 ? '' : 's'} found.`, categoryFound: (cat,n) => `${cat} category. ${n} resource${n === 1 ? '' : 's'} found.`, favFound: n => `${n} favorite${n === 1 ? '' : 's'}.`,
       noResults: 'No matching resources were found.', noFavorites: 'No favorites have been saved yet.', newBadge: 'New', open: 'Open resource', addFav: 'Add to favorites', removeFav: 'Remove from favorites',
       settings: {
@@ -109,8 +108,7 @@
         social: '<h3>Social media</h3><p>This area will group TifloAcosta’s official channels and social profiles without cluttering the home screen.</p>',
         library: '<h3>Full library</h3><p><a class="button-link" href="https://drive.google.com/drive/folders/1qUy0-ESqWhmIbYC00gpIdHHMZCPla_1r">Full Spanish folder</a></p><p><a class="button-link" href="https://drive.google.com/drive/folders/1fVQp_eDGWoVO_fp7xFGdPllXMMWZalvx?usp=sharing">Full English folder</a></p><p><a class="button-link" href="https://tifloacosta.wixsite.com/tifloacosta-recursos">Public resources page</a></p>',
         install: '<h3>Install the app</h3><p>On iPhone or iPad, open TifloAcosta App in Safari and use Share > Add to Home Screen. Compatible browsers on other systems may offer an equivalent install option.</p>',
-        notifications: '<h3>Notifications</h3><p>The structure is ready for new-content alerts after the PWA is published and its installed accessibility has been verified.</p>'
-      }, footer: 'TifloAcosta App · Accessible test version 0.12.'
+      }, footer: 'TifloAcosta App · Accessible test version 0.13.'
     }
   };
 
@@ -211,7 +209,7 @@
     els.settingsStatus.textContent=copy[lang].settings.resetDone;
   }
 
-  function renderMoreOptions(){const c=copy[lang],values=['','videos','library'];if(!isStandalone()) values.push('install');values.push('notifications');els.moreSelect.innerHTML='';values.forEach(v=>option(els.moreSelect,v,v?c.moreOptions[v]:c.morePlaceholder));}
+  function renderMoreOptions(){const c=copy[lang],values=['','videos','library'];if(!isStandalone()) values.push('install');els.moreSelect.innerHTML='';values.forEach(v=>option(els.moreSelect,v,v?c.moreOptions[v]:c.morePlaceholder));}
   function showMore(value){if(value==='videos'){location.href='videos.html';return;}if(!value){els.morePanel.hidden=true;els.morePanel.innerHTML='';return;}els.morePanel.hidden=false;els.morePanel.innerHTML=copy[lang].panels[value];}
 
   function localizeBook(){

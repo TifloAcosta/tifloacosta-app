@@ -1,13 +1,14 @@
-const CACHE = 'tifloacosta-app-v0-12-0';
+const CACHE = 'tifloacosta-app-v0-13-0';
 const SHELL = [
   './',
   './index.html',
   './styles.css?v=0.12',
   './data.js?v=0.12',
-  './app.js?v=0.12',
+  './app.js?v=0.13',
+  './notifications.js?v=0.13',
   './videos.html',
   './videos-core.js?v=0.12',
-  './videos.js?v=0.12',
+  './videos.js?v=0.13',
   './videos.json',
   './offline.html',
   './manifest.webmanifest',
@@ -28,7 +29,7 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE).map(key => caches.delete(key))))
+    caches.keys().then(keys => Promise.all(keys.filter(key => key.startsWith('tifloacosta-app-') && key !== CACHE).map(key => caches.delete(key))))
   );
   self.clients.claim();
 });

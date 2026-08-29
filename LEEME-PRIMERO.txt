@@ -1,0 +1,46 @@
+TifloAcosta App v0.13 — Notificaciones con OneSignal
+
+ARCHIVOS QUE HAY QUE SUBIR A LA RAÍZ DEL REPOSITORIO
+- index.html
+- app.js
+- notifications.js
+- sw.js
+- videos.html
+- videos.js
+- offline.html
+
+ARCHIVO QUE DEBE CONSERVAR ESTA RUTA EXACTA
+- push/onesignal/OneSignalSDKWorker.js
+
+No subas OneSignalSDKWorker.js a la raíz. Debe quedar publicado exactamente en:
+https://tifloacosta.github.io/tifloacosta-app/push/onesignal/OneSignalSDKWorker.js
+
+Resumen sugerido para el commit:
+Añadir notificaciones web con OneSignal
+
+QUÉ CAMBIA EN LA V0.13
+- Notificaciones deja de aparecer en “Más de TifloAcosta”.
+- Notificaciones pasa a Configuración.
+- Hay un botón accesible para activar o desactivar avisos.
+- El navegador solo pide permiso después de que la persona pulse “Activar notificaciones”.
+- OneSignal usa un trabajador de servicio separado del trabajador de la PWA.
+- El botón “Actualizar aplicación” conserva el trabajador de OneSignal.
+- El trabajador de la PWA ya solo elimina cachés propias de TifloAcosta.
+- GoatCounter se conserva.
+- Se conserva el funcionamiento sin conexión.
+- La interfaz sigue disponible en español e inglés.
+
+COMPROBACIÓN DESPUÉS DE PUBLICAR
+1. Espera a que GitHub Pages termine de publicar.
+2. Abre:
+   https://tifloacosta.github.io/tifloacosta-app/push/onesignal/OneSignalSDKWorker.js
+   Debe mostrarse una única línea que empieza por importScripts.
+3. Abre TifloAcosta App:
+   https://tifloacosta.github.io/tifloacosta-app/
+4. Si usas la PWA instalada, pulsa “Actualizar aplicación” una vez.
+5. Ve a Configuración > Notificaciones > Activar notificaciones.
+6. Acepta el permiso del navegador.
+7. En OneSignal, comprueba que aparece una suscripción nueva con estado Suscrito/Subscribed.
+
+NOTA SOBRE IPHONE Y IPAD
+En iPhone y iPad, Web Push requiere abrir la app desde la pantalla de inicio. Si se abre solo como una pestaña normal de Safari, la propia app lo explicará y no intentará pedir permiso.

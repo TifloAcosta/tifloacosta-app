@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = '0.16';
+  const APP_VERSION = '0.16.1';
   const PAGE_SIZE = 10;
   const core = window.TifloVideoCore;
   if (!core) return;
@@ -58,7 +58,6 @@
       previous: 'Anterior',
       next: 'Siguiente',
       page: (page, pages) => `Página ${page} de ${pages}`,
-      paginationLabel: 'Paginación de vídeos',
       error: 'No se pudo cargar el catálogo de vídeos. Comprueba la conexión e inténtalo de nuevo.',
       footer: `TifloAcosta App · Versión ${APP_VERSION} de prueba accesible.`
     },
@@ -86,7 +85,6 @@
       previous: 'Previous',
       next: 'Next',
       page: (page, pages) => `Page ${page} of ${pages}`,
-      paginationLabel: 'Video pagination',
       error: 'The video catalog could not be loaded. Check your connection and try again.',
       footer: `TifloAcosta App · Accessible test version ${APP_VERSION}.`
     }
@@ -159,7 +157,6 @@
     els.resultsHeading.textContent = c.resultsHeading;
     els.prev.textContent = c.previous;
     els.next.textContent = c.next;
-    els.pagination.setAttribute('aria-label', c.paginationLabel);
     els.footer.textContent = c.footer;
     setSortOptions();
     render();
@@ -179,7 +176,7 @@
 
   function createVideoCard(video) {
     const c = copy[lang];
-    const article = document.createElement('article');
+    const article = document.createElement('div');
     article.className = 'video-card';
 
     if (video.thumbnail) {

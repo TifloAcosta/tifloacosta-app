@@ -4,29 +4,29 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0D2B45">
-<meta name="tifloacosta-version" content="0.16">
+<meta name="tifloacosta-version" content="0.16.1">
 <title>TifloAcosta App</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="tifloacosta-favicon.ico">
 <link rel="apple-touch-icon" href="tifloacosta-apple-touch-icon.png">
-<link rel="stylesheet" href="styles.css?v=0.12">
+<link rel="stylesheet" href="styles.css?v=0.16.1">
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script src="notifications.js?v=0.13" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Saltar al contenido principal</a>
-<header class="site-header">
+<div class="site-header">
   <div class="wrap header-row">
     <a class="brand" href="index.html" aria-label="TifloAcosta, inicio">
       <img class="brand-mark" src="tifloacosta-simbolo-blanco.svg" alt="" aria-hidden="true" width="48" height="48">
       <span class="brand-name">TifloAcosta</span>
     </a>
-    <div class="language-switch" role="group" aria-label="Idioma / Language">
+    <div class="language-switch">
       <button type="button" id="lang-es" aria-pressed="true">Español</button>
       <button type="button" id="lang-en" aria-pressed="false">English</button>
     </div>
   </div>
-</header>
+</div>
 
 <main id="main" class="wrap" tabindex="-1">
   <section class="hero">
@@ -36,7 +36,7 @@
 
   <section>
     <h2 id="search-heading">Buscar recursos</h2>
-    <form id="search-form" role="search">
+    <form id="search-form">
       <label for="search">Título o palabra clave</label>
       <div class="search-row">
         <input id="search" type="search" autocomplete="off" placeholder="Por ejemplo: VoiceOver, Android, WhatsApp…">
@@ -63,11 +63,11 @@
       <button type="button" id="favorites-button">Ver favoritos</button>
       <button type="button" id="clear-results" hidden>Limpiar resultados</button>
     </div>
-    <p id="result-status" class="muted" role="status" aria-live="polite"></p>
+    <p id="result-status" class="muted" aria-live="polite" aria-atomic="true"></p>
     <div id="resource-results" class="resource-list" hidden></div>
   </section>
 
-  <section aria-labelledby="videos-home-heading">
+  <section>
     <h2 id="videos-home-heading">Canal TifloAcosta en YouTube</h2>
     <p id="videos-home-intro">Accede al catálogo completo de vídeos de TifloAcosta desde una pantalla pensada para buscar, ordenar y recorrer el canal con comodidad.</p>
     <div class="resource-actions">
@@ -81,9 +81,9 @@
   <section id="book-section" class="book-section">
     <h2 id="book-heading">Mi libro</h2>
     <div class="book-layout">
-      <figure class="book-figure">
+      <div class="book-figure">
         <img id="book-cover" class="book-cover" src="book-cover.jpg" alt="Portada del libro La vida vista desde donde estoy, de Tony Acosta">
-      </figure>
+      </div>
       <div class="book-copy">
         <h3 id="book-title">La vida vista desde donde estoy</h3>
         <p id="book-subtitle" class="book-subtitle">Reflexiones desde una forma propia de estar en el mundo.</p>
@@ -102,37 +102,37 @@
     <h2 id="contact-heading">Contacto y redes</h2>
 
     <h3 id="contact-direct-heading">Contacto</h3>
-    <ul class="contact-links">
-      <li><a class="button-link" id="contact-whatsapp" href="https://wa.me/34603516398">Contactar por WhatsApp</a></li>
-      <li><a class="button-link" id="contact-email" href="mailto:tifloacosta@gmail.com">Enviar correo electrónico</a></li>
-    </ul>
+    <div class="contact-links">
+      <a class="button-link" id="contact-whatsapp" href="https://wa.me/34603516398">Contactar por WhatsApp</a>
+      <a class="button-link" id="contact-email" href="mailto:tifloacosta@gmail.com">Enviar correo electrónico</a>
+    </div>
 
     <h3 id="contact-follow-heading">Sígueme</h3>
-    <ul class="contact-links">
-      <li><a class="button-link" id="contact-instagram" href="https://www.instagram.com/tifloacosta/">Instagram</a></li>
-      <li><a class="button-link" id="contact-facebook-channel" href="https://www.facebook.com/profile.php?id=61586738581998">Facebook — Canal TifloAcosta</a></li>
-      <li><a class="button-link" id="contact-facebook-personal" href="https://facebook.com/tony.acostaacosta">Facebook — Tony Acosta</a></li>
-    </ul>
+    <div class="contact-links">
+      <a class="button-link" id="contact-instagram" href="https://www.instagram.com/tifloacosta/">Instagram</a>
+      <a class="button-link" id="contact-facebook-channel" href="https://www.facebook.com/profile.php?id=61586738581998">Facebook — Canal TifloAcosta</a>
+      <a class="button-link" id="contact-facebook-personal" href="https://facebook.com/tony.acostaacosta">Facebook — Tony Acosta</a>
+    </div>
 
     <h3 id="contact-podcast-heading">Escucha el podcast</h3>
-    <ul class="contact-links">
-      <li><a class="button-link" id="contact-spotify" href="https://open.spotify.com/show/6z5BbrUhRuMANB5BFJfdfB">Spotify</a></li>
-      <li><a class="button-link" id="contact-apple-podcasts" href="https://podcasts.apple.com/es/podcast/canal-tifloacosta/id1567846456">Apple Podcasts</a></li>
-      <li><a class="button-link" id="contact-ivoox" href="https://www.ivoox.com/podcast-canal-tifloacosta_sq_f11282163_1.html">iVoox</a></li>
-      <li><a class="button-link" id="contact-podimo" href="https://podimo.com/es/shows/canal-tifloacosta">Podimo</a></li>
-      <li><a class="button-link" id="contact-radio" href="https://www.radio.es/podcast/canal-tifloacosta">radio.es</a></li>
-    </ul>
+    <div class="contact-links">
+      <a class="button-link" id="contact-spotify" href="https://open.spotify.com/show/6z5BbrUhRuMANB5BFJfdfB">Spotify</a>
+      <a class="button-link" id="contact-apple-podcasts" href="https://podcasts.apple.com/es/podcast/canal-tifloacosta/id1567846456">Apple Podcasts</a>
+      <a class="button-link" id="contact-ivoox" href="https://www.ivoox.com/podcast-canal-tifloacosta_sq_f11282163_1.html">iVoox</a>
+      <a class="button-link" id="contact-podimo" href="https://podimo.com/es/shows/canal-tifloacosta">Podimo</a>
+      <a class="button-link" id="contact-radio" href="https://www.radio.es/podcast/canal-tifloacosta">radio.es</a>
+    </div>
   </section>
 
   <section>
     <h2 id="config-heading">Configuración</h2>
     <button id="settings-toggle" type="button" aria-expanded="false" aria-controls="settings-panel">Opciones de configuración visual</button>
-    <div id="settings-panel" class="panel settings-panel" aria-labelledby="accessibility-heading" hidden>
+    <div id="settings-panel" class="panel settings-panel" hidden>
       <h3 id="accessibility-heading">Accesibilidad visual</h3>
       <p id="settings-intro">La app respeta el tamaño y el modo de color del sistema. Además, puedes guardar aquí preferencias propias para TifloAcosta.</p>
       <form id="settings-form" class="settings-form">
-        <fieldset>
-          <legend id="setting-text-legend">Tamaño del texto</legend>
+        <div class="settings-group">
+          <p class="settings-group-title" id="setting-text-legend">Tamaño del texto</p>
           <label id="setting-text-label" for="setting-text-size">Tamaño</label>
           <select id="setting-text-size">
             <option value="normal">Predeterminado</option>
@@ -140,42 +140,42 @@
             <option value="xlarge">Muy grande</option>
             <option value="max">Máximo</option>
           </select>
-        </fieldset>
-        <fieldset>
-          <legend id="setting-theme-legend">Color y contraste</legend>
+        </div>
+        <div class="settings-group">
+          <p class="settings-group-title" id="setting-theme-legend">Color y contraste</p>
           <label id="setting-theme-label" for="setting-theme">Perfil de contraste</label>
           <select id="setting-theme">
             <option value="auto">Seguir el sistema</option>
             <option value="light">Alto contraste claro</option>
             <option value="dark">Alto contraste oscuro</option>
           </select>
-        </fieldset>
-        <fieldset>
-          <legend id="setting-spacing-legend">Espaciado</legend>
+        </div>
+        <div class="settings-group">
+          <p class="settings-group-title" id="setting-spacing-legend">Espaciado</p>
           <label id="setting-spacing-label" for="setting-spacing">Separación entre líneas</label>
           <select id="setting-spacing">
             <option value="normal">Normal</option>
             <option value="comfortable">Cómoda</option>
             <option value="wide">Amplia</option>
           </select>
-        </fieldset>
-        <fieldset>
-          <legend id="setting-bold-legend">Legibilidad</legend>
+        </div>
+        <div class="settings-group">
+          <p class="settings-group-title" id="setting-bold-legend">Legibilidad</p>
           <div class="check-row">
             <input id="setting-bold" type="checkbox">
             <label id="setting-bold-label" for="setting-bold">Usar texto reforzado</label>
           </div>
-        </fieldset>
+        </div>
         <div class="settings-actions">
           <button id="settings-reset" type="button">Restablecer ajustes</button>
         </div>
-        <p id="settings-status" class="muted" role="status" aria-live="polite"></p>
+        <p id="settings-status" class="muted" aria-live="polite" aria-atomic="true"></p>
       </form>
     </div>
 
     <div id="install-section" hidden>
       <h3 id="install-heading">Instalar la app</h3>
-      <div class="panel" aria-labelledby="install-heading">
+      <div class="panel">
         <p id="install-intro">En iPhone o iPad, abre TifloAcosta App en Safari y utiliza Compartir &gt; Añadir a pantalla de inicio. En navegadores compatibles de otros sistemas puede aparecer una opción equivalente de instalación.</p>
       </div>
     </div>
@@ -184,26 +184,26 @@
     <div class="panel">
       <p id="notifications-intro">Recibe avisos cuando haya nuevos recursos, vídeos o novedades importantes. Solo se activarán si tú lo decides.</p>
       <button id="notifications-toggle" type="button" aria-pressed="false" disabled>Preparando notificaciones…</button>
-      <p id="notifications-status" class="muted" role="status" aria-live="polite"></p>
+      <p id="notifications-status" class="muted" aria-live="polite" aria-atomic="true"></p>
     </div>
 
     <h3 id="update-heading">Actualización</h3>
-    <div class="panel" aria-labelledby="update-heading">
+    <div class="panel">
       <p id="app-version">Versión actual: 0.16</p>
       <button id="app-update" type="button">Actualizar aplicación</button>
-      <p id="app-update-status" class="muted" role="status" aria-live="polite"></p>
+      <p id="app-update-status" class="muted" aria-live="polite" aria-atomic="true"></p>
     </div>
   </section>
 </main>
 
-<footer class="site-footer">
+<div class="site-footer">
   <div class="wrap">
-    <p id="footer-text">TifloAcosta App · Versión 0.16 de prueba accesible.</p>
+    <p id="footer-text">TifloAcosta App · Versión 0.16.1 de prueba accesible.</p>
   </div>
-</footer>
+</div>
 
 <script src="data.js?v=0.14"></script>
-<script src="app.js?v=0.16"></script>
+<script src="app.js?v=0.16.1"></script>
 <script data-goatcounter="https://tifloacosta.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </body>

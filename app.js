@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = '0.16';
+  const APP_VERSION = '0.16.1';
   const data = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];
   const $ = (selector) => document.querySelector(selector);
 
@@ -122,7 +122,7 @@
   }
 
   function makeCard(item) {
-    const c=copy[lang], article=document.createElement('article'); article.className='resource-card';
+    const c=copy[lang], article=document.createElement('div'); article.className='resource-card';
     const title=document.createElement('h3'); title.textContent=item.title;
     if(item.new){ const badge=document.createElement('span'); badge.className='badge'; badge.textContent=c.newBadge; title.append(' ',badge); }
     const meta=document.createElement('p'); meta.className='resource-meta'; meta.textContent=item.category;
@@ -134,7 +134,7 @@
   }
 
   function makeNewsItem(item) {
-    const article=document.createElement('article'); article.className='news-item';
+    const article=document.createElement('div'); article.className='news-item';
     const h3=document.createElement('h3'); const a=document.createElement('a'); a.href=item.url; a.textContent=item.title; h3.append(a);
     const meta=document.createElement('p'); meta.textContent=item.category;
     article.append(h3,meta); return article;

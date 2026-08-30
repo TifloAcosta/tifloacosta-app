@@ -4,27 +4,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0D2B45">
-<meta name="tifloacosta-version" content="0.16">
+<meta name="tifloacosta-version" content="0.16.1">
 <title>Vídeos de TifloAcosta</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="tifloacosta-favicon.ico">
 <link rel="apple-touch-icon" href="tifloacosta-apple-touch-icon.png">
-<link rel="stylesheet" href="styles.css?v=0.12">
+<link rel="stylesheet" href="styles.css?v=0.16.1">
 </head>
 <body>
 <a class="skip-link" href="#main">Saltar al contenido principal</a>
-<header class="site-header">
+<div class="site-header">
   <div class="wrap header-row">
     <a class="brand" href="index.html" aria-label="TifloAcosta, inicio">
       <img class="brand-mark" src="tifloacosta-simbolo-blanco.svg" alt="" aria-hidden="true" width="48" height="48">
       <span class="brand-name">TifloAcosta</span>
     </a>
-    <div class="language-switch" role="group" aria-label="Idioma / Language">
+    <div class="language-switch">
       <button type="button" id="lang-es" aria-pressed="true">Español</button>
       <button type="button" id="lang-en" aria-pressed="false">English</button>
     </div>
   </div>
-</header>
+</div>
 
 <main id="main" class="wrap" tabindex="-1">
   <p><a id="back-home" class="back-link" href="index.html">Volver a TifloAcosta App</a></p>
@@ -36,7 +36,7 @@
 
   <section>
     <h2 id="video-controls-heading">Buscar y ordenar</h2>
-    <form id="video-search-form" role="search">
+    <form id="video-search-form">
       <label id="video-search-label" for="video-search">Título o palabras de la descripción</label>
       <div class="search-row">
         <input id="video-search" type="search" autocomplete="off" placeholder="Por ejemplo: VoiceOver, Android, WhatsApp…">
@@ -55,26 +55,26 @@
 
   <section>
     <h2 id="video-results-heading">Resultados</h2>
-    <p id="video-status" class="muted" role="status" aria-live="polite">Cargando catálogo de vídeos…</p>
+    <p id="video-status" class="muted" aria-live="polite" aria-atomic="true">Cargando catálogo de vídeos…</p>
     <div id="video-list" class="video-list"></div>
-    <nav id="video-pagination" class="pagination" aria-label="Paginación de vídeos" hidden>
+    <div id="video-pagination" class="pagination" hidden>
       <button id="video-prev" type="button">Anterior</button>
       <p id="video-page" class="page-indicator" aria-live="off"></p>
       <button id="video-next" type="button">Siguiente</button>
-    </nav>
+    </div>
   </section>
 
   <noscript><p>Necesitas JavaScript activado para buscar, ordenar y paginar el catálogo de vídeos.</p></noscript>
 </main>
 
-<footer class="site-footer">
+<div class="site-footer">
   <div class="wrap">
-    <p id="footer-text">TifloAcosta App · Versión 0.16 de prueba accesible.</p>
+    <p id="footer-text">TifloAcosta App · Versión 0.16.1 de prueba accesible.</p>
   </div>
-</footer>
+</div>
 
 <script src="videos-core.js?v=0.16"></script>
-<script src="videos.js?v=0.16"></script>
+<script src="videos.js?v=0.16.1"></script>
 <script data-goatcounter="https://tifloacosta.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </body>

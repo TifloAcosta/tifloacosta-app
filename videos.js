@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = '0.16.1';
+  const APP_VERSION = '1.0';
   const PAGE_SIZE = 10;
   const core = window.TifloVideoCore;
   if (!core) return;
@@ -59,7 +59,7 @@
       next: 'Siguiente',
       page: (page, pages) => `Página ${page} de ${pages}`,
       error: 'No se pudo cargar el catálogo de vídeos. Comprueba la conexión e inténtalo de nuevo.',
-      footer: `TifloAcosta App · Versión ${APP_VERSION} de prueba accesible.`
+      footer: `TifloAcosta App · Versión ${APP_VERSION}.`
     },
     en: {
       skip: 'Skip to main content',
@@ -86,7 +86,7 @@
       next: 'Next',
       page: (page, pages) => `Page ${page} of ${pages}`,
       error: 'The video catalog could not be loaded. Check your connection and try again.',
-      footer: `TifloAcosta App · Accessible test version ${APP_VERSION}.`
+      footer: `TifloAcosta App · Version ${APP_VERSION}.`
     }
   };
 

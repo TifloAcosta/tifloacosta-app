@@ -1,5 +1,5 @@
 TIFLOACOSTA APP — GUÍA VIGENTE DE MANTENIMIENTO
-Estado actual: versión 0.16.1, fase final previa a la versión 1.0
+Estado actual: versión 1.0
 
 Aplicación pública:
 https://tifloacosta.github.io/tifloacosta-app/
@@ -8,34 +8,34 @@ Repositorio:
 https://github.com/TifloAcosta/tifloacosta-app
 
 OBJETIVO
-Esta es la documentación vigente para mantener TifloAcosta App. Sustituye las instrucciones antiguas de las versiones 0.4, 0.12, 0.13 y posteriores paquetes intermedios.
+Esta es la documentación vigente para mantener TifloAcosta App. Sustituye las instrucciones de versiones y paquetes anteriores.
 
-La aplicación es una PWA bilingüe, accesible y orientada especialmente al uso con lectores de pantalla. Reúne recursos, novedades, vídeos, información del libro, contactos, redes, configuración visual y notificaciones.
+TifloAcosta App 1.0 es una PWA bilingüe y accesible que reúne recursos, novedades, el catálogo del Canal TifloAcosta en YouTube, información del libro, contacto y redes, configuración visual, notificaciones web y funcionamiento sin conexión.
 
 CRITERIO DE ACCESIBILIDAD
-La referencia de accesibilidad es la experiencia conseguida en la versión 0.16.1.
+La referencia funcional y de accesibilidad de la versión 1.0 es la experiencia validada durante el cierre previo a esta versión.
 
-Se conserva la semántica que realmente ayuda: contenido principal, encabezados bien jerarquizados, etiquetas de formularios, controles nativos, estados dinámicos y enlace para saltar al contenido principal.
+Se conserva la semántica que realmente ayuda: contenido principal, encabezados jerarquizados, etiquetas de formularios, controles nativos, avisos dinámicos y enlace para saltar al contenido principal.
 
-Se evita añadir contenedores semánticos innecesarios que provoquen anuncios repetitivos como “inicio de región”, “fin de región”, “inicio de grupo”, “fin de artículo” u otros similares cuando no aporten orientación real.
+Se evitan contenedores semánticos innecesarios que provoquen anuncios repetitivos como “inicio de región”, “fin de región”, “inicio de grupo”, “fin de artículo” u otros similares cuando no aporten orientación real.
 
 No debe añadirse ARIA si el HTML nativo ya expresa correctamente la función del elemento.
 
 MANTENIMIENTO DE RECURSOS: MODO MANUAL BAJO DEMANDA
-Los documentos de Google Drive NO se sincronizan automáticamente con la app.
+Los documentos de Google Drive no se incorporan automáticamente al catálogo de recursos.
 
 Procedimiento acordado:
 1. El nuevo documento se coloca en la carpeta de Google Drive que corresponda, en español o en inglés.
 2. Se solicita la actualización de TifloAcosta App indicando qué documento se ha incorporado.
 3. Se localiza el archivo en Drive y se comprueban su título, idioma, categoría y enlace definitivo.
 4. Se actualiza data.js conservando la estructura existente y sin alterar otros recursos.
-5. Si el documento debe aparecer en Novedades, se marca como nuevo. La portada muestra un máximo de tres novedades por idioma, por lo que se revisan también las marcas de novedades anteriores para que se muestren las tres que realmente correspondan.
+5. Si el documento debe aparecer en Novedades, se marca como nuevo. La portada muestra un máximo de tres novedades por idioma, por lo que se revisan las marcas anteriores para que aparezcan las tres que correspondan.
 6. Se comprueba que funcionan búsqueda, categorías, favoritos, cambio de idioma y enlaces.
 7. Se prepara un paquete mínimo con únicamente los archivos que sea necesario sustituir.
 8. Se suben esos archivos a la rama main de GitHub.
-9. Después de la publicación, se verifica la aplicación pública.
+9. Después de la publicación se verifica la aplicación pública.
 
-Una actualización de contenido que solo modifique data.js no obliga por sí misma a cambiar la versión de la aplicación. La numeración de versión se reserva para cambios de interfaz, comportamiento, accesibilidad o infraestructura.
+Una actualización de contenido que solo modifique data.js no obliga por sí misma a cambiar la versión de la aplicación. La numeración se reserva para cambios de interfaz, comportamiento, accesibilidad o infraestructura.
 
 REGLA IMPORTANTE PARA LAS SUBIDAS
 No se debe sustituir ningún archivo que no forme parte expresamente del paquete preparado para una actualización.
@@ -70,16 +70,16 @@ push/onesignal/OneSignalSDKWorker.js
 URL pública del trabajador:
 https://tifloacosta.github.io/tifloacosta-app/push/onesignal/OneSignalSDKWorker.js
 
-La prueba completa de notificaciones en iPhone se realizará al final del proceso de cierre, con la PWA instalada en la pantalla de inicio.
+La validación específica de notificaciones en iPhone queda pendiente para una fase posterior y no bloquea la publicación de la versión 1.0. En iPhone y iPad, las notificaciones web requieren abrir la PWA instalada desde la pantalla de inicio.
 
-No modificar la configuración de OneSignal ni su trabajador durante una actualización normal de recursos.
+Hasta realizar esa prueba específica, no debe afirmarse que las notificaciones en iPhone están validadas. La integración de OneSignal se conserva sin cambios y no debe modificarse durante una actualización normal de recursos.
 
 PWA, CACHÉ Y ACTUALIZACIONES
 manifest.webmanifest define la instalación de la aplicación.
 
-sw.js es el trabajador de servicio de la PWA. Su caché está versionada y la aplicación utiliza estrategia de red prioritaria para páginas, scripts, estilos y videos.json.
+sw.js es el trabajador de servicio de la PWA. La versión 1.0 utiliza la caché tifloacosta-app-v1-0 y mantiene estrategia de red prioritaria para páginas, scripts, estilos y videos.json.
 
-El botón “Actualizar aplicación” está destinado a ayudar a renovar la versión instalada sin eliminar la configuración independiente de OneSignal.
+El botón “Actualizar aplicación” ayuda a renovar la versión instalada sin eliminar la configuración independiente de OneSignal.
 
 PUBLICAR UNA ACTUALIZACIÓN EN GITHUB
 1. Abrir:
@@ -119,6 +119,6 @@ La aplicación conserva GoatCounter:
 https://tifloacosta.goatcounter.com
 
 VERSIÓN 1.0
-La versión 0.16.1 es la referencia funcional y de accesibilidad previa al cierre.
+La versión 1.0 consolida el estado estable alcanzado tras las pruebas de la serie 0.16.x. No introduce funciones nuevas: oficializa la aplicación, retira la indicación “de prueba” y establece esta guía como referencia de mantenimiento.
 
-Antes de declarar la versión 1.0 se completará la prueba final de notificaciones en iPhone y se realizará una última revisión de publicación. Si no aparecen incidencias, la 1.0 deberá limitarse a consolidar el estado estable, retirar la indicación “de prueba” y actualizar la numeración, evitando introducir funciones nuevas en ese momento.
+Las mejoras futuras se harán de forma incremental, procurando no alterar la experiencia de lector de pantalla ya validada.

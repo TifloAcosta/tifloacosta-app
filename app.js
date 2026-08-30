@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = '0.16.1';
+  const APP_VERSION = '1.0';
   const data = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];
   const $ = (selector) => document.querySelector(selector);
 
@@ -63,7 +63,7 @@
         done: `Aplicación actualizada. Versión ${APP_VERSION}.`, error: 'No se pudo actualizar. Comprueba la conexión a Internet e inténtalo de nuevo.'
       },
       install: { heading:'Instalar la app', intro:'En iPhone o iPad, abre TifloAcosta App en Safari y utiliza Compartir > Añadir a pantalla de inicio. En navegadores compatibles de otros sistemas puede aparecer una opción equivalente de instalación.' },
- footer: `TifloAcosta App · Versión ${APP_VERSION} de prueba accesible.`
+ footer: `TifloAcosta App · Versión ${APP_VERSION}.`
     },
     en: {
       intro: 'Accessibility and technology resources, organized so you can reach what you need without getting lost along the way.',
@@ -97,7 +97,7 @@
         done: `Application updated. Version ${APP_VERSION}.`, error: 'The app could not be updated. Check your internet connection and try again.'
       },
       install: { heading:'Install the app', intro:'On iPhone or iPad, open TifloAcosta App in Safari and use Share > Add to Home Screen. Compatible browsers on other systems may offer an equivalent installation option.' },
- footer: `TifloAcosta App · Accessible test version ${APP_VERSION}.`
+ footer: `TifloAcosta App · Version ${APP_VERSION}.`
     }
   };
 

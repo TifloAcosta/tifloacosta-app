@@ -11,6 +11,7 @@
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
       .toLocaleLowerCase()
+      .replace(/\s+/g, ' ')
       .trim();
   }
 
@@ -18,9 +19,10 @@
     const items = Array.isArray(videos) ? videos : [];
     const term = normalizeText(query);
     if (!term) return [...items];
+    const words = term.split(' ').filter(Boolean);
     return items.filter(video => {
       const haystack = normalizeText(`${video.title || ''} ${video.description || ''} ${video.excerpt || ''}`);
-      return haystack.includes(term);
+      return words.every(word => haystack.includes(word));
     });
   }
 
@@ -41,13 +43,16 @@
     const totalPages = Math.max(1, Math.ceil(items.length / size));
     const rawPage = Number.isFinite(Number(requestedPage)) ? Math.floor(Number(requestedPage)) : 1;
     const page = Math.min(totalPages, Math.max(1, rawPage));
-    const start = (page - 1) * size;
+    const offset = (page - 1) * size;
+    const pageItems = items.slice(offset, offset + size);
     return {
-      items: items.slice(start, start + size),
+      items: pageItems,
       page,
       pageSize: size,
       totalPages,
-      totalItems: items.length
+      totalItems: items.length,
+      start: items.length ? offset + 1 : 0,
+      end: items.length ? offset + pageItems.length : 0
     };
   }
 

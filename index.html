@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0D2B45">
-<meta name="tifloacosta-version" content="0.13">
+<meta name="tifloacosta-version" content="0.16">
 <title>TifloAcosta App</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="tifloacosta-favicon.ico">
@@ -67,17 +67,16 @@
     <div id="resource-results" class="resource-list" hidden></div>
   </section>
 
-  <section>
-    <h2 id="more-heading">Más de TifloAcosta</h2>
-    <label for="more-select">Elegir una opción</label>
-    <select id="more-select">
-      <option value="">Seleccionar</option>
-      <option value="videos">Vídeos</option>
-      <option value="library">Biblioteca completa</option>
-    </select>
-    <div id="more-panel" class="panel" hidden tabindex="-1"></div>
-    <noscript><p>Esta prueba necesita JavaScript activado para mostrar los recursos y guardar las preferencias.</p></noscript>
+  <section aria-labelledby="videos-home-heading">
+    <h2 id="videos-home-heading">Canal TifloAcosta en YouTube</h2>
+    <p id="videos-home-intro">Accede al catálogo completo de vídeos de TifloAcosta desde una pantalla pensada para buscar, ordenar y recorrer el canal con comodidad.</p>
+    <div class="resource-actions">
+      <a class="button-link" id="videos-home-open" href="videos.html">Explorar todos los vídeos</a>
+      <a class="button-link" id="youtube-home-channel" href="https://www.youtube.com/@tifloacosta">Abrir Canal TifloAcosta en YouTube</a>
+    </div>
   </section>
+
+  <noscript><p>Esta prueba necesita JavaScript activado para mostrar los recursos y guardar las preferencias.</p></noscript>
 
   <section id="book-section" class="book-section">
     <h2 id="book-heading">Mi libro</h2>
@@ -113,7 +112,6 @@
       <li><a class="button-link" id="contact-instagram" href="https://www.instagram.com/tifloacosta/">Instagram</a></li>
       <li><a class="button-link" id="contact-facebook-channel" href="https://www.facebook.com/profile.php?id=61586738581998">Facebook — Canal TifloAcosta</a></li>
       <li><a class="button-link" id="contact-facebook-personal" href="https://facebook.com/tony.acostaacosta">Facebook — Tony Acosta</a></li>
-      <li><a class="button-link" id="contact-youtube" href="https://www.youtube.com/results?search_query=Canal+TifloAcosta">YouTube — Canal TifloAcosta</a></li>
     </ul>
 
     <h3 id="contact-podcast-heading">Escucha el podcast</h3>
@@ -175,6 +173,13 @@
       </form>
     </div>
 
+    <div id="install-section" hidden>
+      <h3 id="install-heading">Instalar la app</h3>
+      <div class="panel" aria-labelledby="install-heading">
+        <p id="install-intro">En iPhone o iPad, abre TifloAcosta App en Safari y utiliza Compartir &gt; Añadir a pantalla de inicio. En navegadores compatibles de otros sistemas puede aparecer una opción equivalente de instalación.</p>
+      </div>
+    </div>
+
     <h3 id="notifications-heading">Notificaciones</h3>
     <div class="panel">
       <p id="notifications-intro">Recibe avisos cuando haya nuevos recursos, vídeos o novedades importantes. Solo se activarán si tú lo decides.</p>
@@ -184,7 +189,7 @@
 
     <h3 id="update-heading">Actualización</h3>
     <div class="panel" aria-labelledby="update-heading">
-      <p id="app-version">Versión actual: 0.13</p>
+      <p id="app-version">Versión actual: 0.16</p>
       <button id="app-update" type="button">Actualizar aplicación</button>
       <p id="app-update-status" class="muted" role="status" aria-live="polite"></p>
     </div>
@@ -193,12 +198,12 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <p id="footer-text">TifloAcosta App · Versión 0.13 de prueba accesible.</p>
+    <p id="footer-text">TifloAcosta App · Versión 0.16 de prueba accesible.</p>
   </div>
 </footer>
 
-<script src="data.js?v=0.12"></script>
-<script src="app.js?v=0.13"></script>
+<script src="data.js?v=0.14"></script>
+<script src="app.js?v=0.16"></script>
 <script data-goatcounter="https://tifloacosta.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </body>

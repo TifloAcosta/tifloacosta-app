@@ -1,14 +1,14 @@
-const CACHE = 'tifloacosta-app-v0-13-0';
+const CACHE = 'tifloacosta-app-v0-16-0';
 const SHELL = [
   './',
   './index.html',
   './styles.css?v=0.12',
-  './data.js?v=0.12',
-  './app.js?v=0.13',
+  './data.js?v=0.14',
+  './app.js?v=0.16',
   './notifications.js?v=0.13',
   './videos.html',
-  './videos-core.js?v=0.12',
-  './videos.js?v=0.13',
+  './videos-core.js?v=0.16',
+  './videos.js?v=0.16',
   './videos.json',
   './offline.html',
   './manifest.webmanifest',

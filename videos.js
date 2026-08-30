@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = '0.13';
+  const APP_VERSION = '0.16';
   const PAGE_SIZE = 10;
   const core = window.TifloVideoCore;
   if (!core) return;
@@ -50,7 +50,8 @@
       oldest: 'Más antiguos primero',
       resultsHeading: 'Resultados',
       loading: 'Cargando catálogo de vídeos…',
-      status: (n, page, pages) => `${n} vídeo${n === 1 ? '' : 's'}. Página ${page} de ${pages}.`,
+      empty: 'El catálogo de vídeos está vacío en este momento.',
+      status: (start, end, n, page, pages) => `Mostrando ${start} a ${end} de ${n} vídeo${n === 1 ? '' : 's'}. Página ${page} de ${pages}.`,
       noResults: 'No hay vídeos que coincidan con la búsqueda.',
       published: date => `Publicado el ${date}`,
       play: 'Reproducir',
@@ -77,7 +78,8 @@
       oldest: 'Oldest first',
       resultsHeading: 'Results',
       loading: 'Loading video catalog…',
-      status: (n, page, pages) => `${n} video${n === 1 ? '' : 's'}. Page ${page} of ${pages}.`,
+      empty: 'The video catalog is currently empty.',
+      status: (start, end, n, page, pages) => `Showing ${start} to ${end} of ${n} video${n === 1 ? '' : 's'}. Page ${page} of ${pages}.`,
       noResults: 'No videos match your search.',
       published: date => `Published ${date}`,
       play: 'Play',
@@ -96,6 +98,7 @@
   let sortOrder = 'newest';
   let currentPage = 1;
   let loadError = false;
+  let catalogLoaded = false;
 
   function readStorage(key) {
     try { return localStorage.getItem(key); } catch { return null; }
@@ -190,7 +193,7 @@
       article.append(img);
     }
 
-    const title = document.createElement('h3');
+    const title = document.createElement('h2');
     title.textContent = video.title || '';
     article.append(title);
 
@@ -233,8 +236,14 @@
       return;
     }
 
-    if (!catalog.length) {
+    if (!catalogLoaded) {
       els.status.textContent = c.loading;
+      els.pagination.hidden = true;
+      return;
+    }
+
+    if (!catalog.length) {
+      els.status.textContent = c.empty;
       els.pagination.hidden = true;
       return;
     }
@@ -243,28 +252,27 @@
     const pageData = core.paginate(filtered, currentPage, PAGE_SIZE);
     currentPage = pageData.page;
     els.status.textContent = pageData.totalItems
-      ? c.status(pageData.totalItems, pageData.page, pageData.totalPages)
+      ? c.status(pageData.start, pageData.end, pageData.totalItems, pageData.page, pageData.totalPages)
       : c.noResults;
 
     pageData.items.forEach(video => els.list.append(createVideoCard(video)));
     els.pagination.hidden = pageData.totalItems === 0;
-    els.prev.disabled = pageData.page <= 1;
-    els.next.disabled = pageData.page >= pageData.totalPages;
+    els.prev.hidden = pageData.page <= 1;
+    els.next.hidden = pageData.page >= pageData.totalPages;
     els.page.textContent = c.page(pageData.page, pageData.totalPages);
   }
 
-  function focusResults() {
-    els.resultsHeading.focus();
-  }
 
   async function loadCatalog() {
     loadError = false;
+    catalogLoaded = false;
     els.status.textContent = copy[lang].loading;
     try {
       const response = await fetch('./videos.json', { cache: 'no-store' });
       if (!response.ok) throw new Error(`Catalog request failed: ${response.status}`);
       const data = await response.json();
       catalog = Array.isArray(data.videos) ? data.videos : [];
+      catalogLoaded = true;
       render();
     } catch (error) {
       loadError = true;
@@ -279,7 +287,6 @@
     query = els.search.value.trim();
     currentPage = 1;
     render();
-    focusResults();
   });
   els.clearButton.addEventListener('click', () => {
     els.search.value = '';
@@ -292,17 +299,14 @@
     sortOrder = els.sort.value;
     currentPage = 1;
     render();
-    focusResults();
   });
   els.prev.addEventListener('click', () => {
     currentPage -= 1;
     render();
-    focusResults();
   });
   els.next.addEventListener('click', () => {
     currentPage += 1;
     render();
-    focusResults();
   });
 
   if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {

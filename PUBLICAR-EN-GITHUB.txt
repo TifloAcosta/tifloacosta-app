@@ -1,7 +1,14 @@
-TifloAcosta App v0.4 — paquete preparado para GitHub Pages
+DOCUMENTO SUSTITUIDO
 
-1. No subas el ZIP. Descomprímelo.
-2. En el repositorio de GitHub sube el CONTENIDO de esta carpeta a la raíz del repositorio.
-3. Deben quedar index.html, app.js, data.js, styles.css, sw.js, manifest.webmanifest, offline.html, .nojekyll y la carpeta icons en el nivel principal.
-4. En Settings > Pages, selecciona Deploy from a branch, rama main y carpeta /(root), y guarda.
-5. Cuando GitHub indique que el sitio está publicado, abre Visit site.
+Este archivo se conserva únicamente para evitar que se sigan instrucciones antiguas por error.
+
+La documentación vigente de TifloAcosta App está en:
+README.txt
+
+Repositorio:
+https://github.com/TifloAcosta/tifloacosta-app
+
+Aplicación pública:
+https://tifloacosta.github.io/tifloacosta-app/
+
+No utilices procedimientos de versiones anteriores que puedan aparecer en copias antiguas de este archivo.

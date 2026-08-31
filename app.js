@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = '1.0';
+  const APP_VERSION = '1.1';
   const data = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];
   const $ = (selector) => document.querySelector(selector);
 
@@ -121,21 +121,157 @@
     root.dataset.bold = String(Boolean(prefs.bold));
   }
 
+  const resourceMenuCopy = {
+    es: {
+      heading: 'Opciones del documento',
+      open: 'Abrir documento',
+      download: 'Descargar documento',
+      share: 'Compartir documento',
+      addFavorite: 'Añadir a favoritos',
+      removeFavorite: 'Quitar de favoritos',
+      cancel: 'Cancelar',
+      copied: 'El enlace del documento se ha copiado al portapapeles.',
+      shareUnavailable: 'Este dispositivo no ofrece una opción compatible para compartir este documento.'
+    },
+    en: {
+      heading: 'Document options',
+      open: 'Open document',
+      download: 'Download document',
+      share: 'Share document',
+      addFavorite: 'Add to favorites',
+      removeFavorite: 'Remove from favorites',
+      cancel: 'Cancel',
+      copied: 'The document link has been copied to the clipboard.',
+      shareUnavailable: 'This device does not provide a compatible option for sharing this document.'
+    }
+  };
+
+  function extractDriveFileId(url) {
+    const value=String(url||'');
+    const pathMatch=value.match(/\/file\/d\/([^/?#]+)/);
+    if(pathMatch) return pathMatch[1];
+    try {
+      const parsed=new URL(value);
+      if(parsed.hostname==='drive.google.com'||parsed.hostname.endsWith('.drive.google.com')) return parsed.searchParams.get('id');
+    } catch(error) {}
+    return null;
+  }
+
+  function driveDownloadUrl(url) {
+    const id=extractDriveFileId(url);
+    return id?`https://drive.google.com/uc?export=download&id=${encodeURIComponent(id)}`:url;
+  }
+
+  async function shareResource(item,status) {
+    const labels=resourceMenuCopy[lang];
+    if(navigator.share) {
+      try {
+        await navigator.share({title:item.title,url:item.url});
+        return 'shared';
+      } catch(error) {
+        if(error&&error.name==='AbortError') return 'cancelled';
+      }
+    }
+    try {
+      if(navigator.clipboard&&window.isSecureContext) {
+        await navigator.clipboard.writeText(item.url);
+        status.textContent=labels.copied;
+        return 'copied';
+      }
+    } catch(error) {}
+    status.textContent=labels.shareUnavailable;
+    return 'unavailable';
+  }
+
+  function openResourceMenu(item,trigger) {
+    const labels=resourceMenuCopy[lang];
+    const dialog=document.createElement('dialog');
+    dialog.className='panel';
+    const heading=document.createElement('h2');
+    heading.textContent=labels.heading;
+    const headingId=`resource-dialog-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    heading.id=headingId;
+    dialog.setAttribute('aria-labelledby',headingId);
+    const title=document.createElement('p');
+    title.textContent=item.title;
+    const actions=document.createElement('div');
+    actions.className='resource-actions';
+    const status=document.createElement('p');
+    status.className='muted';
+    status.setAttribute('aria-live','polite');
+    status.setAttribute('aria-atomic','true');
+    let focusAfterClose=trigger;
+    let rerenderAfterClose=false;
+
+    const makeButton=label=>{const button=document.createElement('button');button.type='button';button.textContent=label;return button;};
+    const openButton=makeButton(labels.open);
+    const downloadButton=makeButton(labels.download);
+    const shareButton=makeButton(labels.share);
+    const favoriteButton=makeButton(favorites.has(item.id)?labels.removeFavorite:labels.addFavorite);
+    const cancelButton=makeButton(labels.cancel);
+    favoriteButton.setAttribute('aria-pressed',String(favorites.has(item.id)));
+
+    openButton.addEventListener('click',()=>{
+      focusAfterClose=null;
+      dialog.close();
+      location.href=item.url;
+    });
+    downloadButton.addEventListener('click',()=>{
+      focusAfterClose=null;
+      dialog.close();
+      location.href=driveDownloadUrl(item.url);
+    });
+    shareButton.addEventListener('click',async()=>{
+      status.textContent='';
+      const result=await shareResource(item,status);
+      if(result==='shared') dialog.close();
+    });
+    favoriteButton.addEventListener('click',()=>{
+      const nowFavorite=!favorites.has(item.id);
+      if(nowFavorite) favorites.add(item.id); else favorites.delete(item.id);
+      saveFavorites();
+      const card=trigger.closest?trigger.closest('.resource-card'):null;
+      const cardFavorite=card?card.querySelector('[data-favorite-action="true"]'):null;
+      if(cardFavorite) {
+        cardFavorite.textContent=nowFavorite?copy[lang].removeFav:copy[lang].addFav;
+        cardFavorite.setAttribute('aria-pressed',String(nowFavorite));
+      }
+      if(els.favoritesButton.getAttribute('data-active')==='true'&&!nowFavorite) {
+        rerenderAfterClose=true;
+        focusAfterClose=els.favoritesButton;
+      }
+      dialog.close();
+    });
+    cancelButton.addEventListener('click',()=>dialog.close());
+
+    actions.append(openButton,downloadButton,shareButton,favoriteButton,cancelButton);
+    dialog.append(heading,title,actions,status);
+    document.body.append(dialog);
+    dialog.addEventListener('close',()=>{
+      dialog.remove();
+      if(rerenderAfterClose) rerenderCurrentResults();
+      if(focusAfterClose&&document.contains(focusAfterClose)) focusAfterClose.focus();
+    },{once:true});
+    dialog.showModal();
+    openButton.focus();
+  }
+
   function makeCard(item) {
     const c=copy[lang], article=document.createElement('div'); article.className='resource-card';
     const title=document.createElement('h3'); title.textContent=item.title;
     if(item.new){ const badge=document.createElement('span'); badge.className='badge'; badge.textContent=c.newBadge; title.append(' ',badge); }
     const meta=document.createElement('p'); meta.className='resource-meta'; meta.textContent=item.category;
     const actions=document.createElement('div'); actions.className='resource-actions';
-    const open=document.createElement('a'); open.className='button-link'; open.href=item.url; open.textContent=c.open;
-    const fav=document.createElement('button'); fav.type='button'; const isFav=favorites.has(item.id); fav.textContent=isFav?c.removeFav:c.addFav; fav.setAttribute('aria-pressed',String(isFav));
+    const open=document.createElement('a'); open.className='button-link'; open.href=item.url; open.textContent=c.open; open.setAttribute('aria-haspopup','dialog');
+    open.addEventListener('click',event=>{event.preventDefault();openResourceMenu(item,open);});
+    const fav=document.createElement('button'); fav.type='button'; fav.dataset.favoriteAction='true'; const isFav=favorites.has(item.id); fav.textContent=isFav?c.removeFav:c.addFav; fav.setAttribute('aria-pressed',String(isFav));
     fav.addEventListener('click',()=>{ if(favorites.has(item.id)) favorites.delete(item.id); else favorites.add(item.id); saveFavorites(); if(!els.results.hidden) rerenderCurrentResults(); });
     actions.append(open,fav); article.append(title,meta,actions); return article;
   }
 
   function makeNewsItem(item) {
     const article=document.createElement('div'); article.className='news-item';
-    const h3=document.createElement('h3'); const a=document.createElement('a'); a.href=item.url; a.textContent=item.title; h3.append(a);
+    const h3=document.createElement('h3'); const a=document.createElement('a'); a.href=item.url; a.textContent=item.title; a.setAttribute('aria-haspopup','dialog'); a.addEventListener('click',event=>{event.preventDefault();openResourceMenu(item,a);}); h3.append(a);
     const meta=document.createElement('p'); meta.textContent=item.category;
     article.append(h3,meta); return article;
   }

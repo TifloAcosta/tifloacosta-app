@@ -1,5 +1,5 @@
 TIFLOACOSTA APP — GUÍA VIGENTE DE MANTENIMIENTO
-Estado actual: versión 1.0
+Estado actual: versión 1.1
 
 Aplicación pública:
 https://tifloacosta.github.io/tifloacosta-app/
@@ -10,16 +10,28 @@ https://github.com/TifloAcosta/tifloacosta-app
 OBJETIVO
 Esta es la documentación vigente para mantener TifloAcosta App. Sustituye las instrucciones de versiones y paquetes anteriores.
 
-TifloAcosta App 1.0 es una PWA bilingüe y accesible que reúne recursos, novedades, el catálogo del Canal TifloAcosta en YouTube, información del libro, contacto y redes, configuración visual, notificaciones web y funcionamiento sin conexión.
+TifloAcosta App 1.1 es una PWA bilingüe y accesible que reúne recursos, novedades, el catálogo del Canal TifloAcosta en YouTube, información del libro, contacto y redes, configuración visual, notificaciones web y funcionamiento sin conexión.
 
 CRITERIO DE ACCESIBILIDAD
-La referencia funcional y de accesibilidad de la versión 1.0 es la experiencia validada durante el cierre previo a esta versión.
+La versión 1.1 mantiene como referencia funcional y de accesibilidad la experiencia validada durante el cierre de la versión 1.0.
 
 Se conserva la semántica que realmente ayuda: contenido principal, encabezados jerarquizados, etiquetas de formularios, controles nativos, avisos dinámicos y enlace para saltar al contenido principal.
 
 Se evitan contenedores semánticos innecesarios que provoquen anuncios repetitivos como “inicio de región”, “fin de región”, “inicio de grupo”, “fin de artículo” u otros similares cuando no aporten orientación real.
 
 No debe añadirse ARIA si el HTML nativo ya expresa correctamente la función del elemento.
+
+APERTURA Y GESTIÓN DE DOCUMENTOS
+Desde la versión 1.1, al activar un documento desde Novedades, una búsqueda, una categoría o favoritos, la aplicación muestra un cuadro de opciones antes de salir de TifloAcosta.
+
+Opciones disponibles:
+- Abrir documento.
+- Descargar documento.
+- Compartir documento. Cuando el sistema no ofrece una hoja de compartir compatible, la aplicación intenta copiar el enlace al portapapeles y lo comunica de forma accesible.
+- Añadir a favoritos o quitar de favoritos, según el estado actual.
+- Cancelar.
+
+El cuadro utiliza un diálogo nativo. Al cancelarlo, el foco vuelve al control desde el que se abrió. Los favoritos continúan siendo una forma de localizar rápidamente un recurso y no deben describirse como almacenamiento sin conexión.
 
 MANTENIMIENTO DE RECURSOS: MODO MANUAL BAJO DEMANDA
 Los documentos de Google Drive no se incorporan automáticamente al catálogo de recursos.
@@ -70,14 +82,14 @@ push/onesignal/OneSignalSDKWorker.js
 URL pública del trabajador:
 https://tifloacosta.github.io/tifloacosta-app/push/onesignal/OneSignalSDKWorker.js
 
-La validación específica de notificaciones en iPhone queda pendiente para una fase posterior y no bloquea la publicación de la versión 1.0. En iPhone y iPad, las notificaciones web requieren abrir la PWA instalada desde la pantalla de inicio.
+La validación específica de notificaciones en iPhone queda pendiente y no bloquea la publicación de la versión 1.1. En iPhone y iPad, las notificaciones web requieren abrir la PWA instalada desde la pantalla de inicio.
 
 Hasta realizar esa prueba específica, no debe afirmarse que las notificaciones en iPhone están validadas. La integración de OneSignal se conserva sin cambios y no debe modificarse durante una actualización normal de recursos.
 
 PWA, CACHÉ Y ACTUALIZACIONES
 manifest.webmanifest define la instalación de la aplicación.
 
-sw.js es el trabajador de servicio de la PWA. La versión 1.0 utiliza la caché tifloacosta-app-v1-0 y mantiene estrategia de red prioritaria para páginas, scripts, estilos y videos.json.
+sw.js es el trabajador de servicio de la PWA. La versión 1.1 utiliza la caché tifloacosta-app-v1-1 y mantiene estrategia de red prioritaria para páginas, scripts, estilos y videos.json.
 
 El botón “Actualizar aplicación” ayuda a renovar la versión instalada sin eliminar la configuración independiente de OneSignal.
 
@@ -118,7 +130,10 @@ ANALÍTICA
 La aplicación conserva GoatCounter:
 https://tifloacosta.goatcounter.com
 
+VERSIÓN 1.1
+La versión 1.1 incorpora el nuevo cuadro de gestión de documentos con apertura, descarga, compartir, favoritos y cancelación. Mantiene el catálogo de recursos, YouTube, notificaciones, analítica, configuración y estructura visual de la versión 1.0.
+
 VERSIÓN 1.0
-La versión 1.0 consolida el estado estable alcanzado tras las pruebas de la serie 0.16.x. No introduce funciones nuevas: oficializa la aplicación, retira la indicación “de prueba” y establece esta guía como referencia de mantenimiento.
+La versión 1.0 consolidó el estado estable alcanzado tras las pruebas de la serie 0.16.x, oficializó la aplicación, retiró la indicación “de prueba” y estableció esta guía como referencia de mantenimiento.
 
 Las mejoras futuras se harán de forma incremental, procurando no alterar la experiencia de lector de pantalla ya validada.

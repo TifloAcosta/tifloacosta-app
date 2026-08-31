@@ -1,4 +1,4 @@
-            Limpiar categoría Atajoswindow.TIFLO_CATEGORIES = {
+            window.TIFLO_CATEGORIES = {
   "es": [
     "Android",
     "APPs",
@@ -116,79 +116,7 @@ window.TIFLO_RESOURCES = [
     "new": false
   },
   {
-    "id": "es-14yiPNJaGXaoCUZ1UwJHGXqOXAi1hmkwb",
-    "lang": "es",
-    "category": "Atajos",
-    "title": "2 atajos para que grabes lo que quieras",
-    "url": "https://drive.google.com/file/d/14yiPNJaGXaoCUZ1UwJHGXqOXAi1hmkwb/view?usp=drivesdk",
-    "new": false
-  },
-  {
-    "id": "es-11-sqishClvKNS8Yzt_YihRJgZR-S9nUE",
-    "lang": "es",
-    "category": "Atajos",
-    "title": "Atajo con un ojo prestado en tiempo real",
-    "url": "https://drive.google.com/file/d/11-sqishClvKNS8Yzt_YihRJgZR-S9nUE/view?usp=drivesdk",
-    "new": false
-  },
-  {
-    "id": "es-1DzL-NPe_UnyhsonQqxcIIeouJfQQlFIQ",
-    "lang": "es",
-    "category": "Atajos",
-    "title": "Atajo cuenta calorías",
-    "url": "https://drive.google.com/file/d/1DzL-NPe_UnyhsonQqxcIIeouJfQQlFIQ/view?usp=drivesdk",
-    "new": false
-  },
-  {
-    "id": "es-1O188qb85LgdjRKdyI91XW22fBh-Haqpc",
-    "lang": "es",
-    "category": "Atajos",
-    "title": "Atajo describe usando Gemini",
-    "url": "https://drive.google.com/file/d/1O188qb85LgdjRKdyI91XW22fBh-Haqpc/view?usp=drivesdk",
-    "new": false
-  },
-  {
-    "id": "es-1LJoKT2UCS4-sLCsdG5Go5m513kho-5pR",
-    "lang": "es",
-    "category": "Atajos",
-    "title": "Atajo para extraer el audio a tus vídeos",
-    "url": "https://drive.google.com/file/d/1LJoKT2UCS4-sLCsdG5Go5m513kho-5pR/view?usp=drivesdk",
-    "new": false
-  },
-  {
-    "id": "es-1sxG9Y3gvPAJngPUxr3pE0aaIzXro7r0q",
-    "lang": "es",
-    "category": "Atajos",
-    "title": "Atajo para hacer fotos.... con la voz",
-    "url": "https://drive.google.com/file/d/1sxG9Y3gvPAJngPUxr3pE0aaIzXro7r0q/view?usp=drivesdk",
-    "new": false
-  },
-  {
-    "id": "es-1qZGFScEKS2crwmkOfZrXZRbCcIFL-VhV",
-    "lang": "es",
-    "category": "Atajos",
-    "title": "Atajo para voces inteligentes",
-    "url": "https://drive.google.com/file/d/1qZGFScEKS2crwmkOfZrXZRbCcIFL-VhV/view?usp=drivesdk",
-    "new": false
-  },
-  {
-    "id": "es-1GmYYC-Fe_V0WUo9zPAMg8AB1GU3-c4AI",
-    "lang": "es",
-    "category": "Atajos",
-    "title": "Atajo Traduce, de cualquier idioma a español",
-    "url": "https://drive.google.com/file/d/1GmYYC-Fe_V0WUo9zPAMg8AB1GU3-c4AI/view?usp=drivesdk",
-    "new": false
-  },
-  {
-    "id": "es-12z0whzV4lE_a_Ota2Ed8QHokV2u62756",
-    "lang": "es",
-    "category": "Atajos",
-    "title": "Atajo transcribe y resume audios",
-    "url": "https://drive.google.com/file/d/12z0whzV4lE_a_Ota2Ed8QHokV2u62756/view?usp=drivesdk",
-    "new": false
-  },
-  {
-    "id": "es-19oVnEZYBLwKc6CGF-Oq08KRV7THGM7O5",
+"id": "es-19oVnEZYBLwKc6CGF-Oq08KRV7THGM7O5",
     "lang": "es",
     "category": "Atajos",
     "title": "Tomando atajos con Canal TifloAcosta",

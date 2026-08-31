@@ -1,4 +1,4 @@
-            window.TIFLO_CATEGORIES = {
+            Limpiar categoría Atajoswindow.TIFLO_CATEGORIES = {
   "es": [
     "Android",
     "APPs",

@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = '1.2';
+  const APP_VERSION = '1.3';
   const data = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];
   const $ = (selector) => document.querySelector(selector);
 
@@ -212,14 +212,12 @@
     favoriteButton.setAttribute('aria-pressed',String(favorites.has(item.id)));
 
     openButton.addEventListener('click',()=>{
-      focusAfterClose=null;
+      window.open(item.url,'_blank','noopener,noreferrer');
       dialog.close();
-      location.href=item.url;
     });
     downloadButton.addEventListener('click',()=>{
-      focusAfterClose=null;
+      window.open(driveDownloadUrl(item.url),'_blank','noopener,noreferrer');
       dialog.close();
-      location.href=driveDownloadUrl(item.url);
     });
     shareButton.addEventListener('click',async()=>{
       status.textContent='';

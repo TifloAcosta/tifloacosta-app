@@ -1,5 +1,5 @@
 TIFLOACOSTA APP — GUÍA VIGENTE DE MANTENIMIENTO
-Estado actual: versión 1.2
+Estado actual: versión 1.3
 
 Aplicación pública:
 https://tifloacosta.github.io/tifloacosta-app/
@@ -10,10 +10,10 @@ https://github.com/TifloAcosta/tifloacosta-app
 OBJETIVO
 Esta es la documentación vigente para mantener TifloAcosta App. Sustituye las instrucciones de versiones y paquetes anteriores.
 
-TifloAcosta App 1.2 es una PWA bilingüe y accesible que reúne recursos, novedades, el catálogo del Canal TifloAcosta en YouTube, información del libro, contacto y redes, configuración visual, notificaciones web y funcionamiento sin conexión.
+TifloAcosta App 1.3 es una PWA bilingüe y accesible que reúne recursos, novedades, el catálogo del Canal TifloAcosta en YouTube, información del libro, contacto y redes, configuración visual, notificaciones web y funcionamiento sin conexión.
 
 CRITERIO DE ACCESIBILIDAD
-La versión 1.2 mantiene como referencia funcional y de accesibilidad la experiencia validada durante el cierre de la versión 1.0.
+La versión 1.3 mantiene como referencia funcional y de accesibilidad la experiencia validada durante el cierre de la versión 1.0.
 
 Se conserva la semántica que realmente ayuda: contenido principal, encabezados jerarquizados, etiquetas de formularios, controles nativos, avisos dinámicos y enlace para saltar al contenido principal.
 
@@ -22,7 +22,7 @@ Se evitan contenedores semánticos innecesarios que provoquen anuncios repetitiv
 No debe añadirse ARIA si el HTML nativo ya expresa correctamente la función del elemento.
 
 APERTURA Y GESTIÓN DE DOCUMENTOS
-Desde la versión 1.2, el título de cada documento es el único control de entrada al recurso en Novedades, búsquedas, categorías y favoritos. Al activarlo, la aplicación muestra un cuadro de opciones antes de salir de TifloAcosta.
+Desde la versión 1.2, el título de cada documento es el único control de entrada al recurso en Novedades, búsquedas, categorías y favoritos. Al activarlo, la aplicación muestra un cuadro de opciones antes de abrir el contenido.
 
 Opciones disponibles:
 - Abrir documento.
@@ -32,6 +32,8 @@ Opciones disponibles:
 - Cancelar.
 
 Para mantener la presentación limpia, las fichas de resultados no muestran botones separados de “Abrir recurso” ni de favoritos debajo del título. El cuadro utiliza un diálogo nativo. Al cancelarlo, el foco vuelve al título desde el que se abrió. Los favoritos continúan siendo una forma de localizar rápidamente un recurso y no deben describirse como almacenamiento sin conexión.
+
+Desde la versión 1.3, Abrir documento y Descargar documento abren el contenido externo sin sustituir la PWA. Al regresar a TifloAcosta, la aplicación permanece en la búsqueda, categoría o lista de favoritos desde la que se abrió el recurso. Los vídeos de YouTube y los enlaces web externos siguen el mismo criterio. La pantalla de vídeos ofrece además un enlace explícito para volver a la pantalla principal tanto antes como después del catálogo.
 
 MANTENIMIENTO DE RECURSOS: MODO MANUAL BAJO DEMANDA
 Los documentos de Google Drive no se incorporan automáticamente al catálogo de recursos.
@@ -82,14 +84,14 @@ push/onesignal/OneSignalSDKWorker.js
 URL pública del trabajador:
 https://tifloacosta.github.io/tifloacosta-app/push/onesignal/OneSignalSDKWorker.js
 
-La validación específica de notificaciones en iPhone queda pendiente y no bloquea la publicación de la versión 1.2. En iPhone y iPad, las notificaciones web requieren abrir la PWA instalada desde la pantalla de inicio.
+La validación específica de notificaciones en iPhone queda pendiente y no bloquea la publicación de la versión 1.3. En iPhone y iPad, las notificaciones web requieren abrir la PWA instalada desde la pantalla de inicio.
 
 Hasta realizar esa prueba específica, no debe afirmarse que las notificaciones en iPhone están validadas. La integración de OneSignal se conserva sin cambios y no debe modificarse durante una actualización normal de recursos.
 
 PWA, CACHÉ Y ACTUALIZACIONES
 manifest.webmanifest define la instalación de la aplicación.
 
-sw.js es el trabajador de servicio de la PWA. La versión 1.2 utiliza la caché tifloacosta-app-v1-2 y mantiene estrategia de red prioritaria para páginas, scripts, estilos y videos.json.
+sw.js es el trabajador de servicio de la PWA. La versión 1.3 utiliza la caché tifloacosta-app-v1-3 y mantiene estrategia de red prioritaria para páginas, scripts, estilos y videos.json.
 
 El botón “Actualizar aplicación” ayuda a renovar la versión instalada sin eliminar la configuración independiente de OneSignal.
 
@@ -129,6 +131,9 @@ AUTOMATIZACIONES
 ANALÍTICA
 La aplicación conserva GoatCounter:
 https://tifloacosta.goatcounter.com
+
+VERSIÓN 1.3
+La versión 1.3 corrige la navegación al abrir contenidos externos desde la PWA. Los documentos de Google Drive, las descargas, los vídeos de YouTube y los principales enlaces web se abren sin sustituir TifloAcosta, de modo que al regresar se conserva el punto de trabajo. El catálogo de vídeos incorpora un enlace de vuelta a la pantalla principal tanto al comienzo como al final. También se renueva la caché de la PWA para distribuir correctamente los archivos de esta versión.
 
 VERSIÓN 1.2
 La versión 1.2 simplifica la presentación de los recursos: el título del documento pasa a ser el único control visible para abrir el cuadro de gestión. Se eliminan de las fichas los controles separados “Abrir recurso” y “Añadir/Quitar de favoritos”. Las acciones de abrir, descargar, compartir y gestionar favoritos se concentran en el cuadro de opciones, junto con Cancelar.

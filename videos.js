@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = '1.0';
+  const APP_VERSION = '1.3';
   const PAGE_SIZE = 10;
   const core = window.TifloVideoCore;
   if (!core) return;
@@ -12,6 +12,7 @@
     langEn: $('#lang-en'),
     skip: $('.skip-link'),
     back: $('#back-home'),
+    backBottom: $('#back-home-bottom'),
     heading: $('#videos-heading'),
     intro: $('#videos-intro'),
     channel: $('#youtube-channel'),
@@ -36,7 +37,7 @@
   const copy = {
     es: {
       skip: 'Saltar al contenido principal',
-      back: 'Volver a TifloAcosta App',
+      back: 'Volver a la pantalla principal',
       heading: 'Vídeos de TifloAcosta',
       intro: 'Catálogo de los vídeos públicos del Canal TifloAcosta, actualizado automáticamente. Los títulos y las descripciones se muestran tal como fueron publicados en YouTube.',
       channel: 'Abrir Canal TifloAcosta en YouTube',
@@ -63,7 +64,7 @@
     },
     en: {
       skip: 'Skip to main content',
-      back: 'Back to TifloAcosta App',
+      back: 'Back to main screen',
       heading: 'TifloAcosta videos',
       intro: 'Catalog of public videos from Canal TifloAcosta, updated automatically. Titles and descriptions are shown exactly as they were published on YouTube.',
       channel: 'Open Canal TifloAcosta on YouTube',
@@ -145,6 +146,7 @@
     els.langEn.setAttribute('aria-pressed', String(lang === 'en'));
     els.skip.textContent = c.skip;
     els.back.textContent = c.back;
+    els.backBottom.textContent = c.back;
     els.heading.textContent = c.heading;
     els.intro.textContent = c.intro;
     els.channel.textContent = c.channel;
@@ -218,6 +220,8 @@
     link.href = video.url || `https://www.youtube.com/watch?v=${encodeURIComponent(video.id || '')}`;
     link.textContent = c.play;
     link.setAttribute('aria-label', c.play);
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
     article.append(link);
 
     return article;

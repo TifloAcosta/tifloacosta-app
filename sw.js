@@ -1,10 +1,10 @@
-const CACHE = 'tifloacosta-app-v1-1';
+const CACHE = 'tifloacosta-app-v1-2';
 const SHELL = [
   './',
   './index.html',
   './styles.css?v=1.0',
   './data.js?v=0.14',
-  './app.js?v=1.1',
+  './app.js?v=1.2',
   './notifications.js?v=0.13',
   './videos.html',
   './videos-core.js?v=0.16',

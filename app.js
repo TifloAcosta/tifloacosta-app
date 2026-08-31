@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = '1.1';
+  const APP_VERSION = '1.2';
   const data = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];
   const $ = (selector) => document.querySelector(selector);
 
@@ -258,15 +258,13 @@
 
   function makeCard(item) {
     const c=copy[lang], article=document.createElement('div'); article.className='resource-card';
-    const title=document.createElement('h3'); title.textContent=item.title;
+    const title=document.createElement('h3');
+    const open=document.createElement('a'); open.href=item.url; open.textContent=item.title; open.setAttribute('aria-haspopup','dialog');
+    open.addEventListener('click',event=>{event.preventDefault();openResourceMenu(item,open);});
+    title.append(open);
     if(item.new){ const badge=document.createElement('span'); badge.className='badge'; badge.textContent=c.newBadge; title.append(' ',badge); }
     const meta=document.createElement('p'); meta.className='resource-meta'; meta.textContent=item.category;
-    const actions=document.createElement('div'); actions.className='resource-actions';
-    const open=document.createElement('a'); open.className='button-link'; open.href=item.url; open.textContent=c.open; open.setAttribute('aria-haspopup','dialog');
-    open.addEventListener('click',event=>{event.preventDefault();openResourceMenu(item,open);});
-    const fav=document.createElement('button'); fav.type='button'; fav.dataset.favoriteAction='true'; const isFav=favorites.has(item.id); fav.textContent=isFav?c.removeFav:c.addFav; fav.setAttribute('aria-pressed',String(isFav));
-    fav.addEventListener('click',()=>{ if(favorites.has(item.id)) favorites.delete(item.id); else favorites.add(item.id); saveFavorites(); if(!els.results.hidden) rerenderCurrentResults(); });
-    actions.append(open,fav); article.append(title,meta,actions); return article;
+    article.append(title,meta); return article;
   }
 
   function makeNewsItem(item) {

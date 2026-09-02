@@ -107,3 +107,45 @@ test('video cards use h3 titles and title-specific accessible play names', async
   assert.doesNotMatch(source, /const title = document\.createElement\('h2'\)/);
   assert.doesNotMatch(source, /setAttribute\('aria-label', c\.play\)/);
 });
+
+test('public pages expose canonical social metadata for the verified project URL', async () => {
+  const home = await read('index.html');
+  const videos = await read('videos.html');
+  const base = 'https://tifloacosta.github.io/tifloacosta-app/';
+
+  assert.match(home, new RegExp(`<link rel="canonical" href="${base}">`));
+  assert.match(videos, new RegExp(`<link rel="canonical" href="${base}videos\\.html">`));
+  for (const html of [home, videos]) {
+    assert.match(html, /<meta name="description" content="[^"]+">/);
+    assert.match(html, /<meta property="og:title" content="[^"]+">/);
+    assert.match(html, /<meta property="og:image" content="https:\/\//);
+    assert.match(html, /<meta name="twitter:card" content="summary">/);
+    assert.doesNotMatch(html, /http-equiv="(?:Content-Security-Policy|X-Frame-Options)/i);
+  }
+});
+
+test('privacy and external-service information is present and bilingual', async () => {
+  const html = await read('index.html');
+  const source = await read('app.js');
+
+  for (const id of ['about-heading', 'external-links-note', 'privacy-heading', 'privacy-text', 'accessibility-info-text']) {
+    assert.match(html, new RegExp(`id="${id}"`));
+  }
+  for (const expected of ['GoatCounter', 'OneSignal', "heading: 'About Tony'", "heading: 'Privacy and accessibility'", 'els.privacyText.textContent=c.privacy.text']) {
+    assert.ok(source.includes(expected), `Missing localized audit information: ${expected}`);
+  }
+});
+
+test('YouTube workflow uses one sync implementation and deploys changed catalog directly', async () => {
+  const sync = await read('.github/workflows/sync-youtube.yml');
+  const pages = await read('.github/workflows/jekyll-gh-pages.yml');
+
+  assert.match(sync, /run: node scripts\/sync-youtube\.mjs/);
+  assert.doesNotMatch(sync, /node <<'NODE'/);
+  assert.match(sync, /pages: write/);
+  assert.match(sync, /id-token: write/);
+  assert.match(sync, /actions\/upload-pages-artifact@v3/);
+  assert.match(sync, /actions\/deploy-pages@v4/);
+  assert.match(sync, /if: steps\.changes\.outputs\.changed == 'true'/);
+  assert.match(pages, /actions\/deploy-pages@v5/);
+});

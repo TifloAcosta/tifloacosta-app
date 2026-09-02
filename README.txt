@@ -145,3 +145,12 @@ VERSIÓN 1.0
 La versión 1.0 consolidó el estado estable alcanzado tras las pruebas de la serie 0.16.x, oficializó la aplicación, retiró la indicación “de prueba” y estableció esta guía como referencia de mantenimiento.
 
 Las mejoras futuras se harán de forma incremental, procurando no alterar la experiencia de lector de pantalla ya validada.
+
+PRIVACIDAD, ACCESIBILIDAD Y SEGURIDAD
+La portada explica qué preferencias se guardan localmente y qué servicios externos carga realmente la aplicación (GoatCounter y OneSignal), además de resumir las ayudas de accesibilidad disponibles y cómo comunicar barreras.
+
+GitHub Pages publica esta aplicación en la URL de proyecto indicada al comienzo de este documento. No existe un archivo CNAME ni se ha configurado un dominio personalizado.
+
+Las limitaciones de las cabeceras HTTP en GitHub Pages y las medidas aplicables están documentadas en SECURITY.md. No deben añadirse etiquetas meta para aparentar cabeceras que requieren control del servidor.
+
+La sincronización de YouTube ejecuta scripts/sync-youtube.mjs como única implementación de la lógica de catálogo. Si cambia videos.json, el mismo workflow crea y sube el commit y despliega GitHub Pages directamente. Esto es necesario porque los pushes realizados con GITHUB_TOKEN no disparan otro workflow de Pages.

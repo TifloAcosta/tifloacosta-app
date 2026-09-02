@@ -6,9 +6,10 @@
   const $ = (selector) => document.querySelector(selector);
 
   const els = {
-    langEs: $('#lang-es'), langEn: $('#lang-en'), intro: $('#intro'), searchHeading: $('#search-heading'),
+    langEs: $('#lang-es'), langEn: $('#lang-en'), skip: $('.skip-link'), brand: $('.brand'), appHeading: $('#app-heading'),
+    intro: $('#intro'), searchHeading: $('#search-heading'), searchLabel: $('label[for="search"]'),
     searchForm: $('#search-form'), search: $('#search'), searchButton: $('#search-button'), newsHeading: $('#news-heading'),
-    newsCount: $('#news-count'), newsList: $('#news-list'), exploreHeading: $('#explore-heading'), category: $('#category'),
+    newsCount: $('#news-count'), newsList: $('#news-list'), exploreHeading: $('#explore-heading'), categoryLabel: $('label[for="category"]'), category: $('#category'),
     favoritesButton: $('#favorites-button'), clearResults: $('#clear-results'), resultStatus: $('#result-status'), results: $('#resource-results'),
     videosHomeHeading: $('#videos-home-heading'), videosHomeIntro: $('#videos-home-intro'), videosHomeOpen: $('#videos-home-open'), youtubeHomeChannel: $('#youtube-home-channel'),
     bookHeading: $('#book-heading'), bookCover: $('#book-cover'), bookTitle: $('#book-title'), bookSubtitle: $('#book-subtitle'),
@@ -32,6 +33,7 @@
 
   const copy = {
     es: {
+      documentTitle: 'TifloAcosta App — Recursos de accesibilidad', skip: 'Saltar al contenido principal', brandLabel: 'TifloAcosta, inicio', appHeading: 'TifloAcosta App',
       intro: 'Recursos de accesibilidad y tecnología, organizados para llegar a ellos sin perderse por el camino.',
       searchHeading: 'Buscar recursos', searchLabel: 'Título o palabra clave', placeholder: 'Por ejemplo: VoiceOver, Android, WhatsApp…', searchButton: 'Buscar',
       news: 'Novedades', newsCount: n => `${n} novedad${n === 1 ? '' : 'es'} reciente${n === 1 ? '' : 's'}.`,
@@ -66,6 +68,7 @@
  footer: `TifloAcosta App · Versión ${APP_VERSION}.`
     },
     en: {
+      documentTitle: 'TifloAcosta App — Accessibility resources', skip: 'Skip to main content', brandLabel: 'TifloAcosta, home', appHeading: 'TifloAcosta App',
       intro: 'Accessibility and technology resources, organized so you can reach what you need without getting lost along the way.',
       searchHeading: 'Search resources', searchLabel: 'Title or keyword', placeholder: 'For example: VoiceOver, Android, WhatsApp…', searchButton: 'Search',
       news: 'What’s new', newsCount: n => `${n} recent item${n === 1 ? '' : 's'}.`,
@@ -422,7 +425,7 @@
     if(history.replaceState) history.replaceState(null,'',clean);
   }
 
-  function applyLanguage(){const c=copy[lang];document.documentElement.lang=lang;localStorage.setItem('tifloLang',lang);els.langEs.setAttribute('aria-pressed',String(lang==='es'));els.langEn.setAttribute('aria-pressed',String(lang==='en'));els.intro.textContent=c.intro;els.searchHeading.textContent=c.searchHeading;els.search.previousElementSibling.textContent=c.searchLabel;els.search.placeholder=c.placeholder;els.searchButton.textContent=c.searchButton;els.newsHeading.textContent=c.news;els.exploreHeading.textContent=c.explore;els.category.previousElementSibling.textContent=c.categoryLabel;els.favoritesButton.textContent=c.favorites;els.clearResults.textContent=c.clear;els.videosHomeHeading.textContent=c.videosHome.heading;els.videosHomeIntro.textContent=c.videosHome.intro;els.videosHomeOpen.textContent=c.videosHome.open;els.youtubeHomeChannel.textContent=c.videosHome.channel;els.configHeading.textContent=c.configuration;els.accessibilityHeading.textContent=c.accessibility;els.footer.textContent=c.footer;renderCategories();renderNews();localizeBook();localizeContact();localizeSettings();localizeInstall();localizeUpdate();clearResults();}
+  function applyLanguage(){const c=copy[lang];document.documentElement.lang=lang;document.title=c.documentTitle;localStorage.setItem('tifloLang',lang);els.langEs.setAttribute('aria-pressed',String(lang==='es'));els.langEn.setAttribute('aria-pressed',String(lang==='en'));els.skip.textContent=c.skip;els.brand.setAttribute('aria-label',c.brandLabel);els.appHeading.textContent=c.appHeading;els.intro.textContent=c.intro;els.searchHeading.textContent=c.searchHeading;els.searchLabel.textContent=c.searchLabel;els.search.placeholder=c.placeholder;els.searchButton.textContent=c.searchButton;els.newsHeading.textContent=c.news;els.exploreHeading.textContent=c.explore;els.categoryLabel.textContent=c.categoryLabel;els.favoritesButton.textContent=c.favorites;els.clearResults.textContent=c.clear;els.videosHomeHeading.textContent=c.videosHome.heading;els.videosHomeIntro.textContent=c.videosHome.intro;els.videosHomeOpen.textContent=c.videosHome.open;els.youtubeHomeChannel.textContent=c.videosHome.channel;els.configHeading.textContent=c.configuration;els.accessibilityHeading.textContent=c.accessibility;els.footer.textContent=c.footer;renderCategories();renderNews();localizeBook();localizeContact();localizeSettings();localizeInstall();localizeUpdate();clearResults();}
 
   els.langEs.addEventListener('click',()=>{lang='es';applyLanguage();});els.langEn.addEventListener('click',()=>{lang='en';applyLanguage();});els.searchForm.addEventListener('submit',e=>{e.preventDefault();searchResources();});els.category.addEventListener('change',()=>showCategory(els.category.value));els.favoritesButton.addEventListener('click',showFavorites);els.clearResults.addEventListener('click',clearResults);
   els.settingsToggle.addEventListener('click',toggleSettings);

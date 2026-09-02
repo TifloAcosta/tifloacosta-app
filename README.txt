@@ -153,4 +153,4 @@ GitHub Pages publica esta aplicación en la URL de proyecto indicada al comienzo
 
 Las limitaciones de las cabeceras HTTP en GitHub Pages y las medidas aplicables están documentadas en SECURITY.md. No deben añadirse etiquetas meta para aparentar cabeceras que requieren control del servidor.
 
-La sincronización de YouTube ejecuta scripts/sync-youtube.mjs desde un único workflow. Si cambia videos.json, el workflow crea y sube el commit; ese push activa el workflow general de Pages, que realiza el único despliegue.
+La sincronización de YouTube ejecuta scripts/sync-youtube.mjs como única implementación de la lógica de catálogo. Si cambia videos.json, el mismo workflow crea y sube el commit y despliega GitHub Pages directamente. Esto es necesario porque los pushes realizados con GITHUB_TOKEN no disparan otro workflow de Pages.

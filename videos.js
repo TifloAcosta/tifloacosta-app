@@ -56,6 +56,7 @@
       noResults: 'No hay vídeos que coincidan con la búsqueda.',
       published: date => `Publicado el ${date}`,
       play: 'Reproducir',
+      playLabel: title => `Reproducir: ${title}`,
       previous: 'Anterior',
       next: 'Siguiente',
       page: (page, pages) => `Página ${page} de ${pages}`,
@@ -83,6 +84,7 @@
       noResults: 'No videos match your search.',
       published: date => `Published ${date}`,
       play: 'Play',
+      playLabel: title => `Play: ${title}`,
       previous: 'Previous',
       next: 'Next',
       page: (page, pages) => `Page ${page} of ${pages}`,
@@ -192,7 +194,7 @@
       article.append(img);
     }
 
-    const title = document.createElement('h2');
+    const title = document.createElement('h3');
     title.textContent = video.title || '';
     article.append(title);
 
@@ -219,7 +221,7 @@
     link.className = 'button-link';
     link.href = video.url || `https://www.youtube.com/watch?v=${encodeURIComponent(video.id || '')}`;
     link.textContent = c.play;
-    link.setAttribute('aria-label', c.play);
+    link.setAttribute('aria-label', c.playLabel(video.title || ''));
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     article.append(link);

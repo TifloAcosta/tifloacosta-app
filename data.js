@@ -1,47 +1,3 @@
-            window.TIFLO_CATEGORIES = {
-  "es": [
-    "Android",
-    "APPs",
-    "Apple Watch",
-    "Atajos",
-    "Cámara",
-    "Catálogos",
-    "Colección de tonos",
-    "Correos",
-    "Estudios",
-    "Gafas",
-    "General",
-    "IA",
-    "iPhone",
-    "Lectores de pantalla",
-    "Lectura",
-    "Mac",
-    "Noticias",
-    "Nubes",
-    "Tutoriales",
-    "Windows"
-  ],
-  "en": [
-    "AI",
-    "Android",
-    "Apple Watch",
-    "Apps",
-    "Camera",
-    "Catalog",
-    "Cloud Storage Services",
-    "General",
-    "iPhone",
-    "Mac",
-    "Mail",
-    "News",
-    "Research and Studies",
-    "Ringtones",
-    "Screen Readers",
-    "Smart Glasses",
-    "Windows"
-  ]
-};
-
 window.TIFLO_RESOURCES = [
   {
     "id": "es-1G66sYkWuXIwYggrMvHq74W1E1EsX_Vvx",
@@ -928,7 +884,6 @@ window.TIFLO_RESOURCES = [
 (() => {
   'use strict';
 
-  const categorySets = window.TIFLO_CATEGORIES || { es: [], en: [] };
   const libraryRoots = {
     es: 'https://drive.google.com/drive/folders/1qUy0-ESqWhmIbYC00gpIdHHMZCPla_1r',
     en: 'https://drive.google.com/drive/folders/1fVQp_eDGWoVO_fp7xFGdPllXMMWZalvx?usp=sharing'
@@ -938,42 +893,10 @@ window.TIFLO_RESOURCES = [
 
   const currentLanguage = () => document.documentElement.lang?.toLowerCase().startsWith('en') ? 'en' : 'es';
 
-  function populateCategorySelect() {
-    const select = document.getElementById('category');
-    if (!select) return;
-    const lang = currentLanguage();
-    const previous = select.value;
-    const placeholder = lang === 'en' ? 'Select a category' : 'Seleccionar una categoría';
-    select.innerHTML = '';
-
-    const first = document.createElement('option');
-    first.value = '';
-    first.textContent = placeholder;
-    select.append(first);
-
-    for (const category of categorySets[lang] || []) {
-      const option = document.createElement('option');
-      option.value = category;
-      option.textContent = category;
-      select.append(option);
-    }
-
-    if ((categorySets[lang] || []).includes(previous)) select.value = previous;
-  }
-
-  function scheduleCategoryRefresh() {
-    if (typeof queueMicrotask === 'function') queueMicrotask(populateCategorySelect);
-    else setTimeout(populateCategorySelect, 0);
-  }
-
-  document.getElementById('lang-es')?.addEventListener('click', scheduleCategoryRefresh);
-  document.getElementById('lang-en')?.addEventListener('click', scheduleCategoryRefresh);
-
   document.getElementById('more-select')?.addEventListener('change', event => {
     if (event.currentTarget.value !== 'library') return;
     event.stopImmediatePropagation();
     window.location.href = libraryRoots[currentLanguage()];
   }, true);
 
-  scheduleCategoryRefresh();
 })();

@@ -108,7 +108,6 @@ test('video cards use h3 titles and title-specific accessible play names', async
   assert.doesNotMatch(source, /setAttribute\('aria-label', c\.play\)/);
 });
 
-
 test('public pages expose canonical social metadata for the verified project URL', async () => {
   const home = await read('index.html');
   const videos = await read('videos.html');
@@ -137,11 +136,16 @@ test('privacy and external-service information is present and bilingual', async 
   }
 });
 
-test('YouTube workflow delegates synchronization and deployment exactly once', async () => {
+test('YouTube workflow uses one sync implementation and deploys changed catalog directly', async () => {
   const sync = await read('.github/workflows/sync-youtube.yml');
   const pages = await read('.github/workflows/jekyll-gh-pages.yml');
 
   assert.match(sync, /run: node scripts\/sync-youtube\.mjs/);
-  assert.doesNotMatch(sync, /node <<'NODE'|deploy-pages|upload-pages-artifact|pages: write|id-token: write/);
+  assert.doesNotMatch(sync, /node <<'NODE'/);
+  assert.match(sync, /pages: write/);
+  assert.match(sync, /id-token: write/);
+  assert.match(sync, /actions\/upload-pages-artifact@v3/);
+  assert.match(sync, /actions\/deploy-pages@v4/);
+  assert.match(sync, /if: steps\.changes\.outputs\.changed == 'true'/);
   assert.match(pages, /actions\/deploy-pages@v5/);
 });

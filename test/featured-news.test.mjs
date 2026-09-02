@@ -31,6 +31,6 @@ test('featured news uses an explicit three-item priority per language', async ()
       .slice(0, 3)
       .map(item => item.id);
 
-    assert.deepEqual(selected, configured);
+    assert.deepEqual([...selected], configured);
   }
 });

@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { createRequire } from 'node:module';
 
@@ -31,4 +32,14 @@ test('browser install event records installation without counting a browser visi
     { path: 'pwa-install-windows', title: 'PWA install · Windows' }
   ]);
   assert.deepEqual(core.getInstallAnalyticsEvents({ standalone: false, installedNow: false, alreadyTracked: false, platform: 'windows' }), []);
+});
+
+test('homepage wires one-time install and installed-app open events into GoatCounter', async () => {
+  const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+  assert.match(html, /app-core\.js\?v=1\.1/);
+  assert.match(html, /tifloPwaInstallTrackedV1/);
+  assert.match(html, /addEventListener\('appinstalled'/);
+  assert.match(html, /goatcounter\.count\(\{/);
+  assert.match(html, /event:\s*true/);
+  assert.match(html, /no_session:\s*true/);
 });

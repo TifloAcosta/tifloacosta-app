@@ -76,5 +76,34 @@
     catch (error) { return false; }
   }
 
-  return { compareNewsItems, getFeaturedNewsIds, getStorage, normalizeSearchText, readStoredJson, readStoredValue, resourceMatches, writeStoredJson, writeStoredValue };
+  function detectInstallPlatform(navigatorLike) {
+    const nav = navigatorLike || {};
+    const ua = String(nav.userAgent || '').toLowerCase();
+    const platform = String(nav.platform || '').toLowerCase();
+    const touchPoints = Number(nav.maxTouchPoints || 0);
+    if (/iphone|ipad|ipod/.test(ua) || /iphone|ipad|ipod/.test(platform) || (platform === 'macintel' && touchPoints > 1)) return 'ios';
+    if (ua.includes('android') || platform.includes('android')) return 'android';
+    if (ua.includes('windows') || platform.startsWith('win')) return 'windows';
+    if (ua.includes('macintosh') || platform.startsWith('mac')) return 'macos';
+    return 'other';
+  }
+
+  function platformAnalyticsLabel(platform) {
+    return ({ ios: 'iOS', android: 'Android', windows: 'Windows', macos: 'macOS', other: 'Other' })[platform] || 'Other';
+  }
+
+  function getInstallAnalyticsEvents({ standalone, installedNow, alreadyTracked, platform }) {
+    const normalizedPlatform = ['ios', 'android', 'windows', 'macos'].includes(platform) ? platform : 'other';
+    const label = platformAnalyticsLabel(normalizedPlatform);
+    const events = [];
+    if (!alreadyTracked && (standalone || installedNow)) {
+      events.push({ path: `pwa-install-${normalizedPlatform}`, title: `PWA install · ${label}` });
+    }
+    if (standalone) {
+      events.push({ path: `pwa-open-${normalizedPlatform}`, title: `PWA open · ${label}` });
+    }
+    return events;
+  }
+
+  return { compareNewsItems, detectInstallPlatform, getFeaturedNewsIds, getInstallAnalyticsEvents, getStorage, normalizeSearchText, readStoredJson, readStoredValue, resourceMatches, writeStoredJson, writeStoredValue };
 }));

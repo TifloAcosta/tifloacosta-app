@@ -36,10 +36,13 @@ test('browser install event records installation without counting a browser visi
 
 test('homepage wires one-time install and installed-app open events into GoatCounter', async () => {
   const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+  const worker = await readFile(new URL('../sw.js', import.meta.url), 'utf8');
   assert.match(html, /app-core\.js\?v=1\.1/);
   assert.match(html, /tifloPwaInstallTrackedV1/);
   assert.match(html, /addEventListener\('appinstalled'/);
   assert.match(html, /goatcounter\.count\(\{/);
   assert.match(html, /event:\s*true/);
   assert.match(html, /no_session:\s*true/);
+  assert.match(worker, /tifloacosta-app-v1-3-analytics/);
+  assert.match(worker, /'\.\/app-core\.js\?v=1\.1'/);
 });

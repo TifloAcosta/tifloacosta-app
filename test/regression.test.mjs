@@ -53,9 +53,9 @@ test('homepage loads shared app logic and reserves the lazy book-cover dimension
   const html = await read('index.html');
   const worker = await read('sw.js');
 
-  assert.match(html, /<script src="app-core\.js\?v=1\.0"><\/script>\s*<script src="app\.js\?v=1\.3"><\/script>/);
+  assert.match(html, /<script src="app-core\.js\?v=1\.1"><\/script>\s*<script src="app\.js\?v=1\.3"><\/script>/);
   assert.match(html, /<img id="book-cover"[^>]*loading="lazy"[^>]*width="1600"[^>]*height="2560">/);
-  assert.match(worker, /'\.\/app-core\.js\?v=1\.0'/);
+  assert.match(worker, /'\.\/app-core\.js\?v=1\.1'/);
 });
 
 test('homepage localization uses explicit form-label references', async () => {

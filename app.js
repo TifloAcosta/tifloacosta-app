@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = '1.5';
+  const APP_VERSION = '1.6';
   const core = window.TIFLO_APP_CORE;
   const data = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];
   const $ = (selector) => document.querySelector(selector);
@@ -432,8 +432,9 @@
   function announceCompletedUpdate() {
     const params=new URLSearchParams(location.search);
     if(params.get('tiflo_updated')!=='1') return;
-    els.updateStatus.dataset.persist='true';
+    delete els.updateStatus.dataset.persist;
     els.updateStatus.textContent=copy[lang].update.done;
+    window.setTimeout(()=>{ els.updateStatus.textContent=''; },2500);
     params.delete('tiflo_updated');
     params.delete('t');
     const clean=`${location.pathname}${params.toString()?`?${params.toString()}`:''}${location.hash}`;

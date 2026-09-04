@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = '1.4';
+  const APP_VERSION = '1.5';
   const core = window.TIFLO_APP_CORE;
   const data = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];
   const $ = (selector) => document.querySelector(selector);
@@ -189,7 +189,7 @@
     const labels=resourceMenuCopy[lang];
     if(navigator.share) {
       try {
-        await navigator.share({title:item.title,url:item.url});
+        await navigator.share({title:item.title,url:item.openUrl||item.url});
         return 'shared';
       } catch(error) {
         if(error&&error.name==='AbortError') return 'cancelled';
@@ -197,7 +197,7 @@
     }
     try {
       if(navigator.clipboard&&window.isSecureContext) {
-        await navigator.clipboard.writeText(item.url);
+        await navigator.clipboard.writeText(item.openUrl||item.url);
         status.textContent=labels.copied;
         return 'copied';
       }
@@ -228,7 +228,7 @@
 
     const makeButton=label=>{const button=document.createElement('button');button.type='button';button.textContent=label;return button;};
     const makeLink=(label,href)=>{const link=document.createElement('a');link.className='button-link';link.href=href;link.textContent=label;link.target='_blank';link.rel='noopener noreferrer';return link;};
-    const openLink=makeLink(labels.open,item.url);
+    const openLink=makeLink(labels.open,item.openUrl||item.url);
     const downloadLink=makeLink(labels.download,driveDownloadUrl(item.url));
     const shareButton=makeButton(labels.share);
     const favoriteButton=makeButton(favorites.has(item.id)?labels.removeFavorite:labels.addFavorite);

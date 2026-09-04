@@ -769,7 +769,8 @@ window.TIFLO_RESOURCES = [
     "lang": "en",
     "category": "Mac",
     "title": "Practical Guide WhatsApp for Mac with VoiceOver",
-    "url": "https://docs.google.com/document/d/1Qfn5zjvOriEdIqjFVNNqM1ZWIgcRN4mX/edit?usp=drivesdk&ouid=116033141645180585993&rtpof=true&sd=true",
+    "url": "https://drive.google.com/file/d/1Ik-v1BREcnbWdOIfqSRIy3YAm-WkSNYx/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1Ik-v1BREcnbWdOIfqSRIy3YAm-WkSNYx.html",
     "new": false
   },
   {
@@ -796,6 +797,7 @@ window.TIFLO_RESOURCES = [
     "category": "Mail",
     "title": "Create a Gmail account with a screen reader",
     "url": "https://drive.google.com/file/d/1MhBnTp55lW3jca6c35gKEFt9Q4YUM6GG/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1MhBnTp55lW3jca6c35gKEFt9Q4YUM6GG.html",
     "new": false
   },
   {

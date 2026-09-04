@@ -55,11 +55,23 @@ test('addOpenUrlToCatalog updates only the requested resource', () => {
   assert.match(result, /"id": "es-two"[\s\S]*"openUrl": "https:\/\/example\.test\/reader-two\.html"/);
 });
 
-test('every Spanish resource has a direct reader URL', async () => {
+test('every catalog resource has a direct accessible reader with a return control', async () => {
   const source = await readFile(new URL('../data.js', import.meta.url), 'utf8');
   const context = { window: {} };
   vm.runInNewContext(source, context);
-  const spanish = context.window.TIFLO_RESOURCES.filter(item => item.lang === 'es');
-  const missing = spanish.filter(item => !item.openUrl).map(item => item.title);
-  assert.equal(missing.length, 0, `Spanish resources missing openUrl: ${missing.join(', ')}`);
+  const resources = context.window.TIFLO_RESOURCES;
+  const missing = resources.filter(item => !item.openUrl).map(item => item.title);
+  assert.equal(missing.length, 0, `Resources missing openUrl: ${missing.join(', ')}`);
+
+  const base = 'https://tifloacosta.github.io/tifloacosta-app/';
+  for (const item of resources) {
+    assert.ok(item.openUrl.startsWith(base), `Unexpected reader URL for ${item.title}: ${item.openUrl}`);
+    const relative = item.openUrl.slice(base.length).split('?')[0];
+    const html = await readFile(new URL(`../${relative}`, import.meta.url), 'utf8');
+    assert.match(html, /id="volver-app"/, `Reader has no return control: ${item.title}`);
+    const label = item.lang === 'es'
+      ? 'Volver a la pantalla principal de TifloAcosta App'
+      : 'Back to the TifloAcosta App main screen';
+    assert.ok(html.includes(label), `Reader has the wrong return label: ${item.title}`);
+  }
 });

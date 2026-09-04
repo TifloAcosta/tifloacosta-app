@@ -239,6 +239,7 @@ window.TIFLO_RESOURCES = [
     "category": "Gafas",
     "title": "Gafas inteligentes y personas ciegas",
     "url": "https://drive.google.com/file/d/1D7sW3KlqT6lEPf7VyvvddypZtD2qGmIY/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1D7sW3KlqT6lEPf7VyvvddypZtD2qGmIY.html",
     "new": false
   },
   {
@@ -247,6 +248,7 @@ window.TIFLO_RESOURCES = [
     "category": "General",
     "title": "Ayer funcionaba",
     "url": "https://drive.google.com/file/d/1eYJutqgY2neCcUDo-UMMlBMOtH5Btm_p/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1eYJutqgY2neCcUDo-UMMlBMOtH5Btm_p.html",
     "new": false
   },
   {
@@ -255,6 +257,7 @@ window.TIFLO_RESOURCES = [
     "category": "General",
     "title": "Buscar en internet ya no es lo que era.",
     "url": "https://drive.google.com/file/d/1ImO_jIXwDyr5va_8IkYbqSmgSsYAwXjc/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1ImO_jIXwDyr5va_8IkYbqSmgSsYAwXjc.html",
     "new": false
   },
   {
@@ -263,6 +266,7 @@ window.TIFLO_RESOURCES = [
     "category": "General",
     "title": "Cuando el captcha es la barrera",
     "url": "https://drive.google.com/file/d/1CfderlYFrafHB4nhy-HCC5At0paQDr5y/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1CfderlYFrafHB4nhy-HCC5At0paQDr5y.html",
     "new": false
   },
   {
@@ -271,6 +275,7 @@ window.TIFLO_RESOURCES = [
     "category": "General",
     "title": "Cuando siendo ciego compramos a ciegas",
     "url": "https://drive.google.com/file/d/1QwKn5Tu5BvLNiUgCpVCt_sH3SgXY2TLD/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1QwKn5Tu5BvLNiUgCpVCt_sH3SgXY2TLD.html",
     "new": false
   },
   {
@@ -279,6 +284,7 @@ window.TIFLO_RESOURCES = [
     "category": "General",
     "title": "El arte de ayudar sin estorbar. Guía escrita desde la experiencia",
     "url": "https://drive.google.com/file/d/1v38XlJafVcVcR6jzn3u7Ag-QQdnGs_Hh/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1v38XlJafVcVcR6jzn3u7Ag-QQdnGs_Hh.html",
     "new": false
   },
   {
@@ -287,6 +293,7 @@ window.TIFLO_RESOURCES = [
     "category": "General",
     "title": "El Futuro de la Radio",
     "url": "https://drive.google.com/file/d/1A4SO3ybRU3IevF_3a2ZgjDGbXiVynrb6/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1A4SO3ybRU3IevF_3a2ZgjDGbXiVynrb6.html",
     "new": false
   },
   {
@@ -295,6 +302,7 @@ window.TIFLO_RESOURCES = [
     "category": "IA",
     "title": "Estudio sobre las inteligencias artificiales actuales",
     "url": "https://drive.google.com/file/d/1Wg6jPZJCB1indjb98K-LDuQMJOWt4mfz/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1Wg6jPZJCB1indjb98K-LDuQMJOWt4mfz.html",
     "new": false
   },
   {
@@ -303,6 +311,7 @@ window.TIFLO_RESOURCES = [
     "category": "IA",
     "title": "Gemini 3.0, qué cambia para mí",
     "url": "https://drive.google.com/file/d/1-CuplaT5g7Ch6ep1uUuqB9m8lHIewkmj/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1-CuplaT5g7Ch6ep1uUuqB9m8lHIewkmj.html",
     "new": false
   },
   {
@@ -311,6 +320,7 @@ window.TIFLO_RESOURCES = [
     "category": "iPhone",
     "title": "Cambiar de iPhone sin dejar nada atrás",
     "url": "https://drive.google.com/file/d/1DhFn8SOhklScG9lhgwOfAO1PkJjTLHOo/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1DhFn8SOhklScG9lhgwOfAO1PkJjTLHOo.html",
     "new": true
   },
   {
@@ -319,6 +329,7 @@ window.TIFLO_RESOURCES = [
     "category": "iPhone",
     "title": "Cuando el iPhone no te deja entrar: código, cuenta Apple, copia de seguridad y restauración",
     "url": "https://drive.google.com/file/d/1xT5cXyLJ1IoRq5wYrYmzqxVeHBwJmXdb/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1xT5cXyLJ1IoRq5wYrYmzqxVeHBwJmXdb.html",
     "new": true
   },
   {
@@ -327,6 +338,7 @@ window.TIFLO_RESOURCES = [
     "category": "iPhone",
     "title": "Cómo usa un iPhone alguien que no lo ve",
     "url": "https://drive.google.com/file/d/1YJARDsI58Esq9vDYXr9NPrLFQEUTIVNL/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1YJARDsI58Esq9vDYXr9NPrLFQEUTIVNL.html",
     "new": true
   },
   {
@@ -335,6 +347,7 @@ window.TIFLO_RESOURCES = [
     "category": "iPhone",
     "title": "Descargar en iPhone con VoiceOver. La odisea que nadie pidió (pero aquí estamos)",
     "url": "https://drive.google.com/file/d/1IC8N6iDXy7E_Vd4cfak7v42E2GMCYQeS/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1IC8N6iDXy7E_Vd4cfak7v42E2GMCYQeS.html",
     "new": false
   },
   {
@@ -343,6 +356,7 @@ window.TIFLO_RESOURCES = [
     "category": "iPhone",
     "title": "Enseña a tu iPhone a reconocer los pitidos de ciertos electrodomésticos",
     "url": "https://drive.google.com/file/d/1Z_b2H01fz5u2QoH9ReiY8GdxRW_o4iTW/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1Z_b2H01fz5u2QoH9ReiY8GdxRW_o4iTW.html",
     "new": true
   },
   {
@@ -351,6 +365,7 @@ window.TIFLO_RESOURCES = [
     "category": "iPhone",
     "title": "Guía práctica para empezar a usar el iPhone con VoiceOver",
     "url": "https://drive.google.com/file/d/1QH45VySl7dmR7bbzQUTZvW_V8X86Gj0t/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1QH45VySl7dmR7bbzQUTZvW_V8X86Gj0t.html",
     "new": true
   },
   {
@@ -359,6 +374,7 @@ window.TIFLO_RESOURCES = [
     "category": "iPhone",
     "title": "Todo lo que necesitas conocer sobre la RAM y el caché de tu iPhone",
     "url": "https://drive.google.com/file/d/1gvutVyw8z7sVs3z0ygTFXQfFDudYdR6Z/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1gvutVyw8z7sVs3z0ygTFXQfFDudYdR6Z.html",
     "new": true
   },
   {
@@ -367,6 +383,7 @@ window.TIFLO_RESOURCES = [
     "category": "iPhone",
     "title": "Uso de teclados externos con VoiceOver en iPhone y iPad. Funciones, atajos y consejos",
     "url": "https://drive.google.com/file/d/1jSA3mUc3dYaAr-H3CFXyIeqVne8vkanv/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1jSA3mUc3dYaAr-H3CFXyIeqVne8vkanv.html",
     "new": true
   },
   {
@@ -375,6 +392,7 @@ window.TIFLO_RESOURCES = [
     "category": "Lectores de pantalla",
     "title": "Comandos y equivalencias Jaws y NVDA",
     "url": "https://drive.google.com/file/d/10NvRY9lccAgC2M6HghxgLpprKJjTMXF7/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-10NvRY9lccAgC2M6HghxgLpprKJjTMXF7.html",
     "new": false
   },
   {
@@ -383,6 +401,7 @@ window.TIFLO_RESOURCES = [
     "category": "Lectores de pantalla",
     "title": "Curso de Word con JAWS y NVDA",
     "url": "https://drive.google.com/file/d/1Wzf3ADcfQM28i6MMqhULnP6OUDlC7Ntw/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1Wzf3ADcfQM28i6MMqhULnP6OUDlC7Ntw.html",
     "new": false
   },
   {
@@ -391,6 +410,7 @@ window.TIFLO_RESOURCES = [
     "category": "Lectores de pantalla",
     "title": "Curso práctico de Excel con JAWS y NVDA",
     "url": "https://drive.google.com/file/d/189nfMh8fJwP_5ET2Qz0Y8Ftv0j3RurZL/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-189nfMh8fJwP_5ET2Qz0Y8Ftv0j3RurZL.html",
     "new": false
   },
   {
@@ -399,6 +419,7 @@ window.TIFLO_RESOURCES = [
     "category": "Lectores de pantalla",
     "title": "Jaws versus NVDA",
     "url": "https://drive.google.com/file/d/1WWeXnOMRnrcBD2i0gX7BplyeeXOFlYaQ/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1WWeXnOMRnrcBD2i0gX7BplyeeXOFlYaQ.html",
     "new": false
   },
   {
@@ -407,6 +428,7 @@ window.TIFLO_RESOURCES = [
     "category": "Lectura",
     "title": "Guía práctica para importar documentos HTML en Voice Dream Reader",
     "url": "https://drive.google.com/file/d/1SfWvkEsrKx3XtGNV1wMCD4oJfHJuCCLN/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1SfWvkEsrKx3XtGNV1wMCD4oJfHJuCCLN.html",
     "new": false
   },
   {
@@ -415,6 +437,7 @@ window.TIFLO_RESOURCES = [
     "category": "Lectura",
     "title": "Leer sin pedir permiso",
     "url": "https://drive.google.com/file/d/1SgInCwUgLmgEYgL0YbEN2sRPhM_JhzEo/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1SgInCwUgLmgEYgL0YbEN2sRPhM_JhzEo.html",
     "new": false
   },
   {
@@ -423,6 +446,7 @@ window.TIFLO_RESOURCES = [
     "category": "Mac",
     "title": "Curso de VoiceOver con Mac desde 0. 2026",
     "url": "https://drive.google.com/file/d/1qKp8KikET3HgUEECCodEzoIaMgLDBYS2/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1qKp8KikET3HgUEECCodEzoIaMgLDBYS2.html",
     "new": false
   },
   {
@@ -431,6 +455,7 @@ window.TIFLO_RESOURCES = [
     "category": "Mac",
     "title": "Curso de WhatsApp en Mac con VoiceOver",
     "url": "https://drive.google.com/file/d/1Nb_1mCDIEV2ayv3MIDcNIb-tUSWNoWir/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1Nb_1mCDIEV2ayv3MIDcNIb-tUSWNoWir.html",
     "new": false
   },
   {
@@ -439,6 +464,7 @@ window.TIFLO_RESOURCES = [
     "category": "Mac",
     "title": "Programas y utilidades esenciales para usuarios de Mac con VoiceOver",
     "url": "https://drive.google.com/file/d/1_hQ87pVewYHhqGixGnTQsyD-khQL5OYl/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1_hQ87pVewYHhqGixGnTQsyD-khQL5OYl.html",
     "new": false
   },
   {
@@ -447,6 +473,7 @@ window.TIFLO_RESOURCES = [
     "category": "Mac",
     "title": "StayAwake. una utilidad gratuita para Mac que mantiene el equipo despierto mientras usas VoiceOver",
     "url": "https://drive.google.com/file/d/1dSx742s2Li3VJKRXJuhMlDx5jTmsK5jv/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1dSx742s2Li3VJKRXJuhMlDx5jTmsK5jv.html",
     "new": false
   },
   {
@@ -455,6 +482,7 @@ window.TIFLO_RESOURCES = [
     "category": "Nubes",
     "title": "Google Drive, guía práctica y accesible para Windows, Mac, iPhone y Android con JAWS, NVDA, VoiceOver y TalkBack",
     "url": "https://drive.google.com/file/d/1QluhM_Xwzs4wnmYQcUsxLcXZrJW2KVcK/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1QluhM_Xwzs4wnmYQcUsxLcXZrJW2KVcK.html",
     "new": false
   },
   {
@@ -463,6 +491,7 @@ window.TIFLO_RESOURCES = [
     "category": "Nubes",
     "title": "iCloud Drive entre el iPhone y Windows",
     "url": "https://drive.google.com/file/d/1AvPj0BRNLoySVc6QF6k28kH9PedWRtRS/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1AvPj0BRNLoySVc6QF6k28kH9PedWRtRS.html",
     "new": false
   },
   {
@@ -471,6 +500,7 @@ window.TIFLO_RESOURCES = [
     "category": "Windows",
     "title": "Catálogo de programas y utilidades accesibles para Windows",
     "url": "https://drive.google.com/file/d/1MEAjq6q_m6vlSuMfqwykjLFxUtWjZaGH/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1MEAjq6q_m6vlSuMfqwykjLFxUtWjZaGH.html",
     "new": false
   },
   {
@@ -479,6 +509,7 @@ window.TIFLO_RESOURCES = [
     "category": "Windows",
     "title": "Curso práctico de WhatsApp Desktop en Windows con lectores de pantalla",
     "url": "https://drive.google.com/file/d/1ecKOJiRxoFF3hTQqv0ws0cfOYU9V4FtY/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1ecKOJiRxoFF3hTQqv0ws0cfOYU9V4FtY.html",
     "new": false
   },
   {
@@ -487,6 +518,7 @@ window.TIFLO_RESOURCES = [
     "category": "Windows",
     "title": "El teclado de Windows, guía completa para usuarios de lector de pantalla",
     "url": "https://drive.google.com/file/d/1C1-3PnFVHxvXBewvpLWp5Xg0oxHLBZu9/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1C1-3PnFVHxvXBewvpLWp5Xg0oxHLBZu9.html",
     "new": false
   },
   {

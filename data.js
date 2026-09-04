@@ -194,6 +194,7 @@ window.TIFLO_RESOURCES = [
     "category": "Estudios",
     "title": "Impresoras braille domésticas",
     "url": "https://drive.google.com/file/d/126dcOqVVxl2MljvPysPT3QIaaDAmQ0SH/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-126dcOqVVxl2MljvPysPT3QIaaDAmQ0SH.html",
     "new": false
   },
   {
@@ -202,6 +203,7 @@ window.TIFLO_RESOURCES = [
     "category": "Estudios",
     "title": "iPhone, iPad o Mac, qué comprar según lo que realmente necesitas",
     "url": "https://drive.google.com/file/d/1l4qE3T2jxW5asmt9hm9hOLK-4C9aLdM0/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1l4qE3T2jxW5asmt9hm9hOLK-4C9aLdM0.html",
     "new": false
   },
   {
@@ -210,6 +212,7 @@ window.TIFLO_RESOURCES = [
     "category": "Estudios",
     "title": "Líneas braille. qué son, cómo funcionan y cuál te conviene",
     "url": "https://drive.google.com/file/d/1vn8VEbCE0qCPgOWEXo35_5J68YWPdsAO/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1vn8VEbCE0qCPgOWEXo35_5J68YWPdsAO.html",
     "new": false
   },
   {
@@ -218,6 +221,7 @@ window.TIFLO_RESOURCES = [
     "category": "Estudios",
     "title": "Seguridad digital sin sustos",
     "url": "https://drive.google.com/file/d/1q1DZABDaAtHVUdYZYuPwLsP3smSD1WwR/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1q1DZABDaAtHVUdYZYuPwLsP3smSD1WwR.html",
     "new": false
   },
   {
@@ -226,6 +230,7 @@ window.TIFLO_RESOURCES = [
     "category": "Gafas",
     "title": "Gafas inteligentes para ciegos. Todo lo que funciona en español y lo que no deberías comprar",
     "url": "https://drive.google.com/file/d/1rM6_MRuWo8s3fE4ec92ZBjgb_srgPmGP/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1rM6_MRuWo8s3fE4ec92ZBjgb_srgPmGP.html",
     "new": false
   },
   {

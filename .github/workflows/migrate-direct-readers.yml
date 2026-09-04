@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
       - name: Migrate English readers
         run: node scripts/migrate-readers.mjs --lang=en
       - name: Run regression tests

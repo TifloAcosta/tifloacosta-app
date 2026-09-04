@@ -61,5 +61,5 @@ test('every Spanish resource has a direct reader URL', async () => {
   vm.runInNewContext(source, context);
   const spanish = context.window.TIFLO_RESOURCES.filter(item => item.lang === 'es');
   const missing = spanish.filter(item => !item.openUrl).map(item => item.title);
-  assert.deepEqual(missing, []);
+  assert.equal(missing.length, 0, `Spanish resources missing openUrl: ${missing.join(', ')}`);
 });

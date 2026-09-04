@@ -5,6 +5,7 @@ window.TIFLO_RESOURCES = [
     "category": "Android",
     "title": "Curso completo de Android con TalkBack",
     "url": "https://drive.google.com/file/d/1G66sYkWuXIwYggrMvHq74W1E1EsX_Vvx/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1G66sYkWuXIwYggrMvHq74W1E1EsX_Vvx.html",
     "new": false
   },
   {
@@ -13,6 +14,7 @@ window.TIFLO_RESOURCES = [
     "category": "Android",
     "title": "Curso Jieshuo en Android",
     "url": "https://drive.google.com/file/d/1sxkdwNWtbDitDu-GVRNDOwvNX4n6CaG6/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1sxkdwNWtbDitDu-GVRNDOwvNX4n6CaG6.html",
     "new": true
   },
   {
@@ -21,6 +23,7 @@ window.TIFLO_RESOURCES = [
     "category": "Android",
     "title": "Files de Google, una buena escoba para el almacenamiento de Android",
     "url": "https://drive.google.com/file/d/171jkNluL0wFaCK2HjV-SqKy4tP9cF2Fd/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-171jkNluL0wFaCK2HjV-SqKy4tP9cF2Fd.html",
     "new": false
   },
   {
@@ -29,6 +32,7 @@ window.TIFLO_RESOURCES = [
     "category": "APPs",
     "title": "Apps que te pueden interesar",
     "url": "https://drive.google.com/file/d/1zW5_QwwC6WJRMR9qTTv51qLi0FCJ1j3_/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1zW5_QwwC6WJRMR9qTTv51qLi0FCJ1j3_.html",
     "new": false
   },
   {
@@ -37,6 +41,7 @@ window.TIFLO_RESOURCES = [
     "category": "APPs",
     "title": "Braillito, una forma entretenida de conocer el braille",
     "url": "https://drive.google.com/file/d/1qzoR-i5zvSFTuMPVhxhfOVJ3bjSVuTZc/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1qzoR-i5zvSFTuMPVhxhfOVJ3bjSVuTZc.html",
     "new": false
   },
   {
@@ -54,6 +59,7 @@ window.TIFLO_RESOURCES = [
     "category": "APPs",
     "title": "TableEx. Juegos de mesa y cartas accesibles para personas ciegas",
     "url": "https://drive.google.com/file/d/1bARy1QpqGYy9ZvqmS74gxZG0px6kpyJk/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1bARy1QpqGYy9ZvqmS74gxZG0px6kpyJk.html",
     "new": false
   },
   {
@@ -62,6 +68,7 @@ window.TIFLO_RESOURCES = [
     "category": "APPs",
     "title": "Te presento EasyWeather",
     "url": "https://drive.google.com/file/d/1kIhX2J4rGdTWFplU50SrwxOn5LDYnkv8/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1kIhX2J4rGdTWFplU50SrwxOn5LDYnkv8.html",
     "new": false
   },
   {

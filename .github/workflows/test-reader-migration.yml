@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - 'test/reader-migration.test.mjs'
+      - 'test/install-analytics.test.mjs'
+      - 'test/regression.test.mjs'
       - 'scripts/migrate-readers.mjs'
       - '.github/workflows/test-reader-migration.yml'
   workflow_dispatch:

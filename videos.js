@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = '1.3';
+  const APP_VERSION = '1.9';
   const PAGE_SIZE = 10;
   const core = window.TifloVideoCore;
   if (!core) return;
@@ -149,6 +149,8 @@
     els.skip.textContent = c.skip;
     els.back.textContent = c.back;
     els.backBottom.textContent = c.back;
+    els.back.setAttribute('aria-label', lang === 'es' ? 'Volver a la pantalla principal de TifloAcosta App' : 'Back to the TifloAcosta App main screen');
+    els.backBottom.setAttribute('aria-label', lang === 'es' ? 'Volver a la pantalla principal de TifloAcosta App' : 'Back to the TifloAcosta App main screen');
     els.heading.textContent = c.heading;
     els.intro.textContent = c.intro;
     els.channel.textContent = c.channel;

@@ -56,6 +56,7 @@
   const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   const isStandalone = () => window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
   const permissionDenied = () => 'Notification' in window && Notification.permission === 'denied';
+  const setStatus = value => { if (status.textContent !== value) status.textContent = value; };
 
   function render() {
     const c = copy[currentLanguage()];
@@ -65,7 +66,7 @@
     if (busy) {
       toggle.disabled = true;
       toggle.textContent = state === 'enabled' ? c.deactivating : c.activating;
-      status.textContent = '';
+      setStatus('');
       return;
     }
 
@@ -74,31 +75,31 @@
     if (state === 'preparing') {
       toggle.disabled = true;
       toggle.textContent = c.preparing;
-      status.textContent = '';
+      setStatus('');
     } else if (state === 'enabled') {
       toggle.disabled = false;
       toggle.textContent = c.deactivate;
-      status.textContent = c.enabled;
+      setStatus(c.enabled);
     } else if (state === 'disabled') {
       toggle.disabled = false;
       toggle.textContent = c.activate;
-      status.textContent = notice === 'notActivated' ? c.notActivated : c.disabled;
+      setStatus(notice === 'notActivated' ? c.notActivated : c.disabled);
     } else if (state === 'blocked') {
       toggle.disabled = true;
       toggle.textContent = c.activate;
-      status.textContent = c.blocked;
+      setStatus(c.blocked);
     } else if (state === 'iosInstall') {
       toggle.disabled = true;
       toggle.textContent = c.activate;
-      status.textContent = c.iosInstall;
+      setStatus(c.iosInstall);
     } else if (state === 'unsupported') {
       toggle.disabled = true;
       toggle.textContent = c.activate;
-      status.textContent = c.unsupported;
+      setStatus(c.unsupported);
     } else {
       toggle.disabled = true;
       toggle.textContent = c.activate;
-      status.textContent = c.unavailable;
+      setStatus(c.unavailable);
     }
   }
 

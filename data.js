@@ -149,6 +149,7 @@ window.TIFLO_RESOURCES = [
     "category": "Correos",
     "title": "Guía práctica para usar Gmail desde el navegador con Jaws",
     "url": "https://drive.google.com/file/d/1L7YzsO_mN9Jwb-D7MmaAX-Dnp7A0rQhT/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1L7YzsO_mN9Jwb-D7MmaAX-Dnp7A0rQhT.html",
     "new": false
   },
   {
@@ -157,6 +158,7 @@ window.TIFLO_RESOURCES = [
     "category": "Estudios",
     "title": "Android o iPhone, qué comprar si soy una persona ciega",
     "url": "https://drive.google.com/file/d/16xWHXKfFtty3nNJYxEOtHTns3GAkzlfN/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-16xWHXKfFtty3nNJYxEOtHTns3GAkzlfN.html",
     "new": false
   },
   {
@@ -165,6 +167,7 @@ window.TIFLO_RESOURCES = [
     "category": "Estudios",
     "title": "Cambiar de móvil cuando no ves. Consejos para no arrepentirte a la semana",
     "url": "https://drive.google.com/file/d/1fVuM52NOltMRly2QLDbNgb09oOEQ3RU4/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1fVuM52NOltMRly2QLDbNgb09oOEQ3RU4.html",
     "new": false
   },
   {
@@ -173,6 +176,7 @@ window.TIFLO_RESOURCES = [
     "category": "Estudios",
     "title": "Ceguera, sueño y No24",
     "url": "https://drive.google.com/file/d/1fpa1se6481mR9SFmwZ3RGtO0_IEoXA3n/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1fpa1se6481mR9SFmwZ3RGtO0_IEoXA3n.html",
     "new": false
   },
   {
@@ -181,6 +185,7 @@ window.TIFLO_RESOURCES = [
     "category": "Estudios",
     "title": "El Kit de movilidad digital",
     "url": "https://drive.google.com/file/d/1kJnrhMeEemgAxjglqnH-oq9zX_p0hevv/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1kJnrhMeEemgAxjglqnH-oq9zX_p0hevv.html",
     "new": false
   },
   {

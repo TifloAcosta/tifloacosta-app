@@ -45,6 +45,7 @@ window.TIFLO_RESOURCES = [
     "category": "APPs",
     "title": "Lo que no puede faltar en tu iPhone",
     "url": "https://drive.google.com/file/d/1FKsaxZ_-NgKsHWWBI_i25X8rEqwQHTgN/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/lo-que-no-puede-faltar-en-tu-iphone.html",
     "new": true
   },
   {

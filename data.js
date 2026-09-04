@@ -77,6 +77,7 @@ window.TIFLO_RESOURCES = [
     "category": "Apple Watch",
     "title": "Curso práctico de Apple Watch con VoiceOver",
     "url": "https://drive.google.com/file/d/1CxrXzCDNgwv8WVQ_2vfiWTk2gTqiXBzO/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1CxrXzCDNgwv8WVQ_2vfiWTk2gTqiXBzO.html",
     "new": false
   },
   {
@@ -85,6 +86,7 @@ window.TIFLO_RESOURCES = [
     "category": "Atajos",
     "title": "Tomando atajos con Canal TifloAcosta",
     "url": "https://drive.google.com/file/d/19oVnEZYBLwKc6CGF-Oq08KRV7THGM7O5/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-19oVnEZYBLwKc6CGF-Oq08KRV7THGM7O5.html",
     "new": false
   },
   {
@@ -93,6 +95,7 @@ window.TIFLO_RESOURCES = [
     "category": "Cámara",
     "title": "La cámara del iPhone sin mirar la pantalla",
     "url": "https://drive.google.com/file/d/1kiEF21ABd21KWP_RaDZYWL5e6s66eJcY/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1kiEF21ABd21KWP_RaDZYWL5e6s66eJcY.html",
     "new": false
   },
   {
@@ -101,6 +104,7 @@ window.TIFLO_RESOURCES = [
     "category": "Catálogos",
     "title": "Catálogo de tutoriales actualizado a 28 de mayo de 2026",
     "url": "https://drive.google.com/file/d/1yh_FcJdSqF2ffmTdWLlytchro1gK4yfm/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1yh_FcJdSqF2ffmTdWLlytchro1gK4yfm.html",
     "new": false
   },
   {
@@ -109,6 +113,7 @@ window.TIFLO_RESOURCES = [
     "category": "Catálogos",
     "title": "Catálogo internacional de juegos accesibles para móviles y tabletas",
     "url": "https://drive.google.com/file/d/1qmWq6S_aBbdQhHX06_ctjExK4NJh_6AX/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1qmWq6S_aBbdQhHX06_ctjExK4NJh_6AX.html",
     "new": false
   },
   {
@@ -117,6 +122,7 @@ window.TIFLO_RESOURCES = [
     "category": "Correos",
     "title": "Crear una cuenta Gmail con lector de pantalla",
     "url": "https://drive.google.com/file/d/1DtyE0VG1LhU21RkOQCMaERYcyWfRgSJS/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1DtyE0VG1LhU21RkOQCMaERYcyWfRgSJS.html",
     "new": false
   },
   {
@@ -125,6 +131,7 @@ window.TIFLO_RESOURCES = [
     "category": "Correos",
     "title": "Curso práctico de Outlook con lector de pantalla en Windows",
     "url": "https://drive.google.com/file/d/1Kf-IytP0NI1DOsA0HjKtjemNWrVoCBuI/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1Kf-IytP0NI1DOsA0HjKtjemNWrVoCBuI.html",
     "new": false
   },
   {
@@ -133,6 +140,7 @@ window.TIFLO_RESOURCES = [
     "category": "Correos",
     "title": "Guía accesible de Thunderbird",
     "url": "https://drive.google.com/file/d/1Lcbr7BGqIUaiUcc5__hsMd8GAp4gxRwx/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1Lcbr7BGqIUaiUcc5__hsMd8GAp4gxRwx.html",
     "new": false
   },
   {

@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = '1.3';
+  const APP_VERSION = '1.4';
   const core = window.TIFLO_APP_CORE;
   const data = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];
   const $ = (selector) => document.querySelector(selector);
@@ -227,21 +227,16 @@
     let rerenderAfterClose=false;
 
     const makeButton=label=>{const button=document.createElement('button');button.type='button';button.textContent=label;return button;};
-    const openButton=makeButton(labels.open);
-    const downloadButton=makeButton(labels.download);
+    const makeLink=(label,href)=>{const link=document.createElement('a');link.className='button-link';link.href=href;link.textContent=label;link.target='_blank';link.rel='noopener noreferrer';return link;};
+    const openLink=makeLink(labels.open,item.url);
+    const downloadLink=makeLink(labels.download,driveDownloadUrl(item.url));
     const shareButton=makeButton(labels.share);
     const favoriteButton=makeButton(favorites.has(item.id)?labels.removeFavorite:labels.addFavorite);
     const cancelButton=makeButton(labels.cancel);
     favoriteButton.setAttribute('aria-pressed',String(favorites.has(item.id)));
 
-    openButton.addEventListener('click',()=>{
-      window.open(item.url,'_blank','noopener,noreferrer');
-      dialog.close();
-    });
-    downloadButton.addEventListener('click',()=>{
-      window.open(driveDownloadUrl(item.url),'_blank','noopener,noreferrer');
-      dialog.close();
-    });
+    openLink.addEventListener('click',()=>dialog.close());
+    downloadLink.addEventListener('click',()=>dialog.close());
     shareButton.addEventListener('click',async()=>{
       status.textContent='';
       const result=await shareResource(item,status);
@@ -265,7 +260,7 @@
     });
     cancelButton.addEventListener('click',()=>dialog.close());
 
-    actions.append(openButton,downloadButton,shareButton,favoriteButton,cancelButton);
+    actions.append(openLink,downloadLink,shareButton,favoriteButton,cancelButton);
     dialog.append(heading,title,actions,status);
     document.body.append(dialog);
     dialog.addEventListener('close',()=>{
@@ -274,7 +269,7 @@
       if(focusAfterClose&&document.contains(focusAfterClose)) focusAfterClose.focus();
     },{once:true});
     dialog.showModal();
-    openButton.focus();
+    openLink.focus();
   }
 
   function makeCard(item) {

@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = '1.9';
+  const APP_VERSION = '2.0';
   const PAGE_SIZE = 10;
   const core = window.TifloVideoCore;
   if (!core) return;

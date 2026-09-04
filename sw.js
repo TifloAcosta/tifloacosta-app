@@ -1,15 +1,15 @@
-const CACHE = 'tifloacosta-app-v1-8-reader-return';
+const CACHE = 'tifloacosta-app-v1-9-safe-navigation';
 const SHELL = [
   './',
   './index.html',
   './styles.css?v=1.0',
   './data.js?v=0.16',
   './app-core.js?v=1.1',
-  './app.js?v=1.8',
+  './app.js?v=1.9',
   './notifications.js?v=0.15',
   './videos.html',
   './videos-core.js?v=0.16',
-  './videos.js?v=1.3',
+  './videos.js?v=1.9',
   './videos.json',
   './offline.html',
   './manifest.webmanifest',

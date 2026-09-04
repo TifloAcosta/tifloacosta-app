@@ -51,6 +51,13 @@
   let state = 'preparing';
   let busy = false;
   let notice = '';
+  let clearNoticeTimer = null;
+
+  function announceStatus(message) {
+    window.clearTimeout(clearNoticeTimer);
+    setStatus(message);
+    clearNoticeTimer = window.setTimeout(() => setStatus(''), 2500);
+  }
 
   const currentLanguage = () => document.documentElement.lang?.toLowerCase().startsWith('en') ? 'en' : 'es';
   const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
@@ -79,27 +86,27 @@
     } else if (state === 'enabled') {
       toggle.disabled = false;
       toggle.textContent = c.deactivate;
-      setStatus(c.enabled);
+      setStatus('');
     } else if (state === 'disabled') {
       toggle.disabled = false;
       toggle.textContent = c.activate;
-      setStatus(notice === 'notActivated' ? c.notActivated : c.disabled);
+      setStatus('');
     } else if (state === 'blocked') {
       toggle.disabled = true;
       toggle.textContent = c.activate;
-      setStatus(c.blocked);
+      setStatus('');
     } else if (state === 'iosInstall') {
       toggle.disabled = true;
       toggle.textContent = c.activate;
-      setStatus(c.iosInstall);
+      setStatus('');
     } else if (state === 'unsupported') {
       toggle.disabled = true;
       toggle.textContent = c.activate;
-      setStatus(c.unsupported);
+      setStatus('');
     } else {
       toggle.disabled = true;
       toggle.textContent = c.activate;
-      setStatus(c.unavailable);
+      setStatus('');
     }
   }
 
@@ -156,13 +163,17 @@
         await OneSignalInstance.User.PushSubscription.optIn();
       }
       refreshState();
-      if (!wasEnabled && state === 'disabled') {
-        notice = 'notActivated';
-        render();
+      if (wasEnabled && state === 'disabled') {
+        announceStatus(copy[currentLanguage()].disabled);
+      } else if (!wasEnabled && state === 'enabled') {
+        announceStatus(copy[currentLanguage()].enabled);
+      } else if (!wasEnabled && state === 'disabled') {
+        announceStatus(copy[currentLanguage()].notActivated);
       }
     } catch (_) {
       state = permissionDenied() ? 'blocked' : 'unavailable';
       render();
+      announceStatus(state === 'blocked' ? copy[currentLanguage()].blocked : copy[currentLanguage()].unavailable);
     } finally {
       busy = false;
       render();

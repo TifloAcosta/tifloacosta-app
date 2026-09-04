@@ -10,6 +10,14 @@ const LABELS = {
   en: 'Back to the TifloAcosta App main screen'
 };
 
+// A small number of catalog entries point to a non-HTML representation even
+// though an equivalent public HTML copy exists in Drive. Use that HTML copy
+// only as the direct-reader source; keep the catalog's original URL untouched
+// so download behavior does not change.
+const SOURCE_OVERRIDES = {
+  'en-1Qfn5zjvOriEdIqjFVNNqM1ZWIgcRN4mX': 'https://drive.google.com/file/d/1Ik-v1BREcnbWdOIfqSRIy3YAm-WkSNYx/view?usp=drivesdk'
+};
+
 export function readerUrl(lang, driveId) {
   if (!['es', 'en'].includes(lang)) throw new Error(`Unsupported language: ${lang}`);
   return `${READER_BASE}/${lang}/reader-${driveId}.html`;
@@ -49,10 +57,11 @@ export function addOpenUrlToCatalog(source, resourceId, openUrl) {
 }
 
 export function extractDriveId(url) {
-  const match = String(url || '').match(/\/file\/d\/([^/?#]+)/);
-  if (match) return match[1];
+  const value = String(url || '');
+  const pathMatch = value.match(/\/(?:file|document)\/d\/([^/?#]+)/);
+  if (pathMatch) return pathMatch[1];
   try {
-    const parsed = new URL(url);
+    const parsed = new URL(value);
     return parsed.searchParams.get('id');
   } catch {
     return null;
@@ -69,18 +78,34 @@ function parseResources(source) {
   return JSON.parse(source.slice(arrayStart, arrayEnd + 1));
 }
 
+function validateHtml(html) {
+  if (!/<html\b/i.test(html) || !/<body\b/i.test(html)) return 'notHtml';
+  if (/accounts\.google\.com|ServiceLogin/i.test(html)) return 'signIn';
+  return 'ok';
+}
+
 async function downloadDriveHtml(driveId) {
-  const url = `https://drive.usercontent.google.com/download?id=${encodeURIComponent(driveId)}&export=download&confirm=t`;
-  const response = await fetch(url, { redirect: 'follow' });
-  if (!response.ok) throw new Error(`Drive returned HTTP ${response.status}`);
-  const html = await response.text();
-  if (!/<html\b/i.test(html) || !/<body\b/i.test(html)) {
-    throw new Error('Drive response is not a usable HTML document');
+  const candidates = [
+    `https://drive.usercontent.google.com/download?id=${encodeURIComponent(driveId)}&export=download&confirm=t`,
+    `https://drive.google.com/uc?export=download&id=${encodeURIComponent(driveId)}`
+  ];
+  let lastReason = 'notHtml';
+
+  for (const url of candidates) {
+    const response = await fetch(url, { redirect: 'follow' });
+    if (!response.ok) {
+      lastReason = `http:${response.status}`;
+      continue;
+    }
+    const html = await response.text();
+    const result = validateHtml(html);
+    if (result === 'ok') return html;
+    lastReason = result;
   }
-  if (/accounts\.google\.com|ServiceLogin/i.test(html)) {
-    throw new Error('Drive returned a sign-in page instead of the document');
-  }
-  return html;
+
+  if (lastReason === 'signIn') throw new Error('Drive returned a sign-in page instead of the document');
+  if (lastReason.startsWith('http:')) throw new Error(`Drive returned HTTP ${lastReason.split(':')[1]}`);
+  throw new Error('Drive response is not a usable HTML document');
 }
 
 function parseArgs(argv) {
@@ -113,7 +138,8 @@ async function runMigration() {
   let migrated = 0;
 
   for (const item of pending) {
-    const driveId = extractDriveId(item.url);
+    const readerSourceUrl = SOURCE_OVERRIDES[item.id] || item.url;
+    const driveId = extractDriveId(readerSourceUrl);
     if (!driveId) {
       failures.push(`${item.title}: Drive id not found`);
       continue;

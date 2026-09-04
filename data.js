@@ -527,6 +527,7 @@ window.TIFLO_RESOURCES = [
     "category": "AI",
     "title": "Study of Current Artificial Intelligence Systems",
     "url": "https://drive.google.com/file/d/188XqsYUkC8lLyT-xmrw19Fbufbx9MnGo/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-188XqsYUkC8lLyT-xmrw19Fbufbx9MnGo.html",
     "new": false
   },
   {
@@ -535,6 +536,7 @@ window.TIFLO_RESOURCES = [
     "category": "Android",
     "title": "Complete Android Course with TalkBack",
     "url": "https://drive.google.com/file/d/1veOlIwz6wdjAF1nS4x_9fdTnkIo0u7JA/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1veOlIwz6wdjAF1nS4x_9fdTnkIo0u7JA.html",
     "new": false
   },
   {
@@ -543,6 +545,7 @@ window.TIFLO_RESOURCES = [
     "category": "Android",
     "title": "Files by Google, A Handy Broom for Android Storage",
     "url": "https://drive.google.com/file/d/18Tpuaua3HRo-FC6_eHmrnhMADD9GQtRW/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-18Tpuaua3HRo-FC6_eHmrnhMADD9GQtRW.html",
     "new": false
   },
   {
@@ -551,6 +554,7 @@ window.TIFLO_RESOURCES = [
     "category": "Android",
     "title": "Jieshuo Android Practical Course",
     "url": "https://drive.google.com/file/d/1Gcty0-OWwfAD--XruEZYzUO_9kTatGBC/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1Gcty0-OWwfAD--XruEZYzUO_9kTatGBC.html",
     "new": true
   },
   {
@@ -559,6 +563,7 @@ window.TIFLO_RESOURCES = [
     "category": "Apple Watch",
     "title": "Practical Apple Watch Course with VoiceOver",
     "url": "https://drive.google.com/file/d/1sZQy31bS_DG1zzMzqu8o1pL35zd-ttv4/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1sZQy31bS_DG1zzMzqu8o1pL35zd-ttv4.html",
     "new": false
   },
   {
@@ -567,6 +572,7 @@ window.TIFLO_RESOURCES = [
     "category": "Apps",
     "title": "Braillito, A fun way to discover Braille",
     "url": "https://drive.google.com/file/d/1SBdPkyF-D2Qpp6G-bzAd_jOU0tPyBKWM/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1SBdPkyF-D2Qpp6G-bzAd_jOU0tPyBKWM.html",
     "new": false
   },
   {
@@ -575,6 +581,7 @@ window.TIFLO_RESOURCES = [
     "category": "Apps",
     "title": "TableEx. Accessible Board and Card Games for Blind People",
     "url": "https://drive.google.com/file/d/1HWmHoQGwPMInjiBif-sZNEte1Qwi-OrS/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1HWmHoQGwPMInjiBif-sZNEte1Qwi-OrS.html",
     "new": false
   },
   {
@@ -583,6 +590,7 @@ window.TIFLO_RESOURCES = [
     "category": "Apps",
     "title": "What You Should Have on Your iPhone",
     "url": "https://drive.google.com/file/d/177Ni4DvWPtzmP6C7U4LbjB5GMTLiLzR4/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-177Ni4DvWPtzmP6C7U4LbjB5GMTLiLzR4.html",
     "new": true
   },
   {
@@ -591,6 +599,7 @@ window.TIFLO_RESOURCES = [
     "category": "Camera",
     "title": "Using the iPhone Camera Without Seeing the Screen",
     "url": "https://drive.google.com/file/d/1wLvd8JmXJR6KCuompDknG7Pq90iKzygC/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1wLvd8JmXJR6KCuompDknG7Pq90iKzygC.html",
     "new": false
   },
   {
@@ -599,6 +608,7 @@ window.TIFLO_RESOURCES = [
     "category": "Catalog",
     "title": "International Catalog of Accessible Games for Mobile Phones and Tablets",
     "url": "https://drive.google.com/file/d/1fBmI_rBo0nGWUXsrLH2plxIdT-qaa8BB/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1fBmI_rBo0nGWUXsrLH2plxIdT-qaa8BB.html",
     "new": false
   },
   {
@@ -607,6 +617,7 @@ window.TIFLO_RESOURCES = [
     "category": "Cloud Storage Services",
     "title": "Google Drive, A practical and accessible guide for Windows, Mac, iPhone and Android With JAWS, NVDA, VoiceOver and TalkBack",
     "url": "https://drive.google.com/file/d/1d-CfhSHvI1Hzt2SY65BwYI3EQw8G23CS/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1d-CfhSHvI1Hzt2SY65BwYI3EQw8G23CS.html",
     "new": false
   },
   {
@@ -615,6 +626,7 @@ window.TIFLO_RESOURCES = [
     "category": "Cloud Storage Services",
     "title": "iCloud Drive between iPhone and Windows",
     "url": "https://drive.google.com/file/d/18pv7wNKyodcHCMXiaXEX5Kz-JrrDEub7/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-18pv7wNKyodcHCMXiaXEX5Kz-JrrDEub7.html",
     "new": false
   },
   {
@@ -623,6 +635,7 @@ window.TIFLO_RESOURCES = [
     "category": "General",
     "title": "It worked yesterday",
     "url": "https://drive.google.com/file/d/1CkUT59t5FpfcMpAvDLX5FBdo_qP8XrfD/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1CkUT59t5FpfcMpAvDLX5FBdo_qP8XrfD.html",
     "new": false
   },
   {
@@ -631,6 +644,7 @@ window.TIFLO_RESOURCES = [
     "category": "General",
     "title": "Searching the Internet Is No Longer What It Used to Be",
     "url": "https://drive.google.com/file/d/15dnqa0X5uitVAawYdikzUoALi1XzQI6Z/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-15dnqa0X5uitVAawYdikzUoALi1XzQI6Z.html",
     "new": false
   },
   {
@@ -639,6 +653,7 @@ window.TIFLO_RESOURCES = [
     "category": "General",
     "title": "The Art of Helping Without Getting in the Way",
     "url": "https://drive.google.com/file/d/1GqHYUDA1Y5amL9Dm3HrvR74jCOD3WWMi/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1GqHYUDA1Y5amL9Dm3HrvR74jCOD3WWMi.html",
     "new": false
   },
   {
@@ -647,6 +662,7 @@ window.TIFLO_RESOURCES = [
     "category": "General",
     "title": "When Being Blind Means Buying Blind",
     "url": "https://drive.google.com/file/d/1_zCgJmkjUebl3iLNm7E5ySYjJtf4BwaP/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1_zCgJmkjUebl3iLNm7E5ySYjJtf4BwaP.html",
     "new": false
   },
   {
@@ -655,6 +671,7 @@ window.TIFLO_RESOURCES = [
     "category": "General",
     "title": "When CAPTCHA Becomes the Barrier",
     "url": "https://drive.google.com/file/d/10C6DY2QuW4IXOdybbfhfCvhG_zwd9ND0/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-10C6DY2QuW4IXOdybbfhfCvhG_zwd9ND0.html",
     "new": false
   },
   {
@@ -663,6 +680,7 @@ window.TIFLO_RESOURCES = [
     "category": "iPhone",
     "title": "Changing iPhone Without Leaving Anything Behind",
     "url": "https://drive.google.com/file/d/1h1KnGhyaA3mpu0oKm8tkDojUMPfIUmti/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1h1KnGhyaA3mpu0oKm8tkDojUMPfIUmti.html",
     "new": true
   },
   {
@@ -671,6 +689,7 @@ window.TIFLO_RESOURCES = [
     "category": "iPhone",
     "title": "Downloading on iPhone with VoiceOver",
     "url": "https://drive.google.com/file/d/14XPltm__NDBu2ICNpVTpGdZBffC3bIwb/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-14XPltm__NDBu2ICNpVTpGdZBffC3bIwb.html",
     "new": false
   },
   {
@@ -679,6 +698,7 @@ window.TIFLO_RESOURCES = [
     "category": "iPhone",
     "title": "Everything You Need to Know About RAM and Cache on Your iPhone",
     "url": "https://drive.google.com/file/d/18WiIo0DRW918qdzjz8Ej7VDreNiZ2rdF/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-18WiIo0DRW918qdzjz8Ej7VDreNiZ2rdF.html",
     "new": true
   },
   {
@@ -687,6 +707,7 @@ window.TIFLO_RESOURCES = [
     "category": "iPhone",
     "title": "How a blind person uses an iPhone",
     "url": "https://drive.google.com/file/d/1B92gvq8L1BhvFrAyGt90QsRpbwZnTAXq/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1B92gvq8L1BhvFrAyGt90QsRpbwZnTAXq.html",
     "new": true
   },
   {
@@ -695,6 +716,7 @@ window.TIFLO_RESOURCES = [
     "category": "iPhone",
     "title": "Practical Guide to Getting Started with iPhone Using VoiceOver",
     "url": "https://drive.google.com/file/d/199EJuLuDa80LxFeoT_nnsnVlEin5AnBW/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-199EJuLuDa80LxFeoT_nnsnVlEin5AnBW.html",
     "new": true
   },
   {
@@ -703,6 +725,7 @@ window.TIFLO_RESOURCES = [
     "category": "iPhone",
     "title": "Teach Your iPhone to Recognize the Beeps of Certain Appliances",
     "url": "https://drive.google.com/file/d/1_xbSNKnHef1PBBl9Pgmi0gVNAkCqw9wv/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1_xbSNKnHef1PBBl9Pgmi0gVNAkCqw9wv.html",
     "new": true
   },
   {
@@ -711,6 +734,7 @@ window.TIFLO_RESOURCES = [
     "category": "iPhone",
     "title": "Using External Keyboards with VoiceOver on iPhone and iPad. Features, Shortcuts and Tips",
     "url": "https://drive.google.com/file/d/1NcnFeIx5_HBHgIzs8udKMgGIU0b0sTBr/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1NcnFeIx5_HBHgIzs8udKMgGIU0b0sTBr.html",
     "new": true
   },
   {
@@ -719,6 +743,7 @@ window.TIFLO_RESOURCES = [
     "category": "iPhone",
     "title": "When Your iPhone Won’t Let You In: Passcode, Apple Account, Backup and Restore",
     "url": "https://drive.google.com/file/d/1pOu-JfqCibjFb8EoURlQXpqtmRvhcuoZ/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1pOu-JfqCibjFb8EoURlQXpqtmRvhcuoZ.html",
     "new": true
   },
   {
@@ -727,6 +752,7 @@ window.TIFLO_RESOURCES = [
     "category": "Mac",
     "title": "Complete VoiceOver Course on Mac accessible",
     "url": "https://drive.google.com/file/d/1oL1upqZzP6nEjy93tiVHHPXg0-RBwYLd/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1oL1upqZzP6nEjy93tiVHHPXg0-RBwYLd.html",
     "new": false
   },
   {
@@ -735,6 +761,7 @@ window.TIFLO_RESOURCES = [
     "category": "Mac",
     "title": "Essential programs and utilities for Mac users with VoiceOver",
     "url": "https://drive.google.com/file/d/1cvMcfoM3HiMrcXAZBX-qh0X_s4DbibRk/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1cvMcfoM3HiMrcXAZBX-qh0X_s4DbibRk.html",
     "new": false
   },
   {
@@ -751,6 +778,7 @@ window.TIFLO_RESOURCES = [
     "category": "Mac",
     "title": "StayAwake. A Free Mac Utility to Keep Your Computer Awake While Using VoiceOver",
     "url": "https://drive.google.com/file/d/1cf1As8AKMzShSGHBmYnbX75X3KGkEqcS/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1cf1As8AKMzShSGHBmYnbX75X3KGkEqcS.html",
     "new": false
   },
   {
@@ -759,6 +787,7 @@ window.TIFLO_RESOURCES = [
     "category": "Mail",
     "title": "Accessible Thunderbird Guide",
     "url": "https://drive.google.com/file/d/1XDcRlphN5GvMhCPzv5I-TsBajVBloYAy/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1XDcRlphN5GvMhCPzv5I-TsBajVBloYAy.html",
     "new": false
   },
   {
@@ -775,6 +804,7 @@ window.TIFLO_RESOURCES = [
     "category": "Mail",
     "title": "Practical Guide to Using Gmail in a Web Browser with JAWS",
     "url": "https://drive.google.com/file/d/13D2JQ4bSJO6CCb87KMglFPKKwvAqcS5i/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-13D2JQ4bSJO6CCb87KMglFPKKwvAqcS5i.html",
     "new": false
   },
   {
@@ -783,6 +813,7 @@ window.TIFLO_RESOURCES = [
     "category": "Mail",
     "title": "Practical Outlook Course Using a Screen Reader in Windows",
     "url": "https://drive.google.com/file/d/1-11YZnrCZaqcZgDVGPndC4W1-sHDNFYy/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1-11YZnrCZaqcZgDVGPndC4W1-sHDNFYy.html",
     "new": false
   },
   {
@@ -791,6 +822,7 @@ window.TIFLO_RESOURCES = [
     "category": "News",
     "title": "RSS feed collection",
     "url": "https://drive.google.com/file/d/124egW5QOiuKENPZ-nIUPxN-3WpQQ98LW/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-124egW5QOiuKENPZ-nIUPxN-3WpQQ98LW.html",
     "new": false
   },
   {
@@ -799,6 +831,7 @@ window.TIFLO_RESOURCES = [
     "category": "News",
     "title": "RSS, the calmest way to stay informed",
     "url": "https://drive.google.com/file/d/1vcdA-RuOzb-908X42S1fkfpLGy6KBpPY/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1vcdA-RuOzb-908X42S1fkfpLGy6KBpPY.html",
     "new": false
   },
   {
@@ -807,6 +840,7 @@ window.TIFLO_RESOURCES = [
     "category": "Research and Studies",
     "title": "Amazon, Google or Apple, which brand is worth buying",
     "url": "https://drive.google.com/file/d/1Q6jUzIRoBlbpiHE4Wc6VCDnCH8axd9W4/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1Q6jUzIRoBlbpiHE4Wc6VCDnCH8axd9W4.html",
     "new": false
   },
   {
@@ -815,6 +849,7 @@ window.TIFLO_RESOURCES = [
     "category": "Research and Studies",
     "title": "Android or iPhone, What Should I Buy If I Am Blind",
     "url": "https://drive.google.com/file/d/14AjSCaEIeI0k-CBX0z4cNmWZCvvCTSqy/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-14AjSCaEIeI0k-CBX0z4cNmWZCvvCTSqy.html",
     "new": false
   },
   {
@@ -823,6 +858,7 @@ window.TIFLO_RESOURCES = [
     "category": "Research and Studies",
     "title": "Blindness, sleep and Non24",
     "url": "https://drive.google.com/file/d/1J8ZCK1w_N-isRJuPmIqJVI9S1qOg4puc/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1J8ZCK1w_N-isRJuPmIqJVI9S1qOg4puc.html",
     "new": false
   },
   {
@@ -831,6 +867,7 @@ window.TIFLO_RESOURCES = [
     "category": "Research and Studies",
     "title": "Braille Displays. What They Are, How They Work, and Which One Is Right for You",
     "url": "https://drive.google.com/file/d/1bUxovIRd_nuqeMYS8jIvZ8NPndKlf7-8/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1bUxovIRd_nuqeMYS8jIvZ8NPndKlf7-8.html",
     "new": false
   },
   {
@@ -839,6 +876,7 @@ window.TIFLO_RESOURCES = [
     "category": "Research and Studies",
     "title": "Braille embossers for home use",
     "url": "https://drive.google.com/file/d/1cFAKc9ryiOxZ8fEBpch7wJDQOFZgYq9E/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1cFAKc9ryiOxZ8fEBpch7wJDQOFZgYq9E.html",
     "new": false
   },
   {
@@ -847,6 +885,7 @@ window.TIFLO_RESOURCES = [
     "category": "Research and Studies",
     "title": "Changing Phones When You Are Blind",
     "url": "https://drive.google.com/file/d/1WLi-nq4MFZ4y4xk8tO-mfY9JPdQ8J1il/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1WLi-nq4MFZ4y4xk8tO-mfY9JPdQ8J1il.html",
     "new": false
   },
   {
@@ -855,6 +894,7 @@ window.TIFLO_RESOURCES = [
     "category": "Research and Studies",
     "title": "Digital Security Without Scares. Complete Guide",
     "url": "https://drive.google.com/file/d/1fuEwRzPoJefzNo2kAIQshCPSVN-EcpOA/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1fuEwRzPoJefzNo2kAIQshCPSVN-EcpOA.html",
     "new": false
   },
   {
@@ -863,6 +903,7 @@ window.TIFLO_RESOURCES = [
     "category": "Research and Studies",
     "title": "Digital Security Without Scares. Essential Guide",
     "url": "https://drive.google.com/file/d/1LtXWkQp0pDjoxCB4RYU7ilki4W1WkBFJ/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1LtXWkQp0pDjoxCB4RYU7ilki4W1WkBFJ.html",
     "new": false
   },
   {
@@ -871,6 +912,7 @@ window.TIFLO_RESOURCES = [
     "category": "Research and Studies",
     "title": "iPhone, iPad or Mac, What Should You Buy Based on What You Actually Need",
     "url": "https://drive.google.com/file/d/1mAV8pWt-UDR7uojeZvmhdrXAoTZQRbZw/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1mAV8pWt-UDR7uojeZvmhdrXAoTZQRbZw.html",
     "new": false
   },
   {
@@ -879,6 +921,7 @@ window.TIFLO_RESOURCES = [
     "category": "Research and Studies",
     "title": "Study of Mobility Apps for Blind iPhone Users",
     "url": "https://drive.google.com/file/d/1qNZ5of4IuOTkmbO27KQ3FO7R0aqwD4xl/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1qNZ5of4IuOTkmbO27KQ3FO7R0aqwD4xl.html",
     "new": false
   },
   {
@@ -887,6 +930,7 @@ window.TIFLO_RESOURCES = [
     "category": "Screen Readers",
     "title": "Jaws and NVDA Equivalent Commands",
     "url": "https://drive.google.com/file/d/1QilTDJjfsUkHcYLq3BMJBSLrPnzUa63M/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1QilTDJjfsUkHcYLq3BMJBSLrPnzUa63M.html",
     "new": false
   },
   {
@@ -895,6 +939,7 @@ window.TIFLO_RESOURCES = [
     "category": "Screen Readers",
     "title": "Practical Excel Course with JAWS and NVDA",
     "url": "https://drive.google.com/file/d/1qgC5AprH-11X_PQscgLu0zgDyh9RdfMj/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1qgC5AprH-11X_PQscgLu0zgDyh9RdfMj.html",
     "new": false
   },
   {
@@ -903,6 +948,7 @@ window.TIFLO_RESOURCES = [
     "category": "Screen Readers",
     "title": "Word Course with JAWS and NVDA",
     "url": "https://drive.google.com/file/d/1voNTrrdU7tP1-ddikI4-E-GufwjD7nYr/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1voNTrrdU7tP1-ddikI4-E-GufwjD7nYr.html",
     "new": false
   },
   {
@@ -911,6 +957,7 @@ window.TIFLO_RESOURCES = [
     "category": "Smart Glasses",
     "title": "Smart Glasses and Blind People",
     "url": "https://drive.google.com/file/d/1MeJvGeKC1Xo3K0wGCpuLpn2sybbTKbUO/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1MeJvGeKC1Xo3K0wGCpuLpn2sybbTKbUO.html",
     "new": false
   },
   {
@@ -919,6 +966,7 @@ window.TIFLO_RESOURCES = [
     "category": "Windows",
     "title": "Catalogue of Accessible Programs and Utilities for Windows",
     "url": "https://drive.google.com/file/d/1Rl5quAwB5DSSdro9E312evOwzq75jOtx/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1Rl5quAwB5DSSdro9E312evOwzq75jOtx.html",
     "new": false
   },
   {
@@ -927,6 +975,7 @@ window.TIFLO_RESOURCES = [
     "category": "Windows",
     "title": "Practical WhatsApp Desktop Course for Windows. With Screen Readers: JAWS and NVDA",
     "url": "https://drive.google.com/file/d/1T4JQtTAA7UhR1GRzcek18WJgDZa3uwTQ/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1T4JQtTAA7UhR1GRzcek18WJgDZa3uwTQ.html",
     "new": false
   },
   {
@@ -935,6 +984,7 @@ window.TIFLO_RESOURCES = [
     "category": "Windows",
     "title": "The Windows Keyboard: A Complete Guide for Screen Reader Users",
     "url": "https://drive.google.com/file/d/1al0eoXbERt6aimxKwjkb-2Np71YZhD-R/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1al0eoXbERt6aimxKwjkb-2Np71YZhD-R.html",
     "new": false
   }
 ];

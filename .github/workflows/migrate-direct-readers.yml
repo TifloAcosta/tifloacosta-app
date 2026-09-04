@@ -1,0 +1,34 @@
+name: Migrate direct readers
+
+on:
+  push:
+    paths:
+      - '.github/workflows/migrate-direct-readers.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  migrate-spanish-pilot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Migrate first Spanish batch
+        run: node scripts/migrate-readers.mjs --lang=es --limit=5
+      - name: Run regression tests
+        run: npm test
+      - name: Commit migrated readers
+        run: |
+          if git diff --quiet && [ -z "$(git status --porcelain --untracked-files=normal)" ]; then
+            echo "No migration changes to commit."
+            exit 0
+          fi
+          git config user.name "TifloAcosta automation"
+          git config user.email "146574974+TifloAcosta@users.noreply.github.com"
+          git add data.js docs/es
+          git commit -m "content: migrate Spanish direct readers batch"
+          git push

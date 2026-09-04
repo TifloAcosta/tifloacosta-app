@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = '1.6';
+  const APP_VERSION = '1.7';
   const core = window.TIFLO_APP_CORE;
   const data = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];
   const $ = (selector) => document.querySelector(selector);
@@ -227,8 +227,8 @@
     let rerenderAfterClose=false;
 
     const makeButton=label=>{const button=document.createElement('button');button.type='button';button.textContent=label;return button;};
-    const makeLink=(label,href)=>{const link=document.createElement('a');link.className='button-link';link.href=href;link.textContent=label;link.target='_blank';link.rel='noopener noreferrer';return link;};
-    const openLink=makeLink(labels.open,item.openUrl||item.url);
+    const makeLink=(label,href,target='_blank')=>{const link=document.createElement('a');link.className='button-link';link.href=href;link.textContent=label;link.target=target;if(target==='_blank')link.rel='noopener noreferrer';return link;};
+    const openLink=makeLink(labels.open,item.openUrl||item.url,item.openUrl?'_self':'_blank');
     const downloadLink=makeLink(labels.download,driveDownloadUrl(item.url));
     const shareButton=makeButton(labels.share);
     const favoriteButton=makeButton(favorites.has(item.id)?labels.removeFavorite:labels.addFavorite);

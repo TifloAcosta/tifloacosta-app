@@ -43,6 +43,6 @@ test('homepage wires one-time install and installed-app open events into GoatCou
   assert.match(html, /goatcounter\.count\(\{/);
   assert.match(html, /event:\s*true/);
   assert.match(html, /no_session:\s*true/);
-  assert.match(worker, /tifloacosta-app-v1-3-analytics/);
+  assert.match(worker, /const CACHE = 'tifloacosta-app-v[^']+'/);
   assert.match(worker, /'\.\/app-core\.js\?v=1\.1'/);
 });

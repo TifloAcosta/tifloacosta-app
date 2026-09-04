@@ -1,5 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import vm from 'node:vm';
 import {
   addReturnControl,
   readerUrl,
@@ -51,4 +53,13 @@ test('addOpenUrlToCatalog updates only the requested resource', () => {
   const result = addOpenUrlToCatalog(source, 'es-two', 'https://example.test/reader-two.html');
   assert.doesNotMatch(result.slice(0, result.indexOf('"id": "es-two"')), /openUrl/);
   assert.match(result, /"id": "es-two"[\s\S]*"openUrl": "https:\/\/example\.test\/reader-two\.html"/);
+});
+
+test('every Spanish resource has a direct reader URL', async () => {
+  const source = await readFile(new URL('../data.js', import.meta.url), 'utf8');
+  const context = { window: {} };
+  vm.runInNewContext(source, context);
+  const spanish = context.window.TIFLO_RESOURCES.filter(item => item.lang === 'es');
+  const missing = spanish.filter(item => !item.openUrl).map(item => item.title);
+  assert.deepEqual(missing, []);
 });

@@ -1,12 +1,12 @@
-const CACHE = 'tifloacosta-app-v1-5-direct-reader';
+const CACHE = 'tifloacosta-app-v1-6-transient-status';
 const SHELL = [
   './',
   './index.html',
   './styles.css?v=1.0',
   './data.js?v=0.15',
   './app-core.js?v=1.1',
-  './app.js?v=1.5',
-  './notifications.js?v=0.14',
+  './app.js?v=1.6',
+  './notifications.js?v=0.15',
   './videos.html',
   './videos-core.js?v=0.16',
   './videos.js?v=1.3',

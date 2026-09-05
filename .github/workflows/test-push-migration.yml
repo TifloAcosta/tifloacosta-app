@@ -1,0 +1,25 @@
+name: Test push migration
+
+on:
+  push:
+    paths:
+      - 'test/push-migration.test.mjs'
+      - 'index.html'
+      - 'notifications.js'
+      - 'sw.js'
+      - 'push/**'
+      - '.github/workflows/test-push-migration.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node --test test/push-migration.test.mjs

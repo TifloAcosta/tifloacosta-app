@@ -1,10 +1,8 @@
 (() => {
   'use strict';
 
-  const ONESIGNAL_APP_ID = 'ed030723-7f6f-4745-8cd3-6938a9d04377';
-  const ONESIGNAL_WORKER_PATH = 'tifloacosta-app/push/onesignal/OneSignalSDKWorker.js';
-  const ONESIGNAL_WORKER_SCOPE = '/tifloacosta-app/push/onesignal/';
-  const DEFAULT_URL = 'https://tifloacosta.github.io/tifloacosta-app/';
+  const config = window.TIFLO_PUSHALERT_CONFIG || {};
+  const integrationScriptUrl = typeof config.integrationScriptUrl === 'string' ? config.integrationScriptUrl.trim() : '';
 
   const heading = document.querySelector('#notifications-heading');
   const intro = document.querySelector('#notifications-intro');
@@ -47,23 +45,23 @@
     }
   };
 
-  let OneSignalInstance = null;
+  let ready = false;
   let state = 'preparing';
   let busy = false;
-  let notice = '';
   let clearNoticeTimer = null;
+
+  const currentLanguage = () => document.documentElement.lang?.toLowerCase().startsWith('en') ? 'en' : 'es';
+  const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const isStandalone = () => window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  const permissionDenied = () => 'Notification' in window && Notification.permission === 'denied';
+  const pushSupported = () => 'Notification' in window && 'serviceWorker' in navigator && 'PushManager' in window;
+  const setStatus = value => { if (status.textContent !== value) status.textContent = value; };
 
   function announceStatus(message) {
     window.clearTimeout(clearNoticeTimer);
     setStatus(message);
     clearNoticeTimer = window.setTimeout(() => setStatus(''), 2500);
   }
-
-  const currentLanguage = () => document.documentElement.lang?.toLowerCase().startsWith('en') ? 'en' : 'es';
-  const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-  const isStandalone = () => window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-  const permissionDenied = () => 'Notification' in window && Notification.permission === 'denied';
-  const setStatus = value => { if (status.textContent !== value) status.textContent = value; };
 
   function render() {
     const c = copy[currentLanguage()];
@@ -110,40 +108,87 @@
     }
   }
 
-  function syncOneSignalLanguage() {
-    if (!OneSignalInstance) return;
+  function getSubscriptionInfo() {
     try {
-      OneSignalInstance.User.setLanguage(currentLanguage());
-    } catch (_) {}
+      if (!window.PushAlertCo || typeof window.PushAlertCo.getSubsInfo !== 'function') return null;
+      return window.PushAlertCo.getSubsInfo();
+    } catch (_) {
+      return null;
+    }
   }
 
   function refreshState() {
-    if (!OneSignalInstance) return;
-    notice = '';
-
     if (isIOS() && !isStandalone()) {
       state = 'iosInstall';
       render();
       return;
     }
 
-    let supported = false;
-    try {
-      supported = OneSignalInstance.Notifications.isPushSupported();
-    } catch (_) {}
-
-    if (!supported) {
+    if (!pushSupported()) {
       state = 'unsupported';
-    } else if (permissionDenied()) {
+      render();
+      return;
+    }
+
+    if (permissionDenied()) {
+      state = 'blocked';
+      render();
+      return;
+    }
+
+    if (!ready) {
+      state = 'preparing';
+      render();
+      return;
+    }
+
+    const info = getSubscriptionInfo();
+    if (!info) {
+      state = 'unavailable';
+    } else if (info.status === 'subscribed') {
+      state = 'enabled';
+    } else if (info.status === 'denied') {
       state = 'blocked';
     } else {
-      state = OneSignalInstance.User.PushSubscription.optedIn ? 'enabled' : 'disabled';
+      state = 'disabled';
     }
     render();
   }
 
-  async function toggleNotifications() {
-    if (!OneSignalInstance || busy || !['enabled', 'disabled'].includes(state)) return;
+  function finishAction(message) {
+    busy = false;
+    refreshState();
+    if (message) announceStatus(message);
+  }
+
+  function onReady() {
+    ready = true;
+    refreshState();
+  }
+
+  function onSuccess(result) {
+    const wasNew = result && result.alreadySubscribed === false;
+    finishAction(wasNew ? copy[currentLanguage()].enabled : '');
+  }
+
+  function onFailure(result) {
+    const code = result && Number(result.status);
+    if (code === -1) {
+      busy = false;
+      state = 'blocked';
+      render();
+      announceStatus(copy[currentLanguage()].blocked);
+      return;
+    }
+    if (code === 1) {
+      finishAction(copy[currentLanguage()].disabled);
+      return;
+    }
+    finishAction(copy[currentLanguage()].notActivated);
+  }
+
+  function toggleNotifications() {
+    if (!ready || busy || !['enabled', 'disabled'].includes(state) || !window.PushAlertCo) return;
 
     if (state === 'disabled' && permissionDenied()) {
       state = 'blocked';
@@ -153,83 +198,74 @@
 
     const wasEnabled = state === 'enabled';
     busy = true;
-    notice = '';
     render();
 
     try {
       if (wasEnabled) {
-        await OneSignalInstance.User.PushSubscription.optOut();
+        window.PushAlertCo.unsubscribe();
+        window.setTimeout(() => {
+          if (busy) finishAction(copy[currentLanguage()].disabled);
+        }, 1200);
       } else {
-        await OneSignalInstance.User.PushSubscription.optIn();
-      }
-      refreshState();
-      if (wasEnabled && state === 'disabled') {
-        announceStatus(copy[currentLanguage()].disabled);
-      } else if (!wasEnabled && state === 'enabled') {
-        announceStatus(copy[currentLanguage()].enabled);
-      } else if (!wasEnabled && state === 'disabled') {
-        announceStatus(copy[currentLanguage()].notActivated);
+        window.PushAlertCo.forceSubscribe();
+        window.setTimeout(() => {
+          if (busy) {
+            refreshState();
+            if (state !== 'enabled') finishAction(copy[currentLanguage()].notActivated);
+          }
+        }, 5000);
       }
     } catch (_) {
+      busy = false;
       state = permissionDenied() ? 'blocked' : 'unavailable';
       render();
       announceStatus(state === 'blocked' ? copy[currentLanguage()].blocked : copy[currentLanguage()].unavailable);
-    } finally {
-      busy = false;
-      render();
     }
+  }
+
+  function loadPushAlert() {
+    if (!integrationScriptUrl || !/^https:\/\/cdn\.pushalert\.co\/integrate_[A-Za-z0-9_-]+\.js(?:\?.*)?$/.test(integrationScriptUrl)) {
+      state = 'unavailable';
+      render();
+      return;
+    }
+
+    window.pushalertbyiw = window.pushalertbyiw || [];
+    window.pushalertbyiw.push(['disableAutoInit', true]);
+    window.pushalertbyiw.push(['onReady', onReady]);
+    window.pushalertbyiw.push(['onSuccess', onSuccess]);
+    window.pushalertbyiw.push(['onFailure', onFailure]);
+
+    const script = document.createElement('script');
+    script.src = integrationScriptUrl;
+    script.async = true;
+    script.onerror = () => {
+      ready = false;
+      state = 'unavailable';
+      render();
+    };
+    document.head.append(script);
   }
 
   toggle.addEventListener('click', toggleNotifications);
 
-  const languageObserver = new MutationObserver(() => {
-    syncOneSignalLanguage();
-    render();
-  });
+  const languageObserver = new MutationObserver(render);
   languageObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
 
-  window.addEventListener('focus', () => {
-    if (OneSignalInstance) refreshState();
-  });
+  window.addEventListener('focus', refreshState);
   document.addEventListener('visibilitychange', () => {
-    if (!document.hidden && OneSignalInstance) refreshState();
+    if (!document.hidden) refreshState();
   });
 
   render();
 
-  const startupTimeout = window.setTimeout(() => {
-    if (!OneSignalInstance) {
-      state = 'unavailable';
-      render();
-    }
-  }, 8000);
-
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  window.OneSignalDeferred.push(async function (OneSignal) {
-    try {
-      await OneSignal.init({
-        appId: ONESIGNAL_APP_ID,
-        safari_web_id: 'web.onesignal.auto.5f8d50ad-7ec3-4f1c-a2de-134e8949294e',
-        serviceWorkerPath: ONESIGNAL_WORKER_PATH,
-        serviceWorkerParam: { scope: ONESIGNAL_WORKER_SCOPE },
-        notifyButton: { enable: false },
-        welcomeNotification: { disable: true },
-        autoResubscribe: true
-      });
-
-      OneSignal.Notifications.setDefaultTitle('TifloAcosta App');
-      OneSignal.Notifications.setDefaultUrl(DEFAULT_URL);
-      OneSignalInstance = OneSignal;
-      window.clearTimeout(startupTimeout);
-
-      OneSignal.User.PushSubscription.addEventListener('change', refreshState);
-      OneSignal.Notifications.addEventListener('permissionChange', refreshState);
-      syncOneSignalLanguage();
-      refreshState();
-    } catch (_) {
-      window.clearTimeout(startupTimeout);
-      state = 'unavailable';
-      render();
-    }
-  });
+  if (isIOS() && !isStandalone()) {
+    state = 'iosInstall';
+    render();
+  } else if (!pushSupported()) {
+    state = 'unsupported';
+    render();
+  } else {
+    loadPushAlert();
+  }
 })();

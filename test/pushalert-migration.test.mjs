@@ -46,5 +46,6 @@ test('PushAlert sending is queued through GitHub without exposing the API key in
   assert.match(workflow, /push\/queue\/\*\.json/);
   assert.match(workflow, /--diff-filter=A/);
   assert.match(workflow, /secrets\.PUSHALERT_API_KEY/);
+  assert.doesNotMatch(workflow, /\\\\n/);
   assert.doesNotMatch(config, /api[_-]?key/i);
 });

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { access, readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 const read = file => readFile(new URL(`../${file}`, import.meta.url), 'utf8');
@@ -29,4 +29,5 @@ test('PushAlert migration removes OneSignal and preserves the accessible in-app 
   assert.match(worker, /importScripts\('\.\/pushalert-worker\.js'\)/);
   assert.match(config, /TIFLO_PUSHALERT_CONFIG/);
   assert.match(providerWorker, /PUSHALERT_WORKER_NOT_CONFIGURED/);
+  await assert.rejects(access(new URL('../push/onesignal/OneSignalSDKWorker.js', import.meta.url)));
 });

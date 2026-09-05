@@ -1,1 +1,38 @@
-name: Send PushAlert notification\n\non:\n  push:\n    branches: ["main"]\n    paths:\n      - 'push/queue/*.json'\n\npermissions:\n  contents: read\n\njobs:\n  send:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout\n        uses: actions/checkout@v4\n        with:\n          fetch-depth: 2\n      - name: Setup Node\n        uses: actions/setup-node@v4\n        with:\n          node-version: '20'\n      - name: Find newly queued notifications\n        id: queue\n        shell: bash\n        run: |\n          files="$(git diff --diff-filter=A --name-only HEAD^ HEAD -- 'push/queue/*.json' | tr '\n' ' ')"\n          echo "files=$files" >> "$GITHUB_OUTPUT"\n      - name: Send queued notifications\n        if: steps.queue.outputs.files != ''\n        env:\n          PUSHALERT_API_KEY: ${{ secrets.PUSHALERT_API_KEY }}\n        shell: bash\n        run: |\n          for file in ${{ steps.queue.outputs.files }}; do\n            node scripts/send-pushalert.mjs "$file"\n          done\n
+name: Send PushAlert notification
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - 'push/queue/*.json'
+
+permissions:
+  contents: read
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Find newly queued notifications
+        id: queue
+        shell: bash
+        run: |
+          files="$(git diff --diff-filter=A --name-only HEAD^ HEAD -- 'push/queue/*.json' | tr '\n' ' ')"
+          echo "files=$files" >> "$GITHUB_OUTPUT"
+      - name: Send queued notifications
+        if: steps.queue.outputs.files != ''
+        env:
+          PUSHALERT_API_KEY: ${{ secrets.PUSHALERT_API_KEY }}
+        shell: bash
+        run: |
+          for file in ${{ steps.queue.outputs.files }}; do
+            node scripts/send-pushalert.mjs "$file"
+          done

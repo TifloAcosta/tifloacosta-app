@@ -153,6 +153,15 @@ window.TIFLO_RESOURCES = [
     "new": false
   },
   {
+    "id": "es-foal-america-latina-2026",
+    "lang": "es",
+    "category": "Estudios",
+    "title": "FOAL en América Latina: qué queda en pie y qué sigue sin demostrarse",
+    "url": "https://tifloacosta.github.io/tifloacosta-app/docs/es/foal-america-latina.html",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/foal-america-latina.html",
+    "new": true
+  },
+  {
     "id": "es-16xWHXKfFtty3nNJYxEOtHTns3GAkzlfN",
     "lang": "es",
     "category": "Estudios",

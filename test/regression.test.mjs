@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { access, readFile } from 'node:fs/promises';
 import test from 'node:test';
 import vm from 'node:vm';
 import { createRequire } from 'node:module';
@@ -100,8 +100,8 @@ test('categories have TIFLO_RESOURCES as their only data source', async () => {
 test('video cards use h3 titles and title-specific accessible play names', async () => {
   const source = await read('videos.js');
 
-  assert.match(source, /playLabel:\s*title => `Reproducir: \$\{title\}`/);
-  assert.match(source, /playLabel:\s*title => `Play: \$\{title\}`/);
+  assert.match(source, /playLabel:\s*title => `Reproducir: \${title}`/);
+  assert.match(source, /playLabel:\s*title => `Play: \${title}`/);
   assert.match(source, /const title = document\.createElement\('h3'\)/);
   assert.match(source, /setAttribute\('aria-label', c\.playLabel\(video\.title \|\| ''\)\)/);
   assert.doesNotMatch(source, /const title = document\.createElement\('h2'\)/);
@@ -148,4 +148,18 @@ test('YouTube workflow uses one sync implementation and deploys changed catalog 
   assert.match(sync, /actions\/deploy-pages@v4/);
   assert.match(sync, /if: steps\.changes\.outputs\.changed == 'true'/);
   assert.match(pages, /actions\/deploy-pages@v5/);
+});
+
+test('web push integration is migrated from OneSignal to Webpushr without adding a second service worker', async () => {
+  const html = await read('index.html');
+  const notifications = await read('notifications.js');
+  const worker = await read('sw.js');
+
+  assert.doesNotMatch(html, /onesignal/i);
+  assert.doesNotMatch(notifications, /onesignal/i);
+  assert.match(notifications, /cdn\.webpushr\.com\/app\.min\.js/);
+  assert.match(notifications, /webpushr\('setup',[\s\S]*['"]sw['"]\s*:\s*['"]none['"]/);
+  assert.match(worker, /importScripts\(['"]https:\/\/cdn\.webpushr\.com\/sw-server\.min\.js['"]\)/);
+  assert.match(html, /Webpushr/);
+  await assert.rejects(access(new URL('../push/onesignal/OneSignalSDKWorker.js', import.meta.url)));
 });

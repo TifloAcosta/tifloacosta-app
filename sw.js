@@ -1,4 +1,6 @@
-const CACHE = 'tifloacosta-app-v2-1-foal';
+importScripts('./pushalert-worker.js');
+
+const CACHE = 'tifloacosta-app-v2-1-pushalert';
 const SHELL = [
   './',
   './index.html',
@@ -6,7 +8,8 @@ const SHELL = [
   './data.js?v=0.18',
   './app-core.js?v=1.2',
   './app.js?v=2.1',
-  './notifications.js?v=0.15',
+  './pushalert-config.js?v=0.1',
+  './notifications.js?v=0.16',
   './videos.html',
   './videos-core.js?v=0.16',
   './videos.js?v=2.0',

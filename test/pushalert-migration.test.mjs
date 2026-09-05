@@ -31,3 +31,20 @@ test('PushAlert migration removes OneSignal and preserves the accessible in-app 
   assert.match(providerWorker, /PUSHALERT_WORKER_NOT_CONFIGURED/);
   await assert.rejects(access(new URL('../push/onesignal/OneSignalSDKWorker.js', import.meta.url)));
 });
+
+
+test('PushAlert sending is queued through GitHub without exposing the API key in public files', async () => {
+  const sender = await read('scripts/send-pushalert.mjs');
+  const workflow = await read('.github/workflows/send-pushalert.yml');
+  const config = await read('pushalert-config.js');
+
+  assert.match(sender, /https:\/\/api\.pushalert\.co\/rest\/v2\/web-push\/send/);
+  assert.match(sender, /PUSHALERT_API_KEY/);
+  assert.match(sender, /title/);
+  assert.match(sender, /message/);
+  assert.match(sender, /url/);
+  assert.match(workflow, /push\/queue\/\*\.json/);
+  assert.match(workflow, /--diff-filter=A/);
+  assert.match(workflow, /secrets\.PUSHALERT_API_KEY/);
+  assert.doesNotMatch(config, /api[_-]?key/i);
+});

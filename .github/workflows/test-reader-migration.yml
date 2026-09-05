@@ -7,6 +7,11 @@ on:
       - 'test/install-analytics.test.mjs'
       - 'test/regression.test.mjs'
       - 'scripts/migrate-readers.mjs'
+      - 'index.html'
+      - 'notifications.js'
+      - 'sw.js'
+      - 'app.js'
+      - 'push/**'
       - '.github/workflows/test-reader-migration.yml'
   workflow_dispatch:
 

@@ -10,6 +10,8 @@ on:
       - 'pushalert-config.js'
       - 'pushalert-worker.js'
       - 'sw.js'
+      - 'scripts/send-pushalert.mjs'
+      - '.github/workflows/send-pushalert.yml'
       - '.github/workflows/test-pushalert-migration.yml'
   workflow_dispatch:
 

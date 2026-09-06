@@ -15,7 +15,7 @@ window.TIFLO_RESOURCES = [
     "title": "Curso Jieshuo en Android",
     "url": "https://drive.google.com/file/d/1sxkdwNWtbDitDu-GVRNDOwvNX4n6CaG6/view?usp=drivesdk",
     "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1sxkdwNWtbDitDu-GVRNDOwvNX4n6CaG6.html",
-    "new": true
+    "new": false
   },
   {
     "id": "es-171jkNluL0wFaCK2HjV-SqKy4tP9cF2Fd",
@@ -51,7 +51,7 @@ window.TIFLO_RESOURCES = [
     "title": "Lo que no puede faltar en tu iPhone",
     "url": "https://drive.google.com/file/d/1FKsaxZ_-NgKsHWWBI_i25X8rEqwQHTgN/view?usp=drivesdk",
     "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/lo-que-no-puede-faltar-en-tu-iphone.html?reader=2",
-    "new": true
+    "new": false
   },
   {
     "id": "es-1bARy1QpqGYy9ZvqmS74gxZG0px6kpyJk",
@@ -81,7 +81,7 @@ window.TIFLO_RESOURCES = [
     "new": false
   },
   {
-"id": "es-19oVnEZYBLwKc6CGF-Oq08KRV7THGM7O5",
+    "id": "es-19oVnEZYBLwKc6CGF-Oq08KRV7THGM7O5",
     "lang": "es",
     "category": "Atajos",
     "title": "Tomando atajos con Canal TifloAcosta",
@@ -159,7 +159,7 @@ window.TIFLO_RESOURCES = [
     "title": "FOAL en América Latina: qué queda en pie y qué sigue sin demostrarse",
     "url": "https://tifloacosta.github.io/tifloacosta-app/docs/es/foal-america-latina.html",
     "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/foal-america-latina.html",
-    "new": true
+    "new": false
   },
   {
     "id": "es-16xWHXKfFtty3nNJYxEOtHTns3GAkzlfN",
@@ -330,7 +330,7 @@ window.TIFLO_RESOURCES = [
     "title": "Cambiar de iPhone sin dejar nada atrás",
     "url": "https://drive.google.com/file/d/1DhFn8SOhklScG9lhgwOfAO1PkJjTLHOo/view?usp=drivesdk",
     "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1DhFn8SOhklScG9lhgwOfAO1PkJjTLHOo.html",
-    "new": true
+    "new": false
   },
   {
     "id": "es-1xT5cXyLJ1IoRq5wYrYmzqxVeHBwJmXdb",
@@ -339,7 +339,7 @@ window.TIFLO_RESOURCES = [
     "title": "Cuando el iPhone no te deja entrar: código, cuenta Apple, copia de seguridad y restauración",
     "url": "https://drive.google.com/file/d/1xT5cXyLJ1IoRq5wYrYmzqxVeHBwJmXdb/view?usp=drivesdk",
     "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1xT5cXyLJ1IoRq5wYrYmzqxVeHBwJmXdb.html",
-    "new": true
+    "new": false
   },
   {
     "id": "es-1YJARDsI58Esq9vDYXr9NPrLFQEUTIVNL",
@@ -348,7 +348,7 @@ window.TIFLO_RESOURCES = [
     "title": "Cómo usa un iPhone alguien que no lo ve",
     "url": "https://drive.google.com/file/d/1YJARDsI58Esq9vDYXr9NPrLFQEUTIVNL/view?usp=drivesdk",
     "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1YJARDsI58Esq9vDYXr9NPrLFQEUTIVNL.html",
-    "new": true
+    "new": false
   },
   {
     "id": "es-1IC8N6iDXy7E_Vd4cfak7v42E2GMCYQeS",
@@ -366,7 +366,7 @@ window.TIFLO_RESOURCES = [
     "title": "Enseña a tu iPhone a reconocer los pitidos de ciertos electrodomésticos",
     "url": "https://drive.google.com/file/d/1Z_b2H01fz5u2QoH9ReiY8GdxRW_o4iTW/view?usp=drivesdk",
     "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1Z_b2H01fz5u2QoH9ReiY8GdxRW_o4iTW.html",
-    "new": true
+    "new": false
   },
   {
     "id": "es-1QH45VySl7dmR7bbzQUTZvW_V8X86Gj0t",
@@ -375,7 +375,7 @@ window.TIFLO_RESOURCES = [
     "title": "Guía práctica para empezar a usar el iPhone con VoiceOver",
     "url": "https://drive.google.com/file/d/1QH45VySl7dmR7bbzQUTZvW_V8X86Gj0t/view?usp=drivesdk",
     "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1QH45VySl7dmR7bbzQUTZvW_V8X86Gj0t.html",
-    "new": true
+    "new": false
   },
   {
     "id": "es-1gvutVyw8z7sVs3z0ygTFXQfFDudYdR6Z",
@@ -384,7 +384,7 @@ window.TIFLO_RESOURCES = [
     "title": "Todo lo que necesitas conocer sobre la RAM y el caché de tu iPhone",
     "url": "https://drive.google.com/file/d/1gvutVyw8z7sVs3z0ygTFXQfFDudYdR6Z/view?usp=drivesdk",
     "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1gvutVyw8z7sVs3z0ygTFXQfFDudYdR6Z.html",
-    "new": true
+    "new": false
   },
   {
     "id": "es-1jSA3mUc3dYaAr-H3CFXyIeqVne8vkanv",
@@ -393,7 +393,7 @@ window.TIFLO_RESOURCES = [
     "title": "Uso de teclados externos con VoiceOver en iPhone y iPad. Funciones, atajos y consejos",
     "url": "https://drive.google.com/file/d/1jSA3mUc3dYaAr-H3CFXyIeqVne8vkanv/view?usp=drivesdk",
     "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1jSA3mUc3dYaAr-H3CFXyIeqVne8vkanv.html",
-    "new": true
+    "new": false
   },
   {
     "id": "es-10NvRY9lccAgC2M6HghxgLpprKJjTMXF7",
@@ -564,7 +564,7 @@ window.TIFLO_RESOURCES = [
     "title": "Jieshuo Android Practical Course",
     "url": "https://drive.google.com/file/d/1Gcty0-OWwfAD--XruEZYzUO_9kTatGBC/view?usp=drivesdk",
     "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1Gcty0-OWwfAD--XruEZYzUO_9kTatGBC.html",
-    "new": true
+    "new": false
   },
   {
     "id": "en-1sZQy31bS_DG1zzMzqu8o1pL35zd-ttv4",
@@ -600,7 +600,7 @@ window.TIFLO_RESOURCES = [
     "title": "What You Should Have on Your iPhone",
     "url": "https://drive.google.com/file/d/177Ni4DvWPtzmP6C7U4LbjB5GMTLiLzR4/view?usp=drivesdk",
     "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-177Ni4DvWPtzmP6C7U4LbjB5GMTLiLzR4.html",
-    "new": true
+    "new": false
   },
   {
     "id": "en-1wLvd8JmXJR6KCuompDknG7Pq90iKzygC",
@@ -690,7 +690,7 @@ window.TIFLO_RESOURCES = [
     "title": "Changing iPhone Without Leaving Anything Behind",
     "url": "https://drive.google.com/file/d/1h1KnGhyaA3mpu0oKm8tkDojUMPfIUmti/view?usp=drivesdk",
     "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1h1KnGhyaA3mpu0oKm8tkDojUMPfIUmti.html",
-    "new": true
+    "new": false
   },
   {
     "id": "en-14XPltm__NDBu2ICNpVTpGdZBffC3bIwb",
@@ -708,7 +708,7 @@ window.TIFLO_RESOURCES = [
     "title": "Everything You Need to Know About RAM and Cache on Your iPhone",
     "url": "https://drive.google.com/file/d/18WiIo0DRW918qdzjz8Ej7VDreNiZ2rdF/view?usp=drivesdk",
     "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-18WiIo0DRW918qdzjz8Ej7VDreNiZ2rdF.html",
-    "new": true
+    "new": false
   },
   {
     "id": "en-1B92gvq8L1BhvFrAyGt90QsRpbwZnTAXq",
@@ -717,7 +717,7 @@ window.TIFLO_RESOURCES = [
     "title": "How a blind person uses an iPhone",
     "url": "https://drive.google.com/file/d/1B92gvq8L1BhvFrAyGt90QsRpbwZnTAXq/view?usp=drivesdk",
     "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1B92gvq8L1BhvFrAyGt90QsRpbwZnTAXq.html",
-    "new": true
+    "new": false
   },
   {
     "id": "en-199EJuLuDa80LxFeoT_nnsnVlEin5AnBW",
@@ -726,7 +726,7 @@ window.TIFLO_RESOURCES = [
     "title": "Practical Guide to Getting Started with iPhone Using VoiceOver",
     "url": "https://drive.google.com/file/d/199EJuLuDa80LxFeoT_nnsnVlEin5AnBW/view?usp=drivesdk",
     "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-199EJuLuDa80LxFeoT_nnsnVlEin5AnBW.html",
-    "new": true
+    "new": false
   },
   {
     "id": "en-1_xbSNKnHef1PBBl9Pgmi0gVNAkCqw9wv",
@@ -735,7 +735,7 @@ window.TIFLO_RESOURCES = [
     "title": "Teach Your iPhone to Recognize the Beeps of Certain Appliances",
     "url": "https://drive.google.com/file/d/1_xbSNKnHef1PBBl9Pgmi0gVNAkCqw9wv/view?usp=drivesdk",
     "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1_xbSNKnHef1PBBl9Pgmi0gVNAkCqw9wv.html",
-    "new": true
+    "new": false
   },
   {
     "id": "en-1NcnFeIx5_HBHgIzs8udKMgGIU0b0sTBr",
@@ -744,7 +744,7 @@ window.TIFLO_RESOURCES = [
     "title": "Using External Keyboards with VoiceOver on iPhone and iPad. Features, Shortcuts and Tips",
     "url": "https://drive.google.com/file/d/1NcnFeIx5_HBHgIzs8udKMgGIU0b0sTBr/view?usp=drivesdk",
     "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1NcnFeIx5_HBHgIzs8udKMgGIU0b0sTBr.html",
-    "new": true
+    "new": false
   },
   {
     "id": "en-1pOu-JfqCibjFb8EoURlQXpqtmRvhcuoZ",
@@ -753,7 +753,7 @@ window.TIFLO_RESOURCES = [
     "title": "When Your iPhone Won’t Let You In: Passcode, Apple Account, Backup and Restore",
     "url": "https://drive.google.com/file/d/1pOu-JfqCibjFb8EoURlQXpqtmRvhcuoZ/view?usp=drivesdk",
     "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1pOu-JfqCibjFb8EoURlQXpqtmRvhcuoZ.html",
-    "new": true
+    "new": false
   },
   {
     "id": "en-1oL1upqZzP6nEjy93tiVHHPXg0-RBwYLd",
@@ -997,6 +997,24 @@ window.TIFLO_RESOURCES = [
     "url": "https://drive.google.com/file/d/1al0eoXbERt6aimxKwjkb-2Np71YZhD-R/view?usp=drivesdk",
     "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1al0eoXbERt6aimxKwjkb-2Np71YZhD-R.html",
     "new": false
+  },
+  {
+    "id": "es-1Yk652avn7fcQtfNV28nu0VIkqpcZiRos",
+    "lang": "es",
+    "category": "Noticias",
+    "title": "Píldoras 21 2026",
+    "url": "https://drive.google.com/file/d/1Yk652avn7fcQtfNV28nu0VIkqpcZiRos/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1Yk652avn7fcQtfNV28nu0VIkqpcZiRos.html",
+    "new": true
+  },
+  {
+    "id": "en-1ztd-nsQcYPNa3-Ij40CxlNIGkuEPtX-T",
+    "lang": "en",
+    "category": "News",
+    "title": "Tech Pills 21 2026",
+    "url": "https://drive.google.com/file/d/1ztd-nsQcYPNa3-Ij40CxlNIGkuEPtX-T/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1ztd-nsQcYPNa3-Ij40CxlNIGkuEPtX-T.html",
+    "new": true
   }
 ];
 

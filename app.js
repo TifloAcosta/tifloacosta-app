@@ -445,9 +445,29 @@
     if(history.replaceState) history.replaceState(null,'',clean);
   }
 
+  function trackLanguageUse() {
+    const selected = lang === 'en' ? 'en' : 'es';
+    const title = selected === 'es' ? 'Idioma de la app · Español' : 'App language · English';
+    let attempts = 0;
+    const timer = window.setInterval(() => {
+      attempts += 1;
+      if (window.goatcounter && typeof window.goatcounter.count === 'function') {
+        window.clearInterval(timer);
+        window.goatcounter.count({
+          path: `app-language-${selected}`,
+          title,
+          event: true,
+          no_session: true
+        });
+      } else if (attempts >= 50) {
+        window.clearInterval(timer);
+      }
+    }, 100);
+  }
+
   function applyLanguage(){const c=copy[lang];document.documentElement.lang=lang;document.title=c.documentTitle;core.writeStoredValue(storage,'tifloLang',lang);els.langEs.setAttribute('aria-pressed',String(lang==='es'));els.langEn.setAttribute('aria-pressed',String(lang==='en'));els.skip.textContent=c.skip;els.brand.setAttribute('aria-label',c.brandLabel);els.appHeading.textContent=c.appHeading;els.intro.textContent=c.intro;els.searchHeading.textContent=c.searchHeading;els.searchLabel.textContent=c.searchLabel;els.search.placeholder=c.placeholder;els.searchButton.textContent=c.searchButton;els.newsHeading.textContent=c.news;els.exploreHeading.textContent=c.explore;els.categoryLabel.textContent=c.categoryLabel;els.favoritesButton.textContent=c.favorites;els.clearResults.textContent=c.clear;els.videosHomeHeading.textContent=c.videosHome.heading;els.videosHomeIntro.textContent=c.videosHome.intro;els.videosHomeOpen.textContent=c.videosHome.open;els.youtubeHomeChannel.textContent=c.videosHome.channel;els.aboutHeading.textContent=c.about.heading;els.aboutText.textContent=c.about.text;els.externalLinksNote.textContent=c.externalLinks;els.privacyHeading.textContent=c.privacy.heading;els.privacySubheading.textContent=c.privacy.privacyHeading;els.privacyText.textContent=c.privacy.text;els.accessibilityInfoHeading.textContent=c.privacy.accessibilityHeading;els.accessibilityInfoText.textContent=c.privacy.accessibilityText;els.configHeading.textContent=c.configuration;els.accessibilityHeading.textContent=c.accessibility;els.footer.textContent=c.footer;renderCategories();renderNews();localizeBook();localizeContact();localizeSettings();localizeInstall();localizeUpdate();clearResults();}
 
-  els.langEs.addEventListener('click',()=>{lang='es';applyLanguage();});els.langEn.addEventListener('click',()=>{lang='en';applyLanguage();});els.searchForm.addEventListener('submit',e=>{e.preventDefault();searchResources();});els.category.addEventListener('change',()=>showCategory(els.category.value));els.favoritesButton.addEventListener('click',showFavorites);els.clearResults.addEventListener('click',clearResults);
+  els.langEs.addEventListener('click',()=>{const changed=lang!=='es';lang='es';applyLanguage();if(changed)trackLanguageUse();});els.langEn.addEventListener('click',()=>{const changed=lang!=='en';lang='en';applyLanguage();if(changed)trackLanguageUse();});els.searchForm.addEventListener('submit',e=>{e.preventDefault();searchResources();});els.category.addEventListener('change',()=>showCategory(els.category.value));els.favoritesButton.addEventListener('click',showFavorites);els.clearResults.addEventListener('click',clearResults);
   els.settingsToggle.addEventListener('click',toggleSettings);
   els.settingsForm.addEventListener('submit',e=>e.preventDefault());
   els.textSize.addEventListener('change',()=>saveDisplaySettings(copy[lang].settings.saved));
@@ -457,5 +477,5 @@
   els.settingsReset.addEventListener('click',resetDisplaySettings);
   els.updateButton.addEventListener('click',forceUpdateApplication);
   if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').then(reg=>reg.update()).catch(()=>{}));}
-  applyPrefs();applyLanguage();announceCompletedUpdate();
+  applyPrefs();applyLanguage();trackLanguageUse();announceCompletedUpdate();
 })();

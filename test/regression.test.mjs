@@ -8,13 +8,17 @@ const read = file => readFile(new URL(`../${file}`, import.meta.url), 'utf8');
 const require = createRequire(import.meta.url);
 const core = require('../app-core.js');
 
-test('resource search ignores diacritics and constrains very short terms to whole words', () => {
+test('resource search ignores diacritics, handles simple singular/plural variants and constrains very short terms to whole words', () => {
   const camera = { title: 'Cámara inteligente', category: 'Tecnología' };
   const guide = { title: 'Guía práctica para móviles', category: 'Estudios' };
+  const course = { title: 'Curso completo de VoiceOver', category: 'iPhone' };
   const ai = { title: 'IA para la accesibilidad', category: 'Tecnología' };
 
   assert.equal(core.resourceMatches(camera, 'camara'), true);
   assert.equal(core.resourceMatches(camera, 'CAMARA'), true);
+  assert.equal(core.resourceMatches(guide, 'Guías prácticas'), true);
+  assert.equal(core.resourceMatches(course, 'Cursos'), true);
+  assert.equal(core.resourceMatches(course, 'cursores'), false);
   assert.equal(core.resourceMatches(guide, 'IA'), false);
   assert.equal(core.resourceMatches(ai, 'IA'), true);
 });

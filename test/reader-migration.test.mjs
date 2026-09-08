@@ -8,15 +8,17 @@ import {
   addOpenUrlToCatalog
 } from '../scripts/migrate-readers.mjs';
 
-test('Spanish reader starts with an explicit return control', () => {
+test('Spanish reader has explicit return controls at the start and end', () => {
   const source = '<!doctype html><html lang="es"><head><title>Prueba</title></head><body><h1>Documento</h1></body></html>';
   const result = addReturnControl(source, 'es');
   const body = result.slice(result.indexOf('<body'));
-  const buttonIndex = body.indexOf('role="button"');
+  const startIndex = body.indexOf('id="volver-app"');
   const headingIndex = body.indexOf('<h1>');
+  const endIndex = body.indexOf('id="volver-app-final"');
 
-  assert.ok(buttonIndex >= 0);
-  assert.ok(buttonIndex < headingIndex);
+  assert.ok(startIndex >= 0);
+  assert.ok(startIndex < headingIndex);
+  assert.ok(endIndex > headingIndex);
   assert.match(result, /Volver a la pantalla principal de TifloAcosta App/);
   assert.match(result, /href="https:\/\/tifloacosta\.github\.io\/tifloacosta-app\/"/);
 });
@@ -68,7 +70,8 @@ test('every catalog resource has a direct accessible reader with a return contro
     assert.ok(item.openUrl.startsWith(base), `Unexpected reader URL for ${item.title}: ${item.openUrl}`);
     const relative = item.openUrl.slice(base.length).split('?')[0];
     const html = await readFile(new URL(`../${relative}`, import.meta.url), 'utf8');
-    assert.match(html, /id="volver-app"/, `Reader has no return control: ${item.title}`);
+    assert.match(html, /id="volver-app"/, `Reader has no start return control: ${item.title}`);
+    assert.match(html, /id="volver-app-final"/, `Reader has no end return control: ${item.title}`);
     const label = item.lang === 'es'
       ? 'Volver a la pantalla principal de TifloAcosta App'
       : 'Back to the TifloAcosta App main screen';

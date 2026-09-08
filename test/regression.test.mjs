@@ -100,8 +100,8 @@ test('categories have TIFLO_RESOURCES as their only data source', async () => {
 test('video cards use h3 titles and title-specific accessible play names', async () => {
   const source = await read('videos.js');
 
-  assert.match(source, /playLabel:\s*title => `Reproducir: \$\{title\}`/);
-  assert.match(source, /playLabel:\s*title => `Play: \$\{title\}`/);
+  assert.match(source, /playLabel:\s*title => `Abrir reproductor para: \$\{title\}`/);
+  assert.match(source, /playLabel:\s*title => `Open player for: \$\{title\}`/);
   assert.match(source, /const title = document\.createElement\('h3'\)/);
   assert.match(source, /setAttribute\('aria-label', c\.playLabel\(video\.title \|\| ''\)\)/);
   assert.doesNotMatch(source, /const title = document\.createElement\('h2'\)/);

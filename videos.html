@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0D2B45">
-<meta name="tifloacosta-version" content="2.0">
+<meta name="tifloacosta-version" content="2.1">
 <meta name="description" content="Catálogo accesible y actualizado de los vídeos públicos del Canal TifloAcosta en YouTube.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://tifloacosta.github.io/tifloacosta-app/videos.html">
@@ -25,7 +25,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="tifloacosta-favicon.ico">
 <link rel="apple-touch-icon" href="tifloacosta-apple-touch-icon.png">
-<link rel="stylesheet" href="styles.css?v=1.0">
+<link rel="stylesheet" href="styles.css?v=1.1">
 </head>
 <body>
 <a class="skip-link" href="#main">Saltar al contenido principal</a>
@@ -50,7 +50,20 @@
     <p><a id="youtube-channel" class="button-link" href="https://www.youtube.com/@tifloacosta" target="_blank" rel="noopener noreferrer">Abrir Canal TifloAcosta en YouTube</a></p>
   </section>
 
-  <section>
+  <section id="video-player-section" class="video-player-section" aria-labelledby="video-player-heading" hidden>
+    <h2 id="video-player-heading">Reproductor de vídeo</h2>
+    <h3 id="video-player-title" class="video-player-title" tabindex="-1"></h3>
+    <div class="video-player-frame">
+      <iframe id="video-player" title="Reproductor de YouTube" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    </div>
+    <p id="video-player-note" class="muted">Para que la visualización se registre en YouTube, inicia el vídeo con el botón Reproducir del propio reproductor.</p>
+    <div class="video-player-actions">
+      <button id="video-player-close" type="button">Cerrar reproductor y volver a los vídeos</button>
+      <a id="video-player-youtube" class="button-link" href="https://www.youtube.com/@tifloacosta" target="_blank" rel="noopener noreferrer">Abrir este vídeo en YouTube</a>
+    </div>
+  </section>
+
+  <section id="video-controls-section">
     <h2 id="video-controls-heading">Buscar y ordenar</h2>
     <form id="video-search-form">
       <label id="video-search-label" for="video-search">Título o palabras de la descripción</label>
@@ -69,7 +82,7 @@
     </div>
   </section>
 
-  <section>
+  <section id="video-results-section">
     <h2 id="video-results-heading">Resultados</h2>
     <p id="video-status" class="muted" aria-live="polite" aria-atomic="true">Cargando catálogo de vídeos…</p>
     <div id="video-list" class="video-list"></div>
@@ -87,12 +100,12 @@
 
 <div class="site-footer">
   <div class="wrap">
-    <p id="footer-text">TifloAcosta App · Versión 2.0.</p>
+    <p id="footer-text">TifloAcosta App · Versión 2.1.</p>
   </div>
 </div>
 
 <script src="videos-core.js?v=0.16"></script>
-<script src="videos.js?v=2.0"></script>
+<script src="videos.js?v=2.1"></script>
 <script data-goatcounter="https://tifloacosta.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </body>

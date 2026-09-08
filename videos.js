@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = '2.0';
+  const APP_VERSION = '2.1';
   const PAGE_SIZE = 10;
   const core = window.TifloVideoCore;
   if (!core) return;
@@ -16,6 +16,7 @@
     heading: $('#videos-heading'),
     intro: $('#videos-intro'),
     channel: $('#youtube-channel'),
+    controlsSection: $('#video-controls-section'),
     controlsHeading: $('#video-controls-heading'),
     form: $('#video-search-form'),
     search: $('#video-search'),
@@ -24,6 +25,14 @@
     clearButton: $('#video-clear'),
     sortLabel: $('#video-sort-label'),
     sort: $('#video-sort'),
+    playerSection: $('#video-player-section'),
+    playerHeading: $('#video-player-heading'),
+    playerTitle: $('#video-player-title'),
+    playerFrame: $('#video-player'),
+    playerNote: $('#video-player-note'),
+    playerClose: $('#video-player-close'),
+    playerYouTube: $('#video-player-youtube'),
+    resultsSection: $('#video-results-section'),
     resultsHeading: $('#video-results-heading'),
     status: $('#video-status'),
     list: $('#video-list'),
@@ -55,8 +64,13 @@
       status: (start, end, n, page, pages) => `Mostrando ${start} a ${end} de ${n} vídeo${n === 1 ? '' : 's'}. Página ${page} de ${pages}.`,
       noResults: 'No hay vídeos que coincidan con la búsqueda.',
       published: date => `Publicado el ${date}`,
-      play: 'Reproducir',
-      playLabel: title => `Reproducir: ${title}`,
+      play: 'Abrir reproductor',
+      playLabel: title => `Abrir reproductor para: ${title}`,
+      playerHeading: 'Reproductor de vídeo',
+      playerNote: 'Para que la visualización se registre en YouTube, inicia el vídeo con el botón Reproducir del propio reproductor.',
+      closePlayer: 'Cerrar reproductor y volver a los vídeos',
+      openYouTube: 'Abrir este vídeo en YouTube',
+      iframeTitle: title => `Reproductor de YouTube: ${title}`,
       previous: 'Anterior',
       next: 'Siguiente',
       page: (page, pages) => `Página ${page} de ${pages}`,
@@ -83,8 +97,13 @@
       status: (start, end, n, page, pages) => `Showing ${start} to ${end} of ${n} video${n === 1 ? '' : 's'}. Page ${page} of ${pages}.`,
       noResults: 'No videos match your search.',
       published: date => `Published ${date}`,
-      play: 'Play',
-      playLabel: title => `Play: ${title}`,
+      play: 'Open player',
+      playLabel: title => `Open player for: ${title}`,
+      playerHeading: 'Video player',
+      playerNote: 'To have the view registered by YouTube, start the video with the Play button in the YouTube player itself.',
+      closePlayer: 'Close player and return to videos',
+      openYouTube: 'Open this video on YouTube',
+      iframeTitle: title => `YouTube player: ${title}`,
       previous: 'Previous',
       next: 'Next',
       page: (page, pages) => `Page ${page} of ${pages}`,
@@ -100,6 +119,8 @@
   let currentPage = 1;
   let loadError = false;
   let catalogLoaded = false;
+  let activeVideo = null;
+  let lastPlayerVideoId = '';
 
   function readStorage(key) {
     try { return localStorage.getItem(key); } catch { return null; }
@@ -160,6 +181,13 @@
     els.searchButton.textContent = c.searchButton;
     els.clearButton.textContent = c.clearButton;
     els.sortLabel.textContent = c.sortLabel;
+    els.playerHeading.textContent = c.playerHeading;
+    els.playerNote.textContent = c.playerNote;
+    els.playerClose.textContent = c.closePlayer;
+    els.playerYouTube.textContent = c.openYouTube;
+    if (activeVideo) {
+      els.playerFrame.title = c.iframeTitle(activeVideo.title || '');
+    }
     els.resultsHeading.textContent = c.resultsHeading;
     els.prev.textContent = c.previous;
     els.next.textContent = c.next;
@@ -178,6 +206,57 @@
     const slice = text.slice(0, 350);
     const cut = slice.lastIndexOf(' ');
     return `${(cut > 0 ? slice.slice(0, cut) : slice).trim()}…`;
+  }
+
+  function videoId(video) {
+    const id = String(video && video.id || '').trim();
+    if (/^[A-Za-z0-9_-]{11}$/.test(id)) return id;
+    try {
+      const url = new URL(String(video && video.url || ''));
+      if (url.hostname === 'youtu.be') {
+        const shortId = url.pathname.replace(/^\//, '').split('/')[0];
+        if (/^[A-Za-z0-9_-]{11}$/.test(shortId)) return shortId;
+      }
+      const queryId = url.searchParams.get('v') || '';
+      if (/^[A-Za-z0-9_-]{11}$/.test(queryId)) return queryId;
+    } catch {}
+    return '';
+  }
+
+  function youtubeUrl(video) {
+    return video.url || `https://www.youtube.com/watch?v=${encodeURIComponent(videoId(video))}`;
+  }
+
+  function openPlayer(video) {
+    const id = videoId(video);
+    if (!id) {
+      window.open(youtubeUrl(video), '_blank', 'noopener,noreferrer');
+      return;
+    }
+
+    activeVideo = video;
+    lastPlayerVideoId = id;
+    els.playerTitle.textContent = video.title || '';
+    els.playerFrame.title = copy[lang].iframeTitle(video.title || '');
+    els.playerFrame.src = `https://www.youtube.com/embed/${encodeURIComponent(id)}?playsinline=1&rel=0`;
+    els.playerYouTube.href = youtubeUrl(video);
+    els.controlsSection.hidden = true;
+    els.resultsSection.hidden = true;
+    els.playerSection.hidden = false;
+    els.playerTitle.focus();
+  }
+
+  function closePlayer() {
+    const returnId = lastPlayerVideoId;
+    els.playerFrame.removeAttribute('src');
+    els.playerSection.hidden = true;
+    els.controlsSection.hidden = false;
+    els.resultsSection.hidden = false;
+    activeVideo = null;
+    lastPlayerVideoId = '';
+    const trigger = returnId ? els.list.querySelector(`button[data-video-id="${returnId}"]`) : null;
+    if (trigger) trigger.focus();
+    else els.resultsHeading.focus?.();
   }
 
   function createVideoCard(video) {
@@ -219,14 +298,15 @@
       article.append(p);
     }
 
-    const link = document.createElement('a');
-    link.className = 'button-link';
-    link.href = video.url || `https://www.youtube.com/watch?v=${encodeURIComponent(video.id || '')}`;
-    link.textContent = c.play;
-    link.setAttribute('aria-label', c.playLabel(video.title || ''));
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-    article.append(link);
+    const playButton = document.createElement('button');
+    playButton.type = 'button';
+    playButton.className = 'video-play-button';
+    playButton.textContent = c.play;
+    playButton.setAttribute('aria-label', c.playLabel(video.title || ''));
+    const id = videoId(video);
+    if (id) playButton.dataset.videoId = id;
+    playButton.addEventListener('click', () => openPlayer(video));
+    article.append(playButton);
 
     return article;
   }
@@ -305,6 +385,7 @@
     currentPage = 1;
     render();
   });
+  els.playerClose.addEventListener('click', closePlayer);
   els.prev.addEventListener('click', () => {
     currentPage -= 1;
     render();

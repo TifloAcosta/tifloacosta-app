@@ -26,12 +26,26 @@
     return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
   }
 
+  function searchToken(value) {
+    const token = normalizeSearchText(value);
+    if (token.length > 4 && token.endsWith('s')) return token.slice(0, -1);
+    return token;
+  }
+
+  function searchWords(value) {
+    return normalizeSearchText(value).split(/[^a-z0-9]+/).filter(Boolean);
+  }
+
   function resourceMatches(item, query) {
     const term = normalizeSearchText(query);
     if (!term) return false;
     const text = normalizeSearchText(`${item.title || ''} ${item.category || ''}`);
-    if (term.length <= 2) return text.split(/[^a-z0-9]+/).includes(term);
-    return text.includes(term);
+    if (term.length <= 2) return searchWords(text).includes(term);
+    if (text.includes(term)) return true;
+
+    const queryWords = searchWords(term);
+    const textTokens = new Set(searchWords(text).map(searchToken));
+    return queryWords.length > 0 && queryWords.every(word => textTokens.has(searchToken(word)));
   }
 
   function compareNewsItems(a, b) {

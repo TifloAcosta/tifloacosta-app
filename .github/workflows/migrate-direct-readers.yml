@@ -10,6 +10,7 @@ permissions:
   contents: write
 
 jobs:
+  # Refresh both language reader collections
   refresh-readers:
     runs-on: ubuntu-latest
     steps:

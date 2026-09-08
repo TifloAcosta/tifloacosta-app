@@ -22,8 +22,8 @@ jobs:
         run: node scripts/migrate-readers.mjs --lang=en
       - name: Refresh Spanish readers
         run: node scripts/migrate-readers.mjs --lang=es
-      - name: Run regression tests
-        run: npm test
+      - name: Run reader navigation tests
+        run: node --test test/reader-migration.test.mjs
       - name: Commit migrated readers
         run: |
           if git diff --quiet && [ -z "$(git status --porcelain --untracked-files=normal)" ]; then

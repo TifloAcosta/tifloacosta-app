@@ -1015,25 +1015,437 @@ window.TIFLO_RESOURCES = [
     "url": "https://drive.google.com/file/d/1ztd-nsQcYPNa3-Ij40CxlNIGkuEPtX-T/view?usp=drivesdk",
     "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1ztd-nsQcYPNa3-Ij40CxlNIGkuEPtX-T.html",
     "new": true
+  },
+  {
+    "id": "es-video-text-1283tZd-Mu0UWVOmaaFLC1YYAYM228-ig",
+    "lang": "es",
+    "category": "Vídeos del canal en texto",
+    "title": "YouTube por fin deja quitar los Shorts",
+    "url": "https://drive.google.com/file/d/1283tZd-Mu0UWVOmaaFLC1YYAYM228-ig/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/video-text-1283tZd-Mu0UWVOmaaFLC1YYAYM228-ig.html",
+    "new": false
+  },
+  {
+    "id": "es-video-text-1wQLrAgXN4OyGF1WfWBNvUyFtq6w0Q83X",
+    "lang": "es",
+    "category": "Vídeos del canal en texto",
+    "title": "Te enseño cómo usar dos números de WhatsApp en el mismo iPhone",
+    "url": "https://drive.google.com/file/d/1wQLrAgXN4OyGF1WfWBNvUyFtq6w0Q83X/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/video-text-1wQLrAgXN4OyGF1WfWBNvUyFtq6w0Q83X.html",
+    "new": false
+  },
+  {
+    "id": "es-video-text-1R4ky6ksovb8C7FenO4PrZGeGWkCxx0gS",
+    "lang": "es",
+    "category": "Vídeos del canal en texto",
+    "title": "¿Y si hablar otro idioma dejara de ser un muro?",
+    "url": "https://drive.google.com/file/d/1R4ky6ksovb8C7FenO4PrZGeGWkCxx0gS/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/video-text-1R4ky6ksovb8C7FenO4PrZGeGWkCxx0gS.html",
+    "new": false
+  },
+  {
+    "id": "es-video-text-1YDPjBBbWykRGs6y4vuCSpNa4blM7_FR4",
+    "lang": "es",
+    "category": "Vídeos del canal en texto",
+    "title": "SonarPad, la app accesible que lo quiere hacer todo",
+    "url": "https://drive.google.com/file/d/1YDPjBBbWykRGs6y4vuCSpNa4blM7_FR4/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/video-text-1YDPjBBbWykRGs6y4vuCSpNa4blM7_FR4.html",
+    "new": false
+  },
+  {
+    "id": "es-video-text-1g_wJDb7abeFmpCZ2XQn2WEyHXv25OwSR",
+    "lang": "es",
+    "category": "Vídeos del canal en texto",
+    "title": "zEdit, por fin editar vídeo y audio con VoiceOver deja de ser una tortura",
+    "url": "https://drive.google.com/file/d/1g_wJDb7abeFmpCZ2XQn2WEyHXv25OwSR/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/video-text-1g_wJDb7abeFmpCZ2XQn2WEyHXv25OwSR.html",
+    "new": false
+  },
+  {
+    "id": "es-video-text-1YShD7GWgVnynlsDqO1rwqXkf4Qn1RsUM",
+    "lang": "es",
+    "category": "Vídeos del canal en texto",
+    "title": "aGram, por fin Telegram se deja usar bien con VoiceOver",
+    "url": "https://drive.google.com/file/d/1YShD7GWgVnynlsDqO1rwqXkf4Qn1RsUM/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/video-text-1YShD7GWgVnynlsDqO1rwqXkf4Qn1RsUM.html",
+    "new": false
+  },
+  {
+    "id": "es-video-text-1oDsqTFQuVx7HbhtBeJOm3t02uevEPHF0",
+    "lang": "es",
+    "category": "Vídeos del canal en texto",
+    "title": "iOS 26.3, ¿Qué hay de nuevo viejo? 🐰 📱",
+    "url": "https://drive.google.com/file/d/1oDsqTFQuVx7HbhtBeJOm3t02uevEPHF0/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/video-text-1oDsqTFQuVx7HbhtBeJOm3t02uevEPHF0.html",
+    "new": false
+  },
+  {
+    "id": "es-video-text-1m5CyjRCIO06j8RnitR6eiej9XIHhjN4J",
+    "lang": "es",
+    "category": "Vídeos del canal en texto",
+    "title": "La mayor confusión del iPhone se llama iCloud",
+    "url": "https://drive.google.com/file/d/1m5CyjRCIO06j8RnitR6eiej9XIHhjN4J/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/video-text-1m5CyjRCIO06j8RnitR6eiej9XIHhjN4J.html",
+    "new": false
+  },
+  {
+    "id": "es-video-text-1jBl5cjf8pH5AeP0zpTGysNY1c8v3JDGX",
+    "lang": "es",
+    "category": "Vídeos del canal en texto",
+    "title": "Cómo saber si te han bloqueado en WhatsApp",
+    "url": "https://drive.google.com/file/d/1jBl5cjf8pH5AeP0zpTGysNY1c8v3JDGX/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/video-text-1jBl5cjf8pH5AeP0zpTGysNY1c8v3JDGX.html",
+    "new": false
+  },
+  {
+    "id": "es-video-text-1kpUojRKwjJNZGT-ihlVmIpyhGP0SuCnA",
+    "lang": "es",
+    "category": "Vídeos del canal en texto",
+    "title": "Actualizaciones invisibles en iPhone. Qué son y por qué importan",
+    "url": "https://drive.google.com/file/d/1kpUojRKwjJNZGT-ihlVmIpyhGP0SuCnA/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/video-text-1kpUojRKwjJNZGT-ihlVmIpyhGP0SuCnA.html",
+    "new": false
+  },
+  {
+    "id": "es-video-text-1hS5KdXaCeBWsNzoV7TGkxOgHIxNW1dFf",
+    "lang": "es",
+    "category": "Vídeos del canal en texto",
+    "title": "iOS 26.4 sin la nueva Siri pero con cambios que sí interesan",
+    "url": "https://drive.google.com/file/d/1hS5KdXaCeBWsNzoV7TGkxOgHIxNW1dFf/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/video-text-1hS5KdXaCeBWsNzoV7TGkxOgHIxNW1dFf.html",
+    "new": false
+  },
+  {
+    "id": "es-video-text-1eklbvKPJRNVIG3cqtYC3kgze4VWYXHyl",
+    "lang": "es",
+    "category": "Vídeos del canal en texto",
+    "title": "El truco de VoiceOver que estabas esperando. Tú y la IA a solas, sin intromisiones",
+    "url": "https://drive.google.com/file/d/1eklbvKPJRNVIG3cqtYC3kgze4VWYXHyl/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/video-text-1eklbvKPJRNVIG3cqtYC3kgze4VWYXHyl.html",
+    "new": false
+  },
+  {
+    "id": "es-video-text-1cc_7Ia-GkC3ZHPvYioBA5Gqm-hkCv_5f",
+    "lang": "es",
+    "category": "Vídeos del canal en texto",
+    "title": "Toque directo en VoiceOver. Cuándo usarlo y cuándo salir corriendo",
+    "url": "https://drive.google.com/file/d/1cc_7Ia-GkC3ZHPvYioBA5Gqm-hkCv_5f/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/video-text-1cc_7Ia-GkC3ZHPvYioBA5Gqm-hkCv_5f.html",
+    "new": false
+  },
+  {
+    "id": "es-video-text-1b6RsfoqDPcSCjh9GmDa0SDwIIYKBBpBh",
+    "lang": "es",
+    "category": "Vídeos del canal en texto",
+    "title": "Batería en el iPhone. Todo lo que necesitas saber",
+    "url": "https://drive.google.com/file/d/1b6RsfoqDPcSCjh9GmDa0SDwIIYKBBpBh/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/video-text-1b6RsfoqDPcSCjh9GmDa0SDwIIYKBBpBh.html",
+    "new": false
+  },
+  {
+    "id": "es-video-text-1C9ianaduKBjRrK9aDLXykhitXKr_Y_Xx",
+    "lang": "es",
+    "category": "Vídeos del canal en texto",
+    "title": "Un ciego prevenido vale por dos. Alertas sísmicas en el móvil",
+    "url": "https://drive.google.com/file/d/1C9ianaduKBjRrK9aDLXykhitXKr_Y_Xx/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/video-text-1C9ianaduKBjRrK9aDLXykhitXKr_Y_Xx.html",
+    "new": false
+  },
+  {
+    "id": "es-video-text-1qh-wpAEAnxR9ILfXiQnjg4kQ28sv9Dn8",
+    "lang": "es",
+    "category": "Vídeos del canal en texto",
+    "title": "Tu iPhone habla al cargar. Crea un sonido automático al conectar y quitar el cargador",
+    "url": "https://drive.google.com/file/d/1qh-wpAEAnxR9ILfXiQnjg4kQ28sv9Dn8/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/video-text-1qh-wpAEAnxR9ILfXiQnjg4kQ28sv9Dn8.html",
+    "new": false
+  },
+  {
+    "id": "es-video-text-1B87FrddFAyX0L2BxeYvPBtgEzbIDMDw0",
+    "lang": "es",
+    "category": "Vídeos del canal en texto",
+    "title": "Crea informes de accesibilidad en segundos desde tu iPhone",
+    "url": "https://drive.google.com/file/d/1B87FrddFAyX0L2BxeYvPBtgEzbIDMDw0/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/video-text-1B87FrddFAyX0L2BxeYvPBtgEzbIDMDw0.html",
+    "new": false
+  },
+  {
+    "id": "es-video-text-1-xPERxnlRvnHqoNV6vvWovc7ch2JfBoz",
+    "lang": "es",
+    "category": "Vídeos del canal en texto",
+    "title": "2 por 1: detectar mensajes sospechosos y una app que te cuenta la historia de tu entorno",
+    "url": "https://drive.google.com/file/d/1-xPERxnlRvnHqoNV6vvWovc7ch2JfBoz/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/video-text-1-xPERxnlRvnHqoNV6vvWovc7ch2JfBoz.html",
+    "new": false
+  },
+  {
+    "id": "es-video-text-11_yUfziaI4rhl-XHNcKNOvhz1en3-3IT",
+    "lang": "es",
+    "category": "Vídeos del canal en texto",
+    "title": "Linux para personas ciegas. ¿Es realmente usable con lector de pantalla?",
+    "url": "https://drive.google.com/file/d/11_yUfziaI4rhl-XHNcKNOvhz1en3-3IT/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/video-text-11_yUfziaI4rhl-XHNcKNOvhz1en3-3IT.html",
+    "new": false
+  },
+  {
+    "id": "es-video-text-19kCJGPZV4Wm04qtELfbubezUx2DC5bqv",
+    "lang": "es",
+    "category": "Vídeos del canal en texto",
+    "title": "Vox Libri, un reproductor de libros pensado de verdad para personas ciegas",
+    "url": "https://drive.google.com/file/d/19kCJGPZV4Wm04qtELfbubezUx2DC5bqv/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/video-text-19kCJGPZV4Wm04qtELfbubezUx2DC5bqv.html",
+    "new": false
+  },
+  {
+    "id": "es-video-text-1frXEmS6ST9MqdNy9ZbpZ3Lhks3QVFi6u",
+    "lang": "es",
+    "category": "Vídeos del canal en texto",
+    "title": "TifloAcosta ya tiene app: todo cambia a partir de aquí",
+    "url": "https://drive.google.com/file/d/1frXEmS6ST9MqdNy9ZbpZ3Lhks3QVFi6u/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/video-text-1frXEmS6ST9MqdNy9ZbpZ3Lhks3QVFi6u.html",
+    "new": false
+  },
+  {
+    "id": "es-video-text-1IQ79WwvwNPv9qdB8wq8SyipBh_utLP_9",
+    "lang": "es",
+    "category": "Vídeos del canal en texto",
+    "title": "Este atajo no pregunta, ve un código y se pone a investigar",
+    "url": "https://drive.google.com/file/d/1IQ79WwvwNPv9qdB8wq8SyipBh_utLP_9/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/video-text-1IQ79WwvwNPv9qdB8wq8SyipBh_utLP_9.html",
+    "new": false
+  },
+  {
+    "id": "es-video-text-1a7wZ1HLBWKmNaWVbpnRvMBZfCXzXXsa4",
+    "lang": "es",
+    "category": "Vídeos del canal en texto",
+    "title": "Gestos táctiles de VoiceOver en iOS: cómo navegar y controlar el iPhone sin ver",
+    "url": "https://drive.google.com/file/d/1a7wZ1HLBWKmNaWVbpnRvMBZfCXzXXsa4/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/video-text-1a7wZ1HLBWKmNaWVbpnRvMBZfCXzXXsa4.html",
+    "new": false
+  },
+  {
+    "id": "es-video-text-18tyEZyrSDNZV3iSKTId6xx44Jdz-Wloq",
+    "lang": "es",
+    "category": "Vídeos del canal en texto",
+    "title": "VoiceOver: ¿Esa voz es nueva?",
+    "url": "https://drive.google.com/file/d/18tyEZyrSDNZV3iSKTId6xx44Jdz-Wloq/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/video-text-18tyEZyrSDNZV3iSKTId6xx44Jdz-Wloq.html",
+    "new": false
+  },
+  {
+    "id": "en-video-text-1xki8LUVe3iWdG6CvPSr3riw38-KEuB6I",
+    "lang": "en",
+    "category": "Channel Videos in Text",
+    "title": "YouTube Finally Lets You Get Rid of Shorts",
+    "url": "https://drive.google.com/file/d/1xki8LUVe3iWdG6CvPSr3riw38-KEuB6I/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/video-text-1xki8LUVe3iWdG6CvPSr3riw38-KEuB6I.html",
+    "new": false
+  },
+  {
+    "id": "en-video-text-1V-v2CRxMeRdjfrfe_eqSujixT7jfFoMp",
+    "lang": "en",
+    "category": "Channel Videos in Text",
+    "title": "How to Use Two WhatsApp Numbers on the Same iPhone",
+    "url": "https://drive.google.com/file/d/1V-v2CRxMeRdjfrfe_eqSujixT7jfFoMp/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/video-text-1V-v2CRxMeRdjfrfe_eqSujixT7jfFoMp.html",
+    "new": false
+  },
+  {
+    "id": "en-video-text-1l0PnRPFpoSJ39asuhcAc-A6lVyxTlbiR",
+    "lang": "en",
+    "category": "Channel Videos in Text",
+    "title": "What If Speaking Another Language Stopped Being a Barrier?",
+    "url": "https://drive.google.com/file/d/1l0PnRPFpoSJ39asuhcAc-A6lVyxTlbiR/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/video-text-1l0PnRPFpoSJ39asuhcAc-A6lVyxTlbiR.html",
+    "new": false
+  },
+  {
+    "id": "en-video-text-1zLjjne41ig3-nxwSTkKIMeUasN0VIv_q",
+    "lang": "en",
+    "category": "Channel Videos in Text",
+    "title": "SonarPad, The Accessible App That Wants to Do Everything",
+    "url": "https://drive.google.com/file/d/1zLjjne41ig3-nxwSTkKIMeUasN0VIv_q/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/video-text-1zLjjne41ig3-nxwSTkKIMeUasN0VIv_q.html",
+    "new": false
+  },
+  {
+    "id": "en-video-text-1RQ9MSMjnda9aD-MaYkaq_0oC1MYjY9JK",
+    "lang": "en",
+    "category": "Channel Videos in Text",
+    "title": "zEdit, At Last Editing Video and Audio with VoiceOver Stops Being a Torture",
+    "url": "https://drive.google.com/file/d/1RQ9MSMjnda9aD-MaYkaq_0oC1MYjY9JK/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/video-text-1RQ9MSMjnda9aD-MaYkaq_0oC1MYjY9JK.html",
+    "new": false
+  },
+  {
+    "id": "en-video-text-1_IoYocPxWXfzdfiPq1g7DvhACOnKqLTB",
+    "lang": "en",
+    "category": "Channel Videos in Text",
+    "title": "aGram, At Last Telegram Is Easy to Use with VoiceOver",
+    "url": "https://drive.google.com/file/d/1_IoYocPxWXfzdfiPq1g7DvhACOnKqLTB/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/video-text-1_IoYocPxWXfzdfiPq1g7DvhACOnKqLTB.html",
+    "new": false
+  },
+  {
+    "id": "en-video-text-1Dw7TZlbiONYHvWwRUy7O97iXq-MgrJlh",
+    "lang": "en",
+    "category": "Channel Videos in Text",
+    "title": "iOS 26.3: What's New?",
+    "url": "https://drive.google.com/file/d/1Dw7TZlbiONYHvWwRUy7O97iXq-MgrJlh/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/video-text-1Dw7TZlbiONYHvWwRUy7O97iXq-MgrJlh.html",
+    "new": false
+  },
+  {
+    "id": "en-video-text-1IfdyTCozylWLU_EAhcJE0JgFL1Lane3o",
+    "lang": "en",
+    "category": "Channel Videos in Text",
+    "title": "The biggest iPhone confusion is called iCloud",
+    "url": "https://drive.google.com/file/d/1IfdyTCozylWLU_EAhcJE0JgFL1Lane3o/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/video-text-1IfdyTCozylWLU_EAhcJE0JgFL1Lane3o.html",
+    "new": false
+  },
+  {
+    "id": "en-video-text-1Ir74IndIPK0xqD5eKBOt0nBuOHpDGJSu",
+    "lang": "en",
+    "category": "Channel Videos in Text",
+    "title": "How to tell if someone blocked you on WhatsApp",
+    "url": "https://drive.google.com/file/d/1Ir74IndIPK0xqD5eKBOt0nBuOHpDGJSu/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/video-text-1Ir74IndIPK0xqD5eKBOt0nBuOHpDGJSu.html",
+    "new": false
+  },
+  {
+    "id": "en-video-text-1o_nWqLndHJySLEUEV7gCoBg3QE3GjfJ6",
+    "lang": "en",
+    "category": "Channel Videos in Text",
+    "title": "Invisible iPhone updates. What they are and why they matter",
+    "url": "https://drive.google.com/file/d/1o_nWqLndHJySLEUEV7gCoBg3QE3GjfJ6/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/video-text-1o_nWqLndHJySLEUEV7gCoBg3QE3GjfJ6.html",
+    "new": false
+  },
+  {
+    "id": "en-video-text-1jxfsu_AUXt4hTkhKwIbJEiuBhM6PIqIt",
+    "lang": "en",
+    "category": "Channel Videos in Text",
+    "title": "iOS 26.4 without the new Siri but with changes that actually matter",
+    "url": "https://drive.google.com/file/d/1jxfsu_AUXt4hTkhKwIbJEiuBhM6PIqIt/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/video-text-1jxfsu_AUXt4hTkhKwIbJEiuBhM6PIqIt.html",
+    "new": false
+  },
+  {
+    "id": "en-video-text-1CaNZuEThEVd24kW42eo_oe46vkIsPHn-",
+    "lang": "en",
+    "category": "Channel Videos in Text",
+    "title": "The VoiceOver Trick You Were Waiting For. Just You and AI, Without Interruptions",
+    "url": "https://drive.google.com/file/d/1CaNZuEThEVd24kW42eo_oe46vkIsPHn-/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/video-text-1CaNZuEThEVd24kW42eo_oe46vkIsPHn-.html",
+    "new": false
+  },
+  {
+    "id": "en-video-text-1l3maUilnCNO4cvLf8UQmfXT4cxOtriIp",
+    "lang": "en",
+    "category": "Channel Videos in Text",
+    "title": "Direct Touch in VoiceOver. When to Use It and When to Run Away",
+    "url": "https://drive.google.com/file/d/1l3maUilnCNO4cvLf8UQmfXT4cxOtriIp/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/video-text-1l3maUilnCNO4cvLf8UQmfXT4cxOtriIp.html",
+    "new": false
+  },
+  {
+    "id": "en-video-text-1Y5cvUp1VpU4G7MsBianGiJ3eJH7Rzacw",
+    "lang": "en",
+    "category": "Channel Videos in Text",
+    "title": "iPhone Battery. Everything You Need to Know",
+    "url": "https://drive.google.com/file/d/1Y5cvUp1VpU4G7MsBianGiJ3eJH7Rzacw/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/video-text-1Y5cvUp1VpU4G7MsBianGiJ3eJH7Rzacw.html",
+    "new": false
+  },
+  {
+    "id": "en-video-text-1KvQZhBJ8g3WOMbkMR0Jjvh-8nYsHJSFM",
+    "lang": "en",
+    "category": "Channel Videos in Text",
+    "title": "A Blind Person Forewarned Is Forearmed. Earthquake Alerts on Your Phone",
+    "url": "https://drive.google.com/file/d/1KvQZhBJ8g3WOMbkMR0Jjvh-8nYsHJSFM/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/video-text-1KvQZhBJ8g3WOMbkMR0Jjvh-8nYsHJSFM.html",
+    "new": false
+  },
+  {
+    "id": "en-video-text-1dpQE_6lafcY0xMK4H2PsKR3IOp1MIdae",
+    "lang": "en",
+    "category": "Channel Videos in Text",
+    "title": "Make Your iPhone Speak When Charging. Play a Sound When Connecting or Disconnecting the Charger",
+    "url": "https://drive.google.com/file/d/1dpQE_6lafcY0xMK4H2PsKR3IOp1MIdae/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/video-text-1dpQE_6lafcY0xMK4H2PsKR3IOp1MIdae.html",
+    "new": false
+  },
+  {
+    "id": "en-video-text-1hPlXxZNQC6eKte1sapvVlu_ykHb3vY6z",
+    "lang": "en",
+    "category": "Channel Videos in Text",
+    "title": "Create Accessibility Reports in Seconds from Your iPhone",
+    "url": "https://drive.google.com/file/d/1hPlXxZNQC6eKte1sapvVlu_ykHb3vY6z/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/video-text-1hPlXxZNQC6eKte1sapvVlu_ykHb3vY6z.html",
+    "new": false
+  },
+  {
+    "id": "en-video-text-1HXtrYRVM6ki0i9Y2eScYQl3B_VFuC0dg",
+    "lang": "en",
+    "category": "Channel Videos in Text",
+    "title": "Two in one: checking suspicious messages and an app that tells you the history around you",
+    "url": "https://drive.google.com/file/d/1HXtrYRVM6ki0i9Y2eScYQl3B_VFuC0dg/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/video-text-1HXtrYRVM6ki0i9Y2eScYQl3B_VFuC0dg.html",
+    "new": false
+  },
+  {
+    "id": "en-video-text-1K6d6a06A_9H_-1AYopbTPs-jkxCgFELL",
+    "lang": "en",
+    "category": "Channel Videos in Text",
+    "title": "Linux for blind people. Is it really usable with a screen reader?",
+    "url": "https://drive.google.com/file/d/1K6d6a06A_9H_-1AYopbTPs-jkxCgFELL/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/video-text-1K6d6a06A_9H_-1AYopbTPs-jkxCgFELL.html",
+    "new": false
+  },
+  {
+    "id": "en-video-text-1nBiUH2h9G4j3u9NsLifvmFouaJTLaPrO",
+    "lang": "en",
+    "category": "Channel Videos in Text",
+    "title": "Vox Libri: a book reader genuinely designed with blind users in mind",
+    "url": "https://drive.google.com/file/d/1nBiUH2h9G4j3u9NsLifvmFouaJTLaPrO/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/video-text-1nBiUH2h9G4j3u9NsLifvmFouaJTLaPrO.html",
+    "new": false
+  },
+  {
+    "id": "en-video-text-1CVbXD-R0C58VxBcA48QxRvY7Ku8aA7Rj",
+    "lang": "en",
+    "category": "Channel Videos in Text",
+    "title": "TifloAcosta Now Has an App: Everything Changes From Here",
+    "url": "https://drive.google.com/file/d/1CVbXD-R0C58VxBcA48QxRvY7Ku8aA7Rj/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/video-text-1CVbXD-R0C58VxBcA48QxRvY7Ku8aA7Rj.html",
+    "new": false
+  },
+  {
+    "id": "en-video-text-19ufQzuAWLkFsldrxISp9O_GLDUJ85GGt",
+    "lang": "en",
+    "category": "Channel Videos in Text",
+    "title": "This Shortcut Doesn't Ask Questions: It Sees a Code and Starts Investigating",
+    "url": "https://drive.google.com/file/d/19ufQzuAWLkFsldrxISp9O_GLDUJ85GGt/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/video-text-19ufQzuAWLkFsldrxISp9O_GLDUJ85GGt.html",
+    "new": false
+  },
+  {
+    "id": "en-video-text-1k4XM7_ZOPejXYjfb9LJOIms6wGARa4WO",
+    "lang": "en",
+    "category": "Channel Videos in Text",
+    "title": "VoiceOver Touch Gestures on iOS: How to Navigate and Control the iPhone Without Seeing",
+    "url": "https://drive.google.com/file/d/1k4XM7_ZOPejXYjfb9LJOIms6wGARa4WO/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/video-text-1k4XM7_ZOPejXYjfb9LJOIms6wGARa4WO.html",
+    "new": false
+  },
+  {
+    "id": "en-video-text-1LX0pE_XVBAbZ76Vmsc2mw2qJ4rcCU6Bf",
+    "lang": "en",
+    "category": "Channel Videos in Text",
+    "title": "VoiceOver: Is That Voice New?",
+    "url": "https://drive.google.com/file/d/1LX0pE_XVBAbZ76Vmsc2mw2qJ4rcCU6Bf/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/video-text-1LX0pE_XVBAbZ76Vmsc2mw2qJ4rcCU6Bf.html",
+    "new": false
   }
 ];
-
-(() => {
-  'use strict';
-
-  const libraryRoots = {
-    es: 'https://drive.google.com/drive/folders/1qUy0-ESqWhmIbYC00gpIdHHMZCPla_1r',
-    en: 'https://drive.google.com/drive/folders/1fVQp_eDGWoVO_fp7xFGdPllXMMWZalvx?usp=sharing'
-  };
-
-  if (typeof document === 'undefined') return;
-
-  const currentLanguage = () => document.documentElement.lang?.toLowerCase().startsWith('en') ? 'en' : 'es';
-
-  document.getElementById('more-select')?.addEventListener('change', event => {
-    if (event.currentTarget.value !== 'library') return;
-    event.stopImmediatePropagation();
-    window.location.href = libraryRoots[currentLanguage()];
-  }, true);
-
-})();

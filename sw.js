@@ -1,9 +1,9 @@
-const CACHE = 'tifloacosta-app-v2-1-video-player';
+const CACHE = 'tifloacosta-app-v2-1-video-text-library';
 const SHELL = [
   './',
   './index.html',
   './styles.css?v=1.1',
-  './data.js?v=0.18',
+  './data.js?v=0.19',
   './app-core.js?v=1.2',
   './app.js?v=2.1',
   './notifications.js?v=0.15',

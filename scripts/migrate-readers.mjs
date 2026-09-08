@@ -1,4 +1,4 @@
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -26,14 +26,26 @@ export function readerUrl(lang, driveId) {
 export function addReturnControl(html, lang) {
   const label = LABELS[lang];
   if (!label) throw new Error(`Unsupported language: ${lang}`);
-  if (html.includes('id="volver-app"')) return html;
 
   const bodyMatch = html.match(/<body\b[^>]*>/i);
   if (!bodyMatch || bodyMatch.index == null) throw new Error('HTML document has no body element');
 
-  const control = `\n<nav aria-label="${label}" style="margin:0 0 1rem 0">\n  <a id="volver-app" href="${APP_HOME}" role="button" aria-label="${label}" style="display:inline-block;font:inherit;font-weight:700;padding:.7rem 1rem;border:2px solid currentColor;border-radius:.35rem;color:inherit;background:transparent;text-decoration:none">${label}</a>\n</nav>`;
-  const insertAt = bodyMatch.index + bodyMatch[0].length;
-  return `${html.slice(0, insertAt)}${control}${html.slice(insertAt)}`;
+  const control = id => `\n<nav aria-label="${label}" style="margin:1rem 0">\n  <a id="${id}" href="${APP_HOME}" role="button" aria-label="${label}" style="display:inline-block;font:inherit;font-weight:700;padding:.7rem 1rem;border:2px solid currentColor;border-radius:.35rem;color:inherit;background:transparent;text-decoration:none">${label}</a>\n</nav>`;
+
+  let result = html;
+  if (!result.includes('id="volver-app"')) {
+    const currentBody = result.match(/<body\b[^>]*>/i);
+    const insertAt = currentBody.index + currentBody[0].length;
+    result = `${result.slice(0, insertAt)}${control('volver-app')}${result.slice(insertAt)}`;
+  }
+
+  if (!result.includes('id="volver-app-final"')) {
+    const closingBody = result.search(/<\/body\s*>/i);
+    if (closingBody < 0) throw new Error('HTML document has no closing body element');
+    result = `${result.slice(0, closingBody)}${control('volver-app-final')}${result.slice(closingBody)}`;
+  }
+
+  return result;
 }
 
 export function addOpenUrlToCatalog(source, resourceId, openUrl) {
@@ -118,6 +130,28 @@ function parseArgs(argv) {
   return { lang, limit };
 }
 
+async function refreshExistingReaders(targetDir, lang) {
+  let entries = [];
+  try {
+    entries = await readdir(targetDir, { withFileTypes: true });
+  } catch (error) {
+    if (error.code === 'ENOENT') return 0;
+    throw error;
+  }
+
+  let updated = 0;
+  for (const entry of entries) {
+    if (!entry.isFile() || !entry.name.endsWith('.html')) continue;
+    const filePath = path.join(targetDir, entry.name);
+    const html = await readFile(filePath, 'utf8');
+    const refreshed = addReturnControl(html, lang);
+    if (refreshed === html) continue;
+    await writeFile(filePath, refreshed, 'utf8');
+    updated += 1;
+  }
+  return updated;
+}
+
 async function runMigration() {
   const { lang, limit } = parseArgs(process.argv.slice(2));
   const here = path.dirname(fileURLToPath(import.meta.url));
@@ -126,14 +160,17 @@ async function runMigration() {
   let source = await readFile(dataPath, 'utf8');
   const resources = parseResources(source);
   const pending = resources.filter(item => item.lang === lang && !item.openUrl).slice(0, limit);
+  const targetDir = path.join(root, 'docs', lang);
+  await mkdir(targetDir, { recursive: true });
+
+  const refreshed = await refreshExistingReaders(targetDir, lang);
+  console.log(`Refreshed ${refreshed} existing ${lang} reader(s) with start/end return controls.`);
 
   if (!pending.length) {
     console.log(`No ${lang} resources need migration.`);
     return;
   }
 
-  const targetDir = path.join(root, 'docs', lang);
-  await mkdir(targetDir, { recursive: true });
   const failures = [];
   let migrated = 0;
 

@@ -10,15 +10,17 @@ permissions:
   contents: write
 
 jobs:
-  migrate-english:
+  refresh-readers:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Migrate English readers
-        run: node scripts/migrate-readers.mjs --lang=en || true
+      - name: Refresh English readers
+        run: node scripts/migrate-readers.mjs --lang=en
+      - name: Refresh Spanish readers
+        run: node scripts/migrate-readers.mjs --lang=es
       - name: Run regression tests
         run: npm test
       - name: Commit migrated readers
@@ -29,6 +31,6 @@ jobs:
           fi
           git config user.name "TifloAcosta automation"
           git config user.email "146574974+TifloAcosta@users.noreply.github.com"
-          git add data.js docs/en
-          git commit -m "content: migrate valid English direct readers"
+          git add data.js docs/en docs/es
+          git commit -m "accessibility: add reader return controls at both ends"
           git push

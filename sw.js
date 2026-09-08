@@ -1,15 +1,15 @@
-const CACHE = 'tifloacosta-app-v2-1-foal';
+const CACHE = 'tifloacosta-app-v2-1-video-player';
 const SHELL = [
   './',
   './index.html',
-  './styles.css?v=1.0',
+  './styles.css?v=1.1',
   './data.js?v=0.18',
   './app-core.js?v=1.2',
   './app.js?v=2.1',
   './notifications.js?v=0.15',
   './videos.html',
   './videos-core.js?v=0.16',
-  './videos.js?v=2.0',
+  './videos.js?v=2.1',
   './videos.json',
   './offline.html',
   './manifest.webmanifest',

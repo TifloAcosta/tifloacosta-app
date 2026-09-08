@@ -1,0 +1,65 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="author" content="Tony Acosta"><meta name="publisher" content="TifloAcosta">
+<title>Tu iPhone habla al cargar: crea un sonido automático al conectar y quitar el cargador</title>
+<style>
+:root{color-scheme:light dark}
+*{box-sizing:border-box}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.65;max-width:64rem;margin:0 auto;padding:1.25rem}
+a{overflow-wrap:anywhere;text-underline-offset:.15em}
+a:focus{outline:.2rem solid currentColor;outline-offset:.2rem}
+.skip-link{position:absolute;left:-9999px}
+.skip-link:focus{position:static;display:inline-block;margin-bottom:1rem}
+.brand img{display:block;width:8rem;max-width:40%;height:auto}
+.reader-nav{margin:0 0 1rem}
+.reader-nav a{display:inline-block;font-weight:700;padding:.65rem .9rem;border:2px solid currentColor;border-radius:.4rem;text-decoration:none}
+h1,h2{line-height:1.25}
+h2{margin-top:2rem}
+.meta{margin:.4rem 0 1.2rem}
+footer{margin-top:2.5rem}
+@media print{.skip-link,.reader-nav{display:none}body{max-width:none}}
+</style></head><body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<nav class="reader-nav" aria-label="Volver a TifloAcosta App"><a href="https://tifloacosta.github.io/tifloacosta-app/">Volver a TifloAcosta App</a></nav>
+<header><div class="brand"><img src="https://tifloacosta.github.io/tifloacosta-app/tifloacosta-icon-512.png" alt="TifloAcosta"></div>
+<h1>Tu iPhone habla al cargar: crea un sonido automático al conectar y quitar el cargador</h1><p class="meta">Versión escrita accesible del contenido de un vídeo de Canal TifloAcosta.</p></header>
+<main id="contenido">
+<section><h2>Introducción</h2>
+<p>Tony Acosta presenta en Canal TifloAcosta una automatización de iOS para conseguir que el iPhone reproduzca un archivo de audio automáticamente cada vez que se conecta o se desconecta del cargador.</p>
+</section>
+<section><h2>Preparar el archivo de sonido</h2>
+<p>Antes de crear la automatización, Tony explica que hay que disponer del archivo de audio que se utilizará como aviso.</p>
+<p>Abre la aplicación Archivos y entra en iCloud Drive. Dentro de esa ubicación accede a la carpeta “Shortcuts”, donde guarda el archivo de sonido utilizado durante la demostración.</p>
+<p>El archivo se identifica como “carga.mp3”. Tony insiste en que, cuando más adelante se escriba la ruta del archivo dentro del atajo, el nombre y la extensión deben coincidir exactamente con el archivo guardado para que pueda localizarse correctamente.</p>
+</section>
+<section><h2>Abrir la sección Automatización</h2>
+<p>Tony entra en la aplicación Atajos y selecciona la pestaña “Automatización” de la barra inferior.</p>
+<p>En la pantalla de automatizaciones activa “Nueva automatización”. Se abre la lista de eventos disponibles y selecciona “Cargador”, que VoiceOver identifica como la opción relacionada con el momento en que el iPhone se conecta a la corriente.</p>
+</section>
+<section><h2>Configurar cuándo debe ejecutarse</h2>
+<p>En las opciones del cargador, “Está conectado” aparece seleccionado inicialmente. Tony activa también “Está desconectado” para que la misma automatización se ejecute tanto al conectar como al retirar el cargador.</p>
+<p>En la forma de ejecución cambia “Ejecutar tras confirmar” por “Ejecutar inmediatamente”, de modo que no sea necesario aceptar manualmente cada ejecución.</p>
+<p>La opción “Notificar cuando se ejecute” permanece desactivada para evitar una notificación adicional cada vez que se active la automatización.</p>
+<p>Después pulsa “Siguiente”.</p>
+</section>
+<section><h2>Crear las acciones de la automatización</h2>
+<p>En la pantalla siguiente Tony activa “Crear nuevo atajo”.</p>
+<p>Durante la demostración señala que, si VoiceOver tiene dificultades para activar ese control, puede recurrirse al reconocimiento de pantalla desde el rotor para poder interactuar con él.</p>
+<p>Una vez dentro del editor, activa “Buscar acciones” y escribe “Obtener archivo de carpeta”.</p>
+<p>Entre los resultados selecciona la acción “Obtener archivo de carpeta”. La automatización muestra entonces una estructura del tipo “Obtener archivo de Shortcuts en la ruta…”.</p>
+<p>Tony utiliza las acciones del rotor de VoiceOver sobre esa instrucción para localizar la opción que permite editar la ruta. En el campo correspondiente escribe “carga.mp3”, coincidiendo con el archivo que había guardado previamente en la carpeta Shortcuts.</p>
+</section>
+<section><h2>Añadir la reproducción del sonido</h2>
+<p>Tony vuelve al campo “Buscar acciones” y escribe “Reproducir sonido”.</p>
+<p>Selecciona la acción “Reproducir sonido” entre los resultados. Con ello, la automatización queda formada por una primera acción que obtiene el archivo guardado y una segunda que lo reproduce.</p>
+<p>Para terminar, activa “OK” y después “Añadir” para guardar la automatización.</p>
+</section>
+<section><h2>Comprobación práctica</h2>
+<p>Tony realiza una prueba para comprobar el resultado.</p>
+<p>Primero desconecta el auricular que tenía conectado al puerto del teléfono. A continuación conecta el cable del cargador al iPhone. La automatización se ejecuta de inmediato y reproduce el sonido configurado.</p>
+<p>Después desconecta el cargador. El iPhone vuelve a ejecutar la automatización y reproduce nuevamente la misma alerta sonora.</p>
+</section>
+<section><h2>Conclusión y despedida</h2>
+<p>Tony concluye la demostración invitando a dejar comentarios, pulsar “me gusta” y compartir el vídeo. Se despide hasta una próxima entrega de Canal TifloAcosta.</p>
+</section>
+</main><footer><p>Revisión TifloAcosta: 7 de septiembre de 2026.</p></footer></body></html>

@@ -1,5 +1,23 @@
 window.TIFLO_RESOURCES = [
   {
+    "id": "es-13crgHIVB9E0YUYNmF6hlyFgi-ymhwb_V",
+    "lang": "es",
+    "category": "iPhone",
+    "title": "Apple 2026: todo lo nuevo de la keynote",
+    "url": "https://drive.google.com/file/d/13crgHIVB9E0YUYNmF6hlyFgi-ymhwb_V/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-13crgHIVB9E0YUYNmF6hlyFgi-ymhwb_V.html",
+    "new": true
+  },
+  {
+    "id": "en-1NhzNbXNly2cv_QB2WQgxjo5Ex0L4HHuB",
+    "lang": "en",
+    "category": "iPhone",
+    "title": "Apple 2026: Everything New from the Keynote",
+    "url": "https://drive.google.com/file/d/1NhzNbXNly2cv_QB2WQgxjo5Ex0L4HHuB/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1NhzNbXNly2cv_QB2WQgxjo5Ex0L4HHuB.html",
+    "new": true
+  },
+  {
     "id": "es-1G66sYkWuXIwYggrMvHq74W1E1EsX_Vvx",
     "lang": "es",
     "category": "Android",

@@ -153,6 +153,15 @@ window.TIFLO_RESOURCES = [
     "new": false
   },
   {
+    "id": "es-1uTEYvSDBUxzvxPmLFkQa78VSqJtEHsGI",
+    "lang": "es",
+    "category": "Estudios",
+    "title": "Cuando el mismo iPhone no hace lo mismo",
+    "url": "https://drive.google.com/file/d/1uTEYvSDBUxzvxPmLFkQa78VSqJtEHsGI/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-1uTEYvSDBUxzvxPmLFkQa78VSqJtEHsGI.html",
+    "new": true
+  },
+  {
     "id": "es-foal-america-latina-2026",
     "lang": "es",
     "category": "Estudios",
@@ -844,6 +853,15 @@ window.TIFLO_RESOURCES = [
     "url": "https://drive.google.com/file/d/1vcdA-RuOzb-908X42S1fkfpLGy6KBpPY/view?usp=drivesdk",
     "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1vcdA-RuOzb-908X42S1fkfpLGy6KBpPY.html",
     "new": false
+  },
+  {
+    "id": "en-1ZEgNb3rI49H28DWmDnSUaB2OVFrHyK_9",
+    "lang": "en",
+    "category": "Research and Studies",
+    "title": "When the same iPhone doesn’t do the same thing",
+    "url": "https://drive.google.com/file/d/1ZEgNb3rI49H28DWmDnSUaB2OVFrHyK_9/view?usp=drivesdk",
+    "openUrl": "https://tifloacosta.github.io/tifloacosta-app/docs/en/reader-1ZEgNb3rI49H28DWmDnSUaB2OVFrHyK_9.html",
+    "new": true
   },
   {
     "id": "en-1Q6jUzIRoBlbpiHE4Wc6VCDnCH8axd9W4",

@@ -15,14 +15,51 @@
       .trim();
   }
 
+  function indexedMetadata(video) {
+    const index = typeof globalThis !== 'undefined' ? globalThis.TIFLO_VIDEO_SEARCH_INDEX : null;
+    const videos = index && typeof index === 'object' && index.videos && typeof index.videos === 'object'
+      ? index.videos
+      : {};
+    const extra = videos[video && video.id];
+    return extra && typeof extra === 'object' ? extra : {};
+  }
+
+  function keywordText(value) {
+    if (Array.isArray(value)) return value.join(' ');
+    return String(value || '');
+  }
+
+  function supplementalText(video) {
+    const extra = indexedMetadata(video);
+    return [
+      keywordText(video && video.keywords),
+      keywordText(extra.keywords),
+      video && video.searchText,
+      extra.searchText,
+      video && video.adaptedText,
+      extra.adaptedText
+    ].filter(Boolean).join(' ');
+  }
+
   function filterVideos(videos, query) {
     const items = Array.isArray(videos) ? videos : [];
     const term = normalizeText(query);
     if (!term) return [...items];
     const words = term.split(' ').filter(Boolean);
     return items.filter(video => {
-      const haystack = normalizeText(`${video.title || ''} ${video.description || ''} ${video.excerpt || ''}`);
+      const haystack = normalizeText(`${video.title || ''} ${video.description || ''} ${video.excerpt || ''} ${supplementalText(video)}`);
       return words.every(word => haystack.includes(word));
+    });
+  }
+
+  function applySearchIndex(videos, index) {
+    const items = Array.isArray(videos) ? videos : [];
+    const entries = index && typeof index === 'object' && index.videos && typeof index.videos === 'object'
+      ? index.videos
+      : {};
+    return items.map(video => {
+      const extra = entries[video && video.id];
+      return extra && typeof extra === 'object' ? { ...video, ...extra } : { ...video };
     });
   }
 
@@ -56,7 +93,7 @@
     };
   }
 
-  return { normalizeText, filterVideos, sortVideos, paginate };
+  return { normalizeText, filterVideos, applySearchIndex, sortVideos, paginate };
 });
 
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {

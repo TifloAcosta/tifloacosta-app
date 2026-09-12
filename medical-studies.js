@@ -20,8 +20,8 @@
       lang: 'es',
       category: 'Estudios médicos',
       title: 'Cuando el termómetro se pone chulo',
-      url: 'https://drive.google.com/file/d/16UdR4atwcWbd446dwT4VVR5GlC0LOsHn/view?usp=drivesdk',
-      openUrl: 'https://drive.google.com/file/d/16UdR4atwcWbd446dwT4VVR5GlC0LOsHn/view?usp=drivesdk',
+      url: 'https://drive.google.com/file/d/1_VyVgtFln1tSznf9ct3990CGZ_i4wOO1/view?usp=drivesdk',
+      openUrl: 'https://drive.google.com/file/d/1_VyVgtFln1tSznf9ct3990CGZ_i4wOO1/view?usp=drivesdk',
       new: true
     },
     {
@@ -29,8 +29,8 @@
       lang: 'en',
       category: 'Medical Studies',
       title: 'When the Thermometer Gets Cocky',
-      url: 'https://drive.google.com/file/d/1HZRDwjukiqZxTkjy0eSqW_m5FXqDOVcf/view?usp=drivesdk',
-      openUrl: 'https://drive.google.com/file/d/1HZRDwjukiqZxTkjy0eSqW_m5FXqDOVcf/view?usp=drivesdk',
+      url: 'https://drive.google.com/file/d/1yEGRwTEzGjgEzmYtP2wnlnaACFFbdho6/view?usp=drivesdk',
+      openUrl: 'https://drive.google.com/file/d/1yEGRwTEzGjgEzmYtP2wnlnaACFFbdho6/view?usp=drivesdk',
       new: true
     }
   ];

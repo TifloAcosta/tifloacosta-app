@@ -86,3 +86,71 @@
     if (!resources.some(item => item.id === resource.id)) resources.push(resource);
   });
 })();
+
+(() => {
+  'use strict';
+
+  const resources = window.TIFLO_RESOURCES;
+  if (!Array.isArray(resources)) return;
+
+  const toneResources = [
+    {
+      id: 'es-tonos-general-2026',
+      lang: 'es',
+      category: 'Tonos',
+      title: 'Colección general de tonos',
+      url: 'https://tifloacosta.com/docs/es/tonos.html',
+      openUrl: 'https://tifloacosta.com/docs/es/tonos.html#general',
+      new: false
+    },
+    {
+      id: 'es-tonos-nokia-2026',
+      lang: 'es',
+      category: 'Tonos',
+      title: 'Tonos Nokia: 30 sonidos',
+      url: 'https://tifloacosta.com/docs/es/tonos.html',
+      openUrl: 'https://tifloacosta.com/docs/es/tonos.html#nokia',
+      new: false
+    },
+    {
+      id: 'es-tonos-iphone-2026',
+      lang: 'es',
+      category: 'Tonos',
+      title: 'Tonos instrumentales para iPhone: 80 temas',
+      url: 'https://tifloacosta.com/docs/es/tonos.html',
+      openUrl: 'https://tifloacosta.com/docs/es/tonos.html#iphone',
+      new: false
+    },
+    {
+      id: 'en-ringtones-general-2026',
+      lang: 'en',
+      category: 'Ringtones',
+      title: 'General ringtone collection',
+      url: 'https://tifloacosta.com/docs/en/ringtones.html',
+      openUrl: 'https://tifloacosta.com/docs/en/ringtones.html#general',
+      new: false
+    },
+    {
+      id: 'en-ringtones-nokia-2026',
+      lang: 'en',
+      category: 'Ringtones',
+      title: 'Nokia ringtones: 30 sounds',
+      url: 'https://tifloacosta.com/docs/en/ringtones.html',
+      openUrl: 'https://tifloacosta.com/docs/en/ringtones.html#nokia',
+      new: false
+    },
+    {
+      id: 'en-ringtones-iphone-2026',
+      lang: 'en',
+      category: 'Ringtones',
+      title: 'Instrumental ringtones for iPhone: 80 tracks',
+      url: 'https://tifloacosta.com/docs/en/ringtones.html',
+      openUrl: 'https://tifloacosta.com/docs/en/ringtones.html#iphone',
+      new: false
+    }
+  ];
+
+  toneResources.forEach(resource => {
+    if (!resources.some(item => item.id === resource.id)) resources.push(resource);
+  });
+})();

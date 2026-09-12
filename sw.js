@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-1-video-text-library-search-plurals';
+const CACHE = 'tifloacosta-app-v2-1-video-search-index';
 const SHELL = [
   './',
   './index.html',
@@ -8,7 +8,8 @@ const SHELL = [
   './app.js?v=2.1',
   './notifications.js?v=0.15',
   './videos.html',
-  './videos-core.js?v=0.16',
+  './video-search-index.js?v=1.0',
+  './videos-core.js?v=0.17',
   './videos.js?v=2.1',
   './videos.json',
   './offline.html',

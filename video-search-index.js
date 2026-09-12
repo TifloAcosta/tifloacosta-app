@@ -1,0 +1,15 @@
+window.TIFLO_VIDEO_SEARCH_INDEX = {
+  "videos": {
+    "ujr-4y4ua8I": {
+      "keywords": [
+        "Suno",
+        "música",
+        "música con IA",
+        "música generativa",
+        "generar canciones",
+        "canciones con inteligencia artificial",
+        "IA musical"
+      ]
+    }
+  }
+};

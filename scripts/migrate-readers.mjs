@@ -2,7 +2,7 @@ import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const APP_HOME = 'https://tifloacosta.github.io/tifloacosta-app/';
+const APP_HOME = 'https://tifloacosta.com/';
 const READER_BASE = `${APP_HOME}docs`;
 
 const LABELS = {

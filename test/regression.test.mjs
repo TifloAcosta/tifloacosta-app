@@ -115,7 +115,7 @@ test('video cards use h3 titles and title-specific accessible play names', async
 test('public pages expose canonical social metadata for the verified project URL', async () => {
   const home = await read('index.html');
   const videos = await read('videos.html');
-  const base = 'https://tifloacosta.github.io/tifloacosta-app/';
+  const base = 'https://tifloacosta.com/';
 
   assert.match(home, new RegExp(`<link rel="canonical" href="${base}">`));
   assert.match(videos, new RegExp(`<link rel="canonical" href="${base}videos\\.html">`));

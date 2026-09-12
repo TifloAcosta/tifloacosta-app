@@ -9,6 +9,6 @@ Repositorio:
 https://github.com/TifloAcosta/tifloacosta-app
 
 Aplicación pública:
-https://tifloacosta.github.io/tifloacosta-app/
+https://tifloacosta.com/
 
 No utilices procedimientos de versiones anteriores que puedan aparecer en copias antiguas de este archivo.

@@ -4,7 +4,7 @@
   const ONESIGNAL_APP_ID = 'ed030723-7f6f-4745-8cd3-6938a9d04377';
   const ONESIGNAL_WORKER_PATH = 'tifloacosta-app/push/onesignal/OneSignalSDKWorker.js';
   const ONESIGNAL_WORKER_SCOPE = '/tifloacosta-app/push/onesignal/';
-  const DEFAULT_URL = 'https://tifloacosta.github.io/tifloacosta-app/';
+  const DEFAULT_URL = 'https://tifloacosta.com/';
 
   const heading = document.querySelector('#notifications-heading');
   const intro = document.querySelector('#notifications-intro');

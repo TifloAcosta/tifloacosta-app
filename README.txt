@@ -2,7 +2,7 @@ TIFLOACOSTA APP — GUÍA VIGENTE DE MANTENIMIENTO
 Estado actual: versión 1.3
 
 Aplicación pública:
-https://tifloacosta.github.io/tifloacosta-app/
+https://tifloacosta.com/
 
 Repositorio:
 https://github.com/TifloAcosta/tifloacosta-app
@@ -82,7 +82,7 @@ Trabajador de OneSignal:
 push/onesignal/OneSignalSDKWorker.js
 
 URL pública del trabajador:
-https://tifloacosta.github.io/tifloacosta-app/push/onesignal/OneSignalSDKWorker.js
+https://tifloacosta.com/push/onesignal/OneSignalSDKWorker.js
 
 La validación específica de notificaciones en iPhone queda pendiente y no bloquea la publicación de la versión 1.3. En iPhone y iPad, las notificaciones web requieren abrir la PWA instalada desde la pantalla de inicio.
 
@@ -105,7 +105,7 @@ https://github.com/TifloAcosta/tifloacosta-app
 6. Guardar los cambios directamente en main, salvo que se indique expresamente otra cosa.
 7. Comprobar que GitHub Pages termina la publicación correctamente.
 8. Verificar después:
-https://tifloacosta.github.io/tifloacosta-app/
+https://tifloacosta.com/
 
 No se sube el archivo ZIP. Se descomprime y se suben los archivos que contiene.
 

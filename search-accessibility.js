@@ -50,13 +50,23 @@
     const controls = document.querySelector('#video-controls-section');
     const form = document.querySelector('#video-search-form');
     const search = document.querySelector('#video-search');
+    const searchLabel = document.querySelector('#video-search-label');
     const clear = document.querySelector('#video-clear');
     const sort = document.querySelector('.video-sort-control');
     const results = document.querySelector('#video-results-section');
+    const langEs = document.querySelector('#lang-es');
+    const langEn = document.querySelector('#lang-en');
 
     if (!controls || !form || !search || !clear || !sort || !results) return;
     if (form.dataset.accessibleSearchFlow === 'true') return;
     form.dataset.accessibleSearchFlow = 'true';
+
+    function localizeSearchLabel() {
+      if (!searchLabel) return;
+      searchLabel.textContent = document.documentElement.lang === 'en'
+        ? 'Video title, description, or topic'
+        : 'Título, descripción o tema del vídeo';
+    }
 
     controls.insertBefore(sort, form);
 
@@ -65,6 +75,7 @@
     clearRow.append(clear);
     controls.insertBefore(clearRow, form);
     clear.hidden = !search.value.trim();
+    localizeSearchLabel();
 
     form.addEventListener('submit', () => {
       clear.hidden = !search.value.trim();
@@ -73,6 +84,9 @@
     clear.addEventListener('click', () => {
       clear.hidden = true;
     });
+
+    if (langEs) langEs.addEventListener('click', () => window.setTimeout(localizeSearchLabel, 0));
+    if (langEn) langEn.addEventListener('click', () => window.setTimeout(localizeSearchLabel, 0));
   }
 
   function init() {

@@ -1,0 +1,46 @@
+name: Migrate custom domain
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "scripts/migrate-custom-domain.mjs"
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Replace legacy TifloAcosta URLs
+        run: node scripts/migrate-custom-domain.mjs
+
+      - name: Verify no legacy URLs remain
+        run: node scripts/migrate-custom-domain.mjs --check
+
+      - name: Run tests
+        run: npm test
+
+      - name: Commit migrated URLs
+        shell: bash
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No domain references needed migration."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore: migrate app links to tifloacosta.com"
+          git push

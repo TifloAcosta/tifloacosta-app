@@ -37,6 +37,9 @@ jobs:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: node scripts/sync-youtube.mjs
 
+      - name: Build video search index
+        run: node scripts/build-video-search-index.mjs
+
       - name: Detect catalog changes
         id: changes
         shell: bash

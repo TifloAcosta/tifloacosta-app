@@ -7,14 +7,14 @@
 
   const featuredNewsIds = {
     es: [
-      'es-foal-america-latina-2026',
-      'es-1xT5cXyLJ1IoRq5wYrYmzqxVeHBwJmXdb',
-      'es-1FKsaxZ_-NgKsHWWBI_i25X8rEqwQHTgN'
+      'es-13crgHIVB9E0YUYNmF6hlyFgi-ymhwb_V',
+      'es-1uTEYvSDBUxzvxPmLFkQa78VSqJtEHsGI',
+      'es-1Yk652avn7fcQtfNV28nu0VIkqpcZiRos'
     ],
     en: [
-      'en-1pOu-JfqCibjFb8EoURlQXpqtmRvhcuoZ',
-      'en-177Ni4DvWPtzmP6C7U4LbjB5GMTLiLzR4',
-      'en-1Gcty0-OWwfAD--XruEZYzUO_9kTatGBC'
+      'en-1NhzNbXNly2cv_QB2WQgxjo5Ex0L4HHuB',
+      'en-1ztd-nsQcYPNa3-Ij40CxlNIGkuEPtX-T',
+      'en-1ZEgNb3rI49H28DWmDnSUaB2OVFrHyK_9'
     ]
   };
   const featuredRanks = new Map(

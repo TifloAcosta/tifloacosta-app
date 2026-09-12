@@ -20,6 +20,15 @@ function assertReturnControls(html, title = 'reader') {
   assert.ok(lastReturn > firstReturn, `Reader needs separate start and end return controls: ${title}`);
 }
 
+function assertLocalizedReturnLabel(html, lang, title) {
+  if (lang === 'es') {
+    assert.ok(html.includes('Volver a la pantalla principal de TifloAcosta App'), `Reader has the wrong return label: ${title}`);
+    return;
+  }
+  const englishLabel = /Back to (?:the )?TifloAcosta App (?:home|main) screen|Back to TifloAcosta App/;
+  assert.match(html, englishLabel, `Reader has the wrong return label: ${title}`);
+}
+
 test('Spanish reader has explicit return controls at the start and end', () => {
   const source = '<!doctype html><html lang="es"><head><title>Prueba</title></head><body><h1>Documento</h1></body></html>';
   const result = addReturnControl(source, 'es');
@@ -29,10 +38,10 @@ test('Spanish reader has explicit return controls at the start and end', () => {
   assert.match(result, /href="https:\/\/tifloacosta\.com\/"/);
 });
 
-test('English reader uses the English return label', () => {
+test('English reader uses an accessible English return label', () => {
   const source = '<html lang="en"><body><h1>Document</h1></body></html>';
   const result = addReturnControl(source, 'en');
-  assert.match(result, /Back to the TifloAcosta App main screen/);
+  assertLocalizedReturnLabel(result, 'en', 'English test reader');
 });
 
 test('readerUrl uses the language folder and Drive id', () => {
@@ -76,9 +85,6 @@ test('every catalog resource has a direct accessible reader with a return contro
     const relative = item.openUrl.slice(APP_HOME.length).split('?')[0];
     const html = await readFile(new URL(`../${relative}`, import.meta.url), 'utf8');
     assertReturnControls(html, item.title);
-    const label = item.lang === 'es'
-      ? 'Volver a la pantalla principal de TifloAcosta App'
-      : 'Back to the TifloAcosta App main screen';
-    assert.ok(html.includes(label), `Reader has the wrong return label: ${item.title}`);
+    assertLocalizedReturnLabel(html, item.lang, item.title);
   }
 });

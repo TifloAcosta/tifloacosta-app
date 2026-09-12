@@ -9,8 +9,7 @@
     es: [
       'es-foal-america-latina-2026',
       'es-1xT5cXyLJ1IoRq5wYrYmzqxVeHBwJmXdb',
-      'es-1FKsaxZ_-NgKsHWWBI_i25X8rEqwQHTgN',
-      'es-1sxkdwNWtbDitDu-GVRNDOwvNX4n6CaG6'
+      'es-1FKsaxZ_-NgKsHWWBI_i25X8rEqwQHTgN'
     ],
     en: [
       'en-1pOu-JfqCibjFb8EoURlQXpqtmRvhcuoZ',

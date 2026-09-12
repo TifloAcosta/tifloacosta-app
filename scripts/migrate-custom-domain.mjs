@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-// Canonical home for every internal TifloAcosta link. Verified migration runner.
+// Canonical home for every internal TifloAcosta link. Migration complete and published.
 const OLD_BASE = ['https://tifloacosta.github.io', 'tifloacosta-app/'].join('/');
 const NEW_BASE = 'https://tifloacosta.com/';
 const CHECK_ONLY = process.argv.includes('--check');

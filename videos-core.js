@@ -58,3 +58,13 @@
 
   return { normalizeText, filterVideos, sortVideos, paginate };
 });
+
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', () => {
+    if (document.querySelector('script[data-tiflo-search-accessibility]')) return;
+    const script = document.createElement('script');
+    script.src = new URL('search-accessibility.js?v=1.0', document.baseURI).href;
+    script.dataset.tifloSearchAccessibility = 'true';
+    document.head.append(script);
+  }, { once: true });
+}

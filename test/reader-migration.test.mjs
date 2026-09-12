@@ -20,7 +20,7 @@ test('Spanish reader has explicit return controls at the start and end', () => {
   assert.ok(startIndex < headingIndex);
   assert.ok(endIndex > headingIndex);
   assert.match(result, /Volver a la pantalla principal de TifloAcosta App/);
-  assert.match(result, /href="https:\/\/tifloacosta\.github\.io\/tifloacosta-app\/"/);
+  assert.match(result, /href="https:\/\/tifloacosta\.com\/"/);
 });
 
 test('English reader uses the English return label', () => {
@@ -32,7 +32,7 @@ test('English reader uses the English return label', () => {
 test('readerUrl uses the language folder and Drive id', () => {
   assert.equal(
     readerUrl('es', 'abc_123'),
-    'https://tifloacosta.github.io/tifloacosta-app/docs/es/reader-abc_123.html'
+    'https://tifloacosta.com/docs/es/reader-abc_123.html'
   );
 });
 
@@ -65,7 +65,7 @@ test('every catalog resource has a direct accessible reader with a return contro
   const missing = resources.filter(item => !item.openUrl).map(item => item.title);
   assert.equal(missing.length, 0, `Resources missing openUrl: ${missing.join(', ')}`);
 
-  const base = 'https://tifloacosta.github.io/tifloacosta-app/';
+  const base = 'https://tifloacosta.com/';
   for (const item of resources) {
     assert.ok(item.openUrl.startsWith(base), `Unexpected reader URL for ${item.title}: ${item.openUrl}`);
     const relative = item.openUrl.slice(base.length).split('?')[0];

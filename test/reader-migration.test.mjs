@@ -8,17 +8,23 @@ import {
   addOpenUrlToCatalog
 } from '../scripts/migrate-readers.mjs';
 
+const APP_HOME = 'https://tifloacosta.com/';
+
+function assertReturnControls(html, title = 'reader') {
+  const headingIndex = html.search(/<h1\b/i);
+  const firstReturn = html.indexOf(`href="${APP_HOME}"`);
+  const lastReturn = html.lastIndexOf(`href="${APP_HOME}"`);
+  assert.ok(firstReturn >= 0, `Reader has no return control: ${title}`);
+  assert.ok(firstReturn < headingIndex, `Reader return control is not before the main heading: ${title}`);
+  assert.ok(lastReturn > headingIndex, `Reader has no final return control: ${title}`);
+  assert.ok(lastReturn > firstReturn, `Reader needs separate start and end return controls: ${title}`);
+}
+
 test('Spanish reader has explicit return controls at the start and end', () => {
   const source = '<!doctype html><html lang="es"><head><title>Prueba</title></head><body><h1>Documento</h1></body></html>';
   const result = addReturnControl(source, 'es');
-  const body = result.slice(result.indexOf('<body'));
-  const startIndex = body.indexOf('id="volver-app"');
-  const headingIndex = body.indexOf('<h1>');
-  const endIndex = body.indexOf('id="volver-app-final"');
 
-  assert.ok(startIndex >= 0);
-  assert.ok(startIndex < headingIndex);
-  assert.ok(endIndex > headingIndex);
+  assertReturnControls(result, 'Spanish test reader');
   assert.match(result, /Volver a la pantalla principal de TifloAcosta App/);
   assert.match(result, /href="https:\/\/tifloacosta\.com\/"/);
 });
@@ -65,13 +71,11 @@ test('every catalog resource has a direct accessible reader with a return contro
   const missing = resources.filter(item => !item.openUrl).map(item => item.title);
   assert.equal(missing.length, 0, `Resources missing openUrl: ${missing.join(', ')}`);
 
-  const base = 'https://tifloacosta.com/';
   for (const item of resources) {
-    assert.ok(item.openUrl.startsWith(base), `Unexpected reader URL for ${item.title}: ${item.openUrl}`);
-    const relative = item.openUrl.slice(base.length).split('?')[0];
+    assert.ok(item.openUrl.startsWith(APP_HOME), `Unexpected reader URL for ${item.title}: ${item.openUrl}`);
+    const relative = item.openUrl.slice(APP_HOME.length).split('?')[0];
     const html = await readFile(new URL(`../${relative}`, import.meta.url), 'utf8');
-    assert.match(html, /id="volver-app"/, `Reader has no start return control: ${item.title}`);
-    assert.match(html, /id="volver-app-final"/, `Reader has no end return control: ${item.title}`);
+    assertReturnControls(html, item.title);
     const label = item.lang === 'es'
       ? 'Volver a la pantalla principal de TifloAcosta App'
       : 'Back to the TifloAcosta App main screen';

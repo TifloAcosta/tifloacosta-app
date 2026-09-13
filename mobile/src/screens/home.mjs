@@ -1,7 +1,13 @@
 export const HOME_ITEMS = ['actualidad','search','library','favorites','videos','book','podcast','contact','settings'];
 export const HOME_EXTERNAL_URLS = [];
 
-export function renderHome({ root, router, content, t }) {
+export function selectHomeNews(content, lang) {
+  return (Array.isArray(content?.news) ? content.news : [])
+    .filter(item => !item.lang || item.lang === lang)
+    .slice(0, 5);
+}
+
+export function renderHome({ root, router, content, preferences, t }) {
   root.replaceChildren();
 
   const heading = document.createElement('h1');
@@ -10,7 +16,7 @@ export function renderHome({ root, router, content, t }) {
   heading.textContent = t('appName');
   root.append(heading);
 
-  const news = Array.isArray(content?.news) ? content.news.slice(0, 5) : [];
+  const news = selectHomeNews(content, preferences.lang);
   if (news.length) {
     const section = document.createElement('section');
     const title = document.createElement('h2');

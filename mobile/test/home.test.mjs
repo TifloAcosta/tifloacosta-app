@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { HOME_ITEMS, HOME_EXTERNAL_URLS } from '../src/screens/home.mjs';
+import { HOME_ITEMS, HOME_EXTERNAL_URLS, selectHomeNews } from '../src/screens/home.mjs';
 import { text } from '../src/core/i18n.mjs';
 import { readFile } from 'node:fs/promises';
 
@@ -37,4 +37,15 @@ test('contact labels are localized instead of hard-coded in Spanish', async () =
   const source = await readFile(new URL('../src/screens/contact.mjs', import.meta.url), 'utf8');
   assert.doesNotMatch(source, /\['Correo electrónico'/);
   assert.match(source, /t\(`contact\.\$\{labelKey\}`\)/);
+});
+
+test('home news preview follows the selected interface language and stays capped at five', () => {
+  const news = [
+    { id: 'es1', lang: 'es' }, { id: 'en1', lang: 'en' },
+    { id: 'es2', lang: 'es' }, { id: 'es3', lang: 'es' },
+    { id: 'es4', lang: 'es' }, { id: 'es5', lang: 'es' },
+    { id: 'es6', lang: 'es' }, { id: 'neutral' }
+  ];
+  assert.deepEqual(selectHomeNews({ news }, 'es').map(item => item.id), ['es1','es2','es3','es4','es5']);
+  assert.deepEqual(selectHomeNews({ news }, 'en').map(item => item.id), ['en1','neutral']);
 });

@@ -1,14 +1,12 @@
-name: Test reader migration
+name: Test repository changes
 
 on:
   push:
     paths:
-      - 'test/reader-migration.test.mjs'
-      - 'test/install-analytics.test.mjs'
-      - 'test/regression.test.mjs'
-      - 'test/mobile-content.test.mjs'
-      - 'scripts/migrate-readers.mjs'
-      - 'scripts/build-mobile-content.mjs'
+      - 'test/**'
+      - 'scripts/**'
+      - 'mobile/**'
+      - 'package.json'
       - '.github/workflows/test-reader-migration.yml'
   workflow_dispatch:
 
@@ -23,4 +21,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: npm test
+      - name: Run root tests
+        run: npm test
+      - name: Install mobile dependencies
+        if: hashFiles('mobile/package.json') != ''
+        working-directory: mobile
+        run: npm install
+      - name: Run mobile tests
+        if: hashFiles('mobile/package.json') != ''
+        working-directory: mobile
+        run: npm test

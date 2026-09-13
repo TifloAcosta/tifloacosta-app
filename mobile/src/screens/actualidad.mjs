@@ -11,7 +11,19 @@ function favoriteButton({ item, favorites, t }) {
   return button;
 }
 
-export function renderActualidad({ root, router, content, preferences, favorites, t }) {
+function shareButton({ item, share, t }) {
+  const url = item.url || item.sourceUrl || item.originalUrl;
+  if (!url) return null;
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.textContent = t('share');
+  button.addEventListener('click', () => {
+    share.shareLink({ title: item.title || 'TifloAcosta', text: item.summary || '', url }).catch(() => {});
+  });
+  return button;
+}
+
+export function renderActualidad({ root, router, content, preferences, favorites, share, t }) {
   const snapshot = Array.isArray(content?.news)
     ? content.news.filter(item => !item.lang || item.lang === preferences.lang).map(item => ({ ...item }))
     : [];
@@ -53,6 +65,8 @@ export function renderActualidad({ root, router, content, preferences, favorites
       article.append(source);
     }
     article.append(favoriteButton({ item, favorites, t }));
+    const shareControl = shareButton({ item, share, t });
+    if (shareControl) article.append(shareControl);
     list.append(article);
   }
   root.append(list);

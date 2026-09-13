@@ -6,7 +6,7 @@ export const PODCAST_LINKS = [
   ['radio.es', 'https://www.radio.es/podcast/canal-tifloacosta']
 ];
 
-export function renderPodcast({ root, router, t }) {
+export function renderPodcast({ root, router, external, t }) {
   root.replaceChildren();
   const back = document.createElement('button');
   back.type = 'button';
@@ -28,6 +28,10 @@ export function renderPodcast({ root, router, t }) {
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     link.textContent = label;
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      external.open(href).catch(() => {});
+    });
     li.append(link);
     list.append(li);
   }

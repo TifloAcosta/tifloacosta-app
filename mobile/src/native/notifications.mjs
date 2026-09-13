@@ -15,12 +15,11 @@ export function createNotificationService({
   router,
   resolveRoute = parseTifloAcostaUrl
 }) {
-  let initialized = false;
+  let initializePromise = null;
 
-  return {
-    async initialize() {
-      if (initialized) return;
-      await oneSignal.initialize(appId);
+  const initialize = () => {
+    if (initializePromise) return initializePromise;
+    initializePromise = Promise.resolve(oneSignal.initialize(appId)).then(() => {
       oneSignal.Notifications.addEventListener('click', event => {
         const value = notificationTargetUrl(event);
         if (!value) return;
@@ -28,15 +27,21 @@ export function createNotificationService({
         if (!target) return;
         router.enterExternal(target.route);
       });
-      initialized = true;
-    },
+    });
+    return initializePromise;
+  };
+
+  return {
+    initialize,
 
     async getPermissionStatus() {
+      await initialize();
       if (await oneSignal.Notifications.hasPermission()) return 'granted';
       return await oneSignal.Notifications.canRequestPermission() ? 'available' : 'denied';
     },
 
     async requestPermission() {
+      await initialize();
       return oneSignal.Notifications.requestPermission(false);
     }
   };

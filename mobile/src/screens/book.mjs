@@ -1,7 +1,7 @@
 const AMAZON_PRINT = 'https://www.amazon.es/s?k=9798185909218&i=stripbooks';
 const AMAZON_KINDLE = 'https://www.amazon.es/s?k=La+vida+vista+desde+donde+estoy+Tony+Acosta&i=digital-text';
 
-export function renderBook({ root, router, t }) {
+export function renderBook({ root, router, external, t }) {
   root.replaceChildren();
   const back = document.createElement('button');
   back.type = 'button';
@@ -30,6 +30,10 @@ export function renderBook({ root, router, t }) {
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     link.textContent = t(label);
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      external.open(href).catch(() => {});
+    });
     p.append(link);
     root.append(p);
   }

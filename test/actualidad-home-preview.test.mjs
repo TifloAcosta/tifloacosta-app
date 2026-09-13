@@ -37,3 +37,12 @@ test('Actualidad home labels are bilingual', async () => {
   assert.match(source, /heading:'News'/);
   assert.match(source, /open:'View all news'/);
 });
+
+test('service worker treats the shared Actualidad assets as live content', async () => {
+  const worker = await read('sw.js');
+  assert.match(worker, /'\.\/actualidad\.html'/);
+  assert.match(worker, /'\.\/actualidad-core\.js\?v=1\.0'/);
+  assert.match(worker, /'\.\/actualidad\.js\?v=1\.0'/);
+  assert.match(worker, /'\.\/actualidad\.json'/);
+  assert.match(worker, /url\.pathname\.endsWith\('\/actualidad\.json'\)/);
+});

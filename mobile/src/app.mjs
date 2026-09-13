@@ -1,3 +1,4 @@
+import { AppLauncher } from '@capacitor/app-launcher';
 import { Share } from '@capacitor/share';
 import { backgroundRefreshMode } from './core/background-refresh.mjs';
 import { createContentStore } from './core/content-store.mjs';
@@ -8,6 +9,7 @@ import { applyPreferences, createPreferencesStore } from './core/preferences.mjs
 import { createRouter } from './core/router.mjs';
 import { createBackButtonHandler } from './native/back-button.mjs';
 import { installDeepLinkListener } from './native/deep-links.mjs';
+import { createExternalLinkService } from './native/external-links.mjs';
 import { createShareService } from './native/share.mjs';
 import { renderActualidad } from './screens/actualidad.mjs';
 import { renderBook } from './screens/book.mjs';
@@ -25,6 +27,7 @@ const preferencesStore = createPreferencesStore();
 const favoritesStore = createFavoritesStore();
 const contentStore = createContentStore();
 const shareService = createShareService({ sharePlugin: Share, navigatorObj: globalThis.navigator });
+const externalLinkService = createExternalLinkService({ appLauncher: AppLauncher });
 const emptyContent = { schemaVersion: 1, generatedAt: '', resources: [], videos: [], news: [] };
 let content = contentStore.getCurrent() || emptyContent;
 let router;
@@ -57,6 +60,7 @@ function renderRoute(route) {
     preferences,
     favorites: favoritesStore,
     share: shareService,
+    external: externalLinkService,
     t,
     onPreferencesChange(patch) {
       const next = preferencesStore.update(patch);

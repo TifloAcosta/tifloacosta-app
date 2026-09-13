@@ -60,6 +60,22 @@ test('output order is deterministic regardless of source order', async () => {
   assert.deepEqual(first.stories.map(item => item.title), ['New', 'Old']);
 });
 
+test('stories older than 90 days are excluded from the shared feed', async () => {
+  const xml = `<?xml version="1.0"?><rss><channel>
+    <item><title>Recent</title><link>https://example.com/recent</link><pubDate>Sat, 12 Sep 2026 12:00:00 GMT</pubDate><description>Recent summary</description></item>
+    <item><title>Stale</title><link>https://example.com/stale</link><pubDate>Fri, 01 May 2026 12:00:00 GMT</pubDate><description>Stale summary</description></item>
+  </channel></rss>`;
+
+  const result = await syncActualidad({
+    sources: [source()],
+    editorial: [],
+    fetchFn: async () => response(xml),
+    now: new Date('2026-09-13T12:00:00Z')
+  });
+
+  assert.deepEqual(result.stories.map(item => item.title), ['Recent']);
+});
+
 test('withheld editorial stories are excluded and valid adaptations remain public', async () => {
   const fetchFn = async () => response(rss());
   const first = await syncActualidad({ sources: [source()], editorial: [], fetchFn });

@@ -5,11 +5,16 @@ on:
     branches:
       - feature/mobile-native-integrations-work
     paths:
+      - 'mobile/package.json'
+      - 'mobile/capacitor.config.json'
       - '.github/workflows/finalize-mobile-bundle.yml'
   workflow_dispatch:
 
 permissions:
   contents: write
+
+env:
+  ONESIGNAL_DISABLE_LOCATION: true
 
 jobs:
   finalize:
@@ -55,5 +60,5 @@ jobs:
             echo "No generated changes to commit."
             exit 0
           fi
-          git commit -m "build: sync native integration dependencies"
+          git commit -m "build: sync mobile native dependencies"
           git push origin HEAD:feature/mobile-native-integrations-work

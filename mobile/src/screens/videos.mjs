@@ -11,7 +11,18 @@ function favoriteButton({ item, favorites, t }) {
   return button;
 }
 
-export function renderVideos({ root, router, content, favorites, t }) {
+function shareButton({ item, share, t }) {
+  if (!item.url) return null;
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.textContent = t('share');
+  button.addEventListener('click', () => {
+    share.shareLink({ title: item.title || 'TifloAcosta', url: item.url }).catch(() => {});
+  });
+  return button;
+}
+
+export function renderVideos({ root, router, content, favorites, share, t }) {
   root.replaceChildren();
   const back = document.createElement('button');
   back.type = 'button';
@@ -42,6 +53,8 @@ export function renderVideos({ root, router, content, favorites, t }) {
     link.rel = 'noopener noreferrer';
     link.textContent = item.title || '';
     li.append(link, favoriteButton({ item, favorites, t }));
+    const shareControl = shareButton({ item, share, t });
+    if (shareControl) li.append(shareControl);
     list.append(li);
   }
   root.append(list);

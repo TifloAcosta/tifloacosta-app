@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { buildMobileContent } from '../scripts/build-mobile-content.mjs';
+import { buildMobileContent, downloadUrlForResource } from '../scripts/build-mobile-content.mjs';
 
 test('mobile content feed normalizes resources and videos and exposes news', () => {
   const feed = buildMobileContent({
@@ -12,6 +12,14 @@ test('mobile content feed normalizes resources and videos and exposes news', () 
   assert.equal(feed.schemaVersion, 1);
   assert.equal(feed.resources[0].kind, 'resource');
   assert.equal(feed.resources[0].isNew, true);
+  assert.equal(feed.resources[0].downloadUrl, 'https://download');
   assert.equal(feed.videos[0].kind, 'video');
   assert.deepEqual(feed.news, []);
+});
+
+test('Google Drive preview links become direct download links', () => {
+  assert.equal(
+    downloadUrlForResource('https://drive.google.com/file/d/ABC_123/view?usp=drivesdk'),
+    'https://drive.google.com/uc?export=download&id=ABC_123'
+  );
 });

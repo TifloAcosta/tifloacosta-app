@@ -27,6 +27,10 @@ jobs:
         if: hashFiles('mobile/package.json') != ''
         working-directory: mobile
         run: npm install
+      - name: Build mobile bundle
+        if: hashFiles('mobile/package.json') != ''
+        working-directory: mobile
+        run: npm run build
       - name: Run mobile tests
         if: hashFiles('mobile/package.json') != ''
         working-directory: mobile

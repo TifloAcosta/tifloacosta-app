@@ -20,6 +20,20 @@ export function createRouter({ render, focusScreenHeading, restoreOriginFocus })
       return renderCurrent();
     },
 
+    enterExternal(route) {
+      if (route === 'home') {
+        stack.splice(0, stack.length, { name: 'home', originId: null });
+      } else {
+        stack.splice(
+          0,
+          stack.length,
+          { name: 'home', originId: null },
+          { name: route, originId: null }
+        );
+      }
+      return renderCurrent();
+    },
+
     back() {
       if (stack.length <= 1) return false;
       const leaving = stack.pop();

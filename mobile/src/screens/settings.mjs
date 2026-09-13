@@ -19,7 +19,63 @@ function selectRow({ root, id, label, value, values, onChange }) {
   root.append(wrapper);
 }
 
-export function renderSettings({ root, router, preferences, t, onPreferencesChange }) {
+function notificationSection({ root, notifications, t }) {
+  const section = document.createElement('section');
+  const heading = document.createElement('h2');
+  heading.textContent = t('settings.notificationsTitle');
+  const description = document.createElement('p');
+  description.textContent = t('settings.notificationsDescription');
+  const controls = document.createElement('div');
+  section.append(heading, description, controls);
+  root.append(section);
+
+  if (!notifications) {
+    const status = document.createElement('p');
+    status.textContent = t('settings.notificationsUnavailable');
+    controls.append(status);
+    return;
+  }
+
+  notifications.getPermissionStatus().then(status => {
+    if (status === 'granted') {
+      const text = document.createElement('p');
+      text.textContent = t('settings.notificationsGranted');
+      controls.replaceChildren(text);
+      return;
+    }
+
+    if (status === 'denied') {
+      const text = document.createElement('p');
+      text.textContent = t('settings.notificationsDenied');
+      controls.replaceChildren(text);
+      return;
+    }
+
+    const activate = document.createElement('button');
+    activate.type = 'button';
+    activate.textContent = t('settings.notificationsActivate');
+    activate.addEventListener('click', async () => {
+      activate.disabled = true;
+      try {
+        const granted = await notifications.requestPermission();
+        const text = document.createElement('p');
+        text.textContent = granted
+          ? t('settings.notificationsGranted')
+          : t('settings.notificationsDenied');
+        controls.replaceChildren(text);
+      } catch {
+        activate.disabled = false;
+      }
+    });
+    controls.replaceChildren(activate);
+  }).catch(() => {
+    const text = document.createElement('p');
+    text.textContent = t('settings.notificationsUnavailable');
+    controls.replaceChildren(text);
+  });
+}
+
+export function renderSettings({ root, router, preferences, notifications, t, onPreferencesChange }) {
   root.replaceChildren();
   const back = document.createElement('button');
   back.type = 'button';
@@ -77,4 +133,6 @@ export function renderSettings({ root, router, preferences, t, onPreferencesChan
   boldLabel.textContent = t('settings.bold');
   wrapper.append(bold, boldLabel);
   root.append(wrapper);
+
+  notificationSection({ root, notifications, t });
 }

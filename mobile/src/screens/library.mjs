@@ -23,7 +23,23 @@ function shareButton({ item, share, t }) {
   return button;
 }
 
-export function renderLibrary({ root, router, content, preferences, favorites, share, t }) {
+function safeFileName(title = 'TifloAcosta') {
+  return `${title.replace(/[\\/:*?"<>|]+/g, '-').trim() || 'TifloAcosta'}.html`;
+}
+
+function saveButton({ item, saveFile, t }) {
+  const url = item.downloadUrl || item.url;
+  if (!url || typeof saveFile !== 'function') return null;
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.textContent = t('saveFile');
+  button.addEventListener('click', () => {
+    saveFile({ url, suggestedName: safeFileName(item.title) }).catch(() => {});
+  });
+  return button;
+}
+
+export function renderLibrary({ root, router, content, preferences, favorites, share, saveFile, t }) {
   root.replaceChildren();
   const back = document.createElement('button');
   back.type = 'button';
@@ -56,6 +72,8 @@ export function renderLibrary({ root, router, content, preferences, favorites, s
     li.append(link, favoriteButton({ item, favorites, t }));
     const shareControl = shareButton({ item, share, t });
     if (shareControl) li.append(shareControl);
+    const saveControl = saveButton({ item, saveFile, t });
+    if (saveControl) li.append(saveControl);
     list.append(li);
   }
   root.append(list);

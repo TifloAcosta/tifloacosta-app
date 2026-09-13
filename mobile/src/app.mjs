@@ -1,4 +1,5 @@
 import { AppLauncher } from '@capacitor/app-launcher';
+import { registerPlugin } from '@capacitor/core';
 import { Share } from '@capacitor/share';
 import { backgroundRefreshMode } from './core/background-refresh.mjs';
 import { createContentStore } from './core/content-store.mjs';
@@ -10,6 +11,7 @@ import { createRouter } from './core/router.mjs';
 import { createBackButtonHandler } from './native/back-button.mjs';
 import { installDeepLinkListener } from './native/deep-links.mjs';
 import { createExternalLinkService } from './native/external-links.mjs';
+import { saveRemoteFile } from './native/save-file.mjs';
 import { createShareService } from './native/share.mjs';
 import { renderActualidad } from './screens/actualidad.mjs';
 import { renderBook } from './screens/book.mjs';
@@ -28,6 +30,12 @@ const favoritesStore = createFavoritesStore();
 const contentStore = createContentStore();
 const shareService = createShareService({ sharePlugin: Share, navigatorObj: globalThis.navigator });
 const externalLinkService = createExternalLinkService({ appLauncher: AppLauncher });
+const SaveFile = registerPlugin('SaveFile');
+const saveFile = ({ url, suggestedName }) => saveRemoteFile({
+  url,
+  suggestedName,
+  nativeSave: SaveFile
+});
 const emptyContent = { schemaVersion: 1, generatedAt: '', resources: [], videos: [], news: [] };
 let content = contentStore.getCurrent() || emptyContent;
 let router;
@@ -61,6 +69,7 @@ function renderRoute(route) {
     favorites: favoritesStore,
     share: shareService,
     external: externalLinkService,
+    saveFile,
     t,
     onPreferencesChange(patch) {
       const next = preferencesStore.update(patch);

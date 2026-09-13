@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { syncActualidad } from '../scripts/sync-actualidad.mjs';
 
+const TEST_NOW = new Date('2026-09-13T12:00:00Z');
+
 const source = overrides => ({
   id: 'source-a',
   name: 'Source A',
@@ -26,14 +28,14 @@ test('one failed source does not discard valid stories from another source', asy
     return response(rss());
   };
 
-  const result = await syncActualidad({ sources, editorial: [], fetchFn });
+  const result = await syncActualidad({ sources, editorial: [], fetchFn, now: TEST_NOW });
   assert.equal(result.stories.length, 1);
   assert.deepEqual(result.failedSources, ['source-b']);
 });
 
 test('all enabled sources failing rejects instead of returning an empty feed', async () => {
   await assert.rejects(
-    syncActualidad({ sources: [source()], editorial: [], fetchFn: async () => { throw new Error('offline'); } }),
+    syncActualidad({ sources: [source()], editorial: [], fetchFn: async () => { throw new Error('offline'); }, now: TEST_NOW }),
     /All enabled Actualidad sources failed/
   );
 });
@@ -42,7 +44,7 @@ test('duplicate canonical URLs appear only once', async () => {
   const sources = [source(), source({ id: 'source-b', feedUrl: 'https://example.org/feed.xml', homepage: 'https://example.org/' })];
   const fetchFn = async () => response(rss({ url: 'https://example.com/story?utm_source=rss' }));
 
-  const result = await syncActualidad({ sources, editorial: [], fetchFn });
+  const result = await syncActualidad({ sources, editorial: [], fetchFn, now: TEST_NOW });
   assert.equal(result.stories.length, 1);
   assert.equal(result.stories[0].originalUrl, 'https://example.com/story');
 });
@@ -54,8 +56,8 @@ test('output order is deterministic regardless of source order', async () => {
     ? response(rss({ title: 'New', url: 'https://new.example/story', date: 'Sun, 13 Sep 2026 14:00:00 GMT' }))
     : response(rss({ title: 'Old', url: 'https://old.example/story', date: 'Sun, 13 Sep 2026 10:00:00 GMT' }));
 
-  const first = await syncActualidad({ sources: [older, newer], editorial: [], fetchFn });
-  const second = await syncActualidad({ sources: [newer, older], editorial: [], fetchFn });
+  const first = await syncActualidad({ sources: [older, newer], editorial: [], fetchFn, now: TEST_NOW });
+  const second = await syncActualidad({ sources: [newer, older], editorial: [], fetchFn, now: TEST_NOW });
   assert.deepEqual(first.stories, second.stories);
   assert.deepEqual(first.stories.map(item => item.title), ['New', 'Old']);
 });
@@ -70,7 +72,7 @@ test('stories older than 90 days are excluded from the shared feed', async () =>
     sources: [source()],
     editorial: [],
     fetchFn: async () => response(xml),
-    now: new Date('2026-09-13T12:00:00Z')
+    now: TEST_NOW
   });
 
   assert.deepEqual(result.stories.map(item => item.title), ['Recent']);
@@ -78,17 +80,23 @@ test('stories older than 90 days are excluded from the shared feed', async () =>
 
 test('withheld editorial stories are excluded and valid adaptations remain public', async () => {
   const fetchFn = async () => response(rss());
-  const first = await syncActualidad({ sources: [source()], editorial: [], fetchFn });
+  const first = await syncActualidad({ sources: [source()], editorial: [], fetchFn, now: TEST_NOW });
   const id = first.stories[0].id;
 
   const adapted = await syncActualidad({
     sources: [source()],
     editorial: [{ id, editorialState: 'adapted', lang: 'es', title: 'Historia adaptada', body: 'Texto propio.' }],
-    fetchFn
+    fetchFn,
+    now: TEST_NOW
   });
   assert.equal(adapted.stories[0].editorialState, 'adapted');
   assert.equal(adapted.stories[0].lang, 'es');
 
-  const withheld = await syncActualidad({ sources: [source()], editorial: [{ id, editorialState: 'withheld' }], fetchFn });
+  const withheld = await syncActualidad({
+    sources: [source()],
+    editorial: [{ id, editorialState: 'withheld' }],
+    fetchFn,
+    now: TEST_NOW
+  });
   assert.deepEqual(withheld.stories, []);
 });

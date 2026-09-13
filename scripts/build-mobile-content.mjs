@@ -2,6 +2,12 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import vm from 'node:vm';
 
+export function downloadUrlForResource(url = '') {
+  const match = String(url).match(/^https:\/\/drive\.google\.com\/file\/d\/([^/]+)\//i);
+  if (!match) return url;
+  return `https://drive.google.com/uc?export=download&id=${encodeURIComponent(match[1])}`;
+}
+
 export function buildMobileContent({ resources, videos, generatedAt = new Date().toISOString() }) {
   return {
     schemaVersion: 1,
@@ -13,6 +19,7 @@ export function buildMobileContent({ resources, videos, generatedAt = new Date()
       category: item.category,
       title: item.title,
       url: item.url,
+      downloadUrl: downloadUrlForResource(item.url),
       openUrl: item.openUrl || item.url,
       isNew: Boolean(item.new)
     })),

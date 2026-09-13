@@ -1,6 +1,7 @@
 import { AppLauncher } from '@capacitor/app-launcher';
 import { registerPlugin } from '@capacitor/core';
 import { Share } from '@capacitor/share';
+import OneSignal from '@onesignal/capacitor-plugin';
 import { backgroundRefreshMode } from './core/background-refresh.mjs';
 import { createContentStore } from './core/content-store.mjs';
 import { createFavoritesStore } from './core/favorites.mjs';
@@ -11,6 +12,7 @@ import { createRouter } from './core/router.mjs';
 import { createBackButtonHandler } from './native/back-button.mjs';
 import { installDeepLinkListener } from './native/deep-links.mjs';
 import { createExternalLinkService } from './native/external-links.mjs';
+import { createNotificationService } from './native/notifications.mjs';
 import { saveRemoteFile } from './native/save-file.mjs';
 import { createShareService } from './native/share.mjs';
 import { renderActualidad } from './screens/actualidad.mjs';
@@ -24,6 +26,7 @@ import { renderSearch } from './screens/search.mjs';
 import { renderSettings } from './screens/settings.mjs';
 import { renderVideos } from './screens/videos.mjs';
 
+const ONESIGNAL_APP_ID = 'ed030723-7f6f-4745-8cd3-6938a9d04377';
 const root = document.querySelector('#app');
 const preferencesStore = createPreferencesStore();
 const favoritesStore = createFavoritesStore();
@@ -39,6 +42,7 @@ const saveFile = ({ url, suggestedName }) => saveRemoteFile({
 const emptyContent = { schemaVersion: 1, generatedAt: '', resources: [], videos: [], news: [] };
 let content = contentStore.getCurrent() || emptyContent;
 let router;
+let notificationService;
 
 applyPreferences(document.documentElement, preferencesStore.get());
 
@@ -70,6 +74,7 @@ function renderRoute(route) {
     share: shareService,
     external: externalLinkService,
     saveFile,
+    notifications: notificationService,
     t,
     onPreferencesChange(patch) {
       const next = preferencesStore.update(patch);
@@ -85,7 +90,14 @@ router = createRouter({
   restoreOriginFocus: originId => restoreOriginFocus(root, originId)
 });
 
+notificationService = createNotificationService({
+  oneSignal: OneSignal,
+  appId: ONESIGNAL_APP_ID,
+  router
+});
+
 router.start('home');
+notificationService.initialize().catch(() => {});
 
 import('@capacitor/app')
   .then(async ({ App }) => {

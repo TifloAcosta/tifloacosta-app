@@ -24,7 +24,26 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  validate-sources:
+    if: github.ref != 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Synchronize Actualidad
+        run: node scripts/sync-actualidad.mjs
+
+      - name: Run tests
+        run: npm test
+
   sync-and-deploy:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -58,7 +77,7 @@ jobs:
           fi
 
       - name: Commit Actualidad
-        if: steps.changes.outputs.changed == 'true' && github.ref == 'refs/heads/main'
+        if: steps.changes.outputs.changed == 'true'
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
@@ -68,16 +87,16 @@ jobs:
           git push
 
       - name: Configure Pages
-        if: steps.changes.outputs.changed == 'true' && github.ref == 'refs/heads/main'
+        if: steps.changes.outputs.changed == 'true'
         uses: actions/configure-pages@v5
 
       - name: Upload Pages artifact
-        if: steps.changes.outputs.changed == 'true' && github.ref == 'refs/heads/main'
+        if: steps.changes.outputs.changed == 'true'
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
 
       - name: Deploy Pages
-        if: steps.changes.outputs.changed == 'true' && github.ref == 'refs/heads/main'
+        if: steps.changes.outputs.changed == 'true'
         id: deployment
         uses: actions/deploy-pages@v4

@@ -1,9 +1,18 @@
 {
-  "generatedAt": "2026-09-01T10:10:34.211Z",
+  "generatedAt": "2026-09-13T12:44:33.558Z",
   "channelHandle": "@tifloacosta",
   "channelUrl": "https://www.youtube.com/@tifloacosta",
-  "count": 286,
+  "count": 287,
   "videos": [
+    {
+      "id": "KCiCubo9G9o",
+      "title": "Yo ya no persigo las noticias: ahora vienen a buscarme",
+      "publishedAt": "2026-09-13T09:00:29Z",
+      "description": "En este vídeo les presento cMRSS, una aplicación accesible que permite reunir en un mismo lugar las fuentes de noticias y contenidos que realmente nos\ninteresan.\nPodemos añadir medios y páginas mediante sus fuentes RSS, organizar lo que seguimos y consultar las novedades sin tener que ir saltando de una web a otra.\nPero hay una función que a mí me ha gustado especialmente: también podemos añadir canales de YouTube y seguir sus nuevas publicaciones desde la propia\naplicación, sin necesidad de entrar continuamente en YouTube para comprobar qué han publicado.\ncMRSS no es gratuita, y eso también hay que decirlo. Pero después de usarla y comprobar lo que me ofrece, en mi caso considero que merece la pena la inversión.\nEn el vídeo les enseño cómo funciona, qué posibilidades ofrece y por qué se ha ganado un sitio entre las aplicaciones que utilizo para mantenerme informado.",
+      "excerpt": "En este vídeo les presento cMRSS, una aplicación accesible que permite reunir en un mismo lugar las fuentes de noticias y contenidos que realmente nos",
+      "thumbnail": "https://i.ytimg.com/vi/KCiCubo9G9o/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=KCiCubo9G9o"
+    },
     {
       "id": "qYvoYsQZNbQ",
       "title": "TifloAcosta ya tiene app: todo cambia a partir de aquí",

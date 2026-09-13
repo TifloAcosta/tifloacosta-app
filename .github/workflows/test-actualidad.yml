@@ -22,7 +22,7 @@ on:
       - 'test/clean-home.test.mjs'
       - 'test/clean-navigation-regression.test.mjs'
       - 'test/regression.test.mjs'
-      - '.github/workflows/test-actualidad.yml'
+      - '.github/workflows/*actualidad*.yml'
   workflow_dispatch:
 
 permissions:

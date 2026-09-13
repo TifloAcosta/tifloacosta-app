@@ -6,7 +6,9 @@ on:
       - 'test/reader-migration.test.mjs'
       - 'test/install-analytics.test.mjs'
       - 'test/regression.test.mjs'
+      - 'test/mobile-content.test.mjs'
       - 'scripts/migrate-readers.mjs'
+      - 'scripts/build-mobile-content.mjs'
       - '.github/workflows/test-reader-migration.yml'
   workflow_dispatch:
 

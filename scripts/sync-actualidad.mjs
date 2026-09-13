@@ -8,6 +8,7 @@ const require = createRequire(import.meta.url);
 const core = require('../actualidad-core.js');
 const STORY_RETENTION_DAYS = 90;
 const STORY_RETENTION_MS = STORY_RETENTION_DAYS * 24 * 60 * 60 * 1000;
+const SOURCE_FETCH_ATTEMPTS = 3;
 
 function sourceKey(source) {
   return String(source?.id || '');
@@ -19,7 +20,7 @@ function retentionCutoff(now) {
   return timestamp - STORY_RETENTION_MS;
 }
 
-async function fetchSource(source, fetchFn) {
+async function fetchSourceOnce(source, fetchFn) {
   const response = await fetchFn(source.feedUrl, {
     headers: {
       'accept': 'application/atom+xml, application/rss+xml, application/xml, text/xml;q=0.9, */*;q=0.5',
@@ -31,6 +32,18 @@ async function fetchSource(source, fetchFn) {
   return parseFeedXml(xml, source)
     .map(entry => normalizeFeedEntry(entry, source))
     .filter(Boolean);
+}
+
+async function fetchSource(source, fetchFn) {
+  let lastError;
+  for (let attempt = 1; attempt <= SOURCE_FETCH_ATTEMPTS; attempt += 1) {
+    try {
+      return await fetchSourceOnce(source, fetchFn);
+    } catch (error) {
+      lastError = error;
+    }
+  }
+  throw lastError || new Error(`Unable to fetch ${source.id}`);
 }
 
 export async function syncActualidad({ sources, editorial, fetchFn = fetch, now = new Date() }) {

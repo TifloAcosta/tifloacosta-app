@@ -32,6 +32,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - name: Build mobile content feed
+        run: node scripts/build-mobile-content.mjs
       - name: Build video search index
         run: node scripts/build-video-search-index.mjs
       - name: Setup Pages

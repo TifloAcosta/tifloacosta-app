@@ -6,9 +6,17 @@ import { normalizeFeedEntry, parseFeedXml } from './actualidad-feed.mjs';
 
 const require = createRequire(import.meta.url);
 const core = require('../actualidad-core.js');
+const STORY_RETENTION_DAYS = 90;
+const STORY_RETENTION_MS = STORY_RETENTION_DAYS * 24 * 60 * 60 * 1000;
 
 function sourceKey(source) {
   return String(source?.id || '');
+}
+
+function retentionCutoff(now) {
+  const timestamp = now instanceof Date ? now.getTime() : new Date(now).getTime();
+  if (Number.isNaN(timestamp)) throw new Error('Invalid Actualidad reference date');
+  return timestamp - STORY_RETENTION_MS;
 }
 
 async function fetchSource(source, fetchFn) {
@@ -25,7 +33,7 @@ async function fetchSource(source, fetchFn) {
     .filter(Boolean);
 }
 
-export async function syncActualidad({ sources, editorial, fetchFn = fetch }) {
+export async function syncActualidad({ sources, editorial, fetchFn = fetch, now = new Date() }) {
   const enabled = (Array.isArray(sources) ? sources : [])
     .filter(source => source?.enabled !== false && source?.id && source?.feedUrl)
     .sort((a, b) => sourceKey(a).localeCompare(sourceKey(b)));
@@ -52,11 +60,13 @@ export async function syncActualidad({ sources, editorial, fetchFn = fetch }) {
     if (!uniqueByUrl.has(story.originalUrl)) uniqueByUrl.set(story.originalUrl, story);
   }
 
+  const cutoff = retentionCutoff(now);
   const merged = mergeEditorial([...uniqueByUrl.values()], editorial);
   const stories = core.sortStories(
     merged
       .map(story => core.normalizeStory(story))
       .filter(story => story && story.editorialState !== 'withheld')
+      .filter(story => new Date(story.publishedAt).getTime() >= cutoff)
   );
 
   return { stories, failedSources };

@@ -36,8 +36,16 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Synchronize Actualidad
-        run: node scripts/sync-actualidad.mjs
+      - name: Synchronize Actualidad and require every source
+        shell: bash
+        run: |
+          set -o pipefail
+          output="$(node scripts/sync-actualidad.mjs 2>&1)"
+          printf '%s\n' "$output"
+          if grep -q 'Actualidad sources unavailable:' <<< "$output"; then
+            echo 'One or more configured Actualidad sources are unavailable during validation.' >&2
+            exit 1
+          fi
 
       - name: Run tests
         run: npm test

@@ -1,0 +1,7 @@
+.worktrees/
+mobile/node_modules/
+mobile/android/.gradle/
+mobile/android/local.properties
+mobile/android/app/build/
+mobile/ios/App/Pods/
+mobile/ios/App/App/public/

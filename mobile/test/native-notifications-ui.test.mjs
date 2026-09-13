@@ -34,3 +34,15 @@ test('package and Capacitor config use the current OneSignal Capacitor plugin', 
   assert.equal(pkg.dependencies['@onesignal/capacitor-plugin'], '1.1.12');
   assert.equal(config.ios?.handleApplicationNotifications, false);
 });
+
+test('iOS main app declares basic push capability without adding a rich-notification extension', async () => {
+  const entitlements = await readFile(new URL('../ios/App/App/App.entitlements', import.meta.url), 'utf8');
+  const info = await readFile(new URL('../ios/App/App/Info.plist', import.meta.url), 'utf8');
+  const project = await readFile(new URL('../ios/App/App.xcodeproj/project.pbxproj', import.meta.url), 'utf8');
+  assert.match(entitlements, /<key>aps-environment<\/key>/);
+  assert.match(entitlements, /\$\(APS_ENVIRONMENT\)/);
+  assert.match(info, /<key>UIBackgroundModes<\/key>[\s\S]*<string>remote-notification<\/string>/);
+  assert.match(project, /CODE_SIGN_ENTITLEMENTS = App\/App\.entitlements;/);
+  assert.match(project, /APS_ENVIRONMENT = development;/);
+  assert.match(project, /APS_ENVIRONMENT = production;/);
+});

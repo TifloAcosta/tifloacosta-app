@@ -1,6 +1,15 @@
 name: Sync Actualidad TifloAcosta
 
 on:
+  push:
+    branches:
+      - feature/actualidad-web
+    paths:
+      - 'actualidad-sources.json'
+      - 'actualidad-editorial.json'
+      - 'scripts/actualidad-*.mjs'
+      - 'scripts/sync-actualidad.mjs'
+      - '.github/workflows/sync-actualidad.yml'
   schedule:
     - cron: '17 * * * *'
   workflow_dispatch:

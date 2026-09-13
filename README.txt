@@ -154,3 +154,17 @@ GitHub Pages publica esta aplicación en la URL de proyecto indicada al comienzo
 Las limitaciones de las cabeceras HTTP en GitHub Pages y las medidas aplicables están documentadas en SECURITY.md. No deben añadirse etiquetas meta para aparentar cabeceras que requieren control del servidor.
 
 La sincronización de YouTube ejecuta scripts/sync-youtube.mjs como única implementación de la lógica de catálogo. Si cambia videos.json, el mismo workflow crea y sube el commit y despliega GitHub Pages directamente. Esto es necesario porque los pushes realizados con GITHUB_TOKEN no disparan otro workflow de Pages.
+
+APLICACIONES OFICIALES EN DESARROLLO
+La PWA pública de TifloAcosta continúa manteniéndose en https://tifloacosta.com/ mientras se desarrollan por separado las aplicaciones oficiales para iOS y Android.
+
+El código de la nueva base móvil vive en la carpeta mobile/. Utiliza Capacitor 8, la identidad com.tifloacosta.app y requiere Node.js 22 o posterior.
+
+Comandos de desarrollo disponibles:
+cd mobile
+npm install
+npm test
+npm run sync:android
+npm run sync:ios   (macOS)
+
+Los proyectos nativos se encuentran en mobile/android y mobile/ios. El desarrollo móvil debe mantenerse en su rama de trabajo y no integrarse en main hasta que hayan pasado las pruebas automáticas y las pruebas manuales de accesibilidad con VoiceOver, TalkBack y, cuando sea posible, otros lectores de pantalla de Android.

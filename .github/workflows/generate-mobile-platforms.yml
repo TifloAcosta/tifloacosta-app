@@ -48,34 +48,12 @@ jobs:
           npx cap add ios
           npx cap sync ios
 
-      - name: Document mobile development commands
-        shell: bash
-        run: |
-          if ! grep -q '^APLICACIONES OFICIALES EN DESARROLLO$' README.txt; then
-            cat >> README.txt <<'EOF'
-
-APLICACIONES OFICIALES EN DESARROLLO
-TifloAcosta mantiene la PWA pública en https://tifloacosta.com/ mientras se desarrollan por separado las aplicaciones oficiales para iOS y Android.
-
-La base móvil usa Capacitor 8 y requiere Node.js 22 o posterior.
-
-Comandos de desarrollo:
-cd mobile
-npm install
-npm test
-npm run sync:android
-npm run sync:ios   (macOS)
-
-Los proyectos nativos viven en mobile/android y mobile/ios. Los cambios de la aplicación móvil deben probarse en la rama de desarrollo antes de integrarlos en main.
-EOF
-          fi
-
       - name: Commit generated native projects
         shell: bash
         run: |
           git config user.name "TifloAcosta Mobile Build"
           git config user.email "146574974+TifloAcosta@users.noreply.github.com"
-          git add mobile/package-lock.json mobile/android mobile/ios README.txt
+          git add mobile/package-lock.json mobile/android mobile/ios
           if git diff --cached --quiet; then
             echo "No generated changes to commit."
             exit 0

@@ -4,5 +4,10 @@
   "webDir": "src",
   "server": {
     "androidScheme": "https"
+  },
+  "plugins": {
+    "App": {
+      "disableBackButtonHandler": true
+    }
   }
 }

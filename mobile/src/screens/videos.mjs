@@ -22,7 +22,7 @@ function shareButton({ item, share, t }) {
   return button;
 }
 
-export function renderVideos({ root, router, content, favorites, share, t }) {
+export function renderVideos({ root, router, content, favorites, share, external, t }) {
   root.replaceChildren();
   const back = document.createElement('button');
   back.type = 'button';
@@ -52,6 +52,10 @@ export function renderVideos({ root, router, content, favorites, share, t }) {
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     link.textContent = item.title || '';
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      external.open(item.url).catch(() => {});
+    });
     li.append(link, favoriteButton({ item, favorites, t }));
     const shareControl = shareButton({ item, share, t });
     if (shareControl) li.append(shareControl);

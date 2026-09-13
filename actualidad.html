@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0D2B45">
+<meta name="description" content="Actualidad sobre accesibilidad y tecnología seleccionada por TifloAcosta.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tifloacosta.com/actualidad.html">
+<title>Actualidad TifloAcosta</title>
+<link rel="icon" href="tifloacosta-favicon.ico">
+<link rel="apple-touch-icon" href="tifloacosta-apple-touch-icon.png">
+<link rel="stylesheet" href="styles.css?v=1.1">
+</head>
+<body>
+<a class="skip-link" href="#main">Saltar al contenido principal</a>
+<div class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="index.html" aria-label="TifloAcosta, inicio">
+      <img class="brand-mark" src="tifloacosta-simbolo-blanco.svg" alt="" aria-hidden="true" width="48" height="48">
+      <span class="brand-name">TifloAcosta</span>
+    </a>
+    <div class="language-switch">
+      <button type="button" id="lang-es" aria-pressed="true">Español</button>
+      <button type="button" id="lang-en" aria-pressed="false">English</button>
+    </div>
+  </div>
+</div>
+
+<main id="main" class="wrap" tabindex="-1">
+  <section class="hero">
+    <p><a class="back-link" id="home-link-top" href="index.html">Volver al inicio</a></p>
+    <h1 id="actualidad-heading">Actualidad TifloAcosta</h1>
+    <p id="actualidad-intro">Noticias y novedades de accesibilidad y tecnología seleccionadas para llegar a lo importante sin tener que apartar ruido por el camino.</p>
+  </section>
+
+  <section id="news-browser">
+    <label id="news-category-label" for="news-category">Filtrar por categoría</label>
+    <select id="news-category">
+      <option value="">Todas las categorías</option>
+    </select>
+    <p id="news-status" class="muted" aria-live="polite" aria-atomic="true"></p>
+    <div id="news-list" class="news-list"></div>
+  </section>
+
+  <section id="news-reader" hidden>
+    <button type="button" id="reader-back-top">Volver a Actualidad</button>
+    <h2 id="reader-title" tabindex="-1"></h2>
+    <p id="reader-meta" class="muted"></p>
+    <div id="reader-body"></div>
+    <p><a id="reader-original" class="button-link" href="#" target="_blank" rel="noopener noreferrer">Abrir fuente original</a></p>
+    <button type="button" id="reader-back-bottom">Volver a Actualidad</button>
+  </section>
+
+  <p><a class="back-link" id="home-link-bottom" href="index.html">Volver al inicio</a></p>
+</main>
+
+<div class="site-footer">
+  <div class="wrap"><p id="footer-text">TifloAcosta · Actualidad.</p></div>
+</div>
+
+<script src="actualidad-core.js?v=1.0"></script>
+<script src="actualidad.js?v=1.0"></script>
+</body>
+</html>

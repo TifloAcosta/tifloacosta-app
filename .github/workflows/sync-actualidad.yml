@@ -3,6 +3,7 @@ name: Sync Actualidad TifloAcosta
 on:
   push:
     branches:
+      - main
       - feature/actualidad-web
     paths:
       - 'actualidad-sources.json'

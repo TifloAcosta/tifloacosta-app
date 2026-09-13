@@ -6,7 +6,7 @@ export const CONTACT_LINKS = [
   ['facebookTony', 'https://facebook.com/tony.acostaacosta']
 ];
 
-export function renderContact({ root, router, t }) {
+export function renderContact({ root, router, external, t }) {
   root.replaceChildren();
   const back = document.createElement('button');
   back.type = 'button';
@@ -30,6 +30,10 @@ export function renderContact({ root, router, t }) {
       link.rel = 'noopener noreferrer';
     }
     link.textContent = t(`contact.${labelKey}`);
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      external.open(href).catch(() => {});
+    });
     li.append(link);
     list.append(li);
   }

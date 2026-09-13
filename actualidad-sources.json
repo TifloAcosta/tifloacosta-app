@@ -52,14 +52,5 @@
     "lang": "es",
     "categories": ["tecnologia-accesibilidad"],
     "enabled": true
-  },
-  {
-    "id": "tiflo-audio",
-    "name": "Tiflo Audio",
-    "homepage": "https://www.tifloaudio.com/",
-    "feedUrl": "https://www.tifloaudio.com/feed/",
-    "lang": "es",
-    "categories": ["tecnologia-accesibilidad"],
-    "enabled": true
   }
 ]

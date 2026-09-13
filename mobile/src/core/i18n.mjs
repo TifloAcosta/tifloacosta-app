@@ -3,6 +3,7 @@ const COPY = {
     appName: 'TifloAcosta',
     back: 'Volver',
     share: 'Compartir',
+    saveFile: 'Guardar archivo',
     empty: 'No hay contenido disponible en este momento.',
     home: {
       actualidad: 'Actualidad',
@@ -82,6 +83,7 @@ const COPY = {
     appName: 'TifloAcosta',
     back: 'Back',
     share: 'Share',
+    saveFile: 'Save file',
     empty: 'No content is available right now.',
     home: {
       actualidad: 'News',

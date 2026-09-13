@@ -76,7 +76,13 @@ const COPY = {
       spacing: 'Espaciado entre líneas',
       comfortable: 'Cómodo',
       wide: 'Amplio',
-      bold: 'Usar texto reforzado'
+      bold: 'Usar texto reforzado',
+      notificationsTitle: 'Notificaciones',
+      notificationsDescription: 'Si quieres recibir avisos cuando haya algo importante en TifloAcosta, puedes activarlos aquí. La app no te pedirá permiso sin que tú lo decidas.',
+      notificationsActivate: 'Activar notificaciones',
+      notificationsGranted: 'Las notificaciones están activadas.',
+      notificationsDenied: 'Las notificaciones están desactivadas en los ajustes del sistema.',
+      notificationsUnavailable: 'No se pudo comprobar el estado de las notificaciones.'
     }
   },
   en: {
@@ -156,7 +162,13 @@ const COPY = {
       spacing: 'Line spacing',
       comfortable: 'Comfortable',
       wide: 'Wide',
-      bold: 'Use reinforced text'
+      bold: 'Use reinforced text',
+      notificationsTitle: 'Notifications',
+      notificationsDescription: 'If you want alerts when something important happens in TifloAcosta, you can enable them here. The app will not ask for permission unless you choose to.',
+      notificationsActivate: 'Enable notifications',
+      notificationsGranted: 'Notifications are enabled.',
+      notificationsDenied: 'Notifications are disabled in system settings.',
+      notificationsUnavailable: 'The notification status could not be checked.'
     }
   }
 };

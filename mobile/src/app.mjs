@@ -1,3 +1,4 @@
+import { backgroundRefreshMode } from './core/background-refresh.mjs';
 import { createContentStore } from './core/content-store.mjs';
 import { createFavoritesStore } from './core/favorites.mjs';
 import { focusScreenHeading, restoreOriginFocus } from './core/focus.mjs';
@@ -70,6 +71,14 @@ router.start('home');
 contentStore.load().then(result => {
   if (!result.content) return;
   content = result.content;
-  const active = document.activeElement;
-  if (!active || active === document.body || active === root) renderRoute(router.current());
+
+  const mode = backgroundRefreshMode({
+    activeElement: document.activeElement,
+    body: document.body,
+    root
+  });
+
+  if (mode === 'defer') return;
+  renderRoute(router.current());
+  if (mode === 'render-restore-heading') focusScreenHeading(root);
 });

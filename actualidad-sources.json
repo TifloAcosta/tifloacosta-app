@@ -25,5 +25,23 @@
     "lang": "en",
     "categories": ["windows", "nvda"],
     "enabled": true
+  },
+  {
+    "id": "accessible-android",
+    "name": "Accessible Android",
+    "homepage": "https://accessibleandroid.com/",
+    "feedUrl": "https://accessibleandroid.com/feed/",
+    "lang": "en",
+    "categories": ["android", "apps-accesibles", "tecnologia-accesibilidad"],
+    "enabled": true
+  },
+  {
+    "id": "freedom-scientific-blog",
+    "name": "Freedom Scientific",
+    "homepage": "https://blog.freedomscientific.com/",
+    "feedUrl": "https://blog.freedomscientific.com/feed/",
+    "lang": "en",
+    "categories": ["windows", "tecnologia-accesibilidad"],
+    "enabled": true
   }
 ]

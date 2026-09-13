@@ -12,6 +12,9 @@ on:
 permissions:
   contents: read
 
+env:
+  ONESIGNAL_DISABLE_LOCATION: true
+
 jobs:
   android:
     runs-on: ubuntu-latest

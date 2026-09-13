@@ -13,7 +13,7 @@ test('app registers the local SaveFile plugin and injects the save service', asy
   const source = await readFile(new URL('../src/app.mjs', import.meta.url), 'utf8');
   assert.match(source, /registerPlugin\('SaveFile'\)/);
   assert.match(source, /saveRemoteFile/);
-  assert.match(source, /saveFile:/);
+  assert.match(source, /\n\s*saveFile,\n/);
 });
 
 test('save action has Spanish and English text', async () => {

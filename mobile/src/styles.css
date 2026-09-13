@@ -1,0 +1,32 @@
+:root {
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+body {
+  margin: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translateY(-150%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+#app {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+button,
+a,
+input,
+select {
+  font: inherit;
+}

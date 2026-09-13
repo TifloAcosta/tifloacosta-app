@@ -55,5 +55,5 @@ jobs:
             echo "No generated changes to commit."
             exit 0
           fi
-          git commit -m "build: sync native share dependency"
+          git commit -m "build: sync native integration dependencies"
           git push origin HEAD:feature/mobile-native-integrations-work

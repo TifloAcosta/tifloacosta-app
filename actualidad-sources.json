@@ -1,0 +1,56 @@
+[
+  {
+    "id": "applevis-apps",
+    "name": "AppleVis",
+    "homepage": "https://www.applevis.com/",
+    "feedUrl": "https://www.applevis.com/feed/apps.xml",
+    "lang": "en",
+    "categories": ["apple", "apps-accesibles"],
+    "enabled": true
+  },
+  {
+    "id": "applevis-blog",
+    "name": "AppleVis",
+    "homepage": "https://www.applevis.com/blog",
+    "feedUrl": "https://www.applevis.com/feed/blog.xml",
+    "lang": "en",
+    "categories": ["apple", "tecnologia-accesibilidad"],
+    "enabled": true
+  },
+  {
+    "id": "nvaccess-in-process",
+    "name": "NV Access",
+    "homepage": "https://www.nvaccess.org/category/in-process/",
+    "feedUrl": "https://www.nvaccess.org/category/in-process/feed/",
+    "lang": "en",
+    "categories": ["windows", "nvda"],
+    "enabled": true
+  },
+  {
+    "id": "accessible-android",
+    "name": "Accessible Android",
+    "homepage": "https://accessibleandroid.com/",
+    "feedUrl": "https://accessibleandroid.com/feed/",
+    "lang": "en",
+    "categories": ["android", "apps-accesibles", "tecnologia-accesibilidad"],
+    "enabled": true
+  },
+  {
+    "id": "freedom-scientific-blog",
+    "name": "Freedom Scientific",
+    "homepage": "https://blog.freedomscientific.com/",
+    "feedUrl": "https://blog.freedomscientific.com/feed/",
+    "lang": "en",
+    "categories": ["windows", "tecnologia-accesibilidad"],
+    "enabled": true
+  },
+  {
+    "id": "actualidad-accesible",
+    "name": "Actualidad Accesible",
+    "homepage": "https://actualidadaccesible.com/",
+    "feedUrl": "https://actualidadaccesible.com/feed/",
+    "lang": "es",
+    "categories": ["tecnologia-accesibilidad"],
+    "enabled": true
+  }
+]

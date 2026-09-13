@@ -1,0 +1,111 @@
+name: Sync Actualidad TifloAcosta
+
+on:
+  push:
+    branches:
+      - main
+      - feature/actualidad-web
+    paths:
+      - 'actualidad-sources.json'
+      - 'actualidad-editorial.json'
+      - 'scripts/actualidad-*.mjs'
+      - 'scripts/sync-actualidad.mjs'
+      - '.github/workflows/sync-actualidad.yml'
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  validate-sources:
+    if: github.ref != 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Synchronize Actualidad and require every source
+        shell: bash
+        run: |
+          set -o pipefail
+          output="$(node scripts/sync-actualidad.mjs 2>&1)"
+          printf '%s\n' "$output"
+          if grep -q 'Actualidad sources unavailable:' <<< "$output"; then
+            echo 'One or more configured Actualidad sources are unavailable during validation.' >&2
+            exit 1
+          fi
+
+      - name: Run tests
+        run: npm test
+
+  sync-and-deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Synchronize Actualidad
+        run: node scripts/sync-actualidad.mjs
+
+      - name: Run tests
+        run: npm test
+
+      - name: Detect Actualidad changes
+        id: changes
+        shell: bash
+        run: |
+          if [ -n "$(git status --porcelain -- actualidad.json)" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit Actualidad
+        if: steps.changes.outputs.changed == 'true'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add actualidad.json
+          git commit -m "chore: sync Actualidad"
+          git push
+
+      - name: Configure Pages
+        if: steps.changes.outputs.changed == 'true'
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        if: steps.changes.outputs.changed == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy Pages
+        if: steps.changes.outputs.changed == 'true'
+        id: deployment
+        uses: actions/deploy-pages@v4

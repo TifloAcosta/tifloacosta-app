@@ -1,0 +1,39 @@
+name: Test Actualidad work
+
+on:
+  push:
+    branches:
+      - feature/actualidad-web
+    paths:
+      - 'actualidad*.js'
+      - 'actualidad*.json'
+      - 'actualidad*.html'
+      - 'app.js'
+      - 'index.html'
+      - 'sw.js'
+      - 'scripts/actualidad-*.mjs'
+      - 'scripts/sync-actualidad.mjs'
+      - 'test/actualidad-*.test.mjs'
+      - 'test/content-index.test.mjs'
+      - 'test/global-favorites.test.mjs'
+      - 'test/global-search-page.test.mjs'
+      - 'test/library-favorites-pages.test.mjs'
+      - 'test/secondary-pages.test.mjs'
+      - 'test/clean-home.test.mjs'
+      - 'test/clean-navigation-regression.test.mjs'
+      - 'test/regression.test.mjs'
+      - '.github/workflows/*actualidad*.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm test

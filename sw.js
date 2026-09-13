@@ -1,11 +1,15 @@
-const CACHE = 'tifloacosta-app-v2-1-video-search-index';
+const CACHE = 'tifloacosta-app-v2-1-actualidad';
 const SHELL = [
   './',
   './index.html',
   './styles.css?v=1.1',
   './data.js?v=0.19',
   './app-core.js?v=1.3',
+  './actualidad-core.js?v=1.0',
+  './actualidad.js?v=1.0',
   './app.js?v=2.1',
+  './actualidad.html',
+  './actualidad.json',
   './notifications.js?v=0.15',
   './videos.html',
   './video-search-index.js?v=1.0',
@@ -71,7 +75,8 @@ self.addEventListener('fetch', event => {
   const liveContent = event.request.mode === 'navigate' ||
     event.request.destination === 'script' ||
     event.request.destination === 'style' ||
-    url.pathname.endsWith('/videos.json');
+    url.pathname.endsWith('/videos.json') ||
+    url.pathname.endsWith('/actualidad.json');
 
   event.respondWith(liveContent ? networkFirst(event.request) : cacheFirst(event.request));
 });

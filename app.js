@@ -3,12 +3,15 @@
 
   const APP_VERSION = '2.1';
   const core = window.TIFLO_APP_CORE;
+  const coreActualidad = window.TIFLO_ACTUALIDAD_CORE;
   const data = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];
   const $ = (selector) => document.querySelector(selector);
 
   const els = {
     langEs: $('#lang-es'), langEn: $('#lang-en'), skip: $('.skip-link'), brand: $('.brand'), appHeading: $('#app-heading'),
-    intro: $('#intro'), searchHeading: $('#search-heading'), searchLabel: $('label[for="search"]'),
+    intro: $('#intro'), actualidadHomeHeading: $('#actualidad-home-heading'), actualidadHomeCount: $('#actualidad-home-count'),
+    actualidadHomeIntro: $('#actualidad-home-intro'), actualidadHomeList: $('#actualidad-home-list'), actualidadHomeOpen: $('#actualidad-home-open'),
+    searchHeading: $('#search-heading'), searchLabel: $('label[for="search"]'),
     searchForm: $('#search-form'), search: $('#search'), searchButton: $('#search-button'), newsHeading: $('#news-heading'),
     newsCount: $('#news-count'), newsList: $('#news-list'), exploreHeading: $('#explore-heading'), categoryLabel: $('label[for="category"]'), category: $('#category'),
     favoritesButton: $('#favorites-button'), clearResults: $('#clear-results'), resultStatus: $('#result-status'), results: $('#resource-results'),
@@ -38,6 +41,7 @@
     es: {
       documentTitle: 'TifloAcosta App — Recursos de accesibilidad', skip: 'Saltar al contenido principal', brandLabel: 'TifloAcosta, inicio', appHeading: 'TifloAcosta App',
       intro: 'Recursos de accesibilidad y tecnología, organizados para llegar a ellos sin perderse por el camino.',
+      actualidadHome: { heading:'Actualidad', intro:'Noticias y novedades de accesibilidad y tecnología seleccionadas para llegar a lo importante sin tener que apartar ruido por el camino.', open:'Ver toda la actualidad', source:'Fuente', count:n => `${n} noticia${n === 1 ? '' : 's'} reciente${n === 1 ? '' : 's'}.` },
       searchHeading: 'Buscar recursos', searchLabel: 'Título o palabra clave', placeholder: 'Por ejemplo: VoiceOver, Android, WhatsApp…', searchButton: 'Buscar',
       news: 'Novedades', newsCount: n => `${n} novedad${n === 1 ? '' : 'es'} reciente${n === 1 ? '' : 's'}.`,
       explore: 'Explorar recursos', categoryLabel: 'Categoría', categoryPlaceholder: 'Seleccionar una categoría', favorites: 'Ver favoritos', clear: 'Limpiar resultados',
@@ -76,6 +80,7 @@
     en: {
       documentTitle: 'TifloAcosta App — Accessibility resources', skip: 'Skip to main content', brandLabel: 'TifloAcosta, home', appHeading: 'TifloAcosta App',
       intro: 'Accessibility and technology resources, organized so you can reach what you need without getting lost along the way.',
+      actualidadHome: { heading:'News', intro:'Accessibility and technology news selected to help you reach what matters without having to clear away the noise first.', open:'View all news', source:'Source', count:n => `${n} recent news item${n === 1 ? '' : 's'}.` },
       searchHeading: 'Search resources', searchLabel: 'Title or keyword', placeholder: 'For example: VoiceOver, Android, WhatsApp…', searchButton: 'Search',
       news: 'What’s new', newsCount: n => `${n} recent item${n === 1 ? '' : 's'}.`,
       explore: 'Explore resources', categoryLabel: 'Category', categoryPlaceholder: 'Select a category', favorites: 'View favorites', clear: 'Clear results',
@@ -117,6 +122,8 @@
   const storage = core.getStorage(window);
   const storedLang = core.readStoredValue(storage,'tifloLang',defaultLang);
   let lang = storedLang === 'es' || storedLang === 'en' ? storedLang : defaultLang;
+  let actualidadItems = [];
+  let actualidadLoaded = false;
   const storedFavorites = core.readStoredJson(storage,'tifloFavorites',[]);
   let favorites = new Set(Array.isArray(storedFavorites) ? storedFavorites.filter(id=>typeof id==='string') : []);
   function isStandalone(){ return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true; }
@@ -285,6 +292,31 @@
     if(item.new){ const badge=document.createElement('span'); badge.className='badge'; badge.textContent=c.newBadge; title.append(' ',badge); }
     const meta=document.createElement('p'); meta.className='resource-meta'; meta.textContent=item.category;
     article.append(title,meta); return article;
+  }
+
+  function renderActualidadHome() {
+    const c=copy[lang].actualidadHome;
+    els.actualidadHomeHeading.textContent=c.heading;
+    els.actualidadHomeIntro.textContent=c.intro;
+    els.actualidadHomeOpen.textContent=c.open;
+    els.actualidadHomeList.innerHTML='';
+    if(!coreActualidad||!actualidadLoaded){els.actualidadHomeCount.textContent='';return;}
+    const items=coreActualidad.homePreview(actualidadItems,lang,5);
+    items.forEach(story=>{
+      const item=document.createElement('div'); item.className='news-item';
+      const h3=document.createElement('h3'); h3.textContent=story.title;
+      const meta=document.createElement('p'); meta.className='resource-meta'; meta.textContent=`${c.source}: ${story.sourceName}`;
+      item.append(h3,meta); els.actualidadHomeList.append(item);
+    });
+    els.actualidadHomeCount.textContent=c.count(items.length);
+  }
+
+  function loadActualidadHome() {
+    if(!coreActualidad){actualidadLoaded=true;renderActualidadHome();return;}
+    fetch('actualidad.json',{cache:'no-cache'})
+      .then(response=>{if(!response.ok)throw new Error(`HTTP ${response.status}`);return response.json();})
+      .then(items=>{actualidadItems=Array.isArray(items)?items:[];actualidadLoaded=true;renderActualidadHome();})
+      .catch(()=>{actualidadItems=[];actualidadLoaded=true;renderActualidadHome();});
   }
 
   function makeNewsItem(item) {
@@ -465,7 +497,7 @@
     }, 100);
   }
 
-  function applyLanguage(){const c=copy[lang];document.documentElement.lang=lang;document.title=c.documentTitle;core.writeStoredValue(storage,'tifloLang',lang);els.langEs.setAttribute('aria-pressed',String(lang==='es'));els.langEn.setAttribute('aria-pressed',String(lang==='en'));els.skip.textContent=c.skip;els.brand.setAttribute('aria-label',c.brandLabel);els.appHeading.textContent=c.appHeading;els.intro.textContent=c.intro;els.searchHeading.textContent=c.searchHeading;els.searchLabel.textContent=c.searchLabel;els.search.placeholder=c.placeholder;els.searchButton.textContent=c.searchButton;els.newsHeading.textContent=c.news;els.exploreHeading.textContent=c.explore;els.categoryLabel.textContent=c.categoryLabel;els.favoritesButton.textContent=c.favorites;els.clearResults.textContent=c.clear;els.videosHomeHeading.textContent=c.videosHome.heading;els.videosHomeIntro.textContent=c.videosHome.intro;els.videosHomeOpen.textContent=c.videosHome.open;els.youtubeHomeChannel.textContent=c.videosHome.channel;els.aboutHeading.textContent=c.about.heading;els.aboutText.textContent=c.about.text;els.externalLinksNote.textContent=c.externalLinks;els.privacyHeading.textContent=c.privacy.heading;els.privacySubheading.textContent=c.privacy.privacyHeading;els.privacyText.textContent=c.privacy.text;els.accessibilityInfoHeading.textContent=c.privacy.accessibilityHeading;els.accessibilityInfoText.textContent=c.privacy.accessibilityText;els.configHeading.textContent=c.configuration;els.accessibilityHeading.textContent=c.accessibility;els.footer.textContent=c.footer;renderCategories();renderNews();localizeBook();localizeContact();localizeSettings();localizeInstall();localizeUpdate();clearResults();}
+  function applyLanguage(){const c=copy[lang];document.documentElement.lang=lang;document.title=c.documentTitle;core.writeStoredValue(storage,'tifloLang',lang);els.langEs.setAttribute('aria-pressed',String(lang==='es'));els.langEn.setAttribute('aria-pressed',String(lang==='en'));els.skip.textContent=c.skip;els.brand.setAttribute('aria-label',c.brandLabel);els.appHeading.textContent=c.appHeading;els.intro.textContent=c.intro;els.searchHeading.textContent=c.searchHeading;els.searchLabel.textContent=c.searchLabel;els.search.placeholder=c.placeholder;els.searchButton.textContent=c.searchButton;els.newsHeading.textContent=c.news;els.exploreHeading.textContent=c.explore;els.categoryLabel.textContent=c.categoryLabel;els.favoritesButton.textContent=c.favorites;els.clearResults.textContent=c.clear;els.videosHomeHeading.textContent=c.videosHome.heading;els.videosHomeIntro.textContent=c.videosHome.intro;els.videosHomeOpen.textContent=c.videosHome.open;els.youtubeHomeChannel.textContent=c.videosHome.channel;els.aboutHeading.textContent=c.about.heading;els.aboutText.textContent=c.about.text;els.externalLinksNote.textContent=c.externalLinks;els.privacyHeading.textContent=c.privacy.heading;els.privacySubheading.textContent=c.privacy.privacyHeading;els.privacyText.textContent=c.privacy.text;els.accessibilityInfoHeading.textContent=c.privacy.accessibilityHeading;els.accessibilityInfoText.textContent=c.privacy.accessibilityText;els.configHeading.textContent=c.configuration;els.accessibilityHeading.textContent=c.accessibility;els.footer.textContent=c.footer;renderActualidadHome();renderCategories();renderNews();localizeBook();localizeContact();localizeSettings();localizeInstall();localizeUpdate();clearResults();}
 
   els.langEs.addEventListener('click',()=>{const changed=lang!=='es';lang='es';applyLanguage();if(changed)trackLanguageUse();});els.langEn.addEventListener('click',()=>{const changed=lang!=='en';lang='en';applyLanguage();if(changed)trackLanguageUse();});els.searchForm.addEventListener('submit',e=>{e.preventDefault();searchResources();});els.category.addEventListener('change',()=>showCategory(els.category.value));els.favoritesButton.addEventListener('click',showFavorites);els.clearResults.addEventListener('click',clearResults);
   els.settingsToggle.addEventListener('click',toggleSettings);
@@ -477,5 +509,5 @@
   els.settingsReset.addEventListener('click',resetDisplaySettings);
   els.updateButton.addEventListener('click',forceUpdateApplication);
   if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').then(reg=>reg.update()).catch(()=>{}));}
-  applyPrefs();applyLanguage();trackLanguageUse();announceCompletedUpdate();
+  applyPrefs();applyLanguage();loadActualidadHome();trackLanguageUse();announceCompletedUpdate();
 })();

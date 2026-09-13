@@ -5,6 +5,7 @@ import { focusScreenHeading, restoreOriginFocus } from './core/focus.mjs';
 import { formatText } from './core/i18n.mjs';
 import { applyPreferences, createPreferencesStore } from './core/preferences.mjs';
 import { createRouter } from './core/router.mjs';
+import { installDeepLinkListener } from './native/deep-links.mjs';
 import { renderActualidad } from './screens/actualidad.mjs';
 import { renderBook } from './screens/book.mjs';
 import { renderContact } from './screens/contact.mjs';
@@ -67,6 +68,10 @@ router = createRouter({
 });
 
 router.start('home');
+
+import('@capacitor/app')
+  .then(({ App }) => installDeepLinkListener({ appPlugin: App, router }))
+  .catch(() => {});
 
 contentStore.load().then(result => {
   if (!result.content) return;

@@ -1,0 +1,59 @@
+name: Finalize mobile bundle
+
+on:
+  push:
+    branches:
+      - feature/mobile-native-integrations-work
+    paths:
+      - '.github/workflows/finalize-mobile-bundle.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout work branch
+        uses: actions/checkout@v4
+        with:
+          ref: feature/mobile-native-integrations-work
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install mobile dependencies
+        working-directory: mobile
+        run: npm install
+
+      - name: Run mobile tests
+        working-directory: mobile
+        run: npm test
+
+      - name: Build mobile web bundle
+        working-directory: mobile
+        run: npm run build
+
+      - name: Sync Android
+        working-directory: mobile
+        run: npx cap sync android
+
+      - name: Sync iOS
+        working-directory: mobile
+        run: npx cap sync ios
+
+      - name: Commit lockfile and native sync changes
+        shell: bash
+        run: |
+          git config user.name "TifloAcosta Mobile Build"
+          git config user.email "146574974+TifloAcosta@users.noreply.github.com"
+          git add mobile/package-lock.json mobile/android mobile/ios
+          if git diff --cached --quiet; then
+            echo "No generated changes to commit."
+            exit 0
+          fi
+          git commit -m "build: sync bundled mobile projects"
+          git push origin HEAD:feature/mobile-native-integrations-work

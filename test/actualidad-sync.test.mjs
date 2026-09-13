@@ -33,6 +33,20 @@ test('one failed source does not discard valid stories from another source', asy
   assert.deepEqual(result.failedSources, ['source-b']);
 });
 
+test('temporary source failures are retried before the source is discarded', async () => {
+  let attempts = 0;
+  const fetchFn = async () => {
+    attempts += 1;
+    if (attempts === 1) throw new Error('temporary network failure');
+    return response(rss());
+  };
+
+  const result = await syncActualidad({ sources: [source()], editorial: [], fetchFn, now: TEST_NOW });
+  assert.equal(attempts, 2);
+  assert.equal(result.stories.length, 1);
+  assert.deepEqual(result.failedSources, []);
+});
+
 test('all enabled sources failing rejects instead of returning an empty feed', async () => {
   await assert.rejects(
     syncActualidad({ sources: [source()], editorial: [], fetchFn: async () => { throw new Error('offline'); }, now: TEST_NOW }),

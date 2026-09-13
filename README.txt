@@ -100,7 +100,7 @@ PUBLICAR UNA ACTUALIZACIÓN EN GITHUB
 https://github.com/TifloAcosta/tifloacosta-app
 2. Activar “Añadir archivo”.
 3. Elegir “Subir archivos”.
-4. Seleccionar únicamente los archivos descomprimidos que se hayan preparado para esa actualización.
+4. Seleccionar únicamente los archivos descomprimidos que se hayan preparado para una actualización.
 5. Escribir un resumen claro del cambio.
 6. Guardar los cambios directamente en main, salvo que se indique expresamente otra cosa.
 7. Comprobar que GitHub Pages termina la publicación correctamente.
@@ -168,3 +168,10 @@ npm run sync:android
 npm run sync:ios   (macOS)
 
 Los proyectos nativos se encuentran en mobile/android y mobile/ios. El desarrollo móvil debe mantenerse en su rama de trabajo y no integrarse en main hasta que hayan pasado las pruebas automáticas y las pruebas manuales de accesibilidad con VoiceOver, TalkBack y, cuando sea posible, otros lectores de pantalla de Android.
+
+DATOS PENDIENTES PARA PUBLICACIÓN
+La base móvil se desarrolla sin inventar valores que solo existirán cuando se complete la configuración final en Apple y Google.
+
+Antes de publicar se incorporarán únicamente los datos reales correspondientes al identificador del equipo de Apple, la firma definitiva de Android, los archivos de asociación del dominio para enlaces universales y enlaces de aplicación, y la configuración final de avisos push en OneSignal.
+
+Hasta disponer de esos valores, la ruta tifloacosta:// se utiliza únicamente para comprobar el enrutamiento interno durante el desarrollo.

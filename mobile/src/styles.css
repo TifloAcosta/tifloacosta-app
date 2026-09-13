@@ -1,32 +1,42 @@
-:root {
-  font-family: system-ui, sans-serif;
-  line-height: 1.5;
-}
+:root { font-family: system-ui, sans-serif; line-height: 1.5; }
+body { margin: 0; }
+.skip-link { position: absolute; left: 0; top: 0; transform: translateY(-150%); }
+.skip-link:focus { transform: translateY(0); }
+#app { max-width: 52rem; margin: 0 auto; padding: 1rem; }
+button, a, input, select { font: inherit; }
 
-body {
-  margin: 0;
-}
-
-.skip-link {
+.visually-hidden {
   position: absolute;
-  left: 0;
-  top: 0;
-  transform: translateY(-150%);
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-.skip-link:focus {
-  transform: translateY(0);
+.home-menu {
+  list-style: none;
+  padding: 0;
 }
 
-#app {
-  max-width: 52rem;
-  margin: 0 auto;
-  padding: 1rem;
+.home-menu li + li {
+  margin-top: 0.75rem;
 }
 
-button,
-a,
-input,
-select {
-  font: inherit;
+.home-menu button {
+  width: 100%;
+  text-align: left;
+  padding: 0.85rem 1rem;
 }
+
+html.text-large { font-size: 112.5%; }
+html.text-xlarge { font-size: 125%; }
+html.text-max { font-size: 150%; }
+html.spacing-comfortable { line-height: 1.7; }
+html.spacing-wide { line-height: 1.9; }
+html.text-bold body { font-weight: 600; }
+html.theme-light { color-scheme: light; background: #fff; color: #000; }
+html.theme-dark { color-scheme: dark; background: #000; color: #fff; }

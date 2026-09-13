@@ -18,3 +18,8 @@ test('mobile shell is minimal, semantic and does not autofocus', async () => {
   assert.match(html, /<script type="module" src="\.\/app\.mjs"><\/script>/);
   assert.doesNotMatch(html, /autofocus/i);
 });
+
+test('mobile package declares the Node version required by Capacitor 8', async () => {
+  const pkg = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'));
+  assert.equal(pkg.engines?.node, '>=22.0.0');
+});

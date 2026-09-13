@@ -35,7 +35,7 @@ export function createContentStore({
   storage = globalThis.localStorage,
   url = DEFAULT_URL
 } = {}) {
-  let current = null;
+  let current = readCached(storage);
 
   return {
     async load() {

@@ -43,6 +43,16 @@ test('Apple Spain Newsroom mirrors official accessibility coverage when Apple pu
   assert.equal(source.feedUrl, 'https://www.apple.com/es/newsroom/rss-feed.rss');
 });
 
+test('Apple accessibility coverage has active official feeds in both natural languages', () => {
+  const en = byId.get('apple-newsroom-accessibility');
+  const es = byId.get('apple-newsroom-accessibility-es');
+  assert.equal(en?.enabled, true);
+  assert.equal(es?.enabled, true);
+  assert.equal(en?.lang, 'en');
+  assert.equal(es?.lang, 'es');
+  assert.notEqual(en?.feedUrl, es?.feedUrl);
+});
+
 test('approved English general technology written sources prioritize the clean TifloAcosta reader', () => {
   for (const id of ['ars-technica', 'the-verge', 'engadget', 'techcrunch', '9to5mac']) {
     const source = byId.get(id);

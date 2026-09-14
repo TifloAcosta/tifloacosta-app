@@ -33,3 +33,11 @@ test('both deployment paths use the same synchronization script', () => {
   assert.equal((generalPages.match(new RegExp(command.replaceAll('.', '\\.'), 'g')) || []).length, 1);
   assert.equal((actualidadSync.match(new RegExp(command.replaceAll('.', '\\.'), 'g')) || []).length >= 2, true);
 });
+
+test('Actualidad source validation runs when the shared core changes', () => {
+  assert.match(
+    actualidadSync,
+    /- 'actualidad-core\.js'/,
+    'The source-validation workflow must run after changes to actualidad-core.js because sync-actualidad imports it.'
+  );
+});

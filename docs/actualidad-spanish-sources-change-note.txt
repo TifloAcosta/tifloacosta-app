@@ -1,1 +1,0 @@
-Mejora de Actualidad en español: nuevas fuentes verificadas CTI de la ONCE, Usable y accesible y Conticgo; retirada de fuentes españolas inestables o poco adecuadas; límites por fuente; portada con máximo de dos noticias por fuente cuando hay alternativas. Validación real: 66 noticias y 59 pruebas superadas.

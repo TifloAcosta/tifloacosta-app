@@ -7,6 +7,7 @@
 
   const editorialStates = new Set(['source-only', 'selected', 'adapted', 'withheld']);
   const contentTypes = new Set(['news', 'app', 'audio', 'video']);
+  const DAY_MS = 24 * 60 * 60 * 1000;
 
   function cleanString(value) {
     return typeof value === 'string' ? value.trim() : '';
@@ -160,9 +161,18 @@
     return sortStories(selected);
   }
 
-  function homePreview(items, lang, limit = 5) {
+  function isFeaturedEligible(item, now = new Date(), maxAgeDays = 5) {
+    const published = new Date(item?.publishedAt).getTime();
+    const reference = now instanceof Date ? now.getTime() : new Date(now).getTime();
+    const safeDays = Number(maxAgeDays);
+    if (Number.isNaN(published) || Number.isNaN(reference) || !Number.isFinite(safeDays) || safeDays < 0) return false;
+    const age = reference - published;
+    return age >= 0 && age <= safeDays * DAY_MS;
+  }
+
+  function homePreview(items, lang, limit = 5, now = new Date()) {
     const safeLimit = Number.isInteger(limit) && limit > 0 ? limit : 5;
-    const ordered = publicStories(items, lang);
+    const ordered = publicStories(items, lang).filter(item => isFeaturedEligible(item, now));
     const selected = [];
     const deferred = [];
     const sourceCounts = new Map();
@@ -186,5 +196,5 @@
     return selected.slice(0, safeLimit);
   }
 
-  return { homePreview, localizedStory, normalizeContent, normalizeStory, publicStories, sortStories };
+  return { homePreview, isFeaturedEligible, localizedStory, normalizeContent, normalizeStory, publicStories, sortStories };
 }));

@@ -93,7 +93,15 @@
     };
   }
 
-  return { normalizeText, filterVideos, applySearchIndex, sortVideos, paginate };
+  function videoFromSearch(videos, search = '') {
+    let id = '';
+    try { id = new URLSearchParams(String(search || '')).get('video') || ''; } catch {}
+    if (!/^[A-Za-z0-9_-]{11}$/.test(id)) return null;
+    const items = Array.isArray(videos) ? videos : [];
+    return items.find(video => String(video && video.id || '') === id) || null;
+  }
+
+  return { normalizeText, filterVideos, applySearchIndex, sortVideos, paginate, videoFromSearch };
 });
 
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {

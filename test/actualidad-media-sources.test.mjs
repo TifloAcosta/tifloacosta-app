@@ -26,8 +26,29 @@ test('Double Tap uses its current Simplecast feed', () => {
   assert.equal(byId.get('double-tap')?.endpoint, 'https://feeds.simplecast.com/MhX_XZQZ');
 });
 
-test('La Manzana Mordida stays technology and uses the exact current YouTube handle', () => {
-  const source = byId.get('la-manzana-mordida');
-  assert.equal(source?.section, 'technology');
-  assert.equal(source?.youtubeHandle, '@lammordida');
+test('approved general technology channels stay explicitly outside accessibility', () => {
+  const expected = new Map([
+    ['la-manzana-mordida', '@lammordida'],
+    ['imanu-mx', '@imanumx'],
+    ['marcianotech', '@marcianotech'],
+    ['topes-de-gama', '@topesdegama'],
+    ['me-llaman-geek', '@MellamanGeek'],
+    ['chicageek', '@chicageek'],
+    ['tuapplemundo', '@tuapplemundo'],
+    ['isenacode', '@isenacodetv'],
+    ['xataka', '@XatakaTV'],
+    ['migue-baena-ia', '@MigueBaenaIA'],
+    ['urban-tecno', '@urbantecno']
+  ]);
+  for (const [id, handle] of expected) {
+    const source = byId.get(id);
+    assert.ok(source, `${id} is registered`);
+    assert.equal(source.enabled, true, `${id} is enabled`);
+    assert.equal(source.section, 'technology', `${id} stays in technology`);
+    assert.equal(source.type, 'video', `${id} is video`);
+    assert.equal(source.lang, 'es', `${id} is Spanish`);
+    assert.equal(source.adapter, 'youtube-handle', `${id} uses YouTube handle adapter`);
+    assert.equal(source.youtubeHandle, handle, `${id} uses the verified handle`);
+    assert.ok(Number(source.maxItems) <= 4, `${id} is source-limited`);
+  }
 });

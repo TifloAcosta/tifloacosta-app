@@ -67,6 +67,11 @@ function extractAtomLink(block) {
   return '';
 }
 
+function extractHtmlLink(block) {
+  const match = String(block || '').match(/<a\b[^>]*href\s*=\s*["']([^"']+)["'][^>]*>/i);
+  return match ? decodeEntities(match[1]).trim() : '';
+}
+
 function absoluteUrl(value, base) {
   try {
     return new URL(decodeEntities(value).trim(), base).toString();
@@ -152,6 +157,62 @@ export function parseCtiNewsHtml(html, source = {}) {
   }
 
   return entries;
+}
+
+export function parseBuscaAppsHtml(html, source = {}) {
+  const text = String(html || '');
+  const headings = [...text.matchAll(/<h2\b[^>]*>([\s\S]*?)<\/h2>/gi)];
+  const entries = [];
+  const seen = new Set();
+  const base = source.homepage || 'https://www.buscaapps.com/';
+  const sourceId = String(source.id || 'buscaapps').trim() || 'buscaapps';
+
+  for (let index = 0; index < headings.length; index += 1) {
+    const heading = headings[index];
+    const headingText = cleanText(heading[1]);
+    const meta = headingText.match(/^(.+?):?\s*\(([^()]+)\)\s*$/);
+    if (!meta) continue;
+
+    const title = meta[1].replace(/:\s*$/, '').trim();
+    const platform = meta[2].trim();
+    if (!title || !platform) continue;
+
+    const start = heading.index + heading[0].length;
+    const end = index + 1 < headings.length ? headings[index + 1].index : Math.min(text.length, start + 4000);
+    const block = text.slice(start, end);
+    const href = extractHtmlLink(heading[1]) || extractHtmlLink(block);
+    const url = canonicalizeUrl(absoluteUrl(href, base));
+    if (!url) continue;
+
+    const id = stableStoryId(sourceId, url);
+    if (seen.has(id)) continue;
+    seen.add(id);
+
+    const summary = [...block.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)]
+      .map(match => cleanText(match[1]))
+      .find(Boolean) || '';
+
+    entries.push({ id, title, url, platform, summary });
+  }
+
+  return entries;
+}
+
+export function detectNewDiscoveryItems(items, seenIds = []) {
+  const seen = seenIds instanceof Set
+    ? new Set(seenIds)
+    : new Set(Array.isArray(seenIds) ? seenIds : []);
+  const emitted = new Set();
+  const result = [];
+
+  for (const item of Array.isArray(items) ? items : []) {
+    const id = String(item?.id || '').trim();
+    if (!id || seen.has(id) || emitted.has(id)) continue;
+    emitted.add(id);
+    result.push(item);
+  }
+
+  return result;
 }
 
 export function classifyStoryCategories(entry = {}) {

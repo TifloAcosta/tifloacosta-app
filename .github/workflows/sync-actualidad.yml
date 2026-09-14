@@ -6,6 +6,7 @@ on:
       - main
       - 'feature/actualidad-*'
     paths:
+      - 'actualidad-core.js'
       - 'actualidad-sources.json'
       - 'actualidad-editorial.json'
       - 'scripts/actualidad-*.mjs'

@@ -25,13 +25,34 @@ function sourceEntries(text, source) {
   return parseFeedXml(text, source);
 }
 
-function matchesSourceKeywords(item, source) {
-  const keywords = Array.isArray(source?.includeKeywords)
-    ? source.includeKeywords.map(value => String(value || '').trim().toLowerCase()).filter(Boolean)
+function searchableKeywordText(value) {
+  return String(value || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function configuredKeywords(source, field) {
+  return Array.isArray(source?.[field])
+    ? source[field].map(searchableKeywordText).filter(Boolean)
     : [];
-  if (!keywords.length) return true;
-  const haystack = `${item?.title || ''} ${item?.summary || ''}`.toLowerCase();
-  return keywords.some(keyword => haystack.includes(keyword));
+}
+
+function includesKeyword(haystack, keyword) {
+  return ` ${haystack} `.includes(` ${keyword} `);
+}
+
+function matchesSourceKeywords(item, source) {
+  const includeKeywords = configuredKeywords(source, 'includeKeywords');
+  const excludeKeywords = configuredKeywords(source, 'excludeKeywords');
+  const haystack = searchableKeywordText(`${item?.title || ''} ${item?.summary || ''}`);
+
+  if (excludeKeywords.some(keyword => includesKeyword(haystack, keyword))) return false;
+  if (!includeKeywords.length) return true;
+  return includeKeywords.some(keyword => includesKeyword(haystack, keyword));
 }
 
 function limitSourceItems(items, source) {

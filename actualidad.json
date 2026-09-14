@@ -1,5 +1,393 @@
 [
   {
+    "id": "engadget-88ba7fef18a2e0f0",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2257929/elon-musk-x-corp-and-spacexai-just-moved-to-dismiss-their-lawsuit-against-apple/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T17:49:07.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Elon Musk's X Corp and SpaceXAI just moved to dismiss their lawsuit against Apple",
+        "summary": "A lawsuit from last year accused the iPhone-maker of suppressing apps like Grok on the App Store.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-e116c4cc7c137769",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/14/volkswagens-crazy-efficient-ev-borrows-an-idea-from-slate/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T17:41:20.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Volkswagen’s crazy-efficient EV borrows an idea from Slate",
+        "summary": "Volkswagen's new efficiency-minded halo car is almost twice as efficient as the most efficient production car, the Lucid Air.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-049711ad700b9ada",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2257893/netflix-is-making-movies-based-on-crazy-taxi-and-stranger-than-heaven/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T17:31:57.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Netflix is making movies based on Crazy Taxi and Stranger than Heaven",
+        "summary": "Netflix's deal with Sega includes a new Sonic animated series as well as movies based on Crazy Taxi and Stranger than Heaven.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-f83adc49ef66ce00",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2254118/how-to-know-if-usb-c-port-supports-video/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T17:30:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "How to know if your USB-C ports can support video",
+        "summary": "Your USB-C port can do a lot, but it won't necessarily be able to transfer video. Understanding what yours can do makes it easy to choose the best video option.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-27b321dfa3cf94b4",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/entertainment/994834/tiff-2026-movie-reviews",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T17:30:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "TIFF 2026: the latest movie reviews from Toronto",
+        "summary": "If you want an idea of what’s next in film, the Toronto International Film Festival is a good place to start. Every year TIFF features a huge range of features from around the world, and often some of them go on to be huge hits or awards contenders; the 2025 edition, for instance, included the […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-fb02593a2cf6dd98",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/14/apple-releases-macos-tahoe-26-7-and-macos-sequoia-15-8-heres-whats-new/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T17:27:43.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple releases macOS Tahoe 26.7 and macOS Sequoia 15.8, here’s what’s new",
+        "summary": "In addition to releasing macOS 27 Golden Gate , Apple is also rolling out macOS Tahoe 26.7 and macOS Sequoia 15.8. Here’s what’s new. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-56e689c6ecff882b",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/14/ios-26-7-now-available-for-iphone-heres-whats-new/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T17:22:57.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "programas-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iOS 26.7 now available for iPhone, here’s what’s new",
+        "summary": "Apple launched its major iOS 27 release today for iPhone. But for anyone not yet ready to install the new software version, Apple has also released a smaller iOS 26.7 update. Here’s what’s new. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "applevis-blog-edf0c1197fbfe301",
+    "type": "news",
+    "sourceId": "applevis-blog",
+    "sourceName": "AppleVis Blog",
+    "sourceUrl": "https://www.applevis.com/blog",
+    "originalUrl": "https://www.applevis.com/blog/watchos-27-summary-voiceover-features-issues-improvements",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T17:16:04.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-accesibilidad",
+      "apps-accesibles",
+      "programas-accesibles",
+      "ia-accesibilidad",
+      "braille"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "watchOS 27: A Summary of VoiceOver Features, Issues, and Improvements",
+        "summary": "Apple has today released watchOS 27 to the public. watchOS 27 is compatible with the Apple Watch Series 9 and later and the Apple Watch Ultra 2 and later. Due to the inherent challenges of beta software testing on watchOS, our testing of watchOS 27 has been quite limited. That said, for VoiceOver users, there is at least one new bug that we are aware of and a handful of new features and improvements. New VoiceOver Bugs in watchOS 27 There is rather significant latency with VoiceOver speech when swiping through the user interface. Specifically, there is a delay between when the VoiceOver sound effects/haptics play, and when VoiceOver speaks. Our testing suggests that this issue is not synthesizer-specific. It is unclear to us whether this behavior is simply a function of the newer operating system encountering the limits of hardware (something that has historically been a challenge on Apple Watch devices), or whether this is something that can be resolved by Apple in a future software update. A Feedback report has been filed, and we will keep the community advised as additional information becomes available. If you identify any additional vision accessibility bugs in watchOS 27, please let us know by posting a comment. New VoiceOver Features and Improvements in watchOS 27 There is a new \"Tap to Wake\" toggle in VoiceOver settings. By default, the setting is enabled, and the Watch will be woken when you tap on the screen. Our best understanding is that disabling this feature should prevent the device from waking when the screen is tapped. It is now possible to customize the speaking of VoiceOver hints in watchOS. Available options are 'Always', 'Never', and 'App-Specific Hints'. On the Clock Face, VoiceOver now speaks the names of Complications before speaking their content. For example, VoiceOver might say, \"Weather, Mostly Sunny 65 Degrees,\" instead of just saying \"Mostly Sunny 65 Degrees.\" For braille display users, there is a new setting, \"Translate After a Delay.\" There are other braille settings that we also believe may be new in this release, but our braille-related testing in watchOS is very limited and so this is not something we are able to comment on with any level of certainty. If you spot any other new features/changes in watchOS 27 or have any corrections to the above, please do let us know by posting a comment. watchOS 27 Release Notes watchOS 27 features the next generation of Apple Intelligence and Siri AI, updates to Workout Buddy, a new tap gesture, a dynamic app grid to make it easier to access your most used apps, and improvements that make watchOS 27 more responsive and delightful to use. Siri AI is an entirely new version of Siri that is more intelligent, knowledgeable, and capable. With improvements that span areas like fitness, design, performance, and more, the experience on watchOS 27 has been refined and elevated, so it feels even better to use. Siri AI A more capable and conversational version of Siri is rolling out to users. It helps you find what you need and get more done, drawing on capabilities like personal context understanding, app actions, onscreen awareness, and access to broad world knowledge. New voice experience offers more expressive and natural-sounding voices, and lets you customize expressivity and pace to make Siri more personal to you using powerful on-device models on paired iPhone Air and iPhone 17 Pro models and later. Dedicated Siri app provides an easy way to revisit an existing conversation or kick off a new one, and privately syncs conversations across your Apple products with iCloud. Apple Intelligence across apps Workout Buddy delivers motivation with new insights and is now available without your iPhone nearby when you have a Wi-Fi or cellular connection. Call Context in the Phone app understands when you’re speaking to certain businesses and proactively surfaces relevant information from across your apps, like a confirmation code or a reservation number. Cycle Tracking Cycle deviation notifications that are suggestive of perimenopause can be received by those age 40 and over. Watch Faces Siri Modular face features a rectangular complication that mirrors the top widget of the Smart Stack, which dynamically updates to show the most relevant widget, as well as a Siri complication to quickly invoke Siri. Smart Stack Single-handed tap gesture enables you to tap your index finger and thumb together once to select a widget in the Smart Stack, even if your other hand is occupied. New suggestion widgets will be surfaced when most relevant to you, including a Parked Car location, birthday reminders for a close contact, balance changes on a transit card, Noise app after a loud noise notification, and more. System Improvements Dynamic app grid highlights your most popular and recently used apps. Find My app is now consolidated into one app to show People, Devices, and Items with a map-centric interface. Media playback now starts faster. Workout app makes distance calculations during treadmill workouts even more accurate from the first step of every walk or run. Fitness app features more accurate route maps after workouts. Battery extension notifications may be proactively offered to disable certain features to increase battery life, including gestures, Start Workout reminders, and Raise to Speak method of invoking Siri. Shazam in the Smart Stack and Music Recognition app identifies songs offline without an internet connection and delivers results automatically when you’re back online. Liquid Glass refinements improve readability with more uniform refraction and improved contrast. For information on the security content of Apple software updates, please visit: https://support.apple.com/100100 Usage limits may apply for some Apple Intelligence features. To learn more, please visit: https://www.apple.com/apple-intelligence Software updates, like this one, add new features and improvements that may affect performance and/or battery life. To learn more, please visit: https://support.apple.com/125039 How to Update watchOS 27 is available via Over-the-Air Update (Settings > General > Software Update) or by going to the Watch app on your iPhone and navigating to General > Software Update. To install the update, your Watch must be connected to its charger and have at least 50% battery power.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-381d050980f1c9de",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/science/2026/09/prehistoric-builders-transported-devils-arrows-11-miles/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T17:10:54.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Prehistoric builders transported Devil's Arrows 11 miles",
+        "summary": "Isotropic analysis revealed the most likely source to be Brimham Rocks, not the nearby Plumpton Rocks.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-f24396943cdf898c",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/14/with-ios-27-im-actually-using-siri-again/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T17:10:30.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "With iOS 27, I’m actually using Siri again",
+        "summary": "Apple’s long-delayed Siri overhaul is finally here with iOS 27, and it changes how useful the assistant feels day to day",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-45289640e9b86f5f",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/14/watchos-27-now-available-for-apple-watch-heres-whats-new/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T17:10:29.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "watchOS 27 now available for Apple Watch, here’s what’s new",
+        "summary": "Apple has released its next major update for Apple Watch users: watchOS 27 is rolling out now. Here’s what’s new. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-1aa3919380123211",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/994818/apple-macos-27-golden-gate-available-now",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T17:10:13.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "macOS 27 is available now",
+        "summary": "Apple released macOS 27 Golden Gate on Monday, which brings the new Siri AI assistant, Liquid Glass improvements, improved performance, and more. The update is compatible with all Macs with Apple Silicon, but not Intel Macs - Apple released its final big update for Intel-based Macs last year with macOS Tahoe. Siri AI is arguably […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-1f08d757a1faffcb",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/14/macos-27-new-siri-takes-on-ai-productivity-apps/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T17:10:09.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "windows",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "macOS 27: new Siri takes on AI productivity apps",
+        "summary": "The two most noticeable things about macOS 27 Golden Gate are the newly updated Siri AI and the design changes that make windows and icons more consistent.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-fc4ff0ffee4229d1",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/news/994756/apple-ios-27-launch-iphone-siri-ai-update",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T17:08:49.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple releases iOS 27 with Siri AI overhaul",
+        "summary": "Apple is now rolling out its iOS 27 update to compatible devices today, alongside the watchOS 27, iPadOS 27, and visionOS 27 updates. Siri AI is the headline feature across all four updates, the delayed AI-powered overhaul of the Siri assistant. Siri AI is available as a beta today for English-only devices, and Apple says […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-a522d99962c30097",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/gaming/2026/09/steam-frame-the-ars-technica-review/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T17:00:07.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Steam Frame: The Ars Technica review",
+        "summary": "Valve's new $1,049 VR hardware tries to revive an abandoned VR \"revolution.\"",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-3ac7caaa930807cc",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/gadgets/2026/09/offensively-cheap-solar-power-is-looking-up/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T16:29:18.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "\"Offensively cheap\": Solar power is looking up",
+        "summary": "Chinese-made panels on rooftops across the world are changing the facts of life for big utilities.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "applevis-blog-0ff7bbe29855d2ef",
     "type": "news",
     "sourceId": "applevis-blog",
@@ -172,7 +560,7 @@
     "locales": {
       "en": {
         "title": "‎Muse from Meta",
-        "summary": "Muse is a personal AI agent that can manage email and schedules, book reservations, track spending, compare prices, plan workouts, and handle multistep tasks. It can connect to apps you choose, keep working after you close it, and ask for approval before taking actions. You can interact with Muse either through the native iOS app, through a browser interface at http://muse.ai or through WhatsApp chat messages.",
+        "summary": "Muse is a personal AI agent that can manage email and schedules, book reservations, track spending, compare prices, plan workouts, and handle multistep tasks. It can connect to apps you choose, keep working after you close it, and ask for approval before taking actions. You can interact with Muse either through the native iOS app, through a browser interface at http://muse.ai or through WhatsApp chat messages. Includes a robust free tier, and optional paid subscriptions if you go over.",
         "body": ""
       }
     },
@@ -1600,32 +1988,6 @@
       "en": {
         "title": "AppleVis Unlimited: What's New and Noteworthy for July 2026",
         "summary": "Welcome to the July 2026 edition of AppleVis Unlimited, your monthly digest of the latest and most notable content on the AppleVis website. This newsletter features a curated selection of community-submitted content, including new app entries, updates, news, podcast episodes, and popular discussions. We hope that you find this publication to be both helpful and informative. If you have any questions or feedback about this newsletter, please feel free to reach out using our Contact Form. AnonyMouse's App Pick of the Month: Whisper Notes - Speech to Text If you have been searching for a solid transcription app, Whisper Notes - Speech to Text deserves a spot on your radar. Whisper Notes is not a new entry on AppleVis, but a recent update made this the right time to give it a shoutout. Whisper Notes uses AI to transcribe audio into text. It handles transcription entirely on your device, so your recordings never leave your phone, and it is fast. It has a built in recorder for dictation or interviews, and you can also import audio and video files to transcribe from elsewhere. When you are done, you can export a timestamped transcript, and batch export or delete your files whenever you need to tidy things up. It is also very accessible with VoiceOver, and it continues to see regular updates. Read more about Whisper Notes here New Apps BookCraft Audio From the App Store: BookCraft is an audiobook reader and converter, designed from the ground up with accessibility in mind. Whether you listen with VoiceOver or by touch, it makes listening simple, comfortable and enjoyable. Additional Details: Primary platforms: iOS, iPadOS App is paid Developer: Stelios Platsis BookCraft Audio on AppleVis BookCraft Audio on the App Store Eden Qibla From the App Store: Eden Qibla is a prayer app designed to feel clear, elegant, and deeply accessible. It brings prayer times, reminders, a discreet widget, and precise Qibla guidance into a calm interface. Every part of the experience is built to remain readable, quick to reach, and pleasant to use, without unnecessary complexity. Additional Details: Primary platform: iOS App is free Developer: Khalid Talbi Eden Qibla on AppleVis Eden Qibla on the App Store Hear the Light From the App Store: Hear the Light turns light into sound, so you can \"hear\" where brightness is around you. It was designed from the ground up for people with vision loss. Point your device's back camera in any direction and listen to a tone that rises as the light gets stronger. This makes it easy to find a window, check whether a lamp is on, or tell if a device has an indicator light lit. Additional Details: Primary platforms: iOS, iPadOS App is free Developer: Stelios Platsis Hear the Light on AppleVis Hear the Light on the App Store Package Hero From the App Store: Become the Package Hero! Start with a bicycle and build a worldwide – later even interstellar – delivery empire. Parcels run around the clock on your conveyor belt, even while you're offline. Additional Details: Primary platforms: iOS, iPadOS App is free with in-app purchases Developer: Krogoor Entertainment Package Hero on AppleVis Package Hero on the App Store PeerTube From the App Store: Discover the PeerTube mobile application, a free alternative to video streaming giants like YouTube. Thanks to its decentralised network, PeerTube lets you watch, share and publish videos in complete freedom, while remaining in control of your data. The official PeerTube application is your gateway to hundreds of thousands of videos, available across more than a thousand different platforms, and now viewable on your mobile device wherever you are. Additional Details: Primary platforms: iOS, iPadOS App is free Developer: Framasoft PeerTube on AppleVis PeerTube on the App Store RingCraft From the App Store: Turn any song or video into your ringtone — hundredth-second precision, smooth fades, and full VoiceOver support. Make it. Hear it. Share it. RingCraft turns your favorite tracks into personal ringtones and alert sounds — simply, quickly and precisely. Import an audio or video file, pick exactly the part you want, and export it ready to use as a ringtone. Additional Details: Primary platform: iOS App is paid Developer: Stelios Platsis RingCraft on AppleVis RingCraft on the App Store Sonarpad From the App Store: Sonarpad Mobile arrives on the App Store: documents, news, podcasts, radio, routes, weather and accessible tools in one app. Sonarpad Mobile is an app designed to read, listen with text-to-speech, search and organise content in a simple and accessible way. With Sonarpad, you can manage documents, follow news and podcasts, search for radio stations, check routes, weather, calendar information and other useful everyday tools. Additional Details: Primary platforms: iOS, iPadOS App is free Developer: Ambrogio Riili Sonarpad on AppleVis Sonarpad on the App Store Swinsian From the developer's website: Swinsian is a sophisticated music player for macOS with wide format support, folder watching, advanced tag editing and designed to be responsive even with the largest libraries. Additional Details: Primary platform: macOS App is free with in-app purchases Developer: Swinsian Swinsian on AppleVis Swinsian on the developer's website WordBopper From the App Store: WordBopper is a fast, bouncy, and accessible word game where every letter is waiting to be bopped. Tap letters, build words, score points, and chase that delightful “just one more round” feeling. Make connected words for bonus points, build a streak, and unlock a 3x scoring boost before the clock runs out. It's quick to play, easy to learn, and will have you bopping and making so many words that you may just miss your stop on the train. The Daily Bop will keep bringing you back to find tougher words each day, and will let you ascend through the WordBopper ranks as you level up. Additional Details: Primary platforms: iOS, iPadOS App is free Developer: Marco Salsiccia WordBopper on AppleVis WordBopper on the App Store All recent app entries may be found at: iOS/iPadOS Mac Apple Watch Apple TV Notable App Updates AudioBooth: Audiobooks Player From the App Store: Your personal audiobook companion for Audiobookshelf. AudioBooth is a streamlined iOS client designed exclusively for Audiobookshelf users who value simplicity and performance. Built with a focus on essential audiobook listening features, AudioBooth delivers a clean, distraction-free experience for your self-hosted audiobook library. Below is a summary of Recent Updates to AudioBooth: Audiobooks Player. Please see the App Store page for full Release Notes. Ability to automatically download up next content for series and podcasts for offline listening New volume leveler Ability to play or resume books with Siri Ability to add multiple books to a playlist or collection with a single action Newly-published podcast episodes are automatically added to the cue Additional font support for Ebook reader Stability and accessibility improvements Additional Details: Primary platforms: iOS, iPadOS, macOS, watchOS App is free with in-app purchases Developer: Jeremy Grenier AudioBooth: Audiobooks Player on AppleVis AudioBooth: Audiobooks Player on the App Store BARD Mobile From the App Store: Access tens of thousands of books—from current best sellers to much-loved classics, popular magazines, and music instruction and scores—in audio and electronic braille, with new selections added daily. Below is a summary of recent updates to BARD Mobile. Please see the App Store page for full release notes. iOS 26 and iPadOS 26 support Long lists are now fully searchable Improvements to downloads, wishlists, braille, and VoiceOver focus Additional Details: Primary platforms: iOS, iPadOS App is free Developer: Library Of Congress BARD Mobile on AppleVis BARD Mobile on the App Store Cookie Voice Recipes From the App Store: Cookie is your intelligent voice-controlled cooking companion. Keep your hands free while cooking—simply say \"Cookie\" followed by your command to navigate recipes, set timers, check ingredients, and more. No messy screen touches required. Designed with accessibility in mind for users of all abilities. Below is a summary of recent updates to Cookie Voice Recipes. Please see the App Store page for full release notes. Renamed from Cookie to Cookie Voice Improvements to voice recognition, performance, security, and reliability Additional Details: Primary platforms: iOS, iPadOS App is free with in-app purchases Developer: Stitched Strategy LLC Cookie Voice Recipes on AppleVis Cookie Voice Recipes on the App Store Listen 2 Reader From the App Store: Listen2 runs neural text-to-speech directly on your iPhone or iPad without connecting to cloud services. No subscription or accounts — just a 7 day free trial and then a one-time purchase. Most text-to-speech apps either use the tried and true system voices or require monthly payments for cloud processing. Listen2 runs neural voice models locally using your iOS device's CPU and Apple Neural Engine, giving you natural-sounding speech without ongoing costs or privacy tradeoffs. Below is a summary of recent updates to Listen 2 Reader. Please see the App Store page for full release notes. Audio playback now resumes reliably when VoiceOver is on Ability to manually download image recognition model from the \"Manage Vision Model\" screen Rating prompt should no longer appear each time a file is imported Improvements to iCloud sync reliability Additional Details: Primary platforms: iOS, iPadOS App is free with in-app purchases Developer: Zach Swift Listen 2 Reader on AppleVis Listen 2 Reader on the App Store Yatzy & Farkle: Dice World From the App Store: Six classic dice games in one app — play online with friends or offline anytime. Turn-based matches mean no waiting. Take your turn whenever it fits your schedule, whether you have 2 minutes or 2 hours. Built from the ground up for VoiceOver accessibility. Below is a summary of recent updates to Yatzy & Farkle: Dice World. Please see the App Store page for full release notes. Rebuilt chat and social features for improved performance and reliability Improvements to performance, stability, and accessibility Additional Details: Primary platforms: iOS, iPadOS App is free with in-app purchases Developer: AppA11y, Inc. Yatzy & Farkle: Dice World on AppleVis Yatzy & Farkle: Dice World on the App Store zEdit From the App Store: zEdit — The Fully Accessible Video and Audio Editor Built for Blind Users zEdit is the world's first fully accessible video and audio editing app, designed from the ground up for blind and low-vision users. Most media editing tools rely on visual, drag-and-drop interfaces — making them nearly impossible to use with a screen reader. zEdit solves this at its core: every screen, every button, and every gesture is designed to work flawlessly with VoiceOver. You can now edit your videos and audio recordings completely independently, without needing anyone else's help. Below is a summary of recent updates to zEdit. Please see the App Store page for full release notes. New sound and cinematic visual effects and audio filters New \"Audio Compressor\" for leveling out sound volume Ability to change the speed of content from 0.25x to 4x Ability to import effects from royalty-free sources Ability to undo and redo actions Ability to insert content precisely where you want New \"Use Current Position\" button for starting and ending trims New \"Sound Map,\" \"Filler Cleanup,\" and \"Scene Draft\" smart tools New \"Loop Forever\" option for continuously repeating music New \"Auto-duck music during speech\" option Projects can now be merged Ability to receive content shared from Files, Photos, and Voice Memos apps Ability to reorder files using VoiceOver rotor Ability to adjust position by second using VoiceOver rotor Added Chinese (Simplified), Korean, Portuguese, and Ukrainian language support Numerous bug fixes, feature enhancements, and performance improvements Additional Details: Primary platform: iOS App is free Developer: MERIC KARACA zEdit on AppleVis zEdit on the App Store Recent News and Views Apple Releases Version 26.6 of iOS, iPadOS, macOS, watchOS, and tvOS with Security Updates and Optimizations for upcoming \"27\" Updates By AppleVis | July 27, 2026 Apple has today released version 26.6 of the iOS, iPadOS, macOS, watchOS, and tvOS platforms, bringing bug fixes, security updates, and optimizations to prepare for the upcoming \"27\" updates. All recent blog posts may be found at: AppleVis Blog This Month on the AppleVis Podcast Note: All episodes include AI-generated transcripts. Transcripts can be located on each episode's page by navigating to the \"Transcript\" heading below the description. A Demonstration and Walkthrough of Be My Eyes for Mac In this episode, Tyler demonstrates the Be My Eyes app for Mac. (Editor's Note: Be My Eyes is the parent company of AppleVis.) A Demonstration and Walkthrough of Be My Eyes for Mac (MP3) AppleVis Extra 114: Blind Developer Showcase: A Chat with Ashley Cox of Simulcast In this episode of the AppleVis Extra podcast, David Nason is joined by Ashley Cox, a blind software developer who is building native apps for Apple's platforms with a strong focus on accessibility, usability, and thoughtful design. AppleVis Extra 114: Blind Developer Showcase: A Chat with Ashley Cox of Simulcast (MP3) AppleVis Extra 115: Blind Developer Showcase: A Chat with Quinton Williams of VAL: Voice, Alarm & Chimes In this episode of the AppleVis Extra podcast, David Nason is joined by Quinton Williams, the developer of VAL: Voice, Alarm & Chimes. Quintin shares the story behind creating the app, how a personal interest in accessible talking clocks inspired the project, and how an idea that began as a simple experiment quickly evolved into a feature-rich app for iPhone and Mac. AppleVis Extra 115: Blind Developer Showcase: A Chat with Quinton Williams of VAL: Voice, Alarm & Chimes (MP3) All recent podcast episodes may be found at: AppleVis Podcast New and Updated Guides macOS Beta Testing for the Beginner By Tyler | Updated July 2026 AI-generated summary: This guide provides an overview of macOS beta testing, including how to obtain and install beta versions, and how to report feedback to Apple. It emphasizes the importance of backing up data before installing a beta, as they can be unstable and may contain bugs. The guide also explains how to create a separate volume for testing, allowing users to keep their primary system stable. All recent guides may be found at: AppleVis Guides & Tutorials Popular Topics Below is a selection of popular topics on the AppleVis Forum during July 2026: DSM Access — a native, accessible Mac app for your Synology NAS Apple accessories. First time buying a Mac, some input needed Tiktok doesn't like VoiceOver Need Help Selecting Emoji Categories All recent forum topics may be found at: Apple Posts Non-Apple Posts Connect with Us Subscribe to AppleVis on YouTube Follow AppleVis on Mastodon Follow AppleVis on X Visit and like the AppleVis Facebook Page Learn about The Be My Eyes app Download Be My Eyes from the App Store Wishing you the best and every good thing, The AppleVis Editorial Team A Be My Eyes Company",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "applevis-blog-5e0610a4599421fb",
-    "type": "news",
-    "sourceId": "applevis-blog",
-    "sourceName": "AppleVis Blog",
-    "sourceUrl": "https://www.applevis.com/blog",
-    "originalUrl": "https://www.applevis.com/blog/announcing-anonymouses-app-pick-month-july-2026-whisper-notes-speech-text",
-    "originalLanguage": "en",
-    "publishedAt": "2026-07-31T12:02:58.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-accesibilidad",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Announcing AnonyMouse's App Pick of the Month for July 2026: Whisper Notes - Speech to Text",
-        "summary": "Welcome to the July 2026 installment of AnonyMouse's App Pick of the Month, where each month I highlight a new or noteworthy app. This month's pick is Whisper Notes - Speech to Text . Although it is not a new entry on AppleVis this month, this app has been on my radar for a while, and a recent update made it feel like the right time to give it a spotlight. If you have been on the hunt for a solid transcription app, Whisper Notes - Speech to Text is worth a look. As a longtime user of the AI Note Taker VoicePen, which some of you may recognize from the transcriptions on our AppleVis podcasts, I have made the switch to Whisper Notes as my go-to transcription app. Everything happens entirely on your device, so your recordings never leave your phone, and the process is fast. The app is very accessible with VoiceOver, and it continues to see regular updates. Whisper Notes handles more than just quick voice memos. It has a built-in recorder you can use for dictation or interviews, and you can also import audio and video files to transcribe from elsewhere. When you are done, you can export a timestamped transcript, and batch export or delete your files whenever you need to tidy things up. It is great for more than just podcasts, useful for any recording you would like turned into text. And, Whisper Notes is a one-time purchase rather than a subscription, which is a nice change of pace in a category where subscriptions have become the norm. Why I'm Picking Whisper Notes - Speech to Text This Month Whisper Notes may not appeal to everyone, but it is well worth considering if you are a student who needs to transcribe lectures; someone who dictates notes for work; or really anyone who has ever needed a recording turned into text. Download the App Whisper Notes - Speech to Text is available on the App Store for a one-time purchase of $3.99. Download on the App Store: https://apps.apple.com/us/app/whisper-notes-speech-to-text/id6447090616 Now It's Your Turn Have you tried Whisper Notes yet? I would love to hear how you are using it and what you think of it so far. Drop it in the comments.",
         "body": ""
       }
     },

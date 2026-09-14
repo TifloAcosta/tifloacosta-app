@@ -1,0 +1,50 @@
+[
+  {
+    "id": "applevis-podcast",
+    "name": "AppleVis Podcast",
+    "homepage": "https://www.applevis.com/podcasts",
+    "endpoint": "https://www.applevis.com/feed/podcasts",
+    "section": "accessibility",
+    "type": "audio",
+    "lang": "en",
+    "adapter": "feed",
+    "enabled": true,
+    "maxItems": 8
+  },
+  {
+    "id": "double-tap",
+    "name": "Double Tap",
+    "homepage": "https://doubletaponair.com/",
+    "endpoint": "https://www.doubletaponair.com/podcast",
+    "section": "accessibility",
+    "type": "audio",
+    "lang": "en",
+    "adapter": "feed",
+    "enabled": true,
+    "maxItems": 8
+  },
+  {
+    "id": "tifloaudio",
+    "name": "Tiflo Audio",
+    "homepage": "https://www.tifloaudio.com/",
+    "endpoint": "https://www.tifloaudio.com/",
+    "section": "accessibility",
+    "type": "audio",
+    "lang": "es",
+    "adapter": "tifloaudio-html",
+    "enabled": true,
+    "maxItems": 8
+  },
+  {
+    "id": "la-manzana-mordida",
+    "name": "La Manzana Mordida",
+    "homepage": "https://www.youtube.com/@LaManzanaMordida",
+    "section": "technology",
+    "type": "video",
+    "lang": "es",
+    "adapter": "youtube-handle",
+    "youtubeHandle": "@LaManzanaMordida",
+    "enabled": true,
+    "maxItems": 8
+  }
+]

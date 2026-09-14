@@ -57,6 +57,7 @@
     "includeKeywords": ["accessibility", "voiceover", "voice control", "braille", "magnifier", "live listen", "personal voice", "hearing aid", "assistive access", "accessibility reader"],
     "editorialClass": "official-accessibility",
     "translationPolicy": "always-es",
+    "mirrorGroup": "apple-accessibility",
     "maxItems": 6,
     "enabled": true
   },
@@ -70,6 +71,7 @@
     "includeKeywords": ["accesibilidad", "voiceover", "control por voz", "braille", "lupa", "escucha en directo", "voz personal", "audífonos", "acceso asistido", "lector de accesibilidad"],
     "editorialClass": "official-accessibility",
     "translationPolicy": "official-spanish-first",
+    "mirrorGroup": "apple-accessibility",
     "maxItems": 6,
     "enabled": true
   },

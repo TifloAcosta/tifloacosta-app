@@ -34,6 +34,13 @@ test('multimedia rendering keeps source section authoritative and external sourc
   assert.match(js, /originalLanguage/);
 });
 
+test('multimedia uses a localized editorial title and summary when available', async () => {
+  const js = await read('actualidad-media.js');
+  assert.match(js, /item\.locales\?\.\[currentLanguage\(\)\]/);
+  assert.match(js, /localized\.title \|\| item\.title/);
+  assert.match(js, /localized\.summary \|\| item\.summary/);
+});
+
 test('audio uses native controls without a redundant play toggle', async () => {
   const js = await read('actualidad-media.js');
   assert.match(js, /item\.type === 'audio' && item\.mediaUrl/);

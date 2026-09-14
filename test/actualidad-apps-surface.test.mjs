@@ -6,7 +6,7 @@ const read = file => readFile(new URL(`../${file}`, import.meta.url), 'utf8');
 
 let appsModule = {};
 try {
-  appsModule = await import('../scripts/actualidad-apps.mjs');
+  appsModule = await import('../scripts/sync-actualidad-apps.mjs');
 } catch (error) {
   appsModule = {};
 }

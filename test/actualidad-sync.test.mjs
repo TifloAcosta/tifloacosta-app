@@ -105,6 +105,22 @@ test('per-source limits prevent one source from flooding the feed', async () => 
   assert.deepEqual(result.stories.map(item => item.locales.en.title), ['Newest', 'Middle']);
 });
 
+test('keyword-filtered broad sources keep only relevant items', async () => {
+  const xml = `<?xml version="1.0"?><rss><channel>
+    <item><title>Apple unveils new accessibility features</title><link>https://example.com/accessibility</link><pubDate>Sun, 13 Sep 2026 12:00:00 GMT</pubDate><description>VoiceOver and Braille updates</description></item>
+    <item><title>Apple introduces a new Mac</title><link>https://example.com/mac</link><pubDate>Sun, 13 Sep 2026 11:00:00 GMT</pubDate><description>New desktop hardware</description></item>
+  </channel></rss>`;
+
+  const result = await syncActualidad({
+    sources: [source({ includeKeywords: ['accessibility', 'voiceover', 'braille'] })],
+    editorial: [],
+    fetchFn: async () => response(xml),
+    now: TEST_NOW
+  });
+
+  assert.deepEqual(result.stories.map(item => item.locales.en.title), ['Apple unveils new accessibility features']);
+});
+
 test('output order is deterministic regardless of source order', async () => {
   const newer = source({ id: 'newer', feedUrl: 'https://new.example/feed.xml', homepage: 'https://new.example/' });
   const older = source({ id: 'older', feedUrl: 'https://old.example/feed.xml', homepage: 'https://old.example/' });

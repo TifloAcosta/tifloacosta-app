@@ -25,6 +25,15 @@ function sourceEntries(text, source) {
   return parseFeedXml(text, source);
 }
 
+function matchesSourceKeywords(item, source) {
+  const keywords = Array.isArray(source?.includeKeywords)
+    ? source.includeKeywords.map(value => String(value || '').trim().toLowerCase()).filter(Boolean)
+    : [];
+  if (!keywords.length) return true;
+  const haystack = `${item?.title || ''} ${item?.summary || ''}`.toLowerCase();
+  return keywords.some(keyword => haystack.includes(keyword));
+}
+
 function limitSourceItems(items, source) {
   const maxItems = Number.isInteger(source?.maxItems) && source.maxItems > 0 ? source.maxItems : null;
   const sorted = [...items].sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
@@ -44,7 +53,8 @@ async function fetchSourceOnce(source, fetchFn) {
   const text = await response.text();
   const normalized = sourceEntries(text, source)
     .map(entry => normalizeFeedEntry(entry, source))
-    .filter(Boolean);
+    .filter(Boolean)
+    .filter(item => matchesSourceKeywords(item, source));
   return limitSourceItems(normalized, source);
 }
 

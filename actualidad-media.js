@@ -67,6 +67,11 @@
     let loadFailed = false;
     const currentLanguage = () => document.documentElement.lang?.toLowerCase().startsWith('en') ? 'en' : 'es';
 
+    function mediaVisibleInLanguage(item, lang) {
+      if (item.originalLanguage === lang) return true;
+      return item.editorialState === 'adapted' && Boolean(item.locales?.[lang]);
+    }
+
     function formatDate(value) {
       const date = new Date(value);
       if (Number.isNaN(date.getTime())) return '';
@@ -123,7 +128,7 @@
 
     function renderSection(section, list) {
       const c = copy[currentLanguage()];
-      const visible = items.filter(item => item.section === section);
+      const visible = items.filter(item => item.section === section && mediaVisibleInLanguage(item, currentLanguage()));
       list.replaceChildren();
       if (!visible.length) {
         const empty = document.createElement('p');

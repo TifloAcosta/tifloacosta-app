@@ -76,3 +76,9 @@ test('both deployment paths regenerate and publish the apps catalog independentl
   assert.match(syncWorkflow, /actualidad-apps\.json/);
   assert.match(worker, /actualidad-apps\.json/);
 });
+
+test('changes to the app synchronizer trigger Actualidad source validation', async () => {
+  const workflow = await read('.github/workflows/sync-actualidad.yml');
+  const pathsBlock = workflow.match(/paths:\s*([\s\S]*?)\n\s*schedule:/)?.[1] || '';
+  assert.match(pathsBlock, /scripts\/sync-actualidad-apps\.mjs/);
+});

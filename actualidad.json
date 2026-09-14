@@ -18,23 +18,6 @@
     "featuredRank": null
   },
   {
-    "id": "actualidad-accesible-cba74bfe1f1bb366",
-    "lang": "es",
-    "title": "X ya permite programar publicaciones desde el iPhone: así funciona con VoiceOver",
-    "sourceId": "actualidad-accesible",
-    "sourceName": "Actualidad Accesible",
-    "sourceUrl": "https://actualidadaccesible.com/",
-    "originalUrl": "https://actualidadaccesible.com/2026/09/13/x-programar-publicaciones-iphone-voiceover/",
-    "publishedAt": "2026-09-13T23:36:39.000Z",
-    "categories": [
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "summary": "X estrena la programación de publicaciones en iOS. La probé con VoiceOver y el proceso es completamente accesible. The post X ya permite programar publicaciones desde el iPhone: así funciona con VoiceOver appeared first on Actualidad Accesible .",
-    "body": "",
-    "featuredRank": null
-  },
-  {
     "id": "applevis-blog-5a9a756edf4b9ae4",
     "lang": "en",
     "title": "What's new in Accessibility in iOS 27 for Blind and DeafBlind Users",
@@ -127,23 +110,6 @@
     "featuredRank": null
   },
   {
-    "id": "actualidad-accesible-ae97fd718a8290ed",
-    "lang": "es",
-    "title": "Qué se cuenta el mundo",
-    "sourceId": "actualidad-accesible",
-    "sourceName": "Actualidad Accesible",
-    "sourceUrl": "https://actualidadaccesible.com/",
-    "originalUrl": "https://actualidadaccesible.com/2026/09/13/que-se-cuenta-el-mundo-295/",
-    "publishedAt": "2026-09-13T07:02:13.000Z",
-    "categories": [
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "summary": "BUSCAMOS LOS MEJORES PODCASTS Y VIDEOS DE YOUTUBE SOBRE TECNOLOGÍA Y ACCESIBILIDAD PUBLICADOS DURANTE LA SEMANA,HASTA HOY DÍA 13 DE SEPTIEMBRE DE 2026 PARA AMPLIAR LA INFORMACIÓN VISITA NUESTRA PÁGINA WEB https://actualidadaccesible.com/ O BÚSCANOS EN PLATAFORMAS DE PODCASTS Y EN YOUTUBE SOMOS ACTUALIDAD ACCESIBLE The post Qué se cuenta el mundo appeared first on Actualidad Accesible .",
-    "body": "",
-    "featuredRank": null
-  },
-  {
     "id": "applevis-apps-9b1b82d9dfad3d73",
     "lang": "en",
     "title": "Final Fortress",
@@ -216,53 +182,70 @@
     "featuredRank": null
   },
   {
-    "id": "actualidad-accesible-3fe0b19396a220dc",
+    "id": "cti-once-66c54d7f9f93a856",
     "lang": "es",
-    "title": "ACTUALIDAD ACCESIBLE NEWS RESUMEN SEMANAL",
-    "sourceId": "actualidad-accesible",
-    "sourceName": "Actualidad Accesible",
-    "sourceUrl": "https://actualidadaccesible.com/",
-    "originalUrl": "https://actualidadaccesible.com/2026/09/11/actualidad-accesible-resumen-semanal-12/",
-    "publishedAt": "2026-09-11T06:05:30.000Z",
+    "title": "Evaluaciones de APP Evaluaciones de APP actualizadas o incorporadas en el ClubONCE en el mes de agosto.",
+    "sourceId": "cti-once",
+    "sourceName": "CTI de la ONCE",
+    "sourceUrl": "https://cti.once.es/",
+    "originalUrl": "https://cti.once.es/noticias/evaluaciones-de-app-actualizadas-o-incorporadas-en-el-clubonce-en-el-mes-de-agosto-5",
+    "publishedAt": "2026-09-11T12:00:00.000Z",
     "categories": [
       "tecnologia-accesibilidad"
     ],
     "editorialState": "source-only",
-    "summary": "RECOPILAMOS PARA TI NOTICIAS DE TECNOLOGÍA,ACCESIBILIDAD,PRUEBAS,TUTORIALES Y OTRAS INFORMACIONES PUBLICADAS EN MEDIOS DIGITALES DEL SECTOR Y EN https://actualidadaccesible.com/ HASTA HOY DÍA 11 DE SEPTIEMBRE DE 2026 PARA AMPLIAR LA INFORMACIÓN VISITA NUESTRA PÁGINA WEB https://actualidadaccesible.com/ O BÚSCANOS EN PLATAFORMAS DE PODCASTS Y EN YOUTUBE SOMOS ACTUALIDAD ACCESIBLE The post ACTUALIDAD ACCESIBLE NEWS RESUMEN SEMANAL appeared first on Actualidad Accesible .",
+    "summary": "A lo largo del pasado mes de agosto se han evaluado las siguientes APP:",
     "body": "",
     "featuredRank": null
   },
   {
-    "id": "actualidad-accesible-642c784778e0f8f1",
+    "id": "conticgo-d5d55a3b11d9a2db",
     "lang": "es",
-    "title": "Probé Muse con VoiceOver: primeras impresiones del nuevo agente de IA de Meta",
-    "sourceId": "actualidad-accesible",
-    "sourceName": "Actualidad Accesible",
-    "sourceUrl": "https://actualidadaccesible.com/",
-    "originalUrl": "https://actualidadaccesible.com/2026/09/10/muse-meta-voiceover-accesibilidad-primeras-impresiones/",
-    "publishedAt": "2026-09-10T16:23:02.000Z",
+    "title": "Graphy: la inteligencia artificial que convierte gráficos en información táctil para personas con discapacidad visual",
+    "sourceId": "conticgo",
+    "sourceName": "Conticgo",
+    "sourceUrl": "https://conticgo.net/",
+    "originalUrl": "https://conticgo.net/graphy-la-inteligencia-artificial-que-convierte-graficos-en-informacion-tactil-para-personas-con-discapacidad-visual/",
+    "publishedAt": "2026-09-11T10:00:58.000Z",
     "categories": [
       "tecnologia-accesibilidad"
     ],
     "editorialState": "source-only",
-    "summary": "Probé Muse de Meta con VoiceOver en un iPhone 15 Pro Max. Estas son mis primeras impresiones sobre su accesibilidad y posibilidades. The post Probé Muse con VoiceOver: primeras impresiones del nuevo agente de IA de Meta appeared first on Actualidad Accesible .",
+    "summary": "Acceder a gráficos, mapas, esquemas o representaciones de datos continúa siendo un reto para muchas personas ciegas y con baja visión. En este contexto, Graphy: la inteligencia artificial que convierte gráficos en información táctil para personas con discapacidad visual, presenta un nuevo enfoque que combina inteligencia artificial conversacional y tecnología táctil dinámica para facilitar la […] La entrada Graphy: la inteligencia artificial que convierte gráficos en información táctil para personas con discapacidad visual se publicó primero en Conticgo .",
     "body": "",
     "featuredRank": null
   },
   {
-    "id": "actualidad-accesible-e3d1b0e8cc8d5046",
+    "id": "cti-once-d56459dc69edcd87",
     "lang": "es",
-    "title": "AirPods 5 vs AirPods 4: novedades, precios y accesibilidad",
-    "sourceId": "actualidad-accesible",
-    "sourceName": "Actualidad Accesible",
-    "sourceUrl": "https://actualidadaccesible.com/",
-    "originalUrl": "https://actualidadaccesible.com/2026/09/10/airpods-5-vs-airpods-4-novedades-precios-accesibilidad/",
-    "publishedAt": "2026-09-10T12:12:17.000Z",
+    "title": "Accesibilidad y Tecnología Vive el fútbol accesible con Movistar Touch en el estadio Riyadh Air Metropolitano.",
+    "sourceId": "cti-once",
+    "sourceName": "CTI de la ONCE",
+    "sourceUrl": "https://cti.once.es/",
+    "originalUrl": "https://cti.once.es/noticias/vive-el-futbol-accesible-con-movistar-touch-en-el-estadio-riyadh-air-metropolitano",
+    "publishedAt": "2026-09-10T12:00:00.000Z",
     "categories": [
       "tecnologia-accesibilidad"
     ],
     "editorialState": "source-only",
-    "summary": "Comparamos los AirPods 5 con los AirPods 4: cancelación de ruido, batería, resistencia, traducción en vivo, accesibilidad y precios. The post AirPods 5 vs AirPods 4: novedades, precios y accesibilidad appeared first on Actualidad Accesible .",
+    "summary": "Gracias a la colaboración entre la ONCE, Movistar y el Atlético de Madrid, las personas afiliadas podrán disfrutar de una experiencia más accesible e inmersiva durante los partidos de fútbol que se celebren en el estadio Riyadh Air Metropolitano.",
+    "body": "",
+    "featuredRank": null
+  },
+  {
+    "id": "conticgo-3ce969fc55590368",
+    "lang": "es",
+    "title": "VIABench pone a prueba la inteligencia artificial para ayudar a las personas con discapacidad visual",
+    "sourceId": "conticgo",
+    "sourceName": "Conticgo",
+    "sourceUrl": "https://conticgo.net/",
+    "originalUrl": "https://conticgo.net/viabench-pone-a-prueba-la-inteligencia-artificial-para-ayudar-a-las-personas-con-discapacidad-visual/",
+    "publishedAt": "2026-09-10T08:00:07.000Z",
+    "categories": [
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "summary": "La inteligencia artificial está transformando rápidamente las herramientas de apoyo para las personas ciegas y con baja visión. Sin embargo, todavía existe una pregunta fundamental: ¿realmente estas tecnologías son útiles en situaciones cotidianas? Precisamente para responder a esta cuestión surge VIABench pone a prueba la inteligencia artificial para ayudar a las personas con discapacidad visual, […] La entrada VIABench pone a prueba la inteligencia artificial para ayudar a las personas con discapacidad visual se publicó primero en Conticgo .",
     "body": "",
     "featuredRank": null
   },
@@ -285,57 +268,6 @@
     "featuredRank": null
   },
   {
-    "id": "actualidad-accesible-1937ca9101a523dc",
-    "lang": "es",
-    "title": "RESUMEN APPLE EVENT EN ACTUALIDAD ACCESIBLE",
-    "sourceId": "actualidad-accesible",
-    "sourceName": "Actualidad Accesible",
-    "sourceUrl": "https://actualidadaccesible.com/",
-    "originalUrl": "https://actualidadaccesible.com/2026/09/09/resumen-del-evento-de-apple-septiembre2026/",
-    "publishedAt": "2026-09-09T21:57:41.000Z",
-    "categories": [
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "summary": "RESUMEN DEL EVENTO DE APPLE EN QUE HAN PRESENTADO LOS NUEVOS IPHONE 18 PRO,EL IPHONE DUO Y MUCHO MÁS PARA AMPLIAR LA INFORMACIÓN VISITA NUESTRA PÁGINA WEB https://actualidadaccesible.com/ O BÚSCANOS EN PLATAFORMAS DE PODCASTS Y EN YOUTUBE SOMOS ACTUALIDAD ACCESIBLE The post RESUMEN APPLE EVENT EN ACTUALIDAD ACCESIBLE appeared first on Actualidad Accesible .",
-    "body": "",
-    "featuredRank": null
-  },
-  {
-    "id": "actualidad-accesible-71ec95afbcb75159",
-    "lang": "es",
-    "title": "iOS 27 y iPadOS 27: estos son los iPhone y iPad compatibles",
-    "sourceId": "actualidad-accesible",
-    "sourceName": "Actualidad Accesible",
-    "sourceUrl": "https://actualidadaccesible.com/",
-    "originalUrl": "https://actualidadaccesible.com/2026/09/09/ios-27-ipados-27-iphone-ipad-compatibles/",
-    "publishedAt": "2026-09-09T19:17:21.000Z",
-    "categories": [
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "summary": "Consulta qué iPhone y iPad pueden instalar iOS 27 y iPadOS 27, incluidos el iPhone Duo y los nuevos iPhone 18 Pro. The post iOS 27 y iPadOS 27: estos son los iPhone y iPad compatibles appeared first on Actualidad Accesible .",
-    "body": "",
-    "featuredRank": null
-  },
-  {
-    "id": "actualidad-accesible-7f1bf437e7e284db",
-    "lang": "es",
-    "title": "Últimas filtraciones del evento de Apple: iPhone Duo, precios y novedades antes de la keynote",
-    "sourceId": "actualidad-accesible",
-    "sourceName": "Actualidad Accesible",
-    "sourceUrl": "https://actualidadaccesible.com/",
-    "originalUrl": "https://actualidadaccesible.com/2026/09/09/ultimas-filtraciones-evento-apple-iphone-duo-2026/",
-    "publishedAt": "2026-09-09T14:51:25.000Z",
-    "categories": [
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "summary": "El iPhone Duo plegable, nuevos iPhone 18 Pro y más: repasamos las últimas filtraciones antes del evento de Apple. The post Últimas filtraciones del evento de Apple: iPhone Duo, precios y novedades antes de la keynote appeared first on Actualidad Accesible .",
-    "body": "",
-    "featuredRank": null
-  },
-  {
     "id": "freedom-scientific-blog-22a87afabb8e5970",
     "lang": "en",
     "title": "Vispero Connect: Now Also On YouTube",
@@ -350,6 +282,23 @@
     ],
     "editorialState": "source-only",
     "summary": "You asked, we listened. Vispero Connect, our official monthly podcast, is now available on YouTube. Each episode features product news and tips, interviews with members of our Vispero team, user stories, as well as previews of our upcoming training events. View Vispero Connect playlist on our YouTube channel Of course, you can still find us …",
+    "body": "",
+    "featuredRank": null
+  },
+  {
+    "id": "conticgo-82cd59e7efd67073",
+    "lang": "es",
+    "title": "Arregla el idioma de VoiceOver en correos y aplicaciones.",
+    "sourceId": "conticgo",
+    "sourceName": "Conticgo",
+    "sourceUrl": "https://conticgo.net/",
+    "originalUrl": "https://conticgo.net/arregla-el-idioma-de-voiceover-en-correos-y-aplicaciones/",
+    "publishedAt": "2026-09-09T08:00:35.000Z",
+    "categories": [
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "summary": "Desde EsRetina seguimos trabajando para acercar la tecnología de forma accesible a todas las personas. En esta ocasión, compartimos un nuevo videotutorial accesible donde explicamos paso a paso cómo cambiar el idioma del VoiceOver en Mail y otras aplicaciones. Este contenido forma parte del proyecto Conticgo y ha sido creado con un enfoque claro: fomentar la […] La entrada Arregla el idioma de VoiceOver en correos y aplicaciones. se publicó primero en Conticgo .",
     "body": "",
     "featuredRank": null
   },
@@ -408,23 +357,6 @@
     "featuredRank": null
   },
   {
-    "id": "actualidad-accesible-238bf706453faf6c",
-    "lang": "es",
-    "title": "Mañana Apple tiene una cita clave: esto es lo que espero del nuevo iPhone y lo que quiero comprobar con VoiceOver",
-    "sourceId": "actualidad-accesible",
-    "sourceName": "Actualidad Accesible",
-    "sourceUrl": "https://actualidadaccesible.com/",
-    "originalUrl": "https://actualidadaccesible.com/2026/09/08/evento-apple-septiembre-2026-iphone-plegable-voiceover/",
-    "publishedAt": "2026-09-08T21:54:12.000Z",
-    "categories": [
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "summary": "Apple celebra mañana su gran evento de septiembre. Repasamos qué se espera del posible iPhone plegable, los iPhone 18 Pro y Pro Max, Siri y Apple Intelligence, pero con una pregunta diferente: ¿qué queremos comprobar realmente con VoiceOver? The post Mañana Apple tiene una cita clave: esto es lo que espero del nuevo iPhone y lo que quiero comprobar con VoiceOver appeared first on Actualidad Accesible .",
-    "body": "",
-    "featuredRank": null
-  },
-  {
     "id": "applevis-blog-9a8fe57d9786cf69",
     "lang": "en",
     "title": "Apple Releases iOS 26.6.2 and iPadOS 26.6.2 with Fix for Problems Downloading Updates over Cellular Connections",
@@ -461,23 +393,6 @@
     "featuredRank": null
   },
   {
-    "id": "actualidad-accesible-b77ff501a9c83104",
-    "lang": "es",
-    "title": "Nace IA Accesible: inteligencia artificial explicada y probada sin barreras",
-    "sourceId": "actualidad-accesible",
-    "sourceName": "Actualidad Accesible",
-    "sourceUrl": "https://actualidadaccesible.com/",
-    "originalUrl": "https://actualidadaccesible.com/2026/09/08/ia-accesible-inteligencia-artificial-sin-barreras/",
-    "publishedAt": "2026-09-08T07:20:47.000Z",
-    "categories": [
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "summary": "Nace IA Accesible, una nueva sección para explicar y probar la inteligencia artificial desde la experiencia real con VoiceOver y TalkBack. The post Nace IA Accesible: inteligencia artificial explicada y probada sin barreras appeared first on Actualidad Accesible .",
-    "body": "",
-    "featuredRank": null
-  },
-  {
     "id": "nvaccess-in-process-30b2bc3be3f5f05f",
     "lang": "en",
     "title": "In-Process 8th September 2026",
@@ -492,6 +407,23 @@
     ],
     "editorialState": "source-only",
     "summary": "It’s a busy and exciting time – it’s release time! Let’s dive in and see what’s new: NVDA 2026.2 Magnifier A new Beta already? Resetting to Factory Defaults NVDA 2026.2 NVDA 2026.2 has been released! This release includes a new built-in Magnifier feature, improvements to touch gestures and navigation, and expanded speech and braille capabilities.… Read More",
+    "body": "",
+    "featuredRank": null
+  },
+  {
+    "id": "cti-once-7e1e069a32e93936",
+    "lang": "es",
+    "title": "Novedades del Catálogo Novedades en el Catálogo del CTI",
+    "sourceId": "cti-once",
+    "sourceName": "CTI de la ONCE",
+    "sourceUrl": "https://cti.once.es/",
+    "originalUrl": "https://cti.once.es/noticias/novedades-en-el-catalogo-del-cti-28",
+    "publishedAt": "2026-09-07T12:00:00.000Z",
+    "categories": [
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "summary": "Ya están disponibles en nuestro catálogo nuevos productos tiflotécnicos, cuyas características principales se indican a continuación.",
     "body": "",
     "featuredRank": null
   },
@@ -533,6 +465,23 @@
     "featuredRank": null
   },
   {
+    "id": "usable-y-accesible-7d428a2056813e81",
+    "lang": "es",
+    "title": "EN 301 549 versión 4.1.1. Descripción detallada de todas las novedades y comparativa con la versión 3.2.1",
+    "sourceId": "usable-y-accesible",
+    "sourceName": "Usable y accesible",
+    "sourceUrl": "https://olgacarreras.blogspot.com/",
+    "originalUrl": "https://olgacarreras.blogspot.com/2026/09/en-301-549-version-411-descripcion.html",
+    "publishedAt": "2026-09-04T16:34:04.124Z",
+    "categories": [
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "summary": "El 3 de septiembre de 2026 se publicó la nueva versión de la EN 301 549, la versión 4.1.1, tras varios años de trabajo. El contenido de esta nueva versión ya está cerrado y no sufrirá más cambios. Ahora solo falta que se publique su referencia en el Diario Oficial de la Unión Europea para que se pueda utilizar como referencia para demostrar que un producto o servicio cumple con la legislación",
+    "body": "",
+    "featuredRank": null
+  },
+  {
     "id": "freedom-scientific-blog-131e8cbafb0026f5",
     "lang": "en",
     "title": "Learn How AI Connectors Can Bring Your Everyday Apps and Information Together",
@@ -547,6 +496,23 @@
     ],
     "editorialState": "source-only",
     "summary": "Artificial Intelligence (AI) is changing how we work, helping us automate routine tasks, analyze and summarize data, and generate content. Learn AI with our AI live webinar series and comprehensive online guide, designed to empower you with the knowledge and skills to increase productivity and independence in the workplace. The 14th webinar in this ongoing …",
+    "body": "",
+    "featuredRank": null
+  },
+  {
+    "id": "conticgo-2738ab41c3e719f0",
+    "lang": "es",
+    "title": "Las nuevas gafas inteligentes de Samsung prometen una IA más útil para las personas con baja visión",
+    "sourceId": "conticgo",
+    "sourceName": "Conticgo",
+    "sourceUrl": "https://conticgo.net/",
+    "originalUrl": "https://conticgo.net/las-nuevas-gafas-inteligentes-de-samsung-prometen-una-ia-mas-util-para-las-personas-con-baja-vision/",
+    "publishedAt": "2026-09-01T10:00:30.000Z",
+    "categories": [
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "summary": "Las nuevas gafas inteligentes de Samsung prometen una IA más útil para las personas con baja visión. La compañía surcoreana ha adelantado nuevos detalles sobre este dispositivo, desarrollado junto a Google sobre la plataforma Android XR e impulsado por Gemini. Más allá de su diseño o autonomía, Samsung apuesta por una inteligencia artificial capaz de […] La entrada Las nuevas gafas inteligentes de Samsung prometen una IA más útil para las personas con baja visión se publicó primero en Conticgo .",
     "body": "",
     "featuredRank": null
   },
@@ -714,6 +680,23 @@
     "featuredRank": null
   },
   {
+    "id": "conticgo-dba0444691a186bf",
+    "lang": "es",
+    "title": "VisionPulse: la realidad virtual accesible que permite a las personas con discapacidad visual explorar nuevos entornos",
+    "sourceId": "conticgo",
+    "sourceName": "Conticgo",
+    "sourceUrl": "https://conticgo.net/",
+    "originalUrl": "https://conticgo.net/visionpulse-la-realidad-virtual-accesible-que-permite-a-las-personas-con-discapacidad-visual-explorar-nuevos-entornos/",
+    "publishedAt": "2026-08-18T10:00:48.000Z",
+    "categories": [
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "summary": "La realidad virtual se ha convertido en una herramienta cada vez más utilizada en ámbitos como el entretenimiento, la educación o la formación profesional, pero hasta ahora muchas experiencias digitales han estado diseñadas principalmente para usuarios que pueden ver. En este contexto surge VisionPulse, la realidad virtual accesible que permite a las personas con discapacidad […] La entrada VisionPulse: la realidad virtual accesible que permite a las personas con discapacidad visual explorar nuevos entornos se publicó primero en Conticgo .",
+    "body": "",
+    "featuredRank": null
+  },
+  {
     "id": "freedom-scientific-blog-c720afa6586b603a",
     "lang": "en",
     "title": "JAWS JumpStart – A Deep Dive into Managing Documents with JAWS",
@@ -746,6 +729,23 @@
     ],
     "editorialState": "source-only",
     "summary": "Apple has today released iOS 26.6.1, iPadOS 26.6.1, and macOS Tahoe 26.6.2, bringing unspecified security updates. In our usage and testing of iOS 26.6.1 and macOS Tahoe 26.6.2, we did not identify any changes in these releases that specifically affect the experience for blind, deaf blind, or low vision users. If you notice any changes in your own use of any of these releases, please do let us know by posting a comment. Release Notes iOS 26.6.1 This update provides security fixes for your iPhone. For information on the security content of Apple software updates, please visit this website: https://support.apple.com/100100 iPadOS 26.6.1 This update provides security fixes for your iPad. For information on the security content of Apple software updates, please visit this website: https://support.apple.com/100100 macOS Tahoe 26.6.2 This update provides security fixes for your Mac. For information on the security content of Apple software updates, please visit this website: https://support.apple.com/100100 How to Update iOS and iPadOS 26.6.1 are available via Over-the-Air Update (Settings > General > Software Update), via Finder on a Mac with macOS Catalina or later, or via iTunes on a PC or Mac with macOS Mojave or earlier. Before updating, we strongly recommend making a full and complete backup of your device (either locally or in iCloud, depending on personal preference). This will ensure that, in the unlikely event that something goes wrong during the update process, you will have a current backup on hand in case a device restore becomes necessary. Also, if using OTA update, we recommend plugging your device into a power source for the duration of the download/installation process, so as to prevent the unlikely event of your battery going dead during the update. To install macOS Tahoe 26.6.2, choose System Settings from the Apple menu, select General in the table, click Software Update in the scroll area, and click the Update Now button to begin the update process. If other updates are available, you can click the Info button to see details about them and select specific updates to install.",
+    "body": "",
+    "featuredRank": null
+  },
+  {
+    "id": "usable-y-accesible-a31e16ba9e4be535",
+    "lang": "es",
+    "title": "Lectura Fácil y Web Comprensible. Modelo de los tres umbrales. Reglamento de condiciones básicas de accesibilidad cognitiva.",
+    "sourceId": "usable-y-accesible",
+    "sourceName": "Usable y accesible",
+    "sourceUrl": "https://olgacarreras.blogspot.com/",
+    "originalUrl": "https://olgacarreras.blogspot.com/2026/08/lectura-facil-y-web-comprensible-modelo.html",
+    "publishedAt": "2026-08-17T07:35:30.027Z",
+    "categories": [
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "summary": "Nombre: Lectura Fácil y Web Comprensible. Un libro blanco en el marco del nuevo reglamento Autores: María Xesús Bello Rivas y Óscar García Muñoz Nº páginas: 244 Idioma: español Formato: papel y PDF (gratuito) Fecha de publicación: 2026 Descarga del libro en PDF: Lectura Fácil y web comprensible. Un libro blanco en el marco del nuevo reglamento Podéis",
     "body": "",
     "featuredRank": null
   },
@@ -784,6 +784,23 @@
     ],
     "editorialState": "source-only",
     "summary": "Smart Typer is a lightweight yet feature-rich Android productivity application designed to bring notes, file management, advanced text editing, AI tools, and everyday utilities into…",
+    "body": "",
+    "featuredRank": null
+  },
+  {
+    "id": "conticgo-ff01e34c9df5656a",
+    "lang": "es",
+    "title": "Webinar gratuito sobre las nuevas tecnologías Braille de Orbit Research",
+    "sourceId": "conticgo",
+    "sourceName": "Conticgo",
+    "sourceUrl": "https://conticgo.net/",
+    "originalUrl": "https://conticgo.net/webinar-orbit-research-venkatesh-chari-tecnologia-braille/",
+    "publishedAt": "2026-08-11T08:00:53.000Z",
+    "categories": [
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "summary": "El próximo 15 de agosto de 2026 tendrá lugar un interesante webinar internacional sobre tecnología Braille y accesibilidad, organizado por ACCYTEC – Accesibilidad y Tecnología. El encuentro contará con un invitado de excepción: Venkatesh Chari, fundador y presidente de Orbit Research, una de las compañías más importantes del mundo en el desarrollo de dispositivos Braille […] La entrada Webinar gratuito sobre las nuevas tecnologías Braille de Orbit Research se publicó primero en Conticgo .",
     "body": "",
     "featuredRank": null
   },
@@ -843,6 +860,40 @@
     "featuredRank": null
   },
   {
+    "id": "cti-once-77fd076e8dd029a7",
+    "lang": "es",
+    "title": "Evaluaciones de APP Evaluaciones de APP actualizadas o incorporadas en el ClubONCE en el mes de julio.",
+    "sourceId": "cti-once",
+    "sourceName": "CTI de la ONCE",
+    "sourceUrl": "https://cti.once.es/",
+    "originalUrl": "https://cti.once.es/noticias/evaluaciones-de-app-actualizadas-o-incorporadas-en-el-clubonce-en-el-mes-de-julio-5",
+    "publishedAt": "2026-08-06T12:00:00.000Z",
+    "categories": [
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "summary": "A lo largo del pasado mes de julio se han evaluado las siguientes APP:",
+    "body": "",
+    "featuredRank": null
+  },
+  {
+    "id": "cti-once-0a5cc819ff520e54",
+    "lang": "es",
+    "title": "Modos-ON ¡Ya disponible el informe de Slay the princess - The Pristine Cut para PC!",
+    "sourceId": "cti-once",
+    "sourceName": "CTI de la ONCE",
+    "sourceUrl": "https://cti.once.es/",
+    "originalUrl": "https://cti.once.es/noticias/ya-disponible-el-informe-de-slay-the-princess-the-pristine-cut-para-pc",
+    "publishedAt": "2026-08-04T12:00:00.000Z",
+    "categories": [
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "summary": "Desde el Centro de Tiflotecnología e Innovación de la ONCE (CTI) se ha realizado un análisis detallado evaluando sus distintos apartados y su impacto en la experiencia de juego.",
+    "body": "",
+    "featuredRank": null
+  },
+  {
     "id": "accessible-android-9184590b8a4b5a5d",
     "lang": "en",
     "title": "Talk Forward",
@@ -898,6 +949,74 @@
     "featuredRank": null
   },
   {
+    "id": "cti-once-b29b88fadea4b340",
+    "lang": "es",
+    "title": "Informes del CTI Informe del uso de Google Docs",
+    "sourceId": "cti-once",
+    "sourceName": "CTI de la ONCE",
+    "sourceUrl": "https://cti.once.es/",
+    "originalUrl": "https://cti.once.es/noticias/informe-del-uso-de-google-docs",
+    "publishedAt": "2026-07-31T12:00:00.000Z",
+    "categories": [
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "summary": "Desde el Centro de Tiflotecnología e Innovación de la ONCE (CTI) se ha elaborado un exhaustivo informe del uso de Google Docs con productos de apoyo, tanto magnificadores como lectores de pantalla.",
+    "body": "",
+    "featuredRank": null
+  },
+  {
+    "id": "usable-y-accesible-310ad81f67cb0438",
+    "lang": "es",
+    "title": "Podcast Código abierto #93 - Un mundo digital para todos. Hablamos de accesibilidad digital con Olga Carreras",
+    "sourceId": "usable-y-accesible",
+    "sourceName": "Usable y accesible",
+    "sourceUrl": "https://olgacarreras.blogspot.com/",
+    "originalUrl": "https://olgacarreras.blogspot.com/2026/07/podcast-codigo-abierto-93-un-mundo.html",
+    "publishedAt": "2026-07-29T11:59:00.405Z",
+    "categories": [
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "summary": "Esta semana he tenido el placer de grabar un episodio de Código abierto, una hora en la que nos ha dado tiempo para hablar de muchos aspectos de la accesibilidad: Presentación: sobre mi trayectoria y mi especialización en accesibilidad digital. Concepto de accesibilidad: qué es la accesibilidad digital. Errores más comunes: explico tres que me encuentro habitualmente en las auditorías y que",
+    "body": "",
+    "featuredRank": null
+  },
+  {
+    "id": "usable-y-accesible-131cd024c60e3ea6",
+    "lang": "es",
+    "title": "Accesibilidad y vibe coding",
+    "sourceId": "usable-y-accesible",
+    "sourceName": "Usable y accesible",
+    "sourceUrl": "https://olgacarreras.blogspot.com/",
+    "originalUrl": "https://olgacarreras.blogspot.com/2026/07/accesibilidad-y-vibe-coding.html",
+    "publishedAt": "2026-07-29T11:55:39.944Z",
+    "categories": [
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "summary": "Número promedio de elementos en la página de inicio entre 2019 y 2026 ¿Estamos viendo ya las consecuencias en la accesibilidad de la programación automatizada o asistida por inteligencia artificial («vibe coding»)? Eso es lo que concluye el informe WebAIM Million de 2026. Para quienes no lo conozcan, es un estudio anual de la accesibilidad de las páginas de inicio de un millón de sitios web",
+    "body": "",
+    "featuredRank": null
+  },
+  {
+    "id": "cti-once-407b96986e65b092",
+    "lang": "es",
+    "title": "Arroba Sonora Disponible para su descarga el podcast de julio de \"Arroba Sonora\"",
+    "sourceId": "cti-once",
+    "sourceName": "CTI de la ONCE",
+    "sourceUrl": "https://cti.once.es/",
+    "originalUrl": "https://cti.once.es/noticias/disponible-para-su-descarga-el-podcast-de-julio-de-arroba-sonora",
+    "publishedAt": "2026-07-28T12:00:00.000Z",
+    "categories": [
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "summary": "Disponible el número 49 de “Arroba Sonora”, el podcast de tecnología del CTI, que puede descargarse desde el Gestor ONCE de Libros Digitales, el ClubONCE o escucharse a través de las principales plataformas de podcast o desde la Web del CTI.",
+    "body": "",
+    "featuredRank": null
+  },
+  {
     "id": "applevis-blog-3ddd4178b76f258e",
     "lang": "en",
     "title": "Apple Releases Version 26.6 of iOS, iPadOS, macOS, watchOS, and tvOS with Security Updates and Optimizations for upcoming \"27\" Updates",
@@ -916,6 +1035,40 @@
     "featuredRank": null
   },
   {
+    "id": "usable-y-accesible-673a05207d116027",
+    "lang": "es",
+    "title": "WCAG Evaluation Methodology (WCAG-EM) 2.0 del W3C",
+    "sourceId": "usable-y-accesible",
+    "sourceName": "Usable y accesible",
+    "sourceUrl": "https://olgacarreras.blogspot.com/",
+    "originalUrl": "https://olgacarreras.blogspot.com/2026/07/wcag-evaluation-methodology-wcag-em-20.html",
+    "publishedAt": "2026-07-25T15:18:26.413Z",
+    "categories": [
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "summary": "Han pasado 14 años desde que reseñé el proceso de la primera versión de la WCAG-EM 1.0 (2012-2014) en el artículo \"Metodología de Evaluación de Conformidad con la Accesibilidad en sitios Web (WCAG-EM) 1.0\". Esta semana, el 23 de julio de 2026, se ha publicado la nueva versión de la WCAG-EM del W3C: WCAG Evaluation Methodology (WCAG-EM) 2.0. En Europa, incluida España, las auditorías de",
+    "body": "",
+    "featuredRank": null
+  },
+  {
+    "id": "cti-once-dccea7481f510c8a",
+    "lang": "es",
+    "title": "Modos-ON ¡Ya disponible el informe de accesibilidad del videojuego Rhythm Paradise Groove para Nintendo Switch 2!",
+    "sourceId": "cti-once",
+    "sourceName": "CTI de la ONCE",
+    "sourceUrl": "https://cti.once.es/",
+    "originalUrl": "https://cti.once.es/noticias/ya-disponible-el-informe-de-accesibilidad-del-videojuego-rhythm-paradise-groove-para-nintendo-switch-2",
+    "publishedAt": "2026-07-24T12:00:00.000Z",
+    "categories": [
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "summary": "Desde el Centro de Tiflotecnología e Innovación de la ONCE (CTI) se ha realizado un análisis detallado evaluando sus distintos apartados y su impacto en la experiencia de juego.",
+    "body": "",
+    "featuredRank": null
+  },
+  {
     "id": "nvaccess-in-process-6891b0c36093738e",
     "lang": "en",
     "title": "In-Process 20th July 2026",
@@ -930,6 +1083,23 @@
     ],
     "editorialState": "source-only",
     "summary": "Welcome to a new week and a new edition of the blog! There’s a few things inside, starting off with very sad news of the passing of a legend of the community. Vale Rui Fontes NVDA 2026.2 Beta 7 Characters per line Introducing Access Point System Accessibility Repair Tool Vale Rui Fontes Last week, we… Read More",
+    "body": "",
+    "featuredRank": null
+  },
+  {
+    "id": "usable-y-accesible-b94c9a77963884b5",
+    "lang": "es",
+    "title": "XR Accessibility Guidelines 1.0 de Metaverse Standards Forum",
+    "sourceId": "usable-y-accesible",
+    "sourceName": "Usable y accesible",
+    "sourceUrl": "https://olgacarreras.blogspot.com/",
+    "originalUrl": "https://olgacarreras.blogspot.com/2026/07/xr-accessibility-guidelines-10-de.html",
+    "publishedAt": "2026-07-16T19:13:28.352Z",
+    "categories": [
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "summary": "Imagen creada con IA. Descripción textual de la imagen Se han publicado las XR Accessibility Guidelines 1.0, un recurso pionero del Grupo de Trabajo de Accesibilidad del Metaverse Standards Forum. Las XR Accessibility Guidelines 1.0 nacen para ayudar a evaluar la accesibilidad de las experiencias XR. Por ello, las directrices ofrecen criterios verificables e independientes de la tecnología,",
     "body": "",
     "featuredRank": null
   },

@@ -32,6 +32,17 @@ test('Apple Newsroom accessibility is an English source with mandatory Spanish c
   assert.match(source.feedUrl, /^https:\/\/www\.apple\.com\/newsroom\//);
 });
 
+test('Apple Spain Newsroom mirrors official accessibility coverage when Apple publishes Spanish content', () => {
+  const source = byId.get('apple-newsroom-accessibility-es');
+  assert.ok(source, 'Apple Spain accessibility Newsroom must be configured');
+  assert.equal(source.enabled, true);
+  assert.equal(source.lang, 'es');
+  assert.equal(source.editorialClass, 'official-accessibility');
+  assert.equal(source.translationPolicy, 'official-spanish-first');
+  assert.ok(Array.isArray(source.includeKeywords) && source.includeKeywords.includes('accesibilidad'));
+  assert.equal(source.feedUrl, 'https://www.apple.com/es/newsroom/rss-feed.rss');
+});
+
 test('approved English general technology written sources prioritize the clean TifloAcosta reader', () => {
   for (const id of ['ars-technica', 'the-verge', 'engadget', 'techcrunch', '9to5mac']) {
     const source = byId.get(id);

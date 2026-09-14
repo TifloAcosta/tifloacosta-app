@@ -35,7 +35,7 @@ jobs:
       - name: Synchronize Actualidad
         run: node scripts/sync-actualidad.mjs
       - name: Synchronize Accessible apps
-        run: node scripts/actualidad-apps.mjs
+        run: node scripts/sync-actualidad-apps.mjs
       - name: Build video search index
         run: node scripts/build-video-search-index.mjs
       - name: Setup Pages

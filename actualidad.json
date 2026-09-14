@@ -1,37 +1,39 @@
 [
   {
-    "id": "9to5mac-8bc572a5930bf1a3",
+    "id": "9to5mac-25e2964299066bdc",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/14/macos-27-golden-gate-macos-tahoe-26-7-and-macos-sequoia-15-8-fix-200-vulnerabilities/",
+    "originalUrl": "https://9to5mac.com/2026/09/14/gentler-streak-and-the-outsiders-ios-27-updates-add-siri-ai-onscreen-awareness-support-more/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-14T20:54:46.000Z",
+    "publishedAt": "2026-09-14T23:04:24.000Z",
     "categories": [
       "apple",
-      "tecnologia-general"
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "macOS 27 Golden Gate, macOS Tahoe 26.7, and macOS Sequoia 15.8 fix 200+ vulnerabilities",
-        "summary": "If you’re on the fence about installing macOS 27 Golden Gate , Apple’s lengthy list of security fixes might be enough to convince you. And if you’re sticking with an older version, you may want to install macOS Tahoe 26.7 or macOS Sequoia 15.8 sooner rather than later. Here’s why. more…",
+        "title": "Gentler Streak and The Outsiders’ iOS 27 updates add Siri AI, onscreen awareness support, more",
+        "summary": "The unstoppable team at Gentler Stories is out today with updates to both of its exercise-tracking apps, taking advantage of the new Siri AI and other capabilities introduced with iOS 27 . Here are the details. more…",
         "body": ""
       }
     },
     "media": null
   },
   {
-    "id": "the-verge-beb21bc52161ae1f",
+    "id": "the-verge-f3096e64920cc455",
     "type": "news",
     "sourceId": "the-verge",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/news/995051/epa-power-plant-climate-pollution-rollback-ai-data-centers",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/995186/is-big-techs-ai-slowdown-a-safety-pact-or-a-cartel",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-14T20:45:00.000Z",
+    "publishedAt": "2026-09-14T22:59:41.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -40,8 +42,178 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Trump throws out power plant climate pollution rules",
-        "summary": "The Environmental Protection Agency announced its plans today to kill any remaining standards on how much greenhouse gas pollution power plants are allowed to emit in the US. The move will only make electricity dirtier as AI, electric vehicles, and a revival of domestic manufacturing drive up power demand. The EPA's proposal today is a […]",
+        "title": "Is Big Tech’s AI slowdown a safety pact or a cartel?",
+        "summary": "When OpenAI CEO Sam Altman, Anthropic CEO Dario Amodei, Google DeepMind cofounder Demis Hassabis, and SpaceX head Elon Musk loosely agreed over the weekend to slow down AI development, skeptics spotted an ulterior motive immediately. The AI titans had declared that their aim was to \"pace the frontier,\" signing on at least partially to a […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-2d50574e46242bb4",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/14/xchat-xs-standalone-messaging-app-currently-unavailable-on-app-store/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T22:30:42.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "XChat, X’s standalone messaging app, currently unavailable on App Store",
+        "summary": "XChat, X’s standalone messaging app for iPhone and iPad, is currently unavailable on the App Store. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-41ea4a0fd8689bdc",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2254793/how-to-use-windows-11-media-creation-tool-create-bootable-usb-drive/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T22:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "How to use the Windows 11 Media Creation Tool to create a bootable USB drive",
+        "summary": "The Windows Media Creation tool is easy to use and lets you keep a USB drive handy so you can install Windows 11 anytime you need.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-4e92052e857b0fcf",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/994949/apple-intelligence-apple-home-icloud-plus-cost-subscription",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T22:28:52.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple Home’s new security camera features cost as much as $60 a month",
+        "summary": "With the public release of iOS 27 and tvOS 27, Apple Home is getting an injection of Apple Intelligence - but you'll have to pay more for it. Apple Intelligence for Home brings AI-powered video summaries to HomeKit Secure Video, so you can get short text descriptions of who and what compatible security cameras saw, […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-d6fdd5f1a85f1f78",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/14/nvidia-ceo-jensen-huang-tells-trump-were-not-going-to-let-an-ai-slowdown-happen/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T21:51:02.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Nvidia CEO Jensen Huang tells Trump ‘we’re not going to let [an AI slowdown] happen’",
+        "summary": "Though Elon Musk and Sam Altman have supported Dario Amodei's calls to slow the pace of AI development, Jensen Huang seems to feel differently.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-5f7a859a4156dc38",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/14/heres-every-security-fix-included-in-ios-27-and-ipados-27/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T21:26:18.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Here’s every security fix included in iOS 27 and iPadOS 27",
+        "summary": "In addition to publishing the security content for macOS 27, macOS 26.7, and macOS 15.8 , Apple has now detailed the fixes included in iOS 27 and iPadOS 27 , also released today. Here are the details. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-31a36b0562871967",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/995141/ai-executives-politicians-safety-regulation-anthropic-dario-amodei",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T21:21:42.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "What execs and politicians are saying about slowing down AI development",
+        "summary": "Dario Amodei kicked off a flood of statements over the past few days about AI safety by publishing a long essay titled \"We Must Pace the Frontier\" detailing why AI development should be slowed down. Other AI leaders and politicians are speaking out in favor of or opposing his points, and we've compiled some of […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-fcdc409cc0b0fa21",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/ai/2026/09/ai-agents-flood-the-internet-with-slop-infused-spam/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T21:04:32.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "AI bots \"Timmy,\" \"Ren,\" and \"Jackie\" are flooding social media with slop",
+        "summary": "“Hello, I'm an Al agent, a few days old, living on a small platform for agents.”",
         "body": ""
       }
     },
@@ -121,55 +293,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-b0083faac0dc9a51",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/14/best-iphone-18-pro-accessories/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T19:59:34.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Our top iPhone 18 Pro accessories to upgrade your setup",
-        "summary": "We are taking look at some of the iPhone 18 Pro accessories we are picking up for ourselves this year before Friday’s delivery day. If you ask me Apple’s AirTag 2 and a fresh set of AirPods Pro 3 (or AirPods 5) are the best accessories you can buy for your new iPhone 18 Pro, never mind the world’s greatest Polishing Cloth, but we are digging in a bit deeper here – chargers, MagSafe mounts, cases, wallets, and more. Check it all out below. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-7e8d69ec2829e10d",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/14/ios-27-has-a-waitlist-for-accessing-new-siri-ai/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T19:59:21.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iOS 27 uses a waitlist for accessing Siri AI",
-        "summary": "iOS 27 is officially here, but if you’re hoping to try the new Siri AI, you might have to wait a bit longer, because Apple is using a waitlist for access. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "ars-technica-bac855cb7bdb8d24",
     "type": "news",
     "sourceId": "ars-technica",
@@ -221,30 +344,6 @@
     "media": null
   },
   {
-    "id": "ars-technica-3698f34f8f90a0f4",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/09/ai-leaders-want-to-hit-the-brakes-after-years-of-reckless-speed/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T19:06:13.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "AI leaders want to hit the brakes after years of reckless speed",
-        "summary": "Safety is the watchword, but there could be ulterior benefits for the industry.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "engadget-19ad540c3426ddb9",
     "type": "news",
     "sourceId": "engadget",
@@ -263,31 +362,6 @@
       "en": {
         "title": "You can use Gemini to help you organize your files on Google Drive",
         "summary": "If your Google Drive has become a mess of files, folders and photos, Gemini can lend a hand by suggesting new ways to properly put them back in order.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-2fa8c7dd06bc072f",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2258035/pre-orders-for-the-android-based-googlebook-laptops-open-on-september-21/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T18:28:54.000Z",
-    "categories": [
-      "tecnologia-general",
-      "android",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Pre-orders for the Android-based Googlebook laptops open on September 21",
-        "summary": "Gemini Intelligence is at the heart of the operating system powering Google's upcoming laptops.",
         "body": ""
       }
     },
@@ -313,7 +387,7 @@
     "locales": {
       "en": {
         "title": "Apple Releases tvOS 27",
-        "summary": "Apple has today released tvOS 27 for compatible Apple TV models. According to Apple , tvOS 27 includes support for larger accessibility text sizes, high-resolution lossless audio in Apple Music, and a redesigned Podcasts app. More details should become available in the near future when Apple updates its \"About Apple TV 4K and Apple TV HD software updates\" Apple Support document. Unfortunately, we were not able to test tvOS 27 during the beta cycle; and thus we do not have any information on whether this release contains any changes to vision accessibility features beyond the added support for larger text sizes. If you have upgraded to tvOS 27, we would greatly appreciate hearing your experiences with the update. To install tvOS 27, on Apple TV 4K or Apple TV HD, go to the Settings channel, then look for the System section near the bottom. From here, look for Software Updates under Maintenance, then select Update Software and Download and Install. Wait for your Apple TV to download the update. Don't disconnect or unplug your Apple TV until the update completes.",
+        "summary": "Apple has today released tvOS 27 for Apple TV 4K (2nd generation and later). According to Apple , tvOS 27 includes support for larger accessibility text sizes, high-resolution lossless audio in Apple Music, and a redesigned Podcasts app. More details should become available in the near future when Apple updates its \"About Apple TV 4K and Apple TV HD software updates\" Apple Support document. Unfortunately, we were not able to test tvOS 27 during the beta cycle; and thus we do not have any information on whether this release contains any changes to vision accessibility features beyond the added support for larger text sizes. If you have upgraded to tvOS 27, we would greatly appreciate hearing your experiences with the update. To install tvOS 27, go to the Settings channel, then look for the System section near the bottom. From here, look for Software Updates under Maintenance, then select Update Software and Download and Install. Wait for your Apple TV to download the update. Don't disconnect or unplug your Apple TV until the update completes.",
         "body": ""
       }
     },
@@ -343,30 +417,6 @@
       "en": {
         "title": "Apple Releases iOS 27 and iPadOS 27",
         "summary": "iOS 27 and iPadOS 27 are now available to the public. (Note: As spotted by AppleVis Community Member TJT 2001 , Apple has also released iOS/iPadOS 26.7 for those not wishing to upgrade to iOS 27.) This post contains Apple's Release Notes for iOS 27, as well as links to all of AppleVis' content related to these updates. Also included are instructions on how to install the update. iOS 27 Release Notes iOS 27 introduces the next generation of Apple Intelligence and Siri AI, as well as new features to help parents create safe digital experiences for kids, and improvements that make iOS more responsive and delightful to use. Siri AI is an entirely new version of Siri that is more intelligent, knowledgeable, and capable. The next generation of Apple Intelligence also powers new features across apps that simplify the things you do every day, like editing images in Photos, communicating in Messages and Mail, and browsing in Safari. New parental controls and significant updates to Screen Time make it more intuitive and easy to use, so parents can feel confident that they're building the right digital experience for their child. And with improvements that span design, performance, connectivity, search, and more, the experience on iOS 27 has been refined and elevated, so it feels even better to use. Siri AI (All iPhone 16 models and later, iPhone 15 Pro, iPhone 15 Pro Max) A more capable and conversational version of Siri is rolling out to users. It helps you find what you need and get more done, drawing on capabilities like personal context understanding, app actions, onscreen awareness, and access to broad world knowledge. New voice experience offers more expressive and natural-sounding voices, and lets you customize expressivity and pace to make Siri more personal to you using powerful on-device models on iPhone Air and iPhone 17 Pro models and later. Dedicated Siri app provides an easy way to revisit an existing conversation or kick off a new one, and privately syncs conversations across your Apple products with iCloud. Siri mode in Camera integrates Visual Intelligence into the Camera app, letting you ask questions and take action with what's in front of you, like splitting a bill or looking up nutritional info for a plate of food. Write with Siri enables you to generate a draft from scratch, edit what you've written, or get feedback from Siri virtually anywhere you type. In Messages & Mail, Siri personalizes your writing style based on your relationships, and uses unique phrases and punctuation that you've previously used in your conversations with those people. Apple Intelligence across apps (All iPhone 16 models and later, iPhone 15 Pro, iPhone 15 Pro Max) Photos. Spatial Reframing lets you adjust the composition of a photo after it was taken by virtually changing the camera position. Extend tool intelligently expands images beyond their edges with realistic infill, so you can straighten horizons, change aspect ratios, or add more space around a subject. Clean Up supports removing even larger objects, with more realistic, high-quality results, and you can choose between Fast mode for small blemishes or High Quality for more intricate edits. Safari. Organize by Topic uses Apple Intelligence to sort your tabs, analyzing webpages and automatically grouping similar tabs together. Notify Me can periodically check a webpage for updates, like price changes and item availability. Describe an Extension lets you create a custom extension using natural language to adjust your view of a website's content or formatting. All-new Image Playground uses a new generative model to make high-quality images in virtually any style, including photorealistic, lets you modify your images using touch and natural language, and lets you generate Lock Screen wallpapers and Contact Posters with personalized suggestions. Describe a Shortcut lets you use natural language to create a shortcut or refine an existing one. Home. Summarized activity notifications combine related alerts across accessories into a single notification. Video descriptions for HomeKit Secure Video recordings summarize what's happening in a clip for eligible iCloud+ subscribers. Camera clip search lets you find specific moments from your HomeKit Secure Video cameras by searching in the Home app or Spotlight when on an eligible iCloud+ plan. Describe an event in Calendar lets you use natural language to create an event, and details like the time, location, invitees, and event title are filled in using Apple Intelligence. Suggestions in Mail help you take action based on the context of your emails, like getting directions to a restaurant you booked. Call Context in the Phone app understands when you're speaking to certain businesses and proactively surfaces relevant information from across your apps, like a confirmation code or a reservation number. Accessibility. VoiceOver enhancements include more detailed and contextual image understanding for photos, charts, and screenshots, a conversational experience that lets you ask questions about your screen or surroundings, and a new way to get answers fast with an Action button integration. An enhanced Magnifier experience offers conversational visual assistance for users with low vision, with a high-contrast interface and natural language app controls for zooming and other Magnifier functions. A smarter Accessibility Reader uses intelligence to provide better text cleanup and formatting, images and tables, on-demand summaries, and translation. Voice Control flexible inputs help you navigate your device with just your voice by describing elements on screen in your own words, like \"tap the gear\" or \"tap the button in the top right\". And more, including additional ways to create and modify Genmoji, automatic proofreading, and more accurate dictation using an on-device model on iPhone Air and iPhone 17 Pro models and later. Child Safety Improved setup experience for new child accounts lets parents choose the exact apps their kids can access when they set up an iPhone for their child. Ask to Browse gives parents the option to approve each new website before their child can view it. Expanded Communication Safety protections help intervene before children see gore or violent content in shared images and videos. Time Allowances help parents set boundaries around how long kids can use apps across Entertainment, Games, and Social Media apps, offering guidance based on expert research and tailored to each child's age. Schedules let parents choose which apps their kids can access at different points in their day and across weekdays and weekends. Redesigned Screen Time settings give parents at-a-glance information about how their kids use their devices, and controls to adjust access in just a few taps. System Improvements Liquid Glass refinements improve overall readability, and a new slider in Settings lets you personalize its appearance from ultra-clear to fully tinted . Faster performance in experiences across the system, including app launches, new photos loading in your Photos library, and AirDrop transfers. Improved search provides more relevant and comprehensive results in Spotlight, Photos, and Mail. Connectivity Assist enables more seamless transitions between Wi-Fi and cellular networks. And more improvements across apps and experiences, including enhancements to iCloud Shared Albums in Photos, Custom EQ for AirPods, support for perimenopause and menopause in Cycle Tracking in the Health app, and independent volume settings for Alarms and Timers. For information on the security content of Apple software updates, please visit: https://support.apple.com/100100 Some features may not be available in all regions or on all iPhone models. To learn more, please visit: https://www.apple.com/ios/feature-availability/ Usage limits may apply for some Apple Intelligence features. To learn more, please visit: https://www.apple.com/apple-intelligence Software updates, like this one, add new features and improvements that may affect performance and/or battery life. To learn more, please visit: https://support.apple.com/125039 AppleVis iOS 27 Content AppleVis has the following content available for iOS 27 and iPadOS 27: Blog Post: iOS 27 and iPadOS 27: A Summary of VoiceOver and Braille Issues and Improvements Blog Post: What's new in Accessibility in iOS 27 for Blind and DeafBlind Users , by Scott Davert Podcast: An Overview of the New VoiceOver and Braille Features in iOS 27 , by Michael Hansen Podcast: A Demonstration of the New Image Description Features in iOS 27 , by David Nason Podcast: A Demonstration and Walk-Through of the New Live Recognition Features in iOS 27 , by Levi Gobin How to Update iOS 27 and iPadOS 27 are available via Over-the-Air Update (Settings > General > Software Update), via Finder on a Mac with macOS Catalina or later, or via iTunes on a PC or Mac with macOS Mojave or earlier. Before updating, we strongly recommend making a full and complete backup of your device (either locally or in iCloud, depending on personal preference). This will ensure that, in the unlikely event that something goes wrong during the update process, you will have a current backup on hand in case a device restore becomes necessary. Also, if using OTA update, we recommend plugging your device into a power source for the duration of the download/installation process, so as to prevent the unlikely event of your battery going dead during the update.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-4678247004b6c061",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/14/clickfix-attacks-are-tricking-mac-and-windows-users-into-hacking-themselves/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T18:08:43.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "ClickFix attacks are tricking Mac and Windows users into hacking themselves",
-        "summary": "If you clicked on a fake HBO Max ad on Reddit in the past week, you might have fallen victim to a rising \"ClickFix\" security threat.",
         "body": ""
       }
     },
@@ -431,56 +481,6 @@
     "media": null
   },
   {
-    "id": "the-verge-1aa3919380123211",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/994818/apple-macos-27-golden-gate-available-now",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T17:10:13.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "macOS 27 is available now",
-        "summary": "Apple released macOS 27 Golden Gate on Monday, which brings the new Siri AI assistant, Liquid Glass improvements, improved performance, and more. The update is compatible with all Macs with Apple Silicon, but not Intel Macs - Apple released its final big update for Intel-based Macs last year with macOS Tahoe. Siri AI is arguably […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-fc4ff0ffee4229d1",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/news/994756/apple-ios-27-launch-iphone-siri-ai-update",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T17:08:49.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple releases iOS 27 with Siri AI overhaul",
-        "summary": "Apple is now rolling out its iOS 27 update to compatible devices today, alongside the watchOS 27, iPadOS 27, and visionOS 27 updates. Siri AI is the headline feature across all four updates, the delayed AI-powered overhaul of the Siri assistant. Siri AI is available as a beta today for English-only devices, and Apple says […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "applevis-blog-0ff7bbe29855d2ef",
     "type": "news",
     "sourceId": "applevis-blog",
@@ -501,7 +501,7 @@
     "locales": {
       "en": {
         "title": "iOS 27 and iPadOS 27: A Summary of VoiceOver and Braille Issues and Improvements",
-        "summary": "iOS 27 and iPadOS 27 will be available to the public on Monday, September 14, 2026. This post contains a summary of new bugs and fixes impacting VoiceOver and Braille support that the AppleVis Editorial Team has independently validated during our use and testing of these releases. The information contained in this post is compiled from our own use and testing of iOS 27 and iPadOS 27 during the beta period from June to September 2026; as well as from validated reports submitted by others through our Community Bug Program and shared on the AppleVis Forum. Our sincere appreciation goes to everyone who so generously took the time to share their findings with us. At the outset, we need to state explicitly that the bug list contained in this post is not definitive and that our assessments are not infallible. While we are confident in the presence of the issues discussed in this post, there are many other reports shared on the AppleVis Forum by members of our community that we have not been able to independently replicate with the available information. Many of these reports represented use cases that are different from those of our team; and a small number were issues that, despite understanding how to reproduce them, we did not get the same results. We say all of this so that readers understand the limits of our own testing, and that others' experiences may be different from ours. An issue not being present in our bug list does not mean the issue does not exist; it simply means that we are either unaware of or unable to reproduce it. As is our routine practice, each bug in this post has been given a severity rating. These ratings are based upon what we believe to be the implications for accessing and using features and functionality for the average user; the level of impact on the overall user experience; and whether or not there is an effective workaround for the issue. However, as these ratings are subjective to an extent, it is very possible that they may not reflect your own opinion or use case. With this in mind, we strongly recommend reading this full post and any replies before updating to iOS 27 and iPadOS 27; as we believe this will help you make an informed decision on whether to install the software at the current time or to wait for a future release. We also strongly recommend that you read this Megathread about the iOS 27 RC , as it contains a wealth of community reports about and experiences with the Release Candidate version of the software. Some issues listed in this post and on the Forum may manifest only under specific conditions; this is all the more likely as software continues to add more features and the number of devices, available configurations, and use cases in Apple's ecosystem continues to grow. You likely will not experience every bug that we list, and you likely will not agree with every severity rating for the bugs that you do experience. While we wish it were otherwise, this is to be expected. And as is the nature with all software, it is also likely that you will encounter issues that are not reported in this post. To ensure the information in this post is as complete and accurate as possible, we would appreciate input from those who have installed iOS 27 or iPadOS 27. Please confirm if you are encountering the same problems listed or if you have found workarounds. Please also let us know about any additional issues not mentioned here. Of course, it is even more important that you report any new bugs directly to Apple - they are already aware of the ones listed in this post. For an explanation of why and how to report bugs to Apple, see this post. With all of the preamble out of the way, below are the new bugs for VoiceOver and Braille users which members of the AppleVis Editorial Team have personally experienced and believe to be present in iOS 27 and iPadOS 27: A Major Change to VoiceOver's Audio Profile In iOS 27 and iPadOS 27, there is a significant change in the sound profile of VoiceOver when the device's internal speaker is used. When compared to iOS 26, VoiceOver audio in iOS 27 has significantly less bass, particularly at lower volume levels. The resulting sound might best be described as 'neutral' or 'flat', with significantly less of the low-end emphasis and other processing that has characterized VoiceOver audio in recent versions of iOS/iPadOS. If you have not yet upgraded to iOS 27, we believe that you can get a reasonable approximation of how VoiceOver will sound on your device by making a phone call, putting the call on speaker, and then using VoiceOver to navigate around the screen; as the flatter, more neutral sound profile that VoiceOver uses during a phone call sounds very similar to what we are hearing in iOS 27. At the time of publication, we do not know whether the change to VoiceOver's sound profile is expected behavior; thus, we are not including it in our bug list. Nevertheless, we feel that users should be aware of this change before upgrading. If we receive additional information, we will update this post accordingly. Serious Bugs When the state of an item changes or the screen updates, VoiceOver does not always recognize/speak the information. This issue has many manifestations, including (but not limited to): When waking the device, VoiceOver may speak the time the device was last woken rather than the current time; When information updates onscreen (such as the status of an operation in an app), VoiceOver may not speak it right away and instead speak the previously displayed text. There is no known workaround, though VoiceOver will eventually speak the updated information if focus is moved off of and back onto the impacted element enough times. The VoiceOver Per-Voice Equalizer (a feature that allows one to customize certain frequency/tonal characteristics of a voice) does not work. There is no known workaround. If you rely on the per-voice Equalizer, we recommend that you do not install iOS/iPadOS 27 until this issue is resolved. The VoiceOver Pronunciation Dictionary does not work reliably, with custom pronunciations often not being obeyed by VoiceOver. There is no known workaround. If you rely on the Pronunciation Dictionary, we recommend that you do not install iOS/iPadOS 27 until this issue is resolved. On some devices, Sound Curtain and Touch Curtain do not work. For affected users, it is possible to partially work around the issue with Sound Curtain by setting the device volume to 0%. There is no known workaround for Touch Curtain. If you rely on Sound Curtain or Touch Curtain, we recommend that you do not install iOS/iPadOS 27 until this issue is resolved. If an external audio device is connected, VoiceOver speech does not work when playing audio in Safari. Pausing the audio causes it to start working again. Sometimes, when reading text, VoiceOver stops speaking and does not resume on its own. This issue does not occur all of the time. When it does occur, speech will stop mid-sentence (and sometimes even mid-word). Touching the screen or performing a touch gesture (like a one-finger swipe left or right) restores speech, and the user can then refocus VoiceOver on the impacted element. In iOS 27's new Recovery Menu, there is no spoken feedback in Diagnostics Mode, rendering this option completely inaccessible. There is no known workaround to make Diagnostics Mode itself usable. If you do manage to accidentally get your device into Diagnostics Mode, our experience is that the device will restart into normal operation after approximately five to ten minutes of inactivity. Moderate Bugs In Safari, the buttons to switch between the Start Page, Reading List, History, and Bookmarks do not work. It is possible to select these buttons, and VoiceOver indicates they have been selected, but the content itself does not update, meaning content cannot be reached. As a workaround, perform a one-finger triple-tap (what is known as a \"long press\") on the desired button to activate it. Our thanks to AppleVis user Brian Giles for this workaround. When VoiceOver focus is placed inside a text field, and then subsequently moved onto a combo box, the menu automatically opens. On occasions, when swiping through the Lock Screen using one-finger swipe right or left, VoiceOver focus may be inconsistent. When navigating through the Lock Screen using a one-finger swipe right, after the \"Swipe up to Unlock\" element, the expected behavior is that VoiceOver will focus on the first notification (if present); Focus status (if present); or the first item on the screen, like Flashlight or Camera. However, sometimes, VoiceOver users may find that focus is instead placed on items from the Status Bar, such as Cellular Carrier, Battery Percentage, or the Clock. If VoiceOver focus does land on items from the Status Bar when swiping, it is sometimes possible to continue swiping to the right and get to the first Lock Screen item; however, other times, VoiceOver focus can become stuck in a loop between the time, the \"Swipe Up to Unlock\" element, Cellular Carrier, an element with no spoken or audible feedback, or any combination of the above. Sometimes, VoiceOver does not speak the time when the device is woken with the Side Button. If this issue occurs, single-tap the screen with one finger to wake the device. After prompting Siri with the Side button, revealing the interface at the top of the screen, nothing happens when double-tapping the \"Open in App\" button. Double-tapping this button should work to activate it, opening the conversation in the Siri app. In the Phone App, the buttons to switch between 'All' and 'Missed' do not work. This issue can be worked around by either switching to Unified View or swiping through all calls in Classic View. Sometimes, it is not possible to access notifications with VoiceOver that are visually displayed onscreen. Typically, the 'Show notifications' button is present, but on these intermittent occasions, selecting it fails to reveal the notifications, and does nothing. If this issue occurs, double-tap and hold on the \"Show Notifications\" button, and swipe up. This will reveal the notifications. In Notification Center, the option to clear all notifications does not work. A consistent workaround for this issue has not been identified at the time of posting. We recommend clearing notifications manually. VoiceOver's 'Copy Speech' function copies the full semantic markup and hints, instead of just the spoken text. For example, in iOS 27, Copy Speech might paste \"Latest news, heading Level 2\". In previous versions of iOS, Copy Speech would only paste \"Latest news,\" which is the desired behavior. Screen Recognition does not appear in VoiceOver's Quick Settings panel, even if selected for inclusion. The Camera App contains extraneous elements for editing Camera Controls when Edit Mode is not active. This includes \"Remove\" elements next to each camera control and a \"Done\" button that does nothing when tapped. When an app is open and VoiceOver focus is placed on the battery indicator, it is not possible to swipe to other items on the status bar. The Direct Touch option in the VoiceOver Quick Settings panel does not work. Minor Bugs On the Keypad in the Phone app, the button to place the call is labeled as \"Call Answer.\" When focusing on a conversation in the Siri app, the Actions rotor for the conversation contains two identical \"Delete\" actions. When the device is set to 24-Hour Time, VoiceOver does not correctly speak the time on the top of the hour. When customising VoiceOver touch gestures and you select to replace the current command with a new one, the old command is sometimes not overwritten, necessitating manual removal and replacement. When the Safari toolbar is set to 'Bottom', the \"Show Bookmarks\" button is incorrectly labelled as \"Bookmark.\" When the VoiceOver cursor reaches the first or last element onscreen in the Camera app, focus loops instead of stopping at the boundary. Improvements for VoiceOver and Braille in iOS 27 and iPadOS 27 To the best of our knowledge, Apple does not routinely publish lists of bug fixes for VoiceOver or braille across releases; thus, it is difficult to get a complete accounting of every issue that has been resolved or what fixes users can expect to see upon upgrading to iOS 27 or iPadOS 27. With this in mind, our testing suggests that the following issues present in iOS/iPadOS 26 have been resolved or meaningfully improved in iOS 27 and iPadOS 27: Stability of VoiceOver focus has been significantly improved across the operating system. The screen no longer locks while VoiceOver is reading a notification on the Lock Screen. Keyboard sounds once again play when VoiceOver is on, regardless of the audio ducking setting. VoiceOver focus is no longer erratic in the App Switcher when it is opened from the Home Screen. The default volume of the Eloquence speech synthesizer more closely matches that of other voices. In Conclusion Our team has compiled lists of new vision accessibility bugs for every major iOS and iPadOS release since iOS 7 in 2013. No software from any manufacturer is completely free of bugs. That said, the number of bugs - particularly those classified as 'serious' and involving core VoiceOver and braille functionality - in iOS/iPadOS 27 is deeply concerning. We call on Apple to urgently prioritize fixing the bugs listed in this post, as well as those on The AppleVis Bug Tracker . If you have not already upgraded to iOS 27 or iPadOS 27, we would strongly recommend that you take a few moments to read through any replies to this post before doing so; in case other users' experiences differ from our own. Also, consider that historically, Apple has delivered fixes for many accessibility bugs within the first few x.x.1 updates following major releases, and waiting briefly may allow Apple to resolve any initial problems reported after the public release. In the event that you do encounter an issue that is particularly bothersome, there are some troubleshooting steps you can take. Sometimes, simply toggling VoiceOver off and on again or restarting your device can resolve some issues that may arise following an OS update. Therefore, we highly recommend including these steps as part of your standard troubleshooting process. If restarting VoiceOver and/or your device does not resolve the issue, it might be worth considering a reset of your VoiceOver Settings; to do this, navigate to Settings> Accessibility> VoiceOver> Reset VoiceOver Settings. While this approach requires manually reconfiguring your customized VoiceOver settings, we have heard of multiple instances where a VoiceOver settings reset resolved issues since this feature became available in last year's iOS 26. This suggests that occasionally, problems can be attributed to local factors rather than being OS bugs. Finally, when commenting below, we ask that you please keep the discussion focused on accessibility issues specifically introduced or fixed in iOS 27 and iPadOS 27. Our release posts tend to be widely read and garner many helpful responses, so it is all the more important that readers can easily find relevant information. Also, please remember that upgrade decisions are personal, with each user's situation unique - there is no right or wrong choice. Comments criticizing others' decisions are not constructive and do nothing to add to the discussion; but they do set a negative tone and get in the way of readers finding helpful information. Furthermore, not experiencing an issue yourself does not mean that it doesn't exist for others, as bugs can be configuration-specific. Stating that an issue doesn't exist simply because you haven't encountered it is unhelpful. Our aim with these posts is to provide a forum for respectful, constructive, and honest sharing of experiences that inform decisions and empower people. In closing, we would like to again thank everyone in our community who contributed to AppleVis' testing and bug-reporting efforts during the iOS/iPadOS 27 beta cycle - be it through our Community Bug Program or just by posting on our Forum. Our information about this release is more complete because of you, and we are very grateful to all who took the time to contribute.",
+        "summary": "iOS 27 and iPadOS 27 were released to the public on Monday, September 14, 2026. This post contains a summary of new bugs and fixes impacting VoiceOver and Braille support that the AppleVis Editorial Team has independently validated during our use and testing of these releases. The information contained in this post is compiled from our own use and testing of iOS 27 and iPadOS 27 during the beta period from June to September 2026; as well as from validated reports submitted by others through our Community Bug Program and shared on the AppleVis Forum. Our sincere appreciation goes to everyone who so generously took the time to share their findings with us. At the outset, we need to state explicitly that the bug list contained in this post is not definitive and that our assessments are not infallible. While we are confident in the presence of the issues discussed in this post, there are many other reports shared on the AppleVis Forum by members of our community that we have not been able to independently replicate with the available information. Many of these reports represented use cases that are different from those of our team; and a small number were issues that, despite understanding how to reproduce them, we did not get the same results. We say all of this so that readers understand the limits of our own testing, and that others' experiences may be different from ours. An issue not being present in our bug list does not mean the issue does not exist; it simply means that we are either unaware of or unable to reproduce it. As is our routine practice, each bug in this post has been given a severity rating. These ratings are based upon what we believe to be the implications for accessing and using features and functionality for the average user; the level of impact on the overall user experience; and whether or not there is an effective workaround for the issue. However, as these ratings are subjective to an extent, it is very possible that they may not reflect your own opinion or use case. With this in mind, we strongly recommend reading this full post and any replies before updating to iOS 27 and iPadOS 27; as we believe this will help you make an informed decision on whether to install the software at the current time or to wait for a future release. We also strongly recommend that you read this Megathread about the iOS 27 RC , as it contains a wealth of community reports about and experiences with the Release Candidate version of the software. Some issues listed in this post and on the Forum may manifest only under specific conditions; this is all the more likely as software continues to add more features and the number of devices, available configurations, and use cases in Apple's ecosystem continues to grow. You likely will not experience every bug that we list, and you likely will not agree with every severity rating for the bugs that you do experience. While we wish it were otherwise, this is to be expected. And as is the nature with all software, it is also likely that you will encounter issues that are not reported in this post. To ensure the information in this post is as complete and accurate as possible, we would appreciate input from those who have installed iOS 27 or iPadOS 27. Please confirm if you are encountering the same problems listed or if you have found workarounds. Please also let us know about any additional issues not mentioned here. Of course, it is even more important that you report any new bugs directly to Apple - they are already aware of the ones listed in this post. For an explanation of why and how to report bugs to Apple, see this post. With all of the preamble out of the way, below are the new bugs for VoiceOver and Braille users which members of the AppleVis Editorial Team have personally experienced and believe to be present in iOS 27 and iPadOS 27: A Major Change to VoiceOver's Audio Profile In iOS 27 and iPadOS 27, there is a significant change in the sound profile of VoiceOver when the device's internal speaker is used. When compared to iOS 26, VoiceOver audio in iOS 27 has significantly less bass, particularly at lower volume levels. The resulting sound might best be described as 'neutral' or 'flat', with significantly less of the low-end emphasis and other processing that has characterized VoiceOver audio in recent versions of iOS/iPadOS. If you have not yet upgraded to iOS 27, we believe that you can get a reasonable approximation of how VoiceOver will sound on your device by making a phone call, putting the call on speaker, and then using VoiceOver to navigate around the screen; as the flatter, more neutral sound profile that VoiceOver uses during a phone call sounds very similar to what we are hearing in iOS 27. At the time of publication, we do not know whether the change to VoiceOver's sound profile is expected behavior; thus, we are not including it in our bug list. Nevertheless, we feel that users should be aware of this change before upgrading. If we receive additional information, we will update this post accordingly. Serious Bugs When the state of an item changes or the screen updates, VoiceOver does not always recognize/speak the information. This issue has many manifestations, including (but not limited to): When waking the device, VoiceOver may speak the time the device was last woken rather than the current time; When information updates onscreen (such as the status of an operation in an app), VoiceOver may not speak it right away and instead speak the previously displayed text. There is no known workaround, though VoiceOver will eventually speak the updated information if focus is moved off of and back onto the impacted element enough times. The VoiceOver Per-Voice Equalizer (a feature that allows one to customize certain frequency/tonal characteristics of a voice) does not work. There is no known workaround. If you rely on the per-voice Equalizer, we recommend that you do not install iOS/iPadOS 27 until this issue is resolved. The VoiceOver Pronunciation Dictionary does not work reliably, with custom pronunciations often not being obeyed by VoiceOver. There is no known workaround. If you rely on the Pronunciation Dictionary, we recommend that you do not install iOS/iPadOS 27 until this issue is resolved. On some devices, Sound Curtain and Touch Curtain do not work. For affected users, it is possible to partially work around the issue with Sound Curtain by setting the device volume to 0%. There is no known workaround for Touch Curtain. If you rely on Sound Curtain or Touch Curtain, we recommend that you do not install iOS/iPadOS 27 until this issue is resolved. If an external audio device is connected, VoiceOver speech does not work when playing audio in Safari. Pausing the audio causes it to start working again. Sometimes, when reading text, VoiceOver stops speaking and does not resume on its own. This issue does not occur all of the time. When it does occur, speech will stop mid-sentence (and sometimes even mid-word). Touching the screen or performing a touch gesture (like a one-finger swipe left or right) restores speech, and the user can then refocus VoiceOver on the impacted element. In iOS 27's new Recovery Menu, there is no spoken feedback in Diagnostics Mode, rendering this option completely inaccessible. There is no known workaround to make Diagnostics Mode itself usable. If you do manage to accidentally get your device into Diagnostics Mode, our experience is that the device will restart into normal operation after approximately five to ten minutes of inactivity. Moderate Bugs In Safari, the buttons to switch between the Start Page, Reading List, History, and Bookmarks do not work. It is possible to select these buttons, and VoiceOver indicates they have been selected, but the content itself does not update, meaning content cannot be reached. As a workaround, perform a one-finger triple-tap (what is known as a \"long press\") on the desired button to activate it. Our thanks to AppleVis user Brian Giles for this workaround. When VoiceOver focus is placed inside a text field, and then subsequently moved onto a combo box, the menu automatically opens. On occasions, when swiping through the Lock Screen using one-finger swipe right or left, VoiceOver focus may be inconsistent. When navigating through the Lock Screen using a one-finger swipe right, after the \"Swipe up to Unlock\" element, the expected behavior is that VoiceOver will focus on the first notification (if present); Focus status (if present); or the first item on the screen, like Flashlight or Camera. However, sometimes, VoiceOver users may find that focus is instead placed on items from the Status Bar, such as Cellular Carrier, Battery Percentage, or the Clock. If VoiceOver focus does land on items from the Status Bar when swiping, it is sometimes possible to continue swiping to the right and get to the first Lock Screen item; however, other times, VoiceOver focus can become stuck in a loop between the time, the \"Swipe Up to Unlock\" element, Cellular Carrier, an element with no spoken or audible feedback, or any combination of the above. Sometimes, VoiceOver does not speak the time when the device is woken with the Side Button. If this issue occurs, single-tap the screen with one finger to wake the device. After prompting Siri with the Side button, revealing the interface at the top of the screen, nothing happens when double-tapping the \"Open in App\" button. Double-tapping this button should work to activate it, opening the conversation in the Siri app. In the Phone App, the buttons to switch between 'All' and 'Missed' do not work. This issue can be worked around by either switching to Unified View or swiping through all calls in Classic View. Sometimes, it is not possible to access notifications with VoiceOver that are visually displayed onscreen. Typically, the 'Show notifications' button is present, but on these intermittent occasions, selecting it fails to reveal the notifications, and does nothing. If this issue occurs, double-tap and hold on the \"Show Notifications\" button, and swipe up. This will reveal the notifications. In Notification Center, the option to clear all notifications does not work. A consistent workaround for this issue has not been identified at the time of posting. We recommend clearing notifications manually. VoiceOver's 'Copy Speech' function copies the full semantic markup and hints, instead of just the spoken text. For example, in iOS 27, Copy Speech might paste \"Latest news, heading Level 2\". In previous versions of iOS, Copy Speech would only paste \"Latest news,\" which is the desired behavior. Screen Recognition does not appear in VoiceOver's Quick Settings panel, even if selected for inclusion. The Camera App contains extraneous elements for editing Camera Controls when Edit Mode is not active. This includes \"Remove\" elements next to each camera control and a \"Done\" button that does nothing when tapped. When an app is open and VoiceOver focus is placed on the battery indicator, it is not possible to swipe to other items on the status bar. The Direct Touch option in the VoiceOver Quick Settings panel does not work. Minor Bugs On the Keypad in the Phone app, the button to place the call is labeled as \"Call Answer.\" When focusing on a conversation in the Siri app, the Actions rotor for the conversation contains two identical \"Delete\" actions. When the device is set to 24-Hour Time, VoiceOver does not correctly speak the time on the top of the hour. When customising VoiceOver touch gestures and you select to replace the current command with a new one, the old command is sometimes not overwritten, necessitating manual removal and replacement. When the Safari toolbar is set to 'Bottom', the \"Show Bookmarks\" button is incorrectly labelled as \"Bookmark.\" When the VoiceOver cursor reaches the first or last element onscreen in the Camera app, focus loops instead of stopping at the boundary. Improvements for VoiceOver and Braille in iOS 27 and iPadOS 27 To the best of our knowledge, Apple does not routinely publish lists of bug fixes for VoiceOver or braille across releases; thus, it is difficult to get a complete accounting of every issue that has been resolved or what fixes users can expect to see upon upgrading to iOS 27 or iPadOS 27. With this in mind, our testing suggests that the following issues present in iOS/iPadOS 26 have been resolved or meaningfully improved in iOS 27 and iPadOS 27: Stability of VoiceOver focus has been significantly improved across the operating system. The screen no longer locks while VoiceOver is reading a notification on the Lock Screen. Keyboard sounds once again play when VoiceOver is on, regardless of the audio ducking setting. VoiceOver focus is no longer erratic in the App Switcher when it is opened from the Home Screen. The default volume of the Eloquence speech synthesizer more closely matches that of other voices. In Conclusion Our team has compiled lists of new vision accessibility bugs for every major iOS and iPadOS release since iOS 7 in 2013. No software from any manufacturer is completely free of bugs. That said, the number of bugs - particularly those classified as \"serious\" and involving core VoiceOver and braille functionality - in iOS/iPadOS 27 is deeply concerning. We call on Apple to urgently prioritize fixing the bugs listed in this post, as well as those on The AppleVis Bug Tracker . If you have not already upgraded to iOS 27 or iPadOS 27, we would strongly recommend that you take a few moments to read through any replies to this post before doing so; in case other users' experiences differ from our own. Also, consider that historically, Apple has delivered fixes for many accessibility bugs within the first few x.x.1 updates following major releases, and waiting briefly may allow Apple to resolve any initial problems reported after the public release. In the event that you do encounter an issue that is particularly bothersome, there are some troubleshooting steps you can take. Sometimes, simply toggling VoiceOver off and on again or restarting your device can resolve some issues that may arise following an OS update. Therefore, we highly recommend including these steps as part of your standard troubleshooting process. If restarting VoiceOver and/or your device does not resolve the issue, it might be worth considering a reset of your VoiceOver Settings; to do this, navigate to Settings> Accessibility> VoiceOver> Reset VoiceOver Settings. While this approach requires manually reconfiguring your customized VoiceOver settings, we have heard of multiple instances where a VoiceOver settings reset resolved issues since this feature became available in last year's iOS 26. This suggests that occasionally, problems can be attributed to local factors rather than being OS bugs. Finally, when commenting below, we ask that you please keep the discussion focused on accessibility issues specifically introduced or fixed in iOS 27 and iPadOS 27. Our release posts tend to be widely read and garner many helpful responses, so it is all the more important that readers can easily find relevant information. Also, please remember that upgrade decisions are personal, with each user's situation unique - there is no right or wrong choice. Comments criticizing others' decisions are not constructive and do nothing to add to the discussion; but they do set a negative tone and get in the way of readers finding helpful information. Furthermore, not experiencing an issue yourself does not mean that it doesn't exist for others, as bugs can be configuration-specific. Stating that an issue doesn't exist simply because you haven't encountered it is unhelpful. Our aim with these posts is to provide a forum for respectful, constructive, and honest sharing of experiences that inform decisions and empower people. In closing, we would like to again thank everyone in our community who contributed to AppleVis' testing and bug-reporting efforts during the iOS/iPadOS 27 beta cycle - be it through our Community Bug Program or just by posting on our Forum. Our information about this release is more complete because of you, and we are very grateful to all who took the time to contribute.",
         "body": ""
       }
     },

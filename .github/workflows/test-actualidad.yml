@@ -14,6 +14,7 @@ on:
       - 'scripts/actualidad-*.mjs'
       - 'scripts/sync-actualidad*.mjs'
       - 'test/actualidad-*.test.mjs'
+      - 'docs/actualidad-multimedia-candidates.md'
       - 'test/content-index.test.mjs'
       - 'test/global-favorites.test.mjs'
       - 'test/global-search-page.test.mjs'

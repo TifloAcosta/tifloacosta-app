@@ -5,7 +5,8 @@
 }(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   'use strict';
 
-  const editorialStates = new Set(['source-only', 'adapted', 'withheld']);
+  const editorialStates = new Set(['source-only', 'selected', 'adapted', 'withheld']);
+  const contentTypes = new Set(['news', 'app', 'audio', 'video']);
 
   function cleanString(value) {
     return typeof value === 'string' ? value.trim() : '';
@@ -20,45 +21,121 @@
     }
   }
 
-  function normalizeStory(raw) {
+  function normalizedLocale(value) {
+    if (!value || typeof value !== 'object') return null;
+    const title = cleanString(value.title);
+    if (!title) return null;
+    return {
+      title,
+      summary: cleanString(value.summary),
+      body: cleanString(value.body)
+    };
+  }
+
+  function legacyToLogical(raw) {
+    const lang = cleanString(raw?.lang).toLowerCase();
+    if (!['es', 'en'].includes(lang)) return null;
+    return {
+      ...raw,
+      type: 'news',
+      originalLanguage: lang,
+      locales: {
+        [lang]: {
+          title: cleanString(raw.title),
+          summary: cleanString(raw.summary),
+          body: cleanString(raw.body)
+        }
+      },
+      media: null
+    };
+  }
+
+  function normalizeContent(raw) {
     if (!raw || typeof raw !== 'object') return null;
 
-    const id = cleanString(raw.id);
-    const lang = cleanString(raw.lang).toLowerCase();
-    const title = cleanString(raw.title);
-    const sourceId = cleanString(raw.sourceId);
-    const sourceName = cleanString(raw.sourceName);
-    const sourceUrl = cleanString(raw.sourceUrl);
-    const originalUrl = cleanString(raw.originalUrl);
-    const editorialState = cleanString(raw.editorialState);
-    const categories = Array.isArray(raw.categories)
-      ? [...new Set(raw.categories.map(cleanString).filter(Boolean))]
-      : [];
-    const date = new Date(raw.publishedAt);
+    const isLegacy = !raw.locales && !raw.originalLanguage;
+    const candidate = isLegacy ? legacyToLogical(raw) : raw;
+    if (!candidate) return null;
 
-    if (!id || !['es', 'en'].includes(lang) || !title || !sourceId || !sourceName) return null;
+    const id = cleanString(candidate.id);
+    const type = cleanString(candidate.type || 'news').toLowerCase();
+    const sourceId = cleanString(candidate.sourceId);
+    const sourceName = cleanString(candidate.sourceName);
+    const sourceUrl = cleanString(candidate.sourceUrl);
+    const originalUrl = cleanString(candidate.originalUrl);
+    const originalLanguage = cleanString(candidate.originalLanguage).toLowerCase();
+    const editorialState = cleanString(candidate.editorialState);
+    const categories = Array.isArray(candidate.categories)
+      ? [...new Set(candidate.categories.map(cleanString).filter(Boolean))]
+      : [];
+    const date = new Date(candidate.publishedAt);
+
+    if (!id || !contentTypes.has(type) || !sourceId || !sourceName) return null;
     if (!validHttpUrl(sourceUrl) || !validHttpUrl(originalUrl)) return null;
+    if (!['es', 'en'].includes(originalLanguage)) return null;
     if (Number.isNaN(date.getTime()) || categories.length === 0 || !editorialStates.has(editorialState)) return null;
 
-    const featuredRank = Number.isFinite(Number(raw.featuredRank)) && raw.featuredRank !== null && raw.featuredRank !== ''
-      ? Number(raw.featuredRank)
+    const locales = {};
+    for (const lang of ['es', 'en']) {
+      const locale = normalizedLocale(candidate.locales?.[lang]);
+      if (locale) locales[lang] = locale;
+    }
+
+    if (!locales[originalLanguage]) return null;
+    if (!isLegacy && editorialState === 'adapted' && (!locales.es || !locales.en)) return null;
+
+    const featuredRank = Number.isFinite(Number(candidate.featuredRank)) && candidate.featuredRank !== null && candidate.featuredRank !== ''
+      ? Number(candidate.featuredRank)
       : null;
 
     return {
       id,
-      lang,
-      title,
+      type,
       sourceId,
       sourceName,
       sourceUrl,
       originalUrl,
+      originalLanguage,
       publishedAt: date.toISOString(),
       categories,
       editorialState,
-      summary: cleanString(raw.summary),
-      body: cleanString(raw.body),
-      featuredRank
+      featuredRank,
+      locales,
+      media: candidate.media && typeof candidate.media === 'object' ? { ...candidate.media } : null
     };
+  }
+
+  function localizedStory(raw, lang) {
+    const requestedLanguage = cleanString(lang).toLowerCase();
+    if (!['es', 'en'].includes(requestedLanguage)) return null;
+
+    const item = normalizeContent(raw);
+    const locale = item?.locales?.[requestedLanguage];
+    if (!item || !locale) return null;
+
+    return {
+      id: item.id,
+      lang: requestedLanguage,
+      title: locale.title,
+      sourceId: item.sourceId,
+      sourceName: item.sourceName,
+      sourceUrl: item.sourceUrl,
+      originalUrl: item.originalUrl,
+      publishedAt: item.publishedAt,
+      categories: item.categories,
+      editorialState: item.editorialState,
+      summary: locale.summary,
+      body: locale.body,
+      featuredRank: item.featuredRank,
+      type: item.type,
+      originalLanguage: item.originalLanguage,
+      media: item.media
+    };
+  }
+
+  function normalizeStory(raw) {
+    const lang = cleanString(raw?.lang || raw?.originalLanguage).toLowerCase();
+    return localizedStory(raw, lang);
   }
 
   function sortStories(items) {
@@ -76,8 +153,8 @@
   function publicStories(items, lang) {
     const selected = [];
     for (const raw of Array.isArray(items) ? items : []) {
-      const item = normalizeStory(raw);
-      if (!item || item.editorialState === 'withheld' || item.lang !== lang) continue;
+      const item = localizedStory(raw, lang);
+      if (!item || item.editorialState === 'withheld') continue;
       selected.push(item);
     }
     return sortStories(selected);
@@ -109,5 +186,5 @@
     return selected.slice(0, safeLimit);
   }
 
-  return { homePreview, normalizeStory, publicStories, sortStories };
+  return { homePreview, localizedStory, normalizeContent, normalizeStory, publicStories, sortStories };
 }));

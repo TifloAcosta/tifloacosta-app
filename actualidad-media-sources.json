@@ -27,11 +27,11 @@
     "id": "tifloaudio",
     "name": "Tiflo Audio",
     "homepage": "https://www.tifloaudio.com/",
-    "endpoint": "https://www.tifloaudio.com/",
+    "endpoint": "https://www.ivoox.com/feed_fg_f1185986_filtro_1.xml",
     "section": "accessibility",
     "type": "audio",
     "lang": "es",
-    "adapter": "tifloaudio-html",
+    "adapter": "feed",
     "enabled": true,
     "maxItems": 8
   },

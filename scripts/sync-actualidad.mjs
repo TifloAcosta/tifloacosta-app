@@ -2,7 +2,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { mergeEditorial } from './actualidad-editorial.mjs';
-import { normalizeFeedEntry, parseFeedXml } from './actualidad-feed.mjs';
+import { normalizeFeedEntry, parseCtiNewsHtml, parseFeedXml } from './actualidad-feed.mjs';
 
 const require = createRequire(import.meta.url);
 const core = require('../actualidad-core.js');
@@ -20,18 +20,32 @@ function retentionCutoff(now) {
   return timestamp - STORY_RETENTION_MS;
 }
 
+function sourceEntries(text, source) {
+  if (source?.format === 'cti-html') return parseCtiNewsHtml(text, source);
+  return parseFeedXml(text, source);
+}
+
+function limitSourceItems(items, source) {
+  const maxItems = Number.isInteger(source?.maxItems) && source.maxItems > 0 ? source.maxItems : null;
+  const sorted = [...items].sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+  return maxItems ? sorted.slice(0, maxItems) : sorted;
+}
+
 async function fetchSourceOnce(source, fetchFn) {
   const response = await fetchFn(source.feedUrl, {
     headers: {
-      'accept': 'application/atom+xml, application/rss+xml, application/xml, text/xml;q=0.9, */*;q=0.5',
+      'accept': source?.format === 'cti-html'
+        ? 'text/html, application/xhtml+xml;q=0.9, */*;q=0.5'
+        : 'application/atom+xml, application/rss+xml, application/xml, text/xml;q=0.9, */*;q=0.5',
       'user-agent': 'TifloAcosta-Actualidad/1.0 (+https://tifloacosta.com/)'
     }
   });
   if (!response?.ok) throw new Error(`HTTP ${response?.status || 'error'} for ${source.id}`);
-  const xml = await response.text();
-  return parseFeedXml(xml, source)
+  const text = await response.text();
+  const normalized = sourceEntries(text, source)
     .map(entry => normalizeFeedEntry(entry, source))
     .filter(Boolean);
+  return limitSourceItems(normalized, source);
 }
 
 async function fetchSource(source, fetchFn) {

@@ -45,12 +45,34 @@
     "enabled": true
   },
   {
-    "id": "actualidad-accesible",
-    "name": "Actualidad Accesible",
-    "homepage": "https://actualidadaccesible.com/",
-    "feedUrl": "https://actualidadaccesible.com/feed/",
+    "id": "cti-once",
+    "name": "CTI de la ONCE",
+    "homepage": "https://cti.once.es/",
+    "feedUrl": "https://cti.once.es/noticias",
+    "format": "cti-html",
     "lang": "es",
     "categories": ["tecnologia-accesibilidad"],
+    "maxItems": 8,
+    "enabled": true
+  },
+  {
+    "id": "usable-y-accesible",
+    "name": "Usable y accesible",
+    "homepage": "https://olgacarreras.blogspot.com/",
+    "feedUrl": "https://olgacarreras.blogspot.com/feeds/posts/default",
+    "lang": "es",
+    "categories": ["tecnologia-accesibilidad"],
+    "maxItems": 6,
+    "enabled": true
+  },
+  {
+    "id": "conticgo",
+    "name": "Conticgo",
+    "homepage": "https://conticgo.net/",
+    "feedUrl": "https://conticgo.net/feed/",
+    "lang": "es",
+    "categories": ["tecnologia-accesibilidad"],
+    "maxItems": 6,
     "enabled": true
   }
 ]

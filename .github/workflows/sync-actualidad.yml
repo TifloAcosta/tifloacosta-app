@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - feature/actualidad-web
+      - 'feature/actualidad-*'
     paths:
       - 'actualidad-sources.json'
       - 'actualidad-editorial.json'

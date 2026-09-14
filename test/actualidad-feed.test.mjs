@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { canonicalizeUrl, normalizeFeedEntry, parseFeedXml, stableStoryId } from '../scripts/actualidad-feed.mjs';
+import { canonicalizeUrl, normalizeFeedEntry, parseCtiNewsHtml, parseFeedXml, stableStoryId } from '../scripts/actualidad-feed.mjs';
 
 const source = {
   id: 'applevis-apps',
@@ -26,6 +26,25 @@ test('Atom entries use href links and updated dates', () => {
   assert.equal(items.length, 1);
   assert.equal(items[0].url, 'https://example.com/nvda');
   assert.equal(items[0].publishedAt, '2026-09-13T13:00:00Z');
+});
+
+test('CTI news listing is parsed into dated entries', () => {
+  const html = `
+    <section>
+      <h2><span>Evaluaciones de APP</span> <a href="/noticias/evaluaciones-de-app-agosto">Evaluaciones de APP actualizadas en agosto</a></h2>
+      <span class="date">11/09/2026</span>
+      <p>A lo largo del pasado mes se han evaluado nuevas aplicaciones.</p>
+      <h2><span>Accesibilidad y Tecnología</span> <a href="https://cti.once.es/noticias/futbol-accesible">Vive el fútbol accesible con Movistar Touch</a></h2>
+      <span class="date">10/09/2026</span>
+      <p>Una experiencia accesible e inmersiva para personas afiliadas.</p>
+    </section>`;
+
+  const items = parseCtiNewsHtml(html, { homepage: 'https://cti.once.es/' });
+  assert.equal(items.length, 2);
+  assert.equal(items[0].title, 'Evaluaciones de APP actualizadas en agosto');
+  assert.equal(items[0].url, 'https://cti.once.es/noticias/evaluaciones-de-app-agosto');
+  assert.equal(items[0].publishedAt, '2026-09-11T12:00:00.000Z');
+  assert.equal(items[0].summary, 'A lo largo del pasado mes se han evaluado nuevas aplicaciones.');
 });
 
 test('canonical URLs drop fragments and common tracking parameters', () => {

@@ -85,7 +85,28 @@
 
   function homePreview(items, lang, limit = 5) {
     const safeLimit = Number.isInteger(limit) && limit > 0 ? limit : 5;
-    return publicStories(items, lang).slice(0, safeLimit);
+    const ordered = publicStories(items, lang);
+    const selected = [];
+    const deferred = [];
+    const sourceCounts = new Map();
+    const maxPerSource = 2;
+
+    for (const item of ordered) {
+      const count = sourceCounts.get(item.sourceId) || 0;
+      if (count < maxPerSource && selected.length < safeLimit) {
+        selected.push(item);
+        sourceCounts.set(item.sourceId, count + 1);
+      } else {
+        deferred.push(item);
+      }
+    }
+
+    for (const item of deferred) {
+      if (selected.length >= safeLimit) break;
+      selected.push(item);
+    }
+
+    return selected.slice(0, safeLimit);
   }
 
   return { homePreview, normalizeStory, publicStories, sortStories };

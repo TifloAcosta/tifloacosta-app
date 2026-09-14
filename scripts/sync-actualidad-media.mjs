@@ -1,6 +1,8 @@
 import fs from 'node:fs';
 import sourcesFile from '../actualidad-media-sources.json' with { type: 'json' };
+import editorialFile from '../actualidad-media-editorial.json' with { type: 'json' };
 import { feedEntriesFromXml, parseTifloAudioHtml, youtubeEntriesFromApi } from './actualidad-media-adapters.mjs';
+import { canonicalizeUrl } from './actualidad-feed.mjs';
 import { dedupeMediaItems, normalizeMediaItem, retainRecentMedia } from './actualidad-media-core.mjs';
 
 function apiUrl(resource, params) {
@@ -19,6 +21,73 @@ async function requireText(response) {
 async function requireJson(response) {
   if (!response?.ok) throw new Error(`HTTP ${response?.status || 'error'}`);
   return response.json();
+}
+
+function cleanLocale(raw) {
+  if (!raw || typeof raw !== 'object') return null;
+  const title = String(raw.title || '').trim();
+  const summary = String(raw.summary || '').trim();
+  if (!title && !summary) return null;
+  return { title, summary };
+}
+
+export function mergeMediaEditorial(items = [], records = []) {
+  const byId = new Map();
+  const byUrl = new Map();
+  for (const record of Array.isArray(records) ? records : []) {
+    const id = String(record?.id || '').trim();
+    if (id) byId.set(id, record);
+    const url = canonicalizeUrl(record?.originalUrl || '');
+    if (url) byUrl.set(url, record);
+  }
+
+  const out = [];
+  for (const item of Array.isArray(items) ? items : []) {
+    const record = byId.get(String(item?.id || '')) || byUrl.get(canonicalizeUrl(item?.originalUrl || ''));
+    if (!record) {
+      out.push(item);
+      continue;
+    }
+    if (record.state === 'withheld' || record.withheld === true) continue;
+
+    const locales = {};
+    const es = cleanLocale(record.locales?.es);
+    const en = cleanLocale(record.locales?.en);
+    if (es) locales.es = es;
+    if (en) locales.en = en;
+
+    const merged = { ...item };
+    if (record.state) merged.editorialState = String(record.state);
+    if (Object.keys(locales).length) merged.locales = locales;
+    const rank = Number(record.featuredRank);
+    if (Number.isFinite(rank)) merged.featuredRank = rank;
+    out.push(merged);
+  }
+  return out;
+}
+
+export function orderMediaItems(items = []) {
+  const pending = [...items].sort((a, b) => String(b.publishedAt || '').localeCompare(String(a.publishedAt || '')) || String(a.id || '').localeCompare(String(b.id || '')));
+  const out = [];
+  let lastSource = '';
+  let streak = 0;
+
+  while (pending.length) {
+    let index = 0;
+    if (lastSource && streak >= 2) {
+      const alternative = pending.findIndex(item => String(item.sourceId || '') !== lastSource);
+      if (alternative >= 0) index = alternative;
+    }
+    const [next] = pending.splice(index, 1);
+    const source = String(next?.sourceId || '');
+    if (source && source === lastSource) streak += 1;
+    else {
+      lastSource = source;
+      streak = 1;
+    }
+    out.push(next);
+  }
+  return out;
 }
 
 export async function fetchMediaSource(source, fetchImpl = fetch, env = process.env) {
@@ -47,7 +116,7 @@ export async function fetchMediaSource(source, fetchImpl = fetch, env = process.
   throw new Error(`Unsupported multimedia adapter: ${source.adapter}`);
 }
 
-export async function buildMediaCatalog({ sources = sourcesFile, fetchImpl = fetch, env = process.env, now = new Date() } = {}) {
+export async function buildMediaCatalog({ sources = sourcesFile, fetchImpl = fetch, env = process.env, now = new Date(), editorial = editorialFile } = {}) {
   const enabled = sources.filter(source => source?.enabled);
   const items = [];
   const failures = [];
@@ -68,9 +137,10 @@ export async function buildMediaCatalog({ sources = sourcesFile, fetchImpl = fet
 
   if (enabled.length && successes === 0) throw new Error('All multimedia sources failed');
 
-  const retained = retainRecentMedia(dedupeMediaItems(items), now)
-    .sort((a, b) => String(b.publishedAt).localeCompare(String(a.publishedAt)) || String(a.id).localeCompare(String(b.id)));
-  return { items: retained, failures };
+  const retained = retainRecentMedia(dedupeMediaItems(items), now);
+  const merged = mergeMediaEditorial(retained, editorial);
+  const ordered = orderMediaItems(merged);
+  return { items: ordered, failures };
 }
 
 export async function syncMediaCatalog(options = {}) {

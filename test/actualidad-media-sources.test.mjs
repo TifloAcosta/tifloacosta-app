@@ -52,3 +52,25 @@ test('approved general technology channels stay explicitly outside accessibility
     assert.ok(Number(source.maxItems) <= 4, `${id} is source-limited`);
   }
 });
+
+test('approved English general technology channels are enabled for the English multimedia view', () => {
+  const expected = new Map([
+    ['mkbhd', '@mkbhd'],
+    ['mrwhosetheboss', '@Mrwhosetheboss'],
+    ['linus-tech-tips', '@LinusTechTips'],
+    ['the-verge-video', '@TheVerge'],
+    ['cnet', '@CNET']
+  ]);
+  for (const [id, handle] of expected) {
+    const source = byId.get(id);
+    assert.ok(source, `${id} is registered`);
+    assert.equal(source.enabled, true, `${id} is enabled`);
+    assert.equal(source.section, 'technology', `${id} stays in technology`);
+    assert.equal(source.type, 'video', `${id} is video`);
+    assert.equal(source.lang, 'en', `${id} is English`);
+    assert.equal(source.editorialClass, 'generalist', `${id} is generalist`);
+    assert.equal(source.adapter, 'youtube-handle', `${id} uses YouTube handle adapter`);
+    assert.equal(source.youtubeHandle, handle, `${id} uses the verified handle`);
+    assert.ok(Number(source.maxItems) <= 3, `${id} is source-limited`);
+  }
+});

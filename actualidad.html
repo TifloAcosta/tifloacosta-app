@@ -34,13 +34,30 @@
     <p id="actualidad-intro">Noticias y novedades de accesibilidad y tecnología seleccionadas para llegar a lo importante sin tener que apartar ruido por el camino.</p>
   </section>
 
-  <section id="news-browser">
+  <nav id="actualidad-sections" class="resource-actions" aria-label="Secciones de Actualidad">
+    <a id="section-news-link" class="button-link" href="#news-browser">Noticias</a>
+    <a id="section-apps-link" class="button-link" href="#apps-browser">Apps accesibles</a>
+  </nav>
+
+  <section id="news-browser" aria-labelledby="news-heading">
+    <h2 id="news-heading">Noticias</h2>
     <label id="news-category-label" for="news-category">Filtrar por categoría</label>
     <select id="news-category">
       <option value="">Todas las categorías</option>
     </select>
     <p id="news-status" class="muted" aria-live="polite" aria-atomic="true"></p>
     <div id="news-list" class="news-list"></div>
+  </section>
+
+  <section id="apps-browser" aria-labelledby="apps-heading">
+    <h2 id="apps-heading">Apps accesibles</h2>
+    <p id="apps-intro">Aplicaciones accesibles descubiertas en fuentes especializadas. Cuando una fuente no publica una fecha fiable, TifloAcosta no inventa una.</p>
+    <label id="apps-platform-label" for="apps-platform">Filtrar por plataforma</label>
+    <select id="apps-platform">
+      <option value="">Todas las plataformas</option>
+    </select>
+    <p id="apps-status" class="muted" aria-live="polite" aria-atomic="true"></p>
+    <div id="apps-list" class="news-list"></div>
   </section>
 
   <section id="news-reader" hidden>
@@ -60,6 +77,6 @@
 </div>
 
 <script src="actualidad-core.js?v=1.0"></script>
-<script src="actualidad.js?v=1.0"></script>
+<script src="actualidad.js?v=1.1"></script>
 </body>
 </html>

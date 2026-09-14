@@ -12,6 +12,7 @@ on:
       - 'actualidad-editorial.json'
       - 'scripts/actualidad-*.mjs'
       - 'scripts/sync-actualidad.mjs'
+      - 'scripts/sync-actualidad-apps.mjs'
       - 'scripts/validate-actualidad-discovery.mjs'
       - '.github/workflows/sync-actualidad.yml'
   schedule:

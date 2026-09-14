@@ -61,6 +61,19 @@
     "enabled": true
   },
   {
+    "id": "apple-newsroom-accessibility-es",
+    "name": "Apple Accesibilidad Newsroom España",
+    "homepage": "https://www.apple.com/es/newsroom/",
+    "feedUrl": "https://www.apple.com/es/newsroom/rss-feed.rss",
+    "lang": "es",
+    "categories": ["apple", "tecnologia-accesibilidad"],
+    "includeKeywords": ["accesibilidad", "voiceover", "control por voz", "braille", "lupa", "escucha en directo", "voz personal", "audífonos", "acceso asistido", "lector de accesibilidad"],
+    "editorialClass": "official-accessibility",
+    "translationPolicy": "official-spanish-first",
+    "maxItems": 6,
+    "enabled": true
+  },
+  {
     "id": "ars-technica",
     "name": "Ars Technica",
     "homepage": "https://arstechnica.com/",

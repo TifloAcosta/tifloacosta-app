@@ -17,6 +17,7 @@ on:
       - 'scripts/sync-actualidad-apps.mjs'
       - 'scripts/sync-actualidad-media.mjs'
       - 'scripts/validate-actualidad-discovery.mjs'
+      - 'test/actualidad-media-*.test.mjs'
       - '.github/workflows/sync-actualidad.yml'
   schedule:
     - cron: '17 * * * *'

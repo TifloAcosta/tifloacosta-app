@@ -1,0 +1,11 @@
+[
+  {
+    "id": "buscaapps",
+    "name": "BuscaApps",
+    "homepage": "https://www.buscaapps.com/",
+    "url": "https://www.buscaapps.com/",
+    "format": "buscaapps-html",
+    "lang": "es",
+    "enabled": true
+  }
+]

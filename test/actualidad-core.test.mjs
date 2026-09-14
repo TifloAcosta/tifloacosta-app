@@ -22,6 +22,26 @@ const story = overrides => ({
   ...overrides
 });
 
+const bilingual = overrides => ({
+  id: 'bilingual-1',
+  type: 'news',
+  sourceId: 'applevis-blog',
+  sourceName: 'AppleVis Blog',
+  sourceUrl: 'https://www.applevis.com/blog',
+  originalUrl: 'https://www.applevis.com/blog/story',
+  originalLanguage: 'en',
+  publishedAt: '2026-09-14T10:00:00Z',
+  categories: ['apple'],
+  editorialState: 'adapted',
+  featuredRank: null,
+  locales: {
+    es: { title: 'Historia en español', summary: 'Resumen', body: 'Texto.' },
+    en: { title: 'English story', summary: 'Summary', body: 'Text.' }
+  },
+  media: null,
+  ...overrides
+});
+
 test('withheld stories never become public', () => {
   const items = [story({ editorialState: 'withheld' })];
   assert.deepEqual(core.publicStories(items, 'es'), []);
@@ -31,6 +51,22 @@ test('public stories follow the selected interface language', () => {
   const items = [story({ id: 'es' }), story({ id: 'en', lang: 'en' })];
   assert.deepEqual(core.publicStories(items, 'es').map(item => item.id), ['es']);
   assert.deepEqual(core.publicStories(items, 'en').map(item => item.id), ['en']);
+});
+
+test('a bilingual logical item resolves naturally in both interface languages', () => {
+  assert.equal(core.localizedStory(bilingual(), 'es').title, 'Historia en español');
+  assert.equal(core.localizedStory(bilingual(), 'en').title, 'English story');
+});
+
+test('legacy records remain renderable during migration', () => {
+  const legacy = story({ id: 'legacy-es', lang: 'es', title: 'Legado' });
+  assert.equal(core.localizedStory(legacy, 'es').title, 'Legado');
+  assert.equal(core.localizedStory(legacy, 'en'), null);
+});
+
+test('adapted logical items require both locale variants', () => {
+  const invalid = bilingual({ locales: { es: { title: 'Solo español', summary: '', body: 'Texto.' } } });
+  assert.equal(core.normalizeContent(invalid), null);
 });
 
 test('home preview honors explicit priority before recency and caps at five', () => {

@@ -3,7 +3,7 @@ name: Test Actualidad work
 on:
   push:
     branches:
-      - feature/actualidad-web
+      - 'feature/actualidad-*'
     paths:
       - 'actualidad*.js'
       - 'actualidad*.json'

@@ -10,9 +10,12 @@ on:
       - 'actualidad-sources.json'
       - 'actualidad-discovery-sources.json'
       - 'actualidad-editorial.json'
+      - 'actualidad-media-sources.json'
+      - 'actualidad-media-editorial.json'
       - 'scripts/actualidad-*.mjs'
       - 'scripts/sync-actualidad.mjs'
       - 'scripts/sync-actualidad-apps.mjs'
+      - 'scripts/sync-actualidad-media.mjs'
       - 'scripts/validate-actualidad-discovery.mjs'
       - '.github/workflows/sync-actualidad.yml'
   schedule:
@@ -58,6 +61,19 @@ jobs:
       - name: Synchronize Accessible apps
         run: node scripts/sync-actualidad-apps.mjs
 
+      - name: Synchronize Multimedia and require every source
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        shell: bash
+        run: |
+          set -o pipefail
+          output="$(node scripts/sync-actualidad-media.mjs 2>&1)"
+          printf '%s\n' "$output"
+          if grep -q 'Multimedia source unavailable:' <<< "$output"; then
+            echo 'One or more configured multimedia sources are unavailable during validation.' >&2
+            exit 1
+          fi
+
       - name: Run tests
         run: npm test
 
@@ -85,6 +101,11 @@ jobs:
       - name: Synchronize Accessible apps
         run: node scripts/sync-actualidad-apps.mjs
 
+      - name: Synchronize Multimedia
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: node scripts/sync-actualidad-media.mjs
+
       - name: Run tests
         run: npm test
 
@@ -92,7 +113,7 @@ jobs:
         id: changes
         shell: bash
         run: |
-          if [ -n "$(git status --porcelain -- actualidad.json actualidad-apps.json)" ]; then
+          if [ -n "$(git status --porcelain -- actualidad.json actualidad-apps.json actualidad-media.json)" ]; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
           else
             echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -104,7 +125,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add actualidad.json actualidad-apps.json
+          git add actualidad.json actualidad-apps.json actualidad-media.json
           git commit -m "chore: sync Actualidad"
           git push
 

@@ -1,24 +1,48 @@
 [
   {
-    "id": "engadget-88ba7fef18a2e0f0",
+    "id": "9to5mac-c14d03811396d9e8",
     "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2257929/elon-musk-x-corp-and-spacexai-just-moved-to-dismiss-their-lawsuit-against-apple/",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/14/here-are-the-requirements-to-get-siri-ai-in-ios-27/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-14T17:49:07.000Z",
+    "publishedAt": "2026-09-14T18:10:00.000Z",
     "categories": [
-      "tecnologia-general",
       "apple",
-      "apps-accesibles"
+      "tecnologia-general",
+      "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Elon Musk's X Corp and SpaceXAI just moved to dismiss their lawsuit against Apple",
-        "summary": "A lawsuit from last year accused the iPhone-maker of suppressing apps like Grok on the App Store.",
+        "title": "Here are the requirements to get Siri AI in iOS 27",
+        "summary": "iOS 27 launched today , and with it Siri AI has debuted as a major upgrade to Apple’s assistant. But there are several requirements Apple has in order to gain access to Siri AI. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-4678247004b6c061",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/14/clickfix-attacks-are-tricking-mac-and-windows-users-into-hacking-themselves/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T18:08:43.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "ClickFix attacks are tricking Mac and Windows users into hacking themselves",
+        "summary": "If you clicked on a fake HBO Max ad on Reddit in the past week, you might have fallen victim to a rising 'ClickFix' security threat.",
         "body": ""
       }
     },
@@ -48,29 +72,6 @@
     "media": null
   },
   {
-    "id": "engadget-049711ad700b9ada",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2257893/netflix-is-making-movies-based-on-crazy-taxi-and-stranger-than-heaven/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T17:31:57.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Netflix is making movies based on Crazy Taxi and Stranger than Heaven",
-        "summary": "Netflix's deal with Sega includes a new Sonic animated series as well as movies based on Crazy Taxi and Stranger than Heaven.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "engadget-f83adc49ef66ce00",
     "type": "news",
     "sourceId": "engadget",
@@ -88,29 +89,6 @@
       "en": {
         "title": "How to know if your USB-C ports can support video",
         "summary": "Your USB-C port can do a lot, but it won't necessarily be able to transfer video. Understanding what yours can do makes it easy to choose the best video option.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-27b321dfa3cf94b4",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/entertainment/994834/tiff-2026-movie-reviews",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T17:30:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "TIFF 2026: the latest movie reviews from Toronto",
-        "summary": "If you want an idea of what’s next in film, the Toronto International Film Festival is a good place to start. Every year TIFF features a huge range of features from around the world, and often some of them go on to be huge hits or awards contenders; the 2025 edition, for instance, included the […]",
         "body": ""
       }
     },
@@ -194,23 +172,25 @@
     "media": null
   },
   {
-    "id": "ars-technica-381d050980f1c9de",
+    "id": "engadget-0ed7831dc68f1f57",
     "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/science/2026/09/prehistoric-builders-transported-devils-arrows-11-miles/",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2257834/siri-ai-is-here-as-apple-releases-ios-27-macos-golden-gate-and-other-major-os-updates/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-14T17:10:54.000Z",
+    "publishedAt": "2026-09-14T17:13:09.000Z",
     "categories": [
-      "tecnologia-general"
+      "tecnologia-general",
+      "apple",
+      "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Prehistoric builders transported Devil's Arrows 11 miles",
-        "summary": "Isotropic analysis revealed the most likely source to be Brimham Rocks, not the nearby Plumpton Rocks.",
+        "title": "Siri AI is here as Apple releases iOS 27, macOS Golden Gate and other major OS updates",
+        "summary": "The kinks are still being worked out for users in the EU and China though.",
         "body": ""
       }
     },
@@ -234,31 +214,7 @@
     "locales": {
       "en": {
         "title": "With iOS 27, I’m actually using Siri again",
-        "summary": "Apple’s long-delayed Siri overhaul is finally here with iOS 27, and it changes how useful the assistant feels day to day",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-45289640e9b86f5f",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/14/watchos-27-now-available-for-apple-watch-heres-whats-new/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T17:10:29.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "watchOS 27 now available for Apple Watch, here’s what’s new",
-        "summary": "Apple has released its next major update for Apple Watch users: watchOS 27 is rolling out now. Here’s what’s new. more…",
+        "summary": "Apple’s long-delayed Siri overhaul is finally here with iOS 27, and it changes how useful the assistant feels day to day.",
         "body": ""
       }
     },
@@ -284,33 +240,6 @@
       "en": {
         "title": "macOS 27 is available now",
         "summary": "Apple released macOS 27 Golden Gate on Monday, which brings the new Siri AI assistant, Liquid Glass improvements, improved performance, and more. The update is compatible with all Macs with Apple Silicon, but not Intel Macs - Apple released its final big update for Intel-based Macs last year with macOS Tahoe. Siri AI is arguably […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-1f08d757a1faffcb",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/14/macos-27-new-siri-takes-on-ai-productivity-apps/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T17:10:09.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "windows",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "macOS 27: new Siri takes on AI productivity apps",
-        "summary": "The two most noticeable things about macOS 27 Golden Gate are the newly updated Siri AI and the design changes that make windows and icons more consistent.",
         "body": ""
       }
     },
@@ -365,14 +294,14 @@
     "media": null
   },
   {
-    "id": "ars-technica-3ac7caaa930807cc",
+    "id": "the-verge-35bc47730f10c734",
     "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/gadgets/2026/09/offensively-cheap-solar-power-is-looking-up/",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/994267/steam-frame-review",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-14T16:29:18.000Z",
+    "publishedAt": "2026-09-14T17:00:00.000Z",
     "categories": [
       "tecnologia-general"
     ],
@@ -380,8 +309,31 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "\"Offensively cheap\": Solar power is looking up",
-        "summary": "Chinese-made panels on rooftops across the world are changing the facts of life for big utilities.",
+        "title": "The Steam Frame is made for irresponsible hardware nerds like me",
+        "summary": "For nearly three weeks, I've been testing the limits of Valve's Steam Frame, the company's new wearable PC. At first glance, it's easy to write it off as a pricey headset that missed the VR craze. At $1,059 with 256GB of storage or $1,299 for 1TB, it costs two to three times as much as […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-71abceb7a7534f70",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2254024/are-digital-wallets-safe-than-physical/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T16:30:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "What makes digital wallets safer than physical ones?",
+        "summary": "Digital wallets are convenient, but they also bring a ton of security features that help keep your cards protected.",
         "body": ""
       }
     },
@@ -690,6 +642,29 @@
     "media": null
   },
   {
+    "id": "ars-technica-ff76d6f6349138b4",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/gadgets/2026/09/i-spent-4000-on-a-robot-dog-from-china/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-12T11:00:53.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "I spent $4,000 on a robot dog from China",
+        "summary": "Unitree might be the world’s most important robotics company.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "applevis-apps-00b63fb62c1ff067",
     "type": "news",
     "sourceId": "applevis-apps",
@@ -733,6 +708,30 @@
       "en": {
         "title": "Remote Incident Manager Mobile",
         "summary": "Harness the power of born-accessible remote desktop, right in the palm of your hand! Remote Incident Manager’s mobile companion turns your iPhone or iPad into a powerful universal remote for any PC or Mac running Remote Incident Manager, opening up a world of possibilities. Tap into your home computer while on your commute, and control it as if you were right there in front of it! Run full support or training sessions straight from your phone, complete with crystal-clear voice conversations. Perform routine maintenance on machines across fleets, anytime, anywhere! All this and more with just a phone and a keyboard! Features: Accessible by design. Simple by nature. Near-complete keyboard control across Windows and macOS, irrespective of screen reader. Accessible, customizable touch keyboard and VoiceOver gesture-based control, making simple tasks possible in the absence of a keyboard. High-fidelity, low-latency audio output from the remote computer. Clear visual output with precise mouse/trackpad control. Crystal-clear voice conversations with built-in noise cancelation. In-session text chat capability. No screen reader? No problem! Leverage our Remote Accessibility module to provide assistance to a computer without the need to install a screen reader! Secure peer-to-peer connections between your phone and a remote computer make for extremely low latency (even on mobile data!). Note: This mobile companion is designed solely as a controller and cannot be used as a target. In other words, a computer cannot control a phone running the companion. Account registration through the desktop client or Remote Incident Manager website prior to your first use of this app is highly recommended for an optimal experience.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-b705d6f7e539ea74",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/tech-policy/2026/09/chatgpt-using-lawyer-punished-for-citing-fake-testimony-from-made-up-witnesses/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-11T19:34:09.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "ChatGPT-using lawyer punished for citing fake testimony from made-up witnesses",
+        "summary": "\"I didn't know that AI could hallucinate facts,\" New Mexico defense lawyer says.",
         "body": ""
       }
     },

@@ -27,7 +27,7 @@ test('multimedia loads independently from news and apps without autoplay', async
 
 test('multimedia rendering keeps source section authoritative and external source access', async () => {
   const js = await read('actualidad-media.js');
-  assert.match(js, /items\.filter\(item => item\.section === section\)/);
+  assert.match(js, /items\.filter\(item => item\.section === section/);
   assert.match(js, /renderSection\('accessibility'/);
   assert.match(js, /renderSection\('technology'/);
   assert.match(js, /mediaOriginal/);
@@ -39,6 +39,15 @@ test('multimedia uses a localized editorial title and summary when available', a
   assert.match(js, /item\.locales\?\.\[currentLanguage\(\)\]/);
   assert.match(js, /localized\.title \|\| item\.title/);
   assert.match(js, /localized\.summary \|\| item\.summary/);
+});
+
+test('multimedia follows the interface language and crosses languages only for adapted editorial items', async () => {
+  const js = await read('actualidad-media.js');
+  assert.match(js, /function mediaVisibleInLanguage\(item, lang\)/);
+  assert.match(js, /item\.originalLanguage === lang/);
+  assert.match(js, /item\.editorialState === 'adapted'/);
+  assert.match(js, /item\.locales\?\.\[lang\]/);
+  assert.match(js, /mediaVisibleInLanguage\(item, currentLanguage\(\)\)/);
 });
 
 test('audio uses native controls without a redundant play toggle', async () => {

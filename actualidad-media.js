@@ -73,6 +73,14 @@
       return new Intl.DateTimeFormat(currentLanguage() === 'es' ? 'es-ES' : 'en', { dateStyle: 'long' }).format(date);
     }
 
+    function localizedContent(item) {
+      const localized = item.locales?.[currentLanguage()] || {};
+      return {
+        title: localized.title || item.title,
+        summary: localized.summary || item.summary
+      };
+    }
+
     function mediaMeta(item) {
       const c = copy[currentLanguage()];
       const parts = [`${c.source}: ${item.sourceName}`];
@@ -94,7 +102,7 @@
 
       if (item.type === 'video' && item.embedUrl && button) {
         const frame = document.createElement('iframe');
-        frame.title = `${copy[currentLanguage()].play}: ${item.title}`;
+        frame.title = `${copy[currentLanguage()].play}: ${localizedContent(item).title}`;
         frame.src = item.embedUrl;
         frame.loading = 'lazy';
         frame.allowFullscreen = true;
@@ -126,11 +134,12 @@
       }
 
       for (const item of visible) {
+        const content = localizedContent(item);
         const card = document.createElement('article');
         card.className = 'news-item';
 
         const title = document.createElement('h4');
-        title.textContent = item.title;
+        title.textContent = content.title;
         card.append(title);
 
         const meta = document.createElement('p');
@@ -138,9 +147,9 @@
         meta.textContent = mediaMeta(item);
         card.append(meta);
 
-        if (item.summary) {
+        if (content.summary) {
           const summary = document.createElement('p');
-          summary.textContent = item.summary;
+          summary.textContent = content.summary;
           card.append(summary);
         }
 

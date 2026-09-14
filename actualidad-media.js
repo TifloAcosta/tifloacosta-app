@@ -92,7 +92,7 @@
         return;
       }
 
-      if (item.type === 'video' && item.embedUrl) {
+      if (item.type === 'video' && item.embedUrl && button) {
         const frame = document.createElement('iframe');
         frame.title = `${copy[currentLanguage()].play}: ${item.title}`;
         frame.src = item.embedUrl;
@@ -147,7 +147,7 @@
         const actions = document.createElement('div');
         actions.className = 'resource-actions';
         let playerButton = null;
-        if ((item.type === 'video' && item.embedUrl) || (item.type === 'audio' && item.mediaUrl)) {
+        if (item.type === 'video' && item.embedUrl) {
           playerButton = document.createElement('button');
           playerButton.type = 'button';
           playerButton.textContent = c.play;
@@ -164,7 +164,8 @@
         actions.append(mediaOriginal);
         card.append(actions);
 
-        if (playerButton) addPlayer(card, item, playerButton);
+        if (item.type === 'audio' && item.mediaUrl) addPlayer(card, item, null);
+        else if (playerButton) addPlayer(card, item, playerButton);
         list.append(card);
       }
       return visible.length;

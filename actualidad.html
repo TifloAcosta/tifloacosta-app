@@ -37,6 +37,7 @@
   <nav id="actualidad-sections" class="resource-actions" aria-label="Secciones de Actualidad">
     <a id="section-news-link" class="button-link" href="#news-browser">Noticias</a>
     <a id="section-apps-link" class="button-link" href="#apps-browser">Apps accesibles</a>
+    <a id="section-media-link" class="button-link" href="#media-browser">Escuchar y ver</a>
   </nav>
 
   <section id="news-browser" aria-labelledby="news-heading">
@@ -60,6 +61,28 @@
     <div id="apps-list" class="news-list"></div>
   </section>
 
+  <section id="media-browser" aria-labelledby="media-heading">
+    <h2 id="media-heading">Escuchar y ver</h2>
+    <p id="media-intro">Vídeos y podcasts seleccionados para mantenerse al día sin mezclar fuentes especializadas en accesibilidad con tecnología general.</p>
+    <nav id="media-sections" class="resource-actions" aria-label="Secciones de Escuchar y ver">
+      <a id="media-accessibility-link" class="button-link" href="#media-accessibility">Accesibilidad y tiflotecnología</a>
+      <a id="media-technology-link" class="button-link" href="#media-technology">Actualidad tecnológica</a>
+    </nav>
+    <p id="media-status" class="muted" aria-live="polite" aria-atomic="true"></p>
+
+    <section id="media-accessibility" aria-labelledby="media-accessibility-heading">
+      <h3 id="media-accessibility-heading">Accesibilidad y tiflotecnología</h3>
+      <p id="media-accessibility-intro">Contenido de fuentes especializadas en accesibilidad, lectores de pantalla, tiflotecnología y productos de apoyo.</p>
+      <div id="media-accessibility-list" class="news-list"></div>
+    </section>
+
+    <section id="media-technology" aria-labelledby="media-technology-heading">
+      <h3 id="media-technology-heading">Actualidad tecnológica</h3>
+      <p id="media-technology-intro">Estos canales no están especializados en accesibilidad. Se incluyen porque ofrecen información tecnológica de interés general que puede ayudar a mantenerse al día.</p>
+      <div id="media-technology-list" class="news-list"></div>
+    </section>
+  </section>
+
   <section id="news-reader" hidden>
     <button type="button" id="reader-back-top">Volver a Actualidad</button>
     <h2 id="reader-title" tabindex="-1"></h2>
@@ -78,5 +101,6 @@
 
 <script src="actualidad-core.js?v=1.0"></script>
 <script src="actualidad.js?v=1.1"></script>
+<script src="actualidad-media.js?v=1.0"></script>
 </body>
 </html>

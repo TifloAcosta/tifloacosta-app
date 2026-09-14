@@ -56,16 +56,6 @@
     "enabled": true
   },
   {
-    "id": "programar-a-ciegas",
-    "name": "Programar a ciegas",
-    "homepage": "https://programaraciegas.net/",
-    "feedUrl": "https://programaraciegas.net/feed",
-    "lang": "es",
-    "categories": ["tecnologia-accesibilidad"],
-    "maxItems": 6,
-    "enabled": true
-  },
-  {
     "id": "usable-y-accesible",
     "name": "Usable y accesible",
     "homepage": "https://olgacarreras.blogspot.com/",
@@ -76,13 +66,13 @@
     "enabled": true
   },
   {
-    "id": "actualidad-accesible",
-    "name": "Actualidad Accesible",
-    "homepage": "https://actualidadaccesible.com/",
-    "feedUrl": "https://actualidadaccesible.com/feed/",
+    "id": "conticgo",
+    "name": "Conticgo",
+    "homepage": "https://conticgo.net/",
+    "feedUrl": "https://conticgo.net/feed/",
     "lang": "es",
     "categories": ["tecnologia-accesibilidad"],
-    "maxItems": 3,
+    "maxItems": 6,
     "enabled": true
   }
 ]

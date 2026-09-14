@@ -55,7 +55,7 @@ jobs:
         run: node scripts/validate-actualidad-discovery.mjs
 
       - name: Synchronize Accessible apps
-        run: node scripts/actualidad-apps.mjs
+        run: node scripts/sync-actualidad-apps.mjs
 
       - name: Run tests
         run: npm test
@@ -82,7 +82,7 @@ jobs:
         run: node scripts/sync-actualidad.mjs
 
       - name: Synchronize Accessible apps
-        run: node scripts/actualidad-apps.mjs
+        run: node scripts/sync-actualidad-apps.mjs
 
       - name: Run tests
         run: npm test

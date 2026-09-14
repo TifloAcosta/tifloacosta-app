@@ -12,7 +12,7 @@ on:
       - 'index.html'
       - 'sw.js'
       - 'scripts/actualidad-*.mjs'
-      - 'scripts/sync-actualidad.mjs'
+      - 'scripts/sync-actualidad*.mjs'
       - 'test/actualidad-*.test.mjs'
       - 'test/content-index.test.mjs'
       - 'test/global-favorites.test.mjs'

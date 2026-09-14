@@ -91,9 +91,9 @@ export async function syncActualidad({ sources, editorial, fetchFn = fetch, now 
   const merged = mergeEditorial([...uniqueByUrl.values()], editorial);
   const stories = core.sortStories(
     merged
-      .map(story => core.normalizeStory(story))
-      .filter(story => story && story.editorialState !== 'withheld')
-      .filter(story => new Date(story.publishedAt).getTime() >= cutoff)
+      .map(item => core.normalizeContent(item))
+      .filter(item => item && item.editorialState !== 'withheld')
+      .filter(item => new Date(item.publishedAt).getTime() >= cutoff)
   );
 
   return { stories, failedSources };

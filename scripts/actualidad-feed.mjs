@@ -26,6 +26,21 @@ function cleanText(value) {
     .trim();
 }
 
+function searchableText(value) {
+  return cleanText(value)
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function hasAny(text, terms) {
+  const padded = ` ${text} `;
+  return terms.some(term => padded.includes(` ${term} `));
+}
+
 function extractBlocks(xml, tag) {
   const name = escapeRegExp(tag);
   const regex = new RegExp(`<${name}\\b[^>]*>([\\s\\S]*?)<\\/${name}>`, 'gi');
@@ -139,24 +154,54 @@ export function parseCtiNewsHtml(html, source = {}) {
   return entries;
 }
 
+export function classifyStoryCategories(entry = {}) {
+  const title = searchableText(entry.title);
+  const text = `${title} ${searchableText(entry.summary)}`.trim();
+  const categories = [];
+  const add = category => {
+    if (!categories.includes(category)) categories.push(category);
+  };
+
+  if (hasAny(text, ['apple', 'iphone', 'ipad', 'ios', 'macos', 'macbook', 'voiceover', 'airpod', 'airpods', 'watchos', 'apple watch', 'siri'])) add('apple');
+  if (hasAny(text, ['android', 'talkback', 'pixel', 'google play', 'play store', 'samsung galaxy'])) add('android');
+  if (hasAny(text, ['windows', 'microsoft', 'edge', 'office', 'outlook'])) add('windows');
+  if (hasAny(text, ['jaws', 'freedom scientific', 'vispero'])) add('jaws');
+  if (hasAny(text, ['nvda', 'nv access'])) add('nvda');
+  if (hasAny(text, ['app', 'apps', 'aplicacion', 'aplicaciones', 'app store', 'google play', 'play store'])) add('apps-accesibles');
+  if (hasAny(text, ['programa', 'programas', 'software', 'aplicacion de escritorio', 'desktop app'])) add('programas-accesibles');
+  if (hasAny(text, ['gafas inteligentes', 'smart glasses', 'ray ban meta', 'meta ray ban'])) add('gafas-inteligentes');
+  if (hasAny(text, ['prototipo', 'prototipos', 'proyecto', 'proyectos', 'investigacion', 'investigaciones', 'estudio', 'estudios', 'prueba piloto'])) add('proyectos-prototipos');
+  if (hasAny(text, ['inteligencia artificial', 'artificial intelligence', 'machine learning', 'chatgpt', 'gemini', 'copilot', 'llm', 'ia', 'ai'])) add('ia-accesibilidad');
+  if (hasAny(text, ['braille', 'orbit research', 'orbit reader', 'perkins', 'linea braille', 'pantalla braille', 'braille display'])) add('braille');
+  if (hasAny(text, ['movilidad', 'orientacion', 'navegacion', 'gps', 'wayfinding', 'baston', 'baliza', 'beacon', 'desplazamiento', 'desplazamientos'])) add('movilidad');
+  if (hasAny(text, ['sordociega', 'sordociegas', 'sordociego', 'sordociegos', 'deafblind', 'deaf blind'])) add('sordoceguera');
+  if (hasAny(title, ['lanzamiento', 'lanzamientos', 'a la venta', 'nuevo dispositivo', 'nuevo producto'])) add('productos-disponibles');
+
+  return categories;
+}
+
 export function normalizeFeedEntry(entry, source) {
   const originalUrl = canonicalizeUrl(entry?.url);
   const date = new Date(entry?.publishedAt);
   if (!source?.id || !source?.name || !source?.homepage || !['es', 'en'].includes(source?.lang)) return null;
   if (!originalUrl || Number.isNaN(date.getTime()) || !Array.isArray(source.categories) || source.categories.length === 0) return null;
 
+  const title = cleanText(entry.title);
+  const summary = cleanText(entry.summary);
+  const categories = [...new Set([...source.categories.filter(Boolean), ...classifyStoryCategories({ title, summary })])];
+
   return {
     id: stableStoryId(source.id, originalUrl),
     lang: source.lang,
-    title: cleanText(entry.title),
+    title,
     sourceId: source.id,
     sourceName: source.name,
     sourceUrl: source.homepage,
     originalUrl,
     publishedAt: date.toISOString(),
-    categories: [...new Set(source.categories.filter(Boolean))],
+    categories,
     editorialState: 'source-only',
-    summary: cleanText(entry.summary),
+    summary,
     body: '',
     featuredRank: null
   };

@@ -12,6 +12,16 @@ const source = {
   enabled: true
 };
 
+const spanishSource = {
+  id: 'spanish-source',
+  name: 'Fuente española',
+  homepage: 'https://example.es/',
+  feedUrl: 'https://example.es/feed/',
+  lang: 'es',
+  categories: ['tecnologia-accesibilidad'],
+  enabled: true
+};
+
 test('RSS items are parsed into feed entries', () => {
   const xml = `<?xml version="1.0"?><rss><channel><item><title>Accessible App</title><link>https://example.com/app?utm_source=rss</link><pubDate>Sun, 13 Sep 2026 12:00:00 GMT</pubDate><description><![CDATA[Useful app]]></description></item></channel></rss>`;
   const items = parseFeedXml(xml, source);
@@ -73,4 +83,30 @@ test('normalized feed entries inherit source language and categories', () => {
   assert.deepEqual(item.categories, ['apple', 'apps-accesibles']);
   assert.equal(item.originalUrl, 'https://example.com/app');
   assert.equal(item.editorialState, 'source-only');
+});
+
+test('Spanish stories gain specific categories from their own title and summary', () => {
+  const cases = [
+    ['Evaluaciones de APP actualizadas', 'Nuevas aplicaciones accesibles para móviles.', ['apps-accesibles']],
+    ['Novedades de VoiceOver en iOS 27', 'Cambios para usuarios de iPhone.', ['apple']],
+    ['TalkBack mejora la navegación en Android', 'Nueva versión del lector de pantalla.', ['android']],
+    ['JAWS y NVDA reciben nuevas funciones', 'Lectores de pantalla para Windows.', ['windows', 'jaws', 'nvda']],
+    ['Webinar sobre nuevas tecnologías Braille', 'Orbit Research presenta una línea braille.', ['braille']],
+    ['Inteligencia artificial para describir imágenes', 'Una herramienta de IA orientada a la accesibilidad.', ['ia-accesibilidad']],
+    ['Nuevas gafas inteligentes accesibles', 'Un dispositivo para personas ciegas.', ['gafas-inteligentes']],
+    ['Proyecto piloto de orientación accesible', 'Navegación GPS para mejorar los desplazamientos.', ['proyectos-prototipos', 'movilidad']],
+    ['Tecnología para personas sordociegas', 'Nuevo sistema de comunicación accesible.', ['sordoceguera']]
+  ];
+
+  for (const [title, summary, expected] of cases) {
+    const item = normalizeFeedEntry({
+      title,
+      url: `https://example.es/${encodeURIComponent(title)}`,
+      publishedAt: '2026-09-13T12:00:00Z',
+      summary
+    }, spanishSource);
+
+    assert.ok(item.categories.includes('tecnologia-accesibilidad'));
+    for (const category of expected) assert.ok(item.categories.includes(category), `${title} should include ${category}`);
+  }
 });

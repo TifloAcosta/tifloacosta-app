@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = '2.1';
+  const APP_VERSION = '2.2';
   const PAGE_SIZE = 10;
   const core = window.TifloVideoCore;
   if (!core) return;
@@ -95,7 +95,7 @@
       loading: 'Loading video catalog…',
       empty: 'The video catalog is currently empty.',
       status: (start, end, n, page, pages) => `Showing ${start} to ${end} of ${n} video${n === 1 ? '' : 's'}. Page ${page} of ${pages}.`,
-      noResults: 'No videos match your search.',
+      noResults: 'No videos match the search.',
       published: date => `Published ${date}`,
       play: 'Open player',
       playLabel: title => `Open player for: ${title}`,
@@ -107,7 +107,7 @@
       previous: 'Previous',
       next: 'Next',
       page: (page, pages) => `Page ${page} of ${pages}`,
-      error: 'The video catalog could not be loaded. Check your connection and try again.',
+      error: 'The video catalog could not be loaded. Check the connection and try again.',
       footer: `TifloAcosta App · Version ${APP_VERSION}.`
     }
   };
@@ -347,7 +347,6 @@
     els.page.textContent = c.page(pageData.page, pageData.totalPages);
   }
 
-
   async function loadCatalog() {
     loadError = false;
     catalogLoaded = false;
@@ -359,6 +358,8 @@
       catalog = Array.isArray(data.videos) ? data.videos : [];
       catalogLoaded = true;
       render();
+      const directVideo = core.videoFromSearch(catalog, window.location.search);
+      if (directVideo) openPlayer(directVideo);
     } catch (error) {
       loadError = true;
       render();

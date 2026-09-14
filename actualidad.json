@@ -1,13 +1,158 @@
 [
   {
-    "id": "9to5mac-c14d03811396d9e8",
+    "id": "9to5mac-8bc572a5930bf1a3",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/14/here-are-the-requirements-to-get-siri-ai-in-ios-27/",
+    "originalUrl": "https://9to5mac.com/2026/09/14/macos-27-golden-gate-macos-tahoe-26-7-and-macos-sequoia-15-8-fix-200-vulnerabilities/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-14T18:10:00.000Z",
+    "publishedAt": "2026-09-14T20:54:46.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "macOS 27 Golden Gate, macOS Tahoe 26.7, and macOS Sequoia 15.8 fix 200+ vulnerabilities",
+        "summary": "If you’re on the fence about installing macOS 27 Golden Gate , Apple’s lengthy list of security fixes might be enough to convince you. And if you’re sticking with an older version, you may want to install macOS Tahoe 26.7 or macOS Sequoia 15.8 sooner rather than later. Here’s why. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-beb21bc52161ae1f",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/news/995051/epa-power-plant-climate-pollution-rollback-ai-data-centers",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T20:45:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Trump throws out power plant climate pollution rules",
+        "summary": "The Environmental Protection Agency announced its plans today to kill any remaining standards on how much greenhouse gas pollution power plants are allowed to emit in the US. The move will only make electricity dirtier as AI, electric vehicles, and a revival of domestic manufacturing drive up power demand. The EPA's proposal today is a […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-5e7604e53bf944a5",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/14/openai-buys-smartphone-camera-maker-glass-imaging-for-300-million-report-says/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T20:44:14.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "OpenAI buys smartphone camera maker Glass Imaging for $300 million, report says",
+        "summary": "Glass Imaging was founded by a pair of former Apple engineers who previously led the team that developed Apple's Portrait Mode.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-ae9ea8bfd86445bf",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/14/ai-infrastructure-company-cornelis-raises-205m-to-chip-away-at-nvidias-dominance/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T20:07:37.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "AI infrastructure company Cornelis raises $205M to chip away at Nvidia’s dominance",
+        "summary": "The company also announced a product called Active Compute Fabric, a network technology that targets the fact that much GPU time is wasted waiting for data to arrive.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-9059070eaf1b577e",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2254550/how-to-force-quit-windows-pc/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T20:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "How to force quit on your Windows PC",
+        "summary": "If you're switching from a Mac or new to Windows, knowing how to 'force quit' an app can be confusing. Luckily, there are a number of ways to get the job done.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-b0083faac0dc9a51",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/14/best-iphone-18-pro-accessories/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T19:59:34.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Our top iPhone 18 Pro accessories to upgrade your setup",
+        "summary": "We are taking look at some of the iPhone 18 Pro accessories we are picking up for ourselves this year before Friday’s delivery day. If you ask me Apple’s AirTag 2 and a fresh set of AirPods Pro 3 (or AirPods 5) are the best accessories you can buy for your new iPhone 18 Pro, never mind the world’s greatest Polishing Cloth, but we are digging in a bit deeper here – chargers, MagSafe mounts, cases, wallets, and more. Check it all out below. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-7e8d69ec2829e10d",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/14/ios-27-has-a-waitlist-for-accessing-new-siri-ai/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T19:59:21.000Z",
     "categories": [
       "apple",
       "tecnologia-general",
@@ -17,8 +162,187 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Here are the requirements to get Siri AI in iOS 27",
-        "summary": "iOS 27 launched today , and with it Siri AI has debuted as a major upgrade to Apple’s assistant. But there are several requirements Apple has in order to gain access to Siri AI. more…",
+        "title": "iOS 27 uses a waitlist for accessing Siri AI",
+        "summary": "iOS 27 is officially here, but if you’re hoping to try the new Siri AI, you might have to wait a bit longer, because Apple is using a waitlist for access. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-bac855cb7bdb8d24",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/tech-policy/2026/09/musk-drops-apple-from-antitrust-suit-but-keeps-gunning-for-openai/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T19:45:13.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "OpenAI stuck fighting Musk antitrust suit after Apple finds a way out",
+        "summary": "Musk stops attacking Apple over ChatGPT integration but not OpenAI.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-0e9a1965f294d681",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/apple/2026/09/apple-releases-ios-27-macos-golden-gate-27-with-siri-ai-and-liquid-glass-refinements/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T19:28:42.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple releases iOS 27, macOS Golden Gate 27 with Siri AI and Liquid Glass refinements",
+        "summary": "This is also the last version of macOS to support Rosetta for Intel apps.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-3698f34f8f90a0f4",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/ai/2026/09/ai-leaders-want-to-hit-the-brakes-after-years-of-reckless-speed/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T19:06:13.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "AI leaders want to hit the brakes after years of reckless speed",
+        "summary": "Safety is the watchword, but there could be ulterior benefits for the industry.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-19ad540c3426ddb9",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2253054/use-gemini-help-you-organize-files-google-drive/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T18:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "You can use Gemini to help you organize your files on Google Drive",
+        "summary": "If your Google Drive has become a mess of files, folders and photos, Gemini can lend a hand by suggesting new ways to properly put them back in order.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-2fa8c7dd06bc072f",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2258035/pre-orders-for-the-android-based-googlebook-laptops-open-on-september-21/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T18:28:54.000Z",
+    "categories": [
+      "tecnologia-general",
+      "android",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Pre-orders for the Android-based Googlebook laptops open on September 21",
+        "summary": "Gemini Intelligence is at the heart of the operating system powering Google's upcoming laptops.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "applevis-blog-f9e0a0700b584930",
+    "type": "news",
+    "sourceId": "applevis-blog",
+    "sourceName": "AppleVis Blog",
+    "sourceUrl": "https://www.applevis.com/blog",
+    "originalUrl": "https://www.applevis.com/blog/apple-releases-tvos-27",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T18:20:54.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-accesibilidad",
+      "apps-accesibles",
+      "programas-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple Releases tvOS 27",
+        "summary": "Apple has today released tvOS 27 for compatible Apple TV models. According to Apple , tvOS 27 includes support for larger accessibility text sizes, high-resolution lossless audio in Apple Music, and a redesigned Podcasts app. More details should become available in the near future when Apple updates its \"About Apple TV 4K and Apple TV HD software updates\" Apple Support document. Unfortunately, we were not able to test tvOS 27 during the beta cycle; and thus we do not have any information on whether this release contains any changes to vision accessibility features beyond the added support for larger text sizes. If you have upgraded to tvOS 27, we would greatly appreciate hearing your experiences with the update. To install tvOS 27, on Apple TV 4K or Apple TV HD, go to the Settings channel, then look for the System section near the bottom. From here, look for Software Updates under Maintenance, then select Update Software and Download and Install. Wait for your Apple TV to download the update. Don't disconnect or unplug your Apple TV until the update completes.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "applevis-blog-16ddd3f1052e06a6",
+    "type": "news",
+    "sourceId": "applevis-blog",
+    "sourceName": "AppleVis Blog",
+    "sourceUrl": "https://www.applevis.com/blog",
+    "originalUrl": "https://www.applevis.com/blog/apple-releases-ios-27-ipados-27",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-14T18:12:14.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-accesibilidad",
+      "apps-accesibles",
+      "programas-accesibles",
+      "ia-accesibilidad",
+      "braille",
+      "sordoceguera"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple Releases iOS 27 and iPadOS 27",
+        "summary": "iOS 27 and iPadOS 27 are now available to the public. (Note: As spotted by AppleVis Community Member TJT 2001 , Apple has also released iOS/iPadOS 26.7 for those not wishing to upgrade to iOS 27.) This post contains Apple's Release Notes for iOS 27, as well as links to all of AppleVis' content related to these updates. Also included are instructions on how to install the update. iOS 27 Release Notes iOS 27 introduces the next generation of Apple Intelligence and Siri AI, as well as new features to help parents create safe digital experiences for kids, and improvements that make iOS more responsive and delightful to use. Siri AI is an entirely new version of Siri that is more intelligent, knowledgeable, and capable. The next generation of Apple Intelligence also powers new features across apps that simplify the things you do every day, like editing images in Photos, communicating in Messages and Mail, and browsing in Safari. New parental controls and significant updates to Screen Time make it more intuitive and easy to use, so parents can feel confident that they're building the right digital experience for their child. And with improvements that span design, performance, connectivity, search, and more, the experience on iOS 27 has been refined and elevated, so it feels even better to use. Siri AI (All iPhone 16 models and later, iPhone 15 Pro, iPhone 15 Pro Max) A more capable and conversational version of Siri is rolling out to users. It helps you find what you need and get more done, drawing on capabilities like personal context understanding, app actions, onscreen awareness, and access to broad world knowledge. New voice experience offers more expressive and natural-sounding voices, and lets you customize expressivity and pace to make Siri more personal to you using powerful on-device models on iPhone Air and iPhone 17 Pro models and later. Dedicated Siri app provides an easy way to revisit an existing conversation or kick off a new one, and privately syncs conversations across your Apple products with iCloud. Siri mode in Camera integrates Visual Intelligence into the Camera app, letting you ask questions and take action with what's in front of you, like splitting a bill or looking up nutritional info for a plate of food. Write with Siri enables you to generate a draft from scratch, edit what you've written, or get feedback from Siri virtually anywhere you type. In Messages & Mail, Siri personalizes your writing style based on your relationships, and uses unique phrases and punctuation that you've previously used in your conversations with those people. Apple Intelligence across apps (All iPhone 16 models and later, iPhone 15 Pro, iPhone 15 Pro Max) Photos. Spatial Reframing lets you adjust the composition of a photo after it was taken by virtually changing the camera position. Extend tool intelligently expands images beyond their edges with realistic infill, so you can straighten horizons, change aspect ratios, or add more space around a subject. Clean Up supports removing even larger objects, with more realistic, high-quality results, and you can choose between Fast mode for small blemishes or High Quality for more intricate edits. Safari. Organize by Topic uses Apple Intelligence to sort your tabs, analyzing webpages and automatically grouping similar tabs together. Notify Me can periodically check a webpage for updates, like price changes and item availability. Describe an Extension lets you create a custom extension using natural language to adjust your view of a website's content or formatting. All-new Image Playground uses a new generative model to make high-quality images in virtually any style, including photorealistic, lets you modify your images using touch and natural language, and lets you generate Lock Screen wallpapers and Contact Posters with personalized suggestions. Describe a Shortcut lets you use natural language to create a shortcut or refine an existing one. Home. Summarized activity notifications combine related alerts across accessories into a single notification. Video descriptions for HomeKit Secure Video recordings summarize what's happening in a clip for eligible iCloud+ subscribers. Camera clip search lets you find specific moments from your HomeKit Secure Video cameras by searching in the Home app or Spotlight when on an eligible iCloud+ plan. Describe an event in Calendar lets you use natural language to create an event, and details like the time, location, invitees, and event title are filled in using Apple Intelligence. Suggestions in Mail help you take action based on the context of your emails, like getting directions to a restaurant you booked. Call Context in the Phone app understands when you're speaking to certain businesses and proactively surfaces relevant information from across your apps, like a confirmation code or a reservation number. Accessibility. VoiceOver enhancements include more detailed and contextual image understanding for photos, charts, and screenshots, a conversational experience that lets you ask questions about your screen or surroundings, and a new way to get answers fast with an Action button integration. An enhanced Magnifier experience offers conversational visual assistance for users with low vision, with a high-contrast interface and natural language app controls for zooming and other Magnifier functions. A smarter Accessibility Reader uses intelligence to provide better text cleanup and formatting, images and tables, on-demand summaries, and translation. Voice Control flexible inputs help you navigate your device with just your voice by describing elements on screen in your own words, like \"tap the gear\" or \"tap the button in the top right\". And more, including additional ways to create and modify Genmoji, automatic proofreading, and more accurate dictation using an on-device model on iPhone Air and iPhone 17 Pro models and later. Child Safety Improved setup experience for new child accounts lets parents choose the exact apps their kids can access when they set up an iPhone for their child. Ask to Browse gives parents the option to approve each new website before their child can view it. Expanded Communication Safety protections help intervene before children see gore or violent content in shared images and videos. Time Allowances help parents set boundaries around how long kids can use apps across Entertainment, Games, and Social Media apps, offering guidance based on expert research and tailored to each child's age. Schedules let parents choose which apps their kids can access at different points in their day and across weekdays and weekends. Redesigned Screen Time settings give parents at-a-glance information about how their kids use their devices, and controls to adjust access in just a few taps. System Improvements Liquid Glass refinements improve overall readability, and a new slider in Settings lets you personalize its appearance from ultra-clear to fully tinted . Faster performance in experiences across the system, including app launches, new photos loading in your Photos library, and AirDrop transfers. Improved search provides more relevant and comprehensive results in Spotlight, Photos, and Mail. Connectivity Assist enables more seamless transitions between Wi-Fi and cellular networks. And more improvements across apps and experiences, including enhancements to iCloud Shared Albums in Photos, Custom EQ for AirPods, support for perimenopause and menopause in Cycle Tracking in the Health app, and independent volume settings for Alarms and Timers. For information on the security content of Apple software updates, please visit: https://support.apple.com/100100 Some features may not be available in all regions or on all iPhone models. To learn more, please visit: https://www.apple.com/ios/feature-availability/ Usage limits may apply for some Apple Intelligence features. To learn more, please visit: https://www.apple.com/apple-intelligence Software updates, like this one, add new features and improvements that may affect performance and/or battery life. To learn more, please visit: https://support.apple.com/125039 AppleVis iOS 27 Content AppleVis has the following content available for iOS 27 and iPadOS 27: Blog Post: iOS 27 and iPadOS 27: A Summary of VoiceOver and Braille Issues and Improvements Blog Post: What's new in Accessibility in iOS 27 for Blind and DeafBlind Users , by Scott Davert Podcast: An Overview of the New VoiceOver and Braille Features in iOS 27 , by Michael Hansen Podcast: A Demonstration of the New Image Description Features in iOS 27 , by David Nason Podcast: A Demonstration and Walk-Through of the New Live Recognition Features in iOS 27 , by Levi Gobin How to Update iOS 27 and iPadOS 27 are available via Over-the-Air Update (Settings > General > Software Update), via Finder on a Mac with macOS Catalina or later, or via iTunes on a PC or Mac with macOS Mojave or earlier. Before updating, we strongly recommend making a full and complete backup of your device (either locally or in iCloud, depending on personal preference). This will ensure that, in the unlikely event that something goes wrong during the update process, you will have a current backup on hand in case a device restore becomes necessary. Also, if using OTA update, we recommend plugging your device into a power source for the duration of the download/installation process, so as to prevent the unlikely event of your battery going dead during the update.",
         "body": ""
       }
     },
@@ -42,102 +366,37 @@
     "locales": {
       "en": {
         "title": "ClickFix attacks are tricking Mac and Windows users into hacking themselves",
-        "summary": "If you clicked on a fake HBO Max ad on Reddit in the past week, you might have fallen victim to a rising 'ClickFix' security threat.",
+        "summary": "If you clicked on a fake HBO Max ad on Reddit in the past week, you might have fallen victim to a rising \"ClickFix\" security threat.",
         "body": ""
       }
     },
     "media": null
   },
   {
-    "id": "techcrunch-e116c4cc7c137769",
+    "id": "applevis-blog-3bcaa61b87956221",
     "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/14/volkswagens-crazy-efficient-ev-borrows-an-idea-from-slate/",
+    "sourceId": "applevis-blog",
+    "sourceName": "AppleVis Blog",
+    "sourceUrl": "https://www.applevis.com/blog",
+    "originalUrl": "https://www.applevis.com/blog/macos-golden-gate-new-features-changes-improvements-bugs-blind-low-vision-users",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-14T17:41:20.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Volkswagen’s crazy-efficient EV borrows an idea from Slate",
-        "summary": "Volkswagen's new efficiency-minded halo car is almost twice as efficient as the most efficient production car, the Lucid Air.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-f83adc49ef66ce00",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2254118/how-to-know-if-usb-c-port-supports-video/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T17:30:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "How to know if your USB-C ports can support video",
-        "summary": "Your USB-C port can do a lot, but it won't necessarily be able to transfer video. Understanding what yours can do makes it easy to choose the best video option.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-fb02593a2cf6dd98",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/14/apple-releases-macos-tahoe-26-7-and-macos-sequoia-15-8-heres-whats-new/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T17:27:43.000Z",
+    "publishedAt": "2026-09-14T18:00:59.000Z",
     "categories": [
       "apple",
-      "tecnologia-general"
+      "tecnologia-accesibilidad",
+      "windows",
+      "apps-accesibles",
+      "programas-accesibles",
+      "ia-accesibilidad",
+      "braille",
+      "sordoceguera"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Apple releases macOS Tahoe 26.7 and macOS Sequoia 15.8, here’s what’s new",
-        "summary": "In addition to releasing macOS 27 Golden Gate , Apple is also rolling out macOS Tahoe 26.7 and macOS Sequoia 15.8. Here’s what’s new. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-56e689c6ecff882b",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/14/ios-26-7-now-available-for-iphone-heres-whats-new/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T17:22:57.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "programas-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iOS 26.7 now available for iPhone, here’s what’s new",
-        "summary": "Apple launched its major iOS 27 release today for iPhone. But for anyone not yet ready to install the new software version, Apple has also released a smaller iOS 26.7 update. Here’s what’s new. more…",
+        "title": "macOS Golden Gate: New Features, Changes, Improvements, and Bugs for Blind and Low Vision Users",
+        "summary": "Apple has today released macOS 27 Golden Gate to the public. As usual, we won’t cover the mainstream features here, concentrating instead on what's new and changed for blind, DeafBlind, and low vision users. For an overview of the mainstream changes, we recommend this in-depth review by MacStories . Please remember to check the section about bugs to see if now is the right time to upgrade. There’s no harm in holding off a few weeks or months to let Apple address a problem you may find too disruptive to deal with. A note to braille users: the AppleVis team members doing testing with macOS Golden Gate are not heavy braille users. We have no information as to how well braille works in this release, so please keep this in mind when upgrading. If you are a braille user who has experience with Golden Gate, please share your findings in the comments to help the community. Changes for VoiceOver and Braille Users Improved Image and Screen Descriptions As on iOS 27 and iPadOS 27, VoiceOver in macOS Golden Gate can use Apple Intelligence to describe and answer questions about images or the current screen as it appears visually. Focusing on an image and pressing VO-Shift-L will describe the image, and you can find additional options, such as the ability to ask about an image, explore the image spatially, or describe the current screen, by pressing VO-Shift-R from anywhere in macOS. For added convenience, commands in this menu can be mapped in VoiceOver Utility > Commands. Note that while VoiceOver can describe and answer questions about what's on the screen, it cannot directly interact with elements like VOCR or Screen Recognition on iOS and iPadOS can. New Verbosity Options for Coding With macOS Golden Gate, you can customize how information such as line numbers, errors, and warnings are reported by VoiceOver in code editors like Xcode. These settings can be found in the new \"Coding\" tab in VoiceOver Utility > Verbosity. We do not currently know which code editors besides Xcode respect these settings. New \"Actions\" rotor for trackpad users With macOS Golden Gate, you can perform custom actions for the focused element, the same actions available in VoiceOver's Actions menu, using trackpad commands. To do this, enable trackpad commands if they're not already enabled, turn the rotor to \"Actions,\" swipe up or down with one finger to select a custom action, and double-tap to activate it. \"Ducking Amount\" setting The \"Ducking Amount\" setting for determining how much other audio is ducked when VoiceOver is speaking, originally introduced with iOS 18 and iPadOS 18, has been brought to macOS with the release of Golden Gate. It can be found in VoiceOver Utility > Sound. Braille Improvements While it is not something we have been able to test, we are aware of the following improvements for braille users in macOS Golden Gate: As on iOS 27 and iPadOS 27, text field labels can now be shown in braille. You can change the format these labels are presented in, or hide them entirely, by going to VoiceOver Utility > Braille > Layout, and clicking Text Field Labels. As on iOS 27 and iPadOS 27, Braille Access in macOS Golden Gate supports plain text (txt) and portable document format (PDF) files. Improvements for Low Vision Users While it is not something we have been able to test, we are aware of the following improvement for low vision users: As on iOS 27 and iPadOS 27, content in Accessibility Reader can now be summarized and translated while retaining its original formatting on macOS Golden Gate. If you are a low vision Mac user, we would love to hear in the comments your experience and thoughts on this and any additional enhancements you encounter in macOS Golden Gate. Other Changes As on iOS 27 and iPadOS 27, the Aaron (English US), Arthur (English UK), Catherine (English Australia), Gordon (English Australia), and Martha (English UK) voices have been reintroduced with macOS Golden Gate. Like other voices, they can be used with Siri, as well as for accessibility functions like VoiceOver and Read & Speak. As on iOS 27 and iPadOS 27, subtitles for spoken dialog in videos where captioning is not already provided can be generated automatically in macOS Golden Gate. These can be turned on and adjusted when playing a video by clicking the \"show legible media selection menu\" button in the playback controls group. Writing Tools, previously accessed from many apps' Edit menus, as well as many text fields' context menus, is now accessed with VoiceOver by focusing on a text field and choosing \"Show Writing Tools\" from the Actions Menu. When toggling Cursor Tracking with VO-F3, its state is reflected in the \"Mouse pointer:\" popup menu in VoiceOver Utility. In prior versions of macOS, the state of Cursor Tracking was not reflected in this popup menu, which had the potential to confuse users. Change List In its support documentation, Apple lists the following changes for VoiceOver users in macOS Golden Gate: You can now turn off announcements that webpages send automatically, such as live scores, new messages, or status updates. Turn off Enable Web Announcements to silence announcements from a single area of a webpage or from the entire page. VoiceOver remembers your choice for that website, so the area stays silent the next time you visit. With the new Coding tab in the Verbosity category of VoiceOver Utility, you can choose whether VoiceOver announces line numbers, and whether it plays a tone or speaks a description when it encounters an error, a breakpoint, or the program counter. Bug Fixes and New Bugs for VoiceOver Users Below are lists of the bugs we believe to have been resolved in macOS Golden Gate, as well as new bugs introduced in this release. We strongly recommend that you read through the list of new bugs and any replies before updating, as this will allow you to make an informed decision on whether to install macOS Golden Gate or wait for a future release. While we are confident in the status of issues contained in this post, we do not claim that our bug list is definitive or that our assessments are infallible. Some issues may manifest only under specific conditions; this is all the more likely as software continues to add more features, and the number of available configurations and use cases in Apple's ecosystem continues to grow. You likely will not experience every bug that we list, and it is also likely that you will encounter issues that we did not experience during our own testing and daily use of macOS Golden Gate. To ensure the information here is as complete and accurate as possible, we would appreciate input from those who have installed macOS Golden Gate. Please confirm if you are encountering the same problems listed or if you have found workarounds. Please also let us know about any additional issues not mentioned here. Of course, it's even more important that you report any new bugs directly to Apple - they're already aware of the ones listed here. For an explanation of why and how to report bugs to Apple, see this post. Accessibility Bugs Resolved in macOS Golden Gate To the best of our knowledge, Apple does not routinely publish lists of bug fixes for VoiceOver or Braille across releases; thus, it is difficult to get a complete accounting of every issue that has been resolved or what fixes users can expect to see upon upgrading to macOS Golden Gate. With this in mind, our testing suggests that the following issues present in macOS Tahoe have been resolved or meaningfully improved in macOS Golden Gate: VoiceOver no longer speaks list items on webpages unreliably. Pauses between sentences are no longer extended when using VoiceOver's \"Say All\" command. It is once again possible to reply to a message in the Message app by selecting the \"Reply\" action in the Actions menu. The Actions menu for Messages in the Messages app no longer contains redundant tapback actions. New Bugs for VoiceOver Users in macOS Golden Gate Our testing suggests that the following bugs have been introduced in macOS Golden Gate: After clicking the “Proofread” button in the Writing Tools popover using VoiceOver, only the Next, Previous, and Close buttons are visible, with no way to view the specific changes made to the text. There is no way to open or redownload apps from the “Apps & Purchases” page in the App Store using VoiceOver, with each app conveyed only as a button with no actions available and nothing to interact with besides the app’s name. To redownload a previously purchased app, you must click the [app name] button to open the product page, and then click the \"Redownload\" button in the toolbar. The sections and buttons in Safari’s Page Menu lack accessibility labels. Interacting with a section and pressing VO-Space on an item (all of which are clearly labeled) works to activate the item; however, interacting with each item in a section reveals an unlabeled button. When playing audio or video, VoiceOver announces “system has new window” once the media has started playing. The identity and purpose of this window is not clear from this announcement, and no new items appear in the application or window chooser menus. Other Possible Bugs In addition to the bugs listed here, we strongly recommend you read this Megathread about the macOS Golden Gate RC , , as it contains a wealth of community reports about and experiences with the Release Candidate version of the software that may differ from our own. macOS Golden Gate release notes macOS 27 introduces Siri AI powered by Apple Intelligence, new parental controls, and an expansive set of improvements that make your Mac even more responsive, reliable, and delightful. Experience the new Siri AI Introducing Siri AI, an entirely new version of Siri powered by Apple Intelligence that’s more personal, more capable, and more conversational. It is integrated into Spotlight, so you can search for answers about almost any topic right from where you already search for things across your system. It can draw on personal context to find things across your messages, mail, photos, and more. And it can get things done across your apps, just by asking. Revisit and resume past conversations in the new dedicated Siri app, synced with iCloud across your Apple devices. Siri AI is rolling out to users, and you can get started by turning it on in Settings. Take action on what’s onscreen With Visual Intelligence, you can select a window of your screen and Siri can answer questions or take action with what’s onscreen, like adding events to your calendar. You can access Visual Intelligence with a dedicated keyboard shortcut — Command-Shift-Space. Powerful new ways to edit photos Use intelligent photo editing tools to reframe a photo after it’s been taken with Spatial Reframing or expand your shot with the Extend tool. And enhancements to Clean Up let you remove distractions with better quality and more realistic infill, even when the scene is complex. New tools to browse in Safari Automatically group your tabs into topics, so related pages are easier to find. With Notify Me, Safari can monitor pages for changes like price drops or restocks and alert you when it’s time to act. Describe an Extension lets you use natural language to create custom extensions, like adding a button to save your favorite recipes. Easily create Shortcuts using natural language With Describe a Shortcut, you can automate daily tasks with a simple description and all of the required steps are assembled on your behalf. For example, you can describe a shortcut to automatically text your partner when you’re headed home from work with an estimated arrival time based on traffic. Even more refined design Updates to Liquid Glass improve readability, and a new slider lets you customize how it looks, from ultra-clear to fully tinted. Uniform toolbars, edge-to-edge sidebars, and more detailed app icons further elevate the design. New child safety features Powerful new parental controls help parents manage what content their children see, who they can communicate with, and when they can access apps. Ask to Browse requires kids to request permission before visiting any new website in Safari. Communication Safety expands its protections to help keep conversations safe. Time Allowances gives parents more flexible ways to manage kids’ time in apps across categories. Schedules manage which apps kids can access at different times of day and throughout the week. A more responsive and delightful experience An expansive set of improvements make your Mac even faster, more reliable, and easier to use. Better search in Spotlight and Mail helps you find what you’re looking for with greater ease. AirDrop Transfers and network file browsing happen faster. And many more improvements make your day-to-day use more enjoyable. Learn more Discover even more powerful capabilities in the next release by visiting apple.com/os/macos . For information on the security content of Apple software updates, please visit: support.apple.com/100100 . Some features may not be available in all regions or on all Apple devices. To learn more, please visit: apple.com/macos/feature-availability . Usage limits may apply for some Apple Intelligence features. To learn more, please visit: apple.com/apple-intelligence . Software updates, like this one, add new features and improvements that may affect performance and battery life. To learn more, please visit: support.apple.com/125039 . In Conclusion We would like to thank everyone in our community who contributed to AppleVis' testing and bug-reporting efforts during the macOS Golden Gate beta cycle - be it through our Community Bug Program or just by posting on our Forum. Our information about this release is more complete because of you, and we are very grateful to all who took the time to contribute. We'd love to hear your thoughts after you've had a chance to install the upgrade. What new features do you find most useful? Are there any changes you don't like? Please share your feedback in the comments below. When doing so, we ask that you please keep the discussion focused on accessibility issues specifically introduced or fixed in macOS Golden Gate. Our release posts tend to be widely read and garner many helpful responses, so it is all the more important that readers can easily find relevant information. Also, please remember that upgrade decisions are personal, with each user's situation unique - there is no right or wrong choice. Comments criticizing others' decisions are not constructive and do nothing to add to the discussion; but they do set a negative tone and get in the way of readers finding helpful information. Furthermore, not experiencing an issue yourself does not mean that it doesn't exist for others, as bugs can be configuration-specific. Stating that an issue doesn't exist simply because you haven't encountered it is unhelpful. Our aim with these posts is to provide a forum for respectful, constructive, and honest sharing of experiences that inform decisions and empower people. In closing, we thank Apple's Accessibility team for their prompt response in fixing many of the bugs reported during the macOS Golden Gate beta cycle. However, many longstanding issues remain unresolved, and we find the inability to fully use the Proofread function, a key feature of Apple Intelligence, during a cycle where enhancements to Apple Intelligence were heavily emphasized, incredibly disappointing. We encourage Apple to promptly address this and other outstanding accessibility issues discussed in this post and the comments below so that macOS can be as accessible, usable, and enjoyable as possible for all users. To install macOS Golden Gate, choose System Settings from the Apple menu, select General in the table, click Software Update in the scroll area, and click the Upgrade Now button to begin the upgrade process. If other updates are available, you can click the Info button to see details about them and select specific updates to install. More information on how to update the software on your Mac is available on this Apple Support page.",
         "body": ""
       }
     },
@@ -166,55 +425,6 @@
       "en": {
         "title": "watchOS 27: A Summary of VoiceOver Features, Issues, and Improvements",
         "summary": "Apple has today released watchOS 27 to the public. watchOS 27 is compatible with the Apple Watch Series 9 and later and the Apple Watch Ultra 2 and later. Due to the inherent challenges of beta software testing on watchOS, our testing of watchOS 27 has been quite limited. That said, for VoiceOver users, there is at least one new bug that we are aware of and a handful of new features and improvements. New VoiceOver Bugs in watchOS 27 There is rather significant latency with VoiceOver speech when swiping through the user interface. Specifically, there is a delay between when the VoiceOver sound effects/haptics play, and when VoiceOver speaks. Our testing suggests that this issue is not synthesizer-specific. It is unclear to us whether this behavior is simply a function of the newer operating system encountering the limits of hardware (something that has historically been a challenge on Apple Watch devices), or whether this is something that can be resolved by Apple in a future software update. A Feedback report has been filed, and we will keep the community advised as additional information becomes available. If you identify any additional vision accessibility bugs in watchOS 27, please let us know by posting a comment. New VoiceOver Features and Improvements in watchOS 27 There is a new \"Tap to Wake\" toggle in VoiceOver settings. By default, the setting is enabled, and the Watch will be woken when you tap on the screen. Our best understanding is that disabling this feature should prevent the device from waking when the screen is tapped. It is now possible to customize the speaking of VoiceOver hints in watchOS. Available options are 'Always', 'Never', and 'App-Specific Hints'. On the Clock Face, VoiceOver now speaks the names of Complications before speaking their content. For example, VoiceOver might say, \"Weather, Mostly Sunny 65 Degrees,\" instead of just saying \"Mostly Sunny 65 Degrees.\" For braille display users, there is a new setting, \"Translate After a Delay.\" There are other braille settings that we also believe may be new in this release, but our braille-related testing in watchOS is very limited and so this is not something we are able to comment on with any level of certainty. If you spot any other new features/changes in watchOS 27 or have any corrections to the above, please do let us know by posting a comment. watchOS 27 Release Notes watchOS 27 features the next generation of Apple Intelligence and Siri AI, updates to Workout Buddy, a new tap gesture, a dynamic app grid to make it easier to access your most used apps, and improvements that make watchOS 27 more responsive and delightful to use. Siri AI is an entirely new version of Siri that is more intelligent, knowledgeable, and capable. With improvements that span areas like fitness, design, performance, and more, the experience on watchOS 27 has been refined and elevated, so it feels even better to use. Siri AI A more capable and conversational version of Siri is rolling out to users. It helps you find what you need and get more done, drawing on capabilities like personal context understanding, app actions, onscreen awareness, and access to broad world knowledge. New voice experience offers more expressive and natural-sounding voices, and lets you customize expressivity and pace to make Siri more personal to you using powerful on-device models on paired iPhone Air and iPhone 17 Pro models and later. Dedicated Siri app provides an easy way to revisit an existing conversation or kick off a new one, and privately syncs conversations across your Apple products with iCloud. Apple Intelligence across apps Workout Buddy delivers motivation with new insights and is now available without your iPhone nearby when you have a Wi-Fi or cellular connection. Call Context in the Phone app understands when you’re speaking to certain businesses and proactively surfaces relevant information from across your apps, like a confirmation code or a reservation number. Cycle Tracking Cycle deviation notifications that are suggestive of perimenopause can be received by those age 40 and over. Watch Faces Siri Modular face features a rectangular complication that mirrors the top widget of the Smart Stack, which dynamically updates to show the most relevant widget, as well as a Siri complication to quickly invoke Siri. Smart Stack Single-handed tap gesture enables you to tap your index finger and thumb together once to select a widget in the Smart Stack, even if your other hand is occupied. New suggestion widgets will be surfaced when most relevant to you, including a Parked Car location, birthday reminders for a close contact, balance changes on a transit card, Noise app after a loud noise notification, and more. System Improvements Dynamic app grid highlights your most popular and recently used apps. Find My app is now consolidated into one app to show People, Devices, and Items with a map-centric interface. Media playback now starts faster. Workout app makes distance calculations during treadmill workouts even more accurate from the first step of every walk or run. Fitness app features more accurate route maps after workouts. Battery extension notifications may be proactively offered to disable certain features to increase battery life, including gestures, Start Workout reminders, and Raise to Speak method of invoking Siri. Shazam in the Smart Stack and Music Recognition app identifies songs offline without an internet connection and delivers results automatically when you’re back online. Liquid Glass refinements improve readability with more uniform refraction and improved contrast. For information on the security content of Apple software updates, please visit: https://support.apple.com/100100 Usage limits may apply for some Apple Intelligence features. To learn more, please visit: https://www.apple.com/apple-intelligence Software updates, like this one, add new features and improvements that may affect performance and/or battery life. To learn more, please visit: https://support.apple.com/125039 How to Update watchOS 27 is available via Over-the-Air Update (Settings > General > Software Update) or by going to the Watch app on your iPhone and navigating to General > Software Update. To install the update, your Watch must be connected to its charger and have at least 50% battery power.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-0ed7831dc68f1f57",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2257834/siri-ai-is-here-as-apple-releases-ios-27-macos-golden-gate-and-other-major-os-updates/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T17:13:09.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Siri AI is here as Apple releases iOS 27, macOS Golden Gate and other major OS updates",
-        "summary": "The kinks are still being worked out for users in the EU and China though.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-f24396943cdf898c",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/14/with-ios-27-im-actually-using-siri-again/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T17:10:30.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "With iOS 27, I’m actually using Siri again",
-        "summary": "Apple’s long-delayed Siri overhaul is finally here with iOS 27, and it changes how useful the assistant feels day to day.",
         "body": ""
       }
     },
@@ -265,75 +475,6 @@
       "en": {
         "title": "Apple releases iOS 27 with Siri AI overhaul",
         "summary": "Apple is now rolling out its iOS 27 update to compatible devices today, alongside the watchOS 27, iPadOS 27, and visionOS 27 updates. Siri AI is the headline feature across all four updates, the delayed AI-powered overhaul of the Siri assistant. Siri AI is available as a beta today for English-only devices, and Apple says […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-a522d99962c30097",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/gaming/2026/09/steam-frame-the-ars-technica-review/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T17:00:07.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Steam Frame: The Ars Technica review",
-        "summary": "Valve's new $1,049 VR hardware tries to revive an abandoned VR \"revolution.\"",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-35bc47730f10c734",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/994267/steam-frame-review",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T17:00:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The Steam Frame is made for irresponsible hardware nerds like me",
-        "summary": "For nearly three weeks, I've been testing the limits of Valve's Steam Frame, the company's new wearable PC. At first glance, it's easy to write it off as a pricey headset that missed the VR craze. At $1,059 with 256GB of storage or $1,299 for 1TB, it costs two to three times as much as […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-71abceb7a7534f70",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2254024/are-digital-wallets-safe-than-physical/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T16:30:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "What makes digital wallets safer than physical ones?",
-        "summary": "Digital wallets are convenient, but they also bring a ton of security features that help keep your cards protected.",
         "body": ""
       }
     },
@@ -487,7 +628,7 @@
     "locales": {
       "en": {
         "title": "What's new in Accessibility in iOS 27 for Blind and DeafBlind Users",
-        "summary": "Introduction 15 years ago, I produced my first \"What's New in iOS Accessibility\" article. Every September since, I've been documenting what my testing of the betas has yielded. There are many welcome mainstream changes in this year's iOS 27, such as the upgraded Siri app, new parental controls, a slider to adjust Liquid Glass, further enhanced Apple Intelligence features, and much more. The new Siri has its own app, and coverage of it is beyond the scope of this article other than to mention it's much more verssitle and can assist with all kinds of tasks from asking about your personal data to recipes and so on. Lots of individuals will be reviewing these new features. As I've done for many years now, I document my findings after testing the new version of iOS throughout the summer to discuss accessibility-specific features which impact blind and DeafBlind users. Following what has become a tradition, Apple began discussing enhancements coming to accessibility with its announcement ahead of Global Accessibility Awareness Day. More info about forthcoming features was detailed during the Worldwide Developers Conference Keynote. Devices that will work with iOS 27, according to Apple are the iPhone SE 2 and later, as well as the iPhone 11 and later. The page linked to above is also a good resource for mainstream changes coming in iOS 27. VoiceOver Though there are fewer changes in iOS 27 than what were found in iOS 26, VoiceOver has gained quite a bit of new functionality. Whether you are a speech user or a braille one, there are a lot of new offerings in this year's release. Pronounce It Together There is now a setting which allows a VoiceOver user to import or share their pronunciation dictionary. This feature could be helpful when, for example, text-to-speech engines do not pronounce things correctly in local dialects. Instead of everyone having to make the changes, one person could compile it and share it with other users in a similar situation. It could also be used as a form of prank. Imagine changing the pronunciation of a friend's name to a friendly insult along with other changes and they later encounter it. These settings can be found under Settings> Accessibility> VoiceOver> Speech> Pronunciations. Selecting 'Import' will bring up the Files function and allow the user to browse to the file they wish to import. Sharing one's own pronunciations brings up the standard Share Sheet, where the file can be sent to any number of places or contacts. Hide Your Cursor For those who may not be aware, the VoiceOver cursor appears as a black rectangular outline surrounding the item that currently has VoiceOver focus. While handy in some situations such as showing a sighted user where VoiceOver focus is set, helping a low vision user who tracks VoiceOver focus, or when demonstrating VoiceOver support to a developer, there are certainly reasons individuals may wish to disable it. This is because it can also serve as a distraction when the VoiceOver cursor itself isn't an important part of the iPhone's purpose. For example, when using the iPhone for face-to-face communication as a DeafBlind user, it can distract the person you are attempting to communicate with from the text you are typing. Some may wish to hide the visual VoiceOver cursor during screen sharing. To adjust this setting, head to Settings> Accessibility> VoiceOver> Cursor Visibility, and choose from showing the cursor, hiding it always, or hiding it during screen sharing. Navigating in New Ways with Explore By Touch iOS 27 brings new options to precisely control VoiceOver's reading of text when using Explore by Touch, or, as it's more commonly referred to, 'dragging your finger around the screen'. Options for Text Exploration are now Paragraph, Line, or Sentence. For example, when set to 'Sentence', VoiceOver will only speak the sentence under your finger instead of the entire element as it previously did. Users can adjust this by going to Settings> Accessibility> VoiceOver> Text Exploration. Note that changes made in Text Exploration only apply to Explore by Touch, and will not impact swiping through content. At least, not this particular setting. It's for Swipers Too A separate setting, called Text Navigation, offers the ability to modify how VoiceOver moves when swiping left and right through the screen with one finger. The available options are Line, Sentence, Paragraph, and Element. In addition to allowing one to more easily read blocks of text that VoiceOver sees as one large element, having these two new sets of options can give VoiceOver users other choices than the rotor for text navigation. To check out the new settings for swiping, head to Settings> Accessibility> VoiceOver> Text Navigation. Remember that you will need to adjust settings for Text Exploration and Text Navigation separately. Hints Become Customizable For a lot of the clients I work with who use speech, the hints offered by VoiceOver can be helpful, but there comes a point where they cause interference with touchscreen navigation once a user advances in their journey of learning VoiceOver. For example, \"Double Tap to Open\" can grind on one's nerves after a while. When I first started learning to use an iPhone with iOS 4, this was also something I became frustrated with. If the system hints become a nuisance, the user now has more control over them. iOS 27 brings the ability to adjust the amount of delay between when VoiceOver provides active information about what is in focus and when the hint will be conveyed. To configure this, head to Settings> Accessibility> VoiceOver> Verbosity> Hints, and then either type the duration in seconds ranging from 0.05 to 2.0, or use the 'Decrement' and 'Increment' buttons. The default is 0.8 seconds. It's also now possible to specify if users want all hints, app-specific hints, or no hints at all. You can find these options on the same screen. No Modifier Required for These Functions For VoiceOver commands to be assigned to keyboard shortcuts, Bluetooth keyboard users have always had to include their chosen VoiceOver modifier along with the command. This is no longer necissary with the function keys located in the top row of many Bluetooth keyboards. The setting must be enabled, which one can do by going to Settings>Accessibility>VoiceOver>Commands and setting the Switch Button for \"No Modifier Keys\" to on. Instead of having to press, for example, VoiceOver Modifier f8 to launch the VoiceOver Settings menu, users can now simply press F8. Live and Open for Questions Live Recognition was first integrated into VoiceOver with iOS 18. iOS 27, coupled with Apple Inteligence, gives Live Recognition even more power. Activating the 'Ask' button will allow the user to ask about what is currently in the camera's view. It's also possible to tell Live Recognition to focus on a specific thing in your environment. As long as that item is able to be tracked, its actions and movements will often be reported by VoiceOver. Ask is a feature that is highly customizable. Going to Settings> Accessibility> VoiceOver> Live Recognition allows the user to set up some other options. One can change the default question asked when the button is activated, make the default input either dictation or typing, and have the Volume buttons take a still photo for a follow-up or more detailed description. Ask can be set up with a gesture, Bluetooth keyboard command, the Accessibility Shortcut, or a Perkins-style keyboard command. If none of those are what the user wants, there is also the ability to launch the Ask feature using the Action Button. It can be enabled by going to Settings> Action Button, selecting the Accessibility category, and then choosing 'Ask a Question'. The View From iOS In my view, pardon the pun, the largest upgrade for VoiceOver and braille users in iOS 27 is the massive overhaul of the Image Recognition feature. This is thanks to Apple Intelligence, but I'm sure those using iPhone 15 and earlier devices aren't feeling very thankful, since they do not have access to these features. Unlike the multi-step processes involved with using third-party services for detailed descriptions, Image Recognition descriptions typically take less than three seconds. They can be generated on virtually all images the iPhone encounters, and the user does not need to download or upload each image they wish to have described. It is also possible to describe the screen of the device itself, to ask questions about the image in focus, and to generate a description with the ability to ask a follow-up question immediately. These features can be activated through the VoiceOver rotor or by adding specific functions to gestures. The two devices I have upgraded at this point had the Image Recognition options in the Rotor. If, by chance, your Rotor does not have the Image Recognition option after upgrading, it can be added by going to Settings> Accessibility> VoiceOver> Rotor> Rotor Items and selecting Image Recognition. Since there are up to seven different options for Image Recognition, Apple has also given users the ability to add and remove what they wish to this rotor item. It can be configured by going to Settings> Accessibility> VoiceOver> Rotor> Image Recognition Rotor. Each of the available options will be discussed below. Image/Item Description will allow the user to get a description of the image or item that VoiceOver focus is set to. Based on my testing, it is generated in less than three seconds. It will be delivered in the form of a VoiceOver announcement. For those using braille, one can read the description at their own pace by pressing Space with N. When done, pressing space with n will return the user to where they were before. I find this particular function to be wonderful for generating descriptions of things in my Facebook feed, my growing photo library, album art in the Music app, and when reading photo-heavy articles on various news sources. Interestingly, this function is the only one that can be mapped to a Perkins-style keyboard. The other options discussed below are not available for users of Perkins-style keyboards. Using the Copied Speech Rotor option launched with iOS 26, users can copy the description to wherever they want on their iOS device. A simpler solution in some situations is available as discussed below. Ask About Image/Item is another option, which does exactly what the choice says. After selecting this, users are presented with a text field which allows them to type a question. Pressing return or enter will generate a response. The nice thing is that you do not need to generate a general description before asking a question. Placing VoiceOver focus on the image is all that is required. With many third-party applications, one must first wait through getting the general description before they can ask a question. I have solved simple CAPTCHAs by asking my iPhone to provide me with only the text in the image. I can then copy it and solve CAPTCHAs. I have not tried more complex puzzles. Explore Image/Item allows you to get the same description as you get when generating an Intelligent Description, but it is static text instead of a VoiceOver announcement. After the text description, there is an option to ask a question either by typing or voice. Also, when focus is on the description, one can flick up with one finger, or use whatever alternative method, to copy the description. Ask About Screen allows the user to get a description of the screen on their iOS device. It functions the same as the Ask About Image/Item choice, but covers the entire screen. I've found this feature handy for understanding what buttons without labels do. This is far more preferable to activating the button to see what happens. The other two options are Describe Screen and Explore Screen. These work the same as the others documented above, only this applies to your entire screen instead of one item. I mentioned browsing photos above, and when in the Photos app, there is yet another rotor option available called Save Intelligent Image Description. When selected, this will add the description generated to the photo itself which will then be available later. A final setting is the ability to show a list of the recognition options discussed above. It does not have a touch screen gesture assigned to it, but the user can create one. On a Bluetooth keyboard, pressing VoiceOver Modifier, Shift, and R will bring up this menu. Sorry, braille display users, there appears to be no Perkins-style keyboard option. Automatic Image Descriptions Users can head to Settings>Accessibility>VoiceOver>VoiceOver Recognition>Image Descriptions to configure whether image descriptions are provided automatically. One can configure whether they want automatic image descriptions or whether they are conveyed as a fall-back option to when images have alt text. Note that this setting applies to the classic image descriptions, but one will not recieve a etailed description such as the ones provided by Apple Inteligence. Braille There are some changes to braille outlined below. As a general usage note, writing longer passages of text seems to be a bit more reliable than it was in all of the iOS 26 releases. Further, there were some issues in iOS 26 with cursor routing buttons not routing correctly and focus jumping back to the top in longer blocks of text while the user was reading. Based on my use, all of these issues have been improved significantly. Predict More Predictably with Braille Screen Input Braille Screen Input now uses the same Predictive Text gestures as the default onscreen keyboard. When typing on the standard touchscreen keyboard, iOS uses Autocorrect and Predictive Text to identify the word you probably intended based on the letters entered, nearby keys, sentence context, and commonly-used language. Braille Screen Input now uses this same prediction system: after entering a word, users can swipe up or down with one finger to move through suggested words or corrections, then continue typing once the desired suggestion is selected. Further, it is now possible to type part of an emoji name and swipe up or down with one finger to find it. Functionality of the BSI Autocorrect requires the primary software keyboard Autocorrect setting to be enabled in Settings> General> Keyboards. Finally, iOS 27 adds the ability to more easily insert alternative characters. To activate alternative character selection, hold the dots of the character you wish to insert until you hear a sound, then release and swipe up or down with one finger to select the desired symbol. A More Flexible Cursor Shifting to braille display users, there is a new setting called 'Snap To Print Text Cursor', which can be found by going to Settings> Accessibility> VoiceOver> Braille> Cursor Routing. The options are the new Snap To Text Cursor or Any Braille Cell. By default, Snap To Print Text Cursor was selected when I upgraded. The 'Snap to Print Text' setting places the cursor on the closest print text equivalent even when contracted braille is enabled. This setting is particularly helpful for those braille display users using QWERTY keyboards to type while also using contracted braille for reading, as it removes some ambiguity from where the cursor is located. Text Field Labels That Stick Prior to iOS 27, when activating a text field, the text label would disappear entirely. In iOS 27, the label persists even when the text field is active. The label itself appears between two indicator symbols which clearly distinguish the label from the text entered. It can be configured by going to Settings> Accessibility> VoiceOver> Braille> Text Field Labels. The options are to show an abbreviated version of the label or the full thing. Selecting 'Collapse' will provide two indicators without the text label. Selecting 'Full' will display the entire text field label. You can collapse the label by pressing a cursor routing button. If you disable everything in this menu, the behavior will be as it always was in past versions of iOS. Braille Access Expands File Support Braille Access now supports plain text and PDF files. As such, the formerly named 'BRF Files' is now simply called 'Files'. To import these file types, users can follow the same procedures they already use to get BRF content imported. Files are still stored in the 'BRF files' folder on iCloud, so any method a user would utilize to copy text and PDF content is the same. I found that opening plain text files worked quickly, and it was nice to have them imported. Unlike many applications for braille readers, Braille Access tends to remember the place I was in a file when I open it again. PDF content will display, but seems to depend on how well the creator of the file treated accessibility. Formatting such as headings is not preserved. New Features Bring New Keyboard Shortcuts Apple has added a few new options for Perkins-style keyboard shortcuts that people may take advantage of. Under the VoiceOver category, one has been added for launching the Ask function found in VoiceOver Recognition, while another was added for generating an Intelligent Description with Image Recognition. There are no new commands for the other Image Recognition options discussed above. Another mapping option was made available for ignoring trackpads. Hearing ON-demand Sign Language Interpreters on FaceTime As part of Apple's Global Accessibility Awareness Day announcement in May, the company shared preliminary details of an API that providers of sign language interpretation apps could use to allow callers to add an interpreter to their FaceTime call. As of the time of writing, there do not appear to be any announcements concerning providers utilizing this API, but hopefully that will come soon. Auto-Caption This Video Captioning automatically produces synchronized subtitles from spoken audio when a video has no existing captions. Apple says it works with videos recorded on the iPhone, videos sent to the user, streamed videos, and other uncaptioned videos played through supported system playback interfaces. When I enabled captioning in the Photos app while playing a video, there were several visual options available for adjusting the output. However, I was not able to find the generated captions with braille. Thankfully, Live Captions under Braille Access works well. Conclusion iOS 27 may not bring as many accessibility changes as its predecessor, but several of its additions are substantial. The expanded image-recognition tools can give blind users faster and more independent access to photos, unfamiliar controls, and other visual information, while the new navigation and customization options allow VoiceOver users to better tailor the experience to their needs. Braille users also gain welcome improvements, including more reliable text editing, clearer text-field labels, and support for additional file formats in Braille Access. Some of the most significant new features require Apple Intelligence, leaving users of older compatible devices without access to everything discussed in this article. There are also a few places where braille keyboard support remains incomplete. Even with those limitations, iOS 27 offers a useful collection of accessibility improvements. As always, individual experiences will vary, and readers are encouraged to share their own observations and bugs in the comments. I also encourage users to check out the AppleVis list of bugs and fixes. If needed, more information on how to update the software on your device is available on this Apple Support page.",
+        "summary": "Introduction 15 years ago, I produced my first \"What's New in iOS Accessibility\" article. Every September since, I've been documenting what my testing of the betas has yielded. There are many welcome mainstream changes in this year's iOS 27, such as the upgraded Siri app, new parental controls, a slider to adjust Liquid Glass, further enhanced Apple Intelligence features, and much more. The new Siri has its own app, and coverage of it is beyond the scope of this article other than to mention it's much more versatile and can assist with all kinds of tasks from asking about your personal data to recipes and so on. Lots of individuals will be reviewing these new features. As I've done for many years now, I'm documenting my findings after testing the new version of iOS throughout the summer to discuss accessibility-specific features which impact blind and DeafBlind users. Following what has become a tradition, Apple began discussing enhancements coming to accessibility with its announcement ahead of Global Accessibility Awareness Day. More info about forthcoming features was detailed during the Worldwide Developers Conference Keynote. Devices that will work with iOS 27, according to Apple, are the iPhone SE 2 and later, as well as the iPhone 11 and later. The page linked to above is also a good resource for mainstream changes coming in iOS 27. VoiceOver Though there are fewer changes in iOS 27 than what were found in iOS 26, VoiceOver has gained quite a bit of new functionality. Whether you are a speech user or a braille one, there are a lot of new offerings in this year's release. Pronounce It Together There is now a setting which allows a VoiceOver user to import or share their pronunciation dictionary. This feature could be helpful when, for example, text-to-speech engines do not pronounce things correctly in local dialects. Instead of everyone having to make the changes, one person could compile it and share it with other users in a similar situation. It could also be used as a form of prank. Imagine changing the pronunciation of a friend's name to a friendly insult along with other changes and they later encounter it. These settings can be found under Settings> Accessibility> VoiceOver> Speech> Pronunciations. Selecting 'Import' will bring up the Files function and allow the user to browse to the file they wish to import. Sharing one's own pronunciations brings up the standard Share Sheet, where the file can be sent to any number of places or contacts. Hide Your Cursor For those who may not be aware, the VoiceOver cursor appears as a black rectangular outline surrounding the item that currently has VoiceOver focus. While handy in some situations such as showing a sighted user where VoiceOver focus is set, helping a low vision user who tracks VoiceOver focus, or when demonstrating VoiceOver support to a developer, there are certainly reasons individuals may wish to disable it. This is because it can also serve as a distraction when the VoiceOver cursor itself isn't an important part of the iPhone's purpose. For example, when using the iPhone for face-to-face communication as a DeafBlind user, it can distract the person you are attempting to communicate with from the text you are typing. Some may wish to hide the visual VoiceOver cursor during screen sharing. To adjust this setting, head to Settings> Accessibility> VoiceOver> Cursor Visibility, and choose from showing the cursor, hiding it always, or hiding it during screen sharing. Navigating in New Ways with Explore By Touch iOS 27 brings new options to precisely control VoiceOver's reading of text when using Explore by Touch, or, as it's more commonly referred to, 'dragging your finger around the screen'. Options for Text Exploration are now Paragraph, Line, or Sentence. For example, when set to 'Sentence', VoiceOver will only speak the sentence under your finger instead of the entire element as it previously did. Users can adjust this by going to Settings> Accessibility> VoiceOver> Text Exploration. Note that changes made in Text Exploration only apply to Explore by Touch, and will not impact swiping through content. At least, not this particular setting. It's for Swipers Too A separate setting, called Text Navigation, offers the ability to modify how VoiceOver moves when swiping left and right through the screen with one finger. The available options are Line, Sentence, Paragraph, and Element. In addition to allowing one to more easily read blocks of text that VoiceOver sees as one large element, having these two new sets of options can give VoiceOver users other choices than the rotor for text navigation. To check out the new settings for swiping, head to Settings> Accessibility> VoiceOver> Text Navigation. Remember that you will need to adjust settings for Text Exploration and Text Navigation separately. Hints Become Customizable For a lot of the clients I work with who use speech, the hints offered by VoiceOver can be helpful, but there comes a point where they cause interference with touchscreen navigation once a user advances in their journey of learning VoiceOver. For example, \"Double Tap to Open\" can grind on one's nerves after a while. When I first started learning to use an iPhone with iOS 4, this was also something I became frustrated with. If the system hints become a nuisance, the user now has more control over them. iOS 27 brings the ability to adjust the amount of delay between when VoiceOver provides active information about what is in focus and when the hint will be conveyed. To configure this, head to Settings> Accessibility> VoiceOver> Verbosity> Hints, and then either type the duration in seconds ranging from 0.05 to 2.0, or use the 'Decrement' and 'Increment' buttons. The default is 0.8 seconds. It's also now possible to specify if users want all hints, app-specific hints, or no hints at all. You can find these options on the same screen. No Modifier Required for These Functions For VoiceOver commands to be assigned to keyboard shortcuts, Bluetooth keyboard users have always had to include their chosen VoiceOver modifier along with the command. This is no longer necessary with the function keys located in the top row of many Bluetooth keyboards. The setting must be enabled, which one can do by going to Settings>Accessibility>VoiceOver>Commands and setting the Switch Button for \"No Modifier Keys\" to on. Instead of having to press, for example, VoiceOver Modifier f8 to launch the VoiceOver Settings menu, users can now simply press F8. Live and Open for Questions Live Recognition was first integrated into VoiceOver with iOS 18. iOS 27, coupled with Apple Intelligence, gives Live Recognition even more power. Activating the 'Ask' button will allow the user to ask about what is currently in the camera's view. It's also possible to tell Live Recognition to focus on a specific thing in your environment. As long as that item is able to be tracked, its actions and movements will often be reported by VoiceOver. Ask is a feature that is highly customizable. Going to Settings> Accessibility> VoiceOver> Live Recognition allows the user to set up some other options. One can change the default question asked when the button is activated, make the default input either dictation or typing, and have the Volume buttons take a still photo for a follow-up or more detailed description. Ask can be set up with a gesture, Bluetooth keyboard command, the Accessibility Shortcut, or a Perkins-style keyboard command. If none of those are what the user wants, there is also the ability to launch the Ask feature using the Action Button. It can be enabled by going to Settings> Action Button, selecting the Accessibility category, and then choosing 'Ask a Question'. The View From iOS In my view, pardon the pun, the largest upgrade for VoiceOver and braille users in iOS 27 is the massive overhaul of the Image Recognition feature. This is thanks to Apple Intelligence, but I'm sure those using iPhone 15 and earlier devices aren't feeling very thankful, since they do not have access to these features. Unlike the multi-step processes involved with using third-party services for detailed descriptions, Image Recognition descriptions typically take less than three seconds. They can be generated on virtually all images the iPhone encounters, and the user does not need to download or upload each image they wish to have described. It is also possible to describe the screen of the device itself, to ask questions about the image in focus, and to generate a description with the ability to ask a follow-up question immediately. These features can be activated through the VoiceOver rotor or by adding specific functions to gestures. The two devices I have upgraded at this point had the Image Recognition options in the Rotor. If, by chance, your Rotor does not have the Image Recognition option after upgrading, it can be added by going to Settings> Accessibility> VoiceOver> Rotor> Rotor Items and selecting Image Recognition. Since there are up to seven different options for Image Recognition, Apple has also given users the ability to add and remove what they wish to this rotor item. It can be configured by going to Settings> Accessibility> VoiceOver> Rotor> Image Recognition Rotor. Each of the available options will be discussed below. Image/Item Description will allow the user to get a description of the image or item that VoiceOver focus is set to. Based on my testing, it is generated in less than three seconds. It will be delivered in the form of a VoiceOver announcement. For those using braille, one can read the description at their own pace by pressing Space with N. When done, pressing space with n will return the user to where they were before. I find this particular function to be wonderful for generating descriptions of things in my Facebook feed, my growing photo library, album art in the Music app, and when reading photo-heavy articles on various news sources. Interestingly, this function is the only one that can be mapped to a Perkins-style keyboard. The other options discussed below are not available for users of Perkins-style keyboards. Using the Copied Speech Rotor option launched with iOS 26, users can copy the description to wherever they want on their iOS device. A simpler solution in some situations is available as discussed below. Ask About Image/Item is another option, which does exactly what the choice says. After selecting this, users are presented with a text field which allows them to type a question. Pressing return or enter will generate a response. The nice thing is that you do not need to generate a general description before asking a question. Placing VoiceOver focus on the image is all that is required. With many third-party applications, one must first wait through getting the general description before they can ask a question. I have solved simple CAPTCHAs by asking my iPhone to provide me with only the text in the image. I can then copy it and solve CAPTCHAs. I have not tried more complex puzzles. Explore Image/Item allows you to get the same description as you get when generating an Intelligent Description, but it is static text instead of a VoiceOver announcement. After the text description, there is an option to ask a question either by typing or voice. Also, when focus is on the description, one can flick up with one finger, or use whatever alternative method, to copy the description. Ask About Screen allows the user to get a description of the screen on their iOS device. It functions the same as the Ask About Image/Item choice, but covers the entire screen. I've found this feature handy for understanding what buttons without labels in applications do. This is far more preferable to activating the button to see what happens. The other two options are Describe Screen and Explore Screen. These work the same as the others documented above, only this applies to your entire screen instead of one item. I mentioned browsing photos above, and when in the Photos app, there is yet another rotor option available called Save Intelligent Image Description. When selected, this will add the description generated to the photo itself which will then be available later. A final setting is the ability to show a list of the recognition options discussed above. It does not have a touch screen gesture assigned to it, but the user can create one. On a Bluetooth keyboard, pressing VoiceOver Modifier, Shift, and R will bring up this menu. Sorry, braille display users, there appears to be no Perkins-style keyboard option. Automatic Image Descriptions Users can head to Settings>Accessibility>VoiceOver>VoiceOver Recognition>Image Descriptions to configure whether image descriptions are provided automatically. One can configure whether they want automatic image descriptions or whether they are conveyed as a fallback when images have alt text. Note that this setting applies to the classic image descriptions, but one will not receive a detailed description such as the ones provided by Apple Intelligence. Braille There are some changes to braille outlined below. As a general usage note, writing longer passages of text seems to be a bit more reliable than it was in all of the iOS 26 releases. Further, there were some issues in iOS 26 with cursor routing buttons not routing correctly and focus jumping back to the top in longer blocks of text while the user was reading. Based on my use, all of these issues have been improved significantly. Predict More Predictably with Braille Screen Input Braille Screen Input now uses the same Predictive Text gestures as the default onscreen keyboard. When typing on the standard touchscreen keyboard, iOS uses Autocorrect and Predictive Text to identify the word you probably intended based on the letters entered, nearby keys, sentence context, and commonly-used language. Braille Screen Input now uses this same prediction system: after entering a word, users can swipe up or down with one finger to move through suggested words or corrections, then continue typing once the desired suggestion is selected. Further, it is now possible to type part of an emoji name and swipe up or down with one finger to find it. Functionality of the BSI Autocorrect requires the primary software keyboard Autocorrect setting to be enabled in Settings> General> Keyboards. Finally, iOS 27 adds the ability to more easily insert alternative characters. To activate alternative character selection, hold the dots of the character you wish to insert until you hear a sound, then release and swipe up or down with one finger to select the desired symbol. A More Flexible Cursor Shifting to braille display users, there is a new setting called 'Snap To Print Text Cursor', which can be found by going to Settings> Accessibility> VoiceOver> Braille> Cursor Routing. The options are the new Snap To Text Cursor or Any Braille Cell. By default, Snap To Print Text Cursor was selected when I upgraded. The 'Snap to Print Text' setting places the cursor on the closest print text equivalent even when contracted braille is enabled. This setting is particularly helpful for those braille display users using QWERTY keyboards to type while also using contracted braille for reading, as it removes some ambiguity from where the cursor is located. Text Field Labels That Stick Prior to iOS 27, when activating a text field, the text label would disappear entirely. In iOS 27, the label persists even when the text field is active. The label itself appears between two indicator symbols which clearly distinguish the label from the text entered. It can be configured by going to Settings> Accessibility> VoiceOver> Braille> Text Field Labels. The options are to show an abbreviated version of the label or the full thing. Selecting 'Collapse' will provide two indicators without the text label. Selecting 'Full' will display the entire text field label. You can collapse the label by pressing a cursor routing button. If you disable everything in this menu, the behavior will be as it always was in past versions of iOS. Braille Access Expands File Support Braille Access now supports plain text and PDF files. As such, the formerly named 'BRF Files' is now simply called 'Files'. To import these file types, users can follow the same procedures they already use to get BRF content imported. Files are still stored in the 'BRF files' folder on iCloud, so any method a user would utilize to copy text and PDF content is the same. I found that opening plain text files worked quickly, and it was nice to have them imported. Unlike many applications for braille readers, Braille Access tends to remember the place I was in a file when I open it again. PDF content will display, but seems to depend on how well the creator of the file treated accessibility. Formatting such as headings is not preserved. There also appears to be a file size limit, as I was not able to load a PDF file that was 15 MB due to the images it contained. New Features Bring New Keyboard Shortcuts Apple has added a few new options for Perkins-style keyboard shortcuts that people may take advantage of. Under the VoiceOver category, one has been added for launching the Ask function found in VoiceOver Recognition, while another was added for generating an Intelligent Description with Image Recognition. There are no new commands for the other Image Recognition options discussed above. Another mapping option was made available for ignoring trackpads. Hearing On-demand Sign Language Interpreters on FaceTime As part of Apple's Global Accessibility Awareness Day announcement in May, the company shared preliminary details of an API that providers of sign language interpretation apps could use to allow callers to add an interpreter to their FaceTime call. As of the time of writing, there do not appear to be any announcements concerning providers utilizing this API, but hopefully that will come soon. Auto-Caption This Video Captioning automatically produces synchronized subtitles from spoken audio when a video has no existing captions. Apple says it works with videos recorded on the iPhone, videos sent to the user, streamed videos, and other uncaptioned videos played through supported system playback interfaces. When I enabled captioning in the Photos app while playing a video, there were several visual options available for adjusting the output. However, I was not able to find the generated captions with braille. Thankfully, Live Captions under Braille Access works well. Conclusion iOS 27 may not bring as many accessibility changes as its predecessor, but several of its additions are substantial. The expanded image-recognition tools can give blind users faster and more independent access to photos, unfamiliar controls, and other visual information, while the new navigation and customization options allow VoiceOver users to better tailor the experience to their needs. Braille users also gain welcome improvements, including more reliable text editing, clearer text-field labels, and support for additional file formats in Braille Access. Some of the most significant new features require Apple Intelligence, leaving users of older compatible devices without access to everything discussed in this article. There are also a few places where braille keyboard support remains incomplete. Even with those limitations, iOS 27 offers a useful collection of accessibility improvements. As always, individual experiences will vary, and readers are encouraged to share their own observations and bugs in the comments. I also encourage users to check out the AppleVis list of bugs and fixes. If needed, more information on how to update the software on your device is available on this Apple Support page. T",
         "body": ""
       }
     },
@@ -642,29 +783,6 @@
     "media": null
   },
   {
-    "id": "ars-technica-ff76d6f6349138b4",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/gadgets/2026/09/i-spent-4000-on-a-robot-dog-from-china/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-12T11:00:53.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "I spent $4,000 on a robot dog from China",
-        "summary": "Unitree might be the world’s most important robotics company.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "applevis-apps-00b63fb62c1ff067",
     "type": "news",
     "sourceId": "applevis-apps",
@@ -708,30 +826,6 @@
       "en": {
         "title": "Remote Incident Manager Mobile",
         "summary": "Harness the power of born-accessible remote desktop, right in the palm of your hand! Remote Incident Manager’s mobile companion turns your iPhone or iPad into a powerful universal remote for any PC or Mac running Remote Incident Manager, opening up a world of possibilities. Tap into your home computer while on your commute, and control it as if you were right there in front of it! Run full support or training sessions straight from your phone, complete with crystal-clear voice conversations. Perform routine maintenance on machines across fleets, anytime, anywhere! All this and more with just a phone and a keyboard! Features: Accessible by design. Simple by nature. Near-complete keyboard control across Windows and macOS, irrespective of screen reader. Accessible, customizable touch keyboard and VoiceOver gesture-based control, making simple tasks possible in the absence of a keyboard. High-fidelity, low-latency audio output from the remote computer. Clear visual output with precise mouse/trackpad control. Crystal-clear voice conversations with built-in noise cancelation. In-session text chat capability. No screen reader? No problem! Leverage our Remote Accessibility module to provide assistance to a computer without the need to install a screen reader! Secure peer-to-peer connections between your phone and a remote computer make for extremely low latency (even on mobile data!). Note: This mobile companion is designed solely as a controller and cannot be used as a target. In other words, a computer cannot control a phone running the companion. Account registration through the desktop client or Remote Incident Manager website prior to your first use of this app is highly recommended for an optimal experience.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-b705d6f7e539ea74",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/tech-policy/2026/09/chatgpt-using-lawyer-punished-for-citing-fake-testimony-from-made-up-witnesses/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-11T19:34:09.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "ChatGPT-using lawyer punished for citing fake testimony from made-up witnesses",
-        "summary": "\"I didn't know that AI could hallucinate facts,\" New Mexico defense lawyer says.",
         "body": ""
       }
     },
@@ -1667,32 +1761,6 @@
     "media": null
   },
   {
-    "id": "applevis-blog-bcbe99e8ef1a5291",
-    "type": "news",
-    "sourceId": "applevis-blog",
-    "sourceName": "AppleVis Blog",
-    "sourceUrl": "https://www.applevis.com/blog",
-    "originalUrl": "https://www.applevis.com/blog/apple-releases-ios-2661-ipados-2661-macos-tahoe-2662-security-updates",
-    "originalLanguage": "en",
-    "publishedAt": "2026-08-17T18:21:42.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-accesibilidad",
-      "programas-accesibles",
-      "sordoceguera"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple Releases iOS 26.6.1, iPadOS 26.6.1, and macOS Tahoe 26.6.2 with Security Updates",
-        "summary": "Apple has today released iOS 26.6.1, iPadOS 26.6.1, and macOS Tahoe 26.6.2, bringing unspecified security updates. In our usage and testing of iOS 26.6.1 and macOS Tahoe 26.6.2, we did not identify any changes in these releases that specifically affect the experience for blind, deaf blind, or low vision users. If you notice any changes in your own use of any of these releases, please do let us know by posting a comment. Release Notes iOS 26.6.1 This update provides security fixes for your iPhone. For information on the security content of Apple software updates, please visit this website: https://support.apple.com/100100 iPadOS 26.6.1 This update provides security fixes for your iPad. For information on the security content of Apple software updates, please visit this website: https://support.apple.com/100100 macOS Tahoe 26.6.2 This update provides security fixes for your Mac. For information on the security content of Apple software updates, please visit this website: https://support.apple.com/100100 How to Update iOS and iPadOS 26.6.1 are available via Over-the-Air Update (Settings > General > Software Update), via Finder on a Mac with macOS Catalina or later, or via iTunes on a PC or Mac with macOS Mojave or earlier. Before updating, we strongly recommend making a full and complete backup of your device (either locally or in iCloud, depending on personal preference). This will ensure that, in the unlikely event that something goes wrong during the update process, you will have a current backup on hand in case a device restore becomes necessary. Also, if using OTA update, we recommend plugging your device into a power source for the duration of the download/installation process, so as to prevent the unlikely event of your battery going dead during the update. To install macOS Tahoe 26.6.2, choose System Settings from the Apple menu, select General in the table, click Software Update in the scroll area, and click the Update Now button to begin the update process. If other updates are available, you can click the Info button to see details about them and select specific updates to install.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "usable-y-accesible-a31e16ba9e4be535",
     "type": "news",
     "sourceId": "usable-y-accesible",
@@ -1842,32 +1910,6 @@
     "media": null
   },
   {
-    "id": "applevis-blog-ef60dd62672afff8",
-    "type": "news",
-    "sourceId": "applevis-blog",
-    "sourceName": "AppleVis Blog",
-    "sourceUrl": "https://www.applevis.com/blog",
-    "originalUrl": "https://www.applevis.com/blog/apple-releases-macos-tahoe-2661-screen-sharing-vulnerability-fix",
-    "originalLanguage": "en",
-    "publishedAt": "2026-08-06T20:16:16.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-accesibilidad",
-      "programas-accesibles",
-      "sordoceguera"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple Releases macOS Tahoe 26.6.1 with Screen Sharing Vulnerability Fix",
-        "summary": "Apple has today released macOS Tahoe 26.6.1, bringing a fix for a vulnerability that allowed an attacker on the network to authenticate to Screen Sharing without valid credentials . As macOS Tahoe 26.6.1 was not distributed to external testers prior to its release, we do not have any information on whether it contains any accessibility fixes for blind, deaf blind, or low vision users at the time of writing. However, as this update appears to have been released to address a small number of specific issues, we do not expect it to contain any such fixes. Release Notes This update provides security fixes for your Mac. For information on the security content of Apple software updates, please visit this website: https://support.apple.com/100100 How to Update To install macOS Tahoe 26.6.1, choose System Settings from the Apple menu, select General in the table, click Software Update in the scroll area, and click the Update Now button to begin the update process. If other updates are available, you can click the Info button to see details about them and select specific updates to install.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "cti-once-77fd076e8dd029a7",
     "type": "news",
     "sourceId": "cti-once",
@@ -1959,34 +2001,6 @@
       "en": {
         "title": "Talk Forward",
         "summary": "Talk Forward is a powerful screen reader that makes your Android phone and tablet fully usable by voice and touch — built for blind and…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "applevis-blog-a2b35d48d6e32043",
-    "type": "news",
-    "sourceId": "applevis-blog",
-    "sourceName": "AppleVis Blog",
-    "sourceUrl": "https://www.applevis.com/blog",
-    "originalUrl": "https://www.applevis.com/blog/applevis-unlimited-whats-new-noteworthy-july-2026",
-    "originalLanguage": "en",
-    "publishedAt": "2026-07-31T20:46:08.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-accesibilidad",
-      "apps-accesibles",
-      "programas-accesibles",
-      "ia-accesibilidad",
-      "braille"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "AppleVis Unlimited: What's New and Noteworthy for July 2026",
-        "summary": "Welcome to the July 2026 edition of AppleVis Unlimited, your monthly digest of the latest and most notable content on the AppleVis website. This newsletter features a curated selection of community-submitted content, including new app entries, updates, news, podcast episodes, and popular discussions. We hope that you find this publication to be both helpful and informative. If you have any questions or feedback about this newsletter, please feel free to reach out using our Contact Form. AnonyMouse's App Pick of the Month: Whisper Notes - Speech to Text If you have been searching for a solid transcription app, Whisper Notes - Speech to Text deserves a spot on your radar. Whisper Notes is not a new entry on AppleVis, but a recent update made this the right time to give it a shoutout. Whisper Notes uses AI to transcribe audio into text. It handles transcription entirely on your device, so your recordings never leave your phone, and it is fast. It has a built in recorder for dictation or interviews, and you can also import audio and video files to transcribe from elsewhere. When you are done, you can export a timestamped transcript, and batch export or delete your files whenever you need to tidy things up. It is also very accessible with VoiceOver, and it continues to see regular updates. Read more about Whisper Notes here New Apps BookCraft Audio From the App Store: BookCraft is an audiobook reader and converter, designed from the ground up with accessibility in mind. Whether you listen with VoiceOver or by touch, it makes listening simple, comfortable and enjoyable. Additional Details: Primary platforms: iOS, iPadOS App is paid Developer: Stelios Platsis BookCraft Audio on AppleVis BookCraft Audio on the App Store Eden Qibla From the App Store: Eden Qibla is a prayer app designed to feel clear, elegant, and deeply accessible. It brings prayer times, reminders, a discreet widget, and precise Qibla guidance into a calm interface. Every part of the experience is built to remain readable, quick to reach, and pleasant to use, without unnecessary complexity. Additional Details: Primary platform: iOS App is free Developer: Khalid Talbi Eden Qibla on AppleVis Eden Qibla on the App Store Hear the Light From the App Store: Hear the Light turns light into sound, so you can \"hear\" where brightness is around you. It was designed from the ground up for people with vision loss. Point your device's back camera in any direction and listen to a tone that rises as the light gets stronger. This makes it easy to find a window, check whether a lamp is on, or tell if a device has an indicator light lit. Additional Details: Primary platforms: iOS, iPadOS App is free Developer: Stelios Platsis Hear the Light on AppleVis Hear the Light on the App Store Package Hero From the App Store: Become the Package Hero! Start with a bicycle and build a worldwide – later even interstellar – delivery empire. Parcels run around the clock on your conveyor belt, even while you're offline. Additional Details: Primary platforms: iOS, iPadOS App is free with in-app purchases Developer: Krogoor Entertainment Package Hero on AppleVis Package Hero on the App Store PeerTube From the App Store: Discover the PeerTube mobile application, a free alternative to video streaming giants like YouTube. Thanks to its decentralised network, PeerTube lets you watch, share and publish videos in complete freedom, while remaining in control of your data. The official PeerTube application is your gateway to hundreds of thousands of videos, available across more than a thousand different platforms, and now viewable on your mobile device wherever you are. Additional Details: Primary platforms: iOS, iPadOS App is free Developer: Framasoft PeerTube on AppleVis PeerTube on the App Store RingCraft From the App Store: Turn any song or video into your ringtone — hundredth-second precision, smooth fades, and full VoiceOver support. Make it. Hear it. Share it. RingCraft turns your favorite tracks into personal ringtones and alert sounds — simply, quickly and precisely. Import an audio or video file, pick exactly the part you want, and export it ready to use as a ringtone. Additional Details: Primary platform: iOS App is paid Developer: Stelios Platsis RingCraft on AppleVis RingCraft on the App Store Sonarpad From the App Store: Sonarpad Mobile arrives on the App Store: documents, news, podcasts, radio, routes, weather and accessible tools in one app. Sonarpad Mobile is an app designed to read, listen with text-to-speech, search and organise content in a simple and accessible way. With Sonarpad, you can manage documents, follow news and podcasts, search for radio stations, check routes, weather, calendar information and other useful everyday tools. Additional Details: Primary platforms: iOS, iPadOS App is free Developer: Ambrogio Riili Sonarpad on AppleVis Sonarpad on the App Store Swinsian From the developer's website: Swinsian is a sophisticated music player for macOS with wide format support, folder watching, advanced tag editing and designed to be responsive even with the largest libraries. Additional Details: Primary platform: macOS App is free with in-app purchases Developer: Swinsian Swinsian on AppleVis Swinsian on the developer's website WordBopper From the App Store: WordBopper is a fast, bouncy, and accessible word game where every letter is waiting to be bopped. Tap letters, build words, score points, and chase that delightful “just one more round” feeling. Make connected words for bonus points, build a streak, and unlock a 3x scoring boost before the clock runs out. It's quick to play, easy to learn, and will have you bopping and making so many words that you may just miss your stop on the train. The Daily Bop will keep bringing you back to find tougher words each day, and will let you ascend through the WordBopper ranks as you level up. Additional Details: Primary platforms: iOS, iPadOS App is free Developer: Marco Salsiccia WordBopper on AppleVis WordBopper on the App Store All recent app entries may be found at: iOS/iPadOS Mac Apple Watch Apple TV Notable App Updates AudioBooth: Audiobooks Player From the App Store: Your personal audiobook companion for Audiobookshelf. AudioBooth is a streamlined iOS client designed exclusively for Audiobookshelf users who value simplicity and performance. Built with a focus on essential audiobook listening features, AudioBooth delivers a clean, distraction-free experience for your self-hosted audiobook library. Below is a summary of Recent Updates to AudioBooth: Audiobooks Player. Please see the App Store page for full Release Notes. Ability to automatically download up next content for series and podcasts for offline listening New volume leveler Ability to play or resume books with Siri Ability to add multiple books to a playlist or collection with a single action Newly-published podcast episodes are automatically added to the cue Additional font support for Ebook reader Stability and accessibility improvements Additional Details: Primary platforms: iOS, iPadOS, macOS, watchOS App is free with in-app purchases Developer: Jeremy Grenier AudioBooth: Audiobooks Player on AppleVis AudioBooth: Audiobooks Player on the App Store BARD Mobile From the App Store: Access tens of thousands of books—from current best sellers to much-loved classics, popular magazines, and music instruction and scores—in audio and electronic braille, with new selections added daily. Below is a summary of recent updates to BARD Mobile. Please see the App Store page for full release notes. iOS 26 and iPadOS 26 support Long lists are now fully searchable Improvements to downloads, wishlists, braille, and VoiceOver focus Additional Details: Primary platforms: iOS, iPadOS App is free Developer: Library Of Congress BARD Mobile on AppleVis BARD Mobile on the App Store Cookie Voice Recipes From the App Store: Cookie is your intelligent voice-controlled cooking companion. Keep your hands free while cooking—simply say \"Cookie\" followed by your command to navigate recipes, set timers, check ingredients, and more. No messy screen touches required. Designed with accessibility in mind for users of all abilities. Below is a summary of recent updates to Cookie Voice Recipes. Please see the App Store page for full release notes. Renamed from Cookie to Cookie Voice Improvements to voice recognition, performance, security, and reliability Additional Details: Primary platforms: iOS, iPadOS App is free with in-app purchases Developer: Stitched Strategy LLC Cookie Voice Recipes on AppleVis Cookie Voice Recipes on the App Store Listen 2 Reader From the App Store: Listen2 runs neural text-to-speech directly on your iPhone or iPad without connecting to cloud services. No subscription or accounts — just a 7 day free trial and then a one-time purchase. Most text-to-speech apps either use the tried and true system voices or require monthly payments for cloud processing. Listen2 runs neural voice models locally using your iOS device's CPU and Apple Neural Engine, giving you natural-sounding speech without ongoing costs or privacy tradeoffs. Below is a summary of recent updates to Listen 2 Reader. Please see the App Store page for full release notes. Audio playback now resumes reliably when VoiceOver is on Ability to manually download image recognition model from the \"Manage Vision Model\" screen Rating prompt should no longer appear each time a file is imported Improvements to iCloud sync reliability Additional Details: Primary platforms: iOS, iPadOS App is free with in-app purchases Developer: Zach Swift Listen 2 Reader on AppleVis Listen 2 Reader on the App Store Yatzy & Farkle: Dice World From the App Store: Six classic dice games in one app — play online with friends or offline anytime. Turn-based matches mean no waiting. Take your turn whenever it fits your schedule, whether you have 2 minutes or 2 hours. Built from the ground up for VoiceOver accessibility. Below is a summary of recent updates to Yatzy & Farkle: Dice World. Please see the App Store page for full release notes. Rebuilt chat and social features for improved performance and reliability Improvements to performance, stability, and accessibility Additional Details: Primary platforms: iOS, iPadOS App is free with in-app purchases Developer: AppA11y, Inc. Yatzy & Farkle: Dice World on AppleVis Yatzy & Farkle: Dice World on the App Store zEdit From the App Store: zEdit — The Fully Accessible Video and Audio Editor Built for Blind Users zEdit is the world's first fully accessible video and audio editing app, designed from the ground up for blind and low-vision users. Most media editing tools rely on visual, drag-and-drop interfaces — making them nearly impossible to use with a screen reader. zEdit solves this at its core: every screen, every button, and every gesture is designed to work flawlessly with VoiceOver. You can now edit your videos and audio recordings completely independently, without needing anyone else's help. Below is a summary of recent updates to zEdit. Please see the App Store page for full release notes. New sound and cinematic visual effects and audio filters New \"Audio Compressor\" for leveling out sound volume Ability to change the speed of content from 0.25x to 4x Ability to import effects from royalty-free sources Ability to undo and redo actions Ability to insert content precisely where you want New \"Use Current Position\" button for starting and ending trims New \"Sound Map,\" \"Filler Cleanup,\" and \"Scene Draft\" smart tools New \"Loop Forever\" option for continuously repeating music New \"Auto-duck music during speech\" option Projects can now be merged Ability to receive content shared from Files, Photos, and Voice Memos apps Ability to reorder files using VoiceOver rotor Ability to adjust position by second using VoiceOver rotor Added Chinese (Simplified), Korean, Portuguese, and Ukrainian language support Numerous bug fixes, feature enhancements, and performance improvements Additional Details: Primary platform: iOS App is free Developer: MERIC KARACA zEdit on AppleVis zEdit on the App Store Recent News and Views Apple Releases Version 26.6 of iOS, iPadOS, macOS, watchOS, and tvOS with Security Updates and Optimizations for upcoming \"27\" Updates By AppleVis | July 27, 2026 Apple has today released version 26.6 of the iOS, iPadOS, macOS, watchOS, and tvOS platforms, bringing bug fixes, security updates, and optimizations to prepare for the upcoming \"27\" updates. All recent blog posts may be found at: AppleVis Blog This Month on the AppleVis Podcast Note: All episodes include AI-generated transcripts. Transcripts can be located on each episode's page by navigating to the \"Transcript\" heading below the description. A Demonstration and Walkthrough of Be My Eyes for Mac In this episode, Tyler demonstrates the Be My Eyes app for Mac. (Editor's Note: Be My Eyes is the parent company of AppleVis.) A Demonstration and Walkthrough of Be My Eyes for Mac (MP3) AppleVis Extra 114: Blind Developer Showcase: A Chat with Ashley Cox of Simulcast In this episode of the AppleVis Extra podcast, David Nason is joined by Ashley Cox, a blind software developer who is building native apps for Apple's platforms with a strong focus on accessibility, usability, and thoughtful design. AppleVis Extra 114: Blind Developer Showcase: A Chat with Ashley Cox of Simulcast (MP3) AppleVis Extra 115: Blind Developer Showcase: A Chat with Quinton Williams of VAL: Voice, Alarm & Chimes In this episode of the AppleVis Extra podcast, David Nason is joined by Quinton Williams, the developer of VAL: Voice, Alarm & Chimes. Quintin shares the story behind creating the app, how a personal interest in accessible talking clocks inspired the project, and how an idea that began as a simple experiment quickly evolved into a feature-rich app for iPhone and Mac. AppleVis Extra 115: Blind Developer Showcase: A Chat with Quinton Williams of VAL: Voice, Alarm & Chimes (MP3) All recent podcast episodes may be found at: AppleVis Podcast New and Updated Guides macOS Beta Testing for the Beginner By Tyler | Updated July 2026 AI-generated summary: This guide provides an overview of macOS beta testing, including how to obtain and install beta versions, and how to report feedback to Apple. It emphasizes the importance of backing up data before installing a beta, as they can be unstable and may contain bugs. The guide also explains how to create a separate volume for testing, allowing users to keep their primary system stable. All recent guides may be found at: AppleVis Guides & Tutorials Popular Topics Below is a selection of popular topics on the AppleVis Forum during July 2026: DSM Access — a native, accessible Mac app for your Synology NAS Apple accessories. First time buying a Mac, some input needed Tiktok doesn't like VoiceOver Need Help Selecting Emoji Categories All recent forum topics may be found at: Apple Posts Non-Apple Posts Connect with Us Subscribe to AppleVis on YouTube Follow AppleVis on Mastodon Follow AppleVis on X Visit and like the AppleVis Facebook Page Learn about The Be My Eyes app Download Be My Eyes from the App Store Wishing you the best and every good thing, The AppleVis Editorial Team A Be My Eyes Company",
         "body": ""
       }
     },

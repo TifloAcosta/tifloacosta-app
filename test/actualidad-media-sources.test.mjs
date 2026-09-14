@@ -16,6 +16,12 @@ test('approved Spanish accessibility podcasts are enabled in multimedia', () => 
   }
 });
 
+test('Tiflo Audio uses its stable podcast feed instead of fragile page HTML', () => {
+  const source = byId.get('tifloaudio');
+  assert.equal(source?.adapter, 'feed');
+  assert.equal(source?.endpoint, 'https://www.ivoox.com/feed_fg_f1185986_filtro_1.xml');
+});
+
 test('Double Tap uses its current Simplecast feed', () => {
   assert.equal(byId.get('double-tap')?.endpoint, 'https://feeds.simplecast.com/MhX_XZQZ');
 });

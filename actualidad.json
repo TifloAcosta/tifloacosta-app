@@ -3,7 +3,7 @@
     "id": "applevis-blog-0ff7bbe29855d2ef",
     "type": "news",
     "sourceId": "applevis-blog",
-    "sourceName": "AppleVis",
+    "sourceName": "AppleVis Blog",
     "sourceUrl": "https://www.applevis.com/blog",
     "originalUrl": "https://www.applevis.com/blog/ios-27-ipados-27-summary-voiceover-braille-issues-improvements",
     "originalLanguage": "en",
@@ -76,10 +76,35 @@
     "media": null
   },
   {
+    "id": "nvda-es-ed501132dbec146b",
+    "type": "news",
+    "sourceId": "nvda-es",
+    "sourceName": "NVDA en español",
+    "sourceUrl": "https://nvda.es/",
+    "originalUrl": "https://nvda.es/2026/09/14/ya-disponible-la-segunda-beta-de-nvda-2026-3/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-09-14T05:35:24.000Z",
+    "categories": [
+      "nvda",
+      "windows",
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "Ya disponible la segunda beta de NVDA 2026.3",
+        "summary": "Tal y como ha anunciado NV Access mediante esta publicación, la beta 2 de NVDA 2026.3 ya se encuentra disponible para descarga y pruebas. Si quieres saber qué ofrece la próxima versión de NVDA antes de que se libere oficialmente, no dudes en descargar esta beta y proporcionar comentarios por los canales de la comunidad, … Continuar leyendo \"Ya disponible la segunda beta de NVDA 2026.3\" La entrada Ya disponible la segunda beta de NVDA 2026.3 se publicó primero en NVDA en español .",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "applevis-apps-514ff0f035cf5313",
     "type": "news",
     "sourceId": "applevis-apps",
-    "sourceName": "AppleVis",
+    "sourceName": "AppleVis Apps",
     "sourceUrl": "https://www.applevis.com/",
     "originalUrl": "https://www.applevis.com/apps/ios/games/brainclash",
     "originalLanguage": "en",
@@ -104,7 +129,7 @@
     "id": "applevis-blog-5a9a756edf4b9ae4",
     "type": "news",
     "sourceId": "applevis-blog",
-    "sourceName": "AppleVis",
+    "sourceName": "AppleVis Blog",
     "sourceUrl": "https://www.applevis.com/blog",
     "originalUrl": "https://www.applevis.com/blog/whats-new-accessibility-ios-27-blind-deafblind-users",
     "originalLanguage": "en",
@@ -132,7 +157,7 @@
     "id": "applevis-apps-870c8ddb50875565",
     "type": "news",
     "sourceId": "applevis-apps",
-    "sourceName": "AppleVis",
+    "sourceName": "AppleVis Apps",
     "sourceUrl": "https://www.applevis.com/",
     "originalUrl": "https://www.applevis.com/apps/ios/productivity/muse-meta",
     "originalLanguage": "en",
@@ -157,7 +182,7 @@
     "id": "applevis-apps-75966efe0c087eb0",
     "type": "news",
     "sourceId": "applevis-apps",
-    "sourceName": "AppleVis",
+    "sourceName": "AppleVis Apps",
     "sourceUrl": "https://www.applevis.com/",
     "originalUrl": "https://www.applevis.com/apps/ios/games/earcade",
     "originalLanguage": "en",
@@ -231,7 +256,7 @@
     "id": "applevis-apps-9b1b82d9dfad3d73",
     "type": "news",
     "sourceId": "applevis-apps",
-    "sourceName": "AppleVis",
+    "sourceName": "AppleVis Apps",
     "sourceUrl": "https://www.applevis.com/",
     "originalUrl": "https://www.applevis.com/apps/ios/games/final-fortress",
     "originalLanguage": "en",
@@ -256,7 +281,7 @@
     "id": "applevis-apps-73bdd5fc2f2d9ef4",
     "type": "news",
     "sourceId": "applevis-apps",
-    "sourceName": "AppleVis",
+    "sourceName": "AppleVis Apps",
     "sourceUrl": "https://www.applevis.com/",
     "originalUrl": "https://www.applevis.com/apps/ios/lifestyle/one-line-journal-app",
     "originalLanguage": "en",
@@ -280,7 +305,7 @@
     "id": "applevis-apps-00b63fb62c1ff067",
     "type": "news",
     "sourceId": "applevis-apps",
-    "sourceName": "AppleVis",
+    "sourceName": "AppleVis Apps",
     "sourceUrl": "https://www.applevis.com/",
     "originalUrl": "https://www.applevis.com/apps/ios/games/idle-dyson-swarm",
     "originalLanguage": "en",
@@ -304,7 +329,7 @@
     "id": "applevis-apps-6367c92be95914e0",
     "type": "news",
     "sourceId": "applevis-apps",
-    "sourceName": "AppleVis",
+    "sourceName": "AppleVis Apps",
     "sourceUrl": "https://www.applevis.com/",
     "originalUrl": "https://www.applevis.com/apps/ios/productivity/remote-incident-manager-mobile",
     "originalLanguage": "en",
@@ -424,7 +449,7 @@
     "id": "applevis-blog-c1ba15249bec0f60",
     "type": "news",
     "sourceId": "applevis-blog",
-    "sourceName": "AppleVis",
+    "sourceName": "AppleVis Blog",
     "sourceUrl": "https://www.applevis.com/blog",
     "originalUrl": "https://www.applevis.com/blog/surprise-shine-recapping-apples-september-9-announcements",
     "originalLanguage": "en",
@@ -502,7 +527,7 @@
     "id": "applevis-apps-df5ce5d148613dfe",
     "type": "news",
     "sourceId": "applevis-apps",
-    "sourceName": "AppleVis",
+    "sourceName": "AppleVis Apps",
     "sourceUrl": "https://www.applevis.com/",
     "originalUrl": "https://www.applevis.com/apps/ios/productivity/ghostwriter-markdown",
     "originalLanguage": "en",
@@ -528,7 +553,7 @@
     "id": "applevis-apps-6633c06159e8f0eb",
     "type": "news",
     "sourceId": "applevis-apps",
-    "sourceName": "AppleVis",
+    "sourceName": "AppleVis Apps",
     "sourceUrl": "https://www.applevis.com/",
     "originalUrl": "https://www.applevis.com/apps/ios/navigation/intersector-intersection-identifier",
     "originalLanguage": "en",
@@ -577,7 +602,7 @@
     "id": "applevis-blog-9a8fe57d9786cf69",
     "type": "news",
     "sourceId": "applevis-blog",
-    "sourceName": "AppleVis",
+    "sourceName": "AppleVis Blog",
     "sourceUrl": "https://www.applevis.com/blog",
     "originalUrl": "https://www.applevis.com/blog/apple-releases-ios-2662-ipados-2662-fix-problems-downloading-updates-over-cellular-connections",
     "originalLanguage": "en",
@@ -603,7 +628,7 @@
     "id": "applevis-apps-6a1cfaa5549dda14",
     "type": "news",
     "sourceId": "applevis-apps",
-    "sourceName": "AppleVis",
+    "sourceName": "AppleVis Apps",
     "sourceUrl": "https://www.applevis.com/",
     "originalUrl": "https://www.applevis.com/apps/ios/productivity/private-llm-local-private-ai-iphone-ipad-mac",
     "originalLanguage": "en",
@@ -668,6 +693,58 @@
       "es": {
         "title": "Novedades del Catálogo Novedades en el Catálogo del CTI",
         "summary": "Ya están disponibles en nuestro catálogo nuevos productos tiflotécnicos, cuyas características principales se indican a continuación.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "tecnoconocimiento-accesible-ab7d79684d83c696",
+    "type": "news",
+    "sourceId": "tecnoconocimiento-accesible",
+    "sourceName": "TecnoConocimientoAccesible",
+    "sourceUrl": "https://tecnoconocimientoaccesible.blogspot.com/",
+    "originalUrl": "https://tecnoconocimientoaccesible.blogspot.com/2026/09/tca-convertdoc-15-ocr-en-pdf-traduce.html",
+    "originalLanguage": "es",
+    "publishedAt": "2026-09-07T08:59:17.275Z",
+    "categories": [
+      "tecnologia-accesibilidad",
+      "programas-accesibles",
+      "windows",
+      "proyectos-prototipos",
+      "movilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "TCA ConvertDoc 1.5: OCR en PDF, 🚀 traduce libros y más!",
+        "summary": "Normal 0 false 21 false false false ES X-NONE X-NONE /* Style Definitions */ table.MsoNormalTable {mso-style-name:\"Tabla normal\"; mso-tstyle-rowband-size:0; mso-tstyle-colband-size:0; mso-style-noshow:yes; mso-style-priority:99; mso-style-parent:\"\"; mso-padding-alt:0cm 5.4pt 0cm 5.4pt; mso-para-margin-top:0cm; mso-para-margin-right:0cm; mso-para-margin-bottom:8.0pt; mso-para-margin-left:0cm; line-height:107%; mso-pagination:widow-orphan; font-size:11.0pt; font-family:\"Calibri\",sans-serif; mso-ascii-font-family:Calibri; mso-ascii-theme-font:minor-latin; mso-hansi-font-family:Calibri; mso-hansi-theme-font:minor-latin; mso-bidi-font-family:\"Times New Roman\"; mso-bidi-theme-font:minor-bidi; mso-fareast-language:EN-US;} Hola gente, ¿qué tal les va? Muy atentos: Después de casi dos años de desarrollo, por fin llega TCA ConvertDoc 1.5. No es una simple actualización: es un salto generacional con las funcionalidades que me habéis ido pidiendo en los comentarios del blog, sobre todo desde la entrada de la versión 1.4. Para quienes aún no lo conozcan: ¿Qué es TCA ConvertDoc? TCA ConvertDoc es una pequeña utilidad portable y gratuita para Windows, con interfaz 100% accesible y atajos de teclado, que nos permite convertir entre multitud de formatos de documentos (doc, docx, RTF, epub, pdf, HTML, odt, txt, markdown, PNG, JPG, PPTx), hacer OCR a imágenes y PDFs, y ahora, además, traducir. Y todo, de forma individual o por lotes (carpeta entera de una sola vez). Pues bien, la 1.5 llega cargada de novedades. Os las cuento todas. Novedades de TCA ConvertDoc 1.5 1. Conversión DOCX → PDF (individual y por lotes) Ahora podéis convertir documentos de Word a PDF con un solo clic. ¿Tenéis una carpeta llena de? docx? La conversión masiva procesa todo el directorio de golpe, manteniendo el formato, las imágenes y la estructura del documento. Perfecto para preparar entregas, archivar o compartir. 2. Conversión PPTX → Markdown (individual y por lotes) Algunos me preguntasteis en la entrada de la 1.4 por qué ciertas presentaciones de PowerPoint no se pueden leer con lectores de pantalla. Pues esta es una de las soluciones: extrae el contenido de tus presentaciones a Markdown limpio y editable, ideal para documentación, blogs, wikis o migrar contenido. También funciona en lote para carpetas completas. 3. PDF escaneado PDF buscable (OCR) \"¿Se puede convertir un pdf en un pdf con capacidad de búsqueda?\" — me preguntasteis en los comentarios de la 1.4. ¡Ahora sí! Añades un PDF que es solo imagen (un escaneo sin capa de texto), TCA ConvertDoc le aplica OCR y te devuelve un PDF con texto seleccionable y buscable. Accesibilidad real para documentos heredados, del tipo que sea. 4. JPG / PNG PDF buscable Construye PDFs accesibles a partir de imágenes sueltas. Cada imagen pasa por OCR y se une en un único PDF donde puedes buscar, copiar y seleccionar el texto. Ideal para digitalizar notas, facturas, páginas de libros o documentos fotografiados con el móvil. 5. Traducción integrada! (¡la gran novedad!) Llevaba muchísimo tiempo queriendo incorporarle la traducción a TCA ConvertDoc, y por fin está aquí. Ahora el programa es capaz de traducir archivos completos a cualquier idioma usando dos motores: • Argos Translate | Offline | Descarga previa de los paquetes de idioma (privacidad total, sin internet) • Google Translate | Online | Conexión a internet, máxima calidad Formatos soportados: .txt, .docx y .pdf. Y lo mejor de todo: traduce incluso archivos grandes como libros enteros. El motor procesa el texto en fragmentos inteligentes, mantiene la estructura del documento (párrafos, saltos de página, estilos en DOCX) y te entrega el archivo traducido listo para usar. Nada de copiar y pegar por trozos, ni de chocar con límites ridículos de caracteres. Un detalle importante sobre Argos: la primera vez que uses Argos con un idioma, te aparecerá un diálogo ofreciéndote descargar los paquetes de ese idioma... y solo esa única vez. A partir de ahí, ese idioma queda instalado en el programa y funciona totalmente sin conexión. Tranquilo, no te lo volverá a pedir. 6. Selector de idiomas del OCR (Tesseract) completo En la 1.4 teníamos 3 idiomas de OCR (español, inglés e italiano). Ahora, en el cuadro combinado de idioma del OCR aparecen todos los idiomas que soporta Tesseract. Ya no hay que editar configs a mano ni adivinar códigos: eliges el idioma y listo. 7. Arreglos y optimizaciones internas OCR de archivos grandes: se ha reescrito el proceso para manejar PDFs e imágenes de gran tamaño sin agotar la memoria ni bloquear la interfaz. Gestión de hilos optimizada en las conversiones por lotes. Mejor detección de orientación y enderezado automático en imágenes escaneadas. Logs más claros y barra de progreso real en las operaciones largas. Y muchas otras mejoras internas que hacen el programa más estable y rápido. Requisitos para utilizar TCA ConvertDoc 1.5: • Windows10 (x64) en adelante. • portable, sin instalación. • Para Argos: el programa te ofrece descargar los paquetes del idioma la primera vez que lo uses (un solo diálogo), y luego funciona offline • Para Google Translate: conexión a internet Tip: si vas a trabajar mucho con traducción offline, entra a Argos, descarga de una vez los idiomas que más uses (español, inglés, francés, alemán, chino, japonés, árabe...) y olvídate. Luego todo irá 100% sin conexión. Tutorial: 📘 TCA ConvertDoc 1.5: OCR en PDF, 🚀 traduce libros y más! En este tutorial les mostraré: • Les mostraré la nueva conversión de Docx a PDF. • Conversión de PPTX a Markdown. • Conversión de un PDF (que son imágenes) a un PDF accesible (que admite búsqueda). • Construir un archivo PDF a partir de imágenes Jpg o PNG. • Muestra de que todos los idiomas ahora se cargan en el Motor OCR Tesseract. • Como traducir un documento en formato TXT a otro idioma de forma Online usando Google Translate (• conversión del inglés al español). • Como traducir un documento en formato Docx, utilizando la traducción OfLine con Argos Translate (• muestra del inglés al francés, descarga de idiomas y más). • Finalmente les mostraré, como traducir un PDF a otro idioma. La descarga. Les dejaré en la descarga: • El audio tutorial (en los canales Odysse y YouTube estará en video tutorial). • El programa TCA ConvertDoc 1.5 x64. • Archivo con las librerías visual estudio C++. Espero les sea de mucha utilidad: Dos años son mucho tiempo en software, pero TCA ConvertDoc 1.5 llega para quedarse. No es un parche: es un salto que cubre el ciclo completo —convertir, OCR, buscar, traducir— en una sola herramienta accesible, portable, gratuita y sin suscripciones. Si trabajas con documentos, investigas, digitalizas archivo o necesitas mover contenido entre idiomas, esta versión te va a ahorrar horas. Y la traducción de libros enteros, esa que tanto esperabais, por fin es una realidad. ¿Qué funcionalidad echabas más en falta? ¿Se te ocurre algo para la 1?6? Y ya sabes, Si te gusta este contenido, Apóyanos haciendo una donación: Dona aquí en PayPal. compártelo en: Facebook, X. Deja un comentario sobre esta entrada. Síguenos en X: Abajo tienes el botón. Suscríbete al blog: Ahora puedes unirte a nuestros grupos de WhatsApp o Telegram: Puedes escribir al mail del blog con tus datos si deseas ingresar a los mismos. Escucha todos nuestros audio tutoriales, cómodamente: Entrando desde aquí, a nuestro canal en YouTube. Ahora también, en nuestro canal en Odysse: Entra al canal de Tecnoconocimiento Accesible en Odysse. O si prefieres escúchanos en: Anchor: Escúchanos en Anchor. Ponte en contacto con nosotros, déjanos tus sugerencias, dudas, o comentarios, abajo tienes un sencillo formulario, o si lo prefieres, escríbenos al correo del blog: tecnoconocimientoaccesible@gmail.com Los aportes siempre serán bienvenidos. cuando nos escribas por uno de los medios con alguna sugerencia, se publicará con tu nombre. además, como ya se sabe, puedes publicar esta entrada en otro sitio, pero no te olvides citar la fuente. Saludos, y hasta otro post. Descarga aquí el tutorial. Descarga aquí el programa. Descarga aquí las librerías.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "nvda-es-ea1091f102260dbe",
+    "type": "news",
+    "sourceId": "nvda-es",
+    "sourceName": "NVDA en español",
+    "sourceUrl": "https://nvda.es/",
+    "originalUrl": "https://nvda.es/2026/09/07/ya-disponible-la-primera-beta-de-nvda-2026-3/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-09-07T05:53:06.000Z",
+    "categories": [
+      "nvda",
+      "windows",
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "Ya disponible la primera beta de NVDA 2026.3",
+        "summary": "Tal y como ha anunciado NV Access mediante esta publicación, la beta 1 de NVDA 2026.3 ya se encuentra disponible para descarga y pruebas. Si quieres saber qué ofrece la próxima versión de NVDA antes de que se libere oficialmente, no dudes en descargar esta beta y proporcionar comentarios por los canales de la comunidad, … Continuar leyendo \"Ya disponible la primera beta de NVDA 2026.3\" La entrada Ya disponible la primera beta de NVDA 2026.3 se publicó primero en NVDA en español .",
         "body": ""
       }
     },
@@ -742,6 +819,31 @@
       "es": {
         "title": "EN 301 549 versión 4.1.1. Descripción detallada de todas las novedades y comparativa con la versión 3.2.1",
         "summary": "El 3 de septiembre de 2026 se publicó la nueva versión de la EN 301 549, la versión 4.1.1, tras varios años de trabajo. El contenido de esta nueva versión ya está cerrado y no sufrirá más cambios. Ahora solo falta que se publique su referencia en el Diario Oficial de la Unión Europea para que se pueda utilizar como referencia para demostrar que un producto o servicio cumple con la legislación",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "nvda-es-ebc1424b394a323a",
+    "type": "news",
+    "sourceId": "nvda-es",
+    "sourceName": "NVDA en español",
+    "sourceUrl": "https://nvda.es/",
+    "originalUrl": "https://nvda.es/2026/09/03/regresan-las-voces-tiflotecnia-a-la-tienda-de-nvda-en-espanol/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-09-03T17:13:25.000Z",
+    "categories": [
+      "nvda",
+      "windows",
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "Regresan las voces Tiflotecnia a la tienda de NVDA en español",
+        "summary": "¡Hola, comunidad! ¿Cómo han ido estos meses de descanso? Esperamos que hayan servido para cargar las pilas y empezar este nuevo año lectivo con energía. Nosotros, aunque no hemos desconectado del todo para informarte de la llegada de NVDA 2026.2 y actualizar traducciones, estamos listos para seguir adelante con nuestra actividad habitual. Si recuerdas el … Continuar leyendo \"Regresan las voces Tiflotecnia a la tienda de NVDA en español\" La entrada Regresan las voces Tiflotecnia a la tienda de NVDA en español se publicó primero en NVDA en español .",
         "body": ""
       }
     },
@@ -825,6 +927,31 @@
     "media": null
   },
   {
+    "id": "nvda-es-b6a6c9aa4f477cd7",
+    "type": "news",
+    "sourceId": "nvda-es",
+    "sourceName": "NVDA en español",
+    "sourceUrl": "https://nvda.es/",
+    "originalUrl": "https://nvda.es/2026/08/31/ya-disponible-la-version-final-de-nvda-2026-2/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-08-31T05:31:05.000Z",
+    "categories": [
+      "nvda",
+      "windows",
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "Ya disponible la versión final de NVDA 2026.2",
+        "summary": "Tras 11 versiones beta y 2 candidatas a liberación, NV Access ha anunciado mediante esta publicación que ya se encuentra disponible para su descarga la versión final de NVDA 2026.2, el lector de pantalla gratuito y de código abierto para Microsoft Windows. Se recomienda a todos los usuarios actualizar a esta nueva versión, cuyo uso … Continuar leyendo \"Ya disponible la versión final de NVDA 2026.2\" La entrada Ya disponible la versión final de NVDA 2026.2 se publicó primero en NVDA en español .",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "freedom-scientific-blog-e84068c164971d06",
     "type": "news",
     "sourceId": "freedom-scientific-blog",
@@ -852,7 +979,7 @@
     "id": "applevis-blog-4dd0bdc14da36365",
     "type": "news",
     "sourceId": "applevis-blog",
-    "sourceName": "AppleVis",
+    "sourceName": "AppleVis Blog",
     "sourceUrl": "https://www.applevis.com/blog",
     "originalUrl": "https://www.applevis.com/blog/applevis-unlimited-whats-new-noteworthy-august-2026",
     "originalLanguage": "en",
@@ -930,6 +1057,31 @@
     "media": null
   },
   {
+    "id": "nvda-es-bb27678f657c9586",
+    "type": "news",
+    "sourceId": "nvda-es",
+    "sourceName": "NVDA en español",
+    "sourceUrl": "https://nvda.es/",
+    "originalUrl": "https://nvda.es/2026/08/26/ya-disponible-la-segunda-candidata-a-liberacion-de-nvda-2026-2/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-08-26T06:18:11.000Z",
+    "categories": [
+      "nvda",
+      "windows",
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "Ya disponible la segunda candidata a liberación de NVDA 2026.2",
+        "summary": "Tal y como ha anunciado NV Access mediante esta publicación, la rc 2 de NVDA 2026.2 ya se encuentra disponible para descarga y pruebas. Se recomienda a todos los usuarios descargar esta versión y proporcionar comentarios por los canales de la comunidad, o por el sistema de informe de fallos de NV Access. A menos … Continuar leyendo \"Ya disponible la segunda candidata a liberación de NVDA 2026.2\" La entrada Ya disponible la segunda candidata a liberación de NVDA 2026.2 se publicó primero en NVDA en español .",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "freedom-scientific-blog-b13c944403a82928",
     "type": "news",
     "sourceId": "freedom-scientific-blog",
@@ -958,7 +1110,7 @@
     "id": "applevis-blog-ed86682f1f8939cc",
     "type": "news",
     "sourceId": "applevis-blog",
-    "sourceName": "AppleVis",
+    "sourceName": "AppleVis Blog",
     "sourceUrl": "https://www.applevis.com/blog",
     "originalUrl": "https://www.applevis.com/blog/apple-introduces-updated-mac-mini-mac-studio-upgraded-chips-improved-connectivity",
     "originalLanguage": "en",
@@ -1031,6 +1183,55 @@
     "media": null
   },
   {
+    "id": "tecnoconocimiento-accesible-ad2f8f8257c47f94",
+    "type": "news",
+    "sourceId": "tecnoconocimiento-accesible",
+    "sourceName": "TecnoConocimientoAccesible",
+    "sourceUrl": "https://tecnoconocimientoaccesible.blogspot.com/",
+    "originalUrl": "https://tecnoconocimientoaccesible.blogspot.com/2026/08/tca-mediadownloader-version-29a-se.html",
+    "originalLanguage": "es",
+    "publishedAt": "2026-08-24T09:24:28.538Z",
+    "categories": [
+      "tecnologia-accesibilidad",
+      "programas-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "TCA-MediaDownloader versión 2.9a: 🚀Se acabaron los problemas!",
+        "summary": "Normal 0 false 21 false false false ES X-NONE X-NONE /* Style Definitions */ table.MsoNormalTable {mso-style-name:\"Tabla normal\"; mso-tstyle-rowband-size:0; mso-tstyle-colband-size:0; mso-style-noshow:yes; mso-style-priority:99; mso-style-parent:\"\"; mso-padding-alt:0cm 5.4pt 0cm 5.4pt; mso-para-margin-top:0cm; mso-para-margin-right:0cm; mso-para-margin-bottom:8.0pt; mso-para-margin-left:0cm; line-height:107%; mso-pagination:widow-orphan; font-size:11.0pt; font-family:\"Calibri\",sans-serif; mso-ascii-font-family:Calibri; mso-ascii-theme-font:minor-latin; mso-hansi-font-family:Calibri; mso-hansi-theme-font:minor-latin; mso-bidi-font-family:\"Times New Roman\"; mso-bidi-theme-font:minor-bidi; mso-fareast-language:EN-US;} Hola gente, ¿qué tal les va? Muy atentos, porque hoy les traigo una variante muy especial: TCA-MediaDownloader versión 2.9a, una variante totalmente funcional a agosto de 2026, que descarga, pre-reproduce y, sobre todo, que no sufre los problemas que arrastran otras versiones y otros programas! ¿Qué pasa con las demás versiones y programas? Seguramente ya lo han vivido: hay programas que no descargan, otros que si descargan el archivo queda sin sonido, o que directamente lanzan errores al intentar reproducir. Y esto no es un problema exclusivo de estas versiones ni de estos programas. La causa real son los constantes cambios que realiza YouTube y otras plataformas, que modifican su funcionamiento con frecuencia para dificultar las descargas externas. Por ese motivo, la librería yt-dlp debe estar constantemente adaptándose a dichos cambios, lanzando parches que a veces llegan antes y a veces llegan tarde, y esos cambios rompen muchas funciones hasta que llega la solución. Esta variante 2.9a está optimizada justamente para ese escenario, y en las pruebas que realicé (y las personas que me ayudaron a probarla) funciona sin problemas de reproducción ni de descarga. Si con esta versión no te descarga o reproduce un contenido, difícilmente lo podrás hacer con otro programa. Así de simple. TCA-MediaDownloader 2.9a puede reproducir y descargar lo que otros programas no pueden. Novedades importantes de TCA-MediaDownloader 2.9a Elección de la rama de yt-dlp Ahora, dentro de las opciones, podemos elegir la rama de actualización de yt-dlp que queramos utilizar: • Estable (recomendada): la versión probada y oficial. • Nightly (desarrollo): aquí llegan antes los cambios y los parches ante las modificaciones de las plataformas. Puede ser algo más inestable, pero cuando hay muchos cambios de por medio es la que antes reacciona. Yo personalmente la tengo configurada en la rama de desarrollo y me va bastante bien, pero cada uno puede dejar la que prefiera. Nueva categoría: Cookies Las opciones ahora incluyen una nueva categoría llamada Cookies, donde, de forma opcional, podremos añadir un archivo .txt que contenga nuestras cookies. ¿Para qué sirven? Algunos sitios web requieren que hayas iniciado sesión para descargar ciertos contenidos. Con las cookies, el programa se autenticará igual que lo hace tu navegador. Puedes exportar tus cookies desde el navegador usando una extensión como Get cookies.txt LOCALLY (disponible para Chrome y Firefox) y seleccionar aquí el archivo .txt generado. En el tutorial muestro el paso a paso completo: Recuerda: esta opción no es obligatoria para que el programa funcione, pero sí es recomendable tenerla activada como una capa más para que las descargas no fallen. Correcciones varias en el código. Se han corregido varias cosas, como mejora de la identificación del PC, guardado correcto de las opciones, nueva dependencia para mejorar descargas y muchas correcciones menores. Tutorial: TCA-MediaDownloader versión 2.9a: 🚀 Se acabaron los problemas! En este tutorial les muestro: • Breve presentación de la variante 2.9a y sus ventajas. • Las novedades de las opciones: elección de la rama de yt-dlp (Nightly/desarrollo o estable). • Cómo actualizar la librería yt-dlp desde el menú Herramientas. • Paso a paso para instalar la extensión Get cookies.txt LOCALLY en un navegador basado en Chromium (Brave). • Cómo iniciar sesión en YouTube y exportar el archivo de cookies .txt. • Cómo cargar el archivo de cookies en las opciones de TCA-MediaDownloader 2.9a. • Comparativa práctica con la versión 3: errores al reproducir y descargas sin sonido frente al funcionamiento correcto de la 2.9a. • Reproducción y descarga exitosas con la variante 2.9a. La descarga. Les dejaré en la descarga: • El audio tutorial (en los canales Odysse y YouTube estará en video tutorial). • El programa TCA-MediaDownloader 2.9a. Esta variante sale solamente para 64 bits. • Enlace para conseguir el complemento Get Cookies (para navegadores basados en chromium). • Enlace para conseguir el complemento Cookies TXT (para Firefox). Espero lo disfruten. Esta es una opción funcional a agosto de 2026: si con esta versión no puedes descargar o reproducir un contenido multimedia, difícilmente puedas hacerlo con ningún otro programa. Y ya sabes, Si te gusta este contenido, Apóyanos haciendo una donación: Dona aquí en PayPal. compártelo en: Facebook, X. Deja un comentario sobre esta entrada. Síguenos en X: Abajo tienes el botón. Suscríbete al blog: Ahora puedes unirte a nuestros grupos de WhatsApp o Telegram: Puedes escribir al mail del blog con tus datos si deseas ingresar a los mismos. Escucha todos nuestros audio tutoriales, cómodamente: Entrando desde aquí, a nuestro canal en YouTube. Ahora también, en nuestro canal en Odysse: Entra al canal de Tecnoconocimiento Accesible en Odysse. O si prefieres escúchanos en: Anchor: Escúchanos en Anchor. Ponte en contacto con nosotros, déjanos tus sugerencias, dudas, o comentarios, abajo tienes un sencillo formulario, o si lo prefieres, escríbenos al correo del blog: tecnoconocimientoaccesible@gmail.com Los aportes siempre serán bienvenidos. cuando nos escribas por uno de los medios con alguna sugerencia, se publicará con tu nombre. además, como ya se sabe, puedes publicar esta entrada en otro sitio, pero no te olvides citar la fuente. Saludos, y hasta otro post. Descarga aquí el tutorial. Descarga aquí el programa. Consigue aquí la extensión para navavegadores chromium. Consigue aquí la extensión para Firefox.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "nvda-es-a9095c89975572e2",
+    "type": "news",
+    "sourceId": "nvda-es",
+    "sourceName": "NVDA en español",
+    "sourceUrl": "https://nvda.es/",
+    "originalUrl": "https://nvda.es/2026/08/24/ya-disponible-la-primera-candidata-a-liberacion-de-nvda-2026-2/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-08-24T06:19:31.000Z",
+    "categories": [
+      "nvda",
+      "windows",
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "Ya disponible la primera candidata a liberación de NVDA 2026.2",
+        "summary": "Tal y como ha anunciado NV Access mediante esta publicación, la rc 1 de NVDA 2026.2 ya se encuentra disponible para descarga y pruebas. Se recomienda a todos los usuarios descargar esta versión y proporcionar comentarios por los canales de la comunidad, o por el sistema de informe de fallos de NV Access. A menos … Continuar leyendo \"Ya disponible la primera candidata a liberación de NVDA 2026.2\" La entrada Ya disponible la primera candidata a liberación de NVDA 2026.2 se publicó primero en NVDA en español .",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "conticgo-dba0444691a186bf",
     "type": "news",
     "sourceId": "conticgo",
@@ -1082,7 +1283,7 @@
     "id": "applevis-blog-bcbe99e8ef1a5291",
     "type": "news",
     "sourceId": "applevis-blog",
-    "sourceName": "AppleVis",
+    "sourceName": "AppleVis Blog",
     "sourceUrl": "https://www.applevis.com/blog",
     "originalUrl": "https://www.applevis.com/blog/apple-releases-ios-2661-ipados-2661-macos-tahoe-2662-security-updates",
     "originalLanguage": "en",
@@ -1122,6 +1323,31 @@
       "es": {
         "title": "Lectura Fácil y Web Comprensible. Modelo de los tres umbrales. Reglamento de condiciones básicas de accesibilidad cognitiva.",
         "summary": "Nombre: Lectura Fácil y Web Comprensible. Un libro blanco en el marco del nuevo reglamento Autores: María Xesús Bello Rivas y Óscar García Muñoz Nº páginas: 244 Idioma: español Formato: papel y PDF (gratuito) Fecha de publicación: 2026 Descarga del libro en PDF: Lectura Fácil y web comprensible. Un libro blanco en el marco del nuevo reglamento Podéis",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "nvda-es-438c784a29be67e9",
+    "type": "news",
+    "sourceId": "nvda-es",
+    "sourceName": "NVDA en español",
+    "sourceUrl": "https://nvda.es/",
+    "originalUrl": "https://nvda.es/2026/08/17/ya-disponible-la-undecima-beta-de-nvda-2026-2/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-08-17T06:21:17.000Z",
+    "categories": [
+      "nvda",
+      "windows",
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "Ya disponible la undécima beta de NVDA 2026.2",
+        "summary": "Tal y como ha anunciado NV Access mediante esta publicación, la beta 11 de NVDA 2026.2 ya se encuentra disponible para descarga y pruebas. Si quieres saber qué ofrece la próxima versión de NVDA antes de que se libere oficialmente, no dudes en descargar esta beta y proporcionar comentarios por los canales de la comunidad, … Continuar leyendo \"Ya disponible la undécima beta de NVDA 2026.2\" La entrada Ya disponible la undécima beta de NVDA 2026.2 se publicó primero en NVDA en español .",
         "body": ""
       }
     },
@@ -1232,7 +1458,7 @@
     "id": "applevis-blog-ef60dd62672afff8",
     "type": "news",
     "sourceId": "applevis-blog",
-    "sourceName": "AppleVis",
+    "sourceName": "AppleVis Blog",
     "sourceUrl": "https://www.applevis.com/blog",
     "originalUrl": "https://www.applevis.com/blog/apple-releases-macos-tahoe-2661-screen-sharing-vulnerability-fix",
     "originalLanguage": "en",
@@ -1273,6 +1499,31 @@
       "es": {
         "title": "Evaluaciones de APP Evaluaciones de APP actualizadas o incorporadas en el ClubONCE en el mes de julio.",
         "summary": "A lo largo del pasado mes de julio se han evaluado las siguientes APP:",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "nvda-es-a406dc4e0e6b5061",
+    "type": "news",
+    "sourceId": "nvda-es",
+    "sourceName": "NVDA en español",
+    "sourceUrl": "https://nvda.es/",
+    "originalUrl": "https://nvda.es/2026/08/06/ya-disponible-la-decima-beta-de-nvda-2026-2/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-08-06T06:30:59.000Z",
+    "categories": [
+      "nvda",
+      "windows",
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "Ya disponible la décima beta de NVDA 2026.2",
+        "summary": "Tal y como ha anunciado NV Access mediante esta publicación, la beta 10 de NVDA 2026.2 ya se encuentra disponible para descarga y pruebas. Si quieres saber qué ofrece la próxima versión de NVDA antes de que se libere oficialmente, no dudes en descargar esta beta y proporcionar comentarios por los canales de la comunidad, … Continuar leyendo \"Ya disponible la décima beta de NVDA 2026.2\" La entrada Ya disponible la décima beta de NVDA 2026.2 se publicó primero en NVDA en español .",
         "body": ""
       }
     },
@@ -1330,7 +1581,7 @@
     "id": "applevis-blog-a2b35d48d6e32043",
     "type": "news",
     "sourceId": "applevis-blog",
-    "sourceName": "AppleVis",
+    "sourceName": "AppleVis Blog",
     "sourceUrl": "https://www.applevis.com/blog",
     "originalUrl": "https://www.applevis.com/blog/applevis-unlimited-whats-new-noteworthy-july-2026",
     "originalLanguage": "en",
@@ -1358,7 +1609,7 @@
     "id": "applevis-blog-5e0610a4599421fb",
     "type": "news",
     "sourceId": "applevis-blog",
-    "sourceName": "AppleVis",
+    "sourceName": "AppleVis Blog",
     "sourceUrl": "https://www.applevis.com/blog",
     "originalUrl": "https://www.applevis.com/blog/announcing-anonymouses-app-pick-month-july-2026-whisper-notes-speech-text",
     "originalLanguage": "en",
@@ -1594,6 +1845,31 @@
     "media": null
   },
   {
+    "id": "tecnoconocimiento-accesible-9c6d3ff02db10bac",
+    "type": "news",
+    "sourceId": "tecnoconocimiento-accesible",
+    "sourceName": "TecnoConocimientoAccesible",
+    "sourceUrl": "https://tecnoconocimientoaccesible.blogspot.com/",
+    "originalUrl": "https://tecnoconocimientoaccesible.blogspot.com/2026/06/tca-tts-timmer-12-alarmas-utc-apagado.html",
+    "originalLanguage": "es",
+    "publishedAt": "2026-06-29T08:53:25.332Z",
+    "categories": [
+      "tecnologia-accesibilidad",
+      "programas-accesibles",
+      "windows"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "TCA TTS Timmer 1.2: Alarmas, UTC , Apagado programado y +!",
+        "summary": "Normal 0 false 21 false false false ES X-NONE X-NONE /* Style Definitions */ table.MsoNormalTable {mso-style-name:\"Tabla normal\"; mso-tstyle-rowband-size:0; mso-tstyle-colband-size:0; mso-style-noshow:yes; mso-style-priority:99; mso-style-parent:\"\"; mso-padding-alt:0cm 5.4pt 0cm 5.4pt; mso-para-margin-top:0cm; mso-para-margin-right:0cm; mso-para-margin-bottom:8.0pt; mso-para-margin-left:0cm; line-height:107%; mso-pagination:widow-orphan; font-size:11.0pt; font-family:\"Calibri\",sans-serif; mso-ascii-font-family:Calibri; mso-ascii-theme-font:minor-latin; mso-hansi-font-family:Calibri; mso-hansi-theme-font:minor-latin; mso-bidi-font-family:\"Times New Roman\"; mso-bidi-theme-font:minor-bidi; mso-fareast-language:EN-US;} Hola gente, ¿qué tal les va? Muy atentos. Hoy les traigo la actualización de TCA-TTS-TIMMER, nuestro querido reloj parlante para Windows, que llega a la versión 1.2 cargada de novedades muy importantes y funcionalidades útiles! Antes, para quienes no lo conozcan: ¿Qué es TCA-TTS-TIMMER? Es una pequeña utilidad desarrollada en Python que nos permite escuchar la hora cada 15 minutos, 30 minutos o cada hora, mediante un sonido y una voz TTS. Además, puede darnos la hora de muchos países de Latinoamérica y Europa, todo desde una interfaz sencilla, totalmente accesible y con atajos de teclado. Novedades en TCA-TTS-TIMMER 1.2 El reloj llega a la versión 1.2 con los siguientes cambios: • Hora Universal UTC Ahora el reloj incorpora un botón en la interfaz principal que te permite saber la Hora Universal UTC al instante. Disponible también mediante el atajo de teclado Alt+U. Muy útil para quienes trabajan con sistemas, servidores o simplemente necesitan la referencia horaria internacional. • Nueva voz: Español México (mx) Además de la voz español España, ahora incorporamos la voz español México (mx). Podrás elegir entre ambas desde el cuadro combinando \"Lenguaje de la voz\" en las opciones. Una voz clara y agradable que le da un toque diferente al reloj. • Alarmas ¡TCA-TTS-TIMMER ahora permite establecer alarmas! Desde el botón \"Alarmas\" en la interfaz principal, podrás gestionar una o varias alarmas al día, eligiendo la hora, el sonido y el número de repeticiones. Ideal para recordatorios, descansos o lo que necesites. • Apagado programado Otra función muy solicitada: el apagado programado. Puedes programar que tu PC se apague automáticamente después de un número determinado de horas y minutos. Perfecto para cuando dejas el equipo realizando una tarea por la noche o antes de salir de casa. También incluye un botón para cancelar el apagado si cambias de opinión. • Correcciones y mejoras internas Se realizaron varias correcciones y mejoras en el código para un funcionamiento más estable y eficiente. Compatibilidad El programa es compatible con Windows 10 en adelante, para 64 bits. En versiones antiguas de Windows, puede que necesites las librerías Visual Studio C++ (incluidas en la descarga). Tutorial: ⏰ TCA TTS Timmer 1.2: Alarmas, UTC , Apagado programado y +! He grabado un video tutorial donde muestro todas estas novedades en acción: • El nuevo botón de Hora UTC y su atajo Alt+U. • Cómo cambiar a la voz mexicana y escucharla anunciar la hora. • Cómo configurar y gestionar alarmas. • Cómo usar el apagado programado paso a paso. La descarga. Les dejaré en la descarga: • El audio tutorial (en los canales Odysse y YouTube estará en video tutorial). • El programa TCA-TTS-TIMMER 1.2 para 64 bits. • Las librerías Visual Studio C++. Espero que disfruten de esta nueva versión y les sea de gran utilidad. Sigo mejorando este reloj 100% accesible, gratuito y fácil de usar, y escucho sus sugerencias para futuras versiones. Un agradecimiento especial a todos los que probaron la versión anterior y aportaron sus ideas. Y ya sabes, Si te gusta este contenido, Apóyanos haciendo una donación: Dona aquí en PayPal. compártelo en: Facebook, X. Deja un comentario sobre esta entrada. Síguenos en X: Abajo tienes el botón. Suscríbete al blog: Ahora puedes unirte a nuestros grupos de WhatsApp o Telegram: Puedes escribir al mail del blog con tus datos si deseas ingresar a los mismos. Escucha todos nuestros audio tutoriales, cómodamente: Entrando desde aquí, a nuestro canal en YouTube. Ahora también, en nuestro canal en Odysse: Entra al canal de Tecnoconocimiento Accesible en Odysse. O si prefieres escúchanos en: Anchor: Escúchanos en Anchor. Ponte en contacto con nosotros, déjanos tus sugerencias, dudas, o comentarios, abajo tienes un sencillo formulario, o si lo prefieres, escríbenos al correo del blog: tecnoconocimientoaccesible@gmail.com Los aportes siempre serán bienvenidos. cuando nos escribas por uno de los medios con alguna sugerencia, se publicará con tu nombre. además, como ya se sabe, puedes publicar esta entrada en otro sitio, pero no te olvides citar la fuente. Saludos, y hasta otro post. Descarga aquí el tutorial. Descarga aquí el programa. Descarga aquí las librerías.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "nvaccess-in-process-5ad7fbf5621abc19",
     "type": "news",
     "sourceId": "nvaccess-in-process",
@@ -1637,6 +1913,36 @@
       "en": {
         "title": "Honor 600 Pro Review",
         "summary": "After spending more than five years with Samsung phones, the time has come to test out a phone from another brand. While not a flagship,…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "tecnoconocimiento-accesible-1a6aa1edd60a1a48",
+    "type": "news",
+    "sourceId": "tecnoconocimiento-accesible",
+    "sourceName": "TecnoConocimientoAccesible",
+    "sourceUrl": "https://tecnoconocimientoaccesible.blogspot.com/",
+    "originalUrl": "https://tecnoconocimientoaccesible.blogspot.com/2026/06/descargador-de-musica-accesible-142.html",
+    "originalLanguage": "es",
+    "publishedAt": "2026-06-22T08:42:24.732Z",
+    "categories": [
+      "tecnologia-accesibilidad",
+      "programas-accesibles",
+      "windows",
+      "jaws",
+      "nvda",
+      "apps-accesibles",
+      "proyectos-prototipos",
+      "movilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "Descargador de Música Accesible 1.4.2: Nueva Alternativa!",
+        "summary": "Normal 0 false 21 false false false ES X-NONE X-NONE /* Style Definitions */ table.MsoNormalTable {mso-style-name:\"Tabla normal\"; mso-tstyle-rowband-size:0; mso-tstyle-colband-size:0; mso-style-noshow:yes; mso-style-priority:99; mso-style-parent:\"\"; mso-padding-alt:0cm 5.4pt 0cm 5.4pt; mso-para-margin-top:0cm; mso-para-margin-right:0cm; mso-para-margin-bottom:8.0pt; mso-para-margin-left:0cm; line-height:107%; mso-pagination:widow-orphan; font-size:11.0pt; font-family:\"Calibri\",sans-serif; mso-ascii-font-family:Calibri; mso-ascii-theme-font:minor-latin; mso-hansi-font-family:Calibri; mso-hansi-theme-font:minor-latin; mso-bidi-font-family:\"Times New Roman\"; mso-bidi-theme-font:minor-bidi; mso-fareast-language:EN-US;} Hola gente, ¿qué tal les va? Descargador de Música Accesible 1.4.2 : Otra gran alternativa inclusiva para YouTube Introducción En el mundo actual, el contenido multimedia es parte fundamental de nuestro día a día. Para la comunidad de personas con discapacidad visual, contar con herramientas que permitan descargar y gestionar este contenido de forma autónoma es vital. Si bien ya existen en el ecosistema opciones consolidadas y muy queridas como TCA MediaDownloader, siempre es una excelente noticia recibir nuevas propuestas que enriquezcan nuestras opciones. Hoy queremos hablar de Descargador de Música Accesible, otra fantástica alternativa que se suma a la lista de herramientas diseñadas desde cero para garantizar una experiencia fluida, cómoda y sin barreras. Esta aplicación ha sido desarrollada por Nicolás Alfaro, programador y miembro del colectivo de personas con discapacidad visual, quien ha puesto su conocimiento al servicio de la comunidad. ¿Qué es Descargador de Música Accesible? Es una aplicación gratuita para Windows que permite bajar audio y video desde YouTube de manera sencilla y con total compatibilidad con lectores de pantalla. Actualmente en su versión 1.4.2, el programa destaca por su ligereza y por integrar soluciones prácticas —como un reproductor interno portable— que facilitan la navegación previa a la descarga. Al ser un proyecto creado por y para usuarios con discapacidad visual, cada ventana y comando está optimizado para responder exactamente a lo que la comunidad necesita, convirtiéndose en un complemento ideal para tu día a día digital. Características principales • Interfaz 100% accesible: Diseñada minuciosamente para funcionar a la perfección con NVDA y JAWS. Cada elemento, botón y cuadro de diálogo está correctamente etiquetado para una navegación fluida mediante el tabulador y atajos de teclado. • Buscador integrado de YouTube: No necesitas abrir el navegador. El programa incluye una pestaña de búsqueda directa que ofrece hasta 50 resultados, permitiéndote elegir el contenido exacto desde una lista cómoda y accesible. • Reproductor interno MPV: Una de las novedades más potentes de la versión 1.4.2. Incorpora un reproductor basado en MPV portable para escuchar el audio o ver el video antes de descargarlo, con controles adaptados y accesibles. • Variedad de formatos y calidades: Audio (MP3): Permite elegir entre calidades de 128, 256 y 320 kbps. Video (MP4). • Información detallada antes de descargar: Puedes verificar el título, duración, fecha de publicación y número de visualizaciones para asegurarte de que es el archivo correcto. • Historial de descargas: Un registro organizado y accesible desde el menú superior para revisar tus archivos obtenidos recientemente. Mantenimiento y actualización integrada: Como YouTube actualiza su plataforma constantemente, el programa incluye una opción en el menú de herramientas para actualizar las librerías de yt-dlp de forma automática, garantizando que el software nunca quede obsoleto. • Sistema de diagnóstico: Si experimentas fallos con el lector de pantalla o el reproductor, la app cuenta con una herramienta de diagnóstico que verifica el estado de NVDA y los módulos de Python. Puedes exportar este reporte para recibir soporte técnico de forma eficiente. Contacto y soporte El desarrollo de software accesible crece gracias a la retroalimentación de la comunidad. Si tienes sugerencias, comentarios o deseas reportar algún fallo, puedes ponerte en contacto directo con el desarrollador: Correo electrónico: alfaronico8@gmail.com Nota para el soporte: Se recomienda ser lo más detallado posible al describir cualquier incidencia o sugerencia para facilitar las futuras actualizaciones del programa. Tutorial: 🎧 Descargador de Música Accesible 1.4.2: Nueva Alternativa! En este tutorial, Nicolás nos mostrará como utilizar este programa, además todas sus funcionalidades. La descarga. Les dejaré en la descarga: • El audio tutorial (en los canales Odysse y YouTube estará en video tutorial). • El programa: Descargador de Música Accesible 1.4.2. Aquí Nicolás Alfaro nos propone otra alternativa para descargar contenido multimedia. Espero lo disfruten y les sea de utilidad. Y ya sabes, Si te gusta este contenido, Apóyanos haciendo una donación: Dona aquí en PayPal. compártelo en: Facebook, X. Deja un comentario sobre esta entrada. Síguenos en X: Abajo tienes el botón. Suscríbete al blog: Ahora puedes unirte a nuestros grupos de WhatsApp o Telegram: Puedes escribir al mail del blog con tus datos si deseas ingresar a los mismos. Escucha todos nuestros audio tutoriales, cómodamente: Entrando desde aquí, a nuestro canal en YouTube. Ahora también, en nuestro canal en Odysse: Entra al canal de Tecnoconocimiento Accesible en Odysse. O si prefieres escúchanos en: Anchor: Escúchanos en Anchor. Ponte en contacto con nosotros, déjanos tus sugerencias, dudas, o comentarios, abajo tienes un sencillo formulario, o si lo prefieres, escríbenos al correo del blog: tecnoconocimientoaccesible@gmail.com Los aportes siempre serán bienvenidos. cuando nos escribas por uno de los medios con alguna sugerencia, se publicará con tu nombre. además, como ya se sabe, puedes publicar esta entrada en otro sitio, pero no te olvides citar la fuente. Saludos, y hasta otro post. Descarga aquí el tutorial. Descarga aquí el programa.",
         "body": ""
       }
     },

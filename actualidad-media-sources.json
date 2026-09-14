@@ -105,6 +105,126 @@
     "adapter": "youtube-handle",
     "youtubeHandle": "@lammordida",
     "enabled": true,
-    "maxItems": 8
+    "maxItems": 3
+  },
+  {
+    "id": "imanu-mx",
+    "name": "iManu Mx",
+    "homepage": "https://www.youtube.com/@imanumx",
+    "section": "technology",
+    "type": "video",
+    "lang": "es",
+    "adapter": "youtube-handle",
+    "youtubeHandle": "@imanumx",
+    "enabled": true,
+    "maxItems": 3
+  },
+  {
+    "id": "marcianotech",
+    "name": "MarcianoTech",
+    "homepage": "https://www.youtube.com/@marcianotech",
+    "section": "technology",
+    "type": "video",
+    "lang": "es",
+    "adapter": "youtube-handle",
+    "youtubeHandle": "@marcianotech",
+    "enabled": true,
+    "maxItems": 3
+  },
+  {
+    "id": "topes-de-gama",
+    "name": "Topes de Gama",
+    "homepage": "https://www.youtube.com/@topesdegama",
+    "section": "technology",
+    "type": "video",
+    "lang": "es",
+    "adapter": "youtube-handle",
+    "youtubeHandle": "@topesdegama",
+    "enabled": true,
+    "maxItems": 3
+  },
+  {
+    "id": "me-llaman-geek",
+    "name": "Me llaman Geek",
+    "homepage": "https://www.youtube.com/@MellamanGeek",
+    "section": "technology",
+    "type": "video",
+    "lang": "es",
+    "adapter": "youtube-handle",
+    "youtubeHandle": "@MellamanGeek",
+    "enabled": true,
+    "maxItems": 3
+  },
+  {
+    "id": "chicageek",
+    "name": "ChicaGeek",
+    "homepage": "https://www.youtube.com/@chicageek",
+    "section": "technology",
+    "type": "video",
+    "lang": "es",
+    "adapter": "youtube-handle",
+    "youtubeHandle": "@chicageek",
+    "enabled": true,
+    "maxItems": 3
+  },
+  {
+    "id": "tuapplemundo",
+    "name": "TuAppleMundo",
+    "homepage": "https://www.youtube.com/@tuapplemundo",
+    "section": "technology",
+    "type": "video",
+    "lang": "es",
+    "adapter": "youtube-handle",
+    "youtubeHandle": "@tuapplemundo",
+    "enabled": true,
+    "maxItems": 3
+  },
+  {
+    "id": "isenacode",
+    "name": "iSenaCode",
+    "homepage": "https://www.youtube.com/@isenacodetv",
+    "section": "technology",
+    "type": "video",
+    "lang": "es",
+    "adapter": "youtube-handle",
+    "youtubeHandle": "@isenacodetv",
+    "enabled": true,
+    "maxItems": 3
+  },
+  {
+    "id": "xataka",
+    "name": "Xataka TV",
+    "homepage": "https://www.youtube.com/@XatakaTV",
+    "section": "technology",
+    "type": "video",
+    "lang": "es",
+    "adapter": "youtube-handle",
+    "youtubeHandle": "@XatakaTV",
+    "enabled": true,
+    "maxItems": 3
+  },
+  {
+    "id": "migue-baena-ia",
+    "name": "Migue Baena IA",
+    "homepage": "https://www.youtube.com/@MigueBaenaIA",
+    "section": "technology",
+    "type": "video",
+    "lang": "es",
+    "adapter": "youtube-handle",
+    "youtubeHandle": "@MigueBaenaIA",
+    "enabled": true,
+    "maxItems": 3
+  },
+  {
+    "id": "urban-tecno",
+    "name": "Urban Tecno",
+    "homepage": "https://www.youtube.com/@urbantecno",
+    "section": "technology",
+    "type": "video",
+    "lang": "es",
+    "adapter": "youtube-handle",
+    "youtubeHandle": "@urbantecno",
+    "enabled": true,
+    "maxItems": 3
   }
 ]

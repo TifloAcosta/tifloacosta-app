@@ -21,7 +21,7 @@ function response(text, ok = true) {
   return { ok, status: ok ? 200 : 503, text: async () => text };
 }
 
-test('one failed source does not discard valid stories from another source', async () => {
+test('one failed source does not discard valid logical stories from another source', async () => {
   const sources = [source(), source({ id: 'source-b', feedUrl: 'https://example.org/feed.xml', homepage: 'https://example.org/' })];
   const fetchFn = async url => {
     if (url.includes('example.org')) throw new Error('offline');
@@ -31,6 +31,9 @@ test('one failed source does not discard valid stories from another source', asy
   const result = await syncActualidad({ sources, editorial: [], fetchFn, now: TEST_NOW });
   assert.equal(result.stories.length, 1);
   assert.deepEqual(result.failedSources, ['source-b']);
+  assert.equal(result.stories[0].originalLanguage, 'en');
+  assert.equal(result.stories[0].locales.en.title, 'Story');
+  assert.equal(result.stories[0].locales.es, undefined);
 });
 
 test('temporary source failures are retried before the source is discarded', async () => {
@@ -63,7 +66,7 @@ test('duplicate canonical URLs appear only once', async () => {
   assert.equal(result.stories[0].originalUrl, 'https://example.com/story');
 });
 
-test('CTI HTML sources are normalized into the shared feed', async () => {
+test('CTI HTML sources are normalized into the shared logical feed', async () => {
   const html = `
     <h2><a href="/noticias/app-agosto">Evaluaciones de APP actualizadas en agosto</a></h2>
     <span>11/09/2026</span>
@@ -81,8 +84,8 @@ test('CTI HTML sources are normalized into the shared feed', async () => {
   const result = await syncActualidad({ sources: [cti], editorial: [], fetchFn: async () => response(html), now: TEST_NOW });
   assert.equal(result.stories.length, 1);
   assert.equal(result.stories[0].sourceId, 'cti-once');
-  assert.equal(result.stories[0].lang, 'es');
-  assert.equal(result.stories[0].title, 'Evaluaciones de APP actualizadas en agosto');
+  assert.equal(result.stories[0].originalLanguage, 'es');
+  assert.equal(result.stories[0].locales.es.title, 'Evaluaciones de APP actualizadas en agosto');
 });
 
 test('per-source limits prevent one source from flooding the feed', async () => {
@@ -99,7 +102,7 @@ test('per-source limits prevent one source from flooding the feed', async () => 
     now: TEST_NOW
   });
 
-  assert.deepEqual(result.stories.map(item => item.title), ['Newest', 'Middle']);
+  assert.deepEqual(result.stories.map(item => item.locales.en.title), ['Newest', 'Middle']);
 });
 
 test('output order is deterministic regardless of source order', async () => {
@@ -112,7 +115,7 @@ test('output order is deterministic regardless of source order', async () => {
   const first = await syncActualidad({ sources: [older, newer], editorial: [], fetchFn, now: TEST_NOW });
   const second = await syncActualidad({ sources: [newer, older], editorial: [], fetchFn, now: TEST_NOW });
   assert.deepEqual(first.stories, second.stories);
-  assert.deepEqual(first.stories.map(item => item.title), ['New', 'Old']);
+  assert.deepEqual(first.stories.map(item => item.locales.en.title), ['New', 'Old']);
 });
 
 test('stories older than 90 days are excluded from the shared feed', async () => {
@@ -128,22 +131,30 @@ test('stories older than 90 days are excluded from the shared feed', async () =>
     now: TEST_NOW
   });
 
-  assert.deepEqual(result.stories.map(item => item.title), ['Recent']);
+  assert.deepEqual(result.stories.map(item => item.locales.en.title), ['Recent']);
 });
 
-test('withheld editorial stories are excluded and valid adaptations remain public', async () => {
+test('withheld editorial stories are excluded and valid bilingual adaptations remain public', async () => {
   const fetchFn = async () => response(rss());
   const first = await syncActualidad({ sources: [source()], editorial: [], fetchFn, now: TEST_NOW });
   const id = first.stories[0].id;
 
   const adapted = await syncActualidad({
     sources: [source()],
-    editorial: [{ id, editorialState: 'adapted', lang: 'es', title: 'Historia adaptada', body: 'Texto propio.' }],
+    editorial: [{
+      id,
+      editorialState: 'adapted',
+      locales: {
+        es: { title: 'Historia adaptada', summary: 'Resumen propio', body: 'Texto propio.' },
+        en: { title: 'Adapted story', summary: 'Own summary', body: 'Own text.' }
+      }
+    }],
     fetchFn,
     now: TEST_NOW
   });
   assert.equal(adapted.stories[0].editorialState, 'adapted');
-  assert.equal(adapted.stories[0].lang, 'es');
+  assert.equal(adapted.stories[0].locales.es.title, 'Historia adaptada');
+  assert.equal(adapted.stories[0].locales.en.title, 'Adapted story');
 
   const withheld = await syncActualidad({
     sources: [source()],

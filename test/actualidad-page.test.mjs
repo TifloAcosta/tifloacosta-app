@@ -18,12 +18,14 @@ test('Actualidad page has semantic navigation, filters and a quiet status region
   assert.doesNotMatch(html, /autofocus/i);
 });
 
-test('Actualidad page loads one shared feed and the shared contract', async () => {
+test('Actualidad page loads one shared feed and resolves interface language through the shared core', async () => {
   const html = await read('actualidad.html');
   const js = await read('actualidad.js');
   assert.match(html, /actualidad-core\.js/);
   assert.match(html, /actualidad\.js/);
+  assert.match(js, /core\.publicStories\(stories, lang\)/);
   assert.match(js, /fetch\(['"]actualidad\.json['"]/);
+  assert.equal((js.match(/fetch\(['"]actualidad\.json['"]/g) || []).length, 1);
   assert.doesNotMatch(js, /setInterval|setTimeout/);
 });
 
@@ -34,7 +36,38 @@ test('source-only stories never expose a TifloAcosta reader action', async () =>
   assert.equal(actions[0].label, 'Abrir fuente original');
 });
 
-test('adapted stories expose reader and original source actions in both languages', async () => {
+test('one bilingual logical item exposes natural reader actions in Spanish and English', () => {
+  const core = require('../actualidad-core.js');
+  const view = require('../actualidad.js');
+  const item = {
+    id: 'bilingual-story',
+    type: 'news',
+    sourceId: 'applevis-blog',
+    sourceName: 'AppleVis Blog',
+    sourceUrl: 'https://www.applevis.com/blog',
+    originalUrl: 'https://www.applevis.com/blog/example',
+    originalLanguage: 'en',
+    publishedAt: '2026-09-14T10:00:00Z',
+    categories: ['apple'],
+    editorialState: 'adapted',
+    featuredRank: null,
+    locales: {
+      es: { title: 'Título en español', summary: 'Resumen', body: 'Texto en español.' },
+      en: { title: 'English title', summary: 'Summary', body: 'English text.' }
+    },
+    media: null
+  };
+
+  const es = core.localizedStory(item, 'es');
+  const en = core.localizedStory(item, 'en');
+  assert.equal(es.id, en.id);
+  assert.equal(es.title, 'Título en español');
+  assert.equal(en.title, 'English title');
+  assert.deepEqual(view.availableActions(es, 'es').map(action => action.label), ['Leer en TifloAcosta', 'Abrir fuente original']);
+  assert.deepEqual(view.availableActions(en, 'en').map(action => action.label), ['Read on TifloAcosta', 'Open original source']);
+});
+
+test('adapted flat stories expose reader and original source actions in both languages', async () => {
   const view = require('../actualidad.js');
   const es = view.availableActions({ editorialState: 'adapted', body: 'Texto', originalUrl: 'https://example.com/story' }, 'es');
   const en = view.availableActions({ editorialState: 'adapted', body: 'Text', originalUrl: 'https://example.com/story' }, 'en');

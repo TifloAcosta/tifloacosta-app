@@ -19,41 +19,42 @@ const sourceStory = overrides => ({
   ...overrides
 });
 
-test('source-only stories remain source-only when no editorial record exists', () => {
+test('source-only stories become one logical source-language item when no editorial record exists', () => {
   const [result] = mergeEditorial([sourceStory()], []);
   assert.equal(result.editorialState, 'source-only');
-  assert.equal(result.body, '');
+  assert.equal(result.originalLanguage, 'en');
+  assert.equal(result.locales.en.title, 'Original title');
+  assert.equal(result.locales.es, undefined);
 });
 
-test('an adaptation is exposed only when it has a non-empty body', () => {
+test('an adapted editorial record produces one logical item with both locales', () => {
   const [result] = mergeEditorial([sourceStory()], [{
     id: 'story-1',
     editorialState: 'adapted',
-    lang: 'es',
-    title: 'Título adaptado',
-    summary: 'Resumen propio',
-    body: 'Texto propio de TifloAcosta.',
+    locales: {
+      es: { title: 'Título adaptado', summary: 'Resumen propio', body: 'Texto propio.' },
+      en: { title: 'Adapted title', summary: 'Own summary', body: 'Own text.' }
+    },
     categories: ['apple', 'tecnologia-accesibilidad'],
     featuredRank: 1
   }]);
 
   assert.equal(result.editorialState, 'adapted');
-  assert.equal(result.lang, 'es');
-  assert.equal(result.body, 'Texto propio de TifloAcosta.');
+  assert.equal(result.originalLanguage, 'en');
+  assert.equal(result.locales.es.title, 'Título adaptado');
+  assert.equal(result.locales.en.title, 'Adapted title');
   assert.deepEqual(result.categories, ['apple', 'tecnologia-accesibilidad']);
   assert.equal(result.featuredRank, 1);
 });
 
-test('empty adapted records are downgraded to source-only', () => {
+test('an incomplete bilingual adaptation is not published as adapted', () => {
   const [result] = mergeEditorial([sourceStory()], [{
     id: 'story-1',
     editorialState: 'adapted',
-    title: 'No debe publicarse como adaptación',
-    body: '   '
+    locales: { es: { title: 'Solo español', body: 'Texto.' } }
   }]);
 
-  assert.equal(result.editorialState, 'source-only');
-  assert.equal(result.body, '');
+  assert.notEqual(result.editorialState, 'adapted');
 });
 
 test('editorial records can match by canonical original URL', () => {

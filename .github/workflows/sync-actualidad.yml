@@ -12,6 +12,7 @@ on:
       - 'actualidad-editorial.json'
       - 'scripts/actualidad-*.mjs'
       - 'scripts/sync-actualidad.mjs'
+      - 'scripts/sync-actualidad-apps.mjs'
       - 'scripts/validate-actualidad-discovery.mjs'
       - '.github/workflows/sync-actualidad.yml'
   schedule:
@@ -54,6 +55,9 @@ jobs:
       - name: Validate discovery sources
         run: node scripts/validate-actualidad-discovery.mjs
 
+      - name: Synchronize Accessible apps
+        run: node scripts/sync-actualidad-apps.mjs
+
       - name: Run tests
         run: npm test
 
@@ -78,6 +82,9 @@ jobs:
       - name: Synchronize Actualidad
         run: node scripts/sync-actualidad.mjs
 
+      - name: Synchronize Accessible apps
+        run: node scripts/sync-actualidad-apps.mjs
+
       - name: Run tests
         run: npm test
 
@@ -85,7 +92,7 @@ jobs:
         id: changes
         shell: bash
         run: |
-          if [ -n "$(git status --porcelain -- actualidad.json)" ]; then
+          if [ -n "$(git status --porcelain -- actualidad.json actualidad-apps.json)" ]; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
           else
             echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -97,7 +104,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add actualidad.json
+          git add actualidad.json actualidad-apps.json
           git commit -m "chore: sync Actualidad"
           git push
 

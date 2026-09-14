@@ -45,11 +45,22 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       brand: $('.brand'),
       heading: $('#actualidad-heading'),
       intro: $('#actualidad-intro'),
+      sectionsNav: $('#actualidad-sections'),
+      sectionNewsLink: $('#section-news-link'),
+      sectionAppsLink: $('#section-apps-link'),
+      newsHeading: $('#news-heading'),
       categoryLabel: $('#news-category-label'),
       category: $('#news-category'),
       status: $('#news-status'),
       list: $('#news-list'),
       browser: $('#news-browser'),
+      appsBrowser: $('#apps-browser'),
+      appsHeading: $('#apps-heading'),
+      appsIntro: $('#apps-intro'),
+      appsPlatformLabel: $('#apps-platform-label'),
+      appsPlatform: $('#apps-platform'),
+      appsStatus: $('#apps-status'),
+      appsList: $('#apps-list'),
       reader: $('#news-reader'),
       readerBackTop: $('#reader-back-top'),
       readerBackBottom: $('#reader-back-bottom'),
@@ -69,17 +80,28 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         brand: 'TifloAcosta, inicio',
         heading: 'Actualidad TifloAcosta',
         intro: 'Noticias y novedades de accesibilidad y tecnología seleccionadas para llegar a lo importante sin tener que apartar ruido por el camino.',
+        sections: 'Secciones de Actualidad',
+        news: 'Noticias',
+        apps: 'Apps accesibles',
+        appsIntro: 'Aplicaciones accesibles descubiertas en fuentes especializadas. Cuando una fuente no publica una fecha fiable, TifloAcosta no inventa una.',
         categoryLabel: 'Filtrar por categoría',
         allCategories: 'Todas las categorías',
+        platformLabel: 'Filtrar por plataforma',
+        allPlatforms: 'Todas las plataformas',
         home: 'Volver al inicio',
         back: 'Volver a Actualidad',
         original: 'Abrir fuente original',
+        appOriginal: 'Abrir ficha en la fuente',
         empty: 'No hay noticias disponibles en este momento.',
+        appsEmpty: 'No hay aplicaciones disponibles en este momento.',
         error: 'No se pudo cargar Actualidad. Inténtalo de nuevo más tarde.',
+        appsError: 'No se pudo cargar la sección de Apps accesibles. Inténtalo de nuevo más tarde.',
         count: n => `${n} noticia${n === 1 ? '' : 's'} disponible${n === 1 ? '' : 's'}.`,
+        appsCount: n => `${n} aplicación${n === 1 ? '' : 'es'} disponible${n === 1 ? '' : 's'}.`,
         footer: 'TifloAcosta · Actualidad.',
         source: 'Fuente',
-        categories: 'Categorías'
+        categories: 'Categorías',
+        platform: 'Plataforma'
       },
       en: {
         documentTitle: 'TifloAcosta News',
@@ -87,17 +109,28 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         brand: 'TifloAcosta, home',
         heading: 'TifloAcosta News',
         intro: 'Accessibility and technology news selected to help you reach what matters without having to clear away the noise first.',
+        sections: 'News sections',
+        news: 'News',
+        apps: 'Accessible apps',
+        appsIntro: 'Accessible apps discovered through specialist sources. When a source does not provide a reliable publication date, TifloAcosta does not invent one.',
         categoryLabel: 'Filter by category',
         allCategories: 'All categories',
+        platformLabel: 'Filter by platform',
+        allPlatforms: 'All platforms',
         home: 'Back to home',
         back: 'Back to News',
         original: 'Open original source',
+        appOriginal: 'Open app at source',
         empty: 'There are no news items available right now.',
+        appsEmpty: 'There are no accessible apps available right now.',
         error: 'News could not be loaded. Please try again later.',
+        appsError: 'The Accessible apps section could not be loaded. Please try again later.',
         count: n => `${n} news item${n === 1 ? '' : 's'} available.`,
+        appsCount: n => `${n} app${n === 1 ? '' : 's'} available.`,
         footer: 'TifloAcosta · News.',
         source: 'Source',
-        categories: 'Categories'
+        categories: 'Categories',
+        platform: 'Platform'
       }
     };
 
@@ -121,6 +154,8 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     };
 
     let stories = [];
+    let apps = [];
+    let appsLoadFailed = false;
     let readerOpener = null;
     let lang = readStoredLanguage();
 
@@ -157,6 +192,17 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       return bits.join(' · ');
     }
 
+    function appMetaText(app) {
+      const c = copy[lang];
+      const bits = [`${c.source}: ${app.sourceName}`];
+      if (app.platform) bits.push(`${c.platform}: ${app.platform}`);
+      if (app.publishedAt) {
+        const date = formatDate(app.publishedAt);
+        if (date) bits.push(date);
+      }
+      return bits.join(' · ');
+    }
+
     function applyCopy() {
       const c = copy[lang];
       document.documentElement.lang = lang;
@@ -165,7 +211,14 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       els.brand.setAttribute('aria-label', c.brand);
       els.heading.textContent = c.heading;
       els.intro.textContent = c.intro;
+      els.sectionsNav.setAttribute('aria-label', c.sections);
+      els.sectionNewsLink.textContent = c.news;
+      els.sectionAppsLink.textContent = c.apps;
+      els.newsHeading.textContent = c.news;
       els.categoryLabel.textContent = c.categoryLabel;
+      els.appsHeading.textContent = c.apps;
+      els.appsIntro.textContent = c.appsIntro;
+      els.appsPlatformLabel.textContent = c.platformLabel;
       els.homeTop.textContent = c.home;
       els.homeBottom.textContent = c.home;
       els.readerBackTop.textContent = c.back;
@@ -194,9 +247,29 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       els.category.value = categories.includes(selected) ? selected : '';
     }
 
+    function rebuildPlatforms() {
+      const selected = els.appsPlatform.value;
+      const platforms = [...new Set(apps.map(app => String(app.platform || '').trim()).filter(Boolean))]
+        .sort((a, b) => a.localeCompare(b, lang === 'es' ? 'es' : 'en'));
+      els.appsPlatform.replaceChildren();
+      const all = document.createElement('option');
+      all.value = '';
+      all.textContent = copy[lang].allPlatforms;
+      els.appsPlatform.append(all);
+      for (const platform of platforms) {
+        const option = document.createElement('option');
+        option.value = platform;
+        option.textContent = platform;
+        els.appsPlatform.append(option);
+      }
+      els.appsPlatform.value = platforms.includes(selected) ? selected : '';
+    }
+
     function closeReader({ restoreFocus = true } = {}) {
       els.reader.hidden = true;
+      els.sectionsNav.hidden = false;
       els.browser.hidden = false;
+      els.appsBrowser.hidden = false;
       if (restoreFocus && readerOpener && readerOpener.isConnected) readerOpener.focus();
       readerOpener = null;
     }
@@ -204,7 +277,9 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     function openReader(story, opener) {
       if (story.editorialState !== 'adapted' || !String(story.body || '').trim()) return;
       readerOpener = opener;
+      els.sectionsNav.hidden = true;
       els.browser.hidden = true;
+      els.appsBrowser.hidden = true;
       els.reader.hidden = false;
       els.readerTitle.textContent = story.title;
       els.readerMeta.textContent = metaText(story);
@@ -239,7 +314,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         const card = document.createElement('div');
         card.className = 'news-item';
 
-        const title = document.createElement('h2');
+        const title = document.createElement('h3');
         title.textContent = story.title;
         card.append(title);
 
@@ -280,11 +355,71 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       els.status.textContent = c.count(visible.length);
     }
 
+    function renderApps() {
+      const c = copy[lang];
+      const selected = els.appsPlatform.value;
+      const visible = selected ? apps.filter(app => app.platform === selected) : apps;
+      els.appsList.replaceChildren();
+
+      if (appsLoadFailed) {
+        const error = document.createElement('p');
+        error.className = 'no-results';
+        error.textContent = c.appsError;
+        els.appsList.append(error);
+        els.appsStatus.textContent = '';
+        return;
+      }
+
+      if (!visible.length) {
+        const empty = document.createElement('p');
+        empty.className = 'no-results';
+        empty.textContent = c.appsEmpty;
+        els.appsList.append(empty);
+        els.appsStatus.textContent = c.appsCount(0);
+        return;
+      }
+
+      for (const app of visible) {
+        const card = document.createElement('div');
+        card.className = 'news-item';
+
+        const title = document.createElement('h3');
+        title.textContent = app.title;
+        card.append(title);
+
+        const meta = document.createElement('p');
+        meta.className = 'resource-meta';
+        meta.textContent = appMetaText(app);
+        card.append(meta);
+
+        if (app.summary && (!app.lang || app.lang === lang)) {
+          const summary = document.createElement('p');
+          summary.textContent = app.summary;
+          card.append(summary);
+        }
+
+        const actions = document.createElement('div');
+        actions.className = 'resource-actions';
+        const link = document.createElement('a');
+        link.className = 'button-link';
+        link.href = app.originalUrl;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = c.appOriginal;
+        actions.append(link);
+        card.append(actions);
+        els.appsList.append(card);
+      }
+      els.appsStatus.textContent = c.appsCount(visible.length);
+    }
+
     function render() {
       applyCopy();
       if (!els.reader.hidden) closeReader({ restoreFocus: false });
       rebuildCategories();
       renderList();
+      rebuildPlatforms();
+      renderApps();
     }
 
     function setLanguage(value) {
@@ -297,10 +432,14 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     els.langEs.addEventListener('click', () => setLanguage('es'));
     els.langEn.addEventListener('click', () => setLanguage('en'));
     els.category.addEventListener('change', renderList);
+    els.appsPlatform.addEventListener('change', renderApps);
     els.readerBackTop.addEventListener('click', () => closeReader());
     els.readerBackBottom.addEventListener('click', () => closeReader());
 
     applyCopy();
+    rebuildPlatforms();
+    renderApps();
+
     fetch('actualidad.json', { cache: 'no-cache' })
       .then(response => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -320,6 +459,24 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         error.textContent = copy[lang].error;
         els.list.append(error);
         els.status.textContent = '';
+      });
+
+    fetch('actualidad-apps.json', { cache: 'no-cache' })
+      .then(response => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      })
+      .then(data => {
+        apps = Array.isArray(data) ? data : [];
+        appsLoadFailed = false;
+        rebuildPlatforms();
+        renderApps();
+      })
+      .catch(() => {
+        apps = [];
+        appsLoadFailed = true;
+        rebuildPlatforms();
+        renderApps();
       });
   }, { once: true });
 }

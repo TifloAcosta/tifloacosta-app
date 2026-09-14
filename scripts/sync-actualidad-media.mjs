@@ -125,11 +125,13 @@ export async function buildMediaCatalog({ sources = sourcesFile, fetchImpl = fet
   for (const source of enabled) {
     try {
       const raw = await fetchMediaSource(source, fetchImpl, env);
+      const normalized = raw
+        .slice(0, Math.max(1, Number(source.maxItems) || 8))
+        .map(entry => normalizeMediaItem(entry, source))
+        .filter(Boolean);
+      if (!normalized.length) throw new Error('No valid multimedia items parsed');
       successes += 1;
-      for (const entry of raw.slice(0, Math.max(1, Number(source.maxItems) || 8))) {
-        const normalized = normalizeMediaItem(entry, source);
-        if (normalized) items.push(normalized);
-      }
+      items.push(...normalized);
     } catch (error) {
       failures.push({ sourceId: source.id, message: error?.message || String(error) });
     }
@@ -139,6 +141,12 @@ export async function buildMediaCatalog({ sources = sourcesFile, fetchImpl = fet
 
   const retained = retainRecentMedia(dedupeMediaItems(items), now);
   const merged = mergeMediaEditorial(retained, editorial);
+  const requiredSections = [...new Set(enabled.map(source => source.section === 'technology' ? 'technology' : 'accessibility'))];
+  for (const section of requiredSections) {
+    if (!merged.some(item => item.section === section)) {
+      throw new Error(`Multimedia section unavailable: ${section}`);
+    }
+  }
   const ordered = orderMediaItems(merged);
   return { items: ordered, failures };
 }

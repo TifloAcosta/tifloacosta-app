@@ -63,6 +63,45 @@ test('duplicate canonical URLs appear only once', async () => {
   assert.equal(result.stories[0].originalUrl, 'https://example.com/story');
 });
 
+test('CTI HTML sources are normalized into the shared feed', async () => {
+  const html = `
+    <h2><a href="/noticias/app-agosto">Evaluaciones de APP actualizadas en agosto</a></h2>
+    <span>11/09/2026</span>
+    <p>Nuevas evaluaciones de aplicaciones accesibles.</p>`;
+  const cti = source({
+    id: 'cti-once',
+    name: 'CTI de la ONCE',
+    homepage: 'https://cti.once.es/',
+    feedUrl: 'https://cti.once.es/noticias',
+    format: 'cti-html',
+    lang: 'es',
+    categories: ['tecnologia-accesibilidad']
+  });
+
+  const result = await syncActualidad({ sources: [cti], editorial: [], fetchFn: async () => response(html), now: TEST_NOW });
+  assert.equal(result.stories.length, 1);
+  assert.equal(result.stories[0].sourceId, 'cti-once');
+  assert.equal(result.stories[0].lang, 'es');
+  assert.equal(result.stories[0].title, 'Evaluaciones de APP actualizadas en agosto');
+});
+
+test('per-source limits prevent one source from flooding the feed', async () => {
+  const xml = `<?xml version="1.0"?><rss><channel>
+    <item><title>Newest</title><link>https://example.com/newest</link><pubDate>Sun, 13 Sep 2026 12:00:00 GMT</pubDate><description>Newest</description></item>
+    <item><title>Middle</title><link>https://example.com/middle</link><pubDate>Sat, 12 Sep 2026 12:00:00 GMT</pubDate><description>Middle</description></item>
+    <item><title>Oldest</title><link>https://example.com/oldest</link><pubDate>Fri, 11 Sep 2026 12:00:00 GMT</pubDate><description>Oldest</description></item>
+  </channel></rss>`;
+
+  const result = await syncActualidad({
+    sources: [source({ maxItems: 2 })],
+    editorial: [],
+    fetchFn: async () => response(xml),
+    now: TEST_NOW
+  });
+
+  assert.deepEqual(result.stories.map(item => item.title), ['Newest', 'Middle']);
+});
+
 test('output order is deterministic regardless of source order', async () => {
   const newer = source({ id: 'newer', feedUrl: 'https://new.example/feed.xml', homepage: 'https://new.example/' });
   const older = source({ id: 'older', feedUrl: 'https://old.example/feed.xml', homepage: 'https://old.example/' });

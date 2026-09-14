@@ -18,6 +18,7 @@ on:
       - 'scripts/sync-actualidad-media.mjs'
       - 'scripts/validate-actualidad-discovery.mjs'
       - 'test/actualidad-media-*.test.mjs'
+      - 'docs/actualidad-multimedia-candidates.md'
       - '.github/workflows/sync-actualidad.yml'
   schedule:
     - cron: '17 * * * *'

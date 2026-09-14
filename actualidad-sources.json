@@ -1,7 +1,7 @@
 [
   {
     "id": "applevis-apps",
-    "name": "AppleVis",
+    "name": "AppleVis Apps",
     "homepage": "https://www.applevis.com/",
     "feedUrl": "https://www.applevis.com/feed/apps.xml",
     "lang": "en",
@@ -10,7 +10,7 @@
   },
   {
     "id": "applevis-blog",
-    "name": "AppleVis",
+    "name": "AppleVis Blog",
     "homepage": "https://www.applevis.com/blog",
     "feedUrl": "https://www.applevis.com/feed/blog.xml",
     "lang": "en",
@@ -73,6 +73,36 @@
     "lang": "es",
     "categories": ["tecnologia-accesibilidad"],
     "maxItems": 6,
+    "enabled": true
+  },
+  {
+    "id": "tecnoconocimiento-accesible",
+    "name": "TecnoConocimientoAccesible",
+    "homepage": "https://tecnoconocimientoaccesible.blogspot.com/",
+    "feedUrl": "https://tecnoconocimientoaccesible.blogspot.com/feeds/posts/default",
+    "lang": "es",
+    "categories": ["tecnologia-accesibilidad", "programas-accesibles"],
+    "maxItems": 8,
+    "enabled": true
+  },
+  {
+    "id": "accytec",
+    "name": "ACCYTEC - Accesibilidad y Tecnología",
+    "homepage": "https://accesibilidadytecnologia.blogspot.com/",
+    "feedUrl": "https://accesibilidadytecnologia.blogspot.com/feeds/posts/default",
+    "lang": "es",
+    "categories": ["tecnologia-accesibilidad"],
+    "maxItems": 6,
+    "enabled": true
+  },
+  {
+    "id": "nvda-es",
+    "name": "NVDA en español",
+    "homepage": "https://nvda.es/",
+    "feedUrl": "https://nvda.es/feed/",
+    "lang": "es",
+    "categories": ["nvda", "windows", "tecnologia-accesibilidad"],
+    "maxItems": 8,
     "enabled": true
   }
 ]

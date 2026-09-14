@@ -8,9 +8,11 @@ on:
     paths:
       - 'actualidad-core.js'
       - 'actualidad-sources.json'
+      - 'actualidad-discovery-sources.json'
       - 'actualidad-editorial.json'
       - 'scripts/actualidad-*.mjs'
       - 'scripts/sync-actualidad.mjs'
+      - 'scripts/validate-actualidad-discovery.mjs'
       - '.github/workflows/sync-actualidad.yml'
   schedule:
     - cron: '17 * * * *'
@@ -48,6 +50,9 @@ jobs:
             echo 'One or more configured Actualidad sources are unavailable during validation.' >&2
             exit 1
           fi
+
+      - name: Validate discovery sources
+        run: node scripts/validate-actualidad-discovery.mjs
 
       - name: Run tests
         run: npm test

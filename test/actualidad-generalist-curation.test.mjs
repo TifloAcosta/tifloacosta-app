@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { syncActualidad } from '../scripts/sync-actualidad.mjs';
 
+// Regression coverage for broad English technology feeds.
 const TEST_NOW = new Date('2026-09-14T18:00:00Z');
 const sources = JSON.parse(await readFile(new URL('../actualidad-sources.json', import.meta.url), 'utf8'));
 const byId = new Map(sources.map(source => [source.id, source]));

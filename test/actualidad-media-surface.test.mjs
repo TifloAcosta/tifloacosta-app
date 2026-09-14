@@ -25,12 +25,19 @@ test('multimedia loads independently from news and apps without autoplay', async
   assert.doesNotMatch(js, /autoplay=1|\.play\(\)/);
 });
 
-test('multimedia rendering uses source section as authoritative and keeps external source access', async () => {
+test('multimedia rendering keeps source section authoritative and external source access', async () => {
   const js = await read('actualidad-media.js');
-  assert.match(js, /item\.section === 'technology'/);
-  assert.match(js, /item\.section === 'accessibility'/);
+  assert.match(js, /items\.filter\(item => item\.section === section\)/);
+  assert.match(js, /renderSection\('accessibility'/);
+  assert.match(js, /renderSection\('technology'/);
   assert.match(js, /mediaOriginal/);
   assert.match(js, /originalLanguage/);
+});
+
+test('audio uses native controls without a redundant play toggle', async () => {
+  const js = await read('actualidad-media.js');
+  assert.match(js, /item\.type === 'audio' && item\.mediaUrl/);
+  assert.doesNotMatch(js, /\(item\.type === 'video' && item\.embedUrl\) \|\| \(item\.type === 'audio' && item\.mediaUrl\)/);
 });
 
 test('opening a news reader hides multimedia and returning restores all browsers', async () => {

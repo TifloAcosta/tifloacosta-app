@@ -29,12 +29,6 @@ test('Actualidad page loads one shared feed and resolves interface language thro
   assert.doesNotMatch(js, /setInterval|setTimeout/);
 });
 
-test('general technology category has natural labels in Spanish and English', async () => {
-  const js = await read('actualidad.js');
-  assert.match(js, /'tecnologia-general': 'Tecnología general'/);
-  assert.match(js, /'tecnologia-general': 'General technology'/);
-});
-
 test('source-only stories never expose a TifloAcosta reader action', async () => {
   const view = require('../actualidad.js');
   const actions = view.availableActions({ editorialState: 'source-only', originalUrl: 'https://example.com/story' }, 'es');

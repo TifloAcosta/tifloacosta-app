@@ -1,5 +1,42 @@
 [
   {
+    "id": "conticgo-7016f302d4b6d8c2",
+    "lang": "es",
+    "title": "Los nuevos modelos de Gemini apuntan a una inteligencia artificial más útil para las personas con baja visión",
+    "sourceId": "conticgo",
+    "sourceName": "Conticgo",
+    "sourceUrl": "https://conticgo.net/",
+    "originalUrl": "https://conticgo.net/los-nuevos-modelos-de-gemini-apuntan-a-una-inteligencia-artificial-mas-util-para-las-personas-con-baja-vision/",
+    "publishedAt": "2026-09-14T08:00:52.000Z",
+    "categories": [
+      "tecnologia-accesibilidad",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "summary": "Google ha presentado una nueva generación de modelos de inteligencia artificial dentro de la familia Gemini, una actualización que va mucho más allá de las mejoras técnicas para desarrolladores. Los nuevos modelos de Gemini apuntan a una inteligencia artificial más útil para las personas con baja visión, gracias a avances en velocidad, eficiencia y comprensión […] La entrada Los nuevos modelos de Gemini apuntan a una inteligencia artificial más útil para las personas con baja visión se publicó primero en Conticgo .",
+    "body": "",
+    "featuredRank": null
+  },
+  {
+    "id": "accessible-android-54cd8d26641febeb",
+    "lang": "en",
+    "title": "NetBoard",
+    "sourceId": "accessible-android",
+    "sourceName": "Accessible Android",
+    "sourceUrl": "https://accessibleandroid.com/",
+    "originalUrl": "https://accessibleandroid.com/app/netboard/",
+    "publishedAt": "2026-09-14T07:00:00.000Z",
+    "categories": [
+      "android",
+      "apps-accesibles",
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "summary": "NetBoard turns your computer into an instant input device for your phone, allowing you to type quickly, accurately, and effortlessly using your computer’s full physical…",
+    "body": "",
+    "featuredRank": null
+  },
+  {
     "id": "applevis-apps-514ff0f035cf5313",
     "lang": "en",
     "title": "Brainclash",
@@ -836,24 +873,6 @@
     ],
     "editorialState": "source-only",
     "summary": "Smart Typer is a lightweight yet feature-rich Android productivity application designed to bring notes, file management, advanced text editing, AI tools, and everyday utilities into…",
-    "body": "",
-    "featuredRank": null
-  },
-  {
-    "id": "conticgo-ff01e34c9df5656a",
-    "lang": "es",
-    "title": "Webinar gratuito sobre las nuevas tecnologías Braille de Orbit Research",
-    "sourceId": "conticgo",
-    "sourceName": "Conticgo",
-    "sourceUrl": "https://conticgo.net/",
-    "originalUrl": "https://conticgo.net/webinar-orbit-research-venkatesh-chari-tecnologia-braille/",
-    "publishedAt": "2026-08-11T08:00:53.000Z",
-    "categories": [
-      "tecnologia-accesibilidad",
-      "braille"
-    ],
-    "editorialState": "source-only",
-    "summary": "El próximo 15 de agosto de 2026 tendrá lugar un interesante webinar internacional sobre tecnología Braille y accesibilidad, organizado por ACCYTEC – Accesibilidad y Tecnología. El encuentro contará con un invitado de excepción: Venkatesh Chari, fundador y presidente de Orbit Research, una de las compañías más importantes del mundo en el desarrollo de dispositivos Braille […] La entrada Webinar gratuito sobre las nuevas tecnologías Braille de Orbit Research se publicó primero en Conticgo .",
     "body": "",
     "featuredRank": null
   },

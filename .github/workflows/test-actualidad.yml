@@ -10,6 +10,7 @@ on:
       - 'actualidad*.html'
       - 'app.js'
       - 'index.html'
+      - 'styles.css'
       - 'sw.js'
       - 'scripts/actualidad-*.mjs'
       - 'scripts/sync-actualidad*.mjs'

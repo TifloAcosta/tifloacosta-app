@@ -22,6 +22,13 @@ img { max-width:100%; } .wrap { width:min(100% - 2rem,62rem); margin-inline:auto
 .brand { display:inline-flex; align-items:center; gap:.7rem; color:#FFF; text-decoration:none; border-radius:.55rem; padding:.15rem .25rem .15rem 0; font-weight:800; } .brand:hover { text-decoration:none; }
 .brand-mark { display:block; width:2.8rem; height:2.8rem; object-fit:contain; flex:0 0 auto; } .brand-name { font-size:1.35rem; letter-spacing:-.015em; }
 .language-switch,.inline-actions,.search-row,.resource-actions,.book-actions,.settings-actions { display:flex; gap:.65rem; flex-wrap:wrap; }
+#home-blocks .resource-actions,
+#actualidad-sections,
+#media-sections { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,14rem),1fr)); gap:1rem; }
+#actualidad-sections { margin-block:1.5rem; }
+#home-blocks .resource-actions .button-link,
+#actualidad-sections .button-link,
+#media-sections .button-link { width:100%; }
 .language-switch button { min-height:2.55rem; padding:.5rem .78rem; color:#FFF; background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.72); box-shadow:none; }
 .language-switch button[aria-pressed="true"] { color:var(--brand); background:#FFF; border-color:#FFF; } .site-header :focus-visible { outline-color:#FFD166; }
 main { padding-block:1.4rem 3rem; } main > section { border-radius:1rem; }

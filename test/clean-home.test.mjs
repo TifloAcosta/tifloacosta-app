@@ -25,3 +25,13 @@ test('launcher and actualidad navigation keep visible spacing between blocks', a
   assert.match(css, /#actualidad-sections\s*\{[^}]*margin-block:1\.5rem;[^}]*\}/s);
   assert.match(css, /#home-blocks \.resource-actions \.button-link,\s*#actualidad-sections \.button-link,\s*#media-sections \.button-link\s*\{[^}]*width:100%;[^}]*\}/s);
 });
+
+test('content collections fill available width without rigid empty columns', async () => {
+  const css = await read('styles.css');
+  assert.match(css, /\.resource-list,\.video-list\s*\{[^}]*display:flex;[^}]*flex-wrap:wrap;[^}]*gap:1rem;[^}]*\}/s);
+  assert.match(css, /\.resource-card,\.video-card\s*\{[^}]*flex:1 1 20rem;[^}]*min-width:0;[^}]*\}/s);
+  assert.match(css, /\.settings-form\s*\{[^}]*display:flex;[^}]*flex-wrap:wrap;[^}]*gap:1rem;[^}]*\}/s);
+  assert.match(css, /\.settings-form \.settings-group\s*\{[^}]*flex:1 1 20rem;[^}]*\}/s);
+  assert.match(css, /\.settings-form \.settings-actions,\.settings-form \.settings-status\s*\{[^}]*flex:1 1 100%;[^}]*\}/s);
+  assert.doesNotMatch(css, /grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
+});

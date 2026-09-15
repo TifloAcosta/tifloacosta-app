@@ -9,6 +9,7 @@ test('home and actualidad upgrade internal navigation to native buttons before p
 
   assert.match(js, /document\.createElement\(['"]button['"]\)/);
   assert.match(js, /button\.type\s*=\s*['"]button['"]/);
+  assert.match(js, /button\.setAttribute\(attribute\.name, attribute\.value\)/);
   assert.match(js, /link\.replaceWith\(button\)/);
   assert.match(js, /#home-blocks a\.button-link/);
   assert.match(js, /a\[data-home-back\]/);
@@ -25,6 +26,7 @@ test('video screen upgrades only its internal return controls to native buttons'
 
   assert.match(js, /document\.createElement\(['"]button['"]\)/);
   assert.match(js, /button\.type\s*=\s*['"]button['"]/);
+  assert.match(js, /button\.setAttribute\(attribute\.name, attribute\.value\)/);
   assert.match(js, /link\.replaceWith\(button\)/);
   assert.match(js, /#back-home/);
   assert.match(js, /#back-home-bottom/);

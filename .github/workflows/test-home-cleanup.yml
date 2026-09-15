@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'feature/home-clean-block-navigation'
+      - 'fix/actualidad-config-spacing'
 
 permissions:
   contents: read

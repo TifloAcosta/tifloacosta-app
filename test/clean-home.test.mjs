@@ -47,3 +47,13 @@ test('Actualidad cards use a fluid multi-column layout instead of one oversized 
   assert.match(css, /\.news-list\s*\{[^}]*display:grid;[^}]*grid-template-columns:repeat\(auto-fit,minmax\(min\(100%,28rem\),1fr\)\);[^}]*gap:\.8rem;[^}]*\}/s);
   assert.match(css, /\.news-item\s*\{[^}]*min-width:0;[^}]*\}/s);
 });
+
+test('Actualidad text can use the full width of each news card and reader block', async () => {
+  const css = await read('styles.css');
+  assert.match(css, /\.news-item p,\s*#news-reader p\s*\{[^}]*max-width:none;[^}]*\}/s);
+});
+
+test('configuration keeps clear vertical separation between its main control blocks', async () => {
+  const css = await read('styles.css');
+  assert.match(css, /#config-section > h3\s*\{[^}]*margin-top:1\.75rem;[^}]*\}/s);
+});

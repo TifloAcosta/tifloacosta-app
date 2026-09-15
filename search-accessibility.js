@@ -1,102 +1,450 @@
-(() => {
+(function (root, factory) {
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  root.TIFLO_GLOBAL_SEARCH = api;
+}(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   'use strict';
 
-  function enhanceResourceSearch() {
-    const form = document.querySelector('#search-form');
-    const results = document.querySelector('#resource-results');
-    const status = document.querySelector('#result-status');
-    const category = document.querySelector('#category');
-    const favorites = document.querySelector('#favorites-button');
-    const clear = document.querySelector('#clear-results');
-    const langEs = document.querySelector('#lang-es');
-    const langEn = document.querySelector('#lang-en');
+  function normalizeText(value) {
+    return String(value || '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
 
-    if (!form || !results || !status || !category || !favorites || !clear) return;
-    if (form.dataset.accessibleSearchFlow === 'true') return;
-    form.dataset.accessibleSearchFlow = 'true';
+  function queryMatches(text, query) {
+    const normalizedQuery = normalizeText(query);
+    if (!normalizedQuery) return false;
+    const normalizedText = normalizeText(text);
+    const words = normalizedQuery.split(/[^a-z0-9]+/).filter(Boolean);
+    return words.length > 0 && words.every(word => normalizedText.includes(word));
+  }
 
-    const exploreSection = category.closest('section');
-    const exploreActions = clear.parentElement;
-    if (!exploreSection || !exploreActions) return;
+  function supplementalVideoText(videoIndex, id) {
+    const extra = videoIndex?.videos?.[id] || {};
+    return [
+      ...(Array.isArray(extra.keywords) ? extra.keywords : []),
+      extra.searchText || '',
+      extra.adaptedText || ''
+    ].join(' ');
+  }
 
-    const searchSlot = document.createElement('div');
-    searchSlot.id = 'search-results-accessible';
-    searchSlot.hidden = true;
-    form.insertAdjacentElement('afterend', searchSlot);
+  function searchAcrossSources(sources = {}, query = '', lang = 'es') {
+    const term = normalizeText(query);
+    if (!term) return [];
+    const language = lang === 'en' ? 'en' : 'es';
+    const results = [];
 
-    function moveToSearch() {
-      searchSlot.hidden = false;
-      searchSlot.append(results, status, clear);
+    for (const item of Array.isArray(sources.resources) ? sources.resources : []) {
+      if (item?.lang && item.lang !== language) continue;
+      const text = `${item?.title || ''} ${item?.category || ''}`;
+      if (!queryMatches(text, term)) continue;
+      results.push({
+        kind: 'resource',
+        id: String(item.id || item.title || ''),
+        title: String(item.title || ''),
+        meta: String(item.category || ''),
+        href: String(item.openUrl || item.url || '#')
+      });
     }
 
-    function moveToExplore() {
-      searchSlot.hidden = true;
-      exploreActions.append(clear);
-      exploreSection.append(status, results);
+    for (const item of Array.isArray(sources.videos) ? sources.videos : []) {
+      const id = String(item?.id || '').trim();
+      const text = `${item?.title || ''} ${item?.description || ''} ${item?.excerpt || ''} ${supplementalVideoText(sources.videoIndex, id)}`;
+      if (!queryMatches(text, term)) continue;
+      results.push({
+        kind: 'video',
+        id,
+        title: String(item.title || ''),
+        meta: '',
+        href: id ? `videos.html?video=${encodeURIComponent(id)}` : String(item.url || 'videos.html'),
+        publishedAt: item.publishedAt || ''
+      });
     }
 
-    form.addEventListener('submit', () => {
-      moveToSearch();
-    });
-
-    category.addEventListener('change', moveToExplore);
-    favorites.addEventListener('click', moveToExplore);
-    clear.addEventListener('click', moveToExplore);
-    if (langEs) langEs.addEventListener('click', moveToExplore);
-    if (langEn) langEn.addEventListener('click', moveToExplore);
-  }
-
-  function enhanceVideoSearch() {
-    const controls = document.querySelector('#video-controls-section');
-    const form = document.querySelector('#video-search-form');
-    const search = document.querySelector('#video-search');
-    const searchLabel = document.querySelector('#video-search-label');
-    const clear = document.querySelector('#video-clear');
-    const sort = document.querySelector('.video-sort-control');
-    const results = document.querySelector('#video-results-section');
-    const langEs = document.querySelector('#lang-es');
-    const langEn = document.querySelector('#lang-en');
-
-    if (!controls || !form || !search || !clear || !sort || !results) return;
-    if (form.dataset.accessibleSearchFlow === 'true') return;
-    form.dataset.accessibleSearchFlow = 'true';
-
-    function localizeSearchLabel() {
-      if (!searchLabel) return;
-      searchLabel.textContent = document.documentElement.lang === 'en'
-        ? 'Video title, description, or topic'
-        : 'Título, descripción o tema del vídeo';
+    for (const item of Array.isArray(sources.stories) ? sources.stories : []) {
+      if (item?.lang && item.lang !== language) continue;
+      const categories = Array.isArray(item?.categories) ? item.categories.join(' ') : '';
+      const text = `${item?.title || ''} ${item?.summary || ''} ${item?.body || ''} ${item?.sourceName || ''} ${categories}`;
+      if (!queryMatches(text, term)) continue;
+      results.push({
+        kind: 'news',
+        id: String(item.id || item.title || ''),
+        title: String(item.title || ''),
+        meta: String(item.sourceName || ''),
+        href: String(item.originalUrl || 'actualidad.html#news-browser'),
+        publishedAt: item.publishedAt || ''
+      });
     }
 
-    controls.insertBefore(sort, form);
+    for (const item of Array.isArray(sources.apps) ? sources.apps : []) {
+      if (item?.lang && item.lang !== language) continue;
+      const text = `${item?.title || ''} ${item?.summary || ''} ${item?.platform || ''} ${item?.sourceName || ''}`;
+      if (!queryMatches(text, term)) continue;
+      results.push({
+        kind: 'app',
+        id: String(item.id || item.title || ''),
+        title: String(item.title || ''),
+        meta: [item.platform, item.sourceName].filter(Boolean).join(' · '),
+        href: String(item.originalUrl || 'actualidad.html#apps-browser'),
+        publishedAt: item.publishedAt || ''
+      });
+    }
 
-    const clearRow = document.createElement('div');
-    clearRow.className = 'inline-actions video-clear-row';
-    clearRow.append(clear);
-    controls.insertBefore(clearRow, form);
-    clear.hidden = !search.value.trim();
-    localizeSearchLabel();
+    for (const item of Array.isArray(sources.media) ? sources.media : []) {
+      if (item?.originalLanguage && item.originalLanguage !== language) continue;
+      const categories = Array.isArray(item?.categories) ? item.categories.join(' ') : '';
+      const text = `${item?.title || ''} ${item?.summary || ''} ${item?.sourceName || ''} ${item?.platform || ''} ${categories}`;
+      if (!queryMatches(text, term)) continue;
+      results.push({
+        kind: 'media',
+        id: String(item.id || item.title || ''),
+        title: String(item.title || ''),
+        meta: String(item.sourceName || ''),
+        href: String(item.originalUrl || 'actualidad.html#media-browser'),
+        publishedAt: item.publishedAt || ''
+      });
+    }
 
-    form.addEventListener('submit', () => {
-      clear.hidden = !search.value.trim();
+    const kindOrder = { resource: 0, video: 1, news: 2, app: 3, media: 4 };
+    return results.sort((a, b) => {
+      const kindDelta = (kindOrder[a.kind] ?? 99) - (kindOrder[b.kind] ?? 99);
+      if (kindDelta) return kindDelta;
+      const dateDelta = new Date(b.publishedAt || 0).getTime() - new Date(a.publishedAt || 0).getTime();
+      if (dateDelta) return dateDelta;
+      return normalizeText(a.title).localeCompare(normalizeText(b.title));
     });
-
-    clear.addEventListener('click', () => {
-      clear.hidden = true;
-    });
-
-    if (langEs) langEs.addEventListener('click', () => window.setTimeout(localizeSearchLabel, 0));
-    if (langEn) langEn.addEventListener('click', () => window.setTimeout(localizeSearchLabel, 0));
   }
 
-  function init() {
-    enhanceResourceSearch();
-    enhanceVideoSearch();
-  }
+  return { normalizeText, queryMatches, searchAcrossSources };
+}));
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init, { once: true });
-  } else {
-    init();
-  }
-})();
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+  (() => {
+    'use strict';
+
+    const api = window.TIFLO_GLOBAL_SEARCH;
+    if (!api) return;
+
+    const copyByLanguage = {
+      es: {
+        heading: 'Buscar en TifloAcosta',
+        label: 'Título, descripción o tema',
+        placeholder: 'Por ejemplo: VoiceOver, Android, WhatsApp…',
+        button: 'Buscar',
+        clear: 'Borrar búsqueda',
+        loading: 'Buscando en TifloAcosta…',
+        empty: 'No se encontraron resultados.',
+        count: n => `${n} resultado${n === 1 ? '' : 's'} encontrado${n === 1 ? '' : 's'}.`,
+        groups: {
+          resource: 'Recursos',
+          video: 'Vídeos de TifloAcosta',
+          news: 'Noticias',
+          app: 'Apps accesibles',
+          media: 'Escuchar y ver'
+        },
+        open: {
+          resource: 'Abrir recurso',
+          video: 'Abrir vídeo',
+          news: 'Abrir noticia',
+          app: 'Abrir ficha',
+          media: 'Abrir contenido'
+        },
+        controlsHeading: 'Ordenar vídeos'
+      },
+      en: {
+        heading: 'Search TifloAcosta',
+        label: 'Title, description, or topic',
+        placeholder: 'For example: VoiceOver, Android, WhatsApp…',
+        button: 'Search',
+        clear: 'Clear search',
+        loading: 'Searching TifloAcosta…',
+        empty: 'No results were found.',
+        count: n => `${n} result${n === 1 ? '' : 's'} found.`,
+        groups: {
+          resource: 'Resources',
+          video: 'TifloAcosta videos',
+          news: 'News',
+          app: 'Accessible apps',
+          media: 'Listen and watch'
+        },
+        open: {
+          resource: 'Open resource',
+          video: 'Open video',
+          news: 'Open news item',
+          app: 'Open app page',
+          media: 'Open content'
+        },
+        controlsHeading: 'Sort videos'
+      }
+    };
+
+    function currentLanguage() {
+      return document.documentElement.lang === 'en' ? 'en' : 'es';
+    }
+
+    function loadScriptOnce(src) {
+      return new Promise(resolve => {
+        if (window.TIFLO_VIDEO_SEARCH_INDEX) return resolve();
+        const existing = document.querySelector('script[data-global-video-index]');
+        if (existing) {
+          existing.addEventListener('load', () => resolve(), { once: true });
+          existing.addEventListener('error', () => resolve(), { once: true });
+          return;
+        }
+        const script = document.createElement('script');
+        script.src = src;
+        script.dataset.globalVideoIndex = 'true';
+        script.addEventListener('load', () => resolve(), { once: true });
+        script.addEventListener('error', () => resolve(), { once: true });
+        document.head.append(script);
+      });
+    }
+
+    async function fetchJson(url, fallback) {
+      try {
+        const response = await fetch(url, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return await response.json();
+      } catch (error) {
+        return fallback;
+      }
+    }
+
+    function enhanceGlobalSearch() {
+      const form = document.querySelector('#search-form');
+      const search = document.querySelector('#search');
+      const heading = document.querySelector('#search-heading');
+      const label = document.querySelector('label[for="search"]');
+      const button = document.querySelector('#search-button');
+      const homeHero = document.querySelector('#home-hero');
+      const langEs = document.querySelector('#lang-es');
+      const langEn = document.querySelector('#lang-en');
+      if (!form || !search || !heading || !label || !button || !homeHero) return;
+      if (form.dataset.globalSearch === 'true') return;
+      form.dataset.globalSearch = 'true';
+
+      const searchSection = form.closest('section');
+      if (!searchSection) return;
+      searchSection.id = 'global-search-section';
+      searchSection.classList.add('global-search-section');
+      homeHero.insertAdjacentElement('afterend', searchSection);
+
+      const status = document.createElement('p');
+      status.id = 'global-search-status';
+      status.className = 'muted global-search-status';
+      status.setAttribute('aria-live', 'polite');
+      status.setAttribute('aria-atomic', 'true');
+
+      const clearRow = document.createElement('div');
+      clearRow.className = 'inline-actions global-search-clear-row';
+      const clearButton = document.createElement('button');
+      clearButton.type = 'button';
+      clearButton.id = 'global-search-clear';
+      clearButton.hidden = true;
+      clearRow.append(clearButton);
+
+      const results = document.createElement('div');
+      results.id = 'global-search-results';
+      results.className = 'global-search-results';
+      results.hidden = true;
+      form.insertAdjacentElement('afterend', status);
+      status.insertAdjacentElement('afterend', clearRow);
+      clearRow.insertAdjacentElement('afterend', results);
+
+      let rawStories = [];
+      let sourcesPromise = null;
+
+      function localize() {
+        const lang = currentLanguage();
+        const copy = copyByLanguage[lang];
+        heading.textContent = copy.heading;
+        label.textContent = copy.label;
+        search.placeholder = copy.placeholder;
+        button.textContent = copy.button;
+        clearButton.textContent = copy.clear;
+      }
+
+      async function loadSources() {
+        if (sourcesPromise) return sourcesPromise;
+        sourcesPromise = Promise.all([
+          fetchJson('videos.json', { videos: [] }),
+          fetchJson('actualidad.json', []),
+          fetchJson('actualidad-apps.json', []),
+          fetchJson('actualidad-media.json', []),
+          loadScriptOnce('video-search-index.js?v=1.0')
+        ]).then(([videoCatalog, stories, apps, media]) => {
+          rawStories = Array.isArray(stories) ? stories : [];
+          return {
+            videos: Array.isArray(videoCatalog?.videos) ? videoCatalog.videos : [],
+            apps: Array.isArray(apps) ? apps : [],
+            media: Array.isArray(media) ? media : []
+          };
+        });
+        return sourcesPromise;
+      }
+
+      function localizedStories(lang) {
+        const core = window.TIFLO_ACTUALIDAD_CORE;
+        if (core && typeof core.publicStories === 'function') return core.publicStories(rawStories, lang);
+        return rawStories.filter(item => !item.lang || item.lang === lang);
+      }
+
+      function resultCard(item, copy) {
+        const card = document.createElement('div');
+        card.className = 'global-search-card';
+        const title = document.createElement('h4');
+        title.textContent = item.title;
+        card.append(title);
+        if (item.meta) {
+          const meta = document.createElement('p');
+          meta.className = 'muted global-search-meta';
+          meta.textContent = item.meta;
+          card.append(meta);
+        }
+        const link = document.createElement('a');
+        link.className = 'button-link';
+        link.href = item.href;
+        link.textContent = `${copy.open[item.kind]}: ${item.title}`;
+        if (/^https?:\/\//.test(item.href) && !item.href.startsWith(location.origin)) {
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+        }
+        card.append(link);
+        return card;
+      }
+
+      function render(items) {
+        const lang = currentLanguage();
+        const copy = copyByLanguage[lang];
+        results.replaceChildren();
+        results.hidden = false;
+        clearButton.hidden = false;
+        status.textContent = items.length ? copy.count(items.length) : copy.empty;
+
+        const kinds = ['resource', 'video', 'news', 'app', 'media'];
+        for (const kind of kinds) {
+          const matches = items.filter(item => item.kind === kind);
+          if (!matches.length) continue;
+          const group = document.createElement('section');
+          group.className = 'global-search-group';
+          const groupHeading = document.createElement('h3');
+          groupHeading.textContent = `${copy.groups[kind]} (${matches.length})`;
+          group.append(groupHeading);
+          const list = document.createElement('div');
+          list.className = 'global-search-list';
+          matches.slice(0, 10).forEach(item => list.append(resultCard(item, copy)));
+          group.append(list);
+          results.append(group);
+        }
+      }
+
+      async function runSearch(event) {
+        if (event) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+        }
+        const term = search.value.trim();
+        if (!term) {
+          results.replaceChildren();
+          results.hidden = true;
+          clearButton.hidden = true;
+          status.textContent = '';
+          return;
+        }
+        const lang = currentLanguage();
+        const copy = copyByLanguage[lang];
+        status.textContent = copy.loading;
+        const loaded = await loadSources();
+        const found = api.searchAcrossSources({
+          resources: Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [],
+          videos: loaded.videos,
+          stories: localizedStories(lang),
+          apps: loaded.apps,
+          media: loaded.media,
+          videoIndex: window.TIFLO_VIDEO_SEARCH_INDEX || { videos: {} }
+        }, term, lang);
+        render(found);
+      }
+
+      function clearSearch() {
+        search.value = '';
+        results.replaceChildren();
+        results.hidden = true;
+        clearButton.hidden = true;
+        status.textContent = '';
+        search.focus();
+      }
+
+      function updateHomeVisibility() {
+        const key = location.hash.replace(/^#/, '');
+        searchSection.hidden = Boolean(key && key !== 'home');
+      }
+
+      form.addEventListener('submit', runSearch, true);
+      clearButton.addEventListener('click', clearSearch);
+      window.addEventListener('hashchange', updateHomeVisibility);
+      if (langEs) langEs.addEventListener('click', () => window.setTimeout(() => { localize(); if (search.value.trim()) runSearch(); }, 0));
+      if (langEn) langEn.addEventListener('click', () => window.setTimeout(() => { localize(); if (search.value.trim()) runSearch(); }, 0));
+      localize();
+      updateHomeVisibility();
+      loadSources();
+    }
+
+    function openRequestedVideo() {
+      const requestedId = new URLSearchParams(location.search).get('video');
+      if (!requestedId) return;
+      let attempts = 0;
+      const timer = window.setInterval(() => {
+        attempts += 1;
+        const button = document.querySelector(`button[data-video-id="${CSS.escape(requestedId)}"]`);
+        if (button) {
+          window.clearInterval(timer);
+          button.click();
+          const url = new URL(location.href);
+          url.searchParams.delete('video');
+          if (history.replaceState) history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
+        } else if (attempts >= 80) {
+          window.clearInterval(timer);
+        }
+      }, 100);
+    }
+
+    function simplifyVideoControls() {
+      const controls = document.querySelector('#video-controls-section');
+      const videoSearchForm = document.querySelector('#video-search-form');
+      const controlsHeading = document.querySelector('#video-controls-heading');
+      const sort = document.querySelector('.video-sort-control');
+      const langEs = document.querySelector('#lang-es');
+      const langEn = document.querySelector('#lang-en');
+      if (!controls || !videoSearchForm || !controlsHeading || !sort) return;
+
+      videoSearchForm.hidden = true;
+      controls.classList.add('video-controls-clean');
+      controls.insertBefore(sort, videoSearchForm);
+
+      function localize() {
+        const copy = copyByLanguage[currentLanguage()];
+        controlsHeading.textContent = copy.controlsHeading;
+      }
+
+      if (langEs) langEs.addEventListener('click', () => window.setTimeout(localize, 0));
+      if (langEn) langEn.addEventListener('click', () => window.setTimeout(localize, 0));
+      localize();
+      openRequestedVideo();
+    }
+
+    function init() {
+      enhanceGlobalSearch();
+      simplifyVideoControls();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init, { once: true });
+    } else {
+      init();
+    }
+  })();
+}

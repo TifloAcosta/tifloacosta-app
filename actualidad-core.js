@@ -198,3 +198,50 @@
 
   return { homePreview, isFeaturedEligible, localizedStory, normalizeContent, normalizeStory, publicStories, sortStories };
 }));
+
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+  const selectors = [
+    '#home-blocks a.button-link',
+    'a[data-home-back]',
+    '#actualidad-home-open',
+    '#videos-home-open',
+    '#actualidad-sections a.button-link',
+    '#media-sections a.button-link',
+    '#home-link-top',
+    '#home-link-bottom'
+  ];
+
+  function activateInternalHref(href) {
+    if (!href) return;
+    if (href.startsWith('#')) {
+      if (window.location.hash === href) {
+        const target = document.getElementById(href.slice(1));
+        if (target) target.scrollIntoView();
+      } else {
+        window.location.hash = href;
+      }
+      return;
+    }
+    window.location.assign(href);
+  }
+
+  function upgradeInternalLink(link) {
+    if (!link || link.tagName !== 'A') return;
+    const href = link.getAttribute('href');
+    if (!href) return;
+
+    const button = document.createElement('button');
+    for (const attribute of Array.from(link.attributes)) {
+      if (['href', 'target', 'rel', 'role'].includes(attribute.name)) continue;
+      button.setAttribute(attribute.name, attribute.value);
+    }
+    button.type = 'button';
+    button.innerHTML = link.innerHTML;
+    button.addEventListener('click', () => activateInternalHref(href));
+    link.replaceWith(button);
+  }
+
+  selectors.forEach(selector => {
+    document.querySelectorAll(selector).forEach(upgradeInternalLink);
+  });
+}

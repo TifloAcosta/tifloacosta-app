@@ -152,7 +152,8 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
           app: 'Abrir ficha',
           media: 'Abrir contenido'
         },
-        controlsHeading: 'Ordenar vídeos'
+        controlsHeading: 'Ordenar vídeos',
+        videosIntro: 'Accede al catálogo completo de vídeos de TifloAcosta para ordenarlo y recorrerlo con comodidad. Para buscar un vídeo, utiliza el buscador general del inicio.'
       },
       en: {
         heading: 'Search TifloAcosta',
@@ -177,7 +178,8 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
           app: 'Open app page',
           media: 'Open content'
         },
-        controlsHeading: 'Sort videos'
+        controlsHeading: 'Sort videos',
+        videosIntro: 'Open the complete TifloAcosta video catalog to sort and browse it comfortably. To find a video, use the global search on the home screen.'
       }
     };
 
@@ -220,6 +222,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       const label = document.querySelector('label[for="search"]');
       const button = document.querySelector('#search-button');
       const homeHero = document.querySelector('#home-hero');
+      const videosHomeIntro = document.querySelector('#videos-home-intro');
       const langEs = document.querySelector('#lang-es');
       const langEn = document.querySelector('#lang-en');
       if (!form || !search || !heading || !label || !button || !homeHero) return;
@@ -265,6 +268,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         search.placeholder = copy.placeholder;
         button.textContent = copy.button;
         clearButton.textContent = copy.clear;
+        if (videosHomeIntro) videosHomeIntro.textContent = copy.videosIntro;
       }
 
       async function loadSources() {
@@ -393,13 +397,28 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       loadSources();
     }
 
-    function openRequestedVideo() {
+    function submitHiddenVideoSearch(form) {
+      form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+    }
+
+    async function openRequestedVideo() {
       const requestedId = new URLSearchParams(location.search).get('video');
       if (!requestedId) return;
+      const videoSearchForm = document.querySelector('#video-search-form');
+      const videoSearch = document.querySelector('#video-search');
+      if (!videoSearchForm || !videoSearch) return;
+
+      const catalog = await fetchJson('videos.json', { videos: [] });
+      const target = Array.isArray(catalog?.videos) ? catalog.videos.find(video => video.id === requestedId) : null;
+      if (!target) return;
+
+      videoSearch.value = target.title || requestedId;
+      submitHiddenVideoSearch(videoSearchForm);
+
       let attempts = 0;
       const timer = window.setInterval(() => {
         attempts += 1;
-        const button = document.querySelector(`button[data-video-id="${CSS.escape(requestedId)}"]`);
+        const button = [...document.querySelectorAll('button[data-video-id]')].find(candidate => candidate.dataset.videoId === requestedId);
         if (button) {
           window.clearInterval(timer);
           button.click();
@@ -415,8 +434,10 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     function simplifyVideoControls() {
       const controls = document.querySelector('#video-controls-section');
       const videoSearchForm = document.querySelector('#video-search-form');
+      const videoSearch = document.querySelector('#video-search');
       const controlsHeading = document.querySelector('#video-controls-heading');
       const sort = document.querySelector('.video-sort-control');
+      const closePlayer = document.querySelector('#video-player-close');
       const langEs = document.querySelector('#lang-es');
       const langEn = document.querySelector('#lang-en');
       if (!controls || !videoSearchForm || !controlsHeading || !sort) return;
@@ -430,6 +451,13 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         controlsHeading.textContent = copy.controlsHeading;
       }
 
+      if (closePlayer && videoSearch) {
+        closePlayer.addEventListener('click', () => window.setTimeout(() => {
+          if (!videoSearch.value) return;
+          videoSearch.value = '';
+          submitHiddenVideoSearch(videoSearchForm);
+        }, 0));
+      }
       if (langEs) langEs.addEventListener('click', () => window.setTimeout(localize, 0));
       if (langEn) langEn.addEventListener('click', () => window.setTimeout(localize, 0));
       localize();

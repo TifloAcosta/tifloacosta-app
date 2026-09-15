@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'feature/home-clean-block-navigation'
+      - 'feature/global-search-clean-videos'
 
 permissions:
   contents: read

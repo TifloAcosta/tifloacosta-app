@@ -4,33 +4,33 @@ import test from 'node:test';
 
 const read = file => readFile(new URL(`../${file}`, import.meta.url), 'utf8');
 
-test('all app surfaces load the internal navigation semantics upgrader', async () => {
-  const [home, actualidad, videos] = await Promise.all([
-    read('index.html'),
-    read('actualidad.html'),
-    read('videos.html')
-  ]);
-
-  for (const html of [home, actualidad, videos]) {
-    assert.match(html, /<script src="navigation-semantics\.js\?v=1\.0"><\/script>/);
-  }
-});
-
-test('internal navigation is upgraded to native buttons at runtime', async () => {
-  const js = await read('navigation-semantics.js');
+test('home and actualidad upgrade internal navigation to native buttons before page scripts run', async () => {
+  const js = await read('actualidad-core.js');
 
   assert.match(js, /document\.createElement\(['"]button['"]\)/);
   assert.match(js, /button\.type\s*=\s*['"]button['"]/);
   assert.match(js, /link\.replaceWith\(button\)/);
   assert.match(js, /#home-blocks a\.button-link/);
   assert.match(js, /a\[data-home-back\]/);
+  assert.match(js, /#actualidad-home-open/);
+  assert.match(js, /#videos-home-open/);
   assert.match(js, /#actualidad-sections a\.button-link/);
   assert.match(js, /#media-sections a\.button-link/);
+  assert.match(js, /#home-link-top/);
+  assert.match(js, /#home-link-bottom/);
+});
+
+test('video screen upgrades only its internal return controls to native buttons', async () => {
+  const js = await read('videos-core.js');
+
+  assert.match(js, /document\.createElement\(['"]button['"]\)/);
+  assert.match(js, /button\.type\s*=\s*['"]button['"]/);
+  assert.match(js, /link\.replaceWith\(button\)/);
   assert.match(js, /#back-home/);
   assert.match(js, /#back-home-bottom/);
 });
 
-test('real content and external destinations remain links', async () => {
+test('real content and external destinations remain links in the source markup', async () => {
   const [home, actualidad, videos] = await Promise.all([
     read('index.html'),
     read('actualidad.html'),

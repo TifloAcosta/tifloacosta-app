@@ -57,3 +57,11 @@ test('configuration keeps clear vertical separation between its main control blo
   const css = await read('styles.css');
   assert.match(css, /#config-section > h3\s*\{[^}]*margin-top:1\.75rem;[^}]*\}/s);
 });
+
+test('one global search is promoted to the home screen and video search is hidden', async () => {
+  const [source, css] = await Promise.all([read('search-accessibility.js'), read('styles.css')]);
+  assert.match(source, /insertAdjacentElement\('afterend',\s*searchSection\)/);
+  assert.match(source, /videoSearchForm\.hidden\s*=\s*true/);
+  assert.match(source, /controlsHeading\.textContent\s*=\s*copy\.controlsHeading/);
+  assert.match(css, /#video-results-section\s*\{[^}]*margin-top:1\.75rem;[^}]*\}/s);
+});

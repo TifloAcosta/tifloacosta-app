@@ -1,5 +1,52 @@
 [
   {
+    "id": "ars-technica-92367f9b28d9c8b8",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/cars/2026/09/volvo-bigs-up-the-batteries-for-2028-xc60-and-xc90-plug-in-refresh/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-15T07:00:30.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Volvo increases the batteries for 2028 XC60 and XC90 plug-in refresh",
+        "summary": "The refreshed Volvos also get new infotainment systems with Gemini onboard.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-93d726d889b43dcb",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2255878/2028-volvo-xc60-and-xc90-first-look/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-15T07:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "2028 Volvo XC60 and XC90 first look: Double the range and smarter safety, too",
+        "summary": "Volvo caters to EV-curious buyers with way more range in its plug-in hybrid SUVs.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "9to5mac-190bab71c9c0d1d2",
     "type": "news",
     "sourceId": "9to5mac",
@@ -290,31 +337,6 @@
     "media": null
   },
   {
-    "id": "engadget-9059070eaf1b577e",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2254550/how-to-force-quit-windows-pc/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T20:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "How to force quit on your Windows PC",
-        "summary": "If you're switching from a Mac or new to Windows, knowing how to 'force quit' an app can be confusing. Luckily, there are a number of ways to get the job done.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "ars-technica-bac855cb7bdb8d24",
     "type": "news",
     "sourceId": "ars-technica",
@@ -334,32 +356,6 @@
       "en": {
         "title": "OpenAI stuck fighting Musk antitrust suit after Apple finds a way out",
         "summary": "Musk stops attacking Apple over ChatGPT integration but not OpenAI.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-0e9a1965f294d681",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/apple/2026/09/apple-releases-ios-27-macos-golden-gate-27-with-siri-ai-and-liquid-glass-refinements/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T19:28:42.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple releases iOS 27, macOS Golden Gate 27 with Siri AI and Liquid Glass refinements",
-        "summary": "This is also the last version of macOS to support Rosetta for Intel apps.",
         "body": ""
       }
     },

@@ -97,6 +97,25 @@
 });
 
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+  function upgradeVideoNavigationLink(selector) {
+    const link = document.querySelector(selector);
+    if (!link || link.tagName !== 'A') return;
+    const href = link.getAttribute('href');
+    if (!href) return;
+
+    const button = document.createElement('button');
+    for (const attribute of Array.from(link.attributes)) {
+      if (['href', 'target', 'rel', 'role'].includes(attribute.name)) continue;
+      button.setAttribute(attribute.name, attribute.value);
+    }
+    button.type = 'button';
+    button.innerHTML = link.innerHTML;
+    button.addEventListener('click', () => window.location.assign(href));
+    link.replaceWith(button);
+  }
+
+  ['#back-home', '#back-home-bottom'].forEach(upgradeVideoNavigationLink);
+
   document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector('script[data-tiflo-search-accessibility]')) return;
     const script = document.createElement('script');

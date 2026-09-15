@@ -1,5 +1,53 @@
 [
   {
+    "id": "the-verge-731839118e0bc239",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/news/995302/microsoft-out-of-band-windows-11-update-fix-issues",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-15T08:54:48.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows",
+      "programas-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Microsoft issues emergency Windows 11 update to fix its record-breaking patch",
+        "summary": "Microsoft has started rolling out an emergency out-of-band update to fix problems with its record-breaking September patch Tuesday update. The software giant patched nearly 1,000 flaws in its biggest update ever this month, but it also introduced some bugs that have affected businesses, developers, and gamers. The September patch Tuesday affected folder shares on Hyper-V-based […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "conticgo-e55ff574aea92ae5",
+    "type": "news",
+    "sourceId": "conticgo",
+    "sourceName": "Conticgo",
+    "sourceUrl": "https://conticgo.net/",
+    "originalUrl": "https://conticgo.net/stactiles-las-pegatinas-tactiles-de-hable-one-que-hacen-accesible-cualquier-vitroceramica/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-09-15T08:00:11.000Z",
+    "categories": [
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "Stactiles: las pegatinas táctiles de Hable One que hacen accesible cualquier vitrocerámica",
+        "summary": "Las superficies táctiles han cambiado la forma en la que utilizamos muchos electrodomésticos, pero también pueden convertirse en una barrera para las personas ciegas o con baja visión. Para facilitar la identificación de controles y funciones, Hable One ha desarrollado Stactiles, unas pegatinas táctiles que están ganando popularidad entre usuarios con discapacidad visual y que […] La entrada Stactiles: las pegatinas táctiles de Hable One que hacen accesible cualquier vitrocerámica se publicó primero en Conticgo .",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "ars-technica-92367f9b28d9c8b8",
     "type": "news",
     "sourceId": "ars-technica",
@@ -210,31 +258,6 @@
       "en": {
         "title": "How to use the Windows 11 Media Creation Tool to create a bootable USB drive",
         "summary": "The Windows Media Creation tool is easy to use and lets you keep a USB drive handy so you can install Windows 11 anytime you need.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-4e92052e857b0fcf",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/994949/apple-intelligence-apple-home-icloud-plus-cost-subscription",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T22:28:52.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple Home’s new security camera features cost as much as $60 a month",
-        "summary": "With the public release of iOS 27 and tvOS 27, Apple Home is getting an injection of Apple Intelligence - but you'll have to pay more for it. Apple Intelligence for Home brings AI-powered video summaries to HomeKit Secure Video, so you can get short text descriptions of who and what compatible security cameras saw, […]",
         "body": ""
       }
     },
@@ -1701,29 +1724,6 @@
       "es": {
         "title": "Ya disponible la primera candidata a liberación de NVDA 2026.2",
         "summary": "Tal y como ha anunciado NV Access mediante esta publicación, la rc 1 de NVDA 2026.2 ya se encuentra disponible para descarga y pruebas. Se recomienda a todos los usuarios descargar esta versión y proporcionar comentarios por los canales de la comunidad, o por el sistema de informe de fallos de NV Access. A menos … Continuar leyendo \"Ya disponible la primera candidata a liberación de NVDA 2026.2\" La entrada Ya disponible la primera candidata a liberación de NVDA 2026.2 se publicó primero en NVDA en español .",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "conticgo-dba0444691a186bf",
-    "type": "news",
-    "sourceId": "conticgo",
-    "sourceName": "Conticgo",
-    "sourceUrl": "https://conticgo.net/",
-    "originalUrl": "https://conticgo.net/visionpulse-la-realidad-virtual-accesible-que-permite-a-las-personas-con-discapacidad-visual-explorar-nuevos-entornos/",
-    "originalLanguage": "es",
-    "publishedAt": "2026-08-18T10:00:48.000Z",
-    "categories": [
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "es": {
-        "title": "VisionPulse: la realidad virtual accesible que permite a las personas con discapacidad visual explorar nuevos entornos",
-        "summary": "La realidad virtual se ha convertido en una herramienta cada vez más utilizada en ámbitos como el entretenimiento, la educación o la formación profesional, pero hasta ahora muchas experiencias digitales han estado diseñadas principalmente para usuarios que pueden ver. En este contexto surge VisionPulse, la realidad virtual accesible que permite a las personas con discapacidad […] La entrada VisionPulse: la realidad virtual accesible que permite a las personas con discapacidad visual explorar nuevos entornos se publicó primero en Conticgo .",
         "body": ""
       }
     },

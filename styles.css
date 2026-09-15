@@ -1,11 +1,11 @@
 :root {
   color-scheme: light dark;
   --brand: #0D2B45; --brand-deep: #082037; --brand-red: #E53935;
-  --bg: #F5F7FA; --text: #17202A; --muted: #4E5D69; --surface: #FFFFFF; --surface-alt: #EDF2F5;
-  --border: #C7D2DB; --border-strong: #7A91A3; --accent: #0D2B45; --accent-text: #FFFFFF;
-  --button-bg: #0D2B45; --button-text: #FFFFFF; --button-border: #0D2B45; --button-soft-bg: #FFFFFF; --button-soft-text: #0D2B45;
-  --focus: #C62828; --shadow: 0 .45rem 1.4rem rgba(13,43,69,.10); --shadow-strong: 0 .65rem 1.8rem rgba(13,43,69,.16);
-  --body-size: 100%; --body-line-height: 1.58; --body-weight: 400;
+  --bg: #F5F7FA; --text: #17202A; --muted:#4E5D69; --surface:#FFFFFF; --surface-alt:#EDF2F5;
+  --border:#C7D2DB; --border-strong:#7A91A3; --accent:#0D2B45; --accent-text:#FFFFFF;
+  --button-bg:#0D2B45; --button-text:#FFFFFF; --button-border:#0D2B45; --button-soft-bg:#FFFFFF; --button-soft-text:#0D2B45;
+  --focus:#C62828; --shadow:0 .45rem 1.4rem rgba(13,43,69,.10); --shadow-strong:0 .65rem 1.8rem rgba(13,43,69,.16);
+  --body-size:100%; --body-line-height:1.58; --body-weight:400;
 }
 @media (prefers-color-scheme: dark) { :root { --bg:#0B1218; --text:#F7FAFC; --muted:#C9D3DC; --surface:#121E28; --surface-alt:#172A39; --border:#496579; --border-strong:#A8BECE; --accent:#9BD5FF; --accent-text:#071018; --button-bg:#255678; --button-text:#FFFFFF; --button-border:#8ABBD9; --button-soft-bg:#172A39; --button-soft-text:#F7FAFC; --focus:#FFD166; --shadow:0 .45rem 1.4rem rgba(0,0,0,.24); --shadow-strong:0 .65rem 1.8rem rgba(0,0,0,.34); } }
 html[data-theme="light"] { color-scheme:light; --bg:#FFFFFF; --text:#000000; --muted:#202020; --surface:#FFFFFF; --surface-alt:#FFFFFF; --border:#000000; --border-strong:#000000; --accent:#003B70; --accent-text:#FFFFFF; --button-bg:#000000; --button-text:#FFFFFF; --button-border:#000000; --button-soft-bg:#FFFFFF; --button-soft-text:#000000; --focus:#9B3200; --shadow:none; --shadow-strong:none; }
@@ -15,7 +15,7 @@ html[data-line-spacing="comfortable"] { --body-line-height:1.8; } html[data-line
 * { box-sizing:border-box; }
 html { font-family:Inter,"Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,sans-serif; line-height:var(--body-line-height); font-size:var(--body-size); background:var(--bg); }
 body { margin:0; min-height:100vh; background:var(--bg); color:var(--text); font-size:1rem; font-weight:var(--body-weight); }
-img { max-width:100%; } .wrap { width:min(100% - 2rem,62rem); margin-inline:auto; }
+img { max-width:100%; } .wrap { width:94vw; margin-inline:auto; }
 .skip-link { position:absolute; left:.5rem; top:-6rem; background:#FFF; color:#000; border:3px solid #000; border-radius:.5rem; padding:.75rem 1rem; z-index:100; font-weight:800; } .skip-link:focus { top:.5rem; }
 .site-header { background:linear-gradient(135deg,var(--brand-deep),var(--brand)); color:#FFF; border-bottom:.28rem solid var(--brand-red); padding:.65rem 0; box-shadow:0 .25rem .9rem rgba(13,43,69,.22); }
 .header-row { display:flex; gap:1rem; align-items:center; justify-content:space-between; flex-wrap:wrap; }
@@ -64,5 +64,5 @@ a { color:var(--accent); text-decoration-thickness:.12em; text-underline-offset:
 .video-player-actions { display:flex; gap:.65rem; flex-wrap:wrap; margin-top:1rem; }
 .pagination { display:flex; gap:.75rem; align-items:center; justify-content:space-between; flex-wrap:wrap; margin-top:1.25rem; } .page-indicator { margin:0; font-weight:750; }
 .offline-shell { min-height:calc(100vh - 12rem); display:grid; align-items:center; padding-block:2rem; } .offline-card { background:var(--surface); border:1px solid var(--border); border-left:.4rem solid var(--brand-red); border-radius:1rem; padding:clamp(1.2rem,4vw,2rem); box-shadow:var(--shadow-strong); }
-@media (max-width:38rem) { .wrap { width:min(100% - 1.25rem,62rem); } .book-layout { grid-template-columns:1fr; } .book-cover { max-width:11rem; } .brand-mark { width:2.45rem; height:2.45rem; } .brand-name { font-size:1.2rem; } .language-switch { width:100%; } .language-switch button { flex:1 1 8rem; } }
+@media (max-width:38rem) { .book-layout { grid-template-columns:1fr; } .book-cover { max-width:11rem; } .brand-mark { width:2.45rem; height:2.45rem; } .brand-name { font-size:1.2rem; } .language-switch { width:100%; } .language-switch button { flex:1 1 8rem; } }
 @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition:none !important; animation:none !important; } }

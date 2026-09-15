@@ -1,37 +1,39 @@
 [
   {
-    "id": "engadget-870b25e9fb4b5670",
+    "id": "techcrunch-4e34a8d3caa0f84c",
     "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2255821/why-improve-siri-and-dictation-setting-off/",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/15/the-ai-graveyard-a-running-list-of-projects-and-startups-that-didnt-make-it/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-15T15:00:00.000Z",
+    "publishedAt": "2026-09-15T19:00:00.000Z",
     "categories": [
       "tecnologia-general",
-      "apple"
+      "apple",
+      "apps-accesibles",
+      "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "You should probably have the \"Improve Siri & Dictation\" setting off — here's why",
-        "summary": "Apple used anonymized voice data to improve its products, but you might not want to contribute to this even with its privacy methods in place.",
+        "title": "The AI graveyard: a running list of projects and startups that didn’t make it",
+        "summary": "From Apple's repeatedly delayed Siri AI to OpenAI's messy 'super app' launch, here's a look at the AI projects that shut down or missed expectations.",
         "body": ""
       }
     },
     "media": null
   },
   {
-    "id": "engadget-f04322861b71484c",
+    "id": "techcrunch-e0bb44f95498ed92",
     "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2258403/meta-adds-new-subscription-tiers-for-businesses-creators-and-ai-power-users/",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/15/us-data-centers-could-consume-more-natural-gas-than-germany-and-japan-combined-by-2035/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-15T15:00:00.000Z",
+    "publishedAt": "2026-09-15T18:29:20.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -40,8 +42,203 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Meta adds new subscription tiers for businesses, creators and 'AI power users'",
-        "summary": "The company's Meta One plans range from $2.99/month to $499/month.",
+        "title": "US data centers could consume more natural gas than Germany and Japan combined by 2035",
+        "summary": "The AI frenzy could push U.S. data centers to become one of the largest consumers of natural gas in the world.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-027e442c4e581985",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2256059/safety-privacy-concerns-digital-wallet-storing-drivers-license/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-15T18:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The safety and privacy concerns of storing your driver's license in a digital wallet",
+        "summary": "A digital driver's license kept in Apple Wallet or Google Wallet is convenient, but you should be aware of its implications on your privacy.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-7def4afb2f345cd0",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2258821/google-pixel-update-vip-contacts-scam-detection-gesture-controls/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-15T18:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "android"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google's latest Pixel drop will keep you more connected to your VIPs",
+        "summary": "Google has revealed the updates coming with the latest Pixel drop.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-7c559073fb920631",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/cars/2026/09/ev-charging-infrastructure-is-still-lagging-adoption-report-says/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-15T17:58:09.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Demand for EV chargers is outstripping supply, says ChargePoint report",
+        "summary": "EV growth is happening, even in the US, and those EVs will need plugs to charge.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-3083418787d601d2",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/15/iphone-duo-could-be-very-hard-to-get-at-launch-per-report/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-15T17:45:22.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iPhone Duo could be very hard to get at launch, per report",
+        "summary": "iPhone Duo pre-orders open next month , and a new analyst report indicates the device could be in even shorter supply at launch than expected. Here are the details. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-20b72ddafa761f97",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/15/ai-agents-now-have-a-place-to-snitch/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-15T17:42:59.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "AI agents now have a place to snitch",
+        "summary": "The AI Contact Hotline is designed to be a discreet place where agents that have witnessed misbehavior can tip off authorities.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-b9f2bfb7d149b55d",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/15/appzapper-3000-the-uninstaller-apple-forgot-returns-for-the-modern-mac-era/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-15T17:39:08.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "windows",
+      "apps-accesibles",
+      "programas-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "AppZapper 3000: ‘The uninstaller Apple forgot’ returns for the modern Mac era",
+        "summary": "AppZapper is one of the first Mac apps I bought when I switched from PC to Mac in 2009. Coming from Windows, OS X lacked an obvious solution for thoroughly uninstalling software. The answer, of course, is dragging an app from the Applications folder to the Trash. But what about all the extra cruft that apps leave behind? AppZapper handled it. This week, the app returned from a long hiatus to introduce a brand-new version of “the uninstaller Apple forgot” with AppZapper 3000. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-28c5816d429e69e9",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/15/watchos-27-siri-app-lets-you-continue-existing-chats-though-its-a-bit-hidden/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-15T17:00:11.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "watchOS 27: Siri app lets you continue existing chats, though it’s a bit hidden",
+        "summary": "Apple Watch includes an all-new Siri app in watchOS 27. Unlike the iPhone and iPad versions, it’s a bit less intuitive to use in one way. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-da2cd07f5494e54c",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2259077/gm-finds-splitscreen-solution-for-carplay-and-android-auto/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-15T15:29:26.000Z",
+    "categories": [
+      "tecnologia-general",
+      "android"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "GM finds splitscreen solution for CarPlay and Android Auto",
+        "summary": "That should keep these infotainment systems from hogging all the important screen real estate.",
         "body": ""
       }
     },
@@ -73,79 +270,6 @@
     "media": null
   },
   {
-    "id": "techcrunch-0b52732370d48348",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/15/former-tiktok-execs-built-an-app-that-uses-ai-to-teach-you-how-to-pose-for-a-photo/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-15T14:42:37.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Former TikTok execs built an app that uses AI to teach you how to pose for a photo",
-        "summary": "Essentially is a camera app, Superpose analyzes selfies or photos and generates four potential poses using AI.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-1223fda505685416",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/15/apple-watch-adds-an-all-new-readiness-app-heres-how-it-works/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-15T14:38:05.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple Watch adds an all-new Readiness app, here’s how it works",
-        "summary": "Apple Watch is gaining an all-new health-related app called Readiness. Here’s what you need to know about Apple’s new fitness-focused Readiness app. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-2d661ef9863fe1fe",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/15/discover-how-to-take-your-startup-from-prototype-to-production-at-techcrunch-disrupt-2026/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-15T14:30:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Discover how to take your startup from prototype to production at TechCrunch Disrupt 2026",
-        "summary": "Learn how to scale your startup breakthrough from prototype to production at TechCrunch Disrupt 2026 with scaling leaders, Adrian Macneil (Foxglove), John Mackey (MBRYONICS), and Boris Sofman (Bedrock Robotics. Register before September 25 to save up to $200 on your pass.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "the-verge-0ebd2f3b26910d1e",
     "type": "news",
     "sourceId": "the-verge",
@@ -163,53 +287,6 @@
       "en": {
         "title": "Fujifilm’s Instax Pal 2 is a tiny digital camera that may not disappoint",
         "summary": "Fujifilm announced a follow-up to its tiny and quirky Instax Pal camera that debuted three years ago bundled with an instant printer. While the original Pal was a palm-sized camera with a round design that lacked a screen or viewfinder, the new Instax Pal 2 includes both in a design that looks like a miniaturized […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-647dca07efafcd95",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/15/apple-card-has-three-new-and-improved-features-in-ios-27/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-15T14:00:41.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple Card has three new and improved features in iOS 27",
-        "summary": "Apple Card gets even better in iOS 27, with new features like a recurring transactions section to help you stay on top of regular charges. Here’s what’s new. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-6fad7adac62b0da2",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2251529/what-is-vpn-kill-switch-how-works/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-15T14:00:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "What is a VPN kill switch and how does it work?",
-        "summary": "A VPN offers increased privacy, but won't do you much good if the connection drops. Kill switches ensure you're always using a VPN when it matters.",
         "body": ""
       }
     },
@@ -234,54 +311,6 @@
       "en": {
         "title": "This doorbell camera lets a human security guard watch your front door",
         "summary": "DIY home security company SimpliSafe is bringing its AI-powered proactive security feature to the front door. The new SimpliSafe Video Doorbell Series 2 launches today for $199.99 and works with the company's Active Guard Outdoor Protection (starting at $49.99 a month). This combines AI analysis with live agents to detect potential threats and respond proactively. […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-4eb3b43596fa3a70",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/15/battery-draining-faster-after-updating-to-ios-27-dont-panic/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-15T13:35:18.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Battery draining faster after updating to iOS 27? Don’t panic …",
-        "summary": "If you’ve just updated your iPhone to iOS 27 , you may have felt concerned after seeing your battery draining faster than usual, as well as your device getting hot in normal use. If so, there’s no cause for panic. While both effects may be very real, they are only temporary … more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-cb655aba17470fcf",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/15/early-anthropic-hire-former-metr-coo-have-found-a-way-to-rein-in-rogue-ai-agents/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-15T13:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Early Anthropic hire, former METR COO have found a way to rein in rogue AI agents",
-        "summary": "Their startup, Artificial Intelligence Underwriting Company (AIUC) has raised $40 million in a Series A round led by Ribbit Capital, with participation from First Harmonic.",
         "body": ""
       }
     },
@@ -353,30 +382,6 @@
       "en": {
         "title": "Volvo increases the batteries for 2028 XC60 and XC90 plug-in refresh",
         "summary": "The refreshed Volvos also get new infotainment systems with Gemini onboard.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-fcdc409cc0b0fa21",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/09/ai-agents-flood-the-internet-with-slop-infused-spam/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T21:04:32.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "AI bots \"Timmy,\" \"Ren,\" and \"Jackie\" are flooding social media with slop",
-        "summary": "“Hello, I'm an Al agent, a few days old, living on a small platform for agents.”",
         "body": ""
       }
     },
@@ -547,31 +552,6 @@
     "media": null
   },
   {
-    "id": "accessible-android-54cd8d26641febeb",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/netboard/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T07:00:00.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "NetBoard",
-        "summary": "NetBoard turns your computer into an instant input device for your phone, allowing you to type quickly, accurately, and effortlessly using your computer’s full physical…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "nvda-es-ed501132dbec146b",
     "type": "news",
     "sourceId": "nvda-es",
@@ -693,56 +673,6 @@
       "en": {
         "title": "Earcade",
         "summary": "Earcade is a collection of nine audio-only games for blind and low vision players. Every game is played entirely by ear; no visual information is required at any point. The games use binaural HRTF spatial audio, so the position and movement of objects is conveyed through where sounds appear around you. Headphones are recommended. Haptic feedback is used alongside audio in most of the games. Menus and navigation are built for VoiceOver. The app is free, has no ads, and no gameplay content is locked behind a purchase. There is an optional tip jar which unlocks nothing.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "accessible-android-61b8cf8d7281682c",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/yugosoft-messages/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-13T19:13:53.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "YugoSoft Messages",
-        "summary": "YugoSoft Messages is a modern, fast, and fully accessible SMS application, built with the vision of making messaging easy and barrier-free for everyone. The app…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "accessible-android-5f02a1602de1a94c",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/blind-accessibility-keyboard-bak/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-13T15:27:15.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Blind Accessibility Keyboard (BAK)",
-        "summary": "Blind Accessibility Keyboard (BAK) is an Android keyboard for blind and low-vision users. Refined over many years together with blind users, it was rebuilt from…",
         "body": ""
       }
     },
@@ -1247,31 +1177,6 @@
     "media": null
   },
   {
-    "id": "accessible-android-b9ca93b5272e2f9d",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/itest/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-06T09:07:07.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iTest",
-        "summary": "iTest is a hardware diagnostic and specification testing utility developed by Hugh Jeffreys. It allows users to easily test device components—including audio, display, sensors, cameras,…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "freedom-scientific-blog-47d6926d08cd969b",
     "type": "news",
     "sourceId": "freedom-scientific-blog",
@@ -1392,31 +1297,6 @@
       "es": {
         "title": "Las nuevas gafas inteligentes de Samsung prometen una IA más útil para las personas con baja visión",
         "summary": "Las nuevas gafas inteligentes de Samsung prometen una IA más útil para las personas con baja visión. La compañía surcoreana ha adelantado nuevos detalles sobre este dispositivo, desarrollado junto a Google sobre la plataforma Android XR e impulsado por Gemini. Más allá de su diseño o autonomía, Samsung apuesta por una inteligencia artificial capaz de […] La entrada Las nuevas gafas inteligentes de Samsung prometen una IA más útil para las personas con baja visión se publicó primero en Conticgo .",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "accessible-android-11c58aaa518e1ff3",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/blindgram/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-01T07:50:30.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "BlindGram",
-        "summary": "blindGram is an independent accessible Telegram client for blind and low-vision Android users, based on Telegram’s open-source Android code. Its optional blindGram Assistant reads text…",
         "body": ""
       }
     },
@@ -1801,83 +1681,6 @@
     "media": null
   },
   {
-    "id": "accessible-android-895057bf19f013f0",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/a-comprehensive-guide-to-the-smart-typer-pro-app/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-08-15T08:40:45.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "A Comprehensive Guide to the Smart Typer Pro App",
-        "summary": "Smart Typer Pro is an all-in-one productivity app for Android devices that completely redefines mobile note-taking, text editing, voice dictation, artificial intelligence assistance, and document…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "accessible-android-468ee1b22b14846f",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/smart-typer-pro/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-08-14T07:16:42.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Smart Typer Pro",
-        "summary": "Smart Typer is a lightweight yet feature-rich Android productivity application designed to bring notes, file management, advanced text editing, AI tools, and everyday utilities into…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "accessible-android-14a8ff643e0a5049",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/unboxr/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-08-09T16:22:27.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Unboxr",
-        "summary": "Unboxr is the ultimate lightweight and secure tool for extracting archives on your Android device. Designed with a beautiful, modern dark theme using Jetpack Compose,…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "nvaccess-in-process-61c805765b69b0bb",
     "type": "news",
     "sourceId": "nvaccess-in-process",
@@ -1968,31 +1771,6 @@
       "es": {
         "title": "Modos-ON ¡Ya disponible el informe de Slay the princess - The Pristine Cut para PC!",
         "summary": "Desde el Centro de Tiflotecnología e Innovación de la ONCE (CTI) se ha realizado un análisis detallado evaluando sus distintos apartados y su impacto en la experiencia de juego.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "accessible-android-9184590b8a4b5a5d",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/talk-forward/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-08-03T16:03:31.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Talk Forward",
-        "summary": "Talk Forward is a powerful screen reader that makes your Android phone and tablet fully usable by voice and touch — built for blind and…",
         "body": ""
       }
     },
@@ -2187,31 +1965,6 @@
     "media": null
   },
   {
-    "id": "accessible-android-4142b5e8ce924d4f",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/beyond-the-numbers-do-flagship-processors-make-a-real-difference-in-daily-use/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-07-13T15:30:16.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Beyond the Numbers: Do Flagship Processors Make a Real Difference in Daily Use?",
-        "summary": "Android phones span a wide range of prices, starting at around $80 and reaching as high as $1,500. While it is not reasonable to expect…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "tecnoconocimiento-accesible-9c6d3ff02db10bac",
     "type": "news",
     "sourceId": "tecnoconocimiento-accesible",
@@ -2261,31 +2014,6 @@
     "media": null
   },
   {
-    "id": "accessible-android-9855b497db48fc8e",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/honor-600-pro-review/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-06-22T20:56:46.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Honor 600 Pro Review",
-        "summary": "After spending more than five years with Samsung phones, the time has come to test out a phone from another brand. While not a flagship,…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "tecnoconocimiento-accesible-1a6aa1edd60a1a48",
     "type": "news",
     "sourceId": "tecnoconocimiento-accesible",
@@ -2310,31 +2038,6 @@
       "es": {
         "title": "Descargador de Música Accesible 1.4.2: Nueva Alternativa!",
         "summary": "Normal 0 false 21 false false false ES X-NONE X-NONE /* Style Definitions */ table.MsoNormalTable {mso-style-name:\"Tabla normal\"; mso-tstyle-rowband-size:0; mso-tstyle-colband-size:0; mso-style-noshow:yes; mso-style-priority:99; mso-style-parent:\"\"; mso-padding-alt:0cm 5.4pt 0cm 5.4pt; mso-para-margin-top:0cm; mso-para-margin-right:0cm; mso-para-margin-bottom:8.0pt; mso-para-margin-left:0cm; line-height:107%; mso-pagination:widow-orphan; font-size:11.0pt; font-family:\"Calibri\",sans-serif; mso-ascii-font-family:Calibri; mso-ascii-theme-font:minor-latin; mso-hansi-font-family:Calibri; mso-hansi-theme-font:minor-latin; mso-bidi-font-family:\"Times New Roman\"; mso-bidi-theme-font:minor-bidi; mso-fareast-language:EN-US;} Hola gente, ¿qué tal les va? Descargador de Música Accesible 1.4.2 : Otra gran alternativa inclusiva para YouTube Introducción En el mundo actual, el contenido multimedia es parte fundamental de nuestro día a día. Para la comunidad de personas con discapacidad visual, contar con herramientas que permitan descargar y gestionar este contenido de forma autónoma es vital. Si bien ya existen en el ecosistema opciones consolidadas y muy queridas como TCA MediaDownloader, siempre es una excelente noticia recibir nuevas propuestas que enriquezcan nuestras opciones. Hoy queremos hablar de Descargador de Música Accesible, otra fantástica alternativa que se suma a la lista de herramientas diseñadas desde cero para garantizar una experiencia fluida, cómoda y sin barreras. Esta aplicación ha sido desarrollada por Nicolás Alfaro, programador y miembro del colectivo de personas con discapacidad visual, quien ha puesto su conocimiento al servicio de la comunidad. ¿Qué es Descargador de Música Accesible? Es una aplicación gratuita para Windows que permite bajar audio y video desde YouTube de manera sencilla y con total compatibilidad con lectores de pantalla. Actualmente en su versión 1.4.2, el programa destaca por su ligereza y por integrar soluciones prácticas —como un reproductor interno portable— que facilitan la navegación previa a la descarga. Al ser un proyecto creado por y para usuarios con discapacidad visual, cada ventana y comando está optimizado para responder exactamente a lo que la comunidad necesita, convirtiéndose en un complemento ideal para tu día a día digital. Características principales • Interfaz 100% accesible: Diseñada minuciosamente para funcionar a la perfección con NVDA y JAWS. Cada elemento, botón y cuadro de diálogo está correctamente etiquetado para una navegación fluida mediante el tabulador y atajos de teclado. • Buscador integrado de YouTube: No necesitas abrir el navegador. El programa incluye una pestaña de búsqueda directa que ofrece hasta 50 resultados, permitiéndote elegir el contenido exacto desde una lista cómoda y accesible. • Reproductor interno MPV: Una de las novedades más potentes de la versión 1.4.2. Incorpora un reproductor basado en MPV portable para escuchar el audio o ver el video antes de descargarlo, con controles adaptados y accesibles. • Variedad de formatos y calidades: Audio (MP3): Permite elegir entre calidades de 128, 256 y 320 kbps. Video (MP4). • Información detallada antes de descargar: Puedes verificar el título, duración, fecha de publicación y número de visualizaciones para asegurarte de que es el archivo correcto. • Historial de descargas: Un registro organizado y accesible desde el menú superior para revisar tus archivos obtenidos recientemente. Mantenimiento y actualización integrada: Como YouTube actualiza su plataforma constantemente, el programa incluye una opción en el menú de herramientas para actualizar las librerías de yt-dlp de forma automática, garantizando que el software nunca quede obsoleto. • Sistema de diagnóstico: Si experimentas fallos con el lector de pantalla o el reproductor, la app cuenta con una herramienta de diagnóstico que verifica el estado de NVDA y los módulos de Python. Puedes exportar este reporte para recibir soporte técnico de forma eficiente. Contacto y soporte El desarrollo de software accesible crece gracias a la retroalimentación de la comunidad. Si tienes sugerencias, comentarios o deseas reportar algún fallo, puedes ponerte en contacto directo con el desarrollador: Correo electrónico: alfaronico8@gmail.com Nota para el soporte: Se recomienda ser lo más detallado posible al describir cualquier incidencia o sugerencia para facilitar las futuras actualizaciones del programa. Tutorial: 🎧 Descargador de Música Accesible 1.4.2: Nueva Alternativa! En este tutorial, Nicolás nos mostrará como utilizar este programa, además todas sus funcionalidades. La descarga. Les dejaré en la descarga: • El audio tutorial (en los canales Odysse y YouTube estará en video tutorial). • El programa: Descargador de Música Accesible 1.4.2. Aquí Nicolás Alfaro nos propone otra alternativa para descargar contenido multimedia. Espero lo disfruten y les sea de utilidad. Y ya sabes, Si te gusta este contenido, Apóyanos haciendo una donación: Dona aquí en PayPal. compártelo en: Facebook, X. Deja un comentario sobre esta entrada. Síguenos en X: Abajo tienes el botón. Suscríbete al blog: Ahora puedes unirte a nuestros grupos de WhatsApp o Telegram: Puedes escribir al mail del blog con tus datos si deseas ingresar a los mismos. Escucha todos nuestros audio tutoriales, cómodamente: Entrando desde aquí, a nuestro canal en YouTube. Ahora también, en nuestro canal en Odysse: Entra al canal de Tecnoconocimiento Accesible en Odysse. O si prefieres escúchanos en: Anchor: Escúchanos en Anchor. Ponte en contacto con nosotros, déjanos tus sugerencias, dudas, o comentarios, abajo tienes un sencillo formulario, o si lo prefieres, escríbenos al correo del blog: tecnoconocimientoaccesible@gmail.com Los aportes siempre serán bienvenidos. cuando nos escribas por uno de los medios con alguna sugerencia, se publicará con tu nombre. además, como ya se sabe, puedes publicar esta entrada en otro sitio, pero no te olvides citar la fuente. Saludos, y hasta otro post. Descarga aquí el tutorial. Descarga aquí el programa.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "accessible-android-e3d173bca63a2350",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/framework-detector/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-06-21T10:28:22.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Framework Detector",
-        "summary": "Ever wondered what framework powers your favorite Android app? Framework Detector App is the ultimate Android framework identifier for developers, reverse engineers, and technology enthusiasts.…",
         "body": ""
       }
     },

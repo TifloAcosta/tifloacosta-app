@@ -41,3 +41,9 @@ test('global page frame remains proportional when browser zoom changes', async (
   assert.match(css, /\.wrap\s*\{[^}]*width:94vw;[^}]*margin-inline:auto;[^}]*\}/s);
   assert.doesNotMatch(css, /\.wrap\s*\{[^}]*62rem/);
 });
+
+test('Actualidad cards use a fluid multi-column layout instead of one oversized column', async () => {
+  const css = await read('styles.css');
+  assert.match(css, /\.news-list\s*\{[^}]*display:grid;[^}]*grid-template-columns:repeat\(auto-fit,minmax\(min\(100%,28rem\),1fr\)\);[^}]*gap:\.8rem;[^}]*\}/s);
+  assert.match(css, /\.news-item\s*\{[^}]*min-width:0;[^}]*\}/s);
+});

@@ -35,3 +35,9 @@ test('content collections fill available width without rigid empty columns', asy
   assert.match(css, /\.settings-form \.settings-actions,\.settings-form \.settings-status\s*\{[^}]*flex:1 1 100%;[^}]*\}/s);
   assert.doesNotMatch(css, /grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
 });
+
+test('global page frame remains proportional when browser zoom changes', async () => {
+  const css = await read('styles.css');
+  assert.match(css, /\.wrap\s*\{[^}]*width:94vw;[^}]*margin-inline:auto;[^}]*\}/s);
+  assert.doesNotMatch(css, /\.wrap\s*\{[^}]*62rem/);
+});

@@ -20,25 +20,27 @@ jobs:
       - name: Synchronize TifloAcosta podcast for search verification
         run: node scripts/sync-podcast.mjs
       - run: npm test
-      - name: Check TifloAcosta podcast catalogs for the reported calor episode
+      - name: Find the reported calor episode in approved podcast feeds
         run: |
           node - <<'NODE'
-          const feeds = [
-            'https://anchor.fm/s/5b48ca28/podcast/rss',
-            'https://www.ivoox.com/feed_fg_f11282163_filtro_1.xml',
-            'https://www.ivoox.com/feed_fg_f11272924_filtro_1.xml'
-          ];
+          const fs = require('fs');
+          const sources = JSON.parse(fs.readFileSync('actualidad-media-sources.json', 'utf8'))
+            .filter(source => source.enabled && source.type === 'audio' && source.adapter === 'feed' && source.endpoint);
           let found = false;
-          for (const url of feeds) {
-            const response = await fetch(url);
-            console.log(`FEED ${url} HTTP ${response.status}`);
-            if (!response.ok) continue;
-            const xml = await response.text();
-            const titles = [...xml.matchAll(/<title(?:\s[^>]*)?>([\s\S]*?)<\/title>/gi)]
-              .map(match => match[1].replace(/<!\[CDATA\[|\]\]>/g, '').replace(/<[^>]+>/g, '').trim())
-              .filter(title => /(calor|gusta|verano|fr[ií]o)/i.test(title));
-            console.log(titles.join('\n') || 'No related titles found');
-            if (titles.some(title => /calor/i.test(title))) found = true;
+          for (const source of sources) {
+            try {
+              const response = await fetch(source.endpoint);
+              console.log(`FEED ${source.name} HTTP ${response.status}`);
+              if (!response.ok) continue;
+              const xml = await response.text();
+              const titles = [...xml.matchAll(/<title(?:\s[^>]*)?>([\s\S]*?)<\/title>/gi)]
+                .map(match => match[1].replace(/<!\[CDATA\[|\]\]>/g, '').replace(/<[^>]+>/g, '').trim())
+                .filter(title => /calor/i.test(title));
+              for (const title of titles) console.log(`MATCH ${source.name}: ${title}`);
+              if (titles.length) found = true;
+            } catch (error) {
+              console.log(`ERROR ${source.name}: ${error.message}`);
+            }
           }
           if (!found) process.exit(1);
           NODE

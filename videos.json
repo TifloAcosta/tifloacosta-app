@@ -1,9 +1,18 @@
 {
-  "generatedAt": "2026-09-13T12:44:33.558Z",
+  "generatedAt": "2026-09-16T11:38:59.465Z",
   "channelHandle": "@tifloacosta",
   "channelUrl": "https://www.youtube.com/@tifloacosta",
-  "count": 287,
+  "count": 288,
   "videos": [
+    {
+      "id": "f-5AhrQoieE",
+      "title": "iOS 27: lo que cambia cuando no miras la pantalla",
+      "publishedAt": "2026-09-16T09:00:02Z",
+      "description": "iOS 27 ya está aquí, pero no todas sus novedades afectan igual a quienes usamos VoiceOver.\nEn este vídeo repasamos los cambios que realmente merece la pena conocer, qué aportan en el día a día y cuáles pueden marcar una diferencia práctica en accesibilidad.\nSi usas iPhone con VoiceOver, entra y descubre qué cambia para ti.",
+      "excerpt": "iOS 27 ya está aquí, pero no todas sus novedades afectan igual a quienes usamos VoiceOver.",
+      "thumbnail": "https://i.ytimg.com/vi/f-5AhrQoieE/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=f-5AhrQoieE"
+    },
     {
       "id": "KCiCubo9G9o",
       "title": "Yo ya no persigo las noticias: ahora vienen a buscarme",

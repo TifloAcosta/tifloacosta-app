@@ -1,178 +1,37 @@
 [
   {
-    "id": "9to5mac-8f4b920c18c028c7",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/15/apple-explains-how-the-iphone-18-pros-new-reference-image-camera-mode-works/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T02:25:19.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple explains how the iPhone 18 Pro’s new Reference Image camera mode works",
-        "summary": "A new post on Apple’s Security Research blog details the fascinating tech, architecture, and thinking behind the iPhone 18 Pro’s new Reference Image camera mode . Here are the details more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-3563719460ae21d5",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/995826/boox-palma-3-e-ink-reader-pocket-smartphone-android-16",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T02:00:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The Boox Palma 3 gets stylus support and a sleek redesign",
-        "summary": "Nearly two years after the last update to Boox's smartphone-sized black-and-white e-reader, the company announced the Palma 3 with a sleek redesign, new functionality, and a handful of other small updates that may justify its significant price bump depending on how you plan to use it. While the Palma 2 launched in 2024 for $279.99, […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-5667e8036aad25f0",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2259755/canon-r8-ii-camera-borrowed-styling-from-a-classic-slr-film-camera/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T01:00:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Canon's R8 II camera borrowed its styling from a classic SLR film camera",
-        "summary": "Though preoccupied with vlogging lately, Canon hasn't forgotten its full-frame photography market.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-db9a51410e27fd8c",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/995430/canon-eos-r8-mark-11-full-frame-digital-camera-pricing-availability",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T01:00:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The EOS R8 Mark II is Canon’s lightest full-frame camera with stabilization",
-        "summary": "Canon announced the second-generation of its EOS R8 with a new retro-inspired redesign and the addition of in-body stabilization. That feature was one of the most notable omissions from the original R8 that launched in 2023 as a smaller, cheaper, and more accessible alternative to the Canon R6 Mark II for photographers wanting a larger […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-30c3bebdf7db19af",
+    "id": "techcrunch-f9df6474e0c4d588",
     "type": "news",
     "sourceId": "techcrunch",
     "sourceName": "TechCrunch",
     "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/15/we-dont-need-ai-regulation-leave-safety-to-us-nvidias-jensen-huang-says/",
+    "originalUrl": "https://techcrunch.com/2026/09/16/your-ai-agents-can-now-control-your-google-home-devices/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-16T00:20:39.000Z",
+    "publishedAt": "2026-09-16T17:00:00.000Z",
     "categories": [
       "tecnologia-general",
-      "programas-accesibles",
       "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "We don’t need AI regulation — leave safety to us, Nvidia’s Jensen Huang says",
-        "summary": "AI isn't some new form of \"alien mind,\" according to Jensen Huang. It's just hardware and software, so safety can be engineered by each AI product maker.",
+        "title": "Your AI agents can now control your Google Home devices",
+        "summary": "Google is launching early access to a new MCP server for Google Home, allowing AI agents like Claude, ChatGPT and others to control connected devices, review camera summaries and access smart home activity using natural language.",
         "body": ""
       }
     },
     "media": null
   },
   {
-    "id": "engadget-29c114f5c76ccf4b",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2257144/level-2-ev-charger-how-to-know-if-you-need-one/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T00:00:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Considering a Level 2 EV charger? How to know if you need one",
-        "summary": "Charging your EV from home is cheap and convenient, but knowing which type of charger will get the most out of your electric car can often be confusing.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-e3c34e29a57a0d1d",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/15/india-escalates-apple-probe-over-alleged-ios-18-issues-that-incurred-repair-costs/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-15T23:52:22.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "India escalates Apple probe over alleged iOS 18 issues that incurred repair costs",
-        "summary": "India’s Central Consumer Protection Authority (CCPA) has reportedly escalated its probe into whether Apple should be held responsible for an iOS 18 update that allegedly caused display and microphone issues on some iPhones. Here are the details. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-96e20f159a85f49a",
+    "id": "the-verge-78952817e2333361",
     "type": "news",
     "sourceId": "the-verge",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/995917/data-center-nyt-midterm-poll-september",
+    "originalUrl": "https://www.theverge.com/tech/996310/google-home-mcp-integration-agentic-ai-smart-home-price-release-date",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-15T23:34:25.000Z",
+    "publishedAt": "2026-09-16T17:00:00.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -181,25 +40,142 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "AI and data centers are incredibly unpopular in every poll",
-        "summary": "Poll data released Tuesday by the New York Times and Siena University confirms what we've already been seeing, and what politicians are responding to - AI and data centers are incredibly unpopular. Asked if they support or oppose the construction of data centers to power AI tech, 61 percent of the 1,503 likely voters surveyed […]",
+        "title": "Google will now let any AI agent run your smart home",
+        "summary": "Google is opening up its smart home to AI agents, letting tools like Claude and Open Claw access and control your connected devices and analyze your home's data using the standardized Model Context Protocol. Google Home MCP is a new integration that lets third-party AI agents control and monitor your smart home and act on […]",
         "body": ""
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-3dca5407d0148986",
+    "id": "engadget-3709bb86f23ae259",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2259938/anthropics-claude-can-now-create-editable-documents-for-you-cowork-chat-together/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T16:30:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Anthropic's Claude can now create editable documents for you",
+        "summary": "Anthropic is adding the ability to create docs, slideshow and access Cowork capabilities inside chat. It will roll out to Pro and Max subscribers first.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-0274f48103a33275",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/16/anthropic-merges-claude-chat-and-cowork-in-one-interface/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T16:30:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Anthropic merges Claude chat and Cowork in one interface",
+        "summary": "Anthropic is initially releasing these features to Pro and Max plan subscribers.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-dbb65f7394419500",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/996234/anthropic-one-claude-cowork-docs-slides",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T16:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Claude comes for Gemini with its own take on Docs and Slides",
+        "summary": "Claude is getting a pair of new tools today: Docs and Slides. They'll let you create documents and presentations through Claude chats, which you can export, edit, and share with other users. As part of the announcement, Anthropic is also simplifying how Claude chats work, merging regular chats and Cowork into \"one Claude,\" with all […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-5bd63e1040f8ce8a",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/15/omnifocus-adds-siri-ai-support-as-omni-group-updates-its-apps-for-ios-27-macos-27-more/",
+    "originalUrl": "https://9to5mac.com/2026/09/16/apple-weather-adds-two-convenient-new-features-in-ios-27/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-15T23:22:20.000Z",
+    "publishedAt": "2026-09-16T16:09:39.000Z",
     "categories": [
       "apple",
-      "tecnologia-general",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple Weather adds two convenient new features in iOS 27",
+        "summary": "Apple Weather adds two convenient features in iOS 27 that make it easier to track rain and wind forecasts. Here are the details. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-5979d893592bd0e2",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/16/apple-watch-series-12-has-subtle-design-change-that-apple-didnt-mention/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T15:34:14.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple Watch Series 12 has subtle design change that Apple didn’t mention",
+        "summary": "Apple Watch Series 12 arrives this Friday (pre-order here), but some upgraders might be surprised by a subtle design change that Apple didn’t mention in its announcement: larger bezels around the display. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "applevis-apps-c32fc2263e2fdc72",
+    "type": "news",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/mac/productivity/norlay",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T15:02:26.000Z",
+    "categories": [
+      "apple",
       "apps-accesibles",
       "ia-accesibilidad"
     ],
@@ -207,23 +183,96 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "OmniFocus adds Siri AI support as Omni Group updates its apps for iOS 27, macOS 27, more",
-        "summary": "Unsurprisingly, the Omni Group worked all summer to get its suite of apps ready for Apple’s 2027 system updates from day one. Here’s what’s new. more…",
+        "title": "norlay",
+        "summary": "Norlay is a free, VoiceOver-first AI assistant for macOS that actually uses your computer for you. Type or speak normally and it searches files, browses the web, reads and writes documents, runs commands, sets reminders, looks at your screen, and shows each step in an activity log — asking your approval before anything irreversible. Every step, reply, and error is announced; optional offline Amy voice speaks replies aloud, with hold-to-talk dictation and a hands-free loop. Works with free AI models (Gemini, OpenRouter, Groq, Ollama, Apple on-device) — no account, no tracking. Requires macOS 14 or later, best on Apple Silicon. Download: https://norlay.fit/download — Docs: https://norlay.fit/docs — Feedback (please use this, not AppleVis comments): https://norlay.fit/feedback",
         "body": ""
       }
     },
     "media": null
   },
   {
-    "id": "engadget-bbac1f7995424e0a",
+    "id": "engadget-ea53ba65ac69c4ea",
     "type": "news",
     "sourceId": "engadget",
     "sourceName": "Engadget",
     "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2252764/how-to-manually-update-android-auto/",
+    "originalUrl": "https://www.engadget.com/2260114/snap-specs-launch-live-blog-evan-spiegel-keynote/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-15T23:00:00.000Z",
+    "publishedAt": "2026-09-16T15:00:00.000Z",
     "categories": [
+      "tecnologia-general",
+      "gafas-inteligentes"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Snap Specs launch 2026: Live updates from CEO Evan Spiegel's keynote",
+        "summary": "More details on the company's chunky smart glasses are expected today.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-cda3aadd398f83ba",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/16/robots-are-waiting-for-a-chatgpt-moment-nvidias-les-karpas-explains-why-at-techcrunch-disrupt-2026/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T15:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Robots are waiting for a ChatGPT moment: Nvidia’s Les Karpas explains why at TechCrunch Disrupt 2026",
+        "summary": "The robotics industry is still waiting for their breakthrough into day-to-day life. Nvidia's Les Karpas has an answer as to why at TechCrunch Disrupt 2026. Register before September 25 to save up to $200 on your pass.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-205f94d99b8e53e5",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/gadgets/2026/09/macos-27-golden-gate-the-ars-technica-review/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T14:50:06.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "macOS 27 Golden Gate: The Ars Technica review",
+        "summary": "It's both a \"Snow Leopard update\" and a major leap for Apple Intelligence.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-db672dfd419f5128",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/16/daily-september-16-2026/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T14:42:56.000Z",
+    "categories": [
+      "apple",
       "tecnologia-general",
       "android",
       "apps-accesibles"
@@ -232,56 +281,82 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "How to manually update Android Auto (and what it might mean if you can't)",
-        "summary": "The Android Auto app lives in the Play Store, so start there if you want to update.",
+        "title": "9to5Mac Daily: September 16, 2026 – macOS 27 Golden Gate features",
+        "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Stuff :Stuff helps you get everything out of your head and into a simple, elegant system—closing open loops and reducing mental stress. A simple to-do list for iPhone, iPad, and Mac, with powerful tools that make organizing, tracking, and checking off your tasks a whole lot more satisfying. Get Stuff done. more…",
         "body": ""
       }
     },
     "media": null
   },
   {
-    "id": "techcrunch-04158ff69019dd12",
+    "id": "accessible-android-dd64e81e0c3fde69",
     "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/15/the-ai-data-center-boom-is-colliding-with-cities-scarred-by-big-industry/",
+    "sourceId": "accessible-android",
+    "sourceName": "Accessible Android",
+    "sourceUrl": "https://accessibleandroid.com/",
+    "originalUrl": "https://accessibleandroid.com/jieshuo-touch-focus-and-double-tap-delays/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-15T21:47:38.000Z",
+    "publishedAt": "2026-09-16T13:12:40.000Z",
     "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
+      "android",
+      "apps-accesibles",
+      "tecnologia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "The AI data center boom is colliding with cities scarred by big industry",
-        "summary": "National outcry against data center construction has spread to Philadelphia, where officials suggested possible construction in a neighborhood already impacted by a now-defunct oil refinery.",
+        "title": "Jieshuo Touch Focus And Double Tap Delays",
+        "summary": "Whether you are exploring the screen or trying to find a specific element, there is a delay between touching the screen and focusing on the…",
         "body": ""
       }
     },
     "media": null
   },
   {
-    "id": "techcrunch-dfa2e60106b97131",
+    "id": "engadget-28dce57947a6caf7",
     "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/15/meta-now-lets-ai-agents-handle-the-boring-parts-of-whatsapp-business-setup/",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2259654/how-iphone-18-pro-apple-reference-image-works/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-15T20:12:53.000Z",
+    "publishedAt": "2026-09-16T12:00:00.000Z",
     "categories": [
       "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Here's how the iPhone 18 Pro's Apple Reference Image tech works",
+        "summary": "Apple Reference Image is like giving your photos a tamper-proof seal.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-18274aebf7465b46",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/policy/995534/a-brief-history-of-ai-executives-calling-for-regulation",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T12:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows",
       "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Meta now lets AI agents handle the boring parts of WhatsApp Business setup",
-        "summary": "A new WhatsApp Business MCP server lets developers use AI coding agents like Claude, Cursor, Codex, and ChatGPT to handle setup, messaging templates, testing, and troubleshooting.",
+        "title": "A brief history of AI executives calling for regulation",
+        "summary": "Over the past few days, a lot of people who stand to make a lot of money from AI all publicly agreed that it's time to make everyone slow down before we lose control - including OpenAI CEO Sam Altman, Anthropic CEO Dario Amodei, Google DeepMind cofounder Demis Hassabis, Microsoft CEO Satya Nadella, and X […]",
         "body": ""
       }
     },
@@ -352,30 +427,6 @@
       "en": {
         "title": "Demand for EV chargers is outstripping supply, says ChargePoint report",
         "summary": "EV growth is happening, even in the US, and those EVs will need plugs to charge.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-b5a678d24df5a70c",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/09/exclusive-open-chinese-models-close-gap-with-silicon-valleys-frontier-ai-models/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-15T12:00:41.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Exclusive: Paying for frontier AI models buys 4-month head start at 5x the cost",
-        "summary": "Ars previewed Mozilla’s report on how cheap open models caught up on capability.",
         "body": ""
       }
     },
@@ -538,7 +589,7 @@
     "locales": {
       "en": {
         "title": "iOS 27 and iPadOS 27: A Summary of VoiceOver and Braille Issues and Improvements",
-        "summary": "iOS 27 and iPadOS 27 were released to the public on Monday, September 14, 2026. This post contains a summary of new bugs and fixes impacting VoiceOver and Braille support that the AppleVis Editorial Team has independently validated during our use and testing of these releases. The information contained in this post is compiled from our own use and testing of iOS 27 and iPadOS 27 during the beta period from June to September 2026; as well as from validated reports submitted by others through our Community Bug Program and shared on the AppleVis Forum. Our sincere appreciation goes to everyone who so generously took the time to share their findings with us. At the outset, we need to state explicitly that the bug list contained in this post is not definitive and that our assessments are not infallible. While we are confident in the presence of the issues discussed in this post, there are many other reports shared on the AppleVis Forum by members of our community that we have not been able to independently replicate with the available information. Many of these reports represented use cases that are different from those of our team; and a small number were issues that, despite understanding how to reproduce them, we did not get the same results. We say all of this so that readers understand the limits of our own testing, and that others' experiences may be different from ours. An issue not being present in our bug list does not mean the issue does not exist; it simply means that we are either unaware of or unable to reproduce it. As is our routine practice, each bug in this post has been given a severity rating. These ratings are based upon what we believe to be the implications for accessing and using features and functionality for the average user; the level of impact on the overall user experience; and whether or not there is an effective workaround for the issue. However, as these ratings are subjective to an extent, it is very possible that they may not reflect your own opinion or use case. With this in mind, we strongly recommend reading this full post and any replies before updating to iOS 27 and iPadOS 27; as we believe this will help you make an informed decision on whether to install the software at the current time or to wait for a future release. We also strongly recommend that you read this Megathread about the iOS 27 RC , as it contains a wealth of community reports about and experiences with the Release Candidate version of the software. Some issues listed in this post and on the Forum may manifest only under specific conditions; this is all the more likely as software continues to add more features and the number of devices, available configurations, and use cases in Apple's ecosystem continues to grow. You likely will not experience every bug that we list, and you likely will not agree with every severity rating for the bugs that you do experience. While we wish it were otherwise, this is to be expected. And as is the nature with all software, it is also likely that you will encounter issues that are not reported in this post. To ensure the information in this post is as complete and accurate as possible, we would appreciate input from those who have installed iOS 27 or iPadOS 27. Please confirm if you are encountering the same problems listed or if you have found workarounds. Please also let us know about any additional issues not mentioned here. Of course, it is even more important that you report any new bugs directly to Apple - they are already aware of the ones listed in this post. For an explanation of why and how to report bugs to Apple, see this post. With all of the preamble out of the way, below are the new bugs for VoiceOver and Braille users which members of the AppleVis Editorial Team have personally experienced and believe to be present in iOS 27 and iPadOS 27: A Major Change to VoiceOver's Audio Profile In iOS 27 and iPadOS 27, there is a significant change in the sound profile of VoiceOver when the device's internal speaker is used. When compared to iOS 26, VoiceOver audio in iOS 27 has significantly less bass, particularly at lower volume levels. The resulting sound might best be described as 'neutral' or 'flat', with significantly less of the low-end emphasis and other processing that has characterized VoiceOver audio in recent versions of iOS/iPadOS. If you have not yet upgraded to iOS 27, we believe that you can get a reasonable approximation of how VoiceOver will sound on your device by making a phone call, putting the call on speaker, and then using VoiceOver to navigate around the screen; as the flatter, more neutral sound profile that VoiceOver uses during a phone call sounds very similar to what we are hearing in iOS 27. At the time of publication, we do not know whether the change to VoiceOver's sound profile is expected behavior; thus, we are not including it in our bug list. Nevertheless, we feel that users should be aware of this change before upgrading. If we receive additional information, we will update this post accordingly. Serious Bugs When the state of an item changes or the screen updates, VoiceOver does not always recognize/speak the information. This issue has many manifestations, including (but not limited to): When waking the device, VoiceOver may speak the time the device was last woken rather than the current time; When information updates onscreen (such as the status of an operation in an app), VoiceOver may not speak it right away and instead speak the previously displayed text. There is no known workaround, though VoiceOver will eventually speak the updated information if focus is moved off of and back onto the impacted element enough times. The VoiceOver Per-Voice Equalizer (a feature that allows one to customize certain frequency/tonal characteristics of a voice) does not work. There is no known workaround. If you rely on the per-voice Equalizer, we recommend that you do not install iOS/iPadOS 27 until this issue is resolved. The VoiceOver Pronunciation Dictionary does not work reliably, with custom pronunciations often not being obeyed by VoiceOver. There is no known workaround. If you rely on the Pronunciation Dictionary, we recommend that you do not install iOS/iPadOS 27 until this issue is resolved. On some devices, Sound Curtain and Touch Curtain do not work. For affected users, it is possible to partially work around the issue with Sound Curtain by setting the device volume to 0%. There is no known workaround for Touch Curtain. If you rely on Sound Curtain or Touch Curtain, we recommend that you do not install iOS/iPadOS 27 until this issue is resolved. If an external audio device is connected, VoiceOver speech does not work when playing audio in Safari. Pausing the audio causes it to start working again. Sometimes, when reading text, VoiceOver stops speaking and does not resume on its own. This issue does not occur all of the time. When it does occur, speech will stop mid-sentence (and sometimes even mid-word). Touching the screen or performing a touch gesture (like a one-finger swipe left or right) restores speech, and the user can then refocus VoiceOver on the impacted element. In iOS 27's new Recovery Menu, there is no spoken feedback in Diagnostics Mode, rendering this option completely inaccessible. There is no known workaround to make Diagnostics Mode itself usable. If you do manage to accidentally get your device into Diagnostics Mode, our experience is that the device will restart into normal operation after approximately five to ten minutes of inactivity. Moderate Bugs In Safari, the buttons to switch between the Start Page, Reading List, History, and Bookmarks do not work. It is possible to select these buttons, and VoiceOver indicates they have been selected, but the content itself does not update, meaning content cannot be reached. As a workaround, perform a one-finger triple-tap (what is known as a \"long press\") on the desired button to activate it. Our thanks to AppleVis user Brian Giles for this workaround. When VoiceOver focus is placed inside a text field, and then subsequently moved onto a combo box, the menu automatically opens. On occasions, when swiping through the Lock Screen using one-finger swipe right or left, VoiceOver focus may be inconsistent. When navigating through the Lock Screen using a one-finger swipe right, after the \"Swipe up to Unlock\" element, the expected behavior is that VoiceOver will focus on the first notification (if present); Focus status (if present); or the first item on the screen, like Flashlight or Camera. However, sometimes, VoiceOver users may find that focus is instead placed on items from the Status Bar, such as Cellular Carrier, Battery Percentage, or the Clock. If VoiceOver focus does land on items from the Status Bar when swiping, it is sometimes possible to continue swiping to the right and get to the first Lock Screen item; however, other times, VoiceOver focus can become stuck in a loop between the time, the \"Swipe Up to Unlock\" element, Cellular Carrier, an element with no spoken or audible feedback, or any combination of the above. Sometimes, VoiceOver does not speak the time when the device is woken with the Side Button. If this issue occurs, single-tap the screen with one finger to wake the device. After prompting Siri with the Side button, revealing the interface at the top of the screen, nothing happens when double-tapping the \"Open in App\" button. Double-tapping this button should work to activate it, opening the conversation in the Siri app. In the Phone App, the buttons to switch between 'All' and 'Missed' do not work. This issue can be worked around by either switching to Unified View or swiping through all calls in Classic View. Sometimes, it is not possible to access notifications with VoiceOver that are visually displayed onscreen. Typically, the 'Show notifications' button is present, but on these intermittent occasions, selecting it fails to reveal the notifications, and does nothing. If this issue occurs, double-tap and hold on the \"Show Notifications\" button, and swipe up. This will reveal the notifications. In Notification Center, the option to clear all notifications does not work. A consistent workaround for this issue has not been identified at the time of posting. We recommend clearing notifications manually. VoiceOver's 'Copy Speech' function copies the full semantic markup and hints, instead of just the spoken text. For example, in iOS 27, Copy Speech might paste \"Latest news, heading Level 2\". In previous versions of iOS, Copy Speech would only paste \"Latest news,\" which is the desired behavior. Screen Recognition does not appear in VoiceOver's Quick Settings panel, even if selected for inclusion. The Camera App contains extraneous elements for editing Camera Controls when Edit Mode is not active. This includes \"Remove\" elements next to each camera control and a \"Done\" button that does nothing when tapped. When an app is open and VoiceOver focus is placed on the battery indicator, it is not possible to swipe to other items on the status bar. The Direct Touch option in the VoiceOver Quick Settings panel does not work. Minor Bugs On the Keypad in the Phone app, the button to place the call is labeled as \"Call Answer.\" When focusing on a conversation in the Siri app, the Actions rotor for the conversation contains two identical \"Delete\" actions. When the device is set to 24-Hour Time, VoiceOver does not correctly speak the time on the top of the hour. When customising VoiceOver touch gestures and you select to replace the current command with a new one, the old command is sometimes not overwritten, necessitating manual removal and replacement. When the Safari toolbar is set to 'Bottom', the \"Show Bookmarks\" button is incorrectly labelled as \"Bookmark.\" When the VoiceOver cursor reaches the first or last element onscreen in the Camera app, focus loops instead of stopping at the boundary. Improvements for VoiceOver and Braille in iOS 27 and iPadOS 27 To the best of our knowledge, Apple does not routinely publish lists of bug fixes for VoiceOver or braille across releases; thus, it is difficult to get a complete accounting of every issue that has been resolved or what fixes users can expect to see upon upgrading to iOS 27 or iPadOS 27. With this in mind, our testing suggests that the following issues present in iOS/iPadOS 26 have been resolved or meaningfully improved in iOS 27 and iPadOS 27: Stability of VoiceOver focus has been significantly improved across the operating system. The screen no longer locks while VoiceOver is reading a notification on the Lock Screen. Keyboard sounds once again play when VoiceOver is on, regardless of the audio ducking setting. VoiceOver focus is no longer erratic in the App Switcher when it is opened from the Home Screen. The default volume of the Eloquence speech synthesizer more closely matches that of other voices. In Conclusion Our team has compiled lists of new vision accessibility bugs for every major iOS and iPadOS release since iOS 7 in 2013. No software from any manufacturer is completely free of bugs. That said, the number of bugs - particularly those classified as \"serious\" and involving core VoiceOver and braille functionality - in iOS/iPadOS 27 is deeply concerning. We call on Apple to urgently prioritize fixing the bugs listed in this post, as well as those on The AppleVis Bug Tracker . If you have not already upgraded to iOS 27 or iPadOS 27, we would strongly recommend that you take a few moments to read through any replies to this post before doing so; in case other users' experiences differ from our own. Also, consider that historically, Apple has delivered fixes for many accessibility bugs within the first few x.x.1 updates following major releases, and waiting briefly may allow Apple to resolve any initial problems reported after the public release. In the event that you do encounter an issue that is particularly bothersome, there are some troubleshooting steps you can take. Sometimes, simply toggling VoiceOver off and on again or restarting your device can resolve some issues that may arise following an OS update. Therefore, we highly recommend including these steps as part of your standard troubleshooting process. If restarting VoiceOver and/or your device does not resolve the issue, it might be worth considering a reset of your VoiceOver Settings; to do this, navigate to Settings> Accessibility> VoiceOver> Reset VoiceOver Settings. While this approach requires manually reconfiguring your customized VoiceOver settings, we have heard of multiple instances where a VoiceOver settings reset resolved issues since this feature became available in last year's iOS 26. This suggests that occasionally, problems can be attributed to local factors rather than being OS bugs. Finally, when commenting below, we ask that you please keep the discussion focused on accessibility issues specifically introduced or fixed in iOS 27 and iPadOS 27. Our release posts tend to be widely read and garner many helpful responses, so it is all the more important that readers can easily find relevant information. Also, please remember that upgrade decisions are personal, with each user's situation unique - there is no right or wrong choice. Comments criticizing others' decisions are not constructive and do nothing to add to the discussion; but they do set a negative tone and get in the way of readers finding helpful information. Furthermore, not experiencing an issue yourself does not mean that it doesn't exist for others, as bugs can be configuration-specific. Stating that an issue doesn't exist simply because you haven't encountered it is unhelpful. Our aim with these posts is to provide a forum for respectful, constructive, and honest sharing of experiences that inform decisions and empower people. In closing, we would like to again thank everyone in our community who contributed to AppleVis' testing and bug-reporting efforts during the iOS/iPadOS 27 beta cycle - be it through our Community Bug Program or just by posting on our Forum. Our information about this release is more complete because of you, and we are very grateful to all who took the time to contribute.",
+        "summary": "iOS 27 and iPadOS 27 were released to the public on Monday, September 14, 2026. This post contains a summary of new bugs and fixes impacting VoiceOver and Braille support that the AppleVis Editorial Team has independently validated during our use and testing of these releases. The information contained in this post is compiled from our own use and testing of iOS 27 and iPadOS 27 during the beta period from June to September 2026; as well as from validated reports submitted by others through our Community Bug Program and shared on the AppleVis Forum. Our sincere appreciation goes to everyone who so generously took the time to share their findings with us. At the outset, we need to state explicitly that the bug list contained in this post is not definitive and that our assessments are not infallible. While we are confident in the presence of the issues discussed in this post, there are many other reports shared on the AppleVis Forum by members of our community that we have not been able to independently replicate with the available information. Many of these reports represented use cases that are different from those of our team; and a small number were issues that, despite understanding how to reproduce them, we did not get the same results. We say all of this so that readers understand the limits of our own testing, and that others' experiences may be different from ours. An issue not being present in our bug list does not mean the issue does not exist; it simply means that we are either unaware of or unable to reproduce it. As is our routine practice, each bug in this post has been given a severity rating. These ratings are based upon what we believe to be the implications for accessing and using features and functionality for the average user; the level of impact on the overall user experience; and whether or not there is an effective workaround for the issue. However, as these ratings are subjective to an extent, it is very possible that they may not reflect your own opinion or use case. With this in mind, we strongly recommend reading this full post and any replies before updating to iOS 27 and iPadOS 27; as we believe this will help you make an informed decision on whether to install the software at the current time or to wait for a future release. We also strongly recommend that you read this Megathread about the iOS 27 RC , as it contains a wealth of community reports about and experiences with the Release Candidate version of the software. Some issues listed in this post and on the Forum may manifest only under specific conditions; this is all the more likely as software continues to add more features and the number of devices, available configurations, and use cases in Apple's ecosystem continues to grow. You likely will not experience every bug that we list, and you likely will not agree with every severity rating for the bugs that you do experience. While we wish it were otherwise, this is to be expected. And as is the nature with all software, it is also likely that you will encounter issues that are not reported in this post. To ensure the information in this post is as complete and accurate as possible, we would appreciate input from those who have installed iOS 27 or iPadOS 27. Please confirm if you are encountering the same problems listed or if you have found workarounds. Please also let us know about any additional issues not mentioned here. Of course, it is even more important that you report any new bugs directly to Apple - they are already aware of the ones listed in this post. For an explanation of why and how to report bugs to Apple, see this post. With all of the preamble out of the way, below are the new bugs for VoiceOver and Braille users which members of the AppleVis Editorial Team have personally experienced and believe to be present in iOS 27 and iPadOS 27: A Major Change to VoiceOver's Audio Profile In iOS 27 and iPadOS 27, there is a significant change in the sound profile of VoiceOver when the device's internal speaker is used. When compared to iOS 26, VoiceOver audio in iOS 27 has significantly less bass, particularly at lower volume levels. The resulting sound might best be described as 'neutral' or 'flat', with significantly less of the low-end emphasis and other processing that has characterized VoiceOver audio in recent versions of iOS/iPadOS. If you have not yet upgraded to iOS 27, we believe that you can get a reasonable approximation of how VoiceOver will sound on your device by making a phone call, putting the call on speaker, and then using VoiceOver to navigate around the screen; as the flatter, more neutral sound profile that VoiceOver uses during a phone call sounds very similar to what we are hearing in iOS 27. At the time of publication, we do not know whether the change to VoiceOver's sound profile is expected behavior; thus, we are not including it in our bug list. Nevertheless, we feel that users should be aware of this change before upgrading. If we receive additional information, we will update this post accordingly. Serious Bugs When the state of an item changes or the screen updates, VoiceOver does not always recognize/speak the information. This issue has many manifestations, including (but not limited to): When waking the device, VoiceOver may speak the time the device was last woken rather than the current time; When information updates onscreen (such as the status of an operation in an app), VoiceOver may not speak it right away and instead speak the previously displayed text. There is no known workaround, though VoiceOver will eventually speak the updated information if focus is moved off of and back onto the impacted element enough times. The VoiceOver Per-Voice Equalizer (a feature that allows one to customize certain frequency/tonal characteristics of a voice) does not work. There is no known workaround. If you rely on the per-voice Equalizer, we recommend that you do not install iOS/iPadOS 27 until this issue is resolved. The VoiceOver Pronunciation Dictionary does not work reliably, with custom pronunciations often not being obeyed by VoiceOver. There is no known workaround. If you rely on the Pronunciation Dictionary, we recommend that you do not install iOS/iPadOS 27 until this issue is resolved. On some devices, Sound Curtain and Touch Curtain do not work. For affected users, it is possible to partially work around the issue with Sound Curtain by setting the device volume to 0%. There is no known workaround for Touch Curtain. If you rely on Sound Curtain or Touch Curtain, we recommend that you do not install iOS/iPadOS 27 until this issue is resolved. If an external audio device is connected, VoiceOver speech does not work when playing audio in Safari. Pausing the audio causes it to start working again. Sometimes, when reading text, VoiceOver stops speaking and does not resume on its own. This issue does not occur all of the time. When it does occur, speech will stop mid-sentence (and sometimes even mid-word). Touching the screen or performing a touch gesture (like a one-finger swipe left or right) restores speech, and the user can then refocus VoiceOver on the impacted element. In iOS 27's new Recovery Menu, there is no spoken feedback in Diagnostics Mode, rendering this option completely inaccessible. There is no known workaround to make Diagnostics Mode itself usable. If you do manage to accidentally get your device into Diagnostics Mode, our experience is that the device will restart into normal operation after approximately five to ten minutes of inactivity. Moderate Bugs In Safari, the buttons to switch between the Start Page, Reading List, History, and Bookmarks do not work. It is possible to select these buttons, and VoiceOver indicates they have been selected, but the content itself does not update, meaning content cannot be reached. As a workaround, perform a one-finger triple-tap (what is known as a \"long press\") on the desired button to activate it. Our thanks to AppleVis user Brian Giles for this workaround. When VoiceOver focus is placed inside a text field, and then subsequently moved onto a combo box, the menu automatically opens. On occasions, when swiping through the Lock Screen using one-finger swipe right or left, VoiceOver focus may be inconsistent. When navigating through the Lock Screen using a one-finger swipe right, after the \"Swipe up to Unlock\" element, the expected behavior is that VoiceOver will focus on the first notification (if present); Focus status (if present); or the first item on the screen, like Flashlight or Camera. However, sometimes, VoiceOver users may find that focus is instead placed on items from the Status Bar, such as Cellular Carrier, Battery Percentage, or the Clock. If VoiceOver focus does land on items from the Status Bar when swiping, it is sometimes possible to continue swiping to the right and get to the first Lock Screen item; however, other times, VoiceOver focus can become stuck in a loop between the time, the \"Swipe Up to Unlock\" element, Cellular Carrier, an element with no spoken or audible feedback, or any combination of the above. Sometimes, VoiceOver does not speak the time when the device is woken with the Side Button. If this issue occurs, single-tap the screen with one finger to wake the device. After prompting Siri with the Side button, revealing the interface at the top of the screen, nothing happens when double-tapping the \"Open in App\" button. Double-tapping this button should work to activate it, opening the conversation in the Siri app. In the Phone App, the buttons to switch between 'All' and 'Missed' do not work. This issue can be worked around by either switching to Unified View or swiping through all calls in Classic View. Sometimes, it is not possible to access notifications with VoiceOver that are visually displayed onscreen. Typically, the 'Show notifications' button is present, but on these intermittent occasions, selecting it fails to reveal the notifications, and does nothing. If this issue occurs, double-tap and hold on the \"Show Notifications\" button, and swipe up. This will reveal the notifications. VoiceOver's 'Copy Speech' function copies the full semantic markup and hints, instead of just the spoken text. For example, in iOS 27, Copy Speech might paste \"Latest news, heading Level 2\". In previous versions of iOS, Copy Speech would only paste \"Latest news,\" which is the desired behavior. Screen Recognition does not appear in VoiceOver's Quick Settings panel, even if selected for inclusion. The Camera App contains extraneous elements for editing Camera Controls when Edit Mode is not active. This includes \"Remove\" elements next to each camera control and a \"Done\" button that does nothing when tapped. When an app is open and VoiceOver focus is placed on the battery indicator, it is not possible to swipe to other items on the status bar. The Direct Touch option in the VoiceOver Quick Settings panel does not work. Minor Bugs In Notification Center, the Rotor Action for clearing all notifications does not work. As a workaround, Locate and double-tap on the \"Clear, Notification Center\" button, then double-tap on the \"Confirm Clear, Notification Center\" button that appears. Our thanks to AppleVis Community member Sieghard Weitzel for this workaround. On the Keypad in the Phone app, the button to place the call is labeled as \"Call Answer.\" When focusing on a conversation in the Siri app, the Actions rotor for the conversation contains two identical \"Delete\" actions. When the device is set to 24-Hour Time, VoiceOver does not correctly speak the time on the top of the hour. When customising VoiceOver touch gestures and you select to replace the current command with a new one, the old command is sometimes not overwritten, necessitating manual removal and replacement. When the Safari toolbar is set to 'Bottom', the \"Show Bookmarks\" button is incorrectly labelled as \"Bookmark.\" When the VoiceOver cursor reaches the first or last element onscreen in the Camera app, focus loops instead of stopping at the boundary. Improvements for VoiceOver and Braille in iOS 27 and iPadOS 27 To the best of our knowledge, Apple does not routinely publish lists of bug fixes for VoiceOver or braille across releases; thus, it is difficult to get a complete accounting of every issue that has been resolved or what fixes users can expect to see upon upgrading to iOS 27 or iPadOS 27. With this in mind, our testing suggests that the following issues present in iOS/iPadOS 26 have been resolved or meaningfully improved in iOS 27 and iPadOS 27: Stability of VoiceOver focus has been significantly improved across the operating system. The screen no longer locks while VoiceOver is reading a notification on the Lock Screen. Keyboard sounds once again play when VoiceOver is on, regardless of the audio ducking setting. VoiceOver focus is no longer erratic in the App Switcher when it is opened from the Home Screen. The default volume of the Eloquence speech synthesizer more closely matches that of other voices. In Conclusion Our team has compiled lists of new vision accessibility bugs for every major iOS and iPadOS release since iOS 7 in 2013. No software from any manufacturer is completely free of bugs. That said, the number of bugs - particularly those classified as \"serious\" and involving core VoiceOver and braille functionality - in iOS/iPadOS 27 is deeply concerning. We call on Apple to urgently prioritize fixing the bugs listed in this post, as well as those on The AppleVis Bug Tracker . If you have not already upgraded to iOS 27 or iPadOS 27, we would strongly recommend that you take a few moments to read through any replies to this post before doing so; in case other users' experiences differ from our own. Also, consider that historically, Apple has delivered fixes for many accessibility bugs within the first few x.x.1 updates following major releases, and waiting briefly may allow Apple to resolve any initial problems reported after the public release. In the event that you do encounter an issue that is particularly bothersome, there are some troubleshooting steps you can take. Sometimes, simply toggling VoiceOver off and on again or restarting your device can resolve some issues that may arise following an OS update. Therefore, we highly recommend including these steps as part of your standard troubleshooting process. If restarting VoiceOver and/or your device does not resolve the issue, it might be worth considering a reset of your VoiceOver Settings; to do this, navigate to Settings> Accessibility> VoiceOver> Reset VoiceOver Settings. While this approach requires manually reconfiguring your customized VoiceOver settings, we have heard of multiple instances where a VoiceOver settings reset resolved issues since this feature became available in last year's iOS 26. This suggests that occasionally, problems can be attributed to local factors rather than being OS bugs. Finally, when commenting below, we ask that you please keep the discussion focused on accessibility issues specifically introduced or fixed in iOS 27 and iPadOS 27. Our release posts tend to be widely read and garner many helpful responses, so it is all the more important that readers can easily find relevant information. Also, please remember that upgrade decisions are personal, with each user's situation unique - there is no right or wrong choice. Comments criticizing others' decisions are not constructive and do nothing to add to the discussion; but they do set a negative tone and get in the way of readers finding helpful information. Furthermore, not experiencing an issue yourself does not mean that it doesn't exist for others, as bugs can be configuration-specific. Stating that an issue doesn't exist simply because you haven't encountered it is unhelpful. Our aim with these posts is to provide a forum for respectful, constructive, and honest sharing of experiences that inform decisions and empower people. In closing, we would like to again thank everyone in our community who contributed to AppleVis' testing and bug-reporting efforts during the iOS/iPadOS 27 beta cycle - be it through our Community Bug Program or just by posting on our Forum. Our information about this release is more complete because of you, and we are very grateful to all who took the time to contribute.",
         "body": ""
       }
     },
@@ -1062,30 +1113,6 @@
       "en": {
         "title": "ghostWriter Markdown",
         "summary": "Accessibility-first Markdown writing with VoiceOver-friendly editing, document organization, and flexible exports to Word, PDF, HTML, braille, and more. ghostWriter Markdown is a plain-text writing app for notes, articles, lists, documentation, and anything else you want to say with words. It was built accessibility-first. Not accessibility-eventually, or accessibility-in-the-settings-somewhere. VoiceOver was at the center of the design from the first line of code, as the app has been fully created by a Blind developer. If you write with a screen reader, this app was made for you. If you don't, you get a clean, fast, native editor that never gets in your way. So what's Markdown? Markdown adds structure to writing using a few ordinary punctuation marks. A number sign makes a heading. A dash makes a list item. Your document stays readable as plain text, and you can render it whenever you want to see the finished formatting. You don't have to know any of this to start. The Insert feature can add common elements for you, and a built-in Markdown Reference is always a tap away. Writing Made Easy: • A native editor with the Markdown punctuation kept visible, so you always control the source • Insert Actions for links, images, headings, quotes, code, lists, tasks, tables, and rules • Automatic list continuation for bullets, numbers, and task lists • Indent and outdent with tabs or spaces, your choice • Find and Replace, dictation, braille input, and text selection through native iOS controls • A configurable Status Bar showing line, column, word count, current heading, and selection • Automatic saving as you pause, plus Save Now whenever you want it Useful Navigation: • Outline lists every heading in your document and jumps straight to one, moving both the cursor and VoiceOver focus • A 3-finger horizontal swipe with VoiceOver will move the cursor through your document headings while editing • Jump to Line for long documents • Search across document names and their contents • Your last editing position is remembered in every file Keep Files Organized: • Nested folders you can create, rename, move, and navigate • Pin the documents you keep coming back to • Sort by name, created, modified, or last opened • Recently Deleted holds removed files until you restore them or clear them out • Import Markdown, .txt, Word .docx or Powerpoint presentations to convert them into Markdown Render and Share: • See your Markdown as structured HTML right inside the app • Share complete standalone HTML, Markdown, plain text, ePub, tagged PDF, eBraille, BRF, Microsoft Word documents or even Powerpoint presentations • Rendered output uses real semantic headings, lists, tables, links, and landmarks — so what you share is accessible to whoever receives it Your Files, Your Devices: • Documents are ordinary Markdown files, visible in the Files app • Store them on your device, or turn on iCloud Drive to sync across your iPhone, iPad, and Mac • Open and edit the same files in any other app that reads text • Nothing is locked in a proprietary format, and nothing needs this app to survive Accessibility: Developed toward WCAG 2.2 Level AA and tested with VoiceOver as a primary interaction method. • A predictable, linear VoiceOver reading order • Native controls with the roles and behaviors you already expect • Dynamic Type, including accessibility text sizes, everywhere • System, monospaced, rounded, and serif editor typefaces • Light, dark, and system appearance • Voice Control, Switch Control, and hardware keyboard support • Optional keyboard shortcuts for common actions • Reduced-motion support Privacy: No accounts. No sign-in. No ads. No analytics. No tracking. No data collection of any kind. There is no server behind this app because there doesn't need to be one. Your documents are yours, on your device or in your own iCloud, and they never travel anywhere you don't send them. Made by a blind developer who got tired of using tools that treated screen reader support as an afterthought. Heading",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "applevis-apps-6633c06159e8f0eb",
-    "type": "news",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/navigation/intersector-intersection-identifier",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-08T23:43:10.000Z",
-    "categories": [
-      "apple",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Intersector: Intersection Identifier",
-        "summary": "Hear your upcoming intersections while walking, when in a rideshare, or on a bus with the new Live Mode. Intersector helps you quickly identify nearby street intersections using your iPhone’s location and heading. Ask for the nearest intersection, what’s coming up ahead, use Scan Mode to point your phone down the street and hear the intersection it detects, or turn on Live Mode and have Intersector speak your upcoming intersections on a walk or during a ride with your phone locked. Intersector can speak distance, direction, and neighborhood context, and includes optional wording styles so announcements can match how you think about your surroundings. Built with VoiceOver users in mind, Intersector focuses on fast, clear spoken information without turning into turn-by-turn navigation. It is designed as a lightweight orientation tool for understanding nearby cross streets, not as a crossing aid or safety system. Features include: • Nearest intersection announcements • Upcoming intersection announcements • Scan Mode for nearby intersections in the direction you point • Live Mode to announce upcoming intersections automatically while walking or in transportation, using customizable speech • Siri Shortcut support • Optional distance, direction, and neighborhood details • Customizable intersection wording • Support for split intersections where different streets meet the same main street • Manhattan Snob Mode for New York-style direction wording • VoiceOver-friendly controls and spoken feedback • Dynamic Type and large text support. Intersector also has an Apple Watch companion app, so Siri Shortcuts and intersection data can be queried right from your wrist. Intersector uses location and heading data to provide orientation information. Always use your own judgment, mobility skills, and available pedestrian infrastructure when traveling.",
         "body": ""
       }
     },

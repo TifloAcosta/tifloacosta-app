@@ -1,5 +1,176 @@
 [
   {
+    "id": "techcrunch-30c3bebdf7db19af",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/15/we-dont-need-ai-regulation-leave-safety-to-us-nvidias-jensen-huang-says/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T00:20:39.000Z",
+    "categories": [
+      "tecnologia-general",
+      "programas-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "We don’t need AI regulation — leave safety to us, Nvidia’s Jensen Huang says",
+        "summary": "AI isn't some kind of new form of \"alien mind,\" according to Jensen Huang. It's just hardware and software, so safety can be engineered by each AI product maker.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-29c114f5c76ccf4b",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2257144/level-2-ev-charger-how-to-know-if-you-need-one/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T00:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Considering a Level 2 EV charger? How to know if you need one",
+        "summary": "Charging your EV from home is cheap and convenient, but knowing which type of charger will get the most out of your electric car can often be confusing.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-e3c34e29a57a0d1d",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/15/india-escalates-apple-probe-over-alleged-ios-18-issues-that-incurred-repair-costs/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-15T23:52:22.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "India escalates Apple probe over alleged iOS 18 issues that incurred repair costs",
+        "summary": "India’s Central Consumer Protection Authority (CCPA) has reportedly escalated its probe into whether Apple should be held responsible for an iOS 18 update that allegedly caused display and microphone issues on some iPhones. Here are the details. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-96e20f159a85f49a",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/995917/data-center-nyt-midterm-poll-september",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-15T23:34:25.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Voters mostly don’t like AI and data centers, but neither party seems to have an edge",
+        "summary": "Poll data released Tuesday by the New York Times and Siena University confirms what we've already been seeing, and what politicians are responding to - AI and data centers are incredibly unpopular. Asked if they support or oppose the construction of data centers to power AI tech, 61 percent of the 1,503 likely voters surveyed […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-3dca5407d0148986",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/15/omnifocus-adds-siri-ai-support-as-omni-group-updates-its-apps-for-ios-27-macos-27-more/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-15T23:22:20.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "OmniFocus adds Siri AI support as Omni Group updates its apps for iOS 27, macOS 27, more",
+        "summary": "Unsurprisingly, the Omni Group worked all summer to get its suite of apps ready for Apple’s 2027 system updates from day one. Here’s what’s new. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-bbac1f7995424e0a",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2252764/how-to-manually-update-android-auto/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-15T23:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "android",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "How to manually update Android Auto (and what it might mean if you can't)",
+        "summary": "The Android Auto app lives in the Play Store, so start there if you want to update.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-3997f3416e27b15d",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2256491/usb-c-flash-drive-better-usb-a-comparison/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-15T22:30:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Are USB-C flash drives better than USB-A ones?",
+        "summary": "USB-A and USB-C flash drives both have their purposes. USB-C is increasingly common, but USB-A isn't going anywhere yet.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "9to5mac-172e574d90f0e381",
     "type": "news",
     "sourceId": "9to5mac",
@@ -25,30 +196,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-673fc7deeff74c4b",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/15/dbrand-has-iphone-duo-iphone-18-pro-covered-with-huge-range-of-designs/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-15T22:00:00.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "dbrand has the iPhone Duo and iPhone 18 Pro covered – with a huge range of designs",
-        "summary": "With the exciting new iPhone Duo and latest evolution of the iPhone 18 Pro now official, casemaker dbrand has wasted no time in announcing its latest cases, vinyl wraps, and screen protectors. Whether you’re looking for a minimalist, barely-there case or one that offers the ultimate in no-compromise protection, dbrand has you covered. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "techcrunch-04158ff69019dd12",
     "type": "news",
     "sourceId": "techcrunch",
@@ -67,31 +214,6 @@
       "en": {
         "title": "The AI data center boom is colliding with cities scarred by big industry",
         "summary": "National outcry against data center construction has spread to Philadelphia, where officials suggested possible construction in a neighborhood already impacted by a now-defunct oil refinery.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-7f5b3ab78b110f9d",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/15/ios-27-has-a-fun-new-animation-when-you-call-a-contact-on-their-birthday/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-15T20:44:58.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iOS 27 has a fun new animation when you call a contact on their birthday",
-        "summary": "iOS 27 adds a small birthday-themed tidbit to the Phone app, with a new animation that appears when calling someone on their big day. Here are the details. more…",
         "body": ""
       }
     },
@@ -170,30 +292,6 @@
     "media": null
   },
   {
-    "id": "engadget-84299e144d30824b",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2256208/how-to-improve-audio-quality-iphone/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-15T20:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "How to improve the audio quality on your iPhone",
-        "summary": "You can improve your iPhone's audio quality whether you're using the built-in speakers, headphones, or a speaker.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "applevis-apps-7b5840f570609115",
     "type": "news",
     "sourceId": "applevis-apps",
@@ -212,32 +310,6 @@
       "en": {
         "title": "No wifi mini games",
         "summary": "No Wifi Mini Games is an all-in-one collection of 150+ games you can play anywhere, with no Wi-Fi or internet connection required. Enjoy quick arcade challenges, classic board games, relaxing solitaire, word games, number games, dice games, and brain-teasing puzzles. Visit the Daily Hub for a fresh collection of shared puzzles every day, build streaks, unlock achievements, and track your Daily results. There are no ads, no subscriptions, and no in-app purchases. No account is required. Just open the app, choose a game, and play. Something for Every Player Arcade & Reflex Snake, Pop the Lock, Dodge ’n Dash, Flight Frenzy, Tap the Carrot, Ricochet, Cosmic Assault, Orbital Bounce, Tower Stacker, and more. Puzzles & Logic Sudoku, Block Sudoku, Shikaku, Star Battle, Tents & Trees, 15 Puzzle, Number Slide, 2248 Number Puzzle, Zero Tiles, Color Chain, Triple Slide, Kayla’s Block Puzzle, Lights Out, Mastermind, Set, and more. Word Games Hangman, Word Search, Word Ladder, Word Guess, Word Stacks, Puzzle Words, Spelling Words, and more. Classic Board & Strategy Chess, Checkers, Reversi, Mancala, Gomoku, Four in a Row, Tic-Tac-Toe, Ultimate Tic-Tac-Toe, Dots and Boxes, Three Men’s Morris, and more. Cards & Solitaire Klondike Solitaire, FreeCell Solitaire, Pyramid Solitaire, Spider Solitaire, TriPeaks Solitaire, War, and more. Dice & Luck Farkle, Pig Dice Game, Five Dice Showdown, Ship, Captain, Crew, Knucklebones, and more. Made to Play Your Way • Play completely offline, including in Airplane Mode • Discover fresh puzzles every day in the Daily Hub • Build Daily streaks, unlock achievements, and track separate Daily statistics • No ads, no subscriptions, and no in-app purchases • No account required • No tracking or advertising profiles • Choose Light Mode, Dark Mode, or your device’s System Default appearance • Adjust instruction text size for easier reading • Use VoiceOver and accessibility support throughout the app • Save game progress, statistics, favorites, and supported settings • Track high scores, wins, streaks, and other game statistics in supported games • Compete on Game Center leaderboards in supported games when you’re online • Find games quickly with filters, favorites, recently played, and hidden games • Play solo, with friends, or against computer players in supported games • Enjoy regular updates with new games and improvements inspired by player feedback Whether you have a few minutes to spare or want to settle in with a favorite classic, No Wifi Mini Games keeps a huge collection of games ready wherever you go. 150+ games. Fresh Daily puzzles. No ads. No subscriptions. No Wi-Fi needed.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-4e34a8d3caa0f84c",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/15/the-ai-graveyard-a-running-list-of-projects-and-startups-that-didnt-make-it/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-15T19:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The AI graveyard: a running list of projects and startups that didn’t make it",
-        "summary": "From Apple's repeatedly delayed Siri AI to OpenAI's messy \"super app\" launch, here's a look at the AI projects that shut down or missed expectations.",
         "body": ""
       }
     },
@@ -267,54 +339,6 @@
     "media": null
   },
   {
-    "id": "engadget-027e442c4e581985",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2256059/safety-privacy-concerns-digital-wallet-storing-drivers-license/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-15T18:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The safety and privacy concerns of storing your driver's license in a digital wallet",
-        "summary": "A digital driver's license kept in Apple Wallet or Google Wallet is convenient, but you should be aware of its implications on your privacy.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-7def4afb2f345cd0",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2258821/google-pixel-update-vip-contacts-scam-detection-gesture-controls/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-15T18:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "android"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google's latest Pixel drop will keep you more connected to your VIPs",
-        "summary": "Google has revealed the updates coming with the latest Pixel drop.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "ars-technica-7c559073fb920631",
     "type": "news",
     "sourceId": "ars-technica",
@@ -332,31 +356,6 @@
       "en": {
         "title": "Demand for EV chargers is outstripping supply, says ChargePoint report",
         "summary": "EV growth is happening, even in the US, and those EVs will need plugs to charge.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-2590da43cf2ce3d6",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/995453/meta-one-subscriptions-ai",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-15T15:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta’s new One subscriptions put a price on social media and AI",
-        "summary": "Shortly after launching its new do-everything AI assistant Muse, Meta's launching subscription bundles that pair its standalone app subscriptions with extra AI usage. Some of the new Meta One bundles were in testing earlier this year, but are now available globally starting today, with several tiers for individual users, creators, and businesses. Meta says the […]",
         "body": ""
       }
     },

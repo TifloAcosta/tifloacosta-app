@@ -1,5 +1,127 @@
 [
   {
+    "id": "9to5mac-a8764f2e62cf13cf",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/16/ios-27-2-references-new-option-to-overwrite-iphone-storage-with-blank-data-after-erasing/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T20:00:52.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iOS 27.2 references new option to overwrite iPhone storage with blank data after erasing",
+        "summary": "Apple is working on a new option to more thoroughly wipe an iPhone’s storage when erasing the device, but there’s a catch. Here are the details. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-bbd6c9df1250b8b0",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/16/ios-27-gives-apple-photos-a-very-useful-feature-ive-wanted-for-years/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T19:47:14.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iOS 27 gives Apple Photos a very useful feature I’ve wanted for years",
+        "summary": "Apple Photos gets a variety of exciting upgrades in iOS 27 , including a new feature that’s long been on my wishlist: the ability to save a video frame as a photo. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-66bc33ce7790d8b3",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/16/ios-27-2-gives-apple-tv-a-new-profiles-feature-on-iphone/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T18:30:59.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iOS 27.2 gives Apple TV a new profiles feature on iPhone",
+        "summary": "iOS 27.2 beta 1 arrived today , and with it a key new feature for the Apple TV app on iPhone: user profiles. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-a1be8383342bf052",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/16/ai-labs-want-in-house-auditors-but-maybe-they-should-shut-the-front-door-first/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T18:25:25.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "AI labs want in-house auditors — but maybe they should shut the front door first",
+        "summary": "There may be a simpler and more effective fix for rogue agents, hiding in plain sight.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-1fb230473802d79b",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2260455/the-boox-note-air6c-e-ink-tablet-flips-pages-nearly-40-percent-faster/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T17:36:21.000Z",
+    "categories": [
+      "tecnologia-general",
+      "android",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The Boox Note Air6C E Ink tablet flips pages nearly 40 percent faster",
+        "summary": "The 10.3-inch color ereader runs Android 16 and can access the Google Play Store.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "techcrunch-f9df6474e0c4d588",
     "type": "news",
     "sourceId": "techcrunch",
@@ -17,7 +139,7 @@
     "locales": {
       "en": {
         "title": "Your AI agents can now control your Google Home devices",
-        "summary": "Google is launching early access to a new MCP server for Google Home, allowing AI agents like Claude, ChatGPT and others to control connected devices, review camera summaries and access smart home activity using natural language.",
+        "summary": "Google is launching early access to a new MCP server for Google Home, allowing AI agents like Claude, ChatGPT, and others to control connected devices, review camera summaries, and access smart home activity using natural language.",
         "body": ""
       }
     },
@@ -118,54 +240,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-5bd63e1040f8ce8a",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/16/apple-weather-adds-two-convenient-new-features-in-ios-27/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T16:09:39.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple Weather adds two convenient new features in iOS 27",
-        "summary": "Apple Weather adds two convenient features in iOS 27 that make it easier to track rain and wind forecasts. Here are the details. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-5979d893592bd0e2",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/16/apple-watch-series-12-has-subtle-design-change-that-apple-didnt-mention/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T15:34:14.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple Watch Series 12 has subtle design change that Apple didn’t mention",
-        "summary": "Apple Watch Series 12 arrives this Friday (pre-order here), but some upgraders might be surprised by a subtle design change that Apple didn’t mention in its announcement: larger bezels around the display. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "applevis-apps-c32fc2263e2fdc72",
     "type": "news",
     "sourceId": "applevis-apps",
@@ -215,30 +289,6 @@
     "media": null
   },
   {
-    "id": "techcrunch-cda3aadd398f83ba",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/16/robots-are-waiting-for-a-chatgpt-moment-nvidias-les-karpas-explains-why-at-techcrunch-disrupt-2026/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T15:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Robots are waiting for a ChatGPT moment: Nvidia’s Les Karpas explains why at TechCrunch Disrupt 2026",
-        "summary": "The robotics industry is still waiting for their breakthrough into day-to-day life. Nvidia's Les Karpas has an answer as to why at TechCrunch Disrupt 2026. Register before September 25 to save up to $200 on your pass.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "ars-technica-205f94d99b8e53e5",
     "type": "news",
     "sourceId": "ars-technica",
@@ -257,32 +307,6 @@
       "en": {
         "title": "macOS 27 Golden Gate: The Ars Technica review",
         "summary": "It's both a \"Snow Leopard update\" and a major leap for Apple Intelligence.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-db672dfd419f5128",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/16/daily-september-16-2026/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T14:42:56.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "android",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "9to5Mac Daily: September 16, 2026 – macOS 27 Golden Gate features",
-        "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Stuff :Stuff helps you get everything out of your head and into a simple, elegant system—closing open loops and reducing mental stress. A simple to-do list for iPhone, iPad, and Mac, with powerful tools that make organizing, tracking, and checking off your tasks a whole lot more satisfying. Get Stuff done. more…",
         "body": ""
       }
     },
@@ -308,30 +332,6 @@
       "en": {
         "title": "Jieshuo Touch Focus And Double Tap Delays",
         "summary": "Whether you are exploring the screen or trying to find a specific element, there is a delay between touching the screen and focusing on the…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-28dce57947a6caf7",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2259654/how-iphone-18-pro-apple-reference-image-works/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T12:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Here's how the iPhone 18 Pro's Apple Reference Image tech works",
-        "summary": "Apple Reference Image is like giving your photos a tamper-proof seal.",
         "body": ""
       }
     },

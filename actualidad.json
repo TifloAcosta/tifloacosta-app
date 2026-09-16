@@ -1,61 +1,13 @@
 [
   {
-    "id": "9to5mac-a8764f2e62cf13cf",
+    "id": "9to5mac-b3280d10d964f951",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/16/ios-27-2-references-new-option-to-overwrite-iphone-storage-with-blank-data-after-erasing/",
+    "originalUrl": "https://9to5mac.com/2026/09/16/whatsapp-may-soon-let-iphone-users-add-a-third-account/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-16T20:00:52.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iOS 27.2 references new option to overwrite iPhone storage with blank data after erasing",
-        "summary": "Apple is working on a new option to more thoroughly wipe an iPhone’s storage when erasing the device, but there’s a catch. Here are the details. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-bbd6c9df1250b8b0",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/16/ios-27-gives-apple-photos-a-very-useful-feature-ive-wanted-for-years/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T19:47:14.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iOS 27 gives Apple Photos a very useful feature I’ve wanted for years",
-        "summary": "Apple Photos gets a variety of exciting upgrades in iOS 27 , including a new feature that’s long been on my wishlist: the ability to save a video frame as a photo. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-66bc33ce7790d8b3",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/16/ios-27-2-gives-apple-tv-a-new-profiles-feature-on-iphone/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T18:30:59.000Z",
+    "publishedAt": "2026-09-16T22:39:22.000Z",
     "categories": [
       "apple",
       "tecnologia-general",
@@ -65,8 +17,204 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "iOS 27.2 gives Apple TV a new profiles feature on iPhone",
-        "summary": "iOS 27.2 beta 1 arrived today , and with it a key new feature for the Apple TV app on iPhone: user profiles. more…",
+        "title": "WhatsApp may soon let iPhone users add a third account",
+        "summary": "After recently letting iPhone users add a second account to the same app, WhatsApp is now working on expanding support to up to three accounts. Here are the details. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-55198c501d3aecb0",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/16/tripsys-ios-27-update-includes-smarter-imports-on-device-ai-insights-more/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T22:12:09.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Tripsy’s iOS 27 update includes smarter imports, on-device AI insights, more",
+        "summary": "Travel planning app Tripsy was updated this week with support for iOS 27’s extra-large widget, a new Smart Import tool, AI-powered features, and more. Here are the details. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "freedom-scientific-blog-d8254ae4300e75d6",
+    "type": "news",
+    "sourceId": "freedom-scientific-blog",
+    "sourceName": "Freedom Scientific",
+    "sourceUrl": "https://blog.freedomscientific.com/",
+    "originalUrl": "https://training.vispero.com/learn-how-to-work-more-effectively-with-pdfs-and-jaws/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T21:36:48.000Z",
+    "categories": [
+      "windows",
+      "tecnologia-accesibilidad",
+      "jaws"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Learn How to Work More Effectively with PDFs and JAWS",
+        "summary": "PDF documents are everywhere, from reports and forms to manuals and online resources. These documents can be accessed via a web browser or application like Adobe Acrobat Reader. When PDFs are formatted correctly, they can be read using standard navigation commands and JAWS Quick Navigation Keys; however, challenges arise when the PDF is not structured …",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-eeca67da0fca9690",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2260794/apple-s-redesigned-health-app-is-available-now-in-the-ios-27-2-developer-beta/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T21:18:43.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple's redesigned Health app is available now in the iOS 27.2 developer beta",
+        "summary": "New features like Health Age bring Apple's app more in line with competitors like Whoop and Oura.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-e2fbc779e50b66f8",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/16/anthropic-and-openai-want-to-embed-safety-evaluators-will-they-really-be-independent/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T21:07:24.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Anthropic and OpenAI want to embed safety evaluators. Will they really be independent?",
+        "summary": "Anthropic and OpenAI want to embed independent safety evaluators inside their AI labs. Researchers welcome the unprecedented access, but warn meaningful oversight requires transparency, independence, and eventually regulation.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-5588b4c6b67ac8d9",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/16/ios-27-2-will-help-users-move-data-and-settings-from-an-old-app-to-its-replacement/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T21:03:28.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iOS 27.2 will help users move data and settings from an old app to its replacement",
+        "summary": "Starting with iOS 27.2, developers will be able to offer users a way to move their data and settings from an existing app to its designated replacement. Here are the details. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-655643e8a4ac7d4f",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/996470/ai-data-center-e-waste-ban",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T20:40:46.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The AI data center e-waste problem is huge — and getting bigger",
+        "summary": "E-waste from the AI boom has been vastly underestimated, a new report warns. By 2050, it could become enough trash to fill 23 million shipping containers - roughly enough 40-foot containers to circle the world six times if lined up in a row. It's a significantly higher estimate of AI's e-waste than previous studies have […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-3ca8cf2aa37e4482",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/gaming/2026/09/not-just-proton-getting-to-know-valves-new-steamos-compatibility-layers/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T20:23:16.000Z",
+    "categories": [
+      "tecnologia-general",
+      "android"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Not just Proton: Getting to know Valve's new SteamOS compatibility layers",
+        "summary": "New system-level tools bring Arm chipsets, Android APKs into the Steam ecosystem.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-7cf6da2fec618665",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/16/after-accusations-of-selling-perv-glasses-meta-prepares-to-sell-a-pair-without-a-camera/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T20:12:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "After accusations of selling ‘perv glasses,’ Meta prepares to sell a pair without a camera",
+        "summary": "Can Meta dodge the \"pervert glasses\" accusations with a new camera-free product?",
         "body": ""
       }
     },
@@ -122,30 +270,6 @@
     "media": null
   },
   {
-    "id": "techcrunch-f9df6474e0c4d588",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/16/your-ai-agents-can-now-control-your-google-home-devices/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T17:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Your AI agents can now control your Google Home devices",
-        "summary": "Google is launching early access to a new MCP server for Google Home, allowing AI agents like Claude, ChatGPT, and others to control connected devices, review camera summaries, and access smart home activity using natural language.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "the-verge-78952817e2333361",
     "type": "news",
     "sourceId": "the-verge",
@@ -187,29 +311,6 @@
       "en": {
         "title": "Anthropic's Claude can now create editable documents for you",
         "summary": "Anthropic is adding the ability to create docs, slideshow and access Cowork capabilities inside chat. It will roll out to Pro and Max subscribers first.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-0274f48103a33275",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/16/anthropic-merges-claude-chat-and-cowork-in-one-interface/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T16:30:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Anthropic merges Claude chat and Cowork in one interface",
-        "summary": "Anthropic is initially releasing these features to Pro and Max plan subscribers.",
         "body": ""
       }
     },
@@ -265,30 +366,6 @@
     "media": null
   },
   {
-    "id": "engadget-ea53ba65ac69c4ea",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2260114/snap-specs-launch-live-blog-evan-spiegel-keynote/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T15:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "gafas-inteligentes"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Snap Specs launch 2026: Live updates from CEO Evan Spiegel's keynote",
-        "summary": "More details on the company's chunky smart glasses are expected today.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "ars-technica-205f94d99b8e53e5",
     "type": "news",
     "sourceId": "ars-technica",
@@ -338,31 +415,6 @@
     "media": null
   },
   {
-    "id": "the-verge-18274aebf7465b46",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/policy/995534/a-brief-history-of-ai-executives-calling-for-regulation",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T12:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "A brief history of AI executives calling for regulation",
-        "summary": "Over the past few days, a lot of people who stand to make a lot of money from AI all publicly agreed that it's time to make everyone slow down before we lose control - including OpenAI CEO Sam Altman, Anthropic CEO Dario Amodei, Google DeepMind cofounder Demis Hassabis, Microsoft CEO Satya Nadella, and X […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "applevis-apps-7b5840f570609115",
     "type": "news",
     "sourceId": "applevis-apps",
@@ -404,29 +456,6 @@
       "en": {
         "title": "Agility’s new humanoid robot will stop, squat to avoid harming human coworkers",
         "summary": "Robots can start working outside physical cages and without safety barriers.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-7c559073fb920631",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/cars/2026/09/ev-charging-infrastructure-is-still-lagging-adoption-report-says/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-15T17:58:09.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Demand for EV chargers is outstripping supply, says ChargePoint report",
-        "summary": "EV growth is happening, even in the US, and those EVs will need plugs to charge.",
         "body": ""
       }
     },
@@ -1745,31 +1774,6 @@
       "es": {
         "title": "Ya disponible la primera candidata a liberación de NVDA 2026.2",
         "summary": "Tal y como ha anunciado NV Access mediante esta publicación, la rc 1 de NVDA 2026.2 ya se encuentra disponible para descarga y pruebas. Se recomienda a todos los usuarios descargar esta versión y proporcionar comentarios por los canales de la comunidad, o por el sistema de informe de fallos de NV Access. A menos … Continuar leyendo \"Ya disponible la primera candidata a liberación de NVDA 2026.2\" La entrada Ya disponible la primera candidata a liberación de NVDA 2026.2 se publicó primero en NVDA en español .",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "freedom-scientific-blog-c720afa6586b603a",
-    "type": "news",
-    "sourceId": "freedom-scientific-blog",
-    "sourceName": "Freedom Scientific",
-    "sourceUrl": "https://blog.freedomscientific.com/",
-    "originalUrl": "https://training.vispero.com/jaws-jumpstart-a-deep-dive-into-managing-documents-with-jaws/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-08-17T23:23:25.000Z",
-    "categories": [
-      "windows",
-      "tecnologia-accesibilidad",
-      "jaws"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "JAWS JumpStart – A Deep Dive into Managing Documents with JAWS",
-        "summary": "Welcome to JAWS Jumpstart, a four-week series designed to help students, teachers, new users, and anyone looking for a refresher get the most out of JAWS as the new school year begins. Each Monday in August, we’ll share a practical tip, shortcut, or feature to help you start the year off on the right foot. …",
         "body": ""
       }
     },

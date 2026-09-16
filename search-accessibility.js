@@ -31,6 +31,13 @@
     ].join(' ');
   }
 
+  function supplementalResourceText(item) {
+    return [
+      ...(Array.isArray(item?.keywords) ? item.keywords : []),
+      item?.searchText || ''
+    ].join(' ');
+  }
+
   function searchAcrossSources(sources = {}, query = '', lang = 'es') {
     const term = normalizeText(query);
     if (!term) return [];
@@ -39,7 +46,7 @@
 
     for (const item of Array.isArray(sources.resources) ? sources.resources : []) {
       if (item?.lang && item.lang !== language) continue;
-      const text = `${item?.title || ''} ${item?.category || ''}`;
+      const text = `${item?.title || ''} ${item?.category || ''} ${supplementalResourceText(item)}`;
       if (!queryMatches(text, term)) continue;
       results.push({
         kind: 'resource',
@@ -60,20 +67,6 @@
         title: String(item.title || ''),
         meta: '',
         href: id ? `videos.html?video=${encodeURIComponent(id)}` : String(item.url || 'videos.html'),
-        publishedAt: item.publishedAt || ''
-      });
-    }
-
-    for (const item of Array.isArray(sources.podcasts) ? sources.podcasts : []) {
-      if (item?.lang && item.lang !== language) continue;
-      const text = `${item?.title || ''} ${item?.summary || ''}`;
-      if (!queryMatches(text, term)) continue;
-      results.push({
-        kind: 'podcast',
-        id: String(item.id || item.url || item.title || ''),
-        title: String(item.title || ''),
-        meta: 'Canal TifloAcosta',
-        href: String(item.url || item.originalUrl || '#'),
         publishedAt: item.publishedAt || ''
       });
     }
@@ -122,7 +115,7 @@
       });
     }
 
-    const kindOrder = { resource: 0, video: 1, podcast: 2, news: 3, app: 4, media: 5 };
+    const kindOrder = { resource: 0, video: 1, news: 2, app: 3, media: 4 };
     return results.sort((a, b) => {
       const kindDelta = (kindOrder[a.kind] ?? 99) - (kindOrder[b.kind] ?? 99);
       if (kindDelta) return kindDelta;
@@ -155,7 +148,6 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         groups: {
           resource: 'Recursos',
           video: 'Vídeos de TifloAcosta',
-          podcast: 'Podcast de TifloAcosta',
           news: 'Noticias',
           app: 'Apps accesibles',
           media: 'Escuchar y ver'
@@ -163,7 +155,6 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         open: {
           resource: 'Abrir recurso',
           video: 'Abrir vídeo',
-          podcast: 'Abrir episodio',
           news: 'Abrir noticia',
           app: 'Abrir ficha',
           media: 'Abrir contenido'
@@ -183,7 +174,6 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         groups: {
           resource: 'Resources',
           video: 'TifloAcosta videos',
-          podcast: 'TifloAcosta podcast',
           news: 'News',
           app: 'Accessible apps',
           media: 'Listen and watch'
@@ -191,7 +181,6 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         open: {
           resource: 'Open resource',
           video: 'Open video',
-          podcast: 'Open episode',
           news: 'Open news item',
           app: 'Open app page',
           media: 'Open content'
@@ -293,16 +282,14 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         if (sourcesPromise) return sourcesPromise;
         sourcesPromise = Promise.all([
           fetchJson('videos.json', { videos: [] }),
-          fetchJson('podcast.json', []),
           fetchJson('actualidad.json', []),
           fetchJson('actualidad-apps.json', []),
           fetchJson('actualidad-media.json', []),
           loadScriptOnce('video-search-index.js?v=1.0')
-        ]).then(([videoCatalog, podcasts, stories, apps, media]) => {
+        ]).then(([videoCatalog, stories, apps, media]) => {
           rawStories = Array.isArray(stories) ? stories : [];
           return {
             videos: Array.isArray(videoCatalog?.videos) ? videoCatalog.videos : [],
-            podcasts: Array.isArray(podcasts) ? podcasts : [],
             apps: Array.isArray(apps) ? apps : [],
             media: Array.isArray(media) ? media : []
           };
@@ -348,7 +335,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         clearButton.hidden = false;
         status.textContent = items.length ? copy.count(items.length) : copy.empty;
 
-        const kinds = ['resource', 'video', 'podcast', 'news', 'app', 'media'];
+        const kinds = ['resource', 'video', 'news', 'app', 'media'];
         for (const kind of kinds) {
           const matches = items.filter(item => item.kind === kind);
           if (!matches.length) continue;
@@ -385,7 +372,6 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         const found = api.searchAcrossSources({
           resources: Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [],
           videos: loaded.videos,
-          podcasts: loaded.podcasts,
           stories: localizedStories(lang),
           apps: loaded.apps,
           media: loaded.media,
@@ -462,19 +448,19 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       function rebuildOptions() {
         categoryOptions.replaceChildren();
         [...select.options].filter(option => option.value).forEach(option => {
-          const button = document.createElement('button');
-          button.type = 'button';
-          button.className = 'category-option';
-          button.textContent = option.textContent;
-          button.dataset.categoryValue = option.value;
-          button.addEventListener('click', () => {
+          const optionButton = document.createElement('button');
+          optionButton.type = 'button';
+          optionButton.className = 'category-option';
+          optionButton.textContent = option.textContent;
+          optionButton.dataset.categoryValue = option.value;
+          optionButton.addEventListener('click', () => {
             select.value = option.value;
             syncToggle();
             setOpen(false);
             select.dispatchEvent(new Event('change', { bubbles: true }));
             categoryToggle.focus();
           });
-          categoryOptions.append(button);
+          categoryOptions.append(optionButton);
         });
       }
 

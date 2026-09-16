@@ -19,6 +19,6 @@ jobs:
           node-version: '22'
       - name: Synchronize TifloAcosta podcast for search verification
         run: node scripts/sync-podcast.mjs
-      - name: Verify the reported calor episode is present
-        run: node -e "const fs=require('fs'); const items=JSON.parse(fs.readFileSync('podcast.json','utf8')); if(!items.some(item=>String(item.title||'').toLowerCase().includes('calor'))) process.exit(1);"
       - run: npm test
+      - name: Diagnose the reported calor episode
+        run: node -e "const fs=require('fs'); const items=JSON.parse(fs.readFileSync('podcast.json','utf8')); const hits=items.filter(item=>/(calor|gusta|verano|fr[ií]o)/i.test(String(item.title||''))); console.log(hits.map(item=>item.title).join('\n') || 'No related titles found'); if(!items.some(item=>/calor/i.test(String(item.title||'')))) process.exit(1);"

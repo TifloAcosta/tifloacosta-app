@@ -1,5 +1,98 @@
 [
   {
+    "id": "9to5mac-8f4b920c18c028c7",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/15/apple-explains-how-the-iphone-18-pros-new-reference-image-camera-mode-works/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T02:25:19.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple explains how the iPhone 18 Pro’s new Reference Image camera mode works",
+        "summary": "A new post on Apple’s Security Research blog details the fascinating tech, architecture, and thinking behind the iPhone 18 Pro’s new Reference Image camera mode . Here are the details more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-3563719460ae21d5",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/995826/boox-palma-3-e-ink-reader-pocket-smartphone-android-16",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T02:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The Boox Palma 3 gets stylus support and a sleek redesign",
+        "summary": "Nearly two years after the last update to Boox's smartphone-sized black-and-white e-reader, the company announced the Palma 3 with a sleek redesign, new functionality, and a handful of other small updates that may justify its significant price bump depending on how you plan to use it. While the Palma 2 launched in 2024 for $279.99, […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-5667e8036aad25f0",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2259755/canon-r8-ii-camera-borrowed-styling-from-a-classic-slr-film-camera/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T01:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Canon's R8 II camera borrowed its styling from a classic SLR film camera",
+        "summary": "Though preoccupied with vlogging lately, Canon hasn't forgotten its full-frame photography market.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-db9a51410e27fd8c",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/995430/canon-eos-r8-mark-11-full-frame-digital-camera-pricing-availability",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T01:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The EOS R8 Mark II is Canon’s lightest full-frame camera with stabilization",
+        "summary": "Canon announced the second-generation of its EOS R8 with a new retro-inspired redesign and the addition of in-body stabilization. That feature was one of the most notable omissions from the original R8 that launched in 2023 as a smaller, cheaper, and more accessible alternative to the Canon R6 Mark II for photographers wanting a larger […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "techcrunch-30c3bebdf7db19af",
     "type": "news",
     "sourceId": "techcrunch",
@@ -18,7 +111,7 @@
     "locales": {
       "en": {
         "title": "We don’t need AI regulation — leave safety to us, Nvidia’s Jensen Huang says",
-        "summary": "AI isn't some kind of new form of \"alien mind,\" according to Jensen Huang. It's just hardware and software, so safety can be engineered by each AI product maker.",
+        "summary": "AI isn't some new form of \"alien mind,\" according to Jensen Huang. It's just hardware and software, so safety can be engineered by each AI product maker.",
         "body": ""
       }
     },
@@ -82,14 +175,13 @@
     "publishedAt": "2026-09-15T23:34:25.000Z",
     "categories": [
       "tecnologia-general",
-      "windows",
       "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Voters mostly don’t like AI and data centers, but neither party seems to have an edge",
+        "title": "AI and data centers are incredibly unpopular in every poll",
         "summary": "Poll data released Tuesday by the New York Times and Siena University confirms what we've already been seeing, and what politicians are responding to - AI and data centers are incredibly unpopular. Asked if they support or oppose the construction of data centers to power AI tech, 61 percent of the 1,503 likely voters surveyed […]",
         "body": ""
       }
@@ -148,54 +240,6 @@
     "media": null
   },
   {
-    "id": "engadget-3997f3416e27b15d",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2256491/usb-c-flash-drive-better-usb-a-comparison/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-15T22:30:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Are USB-C flash drives better than USB-A ones?",
-        "summary": "USB-A and USB-C flash drives both have their purposes. USB-C is increasingly common, but USB-A isn't going anywhere yet.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-172e574d90f0e381",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/15/ulysses-gets-siri-ai-support-customizable-toolbars-project-templates-more/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-15T22:01:17.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Ulysses gets Siri AI support, customizable toolbars, project templates, more",
-        "summary": "Following the release of macOS 27 Golden Gate and iOS 27 , Ulysses was updated with Siri AI support, a refreshed interface, customizable toolbars, project templates, and more. Here are the details. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "techcrunch-04158ff69019dd12",
     "type": "news",
     "sourceId": "techcrunch",
@@ -214,54 +258,6 @@
       "en": {
         "title": "The AI data center boom is colliding with cities scarred by big industry",
         "summary": "National outcry against data center construction has spread to Philadelphia, where officials suggested possible construction in a neighborhood already impacted by a now-defunct oil refinery.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-e29397d7a92196bc",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/news/994714/microsoft-windows-surface-event-october-7-san-francisco",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-15T20:36:59.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Microsoft announces Windows and Surface event for October 7th",
-        "summary": "It's been more than two years since the last major Windows event, so Microsoft is heading to San Francisco next month to outline the future of Windows and Surface devices. At an event on October 7th, the company says it will host a \"conversation on how local AI will shape the next chapter of the […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-4321ace8fa3908e1",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/policy/995704/peter-gray-restoring-childhood-jonathan-haidt",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-15T20:13:30.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "What if social media isn’t hurting kids?",
-        "summary": "Two years ago, social psychologist Jonathan Haidt released his New York Times bestseller The Anxious Generation. The book posits that the rise of social media and smartphone use is largely to blame for the prominent decline in teen mental health since 2010. It quickly became a central rallying cry of the social media backlash. Haidt […]",
         "body": ""
       }
     },

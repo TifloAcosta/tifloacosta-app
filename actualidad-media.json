@@ -1,5 +1,22 @@
 [
   {
+    "id": "cnet:https://www.youtube.com/watch?v=qevZ_47k2qw",
+    "type": "video",
+    "section": "technology",
+    "sourceId": "cnet",
+    "sourceName": "CNET",
+    "sourceUrl": "https://www.youtube.com/@CNET",
+    "originalUrl": "https://www.youtube.com/watch?v=qevZ_47k2qw",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T06:00:28.000Z",
+    "title": "Unboxing Apple's $1,299 iPhone 18 Pro Max in Burgundy",
+    "summary": "One of Apple's newest iPhone colors, burgundy, is here. Unbox it the iPhone 18 Pro Max with us and some of the new matching accessories.\n\nRead more about it on CNET.com: \n\nAdd CNET as a trusted news source https://www.google.com/preferences/source?q=cnet.com\nNever miss a deal again! See CNET’s browser extension 👉 https://bit.ly/3lO7sOU\nCheck out CNET’s Amazon Storefront: https://www.amazon.com/shop/cnet\nSubscribe to CNET on YouTube: https://www.youtube.com/cnet\nFollow us on TikTok: https://www.tiktok.com/@cnetdotcom\nFollow us on Instagram: https://www.instagram.com/cnet\nFollow us on Bluesky: https://bsky.app/profile/cnet.com\nLike us on Facebook: https://www.facebook.com/cnet\nCNET's AI Atlas: https://www.cnet.com/ai-atlas\nFollow us on X: https://www.x.com/cnet\nVisit CNET.com:  https://www.cnet.com",
+    "mediaUrl": null,
+    "embedUrl": "https://www.youtube.com/embed/qevZ_47k2qw",
+    "platform": "youtube",
+    "categories": []
+  },
+  {
     "id": "the-verge-video:https://www.youtube.com/watch?v=S74uAW7ltnk",
     "type": "video",
     "section": "technology",
@@ -523,23 +540,6 @@
     "summary": "Secure your business with ThreatLocker today and sign up for Zero Trust World using our link: https://www.ztw.com\nand learn more about how ThreatLocker can help your business safely integrate AI agenic tools here: https://www.threatlocker.com/blog/app...\n\nValve's new Steam Frame has finally arrived... no more leaks... and its promising to shake up the VR market. Is it the wireless, standalone headset we've been waiting for, or does it fall short of the high bar set by the Index? We test performance, battery life, and comfort to see if it's worth the upgrade. \n\nDiscuss on the forum: https://linustechtips.com/topic/1642726-the-steam-frame-changes-everything-full-review/\n\nLink to the Article about Human Vision referenced in the Video: https://pixelcraft.photo.blog/2022/05/16/the-human-visual-system-focus-and-acuity/\n\nCheck out our Channel Partners:\n\nSecretlab \n- Grab a TITAN Evo ergonomic gaming chair:  https://lmg.gg/secretlabltt\n- Grab an ATLAS ergonomic office chair:  https://lmg.gg/secretlablttatlas\n\nPIA \n- Get the VPN of our choice: https://www.piavpn.com/ltt\n\ndbrand \n- Buy a \"Circuit\" series skin for your device: https://dbrand.com/pcb\n\n► SHOP LTT PRODUCTS: https://lttstore.com\n► GET EXCLUSIVE CONTENT ON FLOATPLANE: https://lmg.gg/lttfloatplane\n► DIVE DEEPER ON THE LTT LABS WEBSITE: https://lmg.gg/labs\n► SPONSORS, AFFILIATES, AND PARTNERS: https://lmg.gg/partners\n\nPurchases made through some store links may provide some compensation to Linus Media Group. Affiliate links powered in part by https://affilimate.com/?aid=ghz1izbpb\n\nLinus Sebastian is an investor in Framework Computer, Inc and HexOS by Eshtek.\n\nCHAPTERS\n---------------------------------------------------\n0:00 Intro\n2:15 What’s USING it like?\n4:07 The MOST EXCITING Features\n6:50 Standalone Functionality\n9:35 Performance and Standalone Gaming Experience\n10:55 Battery Life\n12:51 Low Lights - Cameras and Controllers\n14:55 Price and Free Form Discussion\n23:32 Outro",
     "mediaUrl": null,
     "embedUrl": "https://www.youtube.com/embed/3PGKMwgjla0",
-    "platform": "youtube",
-    "categories": []
-  },
-  {
-    "id": "cnet:https://www.youtube.com/watch?v=IQPfT49lysY",
-    "type": "video",
-    "section": "technology",
-    "sourceId": "cnet",
-    "sourceName": "CNET",
-    "sourceUrl": "https://www.youtube.com/@CNET",
-    "originalUrl": "https://www.youtube.com/watch?v=IQPfT49lysY",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T17:00:04.000Z",
-    "title": "Unboxing the $1,059 Valve Steam Frame",
-    "summary": "Pricing for the Steam Frame starts at $1,059 for the base 256GB version, and $1,299 for the 1TB model. Additional ergonomic accessories are available for $59. Let's unbox it. #steam #steamframe #valve #vr #vrheadset #unboxing #pcgaming \n\nAdd CNET as a trusted news source https://www.google.com/preferences/source?q=cnet.com\nNever miss a deal again! See CNET’s browser extension 👉 https://bit.ly/3lO7sOU\nCheck out CNET’s Amazon Storefront: https://www.amazon.com/shop/cnet\nSubscribe to CNET on YouTube: https://www.youtube.com/cnet\nFollow us on TikTok: https://www.tiktok.com/@cnetdotcom\nFollow us on Instagram: https://www.instagram.com/cnet\nFollow us on Bluesky: https://bsky.app/profile/cnet.com\nLike us on Facebook: https://www.facebook.com/cnet\nCNET's AI Atlas: https://www.cnet.com/ai-atlas\nFollow us on X: https://www.x.com/cnet\nVisit CNET.com:  https://www.cnet.com",
-    "mediaUrl": null,
-    "embedUrl": "https://www.youtube.com/embed/IQPfT49lysY",
     "platform": "youtube",
     "categories": []
   },

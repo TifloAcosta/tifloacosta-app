@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-3-actualidad-media';
+const CACHE = 'tifloacosta-app-v2-4-search-podcast-categories';
 const SHELL = [
   './',
   './index.html',
@@ -13,6 +13,7 @@ const SHELL = [
   './actualidad.json',
   './actualidad-apps.json',
   './actualidad-media.json',
+  './podcast.json',
   './notifications.js?v=0.15',
   './videos.html',
   './video-search-index.js?v=1.0',
@@ -79,6 +80,7 @@ self.addEventListener('fetch', event => {
     event.request.destination === 'script' ||
     event.request.destination === 'style' ||
     url.pathname.endsWith('/videos.json') ||
+    url.pathname.endsWith('/podcast.json') ||
     url.pathname.endsWith('/actualidad.json') ||
     url.pathname.endsWith('/actualidad-apps.json') ||
     url.pathname.endsWith('/actualidad-media.json');

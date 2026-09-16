@@ -20,5 +20,25 @@ jobs:
       - name: Synchronize TifloAcosta podcast for search verification
         run: node scripts/sync-podcast.mjs
       - run: npm test
-      - name: Diagnose the reported calor episode
-        run: node -e "const fs=require('fs'); const items=JSON.parse(fs.readFileSync('podcast.json','utf8')); const hits=items.filter(item=>/(calor|gusta|verano|fr[ií]o)/i.test(String(item.title||''))); console.log(hits.map(item=>item.title).join('\n') || 'No related titles found'); if(!items.some(item=>/calor/i.test(String(item.title||'')))) process.exit(1);"
+      - name: Check TifloAcosta podcast catalogs for the reported calor episode
+        run: |
+          node - <<'NODE'
+          const feeds = [
+            'https://anchor.fm/s/5b48ca28/podcast/rss',
+            'https://www.ivoox.com/feed_fg_f11282163_filtro_1.xml',
+            'https://www.ivoox.com/feed_fg_f11272924_filtro_1.xml'
+          ];
+          let found = false;
+          for (const url of feeds) {
+            const response = await fetch(url);
+            console.log(`FEED ${url} HTTP ${response.status}`);
+            if (!response.ok) continue;
+            const xml = await response.text();
+            const titles = [...xml.matchAll(/<title(?:\s[^>]*)?>([\s\S]*?)<\/title>/gi)]
+              .map(match => match[1].replace(/<!\[CDATA\[|\]\]>/g, '').replace(/<[^>]+>/g, '').trim())
+              .filter(title => /(calor|gusta|verano|fr[ií]o)/i.test(title));
+            console.log(titles.join('\n') || 'No related titles found');
+            if (titles.some(title => /calor/i.test(title))) found = true;
+          }
+          if (!found) process.exit(1);
+          NODE

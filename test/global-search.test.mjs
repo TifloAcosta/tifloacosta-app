@@ -14,6 +14,9 @@ test('global search finds matching content across all TifloAcosta sources', () =
     videos: [
       { id:'abcdefghijk', title:'La cámara del iPhone con VoiceOver', description:'Fotografía accesible' }
     ],
+    podcasts: [
+      { id:'p1', lang:'es', title:'Cámara y accesibilidad en el podcast', summary:'Consejos prácticos', url:'https://example.com/podcast' }
+    ],
     stories: [
       { id:'n1', lang:'es', title:'Nueva cámara accesible', summary:'Mejoras con VoiceOver', sourceName:'TifloAcosta', originalUrl:'https://example.com/noticia' }
     ],
@@ -21,20 +24,41 @@ test('global search finds matching content across all TifloAcosta sources', () =
       { id:'a1', lang:'es', title:'Cámara Fácil', summary:'App accesible para hacer fotos', platform:'iOS', originalUrl:'https://example.com/app' }
     ],
     media: [
-      { id:'m1', originalLanguage:'es', title:'Podcast sobre cámara y accesibilidad', summary:'Consejos prácticos', sourceName:'Podcast', originalUrl:'https://example.com/audio' }
+      { id:'m1', originalLanguage:'es', title:'Podcast externo sobre cámara y accesibilidad', summary:'Consejos prácticos', sourceName:'Podcast', originalUrl:'https://example.com/audio' }
     ],
     videoIndex: { videos: {} }
   };
 
   const results = search.searchAcrossSources(sources, 'camara', 'es');
-  assert.deepEqual(new Set(results.map(item => item.kind)), new Set(['resource', 'video', 'news', 'app', 'media']));
+  assert.deepEqual(new Set(results.map(item => item.kind)), new Set(['resource', 'video', 'podcast', 'news', 'app', 'media']));
   assert.equal(results.some(item => item.id === 'r-en'), false);
+});
+
+test('global search finds old TifloAcosta podcast episodes by title', () => {
+  const sources = {
+    resources: [],
+    videos: [],
+    podcasts: [
+      { id:'calor', lang:'es', title:'No me gusta el calor', summary:'Un episodio del Canal TifloAcosta', url:'https://example.com/no-me-gusta-el-calor' }
+    ],
+    stories: [],
+    apps: [],
+    media: [],
+    videoIndex: { videos: {} }
+  };
+
+  const results = search.searchAcrossSources(sources, 'calor', 'es');
+  assert.equal(results.length, 1);
+  assert.equal(results[0].kind, 'podcast');
+  assert.equal(results[0].title, 'No me gusta el calor');
+  assert.equal(results[0].href, 'https://example.com/no-me-gusta-el-calor');
 });
 
 test('global search uses supplemental video metadata and ignores accents', () => {
   const sources = {
     resources: [],
     videos: [{ id:'abcdefghijk', title:'VoiceOver: esa voz es nueva', description:'Nuevas voces' }],
+    podcasts: [],
     stories: [],
     apps: [],
     media: [],

@@ -20,6 +20,7 @@
       lang: 'es',
       category: 'Estudios médicos',
       title: 'Cuando el termómetro se pone chulo',
+      searchText: 'Lo que el calor hace de verdad en nuestro cuerpo, para bien y para mal. A mí el calor no me gusta. Nada.',
       url: 'https://drive.google.com/file/d/1_VyVgtFln1tSznf9ct3990CGZ_i4wOO1/view?usp=drivesdk',
       openUrl: 'https://drive.google.com/file/d/1_VyVgtFln1tSznf9ct3990CGZ_i4wOO1/view?usp=drivesdk',
       new: true
@@ -29,6 +30,7 @@
       lang: 'en',
       category: 'Medical Studies',
       title: 'When the Thermometer Gets Cocky',
+      searchText: 'What heat really does to our bodies, for better and for worse. I do not like the heat at all.',
       url: 'https://drive.google.com/file/d/1yEGRwTEzGjgEzmYtP2wnlnaACFFbdho6/view?usp=drivesdk',
       openUrl: 'https://drive.google.com/file/d/1yEGRwTEzGjgEzmYtP2wnlnaACFFbdho6/view?usp=drivesdk',
       new: true

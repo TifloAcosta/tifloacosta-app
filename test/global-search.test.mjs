@@ -21,7 +21,7 @@ test('global search finds matching content across all TifloAcosta sources', () =
       { id:'a1', lang:'es', title:'Cámara Fácil', summary:'App accesible para hacer fotos', platform:'iOS', originalUrl:'https://example.com/app' }
     ],
     media: [
-      { id:'m1', originalLanguage:'es', title:'Podcast sobre cámara y accesibilidad', summary:'Consejos prácticos', sourceName:'Podcast', originalUrl:'https://example.com/audio' }
+      { id:'m1', originalLanguage:'es', title:'Podcast externo sobre cámara y accesibilidad', summary:'Consejos prácticos', sourceName:'Podcast', originalUrl:'https://example.com/audio' }
     ],
     videoIndex: { videos: {} }
   };
@@ -29,6 +29,31 @@ test('global search finds matching content across all TifloAcosta sources', () =
   const results = search.searchAcrossSources(sources, 'camara', 'es');
   assert.deepEqual(new Set(results.map(item => item.kind)), new Set(['resource', 'video', 'news', 'app', 'media']));
   assert.equal(results.some(item => item.id === 'r-en'), false);
+});
+
+test('global search uses supplemental resource text for the heat study', () => {
+  const sources = {
+    resources: [
+      {
+        id:'es-estudio-medico-calor-2026',
+        lang:'es',
+        category:'Estudios médicos',
+        title:'Cuando el termómetro se pone chulo',
+        searchText:'Lo que el calor hace de verdad en nuestro cuerpo. A mí el calor no me gusta. Nada.',
+        openUrl:'https://example.com/calor'
+      }
+    ],
+    videos: [],
+    stories: [],
+    apps: [],
+    media: [],
+    videoIndex: { videos: {} }
+  };
+
+  const results = search.searchAcrossSources(sources, 'calor', 'es');
+  assert.equal(results.length, 1);
+  assert.equal(results[0].kind, 'resource');
+  assert.equal(results[0].id, 'es-estudio-medico-calor-2026');
 });
 
 test('global search uses supplemental video metadata and ignores accents', () => {

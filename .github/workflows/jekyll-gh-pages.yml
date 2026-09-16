@@ -33,6 +33,8 @@ jobs:
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: node scripts/sync-actualidad-media.mjs
+      - name: Synchronize TifloAcosta podcast
+        run: node scripts/sync-podcast.mjs
       - name: Build video search index
         run: node scripts/build-video-search-index.mjs
       - name: Setup Pages

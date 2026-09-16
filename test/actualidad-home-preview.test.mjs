@@ -38,7 +38,7 @@ test('Actualidad home labels are bilingual', async () => {
   assert.match(source, /open:'View all news'/);
 });
 
-test('service worker treats all Actualidad catalogs and scripts as live content', async () => {
+test('service worker treats changing catalogs and scripts as live content', async () => {
   const worker = await read('sw.js');
   assert.match(worker, /'\.\/actualidad\.html'/);
   assert.match(worker, /'\.\/actualidad-core\.js\?v=1\.0'/);
@@ -47,8 +47,10 @@ test('service worker treats all Actualidad catalogs and scripts as live content'
   assert.match(worker, /'\.\/actualidad\.json'/);
   assert.match(worker, /'\.\/actualidad-apps\.json'/);
   assert.match(worker, /'\.\/actualidad-media\.json'/);
+  assert.match(worker, /'\.\/podcast\.json'/);
   assert.match(worker, /url\.pathname\.endsWith\('\/actualidad\.json'\)/);
   assert.match(worker, /url\.pathname\.endsWith\('\/actualidad-apps\.json'\)/);
   assert.match(worker, /url\.pathname\.endsWith\('\/actualidad-media\.json'\)/);
-  assert.match(worker, /tifloacosta-app-v2-3-actualidad-media/);
+  assert.match(worker, /url\.pathname\.endsWith\('\/podcast\.json'\)/);
+  assert.match(worker, /tifloacosta-app-v2-4-search-podcast-categories/);
 });

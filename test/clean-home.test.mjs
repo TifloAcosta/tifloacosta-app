@@ -66,11 +66,11 @@ test('one global search is promoted to the home screen and video search is hidde
   assert.match(css, /#video-results-section\s*\{[^}]*margin-top:1\.75rem;[^}]*\}/s);
 });
 
-test('resource categories use an explicit expandable control for screen readers', async () => {
-  const [html, app] = await Promise.all([read('index.html'), read('app.js')]);
-  assert.match(html, /id="category-toggle"[^>]*aria-expanded="false"[^>]*aria-controls="category-options"/);
-  assert.match(html, /id="category-options"[^>]*hidden/);
-  assert.doesNotMatch(html, /<select id="category"/);
-  assert.match(app, /categoryToggle\.addEventListener\('click'/);
-  assert.match(app, /categoryOptions/);
+test('resource categories are progressively enhanced to an explicit expandable control for screen readers', async () => {
+  const [html, source] = await Promise.all([read('index.html'), read('search-accessibility.js')]);
+  assert.match(html, /<select id="category">/);
+  assert.match(source, /function enhanceResourceCategories\(\)/);
+  assert.match(source, /categoryToggle\.setAttribute\('aria-expanded'/);
+  assert.match(source, /categoryOptions\.hidden/);
+  assert.match(source, /select\.dispatchEvent\(new Event\('change'/);
 });

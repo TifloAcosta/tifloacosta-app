@@ -64,6 +64,20 @@
       });
     }
 
+    for (const item of Array.isArray(sources.podcasts) ? sources.podcasts : []) {
+      if (item?.lang && item.lang !== language) continue;
+      const text = `${item?.title || ''} ${item?.summary || ''}`;
+      if (!queryMatches(text, term)) continue;
+      results.push({
+        kind: 'podcast',
+        id: String(item.id || item.url || item.title || ''),
+        title: String(item.title || ''),
+        meta: 'Canal TifloAcosta',
+        href: String(item.url || item.originalUrl || '#'),
+        publishedAt: item.publishedAt || ''
+      });
+    }
+
     for (const item of Array.isArray(sources.stories) ? sources.stories : []) {
       if (item?.lang && item.lang !== language) continue;
       const categories = Array.isArray(item?.categories) ? item.categories.join(' ') : '';
@@ -108,7 +122,7 @@
       });
     }
 
-    const kindOrder = { resource: 0, video: 1, news: 2, app: 3, media: 4 };
+    const kindOrder = { resource: 0, video: 1, podcast: 2, news: 3, app: 4, media: 5 };
     return results.sort((a, b) => {
       const kindDelta = (kindOrder[a.kind] ?? 99) - (kindOrder[b.kind] ?? 99);
       if (kindDelta) return kindDelta;
@@ -141,6 +155,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         groups: {
           resource: 'Recursos',
           video: 'Vídeos de TifloAcosta',
+          podcast: 'Podcast de TifloAcosta',
           news: 'Noticias',
           app: 'Apps accesibles',
           media: 'Escuchar y ver'
@@ -148,6 +163,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         open: {
           resource: 'Abrir recurso',
           video: 'Abrir vídeo',
+          podcast: 'Abrir episodio',
           news: 'Abrir noticia',
           app: 'Abrir ficha',
           media: 'Abrir contenido'
@@ -167,6 +183,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         groups: {
           resource: 'Resources',
           video: 'TifloAcosta videos',
+          podcast: 'TifloAcosta podcast',
           news: 'News',
           app: 'Accessible apps',
           media: 'Listen and watch'
@@ -174,6 +191,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         open: {
           resource: 'Open resource',
           video: 'Open video',
+          podcast: 'Open episode',
           news: 'Open news item',
           app: 'Open app page',
           media: 'Open content'
@@ -275,14 +293,16 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         if (sourcesPromise) return sourcesPromise;
         sourcesPromise = Promise.all([
           fetchJson('videos.json', { videos: [] }),
+          fetchJson('podcast.json', []),
           fetchJson('actualidad.json', []),
           fetchJson('actualidad-apps.json', []),
           fetchJson('actualidad-media.json', []),
           loadScriptOnce('video-search-index.js?v=1.0')
-        ]).then(([videoCatalog, stories, apps, media]) => {
+        ]).then(([videoCatalog, podcasts, stories, apps, media]) => {
           rawStories = Array.isArray(stories) ? stories : [];
           return {
             videos: Array.isArray(videoCatalog?.videos) ? videoCatalog.videos : [],
+            podcasts: Array.isArray(podcasts) ? podcasts : [],
             apps: Array.isArray(apps) ? apps : [],
             media: Array.isArray(media) ? media : []
           };
@@ -328,7 +348,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         clearButton.hidden = false;
         status.textContent = items.length ? copy.count(items.length) : copy.empty;
 
-        const kinds = ['resource', 'video', 'news', 'app', 'media'];
+        const kinds = ['resource', 'video', 'podcast', 'news', 'app', 'media'];
         for (const kind of kinds) {
           const matches = items.filter(item => item.kind === kind);
           if (!matches.length) continue;
@@ -365,6 +385,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         const found = api.searchAcrossSources({
           resources: Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [],
           videos: loaded.videos,
+          podcasts: loaded.podcasts,
           stories: localizedStories(lang),
           apps: loaded.apps,
           media: loaded.media,
@@ -395,6 +416,90 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       localize();
       updateHomeVisibility();
       loadSources();
+    }
+
+    function enhanceResourceCategories() {
+      const select = document.querySelector('#category');
+      const label = document.querySelector('label[for="category"]');
+      if (!select || !label || select.dataset.accessibleCategories === 'true') return;
+      select.dataset.accessibleCategories = 'true';
+
+      label.id = label.id || 'category-label';
+      label.removeAttribute('for');
+
+      const categoryToggle = document.createElement('button');
+      categoryToggle.type = 'button';
+      categoryToggle.id = 'category-toggle';
+      categoryToggle.setAttribute('aria-expanded', 'false');
+      categoryToggle.setAttribute('aria-controls', 'category-options');
+      categoryToggle.setAttribute('aria-labelledby', `${label.id} category-toggle`);
+
+      const categoryOptions = document.createElement('div');
+      categoryOptions.id = 'category-options';
+      categoryOptions.className = 'inline-actions category-options';
+      categoryOptions.hidden = true;
+      categoryOptions.setAttribute('role', 'group');
+      categoryOptions.setAttribute('aria-labelledby', label.id);
+
+      select.hidden = true;
+      select.insertAdjacentElement('afterend', categoryToggle);
+      categoryToggle.insertAdjacentElement('afterend', categoryOptions);
+
+      function placeholder() {
+        return select.options[0]?.textContent || (currentLanguage() === 'en' ? 'Select a category' : 'Seleccionar una categoría');
+      }
+
+      function syncToggle() {
+        const selected = [...select.options].find(option => option.value === select.value);
+        categoryToggle.textContent = select.value && selected ? selected.textContent : placeholder();
+      }
+
+      function setOpen(open) {
+        categoryToggle.setAttribute('aria-expanded', String(open));
+        categoryOptions.hidden = !open;
+      }
+
+      function rebuildOptions() {
+        categoryOptions.replaceChildren();
+        [...select.options].filter(option => option.value).forEach(option => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'category-option';
+          button.textContent = option.textContent;
+          button.dataset.categoryValue = option.value;
+          button.addEventListener('click', () => {
+            select.value = option.value;
+            syncToggle();
+            setOpen(false);
+            select.dispatchEvent(new Event('change', { bubbles: true }));
+            categoryToggle.focus();
+          });
+          categoryOptions.append(button);
+        });
+      }
+
+      categoryToggle.addEventListener('click', () => {
+        rebuildOptions();
+        syncToggle();
+        setOpen(categoryToggle.getAttribute('aria-expanded') !== 'true');
+      });
+      categoryOptions.addEventListener('keydown', event => {
+        if (event.key !== 'Escape') return;
+        setOpen(false);
+        categoryToggle.focus();
+      });
+      select.addEventListener('change', syncToggle);
+      document.querySelector('#favorites-button')?.addEventListener('click', () => window.setTimeout(syncToggle, 0));
+      document.querySelector('#clear-results')?.addEventListener('click', () => window.setTimeout(syncToggle, 0));
+
+      const observer = new MutationObserver(() => {
+        rebuildOptions();
+        syncToggle();
+      });
+      observer.observe(select, { childList: true });
+
+      rebuildOptions();
+      syncToggle();
     }
 
     function submitHiddenVideoSearch(form) {
@@ -466,6 +571,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
 
     function init() {
       enhanceGlobalSearch();
+      enhanceResourceCategories();
       simplifyVideoControls();
     }
 

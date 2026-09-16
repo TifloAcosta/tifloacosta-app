@@ -17,4 +17,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Synchronize TifloAcosta podcast for search verification
+        run: node scripts/sync-podcast.mjs
+      - name: Verify the reported calor episode is present
+        run: node -e "const fs=require('fs'); const items=JSON.parse(fs.readFileSync('podcast.json','utf8')); if(!items.some(item=>String(item.title||'').toLowerCase().includes('calor'))) process.exit(1);"
       - run: npm test

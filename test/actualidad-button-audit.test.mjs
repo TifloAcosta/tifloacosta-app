@@ -217,3 +217,14 @@ test('content-opening controls are wired to their intended handlers', async () =
   assert.match(videos, /els\.prev\.addEventListener\('click'/);
   assert.match(videos, /els\.next\.addEventListener\('click'/);
 });
+
+test('home hash navigation actually reveals the requested section and hides the launcher', async () => {
+  const source = await read('actualidad-core.js');
+  const match = source.match(/function applyHomeIsolation\([^)]*\)\s*\{([\s\S]*?)\n\s*\}\n\n\s*function applyActualidadIsolation/);
+  assert.ok(match, 'Missing applyHomeIsolation navigation controller');
+  const body = match[1];
+  assert.match(body, /document\.getElementById\('home-hero'\)/, 'Home routing never manages the home hero');
+  assert.match(body, /document\.getElementById\('home-blocks'\)/, 'Home routing never manages the section launcher');
+  assert.match(body, /state\.view/, 'Home routing never uses the resolved target view');
+  assert.match(body, /setHidden\(/, 'Home routing never reveals or hides its views');
+});

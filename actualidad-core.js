@@ -241,7 +241,15 @@
     return null;
   }
 
-  return { catalogForActualidadRoute, homePreview, isFeaturedEligible, localizedStory, normalizeContent, normalizeStory, publicStories, resolveIsolatedView, sortStories };
+  function setElementHidden(element, hidden) {
+    if (!element) return false;
+    const next = Boolean(hidden);
+    if (element.hidden === next) return false;
+    element.hidden = next;
+    return true;
+  }
+
+  return { catalogForActualidadRoute, homePreview, isFeaturedEligible, localizedStory, normalizeContent, normalizeStory, publicStories, resolveIsolatedView, setElementHidden, sortStories };
 }));
 
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
@@ -299,7 +307,13 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
   }
 
   function setHidden(element, hidden) {
-    if (element) element.hidden = hidden;
+    if (!element) return;
+    if (navigationCore?.setElementHidden) {
+      navigationCore.setElementHidden(element, hidden);
+      return;
+    }
+    const next = Boolean(hidden);
+    if (element.hidden !== next) element.hidden = next;
   }
 
   function focusElement(element) {

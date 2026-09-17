@@ -26,11 +26,10 @@ test('Android bootstrap is isolated, reproducible and supports secret-backed rel
     'mobile/package-lock.json',
     'mobile/android',
     '[skip mobile-bootstrap]',
-    'secrets.ANDROID_KEYSTORE_BASE64',
-    'secrets.ANDROID_KEYSTORE_PASSWORD',
-    'secrets.ANDROID_KEY_ALIAS',
-    'secrets.ANDROID_KEY_PASSWORD',
-    'android-upload-key.jks'
+    'secrets.TIFLOACOSTA_KEYSTORE_BASE64',
+    'secrets.TIFLOACOSTA_KEYSTORE_PASSWORD',
+    'tifloacosta-upload',
+    'tifloacosta-upload.p12'
   ]) {
     assert.ok(workflow.includes(expected), `Android bootstrap missing: ${expected}`);
   }

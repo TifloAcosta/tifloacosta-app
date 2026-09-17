@@ -27,6 +27,34 @@ function assertLocalFileTarget(href, label) {
   return access(new URL(`../${path.replace(/^\.\//, '')}`, import.meta.url));
 }
 
+function driveId(value) {
+  return String(value || '').match(/\/file\/d\/([^/?#]+)/)?.[1] || null;
+}
+
+function normalizedWords(value) {
+  return String(value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/&[^;]+;/g, ' ')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .split(/\s+/)
+    .filter(word => word.length >= 4 && !['para', 'with', 'from', 'this', 'that', 'todo', 'como'].includes(word));
+}
+
+function titleOverlap(a, b) {
+  const left = new Set(normalizedWords(a));
+  const right = new Set(normalizedWords(b));
+  if (!left.size || !right.size) return 0;
+  let shared = 0;
+  for (const word of left) if (right.has(word)) shared += 1;
+  return shared / Math.min(left.size, right.size);
+}
+
+function firstH1(html) {
+  return html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1]?.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim() || '';
+}
+
 test('home section controls point to the view or page they advertise', async () => {
   const html = await read('index.html');
   const expected = {
@@ -83,7 +111,7 @@ test('Actualidad section controls point to the isolated section they advertise',
   await assertLocalFileTarget('index.html', 'Actualidad back to home');
 });
 
-test('every accessible resource Open document destination exists in the deployed tree', async () => {
+test('every accessible resource Open document control opens the intended reader', async () => {
   const source = await read('data.js');
   const context = { window: {} };
   vm.runInNewContext(source, context);
@@ -94,7 +122,17 @@ test('every accessible resource Open document destination exists in the deployed
     assert.ok(item.openUrl, `Resource has no Open document destination: ${item.title}`);
     const url = new URL(item.openUrl);
     assert.equal(url.origin, 'https://tifloacosta.com', `Resource opens outside TifloAcosta reader: ${item.title}`);
-    await access(new URL(`../${url.pathname.replace(/^\//, '')}`, import.meta.url));
+    const path = url.pathname.replace(/^\//, '');
+    const html = await read(path);
+    const h1 = firstH1(html);
+    assert.ok(h1, `Reader has no H1: ${item.title}`);
+    assert.ok(titleOverlap(item.title, h1) >= 0.5, `Open document appears to point to different content: "${item.title}" -> "${h1}"`);
+
+    const sourceId = driveId(item.url);
+    const readerId = path.match(/reader-([^/]+)\.html$/)?.[1] || null;
+    if (readerId && sourceId) {
+      assert.equal(readerId, sourceId, `Reader file belongs to a different Drive resource: ${item.title}`);
+    }
   }
 });
 
@@ -118,6 +156,27 @@ test('all generated Actualidad actions have usable destinations', async () => {
   }
 });
 
+test('Listen and watch controls have valid source and player destinations', async () => {
+  const items = JSON.parse(await read('actualidad-media.json'));
+  assert.ok(Array.isArray(items) && items.length > 0, 'Listen and watch catalog is empty');
+
+  for (const item of items) {
+    const original = new URL(item.originalUrl);
+    assert.ok(['http:', 'https:'].includes(original.protocol), `Invalid original destination: ${item.title}`);
+
+    if (item.type === 'video') {
+      const embed = new URL(item.embedUrl);
+      assert.equal(embed.protocol, 'https:', `Video embed is not HTTPS: ${item.title}`);
+      assert.match(embed.hostname, /(^|\.)youtube(-nocookie)?\.com$/, `Unexpected video player host: ${item.title}`);
+      assert.match(embed.pathname, /^\/embed\/[A-Za-z0-9_-]{11}/, `Video has a broken embed destination: ${item.title}`);
+    }
+    if (item.type === 'audio') {
+      const media = new URL(item.mediaUrl);
+      assert.ok(['http:', 'https:'].includes(media.protocol), `Audio has a broken media destination: ${item.title}`);
+    }
+  }
+});
+
 test('every video Open player control has a playable YouTube destination', async () => {
   const catalog = JSON.parse(await read('videos.json'));
   const videos = Array.isArray(catalog.videos) ? catalog.videos : [];
@@ -137,21 +196,31 @@ test('every video Open player control has a playable YouTube destination', async
   }
 });
 
-test('content-opening buttons are wired to handlers or native form behavior', async () => {
-  const [home, app, actualidad, videos] = await Promise.all([
-    read('index.html'), read('app.js'), read('actualidad.js'), read('videos.js')
+test('content-opening controls are wired to their intended handlers', async () => {
+  const [home, app, actualidad, media, videos, notifications] = await Promise.all([
+    read('index.html'), read('app.js'), read('actualidad.js'), read('actualidad-media.js'), read('videos.js'), read('notifications.js')
   ]);
 
-  for (const id of ['favorites-button', 'clear-results', 'settings-toggle', 'settings-reset', 'app-update']) {
-    assert.match(app, new RegExp(`els\\.[A-Za-z]+(?:[A-Za-z]+)?\\.addEventListener\\(['\"](?:click|change)['\"]`), `Homepage JS has no interactive handlers`);
+  const homeControls = {
+    'favorites-button': /els\.favoritesButton\.addEventListener\('click',showFavorites\)/,
+    'clear-results': /els\.clearResults\.addEventListener\('click',clearResults\)/,
+    'settings-toggle': /els\.settingsToggle\.addEventListener\('click',toggleSettings\)/,
+    'settings-reset': /els\.settingsReset\.addEventListener\('click',resetDisplaySettings\)/,
+    'app-update': /els\.updateButton\.addEventListener\('click',forceUpdateApplication\)/
+  };
+  for (const [id, handler] of Object.entries(homeControls)) {
     assert.match(home, new RegExp(`\\bid=["']${id}["']`));
+    assert.match(app, handler, `#${id} is not wired to its intended handler`);
   }
+  assert.match(notifications, /notifications-toggle/);
+  assert.match(notifications, /addEventListener\(['"]click['"]/);
   assert.match(app, /open\.addEventListener\('click',[\s\S]*openResourceMenu/);
   assert.match(app, /openLink\.addEventListener\('click'/);
   assert.match(app, /downloadLink\.addEventListener\('click'/);
   assert.match(actualidad, /button\.addEventListener\('click', \(\) => openReader\(story, button\)\)/);
   assert.match(actualidad, /els\.readerBackTop\.addEventListener\('click'/);
   assert.match(actualidad, /els\.readerBackBottom\.addEventListener\('click'/);
+  assert.match(media, /button\.addEventListener\('click', \(\) =>/);
   assert.match(videos, /playButton\.addEventListener\('click', \(\) => openPlayer\(video\)\)/);
   assert.match(videos, /els\.playerClose\.addEventListener\('click', closePlayer\)/);
   assert.match(videos, /els\.prev\.addEventListener\('click'/);

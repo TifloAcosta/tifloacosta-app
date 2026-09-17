@@ -17,7 +17,7 @@ test('Android bootstrap is isolated, reproducible and does not contain signing s
     'npm test',
     'npx cap add android',
     'npx cap sync android',
-    './gradlew assembleDebug bundleRelease',
+    './gradlew --no-daemon assembleDebug bundleRelease',
     'actions/upload-artifact@v4',
     'mobile/package-lock.json',
     'mobile/android',
@@ -25,6 +25,8 @@ test('Android bootstrap is isolated, reproducible and does not contain signing s
   ]) {
     assert.ok(workflow.includes(expected), `Android bootstrap missing: ${expected}`);
   }
+
+  assert.match(workflow, /for attempt in 1 2 3/);
 
   for (const forbidden of [
     'KEYSTORE_PASSWORD',

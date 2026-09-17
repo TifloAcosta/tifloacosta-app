@@ -11,6 +11,7 @@ test('Capacitor config uses the official TifloAcosta identity and bundled web ou
   assert.equal(config.webDir, 'dist');
   assert.equal(config.server?.androidScheme, 'https');
   assert.equal(config.server?.url, undefined, 'mobile shell must not be a remote-site wrapper');
+  assert.equal(config.plugins?.CapacitorHttp?.enabled, true, 'native HTTP must be enabled for the remote content feed');
 });
 
 test('mobile package pins Capacitor 8 native dependencies and builds before platform sync', async () => {

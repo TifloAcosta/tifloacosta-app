@@ -1,0 +1,42 @@
+name: Apply hidden isolation
+
+on:
+  push:
+    branches:
+      - fix/hidden-isolation
+    paths:
+      - '.github/workflows/apply-hidden-isolation.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/hidden-isolation
+      - name: Enforce hidden isolation
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('styles.css')
+          text = path.read_text(encoding='utf-8')
+          rule = '[hidden] { display:none !important; }\n'
+          if rule not in text:
+              marker = '* { box-sizing:border-box; }\n'
+              if marker in text:
+                  text = text.replace(marker, marker + rule, 1)
+              else:
+                  text = rule + text
+              path.write_text(text, encoding='utf-8')
+          PY
+      - name: Commit fix
+        run: |
+          git config user.name 'TifloAcosta'
+          git config user.email '146574974+TifloAcosta@users.noreply.github.com'
+          git add styles.css
+          git diff --cached --quiet && exit 0
+          git commit -m 'fix: respetar hidden en todas las vistas'
+          git push origin HEAD:fix/hidden-isolation

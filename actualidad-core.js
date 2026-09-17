@@ -196,7 +196,42 @@
     return selected.slice(0, safeLimit);
   }
 
-  return { homePreview, isFeaturedEligible, localizedStory, normalizeContent, normalizeStory, publicStories, sortStories };
+  function resolveIsolatedView(page, hash = '') {
+    const route = cleanString(hash).replace(/^#/, '');
+
+    if (page === 'home') {
+      const routes = {
+        resources: 'resources-view',
+        news: 'news-view',
+        book: 'book-section',
+        contact: 'contact-section',
+        privacy: 'privacy-section',
+        config: 'config-section'
+      };
+      const view = routes[route];
+      return view
+        ? { view, parent: 'home', chromeVisible: false }
+        : { view: 'home', parent: null, chromeVisible: true };
+    }
+
+    if (page === 'actualidad') {
+      const parents = {
+        'news-browser': 'actualidad-home',
+        'apps-browser': 'actualidad-home',
+        'media-browser': 'actualidad-home',
+        'media-accessibility': 'media-browser',
+        'media-technology': 'media-browser',
+        'news-reader': 'news-browser'
+      };
+      return parents[route]
+        ? { view: route, parent: parents[route], chromeVisible: false }
+        : { view: 'actualidad-home', parent: null, chromeVisible: false };
+    }
+
+    return { view: page || 'home', parent: null, chromeVisible: page === 'home' };
+  }
+
+  return { homePreview, isFeaturedEligible, localizedStory, normalizeContent, normalizeStory, publicStories, resolveIsolatedView, sortStories };
 }));
 
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
@@ -244,4 +279,169 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
   selectors.forEach(selector => {
     document.querySelectorAll(selector).forEach(upgradeInternalLink);
   });
+
+  const navigationCore = globalThis.TIFLO_ACTUALIDAD_CORE;
+
+  function setPageChromeVisible(visible) {
+    document.querySelectorAll('.site-header, .site-footer, .skip-link').forEach(element => {
+      element.hidden = !visible;
+    });
+  }
+
+  function setHidden(element, hidden) {
+    if (element) element.hidden = hidden;
+  }
+
+  function focusElement(element) {
+    if (!element || typeof element.focus !== 'function') return;
+    if (!element.hasAttribute('tabindex')) element.setAttribute('tabindex', '-1');
+    element.focus();
+  }
+
+  function currentLanguage() {
+    return document.documentElement.lang === 'en' ? 'en' : 'es';
+  }
+
+  const backCopy = {
+    es: { actualidad: 'Volver a Actualidad', media: 'Volver a Escuchar y ver' },
+    en: { actualidad: 'Back to News', media: 'Back to Listen and watch' }
+  };
+
+  let pendingFocusSelector = '';
+
+  function navigateToHash(hash, focusSelector = '') {
+    pendingFocusSelector = focusSelector;
+    if (window.location.hash === hash) {
+      applyActualidadIsolation(true);
+      return;
+    }
+    window.location.hash = hash;
+  }
+
+  function ensureBackControls(section, kind, targetHash, focusSelector) {
+    if (!section) return;
+    const language = currentLanguage();
+    const label = backCopy[language][kind];
+    ['top', 'bottom'].forEach(position => {
+      let wrapper = section.querySelector(`[data-isolated-back="${position}"]`);
+      if (!wrapper) {
+        wrapper = document.createElement('p');
+        wrapper.dataset.isolatedBack = position;
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'button-link back-link';
+        button.addEventListener('click', () => navigateToHash(targetHash, focusSelector));
+        wrapper.append(button);
+        if (position === 'top') section.prepend(wrapper);
+        else section.append(wrapper);
+      }
+      const button = wrapper.querySelector('button');
+      if (button) button.textContent = label;
+    });
+  }
+
+  function applyHomeIsolation() {
+    if (!navigationCore || !document.getElementById('home-blocks')) return;
+    const state = navigationCore.resolveIsolatedView('home', window.location.hash);
+    setPageChromeVisible(state.chromeVisible);
+  }
+
+  function applyActualidadIsolation(focusChangedView = false) {
+    if (!navigationCore || !document.getElementById('actualidad-sections')) return;
+
+    const hero = document.querySelector('main > .hero');
+    const sectionsNav = document.getElementById('actualidad-sections');
+    const news = document.getElementById('news-browser');
+    const apps = document.getElementById('apps-browser');
+    const media = document.getElementById('media-browser');
+    const reader = document.getElementById('news-reader');
+    const homeBottom = document.getElementById('home-link-bottom')?.parentElement;
+    const mediaHeading = document.getElementById('media-heading');
+    const mediaIntro = document.getElementById('media-intro');
+    const mediaNav = document.getElementById('media-sections');
+    const mediaStatus = document.getElementById('media-status');
+    const mediaAccessibility = document.getElementById('media-accessibility');
+    const mediaTechnology = document.getElementById('media-technology');
+
+    setPageChromeVisible(false);
+
+    if (reader && !reader.hidden) {
+      setHidden(hero, true);
+      setHidden(sectionsNav, true);
+      setHidden(news, true);
+      setHidden(apps, true);
+      setHidden(media, true);
+      setHidden(homeBottom, true);
+      return;
+    }
+
+    const state = navigationCore.resolveIsolatedView('actualidad', window.location.hash);
+    const home = state.view === 'actualidad-home';
+    const mediaRoot = state.view === 'media-browser';
+    const mediaAccessibilityView = state.view === 'media-accessibility';
+    const mediaTechnologyView = state.view === 'media-technology';
+
+    setHidden(hero, !home);
+    setHidden(sectionsNav, !home);
+    setHidden(news, state.view !== 'news-browser');
+    setHidden(apps, state.view !== 'apps-browser');
+    setHidden(media, !(mediaRoot || mediaAccessibilityView || mediaTechnologyView));
+    setHidden(reader, true);
+    setHidden(homeBottom, true);
+
+    if (media) {
+      setHidden(mediaHeading, !mediaRoot);
+      setHidden(mediaIntro, !mediaRoot);
+      setHidden(mediaNav, !mediaRoot);
+      setHidden(mediaStatus, true);
+      setHidden(mediaAccessibility, !mediaAccessibilityView);
+      setHidden(mediaTechnology, !mediaTechnologyView);
+    }
+
+    ensureBackControls(news, 'actualidad', '#actualidad-home', '#section-news-link');
+    ensureBackControls(apps, 'actualidad', '#actualidad-home', '#section-apps-link');
+    ensureBackControls(media, 'actualidad', '#actualidad-home', '#section-media-link');
+    ensureBackControls(mediaAccessibility, 'media', '#media-browser', '#media-accessibility-link');
+    ensureBackControls(mediaTechnology, 'media', '#media-browser', '#media-technology-link');
+
+    if (!focusChangedView) return;
+    if (pendingFocusSelector) {
+      const target = document.querySelector(pendingFocusSelector);
+      pendingFocusSelector = '';
+      if (target) {
+        focusElement(target);
+        return;
+      }
+    }
+
+    const focusTargets = {
+      'actualidad-home': '#actualidad-heading',
+      'news-browser': '#news-heading',
+      'apps-browser': '#apps-heading',
+      'media-browser': '#media-heading',
+      'media-accessibility': '#media-accessibility-heading',
+      'media-technology': '#media-technology-heading'
+    };
+    focusElement(document.querySelector(focusTargets[state.view] || '#main'));
+  }
+
+  function applyIsolation(focusChangedView = false) {
+    applyHomeIsolation();
+    applyActualidadIsolation(focusChangedView);
+  }
+
+  window.addEventListener('hashchange', () => applyIsolation(true));
+  applyIsolation(false);
+
+  const reader = document.getElementById('news-reader');
+  if (reader) {
+    const observer = new MutationObserver(() => {
+      queueMicrotask(() => applyActualidadIsolation(false));
+    });
+    observer.observe(reader, { attributes: true, attributeFilter: ['hidden'] });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    window.setTimeout(() => applyIsolation(false), 0);
+  }, { once: true });
 }

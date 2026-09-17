@@ -215,13 +215,15 @@
     }
 
     if (page === 'actualidad') {
+      if (route === 'news-reader') {
+        return { view: 'news-browser', parent: 'actualidad-home', chromeVisible: false };
+      }
       const parents = {
         'news-browser': 'actualidad-home',
         'apps-browser': 'actualidad-home',
         'media-browser': 'actualidad-home',
         'media-accessibility': 'media-browser',
-        'media-technology': 'media-browser',
-        'news-reader': 'news-browser'
+        'media-technology': 'media-browser'
       };
       return parents[route]
         ? { view: route, parent: parents[route], chromeVisible: false }

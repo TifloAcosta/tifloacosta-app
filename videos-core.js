@@ -97,6 +97,14 @@
 });
 
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+  function hideDedicatedPageChrome() {
+    document.querySelectorAll('.site-header, .site-footer, .skip-link').forEach(element => {
+      element.hidden = true;
+    });
+  }
+
+  hideDedicatedPageChrome();
+
   function upgradeVideoNavigationLink(selector) {
     const link = document.querySelector(selector);
     if (!link || link.tagName !== 'A') return;

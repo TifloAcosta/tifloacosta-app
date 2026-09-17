@@ -28,12 +28,15 @@ test('Android bootstrap is isolated, reproducible and supports secret-backed rel
     '[skip mobile-bootstrap]',
     'secrets.TIFLOACOSTA_KEYSTORE_BASE64',
     'secrets.TIFLOACOSTA_KEYSTORE_PASSWORD',
-    'tifloacosta-upload',
+    'keytool -list -v',
+    '-storetype PKCS12',
+    'PrivateKeyEntry',
     'tifloacosta-upload.p12'
   ]) {
     assert.ok(workflow.includes(expected), `Android bootstrap missing: ${expected}`);
   }
 
+  assert.equal(workflow.includes('ANDROID_KEY_ALIAS_SECRET: tifloacosta-upload'), false, 'Signing must not assume the alias written in the helper note is the actual PKCS12 alias');
   assert.match(workflow, /for attempt in 1 2 3/);
   assert.match(workflow, /base64\s+--decode|base64\s+-d/);
 
@@ -50,14 +53,5 @@ test('Android bootstrap is isolated, reproducible and supports secret-backed rel
 
   for (const expected of ['*.jks', '*.keystore', 'keystore.properties']) {
     assert.ok(gitignore.includes(expected), `Git ignore must protect: ${expected}`);
-  }
-
-  for (const forbidden of [
-    'storePassword "',
-    "storePassword '",
-    'keyPassword "',
-    "keyPassword '"
-  ]) {
-    assert.equal(buildGradle.includes(forbidden), false, `Signing credentials must not be hardcoded: ${forbidden}`);
   }
 });

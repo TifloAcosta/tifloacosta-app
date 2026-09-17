@@ -25,5 +25,7 @@ jobs:
         uses: actions/setup-node@v5
         with:
           node-version: 22
-      - name: Run mobile content test
-        run: node --test test/mobile-content.test.mjs
+      - name: Run mobile foundation tests
+        run: |
+          node --test test/mobile-content.test.mjs
+          node --test mobile/test/config.test.mjs

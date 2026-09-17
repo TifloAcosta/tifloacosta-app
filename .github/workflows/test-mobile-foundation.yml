@@ -6,10 +6,9 @@ on:
       - feature/mobile-capacitor-foundation
   pull_request:
     paths:
-      - 'package.json'
-      - 'capacitor.config.json'
-      - 'scripts/build-mobile.mjs'
-      - 'test/mobile-foundation.test.mjs'
+      - 'scripts/build-mobile-content.mjs'
+      - 'test/mobile-content.test.mjs'
+      - 'mobile/**'
       - '.gitignore'
       - '.github/workflows/test-mobile-foundation.yml'
 
@@ -26,5 +25,5 @@ jobs:
         uses: actions/setup-node@v5
         with:
           node-version: 22
-      - name: Run mobile foundation test
-        run: node --test test/mobile-foundation.test.mjs
+      - name: Run mobile content test
+        run: node --test test/mobile-content.test.mjs

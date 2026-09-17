@@ -32,6 +32,16 @@ const DICTIONARIES = {
       large: 'Grande', xlarge: 'Muy grande', max: 'Máximo', theme: 'Color y contraste', auto: 'Seguir el sistema',
       light: 'Alto contraste claro', dark: 'Alto contraste oscuro', spacing: 'Espaciado', comfortable: 'Cómodo', wide: 'Amplio',
       bold: 'Usar texto reforzado', reset: 'Restablecer ajustes'
+    },
+    notifications: {
+      title: 'Notificaciones',
+      explanation: 'Las notificaciones solo se activarán si tú lo decides. TifloAcosta no pedirá permiso al abrir la app.',
+      activate: 'Activar notificaciones',
+      openSettings: 'Abrir ajustes del sistema',
+      unavailable: 'Las notificaciones nativas todavía no están disponibles en esta versión.',
+      notRequested: 'Las notificaciones están desactivadas.',
+      denied: 'El permiso de notificaciones está bloqueado. Puedes revisarlo en los ajustes del sistema.',
+      authorized: 'Las notificaciones están autorizadas.'
     }
   },
   en: {
@@ -67,6 +77,16 @@ const DICTIONARIES = {
       large: 'Large', xlarge: 'Very large', max: 'Maximum', theme: 'Color and contrast', auto: 'Follow system',
       light: 'High contrast light', dark: 'High contrast dark', spacing: 'Spacing', comfortable: 'Comfortable', wide: 'Wide',
       bold: 'Use bolder text', reset: 'Reset settings'
+    },
+    notifications: {
+      title: 'Notifications',
+      explanation: 'Notifications are enabled only if you choose to turn them on. TifloAcosta will not ask for permission when the app opens.',
+      activate: 'Enable notifications',
+      openSettings: 'Open system settings',
+      unavailable: 'Native notifications are not available in this version yet.',
+      notRequested: 'Notifications are turned off.',
+      denied: 'Notification permission is blocked. You can review it in system settings.',
+      authorized: 'Notifications are authorized.'
     }
   }
 };

@@ -5,7 +5,8 @@ on:
     branches:
       - feature/mobile-capacitor-foundation
     paths:
-      - 'mobile/**'
+      - 'mobile/package.json'
+      - 'mobile/capacitor.config.json'
       - '.github/workflows/bootstrap-mobile-android.yml'
   workflow_dispatch:
 

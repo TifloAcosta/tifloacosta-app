@@ -1,4 +1,4 @@
-import { addExternalLink, addParagraph, addScreenHeader, clearScreen } from './shared.mjs';
+import { addExternalLink, addParagraph, addScreenHeader, addShareButton, clearScreen } from './shared.mjs';
 
 function addFavoriteButton(parent, item, favoritesStore, t) {
   const ref = { kind: 'video', id: String(item.id || '') };
@@ -19,7 +19,7 @@ function addFavoriteButton(parent, item, favoritesStore, t) {
   parent.append(button);
 }
 
-export function renderVideos({ root, router, content, favoritesStore, t }) {
+export function renderVideos({ root, router, content, favoritesStore, nativeActions, t }) {
   clearScreen(root);
   addScreenHeader(root, { router, title: t('screen.videos'), backLabel: t('nav.back') });
 
@@ -38,7 +38,20 @@ export function renderVideos({ root, router, content, favoritesStore, t }) {
     title.textContent = item.title || '';
     article.append(title);
     if (item.excerpt || item.description) addParagraph(article, item.excerpt || item.description);
-    if (item.url) addExternalLink(article, { href: item.url, label: `${t('videos.open')}: ${item.title || ''}` });
+    if (item.url) {
+      addExternalLink(article, {
+        href: item.url,
+        label: `${t('videos.open')}: ${item.title || ''}`,
+        onOpen: nativeActions?.openExternal
+      });
+      addShareButton(article, {
+        label: t('common.share'),
+        title: item.title || '',
+        text: item.excerpt || item.description || '',
+        url: item.url,
+        onShare: nativeActions?.share
+      });
+    }
     if (item.id) addFavoriteButton(article, item, favoritesStore, t);
     list.append(article);
   }

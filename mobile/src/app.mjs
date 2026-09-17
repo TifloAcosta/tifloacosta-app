@@ -9,6 +9,7 @@ import { text } from './core/i18n.mjs';
 import { createNativeActions } from './core/native-actions.mjs';
 import { applyPreferences, createPreferencesStore } from './core/preferences.mjs';
 import { TifloSave } from './core/save-plugin.mjs';
+import { createNotificationService } from './native/notifications.mjs';
 import { renderHome } from './screens/home.mjs';
 import { renderActualidad } from './screens/actualidad.mjs';
 import { renderSearch } from './screens/search.mjs';
@@ -37,6 +38,7 @@ function safeStorage() {
 const storage = safeStorage();
 const preferencesStore = createPreferencesStore({ storage });
 const favoritesStore = createFavoritesStore(storage);
+const notificationService = createNotificationService(null);
 const nativeActions = createNativeActions({
   appPlugin: App,
   sharePlugin: Share,
@@ -68,6 +70,7 @@ function render(route) {
     preferences,
     favoritesStore,
     nativeActions,
+    notificationService,
     t,
     onPreferencesChange
   };

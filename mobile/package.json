@@ -8,16 +8,20 @@
   },
   "scripts": {
     "test": "node --test test/*.test.mjs",
-    "sync:android": "npx cap sync android",
-    "sync:ios": "npx cap sync ios"
+    "build": "node scripts/build.mjs",
+    "sync:android": "npm run build && npx cap sync android",
+    "sync:ios": "npm run build && npx cap sync ios"
   },
   "dependencies": {
     "@capacitor/app": "8.1.1",
-    "@capacitor/core": "8.5.2"
+    "@capacitor/browser": "8.0.4",
+    "@capacitor/core": "8.5.2",
+    "@capacitor/share": "8.0.1"
   },
   "devDependencies": {
     "@capacitor/android": "8.5.2",
     "@capacitor/cli": "8.5.2",
-    "@capacitor/ios": "8.5.2"
+    "@capacitor/ios": "8.5.2",
+    "esbuild": "0.28.2"
   }
 }

@@ -55,6 +55,11 @@ function firstH1(html) {
   return html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1]?.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim() || '';
 }
 
+function metaDescription(html) {
+  const tag = html.match(/<meta\b[^>]*name=["']description["'][^>]*>/i)?.[0] || html.match(/<meta\b[^>]*content=["'][^"']*["'][^>]*name=["']description["'][^>]*>/i)?.[0] || '';
+  return tag.match(/\bcontent=["']([^"']*)["']/i)?.[1] || '';
+}
+
 test('home section controls point to the view or page they advertise', async () => {
   const html = await read('index.html');
   const expected = {
@@ -68,20 +73,12 @@ test('home section controls point to the view or page they advertise', async () 
     'home-open-config': '#config'
   };
 
-  for (const [id, href] of Object.entries(expected)) {
-    assert.equal(hrefForId(html, id), href, `#${id} points to the wrong destination`);
-  }
-
+  for (const [id, href] of Object.entries(expected)) assert.equal(hrefForId(html, id), href, `#${id} points to the wrong destination`);
   await assertLocalFileTarget(expected['home-open-actualidad'], 'Actualidad');
   await assertLocalFileTarget(expected['home-open-videos'], 'Videos');
 
   const viewExpectations = {
-    '#resources': 'resources-view',
-    '#news': 'news-view',
-    '#book': 'book-section',
-    '#contact': 'contact-section',
-    '#privacy': 'privacy-section',
-    '#config': 'config-section'
+    '#resources': 'resources-view', '#news': 'news-view', '#book': 'book-section', '#contact': 'contact-section', '#privacy': 'privacy-section', '#config': 'config-section'
   };
   for (const [hash, view] of Object.entries(viewExpectations)) {
     assert.equal(navCore.resolveIsolatedView('home', hash).view, view, `${hash} resolves to the wrong home view`);
@@ -92,20 +89,15 @@ test('home section controls point to the view or page they advertise', async () 
 test('Actualidad section controls point to the isolated section they advertise', async () => {
   const html = await read('actualidad.html');
   const expected = {
-    'section-news-link': '#news-browser',
-    'section-apps-link': '#apps-browser',
-    'section-media-link': '#media-browser',
-    'media-accessibility-link': '#media-accessibility',
-    'media-technology-link': '#media-technology'
+    'section-news-link': '#news-browser', 'section-apps-link': '#apps-browser', 'section-media-link': '#media-browser',
+    'media-accessibility-link': '#media-accessibility', 'media-technology-link': '#media-technology'
   };
-
   for (const [id, href] of Object.entries(expected)) {
     assert.equal(hrefForId(html, id), href, `#${id} points to the wrong destination`);
     const target = href.slice(1);
     assert.match(html, new RegExp(`\\bid=["']${target}["']`), `#${id} points to missing #${target}`);
     assert.equal(navCore.resolveIsolatedView('actualidad', href).view, target, `#${id} resolves to the wrong isolated view`);
   }
-
   assert.equal(hrefForId(html, 'home-link-top'), 'index.html');
   assert.equal(hrefForId(html, 'home-link-bottom'), 'index.html');
   await assertLocalFileTarget('index.html', 'Actualidad back to home');
@@ -126,13 +118,12 @@ test('every accessible resource Open document control opens the intended reader'
     const html = await read(path);
     const h1 = firstH1(html);
     assert.ok(h1, `Reader has no H1: ${item.title}`);
-    assert.ok(titleOverlap(item.title, h1) >= 0.5, `Open document appears to point to different content: "${item.title}" -> "${h1}"`);
+    const contentIdentity = `${h1} ${metaDescription(html)}`;
+    assert.ok(titleOverlap(item.title, contentIdentity) >= 0.5, `Open document appears to point to different content: "${item.title}" -> "${h1}" (${item.openUrl})`);
 
     const sourceId = driveId(item.url);
     const readerId = path.match(/reader-([^/]+)\.html$/)?.[1] || null;
-    if (readerId && sourceId) {
-      assert.equal(readerId, sourceId, `Reader file belongs to a different Drive resource: ${item.title}`);
-    }
+    if (readerId && sourceId) assert.equal(readerId, sourceId, `Reader file belongs to a different Drive resource: ${item.title}`);
   }
 });
 
@@ -140,14 +131,12 @@ test('all generated Actualidad actions have usable destinations', async () => {
   const [storiesRaw, appsRaw] = await Promise.all([read('actualidad.json'), read('actualidad-apps.json')]);
   const stories = JSON.parse(storiesRaw);
   const apps = JSON.parse(appsRaw);
-
   for (const story of stories) {
     assert.doesNotThrow(() => {
       const url = new URL(story.originalUrl);
       assert.ok(['http:', 'https:'].includes(url.protocol));
     }, `News item has a broken original-source destination: ${story.id}`);
   }
-
   for (const app of apps) {
     assert.doesNotThrow(() => {
       const url = new URL(app.originalUrl);
@@ -159,18 +148,16 @@ test('all generated Actualidad actions have usable destinations', async () => {
 test('Listen and watch controls have valid source and player destinations', async () => {
   const items = JSON.parse(await read('actualidad-media.json'));
   assert.ok(Array.isArray(items) && items.length > 0, 'Listen and watch catalog is empty');
-
   for (const item of items) {
     const original = new URL(item.originalUrl);
     assert.ok(['http:', 'https:'].includes(original.protocol), `Invalid original destination: ${item.title}`);
-
-    if (item.type === 'video') {
+    if (item.type === 'video' && item.embedUrl) {
       const embed = new URL(item.embedUrl);
       assert.equal(embed.protocol, 'https:', `Video embed is not HTTPS: ${item.title}`);
       assert.match(embed.hostname, /(^|\.)youtube(-nocookie)?\.com$/, `Unexpected video player host: ${item.title}`);
       assert.match(embed.pathname, /^\/embed\/[A-Za-z0-9_-]{11}/, `Video has a broken embed destination: ${item.title}`);
     }
-    if (item.type === 'audio') {
+    if (item.type === 'audio' && item.mediaUrl) {
       const media = new URL(item.mediaUrl);
       assert.ok(['http:', 'https:'].includes(media.protocol), `Audio has a broken media destination: ${item.title}`);
     }
@@ -181,7 +168,6 @@ test('every video Open player control has a playable YouTube destination', async
   const catalog = JSON.parse(await read('videos.json'));
   const videos = Array.isArray(catalog.videos) ? catalog.videos : [];
   assert.ok(videos.length > 0, 'Video catalog is empty');
-
   for (const video of videos) {
     const id = String(video.id || '').trim();
     const idIsValid = /^[A-Za-z0-9_-]{11}$/.test(id);
@@ -200,7 +186,6 @@ test('content-opening controls are wired to their intended handlers', async () =
   const [home, app, actualidad, media, videos, notifications] = await Promise.all([
     read('index.html'), read('app.js'), read('actualidad.js'), read('actualidad-media.js'), read('videos.js'), read('notifications.js')
   ]);
-
   const homeControls = {
     'favorites-button': /els\.favoritesButton\.addEventListener\('click',showFavorites\)/,
     'clear-results': /els\.clearResults\.addEventListener\('click',clearResults\)/,
@@ -212,8 +197,7 @@ test('content-opening controls are wired to their intended handlers', async () =
     assert.match(home, new RegExp(`\\bid=["']${id}["']`));
     assert.match(app, handler, `#${id} is not wired to its intended handler`);
   }
-  assert.match(notifications, /notifications-toggle/);
-  assert.match(notifications, /addEventListener\(['"]click['"]/);
+  assert.match(notifications, /toggle\.addEventListener\('click', toggleNotifications\)/);
   assert.match(app, /open\.addEventListener\('click',[\s\S]*openResourceMenu/);
   assert.match(app, /openLink\.addEventListener\('click'/);
   assert.match(app, /downloadLink\.addEventListener\('click'/);

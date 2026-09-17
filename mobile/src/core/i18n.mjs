@@ -15,6 +15,7 @@ const DICTIONARIES = {
       label: 'Título o palabra clave', placeholder: 'Por ejemplo: VoiceOver, Android, WhatsApp…', submit: 'Buscar',
       results: '{count} resultados', none: 'No se encontraron resultados.', resultsRegion: 'Resultados de búsqueda'
     },
+    favorites: { add: 'Añadir a favoritos', remove: 'Quitar de favoritos', empty: 'Todavía no has añadido ningún favorito.' },
     actualidad: { empty: 'No hay noticias disponibles en este momento.', original: 'Abrir fuente original' },
     library: { empty: 'No hay recursos disponibles en este momento.', open: 'Abrir documento' },
     videos: { empty: 'No hay vídeos disponibles en este momento.', open: 'Abrir vídeo' },
@@ -31,8 +32,7 @@ const DICTIONARIES = {
       large: 'Grande', xlarge: 'Muy grande', max: 'Máximo', theme: 'Color y contraste', auto: 'Seguir el sistema',
       light: 'Alto contraste claro', dark: 'Alto contraste oscuro', spacing: 'Espaciado', comfortable: 'Cómodo', wide: 'Amplio',
       bold: 'Usar texto reforzado', reset: 'Restablecer ajustes'
-    },
-    placeholder: { favorites: 'Los favoritos se incorporarán en la siguiente fase.' }
+    }
   },
   en: {
     app: { title: 'TifloAcosta' },
@@ -50,6 +50,7 @@ const DICTIONARIES = {
       label: 'Title or keyword', placeholder: 'For example: VoiceOver, Android, WhatsApp…', submit: 'Search',
       results: '{count} results', none: 'No results found.', resultsRegion: 'Search results'
     },
+    favorites: { add: 'Add to favorites', remove: 'Remove from favorites', empty: 'You have not added any favorites yet.' },
     actualidad: { empty: 'There are no news items available right now.', original: 'Open original source' },
     library: { empty: 'There are no resources available right now.', open: 'Open document' },
     videos: { empty: 'There are no videos available right now.', open: 'Open video' },
@@ -66,8 +67,7 @@ const DICTIONARIES = {
       large: 'Large', xlarge: 'Very large', max: 'Maximum', theme: 'Color and contrast', auto: 'Follow system',
       light: 'High contrast light', dark: 'High contrast dark', spacing: 'Spacing', comfortable: 'Comfortable', wide: 'Wide',
       bold: 'Use bolder text', reset: 'Reset settings'
-    },
-    placeholder: { favorites: 'Favorites will be added in the next phase.' }
+    }
   }
 };
 

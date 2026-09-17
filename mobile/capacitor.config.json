@@ -1,7 +1,7 @@
 {
   "appId": "com.tifloacosta.app",
   "appName": "TifloAcosta",
-  "webDir": "src",
+  "webDir": "dist",
   "server": {
     "androidScheme": "https"
   }

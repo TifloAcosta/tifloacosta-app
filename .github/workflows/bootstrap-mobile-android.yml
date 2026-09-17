@@ -65,10 +65,10 @@ jobs:
       - name: Prepare Android release signing when secrets are configured
         shell: bash
         env:
-          ANDROID_KEYSTORE_BASE64_SECRET: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
-          ANDROID_KEYSTORE_PASSWORD_SECRET: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
-          ANDROID_KEY_ALIAS_SECRET: ${{ secrets.ANDROID_KEY_ALIAS }}
-          ANDROID_KEY_PASSWORD_SECRET: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          ANDROID_KEYSTORE_BASE64_SECRET: ${{ secrets.TIFLOACOSTA_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD_SECRET: ${{ secrets.TIFLOACOSTA_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS_SECRET: tifloacosta-upload
+          ANDROID_KEY_PASSWORD_SECRET: ${{ secrets.TIFLOACOSTA_KEYSTORE_PASSWORD }}
         run: |
           values=(
             "$ANDROID_KEYSTORE_BASE64_SECRET"
@@ -81,17 +81,17 @@ jobs:
             if [ -n "$value" ]; then configured=$((configured + 1)); fi
           done
 
-          if [ "$configured" -eq 0 ]; then
+          if [ "$configured" -eq 1 ]; then
             echo "Android signing secrets are not configured; producing validation builds."
             exit 0
           fi
 
           if [ "$configured" -ne 4 ]; then
-            echo "Android signing secrets are incomplete. Configure all four signing secrets."
+            echo "Android signing secrets are incomplete. Configure both TifloAcosta signing secrets."
             exit 1
           fi
 
-          keystore_path="$RUNNER_TEMP/android-upload-key.jks"
+          keystore_path="$RUNNER_TEMP/tifloacosta-upload.p12"
           printf '%s' "$ANDROID_KEYSTORE_BASE64_SECRET" | base64 --decode > "$keystore_path"
           chmod 600 "$keystore_path"
           {

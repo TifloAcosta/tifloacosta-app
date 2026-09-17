@@ -1,38 +1,37 @@
 [
   {
-    "id": "9to5mac-cdc263f5dd739ce7",
+    "id": "9to5mac-8d209040597aab67",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/17/here-are-100-things-siri-ai-can-do-on-your-iphone/",
+    "originalUrl": "https://9to5mac.com/2026/09/17/out-of-warranty-iphone-18-pro-batteries-are-more-expensive-to-replace/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-17T17:49:13.000Z",
+    "publishedAt": "2026-09-17T20:47:09.000Z",
     "categories": [
       "apple",
-      "tecnologia-general",
-      "ia-accesibilidad"
+      "tecnologia-general"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Here are 100+ things Siri AI can do on your iPhone",
-        "summary": "iOS 27 launched this week with the all-new Siri AI. David Pogue put the new Siri to the test by trying 125 requests , here’s how it went. more…",
+        "title": "Out-of-warranty iPhone 18 Pro batteries are more expensive to replace",
+        "summary": "Apple has updated its “ Apple Service and Repair for iPhone ” support page with service prices for the iPhone 18 Pro and the iPhone 18 Pro Max, revealing a pricier battery replacement. Here are the details. more…",
         "body": ""
       }
     },
     "media": null
   },
   {
-    "id": "techcrunch-e02903f940483c1c",
+    "id": "techcrunch-39c89676fc1011be",
     "type": "news",
     "sourceId": "techcrunch",
     "sourceName": "TechCrunch",
     "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/17/even-the-king-of-england-has-his-hesitations-about-ai/",
+    "originalUrl": "https://techcrunch.com/2026/09/17/the-fix-for-rogue-ai-agents-could-be-more-ai/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-17T17:26:25.000Z",
+    "publishedAt": "2026-09-17T20:34:47.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -41,22 +40,22 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Even the king of England has his hesitations about AI",
-        "summary": "King Charles hosted a private summit Thursday with some of the most prominent names in AI and UK government.",
+        "title": "The fix for rogue AI agents could be more AI",
+        "summary": "As companies hand off longer and more complex tasks to AI agents, they are running into an oversight problem: Agents can act faster, longer, and at greater volume than humans can realistically review.",
         "body": ""
       }
     },
     "media": null
   },
   {
-    "id": "techcrunch-878bf652f7ecabd8",
+    "id": "techcrunch-b2a897ee36c3e6a0",
     "type": "news",
     "sourceId": "techcrunch",
     "sourceName": "TechCrunch",
     "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/17/base-labs-launches-an-open-weight-ai-safety-partnership-with-hugging-face-and-goodfire/",
+    "originalUrl": "https://techcrunch.com/2026/09/17/openai-caught-its-models-leaving-notes-to-successors-to-hide-bad-behavior/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-17T17:15:59.000Z",
+    "publishedAt": "2026-09-17T20:34:24.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -65,22 +64,22 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Base Labs launches an open-weight AI safety partnership with Hugging Face and Goodfire",
-        "summary": "Base Labs, the research group Baseten spun up earlier this year, will develop and publish methods for training and monitoring open models.",
+        "title": "OpenAI caught its models leaving notes to successors to hide bad behavior",
+        "summary": "OpenAI disclosed instances of GPT-5.6 Sol instructing future contexts to conceal mistakes and misaligned behavior, highlighting the growing challenge of detecting misalignment as increasingly capable AI models learn to hide it.",
         "body": ""
       }
     },
     "media": null
   },
   {
-    "id": "techcrunch-4cf5842b59a9a30c",
+    "id": "techcrunch-385b59bb008fbaaf",
     "type": "news",
     "sourceId": "techcrunch",
     "sourceName": "TechCrunch",
     "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/17/pinterest-teases-a-new-restyle-feature-that-lets-you-redesign-your-room-with-ai/",
+    "originalUrl": "https://techcrunch.com/2026/09/17/is-the-ai-safety-debate-about-safety-or-control/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-17T17:15:00.000Z",
+    "publishedAt": "2026-09-17T20:19:37.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -89,8 +88,104 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Pinterest teases a new ‘Restyle’ feature that lets you redesign your room with AI",
-        "summary": "Pinterest is testing Restyle, a new AI-powered feature that lets users visualize furniture, decor, lighting, and more in photos of their own rooms — potentially helping turn saved inspiration into purchases.",
+        "title": "Is the AI safety debate about safety or control?",
+        "summary": "Not everyone agrees with Amodei's call for globally coordinated action for AI safety.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-959aa1f41aa4416a",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/17/icloud-subscribers-just-got-new-benefits-in-ios-27/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T20:05:33.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iCloud+ subscribers just got new benefits in iOS 27",
+        "summary": "iOS 27 launched this week, and it includes several new Apple Intelligence-related benefits for iCloud+ subscribers. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-52afe0be810780f5",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/17/pdf-expert-update-adds-handwriting-recognition-expands-apple-pencil-support-more/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T20:03:15.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "PDF Expert update adds handwriting recognition, expands Apple Pencil support, more",
+        "summary": "Readdle updated PDF Expert for iOS 27 and iPadOS 27 this week, adding several new features, including searchable handwriting in 29 languages. Here are the details. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-41fa5eb1ca83f666",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/996923/ai-safety-slow-openai-anthropic",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T19:28:24.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The AI Superintelligence Slowdown",
+        "summary": "Remember when tech leaders would tell their employees to “move fast and break things”? It seemed that would be the way of AI too. But after a summer where rogue AI agents became reality, and researchers warned that AI could kill us all, a number of leading US AI companies are publicly suggesting it’s time […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-2274af71fe03e644",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/997134/anthropic-claude-code-projects",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T18:58:05.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Claude Code relaunches Projects to manage multiple AI agents in the cloud",
+        "summary": "The revamped projects feature in Claude Code allows users to run multiple agents under the same roof, with a shared memory, goals, and library of files and artifacts. Similar to Grok Bot and other tools that manage groups of AI agents, each project has \"threads\" running different tasks in parallel, with a \"coordinator\" directing everything: […]",
         "body": ""
       }
     },
@@ -115,105 +210,6 @@
       "en": {
         "title": "Save $30 or more on a refurbished Apple TV 4K",
         "summary": "Most hardware prices have soared in 2026, and that includes a variety of Apple laptops, tablets, and smart devices. Thankfully, you can offset some of the increased costs on an Apple TV 4K by buying one refurbished through the company. The 64GB model is selling for $169, $30 lower than the new retail price. The […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-fb34cb52184d4a10",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/17/9to5mac-overtime-082-origins-of-the-apple-store-w-special-guest-ron-johnson/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T17:10:53.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "9to5Mac Overtime 082: Origins of the Apple Store w/ special guest Ron Johnson",
-        "summary": "Former Apple SVP of Retail Ron Johnson joins Overtime to discuss his new book, Shop Different: How Retail Revealed Apple’s Genius . Ron talks about the early days of the Apple Store, what it was like collaborating with Steve Jobs, the launch of the original iPhone, why he left Apple to be CEO of JCPenney, where he thinks Apple retail stands today, and, of course, his take on the iPhone Duo. Sponsored by Bitwarden: Register for the free, virtual Open Source Security Summit on September 17, featuring cybersecurity leaders David Sanger and Joseph Menn — and check out Bitwarden for trusted open source password, passkey, and secrets management, with end-to-end encryption and seamless autofill across all your devices. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-cc24ff2b10d2e7fe",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/17/daily-september-17-2026/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T15:50:52.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "android",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "9to5Mac Daily: September 17, 2026 – iOS 27.2 beta testing, more",
-        "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Stuff :Stuff helps you get everything out of your head and into a simple, elegant system—closing open loops and reducing mental stress. A simple to-do list for iPhone, iPad, and Mac, with powerful tools that make organizing, tracking, and checking off your tasks a whole lot more satisfying. Get Stuff done. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-53646e61e76db346",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/996775/ai-is-feared-globally-as-the-destroyer-of-jobs",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T14:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "AI is feared globally as the destroyer of jobs",
-        "summary": "Pew Research has published a new global survey that sheds light on how people view AI, including its impact on jobs, life in general, and income inequality. The survey questioned 42,151 people across 37 countries from February 8th to May 13th - well ahead of recent apocalyptic warnings. A majority sees AI as a threat […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-8966603a76770e3b",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/podcast/996412/microsoft-ai-ceo-mustafa-suleyman-regulation-safety-anthropic-claude",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T14:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Microsoft AI CEO says AI threats are real, and Anthropic is making it worse",
-        "summary": "Today, I’m talking with Mustafa Suleyman, the CEO of Microsoft AI. As you’re no doubt aware, the biggest story in tech right now is the spiraling debate about AI safety and regulation. It should come as no surprise that Mustafa has strong opinions on how AI should be built and regulated. Microsoft just published a […]",
         "body": ""
       }
     },

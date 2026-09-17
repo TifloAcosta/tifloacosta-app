@@ -69,7 +69,8 @@ select:focus-visible {
 
 .home-menu,
 .screen-actions,
-.content-list {
+.content-list,
+.result-list {
   display: grid;
   gap: 0.85rem;
 }
@@ -89,15 +90,35 @@ select:focus-visible {
   color: LinkText;
 }
 
-.content-card {
+.content-card,
+.result-card {
   border: 0.1rem solid currentColor;
   border-radius: 0.5rem;
   padding: 1rem;
 }
 
 .content-card h2,
-.content-card p {
+.content-card h3,
+.content-card p,
+.result-card p {
   margin-block-start: 0;
+}
+
+.search-form {
+  display: grid;
+  gap: 0.65rem;
+  margin-block-end: 1rem;
+}
+
+.search-form input {
+  min-height: 3rem;
+  padding: 0.65rem 0.8rem;
+}
+
+.result-title {
+  width: 100%;
+  text-align: start;
+  font-weight: 700;
 }
 
 .muted {

@@ -41,14 +41,14 @@ test('Actualidad home labels are bilingual', async () => {
 test('service worker treats all Actualidad catalogs and scripts as live content', async () => {
   const worker = await read('sw.js');
   assert.match(worker, /'\.\/actualidad\.html'/);
-  assert.match(worker, /'\.\/actualidad-core\.js\?v=1\.1'/);
-  assert.match(worker, /'\.\/actualidad\.js\?v=1\.1'/);
-  assert.match(worker, /'\.\/actualidad-media\.js\?v=1\.0'/);
+  assert.match(worker, /'\.\/actualidad-core\.js\?v=1\.2'/);
+  assert.match(worker, /'\.\/actualidad\.js\?v=1\.2'/);
+  assert.match(worker, /'\.\/actualidad-media\.js\?v=1\.1'/);
   assert.match(worker, /'\.\/actualidad\.json'/);
   assert.match(worker, /'\.\/actualidad-apps\.json'/);
   assert.match(worker, /'\.\/actualidad-media\.json'/);
   assert.match(worker, /url\.pathname\.endsWith\('\/actualidad\.json'\)/);
   assert.match(worker, /url\.pathname\.endsWith\('\/actualidad-apps\.json'\)/);
   assert.match(worker, /url\.pathname\.endsWith\('\/actualidad-media\.json'\)/);
-  assert.match(worker, /tifloacosta-app-v2-4-actualidad-navigation/);
+  assert.match(worker, /tifloacosta-app-v2-5-actualidad-ios-load/);
 });

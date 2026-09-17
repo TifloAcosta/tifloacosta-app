@@ -3,6 +3,7 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     const $ = selector => document.querySelector(selector);
+    const core = window.TIFLO_ACTUALIDAD_CORE;
     const mediaBrowser = $('#media-browser');
     const heading = $('#media-heading');
     const intro = $('#media-intro');
@@ -64,6 +65,8 @@
 
     let items = [];
     let loadFailed = false;
+    let mediaLoaded = false;
+    let mediaLoading = false;
     const currentLanguage = () => document.documentElement.lang?.toLowerCase().startsWith('en') ? 'en' : 'es';
 
     function mediaVisibleInLanguage(item, lang) {
@@ -105,22 +108,27 @@
       }
 
       if (item.type === 'video' && item.embedUrl && button) {
-        const frame = document.createElement('iframe');
-        frame.title = `${copy[currentLanguage()].play}: ${localizedContent(item).title}`;
-        frame.src = item.embedUrl;
-        frame.loading = 'lazy';
-        frame.allowFullscreen = true;
-        frame.setAttribute('allow', 'encrypted-media; picture-in-picture');
-        frame.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
         const container = document.createElement('div');
         container.hidden = true;
-        container.append(frame);
         card.append(container);
         button.addEventListener('click', () => {
           const opening = container.hidden;
           container.hidden = !opening;
           button.setAttribute('aria-expanded', String(opening));
           button.textContent = opening ? copy[currentLanguage()].close : copy[currentLanguage()].play;
+
+          if (opening) {
+            const frame = document.createElement('iframe');
+            frame.title = `${copy[currentLanguage()].play}: ${localizedContent(item).title}`;
+            frame.src = item.embedUrl;
+            frame.loading = 'lazy';
+            frame.allowFullscreen = true;
+            frame.setAttribute('allow', 'encrypted-media; picture-in-picture');
+            frame.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+            container.replaceChildren(frame);
+          } else {
+            container.replaceChildren();
+          }
         });
       }
     }
@@ -200,6 +208,7 @@
 
     function render() {
       applyCopy();
+      if (!mediaLoaded && !loadFailed) return;
       const c = copy[currentLanguage()];
       if (loadFailed) {
         accessibilityList.replaceChildren();
@@ -215,24 +224,42 @@
       status.textContent = c.count(total);
     }
 
-    const languageObserver = new MutationObserver(render);
+    function loadMedia() {
+      if (mediaLoaded || mediaLoading) return;
+      mediaLoading = true;
+      fetch('actualidad-media.json', { cache: 'no-cache' })
+        .then(response => {
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return response.json();
+        })
+        .then(data => {
+          items = Array.isArray(data) ? data : [];
+          loadFailed = false;
+          mediaLoaded = true;
+          mediaLoading = false;
+          render();
+        })
+        .catch(() => {
+          items = [];
+          loadFailed = true;
+          mediaLoaded = false;
+          mediaLoading = false;
+          render();
+        });
+    }
+
+    function ensureMediaForRoute() {
+      if (core?.catalogForActualidadRoute(window.location.hash) === 'media') loadMedia();
+    }
+
+    const languageObserver = new MutationObserver(() => {
+      if (mediaLoaded || loadFailed) render();
+      else applyCopy();
+    });
     languageObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
 
-    render();
-    fetch('actualidad-media.json', { cache: 'no-cache' })
-      .then(response => {
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return response.json();
-      })
-      .then(data => {
-        items = Array.isArray(data) ? data : [];
-        loadFailed = false;
-        render();
-      })
-      .catch(() => {
-        items = [];
-        loadFailed = true;
-        render();
-      });
+    window.addEventListener('hashchange', ensureMediaForRoute);
+    applyCopy();
+    ensureMediaForRoute();
   }, { once: true });
 })();

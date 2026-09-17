@@ -1,13 +1,13 @@
-const CACHE = 'tifloacosta-app-v2-4-actualidad-navigation';
+const CACHE = 'tifloacosta-app-v2-5-actualidad-ios-load';
 const SHELL = [
   './',
   './index.html',
   './styles.css?v=1.1',
   './data.js?v=0.19',
   './app-core.js?v=1.3',
-  './actualidad-core.js?v=1.1',
-  './actualidad.js?v=1.1',
-  './actualidad-media.js?v=1.0',
+  './actualidad-core.js?v=1.2',
+  './actualidad.js?v=1.2',
+  './actualidad-media.js?v=1.1',
   './app.js?v=2.1',
   './actualidad.html',
   './actualidad.json',

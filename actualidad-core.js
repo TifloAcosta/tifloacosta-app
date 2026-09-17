@@ -233,7 +233,15 @@
     return { view: page || 'home', parent: null, chromeVisible: page === 'home' };
   }
 
-  return { homePreview, isFeaturedEligible, localizedStory, normalizeContent, normalizeStory, publicStories, resolveIsolatedView, sortStories };
+  function catalogForActualidadRoute(hash = '') {
+    const view = resolveIsolatedView('actualidad', hash).view;
+    if (view === 'news-browser') return 'news';
+    if (view === 'apps-browser') return 'apps';
+    if (view === 'media-browser' || view === 'media-accessibility' || view === 'media-technology') return 'media';
+    return null;
+  }
+
+  return { catalogForActualidadRoute, homePreview, isFeaturedEligible, localizedStory, normalizeContent, normalizeStory, publicStories, resolveIsolatedView, sortStories };
 }));
 
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {

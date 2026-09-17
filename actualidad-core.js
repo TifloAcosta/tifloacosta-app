@@ -340,10 +340,23 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     });
   }
 
-  function applyHomeIsolation() {
+  function applyHomeIsolation(focusChangedView = false) {
     if (!navigationCore || !document.getElementById('home-blocks')) return;
     const state = navigationCore.resolveIsolatedView('home', window.location.hash);
+    const hero = document.getElementById('home-hero');
+    const homeBlocks = document.getElementById('home-blocks');
+    const home = state.view === 'home';
+    const viewIds = ['resources-view', 'news-view', 'book-section', 'contact-section', 'privacy-section', 'config-section'];
+
     setPageChromeVisible(state.chromeVisible);
+    setHidden(hero, !home);
+    setHidden(homeBlocks, !home);
+    viewIds.forEach(id => setHidden(document.getElementById(id), state.view !== id));
+
+    if (!focusChangedView) return;
+    const target = home ? hero : document.getElementById(state.view);
+    const heading = target?.querySelector('h1, h2, h3') || target;
+    focusElement(heading);
   }
 
   function applyActualidadIsolation(focusChangedView = false) {
@@ -433,7 +446,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
   }
 
   function applyIsolation(focusChangedView = false) {
-    applyHomeIsolation();
+    applyHomeIsolation(focusChangedView);
     applyActualidadIsolation(focusChangedView);
   }
 

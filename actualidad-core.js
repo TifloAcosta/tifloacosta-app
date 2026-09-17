@@ -320,6 +320,15 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     element.focus();
   }
 
+  function focusTopBackOrHeading(section, headingSelector) {
+    const backButton = section?.querySelector('[data-isolated-back="top"] button');
+    if (backButton) {
+      focusElement(backButton);
+      return;
+    }
+    focusElement(document.querySelector(headingSelector));
+  }
+
   function currentLanguage() {
     return document.documentElement.lang === 'en' ? 'en' : 'es';
   }
@@ -457,14 +466,16 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     }
 
     const focusTargets = {
-      'actualidad-home': '#actualidad-heading',
-      'news-browser': '#news-heading',
-      'apps-browser': '#apps-heading',
-      'media-browser': '#media-heading',
-      'media-accessibility': '#media-accessibility-heading',
-      'media-technology': '#media-technology-heading'
+      'actualidad-home': [null, '#actualidad-heading'],
+      'news-browser': [news, '#news-heading'],
+      'apps-browser': [apps, '#apps-heading'],
+      'media-browser': [media, '#media-heading'],
+      'media-accessibility': [mediaAccessibility, '#media-accessibility-heading'],
+      'media-technology': [mediaTechnology, '#media-technology-heading']
     };
-    focusElement(document.querySelector(focusTargets[state.view] || '#main'));
+    const [section, headingSelector] = focusTargets[state.view] || [null, '#main'];
+    if (section) focusTopBackOrHeading(section, headingSelector);
+    else focusElement(document.querySelector(headingSelector));
   }
 
   function applyIsolation(focusChangedView = false) {

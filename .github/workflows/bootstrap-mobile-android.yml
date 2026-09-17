@@ -67,26 +67,13 @@ jobs:
         env:
           ANDROID_KEYSTORE_BASE64_SECRET: ${{ secrets.TIFLOACOSTA_KEYSTORE_BASE64 }}
           ANDROID_KEYSTORE_PASSWORD_SECRET: ${{ secrets.TIFLOACOSTA_KEYSTORE_PASSWORD }}
-          ANDROID_KEY_ALIAS_SECRET: tifloacosta-upload
-          ANDROID_KEY_PASSWORD_SECRET: ${{ secrets.TIFLOACOSTA_KEYSTORE_PASSWORD }}
         run: |
-          values=(
-            "$ANDROID_KEYSTORE_BASE64_SECRET"
-            "$ANDROID_KEYSTORE_PASSWORD_SECRET"
-            "$ANDROID_KEY_ALIAS_SECRET"
-            "$ANDROID_KEY_PASSWORD_SECRET"
-          )
-          configured=0
-          for value in "${values[@]}"; do
-            if [ -n "$value" ]; then configured=$((configured + 1)); fi
-          done
-
-          if [ "$configured" -eq 1 ]; then
+          if [ -z "$ANDROID_KEYSTORE_BASE64_SECRET" ] && [ -z "$ANDROID_KEYSTORE_PASSWORD_SECRET" ]; then
             echo "Android signing secrets are not configured; producing validation builds."
             exit 0
           fi
 
-          if [ "$configured" -ne 4 ]; then
+          if [ -z "$ANDROID_KEYSTORE_BASE64_SECRET" ] || [ -z "$ANDROID_KEYSTORE_PASSWORD_SECRET" ]; then
             echo "Android signing secrets are incomplete. Configure both TifloAcosta signing secrets."
             exit 1
           fi
@@ -94,11 +81,30 @@ jobs:
           keystore_path="$RUNNER_TEMP/tifloacosta-upload.p12"
           printf '%s' "$ANDROID_KEYSTORE_BASE64_SECRET" | base64 --decode > "$keystore_path"
           chmod 600 "$keystore_path"
+
+          mapfile -t private_key_aliases < <(
+            keytool -list -v \
+              -J-Duser.language=en -J-Duser.country=US \
+              -storetype PKCS12 \
+              -keystore "$keystore_path" \
+              -storepass "$ANDROID_KEYSTORE_PASSWORD_SECRET" 2>/dev/null |
+            awk -F': ' '
+              /^Alias name: / { alias=$2 }
+              /^Entry type: PrivateKeyEntry/ { print alias }
+            '
+          )
+
+          if [ "${#private_key_aliases[@]}" -ne 1 ]; then
+            echo "Expected exactly one private-key entry in the Android upload keystore; found ${#private_key_aliases[@]}."
+            exit 1
+          fi
+          android_key_alias="${private_key_aliases[0]}"
+
           {
             echo "ANDROID_KEYSTORE_PATH=$keystore_path"
             echo "ANDROID_KEYSTORE_PASSWORD=$ANDROID_KEYSTORE_PASSWORD_SECRET"
-            echo "ANDROID_KEY_ALIAS=$ANDROID_KEY_ALIAS_SECRET"
-            echo "ANDROID_KEY_PASSWORD=$ANDROID_KEY_PASSWORD_SECRET"
+            echo "ANDROID_KEY_ALIAS=$android_key_alias"
+            echo "ANDROID_KEY_PASSWORD=$ANDROID_KEYSTORE_PASSWORD_SECRET"
           } >> "$GITHUB_ENV"
 
       - name: Build Android debug APK and release bundle

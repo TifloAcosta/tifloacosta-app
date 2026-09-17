@@ -52,3 +52,16 @@ test('nested media views hide the parent-level Actualidad back controls', async 
   assert.match(source, /mediaRootBackControls/);
   assert.match(source, /wrapper\.hidden\s*=\s*!mediaRoot/);
 });
+
+test('Actualidad interior screens focus the top Back control before their heading', async () => {
+  const source = await readFile(new URL('../actualidad-core.js', import.meta.url), 'utf8');
+
+  assert.match(source, /function focusTopBackOrHeading\(section, headingSelector\)/);
+  assert.match(source, /section\?\.querySelector\('\[data-isolated-back="top"\] button'\)/);
+  assert.match(source, /'news-browser': \[news, '#news-heading'\]/);
+  assert.match(source, /'apps-browser': \[apps, '#apps-heading'\]/);
+  assert.match(source, /'media-browser': \[media, '#media-heading'\]/);
+  assert.match(source, /'media-accessibility': \[mediaAccessibility, '#media-accessibility-heading'\]/);
+  assert.match(source, /'media-technology': \[mediaTechnology, '#media-technology-heading'\]/);
+  assert.match(source, /focusTopBackOrHeading\(section, headingSelector\)/);
+});

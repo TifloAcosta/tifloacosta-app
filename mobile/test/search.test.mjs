@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { searchContent } from '../src/core/search.mjs';
 
@@ -60,4 +61,14 @@ test('title-start matches sort before descriptive matches with deterministic tit
     videos: [], news: []
   };
   assert.deepEqual(searchContent(values, 'camara', 'es').map(item => item.id), ['c', 'a', 'b']);
+});
+
+test('search screen uses one labeled search field, polite count, stable result ids and no autofocus', async () => {
+  const source = await readFile(new URL('../src/screens/search.mjs', import.meta.url), 'utf8');
+  assert.match(source, /type\s*=\s*['"]search['"]/);
+  assert.match(source, /htmlFor\s*=\s*input\.id/);
+  assert.match(source, /ariaLive\s*=\s*['"]polite['"]/);
+  assert.match(source, /result-\$\{result\.kind\}-\$\{result\.id\}/);
+  assert.match(source, /router\.navigate\(result\.route,\s*\{\s*originId:\s*button\.id\s*\}\)/);
+  assert.doesNotMatch(source, /autofocus/i);
 });

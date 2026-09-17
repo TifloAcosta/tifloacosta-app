@@ -1,0 +1,9 @@
+mobile/node_modules/
+mobile/android/.gradle/
+mobile/android/**/build/
+mobile/ios/App/DerivedData/
+mobile/ios/App/Pods/
+mobile/*.jks
+mobile/*.keystore
+mobile/keystore.properties
+.DS_Store

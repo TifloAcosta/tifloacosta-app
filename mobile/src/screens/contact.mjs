@@ -7,11 +7,13 @@ const CONTACTS = [
   ['contact.facebook', 'https://www.facebook.com/profile.php?id=61586738581998']
 ];
 
-export function renderContact({ root, router, t }) {
+export function renderContact({ root, router, nativeActions, t }) {
   clearScreen(root);
   addScreenHeader(root, { router, title: t('screen.contact'), backLabel: t('nav.back') });
   const actions = document.createElement('div');
   actions.className = 'screen-actions';
-  for (const [key, href] of CONTACTS) addExternalLink(actions, { href, label: t(key) });
+  for (const [key, href] of CONTACTS) {
+    addExternalLink(actions, { href, label: t(key), onOpen: nativeActions?.openExternal });
+  }
   root.append(actions);
 }

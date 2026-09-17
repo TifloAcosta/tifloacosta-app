@@ -258,8 +258,6 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     'a[data-home-back]',
     '#actualidad-home-open',
     '#videos-home-open',
-    '#actualidad-sections a.button-link',
-    '#media-sections a.button-link',
     '#home-link-top',
     '#home-link-bottom'
   ];

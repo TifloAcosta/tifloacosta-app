@@ -1,11 +1,11 @@
-const CACHE = 'tifloacosta-app-v2-6-actualidad-hidden-loop';
+const CACHE = 'tifloacosta-app-v2-7-actualidad-native-links';
 const SHELL = [
   './',
   './index.html',
   './styles.css?v=1.1',
   './data.js?v=0.19',
   './app-core.js?v=1.3',
-  './actualidad-core.js?v=1.3',
+  './actualidad-core.js?v=1.4',
   './actualidad.js?v=1.2',
   './actualidad-media.js?v=1.1',
   './app.js?v=2.1',

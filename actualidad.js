@@ -156,6 +156,11 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     let stories = [];
     let apps = [];
     let appsLoadFailed = false;
+    let newsLoadFailed = false;
+    let newsLoaded = false;
+    let newsLoading = false;
+    let appsLoaded = false;
+    let appsLoading = false;
     let readerOpener = null;
     let lang = readStoredLanguage();
 
@@ -296,10 +301,21 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
 
     function renderList() {
       const c = copy[lang];
+      els.list.replaceChildren();
+
+      if (newsLoadFailed) {
+        const error = document.createElement('p');
+        error.className = 'no-results';
+        error.textContent = c.error;
+        els.list.append(error);
+        els.status.textContent = '';
+        return;
+      }
+
+      if (!newsLoaded) return;
       const selected = els.category.value;
       const publicItems = core.publicStories(stories, lang);
       const visible = selected ? publicItems.filter(story => story.categories.includes(selected)) : publicItems;
-      els.list.replaceChildren();
 
       if (!visible.length) {
         const empty = document.createElement('p');
@@ -357,8 +373,6 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
 
     function renderApps() {
       const c = copy[lang];
-      const selected = els.appsPlatform.value;
-      const visible = selected ? apps.filter(app => app.platform === selected) : apps;
       els.appsList.replaceChildren();
 
       if (appsLoadFailed) {
@@ -369,6 +383,10 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         els.appsStatus.textContent = '';
         return;
       }
+
+      if (!appsLoaded) return;
+      const selected = els.appsPlatform.value;
+      const visible = selected ? apps.filter(app => app.platform === selected) : apps;
 
       if (!visible.length) {
         const empty = document.createElement('p');
@@ -416,10 +434,14 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     function render() {
       applyCopy();
       if (!els.reader.hidden) closeReader({ restoreFocus: false });
-      rebuildCategories();
-      renderList();
-      rebuildPlatforms();
-      renderApps();
+      if (newsLoaded || newsLoadFailed) {
+        rebuildCategories();
+        renderList();
+      }
+      if (appsLoaded || appsLoadFailed) {
+        rebuildPlatforms();
+        renderApps();
+      }
     }
 
     function setLanguage(value) {
@@ -429,54 +451,74 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       render();
     }
 
+    function loadNews() {
+      if (newsLoaded || newsLoading) return;
+      newsLoading = true;
+      newsLoadFailed = false;
+      fetch('actualidad.json', { cache: 'no-cache' })
+        .then(response => {
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return response.json();
+        })
+        .then(data => {
+          stories = Array.isArray(data) ? data : [];
+          newsLoaded = true;
+          newsLoading = false;
+          rebuildCategories();
+          renderList();
+        })
+        .catch(() => {
+          stories = [];
+          newsLoaded = false;
+          newsLoading = false;
+          newsLoadFailed = true;
+          rebuildCategories();
+          renderList();
+        });
+    }
+
+    function loadApps() {
+      if (appsLoaded || appsLoading) return;
+      appsLoading = true;
+      appsLoadFailed = false;
+      fetch('actualidad-apps.json', { cache: 'no-cache' })
+        .then(response => {
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return response.json();
+        })
+        .then(data => {
+          apps = Array.isArray(data) ? data : [];
+          appsLoadFailed = false;
+          appsLoaded = true;
+          appsLoading = false;
+          rebuildPlatforms();
+          renderApps();
+        })
+        .catch(() => {
+          apps = [];
+          appsLoadFailed = true;
+          appsLoaded = false;
+          appsLoading = false;
+          rebuildPlatforms();
+          renderApps();
+        });
+    }
+
+    function ensureCatalogForRoute() {
+      const catalog = core.catalogForActualidadRoute(window.location.hash);
+      if (catalog === 'news') loadNews();
+      else if (catalog === 'apps') loadApps();
+    }
+
     els.langEs.addEventListener('click', () => setLanguage('es'));
     els.langEn.addEventListener('click', () => setLanguage('en'));
     els.category.addEventListener('change', renderList);
     els.appsPlatform.addEventListener('change', renderApps);
     els.readerBackTop.addEventListener('click', () => closeReader());
     els.readerBackBottom.addEventListener('click', () => closeReader());
+    window.addEventListener('hashchange', ensureCatalogForRoute);
 
     applyCopy();
-    rebuildPlatforms();
-    renderApps();
-
-    fetch('actualidad.json', { cache: 'no-cache' })
-      .then(response => {
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return response.json();
-      })
-      .then(data => {
-        stories = Array.isArray(data) ? data : [];
-        rebuildCategories();
-        renderList();
-      })
-      .catch(() => {
-        stories = [];
-        rebuildCategories();
-        els.list.replaceChildren();
-        const error = document.createElement('p');
-        error.className = 'no-results';
-        error.textContent = copy[lang].error;
-        els.list.append(error);
-        els.status.textContent = '';
-      });
-
-    fetch('actualidad-apps.json', { cache: 'no-cache' })
-      .then(response => {
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return response.json();
-      })
-      .then(data => {
-        apps = Array.isArray(data) ? data : [];
-        appsLoadFailed = false;
-        rebuildPlatforms();
-        renderApps();
-      })
-      .catch(() => {
-        apps = [];
-        appsLoadFailed = true;
-        rebuildPlatforms();
-        renderApps();
-      });
+    ensureCatalogForRoute();
   }, { once: true });
 }

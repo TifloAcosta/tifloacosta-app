@@ -1,13 +1,13 @@
-const CACHE = 'tifloacosta-app-v2-3-actualidad-media';
+const CACHE = 'tifloacosta-app-v2-10-hidden-isolation';
 const SHELL = [
   './',
   './index.html',
-  './styles.css?v=1.1',
+  './styles.css?v=1.2',
   './data.js?v=0.19',
   './app-core.js?v=1.3',
-  './actualidad-core.js?v=1.0',
-  './actualidad.js?v=1.1',
-  './actualidad-media.js?v=1.0',
+  './actualidad-core.js?v=1.6',
+  './actualidad.js?v=1.2',
+  './actualidad-media.js?v=1.1',
   './app.js?v=2.1',
   './actualidad.html',
   './actualidad.json',

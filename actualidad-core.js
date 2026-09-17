@@ -215,13 +215,15 @@
     }
 
     if (page === 'actualidad') {
+      if (route === 'news-reader') {
+        return { view: 'news-browser', parent: 'actualidad-home', chromeVisible: false };
+      }
       const parents = {
         'news-browser': 'actualidad-home',
         'apps-browser': 'actualidad-home',
         'media-browser': 'actualidad-home',
         'media-accessibility': 'media-browser',
-        'media-technology': 'media-browser',
-        'news-reader': 'news-browser'
+        'media-technology': 'media-browser'
       };
       return parents[route]
         ? { view: route, parent: parents[route], chromeVisible: false }
@@ -231,7 +233,23 @@
     return { view: page || 'home', parent: null, chromeVisible: page === 'home' };
   }
 
-  return { homePreview, isFeaturedEligible, localizedStory, normalizeContent, normalizeStory, publicStories, resolveIsolatedView, sortStories };
+  function catalogForActualidadRoute(hash = '') {
+    const view = resolveIsolatedView('actualidad', hash).view;
+    if (view === 'news-browser') return 'news';
+    if (view === 'apps-browser') return 'apps';
+    if (view === 'media-browser' || view === 'media-accessibility' || view === 'media-technology') return 'media';
+    return null;
+  }
+
+  function setElementHidden(element, hidden) {
+    if (!element) return false;
+    const next = Boolean(hidden);
+    if (element.hidden === next) return false;
+    element.hidden = next;
+    return true;
+  }
+
+  return { catalogForActualidadRoute, homePreview, isFeaturedEligible, localizedStory, normalizeContent, normalizeStory, publicStories, resolveIsolatedView, setElementHidden, sortStories };
 }));
 
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
@@ -240,8 +258,6 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     'a[data-home-back]',
     '#actualidad-home-open',
     '#videos-home-open',
-    '#actualidad-sections a.button-link',
-    '#media-sections a.button-link',
     '#home-link-top',
     '#home-link-bottom'
   ];
@@ -289,13 +305,26 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
   }
 
   function setHidden(element, hidden) {
-    if (element) element.hidden = hidden;
+    if (!element) return;
+    if (navigationCore?.setElementHidden) {
+      navigationCore.setElementHidden(element, hidden);
+      return;
+    }
+    const next = Boolean(hidden);
+    if (element.hidden !== next) element.hidden = next;
   }
 
   function focusElement(element) {
     if (!element || typeof element.focus !== 'function') return;
     if (!element.hasAttribute('tabindex')) element.setAttribute('tabindex', '-1');
     element.focus();
+  }
+
+  function focusTopBackControl(section) {
+    const button = section?.querySelector('[data-isolated-back="top"] button');
+    if (!button) return false;
+    focusElement(button);
+    return true;
   }
 
   function currentLanguage() {
@@ -434,13 +463,17 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       }
     }
 
+    const focusSections = {
+      'news-browser': news,
+      'apps-browser': apps,
+      'media-browser': media,
+      'media-accessibility': mediaAccessibility,
+      'media-technology': mediaTechnology
+    };
+    if (focusTopBackControl(focusSections[state.view])) return;
+
     const focusTargets = {
-      'actualidad-home': '#actualidad-heading',
-      'news-browser': '#news-heading',
-      'apps-browser': '#apps-heading',
-      'media-browser': '#media-heading',
-      'media-accessibility': '#media-accessibility-heading',
-      'media-technology': '#media-technology-heading'
+      'actualidad-home': '#actualidad-heading'
     };
     focusElement(document.querySelector(focusTargets[state.view] || '#main'));
   }

@@ -1,13 +1,159 @@
 [
   {
-    "id": "engadget-033c1c66434d39d9",
+    "id": "9to5mac-465b5184f0e033d1",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/17/heres-everything-new-for-messages-in-ios-27/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T13:46:21.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Here’s everything new for Messages in iOS 27",
+        "summary": "iOS 27 adds new features across many system apps, like Wallet , Calendar , Music , and Maps . Here’s what’s new for the Messages app in iOS 27. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-dbf69977c5f38d3a",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/17/rival-ai-agents-instinct-and-metas-muse-both-add-the-ability-to-make-calls/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T13:46:16.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Rival AI agents, Instinct and Meta’s Muse, both add the ability to make calls",
+        "summary": "People can use these assistants to make restaurant reservations and cancel subscriptions",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-141e8bf366668c08",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/17/google-nvidia-and-anthropic-want-emerald-ai-to-find-space-on-the-grid-for-more-data-centers/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T13:38:33.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google, Nvidia and Anthropic want Emerald AI to find space on the grid for more data centers",
+        "summary": "A new coalition that includes Google, Nvidia, Anthropic and Emerald AI wants to find 100 GW of grid capacity for new data centers.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-aad0b4fbce0fec68",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/17/addigy-launches-intelligence-suite-giving-it-teams-control-over-how-ai-is-used-across-their-fleet/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T13:00:00.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Addigy launches Intelligence Suite, giving IT teams control over how AI is used across their fleet",
+        "summary": "One of the biggest challenges Apple admins face today is managing AI use across apps, services, and more. Addigy is aiming to solve that problem with its Intelligence Suite, announced today, which brings a number of new tools and controls for IT teams to strengthen compliance while also unlocking AI tools in an IT-approved way. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-709d743602ec00bb",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/996341/bose-ultra-open-earbuds-second-gen-wireless-sport",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T13:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Bose’s next open earbuds have more bass, more volume, and more battery life",
+        "summary": "Bose announced a new version of its Ultra Open Earbuds that helped kick off the industry trend of clip-on wireless earbuds nearly two-and-a-half years ago. The new Ultra Open Earbuds (2nd Gen) feature a subtle redesign with improved performance in both sound quality and battery life. They're also joined by a new cheaper alternative called […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-c7bd233ea7f5d600",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/17/apple-watch-series-12-and-ultra-4-review/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T12:00:41.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple Watch Series 12 and Ultra 4 review: More personal than ever before",
+        "summary": "The Apple Watch Series 12 and Apple Watch Ultra 4 are all about what’s happening underneath. Headlined by a new Health Sensing System, they bring some of the biggest improvements to Apple Watch health tracking in years. I’ve spent the last week with the Apple Watch Series 12 and Ultra 4. Here’s everything you need to know. Buy Apple Watch Series 12 from $390 (Reg. $399) Buy Apple Watch Ultra 4 Black from $780 (Reg. $799) more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-d5dc606cacdeab4b",
     "type": "news",
     "sourceId": "engadget",
     "sourceName": "Engadget",
     "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2260916/ios-27-bug-temporarily-freeze-iphone/",
+    "originalUrl": "https://www.engadget.com/2260989/apple-watch-series-12-review-hrv-new-health-sensing-gesture/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-17T06:08:09.000Z",
+    "publishedAt": "2026-09-17T12:00:00.000Z",
     "categories": [
       "tecnologia-general",
       "apple"
@@ -16,203 +162,129 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "An iOS 27 bug can temporarily freeze your iPhone",
-        "summary": "If your newly updated iPhone suddenly freezes, don't panic. Here's how to fix it.",
+        "title": "Apple Watch Series 12 review: Catching up and catching heat",
+        "summary": "The new wearable's controversial audio features aren't available yet, but there are plenty of upgrades here.",
         "body": ""
       }
     },
     "media": null
   },
   {
-    "id": "techcrunch-3c3093840cd39edf",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/16/iceland-based-treble-raises-18-million-for-its-voice-simulation-platform/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T05:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Iceland-based Treble raises $18 million for its voice simulation platform",
-        "summary": "Treble's voice simulation platform is used by voice AI model developers, AI wearable, and robotics companies",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-006eed2ff5fdc8ee",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/16/your-startups-next-teammate-might-be-an-ai-agent-gusto-insight-partners-and-leland-explain-what-that-changes-at-techcrunch-disrupt-2026/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T03:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Your startup’s next teammate might be an AI agent: Gusto, Insight Partners, and Leland explain what that changes at TechCrunch Disrupt 2026",
-        "summary": "This session will explore how early-stage companies are building teams where humans and AI agents work alongside each other — and how founders can do that without sacrificing speed, accountability, or culture. Learn more at TechCrunch Disrupt 2026. Register before September 25 to save up to $200.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-991ff0ecfb59d4dd",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/16/apple-rolls-out-first-release-candidates-for-macos-tahoe-26-7-1-and-macos-sequoia-15-8-1/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T02:18:51.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple rolls out first Release Candidates for macOS Tahoe 26.7.1 and macOS Sequoia 15.8.1",
-        "summary": "After releasing macOS 27.2 beta 1 earlier today, Apple is now rolling out the first RCs of macOS Tahoe 26.7.1 and macOS Sequoia 15.8.1. Here are the details. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-10cd7cdfc621a0e3",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/16/photographer-tyler-stalman-reviews-the-iphone-18-pros-new-camera-with-variable-aperture/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T01:24:30.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Photographer Tyler Stalman reviews the iPhone 18 Pro’s new camera with variable aperture",
-        "summary": "Photographer Tyler Stalman is back with his annual iPhone camera review. Here’s what he had to say about the iPhone 18 Pro’s new variable aperture, photographic styles, Apple Reference Image, and more. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-56df8c3b31685ff3",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/16/snap-tries-to-make-the-case-again-for-its-2200-smart-glasses/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T00:58:49.000Z",
-    "categories": [
-      "tecnologia-general",
-      "gafas-inteligentes"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Snap tries to make the case again for its $2,200 smart glasses",
-        "summary": "Since Specs' debut earlier this year, Snap has clearly been looking for an opportunity to explain why the smart glasses deserve to exist.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-e1aacf0ed4583ea8",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/16/snap-specs-intelligence-cellular-support/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T23:40:00.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Snap announces Specs Intelligence app for iPhone and Mac, cellular variant of Specs",
-        "summary": "After unveiling the design of its consumer-grade Spectacles back in June, Snap is now announcing that they’ll be available for pre-order starting today with a new 5G carrying case. The company also introduced a new proactive AI agent called Specs Intelligence, which despite being Specs branded, will be available on iPhone and Mac regardless of if you own a pair. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-51c375bbae3715e7",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2260736/snap-introduces-a-standalone-ai-assistant-specs-intelligence/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T23:40:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Snap introduces a standalone AI assistant, Specs Intelligence",
-        "summary": "The new assistant works with the company's new AR glasses, but will also have its own mobile and desktop apps.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-7e58cce39122a279",
+    "id": "the-verge-c81dd7a803b2f7a8",
     "type": "news",
     "sourceId": "the-verge",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/996422/snap-specs-hands-on-ar-glasses",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/996563/ai-safety-research-metr-redwood-openai-anthropic",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-16T23:40:00.000Z",
+    "publishedAt": "2026-09-17T11:30:00.000Z",
     "categories": [
       "tecnologia-general",
-      "gafas-inteligentes"
+      "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "I wore Snap’s $2,200 smart glasses",
-        "summary": "My favorite part of wearing the Specs, Snap's new augmented reality glasses, was playing dominoes. Sitting across the table from a Snap employee wearing the same pair of chunky glasses, I could select a virtual domino with a pinch and then move my hand to drop it in place, watching the tile snap down in […]",
+        "title": "Inside the suddenly explosive world of AI safety",
+        "summary": "On a sunny July day in Berkeley, California, the country's top AI safety researchers gathered on an unmarked floor of an unmarked building. They had come together for a \"war room\" to dissect the high-profile cybersecurity incident that had rocked the AI industry hours earlier. An unreleased OpenAI model had gone rogue, executing a stunningly […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-7071cd7d7bf6b924",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2260986/nvidia-google-emerald-coalition-data-center-power/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T11:24:45.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "NVIDIA and Google's new coalition wants to speed up AI data center power grid connections",
+        "summary": "A new coalition of tech giants aims to speed AI data center grid connections in exchange for more flexibility.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-3f518fef9f22b262",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/17/comp-ai-sets-eyes-on-a-continiously-agentic-future-for-security-and-complaince/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T11:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Comp AI sets eyes on a continuously agentic future for security and compliance",
+        "summary": "Comp AI, a cybersecurity and compliance startup, announced a $34 million Series A round led by Roo Capital and Grand Ventures.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-bfc4cb5fb0010774",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2260974/openai-details-instances-of-models-fabricating-information-hiding-from-testers/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T10:50:20.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "OpenAI reveals more instances of concerning AI model behaviors during testing",
+        "summary": "OpenAI says it doesn't believe the industry has solved its problems 'to a sufficient degree to continue responsibly scaling at maximum speed for much longer.'",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "conticgo-78bf05c71d03e8d2",
+    "type": "news",
+    "sourceId": "conticgo",
+    "sourceName": "Conticgo",
+    "sourceUrl": "https://conticgo.net/",
+    "originalUrl": "https://conticgo.net/seo-budd-e-el-robot-guia-que-quiere-revolucionar-la-movilidad-accesible/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-09-17T10:00:10.000Z",
+    "categories": [
+      "tecnologia-accesibilidad",
+      "proyectos-prototipos",
+      "movilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "SEO BUDD-e es el robot guía que quiere revolucionar la movilidad accesible",
+        "summary": "La movilidad accesible continúa siendo uno de los grandes retos para las personas ciegas y con baja visión. BUDD-e es el robot guía que quiere revolucionar la movilidad accesible se presenta como una de las iniciativas de investigación más innovadoras desarrolladas en los últimos años. Este robot guía autónomo desarrollado por el Politécnico de Milán […] La entrada SEO BUDD-e es el robot guía que quiere revolucionar la movilidad accesible se publicó primero en Conticgo .",
         "body": ""
       }
     },
@@ -238,29 +310,6 @@
       "en": {
         "title": "Snap is launching a new Specs AI tool, and it’s coming to iOS and Mac",
         "summary": "Snap is introducing \"Specs Intelligence,\" a new AI assistant that can connect other digital accounts to help you with things like work tasks and keeping track of travel information. It seems similar to AI assistants like Meta's Muse and Gemini's Spark, though Snap is pitching Specs Intelligence as an \"anticipatory AI service\" that \"helps you […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-18b15da950db94fa",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2259628/japan-ambulance-humanoid-robot-on-site-repairs/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T23:00:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Japanese company develops a humanoid robot 'ambulance' for on-the-spot repairs",
-        "summary": "It turns out that breaking down at work isn't a uniquely human experience.",
         "body": ""
       }
     },
@@ -311,30 +360,6 @@
       "en": {
         "title": "Learn How to Work More Effectively with PDFs and JAWS",
         "summary": "PDF documents are everywhere, from reports and forms to manuals and online resources. These documents can be accessed via a web browser or application like Adobe Acrobat Reader. When PDFs are formatted correctly, they can be read using standard navigation commands and JAWS Quick Navigation Keys; however, challenges arise when the PDF is not structured …",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-655643e8a4ac7d4f",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/996470/ai-data-center-e-waste-ban",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T20:40:46.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The AI data center e-waste problem is huge — and getting bigger",
-        "summary": "E-waste from the AI boom has been vastly underestimated, a new report warns. By 2050, it could become enough trash to fill 23 million shipping containers - roughly enough 40-foot containers to circle the world six times if lined up in a row. It's a significantly higher estimate of AI's e-waste than previous studies have […]",
         "body": ""
       }
     },
@@ -1419,32 +1444,6 @@
       "en": {
         "title": "Learn How AI Connectors Can Bring Your Everyday Apps and Information Together",
         "summary": "Artificial Intelligence (AI) is changing how we work, helping us automate routine tasks, analyze and summarize data, and generate content. Learn AI with our AI live webinar series and comprehensive online guide, designed to empower you with the knowledge and skills to increase productivity and independence in the workplace. The 14th webinar in this ongoing …",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "conticgo-2738ab41c3e719f0",
-    "type": "news",
-    "sourceId": "conticgo",
-    "sourceName": "Conticgo",
-    "sourceUrl": "https://conticgo.net/",
-    "originalUrl": "https://conticgo.net/las-nuevas-gafas-inteligentes-de-samsung-prometen-una-ia-mas-util-para-las-personas-con-baja-vision/",
-    "originalLanguage": "es",
-    "publishedAt": "2026-09-01T10:00:30.000Z",
-    "categories": [
-      "tecnologia-accesibilidad",
-      "android",
-      "gafas-inteligentes",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "es": {
-        "title": "Las nuevas gafas inteligentes de Samsung prometen una IA más útil para las personas con baja visión",
-        "summary": "Las nuevas gafas inteligentes de Samsung prometen una IA más útil para las personas con baja visión. La compañía surcoreana ha adelantado nuevos detalles sobre este dispositivo, desarrollado junto a Google sobre la plataforma Android XR e impulsado por Gemini. Más allá de su diseño o autonomía, Samsung apuesta por una inteligencia artificial capaz de […] La entrada Las nuevas gafas inteligentes de Samsung prometen una IA más útil para las personas con baja visión se publicó primero en Conticgo .",
         "body": ""
       }
     },

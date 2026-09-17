@@ -1,5 +1,28 @@
 [
   {
+    "id": "the-verge-709d743602ec00bb",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/996341/bose-ultra-open-earbuds-second-gen-wireless-sport",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T13:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Bose’s next open earbuds have more bass, more volume, and more battery life",
+        "summary": "Bose announced a new version of its Ultra Open Earbuds that helped kick off the industry trend of clip-on wireless earbuds nearly two-and-a-half years ago. The new Ultra Open Earbuds (2nd Gen) feature a subtle redesign with improved performance in both sound quality and battery life. They're also joined by a new cheaper alternative called […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "9to5mac-c7bd233ea7f5d600",
     "type": "news",
     "sourceId": "9to5mac",
@@ -259,30 +282,6 @@
       "en": {
         "title": "Photographer Tyler Stalman reviews the iPhone 18 Pro’s new camera with variable aperture",
         "summary": "Photographer Tyler Stalman is back with his annual iPhone camera review. Here’s what he had to say about the iPhone 18 Pro’s new variable aperture, photographic styles, Apple Reference Image, and more. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-7e58cce39122a279",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/996422/snap-specs-hands-on-ar-glasses",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T23:40:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "gafas-inteligentes"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "I wore Snap’s $2,200 smart glasses",
-        "summary": "My favorite part of wearing the Specs, Snap's new augmented reality glasses, was playing dominoes. Sitting across the table from a Snap employee wearing the same pair of chunky glasses, I could select a virtual domino with a pinch and then move my hand to drop it in place, watching the tile snap down in […]",
         "body": ""
       }
     },

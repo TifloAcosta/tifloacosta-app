@@ -20,7 +20,67 @@ function addSelect(parent, { id, label, value, options, onChange }) {
   parent.append(wrapper);
 }
 
-export function renderSettings({ root, router, preferences, t, onPreferencesChange }) {
+function notificationStatusText(state, t) {
+  const keys = {
+    unavailable: 'notifications.unavailable',
+    'not-requested': 'notifications.notRequested',
+    denied: 'notifications.denied',
+    authorized: 'notifications.authorized'
+  };
+  return t(keys[state] || 'notifications.unavailable');
+}
+
+function addNotificationSettings(root, notificationService, t) {
+  const section = document.createElement('section');
+  section.className = 'settings-section';
+
+  const heading = document.createElement('h2');
+  heading.textContent = t('notifications.title');
+  section.append(heading);
+
+  const explanation = document.createElement('p');
+  explanation.textContent = t('notifications.explanation');
+  section.append(explanation);
+
+  const status = document.createElement('p');
+  status.className = 'muted';
+  status.setAttribute('aria-live', 'polite');
+  section.append(status);
+
+  const actions = document.createElement('div');
+  actions.className = 'settings-actions';
+  section.append(actions);
+  root.append(section);
+
+  async function renderState(nextState) {
+    const state = nextState || await notificationService.status();
+    status.textContent = notificationStatusText(state, t);
+    actions.replaceChildren();
+
+    if (state === 'not-requested') {
+      const activate = document.createElement('button');
+      activate.type = 'button';
+      activate.textContent = t('notifications.activate');
+      activate.addEventListener('click', async () => {
+        activate.disabled = true;
+        await renderState(await notificationService.requestFromUserAction());
+      });
+      actions.append(activate);
+    } else if (state === 'denied') {
+      const settings = document.createElement('button');
+      settings.type = 'button';
+      settings.textContent = t('notifications.openSettings');
+      settings.addEventListener('click', () => {
+        void notificationService.openSystemSettings();
+      });
+      actions.append(settings);
+    }
+  }
+
+  void renderState();
+}
+
+export function renderSettings({ root, router, preferences, notificationService, t, onPreferencesChange }) {
   clearScreen(root);
   addScreenHeader(root, { router, title: t('screen.settings'), backLabel: t('nav.back') });
 
@@ -82,4 +142,6 @@ export function renderSettings({ root, router, preferences, t, onPreferencesChan
   reset.textContent = t('settings.reset');
   reset.addEventListener('click', () => onPreferencesChange(null, { reset: true }));
   root.append(reset);
+
+  addNotificationSettings(root, notificationService, t);
 }

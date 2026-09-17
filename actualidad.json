@@ -1,145 +1,219 @@
 [
   {
-    "id": "9to5mac-465b5184f0e033d1",
+    "id": "9to5mac-cdc263f5dd739ce7",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/17/heres-everything-new-for-messages-in-ios-27/",
+    "originalUrl": "https://9to5mac.com/2026/09/17/here-are-100-things-siri-ai-can-do-on-your-iphone/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-17T13:46:21.000Z",
+    "publishedAt": "2026-09-17T17:49:13.000Z",
     "categories": [
       "apple",
       "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Here are 100+ things Siri AI can do on your iPhone",
+        "summary": "iOS 27 launched this week with the all-new Siri AI. David Pogue put the new Siri to the test by trying 125 requests , here’s how it went. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-e02903f940483c1c",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/17/even-the-king-of-england-has-his-hesitations-about-ai/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T17:26:25.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Even the king of England has his hesitations about AI",
+        "summary": "King Charles hosted a private summit Thursday with some of the most prominent names in AI and UK government.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-878bf652f7ecabd8",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/17/base-labs-launches-an-open-weight-ai-safety-partnership-with-hugging-face-and-goodfire/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T17:15:59.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Base Labs launches an open-weight AI safety partnership with Hugging Face and Goodfire",
+        "summary": "Base Labs, the research group Baseten spun up earlier this year, will develop and publish methods for training and monitoring open models.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-4cf5842b59a9a30c",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/17/pinterest-teases-a-new-restyle-feature-that-lets-you-redesign-your-room-with-ai/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T17:15:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Pinterest teases a new ‘Restyle’ feature that lets you redesign your room with AI",
+        "summary": "Pinterest is testing Restyle, a new AI-powered feature that lets users visualize furniture, decor, lighting, and more in photos of their own rooms — potentially helping turn saved inspiration into purchases.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-32452e4d9df9b203",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/gadgets/997009/refurbished-apple-tv-4k-ring-doorbell-deal-sale",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T17:14:07.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Save $30 or more on a refurbished Apple TV 4K",
+        "summary": "Most hardware prices have soared in 2026, and that includes a variety of Apple laptops, tablets, and smart devices. Thankfully, you can offset some of the increased costs on an Apple TV 4K by buying one refurbished through the company. The 64GB model is selling for $169, $30 lower than the new retail price. The […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-fb34cb52184d4a10",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/17/9to5mac-overtime-082-origins-of-the-apple-store-w-special-guest-ron-johnson/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T17:10:53.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "9to5Mac Overtime 082: Origins of the Apple Store w/ special guest Ron Johnson",
+        "summary": "Former Apple SVP of Retail Ron Johnson joins Overtime to discuss his new book, Shop Different: How Retail Revealed Apple’s Genius . Ron talks about the early days of the Apple Store, what it was like collaborating with Steve Jobs, the launch of the original iPhone, why he left Apple to be CEO of JCPenney, where he thinks Apple retail stands today, and, of course, his take on the iPhone Duo. Sponsored by Bitwarden: Register for the free, virtual Open Source Security Summit on September 17, featuring cybersecurity leaders David Sanger and Joseph Menn — and check out Bitwarden for trusted open source password, passkey, and secrets management, with end-to-end encryption and seamless autofill across all your devices. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-cc24ff2b10d2e7fe",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/17/daily-september-17-2026/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T15:50:52.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "android",
       "apps-accesibles"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Here’s everything new for Messages in iOS 27",
-        "summary": "iOS 27 adds new features across many system apps, like Wallet , Calendar , Music , and Maps . Here’s what’s new for the Messages app in iOS 27. more…",
+        "title": "9to5Mac Daily: September 17, 2026 – iOS 27.2 beta testing, more",
+        "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Stuff :Stuff helps you get everything out of your head and into a simple, elegant system—closing open loops and reducing mental stress. A simple to-do list for iPhone, iPad, and Mac, with powerful tools that make organizing, tracking, and checking off your tasks a whole lot more satisfying. Get Stuff done. more…",
         "body": ""
       }
     },
     "media": null
   },
   {
-    "id": "techcrunch-dbf69977c5f38d3a",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/17/rival-ai-agents-instinct-and-metas-muse-both-add-the-ability-to-make-calls/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T13:46:16.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Rival AI agents, Instinct and Meta’s Muse, both add the ability to make calls",
-        "summary": "People can use these assistants to make restaurant reservations and cancel subscriptions",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-141e8bf366668c08",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/17/google-nvidia-and-anthropic-want-emerald-ai-to-find-space-on-the-grid-for-more-data-centers/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T13:38:33.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google, Nvidia and Anthropic want Emerald AI to find space on the grid for more data centers",
-        "summary": "A new coalition that includes Google, Nvidia, Anthropic and Emerald AI wants to find 100 GW of grid capacity for new data centers.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-aad0b4fbce0fec68",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/17/addigy-launches-intelligence-suite-giving-it-teams-control-over-how-ai-is-used-across-their-fleet/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T13:00:00.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Addigy launches Intelligence Suite, giving IT teams control over how AI is used across their fleet",
-        "summary": "One of the biggest challenges Apple admins face today is managing AI use across apps, services, and more. Addigy is aiming to solve that problem with its Intelligence Suite, announced today, which brings a number of new tools and controls for IT teams to strengthen compliance while also unlocking AI tools in an IT-approved way. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-709d743602ec00bb",
+    "id": "the-verge-53646e61e76db346",
     "type": "news",
     "sourceId": "the-verge",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/996341/bose-ultra-open-earbuds-second-gen-wireless-sport",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/996775/ai-is-feared-globally-as-the-destroyer-of-jobs",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-17T13:00:00.000Z",
+    "publishedAt": "2026-09-17T14:00:00.000Z",
     "categories": [
-      "tecnologia-general"
+      "tecnologia-general",
+      "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Bose’s next open earbuds have more bass, more volume, and more battery life",
-        "summary": "Bose announced a new version of its Ultra Open Earbuds that helped kick off the industry trend of clip-on wireless earbuds nearly two-and-a-half years ago. The new Ultra Open Earbuds (2nd Gen) feature a subtle redesign with improved performance in both sound quality and battery life. They're also joined by a new cheaper alternative called […]",
+        "title": "AI is feared globally as the destroyer of jobs",
+        "summary": "Pew Research has published a new global survey that sheds light on how people view AI, including its impact on jobs, life in general, and income inequality. The survey questioned 42,151 people across 37 countries from February 8th to May 13th - well ahead of recent apocalyptic warnings. A majority sees AI as a threat […]",
         "body": ""
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-c7bd233ea7f5d600",
+    "id": "the-verge-8966603a76770e3b",
     "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/17/apple-watch-series-12-and-ultra-4-review/",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/podcast/996412/microsoft-ai-ceo-mustafa-suleyman-regulation-safety-anthropic-claude",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-17T12:00:41.000Z",
+    "publishedAt": "2026-09-17T14:00:00.000Z",
     "categories": [
-      "apple",
-      "tecnologia-general"
+      "tecnologia-general",
+      "windows",
+      "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Apple Watch Series 12 and Ultra 4 review: More personal than ever before",
-        "summary": "The Apple Watch Series 12 and Apple Watch Ultra 4 are all about what’s happening underneath. Headlined by a new Health Sensing System, they bring some of the biggest improvements to Apple Watch health tracking in years. I’ve spent the last week with the Apple Watch Series 12 and Ultra 4. Here’s everything you need to know. Buy Apple Watch Series 12 from $390 (Reg. $399) Buy Apple Watch Ultra 4 Black from $780 (Reg. $799) more…",
+        "title": "Microsoft AI CEO says AI threats are real, and Anthropic is making it worse",
+        "summary": "Today, I’m talking with Mustafa Suleyman, the CEO of Microsoft AI. As you’re no doubt aware, the biggest story in tech right now is the spiraling debate about AI safety and regulation. It should come as no surprise that Mustafa has strong opinions on how AI should be built and regulated. Microsoft just published a […]",
         "body": ""
       }
     },
@@ -170,30 +244,6 @@
     "media": null
   },
   {
-    "id": "the-verge-c81dd7a803b2f7a8",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/996563/ai-safety-research-metr-redwood-openai-anthropic",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T11:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Inside the suddenly explosive world of AI safety",
-        "summary": "On a sunny July day in Berkeley, California, the country's top AI safety researchers gathered on an unmarked floor of an unmarked building. They had come together for a \"war room\" to dissect the high-profile cybersecurity incident that had rocked the AI industry hours earlier. An unreleased OpenAI model had gone rogue, executing a stunningly […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "engadget-7071cd7d7bf6b924",
     "type": "news",
     "sourceId": "engadget",
@@ -212,30 +262,6 @@
       "en": {
         "title": "NVIDIA and Google's new coalition wants to speed up AI data center power grid connections",
         "summary": "A new coalition of tech giants aims to speed AI data center grid connections in exchange for more flexibility.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-3f518fef9f22b262",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/17/comp-ai-sets-eyes-on-a-continiously-agentic-future-for-security-and-complaince/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T11:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Comp AI sets eyes on a continuously agentic future for security and compliance",
-        "summary": "Comp AI, a cybersecurity and compliance startup, announced a $34 million Series A round led by Roo Capital and Grand Ventures.",
         "body": ""
       }
     },
@@ -285,31 +311,6 @@
       "es": {
         "title": "SEO BUDD-e es el robot guía que quiere revolucionar la movilidad accesible",
         "summary": "La movilidad accesible continúa siendo uno de los grandes retos para las personas ciegas y con baja visión. BUDD-e es el robot guía que quiere revolucionar la movilidad accesible se presenta como una de las iniciativas de investigación más innovadoras desarrolladas en los últimos años. Este robot guía autónomo desarrollado por el Politécnico de Milán […] La entrada SEO BUDD-e es el robot guía que quiere revolucionar la movilidad accesible se publicó primero en Conticgo .",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-945539d81f7a8f01",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/996078/snap-specs-intelligence-ai-agent-ios-mac",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T23:40:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Snap is launching a new Specs AI tool, and it’s coming to iOS and Mac",
-        "summary": "Snap is introducing \"Specs Intelligence,\" a new AI assistant that can connect other digital accounts to help you with things like work tasks and keeping track of travel information. It seems similar to AI assistants like Meta's Muse and Gemini's Spark, though Snap is pitching Specs Intelligence as an \"anticipatory AI service\" that \"helps you […]",
         "body": ""
       }
     },

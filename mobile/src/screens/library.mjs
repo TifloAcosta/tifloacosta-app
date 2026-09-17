@@ -19,6 +19,41 @@ function addFavoriteButton(parent, item, favoritesStore, t) {
   parent.append(button);
 }
 
+function filenameFromUrl(url, fallbackId) {
+  try {
+    const pathname = new URL(url).pathname;
+    const name = decodeURIComponent(pathname.split('/').filter(Boolean).at(-1) || '');
+    if (name) return name;
+  } catch {}
+  return `${String(fallbackId || 'recurso')}.bin`;
+}
+
+function mimeTypeFromFilename(filename) {
+  const lower = String(filename || '').toLowerCase();
+  if (lower.endsWith('.pdf')) return 'application/pdf';
+  if (lower.endsWith('.html') || lower.endsWith('.htm')) return 'text/html';
+  if (lower.endsWith('.txt')) return 'text/plain';
+  if (lower.endsWith('.zip')) return 'application/zip';
+  if (lower.endsWith('.docx')) return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+  return 'application/octet-stream';
+}
+
+function addSaveButton(parent, item, url, nativeActions, t) {
+  if (!nativeActions?.saveFile) return;
+  const filename = filenameFromUrl(url, item.id);
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.textContent = `${t('library.download')}: ${item.title || filename}`;
+  button.addEventListener('click', () => {
+    void nativeActions?.saveFile({
+      url,
+      filename,
+      mimeType: mimeTypeFromFilename(filename)
+    });
+  });
+  parent.append(button);
+}
+
 export function renderLibrary({ root, router, content, preferences, favoritesStore, nativeActions, t }) {
   clearScreen(root);
   addScreenHeader(root, { router, title: t('screen.library'), backLabel: t('nav.back') });
@@ -47,6 +82,7 @@ export function renderLibrary({ root, router, content, preferences, favoritesSto
         label: `${t('library.open')}: ${item.title || ''}`,
         onOpen: nativeActions?.openExternal
       });
+      addSaveButton(article, item, url, nativeActions, t);
       addShareButton(article, {
         label: t('common.share'),
         title: item.title || '',

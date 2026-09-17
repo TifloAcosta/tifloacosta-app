@@ -35,8 +35,9 @@ test('mobile shell starts as a minimal accessible document', async () => {
   assert.match(html, /<main\s+id="app"\s+tabindex="-1"><\/main>/i);
   assert.match(html, /<script\s+type="module"\s+src="\.\/app\.mjs"><\/script>/i);
   assert.doesNotMatch(html, /autofocus/i);
-  assert.match(app, /data-screen-heading/);
-  assert.match(app, /<h1/);
+  assert.match(app, /document\.createElement\('h1'\)/);
+  assert.match(app, /heading\.dataset\.screenHeading\s*=\s*['"]['"]/);
+  assert.match(app, /heading\.tabIndex\s*=\s*-1/);
 });
 
 test('native dependencies, build products and signing material stay out of git', async () => {

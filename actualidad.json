@@ -1,5 +1,125 @@
 [
   {
+    "id": "9to5mac-c7bd233ea7f5d600",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/17/apple-watch-series-12-and-ultra-4-review/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T12:00:41.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple Watch Series 12 and Ultra 4 review: More personal than ever before",
+        "summary": "The Apple Watch Series 12 and Apple Watch Ultra 4 are all about what’s happening underneath. Headlined by a new Health Sensing System, they bring some of the biggest improvements to Apple Watch health tracking in years. I’ve spent the last week with the Apple Watch Series 12 and Ultra 4. Here’s everything you need to know. Buy Apple Watch Series 12 from $390 (Reg. $399) Buy Apple Watch Ultra 4 Black from $780 (Reg. $799) more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-d5dc606cacdeab4b",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2260989/apple-watch-series-12-review-hrv-new-health-sensing-gesture/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T12:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple Watch Series 12 review: Catching up and catching heat",
+        "summary": "The new wearable's controversial audio features aren't available yet, but there are plenty of upgrades here.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-c81dd7a803b2f7a8",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/996563/ai-safety-research-metr-redwood-openai-anthropic",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T11:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Inside the suddenly explosive world of AI safety",
+        "summary": "On a sunny July day in Berkeley, California, the country's top AI safety researchers gathered on an unmarked floor of an unmarked building. They had come together for a \"war room\" to dissect the high-profile cybersecurity incident that had rocked the AI industry hours earlier. An unreleased OpenAI model had gone rogue, executing a stunningly […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-7071cd7d7bf6b924",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2260986/nvidia-google-emerald-coalition-data-center-power/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T11:24:45.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "NVIDIA and Google's new coalition wants to speed up AI data center power grid connections",
+        "summary": "A new coalition of tech giants aims to speed AI data center grid connections in exchange for more flexibility.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-3f518fef9f22b262",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/17/comp-ai-sets-eyes-on-a-continiously-agentic-future-for-security-and-complaince/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T11:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Comp AI sets eyes on a continuously agentic future for security and compliance",
+        "summary": "Comp AI, a cybersecurity and compliance startup, announced a $34 million Series A round led by Roo Capital and Grand Ventures.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "engadget-bfc4cb5fb0010774",
     "type": "news",
     "sourceId": "engadget",
@@ -43,54 +163,6 @@
       "es": {
         "title": "SEO BUDD-e es el robot guía que quiere revolucionar la movilidad accesible",
         "summary": "La movilidad accesible continúa siendo uno de los grandes retos para las personas ciegas y con baja visión. BUDD-e es el robot guía que quiere revolucionar la movilidad accesible se presenta como una de las iniciativas de investigación más innovadoras desarrolladas en los últimos años. Este robot guía autónomo desarrollado por el Politécnico de Milán […] La entrada SEO BUDD-e es el robot guía que quiere revolucionar la movilidad accesible se publicó primero en Conticgo .",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-16456371d79056e5",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2260894/oversight-board-says-metas-rules-ai-deepfakes-fundamentally-inadequate/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T10:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Oversight Board says Meta's rules for AI deepfakes are 'consistently and fundamentally inadequate'",
-        "summary": "The Oversight Board is asking Meta to prioritize AI content when it's reported.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-033c1c66434d39d9",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2260916/ios-27-bug-temporarily-freeze-iphone/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T06:08:09.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "An iOS 27 bug can temporarily freeze your iPhone",
-        "summary": "If your newly updated iPhone suddenly freezes, don't panic. Here's how to fix it.",
         "body": ""
       }
     },
@@ -193,56 +265,6 @@
     "media": null
   },
   {
-    "id": "techcrunch-56df8c3b31685ff3",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/16/snap-tries-to-make-the-case-again-for-its-2200-smart-glasses/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T00:58:49.000Z",
-    "categories": [
-      "tecnologia-general",
-      "gafas-inteligentes"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Snap tries to make the case again for its $2,200 smart glasses",
-        "summary": "Since Specs' debut earlier this year, Snap has clearly been looking for an opportunity to explain why the smart glasses deserve to exist.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-e1aacf0ed4583ea8",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/16/snap-specs-intelligence-cellular-support/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T23:40:00.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Snap announces Specs Intelligence app for iPhone and Mac, cellular variant of Specs",
-        "summary": "After unveiling the design of its consumer-grade Spectacles back in June, Snap is now announcing that they’ll be available for pre-order starting today with a new 5G carrying case. The company also introduced a new proactive AI agent called Specs Intelligence, which despite being Specs branded, will be available on iPhone and Mac regardless of if you own a pair. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "the-verge-7e58cce39122a279",
     "type": "news",
     "sourceId": "the-verge",
@@ -336,30 +358,6 @@
       "en": {
         "title": "Learn How to Work More Effectively with PDFs and JAWS",
         "summary": "PDF documents are everywhere, from reports and forms to manuals and online resources. These documents can be accessed via a web browser or application like Adobe Acrobat Reader. When PDFs are formatted correctly, they can be read using standard navigation commands and JAWS Quick Navigation Keys; however, challenges arise when the PDF is not structured …",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-655643e8a4ac7d4f",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/996470/ai-data-center-e-waste-ban",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T20:40:46.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The AI data center e-waste problem is huge — and getting bigger",
-        "summary": "E-waste from the AI boom has been vastly underestimated, a new report warns. By 2050, it could become enough trash to fill 23 million shipping containers - roughly enough 40-foot containers to circle the world six times if lined up in a row. It's a significantly higher estimate of AI's e-waste than previous studies have […]",
         "body": ""
       }
     },

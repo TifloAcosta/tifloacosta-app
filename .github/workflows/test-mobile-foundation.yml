@@ -1,0 +1,30 @@
+name: Test mobile foundation
+
+on:
+  push:
+    branches:
+      - feature/mobile-capacitor-foundation
+  pull_request:
+    paths:
+      - 'package.json'
+      - 'capacitor.config.json'
+      - 'scripts/build-mobile.mjs'
+      - 'test/mobile-foundation.test.mjs'
+      - '.gitignore'
+      - '.github/workflows/test-mobile-foundation.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - name: Run mobile foundation test
+        run: node --test test/mobile-foundation.test.mjs

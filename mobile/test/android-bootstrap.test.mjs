@@ -2,10 +2,14 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
-const readWorkflow = () => readFile(new URL('../../.github/workflows/bootstrap-mobile-android.yml', import.meta.url), 'utf8');
+const read = path => readFile(new URL(`../../${path}`, import.meta.url), 'utf8');
 
-test('Android bootstrap is isolated, reproducible and does not contain signing secrets', async () => {
-  const workflow = await readWorkflow();
+test('Android bootstrap is isolated, reproducible and supports secret-backed release signing', async () => {
+  const [workflow, buildGradle, gitignore] = await Promise.all([
+    read('.github/workflows/bootstrap-mobile-android.yml'),
+    read('mobile/android/app/build.gradle'),
+    read('.gitignore')
+  ]);
 
   for (const expected of [
     'feature/mobile-capacitor-foundation',
@@ -21,21 +25,40 @@ test('Android bootstrap is isolated, reproducible and does not contain signing s
     'actions/upload-artifact@v4',
     'mobile/package-lock.json',
     'mobile/android',
-    '[skip mobile-bootstrap]'
+    '[skip mobile-bootstrap]',
+    'secrets.ANDROID_KEYSTORE_BASE64',
+    'secrets.ANDROID_KEYSTORE_PASSWORD',
+    'secrets.ANDROID_KEY_ALIAS',
+    'secrets.ANDROID_KEY_PASSWORD',
+    'android-upload-key.jks'
   ]) {
     assert.ok(workflow.includes(expected), `Android bootstrap missing: ${expected}`);
   }
 
   assert.match(workflow, /for attempt in 1 2 3/);
+  assert.match(workflow, /base64\s+--decode|base64\s+-d/);
+
+  for (const expected of [
+    'signingConfigs',
+    'ANDROID_KEYSTORE_PATH',
+    'ANDROID_KEYSTORE_PASSWORD',
+    'ANDROID_KEY_ALIAS',
+    'ANDROID_KEY_PASSWORD',
+    'signingConfig signingConfigs.release'
+  ]) {
+    assert.ok(buildGradle.includes(expected), `Android release signing missing: ${expected}`);
+  }
+
+  for (const expected of ['*.jks', '*.keystore', 'keystore.properties']) {
+    assert.ok(gitignore.includes(expected), `Git ignore must protect: ${expected}`);
+  }
 
   for (const forbidden of [
-    'KEYSTORE_PASSWORD',
-    'KEY_PASSWORD',
-    'SIGNING_KEY',
-    'ANDROID_KEYSTORE',
-    'storePassword',
-    'keyPassword'
+    'storePassword "',
+    "storePassword '",
+    'keyPassword "',
+    "keyPassword '"
   ]) {
-    assert.equal(workflow.includes(forbidden), false, `Signing material must not appear in bootstrap: ${forbidden}`);
+    assert.equal(buildGradle.includes(forbidden), false, `Signing credentials must not be hardcoded: ${forbidden}`);
   }
 });

@@ -34,7 +34,7 @@ jobs:
           node-version: 22
 
       - name: Setup Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 21
@@ -66,7 +66,16 @@ jobs:
         working-directory: mobile/android
         run: |
           chmod +x gradlew
-          ./gradlew assembleDebug bundleRelease
+          for attempt in 1 2 3; do
+            if ./gradlew --no-daemon assembleDebug bundleRelease; then
+              exit 0
+            fi
+            if [ "$attempt" -lt 3 ]; then
+              echo "Gradle build attempt $attempt failed; retrying after a short delay."
+              sleep $((attempt * 10))
+            fi
+          done
+          exit 1
 
       - name: Upload Android validation builds
         uses: actions/upload-artifact@v4

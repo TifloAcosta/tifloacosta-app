@@ -62,6 +62,45 @@ jobs:
           fi
           npx cap sync android
 
+      - name: Prepare Android release signing when secrets are configured
+        shell: bash
+        env:
+          ANDROID_KEYSTORE_BASE64_SECRET: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD_SECRET: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS_SECRET: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD_SECRET: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          values=(
+            "$ANDROID_KEYSTORE_BASE64_SECRET"
+            "$ANDROID_KEYSTORE_PASSWORD_SECRET"
+            "$ANDROID_KEY_ALIAS_SECRET"
+            "$ANDROID_KEY_PASSWORD_SECRET"
+          )
+          configured=0
+          for value in "${values[@]}"; do
+            if [ -n "$value" ]; then configured=$((configured + 1)); fi
+          done
+
+          if [ "$configured" -eq 0 ]; then
+            echo "Android signing secrets are not configured; producing validation builds."
+            exit 0
+          fi
+
+          if [ "$configured" -ne 4 ]; then
+            echo "Android signing secrets are incomplete. Configure all four signing secrets."
+            exit 1
+          fi
+
+          keystore_path="$RUNNER_TEMP/android-upload-key.jks"
+          printf '%s' "$ANDROID_KEYSTORE_BASE64_SECRET" | base64 --decode > "$keystore_path"
+          chmod 600 "$keystore_path"
+          {
+            echo "ANDROID_KEYSTORE_PATH=$keystore_path"
+            echo "ANDROID_KEYSTORE_PASSWORD=$ANDROID_KEYSTORE_PASSWORD_SECRET"
+            echo "ANDROID_KEY_ALIAS=$ANDROID_KEY_ALIAS_SECRET"
+            echo "ANDROID_KEY_PASSWORD=$ANDROID_KEY_PASSWORD_SECRET"
+          } >> "$GITHUB_ENV"
+
       - name: Build Android debug APK and release bundle
         working-directory: mobile/android
         run: |

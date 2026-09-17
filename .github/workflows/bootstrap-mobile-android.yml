@@ -7,6 +7,10 @@ on:
     paths:
       - 'mobile/package.json'
       - 'mobile/capacitor.config.json'
+      - 'mobile/scripts/**'
+      - 'mobile/src/**'
+      - 'mobile/test/**'
+      - 'mobile/android/**'
       - '.github/workflows/bootstrap-mobile-android.yml'
   workflow_dispatch:
 

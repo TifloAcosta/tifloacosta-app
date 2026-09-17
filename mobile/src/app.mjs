@@ -1,8 +1,11 @@
 import { createRouter } from './core/router.mjs';
 import { focusScreenHeading, restoreOriginFocus } from './core/focus.mjs';
+import { createContentStore } from './core/content-store.mjs';
 
 const root = document.querySelector('#app');
 if (!root) throw new Error('Missing mobile app root');
+
+let currentContent = null;
 
 function render(route) {
   root.replaceChildren();
@@ -13,6 +16,21 @@ function render(route) {
   root.append(heading);
 }
 
+function safeStorage() {
+  try {
+    return window.localStorage;
+  } catch {
+    return null;
+  }
+}
+
+function textInputIsActive() {
+  const active = document.activeElement;
+  if (!active) return false;
+  if (active.isContentEditable) return true;
+  return typeof active.matches === 'function' && active.matches('input, textarea, select');
+}
+
 export const router = createRouter({
   render,
   focusScreenHeading: () => focusScreenHeading(root),
@@ -20,3 +38,17 @@ export const router = createRouter({
 });
 
 router.start('home');
+
+const contentStore = createContentStore({
+  fetchFn: (...args) => window.fetch(...args),
+  storage: safeStorage()
+});
+
+contentStore.load().then(result => {
+  currentContent = result.content;
+  if (!textInputIsActive()) render(router.current());
+});
+
+export function getContent() {
+  return currentContent;
+}

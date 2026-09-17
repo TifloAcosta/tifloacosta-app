@@ -1,5 +1,200 @@
 [
   {
+    "id": "9to5mac-10cd7cdfc621a0e3",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/16/photographer-tyler-stalman-reviews-the-iphone-18-pros-new-camera-with-variable-aperture/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T01:24:30.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Photographer Tyler Stalman reviews the iPhone 18 Pro’s new camera with variable aperture",
+        "summary": "Photographer Tyler Stalman is back with his annual iPhone camera review. Here’s what he had to say about the iPhone 18 Pro’s new variable aperture, photographic styles, Apple Reference Image, and more. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-56df8c3b31685ff3",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/16/snap-tries-to-make-the-case-again-for-its-2200-smart-glasses/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T00:58:49.000Z",
+    "categories": [
+      "tecnologia-general",
+      "gafas-inteligentes"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Snap tries to make the case again for its $2,200 smart glasses",
+        "summary": "Snap unveiled new features for its smart glasses this week.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-febc89d2a48ea400",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/16/al-gore-has-a-surprisingly-calm-take-on-the-ai-data-center-backlash/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T23:43:09.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Al Gore has a surprisingly calm take on the AI data center backlash",
+        "summary": "In an interview with TechCrunch, Al Gore suggested he isn't losing sleep over AI data center emissions — he's more worried about the AI industry's own warnings about where the technology is headed.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-e1aacf0ed4583ea8",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/16/snap-specs-intelligence-cellular-support/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T23:40:00.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Snap announces Specs Intelligence app for iPhone and Mac, cellular variant of Specs",
+        "summary": "After unveiling the design of its consumer-grade Spectacles back in June, Snap is now announcing that they’ll be available for pre-order starting today with a new 5G carrying case. The company also introduced a new proactive AI agent called Specs Intelligence, which despite being Specs branded, will be available on iPhone and Mac regardless of if you own a pair. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-51c375bbae3715e7",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2260736/snap-introduces-a-standalone-ai-assistant-specs-intelligence/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T23:40:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Snap introduces a standalone AI assistant, Specs Intelligence",
+        "summary": "The new assistant works with the company's new AR glasses, but will also have its own mobile and desktop apps.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-7e58cce39122a279",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/996422/snap-specs-hands-on-ar-glasses",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T23:40:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "gafas-inteligentes"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "I wore Snap’s $2,200 smart glasses",
+        "summary": "My favorite part of wearing the Specs, Snap's new augmented reality glasses, was playing dominoes. Sitting across the table from a Snap employee wearing the same pair of chunky glasses, I could select a virtual domino with a pinch and then move my hand to drop it in place, watching the tile snap down in […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-945539d81f7a8f01",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/996078/snap-specs-intelligence-ai-agent-ios-mac",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T23:40:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Snap is launching a new Specs AI tool, and it’s coming to iOS and Mac",
+        "summary": "Snap is introducing \"Specs Intelligence,\" a new AI assistant that can connect other digital accounts to help you with things like work tasks and keeping track of travel information. It seems similar to AI assistants like Meta's Muse and Gemini's Spark, though Snap is pitching Specs Intelligence as an \"anticipatory AI service\" that \"helps you […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-18b15da950db94fa",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2259628/japan-ambulance-humanoid-robot-on-site-repairs/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-16T23:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Japanese company develops a humanoid robot 'ambulance' for on-the-spot repairs",
+        "summary": "It turns out that breaking down at work isn't a uniquely human experience.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "9to5mac-b3280d10d964f951",
     "type": "news",
     "sourceId": "9to5mac",
@@ -25,26 +220,25 @@
     "media": null
   },
   {
-    "id": "9to5mac-55198c501d3aecb0",
+    "id": "ars-technica-8511050d101f871a",
     "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/16/tripsys-ios-27-update-includes-smarter-imports-on-device-ai-insights-more/",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/ai/2026/09/apple-reportedly-building-server-packed-with-m-series-ultra-chips-for-ai/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-16T22:12:09.000Z",
+    "publishedAt": "2026-09-16T22:02:46.000Z",
     "categories": [
-      "apple",
       "tecnologia-general",
-      "apps-accesibles",
+      "apple",
       "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Tripsy’s iOS 27 update includes smarter imports, on-device AI insights, more",
-        "summary": "Travel planning app Tripsy was updated this week with support for iOS 27’s extra-large widget, a new Smart Import tool, AI-powered features, and more. Here are the details. more…",
+        "title": "Apple reportedly building server packed with M-series Ultra chips for AI",
+        "summary": "Planned 2029 debut could make this Apple’s first enterprise server in decades.",
         "body": ""
       }
     },
@@ -125,31 +319,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-5588b4c6b67ac8d9",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/16/ios-27-2-will-help-users-move-data-and-settings-from-an-old-app-to-its-replacement/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T21:03:28.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iOS 27.2 will help users move data and settings from an old app to its replacement",
-        "summary": "Starting with iOS 27.2, developers will be able to offer users a way to move their data and settings from an existing app to its designated replacement. Here are the details. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "the-verge-655643e8a4ac7d4f",
     "type": "news",
     "sourceId": "the-verge",
@@ -192,149 +361,6 @@
       "en": {
         "title": "Not just Proton: Getting to know Valve's new SteamOS compatibility layers",
         "summary": "New system-level tools bring Arm chipsets, Android APKs into the Steam ecosystem.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-7cf6da2fec618665",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/16/after-accusations-of-selling-perv-glasses-meta-prepares-to-sell-a-pair-without-a-camera/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T20:12:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "After accusations of selling ‘perv glasses,’ Meta prepares to sell a pair without a camera",
-        "summary": "Can Meta dodge the \"pervert glasses\" accusations with a new camera-free product?",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-a1be8383342bf052",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/16/ai-labs-want-in-house-auditors-but-maybe-they-should-shut-the-front-door-first/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T18:25:25.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "AI labs want in-house auditors — but maybe they should shut the front door first",
-        "summary": "There may be a simpler and more effective fix for rogue agents, hiding in plain sight.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-1fb230473802d79b",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2260455/the-boox-note-air6c-e-ink-tablet-flips-pages-nearly-40-percent-faster/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T17:36:21.000Z",
-    "categories": [
-      "tecnologia-general",
-      "android",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The Boox Note Air6C E Ink tablet flips pages nearly 40 percent faster",
-        "summary": "The 10.3-inch color ereader runs Android 16 and can access the Google Play Store.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-78952817e2333361",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/996310/google-home-mcp-integration-agentic-ai-smart-home-price-release-date",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T17:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google will now let any AI agent run your smart home",
-        "summary": "Google is opening up its smart home to AI agents, letting tools like Claude and Open Claw access and control your connected devices and analyze your home's data using the standardized Model Context Protocol. Google Home MCP is a new integration that lets third-party AI agents control and monitor your smart home and act on […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-3709bb86f23ae259",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2259938/anthropics-claude-can-now-create-editable-documents-for-you-cowork-chat-together/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T16:30:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Anthropic's Claude can now create editable documents for you",
-        "summary": "Anthropic is adding the ability to create docs, slideshow and access Cowork capabilities inside chat. It will roll out to Pro and Max subscribers first.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-dbb65f7394419500",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/996234/anthropic-one-claude-cowork-docs-slides",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T16:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Claude comes for Gemini with its own take on Docs and Slides",
-        "summary": "Claude is getting a pair of new tools today: Docs and Slides. They'll let you create documents and presentations through Claude chats, which you can export, edit, and share with other users. As part of the announcement, Anthropic is also simplifying how Claude chats work, merging regular chats and Cowork into \"one Claude,\" with all […]",
         "body": ""
       }
     },
@@ -433,29 +459,6 @@
       "en": {
         "title": "No wifi mini games",
         "summary": "No Wifi Mini Games is an all-in-one collection of 150+ games you can play anywhere, with no Wi-Fi or internet connection required. Enjoy quick arcade challenges, classic board games, relaxing solitaire, word games, number games, dice games, and brain-teasing puzzles. Visit the Daily Hub for a fresh collection of shared puzzles every day, build streaks, unlock achievements, and track your Daily results. There are no ads, no subscriptions, and no in-app purchases. No account is required. Just open the app, choose a game, and play. Something for Every Player Arcade & Reflex Snake, Pop the Lock, Dodge ’n Dash, Flight Frenzy, Tap the Carrot, Ricochet, Cosmic Assault, Orbital Bounce, Tower Stacker, and more. Puzzles & Logic Sudoku, Block Sudoku, Shikaku, Star Battle, Tents & Trees, 15 Puzzle, Number Slide, 2248 Number Puzzle, Zero Tiles, Color Chain, Triple Slide, Kayla’s Block Puzzle, Lights Out, Mastermind, Set, and more. Word Games Hangman, Word Search, Word Ladder, Word Guess, Word Stacks, Puzzle Words, Spelling Words, and more. Classic Board & Strategy Chess, Checkers, Reversi, Mancala, Gomoku, Four in a Row, Tic-Tac-Toe, Ultimate Tic-Tac-Toe, Dots and Boxes, Three Men’s Morris, and more. Cards & Solitaire Klondike Solitaire, FreeCell Solitaire, Pyramid Solitaire, Spider Solitaire, TriPeaks Solitaire, War, and more. Dice & Luck Farkle, Pig Dice Game, Five Dice Showdown, Ship, Captain, Crew, Knucklebones, and more. Made to Play Your Way • Play completely offline, including in Airplane Mode • Discover fresh puzzles every day in the Daily Hub • Build Daily streaks, unlock achievements, and track separate Daily statistics • No ads, no subscriptions, and no in-app purchases • No account required • No tracking or advertising profiles • Choose Light Mode, Dark Mode, or your device’s System Default appearance • Adjust instruction text size for easier reading • Use VoiceOver and accessibility support throughout the app • Save game progress, statistics, favorites, and supported settings • Track high scores, wins, streaks, and other game statistics in supported games • Compete on Game Center leaderboards in supported games when you’re online • Find games quickly with filters, favorites, recently played, and hidden games • Play solo, with friends, or against computer players in supported games • Enjoy regular updates with new games and improvements inspired by player feedback Whether you have a few minutes to spare or want to settle in with a favorite classic, No Wifi Mini Games keeps a huge collection of games ready wherever you go. 150+ games. Fresh Daily puzzles. No ads. No subscriptions. No Wi-Fi needed.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-96c3082f77cf3d6b",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/09/agilitys-new-humanoid-robot-will-stop-squat-to-avoid-harming-human-coworkers/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-15T18:33:02.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Agility’s new humanoid robot will stop, squat to avoid harming human coworkers",
-        "summary": "Robots can start working outside physical cages and without safety barriers.",
         "body": ""
       }
     },

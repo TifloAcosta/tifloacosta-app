@@ -13,4 +13,4 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: node --test test/actualidad-internal-navigation-semantics.test.mjs
+      - run: node --test test/*.test.mjs

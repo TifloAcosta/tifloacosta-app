@@ -12,6 +12,23 @@ Esta es la documentación vigente para mantener TifloAcosta App. Sustituye las i
 
 TifloAcosta App 1.3 es una PWA bilingüe y accesible que reúne recursos, novedades, el catálogo del Canal TifloAcosta en YouTube, información del libro, contacto y redes, configuración visual, notificaciones web y funcionamiento sin conexión.
 
+APLICACIONES OFICIALES EN DESARROLLO
+La PWA pública se mantiene como producto independiente mientras se desarrollan las aplicaciones oficiales para Android e iOS dentro de la carpeta mobile.
+
+La aplicación móvil utiliza Capacitor y mantiene la identidad com.tifloacosta.app. El proyecto Android se encuentra en mobile/android. El proyecto iOS debe generarse y sincronizarse en macOS; no se debe crear manualmente desde Windows o Linux.
+
+Comandos vigentes para trabajar con la base móvil:
+cd mobile
+npm install
+npm test
+npm run build
+npm run sync:android
+npm run sync:ios   (macOS)
+
+La aplicación móvil no debe convertirse en una simple envoltura remota de tifloacosta.com. La interfaz se empaqueta con la aplicación y obtiene el contenido mutable desde TifloAcosta mediante el feed móvil, conservando la última copia válida cuando no hay conexión.
+
+No deben incorporarse al repositorio claves de firma, keystores, contraseñas ni otros secretos. Las compilaciones de validación de Android se realizan en GitHub Actions y no sustituyen el proceso posterior de firma y publicación en Google Play.
+
 CRITERIO DE ACCESIBILIDAD
 La versión 1.3 mantiene como referencia funcional y de accesibilidad la experiencia validada durante el cierre de la versión 1.0.
 

@@ -1,0 +1,80 @@
+name: Apply Actualidad back-first focus
+
+on:
+  push:
+    branches:
+      - feature/actualidad-back-first-focus
+    paths:
+      - .github/trigger-actualidad-back-first-focus
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/actualidad-back-first-focus
+      - name: Focus top Back control on Actualidad interior views
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('actualidad-core.js')
+          text = path.read_text()
+
+          old_helper = """  function currentLanguage() {
+    return document.documentElement.lang === 'en' ? 'en' : 'es';
+  }
+"""
+          new_helper = """  function focusTopBackOrHeading(section, headingSelector) {
+    const backButton = section?.querySelector('[data-isolated-back=\"top\"] button');
+    if (backButton) {
+      focusElement(backButton);
+      return;
+    }
+    focusElement(document.querySelector(headingSelector));
+  }
+
+  function currentLanguage() {
+    return document.documentElement.lang === 'en' ? 'en' : 'es';
+  }
+"""
+          if old_helper not in text:
+            raise SystemExit('Expected focus helper insertion point not found')
+          text = text.replace(old_helper, new_helper, 1)
+
+          old_focus = """    const focusTargets = {
+      'actualidad-home': '#actualidad-heading',
+      'news-browser': '#news-heading',
+      'apps-browser': '#apps-heading',
+      'media-browser': '#media-heading',
+      'media-accessibility': '#media-accessibility-heading',
+      'media-technology': '#media-technology-heading'
+    };
+    focusElement(document.querySelector(focusTargets[state.view] || '#main'));
+"""
+          new_focus = """    const focusTargets = {
+      'actualidad-home': [null, '#actualidad-heading'],
+      'news-browser': [news, '#news-heading'],
+      'apps-browser': [apps, '#apps-heading'],
+      'media-browser': [media, '#media-heading'],
+      'media-accessibility': [mediaAccessibility, '#media-accessibility-heading'],
+      'media-technology': [mediaTechnology, '#media-technology-heading']
+    };
+    const [section, headingSelector] = focusTargets[state.view] || [null, '#main'];
+    if (section) focusTopBackOrHeading(section, headingSelector);
+    else focusElement(document.querySelector(headingSelector));
+"""
+          if old_focus not in text:
+            raise SystemExit('Expected focus target block not found')
+          path.write_text(text.replace(old_focus, new_focus, 1))
+          PY
+      - name: Commit change
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add actualidad-core.js
+          git commit -m "fix: enfocar Volver al entrar en Actualidad"
+          git push origin HEAD:feature/actualidad-back-first-focus

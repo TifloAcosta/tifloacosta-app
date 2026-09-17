@@ -1,18 +1,19 @@
 import { createRouter } from './core/router.mjs';
 import { focusScreenHeading, restoreOriginFocus } from './core/focus.mjs';
 import { createContentStore } from './core/content-store.mjs';
+import { createFavoritesStore } from './core/favorites.mjs';
 import { text } from './core/i18n.mjs';
 import { applyPreferences, createPreferencesStore } from './core/preferences.mjs';
 import { renderHome } from './screens/home.mjs';
 import { renderActualidad } from './screens/actualidad.mjs';
 import { renderSearch } from './screens/search.mjs';
 import { renderLibrary } from './screens/library.mjs';
+import { renderFavorites } from './screens/favorites.mjs';
 import { renderVideos } from './screens/videos.mjs';
 import { renderBook } from './screens/book.mjs';
 import { renderPodcast } from './screens/podcast.mjs';
 import { renderContact } from './screens/contact.mjs';
 import { renderSettings } from './screens/settings.mjs';
-import { renderPlaceholder } from './screens/placeholder.mjs';
 
 const root = document.querySelector('#app');
 if (!root) throw new Error('Missing mobile app root');
@@ -28,7 +29,9 @@ function safeStorage() {
   }
 }
 
-const preferencesStore = createPreferencesStore({ storage: safeStorage() });
+const storage = safeStorage();
+const preferencesStore = createPreferencesStore({ storage });
+const favoritesStore = createFavoritesStore(storage);
 preferencesStore.load();
 applyPreferences(document.documentElement, preferencesStore.getCurrent());
 
@@ -46,19 +49,28 @@ function textInputIsActive() {
 function render(route) {
   const preferences = preferencesStore.getCurrent();
   document.title = t('app.title');
-  const context = { root, router, route: route.name, content: currentContent, preferences, t, onPreferencesChange };
+  const context = {
+    root,
+    router,
+    route: route.name,
+    content: currentContent,
+    preferences,
+    favoritesStore,
+    t,
+    onPreferencesChange
+  };
 
   switch (route.name) {
     case 'home': renderHome(context); break;
     case 'actualidad': renderActualidad(context); break;
     case 'search': renderSearch(context); break;
     case 'library': renderLibrary(context); break;
+    case 'favorites': renderFavorites(context); break;
     case 'videos': renderVideos(context); break;
     case 'book': renderBook(context); break;
     case 'podcast': renderPodcast(context); break;
     case 'contact': renderContact(context); break;
     case 'settings': renderSettings(context); break;
-    case 'favorites': renderPlaceholder(context); break;
     default: renderHome(context);
   }
 }
@@ -85,7 +97,7 @@ router.start('home');
 
 const contentStore = createContentStore({
   fetchFn: (...args) => window.fetch(...args),
-  storage: safeStorage()
+  storage
 });
 
 contentStore.load().then(result => {

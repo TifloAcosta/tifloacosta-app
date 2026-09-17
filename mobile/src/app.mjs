@@ -5,6 +5,7 @@ import { text } from './core/i18n.mjs';
 import { applyPreferences, createPreferencesStore } from './core/preferences.mjs';
 import { renderHome } from './screens/home.mjs';
 import { renderActualidad } from './screens/actualidad.mjs';
+import { renderSearch } from './screens/search.mjs';
 import { renderLibrary } from './screens/library.mjs';
 import { renderVideos } from './screens/videos.mjs';
 import { renderBook } from './screens/book.mjs';
@@ -50,13 +51,13 @@ function render(route) {
   switch (route.name) {
     case 'home': renderHome(context); break;
     case 'actualidad': renderActualidad(context); break;
+    case 'search': renderSearch(context); break;
     case 'library': renderLibrary(context); break;
     case 'videos': renderVideos(context); break;
     case 'book': renderBook(context); break;
     case 'podcast': renderPodcast(context); break;
     case 'contact': renderContact(context); break;
     case 'settings': renderSettings(context); break;
-    case 'search':
     case 'favorites': renderPlaceholder(context); break;
     default: renderHome(context);
   }

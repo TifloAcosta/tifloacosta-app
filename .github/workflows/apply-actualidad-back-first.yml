@@ -1,0 +1,47 @@
+name: Apply Actualidad Back First
+
+on:
+  push:
+    branches:
+      - fix/actualidad-back-first
+    paths:
+      - .github/trigger-actualidad-back-first
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/actualidad-back-first
+      - name: Focus top Back control in Actualidad interior views
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('actualidad-core.js')
+          text = path.read_text()
+
+          anchor = "  function currentLanguage() {\n"
+          helper = "  function focusTopBackControl(section) {\n    const button = section?.querySelector('[data-isolated-back=\"top\"] button');\n    if (!button) return false;\n    focusElement(button);\n    return true;\n  }\n\n"
+          if helper not in text:
+              if anchor not in text:
+                  raise SystemExit('currentLanguage anchor not found')
+              text = text.replace(anchor, helper + anchor, 1)
+
+          old = "    const focusTargets = {\n      'actualidad-home': '#actualidad-heading',\n      'news-browser': '#news-heading',\n      'apps-browser': '#apps-heading',\n      'media-browser': '#media-heading',\n      'media-accessibility': '#media-accessibility-heading',\n      'media-technology': '#media-technology-heading'\n    };\n    focusElement(document.querySelector(focusTargets[state.view] || '#main'));\n"
+          new = "    const focusSections = {\n      'news-browser': news,\n      'apps-browser': apps,\n      'media-browser': media,\n      'media-accessibility': mediaAccessibility,\n      'media-technology': mediaTechnology\n    };\n    if (focusTopBackControl(focusSections[state.view])) return;\n\n    const focusTargets = {\n      'actualidad-home': '#actualidad-heading'\n    };\n    focusElement(document.querySelector(focusTargets[state.view] || '#main'));\n"
+          if old not in text:
+              raise SystemExit('focus target block not found')
+          text = text.replace(old, new, 1)
+          path.write_text(text)
+          PY
+      - name: Commit change
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add actualidad-core.js
+          git commit -m "fix: enfocar Volver al entrar en Actualidad"
+          git push origin HEAD:fix/actualidad-back-first

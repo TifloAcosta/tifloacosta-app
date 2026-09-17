@@ -17,7 +17,7 @@ const DICTIONARIES = {
     },
     favorites: { add: 'Añadir a favoritos', remove: 'Quitar de favoritos', empty: 'Todavía no has añadido ningún favorito.' },
     actualidad: { empty: 'No hay noticias disponibles en este momento.', original: 'Abrir fuente original' },
-    library: { empty: 'No hay recursos disponibles en este momento.', open: 'Abrir documento' },
+    library: { empty: 'No hay recursos disponibles en este momento.', open: 'Abrir documento', download: 'Guardar documento' },
     videos: { empty: 'No hay vídeos disponibles en este momento.', open: 'Abrir vídeo' },
     book: {
       title: 'La vida vista desde donde estoy', subtitle: 'Reflexiones desde una forma propia de estar en el mundo.',
@@ -52,7 +52,7 @@ const DICTIONARIES = {
     },
     favorites: { add: 'Add to favorites', remove: 'Remove from favorites', empty: 'You have not added any favorites yet.' },
     actualidad: { empty: 'There are no news items available right now.', original: 'Open original source' },
-    library: { empty: 'There are no resources available right now.', open: 'Open document' },
+    library: { empty: 'There are no resources available right now.', open: 'Open document', download: 'Save document' },
     videos: { empty: 'There are no videos available right now.', open: 'Open video' },
     book: {
       title: 'Life Seen from Where I Stand', subtitle: 'Reflections from my own way of being in the world.',

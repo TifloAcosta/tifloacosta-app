@@ -29,3 +29,10 @@ test('startup keeps preferences before first render and remote content refresh a
   assert.ok(loadContent > startHome, 'remote content must load after Home is already rendered');
   assert.match(app, /if \(!textInputIsActive\(\)\) render\(router\.current\(\)\)/);
 });
+
+test('settings always receives a safe notification service even before a native provider is connected', async () => {
+  const app = await read('src/app.mjs');
+  assert.match(app, /import\s+\{\s*createNotificationService\s*\}\s+from\s+['"]\.\/native\/notifications\.mjs['"]/);
+  assert.match(app, /const\s+notificationService\s*=\s*createNotificationService\(null\)/);
+  assert.match(app, /notificationService[,\s]/);
+});

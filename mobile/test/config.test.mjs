@@ -27,17 +27,24 @@ test('mobile package pins the Capacitor 8 foundation and exposes platform sync c
   assert.equal(pkg.scripts?.['sync:ios'], 'npx cap sync ios');
 });
 
-test('mobile shell starts as a minimal accessible document', async () => {
-  const [html, app] = await Promise.all([read('src/index.html'), read('src/app.mjs')]);
+test('mobile shell starts as a minimal accessible document and delegates headings to screen renderers', async () => {
+  const [html, app, shared, home] = await Promise.all([
+    read('src/index.html'),
+    read('src/app.mjs'),
+    read('src/screens/shared.mjs'),
+    read('src/screens/home.mjs')
+  ]);
   assert.match(html, /<html\s+lang="es"/i);
   assert.match(html, /<a[^>]+href="#app"[^>]*>[^<]+<\/a>/i);
   assert.equal((html.match(/<main\b/gi) || []).length, 1);
   assert.match(html, /<main\s+id="app"\s+tabindex="-1"><\/main>/i);
   assert.match(html, /<script\s+type="module"\s+src="\.\/app\.mjs"><\/script>/i);
   assert.doesNotMatch(html, /autofocus/i);
-  assert.match(app, /document\.createElement\('h1'\)/);
-  assert.match(app, /heading\.dataset\.screenHeading\s*=\s*['"]['"]/);
-  assert.match(app, /heading\.tabIndex\s*=\s*-1/);
+  assert.match(app, /renderHome\(context\)/);
+  assert.match(shared, /document\.createElement\('h1'\)/);
+  assert.match(shared, /heading\.dataset\.screenHeading\s*=\s*['"]['"]/);
+  assert.match(shared, /heading\.tabIndex\s*=\s*-1/);
+  assert.match(home, /heading\.dataset\.screenHeading\s*=\s*['"]['"]/);
 });
 
 test('native dependencies, build products and signing material stay out of git', async () => {

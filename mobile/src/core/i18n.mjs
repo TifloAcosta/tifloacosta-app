@@ -10,7 +10,7 @@ const DICTIONARIES = {
       actualidad: 'Actualidad', search: 'Buscar', library: 'Biblioteca', favorites: 'Favoritos', videos: 'Vídeos',
       book: 'Mi libro', podcast: 'Podcast', contact: 'Contacto', settings: 'Configuración'
     },
-    common: { empty: 'No hay contenido disponible en este momento.', open: 'Abrir' },
+    common: { empty: 'No hay contenido disponible en este momento.', open: 'Abrir', share: 'Compartir' },
     search: {
       label: 'Título o palabra clave', placeholder: 'Por ejemplo: VoiceOver, Android, WhatsApp…', submit: 'Buscar',
       results: '{count} resultados', none: 'No se encontraron resultados.', resultsRegion: 'Resultados de búsqueda'
@@ -45,7 +45,7 @@ const DICTIONARIES = {
       actualidad: 'News', search: 'Search', library: 'Library', favorites: 'Favorites', videos: 'Videos',
       book: 'My book', podcast: 'Podcast', contact: 'Contact', settings: 'Settings'
     },
-    common: { empty: 'No content is available right now.', open: 'Open' },
+    common: { empty: 'No content is available right now.', open: 'Open', share: 'Share' },
     search: {
       label: 'Title or keyword', placeholder: 'For example: VoiceOver, Android, WhatsApp…', submit: 'Search',
       results: '{count} results', none: 'No results found.', resultsRegion: 'Search results'

@@ -1,8 +1,12 @@
+import { App } from '@capacitor/app';
+import { Browser } from '@capacitor/browser';
+import { Share } from '@capacitor/share';
 import { createRouter } from './core/router.mjs';
 import { focusScreenHeading, restoreOriginFocus } from './core/focus.mjs';
 import { createContentStore } from './core/content-store.mjs';
 import { createFavoritesStore } from './core/favorites.mjs';
 import { text } from './core/i18n.mjs';
+import { createNativeActions } from './core/native-actions.mjs';
 import { applyPreferences, createPreferencesStore } from './core/preferences.mjs';
 import { renderHome } from './screens/home.mjs';
 import { renderActualidad } from './screens/actualidad.mjs';
@@ -32,6 +36,7 @@ function safeStorage() {
 const storage = safeStorage();
 const preferencesStore = createPreferencesStore({ storage });
 const favoritesStore = createFavoritesStore(storage);
+const nativeActions = createNativeActions({ appPlugin: App, sharePlugin: Share, browserPlugin: Browser });
 preferencesStore.load();
 applyPreferences(document.documentElement, preferencesStore.getCurrent());
 
@@ -56,6 +61,7 @@ function render(route) {
     content: currentContent,
     preferences,
     favoritesStore,
+    nativeActions,
     t,
     onPreferencesChange
   };
@@ -80,6 +86,8 @@ export const router = createRouter({
   focusScreenHeading: () => focusScreenHeading(root),
   restoreOriginFocus: originId => restoreOriginFocus(root, originId)
 });
+
+void nativeActions.installBackHandler(router);
 
 function onPreferencesChange(changes, { reset = false } = {}) {
   const activeId = document.activeElement?.id || '';

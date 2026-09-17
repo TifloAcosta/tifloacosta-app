@@ -404,6 +404,13 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     ensureBackControls(mediaAccessibility, 'media', '#media-browser', '#media-accessibility-link');
     ensureBackControls(mediaTechnology, 'media', '#media-browser', '#media-technology-link');
 
+    const mediaRootBackControls = media
+      ? Array.from(media.children).filter(child => child.dataset?.isolatedBack)
+      : [];
+    mediaRootBackControls.forEach(wrapper => {
+      wrapper.hidden = !mediaRoot;
+    });
+
     if (!focusChangedView) return;
     if (pendingFocusSelector) {
       const target = document.querySelector(pendingFocusSelector);

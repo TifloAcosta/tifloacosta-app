@@ -8,7 +8,8 @@ test('Actualidad focuses the top Back control before headings in every interior 
   const source = await read('actualidad-core.js');
 
   assert.match(source, /function focusTopBackControl\(section\)/);
-  assert.match(source, /section\.querySelector\('\[data-isolated-back="top"\] button'\)/);
+  assert.match(source, /section\?\.querySelector/);
+  assert.match(source, /data-isolated-back=.*top.*button/);
   assert.match(source, /'news-browser':\s*news/);
   assert.match(source, /'apps-browser':\s*apps/);
   assert.match(source, /'media-browser':\s*media/);

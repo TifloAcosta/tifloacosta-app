@@ -4,7 +4,6 @@
   document.addEventListener('DOMContentLoaded', () => {
     const $ = selector => document.querySelector(selector);
     const mediaBrowser = $('#media-browser');
-    const reader = $('#news-reader');
     const heading = $('#media-heading');
     const intro = $('#media-intro');
     const sectionsNav = $('#media-sections');
@@ -18,7 +17,7 @@
     const technologyList = $('#media-technology-list');
     const status = $('#media-status');
     const topMediaLink = $('#section-media-link');
-    if (!mediaBrowser || !reader || !accessibilityList || !technologyList) return;
+    if (!mediaBrowser || !accessibilityList || !technologyList) return;
 
     const copy = {
       es: {
@@ -215,12 +214,6 @@
       const total = renderSection('accessibility', accessibilityList) + renderSection('technology', technologyList);
       status.textContent = c.count(total);
     }
-
-    const readerObserver = new MutationObserver(() => {
-      mediaBrowser.hidden = !reader.hidden;
-    });
-    readerObserver.observe(reader, { attributes: true, attributeFilter: ['hidden'] });
-    mediaBrowser.hidden = !reader.hidden;
 
     const languageObserver = new MutationObserver(render);
     languageObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });

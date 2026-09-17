@@ -56,8 +56,10 @@ test('audio uses native controls without a redundant play toggle', async () => {
   assert.doesNotMatch(js, /\(item\.type === 'video' && item\.embedUrl\) \|\| \(item\.type === 'audio' && item\.mediaUrl\)/);
 });
 
-test('opening a news reader hides multimedia and returning restores all browsers', async () => {
-  const js = await read('actualidad-media.js');
-  assert.match(js, /readerObserver/);
-  assert.match(js, /mediaBrowser\.hidden = !reader\.hidden/);
+test('reader and section visibility is governed by the isolated navigation controller only', async () => {
+  const [mediaJs, coreJs] = await Promise.all([read('actualidad-media.js'), read('actualidad-core.js')]);
+  assert.doesNotMatch(mediaJs, /readerObserver/);
+  assert.doesNotMatch(mediaJs, /mediaBrowser\.hidden = !reader\.hidden/);
+  assert.match(coreJs, /observer\.observe\(reader/);
+  assert.match(coreJs, /setHidden\(media, true\)/);
 });

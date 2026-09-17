@@ -1,0 +1,16 @@
+name: Diagnose Actualidad navigation
+
+on:
+  push:
+    branches:
+      - fix/actualidad-native-hash-links
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node --test test/actualidad-internal-navigation-semantics.test.mjs

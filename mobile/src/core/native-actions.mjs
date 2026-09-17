@@ -1,4 +1,4 @@
-export function createNativeActions({ appPlugin, sharePlugin, browserPlugin } = {}) {
+export function createNativeActions({ appPlugin, sharePlugin, browserPlugin, savePlugin } = {}) {
   async function installBackHandler(router) {
     if (!appPlugin?.addListener || !router?.back) return null;
     return appPlugin.addListener('backButton', async () => {
@@ -29,5 +29,18 @@ export function createNativeActions({ appPlugin, sharePlugin, browserPlugin } = 
     return true;
   }
 
-  return { installBackHandler, share, openExternal };
+  async function saveFile({ url = '', filename = '', mimeType = 'application/octet-stream' } = {}) {
+    const cleanUrl = String(url || '').trim();
+    const cleanFilename = String(filename || '').trim();
+    const cleanMimeType = String(mimeType || 'application/octet-stream').trim() || 'application/octet-stream';
+    if (!cleanUrl || !cleanFilename || !savePlugin?.saveUrl) return false;
+    try {
+      const result = await savePlugin.saveUrl({ url: cleanUrl, filename: cleanFilename, mimeType: cleanMimeType });
+      return result?.saved === true;
+    } catch {
+      return false;
+    }
+  }
+
+  return { installBackHandler, share, openExternal, saveFile };
 }

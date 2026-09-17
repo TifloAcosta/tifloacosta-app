@@ -11,6 +11,10 @@ const DICTIONARIES = {
       book: 'Mi libro', podcast: 'Podcast', contact: 'Contacto', settings: 'Configuración'
     },
     common: { empty: 'No hay contenido disponible en este momento.', open: 'Abrir' },
+    search: {
+      label: 'Título o palabra clave', placeholder: 'Por ejemplo: VoiceOver, Android, WhatsApp…', submit: 'Buscar',
+      results: '{count} resultados', none: 'No se encontraron resultados.', resultsRegion: 'Resultados de búsqueda'
+    },
     actualidad: { empty: 'No hay noticias disponibles en este momento.', original: 'Abrir fuente original' },
     library: { empty: 'No hay recursos disponibles en este momento.', open: 'Abrir documento' },
     videos: { empty: 'No hay vídeos disponibles en este momento.', open: 'Abrir vídeo' },
@@ -28,7 +32,7 @@ const DICTIONARIES = {
       light: 'Alto contraste claro', dark: 'Alto contraste oscuro', spacing: 'Espaciado', comfortable: 'Cómodo', wide: 'Amplio',
       bold: 'Usar texto reforzado', reset: 'Restablecer ajustes'
     },
-    placeholder: { search: 'La búsqueda se incorporará en la siguiente fase.', favorites: 'Los favoritos se incorporarán en la siguiente fase.' }
+    placeholder: { favorites: 'Los favoritos se incorporarán en la siguiente fase.' }
   },
   en: {
     app: { title: 'TifloAcosta' },
@@ -42,6 +46,10 @@ const DICTIONARIES = {
       book: 'My book', podcast: 'Podcast', contact: 'Contact', settings: 'Settings'
     },
     common: { empty: 'No content is available right now.', open: 'Open' },
+    search: {
+      label: 'Title or keyword', placeholder: 'For example: VoiceOver, Android, WhatsApp…', submit: 'Search',
+      results: '{count} results', none: 'No results found.', resultsRegion: 'Search results'
+    },
     actualidad: { empty: 'There are no news items available right now.', original: 'Open original source' },
     library: { empty: 'There are no resources available right now.', open: 'Open document' },
     videos: { empty: 'There are no videos available right now.', open: 'Open video' },
@@ -59,7 +67,7 @@ const DICTIONARIES = {
       light: 'High contrast light', dark: 'High contrast dark', spacing: 'Spacing', comfortable: 'Comfortable', wide: 'Wide',
       bold: 'Use bolder text', reset: 'Reset settings'
     },
-    placeholder: { search: 'Search will be added in the next phase.', favorites: 'Favorites will be added in the next phase.' }
+    placeholder: { favorites: 'Favorites will be added in the next phase.' }
   }
 };
 

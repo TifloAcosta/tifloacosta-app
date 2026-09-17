@@ -29,3 +29,5 @@ test('Actualidad visibility updates do not rewrite an unchanged hidden state', (
   core.setElementHidden(element, false);
   assert.equal(writes, 1, 'repeating the same visible state must stay idempotent');
 });
+
+// Regression target: repeated writes to hidden must not be able to retrigger the observer indefinitely in Safari/WebKit.

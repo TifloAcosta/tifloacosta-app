@@ -29,9 +29,9 @@ test('saveFile delegates to the native save plugin without requesting storage pe
 
 test('Android save plugin uses ACTION_CREATE_DOCUMENT and no broad storage permission', async () => {
   const [plugin, activity, manifest] = await Promise.all([
-    readRepo('android/app/src/main/java/com/tifloacosta/app/TifloSavePlugin.java'),
-    readRepo('android/app/src/main/java/com/tifloacosta/app/MainActivity.java'),
-    readRepo('android/app/src/main/AndroidManifest.xml')
+    readRepo('mobile/android/app/src/main/java/com/tifloacosta/app/TifloSavePlugin.java'),
+    readRepo('mobile/android/app/src/main/java/com/tifloacosta/app/MainActivity.java'),
+    readRepo('mobile/android/app/src/main/AndroidManifest.xml')
   ]);
   assert.match(plugin, /Intent\.ACTION_CREATE_DOCUMENT/);
   assert.match(plugin, /@ActivityCallback/);

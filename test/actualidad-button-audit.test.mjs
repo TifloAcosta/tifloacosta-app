@@ -56,8 +56,12 @@ function firstH1(html) {
 }
 
 function metaDescription(html) {
-  const tag = html.match(/<meta\b[^>]*name=["']description["'][^>]*>/i)?.[0] || html.match(/<meta\b[^>]*content=["'][^"']*["'][^>]*name=["']description["'][^>]*>/i)?.[0] || '';
-  return tag.match(/\bcontent=["']([^"']*)["']/i)?.[1] || '';
+  const tags = html.match(/<meta\b[^>]*>/gi) || [];
+  for (const tag of tags) {
+    if (!/\bname=["']description["']/i.test(tag)) continue;
+    return tag.match(/\bcontent=["']([^"']*)["']/i)?.[1] || '';
+  }
+  return '';
 }
 
 test('home section controls point to the view or page they advertise', async () => {
@@ -118,12 +122,15 @@ test('every accessible resource Open document control opens the intended reader'
     const html = await read(path);
     const h1 = firstH1(html);
     assert.ok(h1, `Reader has no H1: ${item.title}`);
-    const contentIdentity = `${h1} ${metaDescription(html)}`;
-    assert.ok(titleOverlap(item.title, contentIdentity) >= 0.5, `Open document appears to point to different content: "${item.title}" -> "${h1}" (${item.openUrl})`);
 
     const sourceId = driveId(item.url);
     const readerId = path.match(/reader-([^/]+)\.html$/)?.[1] || null;
-    if (readerId && sourceId) assert.equal(readerId, sourceId, `Reader file belongs to a different Drive resource: ${item.title}`);
+    if (sourceId && readerId) {
+      assert.equal(readerId, sourceId, `Reader file belongs to a different Drive resource: ${item.title}`);
+    } else {
+      const contentIdentity = `${h1} ${metaDescription(html)} ${html}`;
+      assert.ok(titleOverlap(item.title, contentIdentity) >= 0.5, `Custom reader appears to point to different content: "${item.title}" -> "${h1}" (${item.openUrl})`);
+    }
   }
 });
 

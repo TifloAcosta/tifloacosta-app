@@ -1,22 +1,25 @@
 [
   {
-    "id": "the-verge-709d743602ec00bb",
+    "id": "9to5mac-aad0b4fbce0fec68",
     "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/996341/bose-ultra-open-earbuds-second-gen-wireless-sport",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/17/addigy-launches-intelligence-suite-giving-it-teams-control-over-how-ai-is-used-across-their-fleet/",
     "originalLanguage": "en",
     "publishedAt": "2026-09-17T13:00:00.000Z",
     "categories": [
-      "tecnologia-general"
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Bose’s next open earbuds have more bass, more volume, and more battery life",
-        "summary": "Bose announced a new version of its Ultra Open Earbuds that helped kick off the industry trend of clip-on wireless earbuds nearly two-and-a-half years ago. The new Ultra Open Earbuds (2nd Gen) feature a subtle redesign with improved performance in both sound quality and battery life. They're also joined by a new cheaper alternative called […]",
+        "title": "Addigy launches Intelligence Suite, giving IT teams control over how AI is used across their fleet",
+        "summary": "One of the biggest challenges Apple admins face today is managing AI use across apps, services, and more. Addigy is aiming to solve that problem with its Intelligence Suite, announced today, which brings a number of new tools and controls for IT teams to strengthen compliance while also unlocking AI tools in an IT-approved way. more…",
         "body": ""
       }
     },
@@ -209,7 +212,7 @@
     "locales": {
       "en": {
         "title": "Iceland-based Treble raises $18 million for its voice simulation platform",
-        "summary": "Treble's voice simulation platform is used by voice AI model developers, AI wearable, and robotics companies",
+        "summary": "Treble's voice simulation platform is used by voice AI model developers and AI wearable and robotics companies,",
         "body": ""
       }
     },
@@ -264,24 +267,24 @@
     "media": null
   },
   {
-    "id": "9to5mac-10cd7cdfc621a0e3",
+    "id": "the-verge-7e58cce39122a279",
     "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/16/photographer-tyler-stalman-reviews-the-iphone-18-pros-new-camera-with-variable-aperture/",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/996422/snap-specs-hands-on-ar-glasses",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-17T01:24:30.000Z",
+    "publishedAt": "2026-09-16T23:40:00.000Z",
     "categories": [
-      "apple",
-      "tecnologia-general"
+      "tecnologia-general",
+      "gafas-inteligentes"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Photographer Tyler Stalman reviews the iPhone 18 Pro’s new camera with variable aperture",
-        "summary": "Photographer Tyler Stalman is back with his annual iPhone camera review. Here’s what he had to say about the iPhone 18 Pro’s new variable aperture, photographic styles, Apple Reference Image, and more. more…",
+        "title": "I wore Snap’s $2,200 smart glasses",
+        "summary": "My favorite part of wearing the Specs, Snap's new augmented reality glasses, was playing dominoes. Sitting across the table from a Snap employee wearing the same pair of chunky glasses, I could select a virtual domino with a pinch and then move my hand to drop it in place, watching the tile snap down in […]",
         "body": ""
       }
     },

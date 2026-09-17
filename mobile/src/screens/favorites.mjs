@@ -1,4 +1,4 @@
-import { addExternalLink, addParagraph, addScreenHeader, clearScreen } from './shared.mjs';
+import { addExternalLink, addParagraph, addScreenHeader, addShareButton, clearScreen } from './shared.mjs';
 
 function itemsForKind(content, kind) {
   if (kind === 'resource') return Array.isArray(content?.resources) ? content.resources : [];
@@ -28,8 +28,14 @@ function openLabel(kind, t) {
   return t('actualidad.original');
 }
 
+function itemText(kind, item) {
+  if (kind === 'resource') return item.category || '';
+  if (kind === 'video') return item.excerpt || item.description || '';
+  return item.summary || '';
+}
+
 export function renderFavorites(context) {
-  const { root, router, content, favoritesStore, t } = context;
+  const { root, router, content, favoritesStore, nativeActions, t } = context;
   clearScreen(root);
   addScreenHeader(root, { router, title: t('screen.favorites'), backLabel: t('nav.back') });
 
@@ -68,7 +74,20 @@ export function renderFavorites(context) {
       article.append(title);
 
       const url = itemUrl(kind, item);
-      if (url) addExternalLink(article, { href: url, label: `${openLabel(kind, t)}: ${item.title || ''}` });
+      if (url) {
+        addExternalLink(article, {
+          href: url,
+          label: `${openLabel(kind, t)}: ${item.title || ''}`,
+          onOpen: nativeActions?.openExternal
+        });
+        addShareButton(article, {
+          label: t('common.share'),
+          title: item.title || '',
+          text: itemText(kind, item),
+          url,
+          onShare: nativeActions?.share
+        });
+      }
 
       const remove = document.createElement('button');
       remove.type = 'button';

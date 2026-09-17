@@ -1,4 +1,4 @@
-import { addExternalLink, addParagraph, addScreenHeader, clearScreen } from './shared.mjs';
+import { addExternalLink, addParagraph, addScreenHeader, addShareButton, clearScreen } from './shared.mjs';
 
 function addFavoriteButton(parent, item, favoritesStore, t) {
   const ref = { kind: 'news', id: String(item.id || '') };
@@ -19,7 +19,7 @@ function addFavoriteButton(parent, item, favoritesStore, t) {
   parent.append(button);
 }
 
-export function renderActualidad({ root, router, content, favoritesStore, t }) {
+export function renderActualidad({ root, router, content, favoritesStore, nativeActions, t }) {
   clearScreen(root);
   addScreenHeader(root, { router, title: t('screen.actualidad'), backLabel: t('nav.back') });
 
@@ -36,7 +36,20 @@ export function renderActualidad({ root, router, content, favoritesStore, t }) {
     heading.textContent = item.title || '';
     article.append(heading);
     if (item.summary) addParagraph(article, item.summary);
-    if (item.originalUrl) addExternalLink(article, { href: item.originalUrl, label: t('actualidad.original') });
+    if (item.originalUrl) {
+      addExternalLink(article, {
+        href: item.originalUrl,
+        label: t('actualidad.original'),
+        onOpen: nativeActions?.openExternal
+      });
+      addShareButton(article, {
+        label: t('common.share'),
+        title: item.title || '',
+        text: item.summary || '',
+        url: item.originalUrl,
+        onShare: nativeActions?.share
+      });
+    }
     if (item.id) addFavoriteButton(article, item, favoritesStore, t);
     root.append(article);
   }

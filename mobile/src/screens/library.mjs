@@ -1,6 +1,25 @@
 import { addExternalLink, addParagraph, addScreenHeader, clearScreen } from './shared.mjs';
 
-export function renderLibrary({ root, router, content, preferences, t }) {
+function addFavoriteButton(parent, item, favoritesStore, t) {
+  const ref = { kind: 'resource', id: String(item.id || '') };
+  const button = document.createElement('button');
+  button.type = 'button';
+
+  function update() {
+    const active = favoritesStore.has(ref);
+    button.ariaPressed = String(active);
+    button.textContent = active ? t('favorites.remove') : t('favorites.add');
+  }
+
+  button.addEventListener('click', () => {
+    favoritesStore.toggle(ref);
+    update();
+  });
+  update();
+  parent.append(button);
+}
+
+export function renderLibrary({ root, router, content, preferences, favoritesStore, t }) {
   clearScreen(root);
   addScreenHeader(root, { router, title: t('screen.library'), backLabel: t('nav.back') });
 
@@ -21,6 +40,7 @@ export function renderLibrary({ root, router, content, preferences, t }) {
     article.append(title);
     if (item.category) addParagraph(article, item.category, 'muted');
     if (item.openUrl || item.url) addExternalLink(article, { href: item.openUrl || item.url, label: `${t('library.open')}: ${item.title || ''}` });
+    if (item.id) addFavoriteButton(article, item, favoritesStore, t);
     list.append(article);
   }
   root.append(list);

@@ -1,5 +1,22 @@
 [
   {
+    "id": "tuapplemundo:https://www.youtube.com/watch?v=VPh85XXQTow",
+    "type": "video",
+    "section": "technology",
+    "sourceId": "tuapplemundo",
+    "sourceName": "TuAppleMundo",
+    "sourceUrl": "https://www.youtube.com/@tuapplemundo",
+    "originalUrl": "https://www.youtube.com/watch?v=VPh85XXQTow",
+    "originalLanguage": "es",
+    "publishedAt": "2026-09-17T12:14:42.000Z",
+    "title": "iPadOS 27 😱 +200 NOVEDADES que ya puedes probar",
+    "summary": "iPadOS 27 ya está disponible para millones de iPads y aquí te cuento todas las novedades que trae, qué modelos se quedan fuera y qué necesitas para estrenar la *nueva Siri con inteligencia artificial.* Repaso contigo el botón de deshacer de la pantalla de inicio, los widgets gigantes, la barra de menús alineada a la izquierda como en el Mac, las tres herramientas nuevas de la app Fotos con el reencuadre en 3D, los álbumes compartidos que ya funcionan con cualquiera y el *Safari que agrupa pestañas* por temas.\n\n\n*🚨 CLAVES DE iPadOS 27*\n\n*Qué iPads se actualizan* - Cinco modelos con iPadOS 26 se quedan fuera.\n*La nueva Siri con IA* - Llega en inglés y la Unión Europea espera.\n*Más parecido al Mac* - Barra de menús alineada y nueva multitarea.\n*Fotos, Safari y Maps* - Reencuadre en 3D, pestañas por temas y Flyover.\n*Mi opinión* - _\"Con el nuevo Flyover vas a sentir que vuelas por tu ciudad.\"_\n\n\n*📰 MÁS CONTENIDO*\n\nNoticias en WhatsApp: https://tuapplemundo.com/whatsapp\nNoticias en Telegram: https://tuapplemundo.com/telegram\nLos gadgets que uso: https://tuapplemundo.com/amazon\nMis redes sociales: https://tuapplemundo.com/redes\n\n\n*🎬 CAPÍTULOS DEL VÍDEO*\n\n00:00 - Todas las novedades de iPadOS 27\n00:42 - Qué iPads se actualizan y cuáles no\n02:21 - El truco para activar la Siri con IA\n03:32 - Cómo es la nueva Siri con IA\n04:12 - Deshacer y widgets gigantes\n05:17 - El iPad se parece más al Mac\n06:08 - Novedades de Fotos y edición IA\n08:38 - Safari, Atajos y el nuevo Flyover\n\n\n*📝 RESUMEN DEL VÍDEO*\n\nRepaso todas las novedades de iPadOS 27, que llega a millones de iPads con una pega. *Cinco modelos se quedan fuera,* el iPad Pro de 12,9 pulgadas de tercera generación, el iPad Pro de 11 pulgadas de primera, el iPad de octava generación, el iPad mini 5 y el iPad Air 3.\n\nLa nueva Siri con inteligencia artificial pide un *chip M1 o superior,* o el iPad mini con A17 Pro, y de momento solo va en inglés y con cuenta de Estados Unidos. Te enseño mi truco, cambiar la región y el idioma del sistema y de Siri.\n\nEn la pantalla de inicio por fin hay *botones de deshacer,* estrenamos widgets más grandes y el reloj de la pantalla de bloqueo se encoge. La barra de menús se alinea a la izquierda como en el Mac y se oculta desde multitarea.\n\nEn Fotos tienes subtítulos automáticos, guardar un fotograma y tres herramientas de edición, limpiar, extender y *reencuadre en 3D.* Los álbumes compartidos se abren a cualquiera sin cuenta de Apple, aunque ocupan iCloud. Safari agrupa pestañas por temas y crea extensiones describiéndolas, Atajos hace lo mismo y *Maps estrena Flyover.*\n\n#Apple #iPadOS27 #AppleIntelligence",
+    "mediaUrl": null,
+    "embedUrl": "https://www.youtube.com/embed/VPh85XXQTow",
+    "platform": "youtube",
+    "categories": []
+  },
+  {
     "id": "urban-tecno:https://www.youtube.com/watch?v=19SkA4XL_og",
     "type": "video",
     "section": "technology",
@@ -506,23 +523,6 @@
     "summary": "iPhone 18 Pro is basically an S year upgrade. And one part of it is really impressive.\n\nProtect your new iPhone 18 with a case or screen protector at http://dbrand.com/shop/iphone-18\n\nThe scale of a transistor: https://youtu.be/Jh9pFp1oM7E\n\nMKBHD Merch: http://shop.MKBHD.com\n\nIntro Track: Make You Happy by Betablock3r\nPlaylist of MKBHD Intro music: https://goo.gl/B3AWV5\n\nPhone provided by Apple for review.\n\n~\nhttp://twitter.com/MKBHD\nhttp://instagram.com/MKBHD\nhttp://facebook.com/MKBHD\n\n0:00 Intro\n1:21 This Camera\n6:47 The Chip\n10:20 Battery Boost\n13:04 The Little Things\n14:22 Conclusion",
     "mediaUrl": null,
     "embedUrl": "https://www.youtube.com/embed/ohqxP8EEumo",
-    "platform": "youtube",
-    "categories": []
-  },
-  {
-    "id": "tuapplemundo:https://www.youtube.com/watch?v=EvRKLkkcIWE",
-    "type": "video",
-    "section": "technology",
-    "sourceId": "tuapplemundo",
-    "sourceName": "TuAppleMundo",
-    "sourceUrl": "https://www.youtube.com/@tuapplemundo",
-    "originalUrl": "https://www.youtube.com/watch?v=EvRKLkkcIWE",
-    "originalLanguage": "es",
-    "publishedAt": "2026-09-15T21:18:39.000Z",
-    "title": "macOS 27 ⚠️ Novedades de la actualización de Mac",
-    "summary": "*macOS 27* ya está aquí y trae tantas novedades que tu Mac va a parecer otro, empezando porque de momento es el único dispositivo de Apple donde puedes probar la nueva *Siri con inteligencia artificial* si vives en la Unión Europea. En este vídeo te enseño a activarla paso a paso y repaso los cambios más importantes en Fotos, Safari, Liquid Glass y el rendimiento general, para que sepas exactamente qué ha cambiado en tu Mac con esta actualización.\n\n\n*🚨 CLAVES DE macOS 27*\n\n*Siri IA solo en Mac* - Es el único dispositivo que estrena la nueva Siri con IA.\n*Más IA en Fotos* - Suma álbumes compartidos y reencuadre de imágenes en 3D.\n*Safari más inteligente* - Agrupa pestañas por temas y crea extensiones con IA.\n*Liquid Glass ajustable* - Un deslizador regula la transparencia de todo el sistema.\n*Mi opinión* - _\"Mejora una barbaridad, es como pasar de ver vídeos en HD a verlos en 4K.\"_\n\n\n*📰 MÁS CONTENIDO*\n\nNoticias en WhatsApp: https://tuapplemundo.com/whatsapp\nNoticias en Telegram: https://tuapplemundo.com/telegram\nLos gadgets que uso: https://tuapplemundo.com/amazon\nMis redes sociales: https://tuapplemundo.com/redes\n\n\n*🎬 CAPÍTULOS DEL VÍDEO*\n\n00:00 - Siri IA llega primero a tu Mac\n01:42 - Activa la nueva Siri con IA\n03:37 - Chatea con la nueva Siri IA\n05:55 - Pregunta con imágenes a Siri\n06:42 - Álbumes compartidos en Fotos\n08:29 - Edición de fotos con IA en 3D\n10:49 - Safari agrupa pestañas con IA\n13:14 - Ajusta el nuevo Liquid Glass\n14:01 - Nuevo diseño en Finder y Ajustes\n15:21 - Crea atajos con inteligencia artificial\n15:41 - El nuevo Flyover 3D en Mapas\n17:15 - Tu Mac va más rápido y el AirDrop mejora\n\n\n*📝 RESUMEN DEL VÍDEO*\n\nEn este vídeo repaso todas las novedades que trae *macOS 27 Golden Gate* a tu Mac, que de momento es el único dispositivo de Apple con la nueva Siri con inteligencia artificial si vives en la Unión Europea. Te enseño a activarla y a usarla, incluso preguntándole por el contenido de una imagen.\n\nEn Fotos llegan los álbumes compartidos, que se abren desde Android o Windows sin cuenta de Apple, y nuevas herramientas de edición con IA como el *reencuadre en 3D.* Safari agrupa las pestañas por temas automáticamente y te deja crear tus propias extensiones con inteligencia artificial, incluida una que avisa cuando cambia el precio de un producto.\n\nEl nuevo Liquid Glass ya se ajusta con un deslizador, el Finder estrena una *barra lateral más ancha* y Mapas mejora una barbaridad con el nuevo Flyover en 3D. El sistema en general va más fluido que macOS 26, se nota al mover archivos y abrir aplicaciones, y hasta el AirDrop transfiere más rápido.\n\n#ActualizacionesApple #macOS27 #SiriIA",
-    "mediaUrl": null,
-    "embedUrl": "https://www.youtube.com/embed/EvRKLkkcIWE",
     "platform": "youtube",
     "categories": []
   },

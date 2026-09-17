@@ -1,5 +1,78 @@
 [
   {
+    "id": "engadget-bfc4cb5fb0010774",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2260974/openai-details-instances-of-models-fabricating-information-hiding-from-testers/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T10:50:20.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "OpenAI reveals more instances of concerning AI model behaviors during testing",
+        "summary": "OpenAI says it doesn't believe the industry has solved its problems 'to a sufficient degree to continue responsibly scaling at maximum speed for much longer.'",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "conticgo-78bf05c71d03e8d2",
+    "type": "news",
+    "sourceId": "conticgo",
+    "sourceName": "Conticgo",
+    "sourceUrl": "https://conticgo.net/",
+    "originalUrl": "https://conticgo.net/seo-budd-e-el-robot-guia-que-quiere-revolucionar-la-movilidad-accesible/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-09-17T10:00:10.000Z",
+    "categories": [
+      "tecnologia-accesibilidad",
+      "proyectos-prototipos",
+      "movilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "SEO BUDD-e es el robot guía que quiere revolucionar la movilidad accesible",
+        "summary": "La movilidad accesible continúa siendo uno de los grandes retos para las personas ciegas y con baja visión. BUDD-e es el robot guía que quiere revolucionar la movilidad accesible se presenta como una de las iniciativas de investigación más innovadoras desarrolladas en los últimos años. Este robot guía autónomo desarrollado por el Politécnico de Milán […] La entrada SEO BUDD-e es el robot guía que quiere revolucionar la movilidad accesible se publicó primero en Conticgo .",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-16456371d79056e5",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2260894/oversight-board-says-metas-rules-ai-deepfakes-fundamentally-inadequate/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T10:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Oversight Board says Meta's rules for AI deepfakes are 'consistently and fundamentally inadequate'",
+        "summary": "The Oversight Board is asking Meta to prioritize AI content when it's reported.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "engadget-033c1c66434d39d9",
     "type": "news",
     "sourceId": "engadget",
@@ -170,31 +243,6 @@
     "media": null
   },
   {
-    "id": "engadget-51c375bbae3715e7",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2260736/snap-introduces-a-standalone-ai-assistant-specs-intelligence/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T23:40:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Snap introduces a standalone AI assistant, Specs Intelligence",
-        "summary": "The new assistant works with the company's new AR glasses, but will also have its own mobile and desktop apps.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "the-verge-7e58cce39122a279",
     "type": "news",
     "sourceId": "the-verge",
@@ -238,29 +286,6 @@
       "en": {
         "title": "Snap is launching a new Specs AI tool, and it’s coming to iOS and Mac",
         "summary": "Snap is introducing \"Specs Intelligence,\" a new AI assistant that can connect other digital accounts to help you with things like work tasks and keeping track of travel information. It seems similar to AI assistants like Meta's Muse and Gemini's Spark, though Snap is pitching Specs Intelligence as an \"anticipatory AI service\" that \"helps you […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-18b15da950db94fa",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2259628/japan-ambulance-humanoid-robot-on-site-repairs/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T23:00:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Japanese company develops a humanoid robot 'ambulance' for on-the-spot repairs",
-        "summary": "It turns out that breaking down at work isn't a uniquely human experience.",
         "body": ""
       }
     },
@@ -1419,32 +1444,6 @@
       "en": {
         "title": "Learn How AI Connectors Can Bring Your Everyday Apps and Information Together",
         "summary": "Artificial Intelligence (AI) is changing how we work, helping us automate routine tasks, analyze and summarize data, and generate content. Learn AI with our AI live webinar series and comprehensive online guide, designed to empower you with the knowledge and skills to increase productivity and independence in the workplace. The 14th webinar in this ongoing …",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "conticgo-2738ab41c3e719f0",
-    "type": "news",
-    "sourceId": "conticgo",
-    "sourceName": "Conticgo",
-    "sourceUrl": "https://conticgo.net/",
-    "originalUrl": "https://conticgo.net/las-nuevas-gafas-inteligentes-de-samsung-prometen-una-ia-mas-util-para-las-personas-con-baja-vision/",
-    "originalLanguage": "es",
-    "publishedAt": "2026-09-01T10:00:30.000Z",
-    "categories": [
-      "tecnologia-accesibilidad",
-      "android",
-      "gafas-inteligentes",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "es": {
-        "title": "Las nuevas gafas inteligentes de Samsung prometen una IA más útil para las personas con baja visión",
-        "summary": "Las nuevas gafas inteligentes de Samsung prometen una IA más útil para las personas con baja visión. La compañía surcoreana ha adelantado nuevos detalles sobre este dispositivo, desarrollado junto a Google sobre la plataforma Android XR e impulsado por Gemini. Más allá de su diseño o autonomía, Samsung apuesta por una inteligencia artificial capaz de […] La entrada Las nuevas gafas inteligentes de Samsung prometen una IA más útil para las personas con baja visión se publicó primero en Conticgo .",
         "body": ""
       }
     },

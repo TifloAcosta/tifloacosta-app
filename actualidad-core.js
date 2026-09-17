@@ -320,6 +320,13 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     element.focus();
   }
 
+  function focusTopBackControl(section) {
+    const button = section?.querySelector('[data-isolated-back="top"] button');
+    if (!button) return false;
+    focusElement(button);
+    return true;
+  }
+
   function currentLanguage() {
     return document.documentElement.lang === 'en' ? 'en' : 'es';
   }
@@ -456,13 +463,17 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       }
     }
 
+    const focusSections = {
+      'news-browser': news,
+      'apps-browser': apps,
+      'media-browser': media,
+      'media-accessibility': mediaAccessibility,
+      'media-technology': mediaTechnology
+    };
+    if (focusTopBackControl(focusSections[state.view])) return;
+
     const focusTargets = {
-      'actualidad-home': '#actualidad-heading',
-      'news-browser': '#news-heading',
-      'apps-browser': '#apps-heading',
-      'media-browser': '#media-heading',
-      'media-accessibility': '#media-accessibility-heading',
-      'media-technology': '#media-technology-heading'
+      'actualidad-home': '#actualidad-heading'
     };
     focusElement(document.querySelector(focusTargets[state.view] || '#main'));
   }

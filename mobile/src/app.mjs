@@ -8,6 +8,7 @@ import { createFavoritesStore } from './core/favorites.mjs';
 import { text } from './core/i18n.mjs';
 import { createNativeActions } from './core/native-actions.mjs';
 import { applyPreferences, createPreferencesStore } from './core/preferences.mjs';
+import { TifloSave } from './core/save-plugin.mjs';
 import { renderHome } from './screens/home.mjs';
 import { renderActualidad } from './screens/actualidad.mjs';
 import { renderSearch } from './screens/search.mjs';
@@ -36,7 +37,12 @@ function safeStorage() {
 const storage = safeStorage();
 const preferencesStore = createPreferencesStore({ storage });
 const favoritesStore = createFavoritesStore(storage);
-const nativeActions = createNativeActions({ appPlugin: App, sharePlugin: Share, browserPlugin: Browser });
+const nativeActions = createNativeActions({
+  appPlugin: App,
+  sharePlugin: Share,
+  browserPlugin: Browser,
+  savePlugin: TifloSave
+});
 preferencesStore.load();
 applyPreferences(document.documentElement, preferencesStore.getCurrent());
 

@@ -46,3 +46,9 @@ test('video catalogue hides global page chrome because it is already a dedicated
   assert.match(source, /\.site-footer/);
   assert.match(source, /\.skip-link/);
 });
+
+test('nested media views hide the parent-level Actualidad back controls', async () => {
+  const source = await readFile(new URL('../actualidad-core.js', import.meta.url), 'utf8');
+  assert.match(source, /mediaRootBackControls/);
+  assert.match(source, /wrapper\.hidden\s*=\s*!mediaRoot/);
+});

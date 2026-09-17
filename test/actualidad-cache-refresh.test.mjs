@@ -6,11 +6,11 @@ const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
 test('Actualidad cache busts all corrected iPhone assets and PWA shell', async () => {
   const [html, sw] = await Promise.all([read('actualidad.html'), read('sw.js')]);
-  assert.match(html, /actualidad-core\.js\?v=1\.2/);
+  assert.match(html, /actualidad-core\.js\?v=1\.3/);
   assert.match(html, /actualidad\.js\?v=1\.2/);
   assert.match(html, /actualidad-media\.js\?v=1\.1/);
-  assert.match(sw, /actualidad-core\.js\?v=1\.2/);
+  assert.match(sw, /actualidad-core\.js\?v=1\.3/);
   assert.match(sw, /actualidad\.js\?v=1\.2/);
   assert.match(sw, /actualidad-media\.js\?v=1\.1/);
-  assert.match(sw, /tifloacosta-app-v2-5-actualidad-ios-load/);
+  assert.match(sw, /tifloacosta-app-v2-6-actualidad-hidden-loop/);
 });

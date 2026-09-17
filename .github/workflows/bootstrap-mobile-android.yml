@@ -46,6 +46,10 @@ jobs:
         working-directory: mobile
         run: npm test
 
+      - name: Build mobile web bundle
+        working-directory: mobile
+        run: npm run build --if-present
+
       - name: Add and synchronize Android
         working-directory: mobile
         run: |

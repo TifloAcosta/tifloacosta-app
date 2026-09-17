@@ -1,4 +1,4 @@
-import { addExternalLink, addParagraph, addScreenHeader, clearScreen } from './shared.mjs';
+import { addExternalLink, addParagraph, addScreenHeader, addShareButton, clearScreen } from './shared.mjs';
 
 function addFavoriteButton(parent, item, favoritesStore, t) {
   const ref = { kind: 'resource', id: String(item.id || '') };
@@ -19,7 +19,7 @@ function addFavoriteButton(parent, item, favoritesStore, t) {
   parent.append(button);
 }
 
-export function renderLibrary({ root, router, content, preferences, favoritesStore, t }) {
+export function renderLibrary({ root, router, content, preferences, favoritesStore, nativeActions, t }) {
   clearScreen(root);
   addScreenHeader(root, { router, title: t('screen.library'), backLabel: t('nav.back') });
 
@@ -39,7 +39,22 @@ export function renderLibrary({ root, router, content, preferences, favoritesSto
     title.textContent = item.title || '';
     article.append(title);
     if (item.category) addParagraph(article, item.category, 'muted');
-    if (item.openUrl || item.url) addExternalLink(article, { href: item.openUrl || item.url, label: `${t('library.open')}: ${item.title || ''}` });
+
+    const url = item.openUrl || item.url || '';
+    if (url) {
+      addExternalLink(article, {
+        href: url,
+        label: `${t('library.open')}: ${item.title || ''}`,
+        onOpen: nativeActions?.openExternal
+      });
+      addShareButton(article, {
+        label: t('common.share'),
+        title: item.title || '',
+        text: item.category || '',
+        url,
+        onShare: nativeActions?.share
+      });
+    }
     if (item.id) addFavoriteButton(article, item, favoritesStore, t);
     list.append(article);
   }

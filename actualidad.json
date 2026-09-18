@@ -1,5 +1,125 @@
 [
   {
+    "id": "the-verge-b6e66c4a57c4fa1f",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/997633/openai-microsoft-chatgpt-ai-new-york-times-doom-loop-theft-google-zero",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T21:07:24.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "OpenAI and Microsoft knew they were starting a ‘doom loop’ for the web",
+        "summary": "Recently unsealed court documents in the New York Times' case against OpenAI and Microsoft are pretty damning. The companies' own documentation warned that it was starting a \"doom loop\" that would damage the web, characterized its scraping of data to train its models as the \"largest theft of labor in human history,\" and that it […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-0e33f5993a0d71ff",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2262932/what-to-expect-at-meta-connect-2026-new-ai-glasses-a-mixed-reality-headset-and-more/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T20:35:11.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "What to expect at Meta Connect 2026: New AI glasses, a mixed reality headset and more",
+        "summary": "There's a lot for Mark Zuckerberg to cover at this year's keynote.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-4446d49034da6bdf",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/18/ios-27-and-ipados-27-expand-language-support-for-dictionary-quicktype-keyboard-more/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T20:31:30.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iOS 27 and iPadOS 27 expand language support for Dictionary, QuickType Keyboard, more",
+        "summary": "Apple today updated its iOS and iPadOS 27 Feature Availability page, confirming that more than 30 new languages and language variants are now supported across features such as Dictionary: Thesaurus, Activate with Siri, and Visual Look Up. Here’s what’s new. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-6e441f894e313e85",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/18/download-the-iphone-duos-official-light-and-dark-wallpapers-here/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T20:05:43.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Download the iPhone Duo’s official light and dark wallpapers here",
+        "summary": "Although Apple did not include the iPhone Duo’s wallpapers in iOS 27, the company did include them in the iPhone simulator in Xcode 27.1 beta, released earlier today, which means now you can download them. Get them below. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-0f1682d19ed18f2b",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/18/airpods-pro-3-keep-getting-better-heres-whats-new-ios-27/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T19:45:30.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "AirPods Pro 3 keep getting better, here’s what’s new in iOS 27",
+        "summary": "AirPods just got a variety of new features in iOS 27, several of which are exclusive to AirPods Pro 3. Here’s everything new. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "ars-technica-f9ada2060d2c4b6e",
     "type": "news",
     "sourceId": "ars-technica",
@@ -18,30 +138,6 @@
       "en": {
         "title": "FAA tees up $875M AI tool to help manage air traffic congestion",
         "summary": "FAA plans for AI tool to help manage DC air traffic before a nationwide rollout.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-b06bef65cdec27e2",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/18/apple-intelligence-has-20-brand-new-features-in-ios-27-heres-the-full-list/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T18:56:01.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple Intelligence has 20+ brand new features in iOS 27, here’s the full list",
-        "summary": "iOS 27 is here, and many of its new features are powered by the next generation of Apple Intelligence. Here are 20+ new Apple Intelligence features in iOS 27. more…",
         "body": ""
       }
     },
@@ -91,31 +187,6 @@
       "en": {
         "title": "Disney hires ex-CEO of AI company it accused of copyright infringement",
         "summary": "What's a little IP theft between friends?",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-2961cd17af71ba27",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/18/homeys-new-device-updates-feature-shows-what-matter-was-supposed-to-be-all-along/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T18:33:00.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "programas-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "HomeKit Weekly: Homey’s new Device Updates feature shows what Matter was supposed to be all along",
-        "summary": "Firmware updates have been the weakest link for a decade with smart homes. Every sensor, light bulb, and smart lock in your house runs software that should be updated regularly . This is on top of even if they have software updates. Homey just announced a fix for a big piece of that, and the way it handles Matter devices is the part that Apple Home users should take note of. more…",
         "body": ""
       }
     },
@@ -194,30 +265,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-5b4cd47a41da464b",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/18/apple-vp-of-hardware-talks-iphone-duo-durability-crease-hinge-and-more/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T17:52:15.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple VP of hardware talks iPhone Duo durability, crease, hinge, and more",
-        "summary": "Apple’s new Vice President of Hardware Engineering, Tom Marieb, sat down with TechRadar for an interview all about iPhone Duo. Here’s what he said about iPhone Duo’s durability, the hinge, display crease, and more. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "techcrunch-51229c633e7acb3a",
     "type": "news",
     "sourceId": "techcrunch",
@@ -261,30 +308,6 @@
       "en": {
         "title": "US government website used Chinese model the FBI called \"malicious\"",
         "summary": "The Federal Register website briefly used an open source Chinese AI search tool.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-725db3e8d03e09b9",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/podcast/997366/the-real-story-of-the-iphone-18-pros-camera",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T17:06:37.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The real story of the iPhone 18 Pro’s camera",
-        "summary": "It's one of the most fascinating years in a while when it comes to iPhone camera upgrades. The big story of the iPhone 18 Pro is the variable aperture main lens, which lets you open the aperture up wider for better low light shots and make the aperture smaller for better depth of field in […]",
         "body": ""
       }
     },
@@ -384,30 +407,6 @@
       "en": {
         "title": "iPhone 18 Pro: Hands-On and Initial Impressions",
         "summary": "iPhone 18 Pro and iPhone 18 Pro Max will be available to customers on Friday, September 18, 2026. Ahead of the launch, Apple sent me an iPhone 18 Pro for review. While a full review will come once I’ve had the opportunity to live with iPhone 18 Pro for a while, I do have some initial impressions that I wanted to share. First, and perhaps most noticeably, iPhone 18 Pro has what I would describe as a really big sound for its size. When compared side-by-side to iPhone 17 Pro Max—a device much larger and, presumably, with a bigger bottom speaker—iPhone 18 Pro sounds warmer, fuller, and lacks the treble over-emphasis I observed on the iPhone 17 Pro Max. If I had to describe the sound of iPhone 18 Pro, it would be ‘more complete’. And I do not think it is just software-side equalization: even at a relatively low 25% volume, iPhone 18 Pro has more bass and overall ‘presence’. My best guess is that Apple has made some hardware changes to the speaker on iPhone 18 Pro, and hopefully the iPhone 18 Pro Max too. One last note on sound for now: the earpiece speaker sounds warmer and fuller, as well. Beyond the speaker, iPhone 18 Pro contains some useful under-the-hood improvements, one of which I was not expecting to notice. Compared to last year’s models, iPhone 18 Pro has a larger vaper chamber inside the device for added cooling capacity. This is not just something you hear about at a Keynote and that's the end of it: picking up iPhone 18 Pro on multiple occasions, I noticed how literally 'cool' it felt to the touch. And even after multiple long phone calls on two different occasions, iPhone 18 Pro did not feel warm the way my iPhone 17 Pro Max does under similar circumstances. Cellular performance on iPhone 18 Pro's Apple-designed C2 Modem seems very good so far. On T-Mobile in Chicago, I got speeds right around a gigabyte down while indoors and a grand total of 1,109 Mbps down / 236 Mbps up when outdoors. This is not unheard-of for my area, but it is also not the norm, either. I will continue to test this throughout the review period. In terms of performance from the A20 Pro processor, VoiceOver (the built-in screen reader for blind, DeafBlind, and low vision people) is as fast and responsive as one could possibly want it to be. The moment I put my finger on the screen, VoiceOver is off and talking. That said, VoiceOver in iOS 27 already runs exceptionally well on the A19 series of chips from last year’s devices, and there’s only so much “can this be any more responsive?” before you hit an inevitable ceiling. Is VoiceOver ‘more’ responsive on the A20 Pro processor in iPhone 18 Pro than last year’s A19 Pro? Yes, but not by much—and again, this is only because VoiceOver already runs so well on last year’s A19-equipped devices to begin with. And that’s about all I can confidently speak to right now. Battery life seems good so far, though of course it’s day one and any serious testing will need to wait until after the various background tasks finish in the next couple days. Performance is good. Sound is very good. Call quality and cellular performance also seem good. I am excited for the coming weeks. Watch this space.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-d087b3192ffcd57b",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2261924/google-cc-is-an-ai-agent-for-families-and-groups/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T22:55:08.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google's revamped CC is an AI agent for families and groups",
-        "summary": "CC gives an AI agent its own Google account in your family or group and sends all members a daily briefing.",
         "body": ""
       }
     },

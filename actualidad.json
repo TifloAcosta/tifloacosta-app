@@ -1,5 +1,55 @@
 [
   {
+    "id": "applevis-blog-955a031c608e88a1",
+    "type": "news",
+    "sourceId": "applevis-blog",
+    "sourceName": "AppleVis Blog",
+    "sourceUrl": "https://www.applevis.com/blog",
+    "originalUrl": "https://www.applevis.com/blog/iphone-18-pro-hands-initial-impressions",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T02:13:03.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-accesibilidad",
+      "programas-accesibles",
+      "sordoceguera"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iPhone 18 Pro: Hands-On and Initial Impressions",
+        "summary": "iPhone 18 Pro and iPhone 18 Pro Max will be available to customers on Friday, September 18, 2026. Ahead of the launch, Apple sent me an iPhone 18 Pro for review. While a full review will come once I’ve had the opportunity to live with iPhone 18 Pro for a while, I do have some initial impressions that I wanted to share. First, and perhaps most noticeably, iPhone 18 Pro has what I would describe as a really big sound for its size. When compared side-by-side to iPhone 17 Pro Max—a device much larger and, presumably, with a bigger bottom speaker—iPhone 18 Pro sounds warmer, fuller, and lacks the treble over-emphasis I observed on the iPhone 17 Pro Max. If I had to describe the sound of iPhone 18 Pro, it would be ‘more complete’. And I do not think it is just software-side equalization: even at a relatively low 25% volume, iPhone 18 Pro has more bass and overall ‘presence’. My best guess is that Apple has made some hardware changes to the speaker on iPhone 18 Pro, and hopefully the iPhone 18 Pro Max too. One last note on sound for now: the earpiece speaker sounds warmer and fuller, as well. Beyond the speaker, iPhone 18 Pro contains some useful under-the-hood improvements, one of which I was not expecting to notice. Compared to last year’s models, iPhone 18 Pro has a larger vaper chamber inside the device for added cooling capacity. This is not just something you hear about at a Keynote and that's the end of it: picking up iPhone 18 Pro on multiple occasions, I noticed how literally 'cool' it felt to the touch. And even after multiple long phone calls on two different occasions, iPhone 18 Pro did not feel warm the way my iPhone 17 Pro Max does under similar circumstances. Cellular performance on iPhone 18 Pro's Apple-designed C2 Modem seems very good so far. On T-Mobile in Chicago, I got speeds right around a gigabyte down while indoors and a grand total of 1,109 Mbps down / 236 Mbps up when outdoors. This is not unheard-of for my area, but it is also not the norm, either. I will continue to test this throughout the review period. In terms of performance from the A20 Pro processor, VoiceOver (the built-in screen reader for blind, DeafBlind, and low vision people) is as fast and responsive as one could possibly want it to be. The moment I put my finger on the screen, VoiceOver is off and talking. That said, VoiceOver in iOS 27 already runs exceptionally well on the A19 series of chips from last year’s devices, and there’s only so much “can this be any more responsive?” before you hit an inevitable ceiling. Is VoiceOver ‘more’ responsive on the A20 Pro processor in iPhone 18 Pro than last year’s A19 Pro? Yes, but not by much—and again, this is only because VoiceOver already runs so well on last year’s A19-equipped devices to begin with. And that’s about all I can confidently speak to right now. Battery life seems good so far, though of course it’s day one and any serious testing will need to wait until after the various background tasks finish in the next couple days. Performance is good. Sound is very good. Call quality and cellular performance also seem good. I am excited for the coming weeks. Watch this space.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-598db3b0052eda81",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/17/whatsapp-starts-rolling-out-new-in-chat-search-button-on-ios/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T01:41:34.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "WhatsApp starts rolling out new in-chat search button on iOS",
+        "summary": "Following a few weeks of beta testing, WhatsApp is now rolling out its new in-chat search button to iPhone users. Here are the details. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "techcrunch-ce4c459e4c2e8bb5",
     "type": "news",
     "sourceId": "techcrunch",
@@ -16,7 +66,7 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Crusoe raises $3.9B to build massive data centers and small modular “AI factories”",
+        "title": "Crusoe raises $3.9B to build massive data centers and small modular ‘AI factories’",
         "summary": "The round values the data center giant at $30.9 billion.",
         "body": ""
       }
@@ -147,6 +197,30 @@
     "media": null
   },
   {
+    "id": "ars-technica-ae4ee1b9dcdb30b4",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/ai/2026/09/nato-backed-startup-adapts-ai-for-autonomous-drone-recon-and-attack-missions/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T22:12:58.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Small AI models let drones autonomously identify and attack battlefield targets",
+        "summary": "Scaleout deploys decentralized AI-driven learning to military bases and drones.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "9to5mac-b972fcfae1f43257",
     "type": "news",
     "sourceId": "9to5mac",
@@ -172,24 +246,49 @@
     "media": null
   },
   {
-    "id": "9to5mac-a55ffee03015c69f",
+    "id": "ars-technica-f550446d1d4c2fb5",
     "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/17/apple-showcases-iphone-18-pro-camera-with-new-what-holds-us-photography-exhibition/",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/google/2026/09/google-announces-new-experimental-cc-ai-agent-for-families/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-17T21:42:41.000Z",
+    "publishedAt": "2026-09-17T20:24:34.000Z",
     "categories": [
-      "apple",
-      "tecnologia-general"
+      "tecnologia-general",
+      "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Apple showcases iPhone 18 Pro camera with new ‘What Holds Us’ photography exhibition",
-        "summary": "Apple is holding a new photography exhibition in New York City this weekend to showcase the iPhone 18 Pro camera. Here are the details. more…",
+        "title": "Google announces new experimental \"CC\" AI agent for families",
+        "summary": "Multiple family members can share data to help the agent make plans and complete tasks.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-b93256d1786c2933",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/tech-policy/2026/09/microsoft-exec-called-ai-scraping-the-largest-theft-of-labor-in-human-history/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T20:10:41.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Microsoft exec called AI scraping the “largest theft of labor in human history”",
+        "summary": "Microsoft, OpenAI emails reveal fear of AI “doom loop” killing news orgs.",
         "body": ""
       }
     },
@@ -317,31 +416,6 @@
     "media": null
   },
   {
-    "id": "ars-technica-8511050d101f871a",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/09/apple-reportedly-building-server-packed-with-m-series-ultra-chips-for-ai/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T22:02:46.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple reportedly building server packed with M-series Ultra chips for AI",
-        "summary": "Planned 2029 debut could make this Apple’s first enterprise server in decades.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "freedom-scientific-blog-d8254ae4300e75d6",
     "type": "news",
     "sourceId": "freedom-scientific-blog",
@@ -367,30 +441,6 @@
     "media": null
   },
   {
-    "id": "ars-technica-3ca8cf2aa37e4482",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/gaming/2026/09/not-just-proton-getting-to-know-valves-new-steamos-compatibility-layers/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T20:23:16.000Z",
-    "categories": [
-      "tecnologia-general",
-      "android"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Not just Proton: Getting to know Valve's new SteamOS compatibility layers",
-        "summary": "New system-level tools bring Arm chipsets, Android APKs into the Steam ecosystem.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "applevis-apps-c32fc2263e2fdc72",
     "type": "news",
     "sourceId": "applevis-apps",
@@ -410,30 +460,6 @@
       "en": {
         "title": "norlay",
         "summary": "Norlay is a free, VoiceOver-first AI assistant for macOS that actually uses your computer for you. Type or speak normally and it searches files, browses the web, reads and writes documents, runs commands, sets reminders, looks at your screen, and shows each step in an activity log — asking your approval before anything irreversible. Every step, reply, and error is announced; optional offline Amy voice speaks replies aloud, with hold-to-talk dictation and a hands-free loop. Works with free AI models (Gemini, OpenRouter, Groq, Ollama, Apple on-device) — no account, no tracking. Requires macOS 14 or later, best on Apple Silicon. Download: https://norlay.fit/download — Docs: https://norlay.fit/docs — Feedback (please use this, not AppleVis comments): https://norlay.fit/feedback",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-205f94d99b8e53e5",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/gadgets/2026/09/macos-27-golden-gate-the-ars-technica-review/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T14:50:06.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "macOS 27 Golden Gate: The Ars Technica review",
-        "summary": "It's both a \"Snow Leopard update\" and a major leap for Apple Intelligence.",
         "body": ""
       }
     },
@@ -1650,32 +1676,6 @@
       "en": {
         "title": "Join Us for Six JAWS Tips for Streamlining Research Workflows",
         "summary": "Are you looking for tips to help you manage web research with JAWS? Join us, along with our friends at the American Printing House for the Blind (APH) for a live webinar, “Six JAWS Tips for Streamlining Research Workflows.” What We’ll Cover Research rarely happens on just one web page. Whether you are gathering information …",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "applevis-blog-ed86682f1f8939cc",
-    "type": "news",
-    "sourceId": "applevis-blog",
-    "sourceName": "AppleVis Blog",
-    "sourceUrl": "https://www.applevis.com/blog",
-    "originalUrl": "https://www.applevis.com/blog/apple-introduces-updated-mac-mini-mac-studio-upgraded-chips-improved-connectivity",
-    "originalLanguage": "en",
-    "publishedAt": "2026-08-25T17:51:39.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-accesibilidad",
-      "windows",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple Introduces Updated Mac Mini and Mac Studio with Upgraded Chips and Improved Connectivity",
-        "summary": "Apple today updated the Mac mini and Mac Studio, introducing the M6 Chip for the Mac mini, as well as the M5 Ultra Chip for the Mac Studio, which Apple describes as its \"most powerful silicon ever.\" Mac mini The new Mac mini with M6 delivers up to 4x faster AI performance, up to 2x faster graphics and storage, and Wi-Fi 7, Bluetooth 6, and 2.5 gigabit Ethernet connectivity, according to Apple's press release for the Mac Mini . Apple lists the following additional claims related to the Mac Mini with M6: Up to 13.5x faster LLM prompt processing in LM Studio when compared to Mac mini with M1, and up to 4.8x faster than M4. Up to 2.3x faster spreadsheet calculations in Microsoft Excel when compared to Mac mini with M1, and up to 1.5x faster than M4. Up to 2x faster gaming performance with ray tracing in Cyberpunk 2077: Ultimate Edition when compared to Mac mini with M4. In addition to the M6, the Mac mini is also available with M5 Pro, which Apple claims delivers: Up to 8.5x faster LLM prompt processing performance in LM Studio when compared to Mac mini with M2 Pro, and up to 4x faster than M4 Pro. Up to 4.5x faster rendering performance with ray tracing in Blender when compared to Mac mini with M2 Pro, and up to 1.4x faster than M4 Pro. Up to 2.1x faster image processing in Affinity when compared to Mac mini with M2 Pro, and up to 1.5x faster than M4 Pro. Besides the upgraded chips, the new Mac mini features Wi-Fi 7, Bluetooth 6, and 2.5GB Ethernet by default (up from the prior generation's default 1GB Ethernet port), with a 10GB option available. The new Mac mini can be preordered from Apple today for a starting price of US $899, and will begin shipping on Tuesday, September 22. Mac Studio Apple has also updated the Mac Studio, bringing the M5 Max and new M5 Ultra chip to Apple's most high-end Mac, as well as Thunderbolt 5, Wi-Fi 7, and Bluetooth 6 connectivity, and a \"next-generation SSD architecture that is up to twice as fast as before,\" according to Apple's press release for the Mac Studio The new Mac Studio with M5 Max delivers up to 3.9x faster AI performance than the prior generation, with the M5 Ultra delivering up to 4.3x the peak AI performance of the M3 Ultra, and up to 9.8x the peak AI performance of the M1 Ultra. Apple additionally lists the following claims related to Mac Studio with M5 Max: Up to 10.7x faster LLM prompt processing in LM Studio when compared to Mac Studio with M1 Max, and 3.9x faster than M4 Max. Up to 7.4x faster text-to-image performance when compared to Mac Studio with M1 Max, and up to 3.5x faster than M4 Max. Up to 5.3x faster Magic Mask performance in Blackmagic Design DaVinci Resolve Studio when compared to Mac Studio with M1 Max, and up to 3x faster than M4 Max. Up to 3.5x faster basecalling for DNA sequencing in Oxford Nanopore MinKNOW when compared to Mac Studio with M1 Max, and up to 1.9x faster than M4 Max. In addition to the M5 Max, the new Mac Studio is available with the new M5 Ultra, which Apple claims delivers: Up to 15.4x faster CopyCat ML training performance in Foundry Nuke when compared to Mac Studio with M1 Ultra, and up to 3.3x faster than M3 Ultra. Up to 9.8x faster LLM prompt processing in LM Studio when compared to Mac Studio with M1 Ultra, and up to 4x faster than M3 Ultra. Up to 8.2x faster text-to-image performance when compared to Mac Studio with M1 Ultra, and up to 4.3x faster than M3 Ultra. Up to 4.7x faster scene rendering performance in Maxon Redshift when compared to Mac Studio with M1 Ultra, and up to 1.7x faster than M3 Ultra. In addition, the Mac Studio with M5 Ultra is available with up to 512 GB of unified memory with 1.2TB/S of memory bandwidth, 50% higher memory bandwidth than M3 Ultra. The new Mac Studio can be preordered from Apple today for a starting price of US $2,499, and most models will begin shipping on Tuesday, September 22, with the model with 512GB of memory shipping in late October.",
         "body": ""
       }
     },

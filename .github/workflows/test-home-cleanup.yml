@@ -3,7 +3,7 @@ name: Test clean home navigation
 on:
   push:
     branches:
-      - 'feature/download-from-link'
+      - 'feature/home-clean-block-navigation'
 
 permissions:
   contents: read

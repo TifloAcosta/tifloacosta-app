@@ -68,7 +68,7 @@
         const direct = new URL('https://drive.google.com/uc');
         direct.searchParams.set('export', 'download');
         direct.searchParams.set('id', match[1]);
-        return { kind: 'result', provider, url, items: [resultItem(direct, provider, 'Archivo de Google Drive', 'unknown')] };
+        return { kind: 'result', provider, url, items: [resultItem(direct, provider, 'Google Drive', 'unknown')] };
       }
     }
 

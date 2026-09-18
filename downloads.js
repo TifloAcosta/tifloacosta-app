@@ -8,7 +8,7 @@
   const PROVIDER_LABELS = {
     'google-drive': 'Google Drive', dropbox: 'Dropbox', onedrive: 'OneDrive',
     'icloud-drive': 'iCloud Drive', box: 'Box', mega: 'MEGA', wetransfer: 'WeTransfer',
-    mediafire: 'MediaFire', pcloud: 'pCloud', direct: 'Enlace directo', web: 'Página web'
+    mediafire: 'MediaFire', pcloud: 'pCloud', direct: 'URL', web: 'Web'
   };
 
   const copyByLanguage = {

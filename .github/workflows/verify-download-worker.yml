@@ -19,6 +19,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Install Worker tooling
+        working-directory: download-worker
+        run: npm install --no-audit --no-fund
       - name: Run Worker tests
         working-directory: download-worker
         run: npm test
+      - name: Build Worker without publishing
+        working-directory: download-worker
+        run: npx wrangler deploy --dry-run

@@ -109,7 +109,7 @@ Esta capa seguirá funcionando aunque el analizador externo esté fuera de servi
 
 Cuando sea necesario, TifloAcosta enviará la URL a un pequeño servicio serverless separado de GitHub Pages.
 
-El servicio recomendado para la primera versión es **Cloudflare Workers**, aprovechando la infraestructura ya usada para el dominio y manteniendo el proyecto dentro de un nivel gratuito mientras el volumen lo permita.
+El servicio preferido para la primera versión es **Cloudflare Workers**, aprovechando la infraestructura ya usada para el dominio, pero solo se desplegará si puede hacerse sin contratar un plan de pago. Si el nivel gratuito disponible no resulta suficiente o exige coste, se buscará una alternativa gratuita antes de publicar esta capa.
 
 El analizador:
 
@@ -230,25 +230,27 @@ Se probarán al menos estos escenarios:
 2. Google Drive público
 3. Dropbox público
 4. OneDrive público
-5. MEGA público
-6. WeTransfer público
-7. MediaFire público
-8. pCloud público
-9. Página web con un solo archivo
-10. Página web con varios archivos
-11. Página con muchos archivos y uso de búsqueda/filtros
-12. Recurso que requiere autenticación
-13. Enlace roto
-14. Página sin archivos descargables
-15. Tiempo de espera agotado
-16. Analizador externo fuera de servicio
-17. Navegación completa solo con teclado
-18. Flujo con VoiceOver
-19. Flujo con TalkBack
-20. Flujo con JAWS
-21. Flujo con NVDA
-22. Cambio de idioma español/inglés
-23. Salida a servicio externo y regreso con contexto conservado
+5. iCloud Drive público
+6. Box público
+7. MEGA público
+8. WeTransfer público
+9. MediaFire público
+10. pCloud público
+11. Página web con un solo archivo
+12. Página web con varios archivos
+13. Página con muchos archivos y uso de búsqueda/filtros
+14. Recurso que requiere autenticación
+15. Enlace roto
+16. Página sin archivos descargables
+17. Tiempo de espera agotado
+18. Analizador externo fuera de servicio
+19. Navegación completa solo con teclado
+20. Flujo con VoiceOver
+21. Flujo con TalkBack
+22. Flujo con JAWS
+23. Flujo con NVDA
+24. Cambio de idioma español/inglés
+25. Salida a servicio externo y regreso con contexto conservado
 
 ## Criterios de éxito
 
@@ -256,7 +258,7 @@ La primera versión se considerará válida cuando:
 
 - La nueva sección sea accesible desde la pantalla principal.
 - Un usuario pueda pegar una URL y comprender qué ocurre sin asistencia visual.
-- Los enlaces directos y al menos los proveedores principales puedan resolverse cuando el recurso sea público.
+- Funcionen, cuando el recurso sea público y el proveedor lo permita, los enlaces directos y las reglas específicas de Google Drive, Dropbox, OneDrive, iCloud Drive, Box, MEGA, WeTransfer, MediaFire y pCloud.
 - Una página web con varios archivos muestre todos los archivos detectados.
 - La persona pueda buscar y filtrar resultados sin perder acceso al conjunto completo.
 - Las credenciales nunca pasen por TifloAcosta.

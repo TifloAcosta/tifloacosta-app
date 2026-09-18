@@ -268,9 +268,9 @@
         body: JSON.stringify({ url }),
         signal: controller.signal
       });
-      if (!response.ok) throw Object.assign(new Error(`HTTP ${response.status}`), { code: 'service_unavailable' });
       const payload = await response.json();
       if (!payload || typeof payload !== 'object') throw Object.assign(new Error('bad response'), { code: 'bad_response' });
+      if (!response.ok && !payload.code) throw Object.assign(new Error(`HTTP ${response.status}`), { code: 'service_unavailable' });
       return payload;
     } catch (error) {
       if (error?.name === 'AbortError') throw Object.assign(error, { code: 'timeout' });

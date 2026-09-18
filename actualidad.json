@@ -1,5 +1,223 @@
 [
   {
+    "id": "9to5mac-79c8f7b328f1a086",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/18/ios-27s-wallet-app-adds-feature-that-will-make-you-want-to-use-apple-cash/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T16:14:17.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iOS 27’s Wallet app adds feature that will make you want to use Apple Cash",
+        "summary": "Apple Wallet is better than ever in iOS 27 thanks to a handful of new features , including a clever solution for splitting bills with friends and family via Apple Cash. Here’s how it works. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-b8983b24bbe389e6",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/18/ive-now-completely-changed-my-mind-about-apple-glasses/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T16:00:00.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "gafas-inteligentes"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "I’ve now completely changed my mind about Apple Glasses",
+        "summary": "The first smart glasses were Google Glass , launched way back in 2014. The product failed for a number of reasons, but the biggest of these was privacy concerns around video recording capabilities, leading to users being labeled “glassholes.” The same phenomenon now seems to have finally caught up with Meta Glasses, leading me to completely change my mind about the requirement for Apple Glasses to have video recording capabilities … more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-7cd593a7e09d0d0b",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/18/family-offices-are-clamoring-for-ai-investments/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T16:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Family offices are clamoring for AI investments",
+        "summary": "Whether it's a permanent shift or part of a familiar cycle is worth asking, though.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-002ae5bef19d3196",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/997444/openai-hack-claude-heif-heist",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T15:30:16.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Security researchers used Claude to help them hack into OpenAI",
+        "summary": "A team of three independent security researchers at Hacktron says it took less than 72 hours for them to hack into OpenAI employee accounts using Anthropic's Claude Opus 4.8 and 5, the Wall Street Journal reports. They were able to access OpenAI's GitHub repository, called \"Monorepo,\" which reportedly contains \"OpenAI's algorithmic secrets,\" according to the […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-f31e4530a15dfbf0",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/18/open-or-closed-ai-nvidias-nader-khalil-and-sydney-sykes-take-on-one-of-the-decisions-shaping-next-gen-startups-at-techcrunch-disrupt-2026/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T15:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Open or closed AI? Nvidia’s Nader Khalil and Sydney Sykes take on one of the decisions shaping next-gen startups at TechCrunch Disrupt 2026",
+        "summary": "Nvidia's Nader Khalil and Sydney Sykes discuss one of the decisions shaping next-gen startups on the Builders Stage at TechCrunch Disrupt 2026.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-c8956b375f3dec7b",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/18/metas-muse-hits-mac-letting-the-ai-take-actions-on-your-computer/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T15:22:48.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Meta’s Muse hits Mac, letting the AI take actions on your computer",
+        "summary": "Muse is now available on the Mac, where it can work with your files and apps to take action on your behalf.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-5181004bcb2fe42c",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/18/iphone-18-pro-apple-watch-series-12-and-ultra-4-airpods-5-now-available-in-stores/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T15:14:47.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iPhone 18 Pro, Apple Watch Series 12 and Ultra 4, AirPods 5 now available in stores",
+        "summary": "Today is a big launch day for new Apple products, with iPhone 18 Pro and Pro Max, Apple Watch Series 12 and Ultra 4, and AirPods 5 all available in Apple Stores and from other retailers worldwide. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-5851dfa46c5da573",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/ai/2026/09/researchers-used-claude-to-hack-openai/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T13:30:12.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Researchers used Claude to hack OpenAI",
+        "summary": "Researchers used Claude to reach an OpenAI employee account and sensitive GitHub data.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-33b8a6dd91b94b41",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2262055/microsoft-openai-internet-scraping-largest-theft-of-labor/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T11:22:31.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Microsoft executive called OpenAI's web scraping the 'largest theft of labor in human history'",
+        "summary": "Executives from OpenAI and Microsoft were reportedly worried about ChatGPT training that scraped millions of news articles.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "conticgo-61a08058b9499d2d",
     "type": "news",
     "sourceId": "conticgo",
@@ -51,54 +269,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-598db3b0052eda81",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/17/whatsapp-starts-rolling-out-new-in-chat-search-button-on-ios/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T01:41:34.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "WhatsApp starts rolling out new in-chat search button on iOS",
-        "summary": "Following a few weeks of beta testing, WhatsApp is now rolling out its new in-chat search button to iPhone users. Here are the details. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-ce4c459e4c2e8bb5",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/17/crusoe-raises-3-9b-to-build-massive-data-centers-and-small-modular-ai-factories/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T23:25:52.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Crusoe raises $3.9B to build massive data centers and small modular ‘AI factories’",
-        "summary": "The round values the data center giant at $30.9 billion.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "engadget-d087b3192ffcd57b",
     "type": "news",
     "sourceId": "engadget",
@@ -117,56 +287,6 @@
       "en": {
         "title": "Google's revamped CC is an AI agent for families and groups",
         "summary": "CC gives an AI agent its own Google account in your family or group and sends all members a daily briefing.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-7e8734a02f4ada5a",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/17/prismml-hopes-its-tiny-llm-could-change-how-we-all-use-ai/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T22:34:09.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "PrismML hopes its tiny LLM will change how we all use AI",
-        "summary": "If AI lab PrismML isn't on your radar yet, it should be.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-2198a0227302fa28",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/17/meta-ai-launches-muse-personal-agent-including-a-new-mobile-app-for-iphone/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T22:30:10.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta AI launches Muse personal agent, including apps for iPhone and Mac",
-        "summary": "Update: Nine days later, Muse now includes a Mac app. You can download it here . Meta AI just launched a brand-new iPhone app called Muse from Meta. Similar to Grok Bot in presentation, Muse is a personal AI agent that handles tasks for you. more…",
         "body": ""
       }
     },
@@ -197,31 +317,6 @@
     "media": null
   },
   {
-    "id": "techcrunch-73b89e3ee6a23160",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/17/the-faas-plan-to-fix-air-traffic-875-million-worth-of-ai/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T22:14:59.000Z",
-    "categories": [
-      "tecnologia-general",
-      "programas-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The FAA’s plan to fix air traffic? $875M worth of AI",
-        "summary": "A new AI-based software program is being launched to help air traffic controllers better navigate their jobs as the crossing guards of America's skies.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "ars-technica-ae4ee1b9dcdb30b4",
     "type": "news",
     "sourceId": "ars-technica",
@@ -246,31 +341,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-b972fcfae1f43257",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/17/macos-27-whats-new-for-the-photos-app/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T21:52:38.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "macOS 27: What’s new for the Photos app?",
-        "summary": "9to5Mac is brought to you by CleanMyMac by MacPaw . With the release of macOS 27 Golden Gate, use CleanMyMac first to free up space, optimize your system, and ensure your new Mac runs at 100% on day one. Learn more . macOS 27 Golden Gate doesn’t give the Photos app a dramatic redesign. Instead, Photos gains a surprisingly broad set of various improvements this year. These range from Apple Intelligence-powered editing, new ways to organize and sort your collection, better sharing tools, and much more. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "ars-technica-f550446d1d4c2fb5",
     "type": "news",
     "sourceId": "ars-technica",
@@ -289,31 +359,6 @@
       "en": {
         "title": "Google announces new experimental \"CC\" AI agent for families",
         "summary": "Multiple family members can share data to help the agent make plans and complete tasks.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-b93256d1786c2933",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/tech-policy/2026/09/microsoft-exec-called-ai-scraping-the-largest-theft-of-labor-in-human-history/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T20:10:41.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Microsoft exec called AI scraping the “largest theft of labor in human history”",
-        "summary": "Microsoft, OpenAI emails reveal fear of AI “doom loop” killing news orgs.",
         "body": ""
       }
     },
@@ -368,54 +413,6 @@
     "media": null
   },
   {
-    "id": "the-verge-32452e4d9df9b203",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/gadgets/997009/refurbished-apple-tv-4k-ring-doorbell-deal-sale",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T17:14:07.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Save $30 or more on a refurbished Apple TV 4K",
-        "summary": "Most hardware prices have soared in 2026, and that includes a variety of Apple laptops, tablets, and smart devices. Thankfully, you can offset some of the increased costs on an Apple TV 4K by buying one refurbished through the company. The 64GB model is selling for $169, $30 lower than the new retail price. The […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-d5dc606cacdeab4b",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2260989/apple-watch-series-12-review-hrv-new-health-sensing-gesture/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T12:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple Watch Series 12 review: Catching up and catching heat",
-        "summary": "The new wearable's controversial audio features aren't available yet, but there are plenty of upgrades here.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "conticgo-78bf05c71d03e8d2",
     "type": "news",
     "sourceId": "conticgo",
@@ -460,31 +457,6 @@
       "en": {
         "title": "Learn How to Work More Effectively with PDFs and JAWS",
         "summary": "PDF documents are everywhere, from reports and forms to manuals and online resources. These documents can be accessed via a web browser or application like Adobe Acrobat Reader. When PDFs are formatted correctly, they can be read using standard navigation commands and JAWS Quick Navigation Keys; however, challenges arise when the PDF is not structured …",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "applevis-apps-c32fc2263e2fdc72",
-    "type": "news",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/mac/productivity/norlay",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T15:02:26.000Z",
-    "categories": [
-      "apple",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "norlay",
-        "summary": "Norlay is a free, VoiceOver-first AI assistant for macOS that actually uses your computer for you. Type or speak normally and it searches files, browses the web, reads and writes documents, runs commands, sets reminders, looks at your screen, and shows each step in an activity log — asking your approval before anything irreversible. Every step, reply, and error is announced; optional offline Amy voice speaks replies aloud, with hold-to-talk dictation and a hands-free loop. Works with free AI models (Gemini, OpenRouter, Groq, Ollama, Apple on-device) — no account, no tracking. Requires macOS 14 or later, best on Apple Silicon. Download: https://norlay.fit/download — Docs: https://norlay.fit/docs — Feedback (please use this, not AppleVis comments): https://norlay.fit/feedback",
         "body": ""
       }
     },
@@ -1194,6 +1166,30 @@
       "en": {
         "title": "ghostWriter Markdown",
         "summary": "Accessibility-first Markdown writing with VoiceOver-friendly editing, document organization, and flexible exports to Word, PDF, HTML, braille, and more. ghostWriter Markdown is a plain-text writing app for notes, articles, lists, documentation, and anything else you want to say with words. It was built accessibility-first. Not accessibility-eventually, or accessibility-in-the-settings-somewhere. VoiceOver was at the center of the design from the first line of code, as the app has been fully created by a Blind developer. If you write with a screen reader, this app was made for you. If you don't, you get a clean, fast, native editor that never gets in your way. So what's Markdown? Markdown adds structure to writing using a few ordinary punctuation marks. A number sign makes a heading. A dash makes a list item. Your document stays readable as plain text, and you can render it whenever you want to see the finished formatting. You don't have to know any of this to start. The Insert feature can add common elements for you, and a built-in Markdown Reference is always a tap away. Writing Made Easy: • A native editor with the Markdown punctuation kept visible, so you always control the source • Insert Actions for links, images, headings, quotes, code, lists, tasks, tables, and rules • Automatic list continuation for bullets, numbers, and task lists • Indent and outdent with tabs or spaces, your choice • Find and Replace, dictation, braille input, and text selection through native iOS controls • A configurable Status Bar showing line, column, word count, current heading, and selection • Automatic saving as you pause, plus Save Now whenever you want it Useful Navigation: • Outline lists every heading in your document and jumps straight to one, moving both the cursor and VoiceOver focus • A 3-finger horizontal swipe with VoiceOver will move the cursor through your document headings while editing • Jump to Line for long documents • Search across document names and their contents • Your last editing position is remembered in every file Keep Files Organized: • Nested folders you can create, rename, move, and navigate • Pin the documents you keep coming back to • Sort by name, created, modified, or last opened • Recently Deleted holds removed files until you restore them or clear them out • Import Markdown, .txt, Word .docx or Powerpoint presentations to convert them into Markdown Render and Share: • See your Markdown as structured HTML right inside the app • Share complete standalone HTML, Markdown, plain text, ePub, tagged PDF, eBraille, BRF, Microsoft Word documents or even Powerpoint presentations • Rendered output uses real semantic headings, lists, tables, links, and landmarks — so what you share is accessible to whoever receives it Your Files, Your Devices: • Documents are ordinary Markdown files, visible in the Files app • Store them on your device, or turn on iCloud Drive to sync across your iPhone, iPad, and Mac • Open and edit the same files in any other app that reads text • Nothing is locked in a proprietary format, and nothing needs this app to survive Accessibility: Developed toward WCAG 2.2 Level AA and tested with VoiceOver as a primary interaction method. • A predictable, linear VoiceOver reading order • Native controls with the roles and behaviors you already expect • Dynamic Type, including accessibility text sizes, everywhere • System, monospaced, rounded, and serif editor typefaces • Light, dark, and system appearance • Voice Control, Switch Control, and hardware keyboard support • Optional keyboard shortcuts for common actions • Reduced-motion support Privacy: No accounts. No sign-in. No ads. No analytics. No tracking. No data collection of any kind. There is no server behind this app because there doesn't need to be one. Your documents are yours, on your device or in your own iCloud, and they never travel anywhere you don't send them. Made by a blind developer who got tired of using tools that treated screen reader support as an afterthought. Heading",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "applevis-apps-6633c06159e8f0eb",
+    "type": "news",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/navigation/intersector-intersection-identifier",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-08T23:43:10.000Z",
+    "categories": [
+      "apple",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Intersector: Intersection Identifier",
+        "summary": "Hear your upcoming intersections while walking, when in a rideshare, or on a bus with the new Live Mode. Intersector helps you quickly identify nearby street intersections using your iPhone’s location and heading. Ask for the nearest intersection, what’s coming up ahead, use Scan Mode to point your phone down the street and hear the intersection it detects, or turn on Live Mode and have Intersector speak your upcoming intersections on a walk or during a ride with your phone locked. Intersector can speak distance, direction, and neighborhood context, and includes optional wording styles so announcements can match how you think about your surroundings. Built with VoiceOver users in mind, Intersector focuses on fast, clear spoken information without turning into turn-by-turn navigation. It is designed as a lightweight orientation tool for understanding nearby cross streets, not as a crossing aid or safety system. Features include: • Nearest intersection announcements • Upcoming intersection announcements • Scan Mode for nearby intersections in the direction you point • Live Mode to announce upcoming intersections automatically while walking or in transportation, using customizable speech • Siri Shortcut support • Optional distance, direction, and neighborhood details • Customizable intersection wording • Support for split intersections where different streets meet the same main street • Manhattan Snob Mode for New York-style direction wording • VoiceOver-friendly controls and spoken feedback • Dynamic Type and large text support. Intersector also has an Apple Watch companion app, so Siri Shortcuts and intersection data can be queried right from your wrist. Intersector uses location and heading data to provide orientation information. Always use your own judgment, mobility skills, and available pedestrian infrastructure when traveling.",
         "body": ""
       }
     },

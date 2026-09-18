@@ -1,0 +1,37 @@
+name: Apply download client fix
+
+on:
+  push:
+    branches:
+      - 'feature/download-from-link'
+    paths:
+      - '.github/workflows/apply-download-client-fix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/download-from-link
+      - name: Preserve structured analyzer errors
+        shell: python
+        run: |
+          from pathlib import Path
+          path = Path('downloads.js')
+          text = path.read_text(encoding='utf-8')
+          old = """      if (!response.ok) throw Object.assign(new Error(`HTTP ${response.status}`), { code: 'service_unavailable' });\n      const payload = await response.json();\n      if (!payload || typeof payload !== 'object') throw Object.assign(new Error('bad response'), { code: 'bad_response' });\n      return payload;"""
+          new = """      const payload = await response.json();\n      if (!payload || typeof payload !== 'object') throw Object.assign(new Error('bad response'), { code: 'bad_response' });\n      if (!response.ok && !payload.code) throw Object.assign(new Error(`HTTP ${response.status}`), { code: 'service_unavailable' });\n      return payload;"""
+          if old not in text:
+              raise SystemExit('Expected analyzer response block was not found')
+          path.write_text(text.replace(old, new, 1), encoding='utf-8')
+      - name: Commit fix
+        run: |
+          git config user.name "TifloAcosta CI"
+          git config user.email "146574974+TifloAcosta@users.noreply.github.com"
+          git add downloads.js
+          git commit -m "fix: preserve analyzer error responses"
+          git push origin HEAD:feature/download-from-link

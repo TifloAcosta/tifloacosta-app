@@ -12,6 +12,15 @@ test('analyzer sends the target URL in a POST JSON body, not in the endpoint que
   assert.doesNotMatch(source, /endpoint\s*\+\s*['"`]\?/);
 });
 
+test('analyzer parses structured error responses before treating HTTP status as service failure', async () => {
+  const source = await read('downloads.js');
+  const payloadIndex = source.indexOf('const payload = await response.json()');
+  const statusIndex = source.indexOf('if (!response.ok)');
+  assert.ok(payloadIndex >= 0, 'response JSON must be parsed');
+  assert.ok(statusIndex >= 0, 'HTTP error status must still be checked');
+  assert.ok(payloadIndex < statusIndex, 'structured error JSON must be parsed before the HTTP status fallback');
+});
+
 test('analyzer failure keeps local providers usable and distinguishes generic web pages', async () => {
   const source = await read('downloads.js');
   assert.match(source, /if \(local\.provider !== 'web'\)/);

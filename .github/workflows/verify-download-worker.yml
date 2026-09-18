@@ -1,0 +1,24 @@
+name: Verify download analyzer worker
+
+on:
+  push:
+    branches:
+      - 'feature/activate-download-analyzer'
+    paths:
+      - 'download-worker/**'
+      - '.github/workflows/verify-download-worker.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run Worker tests
+        working-directory: download-worker
+        run: npm test

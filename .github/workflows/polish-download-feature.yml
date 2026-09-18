@@ -1,0 +1,50 @@
+name: Polish download feature
+
+on:
+  push:
+    branches:
+      - 'feature/download-from-link'
+    paths:
+      - '.github/workflows/polish-download-feature.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  polish-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/download-from-link
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Use language-neutral provider labels
+        shell: python
+        run: |
+          from pathlib import Path
+          ui = Path('downloads.js')
+          text = ui.read_text(encoding='utf-8')
+          old = "mediafire: 'MediaFire', pcloud: 'pCloud', direct: 'Enlace directo', web: 'Página web'"
+          new = "mediafire: 'MediaFire', pcloud: 'pCloud', direct: 'URL', web: 'Web'"
+          if old not in text:
+              raise SystemExit('provider label block not found')
+          ui.write_text(text.replace(old, new, 1), encoding='utf-8')
+
+          core = Path('downloads-core.js')
+          text = core.read_text(encoding='utf-8')
+          old = "resultItem(direct, provider, 'Archivo de Google Drive', 'unknown')"
+          new = "resultItem(direct, provider, 'Google Drive', 'unknown')"
+          if old not in text:
+              raise SystemExit('Drive result label not found')
+          core.write_text(text.replace(old, new, 1), encoding='utf-8')
+      - name: Run full test suite
+        run: npm test
+      - name: Commit polished labels
+        run: |
+          git config user.name "TifloAcosta CI"
+          git config user.email "146574974+TifloAcosta@users.noreply.github.com"
+          git add downloads.js downloads-core.js
+          git commit -m "fix: keep download provider labels bilingual"
+          git push origin HEAD:feature/download-from-link

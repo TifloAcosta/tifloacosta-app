@@ -1,5 +1,30 @@
 [
   {
+    "id": "conticgo-61a08058b9499d2d",
+    "type": "news",
+    "sourceId": "conticgo",
+    "sourceName": "Conticgo",
+    "sourceUrl": "https://conticgo.net/",
+    "originalUrl": "https://conticgo.net/el-nuevo-iphone-18-pro-ofrece-nuevas-posibilidades-para-las-personas-ciegas-y-con-baja-vision/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-09-18T10:00:36.000Z",
+    "categories": [
+      "tecnologia-accesibilidad",
+      "apple",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "El nuevo iPhone 18 Pro ofrece nuevas posibilidades para las personas ciegas y con baja visión",
+        "summary": "Apple ha presentado el nuevo iPhone 18 Pro y iPhone 18 Pro Max con una mayor apuesta por la inteligencia artificial integrada en el dispositivo. Entre las novedades destaca una nueva generación de Apple Intelligence y una versión renovada de Siri capaz de comprender mejor el contexto, interpretar lo que aparece en pantalla y responder […] La entrada El nuevo iPhone 18 Pro ofrece nuevas posibilidades para las personas ciegas y con baja visión se publicó primero en Conticgo .",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "applevis-blog-955a031c608e88a1",
     "type": "news",
     "sourceId": "applevis-blog",
@@ -1143,32 +1168,6 @@
       "en": {
         "title": "Vispero Connect: Now Also On YouTube",
         "summary": "You asked, we listened. Vispero Connect, our official monthly podcast, is now available on YouTube. Each episode features product news and tips, interviews with members of our Vispero team, user stories, as well as previews of our upcoming training events. View Vispero Connect playlist on our YouTube channel Of course, you can still find us …",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "conticgo-82cd59e7efd67073",
-    "type": "news",
-    "sourceId": "conticgo",
-    "sourceName": "Conticgo",
-    "sourceUrl": "https://conticgo.net/",
-    "originalUrl": "https://conticgo.net/arregla-el-idioma-de-voiceover-en-correos-y-aplicaciones/",
-    "originalLanguage": "es",
-    "publishedAt": "2026-09-09T08:00:35.000Z",
-    "categories": [
-      "tecnologia-accesibilidad",
-      "apple",
-      "apps-accesibles",
-      "proyectos-prototipos"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "es": {
-        "title": "Arregla el idioma de VoiceOver en correos y aplicaciones.",
-        "summary": "Desde EsRetina seguimos trabajando para acercar la tecnología de forma accesible a todas las personas. En esta ocasión, compartimos un nuevo videotutorial accesible donde explicamos paso a paso cómo cambiar el idioma del VoiceOver en Mail y otras aplicaciones. Este contenido forma parte del proyecto Conticgo y ha sido creado con un enfoque claro: fomentar la […] La entrada Arregla el idioma de VoiceOver en correos y aplicaciones. se publicó primero en Conticgo .",
         "body": ""
       }
     },

@@ -17,6 +17,11 @@ test('download UI preserves pending external context and accessible focus behavi
   assert.match(source, /does not receive or store your credentials/);
 });
 
+test('opening the download section focuses the URL input', async () => {
+  const source = await read('downloads.js');
+  assert.match(source, /section\.hidden = false;\s*urlInput\.focus\(\);/);
+});
+
 test('filters do not move focus and every result gets its own download link', async () => {
   const source = await read('downloads.js');
   assert.match(source, /resultSearch\.addEventListener\('input', applyFilters\)/);

@@ -1,37 +1,13 @@
 [
   {
-    "id": "9to5mac-8d209040597aab67",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/17/out-of-warranty-iphone-18-pro-batteries-are-more-expensive-to-replace/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T20:47:09.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Out-of-warranty iPhone 18 Pro batteries are more expensive to replace",
-        "summary": "Apple has updated its “ Apple Service and Repair for iPhone ” support page with service prices for the iPhone 18 Pro and the iPhone 18 Pro Max, revealing a pricier battery replacement. Here are the details. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-39c89676fc1011be",
+    "id": "techcrunch-ce4c459e4c2e8bb5",
     "type": "news",
     "sourceId": "techcrunch",
     "sourceName": "TechCrunch",
     "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/17/the-fix-for-rogue-ai-agents-could-be-more-ai/",
+    "originalUrl": "https://techcrunch.com/2026/09/17/crusoe-raises-3-9b-to-build-massive-data-centers-and-small-modular-ai-factories/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-17T20:34:47.000Z",
+    "publishedAt": "2026-09-17T23:25:52.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -40,22 +16,22 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "The fix for rogue AI agents could be more AI",
-        "summary": "As companies hand off longer and more complex tasks to AI agents, they are running into an oversight problem: Agents can act faster, longer, and at greater volume than humans can realistically review.",
+        "title": "Crusoe raises $3.9B to build massive data centers and small modular “AI factories”",
+        "summary": "The round values the data center giant at $30.9 billion.",
         "body": ""
       }
     },
     "media": null
   },
   {
-    "id": "techcrunch-b2a897ee36c3e6a0",
+    "id": "engadget-d087b3192ffcd57b",
     "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/17/openai-caught-its-models-leaving-notes-to-successors-to-hide-bad-behavior/",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2261924/google-cc-is-an-ai-agent-for-families-and-groups/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-17T20:34:24.000Z",
+    "publishedAt": "2026-09-17T22:55:08.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -64,22 +40,22 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "OpenAI caught its models leaving notes to successors to hide bad behavior",
-        "summary": "OpenAI disclosed instances of GPT-5.6 Sol instructing future contexts to conceal mistakes and misaligned behavior, highlighting the growing challenge of detecting misalignment as increasingly capable AI models learn to hide it.",
+        "title": "Google's revamped CC is an AI agent for families and groups",
+        "summary": "CC gives an AI agent its own Google account in your family or group and sends all members a daily briefing.",
         "body": ""
       }
     },
     "media": null
   },
   {
-    "id": "techcrunch-385b59bb008fbaaf",
+    "id": "techcrunch-7e8734a02f4ada5a",
     "type": "news",
     "sourceId": "techcrunch",
     "sourceName": "TechCrunch",
     "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/17/is-the-ai-safety-debate-about-safety-or-control/",
+    "originalUrl": "https://techcrunch.com/2026/09/17/prismml-hopes-its-tiny-llm-could-change-how-we-all-use-ai/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-17T20:19:37.000Z",
+    "publishedAt": "2026-09-17T22:34:09.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -88,22 +64,122 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Is the AI safety debate about safety or control?",
-        "summary": "Not everyone agrees with Amodei's call for globally coordinated action for AI safety.",
+        "title": "PrismML hopes its tiny LLM will change how we all use AI",
+        "summary": "If AI lab PrismML isn't on your radar yet, it should be.",
         "body": ""
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-959aa1f41aa4416a",
+    "id": "9to5mac-2198a0227302fa28",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/17/icloud-subscribers-just-got-new-benefits-in-ios-27/",
+    "originalUrl": "https://9to5mac.com/2026/09/17/meta-ai-launches-muse-personal-agent-including-a-new-mobile-app-for-iphone/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-17T20:05:33.000Z",
+    "publishedAt": "2026-09-17T22:30:10.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Meta AI launches Muse personal agent, including apps for iPhone and Mac",
+        "summary": "Update: Nine days later, Muse now includes a Mac app. You can download it here . Meta AI just launched a brand-new iPhone app called Muse from Meta. Similar to Grok Bot in presentation, Muse is a personal AI agent that handles tasks for you. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-6a4f48d94c2004d5",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2261909/anthropic-says-claude-leads-26-percent-of-its-ai-research-and-development/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T22:30:01.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Anthropic says Claude 'leads' 26 percent of its AI R&D work",
+        "summary": "The company shared the stat alongside three measurements that help communicate the pace of AI development.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-73b89e3ee6a23160",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/17/the-faas-plan-to-fix-air-traffic-875-million-worth-of-ai/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T22:14:59.000Z",
+    "categories": [
+      "tecnologia-general",
+      "programas-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The FAA’s plan to fix air traffic? $875M worth of AI",
+        "summary": "A new AI-based software program is being launched to help air traffic controllers better navigate their jobs as the crossing guards of America's skies.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-b972fcfae1f43257",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/17/macos-27-whats-new-for-the-photos-app/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T21:52:38.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "macOS 27: What’s new for the Photos app?",
+        "summary": "9to5Mac is brought to you by CleanMyMac by MacPaw . With the release of macOS 27 Golden Gate, use CleanMyMac first to free up space, optimize your system, and ensure your new Mac runs at 100% on day one. Learn more . macOS 27 Golden Gate doesn’t give the Photos app a dramatic redesign. Instead, Photos gains a surprisingly broad set of various improvements this year. These range from Apple Intelligence-powered editing, new ways to organize and sort your collection, better sharing tools, and much more. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-a55ffee03015c69f",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/17/apple-showcases-iphone-18-pro-camera-with-new-what-holds-us-photography-exhibition/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-17T21:42:41.000Z",
     "categories": [
       "apple",
       "tecnologia-general"
@@ -112,32 +188,8 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "iCloud+ subscribers just got new benefits in iOS 27",
-        "summary": "iOS 27 launched this week, and it includes several new Apple Intelligence-related benefits for iCloud+ subscribers. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-52afe0be810780f5",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/17/pdf-expert-update-adds-handwriting-recognition-expands-apple-pencil-support-more/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T20:03:15.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "PDF Expert update adds handwriting recognition, expands Apple Pencil support, more",
-        "summary": "Readdle updated PDF Expert for iOS 27 and iPadOS 27 this week, adding several new features, including searchable handwriting in 29 languages. Here are the details. more…",
+        "title": "Apple showcases iPhone 18 Pro camera with new ‘What Holds Us’ photography exhibition",
+        "summary": "Apple is holding a new photography exhibition in New York City this weekend to showcase the iPhone 18 Pro camera. Here are the details. more…",
         "body": ""
       }
     },
@@ -234,54 +286,6 @@
       "en": {
         "title": "Apple Watch Series 12 review: Catching up and catching heat",
         "summary": "The new wearable's controversial audio features aren't available yet, but there are plenty of upgrades here.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-7071cd7d7bf6b924",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2260986/nvidia-google-emerald-coalition-data-center-power/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T11:24:45.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "NVIDIA and Google's new coalition wants to speed up AI data center power grid connections",
-        "summary": "A new coalition of tech giants aims to speed AI data center grid connections in exchange for more flexibility.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-bfc4cb5fb0010774",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2260974/openai-details-instances-of-models-fabricating-information-hiding-from-testers/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T10:50:20.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "OpenAI reveals more instances of concerning AI model behaviors during testing",
-        "summary": "OpenAI says it doesn't believe the industry has solved its problems 'to a sufficient degree to continue responsibly scaling at maximum speed for much longer.'",
         "body": ""
       }
     },

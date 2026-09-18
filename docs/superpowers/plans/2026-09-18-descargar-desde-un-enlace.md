@@ -85,7 +85,7 @@ Expected: FAIL because `downloads-core.js` does not exist.
 Use the same UMD pattern as `app-core.js`. `normalizeUrl` accepts only `http:`/`https:`. `classifyUrl` recognizes Google Drive, Dropbox, OneDrive, iCloud Drive, Box, MEGA, WeTransfer, MediaFire and pCloud. Direct-file detection covers at least `pdf zip rar 7z txt doc docx xls xlsx ppt pptx epub mp3 m4a wav ogg mp4 m4v mov webm apk csv json`.
 
 `resolveLocal` must:
-- convert Google Drive `/file/d/<id>/...` into `https://drive.google.com/uc?export=download&id=<id>`;
+- convert `https://drive.google.com/file/d/abc123/view` into `https://drive.google.com/uc?export=download&id=abc123` by extracting the real file id from the input;
 - set Dropbox query parameter `dl=1`;
 - return a result immediately for recognized direct-file URLs;
 - return `{ kind:'needs-analyzer', provider, url }` for the remaining providers/pages.
@@ -145,13 +145,19 @@ In `actualidad-core.js`, add `downloads: 'downloads-section'` to home routes and
 
 - [ ] **Step 5: Extend styles without creating a parallel design system**
 
-Change the existing form-control selector to include `input[type="url"]`:
+Replace the current form-control selector with this complete rule:
 
 ```css
-input[type="search"],input[type="url"],select { ... }
+input[type="search"],input[type="url"],select { width:100%; min-height:3rem; padding:.72rem .85rem; border:2px solid var(--border-strong); border-radius:.65rem; background:var(--bg); color:var(--text); font:inherit; }
 ```
 
-Add only `.download-results`, `.download-result-card`, `.download-result-meta`, reusing existing colors, borders and focus styling.
+Add:
+
+```css
+.download-results { display:flex; flex-wrap:wrap; gap:1rem; margin-top:1rem; }
+.download-result-card { flex:1 1 20rem; min-width:0; border:1px solid var(--border); border-top:.28rem solid var(--brand); border-radius:.9rem; padding:1.05rem; background:var(--surface); box-shadow:var(--shadow); }
+.download-result-meta { color:var(--muted); margin:.4rem 0 .8rem; }
+```
 
 - [ ] **Step 6: Run green and commit**
 Run: `npm test`
@@ -236,7 +242,7 @@ git commit -m "feat: add download analysis interface"
 - Create: `download-worker/test/providers.test.mjs`
 
 **Interfaces:**
-- Consumes: `POST /analyze` JSON `{ "url": "https://..." }`.
+- Consumes: `POST /analyze` JSON `{ "url": "https://example.org/manual.pdf" }`.
 - Produces: `{status:'ok',provider,items:[{name,url,type,size,source}]}` or `{status:'error',code,message}`.
 
 - [ ] **Step 1: Create exact Worker project config**
@@ -323,7 +329,7 @@ git commit -m "feat: add secure download analyzer worker"
 
 - [ ] **Step 1: Write failing tests**
 
-Verify that the source uses `POST`, JSON body `{url:...}`, never query-string transport for the analyzed URL, and keeps local results when `fetch` fails.
+Verify that the source uses `POST`, `JSON.stringify({ url: normalized.href })`, never query-string transport for the analyzed URL, and keeps local results when `fetch` fails.
 
 - [ ] **Step 2: Create exact config**
 

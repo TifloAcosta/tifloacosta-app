@@ -21,3 +21,9 @@ test('download surface exposes a first-level launcher and accessible controls', 
   assert.match(source, /Volver al inicio/);
   assert.match(source, /Download from a link/);
 });
+
+test('download launcher is inserted immediately before Videos on the home screen', async () => {
+  const source = await read('downloads.js');
+  assert.match(source, /getElementById\('home-open-videos'\)/);
+  assert.match(source, /insertBefore\(launcher,\s*videosLauncher\)/);
+});

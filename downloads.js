@@ -90,7 +90,9 @@
     launcher = element('button', { id: 'home-open-downloads', className: 'button-link', text: t().launcher });
     launcher.type = 'button';
     launcher.addEventListener('click', () => { window.location.hash = '#downloads'; });
-    nav.append(launcher);
+    const videosLauncher = document.getElementById('home-open-videos');
+    if (videosLauncher && videosLauncher.parentElement === nav) nav.insertBefore(launcher, videosLauncher);
+    else nav.append(launcher);
 
     section = element('section', { id: 'downloads-section' });
     section.hidden = true;

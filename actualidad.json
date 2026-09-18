@@ -1,63 +1,256 @@
 [
   {
-    "id": "9to5mac-79c8f7b328f1a086",
+    "id": "ars-technica-f9ada2060d2c4b6e",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/ai/2026/09/faa-tees-up-875m-ai-tool-to-help-manage-air-traffic-congestion/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T19:20:50.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "FAA tees up $875M AI tool to help manage air traffic congestion",
+        "summary": "FAA plans for AI tool to help manage DC air traffic before a nationwide rollout.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-b06bef65cdec27e2",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/18/ios-27s-wallet-app-adds-feature-that-will-make-you-want-to-use-apple-cash/",
+    "originalUrl": "https://9to5mac.com/2026/09/18/apple-intelligence-has-20-brand-new-features-in-ios-27-heres-the-full-list/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-18T16:14:17.000Z",
+    "publishedAt": "2026-09-18T18:56:01.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple Intelligence has 20+ brand new features in iOS 27, here’s the full list",
+        "summary": "iOS 27 is here, and many of its new features are powered by the next generation of Apple Intelligence. Here are 20+ new Apple Intelligence features in iOS 27. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-952aa831762dfbd2",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/18/a-new-kind-of-ai-model-from-a-chatgpt-inventor-is-thrilling-developers/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T18:49:30.000Z",
+    "categories": [
+      "tecnologia-general",
+      "programas-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "A new kind of AI model from a ChatGPT inventor is thrilling developers",
+        "summary": "Jev, a new kind of AI model, is showing developers a cheaper and faster path to software intelligence.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-2d074cdcc3bf2037",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2262703/disney-hires-ex-ceo-of-ai-company-it-accused-of-copyright-infringement/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T18:36:47.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Disney hires ex-CEO of AI company it accused of copyright infringement",
+        "summary": "What's a little IP theft between friends?",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-2961cd17af71ba27",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/18/homeys-new-device-updates-feature-shows-what-matter-was-supposed-to-be-all-along/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T18:33:00.000Z",
     "categories": [
       "apple",
       "tecnologia-general",
+      "programas-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "HomeKit Weekly: Homey’s new Device Updates feature shows what Matter was supposed to be all along",
+        "summary": "Firmware updates have been the weakest link for a decade with smart homes. Every sensor, light bulb, and smart lock in your house runs software that should be updated regularly . This is on top of even if they have software updates. Homey just announced a fix for a big piece of that, and the way it handles Matter devices is the part that Apple Home users should take note of. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-70caa6be7824d2ac",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/policy/997573/virginia-governor-spanberger-data-center-ai-task-force",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T18:29:17.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Virginia governor creates an AI task force and moves to restrain data centers",
+        "summary": "Virginia Gov. Abigail Spanberger ordered the state government to take steps that could empower local communities to have a larger say in data center development and slow down approvals in a state that is already home to the data center capital of the world. Executive Order 22 bans executive branch officials from signing nondisclosure agreements […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-a1a8b07c6a19beb0",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/entertainment/997555/karandeep-anand-disney-character-ai",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T18:27:04.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Disney’s first CTO is Character.AI’s former CEO",
+        "summary": "You would think that a multimedia conglomerate as large as Disney would have a few chief technology officers by now, but the company has just appointed someone to the position for the very first time. Today, Disney announced that Karandeep Anand is joining the company as its new CTO. Anand will report directly to recently […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-cdd833b590685dc7",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/18/disneys-first-cto-led-an-ai-startup-it-once-accused-of-copying-its-characters/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T17:59:53.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Disney’s first CTO led an AI startup it once accused of copying its characters",
+        "summary": "The former CEO of Character.AI, which Disney previously sent a cease-and-desist letter to, will serve as the company's first-ever chief technology officer.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-5b4cd47a41da464b",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/18/apple-vp-of-hardware-talks-iphone-duo-durability-crease-hinge-and-more/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T17:52:15.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple VP of hardware talks iPhone Duo durability, crease, hinge, and more",
+        "summary": "Apple’s new Vice President of Hardware Engineering, Tom Marieb, sat down with TechRadar for an interview all about iPhone Duo. Here’s what he said about iPhone Duo’s durability, the hinge, display crease, and more. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-51229c633e7acb3a",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/18/in-india-the-new-iphone-can-arrive-faster-than-a-pizza/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T17:45:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
       "apps-accesibles"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "iOS 27’s Wallet app adds feature that will make you want to use Apple Cash",
-        "summary": "Apple Wallet is better than ever in iOS 27 thanks to a handful of new features , including a clever solution for splitting bills with friends and family via Apple Cash. Here’s how it works. more…",
+        "title": "In India, the new iPhone can arrive faster than a pizza",
+        "summary": "Availability of Apple's iPhone 18 Pro series turned patchy within hours of its debut on India's quick-commerce apps.",
         "body": ""
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-b8983b24bbe389e6",
+    "id": "ars-technica-56f999d3e802001c",
     "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/18/ive-now-completely-changed-my-mind-about-apple-glasses/",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/tech-policy/2026/09/us-government-website-used-chinese-model-the-fbi-called-malicious/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-18T16:00:00.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "gafas-inteligentes"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "I’ve now completely changed my mind about Apple Glasses",
-        "summary": "The first smart glasses were Google Glass , launched way back in 2014. The product failed for a number of reasons, but the biggest of these was privacy concerns around video recording capabilities, leading to users being labeled “glassholes.” The same phenomenon now seems to have finally caught up with Meta Glasses, leading me to completely change my mind about the requirement for Apple Glasses to have video recording capabilities … more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-7cd593a7e09d0d0b",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/18/family-offices-are-clamoring-for-ai-investments/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T16:00:00.000Z",
+    "publishedAt": "2026-09-18T17:28:50.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -66,104 +259,32 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Family offices are clamoring for AI investments",
-        "summary": "Whether it's a permanent shift or part of a familiar cycle is worth asking, though.",
+        "title": "US government website used Chinese model the FBI called \"malicious\"",
+        "summary": "The Federal Register website briefly used an open source Chinese AI search tool.",
         "body": ""
       }
     },
     "media": null
   },
   {
-    "id": "the-verge-002ae5bef19d3196",
+    "id": "the-verge-725db3e8d03e09b9",
     "type": "news",
     "sourceId": "the-verge",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/997444/openai-hack-claude-heif-heist",
+    "originalUrl": "https://www.theverge.com/podcast/997366/the-real-story-of-the-iphone-18-pros-camera",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-18T15:30:16.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Security researchers used Claude to help them hack into OpenAI",
-        "summary": "A team of three independent security researchers at Hacktron says it took less than 72 hours for them to hack into OpenAI employee accounts using Anthropic's Claude Opus 4.8 and 5, the Wall Street Journal reports. They were able to access OpenAI's GitHub repository, called \"Monorepo,\" which reportedly contains \"OpenAI's algorithmic secrets,\" according to the […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-f31e4530a15dfbf0",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/18/open-or-closed-ai-nvidias-nader-khalil-and-sydney-sykes-take-on-one-of-the-decisions-shaping-next-gen-startups-at-techcrunch-disrupt-2026/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T15:30:00.000Z",
+    "publishedAt": "2026-09-18T17:06:37.000Z",
     "categories": [
       "tecnologia-general",
-      "ia-accesibilidad"
+      "apple"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Open or closed AI? Nvidia’s Nader Khalil and Sydney Sykes take on one of the decisions shaping next-gen startups at TechCrunch Disrupt 2026",
-        "summary": "Nvidia's Nader Khalil and Sydney Sykes discuss one of the decisions shaping next-gen startups on the Builders Stage at TechCrunch Disrupt 2026.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-c8956b375f3dec7b",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/18/metas-muse-hits-mac-letting-the-ai-take-actions-on-your-computer/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T15:22:48.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta’s Muse hits Mac, letting the AI take actions on your computer",
-        "summary": "Muse is now available on the Mac, where it can work with your files and apps to take action on your behalf.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-5181004bcb2fe42c",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/18/iphone-18-pro-apple-watch-series-12-and-ultra-4-airpods-5-now-available-in-stores/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T15:14:47.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iPhone 18 Pro, Apple Watch Series 12 and Ultra 4, AirPods 5 now available in stores",
-        "summary": "Today is a big launch day for new Apple products, with iPhone 18 Pro and Pro Max, Apple Watch Series 12 and Ultra 4, and AirPods 5 all available in Apple Stores and from other retailers worldwide. more…",
+        "title": "The real story of the iPhone 18 Pro’s camera",
+        "summary": "It's one of the most fascinating years in a while when it comes to iPhone camera upgrades. The big story of the iPhone 18 Pro is the variable aperture main lens, which lets you open the aperture up wider for better low light shots and make the aperture smaller for better depth of field in […]",
         "body": ""
       }
     },
@@ -287,126 +408,6 @@
       "en": {
         "title": "Google's revamped CC is an AI agent for families and groups",
         "summary": "CC gives an AI agent its own Google account in your family or group and sends all members a daily briefing.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-6a4f48d94c2004d5",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2261909/anthropic-says-claude-leads-26-percent-of-its-ai-research-and-development/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T22:30:01.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Anthropic says Claude 'leads' 26 percent of its AI R&D work",
-        "summary": "The company shared the stat alongside three measurements that help communicate the pace of AI development.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-ae4ee1b9dcdb30b4",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/09/nato-backed-startup-adapts-ai-for-autonomous-drone-recon-and-attack-missions/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T22:12:58.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Small AI models let drones autonomously identify and attack battlefield targets",
-        "summary": "Scaleout deploys decentralized AI-driven learning to military bases and drones.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-f550446d1d4c2fb5",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/google/2026/09/google-announces-new-experimental-cc-ai-agent-for-families/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T20:24:34.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google announces new experimental \"CC\" AI agent for families",
-        "summary": "Multiple family members can share data to help the agent make plans and complete tasks.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-41fa5eb1ca83f666",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/996923/ai-safety-slow-openai-anthropic",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T19:28:24.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The AI Superintelligence Slowdown",
-        "summary": "Remember when tech leaders would tell their employees to “move fast and break things”? It seemed that would be the way of AI too. But after a summer where rogue AI agents became reality, and researchers warned that AI could kill us all, a number of leading US AI companies are publicly suggesting it’s time […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-2274af71fe03e644",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/997134/anthropic-claude-code-projects",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-17T18:58:05.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Claude Code relaunches Projects to manage multiple AI agents in the cloud",
-        "summary": "The revamped projects feature in Claude Code allows users to run multiple agents under the same roof, with a shared memory, goals, and library of files and artifacts. Similar to Grok Bot and other tools that manage groups of AI agents, each project has \"threads\" running different tasks in parallel, with a \"coordinator\" directing everything: […]",
         "body": ""
       }
     },

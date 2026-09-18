@@ -2,6 +2,11 @@ name: Deploy download analyzer
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - 'feature/activate-download-analyzer'
+    paths:
+      - '.github/workflows/deploy-download-worker.yml'
 
 permissions:
   contents: read
@@ -11,6 +16,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Worker tooling
+        working-directory: download-worker
+        run: npm install --no-audit --no-fund
+      - name: Run Worker tests
+        working-directory: download-worker
+        run: npm test
       - name: Deploy TifloAcosta download analyzer
         uses: cloudflare/wrangler-action@v3
         with:

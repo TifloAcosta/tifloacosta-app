@@ -23,10 +23,8 @@ jobs:
           from pathlib import Path
           path = Path('downloads.js')
           text = path.read_text(encoding='utf-8')
-          old = """    nav.append(launcher);"""
-          new = """    const videosLauncher = document.getElementById('home-open-videos');
-    if (videosLauncher && videosLauncher.parentElement === nav) nav.insertBefore(launcher, videosLauncher);
-    else nav.append(launcher);"""
+          old = "    nav.append(launcher);"
+          new = "    const videosLauncher = document.getElementById('home-open-videos');\n    if (videosLauncher && videosLauncher.parentElement === nav) nav.insertBefore(launcher, videosLauncher);\n    else nav.append(launcher);"
           if old not in text:
               raise SystemExit('Expected launcher insertion was not found')
           path.write_text(text.replace(old, new, 1), encoding='utf-8')

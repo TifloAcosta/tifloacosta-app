@@ -4,9 +4,10 @@ import test from 'node:test';
 
 const read = file => readFile(new URL(`../${file}`, import.meta.url), 'utf8');
 
-test('analyzer sends the target URL in a POST JSON body, not in the endpoint query string', async () => {
+test('analyzer is prepared but remains disabled until the Worker is deployed', async () => {
   const [source, config] = await Promise.all([read('downloads.js'), read('download-config.js')]);
-  assert.match(config, /https:\/\/download\.tifloacosta\.com\/analyze/);
+  assert.match(config, /endpoint:\s*''/);
+  assert.match(config, /plannedEndpoint:\s*'https:\/\/download\.tifloacosta\.com\/analyze'/);
   assert.match(source, /method:\s*'POST'/);
   assert.match(source, /body:\s*JSON\.stringify\(\{ url \}\)/);
   assert.doesNotMatch(source, /endpoint\s*\+\s*['"`]\?/);

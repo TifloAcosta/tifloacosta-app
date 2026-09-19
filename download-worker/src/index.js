@@ -232,7 +232,10 @@ export default {
     const origin = request.headers.get('origin') || '';
     if (origin && !ALLOWED_ORIGINS.has(origin)) return json(errorPayload('forbidden_origin', 'Origin not allowed.'), 403, '');
 
-    const pathname = new URL(request.url).pathname;
+    const rawPathname = new URL(request.url).pathname;
+    const pathname = rawPathname.startsWith('/api/download/')
+      ? rawPathname.slice('/api/download'.length)
+      : rawPathname;
     if (request.method === 'GET' && pathname === '/health') {
       return json({ status: 'ok', service: 'tifloacosta-download-analyzer' }, 200, origin);
     }

@@ -1,5 +1,152 @@
 [
   {
+    "id": "techcrunch-d5b6bc6e9a751206",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/18/tilly-norwoods-press-tour-is-going-about-as-well-as-youd-expect-for-an-ai/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-19T00:12:07.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Tilly Norwood’s press tour is going about as well as you’d expect for an AI",
+        "summary": "In one particularly odd interview, Norwood seems to malfunction and begin speaking Chinese.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-0f7a948640aa6e6b",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5google.com/2026/09/18/gemini-macos-imessage/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T23:57:57.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "windows",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Gemini app for macOS adding send and read iMessage integration",
+        "summary": "Google’s latest update to the Gemini app for macOS readies local iMessage integration. This follows the app coming to Windows last week. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-8a85ab530e356a25",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/18/a-startup-that-builds-other-startups-raised-100m-and-is-all-in-on-physical-ai/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T23:25:01.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "A startup that builds other startups raised $100M, and is all-in on physical AI",
+        "summary": "UP.Labs, now doing business under the name Vantora, is building startups for industrial corporations.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-efb05293c8c30a7f",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/18/anthropic-is-operating-a-lab-that-conducts-biology-experiments/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T23:13:31.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Anthropic is operating a lab that conducts biology experiments",
+        "summary": "AI leaders have been promising that AI is the key to curing human disease. Anthropic researchers have also been warning that AI might kill us all.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-46c2eed521afd193",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/18/the-quantified-scientist-tests-the-apple-watch-series-12s-new-heart-rate-sensor/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T23:08:18.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The Quantified Scientist tests the Apple Watch Series 12’s new heart rate sensor",
+        "summary": "In a new video, The Quantified Scientist’s Rob ter Horst compares the new Apple Watch Series 12’s heart rate sensor against a Polar H10 ECG chest strap. Here’s what he found. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-b025cc4b6dba5ce7",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2263043/ai-almost-led-the-us-military-to-attack-china-report-says/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T22:44:45.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "AI almost led the US military to start a war with China, report says",
+        "summary": "CNN's sources claim the US nearly attacked a Chinese ship it believed was carrying nuclear weapon components.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "the-verge-b6e66c4a57c4fa1f",
     "type": "news",
     "sourceId": "the-verge",
@@ -72,48 +219,24 @@
     "media": null
   },
   {
-    "id": "9to5mac-6e441f894e313e85",
+    "id": "ars-technica-22f5cb6f1ff52a6a",
     "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/18/download-the-iphone-duos-official-light-and-dark-wallpapers-here/",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/ai/2026/09/report-us-almost-boarded-chinese-ship-over-hallucinated-ai-arms-report/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-18T20:05:43.000Z",
+    "publishedAt": "2026-09-18T20:26:33.000Z",
     "categories": [
-      "apple",
-      "tecnologia-general"
+      "tecnologia-general",
+      "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Download the iPhone Duo’s official light and dark wallpapers here",
-        "summary": "Although Apple did not include the iPhone Duo’s wallpapers in iOS 27, the company did include them in the iPhone simulator in Xcode 27.1 beta, released earlier today, which means now you can download them. Get them below. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-0f1682d19ed18f2b",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/18/airpods-pro-3-keep-getting-better-heres-whats-new-ios-27/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T19:45:30.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "AirPods Pro 3 keep getting better, here’s what’s new in iOS 27",
-        "summary": "AirPods just got a variety of new features in iOS 27, several of which are exclusive to AirPods Pro 3. Here’s everything new. more…",
+        "title": "AI hallucination of Chinese nuclear components almost led to US military attack",
+        "summary": "But the military's overall use of AI seems to be accelerating.",
         "body": ""
       }
     },
@@ -138,31 +261,6 @@
       "en": {
         "title": "FAA tees up $875M AI tool to help manage air traffic congestion",
         "summary": "FAA plans for AI tool to help manage DC air traffic before a nationwide rollout.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-952aa831762dfbd2",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/18/a-new-kind-of-ai-model-from-a-chatgpt-inventor-is-thrilling-developers/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T18:49:30.000Z",
-    "categories": [
-      "tecnologia-general",
-      "programas-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "A new kind of AI model from a ChatGPT inventor is thrilling developers",
-        "summary": "Jev, a new kind of AI model, is showing developers a cheaper and faster path to software intelligence.",
         "body": ""
       }
     },
@@ -241,55 +339,6 @@
     "media": null
   },
   {
-    "id": "techcrunch-cdd833b590685dc7",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/18/disneys-first-cto-led-an-ai-startup-it-once-accused-of-copying-its-characters/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T17:59:53.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Disney’s first CTO led an AI startup it once accused of copying its characters",
-        "summary": "The former CEO of Character.AI, which Disney previously sent a cease-and-desist letter to, will serve as the company's first-ever chief technology officer.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-51229c633e7acb3a",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/18/in-india-the-new-iphone-can-arrive-faster-than-a-pizza/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T17:45:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "In India, the new iPhone can arrive faster than a pizza",
-        "summary": "Availability of Apple's iPhone 18 Pro series turned patchy within hours of its debut on India's quick-commerce apps.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "ars-technica-56f999d3e802001c",
     "type": "news",
     "sourceId": "ars-technica",
@@ -308,54 +357,6 @@
       "en": {
         "title": "US government website used Chinese model the FBI called \"malicious\"",
         "summary": "The Federal Register website briefly used an open source Chinese AI search tool.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-5851dfa46c5da573",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/09/researchers-used-claude-to-hack-openai/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T13:30:12.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Researchers used Claude to hack OpenAI",
-        "summary": "Researchers used Claude to reach an OpenAI employee account and sensitive GitHub data.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-33b8a6dd91b94b41",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2262055/microsoft-openai-internet-scraping-largest-theft-of-labor/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T11:22:31.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Microsoft executive called OpenAI's web scraping the 'largest theft of labor in human history'",
-        "summary": "Executives from OpenAI and Microsoft were reportedly worried about ChatGPT training that scraped millions of news articles.",
         "body": ""
       }
     },

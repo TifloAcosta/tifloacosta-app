@@ -45,6 +45,13 @@ El contraste no es un requisito absoluto. Si la noticia tiene suficiente impacto
 
 Para datos especialmente sensibles a cambios —versiones, fechas, precios, compatibilidades, funciones nuevas, retiradas de servicios o incidencias— el sistema debe intentar el contraste con prioridad.
 
+El contraste se hará en dos niveles:
+
+1. Primero, sin coste adicional, buscando coincidencias entre las fuentes y piezas ya recogidas por Actualidad.
+2. Solo para una noticia ya seleccionada y cuando el contraste aporte valor real, el sistema podrá usar búsqueda web desde la API de IA. Se permitirá como máximo una búsqueda de contraste de pago por noticia en una ejecución.
+
+Una fuente oficial de primera parte puede bastar por sí sola cuando publique información sobre su propio producto o servicio, aunque el sistema seguirá intentando contraste cuando sea útil.
+
 ## Estados editoriales
 
 Se mantiene el modelo ya existente:
@@ -167,9 +174,9 @@ Si la evaluación o la generación falla, la noticia debe conservar un estado se
 - `source-only` si no llegó a seleccionarse;
 - `selected` si fue elegida pero la adaptación quedó incompleta.
 
-Los fallos transitorios pueden reintentarse en una ejecución posterior.
+Los fallos transitorios podrán reintentarse hasta dos veces más, con un mínimo de una hora entre intentos. Tras tres intentos fallidos totales, el sistema deja de reintentarlo automáticamente hasta que cambie la fuente o se restablezca manualmente el estado.
 
-El sistema debe evitar bucles: una misma noticia no se reevalúa indefinidamente en cada ejecución. Debe conservar información de intento, resultado y fecha para aplicar una política de reintentos limitada.
+El sistema debe evitar bucles y conservar información de intento, resultado y fecha.
 
 ## Correcciones manuales
 
@@ -177,22 +184,24 @@ Cualquier corrección editorial manual tendrá prioridad sobre la generación au
 
 Una adaptación corregida por una persona no debe ser sobrescrita posteriormente por la automatización.
 
-El sistema debe poder distinguir contenido generado automáticamente de contenido bloqueado para edición manual, aunque ambos terminen publicados como `adapted`.
+Las entradas creadas por la automatización llevarán una huella del contenido generado. Si en una ejecución posterior el registro editorial ya no coincide con esa huella, se considerará que ha habido una edición manual y el sistema bloqueará nuevas sobrescrituras automáticas de esa pieza.
 
 ## Control de costes
 
 El uso de IA debe mantenerse deliberadamente limitado.
 
-Reglas:
+Reglas iniciales:
 
 - no enviar todas las noticias a la IA;
 - no analizar dos veces una URL ya evaluada sin motivo;
 - no regenerar una adaptación ya válida;
 - separar evaluación breve de generación completa;
-- establecer un máximo de adaptaciones nuevas por ejecución;
+- evaluar como máximo 6 candidatas nuevas por ejecución horaria;
+- generar como máximo 2 adaptaciones nuevas por ejecución horaria;
+- permitir como máximo 1 búsqueda web de contraste de pago por noticia seleccionada;
 - si hay más candidatas que el límite, priorizar las de mayor impacto y dejar el resto para ejecuciones posteriores;
 - registrar consumo técnico suficiente para detectar aumentos anómalos;
-- permitir cambiar el modelo sin modificar el resto del sistema.
+- permitir cambiar el modelo y estos límites desde una configuración central sin reescribir el flujo.
 
 No se establece un límite diario rígido que pueda bloquear una jornada excepcional con varias noticias importantes. El límite principal se aplica por ejecución para impedir avalanchas accidentales.
 
@@ -209,7 +218,18 @@ La clave:
 
 La integración debe encapsularse detrás de un módulo propio para poder cambiar de modelo o proveedor en el futuro sin rehacer el flujo editorial.
 
-La configuración del modelo debe quedar centralizada y no dispersa entre scripts.
+El modelo inicial será `gpt-5.6-luna`, por estar orientado a cargas sensibles al coste. El identificador quedará centralizado en configuración para poder sustituirlo sin tocar el resto del sistema. La integración usará respuestas estructuradas para evaluación y generación, y podrá habilitar búsqueda web únicamente en el paso de contraste previsto.
+
+## Archivos y persistencia
+
+La implementación mantendrá responsabilidades separadas:
+
+- `actualidad-editorial.json`: seguirá siendo la fuente de adaptaciones editoriales que se fusionan con las noticias detectadas.
+- `actualidad-auto-state.json`: almacenará el estado técnico de evaluación, intentos, huellas y resultados necesarios para evitar repeticiones y proteger ediciones manuales. No contendrá claves ni razonamientos internos.
+- un archivo de directrices editoriales de TifloAcosta almacenará el tono, criterios de interés y reglas de redacción que se envían al modelo.
+- una configuración central almacenará modelo, límites por ejecución y política de reintentos.
+
+El estado automático se depurará junto con la retención de noticias para evitar crecimiento indefinido.
 
 ## Separación de responsabilidades
 
@@ -240,7 +260,8 @@ Como mínimo:
 - fecha de adaptación;
 - resultado de validación;
 - motivo de rechazo cuando corresponda;
-- indicación de edición manual protegida, si existe.
+- huella de la última adaptación automática válida;
+- indicación de protección por edición manual, si existe.
 
 No se almacenará cadena de pensamiento ni contenido sensible del proveedor.
 
@@ -276,7 +297,8 @@ La implementación deberá incluir pruebas para:
 - rechazo de datos no respaldados cuando sean detectables por las reglas;
 - preservación de una corrección manual;
 - prevención de reevaluación duplicada;
-- límite por ejecución;
+- límites de evaluación, adaptación y contraste por ejecución;
+- política de tres intentos totales;
 - fallo de API y reintento seguro;
 - ausencia de secretos en archivos y logs;
 - integración final con `actualidad.json`.

@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-14-iphone-diagnostics';
+const CACHE = 'tifloacosta-app-v2-15-iphone-results';
 const SHELL = [
   './',
   './index.html',

@@ -1,5 +1,103 @@
 [
   {
+    "id": "techcrunch-7aedb6e7fb3318d1",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/19/trump-suggests-rebranding-ai-with-a-new-name-says-hes-also-creating-an-ai-force/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-19T19:57:47.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Trump suggests rebranding AI with a new name, says he’s also creating an AI Force",
+        "summary": "Trump claimed, without evidence, that the AI backlash is a Democratic hoax.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-6f24bf7fadcd93ac",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/19/indie-app-spotlight-gaspulse-lets-you-keep-an-eye-on-gas-price-trends-around-you/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-19T19:30:00.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "windows",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Indie App Spotlight: ‘GasPulse’ lets you keep an eye on gas price trends around you",
+        "summary": "Welcome to Indie App Spotlight . This is a weekly 9to5Mac series where we showcase the latest apps in the indie app world. If you’re a developer and would like your app featured, get in contact . In this day and age, gas prices fluctuate quite a lot. If you want to have a better idea of how things are flowing, GasPulse is a great tool – giving you trends, historical prices, and an outlook to follow on your iPhone. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-cba6baebce3e46fc",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2263237/now-trump-says-hes-creating-an-ai-force/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-19T19:22:20.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Now Trump says he's creating an AI Force",
+        "summary": "The president said he will soon announce an \"AI czar\" to run this newly made-up agency.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-3e3be95dde65c5dc",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2263235/anthropic-picks-accenture-for-third-party-ai-safety-evaluations/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-19T18:33:46.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Anthropic picks Accenture for third-party AI safety evaluations",
+        "summary": "This move represents the first step in the CEO's plan to slow down AI development.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "engadget-07354fc7cc9919fa",
     "type": "news",
     "sourceId": "engadget",
@@ -48,30 +146,6 @@
     "media": null
   },
   {
-    "id": "engadget-4166356c81259b96",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2263218/california-governor-wants-to-implement-a-kill-switch-for-frontier-ai-models/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-19T17:00:01.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "California governor wants to implement a kill switch for frontier AI models",
-        "summary": "Newsom's executive order calls for an expert panel to develop new AI safety measures.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "accessible-android-31c50c6553225d4d",
     "type": "news",
     "sourceId": "accessible-android",
@@ -91,30 +165,6 @@
       "en": {
         "title": "Accessimind Screen Reader",
         "summary": "Accessimind Reader is a screen reader application developed to enable visually impaired and partially sighted users to use their Android phones more clearly, quickly, and…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-63cb4627ea358209",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2258194/how-to-switch-between-two-phones-apple-carplay/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-19T16:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "How to switch between two phones on CarPlay",
-        "summary": "When using Apple's CarPlay, it will automatically connect to the first iPhone it was paired with. Here's how to get it to connect to a different device.",
         "body": ""
       }
     },
@@ -235,54 +285,6 @@
       "en": {
         "title": "Our top iPhone 18 Pro accessories to upgrade your setup [Updated]",
         "summary": "We are taking look at some of the iPhone 18 Pro accessories we are picking up for ourselves this year before Friday’s delivery day. If you ask me Apple’s AirTag 2 and a fresh set of AirPods Pro 3 (or AirPods 5) are the best accessories you can buy for your new iPhone 18 Pro, never mind the world’s greatest Polishing Cloth, but we are digging in a bit deeper here – chargers, MagSafe mounts, cases, wallets, and more. Check it all out below. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-f04c8e3c8f6451c2",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/19/apple-work-password-management-is-still-hard-and-dashlanes-new-vault-enforcement-admits-it/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-19T13:00:00.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple @ Work: Enterprise oassword management is still hard, and Dashlane’s new Vault Enforcement aims to fix it",
-        "summary": "Apple @ Work is exclusively brought to you by Mosyle , the only Apple Unified Platform. Mosyle is the only solution that integrates in a single professional grade platform all the solutions necessary to seamlessly and automatically deploy, manage, and protect Apple devices at work. Over 45,000 organizations trust Mosyle to make millions of Apple devices work ready with no effort and at an affordable cost. Request your EXTENDED TRIAL today and understand why Mosyle is everything you need to work with Apple . There was a post on X going viral a few weeks ago about password management. The password keeper book is more secure than most people want to admit. As the user said: Reminder that it is quite difficult to hack a piece of paper. Nobody is gonna zero day a book on a shelf in your house, and if they are somehow motivated enough to steal it, you have bigger things to worry about then your facebook password leaking… With that being said, I still believe a properly implemented password management tool is one of the best security measures you can deploy in your organization. Dashlane is rolling out a new solution to help better secure credentials in the enterprise. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-6e8488b9866d31b2",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/19/vals-backed-by-andreessen-horowitz-is-looking-to-become-the-gold-standard-for-ai-benchmarking/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-19T13:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Vals, backed by Andreessen Horowitz, is looking to become the gold standard for AI benchmarking",
-        "summary": "Vals AI is hoping to make AI benchmarking a more neutral and trustworthy resource in a world increasingly inundated by AI models.",
         "body": ""
       }
     },

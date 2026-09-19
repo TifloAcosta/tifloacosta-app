@@ -32,6 +32,16 @@ const DICTIONARIES = {
       unsupported: 'Este enlace no puede analizarse automáticamente.', unavailable: 'El análisis avanzado no está disponible temporalmente.',
       saveFailed: 'No se pudo guardar el archivo.', defaultFilename: 'archivo'
     },
+    soundSearch: {
+      intro: 'Busca por palabra, elige una categoría o combina ambas opciones.',
+      query: 'Buscar por palabra o frase', queryPlaceholder: 'Por ejemplo: campana, teléfono antiguo, pájaros…',
+      category: 'Categoría', allCategories: 'Todas las categorías', search: 'Buscar sonidos', searching: 'Buscando sonidos…',
+      needCriteria: 'Escribe algo para buscar o elige una categoría.', results: 'Resultados', noResults: 'No se encontraron sonidos con esos criterios.',
+      unavailable: 'La búsqueda interna no está disponible ahora mismo. Puedes seguir usando los otros bancos de sonidos.',
+      duration: 'Duración', format: 'Formato', size: 'Tamaño', license: 'Licencia', author: 'Autor', source: 'Banco',
+      listen: 'Escuchar', openOriginal: 'Abrir original', externalHeading: 'Explorar otros bancos de sonidos',
+      externalIntro: 'También puedes abrir estos bancos externos y continuar buscando allí.', openBank: 'Abrir'
+    },
     favorites: { add: 'Añadir a favoritos', remove: 'Quitar de favoritos', empty: 'Todavía no has añadido ningún favorito.' },
     actualidad: { empty: 'No hay noticias disponibles en este momento.', original: 'Abrir fuente original' },
     library: { empty: 'No hay recursos disponibles en este momento.', open: 'Abrir documento', download: 'Guardar documento' },
@@ -89,6 +99,16 @@ const DICTIONARIES = {
       unreachable: 'The specified page could not be reached.', noFiles: 'No downloadable files were found at that link.',
       unsupported: 'This link cannot be analyzed automatically.', unavailable: 'Advanced analysis is temporarily unavailable.',
       saveFailed: 'The file could not be saved.', defaultFilename: 'file'
+    },
+    soundSearch: {
+      intro: 'Search by word, choose a category, or combine both options.',
+      query: 'Search by word or phrase', queryPlaceholder: 'For example: bell, old telephone, birds…',
+      category: 'Category', allCategories: 'All categories', search: 'Search sounds', searching: 'Searching sounds…',
+      needCriteria: 'Enter something to search for or choose a category.', results: 'Results', noResults: 'No sounds were found for those criteria.',
+      unavailable: 'Internal search is not available right now. You can still use the other sound banks.',
+      duration: 'Duration', format: 'Format', size: 'Size', license: 'License', author: 'Author', source: 'Bank',
+      listen: 'Listen', openOriginal: 'Open original', externalHeading: 'Explore other sound banks',
+      externalIntro: 'You can also open these external banks and continue searching there.', openBank: 'Open'
     },
     favorites: { add: 'Add to favorites', remove: 'Remove from favorites', empty: 'You have not added any favorites yet.' },
     actualidad: { empty: 'There are no news items available right now.', original: 'Open original source' },

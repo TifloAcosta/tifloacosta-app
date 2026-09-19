@@ -1,5 +1,6 @@
 import { safeRedirectTarget, validatePublicUrl } from './security.js';
 import { dedupeCandidates, detectProvider, fileTypeFrom, isLikelyDownloadLink, nameFromHeaders } from './providers.js';
+import { searchFreesound } from './sounds.js';
 
 const ALLOWED_ORIGINS = new Set(['https://tifloacosta.com', 'https://tifloacosta.github.io']);
 const MAX_REDIRECTS = 5;
@@ -34,6 +35,7 @@ function isHtmlContentType(contentType) {
 }
 
 function numericSize(value) {
+  if (value === null || value === undefined || value === '') return null;
   const size = Number(value);
   return Number.isFinite(size) && size >= 0 ? size : null;
 }
@@ -226,7 +228,7 @@ async function analyze(target) {
 }
 
 export default {
-  async fetch(request) {
+  async fetch(request, env = {}) {
     const origin = request.headers.get('origin') || '';
     if (origin && !ALLOWED_ORIGINS.has(origin)) return json(errorPayload('forbidden_origin', 'Origin not allowed.'), 403, '');
 
@@ -235,11 +237,24 @@ export default {
     }
     if (request.method !== 'POST') return json(errorPayload('method_not_allowed', 'Use POST.'), 405, origin);
 
+    const pathname = new URL(request.url).pathname;
+    if (pathname !== '/analyze' && pathname !== '/sounds/search') {
+      return json(errorPayload('not_found', 'Unknown endpoint.'), 404, origin);
+    }
+
     let body;
     try { body = await request.json(); }
-    catch (error) { return json(errorPayload('invalid_url', 'Invalid JSON body.'), 400, origin); }
-    if (!body || typeof body.url !== 'string') return json(errorPayload('invalid_url', 'Missing URL.'), 400, origin);
+    catch (error) {
+      const code = pathname === '/sounds/search' ? 'invalid_search' : 'invalid_url';
+      return json(errorPayload(code, 'Invalid JSON body.'), 400, origin);
+    }
 
+    if (pathname === '/sounds/search') {
+      const result = await searchFreesound(body, env);
+      return json(result, result.status === 'ok' ? 200 : 422, origin);
+    }
+
+    if (!body || typeof body.url !== 'string') return json(errorPayload('invalid_url', 'Missing URL.'), 400, origin);
     const result = await analyze(body.url);
     return json(result, result.status === 'ok' ? 200 : 422, origin);
   }

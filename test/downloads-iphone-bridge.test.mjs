@@ -6,9 +6,9 @@ const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
 test('app core loads the iPhone interaction bridge after both download UIs', async () => {
   const source = await read('app-core.js');
-  const linkUi = source.indexOf("appendScript('downloads.js?v=1.1'");
-  const soundUi = source.indexOf("appendScript('sound-search.js?v=1.0'");
-  const bridge = source.indexOf("appendScript('downloads-iphone-bridge.js?v=1.0'");
+  const linkUi = source.indexOf("appendScript('downloads.js?v=1.3'");
+  const soundUi = source.indexOf("appendScript('sound-search.js?v=1.1'");
+  const bridge = source.indexOf("appendScript('downloads-iphone-bridge.js?v=1.1'");
   assert.ok(linkUi >= 0);
   assert.ok(soundUi >= 0);
   assert.ok(bridge > linkUi);
@@ -47,6 +47,6 @@ test('bridge status announcements remain accessible and service worker precaches
   const [bridge, sw] = await Promise.all([read('downloads-iphone-bridge.js'), read('sw.js')]);
   assert.match(bridge, /setAttribute\('role',\s*'status'\)/);
   assert.match(bridge, /setAttribute\('aria-live',\s*'assertive'\)/);
-  assert.match(sw, /tifloacosta-app-v2-15-iphone-results/);
-  assert.match(sw, /downloads-iphone-bridge\.js\?v=1\.0/);
+  assert.match(sw, /tifloacosta-app-v2-16-download-assets/);
+  assert.match(sw, /downloads-iphone-bridge\.js\?v=1\.1/);
 });

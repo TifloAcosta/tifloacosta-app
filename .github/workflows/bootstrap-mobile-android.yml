@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - feature/android-downloads-reconciliation
     paths:
       - 'mobile/**'
       - '.github/workflows/bootstrap-mobile-android.yml'

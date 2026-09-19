@@ -120,18 +120,6 @@
     "publishedAt": null
   },
   {
-    "id": "applevis-apps-c32fc2263e2fdc72",
-    "title": "norlay",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/mac/productivity/norlay",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Norlay is a free, VoiceOver-first AI assistant for macOS that actually uses your computer for you. Type or speak normally and it searches files, browses the web, reads and writes documents, runs commands, sets reminders, looks at your screen, and shows each step in an activity log — asking your approval before anything irreversible. Every step, reply, and error is announced; optional offline Amy voice speaks replies aloud, with hold-to-talk dictation and a hands-free loop. Works with free AI models (Gemini, OpenRouter, Groq, Ollama, Apple on-device) — no account, no tracking. Requires macOS 14 or later, best on Apple Silicon. Download: https://norlay.fit/download — Docs: https://norlay.fit/docs — Feedback (please use this, not AppleVis comments): https://norlay.fit/feedback",
-    "publishedAt": "2026-09-16T15:02:26.000Z"
-  },
-  {
     "id": "applevis-apps-7b5840f570609115",
     "title": "No wifi mini games",
     "sourceId": "applevis-apps",
@@ -166,18 +154,6 @@
     "platform": "Apple",
     "summary": "Muse is a personal AI agent that can manage email and schedules, book reservations, track spending, compare prices, plan workouts, and handle multistep tasks. It can connect to apps you choose, keep working after you close it, and ask for approval before taking actions. You can interact with Muse either through the native iOS app, through a browser interface at http://muse.ai or through WhatsApp chat messages. Includes a robust free tier, and optional paid subscriptions if you go over.",
     "publishedAt": "2026-09-13T21:30:23.000Z"
-  },
-  {
-    "id": "applevis-apps-75966efe0c087eb0",
-    "title": "Earcade",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/earcade",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Earcade is a collection of nine audio-only games for blind and low vision players. Every game is played entirely by ear; no visual information is required at any point. The games use binaural HRTF spatial audio, so the position and movement of objects is conveyed through where sounds appear around you. Headphones are recommended. Haptic feedback is used alongside audio in most of the games. Menus and navigation are built for VoiceOver. The app is free, has no ads, and no gameplay content is locked behind a purchase. There is an optional tip jar which unlocks nothing.",
-    "publishedAt": "2026-09-13T19:56:43.000Z"
   },
   {
     "id": "applevis-apps-9b1b82d9dfad3d73",
@@ -238,5 +214,29 @@
     "platform": "Apple",
     "summary": "Accessibility-first Markdown writing with VoiceOver-friendly editing, document organization, and flexible exports to Word, PDF, HTML, braille, and more. ghostWriter Markdown is a plain-text writing app for notes, articles, lists, documentation, and anything else you want to say with words. It was built accessibility-first. Not accessibility-eventually, or accessibility-in-the-settings-somewhere. VoiceOver was at the center of the design from the first line of code, as the app has been fully created by a Blind developer. If you write with a screen reader, this app was made for you. If you don't, you get a clean, fast, native editor that never gets in your way. So what's Markdown? Markdown adds structure to writing using a few ordinary punctuation marks. A number sign makes a heading. A dash makes a list item. Your document stays readable as plain text, and you can render it whenever you want to see the finished formatting. You don't have to know any of this to start. The Insert feature can add common elements for you, and a built-in Markdown Reference is always a tap away. Writing Made Easy: • A native editor with the Markdown punctuation kept visible, so you always control the source • Insert Actions for links, images, headings, quotes, code, lists, tasks, tables, and rules • Automatic list continuation for bullets, numbers, and task lists • Indent and outdent with tabs or spaces, your choice • Find and Replace, dictation, braille input, and text selection through native iOS controls • A configurable Status Bar showing line, column, word count, current heading, and selection • Automatic saving as you pause, plus Save Now whenever you want it Useful Navigation: • Outline lists every heading in your document and jumps straight to one, moving both the cursor and VoiceOver focus • A 3-finger horizontal swipe with VoiceOver will move the cursor through your document headings while editing • Jump to Line for long documents • Search across document names and their contents • Your last editing position is remembered in every file Keep Files Organized: • Nested folders you can create, rename, move, and navigate • Pin the documents you keep coming back to • Sort by name, created, modified, or last opened • Recently Deleted holds removed files until you restore them or clear them out • Import Markdown, .txt, Word .docx or Powerpoint presentations to convert them into Markdown Render and Share: • See your Markdown as structured HTML right inside the app • Share complete standalone HTML, Markdown, plain text, ePub, tagged PDF, eBraille, BRF, Microsoft Word documents or even Powerpoint presentations • Rendered output uses real semantic headings, lists, tables, links, and landmarks — so what you share is accessible to whoever receives it Your Files, Your Devices: • Documents are ordinary Markdown files, visible in the Files app • Store them on your device, or turn on iCloud Drive to sync across your iPhone, iPad, and Mac • Open and edit the same files in any other app that reads text • Nothing is locked in a proprietary format, and nothing needs this app to survive Accessibility: Developed toward WCAG 2.2 Level AA and tested with VoiceOver as a primary interaction method. • A predictable, linear VoiceOver reading order • Native controls with the roles and behaviors you already expect • Dynamic Type, including accessibility text sizes, everywhere • System, monospaced, rounded, and serif editor typefaces • Light, dark, and system appearance • Voice Control, Switch Control, and hardware keyboard support • Optional keyboard shortcuts for common actions • Reduced-motion support Privacy: No accounts. No sign-in. No ads. No analytics. No tracking. No data collection of any kind. There is no server behind this app because there doesn't need to be one. Your documents are yours, on your device or in your own iCloud, and they never travel anywhere you don't send them. Made by a blind developer who got tired of using tools that treated screen reader support as an afterthought. Heading",
     "publishedAt": "2026-09-09T06:04:10.000Z"
+  },
+  {
+    "id": "applevis-apps-6633c06159e8f0eb",
+    "title": "Intersector: Intersection Identifier",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/navigation/intersector-intersection-identifier",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "Hear your upcoming intersections while walking, when in a rideshare, or on a bus with the new Live Mode. Intersector helps you quickly identify nearby street intersections using your iPhone’s location and heading. Ask for the nearest intersection, what’s coming up ahead, use Scan Mode to point your phone down the street and hear the intersection it detects, or turn on Live Mode and have Intersector speak your upcoming intersections on a walk or during a ride with your phone locked. Intersector can speak distance, direction, and neighborhood context, and includes optional wording styles so announcements can match how you think about your surroundings. Built with VoiceOver users in mind, Intersector focuses on fast, clear spoken information without turning into turn-by-turn navigation. It is designed as a lightweight orientation tool for understanding nearby cross streets, not as a crossing aid or safety system. Features include: • Nearest intersection announcements • Upcoming intersection announcements • Scan Mode for nearby intersections in the direction you point • Live Mode to announce upcoming intersections automatically while walking or in transportation, using customizable speech • Siri Shortcut support • Optional distance, direction, and neighborhood details • Customizable intersection wording • Support for split intersections where different streets meet the same main street • Manhattan Snob Mode for New York-style direction wording • VoiceOver-friendly controls and spoken feedback • Dynamic Type and large text support. Intersector also has an Apple Watch companion app, so Siri Shortcuts and intersection data can be queried right from your wrist. Intersector uses location and heading data to provide orientation information. Always use your own judgment, mobility skills, and available pedestrian infrastructure when traveling.",
+    "publishedAt": "2026-09-08T23:43:10.000Z"
+  },
+  {
+    "id": "applevis-apps-6a1cfaa5549dda14",
+    "title": "Private LLM - Local & Private AI for iPhone, iPad & Mac",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/productivity/private-llm-local-private-ai-iphone-ipad-mac",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "Discover the Ultimate Privacy-Focused AI Assistant on iOS: Private LLM Unlock a new realm of productivity and creativity on your iPhone and iPad with Private LLM, the premier AI assistant designed with your privacy in mind. Available for a one-time purchase, it offers a range of AI capabilities without needing a subscription. Experience advanced on-device AI that keeps your interactions confidential and offline. Why Private LLM is Your Go-To AI Companion: - Exclusive AI Model Selection: Choose from a diverse set of open-source LLM models optimized for performance and perplexity on iOS with state of the art OmniQuant quantization: including models from Llama 2, Llama 3.2, Llama 3.1, Google Gemma 2, Gemma 3, Microsoft Phi-3, Mistral 7B, Qwen 2.5, Qwen 3, StableLM 3B and many more. Whether you need help with creative brainstorming, coding, or daily questions, customize your AI experience to meet your unique needs. - Integrated with Siri &amp; Shortcuts: Enhance your AI interactions with Siri commands and customizable Shortcuts. Private LLM seamlessly fits within your Apple ecosystem, making your digital assistant more accessible. - Customizable Interactions: Tailor your AI’s responses and interactions with customizable system prompts to match your preferences and needs. - Uncompromised Privacy and Security: With Private LLM, your conversations stay confidential and on your device. Our advanced on-device AI performs robust computing without risking data compromise or needing an internet connection. - Family Sharing &amp; Offline Capabilities: Benefit from a one-time purchase that includes Family Sharing. Download models as needed and enjoy the full functionality of your AI assistant, even without internet access. Supported LLM Model families: - DeepSeek R1 Distill based models - Phi 4 based models - Qwen 3 based models (Qwen3-4B-Instruct-2507) - Qwen 2.5 based models (0.5B, 1.5B, 3B and 7B) - Qwen 2.5 Coder based Models (0.5B, 1.5B, 3B, 7B and 14B) - Llama 3.1 8B based models - Llama 3.2 1B and 3B based models - Google Gemma 2 2B and 9B based models - Google Gemma 3 1B based models - Mistral 7B based models - Yi 6B based models For a full list of supported models, including detailed specifications, please visit privatellm.app/models. Private LLM is not just a chatbot; it’s a comprehensive AI companion designed to respect your privacy while providing versatile, on-demand assistance. Whether you’re enhancing your creative writing, tackling complex programming challenges, or just seeking answers, Private LLM adapts to meet your needs while keeping your data secure. Start your journey with Private LLM today and elevate your productivity and creative projects with the most private AI assistant for iOS devices. Private LLM is a better alternative to generic llama.cpp and MLX wrappers apps like Enchanted, Ollama, LLM Farm, LM Studio, Locally AI, RecurseChat, etc on three fronts: 1. Private LLM uses a faster and highly-optimized mlc-llm based inference engine. 2. Models in Private LLM are quantized using the state of the art quantization algorithms like OmniQuant, while competing apps use naive round-to-nearest quantization. 3. Private LLM is a fully native app built using C++, Metal and Swift with deep integrations with iOS and iPadOS, while many of the competing apps are bloated and non-native Electron or Flutter based apps. Please note that Private LLM only supports inference with text based LLMs. Model support varies by device capabilities.",
+    "publishedAt": "2026-09-08T14:54:19.000Z"
   }
 ]

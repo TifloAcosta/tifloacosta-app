@@ -51,5 +51,5 @@ test('service worker treats all Actualidad catalogs and scripts as live content'
   assert.match(worker, /url\.pathname\.endsWith\('\/actualidad\.json'\)/);
   assert.match(worker, /url\.pathname\.endsWith\('\/actualidad-apps\.json'\)/);
   assert.match(worker, /url\.pathname\.endsWith\('\/actualidad-media\.json'\)/);
-  assert.match(worker, /tifloacosta-app-v2-10-hidden-isolation/);
+  assert.match(worker, /tifloacosta-app-v2-12-sounds/);
 });

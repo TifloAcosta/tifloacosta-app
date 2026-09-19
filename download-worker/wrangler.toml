@@ -1,0 +1,9 @@
+name = "tifloacosta-download-analyzer"
+main = "src/index.js"
+compatibility_date = "2026-09-18"
+workers_dev = false
+routes = [
+  { pattern = "download.tifloacosta.com", custom_domain = true }
+]
+
+# Runtime secret required by /sounds/search: FREESOUND_API_KEY

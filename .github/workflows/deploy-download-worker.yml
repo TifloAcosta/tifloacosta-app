@@ -1,0 +1,91 @@
+name: Deploy download analyzer
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'download-worker/**'
+      - '.github/workflows/deploy-download-worker.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run app tests
+        run: npm test
+      - name: Install Worker tooling
+        working-directory: download-worker
+        run: npm install --no-audit --no-fund
+      - name: Run Worker tests
+        working-directory: download-worker
+        run: npm test
+      - name: Configure Freesound API secret
+        working-directory: download-worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          FREESOUND_API_KEY: ${{ secrets.FREESOUND_API_KEY }}
+        shell: bash
+        run: |
+          if [ -n "$FREESOUND_API_KEY" ]; then
+            printf '%s' "$FREESOUND_API_KEY" | npx wrangler secret put FREESOUND_API_KEY
+          else
+            echo 'FREESOUND_API_KEY is not configured; internal Freesound search will remain unavailable.'
+          fi
+      - name: Deploy TifloAcosta download analyzer
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: download-worker
+          command: deploy
+      - name: Smoke test deployed analyzer
+        shell: bash
+        run: |
+          status=$(curl -sS -D headers.txt -o response.json -w "%{http_code}" \
+            -X POST \
+            -H 'Origin: https://tifloacosta.com' \
+            -H 'Content-Type: application/json' \
+            --data '{"url":"https://example.com/"}' \
+            https://download.tifloacosta.com/analyze)
+          cat response.json
+          test "$status" = "422"
+          grep -q '"code":"no_files"' response.json
+          grep -qi '^access-control-allow-origin: https://tifloacosta.com' headers.txt
+
+          sounds_status=$(curl -sS -o sounds-response.json -w "%{http_code}" \
+            -X POST \
+            -H 'Origin: https://tifloacosta.com' \
+            -H 'Content-Type: application/json' \
+            --data '{"query":"","category":"","page":1}' \
+            https://download.tifloacosta.com/sounds/search)
+          cat sounds-response.json
+          test "$sounds_status" = "422"
+          grep -q '"code":"invalid_search"' sounds-response.json
+      - name: Check live Freesound search when configured
+        env:
+          FREESOUND_API_KEY: ${{ secrets.FREESOUND_API_KEY }}
+        shell: bash
+        run: |
+          if [ -n "$FREESOUND_API_KEY" ]; then
+            curl -sS -X POST \
+              -H 'Origin: https://tifloacosta.com' \
+              -H 'Content-Type: application/json' \
+              --data '{"query":"bell","category":"","page":1}' \
+              https://download.tifloacosta.com/sounds/search > live-sounds-response.json
+            cat live-sounds-response.json
+            if ! grep -q '"provider":"freesound"' live-sounds-response.json; then
+              echo 'Freesound is temporarily unavailable; deployment remains valid because the app has external-bank fallback.'
+            fi
+          else
+            echo 'Skipping live Freesound check because the GitHub secret is not configured.'
+          fi

@@ -1,0 +1,34 @@
+name: Test download feature
+
+on:
+  push:
+    branches:
+      - 'feature/**'
+    paths:
+      - 'app-core.js'
+      - 'downloads.js'
+      - 'downloads-core.js'
+      - 'downloads-hub.js'
+      - 'downloads.css'
+      - 'download-config.js'
+      - 'sound-search*.js'
+      - 'sw.js'
+      - 'privacidad/**'
+      - 'download-worker/**'
+      - 'test/downloads-*.test.mjs'
+      - 'test/sound-search-*.test.mjs'
+      - '.github/workflows/deploy-download-worker.yml'
+      - '.github/workflows/test-downloads.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm test

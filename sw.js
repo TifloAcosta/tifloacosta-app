@@ -1,10 +1,18 @@
-const CACHE = 'tifloacosta-app-v2-10-hidden-isolation';
+const CACHE = 'tifloacosta-app-v2-12-sounds';
 const SHELL = [
   './',
   './index.html',
   './styles.css?v=1.2',
   './data.js?v=0.19',
   './app-core.js?v=1.3',
+  './downloads-core.js?v=1.1',
+  './download-config.js?v=1.1',
+  './downloads-hub.js?v=1.0',
+  './downloads.js?v=1.1',
+  './downloads.css?v=1.1',
+  './sound-search-core.js?v=1.0',
+  './sound-search-config.js?v=1.0',
+  './sound-search.js?v=1.0',
   './actualidad-core.js?v=1.6',
   './actualidad.js?v=1.2',
   './actualidad-media.js?v=1.1',

@@ -47,6 +47,6 @@ test('bridge status announcements remain accessible and service worker precaches
   const [bridge, sw] = await Promise.all([read('downloads-iphone-bridge.js'), read('sw.js')]);
   assert.match(bridge, /setAttribute\('role',\s*'status'\)/);
   assert.match(bridge, /setAttribute\('aria-live',\s*'assertive'\)/);
-  assert.match(sw, /tifloacosta-app-v2-14-iphone-diagnostics/);
+  assert.match(sw, /tifloacosta-app-v2-15-iphone-results/);
   assert.match(sw, /downloads-iphone-bridge\.js\?v=1\.0/);
 });

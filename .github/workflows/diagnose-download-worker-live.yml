@@ -1,0 +1,54 @@
+name: Diagnose live download analyzer
+
+on:
+  push:
+    branches:
+      - 'feature/diagnose-download-worker-live'
+    paths:
+      - '.github/workflows/diagnose-download-worker-live.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check preflight and exact GNU Wget analysis
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          echo '=== OPTIONS preflight ==='
+          curl -sS -D preflight-headers.txt -o /dev/null -w 'HTTP %{http_code}\n' \
+            -X OPTIONS \
+            -H 'Origin: https://tifloacosta.com' \
+            -H 'Access-Control-Request-Method: POST' \
+            -H 'Access-Control-Request-Headers: content-type' \
+            https://download.tifloacosta.com/analyze
+          cat preflight-headers.txt
+
+          echo '=== POST GNU Wget ==='
+          status=$(curl -sS -D post-headers.txt -o response.json -w '%{http_code}' \
+            -X POST \
+            -H 'Origin: https://tifloacosta.com' \
+            -H 'Content-Type: application/json' \
+            --data '{"url":"https://ftp.gnu.org/gnu/wget/"}' \
+            https://download.tifloacosta.com/analyze)
+          echo "HTTP $status"
+          cat post-headers.txt
+          python - <<'PY'
+          import json
+          with open('response.json', encoding='utf-8') as f:
+              data = json.load(f)
+          print('status:', data.get('status'))
+          print('code:', data.get('code'))
+          print('provider:', data.get('provider'))
+          items = data.get('items') or []
+          print('items:', len(items))
+          if items:
+              print('first:', items[0].get('name'), items[0].get('url'))
+          PY
+
+          grep -qi '^access-control-allow-origin: https://tifloacosta.com' post-headers.txt
+          test "$status" = "200"

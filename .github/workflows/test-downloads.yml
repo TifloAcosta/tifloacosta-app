@@ -32,3 +32,17 @@ jobs:
         with:
           node-version: '22'
       - run: npm test
+      - name: Diagnose public app startup
+        shell: bash
+        run: |
+          set +e
+          echo '=== DNS custom domain ==='
+          getent ahosts tifloacosta.com || true
+          echo '=== Custom domain homepage ==='
+          curl -L -sS -o /dev/null --max-time 20 -w 'custom_home http=%{http_code} dns=%{time_namelookup} connect=%{time_connect} ttfb=%{time_starttransfer} total=%{time_total}\n' https://tifloacosta.com/
+          echo '=== GitHub Pages origin ==='
+          curl -L -sS -o /dev/null --max-time 20 -w 'github_pages http=%{http_code} dns=%{time_namelookup} connect=%{time_connect} ttfb=%{time_starttransfer} total=%{time_total}\n' https://tifloacosta.github.io/
+          echo '=== Custom app-core ==='
+          curl -L -sS -o /dev/null --max-time 20 -w 'app_core http=%{http_code} dns=%{time_namelookup} connect=%{time_connect} ttfb=%{time_starttransfer} total=%{time_total}\n' 'https://tifloacosta.com/app-core.js?v=1.5'
+          echo '=== Same-origin Worker health ==='
+          curl -L -sS --max-time 20 -w '\nhealth http=%{http_code} dns=%{time_namelookup} connect=%{time_connect} ttfb=%{time_starttransfer} total=%{time_total}\n' https://tifloacosta.com/api/download/health

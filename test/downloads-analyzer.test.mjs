@@ -35,3 +35,10 @@ test('download Worker deploys from main when analyzer code changes', async () =>
   assert.match(workflow, /- ['"]?download-worker\/\*\*['"]?/);
   assert.match(workflow, /- ['"]?\.github\/workflows\/deploy-download-worker\.yml['"]?/);
 });
+
+test('deployment smoke-tests the main-domain download API before the client switches to it', async () => {
+  const workflow = await read('.github/workflows/deploy-download-worker.yml');
+  assert.match(workflow, /https:\/\/tifloacosta\.com\/api\/download\/health/);
+  assert.match(workflow, /https:\/\/tifloacosta\.com\/api\/download\/analyze/);
+  assert.match(workflow, /"code":"no_files"/);
+});

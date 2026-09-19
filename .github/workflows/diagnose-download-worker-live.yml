@@ -14,56 +14,30 @@ jobs:
   diagnose:
     runs-on: ubuntu-latest
     steps:
-      - name: Check app origins and exact GNU Wget analysis
+      - name: Inspect DNS and IP family reachability
         shell: bash
         run: |
           set -euo pipefail
 
-          echo '=== App domain redirects ==='
-          curl -sS -o /dev/null -w 'bare: HTTP %{http_code} final=%{url_effective}\n' -L https://tifloacosta.com/
-          curl -sS -o /dev/null -w 'www: HTTP %{http_code} final=%{url_effective}\n' -L https://www.tifloacosta.com/ || true
-
-          echo '=== OPTIONS preflight from production origin ==='
-          curl -sS -D preflight-headers.txt -o /dev/null -w 'HTTP %{http_code}\n' \
-            -X OPTIONS \
-            -H 'Origin: https://tifloacosta.com' \
-            -H 'Access-Control-Request-Method: POST' \
-            -H 'Access-Control-Request-Headers: content-type' \
-            https://download.tifloacosta.com/analyze
-          cat preflight-headers.txt
-
-          echo '=== POST GNU Wget from production origin ==='
-          status=$(curl -sS -D post-headers.txt -o response.json -w '%{http_code}' \
-            -X POST \
-            -H 'Origin: https://tifloacosta.com' \
-            -H 'Content-Type: application/json' \
-            --data '{"url":"https://ftp.gnu.org/gnu/wget/"}' \
-            https://download.tifloacosta.com/analyze)
-          echo "HTTP $status"
-          cat post-headers.txt
-          python - <<'PY'
-          import json
-          with open('response.json', encoding='utf-8') as f:
-              data = json.load(f)
-          print('status:', data.get('status'))
-          print('code:', data.get('code'))
-          print('provider:', data.get('provider'))
-          items = data.get('items') or []
-          print('items:', len(items))
-          if items:
-              print('first:', items[0].get('name'), items[0].get('url'))
-          PY
-
-          grep -qi '^access-control-allow-origin: https://tifloacosta.com' post-headers.txt
-          test "$status" = "200"
-
-          echo '=== Origin matrix ==='
-          for origin in 'https://tifloacosta.github.io' 'https://www.tifloacosta.com' 'null'; do
-            code=$(curl -sS -o origin-response.json -w '%{http_code}' \
-              -X POST \
-              -H "Origin: $origin" \
-              -H 'Content-Type: application/json' \
-              --data '{"url":"https://example.com/"}' \
-              https://download.tifloacosta.com/analyze)
-            echo "$origin -> HTTP $code: $(cat origin-response.json)"
+          echo '=== Public DNS A/AAAA ==='
+          for resolver in 1.1.1.1 8.8.8.8 9.9.9.9; do
+            echo "--- resolver $resolver ---"
+            dig +time=3 +tries=1 @"$resolver" download.tifloacosta.com A || true
+            dig +time=3 +tries=1 @"$resolver" download.tifloacosta.com AAAA || true
           done
+
+          echo '=== Nameservers ==='
+          dig +time=3 +tries=1 @1.1.1.1 tifloacosta.com NS || true
+
+          echo '=== DNSSEC / trace ==='
+          dig +dnssec +time=3 +tries=1 @1.1.1.1 download.tifloacosta.com A || true
+          dig +trace +time=3 +tries=1 download.tifloacosta.com A || true
+
+          echo '=== HTTPS by IP family ==='
+          curl -4 -sS -o ipv4-body.txt -D ipv4-headers.txt -w 'IPv4 HTTP %{http_code} remote=%{remote_ip} time=%{time_total}\n' --max-time 12 https://download.tifloacosta.com/analyze || true
+          cat ipv4-headers.txt 2>/dev/null || true
+          cat ipv4-body.txt 2>/dev/null || true
+
+          curl -6 -sS -o ipv6-body.txt -D ipv6-headers.txt -w 'IPv6 HTTP %{http_code} remote=%{remote_ip} time=%{time_total}\n' --max-time 12 https://download.tifloacosta.com/analyze || true
+          cat ipv6-headers.txt 2>/dev/null || true
+          cat ipv6-body.txt 2>/dev/null || true

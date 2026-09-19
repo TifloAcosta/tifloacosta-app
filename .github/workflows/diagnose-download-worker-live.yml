@@ -14,30 +14,53 @@ jobs:
   diagnose:
     runs-on: ubuntu-latest
     steps:
-      - name: Inspect DNS and IP family reachability
+      - name: Inspect Worker custom domain binding
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         shell: bash
         run: |
           set -euo pipefail
 
-          echo '=== Public DNS A/AAAA ==='
-          for resolver in 1.1.1.1 8.8.8.8 9.9.9.9; do
-            echo "--- resolver $resolver ---"
-            dig +time=3 +tries=1 @"$resolver" download.tifloacosta.com A || true
-            dig +time=3 +tries=1 @"$resolver" download.tifloacosta.com AAAA || true
-          done
+          curl -sS \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/domains?hostname=download.tifloacosta.com" \
+            -o domains.json
 
-          echo '=== Nameservers ==='
-          dig +time=3 +tries=1 @1.1.1.1 tifloacosta.com NS || true
+          python - <<'PY'
+          import json
+          data = json.load(open('domains.json', encoding='utf-8'))
+          print('success:', data.get('success'))
+          print('errors:', data.get('errors'))
+          for item in data.get('result') or []:
+              print('hostname:', item.get('hostname'))
+              print('service:', item.get('service'))
+              print('environment:', item.get('environment'))
+              print('zone_name:', item.get('zone_name'))
+              print('zone_id:', item.get('zone_id'))
+              print('cert_id_present:', bool(item.get('cert_id')))
+          PY
 
-          echo '=== DNSSEC / trace ==='
-          dig +dnssec +time=3 +tries=1 @1.1.1.1 download.tifloacosta.com A || true
-          dig +trace +time=3 +tries=1 download.tifloacosta.com A || true
+          zone_id=$(python - <<'PY'
+          import json
+          data = json.load(open('domains.json', encoding='utf-8'))
+          result = data.get('result') or []
+          print(result[0].get('zone_id','') if result else '')
+          PY
+          )
 
-          echo '=== HTTPS by IP family ==='
-          curl -4 -sS -o ipv4-body.txt -D ipv4-headers.txt -w 'IPv4 HTTP %{http_code} remote=%{remote_ip} time=%{time_total}\n' --max-time 12 https://download.tifloacosta.com/analyze || true
-          cat ipv4-headers.txt 2>/dev/null || true
-          cat ipv4-body.txt 2>/dev/null || true
-
-          curl -6 -sS -o ipv6-body.txt -D ipv6-headers.txt -w 'IPv6 HTTP %{http_code} remote=%{remote_ip} time=%{time_total}\n' --max-time 12 https://download.tifloacosta.com/analyze || true
-          cat ipv6-headers.txt 2>/dev/null || true
-          cat ipv6-body.txt 2>/dev/null || true
+          if [ -n "$zone_id" ]; then
+            echo '=== Worker routes for zone ==='
+            curl -sS \
+              -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+              "https://api.cloudflare.com/client/v4/zones/$zone_id/workers/routes" \
+              -o routes.json
+            python - <<'PY'
+          import json
+          data = json.load(open('routes.json', encoding='utf-8'))
+          print('routes_success:', data.get('success'))
+          print('routes_errors:', data.get('errors'))
+          for item in data.get('result') or []:
+              print('route:', item.get('pattern'), '->', item.get('script'))
+          PY
+          fi

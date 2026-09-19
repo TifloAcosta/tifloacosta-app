@@ -24,9 +24,10 @@
       badResponse: 'El analizador devolvió una respuesta que TifloAcosta no pudo interpretar.', timeout: 'El análisis tardó demasiado y se detuvo.', unreachable: 'No se pudo acceder a la página indicada.', unsupported: 'Este enlace no puede analizarse automáticamente.',
       auth: 'Este recurso necesita identificación en el servicio externo.',
       blocked: 'La página ha rechazado el análisis automático o exige permisos adicionales.',
+      blockedExternal: 'Este sitio ha rechazado el análisis automático de TifloAcosta. Puedes intentar abrirlo directamente en tu navegador. Si decides continuar, la seguridad depende del sitio externo.',
       externalHeading: 'Continuar en un servicio externo',
       externalText: 'Vas a salir de TifloAcosta para continuar en un servicio externo. La accesibilidad y el funcionamiento de la página que se abra dependen de ese servicio. TifloAcosta no recibe ni guarda tus credenciales.',
-      externalButton: 'Continuar en el servicio externo', retry: 'Reintentar análisis', pending: 'Tienes un enlace pendiente. Puedes reintentar el análisis.',
+      externalButton: 'Continuar en el servicio externo', openExternal: 'Abrir sitio externo', retry: 'Reintentar análisis', pending: 'Tienes un enlace pendiente. Puedes reintentar el análisis.',
       genericNeedsAnalyzer: 'Para examinar una página web y localizar todos sus archivos hace falta el analizador avanzado.'
     },
     en: {
@@ -41,9 +42,10 @@
       badResponse: 'The analyzer returned a response TifloAcosta could not interpret.', timeout: 'The analysis took too long and was stopped.', unreachable: 'The specified page could not be reached.', unsupported: 'This link cannot be analyzed automatically.',
       auth: 'This resource requires sign-in on the external service.',
       blocked: 'The page refused automated analysis or requires additional permission.',
+      blockedExternal: 'This site refused TifloAcosta automated analysis. You can try opening it directly in your browser. If you continue, security depends on the external site.',
       externalHeading: 'Continue on an external service',
       externalText: 'You are leaving TifloAcosta to continue on an external service. Accessibility and operation on the destination page are the responsibility of that service. TifloAcosta does not receive or store your credentials.',
-      externalButton: 'Continue on the external service', retry: 'Retry analysis', pending: 'You have a pending link. You can retry the analysis.',
+      externalButton: 'Continue on the external service', openExternal: 'Open external site', retry: 'Retry analysis', pending: 'You have a pending link. You can retry the analysis.',
       genericNeedsAnalyzer: 'Advanced analysis is required to inspect a web page and locate all of its files.'
     }
   };
@@ -234,16 +236,17 @@
     catch (error) { /* optional */ }
   }
 
-  function renderExternalNotice(provider, url, authenticationRequired = false) {
+  function renderExternalNotice(provider, url, mode = 'provider') {
     resultsSection.hidden = true;
     externalPanel.replaceChildren();
     externalPanel.hidden = false;
     const heading = element('h3', { text: t().externalHeading });
     heading.tabIndex = -1;
-    const reason = element('p', { text: authenticationRequired ? t().auth : `${providerLabel(provider)}.` });
+    const reasonText = mode === 'auth' ? t().auth : mode === 'blocked' ? t().blockedExternal : `${providerLabel(provider)}.`;
+    const reason = element('p', { text: reasonText });
     const warning = element('p', { text: t().externalText });
     const actions = element('div', { className: 'inline-actions' });
-    const link = element('a', { className: 'button-link', text: t().externalButton });
+    const link = element('a', { className: 'button-link', text: mode === 'blocked' ? t().openExternal : t().externalButton });
     link.href = url;
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
@@ -313,7 +316,11 @@
         return;
       }
       if (payload.code === 'authentication_required') {
-        renderExternalNotice(local.provider, normalized.href, true);
+        renderExternalNotice(local.provider, normalized.href, 'auth');
+        return;
+      }
+      if (payload.code === 'access_denied') {
+        renderExternalNotice(local.provider, normalized.href, 'blocked');
         return;
       }
       if (payload.code === 'no_files') {
@@ -323,7 +330,7 @@
       setStatus(mapError(payload.code || 'bad_response'), true);
     } catch (error) {
       if (local.provider !== 'web') {
-        renderExternalNotice(local.provider, normalized.href, false);
+        renderExternalNotice(local.provider, normalized.href, 'provider');
       } else {
         setStatus(error?.code === 'timeout' ? t().timeout : `${t().unavailable} ${t().genericNeedsAnalyzer}`, true);
       }

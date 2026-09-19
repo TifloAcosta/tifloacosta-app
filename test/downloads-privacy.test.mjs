@@ -15,11 +15,15 @@ test('privacy policy discloses transient URL analysis without credentials or fil
   assert.match(html, /does not store credentials/i);
 });
 
-test('service worker refreshes the download feature files', async () => {
+test('service worker refreshes the download and sound-search feature files', async () => {
   const source = await read('sw.js');
-  assert.match(source, /tifloacosta-app-v2-11-downloads/);
-  assert.match(source, /downloads-core\.js\?v=1\.0/);
-  assert.match(source, /download-config\.js\?v=1\.0/);
-  assert.match(source, /downloads\.js\?v=1\.0/);
-  assert.match(source, /downloads\.css\?v=1\.0/);
+  assert.match(source, /tifloacosta-app-v2-12-sounds/);
+  assert.match(source, /downloads-core\.js\?v=1\.1/);
+  assert.match(source, /download-config\.js\?v=1\.1/);
+  assert.match(source, /downloads-hub\.js\?v=1\.0/);
+  assert.match(source, /downloads\.js\?v=1\.1/);
+  assert.match(source, /downloads\.css\?v=1\.1/);
+  assert.match(source, /sound-search-core\.js\?v=1\.0/);
+  assert.match(source, /sound-search-config\.js\?v=1\.0/);
+  assert.match(source, /sound-search\.js\?v=1\.0/);
 });

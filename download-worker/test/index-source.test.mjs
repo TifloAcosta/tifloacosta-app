@@ -39,6 +39,19 @@ test('unknown origins remain rejected', async () => {
   assert.equal(response.headers.get('access-control-allow-origin'), null);
 });
 
+test('GET /health returns an explicit browser-readable service status', async () => {
+  const request = new Request('https://download.tifloacosta.com/health', {
+    method: 'GET'
+  });
+  const response = await worker.fetch(request, {});
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get('content-type'), 'application/json; charset=utf-8');
+  assert.deepEqual(await response.json(), {
+    status: 'ok',
+    service: 'tifloacosta-download-analyzer'
+  });
+});
+
 test('worker validates every redirect and never proxies complete files', async () => {
   const source = await read('src/index.js');
   assert.match(source, /safeRedirectTarget/);

@@ -15,6 +15,17 @@ test('privacy policy discloses transient URL analysis without credentials or fil
   assert.match(html, /does not store credentials/i);
 });
 
+test('privacy policy discloses sound-search queries and provider boundaries in both languages', async () => {
+  const html = await read('privacidad/index.html');
+  assert.match(html, /Buscar sonidos/);
+  assert.match(html, /Freesound/);
+  assert.match(html, /no mantiene un historial personal de las búsquedas de sonidos/i);
+  assert.match(html, /Search sounds/);
+  assert.match(html, /does not keep a personal history of sound searches/i);
+  assert.match(html, /Mixkit/);
+  assert.match(html, /Pixabay/);
+});
+
 test('service worker refreshes the download and sound-search feature files', async () => {
   const source = await read('sw.js');
   assert.match(source, /tifloacosta-app-v2-12-sounds/);

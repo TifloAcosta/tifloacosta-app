@@ -196,7 +196,7 @@
     const name = element('h4', { text: item.name || 'Archivo' });
     const type = element('p', { className: 'download-result-meta', text: item.type && item.type !== 'unknown' ? item.type.toUpperCase() : t().unknownType });
     const numericSize = Number(item.size);
-    const hasSize = Number.isFinite(numericSize) && numericSize >= 0;
+    const hasSize = item.size !== null && item.size !== undefined && item.size !== '' && Number.isFinite(numericSize) && numericSize >= 0;
     const size = element('p', { className: 'download-result-meta', text: hasSize ? core.formatBytes(numericSize) : t().unknownSize });
     const source = element('p', { className: 'download-result-meta', text: `${t().source}: ${providerLabel(item.source)}` });
     const link = element('a', { className: 'button-link', text: `${t().download}: ${item.name || 'Archivo'}` });

@@ -149,5 +149,6 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     appendScript('sound-search-core.js?v=1.0', 'data-tiflo-sound-core');
     appendScript('sound-search-config.js?v=1.0', 'data-tiflo-sound-config');
     appendScript('sound-search.js?v=1.0', 'data-tiflo-sound-ui');
+    appendScript('downloads-iphone-bridge.js?v=1.0', 'data-tiflo-download-iphone-bridge');
   }, { once: true });
 }

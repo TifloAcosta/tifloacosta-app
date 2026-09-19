@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-13-iphone-downloads';
+const CACHE = 'tifloacosta-app-v2-14-iphone-diagnostics';
 const SHELL = [
   './',
   './index.html',
@@ -9,6 +9,7 @@ const SHELL = [
   './download-config.js?v=1.1',
   './downloads-hub.js?v=1.0',
   './downloads.js?v=1.2',
+  './downloads-iphone-bridge.js?v=1.0',
   './downloads.css?v=1.1',
   './sound-search-core.js?v=1.0',
   './sound-search-config.js?v=1.0',

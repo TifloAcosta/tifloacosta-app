@@ -23,6 +23,7 @@
       noFiles: 'No se encontraron archivos descargables en ese enlace.', unavailable: 'El análisis avanzado no está disponible temporalmente. Los enlaces directos, Google Drive y Dropbox siguen funcionando.',
       badResponse: 'El analizador devolvió una respuesta que TifloAcosta no pudo interpretar.', timeout: 'El análisis tardó demasiado y se detuvo.', unreachable: 'No se pudo acceder a la página indicada.', unsupported: 'Este enlace no puede analizarse automáticamente.',
       auth: 'Este recurso necesita identificación en el servicio externo.',
+      blocked: 'La página ha rechazado el análisis automático o exige permisos adicionales.',
       externalHeading: 'Continuar en un servicio externo',
       externalText: 'Vas a salir de TifloAcosta para continuar en un servicio externo. La accesibilidad y el funcionamiento de la página que se abra dependen de ese servicio. TifloAcosta no recibe ni guarda tus credenciales.',
       externalButton: 'Continuar en el servicio externo', retry: 'Reintentar análisis', pending: 'Tienes un enlace pendiente. Puedes reintentar el análisis.',
@@ -39,6 +40,7 @@
       noFiles: 'No downloadable files were found at that link.', unavailable: 'Advanced analysis is temporarily unavailable. Direct links, Google Drive, and Dropbox still work.',
       badResponse: 'The analyzer returned a response TifloAcosta could not interpret.', timeout: 'The analysis took too long and was stopped.', unreachable: 'The specified page could not be reached.', unsupported: 'This link cannot be analyzed automatically.',
       auth: 'This resource requires sign-in on the external service.',
+      blocked: 'The page refused automated analysis or requires additional permission.',
       externalHeading: 'Continue on an external service',
       externalText: 'You are leaving TifloAcosta to continue on an external service. Accessibility and operation on the destination page are the responsibility of that service. TifloAcosta does not receive or store your credentials.',
       externalButton: 'Continue on the external service', retry: 'Retry analysis', pending: 'You have a pending link. You can retry the analysis.',
@@ -193,7 +195,9 @@
     const card = element('article', { className: 'download-result-card' });
     const name = element('h4', { text: item.name || 'Archivo' });
     const type = element('p', { className: 'download-result-meta', text: item.type && item.type !== 'unknown' ? item.type.toUpperCase() : t().unknownType });
-    const size = element('p', { className: 'download-result-meta', text: item.size ? core.formatBytes(item.size) : t().unknownSize });
+    const numericSize = Number(item.size);
+    const hasSize = Number.isFinite(numericSize) && numericSize >= 0;
+    const size = element('p', { className: 'download-result-meta', text: hasSize ? core.formatBytes(numericSize) : t().unknownSize });
     const source = element('p', { className: 'download-result-meta', text: `${t().source}: ${providerLabel(item.source)}` });
     const link = element('a', { className: 'button-link', text: `${t().download}: ${item.name || 'Archivo'}` });
     link.href = item.url;
@@ -255,7 +259,7 @@
 
   function mapError(code) {
     const c = t();
-    return ({ invalid_url:c.invalid, authentication_required:c.auth, timeout:c.timeout, unreachable:c.unreachable,
+    return ({ invalid_url:c.invalid, authentication_required:c.auth, access_denied:c.blocked, timeout:c.timeout, unreachable:c.unreachable,
       no_files:c.noFiles, unsupported:c.unsupported, bad_response:c.badResponse, service_unavailable:c.unavailable })[code] || c.badResponse;
   }
 

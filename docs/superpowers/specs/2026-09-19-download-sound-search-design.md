@@ -30,11 +30,12 @@ La vista «Buscar sonidos» incluirá:
 
 - un campo de búsqueda por texto;
 - un selector o lista de categorías accesibles;
-- un filtro de banco/proveedor, con «Todos los bancos» como opción inicial;
+- un filtro de banco/proveedor, con «Todos los bancos» como opción inicial para proveedores con búsqueda interna compatible;
 - una lista de resultados;
 - reproducción previa cuando el proveedor ofrezca una URL de preescucha fiable;
 - descarga directa cuando el proveedor lo permita sin autenticación especial;
 - apertura en el banco original cuando la descarga directa no sea viable;
+- una zona «Explorar otros bancos» para fuentes útiles que no dispongan de una búsqueda interna estable desde TifloAcosta;
 - regreso explícito al centro de Descargas.
 
 ## Proveedores
@@ -51,11 +52,11 @@ Para la primera versión no se gestionará OAuth2 de usuarios ni descarga autent
 
 Se utilizará como fuente adicional para categorías y descubrimiento cuando su estructura permita enlaces estables y verificables. No se dependerá de scraping frágil como requisito esencial del funcionamiento.
 
-Si no existe una vía estable para ofrecer resultados internos, TifloAcosta presentará accesos organizados a sus categorías o páginas relevantes.
+Si no existe una vía estable para ofrecer resultados internos, TifloAcosta presentará accesos organizados a sus categorías o páginas relevantes dentro de «Explorar otros bancos».
 
 ### Pixabay
 
-Podrá aparecer como banco adicional mediante enlaces organizados cuando sea útil. No se asumirá una API de sonidos si no existe una interfaz oficial documentada y estable para ello.
+Podrá aparecer como banco adicional mediante enlaces organizados cuando sea útil. No se asumirá una API de sonidos si no existe una interfaz oficial documentada y estable para ello. En ese caso aparecerá en «Explorar otros bancos» y no se mezclará artificialmente con resultados internos.
 
 ### Regla general de proveedores
 
@@ -72,9 +73,16 @@ Cada proveedor debe declarar qué capacidades ofrece a TifloAcosta:
 
 La interfaz solo mostrará acciones que el proveedor pueda soportar de forma fiable.
 
+Los proveedores se dividirán funcionalmente en dos grupos:
+
+1. Proveedores buscables: pueden devolver resultados internos normalizados.
+2. Proveedores explorables: ofrecen categorías, páginas o colecciones útiles, pero requieren abrir el banco original para continuar.
+
+Esta distinción evita prometer una búsqueda agregada donde técnicamente no exista.
+
 ## Modelo de resultados
 
-Cada sonido se normalizará a una estructura común, independientemente del banco de origen. Como mínimo:
+Cada sonido de un proveedor buscable se normalizará a una estructura común, independientemente del banco de origen. Como mínimo:
 
 - id estable dentro del proveedor;
 - nombre;
@@ -143,12 +151,13 @@ La búsqueda tendrá estas reglas:
 - el término libre es opcional si se ha elegido una categoría;
 - la categoría es opcional si existe un término de búsqueda;
 - debe existir al menos un término o una categoría antes de buscar;
-- «Todos los bancos» consultará únicamente proveedores habilitados y compatibles;
-- el usuario podrá limitar los resultados a un banco concreto;
+- «Todos los bancos» consultará únicamente proveedores buscables, habilitados y compatibles;
+- el usuario podrá limitar los resultados a un banco buscable concreto;
 - los resultados se combinarán sin mezclar ni ocultar la procedencia;
-- los errores de un proveedor no deben anular resultados válidos de otros.
+- los errores de un proveedor no deben anular resultados válidos de otros;
+- los proveedores explorables se mostrarán aparte como alternativas de navegación, no como falsos resultados de búsqueda.
 
-Ejemplo: una búsqueda «campana» dentro de «Notificaciones» podrá devolver resultados de Freesound y, cuando sea compatible, accesos o resultados de otros bancos.
+Ejemplo: una búsqueda «campana» dentro de «Notificaciones» podrá devolver resultados internos de Freesound y, además, mostrar accesos relacionados de Mixkit o Pixabay en «Explorar otros bancos» cuando existan páginas útiles para esa categoría.
 
 ## Orden de resultados
 
@@ -235,7 +244,7 @@ Si Freesound u otro banco requiere token para búsquedas, se utilizará un Worke
 - reciba término, categoría y filtros permitidos;
 - consulte el proveedor con la credencial en secreto;
 - normalice o limite la respuesta;
-- aplique CORS solo para TifloAcosta;
+- aplique CORS a los orígenes autorizados de TifloAcosta en web y, cuando se incorpore la función móvil, contemple explícitamente los orígenes o el mecanismo de red utilizado por Android;
 - no almacene consultas personales ni credenciales de usuarios;
 - imponga límites razonables para evitar abuso.
 
@@ -313,9 +322,10 @@ La primera versión se considerará válida cuando:
 7. Cada resultado ofrezca descarga directa o apertura externa según capacidades reales.
 8. Se muestre licencia/condiciones cuando el proveedor las facilite.
 9. Los fallos parciales no eliminen resultados válidos de otros proveedores.
-10. La navegación con VoiceOver, JAWS, NVDA y TalkBack tenga foco predecible y botones correctamente etiquetados.
-11. La interfaz funcione en español e inglés.
-12. Las credenciales privadas de APIs no aparezcan en el frontend.
+10. Los bancos sin búsqueda interna estable aparezcan como opciones explorables sin confundirse con resultados internos.
+11. La navegación con VoiceOver, JAWS, NVDA y TalkBack tenga foco predecible y botones correctamente etiquetados.
+12. La interfaz funcione en español e inglés.
+13. Las credenciales privadas de APIs no aparezcan en el frontend.
 
 ## Estrategia de pruebas
 

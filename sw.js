@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-12-sounds';
+const CACHE = 'tifloacosta-app-v2-13-iphone-downloads';
 const SHELL = [
   './',
   './index.html',
@@ -8,7 +8,7 @@ const SHELL = [
   './downloads-core.js?v=1.1',
   './download-config.js?v=1.1',
   './downloads-hub.js?v=1.0',
-  './downloads.js?v=1.1',
+  './downloads.js?v=1.2',
   './downloads.css?v=1.1',
   './sound-search-core.js?v=1.0',
   './sound-search-config.js?v=1.0',
@@ -53,7 +53,14 @@ self.addEventListener('activate', event => {
 
 async function networkFirst(request) {
   try {
-    const response = await fetch(request);
+    const url = new URL(request.url);
+    let response;
+    if (url.pathname.endsWith('/downloads.js')) {
+      url.searchParams.set('v', '1.2');
+      response = await fetch(url.href, { cache: 'no-store', credentials: 'same-origin' });
+    } else {
+      response = await fetch(request, { cache: 'no-store' });
+    }
     if (response && response.ok) {
       const cache = await caches.open(CACHE);
       await cache.put(request, response.clone());

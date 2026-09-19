@@ -28,11 +28,11 @@ test('privacy policy discloses sound-search queries and provider boundaries in b
 
 test('service worker refreshes the download and sound-search feature files', async () => {
   const source = await read('sw.js');
-  assert.match(source, /tifloacosta-app-v2-12-sounds/);
+  assert.match(source, /tifloacosta-app-v2-13-iphone-downloads/);
   assert.match(source, /downloads-core\.js\?v=1\.1/);
   assert.match(source, /download-config\.js\?v=1\.1/);
   assert.match(source, /downloads-hub\.js\?v=1\.0/);
-  assert.match(source, /downloads\.js\?v=1\.1/);
+  assert.match(source, /downloads\.js\?v=1\.2/);
   assert.match(source, /downloads\.css\?v=1\.1/);
   assert.match(source, /sound-search-core\.js\?v=1\.0/);
   assert.match(source, /sound-search-config\.js\?v=1\.0/);

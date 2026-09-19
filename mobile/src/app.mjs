@@ -29,6 +29,7 @@ if (!root) throw new Error('Missing mobile app root');
 
 const EMPTY_CONTENT = Object.freeze({ resources: [], videos: [], news: [] });
 let currentContent = EMPTY_CONTENT;
+let activeScreenCleanup = null;
 
 function safeStorage() {
   try {
@@ -63,6 +64,9 @@ function textInputIsActive() {
 }
 
 function render(route) {
+  activeScreenCleanup?.();
+  activeScreenCleanup = null;
+
   const preferences = preferencesStore.getCurrent();
   document.title = t('app.title');
   const context = {
@@ -75,7 +79,10 @@ function render(route) {
     nativeActions,
     notificationService,
     t,
-    onPreferencesChange
+    onPreferencesChange,
+    setScreenCleanup(cleanup) {
+      activeScreenCleanup = typeof cleanup === 'function' ? cleanup : null;
+    }
   };
 
   switch (route.name) {

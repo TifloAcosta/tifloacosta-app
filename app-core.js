@@ -123,7 +123,7 @@
 }));
 
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
-  document.addEventListener('DOMContentLoaded', () => {
+  function loadDownloadAssets() {
     function appendScript(src, marker) {
       if (document.querySelector(`script[${marker}]`)) return;
       const script = document.createElement('script');
@@ -150,5 +150,11 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     appendScript('sound-search-config.js?v=1.0', 'data-tiflo-sound-config');
     appendScript('sound-search.js?v=1.1', 'data-tiflo-sound-ui');
     appendScript('downloads-iphone-bridge.js?v=1.1', 'data-tiflo-download-iphone-bridge');
-  }, { once: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadDownloadAssets, { once: true });
+  } else {
+    loadDownloadAssets();
+  }
 }

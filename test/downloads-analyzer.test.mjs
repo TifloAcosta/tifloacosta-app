@@ -28,3 +28,10 @@ test('analyzer failure keeps local providers usable and distinguishes generic we
   assert.match(source, /renderExternalNotice\(local\.provider/);
   assert.match(source, /genericNeedsAnalyzer/);
 });
+
+test('download Worker deploys from main when analyzer code changes', async () => {
+  const workflow = await read('.github/workflows/deploy-download-worker.yml');
+  assert.match(workflow, /branches:\s*\n\s*- ['"]?main['"]?/);
+  assert.match(workflow, /- ['"]?download-worker\/\*\*['"]?/);
+  assert.match(workflow, /- ['"]?\.github\/workflows\/deploy-download-worker\.yml['"]?/);
+});

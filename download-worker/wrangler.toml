@@ -5,3 +5,5 @@ workers_dev = false
 routes = [
   { pattern = "download.tifloacosta.com", custom_domain = true }
 ]
+
+# Runtime secret required by /sounds/search: FREESOUND_API_KEY

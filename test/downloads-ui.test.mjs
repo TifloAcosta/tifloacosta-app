@@ -30,6 +30,7 @@ test('opening the download section focuses the URL input', async () => {
   assert.match(source, /section\.hidden = false;\s*urlInput\.focus\(\);/);
 });
 
+// Regression: Safari/iPhone must not pre-empt the app's own URL cleanup and validation.
 test('pasted mobile URLs reach TifloAcosta validation instead of browser URL constraint validation', async () => {
   const source = await read('downloads.js');
   assert.match(source, /form\.noValidate = true/);

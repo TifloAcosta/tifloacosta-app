@@ -3,17 +3,22 @@ const DICTIONARIES = {
     app: { title: 'TifloAcosta' },
     nav: { back: 'Volver' },
     home: {
-      actualidad: 'Actualidad', search: 'Buscar', library: 'Biblioteca', favorites: 'Favoritos', videos: 'Vídeos',
+      actualidad: 'Actualidad', search: 'Buscar', library: 'Biblioteca', downloads: 'Descargas', favorites: 'Favoritos', videos: 'Vídeos',
       book: 'Mi libro', podcast: 'Podcast', contact: 'Contacto', settings: 'Configuración'
     },
     screen: {
-      actualidad: 'Actualidad', search: 'Buscar', library: 'Biblioteca', favorites: 'Favoritos', videos: 'Vídeos',
+      actualidad: 'Actualidad', search: 'Buscar', library: 'Biblioteca', downloads: 'Descargas', favorites: 'Favoritos', videos: 'Vídeos',
       book: 'Mi libro', podcast: 'Podcast', contact: 'Contacto', settings: 'Configuración'
     },
     common: { empty: 'No hay contenido disponible en este momento.', open: 'Abrir', share: 'Compartir' },
     search: {
       label: 'Título o palabra clave', placeholder: 'Por ejemplo: VoiceOver, Android, WhatsApp…', submit: 'Buscar',
       results: '{count} resultados', none: 'No se encontraron resultados.', resultsRegion: 'Resultados de búsqueda'
+    },
+    downloads: {
+      intro: 'Elige qué quieres hacer.',
+      link: 'Descargar desde un enlace',
+      sounds: 'Buscar sonidos'
     },
     favorites: { add: 'Añadir a favoritos', remove: 'Quitar de favoritos', empty: 'Todavía no has añadido ningún favorito.' },
     actualidad: { empty: 'No hay noticias disponibles en este momento.', original: 'Abrir fuente original' },
@@ -48,17 +53,22 @@ const DICTIONARIES = {
     app: { title: 'TifloAcosta' },
     nav: { back: 'Back' },
     home: {
-      actualidad: 'News', search: 'Search', library: 'Library', favorites: 'Favorites', videos: 'Videos',
+      actualidad: 'News', search: 'Search', library: 'Library', downloads: 'Downloads', favorites: 'Favorites', videos: 'Videos',
       book: 'My book', podcast: 'Podcast', contact: 'Contact', settings: 'Settings'
     },
     screen: {
-      actualidad: 'News', search: 'Search', library: 'Library', favorites: 'Favorites', videos: 'Videos',
+      actualidad: 'News', search: 'Search', library: 'Library', downloads: 'Downloads', favorites: 'Favorites', videos: 'Videos',
       book: 'My book', podcast: 'Podcast', contact: 'Contact', settings: 'Settings'
     },
     common: { empty: 'No content is available right now.', open: 'Open', share: 'Share' },
     search: {
       label: 'Title or keyword', placeholder: 'For example: VoiceOver, Android, WhatsApp…', submit: 'Search',
       results: '{count} results', none: 'No results found.', resultsRegion: 'Search results'
+    },
+    downloads: {
+      intro: 'Choose what you want to do.',
+      link: 'Download from a link',
+      sounds: 'Search sounds'
     },
     favorites: { add: 'Add to favorites', remove: 'Remove from favorites', empty: 'You have not added any favorites yet.' },
     actualidad: { empty: 'There are no news items available right now.', original: 'Open original source' },

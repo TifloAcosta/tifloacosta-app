@@ -52,6 +52,25 @@ test('GET /health returns an explicit browser-readable service status', async ()
   });
 });
 
+test('main-domain /api/download route is configured without taking over the rest of tifloacosta.com', async () => {
+  const config = await read('wrangler.toml');
+  assert.match(config, /pattern\s*=\s*"tifloacosta\.com\/api\/download\/\*"/);
+  assert.match(config, /zone_name\s*=\s*"tifloacosta\.com"/);
+  assert.doesNotMatch(config, /pattern\s*=\s*"tifloacosta\.com\/\*"/);
+});
+
+test('same-origin GET /api/download/health reaches the same Worker health handler', async () => {
+  const request = new Request('https://tifloacosta.com/api/download/health', {
+    method: 'GET'
+  });
+  const response = await worker.fetch(request, {});
+  assert.equal(response.status, 200);
+  assert.deepEqual(await response.json(), {
+    status: 'ok',
+    service: 'tifloacosta-download-analyzer'
+  });
+});
+
 test('worker validates every redirect and never proxies complete files', async () => {
   const source = await read('src/index.js');
   assert.match(source, /safeRedirectTarget/);

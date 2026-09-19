@@ -19,8 +19,8 @@ test('preview controller keeps one active audio and stops it on cleanup', () => 
 
 test('sound-search screen uses accessible search and preview controls', () => {
   assert.match(source, /addScreenHeader\(/);
-  assert.match(source, /input\.type\s*=\s*'search'/);
-  assert.match(source, /label\.htmlFor\s*=\s*queryInput\.id/);
+  assert.match(source, /queryInput\.type\s*=\s*'search'/);
+  assert.match(source, /queryLabel\.htmlFor\s*=\s*queryInput\.id/);
   assert.match(source, /categoryLabel\.htmlFor\s*=\s*categorySelect\.id/);
   assert.match(source, /aria-live['"],\s*['"]polite/);
   assert.match(source, /document\.createElement\('audio'\)/);

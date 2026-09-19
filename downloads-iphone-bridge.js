@@ -4,15 +4,13 @@
   const labels = {
     es: {
       linkReceived: 'Enlace recibido. Pulsa Analizar enlace.',
-      linkActivated: 'Botón Analizar activado. Validando enlace…',
       soundReceived: 'Consulta de sonidos recibida. Pulsa Buscar sonidos.',
-      soundActivated: 'Botón Buscar sonidos activado. Buscando sonidos…'
+      downloadResults: 'Archivos encontrados'
     },
     en: {
       linkReceived: 'Link received. Press Analyze link.',
-      linkActivated: 'Analyze button activated. Validating link…',
       soundReceived: 'Sound search received. Press Search sounds.',
-      soundActivated: 'Search sounds button activated. Searching sounds…'
+      downloadResults: 'Files found'
     }
   };
 
@@ -26,8 +24,7 @@
     status.setAttribute('role', 'status');
     status.setAttribute('aria-live', 'assertive');
     status.setAttribute('aria-atomic', 'true');
-    status.textContent = '';
-    window.setTimeout(() => { status.textContent = message; }, 20);
+    status.textContent = message;
   }
 
   function connectDownload() {
@@ -44,10 +41,34 @@
 
     button.addEventListener('click', event => {
       event.preventDefault();
-      announce('download-status', labels[language()].linkActivated);
       form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
     });
 
+    return true;
+  }
+
+  function connectDownloadResults() {
+    const section = document.getElementById('download-results-section');
+    const count = document.getElementById('download-result-count');
+    const heading = document.getElementById('download-results-heading');
+    if (!section || !count || !heading) return false;
+    if (section.dataset.iphoneResultBridge === 'true') return true;
+    section.dataset.iphoneResultBridge = 'true';
+
+    const announceResults = () => {
+      if (section.hidden) return;
+      const countText = String(count.textContent || '').trim();
+      if (!countText) return;
+      heading.textContent = `${labels[language()].downloadResults}. ${countText}`;
+      heading.focus();
+    };
+
+    const observer = new MutationObserver(mutations => {
+      if (mutations.some(mutation => mutation.type === 'attributes' && mutation.attributeName === 'hidden')) {
+        queueMicrotask(announceResults);
+      }
+    });
+    observer.observe(section, { attributes: true, attributeFilter: ['hidden'] });
     return true;
   }
 
@@ -65,7 +86,6 @@
 
     button.addEventListener('click', event => {
       event.preventDefault();
-      announce('sound-status', labels[language()].soundActivated);
       form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
     });
 
@@ -73,7 +93,7 @@
   }
 
   function connectAll() {
-    return connectDownload() && connectSounds();
+    return connectDownload() && connectDownloadResults() && connectSounds();
   }
 
   if (!connectAll()) {

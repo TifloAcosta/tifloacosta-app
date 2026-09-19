@@ -25,3 +25,18 @@ test('worker validates every redirect and never proxies complete files', async (
   assert.match(source, /nameFromHeaders/);
   assert.doesNotMatch(source, /return\s+response\s*;/);
 });
+
+test('worker distinguishes authentication from blocked automated access', async () => {
+  const source = await read('src/index.js');
+  assert.match(source, /response\.status === 401/);
+  assert.match(source, /response\.status === 403/);
+  assert.match(source, /access_denied/);
+});
+
+test('worker probes file sizes without trying every candidate on huge pages', async () => {
+  const source = await read('src/index.js');
+  assert.match(source, /MAX_SIZE_PROBES\s*=\s*20/);
+  assert.match(source, /method:\s*'HEAD'/);
+  assert.match(source, /content-length/);
+  assert.match(source, /enrichCandidateSizes/);
+});

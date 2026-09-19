@@ -2,6 +2,7 @@ export const HOME_ITEMS = [
   'actualidad',
   'search',
   'library',
+  'downloads',
   'favorites',
   'videos',
   'book',

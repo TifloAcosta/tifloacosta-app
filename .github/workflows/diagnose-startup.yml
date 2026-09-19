@@ -20,10 +20,33 @@ jobs:
           getent ahosts tifloacosta.com || true
           echo '=== Custom domain homepage ==='
           curl -L -sS -o /dev/null --max-time 20 -w 'custom_home http=%{http_code} dns=%{time_namelookup} connect=%{time_connect} ttfb=%{time_starttransfer} total=%{time_total}\n' https://tifloacosta.com/
-          echo '=== GitHub Pages origin ==='
-          curl -L -sS -o /dev/null --max-time 20 -w 'github_pages http=%{http_code} dns=%{time_namelookup} connect=%{time_connect} ttfb=%{time_starttransfer} total=%{time_total}\n' https://tifloacosta.github.io/
           echo '=== Custom app-core ==='
           curl -L -sS -o /dev/null --max-time 20 -w 'app_core http=%{http_code} dns=%{time_namelookup} connect=%{time_connect} ttfb=%{time_starttransfer} total=%{time_total}\n' 'https://tifloacosta.com/app-core.js?v=1.5'
           echo '=== Same-origin Worker health ==='
           curl -L -sS --max-time 20 -w '\nhealth http=%{http_code} dns=%{time_namelookup} connect=%{time_connect} ttfb=%{time_starttransfer} total=%{time_total}\n' https://tifloacosta.com/api/download/health
+          echo '=== Download module timings ==='
+          for asset in downloads-core.js download-config.js downloads-hub.js downloads.js sound-search-core.js sound-search-config.js sound-search.js downloads-iphone-bridge.js downloads.css; do
+            curl -L -sS -o /dev/null --max-time 20 -w "$asset http=%{http_code} size=%{size_download} ttfb=%{time_starttransfer} total=%{time_total}\n" "https://tifloacosta.com/$asset"
+          done
+          exit 0
+      - name: Exercise a clean browser startup
+        shell: bash
+        run: |
+          set +e
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          echo "chrome=$CHROME"
+          if [ -z "$CHROME" ]; then
+            echo 'No Chrome-compatible browser found on runner.'
+            exit 0
+          fi
+          rm -rf /tmp/tiflo-clean
+          start=$(date +%s%3N)
+          timeout 30s "$CHROME" --headless --disable-gpu --no-sandbox --user-data-dir=/tmp/tiflo-clean --dump-dom 'https://tifloacosta.com/?startup_probe=1' > /tmp/tiflo-dom.html 2>/tmp/tiflo-chrome.log
+          code=$?
+          end=$(date +%s%3N)
+          echo "chrome_exit=$code elapsed_ms=$((end-start))"
+          echo '=== Descargas markers after JS execution ==='
+          grep -o -m 5 -E 'Descargas|Downloads|downloads-view|home-open-downloads' /tmp/tiflo-dom.html || true
+          echo '=== Relevant browser log tail ==='
+          tail -n 80 /tmp/tiflo-chrome.log || true
           exit 0

@@ -1,6 +1,7 @@
 (() => {
   'use strict';
 
+  // Keep iPhone/PWA announcements separate from the real analysis state.
   const labels = {
     es: {
       linkReceived: 'Enlace recibido. Pulsa Analizar enlace.',

@@ -16,9 +16,21 @@ const DICTIONARIES = {
       results: '{count} resultados', none: 'No se encontraron resultados.', resultsRegion: 'Resultados de búsqueda'
     },
     downloads: {
-      intro: 'Elige qué quieres hacer.',
-      link: 'Descargar desde un enlace',
-      sounds: 'Buscar sonidos'
+      intro: 'Elige qué quieres hacer.', link: 'Descargar desde un enlace', sounds: 'Buscar sonidos'
+    },
+    downloadsLink: {
+      intro: 'Pega un enlace público o compartido y TifloAcosta intentará localizar los archivos descargables disponibles.',
+      label: 'Pega aquí el enlace', placeholder: 'https://…', analyze: 'Analizar enlace', analyzing: 'Analizando enlace…',
+      invalid: 'El enlace no es válido. Utiliza una dirección que empiece por http:// o https://.',
+      resultsHeading: 'Archivos encontrados', filesFound: 'archivos encontrados.', save: 'Guardar', saved: 'Archivo guardado.',
+      unknownSize: 'Tamaño desconocido', unknownType: 'Tipo no identificado', source: 'Procedencia',
+      authenticationRequired: 'Este recurso necesita identificación en el servicio externo.',
+      blocked: 'Este sitio ha rechazado el análisis automático de TifloAcosta.',
+      externalNotice: 'Puedes continuar en el servicio externo. TifloAcosta no recibe ni guarda tus credenciales.',
+      openExternal: 'Abrir sitio externo', retry: 'Reintentar análisis', timeout: 'El análisis tardó demasiado y se detuvo.',
+      unreachable: 'No se pudo acceder a la página indicada.', noFiles: 'No se encontraron archivos descargables en ese enlace.',
+      unsupported: 'Este enlace no puede analizarse automáticamente.', unavailable: 'El análisis avanzado no está disponible temporalmente.',
+      saveFailed: 'No se pudo guardar el archivo.', defaultFilename: 'archivo'
     },
     favorites: { add: 'Añadir a favoritos', remove: 'Quitar de favoritos', empty: 'Todavía no has añadido ningún favorito.' },
     actualidad: { empty: 'No hay noticias disponibles en este momento.', original: 'Abrir fuente original' },
@@ -39,13 +51,9 @@ const DICTIONARIES = {
       bold: 'Usar texto reforzado', reset: 'Restablecer ajustes'
     },
     notifications: {
-      title: 'Notificaciones',
-      explanation: 'Las notificaciones solo se activarán si tú lo decides. TifloAcosta no pedirá permiso al abrir la app.',
-      activate: 'Activar notificaciones',
-      openSettings: 'Abrir ajustes del sistema',
-      unavailable: 'Las notificaciones nativas todavía no están disponibles en esta versión.',
-      notRequested: 'Las notificaciones están desactivadas.',
-      denied: 'El permiso de notificaciones está bloqueado. Puedes revisarlo en los ajustes del sistema.',
+      title: 'Notificaciones', explanation: 'Las notificaciones solo se activarán si tú lo decides. TifloAcosta no pedirá permiso al abrir la app.',
+      activate: 'Activar notificaciones', openSettings: 'Abrir ajustes del sistema', unavailable: 'Las notificaciones nativas todavía no están disponibles en esta versión.',
+      notRequested: 'Las notificaciones están desactivadas.', denied: 'El permiso de notificaciones está bloqueado. Puedes revisarlo en los ajustes del sistema.',
       authorized: 'Las notificaciones están autorizadas.'
     }
   },
@@ -66,9 +74,21 @@ const DICTIONARIES = {
       results: '{count} results', none: 'No results found.', resultsRegion: 'Search results'
     },
     downloads: {
-      intro: 'Choose what you want to do.',
-      link: 'Download from a link',
-      sounds: 'Search sounds'
+      intro: 'Choose what you want to do.', link: 'Download from a link', sounds: 'Search sounds'
+    },
+    downloadsLink: {
+      intro: 'Paste a public or shared link and TifloAcosta will try to locate the downloadable files that are available.',
+      label: 'Paste the link here', placeholder: 'https://…', analyze: 'Analyze link', analyzing: 'Analyzing link…',
+      invalid: 'The link is not valid. Use an address beginning with http:// or https://.',
+      resultsHeading: 'Files found', filesFound: 'files found.', save: 'Save', saved: 'File saved.',
+      unknownSize: 'Size unknown', unknownType: 'Type not identified', source: 'Source',
+      authenticationRequired: 'This resource requires sign-in on the external service.',
+      blocked: 'This site refused TifloAcosta automated analysis.',
+      externalNotice: 'You can continue on the external service. TifloAcosta does not receive or store your credentials.',
+      openExternal: 'Open external site', retry: 'Retry analysis', timeout: 'The analysis took too long and was stopped.',
+      unreachable: 'The specified page could not be reached.', noFiles: 'No downloadable files were found at that link.',
+      unsupported: 'This link cannot be analyzed automatically.', unavailable: 'Advanced analysis is temporarily unavailable.',
+      saveFailed: 'The file could not be saved.', defaultFilename: 'file'
     },
     favorites: { add: 'Add to favorites', remove: 'Remove from favorites', empty: 'You have not added any favorites yet.' },
     actualidad: { empty: 'There are no news items available right now.', original: 'Open original source' },
@@ -89,13 +109,9 @@ const DICTIONARIES = {
       bold: 'Use bolder text', reset: 'Reset settings'
     },
     notifications: {
-      title: 'Notifications',
-      explanation: 'Notifications are enabled only if you choose to turn them on. TifloAcosta will not ask for permission when the app opens.',
-      activate: 'Enable notifications',
-      openSettings: 'Open system settings',
-      unavailable: 'Native notifications are not available in this version yet.',
-      notRequested: 'Notifications are turned off.',
-      denied: 'Notification permission is blocked. You can review it in system settings.',
+      title: 'Notifications', explanation: 'Notifications are enabled only if you choose to turn them on. TifloAcosta will not ask for permission when the app opens.',
+      activate: 'Enable notifications', openSettings: 'Open system settings', unavailable: 'Native notifications are not available in this version yet.',
+      notRequested: 'Notifications are turned off.', denied: 'Notification permission is blocked. You can review it in system settings.',
       authorized: 'Notifications are authorized.'
     }
   }

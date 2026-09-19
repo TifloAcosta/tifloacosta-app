@@ -9,3 +9,12 @@
 #download-url { width:100%; min-height:3rem; padding:.72rem .85rem; border:2px solid var(--border-strong); border-radius:.65rem; background:var(--bg); color:var(--text); font:inherit; }
 #download-url:hover { border-color:var(--accent); }
 #download-result-search { width:100%; }
+.downloads-hub-actions { margin-top:1rem; }
+.sound-search-field { margin-top:1rem; }
+#sound-query { width:100%; min-height:3rem; padding:.72rem .85rem; border:2px solid var(--border-strong); border-radius:.65rem; background:var(--bg); color:var(--text); font:inherit; }
+#sound-query:hover { border-color:var(--accent); }
+.sound-search-filters { margin-bottom:1rem; }
+.sound-preview { display:block; width:100%; max-width:32rem; margin:.9rem 0; }
+.sound-result-card .button-link { margin-top:.5rem; }
+.sound-external-banks { margin-top:2rem; padding-top:1rem; border-top:1px solid var(--border); }
+.sound-bank-actions { margin-top:.75rem; }

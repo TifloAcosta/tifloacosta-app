@@ -1,5 +1,22 @@
 [
   {
+    "id": "urban-tecno:https://www.youtube.com/watch?v=eil07OyjFMw",
+    "type": "video",
+    "section": "technology",
+    "sourceId": "urban-tecno",
+    "sourceName": "Urban Tecno",
+    "sourceUrl": "https://www.youtube.com/@urbantecno",
+    "originalUrl": "https://www.youtube.com/watch?v=eil07OyjFMw",
+    "originalLanguage": "es",
+    "publishedAt": "2026-09-19T08:00:13.000Z",
+    "title": "✨ HUAWEI FreeBuds Neo, alta calidad en formato mini #huaweifreebudsneo #urbantecno",
+    "summary": "",
+    "mediaUrl": null,
+    "embedUrl": "https://www.youtube.com/embed/eil07OyjFMw",
+    "platform": "youtube",
+    "categories": []
+  },
+  {
     "id": "cnet:https://www.youtube.com/watch?v=gXuC_eAhBhQ",
     "type": "video",
     "section": "technology",
@@ -523,23 +540,6 @@
     "summary": "#GoogleTraductor #TrucosGoogle #Viajar #Tecnología #TrucosMóvil \n\nXataka lanza XTRA 💚: https://goo.su/c6qy6Sh\n¡Suscríbete a Xataka LIFE! 🩵: https://www.youtube.com/channel/UCFnJZIJfub-61G4F0cWJiuA?sub_confirmation=1\n\nSuscríbete a nuestros canales: https://linktr.ee/xataka\n\nhttps://www.xataka.com/",
     "mediaUrl": null,
     "embedUrl": "https://www.youtube.com/embed/yTvRXYurRsI",
-    "platform": "youtube",
-    "categories": []
-  },
-  {
-    "id": "urban-tecno:https://www.youtube.com/watch?v=ZvQaq214H7U",
-    "type": "video",
-    "section": "technology",
-    "sourceId": "urban-tecno",
-    "sourceName": "Urban Tecno",
-    "sourceUrl": "https://www.youtube.com/@urbantecno",
-    "originalUrl": "https://www.youtube.com/watch?v=ZvQaq214H7U",
-    "originalLanguage": "es",
-    "publishedAt": "2026-09-17T19:00:39.000Z",
-    "title": "👑 ¡Ya está aquí el REDMI 17 Pro Max! Te cuento lo que más y menos me gusta de él #redmi17promax",
-    "summary": "",
-    "mediaUrl": null,
-    "embedUrl": "https://www.youtube.com/embed/ZvQaq214H7U",
     "platform": "youtube",
     "categories": []
   },

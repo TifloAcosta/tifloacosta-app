@@ -2,7 +2,7 @@ import { safeRedirectTarget, validatePublicUrl } from './security.js';
 import { dedupeCandidates, detectProvider, fileTypeFrom, isLikelyDownloadLink, nameFromHeaders } from './providers.js';
 import { searchFreesound } from './sounds.js';
 
-const ALLOWED_ORIGINS = new Set(['https://tifloacosta.com', 'https://tifloacosta.github.io']);
+const ALLOWED_ORIGINS = new Set(['https://tifloacosta.com', 'https://tifloacosta.github.io', 'https://localhost']);
 const MAX_REDIRECTS = 5;
 const REQUEST_TIMEOUT_MS = 8000;
 const MAX_HTML_BYTES = 1_000_000;

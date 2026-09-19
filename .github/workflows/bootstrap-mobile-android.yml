@@ -3,29 +3,23 @@ name: Bootstrap TifloAcosta Android
 on:
   push:
     branches:
-      - feature/mobile-capacitor-foundation
+      - main
+      - feature/android-downloads-reconciliation
     paths:
-      - 'mobile/package.json'
-      - 'mobile/capacitor.config.json'
-      - 'mobile/scripts/**'
-      - 'mobile/src/**'
-      - 'mobile/test/**'
-      - 'mobile/android/**'
+      - 'mobile/**'
       - '.github/workflows/bootstrap-mobile-android.yml'
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   bootstrap:
-    if: "${{ github.event_name == 'workflow_dispatch' || !contains(github.event.head_commit.message, '[skip mobile-bootstrap]') }}"
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout feature branch
+      - name: Checkout current ref
         uses: actions/checkout@v5
         with:
-          ref: feature/mobile-capacitor-foundation
           fetch-depth: 0
 
       - name: Setup Node
@@ -130,15 +124,3 @@ jobs:
           path: |
             mobile/android/app/build/outputs/apk/debug/*.apk
             mobile/android/app/build/outputs/bundle/release/*.aab
-
-      - name: Commit generated Android project and lockfile
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add mobile/package-lock.json mobile/android
-          if git diff --cached --quiet; then
-            echo "Android project is already synchronized."
-            exit 0
-          fi
-          git commit -m "chore: bootstrap Capacitor Android [skip mobile-bootstrap]"
-          git push origin HEAD:feature/mobile-capacitor-foundation

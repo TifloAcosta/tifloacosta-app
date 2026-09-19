@@ -232,12 +232,16 @@ export default {
     const origin = request.headers.get('origin') || '';
     if (origin && !ALLOWED_ORIGINS.has(origin)) return json(errorPayload('forbidden_origin', 'Origin not allowed.'), 403, '');
 
+    const pathname = new URL(request.url).pathname;
+    if (request.method === 'GET' && pathname === '/health') {
+      return json({ status: 'ok', service: 'tifloacosta-download-analyzer' }, 200, origin);
+    }
+
     if (request.method === 'OPTIONS') {
       return new Response(null, { status: 204, headers: corsHeaders(origin) });
     }
     if (request.method !== 'POST') return json(errorPayload('method_not_allowed', 'Use POST.'), 405, origin);
 
-    const pathname = new URL(request.url).pathname;
     if (pathname !== '/analyze' && pathname !== '/sounds/search') {
       return json(errorPayload('not_found', 'Unknown endpoint.'), 404, origin);
     }

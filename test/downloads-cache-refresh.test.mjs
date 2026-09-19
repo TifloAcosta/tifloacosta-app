@@ -4,11 +4,13 @@ import test from 'node:test';
 
 const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
-test('PWA shell advances its cache and precaches the fixed download script URL', async () => {
+test('PWA shell advances its cache and precaches the fixed download script URLs', async () => {
   const sw = await read('sw.js');
-  assert.match(sw, /tifloacosta-app-v2-15-iphone-results/);
-  assert.match(sw, /downloads\.js\?v=1\.2/);
-  assert.match(sw, /downloads-iphone-bridge\.js\?v=1\.0/);
+  assert.match(sw, /tifloacosta-app-v2-16-download-assets/);
+  assert.match(sw, /app-core\.js\?v=1\.4/);
+  assert.match(sw, /downloads\.js\?v=1\.3/);
+  assert.match(sw, /downloads-iphone-bridge\.js\?v=1\.1/);
+  assert.match(sw, /sound-search\.js\?v=1\.1/);
 });
 
 test('network-first PWA refresh bypasses the browser HTTP cache when online', async () => {
@@ -16,8 +18,13 @@ test('network-first PWA refresh bypasses the browser HTTP cache when online', as
   assert.match(sw, /fetch\(request,\s*\{\s*cache:\s*'no-store'\s*\}\)/);
 });
 
-test('stale downloads script requests are redirected to the fixed asset version', async () => {
+test('stale feature script requests are redirected to the fresh asset generation', async () => {
   const sw = await read('sw.js');
+  assert.match(sw, /pathname\.endsWith\('\/app-core\.js'\)/);
+  assert.match(sw, /searchParams\.set\('v',\s*'1\.4'\)/);
   assert.match(sw, /pathname\.endsWith\('\/downloads\.js'\)/);
-  assert.match(sw, /searchParams\.set\('v',\s*'1\.2'\)/);
+  assert.match(sw, /searchParams\.set\('v',\s*'1\.3'\)/);
+  assert.match(sw, /pathname\.endsWith\('\/downloads-iphone-bridge\.js'\)/);
+  assert.match(sw, /searchParams\.set\('v',\s*'1\.1'\)/);
+  assert.match(sw, /pathname\.endsWith\('\/sound-search\.js'\)/);
 });

@@ -1,0 +1,42 @@
+name: Diagnose download tests
+
+on:
+  push:
+    branches:
+      - 'feature/fix-download-asset-cache-20260919'
+    paths:
+      - '.github/workflows/diagnose-download-tests.yml'
+      - '.github/workflows/test-downloads.yml'
+      - 'app-core.js'
+      - 'downloads.js'
+      - 'downloads-core.js'
+      - 'downloads-hub.js'
+      - 'downloads.css'
+      - 'download-config.js'
+      - 'sound-search*.js'
+      - 'sw.js'
+      - 'privacidad/**'
+      - 'download-worker/**'
+      - 'test/**'
+      - 'index.html'
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run complete test suite
+        run: npm test 2>&1 | tee test-output.txt
+      - name: Upload complete test output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: diagnose-download-test-output
+          path: test-output.txt
+          if-no-files-found: error

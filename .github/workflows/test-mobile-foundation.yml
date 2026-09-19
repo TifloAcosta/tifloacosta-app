@@ -3,8 +3,14 @@ name: Test mobile foundation
 on:
   push:
     branches:
-      - feature/mobile-capacitor-foundation
-      - feature/android-downloads-reconciliation
+      - main
+    paths:
+      - 'scripts/build-mobile-content.mjs'
+      - 'test/mobile-content.test.mjs'
+      - 'mobile/**'
+      - '.gitignore'
+      - '.github/workflows/bootstrap-mobile-android.yml'
+      - '.github/workflows/test-mobile-foundation.yml'
   pull_request:
     paths:
       - 'scripts/build-mobile-content.mjs'

@@ -59,7 +59,7 @@ test('app core loads sound-search modules in dependency order', async () => {
   const source = await read('app-core.js');
   const core = source.indexOf('sound-search-core.js?v=1.0');
   const config = source.indexOf('sound-search-config.js?v=1.0');
-  const ui = source.indexOf('sound-search.js?v=1.0');
+  const ui = source.indexOf('sound-search.js?v=1.1');
   assert.ok(core >= 0 && config > core && ui > config);
   assert.match(source, /data-tiflo-sound-core/);
   assert.match(source, /data-tiflo-sound-config/);

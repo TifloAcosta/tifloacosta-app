@@ -13,11 +13,12 @@ test('service worker caches sound static assets', async () => {
 
 test('privacy copy explains sound-search provider requests in both languages', async () => {
   const ui = await read('sound-search.js');
-  const html = await read('index.html');
   assert.match(ui, /búsquedas de sonidos/i);
   assert.match(ui, /sound searches/i);
-  assert.match(html, /Buscar sonidos/);
-  assert.match(html, /no guarda un historial personal/i);
+  assert.match(ui, /no guarda un historial personal/i);
+  assert.match(ui, /does not keep a personal history/i);
+  assert.match(ui, /sound-search-privacy-note/);
+  assert.match(ui, /privacy-text/);
 });
 
 test('frontend contains no Freesound authorization secret', async () => {

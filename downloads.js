@@ -101,14 +101,17 @@
     section.append(intro);
 
     form = element('form', { id: 'download-form' });
+    form.noValidate = true;
     const label = element('label', { text: t().label });
     label.htmlFor = 'download-url';
     form.append(label);
     const row = element('div', { className: 'search-row' });
     urlInput = element('input', { id: 'download-url' });
-    urlInput.type = 'url';
+    urlInput.type = 'text';
     urlInput.inputMode = 'url';
     urlInput.autocomplete = 'off';
+    urlInput.autocapitalize = 'none';
+    urlInput.spellcheck = false;
     urlInput.placeholder = t().placeholder;
     const analyze = element('button', { id: 'download-analyze', text: t().analyze });
     analyze.type = 'submit';

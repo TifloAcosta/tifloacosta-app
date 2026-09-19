@@ -1,19 +1,19 @@
-const CACHE = 'tifloacosta-app-v2-15-iphone-results';
+const CACHE = 'tifloacosta-app-v2-16-download-assets';
 const SHELL = [
   './',
   './index.html',
   './styles.css?v=1.2',
   './data.js?v=0.19',
-  './app-core.js?v=1.3',
+  './app-core.js?v=1.4',
   './downloads-core.js?v=1.1',
   './download-config.js?v=1.1',
   './downloads-hub.js?v=1.0',
-  './downloads.js?v=1.2',
-  './downloads-iphone-bridge.js?v=1.0',
+  './downloads.js?v=1.3',
+  './downloads-iphone-bridge.js?v=1.1',
   './downloads.css?v=1.1',
   './sound-search-core.js?v=1.0',
   './sound-search-config.js?v=1.0',
-  './sound-search.js?v=1.0',
+  './sound-search.js?v=1.1',
   './actualidad-core.js?v=1.6',
   './actualidad.js?v=1.2',
   './actualidad-media.js?v=1.1',
@@ -56,8 +56,17 @@ async function networkFirst(request) {
   try {
     const url = new URL(request.url);
     let response;
-    if (url.pathname.endsWith('/downloads.js')) {
-      url.searchParams.set('v', '1.2');
+    if (url.pathname.endsWith('/app-core.js')) {
+      url.searchParams.set('v', '1.4');
+      response = await fetch(url.href, { cache: 'no-store', credentials: 'same-origin' });
+    } else if (url.pathname.endsWith('/downloads.js')) {
+      url.searchParams.set('v', '1.3');
+      response = await fetch(url.href, { cache: 'no-store', credentials: 'same-origin' });
+    } else if (url.pathname.endsWith('/downloads-iphone-bridge.js')) {
+      url.searchParams.set('v', '1.1');
+      response = await fetch(url.href, { cache: 'no-store', credentials: 'same-origin' });
+    } else if (url.pathname.endsWith('/sound-search.js')) {
+      url.searchParams.set('v', '1.1');
       response = await fetch(url.href, { cache: 'no-store', credentials: 'same-origin' });
     } else {
       response = await fetch(request, { cache: 'no-store' });

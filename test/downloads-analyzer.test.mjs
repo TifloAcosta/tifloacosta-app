@@ -4,10 +4,10 @@ import test from 'node:test';
 
 const read = file => readFile(new URL(`../${file}`, import.meta.url), 'utf8');
 
-test('analyzer is prepared but remains disabled until the Worker is deployed', async () => {
+test('analyzer uses the deployed Worker endpoint', async () => {
   const [source, config] = await Promise.all([read('downloads.js'), read('download-config.js')]);
-  assert.match(config, /endpoint:\s*''/);
-  assert.match(config, /plannedEndpoint:\s*'https:\/\/download\.tifloacosta\.com\/analyze'/);
+  assert.match(config, /endpoint:\s*'https:\/\/download\.tifloacosta\.com\/analyze'/);
+  assert.doesNotMatch(config, /endpoint:\s*''/);
   assert.match(source, /method:\s*'POST'/);
   assert.match(source, /body:\s*JSON\.stringify\(\{ url \}\)/);
   assert.doesNotMatch(source, /endpoint\s*\+\s*['"`]\?/);

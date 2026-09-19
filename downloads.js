@@ -359,7 +359,7 @@
       .forEach(id => { const node = document.getElementById(id); if (node) node.hidden = true; });
     document.querySelectorAll('.site-header,.site-footer,.skip-link').forEach(node => { node.hidden = true; });
     section.hidden = false;
-    section.focus();
+    urlInput.focus();
   }
 
   if (!buildSurface()) return;

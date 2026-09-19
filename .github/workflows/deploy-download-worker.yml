@@ -2,6 +2,11 @@ name: Deploy download analyzer
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - 'feature/activate-download-analyzer'
+    paths:
+      - '.github/workflows/deploy-download-worker.yml'
 
 permissions:
   contents: read
@@ -11,6 +16,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run app tests
+        run: npm test
+      - name: Install Worker tooling
+        working-directory: download-worker
+        run: npm install --no-audit --no-fund
+      - name: Run Worker tests
+        working-directory: download-worker
+        run: npm test
       - name: Deploy TifloAcosta download analyzer
         uses: cloudflare/wrangler-action@v3
         with:
@@ -18,3 +34,16 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: download-worker
           command: deploy
+      - name: Smoke test deployed analyzer
+        shell: bash
+        run: |
+          status=$(curl -sS -D headers.txt -o response.json -w "%{http_code}" \
+            -X POST \
+            -H 'Origin: https://tifloacosta.com' \
+            -H 'Content-Type: application/json' \
+            --data '{"url":"https://example.com/"}' \
+            https://download.tifloacosta.com/analyze)
+          cat response.json
+          test "$status" = "422"
+          grep -q '"code":"no_files"' response.json
+          grep -qi '^access-control-allow-origin: https://tifloacosta.com' headers.txt

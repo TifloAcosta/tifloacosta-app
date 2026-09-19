@@ -1,3 +1,3 @@
 window.TIFLO_DOWNLOAD_CONFIG = Object.freeze({
-  endpoint: 'https://download.tifloacosta.com/analyze'
+  endpoint: 'https://tifloacosta.com/api/download/analyze'
 });

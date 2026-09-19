@@ -20,6 +20,22 @@ test('derives file types and names safely', () => {
   assert.equal(nameFromHeaders(new URL('https://example.com/download'), headers), 'guide.docx');
 });
 
+test('preserves common compound archive extensions', () => {
+  assert.equal(fileTypeFrom('wget-1.25.0.tar.gz'), 'tar.gz');
+  assert.equal(fileTypeFrom('package.tar.xz'), 'tar.xz');
+  assert.equal(fileTypeFrom('package.tar.lz'), 'tar.lz');
+});
+
+test('recognizes common installer and archive downloads without admitting checksum noise', () => {
+  const base = new URL('https://example.com/releases/');
+  for (const name of ['setup.exe','setup.msi','app.dmg','package.pkg','archive.tar','archive.tar.gz','archive.tar.xz','archive.tar.lz','archive.tgz','archive.gz','archive.xz','archive.lz']) {
+    assert.equal(isLikelyDownloadLink(new URL(name, base), { download: null }), true, name);
+  }
+  for (const name of ['archive.asc','archive.md5','archive.sha1','archive.sha256']) {
+    assert.equal(isLikelyDownloadLink(new URL(name, base), { download: null }), false, name);
+  }
+});
+
 test('recognizes likely download links and deduplicates them', () => {
   const base = new URL('https://example.com/page');
   assert.equal(isLikelyDownloadLink(new URL('/files/a.pdf', base), { download: null }), true);

@@ -6,6 +6,8 @@ const MAX_REDIRECTS = 5;
 const REQUEST_TIMEOUT_MS = 8000;
 const MAX_HTML_BYTES = 1_000_000;
 const MAX_CANDIDATES = 200;
+const MAX_SIZE_PROBES = 20;
+const MAX_SIZE_PROBE_REDIRECTS = 1;
 
 function corsHeaders(origin) {
   const headers = {
@@ -65,11 +67,13 @@ async function readTextLimited(response, limit) {
   }
 }
 
-async function fetchPublicUrl(initialUrl, signal) {
+async function fetchPublicUrl(initialUrl, signal, options = {}) {
+  const method = options.method || 'GET';
+  const maxRedirects = Number.isInteger(options.maxRedirects) ? options.maxRedirects : MAX_REDIRECTS;
   let current = initialUrl instanceof URL ? initialUrl : new URL(initialUrl);
-  for (let redirectCount = 0; redirectCount <= MAX_REDIRECTS; redirectCount += 1) {
+  for (let redirectCount = 0; redirectCount <= maxRedirects; redirectCount += 1) {
     const response = await fetch(current.href, {
-      method: 'GET',
+      method,
       redirect: 'manual',
       signal,
       headers: {
@@ -79,7 +83,7 @@ async function fetchPublicUrl(initialUrl, signal) {
     });
 
     if (response.status >= 300 && response.status < 400) {
-      if (redirectCount === MAX_REDIRECTS) {
+      if (redirectCount === maxRedirects) {
         response.body?.cancel();
         throw Object.assign(new Error('Too many redirects'), { code: 'unreachable' });
       }
@@ -133,6 +137,36 @@ async function extractCandidates(html, baseUrl) {
   return dedupeCandidates(candidates).slice(0, MAX_CANDIDATES);
 }
 
+async function probeCandidateSize(item, signal) {
+  try {
+    const { response } = await fetchPublicUrl(item.url, signal, {
+      method: 'HEAD',
+      maxRedirects: MAX_SIZE_PROBE_REDIRECTS
+    });
+    if (!response.ok) {
+      response.body?.cancel();
+      return null;
+    }
+    const size = numericSize(response.headers.get('content-length'));
+    response.body?.cancel();
+    return size;
+  } catch (error) {
+    return null;
+  }
+}
+
+async function enrichCandidateSizes(items, signal) {
+  const enriched = items.map(item => ({ ...item }));
+  const probeCount = Math.min(enriched.length, MAX_SIZE_PROBES);
+  const sizes = await Promise.all(
+    enriched.slice(0, probeCount).map(item => probeCandidateSize(item, signal))
+  );
+  sizes.forEach((size, index) => {
+    if (size !== null) enriched[index].size = size;
+  });
+  return enriched;
+}
+
 async function analyze(target) {
   const checked = validatePublicUrl(target);
   if (!checked.ok) return errorPayload('invalid_url', 'The supplied URL is not allowed.');
@@ -141,9 +175,13 @@ async function analyze(target) {
   const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
   try {
     const { response, finalUrl } = await fetchPublicUrl(checked.url, controller.signal);
-    if (response.status === 401 || response.status === 403) {
+    if (response.status === 401) {
       response.body?.cancel();
       return errorPayload('authentication_required', 'The resource requires authentication.');
+    }
+    if (response.status === 403) {
+      response.body?.cancel();
+      return errorPayload('access_denied', 'The page refused automated analysis or requires additional permission.');
     }
     if (!response.ok) {
       response.body?.cancel();
@@ -175,8 +213,9 @@ async function analyze(target) {
     }
 
     const html = await readTextLimited(response, MAX_HTML_BYTES);
-    const items = await extractCandidates(html, finalUrl);
-    if (!items.length) return errorPayload('no_files', 'No downloadable files were found.');
+    const candidates = await extractCandidates(html, finalUrl);
+    if (!candidates.length) return errorPayload('no_files', 'No downloadable files were found.');
+    const items = await enrichCandidateSizes(candidates, controller.signal);
     return { status: 'ok', provider, items };
   } catch (error) {
     if (error?.name === 'AbortError') return errorPayload('timeout', 'The request timed out.');

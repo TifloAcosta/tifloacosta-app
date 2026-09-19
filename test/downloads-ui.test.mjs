@@ -30,6 +30,15 @@ test('opening the download section focuses the URL input', async () => {
   assert.match(source, /section\.hidden = false;\s*urlInput\.focus\(\);/);
 });
 
+test('pasted mobile URLs reach TifloAcosta validation instead of browser URL constraint validation', async () => {
+  const source = await read('downloads.js');
+  assert.match(source, /form\.noValidate = true/);
+  assert.match(source, /urlInput\.type = 'text'/);
+  assert.match(source, /urlInput\.inputMode = 'url'/);
+  assert.match(source, /urlInput\.autocapitalize = 'none'/);
+  assert.match(source, /urlInput\.spellcheck = false/);
+});
+
 test('filters do not move focus and every result gets its own download link', async () => {
   const source = await read('downloads.js');
   assert.match(source, /resultSearch\.addEventListener\('input', applyFilters\)/);

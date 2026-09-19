@@ -4,19 +4,19 @@ import test from 'node:test';
 
 const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
-test('PWA shell advances its cache and precaches the fixed download script URLs', async () => {
+test('PWA shell advances its cache and precaches the simple Downloads generation', async () => {
   const sw = await read('sw.js');
-  assert.match(sw, /tifloacosta-app-v2-17-download-loader/);
-  assert.match(sw, /app-core\.js\?v=1\.5/);
-  assert.doesNotMatch(sw, /app-core\.js\?v=1\.4/);
-  assert.match(sw, /downloads\.js\?v=1\.3/);
-  assert.match(sw, /downloads-iphone-bridge\.js\?v=1\.1/);
-  assert.match(sw, /sound-search\.js\?v=1\.1/);
+  assert.match(sw, /tifloacosta-app-v2-18-downloads-simple/);
+  assert.match(sw, /app-core\.js\?v=1\.6/);
+  assert.match(sw, /downloads\.js\?v=1\.4/);
+  assert.doesNotMatch(sw, /downloads-hub\.js/);
+  assert.doesNotMatch(sw, /downloads-iphone-bridge\.js/);
+  assert.doesNotMatch(sw, /sound-search\.js/);
 });
 
-test('homepage requests the fixed app core generation', async () => {
+test('homepage requests the current app core generation', async () => {
   const html = await read('index.html');
-  assert.match(html, /app-core\.js\?v=1\.5/);
+  assert.match(html, /app-core\.js\?v=1\.6/);
 });
 
 test('network-first PWA refresh bypasses the browser HTTP cache when online', async () => {
@@ -24,13 +24,12 @@ test('network-first PWA refresh bypasses the browser HTTP cache when online', as
   assert.match(sw, /fetch\(request,\s*\{\s*cache:\s*'no-store'\s*\}\)/);
 });
 
-test('stale feature script requests are redirected to the fresh asset generation', async () => {
+test('stale feature script requests are redirected only to the active Downloads generation', async () => {
   const sw = await read('sw.js');
   assert.match(sw, /pathname\.endsWith\('\/app-core\.js'\)/);
-  assert.match(sw, /searchParams\.set\('v',\s*'1\.5'\)/);
+  assert.match(sw, /searchParams\.set\('v',\s*'1\.6'\)/);
   assert.match(sw, /pathname\.endsWith\('\/downloads\.js'\)/);
-  assert.match(sw, /searchParams\.set\('v',\s*'1\.3'\)/);
-  assert.match(sw, /pathname\.endsWith\('\/downloads-iphone-bridge\.js'\)/);
-  assert.match(sw, /searchParams\.set\('v',\s*'1\.1'\)/);
-  assert.match(sw, /pathname\.endsWith\('\/sound-search\.js'\)/);
+  assert.match(sw, /searchParams\.set\('v',\s*'1\.4'\)/);
+  assert.doesNotMatch(sw, /pathname\.endsWith\('\/downloads-iphone-bridge\.js'\)/);
+  assert.doesNotMatch(sw, /pathname\.endsWith\('\/sound-search\.js'\)/);
 });

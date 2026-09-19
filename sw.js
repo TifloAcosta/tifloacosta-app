@@ -1,10 +1,10 @@
-const CACHE = 'tifloacosta-app-v2-16-download-assets';
+const CACHE = 'tifloacosta-app-v2-17-download-loader';
 const SHELL = [
   './',
   './index.html',
   './styles.css?v=1.2',
   './data.js?v=0.19',
-  './app-core.js?v=1.4',
+  './app-core.js?v=1.5',
   './downloads-core.js?v=1.1',
   './download-config.js?v=1.1',
   './downloads-hub.js?v=1.0',
@@ -18,95 +18,148 @@ const SHELL = [
   './actualidad.js?v=1.2',
   './actualidad-media.js?v=1.1',
   './app.js?v=2.1',
-  './actualidad.html',
-  './actualidad.json',
-  './actualidad-apps.json',
-  './actualidad-media.json',
-  './notifications.js?v=0.15',
-  './videos.html',
-  './video-search-index.js?v=1.0',
-  './videos-core.js?v=0.17',
-  './videos.js?v=2.1',
-  './videos.json',
-  './offline.html',
-  './manifest.webmanifest',
-  './book-cover.jpg',
+  './tifloacosta-favicon.ico',
   './tifloacosta-icon-192.png',
   './tifloacosta-icon-512.png',
   './tifloacosta-maskable-192.png',
   './tifloacosta-maskable-512.png',
   './tifloacosta-apple-touch-icon.png',
-  './tifloacosta-favicon.ico',
-  './tifloacosta-simbolo-blanco.svg'
+  './tifloacosta-simbolo-blanco.svg',
+  './book-cover.jpg',
+  './offline.html'
 ];
 
+const LIVE_PATHS = new Set([
+  '/actualidad.json',
+  '/actualidad-media.json',
+  '/actualidad-apps.json',
+  '/videos.json',
+  '/mobile-content.json',
+  '/video-search-index.js'
+]);
+
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)));
   self.skipWaiting();
+  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)));
 });
 
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.filter(key => key.startsWith('tifloacosta-app-') && key !== CACHE).map(key => caches.delete(key))))
+    caches.keys()
+      .then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
+      .then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
-async function networkFirst(request) {
-  try {
-    const url = new URL(request.url);
-    let response;
-    if (url.pathname.endsWith('/app-core.js')) {
-      url.searchParams.set('v', '1.4');
-      response = await fetch(url.href, { cache: 'no-store', credentials: 'same-origin' });
-    } else if (url.pathname.endsWith('/downloads.js')) {
-      url.searchParams.set('v', '1.3');
-      response = await fetch(url.href, { cache: 'no-store', credentials: 'same-origin' });
-    } else if (url.pathname.endsWith('/downloads-iphone-bridge.js')) {
-      url.searchParams.set('v', '1.1');
-      response = await fetch(url.href, { cache: 'no-store', credentials: 'same-origin' });
-    } else if (url.pathname.endsWith('/sound-search.js')) {
-      url.searchParams.set('v', '1.1');
-      response = await fetch(url.href, { cache: 'no-store', credentials: 'same-origin' });
-    } else {
-      response = await fetch(request, { cache: 'no-store' });
-    }
-    if (response && response.ok) {
-      const cache = await caches.open(CACHE);
-      await cache.put(request, response.clone());
-    }
-    return response;
-  } catch (error) {
-    const cached = await caches.match(request);
-    if (cached) return cached;
-    if (request.mode === 'navigate') return caches.match('./offline.html');
-    throw error;
-  }
-}
-
-async function cacheFirst(request) {
-  const cached = await caches.match(request);
-  if (cached) return cached;
-  const response = await fetch(request);
-  if (response && response.ok) {
-    const cache = await caches.open(CACHE);
-    await cache.put(request, response.clone());
-  }
-  return response;
-}
-
 self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET') return;
-  const url = new URL(event.request.url);
-  if (url.origin !== self.location.origin) return;
+  const request = event.request;
+  if (request.method !== 'GET') return;
+  const url = new URL(request.url);
+  const isAppOrigin = url.origin === self.location.origin;
+  const isLivePath = isAppOrigin && LIVE_PATHS.has(url.pathname);
 
-  const liveContent = event.request.mode === 'navigate' ||
-    event.request.destination === 'script' ||
-    event.request.destination === 'style' ||
-    url.pathname.endsWith('/videos.json') ||
-    url.pathname.endsWith('/actualidad.json') ||
-    url.pathname.endsWith('/actualidad-apps.json') ||
-    url.pathname.endsWith('/actualidad-media.json');
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request, { cache: 'no-store' })
+        .then(response => {
+          const copy = response.clone();
+          caches.open(CACHE).then(cache => cache.put('./index.html', copy));
+          return response;
+        })
+        .catch(() => caches.match('./index.html').then(cached => cached || caches.match('./offline.html')))
+    );
+    return;
+  }
 
-  event.respondWith(liveContent ? networkFirst(event.request) : cacheFirst(event.request));
+  if (isLivePath) {
+    event.respondWith(
+      fetch(request, { cache: 'no-store' })
+        .then(response => {
+          if (response && response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE).then(cache => cache.put(request, copy));
+          }
+          return response;
+        })
+        .catch(() => caches.match(request))
+    );
+    return;
+  }
+
+  if (isAppOrigin && url.pathname.endsWith('/app-core.js')) {
+    url.searchParams.set('v', '1.5');
+    event.respondWith(
+      fetch(url.href, { cache: 'no-store', credentials: 'same-origin' })
+        .then(response => {
+          if (response && response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE).then(cache => cache.put('./app-core.js?v=1.5', copy));
+          }
+          return response;
+        })
+        .catch(() => caches.match('./app-core.js?v=1.5').then(cached => cached || caches.match(request)))
+    );
+    return;
+  }
+
+  if (isAppOrigin && url.pathname.endsWith('/downloads.js')) {
+    url.searchParams.set('v', '1.3');
+    event.respondWith(
+      fetch(url.href, { cache: 'no-store', credentials: 'same-origin' })
+        .then(response => {
+          if (response && response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE).then(cache => cache.put('./downloads.js?v=1.3', copy));
+          }
+          return response;
+        })
+        .catch(() => caches.match('./downloads.js?v=1.3').then(cached => cached || caches.match(request)))
+    );
+    return;
+  }
+
+  if (isAppOrigin && url.pathname.endsWith('/downloads-iphone-bridge.js')) {
+    url.searchParams.set('v', '1.1');
+    event.respondWith(
+      fetch(url.href, { cache: 'no-store', credentials: 'same-origin' })
+        .then(response => {
+          if (response && response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE).then(cache => cache.put('./downloads-iphone-bridge.js?v=1.1', copy));
+          }
+          return response;
+        })
+        .catch(() => caches.match('./downloads-iphone-bridge.js?v=1.1').then(cached => cached || caches.match(request)))
+    );
+    return;
+  }
+
+  if (isAppOrigin && url.pathname.endsWith('/sound-search.js')) {
+    url.searchParams.set('v', '1.1');
+    event.respondWith(
+      fetch(url.href, { cache: 'no-store', credentials: 'same-origin' })
+        .then(response => {
+          if (response && response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE).then(cache => cache.put('./sound-search.js?v=1.1', copy));
+          }
+          return response;
+        })
+        .catch(() => caches.match('./sound-search.js?v=1.1').then(cached => cached || caches.match(request)))
+    );
+    return;
+  }
+
+  event.respondWith(
+    caches.match(request).then(cached => {
+      const network = fetch(request).then(response => {
+        if (response && response.ok && isAppOrigin) {
+          const copy = response.clone();
+          caches.open(CACHE).then(cache => cache.put(request, copy));
+        }
+        return response;
+      });
+      return cached || network;
+    }).catch(() => caches.match('./offline.html'))
+  );
 });

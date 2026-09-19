@@ -11,9 +11,7 @@ test('router starts on one screen and focuses its heading', () => {
     focusScreenHeading: () => { headingFocuses += 1; },
     restoreOriginFocus: () => {}
   });
-
   router.start('home');
-
   assert.deepEqual(router.current(), { name: 'home', originId: null });
   assert.deepEqual(renders, [{ name: 'home', originId: null }]);
   assert.equal(headingFocuses, 1);
@@ -28,18 +26,45 @@ test('navigate pushes a screen and back restores the origin on the previous scre
     focusScreenHeading: () => { headingFocuses += 1; },
     restoreOriginFocus: originId => restored.push(originId)
   });
-
   router.start('home');
   router.navigate('search', { originId: 'home-search' });
   router.navigate('library', { originId: 'result-resource-r1' });
-
   assert.deepEqual(router.current(), { name: 'library', originId: 'result-resource-r1' });
   assert.equal(headingFocuses, 3);
-
   assert.equal(router.back(), true);
   assert.deepEqual(router.current(), { name: 'search', originId: 'home-search' });
   assert.deepEqual(renders.at(-1), { name: 'search', originId: 'home-search' });
   assert.deepEqual(restored, ['result-resource-r1']);
+});
+
+test('Downloads link Back returns to Downloads and restores the launcher focus', () => {
+  const restored = [];
+  const router = createRouter({
+    render: () => {},
+    focusScreenHeading: () => {},
+    restoreOriginFocus: originId => restored.push(originId)
+  });
+  router.start('home');
+  router.navigate('downloads', { originId: 'home-downloads' });
+  router.navigate('downloads-link', { originId: 'downloads-open-link' });
+  assert.equal(router.back(), true);
+  assert.deepEqual(router.current(), { name: 'downloads', originId: 'home-downloads' });
+  assert.deepEqual(restored, ['downloads-open-link']);
+});
+
+test('Sound search Back returns to Downloads and restores the launcher focus', () => {
+  const restored = [];
+  const router = createRouter({
+    render: () => {},
+    focusScreenHeading: () => {},
+    restoreOriginFocus: originId => restored.push(originId)
+  });
+  router.start('home');
+  router.navigate('downloads', { originId: 'home-downloads' });
+  router.navigate('downloads-sounds', { originId: 'downloads-open-sounds' });
+  assert.equal(router.back(), true);
+  assert.deepEqual(router.current(), { name: 'downloads', originId: 'home-downloads' });
+  assert.deepEqual(restored, ['downloads-open-sounds']);
 });
 
 test('back at home returns false without rendering or moving focus', () => {
@@ -51,7 +76,6 @@ test('back at home returns false without rendering or moving focus', () => {
     focusScreenHeading: () => { headingFocuses += 1; },
     restoreOriginFocus: () => { restorations += 1; }
   });
-
   router.start('home');
   assert.equal(router.back(), false);
   assert.equal(renders, 1);
@@ -62,10 +86,7 @@ test('back at home returns false without rendering or moving focus', () => {
 test('focusScreenHeading focuses the screen heading when present', () => {
   let focused = false;
   const heading = { focus: () => { focused = true; } };
-  const root = {
-    querySelector: selector => selector === '[data-screen-heading]' ? heading : null
-  };
-
+  const root = { querySelector: selector => selector === '[data-screen-heading]' ? heading : null };
   assert.equal(focusScreenHeading(root), true);
   assert.equal(focused, true);
 });
@@ -78,10 +99,7 @@ test('focusScreenHeading safely returns false when heading is missing', () => {
 test('restoreOriginFocus focuses the requested control and handles missing controls', () => {
   let focused = false;
   const target = { focus: () => { focused = true; } };
-  const root = {
-    querySelector: selector => selector === '#result-resource-r1' ? target : null
-  };
-
+  const root = { querySelector: selector => selector === '#result-resource-r1' ? target : null };
   assert.equal(restoreOriginFocus(root, 'result-resource-r1'), true);
   assert.equal(focused, true);
   assert.equal(restoreOriginFocus(root, 'missing-control'), false);

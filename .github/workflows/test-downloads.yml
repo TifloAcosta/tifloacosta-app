@@ -12,6 +12,8 @@ on:
       - 'downloads.css'
       - 'download-config.js'
       - 'sound-search*.js'
+      - 'sw.js'
+      - 'privacidad/**'
       - 'download-worker/**'
       - 'test/downloads-*.test.mjs'
       - 'test/sound-search-*.test.mjs'

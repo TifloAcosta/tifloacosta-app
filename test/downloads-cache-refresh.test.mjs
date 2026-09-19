@@ -8,6 +8,7 @@ test('PWA shell advances its cache and precaches the fixed download script URLs'
   const sw = await read('sw.js');
   assert.match(sw, /tifloacosta-app-v2-17-download-loader/);
   assert.match(sw, /app-core\.js\?v=1\.5/);
+  assert.doesNotMatch(sw, /app-core\.js\?v=1\.4/);
   assert.match(sw, /downloads\.js\?v=1\.3/);
   assert.match(sw, /downloads-iphone-bridge\.js\?v=1\.1/);
   assert.match(sw, /sound-search\.js\?v=1\.1/);

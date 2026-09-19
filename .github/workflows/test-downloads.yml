@@ -3,11 +3,12 @@ name: Test download feature
 on:
   push:
     branches:
-      - 'feature/activate-download-analyzer'
+      - 'feature/**'
     paths:
       - 'downloads.js'
       - 'downloads-core.js'
       - 'download-config.js'
+      - 'download-worker/**'
       - 'test/downloads-*.test.mjs'
       - '.github/workflows/test-downloads.yml'
 

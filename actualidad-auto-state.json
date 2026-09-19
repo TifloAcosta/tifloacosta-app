@@ -1,4 +1,47 @@
 {
   "version": 1,
-  "stories": {}
+  "stories": {
+    "techcrunch-d5b6bc6e9a751206": {
+      "attempts": 1,
+      "lastAttemptAt": "2026-09-19T08:52:03.177Z",
+      "sourceFingerprint": "7befd88f57bf948ec3096de219825141e2a06c6fa878abcd6d999d2a693e37c4",
+      "status": "error",
+      "lastError": "OpenAI Responses API request failed with status 429"
+    },
+    "9to5mac-0f7a948640aa6e6b": {
+      "attempts": 1,
+      "lastAttemptAt": "2026-09-19T08:52:03.177Z",
+      "sourceFingerprint": "8dfe44f679a0e52597573d361fc0988899eac6d2cae22597c80c744fd4513ea7",
+      "status": "error",
+      "lastError": "OpenAI Responses API request failed with status 429"
+    },
+    "techcrunch-8a85ab530e356a25": {
+      "attempts": 1,
+      "lastAttemptAt": "2026-09-19T08:52:03.177Z",
+      "sourceFingerprint": "e9c25e10a76e4a880d6595c8881d417c0bea4e03efdd3cea1da4439cdb709dcd",
+      "status": "error",
+      "lastError": "OpenAI Responses API request failed with status 429"
+    },
+    "techcrunch-efb05293c8c30a7f": {
+      "attempts": 1,
+      "lastAttemptAt": "2026-09-19T08:52:03.177Z",
+      "sourceFingerprint": "e89c109e4ca98b2c8e742d1ef556b910bea371eb8c1233914e0068028e778c6e",
+      "status": "error",
+      "lastError": "OpenAI Responses API request failed with status 429"
+    },
+    "9to5mac-46c2eed521afd193": {
+      "attempts": 1,
+      "lastAttemptAt": "2026-09-19T08:52:03.177Z",
+      "sourceFingerprint": "0e28429143485968e727340e2c25159dfa818638a23ee92c712168e0b8cab687",
+      "status": "error",
+      "lastError": "OpenAI Responses API request failed with status 429"
+    },
+    "engadget-49fccbdeca3e3e62": {
+      "attempts": 1,
+      "lastAttemptAt": "2026-09-19T08:52:03.177Z",
+      "sourceFingerprint": "c45c596ebdf74b776ae3a522473d7f228bbbc9df1ceff4e8d3c9715da62d5a88",
+      "status": "error",
+      "lastError": "OpenAI Responses API request failed with status 429"
+    }
+  }
 }

@@ -4,18 +4,14 @@ import test from 'node:test';
 
 const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
-test('app core loads the iPhone interaction bridge after both download UIs', async () => {
+test('simple Downloads does not load the old iPhone interaction bridge', async () => {
   const source = await read('app-core.js');
-  const linkUi = source.indexOf("appendScript('downloads.js?v=1.3'");
-  const soundUi = source.indexOf("appendScript('sound-search.js?v=1.1'");
-  const bridge = source.indexOf("appendScript('downloads-iphone-bridge.js?v=1.1'");
-  assert.ok(linkUi >= 0);
-  assert.ok(soundUi >= 0);
-  assert.ok(bridge > linkUi);
-  assert.ok(bridge > soundUi);
+  assert.match(source, /downloads\.js\?v=1\.4/);
+  assert.doesNotMatch(source, /sound-search\.js/);
+  assert.doesNotMatch(source, /downloads-iphone-bridge\.js/);
 });
 
-test('iPhone bridge announces link paste but leaves Analyze progress to the real download UI', async () => {
+test('dormant iPhone bridge still contains its link interaction safeguards', async () => {
   const source = await read('downloads-iphone-bridge.js');
   assert.match(source, /download-form/);
   assert.match(source, /download-url/);
@@ -28,7 +24,7 @@ test('iPhone bridge announces link paste but leaves Analyze progress to the real
   assert.doesNotMatch(source, /linkActivated/);
 });
 
-test('iPhone bridge announces sound query but leaves Search progress to the real sound UI', async () => {
+test('dormant bridge still contains its sound interaction safeguards', async () => {
   const source = await read('downloads-iphone-bridge.js');
   assert.match(source, /sound-search-form/);
   assert.match(source, /sound-query/);
@@ -43,10 +39,10 @@ test('bridge announcements cannot asynchronously overwrite a later analysis stat
   assert.doesNotMatch(source, /window\.setTimeout\(\(\) => \{ status\.textContent = message; \}, 20\)/);
 });
 
-test('bridge status announcements remain accessible and service worker precaches the bridge', async () => {
+test('dormant bridge remains accessible but is not precached by the simple shell', async () => {
   const [bridge, sw] = await Promise.all([read('downloads-iphone-bridge.js'), read('sw.js')]);
   assert.match(bridge, /setAttribute\('role',\s*'status'\)/);
   assert.match(bridge, /setAttribute\('aria-live',\s*'assertive'\)/);
-  assert.match(sw, /tifloacosta-app-v2-16-download-assets/);
-  assert.match(sw, /downloads-iphone-bridge\.js\?v=1\.1/);
+  assert.match(sw, /tifloacosta-app-v2-18-downloads-simple/);
+  assert.doesNotMatch(sw, /downloads-iphone-bridge\.js/);
 });

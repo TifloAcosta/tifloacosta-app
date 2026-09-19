@@ -1,5 +1,220 @@
 [
   {
+    "id": "9to5mac-90f36c7c7f381e3d",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/19/heres-why-apple-watch-series-12-may-get-me-to-ditch-whoop/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-19T14:09:00.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple Watch Series 12 might finally convince me to switch away from WHOOP",
+        "summary": "Earlier this year, I picked up a WHOOP for the very first time. As a longtime Apple Watch user I was looking forward to having a new way of tracking my health stats in a cleaner interface that the Apple Watch wasn’t offering. Now, with Apple Watch Series 12, I’m very convinced to switch back to the Apple Watch. Here’s why. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-f3ae4a3c21d97d1c",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/podcast/997382/openai-microsoft-anthropic-elon-musk-cartel-ai-competition",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-19T14:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Does AI need an antitrust exemption so it doesn’t kill everyone????",
+        "summary": "Today on Decoder, we’ve got the first of a two-part series on the future of business, and I’m talking with Jonathan Kanter, the former antitrust chief for the US Department of Justice in the Biden administration. These days, he’s both a professor of law at WashU and professor of technology policy at Carnegie Mellon. The […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-57059678c290dbbd",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/19/best-iphone-18-pro-accessories/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-19T13:57:00.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Our top iPhone 18 Pro accessories to upgrade your setup [Updated]",
+        "summary": "We are taking look at some of the iPhone 18 Pro accessories we are picking up for ourselves this year before Friday’s delivery day. If you ask me Apple’s AirTag 2 and a fresh set of AirPods Pro 3 (or AirPods 5) are the best accessories you can buy for your new iPhone 18 Pro, never mind the world’s greatest Polishing Cloth, but we are digging in a bit deeper here – chargers, MagSafe mounts, cases, wallets, and more. Check it all out below. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-69cff6dcc0e81729",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2263198/google-gemini-escaped-testing-environment-hacked-three-companies/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-19T13:05:53.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google Gemini also escaped its testing environment and hacked three companies",
+        "summary": "Google's AI model hacked real companies during testing due to a misconfiguration by its testing partner, as well.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-f04c8e3c8f6451c2",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/19/apple-work-password-management-is-still-hard-and-dashlanes-new-vault-enforcement-admits-it/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-19T13:00:00.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple @ Work: Enterprise oassword management is still hard, and Dashlane’s new Vault Enforcement aims to fix it",
+        "summary": "Apple @ Work is exclusively brought to you by Mosyle , the only Apple Unified Platform. Mosyle is the only solution that integrates in a single professional grade platform all the solutions necessary to seamlessly and automatically deploy, manage, and protect Apple devices at work. Over 45,000 organizations trust Mosyle to make millions of Apple devices work ready with no effort and at an affordable cost. Request your EXTENDED TRIAL today and understand why Mosyle is everything you need to work with Apple . There was a post on X going viral a few weeks ago about password management. The password keeper book is more secure than most people want to admit. As the user said: Reminder that it is quite difficult to hack a piece of paper. Nobody is gonna zero day a book on a shelf in your house, and if they are somehow motivated enough to steal it, you have bigger things to worry about then your facebook password leaking… With that being said, I still believe a properly implemented password management tool is one of the best security measures you can deploy in your organization. Dashlane is rolling out a new solution to help better secure credentials in the enterprise. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-6e8488b9866d31b2",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/19/vals-backed-by-andreessen-horowitz-is-looking-to-become-the-gold-standard-for-ai-benchmarking/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-19T13:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Vals, backed by Andreessen Horowitz, is looking to become the gold standard for AI benchmarking",
+        "summary": "Vals AI is hoping to make AI benchmarking a more neutral and trustworthy resource in a world increasingly inundated by AI models.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-ed60e3600df57955",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/997706/the-ai-regulation-smackdown-isnt-over",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-19T13:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The AI regulation smackdown isn’t over",
+        "summary": "At the start of this week, the who's-who of AI seemed - at least tentatively - on the side of AI regulation. Over the weekend, Anthropic CEO Dario Amodei had proposed a three-step plan for slowing AI development, including by embedding third-party evaluators in labs, coordinating across the domestic industry, and forging international agreements potentially […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-0c91d83e5560c2dc",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2257815/noise-cancelling-headphones-pros-and-cons/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-19T12:30:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The pros and cons of using noise cancelling headphones",
+        "summary": "Active noise cancellation makes headphones much better, but you should know how it works and what the drawbacks are as well.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-8a0af042c1b8530d",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2257814/laptop-stuck-pixel-causes-fixes/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-19T12:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "android"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "What causes a stuck pixel on your laptop and can it be fixed?",
+        "summary": "Stuck pixels don't have to be a death sentence for your laptop, as there are several options that can bring them back to life.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "techcrunch-d5b6bc6e9a751206",
     "type": "news",
     "sourceId": "techcrunch",
@@ -18,33 +233,6 @@
       "en": {
         "title": "Tilly Norwood’s press tour is going about as well as you’d expect for an AI",
         "summary": "In one particularly odd interview, Norwood seems to malfunction and begin speaking Chinese.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-0f7a948640aa6e6b",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5google.com/2026/09/18/gemini-macos-imessage/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T23:57:57.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "windows",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Gemini app for macOS adding send and read iMessage integration",
-        "summary": "Google’s latest update to the Gemini app for macOS readies local iMessage integration. This follows the app coming to Windows last week. more…",
         "body": ""
       }
     },
@@ -75,102 +263,6 @@
     "media": null
   },
   {
-    "id": "techcrunch-efb05293c8c30a7f",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/18/anthropic-is-operating-a-lab-that-conducts-biology-experiments/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T23:13:31.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Anthropic is operating a lab that conducts biology experiments",
-        "summary": "AI leaders have been promising that AI is the key to curing human disease. Anthropic researchers have also been warning that AI might kill us all.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-46c2eed521afd193",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/18/the-quantified-scientist-tests-the-apple-watch-series-12s-new-heart-rate-sensor/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T23:08:18.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The Quantified Scientist tests the Apple Watch Series 12’s new heart rate sensor",
-        "summary": "In a new video, The Quantified Scientist’s Rob ter Horst compares the new Apple Watch Series 12’s heart rate sensor against a Polar H10 ECG chest strap. Here’s what he found. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-49fccbdeca3e3e62",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2257610/how-focus-mode-changed-ios-27/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T23:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "How Focus mode has changed in iOS 27",
-        "summary": "iOS 27 brings tons of cool upgrades to your iPhone. Don't miss the interesting-yet-subtle changes to Focus.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-b025cc4b6dba5ce7",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2263043/ai-almost-led-the-us-military-to-attack-china-report-says/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T22:44:45.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "AI almost led the US military to start a war with China, report says",
-        "summary": "CNN's sources claim the US nearly attacked a Chinese ship it believed was carrying nuclear weapon components.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "the-verge-b6e66c4a57c4fa1f",
     "type": "news",
     "sourceId": "the-verge",
@@ -189,54 +281,6 @@
       "en": {
         "title": "OpenAI and Microsoft knew they were starting a ‘doom loop’ for the web",
         "summary": "Recently unsealed court documents in the New York Times' case against OpenAI and Microsoft are pretty damning. The companies' own documentation warned that it was starting a \"doom loop\" that would damage the web, characterized its scraping of data to train its models as the \"largest theft of labor in human history,\" and that it […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-0e33f5993a0d71ff",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2262932/what-to-expect-at-meta-connect-2026-new-ai-glasses-a-mixed-reality-headset-and-more/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T20:35:11.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "What to expect at Meta Connect 2026: New AI glasses, a mixed reality headset and more",
-        "summary": "There's a lot for Mark Zuckerberg to cover at this year's keynote.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-4446d49034da6bdf",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/18/ios-27-and-ipados-27-expand-language-support-for-dictionary-quicktype-keyboard-more/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T20:31:30.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iOS 27 and iPadOS 27 expand language support for Dictionary, QuickType Keyboard, more",
-        "summary": "Apple today updated its iOS and iPadOS 27 Feature Availability page, confirming that more than 30 new languages and language variants are now supported across features such as Dictionary: Thesaurus, Activate with Siri, and Visual Look Up. Here’s what’s new. more…",
         "body": ""
       }
     },
@@ -285,54 +329,6 @@
       "en": {
         "title": "FAA tees up $875M AI tool to help manage air traffic congestion",
         "summary": "FAA plans for AI tool to help manage DC air traffic before a nationwide rollout.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-70caa6be7824d2ac",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/policy/997573/virginia-governor-spanberger-data-center-ai-task-force",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T18:29:17.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Virginia governor creates an AI task force and moves to restrain data centers",
-        "summary": "Virginia Gov. Abigail Spanberger ordered the state government to take steps that could empower local communities to have a larger say in data center development and slow down approvals in a state that is already home to the data center capital of the world. Executive Order 22 bans executive branch officials from signing nondisclosure agreements […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-a1a8b07c6a19beb0",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/entertainment/997555/karandeep-anand-disney-character-ai",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T18:27:04.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Disney’s first CTO is Character.AI’s former CEO",
-        "summary": "You would think that a multimedia conglomerate as large as Disney would have a few chief technology officers by now, but the company has just appointed someone to the position for the very first time. Today, Disney announced that Karandeep Anand is joining the company as its new CTO. Anand will report directly to recently […]",
         "body": ""
       }
     },

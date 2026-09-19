@@ -3,14 +3,16 @@
 
   const labels = {
     es: {
-      received: 'Enlace recibido. Pulsa Analizar enlace.',
-      activated: 'Botón Analizar activado. Validando enlace…',
-      missing: 'Diagnóstico: el formulario de Descargas no está disponible.'
+      linkReceived: 'Enlace recibido. Pulsa Analizar enlace.',
+      linkActivated: 'Botón Analizar activado. Validando enlace…',
+      soundReceived: 'Consulta de sonidos recibida. Pulsa Buscar sonidos.',
+      soundActivated: 'Botón Buscar sonidos activado. Buscando sonidos…'
     },
     en: {
-      received: 'Link received. Press Analyze link.',
-      activated: 'Analyze button activated. Validating link…',
-      missing: 'Diagnostic: the Downloads form is not available.'
+      linkReceived: 'Link received. Press Analyze link.',
+      linkActivated: 'Analyze button activated. Validating link…',
+      soundReceived: 'Sound search received. Press Search sounds.',
+      soundActivated: 'Search sounds button activated. Searching sounds…'
     }
   };
 
@@ -18,8 +20,8 @@
     return document.documentElement.lang === 'en' ? 'en' : 'es';
   }
 
-  function announce(message) {
-    const status = document.getElementById('download-status');
+  function announce(statusId, message) {
+    const status = document.getElementById(statusId);
     if (!status) return;
     status.setAttribute('role', 'status');
     status.setAttribute('aria-live', 'assertive');
@@ -28,35 +30,57 @@
     window.setTimeout(() => { status.textContent = message; }, 20);
   }
 
-  function connect() {
+  function connectDownload() {
     const form = document.getElementById('download-form');
     const input = document.getElementById('download-url');
     const button = document.getElementById('download-analyze');
-    if (!form || !input || !button) {
-      announce(labels[language()].missing);
-      return false;
-    }
+    if (!form || !input || !button) return false;
     if (button.dataset.iphoneBridge === 'true') return true;
     button.dataset.iphoneBridge = 'true';
 
     input.addEventListener('input', () => {
-      if (String(input.value || '').trim()) announce(labels[language()].received);
+      if (String(input.value || '').trim()) announce('download-status', labels[language()].linkReceived);
     });
 
     button.addEventListener('click', event => {
       event.preventDefault();
-      announce(labels[language()].activated);
+      announce('download-status', labels[language()].linkActivated);
       form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
     });
 
     return true;
   }
 
-  if (!connect()) {
+  function connectSounds() {
+    const form = document.getElementById('sound-search-form');
+    const input = document.getElementById('sound-query');
+    const button = document.getElementById('sound-search-submit');
+    if (!form || !input || !button) return false;
+    if (button.dataset.iphoneBridge === 'true') return true;
+    button.dataset.iphoneBridge = 'true';
+
+    input.addEventListener('input', () => {
+      if (String(input.value || '').trim()) announce('sound-status', labels[language()].soundReceived);
+    });
+
+    button.addEventListener('click', event => {
+      event.preventDefault();
+      announce('sound-status', labels[language()].soundActivated);
+      form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+    });
+
+    return true;
+  }
+
+  function connectAll() {
+    return connectDownload() && connectSounds();
+  }
+
+  if (!connectAll()) {
     let attempts = 0;
     const timer = window.setInterval(() => {
       attempts += 1;
-      if (connect() || attempts >= 40) window.clearInterval(timer);
+      if (connectAll() || attempts >= 40) window.clearInterval(timer);
     }, 100);
   }
 })();

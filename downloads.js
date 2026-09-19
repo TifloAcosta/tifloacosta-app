@@ -15,7 +15,7 @@
     es: {
       launcher: 'Descargar desde un enlace', heading: 'Descargar desde un enlace',
       intro: 'Pega un enlace público o compartido y TifloAcosta intentará localizar los archivos descargables disponibles.',
-      back: 'Volver al inicio', label: 'Pega aquí el enlace', placeholder: 'https://…', analyze: 'Analizar enlace',
+      back: 'Volver a Descargas', label: 'Pega aquí el enlace', placeholder: 'https://…', analyze: 'Analizar enlace',
       analyzing: 'Analizando enlace…', invalid: 'El enlace no es válido. Utiliza una dirección que empiece por http:// o https://.',
       resultsHeading: 'Archivos encontrados', resultSearch: 'Buscar entre los archivos encontrados', type: 'Tipo de archivo', all: 'Todos',
       found: (visible, total) => visible === total ? `${total} archivo${total === 1 ? '' : 's'} encontrado${total === 1 ? '' : 's'}.` : `${visible} de ${total} archivos visibles.`,
@@ -33,7 +33,7 @@
     en: {
       launcher: 'Download from a link', heading: 'Download from a link',
       intro: 'Paste a public or shared link and TifloAcosta will try to locate the downloadable files that are available.',
-      back: 'Back to home', label: 'Paste the link here', placeholder: 'https://…', analyze: 'Analyze link',
+      back: 'Back to Downloads', label: 'Paste the link here', placeholder: 'https://…', analyze: 'Analyze link',
       analyzing: 'Analyzing link…', invalid: 'The link is not valid. Use an address beginning with http:// or https://.',
       resultsHeading: 'Files found', resultSearch: 'Search within the files found', type: 'File type', all: 'All',
       found: (visible, total) => visible === total ? `${total} file${total === 1 ? '' : 's'} found.` : `${visible} of ${total} files visible.`,
@@ -51,7 +51,6 @@
   };
 
   let allResults = [];
-  let launcher;
   let section;
   let form;
   let urlInput;
@@ -81,22 +80,14 @@
     const button = element('button', { className: 'button-link back-link', text: t().back });
     button.type = 'button';
     button.dataset.downloadBack = 'true';
-    button.addEventListener('click', () => { window.location.hash = '#home'; });
+    button.addEventListener('click', () => { window.location.hash = '#downloads'; });
     wrapper.append(button);
     return wrapper;
   }
 
   function buildSurface() {
-    const nav = document.querySelector('#home-blocks .resource-actions');
     const main = document.getElementById('main');
-    if (!nav || !main || document.getElementById('downloads-section')) return false;
-
-    launcher = element('button', { id: 'home-open-downloads', className: 'button-link', text: t().launcher });
-    launcher.type = 'button';
-    launcher.addEventListener('click', () => { window.location.hash = '#downloads'; });
-    const videosLauncher = document.getElementById('home-open-videos');
-    if (videosLauncher && videosLauncher.parentElement === nav) nav.insertBefore(launcher, videosLauncher);
-    else nav.append(launcher);
+    if (!main || document.getElementById('downloads-section')) return false;
 
     section = element('section', { id: 'downloads-section' });
     section.hidden = true;
@@ -348,7 +339,6 @@
 
   function localize() {
     if (!section) return;
-    launcher.textContent = t().launcher;
     section.querySelector('#downloads-heading').textContent = t().heading;
     section.querySelector('#downloads-intro').textContent = t().intro;
     section.querySelector('label[for="download-url"]').textContent = t().label;
@@ -363,10 +353,10 @@
 
   function applyVisibility() {
     if (!section) return;
-    const active = window.location.hash.replace(/^#/, '') === 'downloads';
+    const active = window.location.hash.replace(/^#/, '') === 'downloads-link';
     section.hidden = !active;
     if (!active) return;
-    ['home-hero','home-blocks','global-search-section','resources-view','news-view','book-section','contact-section','privacy-section','config-section']
+    ['home-hero','home-blocks','global-search-section','resources-view','news-view','book-section','contact-section','privacy-section','config-section','downloads-hub','sound-search-section']
       .forEach(id => { const node = document.getElementById(id); if (node) node.hidden = true; });
     document.querySelectorAll('.site-header,.site-footer,.skip-link').forEach(node => { node.hidden = true; });
     section.hidden = false;

@@ -17,6 +17,14 @@ test('download UI preserves pending external context and accessible focus behavi
   assert.match(source, /does not receive or store your credentials/);
 });
 
+test('link downloader owns the downloads-link route and returns to the Downloads hub', async () => {
+  const source = await read('downloads.js');
+  assert.match(source, /=== 'downloads-link'/);
+  assert.match(source, /window\.location\.hash = '#downloads'/);
+  assert.match(source, /Volver a Descargas/);
+  assert.match(source, /Back to Downloads/);
+});
+
 test('opening the download section focuses the URL input', async () => {
   const source = await read('downloads.js');
   assert.match(source, /section\.hidden = false;\s*urlInput\.focus\(\);/);

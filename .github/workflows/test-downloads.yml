@@ -5,11 +5,18 @@ on:
     branches:
       - 'feature/**'
     paths:
+      - 'app-core.js'
       - 'downloads.js'
       - 'downloads-core.js'
+      - 'downloads-hub.js'
+      - 'downloads.css'
       - 'download-config.js'
+      - 'sound-search*.js'
+      - 'sw.js'
+      - 'privacidad/**'
       - 'download-worker/**'
       - 'test/downloads-*.test.mjs'
+      - 'test/sound-search-*.test.mjs'
       - '.github/workflows/deploy-download-worker.yml'
       - '.github/workflows/test-downloads.yml'
 

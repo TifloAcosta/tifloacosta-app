@@ -136,14 +136,18 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     if (!document.querySelector('link[data-tiflo-downloads-style]')) {
       const style = document.createElement('link');
       style.rel = 'stylesheet';
-      style.href = new URL('downloads.css?v=1.0', document.baseURI).href;
+      style.href = new URL('downloads.css?v=1.1', document.baseURI).href;
       style.dataset.tifloDownloadsStyle = 'true';
       document.head.append(style);
     }
 
     appendScript('search-accessibility.js?v=1.1', 'data-tiflo-search-accessibility');
-    appendScript('downloads-core.js?v=1.0', 'data-tiflo-download-core');
-    appendScript('download-config.js?v=1.0', 'data-tiflo-download-config');
-    appendScript('downloads.js?v=1.0', 'data-tiflo-download-ui');
+    appendScript('downloads-core.js?v=1.1', 'data-tiflo-download-core');
+    appendScript('download-config.js?v=1.1', 'data-tiflo-download-config');
+    appendScript('downloads-hub.js?v=1.0', 'data-tiflo-download-hub');
+    appendScript('downloads.js?v=1.1', 'data-tiflo-download-ui');
+    appendScript('sound-search-core.js?v=1.0', 'data-tiflo-sound-core');
+    appendScript('sound-search-config.js?v=1.0', 'data-tiflo-sound-config');
+    appendScript('sound-search.js?v=1.0', 'data-tiflo-sound-ui');
   }, { once: true });
 }

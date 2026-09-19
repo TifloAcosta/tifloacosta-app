@@ -14,18 +14,32 @@ jobs:
   diagnose:
     runs-on: ubuntu-latest
     steps:
-      - name: Compare app and analyzer network paths
+      - name: Inspect workers.dev fallback
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         shell: bash
         run: |
           set -euo pipefail
-          echo '=== tifloacosta.com ==='
-          dig +short @1.1.1.1 tifloacosta.com A
-          dig +short @1.1.1.1 tifloacosta.com AAAA
-          curl -4 -sS -o /dev/null -w 'main IPv4 HTTP %{http_code} remote=%{remote_ip}\n' --max-time 12 https://tifloacosta.com/
-          curl -6 -sS -o /dev/null -w 'main IPv6 HTTP %{http_code} remote=%{remote_ip}\n' --max-time 12 https://tifloacosta.com/ || true
 
-          echo '=== download.tifloacosta.com ==='
-          dig +short @1.1.1.1 download.tifloacosta.com A
-          dig +short @1.1.1.1 download.tifloacosta.com AAAA
-          curl -4 -sS -o /dev/null -w 'download IPv4 HTTP %{http_code} remote=%{remote_ip}\n' --max-time 12 https://download.tifloacosta.com/analyze
-          curl -6 -sS -o /dev/null -w 'download IPv6 HTTP %{http_code} remote=%{remote_ip}\n' --max-time 12 https://download.tifloacosta.com/analyze || true
+          curl -sS \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/subdomain" \
+            -o account-subdomain.json
+
+          curl -sS \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/scripts/tifloacosta-download-analyzer/subdomain" \
+            -o script-subdomain.json
+
+          python - <<'PY'
+          import json
+          account = json.load(open('account-subdomain.json', encoding='utf-8'))
+          script = json.load(open('script-subdomain.json', encoding='utf-8'))
+          print('account_success:', account.get('success'))
+          print('workers_dev_subdomain:', (account.get('result') or {}).get('subdomain'))
+          print('script_success:', script.get('success'))
+          print('script_enabled:', (script.get('result') or {}).get('enabled'))
+          print('previews_enabled:', (script.get('result') or {}).get('previews_enabled'))
+          print('script_errors:', script.get('errors'))
+          PY

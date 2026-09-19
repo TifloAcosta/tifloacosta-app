@@ -67,7 +67,7 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "A startup that builds other startups raised $100M, and is all-in on physical AI",
+        "title": "A startup that builds other startups raised $100M and is all-in on physical AI",
         "summary": "UP.Labs, now doing business under the name Vantora, is building startups for industrial corporations.",
         "body": ""
       }
@@ -117,6 +117,30 @@
       "en": {
         "title": "The Quantified Scientist tests the Apple Watch Series 12’s new heart rate sensor",
         "summary": "In a new video, The Quantified Scientist’s Rob ter Horst compares the new Apple Watch Series 12’s heart rate sensor against a Polar H10 ECG chest strap. Here’s what he found. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-49fccbdeca3e3e62",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2257610/how-focus-mode-changed-ios-27/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-18T23:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "How Focus mode has changed in iOS 27",
+        "summary": "iOS 27 brings tons of cool upgrades to your iPhone. Don't miss the interesting-yet-subtle changes to Focus.",
         "body": ""
       }
     },
@@ -261,30 +285,6 @@
       "en": {
         "title": "FAA tees up $875M AI tool to help manage air traffic congestion",
         "summary": "FAA plans for AI tool to help manage DC air traffic before a nationwide rollout.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-2d074cdcc3bf2037",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2262703/disney-hires-ex-ceo-of-ai-company-it-accused-of-copyright-infringement/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T18:36:47.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Disney hires ex-CEO of AI company it accused of copyright infringement",
-        "summary": "What's a little IP theft between friends?",
         "body": ""
       }
     },
@@ -828,30 +828,6 @@
     "media": null
   },
   {
-    "id": "applevis-apps-75966efe0c087eb0",
-    "type": "news",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/earcade",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-13T19:56:43.000Z",
-    "categories": [
-      "apple",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Earcade",
-        "summary": "Earcade is a collection of nine audio-only games for blind and low vision players. Every game is played entirely by ear; no visual information is required at any point. The games use binaural HRTF spatial audio, so the position and movement of objects is conveyed through where sounds appear around you. Headphones are recommended. Haptic feedback is used alongside audio in most of the games. Menus and navigation are built for VoiceOver. The app is free, has no ads, and no gameplay content is locked behind a purchase. There is an optional tip jar which unlocks nothing.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "accessible-android-61b8cf8d7281682c",
     "type": "news",
     "sourceId": "accessible-android",
@@ -1242,6 +1218,32 @@
       "en": {
         "title": "Apple Releases iOS 26.6.2 and iPadOS 26.6.2 with Fix for Problems Downloading Updates over Cellular Connections",
         "summary": "Apple has today released iOS 26.6.2 and iPadOS 26.6.2, bringing a fix for an issue that prevented users from downloading updates over cellular connections. As iOS 26.6.2 and iPadOS 26.6.2 were not distributed to external testers prior to their release, we do not have any information on whether they contain any accessibility fixes for blind, deaf blind, or low vision users at the time of writing. However, as these updates appear to have been released to address a specific issue, we do not expect them to contain any such fixes. Release Notes iOS 26.6.2 This update fixes an issue that prevents downloading a software update over a cellular connection. iPadOS 26.6.2 This update fixes an issue that prevents downloading a software update over a cellular connection. How to Update iOS and iPadOS 26.6.2 are available via Over-the-Air Update (Settings > General > Software Update), via Finder on a Mac with macOS Catalina or later, or via iTunes on a PC or Mac with macOS Mojave or earlier. Before updating, we strongly recommend making a full and complete backup of your device (either locally or in iCloud, depending on personal preference). This will ensure that, in the unlikely event that something goes wrong during the update process, you will have a current backup on hand in case a device restore becomes necessary. Also, if using OTA update, we recommend plugging your device into a power source for the duration of the download/installation process, so as to prevent the unlikely event of your battery going dead during the update.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "applevis-apps-6a1cfaa5549dda14",
+    "type": "news",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/productivity/private-llm-local-private-ai-iphone-ipad-mac",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-08T14:54:19.000Z",
+    "categories": [
+      "apple",
+      "apps-accesibles",
+      "windows",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Private LLM - Local & Private AI for iPhone, iPad & Mac",
+        "summary": "Discover the Ultimate Privacy-Focused AI Assistant on iOS: Private LLM Unlock a new realm of productivity and creativity on your iPhone and iPad with Private LLM, the premier AI assistant designed with your privacy in mind. Available for a one-time purchase, it offers a range of AI capabilities without needing a subscription. Experience advanced on-device AI that keeps your interactions confidential and offline. Why Private LLM is Your Go-To AI Companion: - Exclusive AI Model Selection: Choose from a diverse set of open-source LLM models optimized for performance and perplexity on iOS with state of the art OmniQuant quantization: including models from Llama 2, Llama 3.2, Llama 3.1, Google Gemma 2, Gemma 3, Microsoft Phi-3, Mistral 7B, Qwen 2.5, Qwen 3, StableLM 3B and many more. Whether you need help with creative brainstorming, coding, or daily questions, customize your AI experience to meet your unique needs. - Integrated with Siri & Shortcuts: Enhance your AI interactions with Siri commands and customizable Shortcuts. Private LLM seamlessly fits within your Apple ecosystem, making your digital assistant more accessible. - Customizable Interactions: Tailor your AI’s responses and interactions with customizable system prompts to match your preferences and needs. - Uncompromised Privacy and Security: With Private LLM, your conversations stay confidential and on your device. Our advanced on-device AI performs robust computing without risking data compromise or needing an internet connection. - Family Sharing & Offline Capabilities: Benefit from a one-time purchase that includes Family Sharing. Download models as needed and enjoy the full functionality of your AI assistant, even without internet access. Supported LLM Model families: - DeepSeek R1 Distill based models - Phi 4 based models - Qwen 3 based models (Qwen3-4B-Instruct-2507) - Qwen 2.5 based models (0.5B, 1.5B, 3B and 7B) - Qwen 2.5 Coder based Models (0.5B, 1.5B, 3B, 7B and 14B) - Llama 3.1 8B based models - Llama 3.2 1B and 3B based models - Google Gemma 2 2B and 9B based models - Google Gemma 3 1B based models - Mistral 7B based models - Yi 6B based models For a full list of supported models, including detailed specifications, please visit privatellm.app/models. Private LLM is not just a chatbot; it’s a comprehensive AI companion designed to respect your privacy while providing versatile, on-demand assistance. Whether you’re enhancing your creative writing, tackling complex programming challenges, or just seeking answers, Private LLM adapts to meet your needs while keeping your data secure. Start your journey with Private LLM today and elevate your productivity and creative projects with the most private AI assistant for iOS devices. Private LLM is a better alternative to generic llama.cpp and MLX wrappers apps like Enchanted, Ollama, LLM Farm, LM Studio, Locally AI, RecurseChat, etc on three fronts: 1. Private LLM uses a faster and highly-optimized mlc-llm based inference engine. 2. Models in Private LLM are quantized using the state of the art quantization algorithms like OmniQuant, while competing apps use naive round-to-nearest quantization. 3. Private LLM is a fully native app built using C++, Metal and Swift with deep integrations with iOS and iPadOS, while many of the competing apps are bloated and non-native Electron or Flutter based apps. Please note that Private LLM only supports inference with text based LLMs. Model support varies by device capabilities.",
         "body": ""
       }
     },

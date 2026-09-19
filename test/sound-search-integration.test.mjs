@@ -4,10 +4,10 @@ import test from 'node:test';
 
 const read = file => readFile(new URL(`../${file}`, import.meta.url), 'utf8');
 
-test('service worker caches sound static assets', async () => {
+test('service worker keeps dormant sound assets out of the Downloads shell', async () => {
   const sw = await read('sw.js');
   for (const asset of ['downloads-hub.js','sound-search-core.js','sound-search-config.js','sound-search.js']) {
-    assert.match(sw, new RegExp(asset.replace('.', '\\.')));
+    assert.doesNotMatch(sw, new RegExp(asset.replace('.', '\\.')));
   }
 });
 

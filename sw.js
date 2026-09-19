@@ -1,19 +1,14 @@
-const CACHE = 'tifloacosta-app-v2-17-download-loader';
+const CACHE = 'tifloacosta-app-v2-18-downloads-simple';
 const SHELL = [
   './',
   './index.html',
   './styles.css?v=1.2',
   './data.js?v=0.19',
-  './app-core.js?v=1.5',
+  './app-core.js?v=1.6',
   './downloads-core.js?v=1.1',
   './download-config.js?v=1.1',
-  './downloads-hub.js?v=1.0',
-  './downloads.js?v=1.3',
-  './downloads-iphone-bridge.js?v=1.1',
+  './downloads.js?v=1.4',
   './downloads.css?v=1.1',
-  './sound-search-core.js?v=1.0',
-  './sound-search-config.js?v=1.0',
-  './sound-search.js?v=1.1',
   './actualidad-core.js?v=1.6',
   './actualidad.js?v=1.2',
   './actualidad-media.js?v=1.1',
@@ -87,65 +82,33 @@ self.addEventListener('fetch', event => {
   }
 
   if (isAppOrigin && url.pathname.endsWith('/app-core.js')) {
-    url.searchParams.set('v', '1.5');
+    url.searchParams.set('v', '1.6');
     event.respondWith(
       fetch(url.href, { cache: 'no-store', credentials: 'same-origin' })
         .then(response => {
           if (response && response.ok) {
             const copy = response.clone();
-            caches.open(CACHE).then(cache => cache.put('./app-core.js?v=1.5', copy));
+            caches.open(CACHE).then(cache => cache.put('./app-core.js?v=1.6', copy));
           }
           return response;
         })
-        .catch(() => caches.match('./app-core.js?v=1.5').then(cached => cached || caches.match(request)))
+        .catch(() => caches.match('./app-core.js?v=1.6').then(cached => cached || caches.match(request)))
     );
     return;
   }
 
   if (isAppOrigin && url.pathname.endsWith('/downloads.js')) {
-    url.searchParams.set('v', '1.3');
+    url.searchParams.set('v', '1.4');
     event.respondWith(
       fetch(url.href, { cache: 'no-store', credentials: 'same-origin' })
         .then(response => {
           if (response && response.ok) {
             const copy = response.clone();
-            caches.open(CACHE).then(cache => cache.put('./downloads.js?v=1.3', copy));
+            caches.open(CACHE).then(cache => cache.put('./downloads.js?v=1.4', copy));
           }
           return response;
         })
-        .catch(() => caches.match('./downloads.js?v=1.3').then(cached => cached || caches.match(request)))
-    );
-    return;
-  }
-
-  if (isAppOrigin && url.pathname.endsWith('/downloads-iphone-bridge.js')) {
-    url.searchParams.set('v', '1.1');
-    event.respondWith(
-      fetch(url.href, { cache: 'no-store', credentials: 'same-origin' })
-        .then(response => {
-          if (response && response.ok) {
-            const copy = response.clone();
-            caches.open(CACHE).then(cache => cache.put('./downloads-iphone-bridge.js?v=1.1', copy));
-          }
-          return response;
-        })
-        .catch(() => caches.match('./downloads-iphone-bridge.js?v=1.1').then(cached => cached || caches.match(request)))
-    );
-    return;
-  }
-
-  if (isAppOrigin && url.pathname.endsWith('/sound-search.js')) {
-    url.searchParams.set('v', '1.1');
-    event.respondWith(
-      fetch(url.href, { cache: 'no-store', credentials: 'same-origin' })
-        .then(response => {
-          if (response && response.ok) {
-            const copy = response.clone();
-            caches.open(CACHE).then(cache => cache.put('./sound-search.js?v=1.1', copy));
-          }
-          return response;
-        })
-        .catch(() => caches.match('./sound-search.js?v=1.1').then(cached => cached || caches.match(request)))
+        .catch(() => caches.match('./downloads.js?v=1.4').then(cached => cached || caches.match(request)))
     );
     return;
   }

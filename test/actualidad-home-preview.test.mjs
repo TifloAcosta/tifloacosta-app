@@ -38,18 +38,15 @@ test('Actualidad home labels are bilingual', async () => {
   assert.match(source, /open:'View all news'/);
 });
 
-test('service worker treats all Actualidad catalogs and scripts as live content', async () => {
+test('service worker keeps Actualidad scripts cached and its catalogs live', async () => {
   const worker = await read('sw.js');
-  assert.match(worker, /'\.\/actualidad\.html'/);
-  assert.match(worker, /'\.\/styles\.css\?v=1\.2'/);
   assert.match(worker, /'\.\/actualidad-core\.js\?v=1\.6'/);
   assert.match(worker, /'\.\/actualidad\.js\?v=1\.2'/);
   assert.match(worker, /'\.\/actualidad-media\.js\?v=1\.1'/);
-  assert.match(worker, /'\.\/actualidad\.json'/);
-  assert.match(worker, /'\.\/actualidad-apps\.json'/);
-  assert.match(worker, /'\.\/actualidad-media\.json'/);
-  assert.match(worker, /url\.pathname\.endsWith\('\/actualidad\.json'\)/);
-  assert.match(worker, /url\.pathname\.endsWith\('\/actualidad-apps\.json'\)/);
-  assert.match(worker, /url\.pathname\.endsWith\('\/actualidad-media\.json'\)/);
-  assert.match(worker, /tifloacosta-app-v2-16-download-assets/);
+  assert.match(worker, /'\/actualidad\.json'/);
+  assert.match(worker, /'\/actualidad-apps\.json'/);
+  assert.match(worker, /'\/actualidad-media\.json'/);
+  assert.match(worker, /request\.mode === 'navigate'/);
+  assert.match(worker, /LIVE_PATHS\.has\(url\.pathname\)/);
+  assert.match(worker, /tifloacosta-app-v2-18-downloads-simple/);
 });

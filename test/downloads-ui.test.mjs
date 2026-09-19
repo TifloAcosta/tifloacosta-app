@@ -17,12 +17,13 @@ test('download UI preserves pending external context and accessible focus behavi
   assert.match(source, /does not receive or store your credentials/);
 });
 
-test('link downloader owns the downloads-link route and returns to the Downloads hub', async () => {
+test('simple link downloader owns the downloads route and returns directly to home', async () => {
   const source = await read('downloads.js');
-  assert.match(source, /=== 'downloads-link'/);
-  assert.match(source, /window\.location\.hash = '#downloads'/);
-  assert.match(source, /Volver a Descargas/);
-  assert.match(source, /Back to Downloads/);
+  assert.match(source, /=== 'downloads'/);
+  assert.match(source, /window\.location\.hash = '#home'/);
+  assert.match(source, /Volver al inicio/);
+  assert.match(source, /Back to home/);
+  assert.doesNotMatch(source, /=== 'downloads-link'/);
 });
 
 test('opening the download section focuses the URL input', async () => {

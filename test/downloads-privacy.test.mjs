@@ -15,7 +15,7 @@ test('privacy policy discloses transient URL analysis without credentials or fil
   assert.match(html, /does not store credentials/i);
 });
 
-test('privacy policy discloses sound-search queries and provider boundaries in both languages', async () => {
+test('privacy policy keeps the dormant sound-search disclosure in both languages', async () => {
   const html = await read('privacidad/index.html');
   assert.match(html, /Buscar sonidos/);
   assert.match(html, /Freesound/);
@@ -26,16 +26,16 @@ test('privacy policy discloses sound-search queries and provider boundaries in b
   assert.match(html, /Pixabay/);
 });
 
-test('service worker refreshes the download and sound-search feature files', async () => {
+test('service worker refreshes only the active simple Downloads feature files', async () => {
   const source = await read('sw.js');
-  assert.match(source, /tifloacosta-app-v2-16-download-assets/);
+  assert.match(source, /tifloacosta-app-v2-18-downloads-simple/);
   assert.match(source, /downloads-core\.js\?v=1\.1/);
   assert.match(source, /download-config\.js\?v=1\.1/);
-  assert.match(source, /downloads-hub\.js\?v=1\.0/);
-  assert.match(source, /downloads\.js\?v=1\.3/);
-  assert.match(source, /downloads-iphone-bridge\.js\?v=1\.1/);
+  assert.match(source, /downloads\.js\?v=1\.4/);
   assert.match(source, /downloads\.css\?v=1\.1/);
-  assert.match(source, /sound-search-core\.js\?v=1\.0/);
-  assert.match(source, /sound-search-config\.js\?v=1\.0/);
-  assert.match(source, /sound-search\.js\?v=1\.1/);
+  assert.doesNotMatch(source, /downloads-hub\.js/);
+  assert.doesNotMatch(source, /downloads-iphone-bridge\.js/);
+  assert.doesNotMatch(source, /sound-search-core\.js/);
+  assert.doesNotMatch(source, /sound-search-config\.js/);
+  assert.doesNotMatch(source, /sound-search\.js/);
 });

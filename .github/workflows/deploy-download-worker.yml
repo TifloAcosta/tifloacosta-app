@@ -1,5 +1,6 @@
 name: Deploy download analyzer
 
+# Re-run deployment smoke checks after DNS proxy changes.
 on:
   workflow_dispatch:
   push:

@@ -62,6 +62,22 @@ jobs:
           grep -q '"code":"no_files"' response.json
           grep -qi '^access-control-allow-origin: https://tifloacosta.com' headers.txt
 
+          health_status=$(curl -sS -o same-origin-health.json -w "%{http_code}" \
+            https://tifloacosta.com/api/download/health)
+          cat same-origin-health.json
+          test "$health_status" = "200"
+          grep -q '"service":"tifloacosta-download-analyzer"' same-origin-health.json
+
+          same_origin_status=$(curl -sS -o same-origin-response.json -w "%{http_code}" \
+            -X POST \
+            -H 'Origin: https://tifloacosta.com' \
+            -H 'Content-Type: application/json' \
+            --data '{"url":"https://example.com/"}' \
+            https://tifloacosta.com/api/download/analyze)
+          cat same-origin-response.json
+          test "$same_origin_status" = "422"
+          grep -q '"code":"no_files"' same-origin-response.json
+
           sounds_status=$(curl -sS -o sounds-response.json -w "%{http_code}" \
             -X POST \
             -H 'Origin: https://tifloacosta.com' \

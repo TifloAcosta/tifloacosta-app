@@ -4,9 +4,9 @@ import test from 'node:test';
 
 const read = file => readFile(new URL(`../${file}`, import.meta.url), 'utf8');
 
-test('analyzer uses the deployed Worker endpoint', async () => {
+test('analyzer uses the main-domain Worker endpoint', async () => {
   const [source, config] = await Promise.all([read('downloads.js'), read('download-config.js')]);
-  assert.match(config, /endpoint:\s*'https:\/\/download\.tifloacosta\.com\/analyze'/);
+  assert.match(config, /endpoint:\s*'https:\/\/tifloacosta\.com\/api\/download\/analyze'/);
   assert.doesNotMatch(config, /endpoint:\s*''/);
   assert.match(source, /method:\s*'POST'/);
   assert.match(source, /body:\s*JSON\.stringify\(\{ url \}\)/);

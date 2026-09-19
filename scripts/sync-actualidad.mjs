@@ -1,8 +1,10 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
+import { runAutomaticEditorial } from './actualidad-auto-adapt.mjs';
 import { mergeEditorial } from './actualidad-editorial.mjs';
 import { normalizeFeedEntry, parseCtiNewsHtml, parseFeedXml } from './actualidad-feed.mjs';
+import { createActualidadAIClient } from './openai-actualidad-client.mjs';
 
 const require = createRequire(import.meta.url);
 const core = require('../actualidad-core.js');
@@ -91,7 +93,7 @@ async function fetchSource(source, fetchFn) {
   throw lastError || new Error(`Unable to fetch ${source.id}`);
 }
 
-export async function syncActualidad({ sources, editorial, fetchFn = fetch, now = new Date() }) {
+export async function syncActualidad({ sources, editorial, fetchFn = fetch, now = new Date(), automaticEditorial = null }) {
   const enabled = (Array.isArray(sources) ? sources : [])
     .filter(source => source?.enabled !== false && source?.id && source?.feedUrl)
     .sort((a, b) => sourceKey(a).localeCompare(sourceKey(b)));
@@ -118,8 +120,22 @@ export async function syncActualidad({ sources, editorial, fetchFn = fetch, now 
     if (!uniqueByUrl.has(story.originalUrl)) uniqueByUrl.set(story.originalUrl, story);
   }
 
+  const sourceStories = [...uniqueByUrl.values()];
+  let effectiveEditorial = Array.isArray(editorial) ? editorial : [];
+  let automaticResult = null;
+  let automaticError = '';
+
+  if (typeof automaticEditorial === 'function') {
+    try {
+      automaticResult = await automaticEditorial(sourceStories);
+      if (Array.isArray(automaticResult?.editorial)) effectiveEditorial = automaticResult.editorial;
+    } catch (error) {
+      automaticError = String(error?.message || error);
+    }
+  }
+
   const cutoff = retentionCutoff(now);
-  const merged = mergeEditorial([...uniqueByUrl.values()], editorial);
+  const merged = mergeEditorial(sourceStories, effectiveEditorial);
   const stories = core.sortStories(
     merged
       .map(item => core.normalizeContent(item))
@@ -127,29 +143,53 @@ export async function syncActualidad({ sources, editorial, fetchFn = fetch, now 
       .filter(item => new Date(item.publishedAt).getTime() >= cutoff)
   );
 
-  return { stories, failedSources };
+  return { stories, failedSources, editorial: effectiveEditorial, automaticResult, automaticError };
 }
 
 async function readJson(path) {
   return JSON.parse(await readFile(path, 'utf8'));
 }
 
+async function writeJsonIfChanged(path, value) {
+  const next = `${JSON.stringify(value, null, 2)}\n`;
+  let previous = '';
+  try { previous = await readFile(path, 'utf8'); } catch (error) { /* first generation */ }
+  if (previous !== next) await writeFile(path, next, 'utf8');
+  return previous !== next;
+}
+
 async function main() {
   const root = new URL('../', import.meta.url);
-  const [sources, editorial] = await Promise.all([
+  const now = new Date();
+  const [sources, editorial, state, config, guidelines] = await Promise.all([
     readJson(new URL('actualidad-sources.json', root)),
-    readJson(new URL('actualidad-editorial.json', root))
+    readJson(new URL('actualidad-editorial.json', root)),
+    readJson(new URL('actualidad-auto-state.json', root)),
+    readJson(new URL('actualidad-auto-config.json', root)),
+    readFile(new URL('docs/actualidad-editorial-guidelines.md', root), 'utf8')
   ]);
 
-  const { stories, failedSources } = await syncActualidad({ sources, editorial, fetchFn: fetch });
-  const outputUrl = new URL('actualidad.json', root);
-  const next = `${JSON.stringify(stories, null, 2)}\n`;
-  let previous = '';
-  try { previous = await readFile(outputUrl, 'utf8'); } catch (error) { /* first generation */ }
+  const apiKey = String(process.env.OPENAI_API_KEY || '').trim();
+  const aiClient = apiKey ? createActualidadAIClient({ apiKey, model: config.model }) : null;
+  const automaticEditorial = aiClient
+    ? sourceStories => runAutomaticEditorial({ stories: sourceStories, sources, editorial, state, aiClient, config, guidelines, now })
+    : null;
 
-  if (previous !== next) await writeFile(outputUrl, next, 'utf8');
-  if (failedSources.length) console.warn(`Actualidad sources unavailable: ${failedSources.join(', ')}`);
-  console.log(`Actualidad stories: ${stories.length}. Changed: ${previous !== next ? 'yes' : 'no'}.`);
+  const result = await syncActualidad({ sources, editorial, fetchFn: fetch, now, automaticEditorial });
+  const outputChanged = await writeJsonIfChanged(new URL('actualidad.json', root), result.stories);
+  let editorialChanged = false;
+  let stateChanged = false;
+
+  if (result.automaticResult) {
+    editorialChanged = await writeJsonIfChanged(new URL('actualidad-editorial.json', root), result.automaticResult.editorial);
+    stateChanged = await writeJsonIfChanged(new URL('actualidad-auto-state.json', root), result.automaticResult.state);
+  }
+
+  if (!apiKey) console.log('Actualidad automatic adaptation: skipped (OPENAI_API_KEY not configured).');
+  if (result.automaticError) console.warn(`Actualidad automatic adaptation unavailable: ${result.automaticError}`);
+  if (result.failedSources.length) console.warn(`Actualidad sources unavailable: ${result.failedSources.join(', ')}`);
+  if (result.automaticResult?.stats) console.log(`Actualidad automatic editorial: ${JSON.stringify(result.automaticResult.stats)}`);
+  console.log(`Actualidad stories: ${result.stories.length}. Changed: ${outputChanged || editorialChanged || stateChanged ? 'yes' : 'no'}.`);
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {

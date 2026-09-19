@@ -1,0 +1,9 @@
+{
+  "model": "gpt-5.6-luna",
+  "maxEvaluationsPerRun": 6,
+  "maxAdaptationsPerRun": 2,
+  "maxContrastSearchesPerStory": 1,
+  "maxAttempts": 3,
+  "retryAfterMinutes": 60,
+  "candidateMaxAgeDays": 14
+}

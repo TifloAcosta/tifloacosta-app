@@ -124,7 +124,7 @@ Trasladar al Android la utilidad ya disponible en web para analizar una URL y pr
 2. El foco se coloca en el encabezado de pantalla mediante el sistema móvil existente.
 3. Se muestra un campo etiquetado para pegar o escribir una URL.
 4. El usuario activa `Analizar`.
-5. La app aplica primero resoluciones locales que ya puedan resolverse de forma segura, si corresponde.
+5. La app aplica primero reglas móviles puras equivalentes a las ya probadas en `downloads-core.js` para enlaces directos, Google Drive y Dropbox; estas reglas se portan al núcleo móvil sin copiar dependencias de DOM ni del router web.
 6. Para páginas generales usa el Worker `/analyze`.
 7. Presenta resultados como una lista accesible.
 8. Cada resultado ofrece `Guardar` cuando existe una URL descargable directa.
@@ -297,12 +297,12 @@ Sin fijar nombres irrevocables, la implementación debería encajar aproximadame
 - `mobile/src/screens/downloads.mjs`: centro de Descargas.
 - `mobile/src/screens/download-link.mjs`: análisis por URL.
 - `mobile/src/screens/sound-search.mjs`: búsqueda de sonidos.
-- `mobile/src/core/downloads.mjs`: normalización y cliente del analizador.
+- `mobile/src/core/downloads.mjs`: normalización, reglas puras de enlaces directos/Drive/Dropbox y cliente del analizador.
 - `mobile/src/core/sound-search.mjs`: normalización y cliente del buscador de sonidos.
 - `mobile/src/core/native-actions.mjs`: reutilización; cambios solo si una necesidad Android real lo exige.
 - `mobile/test/**`: pruebas nuevas de navegación, análisis, sonidos y accesibilidad estructural.
 
-No se copiarán directamente los módulos web `downloads*.js` y `sound-search*.js` dentro de Android si dependen del DOM y router web. Se reutilizarán contratos, reglas y casos de prueba, no una arquitectura incompatible.
+No se copiarán directamente los módulos web `downloads*.js` y `sound-search*.js` dentro de Android si dependen del DOM y router web. Se reutilizarán contratos, reglas puras y casos de prueba, no una arquitectura incompatible.
 
 ## Pruebas obligatorias
 
@@ -321,8 +321,8 @@ Casos mínimos:
 - URL vacía;
 - esquema inseguro;
 - enlace directo;
-- Google Drive cuando el resolver existente lo soporte;
-- Dropbox cuando el resolver existente lo soporte;
+- Google Drive con la misma resolución pura validada en web;
+- Dropbox con la misma resolución pura validada en web;
 - página con varios archivos;
 - tamaño desconocido;
 - respuesta 401;

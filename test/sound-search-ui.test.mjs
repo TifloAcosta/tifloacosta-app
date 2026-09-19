@@ -11,7 +11,7 @@ test('sound search has labelled controls, live status and stable child route', a
   }
   assert.match(source, /aria-live/);
   assert.match(source, /downloads-sounds/);
-  assert.match(source, /window\.location\.hash = '#downloads'/);
+  assert.match(source, /window\.location\.hash\s*=\s*'#downloads'/);
 });
 
 test('sound search supports bilingual categories and requires term or category', async () => {
@@ -27,7 +27,7 @@ test('preview never autoplays and stops previous audio', async () => {
   assert.doesNotMatch(source, /autoplay\s*=\s*true/);
   assert.match(source, /activeAudio/);
   assert.match(source, /activeAudio\.pause\(\)/);
-  assert.match(source, /preload = 'none'/);
+  assert.match(source, /preload\s*=\s*'none'/);
 });
 
 test('sound result actions contain the sound name and safe external navigation', async () => {
@@ -40,9 +40,9 @@ test('sound result actions contain the sound name and safe external navigation',
 
 test('missing metadata is omitted while known duration, format and size can be rendered', async () => {
   const source = await read('sound-search.js').catch(() => '');
-  assert.match(source, /item\.duration !== null/);
+  assert.match(source, /item\.duration\s*!==\s*null/);
   assert.match(source, /item\.format/);
-  assert.match(source, /item\.size !== null/);
+  assert.match(source, /item\.size\s*!==\s*null/);
   assert.match(source, /downloadCore\.formatBytes/);
 });
 

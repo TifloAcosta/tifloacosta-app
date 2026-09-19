@@ -43,3 +43,13 @@ test('blocked automated access is explained separately from authentication', asy
   assert.match(source, /La página ha rechazado el análisis automático/);
   assert.match(source, /The page refused automated analysis/);
 });
+
+test('blocked automated access offers the original site outside TifloAcosta', async () => {
+  const source = await read('downloads.js');
+  assert.match(source, /payload\.code === 'access_denied'/);
+  assert.match(source, /renderExternalNotice\(local\.provider, normalized\.href, 'blocked'\)/);
+  assert.match(source, /Abrir sitio externo/);
+  assert.match(source, /Open external site/);
+  assert.match(source, /link\.target = '_blank'/);
+  assert.match(source, /link\.rel = 'noopener noreferrer'/);
+});

@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
+// Guard against publishing mixed cache generations of the download feature.
 const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
 function versionFor(source, asset) {

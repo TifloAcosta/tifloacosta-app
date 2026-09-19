@@ -1,5 +1,174 @@
 [
   {
+    "id": "engadget-07354fc7cc9919fa",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2258268/why-ipad-not-charging-fixes/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-19T17:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Why is your iPad not charging (and how to fix it)",
+        "summary": "You probably don't think about your iPad charging until it runs into trouble. When plugging it in doesn't work, you'll need to check its port and charger.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-68ae201458cd25f2",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/19/googles-gemini-is-the-latest-ai-model-to-hack-other-companies/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-19T17:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google’s Gemini is the latest AI model to hack other companies",
+        "summary": "Google said Gemini had \"acted appropriately\" by ending each hack immediately.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-4166356c81259b96",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2263218/california-governor-wants-to-implement-a-kill-switch-for-frontier-ai-models/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-19T17:00:01.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "California governor wants to implement a kill switch for frontier AI models",
+        "summary": "Newsom's executive order calls for an expert panel to develop new AI safety measures.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "accessible-android-31c50c6553225d4d",
+    "type": "news",
+    "sourceId": "accessible-android",
+    "sourceName": "Accessible Android",
+    "sourceUrl": "https://accessibleandroid.com/",
+    "originalUrl": "https://accessibleandroid.com/app/accessimind-screen-reader/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-19T16:31:01.000Z",
+    "categories": [
+      "android",
+      "apps-accesibles",
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Accessimind Screen Reader",
+        "summary": "Accessimind Reader is a screen reader application developed to enable visually impaired and partially sighted users to use their Android phones more clearly, quickly, and…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-63cb4627ea358209",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2258194/how-to-switch-between-two-phones-apple-carplay/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-19T16:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "How to switch between two phones on CarPlay",
+        "summary": "When using Apple's CarPlay, it will automatically connect to the first iPhone it was paired with. Here's how to get it to connect to a different device.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-b0d46e51aa0fda82",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/997795/google-gemini-rogue-ai-hack",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-19T15:25:03.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Gemini went rogue, hacked three companies, and Google hid it",
+        "summary": "In May, Gemini broke containment and hacked three different companies, but Google didn't disclose the incident until the Wall Street Journal approached the company. The hacks happened during a test of the model's cybersecurity capabilities run by third-party Irregular, which was also involved in similar incidents involving Meta and OpenAI. According to WSJ, Google didn't […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-11fb6f7f530ad3e1",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/19/ai-safety-conversations-have-gotten-unbelievable/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-19T15:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "AI safety conversations have gotten unbelievable",
+        "summary": "This week two conversations about AI safety went viral that demonstrate just how hard it is to discern AI fact from fiction.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "9to5mac-90f36c7c7f381e3d",
     "type": "news",
     "sourceId": "9to5mac",
@@ -72,30 +241,6 @@
     "media": null
   },
   {
-    "id": "engadget-69cff6dcc0e81729",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2263198/google-gemini-escaped-testing-environment-hacked-three-companies/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-19T13:05:53.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google Gemini also escaped its testing environment and hacked three companies",
-        "summary": "Google's AI model hacked real companies during testing due to a misconfiguration by its testing partner, as well.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "9to5mac-f04c8e3c8f6451c2",
     "type": "news",
     "sourceId": "9to5mac",
@@ -162,125 +307,6 @@
       "en": {
         "title": "The AI regulation smackdown isn’t over",
         "summary": "At the start of this week, the who's-who of AI seemed - at least tentatively - on the side of AI regulation. Over the weekend, Anthropic CEO Dario Amodei had proposed a three-step plan for slowing AI development, including by embedding third-party evaluators in labs, coordinating across the domestic industry, and forging international agreements potentially […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-0c91d83e5560c2dc",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2257815/noise-cancelling-headphones-pros-and-cons/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-19T12:30:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The pros and cons of using noise cancelling headphones",
-        "summary": "Active noise cancellation makes headphones much better, but you should know how it works and what the drawbacks are as well.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-8a0af042c1b8530d",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2257814/laptop-stuck-pixel-causes-fixes/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-19T12:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "android"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "What causes a stuck pixel on your laptop and can it be fixed?",
-        "summary": "Stuck pixels don't have to be a death sentence for your laptop, as there are several options that can bring them back to life.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-d5b6bc6e9a751206",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/18/tilly-norwoods-press-tour-is-going-about-as-well-as-youd-expect-for-an-ai/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-19T00:12:07.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Tilly Norwood’s press tour is going about as well as you’d expect for an AI",
-        "summary": "In one particularly odd interview, Norwood seems to malfunction and begin speaking Chinese.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-8a85ab530e356a25",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/18/a-startup-that-builds-other-startups-raised-100m-and-is-all-in-on-physical-ai/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T23:25:01.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "A startup that builds other startups raised $100M and is all-in on physical AI",
-        "summary": "UP.Labs, now doing business under the name Vantora, is building startups for industrial corporations.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-b6e66c4a57c4fa1f",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/997633/openai-microsoft-chatgpt-ai-new-york-times-doom-loop-theft-google-zero",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T21:07:24.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "OpenAI and Microsoft knew they were starting a ‘doom loop’ for the web",
-        "summary": "Recently unsealed court documents in the New York Times' case against OpenAI and Microsoft are pretty damning. The companies' own documentation warned that it was starting a \"doom loop\" that would damage the web, characterized its scraping of data to train its models as the \"largest theft of labor in human history,\" and that it […]",
         "body": ""
       }
     },

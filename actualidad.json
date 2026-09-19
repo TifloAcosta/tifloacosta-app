@@ -2340,30 +2340,5 @@
       }
     },
     "media": null
-  },
-  {
-    "id": "accessible-android-e3d173bca63a2350",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/framework-detector/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-06-21T10:28:22.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Framework Detector",
-        "summary": "Ever wondered what framework powers your favorite Android app? Framework Detector App is the ultimate Android framework identifier for developers, reverse engineers, and technology enthusiasts.…",
-        "body": ""
-      }
-    },
-    "media": null
   }
 ]

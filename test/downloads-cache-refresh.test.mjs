@@ -19,6 +19,11 @@ test('homepage requests the current app core generation', async () => {
   assert.match(html, /app-core\.js\?v=1\.6/);
 });
 
+test('Downloads workflow reruns when the homepage changes', async () => {
+  const workflow = await read('.github/workflows/test-downloads.yml');
+  assert.match(workflow, /- 'index\.html'/);
+});
+
 test('network-first PWA refresh bypasses the browser HTTP cache when online', async () => {
   const sw = await read('sw.js');
   assert.match(sw, /fetch\(request,\s*\{\s*cache:\s*'no-store'\s*\}\)/);

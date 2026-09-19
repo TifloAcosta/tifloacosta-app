@@ -55,13 +55,12 @@ test('provider failure remains recoverable and external sound banks stay visible
   assert.match(source, /The internal search could not be completed/);
 });
 
-test('app core loads sound-search modules in dependency order', async () => {
+test('app core keeps sound-search modules dormant after the Downloads rollback', async () => {
   const source = await read('app-core.js');
-  const core = source.indexOf('sound-search-core.js?v=1.0');
-  const config = source.indexOf('sound-search-config.js?v=1.0');
-  const ui = source.indexOf('sound-search.js?v=1.1');
-  assert.ok(core >= 0 && config > core && ui > config);
-  assert.match(source, /data-tiflo-sound-core/);
-  assert.match(source, /data-tiflo-sound-config/);
-  assert.match(source, /data-tiflo-sound-ui/);
+  assert.match(source, /downloads\.js\?v=1\.4/);
+  assert.doesNotMatch(source, /downloads-hub\.js/);
+  assert.doesNotMatch(source, /sound-search-core\.js/);
+  assert.doesNotMatch(source, /sound-search-config\.js/);
+  assert.doesNotMatch(source, /sound-search\.js/);
+  assert.doesNotMatch(source, /downloads-iphone-bridge\.js/);
 });

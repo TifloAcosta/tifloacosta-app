@@ -5,14 +5,15 @@ import test from 'node:test';
 const read = path => readFile(new URL(`../../${path}`, import.meta.url), 'utf8');
 
 test('Android bootstrap is isolated, reproducible and supports secret-backed release signing', async () => {
-  const [workflow, buildGradle, gitignore] = await Promise.all([
+  const [workflow, testWorkflow, buildGradle, gitignore] = await Promise.all([
     read('.github/workflows/bootstrap-mobile-android.yml'),
+    read('.github/workflows/test-mobile-foundation.yml'),
     read('mobile/android/app/build.gradle'),
     read('.gitignore')
   ]);
 
   for (const expected of [
-    'feature/android-downloads-reconciliation',
+    'main',
     'contents: read',
     'node-version: 22',
     'java-version: 21',
@@ -33,7 +34,12 @@ test('Android bootstrap is isolated, reproducible and supports secret-backed rel
     assert.ok(workflow.includes(expected), `Android bootstrap missing: ${expected}`);
   }
 
-  assert.equal(workflow.includes('feature/mobile-capacitor-foundation'), false, 'Validation must not be tied to the retired mobile branch');
+  for (const temporaryBranch of ['feature/mobile-capacitor-foundation', 'feature/android-downloads-reconciliation']) {
+    assert.equal(workflow.includes(temporaryBranch), false, `Android bootstrap must not stay tied to ${temporaryBranch}`);
+    assert.equal(testWorkflow.includes(temporaryBranch), false, `Mobile test workflow must not stay tied to ${temporaryBranch}`);
+  }
+  assert.ok(testWorkflow.includes('main'), 'Mobile test workflow must validate main pushes');
+  assert.ok(testWorkflow.includes('pull_request:'), 'Mobile test workflow must validate pull requests');
   assert.equal(workflow.includes('git push origin'), false, 'Validation must not mutate the repository');
   assert.equal(workflow.includes('ANDROID_KEY_ALIAS_SECRET: tifloacosta-upload'), false, 'Signing must not assume the alias written in the helper note is the actual PKCS12 alias');
   assert.match(workflow, /for attempt in 1 2 3/);

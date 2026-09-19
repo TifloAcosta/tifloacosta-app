@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - feature/mobile-capacitor-foundation
+      - feature/android-downloads-reconciliation
   pull_request:
     paths:
       - 'scripts/build-mobile-content.mjs'

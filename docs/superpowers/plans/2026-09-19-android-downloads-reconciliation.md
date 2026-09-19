@@ -2,9 +2,9 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Reconcile the existing Capacitor Android application with current `main`, add accessible native-mobile Downloads screens for link analysis and sound search, and produce a signed release AAB ready for Play Console validation.
+**Goal:** Reconcile the existing Capacitor Android application with current `main`, add accessible mobile-native Downloads screens for link analysis and sound search, and produce a signed release AAB ready for Play Console validation.
 
-**Architecture:** Preserve the existing `mobile/**` architecture and router, merge current `main` into a dedicated Android integration branch, then add mobile-specific pure clients and screens instead of embedding the web UI. Reuse the existing Cloudflare Worker contracts and native `TifloSave` / Capacitor Browser actions, with all new UI in ES/EN and with TalkBack-first focus/navigation behavior.
+**Architecture:** Preserve the existing `mobile/**` router, screens, preferences, favorites, content store and native actions. Reconcile the long-lived Android branch with current `main`, extend the Worker so the Capacitor local origin is accepted, then add mobile-specific pure clients and screens that reuse Worker contracts plus `TifloSave` / Capacitor Browser instead of embedding the web UI.
 
 **Tech Stack:** Node.js 22, native ES modules, Node test runner, esbuild, Capacitor 8.5.2, Android/Gradle, Java 21, Cloudflare Worker endpoints, GitHub Actions.
 
@@ -15,53 +15,46 @@
 - Preserve the existing Android application and its Capacitor architecture; do not replace screens with the public web app or a WebView substitute.
 - Reconcile the mobile branch with the current `main` before adding Downloads.
 - Work in a dedicated integration branch; do not resolve conflicts directly on `main`.
-- Keep the mobile router, native back-button behavior, focus restoration, preferences, favorites, content store, and `TifloSave` behavior intact.
+- Keep the mobile router, native back-button behavior, focus restoration, preferences, favorites, content store and `TifloSave` behavior intact.
 - Use `https://download.tifloacosta.com/analyze` for advanced URL analysis.
-- Use `https://download.tifloacosta.com/sounds/search` for internal sound search when the provider is configured.
-- Do not embed `FREESOUND_API_KEY` or any other provider secret in the Android bundle.
+- Use `https://download.tifloacosta.com/sounds/search` for internal sound search.
+- Do not embed `FREESOUND_API_KEY` or any provider secret in the Android bundle.
 - Direct-file saving must continue through `nativeActions.saveFile()` / `TifloSave`.
 - External providers must open through `nativeActions.openExternal()` rather than being scraped or proxied through the app.
 - All new visible copy must exist in Spanish and English from the first implementation.
 - No autoplay; starting one sound preview must stop the previous preview.
+- Leaving the sound-search screen must stop any active preview.
 - Every interior screen must have an explicit `Volver` / `Back` control and remain compatible with the Android system Back button.
 - Unknown metadata stays unknown; never convert missing size/duration into zero.
 - Release signing must continue to use `TIFLOACOSTA_KEYSTORE_BASE64` and `TIFLOACOSTA_KEYSTORE_PASSWORD` without changing the existing keystore or password.
 
 ## Review Focus
 
-- A user enters an `ftp:`, `javascript:`, blank, or malformed URL: the app must reject it locally without calling the Worker.
-- The Worker returns HTML, malformed JSON, a slow response, 401-equivalent authentication state, or 403-equivalent automated blocking: the app must remain usable and expose the correct fallback rather than crashing or hanging.
-- A result omits `size`, `type`, `duration`, preview URL, author, or license: the UI must omit or label the missing value without fabricating `0`.
-- The user starts one preview and then another, navigates Back, or changes screen: only one preview may play and audio must not continue unexpectedly after leaving the screen.
-- Android is offline or a remote request fails after a user action: TalkBack must receive a concise state/error message while focus remains in a predictable place and external-bank buttons remain available where applicable.
+- Blank, malformed, `ftp:` or `javascript:` URLs must be rejected locally without calling the Worker.
+- Malformed JSON, slow Worker responses, authentication-required responses and automated-block responses must produce distinct usable states instead of crashes.
+- Missing `size`, `type`, `duration`, preview URL, author or license must remain missing/unknown rather than becoming `0` or fabricated text.
+- Starting a second preview, navigating Back, or switching screens must stop the previous audio.
+- Offline/remote failure must leave TalkBack with a concise status and keep Mixkit/Pixabay available when internal sound search is unavailable.
 
 ---
 
-### Task 1: Reconcile the Android branch with current `main` and make mobile CI branch-safe
+### Task 1: Reconcile Android with current `main` and make mobile CI branch-safe
 
 **Files:**
-- Modify after merge as required: `README.txt`
+- Modify as merge requires: `README.txt`
 - Modify: `.github/workflows/bootstrap-mobile-android.yml`
 - Create: `mobile/test/workflow-branching.test.mjs`
-- Verify unchanged behavior: `mobile/src/**`, `mobile/android/**`
 
 **Interfaces:**
-- Consumes: existing `feature/mobile-capacitor-foundation` at commit lineage containing `mobile/**`; current `main` containing Downloads Worker and current content/infrastructure.
-- Produces: `feature/android-downloads-reconciliation` containing both histories, plus a validation workflow that builds the checked-out ref instead of hardcoding the legacy mobile branch.
+- Consumes: `feature/mobile-capacitor-foundation` and current `main`.
+- Produces: `feature/android-downloads-reconciliation` containing both histories plus validation-only mobile CI.
 
-- [ ] **Step 1: Create the integration branch from the current mobile branch**
+- [ ] **Step 1: Create the integration branch and merge `main`**
 
 ```bash
 git checkout feature/mobile-capacitor-foundation
 git pull --ff-only
 git checkout -b feature/android-downloads-reconciliation
-```
-
-Expected: the new branch starts with all current Android/Capacitor files intact.
-
-- [ ] **Step 2: Merge current `main` before feature work**
-
-```bash
 git fetch origin main
 git merge --no-ff origin/main
 ```
@@ -69,15 +62,15 @@ git merge --no-ff origin/main
 Conflict policy:
 
 ```text
-mobile/**                    -> preserve mobile implementation unless main intentionally owns the same file
-web / Worker / root tests    -> preserve current main
-README.txt                   -> combine both sets of useful notes
-workflows                    -> preserve both web/Worker workflows and mobile validation workflow
+mobile/**                 keep the existing mobile architecture
+web / Worker / root tests keep current main
+README.txt                combine both useful sections
+workflows                 retain web/Worker workflows and mobile validation
 ```
 
-Expected: no unresolved conflict markers remain.
+Expected: no unresolved conflict markers.
 
-- [ ] **Step 3: Run the reconciled baseline before changing behavior**
+- [ ] **Step 2: Verify the reconciled baseline before feature work**
 
 ```bash
 npm test
@@ -91,11 +84,9 @@ chmod +x gradlew
 ./gradlew --no-daemon assembleDebug bundleRelease
 ```
 
-Expected: repository tests PASS, mobile tests PASS, bundle builds, Capacitor sync succeeds, and Gradle produces debug APK + release AAB validation build.
+Expected: root tests PASS, mobile tests PASS, bundle builds, Capacitor sync succeeds, APK/AAB validation builds succeed.
 
-If a baseline test fails because of the merge, fix only the reconciliation regression before continuing; do not mix Downloads feature work into this step.
-
-- [ ] **Step 4: Write a failing workflow regression test**
+- [ ] **Step 3: Write the failing CI regression test**
 
 Create `mobile/test/workflow-branching.test.mjs`:
 
@@ -106,30 +97,32 @@ import test from 'node:test';
 
 const workflow = await readFile(new URL('../../.github/workflows/bootstrap-mobile-android.yml', import.meta.url), 'utf8');
 
-test('mobile workflow does not hardcode the retired foundation branch', () => {
+test('mobile workflow is not tied to the old foundation branch', () => {
   assert.doesNotMatch(workflow, /ref:\s*feature\/mobile-capacitor-foundation/);
-  assert.doesNotMatch(workflow, /git push origin HEAD:feature\/mobile-capacitor-foundation/);
+  assert.doesNotMatch(workflow, /HEAD:feature\/mobile-capacitor-foundation/);
 });
 
-test('mobile workflow validates the ref that triggered the run without mutating the repository', () => {
+test('mobile workflow validates without committing back to the repository', () => {
   assert.match(workflow, /actions\/checkout@v5/);
   assert.doesNotMatch(workflow, /git commit -m/);
   assert.doesNotMatch(workflow, /git push origin/);
 });
 ```
 
-- [ ] **Step 5: Run the workflow test and verify red**
+- [ ] **Step 4: Run red**
 
 ```bash
 cd mobile
 node --test test/workflow-branching.test.mjs
 ```
 
-Expected: FAIL because the current workflow hardcodes `feature/mobile-capacitor-foundation` and pushes generated files back to it.
+Expected: FAIL against the legacy workflow.
 
-- [ ] **Step 6: Make the workflow validation-only and branch-safe**
+- [ ] **Step 5: Make CI branch-safe and validation-only**
 
-Update `.github/workflows/bootstrap-mobile-android.yml` so the relevant parts become equivalent to:
+Update `.github/workflows/bootstrap-mobile-android.yml` so it triggers for `main` and `feature/android-downloads-reconciliation`, checks out the triggering ref without a hardcoded `ref:`, keeps Node 22 / Java 21 / tests / build / `cap sync` / signing / Gradle / artifact upload, changes permissions to `contents: read`, and removes the final repository commit/push step.
+
+Required YAML shape:
 
 ```yaml
 on:
@@ -145,55 +138,111 @@ on:
 permissions:
   contents: read
 
-jobs:
-  bootstrap:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout current ref
-        uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
+steps:
+  - name: Checkout current ref
+    uses: actions/checkout@v5
+    with:
+      fetch-depth: 0
 ```
 
-Keep the existing Node 22, Java 21, root tests, mobile tests, build, Capacitor sync, signing preparation, Gradle build, and artifact upload steps. Remove the final step that commits/pushes generated Android files.
-
-- [ ] **Step 7: Run reconciled tests again**
+- [ ] **Step 6: Run green and commit**
 
 ```bash
 npm test
 cd mobile
 npm test
 npm run build
-```
-
-Expected: all PASS.
-
-- [ ] **Step 8: Commit the reconciled baseline**
-
-```bash
+cd ..
 git add .github/workflows/bootstrap-mobile-android.yml mobile/test/workflow-branching.test.mjs README.txt
 git commit -m "chore: reconcile Android branch with main"
 ```
 
 ---
 
-### Task 2: Add Downloads to mobile navigation and bilingual screen structure
+### Task 2: Allow the Capacitor Android origin through the Downloads Worker
+
+**Files:**
+- Modify: `download-worker/src/index.js`
+- Modify: `download-worker/test/index-source.test.mjs`
+
+**Interfaces:**
+- Consumes: Capacitor config with `androidScheme: "https"` and default localhost host.
+- Produces: Worker CORS support for `https://localhost` while preserving `https://tifloacosta.com` and `https://tifloacosta.github.io`.
+
+- [ ] **Step 1: Write a failing Worker-origin test**
+
+Add a runtime test equivalent to:
+
+```js
+import worker from '../src/index.js';
+
+test('Capacitor HTTPS localhost origin is allowed', async () => {
+  const request = new Request('https://download.tifloacosta.com/unknown', {
+    method: 'OPTIONS',
+    headers: { Origin: 'https://localhost' }
+  });
+  const response = await worker.fetch(request, {});
+  assert.equal(response.status, 204);
+  assert.equal(response.headers.get('access-control-allow-origin'), 'https://localhost');
+});
+```
+
+Keep an existing/non-allowed origin test proving `https://evil.example` does not receive an allow-origin header.
+
+- [ ] **Step 2: Run red**
+
+```bash
+cd download-worker
+npm test
+```
+
+Expected: FAIL because `https://localhost` is not in `ALLOWED_ORIGINS`.
+
+- [ ] **Step 3: Add the Android origin only**
+
+Change:
+
+```js
+const ALLOWED_ORIGINS = new Set([
+  'https://tifloacosta.com',
+  'https://tifloacosta.github.io',
+  'https://localhost'
+]);
+```
+
+Do not add wildcard CORS.
+
+- [ ] **Step 4: Run Worker + root tests and commit**
+
+```bash
+cd download-worker
+npm test
+cd ..
+npm test
+git add download-worker/src/index.js download-worker/test/index-source.test.mjs
+git commit -m "feat: allow Android app origin in downloads Worker"
+```
+
+---
+
+### Task 3: Add Downloads to mobile navigation and bilingual screen structure
 
 **Files:**
 - Modify: `mobile/src/screens/home.mjs`
 - Modify: `mobile/src/app.mjs`
 - Modify: `mobile/src/core/i18n.mjs`
 - Create: `mobile/src/screens/downloads.mjs`
+- Create: `mobile/src/screens/download-link.mjs`
+- Create: `mobile/src/screens/sound-search.mjs`
 - Create: `mobile/test/downloads-navigation.test.mjs`
 - Modify: `mobile/test/home.test.mjs`
 
 **Interfaces:**
-- Consumes: `router.navigate(route, { originId })`, `router.back()`, `addScreenHeader(root, { router, title, backLabel })`.
-- Produces: routes `downloads`, `downloads-link`, and `downloads-sounds`; `renderDownloads(context)`; stable home control id `home-downloads`.
+- Produces routes `downloads`, `downloads-link`, `downloads-sounds` and stable child origin ids `downloads-open-link`, `downloads-open-sounds`.
 
 - [ ] **Step 1: Write failing navigation/i18n tests**
 
-Create `mobile/test/downloads-navigation.test.mjs`:
+Create `mobile/test/downloads-navigation.test.mjs` with:
 
 ```js
 import assert from 'node:assert/strict';
@@ -204,12 +253,12 @@ import { HOME_ITEMS } from '../src/screens/home.mjs';
 
 const read = file => readFile(new URL(`../${file}`, import.meta.url), 'utf8');
 
-test('Downloads is a stable home entry beside Library', () => {
-  const libraryIndex = HOME_ITEMS.indexOf('library');
-  assert.equal(HOME_ITEMS[libraryIndex + 1], 'downloads');
+test('Downloads follows Library on the mobile home screen', () => {
+  const index = HOME_ITEMS.indexOf('library');
+  assert.equal(HOME_ITEMS[index + 1], 'downloads');
 });
 
-test('Downloads route labels exist in Spanish and English', () => {
+test('Downloads core labels exist in Spanish and English', () => {
   for (const lang of ['es', 'en']) {
     for (const key of ['home.downloads', 'screen.downloads', 'downloads.link', 'downloads.sounds']) {
       assert.notEqual(text(lang, key), key);
@@ -217,326 +266,231 @@ test('Downloads route labels exist in Spanish and English', () => {
   }
 });
 
-test('app registers Downloads hub and both child routes', async () => {
+test('app registers all Downloads routes', async () => {
   const source = await read('src/app.mjs');
   assert.match(source, /case 'downloads':/);
   assert.match(source, /case 'downloads-link':/);
   assert.match(source, /case 'downloads-sounds':/);
-});
-
-test('Downloads hub uses shared accessible header and explicit child origin ids', async () => {
-  const source = await read('src/screens/downloads.mjs');
-  assert.match(source, /addScreenHeader\(/);
-  assert.match(source, /downloads-link/);
-  assert.match(source, /downloads-sounds/);
-  assert.doesNotMatch(source, /autofocus/i);
 });
 ```
 
 Update `mobile/test/home.test.mjs` expected order to:
 
 ```js
-[
-  'actualidad', 'search', 'library', 'downloads', 'favorites',
-  'videos', 'book', 'podcast', 'contact', 'settings'
-]
+['actualidad','search','library','downloads','favorites','videos','book','podcast','contact','settings']
 ```
 
-- [ ] **Step 2: Run tests and verify red**
+- [ ] **Step 2: Run red**
 
 ```bash
 cd mobile
 node --test test/home.test.mjs test/downloads-navigation.test.mjs
 ```
 
-Expected: FAIL because `downloads` and routes do not yet exist.
+- [ ] **Step 3: Add bilingual core labels and home item**
 
-- [ ] **Step 3: Add bilingual dictionary entries**
-
-In `mobile/src/core/i18n.mjs`, add at minimum:
+Add `home.downloads`, `screen.downloads`, and:
 
 ```js
 // es
-home: { /* existing */, downloads: 'Descargas' },
-screen: { /* existing */, downloads: 'Descargas' },
-downloads: {
-  intro: 'Elige qué quieres hacer.',
-  link: 'Descargar desde un enlace',
-  sounds: 'Buscar sonidos'
-}
-
+downloads: { intro:'Elige qué quieres hacer.', link:'Descargar desde un enlace', sounds:'Buscar sonidos' }
 // en
-home: { /* existing */, downloads: 'Downloads' },
-screen: { /* existing */, downloads: 'Downloads' },
-downloads: {
-  intro: 'Choose what you want to do.',
-  link: 'Download from a link',
-  sounds: 'Search sounds'
-}
+downloads: { intro:'Choose what you want to do.', link:'Download from a link', sounds:'Search sounds' }
 ```
 
-- [ ] **Step 4: Add home entry and Downloads hub**
+Insert `downloads` after `library` in `HOME_ITEMS`.
 
-Update `HOME_ITEMS` in `mobile/src/screens/home.mjs` with `downloads` immediately after `library`.
+- [ ] **Step 4: Implement the Downloads hub**
 
-Create `mobile/src/screens/downloads.mjs` with this shape:
+Create `mobile/src/screens/downloads.mjs`:
 
 ```js
 import { addParagraph, addScreenHeader, clearScreen } from './shared.mjs';
 
 export function renderDownloads({ root, router, t }) {
   clearScreen(root);
-  addScreenHeader(root, {
-    router,
-    title: t('screen.downloads'),
-    backLabel: t('nav.back')
-  });
+  addScreenHeader(root, { router, title: t('screen.downloads'), backLabel: t('nav.back') });
   addParagraph(root, t('downloads.intro'));
-
-  for (const [route, id, labelKey] of [
-    ['downloads-link', 'downloads-open-link', 'downloads.link'],
-    ['downloads-sounds', 'downloads-open-sounds', 'downloads.sounds']
+  for (const [route, id, label] of [
+    ['downloads-link', 'downloads-open-link', t('downloads.link')],
+    ['downloads-sounds', 'downloads-open-sounds', t('downloads.sounds')]
   ]) {
     const button = document.createElement('button');
     button.type = 'button';
     button.id = id;
-    button.textContent = t(labelKey);
+    button.textContent = label;
     button.addEventListener('click', () => router.navigate(route, { originId: id }));
     root.append(button);
   }
 }
 ```
 
-- [ ] **Step 5: Register hub and temporary child routes**
+- [ ] **Step 5: Create exact compile-safe child screens and register routes**
 
-In `mobile/src/app.mjs` import `renderDownloads` and register:
+Create `mobile/src/screens/download-link.mjs`:
 
 ```js
-case 'downloads': renderDownloads(context); break;
-case 'downloads-link': renderDownloadLink(context); break;
-case 'downloads-sounds': renderSoundSearch(context); break;
+import { addScreenHeader, clearScreen } from './shared.mjs';
+export function renderDownloadLink({ root, router, t }) {
+  clearScreen(root);
+  addScreenHeader(root, { router, title: t('downloads.link'), backLabel: t('nav.back') });
+}
 ```
 
-Create minimal child screen files if needed for compilation, each using `addScreenHeader` and no feature logic yet. These placeholders exist only inside this task and are replaced in Tasks 4 and 6.
+Create `mobile/src/screens/sound-search.mjs`:
 
-- [ ] **Step 6: Run navigation tests green**
+```js
+import { addScreenHeader, clearScreen } from './shared.mjs';
+export function renderSoundSearch({ root, router, t }) {
+  clearScreen(root);
+  addScreenHeader(root, { router, title: t('downloads.sounds'), backLabel: t('nav.back') });
+}
+```
+
+Import all three screen renderers in `mobile/src/app.mjs` and add the three switch cases.
+
+- [ ] **Step 6: Run green and commit**
 
 ```bash
 cd mobile
 npm test
 npm run build
-```
-
-Expected: all mobile tests PASS and bundle builds.
-
-- [ ] **Step 7: Commit**
-
-```bash
+cd ..
 git add mobile/src mobile/test
 git commit -m "feat: add Downloads navigation to Android app"
 ```
 
 ---
 
-### Task 3: Port pure link-resolution rules and analyzer client to mobile
+### Task 4: Port link-resolution rules and analyzer client to mobile
 
 **Files:**
 - Create: `mobile/src/core/downloads.mjs`
 - Create: `mobile/test/downloads-core.test.mjs`
 
 **Interfaces:**
-- Produces: `normalizeUrl(value) -> URL|null`, `classifyUrl(value) -> { provider, url }`, `resolveLocal(value) -> { kind, provider, url, items }`, `formatBytes(bytes) -> string`, `createAnalyzerClient({ fetchFn, endpoint, timeoutMs }) -> { analyze(url) }`.
-- Analyzer success result: payload object from Worker; network/client failures throw `Error` carrying `code` such as `timeout`, `bad_response`, or `service_unavailable`.
+- Produces `normalizeUrl`, `classifyUrl`, `resolveLocal`, `formatBytes`, `createAnalyzerClient`.
+- `createAnalyzerClient({ fetchFn, endpoint, timeoutMs })` returns `{ analyze(url) }`.
 
 - [ ] **Step 1: Write failing pure-core tests**
 
-Create `mobile/test/downloads-core.test.mjs` covering:
+Cover:
 
 ```js
-import assert from 'node:assert/strict';
-import test from 'node:test';
-import {
-  normalizeUrl, classifyUrl, resolveLocal, formatBytes, createAnalyzerClient
-} from '../src/core/downloads.mjs';
+assert.equal(normalizeUrl('ftp://example.com/a.zip'), null);
+assert.equal(normalizeUrl('javascript:alert(1)'), null);
+assert.equal(normalizeUrl('not a url'), null);
+assert.equal(normalizeUrl('https://example.com/a.zip').href, 'https://example.com/a.zip');
 
-test('normalizeUrl accepts only http and https', () => {
-  assert.equal(normalizeUrl('ftp://example.com/a.zip'), null);
-  assert.equal(normalizeUrl('javascript:alert(1)'), null);
-  assert.equal(normalizeUrl('not a url'), null);
-  assert.equal(normalizeUrl('https://example.com/a.zip').href, 'https://example.com/a.zip');
-});
+const drive = resolveLocal('https://drive.google.com/file/d/ABC123/view');
+assert.equal(drive.kind, 'result');
+assert.match(drive.items[0].url, /export=download/);
+assert.match(drive.items[0].url, /id=ABC123/);
 
-test('Google Drive file links resolve locally', () => {
-  const result = resolveLocal('https://drive.google.com/file/d/ABC123/view');
-  assert.equal(result.kind, 'result');
-  assert.match(result.items[0].url, /drive\.google\.com\/uc\?export=download&id=ABC123/);
-});
+const dropbox = resolveLocal('https://www.dropbox.com/s/demo/file.zip?dl=0');
+assert.equal(new URL(dropbox.items[0].url).searchParams.get('dl'), '1');
 
-test('Dropbox links force dl=1', () => {
-  const result = resolveLocal('https://www.dropbox.com/s/demo/file.zip?dl=0');
-  assert.equal(new URL(result.items[0].url).searchParams.get('dl'), '1');
-});
+const direct = resolveLocal('https://example.com/file.pdf');
+assert.equal(direct.items[0].type, 'pdf');
+assert.equal(direct.items[0].size, null);
 
-test('direct file keeps unknown size null', () => {
-  const result = resolveLocal('https://example.com/file.pdf');
-  assert.equal(result.items[0].size, null);
-  assert.equal(result.items[0].type, 'pdf');
-});
-
-test('formatBytes never turns missing values into zero', () => {
-  assert.equal(formatBytes(null), '');
-  assert.equal(formatBytes(undefined), '');
-  assert.equal(formatBytes(-1), '');
-  assert.equal(formatBytes(1024), '1.00 KB');
-});
+assert.equal(formatBytes(null), '');
+assert.equal(formatBytes(undefined), '');
+assert.equal(formatBytes(-1), '');
+assert.equal(formatBytes(1024), '1.00 KB');
 ```
 
-- [ ] **Step 2: Add failing analyzer-client tests**
+- [ ] **Step 2: Write failing analyzer-client tests**
 
-Add cases equivalent to:
+Assert the client POSTs only:
 
 ```js
-test('analyzer sends only the URL as JSON', async () => {
-  let request;
-  const client = createAnalyzerClient({
-    endpoint: 'https://download.tifloacosta.com/analyze',
-    fetchFn: async (url, options) => {
-      request = { url, options };
-      return { ok: true, json: async () => ({ status: 'ok', items: [] }) };
-    }
-  });
-  await client.analyze('https://example.com/page');
-  assert.equal(request.url, 'https://download.tifloacosta.com/analyze');
-  assert.deepEqual(JSON.parse(request.options.body), { url: 'https://example.com/page' });
-  assert.equal('credentials' in JSON.parse(request.options.body), false);
-});
-
-test('malformed JSON becomes bad_response without crashing caller', async () => {
-  const client = createAnalyzerClient({
-    endpoint: 'https://download.tifloacosta.com/analyze',
-    fetchFn: async () => ({ ok: true, json: async () => { throw new SyntaxError('bad'); } })
-  });
-  await assert.rejects(() => client.analyze('https://example.com'), error => error.code === 'bad_response');
-});
+{ url: 'https://example.com/page' }
 ```
 
-Also pin timeout and non-OK response without a Worker `code` to `timeout` / `service_unavailable`.
+and normalizes:
 
-- [ ] **Step 3: Run and verify red**
+```text
+AbortError / timeout -> error.code = timeout
+invalid JSON         -> bad_response
+non-OK without code  -> service_unavailable
+Worker code payload  -> returned intact for screen-level handling
+```
+
+- [ ] **Step 3: Run red**
 
 ```bash
 cd mobile
 node --test test/downloads-core.test.mjs
 ```
 
-Expected: FAIL because `src/core/downloads.mjs` does not exist.
+- [ ] **Step 4: Implement ESM behavior matching `downloads-core.js`**
 
-- [ ] **Step 4: Implement ESM core using the web rules as behavioral reference**
+Keep provider ids stable:
 
-Port the pure classification/resolution rules from `downloads-core.js` into ESM. Keep provider names stable:
-
-```js
-'google-drive', 'dropbox', 'onedrive', 'icloud-drive', 'box',
-'mega', 'wetransfer', 'mediafire', 'pcloud', 'direct', 'web'
+```text
+google-drive, dropbox, onedrive, icloud-drive, box, mega,
+wetransfer, mediafire, pcloud, direct, web
 ```
 
-Implement `createAnalyzerClient` with POST JSON, `AbortController`, default `timeoutMs = 10000`, and error-code normalization.
+Use default analyzer endpoint `https://download.tifloacosta.com/analyze`, `AbortController`, POST JSON and 10-second client timeout.
 
-For `formatBytes`, explicitly guard null before numeric conversion:
+Guard missing numbers before numeric conversion:
 
 ```js
-export function formatBytes(bytes) {
-  if (bytes === null || bytes === undefined || bytes === '') return '';
-  const value = Number(bytes);
-  if (!Number.isFinite(value) || value < 0) return '';
-  // same unit formatting behavior as web
-}
+if (bytes === null || bytes === undefined || bytes === '') return '';
 ```
 
-- [ ] **Step 5: Run core tests green**
+- [ ] **Step 5: Run green and commit**
 
 ```bash
 cd mobile
 node --test test/downloads-core.test.mjs
 npm test
-```
-
-Expected: PASS.
-
-- [ ] **Step 6: Commit**
-
-```bash
+cd ..
 git add mobile/src/core/downloads.mjs mobile/test/downloads-core.test.mjs
 git commit -m "feat: add mobile download analysis core"
 ```
 
 ---
 
-### Task 4: Implement the accessible Android Download-from-link screen and native save flow
+### Task 5: Implement the accessible Download-from-link screen and native save
 
 **Files:**
-- Replace/modify: `mobile/src/screens/download-link.mjs`
-- Modify only if proven necessary: `mobile/src/core/native-actions.mjs`
+- Replace: `mobile/src/screens/download-link.mjs`
+- Extend: `mobile/src/core/i18n.mjs`
 - Create: `mobile/test/download-link-screen.test.mjs`
-- Extend: `mobile/test/native-actions.test.mjs`
-- Extend dictionary: `mobile/src/core/i18n.mjs`
 
 **Interfaces:**
-- Consumes: Task 3 core; `nativeActions.saveFile({ url, filename, mimeType })`; `nativeActions.openExternal(url)`; `addScreenHeader`.
-- Produces: `renderDownloadLink(context)` with URL input, Analyze action, accessible status, result list, Save action, external fallback, and retry.
+- Consumes Task 4 core plus `nativeActions.saveFile()` and `nativeActions.openExternal()`.
+- Produces a URL form, live status, result list, native Save action, external fallback and retry.
 
-- [ ] **Step 1: Add failing structural/accessibility tests**
+- [ ] **Step 1: Write failing structural and dictionary tests**
 
-`mobile/test/download-link-screen.test.mjs` must assert source-level invariants:
+Require:
 
-```js
-assert.match(source, /addScreenHeader\(/);
-assert.match(source, /type\s*=\s*['"]url['"]/);
-assert.match(source, /aria-live/);
-assert.match(source, /nativeActions\.saveFile/);
-assert.match(source, /nativeActions\.openExternal/);
-assert.doesNotMatch(source, /autoplay/i);
-assert.doesNotMatch(source, /window\.location\.href/);
+```text
+addScreenHeader()
+input type=url
+label bound to input
+aria-live=polite status
+nativeActions.saveFile
+nativeActions.openExternal
+no autofocus
 ```
 
-Add dictionary-key tests for the ES/EN keys used for invalid URL, analyzing, files found, save, unknown size/type, auth required, blocked analysis, open external, retry, timeout, unavailable, and save failure.
+Require ES/EN keys for invalid URL, analyzing, files found, save, unknown size/type, authentication required, automated block, open external, retry, timeout, unreachable, no files and save failure.
 
-- [ ] **Step 2: Add failing behavior tests for result mapping and fallback decisions**
-
-Export small pure helpers from the screen module only where useful for testing, for example:
-
-```js
-export function resultPresentation(item) {
-  return {
-    name: String(item?.name || '').trim() || 'Archivo',
-    type: String(item?.type || '').trim() || null,
-    size: item?.size ?? null,
-    url: String(item?.url || '').trim(),
-    source: String(item?.source || '').trim() || null
-  };
-}
-```
-
-Test that `size: null` stays null and an absent URL cannot produce a Save button.
-
-- [ ] **Step 3: Run targeted tests red**
+- [ ] **Step 2: Run red**
 
 ```bash
 cd mobile
-node --test test/download-link-screen.test.mjs test/native-actions.test.mjs
+node --test test/download-link-screen.test.mjs
 ```
 
-Expected: FAIL until the real screen is implemented.
+- [ ] **Step 3: Implement submit flow**
 
-- [ ] **Step 4: Implement screen state without a second router or storage system**
-
-The screen should:
-
-```text
-render header -> input/form -> polite live status -> results region -> optional external fallback
-```
-
-On submit:
+Use:
 
 ```js
 const normalized = normalizeUrl(input.value);
@@ -545,18 +499,15 @@ if (!normalized) {
   return;
 }
 const local = resolveLocal(normalized.href);
-if (local.kind === 'result') {
-  renderResults(local.items);
-  return;
-}
+if (local.kind === 'result') return renderResults(local.items);
 const payload = await analyzer.analyze(normalized.href);
 ```
 
-Interpret Worker codes exactly:
+Map Worker codes distinctly:
 
 ```text
-authentication_required -> external fallback explaining sign-in is required
-access_denied           -> external fallback explaining automated analysis was blocked
+authentication_required -> external sign-in fallback
+access_denied           -> automated-block fallback
 no_files                -> no-files state
 invalid_url             -> invalid state
 timeout                 -> timeout state
@@ -565,102 +516,103 @@ unsupported             -> unsupported state
 service_unavailable     -> unavailable state
 ```
 
-- [ ] **Step 5: Save direct result through the native plugin**
+- [ ] **Step 4: Implement native Save**
 
-For each valid result URL, Save must call:
+For a valid result URL call:
 
 ```js
-await nativeActions.saveFile({
+const saved = await nativeActions.saveFile({
   url: item.url,
-  filename: item.name || 'archivo',
+  filename: item.name || t('downloadsLink.defaultFilename'),
   mimeType: mimeFromType(item.type)
 });
+if (!saved) setStatus(t('downloadsLink.saveFailed'));
 ```
 
-A false result must update the polite status region; it must not throw out of the click handler.
+Do not generate a Save button when `item.url` is absent.
 
-- [ ] **Step 6: Keep external fallback available after remote failures where useful**
+- [ ] **Step 5: Implement external fallback and Retry**
 
-For authentication/blocking and recognized provider fallbacks, call:
+For auth/block/provider fallback use:
 
 ```js
 await nativeActions.openExternal(normalized.href);
 ```
 
-The screen retains a Retry button that re-runs the same URL through the current screen state.
+Retry reuses the current input URL and the same submit function.
 
-- [ ] **Step 7: Run full mobile suite and build**
+- [ ] **Step 6: Run full mobile tests/build and commit**
 
 ```bash
 cd mobile
 npm test
 npm run build
-```
-
-Expected: PASS.
-
-- [ ] **Step 8: Commit**
-
-```bash
-git add mobile/src mobile/test
+cd ..
+git add mobile/src mobile/test/download-link-screen.test.mjs
 git commit -m "feat: add Android download-from-link screen"
 ```
 
 ---
 
-### Task 5: Add the pure mobile sound-search client and normalized result contract
+### Task 6: Add the pure mobile sound-search contract
 
 **Files:**
 - Create: `mobile/src/core/sound-search.mjs`
 - Create: `mobile/test/sound-search-core.test.mjs`
 
 **Interfaces:**
-- Produces: `SOUND_CATEGORIES`, `normalizeSound(item)`, `createSoundSearchClient({ fetchFn, endpoint, timeoutMs })` with `search({ query, category })`.
-- Normalized sound fields: `{ id, name, author, provider, duration, format, size, license, previewUrl, originalUrl }`, with missing optional values represented as `null` rather than zero/empty inventions.
+- Produces `SOUND_CATEGORIES`, `validateSearch`, `buildProviderQuery`, `normalizeSound`, `formatDuration`, `createSoundSearchClient`.
+- Search client sends POST JSON to `/sounds/search`.
 
-- [ ] **Step 1: Write failing contract tests**
+- [ ] **Step 1: Write failing category and query tests**
 
-Cover:
+Pin exact ids to the Worker/web contract:
 
 ```js
-assert.deepEqual(SOUND_CATEGORIES.map(item => item.id), [
-  'ringtones', 'notifications', 'alarms', 'phone', 'technology',
-  'nature', 'animals', 'ambience', 'fun', 'games'
+assert.deepEqual(Object.keys(SOUND_CATEGORIES), [
+  'ringtones','notifications','alarms','phones','technology',
+  'nature','animals','ambience','funny','games'
 ]);
 ```
 
-And normalization:
+Pin combined search:
 
 ```js
-const normalized = normalizeSound({ name: 'Bell', duration: null, size: undefined });
-assert.equal(normalized.name, 'Bell');
-assert.equal(normalized.duration, null);
-assert.equal(normalized.size, null);
+assert.equal(buildProviderQuery('bell', 'notifications'), 'bell notification alert');
+assert.equal(buildProviderQuery('', 'animals'), 'animal');
 ```
 
-- [ ] **Step 2: Write failing request/error tests**
+- [ ] **Step 2: Write failing normalization/request tests**
 
-The client must send only supported search parameters:
+Require:
 
 ```js
-await client.search({ query: 'campana', category: 'notifications' });
+const sound = normalizeSound({ name:'Bell', duration:null, size:undefined });
+assert.equal(sound.duration, null);
+assert.equal(sound.size, null);
 ```
 
-Expected URL semantics:
+The client must POST:
 
-```text
-https://download.tifloacosta.com/sounds/search?q=campana&category=notifications
+```js
+{
+  query: 'bell notification alert',
+  category: 'notifications',
+  page: 1
+}
 ```
 
-Pin these cases:
+to `https://download.tifloacosta.com/sounds/search`.
+
+Pin:
 
 ```text
-provider not configured -> return a typed unavailable state, not an uncaught exception
-valid results            -> normalized list
-empty results            -> []
-malformed JSON            -> bad_response
-network failure           -> service_unavailable
-timeout                   -> timeout
+provider_unavailable -> typed unavailable result/error state
+valid items          -> normalized list
+empty items          -> []
+invalid JSON         -> bad_response
+network failure      -> service_unavailable
+AbortError           -> timeout
 ```
 
 - [ ] **Step 3: Run red**
@@ -670,66 +622,54 @@ cd mobile
 node --test test/sound-search-core.test.mjs
 ```
 
-- [ ] **Step 4: Implement client with AbortController and no secrets**
+- [ ] **Step 4: Implement the ESM core matching web category/query behavior**
 
-Use the Worker endpoint only. No Freesound hostname or key belongs in this module.
+Do not reference Freesound credentials. Preserve Worker result fields:
 
-`normalizeSound` must use null guards before numeric conversion:
-
-```js
-const duration = item?.duration === null || item?.duration === undefined
-  ? null
-  : Number(item.duration);
+```text
+id, name, provider, pageUrl, previewUrl, downloadUrl,
+duration, format, size, license, author, tags
 ```
 
-Apply the same pattern to `size`.
-
-- [ ] **Step 5: Run green**
+- [ ] **Step 5: Run green and commit**
 
 ```bash
 cd mobile
 node --test test/sound-search-core.test.mjs
 npm test
-```
-
-- [ ] **Step 6: Commit**
-
-```bash
+cd ..
 git add mobile/src/core/sound-search.mjs mobile/test/sound-search-core.test.mjs
 git commit -m "feat: add mobile sound search core"
 ```
 
 ---
 
-### Task 6: Implement accessible Android sound search, previews, and external banks
+### Task 7: Implement accessible sound search and a real screen-cleanup lifecycle
 
 **Files:**
-- Replace/modify: `mobile/src/screens/sound-search.mjs`
+- Modify: `mobile/src/app.mjs`
+- Replace: `mobile/src/screens/sound-search.mjs`
 - Extend: `mobile/src/core/i18n.mjs`
 - Create: `mobile/test/sound-search-screen.test.mjs`
+- Create: `mobile/test/screen-cleanup.test.mjs`
 
 **Interfaces:**
-- Consumes: `SOUND_CATEGORIES`, sound client, `nativeActions.openExternal(url)`, mobile router/header helpers.
-- Produces: `renderSoundSearch(context)` with query + category search, polite status, result list, one-at-a-time preview lifecycle, Mixkit/Pixabay external actions.
+- `app.mjs` adds `setScreenCleanup(fn)` to the screen context and invokes the previous cleanup before rendering the next route.
+- `renderSoundSearch(context)` registers cleanup that stops active audio.
 
-- [ ] **Step 1: Write failing structural tests**
+- [ ] **Step 1: Write failing cleanup-lifecycle test**
 
-Assert:
+Source-level requirement for `mobile/src/app.mjs`:
 
 ```js
-assert.match(source, /addScreenHeader\(/);
-assert.match(source, /type\s*=\s*['"]search['"]/);
-assert.match(source, /<audio|createElement\(['"]audio['"]\)/);
-assert.match(source, /aria-live/);
-assert.match(source, /nativeActions\.openExternal/);
-assert.doesNotMatch(source, /\.autoplay\s*=\s*true/);
+assert.match(source, /activeScreenCleanup/);
+assert.match(source, /setScreenCleanup/);
+assert.match(source, /activeScreenCleanup\?\.\(\)/);
 ```
 
-Also verify dictionary coverage for heading, query label, category label, All categories, Search, searching, no results, unavailable internal search, preview, author, duration, format, size, license, source, open original, Mixkit, and Pixabay in ES/EN.
+- [ ] **Step 2: Write failing preview-controller test**
 
-- [ ] **Step 2: Add a focused preview lifecycle test**
-
-Extract a small controller:
+The screen exports:
 
 ```js
 export function createPreviewController() {
@@ -747,88 +687,98 @@ export function createPreviewController() {
 }
 ```
 
-Test:
+Test that activating `b` pauses `a`, and `stop()` then pauses `b`.
 
-```js
-const paused = [];
-const a = { pause: () => paused.push('a') };
-const b = { pause: () => paused.push('b') };
-const previews = createPreviewController();
-previews.activate(a);
-previews.activate(b);
-assert.deepEqual(paused, ['a']);
-previews.stop();
-assert.deepEqual(paused, ['a', 'b']);
+- [ ] **Step 3: Write failing screen-structure tests**
+
+Require:
+
+```text
+addScreenHeader()
+input type=search
+category select with label
+aria-live=polite status
+createElement('audio')
+preload=none
+no autoplay
+nativeActions.openExternal
+setScreenCleanup
 ```
 
-- [ ] **Step 3: Run red**
+Require ES/EN keys for query/category/search/searching/no-results/internal-unavailable/author/duration/format/size/license/source/open-original/external-banks.
+
+- [ ] **Step 4: Run red**
 
 ```bash
 cd mobile
-node --test test/sound-search-screen.test.mjs
+node --test test/screen-cleanup.test.mjs test/sound-search-screen.test.mjs
 ```
 
-- [ ] **Step 4: Implement search form and categories**
+- [ ] **Step 5: Add cleanup lifecycle to `app.mjs`**
 
-Permit:
-
-```text
-query only
-category only
-query + category
-```
-
-Reject only the state where both are empty, with a polite status message; do not send a pointless Worker request.
-
-- [ ] **Step 5: Render normalized results without invented metadata**
-
-Each result article has a heading with the sound name. Append metadata only when non-null/non-empty. Add an `<audio controls preload="none">` only when `previewUrl` exists; never set autoplay.
-
-When `play` fires:
+Implement before `render(route)` switches screens:
 
 ```js
-previews.activate(audio);
+let activeScreenCleanup = null;
+
+function render(route) {
+  activeScreenCleanup?.();
+  activeScreenCleanup = null;
+  const context = {
+    // existing context
+    setScreenCleanup(cleanup) {
+      activeScreenCleanup = typeof cleanup === 'function' ? cleanup : null;
+    }
+  };
+  // existing switch
+}
 ```
 
-Before rerendering results or leaving the screen, call:
+- [ ] **Step 6: Implement sound search**
+
+Permit query-only, category-only or both. Reject only when both are empty.
+
+Use `buildProviderQuery(term, category)` before calling the Worker client so query + category is truly combined.
+
+Render metadata only when present. Add `<audio controls preload="none">` only when `previewUrl` exists. On `play`, call `previews.activate(audio)`.
+
+Register:
 
 ```js
-previews.stop();
+setScreenCleanup(() => previews.stop());
 ```
 
-- [ ] **Step 6: Keep external banks usable when internal provider is unavailable**
+so Back/navigation cannot leave audio playing.
 
-Always render external-bank actions after the internal section:
+- [ ] **Step 7: Keep external banks always available**
+
+Render:
 
 ```js
-const banks = [
-  { name: 'Mixkit', url: 'https://mixkit.co/free-sound-effects/' },
-  { name: 'Pixabay', url: 'https://pixabay.com/sound-effects/' }
-];
+[
+  { name:'Mixkit', url:'https://mixkit.co/free-sound-effects/' },
+  { name:'Pixabay', url:'https://pixabay.com/sound-effects/' }
+]
 ```
 
-Use `nativeActions.openExternal(bank.url)`; do not scrape these pages.
+Each action uses `nativeActions.openExternal(url)`.
 
-- [ ] **Step 7: Run full tests/build**
+When Worker returns `provider_unavailable`, show a concise internal-unavailable message but keep both external actions usable.
+
+- [ ] **Step 8: Run full mobile suite/build and commit**
 
 ```bash
 cd mobile
 npm test
 npm run build
-```
-
-Expected: PASS.
-
-- [ ] **Step 8: Commit**
-
-```bash
+cd ..
 git add mobile/src mobile/test
 git commit -m "feat: add Android sound search screen"
 ```
 
 ---
 
-### Task 7: Pin navigation, TalkBack structure, remote-failure behavior, and Android versioning
+### Task 8: Lock TalkBack structure, Back/focus behavior and release version
 
 **Files:**
 - Extend: `mobile/test/navigation.test.mjs`
@@ -838,65 +788,51 @@ git commit -m "feat: add Android sound search screen"
 - Extend: `mobile/test/android-bootstrap.test.mjs`
 
 **Interfaces:**
-- Consumes: all Downloads routes/screens from Tasks 2–6.
-- Produces: regression coverage for Back/focus semantics and release version `versionCode 3`, `versionName "1.0.2"`.
+- Produces regression coverage plus release `versionCode 3`, `versionName "1.0.2"`.
 
-- [ ] **Step 1: Add navigation stack tests for Downloads children**
+- [ ] **Step 1: Add navigation stack tests**
 
-Use the existing router fake pattern to verify:
+Pin:
 
 ```text
-home -> downloads -> downloads-link -> back returns downloads and restores downloads-open-link
-downloads -> downloads-sounds -> back returns downloads and restores downloads-open-sounds
-system back uses the same router.back() contract
+home -> downloads -> downloads-link -> Back => downloads + restore downloads-open-link
+downloads -> downloads-sounds -> Back => downloads + restore downloads-open-sounds
+Android system Back delegates to router.back()
 ```
 
-- [ ] **Step 2: Add accessibility source invariants**
+- [ ] **Step 2: Add accessibility invariants**
 
-`mobile/test/downloads-accessibility.test.mjs` checks every new screen for:
+For all three new screens require:
 
 ```text
-addScreenHeader()
+shared addScreenHeader()
 no autofocus
-a single screen-heading path via shared header
-form labels bound to controls
-polite live region on async screens
+critical fields have labels
+async screens expose polite live status
 no autoplay
-no direct window navigation for external actions
+no window.location navigation for external actions
+no FREESOUND_API_KEY in mobile/src
 ```
-
-Also assert the two child screens include no hardcoded provider secret names such as `FREESOUND_API_KEY`.
 
 - [ ] **Step 3: Add release-version test red**
 
-Extend `mobile/test/android-bootstrap.test.mjs` to read `android/app/build.gradle` and require:
+Require:
 
 ```js
 assert.match(gradle, /versionCode\s+3\b/);
 assert.match(gradle, /versionName\s+"1\.0\.2"/);
 ```
 
-- [ ] **Step 4: Run tests red**
-
-```bash
-cd mobile
-npm test
-```
-
-Expected: version test FAIL until Gradle is bumped; any missing accessibility invariant also fails here.
-
-- [ ] **Step 5: Bump Android version**
-
-In `mobile/android/app/build.gradle`:
+- [ ] **Step 4: Bump Gradle version only**
 
 ```gradle
 versionCode 3
 versionName "1.0.2"
 ```
 
-Do not change `applicationId`, keystore settings, alias detection, minSdk, targetSdk, or package name.
+Do not change `applicationId`, package name, minSdk, targetSdk, signing config or keystore handling.
 
-- [ ] **Step 6: Run root + mobile regression suites**
+- [ ] **Step 5: Run root + mobile + Capacitor verification and commit**
 
 ```bash
 npm test
@@ -904,35 +840,31 @@ cd mobile
 npm test
 npm run build
 npx cap sync android
-```
-
-Expected: all PASS.
-
-- [ ] **Step 7: Commit**
-
-```bash
+cd ..
 git add mobile/test mobile/android/app/build.gradle
 git commit -m "test: lock Android Downloads accessibility and release version"
 ```
 
 ---
 
-### Task 8: Build signed Android artifacts, review the branch, and prepare integration PR
+### Task 9: Produce signed artifacts, review, and prepare the integration PR
 
 **Files:**
 - Verify: `.github/workflows/bootstrap-mobile-android.yml`
 - Verify: `mobile/android/app/build.gradle`
-- No new production code unless verification exposes a real defect.
+- No production-code change unless verification exposes a reproducible defect.
 
 **Interfaces:**
-- Consumes: GitHub secrets `TIFLOACOSTA_KEYSTORE_BASE64`, `TIFLOACOSTA_KEYSTORE_PASSWORD` and all completed tasks.
-- Produces: successful CI run, debug APK artifact, signed release AAB artifact, code-review-clean PR targeting `main`.
+- Consumes GitHub secrets `TIFLOACOSTA_KEYSTORE_BASE64`, `TIFLOACOSTA_KEYSTORE_PASSWORD`.
+- Produces green CI, debug APK, signed release AAB, reviewed PR to `main`.
 
-- [ ] **Step 1: Run the complete local/CI-equivalent verification**
+- [ ] **Step 1: Run complete verification**
 
 ```bash
 npm test
-cd mobile
+cd download-worker
+npm test
+cd ../mobile
 npm test
 npm run build
 npx cap sync android
@@ -941,40 +873,40 @@ chmod +x gradlew
 ./gradlew --no-daemon clean assembleDebug bundleRelease
 ```
 
-Expected: all commands exit 0.
+Expected: every command exits 0.
 
-- [ ] **Step 2: Verify no secret leaked into the built source**
+- [ ] **Step 2: Check the mobile bundle for forbidden secrets**
 
 ```bash
 grep -R "FREESOUND_API_KEY\|TIFLOACOSTA_KEYSTORE_PASSWORD\|TIFLOACOSTA_KEYSTORE_BASE64" mobile/src mobile/dist || true
 ```
 
-Expected: no secret values and no client-side Freesound API credential reference. Build/signing workflow names may exist only in workflow/configuration contexts, not in bundled app JS.
+Expected: no client-side provider/signing secret reference in bundled app code.
 
-- [ ] **Step 3: Push integration branch and require GitHub Actions green**
+- [ ] **Step 3: Push the integration branch and require GitHub Actions green**
 
 ```bash
 git push -u origin feature/android-downloads-reconciliation
 ```
 
-Expected mobile workflow stages:
+Required workflow stages:
 
 ```text
-root regression tests          success
-mobile tests                   success
-mobile bundle                  success
-Capacitor sync                 success
-signing preparation            success
-assembleDebug                  success
-bundleRelease                  success
-artifact upload                success
+root regression tests success
+mobile tests          success
+mobile bundle         success
+Capacitor sync        success
+signing preparation   success
+assembleDebug         success
+bundleRelease         success
+artifact upload       success
 ```
 
-- [ ] **Step 4: Verify the release AAB is actually signed**
+- [ ] **Step 4: Verify signed AAB artifact**
 
-In CI, keep the existing keystore decode + unique private-key alias detection. The run must fail if only one signing secret exists or if the PKCS12 does not contain exactly one `PrivateKeyEntry`.
+The workflow must decode `TIFLOACOSTA_KEYSTORE_BASE64`, use `TIFLOACOSTA_KEYSTORE_PASSWORD`, detect exactly one `PrivateKeyEntry`, and fail if either secret is missing while the other exists.
 
-Expected artifact path:
+Expected artifact:
 
 ```text
 mobile/android/app/build/outputs/bundle/release/app-release.aab
@@ -982,22 +914,23 @@ mobile/android/app/build/outputs/bundle/release/app-release.aab
 
 - [ ] **Step 5: Perform final code review against the spec**
 
-Review especially:
+Review these failure points explicitly:
 
 ```text
 no WebView substitution
 no second router
 no second save system
-no provider secrets in mobile bundle
-no autoplay
+Android Worker origin accepted without wildcard CORS
+no provider secret in mobile bundle
+no autoplay and audio stops on route change
 Back/focus restoration preserved
-401/auth vs 403/block distinction preserved
-Mixkit/Pixabay available without Freesound
+authentication_required distinct from access_denied
+Mixkit/Pixabay usable without Freesound
 unknown metadata not fabricated
-old mobile screens still registered
+all pre-existing mobile screens still registered
 ```
 
-If review finds a defect, add a reproducing test first, then fix and rerun Task 8 Step 1.
+If a defect is found, first add a test that reproduces it, then fix it and rerun Task 9 Step 1.
 
 - [ ] **Step 6: Open PR to `main`**
 
@@ -1007,20 +940,12 @@ Suggested title:
 Poner Descargas operativas en Android
 ```
 
-PR body must state:
+PR body must state that it reconciles the Android branch with current `main`, adds mobile-native Downloads/link analysis/native save/sound search, keeps Freesound optional, includes ES/EN accessibility coverage, extends Worker CORS only to the Capacitor origin, and produces signed versionCode 3 / versionName 1.0.2 artifacts.
 
-```text
-- reconciles the long-lived Android branch with current main
-- adds mobile-native Downloads hub, link analyzer, native save, and sound search
-- keeps Freesound optional while Mixkit/Pixabay remain available
-- includes ES/EN accessibility and Back/focus tests
-- produces signed versionCode 3 / versionName 1.0.2 AAB
-```
+- [ ] **Step 7: Merge only the exact green commit**
 
-- [ ] **Step 7: Do not merge until CI and review are green**
+Confirm the PR is mergeable and that the latest tested commit SHA matches the PR head before merge. After merge, run the mobile workflow from `main` once more and require another signed AAB from the merged commit.
 
-Before merge, confirm the PR is mergeable and the latest commit is exactly the commit that passed CI. After merge, run the mobile workflow from `main` once more and confirm a signed release AAB is produced from the merged commit.
+- [ ] **Step 8: Keep Play Console upload separate**
 
-- [ ] **Step 8: Final integration commit/merge record**
-
-No additional feature commit is expected here. The merge itself is the final repository integration point; Play Console upload is deliberately a separate follow-up step.
+Do not upload to production automatically. The resulting signed AAB is the handoff artifact for the next Play Console step.

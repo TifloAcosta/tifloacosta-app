@@ -20,6 +20,6 @@ test('app core loads each download asset once through marked dynamic scripts', a
   assert.match(core, /downloads-core\.js\?v=1\.1/);
   assert.match(core, /download-config\.js\?v=1\.1/);
   assert.match(core, /downloads-hub\.js\?v=1\.0/);
-  assert.match(core, /downloads\.js\?v=1\.1/);
+  assert.match(core, /downloads\.js\?v=1\.3/);
   assert.match(core, /data-tiflo-download-hub/);
 });

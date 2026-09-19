@@ -4,8 +4,9 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - 'feature/activate-download-analyzer'
+      - 'main'
     paths:
+      - 'download-worker/**'
       - '.github/workflows/deploy-download-worker.yml'
 
 permissions:

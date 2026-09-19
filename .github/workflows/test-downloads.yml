@@ -5,6 +5,7 @@ on:
     branches:
       - 'feature/**'
     paths:
+      - 'index.html'
       - 'app-core.js'
       - 'downloads.js'
       - 'downloads-core.js'

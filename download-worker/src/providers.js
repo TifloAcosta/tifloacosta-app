@@ -1,6 +1,13 @@
+const COMPOUND_EXTENSIONS = [
+  'tar.gz','tar.bz2','tar.xz','tar.lz','tar.zst'
+];
+
 const DOWNLOAD_EXTENSIONS = new Set([
   'pdf','zip','rar','7z','txt','doc','docx','xls','xlsx','ppt','pptx','epub',
-  'mp3','m4a','wav','ogg','flac','mp4','m4v','mov','webm','avi','mkv','apk','csv','json','xml'
+  'mp3','m4a','wav','ogg','flac','mp4','m4v','mov','webm','avi','mkv','apk','csv','json','xml',
+  'exe','msi','dmg','pkg','deb','rpm','iso','cab',
+  'tar','gz','tgz','bz2','xz','lz','lzma','zst',
+  ...COMPOUND_EXTENSIONS
 ]);
 
 function hostMatches(host, domain) {
@@ -8,8 +15,12 @@ function hostMatches(host, domain) {
 }
 
 function extensionFromName(name) {
-  const match = String(name || '').match(/\.([a-z0-9]{1,10})(?:$|[?#])/i);
-  return match ? match[1].toLowerCase() : '';
+  const value = String(name || '').toLowerCase().split(/[?#]/, 1)[0];
+  for (const extension of COMPOUND_EXTENSIONS) {
+    if (value.endsWith(`.${extension}`)) return extension;
+  }
+  const match = value.match(/\.([a-z0-9]{1,10})$/i);
+  return match ? match[1] : '';
 }
 
 export function detectProvider(urlLike) {
@@ -33,7 +44,9 @@ export function fileTypeFrom(name, contentType = '') {
   const type = String(contentType || '').toLowerCase().split(';')[0].trim();
   const known = {
     'application/pdf':'pdf', 'application/zip':'zip', 'application/x-7z-compressed':'7z',
-    'application/vnd.rar':'rar', 'audio/mpeg':'mp3', 'audio/mp4':'m4a', 'audio/wav':'wav',
+    'application/vnd.rar':'rar', 'application/x-tar':'tar', 'application/gzip':'gz',
+    'application/x-gzip':'gz', 'application/x-xz':'xz', 'application/x-bzip2':'bz2',
+    'audio/mpeg':'mp3', 'audio/mp4':'m4a', 'audio/wav':'wav',
     'audio/ogg':'ogg', 'video/mp4':'mp4', 'video/webm':'webm', 'text/plain':'txt',
     'text/csv':'csv', 'application/json':'json',
     'application/vnd.openxmlformats-officedocument.wordprocessingml.document':'docx',

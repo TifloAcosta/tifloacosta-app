@@ -29,3 +29,17 @@ test('filters do not move focus and every result gets its own download link', as
   assert.match(source, /const link = element\('a'/);
   assert.match(source, /link\.href = item\.url/);
 });
+
+test('unknown sizes stay unknown instead of becoming zero bytes', async () => {
+  const source = await read('downloads.js');
+  assert.match(source, /item\.size !== null/);
+  assert.match(source, /item\.size !== undefined/);
+  assert.match(source, /hasSize \? core\.formatBytes\(numericSize\) : t\(\)\.unknownSize/);
+});
+
+test('blocked automated access is explained separately from authentication', async () => {
+  const source = await read('downloads.js');
+  assert.match(source, /access_denied:c\.blocked/);
+  assert.match(source, /La página ha rechazado el análisis automático/);
+  assert.match(source, /The page refused automated analysis/);
+});

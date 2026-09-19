@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
+import worker from '../src/index.js';
 
 const read = file => readFile(new URL(`../${file}`, import.meta.url), 'utf8');
 
@@ -16,6 +17,26 @@ test('worker enforces POST/OPTIONS, CORS, manual redirects and bounded HTML anal
   assert.match(source, /MAX_HTML_BYTES\s*=\s*1_000_000/);
   assert.match(source, /HTMLRewriter/);
   assert.match(source, /MAX_CANDIDATES\s*=\s*200/);
+});
+
+test('Capacitor HTTPS localhost origin is allowed without wildcard CORS', async () => {
+  const request = new Request('https://download.tifloacosta.com/analyze', {
+    method: 'OPTIONS',
+    headers: { Origin: 'https://localhost' }
+  });
+  const response = await worker.fetch(request, {});
+  assert.equal(response.status, 204);
+  assert.equal(response.headers.get('access-control-allow-origin'), 'https://localhost');
+});
+
+test('unknown origins remain rejected', async () => {
+  const request = new Request('https://download.tifloacosta.com/analyze', {
+    method: 'OPTIONS',
+    headers: { Origin: 'https://evil.example' }
+  });
+  const response = await worker.fetch(request, {});
+  assert.equal(response.status, 403);
+  assert.equal(response.headers.get('access-control-allow-origin'), null);
 });
 
 test('worker validates every redirect and never proxies complete files', async () => {

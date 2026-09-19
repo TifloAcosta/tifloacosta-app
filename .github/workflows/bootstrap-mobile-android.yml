@@ -1,0 +1,125 @@
+name: Bootstrap TifloAcosta Android
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'mobile/**'
+      - '.github/workflows/bootstrap-mobile-android.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout current ref
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Install mobile dependencies
+        working-directory: mobile
+        run: npm install
+
+      - name: Run repository regression tests
+        run: npm test
+
+      - name: Run mobile tests
+        working-directory: mobile
+        run: npm test
+
+      - name: Build mobile web bundle
+        working-directory: mobile
+        run: npm run build --if-present
+
+      - name: Add and synchronize Android
+        working-directory: mobile
+        run: |
+          if [ ! -d android ]; then
+            npx cap add android
+          fi
+          npx cap sync android
+
+      - name: Prepare Android release signing when secrets are configured
+        shell: bash
+        env:
+          ANDROID_KEYSTORE_BASE64_SECRET: ${{ secrets.TIFLOACOSTA_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD_SECRET: ${{ secrets.TIFLOACOSTA_KEYSTORE_PASSWORD }}
+        run: |
+          if [ -z "$ANDROID_KEYSTORE_BASE64_SECRET" ] && [ -z "$ANDROID_KEYSTORE_PASSWORD_SECRET" ]; then
+            echo "Android signing secrets are not configured; producing validation builds."
+            exit 0
+          fi
+
+          if [ -z "$ANDROID_KEYSTORE_BASE64_SECRET" ] || [ -z "$ANDROID_KEYSTORE_PASSWORD_SECRET" ]; then
+            echo "Android signing secrets are incomplete. Configure both TifloAcosta signing secrets."
+            exit 1
+          fi
+
+          keystore_path="$RUNNER_TEMP/tifloacosta-upload.p12"
+          printf '%s' "$ANDROID_KEYSTORE_BASE64_SECRET" | base64 --decode > "$keystore_path"
+          chmod 600 "$keystore_path"
+
+          mapfile -t private_key_aliases < <(
+            keytool -list -v \
+              -J-Duser.language=en -J-Duser.country=US \
+              -storetype PKCS12 \
+              -keystore "$keystore_path" \
+              -storepass "$ANDROID_KEYSTORE_PASSWORD_SECRET" 2>/dev/null |
+            awk -F': ' '
+              /^Alias name: / { alias=$2 }
+              /^Entry type: PrivateKeyEntry/ { print alias }
+            '
+          )
+
+          if [ "${#private_key_aliases[@]}" -ne 1 ]; then
+            echo "Expected exactly one private-key entry in the Android upload keystore; found ${#private_key_aliases[@]}."
+            exit 1
+          fi
+          android_key_alias="${private_key_aliases[0]}"
+
+          {
+            echo "ANDROID_KEYSTORE_PATH=$keystore_path"
+            echo "ANDROID_KEYSTORE_PASSWORD=$ANDROID_KEYSTORE_PASSWORD_SECRET"
+            echo "ANDROID_KEY_ALIAS=$android_key_alias"
+            echo "ANDROID_KEY_PASSWORD=$ANDROID_KEYSTORE_PASSWORD_SECRET"
+          } >> "$GITHUB_ENV"
+
+      - name: Build Android debug APK and release bundle
+        working-directory: mobile/android
+        run: |
+          chmod +x gradlew
+          for attempt in 1 2 3; do
+            if ./gradlew --no-daemon assembleDebug bundleRelease; then
+              exit 0
+            fi
+            if [ "$attempt" -lt 3 ]; then
+              echo "Gradle build attempt $attempt failed; retrying after a short delay."
+              sleep $((attempt * 10))
+            fi
+          done
+          exit 1
+
+      - name: Upload Android validation builds
+        uses: actions/upload-artifact@v4
+        with:
+          name: tifloacosta-android-validation
+          if-no-files-found: error
+          path: |
+            mobile/android/app/build/outputs/apk/debug/*.apk
+            mobile/android/app/build/outputs/bundle/release/*.aab

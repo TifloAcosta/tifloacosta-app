@@ -1,0 +1,13 @@
+{
+  "appId": "com.tifloacosta.app",
+  "appName": "TifloAcosta",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "CapacitorHttp": {
+      "enabled": true
+    }
+  }
+}

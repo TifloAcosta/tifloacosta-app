@@ -124,7 +124,7 @@ export function formatBytes(bytes) {
 
 export function createAnalyzerClient({
   fetchFn = (...args) => fetch(...args),
-  endpoint = 'https://download.tifloacosta.com/analyze',
+  endpoint = 'https://tifloacosta.com/api/download/analyze',
   timeoutMs = 10_000
 } = {}) {
   async function analyze(value) {

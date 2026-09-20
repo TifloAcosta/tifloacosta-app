@@ -40,14 +40,13 @@ test('closing during player startup does not detach an already-created YouTube p
 test('opening the player isolates it from previous catalog chrome for desktop screen readers', async () => {
   const [html, source] = await Promise.all([read('videos.html'), read('videos.js')]);
 
-  assert.match(source, /function setPlayerView\(active\)/);
-  assert.match(source, /els\.siteHeader\.hidden = active/);
-  assert.match(source, /els\.skip\.hidden = active/);
-  assert.match(source, /els\.back\.hidden = active/);
-  assert.match(source, /els\.hero\.hidden = active/);
-  assert.match(source, /els\.backBottom\.hidden = active/);
-  assert.match(source, /els\.siteFooter\.hidden = active/);
-  assert.match(source, /setPlayerView\(true\)/);
-  assert.match(source, /setPlayerView\(false\)/);
+  assert.match(source, /els\.controlsSection\.hidden = true/);
+  assert.match(source, /els\.resultsSection\.hidden = true/);
+  assert.match(html, /body:has\(#video-player-section:not\(\[hidden\]\)\) > \.site-header/);
+  assert.match(html, /body:has\(#video-player-section:not\(\[hidden\]\)\) > \.skip-link/);
+  assert.match(html, /body:has\(#video-player-section:not\(\[hidden\]\)\) #back-home/);
+  assert.match(html, /body:has\(#video-player-section:not\(\[hidden\]\)\) \.video-hero/);
+  assert.match(html, /body:has\(#video-player-section:not\(\[hidden\]\)\) #back-home-bottom/);
+  assert.match(html, /body:has\(#video-player-section:not\(\[hidden\]\)\) > \.site-footer/);
   assert.match(html, /videos\.js\?v=2\.3/);
 });

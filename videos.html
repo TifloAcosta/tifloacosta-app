@@ -26,6 +26,7 @@
 <link rel="icon" href="tifloacosta-favicon.ico">
 <link rel="apple-touch-icon" href="tifloacosta-apple-touch-icon.png">
 <link rel="stylesheet" href="styles.css?v=1.2">
+<link rel="stylesheet" href="youtube-actions.css?v=1.0">
 <style>
 body:has(#video-player-section:not([hidden])) > .skip-link,
 body:has(#video-player-section:not([hidden])) > .site-header,
@@ -72,6 +73,17 @@ body:has(#video-player-section:not([hidden])) > .site-footer {
       <button id="video-player-forward" type="button" disabled>Avanzar 1 minuto</button>
     </div>
     <p id="video-player-note" class="muted" aria-live="polite" aria-atomic="true">Los controles accesibles estarán disponibles cuando el reproductor esté preparado.</p>
+
+    <section id="youtube-actions" class="youtube-actions" aria-labelledby="youtube-actions-heading" hidden>
+      <h3 id="youtube-actions-heading">Acciones de YouTube</h3>
+      <div class="youtube-actions-controls">
+        <button id="youtube-details" type="button" aria-expanded="false">Ver detalles</button>
+      </div>
+      <div id="youtube-details-panel" class="youtube-details-panel" hidden></div>
+      <div id="youtube-account-actions" class="youtube-account-actions"></div>
+      <p id="youtube-actions-status" class="muted" aria-live="polite" aria-atomic="true"></p>
+    </section>
+
     <div class="video-player-actions">
       <button id="video-player-close" type="button">Cerrar reproductor y volver a los vídeos</button>
       <a id="video-player-youtube" class="button-link" href="https://www.youtube.com/@tifloacosta" target="_blank" rel="noopener noreferrer">Abrir este vídeo en YouTube</a>
@@ -121,6 +133,9 @@ body:has(#video-player-section:not([hidden])) > .site-footer {
 
 <script src="video-search-index.js?v=1.0"></script>
 <script src="videos-core.js?v=0.17"></script>
+<script src="youtube-actions-config.js?v=1.0"></script>
+<script src="youtube-actions-core.js?v=1.0"></script>
+<script src="youtube-actions.js?v=1.0"></script>
 <script src="videos.js?v=2.3"></script>
 <script data-goatcounter="https://tifloacosta.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>

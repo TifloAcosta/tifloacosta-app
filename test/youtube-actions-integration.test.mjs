@@ -9,9 +9,9 @@ test('YouTube actions panel lives inside the existing player without replacing p
   assert.match(html, /id="video-player-rewind"[^>]*>Retroceder 1 minuto</);
   assert.match(html, /id="video-player-toggle"[^>]*>Reproducir</);
   assert.match(html, /id="video-player-forward"[^>]*>Avanzar 1 minuto</);
-  assert.match(html, /<section id="youtube-actions" aria-labelledby="youtube-actions-heading">[\s\S]*?<h3 id="youtube-actions-heading">Acciones de YouTube<\/h3>/);
+  assert.match(html, /<section id="youtube-actions"[^>]*aria-labelledby="youtube-actions-heading"[^>]*>[\s\S]*?<h3 id="youtube-actions-heading">Acciones de YouTube<\/h3>/);
   assert.match(html, /id="youtube-details"[^>]*>Ver detalles<\/button>/);
-  assert.match(html, /id="youtube-details-panel" hidden/);
+  assert.match(html, /id="youtube-details-panel"[^>]*hidden/);
   assert.match(html, /id="youtube-account-actions"/);
   assert.match(html, /id="youtube-actions-status"[^>]*aria-live="polite"[^>]*aria-atomic="true"/);
 
@@ -38,4 +38,23 @@ test('the actions module uses credentialed requests and public details remain lo
   assert.match(source, /detailsFromVideo\(/);
   assert.match(source, /\/session/);
   assert.match(source, /\/state\?videoId=/);
+});
+
+test('authenticated controls call only the intended YouTube action endpoints', async () => {
+  const source = await read('youtube-actions.js');
+  assert.match(source, /request\(['"]\/subscribe['"]/);
+  assert.match(source, /request\(['"]\/like['"]/);
+  assert.match(source, /request\(['"]\/comment['"]/);
+  assert.match(source, /request\(['"]\/logout['"]/);
+  assert.match(source, /X-CSRF-Token/);
+  assert.match(source, /Suscripción realizada\. Ya estás suscrito al canal TifloAcosta\./);
+  assert.match(source, /Comentario publicado en YouTube\./);
+});
+
+test('comment editor requires an explicit publish action', async () => {
+  const source = await read('youtube-actions.js');
+  assert.match(source, /youtube-comment-text/);
+  assert.match(source, /youtube-publish-comment/);
+  assert.match(source, /youtube-cancel-comment/);
+  assert.match(source, /publish\.disabled/);
 });

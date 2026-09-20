@@ -1,5 +1,147 @@
 [
   {
+    "id": "applevis-apps-bf0a7ae49816b1e9",
+    "type": "news",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/pegfall-bounce-roguelite",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-20T16:36:21.000Z",
+    "categories": [
+      "apple",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Pegfall: Bounce Roguelite",
+        "summary": "Pegfall is a one-handed pegboard physics roguelite where every shot draws an orb from your deck. Aim, bounce through a living board, build ruthless combos, and descend into the Maw. NEW: PLAY WITH VOICEOVER Aim by named directions, fire with a double tap or Magic Tap, hear every volley, and inspect the board whenever you need to. Peg types use shapes as well as colour, so every board reads clearly. ▸ FAIR — SKILL, NOT LUCK A dotted trajectory preview shows where your shot lands. Every bounce is yours. ▸ A CAMPAIGN THAT ENDS — 10 CHAPTERS, 200 FLOORS Face ten bosses across distinct boards, palettes and rules. Each chapter starts you bare; every decision rebuilds your run. ▸ BUILDS THAT STACK 20 orbs, 23 relics, 14 upgrade cards and three characters create runs that go in completely different directions. Take a curse when the floor asks for one. ▸ THE BOARD FIGHTS BACK Deeper chapters erode spent pegs, wire circuits through armour, and reshape the board as you play. ▸ ENDLESS, DAILY AND WEEKLY Dive without a floor beneath you, take the same daily board as everyone else, or race one shared weekly board with a single attempt. ▸ GET STRONGER AS YOU PLAY Earn permanent upgrades, unlock ascension tiers, achievements, themes, ball skins, faces and note banks. Never pay to win. ▸ MADE TO BE PLAYED BY MORE PEOPLE VoiceOver support, clear combat feedback, accessible peg shapes, Reduce Motion support, and real 44pt touch targets. Special thanks to accessibility tester Matheus Rheine for helping shape this update. ▸ MOBILE-NATIVE True portrait, one-handed, free to start. No energy timer and no premium wall. Honest monetization: optional rewarded continues, an ad-free purchase, cosmetics and essence pouches. Everything in a pouch is also earnable by playing.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-451aa8f548f50925",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/20/techcrunch-mobility-how-do-we-know-when-an-av-is-safe-enough/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-20T16:02:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "TechCrunch Mobility: How do we know when an AV is safe enough?",
+        "summary": "Welcome back to TechCrunch Mobility, your hub for the future of transportation and now, more than ever, the role AI is playing in it. To get this in your inbox, sign up here for free — just click TechCrunch Mobility!",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-16bf258c5854723d",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2259523/how-to-use-phone-smart-tv-remote/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-20T16:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "How to use your phone as a remote for any smart TV",
+        "summary": "Some phones have IR blasters to enable remote functions, but even if yours doesn't, you can do quite a lot over Bluetooth and Wi-Fi.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-0f3cab07b705142c",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/997867/trump-ai-force-ai-czar",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-20T15:39:22.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Trump now says he wants to form an ‘AI Force’",
+        "summary": "The president posted on Truth Social that he wanted to appoint an \"AI czar\" to lead a new \"AI force.\" He made the announcement amid growing calls from across the political spectrum and even within the industry to pump the brakes on AI development. He posted that his administration \"will not in any way hinder […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-f47465c258d73160",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2259329/how-to-wipe-old-laptop/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-20T15:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Before you throw out your old laptop, do this first",
+        "summary": "Giving away or recycling your old laptop is great, but you need to make sure all your data is fully removed before it finds a new home.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-8ea0048d6b6c944c",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/20/heres-why-apple-scrapped-its-shorter-apple-pencil-designed-for-iphone-duo-report/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-20T14:38:43.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Here’s why Apple scrapped its shorter Apple Pencil designed for iPhone Duo: report",
+        "summary": "Leading into the iPhone Duo launch, we heard from Bloomberg’s Mark Gurman that Apple was considering a new Apple Pencil for iPhone Duo, though it was unlikely that the company would go forward with it. Of course, the iPhone Duo keynote came, and Apple did announce support for the USB-C Apple Pencil. Here’s how that happened. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "engadget-2b9f2bbef3bcc055",
     "type": "news",
     "sourceId": "engadget",
@@ -17,6 +159,30 @@
       "en": {
         "title": "Wired vs. wireless charging: Which is better for battery health?",
         "summary": "Wireless charging offers convenience, to be sure, but how does it affect your battery over time? And is it a problem if your phone heats up?",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-9e87b2adce8f83a8",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/science/997834/ai-cyberattack-energy-critical-infrastructure",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-20T12:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Humans, not rogue AI, are still the biggest cybersecurity risk to energy systems",
+        "summary": "Before recent high-profile hacks raised the specter of AI possibly \"killing all humans,\" our energy systems were already disturbingly vulnerable to cyberattack - and the risk is growing. \"We were always prey. We were just kind of surviving at the appetite of our predators,\" Joshua Corman, executive in residence for public safety and resilience at […]",
         "body": ""
       }
     },
@@ -47,54 +213,6 @@
     "media": null
   },
   {
-    "id": "engadget-913db239842b54c4",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2259179/how-to-record-audio-iphone/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-20T00:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "How to record audio on your iPhone",
-        "summary": "You don't need to record unnecessary video to capture a meeting, song or personal memo on your iPhone. Recording audio is simple.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-85946b322e971485",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2259087/apple-carplay-vs-ultra-differences-explained/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-19T23:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "What is the difference between Apple CarPlay and CarPlay Ultra?",
-        "summary": "CarPlay provides a great iOS-like experience in your vehicle. CarPlay Ultra expands that, but isn't widely available yet.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "9to5mac-c84d544af1f9297a",
     "type": "news",
     "sourceId": "9to5mac",
@@ -113,32 +231,6 @@
       "en": {
         "title": "Apple Watch Series 12 and Ultra 4 missing one health-focused feature",
         "summary": "Well, this is odd. The handwashing timer feature is currently absent from the new Apple Watch Series 12 and Ultra 4 hardware. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-c007d756065046bb",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/19/apples-iphone-duo-software-gamble/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-19T20:46:00.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles",
-      "programas-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple is taking a little bit of a gamble with iPhone Duo software: Will it pay off?",
-        "summary": "With the new iPhone Duo, Apple is taking a little bit of a software gamble. All apps, in order to take advantage of the larger inner display of iPhone Duo, will need to be recompiled for iOS 27.0 at a minimum. To use the Duo’s unique new tab bar and other UI components, you’ll need iOS 27.1 . Of course, this means a lot of developers will have to rebuild to support the Duo. On the flip side, it also means Apple is taking a risk of many apps on iPhone Duo being stuck in black bars . more…",
         "body": ""
       }
     },
@@ -237,78 +329,6 @@
       "en": {
         "title": "Accessimind Screen Reader",
         "summary": "Accessimind Reader is a screen reader application developed to enable visually impaired and partially sighted users to use their Android phones more clearly, quickly, and…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-b0d46e51aa0fda82",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/997795/google-gemini-rogue-ai-hack",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-19T15:25:03.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Gemini went rogue, hacked three companies, and Google hid it",
-        "summary": "In May, Gemini broke containment and hacked three different companies, but Google didn't disclose the incident until the Wall Street Journal approached the company. The hacks happened during a test of the model's cybersecurity capabilities run by third-party Irregular, which was also involved in similar incidents involving Meta and OpenAI. According to WSJ, Google didn't […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-11fb6f7f530ad3e1",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/19/ai-safety-conversations-have-gotten-unbelievable/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-19T15:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "AI safety conversations have gotten unbelievable",
-        "summary": "This week two conversations about AI safety went viral that demonstrate just how hard it is to discern AI fact from fiction.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-f3ae4a3c21d97d1c",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/podcast/997382/openai-microsoft-anthropic-elon-musk-cartel-ai-competition",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-19T14:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Does AI need an antitrust exemption so it doesn’t kill everyone????",
-        "summary": "Today on Decoder, we’ve got the first of a two-part series on the future of business, and I’m talking with Jonathan Kanter, the former antitrust chief for the US Department of Justice in the Biden administration. These days, he’s both a professor of law at WashU and professor of technology policy at Carnegie Mellon. The […]",
         "body": ""
       }
     },
@@ -1242,32 +1262,6 @@
       "en": {
         "title": "Apple Releases iOS 26.6.2 and iPadOS 26.6.2 with Fix for Problems Downloading Updates over Cellular Connections",
         "summary": "Apple has today released iOS 26.6.2 and iPadOS 26.6.2, bringing a fix for an issue that prevented users from downloading updates over cellular connections. As iOS 26.6.2 and iPadOS 26.6.2 were not distributed to external testers prior to their release, we do not have any information on whether they contain any accessibility fixes for blind, deaf blind, or low vision users at the time of writing. However, as these updates appear to have been released to address a specific issue, we do not expect them to contain any such fixes. Release Notes iOS 26.6.2 This update fixes an issue that prevents downloading a software update over a cellular connection. iPadOS 26.6.2 This update fixes an issue that prevents downloading a software update over a cellular connection. How to Update iOS and iPadOS 26.6.2 are available via Over-the-Air Update (Settings > General > Software Update), via Finder on a Mac with macOS Catalina or later, or via iTunes on a PC or Mac with macOS Mojave or earlier. Before updating, we strongly recommend making a full and complete backup of your device (either locally or in iCloud, depending on personal preference). This will ensure that, in the unlikely event that something goes wrong during the update process, you will have a current backup on hand in case a device restore becomes necessary. Also, if using OTA update, we recommend plugging your device into a power source for the duration of the download/installation process, so as to prevent the unlikely event of your battery going dead during the update.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "applevis-apps-6a1cfaa5549dda14",
-    "type": "news",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/productivity/private-llm-local-private-ai-iphone-ipad-mac",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-08T14:54:19.000Z",
-    "categories": [
-      "apple",
-      "apps-accesibles",
-      "windows",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Private LLM - Local & Private AI for iPhone, iPad & Mac",
-        "summary": "Discover the Ultimate Privacy-Focused AI Assistant on iOS: Private LLM Unlock a new realm of productivity and creativity on your iPhone and iPad with Private LLM, the premier AI assistant designed with your privacy in mind. Available for a one-time purchase, it offers a range of AI capabilities without needing a subscription. Experience advanced on-device AI that keeps your interactions confidential and offline. Why Private LLM is Your Go-To AI Companion: - Exclusive AI Model Selection: Choose from a diverse set of open-source LLM models optimized for performance and perplexity on iOS with state of the art OmniQuant quantization: including models from Llama 2, Llama 3.2, Llama 3.1, Google Gemma 2, Gemma 3, Microsoft Phi-3, Mistral 7B, Qwen 2.5, Qwen 3, StableLM 3B and many more. Whether you need help with creative brainstorming, coding, or daily questions, customize your AI experience to meet your unique needs. - Integrated with Siri & Shortcuts: Enhance your AI interactions with Siri commands and customizable Shortcuts. Private LLM seamlessly fits within your Apple ecosystem, making your digital assistant more accessible. - Customizable Interactions: Tailor your AI’s responses and interactions with customizable system prompts to match your preferences and needs. - Uncompromised Privacy and Security: With Private LLM, your conversations stay confidential and on your device. Our advanced on-device AI performs robust computing without risking data compromise or needing an internet connection. - Family Sharing & Offline Capabilities: Benefit from a one-time purchase that includes Family Sharing. Download models as needed and enjoy the full functionality of your AI assistant, even without internet access. Supported LLM Model families: - DeepSeek R1 Distill based models - Phi 4 based models - Qwen 3 based models (Qwen3-4B-Instruct-2507) - Qwen 2.5 based models (0.5B, 1.5B, 3B and 7B) - Qwen 2.5 Coder based Models (0.5B, 1.5B, 3B, 7B and 14B) - Llama 3.1 8B based models - Llama 3.2 1B and 3B based models - Google Gemma 2 2B and 9B based models - Google Gemma 3 1B based models - Mistral 7B based models - Yi 6B based models For a full list of supported models, including detailed specifications, please visit privatellm.app/models. Private LLM is not just a chatbot; it’s a comprehensive AI companion designed to respect your privacy while providing versatile, on-demand assistance. Whether you’re enhancing your creative writing, tackling complex programming challenges, or just seeking answers, Private LLM adapts to meet your needs while keeping your data secure. Start your journey with Private LLM today and elevate your productivity and creative projects with the most private AI assistant for iOS devices. Private LLM is a better alternative to generic llama.cpp and MLX wrappers apps like Enchanted, Ollama, LLM Farm, LM Studio, Locally AI, RecurseChat, etc on three fronts: 1. Private LLM uses a faster and highly-optimized mlc-llm based inference engine. 2. Models in Private LLM are quantized using the state of the art quantization algorithms like OmniQuant, while competing apps use naive round-to-nearest quantization. 3. Private LLM is a fully native app built using C++, Metal and Swift with deep integrations with iOS and iPadOS, while many of the competing apps are bloated and non-native Electron or Flutter based apps. Please note that Private LLM only supports inference with text based LLMs. Model support varies by device capabilities.",
         "body": ""
       }
     },

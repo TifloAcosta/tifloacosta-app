@@ -1,5 +1,137 @@
 [
   {
+    "id": "buscaapps-ee92cae77de6709d",
+    "title": "SonicRoom",
+    "sourceId": "buscaapps",
+    "sourceName": "BuscaApps",
+    "sourceUrl": "https://www.buscaapps.com/",
+    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1242",
+    "lang": "es",
+    "platform": "Web",
+    "summary": "Una plataforma de comunicación audiovisual accesible y de baja latencia",
+    "publishedAt": null
+  },
+  {
+    "id": "buscaapps-d01041ec11d31697",
+    "title": "El Panel de Hoy",
+    "sourceId": "buscaapps",
+    "sourceName": "BuscaApps",
+    "sourceUrl": "https://www.buscaapps.com/",
+    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1241",
+    "lang": "es",
+    "platform": "Web",
+    "summary": "Web app de juegos de palabras",
+    "publishedAt": null
+  },
+  {
+    "id": "buscaapps-60e7e1e4b4f55b2e",
+    "title": "PingKit - Network Tools",
+    "sourceId": "buscaapps",
+    "sourceName": "BuscaApps",
+    "sourceUrl": "https://www.buscaapps.com/",
+    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1240",
+    "lang": "es",
+    "platform": "iOS",
+    "summary": "Analizador de red y Wi-Fi para iPhone, iPad y Apple Watch",
+    "publishedAt": null
+  },
+  {
+    "id": "buscaapps-f6202e94961ce1f9",
+    "title": "Nexus Image",
+    "sourceId": "buscaapps",
+    "sourceName": "BuscaApps",
+    "sourceUrl": "https://www.buscaapps.com/",
+    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1239",
+    "lang": "es",
+    "platform": "Windows",
+    "summary": "edición de vídeo accesible y grabación de audio para todos",
+    "publishedAt": null
+  },
+  {
+    "id": "buscaapps-42783766e98438c5",
+    "title": "Visor Universal",
+    "sourceId": "buscaapps",
+    "sourceName": "BuscaApps",
+    "sourceUrl": "https://www.buscaapps.com/",
+    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1238",
+    "lang": "es",
+    "platform": "Windows",
+    "summary": "El visor/lector de libros definitivo para usuarios con lectores de pantalla",
+    "publishedAt": null
+  },
+  {
+    "id": "buscaapps-4a84d11a60d0943f",
+    "title": "Zerogram",
+    "sourceId": "buscaapps",
+    "sourceName": "BuscaApps",
+    "sourceUrl": "https://www.buscaapps.com/",
+    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1237",
+    "lang": "es",
+    "platform": "iOS",
+    "summary": "Cliente accesible y gratuito de Telegram",
+    "publishedAt": null
+  },
+  {
+    "id": "buscaapps-510558393adc5975",
+    "title": "GhostWriter MarkDown",
+    "sourceId": "buscaapps",
+    "sourceName": "BuscaApps",
+    "sourceUrl": "https://www.buscaapps.com/",
+    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1235",
+    "lang": "es",
+    "platform": "iOS",
+    "summary": "Editor de texto MarkDown accesible",
+    "publishedAt": null
+  },
+  {
+    "id": "buscaapps-a1e548d21a91c7f4",
+    "title": "MundiCapitales",
+    "sourceId": "buscaapps",
+    "sourceName": "BuscaApps",
+    "sourceUrl": "https://www.buscaapps.com/",
+    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1234",
+    "lang": "es",
+    "platform": "Web",
+    "summary": "Aprende divirtiéndote a adivinar capitales y países",
+    "publishedAt": null
+  },
+  {
+    "id": "buscaapps-17d4c57012c31161",
+    "title": "TagFit",
+    "sourceId": "buscaapps",
+    "sourceName": "BuscaApps",
+    "sourceUrl": "https://www.buscaapps.com/",
+    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1233",
+    "lang": "es",
+    "platform": "iOS",
+    "summary": "Usa la cámara, etiquetas NFC y códigos QR para identificar, localizar y organizar objetos y gestionar caducidades y ropa",
+    "publishedAt": null
+  },
+  {
+    "id": "buscaapps-f9e2dc0ec4b3dfa8",
+    "title": "Visionauta",
+    "sourceId": "buscaapps",
+    "sourceName": "BuscaApps",
+    "sourceUrl": "https://www.buscaapps.com/",
+    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1232",
+    "lang": "es",
+    "platform": "iOS",
+    "summary": "App multifunción que emplea IA para leer textos, encontrar objetos, describir lo que tenemos delante y más.",
+    "publishedAt": null
+  },
+  {
+    "id": "applevis-apps-bf0a7ae49816b1e9",
+    "title": "Pegfall: Bounce Roguelite",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/pegfall-bounce-roguelite",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "Pegfall is a one-handed pegboard physics roguelite where every shot draws an orb from your deck. Aim, bounce through a living board, build ruthless combos, and descend into the Maw. NEW: PLAY WITH VOICEOVER Aim by named directions, fire with a double tap or Magic Tap, hear every volley, and inspect the board whenever you need to. Peg types use shapes as well as colour, so every board reads clearly. ▸ FAIR — SKILL, NOT LUCK A dotted trajectory preview shows where your shot lands. Every bounce is yours. ▸ A CAMPAIGN THAT ENDS — 10 CHAPTERS, 200 FLOORS Face ten bosses across distinct boards, palettes and rules. Each chapter starts you bare; every decision rebuilds your run. ▸ BUILDS THAT STACK 20 orbs, 23 relics, 14 upgrade cards and three characters create runs that go in completely different directions. Take a curse when the floor asks for one. ▸ THE BOARD FIGHTS BACK Deeper chapters erode spent pegs, wire circuits through armour, and reshape the board as you play. ▸ ENDLESS, DAILY AND WEEKLY Dive without a floor beneath you, take the same daily board as everyone else, or race one shared weekly board with a single attempt. ▸ GET STRONGER AS YOU PLAY Earn permanent upgrades, unlock ascension tiers, achievements, themes, ball skins, faces and note banks. Never pay to win. ▸ MADE TO BE PLAYED BY MORE PEOPLE VoiceOver support, clear combat feedback, accessible peg shapes, Reduce Motion support, and real 44pt touch targets. Special thanks to accessibility tester Matheus Rheine for helping shape this update. ▸ MOBILE-NATIVE True portrait, one-handed, free to start. No energy timer and no premium wall. Honest monetization: optional rewarded continues, an ad-free purchase, cosmetics and essence pouches. Everything in a pouch is also earnable by playing.",
+    "publishedAt": "2026-09-20T16:36:21.000Z"
+  },
+  {
     "id": "applevis-apps-7b5840f570609115",
     "title": "No wifi mini games",
     "sourceId": "applevis-apps",
@@ -106,17 +238,5 @@
     "platform": "Apple",
     "summary": "Hear your upcoming intersections while walking, when in a rideshare, or on a bus with the new Live Mode. Intersector helps you quickly identify nearby street intersections using your iPhone’s location and heading. Ask for the nearest intersection, what’s coming up ahead, use Scan Mode to point your phone down the street and hear the intersection it detects, or turn on Live Mode and have Intersector speak your upcoming intersections on a walk or during a ride with your phone locked. Intersector can speak distance, direction, and neighborhood context, and includes optional wording styles so announcements can match how you think about your surroundings. Built with VoiceOver users in mind, Intersector focuses on fast, clear spoken information without turning into turn-by-turn navigation. It is designed as a lightweight orientation tool for understanding nearby cross streets, not as a crossing aid or safety system. Features include: • Nearest intersection announcements • Upcoming intersection announcements • Scan Mode for nearby intersections in the direction you point • Live Mode to announce upcoming intersections automatically while walking or in transportation, using customizable speech • Siri Shortcut support • Optional distance, direction, and neighborhood details • Customizable intersection wording • Support for split intersections where different streets meet the same main street • Manhattan Snob Mode for New York-style direction wording • VoiceOver-friendly controls and spoken feedback • Dynamic Type and large text support. Intersector also has an Apple Watch companion app, so Siri Shortcuts and intersection data can be queried right from your wrist. Intersector uses location and heading data to provide orientation information. Always use your own judgment, mobility skills, and available pedestrian infrastructure when traveling.",
     "publishedAt": "2026-09-08T23:43:10.000Z"
-  },
-  {
-    "id": "applevis-apps-6a1cfaa5549dda14",
-    "title": "Private LLM - Local & Private AI for iPhone, iPad & Mac",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/productivity/private-llm-local-private-ai-iphone-ipad-mac",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Discover the Ultimate Privacy-Focused AI Assistant on iOS: Private LLM Unlock a new realm of productivity and creativity on your iPhone and iPad with Private LLM, the premier AI assistant designed with your privacy in mind. Available for a one-time purchase, it offers a range of AI capabilities without needing a subscription. Experience advanced on-device AI that keeps your interactions confidential and offline. Why Private LLM is Your Go-To AI Companion: - Exclusive AI Model Selection: Choose from a diverse set of open-source LLM models optimized for performance and perplexity on iOS with state of the art OmniQuant quantization: including models from Llama 2, Llama 3.2, Llama 3.1, Google Gemma 2, Gemma 3, Microsoft Phi-3, Mistral 7B, Qwen 2.5, Qwen 3, StableLM 3B and many more. Whether you need help with creative brainstorming, coding, or daily questions, customize your AI experience to meet your unique needs. - Integrated with Siri &amp; Shortcuts: Enhance your AI interactions with Siri commands and customizable Shortcuts. Private LLM seamlessly fits within your Apple ecosystem, making your digital assistant more accessible. - Customizable Interactions: Tailor your AI’s responses and interactions with customizable system prompts to match your preferences and needs. - Uncompromised Privacy and Security: With Private LLM, your conversations stay confidential and on your device. Our advanced on-device AI performs robust computing without risking data compromise or needing an internet connection. - Family Sharing &amp; Offline Capabilities: Benefit from a one-time purchase that includes Family Sharing. Download models as needed and enjoy the full functionality of your AI assistant, even without internet access. Supported LLM Model families: - DeepSeek R1 Distill based models - Phi 4 based models - Qwen 3 based models (Qwen3-4B-Instruct-2507) - Qwen 2.5 based models (0.5B, 1.5B, 3B and 7B) - Qwen 2.5 Coder based Models (0.5B, 1.5B, 3B, 7B and 14B) - Llama 3.1 8B based models - Llama 3.2 1B and 3B based models - Google Gemma 2 2B and 9B based models - Google Gemma 3 1B based models - Mistral 7B based models - Yi 6B based models For a full list of supported models, including detailed specifications, please visit privatellm.app/models. Private LLM is not just a chatbot; it’s a comprehensive AI companion designed to respect your privacy while providing versatile, on-demand assistance. Whether you’re enhancing your creative writing, tackling complex programming challenges, or just seeking answers, Private LLM adapts to meet your needs while keeping your data secure. Start your journey with Private LLM today and elevate your productivity and creative projects with the most private AI assistant for iOS devices. Private LLM is a better alternative to generic llama.cpp and MLX wrappers apps like Enchanted, Ollama, LLM Farm, LM Studio, Locally AI, RecurseChat, etc on three fronts: 1. Private LLM uses a faster and highly-optimized mlc-llm based inference engine. 2. Models in Private LLM are quantized using the state of the art quantization algorithms like OmniQuant, while competing apps use naive round-to-nearest quantization. 3. Private LLM is a fully native app built using C++, Metal and Swift with deep integrations with iOS and iPadOS, while many of the competing apps are bloated and non-native Electron or Flutter based apps. Please note that Private LLM only supports inference with text based LLMs. Model support varies by device capabilities.",
-    "publishedAt": "2026-09-08T14:54:19.000Z"
   }
 ]

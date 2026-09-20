@@ -50,3 +50,16 @@ test('opening the player isolates it from previous catalog chrome for desktop sc
   assert.match(html, /body:has\(#video-player-section:not\(\[hidden\]\)\) > \.site-footer/);
   assert.match(html, /videos\.js\?v=2\.3/);
 });
+
+test('YouTube actions attach through minimal hooks without replacing player behavior', async () => {
+  const source = await read('videos.js');
+  assert.match(source, /TifloYouTubeActions\?\.showVideo\(video, lang\)/);
+  assert.match(source, /TifloYouTubeActions\?\.hide\(\)/);
+  assert.match(source, /TifloYouTubeActions\?\.setLanguage\(lang\)/);
+  assert.match(source, /takePendingVideoId\?\.\(\)/);
+  assert.match(source, /catalog\.find\(video => videoId\(video\) === pendingId\)/);
+
+  assert.match(source, /els\.playerTitle\.focus\(\)/);
+  assert.match(source, /trigger\.focus\(\)/);
+  assert.match(source, /youtubePlayer\.cueVideoById\(id\)/);
+});

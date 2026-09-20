@@ -1,5 +1,28 @@
 [
   {
+    "id": "engadget-2b9f2bbef3bcc055",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2258952/wired-vs-wireless-charging-better-battery-health/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-20T12:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Wired vs. wireless charging: Which is better for battery health?",
+        "summary": "Wireless charging offers convenience, to be sure, but how does it affect your battery over time? And is it a problem if your phone heats up?",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "9to5mac-5c08c61fa0c6b2a0",
     "type": "news",
     "sourceId": "9to5mac",
@@ -90,29 +113,6 @@
       "en": {
         "title": "Apple Watch Series 12 and Ultra 4 missing one health-focused feature",
         "summary": "Well, this is odd. The handwashing timer feature is currently absent from the new Apple Watch Series 12 and Ultra 4 hardware. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-33abdffab4e75cc9",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2258772/robot-vacuum-downsides/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-19T22:00:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "What are the downsides of robot vacuums?",
-        "summary": "Robot vacuums save a lot of time and effort with their ability to clean autonomously. However, there are a number of reasons why they might not work for you.",
         "body": ""
       }
     },
@@ -2330,36 +2330,6 @@
       "en": {
         "title": "Honor 600 Pro Review",
         "summary": "After spending more than five years with Samsung phones, the time has come to test out a phone from another brand. While not a flagship,…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "tecnoconocimiento-accesible-1a6aa1edd60a1a48",
-    "type": "news",
-    "sourceId": "tecnoconocimiento-accesible",
-    "sourceName": "TecnoConocimientoAccesible",
-    "sourceUrl": "https://tecnoconocimientoaccesible.blogspot.com/",
-    "originalUrl": "https://tecnoconocimientoaccesible.blogspot.com/2026/06/descargador-de-musica-accesible-142.html",
-    "originalLanguage": "es",
-    "publishedAt": "2026-06-22T08:42:24.732Z",
-    "categories": [
-      "tecnologia-accesibilidad",
-      "programas-accesibles",
-      "windows",
-      "jaws",
-      "nvda",
-      "apps-accesibles",
-      "proyectos-prototipos",
-      "movilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "es": {
-        "title": "Descargador de Música Accesible 1.4.2: Nueva Alternativa!",
-        "summary": "Normal 0 false 21 false false false ES X-NONE X-NONE /* Style Definitions */ table.MsoNormalTable {mso-style-name:\"Tabla normal\"; mso-tstyle-rowband-size:0; mso-tstyle-colband-size:0; mso-style-noshow:yes; mso-style-priority:99; mso-style-parent:\"\"; mso-padding-alt:0cm 5.4pt 0cm 5.4pt; mso-para-margin-top:0cm; mso-para-margin-right:0cm; mso-para-margin-bottom:8.0pt; mso-para-margin-left:0cm; line-height:107%; mso-pagination:widow-orphan; font-size:11.0pt; font-family:\"Calibri\",sans-serif; mso-ascii-font-family:Calibri; mso-ascii-theme-font:minor-latin; mso-hansi-font-family:Calibri; mso-hansi-theme-font:minor-latin; mso-bidi-font-family:\"Times New Roman\"; mso-bidi-theme-font:minor-bidi; mso-fareast-language:EN-US;} Hola gente, ¿qué tal les va? Descargador de Música Accesible 1.4.2 : Otra gran alternativa inclusiva para YouTube Introducción En el mundo actual, el contenido multimedia es parte fundamental de nuestro día a día. Para la comunidad de personas con discapacidad visual, contar con herramientas que permitan descargar y gestionar este contenido de forma autónoma es vital. Si bien ya existen en el ecosistema opciones consolidadas y muy queridas como TCA MediaDownloader, siempre es una excelente noticia recibir nuevas propuestas que enriquezcan nuestras opciones. Hoy queremos hablar de Descargador de Música Accesible, otra fantástica alternativa que se suma a la lista de herramientas diseñadas desde cero para garantizar una experiencia fluida, cómoda y sin barreras. Esta aplicación ha sido desarrollada por Nicolás Alfaro, programador y miembro del colectivo de personas con discapacidad visual, quien ha puesto su conocimiento al servicio de la comunidad. ¿Qué es Descargador de Música Accesible? Es una aplicación gratuita para Windows que permite bajar audio y video desde YouTube de manera sencilla y con total compatibilidad con lectores de pantalla. Actualmente en su versión 1.4.2, el programa destaca por su ligereza y por integrar soluciones prácticas —como un reproductor interno portable— que facilitan la navegación previa a la descarga. Al ser un proyecto creado por y para usuarios con discapacidad visual, cada ventana y comando está optimizado para responder exactamente a lo que la comunidad necesita, convirtiéndose en un complemento ideal para tu día a día digital. Características principales • Interfaz 100% accesible: Diseñada minuciosamente para funcionar a la perfección con NVDA y JAWS. Cada elemento, botón y cuadro de diálogo está correctamente etiquetado para una navegación fluida mediante el tabulador y atajos de teclado. • Buscador integrado de YouTube: No necesitas abrir el navegador. El programa incluye una pestaña de búsqueda directa que ofrece hasta 50 resultados, permitiéndote elegir el contenido exacto desde una lista cómoda y accesible. • Reproductor interno MPV: Una de las novedades más potentes de la versión 1.4.2. Incorpora un reproductor basado en MPV portable para escuchar el audio o ver el video antes de descargarlo, con controles adaptados y accesibles. • Variedad de formatos y calidades: Audio (MP3): Permite elegir entre calidades de 128, 256 y 320 kbps. Video (MP4). • Información detallada antes de descargar: Puedes verificar el título, duración, fecha de publicación y número de visualizaciones para asegurarte de que es el archivo correcto. • Historial de descargas: Un registro organizado y accesible desde el menú superior para revisar tus archivos obtenidos recientemente. Mantenimiento y actualización integrada: Como YouTube actualiza su plataforma constantemente, el programa incluye una opción en el menú de herramientas para actualizar las librerías de yt-dlp de forma automática, garantizando que el software nunca quede obsoleto. • Sistema de diagnóstico: Si experimentas fallos con el lector de pantalla o el reproductor, la app cuenta con una herramienta de diagnóstico que verifica el estado de NVDA y los módulos de Python. Puedes exportar este reporte para recibir soporte técnico de forma eficiente. Contacto y soporte El desarrollo de software accesible crece gracias a la retroalimentación de la comunidad. Si tienes sugerencias, comentarios o deseas reportar algún fallo, puedes ponerte en contacto directo con el desarrollador: Correo electrónico: alfaronico8@gmail.com Nota para el soporte: Se recomienda ser lo más detallado posible al describir cualquier incidencia o sugerencia para facilitar las futuras actualizaciones del programa. Tutorial: 🎧 Descargador de Música Accesible 1.4.2: Nueva Alternativa! En este tutorial, Nicolás nos mostrará como utilizar este programa, además todas sus funcionalidades. La descarga. Les dejaré en la descarga: • El audio tutorial (en los canales Odysse y YouTube estará en video tutorial). • El programa: Descargador de Música Accesible 1.4.2. Aquí Nicolás Alfaro nos propone otra alternativa para descargar contenido multimedia. Espero lo disfruten y les sea de utilidad. Y ya sabes, Si te gusta este contenido, Apóyanos haciendo una donación: Dona aquí en PayPal. compártelo en: Facebook, X. Deja un comentario sobre esta entrada. Síguenos en X: Abajo tienes el botón. Suscríbete al blog: Ahora puedes unirte a nuestros grupos de WhatsApp o Telegram: Puedes escribir al mail del blog con tus datos si deseas ingresar a los mismos. Escucha todos nuestros audio tutoriales, cómodamente: Entrando desde aquí, a nuestro canal en YouTube. Ahora también, en nuestro canal en Odysse: Entra al canal de Tecnoconocimiento Accesible en Odysse. O si prefieres escúchanos en: Anchor: Escúchanos en Anchor. Ponte en contacto con nosotros, déjanos tus sugerencias, dudas, o comentarios, abajo tienes un sencillo formulario, o si lo prefieres, escríbenos al correo del blog: tecnoconocimientoaccesible@gmail.com Los aportes siempre serán bienvenidos. cuando nos escribas por uno de los medios con alguna sugerencia, se publicará con tu nombre. además, como ya se sabe, puedes publicar esta entrada en otro sitio, pero no te olvides citar la fuente. Saludos, y hasta otro post. Descarga aquí el tutorial. Descarga aquí el programa.",
         "body": ""
       }
     },

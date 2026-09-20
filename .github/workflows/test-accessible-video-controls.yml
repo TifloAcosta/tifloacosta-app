@@ -3,7 +3,19 @@ name: Test accessible video controls
 on:
   push:
     branches:
-      - 'feature/accessible-video-controls'
+      - main
+      - 'feature/**'
+    paths:
+      - 'videos.html'
+      - 'videos.js'
+      - 'test/video-player-controls.test.mjs'
+      - '.github/workflows/test-accessible-video-controls.yml'
+  pull_request:
+    paths:
+      - 'videos.html'
+      - 'videos.js'
+      - 'test/video-player-controls.test.mjs'
+      - '.github/workflows/test-accessible-video-controls.yml'
 
 permissions:
   contents: read
@@ -16,4 +28,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: npm test
+      - name: Check video JavaScript syntax
+        run: node --check videos.js
+      - name: Run repository tests
+        run: npm test

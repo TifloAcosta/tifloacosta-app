@@ -1,0 +1,36 @@
+name: Diagnose public PWA
+
+on:
+  push:
+    branches:
+      - 'diagnostic/public-pwa-health'
+    paths:
+      - '.github/workflows/diagnose-public-pwa.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check DNS and public root
+        shell: bash
+        run: |
+          set -euxo pipefail
+          getent ahosts tifloacosta.com
+          curl --fail --silent --show-error --location --max-time 20 \
+            --dump-header root-headers.txt \
+            --output root.html \
+            https://tifloacosta.com/
+          head -40 root-headers.txt
+          grep -qi 'TifloAcosta' root.html
+      - name: Check public service worker generation
+        shell: bash
+        run: |
+          set -euxo pipefail
+          curl --fail --silent --show-error --location --max-time 20 \
+            --output sw-public.js \
+            https://tifloacosta.com/sw.js
+          grep -q 'const NAVIGATION_TIMEOUT_MS = 5000;' sw-public.js
+          grep -q 'cache.put(request, copy)' sw-public.js

@@ -4,10 +4,10 @@ import test from 'node:test';
 
 const read = file => readFile(new URL(`../${file}`, import.meta.url), 'utf8');
 
-test('analyzer uses the main-domain Worker endpoint', async () => {
+test('analyzer uses the direct download Worker endpoint', async () => {
   const [source, config] = await Promise.all([read('downloads.js'), read('download-config.js')]);
-  assert.match(config, /endpoint:\s*'https:\/\/tifloacosta\.com\/api\/download\/analyze'/);
-  assert.doesNotMatch(config, /download\.tifloacosta\.com\/analyze/);
+  assert.match(config, /endpoint:\s*'https:\/\/download\.tifloacosta\.com\/analyze'/);
+  assert.doesNotMatch(config, /tifloacosta\.com\/api\/download\/analyze/);
   assert.doesNotMatch(config, /endpoint:\s*''/);
   assert.match(source, /method:\s*'POST'/);
   assert.match(source, /body:\s*JSON\.stringify\(\{ url \}\)/);
@@ -37,9 +37,16 @@ test('download Worker deploys from main when analyzer code changes', async () =>
   assert.match(workflow, /- ['"]?\.github\/workflows\/deploy-download-worker\.yml['"]?/);
 });
 
-test('deployment smoke-tests the main-domain download API before the client switches to it', async () => {
+test('deployment smoke-tests the direct download Worker endpoint only', async () => {
   const workflow = await read('.github/workflows/deploy-download-worker.yml');
-  assert.match(workflow, /https:\/\/tifloacosta\.com\/api\/download\/health/);
-  assert.match(workflow, /https:\/\/tifloacosta\.com\/api\/download\/analyze/);
+  assert.match(workflow, /https:\/\/download\.tifloacosta\.com\/health/);
+  assert.match(workflow, /https:\/\/download\.tifloacosta\.com\/analyze/);
+  assert.doesNotMatch(workflow, /https:\/\/tifloacosta\.com\/api\/download\//);
   assert.match(workflow, /"code":"no_files"/);
+});
+
+test('Worker routing does not require the main domain to be proxied by Cloudflare', async () => {
+  const wrangler = await read('download-worker/wrangler.toml');
+  assert.match(wrangler, /pattern\s*=\s*"download\.tifloacosta\.com"/);
+  assert.doesNotMatch(wrangler, /tifloacosta\.com\/api\/download\/\*/);
 });

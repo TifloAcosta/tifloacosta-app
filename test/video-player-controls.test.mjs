@@ -56,9 +56,10 @@ test('YouTube actions bridge leaves videos.js untouched and connects through exi
   assert.match(html, /videos\.js\?v=2\.3/);
   assert.match(html, /youtube-actions-bridge\.js\?v=/);
   assert.match(bridge, /\.video-play-button\[data-video-id\]/);
-  assert.match(bridge, /TifloYouTubeActions\.showVideo/);
-  assert.match(bridge, /TifloYouTubeActions\.hide/);
-  assert.match(bridge, /TifloYouTubeActions\.setLanguage/);
+  assert.match(bridge, /const actions = window\.TifloYouTubeActions/);
+  assert.match(bridge, /actions\.showVideo\(/);
+  assert.match(bridge, /actions\.hide\(/);
+  assert.match(bridge, /actions\.setLanguage\(/);
   assert.match(bridge, /takePendingVideoId/);
   assert.match(bridge, /button\.click\(\)/);
 });

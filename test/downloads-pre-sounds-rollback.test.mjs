@@ -22,7 +22,8 @@ test('Descargas vuelve a ser una sección directa desde el inicio', async () => 
   assert.match(downloads, /back: 'Volver al inicio'/);
 });
 
-test('el analizador sigue usando la ruta actual de mismo dominio', async () => {
+test('el analizador usa el subdominio directo independiente del dominio principal', async () => {
   const config = await read('download-config.js');
-  assert.match(config, /https:\/\/tifloacosta\.com\/api\/download\/analyze/);
+  assert.match(config, /https:\/\/download\.tifloacosta\.com\/analyze/);
+  assert.doesNotMatch(config, /tifloacosta\.com\/api\/download\/analyze/);
 });

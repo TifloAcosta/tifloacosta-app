@@ -447,8 +447,10 @@
 
   function closePlayer() {
     const returnId = lastPlayerVideoId;
-    if (youtubePlayer && playerReady) {
-      try { youtubePlayer.pauseVideo(); } catch {}
+    if (youtubePlayer) {
+      if (playerReady) {
+        try { youtubePlayer.pauseVideo(); } catch {}
+      }
     } else {
       els.playerFrame.removeAttribute('src');
     }

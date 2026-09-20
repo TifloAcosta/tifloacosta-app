@@ -19,6 +19,7 @@ Ver un vídeo seguirá siendo siempre público y no requerirá iniciar sesión.
 7. No se añadirá una opción para cancelar la suscripción al canal desde TifloAcosta.
 8. No se añadirá una opción para marcar No me gusta ni para retirar un Me gusta en esta fase.
 9. Un comentario nunca se publicará sin una acción explícita final del usuario.
+10. Android utilizará el mismo flujo web HTTPS de OAuth que Windows y iPhone; no se creará un flujo OAuth nativo independiente para Android en esta fase.
 
 ## Experiencia del usuario
 
@@ -200,7 +201,9 @@ Si el usuario inicia OAuth desde un vídeo concreto:
 3. Google vuelve al Worker.
 4. El Worker redirige de nuevo a `https://tifloacosta.com/videos.html`.
 5. El frontend recupera el `videoId` pendiente y vuelve a abrir ese mismo vídeo.
-6. El foco se sitúa en el bloque de acciones o en el título del reproductor según resulte más estable con JAWS, NVDA y VoiceOver.
+6. El foco se sitúa en el bloque de acciones o en el título del reproductor según resulte más estable con JAWS, NVDA, VoiceOver y TalkBack.
+
+En Android, el recorrido seguirá siendo el mismo flujo web HTTPS: TifloAcosta abre la autorización de Google y, al terminar, vuelve a `videos.html` y recupera el vídeo pendiente. Tener la sesión iniciada en la aplicación oficial de YouTube no sustituye la autorización OAuth de TifloAcosta.
 
 Esto evita obligar al usuario a buscar de nuevo el vídeo tras autorizar la cuenta.
 
@@ -214,7 +217,8 @@ El bloque de acciones deberá cumplir:
 - gestión explícita del foco después de suscripción, Me gusta, comentario, cancelación, errores y regreso de OAuth;
 - ningún salto al principio de la página tras una acción;
 - español e inglés con textos equivalentes;
-- funcionamiento con JAWS, NVDA y VoiceOver;
+- funcionamiento con JAWS y NVDA en Windows, VoiceOver en iPhone y TalkBack en Android;
+- no depender de gestos o comportamientos exclusivos de un lector de pantalla;
 - el reproductor seguirá aislado del catálogo mientras esté abierto, manteniendo la corrección ya publicada para Windows.
 
 ## Tratamiento de errores
@@ -267,7 +271,8 @@ Como mínimo:
 - comentario vacío no publicable;
 - comentario publicado y error de comentarios desactivados;
 - logout vuelve al estado no autenticado;
-- error del Worker no afecta al reproductor.
+- error del Worker no afecta al reproductor;
+- regreso de OAuth recupera el mismo vídeo en navegadores móviles y de escritorio.
 
 ### Nuevas pruebas del Worker
 
@@ -288,6 +293,17 @@ Con la API de YouTube simulada en CI:
 
 No se usarán cuentas personales reales de Google en CI.
 
+### Pruebas manuales de accesibilidad
+
+Antes de considerar cerrada la función se verificará el flujo completo, incluida la ida y vuelta de OAuth, con:
+
+- JAWS en Windows;
+- NVDA en Windows;
+- VoiceOver en iPhone;
+- TalkBack en Android.
+
+En cada plataforma se comprobarán reproducción sin login, suscripción, Me gusta, comentario, cierre de sesión, retorno al mismo vídeo y conservación del foco o contexto de lectura.
+
 ## Estrategia de despliegue
 
 1. Desarrollar todo en rama independiente.
@@ -297,7 +313,7 @@ No se usarán cuentas personales reales de Google en CI.
 5. Ejecutar la suite completa.
 6. Integrar únicamente con todas las pruebas verdes.
 7. Publicar Pages y Worker por separado.
-8. Hacer prueba manual accesible en Windows y iPhone antes de considerar cerrada la función.
+8. Hacer prueba manual accesible en Windows, iPhone y Android antes de considerar cerrada la función.
 
 ## Fuera de alcance en esta fase
 
@@ -308,6 +324,7 @@ No se usarán cuentas personales reales de Google en CI.
 - subir o modificar vídeos;
 - administrar listas de reproducción;
 - iniciar o cerrar la sesión global de Google o de la aplicación oficial de YouTube;
+- crear un flujo OAuth nativo distinto para Android;
 - cambiar la arquitectura de Descargas;
 - volver a poner `tifloacosta.com` detrás del proxy de Cloudflare.
 
@@ -317,11 +334,11 @@ La función se considera lista cuando una persona puede:
 
 1. abrir y ver un vídeo sin iniciar sesión;
 2. encontrar una opción clara para conectar YouTube cuando quiera usar las funciones de cuenta, sin que esa conexión sea obligatoria para reproducir;
-3. regresar al mismo vídeo tras OAuth;
+3. regresar al mismo vídeo tras OAuth en Windows, iPhone y Android;
 4. suscribirse al canal TifloAcosta con una sola acción clara;
 5. saber inmediatamente si ya está suscrita;
 6. marcar Me gusta;
 7. publicar un comentario mediante confirmación explícita;
 8. cerrar la sesión de YouTube en TifloAcosta;
-9. realizar todo lo anterior con lector de pantalla sin perder foco;
+9. realizar todo lo anterior con JAWS, NVDA, VoiceOver o TalkBack sin perder el contexto de navegación;
 10. seguir usando el reproductor actual aunque el servicio de YouTube autenticado falle.

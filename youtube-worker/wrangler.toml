@@ -1,0 +1,11 @@
+name = "tifloacosta-youtube-actions"
+main = "src/index.js"
+compatibility_date = "2026-09-20"
+workers_dev = true
+routes = [
+  { pattern = "youtube-auth.tifloacosta.com", custom_domain = true }
+]
+
+[vars]
+ALLOWED_ORIGIN = "https://tifloacosta.com"
+APP_RETURN_URL = "https://tifloacosta.com/videos.html"

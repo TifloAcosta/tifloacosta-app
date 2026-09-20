@@ -1,0 +1,40 @@
+.youtube-actions {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid currentColor;
+}
+
+.youtube-actions h3 {
+  margin-top: 0;
+}
+
+.youtube-actions-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.youtube-details-panel {
+  margin: 0.75rem 0;
+}
+
+.youtube-account-actions {
+  margin-top: 0.75rem;
+}
+
+.youtube-account-actions button,
+.youtube-actions button {
+  margin: 0.25rem 0.5rem 0.25rem 0;
+}
+
+.youtube-comment-editor {
+  margin-top: 0.75rem;
+}
+
+.youtube-comment-editor textarea {
+  display: block;
+  width: 100%;
+  min-height: 7rem;
+  margin: 0.5rem 0;
+}

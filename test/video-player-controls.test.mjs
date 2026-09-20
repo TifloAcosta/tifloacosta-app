@@ -37,7 +37,7 @@ test('closing during player startup does not detach an already-created YouTube p
   assert.match(source, /else \{\s*els\.playerFrame\.removeAttribute\('src'\);\s*\}/s);
 });
 
-test('opening the player isolates it from the previous video-catalog chrome for desktop screen readers', async () => {
+test('opening the player isolates it from previous catalog chrome for desktop screen readers', async () => {
   const [html, source] = await Promise.all([read('videos.html'), read('videos.js')]);
 
   assert.match(source, /function setPlayerView\(active\)/);

@@ -1,5 +1,173 @@
 [
   {
+    "id": "9to5mac-eb8826103fb5d310",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/20/ifixit-tears-down-iphone-18-pro-explores-variable-aperture-finds-concerning-repair-issue/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-20T22:02:17.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iFixit tears down iPhone 18 Pro, explores variable aperture, finds concerning repair issue",
+        "summary": "iFixit has published its traditional teardown of the iPhone 18 Pro, which shows the variable aperture mechanism up close and explores a potential issue involving display repairs. Watch it below. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-b33d30c5eabf162c",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/20/is-the-ai-industry-really-ready-to-slow-down/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-20T18:56:04.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Is the AI industry really ready to slow down?",
+        "summary": "On Equity, we debated whether Ai executives are serious about wanting to slow down.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-7cf707394519f7bb",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/997936/nvidia-jensen-huang-ai-fears-overblown",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-20T18:50:18.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "No one is surprised that Nvidia’s Jensen Huang thinks AI fears are overblown.",
+        "summary": "The man who may stand to make the most money from the AI boom seems to think he knows better than anyone else, including researchers who have studied and worked on AI for decades. In an interview with CBS Sunday Morning, he claimed there was a \"0% chance\" of AI being the end of the […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-5dd2cd059999caff",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/20/five-ways-that-the-new-siri-ai-is-frustrating-iphone-and-apple-watch-users/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-20T18:35:12.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Five ways that the new Siri AI is frustrating iPhone and Apple Watch users",
+        "summary": "The new version of Siri, Siri AI, launched to the masses this month as part of iOS 27. The new Siri is rolling out gradually to users via a waitlist, and is labelled as a ‘beta’ indicating that Apple still has some work to do in follow-up releases. The new Siri is much better at answering questions with access to rich knowledge, can search through your messages and notes for personal context queries, and can take action based on what is on your screen with onscreen awareness. However, the new Siri is not being welcomed with open arms by everyone … more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-b8ecacea0de9e171",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/20/voccis-ring-adds-a-new-form-factor-to-meeting-note-taking/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-20T18:32:52.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Vocci’s ring adds a new form factor to meeting note-taking",
+        "summary": "Vocci's lightweight ring costs $249, and might pose some privacy questions",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-985bb474b603c019",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2255727/how-to-use-chatgpt-make-stickers-imessage-whatsapp/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-20T18:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "How to use ChatGPT to make stickers for iMessage and WhatsApp",
+        "summary": "The default sticker options in iMessage and WhatsApp are cool but maybe a little limited. Now, with help from ChatGPT's AI tool, things have got a bit more fun.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-df47b10a5a032e64",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2259639/using-e-ink-tablets-over-ipad-benefits/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-20T18:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The benefits of using an E Ink tablet over an iPad",
+        "summary": "E Ink excels for tasks like reading and note-taking.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "applevis-apps-bf0a7ae49816b1e9",
     "type": "news",
     "sourceId": "applevis-apps",
@@ -95,29 +263,6 @@
     "media": null
   },
   {
-    "id": "engadget-f47465c258d73160",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2259329/how-to-wipe-old-laptop/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-20T15:00:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Before you throw out your old laptop, do this first",
-        "summary": "Giving away or recycling your old laptop is great, but you need to make sure all your data is fully removed before it finds a new home.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "9to5mac-8ea0048d6b6c944c",
     "type": "news",
     "sourceId": "9to5mac",
@@ -142,29 +287,6 @@
     "media": null
   },
   {
-    "id": "engadget-2b9f2bbef3bcc055",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2258952/wired-vs-wireless-charging-better-battery-health/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-20T12:00:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Wired vs. wireless charging: Which is better for battery health?",
-        "summary": "Wireless charging offers convenience, to be sure, but how does it affect your battery over time? And is it a problem if your phone heats up?",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "the-verge-9e87b2adce8f83a8",
     "type": "news",
     "sourceId": "the-verge",
@@ -183,127 +305,6 @@
       "en": {
         "title": "Humans, not rogue AI, are still the biggest cybersecurity risk to energy systems",
         "summary": "Before recent high-profile hacks raised the specter of AI possibly \"killing all humans,\" our energy systems were already disturbingly vulnerable to cyberattack - and the risk is growing. \"We were always prey. We were just kind of surviving at the appetite of our predators,\" Joshua Corman, executive in residence for public safety and resilience at […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-5c08c61fa0c6b2a0",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/19/ios-27-makes-your-iphone-faster-in-30-ways-heres-the-full-list/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-20T00:16:46.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iOS 27 makes your iPhone faster in these 30+ ways",
-        "summary": "iOS 27 is now available to everyone, and one of the big changes is that it makes your iPhone a lot faster. In fact, Apple has outlined more than 30 ways in which your iPhone will be faster after you update. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-c84d544af1f9297a",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/19/apple-watch-series-12-ultra-4-missing-one-health-feature/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-19T22:16:41.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple Watch Series 12 and Ultra 4 missing one health-focused feature",
-        "summary": "Well, this is odd. The handwashing timer feature is currently absent from the new Apple Watch Series 12 and Ultra 4 hardware. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-51bfbe58965cb06c",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/997833/meta-muse-creepy",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-19T20:44:40.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta’s Muse is creepy, but maybe not for the reasons you think",
-        "summary": "Meta's Muse is apparently an effective AI assistant, but one that's a little creepy. Part of that is because of its new Mac app, which can access Messages, Calendar, and Notes. But for all its smarts, Muse doesn't actually know how to describe itself. Jason Aten, a contributing editor at Inc Magazine, posted on Threads […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-7aedb6e7fb3318d1",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/19/trump-suggests-rebranding-ai-with-a-new-name-says-hes-also-creating-an-ai-force/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-19T19:57:47.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Trump says it’s time to rebrand AI with a new name — and he’s also creating an AI Force",
-        "summary": "Trump claimed, without evidence, that the AI backlash is a Democratic hoax.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-68ae201458cd25f2",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/19/googles-gemini-is-the-latest-ai-model-to-hack-other-companies/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-19T17:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google’s Gemini is the latest AI model to hack other companies",
-        "summary": "Google said Gemini had \"acted appropriately\" by ending each hack immediately.",
         "body": ""
       }
     },
@@ -2299,31 +2300,6 @@
       "en": {
         "title": "In-Process 26th June 2026",
         "summary": "Welcome to another full edition of In-Process! You can always find this under the “Blog” heading on NVAccess.org, or you can sign up to read this via email! NVDA 2026.2 Beta 4 OCR Follow-up: Extracting text from inaccessible PDF files From the Community NVDA Gives George Flexibility 2026.2 Touch Improvements NVDA 2026.2 Beta 4 NVDA… Read More",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "accessible-android-9855b497db48fc8e",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/honor-600-pro-review/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-06-22T20:56:46.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Honor 600 Pro Review",
-        "summary": "After spending more than five years with Samsung phones, the time has come to test out a phone from another brand. While not a flagship,…",
         "body": ""
       }
     },

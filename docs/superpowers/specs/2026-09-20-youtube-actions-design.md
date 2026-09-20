@@ -259,7 +259,7 @@ Deben seguir pasando todas las pruebas actuales, incluyendo:
 
 Como mínimo:
 
-- usuario no autenticado: ver vídeo sin login y mostrar únicamente la conexión a YouTube;
+- usuario no autenticado: ver vídeo sin login y mostrar detalles públicos y la opción de conexión, pero no acciones privadas;
 - usuario autenticado y no suscrito: mostrar `Suscribirme al canal TifloAcosta`;
 - usuario ya suscrito: no ofrecer suscripción de nuevo;
 - suscripción correcta: mantener foco y anunciar estado;
@@ -316,7 +316,7 @@ No se usarán cuentas personales reales de Google en CI.
 La función se considera lista cuando una persona puede:
 
 1. abrir y ver un vídeo sin iniciar sesión;
-2. autorizar YouTube solo cuando intenta usar una acción de cuenta;
+2. encontrar una opción clara para conectar YouTube cuando quiera usar las funciones de cuenta, sin que esa conexión sea obligatoria para reproducir;
 3. regresar al mismo vídeo tras OAuth;
 4. suscribirse al canal TifloAcosta con una sola acción clara;
 5. saber inmediatamente si ya está suscrita;

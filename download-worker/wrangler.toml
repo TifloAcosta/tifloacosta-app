@@ -3,8 +3,7 @@ main = "src/index.js"
 compatibility_date = "2026-09-18"
 workers_dev = true
 routes = [
-  { pattern = "download.tifloacosta.com", custom_domain = true },
-  { pattern = "tifloacosta.com/api/download/*", zone_name = "tifloacosta.com" }
+  { pattern = "download.tifloacosta.com", custom_domain = true }
 ]
 
 # Runtime secret required by /sounds/search: FREESOUND_API_KEY

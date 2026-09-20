@@ -12,6 +12,7 @@
   let video = null;
   let state = core.initialState();
   let detailsOpen = false;
+  let commentOpen = false;
 
   const els = {};
 
@@ -45,6 +46,14 @@
 
   function setStatus(message = '') {
     if (els.status) els.status.textContent = message;
+  }
+
+  function errorMessage(code) {
+    const c = copy();
+    if (code === 'COMMENTS_DISABLED') return c.commentsDisabled;
+    if (code === 'VIDEO_NOT_FOUND' || code === 'INVALID_VIDEO') return c.videoNotFound;
+    if (code === 'SESSION_EXPIRED') return c.sessionExpired;
+    return c.genericError;
   }
 
   function renderDetails() {
@@ -99,6 +108,143 @@
     window.location.assign(endpoint('/auth/start'));
   }
 
+  function csrfOptions(body = undefined) {
+    return {
+      method: 'POST',
+      headers: { 'X-CSRF-Token': state.csrf },
+      ...(body === undefined ? {} : { body: JSON.stringify(body) })
+    };
+  }
+
+  async function subscribeToChannel(event) {
+    const control = event.currentTarget;
+    control.disabled = true;
+    setStatus('');
+    try {
+      await request('/subscribe', csrfOptions({}));
+      state = core.reduce(state, { type: 'SUBSCRIBED' });
+      renderAccount();
+      const message = lang === 'es'
+        ? 'Suscripción realizada. Ya estás suscrito al canal TifloAcosta.'
+        : copy().subscribeSuccess;
+      setStatus(message);
+      const status = $('#youtube-subscription-state');
+      if (status) {
+        status.tabIndex = -1;
+        status.focus();
+      }
+    } catch (error) {
+      control.disabled = false;
+      handleActionError(error);
+    }
+  }
+
+  async function likeVideo(event) {
+    const control = event.currentTarget;
+    control.disabled = true;
+    setStatus('');
+    try {
+      await request('/like', csrfOptions({ videoId: video.id }));
+      state = core.reduce(state, { type: 'LIKED' });
+      renderAccount();
+      setStatus(copy().likeSuccess);
+      const status = $('#youtube-like-state');
+      if (status) {
+        status.tabIndex = -1;
+        status.focus();
+      }
+    } catch (error) {
+      control.disabled = false;
+      handleActionError(error);
+    }
+  }
+
+  function closeCommentEditor({ restoreFocus = true } = {}) {
+    commentOpen = false;
+    renderAccount();
+    if (restoreFocus) $('#youtube-comment')?.focus();
+  }
+
+  function renderCommentEditor() {
+    const c = copy();
+    const wrapper = document.createElement('div');
+    wrapper.className = 'youtube-comment-editor';
+
+    const label = document.createElement('label');
+    label.htmlFor = 'youtube-comment-text';
+    label.textContent = c.commentLabel;
+
+    const textarea = document.createElement('textarea');
+    textarea.id = 'youtube-comment-text';
+    textarea.rows = 5;
+
+    const publish = button('youtube-publish-comment', c.publishComment, async () => {
+      const text = textarea.value.trim();
+      if (!text) return;
+      publish.disabled = true;
+      textarea.disabled = true;
+      cancel.disabled = true;
+      setStatus('');
+      try {
+        await request('/comment', csrfOptions({ videoId: video.id, text }));
+        closeCommentEditor({ restoreFocus: false });
+        const message = lang === 'es' ? 'Comentario publicado en YouTube.' : copy().commentSuccess;
+        setStatus(message);
+        $('#youtube-comment')?.focus();
+      } catch (error) {
+        publish.disabled = false;
+        textarea.disabled = false;
+        cancel.disabled = false;
+        handleActionError(error);
+        textarea.focus();
+      }
+    });
+    publish.disabled = true;
+
+    const cancel = button('youtube-cancel-comment', c.cancel, () => closeCommentEditor());
+
+    textarea.addEventListener('input', () => {
+      publish.disabled = textarea.value.trim().length === 0;
+    });
+
+    wrapper.append(label, textarea, publish, cancel);
+    return wrapper;
+  }
+
+  function openCommentEditor() {
+    commentOpen = true;
+    renderAccount();
+    $('#youtube-comment-text')?.focus();
+  }
+
+  async function logout() {
+    const control = $('#youtube-logout');
+    if (control) control.disabled = true;
+    try {
+      await request('/logout', csrfOptions({}));
+    } catch (error) {
+      if (error.code !== 'SESSION_EXPIRED') {
+        if (control) control.disabled = false;
+        handleActionError(error);
+        return;
+      }
+    }
+    state = core.reduce(state, { type: 'LOGOUT' });
+    commentOpen = false;
+    setStatus('');
+    renderAccount();
+    $('#youtube-sign-in')?.focus();
+  }
+
+  function handleActionError(error) {
+    if (error.code === 'SESSION_EXPIRED') {
+      state = core.reduce(state, { type: 'SESSION_EXPIRED' });
+      commentOpen = false;
+      renderAccount();
+    }
+    setStatus(errorMessage(error.code));
+  }
+
   function renderAccount() {
     if (!els.account) return;
     const c = copy();
@@ -112,7 +258,7 @@
     }
 
     if (state.subscribed === false) {
-      els.account.append(button('youtube-subscribe', c.subscribe, () => {}));
+      els.account.append(button('youtube-subscribe', c.subscribe, subscribeToChannel));
     } else if (state.subscribed === true) {
       const subscribed = document.createElement('p');
       subscribed.id = 'youtube-subscription-state';
@@ -121,7 +267,7 @@
     }
 
     if (state.rating !== 'like') {
-      els.account.append(button('youtube-like', c.like, () => {}));
+      els.account.append(button('youtube-like', c.like, likeVideo));
     } else {
       const liked = document.createElement('p');
       liked.id = 'youtube-like-state';
@@ -129,8 +275,9 @@
       els.account.append(liked);
     }
 
-    els.account.append(button('youtube-comment', c.comment, () => {}));
-    els.account.append(button('youtube-logout', c.logout, () => {}));
+    els.account.append(button('youtube-comment', c.comment, openCommentEditor));
+    if (commentOpen) els.account.append(renderCommentEditor());
+    els.account.append(button('youtube-logout', c.logout, logout));
   }
 
   function render() {
@@ -157,12 +304,7 @@
       });
       renderAccount();
     } catch (error) {
-      if (error.code === 'SESSION_EXPIRED') {
-        state = core.reduce(state, { type: 'SESSION_EXPIRED' });
-        renderAccount();
-      } else {
-        setStatus(copy().genericError);
-      }
+      handleActionError(error);
     }
   }
 
@@ -178,7 +320,6 @@
     els.details.addEventListener('click', () => {
       detailsOpen = !detailsOpen;
       renderDetails();
-      if (detailsOpen) els.detailsPanel.setAttribute('tabindex', '-1');
     });
     render();
   }
@@ -188,6 +329,7 @@
     lang = nextLang === 'en' ? 'en' : 'es';
     state = core.initialState();
     detailsOpen = false;
+    commentOpen = false;
     if (els.root) els.root.hidden = false;
     setStatus('');
     render();
@@ -198,6 +340,7 @@
     video = null;
     state = core.initialState();
     detailsOpen = false;
+    commentOpen = false;
     setStatus('');
     if (els.root) els.root.hidden = true;
     if (els.detailsPanel) els.detailsPanel.hidden = true;

@@ -26,6 +26,16 @@
 <link rel="icon" href="tifloacosta-favicon.ico">
 <link rel="apple-touch-icon" href="tifloacosta-apple-touch-icon.png">
 <link rel="stylesheet" href="styles.css?v=1.2">
+<style>
+body:has(#video-player-section:not([hidden])) > .skip-link,
+body:has(#video-player-section:not([hidden])) > .site-header,
+body:has(#video-player-section:not([hidden])) #back-home,
+body:has(#video-player-section:not([hidden])) .video-hero,
+body:has(#video-player-section:not([hidden])) #back-home-bottom,
+body:has(#video-player-section:not([hidden])) > .site-footer {
+  display: none;
+}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Saltar al contenido principal</a>
@@ -111,7 +121,7 @@
 
 <script src="video-search-index.js?v=1.0"></script>
 <script src="videos-core.js?v=0.17"></script>
-<script src="videos.js?v=2.2"></script>
+<script src="videos.js?v=2.3"></script>
 <script data-goatcounter="https://tifloacosta.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </body>

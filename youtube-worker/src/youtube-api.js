@@ -120,11 +120,13 @@ export async function comment(accessToken, videoId, text, fetchImpl = fetch) {
   const id = validVideoId(videoId);
   const cleanText = String(text || '').trim();
   if (!cleanText) throw typedError('INVALID_COMMENT', 400);
+  const channelId = await resolveChannelId(accessToken, fetchImpl);
   await youtubeFetch(query('commentThreads', [['part', 'snippet']]), {
     accessToken,
     method: 'POST',
     body: {
       snippet: {
+        channelId,
         videoId: id,
         topLevelComment: {
           snippet: { textOriginal: cleanText }

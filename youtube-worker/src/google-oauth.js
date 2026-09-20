@@ -25,23 +25,7 @@ function oauthError(code = 'GOOGLE_OAUTH_FAILED') {
   return error;
 }
 
-export async function exchangeAuthorizationCode({
-  code,
-  verifier,
-  clientId,
-  clientSecret,
-  redirectUri,
-  fetchImpl = fetch
-}) {
-  const body = new URLSearchParams({
-    code,
-    client_id: clientId,
-    client_secret: clientSecret,
-    redirect_uri: redirectUri,
-    grant_type: 'authorization_code',
-    code_verifier: verifier
-  });
-
+async function tokenRequest(body, fetchImpl) {
   let response;
   try {
     response = await fetchImpl(GOOGLE_TOKEN_URL, {
@@ -52,18 +36,48 @@ export async function exchangeAuthorizationCode({
   } catch {
     throw oauthError();
   }
-
   if (!response.ok) throw oauthError();
-
   let data;
   try {
     data = await response.json();
   } catch {
     throw oauthError();
   }
-
   if (!data || typeof data.access_token !== 'string' || !data.access_token) {
     throw oauthError();
   }
   return data;
+}
+
+export function exchangeAuthorizationCode({
+  code,
+  verifier,
+  clientId,
+  clientSecret,
+  redirectUri,
+  fetchImpl = fetch
+}) {
+  return tokenRequest(new URLSearchParams({
+    code,
+    client_id: clientId,
+    client_secret: clientSecret,
+    redirect_uri: redirectUri,
+    grant_type: 'authorization_code',
+    code_verifier: verifier
+  }), fetchImpl);
+}
+
+export function refreshAccessToken({
+  refreshToken,
+  clientId,
+  clientSecret,
+  fetchImpl = fetch
+}) {
+  if (!refreshToken) throw oauthError();
+  return tokenRequest(new URLSearchParams({
+    refresh_token: refreshToken,
+    client_id: clientId,
+    client_secret: clientSecret,
+    grant_type: 'refresh_token'
+  }), fetchImpl);
 }

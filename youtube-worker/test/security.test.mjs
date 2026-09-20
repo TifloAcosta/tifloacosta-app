@@ -41,9 +41,11 @@ test('session cookie is HttpOnly Secure host-only and SameSite=Lax', async () =>
 
 test('tampering with a sealed value is rejected', async () => {
   const sealed = await seal({ value: 'safe' }, secret);
-  const last = sealed.at(-1);
-  const tampered = `${sealed.slice(0, -1)}${last === 'A' ? 'B' : 'A'}`;
-  await assert.rejects(() => unseal(tampered, secret));
+  const [iv, ciphertext] = sealed.split('.');
+  const first = ciphertext[0];
+  const tamperedCiphertext = `${first === 'A' ? 'B' : 'A'}${ciphertext.slice(1)}`;
+  const tampered = `${iv}.${tamperedCiphertext}`;
+  await assert.rejects(() => unseal(tampered, secret), error => error?.code === 'SEALED_VALUE_INVALID');
 });
 
 test('expired or absent session cookies are treated as signed out', async () => {

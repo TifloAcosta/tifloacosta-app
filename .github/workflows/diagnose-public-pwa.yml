@@ -25,6 +25,32 @@ jobs:
             https://tifloacosta.com/
           head -40 root-headers.txt
           grep -qi 'TifloAcosta' root.html
+      - name: Check GitHub Pages fallback URLs
+        shell: bash
+        run: |
+          set -euxo pipefail
+          for url in \
+            https://tifloacosta.github.io/ \
+            https://tifloacosta.github.io/tifloacosta-app/; do
+            echo "===== $url ====="
+            curl --silent --show-error --location --max-time 20 \
+              --dump-header headers.txt \
+              --output body.html \
+              --write-out 'HTTP=%{http_code} FINAL=%{url_effective}\n' \
+              "$url" || true
+            head -40 headers.txt || true
+            head -20 body.html || true
+          done
+      - name: Compare IPv4 and IPv6 access through Cloudflare
+        shell: bash
+        run: |
+          set -euxo pipefail
+          curl -4 --silent --show-error --location --max-time 20 \
+            --output /dev/null --write-out 'IPv4 HTTP=%{http_code} IP=%{remote_ip}\n' \
+            https://tifloacosta.com/ || true
+          curl -6 --silent --show-error --location --max-time 20 \
+            --output /dev/null --write-out 'IPv6 HTTP=%{http_code} IP=%{remote_ip}\n' \
+            https://tifloacosta.com/ || true
       - name: Check public service worker generation
         shell: bash
         run: |

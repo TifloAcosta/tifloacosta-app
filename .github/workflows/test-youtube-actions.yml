@@ -1,0 +1,40 @@
+name: Test YouTube actions
+
+on:
+  push:
+    branches:
+      - main
+      - 'feature/**'
+    paths:
+      - 'youtube-worker/**'
+      - 'youtube-actions*.js'
+      - 'youtube-actions*.css'
+      - 'videos.html'
+      - 'videos.js'
+      - 'test/youtube-actions*.test.mjs'
+      - '.github/workflows/test-youtube-actions.yml'
+  pull_request:
+    paths:
+      - 'youtube-worker/**'
+      - 'youtube-actions*.js'
+      - 'youtube-actions*.css'
+      - 'videos.html'
+      - 'videos.js'
+      - 'test/youtube-actions*.test.mjs'
+      - '.github/workflows/test-youtube-actions.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run YouTube Worker tests
+        run: node --test youtube-worker/test/*.test.mjs
+      - name: Run repository tests
+        run: npm test

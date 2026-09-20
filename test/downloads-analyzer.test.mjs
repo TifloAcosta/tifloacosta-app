@@ -37,8 +37,16 @@ test('download Worker deploys from main when analyzer code changes', async () =>
   assert.match(workflow, /- ['"]?\.github\/workflows\/deploy-download-worker\.yml['"]?/);
 });
 
-test('deployment smoke-tests the direct download Worker endpoint', async () => {
+test('deployment smoke-tests the direct download Worker endpoint only', async () => {
   const workflow = await read('.github/workflows/deploy-download-worker.yml');
+  assert.match(workflow, /https:\/\/download\.tifloacosta\.com\/health/);
   assert.match(workflow, /https:\/\/download\.tifloacosta\.com\/analyze/);
+  assert.doesNotMatch(workflow, /https:\/\/tifloacosta\.com\/api\/download\//);
   assert.match(workflow, /"code":"no_files"/);
+});
+
+test('Worker routing does not require the main domain to be proxied by Cloudflare', async () => {
+  const wrangler = await read('download-worker/wrangler.toml');
+  assert.match(wrangler, /pattern\s*=\s*"download\.tifloacosta\.com"/);
+  assert.doesNotMatch(wrangler, /tifloacosta\.com\/api\/download\/\*/);
 });

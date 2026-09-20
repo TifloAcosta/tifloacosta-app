@@ -26,8 +26,8 @@ test('YouTube action assets are isolated from videos.js and contain no secret va
   const [html, config] = await Promise.all([read('videos.html'), read('youtube-actions-config.js')]);
   assert.match(html, /youtube-actions\.css\?v=/);
   assert.match(html, /youtube-actions-config\.js\?v=/);
-  assert.match(html, /youtube-actions-core\.js\?v=/);
-  assert.match(html, /youtube-actions\.js\?v=/);
+  assert.match(html, /youtube-actions-core\.js\?v=1\.1/);
+  assert.match(html, /youtube-actions\.js\?v=1\.1/);
   assert.match(config, /https:\/\/youtube-auth\.tifloacosta\.com/);
   assert.doesNotMatch(config, /CLIENT_SECRET|SESSION_SECRET|refresh[_-]?token|access[_-]?token/i);
 });

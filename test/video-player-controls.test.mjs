@@ -29,3 +29,10 @@ test('custom controls drive the official YouTube iframe player and preserve focu
   assert.match(source, /YT\.PlayerState\.PLAYING/);
   assert.match(source, /trigger\.focus\(\)/);
 });
+
+test('closing during player startup does not detach an already-created YouTube player', async () => {
+  const source = await read('videos.js');
+
+  assert.match(source, /if \(youtubePlayer\) \{\s*if \(playerReady\)/s);
+  assert.match(source, /else \{\s*els\.playerFrame\.removeAttribute\('src'\);\s*\}/s);
+});

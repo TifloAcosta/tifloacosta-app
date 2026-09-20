@@ -9,7 +9,17 @@ import {
   readOauthCookie,
   readSession
 } from './session.js';
-import { buildAuthorizationUrl, exchangeAuthorizationCode } from './google-oauth.js';
+import {
+  buildAuthorizationUrl,
+  exchangeAuthorizationCode,
+  refreshAccessToken
+} from './google-oauth.js';
+import {
+  comment,
+  getAccountVideoState,
+  like,
+  subscribe
+} from './youtube-api.js';
 
 function corsHeaders(request, env) {
   const origin = request.headers.get('Origin') || '';
@@ -50,6 +60,67 @@ function oauthFailure(env) {
 
 function oauthSuccess(env) {
   return withQuery(env.APP_RETURN_URL, 'youtubeAuth', 'ok');
+}
+
+function appError(code, status = 400, clearSession = false) {
+  const error = new Error(code);
+  error.code = code;
+  error.status = status;
+  error.clearSession = clearSession;
+  return error;
+}
+
+function safeError(error) {
+  const code = String(error?.code || 'YOUTUBE_ERROR');
+  if (code === 'INVALID_VIDEO_ID') return appError('INVALID_VIDEO', 400);
+  if (code === 'INVALID_COMMENT') return appError('INVALID_COMMENT', 400);
+  if (code === 'COMMENTS_DISABLED') return appError('COMMENTS_DISABLED', error.status || 403);
+  if (code === 'VIDEO_NOT_FOUND') return appError('VIDEO_NOT_FOUND', 404);
+  if (code === 'AUTH_REVOKED') return appError('SESSION_EXPIRED', 401, true);
+  if (code === 'CSRF_INVALID') return appError('CSRF_INVALID', 403);
+  if (code === 'SESSION_EXPIRED') return appError('SESSION_EXPIRED', 401, Boolean(error.clearSession));
+  return appError('YOUTUBE_ERROR', 502);
+}
+
+async function readJson(request) {
+  try {
+    const value = await request.json();
+    return value && typeof value === 'object' ? value : {};
+  } catch {
+    return {};
+  }
+}
+
+async function authenticatedContext(request, env, fetchImpl) {
+  const session = await readSession(request, env.YOUTUBE_SESSION_SECRET);
+  if (!session) throw appError('SESSION_EXPIRED', 401);
+
+  if (typeof session.accessToken === 'string' && session.accessToken && Number(session.accessExp) > Date.now() + 60_000) {
+    return { session, accessToken: session.accessToken };
+  }
+
+  try {
+    const token = await refreshAccessToken({
+      refreshToken: session.refreshToken,
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
+      fetchImpl
+    });
+    return { session, accessToken: token.access_token };
+  } catch {
+    throw appError('SESSION_EXPIRED', 401, true);
+  }
+}
+
+function actionOriginAllowed(request, env) {
+  return request.headers.get('Origin') === env.ALLOWED_ORIGIN;
+}
+
+function errorResponse(error, cors) {
+  const safe = safeError(error);
+  const headers = { ...cors };
+  if (safe.clearSession) headers['Set-Cookie'] = clearCookie(SESSION_COOKIE);
+  return json({ error: safe.code }, safe.status, headers);
 }
 
 export async function handleRequest(request, env, deps = {}) {
@@ -140,9 +211,17 @@ export async function handleRequest(request, env, deps = {}) {
   }
 
   if (url.pathname === '/state' && request.method === 'GET') {
-    const session = await readSession(request, env.YOUTUBE_SESSION_SECRET);
-    if (!session) return json({ error: 'SESSION_EXPIRED' }, 401, cors);
-    return json({ error: 'NOT_IMPLEMENTED' }, 501, cors);
+    try {
+      const { accessToken } = await authenticatedContext(request, env, fetchImpl);
+      const state = await getAccountVideoState(accessToken, url.searchParams.get('videoId') || '', fetchImpl);
+      return json({ authenticated: true, ...state }, 200, cors);
+    } catch (error) {
+      return errorResponse(error, cors);
+    }
+  }
+
+  if (['/subscribe', '/like', '/comment', '/logout'].includes(url.pathname) && request.method === 'POST') {
+    if (!actionOriginAllowed(request, env)) return json({ error: 'CSRF_INVALID' }, 403, cors);
   }
 
   if (url.pathname === '/logout' && request.method === 'POST') {
@@ -150,12 +229,30 @@ export async function handleRequest(request, env, deps = {}) {
     if (session) {
       try {
         assertCsrf(request, session);
-      } catch {
-        return json({ error: 'CSRF_INVALID' }, 403, cors);
+      } catch (error) {
+        return errorResponse(error, cors);
       }
     }
     const headers = { ...cors, 'Set-Cookie': clearCookie(SESSION_COOKIE) };
     return json({ authenticated: false }, 200, headers);
+  }
+
+  if (['/subscribe', '/like', '/comment'].includes(url.pathname) && request.method === 'POST') {
+    try {
+      const { session, accessToken } = await authenticatedContext(request, env, fetchImpl);
+      assertCsrf(request, session);
+      const body = await readJson(request);
+
+      if (url.pathname === '/subscribe') {
+        return json(await subscribe(accessToken, fetchImpl), 200, cors);
+      }
+      if (url.pathname === '/like') {
+        return json(await like(accessToken, body.videoId, fetchImpl), 200, cors);
+      }
+      return json(await comment(accessToken, body.videoId, body.text, fetchImpl), 200, cors);
+    } catch (error) {
+      return errorResponse(error, cors);
+    }
   }
 
   return json({ error: 'NOT_FOUND' }, 404, cors);

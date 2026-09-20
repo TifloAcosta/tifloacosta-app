@@ -53,6 +53,15 @@
     if (code === 'COMMENTS_DISABLED') return c.commentsDisabled;
     if (code === 'VIDEO_NOT_FOUND' || code === 'INVALID_VIDEO') return c.videoNotFound;
     if (code === 'SESSION_EXPIRED') return c.sessionExpired;
+    if (code === 'INELIGIBLE_ACCOUNT') return c.ineligibleAccount;
+    if (code === 'YOUTUBE_FORBIDDEN') return c.youtubeForbidden;
+    if (code === 'INSUFFICIENT_PERMISSIONS') return c.insufficientPermissions;
+    if (code === 'COMMENT_TOO_LONG') return c.commentTooLong;
+    if (code === 'INVALID_COMMENT_METADATA') return c.invalidCommentMetadata;
+    if (code === 'PROCESSING_FAILURE') return c.processingFailure;
+    if (code === 'QUOTA_EXCEEDED') return c.quotaExceeded;
+    if (code === 'RATE_LIMITED') return c.rateLimited;
+    if (code === 'CHANNEL_NOT_FOUND') return c.channelNotFound;
     return c.genericError;
   }
 

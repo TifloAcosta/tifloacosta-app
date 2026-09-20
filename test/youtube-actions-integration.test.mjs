@@ -58,3 +58,24 @@ test('comment editor requires an explicit publish action', async () => {
   assert.match(source, /youtube-cancel-comment/);
   assert.match(source, /publish\.disabled/);
 });
+
+test('known YouTube comment rejections have accessible specific messages', async () => {
+  const [source, core] = await Promise.all([read('youtube-actions.js'), read('youtube-actions-core.js')]);
+  for (const code of [
+    'INELIGIBLE_ACCOUNT',
+    'YOUTUBE_FORBIDDEN',
+    'INSUFFICIENT_PERMISSIONS',
+    'COMMENT_TOO_LONG',
+    'INVALID_COMMENT_METADATA',
+    'PROCESSING_FAILURE',
+    'QUOTA_EXCEEDED',
+    'RATE_LIMITED',
+    'CHANNEL_NOT_FOUND'
+  ]) {
+    assert.match(source, new RegExp(code));
+  }
+  assert.match(core, /ineligibleAccount/);
+  assert.match(core, /insufficientPermissions/);
+  assert.match(core, /commentTooLong/);
+  assert.match(core, /quotaExceeded/);
+});

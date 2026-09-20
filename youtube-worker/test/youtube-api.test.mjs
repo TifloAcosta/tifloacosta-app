@@ -114,6 +114,21 @@ test('comment resolves the TifloAcosta channel and includes channelId in a top-l
   });
 });
 
+test('comment preserves safe YouTube rejection reasons for diagnosis', async () => {
+  let calls = 0;
+  await assert.rejects(
+    () => comment(token, videoId, 'hello', async url => {
+      calls += 1;
+      if (String(url).includes('/channels?')) return jsonResponse({ items: [{ id: 'CHANNEL_ID' }] });
+      return jsonResponse({
+        error: { message: 'private Google body', errors: [{ reason: 'ineligibleAccount' }] }
+      }, 403);
+    }),
+    error => error?.code === 'INELIGIBLE_ACCOUNT' && error?.status === 403 && !String(error).includes('private Google body')
+  );
+  assert.equal(calls, 2);
+});
+
 test('invalid video IDs are rejected before any request', async () => {
   let called = false;
   const fetchImpl = async () => { called = true; return jsonResponse({}); };
@@ -124,9 +139,12 @@ test('invalid video IDs are rejected before any request', async () => {
 
 test('YouTube errors are normalized without exposing response bodies', async () => {
   await assert.rejects(
-    () => comment(token, videoId, 'hello', async () => jsonResponse({
-      error: { message: 'private Google body', errors: [{ reason: 'commentsDisabled' }] }
-    }, 403)),
+    () => comment(token, videoId, 'hello', async url => {
+      if (String(url).includes('/channels?')) return jsonResponse({ items: [{ id: 'CHANNEL_ID' }] });
+      return jsonResponse({
+        error: { message: 'private Google body', errors: [{ reason: 'commentsDisabled' }] }
+      }, 403);
+    }),
     error => error?.code === 'COMMENTS_DISABLED' && error?.status === 403 && !String(error).includes('private Google body')
   );
   await assert.rejects(

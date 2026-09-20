@@ -14,18 +14,30 @@ function validVideoId(videoId) {
   return value;
 }
 
+function safeYouTubeReason(reason, status) {
+  if (reason === 'commentsDisabled') return 'COMMENTS_DISABLED';
+  if (reason === 'videoNotFound') return 'VIDEO_NOT_FOUND';
+  if (reason === 'channelNotFound') return 'CHANNEL_NOT_FOUND';
+  if (reason === 'ineligibleAccount') return 'INELIGIBLE_ACCOUNT';
+  if (reason === 'forbidden') return 'YOUTUBE_FORBIDDEN';
+  if (reason === 'insufficientPermissions') return 'INSUFFICIENT_PERMISSIONS';
+  if (reason === 'commentTextTooLong') return 'COMMENT_TOO_LONG';
+  if (reason === 'channelOrVideoIdMissing' || reason === 'invalidCommentThreadMetadata') return 'INVALID_COMMENT_METADATA';
+  if (reason === 'processingFailure') return 'PROCESSING_FAILURE';
+  if (reason === 'quotaExceeded' || reason === 'dailyLimitExceeded') return 'QUOTA_EXCEEDED';
+  if (reason === 'rateLimitExceeded') return 'RATE_LIMITED';
+  if (status === 401 || reason === 'authError' || reason === 'invalidCredentials') return 'AUTH_REVOKED';
+  if (status === 404) return 'VIDEO_NOT_FOUND';
+  return 'YOUTUBE_ERROR';
+}
+
 async function youtubeError(response) {
   let reason = '';
   try {
     const data = await response.json();
     reason = String(data?.error?.errors?.[0]?.reason || '');
   } catch {}
-
-  let code = 'YOUTUBE_ERROR';
-  if (reason === 'commentsDisabled') code = 'COMMENTS_DISABLED';
-  else if (reason === 'videoNotFound' || response.status === 404) code = 'VIDEO_NOT_FOUND';
-  else if (response.status === 401 || reason === 'authError' || reason === 'invalidCredentials') code = 'AUTH_REVOKED';
-  return typedError(code, response.status);
+  return typedError(safeYouTubeReason(reason, response.status), response.status);
 }
 
 async function youtubeFetch(path, { accessToken, method = 'GET', body, fetchImpl = fetch } = {}) {

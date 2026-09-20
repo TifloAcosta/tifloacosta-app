@@ -56,7 +56,12 @@
     <div class="video-player-frame">
       <iframe id="video-player" title="Reproductor de YouTube" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </div>
-    <p id="video-player-note" class="muted">Para que la visualización se registre en YouTube, inicia el vídeo con el botón Reproducir del propio reproductor.</p>
+    <div id="video-player-controls" class="video-player-actions" role="group" aria-label="Controles accesibles del vídeo">
+      <button id="video-player-rewind" type="button" disabled>Retroceder 1 minuto</button>
+      <button id="video-player-toggle" type="button" disabled>Reproducir</button>
+      <button id="video-player-forward" type="button" disabled>Avanzar 1 minuto</button>
+    </div>
+    <p id="video-player-note" class="muted" aria-live="polite" aria-atomic="true">Los controles accesibles estarán disponibles cuando el reproductor esté preparado.</p>
     <div class="video-player-actions">
       <button id="video-player-close" type="button">Cerrar reproductor y volver a los vídeos</button>
       <a id="video-player-youtube" class="button-link" href="https://www.youtube.com/@tifloacosta" target="_blank" rel="noopener noreferrer">Abrir este vídeo en YouTube</a>
@@ -106,7 +111,7 @@
 
 <script src="video-search-index.js?v=1.0"></script>
 <script src="videos-core.js?v=0.17"></script>
-<script src="videos.js?v=2.1"></script>
+<script src="videos.js?v=2.2"></script>
 <script data-goatcounter="https://tifloacosta.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </body>

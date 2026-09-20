@@ -1,3 +1,16 @@
+import { pkceChallenge, randomToken } from './security.js';
+import {
+  OAUTH_COOKIE,
+  SESSION_COOKIE,
+  assertCsrf,
+  clearCookie,
+  createOauthCookie,
+  createSessionCookie,
+  readOauthCookie,
+  readSession
+} from './session.js';
+import { buildAuthorizationUrl, exchangeAuthorizationCode } from './google-oauth.js';
+
 function corsHeaders(request, env) {
   const origin = request.headers.get('Origin') || '';
   if (origin !== env.ALLOWED_ORIGIN) return {};
@@ -15,26 +28,135 @@ function json(data, status = 200, headers = {}) {
   });
 }
 
-export default {
-  async fetch(request, env) {
-    const url = new URL(request.url);
-    const cors = corsHeaders(request, env);
+function withQuery(url, key, value) {
+  const target = new URL(url);
+  target.searchParams.set(key, value);
+  return target.toString();
+}
 
-    if (url.pathname === '/health' && request.method === 'GET') {
-      return json({ ok: true, service: 'youtube-actions' }, 200, cors);
+function redirect(location, cookies = []) {
+  const headers = new Headers({ Location: location });
+  for (const cookie of cookies) headers.append('Set-Cookie', cookie);
+  return new Response(null, { status: 302, headers });
+}
+
+function redirectUri(request, env) {
+  return env.GOOGLE_REDIRECT_URI || `${new URL(request.url).origin}/auth/callback`;
+}
+
+function oauthFailure(env) {
+  return withQuery(env.APP_RETURN_URL, 'youtubeAuth', 'error');
+}
+
+function oauthSuccess(env) {
+  return withQuery(env.APP_RETURN_URL, 'youtubeAuth', 'ok');
+}
+
+export async function handleRequest(request, env, deps = {}) {
+  const fetchImpl = deps.fetchImpl || fetch;
+  const url = new URL(request.url);
+  const cors = corsHeaders(request, env);
+
+  if (url.pathname === '/health' && request.method === 'GET') {
+    return json({ ok: true, service: 'youtube-actions' }, 200, cors);
+  }
+
+  if (request.method === 'OPTIONS') {
+    return new Response(null, {
+      status: 204,
+      headers: {
+        ...cors,
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-Token'
+      }
+    });
+  }
+
+  if (url.pathname === '/auth/start' && request.method === 'GET') {
+    if (!env.GOOGLE_CLIENT_ID || !env.YOUTUBE_SESSION_SECRET) {
+      return redirect(oauthFailure(env));
+    }
+    const verifier = randomToken(48);
+    const state = randomToken(32);
+    const challenge = await pkceChallenge(verifier);
+    const oauthCookie = await createOauthCookie({
+      state,
+      verifier,
+      exp: Date.now() + 10 * 60 * 1000
+    }, env.YOUTUBE_SESSION_SECRET);
+    const authorization = buildAuthorizationUrl({
+      clientId: env.GOOGLE_CLIENT_ID,
+      redirectUri: redirectUri(request, env),
+      state,
+      challenge
+    });
+    return redirect(authorization.toString(), [oauthCookie]);
+  }
+
+  if (url.pathname === '/auth/callback' && request.method === 'GET') {
+    const clearOauth = clearCookie(OAUTH_COOKIE);
+    const oauthState = await readOauthCookie(request, env.YOUTUBE_SESSION_SECRET);
+    const code = url.searchParams.get('code') || '';
+    const state = url.searchParams.get('state') || '';
+    const denied = url.searchParams.has('error');
+
+    if (denied || !oauthState || !code || !state || oauthState.state !== state) {
+      return redirect(oauthFailure(env), [clearOauth]);
     }
 
-    if (request.method === 'OPTIONS') {
-      return new Response(null, {
-        status: 204,
-        headers: {
-          ...cors,
-          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-Token'
-        }
+    try {
+      const tokens = await exchangeAuthorizationCode({
+        code,
+        verifier: oauthState.verifier,
+        clientId: env.GOOGLE_CLIENT_ID,
+        clientSecret: env.GOOGLE_CLIENT_SECRET,
+        redirectUri: redirectUri(request, env),
+        fetchImpl
       });
-    }
+      if (typeof tokens.refresh_token !== 'string' || !tokens.refresh_token) {
+        return redirect(oauthFailure(env), [clearOauth]);
+      }
 
-    return json({ error: 'NOT_FOUND' }, 404, cors);
+      const expiresIn = Number(tokens.expires_in);
+      const session = {
+        refreshToken: tokens.refresh_token,
+        accessToken: tokens.access_token,
+        accessExp: Date.now() + (Number.isFinite(expiresIn) && expiresIn > 0 ? expiresIn : 3600) * 1000,
+        csrf: randomToken(32),
+        exp: Date.now() + 30 * 24 * 60 * 60 * 1000
+      };
+      const sessionCookie = await createSessionCookie(session, env.YOUTUBE_SESSION_SECRET);
+      return redirect(oauthSuccess(env), [sessionCookie, clearOauth]);
+    } catch {
+      return redirect(oauthFailure(env), [clearOauth]);
+    }
+  }
+
+  if (url.pathname === '/session' && request.method === 'GET') {
+    const session = await readSession(request, env.YOUTUBE_SESSION_SECRET);
+    return session
+      ? json({ authenticated: true, csrf: session.csrf }, 200, cors)
+      : json({ authenticated: false }, 200, cors);
+  }
+
+  if (url.pathname === '/logout' && request.method === 'POST') {
+    const session = await readSession(request, env.YOUTUBE_SESSION_SECRET);
+    if (session) {
+      try {
+        assertCsrf(request, session);
+      } catch {
+        return json({ error: 'CSRF_INVALID' }, 403, cors);
+      }
+    }
+    const headers = { ...cors, 'Set-Cookie': clearCookie(SESSION_COOKIE) };
+    return json({ authenticated: false }, 200, headers);
+  }
+
+  return json({ error: 'NOT_FOUND' }, 404, cors);
+}
+
+export default {
+  fetch(request, env) {
+    return handleRequest(request, env);
   }
 };

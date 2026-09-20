@@ -79,6 +79,19 @@ function safeError(error) {
   if (code === 'AUTH_REVOKED') return appError('SESSION_EXPIRED', 401, true);
   if (code === 'CSRF_INVALID') return appError('CSRF_INVALID', 403);
   if (code === 'SESSION_EXPIRED') return appError('SESSION_EXPIRED', 401, Boolean(error.clearSession));
+  if ([
+    'CHANNEL_NOT_FOUND',
+    'INELIGIBLE_ACCOUNT',
+    'YOUTUBE_FORBIDDEN',
+    'INSUFFICIENT_PERMISSIONS',
+    'COMMENT_TOO_LONG',
+    'INVALID_COMMENT_METADATA',
+    'PROCESSING_FAILURE',
+    'QUOTA_EXCEEDED',
+    'RATE_LIMITED'
+  ].includes(code)) {
+    return appError(code, error.status || 502);
+  }
   return appError('YOUTUBE_ERROR', 502);
 }
 

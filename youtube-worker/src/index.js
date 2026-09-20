@@ -139,6 +139,12 @@ export async function handleRequest(request, env, deps = {}) {
       : json({ authenticated: false }, 200, cors);
   }
 
+  if (url.pathname === '/state' && request.method === 'GET') {
+    const session = await readSession(request, env.YOUTUBE_SESSION_SECRET);
+    if (!session) return json({ error: 'SESSION_EXPIRED' }, 401, cors);
+    return json({ error: 'NOT_IMPLEMENTED' }, 501, cors);
+  }
+
   if (url.pathname === '/logout' && request.method === 'POST') {
     const session = await readSession(request, env.YOUTUBE_SESSION_SECRET);
     if (session) {

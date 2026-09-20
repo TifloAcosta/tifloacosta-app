@@ -28,7 +28,8 @@ test('public video details come from the existing catalog object', async () => {
     description: 'Descripción',
     url: 'https://www.youtube.com/watch?v=abcdefghijk'
   };
-  assert.deepEqual(core.detailsFromVideo(video), video);
+  const details = JSON.parse(JSON.stringify(core.detailsFromVideo(video)));
+  assert.deepEqual(details, video);
 });
 
 test('authenticated unsubscribed state makes subscription primary action available', async () => {

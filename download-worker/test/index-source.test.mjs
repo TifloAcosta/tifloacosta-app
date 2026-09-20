@@ -52,15 +52,16 @@ test('GET /health returns an explicit browser-readable service status', async ()
   });
 });
 
-test('main-domain /api/download route is configured without taking over the rest of tifloacosta.com', async () => {
+test('Worker is routed only through its dedicated download subdomain', async () => {
   const config = await read('wrangler.toml');
-  assert.match(config, /pattern\s*=\s*"tifloacosta\.com\/api\/download\/\*"/);
-  assert.match(config, /zone_name\s*=\s*"tifloacosta\.com"/);
-  assert.doesNotMatch(config, /pattern\s*=\s*"tifloacosta\.com\/\*"/);
+  assert.match(config, /pattern\s*=\s*"download\.tifloacosta\.com"/);
+  assert.match(config, /custom_domain\s*=\s*true/);
+  assert.doesNotMatch(config, /tifloacosta\.com\/api\/download\/\*/);
+  assert.doesNotMatch(config, /zone_name\s*=\s*"tifloacosta\.com"/);
 });
 
-test('same-origin GET /api/download/health reaches the same Worker health handler', async () => {
-  const request = new Request('https://tifloacosta.com/api/download/health', {
+test('legacy /api/download path remains harmless inside the Worker handler', async () => {
+  const request = new Request('https://download.tifloacosta.com/api/download/health', {
     method: 'GET'
   });
   const response = await worker.fetch(request, {});

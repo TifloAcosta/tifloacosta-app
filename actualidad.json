@@ -1,5 +1,175 @@
 [
   {
+    "id": "9to5mac-5c08c61fa0c6b2a0",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/19/ios-27-makes-your-iphone-faster-in-30-ways-heres-the-full-list/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-20T00:16:46.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iOS 27 makes your iPhone faster in these 30+ ways",
+        "summary": "iOS 27 is now available to everyone, and one of the big changes is that it makes your iPhone a lot faster. In fact, Apple has outlined more than 30 ways in which your iPhone will be faster after you update. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-913db239842b54c4",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2259179/how-to-record-audio-iphone/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-20T00:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "How to record audio on your iPhone",
+        "summary": "You don't need to record unnecessary video to capture a meeting, song or personal memo on your iPhone. Recording audio is simple.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-85946b322e971485",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2259087/apple-carplay-vs-ultra-differences-explained/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-19T23:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "What is the difference between Apple CarPlay and CarPlay Ultra?",
+        "summary": "CarPlay provides a great iOS-like experience in your vehicle. CarPlay Ultra expands that, but isn't widely available yet.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-c84d544af1f9297a",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/19/apple-watch-series-12-ultra-4-missing-one-health-feature/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-19T22:16:41.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple Watch Series 12 and Ultra 4 missing one health-focused feature",
+        "summary": "Well, this is odd. The handwashing timer feature is currently absent from the new Apple Watch Series 12 and Ultra 4 hardware. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-33abdffab4e75cc9",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2258772/robot-vacuum-downsides/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-19T22:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "What are the downsides of robot vacuums?",
+        "summary": "Robot vacuums save a lot of time and effort with their ability to clean autonomously. However, there are a number of reasons why they might not work for you.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-c007d756065046bb",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/19/apples-iphone-duo-software-gamble/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-19T20:46:00.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles",
+      "programas-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple is taking a little bit of a gamble with iPhone Duo software: Will it pay off?",
+        "summary": "With the new iPhone Duo, Apple is taking a little bit of a software gamble. All apps, in order to take advantage of the larger inner display of iPhone Duo, will need to be recompiled for iOS 27.0 at a minimum. To use the Duo’s unique new tab bar and other UI components, you’ll need iOS 27.1 . Of course, this means a lot of developers will have to rebuild to support the Duo. On the flip side, it also means Apple is taking a risk of many apps on iPhone Duo being stuck in black bars . more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-51bfbe58965cb06c",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/997833/meta-muse-creepy",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-19T20:44:40.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Meta’s Muse is creepy, but maybe not for the reasons you think",
+        "summary": "Meta's Muse is apparently an effective AI assistant, but one that's a little creepy. Part of that is because of its new Mac app, which can access Messages, Calendar, and Notes. But for all its smarts, Muse doesn't actually know how to describe itself. Jason Aten, a contributing editor at Inc Magazine, posted on Threads […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
     "id": "techcrunch-7aedb6e7fb3318d1",
     "type": "news",
     "sourceId": "techcrunch",
@@ -16,106 +186,8 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Trump suggests rebranding AI with a new name, says he’s also creating an AI Force",
+        "title": "Trump says it’s time to rebrand AI with a new name — and he’s also creating an AI Force",
         "summary": "Trump claimed, without evidence, that the AI backlash is a Democratic hoax.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-6f24bf7fadcd93ac",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/19/indie-app-spotlight-gaspulse-lets-you-keep-an-eye-on-gas-price-trends-around-you/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-19T19:30:00.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "windows",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Indie App Spotlight: ‘GasPulse’ lets you keep an eye on gas price trends around you",
-        "summary": "Welcome to Indie App Spotlight . This is a weekly 9to5Mac series where we showcase the latest apps in the indie app world. If you’re a developer and would like your app featured, get in contact . In this day and age, gas prices fluctuate quite a lot. If you want to have a better idea of how things are flowing, GasPulse is a great tool – giving you trends, historical prices, and an outlook to follow on your iPhone. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-cba6baebce3e46fc",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2263237/now-trump-says-hes-creating-an-ai-force/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-19T19:22:20.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Now Trump says he's creating an AI Force",
-        "summary": "The president said he will soon announce an \"AI czar\" to run this newly made-up agency.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-3e3be95dde65c5dc",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2263235/anthropic-picks-accenture-for-third-party-ai-safety-evaluations/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-19T18:33:46.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Anthropic picks Accenture for third-party AI safety evaluations",
-        "summary": "This move represents the first step in the CEO's plan to slow down AI development.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-07354fc7cc9919fa",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2258268/why-ipad-not-charging-fixes/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-19T17:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Why is your iPad not charging (and how to fix it)",
-        "summary": "You probably don't think about your iPad charging until it runs into trouble. When plugging it in doesn't work, you'll need to check its port and charger.",
         "body": ""
       }
     },
@@ -219,30 +291,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-90f36c7c7f381e3d",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/19/heres-why-apple-watch-series-12-may-get-me-to-ditch-whoop/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-19T14:09:00.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple Watch Series 12 might finally convince me to switch away from WHOOP",
-        "summary": "Earlier this year, I picked up a WHOOP for the very first time. As a longtime Apple Watch user I was looking forward to having a new way of tracking my health stats in a cleaner interface that the Apple Watch wasn’t offering. Now, with Apple Watch Series 12, I’m very convinced to switch back to the Apple Watch. Here’s why. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "the-verge-f3ae4a3c21d97d1c",
     "type": "news",
     "sourceId": "the-verge",
@@ -261,54 +309,6 @@
       "en": {
         "title": "Does AI need an antitrust exemption so it doesn’t kill everyone????",
         "summary": "Today on Decoder, we’ve got the first of a two-part series on the future of business, and I’m talking with Jonathan Kanter, the former antitrust chief for the US Department of Justice in the Biden administration. These days, he’s both a professor of law at WashU and professor of technology policy at Carnegie Mellon. The […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-57059678c290dbbd",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/19/best-iphone-18-pro-accessories/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-19T13:57:00.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Our top iPhone 18 Pro accessories to upgrade your setup [Updated]",
-        "summary": "We are taking look at some of the iPhone 18 Pro accessories we are picking up for ourselves this year before Friday’s delivery day. If you ask me Apple’s AirTag 2 and a fresh set of AirPods Pro 3 (or AirPods 5) are the best accessories you can buy for your new iPhone 18 Pro, never mind the world’s greatest Polishing Cloth, but we are digging in a bit deeper here – chargers, MagSafe mounts, cases, wallets, and more. Check it all out below. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-ed60e3600df57955",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/997706/the-ai-regulation-smackdown-isnt-over",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-19T13:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The AI regulation smackdown isn’t over",
-        "summary": "At the start of this week, the who's-who of AI seemed - at least tentatively - on the side of AI regulation. Over the weekend, Anthropic CEO Dario Amodei had proposed a three-step plan for slowing AI development, including by embedding third-party evaluators in labs, coordinating across the domestic industry, and forging international agreements potentially […]",
         "body": ""
       }
     },

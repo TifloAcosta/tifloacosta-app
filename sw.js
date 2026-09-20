@@ -1,4 +1,5 @@
 const CACHE = 'tifloacosta-app-v2-18-downloads-simple';
+const NAVIGATION_TIMEOUT_MS = 5000;
 const SHELL = [
   './',
   './index.html',
@@ -33,6 +34,15 @@ const LIVE_PATHS = new Set([
   '/video-search-index.js'
 ]);
 
+function navigationFetchWithTimeout(request) {
+  return Promise.race([
+    fetch(request, { cache: 'no-store' }),
+    new Promise((_, reject) => {
+      setTimeout(() => reject(new Error('Navigation timeout')), NAVIGATION_TIMEOUT_MS);
+    })
+  ]);
+}
+
 self.addEventListener('install', event => {
   self.skipWaiting();
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)));
@@ -55,13 +65,19 @@ self.addEventListener('fetch', event => {
 
   if (request.mode === 'navigate') {
     event.respondWith(
-      fetch(request, { cache: 'no-store' })
+      navigationFetchWithTimeout(request)
         .then(response => {
-          const copy = response.clone();
-          caches.open(CACHE).then(cache => cache.put('./index.html', copy));
+          if (response && response.ok && isAppOrigin) {
+            const copy = response.clone();
+            caches.open(CACHE).then(cache => cache.put(request, copy));
+          }
           return response;
         })
-        .catch(() => caches.match('./index.html').then(cached => cached || caches.match('./offline.html')))
+        .catch(() =>
+          caches.match(request)
+            .then(cached => cached || caches.match('./index.html'))
+            .then(cached => cached || caches.match('./offline.html'))
+        )
     );
     return;
   }

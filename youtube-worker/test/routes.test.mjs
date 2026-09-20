@@ -148,3 +148,23 @@ test('POST /comment publishes non-empty text and rejects empty text', async () =
   assert.equal(empty.status, 400);
   assert.deepEqual(await empty.json(), { error: 'INVALID_COMMENT' });
 });
+
+test('POST /comment returns a safe specific YouTube rejection code', async () => {
+  const cookie = await authCookie();
+  const headers = { Origin: env.ALLOWED_ORIGIN, Cookie: cookie, 'X-CSRF-Token': 'csrf-token', 'Content-Type': 'application/json' };
+  const fetchImpl = async (url) => {
+    const target = String(url);
+    if (target === 'https://oauth2.googleapis.com/token') return jsonResponse({ access_token: 'test-access', expires_in: 3600 });
+    if (target.includes('/channels?')) return jsonResponse({ items: [{ id: 'UC_TIFLOACOSTA' }] });
+    if (target.includes('/commentThreads?')) {
+      return jsonResponse({ error: { message: 'private Google body', errors: [{ reason: 'ineligibleAccount' }] } }, 403);
+    }
+    throw new Error(`Unexpected fetch ${target}`);
+  };
+  const response = await handleRequest(new Request(
+    'https://youtube-auth.tifloacosta.com/comment',
+    { method: 'POST', headers, body: JSON.stringify({ videoId: 'abcdefghijk', text: 'Gracias' }) }
+  ), env, { fetchImpl });
+  assert.equal(response.status, 403);
+  assert.deepEqual(await response.json(), { error: 'INELIGIBLE_ACCOUNT' });
+});

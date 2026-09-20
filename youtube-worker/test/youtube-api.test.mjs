@@ -93,17 +93,21 @@ test('like rates only the requested valid video as like', async () => {
   assert.equal(seen.options.method, 'POST');
 });
 
-test('comment publishes a top-level comment only after receiving text', async () => {
-  let seen;
+test('comment resolves the TifloAcosta channel and includes channelId in a top-level comment', async () => {
+  const calls = [];
   const result = await comment(token, videoId, 'Texto del comentario', async (url, options) => {
-    seen = { url: String(url), options };
+    calls.push({ url: String(url), options });
+    if (String(url).includes('/channels?')) return jsonResponse({ items: [{ id: 'CHANNEL_ID' }] });
     return jsonResponse({ id: 'thread-1' });
   });
   assert.deepEqual(result, { commented: true });
-  assert.equal(seen.url, 'https://www.googleapis.com/youtube/v3/commentThreads?part=snippet');
-  assert.equal(seen.options.method, 'POST');
-  assert.deepEqual(JSON.parse(seen.options.body), {
+  assert.equal(calls[0].url, 'https://www.googleapis.com/youtube/v3/channels?part=id&forHandle=%40tifloacosta');
+  const insert = calls[1];
+  assert.equal(insert.url, 'https://www.googleapis.com/youtube/v3/commentThreads?part=snippet');
+  assert.equal(insert.options.method, 'POST');
+  assert.deepEqual(JSON.parse(insert.options.body), {
     snippet: {
+      channelId: 'CHANNEL_ID',
       videoId,
       topLevelComment: { snippet: { textOriginal: 'Texto del comentario' } }
     }

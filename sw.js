@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-20-actualidad-clean-reader';
+const CACHE = 'tifloacosta-app-v2-21-red-white-theme';
 const NAVIGATION_TIMEOUT_MS = 5000;
 const SHELL = [
   './',

@@ -28,5 +28,5 @@ test('download feature publishes one fresh, consistent simple asset generation',
     assert.doesNotMatch(source, /sound-search\.js/);
   }
 
-  assert.match(sw, /tifloacosta-app-v2-20-actualidad-clean-reader/);
+  assert.match(sw, /tifloacosta-app-v2-21-red-white-theme/);
 });

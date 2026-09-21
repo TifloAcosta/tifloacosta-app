@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import test from 'node:test';
 
@@ -73,4 +74,18 @@ test('contextual search works in English too', () => {
 test('literal searches remain precise', () => {
   const results = search.searchAcrossSources(sources, 'Android', 'es');
   assert.deepEqual(results.map(item => item.id), ['storage']);
+});
+
+test('the contextual enhancer loads after the existing global search', () => {
+  const source = readFileSync(new URL('../app-core.js', import.meta.url), 'utf8');
+  const baseIndex = source.indexOf("appendScript('search-accessibility.js?v=1.1'");
+  const contextualIndex = source.indexOf("appendScript('contextual-search.js?v=1.0'");
+  assert.ok(baseIndex >= 0);
+  assert.ok(contextualIndex > baseIndex);
+});
+
+test('the home page still contains a single search input', () => {
+  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  const searchInputs = html.match(/<input[^>]+id="search"/g) || [];
+  assert.equal(searchInputs.length, 1);
 });

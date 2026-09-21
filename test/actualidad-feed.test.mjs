@@ -38,6 +38,14 @@ test('Atom entries use href links and updated dates', () => {
   assert.equal(items[0].publishedAt, '2026-09-13T13:00:00Z');
 });
 
+test('feed entries retain article HTML separately from the short summary', () => {
+  const xml = `<?xml version="1.0"?><rss xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><item><title>Accessible article</title><link>https://example.com/article</link><pubDate>Sun, 13 Sep 2026 12:00:00 GMT</pubDate><description>Short summary</description><content:encoded><![CDATA[<article><p>First article paragraph with useful information for readers.</p><p>Second article paragraph with more detail.</p></article>]]></content:encoded></item></channel></rss>`;
+  const items = parseFeedXml(xml, source);
+  assert.equal(items[0].summary, 'Short summary');
+  assert.match(items[0].contentHtml, /First article paragraph/);
+  assert.match(items[0].contentHtml, /<p>/);
+});
+
 test('CTI news listing is parsed into dated entries', () => {
   const html = `
     <section>
@@ -83,6 +91,30 @@ test('normalized feed entries inherit source language and categories', () => {
   assert.deepEqual(item.categories, ['apple', 'apps-accesibles']);
   assert.equal(item.originalUrl, 'https://example.com/app');
   assert.equal(item.editorialState, 'source-only');
+});
+
+test('normalized feed entries turn article HTML into quiet plain paragraphs', () => {
+  const item = normalizeFeedEntry({
+    title: 'Clean reading test',
+    url: 'https://example.com/clean-reading',
+    publishedAt: '2026-09-13T12:00:00Z',
+    summary: 'Short summary',
+    contentHtml: `
+      <article>
+        <nav>Section menu</nav>
+        <p>First useful paragraph with enough information to be part of the article.</p>
+        <img src="photo.jpg" alt="decorative image">
+        <aside>Related stories</aside>
+        <p>Second useful paragraph that should follow the first one cleanly.</p>
+        <div class="share-buttons">Share this story</div>
+      </article>`
+  }, source);
+
+  assert.equal(
+    item.body,
+    'First useful paragraph with enough information to be part of the article.\n\nSecond useful paragraph that should follow the first one cleanly.'
+  );
+  assert.doesNotMatch(item.body, /menu|image|Related|Share/i);
 });
 
 test('Spanish stories gain specific categories from their own title and summary', () => {

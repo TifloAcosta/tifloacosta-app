@@ -104,8 +104,6 @@ jobs:
           node-version: '22'
 
       - name: Synchronize Actualidad
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: node scripts/sync-actualidad.mjs
 
       - name: Synchronize Accessible apps

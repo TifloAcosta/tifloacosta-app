@@ -14,6 +14,35 @@ test('sync keeps its existing source-only behavior when no automatic editor is s
   assert.equal(result.automaticResult, null);
 });
 
+test('sync fetches the article page and stores only its readable text when the feed has no body', async () => {
+  const articleHtml = `
+    <html><body>
+      <header>Site header and navigation</header>
+      <main>
+        <article>
+          <p>First useful article paragraph with enough detail for a clean reading view.</p>
+          <figure><img src="image.jpg"><figcaption>Image caption</figcaption></figure>
+          <p>Second useful article paragraph with the practical information readers need.</p>
+          <aside>Recommended content</aside>
+        </article>
+      </main>
+      <footer>Site footer</footer>
+    </body></html>`;
+
+  const fetchFn = async url => {
+    if (url === 'https://example.com/feed.xml') return { ok: true, status: 200, text: async () => rss };
+    if (url === 'https://example.com/story') return { ok: true, status: 200, text: async () => articleHtml };
+    throw new Error(`Unexpected URL ${url}`);
+  };
+
+  const result = await syncActualidad({ sources, editorial: [], fetchFn, now: NOW });
+  assert.equal(
+    result.stories[0].locales.en.body,
+    'First useful article paragraph with enough detail for a clean reading view.\n\nSecond useful article paragraph with the practical information readers need.'
+  );
+  assert.doesNotMatch(result.stories[0].locales.en.body, /header|Image|Recommended|footer/i);
+});
+
 test('automatic editorial output is merged into the public feed in the same synchronization run', async () => {
   let received = [];
   const automaticEditorial = async stories => {

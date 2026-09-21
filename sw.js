@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-19-contextual-search';
+const CACHE = 'tifloacosta-app-v2-20-actualidad-clean-reader';
 const NAVIGATION_TIMEOUT_MS = 5000;
 const SHELL = [
   './',
@@ -13,7 +13,7 @@ const SHELL = [
   './downloads.js?v=1.4',
   './downloads.css?v=1.1',
   './actualidad-core.js?v=1.6',
-  './actualidad.js?v=1.2',
+  './actualidad.js?v=1.3',
   './actualidad-media.js?v=1.1',
   './app.js?v=2.1',
   './tifloacosta-favicon.ico',

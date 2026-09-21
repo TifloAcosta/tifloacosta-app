@@ -4,10 +4,11 @@ import test from 'node:test';
 
 const read = file => readFile(new URL(`../${file}`, import.meta.url), 'utf8');
 
-test('main hourly sync wires the OpenAI secret only into the Actualidad synchronization step', async () => {
+test('main hourly news sync does not require an OpenAI API key', async () => {
   const workflow = await read('.github/workflows/sync-actualidad.yml');
-  assert.match(workflow, /- name: Synchronize Actualidad\s+env:\s+OPENAI_API_KEY: \$\{\{ secrets\.OPENAI_API_KEY \}\}\s+run: node scripts\/sync-actualidad\.mjs/);
-  assert.equal((workflow.match(/OPENAI_API_KEY:/g) || []).length, 1);
+  const syncScript = await read('scripts/sync-actualidad.mjs');
+  assert.doesNotMatch(workflow, /OPENAI_API_KEY/);
+  assert.doesNotMatch(syncScript, /OPENAI_API_KEY|createActualidadAIClient/);
 });
 
 test('automatic editorial and state files are detected and committed by the hourly workflow', async () => {

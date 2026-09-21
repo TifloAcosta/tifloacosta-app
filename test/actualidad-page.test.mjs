@@ -29,11 +29,18 @@ test('Actualidad page loads one shared feed and resolves interface language thro
   assert.doesNotMatch(js, /setInterval|setTimeout/);
 });
 
-test('source-only stories never expose a TifloAcosta reader action', async () => {
+test('source-only stories with clean body expose the TifloAcosta reader and original source', async () => {
   const view = require('../actualidad.js');
-  const actions = view.availableActions({ editorialState: 'source-only', originalUrl: 'https://example.com/story' }, 'es');
+  const actions = view.availableActions({ editorialState: 'source-only', body: 'Clean article text.', originalUrl: 'https://example.com/story' }, 'es');
+  assert.deepEqual(actions.map(action => action.kind), ['read', 'original']);
+  assert.equal(actions[0].label, 'Leer en TifloAcosta');
+  assert.equal(actions[1].label, 'Abrir fuente original');
+});
+
+test('source-only stories without readable body still expose only the original source', async () => {
+  const view = require('../actualidad.js');
+  const actions = view.availableActions({ editorialState: 'source-only', body: '', originalUrl: 'https://example.com/story' }, 'es');
   assert.deepEqual(actions.map(action => action.kind), ['original']);
-  assert.equal(actions[0].label, 'Abrir fuente original');
 });
 
 test('one bilingual logical item exposes natural reader actions in Spanish and English', () => {

@@ -6,11 +6,15 @@ on:
       - 'feature/tifloacosta-red-white-theme'
     paths:
       - 'styles.css'
+      - 'sw.js'
+      - 'manifest.webmanifest'
       - 'test/theme-tifloacosta-colors.test.mjs'
       - '.github/workflows/test-theme-tifloacosta.yml'
   pull_request:
     paths:
       - 'styles.css'
+      - 'sw.js'
+      - 'manifest.webmanifest'
       - 'test/theme-tifloacosta-colors.test.mjs'
       - '.github/workflows/test-theme-tifloacosta.yml'
 

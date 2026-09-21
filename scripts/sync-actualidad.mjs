@@ -92,12 +92,32 @@ async function fetchSource(source, fetchFn) {
   throw lastError || new Error(`Unable to fetch ${source.id}`);
 }
 
+function escapeHtml(value) {
+  return String(value || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function cleanCachedBody(value) {
+  const paragraphs = String(value || '')
+    .split(/\n\s*\n|\r?\n/)
+    .map(paragraph => paragraph.replace(/\s+/g, ' ').trim())
+    .filter(Boolean);
+  if (!paragraphs.length) return '';
+
+  const html = `<article>${paragraphs.map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join('')}</article>`;
+  return extractReadableText(html);
+}
+
 function previousBodies(previousStories) {
   const bodies = new Map();
   for (const raw of Array.isArray(previousStories) ? previousStories : []) {
     const item = core.normalizeContent(raw);
     if (!item?.originalUrl) continue;
-    const body = String(item.locales?.[item.originalLanguage]?.body || '').trim();
+    const body = cleanCachedBody(item.locales?.[item.originalLanguage]?.body);
     if (body) bodies.set(item.originalUrl, body);
   }
   return bodies;

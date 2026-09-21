@@ -62,7 +62,7 @@ test('formatBytes never turns missing or invalid sizes into zero', () => {
   assert.equal(formatBytes(1024), '1.00 KB');
 });
 
-test('analyzer client defaults to the main-domain API and posts only the normalized URL', async () => {
+test('analyzer client defaults to the dedicated download analyzer and posts only the normalized URL', async () => {
   const calls = [];
   const client = createAnalyzerClient({
     fetchFn: async (url, options) => {
@@ -80,7 +80,7 @@ test('analyzer client defaults to the main-domain API and posts only the normali
   const payload = await client.analyze('https://example.com/page');
   assert.equal(payload.code, 'authentication_required');
   assert.equal(calls.length, 1);
-  assert.equal(calls[0].url, 'https://tifloacosta.com/api/download/analyze');
+  assert.equal(calls[0].url, 'https://download.tifloacosta.com/analyze');
   assert.equal(calls[0].options.method, 'POST');
   assert.deepEqual(JSON.parse(calls[0].options.body), { url: 'https://example.com/page' });
 });

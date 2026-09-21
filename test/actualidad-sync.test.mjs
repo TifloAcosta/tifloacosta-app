@@ -37,15 +37,18 @@ test('one failed source does not discard valid logical stories from another sour
 });
 
 test('temporary source failures are retried before the source is discarded', async () => {
-  let attempts = 0;
-  const fetchFn = async () => {
-    attempts += 1;
-    if (attempts === 1) throw new Error('temporary network failure');
-    return response(rss());
+  let feedAttempts = 0;
+  const fetchFn = async url => {
+    if (url === 'https://example.com/feed.xml') {
+      feedAttempts += 1;
+      if (feedAttempts === 1) throw new Error('temporary network failure');
+      return response(rss());
+    }
+    return response('<html><body><article><p>Readable story body.</p></article></body></html>');
   };
 
   const result = await syncActualidad({ sources: [source()], editorial: [], fetchFn, now: TEST_NOW });
-  assert.equal(attempts, 2);
+  assert.equal(feedAttempts, 2);
   assert.equal(result.stories.length, 1);
   assert.deepEqual(result.failedSources, []);
 });

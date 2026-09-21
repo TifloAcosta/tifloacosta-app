@@ -8,14 +8,14 @@ on:
       - 'styles.css'
       - 'sw.js'
       - 'manifest.webmanifest'
-      - 'test/theme-tifloacosta-colors.test.mjs'
+      - 'test/**'
       - '.github/workflows/test-theme-tifloacosta.yml'
   pull_request:
     paths:
       - 'styles.css'
       - 'sw.js'
       - 'manifest.webmanifest'
-      - 'test/theme-tifloacosta-colors.test.mjs'
+      - 'test/**'
       - '.github/workflows/test-theme-tifloacosta.yml'
 
 permissions:

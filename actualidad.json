@@ -1,13 +1,62 @@
 [
   {
-    "id": "9to5mac-f9d99fee948f3d4a",
+    "id": "techcrunch-86121c752fc9f928",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/21/metas-muse-is-outpacing-chatgpts-early-mobile-launch/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-21T19:19:21.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Meta’s Muse is outpacing ChatGPT’s early mobile launch",
+        "summary": "Meta’s new AI agent Muse has racked up more downloads and daily active users in the U.S. and Canada than ChatGPT did over the same period after its mobile debut, according to new estimates from Appfigures.",
+        "body": "Meta’s latest AI app, Muse, could be the social giant’s next major hit, new data suggests. According to just- released estimates from market intelligence provider Appfigures , Muse’s app on mobile devices has been downloaded more times during its first twelve days on the market than ChatGPT was in the twelve days after its debut. (This data compares the U.S. and Canada markets only.)\n\nMuse also has more daily active users than ChatGPT had at the time, the firm found.\n\nUntil now, it had been difficult to make an exact apples-to-apples comparison between these two apps, given that they had pursued different launch strategies. When ChatGPT arrived on mobile, it was made available globally, but only on iOS. Muse, meanwhile, is available across both Apple’s App Store and Google Play, but only in the U.S. and Canada.\n\nTo better align the numbers for comparison, Appfigures looked only at the iOS data for the U.S. and Canada for both apps during the first twelve days of their respective launches. In this subset of the data, Muse has now seen 1.8 million downloads to ChatGPT’s 1.3 million.\n\nOverall, Muse has seen 2.8 million total installs globally in its first 12 days, the firm also said. Its growth hasn’t yet stagnated, either; Muse has moved up from its original position as No. 2 overall on the U.S. App Store immediately after its launch to now No. 1, as Business Insider reported on Friday. That jump put the app higher than ChatGPT, the outlet noted.\n\nIn addition, Appfigures’ data indicates that Muse’s U.S. daily active users are now higher than they were for ChatGPT at the same point after its launch. When comparing just the U.S. mobile app daily active users, Muse comes in higher with 642,000 daily users compared with 231,000 for ChatGPT at the time.\n\nTo be fair to the fact that Muse is available across both iOS and Android, while ChatGPT launched on iOS only, Appfigures narrowed the comparison to iOS alone. Yet, even here, Muse is coming in higher with 359,000 daily active users on iOS, still above ChatGPT’s figures from that time period.\n\nAppfigures can only provide third-party estimates about an app’s downloads and active users; it doesn’t have direct access to Meta’s internal figures. But even if these numbers are only correct from a general “ballpark” perspective, they indicate that Muse could have a shot at becoming Meta’s newest top app.\n\nMeta already perfected its cross-promotion strategy when it launched Instagram’s Threads, which now has 500+ million users, thanks to heavy marketing and integrations in Meta’s largest apps, including Instagram and Facebook. Muse is likely to get a similar push, given that the AI app can connect with both of those platforms. It also works inside WhatsApp, so that could give it another boost.\n\nWhile Appfigures doesn’t have visibility into Meta’s cross-promotion efforts or ads directly, it did note that over 95% of Muse’s users are also Facebook users and 63% are Instagram users.\n\nMeta, which has been asked for comment, has not yet shared public figures related to Muse’s early adoption."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-6601daf83c8a3c9f",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/21/john-ternus-just-gave-the-best-defense-yet-for-vision-pro/",
+    "originalUrl": "https://9to5mac.com/2026/09/21/ios-27-adds-an-all-new-app-to-your-iphones-home-screen/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-21T15:41:46.000Z",
+    "publishedAt": "2026-09-21T19:14:24.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iOS 27 adds an all-new app to your iPhone’s Home Screen",
+        "summary": "Apple released iOS 27 to everyone last week, including a ton of new Siri and Apple Intelligence features. One of the biggest changes here is the addition of an all-new Siri app. This marks the first time that Siri has been pre-installed as a standalone app for iPhone users … more…",
+        "body": "Apple released iOS 27 to everyone last week, including a ton of new Siri and Apple Intelligence features. One of the biggest changes here is the addition of an all-new Siri app. This marks the first time that Siri has been pre-installed as a standalone app for iPhone users …\n\nAfter you update to iOS 27, you’ll see the new Siri icon appear on your iPhone’s Home Screen. This app is also coming to the Mac with macOS 27, Vision Pro with visionOS 27, iPad with iPadOS 27, and Apple Watch with watchOS 27.\n\nThe Siri app in iOS 27 lets you revisit all your conversations with Siri and easily start new ones. The Siri app syncs with iCloud, so you can continue conversations across all of your Apple devices. It features a chat-style interface with a stream of your previous conversations. You can also upload photos and files to the Siri app for analysis.\n\nThe Siri app ties into the new Siri AI and Apple Intelligence capabilities introduced in iOS 27. This includes access to broad world knowledge, personal context of everything on your iPhone, and much more. Siri AI can also recognize what’s on your screen and answer questions about it.\n\nWith access to that personal context, Siri AI can reference things like your messages, emails, photos, and more to answer your specific questions.\n\nThe Siri app, however, won’t be coming to all iPhone models. It will be available on devices that support Apple Intelligence, which covers the iPhone 15 Pro and newer:\n\nApple has recently added several new iPhone apps by default, including Image Playground as part of iOS 18.2 in December 2024. Last year’s iOS 26 update added the new Preview and Games apps for iPhone users.\n\nWhat do you think of the new Siri app in iOS 27? Have you updated yet? Let us know down in the comments.\n\nFollow Chance : Threads , Bluesky , Instagram , and Mastodon ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-2ae76190dae1f136",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/21/ios-27-2-reveals-new-features-coming-to-apple-music-carplay-more/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-21T19:01:12.000Z",
     "categories": [
       "apple",
       "tecnologia-general"
@@ -16,96 +65,71 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "John Ternus just gave the best defense yet for Vision Pro",
-        "summary": "Apple’s new CEO John Ternus recently sat down for a lengthy, in-depth interview with French outlet Clique TV , and in it he gave the best defense yet for Apple Vision Pro. more…",
-        "body": "Apple’s new CEO John Ternus recently sat down for a lengthy, in-depth interview with French outlet Clique TV , and in it he gave the best defense yet for Apple Vision Pro.\n\nApple Vision Pro is an oddity in Apple’s hardware lineup. It isn’t commercially successful the way the iPhone, iPad, Mac, Apple Watch, and AirPods are. But the device is a technological marvel, and has garnered a small base of loyal fans who love it.\n\nIn the past, Tim Cook defended Vision Pro’s underwhelming sales by saying it’s an “early adopter product.”\n\nNow John Ternus has weighed in, and I found his answer a more satisfying reason for Vision Pro to exist.\n\nIn a new interview , Clique TV’s Mouloud Achour asked Ternus: “The Vision Pro: for you is it a test, a flop, or the first step to the future of what’s going to be…a computer?”\n\nHere’s what Ternus said:\n\nVision Pro to me is an amazing device. It’s an absolutely amazing device. But I think of it as like the early days of computers. It is the early days of a long journey. That’s how I feel about Vision Pro. What you see, if you think about the early days, people found different reasons where the computer allowed them, the Mac allowed them to do something never before possible. Like desktop publishing, and it became a big thing in that industry.\n\nWhat you’re seeing with Vision Pro now is, certainly there’s early adopters who love it and they’re using it and they’re enjoying it, but you also—surgeons are starting to use it in surgery because it’s just a fundamentally better tool for them than a monitor that’s kind of sitting over here. And so it’s growing in that area. In film production people are using it for set development and things like that. So we’re going to continue to grow and find more and more compelling use cases. And I think there’s a very bright future.\n\nTernus invokes Cook’s language of citing early adopters, but his comparison to the early days of computing is also helpful.\n\nWhen personal computers first came on the scene, they were very expensive and had extremely limited use cases. But over time that changed, eventually unlocking possibilities that could scarcely have been imagined in the early days.\n\nThe dream of lightweight glasses offering full-fledged “spatial computing” features may be several years away. But it’s easy to see that future coming true, and the Vision Pro being a key part of that.\n\nYou can watch the full interview below or directly on YouTube .\n\nWhat do you think of Ternus’s defense of Apple Vision Pro? Let us know in the comments."
+        "title": "iOS 27.2 reveals new features coming to Apple Music, CarPlay, more",
+        "summary": "iOS 27.2 beta 2 arrived today , and so far seems to have minimal user-facing changes. But code for iOS 27.2’s beta releases points to new features in the works for Apple Music, CarPlay Ultra, and more. more…",
+        "body": "iOS 27.2 beta 2 arrived today , and so far seems to have minimal user-facing changes. But code for iOS 27.2’s beta releases points to new features in the works for Apple Music, CarPlay Ultra, and more.\n\nWhenever Apple releases new beta software, we tend to discover changes in two ways: through user-facing features active in the software, as well as underlying code changes that point to forthcoming changes.\n\nWith iOS 27.2, there were a variety of new features available for testing from day one, like the all-new Health app , user profiles in Apple TV , Siri AI expansions , and more.\n\nBut users skilled at examining the underlying code found even more changes in the works.\n\nFor example, X user pdfu discovered that Apple Music will soon add live countdowns for new album releases.\n\nAnother discovery by pdfu in iOS 27.2 beta code involves the Shortcuts app.\n\nShortcuts’ new ‘Describe a Shortcut’ feature looks like it will soon gain support for including actions from third-party apps.\n\nAnother noteworthy reveal from iOS 27.2 code involves CarPlay Ultra.\n\nAaron Perris discovered that code references a ‘Drive Mode Theme’ that changes things like gauge style and color, and even syncs ambient lighting in the vehicle.\n\nCarPlay Ultra is still limited to only Aston Martin vehicles. But perhaps the addition of new theming features means Apple is about to expand support to another automaker.\n\nWe previously reported that iOS 27.2 will add a feature to more thoroughly wipe the data of your iPhone. Today’s beta 2 has more descriptive language on this addition—now called “Extended Erase”—as discovered by Aaron Perris.\n\nFinally, Perris found evidence that Apple may be preparing a demo mode for users of its forthcoming ‘HomePad’ smart home device .\n\nWhich of iOS 27.2’s new and upcoming features are you most interested in? Let us know in the comments.\n\n* Buy iPhone with 15% discount from Apple refurbished"
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-0fd6412d2a557c45",
+    "id": "9to5mac-4e4dd4e7b14f8b5a",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/21/iphone-18-pro-face-id-bug-system-reboot/",
+    "originalUrl": "https://9to5mac.com/2026/09/21/bllavors-solar-power-bank-is-built-for-fall-camping-trips/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-21T15:20:20.000Z",
+    "publishedAt": "2026-09-21T18:11:00.000Z",
     "categories": [
       "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "MagSafe Monday: BLAVOR’s solar power bank is built for fall camping trips",
+        "summary": "The weather is turning cooler, and it’s time for camping and football tailgates. BLAVOR’s 20000mAh Solar Power Bank is built for this time of year. It has four built-in cables so you can leave your bag at home, a solar panel for recharging, and a wireless pad on top for your iPhone and Apple Watch. Let’s take a look at it. more…",
+        "body": "The weather is turning cooler, and it’s time for camping and football tailgates. BLAVOR’s 20000mAh Solar Power Bank is built for this time of year. It has four built-in cables so you can leave your bag at home, a solar panel for recharging, and a wireless pad on top for your iPhone and Apple Watch. Let’s take a look at it.\n\nMagSafe Monday: Every Monday, Bradley Chambers looks at the latest and greatest in the MagSafe and wireless charging industry to help you get the most out of your Apple devices that support wireless charging.\n\nThis is what sold me on the concept overall. The unit has four cables built directly into the housing (two USB-C, one Lightning, one USB-A) plus three separate ports, so you can charge six devices at once without carrying a standalone cable, which makes packing a lot easier.\n\nThe USB-C port supports 20-watt fast charging, which BLAVOR says gets a typical iPhone to full in around 50 minutes (Pro vs Pro Max will obviously change). On the capacity side, 20000mAh works out to roughly 4 charges for an iPhone 17, 2.7 for an iPad mini, and 37 for an Apple Watch. Those are BLAVOR’s numbers, but the ballpark is right for a bank this size battery overall. A lot will depend on temperature, if you are using it while charging, etc.\n\nThere’s a wireless charging area on top that works with both the iPhone and the Apple Watch, but it has no magnets. This is plain old-school Qi, not MagSafe or Qi2, so your iPhone sits on the surface rather than snapping to it. Set the bank down on a table, and your iPhone stays put. I won’t stay connected in a bag, etc Ideally in a future one, I’d love to see MagSAafe\n\nBLAVOR only advertises the 20-watt figure for the wired USB-C port, so treat the wireless pad as a convenience charger, not your primary way to charge. If you want high speeds, use one of the four cables already attached to the battery.\n\nSolar charging is a great addition, but it won’t let you charge the battery from empty to full. A panel this small cannot recharge a 20000mAh cell in a day of sun. What it can do is keep the bank from dying over a long trip and give you an emergency option when there’s no outlet nearby. I would think of it as more of a backup option.\n\nBLAVOR packed seven extras with the battery: a flashlight with three modes, a camping light with three brightness levels, a compass, a thermometer, a carabiner, and actually rope. It’s rated IPX5, which means splash and rain-resistant.\n\nThis is not the battery you will use on the plane. This is a great option for camping, tailgating, etc. It’s a good, nice one with plenty of wired options and really handy for an emergency recharge via solar. Super unique concept, and it’s something I’ll keep in my camping bag, etc.\n\nYou can buy the BLAVOR Solar Power Bank from Amazon or directly from BLAVOR ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-aec648b01de84040",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2261250/iphone-duo-vs-standard-software-differences/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-21T18:00:00.000Z",
+    "categories": [
       "tecnologia-general",
+      "apple",
       "programas-accesibles"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "iPhone 18 Pro Face ID bug causing system to crash and reboot for some users",
-        "summary": "The iPhone 18 Pro and Pro Max introduces a new smaller Face ID system, with the Infrared camera now hidden behind the screen, near where the time is shown in the status bar. It appears there may be a software glitch with that component in the shipping release of iOS 27. A number of reports from 18 Pro owners indicate that their device freezes and reboots after a failed Face ID attempt. more…",
-        "body": "The iPhone 18 Pro and Pro Max introduces a new smaller Face ID system, with the Infrared camera now hidden behind the screen, near where the time is shown in the status bar.\n\nIt appears there may be a software glitch with that component in the shipping release of iOS 27. A number of reports from 18 Pro owners indicate that their device freezes and reboots after a failed Face ID attempt.\n\n9to5Mac has reproduced the bug on at least one European iPhone 18 Pro model. The scope of the problem is unclear, as it does not seem to affect everyone.\n\nThe issue appears to occur when using Face ID to unlock a protected app, like the Passwords app, private tabs in Safari, or other apps the user has chosen to lock behind biometric protection. It does not seem to trigger directly from the lock screen.\n\nTo try and reproduce for yourself, on an 18 Pro, when the device presents a Face ID challenge, cover your face with your hand to simulate an authentication failure on the first try. Then, tap the “Try Face ID Again” button in the alert that appears. If you are afflicted by the bug, the phone will lock up and stop responding to all touch input. After a few seconds, the phone panics and reboots back to the lock screen.\n\nIn the Reddit thread of complaining users, one person says they contacted Apple support who apparently recommended a hardware swap. In our experience, this is probably a misdiagnosis and the problem will be fixable by a software update.\n\nThere’s also a similar iOS 27 bug that can trigger system reboots on any iPhone model, which we also expect to be fixed by a forthcoming software patch.\n\nWe have reached out to Apple for comment on the matter and will let you know if we hear back."
+        "title": "How the iPhone Duo's software is different from a standard iPhone",
+        "summary": "The iPhone Duo makes some big changes to iOS to account for the foldable design. It affects the camera, multitasking and more.",
+        "body": "The iPhone Duo has some tricks that no other iPhone can do.\n\nApple finally has a foldable iPhone: the iPhone Duo is arriving in October , and it changes the shape of the device in a way we haven't seen before. But the fold is only part of the story, as Apple has built many features specifically for this form factor. It's still iOS underneath, but not the way you're used to.\n\nThe interface has been revamped to take advantage of the new screens: apps can run side by side and Apple Pencil now works on the iPhone . If you go for an iPhone Duo, you'll be able to explore a set of software features that aren't available on the regular models.\n\nPerhaps the most notable change is in multitasking. While iOS has offered a way to keep multiple apps running since iOS 4, it's never been iPad-level multitasking . The iPhone keeps recent apps suspended in the background so you can switch between them without losing your place, but there has never really been a way to use two apps at the same time until now. iPhone Duo is the first iPhone with iPad-inspired multitasking . It doesn't have the full Stage Manager with floating windows, but you can open two apps side by side on the inner screen.\n\nThe entire iOS interface has been optimized for the Duo. Small details, like keeping your Home Screen accessible on one side of the inner screen while apps run on the other side, make all the difference. It's easy to pick the two apps you want to run side-by-side, while some can also take advantage of the larger inside display.\n\nThe status bar also looks quite different. Instead of sitting at the top, it's now on the right side and features redesigned elements. Cellular signal, Wi-Fi and battery indicators are now grouped together to save screen space. That right side of the screen also holds the Dock and Dynamic Island.\n\nThe device's foldable form factor also introduces new ways to use the iPhone. Fold it in half and watch iOS take on a new form, putting inputs (like the keyboard) on the bottom half while the app content can shine on the top half. It's perfect for watching videos with your iPhone sitting on the table. Thanks to hinge awareness, interactable elements are moved away from the crease when tapping them might be difficult. Or, put the iPhone Duo into \"tent\" mode to turn it into a table clock — it even lights up the inner screen when an alarm goes off.\n\nThe new device format also enables many fresh camera features exclusive to the iPhone Duo. Smart Take is one of the most interesting: it uses AI to take photos of you when you strike a pose. There's no need to press any buttons or set a timer. You can also use the external screen as a live camera preview, which is perfect for filming yourself with the rear camera or helping someone pose for a photo.\n\nThere's a \"Kid Cue\" mode that shows a Snoopy animation on the external screen so your kids will look at the camera while you take a photo. It's akin to the \"Made You Look\" feature on the Pixel 9 Pro Fold and newer, which parents will certainly appreciate. And on FaceTime, you can show both your front and rear cameras — bringing other nearby people into your call becomes much easier with video on the external screen.\n\nOf course, not everything is perfect. The iPhone Duo lacks many of the camera features found on the iPhone 18 Pro , such as the new variable-aperture lens and pro controls. But that's a fair trade-off for people who want to try out Apple's first foldable phone."
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-4d1200d85adadf7c",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/21/security-bite-ios-27-now-lets-apps-ask-your-iphone-if-youre-being-scammed/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-21T15:19:16.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Security Bite: iOS 27 now lets apps ask your iPhone if you’re being scammed",
-        "summary": "9to5Mac Security Bite is exclusively brought to you by Mosyle, the only Apple Unified Platform . Making Apple devices work-ready and enterprise-safe is all we do. Our unique integrated approach to management and security combines state-of-the-art Apple-specific security solutions for fully automated Hardening & Compliance, Next Generation EDR, AI-powered Zero Trust, and exclusive Privilege Management with the most powerful and modern Apple MDM on the market. The result is a totally automated Apple Unified Platform currently trusted by over 45,000 organizations to make millions of Apple devices work-ready with no effort and at an affordable cost. Request your EXTENDED TRIAL today and understand why Mosyle is everything you need to work with Apple . Last week, Apple officially released iOS 27 to everyone. The update comes with many new security features , which is nice given how lackluster iOS 26 was in that area. However, there’s one new anti-scam feature in particular that targets an area Apple has never explored before and could eventually be massively beneficial to users. The feature is called Impersonation Risk Detection . All in all, it’s meant to catch users in the middle of a scam. more…",
-        "body": "9to5Mac Security Bite is exclusively brought to you by Mosyle, the only Apple Unified Platform . Making Apple devices work-ready and enterprise-safe is all we do. Our unique integrated approach to management and security combines state-of-the-art Apple-specific security solutions for fully automated Hardening & Compliance, Next Generation EDR, AI-powered Zero Trust, and exclusive Privilege Management with the most powerful and modern Apple MDM on the market. The result is a totally automated Apple Unified Platform currently trusted by over 45,000 organizations to make millions of Apple devices work-ready with no effort and at an affordable cost. Request your EXTENDED TRIAL today and understand why Mosyle is everything you need to work with Apple .\n\nLast week, Apple officially released iOS 27 to everyone. The update comes with many new security features , which is nice given how lackluster iOS 26 was in that area. However, there’s one new anti-scam feature in particular that targets an area Apple has never explored before and could eventually be massively beneficial to users. The feature is called Impersonation Risk Detection .\n\nAll in all, it’s meant to catch users in the middle of a scam.\n\nThere are many different scenarios in which this feature could be triggered, but one of the more likely ones is a threat actor posing as a bank’s fraud department and walking a user through moving money into a “safe account” or resetting their password. Types of situations where security features like Face ID and two-factor authentication aren’t much help.\n\nWhen in a supported app (it’s unclear which apps offer support yet, but I doubt it’s many), and you do something like send a payment or change your account password, the app can now ask your iPhone for a read on the situation. iOS 27 will then look at previous interaction patterns, timing, context, and even basic sensor data to determine whether the actions taken are legitimate.\n\nAccording to Apple , Impersonation Risk Detection doesn’t look at content in Photos, Messages, or Mail for context. The feature doesn’t look at the point of intrusion. And the only thing an app receives is a single word: “Unknown,” “Medium,” or “High.” Unknown means nothing was tripped, which Apple is careful to note is not confirming you’re safe.\n\nNow, it’s important to note that if there is a Medium or High flag, iOS doesn’t freeze the money transfer or block the password change. It doesn’t even throw up a system alert. Apple hands the app the risk level and leaves it to the app developer to determine what to do next. This could be making the user verify their identity again or adding some kind of delay before a user is able to change critical settings.\n\nApple also says it doesn’t control or determine what an app does with the flag, so one app might treat a Medium risk level differently than another.\n\nUsers can also keep tabs on this feature in settings under recent activity. It shows which apps have requested a risk assessment and what action triggered it. Users can revoke access per app from there as well.\n\nNow, here’s a major shortcoming, and something that Apple could easily fix.\n\nIf you’re reading this, you probably should enable it, but probably don’t need to. My gripe is that Apple shipped the feature off by default, about four taps deep in Privacy and Security within iOS 27 Settings, behind a toggle labeled “Share with App Developers,” which sounds like something you would want to avoid. Put simply, anyone who finds this toggle probably didn’t need it. The people who do need it will never go looking for it.\n\nIt needs to be enabled by default.\n\nThat said, props to Apple for implementing a 24-hour delay before the feature turns off. If a threat actor is walking a victim through turning off Impersonation Risk Detection mid-phone call, they’ll have to wait at least a day. It’s sort of the same logic behind Stolen Device Protection’s security delay.\n\nYou can go turn it on within Settings > Privacy & Security > Impersonation Risk Detection > Share with App Developers ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-48430c0709e9525b",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2260753/how-to-choose-right-usb-to-usb-c-adapter/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-21T15:00:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "How to choose the right USB to USB-C adapter",
-        "summary": "Getting an adapter can open up a world of connectivity and charging options, but specs and brand matter quite a lot. Here's what to look for.",
-        "body": "And why that one cable takes forever to charge your phone.\n\nA USB to USB-C adapter looks simple enough, right? A small plastic connector with a male USB-A plug on one end and a female USB-C port on the other. But not all adapters perform the same way, and picking the wrong one can mean sluggish file transfers, slow charging or, even worse, a damaged port.\n\nThese adapters solve a common problem . You've been buying USB-C to USB-C cables in bulk because they're so much faster for charging, but your laptop only has one C-port, which you need to use to actually charge the laptop itself, and you're left scrambling for a USB-A to USB-C cable around the house so you can charge your headphones, for instance. The same goes for older wall chargers or your car that still features USB-A ports .\n\nThe catch is that not all USB-A to USB-C adapters are built the same. They're not all following the same standardized protocol. Two adapters can look nearly identical while performing very differently, depending on the USB specification they support, the power they can deliver and the quality of the components inside. Before buying one, it's important to understand what these differences actually mean for your devices and which ones matter for your specific use case.\n\nThe USB version printed on the packaging indicates both data transfer speed and charging capability. This is super important to check because the gap between versions is significant.\n\nA USB 2.0 adapter will top out at 480Mbps for data and delivers just 5V/0.5A of power — about 2.5W, although when used with wall chargers, they can supply up to 7.5W. That's not much, but it's also not meant to be. This kind of adapter is built for low-power accessories like mice, keyboards and wearables that don't need fast charging or high-bandwidth data transfers.\n\nA USB 3.0 adapter is a whole different story because it supports up to 5Gbps in data transfer (about 10 times faster than USB 2.0), while a USB 3.2 Gen 2 adapter supports speeds up to 10Gbps. When it comes to charging, a laptop's USB-A port caps output around 7.5W, but plugging the adapter into a dedicated USB-A wall charger can push that number up to 12W-15W.\n\nHere's the thing though — you're plugging this adapter into a USB-A port, so you're going to have to tailor your expectations to what that port can actually do. You're probably used to super-fast charging by using that same cable with your capable charger, but it's just not going to work the same when plugged into an adapter. You'll be able to use it just fine for data transfers, but you'll have to be OK with slow charging for your phone. Truthfully, you're probably better off using it for your wearable gear, headphones and peripherals and only resort to charging your phone through it when you have absolutely no other option.\n\nBefore buying, you'll have to know a few things. What generation USB port does your computer have? If it's an old device with a USB 2.0, buying a newer generation adapter won't increase the transfer speed. It's also important to figure out what you're going to use the adapter for before buying.\n\nWhile a basic USB 2.0 adapter is fine for low-power devices, you should opt for USB 3.0 if you're plugging in something like an external drive or flash drive. Otherwise, that 480Mbps cap on USB 2.0 will make you want to take a snooze.\n\nBrand matters just as much as specs here. Cheap and uncertified adapters can fail to regulate power correctly, which creates a risk of overheating or damaging your device's charging port over time. Stick to manufacturers with a track record, check for safety certifications like UL or CE and check for extra features like overvoltage protection. You may be happy to save a few bucks on a no-name adapter, but you might end up paying way more to fix a damaged laptop port."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-007e6bc4f54d321f",
+    "id": "techcrunch-1142cfa61fd3e8dc",
     "type": "news",
     "sourceId": "techcrunch",
     "sourceName": "TechCrunch",
     "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/21/googles-899-googlebook-is-a-bet-that-youll-buy-a-new-laptop-for-gemini/",
+    "originalUrl": "https://techcrunch.com/2026/09/21/metas-ai-agent-has-been-blocked-from-using-amazon-com/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-21T14:39:22.000Z",
+    "publishedAt": "2026-09-21T17:55:18.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -114,32 +138,129 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Google’s $899 Googlebook is a bet that you’ll buy a new laptop for Gemini",
-        "summary": "Google’s AI-native Googlebook ties Gemini to the cursor, dictation, widgets and other parts of the desktop experience.",
-        "body": "After first unveiling its new AI-powered laptop, dubbed Googlebook, in May , Google on Monday said the new device is now available for pre-order for $899.\n\nMeant to offer a step up from traditional Chromebooks, Googlebooks run on Android OS with a desktop version of the Chrome browser and other familiar ChromeOS elements. However, the real pull for the new devices is that they’ll prominently feature Gemini’s latest capabilities in a new format: the laptop.\n\nGoogle is trying to offer a laptop with unique features like an AI-powered cursor, vibe-coded widgets, and support for AI-enhanced dictation. The latter is a feature called Rambler, which cleans up messy, rambling brain dumps into readable text.\n\nThe move is a bet that AI, specifically Google’s Gemini, could be enough of a draw to get people to buy a new laptop that bakes in AI instead of running them via desktop apps you install or access through the browser. In addition, the devices could eventually replace Chromebooks, bringing millions of former Chromebook customers to Gemini AI.\n\nOn the Googlebook, Google is trying to reinvent the “point-and-click” experience of desktop computing to now include an AI element: the cursor serves as a conduit to Gemini. The company suggests various ways this could be used, like highlighting content on a webpage for Gemini to work with, asking Gemini to see if an email you’ve hovered your cursor over is suspicious, or selecting images and then asking Gemini to visualize them together.\n\nIn practice, this feature isn’t very different from Android’s “Circle to Search,” which allows smartphone owners to use gestures like circling, highlighting, or tapping to connect with Google Search, which of course, also includes AI. While it’s a clever way to take advantage of the ways people use their phones, Circle to Search on its own didn’t inspire a mass exodus to Android.\n\nSimilarly, Magic Cursor, as the AI pointer is called, won’t likely be a main selling point for the Googlebook, especially now that we have AI agents that can take over your computer and browser to do tasks for you.\n\nGoogle’s Rambler, however, may be one of the best of the AI features in this upgrade, as it meets a surprisingly useful need. However, this, too, isn’t enough reason to buy a new device, as it feels more like a feature that’s nice to have than a necessity.\n\nVibe-coding widgets are a minor addition, as well. Other Googlebook features, like Gemini Spark and Gemini Live, also don’t require special, new hardware.\n\nWhat’s more interesting about the Googlebook is how it’s seemingly part of Google’s longer-term plan to capture a large part of the K-12 market that currently relies on Chromebooks, and push them towards the company’s Gemini AI. There are somewhere around 50 million Chromebooks in schools, used by students and educators, Google has said.\n\nIn May, the company told TechCrunch that its current Chromebooks would continue to be supported, though many would become eligible to transition to the new Googlebook experience in the future.\n\nThe $899 device will include 12 months of Google AI Pro, which gives you 5TB of cloud storage, Gemini Advanced tools, and 3 months of YouTube Premium, Adobe Photoshop and more. The devices will receive regular updates for up to 10 years, Google said.\n\nGooglebook pre-orders are open now on the Google Store, Best Buy, and other retailers. Devices will hit shelves on October 4 in the U.S., and October 5 in Canada, the U.K., Ireland, France, Germany, and Australia.\n\nFlagship devices in the new range are being built by Acer, ASUS, Dell, HP and Lenovo, with materials like aluminum, magnesium alloy and carbon fiber. They feature up to 2.8K OLED displays, haptic glass trackpads, and backlit keyboards. Under the hood, they’ll run on processors from Intel and Qualcomm paired with dedicated NPUs. Google says the device will offer up to 14 hours of battery life."
+        "title": "Meta’s AI agent has been blocked from using Amazon.com",
+        "summary": "Muse isn't welcome as a shopper anymore.",
+        "body": "Posted:\n\nSunday night, users of Meta’s AI assistant Muse started getting a strange error message when they tried to buy goods on Amazon. As spotted by GeekWire , the error message read: “Continued access by an unauthorized AI agent violates Amazon’s Conditions of Use, to which our customers have agreed.”\n\nIn other words, Muse isn’t welcome as a shopper — and anyone trying to buy something on Amazon through the AI agent will have to find it somewhere else.\n\nIt’s easy to see the block as a tête-à-tête between tech giants. Amazon has its own cohort of foundation models , after all, along with one of the most popular inference platforms on the internet . As long as they’re under no legal obligation to open the doors to Muse, why would they?\n\nBut there are also substantive reasons Amazon might not want to be in the agentic commerce business just yet. If Muse makes a bad order, Amazon is going to be the one to clean it up — dealing with both the angry customer and the angry vendor. Muse has one of the lower hallucination rates , as AI models go, but it’s still pretty far from zero. Even if Amazon sees an opportunity in agent-driven commerce, they may want to wait a few more release cycles before rolling anything out."
       }
     },
     "media": null
   },
   {
-    "id": "engadget-61128c0db283bf77",
+    "id": "engadget-e9a6a60035b90b9e",
     "type": "news",
     "sourceId": "engadget",
     "sourceName": "Engadget",
     "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2260677/what-uses-most-data-smartphone/",
+    "originalUrl": "https://www.engadget.com/2261133/dont-like-siri-ai-ios-27-feature-may-change-mind/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-21T14:00:00.000Z",
+    "publishedAt": "2026-09-21T17:30:00.000Z",
     "categories": [
-      "tecnologia-general"
+      "tecnologia-general",
+      "apple"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "What typically uses the most data on a smartphone?",
-        "summary": "Unless it's connected to Wi-Fi all day every day, your smartphone is using up data almost constantly. Here's where your data is going.",
-        "body": "You might be burning through data faster than you think.\n\nAccording to Ericsson's mobile traffic data report, the world currently moves around 150-200 exabytes of mobile data monthly. That is 150-200 million terabytes monthly. And that number is only going to keep increasing; Ericsson forecasts that by 2031, global monthly usage will have grown to 328 exabytes, more than double today's figures. The average smartphone alone now consumes more than 20GB a month, up from 4.9GB just a few years ago.\n\nDifferent people rack up that total in different ways: Some people spend all day doing battle on X, while some find themselves drawn into TikTok's unending videos, so there's no one thing that uses the most data. Although there is no lone culprit, these usually do the most damage: video streaming, social media , video calls, software updates, cloud backups and music streaming. For what it's worth, on most of these you can control how much data they consume through a quality setting or two.\n\nVideo streaming services , including Netflix, YouTube and Prime Video, among others, consume a significant amount of data, especially if you're watching at the highest resolution. Let's start with the most popular video platform: YouTube. On low resolution (360p), YouTube consumes around 500MB per hour; on 720p, roughly 2GB per hour; on 1080p, it's 3GB per hour; and on 4K UHD, an hour on YouTube can consume over 15GB of data.\n\nNetflix is a bit more considerate with your data. The platform uses 300MB per hour on Low quality settings, 700MB (0.7GB) per hour on Standard definition, around 3GB per hour on HD and up to 7GB of data per hour on Ultra HD (4K). Amazon Prime Video, on the other hand, offers three quality options: Good, Better and Best. Good streams at 480p and uses around 0.72GB per hour; Better streams in HD and uses roughly 1.8GB of data per hour; and finally, Best streams at 4K and consumes nearly 6.8GB per hour.\n\nOn the other side of the video spectrum are video calls (and conferences). On average, video calls consume around 500MB per hour, though platforms built for group conferencing like Zoom use much more. A one-on-one Zoom call will consume about 540MB per hour at 480p, 1.08GB per hour at 720p and over 1.62GB per hour at 1080p. Group calls use more data: 810MB per hour at 480p, 1.35GB per hour at 720p and 2.48GB per hour at 1080p, since Zoom has to download a separate audio and video stream for every participant.\n\nIt's not uncommon for a single social media post to include text, images and videos, so how much data it consumes can vary widely depending on the exact platform and the type of posts you're viewing. TikTok is mostly short videos, and depending on the resolution, an hour of scrolling can use around 750MB to 1GB of data. Instagram is a mix of photos and videos unless you're spending more time on Reels. On average, Instagram (Reels included) can use up to 1.5GB of data per hour. Text and image posts still dominate Facebook, so it uses a conservative 500MB per hour. That figure can stretch up to 1GB per hour if you start watching more videos. Text-focused social media platforms like X (formerly Twitter) and LinkedIn use far less data than their video-heavy counterparts. X uses as little as 50MB to 1GB of data per hour, and LinkedIn consumes around 120MB to 240MB per hour. And as usual, these figures can change dramatically if you consume more video content on either platform.\n\nSoftware updates are another major but low-key guzzler of data, largely because most updates and backups happen in the background. A single iOS update can run anywhere from a few hundred megabytes to more than 12GB if it's a major release. Android updates follow the same pattern, but the exact size varies depending on the device and the manufacturer. Cloud backups add to that total, but how much data is consumed depends on what exactly is being backed up.\n\nMusic streaming uses relatively little data. At its highest quality settings, a single song on Spotify streams at 320kbps, which translates into 144MB per hour. On default quality settings, an hour of Spotify consumes around 43MB. But that can quickly add up if you stream music for long hours or you're listening in Apple Music's lossless audio quality , which uses roughly 720MB per hour, or as much as 2.9GB per hour at Hi-Res Lossless. Across nearly every category covered, you can cut down data usage by simply downloading content over Wi-Fi for offline playback later on. Once something is downloaded, it won't use your data plan again."
+        "title": "If you don't like using Siri, this iOS 27 feature may change your mind",
+        "summary": "Siri has long been known for its stagnation, but that changes with iOS 27 and accompanying releases. Siri has undergone major improvements.",
+        "body": "Apple Intelligence makes Siri actually useful, thanks to some major changes.\n\nIt's easy to forget how impressive Siri was when it was unveiled back in 2011. But as time passed, Siri never really evolved and even struggled with basic tasks. Chances are you've asked it to play a song or set an alarm, only to have it search the web for your request. If you haven't been a fan of Siri for a while, iOS 27 might change your mind.\n\nThe original Siri was limited: it could only respond to commands it had been programmed to handle. Play a song, create a timer, set an alarm — tasks like that. As far as personal context, it could only take actions like calling a specific contacting or start a route, but it never really understood the full context. That changes with iOS 27, where Siri has been rebuilt with AI .\n\nThe new Siri AI has what Apple calls \"personal context understanding\". Once you install iOS 27, you may notice a notification in the Settings app about \"Optimize Search and Siri.\" This means your device is learning everything about you, from emails to messages. The process takes a while to complete (it will run faster when your phone is locked, charging and on Wi-Fi), but it's essential for Siri AI to work. With this knowledge about what's on your phone, Siri becomes much more powerful and smart.\n\nSay you're on a trip and you've just arrived at the airport. Instead of having to search through your emails for the hotel's address, just ask Siri. It will likely find the right address based on your emails and conversations. You can even ask it to copy the address to your clipboard. Another great example is finding a recommendation from a friend. Having a hard time remembering the name of a song or book someone sent you? Ask Siri, and it will search through your messages for you.\n\nYou can also use Siri AI for general knowledge answers. Want to hear the surprise songs from a specific concert on Taylor Swift's The Eras Tour? Ask Siri, and it should find exactly those songs on Apple Music. Siri AI even works with third-party apps, and while this depends on developers' adoption, some of them are already compatible, such as Flighty and Gentler Streak.\n\nUnfortunately, not everyone can use Siri AI. Beyond updating your Apple devices to Platform 27 , your device also has to support Apple Intelligence . That means an iPhone 15 Pro or later, or a Mac or iPad with an M1 chip or later (plus the seventh-gen A17 Pro iPad mini).\n\nAnother important limitation: Siri AI is currently only available in English. Apple says support for more languages will be rolled out soon, starting in October with French, Japanese, Korean, Portuguese and Spanish. You may have to join a waiting list to get the new Siri and the Siri AI app . It usually doesn't take long, but it's one more step to get your hands on Apple's new virtual assistant."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-cdf0fdb29db184ab",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/google/2026/09/google-confirms-gemini-models-hacked-three-companies-in-may-2026/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-21T16:57:26.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google confirms Gemini models hacked three companies in May 2026",
+        "summary": "A third-party cybersecurity firm accidentally gave experimental Gemini models access to the Internet.",
+        "body": "It has become increasingly common for AI firms to announce that their latest and most capable models engaged in unauthorized real-world hacking. Google, which has been slow to release frontier Gemini models in recent months, has been absent from the \"rogue AI\" conversation until now. Following a Wall Street Journal report, Google has confirmed that Gemini models hacked three companies during a May 2026 test, but the nature of the intrusion isn't as troubling (or impressive) as previous AI hacks.\n\nThe hack took place during a test conducted by cybersecurity firm Irregular. A collection of Gemini models were taking part in a \"capture the flag\" exercise intended to test the AI's cybersecurity capabilities in a closed environment. The AI was instructed to retrieve information from a fake company (which shared a name with a real company) within this environment. Irregular was not supposed to allow the model to operate outside its servers, but due to a misconfiguration, Gemini was able to access the Internet.\n\nWhen Gemini started snooping around the web, it targeted real infrastructure instead of the fakes. For one of the three hacks, Gemini simply guessed passwords until it accessed a company's online services. In the other two instances, Gemini searched public software repositories until it found login credentials for companies that had been accidentally included.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-96a903bf20cdbe4c",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/21/with-tabby-a-former-accountant-is-using-ai-to-make-accountants-obsolete/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-21T16:38:51.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "With Tabby, a former accountant is using AI to make accountants obsolete",
+        "summary": "Tabby is designed to be a real-time bookkeeping interface, handling clients’ paperwork as it gives them up-to-the-minute data on their business’s profit and loss.",
+        "body": "In May of 2025, Ahad Ali was a successful accountant, overseeing a team of 20 people and handling more than 2,000 returns a year. “We did bookkeeping, accounting, sales tax, taxes, everything,” Ali says. It was a stable business, and one that would have been easy to stay in.\n\nBut Ali started to notice something. His work was increasingly dictated by the frictions of accounting software, which was rarely designed with actual accountants in mind. He became frustrated with specific accounting software like QuickBooks, and soon he became frustrated with the entire idea of SaaS-based accounting.\n\n“I realized that small businesses don’t need better accounting software,” Ali told TechCrunch. “They need less accounting software. They need something that just does it for them.”\n\nNow, Ali is building just that. His product, Tabby , is designed to be a real-time bookkeeping interface, handling clients’ paperwork as it gives them up-to-the-minute data on their business’s profit and loss. Using Plaid to import live account data, Tabby uses AI to quickly build a real-time dashboard for a business’s financial health.\n\nThere’s also a version of Tabby for accounting firms that want a smarter alternative to QuickBooks, but Ali’s goal is to go direct to the end user as often as possible. As Ali sees it, products like Tabby have a chance to automate away the work of bookkeeping once and for all, turning it into a monthly charge on the order of internet access or payroll services. If successful, it could seriously change the calculus of operating a small business.\n\n“You can say QuickBooks digitized bookkeeping,” Ali told TechCrunch, “but we want to make [that visible software layer] nonexistent.”\n\nSo far, it seems to be working. Fourteen months in, Tabby has 5,500 small businesses using the platform, with roughly $100,000 in annual recurring revenue. The team is still just seven people — Ali, his technical co-founder, four engineers and a go-to-market specialist — and in the process of raising $1 million in pre-seed funding. When I spoke to Ali, his team was just preparing to launch Tabby Talk, a natural language interface for the product.\n\nThere’s plenty of competition in the accounting space, particularly now that AI has shaken things up. Ali has his eyes focused on QuickBooks, which is still the biggest player — but he’ll also be facing well-funded startups like the Sequoia-backed Rillet , as well as the major labs’ own finance tools . It’s a daunting task, but Ali thinks that Tabby can carve out a niche by focusing on the same small- to medium-sized firms that helped his accounting business thrive.\n\n“Everything we see is making us believe that there’s a path for other players, because the space is big,” Ali told TechCrunch. “There’s 30 million more businesses.”\n\nLearn more about Tabby and the other innovative startups involved in our prestigious Startup Battlefield 200 competition at TechCrunch Disrupt, happening October 13-15 in downtown San Francisco ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-f0191f5975db94f8",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2261083/google-vs-samsung-digital-wallet-features-comparison/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-21T16:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "android"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google Vs Samsung: What features set their digital wallets apart?",
+        "summary": "Google and Samsung's digital wallets are solid options for storing cards, passes, tickets and IDs on Android devices, but there are some subtle differences.",
+        "body": "Sometimes it could be best to use both.\n\nThere's a lot to talk about when comparing the different digital wallets on the market, but two parties in particular spark an important debate. Samsung and Google offer their own solutions, and are both found on the Samsung family of devices. Therefore, if you've already evaluated the pros and cons of digital wallets in general, you'll need to make a choice between the two offerings if you're rocking a Samsung phone.\n\nNaturally, both Samsung and Google wallets offer similar services. Both can store credit and debit cards, tickets, loyalty cards, membership cards, boarding passes, car keys, house keys and certain forms of ID. They also both have the ability to upload physical passes through your camera, a feature that is only now coming to Apple Wallet with iOS 27. However, there are clear differences in utility between Samsung and Google wallets, and both have strengths in different niches, including ID storage, crypto and much more.\n\nA big weakness of Samsung Wallet compared to Google (and Apple) is with digital IDs. Samsung Wallet is compatible with digital ID for 8 states, whereas digital IDs stored in Google Wallets are recognised in 11 states and Puerto Rico. However, while California, Montana, New Mexico, Ohio, and Puerto Rico all recognise Google and not Samsung, the latter does have the advantage in West Virginia, where the former wallet is excluded.\n\nMoreover, cross-device support is another feather in Google's cap. Not only does Google Wallet have a web version, but it's available on other Android devices (Android 9 and above or Wear OS 2.18 and above). Therefore, while you can pay with Google Wallet on your Samsung Galaxy watch , you won't use Samsung Wallet on your Pixel phone due to its Samsung device exclusivity. If that's not enough convenience and utility for you, your passes will sync across devices and Gmail also allows you to pull tickets and passes right from your emails and into Google Wallet.\n\nGoogle's wallet has plenty of upsides compared to Samsung, but don't count out the competition yet. Samsung Wallet has the edge when it comes to cryptocurrency, as it allows you to link digital asset services (such as Coinbase or Samsung's own Blockchain Wallet) with the rest of your cards. This allows you to view and manage your crypto assets from your wallet app.\n\nFurthermore, security is a big factor for many — especially if your digital wallet is holding your house keys . Digital wallets are generally quite secure, with Samsung and Google both offering similar levels of data encryption. You'll probably have more to worry about from social engineering scams than brute-force cyber attacks. Samsung, however, may have a very slight edge here due to its integration with KNOX, which offers the increased protection of hardware-level security.\n\nIf you're a Samsung Galaxy phone owner and you're worried about choosing a default wallet option, don't stress. There's nothing stopping you from using both wallets and having one as a fallback for the other."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-1d9332b05f1092b2",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/ai/2026/09/trump-rejects-ai-slowdown-calls-launches-ai-force-instead/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-21T15:37:56.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Trump rejects AI slowdown calls, launches \"AI Force\" instead",
+        "summary": "The president offered few details on what his proposed new AI Force would do.",
+        "body": "Donald Trump has said that the US would appoint a new AI tsar and create an “AI Force” while offering a full-throated defense of the emerging industry in the face of a growing popular backlash.\n\nThe US president’s announcement comes as leading industry figures have sounded the alarm that humans could lose control over the rapidly advancing technology without a slowdown in development.\n\nHowever, rather than announcing regulation as some have demanded, Trump has dismissed safety concerns as a “hoax.”\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -189,29 +310,6 @@
         "title": "iPhone owners can now submit claims in Apple’s $250 million Siri AI settlement",
         "summary": "Apple is paying $250 million to settle claims that it failed to deliver an AI-upgraded Siri - and now, eligible iPhone owners can submit a claim for a payout. If you live in the US and purchased an iPhone 15 Pro, iPhone 15 Pro Max, or any iPhone 16 model between June 10th, 2024, and […]",
         "body": "Apple is paying $250 million to settle claims that it failed to deliver an AI-upgraded Siri - and now, eligible iPhone owners can submit a claim for a payout. If you live in the US and purchased an iPhone 15 Pro, iPhone 15 Pro Max, or any iPhone 16 model between June 10th, 2024, and March 29th, 2025, you can file a claim on the settlement's website , as reported earlier by MacRumors .\n\nYou can receive an estimated $25 per eligible device, but the settlement's website notes that this can increase to $95 depending on how many people file claims. To file a claim, you'll need to enter your name, contact information, and iPhone serial number on the …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-5da7d29f9d8cb039",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2260628/usb-a-vs-usb-c-differences-between-explained/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-21T13:30:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "USB-A vs. USB-C: What's the difference between them?",
-        "summary": "USB-C did away with the annoying requirement to plug in a cable right side up, but USB-A and USB-C have other major differences.",
-        "body": "These two connector types are visually distinct, but looks aren’t their only differences.\n\nYou likely use USB every day to charge your phone, connect peripherals to your computer and much more. And for everything USB can do, it's only used a handful of connector types since its introduction in the mid-1990s. While these are identifiable from just a look, what each connection is capable of isn't always clear from the outside.\n\nUSB-C is newer than USB-A, but the older standard is still commonly used today. Understanding all the ways they differ helps you make better use of your tech and follow what's happening inside it.\n\nUSB-A (officially USB Type-A) is one of the two original connectors defined in the USB 1 standard. It uses a rectangular connector with all its pins on one side, so it will only connect to a port in one way — everyone has had to flip a USB-A plug multiple times to get it aligned correctly.\n\nUSB was created to simplify computer peripherals by providing one straightforward connection for accessories. Before it came around, plugging a device into your computer meant dealing with a mess of different cables and port compatibility. Early versions of USB designated one device as the host (usually the computer) and the second as the connected device; they weren't reversible. This is why you don't see USB-A to USB-A cables; plugging one of those into two computers would cause problems when both try to act as the host.\n\nUSB-B was the companion connector type in the early days , used for peripherals. You'll occasionally still see USB-B used for devices like printers, but it's much less common now. Mini-B and Micro-B (usually called Mini-USB and Micro-USB) served the same purpose, but were smaller so they could fit on mobile devices like MP3 players, phones and game controllers. These two were much more frequently used than standard USB-B until USB-C started replacing them.\n\nUSB-A is still used today and has wide compatibility across devices given how long it's been around. You'll see it on desktops and laptops, routers, game consoles, cars and device chargers (including various charging spots like clock radios, plane seats and couches).\n\nUSB-C (officially USB Type-C) debuted in 2014, though devices using it didn't properly roll out until 2015. Unlike USB-A, USB-C is a reversible oval, so you only have to attempt plugging it in once. USB-C also sidesteps the host-device distinction from earlier USB standards; when you connect two devices, they figure out which is which.\n\nWhen USB-C arrived, older connections were designated as \"legacy,\" and USB-C has slowly taken over since. You'll now usually find at least one USB-C port on most laptops and desktops, and it's the standard for smaller devices like smartphones, tablets, headphones and controllers. In many places where you would use USB-A ports in years past (like in your car, on your router, on a power bank or similar), it's common to see USB-C now. Micro-USB is still used for some cheaper devices or those that haven't seen updates in years.\n\nAdding to its universal nature is how versatile USB-C is . In addition to transferring data, USB-C can be capable of charging larger devices like laptops, outputting video and audio, and connecting all sorts of peripherals. What used to require a half-dozen various connections on your laptop (charging, connecting an external SSD, hooking up a monitor, adding a microphone, et cetera) can now be achieved with just a few USB-C ports.\n\nEverything we've talked about so far only pertains to the physical connection types of cables and device ports. The data transfer, charging speed and other capabilities of both USB-A and USB-C depend on the standards for a specific cable and port. For example, USB-A has limited charging speeds, whereas USB-C supports modern fast-charging standards .\n\nThe oldest standard still in general use is USB 2.0; these ports and cable connectors are usually black or white. Its theoretical max speed is 480 Mbps. That's in comparison to USB 3.0 , which is usually marked with blue and has a max speed of 5 Gbps. The following standards are confusing; they were originally called USB 3.1 and USB 3.2, but as they arrived, the prior ones were retroactively renamed (multiple times) with \"generation\" titles. Nowadays, the standard names are USB 5 Gbps , USB 10 Gbps and USB 20 Gbps to designate their max speeds.\n\nUSB-A's speeds can range from USB 2.0 to USB 10 Gbps. USB-C can be as slow as USB 2.0, but it can also meet the USB 20 Gbps standard. USB4, which has a base speed of 20 Gbps but can go up to 40 Gbps (or 80 Gbps for USB 4 2.0 devices), is only supported with USB-C. To take advantage of these faster standards, all parts of the connection (the ports on both devices and the cable) must support it. If you plug a USB 20 Gbps cable into a port that caps at USB 5 Gbps, it will only transfer data at the lower speed.\n\nThat's not to mention Thunderbolt , which is another standard that guarantees performance beyond the various USB generations. Thunderbolt has never used USB-A; its first two generations used Mini DisplayPort, while Thunderbolt 3 and onward have used USB-C.\n\nSimilarly, not all USB-C ports and cables are capable of everything USB-C can do. Only one USB-C port on your laptop might work for charging, while another only supports data transfer. A USB-C port that can handle video output is usually marked by a DP symbol (for DisplayPort Alternate Mode). Understanding the various USB symbols can help you know what to expect.\n\nThis is why a blanket comparison of USB-A and USB-C doesn't tell you everything you need to know, other than which device physically fits into the port. You need to check the exact specs on the cable packaging or device manual to know what they're capable of."
       }
     },
     "media": null
@@ -289,53 +387,6 @@
     "media": null
   },
   {
-    "id": "techcrunch-b33d30c5eabf162c",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/20/is-the-ai-industry-really-ready-to-slow-down/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-20T18:56:04.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Is the AI industry really ready to slow down?",
-        "summary": "On Equity, we debated whether AI executives are serious about wanting to slow down.",
-        "body": "We’re seeing a big debate over AI safety and a potential slowdown, as Anthropic CEO Dario Amodei recently published a plan to “pace the frontier,” while Nvidia CEO Jensen Huang has publicly echoed President Donald Trump’s claims that the AI backlash is a hoax and regulation is unnecessary.\n\nOn the latest episode of TechCrunch’s Equity podcast , Kirsten Korosec, Sean O’Kane, and I discussed whether executives like Amodei and OpenAI CEO Sam Altman are serious about wanting to slow down.\n\nWhile I was surprised at how many industry leaders seemed to throw their support behind Amodei’s plan, Sean noted that the plan seemed short on details.\n\nAnd when Kristen asked whether a combination of existing regulation and the workings of the free market could provide enough safeguards on their own, Sean replied, “We have a federal government at the moment that certainly does not seem eager to enforce regulations broadly speaking, let alone specifically speaking here.”\n\nPlus, he argued, “There does not seem like there is a ton of consumer choice driving this market, in the sense of, okay, if one of these companies does something really bad, then they will see an impact in how many cancellations there are or whatever.”\n\nKeep reading for a preview of our conversation , edited for length and clarity.\n\nAnthony: Sean, what do you think? Are we actually going to ”pace the frontier”?\n\nSean: That sounds, for some reason, like something from “Point Break.” It’s just a very California statement, like, “We’re gonna pace the frontier, bruh.”\n\nI don’t know. I said on this show last week , I didn’t think we were headed for a slowdown of any kind, in large part because I don’t think these companies are structured in a way where that works.\n\nSo this was a pretty immediate flip of what I said a week ago, to hear this from Dario at Anthropic and Sam at OpenAI and even Elon Musk to a certain degree — and we can get into whether we believe that or not. I will say, I don’t think I was completely wrong, because even with these loose plans that Dario laid out in a blog post and some of the other leaders have talked about, I feel like we’re still missing a lot of specifics here, not only on some of the claims about why these people think there are dangers and risks, but also specifics on what they mean by slowing down.\n\nAnthony, I know you read this stuff pretty closely last weekend as it was all popping off, so I’m curious if you’re maybe more generous than I am, as far as understanding what it is they’re trying to say here.\n\nAnthony: I mean, I also have questions. What really stood out to me is the fact that so many people in the industry seemed to coalesce around this fairly quickly. Even before Amodei published his blog post, I was seeing other people post some version of this [plan,] just in the days leading up to it.\n\nMy understanding is, these suggestions that have come out of the AI safety community; these are things that have been percolating for a while. They’re not just things that [Amodei] thought up on his own. But it just seemed like a lot of people were kind of ready to embrace this and in some ways, [it’s] encouraging to see that there’s a consensus. But it also makes me a little skeptical that this would represent genuine, major steps towards a slowdown.\n\nKirsten: First of all, consensus can be a good thing. Also, it can be the beginnings of forming a cartel. And so, let’s be clear [about] who we’re talking about here. We’re talking about frontier AI labs. and that’s specific and important.\n\nYou did say a minute ago that the details aren’t really clear, but we do know that the general idea here is that independent third-party evaluators would come in that would work inside [companies] like Anthropic or OpenAI and monitor AI safety practices and incidents. But there is a lot of vagueness around that.\n\nThen there’s another proposal to have major AI companies in democratic countries coordinate on safety standards and limits. And then this international coordination piece. So those are the general ideas around this.\n\nI’ll also add that there’s been very considerable pushback from very specific people. And surprisingly, some people I didn’t think would push back on this. The obvious one, I guess, would be Nvidia’s CEO Jensen Huang, who had some pretty choice words. I don’t know what either of you think of […] some of his comments and the call he took from President Trump onstage [at the All-In Summit].\n\nSean: I think Jensen understands that, to a certain extent, he is seen as the adult in the room here. Which is interesting, because that’s a dynamic that I think has changed. If you were to ask people a year, almost two years ago now, who was playing that role as these AI companies were really starting to blow up in big ways, I think a lot of people would have pointed to Microsoft and Satya Nadella, and I feel like Microsoft has — for a number of reasons that we don’t need to get into right now — lost that grip on being the adult in the room. Certainly in part because Nadella said he was going to make Google dance , and then that never happened. And in fact, the opposite happened, in a lot of ways.\n\nJensen, I think, understands not only that he needs to be pleasing the most amount of people and so he wants to say the most measured thing, he also is one of the most useful liaisons between this field and this administration, to the point that he’s getting a call from the president while he’s onstage at this very well-attended and high-profile conference that allowed both of them to respond to all this mess.\n\nKirsten: [To] your point about him being the adult in the room and the liaison, he is in a position where he could do that. But in my view, I would say that [his appearance,] which did feel a little staged, went a step too far and really highlighted the fact that Nvidia greatly benefits from AI moving forward in an unpaced manner.\n\nI hate to be cynical about it, but that was sort of my initial reaction to it.\n\nAnthony: Trump’s and Huang’s interests are aligned, and also [Huang’s] telling [Trump] what he wants to hear.\n\nI did think some of the things he was specifically focusing on are worth unpacking a little bit. First he talked about this idea of, “We are not going to have a slowdown.” It’s interesting, just that phrase “slowdown,” which has come up a lot — but at the same time, both Altman and Amodei [will] use the slowdown language, but the word they like to use more is “pace.” right?\n\nAnd these three proposals — the ones you just described, Kirsten — in theory, they could result in things slowing down, but they’re not saying that explicitly. It’s saying, “Hey, we’re making some basic safety measures and having some people keep an eye on us.” But none of those things are intrinsically saying that things have to go slower than they are now, at least as I understand it.\n\nKirsten: So I have a question for Sean. Couldn’t you argue in a free market society, we have existing regulations in place, and also [in] the competitive environment in which there isn’t protectionism, if there is something unsafe that is released by a company, that they would no longer be able to be a viable company? And there are regulators in place today that could go after these companies? Or do you reject that idea?\n\nSean: In a vacuum, or in a market that is not being distorted by a whole bunch of different external pressures, yeah, I think there’s an element of that. But we have a federal government at the moment that certainly does not seem eager to enforce regulations broadly speaking, let alone specifically speaking here.\n\nAnd we’re also in this weird situation where — I don’t really know the right way to put it, but it does not seem like there is a ton of consumer choice driving this market, in the sense of, okay, if one of these companies does something really bad, then they will see an impact in how many cancellations there are or whatever.\n\nEspecially now, as they have moved into enterprise and they’re making so much more of their money from selling their services to companies, it’s just naturally harder to vote with your dollars there. Corporations are not going to pack up and move from [OpenAI’s] Codex to [Anthropic’s] Claude Code just because they disagree on principle with something that OpenAI did.\n\nAnd then they’re also just being floated by so much investment money that it makes it easier for them to absorb any of those losses if they actually do face them. So I think it’s a nice idea in theory, but I feel like in practice, there’s none of that really happening."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-b8ecacea0de9e171",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/20/voccis-ring-adds-a-new-form-factor-to-meeting-note-taking/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-20T18:32:52.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Vocci’s ring adds a new form factor to meeting note-taking",
-        "summary": "Vocci's lightweight ring costs $249, and might pose some privacy questions.",
-        "body": "There is no dearth of different forms of hardware for meeting note-taking , including pendants, pins, and credit-card-styled devices. That hasn’t stopped Vocci from releasing a new device for the same use case in a ring form factor, which is convenient but could create some privacy issues.\n\nThe ring form factor is one of the easiest for anyone who wants to just press a button and have the device start recording. Pebble’s new Index 01 Ring, which I am testing right now, lets you hold the button and take a note or a reminder. Stream Ring, made by Sandbar, works similarly with a control pad on the top. Vocci’s ring takes a different path, with meeting note-taking as a central function.\n\nThe ring has a button, which you can double-tap to start recording and double-tap again to stop. You can tap and hold the button to ask Vocci AI questions, but that only works when you have the app open. There is an indicator light and a haptic motor for recording feedback. The ring is lightweight at under six grams and uses titanium material on the inner and outer surfaces — likely a coating.\n\nThe company claims that the Vocci ring can record notes for eight hours on a single charge. The device comes with a chunky plastic case, which can charge the ring up to three times.\n\nThe device captures meetings very well. I have had conversations spanning more than an hour in loud cafes, and the ring managed to convert most of the chat into accurate transcripts. However, this method of note-taking is not great if you want to take short notes.\n\nThe software is the disappointing part of the Vocci ring. The app itself is a bit confusing. Whenever I took shorter notes, I saw AI-generated insights that were longer than the notes themselves. Each recording has Chat, which is the main transcript; Highlights, which are short snippets you can capture by pressing the button while recording a conversation; and Notes, which is a summary and insight of the whole conversation.\n\nIn the app, there is a tab called Base where you can find transcripts, recordings, and anything you generate from them, and I found that redundant. I didn’t find a way to directly initiate a chat with AI for session transcripts.\n\nVoice-enabled rings are a great form factor for taking short notes or reminders. The app doesn’t have direct integration with reminder apps, which is a bummer. The feature rollout for its software is also slow. The company informed me that users can use Vocci’s Model Context Protocol (MCP) to connect to other assistants, but the option to do that didn’t appear until a few weeks ago in the app. Other meeting notetakers are building their platforms to allow users to automate insights and workflow through AI, and at the moment, Vocci’s platform is not fully built out for that.\n\nThere are some privacy concerns with this device because of its form factor. Vocci’s ring looks like a regular piece of jewelry until someone notices the button on it. The ring has a recording indicator, but it faces the user. It’s best practice to let someone know that you are recording a conversation, and it’s also required by law in some countries and regions. But with this kind of device, some miscreants can easily choose not to disclose that information and record the conversation without anyone noticing. The company said it encourages people to disclose that they are recording, but that may not be enough.\n\nAt $249, the ring is pricey compared to other note-takers like Plaud or Pocket , and that is due to the device’s lightweight form factor. The ring is for someone who doesn’t want to stick a gadget on the back of their phone, wear a wristband, or wear a pendant. On the hardware layer, a lot of these devices are combinations of some microphones, a battery, and a connection to the phone. We will likely see more variety in hardware meeting note-takers in the coming years, until users pick the specific formats that work for them."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "applevis-apps-bf0a7ae49816b1e9",
     "type": "news",
     "sourceId": "applevis-apps",
@@ -380,54 +431,6 @@
         "title": "Accessimind Screen Reader",
         "summary": "Accessimind Reader is a screen reader application developed to enable visually impaired and partially sighted users to use their Android phones more clearly, quickly, and…",
         "body": "Published 19 September 2026 by Sarper Arıkan\n\nAccessimind Reader is a screen reader application developed to enable visually impaired and partially sighted users to use their Android phones more clearly, quickly, and independently.\n\nAccessimind Reader uses the Android AccessibilityService API to provide screen reading functions. AccessibilityService is used to provide audio versions of on-screen content, detect user interface elements, navigate with gestures, provide audio feedback on focused items, and deliver a screen reader experience. This service is necessary for the screen reading feature, which is the core function of the application, to work.\n\nAccessimind Reader does not use AccessibilityService for user tracking, displaying advertisements, remotely recording calls, bypassing Android security mechanisms, or modifying user settings without permission.\n\nThe application presents audio feedback, gesture navigation, keyboard shortcuts, clipboard operations, reading preferences, and tools for the focused item in a practical accessibility flow. The context menu provides quick access to frequently used areas such as reading controls, clipboard operations, notification access, focused item operations, and Accessimind settings.\n\nKey Features:\n\nAccessimind Reader is designed for users who need voice output and fast navigation. It focuses on providing predictable controls, understandable labels, and quick access to frequently used screen reader operations.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nAccessimind is a screen reader. Users can test it to see how well its features work for them and fit their needs.\n\nLast Tested App version and Android version:\n\nAndroid 16"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-22f5cb6f1ff52a6a",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/09/report-us-almost-boarded-chinese-ship-over-hallucinated-ai-arms-report/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T20:26:33.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "AI hallucination of Chinese nuclear components almost led to US military attack",
-        "summary": "But the military's overall use of AI seems to be accelerating.",
-        "body": "The US narrowly avoided boarding a Chinese ship based on an \"entirely false\" US intelligence report generated with the help of AI tools, according to a CNN report .\n\nThat erroneous intelligence, submitted by a US Special Operations Command analyst, suggested the Chinese ship was transporting nuclear arms program components through the Middle East, according to \"four sources familiar with the episode\" cited by CNN. The US military was preparing to intercept and board the ship, with air support, before officials discovered a chatbot used in generating the report had \"inaccurately identified the material the ship was carrying.\"\n\nOne source told CNN the AI-powered fiasco \"almost started a war.\"\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-f9ada2060d2c4b6e",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/09/faa-tees-up-875m-ai-tool-to-help-manage-air-traffic-congestion/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T19:20:50.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "FAA tees up $875M AI tool to help manage air traffic congestion",
-        "summary": "FAA plans for AI tool to help manage DC air traffic before a nationwide rollout.",
-        "body": "An AI tool is set to start advising air traffic controllers on managing air traffic in the congested airspace above the Washington, DC, area. The expected launch would be the first step toward a planned nationwide rollout covering the 29 million square miles of US national airspace overseen by the Federal Aviation Administration.\n\nThe FAA describes the SMART system as using AI models to predict air traffic flows and identify potential conflicts based on operational factors like airline schedules, weather, airport capacity, and airspace conditions. US government and industry officials told The Wall Street Journal that SMART could debut for the three major airports in the Washington, DC, area as soon as Monday, September 21.\n\nThe decision to launch SMART in a limited scope before going nationwide is the “right call,” said Philip Mann, principal consultant at Vector Strategic Consulting LLC, where he advises on aviation safety and AI governance. Mann previously worked at the FAA in multiple roles for 17 years.\n\nRead full article\n\nComments"
       }
     },
     "media": null

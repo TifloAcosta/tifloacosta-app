@@ -41,12 +41,12 @@ test('Actualidad home labels are bilingual', async () => {
 test('service worker keeps Actualidad scripts cached and its catalogs live', async () => {
   const worker = await read('sw.js');
   assert.match(worker, /'\.\/actualidad-core\.js\?v=1\.6'/);
-  assert.match(worker, /'\.\/actualidad\.js\?v=1\.2'/);
+  assert.match(worker, /'\.\/actualidad\.js\?v=1\.3'/);
   assert.match(worker, /'\.\/actualidad-media\.js\?v=1\.1'/);
   assert.match(worker, /'\/actualidad\.json'/);
   assert.match(worker, /'\/actualidad-apps\.json'/);
   assert.match(worker, /'\/actualidad-media\.json'/);
   assert.match(worker, /request\.mode === 'navigate'/);
   assert.match(worker, /LIVE_PATHS\.has\(url\.pathname\)/);
-  assert.match(worker, /tifloacosta-app-v2-19-contextual-search/);
+  assert.match(worker, /tifloacosta-app-v2-20-actualidad-clean-reader/);
 });

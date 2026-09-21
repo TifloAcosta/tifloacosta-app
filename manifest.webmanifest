@@ -7,8 +7,8 @@
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#F5F7FA",
-  "theme_color": "#0D2B45",
+  "background_color": "#FFFFFF",
+  "theme_color": "#A61B1B",
   "icons": [
     {
       "src": "tifloacosta-icon-192.png",

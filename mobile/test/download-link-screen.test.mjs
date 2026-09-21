@@ -34,13 +34,18 @@ test('download-from-link screen exposes bilingual operational states', () => {
     'downloadsLink.noFiles', 'downloadsLink.unsupported', 'downloadsLink.unavailable',
     'downloadsLink.saveFailed', 'downloadsLink.defaultFilename'
   ];
-  for (const lang of ['es', 'en']) {
-    for (const key of keys) assert.notEqual(text(lang, key), key, `Missing ${lang} ${key}`);
-  }
+  for (const lang of ['es', 'en']) for (const key of keys) assert.notEqual(text(lang, key), key, `Missing ${lang} ${key}`);
 });
 
 test('save action uses a safe filename, MIME type and never renders without an item URL', () => {
   assert.match(source, /if\s*\(!item\?\.url\)\s*return/);
   assert.match(source, /filename:\s*item\.name\s*\|\|\s*t\('downloadsLink\.defaultFilename'\)/);
   assert.match(source, /mimeType:\s*mimeFromType\(item\.type\)/);
+});
+
+test('download-from-link screen accepts an explicit shared URL and only auto-analyzes when requested', () => {
+  assert.match(source, /initialUrl/);
+  assert.match(source, /analyzeOnOpen/);
+  assert.match(source, /input\.value\s*=\s*String\(initialUrl/);
+  assert.match(source, /if\s*\(analyzeOnOpen/);
 });

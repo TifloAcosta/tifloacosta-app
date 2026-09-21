@@ -39,11 +39,7 @@ test('navigate pushes a screen and back restores the origin on the previous scre
 
 test('Downloads link Back returns to Downloads and restores the launcher focus', () => {
   const restored = [];
-  const router = createRouter({
-    render: () => {},
-    focusScreenHeading: () => {},
-    restoreOriginFocus: originId => restored.push(originId)
-  });
+  const router = createRouter({ render: () => {}, focusScreenHeading: () => {}, restoreOriginFocus: originId => restored.push(originId) });
   router.start('home');
   router.navigate('downloads', { originId: 'home-downloads' });
   router.navigate('downloads-link', { originId: 'downloads-open-link' });
@@ -54,11 +50,7 @@ test('Downloads link Back returns to Downloads and restores the launcher focus',
 
 test('Sound search Back returns to Downloads and restores the launcher focus', () => {
   const restored = [];
-  const router = createRouter({
-    render: () => {},
-    focusScreenHeading: () => {},
-    restoreOriginFocus: originId => restored.push(originId)
-  });
+  const router = createRouter({ render: () => {}, focusScreenHeading: () => {}, restoreOriginFocus: originId => restored.push(originId) });
   router.start('home');
   router.navigate('downloads', { originId: 'home-downloads' });
   router.navigate('downloads-sounds', { originId: 'downloads-open-sounds' });
@@ -104,4 +96,46 @@ test('restoreOriginFocus focuses the requested control and handles missing contr
   assert.equal(focused, true);
   assert.equal(restoreOriginFocus(root, 'missing-control'), false);
   assert.equal(restoreOriginFocus(root, ''), false);
+});
+
+test('router snapshot and restore preserve the full stack including origin ids', () => {
+  const renders = [];
+  let focuses = 0;
+  const router = createRouter({
+    render: route => renders.push(route),
+    focusScreenHeading: () => { focuses += 1; },
+    restoreOriginFocus: () => {}
+  });
+  router.start('home');
+  router.navigate('search', { originId: 'home-search' });
+  router.navigate('library', { originId: 'result-r1' });
+  const saved = router.snapshot();
+
+  router.start('share');
+  const rendersBeforeRestore = renders.length;
+  router.restore(saved, { renderCurrent: false, focus: false });
+  assert.deepEqual(router.current(), { name: 'library', originId: 'result-r1' });
+  assert.equal(renders.length, rendersBeforeRestore);
+
+  router.navigate('settings', { originId: 'library-settings' });
+  assert.deepEqual(saved, [
+    { name: 'home', originId: null },
+    { name: 'search', originId: 'home-search' },
+    { name: 'library', originId: 'result-r1' }
+  ]);
+});
+
+test('router restore can render and focus the restored current route', () => {
+  const renders = [];
+  let focuses = 0;
+  const router = createRouter({
+    render: route => renders.push(route),
+    focusScreenHeading: () => { focuses += 1; },
+    restoreOriginFocus: () => {}
+  });
+  router.start('home');
+  const baselineFocuses = focuses;
+  router.restore([{ name: 'home', originId: null }, { name: 'videos', originId: 'home-videos' }], { renderCurrent: true, focus: true });
+  assert.deepEqual(renders.at(-1), { name: 'videos', originId: 'home-videos' });
+  assert.equal(focuses, baselineFocuses + 1);
 });

@@ -1,7 +1,8 @@
-export function createNativeActions({ appPlugin, sharePlugin, browserPlugin, savePlugin } = {}) {
-  async function installBackHandler(router) {
+export function createNativeActions({ appPlugin, sharePlugin, browserPlugin, savePlugin, tifloSharePlugin } = {}) {
+  async function installBackHandler(router, { beforeBack = null } = {}) {
     if (!appPlugin?.addListener || !router?.back) return null;
     return appPlugin.addListener('backButton', async () => {
+      if (typeof beforeBack === 'function' && await beforeBack()) return;
       const handled = router.back();
       if (!handled && appPlugin?.exitApp) await appPlugin.exitApp();
     });
@@ -42,5 +43,15 @@ export function createNativeActions({ appPlugin, sharePlugin, browserPlugin, sav
     }
   }
 
-  return { installBackHandler, share, openExternal, saveFile };
+  async function finishSharedFlow() {
+    if (!tifloSharePlugin?.finishShare) return false;
+    try {
+      const result = await tifloSharePlugin.finishShare();
+      return result?.finished === true;
+    } catch {
+      return false;
+    }
+  }
+
+  return { installBackHandler, share, openExternal, saveFile, finishSharedFlow };
 }

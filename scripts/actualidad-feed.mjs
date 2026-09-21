@@ -174,7 +174,18 @@ function trimTrailingPublisherNoise(paragraphs) {
   for (let index = 0; index < paragraphs.length; index += 1) {
     const paragraph = paragraphs[index];
     const marker = searchableText(paragraph);
-    if (index >= 2 && articleCharacters >= 180 && paragraph.length <= 120 && markers.has(marker)) {
+    const publisherFooter = paragraph.length <= 300 && (
+      marker.startsWith('ftc ') ||
+      marker.includes('affiliate link') ||
+      marker.includes('affiliate disclosure') ||
+      marker.includes('enlace de afiliado') ||
+      marker.includes('enlaces de afiliados') ||
+      /^check out .+ on youtube\b/.test(marker) ||
+      /^mira .+ en youtube\b/.test(marker) ||
+      /\b(?:let me know|tell us|share your thoughts)\b.*\bcomments?\b/.test(marker) ||
+      /\b(?:cuentame|cuentanos|dinos|dejame|dejanos)\b.*\bcomentarios?\b/.test(marker)
+    );
+    if (index >= 2 && articleCharacters >= 180 && ((paragraph.length <= 120 && markers.has(marker)) || publisherFooter)) {
       return paragraphs.slice(0, index);
     }
     articleCharacters += paragraph.length;

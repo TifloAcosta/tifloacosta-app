@@ -41,3 +41,5 @@ test('reader stops before trailing publisher topics, promos and recommendations'
   );
   assert.doesNotMatch(item.body, /Topics|commission|Consumer News Editor|exhibit table|thrilling developers/i);
 });
+
+// Regression for publisher content that lives inside the article container.

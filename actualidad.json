@@ -1,13 +1,36 @@
 [
   {
-    "id": "engadget-ea51244019dc0699",
+    "id": "engadget-61128c0db283bf77",
     "type": "news",
     "sourceId": "engadget",
     "sourceName": "Engadget",
     "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2260552/iphone-handoff-uses-carriers-explained/",
+    "originalUrl": "https://www.engadget.com/2260677/what-uses-most-data-smartphone/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-21T00:30:00.000Z",
+    "publishedAt": "2026-09-21T14:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "What typically uses the most data on a smartphone?",
+        "summary": "Unless it's connected to Wi-Fi all day every day, your smartphone is using up data almost constantly. Here's where your data is going.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-f4c9842c34dfc691",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/podcast/996874/apple-john-ternus-tim-cook-mark-gurman-future-ai-siri-iphone",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-21T14:00:00.000Z",
     "categories": [
       "tecnologia-general",
       "apple"
@@ -16,8 +39,176 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "One mobile number, two phones: What is iPhone handoff and which carriers support it?",
-        "summary": "If you find yourself swapping between two iPhones regularly, whether for work or casual use, you're going to want to set up Handoff.",
+        "title": "Can John Ternus find Apple’s next big thing?",
+        "summary": "Today, I’m talking with Mark Gurman, who is the world’s best-sourced Apple reporter — both as Bloomberg’s chief Apple correspondent and the host of the upcoming podcast Power On. Earlier this month, Apple hosted its annual iPhone hardware event, virtually every detail of which was reported ahead of time by Mark. But this event was […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-c25088b7802990d4",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/21/heres-everything-new-for-carplay-in-ios-27/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-21T13:40:08.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "CarPlay just got better, here’s everything new in iOS 27",
+        "summary": "iOS 27 has arrived, and with it a handful of improvements for CarPlay. Here’s everything new for CarPlay in iOS 27. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-1618b38fab5acf23",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/998191/apple-siri-ai-iphone-16-class-action-lawsuit-settlement",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-21T13:36:52.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iPhone owners can now submit claims in Apple’s $250 million Siri AI settlement",
+        "summary": "Apple is paying $250 million to settle claims that it failed to deliver an AI-upgraded Siri - and now, eligible iPhone owners can submit a claim for a payout. If you live in the US and purchased an iPhone 15 Pro, iPhone 15 Pro Max, or any iPhone 16 model between June 10th, 2024, and […]",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-ef6fea261a996b58",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/21/m5-ultra-mac-studio-review-roundup-a-local-ai-powerhouse/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-21T13:34:18.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "M5 Ultra Mac Studio reviews: local AI powerhouse",
+        "summary": "In addition to the new M6 Mac mini ( 9to5Mac review ), early impressions of the most powerful Mac Studio are out ahead of tomorrow’s release as well. Here’s what reviewers are saying about the upgraded M5 Ultra Mac Studio so far. more…",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-5da7d29f9d8cb039",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2260628/usb-a-vs-usb-c-differences-between-explained/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-21T13:30:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "USB-A vs. USB-C: What's the difference between them?",
+        "summary": "USB-C did away with the annoying requirement to plug in a cable right side up, but USB-A and USB-C have other major differences.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-c3617f89fa724edb",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2263649/googlebooks-a-laptop-that-works-better-with-your-android-phone/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-21T13:00:36.000Z",
+    "categories": [
+      "tecnologia-general",
+      "android"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google's pitch for Googlebooks: A laptop that works better with your Android phone",
+        "summary": "The first Googlebooks are up for pre-order today and they arrive on October 4.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-2a44eb36a39f432e",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/gadgets/2026/09/googlebook-laptops-launch-october-4-starting-at-899-preorders-for-five-models-live-today/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-21T13:00:11.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Googlebooks launch October 4 starting at $899—here are the five models you can preorder today",
+        "summary": "Googlebooks offer premium hardware and deep smartphone integration, but you may not like the price.",
+        "body": ""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-88f3b3517cdc1cb0",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/997972/googlebook-laptop-chromeos-android-history",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-21T13:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The long dream of the Googlebook",
+        "summary": "In late 2010, an up-and-coming Google executive named Sundar Pichai took the stage in front of a bunch of reporters and explained that Google had a big new idea about laptops. In the future, he said, the only thing you'd need on your computer was a web browser - that was where all your apps, […]",
         "body": ""
       }
     },
@@ -43,57 +234,6 @@
       "en": {
         "title": "RealTime Ai Cam",
         "summary": "RealTime AI Camera provides instant object detection, English OCR, and Spanish-to-English translation - all offline. Point your camera to identify 600+ objects, read text aloud, or translate Spanish text to English. Features LiDAR distance measurement on supported devices. Perfect for accessibility, language learning, and everyday assistance. Works 100% offline with no data collection. WORKS WITH VOICEOVER Every button is labeled, so you can run the whole app without seeing the screen. It reads printed text out loud, names what the camera is pointed at, and tells you how far away things are on phones with a depth sensor.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-f55211e777840928",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2260401/major-chatbot-apps-work-with-carplay/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-20T23:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Which major chatbot apps work with CarPlay?",
-        "summary": "If you aren't happy with Siri while driving, several other chatbot apps are compatible with CarPlay now.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-eb211a89600704bb",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2260287/how-to-join-facetime-call-android-phone-windows-pc/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-20T23:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "android",
-      "windows"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "How to join a FaceTime call with your Android phone or Windows PC",
-        "summary": "FaceTime isn't actually an Apple-exclusive feature. While it's not the full experience, joining calls is possible on Android and Windows devices.",
         "body": ""
       }
     },
@@ -141,56 +281,7 @@
     "locales": {
       "en": {
         "title": "Is the AI industry really ready to slow down?",
-        "summary": "On Equity, we debated whether Ai executives are serious about wanting to slow down.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-7cf707394519f7bb",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/997936/nvidia-jensen-huang-ai-fears-overblown",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-20T18:50:18.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "No one is surprised that Nvidia’s Jensen Huang thinks AI fears are overblown.",
-        "summary": "The man who may stand to make the most money from the AI boom seems to think he knows better than anyone else, including researchers who have studied and worked on AI for decades. In an interview with CBS Sunday Morning, he claimed there was a \"0% chance\" of AI being the end of the […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-5dd2cd059999caff",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/20/five-ways-that-the-new-siri-ai-is-frustrating-iphone-and-apple-watch-users/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-20T18:35:12.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Five ways that the new Siri AI is frustrating iPhone and Apple Watch users",
-        "summary": "The new version of Siri, Siri AI, launched to the masses this month as part of iOS 27. The new Siri is rolling out gradually to users via a waitlist, and is labelled as a ‘beta’ indicating that Apple still has some work to do in follow-up releases. The new Siri is much better at answering questions with access to rich knowledge, can search through your messages and notes for personal context queries, and can take action based on what is on your screen with onscreen awareness. However, the new Siri is not being welcomed with open arms by everyone … more…",
+        "summary": "On Equity, we debated whether AI executives are serious about wanting to slow down.",
         "body": ""
       }
     },
@@ -213,7 +304,7 @@
     "locales": {
       "en": {
         "title": "Vocci’s ring adds a new form factor to meeting note-taking",
-        "summary": "Vocci's lightweight ring costs $249, and might pose some privacy questions",
+        "summary": "Vocci's lightweight ring costs $249, and might pose some privacy questions.",
         "body": ""
       }
     },
@@ -262,78 +353,6 @@
       "en": {
         "title": "TechCrunch Mobility: How do we know when an AV is safe enough?",
         "summary": "Welcome back to TechCrunch Mobility, your hub for the future of transportation and now, more than ever, the role AI is playing in it. To get this in your inbox, sign up here for free — just click TechCrunch Mobility!",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-0f3cab07b705142c",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/997867/trump-ai-force-ai-czar",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-20T15:39:22.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Trump now says he wants to form an ‘AI Force’",
-        "summary": "The president posted on Truth Social that he wanted to appoint an \"AI czar\" to lead a new \"AI force.\" He made the announcement amid growing calls from across the political spectrum and even within the industry to pump the brakes on AI development. He posted that his administration \"will not in any way hinder […]",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-8ea0048d6b6c944c",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/20/heres-why-apple-scrapped-its-shorter-apple-pencil-designed-for-iphone-duo-report/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-20T14:38:43.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Here’s why Apple scrapped its shorter Apple Pencil designed for iPhone Duo: report",
-        "summary": "Leading into the iPhone Duo launch, we heard from Bloomberg’s Mark Gurman that Apple was considering a new Apple Pencil for iPhone Duo, though it was unlikely that the company would go forward with it. Of course, the iPhone Duo keynote came, and Apple did announce support for the USB-C Apple Pencil. Here’s how that happened. more…",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-9e87b2adce8f83a8",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/science/997834/ai-cyberattack-energy-critical-infrastructure",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-20T12:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Humans, not rogue AI, are still the biggest cybersecurity risk to energy systems",
-        "summary": "Before recent high-profile hacks raised the specter of AI possibly \"killing all humans,\" our energy systems were already disturbingly vulnerable to cyberattack - and the risk is growing. \"We were always prey. We were just kind of surviving at the appetite of our predators,\" Joshua Corman, executive in residence for public safety and resilience at […]",
         "body": ""
       }
     },
@@ -407,30 +426,6 @@
       "en": {
         "title": "FAA tees up $875M AI tool to help manage air traffic congestion",
         "summary": "FAA plans for AI tool to help manage DC air traffic before a nationwide rollout.",
-        "body": ""
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-56f999d3e802001c",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/tech-policy/2026/09/us-government-website-used-chinese-model-the-fbi-called-malicious/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T17:28:50.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "US government website used Chinese model the FBI called \"malicious\"",
-        "summary": "The Federal Register website briefly used an open source Chinese AI search tool.",
         "body": ""
       }
     },

@@ -61,6 +61,8 @@ No se utilizarán botones ambiguos como “Aceptar”, “Continuar” o “Más
 - “Volver a la página anterior”.
 - “Cancelar y volver”.
 
+Cuando no exista una clasificación suficientemente clara, la pantalla mostrará como máximo tres acciones posibles, además de “Cancelar y volver”. No se crearán menús extensos para resolver una duda del clasificador.
+
 Las operaciones asíncronas usarán una región de estado accesible para mensajes como “Preparando lectura” o “Analizando enlace”. El foco no saltará mientras una operación esté en curso. Cuando aparezca un contenido nuevo, el foco irá al encabezado de ese contenido.
 
 No habrá reproducción automática de vídeo, locuciones propias, sonidos de confirmación ni elementos que hablen encima del lector de pantalla.
@@ -139,6 +141,8 @@ La nueva entrada no duplicará funciones actuales.
 
 **Búsqueda:** el texto puro se precargará en el buscador general. No se ejecutará la búsqueda automáticamente; el usuario conservará la decisión de iniciarla.
 
+Cuando estas funciones se abran desde una sesión de Compartir, conservarán ese contexto: cerrar el reproductor, retroceder desde Descargas o volver desde la búsqueda regresará al punto correspondiente de la sesión de Compartir, no a Inicio ni a la navegación ordinaria de TifloAcosta.
+
 ## 5. Lectura limpia de páginas externas
 
 ### 5.1 Obtención de la página
@@ -154,6 +158,8 @@ Motivos:
 ### 5.2 Limpieza
 
 El limpiador reutilizará y generalizará las ideas ya presentes en la extracción de Actualidad, pero estará aislado como componente propio para páginas arbitrarias.
+
+La lectura mostrará como contexto el título y, cuando pueda determinarse, el nombre o dominio de la fuente, sin convertir ese dominio en un enlace de salida.
 
 Se eliminarán de forma preferente:
 
@@ -174,10 +180,14 @@ Se conservarán cuando formen parte real del contenido:
 - encabezados;
 - párrafos;
 - listas;
-- enlaces a artículos, capítulos, recursos, secciones o contenidos concretos;
+- enlaces HTTP/HTTPS a artículos, capítulos, recursos, secciones o contenidos concretos;
 - índices de plataformas cuyo contenido principal sea precisamente una colección de enlaces útiles.
 
+Se eliminarán como elementos interactivos los enlaces publicitarios, promocionales, de afiliación, navegación general o protocolos distintos de HTTP/HTTPS.
+
 Los enlaces conservados deben presentar un texto comprensible. Si la página solo aporta un rótulo genérico y no existe información fiable para mejorarlo, se conservará el texto original en lugar de inventar un destino.
+
+La lectura limpia normal no ofrecerá un botón “Abrir página original”. El usuario ya dispone del enlace original en la aplicación desde la que decidió compartirlo y puede regresar a ella finalizando la sesión.
 
 ### 5.3 Navegación limpia interna
 
@@ -233,6 +243,7 @@ Todo contenido remoto se considera no fiable.
 - No se registrarán por defecto las URLs compartidas en un historial permanente.
 - No se enviarán al backend de TifloAcosta las URLs de lectura limpia en esta primera versión.
 - Los redireccionamientos y protocolos se validarán antes de seguirse.
+- La obtención nativa no reutilizará sesiones autenticadas del navegador ni intentará copiar cookies de otras aplicaciones.
 
 ## 8. Estado, foco y salida
 
@@ -325,6 +336,7 @@ La primera versión se considera lista para probar cuando:
 8. Cancelar o terminar coloca TifloAcosta en segundo plano y Android muestra la tarea anterior disponible.
 9. Los fallos de red, lectura o acceso no bloquean la interfaz ni dejan estados infinitos.
 10. Ningún contenido compartido se guarda permanentemente sin una acción futura y explícita del usuario.
+11. Las funciones reutilizadas desde Compartir regresan a la sesión de Compartir al cerrarse o retroceder, sin expulsar al usuario a Inicio.
 
 ## 12. Evolución posterior
 

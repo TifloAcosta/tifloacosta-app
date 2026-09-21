@@ -147,6 +147,41 @@ function jsonLdArticleBody(html) {
   return '';
 }
 
+function trimTrailingPublisherNoise(paragraphs) {
+  const markers = new Set([
+    'topics',
+    'tags',
+    'related stories',
+    'recommended',
+    'recommended stories',
+    'more stories',
+    'read more',
+    'latest',
+    'about the author',
+    'temas',
+    'etiquetas',
+    'historias relacionadas',
+    'articulos relacionados',
+    'recomendado',
+    'recomendados',
+    'mas historias',
+    'leer mas',
+    'ultimas noticias',
+    'sobre el autor'
+  ]);
+
+  let articleCharacters = 0;
+  for (let index = 0; index < paragraphs.length; index += 1) {
+    const paragraph = paragraphs[index];
+    const marker = searchableText(paragraph);
+    if (index >= 2 && articleCharacters >= 180 && paragraph.length <= 120 && markers.has(marker)) {
+      return paragraphs.slice(0, index);
+    }
+    articleCharacters += paragraph.length;
+  }
+  return paragraphs;
+}
+
 export function extractReadableText(html) {
   const text = String(html || '').trim();
   if (!text) return '';
@@ -161,7 +196,7 @@ export function extractReadableText(html) {
     for (const paragraph of paragraphs) {
       if (unique[unique.length - 1] !== paragraph) unique.push(paragraph);
     }
-    return unique.join('\n\n');
+    return trimTrailingPublisherNoise(unique).join('\n\n');
   }
 
   const structured = jsonLdArticleBody(text);

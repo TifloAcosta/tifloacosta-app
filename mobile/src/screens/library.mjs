@@ -1,3 +1,4 @@
+import { resolveLocal } from '../core/downloads.mjs';
 import { addExternalLink, addParagraph, addScreenHeader, addShareButton, clearScreen } from './shared.mjs';
 
 function addFavoriteButton(parent, item, favoritesStore, t) {
@@ -28,6 +29,13 @@ function filenameFromUrl(url, fallbackId) {
   return `${String(fallbackId || 'recurso')}.bin`;
 }
 
+function filenameForResource(item, url) {
+  const filename = filenameFromUrl(url, '');
+  const genericNames = new Set(['view', 'uc', 'download']);
+  if (filename && !genericNames.has(filename.toLowerCase()) && !filename.endsWith('.bin')) return filename;
+  return String(item?.title || item?.id || 'recurso').trim() || 'recurso';
+}
+
 function mimeTypeFromFilename(filename) {
   const lower = String(filename || '').toLowerCase();
   if (lower.endsWith('.pdf')) return 'application/pdf';
@@ -40,15 +48,21 @@ function mimeTypeFromFilename(filename) {
 
 function addSaveButton(parent, item, url, nativeActions, t) {
   if (!nativeActions?.saveFile) return;
-  const filename = filenameFromUrl(url, item.id);
+  const resolved = resolveLocal(url);
+  const resolvedItem = resolved.kind === 'result' && resolved.items.length ? resolved.items[0] : null;
+  const targetUrl = resolvedItem?.url || url;
+  const filename = filenameForResource(item, url);
+  const mimeType = resolvedItem?.type && resolvedItem.type !== 'unknown'
+    ? mimeTypeFromFilename(`archivo.${resolvedItem.type}`)
+    : mimeTypeFromFilename(filename);
   const button = document.createElement('button');
   button.type = 'button';
   button.textContent = `${t('library.download')}: ${item.title || filename}`;
   button.addEventListener('click', () => {
     void nativeActions?.saveFile({
-      url,
+      url: targetUrl,
       filename,
-      mimeType: mimeTypeFromFilename(filename)
+      mimeType
     });
   });
   parent.append(button);
@@ -75,19 +89,24 @@ export function renderLibrary({ root, router, content, preferences, favoritesSto
     article.append(title);
     if (item.category) addParagraph(article, item.category, 'muted');
 
-    const url = item.openUrl || item.url || '';
-    if (url) {
+    const openUrl = item.openUrl || item.url || '';
+    const downloadUrl = item.url || item.openUrl || '';
+    if (openUrl) {
       addExternalLink(article, {
-        href: url,
+        href: openUrl,
         label: `${t('library.open')}: ${item.title || ''}`,
         onOpen: nativeActions?.openExternal
       });
-      addSaveButton(article, item, url, nativeActions, t);
+    }
+    if (downloadUrl) addSaveButton(article, item, downloadUrl, nativeActions, t);
+
+    const shareUrl = openUrl || downloadUrl;
+    if (shareUrl) {
       addShareButton(article, {
         label: t('common.share'),
         title: item.title || '',
         text: item.category || '',
-        url,
+        url: shareUrl,
         onShare: nativeActions?.share
       });
     }

@@ -19,7 +19,7 @@
   function availableActions(story, lang = 'es') {
     const copy = labels[lang] || labels.es;
     const actions = [];
-    if (story?.editorialState === 'adapted' && String(story?.body || '').trim()) {
+    if (String(story?.body || '').trim()) {
       actions.push({ kind: 'read', label: copy.read });
     }
     if (story?.originalUrl) actions.push({ kind: 'original', label: copy.original, url: story.originalUrl });
@@ -280,7 +280,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     }
 
     function openReader(story, opener) {
-      if (story.editorialState !== 'adapted' || !String(story.body || '').trim()) return;
+      if (!String(story.body || '').trim()) return;
       readerOpener = opener;
       els.sectionsNav.hidden = true;
       els.browser.hidden = true;

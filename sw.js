@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-18-downloads-simple';
+const CACHE = 'tifloacosta-app-v2-19-contextual-search';
 const NAVIGATION_TIMEOUT_MS = 5000;
 const SHELL = [
   './',
@@ -6,6 +6,8 @@ const SHELL = [
   './styles.css?v=1.2',
   './data.js?v=0.19',
   './app-core.js?v=1.6',
+  './search-accessibility.js?v=1.1',
+  './contextual-search.js?v=1.0',
   './downloads-core.js?v=1.1',
   './download-config.js?v=1.1',
   './downloads.js?v=1.4',

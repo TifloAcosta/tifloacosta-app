@@ -2,7 +2,12 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
-const styles = await readFile(new URL('../styles.css', import.meta.url), 'utf8');
+const [styles, worker, manifestText] = await Promise.all([
+  readFile(new URL('../styles.css', import.meta.url), 'utf8'),
+  readFile(new URL('../sw.js', import.meta.url), 'utf8'),
+  readFile(new URL('../manifest.webmanifest', import.meta.url), 'utf8')
+]);
+const manifest = JSON.parse(manifestText);
 
 function hexToRgb(hex) {
   const value = hex.replace('#', '');
@@ -42,4 +47,11 @@ test('el cambio de color conserva el marco fluido y los ajustes de lectura', () 
   assert.match(styles, /\.wrap\s*\{\s*width:94vw;\s*margin-inline:auto;\s*\}/);
   assert.match(styles, /grid-template-columns:repeat\(auto-fit,minmax\(min\(100%,14rem\),1fr\)\)/);
   assert.match(styles, /button,.button-link\s*\{[^}]*min-height:2\.75rem;[^}]*padding:\.65rem \.95rem/s);
+});
+
+test('la PWA fuerza una generación nueva del tema y usa el rojo de identidad', () => {
+  assert.match(worker, /tifloacosta-app-v2-21-red-white-theme/);
+  assert.match(worker, /\.\/styles\.css\?v=1\.2/);
+  assert.equal(manifest.theme_color, '#A61B1B');
+  assert.equal(manifest.background_color, '#FFFFFF');
 });

@@ -1,0 +1,31 @@
+name: Test TifloAcosta theme
+
+on:
+  push:
+    branches:
+      - 'feature/tifloacosta-red-white-theme'
+    paths:
+      - 'styles.css'
+      - 'test/theme-tifloacosta-colors.test.mjs'
+      - '.github/workflows/test-theme-tifloacosta.yml'
+  pull_request:
+    paths:
+      - 'styles.css'
+      - 'test/theme-tifloacosta-colors.test.mjs'
+      - '.github/workflows/test-theme-tifloacosta.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run theme regression test
+        run: node --test test/theme-tifloacosta-colors.test.mjs
+      - name: Run repository tests
+        run: npm test

@@ -59,3 +59,8 @@ test('native web fetch plugin enforces the approved safety limits and content ty
     assert.match(wrapper, new RegExp(code));
   }
 });
+
+test('native web fetch rejection passes an Exception to the Capacitor PluginCall API', async () => {
+  const fetchPlugin = await read('android/app/src/main/java/com/tifloacosta/app/TifloWebFetchPlugin.java');
+  assert.match(fetchPlugin, /private void reject\(PluginCall call, String code, String message, Exception error\)/);
+});

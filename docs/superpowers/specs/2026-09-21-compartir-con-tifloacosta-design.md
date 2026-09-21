@@ -12,11 +12,11 @@ El éxito de esta primera versión significa:
 
 - TifloAcosta aparece como destino de Compartir para texto y enlaces.
 - El usuario siempre sabe qué se ha recibido, qué propone hacer la aplicación y cómo volver.
-- Los enlaces de YouTube se abren en el reproductor accesible de TifloAcosta, no se desvían de nuevo a YouTube salvo que el reproductor no pueda utilizarlos.
+- Los enlaces de YouTube se abren en el reproductor accesible de TifloAcosta. Solo si ese reproductor falla se ofrece la apertura en YouTube como salida de emergencia.
 - Los enlaces claramente descargables se entregan al analizador existente de Descargas.
 - Las páginas web normales se intentan presentar en una lectura limpia y navegable.
 - El texto puro puede enviarse al buscador de TifloAcosta.
-- Al terminar el flujo, TifloAcosta devuelve el control a la aplicación anterior mediante el comportamiento nativo de tareas de Android.
+- Al terminar el flujo, TifloAcosta se envía al segundo plano mediante Android; cuando la aplicación de origen siga siendo la tarea anterior disponible, el usuario regresará a ella.
 
 ## 2. Alcance de la primera versión
 
@@ -73,16 +73,32 @@ La lectura limpia conservará estructura semántica útil: encabezados, párrafo
 
 `AndroidManifest.xml` registrará la aplicación como destino para `android.intent.action.SEND` con contenido textual. La primera versión no registrará recepción de archivos ni lotes.
 
-Se añadirá un puente nativo propio, por ejemplo `TifloSharePlugin`, registrado junto a los plugins nativos actuales. Su responsabilidad será únicamente:
+Se añadirá un puente nativo propio, `TifloSharePlugin`, registrado junto a los plugins nativos actuales. Su responsabilidad será únicamente:
 
 1. Leer el `Intent` inicial si la aplicación se abre desde Compartir.
 2. Leer nuevos `Intent` recibidos mientras `MainActivity` ya existe (`singleTask`).
 3. Normalizar el texto recibido y entregarlo a la capa Capacitor.
-4. Exponer una acción nativa para finalizar el flujo de Compartir y devolver TifloAcosta al fondo de la pila de tareas mediante `moveTaskToBack(true)`, permitiendo que Android revele la aplicación anterior.
+4. Exponer una acción nativa para finalizar el flujo de Compartir y devolver TifloAcosta al fondo de la pila de tareas mediante `moveTaskToBack(true)`.
 
-El plugin no clasificará URLs ni decidirá qué función debe abrirse.
+El plugin no clasificará URLs, no descargará páginas y no decidirá qué función debe abrirse.
 
-### 4.2 Flujo Compartir en Capacitor
+### 4.2 Obtención nativa de páginas
+
+La obtención de HTML externo se aislará en un segundo puente nativo, `TifloWebFetchPlugin`, para no mezclar recepción de Intents con red.
+
+Este componente:
+
+- solo aceptará URLs `http` o `https`;
+- permitirá como máximo 5 redirecciones;
+- aplicará un tiempo máximo total de 15 segundos por solicitud;
+- rechazará cuerpos superiores a 5 MiB;
+- aceptará para lectura limpia `text/html`, `application/xhtml+xml` y `text/plain`;
+- devolverá URL final, código de estado, tipo de contenido y cuerpo textual;
+- no ejecutará JavaScript ni cargará la página en un WebView.
+
+Estos límites pertenecen al diseño de la primera versión y podrán revisarse posteriormente solo si las pruebas reales muestran una necesidad concreta.
+
+### 4.3 Flujo Compartir en Capacitor
 
 La capa JavaScript tendrá una sesión efímera de Compartir separada de la navegación normal. La apertura habitual de TifloAcosta seguirá empezando en Inicio.
 
@@ -96,7 +112,7 @@ La sesión contendrá:
 
 Cada nuevo `ACTION_SEND` reemplaza completamente la sesión anterior. No se arrastrará contenido compartido de una entrada previa.
 
-### 4.3 Clasificador
+### 4.4 Clasificador
 
 La clasificación será determinista y conservadora. No utilizará IA.
 
@@ -109,15 +125,15 @@ Orden de decisión:
 5. Cualquier otra URL HTTP/HTTPS se trata como página web candidata a lectura limpia.
 6. Si no hay URL, tratar el contenido como texto y ofrecer “Buscar en TifloAcosta”.
 
-Las URLs acortadas podrán resolverse mediante redirecciones controladas. Tras obtener el destino final, la clasificación se ejecutará de nuevo.
+Las URLs acortadas se resolverán mediante las redirecciones controladas del componente nativo. Tras obtener el destino final, la clasificación se ejecutará de nuevo.
 
 Si una URL no puede validarse, TifloAcosta no intentará repararla de forma especulativa.
 
-### 4.4 Adaptadores a funciones existentes
+### 4.5 Adaptadores a funciones existentes
 
 La nueva entrada no duplicará funciones actuales.
 
-**Vídeos:** se extraerá la lógica reutilizable que reconoce el identificador de YouTube y abre el reproductor accesible para permitir vídeos externos al catálogo. El reproductor existente seguirá proporcionando controles de retroceso, reproducción/pausa, avance y cierre.
+**Vídeos:** se extraerá la lógica reutilizable que reconoce el identificador de YouTube y abre el reproductor accesible para permitir vídeos externos al catálogo. El reproductor existente seguirá proporcionando controles de retroceso, reproducción/pausa, avance y cierre. Si el reproductor no puede preparar el vídeo, entonces se podrá ofrecer “Abrir en YouTube” como salida de emergencia.
 
 **Descargas:** la sesión Compartir entregará la URL al flujo existente de “Descargar desde un enlace”, evitando crear un segundo analizador.
 
@@ -127,15 +143,13 @@ La nueva entrada no duplicará funciones actuales.
 
 ### 5.1 Obtención de la página
 
-La descarga del HTML se realizará mediante Android nativo, no mediante `fetch` del WebView y no mediante un servidor de TifloAcosta.
+La descarga del HTML se realizará mediante `TifloWebFetchPlugin`, no mediante `fetch` del WebView y no mediante un servidor de TifloAcosta.
 
 Motivos:
 
 - evita bloqueos CORS propios del WebView;
 - no envía al servidor de TifloAcosta las URLs privadas o sensibles que el usuario decida compartir;
 - permite controlar tiempo, tamaño y redirecciones antes de entregar contenido a JavaScript.
-
-La capa nativa devolverá únicamente los datos necesarios para procesar la respuesta: URL final, código de estado, tipo de contenido relevante y cuerpo textual cuando sea aceptable.
 
 ### 5.2 Limpieza
 
@@ -167,13 +181,17 @@ Los enlaces conservados deben presentar un texto comprensible. Si la página sol
 
 ### 5.3 Navegación limpia interna
 
-Al activar un enlace útil conservado, TifloAcosta no abrirá inmediatamente el navegador. Intentará obtener y limpiar ese nuevo destino dentro de la misma sesión.
+Al activar un enlace útil conservado, el destino vuelve primero al clasificador general de la sesión.
 
-La sesión mantendrá una pila de navegación:
+- Si es YouTube, se abre el reproductor accesible.
+- Si es una descarga conocida, se abre el analizador de Descargas.
+- Si es otra página web, se obtiene y limpia dentro de la misma sesión.
+
+La sesión mantendrá una pila de navegación para páginas limpias:
 
 `Página compartida → Página 2 → Página 3`
 
-El botón Volver retrocederá una página cada vez. Desde la primera página compartida, Volver finalizará la sesión de Compartir y devolverá TifloAcosta al fondo para recuperar la aplicación anterior.
+El botón Volver retrocederá una página cada vez. Desde la primera página compartida, Volver finalizará la sesión de Compartir y enviará TifloAcosta al segundo plano para que Android muestre la tarea anterior disponible.
 
 No se guardará este historial de forma permanente.
 
@@ -189,7 +207,7 @@ Se muestra un mensaje humano y breve con “Reintentar” y “Cancelar y volver
 
 ### Lectura no fiable
 
-Si no se obtiene suficiente contenido útil o el resultado no cumple los criterios mínimos de lectura, la aplicación no presenta basura como si fuese una lectura correcta. Informa de que no ha podido preparar una versión fiable y ofrece, cuando tenga sentido, “Analizar descargas” y “Cancelar y volver”.
+Si no se obtiene suficiente contenido útil o el resultado no cumple los criterios mínimos de lectura, la aplicación no presenta basura como si fuese una lectura correcta. Informa de que no ha podido preparar una versión fiable y ofrece “Analizar descargas” y “Cancelar y volver”.
 
 ### Contenido protegido
 
@@ -197,11 +215,11 @@ Si la página exige autenticación, muestra un muro de pago o bloquea el acceso,
 
 ### Redirecciones
 
-Se limita el número de redirecciones y solo se aceptan destinos HTTP/HTTPS. Después de resolverlas se vuelve a clasificar el destino final.
+Se aceptan como máximo 5 redirecciones y solo destinos HTTP/HTTPS. Después de resolverlas se vuelve a clasificar el destino final.
 
 ### Tipo o tamaño no aceptable
 
-La capa nativa rechazará respuestas que no sean apropiadas para lectura textual o que superen un límite razonable definido en implementación. Un rechazo debe producir un error controlado, nunca bloquear la interfaz.
+`TifloWebFetchPlugin` rechazará respuestas fuera de los tipos textuales admitidos o superiores a 5 MiB. El rechazo producirá un mensaje accesible y controlado, nunca un bloqueo de la interfaz.
 
 ## 7. Seguridad y privacidad
 
@@ -227,13 +245,16 @@ Al finalizar o cancelar:
 3. se invoca la salida nativa del flujo;
 4. Android coloca la tarea de TifloAcosta en segundo plano mediante `moveTaskToBack(true)` y muestra la tarea anterior disponible.
 
+Normalmente esa tarea será la aplicación desde la que se invocó Compartir. Si Android ya no conserva esa aplicación como tarea anterior, el sistema mostrará la siguiente tarea disponible; TifloAcosta no intentará reconstruir artificialmente una aplicación de origen que el sistema haya eliminado.
+
 Si TifloAcosta estaba ya abierta antes de recibir el contenido, su estado normal queda disponible cuando el usuario vuelva a abrirla posteriormente.
 
 ## 9. Componentes previstos
 
-La implementación deberá mantener unidades pequeñas y probables de forma independiente. Los nombres definitivos pueden ajustarse al estilo del repositorio, pero las responsabilidades serán estas:
+La implementación deberá mantener unidades pequeñas y comprobables de forma independiente. Los nombres definitivos podrán ajustarse al estilo del repositorio, pero las responsabilidades serán estas:
 
-- `TifloSharePlugin` / código Android: recepción de `Intent`, obtención nativa de páginas y salida de la sesión.
+- `TifloSharePlugin`: recepción de `Intent` y salida de la sesión.
+- `TifloWebFetchPlugin`: obtención segura y limitada de páginas externas.
 - `share-session`: estado efímero e historial.
 - `share-classifier`: extracción y clasificación de URLs/texto.
 - `readable-page`: conversión segura de HTML a modelo de lectura.
@@ -255,6 +276,7 @@ El componente de obtención de red y el limpiador permanecerán separados: uno o
 - re-clasificación tras redirección;
 - limpieza de publicidad, navegación, comentarios y scripts;
 - conservación de encabezados, listas y enlaces editoriales útiles;
+- retorno de enlaces conservados al clasificador general;
 - historial interno de lectura limpia;
 - reinicio completo de la sesión ante un nuevo contenido compartido.
 
@@ -262,16 +284,18 @@ El componente de obtención de red y el limpiador permanecerán separados: uno o
 
 - aplicación cerrada + compartir URL;
 - aplicación ya abierta + compartir URL;
-- cancelar y volver a la aplicación anterior;
+- cancelar y volver a la tarea anterior;
 - URL de YouTube externa al catálogo;
+- fallo del reproductor de YouTube y aparición del escape a YouTube;
 - proveedor de descargas;
 - artículo normal;
 - página índice con varios enlaces útiles;
 - URL acortada;
 - red sin conexión;
-- timeout;
+- timeout de 15 segundos;
+- más de 5 redirecciones;
 - autenticación o muro de pago;
-- respuesta demasiado grande o no textual.
+- respuesta superior a 5 MiB o de tipo no textual.
 
 ### Accesibilidad manual
 
@@ -296,9 +320,9 @@ La primera versión se considera lista para probar cuando:
 3. YouTube llega al reproductor accesible con control del usuario.
 4. Las URLs de descarga conocidas reutilizan el analizador existente.
 5. Una página web legible produce una representación limpia sin ejecutar contenido remoto.
-6. Los enlaces editoriales útiles conservados pueden abrirse de nuevo dentro del modo limpio.
+6. Los enlaces editoriales útiles conservados vuelven al clasificador y pueden continuar dentro del modo limpio cuando sean páginas web.
 7. Volver recorre correctamente el historial limpio y desde la raíz termina la sesión.
-8. Cancelar o terminar devuelve TifloAcosta al segundo plano y Android muestra la tarea anterior disponible.
+8. Cancelar o terminar coloca TifloAcosta en segundo plano y Android muestra la tarea anterior disponible.
 9. Los fallos de red, lectura o acceso no bloquean la interfaz ni dejan estados infinitos.
 10. Ningún contenido compartido se guarda permanentemente sin una acción futura y explícita del usuario.
 

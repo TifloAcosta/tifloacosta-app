@@ -183,6 +183,7 @@
     <h2 id="privacy-heading">Privacidad y accesibilidad</h2>
     <h3 id="privacy-subheading">Privacidad</h3>
     <p id="privacy-text">La app guarda en este navegador el idioma, los favoritos y los ajustes visuales. No necesitas crear una cuenta. Al visitar la app se carga GoatCounter para medir el uso del sitio y OneSignal para ofrecer las notificaciones; si activas estas últimas, el navegador solicita tu permiso. Los enlaces externos pueden recibir información técnica habitual de la navegación.</p>
+    <p><a class="button-link" id="privacy-full-policy" href="privacidad/">Leer la política de privacidad completa</a></p>
     <h3 id="accessibility-info-heading">Accesibilidad</h3>
     <p id="accessibility-info-text">La app usa encabezados, etiquetas y controles nativos, incluye un enlace para saltar al contenido y avisos para lector de pantalla. Respeta preferencias del sistema y permite ajustar tamaño, contraste, espaciado y grosor del texto. Si encuentras una barrera, puedes comunicarla mediante las opciones de contacto anteriores.</p>
     <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
@@ -265,6 +266,7 @@
 <div class="site-footer">
   <div class="wrap">
     <p id="footer-text">TifloAcosta App · Versión 2.1.</p>
+    <p><a id="footer-privacy-link" href="privacidad/">Política de privacidad</a></p>
   </div>
 </div>
 
@@ -290,8 +292,8 @@
   const main = document.getElementById('main');
 
   const labels = {
-    es: { sections:'Secciones', actualidad:'Actualidad', resources:'Recursos', news:'Novedades', videos:'Vídeos', book:'Mi libro', contact:'Contacto y redes', privacy:'Privacidad y accesibilidad', config:'Configuración', back:'Volver al inicio' },
-    en: { sections:'Sections', actualidad:'News', resources:'Resources', news:'What’s new', videos:'Videos', book:'My book', contact:'Contact and social', privacy:'Privacy and accessibility', config:'Settings', back:'Back to home' }
+    es: { sections:'Secciones', actualidad:'Actualidad', resources:'Recursos', news:'Novedades', videos:'Vídeos', book:'Mi libro', contact:'Contacto y redes', privacy:'Privacidad y accesibilidad', privacyPolicy:'Política de privacidad', fullPrivacy:'Leer la política de privacidad completa', config:'Configuración', back:'Volver al inicio' },
+    en: { sections:'Sections', actualidad:'News', resources:'Resources', news:'What’s new', videos:'Videos', book:'My book', contact:'Contact and social', privacy:'Privacy and accessibility', privacyPolicy:'Privacy policy', fullPrivacy:'Read the full privacy policy', config:'Settings', back:'Back to home' }
   };
 
   function localizeHomeNavigation() {
@@ -306,6 +308,8 @@
     document.getElementById('home-open-contact').textContent = text.contact;
     document.getElementById('home-open-privacy').textContent = text.privacy;
     document.getElementById('home-open-config').textContent = text.config;
+    document.getElementById('privacy-full-policy').textContent = text.fullPrivacy;
+    document.getElementById('footer-privacy-link').textContent = text.privacyPolicy;
     document.getElementById('resources-view-heading').textContent = text.resources;
     document.querySelectorAll('[data-home-back]').forEach(link => { link.textContent = text.back; });
   }

@@ -1,16 +1,15 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
-import { runAutomaticEditorial } from './actualidad-auto-adapt.mjs';
 import { mergeEditorial } from './actualidad-editorial.mjs';
-import { normalizeFeedEntry, parseCtiNewsHtml, parseFeedXml } from './actualidad-feed.mjs';
-import { createActualidadAIClient } from './openai-actualidad-client.mjs';
+import { extractReadableText, normalizeFeedEntry, parseCtiNewsHtml, parseFeedXml } from './actualidad-feed.mjs';
 
 const require = createRequire(import.meta.url);
 const core = require('../actualidad-core.js');
 const STORY_RETENTION_DAYS = 90;
 const STORY_RETENTION_MS = STORY_RETENTION_DAYS * 24 * 60 * 60 * 1000;
 const SOURCE_FETCH_ATTEMPTS = 3;
+const ARTICLE_FETCH_ATTEMPTS = 2;
 
 function sourceKey(source) {
   return String(source?.id || '');
@@ -93,7 +92,50 @@ async function fetchSource(source, fetchFn) {
   throw lastError || new Error(`Unable to fetch ${source.id}`);
 }
 
-export async function syncActualidad({ sources, editorial, fetchFn = fetch, now = new Date(), automaticEditorial = null }) {
+function previousBodies(previousStories) {
+  const bodies = new Map();
+  for (const raw of Array.isArray(previousStories) ? previousStories : []) {
+    const item = core.normalizeContent(raw);
+    if (!item?.originalUrl) continue;
+    const body = String(item.locales?.[item.originalLanguage]?.body || '').trim();
+    if (body) bodies.set(item.originalUrl, body);
+  }
+  return bodies;
+}
+
+async function fetchReadableBody(story, fetchFn) {
+  let lastError;
+  for (let attempt = 1; attempt <= ARTICLE_FETCH_ATTEMPTS; attempt += 1) {
+    try {
+      const response = await fetchFn(story.originalUrl, {
+        headers: {
+          'accept': 'text/html, application/xhtml+xml;q=0.9, */*;q=0.5',
+          'user-agent': 'TifloAcosta-Actualidad/1.0 (+https://tifloacosta.com/)'
+        }
+      });
+      if (!response?.ok) throw new Error(`HTTP ${response?.status || 'error'}`);
+      const body = extractReadableText(await response.text());
+      if (body) return body;
+      return '';
+    } catch (error) {
+      lastError = error;
+    }
+  }
+  void lastError;
+  return '';
+}
+
+async function enrichReadableBodies(items, fetchFn, cachedBodies) {
+  return Promise.all(items.map(async story => {
+    if (String(story.body || '').trim()) return story;
+    const cached = cachedBodies.get(story.originalUrl);
+    if (cached) return { ...story, body: cached };
+    const body = await fetchReadableBody(story, fetchFn);
+    return body ? { ...story, body } : story;
+  }));
+}
+
+export async function syncActualidad({ sources, editorial, fetchFn = fetch, now = new Date(), automaticEditorial = null, previousStories = [] }) {
   const enabled = (Array.isArray(sources) ? sources : [])
     .filter(source => source?.enabled !== false && source?.id && source?.feedUrl)
     .sort((a, b) => sourceKey(a).localeCompare(sourceKey(b)));
@@ -102,10 +144,12 @@ export async function syncActualidad({ sources, editorial, fetchFn = fetch, now 
 
   const failedSources = [];
   const candidates = [];
+  const cachedBodies = previousBodies(previousStories);
 
   for (const source of enabled) {
     try {
-      candidates.push(...await fetchSource(source, fetchFn));
+      const sourceStories = await fetchSource(source, fetchFn);
+      candidates.push(...await enrichReadableBodies(sourceStories, fetchFn, cachedBodies));
     } catch (error) {
       failedSources.push(source.id);
     }
@@ -150,6 +194,14 @@ async function readJson(path) {
   return JSON.parse(await readFile(path, 'utf8'));
 }
 
+async function readJsonOr(path, fallback) {
+  try {
+    return await readJson(path);
+  } catch (error) {
+    return fallback;
+  }
+}
+
 async function writeJsonIfChanged(path, value) {
   const next = `${JSON.stringify(value, null, 2)}\n`;
   let previous = '';
@@ -161,35 +213,17 @@ async function writeJsonIfChanged(path, value) {
 async function main() {
   const root = new URL('../', import.meta.url);
   const now = new Date();
-  const [sources, editorial, state, config, guidelines] = await Promise.all([
+  const [sources, editorial, previousStories] = await Promise.all([
     readJson(new URL('actualidad-sources.json', root)),
     readJson(new URL('actualidad-editorial.json', root)),
-    readJson(new URL('actualidad-auto-state.json', root)),
-    readJson(new URL('actualidad-auto-config.json', root)),
-    readFile(new URL('docs/actualidad-editorial-guidelines.md', root), 'utf8')
+    readJsonOr(new URL('actualidad.json', root), [])
   ]);
 
-  const apiKey = String(process.env.OPENAI_API_KEY || '').trim();
-  const aiClient = apiKey ? createActualidadAIClient({ apiKey, model: config.model }) : null;
-  const automaticEditorial = aiClient
-    ? sourceStories => runAutomaticEditorial({ stories: sourceStories, sources, editorial, state, aiClient, config, guidelines, now })
-    : null;
-
-  const result = await syncActualidad({ sources, editorial, fetchFn: fetch, now, automaticEditorial });
+  const result = await syncActualidad({ sources, editorial, fetchFn: fetch, now, previousStories });
   const outputChanged = await writeJsonIfChanged(new URL('actualidad.json', root), result.stories);
-  let editorialChanged = false;
-  let stateChanged = false;
 
-  if (result.automaticResult) {
-    editorialChanged = await writeJsonIfChanged(new URL('actualidad-editorial.json', root), result.automaticResult.editorial);
-    stateChanged = await writeJsonIfChanged(new URL('actualidad-auto-state.json', root), result.automaticResult.state);
-  }
-
-  if (!apiKey) console.log('Actualidad automatic adaptation: skipped (OPENAI_API_KEY not configured).');
-  if (result.automaticError) console.warn(`Actualidad automatic adaptation unavailable: ${result.automaticError}`);
   if (result.failedSources.length) console.warn(`Actualidad sources unavailable: ${result.failedSources.join(', ')}`);
-  if (result.automaticResult?.stats) console.log(`Actualidad automatic editorial: ${JSON.stringify(result.automaticResult.stats)}`);
-  console.log(`Actualidad stories: ${result.stories.length}. Changed: ${outputChanged || editorialChanged || stateChanged ? 'yes' : 'no'}.`);
+  console.log(`Actualidad stories: ${result.stories.length}. Changed: ${outputChanged ? 'yes' : 'no'}.`);
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {

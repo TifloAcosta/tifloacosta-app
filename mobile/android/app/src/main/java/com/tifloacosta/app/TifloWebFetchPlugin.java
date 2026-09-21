@@ -175,7 +175,7 @@ public class TifloWebFetchPlugin extends Plugin {
         return StandardCharsets.UTF_8;
     }
 
-    private void reject(PluginCall call, String code, String message, Throwable error) {
+    private void reject(PluginCall call, String code, String message, Exception error) {
         call.reject(message, code, error);
     }
 

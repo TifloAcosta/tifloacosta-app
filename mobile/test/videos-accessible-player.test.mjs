@@ -7,11 +7,13 @@ const read = file => readFile(new URL(`../${file}`, import.meta.url), 'utf8');
 
 test('mobile videos expose the accessible player labels in Spanish and English', () => {
   const expected = {
-    es: ['Abrir reproductor', 'Retroceder 1 minuto', 'Reproducir', 'Pausar', 'Avanzar 1 minuto', 'Cerrar reproductor y volver a los vídeos', 'Abrir este vídeo en YouTube'],
-    en: ['Open player', 'Rewind 1 minute', 'Play', 'Pause', 'Forward 1 minute', 'Close player and return to videos', 'Open this video on YouTube']
+    es: ['Abrir reproductor', 'Retroceder 1 minuto', 'Reproducir', 'Pausar', 'Avanzar 1 minuto', 'Cerrar vídeo y volver a la lista de vídeos', 'Abrir este vídeo en YouTube'],
+    en: ['Open player', 'Rewind 1 minute', 'Play', 'Pause', 'Forward 1 minute', 'Close video and return to the video list', 'Open this video on YouTube']
   };
   const keys = ['videos.play','videos.rewindOneMinute','videos.playControl','videos.pauseControl','videos.forwardOneMinute','videos.closePlayer','videos.openYouTube'];
   for (const lang of ['es', 'en']) assert.deepEqual(keys.map(key => text(lang, key)), expected[lang]);
+  assert.equal(text('es', 'nav.backHome'), 'Volver a la pantalla principal');
+  assert.equal(text('en', 'nav.backHome'), 'Return to the main screen');
 });
 
 test('mobile videos reuse an embedded YouTube player with one-minute seek and play pause controls', async () => {
@@ -20,6 +22,8 @@ test('mobile videos reuse an embedded YouTube player with one-minute seek and pl
     read('src/screens/video-player.mjs')
   ]);
   assert.match(screen, /createAccessibleVideoPlayer/);
+  assert.match(screen, /onBackStateChange/);
+  assert.match(screen, /router\.start\(['"]home['"]\)/);
   assert.match(player, /youtube\.com\/iframe_api/);
   assert.match(player, /YT\.Player|window\.YT\.Player/);
   assert.match(player, /getCurrentTime/);

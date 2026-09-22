@@ -33,7 +33,17 @@ export function renderActualidad({ root, router, content, favoritesStore, native
     const article = document.createElement('article');
     article.className = 'content-card';
     const heading = document.createElement('h2');
-    heading.textContent = item.title || '';
+    if (item.originalUrl) {
+      const openButton = document.createElement('button');
+      openButton.type = 'button';
+      openButton.textContent = item.title || '';
+      openButton.addEventListener('click', () => {
+        void nativeActions?.openExternal?.(item.originalUrl);
+      });
+      heading.append(openButton);
+    } else {
+      heading.textContent = item.title || '';
+    }
     article.append(heading);
     if (item.summary) addParagraph(article, item.summary);
     if (item.originalUrl) {

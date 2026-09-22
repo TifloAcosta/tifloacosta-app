@@ -79,18 +79,18 @@ function addShareScreenHeading(title = t('screen.share')) {
   return heading;
 }
 
-function openSharedVideo(classification) {
+function openSharedVideo(classification, originId = 'share-action-play') {
   shareSession.setClassification(classification);
-  router.navigate('share-video', { originId: 'share-action-play' });
+  router.navigate('share-video', { originId: originId || null });
 }
 
-function openSharedDownload(url) {
+function openSharedDownload(url, originId = 'share-action-downloads') {
   if (url) shareSession.selectUrl(url);
-  router.navigate('share-download', { originId: 'share-action-downloads' });
+  router.navigate('share-download', { originId: originId || null });
 }
 
-function openSharedSearch() {
-  router.navigate('share-search', { originId: 'share-action-search' });
+function openSharedSearch(_text = '', originId = 'share-action-search') {
+  router.navigate('share-search', { originId: originId || null });
 }
 
 async function finishSharedFlow() {
@@ -134,7 +134,8 @@ function renderSharedVideo(context) {
     t,
     nativeActions,
     onClose: () => router.back(),
-    allowYouTubeFallback: true
+    allowYouTubeFallback: true,
+    closeLabel: t('share.closePlayer')
   });
   context.setScreenCleanup(() => player.destroy());
   queueMicrotask(() => { void player.open(); });
@@ -258,5 +259,3 @@ contentStore.load().then(result => {
   currentContent = result.content || EMPTY_CONTENT;
   if (!shareMode && !textInputIsActive()) render(router.current());
 });
-
-export function getContent() { return currentContent; }

@@ -19,6 +19,7 @@ function freshState(generation = 0) {
 
 export function createShareSession() {
   let state = freshState();
+  let requestSequence = 0;
 
   function begin({ text = '', urls = [] } = {}) {
     const generation = state.generation + 1;
@@ -29,6 +30,17 @@ export function createShareSession() {
       urls: Array.isArray(urls) ? urls.map(value => String(value || '').trim()).filter(Boolean) : []
     };
     return snapshot();
+  }
+
+  function beginRequest() {
+    requestSequence += 1;
+    return { generation: state.generation, requestId: requestSequence };
+  }
+
+  function isCurrentRequest(token) {
+    return Boolean(token)
+      && Number(token.generation) === state.generation
+      && Number(token.requestId) === requestSequence;
   }
 
   function selectUrl(url = '') {
@@ -70,5 +82,16 @@ export function createShareSession() {
     return snapshot();
   }
 
-  return { begin, selectUrl, setClassification, pushReadable, popReadable, setView, snapshot, clear };
+  return {
+    begin,
+    beginRequest,
+    isCurrentRequest,
+    selectUrl,
+    setClassification,
+    pushReadable,
+    popReadable,
+    setView,
+    snapshot,
+    clear
+  };
 }

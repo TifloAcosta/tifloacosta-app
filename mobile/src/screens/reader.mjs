@@ -118,7 +118,7 @@ export function renderReader({ root, router, session, t, onActivateLink = null, 
       const retry = document.createElement('button');
       retry.type = 'button';
       retry.textContent = t('reader.retry');
-      retry.addEventListener('click', onRetry);
+      retry.addEventListener('click', () => onRetry(state.error?.url || state.url));
       root.append(retry);
     }
     if (state.allowOriginalFallback && state.url && typeof onOpenOriginal === 'function') {
@@ -129,6 +129,22 @@ export function renderReader({ root, router, session, t, onActivateLink = null, 
       root.append(original);
     }
     return { back: goBack };
+  }
+
+  if (state.error && page) {
+    const status = document.createElement('p');
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    status.setAttribute('aria-atomic', 'true');
+    status.textContent = t('reader.error');
+    root.append(status);
+    if (typeof onRetry === 'function') {
+      const retry = document.createElement('button');
+      retry.type = 'button';
+      retry.textContent = t('reader.retry');
+      retry.addEventListener('click', () => onRetry(state.error?.url || state.url));
+      root.append(retry);
+    }
   }
 
   if (page) {

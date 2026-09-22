@@ -14,11 +14,11 @@ test('search keeps the exact result identity for videos, resources and news', as
   );
   assert.deepEqual(
     module.searchResultAction({ kind: 'resource', id: 'doc-1', source: { openUrl: 'https://example.test/doc' } }),
-    { type: 'external', url: 'https://example.test/doc' }
+    { type: 'resource', url: 'https://example.test/doc' }
   );
   assert.deepEqual(
     module.searchResultAction({ kind: 'news', id: 'news-1', source: { originalUrl: 'https://example.test/news' } }),
-    { type: 'external', url: 'https://example.test/news' }
+    { type: 'news', url: 'https://example.test/news' }
   );
 });
 

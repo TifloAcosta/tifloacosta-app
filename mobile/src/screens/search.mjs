@@ -9,7 +9,7 @@ function groupLabel(kind, t) {
   return t('screen.actualidad');
 }
 
-function renderResults(container, status, { content, preferences, router, t, query, announce = true }) {
+function renderResults(container, status, { content, preferences, t, query, onOpenResult, announce = true }) {
   container.replaceChildren();
   const results = searchContent(content, query, preferences.lang);
 
@@ -44,7 +44,9 @@ function renderResults(container, status, { content, preferences, router, t, que
       button.id = `result-${result.kind}-${result.id}`;
       button.className = 'result-title';
       button.textContent = result.title;
-      button.addEventListener('click', () => router.navigate(result.route, { originId: button.id }));
+      button.addEventListener('click', () => {
+        if (typeof onOpenResult === 'function') onOpenResult(result, button.id);
+      });
       item.append(button);
 
       if (result.subtitle) addParagraph(item, result.subtitle, 'muted');
@@ -54,7 +56,7 @@ function renderResults(container, status, { content, preferences, router, t, que
   }
 }
 
-export function renderSearch({ root, router, content, preferences, t }) {
+export function renderSearch({ root, router, content, preferences, t, onOpenResult = null }) {
   clearScreen(root);
   addScreenHeader(root, { router, title: t('screen.search'), backLabel: t('nav.back') });
 
@@ -89,11 +91,11 @@ export function renderSearch({ root, router, content, preferences, t }) {
   form.addEventListener('submit', event => {
     event.preventDefault();
     lastQuery = input.value.trim();
-    renderResults(results, status, { content, preferences, router, t, query: lastQuery, announce: true });
+    renderResults(results, status, { content, preferences, t, query: lastQuery, onOpenResult, announce: true });
   });
 
   if (lastQuery) {
-    renderResults(results, status, { content, preferences, router, t, query: lastQuery, announce: false });
+    renderResults(results, status, { content, preferences, t, query: lastQuery, onOpenResult, announce: false });
   }
 }
 

@@ -28,6 +28,17 @@ test('keeps a useful link index even with little prose', () => {
   assert.deepEqual(links.map(link => link.text), ['VoiceOver course', 'NVDA course']);
 });
 
+test('keeps modern card-style content links that are not wrapped in paragraphs or list items', () => {
+  const page = extractReadablePage({
+    url: 'https://example.com/resources',
+    contentType: 'text/html',
+    html: '<main><h1>Resources</h1><div class="cards"><a class="card" href="/voiceover"><h2>VoiceOver course</h2></a><a class="card" href="/nvda"><h2>NVDA course</h2></a></div></main>'
+  });
+  const links = page.blocks.flatMap(block => block.parts || []).filter(part => part.type === 'link');
+  assert.equal(page.reliable, true);
+  assert.deepEqual(links.map(link => link.text), ['VoiceOver course', 'NVDA course']);
+});
+
 test('never exposes javascript or mailto as interactive links', () => {
   const page = extractReadablePage({
     url: 'https://example.com/',

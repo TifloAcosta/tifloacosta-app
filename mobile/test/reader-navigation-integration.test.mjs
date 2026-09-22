@@ -37,3 +37,10 @@ test('video and download destinations opened from a reader preserve the activati
   assert.match(app, /router\.navigate\('direct-video', \{ originId: originId \|\| null \}\)/);
   assert.match(app, /router\.navigate\('downloads-link', \{ originId: originId \|\| null \}\)/);
 });
+
+test('a failed nested reader link is announced while the current readable page remains available', async () => {
+  const reader = await read('src/screens/reader.mjs');
+  assert.match(reader, /if \(state\.error && page\)[\s\S]{0,700}setAttribute\('role', 'status'\)/);
+  assert.match(reader, /if \(state\.error && page\)[\s\S]{0,700}t\('reader\.error'\)/);
+  assert.match(reader, /if \(state\.error && page\)[\s\S]{0,900}t\('reader\.retry'\)/);
+});

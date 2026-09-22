@@ -76,6 +76,8 @@ export function createReaderSession() {
   function setError(error = null) {
     state.loading = false;
     state.error = error ? { ...error } : null;
+    const failedUrl = String(error?.url || '').trim();
+    if (failedUrl) state.url = failedUrl;
     return snapshot();
   }
 

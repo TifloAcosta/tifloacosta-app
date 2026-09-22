@@ -38,3 +38,29 @@ test('JavaScript share wrapper has safe non-native fallbacks', async () => {
   assert.match(wrapper, /finishShare/);
   assert.match(wrapper, /shared:\s*false/);
 });
+
+test('native web fetch plugin enforces the approved safety limits and content types', async () => {
+  const [mainActivity, fetchPlugin, wrapper] = await Promise.all([
+    read('android/app/src/main/java/com/tifloacosta/app/MainActivity.java'),
+    read('android/app/src/main/java/com/tifloacosta/app/TifloWebFetchPlugin.java'),
+    read('src/native/web-fetch-plugin.mjs')
+  ]);
+  assert.match(mainActivity, /registerPlugin\(TifloWebFetchPlugin\.class\)/);
+  assert.match(fetchPlugin, /MAX_REDIRECTS\s*=\s*5/);
+  assert.match(fetchPlugin, /MAX_BODY_BYTES\s*=\s*5\s*\*\s*1024\s*\*\s*1024/);
+  assert.match(fetchPlugin, /TOTAL_TIMEOUT_MS\s*=\s*15_?000/);
+  assert.match(fetchPlugin, /setInstanceFollowRedirects\(false\)/);
+  assert.match(fetchPlugin, /text\/html/);
+  assert.match(fetchPlugin, /application\/xhtml\+xml/);
+  assert.match(fetchPlugin, /text\/plain/);
+  assert.match(fetchPlugin, /User-Agent/);
+  assert.doesNotMatch(fetchPlugin, /Cookie/);
+  for (const code of ['invalid_url','too_many_redirects','timeout','too_large','unsupported_type','http_error','unreachable']) {
+    assert.match(wrapper, new RegExp(code));
+  }
+});
+
+test('native web fetch rejection passes an Exception to the Capacitor PluginCall API', async () => {
+  const fetchPlugin = await read('android/app/src/main/java/com/tifloacosta/app/TifloWebFetchPlugin.java');
+  assert.match(fetchPlugin, /private void reject\(PluginCall call, String code, String message, Exception error\)/);
+});

@@ -51,6 +51,14 @@ export function backTargetForState(state = {}) {
   return 'finish';
 }
 
+export function destinationOriginId({ returnView = 'received', kind = '', triggerId = '' } = {}) {
+  if (returnView === 'received') {
+    if (kind === 'youtube') return 'share-action-play';
+    if (kind === 'download') return 'share-action-downloads';
+  }
+  return String(triggerId || '').trim() || (kind === 'youtube' ? 'share-action-play' : 'share-action-downloads');
+}
+
 function fetchPage(webFetch, url) {
   if (typeof webFetch === 'function') return webFetch(url);
   if (webFetch?.fetchPage) return webFetch.fetchPage({ url });
@@ -194,14 +202,22 @@ export function renderShare({
         session.selectUrl(result.classification?.url || url);
         session.setClassification(result.classification);
         session.setView(returnView);
-        onOpenVideo(result.classification, busy?.id || 'share-action-play');
+        onOpenVideo(result.classification, destinationOriginId({
+          returnView,
+          kind: 'youtube',
+          triggerId: busy?.id
+        }));
         return;
       }
       if (result.kind === 'download') {
         session.selectUrl(result.classification?.url || url);
         session.setClassification(result.classification);
         session.setView(returnView);
-        onOpenDownload(result.classification.url, busy?.id || 'share-action-downloads');
+        onOpenDownload(result.classification.url, destinationOriginId({
+          returnView,
+          kind: 'download',
+          triggerId: busy?.id
+        }));
         return;
       }
       if (result.kind === 'readable') {
@@ -237,11 +253,11 @@ export function renderShare({
 
     if (classification.kind === 'youtube') {
       session.setView(returnView);
-      return onOpenVideo(classification, triggerButton?.id || 'share-action-play');
+      return onOpenVideo(classification, destinationOriginId({ returnView, kind: 'youtube', triggerId: triggerButton?.id }));
     }
     if (classification.kind === 'download') {
       session.setView(returnView);
-      return onOpenDownload(classification.url, triggerButton?.id || 'share-action-downloads');
+      return onOpenDownload(classification.url, destinationOriginId({ returnView, kind: 'download', triggerId: triggerButton?.id }));
     }
     if (classification.kind === 'web') return readUrl(classification.url, triggerButton, { returnView });
     session.setView('error', { code: 'invalid_url', url, returnView });

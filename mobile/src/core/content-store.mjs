@@ -11,6 +11,61 @@ function isValidContent(content) {
   );
 }
 
+function normalizeApp(item = {}) {
+  return {
+    kind: 'app',
+    id: item.id,
+    lang: item.lang || '',
+    title: item.title || '',
+    summary: item.summary || '',
+    platform: item.platform || '',
+    sourceName: item.sourceName || '',
+    originalUrl: item.originalUrl || item.url || '',
+    publishedAt: item.publishedAt || ''
+  };
+}
+
+function normalizeMedia(item = {}) {
+  return {
+    kind: 'media',
+    id: item.id,
+    lang: item.lang || item.originalLanguage || '',
+    title: item.title || '',
+    summary: item.summary || '',
+    platform: item.platform || '',
+    sourceName: item.sourceName || '',
+    originalUrl: item.originalUrl || item.mediaUrl || item.url || '',
+    publishedAt: item.publishedAt || ''
+  };
+}
+
+function siblingUrl(base, filename) {
+  try { return new URL(filename, base).href; } catch { return ''; }
+}
+
+async function loadOptionalCollection(fetchFn, targetUrl, normalizer) {
+  if (!targetUrl) return [];
+  try {
+    const response = await fetchFn(targetUrl, { cache: 'no-store' });
+    if (!response?.ok) return [];
+    const values = await response.json();
+    return Array.isArray(values) ? values.map(normalizer) : [];
+  } catch {
+    return [];
+  }
+}
+
+async function enrichActualidadCollections(content, fetchFn, baseUrl) {
+  const enriched = { ...content };
+  if (!Array.isArray(enriched.apps)) {
+    enriched.apps = await loadOptionalCollection(fetchFn, siblingUrl(baseUrl, 'actualidad-apps.json'), normalizeApp);
+  }
+  if (!Array.isArray(enriched.media)) {
+    enriched.media = await loadOptionalCollection(fetchFn, siblingUrl(baseUrl, 'actualidad-media.json'), normalizeMedia);
+  }
+  return enriched;
+}
+
 function readCached(storage) {
   if (!storage || typeof storage.getItem !== 'function') return null;
   try {
@@ -45,9 +100,10 @@ export function createContentStore({ fetchFn = globalThis.fetch, storage = globa
       if (!response?.ok) throw new Error(`Content request failed: ${response?.status || 'unknown'}`);
       const content = await response.json();
       if (!isValidContent(content)) throw new Error('Invalid mobile content schema');
-      current = content;
-      writeCached(storage, content);
-      return { status: 'fresh', content };
+      const enriched = await enrichActualidadCollections(content, fetchFn, url);
+      current = enriched;
+      writeCached(storage, enriched);
+      return { status: 'fresh', content: enriched };
     } catch {
       if (cached) {
         current = cached;

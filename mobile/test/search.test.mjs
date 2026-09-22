@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
-import { searchContent } from '../src/core/search.mjs';
+import { searchContent, searchResultAction } from '../src/core/search.mjs';
 
 const content = {
   resources: [
@@ -44,6 +44,19 @@ test('search results expose stable kind, route, subtitle and source references',
     route: 'videos',
     source: content.videos[0]
   });
+});
+
+test('search result actions preserve exact destination type', () => {
+  assert.deepEqual(searchResultAction({ kind: 'video', id: 'v1' }), { type: 'video', id: 'v1' });
+  assert.deepEqual(
+    searchResultAction({ kind: 'news', source: { originalUrl: 'https://example.test/n1' } }),
+    { type: 'news', url: 'https://example.test/n1' }
+  );
+  assert.deepEqual(
+    searchResultAction({ kind: 'resource', source: { openUrl: 'https://example.test/r1' } }),
+    { type: 'resource', url: 'https://example.test/r1' }
+  );
+  assert.equal(searchResultAction({ kind: 'future-kind', source: { url: 'https://example.test/x' } }), null);
 });
 
 test('blank queries return no results without requiring category or filters', () => {

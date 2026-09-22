@@ -8,6 +8,7 @@ import { createFavoritesStore } from './core/favorites.mjs';
 import { text } from './core/i18n.mjs';
 import { createNativeActions } from './core/native-actions.mjs';
 import { applyPreferences, createPreferencesStore } from './core/preferences.mjs';
+import { searchResultAction } from './core/search.mjs';
 import { TifloSave } from './core/save-plugin.mjs';
 import { createNotificationService } from './native/notifications.mjs';
 import { renderHome } from './screens/home.mjs';
@@ -30,6 +31,7 @@ if (!root) throw new Error('Missing mobile app root');
 const EMPTY_CONTENT = Object.freeze({ resources: [], videos: [], news: [] });
 let currentContent = EMPTY_CONTENT;
 let activeScreenCleanup = null;
+let pendingVideoId = '';
 
 function safeStorage() {
   try {
@@ -63,6 +65,24 @@ function textInputIsActive() {
   return typeof active.matches === 'function' && active.matches('input, textarea, select');
 }
 
+function openSearchResult(result, originId) {
+  const action = searchResultAction(result);
+  if (!action) return false;
+
+  if (action.type === 'video') {
+    pendingVideoId = action.id;
+    router.navigate('videos', { originId });
+    return true;
+  }
+
+  if (action.type === 'external') {
+    void nativeActions.openExternal(action.url);
+    return true;
+  }
+
+  return false;
+}
+
 function render(route) {
   activeScreenCleanup?.();
   activeScreenCleanup = null;
@@ -88,13 +108,18 @@ function render(route) {
   switch (route.name) {
     case 'home': renderHome(context); break;
     case 'actualidad': renderActualidad(context); break;
-    case 'search': renderSearch(context); break;
+    case 'search': renderSearch({ ...context, onOpenResult: openSearchResult }); break;
     case 'library': renderLibrary(context); break;
     case 'downloads': renderDownloads(context); break;
     case 'downloads-link': renderDownloadLink(context); break;
     case 'downloads-sounds': renderSoundSearch(context); break;
     case 'favorites': renderFavorites(context); break;
-    case 'videos': renderVideos(context); break;
+    case 'videos': {
+      const initialVideoId = pendingVideoId;
+      pendingVideoId = '';
+      renderVideos({ ...context, initialVideoId });
+      break;
+    }
     case 'book': renderBook(context); break;
     case 'podcast': renderPodcast(context); break;
     case 'contact': renderContact(context); break;

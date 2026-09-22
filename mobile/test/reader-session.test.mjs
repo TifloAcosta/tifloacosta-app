@@ -38,3 +38,14 @@ test('reader snapshots cannot mutate stored page blocks', () => {
   state.pages[0].blocks[0].parts[0].text = 'Mutated';
   assert.equal(session.snapshot().pages[0].blocks[0].parts[0].text, 'Safe');
 });
+
+test('reader errors keep the failed URL as the retry target without discarding the current page', () => {
+  const session = createReaderSession();
+  session.begin({ url: 'https://one.test', title: 'One', allowOriginalFallback: true });
+  session.push({ url: 'https://one.test', title: 'One', blocks: [] });
+  session.setError({ code: 'unreachable', url: 'https://two.test' });
+  const state = session.snapshot();
+  assert.equal(state.url, 'https://two.test');
+  assert.equal(state.error.url, 'https://two.test');
+  assert.equal(state.pages.at(-1).url, 'https://one.test');
+});

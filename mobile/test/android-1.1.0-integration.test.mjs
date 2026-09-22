@@ -31,6 +31,15 @@ test('normal app navigation exposes one reader route backed by the shared loader
   assert.match(source, /onOpenNews:\s*openActualidadNews/);
 });
 
+test('Search dispatches each exact result through its proper destination', async () => {
+  const source = await read('src/app.mjs');
+  assert.match(source, /if\s*\(action\.type\s*===\s*['"]video['"]\)[\s\S]{0,220}pendingVideoId\s*=\s*action\.id/);
+  assert.match(source, /if\s*\(action\.type\s*===\s*['"]news['"]\)[\s\S]{0,320}openReadableFromApp\(/);
+  assert.match(source, /openReadableFromApp\(\{[\s\S]{0,220}url:\s*action\.url[\s\S]{0,220}allowOriginalFallback:\s*true/);
+  assert.match(source, /if\s*\(action\.type\s*===\s*['"]resource['"]\)[\s\S]{0,220}nativeActions\.openExternal\(action\.url\)/);
+  assert.doesNotMatch(source, /if\s*\(action\.type\s*===\s*['"]external['"]\)/);
+});
+
 test('common reader renders semantic safe nodes and never injects remote HTML', async () => {
   const source = await read('src/screens/reader.mjs');
   assert.match(source, /export function renderReadableContent/);

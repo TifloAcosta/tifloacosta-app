@@ -1,7 +1,7 @@
 const DICTIONARIES = {
   es: {
     app: { title: 'TifloAcosta' },
-    nav: { back: 'Volver' },
+    nav: { back: 'Volver', backHome: 'Volver a la pantalla principal' },
     home: {
       actualidad: 'Actualidad', search: 'Buscar', library: 'Biblioteca', downloads: 'Descargas', favorites: 'Favoritos', videos: 'Vídeos',
       book: 'Mi libro', podcast: 'Podcast', contact: 'Contacto', settings: 'Configuración'
@@ -14,6 +14,11 @@ const DICTIONARIES = {
     search: {
       label: 'Título o palabra clave', placeholder: 'Por ejemplo: VoiceOver, Android, WhatsApp…', submit: 'Buscar',
       results: '{count} resultados', none: 'No se encontraron resultados.', resultsRegion: 'Resultados de búsqueda'
+    },
+    reader: {
+      title: 'Lectura accesible', source: 'Fuente', backPage: 'Volver a la página anterior',
+      preparing: 'Preparando contenido', loading: 'Preparando lectura…', errorHeading: 'No hemos podido preparar el contenido',
+      error: 'No hemos podido preparar una versión fiable de esta página.', retry: 'Reintentar'
     },
     downloads: { intro: 'Elige qué quieres hacer.', link: 'Descargar desde un enlace', sounds: 'Buscar sonidos' },
     downloadsLink: {
@@ -59,7 +64,10 @@ const DICTIONARIES = {
       linkLabel: 'Enlace {number}', youtubeUnavailable: 'No hemos podido preparar este vídeo en el reproductor de TifloAcosta.'
     },
     favorites: { add: 'Añadir a favoritos', remove: 'Quitar de favoritos', empty: 'Todavía no has añadido ningún favorito.' },
-    actualidad: { empty: 'No hay noticias disponibles en este momento.', original: 'Abrir fuente original' },
+    actualidad: {
+      empty: 'No hay contenidos de actualidad disponibles en este momento.', original: 'Abrir fuente original',
+      news: 'Noticias', apps: 'Apps accesibles', media: 'Escuchar y ver'
+    },
     library: { empty: 'No hay recursos disponibles en este momento.', open: 'Abrir documento', download: 'Guardar documento' },
     videos: {
       empty: 'No hay vídeos disponibles en este momento.', open: 'Abrir vídeo', play: 'Abrir reproductor',
@@ -68,7 +76,7 @@ const DICTIONARIES = {
       preparing: 'Preparando los controles accesibles del reproductor…',
       ready: 'Controles accesibles listos. Cada pulsación permite avanzar o retroceder 1 minuto.',
       unavailable: 'No se pudieron activar los controles accesibles adicionales. Puedes abrir el vídeo en YouTube.',
-      closePlayer: 'Cerrar reproductor y volver a los vídeos', openYouTube: 'Abrir este vídeo en YouTube'
+      closePlayer: 'Cerrar vídeo y volver a la lista de vídeos', openYouTube: 'Abrir este vídeo en YouTube'
     },
     book: {
       title: 'La vida vista desde donde estoy', subtitle: 'Reflexiones desde una forma propia de estar en el mundo.',
@@ -93,7 +101,7 @@ const DICTIONARIES = {
   },
   en: {
     app: { title: 'TifloAcosta' },
-    nav: { back: 'Back' },
+    nav: { back: 'Back', backHome: 'Return to the main screen' },
     home: {
       actualidad: 'News', search: 'Search', library: 'Library', downloads: 'Downloads', favorites: 'Favorites', videos: 'Videos',
       book: 'My book', podcast: 'Podcast', contact: 'Contact', settings: 'Settings'
@@ -106,6 +114,11 @@ const DICTIONARIES = {
     search: {
       label: 'Title or keyword', placeholder: 'For example: VoiceOver, Android, WhatsApp…', submit: 'Search',
       results: '{count} results', none: 'No results found.', resultsRegion: 'Search results'
+    },
+    reader: {
+      title: 'Accessible reading', source: 'Source', backPage: 'Return to the previous page',
+      preparing: 'Preparing content', loading: 'Preparing reading…', errorHeading: 'We could not prepare the content',
+      error: 'We could not prepare a reliable version of this page.', retry: 'Try again'
     },
     downloads: { intro: 'Choose what you want to do.', link: 'Download from a link', sounds: 'Search sounds' },
     downloadsLink: {
@@ -151,7 +164,10 @@ const DICTIONARIES = {
       linkLabel: 'Link {number}', youtubeUnavailable: 'We could not prepare this video in the TifloAcosta player.'
     },
     favorites: { add: 'Add to favorites', remove: 'Remove from favorites', empty: 'You have not added any favorites yet.' },
-    actualidad: { empty: 'There are no news items available right now.', original: 'Open original source' },
+    actualidad: {
+      empty: 'There is no current content available right now.', original: 'Open original source',
+      news: 'News', apps: 'Accessible apps', media: 'Listen and watch'
+    },
     library: { empty: 'There are no resources available right now.', open: 'Open document', download: 'Save document' },
     videos: {
       empty: 'There are no videos available right now.', open: 'Open video', play: 'Open player',
@@ -160,7 +176,7 @@ const DICTIONARIES = {
       preparing: 'Preparing the accessible player controls…',
       ready: 'Accessible controls are ready. Each press moves forward or back 1 minute.',
       unavailable: 'The additional accessible controls could not be activated. You can open the video on YouTube.',
-      closePlayer: 'Close player and return to videos', openYouTube: 'Open this video on YouTube'
+      closePlayer: 'Close video and return to the video list', openYouTube: 'Open this video on YouTube'
     },
     book: {
       title: 'Life Seen from Where I Stand', subtitle: 'Reflections from my own way of being in the world.',

@@ -2,12 +2,15 @@ export function clearScreen(root) {
   root.replaceChildren();
 }
 
-export function addScreenHeader(root, { router, title, backLabel }) {
+export function addScreenHeader(root, { router, title, backLabel, onBack = null }) {
   const back = document.createElement('button');
   back.type = 'button';
   back.className = 'back-button';
   back.textContent = backLabel;
-  back.addEventListener('click', () => router.back());
+  back.addEventListener('click', () => {
+    if (typeof onBack === 'function') onBack();
+    else router.back();
+  });
 
   const heading = document.createElement('h1');
   heading.dataset.screenHeading = '';

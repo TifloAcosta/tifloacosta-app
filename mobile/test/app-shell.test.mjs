@@ -20,14 +20,14 @@ test('mobile document keeps one native main landmark and never steals initial fo
   assert.match(html, /href=["']#app["']/i);
 });
 
-test('startup keeps preferences before first render and remote content refresh after Home starts', async () => {
+test('startup keeps preferences before first render and remote content refresh after Home starts without replacing Share', async () => {
   const app = await read('src/app.mjs');
   const applyPreferences = app.indexOf('applyPreferences(document.documentElement');
   const startHome = app.indexOf("router.start('home')");
   const loadContent = app.indexOf('contentStore.load()');
   assert.ok(applyPreferences >= 0 && startHome > applyPreferences, 'preferences must be applied before Home starts');
   assert.ok(loadContent > startHome, 'remote content must load after Home is already rendered');
-  assert.match(app, /if \(!textInputIsActive\(\)\) render\(router\.current\(\)\)/);
+  assert.match(app, /if \(!shareMode\s*&&\s*!textInputIsActive\(\)\) render\(router\.current\(\)\)/);
 });
 
 test('settings always receives a safe notification service even before a native provider is connected', async () => {

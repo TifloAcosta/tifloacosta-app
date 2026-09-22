@@ -15,6 +15,11 @@ const DICTIONARIES = {
       label: 'Título o palabra clave', placeholder: 'Por ejemplo: VoiceOver, Android, WhatsApp…', submit: 'Buscar',
       results: '{count} resultados', none: 'No se encontraron resultados.', resultsRegion: 'Resultados de búsqueda'
     },
+    reader: {
+      title: 'Lectura accesible', source: 'Fuente', backPage: 'Volver a la página anterior',
+      preparing: 'Preparando contenido', loading: 'Preparando lectura…', errorHeading: 'No hemos podido preparar el contenido',
+      error: 'No hemos podido preparar una versión fiable de esta página.', retry: 'Reintentar'
+    },
     downloads: {
       intro: 'Elige qué quieres hacer.', link: 'Descargar desde un enlace', sounds: 'Buscar sonidos'
     },
@@ -97,6 +102,11 @@ const DICTIONARIES = {
     search: {
       label: 'Title or keyword', placeholder: 'For example: VoiceOver, Android, WhatsApp…', submit: 'Search',
       results: '{count} results', none: 'No results found.', resultsRegion: 'Search results'
+    },
+    reader: {
+      title: 'Accessible reading', source: 'Source', backPage: 'Return to the previous page',
+      preparing: 'Preparing content', loading: 'Preparing reading…', errorHeading: 'We could not prepare the content',
+      error: 'We could not prepare a reliable version of this page.', retry: 'Try again'
     },
     downloads: {
       intro: 'Choose what you want to do.', link: 'Download from a link', sounds: 'Search sounds'

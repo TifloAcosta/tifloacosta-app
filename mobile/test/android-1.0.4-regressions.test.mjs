@@ -38,11 +38,14 @@ test('video destination can open the exact video selected by Search', async () =
   assert.doesNotMatch(source, /\.playVideo\(/);
 });
 
-test('Actualidad headlines are actionable and open their own news item', async () => {
+test('Actualidad headlines open the exact news item through the common reader and keep the original source as a secondary action', async () => {
   const source = await read('src/screens/actualidad.mjs');
   assert.match(source, /heading\.append\(openButton\)/);
   assert.match(source, /openButton\.textContent\s*=\s*item\.title/);
-  assert.match(source, /nativeActions\?\.openExternal\?\.\(item\.originalUrl\)/);
+  assert.match(source, /openButton\.id\s*=\s*`news-open-\$\{item\.id\}`/);
+  assert.match(source, /onOpenNews\?\.\(item,\s*openButton\.id\)/);
+  assert.match(source, /label:\s*t\('actualidad\.original'\)/);
+  assert.doesNotMatch(source, /openButton\.addEventListener\([\s\S]{0,160}nativeActions\?\.openExternal/);
 });
 
 test('Android maintenance release is version 1.0.4 code 5', async () => {

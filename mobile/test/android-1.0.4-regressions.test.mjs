@@ -48,8 +48,8 @@ test('Actualidad headlines open the exact news item through the common reader an
   assert.doesNotMatch(source, /openButton\.addEventListener\([\s\S]{0,160}nativeActions\?\.openExternal/);
 });
 
-test('Android maintenance release is version 1.0.4 code 5', async () => {
+test('the maintenance fixes remain present in the integrated Android 1.1.0 code 6 candidate', async () => {
   const gradle = await read('android/app/build.gradle');
-  assert.match(gradle, /versionCode\s+5/);
-  assert.match(gradle, /versionName\s+"1\.0\.4"/);
+  assert.match(gradle, /versionCode\s+6/);
+  assert.match(gradle, /versionName\s+"1\.1\.0"/);
 });

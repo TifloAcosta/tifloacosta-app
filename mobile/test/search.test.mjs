@@ -25,7 +25,7 @@ const content = {
 
 test('search ignores accents and case across all global content collections', () => {
   const results = searchContent(content, 'CAMARA', 'es');
-  assert.deepEqual(results.map(item => item.id), ['a1', 'r1', 'n1', 'v1', 'm1']);
+  assert.deepEqual(results.map(item => item.id), ['r1', 'a1', 'n1', 'm1', 'v1']);
 });
 
 test('search filters language-specific content but keeps language-neutral catalog videos', () => {

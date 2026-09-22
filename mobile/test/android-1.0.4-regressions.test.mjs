@@ -32,8 +32,10 @@ test('search screen delegates the chosen exact result instead of navigating only
 test('video destination can open the exact video selected by Search', async () => {
   const source = await read('src/screens/videos.mjs');
   assert.match(source, /initialVideoId/);
-  assert.match(source, /String\(item\.id\s*\|\|\s*''\)\s*===\s*String\(initialVideoId/);
-  assert.match(source, /openPlayer\(item,\s*playButton\)/);
+  assert.match(source, /matchesInitialVideo\(item,\s*initialVideoId\)/);
+  assert.match(source, /createAccessibleVideoPlayer/);
+  assert.match(source, /openVideo\(initialTarget\.item,\s*initialTarget\.button\)/);
+  assert.doesNotMatch(source, /\.playVideo\(/);
 });
 
 test('Actualidad headlines are actionable and open their own news item', async () => {

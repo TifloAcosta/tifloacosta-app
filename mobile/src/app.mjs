@@ -191,7 +191,16 @@ function openSearchResult(result, originId) {
     return true;
   }
 
-  if (action.type === 'external') {
+  if (action.type === 'news') {
+    return openReadableFromApp({
+      url: action.url,
+      title: result?.title || '',
+      originId,
+      allowOriginalFallback: true
+    });
+  }
+
+  if (action.type === 'resource') {
     void nativeActions.openExternal(action.url);
     return true;
   }

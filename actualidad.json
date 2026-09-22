@@ -1,5 +1,30 @@
 [
   {
+    "id": "9to5mac-a305fcf10e5c1111",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/22/icloud-storage-notification-glitch-puts-unremovable-red-badge-on-settings-app/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-22T07:40:50.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iCloud storage notification glitch puts unremovable red badge on Settings app",
+        "summary": "There’s an annoying little iPhone notification glitch impacting some users on iOS 27. For those affected, the Settings app gets a red badge prompting an alert to ‘Activate iCloud Storage’. However, tapping on this alert simply navigates to the iCloud storage purchase screen and the alert does not go away after dismissing it. This glitched notification appears even when the user has plenty of available iCloud storage already, like if they are on a 2 TB family Apple One plan. more…",
+        "body": "There’s an annoying little iPhone notification glitch impacting some users on iOS 27. For those affected, the Settings app gets a red badge prompting an alert to ‘Activate iCloud Storage’.\n\nHowever, tapping on this alert simply navigates to the iCloud storage purchase screen and the alert does not go away after dismissing it. This glitched notification appears even when the user has plenty of available iCloud storage already, like if they are on a 2 TB family Apple One plan.\n\nWhile Apple sometimes does use the Settings app as a way to promote offers (like Apple TV trials) and remind users about AppleCare warranties, this particular notification appears to simply be a mistake rather than some underhand way to shove an iCloud upsell in front of customers.\n\nThe notification appears on devices running the release version of iOS 27 and iOS 27.2, and there is currently no obvious way to get the notification removed.\n\nSome users have reported that signing out of their Apple Account on their device and logging back in causes the alert to go away. But hopefully Apple can also resolve this quickly with a backend change."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "9to5mac-2a04fcaa7d71b00c",
     "type": "news",
     "sourceId": "9to5mac",
@@ -165,31 +190,6 @@
         "title": "Muse, Meta's extraordinarily privileged AI assistant, has a serious 0-day",
         "summary": "A simple ClickFix attack is only one way to completely hijack the new agent.",
         "body": "Meta founder and CEO Mark Zuckerberg has gone to great lengths to hype the security of its new AI assistant Muse, claiming it is “built from the ground up for privacy and security.” A zero-day vulnerability that gives locally run apps and terminal commands complete control of the agent raises serious doubts. Further raising questions, Amazon on Sunday began blocking Muse from its site.\n\nMeta introduced Muse a few weeks ago. The assistant “books appointments, fills out forms and handles customer service,” “proactively takes tasks off your plate,” and can “make purchases, generate images, create documents, and connect with your favorite apps and services.” The macOS app (curiously, there’s no Windows version) also works with a user’s WhatsApp, email, calendar, and social media accounts. When a task requires a tool that doesn’t exist, Muse creates one on the fly.\n\nOf course, for Muse to do any of these things, users must first give it access to their accounts. This includes authenticating the assistant to each service and, because the app runs on macOS, giving it permissions to a broad range of operating system-restricted device resources like writing files to disk, accessing the mic and camera, and monitoring location and calendars. Apple has spent years developing these defenses to prevent installed apps or commands entered into the terminal from accessing these resources, clearly because the company considers them a security threat. Muse completely undoes these default measures.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-d95b2feb405ddec2",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/21/whatsapp-now-lets-apple-watch-users-react-with-any-emoji/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-21T22:07:49.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "WhatsApp now lets Apple Watch users react with any emoji",
-        "summary": "Following WhatsApp’s initial limited rollout of emoji reactions on the Apple Watch, the app is now rolling out support for the full set of emojis available on watchOS. Here are the details. more…",
-        "body": "Following WhatsApp’s initial limited rollout of emoji reactions on the Apple Watch , the app is now rolling out support for the full set of emojis available on watchOS. Here are the details.\n\nLate last year, WhatsApp launched a full-featured Apple Watch app, with support for call notifications, voice messages, chat history, and emoji reactions.\n\nThe launch was largely good news for Apple Watch users, especially since WhatsApp’s presence on watchOS had previously been very limited, relying almost entirely on system notifications to read and reply to messages.\n\nStill, emoji reactions came with one notable limitation: users could only choose from six preset emojis. Reacting with anything else required reaching for an iPhone.\n\nNow, as reported by WABetaInfo , WhatsApp is rolling out support for the full set of emojis available on watchOS. The site notes that tapping and holding a message still reveals the six default reactions, but users can now open a larger picker with recently used options and the full system emoji library split into categories.\n\nFrom WABetaInfo :\n\nWhatsApp organizes emojis into 8 categories: Smileys, Nature, Food, Activity, Travel, Objects, Symbols, and Flags. Users can scroll through these to find the emoji they want to use as a reaction. They can tap any emoji category to expand the list. It is also possible to choose a recent emoji from the top of the list.\n\nThe site notes that although the feature is now officially rolling out, it may still take a few weeks to reach everyone, as WhatsApp is known for its gradual rollouts.\n\nTo read WABetaInfo ’s full report, follow this link ."
       }
     },
     "media": null

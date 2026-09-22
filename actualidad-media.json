@@ -1,5 +1,22 @@
 [
   {
+    "id": "sucdepoma:https://www.sucdepoma.org/2026/09/22/quedada-de-septiembre-2026-segunda-parte/",
+    "type": "audio",
+    "section": "accessibility",
+    "sourceId": "sucdepoma",
+    "sourceName": "SucDePoma",
+    "sourceUrl": "https://www.sucdepoma.org/",
+    "originalUrl": "https://www.sucdepoma.org/2026/09/22/quedada-de-septiembre-2026-segunda-parte/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-09-22T09:21:21.000Z",
+    "title": "Quedada de septiembre 2026 (Segunda parte)",
+    "summary": "En la segunda parte de la quedada de septiembre Juan Núñez y diversos asistentes hablan sobre algunas de las novedades, peculiaridades y problemas de accesibilidad de los nuevos sistemas operativos iOS 27 y macOS 27 Golden Gate. Se trata de una quedada con un carácter marcadamente práctico, en la que destacan las demos de Juan Núñez y Jaime Franco mostrando las nuevas funciones de descripción y exploración de imágenes presentes en macOS 27 y iOS 27.",
+    "mediaUrl": null,
+    "embedUrl": null,
+    "platform": "podcast",
+    "categories": []
+  },
+  {
     "id": "cnet:https://www.youtube.com/watch?v=dMMjllxQpIU",
     "type": "video",
     "section": "technology",

@@ -15,18 +15,60 @@ function addFavoriteButton(parent, item, favoritesStore, t) {
   parent.append(button);
 }
 
-export function renderVideos({ root, router, content, favoritesStore, nativeActions, t, setScreenCleanup }) {
+function matchesInitialVideo(item, initialVideoId) {
+  const target = String(initialVideoId || '').trim();
+  if (!target) return false;
+  return String(item?.id || '').trim() === target || videoId(item) === target;
+}
+
+export function renderVideos({
+  root,
+  router,
+  content,
+  favoritesStore,
+  nativeActions,
+  t,
+  setScreenCleanup,
+  initialVideoId = '',
+  onBackStateChange = null
+}) {
   clearScreen(root);
-  addScreenHeader(root, { router, title: t('screen.videos'), backLabel: t('nav.back') });
+  addScreenHeader(root, {
+    router,
+    title: t('screen.videos'),
+    backLabel: t('nav.backHome'),
+    onBack: () => router.start('home')
+  });
+
   const items = Array.isArray(content?.videos) ? content.videos : [];
   if (!items.length) {
     addParagraph(root, t('videos.empty'), 'empty-state');
+    onBackStateChange?.(null);
     return;
   }
 
-  const player = createAccessibleVideoPlayer({ parent: root, t, nativeActions, allowYouTubeFallback: true });
+  let player = null;
   const list = document.createElement('div');
   list.className = 'content-list';
+  let initialTarget = null;
+
+  function setPlayerBackHandler() {
+    onBackStateChange?.(() => player?.close?.() === true);
+  }
+
+  player = createAccessibleVideoPlayer({
+    parent: root,
+    t,
+    nativeActions,
+    allowYouTubeFallback: true,
+    closeLabel: t('videos.closePlayer'),
+    onClose: () => onBackStateChange?.(null)
+  });
+
+  async function openVideo(item, button) {
+    setPlayerBackHandler();
+    await player.open(item, button);
+  }
 
   for (const item of items) {
     const article = document.createElement('article');
@@ -41,9 +83,11 @@ export function renderVideos({ root, router, content, favoritesStore, nativeActi
     if (id) {
       const playButton = document.createElement('button');
       playButton.type = 'button';
+      playButton.id = `video-play-${String(item.id || id)}`;
       playButton.textContent = `${t('videos.play')}: ${item.title || ''}`;
-      playButton.addEventListener('click', () => { void player.open(item, playButton); });
+      playButton.addEventListener('click', () => { void openVideo(item, playButton); });
       article.append(playButton);
+      if (matchesInitialVideo(item, initialVideoId)) initialTarget = { item, button: playButton };
     }
 
     if (url) {
@@ -56,5 +100,15 @@ export function renderVideos({ root, router, content, favoritesStore, nativeActi
     list.append(article);
   }
   root.append(list);
-  setScreenCleanup?.(() => player.destroy());
+
+  if (initialTarget) {
+    queueMicrotask(() => { void openVideo(initialTarget.item, initialTarget.button); });
+  } else {
+    onBackStateChange?.(null);
+  }
+
+  setScreenCleanup?.(() => {
+    onBackStateChange?.(null);
+    player.destroy();
+  });
 }

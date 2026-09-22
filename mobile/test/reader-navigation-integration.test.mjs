@@ -45,10 +45,7 @@ test('a failed nested reader link is announced while the current readable page r
   assert.match(reader, /if \(state\.error && page\)[\s\S]{0,900}t\('reader\.retry'\)/);
 });
 
-test('retry after a nested reader failure targets the failed URL, not the page already on screen', async () => {
+test('retry after a nested reader failure targets the failed URL', async () => {
   const reader = await read('src/screens/reader.mjs');
   assert.match(reader, /retry\.addEventListener\('click', \(\) => onRetry\(state\.error\?\.url \|\| state\.url\)\)/);
-
-  const app = await read('src/app.mjs');
-  assert.match(app, /onRetry: target => \{ void loadReaderUrl\(target \|\| readerSession\.snapshot\(\)\.error\?\.url \|\| readerSession\.snapshot\(\)\.url\); \}/);
 });

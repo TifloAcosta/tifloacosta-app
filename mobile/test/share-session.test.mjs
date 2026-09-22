@@ -29,6 +29,18 @@ test('begin advances generation even when the shared text is identical', () => {
   assert.equal(session.snapshot().generation, first + 1);
 });
 
+test('a newer page request invalidates an older request inside the same share session', () => {
+  const session = createShareSession();
+  session.begin({ text: 'https://one.example', urls: ['https://one.example/'] });
+  const first = session.beginRequest();
+  assert.equal(session.isCurrentRequest(first), true);
+  const second = session.beginRequest();
+  assert.equal(session.isCurrentRequest(first), false);
+  assert.equal(session.isCurrentRequest(second), true);
+  session.begin({ text: 'new share', urls: [] });
+  assert.equal(session.isCurrentRequest(second), false);
+});
+
 test('readable history backs up one page at a time', () => {
   const session = createShareSession();
   session.begin({ text: 'x', urls: ['https://one.example/'] });

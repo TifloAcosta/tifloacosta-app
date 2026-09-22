@@ -46,7 +46,7 @@ test('Share delegates web, video, download and text to existing app functions wi
   const search = await read('src/screens/search.mjs');
   assert.match(search, /initialQuery/);
   assert.match(search, /input\.value\s*=\s*String\(initialQuery/);
-  assert.doesNotMatch(search, /initialQuery[\s\S]{0,400}renderResults\(/);
+  assert.match(search, /if\s*\(!initialQuery\s*&&\s*lastQuery\)\s*\{[\s\S]{0,180}renderResults\(/);
 });
 
 test('Android Back is consumed by Share before normal router navigation', async () => {

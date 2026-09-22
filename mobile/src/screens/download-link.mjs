@@ -47,7 +47,7 @@ function errorKey(code) {
   })[code] || 'unavailable';
 }
 
-export function renderDownloadLink({ root, router, t, nativeActions }) {
+export function renderDownloadLink({ root, router, t, nativeActions, initialUrl = '', analyzeOnOpen = false }) {
   clearScreen(root);
   addScreenHeader(root, {
     router,
@@ -65,6 +65,7 @@ export function renderDownloadLink({ root, router, t, nativeActions }) {
   input.inputMode = 'url';
   input.autocomplete = 'off';
   input.placeholder = t('downloadsLink.placeholder');
+  input.value = String(initialUrl || '').trim();
   label.htmlFor = input.id;
   label.textContent = t('downloadsLink.label');
   submit.type = 'submit';
@@ -225,4 +226,8 @@ export function renderDownloadLink({ root, router, t, nativeActions }) {
     event.preventDefault();
     void analyzeCurrent();
   });
+
+  if (analyzeOnOpen === true && normalizeUrl(input.value)) {
+    void analyzeCurrent();
+  }
 }

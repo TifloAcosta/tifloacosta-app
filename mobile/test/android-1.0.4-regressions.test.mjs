@@ -14,11 +14,11 @@ test('search keeps the exact result identity for videos, resources and news', as
   );
   assert.deepEqual(
     module.searchResultAction({ kind: 'resource', id: 'doc-1', source: { openUrl: 'https://example.test/doc' } }),
-    { type: 'external', url: 'https://example.test/doc' }
+    { type: 'resource', url: 'https://example.test/doc' }
   );
   assert.deepEqual(
     module.searchResultAction({ kind: 'news', id: 'news-1', source: { originalUrl: 'https://example.test/news' } }),
-    { type: 'external', url: 'https://example.test/news' }
+    { type: 'news', url: 'https://example.test/news' }
   );
 });
 
@@ -32,19 +32,24 @@ test('search screen delegates the chosen exact result instead of navigating only
 test('video destination can open the exact video selected by Search', async () => {
   const source = await read('src/screens/videos.mjs');
   assert.match(source, /initialVideoId/);
-  assert.match(source, /String\(item\.id\s*\|\|\s*''\)\s*===\s*String\(initialVideoId/);
-  assert.match(source, /openPlayer\(item,\s*playButton\)/);
+  assert.match(source, /matchesInitialVideo\(item,\s*initialVideoId\)/);
+  assert.match(source, /createAccessibleVideoPlayer/);
+  assert.match(source, /openVideo\(initialTarget\.item,\s*initialTarget\.button\)/);
+  assert.doesNotMatch(source, /\.playVideo\(/);
 });
 
-test('Actualidad headlines are actionable and open their own news item', async () => {
+test('Actualidad headlines open the exact news item through the common reader and keep the original source as a secondary action', async () => {
   const source = await read('src/screens/actualidad.mjs');
   assert.match(source, /heading\.append\(openButton\)/);
   assert.match(source, /openButton\.textContent\s*=\s*item\.title/);
-  assert.match(source, /nativeActions\?\.openExternal\?\.\(item\.originalUrl\)/);
+  assert.match(source, /openButton\.id\s*=\s*`news-open-\$\{item\.id\}`/);
+  assert.match(source, /onOpenNews\?\.\(item,\s*openButton\.id\)/);
+  assert.match(source, /label:\s*t\('actualidad\.original'\)/);
+  assert.doesNotMatch(source, /openButton\.addEventListener\([\s\S]{0,160}nativeActions\?\.openExternal/);
 });
 
-test('Android maintenance release is version 1.0.4 code 5', async () => {
+test('the maintenance fixes remain present in the integrated Android 1.1.0 code 6 candidate', async () => {
   const gradle = await read('android/app/build.gradle');
-  assert.match(gradle, /versionCode\s+5/);
-  assert.match(gradle, /versionName\s+"1\.0\.4"/);
+  assert.match(gradle, /versionCode\s+6/);
+  assert.match(gradle, /versionName\s+"1\.1\.0"/);
 });

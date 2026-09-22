@@ -31,6 +31,21 @@ export function createRouter({ render, focusScreenHeading, restoreOriginFocus })
     return current();
   }
 
+  function snapshot() {
+    return stack.map(record => ({ ...record }));
+  }
+
+  function restore(records, { renderCurrent = true, focus = false } = {}) {
+    const next = Array.isArray(records) ? records.map(record => routeRecord(record?.name, record?.originId)) : [];
+    stack = next;
+    const destination = current();
+    if (destination && renderCurrent) {
+      render({ ...destination });
+      if (focus) focusScreenHeading();
+    }
+    return destination;
+  }
+
   function back() {
     if (stack.length <= 1) return false;
     const leaving = stack.pop();
@@ -40,5 +55,5 @@ export function createRouter({ render, focusScreenHeading, restoreOriginFocus })
     return true;
   }
 
-  return { start, navigate, back, current };
+  return { start, navigate, back, current, snapshot, restore };
 }

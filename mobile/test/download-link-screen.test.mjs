@@ -44,3 +44,10 @@ test('save action uses a safe filename, MIME type and never renders without an i
   assert.match(source, /filename:\s*item\.name\s*\|\|\s*t\('downloadsLink\.defaultFilename'\)/);
   assert.match(source, /mimeType:\s*mimeFromType\(item\.type\)/);
 });
+
+test('download-from-link accepts an exact URL and only analyzes it when explicitly requested', () => {
+  assert.match(source, /initialUrl\s*=\s*['"]/);
+  assert.match(source, /analyzeOnOpen\s*=\s*false/);
+  assert.match(source, /input\.value\s*=\s*String\(initialUrl/);
+  assert.match(source, /if\s*\(analyzeOnOpen\s*===\s*true/);
+});

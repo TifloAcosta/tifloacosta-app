@@ -8,12 +8,33 @@ const DICTIONARIES = {
     },
     screen: {
       actualidad: 'Actualidad', search: 'Buscar', library: 'Biblioteca', downloads: 'Descargas', favorites: 'Favoritos', videos: 'Vídeos',
-      book: 'Mi libro', podcast: 'Podcast', contact: 'Contacto', settings: 'Configuración'
+      book: 'Mi libro', podcast: 'Podcast', contact: 'Contacto', settings: 'Configuración', share: 'Compartido con TifloAcosta'
     },
     common: { empty: 'No hay contenido disponible en este momento.', open: 'Abrir', share: 'Compartir' },
     search: {
       label: 'Título o palabra clave', placeholder: 'Por ejemplo: VoiceOver, Android, WhatsApp…', submit: 'Buscar',
       results: '{count} resultados', none: 'No se encontraron resultados.', resultsRegion: 'Resultados de búsqueda'
+    },
+    reader: {
+      title: 'Lectura accesible', source: 'Fuente', backPage: 'Volver a la página anterior',
+      preparing: 'Preparando contenido', loading: 'Preparando lectura…', errorHeading: 'No hemos podido preparar el contenido',
+      error: 'No hemos podido preparar una versión fiable de esta página.', retry: 'Reintentar'
+    },
+    share: {
+      receivedYoutube: 'Has compartido un vídeo de YouTube.',
+      receivedWeb: 'Has compartido una página web.',
+      receivedDownload: 'Has compartido un enlace que TifloAcosta puede analizar para descargar.',
+      receivedText: 'Has compartido texto.',
+      play: 'Reproducir en TifloAcosta', read: 'Leer en modo accesible', downloads: 'Analizar descargas', search: 'Buscar en TifloAcosta',
+      multiFound: 'Se han encontrado {count} enlaces.', chooseLink: 'Elige cuál quieres abrir.',
+      preparing: 'Preparando lectura…', loadingHeading: 'Preparando contenido', retry: 'Reintentar', cancel: 'Cancelar y volver',
+      returnToApp: 'Volver a la aplicación anterior', backPage: 'Volver a la página anterior', backLinks: 'Volver a la lista de enlaces',
+      unreliable: 'No hemos podido preparar una versión fiable de esta página.',
+      timeout: 'La página tardó demasiado en responder.', unreachable: 'No hemos podido acceder a esta página.',
+      unsupportedType: 'Este enlace no contiene una página que podamos preparar para lectura.',
+      tooLarge: 'La página es demasiado grande para prepararla de forma segura.',
+      tooManyRedirects: 'El enlace ha realizado demasiadas redirecciones.', httpError: 'La página ha respondido con un error.',
+      invalid: 'El enlace no es válido.', source: 'Fuente', errorHeading: 'No hemos podido preparar el contenido'
     },
     downloads: {
       intro: 'Elige qué quieres hacer.', link: 'Descargar desde un enlace', sounds: 'Buscar sonidos'
@@ -91,12 +112,33 @@ const DICTIONARIES = {
     },
     screen: {
       actualidad: 'News', search: 'Search', library: 'Library', downloads: 'Downloads', favorites: 'Favorites', videos: 'Videos',
-      book: 'My book', podcast: 'Podcast', contact: 'Contact', settings: 'Settings'
+      book: 'My book', podcast: 'Podcast', contact: 'Contact', settings: 'Settings', share: 'Shared with TifloAcosta'
     },
     common: { empty: 'No content is available right now.', open: 'Open', share: 'Share' },
     search: {
       label: 'Title or keyword', placeholder: 'For example: VoiceOver, Android, WhatsApp…', submit: 'Search',
       results: '{count} results', none: 'No results found.', resultsRegion: 'Search results'
+    },
+    reader: {
+      title: 'Accessible reading', source: 'Source', backPage: 'Return to the previous page',
+      preparing: 'Preparing content', loading: 'Preparing reading…', errorHeading: 'We could not prepare the content',
+      error: 'We could not prepare a reliable version of this page.', retry: 'Try again'
+    },
+    share: {
+      receivedYoutube: 'You shared a YouTube video.',
+      receivedWeb: 'You shared a web page.',
+      receivedDownload: 'You shared a link that TifloAcosta can analyze for downloads.',
+      receivedText: 'You shared text.',
+      play: 'Play in TifloAcosta', read: 'Read in accessible mode', downloads: 'Analyze downloads', search: 'Search in TifloAcosta',
+      multiFound: '{count} links were found.', chooseLink: 'Choose the one you want to open.',
+      preparing: 'Preparing reading…', loadingHeading: 'Preparing content', retry: 'Try again', cancel: 'Cancel and return',
+      returnToApp: 'Return to the previous app', backPage: 'Return to the previous page', backLinks: 'Return to the link list',
+      unreliable: 'We could not prepare a reliable version of this page.',
+      timeout: 'The page took too long to respond.', unreachable: 'We could not reach this page.',
+      unsupportedType: 'This link does not contain a page that can be prepared for reading.',
+      tooLarge: 'The page is too large to prepare safely.',
+      tooManyRedirects: 'The link went through too many redirects.', httpError: 'The page returned an error.',
+      invalid: 'The link is not valid.', source: 'Source', errorHeading: 'We could not prepare the content'
     },
     downloads: {
       intro: 'Choose what you want to do.', link: 'Download from a link', sounds: 'Search sounds'

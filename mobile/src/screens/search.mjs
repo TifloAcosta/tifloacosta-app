@@ -56,7 +56,7 @@ function renderResults(container, status, { content, preferences, t, query, onOp
   }
 }
 
-export function renderSearch({ root, router, content, preferences, t, onOpenResult = null }) {
+export function renderSearch({ root, router, content, preferences, t, onOpenResult = null, initialQuery = '' }) {
   clearScreen(root);
   addScreenHeader(root, { router, title: t('screen.search'), backLabel: t('nav.back') });
 
@@ -68,7 +68,7 @@ export function renderSearch({ root, router, content, preferences, t, onOpenResu
   input.id = 'global-search-input';
   input.type = 'search';
   input.autocomplete = 'off';
-  input.value = lastQuery;
+  input.value = String(initialQuery || lastQuery || '').trim();
   input.placeholder = t('search.placeholder');
   label.htmlFor = input.id;
   label.textContent = t('search.label');
@@ -94,7 +94,7 @@ export function renderSearch({ root, router, content, preferences, t, onOpenResu
     renderResults(results, status, { content, preferences, t, query: lastQuery, onOpenResult, announce: true });
   });
 
-  if (lastQuery) {
+  if (!initialQuery && lastQuery) {
     renderResults(results, status, { content, preferences, t, query: lastQuery, onOpenResult, announce: false });
   }
 }

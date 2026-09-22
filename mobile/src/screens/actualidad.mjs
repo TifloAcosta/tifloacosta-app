@@ -19,7 +19,7 @@ function addFavoriteButton(parent, item, favoritesStore, t) {
   parent.append(button);
 }
 
-export function renderActualidad({ root, router, content, favoritesStore, nativeActions, t }) {
+export function renderActualidad({ root, router, content, favoritesStore, nativeActions, t, onOpenNews = null }) {
   clearScreen(root);
   addScreenHeader(root, { router, title: t('screen.actualidad'), backLabel: t('nav.back') });
 
@@ -36,9 +36,10 @@ export function renderActualidad({ root, router, content, favoritesStore, native
     if (item.originalUrl) {
       const openButton = document.createElement('button');
       openButton.type = 'button';
+      openButton.id = `news-open-${item.id}`;
       openButton.textContent = item.title || '';
       openButton.addEventListener('click', () => {
-        void nativeActions?.openExternal?.(item.originalUrl);
+        onOpenNews?.(item, openButton.id);
       });
       heading.append(openButton);
     } else {

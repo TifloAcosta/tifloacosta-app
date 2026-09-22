@@ -85,7 +85,8 @@ export function createAccessibleVideoPlayer({
   nativeActions,
   onClose = null,
   focusTarget = null,
-  allowYouTubeFallback = true
+  allowYouTubeFallback = true,
+  closeLabel = ''
 } = {}) {
   if (!parent?.append || typeof t !== 'function') throw new TypeError('Player parent and translator are required');
 
@@ -143,7 +144,7 @@ export function createAccessibleVideoPlayer({
 
   const closeButton = document.createElement('button');
   closeButton.type = 'button';
-  closeButton.textContent = t('videos.closePlayer');
+  closeButton.textContent = String(closeLabel || '').trim() || t('videos.closePlayer');
 
   section.append(heading, title, frameWrap, controls, status, fallback, closeButton);
   parent.append(section);

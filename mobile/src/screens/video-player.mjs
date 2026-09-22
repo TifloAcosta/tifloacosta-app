@@ -30,7 +30,6 @@ export const createSharedVideoItem = videoItemFromShared;
 function loadYouTubeApi() {
   if (window.YT && typeof window.YT.Player === 'function') return Promise.resolve(window.YT);
   if (youtubeApiPromise) return youtubeApiPromise;
-
   youtubeApiPromise = new Promise((resolve, reject) => {
     let settled = false;
     let timer = null;
@@ -41,7 +40,6 @@ function loadYouTubeApi() {
       if (timer) clearTimeout(timer);
       callback(value);
     };
-
     window.onYouTubeIframeAPIReady = () => {
       if (typeof previousReady === 'function') {
         try { previousReady(); } catch {}
@@ -49,7 +47,6 @@ function loadYouTubeApi() {
       if (window.YT && typeof window.YT.Player === 'function') finish(resolve, window.YT);
       else finish(reject, new Error('YouTube IFrame API unavailable'));
     };
-
     let script = document.querySelector('script[data-mobile-youtube-iframe-api]');
     if (!script) {
       script = document.createElement('script');
@@ -64,7 +61,6 @@ function loadYouTubeApi() {
     youtubeApiPromise = null;
     throw error;
   });
-
   return youtubeApiPromise;
 }
 
@@ -97,6 +93,7 @@ export function createAccessibleVideoPlayer({
   let playerReady = false;
   let playerIsPlaying = false;
   let disposed = false;
+  let opened = false;
 
   const section = document.createElement('section');
   section.className = 'video-player-section';
@@ -105,21 +102,17 @@ export function createAccessibleVideoPlayer({
   const heading = document.createElement('h2');
   heading.tabIndex = -1;
   heading.textContent = t('videos.playerHeading');
-
   const title = document.createElement('h3');
   title.className = 'video-player-title';
-
   const frameWrap = document.createElement('div');
   frameWrap.className = 'video-player-frame';
   const playerHost = document.createElement('div');
   playerHost.id = hostId;
   frameWrap.append(playerHost);
-
   const controls = document.createElement('div');
   controls.className = 'video-player-controls';
   controls.setAttribute('role', 'group');
   controls.setAttribute('aria-label', t('videos.controlsLabel'));
-
   const rewind = document.createElement('button');
   rewind.type = 'button';
   rewind.textContent = t('videos.rewindOneMinute');
@@ -130,22 +123,18 @@ export function createAccessibleVideoPlayer({
   forward.type = 'button';
   forward.textContent = t('videos.forwardOneMinute');
   controls.append(rewind, toggle, forward);
-
   const status = document.createElement('p');
   status.className = 'video-player-status';
   status.setAttribute('role', 'status');
   status.setAttribute('aria-live', 'polite');
   status.setAttribute('aria-atomic', 'true');
-
   const fallback = document.createElement('button');
   fallback.type = 'button';
   fallback.textContent = t('videos.openYouTube');
   fallback.hidden = true;
-
   const closeButton = document.createElement('button');
   closeButton.type = 'button';
   closeButton.textContent = String(closeLabel || '').trim() || t('videos.closePlayer');
-
   section.append(heading, title, frameWrap, controls, status, fallback, closeButton);
   parent.append(section);
 
@@ -154,11 +143,9 @@ export function createAccessibleVideoPlayer({
     toggle.disabled = !enabled;
     forward.disabled = !enabled;
   }
-
   function updateToggleLabel() {
     toggle.textContent = playerIsPlaying ? t('videos.pauseControl') : t('videos.playControl');
   }
-
   function markUnavailable() {
     playerReady = false;
     playerIsPlaying = false;
@@ -167,7 +154,6 @@ export function createAccessibleVideoPlayer({
     status.textContent = t('videos.unavailable');
     fallback.hidden = !allowYouTubeFallback || !youtubeUrl(activeItem);
   }
-
   function markReady() {
     playerReady = true;
     setControlsEnabled(true);
@@ -175,19 +161,16 @@ export function createAccessibleVideoPlayer({
     fallback.hidden = true;
     updateToggleLabel();
   }
-
   function handlePlayerStateChange(event) {
     const playingState = window.YT?.PlayerState?.PLAYING;
     playerIsPlaying = playingState !== undefined && event?.data === playingState;
     updateToggleLabel();
   }
-
   function handlePlayerReady(event) {
     if (disposed) return;
     youtubePlayer = event.target;
     markReady();
   }
-
   async function ensurePlayer(id) {
     try {
       const YT = await loadYouTubeApi();
@@ -207,12 +190,12 @@ export function createAccessibleVideoPlayer({
       markUnavailable();
     }
   }
-
   async function open(nextItem = activeItem, nextFocusTarget = activeFocusTarget) {
     if (disposed) return false;
     activeItem = nextItem;
     activeFocusTarget = nextFocusTarget;
     const id = videoId(activeItem);
+    opened = true;
     section.hidden = false;
     title.textContent = activeItem?.title || t('videos.playerHeading');
     status.textContent = t('videos.preparing');
@@ -228,7 +211,6 @@ export function createAccessibleVideoPlayer({
     await ensurePlayer(id);
     return true;
   }
-
   function seekBy(seconds) {
     if (!youtubePlayer || !playerReady) return;
     try {
@@ -239,7 +221,6 @@ export function createAccessibleVideoPlayer({
       youtubePlayer.seekTo(target, true);
     } catch {}
   }
-
   function togglePlayback() {
     if (!youtubePlayer || !playerReady) return;
     try {
@@ -248,9 +229,10 @@ export function createAccessibleVideoPlayer({
       else youtubePlayer.playVideo();
     } catch {}
   }
-
   function close() {
+    if (!opened) return false;
     try { youtubePlayer?.pauseVideo?.(); } catch {}
+    opened = false;
     section.hidden = true;
     playerIsPlaying = false;
     setControlsEnabled(false);
@@ -258,11 +240,13 @@ export function createAccessibleVideoPlayer({
     const target = activeFocusTarget;
     activeFocusTarget = null;
     if (typeof onClose === 'function') onClose();
-    else if (target && typeof target.focus === 'function') target.focus();
+    if (target?.isConnected !== false && typeof target?.focus === 'function') target.focus();
+    return true;
   }
-
+  function isOpen() { return opened; }
   function destroy() {
     disposed = true;
+    opened = false;
     try { youtubePlayer?.destroy?.(); } catch {}
     youtubePlayer = null;
     activeItem = null;
@@ -277,5 +261,5 @@ export function createAccessibleVideoPlayer({
   fallback.addEventListener('click', () => { void openExternal(youtubeUrl(activeItem), nativeActions); });
   setControlsEnabled(false);
 
-  return { open, close, destroy };
+  return { open, close, isOpen, destroy };
 }

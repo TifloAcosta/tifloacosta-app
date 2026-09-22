@@ -26,6 +26,31 @@ export function errorActions(code = '') {
   return [ACTIONS.cancel];
 }
 
+export function destinationReturnView(state = {}) {
+  if (state?.view === 'error') {
+    const target = String(state?.error?.returnView || '');
+    if (['readable', 'multi-url', 'received'].includes(target)) return target;
+  }
+  if (state?.view === 'readable') return 'readable';
+  if (state?.view === 'multi-url') return 'multi-url';
+  return 'received';
+}
+
+export function backTargetForState(state = {}) {
+  if (state?.view === 'readable') {
+    if ((state.readableHistory?.length || 0) > 1) return 'readable-previous';
+    if ((state.urls?.length || 0) > 1 && state.selectedUrl) return 'multi-url';
+    return 'finish';
+  }
+  if (state?.view === 'error') {
+    const returnView = String(state?.error?.returnView || '');
+    if (returnView === 'readable' && (state.readableHistory?.length || 0) > 0) return 'readable';
+    if (returnView === 'multi-url') return 'multi-url';
+  }
+  if ((state.urls?.length || 0) > 1 && state.selectedUrl) return 'multi-url';
+  return 'finish';
+}
+
 function fetchPage(webFetch, url) {
   if (typeof webFetch === 'function') return webFetch(url);
   if (webFetch?.fetchPage) return webFetch.fetchPage({ url });
@@ -116,8 +141,6 @@ export function renderShare({
     throw new TypeError('Share root, session and translator are required');
   }
 
-  let busyButton = null;
-
   function finish() {
     onFinish();
   }
@@ -136,20 +159,18 @@ export function renderShare({
 
   function back() {
     const state = session.snapshot();
-    if (state.view === 'readable') {
-      if (state.readableHistory.length > 1) {
-        session.popReadable();
-        render({ focusState: true });
-        return true;
-      }
-      if (state.urls.length > 1 && state.selectedUrl) {
-        toMultiLinkList();
-        return true;
-      }
-      finish();
+    const target = backTargetForState(state);
+    if (target === 'readable-previous') {
+      session.popReadable();
+      render({ focusState: true });
       return true;
     }
-    if (state.urls.length > 1 && state.selectedUrl) {
+    if (target === 'readable') {
+      session.setView('readable');
+      render({ focusState: true });
+      return true;
+    }
+    if (target === 'multi-url') {
       toMultiLinkList();
       return true;
     }
@@ -157,31 +178,34 @@ export function renderShare({
     return true;
   }
 
-  async function readUrl(url, triggerButton = null) {
-    const generation = session.snapshot().generation;
-    busyButton = triggerButton;
-    if (busyButton) busyButton.disabled = true;
+  async function readUrl(url, triggerButton = null, { returnView = destinationReturnView(session.snapshot()) } = {}) {
+    const request = session.beginRequest();
+    const busy = triggerButton;
+    if (busy) busy.disabled = true;
     session.setView('loading');
     const status = root.querySelector?.('[data-share-status]');
     if (status) status.textContent = t('share.preparing');
 
     try {
       const result = await resolveSharedUrl({ url, resolveDownload, webFetch });
-      if (session.snapshot().generation !== generation) return;
+      if (!session.isCurrentRequest(request)) return;
 
       if (result.kind === 'youtube') {
+        session.selectUrl(result.classification?.url || url);
         session.setClassification(result.classification);
-        session.setView('received');
-        onOpenVideo(result.classification);
+        session.setView(returnView);
+        onOpenVideo(result.classification, busy?.id || 'share-action-play');
         return;
       }
       if (result.kind === 'download') {
+        session.selectUrl(result.classification?.url || url);
         session.setClassification(result.classification);
-        session.setView('received');
-        onOpenDownload(result.classification.url);
+        session.setView(returnView);
+        onOpenDownload(result.classification.url, busy?.id || 'share-action-downloads');
         return;
       }
       if (result.kind === 'readable') {
+        session.selectUrl(result.classification?.url || url);
         session.setClassification(result.classification);
         session.pushReadable(result.page);
         render({ focusState: true });
@@ -189,35 +213,45 @@ export function renderShare({
       }
 
       session.setClassification(result.classification);
-      session.setView('error', { code: 'unreliable', url: result.classification?.url || url });
+      session.setView('error', {
+        code: 'unreliable',
+        url: result.classification?.url || url,
+        returnView
+      });
       render({ focusState: true });
     } catch (error) {
-      if (session.snapshot().generation !== generation) return;
-      session.setView('error', { code: error?.code || 'unreachable', url });
+      if (!session.isCurrentRequest(request)) return;
+      session.setView('error', { code: error?.code || 'unreachable', url, returnView });
       render({ focusState: true });
     } finally {
-      if (busyButton && busyButton.isConnected) busyButton.disabled = false;
-      busyButton = null;
+      if (busy && busy.isConnected) busy.disabled = false;
     }
   }
 
   function activateUrl(url, triggerButton = null) {
+    const originState = session.snapshot();
+    const returnView = destinationReturnView(originState);
     const classification = classifySharedUrl(url, { resolveDownload });
     session.selectUrl(classification.url || url);
     session.setClassification(classification);
-    session.setView('received');
 
-    if (classification.kind === 'youtube') return onOpenVideo(classification);
-    if (classification.kind === 'download') return onOpenDownload(classification.url);
-    if (classification.kind === 'web') return readUrl(classification.url, triggerButton);
-    session.setView('error', { code: 'invalid_url', url });
+    if (classification.kind === 'youtube') {
+      session.setView(returnView);
+      return onOpenVideo(classification, triggerButton?.id || 'share-action-play');
+    }
+    if (classification.kind === 'download') {
+      session.setView(returnView);
+      return onOpenDownload(classification.url, triggerButton?.id || 'share-action-downloads');
+    }
+    if (classification.kind === 'web') return readUrl(classification.url, triggerButton, { returnView });
+    session.setView('error', { code: 'invalid_url', url, returnView });
     render({ focusState: true });
   }
 
   function renderReadable(container, state) {
     const page = state.readableHistory.at(-1);
     if (!page) {
-      session.setView('error', { code: 'unreliable', url: currentUrl(state) });
+      session.setView('error', { code: 'unreliable', url: currentUrl(state), returnView: 'received' });
       render({ focusState: true });
       return;
     }
@@ -234,6 +268,7 @@ export function renderShare({
       container.append(source);
     }
 
+    let contentLinkIndex = 0;
     for (const block of Array.isArray(page.blocks) ? page.blocks : []) {
       if (block.type === 'heading') {
         if (String(block.text || '').trim() === String(page.title || '').trim()) continue;
@@ -254,6 +289,7 @@ export function renderShare({
             continue;
           }
           const link = document.createElement('a');
+          link.id = `share-readable-link-${state.readableHistory.length}-${contentLinkIndex++}`;
           link.href = href;
           link.textContent = String(part.text || href);
           link.addEventListener('click', event => {
@@ -278,7 +314,9 @@ export function renderShare({
     }
 
     createButton(container, {
-      label: state.readableHistory.length > 1 ? t('share.backPage') : (state.urls.length > 1 ? t('share.backLinks') : t('share.cancel')),
+      label: state.readableHistory.length > 1
+        ? t('share.backPage')
+        : (state.urls.length > 1 ? t('share.backLinks') : t('share.returnToApp')),
       onClick: back
     });
   }
@@ -296,12 +334,31 @@ export function renderShare({
 
     for (const action of errorActions(state.error?.code)) {
       if (action.id === 'retry') {
-        createButton(container, { label: t(action.labelKey), onClick: event => void readUrl(state.error?.url || currentUrl(state), event.currentTarget) });
+        createButton(container, {
+          id: 'share-error-retry',
+          label: t(action.labelKey),
+          onClick: event => void readUrl(state.error?.url || currentUrl(state), event.currentTarget, {
+            returnView: state.error?.returnView || 'received'
+          })
+        });
       } else if (action.id === 'downloads') {
-        createButton(container, { label: t(action.labelKey), onClick: () => onOpenDownload(state.error?.url || currentUrl(state)) });
+        createButton(container, {
+          id: 'share-error-downloads',
+          label: t(action.labelKey),
+          onClick: event => onOpenDownload(state.error?.url || currentUrl(state), event.currentTarget.id)
+        });
       } else if (action.id === 'cancel') {
-        createButton(container, { label: t(action.labelKey), onClick: finish });
+        createButton(container, { id: 'share-error-cancel', label: t(action.labelKey), onClick: finish });
       }
+    }
+
+    const target = backTargetForState(state);
+    if (target === 'readable' || target === 'multi-url') {
+      createButton(container, {
+        id: 'share-error-back',
+        label: target === 'readable' ? t('share.backPage') : t('share.backLinks'),
+        onClick: back
+      });
     }
   }
 
@@ -321,10 +378,10 @@ export function renderShare({
         label: t(action.labelKey),
         id: `share-action-${action.id}`,
         onClick: () => {
-          if (action.id === 'play') onOpenVideo(classification);
-          else if (action.id === 'downloads') onOpenDownload(classification?.url || currentUrl(state));
-          else if (action.id === 'search') onOpenSearch(state.text);
-          else if (action.id === 'read') void readUrl(classification?.url || currentUrl(state), button);
+          if (action.id === 'play') onOpenVideo(classification, button.id);
+          else if (action.id === 'downloads') onOpenDownload(classification?.url || currentUrl(state), button.id);
+          else if (action.id === 'search') onOpenSearch(state.text, button.id);
+          else if (action.id === 'read') void readUrl(classification?.url || currentUrl(state), button, { returnView: 'received' });
         }
       });
       setButtonLabel(button, t, action);
@@ -351,6 +408,7 @@ export function renderShare({
     state.urls.forEach((url, index) => {
       const item = document.createElement('li');
       createButton(item, {
+        id: `share-link-choice-${index}`,
         label: `${t('share.linkLabel').replace('{number}', String(index + 1))}: ${url}`,
         onClick: event => void activateUrl(url, event.currentTarget)
       });

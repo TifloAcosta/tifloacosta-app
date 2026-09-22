@@ -37,6 +37,38 @@ test('navigate pushes a screen and back restores the origin on the previous scre
   assert.deepEqual(restored, ['result-resource-r1']);
 });
 
+test('router snapshot and restore preserve the complete stack and origin ids', () => {
+  const renders = [];
+  let headingFocuses = 0;
+  const router = createRouter({
+    render: route => renders.push(route),
+    focusScreenHeading: () => { headingFocuses += 1; },
+    restoreOriginFocus: () => {}
+  });
+  router.start('home');
+  router.navigate('search', { originId: 'home-search' });
+  router.navigate('library', { originId: 'result-resource-r1' });
+  const snapshot = router.snapshot();
+  assert.deepEqual(snapshot, [
+    { name: 'home', originId: null },
+    { name: 'search', originId: 'home-search' },
+    { name: 'library', originId: 'result-resource-r1' }
+  ]);
+  snapshot[1].originId = 'mutated';
+  assert.deepEqual(router.current(), { name: 'library', originId: 'result-resource-r1' });
+
+  router.start('home');
+  const baselineFocuses = headingFocuses;
+  router.restore([
+    { name: 'home', originId: null },
+    { name: 'search', originId: 'home-search' },
+    { name: 'library', originId: 'result-resource-r1' }
+  ], { renderCurrent: true, focus: false });
+  assert.deepEqual(router.current(), { name: 'library', originId: 'result-resource-r1' });
+  assert.deepEqual(renders.at(-1), { name: 'library', originId: 'result-resource-r1' });
+  assert.equal(headingFocuses, baselineFocuses);
+});
+
 test('Downloads link Back returns to Downloads and restores the launcher focus', () => {
   const restored = [];
   const router = createRouter({

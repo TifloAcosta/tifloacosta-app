@@ -6,7 +6,8 @@ import { text } from '../src/core/i18n.mjs';
 const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
 test('share decisions keep one clear primary action and bounded error choices', async () => {
-  const { actionsForClassification, errorActions } = await import('../src/screens/share.mjs');
+  const share = await import('../src/screens/share.mjs');
+  const { actionsForClassification, errorActions } = share;
   assert.deepEqual(actionsForClassification({ kind: 'youtube' }).map(item => item.id), ['play']);
   assert.deepEqual(actionsForClassification({ kind: 'download' }).map(item => item.id), ['downloads']);
   assert.deepEqual(actionsForClassification({ kind: 'web' }).map(item => item.id), ['read']);
@@ -14,6 +15,29 @@ test('share decisions keep one clear primary action and bounded error choices', 
   assert.deepEqual(errorActions('unreliable').map(item => item.id), ['downloads', 'cancel']);
   assert.deepEqual(errorActions('timeout').map(item => item.id), ['retry', 'cancel']);
   assert.ok(errorActions('unknown').length <= 4);
+});
+
+test('share navigation preserves the clean-reader or multi-link origin for temporary destinations', async () => {
+  const share = await import('../src/screens/share.mjs');
+  assert.equal(typeof share.destinationReturnView, 'function');
+  assert.equal(typeof share.backTargetForState, 'function');
+  assert.equal(share.destinationReturnView({ view: 'readable' }), 'readable');
+  assert.equal(share.destinationReturnView({ view: 'multi-url' }), 'multi-url');
+  assert.equal(share.destinationReturnView({ view: 'received' }), 'received');
+  assert.equal(share.backTargetForState({
+    view: 'error',
+    error: { returnView: 'readable' },
+    readableHistory: [{ url: 'https://example.com/' }],
+    urls: ['https://example.com/'],
+    selectedUrl: 'https://example.com/next'
+  }), 'readable');
+  assert.equal(share.backTargetForState({
+    view: 'error',
+    error: { returnView: 'multi-url' },
+    readableHistory: [],
+    urls: ['https://a.example/', 'https://b.example/'],
+    selectedUrl: 'https://a.example/'
+  }), 'multi-url');
 });
 
 test('share screen contract is screen-reader friendly and never injects remote HTML', async () => {
@@ -31,9 +55,9 @@ test('share copy exists in Spanish and English for every operational state', () 
   const keys = [
     'screen.share', 'share.receivedYoutube', 'share.receivedWeb', 'share.receivedDownload', 'share.receivedText',
     'share.play', 'share.read', 'share.downloads', 'share.search', 'share.multiFound', 'share.preparing',
-    'share.retry', 'share.cancel', 'share.backPage', 'share.unreliable', 'share.timeout', 'share.unreachable',
+    'share.retry', 'share.cancel', 'share.returnToApp', 'share.backPage', 'share.unreliable', 'share.timeout', 'share.unreachable',
     'share.unsupportedType', 'share.tooLarge', 'share.tooManyRedirects', 'share.httpError', 'share.invalid',
-    'share.source', 'share.chooseLink', 'share.loadingHeading'
+    'share.source', 'share.chooseLink', 'share.loadingHeading', 'share.closePlayer'
   ];
   for (const lang of ['es', 'en']) {
     for (const key of keys) assert.notEqual(text(lang, key), key, `Missing ${lang} ${key}`);

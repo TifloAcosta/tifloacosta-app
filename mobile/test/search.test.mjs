@@ -14,15 +14,21 @@ const content = {
   news: [
     { kind: 'news', id: 'n1', lang: 'es', title: 'Nueva aplicación accesible', summary: 'Una cámara para Android', originalUrl: 'https://example.test/n1' },
     { kind: 'news', id: 'n2', lang: 'en', title: 'Accessible app update', summary: 'Camera improvements', originalUrl: 'https://example.test/n2' }
+  ],
+  apps: [
+    { kind: 'app', id: 'a1', lang: 'es', title: 'App accesible', summary: 'Cámara inclusiva', originalUrl: 'https://example.test/a1' }
+  ],
+  media: [
+    { kind: 'media', id: 'm1', lang: 'es', title: 'Vídeo de tecnología', summary: 'Cámara y accesibilidad', originalUrl: 'https://example.test/m1' }
   ]
 };
 
-test('search ignores accents and case across resources, videos and news', () => {
+test('search ignores accents and case across all global content collections', () => {
   const results = searchContent(content, 'CAMARA', 'es');
-  assert.deepEqual(results.map(item => item.id), ['r1', 'n1', 'v1']);
+  assert.deepEqual(results.map(item => item.id), ['r1', 'a1', 'n1', 'm1', 'v1']);
 });
 
-test('search filters language-specific resources and news but keeps language-neutral videos', () => {
+test('search filters language-specific content but keeps language-neutral catalog videos', () => {
   const spanish = searchContent(content, 'camera', 'es');
   assert.equal(spanish.some(item => item.id === 'r2'), false);
   assert.equal(spanish.some(item => item.id === 'n2'), false);
@@ -63,12 +69,13 @@ test('title-start matches sort before descriptive matches with deterministic tit
   assert.deepEqual(searchContent(values, 'camara', 'es').map(item => item.id), ['c', 'a', 'b']);
 });
 
-test('search screen uses one labeled search field, polite count, stable result ids and no autofocus', async () => {
+test('search screen uses the single global field and delegates exact result activation', async () => {
   const source = await readFile(new URL('../src/screens/search.mjs', import.meta.url), 'utf8');
   assert.match(source, /type\s*=\s*['"]search['"]/);
   assert.match(source, /htmlFor\s*=\s*input\.id/);
   assert.match(source, /ariaLive\s*=\s*['"]polite['"]/);
   assert.match(source, /result-\$\{result\.kind\}-\$\{result\.id\}/);
-  assert.match(source, /router\.navigate\(result\.route,\s*\{\s*originId:\s*button\.id\s*\}\)/);
+  assert.match(source, /onOpenResult\(result,\s*button\.id\)/);
+  assert.doesNotMatch(source, /router\.navigate\(result\.route/);
   assert.doesNotMatch(source, /autofocus/i);
 });

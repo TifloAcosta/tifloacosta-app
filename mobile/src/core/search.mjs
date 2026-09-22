@@ -32,6 +32,16 @@ function resultFrom(kind, item) {
       source: item
     };
   }
+  if (kind === 'app' || kind === 'media') {
+    return {
+      kind,
+      id: String(item.id || ''),
+      title: String(item.title || ''),
+      subtitle: String(item.summary || item.description || item.platform || ''),
+      route: 'actualidad',
+      source: item
+    };
+  }
   return {
     kind: 'news',
     id: String(item.id || ''),
@@ -45,6 +55,8 @@ function resultFrom(kind, item) {
 function searchableText(kind, item) {
   if (kind === 'resource') return `${item.title || ''} ${item.category || ''}`;
   if (kind === 'video') return `${item.title || ''} ${item.description || ''} ${item.excerpt || ''}`;
+  if (kind === 'app') return `${item.title || ''} ${item.summary || ''} ${item.description || ''} ${item.platform || ''}`;
+  if (kind === 'media') return `${item.title || ''} ${item.summary || ''} ${item.description || ''} ${item.platform || ''}`;
   return `${item.title || ''} ${item.summary || ''} ${item.sourceName || ''}`;
 }
 
@@ -55,22 +67,45 @@ function rank(result, query) {
   return 2;
 }
 
+export function searchResultAction(result = {}) {
+  if (result.kind === 'video') {
+    const id = String(result.id || result.source?.id || '').trim();
+    return id ? { type: 'video', id } : null;
+  }
+  if (result.kind === 'resource') {
+    const url = String(result.source?.openUrl || result.source?.url || '').trim();
+    return /^https?:\/\//i.test(url) ? { type: 'resource', url } : null;
+  }
+  if (result.kind === 'news') {
+    const url = String(result.source?.originalUrl || result.source?.url || '').trim();
+    return /^https?:\/\//i.test(url) ? { type: 'news', url } : null;
+  }
+  if (result.kind === 'app' || result.kind === 'media') {
+    const url = String(result.source?.url || result.source?.originalUrl || result.source?.openUrl || '').trim();
+    return /^https?:\/\//i.test(url) ? { type: result.kind, url } : null;
+  }
+  return null;
+}
+
 export function searchContent(content = {}, query = '', lang = 'es') {
   const term = normalize(query);
   if (!term) return [];
   const language = lang === 'en' ? 'en' : 'es';
   const results = [];
 
-  for (const item of Array.isArray(content.resources) ? content.resources : []) {
-    if (!visibleForLanguage(item, language)) continue;
-    if (normalize(searchableText('resource', item)).includes(term)) results.push(resultFrom('resource', item));
-  }
-  for (const item of Array.isArray(content.videos) ? content.videos : []) {
-    if (normalize(searchableText('video', item)).includes(term)) results.push(resultFrom('video', item));
-  }
-  for (const item of Array.isArray(content.news) ? content.news : []) {
-    if (!visibleForLanguage(item, language)) continue;
-    if (normalize(searchableText('news', item)).includes(term)) results.push(resultFrom('news', item));
+  const collections = [
+    ['resource', content.resources],
+    ['video', content.videos],
+    ['news', content.news],
+    ['app', content.apps],
+    ['media', content.media]
+  ];
+
+  for (const [kind, values] of collections) {
+    for (const item of Array.isArray(values) ? values : []) {
+      if (kind !== 'video' && !visibleForLanguage(item, language)) continue;
+      if (normalize(searchableText(kind, item)).includes(term)) results.push(resultFrom(kind, item));
+    }
   }
 
   return results.sort((a, b) => {

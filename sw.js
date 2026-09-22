@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-21-red-white-theme';
+const CACHE = 'tifloacosta-app-v2-22-soft-red';
 const NAVIGATION_TIMEOUT_MS = 5000;
 const SHELL = [
   './',

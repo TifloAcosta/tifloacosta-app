@@ -1,23 +1,26 @@
 const DICTIONARIES = {
   es: {
     app: { title: 'TifloAcosta' },
-    nav: { back: 'Volver' },
+    nav: { back: 'Volver', backHome: 'Volver a la pantalla principal' },
     home: {
       actualidad: 'Actualidad', search: 'Buscar', library: 'Biblioteca', downloads: 'Descargas', favorites: 'Favoritos', videos: 'Vídeos',
       book: 'Mi libro', podcast: 'Podcast', contact: 'Contacto', settings: 'Configuración'
     },
     screen: {
       actualidad: 'Actualidad', search: 'Buscar', library: 'Biblioteca', downloads: 'Descargas', favorites: 'Favoritos', videos: 'Vídeos',
-      book: 'Mi libro', podcast: 'Podcast', contact: 'Contacto', settings: 'Configuración'
+      book: 'Mi libro', podcast: 'Podcast', contact: 'Contacto', settings: 'Configuración', share: 'Compartido con TifloAcosta'
     },
     common: { empty: 'No hay contenido disponible en este momento.', open: 'Abrir', share: 'Compartir' },
     search: {
       label: 'Título o palabra clave', placeholder: 'Por ejemplo: VoiceOver, Android, WhatsApp…', submit: 'Buscar',
       results: '{count} resultados', none: 'No se encontraron resultados.', resultsRegion: 'Resultados de búsqueda'
     },
-    downloads: {
-      intro: 'Elige qué quieres hacer.', link: 'Descargar desde un enlace', sounds: 'Buscar sonidos'
+    reader: {
+      title: 'Lectura accesible', source: 'Fuente', backPage: 'Volver a la página anterior',
+      preparing: 'Preparando contenido', loading: 'Preparando lectura…', errorHeading: 'No hemos podido preparar el contenido',
+      error: 'No hemos podido preparar una versión fiable de esta página.', retry: 'Reintentar'
     },
+    downloads: { intro: 'Elige qué quieres hacer.', link: 'Descargar desde un enlace', sounds: 'Buscar sonidos' },
     downloadsLink: {
       intro: 'Pega un enlace público o compartido y TifloAcosta intentará localizar los archivos descargables disponibles.',
       label: 'Pega aquí el enlace', placeholder: 'https://…', analyze: 'Analizar enlace', analyzing: 'Analizando enlace…',
@@ -42,24 +45,38 @@ const DICTIONARIES = {
       listen: 'Escuchar', openOriginal: 'Abrir original', externalHeading: 'Explorar otros bancos de sonidos',
       externalIntro: 'También puedes abrir estos bancos externos y continuar buscando allí.', openBank: 'Abrir'
     },
+    share: {
+      receivedYoutube: 'Has compartido un vídeo de YouTube.',
+      receivedWeb: 'Has compartido una página web.',
+      receivedDownload: 'Has compartido un enlace que TifloAcosta puede analizar para descargar.',
+      receivedText: 'Has compartido texto.',
+      play: 'Reproducir en TifloAcosta', read: 'Leer en modo accesible', downloads: 'Analizar descargas', search: 'Buscar en TifloAcosta',
+      multiFound: 'Se han encontrado {count} enlaces.', chooseLink: 'Elige cuál quieres abrir.',
+      preparing: 'Preparando lectura…', loadingHeading: 'Preparando contenido', retry: 'Reintentar', cancel: 'Cancelar y volver',
+      returnToApp: 'Volver a la aplicación anterior', backPage: 'Volver a la página anterior', backLinks: 'Volver a la lista de enlaces',
+      closePlayer: 'Cerrar reproductor y volver al contenido compartido',
+      unreliable: 'No hemos podido preparar una versión fiable de esta página.',
+      timeout: 'La página tardó demasiado en responder.', unreachable: 'No hemos podido acceder a esta página.',
+      unsupportedType: 'Este enlace no contiene una página que podamos preparar para lectura.',
+      tooLarge: 'La página es demasiado grande para prepararla de forma segura.',
+      tooManyRedirects: 'El enlace ha realizado demasiadas redirecciones.', httpError: 'La página ha respondido con un error.',
+      invalid: 'El enlace no es válido.', source: 'Fuente', errorHeading: 'No hemos podido preparar el contenido',
+      linkLabel: 'Enlace {number}', youtubeUnavailable: 'No hemos podido preparar este vídeo en el reproductor de TifloAcosta.'
+    },
     favorites: { add: 'Añadir a favoritos', remove: 'Quitar de favoritos', empty: 'Todavía no has añadido ningún favorito.' },
-    actualidad: { empty: 'No hay noticias disponibles en este momento.', original: 'Abrir fuente original' },
+    actualidad: {
+      empty: 'No hay contenidos de actualidad disponibles en este momento.', original: 'Abrir fuente original',
+      news: 'Noticias', apps: 'Apps accesibles', media: 'Escuchar y ver'
+    },
     library: { empty: 'No hay recursos disponibles en este momento.', open: 'Abrir documento', download: 'Guardar documento' },
     videos: {
-      empty: 'No hay vídeos disponibles en este momento.',
-      open: 'Abrir vídeo',
-      play: 'Abrir reproductor',
-      playerHeading: 'Reproductor de vídeo',
-      controlsLabel: 'Controles accesibles del vídeo',
-      rewindOneMinute: 'Retroceder 1 minuto',
-      playControl: 'Reproducir',
-      pauseControl: 'Pausar',
-      forwardOneMinute: 'Avanzar 1 minuto',
+      empty: 'No hay vídeos disponibles en este momento.', open: 'Abrir vídeo', play: 'Abrir reproductor',
+      playerHeading: 'Reproductor de vídeo', controlsLabel: 'Controles accesibles del vídeo',
+      rewindOneMinute: 'Retroceder 1 minuto', playControl: 'Reproducir', pauseControl: 'Pausar', forwardOneMinute: 'Avanzar 1 minuto',
       preparing: 'Preparando los controles accesibles del reproductor…',
       ready: 'Controles accesibles listos. Cada pulsación permite avanzar o retroceder 1 minuto.',
       unavailable: 'No se pudieron activar los controles accesibles adicionales. Puedes abrir el vídeo en YouTube.',
-      closePlayer: 'Cerrar reproductor y volver a los vídeos',
-      openYouTube: 'Abrir este vídeo en YouTube'
+      closePlayer: 'Cerrar vídeo y volver a la lista de vídeos', openYouTube: 'Abrir este vídeo en YouTube'
     },
     book: {
       title: 'La vida vista desde donde estoy', subtitle: 'Reflexiones desde una forma propia de estar en el mundo.',
@@ -84,23 +101,26 @@ const DICTIONARIES = {
   },
   en: {
     app: { title: 'TifloAcosta' },
-    nav: { back: 'Back' },
+    nav: { back: 'Back', backHome: 'Return to the main screen' },
     home: {
       actualidad: 'News', search: 'Search', library: 'Library', downloads: 'Downloads', favorites: 'Favorites', videos: 'Videos',
       book: 'My book', podcast: 'Podcast', contact: 'Contact', settings: 'Settings'
     },
     screen: {
       actualidad: 'News', search: 'Search', library: 'Library', downloads: 'Downloads', favorites: 'Favorites', videos: 'Videos',
-      book: 'My book', podcast: 'Podcast', contact: 'Contact', settings: 'Settings'
+      book: 'My book', podcast: 'Podcast', contact: 'Contact', settings: 'Settings', share: 'Shared with TifloAcosta'
     },
     common: { empty: 'No content is available right now.', open: 'Open', share: 'Share' },
     search: {
       label: 'Title or keyword', placeholder: 'For example: VoiceOver, Android, WhatsApp…', submit: 'Search',
       results: '{count} results', none: 'No results found.', resultsRegion: 'Search results'
     },
-    downloads: {
-      intro: 'Choose what you want to do.', link: 'Download from a link', sounds: 'Search sounds'
+    reader: {
+      title: 'Accessible reading', source: 'Source', backPage: 'Return to the previous page',
+      preparing: 'Preparing content', loading: 'Preparing reading…', errorHeading: 'We could not prepare the content',
+      error: 'We could not prepare a reliable version of this page.', retry: 'Try again'
     },
+    downloads: { intro: 'Choose what you want to do.', link: 'Download from a link', sounds: 'Search sounds' },
     downloadsLink: {
       intro: 'Paste a public or shared link and TifloAcosta will try to locate the downloadable files that are available.',
       label: 'Paste the link here', placeholder: 'https://…', analyze: 'Analyze link', analyzing: 'Analyzing link…',
@@ -125,24 +145,38 @@ const DICTIONARIES = {
       listen: 'Listen', openOriginal: 'Open original', externalHeading: 'Explore other sound banks',
       externalIntro: 'You can also open these external banks and continue searching there.', openBank: 'Open'
     },
+    share: {
+      receivedYoutube: 'You shared a YouTube video.',
+      receivedWeb: 'You shared a web page.',
+      receivedDownload: 'You shared a link that TifloAcosta can analyze for downloads.',
+      receivedText: 'You shared text.',
+      play: 'Play in TifloAcosta', read: 'Read in accessible mode', downloads: 'Analyze downloads', search: 'Search in TifloAcosta',
+      multiFound: '{count} links were found.', chooseLink: 'Choose the one you want to open.',
+      preparing: 'Preparing reading…', loadingHeading: 'Preparing content', retry: 'Try again', cancel: 'Cancel and return',
+      returnToApp: 'Return to the previous app', backPage: 'Return to the previous page', backLinks: 'Return to the link list',
+      closePlayer: 'Close the player and return to the shared content',
+      unreliable: 'We could not prepare a reliable version of this page.',
+      timeout: 'The page took too long to respond.', unreachable: 'We could not reach this page.',
+      unsupportedType: 'This link does not contain a page that can be prepared for reading.',
+      tooLarge: 'The page is too large to prepare safely.',
+      tooManyRedirects: 'The link went through too many redirects.', httpError: 'The page returned an error.',
+      invalid: 'The link is not valid.', source: 'Source', errorHeading: 'We could not prepare the content',
+      linkLabel: 'Link {number}', youtubeUnavailable: 'We could not prepare this video in the TifloAcosta player.'
+    },
     favorites: { add: 'Add to favorites', remove: 'Remove from favorites', empty: 'You have not added any favorites yet.' },
-    actualidad: { empty: 'There are no news items available right now.', original: 'Open original source' },
+    actualidad: {
+      empty: 'There is no current content available right now.', original: 'Open original source',
+      news: 'News', apps: 'Accessible apps', media: 'Listen and watch'
+    },
     library: { empty: 'There are no resources available right now.', open: 'Open document', download: 'Save document' },
     videos: {
-      empty: 'There are no videos available right now.',
-      open: 'Open video',
-      play: 'Open player',
-      playerHeading: 'Video player',
-      controlsLabel: 'Accessible video controls',
-      rewindOneMinute: 'Rewind 1 minute',
-      playControl: 'Play',
-      pauseControl: 'Pause',
-      forwardOneMinute: 'Forward 1 minute',
+      empty: 'There are no videos available right now.', open: 'Open video', play: 'Open player',
+      playerHeading: 'Video player', controlsLabel: 'Accessible video controls', rewindOneMinute: 'Rewind 1 minute',
+      playControl: 'Play', pauseControl: 'Pause', forwardOneMinute: 'Forward 1 minute',
       preparing: 'Preparing the accessible player controls…',
       ready: 'Accessible controls are ready. Each press moves forward or back 1 minute.',
       unavailable: 'The additional accessible controls could not be activated. You can open the video on YouTube.',
-      closePlayer: 'Close player and return to videos',
-      openYouTube: 'Open this video on YouTube'
+      closePlayer: 'Close video and return to the video list', openYouTube: 'Open this video on YouTube'
     },
     book: {
       title: 'Life Seen from Where I Stand', subtitle: 'Reflections from my own way of being in the world.',

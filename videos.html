@@ -12,7 +12,7 @@
 <meta property="og:locale" content="es_ES">
 <meta property="og:site_name" content="TifloAcosta">
 <meta property="og:title" content="Vídeos de TifloAcosta">
-<meta property="og:description" content="Busca, ordena y recorre el catálogo de vídeos públicos del Canal TifloAcosta.">
+<meta property="og:description" content="Ordena y recorre el catálogo de vídeos públicos del Canal TifloAcosta.">
 <meta property="og:url" content="https://tifloacosta.com/videos.html">
 <meta property="og:image" content="https://tifloacosta.com/tifloacosta-icon-512.png">
 <meta property="og:image:alt" content="Símbolo de TifloAcosta">
@@ -85,21 +85,13 @@ body:has(#video-player-section:not([hidden])) > .site-footer {
     </section>
 
     <div class="video-player-actions">
-      <button id="video-player-close" type="button">Cerrar reproductor y volver a los vídeos</button>
+      <button id="video-player-close" type="button">Cerrar vídeo y volver a la lista de vídeos</button>
       <a id="video-player-youtube" class="button-link" href="https://www.youtube.com/@tifloacosta" target="_blank" rel="noopener noreferrer">Abrir este vídeo en YouTube</a>
     </div>
   </section>
 
   <section id="video-controls-section">
-    <h2 id="video-controls-heading">Buscar y ordenar</h2>
-    <form id="video-search-form">
-      <label id="video-search-label" for="video-search">Título, descripción o tema del vídeo</label>
-      <div class="search-row">
-        <input id="video-search" type="search" autocomplete="off" placeholder="Por ejemplo: VoiceOver, Android, WhatsApp…">
-        <button id="video-search-button" type="submit">Buscar</button>
-        <button id="video-clear" type="button">Limpiar búsqueda</button>
-      </div>
-    </form>
+    <h2 id="video-controls-heading">Ordenar vídeos</h2>
     <div class="video-sort-control">
       <label id="video-sort-label" for="video-sort">Orden</label>
       <select id="video-sort">
@@ -110,7 +102,7 @@ body:has(#video-player-section:not([hidden])) > .site-footer {
   </section>
 
   <section id="video-results-section">
-    <h2 id="video-results-heading" tabindex="-1">Resultados</h2>
+    <h2 id="video-results-heading" tabindex="-1">Vídeos</h2>
     <p id="video-status" class="muted" aria-live="polite" aria-atomic="true">Cargando catálogo de vídeos…</p>
     <div id="video-list" class="video-list"></div>
     <div id="video-pagination" class="pagination" hidden>
@@ -122,7 +114,7 @@ body:has(#video-player-section:not([hidden])) > .site-footer {
 
   <p><a id="back-home-bottom" class="button-link back-link" href="index.html" role="button" aria-label="Volver a la pantalla principal de TifloAcosta App">Volver a la pantalla principal</a></p>
 
-  <noscript><p>Necesitas JavaScript activado para buscar, ordenar y paginar el catálogo de vídeos.</p></noscript>
+  <noscript><p>Necesitas JavaScript activado para ordenar y paginar el catálogo de vídeos.</p></noscript>
 </main>
 
 <div class="site-footer">
@@ -131,12 +123,10 @@ body:has(#video-player-section:not([hidden])) > .site-footer {
   </div>
 </div>
 
-<script src="video-search-index.js?v=1.0"></script>
-<script src="videos-core.js?v=0.17"></script>
 <script src="youtube-actions-config.js?v=1.0"></script>
 <script src="youtube-actions-core.js?v=1.1"></script>
 <script src="youtube-actions.js?v=1.1"></script>
-<script src="videos.js?v=2.3"></script>
+<script src="videos-browse.js?v=1.0"></script>
 <script src="youtube-actions-bridge.js?v=1.0"></script>
 <script data-goatcounter="https://tifloacosta.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>

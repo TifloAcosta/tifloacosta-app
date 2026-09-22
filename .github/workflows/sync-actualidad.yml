@@ -20,10 +20,12 @@ on:
       - 'scripts/sync-actualidad.mjs'
       - 'scripts/sync-actualidad-apps.mjs'
       - 'scripts/sync-actualidad-media.mjs'
+      - 'scripts/build-mobile-content.mjs'
       - 'scripts/validate-actualidad-discovery.mjs'
       - 'test/actualidad-auto-*.test.mjs'
       - 'test/openai-actualidad-client.test.mjs'
       - 'test/actualidad-media-*.test.mjs'
+      - 'test/mobile-content.test.mjs'
       - 'docs/actualidad-multimedia-candidates.md'
       - '.github/workflows/sync-actualidad.yml'
   schedule:
@@ -82,6 +84,9 @@ jobs:
             exit 1
           fi
 
+      - name: Build mobile content feed
+        run: node scripts/build-mobile-content.mjs
+
       - name: Run tests
         run: npm test
 
@@ -114,6 +119,9 @@ jobs:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: node scripts/sync-actualidad-media.mjs
 
+      - name: Build mobile content feed
+        run: node scripts/build-mobile-content.mjs
+
       - name: Run tests
         run: npm test
 
@@ -121,7 +129,7 @@ jobs:
         id: changes
         shell: bash
         run: |
-          if [ -n "$(git status --porcelain -- actualidad.json actualidad-apps.json actualidad-media.json actualidad-editorial.json actualidad-auto-state.json)" ]; then
+          if [ -n "$(git status --porcelain -- actualidad.json actualidad-apps.json actualidad-media.json actualidad-editorial.json actualidad-auto-state.json mobile-content.json)" ]; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
           else
             echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -133,7 +141,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add actualidad.json actualidad-apps.json actualidad-media.json actualidad-editorial.json actualidad-auto-state.json
+          git add actualidad.json actualidad-apps.json actualidad-media.json actualidad-editorial.json actualidad-auto-state.json mobile-content.json
           git commit -m "chore: sync Actualidad"
           git push
 

@@ -2,7 +2,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import vm from 'node:vm';
 
-export function buildMobileContent({ resources = [], videos = [], news = [], generatedAt = new Date().toISOString() }) {
+export function buildMobileContent({ resources = [], videos = [], news = [], apps = [], media = [], generatedAt = new Date().toISOString() }) {
   return {
     schemaVersion: 1,
     generatedAt,
@@ -37,6 +37,28 @@ export function buildMobileContent({ resources = [], videos = [], news = [], gen
       originalUrl: item.originalUrl || '',
       publishedAt: item.publishedAt || '',
       categories: Array.isArray(item.categories) ? [...item.categories] : []
+    })),
+    apps: apps.map(item => ({
+      kind: 'app',
+      id: item.id,
+      lang: item.lang || '',
+      title: item.title || '',
+      summary: item.summary || '',
+      platform: item.platform || '',
+      sourceName: item.sourceName || '',
+      originalUrl: item.originalUrl || '',
+      publishedAt: item.publishedAt || ''
+    })),
+    media: media.map(item => ({
+      kind: 'media',
+      id: item.id,
+      lang: item.lang || item.originalLanguage || '',
+      title: item.title || '',
+      summary: item.summary || '',
+      platform: item.platform || '',
+      sourceName: item.sourceName || '',
+      originalUrl: item.originalUrl || item.mediaUrl || '',
+      publishedAt: item.publishedAt || ''
     }))
   };
 }
@@ -71,12 +93,28 @@ async function loadNews() {
   ].filter(item => item?.type === 'news');
 }
 
+async function loadJsonArray(relativePath) {
+  const source = await readFile(new URL(relativePath, import.meta.url), 'utf8');
+  const parsed = JSON.parse(source);
+  return Array.isArray(parsed) ? parsed : [];
+}
+
+async function loadApps() {
+  return loadJsonArray('../actualidad-apps.json');
+}
+
+async function loadMedia() {
+  return loadJsonArray('../actualidad-media.json');
+}
+
 async function main() {
-  const [resources, videos, news] = await Promise.all([loadResources(), loadVideos(), loadNews()]);
-  const feed = buildMobileContent({ resources, videos, news });
+  const [resources, videos, news, apps, media] = await Promise.all([
+    loadResources(), loadVideos(), loadNews(), loadApps(), loadMedia()
+  ]);
+  const feed = buildMobileContent({ resources, videos, news, apps, media });
   const output = new URL('../mobile-content.json', import.meta.url);
   await writeFile(output, `${JSON.stringify(feed, null, 2)}\n`, 'utf8');
-  console.log(`Mobile content generated: ${feed.resources.length} resources, ${feed.videos.length} videos, ${feed.news.length} news.`);
+  console.log(`Mobile content generated: ${feed.resources.length} resources, ${feed.videos.length} videos, ${feed.news.length} news, ${feed.apps.length} apps, ${feed.media.length} media.`);
 }
 
 const invokedPath = process.argv[1] ? pathToFileURL(process.argv[1]).href : '';

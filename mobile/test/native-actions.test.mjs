@@ -6,34 +6,12 @@ function createHarness({ backResult = true } = {}) {
   const calls = [];
   let backHandler = null;
   const appPlugin = {
-    addListener(event, handler) {
-      calls.push(['listen', event]);
-      if (event === 'backButton') backHandler = handler;
-      return Promise.resolve({ remove() {} });
-    },
-    exitApp() {
-      calls.push(['exit']);
-      return Promise.resolve();
-    }
+    addListener(event, handler) { calls.push(['listen', event]); if (event === 'backButton') backHandler = handler; return Promise.resolve({ remove() {} }); },
+    exitApp() { calls.push(['exit']); return Promise.resolve(); }
   };
-  const sharePlugin = {
-    share(options) {
-      calls.push(['share', options]);
-      return Promise.resolve();
-    }
-  };
-  const browserPlugin = {
-    open(options) {
-      calls.push(['open', options]);
-      return Promise.resolve();
-    }
-  };
-  const router = {
-    back() {
-      calls.push(['back']);
-      return backResult;
-    }
-  };
+  const sharePlugin = { share(options) { calls.push(['share', options]); return Promise.resolve(); } };
+  const browserPlugin = { open(options) { calls.push(['open', options]); return Promise.resolve(); } };
+  const router = { back() { calls.push(['back']); return backResult; } };
   return { calls, appPlugin, sharePlugin, browserPlugin, router, triggerBack: () => backHandler?.() };
 }
 
@@ -70,4 +48,33 @@ test('blank external URLs and blank shares are ignored safely', async () => {
   assert.equal(await actions.openExternal(''), false);
   assert.equal(await actions.share({}), false);
   assert.deepEqual(h.calls, []);
+});
+
+test('finishSharedFlow delegates to native finishShare', async () => {
+  let called = 0;
+  const actions = createNativeActions({
+    tifloSharePlugin: {
+      async finishShare() {
+        called += 1;
+        return { finished: true };
+      }
+    }
+  });
+  assert.equal(await actions.finishSharedFlow(), true);
+  assert.equal(called, 1);
+});
+
+test('Android back gives an active share flow first chance to handle Back', async () => {
+  const h = createHarness({ backResult: true });
+  let shareBacks = 0;
+  const actions = createNativeActions({ appPlugin: h.appPlugin });
+  await actions.installBackHandler(h.router, {
+    beforeBack: () => {
+      shareBacks += 1;
+      return true;
+    }
+  });
+  await h.triggerBack();
+  assert.equal(shareBacks, 1);
+  assert.deepEqual(h.calls, [['listen', 'backButton']]);
 });

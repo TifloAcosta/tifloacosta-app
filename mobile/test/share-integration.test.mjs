@@ -53,6 +53,22 @@ test('shared destinations carry the exact origin focus and use a share-specific 
   assert.match(app, /originId:\s*originId/);
 });
 
+test('redirected destinations choose a focus target that exists on return', async () => {
+  const { destinationOriginId } = await import('../src/screens/share.mjs');
+  assert.equal(
+    destinationOriginId({ returnView: 'received', kind: 'youtube', triggerId: 'share-action-read' }),
+    'share-action-play'
+  );
+  assert.equal(
+    destinationOriginId({ returnView: 'received', kind: 'download', triggerId: 'share-action-read' }),
+    'share-action-downloads'
+  );
+  assert.equal(
+    destinationOriginId({ returnView: 'readable', kind: 'youtube', triggerId: 'share-readable-link-1-0' }),
+    'share-readable-link-1-0'
+  );
+});
+
 test('a short web URL that redirects to YouTube is reclassified before reader parsing', async () => {
   const { resolveSharedUrl } = await import('../src/screens/share.mjs');
   const result = await resolveSharedUrl({

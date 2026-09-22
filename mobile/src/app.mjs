@@ -9,11 +9,14 @@ import { text } from './core/i18n.mjs';
 import { createNativeActions } from './core/native-actions.mjs';
 import { applyPreferences, createPreferencesStore } from './core/preferences.mjs';
 import { resolveLocal } from './core/downloads.mjs';
+import { classifySharedText } from './core/share-classifier.mjs';
+import { createShareSession } from './core/share-session.mjs';
 import { createReaderSession } from './core/reader-session.mjs';
 import { loadReadableTarget } from './core/readable-loader.mjs';
 import { searchResultAction } from './core/search.mjs';
 import { TifloSave } from './core/save-plugin.mjs';
 import { createNotificationService } from './native/notifications.mjs';
+import { TifloShare } from './native/share-plugin.mjs';
 import { TifloWebFetch, fetchSharedPage } from './native/web-fetch-plugin.mjs';
 import { renderHome } from './screens/home.mjs';
 import { renderActualidad } from './screens/actualidad.mjs';
@@ -28,6 +31,7 @@ import { renderBook } from './screens/book.mjs';
 import { renderPodcast } from './screens/podcast.mjs';
 import { renderContact } from './screens/contact.mjs';
 import { renderSettings } from './screens/settings.mjs';
+import { renderShare } from './screens/share.mjs';
 import { renderReader } from './screens/reader.mjs';
 import { createAccessibleVideoPlayer, createSharedVideoItem } from './screens/video-player.mjs';
 
@@ -39,9 +43,13 @@ let currentContent = EMPTY_CONTENT;
 let activeScreenCleanup = null;
 let screenBackHandler = null;
 let readerController = null;
+let shareController = null;
+let shareMode = false;
+let normalRouterSnapshot = null;
 let pendingVideoId = '';
 let pendingDirectVideo = null;
 let pendingDownloadUrl = '';
+let pendingSearchQuery = '';
 
 function safeStorage() {
   try {
@@ -56,11 +64,13 @@ const preferencesStore = createPreferencesStore({ storage });
 const favoritesStore = createFavoritesStore(storage);
 const notificationService = createNotificationService(null);
 const readerSession = createReaderSession();
+const shareSession = createShareSession();
 const nativeActions = createNativeActions({
   appPlugin: App,
   sharePlugin: Share,
   browserPlugin: Browser,
-  savePlugin: TifloSave
+  savePlugin: TifloSave,
+  tifloSharePlugin: TifloShare
 });
 preferencesStore.load();
 applyPreferences(document.documentElement, preferencesStore.getCurrent());
@@ -88,6 +98,12 @@ function openNormalDownload(url, originId = '') {
   if (!clean) return false;
   pendingDownloadUrl = clean;
   router.navigate('downloads-link', { originId: originId || null });
+  return true;
+}
+
+function openSharedSearch(value = '', originId = '') {
+  pendingSearchQuery = String(value || '').trim();
+  router.navigate('search', { originId: originId || null });
   return true;
 }
 
@@ -208,6 +224,66 @@ function openSearchResult(result, originId) {
   return false;
 }
 
+async function finishSharedFlow() {
+  if (!shareMode) return false;
+  activeScreenCleanup?.();
+  activeScreenCleanup = null;
+  screenBackHandler = null;
+  shareController = null;
+  shareSession.clear();
+  shareMode = false;
+
+  if (Array.isArray(normalRouterSnapshot) && normalRouterSnapshot.length) {
+    router.restore(normalRouterSnapshot, { renderCurrent: true, focus: false });
+  } else {
+    router.start('home');
+  }
+  normalRouterSnapshot = null;
+  await nativeActions.finishSharedFlow();
+  return true;
+}
+
+function handleShareBack() {
+  if (!shareMode) return false;
+  if (typeof screenBackHandler === 'function' && screenBackHandler()) return true;
+  const route = router.current()?.name || '';
+  if (route !== 'share' && router.back()) return true;
+  if (shareController?.back) return shareController.back();
+  void finishSharedFlow();
+  return true;
+}
+
+function beginSharedFlow(value = '') {
+  const textValue = String(value || '').trim();
+  if (!textValue) return false;
+  const result = classifySharedText(textValue, { resolveDownload: resolveLocal });
+
+  if (!shareMode) {
+    normalRouterSnapshot = router.snapshot();
+  }
+  shareSession.begin({ text: result.text, urls: result.urls });
+  if (result.kind === 'single-url') {
+    shareSession.selectUrl(result.urls[0]);
+    shareSession.setClassification(result.classification);
+  } else if (result.kind === 'text') {
+    shareSession.setClassification({ kind: 'text' });
+  } else if (result.kind === 'multi-url') {
+    shareSession.setView('multi-url');
+  }
+
+  shareMode = true;
+  router.start('share');
+  return true;
+}
+
+async function installShareReceiver() {
+  const initial = await TifloShare.getInitialShare();
+  if (initial?.shared && initial.text) beginSharedFlow(initial.text);
+  await TifloShare.addListener('shareReceived', payload => {
+    beginSharedFlow(payload?.text || '');
+  });
+}
+
 function renderDirectVideo(context) {
   root.replaceChildren();
   const back = document.createElement('button');
@@ -233,7 +309,7 @@ function renderDirectVideo(context) {
     t,
     nativeActions,
     allowYouTubeFallback: true,
-    closeLabel: t('videos.closePlayer'),
+    closeLabel: shareMode ? t('share.returnToApp') : t('videos.closePlayer'),
     onClose: () => router.back()
   });
   screenBackHandler = () => player.close() === true;
@@ -249,6 +325,7 @@ function render(route) {
   activeScreenCleanup = null;
   screenBackHandler = null;
   readerController = null;
+  shareController = null;
 
   const preferences = preferencesStore.getCurrent();
   document.title = t('app.title');
@@ -271,7 +348,12 @@ function render(route) {
   switch (route.name) {
     case 'home': renderHome(context); break;
     case 'actualidad': renderActualidad({ ...context, onOpenNews: openActualidadNews }); break;
-    case 'search': renderSearch({ ...context, onOpenResult: openSearchResult }); break;
+    case 'search': {
+      const initialQuery = pendingSearchQuery;
+      pendingSearchQuery = '';
+      renderSearch({ ...context, onOpenResult: openSearchResult, initialQuery });
+      break;
+    }
     case 'library': renderLibrary(context); break;
     case 'downloads': renderDownloads(context); break;
     case 'downloads-link': {
@@ -303,6 +385,20 @@ function render(route) {
       });
       break;
     }
+    case 'share': {
+      shareController = renderShare({
+        root,
+        session: shareSession,
+        resolveDownload: resolveLocal,
+        webFetch: target => fetchSharedPage(target, TifloWebFetch),
+        t,
+        onOpenVideo: (classification, originId) => openDirectVideo(classification, originId),
+        onOpenDownload: (url, originId) => openNormalDownload(url, originId),
+        onOpenSearch: (value, originId) => openSharedSearch(value, originId),
+        onFinish: finishSharedFlow
+      });
+      break;
+    }
     case 'book': renderBook(context); break;
     case 'podcast': renderPodcast(context); break;
     case 'contact': renderContact(context); break;
@@ -318,6 +414,7 @@ export const router = createRouter({
 });
 
 function handleScreenBack() {
+  if (shareMode) return handleShareBack();
   if (typeof screenBackHandler === 'function' && screenBackHandler()) return true;
   if (router.current()?.name === 'reader' && readerController?.back) return readerController.back();
   return false;
@@ -338,6 +435,7 @@ function onPreferencesChange(changes, { reset = false } = {}) {
 }
 
 router.start('home');
+void installShareReceiver();
 
 const contentStore = createContentStore({
   fetchFn: (...args) => window.fetch(...args),
@@ -346,7 +444,7 @@ const contentStore = createContentStore({
 
 contentStore.load().then(result => {
   currentContent = result.content || EMPTY_CONTENT;
-  if (!textInputIsActive()) render(router.current());
+  if (!shareMode && !textInputIsActive()) render(router.current());
 });
 
 export function getContent() {

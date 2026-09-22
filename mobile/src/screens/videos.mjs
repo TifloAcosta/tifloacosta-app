@@ -98,7 +98,7 @@ async function openExternal(url, nativeActions) {
   return true;
 }
 
-export function renderVideos({ root, router, content, favoritesStore, nativeActions, t, setScreenCleanup }) {
+export function renderVideos({ root, router, content, favoritesStore, nativeActions, t, setScreenCleanup, initialVideoId = '' }) {
   clearScreen(root);
   addScreenHeader(root, { router, title: t('screen.videos'), backLabel: t('nav.back') });
 
@@ -319,6 +319,11 @@ export function renderVideos({ root, router, content, favoritesStore, nativeActi
         void openPlayer(item, playButton);
       });
       article.append(playButton);
+      if (String(item.id || '') === String(initialVideoId || '')) {
+        queueMicrotask(() => {
+          if (!disposed) void openPlayer(item, playButton);
+        });
+      }
     }
 
     if (url) {

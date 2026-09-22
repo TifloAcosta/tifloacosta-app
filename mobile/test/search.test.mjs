@@ -69,6 +69,7 @@ test('search screen uses one labeled search field, polite count, stable result i
   assert.match(source, /htmlFor\s*=\s*input\.id/);
   assert.match(source, /ariaLive\s*=\s*['"]polite['"]/);
   assert.match(source, /result-\$\{result\.kind\}-\$\{result\.id\}/);
-  assert.match(source, /router\.navigate\(result\.route,\s*\{\s*originId:\s*button\.id\s*\}\)/);
+  assert.match(source, /onOpenResult\(result,\s*button\.id\)/);
+  assert.doesNotMatch(source, /router\.navigate\(result\.route/);
   assert.doesNotMatch(source, /autofocus/i);
 });

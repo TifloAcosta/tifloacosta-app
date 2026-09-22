@@ -214,6 +214,30 @@ function htmlBlocks(scope, baseUrl) {
   return blocks;
 }
 
+function standaloneAnchorBlocks(scope, baseUrl, existingBlocks) {
+  const seen = new Set();
+  for (const block of existingBlocks) {
+    for (const part of block.parts || []) {
+      if (part.type === 'link') seen.add(`${part.url}\n${part.text}`);
+    }
+  }
+
+  const blocks = [];
+  const pattern = /<a\b([^>]*)>([\s\S]*?)<\/a\s*>/gi;
+  let match;
+  while ((match = pattern.exec(String(scope || '')))) {
+    const label = cleanText(match[2]);
+    const href = attributeValue(match[1], 'href');
+    const url = normalizeHttpHref(href, baseUrl);
+    const part = { type: 'link', text: label, url };
+    const signature = `${url}\n${label}`;
+    if (!url || seen.has(signature) || !isUsefulContentLink({ href: url, text: label, baseUrl }) || !isDescriptiveLink(part)) continue;
+    seen.add(signature);
+    blocks.push({ type: 'list-item', parts: [part] });
+  }
+  return blocks;
+}
+
 function htmlReliability(title, blocks) {
   if (!title) return false;
   const prose = blocks.filter(block => block.type === 'paragraph' || block.type === 'list-item');
@@ -252,7 +276,8 @@ export function extractReadablePage({ html = '', url = '', contentType = '' } = 
   const scope = readableScope(html);
   const extractedTitle = extractTitle(html, scope);
   const title = extractedTitle || source;
-  const blocks = htmlBlocks(scope, baseUrl || url);
+  const primaryBlocks = htmlBlocks(scope, baseUrl || url);
+  const blocks = [...primaryBlocks, ...standaloneAnchorBlocks(scope, baseUrl || url, primaryBlocks)];
   return {
     reliable: htmlReliability(extractedTitle, blocks),
     title,

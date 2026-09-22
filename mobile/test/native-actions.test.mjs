@@ -45,6 +45,21 @@ test('Android back delegates to app navigation before exiting', async () => {
   assert.deepEqual(h.calls, [['listen', 'backButton'], ['back']]);
 });
 
+test('Android back lets an app-specific handler consume the event before router navigation', async () => {
+  const h = createHarness({ backResult: true });
+  let intercepted = 0;
+  const actions = createNativeActions({ appPlugin: h.appPlugin, sharePlugin: h.sharePlugin, browserPlugin: h.browserPlugin });
+  await actions.installBackHandler(h.router, {
+    beforeBack: () => {
+      intercepted += 1;
+      return true;
+    }
+  });
+  await h.triggerBack();
+  assert.equal(intercepted, 1);
+  assert.deepEqual(h.calls, [['listen', 'backButton']]);
+});
+
 test('Android back exits only when there is no in-app screen to return to', async () => {
   const h = createHarness({ backResult: false });
   const actions = createNativeActions({ appPlugin: h.appPlugin, sharePlugin: h.sharePlugin, browserPlugin: h.browserPlugin });

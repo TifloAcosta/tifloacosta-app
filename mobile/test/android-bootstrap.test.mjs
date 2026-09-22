@@ -56,8 +56,8 @@ test('Android bootstrap is isolated, reproducible and supports secret-backed rel
     assert.ok(buildGradle.includes(expected), `Android release signing missing: ${expected}`);
   }
 
-  assert.match(buildGradle, /versionCode\s+4\b/);
-  assert.match(buildGradle, /versionName\s+"1\.0\.3"/);
+  assert.match(buildGradle, /versionCode\s+5\b/);
+  assert.match(buildGradle, /versionName\s+"1\.0\.4"/);
 
   for (const expected of ['*.jks', '*.keystore', 'keystore.properties']) {
     assert.ok(gitignore.includes(expected), `Git ignore must protect: ${expected}`);

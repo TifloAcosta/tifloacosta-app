@@ -55,6 +55,23 @@ function rank(result, query) {
   return 2;
 }
 
+export function searchResultAction(result = {}) {
+  const kind = String(result.kind || '');
+  if (kind === 'video') {
+    const id = String(result.id || '').trim();
+    return id ? { type: 'video', id } : null;
+  }
+  if (kind === 'resource') {
+    const url = String(result.source?.openUrl || result.source?.url || '').trim();
+    return url ? { type: 'external', url } : null;
+  }
+  if (kind === 'news') {
+    const url = String(result.source?.originalUrl || '').trim();
+    return url ? { type: 'external', url } : null;
+  }
+  return null;
+}
+
 export function searchContent(content = {}, query = '', lang = 'es') {
   const term = normalize(query);
   if (!term) return [];

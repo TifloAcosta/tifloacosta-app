@@ -1,5 +1,103 @@
 [
   {
+    "id": "9to5mac-2a04fcaa7d71b00c",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/21/watchos-27-2-beta-2-brings-the-app-switcher-back-with-a-new-gesture/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-22T02:07:14.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "watchOS 27.2 beta 2 brings the App Switcher back with a new gesture",
+        "summary": "If you’ve been missing the double-click of the Digital Crown that used to bring up the App Switcher on the Apple Watch before watchOS 27, it looks like the feature is making a comeback as of watchOS 27.2 beta 2. Here are the details. more…",
+        "body": "If you’ve been missing the double-click of the Digital Crown that used to bring up the App Switcher on the Apple Watch before watchOS 27, it looks like the feature is making a comeback as of watchOS 27.2 beta 2. Here are the details.\n\nEarlier today, Apple rolled out watchOS 27.2 beta 2 for developers, less than a week after releasing beta 1.\n\nIncluded in today’s beta is a tidbit that will likely please longtime Apple Watch users, including my colleague Zac Hall . Earlier this month, he wrote about how watchOS 27 had removed the ability to quickly switch between recently used apps by double-clicking the Digital Crown.\n\nIn his piece, he noted that there was no longer any way to quickly jump between recent apps, and wished Apple would restore the gesture before releasing watchOS 27, or in a future update.\n\nWhile Apple didn’t bring back the App Switcher’s Digital Crown shortcut in today’s watchOS 27.2 beta 2, it did restore the App Switcher itself with a new gesture.\n\nAs spotted by the Apple Den Discord server and shared by user Bones on X , watchOS 27.2 beta 2 lets users press and hold the bottom of the screen while inside an app to bring up the App Switcher.\n\nAs Bones noted in their tweet, the App Switcher otherwise works much like it did before: after activating the App Switcher with a long press on the bottom of the screen, users can turn the Digital Crown to scroll through recently used apps, or swipe left on an app and tap the “X” button to remove it from the switcher.\n\nWhile, like with any beta, there is no guarantee that this exact interaction will make it into the final release (likely to come next month), its addition in watchOS 27.2 beta 2 suggests that Apple is listening to user feedback and looking for a way to bring the App Switcher back.\n\nHave you been missing the App Switcher on watchOS 27? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "applevis-apps-f5993d0cc238bd5f",
+    "type": "news",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/chess-meets-necromancy",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-22T00:07:10.000Z",
+    "categories": [
+      "apple",
+      "apps-accesibles",
+      "android"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Chess Meets Necromancy",
+        "summary": "Chess you already know. An army you have to raise. Chess Meets Necromancy is a turn-based roguelike played on a real chessboard with real chess movement. Your hero is one piece. Everything you capture is a corpse you can raise. THE RUN Twenty waves across four acts. Enemies move like the pieces they are - grunts step like pawns, lancers leap like knights, imp matrons slide like queens. Clear the board, take a relic, spend your gold, march on. Die and the run is over. RAISE AN ARMY Spend souls next to your hero to raise Skeletons, Bone Knights, Wraiths, Bone Golems and Seraphs. Every summon moves as a chess piece. Give them a stance - Hunt, Hold or Guard - and they act after you, every turn. Army slots are limited, so choose what you bring. RELICS AND TRAITS Nineteen relics, each with levels that stack across a run. Seventeen lasting traits bought in the town between waves: extra turns before a wave lands, fewer enemies per wave, a free summon every wave, bank interest, a doubled army cap. No two runs build the same. BOSSES Ten bosses with real HP bars, from the Ogre Warchief to the Lich King, the Stone Titan and the Brood Queen. Act IV stops sending one king and starts sending a court - the final board holds three at once. THE TOWN Between waves, spend gold. Buy traits, promote your King into a Warlord, hire a new champion, or put gold in the bank and let it earn interest. FOUR HEROES Necromancer, Death Knight, Priestess, Ranger. Each moves differently, starts differently, and each has a relic only they can find. TAP ANYTHING Tap any piece to see its name, movement, attack and health. Gold squares preview where it steps, red squares preview what it can take. Learn the board before you commit. - Plays entirely offline, no required account - No ads, no timers, no energy system - Optional Game Center leaderboards and achievements - No in-app purchases; everything is earned in-run - Game controller support - iPhone and iPad - Pixel art and haptics If you can play chess, you can start. Whether you finish is another question.",
+        "body": "Chess you already know. An army you have to raise. Chess Meets Necromancy is a turn-based roguelike played on a real chessboard with real chess movement. Your hero is one piece. Everything you capture is a corpse you can raise. THE RUN Twenty waves across four acts. Enemies move like the pieces they are - grunts step like pawns, lancers leap like knights, imp matrons slide like queens. Clear the board, take a relic, spend your gold, march on. Die and the run is over. RAISE AN ARMY Spend souls next to your hero to raise Skeletons, Bone Knights, Wraiths, Bone Golems and Seraphs. Every summon moves as a chess piece. Give them a stance - Hunt, Hold or Guard - and they act after you, every turn. Army slots are limited, so choose what you bring. RELICS AND TRAITS Nineteen relics, each with levels that stack across a run. Seventeen lasting traits bought in the town between waves: extra turns before a wave lands, fewer enemies per wave, a free summon every wave, bank interest, a doubled army cap. No two runs build the same. BOSSES Ten bosses with real HP bars, from the Ogre Warchief to the Lich King, the Stone Titan and the Brood Queen. Act IV stops sending one king and starts sending a court - the final board holds three at once. THE TOWN Between waves, spend gold. Buy traits, promote your King into a Warlord, hire a new champion, or put gold in the bank and let it earn interest. FOUR HEROES Necromancer, Death Knight, Priestess, Ranger. Each moves differently, starts differently, and each has a relic only they can find. TAP ANYTHING Tap any piece to see its name, movement, attack and health. Gold squares preview where it steps, red squares preview what it can take. Learn the board before you commit. - Plays entirely offline, no required account - No ads, no timers, no energy system - Optional Game Center leaderboards and achievements - No in-app purchases; everything is earned in-run - Game controller support - iPhone and iPad - Pixel art and haptics If you can play chess, you can start. Whether you finish is another question."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-6ab3dc33b503a253",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2261591/why-laptop-fan-so-loud/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-22T00:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Why is your laptop fan so loud?",
+        "summary": "Laptop fans do an important job, but sometimes they get annoyingly loud. Here's what it might mean and whether you should be concerned.",
+        "body": "Here's how to know whether it's cause for concern.\n\nWhether you're a hardcore gamer or a hardworking student, you probably know that the best laptops for gaming and schoolwork can get monstrously loud. There are several reasons why your portable PC's fans are driving you to distraction with their constant din, but thankfully there are also steps you can take to reduce the noise levels they generate.\n\nIt's important to note that aggressively loud laptop fans shouldn't necessarily make you worry. In most cases, especially with gaming laptops, the fans are working so hard because they need to ventilate the heat that your machine's CPU and GPU are generating. The more demanding the game or processing task you throw at your laptop, the faster its fans have to spin to prevent system-wide overheating.\n\nSure, the constant whirr of laptop fan noise can detract from gaming experiences, but it's a better solution than suffering through regular crashes owing to an overheated GPU. There are situations where loud fan noise should concern you, and we'll guide you through those below. In a lot of cases, though, noisy laptop fans shouldn't give you sleepless nights. But if they do, we've got tips on how to make them quieter.\n\nMost likely because you're putting the poor thing under seriously heavy load. The best gaming laptops can get obnoxiously noisy when running demanding modern titles. When games like Crimson Desert are putting a lot of strain on both the GPU and CPU, your laptop's fans have to run at extremely high speeds to dissipate heat from these two crucial components. Prosumer workstations that have been designed with intensive productivity tasks in mind (like 4K video rendering) can also get seriously noisy when GPU usage shoots through the roof.\n\nAt the time of writing, we consider the ASUS ROG Zephryus G14 to be the best gaming laptop around. I'm actually writing this up on the beastly RTX 5080 configuration. Trust me when I say that my eardrums know the pain of excessive fan noise all too well. Like many high-end laptops, the G14 has a Turbo mode that squeezes maximum performance out of modern games, at an exceptionally loud cost. In terms of noise output, my G14 can reach in excess of 50 dB (that's a super-distracting amount of decibels). Unless you play in an FPS-slaying quiet mode, most gaming laptops are going to drum up a whole lot of din.\n\nHaving a bunch of background processes running can be taxing on your laptop's fans too, so it's worth opening the task manager, checking CPU usage and closing any programs you don't actively need. Blocking effective ventilation to your laptop's fans will also increase noise output, while dust accumulation can clog fan blades, making them even louder, which we're about to touch on.\n\nIn most instances, absolutely. If you're in the middle of playing a demanding AAA game — particularly one that supports advanced ray tracing features like Cyberpunk 2077 — loud fan noise is sadly par for the course. That doesn't mean your laptop is bricked, though. Far from it. Instead, your portable PC's fans are merely doing their job by helping to reduce the thermal levels of your system's internal components. In short, a distractingly noisy fan when your laptop is under heavy load is completely normal and, crucially, safe.\n\nAdmittedly, there are cases where noisy fans could point to issues with your laptop. Fans whirring at consistently high speeds are generally nothing to fret over provided your laptop is performing demanding tasks. Yet if your machine sounds like a jumbo jet taking off when you're merely swapping between tabs in your favorite browser, that's more concerning.\n\nShould you find that fans are running at full pelt even when your laptop's GPU and CPU usage levels are low, that could be a sign of dust build-up. When debris accumulates inside your laptop, it can cause dust to cover your system's fan blades, restricting airflow. If you're worried your fans are clogged, it's best to take your laptop to a repair specialist, who will likely remove the lower case of your PC and use compressed air to clean its fans.\n\nRattling or buzzing noises emanating from your laptop's fans should be even more worrying. If you are hearing these irregular noises, the fan's internal bearing may well be damaged. A fan that's not providing proper cooling can cause serious overheating problems, leading to erratic crashes and shutdowns. Concerned about irregular sounds coming from your laptop's fans? Definitely take your system to an expert or contact the manufacturer.\n\nExcessive fan noise is generally more common on gaming laptops than it is on standard workstations. Regardless of whether your laptop is a portable powerhouse or is primarily used to watch cat videos on YouTube, you can get the best battery life for your Windows laptop by changing these settings . Improving battery performance is often tied to boosting power efficiency, which in turn can lower fan noise.\n\nOne of the easiest methods to reduce fan speeds is by swapping to a quieter power mode. On a Windows laptop, go to Settings > System > Power & battery > Power mode , then select Best power efficiency . Alternatively, if you own a dedicated gaming laptop, there's a decent chance it will have manufacturer-specific software to help you set or reduce fan speed. In the case of my Asus Zephyrus G14, I can quickly select the Quiet profile through its Armoury Crate app , drastically reducing decibel levels.\n\nStaying on noisy gaming laptops, a good way to reduce the din of rapidly whirring fans is to lower in-game settings and cap frame rates. With the latter, capping the PC games to a 60 FPS limit can significantly reduce performance demands compared to running titles at uncapped frame rates, in turn helping to reduce fan noise. Turning off high-end features like ray tracing and lowering a game's internal resolution will also put less strain on your laptop's GPU, allowing your system to run quieter.\n\nIt's also worth considering what conditions you're using your laptop in. In the height of summer, your laptop's fans have to work harder to ventilate the warmer surrounding air. If you're worried about ventilation, place your laptop on a flat surface like a desk, as propping your system on a bed or even, yes, your lap, can block airflow to the fans."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-1f38957c2d22f4b9",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/21/the-man-who-built-apples-stores-doesnt-buy-silicon-valleys-bet-on-ai-shopping/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-21T23:44:28.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The man who built Apple’s stores doesn’t buy Silicon Valley’s bet on AI shopping",
+        "summary": "Apple Store architect Ron Johnson says Apple's secret sauce has always been its people.",
+        "body": "While Silicon Valley is spending billions to make AI agents shop for us, the man who pioneered Apple’s retail stores thinks the industry is overestimating how much of shopping people will hand over to machines — and believes physical stores will continue to thrive.\n\nRon Johnson, 66, has heard predictions about the demise of physical retail before. He joined Apple in 2000 to build its retail business as online shopping was beginning to take off, and went on to help create a store network that became central to how Apple sells its products and connects with customers.\n\n“AI is a new technology that will improve the online shopping experience,” Johnson said in an interview. “But I don’t know that it’s going to change which way we shop.”\n\nJohnson’s view comes as some of the world’s biggest tech companies are trying to push AI deeper into shopping, betting that agents can automate more of how we find and buy items — a concept commonly called agentic commerce . Google is making that push with its Universal Commerce Protocol , a standard designed to help AI agents take consumers from product discovery to checkout. OpenAI, meanwhile, is turning ChatGPT into a shopping destination where users can research, compare, and, in some cases, even buy products without leaving the chatbot.\n\nAsked whether he could imagine someone letting an agent choose and buy a $1,000 or $2,000 laptop without ever visiting a website or store, Johnson was unequivocal: “Honestly, nobody’s going to do that.”\n\nBuying a laptop, he argued, is too personal a purchase to simply delegate to an AI agent. Buyers want to feel its weight, see the display and decide which size works for them. AI may narrow the choices, Johnson told TechCrunch. He added that many consumers would still want to experience the product themselves before spending that kind of money.\n\n“AI will never be able to have you physically experience a product,” Johnson said. Instead, he expects agents to better inform consumers before they walk into a store. “They’ll just become more informed shoppers when they come to the store.”\n\nJohnson’s conviction stems from a decision Apple made more than two decades ago. Apple’s physical stores, he said, were designed not only as places to buy Macs, but also as places where people could try products, learn how to use them, and return for help when something went wrong.\n\nSome of those bets are revisited in Shop Different: How Retail Revealed Apple’s Genius , Johnson’s new book about building Apple’s retail operations alongside Steve Jobs. Competitors, he said, borrowed Apple’s glass-heavy design, open layouts, and even versions of the Genius Bar, but often missed the people.\n\n“The secret sauce for Apple has always been its people, the people in the store, and how they treat the customer,” Johnson said.\n\nApple Store employees are not paid on commission, Johnson said, unlike the sales culture common across much of retail. The idea, he said, was to remove the pressure to sell and instead have employees figure out what a customer actually needed.\n\nAfter leaving Apple, Johnson took over J.C. Penney in 2011 with an ambitious plan to reinvent the struggling department-store chain. He was ousted less than two years later after sales plunged.\n\nJohnson now says he tried to change too much, too quickly, without bringing employees and customers along. Apple’s stores had effectively been a startup that evolved alongside the company’s products. J.C. Penney, on the other hand, was a turnaround that required a different approach.\n\n“I applied a startup mentality to what needed to be a turnaround transformation,” he recalled.\n\nJohnson later returned to the startup world , founding Enjoy Technology, an e-commerce company that brought technology products and setup services directly to customers’ homes. The startup filed for bankruptcy in 2022 and sold substantially all of its assets to Asurion.\n\nFor all his skepticism about how AI will reshape shopping, Johnson remains bullish on the technology itself. “I’m a real believer in AI. I’m an AI optimist,” he said.\n\nHe believes Jobs would have embraced AI, too, but not as a substitute for human judgment. “There’s no substitute for human intuition,” Johnson said, recalling Jobs’ belief in bringing smart people together to debate problems and find new ways of looking at them."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "9to5mac-e25235563a448911",
     "type": "news",
     "sourceId": "9to5mac",
@@ -97,30 +195,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-4dee7f8b52ccd71d",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/21/ios-27-2-beta-2-reveals-new-details-about-unnanounced-iphone-anti-snatching-feature/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-21T21:53:37.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iOS 27.2 beta 2 reveals new details about unnanounced iPhone anti-snatching feature",
-        "summary": "Apple continues to work on a feature that automatically locks an iPhone when it detects that the device has been snatched from its owner’s hand. Here are the details. more…",
-        "body": "Apple continues to work on a feature that automatically locks an iPhone when it detects that the device has been snatched from its owner’s hand. Here are the details.\n\nEarlier this year, 9to5Mac first reported that Apple was working on a new iPhone security feature that can automatically lock the device when it detects that it has been snatched from the user’s hand.\n\nWhile Apple has yet to officially announce the feature, new references included in iOS 27.2 beta 2 show the company is still actively developing it.\n\nAccording to new code seen today by 9to5Mac, the feature, which is called “AutoLock” internally, can use the following signals to determine whether an iPhone may have been taken from its owner:\n\nAdditionally, new references include safeguards meant to prevent false positives, such as successful biometric authentication, certain foreground app activities that could otherwise be mistaken for signs that the device has been taken, and a backoff mechanism that can temporarily suppress further automatic locks after repeated lock events.\n\nThe code also suggests AutoLock uses a voting system in which a potential theft signal can request a lock, while safeguards such as biometrics, familiar locations, or certain app activities can veto it.\n\nThese new details add to the references already present in the code, including a location-based safeguard similar to Stolen Device Protection that accounts for whether the iPhone is in a familiar place.\n\nIt is worth noting that the feature is still under development and is not currently enabled or available as a user-facing option in iOS 27.2 beta 2. Rather, Apple has enabled the underlying AutoLock service in the background, while keeping the component that actually locks the iPhone disabled, possibly as a way to test the underlying behavior without actually triggering automatic locks.\n\nThis means that, for now, the new references only provide a look at Apple’s progress in developing the feature. Whether or when it will ultimately launch remains up to Apple."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "the-verge-3dc1e8761181a9a3",
     "type": "news",
     "sourceId": "the-verge",
@@ -212,55 +286,6 @@
         "title": "Meta’s Muse is outpacing ChatGPT’s early mobile launch",
         "summary": "Meta’s new AI agent Muse has racked up more downloads and daily active users in the U.S. and Canada than ChatGPT did over the same period after its mobile debut, according to new estimates from Appfigures.",
         "body": "Meta’s latest AI app, Muse, could be the social giant’s next major hit, new data suggests. According to just- released estimates from market intelligence provider Appfigures , Muse’s app on mobile devices has been downloaded more times during its first twelve days on the market than ChatGPT was in the twelve days after its debut. (This data compares the U.S. and Canada markets only.)\n\nMuse also has more daily active users than ChatGPT had at the time, the firm found.\n\nUntil now, it had been difficult to make an exact apples-to-apples comparison between these two apps, given that they had pursued different launch strategies. When ChatGPT arrived on mobile, it was made available globally, but only on iOS. Muse, meanwhile, is available across both Apple’s App Store and Google Play, but only in the U.S. and Canada.\n\nTo better align the numbers for comparison, Appfigures looked only at the iOS data for the U.S. and Canada for both apps during the first twelve days of their respective launches. In this subset of the data, Muse has now seen 1.8 million downloads to ChatGPT’s 1.3 million.\n\nOverall, Muse has seen 2.8 million total installs globally in its first 12 days, the firm also said. Its growth hasn’t yet stagnated, either; Muse has moved up from its original position as No. 2 overall on the U.S. App Store immediately after its launch to now No. 1, as Business Insider reported on Friday. That jump put the app higher than ChatGPT, the outlet noted.\n\nIn addition, Appfigures’ data indicates that Muse’s U.S. daily active users are now higher than they were for ChatGPT at the same point after its launch. When comparing just the U.S. mobile app daily active users, Muse comes in higher with 642,000 daily users compared with 231,000 for ChatGPT at the time.\n\nTo be fair to the fact that Muse is available across both iOS and Android, while ChatGPT launched on iOS only, Appfigures narrowed the comparison to iOS alone. Yet, even here, Muse is coming in higher with 359,000 daily active users on iOS, still above ChatGPT’s figures from that time period.\n\nAppfigures can only provide third-party estimates about an app’s downloads and active users; it doesn’t have direct access to Meta’s internal figures. But even if these numbers are only correct from a general “ballpark” perspective, they indicate that Muse could have a shot at becoming Meta’s newest top app.\n\nMeta already perfected its cross-promotion strategy when it launched Instagram’s Threads, which now has 500+ million users, thanks to heavy marketing and integrations in Meta’s largest apps, including Instagram and Facebook. Muse is likely to get a similar push, given that the AI app can connect with both of those platforms. It also works inside WhatsApp, so that could give it another boost.\n\nWhile Appfigures doesn’t have visibility into Meta’s cross-promotion efforts or ads directly, it did note that over 95% of Muse’s users are also Facebook users and 63% are Instagram users.\n\nMeta, which has been asked for comment, has not yet shared public figures related to Muse’s early adoption."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-aec648b01de84040",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2261250/iphone-duo-vs-standard-software-differences/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-21T18:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "programas-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "How the iPhone Duo's software is different from a standard iPhone",
-        "summary": "The iPhone Duo makes some big changes to iOS to account for the foldable design. It affects the camera, multitasking and more.",
-        "body": "The iPhone Duo has some tricks that no other iPhone can do.\n\nApple finally has a foldable iPhone: the iPhone Duo is arriving in October , and it changes the shape of the device in a way we haven't seen before. But the fold is only part of the story, as Apple has built many features specifically for this form factor. It's still iOS underneath, but not the way you're used to.\n\nThe interface has been revamped to take advantage of the new screens: apps can run side by side and Apple Pencil now works on the iPhone . If you go for an iPhone Duo, you'll be able to explore a set of software features that aren't available on the regular models.\n\nPerhaps the most notable change is in multitasking. While iOS has offered a way to keep multiple apps running since iOS 4, it's never been iPad-level multitasking . The iPhone keeps recent apps suspended in the background so you can switch between them without losing your place, but there has never really been a way to use two apps at the same time until now. iPhone Duo is the first iPhone with iPad-inspired multitasking . It doesn't have the full Stage Manager with floating windows, but you can open two apps side by side on the inner screen.\n\nThe entire iOS interface has been optimized for the Duo. Small details, like keeping your Home Screen accessible on one side of the inner screen while apps run on the other side, make all the difference. It's easy to pick the two apps you want to run side-by-side, while some can also take advantage of the larger inside display.\n\nThe status bar also looks quite different. Instead of sitting at the top, it's now on the right side and features redesigned elements. Cellular signal, Wi-Fi and battery indicators are now grouped together to save screen space. That right side of the screen also holds the Dock and Dynamic Island.\n\nThe device's foldable form factor also introduces new ways to use the iPhone. Fold it in half and watch iOS take on a new form, putting inputs (like the keyboard) on the bottom half while the app content can shine on the top half. It's perfect for watching videos with your iPhone sitting on the table. Thanks to hinge awareness, interactable elements are moved away from the crease when tapping them might be difficult. Or, put the iPhone Duo into \"tent\" mode to turn it into a table clock — it even lights up the inner screen when an alarm goes off.\n\nThe new device format also enables many fresh camera features exclusive to the iPhone Duo. Smart Take is one of the most interesting: it uses AI to take photos of you when you strike a pose. There's no need to press any buttons or set a timer. You can also use the external screen as a live camera preview, which is perfect for filming yourself with the rear camera or helping someone pose for a photo.\n\nThere's a \"Kid Cue\" mode that shows a Snoopy animation on the external screen so your kids will look at the camera while you take a photo. It's akin to the \"Made You Look\" feature on the Pixel 9 Pro Fold and newer, which parents will certainly appreciate. And on FaceTime, you can show both your front and rear cameras — bringing other nearby people into your call becomes much easier with video on the external screen.\n\nOf course, not everything is perfect. The iPhone Duo lacks many of the camera features found on the iPhone 18 Pro , such as the new variable-aperture lens and pro controls. But that's a fair trade-off for people who want to try out Apple's first foldable phone."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-1142cfa61fd3e8dc",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/21/metas-ai-agent-has-been-blocked-from-using-amazon-com/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-21T17:55:18.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta’s AI agent has been blocked from using Amazon.com",
-        "summary": "Amazon has its own cohort of foundation models, along with one of the most popular inference platforms on the internet. As long as they're under no legal obligation to open the doors to Muse, why would they?",
-        "body": "Posted:\n\nSunday night, users of Meta’s AI assistant Muse started getting a strange error message when they tried to buy goods on Amazon. As spotted by GeekWire , the error message read: “Continued access by an unauthorized AI agent violates Amazon’s Conditions of Use, to which our customers have agreed.”\n\nIn other words, Muse isn’t welcome as a shopper — and anyone trying to buy something on Amazon through the AI agent will have to find it somewhere else.\n\nIt’s easy to see the block as a tête-à-tête between tech giants. Amazon has its own cohort of foundation models , after all, along with one of the most popular inference platforms on the internet . As long as they’re under no legal obligation to open the doors to Muse, why would they?\n\nBut there are also substantive reasons Amazon might not want to be in the agentic commerce business just yet. If Muse makes a bad order, Amazon is going to be the one to clean it up — dealing with both the angry customer and the angry vendor. Muse has one of the lower hallucination rates , as AI models go, but it’s still pretty far from zero. Even if Amazon sees an opportunity in agent-driven commerce, they may want to wait a few more release cycles before rolling anything out."
       }
     },
     "media": null
@@ -1192,32 +1217,6 @@
         "title": "Vispero Connect: Now Also On YouTube",
         "summary": "You asked, we listened. Vispero Connect, our official monthly podcast, is now available on YouTube. Each episode features product news and tips, interviews with members of our Vispero team, user stories, as well as previews of our upcoming training events. View Vispero Connect playlist on our YouTube channel Of course, you can still find us …",
         "body": "You asked, we listened.\n\nVispero Connect, our official monthly podcast, is now available on YouTube. Each episode features product news and tips, interviews with members of our Vispero team, user stories, as well as previews of our upcoming training events.\n\nOf course, you can still find us on all major podcast platforms.\n\nHappy listening! And let’s keep connected!"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "applevis-apps-df5ce5d148613dfe",
-    "type": "news",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/productivity/ghostwriter-markdown",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-09T06:04:10.000Z",
-    "categories": [
-      "apple",
-      "apps-accesibles",
-      "windows",
-      "braille"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "ghostWriter Markdown",
-        "summary": "Accessibility-first Markdown writing with VoiceOver-friendly editing, document organization, and flexible exports to Word, PDF, HTML, braille, and more. ghostWriter Markdown is a plain-text writing app for notes, articles, lists, documentation, and anything else you want to say with words. It was built accessibility-first. Not accessibility-eventually, or accessibility-in-the-settings-somewhere. VoiceOver was at the center of the design from the first line of code, as the app has been fully created by a Blind developer. If you write with a screen reader, this app was made for you. If you don't, you get a clean, fast, native editor that never gets in your way. So what's Markdown? Markdown adds structure to writing using a few ordinary punctuation marks. A number sign makes a heading. A dash makes a list item. Your document stays readable as plain text, and you can render it whenever you want to see the finished formatting. You don't have to know any of this to start. The Insert feature can add common elements for you, and a built-in Markdown Reference is always a tap away. Writing Made Easy: • A native editor with the Markdown punctuation kept visible, so you always control the source • Insert Actions for links, images, headings, quotes, code, lists, tasks, tables, and rules • Automatic list continuation for bullets, numbers, and task lists • Indent and outdent with tabs or spaces, your choice • Find and Replace, dictation, braille input, and text selection through native iOS controls • A configurable Status Bar showing line, column, word count, current heading, and selection • Automatic saving as you pause, plus Save Now whenever you want it Useful Navigation: • Outline lists every heading in your document and jumps straight to one, moving both the cursor and VoiceOver focus • A 3-finger horizontal swipe with VoiceOver will move the cursor through your document headings while editing • Jump to Line for long documents • Search across document names and their contents • Your last editing position is remembered in every file Keep Files Organized: • Nested folders you can create, rename, move, and navigate • Pin the documents you keep coming back to • Sort by name, created, modified, or last opened • Recently Deleted holds removed files until you restore them or clear them out • Import Markdown, .txt, Word .docx or Powerpoint presentations to convert them into Markdown Render and Share: • See your Markdown as structured HTML right inside the app • Share complete standalone HTML, Markdown, plain text, ePub, tagged PDF, eBraille, BRF, Microsoft Word documents or even Powerpoint presentations • Rendered output uses real semantic headings, lists, tables, links, and landmarks — so what you share is accessible to whoever receives it Your Files, Your Devices: • Documents are ordinary Markdown files, visible in the Files app • Store them on your device, or turn on iCloud Drive to sync across your iPhone, iPad, and Mac • Open and edit the same files in any other app that reads text • Nothing is locked in a proprietary format, and nothing needs this app to survive Accessibility: Developed toward WCAG 2.2 Level AA and tested with VoiceOver as a primary interaction method. • A predictable, linear VoiceOver reading order • Native controls with the roles and behaviors you already expect • Dynamic Type, including accessibility text sizes, everywhere • System, monospaced, rounded, and serif editor typefaces • Light, dark, and system appearance • Voice Control, Switch Control, and hardware keyboard support • Optional keyboard shortcuts for common actions • Reduced-motion support Privacy: No accounts. No sign-in. No ads. No analytics. No tracking. No data collection of any kind. There is no server behind this app because there doesn't need to be one. Your documents are yours, on your device or in your own iCloud, and they never travel anywhere you don't send them. Made by a blind developer who got tired of using tools that treated screen reader support as an afterthought. Heading",
-        "body": "Accessibility-first Markdown writing with VoiceOver-friendly editing, document organization, and flexible exports to Word, PDF, HTML, braille, and more. ghostWriter Markdown is a plain-text writing app for notes, articles, lists, documentation, and anything else you want to say with words. It was built accessibility-first. Not accessibility-eventually, or accessibility-in-the-settings-somewhere. VoiceOver was at the center of the design from the first line of code, as the app has been fully created by a Blind developer. If you write with a screen reader, this app was made for you. If you don't, you get a clean, fast, native editor that never gets in your way. So what's Markdown? Markdown adds structure to writing using a few ordinary punctuation marks. A number sign makes a heading. A dash makes a list item. Your document stays readable as plain text, and you can render it whenever you want to see the finished formatting. You don't have to know any of this to start. The Insert feature can add common elements for you, and a built-in Markdown Reference is always a tap away. Writing Made Easy: • A native editor with the Markdown punctuation kept visible, so you always control the source • Insert Actions for links, images, headings, quotes, code, lists, tasks, tables, and rules • Automatic list continuation for bullets, numbers, and task lists • Indent and outdent with tabs or spaces, your choice • Find and Replace, dictation, braille input, and text selection through native iOS controls • A configurable Status Bar showing line, column, word count, current heading, and selection • Automatic saving as you pause, plus Save Now whenever you want it Useful Navigation: • Outline lists every heading in your document and jumps straight to one, moving both the cursor and VoiceOver focus • A 3-finger horizontal swipe with VoiceOver will move the cursor through your document headings while editing • Jump to Line for long documents • Search across document names and their contents • Your last editing position is remembered in every file Keep Files Organized: • Nested folders you can create, rename, move, and navigate • Pin the documents you keep coming back to • Sort by name, created, modified, or last opened • Recently Deleted holds removed files until you restore them or clear them out • Import Markdown, .txt, Word .docx or Powerpoint presentations to convert them into Markdown Render and Share: • See your Markdown as structured HTML right inside the app • Share complete standalone HTML, Markdown, plain text, ePub, tagged PDF, eBraille, BRF, Microsoft Word documents or even Powerpoint presentations • Rendered output uses real semantic headings, lists, tables, links, and landmarks — so what you share is accessible to whoever receives it Your Files, Your Devices: • Documents are ordinary Markdown files, visible in the Files app • Store them on your device, or turn on iCloud Drive to sync across your iPhone, iPad, and Mac • Open and edit the same files in any other app that reads text • Nothing is locked in a proprietary format, and nothing needs this app to survive Accessibility: Developed toward WCAG 2.2 Level AA and tested with VoiceOver as a primary interaction method. • A predictable, linear VoiceOver reading order • Native controls with the roles and behaviors you already expect • Dynamic Type, including accessibility text sizes, everywhere • System, monospaced, rounded, and serif editor typefaces • Light, dark, and system appearance • Voice Control, Switch Control, and hardware keyboard support • Optional keyboard shortcuts for common actions • Reduced-motion support Privacy: No accounts. No sign-in. No ads. No analytics. No tracking. No data collection of any kind. There is no server behind this app because there doesn't need to be one. Your documents are yours, on your device or in your own iCloud, and they never travel anywhere you don't send them. Made by a blind developer who got tired of using tools that treated screen reader support as an afterthought. Heading"
       }
     },
     "media": null

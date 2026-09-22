@@ -41,6 +41,18 @@ test('shared video helper creates a standalone player item outside the catalog',
   assert.equal(videoItemFromShared({ videoId: 'bad', url: 'https://example.com', title: 'Bad' }), null);
 });
 
+test('shared destinations carry the exact origin focus and use a share-specific player close label', async () => {
+  const [app, player] = await Promise.all([
+    read('src/app.mjs'),
+    read('src/screens/video-player.mjs')
+  ]);
+  assert.match(player, /closeLabel/);
+  assert.match(app, /function openSharedVideo\(classification,\s*originId/);
+  assert.match(app, /function openSharedDownload\(url,\s*originId/);
+  assert.match(app, /closeLabel:\s*t\('share\.closePlayer'\)/);
+  assert.match(app, /originId:\s*originId/);
+});
+
 test('a short web URL that redirects to YouTube is reclassified before reader parsing', async () => {
   const { resolveSharedUrl } = await import('../src/screens/share.mjs');
   const result = await resolveSharedUrl({

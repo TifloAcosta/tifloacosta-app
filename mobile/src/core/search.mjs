@@ -55,6 +55,11 @@ function rank(result, query) {
   return 2;
 }
 
+function httpUrl(value = '') {
+  const url = String(value || '').trim();
+  return /^https?:\/\//i.test(url) ? url : '';
+}
+
 export function searchResultAction(result = {}) {
   const kind = String(result.kind || '');
   if (kind === 'video') {
@@ -62,12 +67,12 @@ export function searchResultAction(result = {}) {
     return id ? { type: 'video', id } : null;
   }
   if (kind === 'resource') {
-    const url = String(result.source?.openUrl || result.source?.url || '').trim();
-    return url ? { type: 'external', url } : null;
+    const url = httpUrl(result.source?.openUrl || result.source?.url);
+    return url ? { type: 'resource', url } : null;
   }
   if (kind === 'news') {
-    const url = String(result.source?.originalUrl || '').trim();
-    return url ? { type: 'external', url } : null;
+    const url = httpUrl(result.source?.originalUrl || result.source?.url);
+    return url ? { type: 'news', url } : null;
   }
   return null;
 }

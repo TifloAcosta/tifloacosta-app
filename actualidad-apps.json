@@ -120,6 +120,18 @@
     "publishedAt": null
   },
   {
+    "id": "applevis-apps-456cafda828f02e9",
+    "title": "Scratch Mancer: Card Roguelike",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/scratch-mancer-card-roguelike",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "A scratch-card roguelike. You work the night counter of a House that sells luck sealed under foil. The quota is due by dawn. Miss it, and the House keeps you. Every ticket is a grid of foil hiding cash, multipliers and skulls. Your thumb is the budget — stamina runs out long before the tickets do, so where you scratch matters as much as what's under it. THE DECISION YOU MAKE ALL GAME • Scratch a cell to 20% and you can read the fragment — it doesn't count and it doesn't trigger • Scratch to 45% and it counts for real, skulls included • One revealed skull halves the payout. Two void the ticket • Cash out whenever you like. Only what you revealed pays BUILD A RUN THAT BENDS THE ODDS • 40 charms across 5 slots: reroll skulls into coins, drift sevens toward corners, make a graze count as a hit • A warden calls every third night. Each one bends a rule you were leaning on. There are six of them • Seven ticket types, each with its own payout rule — match three, complete a crossword, climb a rising ladder, or reveal a single cell on an Offering and stop • Four single-use tools in three pockets: spray the foil to see straight through it, magnet a symbol sideways, sticker a skull into a seven • Nine nights, each with a quota due at dawn. Then endless, if you're still standing • Beat the House and the Seals open: seven stacked terms for the players who won, one added per win. Higher quotas, a skull on every ticket, wardens arriving early, two on the last night. Break all seven NO ADS. NO PAYWALLS. JUST SCRATCHING. One purchase, the whole game. The odds don't know what you paid, because there is no second payment to make: no coins to buy, no subscription, no season pass, no timers. • Plays fully offline • Family Sharing enabled • Game Center achievements and leaderboards • One thumb, portrait, a night finishes on a bus ride • Built for iPhone and iPad by one developer Scratch the foil, read what you can, and try to leave before the House notices. Scratchmancer is a work of fiction. No real money changes hands, no real lottery products appear, and the odds in it are invented.",
+    "publishedAt": "2026-09-22T20:35:01.000Z"
+  },
+  {
     "id": "applevis-apps-f5993d0cc238bd5f",
     "title": "Chess Meets Necromancy",
     "sourceId": "applevis-apps",
@@ -226,17 +238,5 @@
     "platform": "Apple",
     "summary": "Build an automated solar empire from a single bot into a galaxy-spanning Dyson swarm. Create bots, manufacture solar panels, harness stars for energy, and reinvest your profits into an ever-growing production network. Idle Dyson Swarm expands far beyond the first star: • Unlock Research, Skills, Facilities and Mega-Structures • Break through Infinity and optimise repeated prestige runs • Explore Simulations, Reality and Quantum progression • Process offline progress with configurable Stored Time controls • Inspect detailed production formulas and performance statistics • Customise navigation, number notation, audio and processing speed • Continue an existing same-device save from the original Unity version Play in English, French, German, Latin American Spanish, Brazilian Portuguese, Simplified Chinese, Russian or Japanese. Progress at your own pace, refine your automation, and see how much of reality your swarm can consume.",
     "publishedAt": "2026-09-12T10:22:06.000Z"
-  },
-  {
-    "id": "applevis-apps-6367c92be95914e0",
-    "title": "Remote Incident Manager Mobile",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/productivity/remote-incident-manager-mobile",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Harness the power of born-accessible remote desktop, right in the palm of your hand! Remote Incident Manager’s mobile companion turns your iPhone or iPad into a powerful universal remote for any PC or Mac running Remote Incident Manager, opening up a world of possibilities. Tap into your home computer while on your commute, and control it as if you were right there in front of it! Run full support or training sessions straight from your phone, complete with crystal-clear voice conversations. Perform routine maintenance on machines across fleets, anytime, anywhere! All this and more with just a phone and a keyboard! Features: Accessible by design. Simple by nature. Near-complete keyboard control across Windows and macOS, irrespective of screen reader. Accessible, customizable touch keyboard and VoiceOver gesture-based control, making simple tasks possible in the absence of a keyboard. High-fidelity, low-latency audio output from the remote computer. Clear visual output with precise mouse/trackpad control. Crystal-clear voice conversations with built-in noise cancelation. In-session text chat capability. No screen reader? No problem! Leverage our Remote Accessibility module to provide assistance to a computer without the need to install a screen reader! Secure peer-to-peer connections between your phone and a remote computer make for extremely low latency (even on mobile data!). Note: This mobile companion is designed solely as a controller and cannot be used as a target. In other words, a computer cannot control a phone running the companion. Account registration through the desktop client or Remote Incident Manager website prior to your first use of this app is highly recommended for an optimal experience.",
-    "publishedAt": "2026-09-12T02:25:44.000Z"
   }
 ]

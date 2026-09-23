@@ -1,13 +1,37 @@
 [
   {
-    "id": "techcrunch-2e32591749498d0c",
+    "id": "the-verge-cef268e2e4279764",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/999673/meta-connect-2026-muse-glasses-features",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-23T23:40:56.000Z",
+    "categories": [
+      "tecnologia-general",
+      "gafas-inteligentes"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Muse is coming to Meta smart glasses",
+        "summary": "Just a couple of weeks after launching Muse, Meta announced that it's \"working on\" bringing the agent to its smart glasses, including the new glasses it unveiled at Meta Connect. Users will be able to activate Muse from their glasses by saying its name and ask it to handle tasks like guiding a workout, logging […]",
+        "body": "Just a couple of weeks after launching Muse , Meta announced that it's \"working on\" bringing the agent to its smart glasses, including the new glasses it unveiled at Meta Connect. Users will be able to activate Muse from their glasses by saying its name and ask it to handle tasks like guiding a workout, logging meals, or helping them shop for products they're looking at.\n\nMuse is just one of several major updates coming to Meta's glasses. They're also getting some new accessibility features, like a Hearing Enhancement feature Meta says is \"FDA-cleared software for adults with perceived mild to moderate hearing loss.\" It will be available lat …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-8c0fba7bc3a55fd4",
     "type": "news",
     "sourceId": "techcrunch",
     "sourceName": "TechCrunch",
     "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/23/even-americans-who-use-ai-every-day-are-worried-about-it/",
+    "originalUrl": "https://techcrunch.com/2026/09/23/meta-introduces-camera-free-ai-glasses/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-23T16:49:58.000Z",
+    "publishedAt": "2026-09-23T23:39:44.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -16,216 +40,141 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Even Americans who use AI every day are worried about it",
-        "summary": "The report suggests that greater exposure will not resolve the unease around the technology, nor reduce public support for AI regulation.",
-        "body": "People across the world are increasingly turning to AI for everyday tasks, from looking up recipes and doing their homework to researching work projects or making presentations.\n\nBut using AI every day doesn’t necessarily mean people are feeling comfortable with its implications for the world: About 68% of Americans who use AI daily are worried about it, according to a new survey conducted by opinion research firm Gallup, and concern about the tech skews even higher among people who use it less frequently.\n\nComing at a time of intense debate around the dangers of AI , quick developments around AI safety , the implications of AI going rogue , and accusations of anti-competitive behavior , these findings complicate the notion that adoption can serve as a straightforward measure of public enthusiasm for AI.\n\nCommissioned by Microsoft, the Gallup study currently has results from 37 countries, where researchers polled about 1,000 people in each country between April and July. The project will eventually span 140 countries. Notably, India, a large population of tech users, is not currently part of the reported results, nor is Australia and Malaysia.\n\nThe findings appear to put the U.S. at the anxious end of an international chart even as people in other parts of the world expect the technology to improve their lives. According to Gallup, Western countries are most concerned about AI, with the United States leading in anxiety — 74% Americans reported feelings of worry, and only 36% expect AI to mostly help the country.\n\nOther wealthy Western countries showed a similar mix of relatively frequent use and concern. In Canada, for example, 29% of those surveyed reported using AI daily, and of those, more than half expressed concerns about the impact of the technology. Overall, 64% of Canadians aware of AI said it worried them.\n\nThey’re likely not imagining it. There’s certainly been a growing wave of discontent around AI , with tech companies laying off hundreds of thousands of employees in order to invest in AI, shrinking entry-level openings , life-ending cases of AI psychosis , and dire warnings from AI leaders like Anthropic CEO Dario Amodei, who have warned that the tech will wipe out jobs en masse.\n\nThe survey paints a different picture in the rest of the world, however. In Singapore, which had the highest portion of daily users in the study (46%), more than 80% of those aware about AI expect the tech to improve their everyday lives, and 77% think it’ll help the country. China, where 35% of people report using AI daily, most people expect it to help the country. The story is similar in Israel.\n\nStill, optimism about AI doesn’t necessarily appear to translate to trust in the tech’s accuracy. According to Gallup, people who use AI daily were generally more trusting of its results, especially in high-adoption countries like Singapore, Israel and China, while less frequent users remain skeptical across the board. In the U.S., only 45% of daily users expressed that level of confidence. Altogether, only 36% (median) of the people surveyed said they trust AI’s results a lot.\n\nOverall, though, Gallup reports that positivity about AI outweighs negative sentiments: In 34 of the 37 countries surveyed, people mostly reported feeling curious about the tech, with a fewer number saying they felt happy or excited. Only about 32% of those surveyed said they felt worried about AI. Positive emotions seem to be most common in China (90%), Singapore (89%) and Kenya (87%).\n\nIt’s not clear how much sentiment in some countries, especially China, might have changed since the survey ended in July, as the pace of AI development has lately burgeoned into a matter of international importance. AI safety is one of the major topics on the table for discussion when U.S. President Donald Trump and Chinese Premier Xi Jingping meet on Thursday.\n\nNotably, China’s head of the Ministry of State Security, Chen Yixin, wrote in a recent article that AI will have “a systemic impact on the political and security environment,” and could threaten China’s “political security, institutional security, and ideological security.”\n\n“One of the clearest findings is that attitudes toward AI are multidimensional. People can be curious about AI, expect it to be beneficial and use it frequently while still being worried about it. Similarly, they can see considerable potential in AI while remaining skeptical about whether the information it provides is accurate,” Pablo Diego-Rosell, senior scientist at Gallup, told TechCrunch.\n\nWhile the report paints a picture of optimism colored by some concern, it’s nevertheless true that AI worries are increasingly becoming part of public discourse. People who rely on AI for day-to-day tasks may end up supporting tougher rules or resisting its use in hiring, healthcare, education or government. And there’s certainly an argument to be made that training and serving AI models can harm the climate, and their unregulated use can disrupt cybersecurity, diminish content ownership, upset the creative arts fields, or harm data privacy.\n\nAt the end of the day, the report suggests that greater exposure alone will not resolve the unease around the technology. Still, given the amount of money that’s being invested, AI will likely continue proliferating even as disputes rage around where it belongs and what limits should be placed around it."
+        "title": "Meta introduces camera-free AI glasses",
+        "summary": "Meta says the camera-free glasses will be lighter and have up to 12 hours battery life.",
+        "body": "Confirming earlier reports , Meta announced its first pair of camera-free AI glasses, the clunkily named Ray-Ban Meta Audio, at its Connect 2026 conference on Wednesday. Designed to combat criticism around the more malicious use cases for AI glasses, which saw them nicknamed “pervert glasses” by some, the new devices will be audio-only, offering the ability to listen to music and podcasts, take calls, translate speech, and communicate with Meta’s AI assistant, Muse.\n\nThe glasses are designed by Meta’s partner in its AI hardware efforts, EssilorLuxottica, and will start at $349.\n\nWhile Meta today offers a range of AI glasses in a variety of styles, colors, and capabilities, the audio-only glasses could help the brand recover from some of the reputational damage after critics pointed out how people , often men , were using AI glasses to record videos without subjects’ consent. Meta attempted to mitigate this issue with an update that would disable the camera if the LED light that indicated the glasses were recording was ever tampered with. However, the creepiness factor remained.\n\nThis latest device could prove to be more popular for that reason, while also providing an answer to something like Apple’s Siri-powered AirPods.\n\n“Once you get used to high quality audio, it’s just a thing that you want all the time, right?” Meta CEO Mark Zuckerberg said during a keynote Wednesday, adding that the company after working on the idea realized it could design a whole new category of glasses around audio glasses.\n\nBecause they don’t have to house cameras, the glasses are slimmer than Meta’s other models and weigh only 43 grams. They also have adjustable temple tips, swappable nose pads, overextension hinges, and battery life of up to 12 hours on a single charge, Meta claims. With the included charging case, that battery life extends to up to 48 hours.\n\nThey’ll also come in a variety of colors and options — 23 color and lens combinations in total — and in two new styles, a retro-inspired “Clubmaster” Ray-Ban style and “Burbank,” described as more of a “classic, timeless, rectangle shape.” Like other Meta glasses, you can order them with your optical prescription as well, if needed.\n\nThe glasses will be available for preorder on October 13, the company noted.\n\nAlongside the glasses, Meta announced its next-generation AI glasses (the ones with cameras), the Ray-Ban Meta (Gen 3). In addition to the Ray-Ban Meta Wayfarer, there will also be two new styles, the Aviator and Zena — the latter offering more of a cat-eye frame shape. These will have a 12 MP camera that supports 3K Ultra HD video, a six-mic array, and up to nine hours of battery life.\n\nThe glasses Meta launched with EssilorLuxottica will also see an expanded lineup of styles and colors as well as a new partnership with singer Lisa, which follows the company’s earlier brand partnership with Kylie Jenner. The glasses will also be roll out to more countries globally, Meta said.\n\nAll of Meta’s AI glasses will, of course, feature access to its newer personal AI assistant, Muse.\n\nThe company also teased other coming updates, including support for Dolby Atmos Capture, a feature that picks the best photo from multiple frames, an option to choose landscape or portrait modes, hearing enhancements for those with hearing loss, more detailed responses, different audio modes, customizable controls, and something called “private processing” that Meta claims will prevent the company from seeing your data."
       }
     },
     "media": null
   },
   {
-    "id": "the-verge-2e7b392b978d4efd",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/999443/bernie-sanders-ai-superintelligence-ban-act",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-23T16:23:05.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Bernie Sanders proposes banning ‘superintelligence’ and putting violators in prison",
-        "summary": "Sen. Bernie Sanders (I-VT) and Rep. Greg Casar (D-TX) have introduced new legislation that would ban anyone from developing artificial superintelligence - a technology the bill describes as capable of the \"destruction or disempowerment of humanity,\" including by overthrowing the government. Under the Ban Artificial Superintelligence Act, AI leaders would face up to 20 years […]",
-        "body": "Sen. Bernie Sanders (I-VT) and Rep. Greg Casar (D-TX) have introduced new legislation that would ban anyone from developing artificial superintelligence - a technology the bill describes as capable of the \"destruction or disempowerment of humanity,\" including by overthrowing the government. Under the Ban Artificial Superintelligence Act , AI leaders would face up to 20 years in prison for violating the law.\n\nThe bill doesn't just take aim at the more powerful superintelligence, a term President Donald Trump said the US will use in place of \"AI\" in official documents. It would also pause the development of advanced AI systems, which lawmakers …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-6e29bd4c615909aa",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/gadgets/999406/blue-yeti-2-usb-microphone-price-availability",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-23T16:01:45.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Logitech’s new Blue Yeti 2 mic adjusts itself to where you are",
-        "summary": "The original Blue Yeti has been one of the most recognizable go-to USB microphones for content creators since it launched in 2009, and now it finally has a successor. Launching today under Logitech G, the Blue Yeti 2 adds some modern upgrades, including an interactive LED display, AI de-noising, and a proximity based voice sensor […]",
-        "body": "The original Blue Yeti has been one of the most recognizable go-to USB microphones for content creators since it launched in 2009, and now it finally has a successor. Launching today under Logitech G, the Blue Yeti 2 adds some modern upgrades, including an interactive LED display, AI de-noising, and a proximity based voice sensor - which resolves a notable flaw with its predecessor's design while still paying homage to it.\n\nIt's available in black or white color options for $159.99, which is comparatively cheaper than Shure's popular MV7 series USB microphones, which are the current choice for podcasters and start at $299. It's also interest …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-9c199cbaec369974",
+    "id": "engadget-dd7bb96e7a98c204",
     "type": "news",
     "sourceId": "engadget",
     "sourceName": "Engadget",
     "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2266105/meta-connect-2026-live-blog-ai-vr/",
+    "originalUrl": "https://www.engadget.com/2267215/meta-glasses-lisa-edition/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-23T16:00:00.000Z",
+    "publishedAt": "2026-09-23T23:37:43.000Z",
     "categories": [
       "tecnologia-general",
-      "gafas-inteligentes",
-      "ia-accesibilidad"
+      "gafas-inteligentes"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Meta Connect 2026 live: Updates from Mark Zuckerberg's keynote on AI glasses, VR and more",
-        "summary": "More smart glasses and possibly a VR headset are expected today",
-        "body": "More smart glasses and possibly a VR headset are expected today\n\nMeta Connect used to be all about VR, but in recent years, the event has come to be the launchpad for all of the company's hardware, Metaverse and AI projects. This year, we're expecting CEO Mark Zuckerberg to unveil a slew of new products across its smart glasses, headsets and AI portfolios. In fact, its own website for Connect says that the next two days will showcase \"our latest breakthroughs in AI technologies, AI glasses and VR — designed to help you connect, create and do more of what you care about most.\"\n\nZuckerberg is slated to present the keynote speech at 7PM ET (4PM PT) later today, with additional developer talks and sessions scheduled for tomorrow. Our senior reporter Karissa Bell will be on the ground in Menlo Park, CA, reporting live from the company's headquarters. She'll be joined by myself and Devindra Hardawar in covering the news from the keynote live.\n\nAs a reminder, the company already unveiled a new series of Meta Glasses earlier this year , but is expected to show off a pair today that doesn't have cameras onboard. It's also been awhile since we've seen a Quest XR/VR headset from Meta, and it's quite likely that we'll learn more about a new model today. And in case you're getting deja vu , you might be remembering that another company had just launched a new pair of smart glasses last week . But Zuckerberg and co. most likely will have far more than one product and some weird demos to show off today.\n\nIt'll be a few more hours until Meta kicks off, and our liveblog will begin slightly before that. While you wait, we welcome\n\nCome back soon, we'll be starting this liveblog soon. Meanwhile, leave us a comment and we'll do our best to respond!"
+        "title": "Meta's next smart glasses collab is with Blackpink's Lisa",
+        "summary": "Blackpink in your upper-facial area.",
+        "body": "Blackpink in your upper-facial area.\n\nMeta introduced its own smart glasses earlier this year as a cheaper option than its Ray-Ban models and a way to partner with celebrities like Kylie Jenner on exclusive designs. The company is building on that strategy at Meta Connect 2026 by partnering with Blackpink rapper Lisa on two different styles of Meta Glasses. It's also expanding its existing offerings and bringing them to more countries.\n\nBoth of the \"Meta Glasses by Lisa\" models feature custom elements, and one of them is a brand new style while the other is an updated take on an existing offering. The Meta Adventurer Lisa Edition are rectangular glasses with a semi-translucent Moonlit Sky frame and Blush lenses, while the new Meta Capri Lisa Edition features a darker, cat-eye frame with grey lenses.\n\nRegardless of which you pick, you'll get a custom frame (complete with a star on the temple tips), a custom charging case with a star design and case charms shaped like Lisa's pets. In terms of the level of customization, these little adornments sound similar to the little piece of bling and mirror bar that the Kylie Jenner version of Meta Glasses feature as well. The same Meta AI, audio and camera features offered on past Meta-branded smart glasses are also available on these special edition models. And as before, they support prescription lenses.\n\nThe company is also updating its Meta Glasses by Kylie Jenner collab with a new Ivory (off-white) version of its Starfire frames. Both variants of the Lisa shades and the Kylie Jenner options start at $399. Meta is also selling a new, even cheaper version of the Meta Adventurer frame in black with a plug-in charging case for $249, which is $50 less than the usual $299 starting price for the company's smart glasses. For anyone looking for non-special edition styles, the company is also introducing an entirely new Nova design that shares similarities with Ray-Ban's Headliner style.\n\nAlongside the launch of these new frame options, Meta is also bringing Meta Glasses to more countries. These include Singapore, South Korea, Mexico and the United Arab Emirates today, as well as Brazil in the near future."
       }
     },
     "media": null
   },
   {
-    "id": "techcrunch-459da25cfac7cf49",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/23/youtubes-conversational-video-editing-tool-lets-creators-make-edits-in-natural-language/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-23T15:46:57.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "YouTube’s conversational video editing tool lets creators make edits in natural language",
-        "summary": "Creators will be able to use AI in a conversational chat interface to help them edit videos.",
-        "body": "YouTube announced a bunch of new creator tools at Wednesday’s Made On YouTube event, including a conversational editing tool that uses natural language to refine both long- and short-form footage.\n\n“A one-hour shoot can be 10 hours or more in the edit. So, what if we could speed that process along without sacrificing any of our creative control?” YouTuber Happy Kelli shared onstage.\n\nIn a chat interface, creators give the AI instructions on how to help them put a video together. In Happy Kelli’s example, she shares footage of her dancing in different outfits and asks the AI to select the best take for each outfit. Then, she adds music and transitions that go along with the dance.\n\n“If at any point I want even more control, I can jump back into the editing timeline and manually adjust things myself,” she said. “Overall, conversational editing turns the process of editing into a literal conversation with an infinitely patient helper. It’s a collaborative partner that edits with you, not for you.”\n\nThis feature can also add text overlays, remove pauses in speech, and more. It can also make suggestions to the creator based on the context of the conversation.\n\nWhile some creators may find that this tool saves them time and speeds up the often tedious process of video editing, others may feel that their individual editing style sets their videos apart and be reluctant to relinquish control to an AI.\n\nConversational editing will be available for both YouTube Shorts and the YouTube Create app in early 2027."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-35aa3bdd2a0a36f9",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/23/youtube-music-gets-more-conversational-with-new-ai-features/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-23T15:19:30.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "YouTube Music gets more conversational with new AI features",
-        "summary": "Built directly into the YouTube Music app, Ask Music lets users describe what they want to hear in everyday language rather than searching for individual songs or artists.",
-        "body": "YouTube is adding new AI-powered features to YouTube Music that aim to make it easier for listeners to discover music, explore artists, and find podcasts they may otherwise miss.\n\nAnnounced at this year’s Made On YouTube event, the updates include “Ask Music,” a conversational tool for music and podcasts, and “Your Podcast Lineup,” a personalized audio guide designed to help listeners discover new shows.\n\nBuilt directly into the YouTube Music app, Ask Music lets users describe what they want to hear in everyday language rather than searching for individual songs or artists. The feature works across YouTube Music’s catalog of more than 300 million songs, including official recordings, remixes, live performances, covers, and DJ sets. Users can use it to build custom listening queues, explore an artist’s motivations, or dig deeper into music history.\n\nYouTube explains that, instead of manually searching, the user simply types the request as if they were asking a friend. For instance, someone could ask Ask Music to create a mix based on the tracks that inspired a particular song. Users can also ask other questions, such as who played bass on a particular song or other details about its creation.\n\nYouTube Music is also introducing Your Podcast Lineup, a personalized AI-generated audio guide for podcast discovery.\n\nThe feature is designed for a familiar problem: There are more podcasts than most people have time to listen to. Even listeners who already have a list of favorite shows can struggle to keep up with new episodes, let alone find new ones.\n\nYour Podcast Lineup will appear on the podcast page in the YouTube Music app. Each week, it will provide a short spoken preview of recommended shows and explain why they might appeal to the listener. It can then move directly into suggested episodes.\n\nSpotify recently introduced an AI-powered feature that follows a similar direction. Its personal podcasts feature uses AI to generate podcast episodes based on their interests and prompts.\n\nThe new features are part of YouTube’s broader push to use AI throughout its services. Last year, YouTube Music experimented with AI-powered music hosts that provide stories, fan trivia, and commentary related to what users are listening to.\n\nBoth updates are coming soon to YouTube Music and YouTube Premium subscribers worldwide."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-bb5eeb1339933e35",
+    "id": "the-verge-ce20cbc6f83cc7fb",
     "type": "news",
     "sourceId": "the-verge",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/gadgets/999380/una-watch-sports-gps-modular",
+    "originalUrl": "https://www.theverge.com/tech/999281/ray-ban-meta-audio-glasses-meta-connect-2026",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-23T15:01:16.000Z",
+    "publishedAt": "2026-09-23T23:37:17.000Z",
     "categories": [
       "tecnologia-general",
-      "movilidad"
+      "gafas-inteligentes"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "This $199 GPS sports watch is repairable, modular, and open-source",
-        "summary": "The Una Watch costs less than most Garmin watches now that its price has been lowered from the Kickstarter offer of $350 to $199, but its modular, repairable design grabbed my attention first. It features a 1.2-inch MIP LCD display and up to 10 days of battery life, similar to the Garmin Forerunner 70 or […]",
-        "body": "The Una Watch costs less than most Garmin watches now that its price has been lowered from the Kickstarter offer of $350 to $199, but its modular, repairable design grabbed my attention first. It features a 1.2-inch MIP LCD display and up to 10 days of battery life, similar to the Garmin Forerunner 70 or the Pebble Round 2 I preordered earlier this year. Like Pebble's revamped watches , the Una Watch is also open-source , including its SDK, housing, and circuit boards, but it has more fitness features out of the box than Pebble's watches currently offer. Una is also encouraging users to build their own apps for it, including with vibe coding - …\n\nRead the full story at The Verge."
+        "title": "Meta ditches the camera on its newest smart glasses",
+        "summary": "Walking around Meta Connect 2026, everyone's sporting smart glasses in all sorts of shapes, colors, and sizes. It's a marked difference here, a tech bubble where \"pervert glasses\" are not a concern. Outside Connect, the public backlash against wearable surveillance tech - a catchall term that encompasses not just smart glasses, but also smartwatches and […]",
+        "body": "Walking around Meta Connect 2026, everyone's sporting smart glasses in all sorts of shapes, colors, and sizes. It's a marked difference here, a tech bubble where \"pervert glasses\" are not a concern.\n\nOutside Connect, the public backlash against wearable surveillance tech - a catchall term that encompasses not just smart glasses, but also smartwatches and AI pendants - is gaining steam. So it's incredibly curious timing that this year, the company is launching Ray-Ban Meta Audio Glasses: smart glasses infused with Meta AI, but with no camera for recording others.\n\nTo hear Meta tell it, that's a coincidence. Audio-only glasses have been years …\n\nRead the full story at The Verge."
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-28268d95ba3bc910",
+    "id": "engadget-f4799aad076cfd22",
     "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/23/ios-27-2-makes-facetimes-best-new-feature-even-better/",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2267213/ray-ban-meta-gen-3-hands-on-better-battery-life/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-23T14:45:32.000Z",
+    "publishedAt": "2026-09-23T23:35:54.000Z",
     "categories": [
-      "apple",
+      "tecnologia-general",
+      "gafas-inteligentes"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Ray-Ban Meta Gen 3 hands-on: Better battery life and a price hike",
+        "summary": "The latest lineup comes in two new frame styles: Aviator and Zena.",
+        "body": "The latest lineup comes in two new frame styles: Aviator and Zena.\n\nMeta just showed off its third-generation lineup of Ray-Ban-branded AI glasses, and the latest frames come with more hours of battery life and a bit of a price hike. Starting at $449, the Gen 3 Ray-Ban Meta Glasses now come in an Aviator style and a more angular frame called Zena.\n\nSome of the most noticeable changes will look familiar if you've used the Ray-Ban Meta Optics line or any of the Meta Glasses line. Like those, the Gen 3 frames also come with a programmable action button. This can be customized to trigger a specific Meta AI command, capture mode or just about any other feature. The glasses also come with the same adjustable temple tips that we saw on the Optics line, which should make for a slightly better fit.\n\nSpeaking of fit, the aviator frames are quite a bit thicker than some other Ray-Ban Meta models I've tried, and they did feel a bit loose on my face. It's a bolder style than the boxy Wayfarers we're used to seeing from Meta (there is a Gen 3 Wayfarer model too) but I was just happy to see another tortoiseshell frame. As always, what looks lame on one person's face might look cool on someone else.\n\nThe most important Gen 3 upgrades aren't immediately visible: better battery life and microphones. According to Meta, the Gen 3 line now top out at 9 hours of battery life. I haven't had my pair long enough to test this out but in my experience, battery life claims really depend on how close your use is to what Meta considers \"typical.\" For example, I got a little more than 5 hours from my Gen 2 Ray-Ban Meta glasses with continuous audio playback. Either way, another hour should be noticeable enough for anyone wearing these for extended sessions.\n\nMeta has also added an extra mic to its Gen 3 frames, bringing the total number of microphones to six. The company says this should reduce background noise to make it easier for people (or its AI) to hear you in noisy environments.\n\nSome of the updates I'm most looking forward to trying aren't out yet. These include the ability to — finally — capture photos and videos in landscape orientation. (This capability will eventually roll out to other models too.) The Gen 3 line will also be the first to support recording with Dolby Atmos in videos, and allow users to capture spatial sound alongside their videos. I feel like this is a somewhat niche feature, but I'm interested to see how much of a difference it makes.\n\nOne of the biggest benefits of Gen 3 is just how many options Meta now offers. \"Meta Glasses\" used to be synonymous with dark Wayfarers, but that's no longer the case. Between Ray-Ban, Oakley and its own Meta-branded line, the company says that it will have more than 100 different frame styles and color variations by the end of the year."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-5b39130b4fdeae8f",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/23/vogue-sent-robots-down-the-runway-at-vogue-world-and-people-were-not-impressed/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-23T23:33:22.000Z",
+    "categories": [
       "tecnologia-general"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "iOS 27.2 makes FaceTime’s best new feature even better",
-        "summary": "iOS 27 introduced Dual Capture support for FaceTime, letting you show your front and rear camera views at the same time. And in iOS 27.2, that upgrade is expanding to now support Group FaceTime calls. more…",
-        "body": "iOS 27 introduced Dual Capture support for FaceTime, letting you show your front and rear camera views at the same time. And in iOS 27.2, that upgrade is expanding to now support Group FaceTime calls.\n\nFaceTime is a popular iPhone feature that, at its core, hasn’t changed much since first coming on the scene many years ago.\n\nBut iOS 27 introduced the first substantial upgrade in a while: Dual Capture support .\n\nWith Dual Capture, you can have your front and rear camera views active at the same time during your FaceTime call. Just hit the ‘Flip’ button on the viewfinder and whoever you’re talking to will see both of your camera views simultaneously.\n\nNote: Dual Capture requires an iPhone 17 or later, and participants in the call need to be running iOS 27, iPadOS 27, or macOS 27 to see the dual camera streams.\n\niOS 27.2 is currently in beta , but it comes with a great upgrade for Dual Capture: Group FaceTime calls are now supported too .\n\nIn iOS 27.0, you can only use the feature in one-on-one calls. But if you join the iOS 27.2 beta, or just wait a few weeks for the public launch, you’ll get Dual Capture for all of your Group FaceTime calls as well.\n\nHave you used Dual Capture in FaceTime yet on iOS 27? How did it work for you? Let us know in the comments.\n\n* Buy iPhone with 15% discount from Apple refurbished"
+        "title": "Vogue sent robots down the runway at Vogue World, and people were not impressed",
+        "summary": "Nothing says Italian craftsmanship like a Chinese robot doing a lasso to \"L'Amour Toujours.\"",
+        "body": "Vogue World closed its Milan edition this week with a troupe of robots — perhaps a preview of what’s coming when the event descends on San Francisco next year.\n\nVogue World is the magazine’s annual traveling spectacle, now in its fifth year: part runway show, part celebrity showcase, part variety hour, part ad-sales opportunity , staged in a different city each time. It has run through New York, London, Paris, and Hollywood. This year’s Milan edition was marketed as a tribute to Italian craftsmanship and “the human touch” in an age of technology, which makes what happened next a little strange.\n\nDuring the act titled The Age of Intelligence, humanoid robots made by the Chinese firm Unitree walked into the Galleria to Gigi D’Agostino’s “L’Amour Toujours.” They waved their arms in the air, imploring onlookers to clap. One did a lasso. They were not wearing clothes. The pained expression of Alessandro Michele, the creative director of Valentino, quickly went viral.\n\nI haven’t seen a single thing about the actual fashion that was presented at Vogue World Milan. Instead, everyone is talking about the robots. (These same robots have been making headlines worldwide for their dance moves , and for falling and breaking .) Similar robots turned up on the runway at London Fashion Week, which is happening now.\n\nVogue turned heads earlier this year when it announced that the next edition will be in San Francisco, arguably one of the least stylish cities in the United States. The timing isn’t coincidental. Anna Wintour has aligned herself ever more closely with the tech barons of our time, and Vogue World Milan was itself sponsored in part by Meta Glasses, with additional support from OpenAI.\n\nIt was one of those moments that reveals how thoroughly tech exists in a bubble, and that not everyone is happy with the rapid adoption of new technology, or by Vogue cozying up to the symbols of the insanely rich — and only getting richer — tech titans during a cost-of-living crisis. That’s before you get to AI, mass surveillance, the displacement of labor, and the energy crisis, all of them overseen by the same titans. For some, a robot on a runway is further proof of what is going wrong in the world right now.\n\n“I’m annoyed by the celebrities cheering the whole thing,” one tech founder wrote me on Instagram. “It’s sick and gloom. People are literally losing jobs and livelihoods because of these things. They need to stop encouraging it. What’s it even modeling? Headphones?”\n\nOne fashion reporter friend simply said “No,” when I asked for thoughts on the robots and Vogue World San Francisco. Jason Johnson, founder of Culture Impact Agency, noted that Vogue has been trying to build a relationship with Silicon Valley for at least the past decade, highlighting when Jony Ive co-hosted the Met Gala back in 2015. The dancing robots at Vogue World Milan were inevitable, then, as is Vogue World San Francisco and as was Jeff Bezos and his wife, Lauren Sanchez, getting the splashy Vogue wedding cover and co-hosting the 2026 Met Gala.\n\n“Publications are figuring out new ways to make money and tech has money,” he told me. “Vogue has the cultural influence and access that those tech people want.” Both sides win in the end, he said.\n\nStill, something about the way Vogue is going about this feels unnatural.\n\nMuna Ikedionwu, founder of MKEDI, a strategy firm for early-stage startups, said what she found most interesting about the robots is that they don’t fully represent the innovation and progress that’s actually happening in the creative technologist space. “I’ve seen such incredible examples of engineering and AI being used to influence fashion, being used to influence design and art,” she told me, adding that robots walking down the runway doesn’t even scratch the surface of what is happening right now at the intersection of fashion and tech.\n\nShe points to the artist duo AA Murakami , who created Olympian Eileen Gu’s dress of bubbles at this year’s Met Gala . They are fashion designers but also engineers, Ikedionwu said, noting a presentation she saw them give recently about how to create an “everlasting bubble.” They are helping to pioneer “emphemeral technology,” she said, “this idea of technology and innovation that speaks to the ephemeral nature or the temporariness of art and humanity and the soul.”\n\nSure, I guess when you compare it to this, the robots did seem quite boring. Whenever I think about the intersection of fashion and technology, I think about that Spring 2024 Schiaparelli collection , which unveiled a robot baby crafted with Swarovski crystals and a dress made with vintage tech like PC microchips. (I once threatened to wear that dress to Disrupt; see image above.)\n\nIkedionwu wonders whether this robot performance was a way to make the general public more comfortable with technology and fashion overlapping, a merger that has been underway behind the scenes for years. If so, it didn’t work. But maybe Vogue World is saving all the good stuff for San Francisco."
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-03f5e52bca98d0b3",
+    "id": "engadget-a82e898dabaecf1c",
     "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/23/next-years-iphone-pro-models-have-near-borderless-design-report/",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2267212/meta-announces-ray-ban-meta-audio-its-first-smart-glasses-without-a-camera/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-23T14:21:35.000Z",
+    "publishedAt": "2026-09-23T23:33:00.000Z",
     "categories": [
-      "apple",
-      "tecnologia-general"
+      "tecnologia-general",
+      "gafas-inteligentes"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Next year’s iPhone Pro models have ‘near-borderless’ design: report",
-        "summary": "Apple reportedly has a big redesign coming to next year’s iPhone Pro models, and a new ETNews report outlines what to expect from the “near-borderless” design and display. more…",
-        "body": "Apple reportedly has a big redesign coming to next year’s iPhone Pro models, and a new ETNews report outlines what to expect from the “near-borderless” design and display.\n\niPhone 18 Pro just arrived last week, and iPhone Duo will follow next month. But with Apple’s long lead times on iPhone development, it’s never too early for rumors about next year’s models.\n\nWe’ve long heard that Apple is preparing a unique design for its 20th anniversary iPhone Pro models next year. And today a new ETNews report offers the latest on what to expect.\n\nKim Yeong-ho writes that Apple “is still expected to move forward with a four-sided bending display” that’s “designed to create a near-borderless, full-screen appearance by curving the display around all four edges of the smartphone.”\n\nSo the defining characteristic of the 20th anniversary models seems very much on track, contrary to skepticism from Wall Street firm Jefferies last month.\n\nETNews does say, however, that two display technologies previously being considered for the new iPhone Pro models will not be implemented after all.\n\nApple is expected to postpone the adoption of two advanced display technologies—Color Filter on Encapsulation, or COE, and Low-Temperature Polycrystalline Oxide Plus, or LTPO+—that had been under consideration for its 20th-anniversary iPhone next year.\n\nThese technologies could have enabled, respectively, a thinner panel and greater power efficiency.\n\nIndustry sources reportedly attribute Apple’s decision to two main factors: higher memory pricing, which make it harder for Apple to absorb additional display costs, and the company seeking solutions that are better than current COE and LTPO+ options.\n\nIt doesn’t sound like either upgrade would have been especially substantial. What users will no doubt care more about is that the new “near-borderless” design is intact.\n\nHow interested are you in the 20th anniversary iPhone Pro models? Let us know in the comments.\n\n* Buy iPhone with 15% discount from Apple refurbished"
+        "title": "Meta announces Ray-Ban Meta Audio, its first smart glasses without a camera",
+        "summary": "That's one way to avoid the whole surreptitious recording issues.",
+        "body": "A $349 alternative to \"pervert glasses.\"\n\nInvasive use of Meta's camera-enabled smart glasses has earned them the moniker \"pervert glasses,\" and the company has prepped a solution for Meta Connect 2026: Ray-Ban Meta Audio, smart glasses that ditch cameras entirely to focus on audio features and AI.\n\nNaturally, Meta doesn't characterize the new glasses as a response to public backlash — though they are making it harder to use the camera-equipped kind for surreptitious filming — but rather as an acknowledgement that audio has always been its smart glasses' most popular feature. The new frames are capable of taking calls, letting you respond to messages with your voice and playing back podcasts and music without cutting you off from the rest of the world. They're also a way to access Meta AI for things like live translation and real-time answers to questions.\n\nAnother way of looking at the Ray-Ban Meta Audio is as a way to get many of the hardware improvements of the company's latest models, without the extra baggage. Meta says they'll last up to 12 hours on a single charge, with an additional 48 hours available if you use their charging case. They also include the same fit adjustments as the company's previous frames, with the option for adjustable temple tips, customizable nose pads and overextension hinges (hinges with springs that can accommodate a wider selection of head shapes and widths) for improved comfort. Ditching the cameras also means the glasses are lighter at 43 grams; Meta's other models weigh anywhere from 49.2 grams (the recent Optics glasses ) to 69 grams (the largest size of Meta Ray-Ban Display ).\n\nThe real win for Meta and anyone potentially curious about the company's smart glasses is that removing the camera and recording light makes these new frames look even more normal than before. Unless you clocked the slightly larger temples and cut-outs for speakers, you might not know the Ray-Ban Meta Audio are anything other than Ray-Bans. The company is selling the new glasses in two new styles, a rectangular option called Burbank and a retro-inspired style called Clubmaster, both in 23 colors and lens combinations. They also support a range of optical prescriptions, according to the company.\n\nAt this moment in Meta's public perception , releasing the Ray-Ban Meta Audio isn't likely to convert critics, but they could convince someone uncomfortable with the optics of smart glasses in general. Unless of course Meta does something to make people even more mad, like actually releasing the facial recognition feature it was previously testing .\n\nThe Ray-Ban Meta Audio ship October 13 and are available to pre-order today starting at $349."
       }
     },
     "media": null
   },
   {
-    "id": "ars-technica-065bafc3760ac0a2",
+    "id": "the-verge-1eefabb119b17104",
     "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/cars/2026/09/aftermarket-driver-assist-under-federal-probe-following-fatal-crashes/",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/999454/meta-muse-ai-agent-video-chat-connect-2026",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-23T14:20:23.000Z",
+    "publishedAt": "2026-09-23T23:19:42.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -234,22 +183,72 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "After multiple deaths and injuries, NHTSA is investigating comma.ai",
-        "summary": "Feds know of 5 crashes where cars using comma.ai devices hit slow or stopped vehicles.",
-        "body": "Aftermarket devices that can boost or augment a vehicle’s native advanced driver assistance systems are the target of a new federal investigation this week. The National Highway Traffic Safety Administration’s Office of Defects Investigation says it knows of five crashes in which drivers using devices from comma.ai crashed into stopped or slow-moving cars. Two of the crashes resulted in three deaths, and 11 people were injured in four of the five crashes, some seriously.\n\nComma.ai was the brainchild of George Hotz, who rose to prominence at the start of the last decade by jailbreaking iOS and hacking Sony PlayStations. In 2015, Hotz turned his attention to partially automated driver assists, which were gaining attention following Tesla’s exploits with its Autopilot system. Hotz first modified his own Acura to give it a more advanced driver assist that let him take his hands off the wheel, with the goal of selling his system to Tesla and replacing Mobileye as the company’s supplier.\n\n(Mobileye dropped Tesla as a customer the following year after becoming unhappy with the way the car company was using Mobileye products in unintended ways.)\n\nRead full article\n\nComments"
+        "title": "Meta is making Muse more powerful and will let you video chat with it, too",
+        "summary": "Meta is quickly iterating on its new Muse AI agent, announcing a bunch of updates today that make the bot more capable and able to chat with you in more ways. Muse agents are getting their own email addresses that they can use for accomplishing tasks. You'll also be able to communicate with your Muse […]",
+        "body": "Meta is quickly iterating on its new Muse AI agent, announcing a bunch of updates today that make the bot more capable and able to chat with you in more ways.\n\nMuse agents are getting their own email addresses that they can use for accomplishing tasks. You'll also be able to communicate with your Muse agent over the new email addresses, too. In addition, the recently launched Muse Mac app will be getting the ability to use your computer.\n\nMeta is also going to give you another way to chat with its popular AI agent: video calls. Since its recent launch, the primary way to talk with Muse was through a chat interface, but you'll soon be able to …\n\nRead the full story at The Verge."
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-bd8b5596c9a36695",
+    "id": "techcrunch-6e19ffab47860dbb",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/23/anthropic-says-its-biology-lab-has-already-found-something-big/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-23T22:17:39.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Anthropic says its biology lab has already found something big",
+        "summary": "But maybe the biggest reveal is that Anthropic has not let Claude run loose in its biology lab. Humans are still, so far, in the loop.",
+        "body": "Last week, Anthropic confirmed that it was operating a wet biology lab in the Bay Area where it uses its AI models to run physical experiments. This week, the AI giant announced that this lab has already made what it believes is a big discovery: a new enzyme “system” that has certain “properties reminiscent of CRISPR,” as Anthropic describes it .\n\nCRISPR is a natural immune system used by bacteria to fight off viruses that has become a gene-editing technology widely used by researchers .\n\nEssentially, what Anthropic says it found is a previously unknown enzyme system hidden in the DNA of bacteriophages, which are viruses that infect and replicate within bacteria. Anthropic’s researchers say this system behaves similarly to CRISPR in that it can “perform operations like cutting, copying, and pasting DNA.”\n\nIt will be up to the broader research community to validate how big, or new, this discovery actually is. Anthropic CEO Dario Amodei acknowledges that the discovery was based on the work of others and that a team from Stanford previously discovered a system “that is in some ways similar to the one Claude found,” he wrote on X .\n\nBut Amodei and Anthropic are not just emphasizing the discovery. They are touting it was found “mostly, though not entirely, by Claude,” the CEO wrote.\n\nOn the one hand, that is astounding. This lab was only established this spring (though Anthropic declined to be more specific about how many months it has been open). A discovery in just a few short months would be speedy enough work, but the team said it actually only took Claude 21 hours of concerted effort. Claude searched through data using about 950 agents that burned through 210 million tokens.\n\nStill, the revelation that Anthropic has been conducting biology experiments comes right after AI CEOs, including Amodei , publicly admitted that models have become so capable, and so potentially dangerous, that the industry must slow down and develop safety-testing procedures. This after a couple of his employees publicly said earlier this month that there’s a risk AI could kill us all .\n\nAmodei himself has said one of the things he fears most is that AI could be used for bioterrorism. But he also believes AI will “cure most diseases in 5-10 years,” he wrote. So Anthropic has clearly decided the rewards are worth the risks.\n\nGiven that, perhaps the biggest reveal in this news isn’t the discovery itself but that the biology lab hasn’t let Claude loose. The physical experiments were done by humans.\n\n“Our lab, located in the Bay Area, looks like a typical molecular biology lab. We do research that involves only the lower-levels of the biosafety risk level (BSL-1 and BSL-2) and we do not handle pathogens that can infect humans. All of the lab work is performed by human scientists.”\n\nIt’s also true that AI-powered biological research is hardly unique to Anthropic. Researchers from Stanford just published a paper on the work they are doing with LLMs and CRISPR. Researchers at UC San Francisco used AI to design enzymes from scratch . Google launched its first AI-powered biology research tool, AlphaFold, back in 2020 . So AI has clearly arrived in biological research beyond the AI labs pursuing it themselves.\n\nYet, Amodei hasn’t ruled out a fully automated biology lab in the future. “Eventually it may even be possible for Claude itself to safely perform the experiments by autonomously controlling lab equipment, with appropriate safeguards in place, but we aren’t doing that today,” he said.\n\n."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "applevis-blog-888f90102a766838",
+    "type": "news",
+    "sourceId": "applevis-blog",
+    "sourceName": "AppleVis Blog",
+    "sourceUrl": "https://www.applevis.com/blog",
+    "originalUrl": "https://www.applevis.com/blog/apple-releases-watchos-2701-fix-unexpected-restarts-apple-watch-series-12-apple-watch-ultra-4",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-23T21:28:20.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-accesibilidad",
+      "apps-accesibles",
+      "programas-accesibles",
+      "sordoceguera"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple Releases watchOS 27.0.1 with fix for unexpected restarts on Apple Watch Series 12 and Apple Watch Ultra 4",
+        "summary": "Apple has today released watchOS 27.0.1 for Apple Watch Series 12 and Apple Watch Ultra 4, bringing a fix for an issue that caused the devices to restart unexpectedly. As watchOS 27.0.1 was not distributed to external testers prior to its release, we do not have any information on whether it contains any accessibility fixes for blind, deaf blind, or low vision users at the time of writing. However, as this update appears to have been released to address a specific issue on a small subset of devices, we do not expect it to contain any such fixes. watchOS 27.0.1 Release Notes (via 9to5Mac ) This update provides bug fixes for your Apple Watch including fixing an issue where Apple Watch may restart unexpectedly. How to Update watchOS 27.0.1 is available via Over-the-Air Update (Settings > General > Software Update) or by going to the Watch app on your iPhone and navigating to General > Software Update. To install the update, your Watch must be connected to its charger and have at least 50% battery power.",
+        "body": "Apple has today released watchOS 27.0.1 for Apple Watch Series 12 and Apple Watch Ultra 4, bringing a fix for an issue that caused the devices to restart unexpectedly.\n\nAs watchOS 27.0.1 was not distributed to external testers prior to its release, we do not have any information on whether it contains any accessibility fixes for blind, deaf blind, or low vision users at the time of writing. However, as this update appears to have been released to address a specific issue on a small subset of devices, we do not expect it to contain any such fixes.\n\nThis update provides bug fixes for your Apple Watch including fixing an issue where Apple Watch may restart unexpectedly.\n\nwatchOS 27.0.1 is available via Over-the-Air Update (Settings > General > Software Update) or by going to the Watch app on your iPhone and navigating to General > Software Update. To install the update, your Watch must be connected to its charger and have at least 50% battery power."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-0e311c0eab71711b",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/23/tvos-27-2-adds-new-homepod-surround-sound-feature-to-apple-tv-4k/",
+    "originalUrl": "https://9to5mac.com/2026/09/23/macwhisper-update-brings-real-time-meeting-transcripts-improved-speaker-recognition-more/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-23T13:36:11.000Z",
+    "publishedAt": "2026-09-23T21:17:11.000Z",
     "categories": [
       "apple",
       "tecnologia-general"
@@ -258,9 +257,155 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "tvOS 27.2 adds new HomePod surround sound feature to Apple TV 4K [U]",
-        "summary": "Apple TV users have long been able to set HomePods as speakers for audio output. But tvOS 27.2 looks poised to offer a big upgrade, with HomePod surround sound now available in the beta. Update : Following publication, leaker pdfu posted on X that the feature referenced below is in tvOS 27.0 and isn’t actually for surround sound yet, despite additional evidence of the feature in 27.2 code. Original article below. more…",
-        "body": "Apple TV users have long been able to set HomePods as speakers for audio output. But tvOS 27.2 looks poised to offer a big upgrade, with HomePod surround sound now available in the beta.\n\nUpdate : Following publication, leaker pdfu posted on X that the feature referenced below is in tvOS 27.0 and isn’t actually for surround sound yet, despite additional evidence of the feature in 27.2 code. Original article below.\n\nEarlier this month, it was discovered that HomePod 27 beta 8 included references to a forthcoming surround sound feature for Apple TV.\n\nNow as spotted by FlatpanelsHD , that feature has made an appearance in tvOS 27.2 beta 2.\n\nAs seen in the screenshot above, the Apple TV 4K running tvOS 27.2 is configured to send audio to four HomePods total—two full-size models and two HomePod minis.\n\nMore details are shared by Rasmus Larsen on FlatpanelsHD’s website :\n\nVia the Home app, you can now pair two sets of HomePods, four in total, wirelessly to Apple TV 4K. However, the feature is not yet fully baked, as you cannot assign roles to the four speakers, for example rear speakers – they play the same audio from the front and rear. It works with Atmos and surround sound from video sources, but menu and game audio only plays through the front speakers.\n\nIt’s been widely rumored for some time that Apple is working on a big overhaul and expansion of its Home product line. A new ‘HomePad’ device along with new Apple TV 4K and HomePod models are expected to launch in October.\n\nSurround sound could be a great addition for HomePod and Apple TV users. But it’s also likely a good sign that Apple will indeed launch new Home products soon.\n\nAre you interested in a surround sound HomePod feature for Apple TV 4K? Let us know in the comments."
+        "title": "MacWhisper update brings real-time meeting transcripts, improved speaker recognition, more",
+        "summary": "My transcription tool of choice on the Mac, MacWhisper, got another major update today with real-time meeting transcripts, significantly improved speaker recognition, tighter integration with Apple Intelligence, and a new transcription model. Here are the details. more…",
+        "body": "My transcription tool of choice on the Mac, MacWhisper, got another major update today with real-time meeting transcripts, significantly improved speaker recognition, tighter integration with Apple Intelligence, and a new transcription model. Here are the details.\n\nI’ve written in the past about how much I rely on MacWhisper, particularly as part of my podcast production workflow.\n\nMacWhisper was one of the first AI-powered transcription tools for the Mac. Since indie developer Jordi Bruin launched it in 2023, it has been on a relentless streak of improvements and expanded support for new models, services, and workflows.\n\nThat has included everything from automatic meeting recording and speaker recognition to watched folders, system-wide dictation, local and cloud AI models, and integrations with services such as Notion, Zapier, Obsidian, and n8n.\n\nToday, MacWhisper was updated to version 15.2 , introducing an improved speaker recognition powered by NVIDIA’s Nemotron 3 Diarization model, which was announced just hours ago.\n\nIt supports up to 8 speakers and can also be used during live meetings in the new realtime meeting view!\n\nWhich brings us to another major addition in today’s update: real-time meeting transcriptions.\n\nThis feature had been sitting near the top of MacWhisper’s public roadmap for a while, and it is now here, allowing users to follow, refer back to, copy, or transfer a live transcript as the meeting unfolds.\n\nYou can keep the window above your other apps to follow along, and your recording and transcript are saved when the meeting ends.\n\nWhen it comes to the actual transcription models, MacWhisper 15.2 adds Alibaba’s QWEN3-ASR transcription model with support for 22 languages, in addition to a tighter integration with Apple Intelligence, Siri, Spotlight, and Shortcuts on macOS 27.\n\nNow, users running macOS (including in the EU) can search for transcripts system-wide, open them with Siri, pull their text into Shortcuts, and refer to the transcript currently on screen in Siri or Apple Intelligence requests.\n\nFinally, MacWhisper 15.2 adds folders and subfolders for organizing transcripts and meetings, with support for dragging existing transcriptions into them from the sidebar.\n\nTo learn more about MacWhisper 15.2, follow this link ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-84e01844081c3705",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/tech-policy/2026/09/china-silent-as-us-touts-plan-for-ai-safety-alerts-that-omits-tech-experts/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-23T20:52:28.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Trump’s China rivalry and “AI race” delusion may endanger US, experts say",
+        "summary": "Trump focus on winning “AI race” may deter China from sharing safety intel.",
+        "body": "This week, the US and China, the two world leaders on AI, finally started talks meant to keep the whole world safe from emerging safety risks. But whether meetings between Donald Trump and Xi Jinping can lead to a reliable global governance framework for AI depends on how much the fierce rivals are actually willing to cooperate.\n\nIt's clear Trump wants it to seem like discussions are going well. Before Trump and Xi meet on Thursday and Friday, Treasury Secretary Scott Bessent announced that both sides had already discussed setting up a new AI safety notification mechanism. If China agrees to participate, that would create an open line for either side to send alerts when their country’s AI systems pose threats or behave unpredictably. The same channel, Bessent said, could allow the countries to share their “vision of common goals.”\n\nHowever, the proposal comes at a time when China may not be ready to trust the US to have AI safety conversations that aren’t about limiting China’s capabilities. Not only has Trump steadily increased export controls that explicitly seek to block China from accessing technology to advance AI, but Congress is mulling bills that would cut the country off from more chips and hardware. Adding to tensions, just two weeks ago, Trump’s Justice Department accused six of China's leading AI makers of stealing from US frontier labs, which China has strongly disputed.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "accessible-android-818965baf4ceb972",
+    "type": "news",
+    "sourceId": "accessible-android",
+    "sourceName": "Accessible Android",
+    "sourceUrl": "https://accessibleandroid.com/",
+    "originalUrl": "https://accessibleandroid.com/google-is-rolling-out-guided-vision-to-gemini-live-heres-how-to-use-it-and-my-early-impressions/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-23T20:00:51.000Z",
+    "categories": [
+      "android",
+      "apps-accesibles",
+      "tecnologia-accesibilidad",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google Is Rolling Out Guided Vision to Gemini Live: Here’s How to Use It and My Early Impressions",
+        "summary": "Google allows users to turn on the camera feed while in a conversation with Gemini Live, so they can ask about things that are in…",
+        "body": "Published 23 September 2026 by Kareen Kiwan\n\nGoogle allows users to turn on the camera feed while in a conversation with Gemini Live, so they can ask about things that are in view. Although a blind user can take advantage of this feature, it is not designed specifically to assist blind people. Google is now rolling out Guided vision, a mode that uses the camera in a live conversation to help blind people get an overview of their surroundings, read text, and more. This post covers turning the feature on and using it, as well as my first impressions from testing it.\n\nNote that I haven’t done anything special to access Guided vision on my Honor 600 Pro, but I am running a three-month AI Pro trial that came as an offer with my device, so I don’t know if that affected the feature’s arrival on my device. The feature is not available for my other Accessible Android colleagues yet.\n\nTable of Contents\n\nTo enable Guided vision:\n\nA notification appears on the screen with the ability to start a Live session directly. When you use the button to start the Live session, it starts with the camera feed enabled, so you can start talking.\n\nNote that the feature is still not available for everyone, so you should wait if you cannot find the Guided vision toggle in Settings.\n\nAccording to the Google Accessibility help article , it’s possible to assign Guided vision to an accessibility shortcut, and you can launch it through TalkBack too. However, both are still not available on my device. In fact, I haven’t received any TalkBack update recently.\n\nI haven’t tested to see if launching the camera in a Live conversation when Guided vision is active uses the mode without any user’s intervention, but during my tests, I always asked Gemini to start Guided vision to make sure that it works in that mode. When I tried to prompt the assistant to start the feature, it asked me to point the camera at what I wanted described, but that was one of its hallucinations, as it didn’t open the camera feed or start the Live conversation. Starting a Live conversation is still necessary.\n\nAt another time, I asked it to start a Live conversation with Guided vision, but at that instance, it told me that it couldn’t start it automatically and asked me to start Live manually.\n\nNote that turning off Guided vision and then turning it back on from Settings shows the notification to start a Live conversation again, which can be used to start a conversation with the camera turned on.\n\nWhen I had my first conversation with Live with Guided vision turned on, Gemini reminded me that it cannot detect all hazards or guarantee path clearance and that I should use my mobility aid before almost every response. I kept telling it that I understand the risks and that it shouldn’t repeat those warnings. During the later conversations, I didn’t hear any of the warnings. I am not sure, though, if my early prompting helped, or if you hear those warnings only during the first conversation to alert you of the risks or when Gemini thinks that it should do so for your safety.\n\nDuring conversations with Guided vision active, I couldn’t find any indication that a special mode is active. All Live-related controls are the same, with no difference. However, the difference is in how Gemini acts. During my short tests, I found that Gemini tried to be detailed in its descriptions because it was aware that Guided vision is active and that the mode is designed to assist blind users.\n\nI was able to ask it questions about the mode, and I got assurance from it that the mode is to assist blind users. It gave me guidance on how to move the camera to show certain objects or scenes better. When I asked it to tell me how to move to reach something, it told me that it needed to know exactly where I was in relation to the camera’s orientation. Using my hand as a reference, it gave me directions with respect to my hand. It also described the positions of items in the room relative to each other, like the position of a fan relative to the sofa.\n\nAdditionally, Gemini told me the book that I was holding and tried to assist me in putting the full page in view. When I asked it to read the page, it read a part of the page, though. However, when I asked it if that was the only text on the page, it correctly stated that there were other texts and visual diagrams and offered to describe them for me.\n\nThese observations are based on my initial tests, and I haven’t made direct comparisons between using Guided vision with the feature turned on and using the normal Live camera mode with it turned off.\n\nGuided vision changes only how Gemini tries to provide information, as well as making it give more hints to assist a blind user. However, it is still a part of the Live experience. This means that current Live limitations are still present. The most important limitation is the need to prompt it again to tell you about any change, as Live doesn’t have real-time monitoring or continuous picture analysis capabilities.\n\nAnother factor worth mentioning is the model used, as Guided vision doesn’t switch Gemini to a more capable AI model than the one that you are using in your Gemini app.\n\nAlthough image analysis has already advanced and helps in many scenarios, misidentifications are always a part of the formula that shouldn’t be forgotten. For example, a towel hanging on a door was identified more than once as pink, although it wasn’t pink.\n\nAdditionally, leveraging the new mode to take pictures still needs work. After Gemini gave me directions to centre my face and I told it to take a photo, it obeyed my order, opened the camera, and took a photo, but that led to the termination of the Live session. That behavior ended the conversation without being able to make sure that the photo was properly captured or without asking any additional questions about what it includes.\n\nGuided vision is an interesting step forward from Google in tailoring Live camera to blind users. Although Google still has the Lookout app , it decided to make Guided vision a part of the Gemini app. Google decided to launch the feature and mention TalkBack as one of the methods to turn it on before releasing a TalkBack update that includes the necessary shortcut. There is even no accessibility service that can be assigned to an accessibility shortcut at the time of writing. However, an interesting thing for users who rely on other screen readers is that using the feature is not tied to having TalkBack running. I am almost sure that Gemini doesn’t check whether a screen reader is running as a requirement to use the feature.\n\nAlthough it is in its early stages, I am excited to keep Guided vision on, and I am not considering going back to the normal camera mode. This should minimize the need to remind Gemini that I am blind or to try to speak prompts asking it to help me guide my camera toward the subject I am asking about or the text I want it to help me read.\n\nGoogle doesn’t lack the resources to improve how Guided vision works, with the money and ability to make Gemini Live a trusted assistant, as much as “trusted” can be used with AI services, that understands the needs of blind people and helps them live a more independent life.\n\nPublished in Reviews Tutorials"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-88bbc965cfcea316",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/23/apple-releases-watchos-27-0-1-to-fix-apple-watch-series-12-and-ultra-4-bug/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-23T19:58:59.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple releases watchOS 27.0.1 to fix Apple Watch Series 12 and Ultra 4 bug",
+        "summary": "Apple is rolling out watchOS 27.0.1 for Apple Watch today. The company says the update fixes an issue where some Apple Watch units would unexpectedly restart. The update is available exclusively for Apple Watch Series 12 and Apple Watch Ultra 4 users. more…",
+        "body": "Apple is rolling out watchOS 27.0.1 for Apple Watch today. The company says the update fixes an issue where some Apple Watch units would unexpectedly restart. The update is available exclusively for Apple Watch Series 12 and Apple Watch Ultra 4 users.\n\nHere are the full release notes for watchOS 27.0.1:\n\nThis update provides bug fixes for your Apple Watch including fixing an issue where Apple Watch may restart unexpectedly.\n\nOn Reddit and other forums, some Apple Watch Series 12 and Apple Watch Ultra 4 users reported that their new watches were randomly restarting multiple times per day. The problem didn’t affect all users, but there was clearly an issue and that’s what today’s software update will hopefully fix.\n\nHave you had any problems with your Apple Watch Series 12 or Apple Watch Ultra 4? Let us know down in the comments.\n\nMy favorite Apple Watch links:\n\nFollow Chance : Threads , Bluesky , Instagram , and Mastodon ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-436f3eabbb4d8c99",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/gadgets/2026/09/youtube-promises-custom-feeds-and-a-lot-more-ai-later-this-year/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-23T19:35:53.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "YouTube promises custom feeds and a lot more AI later this year",
+        "summary": "YouTube's next year could change the content you see with a big focus on AI and livestreams.",
+        "body": "The annual Made on YouTube event has just wrapped up, offering an early look at the features you can expect to come to Google's dominant online streaming platform in the coming months. Yes, there's plenty of AI for both viewers and creators, but there's also a handful of non-AI updates mixed in there, too.\n\nThe design of YouTube's homepage feed comes under fire often, but the platform is preparing to give you more options. With Custom Feeds, you'll be able to add new tabs to the YouTube interface with content of your choice. To create a feed, just type a description and let YouTube populate the page. You can refine your description and rate video suggestions to tune the Custom Feed. Google says you'll be able to save \"multiple\" feeds without specifying the exact number. This feature will roll out soon in the US for web, mobile, and TV users.\n\nInteracting on YouTube will also change later this year. The platform will finally add the option to post GIFs in comments, which has apparently been a common request for some time. The comment box will let you search for popular animated thumbnails and post them on both regular videos and YouTube Shorts. The YouTube direct messaging feature is also adding support for group chat, but it's only going to be available in the US, UK, Singapore, Brazil, and some European countries to start.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-77d72d72647cd83a",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/23/heres-everything-new-for-apple-calendar-in-ios-27/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-23T18:57:08.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Here’s everything new for Apple Calendar in iOS 27",
+        "summary": "iOS 27 is packed with new features for Apple Wallet , Messages , Notes , and other system apps—including Calendar. Here’s everything new for Apple’s Calendar app in iOS 27. more…",
+        "body": "iOS 27 is packed with new features for Apple Wallet , Messages , Notes , and other system apps—including Calendar. Here’s everything new for Apple’s Calendar app in iOS 27.\n\nCalendar adds a feature in iOS 27 that’s been on my wishlist for years: natural language input.\n\nApple calls this ‘Smart Event Details,’ and it’s powered by Apple Intelligence. Here’s how it’s described:\n\nType events in your own words. Apple Intelligence fills in the title, time, location, and invitees as you go.\n\nThis works for both events and reminders. You can type in natural language when creating or editing an event, and watch the event details automatically fill in based on what you type.\n\nIf you prefer the manual approach, you can toggle this off in Settings, but I’ve been very happy to have it.\n\nApple has updated Calendar’s design in iOS 27 in two main places:\n\nWhen you tap an event, it now pops up in a card overlay with a fresh design. Event options have been reorganized and given icons to make them visually pop.\n\nAnd for event creation and editing, iOS 27 has an updated look too. Like with event details, Apple has reorganized the various options and added icons for each category.\n\nWith modern digital calendars, the ability to mark yourself as busy or free related to a given event is a pretty standard feature. But until iOS 27, that option never existed for iCloud calendars.\n\nIf you use a Google calendar inside Apple’s app, you’ll see the event option to show yourself as busy or free. But for iCloud calendars, that’s long been missing.\n\niOS 27 finally remedies the oversight, offering a free/busy option for iCloud events like you would get for events from Google and other third-party calendar providers.\n\niOS 27 lets you make Home Screen and Today widgets bigger than ever thanks to a new extra-large size . And Calendar supports two extra-large widgets.\n\nYou can set up ’List’ and ‘Up Next’ widgets in the extra-large size. Each is great for showing more events and reminders than ever, so if you have a packed calendar, the new widgets could prove useful.\n\nExtra-large widgets take up a lot of screen real estate, but they should prove especially handy on the iPhone Duo’s extra-large display.\n\nIt’s worth mentioning that Siri AI comes with plenty of upgrades relevant to the Calendar app.\n\nSiri gains onscreen awareness, understands your personal context, and is overall more intelligent and capable than ever before. That means it’s a much better tool for managing your calendar. In my use of iOS 27, I’ve found myself relying much more on Siri for handling events and reminders.\n\nThere’s also a new visual intelligence button in the event creation screen that lets you scan an event flyer with the new Siri mode in the Camera app. Siri then creates a new event with the details.\n\nWhich new Apple Calendar features in iOS 27 are you most excited about? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-ecfd3440e8bea639",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/gadgets/2026/09/owners-mourn-spoiled-food-after-firmware-update-bricks-samsung-smart-fridges/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-23T17:39:39.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Owners mourn spoiled food after firmware update bricks Samsung smart fridges",
+        "summary": "\"So absurd and embarrassing ...\"",
+        "body": "Some Samsung smart fridges stopped working on Tuesday due to a firmware update.\n\nKorean outlets were the first to report the problems, which affect Samsung’s Bespoke AI line of fridges. Star News Korea , per a Google-provided translation, said that most of the affected devices were four-door fridges from 2024 or later.\n\nAffected fridges “suddenly lost power and stopped functioning immediately after” trying to issue a firmware update through SmartThings, Samsung’s smart home platform, per Star News Korea. The SmartThings app then showed the devices as offline. Some users said that their fridge’s internal display was stuck showing the message \"Checking SmartThings app during update.”\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -285,53 +430,6 @@
         "title": "Accesibilidad y Tecnología Novedades de accesibilidad en iOS 27",
         "summary": "El 14 de septiembre, Apple liberó la última versión de su sistema operativo iOS 27.0 para dispositivos móviles, en la que una vez más, entre sus novedades, ha implementado funciones de accesibilidad que facilitan la adaptación e integración de las personas con discapacidad.",
         "body": "El 14 de septiembre, Apple liberó la última versión de su sistema operativo iOS 27.0 para dispositivos móviles, en la que una vez más, entre sus novedades, ha implementado funciones de accesibilidad que facilitan la adaptación e integración de las personas con discapacidad.\n\nEn el siguiente enlace se puede acceder a todas las novedades de iOS 27:\n\nhttps://www.apple.com/es/os/ios/\n\nEn el CTI se ha elaborado un extenso informe en el que se recopilan novedades y errores detectados en las pruebas realizadas, y también otros que han sido identificados gracias al aporte de algunos usuarios y de contenidos publicados en el portal AppleVis.\n\nCabe señalar que, en el momento de redactar este documento, iOS 27 se encuentra en su lanzamiento inicial por lo que algunos de los aspectos aquí recogidos podrían variar en versiones posteriores.\n\nPara acceder a esta información, puede pulsar en el siguiente enlace, donde podrá descargar una versión en pdf.\n\nDescargar informe en pdf\n\nSi lo desea, también hay disponible una versión en HTML, pulsando en el siguiente enlace.\n\nAccede al informe en html"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-8f6f328da20d9162",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2265219/chatgpt-tasks-never-use-for/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-23T12:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Never use ChatGPT for these five tasks",
-        "summary": "ChatGPT and other chatbots are useful for a lot, but remember that what you type into them is not protected and could cause trouble later.",
-        "body": "It's not a lawyer, it's not a doctor and it's definitely not your therapist.\n\nThe roster of people who have self-pwned by typing the wrong information into ChatGPT continues to grow. Samsung engineers, the acting director of America's cyber defense agency, self-represented litigants who provide citations to court cases that don't exist, a man who swapped table salt for sodium bromide after asking how to cut salt from his diet... the list is too long.\n\nEven everyone's favorite all-lowercase techbro CEO Sam Altman concedes that what you're sharing with ChatGPT isn't privileged. Speaking to podcaster Theo Von in July 2025, he highlighted how courts could force OpenAI to hand over chats, calling it \"very screwed up.\"\n\nTell a doctor, lawyer or therapist something and the law shields that conversation, but telling ChatGPT creates an audit trail. There's a non-zero risk here, given that ChatGPT chats have been subpoenaed, exposed by a share button, indexed by Google and preserved by a court order post-deletion — all in the last 18 months.\n\nSure, the chatbot is arguably a useful tool for research (check that case citations are real), coding (even the bugs ship), explaining concepts (there's no correlation between confidence and accuracy) and drafting (delete the prompt from your email before hitting send). But the areas below are where more than 900 million weekly users could create problems for themselves.\n\nSo to that end, don't use ChatGPT (or any other AI chatbot)...\n\nLaw and data science researcher Damien Charlotin maintains a public database that, to date, has logged more than 2,000 court decisions worldwide hamstrung by ChatGPT. These are cases where a judge has caught AI-fabricated citations, quotes or arguments in a filing.\n\nIt's not just self-representing litigants here. While they top the list with 1,175 records at the time of writing, lawyers come second with 815 records. It seems judges are growing tired of these shenanigans, with courts more recently imposing large fines well into the thousands-of-dollars range in a growing number of matters. Although the US makes up the largest number of cases in this data, judges in the UK, South Africa, Israel, Australia and Spain have all caught the same behavior. Where a tool was identified in those cases, ChatGPT was named more than any other.\n\nOpenAI addressed this issue last October when it updated ChatGPT's usage policies. Those policies now prohibit using its services for \"tailored advice that requires a license\" unless a licensed professional is involved. Beyond false citations, ChatGPT chats have no legal privilege, so anything typed into it about a live dispute is fair game for the other side's lawyers in discovery. Go ahead and ask general questions like what a tort is (great if you need help falling asleep), but save the detailed questions about your own dispute for an actual lawyer.\n\nOpenAI estimated last year that 0.15 percent of ChatGPT's weekly active users have conversations that include explicit indicators of potential suicide planning. That unfortunately works out to more than a million people per week, with hundreds of thousands more users exhibiting signs of psychosis or mania. Altman has said young people in particular treat ChatGPT as a therapist or life coach and, again, that nothing shields these chats.\n\nThe parents of 16-year-old Adam Raine sued OpenAI for wrongful death in August 2025, alleging that ChatGPT reinforced their son's suicidal ideation before his death. Since then, OpenAI has reworked its crisis responses with input from more than 170 clinicians. The company has also added parental controls to ChatGPT, though child safety experts are skeptical of ChatGPT for Teens , the age-gated version launched alongside those changes.\n\nResearchers have found that chatbots tend to reinforce a user's existing beliefs through sycophantic responses, in some cases feeding delusional thinking rather than challenging it. Describe an argument with your spouse, for example, and the model will work from your account's context alone, probably serving you an affirming verdict back regardless. Legislators are beginning to wake up to this, with states including Illinois, Nevada and Maine having passed laws prohibiting AI from delivering therapy or making therapeutic decisions.\n\nIt should go without saying that uploading confidential work documents to a third-party chatbot is always a bad idea. Unfortunately, too many people don't seem to realize this.\n\nIronically, Madhu Gottumukkala, the former acting director of the Cybersecurity and Infrastructure Security Agency, didn't. He uploaded at least four contracting documents marked \"for official use only\" to the public version of ChatGPT last summer, triggering security alerts and a Department of Homeland Security review. Even more ironically, the tool had been blocked for most other DHS employees at the time; Gottumukkala requested a special exception to use it. Senator Chuck Grassley followed up in February this year demanding an account of what was exposed, but predictably, nobody was really held to account. Gottumukkala was eventually shuffled elsewhere within the DHS.\n\nSamsung banned gen AI tools on company devices back in May 2023 after engineers notably pasted internal source code into ChatGPT. Accompanying that ban was an internal memo reasoning that data sent to such platforms lives on external servers where it's difficult to retrieve or delete, and could end up disclosed to other users. On consumer accounts, chats can also be used to train new models unless you've chosen to opt out. But opted-out data is still stored and breachable, and subject to legal process. Pasting client data or anything subject to employer controls or NDAs into a personal ChatGPT discussion is almost always going to be a fireable offense; Samsung's memo threatened exactly that.\n\nThe same October 2025 policy update that bans users from using ChatGPT as a lawyer also restricted people from seeking medical advice via the chatbot. HIPAA binds doctors, insurers and their business partners, but not OpenAI. Thus, health data that's legally shielded in a patient portal or between a doctor and patient has no such protection if it's disclosed to ChatGPT.\n\nResearchers from Northeastern University reported in July that while OpenAI has tightened ChatGPT's handling of suicide and self-harm, those safeguards largely don't extend to other conditions. Their work found that conversations involving conditions like eating disorders, insomnia, substance abuse and bipolar disorder didn't trigger the safeguards, and that hiding intent made every tested model's protections more likely to fail.\n\nIn a particularly wacky case of ChatGPT medical advice gone bad, a 60-year-old man spent three weeks in the hospital last year after asking the chatbot how to cut chloride from his diet. He ended up convinced that sodium bromide, a toxic substance with a long half-life, was a safe swap for table salt. He bought it online, took it for three months and wound up in an emergency department convinced his neighbor had poisoned him. While the clinicians in this man's case never saw his chat logs, ChatGPT offered bromide as a chloride substitution when they gave the same question to the bot themselves.\n\nFast Company found nearly 4,500 shared ChatGPT conversations lurking in Google search results last July. These included exchanges describing addiction, abuse and mental health struggles in enough detail to potentially identify their authors. The chats wound up indexed because people checked a \"make this chat discoverable\" checkbox in the share menu which, apparently, happened without them understanding what it did. OpenAI was quick to respond, killing the feature within a day of the report and purging conversations from Google.\n\nAs part of The New York Times' copyright lawsuit, OpenAI was ordered in May 2025 to retain every consumer chat log, deleted and temporary conversations included. That obligation ran until September 26, 2025, and logs preserved during that window remained accessible to the plaintiffs. A judge later terminated that order, meaning OpenAI no longer has to preserve all its ChatGPT data . But for four months, it did, and it could happen again.\n\nIt's vital to be aware that ChatGPT remembers what you tell it by default. That significantly raises the stakes for sensitive matters like passwords and account details, since they can persist across sessions and resurface in later conversations if mentioned even once. Passwords, one-time login codes, Social Security and passport numbers, full card or bank account details and photos of ID documents should never go into a prompt. Every one of those puts you at danger of identity theft if a chat is breached or otherwise accessed.\n\nAltman has called for an \"AI privilege\" (of course he has) to fix these confidentiality issues. But until lawmakers create one, the safe assumption is that anything typed into ChatGPT could someday be read back to you by someone else. If you aren't comfortable with that, don't put it into a prompt."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-c3e928d35f90d3f3",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2260043/dji-osmo-360-ii-review/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-23T11:30:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "DJI Osmo 360 II review: A little more video power, a lot more repairability",
-        "summary": "Replaceable lenses are the hot new feature for an action camera.",
-        "body": "The 8K 60 fps frame rate is nice, but the replaceable lenses are the hot new feature for an action camera.\n\nWe may receive a commission on purchases made from links.\n\nDJI's Osmo 360 was a solid first try at a panoramic action cam, but just over a year later it already has a successor designed to compete with its main rival, the Insta360 X6 . The new Osmo 360 II has some small but welcome improvements over the original, like higher frame rates, improved dynamic range and better low light capability. And unlike the original Osmo 360, it has lenses that can be replaced if you damage them while doing the punishing activities this camera was designed for.\n\nAs it did before, DJI priced this at €589 ($680), well below the Insta360 X6's €699 sticker . The biggest problem is that unlike its primary rival, the Osmo 360 II isn't available in the United States. That's too bad, because the improvements in video quality are very noticeable when you're shooting in bright sunlight or a city nightscape.\n\nThe Osmo 360 II has an ultrawide lens and 1/1.1-inch 8K square sensor on both sides, so it can \"see\" everything around it. Each camera captures a 180-degree view, which is stitched together in-camera to create a 360-degree video. While editing, you can then choose any angle you want. During the export, footage is \"de-warped\" or flattened to create a square video at up to 4K resolution, or you can export 360-degree video. You can also capture 120-megapixel panoramic still photos.\n\nThe new model has the same design as its predecessor, with a squarish shape that's thicker, wider and shorter than the Insta360 X6. There's a bright 2-inch, 314 x 556 touch display at the back along with a camera view (forward or backwards) and record button below. On the right side is the power button and USB-C connector tucked into a waterproof compartment, and the right side has a compartment for the battery and a microSD card slot.\n\nYou won't necessarily need a memory card, though. The Osmo 360 II is equipped with the same 105GB of internal storage as before, more than double the 47GB on the Insta360 X6. USB-C transfer speeds are the same at 600 MB/s, compared to 450 MB/s for the X6. With good cables and a fast external drive, I transferred 20GB of files (8.2 minutes of video) in about 32 seconds.\n\nThe Osmo 360 II comes with a new 2,150mAh battery, up from 1,950 mAh before, that's compatible with DJI's other action cams. Though it's rated for 100 minutes of 8K 30p shooting, just like before, I was able to eke out 105 minutes or so. The camera also charges significantly quicker, from 0 to 100 percent in 39 minutes, compared to 91 minutes for the original. Both charging speeds and battery life are less than the Insta360 X6, which can go 140 minutes between charges at 8K 30 fps and fully charge in 35 minutes.\n\nA key new feature is NFC tap-to-connect. DJI's Mimo app sometimes fails to find the company's action cams over Wi-Fi, but you can now tap your phone to the Osmo 360 II and that handshake will happen automatically. It worked seamlessly in my testing.\n\nWith the Osmo 360, a damaged lens meant you had to send the camera back to DJI. You could try to replace it yourself, but that's a janky process . Now, swapping new ones in is easy and inexpensive. DJI sells replaceable lenses for €39 ($45) a pair in a kit that includes a tool to remove and install them, along with instructions, a blower to clean the sealing area, a suction cup to pull off the old lens and new gaskets. I tried it myself and was able to change one in under five minutes, so this camera's repairability is now much better, and on par with the Insta360 X6.\n\nA key feature of the Osmo 360 II carried from the first model is the 1/1.1-inch square sensor designed for panoramic shooting. It allows DJI to use 25 percent more of the sensor than some rival models, though Insta360's X6 now uses the same-sized sensor. DJI also updated the Osmo 360 II's processor to increase video speeds, improve low light capability and boost dynamic range.\n\nWith the update, the camera can now record 8K 360 video at up to 60 fps instead of 50 fps, and 4K at 120 fps, up from 100 fps. As before, it supports 10-bit D-LogM and HDR capture in HLG mode, but not Dolby Vision like the Insta360 X6. DJI says it boosted dynamic range from 13.5 to 14.5 stops as well. A new AI noise-reduction algorithm called SuperNight 2.0 is designed to allow higher ISO settings, and thus higher shutter speeds at night to reduce motion blur. It even has a dedicated setting under the \"Stabilization Scenarios\" menu setting called \"Anti-motion Blur.\"\n\nTo confirm those claims, I tested the Osmo 360 II in a couple of different scenarios. One was a bike ride on a sunny day to see if I could tease out more shadow and bright light detail. In another, I tested it on Paris streets at night, mounted directly to the bike's handlebars to test RockSteady 3.0 stabilization with pavement vibration. I used both the regular video mode and SuperNight 2.0 (with and without Anti-motion Blur) to see the difference.\n\nThe results were impressive. In daylight, the extra dynamic range was noticeable, with more detail available in both shadows and highlights. That extra latitude allowed me to output vibrant, punchy video and do some creative color correction as well. DJI's cameras have always produced color-accurate video, and that was also on display here with human subjects, vegetation and cityscapes.\n\nAt night, the SuperNight 2 setting did improve motion blur issues by boosting shutter speeds slightly, while also eliminating much of the \"plastic\" effect on people caused by the previous model's aggressive AI noise reduction. I found the optimal balance between image quality and stabilization using SuperNight 2.0 with the Anti-Motion Blur scenario. While some artifacts were present at that setting, it wasn't distracting and allowed for a bright exposure.\n\nI also tried it at night in panoramic mode. I set exposure to \"manual\" with a high ISO setting, reasonably high 1/160th shutter speed and the \"anti-flicker\" setting enabled to reduce artificial light strobing. This worked best to eliminate motion blur caused by the stabilization, and allowed me to apply noise reduction later in post for good results, though footage was darker than when using SuperNight 2.0. Overall, the Osmo 360 II produced some of the best low-light video I've seen on any action cam.\n\nAs before, image quality suffers in one key area. Even with 8K 360 resolution, the Osmo 360 is clearly less sharp than DJI's Action 6 Pro after conversion to 4K flat video. After testing it with resolution charts, I'd rate it as somewhere between 1080p and 4K in the center, and around 720p at the edges.\n\nStitching can still be a problem too, with some artifacts present at certain angles, but fewer than I've seen with the Insta360 X6. This confirms to me that the attraction of the Osmo 360 II is the ability to switch angles, and not the overall video quality.\n\nThe Osmo 360 II offers a few other features, including the new 16K Timelapse feature (up from 8K before) and subject tracking at up to 4K 30 fps. There's also a \"Vortex\" mode that works at 8K 120fps, giving you a trippy (but not very useful) barrel roll effect.\n\nThe audio system is the same as before, with four internal mics to capture ambient sound and in-camera wind reduction that I found effective for bike rides. It can also connect automatically to DJI's latest mics, including the Mic 3, Mic 2, Mic Mini 2S, Mic Mini 2 and Mic Mini. Those allow for clear, realistic voice audio and can also record internally to provide a backup. Both Insta360 and GoPro now offer their own wireless mic systems now, too.\n\nEditing is still a pain point for the Osmo 360 II. DJI's Studio app can handle simple jobs, letting you change and keyframe camera angles or do 360-specific camera moves. It also allows basic color correction and titles, then lets you output your final video in either flat or full panoramic formats.\n\nHowever, it's not very intuitive and lacks key features like detailed color correction, effects and advanced titles. DJI Studio is also behind its main rival, Insta 360 Studio. DJI did introduce a new plugin for DaVinci Resolve called DJI Reframe, though. To use it, you first export the native DJI OSV 360 files as MP4 panoramic files using the DJI Studio app. Then, you can import those into Resolve and apply the DJI Reframe plugin to adjust or keyframe the camera angle and change the projection to Dewarp, Ultrawide and other settings.\n\nThat gives you the power of Resolve for color correction and other chores, but the exporting process is still painful and reduces image quality. Ideally, Blackmagic Design and Adobe should work with DJI (along with Insta360 and GoPro) to support native OSV and other file formats and eliminate the export step.\n\nWith its latest updates, DJI's Osmo 360 II is a formidable rival to the Insta360 X6. Image quality is about as good as it can be given the limitations of 360 video. DJI has resolved my main complaint with the previous model: the excessive motion blur caused by stabilization in low light. The extra dynamic range also makes it easier to adjust shots in post.\n\nLike other 360 models, the Osmo 360 II's video still looks soft compared to regular action cameras, though quality is very similar to its main rival. Those cameras stack up very closely in other areas, but the Osmo 360 II has more storage, slightly higher 360 frame rates and a cheaper price, while the Insta360 X6 has better battery life.\n\nIf you live in the US, there's no decision to be made, as the Insta360 X6 is available in the US and the Osmo 360 II is not. If you're in Europe, Asia and elsewhere, though, it's a great 360 camera pick, offering great picture quality and specs for its category. It's now on sale for £509 in the UK or €589 ($680) in Europe, while the Adventure Combo with extra batteries, a charger and a case will run £639 and €739 in the EU."
       }
     },
     "media": null
@@ -363,30 +461,6 @@
     "media": null
   },
   {
-    "id": "ars-technica-cf300b398d40e664",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/09/new-anthropic-openai-models-make-same-promise-a-little-more-for-a-lot-less-money/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-22T21:25:18.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "New Anthropic, OpenAI models make same promise: A little more for a lot less money",
-        "summary": "The frontier AI model race has entered its comparison shopping phase.",
-        "body": "OpenAI and Anthropic both recently released new models aimed at lowering costs. Anthropic announced Opus 5.5, the latest version of its main mass-market workhorse model, used for tasks like coding and other complex knowledge work.\n\nAnd OpenAI announced GPT-6 Sol and Luna, the latest versions of its middle-of-the-road or smaller models focused on efficiency and speed.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "applevis-apps-456cafda828f02e9",
     "type": "news",
     "sourceId": "applevis-apps",
@@ -406,31 +480,6 @@
         "title": "Scratch Mancer: Card Roguelike",
         "summary": "A scratch-card roguelike. You work the night counter of a House that sells luck sealed under foil. The quota is due by dawn. Miss it, and the House keeps you. Every ticket is a grid of foil hiding cash, multipliers and skulls. Your thumb is the budget — stamina runs out long before the tickets do, so where you scratch matters as much as what's under it. THE DECISION YOU MAKE ALL GAME • Scratch a cell to 20% and you can read the fragment — it doesn't count and it doesn't trigger • Scratch to 45% and it counts for real, skulls included • One revealed skull halves the payout. Two void the ticket • Cash out whenever you like. Only what you revealed pays BUILD A RUN THAT BENDS THE ODDS • 40 charms across 5 slots: reroll skulls into coins, drift sevens toward corners, make a graze count as a hit • A warden calls every third night. Each one bends a rule you were leaning on. There are six of them • Seven ticket types, each with its own payout rule — match three, complete a crossword, climb a rising ladder, or reveal a single cell on an Offering and stop • Four single-use tools in three pockets: spray the foil to see straight through it, magnet a symbol sideways, sticker a skull into a seven • Nine nights, each with a quota due at dawn. Then endless, if you're still standing • Beat the House and the Seals open: seven stacked terms for the players who won, one added per win. Higher quotas, a skull on every ticket, wardens arriving early, two on the last night. Break all seven NO ADS. NO PAYWALLS. JUST SCRATCHING. One purchase, the whole game. The odds don't know what you paid, because there is no second payment to make: no coins to buy, no subscription, no season pass, no timers. • Plays fully offline • Family Sharing enabled • Game Center achievements and leaderboards • One thumb, portrait, a night finishes on a bus ride • Built for iPhone and iPad by one developer Scratch the foil, read what you can, and try to leave before the House notices. Scratchmancer is a work of fiction. No real money changes hands, no real lottery products appear, and the odds in it are invented.",
         "body": "A scratch-card roguelike. You work the night counter of a House that sells luck sealed under foil. The quota is due by dawn. Miss it, and the House keeps you. Every ticket is a grid of foil hiding cash, multipliers and skulls. Your thumb is the budget — stamina runs out long before the tickets do, so where you scratch matters as much as what's under it. THE DECISION YOU MAKE ALL GAME • Scratch a cell to 20% and you can read the fragment — it doesn't count and it doesn't trigger • Scratch to 45% and it counts for real, skulls included • One revealed skull halves the payout. Two void the ticket • Cash out whenever you like. Only what you revealed pays BUILD A RUN THAT BENDS THE ODDS • 40 charms across 5 slots: reroll skulls into coins, drift sevens toward corners, make a graze count as a hit • A warden calls every third night. Each one bends a rule you were leaning on. There are six of them • Seven ticket types, each with its own payout rule — match three, complete a crossword, climb a rising ladder, or reveal a single cell on an Offering and stop • Four single-use tools in three pockets: spray the foil to see straight through it, magnet a symbol sideways, sticker a skull into a seven • Nine nights, each with a quota due at dawn. Then endless, if you're still standing • Beat the House and the Seals open: seven stacked terms for the players who won, one added per win. Higher quotas, a skull on every ticket, wardens arriving early, two on the last night. Break all seven NO ADS. NO PAYWALLS. JUST SCRATCHING. One purchase, the whole game. The odds don't know what you paid, because there is no second payment to make: no coins to buy, no subscription, no season pass, no timers. • Plays fully offline • Family Sharing enabled • Game Center achievements and leaderboards • One thumb, portrait, a night finishes on a bus ride • Built for iPhone and iPad by one developer Scratch the foil, read what you can, and try to leave before the House notices. Scratchmancer is a work of fiction. No real money changes hands, no real lottery products appear, and the odds in it are invented."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-dc55d2a41d5c613e",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/security/2026/09/microsoft-disrupts-ai-assisted-platform-that-compromised-12000/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-22T19:45:47.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Microsoft disrupts AI-assisted platform that compromised 12,000 accounts",
-        "summary": "EvilTokens provided an end-to-end platform that makes mass compromises faster and easier.",
-        "body": "Microsoft said Tuesday that it led an industry-wide disruption of a subscription-based scam platform that used an AI chatbot to compromise 12,000 Microsoft accounts over a few-month span.\n\nNamed EvilTokens, the platform was introduced over a Telegram channel in February and charged an initial $1,500 fee and a recurring $500 charge each month after that. EvilTokens provided a single service for streamlining most steps required to compromise email accounts in large numbers. From there, the platform helped customers analyze inboxes, select targets that would provide the biggest potential payouts, and draft follow-up emails that provided realistic ruses for tricking company employees into transferring funds to attacker-controlled accounts.\n\n“While EvilTokens helped cybercriminals access email accounts, at the center of the service was an AI-style chatbot that could analyze a victim’s inbox and help criminals identify trusted relationships, payment authorizations, and sensitive responsibilities, as well as other circumstances where fraud was most likely to succeed,” Microsoft said . “The platform could even recommend fraud strategies, including drafting messages that impersonated trusted contacts to help criminals trick victims into taking action.”\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -1591,36 +1640,6 @@
         "title": "Take the WebAIM Survey",
         "summary": "Web Accessibility In Mind (WebAIM) is surveying screen reader users to collect information that will impact the future development of web content and web standards. WebAIM, part of Utah State University, provides training, tools, and information to assist in the creation of websites that are accessible to individuals with disabilities. Why Web Accessibility Matters Web …",
         "body": "Web Accessibility In Mind (WebAIM) is surveying screen reader users to collect information that will impact the future development of web content and web standards. WebAIM, part of Utah State University, provides training, tools, and information to assist in the creation of websites that are accessible to individuals with disabilities.\n\nWeb accessibility is crucial to ensure screen reader users can readily access information on the web. This includes content such as:\n\nWebsites are often used to shop online, complete school assignments, and perform essential work tasks. This makes accessibility a necessary part of website development.\n\nWhether you consider yourself a novice or an advanced JAWS user, we ask that you contribute to the future of web accessibility by taking the WebAIM Screen Reader Survey . It will remain open through Monday, August 31, 2026 , and takes around five to ten minutes to complete."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "applevis-blog-4dd0bdc14da36365",
-    "type": "news",
-    "sourceId": "applevis-blog",
-    "sourceName": "AppleVis Blog",
-    "sourceUrl": "https://www.applevis.com/blog",
-    "originalUrl": "https://www.applevis.com/blog/applevis-unlimited-whats-new-noteworthy-august-2026",
-    "originalLanguage": "en",
-    "publishedAt": "2026-08-28T20:08:24.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-accesibilidad",
-      "android",
-      "windows",
-      "apps-accesibles",
-      "programas-accesibles",
-      "ia-accesibilidad",
-      "braille"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "AppleVis Unlimited: What's New and Noteworthy for August 2026",
-        "summary": "Welcome to the August 2026 edition of AppleVis Unlimited, your monthly digest of the latest and most notable content on the AppleVis website. This newsletter features a curated selection of community-submitted content, including new app entries, updates, news, podcast episodes, and popular discussions. We hope that you find this publication to be both helpful and informative. If you have any questions or feedback about this newsletter, please feel free to reach out using our Contact Form. New Apps AudioReel From the App Store: Ever had an audio clip you wanted to post on social media, but couldn't because it's just an audio file? AudioReel solves exactly that: it takes your audio and photos and turns them into a finished video. Additional Details: Primary platform: iOS App is paid Developer: Stelios Platsis AudioReel on AppleVis AudioReel on the App Store BlindRun - an accessible game From the App Store: Close your eyes and play by sound. BlindRun is an endless runner built from the ground up for blind and low-vision players. There’s nothing to watch—you run with your ears. Clear, natural audio tells you what’s coming and where it is, while quick swipes keep you moving. Fast, fair, and fully playable without looking at the screen. Additional Details: Primary platforms: iOS, iPadOS App is free Developer: MERIC KARACA BlindRun - an accessible game on AppleVis BlindRun - an accessible game on the App Store Radiccio From the App Store: Radiccio is a music player and personal music server for Macintosh computers. Additional Details: Primary platform: macOS App is free with in-app purchases Developer: Crispy Crunchy Computerware LLC Radiccio on AppleVis Radiccio on the App Store Radien: Network Toolbox From the App Store: Wi-Fi slow? Site down? Certificate warning? Radien answers from your device - nine honest tools, plain-language verdicts. Pay once. No ads, no trackers, no accounts. Radien is a native network-diagnostics toolbox for iPhone and iPad - and it's honest about what it can and can't see. Every tool runs directly on your device. No ads, no trackers, no analytics, no accounts. Nothing you type is sent to a server we operate. Every tool is fully usable with VoiceOver, and the ping latency chart adopts Apple's Audio Graphs, so you can hear your connection as rising and falling tones instead of reading it. Additional Details: Primary platforms: iOS, iPadOS App is free with in-app purchases Developer: IGOR ARSENKIN Radien: Network Toolbox on AppleVis Radien: Network Toolbox on the App Store Roomers - Sudoku Murder Logic From the App Store: New: three free hints per case, trophies, every locale in its own colors, and the whole game in Spanish. Still no guessing, ever. A fresh free case every day. Every room has a story. One hides a killer. Roomers is a cozy murder-mystery logic puzzle. Each case is a crime scene: a floor plan divided into rooms, furnished with tables, chairs, and secrets. Place every suspect so each row and column holds exactly one person, follow each suspect's clue, and when the board is solved, accuse. The murderer is whoever ends up alone in a room with the victim. Additional Details: Primary platforms: iOS, iPadOS App is free with in-app purchases Developer: Luis Espinal Roomers - Sudoku Murder Logic on AppleVis Roomers - Sudoku Murder Logic on the App Store Text Dungeon: Roguelite From the App Store: Roguelite A minimalist dungeon crawler built around strategy, choice, and replayability. Descend through a procedurally generated dungeon where every room presents a decision — fight, trade, risk, or retreat. Build your character through perks and items, adapt to enemy mechanics, and push deeper with each run. Every descent is different. Every choice matters. Additional Details: Primary platform: iOS App is free with in-app purchases Developer: Marasy Phi Text Dungeon: Roguelite on AppleVis Text Dungeon: Roguelite on the App Store The Dark Realm Beyond Sight From the App Store: THE DARK REALM BEYOND SIGHT — Where sound and steel speak. Close your eyes or lock onto the screen: The Dark Realm Beyond Sight plays both ways. This action RPG was built from the ground up with cartoon-style visuals for sighted players AND full audio design for blind and low-vision players. Same dungeons, same monsters, equal battle for everyone. Deep in a dark crypt, 30 monsters await. From the Shadow Rat to the Dark Dragon, down to the Blind King on his throne, each foe grows stronger, faster, more ruthless. Take up your sword, raise your shield, and free the realm. Additional Details: Primary platform: iOS App is free Developer: MERIC KARACA The Dark Realm Beyond Sight on AppleVis The Dark Realm Beyond Sight on the App Store All recent app entries may be found at: iOS/iPadOS Mac Apple Watch Apple TV Notable App Updates BookCraft Audio From the App Store: BookCraft is an audiobook reader and converter, designed from the ground up with accessibility in mind. Whether you listen with VoiceOver or by touch, it makes listening simple, comfortable and enjoyable. Below is a summary of Recent Updates to BookCraft Audio. Please see the App Store page for full Release Notes. New speed and volume controls iCloud syncing improvements Improved scalability across different screen sizes and resolutions Bug fixes and accessibility, usability, and performance improvements Additional Details: Primary platforms: iOS, iPadOS App is paid Developer: Stelios Platsis BookCraft Audio on AppleVis BookCraft Audio on the App Store DeyesFree From the App Store: DeyesFree is a dice roller built to be used entirely by ear. Roll the dice and a real recorded human voice speaks every die and the total. Designed from day one for players who are blind or have low vision, and just as handy for anyone who wants to keep their eyes on the game instead of a screen. Below is a summary of recent updates to DeyesFree. Please see the App Store page for full release notes. Support for multiple dice bags New tabletop toolkit for customizing roll mechanics Ability to change the voice used by the app New English voice used by default in the United Kingdom, Ireland, Australia, New Zealand, India, and South Africa New American English voice New \"braille mode\" that mutes speech and flashes results on a braille display Ability to customize vibration and shake sensitivity New \"quiet mode\" that mutes speech and provides a visual-only experience Ability to type and preview rolls New ways to roll Ability to customize the app's feedback when rolling New tutorial for learning app sounds Ability to copy, share, and sync rolls The app can now be used in both portrait and landscape orientations German language support Bug fixes and improvements Additional Details: Primary platforms: iOS, watchOS App is free Developer: Harrison Tu DeyesFree on AppleVis DeyesFree on the App Store RightHear - Blind Assistant From the App Store: RightHear is a virtual accessibility assistant that helps people understand where they are and what’s around them – in both new and familiar places. We’re here to empower individuals who are blind, visually impaired, or face orientation challenges to navigate independently, confidently, and on their own terms – anytime, anywhere. Below is a summary of recent updates to RightHear - Blind Assistant. Please see the App Store page for full release notes. Detected markers are now denoted by a green badge New \"Dismiss\" option added to menus User-triggered playback will no longer be interrupted Mixed language support Russian language support Accessibility and localization improvements Additional Details: Primary platforms: iOS, iPadOS App is free Developer: ZIKITAPP LTD RightHear - Blind Assistant on AppleVis RightHear - Blind Assistant on the App Store Soundscape Community From the App Store: Welcome to Soundscape Community. We are a diverse consortium of organizations and individuals committed to improving access and inclusion for everyone, in partnership with a global community of users and open source developers. We are delighted to make Soundscape Community available for people around the world. With the Soundscape Community app, you can immerse yourself in your surroundings and navigate effortlessly with its innovative spatial audio. The app calls out points of interest, individual markers that you have created or which have been shared with you, businesses and much more information by using audio placed in the environment around you so that you experience it as 3D sound when you walk or pass through different spaces and places. Below is a summary of recent updates to Soundscape Community. Please see the App Store page for full release notes. Ability to create route files New getting started tutorials Translation improvements Additional Details: Primary platform: iOS App is free Developer: INCLUSION AND ACCESSIBILITY LABS DESIGNATED ACTIVITY COMPANY Soundscape Community on AppleVis Soundscape Community on the App Store Vox libri From the App Store: Read your way: accessible, comfortable, and without barriers. Vox Libri is designed to help anyone read books and documents in a flexible, personalized, and fully accessible way. Whether you prefer reading on screen, using a braille display, or listening with high-quality text-to-speech, enjoying your content has never been easier. Lightweight, fast, and built for readers who want a comfortable, distraction-free, and inclusive reading experience. Below is a summary of recent updates to Vox libri. Please see the App Store page for full release notes. Ability to read books in FB2 and LaTeX format New settings to control VoiceOver focus when reading Ability to customize menus and reading screen Improvements to music playback when reading (beta) Improvements to audio and search Bug fixes and accessibility improvements Additional Details: Primary platforms: iOS, iPadOS, macOS, watchOS App is paid Developer: Jonathan Chacon Barbero Vox libri on AppleVis Vox libri on the App Store Weather Gods From the App Store: Unleash the Elements with Weather Gods! Step into a world where weather forecasts transcend the ordinary—meet the Weather Gods of Fire, Ice, Water, Air, and Moon. Jaw-dropping visuals, immersive audio, and hyperlocal precision for over a million locations. Swipe the Weather Wheel, browse Almanac day by day, tap a God for a deep dive, and hear the forecast come alive. Ready to rule the elements? Below is a summary of recent updates to Weather Gods. Please see the App Store page for full release notes. New almanac for browsing sun, moon, tides, eclipses, observances, and sky notes New flexible almanac widgets New weather timeline for viewing a wide range of forecast metrics New \"Health & Comfort\" widget for viewing UV, air quality, pollen, and heat comfort from the Home Screen Improved reporting of humidity, sun strength, and heat stress Improved tide, station, and tropical storm maps Ability to listen to nearby NOAA radio stations in the US (premium) Ability to view worldwide rainfall radar (premium) New warnings map for severe weather Expanded coverage for severe weather alerts Added optional Goddess names for water, air, and ice Updated visualization of wind Bug fixes and accessibility improvements Additional Details: Primary platforms: iOS, iPadOS, watchOS App is free with in-app purchases Developer: Weather Gods Ltd Weather Gods on AppleVis Weather Gods on the App Store Recent News and Views Apple Releases macOS Tahoe 26.6.1 with Screen Sharing Vulnerability Fix By AppleVis | August 6, 2026 Apple has today released macOS Tahoe 26.6.1, bringing a fix for a vulnerability that allowed an attacker on the network to authenticate to Screen Sharing without valid credentials . Apple Releases iOS 26.6.1, iPadOS 26.6.1, and macOS Tahoe 26.6.2 with Security Updates By AppleVis | August 17, 2026 Apple has today released iOS 26.6.1, iPadOS 26.6.1, and macOS Tahoe 26.6.2, bringing unspecified security updates. Apple Introduces Updated Mac Mini and Mac Studio with Upgraded Chips and Improved Connectivity By AppleVis | August 25, 2026 Apple today updated the Mac mini and Mac Studio, introducing the M6 Chip for the Mac mini, as well as the M5 Ultra Chip for the Mac Studio, which Apple describes as its \"most powerful silicon ever.\" All recent blog posts may be found at: AppleVis Blog This Month on the AppleVis Podcast Note: All episodes include AI-generated transcripts. Transcripts can be located on each episode's page by navigating to the \"Transcript\" heading below the description. Deyesfree : An Accessible Dice Roller for iPhone and Apple Watch Harrison introduces **Deyesfree **, an accessible dice rolling app built specifically with VoiceOver users in mind. Rather than adapting a traditional visual interface, the app was designed from the ground up to provide a fast, intuitive experience for blind and low vision users while remaining equally enjoyable for anyone looking for a simple digital dice roller. Throughout the introduction, Harrison shares the story behind the app, the inspiration for creating it, and the accessibility decisions that shaped its development. Deyesfree : An Accessible Dice Roller for iPhone and Apple Watch (MP3) AppleVis Extra 116: Blind Developer Showcase: Yannick Plassiard of aGram, aCapture, aScan, and More In this episode of the AppleVis Extra, David Nason is joined by blind software developer Yannick Plassiard for a fascinating conversation about accessibility, software development, and what happens when the person building an accessible app is also someone who relies on accessibility every day. Yannick is the developer behind App-Suite, a growing collection of accessibility-focused applications that includes aGram, aScan, aCapture, and other projects spanning MacOS, iOS, Windows, and Android. AppleVis Extra 116: Blind Developer Showcase: Yannick Plassiard of aGram, aCapture, aScan, and More (MP3) AppleVis Extra 117: Blind Developer Showcase: Rocco Fiorentino of FloType In this episode of the AppleVis Extra, David Nason speaks with Rocco Fiorentino, developer of FloType, an upcoming VoiceOver-first keyboard for blind and low-vision users. If you remember the speed and simplicity offered by Fleksy and later FlickType, FloType will feel immediately familiar. Rocco explains how his background as an audio engineer and producer gradually led him into development, first through scripting tools designed to make Pro Tools more efficient with VoiceOver, and eventually to building a keyboard intended to solve one of the persistent frustrations of touchscreen devices: typing quickly without needing to hit every virtual key precisely. AppleVis Extra 117: Blind Developer Showcase: Rocco Fiorentino of FloType (MP3) All recent podcast episodes may be found at: AppleVis Podcast Popular Topics Below is a selection of popular topics on the AppleVis Forum during August 2026: What is everyone’s favorite voice voice to use? Announcing the first public beta of Runa TTS for iOS: bringing the high quality, natural sounding voices from ReadSpeaker to VoiceOver and other apps that rely on Apple's speech synthesis API's. BrailliantConnect: your Brailliant in the Finder, no macFUSE Radien - looking for VoiceOver feedback on my network diagnostics application Connect them - a New Word Game Anyone else excited about all the rumored Ultra models of everything? Weather Gods 4.9.4 — VoiceOver improvements, Almanac, Pollen, Timeline, and more Story-based game Recommendations Questions for iPad Owners Tactera - upcoming new less expensive 32 cell braille display All recent forum topics may be found at: Apple Posts Non-Apple Posts Be My Eyes Foundation AppleVis is supported in part by contributions to the Be My Eyes Foundation. To learn more, or to donate, go to www.BeMyEyesFoundation.org . Connect with Us Subscribe to AppleVis on YouTube Follow AppleVis on Mastodon Follow AppleVis on X Visit and like the AppleVis Facebook Page Learn about The Be My Eyes app Download Be My Eyes from the App Store Wishing you the best and every good thing, The AppleVis Editorial Team A Be My Eyes Company",
-        "body": "Welcome to the August 2026 edition of AppleVis Unlimited, your monthly digest of the latest and most notable content on the AppleVis website. This newsletter features a curated selection of community-submitted content, including new app entries, updates, news, podcast episodes, and popular discussions. We hope that you find this publication to be both helpful and informative. If you have any questions or feedback about this newsletter, please feel free to reach out using our Contact Form.\n\nFrom the App Store:\n\nEver had an audio clip you wanted to post on social media, but couldn't because it's just an audio file? AudioReel solves exactly that: it takes your audio and photos and turns them into a finished video.\n\nAdditional Details:\n\nFrom the App Store:\n\nClose your eyes and play by sound.\n\nBlindRun is an endless runner built from the ground up for blind and low-vision players. There’s nothing to watch—you run with your ears. Clear, natural audio tells you what’s coming and where it is, while quick swipes keep you moving. Fast, fair, and fully playable without looking at the screen.\n\nAdditional Details:\n\nFrom the App Store:\n\nRadiccio is a music player and personal music server for Macintosh computers.\n\nAdditional Details:\n\nFrom the App Store:\n\nWi-Fi slow? Site down? Certificate warning? Radien answers from your device - nine honest tools, plain-language verdicts. Pay once. No ads, no trackers, no accounts.\n\nRadien is a native network-diagnostics toolbox for iPhone and iPad - and it's honest about what it can and can't see. Every tool runs directly on your device. No ads, no trackers, no analytics, no accounts. Nothing you type is sent to a server we operate.\n\nEvery tool is fully usable with VoiceOver, and the ping latency chart adopts Apple's Audio Graphs, so you can hear your connection as rising and falling tones instead of reading it.\n\nAdditional Details:\n\nFrom the App Store:\n\nNew: three free hints per case, trophies, every locale in its own colors, and the whole game in Spanish. Still no guessing, ever. A fresh free case every day.\n\nEvery room has a story. One hides a killer.\n\nRoomers is a cozy murder-mystery logic puzzle. Each case is a crime scene: a floor plan divided into rooms, furnished with tables, chairs, and secrets. Place every suspect so each row and column holds exactly one person, follow each suspect's clue, and when the board is solved, accuse. The murderer is whoever ends up alone in a room with the victim.\n\nAdditional Details:\n\nFrom the App Store:\n\nRoguelite\n\nA minimalist dungeon crawler built around strategy, choice, and replayability.\n\nDescend through a procedurally generated dungeon where every room presents a decision — fight, trade, risk, or retreat. Build your character through perks and items, adapt to enemy mechanics, and push deeper with each run.\n\nEvery descent is different. Every choice matters.\n\nAdditional Details:\n\nFrom the App Store:\n\nTHE DARK REALM BEYOND SIGHT — Where sound and steel speak.\n\nClose your eyes or lock onto the screen: The Dark Realm Beyond Sight plays both ways. This action RPG was built from the ground up with cartoon-style visuals for sighted players AND full audio design for blind and low-vision players. Same dungeons, same monsters, equal battle for everyone.\n\nDeep in a dark crypt, 30 monsters await. From the Shadow Rat to the Dark Dragon, down to the Blind King on his throne, each foe grows stronger, faster, more ruthless. Take up your sword, raise your shield, and free the realm.\n\nAdditional Details:\n\nAll recent app entries may be found at:\n\nFrom the App Store:\n\nBookCraft is an audiobook reader and converter, designed from the ground up with accessibility in mind. Whether you listen with VoiceOver or by touch, it makes listening simple, comfortable and enjoyable.\n\nBelow is a summary of Recent Updates to BookCraft Audio. Please see the App Store page for full Release Notes.\n\nAdditional Details:\n\nFrom the App Store:\n\nDeyesFree is a dice roller built to be used entirely by ear. Roll the dice and a real recorded human voice speaks every die and the total. Designed from day one for players who are blind or have low vision, and just as handy for anyone who wants to keep their eyes on the game instead of a screen.\n\nBelow is a summary of recent updates to DeyesFree. Please see the App Store page for full release notes.\n\nAdditional Details:\n\nFrom the App Store:\n\nRightHear is a virtual accessibility assistant that helps people understand where they are and what’s around them – in both new and familiar places.\n\nWe’re here to empower individuals who are blind, visually impaired, or face orientation challenges to navigate independently, confidently, and on their own terms – anytime, anywhere.\n\nBelow is a summary of recent updates to RightHear - Blind Assistant. Please see the App Store page for full release notes.\n\nAdditional Details:\n\nFrom the App Store:\n\nWelcome to Soundscape Community. We are a diverse consortium of organizations and individuals committed to improving access and inclusion for everyone, in partnership with a global community of users and open source developers. We are delighted to make Soundscape Community available for people around the world. With the Soundscape Community app, you can immerse yourself in your surroundings and navigate effortlessly with its innovative spatial audio. The app calls out points of interest, individual markers that you have created or which have been shared with you, businesses and much more information by using audio placed in the environment around you so that you experience it as 3D sound when you walk or pass through different spaces and places.\n\nBelow is a summary of recent updates to Soundscape Community. Please see the App Store page for full release notes.\n\nAdditional Details:\n\nFrom the App Store:\n\nRead your way: accessible, comfortable, and without barriers.\n\nVox Libri is designed to help anyone read books and documents in a flexible, personalized, and fully accessible way. Whether you prefer reading on screen, using a braille display, or listening with high-quality text-to-speech, enjoying your content has never been easier.\n\nLightweight, fast, and built for readers who want a comfortable, distraction-free, and inclusive reading experience.\n\nBelow is a summary of recent updates to Vox libri. Please see the App Store page for full release notes.\n\nAdditional Details:\n\nFrom the App Store:\n\nUnleash the Elements with Weather Gods! Step into a world where weather forecasts transcend the ordinary—meet the Weather Gods of Fire, Ice, Water, Air, and Moon. Jaw-dropping visuals, immersive audio, and hyperlocal precision for over a million locations. Swipe the Weather Wheel, browse Almanac day by day, tap a God for a deep dive, and hear the forecast come alive. Ready to rule the elements?\n\nBelow is a summary of recent updates to Weather Gods. Please see the App Store page for full release notes.\n\nAdditional Details:\n\nBy AppleVis | August 6, 2026\n\nApple has today released macOS Tahoe 26.6.1, bringing a fix for a vulnerability that allowed an attacker on the network to authenticate to Screen Sharing without valid credentials .\n\nBy AppleVis | August 17, 2026\n\nApple has today released iOS 26.6.1, iPadOS 26.6.1, and macOS Tahoe 26.6.2, bringing unspecified security updates.\n\nBy AppleVis | August 25, 2026\n\nApple today updated the Mac mini and Mac Studio, introducing the M6 Chip for the Mac mini, as well as the M5 Ultra Chip for the Mac Studio, which Apple describes as its \"most powerful silicon ever.\"\n\nAll recent blog posts may be found at:\n\nAppleVis Blog\n\nNote: All episodes include AI-generated transcripts. Transcripts can be located on each episode's page by navigating to the \"Transcript\" heading below the description.\n\nHarrison introduces **Deyesfree **, an accessible dice rolling app built specifically with VoiceOver users in mind. Rather than adapting a traditional visual interface, the app was designed from the ground up to provide a fast, intuitive experience for blind and low vision users while remaining equally enjoyable for anyone looking for a simple digital dice roller. Throughout the introduction, Harrison shares the story behind the app, the inspiration for creating it, and the accessibility decisions that shaped its development. Deyesfree : An Accessible Dice Roller for iPhone and Apple Watch (MP3)\n\nIn this episode of the AppleVis Extra, David Nason is joined by blind software developer Yannick Plassiard for a fascinating conversation about accessibility, software development, and what happens when the person building an accessible app is also someone who relies on accessibility every day. Yannick is the developer behind App-Suite, a growing collection of accessibility-focused applications that includes aGram, aScan, aCapture, and other projects spanning MacOS, iOS, Windows, and Android. AppleVis Extra 116: Blind Developer Showcase: Yannick Plassiard of aGram, aCapture, aScan, and More (MP3)\n\nIn this episode of the AppleVis Extra, David Nason speaks with Rocco Fiorentino, developer of FloType, an upcoming VoiceOver-first keyboard for blind and low-vision users. If you remember the speed and simplicity offered by Fleksy and later FlickType, FloType will feel immediately familiar. Rocco explains how his background as an audio engineer and producer gradually led him into development, first through scripting tools designed to make Pro Tools more efficient with VoiceOver, and eventually to building a keyboard intended to solve one of the persistent frustrations of touchscreen devices: typing quickly without needing to hit every virtual key precisely. AppleVis Extra 117: Blind Developer Showcase: Rocco Fiorentino of FloType (MP3)\n\nAll recent podcast episodes may be found at:\n\nAppleVis Podcast\n\nBelow is a selection of popular topics on the AppleVis Forum during August 2026:\n\nAll recent forum topics may be found at:\n\nAppleVis is supported in part by contributions to the Be My Eyes Foundation. To learn more, or to donate, go to www.BeMyEyesFoundation.org .\n\nSubscribe to AppleVis on YouTube Follow AppleVis on Mastodon Follow AppleVis on X Visit and like the AppleVis Facebook Page Learn about The Be My Eyes app Download Be My Eyes from the App Store\n\nWishing you the best and every good thing,\n\nThe AppleVis Editorial Team\n\nA Be My Eyes Company"
       }
     },
     "media": null

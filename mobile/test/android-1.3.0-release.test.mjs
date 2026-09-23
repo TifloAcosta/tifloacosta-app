@@ -5,11 +5,11 @@ import test from 'node:test';
 const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 const repoRead = path => readFile(new URL(`../../${path}`, import.meta.url), 'utf8');
 
-test('Android 1.3.0 release candidate uses version code 8', async () => {
+test('Android 1.3.0 release candidate uses version code 9', async () => {
   const gradle = await read('android/app/build.gradle');
-  assert.match(gradle, /versionCode\s+8/);
+  assert.match(gradle, /versionCode\s+9/);
   assert.match(gradle, /versionName\s+"1\.3\.0"/);
-  assert.doesNotMatch(gradle, /versionCode\s+7/);
+  assert.doesNotMatch(gradle, /versionCode\s+8/);
   assert.doesNotMatch(gradle, /versionName\s+"1\.2\.0"/);
 });
 

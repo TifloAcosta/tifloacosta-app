@@ -1,5 +1,29 @@
 [
   {
+    "id": "techcrunch-cde7ba68d9183c10",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/22/were-already-fighting-yesterdays-battle-greeces-prime-minister-gets-candid-about-ai/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-23T04:59:08.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "‘We’re already fighting yesterday’s battle’: Greece’s prime minister gets candid about AI",
+        "summary": "Most leaders on a trade mission stick to the pitch, but when I interviewed Greek Prime Minister Kyriakos Mitsotakis this week, he also admitted that no government is ready for what AI is about to do.",
+        "body": "Greek Prime Minister Kyriakos Mitsotakis came to San Francisco on Monday night to promote Greece, but he also did something that heads of state on trade missions don’t typically do. In front of roughly 250 founders, investors and operators, he said openly that he doesn’t have answers to many of the AI questions leaders around the world are more privately debating.\n\nThe prime minister, speaking with this editor at an event hosted by Endeavor Greece, the local arm of a global nonprofit that supports entrepreneurs in emerging and growth markets, described his Bay Area trip as partly a fact-finding mission. He’d spent the morning touring Tesla and Sequoia Capital, among other stops, with plans to head this week to the U.N. General Assembly in New York. But the trip was also meant to build bridges; indeed, he was pitching anyone in tech who might consider setting up shop in Greece, which is set to regain developed market status next year from MSCI, the influential index provider.\n\n“I think it’s another indication that the economy is doing well and that Greece is no longer treated as a special case,” Mitsotakis said.\n\nMitsotakis, who earned a master’s degree at Stanford and called the visit “a homecoming,” made the economic case first and foremost during our sit-down. Greece is paying down its debt at a record pace, and, he added, borrows more cheaply than the United States. “I don’t know if I should say this,” he told the crowd, smiling.\n\nIt’s not an apples-to-apples comparison. Interest rates are lower across the eurozone, which accounts for part of the difference. But it makes for a strong talking point. As of this writing, Greece’s 10-year bond yield sits around 4.3%, versus roughly 5% for U.S. Treasuries. That would have been completely unimaginable during the debt crisis, when Greek yields topped 40% in 2012.\n\nMitsotakis was just as eager to talk about how Greece has spent its money. For example, he said that much of the roughly €36 billion Greece received from the EU’s post-COVID recovery fund went into digital infrastructure, including an online portal that lets Greeks handle government paperwork without waiting in line, and a new supercomputer assembled with the help of Hewlett Packard Enterprise in the port town of Lavrio that he said will come online within months to power AI and scientific research in Greece.\n\nUnsurprisingly, he also listed policy changes that can matter even more to tech companies. Greece has changed how stock options are taxed, he said, loosened labor laws, and offers returning Greeks far lower taxes for up to seven years.\n\nWe also talked about the country’s growing array of visa programs, though when asked how he measures the success of these, Mitsotakis said the government “still [has] work to do” on processing speed.\n\nHe separately volunteered that there has been a stark turnaround at Greece’s public universities, which he said long embraced a “radical leftist approach,” looking down on corporations, and now spin out startups.\n\nMitsotakis’s larger goal is to win back the talent Greece lost during its debt crisis, when many of the country’s younger citizens left because they had no other options. He also sees an opening: with American work visas getting harder to obtain, he suggested, more founders should consider hiring in Greece.\n\nIt did strike me that the conversation took on a different tone when it turned to AI’s effects on society. Mitsotakis was refreshingly candid about not having a finished plan.\n\nGreece, for example, is instituting a ban on social media for children under 15 as of this coming January, a step many countries are similarly weighing or adopting . He suggested the ban may already be behind the times, however, considering the seemingly addictive nature of AI chatbots.\n\n“Sometimes I feel that we’re already fighting yesterday’s battle,” he said. “What does it mean for our kids to grow up with digital companions or boyfriends or girlfriends?”\n\nHe was similarly cautious about AI in classrooms. Greece has run an education pilot with OpenAI aimed at reducing teachers’ administrative work, and he sees promise in personalized AI tutors. But he said the benefits depend on AI not replacing “the hard work of learning the basic skills.” He warned that students are already using chatbots to do their homework, adding: “complacency is a human trait.”\n\nWhen I asked him about AI infrastructure — Greece has been courting data center investment — he described the country as an outlier. Despite growing opposition to data centers across the globe because of the amounts of electricity and water required to power them, Mitsotakis said that “we have not had any significant reaction” in Greece. He pointed to the fact that Microsoft is building a cluster of data centers near Athens and that AWS recently announced a deal with Greece’s largest utility to build the country’s biggest data center in a former coal region. There, he said, the projects are welcomed.\n\nUnlike many politicians, he didn’t pretend to have answers about what comes next, either. Job displacement “is something which is going to happen,” he said, “and no government and no society is prepared for the speed with which it will happen.”\n\nAs for the debate over whether AI development should slow down, he sided with the leaders of the frontier labs who’ve been calling for one. “If the people who are building the models are telling us, ‘We’re not really sure exactly what’s happening with these models,’” especially in how they improve themselves, he said, “we need to listen to them.”\n\nSome form of “smart regulation” is inevitable, he observed, and the U.S. will largely decide what it looks like. Still, he added, Greece would happily host the conversation.\n\nHumanity has created “a form of intelligence that is very quickly exceeding the capacity of the most advanced organ that evolution has ever created,” said Mitsotakis, raising the question of what it means to be human. Bringing together technologists with “the social scientists, the philosophers, the historians,” he said, “I cannot think of a better place to really have these discussions.”\n\nHe has a point. Athens is where Socrates badgered his fellow citizens in the agora, the city’s ancient public square, about what makes a good life and a just society. Maybe the questions Silicon Valley is still debating will end up being settled there, too?"
+      }
+    },
+    "media": null
+  },
+  {
     "id": "9to5mac-8ff188f7b8d136c1",
     "type": "news",
     "sourceId": "9to5mac",
@@ -19,6 +43,30 @@
         "title": "Public beta debuts for iPadOS 27.2 and more, here’s what’s new",
         "summary": "Apple has a round of new public beta updates rolling out today, including iPadOS 27.2, watchOS 27.2, and more. Here’s what’s new. more…",
         "body": "Apple has a round of new public beta updates rolling out today, including iPadOS 27.2, watchOS 27.2, and more. Here’s what’s new.\n\nIt’s been a big week or so for Apple software releases. It started last Monday, when Apple launched major new software versions for all users, including:\n\nThen on Wednesday, the company surprised us with 27.2 developer updates for its full lineup of platforms. 27.1 is reportedly being skipped in beta because it will focus primarily on iPhone Duo-related changes.\n\nNow today, public beta testers get early access to Apple’s new 27.2 releases too.\n\niPadOS 27.2, watchOS 27.2, tvOS 27.2, and more are now available in public beta. The most notable changes are found in iPadOS and iOS.\n\niPadOS 27.2 has the all-new Health app with Apple Intelligence features, including Insights and Longevity tabs, and more. It also introduces Profiles for the Apple TV app , a long overdue feature for parents whose kids watch video on the iPad.\n\nThe update additionally brings over a handy Siri AI feature previously exclusive to macOS Golden Gate. And Siri AI expands to a bunch of new languages too.\n\nIf you’re interested in installing today’s public betas, go to the Software Update screen in Settings and make sure you’re opted into beta updates.\n\nHave you installed the new 27.2 public betas? How are they running for you? Let us know in the comments.\n\n* Buy iPad with 15% discount from Apple refurbished"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-a1b68597b269d1ca",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/999167/openai-elite-mathematicians-panel",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-23T00:17:17.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "OpenAI wants to consult elite mathematicians about how to not fumble again",
+        "summary": "After turning a string of spectacular mathematical results into a reputational crisis, OpenAI is consulting human mathematicians to help it figure out a less disastrous path forward. On Monday, the company announced a new independent panel of mathematicians tasked with advising it and other AI companies on their interactions with mathematical research and the wider […]",
+        "body": "After turning a string of spectacular mathematical results into a reputational crisis , OpenAI is consulting human mathematicians to help it figure out a less disastrous path forward.\n\nOn Monday, the company announced a new independent panel of mathematicians tasked with advising it and other AI companies on their interactions with mathematical research and the wider mathematics community, including how new results are presented and released. Its abrupt arrival caught many mathematicians by surprise. Researchers told The Verge the group is a good first step, but many said they were left with basic questions about what it will actually do, how …\n\nRead the full story at The Verge."
       }
     },
     "media": null
@@ -264,29 +312,6 @@
     "media": null
   },
   {
-    "id": "the-verge-e3bd066ac9043527",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/998844/motorola-signature-27-specs-snapdragon-8-elite-extreme-gen-6",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-22T20:00:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Motorola’s wild-looking Signature 27 runs Qualcomm’s new Extreme chipset",
-        "summary": "Motorola is the first company to announce a phone running Qualcomm's top-end Snapdragon 8 Elite Extreme Gen 6 chip. The Signature 27 looks set to be Motorola's most advanced flagship in some years, though we're still waiting for the full specs, price, and release date. Any prospective buyers will first have to get over the […]",
-        "body": "Motorola is the first company to announce a phone running Qualcomm's top-end Snapdragon 8 Elite Extreme Gen 6 chip . The Signature 27 looks set to be Motorola's most advanced flagship in some years, though we're still waiting for the full specs, price, and release date.\n\nAny prospective buyers will first have to get over the design, which seems guaranteed to earn mixed reception. The aluminum phone has a thin body, available in either black (sorry, \"Pantone coal smoke\") or green (\"Pantone capulet olive\"), with a woven tactical texture on one and a \"feather-inspired\" finish on the other. Either way, it slopes upwards into what Motorola calls a …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "ars-technica-dc55d2a41d5c613e",
     "type": "news",
     "sourceId": "ars-technica",
@@ -331,30 +356,6 @@
         "title": "Apple could take on Whoop with a new fitness tracker, report says",
         "summary": "Apple may be developing a new fitness tracker as part of its new generation of hardware devices.",
         "body": "Posted:\n\nApple is in the process of developing a new screen-less fitness tracker that would put it into competition with Whoop — the fitness tech firm whose valuation recently crested $10 billion .\n\nBloomberg reports that the iPhone maker is currently engaged in a “technology investigation” — which, just as it sounds, is an exploratory effort to decide whether it will fully develop a product and release it. A number of prototypes have been developed around the item, the outlet notes.\n\nThe device — which is described as “a thin fabric band with a sensor-equipped computing module” — would not be released until at least 2028, Bloomberg said.\n\nIt’s worth noting that Apple already sells a fitness tracker in the form of its Apple Watch (the wearable records workouts, heart rate, sleep, and other categories). However, the new form factor sounds relatively similar to Whoop, which sells simple fitness bands that the company says can track a variety of health metrics.\n\nTechCrunch reached out to Apple for more information.\n\nThe report arrives at a time when Apple is in a period of transition. Tim Cook stepped down from his position as CEO in August to now act as executive chairman, as new CEO John Ternus took the wheel. The company has also faced headwinds due to rising costs from a memory shortage. Despite this, it has promised a slate of new devices, including a new foldable phone , new tablets , and a new MacBook Pro. Meanwhile, it’s engaged in litigation against OpenAI, which it has accused of trade theft, as the battle to build the best hardware for the AI age continues."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-9b4830e2ee1a3d8d",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/22/meta-admits-muses-likeness-to-openclaw-isnt-a-coincidence/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-22T19:09:11.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta admits Muse’s likeness to OpenClaw isn’t a coincidence",
-        "summary": "Meta says Muse was built from scratch, but acknowledges the AI assistant was \"heavily inspired\" by OpenClaw — down to some of its workspace filenames and content.",
-        "body": "Early adopters of Meta’s Muse have been speculating that the reason the AI works so well is because it’s OpenClaw under the hood, wrapped in a more consumer-friendly package. Meta now says those comparisons aren’t entirely off-base. According to an X post by Nat Friedman, head of product at Meta’s Superintelligence Labs (MSL), Muse was “definitely heavily inspired as a product by OpenClaw.”\n\nHowever, he clarified that Muse itself was “built from scratch.”\n\nFriedman, the former GitHub CEO who joined Meta last year alongside Meta’s Chief AI Officer Alexandr Wang , said that the team at Meta had fallen in love with OpenClaw and wanted Muse to be “something like OpenClaw” that could be scaled to billions of people.\n\nBecause OpenClaw is an open source project, it wouldn’t be surprising that Meta looked to it for inspiration, especially given its breakout success , which prompted OpenAI to snatch up its creator earlier this year. However, it speaks to Meta’s well-known playbook that involves taking promising products, then copying their best features — something it did most notoriously with Snapchat’s invention of the stories format.\n\nFriedman’s statement on X was made in response to a post that had gone viral among the AI crowd, where Ansh Nanda , an AI app co-founder, claimed that “Muse is LITERALLY OpenClaw for normies.”\n\nNanda’s X post had included a conversation with Muse, where the AI agent said that the similarity between its own system files and those belonging to OpenClaw was not just “a coincidence” but rather “a match.”\n\nSoon, this thread (and X more broadly) began blowing up as others shared their own comparisons and findings. For instance, one person pointed out that Muse also had a SOUL.md file, the plain text configuration file (written in a simple formatting language called Markdown) that defines an AI agent’s personality, communication style and tone, values, behavioral boundaries, and expertise.\n\nA third noted that the files weren’t just named the same between the two assistants; their content was almost entirely the same.\n\nFollowing his X post, Friedman also responded to a question about why Muse had copied the exact file names that made up the AI agent’s workspace and had “nearly identical content” for the SOUL.md file. Instead of disputing these claims, Friedman simply replied that “we thought that Peter [Steinberger, OpenClaw’s creator] got those things exactly right.”\n\n“We built Muse from scratch, but it is definitely heavily inspired as a product by OpenClaw. After I used OpenClaw in January, I bought hundreds of Mac minis for the MSL team, and lots of us fell in love with using OpenClaw (and other personal agents), Friedman said on X. (TechCrunch has corrected Friedman’s punctuation for readability.)\n\n“@steipete [Peter Steinberger] is a genius, and his harness was pioneering from the jump. I think a lot of people were inspired by it. Our goal with Muse was to build something like OpenClaw that we could make safe and secure and easy to use and scale to billions of people,” he wrote.\n\nThe Muse app has been something of a hit so far, having recently hit No. 1 on the U.S. App Store. Data indicates that it’s now outpacing ChatGPT’s launch when the platforms and market availability are compared directly.\n\nReached for comment, a Meta spokesperson pointed to Friedman’s statement, saying the company had nothing more to add beyond that."
       }
     },
     "media": null

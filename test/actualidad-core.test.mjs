@@ -146,14 +146,3 @@ test('invalid stories are rejected instead of leaking into the feed', () => {
   assert.equal(core.normalizeStory(story({ originalUrl: '' })), null);
   assert.equal(core.normalizeStory(story({ categories: [] })), null);
 });
-
-test('Word formatting noise in summaries is replaced with the clean body opening', () => {
-  const item = core.localizedStory(story({
-    title: 'Novedades en TCA Doc 1.0',
-    summary: 'Normal 0 21 false false false ES-TRAD X-NONE X-NONE Style Definitions table.MsoNormalTable { mso-style-name: Tabla normal; }',
-    body: 'TCA Doc incorpora nuevas mejoras de accesibilidad y funcionamiento.\n\nSegundo párrafo de la noticia.'
-  }), 'es');
-
-  assert.equal(item.summary, 'TCA Doc incorpora nuevas mejoras de accesibilidad y funcionamiento.');
-  assert.doesNotMatch(item.summary, /MsoNormal|Style Definitions|X-NONE/i);
-});

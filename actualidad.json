@@ -1,13 +1,13 @@
 [
   {
-    "id": "9to5mac-55215ef87fb42dbb",
+    "id": "9to5mac-8ff188f7b8d136c1",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/22/apple-expands-tap-to-pay-on-iphone-across-eight-latin-american-markets/",
+    "originalUrl": "https://9to5mac.com/2026/09/22/public-beta-debuts-for-ipados-27-2-and-more-heres-whats-new/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-22T21:50:44.000Z",
+    "publishedAt": "2026-09-23T00:32:42.000Z",
     "categories": [
       "apple",
       "tecnologia-general"
@@ -16,33 +16,107 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Apple expands Tap to Pay on iPhone across eight Latin American markets",
-        "summary": "Apple today announced that Tap to Pay on iPhone is now available in eight additional Latin American countries, with support from six payment platforms across the region. Here are the details. more…",
-        "body": "Apple today announced that Tap to Pay on iPhone is now available in eight additional Latin American countries, with support from six payment platforms across the region. Here are the details.\n\nIn an update published to its Latin America and the Caribbean Newsroom, Apple announced today an expansion of Tap to Pay on iPhone across Argentina, Colombia, Costa Rica, the Dominican Republic, Guatemala, Honduras, Panama, and Peru.\n\nTap to Pay on iPhone allows merchants to accept in-person contactless payments using only a compatible iPhone and supported payment app, without the need for additional card readers or payment terminals.\n\nHere’s the list of countries and payment platforms gaining support today:\n\nApple also noted that Tap to Pay on iPhone “is compatible with contactless debit and credit cards from major payment networks, including American Express, Mastercard, and Visa.”\n\nApple originally announced Tap to Pay on iPhone on February 8, 2022. It was initially announced for the United States, with Stripe as the first payment platform set to support it.\n\nSince then, it has expanded to 59 countries and regions, with Apple’s current list naming more than 100 payment service providers worldwide, including today’s additions.\n\nTo check out Apple’s updated list of countries, regions, and payment service providers that support Tap to Pay on iPhone, follow this link ."
+        "title": "Public beta debuts for iPadOS 27.2 and more, here’s what’s new",
+        "summary": "Apple has a round of new public beta updates rolling out today, including iPadOS 27.2, watchOS 27.2, and more. Here’s what’s new. more…",
+        "body": "Apple has a round of new public beta updates rolling out today, including iPadOS 27.2, watchOS 27.2, and more. Here’s what’s new.\n\nIt’s been a big week or so for Apple software releases. It started last Monday, when Apple launched major new software versions for all users, including:\n\nThen on Wednesday, the company surprised us with 27.2 developer updates for its full lineup of platforms. 27.1 is reportedly being skipped in beta because it will focus primarily on iPhone Duo-related changes.\n\nNow today, public beta testers get early access to Apple’s new 27.2 releases too.\n\niPadOS 27.2, watchOS 27.2, tvOS 27.2, and more are now available in public beta. The most notable changes are found in iPadOS and iOS.\n\niPadOS 27.2 has the all-new Health app with Apple Intelligence features, including Insights and Longevity tabs, and more. It also introduces Profiles for the Apple TV app , a long overdue feature for parents whose kids watch video on the iPad.\n\nThe update additionally brings over a handy Siri AI feature previously exclusive to macOS Golden Gate. And Siri AI expands to a bunch of new languages too.\n\nIf you’re interested in installing today’s public betas, go to the Software Update screen in Settings and make sure you’re opted into beta updates.\n\nHave you installed the new 27.2 public betas? How are they running for you? Let us know in the comments.\n\n* Buy iPad with 15% discount from Apple refurbished"
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-a2f62f10eacf06a1",
+    "id": "9to5mac-14d8e00f6f6aa1a2",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/22/apple-adds-raw-support-for-11-digital-cameras-across-iphone-ipad-mac-and-vision-pro/",
+    "originalUrl": "https://9to5mac.com/2026/09/22/apple-pay-is-getting-even-better-with-four-new-features/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-22T21:19:53.000Z",
+    "publishedAt": "2026-09-22T23:57:57.000Z",
     "categories": [
       "apple",
-      "tecnologia-general"
+      "tecnologia-general",
+      "apps-accesibles"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Apple adds RAW support for 11 digital cameras across iPhone, iPad, Mac, and Vision Pro",
-        "summary": "Apple today updated its official list of digital camera RAW formats supported across its platforms, adding support for 11 models from several manufacturers. Here are the details. more…",
-        "body": "Apple today updated its official list of digital camera RAW formats supported across its platforms, adding support for 11 models from several manufacturers. Here are the details.\n\nApple’s operating systems offer system-level support for RAW images captured by many third-party cameras.\n\nIn a nutshell, this lets compatible apps work directly with those cameras’ RAW files, allowing them to better adjust elements such as exposure, color, and so on.\n\nThat is in contrast with formats such as JPEG, which don’t allow for the same post-processing editing flexibility, since much of that image processing is basically baked into the final image.\n\nApple maintains support articles listing digital cameras with RAW formats supported by its current (and past ) operating systems. The list was updated today, adding 11 digital cameras, bringing the total to 562 models.\n\nHere are the 11 digital cameras Apple added today:\n\nTo check out Apple’s full list of digital camera RAW formats supported by version 27 of iOS, iPadOS, macOS, visionOS, follow this link ."
+        "title": "Apple Pay just got even better with four new features and more",
+        "summary": "Apple Pay is a go-to feature for iPhone users when shopping in stores, online, and in apps. Apple recently announced four new features that make Apple Pay even better. Here’s how they work, plus one major expansion that’s rolling out now. more…",
+        "body": "Apple Pay is a go-to feature for iPhone users when shopping in stores, online, and in apps. Apple recently announced four new features that make Apple Pay even better. Here’s how they work, plus one major expansion that’s rolling out now.\n\nOne of my favorite changes in iOS 27 is the redesigned Apple Pay checkout interface . The new interface makes it much easier to switch between different cards during the checkout flow on websites and in apps.\n\nIn the new design, you can easily swipe between cards on the main Apple Pay checkout screen. You can also tap on a card to view a grid of all your available Apple Pay cards.\n\nThe design also makes it easier to see information about individual cards, including rewards, balances, pay later options, and more.\n\niOS 27 was released to everyone last week. You can update in the Settings app on your iPhone.\n\nApple and American Express recently announced a new partnership that lets you pay with American Express rewards points.\n\nWhen shopping online or in apps with an American Express card, you’ll see a new “Use Rewards” option alongside your available Membership Rewards points balance. You can apply points to cover all or part of your purchase, right in the Apple Pay checkout flow.\n\nAmerican Express points redeemed via Apple Pay are valued at 0.7 cents each. For example, this means 10,000 points can be redeemed for $70 applied towards your purchase.\n\nIn iOS 27, Apple is adding a new “Tap to Share” feature that integrates with Apple Pay on iPhone for in-store shopping.\n\nThis feature is an extension of Tap to Pay on iPhone. Apple explains:\n\nWith just a tap, customers can connect to a participating merchant’s iPhone for a more personalized and faster in-store purchase experience that allows for secure sharing of information, such as email and other contact information, shipping address, loyalty rewards information, and more.\n\nCustomers will also be able to view the items in their basket in real time so they can keep track of what they’ve purchased and ensure all sales and discounts are properly applied.\n\nWhen done, shoppers can complete the checkout on their iPhone using Apple Pay.\n\niPhone users with select banks can manage their debit card balances directly in the Apple Pay interface. According to Apple, you’ll be able to use Apple Pay to add money to a supported debit card directly in Apple Wallet or when checking out.\n\nThis one isn’t really a new feature developed by Apple. Instead, it’s something that should’ve happened years ago finally coming to fruition. Walmart has announced that it is finally starting to roll out support for Apple Pay. Apple Pay is also rolling out to Sam’s Club as part of this initiative.\n\nWalmart started rolling out Apple Pay (and broader contactless support) this week in Arkansas. The retailer says it launch for all stores in the United States by the end of this year.\n\nAs Apple Pay continues to increase in popularity and prevalence among retailers, it’s great to see Apple continue to improve the experience. Personally, Apple Pay is my checkout payment method of choice basically everywhere I shop — whether that’s online or in store.\n\nHow often do you use Apple Pay? What are your favorite Apple Pay features? Let us know down in the comments.\n\nFollow Chance : Threads , Bluesky , Instagram , and Mastodon ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-59ecef6e7f9b1375",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2264685/how-to-remove-voice-button-iphone-imessages-ios-27/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-22T23:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iOS 27: How to hide or replace the audio button in iMessages",
+        "summary": "The fact that the \"send\" button shares real estate with the \"record\" button can make dealing with iMessage aggravating.",
+        "body": "You can make that button actually useful.\n\nHave you accidentally tapped the audio button inside iMessage's text input bar when sending a message? Justin Bieber went viral with an Insta post complaining about how frequently it happened to him.\n\nThe problem is that tapping the button launches a voice recording session, during which your iPhone will stop playing music so it can record the message it thinks you want to send.\n\nBieber became frustrated enough at how often this accidentally happened to him while texting that he wrote, \"The send button should not have multiple functions in the same spot,\" and joked that he would put everyone at Apple in a \"choke hold\" until it got fixed.\n\nHis post generated thousands of likes, reposts and reactions. We don't know if Apple was responding to Bieber or not, but it has made a change to ease the problem. iOS 27 now gives you a choice, permitting you to choose between continuing to display the default waveform-like record icon, a microphone icon for quick access to dictation, or even nothing at all.\n\nStarting with iOS 27, new choices are available in Settings > Apps > Messages > Show in Text Field. You can select one of three options:\n\nWhen you return to iMessages, you should see your choice appear in the text entry field. If it doesn't, then force quit the app, open it again, and the change should appear.\n\nNow even Bieber should no longer have this problem.\n\nYou don't lose any functionality when you remove these buttons from iMessage; all the options remain\n\nYou just need to know where to look:\n\nApple made several improvements in iMessage with iOS 27. One nice enhancement (possibly introduced in preparation for the larger display available on the iPhone Duo ) is a new Drawing app that lets you send sketches and handwritten notes, and it provides markup tools within iMessage.\n\nApple also introduced a new AI tool that suggests useful words and phrases and can automate tasks within a conversation, such as adding items to Reminders or Notes. It is also now possible to use one number across two separate iPhones . Finally, Apple's messaging app now offers improved RCS support , including the ability to edit and unsend messages."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-e1cf43ec00092bd2",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/22/apple-releases-first-ios-27-2-public-beta-with-new-iphone-health-app/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-22T23:06:29.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple releases first iOS 27.2 public beta with new iPhone Health app",
+        "summary": "Six days ago, Apple released iOS 27.2 developer beta 1, skipping over iOS 27.1 beta. Following yesterday’s developer beta 2 release, Apple has now issued the first iOS 27.2 public beta version, with the new iPhone Health app included. Apple has also turned on the ability to schedule and purchase labs through Quest Diagnostics from the new Health app in iOS 27.2 beta. more…",
+        "body": "Six days ago, Apple released iOS 27.2 developer beta 1, skipping over iOS 27.1 beta. Following yesterday’s developer beta 2 release, Apple has now issued the first iOS 27.2 public beta version, with the new iPhone Health app included. Apple has also turned on the ability to schedule and purchase labs through Quest Diagnostics from the new Health app in iOS 27.2 beta.\n\niOS 27.2 is the next release that will follow the official launch of iOS 27 from September 14. iOS 27.1 is just for iPhone Duo.\n\nApple has already detailed how the iOS 27.1 SDK will let developers take full advantage of the iPhone Duo display. You can see how apps will appear on iPhone Duo based on which iOS version they target here .\n\nApple released Xcode 27.1 beta on Friday, adding the iPhone Duo simulator and app development support for the new foldable iPhone.\n\nThe first iOS 27.2 developer beta included these changes:\n\niOS 27.2 is set to be released officially in October. For now, there’s both a developer beta and public beta path for iPhone users looking to test the new Apple Health app early.\n\nDo more with your Apple products\n\nAirPods 5 | Apple’s newest wireless headphones\n\nApple AirTag 2 | Add Find My tracking to keys, bags, bikes, more\n\nAirPods Pro 3 | Apple’s best wireless headphones\n\nWireless CarPlay Adapter | No more plugging in required\n\nBeats USB-A to USB-C Cable | The official CarPlay cable"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-cf300b398d40e664",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/ai/2026/09/new-anthropic-openai-models-make-same-promise-a-little-more-for-a-lot-less-money/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-22T21:25:18.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "New Anthropic, OpenAI models make same promise: A little more for a lot less money",
+        "summary": "The frontier AI model race has entered its comparison shopping phase.",
+        "body": "OpenAI and Anthropic both recently released new models aimed at lowering costs. Anthropic announced Opus 5.5, the latest version of its main mass-market workhorse model, used for tasks like coding and other complex knowledge work.\n\nAnd OpenAI announced GPT-6 Sol and Luna, the latest versions of its middle-of-the-road or smaller models focused on efficiency and speed.\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -143,29 +217,6 @@
     "media": null
   },
   {
-    "id": "engadget-9bf2b3135bdb2dde",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2265628/qualcomm-is-making-not-one-but-two-versions-of-its-flagship-snapdragon-8-elite-gen-6-chip/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-22T20:00:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Qualcomm is making not one but two versions of its flagship Snapdragon 8 Elite Gen 6 chip",
-        "summary": "That video capture is nothing to sneeze at.",
-        "body": "The extreme variant comes with 50 percent more shared memory, wider codec support and better video capture.\n\nNow that most of the major smartphone releases are done for the year, Qualcomm is preparing for the next generation of handsets with its upcoming flagship mobile chip and this time it will be available in two versions: the Snapdragon 8 Elite Gen 6 and Snapdragon 8 Elite Extreme Gen 6.\n\nBased on a 2nm process node, the Snapdragon 8 Elite Gen 6 features an eight-core Oryon CPU composed of two prime cores with clockspeeds of up to 5GHz. The chip also has 16MB of what Qualcomm is calling Flex Cache, which the company says allows the processor to dynamically allocate the cache pool to improve single-threaded performance. Elsewhere, the chip features an Adreno GPU that's 35 percent faster than the previous generation while also providing faster rendering speeds in games. Meanwhile, the Snapdragon 8 Elite Gen 6's NPU is 14 percent faster and offers 20 percent better performance-per-watt for machine learning-based tasks.\n\nWhen it comes to camera features, Qualcomm says the chip's new Spectra image signal processor (ISP) natively supports 8K video capture at up to 30 fps. Photography has also gotten a bump, as the chip can handle single image capture at up to 320-megapixels or triple cameras at up to 64MP with \"zero shutter lag.\" Qualcomm also says its Elite Color Engine will bring more cinematic color science to videos and support for real-time 3D look up tables. Additionally, the company's Intelligent Pixel Control tech allows the camera to better understand the context of a shot, so it can more accurately respond and adjust camera settings to deliver optimal results. As for its connectivity, as you'd expect from a new SoC, the Snapdragon 8 Elite Gen 6's X105 5G modem offers a range of 5G communications including sub-6Ghz and mmWave, along with integrated support for ultra wideband connectivity, Bluetooth 6 and Wi-Fi 8.\n\nFinally, while the extreme version of the Snapdragon 8 Elite Gen 6 is based on the same underlying architecture, it has a few extra features, including that ability to run AI models with more than 30 billion parameters, support for both the APV and VVC video codecs, 18MB of high performance memory and better video recording that tops out at 8K at 60fps (or slow-motion at 4K at up to 240 fps). Gamers will also get an added benefit from Qualcomm's new Matrix Cores in its Adreno GPU, which offers AI-powered super resolution and frame generation for boosting graphics quality and framerates.\n\nSo far, it remains to be seen how many next-gen phones will be powered by the Snapdragon 8 Elite Gen 6 and it's important to remember that even though the chip may support a specific tool or feature, it's ultimately up to the device makers to implement them on retail products. That said, Motorola has already committed to using the SD8 Gen 6 in its upcoming Signature 27 phone. And with Qualcomm's previous gen flagship chip holding the performance crown among Android handsets, this new offering looks like it will be the go-to processor for next year's premium mobile devices."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "engadget-f737c6280f4e27c2",
     "type": "news",
     "sourceId": "engadget",
@@ -256,31 +307,6 @@
         "title": "Microsoft disrupts AI-assisted platform that compromised 12,000 accounts",
         "summary": "EvilTokens provided an end-to-end platform that makes mass compromises faster and easier.",
         "body": "Microsoft said Tuesday that it led an industry-wide disruption of a subscription-based scam platform that used an AI chatbot to compromise 12,000 Microsoft accounts over a few-month span.\n\nNamed EvilTokens, the platform was introduced over a Telegram channel in February and charged an initial $1,500 fee and a recurring $500 charge each month after that. EvilTokens provided a single service for streamlining most steps required to compromise email accounts in large numbers. From there, the platform helped customers analyze inboxes, select targets that would provide the biggest potential payouts, and draft follow-up emails that provided realistic ruses for tricking company employees into transferring funds to attacker-controlled accounts.\n\n“While EvilTokens helped cybercriminals access email accounts, at the center of the service was an AI-style chatbot that could analyze a victim’s inbox and help criminals identify trusted relationships, payment authorizations, and sensitive responsibilities, as well as other circumstances where fraud was most likely to succeed,” Microsoft said . “The platform could even recommend fraud strategies, including drafting messages that impersonated trusted contacts to help criminals trick victims into taking action.”\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-473f6d8bf1c505af",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/22/apple-photos-in-ios-27-gets-camera-roll-feature-its-long-needed/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-22T19:39:42.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple Photos in iOS 27 gets camera roll feature it’s long needed",
-        "summary": "iOS 27 is a big update for Apple’s Photos app , with improvements to slideshows, shared albums, and more. It also adds a welcome camera roll-type feature many have long been asking for: ‘Captured by Me.’ more…",
-        "body": "iOS 27 is a big update for Apple’s Photos app , with improvements to slideshows, shared albums, and more. It also adds a welcome camera roll-type feature many have long been asking for: ‘Captured by Me.’\n\nApple’s Photos app has steadily expanded its feature set over the years. In addition to being home to the photos and videos your iPhone captures, it also includes content that’s been shared with you, Memories, screenshots, saved media, and a lot more.\n\nThe Photos app used to offer a ‘Camera Roll’ feature that was similar to what the ‘Recents’ album does today. It included images you captured as well as ones you saved.\n\nBut what’s been missing for a long time is a feature that actually just shows photos and videos that you’ve taken—in other words, something that could more accurately be called your ‘camera roll.’\n\niOS 27 delivers that long-missing feature, and it’s called ‘Captured by Me.’\n\n‘Captured by Me’ in iOS 27 is a new Photos collection that does exactly what it sounds like. It includes only media that’s been captured by your Camera app.\n\nSo photos and videos that you shot on your iPhone are collected there. But you won’t see screenshots, images your friends sent you, or any other types of content.\n\nIn addition to the dedicated ‘Captured by Me’ collection, you can also use a ‘Captured by Me’ filter in your main Photos library.\n\nWhichever way you use the feature, ‘Captured by Me’ in iOS 27 fills an important gap in Apple Photos’ feature set.\n\nDo you expect to use this new Apple Photos feature in iOS 27? Let us know in the comments.\n\n* Shop at Apple with 15% discount on certified refurbished"
       }
     },
     "media": null
@@ -379,30 +405,6 @@
         "title": "Chess Meets Necromancy",
         "summary": "Chess you already know. An army you have to raise. Chess Meets Necromancy is a turn-based roguelike played on a real chessboard with real chess movement. Your hero is one piece. Everything you capture is a corpse you can raise. THE RUN Twenty waves across four acts. Enemies move like the pieces they are - grunts step like pawns, lancers leap like knights, imp matrons slide like queens. Clear the board, take a relic, spend your gold, march on. Die and the run is over. RAISE AN ARMY Spend souls next to your hero to raise Skeletons, Bone Knights, Wraiths, Bone Golems and Seraphs. Every summon moves as a chess piece. Give them a stance - Hunt, Hold or Guard - and they act after you, every turn. Army slots are limited, so choose what you bring. RELICS AND TRAITS Nineteen relics, each with levels that stack across a run. Seventeen lasting traits bought in the town between waves: extra turns before a wave lands, fewer enemies per wave, a free summon every wave, bank interest, a doubled army cap. No two runs build the same. BOSSES Ten bosses with real HP bars, from the Ogre Warchief to the Lich King, the Stone Titan and the Brood Queen. Act IV stops sending one king and starts sending a court - the final board holds three at once. THE TOWN Between waves, spend gold. Buy traits, promote your King into a Warlord, hire a new champion, or put gold in the bank and let it earn interest. FOUR HEROES Necromancer, Death Knight, Priestess, Ranger. Each moves differently, starts differently, and each has a relic only they can find. TAP ANYTHING Tap any piece to see its name, movement, attack and health. Gold squares preview where it steps, red squares preview what it can take. Learn the board before you commit. - Plays entirely offline, no required account - No ads, no timers, no energy system - Optional Game Center leaderboards and achievements - No in-app purchases; everything is earned in-run - Game controller support - iPhone and iPad - Pixel art and haptics If you can play chess, you can start. Whether you finish is another question.",
         "body": "Chess you already know. An army you have to raise. Chess Meets Necromancy is a turn-based roguelike played on a real chessboard with real chess movement. Your hero is one piece. Everything you capture is a corpse you can raise. THE RUN Twenty waves across four acts. Enemies move like the pieces they are - grunts step like pawns, lancers leap like knights, imp matrons slide like queens. Clear the board, take a relic, spend your gold, march on. Die and the run is over. RAISE AN ARMY Spend souls next to your hero to raise Skeletons, Bone Knights, Wraiths, Bone Golems and Seraphs. Every summon moves as a chess piece. Give them a stance - Hunt, Hold or Guard - and they act after you, every turn. Army slots are limited, so choose what you bring. RELICS AND TRAITS Nineteen relics, each with levels that stack across a run. Seventeen lasting traits bought in the town between waves: extra turns before a wave lands, fewer enemies per wave, a free summon every wave, bank interest, a doubled army cap. No two runs build the same. BOSSES Ten bosses with real HP bars, from the Ogre Warchief to the Lich King, the Stone Titan and the Brood Queen. Act IV stops sending one king and starts sending a court - the final board holds three at once. THE TOWN Between waves, spend gold. Buy traits, promote your King into a Warlord, hire a new champion, or put gold in the bank and let it earn interest. FOUR HEROES Necromancer, Death Knight, Priestess, Ranger. Each moves differently, starts differently, and each has a relic only they can find. TAP ANYTHING Tap any piece to see its name, movement, attack and health. Gold squares preview where it steps, red squares preview what it can take. Learn the board before you commit. - Plays entirely offline, no required account - No ads, no timers, no energy system - Optional Game Center leaderboards and achievements - No in-app purchases; everything is earned in-run - Game controller support - iPhone and iPad - Pixel art and haptics If you can play chess, you can start. Whether you finish is another question."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-f6a99b5223f2ac28",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/security/2026/09/muse-metas-extraordinarily-privileged-ai-assistant-has-a-serious-0-day/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-21T22:24:38.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Muse, Meta's extraordinarily privileged AI assistant, has a serious 0-day",
-        "summary": "A simple ClickFix attack is only one way to completely hijack the new agent.",
-        "body": "Meta founder and CEO Mark Zuckerberg has gone to great lengths to hype the security of its new AI assistant, Muse, claiming it is “built from the ground up for privacy and security.” A zero-day vulnerability that gives locally run apps and terminal commands complete control of the agent raises serious doubts. Further raising questions, Amazon on Sunday began blocking Muse from its site.\n\nMeta introduced Muse a few weeks ago. The assistant “books appointments, fills out forms and handles customer service,” “proactively takes tasks off your plate,” and can “make purchases, generate images, create documents, and connect with your favorite apps and services.” The macOS app (curiously, there’s no Windows version) also works with a user’s WhatsApp, email, calendar, and social media accounts. When a task requires a tool that doesn’t exist, Muse creates one on the fly.\n\nOf course, for Muse to do any of these things, users must first give it access to their accounts. This includes authenticating the assistant to each service and, because the app runs on macOS, giving it permissions to a broad range of operating system-restricted device resources, like writing files to disk, accessing the mic and camera, and monitoring location and calendars. Apple has spent years developing these defenses to prevent installed apps or commands entered into the terminal from accessing these resources, clearly because the company considers them a security threat. Muse completely undoes these default measures.\n\nRead full article\n\nComments"
       }
     },
     "media": null

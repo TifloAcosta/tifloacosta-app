@@ -2,6 +2,10 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import vm from 'node:vm';
 
+const DAY_MS = 24 * 60 * 60 * 1000;
+export const MOBILE_NEWS_MAX_AGE_DAYS = 10;
+export const MOBILE_NEWS_MAX_PER_LANGUAGE = 60;
+
 function cleanText(value) {
   return typeof value === 'string' ? value.trim() : '';
 }
@@ -25,7 +29,42 @@ export function cleanNewsSummary(summary, body) {
   return firstBodyParagraph(body);
 }
 
+function publicationTime(item) {
+  const value = new Date(item?.publishedAt).getTime();
+  return Number.isFinite(value) ? value : Number.NaN;
+}
+
+function chronologicalNews(news, generatedAt) {
+  const parsedReference = new Date(generatedAt).getTime();
+  const referenceTime = Number.isFinite(parsedReference) ? parsedReference : Date.now();
+  const maximumAge = MOBILE_NEWS_MAX_AGE_DAYS * DAY_MS;
+  const byLanguage = new Map([['es', []], ['en', []]]);
+
+  for (const item of Array.isArray(news) ? news : []) {
+    const lang = cleanText(item?.lang).toLowerCase();
+    if (!byLanguage.has(lang)) continue;
+    const published = publicationTime(item);
+    if (!Number.isFinite(published)) continue;
+    const age = referenceTime - published;
+    if (age < 0 || age > maximumAge) continue;
+    byLanguage.get(lang).push(item);
+  }
+
+  const compare = (a, b) => {
+    const dateDelta = publicationTime(b) - publicationTime(a);
+    if (dateDelta) return dateDelta;
+    return String(a?.id || '').localeCompare(String(b?.id || ''));
+  };
+
+  const retained = [];
+  for (const items of byLanguage.values()) {
+    retained.push(...items.sort(compare).slice(0, MOBILE_NEWS_MAX_PER_LANGUAGE));
+  }
+  return retained.sort(compare);
+}
+
 export function buildMobileContent({ resources = [], videos = [], news = [], generatedAt = new Date().toISOString() }) {
+  const retainedNews = chronologicalNews(news, generatedAt);
   return {
     schemaVersion: 1,
     generatedAt,
@@ -49,7 +88,7 @@ export function buildMobileContent({ resources = [], videos = [], news = [], gen
       thumbnail: item.thumbnail || '',
       url: item.url || ''
     })),
-    news: news.map(item => ({
+    news: retainedNews.map(item => ({
       kind: 'news',
       id: `${item.id}:${item.lang}`,
       sourceId: item.id,

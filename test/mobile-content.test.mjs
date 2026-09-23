@@ -92,7 +92,8 @@ test('mobile feed replaces Microsoft Office formatting noise with the first clea
       originalUrl: 'https://example.com/tca-doc',
       publishedAt: '2026-09-23T08:00:00.000Z',
       categories: ['Accesibilidad']
-    }]
+    }],
+    generatedAt: '2026-09-23T09:00:00.000Z'
   });
 
   assert.equal(feed.news[0].summary, 'TCA Doc incorpora nuevas mejoras de accesibilidad y funcionamiento.');

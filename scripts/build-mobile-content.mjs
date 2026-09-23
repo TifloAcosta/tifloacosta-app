@@ -45,7 +45,22 @@ async function loadResources() {
   const source = await readFile(new URL('../data.js', import.meta.url), 'utf8');
   const context = { window: {} };
   vm.runInNewContext(source, context, { filename: 'data.js' });
-  return Array.isArray(context.window.TIFLO_RESOURCES) ? context.window.TIFLO_RESOURCES : [];
+
+  const baseResources = Array.isArray(context.window.TIFLO_RESOURCES)
+    ? context.window.TIFLO_RESOURCES.map(item => ({ ...item }))
+    : [];
+  const baseIds = new Set(baseResources.map(item => item.id));
+
+  const supplementalSource = await readFile(new URL('../medical-studies.js', import.meta.url), 'utf8');
+  vm.runInNewContext(supplementalSource, context, { filename: 'medical-studies.js' });
+
+  const mobileAdditions = Array.isArray(context.window.TIFLO_RESOURCES)
+    ? context.window.TIFLO_RESOURCES
+        .filter(item => item?.mobile === true && !baseIds.has(item.id))
+        .map(item => ({ ...item }))
+    : [];
+
+  return [...mobileAdditions, ...baseResources];
 }
 
 async function loadVideos() {

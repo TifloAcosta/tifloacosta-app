@@ -2,6 +2,29 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import vm from 'node:vm';
 
+function cleanText(value) {
+  return typeof value === 'string' ? value.trim() : '';
+}
+
+function firstBodyParagraph(body) {
+  return cleanText(body)
+    .split(/\n\s*\n+/)
+    .map(part => part.trim())
+    .find(Boolean) || '';
+}
+
+function looksLikeOfficeFormattingNoise(value) {
+  const text = cleanText(value);
+  if (!text) return false;
+  return /\bStyle Definitions\b|\bMsoNormal(?:Table)?\b|\bmso-style-|\bX-NONE\b|\bMicrosoftInternetExplorer4\b/i.test(text);
+}
+
+export function cleanNewsSummary(summary, body) {
+  const value = cleanText(summary);
+  if (!looksLikeOfficeFormattingNoise(value)) return value;
+  return firstBodyParagraph(body);
+}
+
 export function buildMobileContent({ resources = [], videos = [], news = [], generatedAt = new Date().toISOString() }) {
   return {
     schemaVersion: 1,
@@ -32,7 +55,8 @@ export function buildMobileContent({ resources = [], videos = [], news = [], gen
       sourceId: item.id,
       lang: item.lang,
       title: item.title || '',
-      summary: item.summary || '',
+      summary: cleanNewsSummary(item.summary, item.body),
+      body: cleanText(item.body),
       sourceName: item.sourceName || '',
       originalUrl: item.originalUrl || '',
       publishedAt: item.publishedAt || '',

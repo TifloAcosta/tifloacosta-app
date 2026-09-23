@@ -16,7 +16,8 @@
     "@capacitor/app": "8.1.1",
     "@capacitor/browser": "8.0.4",
     "@capacitor/core": "8.5.2",
-    "@capacitor/share": "8.0.1"
+    "@capacitor/share": "8.0.1",
+    "@onesignal/capacitor-plugin": "1.1.6"
   },
   "devDependencies": {
     "@capacitor/android": "8.5.2",

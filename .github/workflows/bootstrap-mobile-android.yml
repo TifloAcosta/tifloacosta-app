@@ -19,6 +19,8 @@ permissions:
 jobs:
   bootstrap:
     runs-on: ubuntu-latest
+    env:
+      ONESIGNAL_DISABLE_LOCATION: "true"
     steps:
       - name: Checkout current ref
         uses: actions/checkout@v5

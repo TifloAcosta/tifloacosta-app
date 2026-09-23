@@ -396,9 +396,16 @@ function render(route) {
         ...context,
         newIds: currentNewNewsIds,
         onOpenNews: openActualidadNews,
-        onVisited: () => {
-          newsSeenStore.markSeen(currentContent.news);
-          currentNewNewsIds = new Set();
+        onVisited: visibleItems => {
+          newsSeenStore.markSeen(visibleItems);
+          const visitedIds = new Set(
+            (Array.isArray(visibleItems) ? visibleItems : [])
+              .map(item => String(item?.id || '').trim())
+              .filter(Boolean)
+          );
+          currentNewNewsIds = new Set(
+            [...currentNewNewsIds].filter(id => !visitedIds.has(id))
+          );
         }
       });
       break;

@@ -6,10 +6,10 @@ function harness() {
   const calls = [];
   const route = createNotificationRouter({
     home: () => calls.push(['home']),
-    news: value => calls.push(['news', value]),
-    video: value => calls.push(['video', value]),
-    resource: value => calls.push(['resource', value]),
-    download: value => calls.push(['download', value])
+    news: value => { calls.push(['news', value]); return true; },
+    video: value => { calls.push(['video', value]); return true; },
+    resource: value => { calls.push(['resource', value]); return true; },
+    download: value => { calls.push(['download', value]); return true; }
   });
   return { calls, route };
 }
@@ -29,4 +29,20 @@ test('general and unknown destinations fall back to home', async () => {
     await route(destination);
     assert.deepEqual(calls, [['home']]);
   }
+});
+
+test('a stale destination whose action cannot open falls back to home', async () => {
+  const calls = [];
+  const route = createNotificationRouter({
+    home: () => calls.push(['home']),
+    news: value => { calls.push(['news', value]); return false; }
+  });
+
+  const result = await route({ type: 'news', id: 'expired-news', url: '', title: '' });
+
+  assert.deepEqual(calls, [
+    ['news', { type: 'news', id: 'expired-news', url: '', title: '' }],
+    ['home']
+  ]);
+  assert.equal(result, 'home');
 });

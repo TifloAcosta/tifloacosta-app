@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-21-red-white-theme';
+const CACHE = 'tifloacosta-app-v2-22-braille-course';
 const NAVIGATION_TIMEOUT_MS = 5000;
 const SHELL = [
   './',
@@ -33,7 +33,8 @@ const LIVE_PATHS = new Set([
   '/actualidad-apps.json',
   '/videos.json',
   '/mobile-content.json',
-  '/video-search-index.js'
+  '/video-search-index.js',
+  '/medical-studies.js'
 ]);
 
 function navigationFetchWithTimeout(request) {

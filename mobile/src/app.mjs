@@ -6,6 +6,7 @@ import { createRouter } from './core/router.mjs';
 import { focusScreenHeading, restoreOriginFocus } from './core/focus.mjs';
 import { createContentStore } from './core/content-store.mjs';
 import { createFavoritesStore } from './core/favorites.mjs';
+import { createNewsSeenStore } from './core/news-seen.mjs';
 import { text } from './core/i18n.mjs';
 import { createNativeActions } from './core/native-actions.mjs';
 import { createNotificationCoordinator } from './core/notification-coordinator.mjs';
@@ -45,6 +46,7 @@ if (!root) throw new Error('Missing mobile app root');
 const ONESIGNAL_APP_ID = 'ed030723-7f6f-4745-8cd3-6938a9d04377';
 const EMPTY_CONTENT = Object.freeze({ resources: [], videos: [], news: [] });
 let currentContent = EMPTY_CONTENT;
+let currentNewNewsIds = new Set();
 let activeScreenCleanup = null;
 let screenBackHandler = null;
 let readerController = null;
@@ -68,6 +70,7 @@ function safeStorage() {
 const storage = safeStorage();
 const preferencesStore = createPreferencesStore({ storage });
 const favoritesStore = createFavoritesStore(storage);
+const newsSeenStore = createNewsSeenStore(storage);
 const readerSession = createReaderSession();
 const shareSession = createShareSession();
 const nativeActions = createNativeActions({
@@ -385,7 +388,18 @@ function render(route) {
 
   switch (route.name) {
     case 'home': renderHome(context); break;
-    case 'actualidad': renderActualidad({ ...context, onOpenNews: openActualidadNews }); break;
+    case 'actualidad': {
+      renderActualidad({
+        ...context,
+        newIds: currentNewNewsIds,
+        onOpenNews: openActualidadNews,
+        onVisited: () => {
+          newsSeenStore.markSeen(currentContent.news);
+          currentNewNewsIds = new Set();
+        }
+      });
+      break;
+    }
     case 'search': {
       const initialQuery = pendingSearchQuery;
       pendingSearchQuery = '';
@@ -531,6 +545,7 @@ const contentStore = createContentStore({
 
 contentStore.load().then(result => {
   currentContent = result.content || EMPTY_CONTENT;
+  currentNewNewsIds = newsSeenStore.compare(currentContent.news);
   if (!shareMode && !textInputIsActive()) render(router.current());
   void notificationCoordinator.markReady();
 });

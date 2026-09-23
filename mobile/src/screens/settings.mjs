@@ -30,7 +30,7 @@ function notificationStatusText(state, t) {
   return t(keys[state] || 'notifications.unavailable');
 }
 
-function addNotificationSettings(root, notificationService, t) {
+function addNotificationSettings(root, notificationService, t, onAppResume) {
   const section = document.createElement('section');
   section.className = 'settings-section';
 
@@ -77,10 +77,26 @@ function addNotificationSettings(root, notificationService, t) {
     }
   }
 
+  const unregisterResume = typeof onAppResume === 'function'
+    ? onAppResume(() => { void renderState(); })
+    : null;
+
   void renderState();
+  return () => {
+    if (typeof unregisterResume === 'function') unregisterResume();
+  };
 }
 
-export function renderSettings({ root, router, preferences, notificationService, t, onPreferencesChange }) {
+export function renderSettings({
+  root,
+  router,
+  preferences,
+  notificationService,
+  t,
+  onPreferencesChange,
+  onAppResume,
+  setScreenCleanup
+}) {
   clearScreen(root);
   addScreenHeader(root, { router, title: t('screen.settings'), backLabel: t('nav.back') });
 
@@ -121,7 +137,7 @@ export function renderSettings({ root, router, preferences, notificationService,
       { value: 'comfortable', label: t('settings.comfortable') },
       { value: 'wide', label: t('settings.wide') }
     ],
-    onChange: spacing => onPreferencesChange({ spacing })
+    onChange: spacing => onPreferencesChange({ spacing: spacing })
   });
 
   const boldRow = document.createElement('div');
@@ -143,5 +159,6 @@ export function renderSettings({ root, router, preferences, notificationService,
   reset.addEventListener('click', () => onPreferencesChange(null, { reset: true }));
   root.append(reset);
 
-  addNotificationSettings(root, notificationService, t);
+  const notificationCleanup = addNotificationSettings(root, notificationService, t, onAppResume);
+  setScreenCleanup?.(notificationCleanup);
 }

@@ -37,14 +37,14 @@ test('mobile Actualidad keeps only the latest 10 days and sorts newest first reg
 test('mobile Actualidad caps the retained background at 60 stories per language', () => {
   const generatedAt = '2026-09-23T18:00:00.000Z';
   const news = [];
+  const newest = new Date('2026-09-23T17:59:00.000Z').getTime();
 
   for (const lang of ['es', 'en']) {
     for (let index = 0; index < 65; index += 1) {
-      const minute = String(index).padStart(2, '0');
       news.push(newsItem({
         id: `${lang}-${index}`,
         lang,
-        publishedAt: `2026-09-23T17:${minute}:00.000Z`
+        publishedAt: new Date(newest - index * 60_000).toISOString()
       }));
     }
   }
@@ -55,10 +55,10 @@ test('mobile Actualidad caps the retained background at 60 stories per language'
 
   assert.equal(es.length, 60);
   assert.equal(en.length, 60);
-  assert.equal(es[0].sourceId, 'es-59');
-  assert.equal(en[0].sourceId, 'en-59');
-  assert.equal(es.at(-1).sourceId, 'es-0');
-  assert.equal(en.at(-1).sourceId, 'en-0');
+  assert.equal(es[0].sourceId, 'es-0');
+  assert.equal(en[0].sourceId, 'en-0');
+  assert.equal(es.at(-1).sourceId, 'es-59');
+  assert.equal(en.at(-1).sourceId, 'en-59');
 });
 
 test('invalid publication dates never enter the mobile Actualidad feed', () => {

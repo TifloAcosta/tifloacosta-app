@@ -126,8 +126,9 @@ export function createOneSignalNotifications({ sdk, appId, onDestination = () =>
     request: async () => {
       if (!(await ensureStarted()) || failed) return 'unavailable';
       try {
-        const accepted = await sdk.Notifications.requestPermission(false);
         consent.grant();
+        sdk.setConsentGiven(true);
+        const accepted = await sdk.Notifications.requestPermission(false);
         if (accepted || await sdk.Notifications.hasPermission()) {
           await pushSubscription().optIn();
         }

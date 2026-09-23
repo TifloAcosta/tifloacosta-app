@@ -48,7 +48,9 @@ export function createNewsSeenStore(storage = globalThis.localStorage) {
   }
 
   function markSeen(items) {
-    return write(new Set(stableIds(items)));
+    const baseline = readRaw() || new Set();
+    for (const id of stableIds(items)) baseline.add(id);
+    return write(baseline);
   }
 
   function readBaseline() {

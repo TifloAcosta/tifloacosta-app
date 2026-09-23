@@ -16,6 +16,28 @@
 
   const additions = [
     {
+      id: 'es-1wfRfY4IumYSh7At5iaoizBZTSoQhKhdc',
+      lang: 'es',
+      category: 'iPhone',
+      title: 'Curso completo de Entrada braille en pantalla en iPhone',
+      searchText: 'Curso práctico de Entrada braille en pantalla con VoiceOver, desde cero hasta un uso avanzado y profesional. Referencia principal iOS 27 con indicaciones útiles para iOS 26.',
+      url: 'https://drive.google.com/file/d/1wfRfY4IumYSh7At5iaoizBZTSoQhKhdc/view?usp=drivesdk',
+      openUrl: 'https://drive.google.com/file/d/1wfRfY4IumYSh7At5iaoizBZTSoQhKhdc/view?usp=drivesdk',
+      new: true,
+      mobile: true
+    },
+    {
+      id: 'en-1C317Eva0eE8ekQ9HqmXIvzY1-Zxty1nC',
+      lang: 'en',
+      category: 'iPhone',
+      title: 'Complete Course on Braille Screen Input on iPhone',
+      searchText: 'Practical Braille Screen Input course with VoiceOver, from zero to advanced and professional use. Primarily based on iOS 27 with useful notes for iOS 26.',
+      url: 'https://drive.google.com/file/d/1C317Eva0eE8ekQ9HqmXIvzY1-Zxty1nC/view?usp=drivesdk',
+      openUrl: 'https://drive.google.com/file/d/1C317Eva0eE8ekQ9HqmXIvzY1-Zxty1nC/view?usp=drivesdk',
+      new: true,
+      mobile: true
+    },
+    {
       id: 'es-estudio-medico-calor-2026',
       lang: 'es',
       category: 'Estudios médicos',
@@ -87,13 +109,6 @@
   spanishRssResources.forEach(resource => {
     if (!resources.some(item => item.id === resource.id)) resources.push(resource);
   });
-})();
-
-(() => {
-  'use strict';
-
-  const resources = window.TIFLO_RESOURCES;
-  if (!Array.isArray(resources)) return;
 
   const toneResources = [
     {

@@ -121,6 +121,23 @@ jobs:
           done
           exit 1
 
+      - name: Verify signed Android release bundle
+        working-directory: mobile/android
+        shell: bash
+        run: |
+          set -euo pipefail
+          aab="app/build/outputs/bundle/release/app-release.aab"
+          if [ -z "${ANDROID_KEYSTORE_PATH:-}" ]; then
+            echo "Android signing secrets are not configured; skipping signed AAB verification."
+            exit 0
+          fi
+          if [ ! -f "$aab" ]; then
+            echo "Release AAB not found at $aab"
+            exit 1
+          fi
+          jarsigner -verify "$aab"
+          echo "Verified signed Android release bundle at $aab"
+
       - name: Verify merged Android notification manifest
         working-directory: mobile/android
         shell: bash

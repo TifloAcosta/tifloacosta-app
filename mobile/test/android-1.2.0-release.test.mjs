@@ -4,14 +4,14 @@ import test from 'node:test';
 
 const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
-test('integrated Android candidate is version 1.1.0 code 6', async () => {
+test('Android release candidate is version 1.2.0 code 7', async () => {
   const gradle = await read('android/app/build.gradle');
-  assert.match(gradle, /versionCode\s+6/);
-  assert.match(gradle, /versionName\s+"1\.1\.0"/);
-  assert.doesNotMatch(gradle, /versionCode\s+5/);
+  assert.match(gradle, /versionCode\s+7/);
+  assert.match(gradle, /versionName\s+"1\.2\.0"/);
+  assert.doesNotMatch(gradle, /versionCode\s+6/);
 });
 
-test('release candidate includes native Share and bounded web fetch plugins', async () => {
+test('release candidate keeps native Share and bounded web fetch plugins', async () => {
   const manifest = await read('android/app/src/main/AndroidManifest.xml');
   const mainActivity = await read('android/app/src/main/java/com/tifloacosta/app/MainActivity.java');
   assert.match(manifest, /android\.intent\.action\.SEND/);

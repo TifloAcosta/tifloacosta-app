@@ -47,11 +47,7 @@ test('video accepts only a valid YouTube id or YouTube URL', () => {
   assert.deepEqual(normalizeNotificationDestination({ tiflo_type: 'video', tiflo_id: 'short' }), { type: 'general' });
 });
 
-test('resource accepts a stable id without requiring a URL while download still requires a safe URL', () => {
-  assert.deepEqual(
-    normalizeNotificationDestination({ tiflo_type: 'resource', tiflo_id: 'r1' }),
-    { type: 'resource', id: 'r1', url: '', title: '' }
-  );
+test('resource and download require a safe URL; resource may also carry a stable id', () => {
   assert.deepEqual(
     normalizeNotificationDestination({ tiflo_type: 'resource', tiflo_id: 'r1', tiflo_url: 'https://example.com/r' }),
     { type: 'resource', id: 'r1', url: 'https://example.com/r', title: '' }
@@ -60,7 +56,7 @@ test('resource accepts a stable id without requiring a URL while download still 
     normalizeNotificationDestination({ tiflo_type: 'download', tiflo_url: 'https://example.com/a.zip' }),
     { type: 'download', url: 'https://example.com/a.zip', title: '' }
   );
-  assert.deepEqual(normalizeNotificationDestination({ tiflo_type: 'resource' }), { type: 'general' });
+  assert.deepEqual(normalizeNotificationDestination({ tiflo_type: 'resource', tiflo_id: 'r1' }), { type: 'general' });
   assert.deepEqual(normalizeNotificationDestination({ tiflo_type: 'download' }), { type: 'general' });
 });
 

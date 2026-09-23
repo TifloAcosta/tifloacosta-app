@@ -12,7 +12,7 @@ import { resolveLocal } from './core/downloads.mjs';
 import { classifySharedText } from './core/share-classifier.mjs';
 import { createShareSession } from './core/share-session.mjs';
 import { createReaderSession } from './core/reader-session.mjs';
-import { loadReadableTarget } from './core/readable-loader.mjs';
+import { loadReadableTarget, readablePageFromNewsItem } from './core/readable-loader.mjs';
 import { searchResultAction } from './core/search.mjs';
 import { TifloSave } from './core/save-plugin.mjs';
 import { createNotificationService } from './native/notifications.mjs';
@@ -189,6 +189,19 @@ function openReaderLink(url, originId = '') {
 }
 
 function openActualidadNews(item, originId = '') {
+  const cachedPage = readablePageFromNewsItem(item);
+  if (cachedPage) {
+    const url = String(item?.originalUrl || item?.url || '').trim();
+    readerSession.begin({
+      url,
+      title: item?.title || '',
+      allowOriginalFallback: true
+    });
+    readerSession.push(cachedPage);
+    router.navigate('reader', { originId: originId || null });
+    return true;
+  }
+
   return openReadableFromApp({
     url: item?.originalUrl || item?.url || '',
     title: item?.title || '',

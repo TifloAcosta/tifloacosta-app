@@ -87,11 +87,32 @@ function addNotificationSettings(root, notificationService, t, onAppResume) {
   };
 }
 
+function addAppInfo(root, appInfo, t) {
+  const section = document.createElement('section');
+  section.className = 'settings-section';
+
+  const heading = document.createElement('h2');
+  heading.textContent = t('settings.appInfo');
+  section.append(heading);
+
+  const unavailable = t('settings.unavailable');
+  const version = document.createElement('p');
+  version.textContent = `${t('settings.version')}: ${appInfo?.version || unavailable}`;
+  section.append(version);
+
+  const build = document.createElement('p');
+  build.textContent = `${t('settings.build')}: ${appInfo?.build || unavailable}`;
+  section.append(build);
+
+  root.append(section);
+}
+
 export function renderSettings({
   root,
   router,
   preferences,
   notificationService,
+  appInfo = { version: '', build: '' },
   t,
   onPreferencesChange,
   onAppResume,
@@ -137,7 +158,7 @@ export function renderSettings({
       { value: 'comfortable', label: t('settings.comfortable') },
       { value: 'wide', label: t('settings.wide') }
     ],
-    onChange: spacing => onPreferencesChange({ spacing: spacing })
+    onChange: spacing => onPreferencesChange({ spacing })
   });
 
   const boldRow = document.createElement('div');
@@ -160,5 +181,6 @@ export function renderSettings({
   root.append(reset);
 
   const notificationCleanup = addNotificationSettings(root, notificationService, t, onAppResume);
+  addAppInfo(root, appInfo, t);
   setScreenCleanup?.(notificationCleanup);
 }

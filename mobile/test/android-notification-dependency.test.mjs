@@ -14,3 +14,11 @@ test('Android CI disables the unused OneSignal location module', async () => {
   const workflow = await repoRead('.github/workflows/bootstrap-mobile-android.yml');
   assert.match(workflow, /ONESIGNAL_DISABLE_LOCATION/);
 });
+
+test('Android CI verifies the merged app manifest contains native push wiring', async () => {
+  const workflow = await repoRead('.github/workflows/bootstrap-mobile-android.yml');
+  assert.match(workflow, /Verify merged Android notification manifest/);
+  assert.match(workflow, /POST_NOTIFICATIONS/);
+  assert.match(workflow, /com\.onesignal/);
+  assert.match(workflow, /merged_manifests/);
+});

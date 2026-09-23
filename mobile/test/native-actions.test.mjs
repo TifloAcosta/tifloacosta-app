@@ -86,3 +86,15 @@ test('blank external URLs and blank shares are ignored safely', async () => {
   assert.equal(await actions.share({}), false);
   assert.deepEqual(h.calls, []);
 });
+
+test('failed external browser opens return false instead of rejecting', async () => {
+  const h = createHarness();
+  h.browserPlugin.open = async options => {
+    h.calls.push(['open', options]);
+    throw new Error('browser unavailable');
+  };
+  const actions = createNativeActions({ appPlugin: h.appPlugin, sharePlugin: h.sharePlugin, browserPlugin: h.browserPlugin });
+
+  assert.equal(await actions.openExternal('https://example.com/fallback'), false);
+  assert.deepEqual(h.calls, [['open', { url: 'https://example.com/fallback' }]]);
+});

@@ -26,8 +26,12 @@ export function createNativeActions({ appPlugin, sharePlugin, browserPlugin, sav
   async function openExternal(url) {
     const value = String(url || '').trim();
     if (!value || !browserPlugin?.open) return false;
-    await browserPlugin.open({ url: value });
-    return true;
+    try {
+      await browserPlugin.open({ url: value });
+      return true;
+    } catch {
+      return false;
+    }
   }
 
   async function saveFile({ url = '', filename = '', mimeType = 'application/octet-stream' } = {}) {

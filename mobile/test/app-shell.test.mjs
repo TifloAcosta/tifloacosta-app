@@ -30,9 +30,11 @@ test('startup keeps preferences before first render and remote content refresh a
   assert.match(app, /if \(!shareMode\s*&&\s*!textInputIsActive\(\)\) render\(router\.current\(\)\)/);
 });
 
-test('settings always receives a safe notification service even before a native provider is connected', async () => {
+test('settings always receives the connected native notification service', async () => {
   const app = await read('src/app.mjs');
   assert.match(app, /import\s+\{\s*createNotificationService\s*\}\s+from\s+['"]\.\/native\/notifications\.mjs['"]/);
-  assert.match(app, /const\s+notificationService\s*=\s*createNotificationService\(null\)/);
+  assert.match(app, /createOneSignalNotifications/);
+  assert.match(app, /notificationService\s*=\s*createNotificationService\(notificationClient\.adapter\)/);
+  assert.doesNotMatch(app, /createNotificationService\(null\)/);
   assert.match(app, /notificationService[,\s]/);
 });

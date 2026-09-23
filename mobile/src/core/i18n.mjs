@@ -64,7 +64,10 @@ const DICTIONARIES = {
       externalIntro: 'También puedes abrir estos bancos externos y continuar buscando allí.', openBank: 'Abrir'
     },
     favorites: { add: 'Añadir a favoritos', remove: 'Quitar de favoritos', empty: 'Todavía no has añadido ningún favorito.' },
-    actualidad: { empty: 'No hay noticias disponibles en este momento.', original: 'Abrir fuente original' },
+    actualidad: {
+      empty: 'No hay noticias disponibles en este momento.', original: 'Abrir fuente original',
+      newLabel: 'Nuevo', newCount: '{count} novedades desde tu última visita.', source: 'Medio', published: 'Publicado'
+    },
     library: { empty: 'No hay recursos disponibles en este momento.', open: 'Abrir documento', download: 'Guardar documento' },
     videos: {
       empty: 'No hay vídeos disponibles en este momento.',
@@ -94,7 +97,8 @@ const DICTIONARIES = {
       language: 'Idioma', spanish: 'Español', english: 'Inglés', textSize: 'Tamaño del texto', normal: 'Predeterminado',
       large: 'Grande', xlarge: 'Muy grande', max: 'Máximo', theme: 'Color y contraste', auto: 'Seguir el sistema',
       light: 'Alto contraste claro', dark: 'Alto contraste oscuro', spacing: 'Espaciado', comfortable: 'Cómodo', wide: 'Amplio',
-      bold: 'Usar texto reforzado', reset: 'Restablecer ajustes'
+      bold: 'Usar texto reforzado', reset: 'Restablecer ajustes', appInfo: 'Información de la aplicación',
+      version: 'Versión', build: 'Compilación', unavailable: 'No disponible'
     },
     notifications: {
       title: 'Notificaciones', explanation: 'Las notificaciones solo se activarán si tú lo decides. TifloAcosta no pedirá permiso al abrir la app.',
@@ -168,7 +172,10 @@ const DICTIONARIES = {
       externalIntro: 'You can also open these external banks and continue searching there.', openBank: 'Open'
     },
     favorites: { add: 'Add to favorites', remove: 'Remove from favorites', empty: 'You have not added any favorites yet.' },
-    actualidad: { empty: 'There are no news items available right now.', original: 'Open original source' },
+    actualidad: {
+      empty: 'There are no news items available right now.', original: 'Open original source',
+      newLabel: 'New', newCount: '{count} new items since your last visit.', source: 'Source', published: 'Published'
+    },
     library: { empty: 'There are no resources available right now.', open: 'Open document', download: 'Save document' },
     videos: {
       empty: 'There are no videos available right now.',
@@ -198,7 +205,8 @@ const DICTIONARIES = {
       language: 'Language', spanish: 'Spanish', english: 'English', textSize: 'Text size', normal: 'Default',
       large: 'Large', xlarge: 'Very large', max: 'Maximum', theme: 'Color and contrast', auto: 'Follow system',
       light: 'High contrast light', dark: 'High contrast dark', spacing: 'Spacing', comfortable: 'Comfortable', wide: 'Wide',
-      bold: 'Use bolder text', reset: 'Reset settings'
+      bold: 'Use bolder text', reset: 'Reset settings', appInfo: 'App information',
+      version: 'Version', build: 'Build', unavailable: 'Unavailable'
     },
     notifications: {
       title: 'Notifications', explanation: 'Notifications are enabled only if you choose to turn them on. TifloAcosta will not ask for permission when the app opens.',

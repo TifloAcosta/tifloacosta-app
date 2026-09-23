@@ -28,6 +28,12 @@ test('notification routes reuse existing reader video resource and download acti
   assert.match(source, /openNormalDownload/);
 });
 
+test('stale resource notification propagates open failure so the router can fall back home', async () => {
+  const source = await read('src/app.mjs');
+  assert.match(source, /resource:\s*destination\s*=>[\s\S]*return\s+nativeActions\.openExternal\(destination\.url\)/);
+  assert.doesNotMatch(source, /void\s+nativeActions\.openExternal\(destination\.url\);\s*return\s+true/);
+});
+
 test('OneSignal uses the existing TifloAcosta app id and production notification service wraps its adapter', async () => {
   const source = await read('src/app.mjs');
   assert.match(source, /ed030723-7f6f-4745-8cd3-6938a9d04377/);

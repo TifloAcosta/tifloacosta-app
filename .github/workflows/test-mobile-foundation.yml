@@ -7,6 +7,8 @@ on:
     paths:
       - 'scripts/build-mobile-content.mjs'
       - 'test/mobile-content.test.mjs'
+      - 'actualidad-core.js'
+      - 'test/actualidad-core.test.mjs'
       - 'mobile/**'
       - '.gitignore'
       - '.github/workflows/bootstrap-mobile-android.yml'
@@ -15,6 +17,8 @@ on:
     paths:
       - 'scripts/build-mobile-content.mjs'
       - 'test/mobile-content.test.mjs'
+      - 'actualidad-core.js'
+      - 'test/actualidad-core.test.mjs'
       - 'mobile/**'
       - '.gitignore'
       - '.github/workflows/bootstrap-mobile-android.yml'
@@ -35,5 +39,6 @@ jobs:
           node-version: 22
       - name: Run mobile foundation tests
         run: |
+          node --test test/actualidad-core.test.mjs
           node --test test/mobile-content.test.mjs
           node --test mobile/test/*.test.mjs

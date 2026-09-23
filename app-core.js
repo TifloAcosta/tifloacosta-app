@@ -7,11 +7,13 @@
 
   const featuredNewsIds = {
     es: [
+      'es-1wfRfY4IumYSh7At5iaoizBZTSoQhKhdc',
       'es-13crgHIVB9E0YUYNmF6hlyFgi-ymhwb_V',
       'es-1uTEYvSDBUxzvxPmLFkQa78VSqJtEHsGI',
       'es-1Yk652avn7fcQtfNV28nu0VIkqpcZiRos'
     ],
     en: [
+      'en-1C317Eva0eE8ekQ9HqmXIvzY1-Zxty1nC',
       'en-1NhzNbXNly2cv_QB2WQgxjo5Ex0L4HHuB',
       'en-1ztd-nsQcYPNa3-Ij40CxlNIGkuEPtX-T',
       'en-1ZEgNb3rI49H28DWmDnSUaB2OVFrHyK_9'

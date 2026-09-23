@@ -24,12 +24,15 @@ test('new state is exposed as readable text rather than visual-only decoration',
   assert.doesNotMatch(screen, /aria-hidden=["']true["'].*new/si);
 });
 
-test('app compares every resolved news catalog and clears markers after Actualidad visit', async () => {
+test('app compares every resolved catalog and consumes only the language actually visited', async () => {
   const source = await read('src/app.mjs');
   assert.match(source, /createNewsSeenStore/);
   assert.match(source, /currentNewNewsIds/);
   assert.match(source, /newsSeenStore\.compare\(currentContent\.news\)/);
-  assert.match(source, /newsSeenStore\.markSeen/);
-  assert.match(source, /currentNewNewsIds\s*=\s*new Set\(\)/);
+  assert.match(source, /onVisited:\s*visibleItems\s*=>/);
+  assert.match(source, /newsSeenStore\.markSeen\(visibleItems\)/);
+  assert.match(source, /visitedIds/);
+  assert.match(source, /currentNewNewsIds\s*=\s*new Set\(/);
+  assert.match(source, /filter\(id\s*=>\s*!visitedIds\.has\(id\)\)/);
   assert.match(source, /newIds:\s*currentNewNewsIds/);
 });

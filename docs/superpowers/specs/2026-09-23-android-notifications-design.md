@@ -27,10 +27,11 @@ Add native Android push notifications to the TifloAcosta Capacitor app using the
 
 ### Audience separation
 
-- Android subscriptions must be identifiable separately from web subscriptions inside the same OneSignal app.
-- The integration will attach an Android-specific tag to the subscription, using a stable key/value such as `tiflo_platform=android`.
+- Android push subscriptions must be distinguishable from Web Push subscriptions inside the same OneSignal app.
+- The primary separation mechanism will use OneSignal's native subscription/device type targeting so Android can be selected independently from Web Push.
+- An optional app tag such as `tiflo_client=android_app` may also be attached as a secondary aid for future segmentation, but platform targeting must not depend exclusively on that tag.
 - Web subscribers remain unaffected.
-- Notification campaigns can then target Android only, web only, or both.
+- Notification campaigns can target Android only, web only, or both.
 - No existing web notification behavior is changed as part of this work.
 
 ### Notification opening behavior
@@ -81,7 +82,7 @@ Responsibilities of the OneSignal integration module:
 - Read current permission state without triggering a prompt.
 - Request permission only when called from the explicit settings action.
 - Open Android application notification settings when permission has been denied and the user asks to change it.
-- Apply the Android subscription tag used for audience separation.
+- Optionally apply the Android app tag used as a secondary segmentation aid.
 - Listen for notification click events and pass validated destination data to the app router.
 
 ### App startup
@@ -119,7 +120,7 @@ Automated tests should cover at least:
 - Status checks do not request notification permission.
 - Permission is requested only by explicit user action.
 - Denied state can open system notification settings.
-- Android subscriptions receive the Android-specific OneSignal tag.
+- Android push subscriptions can be targeted separately from Web Push subscriptions.
 - General notification click opens/falls back to Home.
 - News payload routes to the reader.
 - Video payload routes to the accessible player.

@@ -5,6 +5,7 @@ import OneSignal from '@onesignal/capacitor-plugin';
 import { createRouter } from './core/router.mjs';
 import { focusScreenHeading, restoreOriginFocus } from './core/focus.mjs';
 import { createContentStore } from './core/content-store.mjs';
+import { loadAppInfo } from './core/app-info.mjs';
 import { createFavoritesStore } from './core/favorites.mjs';
 import { createNewsSeenStore } from './core/news-seen.mjs';
 import { text } from './core/i18n.mjs';
@@ -47,6 +48,7 @@ const ONESIGNAL_APP_ID = 'ed030723-7f6f-4745-8cd3-6938a9d04377';
 const EMPTY_CONTENT = Object.freeze({ resources: [], videos: [], news: [] });
 let currentContent = EMPTY_CONTENT;
 let currentNewNewsIds = new Set();
+let appInfo = { version: '', build: '' };
 let activeScreenCleanup = null;
 let screenBackHandler = null;
 let readerController = null;
@@ -378,6 +380,7 @@ function render(route) {
     favoritesStore,
     nativeActions,
     notificationService,
+    appInfo,
     t,
     onPreferencesChange,
     onAppResume,
@@ -537,6 +540,10 @@ function onPreferencesChange(changes, { reset = false } = {}) {
 
 router.start('home');
 void installShareReceiver();
+void loadAppInfo(App).then(info => {
+  appInfo = info;
+  if (!shareMode && router.current()?.name === 'settings') render(router.current());
+});
 
 const contentStore = createContentStore({
   fetchFn: (...args) => window.fetch(...args),

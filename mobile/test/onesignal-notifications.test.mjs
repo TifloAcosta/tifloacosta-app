@@ -115,6 +115,19 @@ test('first launch opts out even when Android already grants notifications', asy
   assert.equal(fake.calls.some(call => call[0] === 'requestPermission'), false);
 });
 
+test('explicit activation releases the OneSignal consent gate before requesting permission', async () => {
+  const fake = fakeSdk({ permission: false, canRequest: true, optedIn: false, requestPermissionResult: true });
+  const client = createOneSignalNotifications({ sdk: fake.sdk, appId: 'app-id', onDestination: () => {}, storage: fakeStorage() });
+
+  await client.start();
+  const callStart = fake.calls.length;
+  await client.adapter.request();
+  assert.deepEqual(fake.calls.slice(callStart, callStart + 2), [
+    ['setConsentGiven', true],
+    ['requestPermission', false]
+  ]);
+});
+
 test('explicit activation stores consent and opts the OneSignal subscription in', async () => {
   const storage = fakeStorage();
   const fake = fakeSdk({ permission: true, canRequest: false, optedIn: true });

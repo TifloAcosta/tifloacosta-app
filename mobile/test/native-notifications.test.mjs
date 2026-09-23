@@ -63,3 +63,17 @@ test('settings exposes explicit notification controls and bilingual explanatory 
   }
   assert.doesNotMatch(settings, /autofocus/i);
 });
+
+test('settings refreshes notification state after returning from Android system settings without moving focus', async () => {
+  const [settings, app] = await Promise.all([
+    read('src/screens/settings.mjs'),
+    read('src/app.mjs')
+  ]);
+  assert.match(settings, /onAppResume/);
+  assert.match(settings, /renderState\(\)/);
+  assert.match(settings, /setScreenCleanup/);
+  assert.match(app, /App\.addListener\(['"]resume['"]/);
+  assert.match(app, /onAppResume/);
+  assert.doesNotMatch(settings, /\.focus\(/);
+  assert.doesNotMatch(settings, /autofocus/i);
+});

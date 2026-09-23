@@ -97,7 +97,8 @@ const DICTIONARIES = {
       language: 'Idioma', spanish: 'Español', english: 'Inglés', textSize: 'Tamaño del texto', normal: 'Predeterminado',
       large: 'Grande', xlarge: 'Muy grande', max: 'Máximo', theme: 'Color y contraste', auto: 'Seguir el sistema',
       light: 'Alto contraste claro', dark: 'Alto contraste oscuro', spacing: 'Espaciado', comfortable: 'Cómodo', wide: 'Amplio',
-      bold: 'Usar texto reforzado', reset: 'Restablecer ajustes'
+      bold: 'Usar texto reforzado', reset: 'Restablecer ajustes', appInfo: 'Información de la aplicación',
+      version: 'Versión', build: 'Compilación', unavailable: 'No disponible'
     },
     notifications: {
       title: 'Notificaciones', explanation: 'Las notificaciones solo se activarán si tú lo decides. TifloAcosta no pedirá permiso al abrir la app.',
@@ -164,7 +165,7 @@ const DICTIONARIES = {
       intro: 'Search by word, choose a category, or combine both options.',
       query: 'Search by word or phrase', queryPlaceholder: 'For example: bell, old telephone, birds…',
       category: 'Category', allCategories: 'All categories', search: 'Search sounds', searching: 'Searching sounds…',
-      needCriteria: 'Enter something to search for or choose a category.', results: 'Results', noResults: 'No results found.',
+      needCriteria: 'Enter something to search for or choose a category.', results: 'Results', noResults: 'No sounds were found for those criteria.',
       unavailable: 'Internal search is not available right now. You can still use the other sound banks.',
       duration: 'Duration', format: 'Format', size: 'Size', license: 'License', author: 'Author', source: 'Bank',
       listen: 'Listen', openOriginal: 'Open original', externalHeading: 'Explore other sound banks',
@@ -204,7 +205,8 @@ const DICTIONARIES = {
       language: 'Language', spanish: 'Spanish', english: 'English', textSize: 'Text size', normal: 'Default',
       large: 'Large', xlarge: 'Very large', max: 'Maximum', theme: 'Color and contrast', auto: 'Follow system',
       light: 'High contrast light', dark: 'High contrast dark', spacing: 'Spacing', comfortable: 'Comfortable', wide: 'Wide',
-      bold: 'Use bolder text', reset: 'Reset settings'
+      bold: 'Use bolder text', reset: 'Reset settings', appInfo: 'App information',
+      version: 'Version', build: 'Build', unavailable: 'Unavailable'
     },
     notifications: {
       title: 'Notifications', explanation: 'Notifications are enabled only if you choose to turn them on. TifloAcosta will not ask for permission when the app opens.',

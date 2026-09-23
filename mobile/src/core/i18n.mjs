@@ -64,7 +64,10 @@ const DICTIONARIES = {
       externalIntro: 'También puedes abrir estos bancos externos y continuar buscando allí.', openBank: 'Abrir'
     },
     favorites: { add: 'Añadir a favoritos', remove: 'Quitar de favoritos', empty: 'Todavía no has añadido ningún favorito.' },
-    actualidad: { empty: 'No hay noticias disponibles en este momento.', original: 'Abrir fuente original' },
+    actualidad: {
+      empty: 'No hay noticias disponibles en este momento.', original: 'Abrir fuente original',
+      newLabel: 'Nuevo', newCount: '{count} novedades desde tu última visita.', source: 'Medio', published: 'Publicado'
+    },
     library: { empty: 'No hay recursos disponibles en este momento.', open: 'Abrir documento', download: 'Guardar documento' },
     videos: {
       empty: 'No hay vídeos disponibles en este momento.',
@@ -161,14 +164,17 @@ const DICTIONARIES = {
       intro: 'Search by word, choose a category, or combine both options.',
       query: 'Search by word or phrase', queryPlaceholder: 'For example: bell, old telephone, birds…',
       category: 'Category', allCategories: 'All categories', search: 'Search sounds', searching: 'Searching sounds…',
-      needCriteria: 'Enter something to search for or choose a category.', results: 'Results', noResults: 'No sounds were found for those criteria.',
+      needCriteria: 'Enter something to search for or choose a category.', results: 'Results', noResults: 'No results found.',
       unavailable: 'Internal search is not available right now. You can still use the other sound banks.',
       duration: 'Duration', format: 'Format', size: 'Size', license: 'License', author: 'Author', source: 'Bank',
       listen: 'Listen', openOriginal: 'Open original', externalHeading: 'Explore other sound banks',
       externalIntro: 'You can also open these external banks and continue searching there.', openBank: 'Open'
     },
     favorites: { add: 'Add to favorites', remove: 'Remove from favorites', empty: 'You have not added any favorites yet.' },
-    actualidad: { empty: 'There are no news items available right now.', original: 'Open original source' },
+    actualidad: {
+      empty: 'There are no news items available right now.', original: 'Open original source',
+      newLabel: 'New', newCount: '{count} new items since your last visit.', source: 'Source', published: 'Published'
+    },
     library: { empty: 'There are no resources available right now.', open: 'Open document', download: 'Save document' },
     videos: {
       empty: 'There are no videos available right now.',

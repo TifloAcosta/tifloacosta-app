@@ -35,6 +35,12 @@ function fakeSdk({
   return {
     calls,
     sdk: {
+      setConsentRequired: required => {
+        calls.push(['setConsentRequired', required]);
+      },
+      setConsentGiven: granted => {
+        calls.push(['setConsentGiven', granted]);
+      },
       initialize: async appId => {
         calls.push(['initialize', appId]);
         if (initializeFails) throw new Error('init failed');
@@ -78,11 +84,23 @@ function fakeSdk({
   };
 }
 
+test('start enables the OneSignal consent gate before initialization and withholds consent on first launch', async () => {
+  const fake = fakeSdk({ permission: true, canRequest: false, optedIn: true });
+  const client = createOneSignalNotifications({ sdk: fake.sdk, appId: 'app-id', onDestination: () => {}, storage: fakeStorage() });
+
+  assert.equal(await client.start(), true);
+  assert.deepEqual(fake.calls.slice(0, 3), [
+    ['setConsentRequired', true],
+    ['setConsentGiven', false],
+    ['initialize', 'app-id']
+  ]);
+});
+
 test('start initializes silently and tags the Android client without requesting permission', async () => {
   const fake = fakeSdk();
   const client = createOneSignalNotifications({ sdk: fake.sdk, appId: 'app-id', onDestination: () => {}, storage: fakeStorage() });
   assert.equal(await client.start(), true);
-  assert.deepEqual(fake.calls[0], ['initialize', 'app-id']);
+  assert.deepEqual(fake.calls.find(call => call[0] === 'initialize'), ['initialize', 'app-id']);
   assert.deepEqual(fake.calls.find(call => call[0] === 'tag'), ['tag', 'tiflo_client', 'android_app']);
   assert.equal(fake.calls.some(call => call[0] === 'requestPermission'), false);
 });

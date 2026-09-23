@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
+const repoRead = path => readFile(new URL(`../../${path}`, import.meta.url), 'utf8');
 
 test('Android 1.3.0 release candidate uses version code 8', async () => {
   const gradle = await read('android/app/build.gradle');
@@ -20,4 +21,12 @@ test('Android 1.3.0 keeps native Share and bounded web fetch plugins', async () 
   assert.doesNotMatch(manifest, /SEND_MULTIPLE/);
   assert.match(mainActivity, /registerPlugin\(TifloSharePlugin\.class\)/);
   assert.match(mainActivity, /registerPlugin\(TifloWebFetchPlugin\.class\)/);
+});
+
+test('Android CI verifies the release AAB signature whenever signing secrets are available', async () => {
+  const workflow = await repoRead('.github/workflows/bootstrap-mobile-android.yml');
+  assert.match(workflow, /Verify signed Android release bundle/);
+  assert.match(workflow, /jarsigner\s+-verify/);
+  assert.match(workflow, /ANDROID_KEYSTORE_PATH/);
+  assert.match(workflow, /app-release\.aab/);
 });

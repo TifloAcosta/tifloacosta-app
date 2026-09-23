@@ -7,6 +7,25 @@ function fetchPage(webFetch, url) {
   throw Object.assign(new Error('Native page fetch is unavailable'), { code: 'unreachable' });
 }
 
+export function readablePageFromNewsItem(item = {}) {
+  const body = String(item?.body || '').trim();
+  if (!body) return null;
+
+  const url = String(item?.originalUrl || item?.url || '').trim();
+  const page = extractReadablePage({
+    html: body,
+    url,
+    contentType: 'text/plain'
+  });
+
+  return {
+    ...page,
+    title: String(item?.title || page.title || '').trim(),
+    source: String(item?.sourceName || page.source || '').trim(),
+    reliable: true
+  };
+}
+
 export async function loadReadableTarget({ url = '', resolveDownload, webFetch } = {}) {
   const first = classifySharedUrl(url, { resolveDownload });
   if (first.kind !== 'web') return { kind: first.kind, classification: first };

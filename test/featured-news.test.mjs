@@ -9,9 +9,13 @@ const core = require('../app-core.js');
 const read = file => readFile(new URL(`../${file}`, import.meta.url), 'utf8');
 
 test('featured news uses an explicit three-item priority per language', async () => {
-  const source = await read('data.js');
+  const [catalogSource, supplementalSource] = await Promise.all([
+    read('data.js'),
+    read('medical-studies.js')
+  ]);
   const context = { window: {}, document: undefined };
-  vm.runInNewContext(source, context);
+  vm.runInNewContext(catalogSource, context);
+  vm.runInNewContext(supplementalSource, context);
   const resources = context.window.TIFLO_RESOURCES;
 
   for (const lang of ['es', 'en']) {

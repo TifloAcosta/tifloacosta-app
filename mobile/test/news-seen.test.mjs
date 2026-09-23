@@ -29,6 +29,17 @@ test('later unseen IDs remain new until markSeen', () => {
   assert.deepEqual([...store.compare(items('c', 'b', 'a'))], []);
 });
 
+test('markSeen merges the visited subset without consuming unseen items from another language', () => {
+  const storage = memoryStorage({ [NEWS_SEEN_KEY]: JSON.stringify(['es-old', 'en-old']) });
+  const store = createNewsSeenStore(storage);
+  const wholeCatalog = items('es-new', 'en-new', 'es-old', 'en-old');
+
+  assert.deepEqual([...store.compare(wholeCatalog)].sort(), ['en-new', 'es-new']);
+  assert.equal(store.markSeen(items('es-new', 'es-old')), true);
+  assert.deepEqual([...store.compare(wholeCatalog)], ['en-new']);
+  assert.deepEqual([...store.readBaseline()].sort(), ['en-old', 'es-new', 'es-old']);
+});
+
 test('duplicate and blank IDs do not create false new items', () => {
   const storage = memoryStorage({ [NEWS_SEEN_KEY]: JSON.stringify(['a']) });
   const store = createNewsSeenStore(storage);

@@ -80,6 +80,25 @@ test('mobile content feed normalizes resources, videos and localized news', () =
   assert.equal('isNew' in resource, false, 'source resource must not gain mobile-only fields');
 });
 
+test('mobile feed replaces Microsoft Office formatting noise with the first clean body paragraph', () => {
+  const feed = buildMobileContent({
+    news: [{
+      id: 'tca-doc',
+      lang: 'es',
+      title: 'Novedades en TCA Doc 1.0',
+      summary: 'Normal 0 21 false false false ES-TRAD X-NONE X-NONE Style Definitions table.MsoNormalTable { mso-style-name: Tabla normal; }',
+      body: 'TCA Doc incorpora nuevas mejoras de accesibilidad y funcionamiento.\n\nSegundo párrafo.',
+      sourceName: 'TecnoAccesible',
+      originalUrl: 'https://example.com/tca-doc',
+      publishedAt: '2026-09-23T08:00:00.000Z',
+      categories: ['Accesibilidad']
+    }]
+  });
+
+  assert.equal(feed.news[0].summary, 'TCA Doc incorpora nuevas mejoras de accesibilidad y funcionamiento.');
+  assert.doesNotMatch(feed.news[0].summary, /MsoNormal|Style Definitions|X-NONE/i);
+});
+
 test('mobile feed tolerates optional video text fields without inventing values', () => {
   const feed = buildMobileContent({
     resources: [],

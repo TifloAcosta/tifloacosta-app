@@ -509,8 +509,7 @@ const notificationRoute = createNotificationRouter({
         allowOriginalFallback: true
       });
     }
-    void nativeActions.openExternal(destination.url);
-    return true;
+    return nativeActions.openExternal(destination.url);
   },
   download: destination => openNormalDownload(destination.url)
 });

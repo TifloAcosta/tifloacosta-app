@@ -1,13 +1,13 @@
 [
   {
-    "id": "techcrunch-cde7ba68d9183c10",
+    "id": "techcrunch-2e32591749498d0c",
     "type": "news",
     "sourceId": "techcrunch",
     "sourceName": "TechCrunch",
     "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/22/were-already-fighting-yesterdays-battle-greeces-prime-minister-gets-candid-about-ai/",
+    "originalUrl": "https://techcrunch.com/2026/09/23/even-americans-who-use-ai-every-day-are-worried-about-it/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-23T04:59:08.000Z",
+    "publishedAt": "2026-09-23T16:49:58.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -16,22 +16,168 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "‘We’re already fighting yesterday’s battle’: Greece’s prime minister gets candid about AI",
-        "summary": "Most leaders on a trade mission stick to the pitch, but when I interviewed Greek Prime Minister Kyriakos Mitsotakis this week, he also admitted that no government is ready for what AI is about to do.",
-        "body": "Greek Prime Minister Kyriakos Mitsotakis came to San Francisco on Monday night to promote Greece, but he also did something that heads of state on trade missions don’t typically do. In front of roughly 250 founders, investors and operators, he said openly that he doesn’t have answers to many of the AI questions leaders around the world are more privately debating.\n\nThe prime minister, speaking with this editor at an event hosted by Endeavor Greece, the local arm of a global nonprofit that supports entrepreneurs in emerging and growth markets, described his Bay Area trip as partly a fact-finding mission. He’d spent the morning touring Tesla and Sequoia Capital, among other stops, with plans to head this week to the U.N. General Assembly in New York. But the trip was also meant to build bridges; indeed, he was pitching anyone in tech who might consider setting up shop in Greece, which is set to regain developed market status next year from MSCI, the influential index provider.\n\n“I think it’s another indication that the economy is doing well and that Greece is no longer treated as a special case,” Mitsotakis said.\n\nMitsotakis, who earned a master’s degree at Stanford and called the visit “a homecoming,” made the economic case first and foremost during our sit-down. Greece is paying down its debt at a record pace, and, he added, borrows more cheaply than the United States. “I don’t know if I should say this,” he told the crowd, smiling.\n\nIt’s not an apples-to-apples comparison. Interest rates are lower across the eurozone, which accounts for part of the difference. But it makes for a strong talking point. As of this writing, Greece’s 10-year bond yield sits around 4.3%, versus roughly 5% for U.S. Treasuries. That would have been completely unimaginable during the debt crisis, when Greek yields topped 40% in 2012.\n\nMitsotakis was just as eager to talk about how Greece has spent its money. For example, he said that much of the roughly €36 billion Greece received from the EU’s post-COVID recovery fund went into digital infrastructure, including an online portal that lets Greeks handle government paperwork without waiting in line, and a new supercomputer assembled with the help of Hewlett Packard Enterprise in the port town of Lavrio that he said will come online within months to power AI and scientific research in Greece.\n\nUnsurprisingly, he also listed policy changes that can matter even more to tech companies. Greece has changed how stock options are taxed, he said, loosened labor laws, and offers returning Greeks far lower taxes for up to seven years.\n\nWe also talked about the country’s growing array of visa programs, though when asked how he measures the success of these, Mitsotakis said the government “still [has] work to do” on processing speed.\n\nHe separately volunteered that there has been a stark turnaround at Greece’s public universities, which he said long embraced a “radical leftist approach,” looking down on corporations, and now spin out startups.\n\nMitsotakis’s larger goal is to win back the talent Greece lost during its debt crisis, when many of the country’s younger citizens left because they had no other options. He also sees an opening: with American work visas getting harder to obtain, he suggested, more founders should consider hiring in Greece.\n\nIt did strike me that the conversation took on a different tone when it turned to AI’s effects on society. Mitsotakis was refreshingly candid about not having a finished plan.\n\nGreece, for example, is instituting a ban on social media for children under 15 as of this coming January, a step many countries are similarly weighing or adopting . He suggested the ban may already be behind the times, however, considering the seemingly addictive nature of AI chatbots.\n\n“Sometimes I feel that we’re already fighting yesterday’s battle,” he said. “What does it mean for our kids to grow up with digital companions or boyfriends or girlfriends?”\n\nHe was similarly cautious about AI in classrooms. Greece has run an education pilot with OpenAI aimed at reducing teachers’ administrative work, and he sees promise in personalized AI tutors. But he said the benefits depend on AI not replacing “the hard work of learning the basic skills.” He warned that students are already using chatbots to do their homework, adding: “complacency is a human trait.”\n\nWhen I asked him about AI infrastructure — Greece has been courting data center investment — he described the country as an outlier. Despite growing opposition to data centers across the globe because of the amounts of electricity and water required to power them, Mitsotakis said that “we have not had any significant reaction” in Greece. He pointed to the fact that Microsoft is building a cluster of data centers near Athens and that AWS recently announced a deal with Greece’s largest utility to build the country’s biggest data center in a former coal region. There, he said, the projects are welcomed.\n\nUnlike many politicians, he didn’t pretend to have answers about what comes next, either. Job displacement “is something which is going to happen,” he said, “and no government and no society is prepared for the speed with which it will happen.”\n\nAs for the debate over whether AI development should slow down, he sided with the leaders of the frontier labs who’ve been calling for one. “If the people who are building the models are telling us, ‘We’re not really sure exactly what’s happening with these models,’” especially in how they improve themselves, he said, “we need to listen to them.”\n\nSome form of “smart regulation” is inevitable, he observed, and the U.S. will largely decide what it looks like. Still, he added, Greece would happily host the conversation.\n\nHumanity has created “a form of intelligence that is very quickly exceeding the capacity of the most advanced organ that evolution has ever created,” said Mitsotakis, raising the question of what it means to be human. Bringing together technologists with “the social scientists, the philosophers, the historians,” he said, “I cannot think of a better place to really have these discussions.”\n\nHe has a point. Athens is where Socrates badgered his fellow citizens in the agora, the city’s ancient public square, about what makes a good life and a just society. Maybe the questions Silicon Valley is still debating will end up being settled there, too?"
+        "title": "Even Americans who use AI every day are worried about it",
+        "summary": "The report suggests that greater exposure will not resolve the unease around the technology, nor reduce public support for AI regulation.",
+        "body": "People across the world are increasingly turning to AI for everyday tasks, from looking up recipes and doing their homework to researching work projects or making presentations.\n\nBut using AI every day doesn’t necessarily mean people are feeling comfortable with its implications for the world: About 68% of Americans who use AI daily are worried about it, according to a new survey conducted by opinion research firm Gallup, and concern about the tech skews even higher among people who use it less frequently.\n\nComing at a time of intense debate around the dangers of AI , quick developments around AI safety , the implications of AI going rogue , and accusations of anti-competitive behavior , these findings complicate the notion that adoption can serve as a straightforward measure of public enthusiasm for AI.\n\nCommissioned by Microsoft, the Gallup study currently has results from 37 countries, where researchers polled about 1,000 people in each country between April and July. The project will eventually span 140 countries. Notably, India, a large population of tech users, is not currently part of the reported results, nor is Australia and Malaysia.\n\nThe findings appear to put the U.S. at the anxious end of an international chart even as people in other parts of the world expect the technology to improve their lives. According to Gallup, Western countries are most concerned about AI, with the United States leading in anxiety — 74% Americans reported feelings of worry, and only 36% expect AI to mostly help the country.\n\nOther wealthy Western countries showed a similar mix of relatively frequent use and concern. In Canada, for example, 29% of those surveyed reported using AI daily, and of those, more than half expressed concerns about the impact of the technology. Overall, 64% of Canadians aware of AI said it worried them.\n\nThey’re likely not imagining it. There’s certainly been a growing wave of discontent around AI , with tech companies laying off hundreds of thousands of employees in order to invest in AI, shrinking entry-level openings , life-ending cases of AI psychosis , and dire warnings from AI leaders like Anthropic CEO Dario Amodei, who have warned that the tech will wipe out jobs en masse.\n\nThe survey paints a different picture in the rest of the world, however. In Singapore, which had the highest portion of daily users in the study (46%), more than 80% of those aware about AI expect the tech to improve their everyday lives, and 77% think it’ll help the country. China, where 35% of people report using AI daily, most people expect it to help the country. The story is similar in Israel.\n\nStill, optimism about AI doesn’t necessarily appear to translate to trust in the tech’s accuracy. According to Gallup, people who use AI daily were generally more trusting of its results, especially in high-adoption countries like Singapore, Israel and China, while less frequent users remain skeptical across the board. In the U.S., only 45% of daily users expressed that level of confidence. Altogether, only 36% (median) of the people surveyed said they trust AI’s results a lot.\n\nOverall, though, Gallup reports that positivity about AI outweighs negative sentiments: In 34 of the 37 countries surveyed, people mostly reported feeling curious about the tech, with a fewer number saying they felt happy or excited. Only about 32% of those surveyed said they felt worried about AI. Positive emotions seem to be most common in China (90%), Singapore (89%) and Kenya (87%).\n\nIt’s not clear how much sentiment in some countries, especially China, might have changed since the survey ended in July, as the pace of AI development has lately burgeoned into a matter of international importance. AI safety is one of the major topics on the table for discussion when U.S. President Donald Trump and Chinese Premier Xi Jingping meet on Thursday.\n\nNotably, China’s head of the Ministry of State Security, Chen Yixin, wrote in a recent article that AI will have “a systemic impact on the political and security environment,” and could threaten China’s “political security, institutional security, and ideological security.”\n\n“One of the clearest findings is that attitudes toward AI are multidimensional. People can be curious about AI, expect it to be beneficial and use it frequently while still being worried about it. Similarly, they can see considerable potential in AI while remaining skeptical about whether the information it provides is accurate,” Pablo Diego-Rosell, senior scientist at Gallup, told TechCrunch.\n\nWhile the report paints a picture of optimism colored by some concern, it’s nevertheless true that AI worries are increasingly becoming part of public discourse. People who rely on AI for day-to-day tasks may end up supporting tougher rules or resisting its use in hiring, healthcare, education or government. And there’s certainly an argument to be made that training and serving AI models can harm the climate, and their unregulated use can disrupt cybersecurity, diminish content ownership, upset the creative arts fields, or harm data privacy.\n\nAt the end of the day, the report suggests that greater exposure alone will not resolve the unease around the technology. Still, given the amount of money that’s being invested, AI will likely continue proliferating even as disputes rage around where it belongs and what limits should be placed around it."
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-8ff188f7b8d136c1",
+    "id": "the-verge-2e7b392b978d4efd",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/999443/bernie-sanders-ai-superintelligence-ban-act",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-23T16:23:05.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Bernie Sanders proposes banning ‘superintelligence’ and putting violators in prison",
+        "summary": "Sen. Bernie Sanders (I-VT) and Rep. Greg Casar (D-TX) have introduced new legislation that would ban anyone from developing artificial superintelligence - a technology the bill describes as capable of the \"destruction or disempowerment of humanity,\" including by overthrowing the government. Under the Ban Artificial Superintelligence Act, AI leaders would face up to 20 years […]",
+        "body": "Sen. Bernie Sanders (I-VT) and Rep. Greg Casar (D-TX) have introduced new legislation that would ban anyone from developing artificial superintelligence - a technology the bill describes as capable of the \"destruction or disempowerment of humanity,\" including by overthrowing the government. Under the Ban Artificial Superintelligence Act , AI leaders would face up to 20 years in prison for violating the law.\n\nThe bill doesn't just take aim at the more powerful superintelligence, a term President Donald Trump said the US will use in place of \"AI\" in official documents. It would also pause the development of advanced AI systems, which lawmakers …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-6e29bd4c615909aa",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/gadgets/999406/blue-yeti-2-usb-microphone-price-availability",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-23T16:01:45.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Logitech’s new Blue Yeti 2 mic adjusts itself to where you are",
+        "summary": "The original Blue Yeti has been one of the most recognizable go-to USB microphones for content creators since it launched in 2009, and now it finally has a successor. Launching today under Logitech G, the Blue Yeti 2 adds some modern upgrades, including an interactive LED display, AI de-noising, and a proximity based voice sensor […]",
+        "body": "The original Blue Yeti has been one of the most recognizable go-to USB microphones for content creators since it launched in 2009, and now it finally has a successor. Launching today under Logitech G, the Blue Yeti 2 adds some modern upgrades, including an interactive LED display, AI de-noising, and a proximity based voice sensor - which resolves a notable flaw with its predecessor's design while still paying homage to it.\n\nIt's available in black or white color options for $159.99, which is comparatively cheaper than Shure's popular MV7 series USB microphones, which are the current choice for podcasters and start at $299. It's also interest …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-9c199cbaec369974",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2266105/meta-connect-2026-live-blog-ai-vr/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-23T16:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "gafas-inteligentes",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Meta Connect 2026 live: Updates from Mark Zuckerberg's keynote on AI glasses, VR and more",
+        "summary": "More smart glasses and possibly a VR headset are expected today",
+        "body": "More smart glasses and possibly a VR headset are expected today\n\nMeta Connect used to be all about VR, but in recent years, the event has come to be the launchpad for all of the company's hardware, Metaverse and AI projects. This year, we're expecting CEO Mark Zuckerberg to unveil a slew of new products across its smart glasses, headsets and AI portfolios. In fact, its own website for Connect says that the next two days will showcase \"our latest breakthroughs in AI technologies, AI glasses and VR — designed to help you connect, create and do more of what you care about most.\"\n\nZuckerberg is slated to present the keynote speech at 7PM ET (4PM PT) later today, with additional developer talks and sessions scheduled for tomorrow. Our senior reporter Karissa Bell will be on the ground in Menlo Park, CA, reporting live from the company's headquarters. She'll be joined by myself and Devindra Hardawar in covering the news from the keynote live.\n\nAs a reminder, the company already unveiled a new series of Meta Glasses earlier this year , but is expected to show off a pair today that doesn't have cameras onboard. It's also been awhile since we've seen a Quest XR/VR headset from Meta, and it's quite likely that we'll learn more about a new model today. And in case you're getting deja vu , you might be remembering that another company had just launched a new pair of smart glasses last week . But Zuckerberg and co. most likely will have far more than one product and some weird demos to show off today.\n\nIt'll be a few more hours until Meta kicks off, and our liveblog will begin slightly before that. While you wait, we welcome\n\nCome back soon, we'll be starting this liveblog soon. Meanwhile, leave us a comment and we'll do our best to respond!"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-459da25cfac7cf49",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/23/youtubes-conversational-video-editing-tool-lets-creators-make-edits-in-natural-language/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-23T15:46:57.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "YouTube’s conversational video editing tool lets creators make edits in natural language",
+        "summary": "Creators will be able to use AI in a conversational chat interface to help them edit videos.",
+        "body": "YouTube announced a bunch of new creator tools at Wednesday’s Made On YouTube event, including a conversational editing tool that uses natural language to refine both long- and short-form footage.\n\n“A one-hour shoot can be 10 hours or more in the edit. So, what if we could speed that process along without sacrificing any of our creative control?” YouTuber Happy Kelli shared onstage.\n\nIn a chat interface, creators give the AI instructions on how to help them put a video together. In Happy Kelli’s example, she shares footage of her dancing in different outfits and asks the AI to select the best take for each outfit. Then, she adds music and transitions that go along with the dance.\n\n“If at any point I want even more control, I can jump back into the editing timeline and manually adjust things myself,” she said. “Overall, conversational editing turns the process of editing into a literal conversation with an infinitely patient helper. It’s a collaborative partner that edits with you, not for you.”\n\nThis feature can also add text overlays, remove pauses in speech, and more. It can also make suggestions to the creator based on the context of the conversation.\n\nWhile some creators may find that this tool saves them time and speeds up the often tedious process of video editing, others may feel that their individual editing style sets their videos apart and be reluctant to relinquish control to an AI.\n\nConversational editing will be available for both YouTube Shorts and the YouTube Create app in early 2027."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-35aa3bdd2a0a36f9",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/23/youtube-music-gets-more-conversational-with-new-ai-features/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-23T15:19:30.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "YouTube Music gets more conversational with new AI features",
+        "summary": "Built directly into the YouTube Music app, Ask Music lets users describe what they want to hear in everyday language rather than searching for individual songs or artists.",
+        "body": "YouTube is adding new AI-powered features to YouTube Music that aim to make it easier for listeners to discover music, explore artists, and find podcasts they may otherwise miss.\n\nAnnounced at this year’s Made On YouTube event, the updates include “Ask Music,” a conversational tool for music and podcasts, and “Your Podcast Lineup,” a personalized audio guide designed to help listeners discover new shows.\n\nBuilt directly into the YouTube Music app, Ask Music lets users describe what they want to hear in everyday language rather than searching for individual songs or artists. The feature works across YouTube Music’s catalog of more than 300 million songs, including official recordings, remixes, live performances, covers, and DJ sets. Users can use it to build custom listening queues, explore an artist’s motivations, or dig deeper into music history.\n\nYouTube explains that, instead of manually searching, the user simply types the request as if they were asking a friend. For instance, someone could ask Ask Music to create a mix based on the tracks that inspired a particular song. Users can also ask other questions, such as who played bass on a particular song or other details about its creation.\n\nYouTube Music is also introducing Your Podcast Lineup, a personalized AI-generated audio guide for podcast discovery.\n\nThe feature is designed for a familiar problem: There are more podcasts than most people have time to listen to. Even listeners who already have a list of favorite shows can struggle to keep up with new episodes, let alone find new ones.\n\nYour Podcast Lineup will appear on the podcast page in the YouTube Music app. Each week, it will provide a short spoken preview of recommended shows and explain why they might appeal to the listener. It can then move directly into suggested episodes.\n\nSpotify recently introduced an AI-powered feature that follows a similar direction. Its personal podcasts feature uses AI to generate podcast episodes based on their interests and prompts.\n\nThe new features are part of YouTube’s broader push to use AI throughout its services. Last year, YouTube Music experimented with AI-powered music hosts that provide stories, fan trivia, and commentary related to what users are listening to.\n\nBoth updates are coming soon to YouTube Music and YouTube Premium subscribers worldwide."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-bb5eeb1339933e35",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/gadgets/999380/una-watch-sports-gps-modular",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-23T15:01:16.000Z",
+    "categories": [
+      "tecnologia-general",
+      "movilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "This $199 GPS sports watch is repairable, modular, and open-source",
+        "summary": "The Una Watch costs less than most Garmin watches now that its price has been lowered from the Kickstarter offer of $350 to $199, but its modular, repairable design grabbed my attention first. It features a 1.2-inch MIP LCD display and up to 10 days of battery life, similar to the Garmin Forerunner 70 or […]",
+        "body": "The Una Watch costs less than most Garmin watches now that its price has been lowered from the Kickstarter offer of $350 to $199, but its modular, repairable design grabbed my attention first. It features a 1.2-inch MIP LCD display and up to 10 days of battery life, similar to the Garmin Forerunner 70 or the Pebble Round 2 I preordered earlier this year. Like Pebble's revamped watches , the Una Watch is also open-source , including its SDK, housing, and circuit boards, but it has more fitness features out of the box than Pebble's watches currently offer. Una is also encouraging users to build their own apps for it, including with vibe coding - …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-28268d95ba3bc910",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/22/public-beta-debuts-for-ipados-27-2-and-more-heres-whats-new/",
+    "originalUrl": "https://9to5mac.com/2026/09/23/ios-27-2-makes-facetimes-best-new-feature-even-better/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-23T00:32:42.000Z",
+    "publishedAt": "2026-09-23T14:45:32.000Z",
     "categories": [
       "apple",
       "tecnologia-general"
@@ -40,22 +186,46 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Public beta debuts for iPadOS 27.2 and more, here’s what’s new",
-        "summary": "Apple has a round of new public beta updates rolling out today, including iPadOS 27.2, watchOS 27.2, and more. Here’s what’s new. more…",
-        "body": "Apple has a round of new public beta updates rolling out today, including iPadOS 27.2, watchOS 27.2, and more. Here’s what’s new.\n\nIt’s been a big week or so for Apple software releases. It started last Monday, when Apple launched major new software versions for all users, including:\n\nThen on Wednesday, the company surprised us with 27.2 developer updates for its full lineup of platforms. 27.1 is reportedly being skipped in beta because it will focus primarily on iPhone Duo-related changes.\n\nNow today, public beta testers get early access to Apple’s new 27.2 releases too.\n\niPadOS 27.2, watchOS 27.2, tvOS 27.2, and more are now available in public beta. The most notable changes are found in iPadOS and iOS.\n\niPadOS 27.2 has the all-new Health app with Apple Intelligence features, including Insights and Longevity tabs, and more. It also introduces Profiles for the Apple TV app , a long overdue feature for parents whose kids watch video on the iPad.\n\nThe update additionally brings over a handy Siri AI feature previously exclusive to macOS Golden Gate. And Siri AI expands to a bunch of new languages too.\n\nIf you’re interested in installing today’s public betas, go to the Software Update screen in Settings and make sure you’re opted into beta updates.\n\nHave you installed the new 27.2 public betas? How are they running for you? Let us know in the comments.\n\n* Buy iPad with 15% discount from Apple refurbished"
+        "title": "iOS 27.2 makes FaceTime’s best new feature even better",
+        "summary": "iOS 27 introduced Dual Capture support for FaceTime, letting you show your front and rear camera views at the same time. And in iOS 27.2, that upgrade is expanding to now support Group FaceTime calls. more…",
+        "body": "iOS 27 introduced Dual Capture support for FaceTime, letting you show your front and rear camera views at the same time. And in iOS 27.2, that upgrade is expanding to now support Group FaceTime calls.\n\nFaceTime is a popular iPhone feature that, at its core, hasn’t changed much since first coming on the scene many years ago.\n\nBut iOS 27 introduced the first substantial upgrade in a while: Dual Capture support .\n\nWith Dual Capture, you can have your front and rear camera views active at the same time during your FaceTime call. Just hit the ‘Flip’ button on the viewfinder and whoever you’re talking to will see both of your camera views simultaneously.\n\nNote: Dual Capture requires an iPhone 17 or later, and participants in the call need to be running iOS 27, iPadOS 27, or macOS 27 to see the dual camera streams.\n\niOS 27.2 is currently in beta , but it comes with a great upgrade for Dual Capture: Group FaceTime calls are now supported too .\n\nIn iOS 27.0, you can only use the feature in one-on-one calls. But if you join the iOS 27.2 beta, or just wait a few weeks for the public launch, you’ll get Dual Capture for all of your Group FaceTime calls as well.\n\nHave you used Dual Capture in FaceTime yet on iOS 27? How did it work for you? Let us know in the comments.\n\n* Buy iPhone with 15% discount from Apple refurbished"
       }
     },
     "media": null
   },
   {
-    "id": "the-verge-a1b68597b269d1ca",
+    "id": "9to5mac-03f5e52bca98d0b3",
     "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/999167/openai-elite-mathematicians-panel",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/23/next-years-iphone-pro-models-have-near-borderless-design-report/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-23T00:17:17.000Z",
+    "publishedAt": "2026-09-23T14:21:35.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Next year’s iPhone Pro models have ‘near-borderless’ design: report",
+        "summary": "Apple reportedly has a big redesign coming to next year’s iPhone Pro models, and a new ETNews report outlines what to expect from the “near-borderless” design and display. more…",
+        "body": "Apple reportedly has a big redesign coming to next year’s iPhone Pro models, and a new ETNews report outlines what to expect from the “near-borderless” design and display.\n\niPhone 18 Pro just arrived last week, and iPhone Duo will follow next month. But with Apple’s long lead times on iPhone development, it’s never too early for rumors about next year’s models.\n\nWe’ve long heard that Apple is preparing a unique design for its 20th anniversary iPhone Pro models next year. And today a new ETNews report offers the latest on what to expect.\n\nKim Yeong-ho writes that Apple “is still expected to move forward with a four-sided bending display” that’s “designed to create a near-borderless, full-screen appearance by curving the display around all four edges of the smartphone.”\n\nSo the defining characteristic of the 20th anniversary models seems very much on track, contrary to skepticism from Wall Street firm Jefferies last month.\n\nETNews does say, however, that two display technologies previously being considered for the new iPhone Pro models will not be implemented after all.\n\nApple is expected to postpone the adoption of two advanced display technologies—Color Filter on Encapsulation, or COE, and Low-Temperature Polycrystalline Oxide Plus, or LTPO+—that had been under consideration for its 20th-anniversary iPhone next year.\n\nThese technologies could have enabled, respectively, a thinner panel and greater power efficiency.\n\nIndustry sources reportedly attribute Apple’s decision to two main factors: higher memory pricing, which make it harder for Apple to absorb additional display costs, and the company seeking solutions that are better than current COE and LTPO+ options.\n\nIt doesn’t sound like either upgrade would have been especially substantial. What users will no doubt care more about is that the new “near-borderless” design is intact.\n\nHow interested are you in the 20th anniversary iPhone Pro models? Let us know in the comments.\n\n* Buy iPhone with 15% discount from Apple refurbished"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-065bafc3760ac0a2",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/cars/2026/09/aftermarket-driver-assist-under-federal-probe-following-fatal-crashes/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-23T14:20:23.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -64,83 +234,130 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "OpenAI wants to consult elite mathematicians about how to not fumble again",
-        "summary": "After turning a string of spectacular mathematical results into a reputational crisis, OpenAI is consulting human mathematicians to help it figure out a less disastrous path forward. On Monday, the company announced a new independent panel of mathematicians tasked with advising it and other AI companies on their interactions with mathematical research and the wider […]",
-        "body": "After turning a string of spectacular mathematical results into a reputational crisis , OpenAI is consulting human mathematicians to help it figure out a less disastrous path forward.\n\nOn Monday, the company announced a new independent panel of mathematicians tasked with advising it and other AI companies on their interactions with mathematical research and the wider mathematics community, including how new results are presented and released. Its abrupt arrival caught many mathematicians by surprise. Researchers told The Verge the group is a good first step, but many said they were left with basic questions about what it will actually do, how …\n\nRead the full story at The Verge."
+        "title": "After multiple deaths and injuries, NHTSA is investigating comma.ai",
+        "summary": "Feds know of 5 crashes where cars using comma.ai devices hit slow or stopped vehicles.",
+        "body": "Aftermarket devices that can boost or augment a vehicle’s native advanced driver assistance systems are the target of a new federal investigation this week. The National Highway Traffic Safety Administration’s Office of Defects Investigation says it knows of five crashes in which drivers using devices from comma.ai crashed into stopped or slow-moving cars. Two of the crashes resulted in three deaths, and 11 people were injured in four of the five crashes, some seriously.\n\nComma.ai was the brainchild of George Hotz, who rose to prominence at the start of the last decade by jailbreaking iOS and hacking Sony PlayStations. In 2015, Hotz turned his attention to partially automated driver assists, which were gaining attention following Tesla’s exploits with its Autopilot system. Hotz first modified his own Acura to give it a more advanced driver assist that let him take his hands off the wheel, with the goal of selling his system to Tesla and replacing Mobileye as the company’s supplier.\n\n(Mobileye dropped Tesla as a customer the following year after becoming unhappy with the way the car company was using Mobileye products in unintended ways.)\n\nRead full article\n\nComments"
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-14d8e00f6f6aa1a2",
+    "id": "9to5mac-bd8b5596c9a36695",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/22/apple-pay-is-getting-even-better-with-four-new-features/",
+    "originalUrl": "https://9to5mac.com/2026/09/23/tvos-27-2-adds-new-homepod-surround-sound-feature-to-apple-tv-4k/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-22T23:57:57.000Z",
+    "publishedAt": "2026-09-23T13:36:11.000Z",
     "categories": [
       "apple",
-      "tecnologia-general",
-      "apps-accesibles"
+      "tecnologia-general"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Apple Pay just got even better with four new features and more",
-        "summary": "Apple Pay is a go-to feature for iPhone users when shopping in stores, online, and in apps. Apple recently announced four new features that make Apple Pay even better. Here’s how they work, plus one major expansion that’s rolling out now. more…",
-        "body": "Apple Pay is a go-to feature for iPhone users when shopping in stores, online, and in apps. Apple recently announced four new features that make Apple Pay even better. Here’s how they work, plus one major expansion that’s rolling out now.\n\nOne of my favorite changes in iOS 27 is the redesigned Apple Pay checkout interface . The new interface makes it much easier to switch between different cards during the checkout flow on websites and in apps.\n\nIn the new design, you can easily swipe between cards on the main Apple Pay checkout screen. You can also tap on a card to view a grid of all your available Apple Pay cards.\n\nThe design also makes it easier to see information about individual cards, including rewards, balances, pay later options, and more.\n\niOS 27 was released to everyone last week. You can update in the Settings app on your iPhone.\n\nApple and American Express recently announced a new partnership that lets you pay with American Express rewards points.\n\nWhen shopping online or in apps with an American Express card, you’ll see a new “Use Rewards” option alongside your available Membership Rewards points balance. You can apply points to cover all or part of your purchase, right in the Apple Pay checkout flow.\n\nAmerican Express points redeemed via Apple Pay are valued at 0.7 cents each. For example, this means 10,000 points can be redeemed for $70 applied towards your purchase.\n\nIn iOS 27, Apple is adding a new “Tap to Share” feature that integrates with Apple Pay on iPhone for in-store shopping.\n\nThis feature is an extension of Tap to Pay on iPhone. Apple explains:\n\nWith just a tap, customers can connect to a participating merchant’s iPhone for a more personalized and faster in-store purchase experience that allows for secure sharing of information, such as email and other contact information, shipping address, loyalty rewards information, and more.\n\nCustomers will also be able to view the items in their basket in real time so they can keep track of what they’ve purchased and ensure all sales and discounts are properly applied.\n\nWhen done, shoppers can complete the checkout on their iPhone using Apple Pay.\n\niPhone users with select banks can manage their debit card balances directly in the Apple Pay interface. According to Apple, you’ll be able to use Apple Pay to add money to a supported debit card directly in Apple Wallet or when checking out.\n\nThis one isn’t really a new feature developed by Apple. Instead, it’s something that should’ve happened years ago finally coming to fruition. Walmart has announced that it is finally starting to roll out support for Apple Pay. Apple Pay is also rolling out to Sam’s Club as part of this initiative.\n\nWalmart started rolling out Apple Pay (and broader contactless support) this week in Arkansas. The retailer says it launch for all stores in the United States by the end of this year.\n\nAs Apple Pay continues to increase in popularity and prevalence among retailers, it’s great to see Apple continue to improve the experience. Personally, Apple Pay is my checkout payment method of choice basically everywhere I shop — whether that’s online or in store.\n\nHow often do you use Apple Pay? What are your favorite Apple Pay features? Let us know down in the comments.\n\nFollow Chance : Threads , Bluesky , Instagram , and Mastodon ."
+        "title": "tvOS 27.2 adds new HomePod surround sound feature to Apple TV 4K [U]",
+        "summary": "Apple TV users have long been able to set HomePods as speakers for audio output. But tvOS 27.2 looks poised to offer a big upgrade, with HomePod surround sound now available in the beta. Update : Following publication, leaker pdfu posted on X that the feature referenced below is in tvOS 27.0 and isn’t actually for surround sound yet, despite additional evidence of the feature in 27.2 code. Original article below. more…",
+        "body": "Apple TV users have long been able to set HomePods as speakers for audio output. But tvOS 27.2 looks poised to offer a big upgrade, with HomePod surround sound now available in the beta.\n\nUpdate : Following publication, leaker pdfu posted on X that the feature referenced below is in tvOS 27.0 and isn’t actually for surround sound yet, despite additional evidence of the feature in 27.2 code. Original article below.\n\nEarlier this month, it was discovered that HomePod 27 beta 8 included references to a forthcoming surround sound feature for Apple TV.\n\nNow as spotted by FlatpanelsHD , that feature has made an appearance in tvOS 27.2 beta 2.\n\nAs seen in the screenshot above, the Apple TV 4K running tvOS 27.2 is configured to send audio to four HomePods total—two full-size models and two HomePod minis.\n\nMore details are shared by Rasmus Larsen on FlatpanelsHD’s website :\n\nVia the Home app, you can now pair two sets of HomePods, four in total, wirelessly to Apple TV 4K. However, the feature is not yet fully baked, as you cannot assign roles to the four speakers, for example rear speakers – they play the same audio from the front and rear. It works with Atmos and surround sound from video sources, but menu and game audio only plays through the front speakers.\n\nIt’s been widely rumored for some time that Apple is working on a big overhaul and expansion of its Home product line. A new ‘HomePad’ device along with new Apple TV 4K and HomePod models are expected to launch in October.\n\nSurround sound could be a great addition for HomePod and Apple TV users. But it’s also likely a good sign that Apple will indeed launch new Home products soon.\n\nAre you interested in a surround sound HomePod feature for Apple TV 4K? Let us know in the comments."
       }
     },
     "media": null
   },
   {
-    "id": "engadget-59ecef6e7f9b1375",
+    "id": "cti-once-601a7702b816fea6",
     "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2264685/how-to-remove-voice-button-iphone-imessages-ios-27/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-22T23:30:00.000Z",
+    "sourceId": "cti-once",
+    "sourceName": "CTI de la ONCE",
+    "sourceUrl": "https://cti.once.es/",
+    "originalUrl": "https://cti.once.es/noticias/novedades-de-accesibilidad-en-ios-27",
+    "originalLanguage": "es",
+    "publishedAt": "2026-09-23T12:00:00.000Z",
     "categories": [
-      "tecnologia-general",
+      "tecnologia-accesibilidad",
       "apple"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
-      "en": {
-        "title": "iOS 27: How to hide or replace the audio button in iMessages",
-        "summary": "The fact that the \"send\" button shares real estate with the \"record\" button can make dealing with iMessage aggravating.",
-        "body": "You can make that button actually useful.\n\nHave you accidentally tapped the audio button inside iMessage's text input bar when sending a message? Justin Bieber went viral with an Insta post complaining about how frequently it happened to him.\n\nThe problem is that tapping the button launches a voice recording session, during which your iPhone will stop playing music so it can record the message it thinks you want to send.\n\nBieber became frustrated enough at how often this accidentally happened to him while texting that he wrote, \"The send button should not have multiple functions in the same spot,\" and joked that he would put everyone at Apple in a \"choke hold\" until it got fixed.\n\nHis post generated thousands of likes, reposts and reactions. We don't know if Apple was responding to Bieber or not, but it has made a change to ease the problem. iOS 27 now gives you a choice, permitting you to choose between continuing to display the default waveform-like record icon, a microphone icon for quick access to dictation, or even nothing at all.\n\nStarting with iOS 27, new choices are available in Settings > Apps > Messages > Show in Text Field. You can select one of three options:\n\nWhen you return to iMessages, you should see your choice appear in the text entry field. If it doesn't, then force quit the app, open it again, and the change should appear.\n\nNow even Bieber should no longer have this problem.\n\nYou don't lose any functionality when you remove these buttons from iMessage; all the options remain\n\nYou just need to know where to look:\n\nApple made several improvements in iMessage with iOS 27. One nice enhancement (possibly introduced in preparation for the larger display available on the iPhone Duo ) is a new Drawing app that lets you send sketches and handwritten notes, and it provides markup tools within iMessage.\n\nApple also introduced a new AI tool that suggests useful words and phrases and can automate tasks within a conversation, such as adding items to Reminders or Notes. It is also now possible to use one number across two separate iPhones . Finally, Apple's messaging app now offers improved RCS support , including the ability to edit and unsend messages."
+      "es": {
+        "title": "Accesibilidad y Tecnología Novedades de accesibilidad en iOS 27",
+        "summary": "El 14 de septiembre, Apple liberó la última versión de su sistema operativo iOS 27.0 para dispositivos móviles, en la que una vez más, entre sus novedades, ha implementado funciones de accesibilidad que facilitan la adaptación e integración de las personas con discapacidad.",
+        "body": "El 14 de septiembre, Apple liberó la última versión de su sistema operativo iOS 27.0 para dispositivos móviles, en la que una vez más, entre sus novedades, ha implementado funciones de accesibilidad que facilitan la adaptación e integración de las personas con discapacidad.\n\nEn el siguiente enlace se puede acceder a todas las novedades de iOS 27:\n\nhttps://www.apple.com/es/os/ios/\n\nEn el CTI se ha elaborado un extenso informe en el que se recopilan novedades y errores detectados en las pruebas realizadas, y también otros que han sido identificados gracias al aporte de algunos usuarios y de contenidos publicados en el portal AppleVis.\n\nCabe señalar que, en el momento de redactar este documento, iOS 27 se encuentra en su lanzamiento inicial por lo que algunos de los aspectos aquí recogidos podrían variar en versiones posteriores.\n\nPara acceder a esta información, puede pulsar en el siguiente enlace, donde podrá descargar una versión en pdf.\n\nDescargar informe en pdf\n\nSi lo desea, también hay disponible una versión en HTML, pulsando en el siguiente enlace.\n\nAccede al informe en html"
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-e1cf43ec00092bd2",
+    "id": "engadget-8f6f328da20d9162",
     "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/22/apple-releases-first-ios-27-2-public-beta-with-new-iphone-health-app/",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2265219/chatgpt-tasks-never-use-for/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-22T23:06:29.000Z",
+    "publishedAt": "2026-09-23T12:00:00.000Z",
     "categories": [
-      "apple",
       "tecnologia-general",
-      "apps-accesibles"
+      "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Apple releases first iOS 27.2 public beta with new iPhone Health app",
-        "summary": "Six days ago, Apple released iOS 27.2 developer beta 1, skipping over iOS 27.1 beta. Following yesterday’s developer beta 2 release, Apple has now issued the first iOS 27.2 public beta version, with the new iPhone Health app included. Apple has also turned on the ability to schedule and purchase labs through Quest Diagnostics from the new Health app in iOS 27.2 beta. more…",
-        "body": "Six days ago, Apple released iOS 27.2 developer beta 1, skipping over iOS 27.1 beta. Following yesterday’s developer beta 2 release, Apple has now issued the first iOS 27.2 public beta version, with the new iPhone Health app included. Apple has also turned on the ability to schedule and purchase labs through Quest Diagnostics from the new Health app in iOS 27.2 beta.\n\niOS 27.2 is the next release that will follow the official launch of iOS 27 from September 14. iOS 27.1 is just for iPhone Duo.\n\nApple has already detailed how the iOS 27.1 SDK will let developers take full advantage of the iPhone Duo display. You can see how apps will appear on iPhone Duo based on which iOS version they target here .\n\nApple released Xcode 27.1 beta on Friday, adding the iPhone Duo simulator and app development support for the new foldable iPhone.\n\nThe first iOS 27.2 developer beta included these changes:\n\niOS 27.2 is set to be released officially in October. For now, there’s both a developer beta and public beta path for iPhone users looking to test the new Apple Health app early.\n\nDo more with your Apple products\n\nAirPods 5 | Apple’s newest wireless headphones\n\nApple AirTag 2 | Add Find My tracking to keys, bags, bikes, more\n\nAirPods Pro 3 | Apple’s best wireless headphones\n\nWireless CarPlay Adapter | No more plugging in required\n\nBeats USB-A to USB-C Cable | The official CarPlay cable"
+        "title": "Never use ChatGPT for these five tasks",
+        "summary": "ChatGPT and other chatbots are useful for a lot, but remember that what you type into them is not protected and could cause trouble later.",
+        "body": "It's not a lawyer, it's not a doctor and it's definitely not your therapist.\n\nThe roster of people who have self-pwned by typing the wrong information into ChatGPT continues to grow. Samsung engineers, the acting director of America's cyber defense agency, self-represented litigants who provide citations to court cases that don't exist, a man who swapped table salt for sodium bromide after asking how to cut salt from his diet... the list is too long.\n\nEven everyone's favorite all-lowercase techbro CEO Sam Altman concedes that what you're sharing with ChatGPT isn't privileged. Speaking to podcaster Theo Von in July 2025, he highlighted how courts could force OpenAI to hand over chats, calling it \"very screwed up.\"\n\nTell a doctor, lawyer or therapist something and the law shields that conversation, but telling ChatGPT creates an audit trail. There's a non-zero risk here, given that ChatGPT chats have been subpoenaed, exposed by a share button, indexed by Google and preserved by a court order post-deletion — all in the last 18 months.\n\nSure, the chatbot is arguably a useful tool for research (check that case citations are real), coding (even the bugs ship), explaining concepts (there's no correlation between confidence and accuracy) and drafting (delete the prompt from your email before hitting send). But the areas below are where more than 900 million weekly users could create problems for themselves.\n\nSo to that end, don't use ChatGPT (or any other AI chatbot)...\n\nLaw and data science researcher Damien Charlotin maintains a public database that, to date, has logged more than 2,000 court decisions worldwide hamstrung by ChatGPT. These are cases where a judge has caught AI-fabricated citations, quotes or arguments in a filing.\n\nIt's not just self-representing litigants here. While they top the list with 1,175 records at the time of writing, lawyers come second with 815 records. It seems judges are growing tired of these shenanigans, with courts more recently imposing large fines well into the thousands-of-dollars range in a growing number of matters. Although the US makes up the largest number of cases in this data, judges in the UK, South Africa, Israel, Australia and Spain have all caught the same behavior. Where a tool was identified in those cases, ChatGPT was named more than any other.\n\nOpenAI addressed this issue last October when it updated ChatGPT's usage policies. Those policies now prohibit using its services for \"tailored advice that requires a license\" unless a licensed professional is involved. Beyond false citations, ChatGPT chats have no legal privilege, so anything typed into it about a live dispute is fair game for the other side's lawyers in discovery. Go ahead and ask general questions like what a tort is (great if you need help falling asleep), but save the detailed questions about your own dispute for an actual lawyer.\n\nOpenAI estimated last year that 0.15 percent of ChatGPT's weekly active users have conversations that include explicit indicators of potential suicide planning. That unfortunately works out to more than a million people per week, with hundreds of thousands more users exhibiting signs of psychosis or mania. Altman has said young people in particular treat ChatGPT as a therapist or life coach and, again, that nothing shields these chats.\n\nThe parents of 16-year-old Adam Raine sued OpenAI for wrongful death in August 2025, alleging that ChatGPT reinforced their son's suicidal ideation before his death. Since then, OpenAI has reworked its crisis responses with input from more than 170 clinicians. The company has also added parental controls to ChatGPT, though child safety experts are skeptical of ChatGPT for Teens , the age-gated version launched alongside those changes.\n\nResearchers have found that chatbots tend to reinforce a user's existing beliefs through sycophantic responses, in some cases feeding delusional thinking rather than challenging it. Describe an argument with your spouse, for example, and the model will work from your account's context alone, probably serving you an affirming verdict back regardless. Legislators are beginning to wake up to this, with states including Illinois, Nevada and Maine having passed laws prohibiting AI from delivering therapy or making therapeutic decisions.\n\nIt should go without saying that uploading confidential work documents to a third-party chatbot is always a bad idea. Unfortunately, too many people don't seem to realize this.\n\nIronically, Madhu Gottumukkala, the former acting director of the Cybersecurity and Infrastructure Security Agency, didn't. He uploaded at least four contracting documents marked \"for official use only\" to the public version of ChatGPT last summer, triggering security alerts and a Department of Homeland Security review. Even more ironically, the tool had been blocked for most other DHS employees at the time; Gottumukkala requested a special exception to use it. Senator Chuck Grassley followed up in February this year demanding an account of what was exposed, but predictably, nobody was really held to account. Gottumukkala was eventually shuffled elsewhere within the DHS.\n\nSamsung banned gen AI tools on company devices back in May 2023 after engineers notably pasted internal source code into ChatGPT. Accompanying that ban was an internal memo reasoning that data sent to such platforms lives on external servers where it's difficult to retrieve or delete, and could end up disclosed to other users. On consumer accounts, chats can also be used to train new models unless you've chosen to opt out. But opted-out data is still stored and breachable, and subject to legal process. Pasting client data or anything subject to employer controls or NDAs into a personal ChatGPT discussion is almost always going to be a fireable offense; Samsung's memo threatened exactly that.\n\nThe same October 2025 policy update that bans users from using ChatGPT as a lawyer also restricted people from seeking medical advice via the chatbot. HIPAA binds doctors, insurers and their business partners, but not OpenAI. Thus, health data that's legally shielded in a patient portal or between a doctor and patient has no such protection if it's disclosed to ChatGPT.\n\nResearchers from Northeastern University reported in July that while OpenAI has tightened ChatGPT's handling of suicide and self-harm, those safeguards largely don't extend to other conditions. Their work found that conversations involving conditions like eating disorders, insomnia, substance abuse and bipolar disorder didn't trigger the safeguards, and that hiding intent made every tested model's protections more likely to fail.\n\nIn a particularly wacky case of ChatGPT medical advice gone bad, a 60-year-old man spent three weeks in the hospital last year after asking the chatbot how to cut chloride from his diet. He ended up convinced that sodium bromide, a toxic substance with a long half-life, was a safe swap for table salt. He bought it online, took it for three months and wound up in an emergency department convinced his neighbor had poisoned him. While the clinicians in this man's case never saw his chat logs, ChatGPT offered bromide as a chloride substitution when they gave the same question to the bot themselves.\n\nFast Company found nearly 4,500 shared ChatGPT conversations lurking in Google search results last July. These included exchanges describing addiction, abuse and mental health struggles in enough detail to potentially identify their authors. The chats wound up indexed because people checked a \"make this chat discoverable\" checkbox in the share menu which, apparently, happened without them understanding what it did. OpenAI was quick to respond, killing the feature within a day of the report and purging conversations from Google.\n\nAs part of The New York Times' copyright lawsuit, OpenAI was ordered in May 2025 to retain every consumer chat log, deleted and temporary conversations included. That obligation ran until September 26, 2025, and logs preserved during that window remained accessible to the plaintiffs. A judge later terminated that order, meaning OpenAI no longer has to preserve all its ChatGPT data . But for four months, it did, and it could happen again.\n\nIt's vital to be aware that ChatGPT remembers what you tell it by default. That significantly raises the stakes for sensitive matters like passwords and account details, since they can persist across sessions and resurface in later conversations if mentioned even once. Passwords, one-time login codes, Social Security and passport numbers, full card or bank account details and photos of ID documents should never go into a prompt. Every one of those puts you at danger of identity theft if a chat is breached or otherwise accessed.\n\nAltman has called for an \"AI privilege\" (of course he has) to fix these confidentiality issues. But until lawmakers create one, the safe assumption is that anything typed into ChatGPT could someday be read back to you by someone else. If you aren't comfortable with that, don't put it into a prompt."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-c3e928d35f90d3f3",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2260043/dji-osmo-360-ii-review/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-23T11:30:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "DJI Osmo 360 II review: A little more video power, a lot more repairability",
+        "summary": "Replaceable lenses are the hot new feature for an action camera.",
+        "body": "The 8K 60 fps frame rate is nice, but the replaceable lenses are the hot new feature for an action camera.\n\nWe may receive a commission on purchases made from links.\n\nDJI's Osmo 360 was a solid first try at a panoramic action cam, but just over a year later it already has a successor designed to compete with its main rival, the Insta360 X6 . The new Osmo 360 II has some small but welcome improvements over the original, like higher frame rates, improved dynamic range and better low light capability. And unlike the original Osmo 360, it has lenses that can be replaced if you damage them while doing the punishing activities this camera was designed for.\n\nAs it did before, DJI priced this at €589 ($680), well below the Insta360 X6's €699 sticker . The biggest problem is that unlike its primary rival, the Osmo 360 II isn't available in the United States. That's too bad, because the improvements in video quality are very noticeable when you're shooting in bright sunlight or a city nightscape.\n\nThe Osmo 360 II has an ultrawide lens and 1/1.1-inch 8K square sensor on both sides, so it can \"see\" everything around it. Each camera captures a 180-degree view, which is stitched together in-camera to create a 360-degree video. While editing, you can then choose any angle you want. During the export, footage is \"de-warped\" or flattened to create a square video at up to 4K resolution, or you can export 360-degree video. You can also capture 120-megapixel panoramic still photos.\n\nThe new model has the same design as its predecessor, with a squarish shape that's thicker, wider and shorter than the Insta360 X6. There's a bright 2-inch, 314 x 556 touch display at the back along with a camera view (forward or backwards) and record button below. On the right side is the power button and USB-C connector tucked into a waterproof compartment, and the right side has a compartment for the battery and a microSD card slot.\n\nYou won't necessarily need a memory card, though. The Osmo 360 II is equipped with the same 105GB of internal storage as before, more than double the 47GB on the Insta360 X6. USB-C transfer speeds are the same at 600 MB/s, compared to 450 MB/s for the X6. With good cables and a fast external drive, I transferred 20GB of files (8.2 minutes of video) in about 32 seconds.\n\nThe Osmo 360 II comes with a new 2,150mAh battery, up from 1,950 mAh before, that's compatible with DJI's other action cams. Though it's rated for 100 minutes of 8K 30p shooting, just like before, I was able to eke out 105 minutes or so. The camera also charges significantly quicker, from 0 to 100 percent in 39 minutes, compared to 91 minutes for the original. Both charging speeds and battery life are less than the Insta360 X6, which can go 140 minutes between charges at 8K 30 fps and fully charge in 35 minutes.\n\nA key new feature is NFC tap-to-connect. DJI's Mimo app sometimes fails to find the company's action cams over Wi-Fi, but you can now tap your phone to the Osmo 360 II and that handshake will happen automatically. It worked seamlessly in my testing.\n\nWith the Osmo 360, a damaged lens meant you had to send the camera back to DJI. You could try to replace it yourself, but that's a janky process . Now, swapping new ones in is easy and inexpensive. DJI sells replaceable lenses for €39 ($45) a pair in a kit that includes a tool to remove and install them, along with instructions, a blower to clean the sealing area, a suction cup to pull off the old lens and new gaskets. I tried it myself and was able to change one in under five minutes, so this camera's repairability is now much better, and on par with the Insta360 X6.\n\nA key feature of the Osmo 360 II carried from the first model is the 1/1.1-inch square sensor designed for panoramic shooting. It allows DJI to use 25 percent more of the sensor than some rival models, though Insta360's X6 now uses the same-sized sensor. DJI also updated the Osmo 360 II's processor to increase video speeds, improve low light capability and boost dynamic range.\n\nWith the update, the camera can now record 8K 360 video at up to 60 fps instead of 50 fps, and 4K at 120 fps, up from 100 fps. As before, it supports 10-bit D-LogM and HDR capture in HLG mode, but not Dolby Vision like the Insta360 X6. DJI says it boosted dynamic range from 13.5 to 14.5 stops as well. A new AI noise-reduction algorithm called SuperNight 2.0 is designed to allow higher ISO settings, and thus higher shutter speeds at night to reduce motion blur. It even has a dedicated setting under the \"Stabilization Scenarios\" menu setting called \"Anti-motion Blur.\"\n\nTo confirm those claims, I tested the Osmo 360 II in a couple of different scenarios. One was a bike ride on a sunny day to see if I could tease out more shadow and bright light detail. In another, I tested it on Paris streets at night, mounted directly to the bike's handlebars to test RockSteady 3.0 stabilization with pavement vibration. I used both the regular video mode and SuperNight 2.0 (with and without Anti-motion Blur) to see the difference.\n\nThe results were impressive. In daylight, the extra dynamic range was noticeable, with more detail available in both shadows and highlights. That extra latitude allowed me to output vibrant, punchy video and do some creative color correction as well. DJI's cameras have always produced color-accurate video, and that was also on display here with human subjects, vegetation and cityscapes.\n\nAt night, the SuperNight 2 setting did improve motion blur issues by boosting shutter speeds slightly, while also eliminating much of the \"plastic\" effect on people caused by the previous model's aggressive AI noise reduction. I found the optimal balance between image quality and stabilization using SuperNight 2.0 with the Anti-Motion Blur scenario. While some artifacts were present at that setting, it wasn't distracting and allowed for a bright exposure.\n\nI also tried it at night in panoramic mode. I set exposure to \"manual\" with a high ISO setting, reasonably high 1/160th shutter speed and the \"anti-flicker\" setting enabled to reduce artificial light strobing. This worked best to eliminate motion blur caused by the stabilization, and allowed me to apply noise reduction later in post for good results, though footage was darker than when using SuperNight 2.0. Overall, the Osmo 360 II produced some of the best low-light video I've seen on any action cam.\n\nAs before, image quality suffers in one key area. Even with 8K 360 resolution, the Osmo 360 is clearly less sharp than DJI's Action 6 Pro after conversion to 4K flat video. After testing it with resolution charts, I'd rate it as somewhere between 1080p and 4K in the center, and around 720p at the edges.\n\nStitching can still be a problem too, with some artifacts present at certain angles, but fewer than I've seen with the Insta360 X6. This confirms to me that the attraction of the Osmo 360 II is the ability to switch angles, and not the overall video quality.\n\nThe Osmo 360 II offers a few other features, including the new 16K Timelapse feature (up from 8K before) and subject tracking at up to 4K 30 fps. There's also a \"Vortex\" mode that works at 8K 120fps, giving you a trippy (but not very useful) barrel roll effect.\n\nThe audio system is the same as before, with four internal mics to capture ambient sound and in-camera wind reduction that I found effective for bike rides. It can also connect automatically to DJI's latest mics, including the Mic 3, Mic 2, Mic Mini 2S, Mic Mini 2 and Mic Mini. Those allow for clear, realistic voice audio and can also record internally to provide a backup. Both Insta360 and GoPro now offer their own wireless mic systems now, too.\n\nEditing is still a pain point for the Osmo 360 II. DJI's Studio app can handle simple jobs, letting you change and keyframe camera angles or do 360-specific camera moves. It also allows basic color correction and titles, then lets you output your final video in either flat or full panoramic formats.\n\nHowever, it's not very intuitive and lacks key features like detailed color correction, effects and advanced titles. DJI Studio is also behind its main rival, Insta 360 Studio. DJI did introduce a new plugin for DaVinci Resolve called DJI Reframe, though. To use it, you first export the native DJI OSV 360 files as MP4 panoramic files using the DJI Studio app. Then, you can import those into Resolve and apply the DJI Reframe plugin to adjust or keyframe the camera angle and change the projection to Dewarp, Ultrawide and other settings.\n\nThat gives you the power of Resolve for color correction and other chores, but the exporting process is still painful and reduces image quality. Ideally, Blackmagic Design and Adobe should work with DJI (along with Insta360 and GoPro) to support native OSV and other file formats and eliminate the export step.\n\nWith its latest updates, DJI's Osmo 360 II is a formidable rival to the Insta360 X6. Image quality is about as good as it can be given the limitations of 360 video. DJI has resolved my main complaint with the previous model: the excessive motion blur caused by stabilization in low light. The extra dynamic range also makes it easier to adjust shots in post.\n\nLike other 360 models, the Osmo 360 II's video still looks soft compared to regular action cameras, though quality is very similar to its main rival. Those cameras stack up very closely in other areas, but the Osmo 360 II has more storage, slightly higher 360 frame rates and a cheaper price, while the Insta360 X6 has better battery life.\n\nIf you live in the US, there's no decision to be made, as the Insta360 X6 is available in the US and the Osmo 360 II is not. If you're in Europe, Asia and elsewhere, though, it's a great 360 camera pick, offering great picture quality and specs for its category. It's now on sale for £509 in the UK or €589 ($680) in Europe, while the Adventure Combo with extra batteries, a charger and a case will run £639 and €739 in the EU."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "conticgo-0719cc5de6ab7a3e",
+    "type": "news",
+    "sourceId": "conticgo",
+    "sourceName": "Conticgo",
+    "sourceUrl": "https://conticgo.net/",
+    "originalUrl": "https://conticgo.net/como-navegar-por-soundscape-con-el-voiceover-la-ultima-aplicacion-de-guiado-para-personas-con-baja-vision/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-09-23T09:00:14.000Z",
+    "categories": [
+      "tecnologia-accesibilidad",
+      "apple",
+      "apps-accesibles",
+      "proyectos-prototipos"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "Cómo navegar por SoundScape con el VoiceOver: la última aplicación de guiado para personas con baja visión",
+        "summary": "Desde EsRetina seguimos trabajando para acercar la tecnología de forma accesible a todas las personas. En esta ocasión, compartimos un nuevo videotutorial accesible donde explicamos paso a paso cómo usar la aplicación SoundScape con el voice over. Este contenido forma parte del proyecto Conticgo y ha sido creado con un enfoque claro: fomentar la autonomía digital, […] La entrada Cómo navegar por SoundScape con el VoiceOver: la última aplicación de guiado para personas con baja visión se publicó primero en Conticgo .",
+        "body": "Desde EsRetina seguimos trabajando para acercar la tecnología de forma accesible a todas las personas. En esta ocasión, compartimos un nuevo videotutorial accesible donde explicamos paso a paso cómo usar la aplicación SoundScape con el voice over .\n\nEste contenido forma parte del proyecto Conticgo y ha sido creado con un enfoque claro: fomentar la autonomía digital, el conocimiento y la accesibilidad tecnológica.\n\nSoundscape G.P.S para personas invidentes. Voice Over activado Anterior 1 de 1 Siguiente Soundscape G.P.S para personas invidentes. Voice Over activado Anterior 1 de 1 Siguiente\n\nEn esta nueva píldora formativa te mostramos cómo utilizar Soundscape , una aplicación de guiado y orientación pensada para facilitar la movilidad de personas con ceguera y baja visión . La herramienta permite explorar el entorno y obtener información sobre lugares y puntos de interés cercanos mediante indicaciones y referencias sonoras.\n\nEn el vídeo explicamos de forma sencilla los principales pasos para comenzar a utilizar Soundscape. También mostramos cómo utilizar la aplicación junto con VoiceOver , el lector de pantalla integrado en los dispositivos de Apple. De esta forma, las personas con discapacidad visual pueden acceder a las diferentes opciones de la aplicación de manera más accesible.\n\nLa combinación de Soundscape y VoiceOver puede ser especialmente útil para las personas que buscan mejorar su orientación durante los desplazamientos. La aplicación permite conocer qué elementos se encuentran alrededor y utilizar referencias del entorno para facilitar la navegación.\n\nEsta píldora formativa está pensada como un recurso práctico y accesible. En ella encontrarás una explicación paso a paso para familiarizarte con Soundscape y aprender a utilizar sus funciones básicas con VoiceOver. Te invitamos a ver el vídeo y descubrir cómo esta herramienta puede ayudarte a moverte por tu entorno con mayor autonomía.\n\nOs dejamos nuestro canal de YouTube en donde podéis encontrar todos nuestros tutoriales, píldoras y formaciones."
       }
     },
     "media": null
@@ -170,31 +387,6 @@
     "media": null
   },
   {
-    "id": "the-verge-bdde852851276d3d",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/999094/rabbit-ai-agent-os3",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-22T20:52:40.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Rabbit’s new AI agent doesn’t need an R1 to run",
-        "summary": "Rabbit, the company behind the underwhelming R1 device, is rolling out a standalone AI agent that you don't need its hardware to use, as reported earlier by Wired. The startup says its new OS3 \"agentic operating system\" runs in the cloud but operates locally across Windows, Mac, and Linux devices. According to Rabbit, you can […]",
-        "body": "Rabbit, the company behind the underwhelming R1 device , is rolling out a standalone AI agent that you don't need its hardware to use, as reported earlier by Wired . The startup says its new OS3 \"agentic operating system\" runs in the cloud but operates locally across Windows, Mac, and Linux devices.\n\nAccording to Rabbit, you can add up to five devices to one account, along with your preferred AI models. OS3 will automatically determine the devices, files, apps, and AI models it needs to complete a task. You can also access OS3 through its dedicated desktop site , a paired messaging app like Telegram or iMessage, as well as on Rabbit's R1 device …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "applevis-apps-456cafda828f02e9",
     "type": "news",
     "sourceId": "applevis-apps",
@@ -214,99 +406,6 @@
         "title": "Scratch Mancer: Card Roguelike",
         "summary": "A scratch-card roguelike. You work the night counter of a House that sells luck sealed under foil. The quota is due by dawn. Miss it, and the House keeps you. Every ticket is a grid of foil hiding cash, multipliers and skulls. Your thumb is the budget — stamina runs out long before the tickets do, so where you scratch matters as much as what's under it. THE DECISION YOU MAKE ALL GAME • Scratch a cell to 20% and you can read the fragment — it doesn't count and it doesn't trigger • Scratch to 45% and it counts for real, skulls included • One revealed skull halves the payout. Two void the ticket • Cash out whenever you like. Only what you revealed pays BUILD A RUN THAT BENDS THE ODDS • 40 charms across 5 slots: reroll skulls into coins, drift sevens toward corners, make a graze count as a hit • A warden calls every third night. Each one bends a rule you were leaning on. There are six of them • Seven ticket types, each with its own payout rule — match three, complete a crossword, climb a rising ladder, or reveal a single cell on an Offering and stop • Four single-use tools in three pockets: spray the foil to see straight through it, magnet a symbol sideways, sticker a skull into a seven • Nine nights, each with a quota due at dawn. Then endless, if you're still standing • Beat the House and the Seals open: seven stacked terms for the players who won, one added per win. Higher quotas, a skull on every ticket, wardens arriving early, two on the last night. Break all seven NO ADS. NO PAYWALLS. JUST SCRATCHING. One purchase, the whole game. The odds don't know what you paid, because there is no second payment to make: no coins to buy, no subscription, no season pass, no timers. • Plays fully offline • Family Sharing enabled • Game Center achievements and leaderboards • One thumb, portrait, a night finishes on a bus ride • Built for iPhone and iPad by one developer Scratch the foil, read what you can, and try to leave before the House notices. Scratchmancer is a work of fiction. No real money changes hands, no real lottery products appear, and the odds in it are invented.",
         "body": "A scratch-card roguelike. You work the night counter of a House that sells luck sealed under foil. The quota is due by dawn. Miss it, and the House keeps you. Every ticket is a grid of foil hiding cash, multipliers and skulls. Your thumb is the budget — stamina runs out long before the tickets do, so where you scratch matters as much as what's under it. THE DECISION YOU MAKE ALL GAME • Scratch a cell to 20% and you can read the fragment — it doesn't count and it doesn't trigger • Scratch to 45% and it counts for real, skulls included • One revealed skull halves the payout. Two void the ticket • Cash out whenever you like. Only what you revealed pays BUILD A RUN THAT BENDS THE ODDS • 40 charms across 5 slots: reroll skulls into coins, drift sevens toward corners, make a graze count as a hit • A warden calls every third night. Each one bends a rule you were leaning on. There are six of them • Seven ticket types, each with its own payout rule — match three, complete a crossword, climb a rising ladder, or reveal a single cell on an Offering and stop • Four single-use tools in three pockets: spray the foil to see straight through it, magnet a symbol sideways, sticker a skull into a seven • Nine nights, each with a quota due at dawn. Then endless, if you're still standing • Beat the House and the Seals open: seven stacked terms for the players who won, one added per win. Higher quotas, a skull on every ticket, wardens arriving early, two on the last night. Break all seven NO ADS. NO PAYWALLS. JUST SCRATCHING. One purchase, the whole game. The odds don't know what you paid, because there is no second payment to make: no coins to buy, no subscription, no season pass, no timers. • Plays fully offline • Family Sharing enabled • Game Center achievements and leaderboards • One thumb, portrait, a night finishes on a bus ride • Built for iPhone and iPad by one developer Scratch the foil, read what you can, and try to leave before the House notices. Scratchmancer is a work of fiction. No real money changes hands, no real lottery products appear, and the odds in it are invented."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-ad0db73972f2c5e6",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2265924/discord-rolls-out-its-revised-age-verification-policy/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-22T20:29:08.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Discord rolls out its revised age verification policy",
-        "summary": "It will offer several privacy-focused options for users who aren't automatically confirmed as adults.",
-        "body": "It will offer several privacy-focused options for users who aren’t automatically confirmed as adults.\n\nMany social media platforms have been applying new age verification rules in response to growing interest in limiting access for minors. Discord had planned to enact a policy this year that would have required either a facial age estimation or an ID scan for users who couldn't have their status as adults confirmed by its internal tools. The company announced in February that it would be delaying those changes in response to concerns about privacy and the collection of personal data involved in both of those verification methods. Today, the service shared details about how it will begin checking ages while accounting for that community feedback.\n\nStarting this week, Discord will automatically sort users into either the Adult or Teen age group based on markers such as how long the account has existed, the servers they're in and their general activity levels. The blog post explicitly stated that Discord will not be accessing messages or calls to determine an age estimate, and the individual's age group will not be displayed on their profile or shared with other server members. Discord users will be able to check which group they've been sorted into under the Account Status section of the User Settings menu. For an expected 90 percent of platform's audience, no further action will need to be taken if they are placed in the correct group.\n\nIf a user is put into the Unconfirmed age category, they will have several options for verifying that they are older than 18. Depending on regional restrictions, those choices might include confirmation via credit card, Apple App Store, Google Play Store, Google Wallet or the AgeKey credential service, as well as more common tools such as an ID scan or a video selfie. To further allay privacy concerns, Discord said it will require any third-party age assurance vendor to permanently delete a user's information once their service is completed, as well as requiring any facial age estimation to run completely on the user's device.\n\nFor the users placed in the Teen Age Group, there will be a trio of restrictions placed on their accounts. First, any messages from non-friends will be sent to the message requests inbox, and Discord will give an alert before accepting a friend request from a user who doesn't have mutual friends or shared membership in a small server. Second, the user will not be able to view some content across Discord. The age-gated material includes images that have been tagged as sensitive by the platform's content filters, in addition to any servers, channels and bot commands that are restricted to only adults. The final limitation is that a teen's full profile details and activity will only be accessible to friends and to members of smaller servers. Accounts in the Unconfirmed category will be placed under the first two restrictions until the user confirms their age."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-ad84e5f52e01527a",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/transportation/998791/ceer-ev-saudi-arabia-foxconn-exobot",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-22T20:14:54.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Saudi Arabia’s new Exobot EVs make the Cybertruck look normal",
-        "summary": "The Kingdom of Saudi Arabia is mostly known for its global dominance over petroleum production and oil reserves - not necessarily cars and auto manufacturing, and certainly not electric vehicle production. So it was a little surprising on Monday when a Saudi startup called Ceer unveiled a pair of hyper-angular, spaceship-like EVs, with plans to […]",
-        "body": "The Kingdom of Saudi Arabia is mostly known for its global dominance over petroleum production and oil reserves - not necessarily cars and auto manufacturing, and certainly not electric vehicle production. So it was a little surprising on Monday when a Saudi startup called Ceer unveiled a pair of hyper-angular, spaceship-like EVs, with plans to launch an additional five models by 2030.\n\nThe Exobot (yes, that's the real name) sedan and SUV are expected to go on sale in Saudi Arabia starting in 2027. The ultra-futuristic designs scream Tron , Blade Runner , and every other sci-fi movie you've seen - and then some. The gullwing doors are ripped s …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-f737c6280f4e27c2",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2265564/motorolas-new-signature-27-is-among-the-first-smartphone-to-use-the-snapdragon-8-elite-extreme-gen-6-processor/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-22T20:00:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Motorola's new Signature 27 is among the first smartphone to use the Snapdragon 8 Elite Extreme Gen 6 processor",
-        "summary": "Not bad for a quick refresh.",
-        "body": "It also has Bang & Olufsen speakers.\n\nMotorola just revealed the Signature 27 smartphone at the Snapdragon Summit. This is a refresh of the pre-existing Signature handset. The big news? It features the Snapdragon 8 Elite Extreme Gen 6 mobile processor. It's one of the first phones to use Qualcomm's latest and greatest mobile SoC.\n\nThis is a flagship model that Motorola is calling \"the most advanced smartphone\" it has ever created. There's some Bang & Olufsen speakers, and an upgraded cooling system to ensure the components don't get too hot.\n\nThe primary camera looks to be relatively unchanged, as it uses a 50MP Sony Lytia 910 sensor. However, the telephoto lens has gotten a major boost, up to 200MP from 50MP.\n\nThe Signature 27 runs Android 17, with a promise of seven years of OS upgrades, and provides access to plenty of Gemini-adjacent AI tools. This includes the video generator Omni and the music generator Lyria .\n\nThere's plenty we don't know here, including display specs. Motorola hasn't announced an actual release date, saying it's \"expected to come to markets worldwide in 2026.\" We also don't know the price. The previous model costs anywhere from $800 to $1,200 or so, depending on the configuration.\n\nWe do know that this won't be the last Motorola product to feature audio by Bang & Olufsen. The companies just announced a multi-year partnership."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-1c010265e3871428",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/22/qualcomm-launches-two-new-smartphone-chips-with-emphasis-on-ai/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-22T20:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Qualcomm launches two new smartphone chips with emphasis on AI",
-        "summary": "Qualcomm said that its new top chip can run 30B mixture-of-expert model locally.",
-        "body": "Qualcomm today announced two flagship smartphone processors, called Snapdragon 8 Elite Gen 6 and Snapdragon 8 Elite Extreme Gen 6, with a focus on facilitating better AI-focused features.\n\nAt its annual Snapdragon Summit, Qualcomm said that the new chips can aid in improved personalization for AI agents. The chips have new sensing hubs that can run small models of up to 200 million parameters. With the new sensing hub, smartphones can run a personal scribe locally and differentiate between speakers. Plus, it can build memory based on your usage for better suggestions for automating tasks. The company said that it can run a complete voice-in and voice-out agent through the new chip.\n\nThe Snapdragon 8 Elite Gen 6 has a new accelerator element that’s designed to run models in a more efficient way. The high-end Extreme version can run a 30-billion-parameter mixture-of-experts (MoE) model locally. This means that while the overall model size is 30B, the model only activates a certain number of parameters for a particular task.\n\nFor comparison, at its Worldwide Developer Conference (WWDC) in June, Apple released a 20-billion-parameter mixture-of-experts model , the most advanced of its third generation of foundation models.\n\nThe new Qualcomm CPU also provides pixel-level control for cameras to facilitate more pro-level experiences, along with improved stabilization and motion understanding. The Extreme version can support video recording at 8K 60fps and at 4K240 for ultra HD slow-motion. It also enables the new Advanced Professional Video (APV) codec for pro-level recording.\n\nWhat’s more, both chips can use AI to boost vocals and reduce noise. Plus, it has Qualcomm’s new voice bubble tech, which isolates users’ noise during calls.\n\nAt the event, Motorola announced its Motorola Signature 27 smartphone, powered by the Snapdragon Gen 8 Elite Extreme Gen 6, with general availability sometime this year.\n\nQualcomm has been working on more than 40 AI devices , but there is still a belief that a lot of people will use their phones for AI rather than other dedicated devices. Nothing co-founder Carl Pei has hinted at this trend in the past, and more recently, new Apple CEO John Ternus reinforced the same line of thought during the iPhone Duo launch earlier this month."
       }
     },
     "media": null
@@ -332,55 +431,6 @@
         "title": "Microsoft disrupts AI-assisted platform that compromised 12,000 accounts",
         "summary": "EvilTokens provided an end-to-end platform that makes mass compromises faster and easier.",
         "body": "Microsoft said Tuesday that it led an industry-wide disruption of a subscription-based scam platform that used an AI chatbot to compromise 12,000 Microsoft accounts over a few-month span.\n\nNamed EvilTokens, the platform was introduced over a Telegram channel in February and charged an initial $1,500 fee and a recurring $500 charge each month after that. EvilTokens provided a single service for streamlining most steps required to compromise email accounts in large numbers. From there, the platform helped customers analyze inboxes, select targets that would provide the biggest potential payouts, and draft follow-up emails that provided realistic ruses for tricking company employees into transferring funds to attacker-controlled accounts.\n\n“While EvilTokens helped cybercriminals access email accounts, at the center of the service was an AI-style chatbot that could analyze a victim’s inbox and help criminals identify trusted relationships, payment authorizations, and sensitive responsibilities, as well as other circumstances where fraud was most likely to succeed,” Microsoft said . “The platform could even recommend fraud strategies, including drafting messages that impersonated trusted contacts to help criminals trick victims into taking action.”\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-1276f75476a991bd",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/22/apple-could-take-on-whoop-with-a-new-fitness-tracker-report-says/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-22T19:27:57.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple could take on Whoop with a new fitness tracker, report says",
-        "summary": "Apple may be developing a new fitness tracker as part of its new generation of hardware devices.",
-        "body": "Posted:\n\nApple is in the process of developing a new screen-less fitness tracker that would put it into competition with Whoop — the fitness tech firm whose valuation recently crested $10 billion .\n\nBloomberg reports that the iPhone maker is currently engaged in a “technology investigation” — which, just as it sounds, is an exploratory effort to decide whether it will fully develop a product and release it. A number of prototypes have been developed around the item, the outlet notes.\n\nThe device — which is described as “a thin fabric band with a sensor-equipped computing module” — would not be released until at least 2028, Bloomberg said.\n\nIt’s worth noting that Apple already sells a fitness tracker in the form of its Apple Watch (the wearable records workouts, heart rate, sleep, and other categories). However, the new form factor sounds relatively similar to Whoop, which sells simple fitness bands that the company says can track a variety of health metrics.\n\nTechCrunch reached out to Apple for more information.\n\nThe report arrives at a time when Apple is in a period of transition. Tim Cook stepped down from his position as CEO in August to now act as executive chairman, as new CEO John Ternus took the wheel. The company has also faced headwinds due to rising costs from a memory shortage. Despite this, it has promised a slate of new devices, including a new foldable phone , new tablets , and a new MacBook Pro. Meanwhile, it’s engaged in litigation against OpenAI, which it has accused of trade theft, as the battle to build the best hardware for the AI age continues."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-aa5b9ce220e0245e",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/gadgets/2026/09/adobe-premiere-finally-brings-powerful-video-editing-to-android-and-its-free/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-22T19:08:58.000Z",
-    "categories": [
-      "tecnologia-general",
-      "android",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Adobe Premiere finally brings powerful video editing to Android, and it's free",
-        "summary": "You don't even need a Creative Cloud login to edit clips, but AI features cost extra.",
-        "body": "Video editing has never been Android's strong suit. While Apple has long offered iMovie for iPhone and iPad, Google has never had a comparable offering. Adobe is now stepping up to fill this feature gap with a proper version of Premiere. The app is now available in the Play Store for almost all Android devices, and it's free (mostly).\n\nAndroid's version of Premiere doesn't offer all the features you'd get in the desktop application, but it's a big step up from the soon-to-be-retired Premiere Rush app. You can import as many video tracks as you want, trim them, split them, add effects, and export videos in up to 4K resolution. It can even extract audio from clips, reduce background noise, and add voiceovers. The app emphasizes the YouTube Short format, even defaulting your video outputs to portrait 16:9, but you can change that to something more traditional.\n\nOn a standard smartphone, the app splits the screen with the timeline at the bottom and preview up top. Adobe says that Premiere is optimized for multiple form factors. If you have a foldable phone, the UI adjusts to give you more breathing room, placing the timeline to the right of the video. That makes sense as the default, as Premiere wants you to make YouTube Shorts, but if you're working with something wider, there's a layout toggle that puts the widescreen video above the expanded timeline. The split is also adjustable if you want to make your video or timeline larger.\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -1139,30 +1189,6 @@
         "title": "Accesibilidad y Tecnología Vive el fútbol accesible con Movistar Touch en el estadio Riyadh Air Metropolitano.",
         "summary": "Gracias a la colaboración entre la ONCE, Movistar y el Atlético de Madrid, las personas afiliadas podrán disfrutar de una experiencia más accesible e inmersiva durante los partidos de fútbol que se celebren en el estadio Riyadh Air Metropolitano.",
         "body": "Gracias a la colaboración entre la ONCE, Movistar y el Atlético de Madrid, las personas afiliadas podrán disfrutar de una experiencia más accesible e inmersiva durante los partidos de fútbol que se celebren en el estadio Riyadh Air Metropolitano.\n\nSe trata de Movistar Touch , un servicio gratuito dirigido a aficionados con entrada para el encuentro, que permite seguir el desarrollo del partido mediante audiodescripción y una tableta háptica capaz de reproducir en tiempo real la posición del balón sobre el terreno de juego. Esta tecnología ofrece una nueva forma de vivir la emoción del fútbol y constituye un excelente ejemplo de cómo la innovación puede contribuir a derribar barreras y favorecer la participación de todas las personas.\n\nActualmente, el Riyadh Air Metropolitano es el único estadio de España que ofrece este sistema. Las personas afiliadas interesadas en utilizarlo deberán solicitarlo previamente enviando un correo electrónico a inclusion@atleticodemadrid.com , indicando el partido de LALIGA para el que desean adquirir entradas y hacer uso del servicio.\n\nEs importante tener en cuenta que Movistar Touch dispone de un número limitado de unidades, por lo que se recomienda realizar la solicitud con la mayor antelación posible.\n\nEsta iniciativa se enmarca en la colaboración que el Atlético de Madrid mantiene desde hace años con la ONCE y Fundación ONCE para seguir mejorando la accesibilidad de sus instalaciones y servicios, reforzando así su compromiso con un deporte más inclusivo y accesible para todos."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "conticgo-3ce969fc55590368",
-    "type": "news",
-    "sourceId": "conticgo",
-    "sourceName": "Conticgo",
-    "sourceUrl": "https://conticgo.net/",
-    "originalUrl": "https://conticgo.net/viabench-pone-a-prueba-la-inteligencia-artificial-para-ayudar-a-las-personas-con-discapacidad-visual/",
-    "originalLanguage": "es",
-    "publishedAt": "2026-09-10T08:00:07.000Z",
-    "categories": [
-      "tecnologia-accesibilidad",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "es": {
-        "title": "VIABench pone a prueba la inteligencia artificial para ayudar a las personas con discapacidad visual",
-        "summary": "La inteligencia artificial está transformando rápidamente las herramientas de apoyo para las personas ciegas y con baja visión. Sin embargo, todavía existe una pregunta fundamental: ¿realmente estas tecnologías son útiles en situaciones cotidianas? Precisamente para responder a esta cuestión surge VIABench pone a prueba la inteligencia artificial para ayudar a las personas con discapacidad visual, […] La entrada VIABench pone a prueba la inteligencia artificial para ayudar a las personas con discapacidad visual se publicó primero en Conticgo .",
-        "body": "La inteligencia artificial está transformando rápidamente las herramientas de apoyo para las personas ciegas y con baja visión. Sin embargo, todavía existe una pregunta fundamental: ¿realmente estas tecnologías son útiles en situaciones cotidianas? Precisamente para responder a esta cuestión surge VIABench pone a prueba la inteligencia artificial para ayudar a las personas con discapacidad visual , un nuevo sistema de evaluación diseñado para analizar cómo se comportan los modelos de IA multimodal en escenarios reales vividos por personas con discapacidad visual.\n\nPresentado por un grupo de investigadores internacionales, VIABench es el primer benchmark construido a partir de vídeos grabados por personas ciegas en su vida diaria. Su objetivo es medir de forma rigurosa hasta qué punto los asistentes de inteligencia artificial pueden comprender el entorno y proporcionar ayuda útil en tareas reales.\n\nVIABench es un conjunto de pruebas creado específicamente para evaluar la capacidad de los modelos de inteligencia artificial multimodal para asistir a personas con discapacidad visual.\n\nLos benchmarks son herramientas utilizadas por los investigadores para comparar el rendimiento de distintos modelos de IA bajo las mismas condiciones. En este caso, la principal diferencia es que VIABench se basa en experiencias reales de usuarios ciegos , en lugar de utilizar imágenes seleccionadas o escenarios preparados artificialmente.\n\nSegún los autores, el objetivo es acercar la evaluación de la inteligencia artificial a las necesidades reales de las personas con discapacidad visual y analizar si estos sistemas pueden ofrecer una ayuda efectiva en el día a día.\n\nPara desarrollar VIABench, los investigadores recopilaron vídeos registrados por personas ciegas mientras realizaban actividades cotidianas.\n\nEstos vídeos incluyen situaciones reales y no controladas, con movimientos de cámara, cambios de iluminación, obstáculos y otros elementos que suelen encontrarse en la vida diaria.\n\nEsta aproximación supone una diferencia importante respecto a muchos conjuntos de datos tradicionales, ya que permite analizar el rendimiento de la IA en contextos mucho más cercanos a la realidad.\n\nLos autores señalan que este enfoque proporciona una evaluación más representativa de los desafíos a los que se enfrentan las personas con discapacidad visual cuando utilizan herramientas basadas en inteligencia artificial.\n\nVIABench analiza diferentes capacidades de los modelos multimodales relacionadas con la asistencia visual.\n\nEntre ellas se encuentran:\n\nEstas pruebas permiten comparar distintos modelos y determinar cuáles ofrecen respuestas más precisas, útiles y seguras para las personas con discapacidad visual.\n\nUno de los hallazgos más relevantes del estudio es que los modelos actuales todavía presentan limitaciones importantes cuando deben actuar de forma proactiva.\n\nSegún los investigadores, muchos sistemas son capaces de responder correctamente cuando el usuario formula una pregunta concreta. Sin embargo, muestran más dificultades a la hora de anticiparse a las necesidades de la persona o detectar información importante sin que esta sea solicitada previamente.\n\nEste aspecto resulta especialmente relevante en aplicaciones de accesibilidad, ya que una advertencia temprana sobre un obstáculo o la identificación espontánea de información importante podría aumentar la seguridad y la autonomía de los usuarios.\n\nLos autores destacan que todavía existe una diferencia significativa entre el rendimiento de la inteligencia artificial en pruebas convencionales y su utilidad real como tecnología de asistencia.\n\nVIABench no es una herramienta destinada al uso directo por parte de las personas con discapacidad visual. Su función es proporcionar un estándar de evaluación que permita a investigadores y empresas desarrollar sistemas más útiles y fiables.\n\nContar con métricas específicas para accesibilidad podría facilitar la creación de asistentes visuales mejor adaptados a las necesidades reales de los usuarios.\n\nAdemás, el benchmark también puede servir para identificar las áreas en las que la inteligencia artificial todavía necesita mejorar antes de convertirse en una ayuda verdaderamente eficaz en la vida cotidiana.\n\nEn los últimos años han aparecido numerosas herramientas basadas en IA capaces de describir imágenes, reconocer objetos o responder preguntas sobre el entorno.\n\nSin embargo, disponer de grandes capacidades técnicas no siempre significa que una herramienta sea realmente útil para las personas con discapacidad visual.\n\nVIABench representa un cambio de enfoque al situar las experiencias reales de los usuarios en el centro de la evaluación. Los resultados obtenidos muestran que la inteligencia artificial continúa avanzando rápidamente, pero también evidencian que aún existen importantes retos por resolver para ofrecer una asistencia visual verdaderamente efectiva.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFUENTES: Arxiv , Repositorio del artículo"
       }
     },
     "media": null
@@ -2158,29 +2184,6 @@
         "title": "WCAG Evaluation Methodology (WCAG-EM) 2.0 del W3C",
         "summary": "Han pasado 14 años desde que reseñé el proceso de la primera versión de la WCAG-EM 1.0 (2012-2014) en el artículo \"Metodología de Evaluación de Conformidad con la Accesibilidad en sitios Web (WCAG-EM) 1.0\". Esta semana, el 23 de julio de 2026, se ha publicado la nueva versión de la WCAG-EM del W3C: WCAG Evaluation Methodology (WCAG-EM) 2.0. En Europa, incluida España, las auditorías de",
         "body": "Nota 1: como todos los artículos de este blog, este artículo NO está promocionado.\n\nNota 2: como todos los artículos de este blog, este artículo se ha ideado y elaborado sin el uso de herramientas IA, solo se han usado para la revisión final de la ortografía.\n\nAutor: Olga Carreras Montoto\n\nEtiquetas: accesibilidad metodología , WCAG 2.2\n\nCompártelo en:\n\nHistórico de artículos:\n\nSubir al comienzo de la página"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "cti-once-dccea7481f510c8a",
-    "type": "news",
-    "sourceId": "cti-once",
-    "sourceName": "CTI de la ONCE",
-    "sourceUrl": "https://cti.once.es/",
-    "originalUrl": "https://cti.once.es/noticias/ya-disponible-el-informe-de-accesibilidad-del-videojuego-rhythm-paradise-groove-para-nintendo-switch-2",
-    "originalLanguage": "es",
-    "publishedAt": "2026-07-24T12:00:00.000Z",
-    "categories": [
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "es": {
-        "title": "Modos-ON ¡Ya disponible el informe de accesibilidad del videojuego Rhythm Paradise Groove para Nintendo Switch 2!",
-        "summary": "Desde el Centro de Tiflotecnología e Innovación de la ONCE (CTI) se ha realizado un análisis detallado evaluando sus distintos apartados y su impacto en la experiencia de juego.",
-        "body": "Desde el Centro de Tiflotecnología e Innovación de la ONCE (CTI) se ha realizado un análisis detallado evaluando sus distintos apartados y su impacto en la experiencia de juego.\n\nEn el siguiente enlace encontrarás todo lo relacionado con la accesibilidad de este título:\n\nInforme evaluación Rhythm Paradise Groove para Nintendo Switch 2"
       }
     },
     "media": null

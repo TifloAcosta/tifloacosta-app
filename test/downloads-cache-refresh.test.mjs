@@ -6,7 +6,7 @@ const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
 test('PWA shell advances its cache and precaches the simple Downloads generation', async () => {
   const sw = await read('sw.js');
-  assert.match(sw, /tifloacosta-app-v2-21-red-white-theme/);
+  assert.match(sw, /tifloacosta-app-v2-22-braille-course/);
   assert.match(sw, /app-core\.js\?v=1\.6/);
   assert.match(sw, /downloads\.js\?v=1\.4/);
   assert.doesNotMatch(sw, /downloads-hub\.js/);

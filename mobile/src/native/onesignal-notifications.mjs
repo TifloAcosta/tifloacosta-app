@@ -42,6 +42,8 @@ export function createOneSignalNotifications({ sdk, appId, onDestination = () =>
     const push = pushSubscription();
     return Boolean(
       sdk &&
+      typeof sdk.setConsentRequired === 'function' &&
+      typeof sdk.setConsentGiven === 'function' &&
       typeof sdk.initialize === 'function' &&
       sdk.Notifications &&
       typeof sdk.Notifications.hasPermission === 'function' &&
@@ -78,12 +80,15 @@ export function createOneSignalNotifications({ sdk, appId, onDestination = () =>
     startPromise = (async () => {
       try {
         if (!validateSdk()) throw new Error('OneSignal SDK unavailable');
+        const existingConsent = consent.read();
+        sdk.setConsentRequired(true);
+        sdk.setConsentGiven(existingConsent);
         await sdk.initialize(appId);
         sdk.Notifications.addEventListener('click', event => {
           onDestination(normalizeNotificationDestination(event?.notification?.additionalData));
         });
 
-        if (!consent.read()) {
+        if (!existingConsent) {
           await pushSubscription().optOut();
         } else if (await sdk.Notifications.hasPermission()) {
           await reconcileAuthorizedSubscription();

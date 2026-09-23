@@ -518,6 +518,7 @@ const notificationCoordinator = createNotificationCoordinator({ route: notificat
 const notificationClient = createOneSignalNotifications({
   sdk: OneSignal,
   appId: ONESIGNAL_APP_ID,
+  storage,
   onDestination: destination => { void notificationCoordinator.receive(destination); }
 });
 notificationService = createNotificationService(notificationClient.adapter);

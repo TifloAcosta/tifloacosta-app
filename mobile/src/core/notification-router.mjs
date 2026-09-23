@@ -10,7 +10,11 @@ export function createNotificationRouter(actions = {}) {
       return 'home';
     }
 
-    await action(destination);
+    const handled = await action(destination);
+    if (handled === false) {
+      await actions.home();
+      return 'home';
+    }
     return type;
   };
 }

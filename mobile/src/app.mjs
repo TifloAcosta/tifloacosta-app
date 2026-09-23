@@ -1,12 +1,15 @@
 import { App } from '@capacitor/app';
 import { Browser } from '@capacitor/browser';
 import { Share } from '@capacitor/share';
+import OneSignal from '@onesignal/capacitor-plugin';
 import { createRouter } from './core/router.mjs';
 import { focusScreenHeading, restoreOriginFocus } from './core/focus.mjs';
 import { createContentStore } from './core/content-store.mjs';
 import { createFavoritesStore } from './core/favorites.mjs';
 import { text } from './core/i18n.mjs';
 import { createNativeActions } from './core/native-actions.mjs';
+import { createNotificationCoordinator } from './core/notification-coordinator.mjs';
+import { createNotificationRouter } from './core/notification-router.mjs';
 import { applyPreferences, createPreferencesStore } from './core/preferences.mjs';
 import { resolveLocal } from './core/downloads.mjs';
 import { classifySharedText } from './core/share-classifier.mjs';
@@ -16,6 +19,7 @@ import { loadReadableTarget, readablePageFromNewsItem } from './core/readable-lo
 import { searchResultAction } from './core/search.mjs';
 import { TifloSave } from './core/save-plugin.mjs';
 import { createNotificationService } from './native/notifications.mjs';
+import { createOneSignalNotifications } from './native/onesignal-notifications.mjs';
 import { TifloShare } from './native/share-plugin.mjs';
 import { TifloWebFetch, fetchSharedPage } from './native/web-fetch-plugin.mjs';
 import { renderHome } from './screens/home.mjs';
@@ -38,6 +42,7 @@ import { createAccessibleVideoPlayer, createSharedVideoItem } from './screens/vi
 const root = document.querySelector('#app');
 if (!root) throw new Error('Missing mobile app root');
 
+const ONESIGNAL_APP_ID = 'ed030723-7f6f-4745-8cd3-6938a9d04377';
 const EMPTY_CONTENT = Object.freeze({ resources: [], videos: [], news: [] });
 let currentContent = EMPTY_CONTENT;
 let activeScreenCleanup = null;
@@ -50,6 +55,7 @@ let pendingVideoId = '';
 let pendingDirectVideo = null;
 let pendingDownloadUrl = '';
 let pendingSearchQuery = '';
+let notificationService;
 
 function safeStorage() {
   try {
@@ -62,7 +68,6 @@ function safeStorage() {
 const storage = safeStorage();
 const preferencesStore = createPreferencesStore({ storage });
 const favoritesStore = createFavoritesStore(storage);
-const notificationService = createNotificationService(null);
 const readerSession = createReaderSession();
 const shareSession = createShareSession();
 const nativeActions = createNativeActions({
@@ -77,6 +82,25 @@ applyPreferences(document.documentElement, preferencesStore.getCurrent());
 
 function t(key) {
   return text(preferencesStore.getCurrent().lang, key);
+}
+
+function onAppResume(handler) {
+  if (typeof handler !== 'function') return () => {};
+  let disposed = false;
+  let listenerHandle = null;
+
+  void App.addListener('resume', () => handler()).then(handle => {
+    if (disposed) {
+      void handle.remove();
+    } else {
+      listenerHandle = handle;
+    }
+  }).catch(() => {});
+
+  return () => {
+    disposed = true;
+    if (listenerHandle) void listenerHandle.remove();
+  };
 }
 
 function textInputIsActive() {
@@ -353,6 +377,7 @@ function render(route) {
     notificationService,
     t,
     onPreferencesChange,
+    onAppResume,
     setScreenCleanup(cleanup) {
       activeScreenCleanup = typeof cleanup === 'function' ? cleanup : null;
     }
@@ -426,6 +451,55 @@ export const router = createRouter({
   restoreOriginFocus: originId => restoreOriginFocus(root, originId)
 });
 
+function findContentItem(items, id) {
+  const cleanId = String(id || '').trim();
+  if (!cleanId || !Array.isArray(items)) return null;
+  return items.find(item => String(item?.id || '').trim() === cleanId) || null;
+}
+
+const notificationRoute = createNotificationRouter({
+  home: () => {
+    router.start('home');
+    return true;
+  },
+  news: destination => {
+    const item = findContentItem(currentContent.news, destination.id);
+    if (item) return openActualidadNews(item);
+    return openReadableFromApp({
+      url: destination.url,
+      title: destination.title,
+      allowOriginalFallback: true
+    });
+  },
+  video: destination => openDirectVideo({
+    videoId: destination.id,
+    url: destination.url,
+    title: destination.title
+  }),
+  resource: destination => {
+    const item = findContentItem(currentContent.resources, destination.id);
+    if (item) {
+      return openReadableFromApp({
+        url: item.openUrl || item.url,
+        title: item.title || destination.title,
+        allowOriginalFallback: true
+      });
+    }
+    void nativeActions.openExternal(destination.url);
+    return true;
+  },
+  download: destination => openNormalDownload(destination.url)
+});
+
+const notificationCoordinator = createNotificationCoordinator({ route: notificationRoute });
+const notificationClient = createOneSignalNotifications({
+  sdk: OneSignal,
+  appId: ONESIGNAL_APP_ID,
+  onDestination: destination => { void notificationCoordinator.receive(destination); }
+});
+notificationService = createNotificationService(notificationClient.adapter);
+void notificationClient.start();
+
 function handleScreenBack() {
   if (shareMode) return handleShareBack();
   if (typeof screenBackHandler === 'function' && screenBackHandler()) return true;
@@ -458,6 +532,7 @@ const contentStore = createContentStore({
 contentStore.load().then(result => {
   currentContent = result.content || EMPTY_CONTENT;
   if (!shareMode && !textInputIsActive()) render(router.current());
+  void notificationCoordinator.markReady();
 });
 
 export function getContent() {

@@ -37,7 +37,11 @@ export function normalizeNotificationDestination(value) {
     return id ? { type, id, url, title } : { type: 'general' };
   }
 
-  if (!url) return { type: 'general' };
-  if (type === 'news' || type === 'resource') return { type, id: rawId, url, title };
-  return { type, url, title };
+  if (type === 'news' || type === 'resource') {
+    return (rawId || url)
+      ? { type, id: rawId, url, title }
+      : { type: 'general' };
+  }
+
+  return url ? { type, url, title } : { type: 'general' };
 }

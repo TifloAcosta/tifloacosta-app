@@ -20,6 +20,12 @@ test('app initializes OneSignal and sends clicks through a startup coordinator',
   assert.match(source, /notificationCoordinator\.markReady\(\)/);
 });
 
+test('production OneSignal client receives persistent app storage for explicit consent', async () => {
+  const source = await read('src/app.mjs');
+  const clientBlock = source.match(/createOneSignalNotifications\(\{[\s\S]*?\}\);/)?.[0] || '';
+  assert.match(clientBlock, /\bstorage\b/);
+});
+
 test('notification routes reuse existing reader video resource and download actions', async () => {
   const source = await read('src/app.mjs');
   assert.match(source, /openActualidadNews|openReadableFromApp/);

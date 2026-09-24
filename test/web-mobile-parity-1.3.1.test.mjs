@@ -56,14 +56,13 @@ test('web player exposes the same adjustable position and independent details co
 
 test('web resources mirror Android platform filters with accessible generated controls', async () => {
   const app = await readRoot('app.js');
-  for (const id of ['resource-platform-all', 'resource-platform-android', 'resource-platform-iphone', 'resource-platform-windows']) {
-    assert.match(app, new RegExp(id));
-  }
+  assert.match(app, /for \(const platform of \['all','android','iphone','windows'\]\)/);
+  assert.match(app, /button\.id=`resource-platform-\$\{platform\}`/);
   assert.match(app, /resourceMatchesPlatform/);
   assert.match(app, /aria-pressed/);
-  assert.match(app, /\bjieshuo\b/);
-  assert.match(app, /\bjaws\b/);
-  assert.match(app, /\bnvda\b/);
+  assert.match(app, /\\bjieshuo\\b/);
+  assert.match(app, /\\bjaws\\b/);
+  assert.match(app, /\\bnvda\\b/);
 });
 
 test('web global search clear returns focus to the search field like Android', async () => {

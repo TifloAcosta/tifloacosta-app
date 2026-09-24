@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es" data-sound-search-standalone="true">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0D2B45">
+<meta name="robots" content="index, follow">
+<title>Buscar sonidos — TifloAcosta App</title>
+<link rel="icon" href="tifloacosta-favicon.ico">
+<link rel="stylesheet" href="styles.css?v=1.2">
+<link rel="stylesheet" href="downloads.css?v=1.1">
+<script>
+(() => {
+  'use strict';
+  let stored = 'es';
+  try { stored = localStorage.getItem('tifloLang') === 'en' ? 'en' : 'es'; } catch (error) {}
+  document.documentElement.lang = stored;
+  if (location.hash !== '#downloads-sounds') history.replaceState(null, '', '#downloads-sounds');
+})();
+</script>
+</head>
+<body>
+<header class="wrap">
+  <h1>TifloAcosta App</h1>
+  <div class="language-switch" aria-label="Idioma">
+    <button type="button" id="lang-es">Español</button>
+    <button type="button" id="lang-en">English</button>
+  </div>
+</header>
+<main id="main" class="wrap" tabindex="-1"></main>
+<noscript><p class="wrap">Esta función necesita JavaScript activado.</p></noscript>
+
+<script>
+(() => {
+  'use strict';
+  const es = document.getElementById('lang-es');
+  const en = document.getElementById('lang-en');
+  function apply(lang) {
+    document.documentElement.lang = lang;
+    document.title = lang === 'en' ? 'Search sounds — TifloAcosta App' : 'Buscar sonidos — TifloAcosta App';
+    es.setAttribute('aria-pressed', String(lang === 'es'));
+    en.setAttribute('aria-pressed', String(lang === 'en'));
+    try { localStorage.setItem('tifloLang', lang); } catch (error) {}
+  }
+  es.addEventListener('click', () => apply('es'));
+  en.addEventListener('click', () => apply('en'));
+  apply(document.documentElement.lang === 'en' ? 'en' : 'es');
+})();
+</script>
+<script src="downloads-core.js?v=1.1"></script>
+<script src="sound-search-core.js?v=1.0"></script>
+<script src="sound-search-config.js?v=1.0"></script>
+<script src="sound-search.js?v=1.0"></script>
+<script>
+window.addEventListener('hashchange', () => {
+  if (location.hash === '#downloads') location.href = 'index.html#downloads';
+});
+</script>
+</body>
+</html>

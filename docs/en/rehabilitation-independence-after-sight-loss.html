@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Tony Acosta">
+<meta name="description" content="Tony Acosta's study on rehabilitation, independence and rebuilding everyday life after sight loss.">
+<title>How Am I Supposed to Live My Life Now? — Tony Acosta</title>
+<style>
+:root{color-scheme:light;--brand:#0D2B45;--accent:#E53935;--text:#111;--muted:#5f6670;--bg:#fff;--link:#0645ad;--rule:#d9dde2}
+*{box-sizing:border-box}html{background:var(--bg)}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif;font-size:1.05rem;line-height:1.68}.topbar{background:var(--brand);color:#fff}.topbar-inner{max-width:60rem;margin:0 auto;padding:.8rem 1.25rem;display:flex;align-items:center;gap:.75rem}.topbar img{width:2.5rem;height:2.5rem}.topbar a{color:#fff;font-weight:700;text-decoration:none}main{max-width:60rem;margin:0 auto;padding:1.3rem 1.25rem 4rem}.actions{display:flex;flex-wrap:wrap;gap:.7rem;margin:0 0 1.5rem}.button-link{display:inline-block;padding:.65rem .9rem;border:2px solid currentColor;border-radius:.4rem;font-weight:700;text-decoration:none}header{padding-bottom:1.2rem;border-bottom:3px solid var(--accent);margin-bottom:2rem}h1,h2,h3{color:var(--brand);line-height:1.28}h1{font-size:clamp(2rem,5vw,2.8rem);margin:.4rem 0 .45rem}h2{font-size:1.55rem;margin:2.2rem 0 .7rem}h3{font-size:1.22rem;margin:1.65rem 0 .5rem}p{max-width:78ch;margin:.74rem 0}.subtitle{font-size:1.2rem;font-weight:700;color:var(--brand);margin:0 0 .4rem}.byline{font-weight:700;color:var(--muted);margin:.8rem 0 0}a{color:var(--link);text-underline-offset:.14em}a:visited{color:#551a8b}a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.footer-actions{margin-top:2.5rem;padding-top:1rem;border-top:1px solid var(--rule)}@media(max-width:40rem){main{padding:1rem 1rem 3rem}.topbar-inner{padding:.7rem 1rem}}@media print{.topbar,.actions,.footer-actions{display:none}body{font-size:11pt}}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topbar-inner"><img src="../../tifloacosta-icon-192.png" alt=""><a href="../../index.html">TifloAcosta</a></div></div>
+<main id="main">
+<div class="actions"><a class="button-link" href="../../index.html">Back to TifloAcosta App</a><a class="button-link" href="https://drive.google.com/file/d/1Pla9qsRkSSMoAlnfixE8nA7J5Um6mCQS/view?usp=drivesdk">Download the Word document</a></div>
+<header><h1>How Am I Supposed to Live My Life Now?</h1><p class="subtitle">Rehabilitation and independence after sight loss</p><p class="byline">Tony Acosta · TifloAcosta</p></header>
+<p id="loading" role="status">Loading the study…</p>
+<div id="study-body" aria-busy="true"></div>
+<noscript><p>To read the study without JavaScript, download the Word document using the link at the top of this page.</p></noscript>
+<div class="footer-actions"><a class="button-link" href="../../index.html">Back to TifloAcosta App</a> <a class="button-link" href="https://drive.google.com/file/d/1Pla9qsRkSSMoAlnfixE8nA7J5Um6mCQS/view?usp=drivesdk">Download the Word document</a></div>
+</main>
+<script>
+(async()=>{const target=document.getElementById('study-body');const loading=document.getElementById('loading');const files=['rehabilitation-independence-1.html','rehabilitation-independence-2.html','rehabilitation-independence-3.html','rehabilitation-independence-4.html'];try{const parts=[];for(const file of files){const response=await fetch(file,{cache:'no-store'});if(!response.ok)throw new Error('Could not load part of the study');parts.push(await response.text());}target.innerHTML=parts.join('\n');target.setAttribute('aria-busy','false');loading.remove();}catch(error){target.setAttribute('aria-busy','false');loading.textContent='The complete study could not be loaded. You can open the Word version using the link on this page.';}})();
+</script>
+</body>
+</html>

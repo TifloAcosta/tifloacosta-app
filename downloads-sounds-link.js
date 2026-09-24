@@ -5,6 +5,8 @@
     es: { heading: 'Más herramientas', sounds: 'Buscar sonidos' },
     en: { heading: 'More tools', sounds: 'Search sounds' }
   };
+  let attempts = 0;
+  const MAX_ATTEMPTS = 25;
 
   function language() {
     return document.documentElement.lang === 'en' ? 'en' : 'es';
@@ -22,7 +24,8 @@
     const section = document.getElementById('downloads-section');
     const intro = document.getElementById('downloads-intro');
     if (!section || !intro) {
-      window.setTimeout(mount, 0);
+      attempts += 1;
+      if (attempts < MAX_ATTEMPTS) window.setTimeout(mount, 20);
       return;
     }
     if (document.getElementById('downloads-sounds-link-block')) return;

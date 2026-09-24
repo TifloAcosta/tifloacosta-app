@@ -38,6 +38,28 @@
       mobile: true
     },
     {
+      id: 'es-rehabilitacion-autonomia-2026',
+      lang: 'es',
+      category: 'Estudios',
+      title: '¿Y ahora cómo voy a hacer mi vida?',
+      searchText: 'Rehabilitación y autonomía después de perder la vista. Un estudio sobre cómo se reconstruye la vida, la independencia y la capacidad de decidir después de una pérdida visual.',
+      url: 'https://drive.google.com/file/d/1ctEt4f5dq1Q5ITwj2VpBGgkBVAdVD4SR/view?usp=drivesdk',
+      openUrl: 'https://tifloacosta.com/docs/es/rehabilitacion-autonomia-despues-perder-vista.html',
+      new: true,
+      mobile: true
+    },
+    {
+      id: 'en-rehabilitation-independence-2026',
+      lang: 'en',
+      category: 'Research and Studies',
+      title: 'How Am I Supposed to Live My Life Now?',
+      searchText: 'Rehabilitation and independence after sight loss. A study about rebuilding everyday life, independence and the ability to make your own decisions after losing vision.',
+      url: 'https://drive.google.com/file/d/1Pla9qsRkSSMoAlnfixE8nA7J5Um6mCQS/view?usp=drivesdk',
+      openUrl: 'https://tifloacosta.com/docs/en/rehabilitation-independence-after-sight-loss.html',
+      new: true,
+      mobile: true
+    },
+    {
       id: 'es-estudio-medico-calor-2026',
       lang: 'es',
       category: 'Estudios médicos',

@@ -1,3 +1,5 @@
+---
+---
 <!doctype html>
 <html lang="es">
 <head>
@@ -14,15 +16,15 @@
 <body>
 <div class="topbar"><div class="topbar-inner"><img src="../../tifloacosta-icon-192.png" alt=""><a href="../../index.html">TifloAcosta</a></div></div>
 <main id="main">
-<div class="actions"><a class="button-link" href="../../index.html">Volver a TifloAcosta App</a><a class="button-link" href="https://drive.google.com/file/d/1ctEt4f5dq1Q5ITwj2VpBGgkBVAdVD4SR/view?usp=drivesdk">Abrir copia HTML alternativa</a></div>
+<div class="actions"><a class="button-link" href="../../index.html">Volver a TifloAcosta App</a></div>
 <header><h1>¿Y ahora cómo voy a hacer mi vida?</h1><p class="subtitle">Rehabilitación y autonomía después de perder la vista</p><p class="byline">Tony Acosta · TifloAcosta</p></header>
-<p id="loading" role="status">Cargando el estudio…</p>
-<div id="study-body" aria-busy="true"></div>
-<noscript><p>Para leer el estudio sin JavaScript, abre la copia HTML alternativa desde el enlace situado al principio de esta página.</p></noscript>
-<div class="footer-actions"><a class="button-link" href="../../index.html">Volver a TifloAcosta App</a> <a class="button-link" href="https://drive.google.com/file/d/1ctEt4f5dq1Q5ITwj2VpBGgkBVAdVD4SR/view?usp=drivesdk">Abrir copia HTML alternativa</a></div>
+<article>
+{% include_relative rehabilitacion-autonomia-1.html %}
+{% include_relative rehabilitacion-autonomia-2.html %}
+{% include_relative rehabilitacion-autonomia-3.html %}
+{% include_relative rehabilitacion-autonomia-4.html %}
+</article>
+<div class="footer-actions"><a class="button-link" href="../../index.html">Volver a TifloAcosta App</a></div>
 </main>
-<script>
-(async()=>{const target=document.getElementById('study-body');const loading=document.getElementById('loading');const files=['rehabilitacion-autonomia-1.html','rehabilitacion-autonomia-2.html','rehabilitacion-autonomia-3.html','rehabilitacion-autonomia-4.html'];try{const parts=[];for(const file of files){const response=await fetch(file,{cache:'no-store'});if(!response.ok)throw new Error('No se pudo cargar una parte del estudio');parts.push(await response.text());}target.innerHTML=parts.join('\n');target.setAttribute('aria-busy','false');loading.remove();}catch(error){target.setAttribute('aria-busy','false');loading.textContent='No se pudo cargar el estudio completo. Puedes abrir la copia HTML alternativa con el enlace de esta página.';}})();
-</script>
 </body>
 </html>

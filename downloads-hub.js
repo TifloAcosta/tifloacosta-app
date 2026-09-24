@@ -101,14 +101,17 @@
     const main = document.getElementById('main');
     if (!nav || !main || document.getElementById('downloads-hub')) return false;
 
-    launcher = document.createElement('button');
-    launcher.id = 'home-open-downloads';
-    launcher.type = 'button';
-    launcher.className = 'button-link';
-    launcher.addEventListener('click', () => { window.location.hash = '#downloads'; });
-    const videosLauncher = document.getElementById('home-open-videos');
-    if (videosLauncher && videosLauncher.parentElement === nav) nav.insertBefore(launcher, videosLauncher);
-    else nav.append(launcher);
+    launcher = document.getElementById('home-open-downloads');
+    if (!launcher) {
+      launcher = document.createElement('button');
+      launcher.id = 'home-open-downloads';
+      launcher.type = 'button';
+      launcher.className = 'button-link';
+      const videosLauncher = document.getElementById('home-open-videos');
+      if (videosLauncher && videosLauncher.parentElement === nav) nav.insertBefore(launcher, videosLauncher);
+      else nav.append(launcher);
+    }
+    launcher.onclick = () => { window.location.hash = '#downloads'; };
 
     section = document.createElement('section');
     section.id = 'downloads-hub';

@@ -43,16 +43,16 @@ test('web player exposes the same adjustable position and independent details co
   assert.match(script, /createElement\(['"]a['"]\)/);
 });
 
-test('web resources mirror Android platform filters', async () => {
-  const [html, app] = await Promise.all([
-    readRoot('index.html'),
-    readRoot('app.js')
-  ]);
+test('web resources mirror Android platform filters with accessible generated controls', async () => {
+  const app = await readRoot('app.js');
   for (const id of ['resource-platform-all', 'resource-platform-android', 'resource-platform-iphone', 'resource-platform-windows']) {
-    assert.match(html, new RegExp(`id=["']${id}["']`));
+    assert.match(app, new RegExp(id));
   }
-  assert.match(app, /resourceMatchesPlatform|matchesPlatform/);
+  assert.match(app, /resourceMatchesPlatform/);
   assert.match(app, /aria-pressed/);
+  assert.match(app, /\bjieshuo\b/);
+  assert.match(app, /\bjaws\b/);
+  assert.match(app, /\bnvda\b/);
 });
 
 test('temporary Android Actualidad language diagnostic is not left in the release interface', async () => {

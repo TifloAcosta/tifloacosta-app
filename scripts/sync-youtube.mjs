@@ -127,12 +127,14 @@ export async function syncCatalog() {
       const id = item.contentDetails?.videoId;
       const title = String(snippet.title || '').trim();
       if (!id || !title || /^(deleted video|private video)$/i.test(title)) continue;
-      const description = cleanDescription(snippet.description || '');
+      const fullDescription = String(snippet.description || '').replace(/\r/g, '').trim();
+      const description = cleanDescription(fullDescription);
       videos.push({
         id,
         title,
         publishedAt: item.contentDetails?.videoPublishedAt || snippet.publishedAt || '',
         description,
+        fullDescription,
         excerpt: buildExcerpt(title, description),
         thumbnail: snippet.thumbnails?.medium?.url || snippet.thumbnails?.high?.url || snippet.thumbnails?.default?.url || '',
         url: `https://www.youtube.com/watch?v=${id}`

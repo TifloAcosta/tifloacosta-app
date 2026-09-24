@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-24T20:31:50.598Z",
+  "generatedAt": "2026-09-24T23:30:27.478Z",
   "resources": [
     {
       "kind": "resource",
@@ -20,6 +20,26 @@
       "title": "Complete Course on Braille Screen Input on iPhone",
       "url": "https://drive.google.com/file/d/1C317Eva0eE8ekQ9HqmXIvzY1-Zxty1nC/view?usp=drivesdk",
       "openUrl": "https://drive.google.com/file/d/1C317Eva0eE8ekQ9HqmXIvzY1-Zxty1nC/view?usp=drivesdk",
+      "isNew": true
+    },
+    {
+      "kind": "resource",
+      "id": "es-rehabilitacion-autonomia-2026",
+      "lang": "es",
+      "category": "Estudios",
+      "title": "¿Y ahora cómo voy a hacer mi vida?",
+      "url": "https://drive.google.com/file/d/1ctEt4f5dq1Q5ITwj2VpBGgkBVAdVD4SR/view?usp=drivesdk",
+      "openUrl": "https://tifloacosta.com/docs/es/rehabilitacion-autonomia-despues-perder-vista.html",
+      "isNew": true
+    },
+    {
+      "kind": "resource",
+      "id": "en-rehabilitation-independence-2026",
+      "lang": "en",
+      "category": "Research and Studies",
+      "title": "How Am I Supposed to Live My Life Now?",
+      "url": "https://drive.google.com/file/d/1Pla9qsRkSSMoAlnfixE8nA7J5Um6mCQS/view?usp=drivesdk",
+      "openUrl": "https://tifloacosta.com/docs/en/rehabilitation-independence-after-sight-loss.html",
       "isNew": true
     },
     {
@@ -4846,6 +4866,139 @@
   "news": [
     {
       "kind": "news",
+      "id": "engadget-05b6b0c987172f8d:en",
+      "sourceId": "engadget-05b6b0c987172f8d",
+      "lang": "en",
+      "title": "Ray-Ban Meta Gen 3 vs. Ray-Ban Meta Gen 2: How these AI glasses compare",
+      "summary": "Meta's newest smart glasses are an iterative, expensive update.",
+      "body": "Meta's newest smart glasses are an iterative, expensive update.\n\nMeta announced a slew of new smart glasses at Meta Connect 2026 , including its first camera-free options , but the company's Ray-Ban Meta models remain the flagship. The Ray-Ban Meta Gen 3 carry over many of the improvements introduced in smaller updates over the last year, like the more prescription-friendly Ray-Ban Meta Optics or the affordable Meta Glasses , with new features that mostly rely on software rather than reinvented hardware.\n\nOther than new colors and frame options, it's hard to tell how the Ray-Ban Meta Gen 3 glasses differ from the Ray-Ban Meta Gen 2 , unless you really dig into the specs. And you kind of need to, since understanding those differences is the only way to justify the new $449 starting price.\n\nThe biggest changes Meta introduced to the Gen 3 are a longer battery life and the addition of more microphones. The Ray-Ban Meta Gen 3 lasts up to 9 hours on a charge — one hour more than the Gen 2 — and up to 50 hours with its charging case, two hours more than the Gen 2's 48 hours. In day-to-day usability this might not make a huge difference, especially when compared to the 12 hours of battery life the company is promising on the Ray-Ban Meta Audio. We'll need to do a full review of the glasses to see what the battery life improvements mean in real-world use.\n\nThe Gen 3's six-mic array, one more mic than what Meta offered on the Gen 2, is a similarly modest change. Meta says adding the extra mic and redesigning the microphone layout on the Gen 3 model has allowed for better background noise reduction for calls and AI interactions, but that will have to be tested to see if it's meaningfully different. One way the new mic on the Gen 3 could allow it to stand out from the Gen 2 is support for listening to and recording Dolby Atmos spatial audio, a feature the company says is launching later in 2026.\n\nMeta has also ported over the action button it introduced on the Ray-Ban Meta Optics and Meta Glasses to the Gen 3. The button can summon Meta AI, act as a capture button, or be assigned as a shortcut for a variety of other Ray-Ban Meta features. The Gen 2 features a capture button that only works with Meta's camera features.\n\nSmart glasses are fashion as much as they are anything else, so another way the Gen 3 are differentiated from the Gen 2 is the addition of two new frame styles. The Ray-Ban Meta (Gen 3) Aviator features lenses shaped like Ray-Ban's classic aviator glasses, with thick frames in multiple translucent and tortoiseshell colors. For something a little less in-your-face, the Ray-Ban Meta (Gen 3) Zena comes with more of a cat-eye shape in translucent, black and tortoiseshell colors. The only frame shape that's carrying over from the Gen 2 is the Wayfarer, Ray-Ban's most well-known frame. That doesn't mean Meta won't port more Gen 2 styles over in the future given its penchant for mid-cycle refreshes, but for now most Gen 3 glasses will look pretty different.\n\nThey're also, technically, a bit smaller. The best comparison point is the Ray-Ban Meta Wayfarer. The standard-fit Gen 2 model is 131mm from hinge to hinge, while the Gen 3 model is only 129mm. The temples on the Gen 3 model are also slightly shorter at 149mm compared to 150mm on the Gen 2. The relationship is reversed when it comes to weight, though, where the Gen 3 model is a slightly heavier 51.5 grams compared to the Gen 2's 51 grams. Those changes might not be noticeable unless you have the glasses side-by-side, but it does suggest Meta is mostly trending towards smaller glasses overall.\n\nSoftware and AI access define the experience of using Ray-Ban Meta smart glasses. And the vast majority of features the company announced alongside its Gen 3 model will be available on older Gen 2 models, too. That includes using the smart glasses' FDA-cleared hearing enhancement feature , interacting with the company's Muse AI agent , and taking photos with the glasses' new dynamic photo capture feature, which captures multiple shots at once and lets you pick the best framing.\n\nCombined with the Ray-Ban Meta Gen 3's higher starting price of $449, $70 more than the Ray-Ban Meta Gen 2, that makes justifying an upgrade hard. The company's new smart glasses will likely be a great way to jump into Meta's growing ecosystem, but if you can buy a used Gen 2 pair (assuming you don't need a prescription) you'll likely get a better deal.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2268392/ray-ban-meta-gen-3-vs-gen-2-ai-glasses-comparison/",
+      "publishedAt": "2026-09-24T21:56:17.000Z",
+      "categories": [
+        "tecnologia-general",
+        "gafas-inteligentes",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-64eedca16b292eac:en",
+      "sourceId": "techcrunch-64eedca16b292eac",
+      "lang": "en",
+      "title": "Nexterity wants to automate the hard, dangerous part of pipefitting",
+      "summary": "The startup's robot can tighten or loosen four bolts at a time, and it fits in a Pelican case.",
+      "body": "Lindsey Elliott is big into bolts. At last year’s Bolting Symposium — the 13th annual — she said the highlight was playing “Bolting Bingo” against the many self-proclaimed “torque dorks” who were in the room.\n\nA former engineer and planner at ExxonMobil, Elliott has spent years thinking about how to improve the infrastructure that moves oil, gas, and petrochemicals. Bolts are what she landed on. Specifically, the bolts that connect sections of pipe (technically called “bolted flange joints”). These bolts require hard, physical work to loosen and tighten, and are the source of many pipefitters’ injuries. Like many trade industries, there’s also a labor shortage.\n\n“Those people get really tired when they’re asked to work 12 hours a day for three months in a row,” she told TechCrunch. “I’ve talked to pipefitters across the U.S. across Canada, and just repeatedly have been told North American pipefitting productivity is notoriously low.”\n\nThe solution Elliott came up with at her startup Nexterity, which is one of the Startup Battlefield 200 selected to participate in TechCrunch Disrupt, is a remote-controlled robot that can handle this part of the job. It’s the kind of idea that could fundamentally change this particular blue collar job if widely adopted, making the workers safer and more productive.\n\nThink: more dork, less torque.\n\nThe robot comes in two main pieces that fit around a pipe. Powered by batteries, the robot can slide across the pipe once it’s attached and quickly loosen and tighten four bolts at a time.\n\nElliott said Nexterity has developed a few different configurations of the robot to fit different standard pipe sizes, but they’re all small enough to fit in a Pelican case and be carried by a single worker. That makes them easy to deploy to new sites — flexibility that is crucial to Nexterity’s business model of treating the robot like rental construction equipment.\n\nElliott said she arrived at this particular design as a result of conversations she’s had over the last few years — not just at the Bolting Symposium, but also with members of the Pressure Vessels & Piping Division of the American Society of Mechanical Engineers.\n\n“What I learned from the people, the torque dorks per se,” she said, “is that 80% of our pipes are between two to eight inches in diameter, or what they call NPS2 to NPS8. And so when you have that much repeatability, you have a fantastic candidate for automation.”\n\nIt’s a pretty straightforward idea, but one that Elliott believes has a lot of upside.\n\n“I think it would shock a lot of people just how big this market is,” she said. “I mean, day to day, most of us don’t think about piping infrastructure, but even water, wastewater, water treatment, food and beverage, mining, nuclear, any kind of green and sustainable manufacturing facility — they all use the same kind of piping.”",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/09/24/nexterity-wants-to-automate-the-hard-dangerous-part-of-pipefitting/",
+      "publishedAt": "2026-09-24T20:45:00.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-73414574b2d8ba3c:en",
+      "sourceId": "9to5mac-73414574b2d8ba3c",
+      "lang": "en",
+      "title": "M6 Mac mini review, Apple fitness band rumors, Apple AI servers",
+      "summary": "Benjamin and Chance cover the week in Apple news, including hands-on with the new M6 Mac mini and AirPods 5, the first round of bug fixes for the new operating systems, Apple Music Hall, and more. And in Happy Hour Plus , we reflect on how Siri AI has fared in the real world so far. Subscribe at 9to5mac.com/join . Sponsored by Quince : Find your next fall favorites at Quince. Download the Quince app for app-exclusive offers, or visit quince.com/happyhour . Get free shipping on your order and 365-day returns. Now available in Canada and the UK, too. Sponsored by iMazing : iMazing’s platform for data transfer and device management keeps getting better. Get 20% off iMazing with code 9TO5-SEP26-20OFF. Sponsored by Copilot Money : Get two months free with code 9TO5MAC at copilot.money/9to5mac . more…",
+      "body": "Benjamin and Chance cover the week in Apple news, including hands-on with the new M6 Mac mini and AirPods 5, the first round of bug fixes for the new operating systems, Apple Music Hall, and more.\n\nAnd in Happy Hour Plus , we reflect on how Siri AI has fared in the real world so far. Subscribe at 9to5mac.com/join .\n\nChance Miller\n\nBenjamin Mayo\n\nSubscribe to 9to5Mac Happy Hour Plus ! Support Benjamin and Chance directly with Happy Hour Plus! 9to5Mac Happy Hour Plus includes:\n\nJoin for $5 per month or $50 a year at 9to5mac.com/join .",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/09/24/happy-hour-609/",
+      "publishedAt": "2026-09-24T20:43:14.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "apps-accesibles",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-223310dbc6db7e59:en",
+      "sourceId": "the-verge-223310dbc6db7e59",
+      "lang": "en",
+      "title": "Gemini 3.8 Live with Live Avatar gives Google’s AI a face",
+      "summary": "Google's new Gemini 3.8 Live update lets users have conversations with the model while watching an animated AI persona respond in real time. The \"Live Avatar\" will lip-sync and show different facial expressions during conversations, but it's currently only available to Gemini Enterprise customers. As noted by Google, Live Avatar can transition between the 97 […]",
+      "body": "Google's new Gemini 3.8 Live update lets users have conversations with the model while watching an animated AI persona respond in real time. The \"Live Avatar\" will lip-sync and show different facial expressions during conversations, but it's currently only available to Gemini Enterprise customers.\n\nAs noted by Google, Live Avatar can transition between the 97 languages it supports \"without degrading video fidelity or introducing visual drift.\" One video shared by Google shows its Live Avatar talking in English and Japanese, with its mouth animation lining up with what it's saying in both languages. It can also pull up information on-screen w …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1000328/google-gemini-ai-live-avatar-face",
+      "publishedAt": "2026-09-24T19:59:26.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-50a6ea82d5a6559c:en",
+      "sourceId": "9to5mac-50a6ea82d5a6559c",
+      "lang": "en",
+      "title": "Apple Maps just added two new features in iOS 27",
+      "summary": "iOS 27 is packed with a wide array of new features for iPhone, including in Apple Maps. Here are the two tentpole iOS 27 features for Apple Maps, plus some miscellaneous improvements. more…",
+      "body": "iOS 27 is packed with a wide array of new features for iPhone, including in Apple Maps. Here are the two tentpole iOS 27 features for Apple Maps, plus some miscellaneous improvements.\n\nApple Maps doesn’t look drastically different when you open it in iOS 27. But Apple has a variety of big and small improvements in its latest update.\n\nOne tentpole feature is an upgraded Flyover experience . Per Apple :\n\nApple Maps brings an enhanced Flyover experience, which combines aerial imagery with AI to enable users to view imagery in stunning detail for select cities around the world like never before. Whether scouting a location before a trip or simply exploring a city from a new perspective, the enhanced experience gives users a sharper and more lifelike glimpse into destinations across the globe.\n\nApple also highlights a new Local Lists feature that’s available in the US:\n\nWith Local Lists, Apple Maps users in the U.S. can find the perfect spot for meeting friends, dining, and more. Using intelligent insights from what’s trending, Maps surfaces locally relevant collections of places — from trending restaurants to great spots to take kids — so it’s easy for users to find what they are looking for. All insights are derived with privacy in mind and never tied to individual users.\n\nBeyond these two tentpole changes, iOS 27 also has a variety of other improvements:\n\niOS 27 also brings certain features to more territories around the world, including Visited Places and Guides. And the Maps icon has been refreshed with a new design, as seen above.\n\nWhich new iOS 27 features in Apple Maps are you most excited about? Let us know in the comments.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/09/24/heres-everything-new-for-apple-maps-in-ios-27/",
+      "publishedAt": "2026-09-24T19:55:15.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-100cde1ac1467fb2:en",
+      "sourceId": "ars-technica-100cde1ac1467fb2",
+      "lang": "en",
+      "title": "F-Droid gets its biggest update in a decade with new UI and smoother app installs",
+      "summary": "F-Droid's Android app store has been rebuilt from the ground up.",
+      "body": "Virtually every Android device comes with the Play Store preloaded, but there are other ways to get apps. F-Droid bills itself as a community-driven source for free and open source Android apps, but its official app store has gone 10 years without a major update. That's finally changing: After a multiyear effort, the team has just announced F-Droid 2.0 is rolling out.\n\nThe new F-Droid client was redesigned from scratch in Kotlin Compose, which is the standard for modern Android apps. This makes the store much more responsive, and there's optional support for Android's Material theming. The interface has also been cleaned up considerably, making the most important functions easier to access and hiding some others in overflow menus.\n\nWhile the new F-Droid looks nicer, the update was largely about making it easier to find and install apps. When F-Droid first appeared, there wasn't much to see, but now it has thousands of open source apps. Unlike the Play Store, F-Droid doesn't track your taps and installs to push ads and suggestions—it helps you find things and gets out of the way.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/gadgets/2026/09/f-droid-gets-its-biggest-update-in-a-decade-with-new-ui-and-smoother-app-installs/",
+      "publishedAt": "2026-09-24T19:30:42.000Z",
+      "categories": [
+        "tecnologia-general",
+        "android",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-35e353359cde3fd6:en",
+      "sourceId": "engadget-35e353359cde3fd6",
+      "lang": "en",
+      "title": "New York Times Cooking is coming to Meta's AI and display glasses",
+      "summary": "The app is getting a \"hands-free\" mode that can narrate recipe steps.",
+      "body": "The app is getting a \"hands-free\" mode that can narrate recipe steps.\n\nWhen I reviewed Meta's display-enabled glasses last year, I was really curious to see if they would be useful while cooking. I spend a lot of time trying new recipes, and being able to see the steps right in front of my eyes sounded so much more convenient than having to repeatedly unlock and scroll through my phone with dirty hands.\n\nUnfortunately, the glasses didn't quite hold up as a cooking aid. At the time, the only way to get recipe content was via Meta AI. And even when I tried the recipes it suggested, the steps wouldn't appear in the display long enough to complete them.\n\nBut Meta has now revived my hope that smart glasses could save me some frustration while cooking dinner. The company showed off a new integration with the New York Times Cooking app that will bring its recipes to its display glasses and to its wider lineup of non-display AI glasses. It's not available yet, but we got a brief preview of how it will work during Meta's developer state of the union at Connect.\n\nThe New York Times Cooking app is getting a new \"hands-free mode\" that will allow users to pair their glasses to the app in order to receive audio cues for the dish they're cooking. But the feature won't just read out the same steps listed in the app. \"With cooking's editorial guidance, we developed a system to restructure lengthy steps into brief audio instructions, preserving the author's expertise while supplying ingredients and measurements in line,\" The New York Times ' AJ Chavar explained. The version for Meta's Ray-Ban Display glasses will also keep recipe steps brief, with each displayed on a card users can swipe through as they go.\n\nChavar didn't say exactly when the app would be available on Meta's glasses, but said hands-free mode would be rolling out \"later this fall.\"",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2268183/new-york-times-cooking-is-coming-to-metas-ai-and-display-glasses/",
+      "publishedAt": "2026-09-24T19:24:34.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apps-accesibles",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-f1b2237788d33ae9:en",
+      "sourceId": "9to5mac-f1b2237788d33ae9",
+      "lang": "en",
+      "title": "macOS 27 Top Features: much more than just Siri AI [Video]",
+      "summary": "Although Apple’s revamped personal assistant is no doubt the headlining feature in macOS 27 Golden Gate , there are many other new features and refinements in this year’s update that don’t involve Siri AI. Read our post as I cherry-pick a few of my favorite new macOS 27 updates, and be sure to watch our video as I walk through them all. more…",
+      "body": "Although Apple’s revamped personal assistant is no doubt the headlining feature in macOS 27 Golden Gate , there are many other new features and refinements in this year’s update that don’t involve Siri AI. Read our post as I cherry-pick a few of my favorite new macOS 27 updates, and be sure to watch our video as I walk through them all.\n\nJeff's favorite screen cleaning cloth that polishes to a shine.\n\nmacOS 27 changes almost all of the built-in app icons in some way, with a few icons like Siri, Preview, and Chess undergoing complete redesigns. Other app icons, like Finder, Photos, and Reminders, also receive noticeable revamps, with a trend toward emphasizing the Liquid Glass design language. Few app icons were spared changes in macOS Golden Gate, but many of the updates are subtle.\n\nIf you watch my video below, you’ll see slider comparisons showing how each app icon looked in macOS Tahoe and how it now looks in macOS Golden Gate.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/09/24/macos-27-top-features-much-more-than-just-siri-ai-video/",
+      "publishedAt": "2026-09-24T19:13:04.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "techcrunch-9e2dbf513e867c90:en",
       "sourceId": "techcrunch-9e2dbf513e867c90",
       "lang": "en",
@@ -4912,88 +5065,6 @@
     },
     {
       "kind": "news",
-      "id": "techcrunch-44c339cde0d1b1ea:en",
-      "sourceId": "techcrunch-44c339cde0d1b1ea",
-      "lang": "en",
-      "title": "Meta’s Muse Charm looks like a Tamagotchi, but it’s tapping into a much newer trend",
-      "summary": "Meta’s new AI gadget may look like a Tamagotchi, but its dangling form factor taps into a much broader Gen Z trend around bag charms, retro tech, and turning gadgets into fashion accessories.",
-      "body": "Is Meta’s just-announced Muse Charm a playful device that will make AI more approachable to everyday consumers, or will it be yet another flop in a long list of AI hardware gadgets that didn’t take off, like the Ai Pin, Rabbit, or Friend pendant? Reactions, so far, have been mixed. What the Charm is, however, is on-trend.\n\nLike it or not, the form factor could potentially appeal to Gen Z consumers who, in this post- Labubu era, have already been into various dangling items from keychains and bags. It’s all part of a broader kitschy, retro-inspired shift in their approach to fashion and technology.\n\nAlready, Gen Z has created a market for things that dangle, with everything from lip glosses to hand sanitizers to sunblocks to fragrances and more turned into bag charms , primarily targeted at women.\n\nView this post on Instagram A post shared by Kristina Rodulfo (@kristinarodulfo)\n\nHailey Bieber’s viral Rhode lip case, which stuck the lip gloss onto a phone case , had a big influence on this idea that beauty products could also be fashion accessories, as did its other beauty-focused bag charms . (The brand saw $212 million in annual net sales from a lineup of roughly 10 products, Vogue noted last year, as the company announced its billion-dollar exit to Elf Beauty.)\n\nThen there was the Labubu craze , which saw sales of the so-ugly-it’s-cute fuzzy monster bag charm explode, growing Pop Mart’s (the Chinese retailer behind the product) revenue to $1.8 billion in 2024 , a 7x jump from 2019. While demand for the Labubu itself has since faded, the concept of the decorative bag charm has not. One analyst firm estimates the global bag charm market will grow to over $1 billion by 2030 .\n\nToday, bag charms can be characters, bedazzled beauty products, or other whimsical designs or objects, like Coach’s coveted cherry charms , a Gen Z favorite . They’ve proven popular because they’re a means of expressing your personality, just as humans have done for ages through their fashion choices, makeup, and jewelry.\n\nSimilarly, Meta’s Muse is a customizable character; you design your own avatar, which makes the AI agent a reflection of you, too.\n\nAnd, as many have pointed out, Muse Charm’s form factor recalls a Tamagotchi, the pocket-sized digital virtual pet that became a major toy fad in the late 90s and again in the mid-2000s.\n\nHowever, the Tamagotchi is not the most current reference. It seems the Muse Charm is actually a twist on what some young people are already doing with their Apple Watch. Often meant as a way to repurpose an older device , the concept of the Apple Watch keychain or charm has been growing in popularity, fueled by TikTok videos showing different ways to use the watch when not on your wrist.\n\nOn retailers like Amazon and Walmart, and marketplaces like eBay and Etsy , there are thousands of Apple Watch keychains, straps, pendants, lanyards, clips, and bag charm cases now available in nearly every style you can think of. As you might expect, these keychain watches are often being adopted by younger women as a fashion accessory first, rather than a piece of technology.\n\nThis all then intersects with the broader retro-tech trend , which has seen older tech like digital cameras, flip phones, iPods, CDs , cassette tapes, home phones , and wired earbuds making a quiet comeback.\n\nThis vibe shift in tech comes as young people describe the addictive, algorithm-driven feeds and “soulness” nature of technology as making them feel more disconnected, which has also fed into this trend of wanting tech they can touch and feel. (One startup, Clicks, is even bringing back the physical phone keyboard in a BlackBerry-inspired device , for instance.)\n\nFor Gen Z, these physical objects help them feel more connected with the technology they’re using and offer a sense of control over a world where technology has become so deeply integrated into our lives that it no longer feels like a choice to use it.\n\nYoung women , again, have been at the forefront of this trend, with some even crafting their own portable, mini computers, “cyberdecks, ” which they fit inside clamshell purses or custom cases, and bedazzle with jewels, flowers, stickers, pearls, and other items to make them feel more personal.\n\nThat brings us back to the Muse Charm. While it’s clearly designed with the tech-as-fashion-accessory trend in mind, that doesn’t mean it will be a hit.\n\nMeta has abused consumer trust over the years to such an extent that it may never fully recover.\n\nTo name just a few examples: The tech giant had to settle with the FTC over charges that it deceived consumers by making users’ private information public without their consent, and has been penalized by the FTC for numerous privacy-related violations. In 2023, the FTC charged Meta with violating a privacy order that was filed after the 2019 settlement. It’s also been repeatedly hauled before Congress over its harms to minors, has lost or settled multiple lawsuits over the same topics, and has seen various whistleblowers outing its abuses.\n\nThese careless privacy practices could ultimately see Meta lose the battle to be the consumer AI of choice… unless, of course, consumers decide that the “devil you know” is better than the one you don’t. (Especially when the latter are those warning AI could put an end to the human race .)\n\nMeta’s end game, after all, is highly-targeted, highly-personalized ads. If that’s the privacy tradeoff in gaining access to free AI — Meta said it will monetize Muse by taking a small fee from transactions — consumers could be willing to take the risk.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/09/24/metas-muse-charm-looks-like-a-tamagotchi-but-its-tapping-into-a-much-newer-trend/",
-      "publishedAt": "2026-09-24T17:39:24.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-0c9bc2c3ba12ba23:en",
-      "sourceId": "9to5mac-0c9bc2c3ba12ba23",
-      "lang": "en",
-      "title": "9to5Mac Daily: September 24, 2026 – iPhone Handoff, iOS 27 updates",
-      "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Stuff :Stuff helps you get everything out of your head and into a simple, elegant system—closing open loops and reducing mental stress. A simple to-do list for iPhone, iPad, and Mac, with powerful tools that make organizing, tracking, and checking off your tasks a whole lot more satisfying. Get Stuff done. more…",
-      "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Stuff :Stuff helps you get everything out of your head and into a simple, elegant system—closing open loops and reducing mental stress. A simple to-do list for iPhone, iPad, and Mac, with powerful tools that make organizing, tracking, and checking off your tasks a whole lot more satisfying. Get Stuff done.\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nCatch up on 9to5Mac Daily episodes!\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/09/24/9to5mac-daily-september-24-2026-iphone-handoff-ios-27-updates/",
-      "publishedAt": "2026-09-24T17:36:23.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "android",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-aa48c1b27a4d4758:en",
-      "sourceId": "engadget-aa48c1b27a4d4758",
-      "lang": "en",
-      "title": "Turtle Beach Rematch review: The cutest Switch 2 controller of the bunch",
-      "summary": "Official Nintendo designs and RGB lighting give the Rematch an adorable edge.",
-      "body": "Official Nintendo designs and RGB lighting give the Rematch an adorable edge.\n\nThe first time I turned on the Rosalina edition of the Switch 2 Rematch controller, and a rainbow of RGB lighting rippled across the stars on its face, I expelled a sound of delight that would've been embarrassing had anyone other than my two small dogs been in the room. The noise was involuntary, high-pitched and entirely warranted, because this gamepad is a slice of handheld joy — and that's a feeling we could all use a little more of nowadays.\n\nOn top of the adorable factor, the Turtle Beach Rematch Wireless Controller for Switch 2 is a comfortable, reactive and low-latency wireless gamepad with a few key cutting-edge features. Obviously, it comes in a handful of Nintendo-inspired, RGB-lit designs. Light and slim with offset thumbsticks just like the Nintendo Switch 2 Pro Controller , Turtle Beach's Switch 2 Rematch is the gamepad for Mario Kart fanatics, Animal Crossing residents and anyone who wants to hold a bit of whimsy in their hands. There's also an all-black model, if smiling isn't really your thing.\n\nThe Turtle Beach Rematch Wireless Controller for Switch 2 features built-in motion control capabilities, never-drift TMR thumbsticks, a dedicated button for GameChat, a rechargeable 40-hour battery (12 hours with RGB effects turned on) and a playable range of 30 feet. It also has buttons on the backside of the grips that you can map to whatever action you'd like, or just use them as built-in fidget toys. Most of the models include RGB effects with four settings.\n\nI tested out the Rosalina edition, usually with a rainbow river flowing under my fingertips, and found it to be perfectly responsive across a few games, including Hello Kitty Island Adventure , Mario Kart World and Resident Evil Requiem . It has stiff, hard-plastic face buttons that look like little round pills, and enjoyably clicky triggers and bumpers. The face buttons have their associated letters carved into them — A, B, Y, X — and they'll leave an impression on your thumb-tip when playing anything that requires a long hold, like Mario Kart .\n\nThe analog sticks are smooth with a crisp click when they hit the sides of their containment circles, and the fact that they're built with TMR tech means they're ultra precise and won't ever drift. This is a feature that even the Nintendo Switch 2 Pro Controller doesn't have.\n\nI enjoy the fact that the player indicator lives on the bottom of the Rematch, easily peepable with a quick glance down. And, of course, I adore the multicolored lighting effects on the Rosalina gamepad.\n\nThe Switch 2 Rematch doesn't have haptic feedback and it's not able to wake up the Switch 2 console on its own. The controller weighs just 0.79 lbs and here's a hollow sound about it that could read as cheap to some people, but I'm just happy it's not heavy. Sizewise, it's comparable to the official Switch 2 Pro Controller, with a super-smooth face and textured plastic grips.\n\nI happen to have fairly small hands — it's like they stopped growing in middle school, I swear — and the Rematch is a perfect fit in my grasp, slim and light. It's never caused my palms or fingers to cramp up, even after multiple uninterrupted hours of play. A compact form factor is a common feature among Switch 2 gamepads, since they tend to be modeled after Nintendo's Pro Controller line, which is certifiably small-hand friendly. So, while it's not unique to the Rematch, the small chassis is definitely a bonus in my book.\n\nThe standout feature of the Rematch, the thing that makes it worth buying over any other Switch 2 controller, is its cute factor. Turtle Beach's Switch 2 Rematch controllers come in a variety of adorable and/or rad designs, complete with RGB lighting effects and officially licensed characters like Mario, Princess Peach, Rosalina and KK Slider. There's also a sleek solid-black model with red rings around the sticks for the minimalists, goths and spies among us.\n\nHere are the available flavors of the Switch 2 Rematch gamepad:\n\nThere is no price difference among the models. While the Switch 2 Rematch wireless controller is priced at $65, it's often on sale for $50 or less. There's also a special, slightly more expensive version of the controller with a Fortnite Kevin the Cube design. Regardless of your knowledge of Fortinte lore, this controller is very pretty, with a purple ombre colorway and light-up sigils. It costs $70, includes an in-game emote, and doesn't seem to be on sale as often as the others.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2267930/turtle-beach-rematch-review/",
-      "publishedAt": "2026-09-24T17:30:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "windows"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-995a7cb8f61e755f:en",
-      "sourceId": "9to5mac-995a7cb8f61e755f",
-      "lang": "en",
-      "title": "Apple Watch Ultra 4 includes a new watch face bezel option",
-      "summary": "Apple Watch Ultra includes a few more ways to customize your watch face than Series models. These include Ultra-only faces, colors and fonts, and a bezel-type complication. Apple Watch Ultra 4 goes even further, adding a new option in the bezel configuration category. more…",
-      "body": "Apple Watch Ultra includes a few more ways to customize your watch face than Series models. These include Ultra-only faces, colors and fonts, and a bezel-type complication. Apple Watch Ultra 4 goes even further, adding a new option in the bezel configuration category.\n\nBoth Apple Watch Series 12 and Apple Watch Ultra 4 introduce the new Readiness app . This uses data like fitness activity, vitals, and sleep score to present you with a Readiness score.\n\nOvernight vitals include heart rate, respiratory rate, wrist temperature, and recovery HRV. Daytime vitals include heart rate and recovery HRV.\n\nApple Watch Ultra 4 faces that support displaying bezel information add Readiness as a new watch face configuration. Bezel options now include:\n\nThe Readiness bezel option puts your numerical score and description at the bottom of the watch face.\n\nFour bars wrap the edge of the watch face, showing the different readiness score categories, while a dot indicates where your score fits within that category.\n\nWatch faces like Modular Ultra and the new Siri Modular face support displaying the bezel configuration.\n\nIf you’re looking for a way to focus on your readiness score, the new bezel configuration is a great way to keep track of the number.\n\nSince readiness can change throughout the day, it may be worth having front-and-center for a lot of users.\n\nApple Watch Series 12 and Ultra 4 are both available now.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/09/24/apple-watch-ultra-4-includes-a-new-watch-face-bezel-option/",
-      "publishedAt": "2026-09-24T17:29:05.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-5c54170b1aca0d57:en",
-      "sourceId": "9to5mac-5c54170b1aca0d57",
-      "lang": "en",
-      "title": "watchOS 27.2 includes hidden overhaul for Apple Watch screenshots",
-      "summary": "watchOS 27.2 is coming next month with new Apple Watch features, and leaker pdfu just found a big change in the works for screenshots too. more…",
-      "body": "watchOS 27.2 is coming next month with new Apple Watch features, and leaker pdfu just found a big change in the works for screenshots too.\n\nLeaker pdfu has recently started sharing a variety of tidbits found in Apple code. For example, he was the first to discover the Readiness app in watchOS 27, and just yesterday leaked the UI for Siri AI on HomePod.\n\nToday in a new post , pdfu reveals that the watchOS 27.2 beta includes code for a revamped screenshot experience on Apple Watch.\n\nCurrently, taking an Apple Watch screenshot simply causes the screen to flash, then the screenshot is added to your Photos library.\n\nThe new screenshot flow imitates what’s available now on iPhone and iPad, letting you optionally share and/or delete the screenshot right away.\n\nIt’s unclear if Apple plans to implement this change in a forthcoming watchOS 27.2 beta, or if it needs more time for development. But if it doesn’t make the cut in watchOS 27.2, we’re still likely to see it come to the Apple Watch in the near future.\n\nWhat do you think of watchOS 27.2’s leaked screenshot experience? Let us know in the comments.\n\n* Buy Apple Watch with 15% discount from Apple refurbished",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/09/24/watchos-27-2-includes-hidden-overhaul-for-apple-watch-screenshots/",
-      "publishedAt": "2026-09-24T17:24:26.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "the-verge-cbb6b6f8ffdf8cc4:en",
       "sourceId": "the-verge-cbb6b6f8ffdf8cc4",
       "lang": "en",
@@ -5006,38 +5077,6 @@
       "categories": [
         "tecnologia-general",
         "apps-accesibles",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-95e4fa1e1fc3e05a:en",
-      "sourceId": "engadget-95e4fa1e1fc3e05a",
-      "lang": "en",
-      "title": "Google Photos' new Redact tool will make it easy to hide sensitive information",
-      "summary": "Google Photos' new AI-powered features include the Redact tool, which can quickly blur parts of an image.",
-      "body": "It's one of many new features in the app.\n\nGoogle has listed some of its latest AI-powered updates for the Photos app, and they include a new \"Redact\" tool that lets you blur sensitive information and anything else you want in your images. Say, you have a picture of a vehicle and want to censor its plate number — just use Redact to turn that portion of the image into a \"pixelated\" block. Redact is part of Photos' upgraded Markup feature, which now also offers new fonts and precise thickness sliders for pens and highlighters. The new Markup tools are rolling out to all Google Photos users on Android worldwide.\n\nIn addition, the company has announced that the app's Wardrobe feature is rolling out to more people. If you don't have access to it yet, you will have it soon if you're an Android or iOS user in the US, India or Brazil. You can use Wardrobe to create a catalog of your clothes and jewelry from the images in your library, which you can then consult for styling ideas.\n\nGoogle has also revisited Photos' availability within Gemini Spark, which will let you find and edit images with a single prompt if you're a Google AI Pro or Ultra subscriber in the US. If you're on Android, you'll be able to apply vintage-inspired filters to your photos with the Moods feature. On both Android and iOS in select countries, you'll now see 15 new Remix templates that can use your likeness to create red carpet images and photo booth shots for you.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2267415/google-photos-update-redact-tool/",
-      "publishedAt": "2026-09-24T17:00:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-a0214c9336158530:en",
-      "sourceId": "the-verge-a0214c9336158530",
-      "lang": "en",
-      "title": "Now Google Chrome shares tabs to new devices that save where you were",
-      "summary": "Google is rolling out some new Chrome browser features that are designed to make it easier to research and study complicated topics. The cross-device tab switching feature is getting a memory upgrade, alongside new capabilities for Gemini in Chrome that can analyze more types of media and generate interactive study quizzes. Chrome has an existing […]",
-      "body": "Google is rolling out some new Chrome browser features that are designed to make it easier to research and study complicated topics. The cross-device tab switching feature is getting a memory upgrade, alongside new capabilities for Gemini in Chrome that can analyze more types of media and generate interactive study quizzes.\n\nChrome has an existing feature that allows you to send a tab from your mobile to a computer (or vice versa) so you can quickly access the same webpage when switching devices. Now, this feature will also remember exactly where you had scrolled to on that tab when you switch, sparing you from having to manually find where …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/999901/google-chrome-tab-memory-gemini-updates",
-      "publishedAt": "2026-09-24T17:00:00.000Z",
-      "categories": [
-        "tecnologia-general",
         "ia-accesibilidad"
       ]
     },
@@ -5069,23 +5108,6 @@
       "publishedAt": "2026-09-24T14:03:38.000Z",
       "categories": [
         "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-5e10f22222e5f04b:en",
-      "sourceId": "ars-technica-5e10f22222e5f04b",
-      "lang": "en",
-      "title": "Review: Apple's hyper-pricey M5 Ultra Mac Studio made me into a vibe coder",
-      "summary": "Usable local AI is a lot of fun, but how much would you pay for it?",
-      "body": "This spring, Apple made it official: The Mac Pro is dead .\n\nWhen Apple was using Intel processors and AMD GPUs, the idea of an expandable and upgradeable tower made sense. But Apple Silicon chips bring the CPU, GPU, and memory interface all under one roof in a way that makes that sort of upgradeability not just superfluous but impossible. At least not without breaking some of the chips' key benefits.\n\nAnd as it happens, Apple Silicon's combination of a fast CPU, solid GPU, and unified memory architecture has made it a good fit for a modern \"pro\" workload that really pushes high-end hardware: running language models and agents locally.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/gadgets/2026/09/review-apples-hyper-pricey-m5-ultra-mac-studio-made-me-into-a-vibe-coder/",
-      "publishedAt": "2026-09-24T11:00:04.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple",
         "ia-accesibilidad"
       ]
     },

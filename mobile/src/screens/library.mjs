@@ -80,7 +80,7 @@ export function resourceMatchesPlatform(item, platform) {
     return /\bandroid\b|\btalkback\b|\bjieshuo\b/.test(text);
   }
   if (platform === 'iPhone') {
-    return /\biphone\b|\bipad\b|\bios\b|\bvoiceover\b|\bapple watch\b|\batajos?\b/.test(text);
+    return /\biphone\b|\bipad\b|\bios\b|\batajos?\b|\bshortcuts?\b/.test(text);
   }
   if (platform === 'Windows') {
     return /\bwindows\b|\bjaws\b|\bnvda\b/.test(text);

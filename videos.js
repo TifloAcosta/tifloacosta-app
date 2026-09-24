@@ -4,6 +4,7 @@
   const APP_VERSION = '2.1';
   const PAGE_SIZE = 10;
   const SEEK_SECONDS = 60;
+  const POSITION_REFRESH_MS = 1000;
   const YOUTUBE_API_TIMEOUT_MS = 10000;
   const core = window.TifloVideoCore;
   if (!core) return;
@@ -35,7 +36,11 @@
     playerRewind: $('#video-player-rewind'),
     playerToggle: $('#video-player-toggle'),
     playerForward: $('#video-player-forward'),
+    playerPositionLabel: $('#video-player-position-label'),
+    playerPosition: $('#video-player-position'),
     playerNote: $('#video-player-note'),
+    videoDetails: $('#video-details'),
+    videoDetailsPanel: $('#video-details-panel'),
     playerClose: $('#video-player-close'),
     playerYouTube: $('#video-player-youtube'),
     resultsSection: $('#video-results-section'),
@@ -78,8 +83,12 @@
       playControl: 'Reproducir',
       pauseControl: 'Pausar',
       forwardOneMinute: 'Avanzar 1 minuto',
+      position: 'Posición del vídeo',
+      details: 'Ver detalles del vídeo',
+      hideDetails: 'Ocultar detalles del vídeo',
+      detailsEmpty: 'Este vídeo no tiene detalles adicionales.',
       playerPreparing: 'Preparando los controles accesibles del reproductor…',
-      playerReady: 'Controles accesibles listos. Cada pulsación permite avanzar o retroceder 1 minuto.',
+      playerReady: 'Controles accesibles listos. Puedes avanzar o retroceder un minuto o ajustar directamente la posición del vídeo.',
       playerUnavailable: 'No se pudieron activar los controles accesibles adicionales. Puedes utilizar el reproductor de YouTube o abrir el vídeo en YouTube.',
       closePlayer: 'Cerrar reproductor y volver a los vídeos',
       openYouTube: 'Abrir este vídeo en YouTube',
@@ -118,8 +127,12 @@
       playControl: 'Play',
       pauseControl: 'Pause',
       forwardOneMinute: 'Forward 1 minute',
+      position: 'Video position',
+      details: 'Show video details',
+      hideDetails: 'Hide video details',
+      detailsEmpty: 'This video has no additional details.',
       playerPreparing: 'Preparing the accessible player controls…',
-      playerReady: 'Accessible controls are ready. Each press moves forward or back 1 minute.',
+      playerReady: 'Accessible controls are ready. You can move one minute at a time or adjust the video position directly.',
       playerUnavailable: 'The additional accessible controls could not be activated. You can use the YouTube player or open the video on YouTube.',
       closePlayer: 'Close player and return to videos',
       openYouTube: 'Open this video on YouTube',
@@ -147,6 +160,8 @@
   let playerReady = false;
   let playerIsPlaying = false;
   let playerControlStatus = 'preparing';
+  let detailsOpen = false;
+  let positionTimer = null;
 
   function readStorage(key) {
     try { return localStorage.getItem(key); } catch { return null; }
@@ -174,6 +189,15 @@
     }).format(date);
   }
 
+  function formatTime(seconds) {
+    const total = Math.max(0, Math.round(Number(seconds) || 0));
+    const hours = Math.floor(total / 3600);
+    const minutes = Math.floor((total % 3600) / 60);
+    const secs = total % 60;
+    if (hours > 0) return `${hours}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    return `${minutes}:${String(secs).padStart(2, '0')}`;
+  }
+
   function setSortOptions() {
     const c = copy[lang];
     els.sort.innerHTML = '';
@@ -194,8 +218,8 @@
   }
 
   function setPlayerControlsEnabled(enabled) {
-    [els.playerRewind, els.playerToggle, els.playerForward].forEach(button => {
-      button.disabled = !enabled;
+    [els.playerRewind, els.playerToggle, els.playerForward, els.playerPosition].forEach(control => {
+      if (control) control.disabled = !enabled;
     });
   }
 
@@ -214,6 +238,74 @@
       unavailable: c.playerUnavailable
     };
     els.playerNote.textContent = messages[status] || c.playerPreparing;
+  }
+
+  function updatePosition({ fromPlayer = true } = {}) {
+    if (!youtubePlayer || !playerReady || !els.playerPosition) return;
+    try {
+      const duration = Math.max(0, Number(youtubePlayer.getDuration?.() || 0));
+      const current = fromPlayer
+        ? Math.max(0, Number(youtubePlayer.getCurrentTime?.() || 0))
+        : Math.max(0, Number(els.playerPosition.value || 0));
+      const bounded = duration > 0 ? Math.min(current, duration) : current;
+      els.playerPosition.max = String(Math.max(0, Math.round(duration)));
+      els.playerPosition.value = String(Math.round(bounded));
+      els.playerPosition.setAttribute('aria-valuetext', `${formatTime(bounded)} / ${formatTime(duration)}`);
+    } catch {}
+  }
+
+  function stopPositionTimer() {
+    if (positionTimer) clearInterval(positionTimer);
+    positionTimer = null;
+  }
+
+  function startPositionTimer() {
+    stopPositionTimer();
+    positionTimer = setInterval(() => {
+      if (activeVideo && playerReady) updatePosition();
+    }, POSITION_REFRESH_MS);
+  }
+
+  function appendLinkedDescription(parent, value) {
+    parent.replaceChildren();
+    const text = String(value || '').trim();
+    if (!text) return false;
+    const urlPattern = /https?:\/\/[^\s<>"']+/gi;
+    let cursor = 0;
+    for (const match of text.matchAll(urlPattern)) {
+      const index = Number(match.index || 0);
+      if (index > cursor) parent.append(document.createTextNode(text.slice(cursor, index)));
+      let href = match[0];
+      let suffix = '';
+      while (/[),.;!?]$/.test(href)) {
+        suffix = href.slice(-1) + suffix;
+        href = href.slice(0, -1);
+      }
+      const link = document.createElement('a');
+      link.href = href;
+      link.textContent = href;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      parent.append(link);
+      if (suffix) parent.append(document.createTextNode(suffix));
+      cursor = index + match[0].length;
+    }
+    if (cursor < text.length) parent.append(document.createTextNode(text.slice(cursor)));
+    return true;
+  }
+
+  function renderVideoDetails() {
+    if (!els.videoDetails || !els.videoDetailsPanel) return;
+    const c = copy[lang];
+    els.videoDetails.textContent = detailsOpen ? c.hideDetails : c.details;
+    els.videoDetails.setAttribute('aria-expanded', String(detailsOpen));
+    els.videoDetailsPanel.hidden = !detailsOpen;
+    els.videoDetailsPanel.replaceChildren();
+    if (!detailsOpen) return;
+    const description = String(activeVideo?.fullDescription || activeVideo?.description || '').trim();
+    if (!appendLinkedDescription(els.videoDetailsPanel, description)) {
+      els.videoDetailsPanel.textContent = c.detailsEmpty;
+    }
   }
 
   function applyLanguage() {
@@ -243,8 +335,11 @@
     els.playerRewind.setAttribute('aria-label', c.rewindOneMinute);
     els.playerForward.textContent = c.forwardOneMinute;
     els.playerForward.setAttribute('aria-label', c.forwardOneMinute);
+    if (els.playerPositionLabel) els.playerPositionLabel.textContent = c.position;
+    if (els.playerPosition) els.playerPosition.setAttribute('aria-label', c.position);
     updateToggleLabel();
     updatePlayerControlStatus();
+    renderVideoDetails();
     els.playerClose.textContent = c.closePlayer;
     els.playerYouTube.textContent = c.openYouTube;
     if (activeVideo) {
@@ -335,6 +430,7 @@
     const YT = window.YT;
     playerIsPlaying = Boolean(YT && YT.PlayerState && event.data === YT.PlayerState.PLAYING);
     updateToggleLabel();
+    updatePosition();
   }
 
   function handlePlayerReady(event) {
@@ -349,6 +445,8 @@
       } catch {}
       setPlayerControlsEnabled(true);
       updatePlayerControlStatus('ready');
+      updatePosition();
+      startPositionTimer();
       currentPlayerFrame().title = copy[lang].iframeTitle(activeVideo.title || '');
     } else {
       setPlayerControlsEnabled(false);
@@ -364,6 +462,8 @@
       setPlayerControlsEnabled(true);
       updateToggleLabel();
       updatePlayerControlStatus('ready');
+      updatePosition();
+      startPositionTimer();
       return;
     }
 
@@ -382,6 +482,7 @@
     } catch {
       if (!activeVideo || requestedVideoId !== requestId) return;
       playerReady = false;
+      stopPositionTimer();
       setPlayerControlsEnabled(false);
       updatePlayerControlStatus('unavailable');
     }
@@ -395,6 +496,16 @@
       let target = Math.max(0, current + seconds);
       if (duration > 0) target = Math.min(target, duration);
       youtubePlayer.seekTo(target, true);
+      updatePosition();
+    } catch {}
+  }
+
+  function seekToPosition() {
+    if (!youtubePlayer || !playerReady || !els.playerPosition) return;
+    try {
+      const target = Math.max(0, Number(els.playerPosition.value || 0));
+      youtubePlayer.seekTo(target, true);
+      updatePosition({ fromPlayer: false });
     } catch {}
   }
 
@@ -417,12 +528,19 @@
     }
 
     activeVideo = video;
+    detailsOpen = false;
+    renderVideoDetails();
     lastPlayerVideoId = id;
     requestedVideoId = id;
     playerIsPlaying = false;
     els.playerTitle.textContent = video.title || '';
     currentPlayerFrame().title = copy[lang].iframeTitle(video.title || '');
     els.playerYouTube.href = youtubeUrl(video);
+    if (els.playerPosition) {
+      els.playerPosition.value = '0';
+      els.playerPosition.max = '0';
+      els.playerPosition.setAttribute('aria-valuetext', `${formatTime(0)} / ${formatTime(0)}`);
+    }
     els.controlsSection.hidden = true;
     els.resultsSection.hidden = true;
     els.playerSection.hidden = false;
@@ -432,6 +550,8 @@
       try { youtubePlayer.cueVideoById(id); } catch {}
       setPlayerControlsEnabled(true);
       updatePlayerControlStatus('ready');
+      updatePosition();
+      startPositionTimer();
     } else {
       const origin = location.origin && location.origin !== 'null'
         ? `&origin=${encodeURIComponent(location.origin)}`
@@ -447,6 +567,7 @@
 
   function closePlayer() {
     const returnId = lastPlayerVideoId;
+    stopPositionTimer();
     if (youtubePlayer) {
       if (playerReady) {
         try { youtubePlayer.pauseVideo(); } catch {}
@@ -458,6 +579,8 @@
     els.controlsSection.hidden = false;
     els.resultsSection.hidden = false;
     activeVideo = null;
+    detailsOpen = false;
+    renderVideoDetails();
     lastPlayerVideoId = '';
     requestedVideoId = '';
     playerIsPlaying = false;
@@ -597,6 +720,12 @@
   els.playerRewind.addEventListener('click', () => seekBy(-SEEK_SECONDS));
   els.playerToggle.addEventListener('click', togglePlayback);
   els.playerForward.addEventListener('click', () => seekBy(SEEK_SECONDS));
+  els.playerPosition?.addEventListener('input', seekToPosition);
+  els.playerPosition?.addEventListener('change', seekToPosition);
+  els.videoDetails?.addEventListener('click', () => {
+    detailsOpen = !detailsOpen;
+    renderVideoDetails();
+  });
   els.playerClose.addEventListener('click', closePlayer);
   els.prev.addEventListener('click', () => {
     currentPage -= 1;

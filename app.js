@@ -75,7 +75,7 @@
         done: `Aplicación actualizada. Versión ${APP_VERSION}.`, error: 'No se pudo actualizar. Comprueba la conexión a Internet e inténtalo de nuevo.'
       },
       install: { heading:'Instalar la app', intro:'En iPhone o iPad, abre TifloAcosta App en Safari y utiliza Compartir > Añadir a pantalla de inicio. En navegadores compatibles de otros sistemas puede aparecer una opción equivalente de instalación.' },
- footer: `TifloAcosta App · Versión ${APP_VERSION}.`
+      footer: `TifloAcosta App · Versión ${APP_VERSION}.`
     },
     en: {
       documentTitle: 'TifloAcosta App — Accessibility resources', skip: 'Skip to main content', brandLabel: 'TifloAcosta, home', appHeading: 'TifloAcosta App',
@@ -114,7 +114,7 @@
         done: `Application updated. Version ${APP_VERSION}.`, error: 'The app could not be updated. Check your internet connection and try again.'
       },
       install: { heading:'Install the app', intro:'On iPhone or iPad, open TifloAcosta App in Safari and use Share > Add to Home Screen. Compatible browsers on other systems may offer an equivalent installation option.' },
- footer: `TifloAcosta App · Version ${APP_VERSION}.`
+      footer: `TifloAcosta App · Version ${APP_VERSION}.`
     }
   };
 
@@ -124,6 +124,7 @@
   let lang = storedLang === 'es' || storedLang === 'en' ? storedLang : defaultLang;
   let actualidadItems = [];
   let actualidadLoaded = false;
+  let resourcePlatform = 'all';
   const storedFavorites = core.readStoredJson(storage,'tifloFavorites',[]);
   let favorites = new Set(Array.isArray(storedFavorites) ? storedFavorites.filter(id=>typeof id==='string') : []);
   function isStandalone(){ return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true; }
@@ -142,6 +143,25 @@
   const categories = () => [...new Set(resourcesForLanguage().map(item => item.category))].sort((a,b) => a.localeCompare(b,lang));
   const saveFavorites = () => core.writeStoredJson(storage,'tifloFavorites',[...favorites]);
   const savePrefs = () => core.writeStoredJson(storage,'tifloDisplayPrefs',prefs);
+
+  const platformCopy = {
+    es: { group:'Filtrar recursos por plataforma', all:'Todos', android:'Android', iphone:'iPhone', windows:'Windows' },
+    en: { group:'Filter resources by platform', all:'All', android:'Android', iphone:'iPhone', windows:'Windows' }
+  };
+  const platformGroup = document.createElement('div');
+  platformGroup.className = 'inline-actions';
+  platformGroup.setAttribute('role','group');
+  const platformButtons = {};
+  for (const platform of ['all','android','iphone','windows']) {
+    const button=document.createElement('button');
+    button.type='button';
+    button.id=`resource-platform-${platform}`;
+    button.setAttribute('aria-pressed',String(platform==='all'));
+    button.addEventListener('click',()=>selectResourcePlatform(platform));
+    platformButtons[platform]=button;
+    platformGroup.append(button);
+  }
+  els.category.insertAdjacentElement('afterend',platformGroup);
 
   function applyPrefs() {
     const root = document.documentElement;
@@ -175,6 +195,42 @@
       shareUnavailable: 'This device does not provide a compatible option for sharing this document.'
     }
   };
+
+  function resourceMatchesPlatform(item, platform=resourcePlatform) {
+    if (platform === 'all') return true;
+    const haystack=`${String(item?.category||'')} ${String(item?.title||'')}`.toLowerCase();
+    if (platform === 'android') return /\bandroid\b|\btalkback\b|\bjieshuo\b/i.test(haystack);
+    if (platform === 'iphone') return /\biphone\b|\bipad\b|\bios\b|\batajos?\b|\bshortcuts?\b/i.test(haystack);
+    if (platform === 'windows') return /\bwindows\b|\bjaws\b|\bnvda\b/i.test(haystack);
+    return true;
+  }
+
+  function platformFiltered(items) {
+    return resourcePlatform === 'all' ? items : items.filter(item=>resourceMatchesPlatform(item,resourcePlatform));
+  }
+
+  function updatePlatformControls() {
+    const labels=platformCopy[lang];
+    platformGroup.setAttribute('aria-label',labels.group);
+    for (const platform of ['all','android','iphone','windows']) {
+      platformButtons[platform].textContent=labels[platform];
+      platformButtons[platform].setAttribute('aria-pressed',String(resourcePlatform===platform));
+    }
+  }
+
+  function selectResourcePlatform(platform) {
+    resourcePlatform=['all','android','iphone','windows'].includes(platform)?platform:'all';
+    updatePlatformControls();
+    if(els.favoritesButton.getAttribute('data-active')==='true') showFavorites();
+    else if(els.category.value) showCategory(els.category.value);
+    else if(els.search.value.trim()) searchResources();
+    else {
+      const c=copy[lang];
+      const items=platformFiltered(resourcesForLanguage());
+      showResults(items,c.found(items.length),c.noResults);
+    }
+    queueMicrotask(()=>els.results.querySelector('h3')?.focus?.());
+  }
 
   function extractDriveFileId(url) {
     const value=String(url||'');
@@ -285,7 +341,7 @@
 
   function makeCard(item) {
     const c=copy[lang], article=document.createElement('div'); article.className='resource-card';
-    const title=document.createElement('h3');
+    const title=document.createElement('h3'); title.tabIndex=-1;
     const open=document.createElement('a'); open.href=item.url; open.textContent=item.title; open.setAttribute('aria-haspopup','dialog');
     open.addEventListener('click',event=>{event.preventDefault();openResourceMenu(item,open);});
     title.append(open);
@@ -329,11 +385,11 @@
   function renderNews(){ const c=copy[lang],items=resourcesForLanguage().filter(item=>item.new).sort(core.compareNewsItems).slice(0,3); els.newsList.innerHTML=''; items.forEach(item=>els.newsList.append(makeNewsItem(item))); els.newsCount.textContent=c.newsCount(items.length); }
   function renderCategories(){ const c=copy[lang]; els.category.innerHTML=''; const p=document.createElement('option'); p.value='';p.textContent=c.categoryPlaceholder;els.category.append(p);categories().forEach(cat=>{const o=document.createElement('option');o.value=cat;o.textContent=cat;els.category.append(o);}); }
   function showResults(items,message,emptyMessage){ els.results.innerHTML='';els.results.hidden=false;els.clearResults.hidden=false;els.resultStatus.textContent=message;if(!items.length){const p=document.createElement('p');p.className='no-results';p.textContent=emptyMessage;els.results.append(p);return;}items.forEach(item=>els.results.append(makeCard(item))); }
-  function clearResults(){els.results.innerHTML='';els.results.hidden=true;els.clearResults.hidden=true;els.resultStatus.textContent='';els.category.value='';els.search.value='';els.favoritesButton.removeAttribute('data-active');}
-  function searchResources(){const c=copy[lang],term=els.search.value.trim();if(!term){clearResults();els.resultStatus.textContent=c.noResults;return;}els.category.value='';els.favoritesButton.removeAttribute('data-active');const items=resourcesForLanguage().filter(item=>core.resourceMatches(item,term));showResults(items,c.found(items.length),c.noResults);}
-  function showCategory(cat){const c=copy[lang];els.search.value='';els.favoritesButton.removeAttribute('data-active');if(!cat){clearResults();return;}const items=resourcesForLanguage().filter(item=>item.category===cat);showResults(items,c.categoryFound(cat,items.length),c.noResults);}
-  function showFavorites(){const c=copy[lang];els.search.value='';els.category.value='';els.favoritesButton.setAttribute('data-active','true');const items=resourcesForLanguage().filter(item=>favorites.has(item.id));showResults(items,c.favFound(items.length),c.noFavorites);}
-  function rerenderCurrentResults(){if(els.favoritesButton.getAttribute('data-active')==='true')return showFavorites();if(els.category.value)return showCategory(els.category.value);if(els.search.value.trim())return searchResources();}
+  function clearResults(){els.results.innerHTML='';els.results.hidden=true;els.clearResults.hidden=true;els.resultStatus.textContent='';els.category.value='';els.search.value='';els.favoritesButton.removeAttribute('data-active');resourcePlatform='all';updatePlatformControls();}
+  function searchResources(){const c=copy[lang],term=els.search.value.trim();if(!term){clearResults();els.resultStatus.textContent=c.noResults;return;}els.category.value='';els.favoritesButton.removeAttribute('data-active');const items=platformFiltered(resourcesForLanguage().filter(item=>core.resourceMatches(item,term)));showResults(items,c.found(items.length),c.noResults);}
+  function showCategory(cat){const c=copy[lang];els.search.value='';els.favoritesButton.removeAttribute('data-active');if(!cat){clearResults();return;}const items=platformFiltered(resourcesForLanguage().filter(item=>item.category===cat));showResults(items,c.categoryFound(cat,items.length),c.noResults);}
+  function showFavorites(){const c=copy[lang];els.search.value='';els.category.value='';els.favoritesButton.setAttribute('data-active','true');const items=platformFiltered(resourcesForLanguage().filter(item=>favorites.has(item.id)));showResults(items,c.favFound(items.length),c.noFavorites);}
+  function rerenderCurrentResults(){if(els.favoritesButton.getAttribute('data-active')==='true')return showFavorites();if(els.category.value)return showCategory(els.category.value);if(els.search.value.trim())return searchResources();const c=copy[lang],items=platformFiltered(resourcesForLanguage());showResults(items,c.found(items.length),c.noResults);}
 
   function option(select,value,label){const o=document.createElement('option');o.value=value;o.textContent=label;select.append(o);}
 
@@ -497,7 +553,7 @@
     }, 100);
   }
 
-  function applyLanguage(){const c=copy[lang];document.documentElement.lang=lang;document.title=c.documentTitle;core.writeStoredValue(storage,'tifloLang',lang);els.langEs.setAttribute('aria-pressed',String(lang==='es'));els.langEn.setAttribute('aria-pressed',String(lang==='en'));els.skip.textContent=c.skip;els.brand.setAttribute('aria-label',c.brandLabel);els.appHeading.textContent=c.appHeading;els.intro.textContent=c.intro;els.searchHeading.textContent=c.searchHeading;els.searchLabel.textContent=c.searchLabel;els.search.placeholder=c.placeholder;els.searchButton.textContent=c.searchButton;els.newsHeading.textContent=c.news;els.exploreHeading.textContent=c.explore;els.categoryLabel.textContent=c.categoryLabel;els.favoritesButton.textContent=c.favorites;els.clearResults.textContent=c.clear;els.videosHomeHeading.textContent=c.videosHome.heading;els.videosHomeIntro.textContent=c.videosHome.intro;els.videosHomeOpen.textContent=c.videosHome.open;els.youtubeHomeChannel.textContent=c.videosHome.channel;els.aboutHeading.textContent=c.about.heading;els.aboutText.textContent=c.about.text;els.externalLinksNote.textContent=c.externalLinks;els.privacyHeading.textContent=c.privacy.heading;els.privacySubheading.textContent=c.privacy.privacyHeading;els.privacyText.textContent=c.privacy.text;els.accessibilityInfoHeading.textContent=c.privacy.accessibilityHeading;els.accessibilityInfoText.textContent=c.privacy.accessibilityText;els.configHeading.textContent=c.configuration;els.accessibilityHeading.textContent=c.accessibility;els.footer.textContent=c.footer;renderActualidadHome();renderCategories();renderNews();localizeBook();localizeContact();localizeSettings();localizeInstall();localizeUpdate();clearResults();}
+  function applyLanguage(){const c=copy[lang];document.documentElement.lang=lang;document.title=c.documentTitle;core.writeStoredValue(storage,'tifloLang',lang);els.langEs.setAttribute('aria-pressed',String(lang==='es'));els.langEn.setAttribute('aria-pressed',String(lang==='en'));els.skip.textContent=c.skip;els.brand.setAttribute('aria-label',c.brandLabel);els.appHeading.textContent=c.appHeading;els.intro.textContent=c.intro;els.searchHeading.textContent=c.searchHeading;els.searchLabel.textContent=c.searchLabel;els.search.placeholder=c.placeholder;els.searchButton.textContent=c.searchButton;els.newsHeading.textContent=c.news;els.exploreHeading.textContent=c.explore;els.categoryLabel.textContent=c.categoryLabel;els.favoritesButton.textContent=c.favorites;els.clearResults.textContent=c.clear;els.videosHomeHeading.textContent=c.videosHome.heading;els.videosHomeIntro.textContent=c.videosHome.intro;els.videosHomeOpen.textContent=c.videosHome.open;els.youtubeHomeChannel.textContent=c.videosHome.channel;els.aboutHeading.textContent=c.about.heading;els.aboutText.textContent=c.about.text;els.externalLinksNote.textContent=c.externalLinks;els.privacyHeading.textContent=c.privacy.heading;els.privacySubheading.textContent=c.privacy.privacyHeading;els.privacyText.textContent=c.privacy.text;els.accessibilityInfoHeading.textContent=c.privacy.accessibilityHeading;els.accessibilityInfoText.textContent=c.privacy.accessibilityText;els.configHeading.textContent=c.configuration;els.accessibilityHeading.textContent=c.accessibility;els.footer.textContent=c.footer;updatePlatformControls();renderActualidadHome();renderCategories();renderNews();localizeBook();localizeContact();localizeSettings();localizeInstall();localizeUpdate();clearResults();}
 
   els.langEs.addEventListener('click',()=>{const changed=lang!=='es';lang='es';applyLanguage();if(changed)trackLanguageUse();});els.langEn.addEventListener('click',()=>{const changed=lang!=='en';lang='en';applyLanguage();if(changed)trackLanguageUse();});els.searchForm.addEventListener('submit',e=>{e.preventDefault();searchResources();});els.category.addEventListener('change',()=>showCategory(els.category.value));els.favoritesButton.addEventListener('click',showFavorites);els.clearResults.addEventListener('click',clearResults);
   els.settingsToggle.addEventListener('click',toggleSettings);

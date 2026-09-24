@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: '17,47 * * * *'
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/sync-youtube.mjs'
+      - 'scripts/build-mobile-content.mjs'
+      - '.github/workflows/sync-youtube.yml'
 
 permissions:
   contents: write
@@ -37,6 +43,9 @@ jobs:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: node scripts/sync-youtube.mjs
 
+      - name: Build mobile content
+        run: node scripts/build-mobile-content.mjs
+
       - name: Build video search index
         run: node scripts/build-video-search-index.mjs
 
@@ -44,7 +53,7 @@ jobs:
         id: changes
         shell: bash
         run: |
-          if [ -n "$(git status --porcelain -- videos.json)" ]; then
+          if [ -n "$(git status --porcelain -- videos.json mobile-content.json)" ]; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
           else
             echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -56,7 +65,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add videos.json
+          git add videos.json mobile-content.json
           git commit -m "chore: sync YouTube catalog"
           git push
 

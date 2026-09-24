@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-22-braille-course';
+const CACHE = 'tifloacosta-app-v2-23-web-parity';
 const NAVIGATION_TIMEOUT_MS = 5000;
 const SHELL = [
   './',
@@ -44,6 +44,18 @@ function navigationFetchWithTimeout(request) {
       setTimeout(() => reject(new Error('Navigation timeout')), NAVIGATION_TIMEOUT_MS);
     })
   ]);
+}
+
+function freshScript(url, cacheKey, request) {
+  return fetch(url.href, { cache: 'no-store', credentials: 'same-origin' })
+    .then(response => {
+      if (response && response.ok) {
+        const copy = response.clone();
+        caches.open(CACHE).then(cache => cache.put(cacheKey, copy));
+      }
+      return response;
+    })
+    .catch(() => caches.match(cacheKey).then(cached => cached || caches.match(request)));
 }
 
 self.addEventListener('install', event => {
@@ -102,33 +114,19 @@ self.addEventListener('fetch', event => {
 
   if (isAppOrigin && url.pathname.endsWith('/app-core.js')) {
     url.searchParams.set('v', '1.6');
-    event.respondWith(
-      fetch(url.href, { cache: 'no-store', credentials: 'same-origin' })
-        .then(response => {
-          if (response && response.ok) {
-            const copy = response.clone();
-            caches.open(CACHE).then(cache => cache.put('./app-core.js?v=1.6', copy));
-          }
-          return response;
-        })
-        .catch(() => caches.match('./app-core.js?v=1.6').then(cached => cached || caches.match(request)))
-    );
+    event.respondWith(freshScript(url, './app-core.js?v=1.6', request));
+    return;
+  }
+
+  if (isAppOrigin && url.pathname.endsWith('/app.js')) {
+    url.searchParams.set('v', '2.1');
+    event.respondWith(freshScript(url, './app.js?v=2.1', request));
     return;
   }
 
   if (isAppOrigin && url.pathname.endsWith('/downloads.js')) {
     url.searchParams.set('v', '1.4');
-    event.respondWith(
-      fetch(url.href, { cache: 'no-store', credentials: 'same-origin' })
-        .then(response => {
-          if (response && response.ok) {
-            const copy = response.clone();
-            caches.open(CACHE).then(cache => cache.put('./downloads.js?v=1.4', copy));
-          }
-          return response;
-        })
-        .catch(() => caches.match('./downloads.js?v=1.4').then(cached => cached || caches.match(request)))
-    );
+    event.respondWith(freshScript(url, './downloads.js?v=1.4', request));
     return;
   }
 

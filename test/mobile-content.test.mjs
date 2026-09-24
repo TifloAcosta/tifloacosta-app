@@ -22,6 +22,7 @@ test('mobile content feed normalizes resources, videos and localized news', () =
     title: 'Vídeo',
     publishedAt: '2026-09-13T09:00:00Z',
     description: 'Descripción',
+    fullDescription: 'Descripción completa con enlace https://example.com/recurso',
     excerpt: 'Resumen',
     thumbnail: 'https://example.com/thumb.jpg',
     url: 'https://www.youtube.com/watch?v=v1234567890'
@@ -63,6 +64,7 @@ test('mobile content feed normalizes resources, videos and localized news', () =
     title: 'Vídeo',
     publishedAt: '2026-09-13T09:00:00Z',
     description: 'Descripción',
+    fullDescription: 'Descripción completa con enlace https://example.com/recurso',
     excerpt: 'Resumen',
     thumbnail: 'https://example.com/thumb.jpg',
     url: 'https://www.youtube.com/watch?v=v1234567890'
@@ -117,6 +119,7 @@ test('mobile feed tolerates optional video text fields without inventing values'
     title: 'Solo título',
     publishedAt: '',
     description: '',
+    fullDescription: '',
     excerpt: '',
     thumbnail: '',
     url: ''

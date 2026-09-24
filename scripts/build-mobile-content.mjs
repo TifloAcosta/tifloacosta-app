@@ -84,6 +84,7 @@ export function buildMobileContent({ resources = [], videos = [], news = [], gen
       title: item.title || '',
       publishedAt: item.publishedAt || '',
       description: item.description || '',
+      fullDescription: item.fullDescription || item.description || '',
       excerpt: item.excerpt || '',
       thumbnail: item.thumbnail || '',
       url: item.url || ''

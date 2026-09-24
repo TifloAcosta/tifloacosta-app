@@ -33,6 +33,22 @@ test('library platform matching works even when the source category is topical i
   assert.equal(resourceMatchesPlatform({ category: 'General', title: 'Documento multiplataforma' }, 'Windows'), false);
 });
 
+test('iPhone matching does not treat VoiceOver alone as an iPhone signal', () => {
+  const macCourse = { category: 'Mac', title: 'Curso de VoiceOver con Mac desde 0' };
+  assert.equal(resourceMatchesPlatform(macCourse, 'iPhone'), false);
+
+  const shortcuts = { category: 'Atajos', title: 'Tomando atajos con Canal TifloAcosta' };
+  assert.equal(resourceMatchesPlatform(shortcuts, 'iPhone'), true);
+
+  const multiPlatform = {
+    category: 'Nubes',
+    title: 'Google Drive para Windows, Mac, iPhone y Android con JAWS, NVDA, VoiceOver y TalkBack'
+  };
+  assert.equal(resourceMatchesPlatform(multiPlatform, 'Android'), true);
+  assert.equal(resourceMatchesPlatform(multiPlatform, 'iPhone'), true);
+  assert.equal(resourceMatchesPlatform(multiPlatform, 'Windows'), true);
+});
+
 test('long catalogue screens expose a bottom Back control so screen-reader users do not traverse the whole page backwards', () => {
   for (const source of [searchSource, librarySource, actualidadSource]) {
     assert.match(source, /end-back-button/);

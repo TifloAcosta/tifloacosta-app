@@ -36,6 +36,15 @@ body:has(#video-player-section:not([hidden])) #back-home-bottom,
 body:has(#video-player-section:not([hidden])) > .site-footer {
   display: none;
 }
+.video-player-position-control {
+  margin-block: 1rem;
+}
+.video-player-position-control input[type="range"] {
+  width: 100%;
+}
+.video-details-panel {
+  white-space: pre-wrap;
+}
 </style>
 </head>
 <body>
@@ -72,12 +81,22 @@ body:has(#video-player-section:not([hidden])) > .site-footer {
       <button id="video-player-toggle" type="button" disabled>Reproducir</button>
       <button id="video-player-forward" type="button" disabled>Avanzar 1 minuto</button>
     </div>
+    <div class="video-player-position-control">
+      <label id="video-player-position-label" for="video-player-position">Posición del vídeo</label>
+      <input id="video-player-position" type="range" min="0" max="0" step="1" value="0" aria-valuetext="0:00 / 0:00" disabled>
+    </div>
     <p id="video-player-note" class="muted" aria-live="polite" aria-atomic="true">Los controles accesibles estarán disponibles cuando el reproductor esté preparado.</p>
+
+    <section id="video-details-section" aria-labelledby="video-details-heading">
+      <h3 id="video-details-heading">Detalles del vídeo</h3>
+      <button id="video-details" type="button" aria-expanded="false" aria-controls="video-details-panel">Ver detalles del vídeo</button>
+      <div id="video-details-panel" class="video-details-panel" hidden></div>
+    </section>
 
     <section id="youtube-actions" class="youtube-actions" aria-labelledby="youtube-actions-heading" hidden>
       <h3 id="youtube-actions-heading">Acciones de YouTube</h3>
-      <div class="youtube-actions-controls">
-        <button id="youtube-details" type="button" aria-expanded="false">Ver detalles</button>
+      <div class="youtube-actions-controls" hidden aria-hidden="true">
+        <button id="youtube-details" type="button" aria-expanded="false" tabindex="-1">Ver detalles</button>
       </div>
       <div id="youtube-details-panel" class="youtube-details-panel" hidden></div>
       <div id="youtube-account-actions" class="youtube-account-actions"></div>
@@ -136,7 +155,7 @@ body:has(#video-player-section:not([hidden])) > .site-footer {
 <script src="youtube-actions-config.js?v=1.0"></script>
 <script src="youtube-actions-core.js?v=1.1"></script>
 <script src="youtube-actions.js?v=1.1"></script>
-<script src="videos.js?v=2.3"></script>
+<script src="videos.js?v=2.4"></script>
 <script src="youtube-actions-bridge.js?v=1.0"></script>
 <script data-goatcounter="https://tifloacosta.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>

@@ -70,16 +70,19 @@ test('web global search clear returns focus to the search field like Android', a
 });
 
 test('web Downloads stays independent while Search sounds is available on an isolated page', async () => {
-  const [appCore, downloads, soundsPage] = await Promise.all([
+  const [appCore, downloads, launcher, soundsPage] = await Promise.all([
     readRoot('app-core.js'),
     readRoot('downloads.js'),
+    readRoot('downloads-sounds-link.js'),
     readRoot('sounds.html')
   ]);
   assert.doesNotMatch(appCore, /sound-search/);
   assert.doesNotMatch(appCore, /downloads-hub/);
   assert.match(downloads, /descargables disponibles/);
-  assert.match(downloads, /sounds\.html/);
-  assert.match(downloads, /Buscar sonidos/);
+  assert.match(appCore, /downloads-sounds-link\.js/);
+  assert.match(launcher, /sounds\.html/);
+  assert.match(launcher, /Buscar sonidos/);
+  assert.doesNotMatch(launcher, /sound-search/);
   assert.match(soundsPage, /data-sound-search-standalone/);
   assert.match(soundsPage, /sound-search-core\.js/);
   assert.match(soundsPage, /sound-search-config\.js/);

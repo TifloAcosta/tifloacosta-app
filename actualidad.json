@@ -1,5 +1,292 @@
 [
   {
+    "id": "techcrunch-2ea39d425466b3ab",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/24/shield-ai-waabi-and-general-motors-on-building-ai-when-failure-is-not-an-option-at-techcrunch-disrupt-2026/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T15:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Shield AI, Waabi, and General Motors on building AI when failure is not an option at TechCrunch Disrupt 2026",
+        "summary": "Leaders from Waabi, Shield AI, and General Motors join the Real World AI Stage at TechCrunch Disrupt 2026 to talk building AI. Save up to $200 by Sept. 25, 11:59 p.m. PT. Get a second pass at 50% off.",
+        "body": "An AI chatbot can give you a bad answer. An AI system controlling an aircraft, vehicle, or robot can create an entirely different kind of problem. When artificial intelligence (AI) moves into the physical world, a mistake can ground an aircraft, cause a vehicle crash, or compromise a mission. So how do you know when an autonomous system is actually ready to leave the lab?\n\nAt TechCrunch Disrupt 2026 , Shield AI Chief Technology Officer Nathan Michael, Waabi founder and CEO Raquel Urtasun, and General Motors Director of Robotics Strategy Mikell Taylor will tackle that question on the Real World AI Stage in “Building AI Systems When Failure Is Not an Option.”\n\nThe conversation will get into the work behind deploying AI where the stakes are high: creating a safety culture, testing and validating systems, navigating regulatory hurdles, and earning trust.\n\nBuilding AI for the physical world? Tomorrow is the last day to save up to $200 on your Disrupt pass. Secure your ticket by September 25 at 11:59 p.m. PT and hear from three leaders working where failure has real-world consequences. Prices will increase after September 25, 11:59 p.m. PT.\n\nAt Shield AI , Nathan Michael leads the development and deployment of Hivemind, the company’s platform-agnostic mission autonomy software. His background spans AI, control, perception, and multi-robot systems, including years at Carnegie Mellon University’s Robotics Institute, where he directed the Resilient Intelligent Systems Lab.\n\nThat expertise is being put to work on technology designed for some of AI’s highest-stakes environments. In February, Hivemind was selected as an autonomy provider for the U.S. Air Force’s Collaborative Combat Aircraft drone prototype program. A month later, Shield AI announced $1.5 billion in Series G funding at a $12.7 billion post-money valuation.\n\nAt Disrupt, Michael brings the perspective of an AI leader developing autonomous systems for environments where performance has to be matched by assurance.\n\nWhat does it take to trust AI with a mission? Secure your Disrupt pass before September 25, 11:59 p.m. PT, and hear Nathan Michael’s perspective on developing autonomy for high-stakes environments.\n\nRaquel Urtasun has spent 25 years working in AI and autonomous vehicles. Before founding Waabi , she served as chief scientist and head of R&D at Uber ATG. She’s also a professor of computer science at the University of Toronto, co-founded the Vector Institute for AI, and has published more than 200 AI papers.\n\nNow Waabi is preparing to take its autonomous-driving technology much further. In January, the company raised $1 billion and announced a partnership with Uber to support the deployment of 25,000 or more Waabi Driver-powered robotaxis.\n\nTesting and validation are central to Waabi’s approach. Its Waabi World simulator trains, tests, and stress-tests the Waabi Driver in a virtual environment, and Urtasun has said the company’s autonomous trucks still need to be fully validated before driverless deployment.\n\nThat puts one of the session’s central questions squarely in Urtasun’s wheelhouse: How do you determine when an AI system is ready to operate without a human behind the wheel?\n\nWant to hear how autonomous-driving leaders approach testing, validation, and deployment? Secure your Disrupt pass by September 25 at 11:59 p.m. PT to save up to $200 — and get a second pass for 50% off select ticket types.\n\nMikell Taylor has spent more than two decades building robots designed to do useful work. Today, she leads robotics strategy for General Motors ’ Autonomous Robotics Center. Previously, she led the Amazon Robotics team that developed Proteus, Amazon’s first autonomous mobile robot.\n\nHer robotics career started in a decidedly less industrial setting: She once built a robotic senior prom date. Since then, Taylor has worked on everything from autonomous underwater vehicles to industrial robotic systems, with a focus on robots that are practical, reliable, and able to work effectively around people.\n\nTaylor’s experience will shed light on a fundamental challenge facing real-world robotics: user experience and adoption need to be considered from the start, as part of both product design and deployment planning. That human element matters when AI-powered machines leave controlled demonstrations and enter workplaces where people have to depend on them.\n\nHow do you build autonomous systems people can work with — and trust? Register for Disrupt before September 25, 11:59 p.m. PT, to save up to $200 and to hear from leaders tackling those questions in the real world.\n\nAircraft. Autonomous vehicles. Industrial robots. The environments may be different, but all three put the same question in sharp focus: When the consequences of failure are real, what does it take to deploy with confidence?\n\nFor founders and technology leaders building autonomous systems, the session offers a chance to compare how leaders in defense, autonomous driving, and industrial robotics approach the decisions that stand between a promising system and one that’s ready for the real world.\n\nThis session is one of 200+ across six industry stages, roundtables, and breakouts at Disrupt, October 13–15 at Moscone West in San Francisco . More than 10,000 founders, investors, operators, and tech leaders are expected, along with 250+ speakers and 300+ exhibiting startups. Beyond the agenda, matchmaking, dealmaking, and networking create more opportunities to make the connections that can move a company forward.\n\nWhen failure isn’t an option, “almost ready” isn’t enough. These are the last two days to save up to $200 on your Disrupt pass . Secure your ticket by September 25 at 11:59 p.m. PT — and get a second pass for 50% off select ticket types."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-ee6c9342417055a8",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1000037/nikon-z5-iic-full-frame-digital-camera-ibis-mechanical-shutter",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T14:53:06.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "You might not miss what Nikon removed from its cheaper full-frame Z5 IIC",
+        "summary": "Nikon waited five years to update its full-frame Z5 camera to the Z5 II, but today it announced a new variant of last year's upgrade that removes features instead of introducing improvements in order to make it more affordable for novice photographers. While the Nikon Z5 II starts at $1,849.95, the new Nikon Z5 IIC […]",
+        "body": "Nikon waited five years to update its full-frame Z5 camera to the Z5 II, but today it announced a new variant of last year's upgrade that removes features instead of introducing improvements in order to make it more affordable for novice photographers. While the Nikon Z5 II starts at $1,849.95, the new Nikon Z5 IIC is $450 cheaper at $1,399.95 with a refreshed design and all of the original's best core features.\n\nThe Nikon Z5 IIC carries forward the Z5 II's 24.5-megapixel backside illuminated full-frame sensor using the same EXPEED 7 image processing engine found in the company's higher-end shooters with in-body image stabilization. It can c …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-b95ec065349c6f26",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/24/techcrunch-disrupt-2026-cal-ais-zach-yadegari-on-how-to-create-viral-growth-and-capitalize-on-it/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T14:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "TechCrunch Disrupt 2026: Cal AI’s Zach Yadegari on how to create viral growth and capitalize on it",
+        "summary": "Zach Yadegari joins the Builders Stage at TechCrunch Disrupt 2026 to share how he capitalized on viral growth. Save up to $200 before September 25. Save 50% on a second pass.",
+        "body": "What happens when the app you started in high school goes viral?\n\nFor Zach Yadegari, the answer was more than 15 million downloads, $30 million in annual revenue, and an acquisition by MyFitnessPal — all before his 20th birthday. Yadegari was just 17 when he co-founded Cal AI, the artificial intelligence (AI)-powered nutrition app that lets users track what they eat by snapping a photo.\n\nBut those numbers leave out the part most founders would like to know: How did Cal AI get that kind of viral attention in the first place? And once millions of people showed up, how did the company make the most of that momentum?\n\nAt TechCrunch Disrupt 2026 , Yadegari will take the Builders Stage for a fireside chat on “How to Create Viral Growth and Capitalize On It.” He’ll get into Cal AI’s rapid growth, the product pressure that came with it, and the challenge of turning breakout attention into durable retention and long-term company building.\n\nTrying to break through in a crowded market? Save up to $200 when you secure your pass by September 25 at 11:59 p.m. PT and hear what Yadegari learned building a breakout consumer app. Got a colleague who’d like to join? Get a second pass for 50% off.\n\nCal AI is built around a simple proposition: Snap a photo of a meal, and the app uses image recognition and the phone’s depth sensor to calculate calories, protein, carbs, and fat.\n\nYadegari was still a high school senior when he co-founded Cal AI, but it wasn’t his first experience attracting a large online audience. At 16, he sold Totally Science, a gaming platform he founded that drew more than 5 million users during the COVID-19 pandemic, for six figures.\n\nCal AI moved even faster. In less than two years, it had more than 15 million downloads and was generating more than $30 million in annual revenue. MyFitnessPal took notice, acquiring the company in a deal that closed in December 2025. The deal kept Cal AI as a standalone app, retained its seven-person team, and left Yadegari at the helm.\n\nAt Disrupt, Yadegari will share what Cal AI learned about building in a distribution-driven market where a product can find a massive audience fast — and what it takes to exploit that viral growth when it happens.\n\nChasing your own breakout moment? Get your Disrupt ticket to learn from Cal AI’s story. Save up to $200 on your pass and get a second pass for 50% off select ticket types. Secure your ticket by September 25 at 11:59 p.m. PT.\n\nFor founders chasing growth, Yadegari’s story offers a look at both sides of a viral breakout: how a product finds a massive audience and what it takes to turn that attention into durable retention and long-term company building.\n\nYadegari’s fireside chat is one of 200+ sessions across six industry stages at Disrupt, October 13–15 at Moscone West in San Francisco . More than 10,000 founders, investors, operators and tech leaders are expected, along with 250+ speakers, roundtables and breakouts, and 300+ exhibiting startups.\n\nBeyond the agenda, matchmaking, dealmaking and networking give founders opportunities to connect with investors, potential customers, partners and other builders working through many of the same challenges.\n\nThese are the last two days to save up to $200 on your Disrupt pass. Secure your ticket by September 25 at 11:59 p.m. PT — and get a second pass for 50% off select ticket types. Lock in your savings to hear Zach Yadegari share the lessons behind Cal AI’s viral success."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-0f8f2f81d1fcff59",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/999881/why-cant-we-airgap-rogue-ai-agents",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T14:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Why can’t we just keep rogue AIs off the internet?",
+        "summary": "AI agents keep getting loose, escaping supposedly secure tests to attack real-world targets, commandeer obscure wikis, and leave instructions for other agents to follow. Researchers are testing these systems precisely because they might behave in unpredictable, even dangerous, ways. So wouldn't it be safer to just keep the agents off the internet? \"A strict air […]",
+        "body": "AI agents keep getting loose , escaping supposedly secure tests to attack real-world targets , commandeer obscure wikis , and leave instructions for other agents to follow. Researchers are testing these systems precisely because they might behave in unpredictable, even dangerous, ways. So wouldn't it be safer to just keep the agents off the internet?\n\nIn theory, yes. Researchers can isolate the computers running AI tools from the internet and other outside networks, a technique known as air gapping. That can mean physically removing or disabling cables …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-58b88bcc736109a1",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/24/ios-27-lets-you-create-your-own-iphone-wallpapers/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T14:18:06.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iOS 27 lets you create your own custom iPhone wallpapers",
+        "summary": "Apple introduces new iPhone wallpapers every year, and you can download iOS 27’s additions here . But iOS 27 also adds the ability to create your own custom wallpapers. Here’s how. more…",
+        "body": "Apple introduces new iPhone wallpapers every year, and you can download iOS 27’s additions here . But iOS 27 also adds the ability to create your own custom wallpapers. Here’s how.\n\nThis year as part of iOS 27’s overall theme of major AI improvements, Apple has given its Image Playground app an overhaul.\n\nImage Playground now offers more powerful image generation capabilities and far fewer restrictions than before. It even lets you create images that are the perfect wallpaper size.\n\nBut you don’t even need to open the Image Playground app to create wallpapers.\n\niOS 27 lets you create your own iPhone wallpapers right from the wallpaper picker.\n\nGo to Settings ⇾ Wallpaper ⇾ Add New Wallpaper or long-press your Lock Screen and hit the ‘+’ button to open iOS 27’s wallpaper gallery.\n\nNew in the gallery this year, you’ll see Image Playground as an option in the top row. iOS 27 also automatically adds some AI-generated images to the Featured wallpaper section.\n\nFor example, you’ll see suggested wallpapers that are based on your own photos, but in a new style.\n\nIn my testing of iOS 27, with no effort on my part, my iPhone prepared beautifully stylized versions of some of my favorite photos that look great as wallpapers.\n\nWherever you see an AI-generated wallpaper in the gallery, Apple’s new Image Playground icon appears next to it. That way, it’s always clear where the image came from.\n\nIf you like one of Apple’s suggested AI wallpapers, you can choose it and be all set.\n\nBut iOS 27 also lets you create fully custom wallpapers by hitting the Image Playground button in the top row. Image Playground will ask you to describe your image, and let you optionally choose a style or base it on an existing photo or person.\n\nWhen the image is created, it’s automatically the perfect size for an iPhone wallpaper.\n\nHave you tried iOS 27’s new wallpaper creation tool? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-d2e5ddc7c6c5b9c9",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1000015/google-ai-satellite-space-project-suncatcher",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T14:15:17.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google is sending an AI satellite into space next week",
+        "summary": "Google is getting ready to launch a satellite with its AI processors to test how well they perform in space, as reported earlier by The New York Times. The move is part of Google's Project Suncatcher, the company's experimental initiative that could eventually put AI data centers into orbit. The satellite, equipped with Google's Tensor […]",
+        "body": "Google is getting ready to launch a satellite with its AI processors to test how well they perform in space, as reported earlier by The New York Times . The move is part of Google's Project Suncatcher , the company's experimental initiative that could eventually put AI data centers into orbit.\n\nThe satellite, equipped with Google's Tensor Processing Units, will launch aboard a SpaceX Falcon 9 rocket on October 1st, allowing it to harness the power of the sun in low Earth orbit. As noted by Google, the goal of the mission is to measure how well its TPUs \"handle the physical stress of spaceflight and the radiation and thermal extremes of space.\" …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-2d63f85e0bfa8a93",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/24/adobe-expands-creative-tool-access-to-google-gemini-brings-acrobat-to-claude/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T13:00:00.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Adobe expands creative tool access to Google Gemini, brings Acrobat to Claude",
+        "summary": "Adobe today announced two major expansions to its AI chatbot integrations, bringing its creative tools to Google Gemini while adding Acrobat tools to Claude. Here are the details. more…",
+        "body": "Adobe today announced two major expansions to its AI chatbot integrations, bringing its creative tools to Google Gemini while adding Acrobat tools to Claude. Here are the details.\n\nFor the past year or so, Adobe has been working to bring its creative tools to AI chatbots and other productivity tools, such as ChatGPT, Slack, and Copilot.\n\nToday, the company is announcing two expansions to that effort.\n\nFirst, Adobe is expanding its integration with Claude. The company already offered access to creative tools from Photoshop, Illustrator, Premiere, Lightroom, InDesign, Adobe Express, Adobe Stock, and more. Today, it is also adding Acrobat tools to the same plugin across Claude and Claude Code on desktop, the web, and mobile.\n\nAdobe says users can get started as a guest, or sign in with their Adobe account “to unlock the full plugin experience, including higher usage limits, additional tools and continuity across sessions.”\n\nHere’s how Adobe describes some of the new capabilities:\n\nThe second piece of news today comes for Google Gemini users across all plans. Starting today, Adobe is bringing tools from Photoshop, Lightroom, Adobe Express, and Firefly directly into Gemini.\n\nThis means that users can ask Gemini to enhance photos, create marketing assets, and customize designs using Adobe’s tools without leaving the conversation.\n\nTo get started, navigate to Personal Intelligence, select Adobe under Connected Apps, and sign in with your Adobe account or create one for free if you don’t already have one.\n\nAdobe adds that users only need to describe what they want, and Adobe “orchestrates the right tools and steps to get you there.”\n\nSome of the things Adobe says users can now do in Google Gemini include:\n\nHave you been using creativity and productivity tools in your AI chatbots? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-dab5a54a69f9c7ce",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/24/australia-to-investigate-if-openai-hack-of-government-health-website-broke-the-law/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T12:54:19.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Australia to investigate if OpenAI hack of government health website broke the law",
+        "summary": "The incident is the first known breach to affect a government agency, and Australia's prime minister has vowed to hold OpenAI accountable.",
+        "body": "An OpenAI model hacked into an Australian government website, the country’s prime minister Anthony Albanese said Wednesday, in the first publicly reported case of an AI model hacking into a government’s systems.\n\nAlbanese said that there would “obviously be legal consequences” following the breach, and that OpenAI faces a government investigation into how its unreleased models gained access to reams of bulk health data information.\n\nThis latest incident disclosure comes as governments and tech companies grapple with how to rein in increasingly autonomous AI after a recent spate of AI agents breaking out of their sandboxes, colluding on the internet, and posing cybersecurity issues.\n\nThe breach also poses questions about how both OpenAI and the Australian government failed to detect the attack until several months later.\n\nDuring a Wednesday news briefing at the U.N. General Assembly, Albanese said that the breach began on June 18, but that OpenAI did not notify the government until September 10.\n\nOpenAI only became aware of the incident in August when it turned up during a broader, companywide review of agents behaving in unintended ways, according to an OpenAI spokesperson who reached TechCrunch via email.\n\nThe unspecified OpenAI agent obtained both public and nonpublic files from Services Australia, which administers Australia’s universal healthcare scheme. While the prime minister said there is no evidence that any citizens’ personal information was leaked, OpenAI said that the information the agent reached included aggregate health statistics and internal file names.\n\nThe agent was running during an internal OpenAI evaluation, seeking answers about Australia and publicly available medicine information. At the Medicare portal, the agent encountered repeated blocks but found ways around them.\n\nAlbanese told reporters that the model “didn’t accept no for an answer,” and added that the model had actively written data to the government’s database, rather than just accessing it, indicating the possibility that the department’s data was modified or muddied.\n\nThe prime minister said OpenAI disclosed the breach by sending a notification to the public mailbox of Services Australia, which then notified Australia’s Cyber Security Centre five days later. It’s unclear why there was a delay, but Albanese said he raised the breach directly with OpenAI chief executive Sam Altman by stressing Australia’s “extreme concern” about this incident and “disappointment” that OpenAI sat on the information for nearly three months.\n\n“This situation is obviously unacceptable,” said Albanese, making clear that he held the company accountable for both the hack and how slowly it came to light.\n\nAlbanese said that the government’s investigation will consider law enforcement and legislative responses to prevent incidents like this one happening again.\n\nAustralian media outlet ABC News reports that the latest identified attack may have relied on an earlier breach of a German wiki site , which was used as a staging ground for attacking the Australian government’s website. The AI model agents reportedly used the German wiki to leave notes to be used in later hacks, including a note to obtain data from the Australian Institute of Health and Welfare, a federal agency that publishes national health data. The agency is one of three additional systems that Albanese said may have been breached.\n\nTransluce, a nonprofit AI research lab, separately found public records showing AI agents targeting the Australian Institute of Health and Welfare on June 20 and 21.\n\nOpenAI did not respond to TechCrunch’s specific inquiry on whether the incidents were connected but acknowledged their “activity involving several Australian government websites and services.”\n\nThe incident comes after a string of security incidents caused by rogue agents, often acting within the infrastructure of AI labs. In July, swarms of OpenAI agents breached Hugging Face. Since then, more incidents of AI agent hacks from Anthropic, Meta, and Google have been revealed .\n\nOpenAI now says it is conducting an “extensive review of misaligned model activity during training and evaluation” and is notifying third parties of potential breaches."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-21db4ab61229ebb8",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/24/new-ipad-mini-coming-soon-with-these-major-changes/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T12:49:52.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "New iPad mini coming soon with these major changes",
+        "summary": "Apple is about to release a new iPad mini. This will mark the first update to the device in two years, and it’s expected to be a big one. Here’s everything we know so far about the new iPad mini coming as soon as next month. more…",
+        "body": "Apple is about to release a new iPad mini . This will mark the first update to the device in two years, and it’s expected to be a big one. Here’s everything we know so far about the new iPad mini coming as soon as next month.\n\nBy far the biggest change to the new iPad mini will be to the display. According to multiple sources , the iPad mini 8 will feature an OLED display.\n\nThis will be a dramatic improvement to the iPad mini’s current LCD panel. For users, the move to OLED means deeper blacks, richer colors, and better contrast. The iPhone X was the first iPhone to use an OLED display in 2017, while the OLED iPad Pro debuted in 2024.\n\nOne lingering question, though, is whether the new iPad mini will use a ProMotion display for refresh rates of up to 120Hz. According to a sketchy rumor last week , the new iPad mini won’t offer ProMotion support and will instead be limited to 60Hz.\n\nThis hasn’t been corroborated by any other sources, though, so I’m holding out hope this leak is incorrect.\n\nThe current iPad mini, released in October 2024, is powered by Apple’s A17 Pro chip. The new iPad mini will likely feature the A19 Pro or A20 Pro chip. This will offer a solid boost in performance, and could enable support for the most advanced Siri AI features in iOS 27.\n\nAccording to Bloomberg , Apple has tested a “redesigned casing” for the iPad mini that is water-resistant like the iPhone.\n\nWhether or not this water-resistant casing pans out remains to be seen. However, it would make the iPad mini far more durable. It’d be especially notable for people who use it as an e-reader, as one of the top features of dedicated e-readers like the Kindle is water resistance .\n\nThe iPad mini 8 might also be Apple’s first device with a revamped vibration-based speaker system. This vibration-based speaker system would let Apple remove speaker holes, aiding its work to make the device water-resistant.\n\nIn contrast, the iPhone has speaker holes, but Apple uses gaskets and adhesives to make the device water-resistant.\n\nAccording to the latest reporting from Bloomberg , Apple is aiming to release the OLED iPad mini as early as this October. It’s allegedly the “biggest overhaul to the iPad mini in half a decade.”\n\nThere’s no word on how much the new iPad mini will cost. Apple increased the price of the current iPad mini in July from $499 to $599 (currently discounted to $569 on Amazon ). Whether the new iPad mini with OLED is even more expensive remains to be seen.\n\nWhat do you think of Apple’s rumored plans for the iPad mini? Are you tempted by the OLED display? Let us know down in the comments.\n\nFollow Chance : Threads , Bluesky , Instagram , and Mastodon ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-485665dc8c10462e",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2267407/qualcomm-snapdragon-sound-elite-ai-for-audio-wearables/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T11:23:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Qualcomm's Snapdragon Sound Elite is a new AI chip for audio wearables",
+        "summary": "Qualcomm has launched a new chip that will enable AI features on small audio devices.",
+        "body": "The company says it will enable on-device AI.\n\nQualcomm has launched the Snapdragon Sound Elite Gen 2 chip for the next generation of audio devices with AI features. This model will enable more powerful on-device AI capabilities for earbuds, headphones, audio glasses (perhaps similar to the new Ray-Ban Meta Audio ) and camera-equipped earbuds like the AirPods Apple is reportedly developing . Qualcomm says the Snapdragon Sound Elite Gen 2 has twice the AI capabilities of its predecessor, the Snapdragon S7 Gen 1 Sound Platform.\n\n\"As AI becomes a core capability, users will increasingly expect more natural ways to interact with it,\" said Ziad Asghar, Qualcomm Senior Vice President and General Manager for XR, Wearables and Personal AI. \"Those interactions won't always happen through a screen. They will happen through natural conversations, where users can simply speak to an AI assistant and receive help in real time.\" Asghar added that the new chip will give devices the power to offer features, such as real-time on-device translation and the ability to amplify sounds and conversations for those who are hard of hearing.\n\nThe chip comes with support for Qualcomm's aptX Lossless technology for immersive audio quality, as well as for the company's XPAN wireless audio technology that combines Wi-Fi and Bluetooth to extend the range of devices. Its Wi-Fi 6E connectivity enables faster speeds that Qualcomm says makes always-available AI possible without affecting the device's battery and sound quality."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-5e10f22222e5f04b",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/gadgets/2026/09/review-apples-hyper-pricey-m5-ultra-mac-studio-made-me-into-a-vibe-coder/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T11:00:04.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Review: Apple's hyper-pricey M5 Ultra Mac Studio made me into a vibe coder",
+        "summary": "Usable local AI is a lot of fun, but how much would you pay for it?",
+        "body": "This spring, Apple made it official: The Mac Pro is dead .\n\nWhen Apple was using Intel processors and AMD GPUs, the idea of an expandable and upgradeable tower made sense. But Apple Silicon chips bring the CPU, GPU, and memory interface all under one roof in a way that makes that sort of upgradeability not just superfluous but impossible. At least not without breaking some of the chips' key benefits.\n\nAnd as it happens, Apple Silicon's combination of a fast CPU, solid GPU, and unified memory architecture has made it a good fit for a modern \"pro\" workload that really pushes high-end hardware: running language models and agents locally.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-2bc97c9928e51fcc",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2267381/openai-hacked-into-australias-government/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T10:01:55.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "OpenAI's agent hacked into an Australian government website",
+        "summary": "Researchers and the Prime Minister of Australia have revealed more instances of OpenAI's agents going rogue.",
+        "body": "Australia’s prime minister said it doesn’t seem like any personal health information was compromised.\n\nAn OpenAI agent hacked into the public website of the Australian government's Medicare public health insurance system in June, Australian Prime Minister Anthony Albanese has revealed . Albanese said he spoke with Sam Altman, the company's CEO, to express the country's \"extreme concern\" about the incident. He also criticized the company for taking too long to notify Australian authorities.\n\nAccording to The Guardian , OpenAI only sent an email about the breach to a general Australian government email address on September 10. And since authorities only check that account once a day, they didn't see it until September 11. The news didn't reach minister for government services, Katy Gallagher, until September 17. While the investigation is still ongoing, Albanese said it doesn't seem like the agent stole personal health information from the portal.\n\nConrad Stosz, the head of governance at Transluce, a nonprofit research lab working on technology to better understand AI systems, told The New York Times that this might be the \"first instance of an agent autonomously choosing to hack into a government.\" Transluce identified other previously undisclosed incidents, wherein OpenAI's agents attacked real-world entities when they were instructed to collect data during testing. They all occurred before Hugging Face detected unauthorized access on its systems in July and before OpenAI admitted that its agents broke into the AI repository.\n\nIn addition to hacking into Australia's Medicare, OpenAI's agent also tried to infiltrate a digital library at the University of New Mexico on May 25 and 26, The Times reports. The agent was apparently trying to access photos of a historic tuberculosis treatment center from the library and then actively looked for vulnerabilities to exploit when it couldn't get them. After failing to break into the digital library, it flooded the university's server with requests.\n\nIn another incident that took place on May 28, OpenAI's agent targeted Data USA, an open-source platform that visualizes information from multiple federal agencies. The agent sent a query to the site for data, and when it failed, it probed the website for vulnerabilities. OpenAI's agents didn't seem to be successful in their attempt to break into Data USA's website and the University of New Mexico's library. A spokesperson told The Times that the company had already reached out to both of them about the incidents. They added that OpenAI found out about its agent's efforts to break into Australia's government website after an extensive review of its models and found that the models \"took actions [the company] did not intend.\" It will take a few more months for the company to finish its review.\n\nOpenAI recently announced a new reporting framework for misalignments meant to expedite the release of information about instances of its AI technologies going rogue. In that report, it revealed six more incidents of models behaving in concerning ways it didn't expect. The company made the announcement after it admitted that its AI agents had hacked Hugging Face and after reports went out about earlier incidents, such as its agents breaking into RubyGems . In that post, the company said that it doesn't believe the AI industry \"has solved alignment and monitoring to a sufficient degree to continue responsibly scaling at maximum speed for much longer.\" Altman has also just told the UN that the industry needs international evaluation standards to measure the capabilities and risks of AI tools, as well as to assess the tools' need for human oversight."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "conticgo-01b913c94c485bdd",
     "type": "news",
     "sourceId": "conticgo",
@@ -49,79 +336,6 @@
     "media": null
   },
   {
-    "id": "the-verge-da637dcfece15453",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/999802/google-deepmind-gemini-4-timeline-koray-kavukcuoglu",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-24T09:04:18.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Gemini 4 is almost ready, says new Google DeepMind chief",
-        "summary": "Google is reportedly nearing the launch of its long awaited Gemini 4 model, after dawdling behind rival developers on flagship AI releases. Speaking with The Information during his first media appearance as the leader of Google's DeepMind division, Koray Kavukcuoglu said that Gemini 4 is currently in its refinement stage, and that the company is […]",
-        "body": "Google is reportedly nearing the launch of its long awaited Gemini 4 model, after dawdling behind rival developers on flagship AI releases. Speaking with The Information during his first media appearance as the leader of Google's DeepMind division, Koray Kavukcuoglu said that Gemini 4 is currently in its refinement stage, and that the company is aiming to launch the model \"much earlier\" than the end of the year.\n\n\"Our intention is to, like - as soon as possible - to release an early post-training output because we see the results and we are excited,\" Kavukcuoglu told the publication, adding that Google would \"continue the fast-paced iteratio …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-be94d0baf1ecf3d6",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/24/operas-free-built-in-vpn-can-now-turn-on-automatically-when-using-public-wi-fi/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-24T08:00:00.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Opera’s free built-in VPN can now turn on automatically when using public Wi-Fi",
-        "summary": "Opera announced today that its free, built-in VPN for desktop can now automatically activate when users connect to public or unsecured Wi-Fi networks. Here are the details. more…",
-        "body": "Opera announced today that its free, built-in VPN for desktop can now automatically activate when users connect to public or unsecured Wi-Fi networks. Here are the details.\n\nSince 2016, the Opera browser has offered a free, built-in VPN. The company says this builds on its core belief that “making basic online privacy accessible to everyone.”\n\nIn recent years, VPNs have gone from being a relatively niche privacy tool to something much more mainstream. Still, according to data from We Are Social’s Digital 2026 Mid-Year Global Update Report , only 23% of internet users aged 16 and older use a VPN for at least some of their online activities.\n\nThat is a problem, particularly for users who rely on public Wi-Fi for work or while traveling.\n\nToday, Opera announced that users in the US and France can opt to have its built-in VPN turn on automatically whenever they connect to a public or unsecured Wi-Fi network.\n\nHere’s Opera:\n\nPublic Wi-Fi networks are notoriously vulnerable to snooping and data interception. Opera’s browser VPN now removes manual friction by automatically activating when detecting public or unsecured Wi-Fi networks. Users can study, work, manage finances, or browse without having to remember to turn on protection manually. To respect user agency, the feature remains strictly opt-in and can be easily toggled within settings. This functionality is rolling out today to Opera users in the US and France.\n\nOpera notes that its “free VPN operates under strict GDPR laws,” adding that it “has been independently audited by Deloitte.” The company also stresses that the VPN is part of a broader set of built-in privacy tools, alongside Opera’s native Ad Blocker and Tracker Blocker.\n\nTo learn more about Opera, follow this link ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-544f4ba9cf9f296a",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/23/apple-iphone-18-pro-rebooting-bug-software-update-fix/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-24T06:43:49.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "programas-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple says software update to fix iPhone 18 Pro rebooting bug is coming next week",
-        "summary": "On Monday, we reported on an issue where iPhone 18 Pro and iPhone 18 Pro Max users were seeing their phone freeze and reboot following a failed Face ID attempt. To us, it appeared to be a software glitch rather than an inherent hardware fault. Apple has now confirmed to 9to5Mac that a software update to address this problem is in the works, and should be available early next week. more…",
-        "body": "On Monday, we reported on an issue where iPhone 18 Pro and iPhone 18 Pro Max users were seeing their phone freeze and reboot following a failed Face ID attempt. To us, it appeared to be a software glitch rather than an inherent hardware fault.\n\nApple has now confirmed to 9to5Mac that a software update to address this problem is in the works, and should be available early next week.\n\nAlthough the bug did not seemingly affect all users, it was reasonably widespread based on social media and 9to5Mac reader reports.\n\nAt the time, we reproduced the problem on an iPhone 18 Pro device by obscuring our face with our hand as we attempted a Face ID authentication to access the Passwords app. The phone simply stops responding to touch input, and hard reboots after a few seconds. You could then find a panic log in the iPhone Analytics section of the Settings app.\n\niPhone 18 Pro and Pro Max feature a redesigned Face ID sensor system, where the Infrared camera has moved behind the under the screen near where the clock is rendered in the status bar, resulting in a 25% smaller visible Dynamic Island.\n\nAs we reported earlier in the week, some customers had already attempted to resolve the rebooting problem by swapping their phone with a new device at Apple, thinking it was a hardware fault. To reiterate, this is not necessary with a software fix now confirmed to be on the way.\n\nOn a somewhat related note, Apple also just released watchOS 27.0.1 to fix a random restart issue with Apple Watch Series 12 and Ultra 4."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "usable-y-accesible-3b1bb36749b21a5e",
     "type": "news",
     "sourceId": "usable-y-accesible",
@@ -140,201 +354,6 @@
         "title": "Sirviendo Código Awards: nominada la \"La European Accessibility Act (EAA) de forma sencilla\"",
         "summary": "Esta semana se votan las mejores charlas del año en los \"Sirviendo Código Awards\". Mi charla \"La European Accessibility Act (EAA) de forma sencilla\", que impartí en la a11yConf, está nominada en la categoría \"Access Mother\". Puedes votar tu charla favorita en: Sirviendo Código Awards. Como parte del equipo organizador de la a11yConf 2026, también es una satisfacción tener tres charlas",
         "body": "Nota 1: como todos los artículos de este blog, este artículo NO está promocionado.\n\nNota 2: como todos los artículos de este blog, este artículo se ha ideado y elaborado sin el uso de herramientas IA, solo se han usado para la revisión final de la ortografía.\n\nAutor: Olga Carreras Montoto"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-e8fa733a2b9edc9c",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/23/meta-announces-camera-free-glasses-dedicated-muse-ai-gadget-more/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-24T01:24:44.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta announces camera-free glasses, dedicated Muse AI gadget, more",
-        "summary": "Meta announced today a series of AI-powered devices, including the Muse Charm, a palm-sized gadget designed specifically for its new Muse AI assistant. Here are the details. more…",
-        "body": "Meta announced today a series of AI-powered devices, including the Muse Charm, a palm-sized gadget designed specifically for its new Muse AI assistant. Here are the details.\n\nMeta kicked off its Meta Connect 2026 event today, its yearly showcase for new AI technologies, wearables, and VR products.\n\nLast year, the biggest announcement was the Meta Ray-Ban Display , the company’s first smart glasses with a built-in display that can show messages, navigation, Meta AI responses, and more.\n\nAt the time, Meta’s AI-powered glasses lineup was already gaining significant traction, with Meta and EssilorLuxottica going on to sell more than 7 million units for the year.\n\nSince then, Meta’s camera-equipped glasses have faced growing scrutiny over privacy and ethics, as there has been no shortage of discussions involving privacy, ethics, and the general pushback on AI.\n\nToday, Meta announced the Ray-Ban Meta Audio , its first pair of camera-free smart glasses, which starts at $349 and will be available beginning October 13.\n\nThe Ray-Ban Meta Audio retains features such as music and podcast playback, calls, and live translation, offering many of the same audio features as Meta’s camera-equipped glasses. They also support Muse , Meta’s recently launched personal AI agent.\n\nThat said, Meta also announced the Ray-Ban Meta (Gen 3) tonight, featuring a slimmer design, up to nine hours of battery life, and a new action button, while retaining the 12MP camera and 3K video recording introduced with the previous generation.\n\nThe new action button can be customized in the Meta AI app to provide one-touch access to Meta AI or other features, such as live translation. The Ray-Ban Meta (Gen 3) is available today, starting at $449.\n\nIn tonight’s event, the company also announced the Meta VR Glasses , a roughly 100-gram VR headset designed to look and feel more like a pair of glasses. The device features what Meta calls a “5K Infinite Display built on micro-OLED panels,” built-in Meta AI, eye and hand tracking, and a separate pocketable puck that handles processing, battery, and storage.\n\nMeta is pitching the VR Glasses as a personal cinema, gaming device, and workspace. They are also the first IMAX Enhanced-certified VR device, with support for 3D movies and immersive live sports.\n\nAlongside the Meta VR Glasses, the company also introduced a new hologram feature that can create a photorealistic avatar that reflects a user’s real-time expressions and reactions during video calls.\n\nMeta says that a version of the feature is also coming to Meta Ray-Ban Display , where users can create a digital version of their face for hands-free video calls, beginning with WhatsApp.\n\nThe Meta VR Glasses will go on sale in spring 2027 for $1,299.99.\n\nRounding up tonight’s glassware news, Meta also expanded its own Meta Glasses lineup with two new styles, Capri and Nova, a new collection designed with LISA, and the $249 Meta Adventurer, its most affordable pair of smart glasses yet.\n\nThe company also introduced a limited-edition Meta Fury model and a new Ivory colorway for its Kylie Jenner collaboration.\n\nAt tonight’s event, Meta also announced the Muse Charm, a palm-sized device built specifically around its recently launched Muse personal AI agent. Meta launched Muse earlier this month, and the app has since risen to the No. 1 spot on both the U.S. App Store and Google Play.\n\nAccording to Bloomberg , the Muse Charm was developed by Meta’s new design lab, led by former Apple interface design chief Alan Dye, alongside the company’s Superintelligence AI group.\n\nThe Muse Charm, which Meta refers to as a “holdable,” features a roughly 2-inch OLED touchscreen with a customizable Muse character at the center of the interface. Users can change its appearance, outfits, voice, and other attributes, and interact with Muse directly through the device.\n\nThe device also includes front- and rear-facing cameras, speakers, microphones, 5G connectivity, and a USB-C port. The cameras can capture photos and videos, but Bloomberg reports they are primarily intended to provide Muse with visual context for analysis and AI-assisted actions, rather than to serve as traditional cameras.\n\nUsers set up and sync the Charm through the Muse app on iPhone or Android. Two Charm devices can also recognize and interact with each other when placed nearby.\n\nMeta plans to begin selling the Muse Charm in December. The company has not yet announced a price, but Bloomberg reports that it is expected to cost roughly as much as a smartwatch.\n\nWhat do you make of Meta’s announcements? Let us know in the comments."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-596d28daafecc113",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/23/everything-new-coming-to-metas-ai-agent-muse/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-24T01:13:32.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Everything new coming to Meta’s AI agent Muse",
-        "summary": "CEO Mark Zuckerberg kicked off the company’s annual Connect event in Menlo Park on Wednesday with a keynote that made one thing clear: Meta is going all-in on Muse. It's even coming to Meta's AI glasses.",
-        "body": "Meta’s personal AI agent Muse is only a few weeks old, and the social networking giant isn’t wasting any time building out what may be its biggest bet on consumer AI to date.\n\nCEO Mark Zuckerberg kicked off the company’s annual Connect event in Menlo Park on Wednesday with a keynote that made one thing clear: Meta is going all-in on Muse.\n\nThe Muse agent (the physical avatar is named Jolly, according to Zuckerberg) is designed to handle everyday tasks by connecting to users’ apps and services, including email and calendars. At Connect, Zuckerberg introduced a slew of new capabilities and integrations to make Muse more useful and more deeply woven into users’ daily lives. Muse will be everywhere, if the user chooses, including on their Meta AI glasses.\n\nMuse, which launched in early September, interacts across a user’s devices and digital accounts. The agent is powered by Muse Spark , Meta’s multimodal AI model built for agentic work. Meta has touted it as a more accessible agent than those offered by competitors — an AI helper that, from the jump, allows users to automate the busy work in their lives.\n\n“The centerpiece of our vision for what we’re building is Muse,” Zuckerberg said as he kicked off a keynote donning khakis and a black T-shirt with the words “Building is My love Language” emblazoned across the front. “In the coming years, I expect that Muse is going to grow into the personal superintelligence that billions of people around the world are going to use to accomplish their goals and improve their lives.”\n\nZuckerberg also believes that Muse will make money for its users — and of course, eventually for Meta.\n\n“We’re standing behind this by making Muse free for a huge number of tokens, with the expectation that over time we will profit by taking a small fee from transactions,” he said.\n\nHere are the new features and capabilities that got our attention …\n\nOne of the more fun announcements made Wednesday is that Muse users will soon have the ability to conjure a distinct digital avatar for their particular agent and then video chat with it in real time. A new AI model, Muse Realtime Avatar, has been developed to power the particular feature, the company says.\n\nThe idea is that Meta’s previously faceless AI software will be given a face, body, and voice, making them significantly more personable. There’s certainly a hint of Metaverse-ishness to this feature, which was demoed on stage at Connect. Users will be able to have live conversations with this avatar, giving it tasks and asking it questions.\n\nMuse will also be integrated with Meta’s smart glasses line , the company announced. This means that users will be able to communicate with their agent merely by speaking to their glasses. The agent activates via a wake word, the company said, adding that it will be able to guide users through a personalized workout, log meals, book an appointment, and help them buy products they see.\n\nMeta said Muse will work in the background and check back in when it’s done.\n\nIt’s not clear exactly when this feature will become available, although Meta says that it should launch sometime in “the coming months.”\n\nMeta says it is bringing Muse computer work to Mac. The company had previously talked about Muse coming to Mac , and spent more time on Wednesday providing a few new details. This means that users will be able to delegate tasks to the agent, and — much like other popular AI agents from OpenAI and Anthropic — Muse will be able to operate any app on a user’s desktop.\n\n“You can have it help you run your small business, or just get work done for you,” Meta’s chief AI officer Alexandr Wang said Wednesday during the keynote. “You can walk away from your computer and it keeps working for you on all the jobs you lined up.”\n\nSince Muse will always be working in the background, it will naturally need its own email address. Meta’s Wang announced it is developing that feature and will make it available “soon,” without providing a more precise timeline.\n\nUsers will also be able to add Muse to an email thread or forward emails from the agent to handle on their behalf.\n\nMeta has locked in partnerships with companies like Stripe and Shopify, illustrating that the company sees Muse as an important tool for shopping.\n\nMuse can access the entire Shopify product catalog agentically and use Lync and now Shop Pay to buy almost anything on the internet, according to Wang, who noted that Meta has also added more support for payments with PayPal.\n\nThe company also announced a string of new partnerships with retailers, including Best Buy, Gap, Sephora, Walmart, and Wayfair. Muse will be able to connect with these retail apps as well as with Expedia and soon, Instacart. Other connectors include GitHub, Granola, and Notion.\n\nWang noted that the company wants Muse to connect with small business too. Meta recently opened its platform to allow developers to build their own “connectors.” The company received more than 1,500 applications in less than week, he said, adding “I think this could be a generational opportunity to start building for a new platform as it takes off, and the response so far has been really great.”"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-3c8b0015bd61abbf",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/23/meta-made-a-tamagotchi-like-wearable-for-its-muse-ai-agent/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-24T00:46:17.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta made a Tamagotchi-like wearable for its Muse AI agent",
-        "summary": "The tiny hardware device creates another mobile home for its AI agent Muse.",
-        "body": "The AI amulet has become a bit of a cliché in the tech industry — devices like Friend have turned the idea of physical AI into little more than an exercise in eye-rolling for many consumers.\n\nBut that hasn’t stopped Meta from jumping into the arena with its own AI wearable, called Muse Charm, which is designed to give consumers another way to stay connected to its recently launched, and already popular, personal AI agent, Muse.\n\nThe device, which CEO Mark Zuckerberg revealed in a “one more thing” moment during the company’s annual Connect event, isn’t ready to ship just yet. Zuckerberg said his team had to “finalize laying out the components” and promised the devices would be “ready to ship in time for the holidays in December.”\n\nThe Muse agent, which is now embodied by a cute digital avatar known within the company as Jolly, lives inside the palm-sized totem that users can carry in their pockets or attach to a keychain. The device comes with a tiny screen that displays the avatar representing the agent. Users can talk to the device, which can then presumably carry out tasks on their behalf.\n\n“We packed the whole Muse experience, including the whole real-time voice and avatar stack, into something that fits on a keychain and is always available to talk to,” Zuckerberg said during Wednesday’s keynote. “You just go ahead and tap here in the fingerprint sensor in the corner, and you can start talking without having to unlock a phone or open an app.”\n\nZuckerberg added: “So if you’re not wearing glasses, this is going to be by far the fastest way to talk to your Muse and to show what’s going on around you.”\n\nAppropriate for what it offers, the gadget has a quasi-Tamagotchi feel to it — a lightweight, personality-filled device designed to keep users always connected to Meta’s software. It also feels like a relatviely low-stakes way for the social media giant to experiment with AI wearables while also offering yet another way to distribute its AI agent to the masses."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-1a626802dbc10b10",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/999750/muse-charm-meta-ai-hardware",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-24T00:15:20.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta is making a standalone Muse AI gadget",
-        "summary": "Meta is building a dedicated hardware device for its new Muse AI agent. The product, called Muse Charm, was briefly shown off by Meta CEO Mark Zuckerberg at the end of tonight's Meta Connect presentation. It looks almost like a chunky smartwatch without the strap - just a big screen, plus a little lanyard for […]",
-        "body": "Meta is building a dedicated hardware device for its new Muse AI agent. The product, called Muse Charm, was briefly shown off by Meta CEO Mark Zuckerberg at the end of tonight's Meta Connect presentation. It looks almost like a chunky smartwatch without the strap - just a big screen, plus a little lanyard for carrying the device around.\n\nThe Muse Charm has a fingerprint sensor on the top right corner that you can press to activate and begin speaking to the agent. There appears to be a small camera on the device as well, plus what looks like at least three holes for microphones on the front. Zuckerberg said you don't have to unlock a phone or …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-7a62c69cf672cf6d",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2267229/meta-put-muse-in-a-tamagotchi-like-charm-device/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-24T00:05:03.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta put Muse in a Tamagotchi like 'Charm' device",
-        "summary": "Meta's Muse Charm is a Tamagotchi-like device with Muse AI.",
-        "body": "Mark Zuckerberg has revealed the device on stage at Connect.\n\nMeta has revealed a Tamagotchi-like device on stage at its Connect event, except instead of a digital pet, it contains the company's Muse AI. During the demo, Mark Zuckerberg showed how you only have to tap on the \"Muse Charm's\" fingerprint sensor at the corner to start interacting with the AI. Its screen shows a small animated and interchangeable avatar as the visual representation of Muse. Zuckerberg says Meta \"packed the whole Muse experience, including the real-time voice and avatar stack into something that fits on a keychain and is always available to talk to.\"\n\nThe company still has to finalize the Muse Charm's components and design and has only built a few units so far. However, as you might have already guessed, it is aiming to get the device ready to ship in time for the holidays this December. Zuckerberg didn't reveal much about it during Connect, but he said Meta will share more details about it soon."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-e88f9f66072ccd82",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2267227/meta-will-stop-training-its-ai-on-visual-data-from-its-smart-glasses-if-you-opt-out/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-24T00:00:44.000Z",
-    "categories": [
-      "tecnologia-general",
-      "gafas-inteligentes",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta will stop training its AI on 'visual data' from its smart glasses — if you opt out",
-        "summary": "Somewhere, a contractor just breathed a sigh of relief.",
-        "body": "Somewhere, a contractor just breathed a sigh of relief.\n\nMeta is making another concession to privacy critics as it tries to get ahead of the ongoing privacy backlash against its AI glasses. Now, the company says it will allow people to opt out of having their \"visual data\" from the glasses used for AI training.\n\nThe change means that users can opt of having their camera-based interactions with Meta AI being used to train the company's models. Those images will also not be shown to third-party contractors in other countries.\n\n\"If you've opted out and you ask your glasses to translate a menu, we'll use your visual data to answer your question and then it's gone,\" Meta explained. \"It isn't used for training and nobody reviews it for product improvement.\"\n\nMeta has long said that the actual content of photos you capture with the glasses' cameras are not shared or used for training. But the company has allowed images and video captured while using Meta AI to be used for this purpose. This is confusing because these images and videos aren't saved to your camera roll, so a lot of people likely don't know that these captures are being saved, much less used for anything else. Meta has also done a pretty poor job of explaining this to people. But the fact is that any interaction with Meta AI that relies on the camera — for example \"Hey Meta, what does this sign mean\" — is storing those images.\n\nEven worse, those recordings are sometimes sent to third-party contractors in other countries who \"review\" and label the images for AI training. At least some of those contractors have reported seeing some pretty personal and intimate images of people while doing this work, according to a report earlier this year.\n\nThe new setting addresses this. Importantly, though, it only covers visual data . Your audio interactions with Meta AI are still fair game to the company for training and review, although the company does allow people to manually delete those recordings. But the opt-out does, at least, help Meta address some of its privacy critics (and at least one proposed class-action lawsuit ). The company also just revealed a new lineup of Ray-Ban-branded glasses that don't have cameras at all."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-a3def5a8863ba6b4",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/999593/meta-connect-2026-everything-announced",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-24T00:00:33.000Z",
-    "categories": [
-      "tecnologia-general",
-      "gafas-inteligentes",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta Connect 2026: The 7 biggest announcements",
-        "summary": "Meta announced a slate of new wearables during its annual Meta Connect showcase on Wednesday. The star of the event was the new Meta VR Glasses, which pack virtual reality tech into a lightweight smart glasses-style frame with a tethered puck. Meta also announced new pairs of screen-free smart glasses, along with some new AI […]",
-        "body": "Meta announced a slate of new wearables during its annual Meta Connect showcase on Wednesday. The star of the event was the new Meta VR Glasses, which pack virtual reality tech into a lightweight smart glasses-style frame with a tethered puck. Meta also announced new pairs of screen-free smart glasses, along with some new AI features and style and frame options.\n\nYou can catch up on all the highlights from this year's Meta Connect below.\n\nMeta's latest wearable offers full virtual reality in a smart glasses-style form factor. Unlike a typical VR headset, the VR Glasses don't h …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-8c0fba7bc3a55fd4",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/23/meta-introduces-camera-free-ai-glasses/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-23T23:39:44.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta introduces camera-free AI glasses",
-        "summary": "Meta says the camera-free glasses will be lighter and have up to 12 hours battery life.",
-        "body": "Confirming earlier reports , Meta announced its first pair of camera-free AI glasses, the clunkily named Ray-Ban Meta Audio, at its Connect 2026 conference on Wednesday. Designed to combat criticism around the more malicious use cases for AI glasses, which saw them nicknamed “pervert glasses” by some, the new devices will be audio-only, offering the ability to listen to music and podcasts, take calls, translate speech, and communicate with Meta’s AI assistant, Muse.\n\nThe glasses are designed by Meta’s partner in its AI hardware efforts, EssilorLuxottica, and will start at $349.\n\nWhile Meta today offers a range of AI glasses in a variety of styles, colors, and capabilities, the audio-only glasses could help the brand recover from some of the reputational damage after critics pointed out how people , often men , were using AI glasses to record videos without subjects’ consent. Meta attempted to mitigate this issue with an update that would disable the camera if the LED light that indicated the glasses were recording was ever tampered with. However, the creepiness factor remained.\n\nThis latest device could prove to be more popular for that reason, while also providing an answer to something like Apple’s Siri-powered AirPods.\n\n“Once you get used to high quality audio, it’s just a thing that you want all the time, right?” Meta CEO Mark Zuckerberg said during a keynote Wednesday, adding that the company after working on the idea realized it could design a whole new category of glasses around audio glasses.\n\nBecause they don’t have to house cameras, the glasses are slimmer than Meta’s other models and weigh only 43 grams. They also have adjustable temple tips, swappable nose pads, overextension hinges, and battery life of up to 12 hours on a single charge, Meta claims. With the included charging case, that battery life extends to up to 48 hours.\n\nThey’ll also come in a variety of colors and options — 23 color and lens combinations in total — and in two new styles, a retro-inspired “Clubmaster” Ray-Ban style and “Burbank,” described as more of a “classic, timeless, rectangle shape.” Like other Meta glasses, you can order them with your optical prescription as well, if needed.\n\nThe glasses will be available for preorder on October 13, the company noted.\n\nAlongside the glasses, Meta announced its next-generation AI glasses (the ones with cameras), the Ray-Ban Meta (Gen 3). In addition to the Ray-Ban Meta Wayfarer, there will also be two new styles, the Aviator and Zena — the latter offering more of a cat-eye frame shape. These will have a 12 MP camera that supports 3K Ultra HD video, a six-mic array, and up to nine hours of battery life.\n\nThe glasses Meta launched with EssilorLuxottica will also see an expanded lineup of styles and colors as well as a new partnership with singer Lisa, which follows the company’s earlier brand partnership with Kylie Jenner. The glasses will also be roll out to more countries globally, Meta said.\n\nAll of Meta’s AI glasses will, of course, feature access to its newer personal AI assistant, Muse.\n\nThe company also teased other coming updates, including support for Dolby Atmos Capture, a feature that picks the best photo from multiple frames, an option to choose landscape or portrait modes, hearing enhancements for those with hearing loss, more detailed responses, different audio modes, customizable controls, and something called “private processing” that Meta claims will prevent the company from seeing your data."
       }
     },
     "media": null
@@ -436,29 +455,6 @@
         "title": "YouTube promises custom feeds and a lot more AI later this year",
         "summary": "YouTube's next year could change the content you see with a big focus on AI and livestreams.",
         "body": "The annual Made on YouTube event has just wrapped up, offering an early look at the features you can expect to come to Google's dominant online streaming platform in the coming months. Yes, there's plenty of AI for both viewers and creators, but there's also a handful of non-AI updates mixed in there, too.\n\nThe design of YouTube's homepage feed comes under fire often, but the platform is preparing to give you more options. With Custom Feeds, you'll be able to add new tabs to the YouTube interface with content of your choice. To create a feed, just type a description and let YouTube populate the page. You can refine your description and rate video suggestions to tune the Custom Feed. Google says you'll be able to save \"multiple\" feeds without specifying the exact number. This feature will roll out soon in the US for web, mobile, and TV users.\n\nInteracting on YouTube will also change later this year. The platform will finally add the option to post GIFs in comments, which has apparently been a common request for some time. The comment box will let you search for popular animated thumbnails and post them on both regular videos and YouTube Shorts. The YouTube direct messaging feature is also adding support for group chat, but it's only going to be available in the US, UK, Singapore, Brazil, and some European countries to start.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-ecfd3440e8bea639",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/gadgets/2026/09/owners-mourn-spoiled-food-after-firmware-update-bricks-samsung-smart-fridges/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-23T17:39:39.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Owners mourn spoiled food after firmware update bricks Samsung smart fridges",
-        "summary": "\"So absurd and embarrassing ...\"",
-        "body": "Some Samsung smart fridges stopped working on Tuesday due to a firmware update.\n\nKorean outlets were the first to report the problems, which affect Samsung’s Bespoke AI line of fridges. Star News Korea , per a Google-provided translation, said that most of the affected devices were four-door fridges from 2024 or later.\n\nAffected fridges “suddenly lost power and stopped functioning immediately after” trying to issue a firmware update through SmartThings, Samsung’s smart home platform, per Star News Korea. The SmartThings app then showed the devices as offline. Some users said that their fridge’s internal display was stuck showing the message \"Checking SmartThings app during update.”\n\nRead full article\n\nComments"
       }
     },
     "media": null

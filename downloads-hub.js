@@ -6,6 +6,7 @@
       launcher: 'Descargas',
       heading: 'Descargas',
       intro: 'Elige qué quieres hacer.',
+      explanation: 'Pega un enlace público o compartido y TifloAcosta intentará localizar los archivos descargables disponibles.',
       link: 'Descargar desde un enlace',
       sounds: 'Buscar sonidos',
       back: 'Volver al inicio'
@@ -14,6 +15,7 @@
       launcher: 'Downloads',
       heading: 'Downloads',
       intro: 'Choose what you want to do.',
+      explanation: 'Paste a public or shared link and TifloAcosta will try to locate the downloadable files that are available.',
       link: 'Download from a link',
       sounds: 'Search sounds',
       back: 'Back to home'
@@ -56,6 +58,7 @@
     launcher.textContent = t.launcher;
     section.querySelector('#downloads-hub-heading').textContent = t.heading;
     section.querySelector('#downloads-hub-intro').textContent = t.intro;
+    section.querySelector('#downloads-hub-explanation').textContent = t.explanation;
     section.querySelector('#downloads-open-link').textContent = t.link;
     section.querySelector('#downloads-open-sounds').textContent = t.sounds;
     section.querySelectorAll('[data-downloads-home]').forEach(button => {
@@ -122,6 +125,11 @@
     intro.id = 'downloads-hub-intro';
     intro.className = 'download-tool-intro';
     section.append(intro);
+
+    const explanation = document.createElement('p');
+    explanation.id = 'downloads-hub-explanation';
+    explanation.className = 'muted';
+    section.append(explanation);
 
     const actions = document.createElement('div');
     actions.className = 'resource-actions downloads-hub-actions';

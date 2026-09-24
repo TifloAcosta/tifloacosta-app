@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
+import { resourceMatchesPlatform } from '../src/screens/library.mjs';
 
 const searchSource = await readFile(new URL('../src/screens/search.mjs', import.meta.url), 'utf8');
 const librarySource = await readFile(new URL('../src/screens/library.mjs', import.meta.url), 'utf8');
@@ -23,13 +24,13 @@ test('library exposes Android, iPhone and Windows platform filters without hidin
   assert.match(librarySource, /activePlatform/);
 });
 
-test('library platform detection also uses titles and common screen-reader names because source categories are often topical', () => {
-  assert.match(librarySource, /item\?\.title/);
-  assert.match(librarySource, /talkback/i);
-  assert.match(librarySource, /jieshuo/i);
-  assert.match(librarySource, /voiceover/i);
-  assert.match(librarySource, /\bjaws\b/i);
-  assert.match(librarySource, /nvda/i);
+test('library platform matching works even when the source category is topical instead of an operating system', () => {
+  assert.equal(resourceMatchesPlatform({ category: 'Correos', title: 'Curso práctico de Outlook con lector de pantalla en Windows' }, 'Windows'), true);
+  assert.equal(resourceMatchesPlatform({ category: 'APPs', title: 'Lo que no puede faltar en tu iPhone' }, 'iPhone'), true);
+  assert.equal(resourceMatchesPlatform({ category: 'Cursos', title: 'Curso completo con TalkBack' }, 'Android'), true);
+  assert.equal(resourceMatchesPlatform({ category: 'Cursos', title: 'Curso Jieshuo' }, 'Android'), true);
+  assert.equal(resourceMatchesPlatform({ category: 'Accesibilidad', title: 'Guía de JAWS y NVDA para Windows' }, 'Windows'), true);
+  assert.equal(resourceMatchesPlatform({ category: 'General', title: 'Documento multiplataforma' }, 'Windows'), false);
 });
 
 test('long catalogue screens expose a bottom Back control so screen-reader users do not traverse the whole page backwards', () => {

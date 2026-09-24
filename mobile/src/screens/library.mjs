@@ -171,6 +171,13 @@ export function renderLibrary({ root, router, content, preferences, favoritesSto
     }
   }
 
+  function focusFilteredResults() {
+    const target = list.querySelector('h2, .empty-state');
+    if (!target) return;
+    target.tabIndex = -1;
+    target.focus();
+  }
+
   for (const [platform, label] of choices) {
     const button = document.createElement('button');
     button.type = 'button';
@@ -181,7 +188,7 @@ export function renderLibrary({ root, router, content, preferences, favoritesSto
       activePlatform = platform;
       updateFilterState();
       renderList();
-      list.querySelector('h2, .empty-state')?.focus?.();
+      focusFilteredResults();
     });
     filterButtons.set(platform, button);
     filters.append(button);

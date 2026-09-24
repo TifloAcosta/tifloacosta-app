@@ -1,84 +1,63 @@
 [
   {
-    "id": "techcrunch-2ea39d425466b3ab",
+    "id": "techcrunch-9e2dbf513e867c90",
     "type": "news",
     "sourceId": "techcrunch",
     "sourceName": "TechCrunch",
     "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/24/shield-ai-waabi-and-general-motors-on-building-ai-when-failure-is-not-an-option-at-techcrunch-disrupt-2026/",
+    "originalUrl": "https://techcrunch.com/2026/09/24/prismml-brings-its-tiny-llms-to-qualcomm-powered-smart-glasses/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-24T15:00:00.000Z",
+    "publishedAt": "2026-09-24T19:00:42.000Z",
     "categories": [
       "tecnologia-general",
+      "gafas-inteligentes",
       "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Shield AI, Waabi, and General Motors on building AI when failure is not an option at TechCrunch Disrupt 2026",
-        "summary": "Leaders from Waabi, Shield AI, and General Motors join the Real World AI Stage at TechCrunch Disrupt 2026 to talk building AI. Save up to $200 by Sept. 25, 11:59 p.m. PT. Get a second pass at 50% off.",
-        "body": "An AI chatbot can give you a bad answer. An AI system controlling an aircraft, vehicle, or robot can create an entirely different kind of problem. When artificial intelligence (AI) moves into the physical world, a mistake can ground an aircraft, cause a vehicle crash, or compromise a mission. So how do you know when an autonomous system is actually ready to leave the lab?\n\nAt TechCrunch Disrupt 2026 , Shield AI Chief Technology Officer Nathan Michael, Waabi founder and CEO Raquel Urtasun, and General Motors Director of Robotics Strategy Mikell Taylor will tackle that question on the Real World AI Stage in “Building AI Systems When Failure Is Not an Option.”\n\nThe conversation will get into the work behind deploying AI where the stakes are high: creating a safety culture, testing and validating systems, navigating regulatory hurdles, and earning trust.\n\nBuilding AI for the physical world? Tomorrow is the last day to save up to $200 on your Disrupt pass. Secure your ticket by September 25 at 11:59 p.m. PT and hear from three leaders working where failure has real-world consequences. Prices will increase after September 25, 11:59 p.m. PT.\n\nAt Shield AI , Nathan Michael leads the development and deployment of Hivemind, the company’s platform-agnostic mission autonomy software. His background spans AI, control, perception, and multi-robot systems, including years at Carnegie Mellon University’s Robotics Institute, where he directed the Resilient Intelligent Systems Lab.\n\nThat expertise is being put to work on technology designed for some of AI’s highest-stakes environments. In February, Hivemind was selected as an autonomy provider for the U.S. Air Force’s Collaborative Combat Aircraft drone prototype program. A month later, Shield AI announced $1.5 billion in Series G funding at a $12.7 billion post-money valuation.\n\nAt Disrupt, Michael brings the perspective of an AI leader developing autonomous systems for environments where performance has to be matched by assurance.\n\nWhat does it take to trust AI with a mission? Secure your Disrupt pass before September 25, 11:59 p.m. PT, and hear Nathan Michael’s perspective on developing autonomy for high-stakes environments.\n\nRaquel Urtasun has spent 25 years working in AI and autonomous vehicles. Before founding Waabi , she served as chief scientist and head of R&D at Uber ATG. She’s also a professor of computer science at the University of Toronto, co-founded the Vector Institute for AI, and has published more than 200 AI papers.\n\nNow Waabi is preparing to take its autonomous-driving technology much further. In January, the company raised $1 billion and announced a partnership with Uber to support the deployment of 25,000 or more Waabi Driver-powered robotaxis.\n\nTesting and validation are central to Waabi’s approach. Its Waabi World simulator trains, tests, and stress-tests the Waabi Driver in a virtual environment, and Urtasun has said the company’s autonomous trucks still need to be fully validated before driverless deployment.\n\nThat puts one of the session’s central questions squarely in Urtasun’s wheelhouse: How do you determine when an AI system is ready to operate without a human behind the wheel?\n\nWant to hear how autonomous-driving leaders approach testing, validation, and deployment? Secure your Disrupt pass by September 25 at 11:59 p.m. PT to save up to $200 — and get a second pass for 50% off select ticket types.\n\nMikell Taylor has spent more than two decades building robots designed to do useful work. Today, she leads robotics strategy for General Motors ’ Autonomous Robotics Center. Previously, she led the Amazon Robotics team that developed Proteus, Amazon’s first autonomous mobile robot.\n\nHer robotics career started in a decidedly less industrial setting: She once built a robotic senior prom date. Since then, Taylor has worked on everything from autonomous underwater vehicles to industrial robotic systems, with a focus on robots that are practical, reliable, and able to work effectively around people.\n\nTaylor’s experience will shed light on a fundamental challenge facing real-world robotics: user experience and adoption need to be considered from the start, as part of both product design and deployment planning. That human element matters when AI-powered machines leave controlled demonstrations and enter workplaces where people have to depend on them.\n\nHow do you build autonomous systems people can work with — and trust? Register for Disrupt before September 25, 11:59 p.m. PT, to save up to $200 and to hear from leaders tackling those questions in the real world.\n\nAircraft. Autonomous vehicles. Industrial robots. The environments may be different, but all three put the same question in sharp focus: When the consequences of failure are real, what does it take to deploy with confidence?\n\nFor founders and technology leaders building autonomous systems, the session offers a chance to compare how leaders in defense, autonomous driving, and industrial robotics approach the decisions that stand between a promising system and one that’s ready for the real world.\n\nThis session is one of 200+ across six industry stages, roundtables, and breakouts at Disrupt, October 13–15 at Moscone West in San Francisco . More than 10,000 founders, investors, operators, and tech leaders are expected, along with 250+ speakers and 300+ exhibiting startups. Beyond the agenda, matchmaking, dealmaking, and networking create more opportunities to make the connections that can move a company forward.\n\nWhen failure isn’t an option, “almost ready” isn’t enough. These are the last two days to save up to $200 on your Disrupt pass . Secure your ticket by September 25 at 11:59 p.m. PT — and get a second pass for 50% off select ticket types."
+        "title": "PrismML brings its tiny LLMs to Qualcomm-powered smart glasses",
+        "summary": "Prism's larger goal is open-weight AI that runs on devices and makes better use of the computing power they already have.",
+        "body": "Posted:\n\nThe AI Lab PrismML — founded by Caltech researchers and advised by UC Berkeley’s Ion Stoica — has created a version of its tiny language models for smart glasses running on Qualcomm’s Snapdragon chips.\n\nOn Wednesday, at Qualcomm’s Snapdragon Summit, the chipmaker showcased PrismML’s 1-bit Bonsai LLM, which can be run locally on AI smart glasses built on the Snapdragon AR1 Gen 1 Platform.\n\nAs TechCrunch previously reported, PrismML’s claim to fame is that it shrinks larger models substantially (in this case, by 4x), while retaining almost all of their performance on standard benchmarks. The smart glasses version is a 2-billion-parameter model tuned for vision and language, so wearers can ask what they’re looking at in real time.\n\nPrism’s larger goal is open-weight AI that runs on devices and makes better use of the computing power they already have. The startup pitches this as an alternative to depending on the privacy promises of proprietary AI labs and their insatiable need for more compute.\n\nReleasing a model for Qualcomm’s chip is a step toward that vision. But no smart glasses running PrismML have been announced yet."
       }
     },
     "media": null
   },
   {
-    "id": "the-verge-ee6c9342417055a8",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1000037/nikon-z5-iic-full-frame-digital-camera-ibis-mechanical-shutter",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-24T14:53:06.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "You might not miss what Nikon removed from its cheaper full-frame Z5 IIC",
-        "summary": "Nikon waited five years to update its full-frame Z5 camera to the Z5 II, but today it announced a new variant of last year's upgrade that removes features instead of introducing improvements in order to make it more affordable for novice photographers. While the Nikon Z5 II starts at $1,849.95, the new Nikon Z5 IIC […]",
-        "body": "Nikon waited five years to update its full-frame Z5 camera to the Z5 II, but today it announced a new variant of last year's upgrade that removes features instead of introducing improvements in order to make it more affordable for novice photographers. While the Nikon Z5 II starts at $1,849.95, the new Nikon Z5 IIC is $450 cheaper at $1,399.95 with a refreshed design and all of the original's best core features.\n\nThe Nikon Z5 IIC carries forward the Z5 II's 24.5-megapixel backside illuminated full-frame sensor using the same EXPEED 7 image processing engine found in the company's higher-end shooters with in-body image stabilization. It can c …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-b95ec065349c6f26",
+    "id": "techcrunch-b5fd75257faee109",
     "type": "news",
     "sourceId": "techcrunch",
     "sourceName": "TechCrunch",
     "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/24/techcrunch-disrupt-2026-cal-ais-zach-yadegari-on-how-to-create-viral-growth-and-capitalize-on-it/",
+    "originalUrl": "https://techcrunch.com/2026/09/24/meet-feather-the-startup-building-the-android-of-robotics-for-developers/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-24T14:30:00.000Z",
+    "publishedAt": "2026-09-24T18:52:38.000Z",
     "categories": [
       "tecnologia-general",
-      "ia-accesibilidad"
+      "android",
+      "programas-accesibles"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "TechCrunch Disrupt 2026: Cal AI’s Zach Yadegari on how to create viral growth and capitalize on it",
-        "summary": "Zach Yadegari joins the Builders Stage at TechCrunch Disrupt 2026 to share how he capitalized on viral growth. Save up to $200 before September 25. Save 50% on a second pass.",
-        "body": "What happens when the app you started in high school goes viral?\n\nFor Zach Yadegari, the answer was more than 15 million downloads, $30 million in annual revenue, and an acquisition by MyFitnessPal — all before his 20th birthday. Yadegari was just 17 when he co-founded Cal AI, the artificial intelligence (AI)-powered nutrition app that lets users track what they eat by snapping a photo.\n\nBut those numbers leave out the part most founders would like to know: How did Cal AI get that kind of viral attention in the first place? And once millions of people showed up, how did the company make the most of that momentum?\n\nAt TechCrunch Disrupt 2026 , Yadegari will take the Builders Stage for a fireside chat on “How to Create Viral Growth and Capitalize On It.” He’ll get into Cal AI’s rapid growth, the product pressure that came with it, and the challenge of turning breakout attention into durable retention and long-term company building.\n\nTrying to break through in a crowded market? Save up to $200 when you secure your pass by September 25 at 11:59 p.m. PT and hear what Yadegari learned building a breakout consumer app. Got a colleague who’d like to join? Get a second pass for 50% off.\n\nCal AI is built around a simple proposition: Snap a photo of a meal, and the app uses image recognition and the phone’s depth sensor to calculate calories, protein, carbs, and fat.\n\nYadegari was still a high school senior when he co-founded Cal AI, but it wasn’t his first experience attracting a large online audience. At 16, he sold Totally Science, a gaming platform he founded that drew more than 5 million users during the COVID-19 pandemic, for six figures.\n\nCal AI moved even faster. In less than two years, it had more than 15 million downloads and was generating more than $30 million in annual revenue. MyFitnessPal took notice, acquiring the company in a deal that closed in December 2025. The deal kept Cal AI as a standalone app, retained its seven-person team, and left Yadegari at the helm.\n\nAt Disrupt, Yadegari will share what Cal AI learned about building in a distribution-driven market where a product can find a massive audience fast — and what it takes to exploit that viral growth when it happens.\n\nChasing your own breakout moment? Get your Disrupt ticket to learn from Cal AI’s story. Save up to $200 on your pass and get a second pass for 50% off select ticket types. Secure your ticket by September 25 at 11:59 p.m. PT.\n\nFor founders chasing growth, Yadegari’s story offers a look at both sides of a viral breakout: how a product finds a massive audience and what it takes to turn that attention into durable retention and long-term company building.\n\nYadegari’s fireside chat is one of 200+ sessions across six industry stages at Disrupt, October 13–15 at Moscone West in San Francisco . More than 10,000 founders, investors, operators and tech leaders are expected, along with 250+ speakers, roundtables and breakouts, and 300+ exhibiting startups.\n\nBeyond the agenda, matchmaking, dealmaking and networking give founders opportunities to connect with investors, potential customers, partners and other builders working through many of the same challenges.\n\nThese are the last two days to save up to $200 on your Disrupt pass. Secure your ticket by September 25 at 11:59 p.m. PT — and get a second pass for 50% off select ticket types. Lock in your savings to hear Zach Yadegari share the lessons behind Cal AI’s viral success."
+        "title": "Meet Feather, the startup building the ‘Android of robotics’ for developers",
+        "summary": "Feather is betting on a customizable, $30,000 platform built for software developers.",
+        "body": "If there is one thing robotics founders and investors agree on, it’s that the “ChatGPT moment” where a general-purpose robot can seamlessly adapt to any environment has not arrived. Opinions vary on whether the breakthrough is just around the corner or a decade away.\n\nFeather Robotics , a humanoid startup founded last year, is developing a robot for either timeline. Unlike Tesla or Figure, which are tackling the lofty mission of building both the body and a foundational ‘brain’ that isn’t yet widely deployed, Feather provides the hardware and software toolkit for developers to tackle real-world tasks now.\n\n“You can’t buy a Tesla robot today and develop on top of it,” Feather co-founder Hoa Mai told TechCrunch. “We realized that this is not how most companies became successful. Hardware players like Nvidia or Apple started with a product that worked and was deployable, and then they added complexity over time.”\n\nIn 2025, after selling his previous humanoid startup to 1X, Mai (pictured left) teamed up with Parsa Bakhtiari (pictured right), a former Tesla Model 3 engineer who at one point reported directly to Elon Musk, to build what the duo hopes will become the Android of robotics.\n\nThat vision was attractive to Gradient Ventures, which backed Feather at its inception, leading the startup’s previously announced $7.6 million pre-seed round.\n\nSince then, Feather has rolled out a modular robotic system that allows developers to customize the hardware for different use cases, such as adjusting arm lengths. The startup has already begun selling to customers, surpassing $1 million in revenue.\n\nAlthough Feather is not disclosing its customers, it said that its robots are working as cooks in restaurants in Japan and cleaning up science labs. On the software side, the hardware can run models from any leading robotics AI provider, including Generalist, Skild, or Physical Intelligence.\n\n“We’ve been selling small quantities of these robots, and now that we resolved like almost all the issues over the last year of field testing, we’re getting ready for a big product launch,” Mai said.\n\nAccording to Darian Shirazi, General Partner at Gradient, Feather doesn’t have direct competitors in the US. He breaks down the current hardware robotics landscape into three categories: startups like Sunday building domestic household robots, heavyweights like Figure and Tesla aiming for general-purpose machines, and Feather, which, he believes, is the only U.S. startup developing a modular humanoid platform.\n\nMai admits that Feather took a page from Chinese robotics companies like Unitree. But with new foreign-made models restricted from entering the U.S. market, Feather is now uniquely positioned as a homegrown option of its kind.\n\nFeather’s other advantage is its price. The robot costs $30,000, which is about half the price Unitree’s H2 Edu.\n\nShirazi believes the market size at that price could be very large. “You would hire a laborer for $50,000 to $60,000 a year, you’d have to train [them]. They’d have to have HR. They’d have to have all these different support mechanisms,” he said. “You can now buy a Feather robot to do that.”\n\nFeather is also operating extremely efficiently, having spent only a fraction of its pre-seed funding, according to Shirazi.\n\nThe startup’s big bet, of course, is that the value in robotics will come from an ecosystem developed around the hardware.\n\n“If we think about the market size today for physical AI companies, it’s very small,” Mai said. “But if you think about how many physical AI application companies will probably exist in five years, we expect it to be in the thousands.”\n\nFeather hopes to be the platform that powers all of them."
       }
     },
     "media": null
   },
   {
-    "id": "the-verge-0f8f2f81d1fcff59",
+    "id": "the-verge-41043260c2411589",
     "type": "news",
     "sourceId": "the-verge",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/999881/why-cant-we-airgap-rogue-ai-agents",
+    "originalUrl": "https://www.theverge.com/tech/1000140/jensen-huang-nvidia-ai-energy-climate-change-supervillain",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-24T14:30:00.000Z",
+    "publishedAt": "2026-09-24T18:04:44.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -87,142 +66,22 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Why can’t we just keep rogue AIs off the internet?",
-        "summary": "AI agents keep getting loose, escaping supposedly secure tests to attack real-world targets, commandeer obscure wikis, and leave instructions for other agents to follow. Researchers are testing these systems precisely because they might behave in unpredictable, even dangerous, ways. So wouldn't it be safer to just keep the agents off the internet? \"A strict air […]",
-        "body": "AI agents keep getting loose , escaping supposedly secure tests to attack real-world targets , commandeer obscure wikis , and leave instructions for other agents to follow. Researchers are testing these systems precisely because they might behave in unpredictable, even dangerous, ways. So wouldn't it be safer to just keep the agents off the internet?\n\nIn theory, yes. Researchers can isolate the computers running AI tools from the internet and other outside networks, a technique known as air gapping. That can mean physically removing or disabling cables …\n\nRead the full story at The Verge."
+        "title": "Jensen Huang talks about AI and climate change like a supervillain",
+        "summary": "As Jensen Huang puts it, AI can help fight climate change - but only if it inflicts \"an enormous amount of pain and suffering\" first. The Nvidia CEO discussed the future of energy and AI's impact on our planet in the latest episode of The Ezra Klein Show. But his comments boil down to the […]",
+        "body": "As Jensen Huang puts it, AI can help fight climate change - but only if it inflicts \"an enormous amount of pain and suffering\" first.\n\nThe Nvidia CEO discussed the future of energy and AI's impact on our planet in the latest episode of The Ezra Klein Show . But his comments boil down to the same accelerationist spin we've seen from a variety of tech leaders as well as President Donald Trump. They promise that AI will be such a gift to humanity that it's worth the damage caused by data centers currently running on dirty energy.\n\nHuang's extreme level of privilege is glaring in the interview. He …\n\nRead the full story at The Verge."
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-58b88bcc736109a1",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/24/ios-27-lets-you-create-your-own-iphone-wallpapers/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-24T14:18:06.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iOS 27 lets you create your own custom iPhone wallpapers",
-        "summary": "Apple introduces new iPhone wallpapers every year, and you can download iOS 27’s additions here . But iOS 27 also adds the ability to create your own custom wallpapers. Here’s how. more…",
-        "body": "Apple introduces new iPhone wallpapers every year, and you can download iOS 27’s additions here . But iOS 27 also adds the ability to create your own custom wallpapers. Here’s how.\n\nThis year as part of iOS 27’s overall theme of major AI improvements, Apple has given its Image Playground app an overhaul.\n\nImage Playground now offers more powerful image generation capabilities and far fewer restrictions than before. It even lets you create images that are the perfect wallpaper size.\n\nBut you don’t even need to open the Image Playground app to create wallpapers.\n\niOS 27 lets you create your own iPhone wallpapers right from the wallpaper picker.\n\nGo to Settings ⇾ Wallpaper ⇾ Add New Wallpaper or long-press your Lock Screen and hit the ‘+’ button to open iOS 27’s wallpaper gallery.\n\nNew in the gallery this year, you’ll see Image Playground as an option in the top row. iOS 27 also automatically adds some AI-generated images to the Featured wallpaper section.\n\nFor example, you’ll see suggested wallpapers that are based on your own photos, but in a new style.\n\nIn my testing of iOS 27, with no effort on my part, my iPhone prepared beautifully stylized versions of some of my favorite photos that look great as wallpapers.\n\nWherever you see an AI-generated wallpaper in the gallery, Apple’s new Image Playground icon appears next to it. That way, it’s always clear where the image came from.\n\nIf you like one of Apple’s suggested AI wallpapers, you can choose it and be all set.\n\nBut iOS 27 also lets you create fully custom wallpapers by hitting the Image Playground button in the top row. Image Playground will ask you to describe your image, and let you optionally choose a style or base it on an existing photo or person.\n\nWhen the image is created, it’s automatically the perfect size for an iPhone wallpaper.\n\nHave you tried iOS 27’s new wallpaper creation tool? Let us know in the comments."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-d2e5ddc7c6c5b9c9",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1000015/google-ai-satellite-space-project-suncatcher",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-24T14:15:17.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google is sending an AI satellite into space next week",
-        "summary": "Google is getting ready to launch a satellite with its AI processors to test how well they perform in space, as reported earlier by The New York Times. The move is part of Google's Project Suncatcher, the company's experimental initiative that could eventually put AI data centers into orbit. The satellite, equipped with Google's Tensor […]",
-        "body": "Google is getting ready to launch a satellite with its AI processors to test how well they perform in space, as reported earlier by The New York Times . The move is part of Google's Project Suncatcher , the company's experimental initiative that could eventually put AI data centers into orbit.\n\nThe satellite, equipped with Google's Tensor Processing Units, will launch aboard a SpaceX Falcon 9 rocket on October 1st, allowing it to harness the power of the sun in low Earth orbit. As noted by Google, the goal of the mission is to measure how well its TPUs \"handle the physical stress of spaceflight and the radiation and thermal extremes of space.\" …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-2d63f85e0bfa8a93",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/24/adobe-expands-creative-tool-access-to-google-gemini-brings-acrobat-to-claude/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-24T13:00:00.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Adobe expands creative tool access to Google Gemini, brings Acrobat to Claude",
-        "summary": "Adobe today announced two major expansions to its AI chatbot integrations, bringing its creative tools to Google Gemini while adding Acrobat tools to Claude. Here are the details. more…",
-        "body": "Adobe today announced two major expansions to its AI chatbot integrations, bringing its creative tools to Google Gemini while adding Acrobat tools to Claude. Here are the details.\n\nFor the past year or so, Adobe has been working to bring its creative tools to AI chatbots and other productivity tools, such as ChatGPT, Slack, and Copilot.\n\nToday, the company is announcing two expansions to that effort.\n\nFirst, Adobe is expanding its integration with Claude. The company already offered access to creative tools from Photoshop, Illustrator, Premiere, Lightroom, InDesign, Adobe Express, Adobe Stock, and more. Today, it is also adding Acrobat tools to the same plugin across Claude and Claude Code on desktop, the web, and mobile.\n\nAdobe says users can get started as a guest, or sign in with their Adobe account “to unlock the full plugin experience, including higher usage limits, additional tools and continuity across sessions.”\n\nHere’s how Adobe describes some of the new capabilities:\n\nThe second piece of news today comes for Google Gemini users across all plans. Starting today, Adobe is bringing tools from Photoshop, Lightroom, Adobe Express, and Firefly directly into Gemini.\n\nThis means that users can ask Gemini to enhance photos, create marketing assets, and customize designs using Adobe’s tools without leaving the conversation.\n\nTo get started, navigate to Personal Intelligence, select Adobe under Connected Apps, and sign in with your Adobe account or create one for free if you don’t already have one.\n\nAdobe adds that users only need to describe what they want, and Adobe “orchestrates the right tools and steps to get you there.”\n\nSome of the things Adobe says users can now do in Google Gemini include:\n\nHave you been using creativity and productivity tools in your AI chatbots? Let us know in the comments."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-dab5a54a69f9c7ce",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/24/australia-to-investigate-if-openai-hack-of-government-health-website-broke-the-law/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-24T12:54:19.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Australia to investigate if OpenAI hack of government health website broke the law",
-        "summary": "The incident is the first known breach to affect a government agency, and Australia's prime minister has vowed to hold OpenAI accountable.",
-        "body": "An OpenAI model hacked into an Australian government website, the country’s prime minister Anthony Albanese said Wednesday, in the first publicly reported case of an AI model hacking into a government’s systems.\n\nAlbanese said that there would “obviously be legal consequences” following the breach, and that OpenAI faces a government investigation into how its unreleased models gained access to reams of bulk health data information.\n\nThis latest incident disclosure comes as governments and tech companies grapple with how to rein in increasingly autonomous AI after a recent spate of AI agents breaking out of their sandboxes, colluding on the internet, and posing cybersecurity issues.\n\nThe breach also poses questions about how both OpenAI and the Australian government failed to detect the attack until several months later.\n\nDuring a Wednesday news briefing at the U.N. General Assembly, Albanese said that the breach began on June 18, but that OpenAI did not notify the government until September 10.\n\nOpenAI only became aware of the incident in August when it turned up during a broader, companywide review of agents behaving in unintended ways, according to an OpenAI spokesperson who reached TechCrunch via email.\n\nThe unspecified OpenAI agent obtained both public and nonpublic files from Services Australia, which administers Australia’s universal healthcare scheme. While the prime minister said there is no evidence that any citizens’ personal information was leaked, OpenAI said that the information the agent reached included aggregate health statistics and internal file names.\n\nThe agent was running during an internal OpenAI evaluation, seeking answers about Australia and publicly available medicine information. At the Medicare portal, the agent encountered repeated blocks but found ways around them.\n\nAlbanese told reporters that the model “didn’t accept no for an answer,” and added that the model had actively written data to the government’s database, rather than just accessing it, indicating the possibility that the department’s data was modified or muddied.\n\nThe prime minister said OpenAI disclosed the breach by sending a notification to the public mailbox of Services Australia, which then notified Australia’s Cyber Security Centre five days later. It’s unclear why there was a delay, but Albanese said he raised the breach directly with OpenAI chief executive Sam Altman by stressing Australia’s “extreme concern” about this incident and “disappointment” that OpenAI sat on the information for nearly three months.\n\n“This situation is obviously unacceptable,” said Albanese, making clear that he held the company accountable for both the hack and how slowly it came to light.\n\nAlbanese said that the government’s investigation will consider law enforcement and legislative responses to prevent incidents like this one happening again.\n\nAustralian media outlet ABC News reports that the latest identified attack may have relied on an earlier breach of a German wiki site , which was used as a staging ground for attacking the Australian government’s website. The AI model agents reportedly used the German wiki to leave notes to be used in later hacks, including a note to obtain data from the Australian Institute of Health and Welfare, a federal agency that publishes national health data. The agency is one of three additional systems that Albanese said may have been breached.\n\nTransluce, a nonprofit AI research lab, separately found public records showing AI agents targeting the Australian Institute of Health and Welfare on June 20 and 21.\n\nOpenAI did not respond to TechCrunch’s specific inquiry on whether the incidents were connected but acknowledged their “activity involving several Australian government websites and services.”\n\nThe incident comes after a string of security incidents caused by rogue agents, often acting within the infrastructure of AI labs. In July, swarms of OpenAI agents breached Hugging Face. Since then, more incidents of AI agent hacks from Anthropic, Meta, and Google have been revealed .\n\nOpenAI now says it is conducting an “extensive review of misaligned model activity during training and evaluation” and is notifying third parties of potential breaches."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-21db4ab61229ebb8",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/24/new-ipad-mini-coming-soon-with-these-major-changes/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-24T12:49:52.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "New iPad mini coming soon with these major changes",
-        "summary": "Apple is about to release a new iPad mini. This will mark the first update to the device in two years, and it’s expected to be a big one. Here’s everything we know so far about the new iPad mini coming as soon as next month. more…",
-        "body": "Apple is about to release a new iPad mini . This will mark the first update to the device in two years, and it’s expected to be a big one. Here’s everything we know so far about the new iPad mini coming as soon as next month.\n\nBy far the biggest change to the new iPad mini will be to the display. According to multiple sources , the iPad mini 8 will feature an OLED display.\n\nThis will be a dramatic improvement to the iPad mini’s current LCD panel. For users, the move to OLED means deeper blacks, richer colors, and better contrast. The iPhone X was the first iPhone to use an OLED display in 2017, while the OLED iPad Pro debuted in 2024.\n\nOne lingering question, though, is whether the new iPad mini will use a ProMotion display for refresh rates of up to 120Hz. According to a sketchy rumor last week , the new iPad mini won’t offer ProMotion support and will instead be limited to 60Hz.\n\nThis hasn’t been corroborated by any other sources, though, so I’m holding out hope this leak is incorrect.\n\nThe current iPad mini, released in October 2024, is powered by Apple’s A17 Pro chip. The new iPad mini will likely feature the A19 Pro or A20 Pro chip. This will offer a solid boost in performance, and could enable support for the most advanced Siri AI features in iOS 27.\n\nAccording to Bloomberg , Apple has tested a “redesigned casing” for the iPad mini that is water-resistant like the iPhone.\n\nWhether or not this water-resistant casing pans out remains to be seen. However, it would make the iPad mini far more durable. It’d be especially notable for people who use it as an e-reader, as one of the top features of dedicated e-readers like the Kindle is water resistance .\n\nThe iPad mini 8 might also be Apple’s first device with a revamped vibration-based speaker system. This vibration-based speaker system would let Apple remove speaker holes, aiding its work to make the device water-resistant.\n\nIn contrast, the iPhone has speaker holes, but Apple uses gaskets and adhesives to make the device water-resistant.\n\nAccording to the latest reporting from Bloomberg , Apple is aiming to release the OLED iPad mini as early as this October. It’s allegedly the “biggest overhaul to the iPad mini in half a decade.”\n\nThere’s no word on how much the new iPad mini will cost. Apple increased the price of the current iPad mini in July from $499 to $599 (currently discounted to $569 on Amazon ). Whether the new iPad mini with OLED is even more expensive remains to be seen.\n\nWhat do you think of Apple’s rumored plans for the iPad mini? Are you tempted by the OLED display? Let us know down in the comments.\n\nFollow Chance : Threads , Bluesky , Instagram , and Mastodon ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-485665dc8c10462e",
+    "id": "engadget-3db47c6155dcca45",
     "type": "news",
     "sourceId": "engadget",
     "sourceName": "Engadget",
     "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2267407/qualcomm-snapdragon-sound-elite-ai-for-audio-wearables/",
+    "originalUrl": "https://www.engadget.com/2267975/google-is-sending-a-teensy-tiny-ai-data-center-to-space/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-24T11:23:00.000Z",
+    "publishedAt": "2026-09-24T17:45:37.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -231,9 +90,251 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Qualcomm's Snapdragon Sound Elite is a new AI chip for audio wearables",
-        "summary": "Qualcomm has launched a new chip that will enable AI features on small audio devices.",
-        "body": "The company says it will enable on-device AI.\n\nQualcomm has launched the Snapdragon Sound Elite Gen 2 chip for the next generation of audio devices with AI features. This model will enable more powerful on-device AI capabilities for earbuds, headphones, audio glasses (perhaps similar to the new Ray-Ban Meta Audio ) and camera-equipped earbuds like the AirPods Apple is reportedly developing . Qualcomm says the Snapdragon Sound Elite Gen 2 has twice the AI capabilities of its predecessor, the Snapdragon S7 Gen 1 Sound Platform.\n\n\"As AI becomes a core capability, users will increasingly expect more natural ways to interact with it,\" said Ziad Asghar, Qualcomm Senior Vice President and General Manager for XR, Wearables and Personal AI. \"Those interactions won't always happen through a screen. They will happen through natural conversations, where users can simply speak to an AI assistant and receive help in real time.\" Asghar added that the new chip will give devices the power to offer features, such as real-time on-device translation and the ability to amplify sounds and conversations for those who are hard of hearing.\n\nThe chip comes with support for Qualcomm's aptX Lossless technology for immersive audio quality, as well as for the company's XPAN wireless audio technology that combines Wi-Fi and Bluetooth to extend the range of devices. Its Wi-Fi 6E connectivity enables faster speeds that Qualcomm says makes always-available AI possible without affecting the device's battery and sound quality."
+        "title": "Google is sending a teensy-tiny AI data center to space",
+        "summary": "It's an experiment to see how the chips hold up in the harsh vacuum of the cosmos.",
+        "body": "It's an experiment to see how the chips hold up in the harsh vacuum of the cosmos.\n\nGoogle's Project Suncatcher, which ultimately aims to put large AI installations in low-Earth orbit , is preparing for a milestone event. The company will be sending a teensy-tiny AI data center into space to see how it reacts to the harsh conditions, as reported by The New York Times .\n\nA satellite named MVP will be aboard a SpaceX Falcon 9 rocket set to launch on October 1, where it will be placed into orbit. This isn't a full data center in the conventional sense. It's four specialized computer chips called \"tensor processing units\" which, combined, offer the power of a single server in a data center.\n\nWe're taking AI to space with @Google . 🛰️\n\nProject Suncatcher explores putting AI compute in orbit, powered by the sun. Soon, we'll be sending our first satellite into space to start testing that idea. It's a new approach to AI infrastructure.\n\nCheck out a behind-the-scenes look... pic.twitter.com/cup8uXuyrC\n\n— Planet (@planet) September 24, 2026\n\nSolar panels will supply just one kilowatt of power to juice the chips, which is equivalent to the energy needed to run a hair dryer. Google says this will be enough to test the hardware against the harsh conditions of space. The company plans to let the satellite answer simple AI queries for a year, though it will orbit Earth for six years before it burns up during a descent into the atmosphere.\n\nThese chips have undergone a battery of tests to simulate the void of space, including getting blasted with large amounts of radiation at Crocker Nuclear Laboratory. Radiation can seriously mess with computer chips, causing something called \"bit flips.\" This essentially flips the binary code from a one to a zero, or vice versa.\n\nWhat's the solution to bit flips? Google is taking the tried-and-true PC method. It plans on restarting the chips when they act up. There's also a proprietary cooling system in place that uses layers of conductive material to expel heat into space, though it only works for around 15 minutes before the chips have to be turned off to cool down.\n\nThe initial experiments at Crocker reportedly went well enough to take the next step, which is shooting the chips into the great beyond. However, this doesn't mean we are particularly close to having actual AI data centers in space. James Manyika, the Senior Vice President for Research, Technology & Society at Google, urges the public to temper their expectations. \"We don't expect, to be perfectly frank, that we'll have anything usefully operational in the next few years,\" he said.\n\n\"Expanding from one satellite to a vast network of them that operate like a giant data center will take years and enormous funds,\" Brandon Lucia, a professor of electrical and computer engineering at Carnegie Mellon University, told The New York Times . \"If you do this on a large scale, there are additional engineering problems.\"\n\nThose additional engineering problems are no joke, despite people like Elon Musk pronouncing that putting AI data centers in space will be easy . There's the radiation and that whole bit flip thing, which seems extremely finicky with four chips let alone thousands.\n\nCosmic rays are an issue , as they are actual physical particles traveling quickly through space that could punch through and actually melt semiconductor junctions. It's also extremely expensive to launch this stuff into space. A single Falcon 9 launch, for instance, costs around $74 million .\n\nScaling up the cooling system looks to be incredibly difficult. Remember, Google's current system can only work for 15 minutes, and that's with the small amount of heat generated by just four chips. Standard heat dissipation does not work in space. Power must also be considered. Using a solar array for four chips is quite different from launching a massive array to power a legitimate data center.\n\nDespite these challenges, Google plans on scaling this project up. It wants to launch two similar satellites next year, with the eventual goal of launching 80 satellites that will fly in close formation to better process AI queries. It's also looking into building a much larger satellite, around the size of a football field. The company has not indicated how much money it is pouring into this endeavor."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-44c339cde0d1b1ea",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/24/metas-muse-charm-looks-like-a-tamagotchi-but-its-tapping-into-a-much-newer-trend/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T17:39:24.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Meta’s Muse Charm looks like a Tamagotchi, but it’s tapping into a much newer trend",
+        "summary": "Meta’s new AI gadget may look like a Tamagotchi, but its dangling form factor taps into a much broader Gen Z trend around bag charms, retro tech, and turning gadgets into fashion accessories.",
+        "body": "Is Meta’s just-announced Muse Charm a playful device that will make AI more approachable to everyday consumers, or will it be yet another flop in a long list of AI hardware gadgets that didn’t take off, like the Ai Pin, Rabbit, or Friend pendant? Reactions, so far, have been mixed. What the Charm is, however, is on-trend.\n\nLike it or not, the form factor could potentially appeal to Gen Z consumers who, in this post- Labubu era, have already been into various dangling items from keychains and bags. It’s all part of a broader kitschy, retro-inspired shift in their approach to fashion and technology.\n\nAlready, Gen Z has created a market for things that dangle, with everything from lip glosses to hand sanitizers to sunblocks to fragrances and more turned into bag charms , primarily targeted at women.\n\nView this post on Instagram A post shared by Kristina Rodulfo (@kristinarodulfo)\n\nHailey Bieber’s viral Rhode lip case, which stuck the lip gloss onto a phone case , had a big influence on this idea that beauty products could also be fashion accessories, as did its other beauty-focused bag charms . (The brand saw $212 million in annual net sales from a lineup of roughly 10 products, Vogue noted last year, as the company announced its billion-dollar exit to Elf Beauty.)\n\nThen there was the Labubu craze , which saw sales of the so-ugly-it’s-cute fuzzy monster bag charm explode, growing Pop Mart’s (the Chinese retailer behind the product) revenue to $1.8 billion in 2024 , a 7x jump from 2019. While demand for the Labubu itself has since faded, the concept of the decorative bag charm has not. One analyst firm estimates the global bag charm market will grow to over $1 billion by 2030 .\n\nToday, bag charms can be characters, bedazzled beauty products, or other whimsical designs or objects, like Coach’s coveted cherry charms , a Gen Z favorite . They’ve proven popular because they’re a means of expressing your personality, just as humans have done for ages through their fashion choices, makeup, and jewelry.\n\nSimilarly, Meta’s Muse is a customizable character; you design your own avatar, which makes the AI agent a reflection of you, too.\n\nAnd, as many have pointed out, Muse Charm’s form factor recalls a Tamagotchi, the pocket-sized digital virtual pet that became a major toy fad in the late 90s and again in the mid-2000s.\n\nHowever, the Tamagotchi is not the most current reference. It seems the Muse Charm is actually a twist on what some young people are already doing with their Apple Watch. Often meant as a way to repurpose an older device , the concept of the Apple Watch keychain or charm has been growing in popularity, fueled by TikTok videos showing different ways to use the watch when not on your wrist.\n\nOn retailers like Amazon and Walmart, and marketplaces like eBay and Etsy , there are thousands of Apple Watch keychains, straps, pendants, lanyards, clips, and bag charm cases now available in nearly every style you can think of. As you might expect, these keychain watches are often being adopted by younger women as a fashion accessory first, rather than a piece of technology.\n\nThis all then intersects with the broader retro-tech trend , which has seen older tech like digital cameras, flip phones, iPods, CDs , cassette tapes, home phones , and wired earbuds making a quiet comeback.\n\nThis vibe shift in tech comes as young people describe the addictive, algorithm-driven feeds and “soulness” nature of technology as making them feel more disconnected, which has also fed into this trend of wanting tech they can touch and feel. (One startup, Clicks, is even bringing back the physical phone keyboard in a BlackBerry-inspired device , for instance.)\n\nFor Gen Z, these physical objects help them feel more connected with the technology they’re using and offer a sense of control over a world where technology has become so deeply integrated into our lives that it no longer feels like a choice to use it.\n\nYoung women , again, have been at the forefront of this trend, with some even crafting their own portable, mini computers, “cyberdecks, ” which they fit inside clamshell purses or custom cases, and bedazzle with jewels, flowers, stickers, pearls, and other items to make them feel more personal.\n\nThat brings us back to the Muse Charm. While it’s clearly designed with the tech-as-fashion-accessory trend in mind, that doesn’t mean it will be a hit.\n\nMeta has abused consumer trust over the years to such an extent that it may never fully recover.\n\nTo name just a few examples: The tech giant had to settle with the FTC over charges that it deceived consumers by making users’ private information public without their consent, and has been penalized by the FTC for numerous privacy-related violations. In 2023, the FTC charged Meta with violating a privacy order that was filed after the 2019 settlement. It’s also been repeatedly hauled before Congress over its harms to minors, has lost or settled multiple lawsuits over the same topics, and has seen various whistleblowers outing its abuses.\n\nThese careless privacy practices could ultimately see Meta lose the battle to be the consumer AI of choice… unless, of course, consumers decide that the “devil you know” is better than the one you don’t. (Especially when the latter are those warning AI could put an end to the human race .)\n\nMeta’s end game, after all, is highly-targeted, highly-personalized ads. If that’s the privacy tradeoff in gaining access to free AI — Meta said it will monetize Muse by taking a small fee from transactions — consumers could be willing to take the risk."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-0c9bc2c3ba12ba23",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/24/9to5mac-daily-september-24-2026-iphone-handoff-ios-27-updates/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T17:36:23.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "android",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "9to5Mac Daily: September 24, 2026 – iPhone Handoff, iOS 27 updates",
+        "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Stuff :Stuff helps you get everything out of your head and into a simple, elegant system—closing open loops and reducing mental stress. A simple to-do list for iPhone, iPad, and Mac, with powerful tools that make organizing, tracking, and checking off your tasks a whole lot more satisfying. Get Stuff done. more…",
+        "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Stuff :Stuff helps you get everything out of your head and into a simple, elegant system—closing open loops and reducing mental stress. A simple to-do list for iPhone, iPad, and Mac, with powerful tools that make organizing, tracking, and checking off your tasks a whole lot more satisfying. Get Stuff done.\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nCatch up on 9to5Mac Daily episodes!\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-aa48c1b27a4d4758",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2267930/turtle-beach-rematch-review/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T17:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Turtle Beach Rematch review: The cutest Switch 2 controller of the bunch",
+        "summary": "Official Nintendo designs and RGB lighting give the Rematch an adorable edge.",
+        "body": "Official Nintendo designs and RGB lighting give the Rematch an adorable edge.\n\nThe first time I turned on the Rosalina edition of the Switch 2 Rematch controller, and a rainbow of RGB lighting rippled across the stars on its face, I expelled a sound of delight that would've been embarrassing had anyone other than my two small dogs been in the room. The noise was involuntary, high-pitched and entirely warranted, because this gamepad is a slice of handheld joy — and that's a feeling we could all use a little more of nowadays.\n\nOn top of the adorable factor, the Turtle Beach Rematch Wireless Controller for Switch 2 is a comfortable, reactive and low-latency wireless gamepad with a few key cutting-edge features. Obviously, it comes in a handful of Nintendo-inspired, RGB-lit designs. Light and slim with offset thumbsticks just like the Nintendo Switch 2 Pro Controller , Turtle Beach's Switch 2 Rematch is the gamepad for Mario Kart fanatics, Animal Crossing residents and anyone who wants to hold a bit of whimsy in their hands. There's also an all-black model, if smiling isn't really your thing.\n\nThe Turtle Beach Rematch Wireless Controller for Switch 2 features built-in motion control capabilities, never-drift TMR thumbsticks, a dedicated button for GameChat, a rechargeable 40-hour battery (12 hours with RGB effects turned on) and a playable range of 30 feet. It also has buttons on the backside of the grips that you can map to whatever action you'd like, or just use them as built-in fidget toys. Most of the models include RGB effects with four settings.\n\nI tested out the Rosalina edition, usually with a rainbow river flowing under my fingertips, and found it to be perfectly responsive across a few games, including Hello Kitty Island Adventure , Mario Kart World and Resident Evil Requiem . It has stiff, hard-plastic face buttons that look like little round pills, and enjoyably clicky triggers and bumpers. The face buttons have their associated letters carved into them — A, B, Y, X — and they'll leave an impression on your thumb-tip when playing anything that requires a long hold, like Mario Kart .\n\nThe analog sticks are smooth with a crisp click when they hit the sides of their containment circles, and the fact that they're built with TMR tech means they're ultra precise and won't ever drift. This is a feature that even the Nintendo Switch 2 Pro Controller doesn't have.\n\nI enjoy the fact that the player indicator lives on the bottom of the Rematch, easily peepable with a quick glance down. And, of course, I adore the multicolored lighting effects on the Rosalina gamepad.\n\nThe Switch 2 Rematch doesn't have haptic feedback and it's not able to wake up the Switch 2 console on its own. The controller weighs just 0.79 lbs and here's a hollow sound about it that could read as cheap to some people, but I'm just happy it's not heavy. Sizewise, it's comparable to the official Switch 2 Pro Controller, with a super-smooth face and textured plastic grips.\n\nI happen to have fairly small hands — it's like they stopped growing in middle school, I swear — and the Rematch is a perfect fit in my grasp, slim and light. It's never caused my palms or fingers to cramp up, even after multiple uninterrupted hours of play. A compact form factor is a common feature among Switch 2 gamepads, since they tend to be modeled after Nintendo's Pro Controller line, which is certifiably small-hand friendly. So, while it's not unique to the Rematch, the small chassis is definitely a bonus in my book.\n\nThe standout feature of the Rematch, the thing that makes it worth buying over any other Switch 2 controller, is its cute factor. Turtle Beach's Switch 2 Rematch controllers come in a variety of adorable and/or rad designs, complete with RGB lighting effects and officially licensed characters like Mario, Princess Peach, Rosalina and KK Slider. There's also a sleek solid-black model with red rings around the sticks for the minimalists, goths and spies among us.\n\nHere are the available flavors of the Switch 2 Rematch gamepad:\n\nThere is no price difference among the models. While the Switch 2 Rematch wireless controller is priced at $65, it's often on sale for $50 or less. There's also a special, slightly more expensive version of the controller with a Fortnite Kevin the Cube design. Regardless of your knowledge of Fortinte lore, this controller is very pretty, with a purple ombre colorway and light-up sigils. It costs $70, includes an in-game emote, and doesn't seem to be on sale as often as the others."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-995a7cb8f61e755f",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/24/apple-watch-ultra-4-includes-a-new-watch-face-bezel-option/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T17:29:05.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple Watch Ultra 4 includes a new watch face bezel option",
+        "summary": "Apple Watch Ultra includes a few more ways to customize your watch face than Series models. These include Ultra-only faces, colors and fonts, and a bezel-type complication. Apple Watch Ultra 4 goes even further, adding a new option in the bezel configuration category. more…",
+        "body": "Apple Watch Ultra includes a few more ways to customize your watch face than Series models. These include Ultra-only faces, colors and fonts, and a bezel-type complication. Apple Watch Ultra 4 goes even further, adding a new option in the bezel configuration category.\n\nBoth Apple Watch Series 12 and Apple Watch Ultra 4 introduce the new Readiness app . This uses data like fitness activity, vitals, and sleep score to present you with a Readiness score.\n\nOvernight vitals include heart rate, respiratory rate, wrist temperature, and recovery HRV. Daytime vitals include heart rate and recovery HRV.\n\nApple Watch Ultra 4 faces that support displaying bezel information add Readiness as a new watch face configuration. Bezel options now include:\n\nThe Readiness bezel option puts your numerical score and description at the bottom of the watch face.\n\nFour bars wrap the edge of the watch face, showing the different readiness score categories, while a dot indicates where your score fits within that category.\n\nWatch faces like Modular Ultra and the new Siri Modular face support displaying the bezel configuration.\n\nIf you’re looking for a way to focus on your readiness score, the new bezel configuration is a great way to keep track of the number.\n\nSince readiness can change throughout the day, it may be worth having front-and-center for a lot of users.\n\nApple Watch Series 12 and Ultra 4 are both available now."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-5c54170b1aca0d57",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/24/watchos-27-2-includes-hidden-overhaul-for-apple-watch-screenshots/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T17:24:26.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "watchOS 27.2 includes hidden overhaul for Apple Watch screenshots",
+        "summary": "watchOS 27.2 is coming next month with new Apple Watch features, and leaker pdfu just found a big change in the works for screenshots too. more…",
+        "body": "watchOS 27.2 is coming next month with new Apple Watch features, and leaker pdfu just found a big change in the works for screenshots too.\n\nLeaker pdfu has recently started sharing a variety of tidbits found in Apple code. For example, he was the first to discover the Readiness app in watchOS 27, and just yesterday leaked the UI for Siri AI on HomePod.\n\nToday in a new post , pdfu reveals that the watchOS 27.2 beta includes code for a revamped screenshot experience on Apple Watch.\n\nCurrently, taking an Apple Watch screenshot simply causes the screen to flash, then the screenshot is added to your Photos library.\n\nThe new screenshot flow imitates what’s available now on iPhone and iPad, letting you optionally share and/or delete the screenshot right away.\n\nIt’s unclear if Apple plans to implement this change in a forthcoming watchOS 27.2 beta, or if it needs more time for development. But if it doesn’t make the cut in watchOS 27.2, we’re still likely to see it come to the Apple Watch in the near future.\n\nWhat do you think of watchOS 27.2’s leaked screenshot experience? Let us know in the comments.\n\n* Buy Apple Watch with 15% discount from Apple refurbished"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-cbb6b6f8ffdf8cc4",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/report/1000180/muse-openclaw-instinct-lookalike",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T17:10:38.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Muse sure looks a lot like OpenClaw",
+        "summary": "We seem to be entering into an AI agent renaissance. Meta's new consumer-facing AI agent, Muse, topped the App Store charts soon after its release and has 600,000 daily active users in the US, by an Apptopia estimate. And AI agent platform Instinct, whose eponymous creator is fundraising at a $2.5 billion valuation, has been […]",
+        "body": "We seem to be entering into an AI agent renaissance. Meta's new consumer-facing AI agent, Muse, topped the App Store charts soon after its release and has 600,000 daily active users in the US, by an Apptopia estimate. And AI agent platform Instinct, whose eponymous creator is fundraising at a $2.5 billion valuation, has been making the rounds in the tech industry. Under the hood, though, there are some obvious similarities to the platform that started it all: OpenClaw.\n\nFor the past week or so, some social media users have alleged that Muse is directly built on OpenClaw. The two platforms use the same names for core files (SOUL.md, memory, …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-95e4fa1e1fc3e05a",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2267415/google-photos-update-redact-tool/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T17:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google Photos' new Redact tool will make it easy to hide sensitive information",
+        "summary": "Google Photos' new AI-powered features include the Redact tool, which can quickly blur parts of an image.",
+        "body": "It's one of many new features in the app.\n\nGoogle has listed some of its latest AI-powered updates for the Photos app, and they include a new \"Redact\" tool that lets you blur sensitive information and anything else you want in your images. Say, you have a picture of a vehicle and want to censor its plate number — just use Redact to turn that portion of the image into a \"pixelated\" block. Redact is part of Photos' upgraded Markup feature, which now also offers new fonts and precise thickness sliders for pens and highlighters. The new Markup tools are rolling out to all Google Photos users on Android worldwide.\n\nIn addition, the company has announced that the app's Wardrobe feature is rolling out to more people. If you don't have access to it yet, you will have it soon if you're an Android or iOS user in the US, India or Brazil. You can use Wardrobe to create a catalog of your clothes and jewelry from the images in your library, which you can then consult for styling ideas.\n\nGoogle has also revisited Photos' availability within Gemini Spark, which will let you find and edit images with a single prompt if you're a Google AI Pro or Ultra subscriber in the US. If you're on Android, you'll be able to apply vintage-inspired filters to your photos with the Moods feature. On both Android and iOS in select countries, you'll now see 15 new Remix templates that can use your likeness to create red carpet images and photo booth shots for you."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-a0214c9336158530",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/999901/google-chrome-tab-memory-gemini-updates",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T17:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Now Google Chrome shares tabs to new devices that save where you were",
+        "summary": "Google is rolling out some new Chrome browser features that are designed to make it easier to research and study complicated topics. The cross-device tab switching feature is getting a memory upgrade, alongside new capabilities for Gemini in Chrome that can analyze more types of media and generate interactive study quizzes. Chrome has an existing […]",
+        "body": "Google is rolling out some new Chrome browser features that are designed to make it easier to research and study complicated topics. The cross-device tab switching feature is getting a memory upgrade, alongside new capabilities for Gemini in Chrome that can analyze more types of media and generate interactive study quizzes.\n\nChrome has an existing feature that allows you to send a tab from your mobile to a computer (or vice versa) so you can quickly access the same webpage when switching devices. Now, this feature will also remember exactly where you had scrolled to on that tab when you switch, sparing you from having to manually find where …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-941dc18136b224ea",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/ai/2026/09/openai-agent-didnt-accept-no-for-an-answer-in-australian-government-breach/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T16:01:16.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "OpenAI agent “didn’t accept no for an answer” in Australian government breach",
+        "summary": "\"There will obviously be legal consequences,\" prime minister promises.",
+        "body": "Australian Prime Minister Anthony Albanese said his government is investigating a June incident in which an OpenAI agent accessed \"non-public files\" from the country's online Medicare statistics portal. OpenAI said in a statement that \"our models took actions we did not intend\" in causing the breach, which it only recently disclosed to the Australian government.\n\nSpeaking in New York on Wednesday , Albanese said three other public health statistics systems also \"may have been impacted\" across Australian federal and state governments. He added that these portals \"contain non-sensitive Medicare information\" such as aggregate statistics and that early indications suggest \"no personal information is believed to have been accessed.\"\n\nThat said, Albanese stressed that the \"situation is obviously unacceptable\" and that he has expressed his \"extreme concern\" over how the incident was handled to OpenAI CEO Sam Altman.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-39a7dd4b9340a753",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/ai/2026/09/meta-puts-its-ai-assistant-on-a-keychain/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T14:03:38.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Meta puts its AI assistant on a keychain",
+        "summary": "Meta says the keychain-sized Muse Charm will ship in December.",
+        "body": "Mark Zuckerberg said Meta’s new personal AI agent Muse has become the “centerpiece” of his AI vision, as he unveiled a new handheld AI “charm” device that will feature the interactive assistant.\n\nThe Meta chief used the company’s annual Connect event at its Silicon Valley headquarters to announce Muse Charm, a small pendant-like device that fits on a keychain and is activated by a fingerprint sensor.\n\nThe device, which features a screen showing the Muse avatar, will also have real-time voice interactivity and is set to be released in December.\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -264,29 +365,6 @@
     "media": null
   },
   {
-    "id": "engadget-2bc97c9928e51fcc",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2267381/openai-hacked-into-australias-government/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-24T10:01:55.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "OpenAI's agent hacked into an Australian government website",
-        "summary": "Researchers and the Prime Minister of Australia have revealed more instances of OpenAI's agents going rogue.",
-        "body": "Australia’s prime minister said it doesn’t seem like any personal health information was compromised.\n\nAn OpenAI agent hacked into the public website of the Australian government's Medicare public health insurance system in June, Australian Prime Minister Anthony Albanese has revealed . Albanese said he spoke with Sam Altman, the company's CEO, to express the country's \"extreme concern\" about the incident. He also criticized the company for taking too long to notify Australian authorities.\n\nAccording to The Guardian , OpenAI only sent an email about the breach to a general Australian government email address on September 10. And since authorities only check that account once a day, they didn't see it until September 11. The news didn't reach minister for government services, Katy Gallagher, until September 17. While the investigation is still ongoing, Albanese said it doesn't seem like the agent stole personal health information from the portal.\n\nConrad Stosz, the head of governance at Transluce, a nonprofit research lab working on technology to better understand AI systems, told The New York Times that this might be the \"first instance of an agent autonomously choosing to hack into a government.\" Transluce identified other previously undisclosed incidents, wherein OpenAI's agents attacked real-world entities when they were instructed to collect data during testing. They all occurred before Hugging Face detected unauthorized access on its systems in July and before OpenAI admitted that its agents broke into the AI repository.\n\nIn addition to hacking into Australia's Medicare, OpenAI's agent also tried to infiltrate a digital library at the University of New Mexico on May 25 and 26, The Times reports. The agent was apparently trying to access photos of a historic tuberculosis treatment center from the library and then actively looked for vulnerabilities to exploit when it couldn't get them. After failing to break into the digital library, it flooded the university's server with requests.\n\nIn another incident that took place on May 28, OpenAI's agent targeted Data USA, an open-source platform that visualizes information from multiple federal agencies. The agent sent a query to the site for data, and when it failed, it probed the website for vulnerabilities. OpenAI's agents didn't seem to be successful in their attempt to break into Data USA's website and the University of New Mexico's library. A spokesperson told The Times that the company had already reached out to both of them about the incidents. They added that OpenAI found out about its agent's efforts to break into Australia's government website after an extensive review of its models and found that the models \"took actions [the company] did not intend.\" It will take a few more months for the company to finish its review.\n\nOpenAI recently announced a new reporting framework for misalignments meant to expedite the release of information about instances of its AI technologies going rogue. In that report, it revealed six more incidents of models behaving in concerning ways it didn't expect. The company made the announcement after it admitted that its AI agents had hacked Hugging Face and after reports went out about earlier incidents, such as its agents breaking into RubyGems . In that post, the company said that it doesn't believe the AI industry \"has solved alignment and monitoring to a sufficient degree to continue responsibly scaling at maximum speed for much longer.\" Altman has also just told the UN that the industry needs international evaluation standards to measure the capabilities and risks of AI tools, as well as to assess the tools' need for human oversight."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "conticgo-01b913c94c485bdd",
     "type": "news",
     "sourceId": "conticgo",
@@ -308,29 +386,6 @@
         "title": "Tact es una nueva herramienta utiliza IA para crear cuentos en Braille con ilustraciones táctiles",
         "summary": "La inteligencia artificial también está comenzando a explorar nuevas formas de crear materiales accesibles. Un ejemplo reciente es Tact, un proyecto que combina inteligencia artificial, Braille e impresión 3D para generar cuentos infantiles acompañados de ilustraciones táctiles. El sistema, presentado por el investigador Iliano Fasolino, permite introducir una idea para una historia, incluso mediante voz, […] La entrada Tact es una nueva herramienta utiliza IA para crear cuentos en Braille con ilustraciones táctiles se publicó primero en Conticgo .",
         "body": "La inteligencia artificial también está comenzando a explorar nuevas formas de crear materiales accesibles. Un ejemplo reciente es Tact , un proyecto que combina inteligencia artificial, Braille e impresión 3D para generar cuentos infantiles acompañados de ilustraciones táctiles.\n\nEl sistema, presentado por el investigador Iliano Fasolino, permite introducir una idea para una historia, incluso mediante voz, y generar una página preparada para su impresión con texto en Braille e ilustraciones en relieve . El proyecto está pensado principalmente para niños ciegos y con baja visión de aproximadamente 4 a 10 años.\n\nTact es un sistema basado en navegador que permite crear pequeños cuentos táctiles a partir de una idea introducida por el usuario. Esta propuesta puede escribirse o incluso dictarse mediante voz.\n\nA partir de ella, el sistema genera una historia y prepara una página que combina texto en Braille e ilustraciones en relieve .\n\nEl proyecto está pensado principalmente para niños de entre 4 y 10 años y pretende facilitar que familiares, docentes y profesionales puedan crear materiales personalizados sin necesidad de conocimientos especializados en diseño táctil.\n\nUno de los aspectos más interesantes de Tact es que no convierte directamente una imagen convencional en un relieve.\n\nEl sistema utiliza una biblioteca de formas táctiles previamente diseñadas. Según explica su autor, actualmente incluye 93 formas relacionadas con animales, objetos, naturaleza y otros elementos habituales en los cuentos infantiles.\n\nLa inteligencia artificial selecciona las formas necesarias para representar determinadas escenas y las organiza junto al texto.\n\nEste planteamiento es especialmente relevante porque una ilustración diseñada para verse no siempre funciona cuando se explora mediante el tacto. Las formas deben ser sencillas y estar suficientemente separadas para facilitar su identificación.\n\nUna vez generado el contenido, Tact prepara un archivo STL , que puede utilizarse para fabricar la página mediante una impresora 3D.\n\nEl proyecto utiliza como referencia la norma ISO 17049:2013 para las características del Braille.\n\nDe esta manera, el proceso intenta reunir en una misma herramienta varias tareas: crear la historia, convertir el texto a Braille, seleccionar las formas táctiles y preparar el archivo necesario para su fabricación.\n\nActualmente, el sistema permite generar historias en inglés e italiano , por lo que todavía no ofrece generación directa en español.\n\nLa posibilidad de crear cuentos personalizados puede ser especialmente interesante en el ámbito educativo.\n\nUn docente o una familia podría generar una historia adaptada a los intereses de un niño y acompañarla de una representación táctil relacionada con el contenido.\n\nEsto podría contribuir a ampliar la disponibilidad de materiales accesibles, especialmente aquellos que son demasiado específicos o personalizados como para encontrarlos fácilmente en un catálogo de libros adaptados.\n\nAdemás, el proyecto apuesta por tecnologías relativamente accesibles, como una impresora 3D, para facilitar la fabricación de los materiales.\n\nAunque Tact plantea una propuesta interesante, todavía se encuentra en una fase de desarrollo.\n\nEl propio autor señala que es necesario realizar más trabajo y validar el sistema directamente con personas ciegas y con sordoceguera y con las organizaciones que las representan .\n\nEsta validación será fundamental para comprobar que las ilustraciones generadas son realmente fáciles de interpretar mediante el tacto y que el diseño de las páginas resulta adecuado para los usuarios.\n\nPor tanto, Tact no debe considerarse todavía una solución educativa plenamente validada, sino una propuesta de investigación que explora cómo la inteligencia artificial puede facilitar la creación de materiales táctiles.\n\nTact muestra una de las posibles líneas de evolución de la tecnología accesible: utilizar la inteligencia artificial no solo para describir imágenes o reconocer textos, sino también para crear nuevos recursos accesibles desde cero .\n\nLa combinación de IA, Braille e impresión 3D podría facilitar en el futuro la creación de materiales personalizados para personas ciegas y con baja visión.\n\nEl proyecto todavía tiene retos por delante, pero plantea una posibilidad interesante: que crear determinados materiales táctiles personalizados pueda ser mucho más sencillo y accesible para familias, docentes y entidades.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuentes: zenodo.org , tatto.dev ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-c316f3d226167f70",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2267374/nikon-z5-iic-cheaper-version-z5ii/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-24T09:08:59.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Nikon's new Z5 IIC is a cheaper Z5 II without the electronic viewfinder",
-        "summary": "Nikon's Z5 IIC is an inexpensive but powerful full-frame camera.",
-        "body": "With RAW video and a flip-out screen, it should be a great vlogging camera.\n\nNikon's Z5 II is already one of the least expensive full-frame cameras available, but if you can do without an electronic viewfinder, there's now an even cheaper option. The company just announced the 24-megapixel Z5 IIC mirrorless camera without an EVF, but nearly all the other features of the Z5 II including RAW internal video. It's available at a very reasonable price, which is great news considering the steep inflation across the camera world of late.\n\nElectronic viewfinders are expensive components and removing it allowed Nikon to not only lower the price but make the Z5 IIC lighter and smaller (the \"C\" is for \"compact\"). It weighs just 537 grams, nearly 25 percent lighter than the 700 gram Z5 II. And yet, it still has a full-sized grip and a good array of manual controls, though it's missing the Z5 II's joystick and a few other buttons. Most importantly, it has a fully articulating 3.2-inch 1040K dot touch display ideal for solo shooters. It also looks nice, especially the silver and black version.\n\nThe Z5 IIC is perhaps the best vlogging camera for debutants. It supports 4K video at 30 fps that supersamples from the full 6K sensor width, or 4K 60 fps video with a 1.5x crop (1080p at 120 fps). Moreover, you can capture that video in Nikon's N-RAW format with N-Log to maximize quality, something aspiring filmmakers will appreciate (H.265 is also supported). With the same video autofocus as the Z5 II, it should be fast and responsive. Nikon says it now supports fish(!) along with human, animal, bird and vehicle subject detection. It also offers in-body stabilization with 7.5 stops of shake reduction, a surprising feature for an inexpensive camera.\n\nOther niceties for creators include scene modes for capturing 15 different types of scenes ranging from portraits to pets and food, or night landscape and twilight scenes. It has a REC light up front so your subject knows you're filming, a \"product review\" mode where the camera switches focus from presenter to objects and back again, \"imaging recipes\" (including some from the cinema camera company RED) to give you a filmic look, a waveform display to gauge video exposure and focus peaking/zebras. One drawback is the single SD UHS II card slot, rather than two as on the Z5 II.\n\nThe Z5 II will be nice for photographers as well, as long as they don't mind the lack of a viewfinder. It supports 14 fps burst speeds (RAW and JPEG) with continuous autofocus or 30 fps (JPEG only) in electronic shutter mode. Photo autofocus offers all the same subject detection features as video, including that weird fish mode. It should be a great low-light camera (like the Z5 II) as the expanded ISO range goes up to ISO 64,000.\n\nThe Nikon Z5 IIC is now on preorder for $1,400 (body only) , a veritable bargain for a full-frame camera, especially considering the features like in-body stabilization and RAW video. You can also pick it up in a bundle with the Z 24-50mm f/4.3-5.3 kits lens for $1,700."
       }
     },
     "media": null
@@ -386,30 +441,6 @@
     "media": null
   },
   {
-    "id": "ars-technica-84e01844081c3705",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/tech-policy/2026/09/china-silent-as-us-touts-plan-for-ai-safety-alerts-that-omits-tech-experts/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-23T20:52:28.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Trump’s China rivalry and “AI race” delusion may endanger US, experts say",
-        "summary": "Trump focus on winning “AI race” may deter China from sharing safety intel.",
-        "body": "This week, the US and China, the two world leaders on AI, finally started talks meant to keep the whole world safe from emerging safety risks. But whether meetings between Donald Trump and Xi Jinping can lead to a reliable global governance framework for AI depends on how much the fierce rivals are actually willing to cooperate.\n\nIt's clear Trump wants it to seem like discussions are going well. Before Trump and Xi meet on Thursday and Friday, Treasury Secretary Scott Bessent announced that both sides had already discussed setting up a new AI safety notification mechanism. If China agrees to participate, that would create an open line for either side to send alerts when their country’s AI systems pose threats or behave unpredictably. The same channel, Bessent said, could allow the countries to share their “vision of common goals.”\n\nHowever, the proposal comes at a time when China may not be ready to trust the US to have AI safety conversations that aren’t about limiting China’s capabilities. Not only has Trump steadily increased export controls that explicitly seek to block China from accessing technology to advance AI, but Congress is mulling bills that would cut the country off from more chips and hardware. Adding to tensions, just two weeks ago, Trump’s Justice Department accused six of China's leading AI makers of stealing from US frontier labs, which China has strongly disputed.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "accessible-android-818965baf4ceb972",
     "type": "news",
     "sourceId": "accessible-android",
@@ -431,30 +462,6 @@
         "title": "Google Is Rolling Out Guided Vision to Gemini Live: Here’s How to Use It and My Early Impressions",
         "summary": "Google allows users to turn on the camera feed while in a conversation with Gemini Live, so they can ask about things that are in…",
         "body": "Published 23 September 2026 by Kareen Kiwan\n\nGoogle allows users to turn on the camera feed while in a conversation with Gemini Live, so they can ask about things that are in view. Although a blind user can take advantage of this feature, it is not designed specifically to assist blind people. Google is now rolling out Guided vision, a mode that uses the camera in a live conversation to help blind people get an overview of their surroundings, read text, and more. This post covers turning the feature on and using it, as well as my first impressions from testing it.\n\nNote that I haven’t done anything special to access Guided vision on my Honor 600 Pro, but I am running a three-month AI Pro trial that came as an offer with my device, so I don’t know if that affected the feature’s arrival on my device. The feature is not available for my other Accessible Android colleagues yet.\n\nTable of Contents\n\nTo enable Guided vision:\n\nA notification appears on the screen with the ability to start a Live session directly. When you use the button to start the Live session, it starts with the camera feed enabled, so you can start talking.\n\nNote that the feature is still not available for everyone, so you should wait if you cannot find the Guided vision toggle in Settings.\n\nAccording to the Google Accessibility help article , it’s possible to assign Guided vision to an accessibility shortcut, and you can launch it through TalkBack too. However, both are still not available on my device. In fact, I haven’t received any TalkBack update recently.\n\nI haven’t tested to see if launching the camera in a Live conversation when Guided vision is active uses the mode without any user’s intervention, but during my tests, I always asked Gemini to start Guided vision to make sure that it works in that mode. When I tried to prompt the assistant to start the feature, it asked me to point the camera at what I wanted described, but that was one of its hallucinations, as it didn’t open the camera feed or start the Live conversation. Starting a Live conversation is still necessary.\n\nAt another time, I asked it to start a Live conversation with Guided vision, but at that instance, it told me that it couldn’t start it automatically and asked me to start Live manually.\n\nNote that turning off Guided vision and then turning it back on from Settings shows the notification to start a Live conversation again, which can be used to start a conversation with the camera turned on.\n\nWhen I had my first conversation with Live with Guided vision turned on, Gemini reminded me that it cannot detect all hazards or guarantee path clearance and that I should use my mobility aid before almost every response. I kept telling it that I understand the risks and that it shouldn’t repeat those warnings. During the later conversations, I didn’t hear any of the warnings. I am not sure, though, if my early prompting helped, or if you hear those warnings only during the first conversation to alert you of the risks or when Gemini thinks that it should do so for your safety.\n\nDuring conversations with Guided vision active, I couldn’t find any indication that a special mode is active. All Live-related controls are the same, with no difference. However, the difference is in how Gemini acts. During my short tests, I found that Gemini tried to be detailed in its descriptions because it was aware that Guided vision is active and that the mode is designed to assist blind users.\n\nI was able to ask it questions about the mode, and I got assurance from it that the mode is to assist blind users. It gave me guidance on how to move the camera to show certain objects or scenes better. When I asked it to tell me how to move to reach something, it told me that it needed to know exactly where I was in relation to the camera’s orientation. Using my hand as a reference, it gave me directions with respect to my hand. It also described the positions of items in the room relative to each other, like the position of a fan relative to the sofa.\n\nAdditionally, Gemini told me the book that I was holding and tried to assist me in putting the full page in view. When I asked it to read the page, it read a part of the page, though. However, when I asked it if that was the only text on the page, it correctly stated that there were other texts and visual diagrams and offered to describe them for me.\n\nThese observations are based on my initial tests, and I haven’t made direct comparisons between using Guided vision with the feature turned on and using the normal Live camera mode with it turned off.\n\nGuided vision changes only how Gemini tries to provide information, as well as making it give more hints to assist a blind user. However, it is still a part of the Live experience. This means that current Live limitations are still present. The most important limitation is the need to prompt it again to tell you about any change, as Live doesn’t have real-time monitoring or continuous picture analysis capabilities.\n\nAnother factor worth mentioning is the model used, as Guided vision doesn’t switch Gemini to a more capable AI model than the one that you are using in your Gemini app.\n\nAlthough image analysis has already advanced and helps in many scenarios, misidentifications are always a part of the formula that shouldn’t be forgotten. For example, a towel hanging on a door was identified more than once as pink, although it wasn’t pink.\n\nAdditionally, leveraging the new mode to take pictures still needs work. After Gemini gave me directions to centre my face and I told it to take a photo, it obeyed my order, opened the camera, and took a photo, but that led to the termination of the Live session. That behavior ended the conversation without being able to make sure that the photo was properly captured or without asking any additional questions about what it includes.\n\nGuided vision is an interesting step forward from Google in tailoring Live camera to blind users. Although Google still has the Lookout app , it decided to make Guided vision a part of the Gemini app. Google decided to launch the feature and mention TalkBack as one of the methods to turn it on before releasing a TalkBack update that includes the necessary shortcut. There is even no accessibility service that can be assigned to an accessibility shortcut at the time of writing. However, an interesting thing for users who rely on other screen readers is that using the feature is not tied to having TalkBack running. I am almost sure that Gemini doesn’t check whether a screen reader is running as a requirement to use the feature.\n\nAlthough it is in its early stages, I am excited to keep Guided vision on, and I am not considering going back to the normal camera mode. This should minimize the need to remind Gemini that I am blind or to try to speak prompts asking it to help me guide my camera toward the subject I am asking about or the text I want it to help me read.\n\nGoogle doesn’t lack the resources to improve how Guided vision works, with the money and ability to make Gemini Live a trusted assistant, as much as “trusted” can be used with AI services, that understands the needs of blind people and helps them live a more independent life.\n\nPublished in Reviews Tutorials"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-436f3eabbb4d8c99",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/gadgets/2026/09/youtube-promises-custom-feeds-and-a-lot-more-ai-later-this-year/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-23T19:35:53.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "YouTube promises custom feeds and a lot more AI later this year",
-        "summary": "YouTube's next year could change the content you see with a big focus on AI and livestreams.",
-        "body": "The annual Made on YouTube event has just wrapped up, offering an early look at the features you can expect to come to Google's dominant online streaming platform in the coming months. Yes, there's plenty of AI for both viewers and creators, but there's also a handful of non-AI updates mixed in there, too.\n\nThe design of YouTube's homepage feed comes under fire often, but the platform is preparing to give you more options. With Custom Feeds, you'll be able to add new tabs to the YouTube interface with content of your choice. To create a feed, just type a description and let YouTube populate the page. You can refine your description and rate video suggestions to tune the Custom Feed. Google says you'll be able to save \"multiple\" feeds without specifying the exact number. This feature will roll out soon in the US for web, mobile, and TV users.\n\nInteracting on YouTube will also change later this year. The platform will finally add the option to post GIFs in comments, which has apparently been a common request for some time. The comment box will let you search for popular animated thumbnails and post them on both regular videos and YouTube Shorts. The YouTube direct messaging feature is also adding support for group chat, but it's only going to be available in the US, UK, Singapore, Brazil, and some European countries to start.\n\nRead full article\n\nComments"
       }
     },
     "media": null

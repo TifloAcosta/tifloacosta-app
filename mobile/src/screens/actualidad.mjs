@@ -55,9 +55,6 @@ export function renderActualidad({
   clearScreen(root);
   addScreenHeader(root, { router, title: t('screen.actualidad'), backLabel: t('nav.back') });
 
-  const activeLanguage = preferences.lang === 'en' ? t('settings.english') : t('settings.spanish');
-  addParagraph(root, `${t('settings.language')}: ${activeLanguage}`, 'muted');
-
   const allItems = Array.isArray(content?.news) ? content.news : [];
   const items = allItems
     .filter(item => item.lang === preferences.lang)

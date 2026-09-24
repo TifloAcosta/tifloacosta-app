@@ -68,6 +68,58 @@ function addSaveButton(parent, item, url, nativeActions, t) {
   parent.append(button);
 }
 
+function platformFor(item) {
+  const category = String(item?.category || '').trim().toLowerCase();
+  if (category.includes('android')) return 'Android';
+  if (category.includes('iphone')) return 'iPhone';
+  if (category.includes('windows')) return 'Windows';
+  return '';
+}
+
+function addEndBackButton(root, router, label) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.id = 'end-back-button';
+  button.className = 'back-button';
+  button.textContent = label;
+  button.addEventListener('click', () => router.back());
+  root.append(button);
+  return button;
+}
+
+function renderResource(parent, item, favoritesStore, nativeActions, t) {
+  const article = document.createElement('article');
+  article.className = 'content-card';
+  const title = document.createElement('h2');
+  title.textContent = item.title || '';
+  article.append(title);
+  if (item.category) addParagraph(article, item.category, 'muted');
+
+  const openUrl = item.openUrl || item.url || '';
+  const downloadUrl = item.url || item.openUrl || '';
+  if (openUrl) {
+    addExternalLink(article, {
+      href: openUrl,
+      label: `${t('library.open')}: ${item.title || ''}`,
+      onOpen: nativeActions?.openExternal
+    });
+  }
+  if (downloadUrl) addSaveButton(article, item, downloadUrl, nativeActions, t);
+
+  const shareUrl = openUrl || downloadUrl;
+  if (shareUrl) {
+    addShareButton(article, {
+      label: t('common.share'),
+      title: item.title || '',
+      text: item.category || '',
+      url: shareUrl,
+      onShare: nativeActions?.share
+    });
+  }
+  if (item.id) addFavoriteButton(article, item, favoritesStore, t);
+  parent.append(article);
+}
+
 export function renderLibrary({ root, router, content, preferences, favoritesStore, nativeActions, t }) {
   clearScreen(root);
   addScreenHeader(root, { router, title: t('screen.library'), backLabel: t('nav.back') });
@@ -76,42 +128,66 @@ export function renderLibrary({ root, router, content, preferences, favoritesSto
   const items = (Array.isArray(content?.resources) ? content.resources : []).filter(item => !item.lang || item.lang === lang);
   if (!items.length) {
     addParagraph(root, t('library.empty'), 'empty-state');
+    addEndBackButton(root, router, t('nav.back'));
     return;
   }
 
+  let activePlatform = '';
+  const filters = document.createElement('div');
+  filters.className = 'library-platform-filters';
+  filters.setAttribute('role', 'group');
+  filters.setAttribute('aria-label', t('screen.library'));
+
+  const filterButtons = new Map();
+  const choices = [
+    ['', lang === 'en' ? 'All' : 'Todos'],
+    ['Android', 'Android'],
+    ['iPhone', 'iPhone'],
+    ['Windows', 'Windows']
+  ];
+
   const list = document.createElement('div');
   list.className = 'content-list';
-  for (const item of items) {
-    const article = document.createElement('article');
-    article.className = 'content-card';
-    const title = document.createElement('h2');
-    title.textContent = item.title || '';
-    article.append(title);
-    if (item.category) addParagraph(article, item.category, 'muted');
 
-    const openUrl = item.openUrl || item.url || '';
-    const downloadUrl = item.url || item.openUrl || '';
-    if (openUrl) {
-      addExternalLink(article, {
-        href: openUrl,
-        label: `${t('library.open')}: ${item.title || ''}`,
-        onOpen: nativeActions?.openExternal
-      });
+  function updateFilterState() {
+    for (const [platform, button] of filterButtons) {
+      button.ariaPressed = String(activePlatform === platform);
     }
-    if (downloadUrl) addSaveButton(article, item, downloadUrl, nativeActions, t);
-
-    const shareUrl = openUrl || downloadUrl;
-    if (shareUrl) {
-      addShareButton(article, {
-        label: t('common.share'),
-        title: item.title || '',
-        text: item.category || '',
-        url: shareUrl,
-        onShare: nativeActions?.share
-      });
-    }
-    if (item.id) addFavoriteButton(article, item, favoritesStore, t);
-    list.append(article);
   }
-  root.append(list);
+
+  function renderList() {
+    list.replaceChildren();
+    const visibleItems = activePlatform
+      ? items.filter(item => platformFor(item) === activePlatform)
+      : items;
+
+    if (!visibleItems.length) {
+      addParagraph(list, t('library.empty'), 'empty-state');
+      return;
+    }
+
+    for (const item of visibleItems) {
+      renderResource(list, item, favoritesStore, nativeActions, t);
+    }
+  }
+
+  for (const [platform, label] of choices) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.id = platform ? `library-filter-${platform.toLowerCase()}` : 'library-filter-all';
+    button.textContent = label;
+    button.ariaPressed = String(activePlatform === platform);
+    button.addEventListener('click', () => {
+      activePlatform = platform;
+      updateFilterState();
+      renderList();
+      list.querySelector('h2, .empty-state')?.focus?.();
+    });
+    filterButtons.set(platform, button);
+    filters.append(button);
+  }
+
+  root.append(filters, list);
+  renderList();
+  addEndBackButton(root, router, t('nav.back'));
 }

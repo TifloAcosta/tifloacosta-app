@@ -1,0 +1,71 @@
+name: Consolidate rehabilitation studies once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/consolidate-rehabilitation-once.yml
+
+permissions:
+  contents: write
+
+jobs:
+  consolidate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Consolidate study files
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          studies = [
+              (
+                  Path('docs/es/rehabilitacion-autonomia-despues-perder-vista.html'),
+                  [Path(f'docs/es/rehabilitacion-autonomia-{i}.html') for i in range(1, 5)],
+              ),
+              (
+                  Path('docs/en/rehabilitation-independence-after-sight-loss.html'),
+                  [Path(f'docs/en/rehabilitation-independence-{i}.html') for i in range(1, 5)],
+              ),
+          ]
+
+          for main, parts in studies:
+              source = main.read_text(encoding='utf-8')
+              start = source.index('<article>')
+              end = source.index('</article>', start) + len('</article>')
+              body = '\n'.join(part.read_text(encoding='utf-8').strip() for part in parts)
+              consolidated = source[:start] + '<article>\n' + body + '\n</article>' + source[end:]
+              main.write_text(consolidated, encoding='utf-8')
+              for part in parts:
+                  part.unlink()
+
+          workflow = Path('.github/workflows/consolidate-rehabilitation-once.yml')
+          workflow.unlink()
+
+          es = Path('docs/es/rehabilitacion-autonomia-despues-perder-vista.html').read_text(encoding='utf-8')
+          en = Path('docs/en/rehabilitation-independence-after-sight-loss.html').read_text(encoding='utf-8')
+          assert '{% include_relative' not in es
+          assert '{% include_relative' not in en
+          assert 'Hola hola gente guapa' in es
+          assert 'Hello, hello, lovely people' in en
+          assert len(es.encode('utf-8')) > 50000
+          assert len(en.encode('utf-8')) > 50000
+          PY
+
+      - name: Verify and commit
+        shell: bash
+        run: |
+          git diff --check
+          test ! -e docs/es/rehabilitacion-autonomia-1.html
+          test ! -e docs/en/rehabilitation-independence-1.html
+          git config user.name "TifloAcosta"
+          git config user.email "146574974+TifloAcosta@users.noreply.github.com"
+          git add -A
+          git commit -m "Store rehabilitation studies as single HTML files"
+          git push origin HEAD:main

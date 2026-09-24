@@ -14,6 +14,15 @@ test('YouTube sync preserves a full description with public links for details', 
   assert.match(build, /fullDescription/);
 });
 
+test('YouTube workflow regenerates web and Android content together and runs after this sync code changes', async () => {
+  const workflow = await readRoot('.github/workflows/sync-youtube.yml');
+  assert.match(workflow, /node scripts\/sync-youtube\.mjs/);
+  assert.match(workflow, /node scripts\/build-mobile-content\.mjs/);
+  assert.match(workflow, /git status --porcelain -- videos\.json mobile-content\.json/);
+  assert.match(workflow, /git add videos\.json mobile-content\.json/);
+  assert.match(workflow, /push:\s*\n\s*branches:\s*\[main\][\s\S]*scripts\/sync-youtube\.mjs/);
+});
+
 test('Android accessible player includes an adjustable position control and public video details', async () => {
   const [player, i18n] = await Promise.all([
     readMobile('src/screens/video-player.mjs'),
@@ -53,6 +62,23 @@ test('web resources mirror Android platform filters with accessible generated co
   assert.match(app, /\bjieshuo\b/);
   assert.match(app, /\bjaws\b/);
   assert.match(app, /\bnvda\b/);
+});
+
+test('web global search clear returns focus to the search field like Android', async () => {
+  const search = await readRoot('search-accessibility.js');
+  assert.match(search, /function clearSearch\(\)[\s\S]*search\.value = ''[\s\S]*search\.focus\(\)/);
+});
+
+test('web Downloads mirrors Android explanation and both available actions', async () => {
+  const [hub, core] = await Promise.all([
+    readRoot('downloads-hub.js'),
+    readRoot('app-core.js')
+  ]);
+  assert.match(hub, /descargables disponibles/);
+  assert.match(hub, /downloads-open-link/);
+  assert.match(hub, /downloads-open-sounds/);
+  assert.match(core, /downloads-hub\.js/);
+  assert.match(core, /sound-search\.js/);
 });
 
 test('temporary Android Actualidad language diagnostic is not left in the release interface', async () => {

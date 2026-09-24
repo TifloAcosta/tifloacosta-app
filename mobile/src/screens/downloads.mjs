@@ -8,6 +8,7 @@ export function renderDownloads({ root, router, t }) {
     backLabel: t('nav.back')
   });
   addParagraph(root, t('downloads.intro'));
+  addParagraph(root, t('downloadsLink.intro'), 'muted');
 
   for (const [route, id, label] of [
     ['downloads-link', 'downloads-open-link', t('downloads.link')],

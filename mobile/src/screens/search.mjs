@@ -9,6 +9,17 @@ function groupLabel(kind, t) {
   return t('screen.actualidad');
 }
 
+function addEndBackButton(root, router, label) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.id = 'end-back-button';
+  button.className = 'back-button';
+  button.textContent = label;
+  button.addEventListener('click', () => router.back());
+  root.append(button);
+  return button;
+}
+
 function renderResults(container, status, { content, preferences, t, query, onOpenResult, announce = true }) {
   container.replaceChildren();
   const results = searchContent(content, query, preferences.lang);
@@ -77,6 +88,11 @@ export function renderSearch({ root, router, content, preferences, t, onOpenResu
   submit.type = 'submit';
   submit.textContent = t('search.submit');
 
+  const clear = document.createElement('button');
+  clear.type = 'button';
+  clear.id = 'clear-search';
+  clear.textContent = preferences?.lang === 'en' ? 'Clear search' : 'Borrar búsqueda';
+
   const status = document.createElement('p');
   status.className = 'muted';
   status.ariaLive = 'polite';
@@ -85,13 +101,22 @@ export function renderSearch({ root, router, content, preferences, t, onOpenResu
   const results = document.createElement('section');
   results.setAttribute('aria-label', t('search.resultsRegion'));
 
-  form.append(label, input, submit);
+  form.append(label, input, submit, clear);
   root.append(form, status, results);
+  addEndBackButton(root, router, t('nav.back'));
 
   form.addEventListener('submit', event => {
     event.preventDefault();
     lastQuery = input.value.trim();
     renderResults(results, status, { content, preferences, t, query: lastQuery, onOpenResult, announce: true });
+  });
+
+  clear.addEventListener('click', () => {
+    input.value = '';
+    lastQuery = '';
+    status.textContent = '';
+    results.replaceChildren();
+    input.focus();
   });
 
   if (!initialQuery && lastQuery) {

@@ -5,15 +5,15 @@ import test from 'node:test';
 const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 const repoRead = path => readFile(new URL(`../../${path}`, import.meta.url), 'utf8');
 
-test('Android 1.3.0 release candidate uses version code 9', async () => {
+test('Android 1.3.1 release candidate uses version code 10', async () => {
   const gradle = await read('android/app/build.gradle');
-  assert.match(gradle, /versionCode\s+9/);
-  assert.match(gradle, /versionName\s+"1\.3\.0"/);
-  assert.doesNotMatch(gradle, /versionCode\s+8/);
-  assert.doesNotMatch(gradle, /versionName\s+"1\.2\.0"/);
+  assert.match(gradle, /versionCode\s+10/);
+  assert.match(gradle, /versionName\s+"1\.3\.1"/);
+  assert.doesNotMatch(gradle, /versionCode\s+9/);
+  assert.doesNotMatch(gradle, /versionName\s+"1\.3\.0"/);
 });
 
-test('Android 1.3.0 keeps native Share and bounded web fetch plugins', async () => {
+test('Android 1.3.1 keeps native Share and bounded web fetch plugins', async () => {
   const manifest = await read('android/app/src/main/AndroidManifest.xml');
   const mainActivity = await read('android/app/src/main/java/com/tifloacosta/app/MainActivity.java');
   assert.match(manifest, /android\.intent\.action\.SEND/);

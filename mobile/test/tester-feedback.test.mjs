@@ -23,6 +23,15 @@ test('library exposes Android, iPhone and Windows platform filters without hidin
   assert.match(librarySource, /activePlatform/);
 });
 
+test('library platform detection also uses titles and common screen-reader names because source categories are often topical', () => {
+  assert.match(librarySource, /item\?\.title/);
+  assert.match(librarySource, /talkback/i);
+  assert.match(librarySource, /jieshuo/i);
+  assert.match(librarySource, /voiceover/i);
+  assert.match(librarySource, /\bjaws\b/i);
+  assert.match(librarySource, /nvda/i);
+});
+
 test('long catalogue screens expose a bottom Back control so screen-reader users do not traverse the whole page backwards', () => {
   for (const source of [searchSource, librarySource, actualidadSource]) {
     assert.match(source, /end-back-button/);

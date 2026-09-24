@@ -68,12 +68,24 @@ function addSaveButton(parent, item, url, nativeActions, t) {
   parent.append(button);
 }
 
-function platformFor(item) {
-  const category = String(item?.category || '').trim().toLowerCase();
-  if (category.includes('android')) return 'Android';
-  if (category.includes('iphone')) return 'iPhone';
-  if (category.includes('windows')) return 'Windows';
-  return '';
+function platformSearchText(item) {
+  return `${String(item?.category || '')} ${String(item?.title || '')}`.toLowerCase();
+}
+
+export function resourceMatchesPlatform(item, platform) {
+  if (!platform) return true;
+  const text = platformSearchText(item);
+
+  if (platform === 'Android') {
+    return /\bandroid\b|\btalkback\b|\bjieshuo\b/.test(text);
+  }
+  if (platform === 'iPhone') {
+    return /\biphone\b|\bipad\b|\bios\b|\bvoiceover\b|\bapple watch\b|\batajos?\b/.test(text);
+  }
+  if (platform === 'Windows') {
+    return /\bwindows\b|\bjaws\b|\bnvda\b/.test(text);
+  }
+  return false;
 }
 
 function addEndBackButton(root, router, label) {
@@ -158,7 +170,7 @@ export function renderLibrary({ root, router, content, preferences, favoritesSto
   function renderList() {
     list.replaceChildren();
     const visibleItems = activePlatform
-      ? items.filter(item => platformFor(item) === activePlatform)
+      ? items.filter(item => resourceMatchesPlatform(item, activePlatform))
       : items;
 
     if (!visibleItems.length) {

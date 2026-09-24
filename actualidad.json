@@ -1,5 +1,150 @@
 [
   {
+    "id": "conticgo-01b913c94c485bdd",
+    "type": "news",
+    "sourceId": "conticgo",
+    "sourceName": "Conticgo",
+    "sourceUrl": "https://conticgo.net/",
+    "originalUrl": "https://conticgo.net/tact-es-una-nueva-herramienta-utiliza-ia-para-crear-cuentos-en-braille-con-ilustraciones-tactiles/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-09-24T10:00:22.000Z",
+    "categories": [
+      "tecnologia-accesibilidad",
+      "proyectos-prototipos",
+      "ia-accesibilidad",
+      "braille"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "Tact es una nueva herramienta utiliza IA para crear cuentos en Braille con ilustraciones táctiles",
+        "summary": "La inteligencia artificial también está comenzando a explorar nuevas formas de crear materiales accesibles. Un ejemplo reciente es Tact, un proyecto que combina inteligencia artificial, Braille e impresión 3D para generar cuentos infantiles acompañados de ilustraciones táctiles. El sistema, presentado por el investigador Iliano Fasolino, permite introducir una idea para una historia, incluso mediante voz, […] La entrada Tact es una nueva herramienta utiliza IA para crear cuentos en Braille con ilustraciones táctiles se publicó primero en Conticgo .",
+        "body": "La inteligencia artificial también está comenzando a explorar nuevas formas de crear materiales accesibles. Un ejemplo reciente es Tact , un proyecto que combina inteligencia artificial, Braille e impresión 3D para generar cuentos infantiles acompañados de ilustraciones táctiles.\n\nEl sistema, presentado por el investigador Iliano Fasolino, permite introducir una idea para una historia, incluso mediante voz, y generar una página preparada para su impresión con texto en Braille e ilustraciones en relieve . El proyecto está pensado principalmente para niños ciegos y con baja visión de aproximadamente 4 a 10 años.\n\nTact es un sistema basado en navegador que permite crear pequeños cuentos táctiles a partir de una idea introducida por el usuario. Esta propuesta puede escribirse o incluso dictarse mediante voz.\n\nA partir de ella, el sistema genera una historia y prepara una página que combina texto en Braille e ilustraciones en relieve .\n\nEl proyecto está pensado principalmente para niños de entre 4 y 10 años y pretende facilitar que familiares, docentes y profesionales puedan crear materiales personalizados sin necesidad de conocimientos especializados en diseño táctil.\n\nUno de los aspectos más interesantes de Tact es que no convierte directamente una imagen convencional en un relieve.\n\nEl sistema utiliza una biblioteca de formas táctiles previamente diseñadas. Según explica su autor, actualmente incluye 93 formas relacionadas con animales, objetos, naturaleza y otros elementos habituales en los cuentos infantiles.\n\nLa inteligencia artificial selecciona las formas necesarias para representar determinadas escenas y las organiza junto al texto.\n\nEste planteamiento es especialmente relevante porque una ilustración diseñada para verse no siempre funciona cuando se explora mediante el tacto. Las formas deben ser sencillas y estar suficientemente separadas para facilitar su identificación.\n\nUna vez generado el contenido, Tact prepara un archivo STL , que puede utilizarse para fabricar la página mediante una impresora 3D.\n\nEl proyecto utiliza como referencia la norma ISO 17049:2013 para las características del Braille.\n\nDe esta manera, el proceso intenta reunir en una misma herramienta varias tareas: crear la historia, convertir el texto a Braille, seleccionar las formas táctiles y preparar el archivo necesario para su fabricación.\n\nActualmente, el sistema permite generar historias en inglés e italiano , por lo que todavía no ofrece generación directa en español.\n\nLa posibilidad de crear cuentos personalizados puede ser especialmente interesante en el ámbito educativo.\n\nUn docente o una familia podría generar una historia adaptada a los intereses de un niño y acompañarla de una representación táctil relacionada con el contenido.\n\nEsto podría contribuir a ampliar la disponibilidad de materiales accesibles, especialmente aquellos que son demasiado específicos o personalizados como para encontrarlos fácilmente en un catálogo de libros adaptados.\n\nAdemás, el proyecto apuesta por tecnologías relativamente accesibles, como una impresora 3D, para facilitar la fabricación de los materiales.\n\nAunque Tact plantea una propuesta interesante, todavía se encuentra en una fase de desarrollo.\n\nEl propio autor señala que es necesario realizar más trabajo y validar el sistema directamente con personas ciegas y con sordoceguera y con las organizaciones que las representan .\n\nEsta validación será fundamental para comprobar que las ilustraciones generadas son realmente fáciles de interpretar mediante el tacto y que el diseño de las páginas resulta adecuado para los usuarios.\n\nPor tanto, Tact no debe considerarse todavía una solución educativa plenamente validada, sino una propuesta de investigación que explora cómo la inteligencia artificial puede facilitar la creación de materiales táctiles.\n\nTact muestra una de las posibles líneas de evolución de la tecnología accesible: utilizar la inteligencia artificial no solo para describir imágenes o reconocer textos, sino también para crear nuevos recursos accesibles desde cero .\n\nLa combinación de IA, Braille e impresión 3D podría facilitar en el futuro la creación de materiales personalizados para personas ciegas y con baja visión.\n\nEl proyecto todavía tiene retos por delante, pero plantea una posibilidad interesante: que crear determinados materiales táctiles personalizados pueda ser mucho más sencillo y accesible para familias, docentes y entidades.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuentes: zenodo.org , tatto.dev ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-c316f3d226167f70",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2267374/nikon-z5-iic-cheaper-version-z5ii/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T09:08:59.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Nikon's new Z5 IIC is a cheaper Z5 II without the electronic viewfinder",
+        "summary": "Nikon's Z5 IIC is an inexpensive but powerful full-frame camera.",
+        "body": "With RAW video and a flip-out screen, it should be a great vlogging camera.\n\nNikon's Z5 II is already one of the least expensive full-frame cameras available, but if you can do without an electronic viewfinder, there's now an even cheaper option. The company just announced the 24-megapixel Z5 IIC mirrorless camera without an EVF, but nearly all the other features of the Z5 II including RAW internal video. It's available at a very reasonable price, which is great news considering the steep inflation across the camera world of late.\n\nElectronic viewfinders are expensive components and removing it allowed Nikon to not only lower the price but make the Z5 IIC lighter and smaller (the \"C\" is for \"compact\"). It weighs just 537 grams, nearly 25 percent lighter than the 700 gram Z5 II. And yet, it still has a full-sized grip and a good array of manual controls, though it's missing the Z5 II's joystick and a few other buttons. Most importantly, it has a fully articulating 3.2-inch 1040K dot touch display ideal for solo shooters. It also looks nice, especially the silver and black version.\n\nThe Z5 IIC is perhaps the best vlogging camera for debutants. It supports 4K video at 30 fps that supersamples from the full 6K sensor width, or 4K 60 fps video with a 1.5x crop (1080p at 120 fps). Moreover, you can capture that video in Nikon's N-RAW format with N-Log to maximize quality, something aspiring filmmakers will appreciate (H.265 is also supported). With the same video autofocus as the Z5 II, it should be fast and responsive. Nikon says it now supports fish(!) along with human, animal, bird and vehicle subject detection. It also offers in-body stabilization with 7.5 stops of shake reduction, a surprising feature for an inexpensive camera.\n\nOther niceties for creators include scene modes for capturing 15 different types of scenes ranging from portraits to pets and food, or night landscape and twilight scenes. It has a REC light up front so your subject knows you're filming, a \"product review\" mode where the camera switches focus from presenter to objects and back again, \"imaging recipes\" (including some from the cinema camera company RED) to give you a filmic look, a waveform display to gauge video exposure and focus peaking/zebras. One drawback is the single SD UHS II card slot, rather than two as on the Z5 II.\n\nThe Z5 II will be nice for photographers as well, as long as they don't mind the lack of a viewfinder. It supports 14 fps burst speeds (RAW and JPEG) with continuous autofocus or 30 fps (JPEG only) in electronic shutter mode. Photo autofocus offers all the same subject detection features as video, including that weird fish mode. It should be a great low-light camera (like the Z5 II) as the expanded ISO range goes up to ISO 64,000.\n\nThe Nikon Z5 IIC is now on preorder for $1,400 (body only) , a veritable bargain for a full-frame camera, especially considering the features like in-body stabilization and RAW video. You can also pick it up in a bundle with the Z 24-50mm f/4.3-5.3 kits lens for $1,700."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-da637dcfece15453",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/999802/google-deepmind-gemini-4-timeline-koray-kavukcuoglu",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T09:04:18.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Gemini 4 is almost ready, says new Google DeepMind chief",
+        "summary": "Google is reportedly nearing the launch of its long awaited Gemini 4 model, after dawdling behind rival developers on flagship AI releases. Speaking with The Information during his first media appearance as the leader of Google's DeepMind division, Koray Kavukcuoglu said that Gemini 4 is currently in its refinement stage, and that the company is […]",
+        "body": "Google is reportedly nearing the launch of its long awaited Gemini 4 model, after dawdling behind rival developers on flagship AI releases. Speaking with The Information during his first media appearance as the leader of Google's DeepMind division, Koray Kavukcuoglu said that Gemini 4 is currently in its refinement stage, and that the company is aiming to launch the model \"much earlier\" than the end of the year.\n\n\"Our intention is to, like - as soon as possible - to release an early post-training output because we see the results and we are excited,\" Kavukcuoglu told the publication, adding that Google would \"continue the fast-paced iteratio …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-be94d0baf1ecf3d6",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/24/operas-free-built-in-vpn-can-now-turn-on-automatically-when-using-public-wi-fi/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T08:00:00.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Opera’s free built-in VPN can now turn on automatically when using public Wi-Fi",
+        "summary": "Opera announced today that its free, built-in VPN for desktop can now automatically activate when users connect to public or unsecured Wi-Fi networks. Here are the details. more…",
+        "body": "Opera announced today that its free, built-in VPN for desktop can now automatically activate when users connect to public or unsecured Wi-Fi networks. Here are the details.\n\nSince 2016, the Opera browser has offered a free, built-in VPN. The company says this builds on its core belief that “making basic online privacy accessible to everyone.”\n\nIn recent years, VPNs have gone from being a relatively niche privacy tool to something much more mainstream. Still, according to data from We Are Social’s Digital 2026 Mid-Year Global Update Report , only 23% of internet users aged 16 and older use a VPN for at least some of their online activities.\n\nThat is a problem, particularly for users who rely on public Wi-Fi for work or while traveling.\n\nToday, Opera announced that users in the US and France can opt to have its built-in VPN turn on automatically whenever they connect to a public or unsecured Wi-Fi network.\n\nHere’s Opera:\n\nPublic Wi-Fi networks are notoriously vulnerable to snooping and data interception. Opera’s browser VPN now removes manual friction by automatically activating when detecting public or unsecured Wi-Fi networks. Users can study, work, manage finances, or browse without having to remember to turn on protection manually. To respect user agency, the feature remains strictly opt-in and can be easily toggled within settings. This functionality is rolling out today to Opera users in the US and France.\n\nOpera notes that its “free VPN operates under strict GDPR laws,” adding that it “has been independently audited by Deloitte.” The company also stresses that the VPN is part of a broader set of built-in privacy tools, alongside Opera’s native Ad Blocker and Tracker Blocker.\n\nTo learn more about Opera, follow this link ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-544f4ba9cf9f296a",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/23/apple-iphone-18-pro-rebooting-bug-software-update-fix/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T06:43:49.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "programas-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple says software update to fix iPhone 18 Pro rebooting bug is coming next week",
+        "summary": "On Monday, we reported on an issue where iPhone 18 Pro and iPhone 18 Pro Max users were seeing their phone freeze and reboot following a failed Face ID attempt. To us, it appeared to be a software glitch rather than an inherent hardware fault. Apple has now confirmed to 9to5Mac that a software update to address this problem is in the works, and should be available early next week. more…",
+        "body": "On Monday, we reported on an issue where iPhone 18 Pro and iPhone 18 Pro Max users were seeing their phone freeze and reboot following a failed Face ID attempt. To us, it appeared to be a software glitch rather than an inherent hardware fault.\n\nApple has now confirmed to 9to5Mac that a software update to address this problem is in the works, and should be available early next week.\n\nAlthough the bug did not seemingly affect all users, it was reasonably widespread based on social media and 9to5Mac reader reports.\n\nAt the time, we reproduced the problem on an iPhone 18 Pro device by obscuring our face with our hand as we attempted a Face ID authentication to access the Passwords app. The phone simply stops responding to touch input, and hard reboots after a few seconds. You could then find a panic log in the iPhone Analytics section of the Settings app.\n\niPhone 18 Pro and Pro Max feature a redesigned Face ID sensor system, where the Infrared camera has moved behind the under the screen near where the clock is rendered in the status bar, resulting in a 25% smaller visible Dynamic Island.\n\nAs we reported earlier in the week, some customers had already attempted to resolve the rebooting problem by swapping their phone with a new device at Apple, thinking it was a hardware fault. To reiterate, this is not necessary with a software fix now confirmed to be on the way.\n\nOn a somewhat related note, Apple also just released watchOS 27.0.1 to fix a random restart issue with Apple Watch Series 12 and Ultra 4."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "usable-y-accesible-3b1bb36749b21a5e",
+    "type": "news",
+    "sourceId": "usable-y-accesible",
+    "sourceName": "Usable y accesible",
+    "sourceUrl": "https://olgacarreras.blogspot.com/",
+    "originalUrl": "https://olgacarreras.blogspot.com/2026/09/sirviendo-codigo-awards-nominada-la-la.html",
+    "originalLanguage": "es",
+    "publishedAt": "2026-09-24T05:51:16.809Z",
+    "categories": [
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "Sirviendo Código Awards: nominada la \"La European Accessibility Act (EAA) de forma sencilla\"",
+        "summary": "Esta semana se votan las mejores charlas del año en los \"Sirviendo Código Awards\". Mi charla \"La European Accessibility Act (EAA) de forma sencilla\", que impartí en la a11yConf, está nominada en la categoría \"Access Mother\". Puedes votar tu charla favorita en: Sirviendo Código Awards. Como parte del equipo organizador de la a11yConf 2026, también es una satisfacción tener tres charlas",
+        "body": "Nota 1: como todos los artículos de este blog, este artículo NO está promocionado.\n\nNota 2: como todos los artículos de este blog, este artículo se ha ideado y elaborado sin el uso de herramientas IA, solo se han usado para la revisión final de la ortografía.\n\nAutor: Olga Carreras Montoto"
+      }
+    },
+    "media": null
+  },
+  {
     "id": "9to5mac-e8fa733a2b9edc9c",
     "type": "news",
     "sourceId": "9to5mac",
@@ -171,79 +316,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-2bce658547760e7e",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/23/openai-says-apple-intelligence-users-showed-little-interest-in-chatgpt-integration/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-23T23:58:31.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "OpenAI says Apple Intelligence users showed little interest in ChatGPT integration",
-        "summary": "As reported by The Financial Times , new court filings show that OpenAI was disappointed by the adoption of ChatGPT through Apple Intelligence, which it says “dramatically underperformed” after launching in 2024. Here are the details. more…",
-        "body": "As reported by The Financial Times , new court filings show that OpenAI was disappointed by the adoption of ChatGPT through Apple Intelligence, which it says “dramatically underperformed” after launching in 2024. Here are the details.\n\nIn August 2025, Elon Musk said that X, now part of SpaceXAI, would sue Apple and OpenAI over alleged collusion to shut out competitors in the AI space, stemming from OpenAI’s deal with Apple to make ChatGPT part of Apple Intelligence and Siri.\n\nWhen the lawsuit was filed, it actually went beyond Musk’s original public complaint about App Store rankings. X and SpaceXAI also accused Apple of trying to stifle the development of “super apps,” including X’s effort to turn itself into an “everything app.”\n\nIn the weeks and months that followed, all companies involved filed briefs, accusations, and defenses with the court. Apple and OpenAI have argued, among other things, that their deal was not exclusive as the complaint alleged, while court filings have also revealed new details about how the partnership worked behind the scenes.\n\nOne of those details surfaced today in a filing from OpenAI. As first reported by The Financial Times, OpenAI “said it was disappointed by how little interest Apple generated from iPhone users after the two companies struck a deal in 2024 for ChatGPT to power ‘Apple Intelligence’.”\n\nFrom the report:\n\nWhen the 2024 deal was agreed, OpenAI expected a “halo effect” from promotion and brand association with Apple, as well as more subscriptions coming from Apple Intelligence users, Wednesday’s court document says.\n\nBut a month after the ChatGPT integration launched, it “appeared to be off to a slow start” and OpenAI was cutting its forecasts for how many weekly active users it expected to attract, it said. By the summer of 2025, “it was clear that Apple’s integration of ChatGPT was dramatically underperforming”.\n\nThe report notes that today’s filing contains multiple redacted conversations, but the unredacted portions show that OpenAI executives were concerned Apple could “want to move faster” to secure another AI partner.\n\nWhen Apple Intelligence was first announced in 2024, Craig Federighi said in an interview that Apple ultimately wanted users to be able to choose between different AI models, specifically pointing to Google Gemini as a potential future integration.\n\nThat specific partnership never materialized, but Apple has since turned to Google’s Gemini models to help power the new Siri AI, while Xcode has expanded to support coding agents from Anthropic, Google, and OpenAI.\n\nBack to today’s filing, The Financial Times notes that it also points to the way Apple implemented ChatGPT as one possible reason for the slow adoption, as the integration was turned off by default.\n\nFinally, as noted by Reuters , OpenAI is also arguing that recent securities disclosures from SpaceX undermine SpaceXAI’s claims that the Apple partnership harmed competition. In its filing, OpenAI said SpaceX’s IPO registration statement was “replete with disclosures diametrically opposed” to the competitive harm alleged in the lawsuit.\n\nFor these reasons, OpenAI is asking Judge Mark Pittman to rule in its favor before trial on SpaceXAI’s antitrust claims. The case is currently set to go to trial in January.\n\nYou can read The Financial Times ’ report here . For Reuters ’ report, follow this link ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-3c0433b0bce56f21",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2267220/meta-ray-ban-display-getting-feature-updates-including-holographic-avatar-support/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-23T23:44:51.000Z",
-    "categories": [
-      "tecnologia-general",
-      "gafas-inteligentes"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta Ray-Ban Display getting feature updates including holographic avatar support",
-        "summary": "The smart glasses are also arriving in five new markets this fall.",
-        "body": "The smart glasses are also arriving in five new markets this fall.\n\nToday's Meta Connect 2026 conference shared a lot of news about the company's Ray-Ban Display smart glasses, which were introduced at the same event last year.\n\nOne of the notable changes coming to the device is support for a holographic avatar while taking calls. Since calls via smart glasses mean the wearer's face isn't visible to whomever they're chatting with, this feature uses the Meta AI app to create a photorealistic hologram to display instead. According to the press release, \"Your hologram is driven entirely by your voice, and the hologram model infers your expression from what you're saying and how you're saying it.\" The Hologram feature will initially be available in early access later this fall for WhatsApp users in the US.\n\nThe glasses' heads-up navigation tools have also been expanded, allowing a wearer to ask for cycling or public transit directions with a voice command. Users in the US and Canada will be the first to have this feature, rolling out later this month. Additionally, the navigation directions can now be based on the world around the person rather than solely relying on street signs for a more conversational experience. For example, you might be directed to \"turn left at the yellow house\" rather than to \"turn left on Third Street.\"\n\nWhen Karissa Bell reviewed the Ray-Ban Display smart glasses last year, one of the top issues she had with the Display was a lack of available apps. A new Explore app is coming to both the smart glasses and the Meta AI app that will help users to browse available programs that do work on the set.\n\nThe other features announced today include some incremental improvements to the user experience, such as bringing Dolby Atmos audio to its capture and playback tools, photo editing within the Display screen, a more detailed calendar, mirrored phone notifications and Threads for Community Feeds.\n\nThe Meta Ray-Ban Display is coming to five new markets: the UK, Canada, France, Italy and Germany. The glasses will be available to order online in those regions, as well as in the US. Display is available starting today in the UK starting at £749 and in Canada starting at CA$1,149. Pre-orders will begin today for the other three new markets for a base price of €899 before Display becomes available on October 13."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-cef268e2e4279764",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/999673/meta-connect-2026-muse-glasses-features",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-23T23:40:56.000Z",
-    "categories": [
-      "tecnologia-general",
-      "gafas-inteligentes"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Muse is coming to Meta smart glasses",
-        "summary": "Just a couple of weeks after launching Muse, Meta announced that it's \"working on\" bringing the agent to its smart glasses, including the new glasses it unveiled at Meta Connect. Users will be able to activate Muse from their glasses by saying its name and ask it to handle tasks like guiding a workout, logging […]",
-        "body": "Just a couple of weeks after launching Muse , Meta announced that it's \"working on\" bringing the agent to its smart glasses, including the new glasses it unveiled at Meta Connect. Users will be able to activate Muse from their glasses by saying its name and ask it to handle tasks like guiding a workout, logging meals, or helping them shop for products they're looking at.\n\nMuse is just one of several major updates coming to Meta's glasses. They're also getting some new accessibility features, like a Hearing Enhancement feature Meta says is \"FDA-cleared software for adults with perceived mild to moderate hearing loss.\" It will be available lat …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "techcrunch-8c0fba7bc3a55fd4",
     "type": "news",
     "sourceId": "techcrunch",
@@ -290,30 +362,6 @@
         "title": "Apple Releases watchOS 27.0.1 with fix for unexpected restarts on Apple Watch Series 12 and Apple Watch Ultra 4",
         "summary": "Apple has today released watchOS 27.0.1 for Apple Watch Series 12 and Apple Watch Ultra 4, bringing a fix for an issue that caused the devices to restart unexpectedly. As watchOS 27.0.1 was not distributed to external testers prior to its release, we do not have any information on whether it contains any accessibility fixes for blind, deaf blind, or low vision users at the time of writing. However, as this update appears to have been released to address a specific issue on a small subset of devices, we do not expect it to contain any such fixes. watchOS 27.0.1 Release Notes (via 9to5Mac ) This update provides bug fixes for your Apple Watch including fixing an issue where Apple Watch may restart unexpectedly. How to Update watchOS 27.0.1 is available via Over-the-Air Update (Settings > General > Software Update) or by going to the Watch app on your iPhone and navigating to General > Software Update. To install the update, your Watch must be connected to its charger and have at least 50% battery power.",
         "body": "Apple has today released watchOS 27.0.1 for Apple Watch Series 12 and Apple Watch Ultra 4, bringing a fix for an issue that caused the devices to restart unexpectedly.\n\nAs watchOS 27.0.1 was not distributed to external testers prior to its release, we do not have any information on whether it contains any accessibility fixes for blind, deaf blind, or low vision users at the time of writing. However, as this update appears to have been released to address a specific issue on a small subset of devices, we do not expect it to contain any such fixes.\n\nThis update provides bug fixes for your Apple Watch including fixing an issue where Apple Watch may restart unexpectedly.\n\nwatchOS 27.0.1 is available via Over-the-Air Update (Settings > General > Software Update) or by going to the Watch app on your iPhone and navigating to General > Software Update. To install the update, your Watch must be connected to its charger and have at least 50% battery power."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-0e311c0eab71711b",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/23/macwhisper-update-brings-real-time-meeting-transcripts-improved-speaker-recognition-more/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-23T21:17:11.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "MacWhisper update brings real-time meeting transcripts, improved speaker recognition, more",
-        "summary": "My transcription tool of choice on the Mac, MacWhisper, got another major update today with real-time meeting transcripts, significantly improved speaker recognition, tighter integration with Apple Intelligence, and a new transcription model. Here are the details. more…",
-        "body": "My transcription tool of choice on the Mac, MacWhisper, got another major update today with real-time meeting transcripts, significantly improved speaker recognition, tighter integration with Apple Intelligence, and a new transcription model. Here are the details.\n\nI’ve written in the past about how much I rely on MacWhisper, particularly as part of my podcast production workflow.\n\nMacWhisper was one of the first AI-powered transcription tools for the Mac. Since indie developer Jordi Bruin launched it in 2023, it has been on a relentless streak of improvements and expanded support for new models, services, and workflows.\n\nThat has included everything from automatic meeting recording and speaker recognition to watched folders, system-wide dictation, local and cloud AI models, and integrations with services such as Notion, Zapier, Obsidian, and n8n.\n\nToday, MacWhisper was updated to version 15.2 , introducing an improved speaker recognition powered by NVIDIA’s Nemotron 3 Diarization model, which was announced just hours ago.\n\nIt supports up to 8 speakers and can also be used during live meetings in the new realtime meeting view!\n\nWhich brings us to another major addition in today’s update: real-time meeting transcriptions.\n\nThis feature had been sitting near the top of MacWhisper’s public roadmap for a while, and it is now here, allowing users to follow, refer back to, copy, or transfer a live transcript as the meeting unfolds.\n\nYou can keep the window above your other apps to follow along, and your recording and transcript are saved when the meeting ends.\n\nWhen it comes to the actual transcription models, MacWhisper 15.2 adds Alibaba’s QWEN3-ASR transcription model with support for 22 languages, in addition to a tighter integration with Apple Intelligence, Siri, Spotlight, and Shortcuts on macOS 27.\n\nNow, users running macOS (including in the EU) can search for transcripts system-wide, open them with Siri, pull their text into Shortcuts, and refer to the transcript currently on screen in Siri or Apple Intelligence requests.\n\nFinally, MacWhisper 15.2 adds folders and subfolders for organizing transcripts and meetings, with support for dragging existing transcriptions into them from the sidebar.\n\nTo learn more about MacWhisper 15.2, follow this link ."
       }
     },
     "media": null
@@ -1196,30 +1244,6 @@
         "title": "Evaluaciones de APP Evaluaciones de APP actualizadas o incorporadas en el ClubONCE en el mes de agosto.",
         "summary": "A lo largo del pasado mes de agosto se han evaluado las siguientes APP:",
         "body": "A lo largo del pasado mes de agosto se han evaluado las siguientes APP:\n\nAndroid\n\nLa aplicación ofrece estadísticas, clasificaciones y diferentes modalidades de juego, proporcionando una experiencia de gestión y competición orientada a los aficionados al fútbol.\n\niOS\n\nLa aplicación ofrece estadísticas, clasificaciones y diferentes modalidades de juego, proporcionando una experiencia de gestión y competición orientada a los aficionados al fútbol.\n\nEn esta ocasión se han evaluado Apps categorizadas en: Utilidades y Entretenimiento.\n\nSi tiene problemas para abrir los enlaces, copie las url que se muestran a continuación en su navegador:\n\nAndroid\n\niOS\n\nRecordamos a las personas afiliadas que estén interesados en estos informes, que pueden suscribirse a Valoraciones Accesibilidad de APP, de esta manera recibirán un correo cada vez que se publique una nueva aplicación, permitiéndoles disponer de la información puntualmente.\n\nEsta información y los documentos completos de evaluación de cada una de estas aplicaciones están disponibles en el apartado de Valoraciones de accesibilidad de aplicaciones para móviles o accediendo con el navegador a la ruta ClubONCE / Servicios / Autonomía Personal y Tecnología / Tiflotecnología / Valoraciones de accesibilidad de aplicaciones móviles."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "conticgo-d5d55a3b11d9a2db",
-    "type": "news",
-    "sourceId": "conticgo",
-    "sourceName": "Conticgo",
-    "sourceUrl": "https://conticgo.net/",
-    "originalUrl": "https://conticgo.net/graphy-la-inteligencia-artificial-que-convierte-graficos-en-informacion-tactil-para-personas-con-discapacidad-visual/",
-    "originalLanguage": "es",
-    "publishedAt": "2026-09-11T10:00:58.000Z",
-    "categories": [
-      "tecnologia-accesibilidad",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "es": {
-        "title": "Graphy: la inteligencia artificial que convierte gráficos en información táctil para personas con discapacidad visual",
-        "summary": "Acceder a gráficos, mapas, esquemas o representaciones de datos continúa siendo un reto para muchas personas ciegas y con baja visión. En este contexto, Graphy: la inteligencia artificial que convierte gráficos en información táctil para personas con discapacidad visual, presenta un nuevo enfoque que combina inteligencia artificial conversacional y tecnología táctil dinámica para facilitar la […] La entrada Graphy: la inteligencia artificial que convierte gráficos en información táctil para personas con discapacidad visual se publicó primero en Conticgo .",
-        "body": "Acceder a gráficos, mapas, esquemas o representaciones de datos continúa siendo un reto para muchas personas ciegas y con baja visión. En este contexto, Graphy: la inteligencia artificial que convierte gráficos en información táctil para personas con discapacidad visual , presenta un nuevo enfoque que combina inteligencia artificial conversacional y tecnología táctil dinámica para facilitar la exploración de información visual. El proyecto plantea una colaboración entre la IA y el sentido del tacto, en lugar de intentar sustituirlo.\n\nLos gráficos están presentes en numerosos ámbitos de la vida diaria: educación, investigación, empleo, economía o comunicación científica.\n\nSin embargo, muchas de estas representaciones siguen siendo difíciles de interpretar para las personas con discapacidad visual, ya que tradicionalmente requieren adaptaciones específicas como gráficos en relieve, materiales táctiles impresos o explicaciones verbales.\n\nGraphy surge como una propuesta de investigación que busca cambiar la forma en la que las personas ciegas interactúan con este tipo de información.\n\nGraphy es un sistema experimental que combina una pantalla táctil dinámica con un modelo de lenguaje de gran escala (LLM, por sus siglas en inglés).\n\nSu objetivo es permitir que una persona pueda explorar un gráfico mediante el tacto mientras mantiene una conversación con un sistema de inteligencia artificial que explica, responde preguntas y proporciona información adicional.\n\nEn lugar de ofrecer únicamente una descripción automática del contenido, el sistema plantea una interacción más flexible:\n\nUno de los aspectos más interesantes de Graphy es su planteamiento.\n\nMuchas herramientas basadas en inteligencia artificial para personas con discapacidad visual se centran en describir imágenes mediante audio. Sin embargo, este proyecto apuesta por mantener el tacto como una vía fundamental de acceso a la información .\n\nLa combinación entre exploración táctil y explicación mediante inteligencia artificial puede permitir una comprensión más completa de elementos complejos como:\n\nDe esta manera, la IA actúa como un apoyo que acompaña al usuario durante la exploración, no como un sustituto de la experiencia táctil.\n\nUno de los ámbitos donde Graphy podría tener mayor impacto es la educación.\n\nActualmente, muchos estudiantes ciegos encuentran dificultades para acceder a contenidos visuales presentes en asignaturas como matemáticas, ciencias o economía.\n\nLos gráficos táctiles tradicionales requieren tiempo de preparación y no siempre permiten una interacción rápida o flexible.\n\nUna tecnología como Graphy podría facilitar que los estudiantes exploren representaciones complejas y realicen preguntas durante el aprendizaje, acercando la información visual al mismo ritmo que sus compañeros.\n\nEl acceso a gráficos y datos no es únicamente una cuestión educativa.\n\nEn numerosos puestos de trabajo se utilizan informes visuales, estadísticas, diagramas o paneles de información.\n\nHerramientas capaces de convertir estos contenidos en experiencias táctiles e interactivas podrían contribuir a reducir barreras para las personas con discapacidad visual en entornos profesionales.\n\nAunque Graphy todavía se encuentra en fase de investigación, su planteamiento abre una nueva línea dentro de la tiflotecnología: crear sistemas donde la inteligencia artificial y las ayudas tradicionales trabajen juntas.\n\nComo ocurre con muchas tecnologías emergentes, Graphy todavía tiene varios desafíos antes de convertirse en una herramienta disponible para el público general.\n\nEntre ellos se encuentran:\n\nAdemás, será fundamental que las personas con discapacidad visual participen en las futuras fases de diseño y evaluación para garantizar que la tecnología responde realmente a sus necesidades.\n\nGraphy representa una tendencia creciente dentro de la accesibilidad tecnológica: combinar las capacidades de la inteligencia artificial con herramientas sensoriales tradicionales.\n\nLa tecnología no busca eliminar el papel del tacto, sino ampliarlo mediante nuevas posibilidades de interacción.\n\nSi continúa desarrollándose, este tipo de sistemas podrían transformar la forma en la que las personas ciegas acceden a información gráfica, favoreciendo una mayor autonomía tanto en la educación como en el empleo.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFUENTE: Arxiv , Arxiv ."
       }
     },
     "media": null
@@ -2237,30 +2261,6 @@
     "media": null
   },
   {
-    "id": "usable-y-accesible-b94c9a77963884b5",
-    "type": "news",
-    "sourceId": "usable-y-accesible",
-    "sourceName": "Usable y accesible",
-    "sourceUrl": "https://olgacarreras.blogspot.com/",
-    "originalUrl": "https://olgacarreras.blogspot.com/2026/07/xr-accessibility-guidelines-10-de.html",
-    "originalLanguage": "es",
-    "publishedAt": "2026-07-16T19:13:28.352Z",
-    "categories": [
-      "tecnologia-accesibilidad",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "es": {
-        "title": "XR Accessibility Guidelines 1.0 de Metaverse Standards Forum",
-        "summary": "Imagen creada con IA. Descripción textual de la imagen Se han publicado las XR Accessibility Guidelines 1.0, un recurso pionero del Grupo de Trabajo de Accesibilidad del Metaverse Standards Forum. Las XR Accessibility Guidelines 1.0 nacen para ayudar a evaluar la accesibilidad de las experiencias XR. Por ello, las directrices ofrecen criterios verificables e independientes de la tecnología,",
-        "body": "Nota 1: como todos los artículos de este blog, este artículo NO está promocionado.\n\nNota 2: como todos los artículos de este blog, este artículo se ha ideado y elaborado sin el uso de herramientas IA, solo se han usado para la revisión final de la ortografía.\n\nAutor: Olga Carreras Montoto\n\nEtiquetas: accesibilidad metaverso , accesibilidad realidad virtual (VR)\n\nCompártelo en:\n\nHistórico de artículos:\n\nSubir al comienzo de la página"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "accessible-android-4142b5e8ce924d4f",
     "type": "news",
     "sourceId": "accessible-android",
@@ -2306,30 +2306,6 @@
         "title": "TCA TTS Timmer 1.2: Alarmas, UTC , Apagado programado y +!",
         "summary": "Normal 0 false 21 false false false ES X-NONE X-NONE /* Style Definitions */ table.MsoNormalTable {mso-style-name:\"Tabla normal\"; mso-tstyle-rowband-size:0; mso-tstyle-colband-size:0; mso-style-noshow:yes; mso-style-priority:99; mso-style-parent:\"\"; mso-padding-alt:0cm 5.4pt 0cm 5.4pt; mso-para-margin-top:0cm; mso-para-margin-right:0cm; mso-para-margin-bottom:8.0pt; mso-para-margin-left:0cm; line-height:107%; mso-pagination:widow-orphan; font-size:11.0pt; font-family:\"Calibri\",sans-serif; mso-ascii-font-family:Calibri; mso-ascii-theme-font:minor-latin; mso-hansi-font-family:Calibri; mso-hansi-theme-font:minor-latin; mso-bidi-font-family:\"Times New Roman\"; mso-bidi-theme-font:minor-bidi; mso-fareast-language:EN-US;} Hola gente, ¿qué tal les va? Muy atentos. Hoy les traigo la actualización de TCA-TTS-TIMMER, nuestro querido reloj parlante para Windows, que llega a la versión 1.2 cargada de novedades muy importantes y funcionalidades útiles! Antes, para quienes no lo conozcan: ¿Qué es TCA-TTS-TIMMER? Es una pequeña utilidad desarrollada en Python que nos permite escuchar la hora cada 15 minutos, 30 minutos o cada hora, mediante un sonido y una voz TTS. Además, puede darnos la hora de muchos países de Latinoamérica y Europa, todo desde una interfaz sencilla, totalmente accesible y con atajos de teclado. Novedades en TCA-TTS-TIMMER 1.2 El reloj llega a la versión 1.2 con los siguientes cambios: • Hora Universal UTC Ahora el reloj incorpora un botón en la interfaz principal que te permite saber la Hora Universal UTC al instante. Disponible también mediante el atajo de teclado Alt+U. Muy útil para quienes trabajan con sistemas, servidores o simplemente necesitan la referencia horaria internacional. • Nueva voz: Español México (mx) Además de la voz español España, ahora incorporamos la voz español México (mx). Podrás elegir entre ambas desde el cuadro combinando \"Lenguaje de la voz\" en las opciones. Una voz clara y agradable que le da un toque diferente al reloj. • Alarmas ¡TCA-TTS-TIMMER ahora permite establecer alarmas! Desde el botón \"Alarmas\" en la interfaz principal, podrás gestionar una o varias alarmas al día, eligiendo la hora, el sonido y el número de repeticiones. Ideal para recordatorios, descansos o lo que necesites. • Apagado programado Otra función muy solicitada: el apagado programado. Puedes programar que tu PC se apague automáticamente después de un número determinado de horas y minutos. Perfecto para cuando dejas el equipo realizando una tarea por la noche o antes de salir de casa. También incluye un botón para cancelar el apagado si cambias de opinión. • Correcciones y mejoras internas Se realizaron varias correcciones y mejoras en el código para un funcionamiento más estable y eficiente. Compatibilidad El programa es compatible con Windows 10 en adelante, para 64 bits. En versiones antiguas de Windows, puede que necesites las librerías Visual Studio C++ (incluidas en la descarga). Tutorial: ⏰ TCA TTS Timmer 1.2: Alarmas, UTC , Apagado programado y +! He grabado un video tutorial donde muestro todas estas novedades en acción: • El nuevo botón de Hora UTC y su atajo Alt+U. • Cómo cambiar a la voz mexicana y escucharla anunciar la hora. • Cómo configurar y gestionar alarmas. • Cómo usar el apagado programado paso a paso. La descarga. Les dejaré en la descarga: • El audio tutorial (en los canales Odysse y YouTube estará en video tutorial). • El programa TCA-TTS-TIMMER 1.2 para 64 bits. • Las librerías Visual Studio C++. Espero que disfruten de esta nueva versión y les sea de gran utilidad. Sigo mejorando este reloj 100% accesible, gratuito y fácil de usar, y escucho sus sugerencias para futuras versiones. Un agradecimiento especial a todos los que probaron la versión anterior y aportaron sus ideas. Y ya sabes, Si te gusta este contenido, Apóyanos haciendo una donación: Dona aquí en PayPal. compártelo en: Facebook, X. Deja un comentario sobre esta entrada. Síguenos en X: Abajo tienes el botón. Suscríbete al blog: Ahora puedes unirte a nuestros grupos de WhatsApp o Telegram: Puedes escribir al mail del blog con tus datos si deseas ingresar a los mismos. Escucha todos nuestros audio tutoriales, cómodamente: Entrando desde aquí, a nuestro canal en YouTube. Ahora también, en nuestro canal en Odysse: Entra al canal de Tecnoconocimiento Accesible en Odysse. O si prefieres escúchanos en: Anchor: Escúchanos en Anchor. Ponte en contacto con nosotros, déjanos tus sugerencias, dudas, o comentarios, abajo tienes un sencillo formulario, o si lo prefieres, escríbenos al correo del blog: tecnoconocimientoaccesible@gmail.com Los aportes siempre serán bienvenidos. cuando nos escribas por uno de los medios con alguna sugerencia, se publicará con tu nombre. además, como ya se sabe, puedes publicar esta entrada en otro sitio, pero no te olvides citar la fuente. Saludos, y hasta otro post. Descarga aquí el tutorial. Descarga aquí el programa. Descarga aquí las librerías.",
         "body": "Hola gente, ¿qué tal les va?\n\nMuy atentos. Hoy les traigo la actualización de TCA-TTS-TIMMER, nuestro querido reloj parlante para Windows, que llega a la versión 1.2 cargada de novedades muy importantes y funcionalidades útiles!\n\nAntes, para quienes no lo conozcan:\n\nEs una pequeña utilidad desarrollada en Python que nos permite escuchar la hora cada 15 minutos, 30 minutos o cada hora, mediante un sonido y una voz TTS. Además, puede darnos la hora de muchos países de Latinoamérica y Europa, todo desde una interfaz sencilla, totalmente accesible y con atajos de teclado.\n\nEl reloj llega a la versión 1.2 con los siguientes cambios:\n\n• Hora Universal UTC\n\nAhora el reloj incorpora un botón en la interfaz principal que te permite saber la Hora Universal UTC al instante. Disponible también mediante el atajo de teclado Alt+U. Muy útil para quienes trabajan con sistemas, servidores o simplemente necesitan la referencia horaria internacional.\n\n• Nueva voz: Español México (mx)\n\nAdemás de la voz español España, ahora incorporamos la voz español México (mx). Podrás elegir entre ambas desde el cuadro combinando \"Lenguaje de la voz\" en las opciones. Una voz clara y agradable que le da un toque diferente al reloj.\n\n• Alarmas\n\n¡TCA-TTS-TIMMER ahora permite establecer alarmas! Desde el botón \"Alarmas\" en la interfaz principal, podrás gestionar una o varias alarmas al día, eligiendo la hora, el sonido y el número de repeticiones. Ideal para recordatorios, descansos o lo que necesites.\n\n• Apagado programado\n\nOtra función muy solicitada: el apagado programado. Puedes programar que tu PC se apague automáticamente después de un número determinado de horas y minutos. Perfecto para cuando dejas el equipo realizando una tarea por la noche o antes de salir de casa. También incluye un botón para cancelar el apagado si cambias de opinión.\n\n• Correcciones y mejoras internas\n\nSe realizaron varias correcciones y mejoras en el código para un funcionamiento más estable y eficiente.\n\nEl programa es compatible con Windows 10 en adelante, para 64 bits. En versiones antiguas de Windows, puede que necesites las librerías Visual Studio C++ (incluidas en la descarga).\n\nHe grabado un video tutorial donde muestro todas estas novedades en acción:\n\n• El nuevo botón de Hora UTC y su atajo Alt+U.\n\n• Cómo cambiar a la voz mexicana y escucharla anunciar la hora.\n\n• Cómo configurar y gestionar alarmas.\n\n• Cómo usar el apagado programado paso a paso.\n\nLes dejaré en la descarga:\n\n• El audio tutorial (en los canales Odysse y YouTube estará en video tutorial).\n\n• El programa TCA-TTS-TIMMER 1.2 para 64 bits.\n\n• Las librerías Visual Studio C++.\n\nEspero que disfruten de esta nueva versión y les sea de gran utilidad. Sigo mejorando este reloj 100% accesible, gratuito y fácil de usar, y escucho sus sugerencias para futuras versiones.\n\nUn agradecimiento especial a todos los que probaron la versión anterior y aportaron sus ideas.\n\nY ya sabes, Si te gusta este contenido,\n\nApóyanos haciendo una donación:\n\nDona aquí en PayPal.\n\ncompártelo en: Facebook, X.\n\nDeja un comentario sobre esta entrada.\n\nSíguenos en X:\n\nAbajo tienes el botón.\n\nSuscríbete al blog:\n\nAhora puedes unirte a nuestros grupos de WhatsApp o Telegram:\n\nPuedes escribir al mail del blog con tus datos si deseas ingresar a los mismos.\n\nEscucha todos nuestros audio tutoriales, cómodamente:\n\nEntrando desde aquí, a nuestro canal en YouTube.\n\nAhora también, en nuestro canal en Odysse:\n\nEntra al canal de Tecnoconocimiento Accesible en Odysse.\n\nO si prefieres escúchanos en:\n\nAnchor:\n\nEscúchanos en Anchor."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "nvaccess-in-process-5ad7fbf5621abc19",
-    "type": "news",
-    "sourceId": "nvaccess-in-process",
-    "sourceName": "NV Access",
-    "sourceUrl": "https://www.nvaccess.org/category/in-process/",
-    "originalUrl": "https://www.nvaccess.org/post/in-process-26th-june-2026/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-06-26T07:26:21.000Z",
-    "categories": [
-      "windows",
-      "nvda"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "In-Process 26th June 2026",
-        "summary": "Welcome to another full edition of In-Process! You can always find this under the “Blog” heading on NVAccess.org, or you can sign up to read this via email! NVDA 2026.2 Beta 4 OCR Follow-up: Extracting text from inaccessible PDF files From the Community NVDA Gives George Flexibility 2026.2 Touch Improvements NVDA 2026.2 Beta 4 NVDA… Read More",
-        "body": "Welcome to another full edition of In-Process! You can always find this under the “Blog” heading on NVAccess.org, or you can sign up to read this via email !\n\nNVDA 2026.2 Beta 4 is now available for download and testing. For anyone who is interested in trying out what the next version of NVDA has to offer before it is officially released, we welcome you to download the beta and provide feedback using our issue reporting process.\n\nSince the last In-Process we’ve had two betas, so let’s recap what they contain:\n\nChanges introduced in Beta 4: Updates to translations Changed the button layout in the “Add dictionary entry” dialog to vertical Changed the magnifier tracking from the center of an object to the start (e.g. top-left for left-to-right languages) Fixed saving comments in speech dictionaries Added a debug log category for magnifier Improvements to Magnifier settings names and layout\n\nChanges introduced in Beta 3: Pressing NVDA+control+w on secure screens now opens Magnifier settings as expected Highlighter and Magnifier now follow the focused cell in Excel Improvements to Magnifier settings names and layout\n\nBe sure to head over to the NVDA 2026.2 Beta 4 Release Announcement for all the details and to download.\n\nLast fortnight, we wrote an article about some of the updates to NVDA’s OCR capabilities and some recommendations for dealing with inaccessible content.\n\nThe article noted the limitations of the built-in OCR, particularly in relation to longer inaccessible PDF files. In fact, there are a number of options you can explore beyond NVDA’s built-in OCR to work with those longer documents where recognising what is on screen will not capture the whole document:\n\nNVDA add-ons. NVDA has several add-ons which can help with longer, inaccessible documents: The NAO add-on (NAO stands for NVDA Advanced OCR) can recognise entire documents at once Tesseract OCR add-on can also recognise entire PDF documents, as well as scan and recognise hardcopy documents on a connected hardware scanner NVDA also has a number of other add-ons which can help with OCR If you have the paid version of Adobe Acrobat, it can also recognise text and export to Word or plain text You can try opening the PDF file in Word and it will attempt to convert it to editable text AI Services such as Copilot or Gemini can recognise text in PDF files – and NVDA has a number of AI related add-ons which make working with the various AI programs easier\n\nNote that any of these options should be considered a last resort and not something users should be expected to rely on. The results often vary in their accuracy and the amount of information they are able to extract. Documents should be made accessible in the first instance, and creating accessible documents is much easier done by the person who creates them.\n\nOne of the most important parts of NVDA has always been our passionate and dedicated community! Firstly, in our own community news, thanks to everyone who came out to See Differently TechFEST in Adelaide last week. It was a very productive day with lots of great conversations. We met local users and organisations, showed off the latest NVDA 2026.2 Beta, and got lots of great feedback. We also met with See Differently staff who were very excited about how the latest features and improvements in NVDA would benefit their clients.\n\nOur community has been busy and innovative as always as well! While we don’t recommend any specific products, here are a couple of updates from the NVDA community, which have gained interest in some of the NVDA communities: Christopher Mutch has launched Speaking Access . An app which lets users control Windows and NVDA entirely through voice commands. It comes with a 30-day trial then one-off cost of $29.95 USD.\n\nPolyglot, a new NVDA translation add-on available in the NVDA add-on store, by the NVDA Chinese community. We recently covered various ways of working with text in different languages , and add-ons like this are also an ever-evolving part of that ecosystem of options!\n\nColin Olkowski shared a solution he developed for his mother using a MIDI controller, some software options he worked out with trial and error, and, of course, NVDA. Is this the ideal setup for everyone? No, but it definitely shows thinking outside the box and repurposing which may work for some – or at least get you thinking.\n\nAnd a couple from the wider blindness community which might be of interest (again, no specific endorsement, but if you find these useful, you might be interested in David Goldfield’s TechVI list where he often highlights new things like these):\n\nIntopia.digital recently conducted a survey of assistive technology users in Australia and New Zealand. The results are now available . One thing I found particularly interesting was the high take-up of AI among assistive technology users – 70% of those who use AT on both desktop and mobile incorporate AI into their use.\n\nAnd following on from that statistic: A new book by NVDA community member Tony Gebhard: “ No Sight Required – The Blind User’s Guide to AI ” – A very timely release!\n\nKelly Ford, formerly of Microsoft Accessibility, has released QuickMail, a standalone, independent Email client .\n\nAs NVDA celebrates its 20th year this year, George has been an NVDA user for half of that time. He sent us a fantastic testimonial recently. NVDA Gives George Flexibility is bite-sized but powerful. It’s a great reminder of how important access is to technology without additional financial burden for people. Thanks George!\n\nIf you have a touch screen, NVDA 2026.2 (currently in beta) contains some updates you might be interested in trying.\n\nWhat’s new Added pinch in and pinch out touch gestures, allowing two-finger pinch gestures to be bound to scripts. (#19963, @kefaslungu) Added touch-based navigation of browse mode elements, allowing touch screen users to move between links, headings, form fields, lists, tables and other quick navigation elements. (#3424, @kefaslungu) Flick down or up to cycle through element types; flick right or left to navigate between elements of the selected type The element types shown when cycling can be configured in the Browse Mode settings panel\n\nHow to use touch touch gestures in the user guide . And a section in the User Guide on the touch settings available.\n\nYou can toggle touch interaction support, by pressing NVDA+control+alt+t or from the settings.\n\nThe most basic action you can perform with the touch screen is to announce the control or text at any point on the screen. To do this, place one finger anywhere on the screen. You can also keep your finger on the screen and move it around to read other controls and text that your finger moves over.\n\nGestures can involve tapping the screen one or more times, with one or more fingers. You can also “flick” with one or more fingers, up, down, left or right.\n\nThere are many more NVDA commands than possible touch gestures. NVDA has several touch modes you can switch between which make certain subsets of commands available. The two modes are text mode and object mode. To toggle touch modes, perform a 3-finger tap.\n\nYou can use a touch keyboard to enter text and commands from a touch screen. When focused on an edit field, bring up the touch keyboard by double-tapping the touch keyboard icon on the bottom of the screen.\n\nEach command in the user guide , or the commands quick references (both available from NVDA’s help menu) can have up to three gestures listed. The desktop keyboard shortcut, the laptop keyboard shortcut, and the touch gesture. The touch gesture is blank for many commands, but in these cases, a gesture can be assigned in the “ Input Gestures ” dialog.\n\nThat is, of course, an extremely brief overview of some of what you can do with touch, so do investigate the user guide for more. Please note: touch is not available from portable or temporary copies of NVDA . If you wish to test the new touch improvements in the NVDA 2026.2 Beta , you will need to install it.\n\nThat’s all for this fortnight. Do try the latest NVDA 2026.2 Beta , check out those community resources and join the conversation on social media or in the NVDA user group !"
       }
     },
     "media": null

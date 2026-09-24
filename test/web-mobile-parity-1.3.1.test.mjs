@@ -32,7 +32,9 @@ test('Android accessible player includes an adjustable position control and publ
   assert.match(player, /getDuration/);
   assert.match(player, /ariaValueText|aria-valuetext|setAttribute\(['"]aria-valuetext/);
   assert.match(player, /fullDescription/);
-  assert.match(player, /https?:\\\/\\\//);
+  assert.match(player, /urlPattern/);
+  assert.match(player, /createElement\(['"]a['"]\)/);
+  assert.match(player, /link\.href\s*=\s*href/);
   assert.match(i18n, /details:\s*['"](?:Ver detalles del vídeo|Show video details)['"]/);
   assert.match(i18n, /position:\s*['"](?:Posición del vídeo|Video position)['"]/);
 });

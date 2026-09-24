@@ -56,10 +56,9 @@ test('long catalogue screens expose a bottom Back control so screen-reader users
   }
 });
 
-test('Actualidad announces the selected content language for beta diagnostics', () => {
-  assert.match(actualidadSource, /settings\.language/);
-  assert.match(actualidadSource, /settings\.spanish/);
-  assert.match(actualidadSource, /settings\.english/);
+test('Actualidad follows the selected language without leaving the temporary beta diagnostic in the interface', () => {
+  assert.match(actualidadSource, /item\.lang\s*===\s*preferences\.lang/);
+  assert.doesNotMatch(actualidadSource, /settings\.language|settings\.spanish|settings\.english|activeLanguage|contentLanguage|Idioma:/i);
 });
 
 test('Downloads explains what link analysis does before presenting the actions', () => {

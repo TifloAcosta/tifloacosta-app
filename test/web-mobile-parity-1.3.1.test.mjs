@@ -69,16 +69,22 @@ test('web global search clear returns focus to the search field like Android', a
   assert.match(search, /function clearSearch\(\)[\s\S]*search\.value = ''[\s\S]*search\.focus\(\)/);
 });
 
-test('web Downloads mirrors Android explanation and both available actions', async () => {
-  const [hub, core] = await Promise.all([
-    readRoot('downloads-hub.js'),
-    readRoot('app-core.js')
+test('web Downloads stays independent while Search sounds is available on an isolated page', async () => {
+  const [appCore, downloads, soundsPage] = await Promise.all([
+    readRoot('app-core.js'),
+    readRoot('downloads.js'),
+    readRoot('sounds.html')
   ]);
-  assert.match(hub, /descargables disponibles/);
-  assert.match(hub, /downloads-open-link/);
-  assert.match(hub, /downloads-open-sounds/);
-  assert.match(core, /downloads-hub\.js/);
-  assert.match(core, /sound-search\.js/);
+  assert.doesNotMatch(appCore, /sound-search/);
+  assert.doesNotMatch(appCore, /downloads-hub/);
+  assert.match(downloads, /descargables disponibles/);
+  assert.match(downloads, /sounds\.html/);
+  assert.match(downloads, /Buscar sonidos/);
+  assert.match(soundsPage, /data-sound-search-standalone/);
+  assert.match(soundsPage, /sound-search-core\.js/);
+  assert.match(soundsPage, /sound-search-config\.js/);
+  assert.match(soundsPage, /sound-search\.js/);
+  assert.doesNotMatch(soundsPage, /app-core\.js/);
 });
 
 test('temporary Android Actualidad language diagnostic is not left in the release interface', async () => {

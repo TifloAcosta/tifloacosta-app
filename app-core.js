@@ -146,10 +146,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     appendScript('downloads-core.js?v=1.1', 'data-tiflo-download-core');
     appendScript('download-config.js?v=1.1', 'data-tiflo-download-config');
     appendScript('downloads.js?v=1.4', 'data-tiflo-download-ui');
-    appendScript('sound-search-core.js?v=1.0', 'data-tiflo-sound-core');
-    appendScript('sound-search-config.js?v=1.0', 'data-tiflo-sound-config');
-    appendScript('sound-search.js?v=1.0', 'data-tiflo-sound-ui');
-    appendScript('downloads-hub.js?v=1.1', 'data-tiflo-download-hub');
+    appendScript('downloads-sounds-link.js?v=1.0', 'data-tiflo-download-sounds-link');
   }
 
   if (document.readyState === 'loading') {

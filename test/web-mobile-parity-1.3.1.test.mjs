@@ -24,8 +24,8 @@ test('Android accessible player includes an adjustable position control and publ
   assert.match(player, /ariaValueText|aria-valuetext|setAttribute\(['"]aria-valuetext/);
   assert.match(player, /fullDescription/);
   assert.match(player, /https?:\\\/\\\//);
-  assert.match(i18n, /videos\.details/);
-  assert.match(i18n, /videos\.position/);
+  assert.match(i18n, /details:\s*['"](?:Ver detalles del vídeo|Show video details)['"]/);
+  assert.match(i18n, /position:\s*['"](?:Posición del vídeo|Video position)['"]/);
 });
 
 test('web player exposes the same adjustable position and independent details controls', async () => {

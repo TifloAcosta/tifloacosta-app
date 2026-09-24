@@ -19,6 +19,17 @@ function addFavoriteButton(parent, item, favoritesStore, t) {
   parent.append(button);
 }
 
+function addEndBackButton(root, router, label) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.id = 'end-back-button';
+  button.className = 'back-button';
+  button.textContent = label;
+  button.addEventListener('click', () => router.back());
+  root.append(button);
+  return button;
+}
+
 function formatPublishedAt(value, lang) {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return '';
@@ -44,6 +55,9 @@ export function renderActualidad({
   clearScreen(root);
   addScreenHeader(root, { router, title: t('screen.actualidad'), backLabel: t('nav.back') });
 
+  const activeLanguage = preferences.lang === 'en' ? t('settings.english') : t('settings.spanish');
+  addParagraph(root, `${t('settings.language')}: ${activeLanguage}`, 'muted');
+
   const allItems = Array.isArray(content?.news) ? content.news : [];
   const items = allItems
     .filter(item => item.lang === preferences.lang)
@@ -55,6 +69,7 @@ export function renderActualidad({
 
   if (!items.length) {
     addParagraph(root, t('actualidad.empty'), 'empty-state');
+    addEndBackButton(root, router, t('nav.back'));
     onVisited?.(items);
     return;
   }
@@ -106,5 +121,6 @@ export function renderActualidad({
     root.append(article);
   }
 
+  addEndBackButton(root, router, t('nav.back'));
   onVisited?.(items);
 }

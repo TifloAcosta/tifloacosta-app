@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Curso completo de Entrada braille en pantalla en iPhone</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;line-height:1.65;max-width:900px;margin:0 auto;padding:1.25rem}
+header,main,footer{display:block}
+.brand{font-weight:700;margin-bottom:.5rem}
+h1{line-height:1.2}
+h2{margin-top:2rem;line-height:1.3}
+h3{margin-top:1.6rem;line-height:1.35}
+h4{margin-top:1.35rem;line-height:1.4}
+p{margin:.9rem 0}
+ul,ol{padding-left:1.6rem}
+li{margin:.45rem 0}
+.skip-link{position:absolute;left:-9999px}
+.skip-link:focus{position:static;display:inline-block;margin-bottom:1rem}
+footer{margin-top:3rem;border-top:1px solid currentColor;padding-top:1rem}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+<header>
+<p class="brand">TifloAcosta</p>
+<h1>Curso completo de Entrada braille en pantalla en iPhone</h1>
+<p>De cero a un uso avanzado y profesional</p>
+<p>Referencia principal: iOS 27, con indicaciones útiles para iOS 26</p>
+<p>Creado por Tony Acosta para TifloAcosta</p>
+</header>
+<main id="contenido">
+<h2 id="introduccion">Introducción</h2>
+<p>Este curso empieza desde cero. Vamos a escribir en braille directamente sobre la pantalla del iPhone con VoiceOver, sin dar por hecho que ya conoces el sistema ni que tienes soltura con los gestos. Si partes con experiencia, avanzarás más deprisa; si no, iremos construyendo la base mientras practicamos.</p>
+<p>Trabajaremos con iPhone y VoiceOver, tomando iOS 27 como referencia principal. Cuando iOS 26 cambie algo que afecte al procedimiento, lo señalaré justo donde haga falta. Si funciona igual en las dos versiones, no voy a duplicar la explicación para llenar páginas.</p>
+<p>Iremos paso a paso. Primero colocamos los dedos y escribimos caracteres sueltos. Después llegan los espacios, el borrado, los números, los signos y el uso en aplicaciones. Más adelante nos moveremos dentro de un texto, entraremos en el Modo de comandos, trabajaremos la velocidad, veremos qué hacer cuando algo falla y probaremos opciones avanzadas como la escritura con una sola mano.</p>
+<p>No intentes memorizarlo todo de una vez. Los anexos del final están precisamente para consultar un gesto, una combinación o una diferencia entre versiones cuando la necesites, sin tener que recorrer el curso entero otra vez.</p>
+<h2 id="contenido">Contenido</h2>
+<nav aria-label="Índice del curso">
+<ol>
+<li><a href="#modulo-1-empezamos-desde-cero">Módulo 1. Empezamos desde cero</a></li>
+<li><a href="#modulo-2-preparar-el-iphone">Módulo 2. Preparar el iPhone</a></li>
+<li><a href="#modulo-3-primer-contacto-con-el-teclado-braille">Módulo 3. Primer contacto con el teclado braille</a></li>
+<li><a href="#modulo-4-aprender-a-escribir-sin-prisas">Módulo 4. Aprender a escribir sin prisas</a></li>
+<li><a href="#modulo-5-ya-estamos-escribiendo">Módulo 5. Ya estamos escribiendo</a></li>
+<li><a href="#modulo-6-mayusculas-numeros-signos-y-tablas-braille">Módulo 6. Mayúsculas, números, signos y tablas braille</a></li>
+<li><a href="#modulo-7-escribir-en-aplicaciones-reales">Módulo 7. Escribir en aplicaciones reales</a></li>
+<li><a href="#modulo-8-moverse-y-corregir-dentro-del-texto">Módulo 8. Moverse y corregir dentro del texto</a></li>
+<li><a href="#modulo-9-modo-de-comandos-controlar-el-iphone-desde-el-braille">Módulo 9. Modo de comandos: controlar el iPhone desde el braille</a></li>
+<li><a href="#modulo-10-ganar-velocidad-sin-perder-precision">Módulo 10. Ganar velocidad sin perder precisión</a></li>
+<li><a href="#modulo-11-cuando-algo-no-funciona">Módulo 11. Cuando algo no funciona</a></li>
+<li><a href="#modulo-12-del-uso-avanzado-al-uso-profesional">Módulo 12. Del uso avanzado al uso profesional</a></li>
+<li><a href="#modulo-13-practica-final-ahora-toca-hacerlo-todo-junto">Módulo 13. Práctica final: ahora toca hacerlo todo junto</a></li>
+<li><a href="#modulo-14-cerrar-el-curso-sin-cerrar-el-aprendizaje">Módulo 14. Cerrar el curso sin cerrar el aprendizaje</a></li>
+<li><a href="#anexo-a-referencia-rapida">Anexo A. Referencia rápida</a></li>
+<li><a href="#anexo-b-ios-26-e-ios-27-que-cambia-realmente">Anexo B. iOS 26 e iOS 27: qué cambia realmente</a></li>
+</ol>
+</nav>
+<h2 id="modulo-1-empezamos-desde-cero">Módulo 1. Empezamos desde cero</h2>
+<p>La Entrada braille en pantalla te deja escribir en el iPhone usando los dedos como si tuvieras delante las seis teclas de una máquina braille. Ojo, porque no hay ningún teclado físico ni virtual que localizar: apoyas los dedos sobre determinadas zonas de la pantalla y formas cada carácter pulsando a la vez los puntos que le corresponden. Así de simple, y así de raro las primeras veces.</p>
+<p>Al principio uno piensa “punto 1, punto 2, punto 4…” como si estuviera haciendo una cuenta. Con el tiempo esa cuenta desaparece y las manos empiezan a reconocer las letras solas, sin pasar por la cabeza. Esa transición, de pensar en puntos a simplemente escribir, es justo lo que vamos a entrenar durante el curso.</p>
+<p>Aclaremos una cosa desde el principio, porque suele dar lugar a confusión: una pantalla braille física es un dispositivo aparte, conectado al iPhone, con celdas braille reales en relieve. La Entrada braille en pantalla usa únicamente la pantalla táctil del teléfono. Las dos trabajan con braille, pero no son la misma herramienta.</p>
+<p>Este tampoco pretende ser un curso completo de lectoescritura braille. Si ya conoces el sistema, partes con ventaja. Si tienes pocas nociones, también puedes seguirlo: iremos viendo las combinaciones a medida que las necesitemos. Mi intención es que el braille termine siendo una forma práctica y cómoda de escribir con el iPhone, no un examen de memoria.</p>
+<p>Y eso significa bastante más que poner letras una detrás de otra: escribir mensajes, notas, correos y textos algo más largos; manejar números y signos; darte cuenta de que metiste la pata varias palabras atrás; moverte por el texto, corregirlo y seguir escribiendo sin perder el hilo de dónde estabas.</p>
+<p>Durante las primeras prácticas, olvídate de la velocidad. Una letra bien puesta vale mucho más que diez escritas a lo loco y corregidas después. Primero buscamos precisión y comodidad; la rapidez llega sola cuando los movimientos empiezan a sentirse familiares, no antes.</p>
+<p>Trabajaremos sobre todo con braille de seis puntos. Las tablas, otros modos y las opciones más avanzadas irán apareciendo cuando aporten algo útil. Meterlo todo el primer día solo conseguiría que acabáramos buscando las herramientas antes de haber empezado a usarlas.</p>
+<p>El tamaño del iPhone y tus propias manos influyen en lo cómodo que resulte todo esto. Lo que a una persona le va perfecto puede resultarle incómodo a otra, y no pasa nada. Probaremos las posturas principales y cada cual se queda con la que mejor le funcione.</p>
+<p>Una cosa más, para que quede tranquilo quien lo esté pensando: la Entrada braille convive sin ningún problema con el dictado, el teclado convencional, una pantalla braille o un teclado físico. Aprenderla amplía tus formas de escribir, no te obliga a renunciar a ninguna de las demás.</p>
+<p>Con esto ya aclarado, toca preparar el teléfono.</p>
+<h2 id="modulo-2-preparar-el-iphone">Módulo 2. Preparar el iPhone</h2>
+<p>Antes de escribir la primera letra merece la pena dedicar unos minutos a la configuración. Cuantas menos cosas cambiemos al principio, más fácil será saber qué está ocurriendo cuando empecemos a practicar.</p>
+<p>La Entrada braille en pantalla forma parte de VoiceOver, y su configuración vive en:</p>
+<p><em>Ajustes &gt; Accesibilidad &gt; VoiceOver &gt; Braille &gt; Entrada braille en pantalla</em></p>
+<p>Para arrancar nos interesan dos cosas: poder activar la Entrada braille cuando estemos en un campo editable, y tener seleccionada una tabla adecuada para escribir en español.</p>
+<h3 id="activacion-mediante-el-rotor">Activación mediante el rotor</h3>
+<p>La forma más segura de entrar es incluir la Entrada braille en pantalla entre las opciones del rotor de VoiceOver. Cuando estés en un campo donde se pueda escribir, seleccionas Entrada braille en pantalla con el rotor y ya la tienes lista para usar.</p>
+<p>Si no aparece entre las opciones del rotor, revisa:</p>
+<p><em>Ajustes &gt; Accesibilidad &gt; VoiceOver &gt; Rotor &gt; Ítems del rotor &gt; Entrada braille en pantalla</em></p>
+<h3 id="activacion-directa">Activación directa</h3>
+<p>Las versiones actuales ofrecen, además, un gesto de activación directa. Si tienes habilitada la opción Usar gestos de activación, coloca un dedo de cada mano en los bordes superior e inferior de la pantalla y haz un doble toque.</p>
+<p>Quédate con el método que te resulte más cómodo. Y recuerda que el rotor sigue ahí como vía de entrada si algún día el gesto directo no responde.</p>
+<h3 id="tabla-braille-y-ajustes-iniciales">Tabla braille y ajustes iniciales</h3>
+<p>La tabla braille sí merece atención desde el principio, esta no te la puedes saltar. Para este curso usaremos una tabla española apropiada para lo que vamos a practicar. Las letras básicas coinciden en muchos casos con otros códigos, pero los caracteres acentuados, ciertos signos y algunas convenciones cambian de una tabla a otra.</p>
+<p>Dentro de la configuración encontrarás otras posibilidades: iniciar Entrada braille automáticamente al empezar a editar, mantenerla activa hasta que decidas salir tú, invertir la posición de los puntos, ajustar la respuesta mientras escribes, dejar que el sistema aprenda la posición de tus dedos y configurar el uso con una sola mano.</p>
+<p>Para las primeras prácticas nos basta con una configuración sencilla. Luego iremos añadiendo solo aquello que realmente te resulte útil.</p>
+<h2 id="modulo-3-primer-contacto-con-el-teclado-braille">Módulo 3. Primer contacto con el teclado braille</h2>
+<p>Abre una nota. Es un buen sitio para experimentar sin presión: si escribes una barbaridad, nadie la recibe; si borras media frase sin querer, tampoco pasa absolutamente nada.</p>
+<p>Crea una nota nueva, sitúate en el área de escritura y activa Entrada braille en pantalla.</p>
+<h3 id="las-dos-posiciones-principales">Las dos posiciones principales</h3>
+<p>El iPhone se puede usar apoyado sobre una mesa o con la pantalla alejada de ti. La primera posición suele ser más cómoda para entender dónde cae cada dedo; la segunda es la que se usa habitualmente cuando sostienes el teléfono con las manos, sin apoyarlo en ningún sitio.</p>
+<p>En braille de seis puntos, la referencia habitual es esta:</p>
+<ul>
+<li>Mano izquierda: índice, punto 1; corazón, punto 2; anular, punto 3.</li>
+<li>Mano derecha: índice, punto 4; corazón, punto 5; anular, punto 6.</li>
+</ul>
+<p>Apoya los seis dedos con naturalidad. Las manos no deberían quedar rígidas ni obligarte a abrir los dedos más de la cuenta. Si notas la postura incómoda, recoloca el teléfono antes de seguir, no fuerces la mano.</p>
+<h3 id="calibrar-la-posicion-de-los-puntos">Calibrar la posición de los puntos</h3>
+<p>Cuando notes que la pantalla deja de corresponder con la posición real de tus dedos, puedes recalibrar. En el iPhone, toca y levanta a la vez los tres dedos de la mano derecha para fijar los puntos 4, 5 y 6, e inmediatamente después haz lo mismo con los tres dedos de la izquierda para fijar los puntos 1, 2 y 3.</p>
+<p>Una errata suelta no justifica recalibrar; eso nos pasa a todos. Hazlo cuando varios intentos seguidos indiquen que la referencia de los puntos se ha movido. También puedes activar el ajuste que permite a Entrada braille aprender la posición de tus dedos mientras la utilizas.</p>
+<h3 id="primeras-pulsaciones">Primeras pulsaciones</h3>
+<p>Antes de formar palabras, toca un solo punto, después combina dos y escucha cómo responde VoiceOver. Aquí solo queremos acostumbrar los dedos a pulsar juntos sin que toda la mano se desplace.</p>
+<p>Después prueba la posición con la pantalla alejada. La sensación física cambia bastante, pero los puntos siguen siendo los mismos. Puede gustarte más una postura que otra, o usar cada una en momentos distintos; pruébalas y quédate con lo que te funcione.</p>
+<h3 id="salir-de-entrada-braille">Salir de Entrada braille</h3>
+<p>Puedes salir deslizando dos dedos en direcciones opuestas. También sirve el barrido de dos dedos en forma de zeta, el gesto habitual de VoiceOver para retroceder.</p>
+<h2 id="modulo-4-aprender-a-escribir-sin-prisas">Módulo 4. Aprender a escribir sin prisas</h2>
+<p>Una celda braille de seis puntos se forma combinando los puntos del 1 al 6. Para escribir una letra, tocas a la vez los puntos que la componen. Vamos a por las primeras.</p>
+<h3 id="las-primeras-diez-letras">Las primeras diez letras</h3>
+<ul>
+<li>a: punto 1.</li>
+<li>b: puntos 1-2.</li>
+<li>c: puntos 1-4.</li>
+<li>d: puntos 1-4-5.</li>
+<li>e: puntos 1-5.</li>
+<li>f: puntos 1-2-4.</li>
+<li>g: puntos 1-2-4-5.</li>
+<li>h: puntos 1-2-5.</li>
+<li>i: puntos 2-4.</li>
+<li>j: puntos 2-4-5.</li>
+</ul>
+<p>Empieza por unas pocas y añade las siguientes cuando los dedos ya encuentren las primeras con seguridad, sin agobios.</p>
+<h3 id="la-segunda-serie">La segunda serie</h3>
+<ul>
+<li>k: puntos 1-3.</li>
+<li>l: puntos 1-2-3.</li>
+<li>m: puntos 1-3-4.</li>
+<li>n: puntos 1-3-4-5.</li>
+<li>o: puntos 1-3-5.</li>
+<li>p: puntos 1-2-3-4.</li>
+<li>q: puntos 1-2-3-4-5.</li>
+<li>r: puntos 1-2-3-5.</li>
+<li>s: puntos 2-3-4.</li>
+<li>t: puntos 2-3-4-5.</li>
+</ul>
+<p>Fíjate en el truco: buena parte de estas letras sale de las diez primeras añadiendo el punto 3. Entender esa familia te ayuda mucho más que memorizar veinte combinaciones sueltas como si fueran independientes entre sí.</p>
+<h3 id="las-letras-restantes">Las letras restantes</h3>
+<ul>
+<li>u: puntos 1-3-6.</li>
+<li>v: puntos 1-2-3-6.</li>
+<li>x: puntos 1-3-4-6.</li>
+<li>y: puntos 1-3-4-5-6.</li>
+<li>z: puntos 1-3-5-6.</li>
+<li>w: puntos 2-4-5-6.</li>
+<li>ñ: puntos 1-2-4-5-6.</li>
+</ul>
+<p>Ahora prueba con palabras sencillas: casa, mesa, hola, mano, sol. Escucha lo que vas escribiendo y, si una combinación sale mal, corrígela y sigue. No merece la pena repetir la palabra entera por una sola letra.</p>
+<p>Después escribe tu propio nombre. Sabes perfectamente cómo tiene que sonar, así que cualquier fallo salta a la vista enseguida.</p>
+<p>Cuando empieces a enlazar varias letras sin pararte antes de cada una, prueba con frases cortas:</p>
+<p><em>hola me llamo [tu nombre]</em></p>
+<p><em>estoy aprendiendo braille en el iphone</em></p>
+<p>Es normal seguir pensando en los puntos de algunas letras durante esta etapa. Esa vocecita interna irá desapareciendo con la práctica. Cuando escribas una palabra conocida sin recitarte sus puntos, notarás que algo ya ha cambiado.</p>
+<h2 id="modulo-5-ya-estamos-escribiendo">Módulo 5. Ya estamos escribiendo</h2>
+<p>Hasta aquí hemos trabajado sobre todo con letras y palabras sueltas. Para escribir frases enteras necesitamos tres acciones más que, con el tiempo, saldrán solas: dejar un espacio, borrar y cambiar de línea.</p>
+<h3 id="espacio-y-borrado">Espacio y borrado</h3>
+<p>Un dedo hacia la derecha introduce un espacio. Un dedo hacia la izquierda borra el carácter anterior.</p>
+<p>Si sabes que te equivocaste en la última letra, corrígela ahí mismo y sigue. Volver a escribir la palabra o la frase entera por cada errata solo te hace perder tiempo.</p>
+<p>Prueba con:</p>
+<p><em>mañana voy a casa</em></p>
+<p><em>hoy hace buen tiempo</em></p>
+<h3 id="nueva-linea-y-retorno">Nueva línea y Retorno</h3>
+<p>Dos dedos hacia la derecha crean una línea nueva. En un editor de texto normal esto equivale a saltar a la línea siguiente. En algunas aplicaciones, el control de Retorno puede ejecutar otra acción distinta según el campo en el que te encuentres.</p>
+<p>Tres dedos hacia arriba introducen Retorno. En Mensajes, según el contexto, este gesto puede llegar a enviar el mensaje, así que antes de usarlo comprueba dónde estás y qué acción espera ese campo.</p>
+<p>Escribe ahora tres cosas que hayas hecho hoy, cada una en su propia línea. En cuanto tienes que pensar qué quieres decir mientras los dedos escriben, la práctica empieza a parecerse mucho más al uso cotidiano.</p>
+<h2 id="modulo-6-mayusculas-numeros-signos-y-tablas-braille">Módulo 6. Mayúsculas, números, signos y tablas braille</h2>
+<p>Escribir solo en minúsculas está bien para practicar, pero la vida real trae nombres propios, fechas, cantidades, preguntas, direcciones y signos de todo tipo.</p>
+<h3 id="mayusculas">Mayúsculas</h3>
+<p>En braille español se introduce primero el signo de mayúscula, puntos 4-6, y después la letra correspondiente. Por ejemplo, para escribir Tony introducimos el signo de mayúscula y a continuación la t; las letras siguientes siguen en minúscula con normalidad.</p>
+<h3 id="numeros">Números</h3>
+<p>El signo de número se forma con los puntos 3-4-5-6. Después usamos las combinaciones de las diez primeras letras para representar las cifras:</p>
+<ul>
+<li>a = 1</li>
+<li>b = 2</li>
+<li>c = 3</li>
+<li>d = 4</li>
+<li>e = 5</li>
+<li>f = 6</li>
+<li>g = 7</li>
+<li>h = 8</li>
+<li>i = 9</li>
+<li>j = 0</li>
+</ul>
+<p>Prueba primero con números de una cifra y después con algo que tenga sentido real: una edad, una hora, un día del mes, una cantidad.</p>
+<p><em>25</em></p>
+<p><em>10</em></p>
+<p><em>2026</em></p>
+<p><em>tengo cita el día 25</em></p>
+<p><em>la reunión es a las 10</em></p>
+<p>Con los números baja un poco el ritmo. Una palabra mal escrita suele delatarse por el contexto; un número equivocado puede parecer perfectamente válido y pasar desapercibido.</p>
+<h3 id="caracteres-propios-del-espanol">Caracteres propios del español</h3>
+<ul>
+<li>ñ: puntos 1-2-4-5-6.</li>
+<li>á: puntos 1-2-3-5-6.</li>
+<li>é: puntos 2-3-4-6.</li>
+<li>í: puntos 3-4.</li>
+<li>ó: puntos 3-4-6.</li>
+<li>ú: puntos 2-3-4-5-6.</li>
+<li>ü: puntos 1-2-5-6.</li>
+</ul>
+<p>Practícalos dentro de palabras reales: mañana, canción, teléfono, último, pingüino. Resulta más fácil recordar una combinación cuando queda asociada a una palabra que usas que cuando vive sola en una lista.</p>
+<h3 id="puntuacion-basica">Puntuación básica</h3>
+<ul>
+<li>Punto: punto 3.</li>
+<li>Coma: punto 2.</li>
+<li>Punto y coma: puntos 2-3.</li>
+<li>Dos puntos: puntos 2-5.</li>
+<li>Interrogación: puntos 2-6.</li>
+<li>Exclamación: puntos 2-3-5.</li>
+<li>Guion: puntos 3-6.</li>
+</ul>
+<p>En braille español, la misma combinación de interrogación sirve para abrir y para cerrar; con la exclamación ocurre igual.</p>
+<p><em>Hola, ¿cómo estás?</em></p>
+<p><em>Mañana voy a Madrid.</em></p>
+<p><em>¡Qué bien!</em></p>
+<h3 id="tablas-braille">Tablas braille</h3>
+<p>La tabla determina cómo se interpretan ciertos signos y caracteres. Si trabajas en español, necesitas una tabla apropiada para español. Si un día las letras normales salen perfectas pero algunos signos empiezan a parecer raros, comprueba qué tabla tienes activa antes de tocar ningún otro ajuste.</p>
+<p>Dos dedos hacia arriba pasan a la siguiente tabla braille disponible. Dos dedos hacia abajo fuerzan la traducción inmediata cuando se usa braille contraído.</p>
+<h2 id="modulo-7-escribir-en-aplicaciones-reales">Módulo 7. Escribir en aplicaciones reales</h2>
+<p>Como Entrada braille forma parte de VoiceOver, puedes usarla en casi cualquier lugar donde haya un campo editable: Mensajes, WhatsApp, Mail, Safari, formularios y muchas otras aplicaciones.</p>
+<p>El mecanismo no cambia. Lo que cambia es el lugar en el que estás escribiendo y, con él, algunas acciones del campo.</p>
+<h3 id="mensajes-y-whatsapp">Mensajes y WhatsApp</h3>
+<p>Entra en una conversación donde puedas probar con tranquilidad, localiza el campo de escritura y activa Entrada braille. Redacta una frase normal, por ejemplo:</p>
+<p><em>llego en diez minutos</em></p>
+<p>Antes de enviar, deja que VoiceOver lea el texto y comprueba que dice lo que esperabas. Al principio viene bien separar dos momentos: primero escribes; después decides si envías.</p>
+<h3 id="correo-electronico">Correo electrónico</h3>
+<p>En Mail tienes varias zonas importantes: destinatario, asunto y cuerpo. Crea un correo nuevo sin enviarlo. Escribe un asunto breve y después dos o tres líneas en el cuerpo.</p>
+<p><em>Asunto: reunión de mañana</em></p>
+<p><em>Hola.</em></p>
+<p><em>Te escribo para confirmar que mañana estaré allí a las 10.</em></p>
+<p><em>Un saludo.</em></p>
+<p>Las direcciones de correo y las direcciones web necesitan una revisión más cuidadosa que una frase normal. Una sola letra mal puesta puede convertirlas en otra cosa.</p>
+<h3 id="safari-y-formularios">Safari y formularios</h3>
+<p>En Safari puedes practicar con el cuadro de búsqueda: escribes, revisas y luego ejecutas la búsqueda con el control correspondiente.</p>
+<p>En los formularios, primero identifica el campo y después escribe. Nombre, apellidos, teléfono, correo y contraseña suelen aparecer uno debajo de otro y pueden confundirse fácilmente si vas con prisa.</p>
+<p>Los campos de contraseña merecen una mención aparte. Por seguridad, VoiceOver puede ofrecer menos información de la habitual. Si para un dato concreto te sientes más seguro con otro método, úsalo sin dudarlo.</p>
+<p>Si una aplicación se comporta de forma extraña, prueba la misma escritura en otro campo o en una aplicación sencilla. Esa comparación suele aclarar enseguida si el problema está en Entrada braille o en ese control concreto.</p>
+<h2 id="modulo-8-moverse-y-corregir-dentro-del-texto">Módulo 8. Moverse y corregir dentro del texto</h2>
+<p>Cuando la equivocación está al final, basta con borrar y seguir. El lío empieza cuando terminas un párrafo, lo escuchas entero y descubres que la palabra incorrecta se quedó varias líneas atrás.</p>
+<p>Borrar desde el final hasta encontrarla arrasa demasiado texto por el camino. Aquí necesitamos otra estrategia: movernos hasta el error.</p>
+<h3 id="el-camino-seguro-con-voiceover">El camino seguro con VoiceOver</h3>
+<p>Para empezar usaremos una forma muy fiable: sales temporalmente de Entrada braille, te orientas con VoiceOver y vuelves a entrar cuando llegas al punto donde quieres escribir.</p>
+<p>Con el rotor puedes desplazarte por unidades como caracteres, palabras o líneas. Una estrategia práctica es empezar con unidades grandes e ir cerrando el cerco: localizas la línea, luego la palabra y, si hace falta, el carácter exacto.</p>
+<p><em>Mañana voy al médico.</em></p>
+<p><em>Después pasaré por el supermercado.</em></p>
+<p>Si en realidad querías escribir dentista en lugar de médico, localizas esa palabra, colocas el punto de inserción donde toca y haces la corrección sin tocar el resto del texto.</p>
+<h3 id="tres-practicas-de-edicion">Tres prácticas de edición</h3>
+<p>Escribe esta frase y cambia tarde por noche:</p>
+<p><em>Esta tarde voy a llamar a María para contarle las noticias.</em></p>
+<p>Después escribe:</p>
+<p><em>Mañana tengo una cita importante.</em></p>
+<p>Inserta la palabra muy antes de importante.</p>
+<p>Por último, escribe:</p>
+<p><em>Hoy voy a ir al mercado mercado antes de comer.</em></p>
+<p>Elimina solo una de las dos apariciones de mercado, dejando la frase con sentido.</p>
+<p>Entrada braille permite hacer buena parte de estas operaciones sin salir del entorno braille. Para eso está el Modo de comandos, que veremos a continuación con combinaciones concretas.</p>
+<h2 id="modulo-9-modo-de-comandos-controlar-el-iphone-desde-el-braille">Módulo 9. Modo de comandos: controlar el iPhone desde el braille</h2>
+<p>Hasta aquí hemos usado la Entrada braille sobre todo para escribir. El Modo de comandos permite usar combinaciones braille para navegar, editar y controlar VoiceOver sin abandonar constantemente la disposición de los seis puntos.</p>
+<h3 id="entrar-y-salir-del-modo-de-comandos">Entrar y salir del Modo de comandos</h3>
+<p>Desliza tres dedos hacia la izquierda o hacia la derecha para recorrer los modos disponibles. VoiceOver anunciará el modo correspondiente según la configuración de avisos que tengas activa.</p>
+<p>Antes de introducir una combinación, acostúmbrate a escuchar en qué modo estás. En escritura, los puntos forman caracteres. En Modo de comandos, esos mismos puntos ejecutan acciones.</p>
+<p>Por ejemplo, 1-4 forma la letra c cuando escribes y significa Copiar en Modo de comandos. Si el iPhone hace algo que no esperabas, comprobar el modo es una de las primeras cosas que merece la pena mirar.</p>
+<h3 id="navegacion-basica">Navegación básica</h3>
+<ul>
+<li>Punto 1: ítem anterior.</li>
+<li>Punto 4: ítem siguiente.</li>
+<li>Puntos 1-2-3: primer ítem.</li>
+<li>Puntos 4-5-6: último ítem.</li>
+<li>Puntos 1-2: salir del contexto actual.</li>
+<li>Puntos 2-5: abrir el Centro de control.</li>
+<li>Puntos 4-6: abrir el Centro de notificaciones.</li>
+<li>Puntos 3-6: pulsación simple.</li>
+</ul>
+<p>Pruébalo primero sin editar nada: avanza con el punto 4, retrocede con el punto 1 y usa 3-6 sobre un elemento que se pueda activar.</p>
+<h3 id="rotor-desde-el-modo-de-comandos">Rotor desde el Modo de comandos</h3>
+<ul>
+<li>Puntos 2-3: ajuste anterior del rotor.</li>
+<li>Puntos 5-6: ajuste siguiente del rotor.</li>
+<li>Punto 3: ítem anterior según el ajuste del rotor.</li>
+<li>Punto 6: ítem siguiente según el ajuste del rotor.</li>
+</ul>
+<p>Esto te permite elegir una unidad de navegación, por ejemplo Palabras o Caracteres, y moverte usando directamente las combinaciones braille, sin levantar las manos de la posición.</p>
+<h3 id="seleccionar-y-editar">Seleccionar y editar</h3>
+<ul>
+<li>Puntos 2-3-5: ampliar la selección hacia la izquierda.</li>
+<li>Puntos 2-5-6: ampliar la selección hacia la derecha.</li>
+<li>Puntos 2-3-5-6: seleccionar todo.</li>
+<li>Puntos 1-4: copiar.</li>
+<li>Puntos 1-3-4-6: cortar.</li>
+<li>Puntos 1-2-3-6: pegar.</li>
+<li>Puntos 1-3-5-6: deshacer.</li>
+<li>Puntos 2-3-4-6: rehacer.</li>
+</ul>
+<p>Hay tres combinaciones fáciles de relacionar con las letras que ya conoces: 1-4 es la c de copiar; 1-3-4-6 es la x de cortar; 1-2-3-6 es la v de pegar. Esa relación ayuda bastante a recordarlas.</p>
+<p>Escribe una frase, localiza una palabra o un fragmento, selecciónalo y prueba Copiar, Cortar y Pegar. Después haz un cambio a propósito y usa Deshacer. Rehacer te devuelve la operación si al final la necesitabas.</p>
+<h3 id="personalizar-comandos">Personalizar comandos</h3>
+<p>VoiceOver te deja consultar y personalizar los comandos desde:</p>
+<p><em>Ajustes &gt; Accesibilidad &gt; VoiceOver &gt; Comandos &gt; Entrada braille en pantalla</em></p>
+<p>Para empezar, quédate con los comandos que vayas a utilizar. Si más adelante repites mucho una acción concreta, entonces sí puede merecer la pena personalizar.</p>
+<h2 id="modulo-10-ganar-velocidad-sin-perder-precision">Módulo 10. Ganar velocidad sin perder precisión</h2>
+<p>La velocidad que interesa no es mover los dedos a toda prisa. Es escribir con menos pausas, menos movimientos innecesarios y menos correcciones después.</p>
+<p>El cambio se nota cuando dejas de recitar mentalmente cada combinación. Al principio piensas “m: 1-3-4”. Más adelante escribes la m sin hacer esa traducción por dentro. No hay un truco especial: aparece con la repetición.</p>
+<p>Practica con palabras que formen parte de tu día a día: hola, gracias, mañana, mensaje, correo, iPhone, VoiceOver, WhatsApp. Poco a poco los dedos empiezan a reconocer secuencias y cada letra deja de sentirse como una operación independiente.</p>
+<h3 id="buscar-ritmo">Buscar ritmo</h3>
+<p>Escribe una frase conocida una vez, con toda la calma que necesites, y repítela después intentando mantener un movimiento continuo:</p>
+<p><em>Mañana te llamo cuando llegue a casa.</em></p>
+<p>No intentes acelerar palabra por palabra. Busca un ritmo regular. Suele funcionar mejor escribir un poco más despacio y sin cortes que ir a tirones intentando correr.</p>
+<h3 id="movimiento-y-postura">Movimiento y postura</h3>
+<p>Levanta los dedos solo lo necesario entre una combinación y la siguiente. Cuanto más recorrido hagas, más fácil es que pierdas la posición de referencia.</p>
+<p>Compara durante unos minutos la escritura sobre mesa y con la pantalla alejada. Mira los errores, la estabilidad de los dedos y, sobre todo, la comodidad. Es perfectamente posible que prefieras una postura en casa y otra cuando estás fuera.</p>
+<p>Si después de varios intentos el mismo punto deja de reconocerse bien, revisa la colocación y recalibra. Insisto en una cosa: una errata suelta no es motivo para cambiar la referencia de todos los dedos.</p>
+<h3 id="medir-el-progreso">Medir el progreso</h3>
+<p>Puedes guardar un texto de cuatro o cinco líneas como referencia. Repítelo unos días después y compara dos cosas: el tiempo que tardas y los errores que aparecen.</p>
+<p>Me parece todavía más útil escribir algo que no estés copiando. Durante tres minutos, redacta una nota sobre cualquier tema. Si puedes pensar en el contenido mientras los dedos siguen trabajando, ya estás dejando atrás la fase de ejercicio.</p>
+<p>Cinco o diez minutos bien concentrados pueden rendir más que una sesión larga con las manos cansadas. Aquí no gana quien más aguanta.</p>
+<h2 id="modulo-11-cuando-algo-no-funciona">Módulo 11. Cuando algo no funciona</h2>
+<p>Antes de tocar nada, concreta qué está fallando. “No me funciona el braille” puede significar muchas cosas distintas, y cada una nos lleva por un camino diferente.</p>
+<h3 id="no-puedo-entrar-en-entrada-braille">No puedo entrar en Entrada braille</h3>
+<p>Comprueba que VoiceOver está activo, que estás en un campo editable y que Entrada braille aparece entre las opciones disponibles. Si el gesto directo no responde, prueba a entrar por el rotor. Si por el rotor funciona, ya sabes que la función está disponible y que el problema está en la forma de activarla, no en la función en sí.</p>
+<h3 id="intento-escribir-y-aparecen-acciones">Intento escribir y aparecen acciones</h3>
+<p>Comprueba el modo activo. Si estás en Modo de comandos, las combinaciones ejecutarán acciones en lugar de escribir caracteres.</p>
+<h3 id="las-letras-salen-mal">Las letras salen mal</h3>
+<p>Prueba con caracteres sencillos, por ejemplo a, b y c. Fíjate en si el error afecta siempre al mismo punto. Recoloca las manos y asegúrate de que el teléfono no se ha movido de sitio. Si el patrón se repite, ahí sí tiene sentido recalibrar.</p>
+<h3 id="las-letras-salen-bien-y-los-signos-no">Las letras salen bien y los signos no</h3>
+<p>Comprueba la tabla braille activa. Un cambio de tabla puede pasar completamente desapercibido con letras corrientes y hacerse evidente solo al escribir caracteres especiales.</p>
+<h3 id="falla-una-aplicacion-concreta">Falla una aplicación concreta</h3>
+<p>Prueba en otro campo o en una aplicación sencilla. Si allí funciona, no cambies la configuración general de VoiceOver por si acaso: ya tienes una pista clara de que el problema está en esa aplicación o en ese control.</p>
+<h3 id="me-he-perdido-dentro-del-texto">Me he perdido dentro del texto</h3>
+<p>Si te has perdido, deja de lanzar gestos a ver qué ocurre. Sal de Entrada braille si te ayuda, escucha el contexto con VoiceOver, localiza una frase conocida y recupera desde ahí el punto de inserción.</p>
+<h3 id="reinicio-y-comprobaciones-finales">Reinicio y comprobaciones finales</h3>
+<p>Si el comportamiento raro afecta a varias cosas a la vez, desactivar y volver a activar VoiceOver es una prueba razonable. Si continúa, reinicia el iPhone antes de ponerte a cambiar ajustes que hasta ahora funcionaban bien.</p>
+<p>Si el problema persiste, sigue este orden: campo editable, modo activo, tabla braille, posición de los dedos, prueba en otra aplicación, calibración si el fallo se repite, reinicio de VoiceOver y, como último recurso, reinicio del iPhone.</p>
+<h2 id="modulo-12-del-uso-avanzado-al-uso-profesional">Módulo 12. Del uso avanzado al uso profesional</h2>
+<p>Llega un momento en que dejas de pensar “estoy usando Entrada braille” y te concentras en la tarea: responder un mensaje, tomar una nota, redactar un correo o trabajar con un texto largo.</p>
+<h3 id="textos-largos-y-notas-rapidas">Textos largos y notas rápidas</h3>
+<p>En un texto largo separa dos cosas: una errata evidente y una frase que quizá quieras mejorar. La errata se corrige en el momento; la frase dudosa puede esperar a la revisión. Trabajar por bloques ayuda a conservar el hilo.</p>
+<p>Las notas rápidas funcionan de otra manera. Si estás en una reunión o escuchando una explicación, puede importar más capturar la idea que dejarla perfectamente redactada. Palabras sueltas, abreviaturas propias o frases incompletas sirven perfectamente si después sabes interpretarlas.</p>
+<p>Entrada braille tiene además una ventaja clara frente al dictado en determinados lugares: permite escribir sin hablar en voz alta. En una sala de espera, una reunión o un transporte público, eso puede marcar bastante la diferencia.</p>
+<h3 id="datos-exactos">Datos exactos</h3>
+<p>Con números de teléfono, fechas, cantidades, direcciones de correo, direcciones web, contraseñas y cualquier dato exacto, baja deliberadamente la velocidad. Ahí no buscamos fluidez: buscamos que el dato quede bien.</p>
+<p>Las sustituciones de texto de iOS también pueden ahorrar trabajo con expresiones que repites mucho. Elige abreviaturas poco probables en una conversación normal; así evitas que se expandan cuando no toca.</p>
+<h3 id="escritura-con-una-sola-mano">Escritura con una sola mano</h3>
+<p>La Entrada braille tiene modalidades específicas para escribir con una sola mano. No es ninguna novedad exclusiva de iOS 27: ya estaba disponible en iOS 26 y sigue en iOS 27 sin cambios de fondo.</p>
+<p>Se configura desde:</p>
+<p><em>Ajustes &gt; Accesibilidad &gt; VoiceOver &gt; Braille &gt; Entrada braille en pantalla</em></p>
+<p>La escritura con una mano se usa con el iPhone en orientación vertical y ofrece tres estilos.</p>
+<h4 id="mano-derecha-o-mano-izquierda">Mano derecha o mano izquierda</h4>
+<p>La celda se construye por columnas: 1-4, 2-5 y 3-6. Vas introduciendo esas columnas una tras otra. Si una columna tiene que quedar vacía, deslizas hacia la derecha para pasarla de largo, y cuando la celda está completa, haces un doble toque para confirmarla. Mano derecha viene seleccionada por defecto.</p>
+<p>Empieza con letras muy conocidas, luego palabras cortas, espacio y borrado, y por último frases. Este método tiene su propia memoria muscular y pide práctica aparte; no esperes dominarlo el primer día solo porque ya sabías escribir con las dos manos.</p>
+<h4 id="pizarra-y-punzon">Pizarra y punzón</h4>
+<p>En este estilo, los puntos 1, 2 y 3 quedan a la derecha y los puntos 4, 5 y 6 a la izquierda. La disposición reproduce la lógica de una pizarra braille tradicional, para quien ya venga de ese mundo.</p>
+<h4 id="pizarra-y-punzon-invertidos">Pizarra y punzón invertidos</h4>
+<p>Aquí la distribución se invierte: los puntos 1, 2 y 3 quedan a la izquierda y los puntos 4, 5 y 6 a la derecha.</p>
+<p>La modalidad de una mano puede servirte siempre, solo durante una temporada, en una postura concreta o porque sencillamente te resulte más cómoda. Es una posibilidad más; úsala si te resuelve algo.</p>
+<h3 id="entrada-braille-pantalla-braille-y-acceso-braille">Entrada braille, pantalla braille y Acceso Braille</h3>
+<p>Entrada braille en pantalla usa la superficie táctil del iPhone para escribir. Una pantalla braille es un dispositivo físico conectado al equipo. Acceso Braille es un entorno diferente, pensado para trabajar con una pantalla braille conectada, y ofrece funciones propias, como el trabajo con notas o archivos braille.</p>
+<p>Comparten la palabra braille, pero son herramientas distintas y conviene tenerlas bien separadas.</p>
+<h3 id="privacidad-y-eleccion-de-herramienta">Privacidad y elección de herramienta</h3>
+<p>Puedes escribir en braille sin hablar, pero VoiceOver puede verbalizar lo que introduces. En un lugar público, unos auriculares pueden ser más importantes que cualquier ajuste del teclado.</p>
+<p>Braille, dictado, teclado físico y pantalla braille pueden convivir sin problema. La gracia está en poder escoger la herramienta que mejor encaje con lo que estás haciendo.</p>
+<h2 id="modulo-13-practica-final-ahora-toca-hacerlo-todo-junto">Módulo 13. Práctica final: ahora toca hacerlo todo junto</h2>
+<p>Ya hemos practicado las piezas por separado: escribir, dejar espacios, borrar, usar números y signos, movernos por un texto, corregir algo que quedó atrás, cambiar de aplicación y recuperar el control cuando algo se tuerce. Ahora toca juntarlo todo en una sola práctica.</p>
+<p>Escribe cinco o seis líneas sobre algo cercano: lo que has hecho hoy, lo que vas a hacer mañana, una llamada pendiente o cualquier asunto que no tengas que inventarte. Incluye al menos un nombre propio, alguna palabra acentuada, un número y dos párrafos.</p>
+<p>Escribe primero el texto completo de un tirón. Corrige las equivocaciones evidentes sobre la marcha y deja los cambios de estilo para después.</p>
+<p>Cuando termines, vuelve al principio y haz tres cambios: sustituye una palabra, añade otra en un punto intermedio y elimina algo de la última parte. La idea es volver sobre un texto ya escrito sin tener que rehacerlo entero.</p>
+<p>Introduce a propósito una pequeña errata cerca del final, escribe unas palabras más y luego regresa a buscarla. Queremos comprobar que sabes corregir un error que ya no está pegado al punto de inserción.</p>
+<p>Añade una frase con una fecha, una hora o una cantidad, y revísala con especial cuidado, carácter a carácter.</p>
+<p><em>La cita es el día 25 a las 10.</em></p>
+<p>Selecciona una frase, cópiala y pégala al final. Después corta otro fragmento y colócalo en otro sitio. Usa Deshacer al menos una vez, para comprobar que sabes recuperar un cambio cuando hace falta.</p>
+<p>Cambia de aplicación: redacta un mensaje que podrías enviar y después un correo de varios párrafos, sin llegar a enviarlo. Cuando estés en el segundo párrafo, vuelve al primero y modifica algo.</p>
+<p>Escribe también una dirección de correo y un número de teléfono que conozcas. Revísalos carácter a carácter. En un dato exacto, cada carácter cuenta.</p>
+<p>Por último, muévete por el texto usando distintas unidades, cambia de línea, de palabra y de carácter, y vuelve al final. Si pierdes la posición, vuelve a localizarte y continúa desde ahí.</p>
+<p>Después de este módulo, la prueba que más vale es utilizar Entrada braille para algo que tengas que hacer de verdad: un mensaje, una nota, un correo. Ahí notarás enseguida qué partes ya salen solas y cuáles todavía necesitan práctica.</p>
+<h2 id="modulo-14-cerrar-el-curso-sin-cerrar-el-aprendizaje">Módulo 14. Cerrar el curso sin cerrar el aprendizaje</h2>
+<p>Podría seguir añadiendo funciones durante muchas páginas. Siempre habrá otro ajuste o algún comando que se nos quede fuera. Pero llega un punto en que seguir acumulando información sirve menos que empezar a usar con soltura lo que ya tenemos.</p>
+<p>No todas las partes de Entrada braille se dominan al mismo ritmo. Quizá escribas palabras con soltura y todavía dudes con los números, o manejes bien los signos pero te cueste corregir algo varias líneas atrás. Dedica la práctica precisamente a lo que todavía te hace parar.</p>
+<p>Una rutina pequeña suele bastar: un mensaje, una lista, unas líneas de texto, una búsqueda o la respuesta a un correo. Cuando la práctica entra en la vida diaria, deja de parecer una tarea aparte.</p>
+<p>Con el tiempo cada persona encuentra su manera de trabajar. Habrá quien quiera mucha respuesta de VoiceOver y quien prefiera menos interrupciones. Unos usarán mucho el Modo de comandos y otros volverán con frecuencia a la navegación habitual de VoiceOver. Mientras tengas el control, no hay una única fórmula.</p>
+<p>Las futuras versiones de iOS traerán cambios. No merece la pena aprender una función solo porque sea nueva; merece la pena cuando te resuelve algo que haces habitualmente.</p>
+<p>Hay una habilidad que yo pondría por encima de memorizar cualquier gesto: saber volver a terreno conocido. Si cambiaste de modo por error, regresa. Si perdiste la posición, oriéntate. Si una aplicación se comporta de forma extraña, prueba en otro campo. Si un signo sale raro, comprueba la tabla.</p>
+<p>Con experiencia seguimos equivocándonos. La diferencia es que cada vez sabemos mejor cómo arreglarlo y continuar sin perder el hilo.</p>
+<p>Al principio pensamos en puntos. Después empezamos a pensar en palabras. Y al final la atención vuelve a donde debía estar desde el principio: en lo que queremos escribir.</p>
+<p>Los dos anexos que vienen a continuación están para consultar cuando haga falta, no para estudiarlos de memoria.</p>
+<h2 id="anexo-a-referencia-rapida">Anexo A. Referencia rápida</h2>
+<p>Este anexo sirve para consultar rápidamente una ruta, un gesto o una combinación. Las explicaciones y prácticas completas están en los módulos correspondientes.</p>
+<h3 id="configuracion">Configuración</h3>
+<p><em>Ajustes &gt; Accesibilidad &gt; VoiceOver &gt; Braille &gt; Entrada braille en pantalla</em></p>
+<p>Desde ahí se configuran los gestos de activación, el inicio automático al editar, la permanencia de Entrada braille hasta cerrarla, la posición de los puntos, la respuesta durante la escritura, los avisos de modo, el modo de una mano y las tablas braille.</p>
+<h3 id="activar-entrada-braille">Activar Entrada braille</h3>
+<ul>
+<li>Mediante el rotor: en un campo de texto, seleccionar Entrada braille en pantalla.</li>
+<li>Si no aparece en el rotor: Ajustes &gt; Accesibilidad &gt; VoiceOver &gt; Rotor &gt; Ítems del rotor &gt; Entrada braille en pantalla.</li>
+<li>Mediante el gesto directo, si está habilitado: colocar un dedo de cada mano en los bordes superior e inferior de la pantalla y hacer un doble toque.</li>
+</ul>
+<h3 id="distribucion-de-seis-puntos">Distribución de seis puntos</h3>
+<ul>
+<li>Mano izquierda: índice, punto 1; corazón, punto 2; anular, punto 3.</li>
+<li>Mano derecha: índice, punto 4; corazón, punto 5; anular, punto 6.</li>
+</ul>
+<h3 id="gestos-principales">Gestos principales</h3>
+<ul>
+<li>Un dedo hacia la derecha: espacio.</li>
+<li>Un dedo hacia la izquierda: borrar el carácter anterior.</li>
+<li>Dos dedos hacia la derecha: nueva línea.</li>
+<li>Un dedo hacia arriba o hacia abajo: recorrer sugerencias ortográficas.</li>
+<li>Tres dedos hacia arriba: Retorno; en Mensajes, según el contexto, también puede enviar.</li>
+<li>Tres dedos hacia la izquierda o hacia la derecha: recorrer los modos disponibles, entre ellos escritura y Modo de comandos.</li>
+<li>Dos dedos hacia arriba: siguiente tabla braille.</li>
+<li>Dos dedos hacia abajo: traducir inmediatamente cuando se utiliza braille contraído.</li>
+</ul>
+<h3 id="salir-de-entrada-braille-2">Salir de Entrada braille</h3>
+<ul>
+<li>Deslizar dos dedos en direcciones opuestas.</li>
+<li>Utilizar el barrido de dos dedos en forma de zeta, el gesto habitual de VoiceOver para retroceder.</li>
+</ul>
+<h3 id="calibracion">Calibración</h3>
+<p>En iPhone: toca y levanta simultáneamente los tres dedos de la mano derecha para fijar los puntos 4, 5 y 6; inmediatamente después haz lo mismo con los tres dedos de la izquierda para fijar los puntos 1, 2 y 3.</p>
+<p>Una errata aislada no es motivo para recalibrar. Recalibra cuando el fallo de posición se repita de forma estable.</p>
+<h3 id="modo-de-comandos">Modo de comandos</h3>
+<p>Para entrar o salir: tres dedos hacia la izquierda o hacia la derecha hasta escuchar el modo correspondiente.</p>
+<ul>
+<li>Punto 1: ítem anterior.</li>
+<li>Punto 4: ítem siguiente.</li>
+<li>Puntos 1-2-3: primer ítem.</li>
+<li>Puntos 4-5-6: último ítem.</li>
+<li>Puntos 1-2: salir del contexto actual.</li>
+<li>Puntos 2-5: Centro de control.</li>
+<li>Puntos 4-6: Centro de notificaciones.</li>
+<li>Puntos 3-6: pulsación simple.</li>
+<li>Puntos 2-3: ajuste anterior del rotor.</li>
+<li>Puntos 5-6: ajuste siguiente del rotor.</li>
+<li>Punto 3: ítem anterior según el rotor.</li>
+<li>Punto 6: ítem siguiente según el rotor.</li>
+<li>Puntos 2-3-5-6: seleccionar todo.</li>
+<li>Puntos 2-3-5: seleccionar hacia la izquierda.</li>
+<li>Puntos 2-5-6: seleccionar hacia la derecha.</li>
+<li>Puntos 1-3-4-6: cortar.</li>
+<li>Puntos 1-4: copiar.</li>
+<li>Puntos 1-2-3-6: pegar.</li>
+<li>Puntos 1-3-5-6: deshacer.</li>
+<li>Puntos 2-3-4-6: rehacer.</li>
+</ul>
+<h3 id="personalizar-comandos-2">Personalizar comandos</h3>
+<p><em>Ajustes &gt; Accesibilidad &gt; VoiceOver &gt; Comandos &gt; Entrada braille en pantalla</em></p>
+<h3 id="mayusculas-numeros-y-caracteres-espanoles">Mayúsculas, números y caracteres españoles</h3>
+<ul>
+<li>Mayúscula: puntos 4-6 antes de la letra.</li>
+<li>Signo de número: puntos 3-4-5-6.</li>
+<li>ñ: 1-2-4-5-6.</li>
+<li>á: 1-2-3-5-6.</li>
+<li>é: 2-3-4-6.</li>
+<li>í: 3-4.</li>
+<li>ó: 3-4-6.</li>
+<li>ú: 2-3-4-5-6.</li>
+<li>ü: 1-2-5-6.</li>
+</ul>
+<h3 id="numeros-2">Números</h3>
+<ul>
+<li>a = 1</li>
+<li>b = 2</li>
+<li>c = 3</li>
+<li>d = 4</li>
+<li>e = 5</li>
+<li>f = 6</li>
+<li>g = 7</li>
+<li>h = 8</li>
+<li>i = 9</li>
+<li>j = 0</li>
+</ul>
+<h3 id="escritura-con-una-sola-mano-2">Escritura con una sola mano</h3>
+<ul>
+<li>Mano derecha o izquierda: columnas 1-4, 2-5 y 3-6; deslizar a la derecha para una columna vacía y doble toque para confirmar la celda.</li>
+<li>Pizarra y punzón: puntos 1-2-3 a la derecha; 4-5-6 a la izquierda.</li>
+<li>Pizarra y punzón invertidos: puntos 1-2-3 a la izquierda; 4-5-6 a la derecha.</li>
+</ul>
+<h3 id="diagnostico-rapido">Diagnóstico rápido</h3>
+<ul>
+<li>Comprobar que estamos en un campo editable.</li>
+<li>Comprobar el modo activo.</li>
+<li>Comprobar la tabla braille.</li>
+<li>Recolocar los dedos y probar caracteres sencillos.</li>
+<li>Probar en otra aplicación.</li>
+<li>Recalibrar si el fallo de los puntos se repite.</li>
+<li>Reiniciar VoiceOver si es necesario.</li>
+<li>Si el problema continúa de forma general, reiniciar el iPhone.</li>
+</ul>
+<h3 id="tres-conceptos-que-no-son-lo-mismo">Tres conceptos que no son lo mismo</h3>
+<ul>
+<li>Entrada braille en pantalla: utiliza directamente la superficie táctil del iPhone.</li>
+<li>Pantalla braille: dispositivo físico conectado al iPhone.</li>
+<li>Acceso Braille: entorno específico para trabajar con una pantalla braille conectada.</li>
+</ul>
+<h2 id="anexo-b-ios-26-e-ios-27-que-cambia-realmente">Anexo B. iOS 26 e iOS 27: qué cambia realmente</h2>
+<p>Este anexo está para resolver una duda muy concreta: qué cambia al pasar de iOS 26 a iOS 27 y qué se mantiene igual, sin obligarte a repasar todo el curso.</p>
+<p>Entre iOS 26 e iOS 27, Entrada braille conserva en lo esencial la misma forma de trabajo. Si ya la usabas en iOS 26, en iOS 27 encontrarás el mismo planteamiento general: escritura mediante puntos sobre la pantalla, posiciones sobre mesa y con la pantalla alejada, tablas braille, calibración, gestos de edición, Modo de comandos y modalidades para una sola mano.</p>
+<h3 id="lo-que-ya-existia-en-ios-26">Lo que ya existía en iOS 26</h3>
+<ul>
+<li>Entrada braille desde VoiceOver.</li>
+<li>Acceso mediante el rotor.</li>
+<li>Gestos de activación directa.</li>
+<li>Escritura sobre mesa y con la pantalla alejada.</li>
+<li>Braille de seis y ocho puntos según la configuración utilizada.</li>
+<li>Selección y cambio de tablas braille.</li>
+<li>Calibración de los puntos.</li>
+<li>Aprendizaje automático de la posición de los dedos.</li>
+<li>Gestos de espacio, borrado, nueva línea y cambio de tabla.</li>
+<li>Sugerencias ortográficas.</li>
+<li>Modo de comandos.</li>
+<li>Comandos de navegación y edición.</li>
+<li>Modalidades de escritura con una sola mano.</li>
+</ul>
+<p>Por eso no vamos a presentar ninguna de estas posibilidades como una novedad propia de iOS 27.</p>
+<h3 id="que-ocurre-en-ios-27">Qué ocurre en iOS 27</h3>
+<p>iOS 27 mantiene la misma base de trabajo. Si aprendiste a usar Entrada braille en iOS 26, conservas la posición de los puntos, la forma de escribir, los gestos principales y la lógica del Modo de comandos.</p>
+<p>El curso toma iOS 27 como referencia para los nombres, las rutas y el funcionamiento actual. Cuando iOS 26 funciona igual, lo explico una sola vez.</p>
+<h3 id="acceso-braille">Acceso Braille</h3>
+<p>Entrada braille en pantalla y Acceso Braille son funciones diferentes, aunque el nombre pueda liarte. Entrada braille usa directamente la pantalla táctil del iPhone. Acceso Braille está pensado para trabajar con una pantalla braille física conectada, y ofrece un entorno específico con funciones propias.</p>
+<p>Acceso Braille llegó con la generación de iOS 26 y continúa en las versiones posteriores. No sustituye a Entrada braille en pantalla ni hace falta para seguir este curso.</p>
+<h3 id="si-tienes-ios-26">Si tienes iOS 26</h3>
+<p>Puedes seguir el curso con normalidad. Las letras, los gestos básicos, las posiciones, la calibración, el Modo de comandos y la escritura con una mano mantienen la misma base. Solo presta atención cuando se indique de forma expresa una diferencia de versión.</p>
+<h3 id="si-tienes-ios-27">Si tienes iOS 27</h3>
+<p>Sigue las instrucciones tal como aparecen. Si vienes de iOS 26, no necesitas rehacer el aprendizaje. Después de actualizar, prueba lo que usas habitualmente: entrar en Entrada braille, escribir unas palabras, comprobar espacio y borrado, cambiar de modo y revisar que tus tablas siguen como esperabas.</p>
+<h3 id="cuando-llegue-una-version-posterior">Cuando llegue una versión posterior</h3>
+<p>Cuando llegue otra versión, habrá que revisar solo lo que cambie: rutas, nombres de opciones, gestos que aparezcan o desaparezcan y funciones que modifiquen la forma de usar Entrada braille. Lo demás podrá seguir exactamente igual.</p>
+<p>En resumen: si ya usabas Entrada braille en iOS 26 y pasas a iOS 27, conservas lo aprendido. No aparece un sistema nuevo que te obligue a empezar otra vez desde cero.</p>
+</main>
+<footer>
+<p>Curso creado por Tony Acosta para TifloAcosta.</p><p>23 de septiembre de 2026</p>
+</footer>
+</body>
+</html>

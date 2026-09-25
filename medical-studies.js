@@ -21,8 +21,8 @@
       category: 'iPhone',
       title: 'Curso completo de Entrada braille en pantalla en iPhone',
       searchText: 'Curso práctico de Entrada braille en pantalla con VoiceOver, desde cero hasta un uso avanzado y profesional. Referencia principal iOS 27 con indicaciones útiles para iOS 26.',
-      url: 'https://drive.google.com/file/d/1wfRfY4IumYSh7At5iaoizBZTSoQhKhdc/view?usp=drivesdk',
-      openUrl: 'https://drive.google.com/file/d/1wfRfY4IumYSh7At5iaoizBZTSoQhKhdc/view?usp=drivesdk',
+      url: 'https://tifloacosta.com/docs/es/reader-1wfRfY4IumYSh7At5iaoizBZTSoQhKhdc.html',
+      openUrl: 'https://tifloacosta.com/docs/es/reader-1wfRfY4IumYSh7At5iaoizBZTSoQhKhdc.html',
       new: true,
       mobile: true
     },
@@ -32,8 +32,8 @@
       category: 'iPhone',
       title: 'Complete Course on Braille Screen Input on iPhone',
       searchText: 'Practical Braille Screen Input course with VoiceOver, from zero to advanced and professional use. Primarily based on iOS 27 with useful notes for iOS 26.',
-      url: 'https://drive.google.com/file/d/1C317Eva0eE8ekQ9HqmXIvzY1-Zxty1nC/view?usp=drivesdk',
-      openUrl: 'https://drive.google.com/file/d/1C317Eva0eE8ekQ9HqmXIvzY1-Zxty1nC/view?usp=drivesdk',
+      url: 'https://tifloacosta.com/docs/en/reader-1C317Eva0eE8ekQ9HqmXIvzY1-Zxty1nC.html',
+      openUrl: 'https://tifloacosta.com/docs/en/reader-1C317Eva0eE8ekQ9HqmXIvzY1-Zxty1nC.html',
       new: true,
       mobile: true
     },
@@ -43,7 +43,7 @@
       category: 'Estudios',
       title: '¿Y ahora cómo voy a hacer mi vida?',
       searchText: 'Rehabilitación y autonomía después de perder la vista. Un estudio sobre cómo se reconstruye la vida, la independencia y la capacidad de decidir después de una pérdida visual.',
-      url: 'https://drive.google.com/file/d/1ctEt4f5dq1Q5ITwj2VpBGgkBVAdVD4SR/view?usp=drivesdk',
+      url: 'https://tifloacosta.com/docs/es/reader-1ctEt4f5dq1Q5ITwj2VpBGgkBVAdVD4SR.html',
       openUrl: 'https://tifloacosta.com/docs/es/rehabilitacion-autonomia-despues-perder-vista.html',
       new: true,
       mobile: true
@@ -54,7 +54,7 @@
       category: 'Research and Studies',
       title: 'How Am I Supposed to Live My Life Now?',
       searchText: 'Rehabilitation and independence after sight loss. A study about rebuilding everyday life, independence and the ability to make your own decisions after losing vision.',
-      url: 'https://drive.google.com/file/d/1Pla9qsRkSSMoAlnfixE8nA7J5Um6mCQS/view?usp=drivesdk',
+      url: 'https://tifloacosta.com/docs/en/reader-1Pla9qsRkSSMoAlnfixE8nA7J5Um6mCQS.html',
       openUrl: 'https://tifloacosta.com/docs/en/rehabilitation-independence-after-sight-loss.html',
       new: true,
       mobile: true
@@ -65,8 +65,8 @@
       category: 'Estudios médicos',
       title: 'Cuando el termómetro se pone chulo',
       searchText: 'Lo que el calor hace de verdad en nuestro cuerpo, para bien y para mal. A mí el calor no me gusta. Nada.',
-      url: 'https://drive.google.com/file/d/1_VyVgtFln1tSznf9ct3990CGZ_i4wOO1/view?usp=drivesdk',
-      openUrl: 'https://drive.google.com/file/d/1_VyVgtFln1tSznf9ct3990CGZ_i4wOO1/view?usp=drivesdk',
+      url: 'https://tifloacosta.com/docs/es/reader-1_VyVgtFln1tSznf9ct3990CGZ_i4wOO1.html',
+      openUrl: 'https://tifloacosta.com/docs/es/reader-1_VyVgtFln1tSznf9ct3990CGZ_i4wOO1.html',
       new: true
     },
     {
@@ -75,8 +75,8 @@
       category: 'Medical Studies',
       title: 'When the Thermometer Gets Cocky',
       searchText: 'What heat really does to our bodies, for better and for worse. I do not like the heat at all.',
-      url: 'https://drive.google.com/file/d/1yEGRwTEzGjgEzmYtP2wnlnaACFFbdho6/view?usp=drivesdk',
-      openUrl: 'https://drive.google.com/file/d/1yEGRwTEzGjgEzmYtP2wnlnaACFFbdho6/view?usp=drivesdk',
+      url: 'https://tifloacosta.com/docs/en/reader-1yEGRwTEzGjgEzmYtP2wnlnaACFFbdho6.html',
+      openUrl: 'https://tifloacosta.com/docs/en/reader-1yEGRwTEzGjgEzmYtP2wnlnaACFFbdho6.html',
       new: true
     }
   ];
@@ -123,8 +123,8 @@
     lang: 'es',
     category: 'RSS y fuentes',
     title,
-    url: `https://drive.google.com/file/d/${driveId}/view?usp=drivesdk`,
-    openUrl: `https://drive.google.com/file/d/${driveId}/view?usp=drivesdk`,
+    url: `https://tifloacosta.com/docs/es/reader-${driveId}.html`,
+    openUrl: `https://tifloacosta.com/docs/es/reader-${driveId}.html`,
     new: false
   }));
 

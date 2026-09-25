@@ -1,7 +1,6 @@
 import { normalizeNotificationDestination } from '../core/notification-destination.mjs';
 
 export const NOTIFICATION_CONSENT_KEY = 'tiflo-mobile-notifications-opt-in-v1';
-const VERSION_RE = /^\d+\.\d+\.\d+$/;
 
 function createConsentState(storage) {
   let cached = null;
@@ -29,16 +28,10 @@ function createConsentState(storage) {
   return { read, grant };
 }
 
-function normalizeVersion(value) {
-  const clean = typeof value === 'string' ? value.trim() : '';
-  return VERSION_RE.test(clean) ? clean : '';
-}
-
-export function createOneSignalNotifications({ sdk, appId, appVersion = '', onDestination = () => {}, storage = null } = {}) {
+export function createOneSignalNotifications({ sdk, appId, onDestination = () => {}, storage = null } = {}) {
   let started = false;
   let failed = false;
   let startPromise = null;
-  let currentAppVersion = normalizeVersion(appVersion);
   const consent = createConsentState(storage);
 
   function pushSubscription() {
@@ -82,18 +75,6 @@ export function createOneSignalNotifications({ sdk, appId, appVersion = '', onDe
     return (await sdk.Notifications.canRequestPermission()) ? 'not-requested' : 'denied';
   }
 
-  async function tagVersion(version) {
-    const clean = normalizeVersion(version);
-    if (!clean || !started || failed) return false;
-    try {
-      await sdk.User?.addTag?.('tiflo_version', clean);
-      currentAppVersion = clean;
-      return true;
-    } catch {
-      return false;
-    }
-  }
-
   function start() {
     if (startPromise) return startPromise;
     startPromise = (async () => {
@@ -123,7 +104,6 @@ export function createOneSignalNotifications({ sdk, appId, appVersion = '', onDe
       } catch {
         // The tag is a secondary segmentation aid. Platform targeting remains authoritative.
       }
-      if (currentAppVersion) await tagVersion(currentAppVersion);
       return true;
     })();
     return startPromise;
@@ -132,14 +112,6 @@ export function createOneSignalNotifications({ sdk, appId, appVersion = '', onDe
   async function ensureStarted() {
     if (!startPromise) return false;
     return startPromise;
-  }
-
-  async function setAppVersion(value) {
-    const clean = normalizeVersion(value);
-    if (!clean) return false;
-    currentAppVersion = clean;
-    if (!(await ensureStarted()) || failed) return false;
-    return tagVersion(clean);
   }
 
   const adapter = {
@@ -179,5 +151,5 @@ export function createOneSignalNotifications({ sdk, appId, appVersion = '', onDe
     }
   };
 
-  return { start, setAppVersion, adapter };
+  return { start, adapter };
 }

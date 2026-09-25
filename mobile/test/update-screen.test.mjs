@@ -11,7 +11,8 @@ test('update screen exposes the existing focus-heading convention', () => {
 });
 
 test('update screen has explicit update and later actions in Spanish', () => {
-  assert.match(source, /data-action/);
+  assert.match(source, /dataset\.action = 'update'/);
+  assert.match(source, /dataset\.action = 'later'/);
   assert.match(source, /Actualizar ahora/);
   assert.match(source, /Más tarde/);
 });

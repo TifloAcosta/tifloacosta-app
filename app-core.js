@@ -5,22 +5,6 @@
 }(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   'use strict';
 
-  const featuredNewsIds = {
-    es: [
-      'es-1wfRfY4IumYSh7At5iaoizBZTSoQhKhdc',
-      'es-13crgHIVB9E0YUYNmF6hlyFgi-ymhwb_V',
-      'es-1uTEYvSDBUxzvxPmLFkQa78VSqJtEHsGI'
-    ],
-    en: [
-      'en-1C317Eva0eE8ekQ9HqmXIvzY1-Zxty1nC',
-      'en-1NhzNbXNly2cv_QB2WQgxjo5Ex0L4HHuB',
-      'en-1ztd-nsQcYPNa3-Ij40CxlNIGkuEPtX-T'
-    ]
-  };
-  const featuredRanks = new Map(
-    Object.values(featuredNewsIds).flatMap(ids => ids.map((id, index) => [id, index]))
-  );
-
   function normalizeSearchText(value) {
     return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
   }
@@ -47,18 +31,15 @@
     return queryWords.length > 0 && queryWords.every(word => textTokens.has(searchToken(word)));
   }
 
-  function compareNewsItems(a, b) {
-    const aRank = featuredRanks.has(a.id) ? featuredRanks.get(a.id) : Number.POSITIVE_INFINITY;
-    const bRank = featuredRanks.has(b.id) ? featuredRanks.get(b.id) : Number.POSITIVE_INFINITY;
-    if (aRank !== bRank) return aRank - bRank;
-    const key = item => [item.title, item.category, item.id].map(normalizeSearchText).join('\u0000');
-    const aKey = key(a);
-    const bKey = key(b);
-    return aKey < bKey ? -1 : aKey > bKey ? 1 : 0;
+  function newsTimestamp(item) {
+    const timestamp = Date.parse(String(item && item.newsDate || ''));
+    return Number.isFinite(timestamp) ? timestamp : 0;
   }
 
-  function getFeaturedNewsIds(lang) {
-    return [...(featuredNewsIds[lang] || [])];
+  function compareNewsItems(a, b) {
+    const byRecency = newsTimestamp(b) - newsTimestamp(a);
+    if (byRecency !== 0) return byRecency;
+    return 0;
   }
 
   function getStorage(target) {
@@ -119,7 +100,7 @@
     return events;
   }
 
-  return { compareNewsItems, detectInstallPlatform, getFeaturedNewsIds, getInstallAnalyticsEvents, getStorage, normalizeSearchText, readStoredJson, readStoredValue, resourceMatches, writeStoredJson, writeStoredValue };
+  return { compareNewsItems, detectInstallPlatform, getInstallAnalyticsEvents, getStorage, normalizeSearchText, readStoredJson, readStoredValue, resourceMatches, writeStoredJson, writeStoredValue };
 }));
 
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {

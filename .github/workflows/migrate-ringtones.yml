@@ -5,6 +5,7 @@ on:
     branches: ["main"]
     paths:
       - "scripts/build-local-ringtones.mjs"
+      - ".github/workflows/migrate-ringtones.yml"
   workflow_dispatch:
 
 permissions:
@@ -37,7 +38,7 @@ jobs:
         run: |
           rm -rf .tone-import
           mkdir -p .tone-import
-          gdown --folder --remaining-ok "https://drive.google.com/drive/folders/1wfOpHewRIXds1MiQNv6TxJWOd8frNu50" -O .tone-import
+          gdown --folder "https://drive.google.com/drive/folders/1wfOpHewRIXds1MiQNv6TxJWOd8frNu50" -O .tone-import
 
       - name: Crear biblioteca local y páginas accesibles
         run: node scripts/build-local-ringtones.mjs

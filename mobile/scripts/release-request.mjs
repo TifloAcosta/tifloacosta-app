@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 
 const VERSION_RE = /^\d+\.\d+\.\d+$/;
-const ALLOWED_TRACKS = new Set(['internal', 'alpha', 'beta', 'production']);
+const ALLOWED_TRACKS = new Set(['alpha', 'beta', 'production']);
 const ALLOWED_STATUSES = new Set(['draft', 'completed']);
 
 function fail(message) {
@@ -14,20 +14,22 @@ function cleanNote(value, language) {
   return note;
 }
 
-export function parseReleaseRequest(value) {
+export function parseReleaseRequest(value = {}) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) fail('expected an object');
 
-  const versionName = typeof value.versionName === 'string' ? value.versionName.trim() : '';
-  const track = typeof value.track === 'string' ? value.track.trim().toLowerCase() : '';
-  const status = typeof value.status === 'string' ? value.status.trim().toLowerCase() : '';
-  const priority = value.priority;
-  const notifyUpdate = value.notifyUpdate;
+  const versionName = String(value.versionName || '').trim();
+  const track = String(value.track || '').trim().toLowerCase();
+  const status = String(value.status || 'draft').trim().toLowerCase();
+  const priority = Number(value.priority ?? 0);
+  const notifyUpdate = value.notifyUpdate === true;
 
   if (!VERSION_RE.test(versionName)) fail('versionName must use x.y.z');
   if (!ALLOWED_TRACKS.has(track)) fail('unsupported Google Play track');
   if (!ALLOWED_STATUSES.has(status)) fail('status must be draft or completed');
   if (!Number.isInteger(priority) || priority < 0 || priority > 5) fail('priority must be an integer from 0 to 5');
-  if (typeof notifyUpdate !== 'boolean') fail('notifyUpdate must be true or false');
+  if (track === 'production' && value.confirmProduction !== true) {
+    fail('production requires confirmProduction=true');
+  }
 
   return {
     versionName,

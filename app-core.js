@@ -39,7 +39,10 @@
   function compareNewsItems(a, b) {
     const byRecency = newsTimestamp(b) - newsTimestamp(a);
     if (byRecency !== 0) return byRecency;
-    return 0;
+    const key = item => [item.title, item.category, item.id].map(normalizeSearchText).join('\u0000');
+    const aKey = key(a);
+    const bKey = key(b);
+    return aKey < bKey ? -1 : aKey > bKey ? 1 : 0;
   }
 
   function getStorage(target) {

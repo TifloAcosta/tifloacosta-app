@@ -21,7 +21,7 @@ export function createUpdateSession({ plugin } = {}) {
   let promptedVersionCode = null;
   let dismissedVersionCode = null;
 
-  async function check({ force = false } = {}) {
+  async function check() {
     try {
       if (!plugin || typeof plugin.check !== 'function') throw new Error('plugin unavailable');
       const info = await plugin.check();
@@ -36,7 +36,7 @@ export function createUpdateSession({ plugin } = {}) {
       const downloaded = info?.downloaded === true;
       const alreadyDismissed = versionCode > 0 && dismissedVersionCode === versionCode;
       const alreadyPrompted = versionCode > 0 && promptedVersionCode === versionCode;
-      const shouldPrompt = !alreadyDismissed && (downloaded || (!alreadyPrompted && (force || true)));
+      const shouldPrompt = !alreadyDismissed && (downloaded || !alreadyPrompted);
 
       if (shouldPrompt && versionCode > 0) promptedVersionCode = versionCode;
       current = {

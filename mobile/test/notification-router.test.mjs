@@ -47,3 +47,15 @@ test('a stale destination whose action cannot open falls back to home', async ()
   ]);
   assert.equal(result, 'home');
 });
+
+test('update destination without an app action preserves the current screen for the update bootstrap', async () => {
+  const calls = [];
+  const route = createNotificationRouter({
+    home: () => calls.push(['home'])
+  });
+
+  const result = await route({ type: 'update', version: '1.3.2' });
+
+  assert.deepEqual(calls, []);
+  assert.equal(result, 'update');
+});

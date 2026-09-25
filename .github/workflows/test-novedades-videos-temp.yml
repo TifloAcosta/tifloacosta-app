@@ -1,0 +1,17 @@
+name: Test Novedades videos temp
+
+on:
+  push:
+    branches:
+      - feat/novedades-videos
+  workflow_dispatch:
+
+jobs:
+  test-featured-news:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node --test test/featured-news.test.mjs

@@ -1,0 +1,20 @@
+name: Test Drive-free resource library
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run Drive-free library test
+        run: node --test test/no-google-drive-library.test.mjs

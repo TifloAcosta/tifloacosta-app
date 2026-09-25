@@ -1,0 +1,43 @@
+name: Finalize Drive migration
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "scripts/finalize-drive-migration.mjs"
+      - ".github/workflows/finalize-drive-migration.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Google Drive downloader
+        run: python -m pip install --disable-pip-version-check "gdown==6.0.0"
+      - name: Migrate resources and tones from Drive
+        run: node scripts/finalize-drive-migration.mjs
+      - name: Regenerate mobile content
+        run: node scripts/build-mobile-content.mjs
+      - name: Run complete test suite
+        run: node --test
+      - name: Remove one-shot migration files
+        run: |
+          rm scripts/finalize-drive-migration.mjs
+          rm .github/workflows/finalize-drive-migration.yml
+      - name: Commit migration
+        run: |
+          git config user.name "TifloAcosta automation"
+          git config user.email "146574974+TifloAcosta@users.noreply.github.com"
+          git add -A
+          git commit -m "feat: host resource library entirely on TifloAcosta"
+          git push origin main

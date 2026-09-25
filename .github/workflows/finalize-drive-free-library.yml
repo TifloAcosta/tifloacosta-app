@@ -28,35 +28,63 @@ jobs:
         shell: python
         run: |
           from pathlib import Path
+          from urllib.parse import urlparse, unquote
           import re
 
           root = Path('.')
 
-          # El recurso ya tiene una página local completa: reutilizarla también para descarga.
-          data = (root/'data.js').read_text(encoding='utf-8')
-          data = data.replace(
-              '"url": "https://tifloacosta.com/docs/es/reader-1FKsaxZ_-NgKsHWWBI_i25X8rEqwQHTgN.html",\n    "openUrl": "https://tifloacosta.com/docs/es/lo-que-no-puede-faltar-en-tu-iphone.html?reader=2"',
-              '"url": "https://tifloacosta.com/docs/es/lo-que-no-puede-faltar-en-tu-iphone.html?reader=2",\n    "openUrl": "https://tifloacosta.com/docs/es/lo-que-no-puede-faltar-en-tu-iphone.html?reader=2"'
-          )
-          (root/'data.js').write_text(data, encoding='utf-8')
+          # Si un recurso conserva una URL genérica inexistente pero tiene una página
+          # local válida en openUrl, usar esa misma página también como URL de descarga.
+          data_path = root/'data.js'
+          data = data_path.read_text(encoding='utf-8')
 
-          # Los tonos están en /media/tones en la raíz del sitio, no dentro de /docs.
-          test = (root/'test/no-google-drive-library.test.mjs').read_text(encoding='utf-8')
-          test = test.replace("new URL('../docs/media/tones/', import.meta.url)", "new URL('../media/tones/', import.meta.url)")
-          (root/'test/no-google-drive-library.test.mjs').write_text(test, encoding='utf-8')
+          def local_file(url):
+              if not url:
+                  return None
+              p = urlparse(url)
+              if p.hostname not in ('tifloacosta.com', 'www.tifloacosta.com'):
+                  return None
+              rel = unquote(p.path.lstrip('/'))
+              return root/rel if rel.startswith('docs/') else None
+
+          def fix_block(match):
+              block = match.group(0)
+              u = re.search(r'"url":\s*"([^"]+)"', block)
+              o = re.search(r'"openUrl":\s*"([^"]+)"', block)
+              if not u or not o:
+                  return block
+              url, open_url = u.group(1), o.group(1)
+              url_file, open_file = local_file(url), local_file(open_url)
+              if url_file and not url_file.exists() and open_file and open_file.exists():
+                  block = block.replace(f'"url": "{url}"', f'"url": "{open_url}"', 1)
+              return block
+
+          data = re.sub(r'\{\n(?:[^{}]|\{[^{}]*\})*?\n  \}', fix_block, data)
+          data_path.write_text(data, encoding='utf-8')
+
+          # Los tonos están en /media/tones en la raíz del sitio.
+          test_path = root/'test/no-google-drive-library.test.mjs'
+          test = test_path.read_text(encoding='utf-8')
+          if "from 'node:url'" not in test:
+              test = test.replace("import vm from 'node:vm';", "import vm from 'node:vm';\nimport { fileURLToPath } from 'node:url';")
+          test = test.replace(
+              "const mediaDir = new URL('../docs/media/tones/', import.meta.url);",
+              "const mediaDir = fileURLToPath(new URL('../media/tones/', import.meta.url));"
+          )
+          test = test.replace(
+              "const mediaDir = new URL('../media/tones/', import.meta.url);",
+              "const mediaDir = fileURLToPath(new URL('../media/tones/', import.meta.url));"
+          )
+          test_path.write_text(test, encoding='utf-8')
 
           app_path = root/'app.js'
           app = app_path.read_text(encoding='utf-8')
-
-          # Eliminar las dos funciones específicas de Google Drive.
           app = re.sub(
               r"\n  function extractDriveFileId\(url\) \{.*?\n  \}\n\n  function driveDownloadUrl\(url\) \{.*?\n  \}\n",
               "\n",
               app,
               flags=re.S
           )
-
-          # La descarga usa ahora directamente el recurso local.
           app = app.replace(
               "const downloadLink=makeLink(labels.download,driveDownloadUrl(item.url));",
               "const downloadLink=makeLink(labels.download,item.url);"
@@ -65,10 +93,8 @@ jobs:
               "if(!extractDriveFileId(item.url)&&localDownloadUrl.origin===location.origin) downloadLink.setAttribute('download','');",
               "if(localDownloadUrl.origin===location.origin) downloadLink.setAttribute('download','');"
           )
-
           if 'driveDownloadUrl' in app or 'extractDriveFileId' in app or 'drive.google.com' in app:
               raise SystemExit('Queda código específico de Google Drive en app.js')
-
           app_path.write_text(app, encoding='utf-8')
 
       - name: Regenerar contenido móvil

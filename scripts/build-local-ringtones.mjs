@@ -65,4 +65,4 @@ function page(lang) {
 await fs.writeFile(path.join(root,'docs','es','tonos.html'), page('es'), 'utf8');
 await fs.writeFile(path.join(root,'docs','en','ringtones.html'), page('en'), 'utf8');
 
-console.log('Colección local preparada: 13 OGG, 30 MP3 y 80 M4R.');
+console.log('Colección local preparada y validada: 13 OGG, 30 MP3 y 80 M4R.');

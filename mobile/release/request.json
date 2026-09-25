@@ -1,0 +1,11 @@
+{
+  "versionName": "1.3.2",
+  "track": "alpha",
+  "status": "draft",
+  "priority": 2,
+  "notifyUpdate": true,
+  "notes": {
+    "es": "Mejoras en Novedades, accesibilidad y preparación de actualizaciones de Android.",
+    "en": "Improvements to What's New, accessibility, and Android update preparation."
+  }
+}

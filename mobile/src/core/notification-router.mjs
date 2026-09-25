@@ -5,6 +5,10 @@ export function createNotificationRouter(actions = {}) {
     const type = destination?.type || 'general';
     const action = actions[type];
 
+    if (type === 'update' && typeof action !== 'function') {
+      return 'update';
+    }
+
     if (type === 'general' || typeof action !== 'function') {
       await actions.home();
       return 'home';

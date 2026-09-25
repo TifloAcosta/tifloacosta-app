@@ -1,0 +1,139 @@
+name: Create TifloAcosta Android release
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: 'Publish the prepared release to the Google Play track declared in request.json'
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      ONESIGNAL_DISABLE_LOCATION: "true"
+      GOOGLE_PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+      ONESIGNAL_REST_API_KEY: ${{ secrets.ONESIGNAL_REST_API_KEY }}
+    steps:
+      - name: Checkout requested ref
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: gradle
+
+      - name: Install mobile dependencies
+        working-directory: mobile
+        run: npm install
+
+      - name: Run repository regression tests
+        run: npm test
+
+      - name: Run mobile tests
+        working-directory: mobile
+        run: npm test
+
+      - name: Build mobile web bundle
+        working-directory: mobile
+        run: npm run build
+
+      - name: Synchronize Android
+        working-directory: mobile
+        run: npx cap sync android
+
+      - name: Require release credentials
+        shell: bash
+        env:
+          ANDROID_KEYSTORE_BASE64_SECRET: ${{ secrets.TIFLOACOSTA_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD_SECRET: ${{ secrets.TIFLOACOSTA_KEYSTORE_PASSWORD }}
+        run: |
+          set -euo pipefail
+          if [ -z "$ANDROID_KEYSTORE_BASE64_SECRET" ] || [ -z "$ANDROID_KEYSTORE_PASSWORD_SECRET" ]; then
+            echo "Android signing credentials are incomplete."
+            exit 1
+          fi
+          if [ -z "${GOOGLE_PLAY_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "GOOGLE_PLAY_SERVICE_ACCOUNT_JSON is not configured."
+            exit 1
+          fi
+          if [ "${{ inputs.publish }}" = "true" ] && [ -z "${ONESIGNAL_REST_API_KEY:-}" ]; then
+            notify="$(node -e "const r=require('./mobile/release/request.json'); process.stdout.write(String(r.notifyUpdate===true))")"
+            if [ "$notify" = "true" ]; then
+              echo "ONESIGNAL_REST_API_KEY is required because this release requests an update notification."
+              exit 1
+            fi
+          fi
+
+      - name: Prepare Android release signing
+        shell: bash
+        env:
+          ANDROID_KEYSTORE_BASE64_SECRET: ${{ secrets.TIFLOACOSTA_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD_SECRET: ${{ secrets.TIFLOACOSTA_KEYSTORE_PASSWORD }}
+        run: |
+          set -euo pipefail
+          keystore_path="$RUNNER_TEMP/tifloacosta-upload.p12"
+          printf '%s' "$ANDROID_KEYSTORE_BASE64_SECRET" | base64 --decode > "$keystore_path"
+          chmod 600 "$keystore_path"
+
+          mapfile -t private_key_aliases < <(
+            keytool -list -v \
+              -J-Duser.language=en -J-Duser.country=US \
+              -storetype PKCS12 \
+              -keystore "$keystore_path" \
+              -storepass "$ANDROID_KEYSTORE_PASSWORD_SECRET" 2>/dev/null |
+            awk -F': ' '
+              /^Alias name: / { alias=$2 }
+              /^Entry type: PrivateKeyEntry/ { print alias }
+            '
+          )
+
+          if [ "${#private_key_aliases[@]}" -ne 1 ]; then
+            echo "Expected exactly one private-key entry in the Android upload keystore."
+            exit 1
+          fi
+
+          {
+            echo "ANDROID_KEYSTORE_PATH=$keystore_path"
+            echo "ANDROID_KEYSTORE_PASSWORD=$ANDROID_KEYSTORE_PASSWORD_SECRET"
+            echo "ANDROID_KEY_ALIAS=${private_key_aliases[0]}"
+            echo "ANDROID_KEY_PASSWORD=$ANDROID_KEYSTORE_PASSWORD_SECRET"
+          } >> "$GITHUB_ENV"
+
+      - name: Prepare Android release without publishing
+        if: ${{ !inputs.publish }}
+        working-directory: mobile
+        run: node scripts/release-android.mjs
+
+      - name: Prepare and publish Android release
+        if: ${{ inputs.publish }}
+        working-directory: mobile
+        run: node scripts/release-android.mjs --publish
+
+      - name: Upload accessible Android release package
+        uses: actions/upload-artifact@v4
+        with:
+          name: tifloacosta-android-release
+          if-no-files-found: error
+          path: |
+            mobile/release/out/*.zip
+            mobile/release/out/*.aab
+            mobile/release/out/*.apk
+            mobile/release/out/*.txt
+            mobile/release/state.next.json

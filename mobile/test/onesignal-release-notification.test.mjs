@@ -5,14 +5,27 @@ import {
   sendUpdateNotification
 } from '../scripts/onesignal-release-notification.mjs';
 
-test('update push targets Android and routes as update', () => {
-  const body = buildUpdateNotification({ versionName: '1.3.2', appId: 'app-id' });
+test('update push targets Android app subscribers and routes as update', () => {
+  const body = buildUpdateNotification({ versionName: '1.3.2', versionCode: 11, appId: 'app-id' });
   assert.equal(body.app_id, 'app-id');
-  assert.equal(body.isAndroid, true);
+  assert.equal(body.target_channel, 'push');
+  assert.deepEqual(body.filters, [
+    { field: 'tag', key: 'tiflo_client', relation: '=', value: 'android_app' }
+  ]);
   assert.equal(body.data.tiflo_type, 'update');
   assert.equal(body.data.tiflo_version, '1.3.2');
+  assert.equal(body.data.tiflo_version_code, 11);
   assert.match(body.headings.es, /Nueva versión/);
   assert.match(body.headings.en, /New version/);
+  assert.equal('included_segments' in body, false);
+  assert.equal('isAndroid' in body, false);
+});
+
+test('update push rejects an invalid Android version code', () => {
+  assert.throws(
+    () => buildUpdateNotification({ versionName: '1.3.2', versionCode: 0, appId: 'app-id' }),
+    /versionCode/
+  );
 });
 
 test('update push uses OneSignal REST auth without leaking the key on failure', async () => {
@@ -27,6 +40,7 @@ test('update push uses OneSignal REST auth without leaking the key on failure', 
       appId: 'app-id',
       apiKey: 'secret-key',
       versionName: '1.3.2',
+      versionCode: 11,
       fetchImpl
     }),
     error => {

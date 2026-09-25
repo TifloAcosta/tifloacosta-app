@@ -17,7 +17,7 @@ const COPY = {
   }
 };
 
-export function renderUpdate({ root, session, lang = 'es', onDismiss = () => {}, onComplete = () => {} } = {}) {
+export function renderUpdate({ root, session, lang = 'es', onStart = () => {}, onDismiss = () => {}, onComplete = () => {} } = {}) {
   const state = session?.state?.() || { mode: 'none', info: null };
   const copy = lang === 'en' ? COPY.en : COPY.es;
   root.replaceChildren();
@@ -42,7 +42,8 @@ export function renderUpdate({ root, session, lang = 'es', onDismiss = () => {},
   updateButton.addEventListener('click', async () => {
     updateButton.disabled = true;
     try {
-      await session.start();
+      const result = await session.start();
+      if (result?.started === true) onStart();
     } finally {
       updateButton.disabled = false;
     }

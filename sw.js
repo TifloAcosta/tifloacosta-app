@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-24-drive-free-library';
+const CACHE = 'tifloacosta-app-v2-25-colors';
 const NAVIGATION_TIMEOUT_MS = 5000;
 const SHELL = [
   './',
@@ -109,6 +109,12 @@ self.addEventListener('fetch', event => {
         })
         .catch(() => caches.match(request))
     );
+    return;
+  }
+
+  if (isAppOrigin && url.pathname.endsWith('/styles.css')) {
+    url.searchParams.set('v', '1.2');
+    event.respondWith(freshScript(url, './styles.css?v=1.2', request));
     return;
   }
 

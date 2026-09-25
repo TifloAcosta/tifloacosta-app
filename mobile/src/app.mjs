@@ -549,6 +549,7 @@ router.start('home');
 void installShareReceiver();
 void loadAppInfo(App).then(info => {
   appInfo = info;
+  void notificationClient.setAppVersion?.(info.version);
   if (!shareMode && router.current()?.name === 'settings') render(router.current());
 });
 

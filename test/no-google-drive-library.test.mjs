@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile, readdir, access } from 'node:fs/promises';
 import path from 'node:path';
 import vm from 'node:vm';
+import { fileURLToPath } from 'node:url';
 
 const root = new URL('../', import.meta.url);
 const DRIVE = /https?:\/\/(?:www\.)?drive\.google\.com\//i;
@@ -48,7 +49,7 @@ test('resource catalog has no Google Drive delivery URLs and every local documen
 });
 
 test('ringtone library is hosted locally and complete', async () => {
-  const mediaDir = new URL('../docs/media/tones/', import.meta.url);
+  const mediaDir = fileURLToPath(new URL('../media/tones/', import.meta.url));
   const files = await walk(mediaDir);
   const counts = files.reduce((acc, file) => {
     const ext = path.extname(file).toLowerCase();

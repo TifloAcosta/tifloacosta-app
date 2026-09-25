@@ -232,21 +232,6 @@
     queueMicrotask(()=>els.results.querySelector('h3')?.focus?.());
   }
 
-  function extractDriveFileId(url) {
-    const value=String(url||'');
-    const pathMatch=value.match(/\/file\/d\/([^/?#]+)/);
-    if(pathMatch) return pathMatch[1];
-    try {
-      const parsed=new URL(value);
-      if(parsed.hostname==='drive.google.com'||parsed.hostname.endsWith('.drive.google.com')) return parsed.searchParams.get('id');
-    } catch(error) {}
-    return null;
-  }
-
-  function driveDownloadUrl(url) {
-    const id=extractDriveFileId(url);
-    return id?`https://drive.google.com/uc?export=download&id=${encodeURIComponent(id)}`:url;
-  }
 
   async function shareResource(item,status) {
     const labels=resourceMenuCopy[lang];
@@ -292,10 +277,10 @@
     const makeButton=label=>{const button=document.createElement('button');button.type='button';button.textContent=label;return button;};
     const makeLink=(label,href,target='_blank')=>{const link=document.createElement('a');link.className='button-link';link.href=href;link.textContent=label;link.target=target;if(target==='_blank')link.rel='noopener noreferrer';return link;};
     const openLink=makeLink(labels.open,item.openUrl||item.url,item.openUrl?'_self':'_blank');
-    const downloadLink=makeLink(labels.download,driveDownloadUrl(item.url));
+    const downloadLink=makeLink(labels.download,item.url);
     try {
       const localDownloadUrl=new URL(item.url,location.href);
-      if(!extractDriveFileId(item.url)&&localDownloadUrl.origin===location.origin) downloadLink.setAttribute('download','');
+      if(localDownloadUrl.origin===location.origin) downloadLink.setAttribute('download','');
     } catch(error) {}
     const shareButton=makeButton(labels.share);
     const favoriteButton=makeButton(favorites.has(item.id)?labels.removeFavorite:labels.addFavorite);

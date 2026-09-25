@@ -43,7 +43,7 @@
       category: 'Estudios',
       title: '¿Y ahora cómo voy a hacer mi vida?',
       searchText: 'Rehabilitación y autonomía después de perder la vista. Un estudio sobre cómo se reconstruye la vida, la independencia y la capacidad de decidir después de una pérdida visual.',
-      url: 'https://tifloacosta.com/docs/es/reader-1ctEt4f5dq1Q5ITwj2VpBGgkBVAdVD4SR.html',
+      url: 'https://tifloacosta.com/docs/es/rehabilitacion-autonomia-despues-perder-vista.html',
       openUrl: 'https://tifloacosta.com/docs/es/rehabilitacion-autonomia-despues-perder-vista.html',
       new: true,
       mobile: true
@@ -54,7 +54,7 @@
       category: 'Research and Studies',
       title: 'How Am I Supposed to Live My Life Now?',
       searchText: 'Rehabilitation and independence after sight loss. A study about rebuilding everyday life, independence and the ability to make your own decisions after losing vision.',
-      url: 'https://tifloacosta.com/docs/en/reader-1Pla9qsRkSSMoAlnfixE8nA7J5Um6mCQS.html',
+      url: 'https://tifloacosta.com/docs/en/rehabilitation-independence-after-sight-loss.html',
       openUrl: 'https://tifloacosta.com/docs/en/rehabilitation-independence-after-sight-loss.html',
       new: true,
       mobile: true

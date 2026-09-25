@@ -2,9 +2,13 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { buildUpdateNotification, sendUpdateNotification } from '../scripts/onesignal-release-notification.mjs';
 
-test('update push targets Android and routes as update', () => {
+test('update push targets Android users who are not already on the new version', () => {
   const body = buildUpdateNotification({ versionName: '1.3.2' });
   assert.equal(body.isAndroid, true);
+  assert.equal(body.target_channel, 'push');
+  assert.deepEqual(body.filters, [
+    { field: 'app_version', relation: '!=', value: '1.3.2' }
+  ]);
   assert.equal(body.data.tiflo_type, 'update');
   assert.equal(body.data.tiflo_version, '1.3.2');
   assert.match(body.headings.es, /Nueva versión/);

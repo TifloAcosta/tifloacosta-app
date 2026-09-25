@@ -4,56 +4,136 @@ on:
   push:
     branches: ["main"]
     paths:
-      - "scripts/build-local-ringtones.mjs"
+      - "scripts/build-local-ringtones-v2.mjs"
       - ".github/workflows/migrate-ringtones.yml"
   workflow_dispatch:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 concurrency:
   group: "migrate-ringtones"
   cancel-in-progress: false
 
 jobs:
-  migrate:
+  nokia:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Instalar descargador
+        run: python -m pip install --disable-pip-version-check gdown
+      - name: Descargar Nokia
+        run: |
+          mkdir -p staging/nokia
+          gdown --folder "https://drive.google.com/drive/folders/1grA0e5j01mpf_Z-Qe4z2hctjGuXEVdiS" -O staging/nokia
+      - name: Guardar lote Nokia
+        uses: actions/upload-artifact@v4
+        with:
+          name: tone-nokia
+          path: staging/nokia
+
+  iphone-main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Instalar descargador
+        run: python -m pip install --disable-pip-version-check gdown
+      - name: Descargar lote principal de iPhone
+        run: |
+          mkdir -p staging/iphone-main
+          gdown --folder "https://drive.google.com/drive/folders/1ZzdAhlJFpltF2VTQPQmzGqvN1xwAgLvu" -O staging/iphone-main || true
+      - name: Guardar lo descargado
+        uses: actions/upload-artifact@v4
+        with:
+          name: tone-iphone-main
+          path: staging/iphone-main
+
+  fallback:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Instalar descargador
+        run: python -m pip install --disable-pip-version-check gdown
+      - name: Descargar tonos de respaldo y colección general
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p staging/fallback
+          cat > /tmp/tones.tsv <<'EOF'
+          1zMJRDZvr6wY_rFY3hgzsucPjodpmXp4x|Roy Etzel - El silencio.m4r
+          1z06Dy_LvFLnHGb0S2zps1K9cwXeHcisD|Roy Etzel - Lili Marleen.m4r
+          1oXXyqFXsGkDh1GQT_UPZJfdUyCTjcndB|Russ Conway - Ruleta.m4r
+          1pCxw2-fAV85we5rCuOEyPgROMdSdv4_Z|Santo y Johnny Farina - Venus.m4r
+          1A-ba7MnIcMdeNdnjEmIZ2EnIkUW_FooW|Suite for strings in d minor- ii. gigue.m4r
+          1bXWus_I3mROL59yE-YJY0PYzceJ2E8Gh|The - Benny hill show.m4r
+          1nNZ8VRQq7KjEaYyVSwOTgCnEKsHwc4az|The Midland Big Band - Eso es el amor.m4r
+          1i9xPdBwIK8uwlJnCn8OQM2ARuWQyaH4c|The Shadows - Man Of Mystery.m4r
+          1Jw5fDNFGJfeA0BzwNysWoBXIb5GdiyIL|ugo Montenegro - El bueno, el malo y el feo.m4r
+          1FfLT6YMVMSOtcn-ahX6osqj6FqvUbkhG|Werner Muller - Mack The Knife (Theme From The Three Penny Opera) (Moritat).m4r
+          1_JWjrdoMhdaiR3KwII6EV2kOTg9hW9go|Avemaria.ogg
+          1oLPzmOuZE2OfzejszrIgSi47AXtNPvxf|Cheerful_Greeting.ogg
+          1z_CrCkLu9jKHo7GSMmQyV5z7W0R8KGPr|Classic bell.ogg
+          1X_rTumEk4CBMlpS65tfwg53vNmXRiJpj|Forest_Day.ogg
+          1q90mvdpu2IszoA918LMEiYFunG-rAZCM|Huawei_Tune_Living.ogg
+          11EF-P9bUUK32vC_D_5dpVD7oO18Gi3O1|Huawei_Tune_Orchestral.ogg
+          1h_80Zih9_aMT0vaakWeksfFQh6j0VEF8|Menuet.ogg
+          1S9PI7hWQaNTzskQwCd98EkVS4G_LFV0X|MiRemix.ogg
+          15a3VSMA3TUh3evaMkJyh8k9qMmDNlmLn|Moto.ogg
+          1OuE6I46vK2LC8Qb_ajbGqEFllHX7FpQf|POCO.ogg
+          1y1Rujq11vMgCpnKdpD8j0tjj-PapPIMG|S_On_time.ogg
+          1XVIBpwWVbD1oOuo4mbu70koQ0AEC4G5Q|Samsung tune.ogg
+          1mNGZpY6kzLSVEGIICV9zRFrGkr_bpt8R|Skyline.ogg
+          EOF
+          while IFS='|' read -r id name; do
+            ok=0
+            for attempt in 1 2 3; do
+              if gdown "$id" -O "staging/fallback/$name"; then ok=1; break; fi
+              sleep 2
+            done
+            if [ "$ok" -ne 1 ]; then
+              echo "No se pudo descargar: $name"
+              exit 1
+            fi
+          done < /tmp/tones.tsv
+      - name: Guardar lote de respaldo
+        uses: actions/upload-artifact@v4
+        with:
+          name: tone-fallback
+          path: staging/fallback
+
+  consolidate:
+    needs: [nokia, iphone-main, fallback]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-
-      - name: Instalar descargador de Drive
-        run: python -m pip install --disable-pip-version-check gdown
-
-      - name: Descargar colección completa de tonos
-        run: |
-          rm -rf .tone-import
-          mkdir -p .tone-import
-          gdown --folder "https://drive.google.com/drive/folders/1wfOpHewRIXds1MiQNv6TxJWOd8frNu50" -O .tone-import
-
-      - name: Crear biblioteca local y páginas accesibles
-        run: node scripts/build-local-ringtones.mjs
-
-      - name: Verificar cantidades y ausencia de Drive en las páginas
+      - name: Recuperar Nokia
+        uses: actions/download-artifact@v4
+        with:
+          name: tone-nokia
+          path: .tone-import/nokia
+      - name: Recuperar iPhone
+        uses: actions/download-artifact@v4
+        with:
+          name: tone-iphone-main
+          path: .tone-import/iphone-main
+      - name: Recuperar respaldo
+        uses: actions/download-artifact@v4
+        with:
+          name: tone-fallback
+          path: .tone-import/fallback
+      - name: Construir colección local
+        run: node scripts/build-local-ringtones-v2.mjs
+      - name: Verificar colección
         run: |
           test "$(find media/tones/general -type f | wc -l)" -eq 13
           test "$(find media/tones/nokia -type f | wc -l)" -eq 30
           test "$(find media/tones/iphone -type f | wc -l)" -eq 80
-          if grep -n "drive.google.com" docs/es/tonos.html docs/en/ringtones.html; then
-            echo "Las páginas de tonos siguen apuntando a Drive"
-            exit 1
-          fi
-
-      - name: Guardar tonos en TifloAcosta
+          ! grep -n "drive.google.com" docs/es/tonos.html docs/en/ringtones.html
+      - name: Guardar colección en TifloAcosta
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

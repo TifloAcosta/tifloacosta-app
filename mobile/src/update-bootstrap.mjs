@@ -26,6 +26,7 @@ function showDialog() {
     root: target,
     session,
     lang: document.documentElement.lang === 'en' ? 'en' : 'es',
+    onStart: closeDialog,
     onDismiss: closeDialog,
     onComplete: closeDialog
   });

@@ -46,9 +46,9 @@ jobs:
           java-version: 21
           cache: gradle
 
-      - name: Install mobile dependencies reproducibly
+      - name: Install mobile dependencies
         working-directory: mobile
-        run: npm ci
+        run: npm install
 
       - name: Run repository regression tests
         run: npm test

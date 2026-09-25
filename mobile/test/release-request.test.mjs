@@ -20,10 +20,31 @@ test('accepts a closed-test release request', () => {
   });
 });
 
-test('rejects malformed version, invalid priority and implicit production', () => {
+test('rejects malformed version and invalid priority', () => {
   assert.throws(
-    () => parseReleaseRequest({ versionName: 'v1', track: 'production', priority: 6 }),
+    () => parseReleaseRequest({
+      versionName: 'v1',
+      track: 'alpha',
+      status: 'draft',
+      priority: 6,
+      notifyUpdate: false,
+      notes: { es: 'Notas.', en: 'Notes.' }
+    }),
     /release request/i
+  );
+});
+
+test('requires an explicit confirmation for production', () => {
+  assert.throws(
+    () => parseReleaseRequest({
+      versionName: '1.3.2',
+      track: 'production',
+      status: 'draft',
+      priority: 2,
+      notifyUpdate: true,
+      notes: { es: 'Notas.', en: 'Notes.' }
+    }),
+    /production/i
   );
 });
 

@@ -10,13 +10,18 @@ await rm(distDir, { recursive: true, force: true });
 await mkdir(distDir, { recursive: true });
 
 const sourceHtml = await readFile(`${srcDir}index.html`, 'utf8');
-const bundledHtml = sourceHtml.replace('./app.mjs', './app.js');
+const bundledHtml = sourceHtml
+  .replace('./app.mjs', './app.js')
+  .replace('./update-bootstrap.mjs', './update-bootstrap.js');
 await writeFile(`${distDir}index.html`, bundledHtml, 'utf8');
 await copyFile(`${srcDir}styles.css`, `${distDir}styles.css`);
 
 await build({
-  entryPoints: [`${srcDir}app.mjs`],
-  outfile: `${distDir}app.js`,
+  entryPoints: {
+    app: `${srcDir}app.mjs`,
+    'update-bootstrap': `${srcDir}update-bootstrap.mjs`
+  },
+  outdir: distDir,
   bundle: true,
   format: 'esm',
   platform: 'browser',

@@ -5,7 +5,7 @@
   "priority": 2,
   "notifyUpdate": true,
   "notes": {
-    "es": "Mejoras de Novedades, integración de vídeos y ajustes de accesibilidad y mantenimiento.",
-    "en": "News improvements, video integration, accessibility refinements, and maintenance updates."
+    "es": "Mejoras de Novedades, integración de vídeos, avisos accesibles de actualización y ajustes de accesibilidad y mantenimiento.",
+    "en": "News improvements, video integration, accessible update prompts, accessibility refinements, and maintenance updates."
   }
 }

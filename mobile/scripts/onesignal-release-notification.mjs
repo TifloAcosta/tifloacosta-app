@@ -8,6 +8,10 @@ export function buildUpdateNotification({ versionName } = {}) {
   const version = cleanVersion(versionName);
   return {
     isAndroid: true,
+    target_channel: 'push',
+    filters: [
+      { field: 'app_version', relation: '!=', value: version }
+    ],
     headings: {
       es: 'Nueva versión de TifloAcosta',
       en: 'New TifloAcosta version'
@@ -30,7 +34,6 @@ export async function sendUpdateNotification({ appId, apiKey, versionName, fetch
 
   const payload = {
     app_id: id,
-    included_segments: ['Subscribed Users'],
     ...buildUpdateNotification({ versionName })
   };
 

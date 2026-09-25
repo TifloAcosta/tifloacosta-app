@@ -9,14 +9,37 @@ import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
 import com.google.android.play.core.appupdate.AppUpdateOptions;
+import com.google.android.play.core.install.InstallState;
+import com.google.android.play.core.install.InstallStateUpdatedListener;
 import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.InstallStatus;
 import com.google.android.play.core.install.model.UpdateAvailability;
 
 @CapacitorPlugin(name = "TifloUpdate")
 public class TifloUpdatePlugin extends Plugin {
+    private AppUpdateManager appUpdateManager;
+    private InstallStateUpdatedListener installStateListener;
+
+    @Override
+    public void load() {
+        appUpdateManager = AppUpdateManagerFactory.create(getContext());
+        installStateListener = state -> notifyListeners("stateChange", installStateToJs(state));
+        appUpdateManager.registerListener(installStateListener);
+    }
+
+    @Override
+    protected void handleOnDestroy() {
+        if (appUpdateManager != null && installStateListener != null) {
+            appUpdateManager.unregisterListener(installStateListener);
+        }
+        super.handleOnDestroy();
+    }
+
     private AppUpdateManager manager() {
-        return AppUpdateManagerFactory.create(getContext());
+        if (appUpdateManager == null) {
+            appUpdateManager = AppUpdateManagerFactory.create(getContext());
+        }
+        return appUpdateManager;
     }
 
     @PluginMethod
@@ -93,6 +116,14 @@ public class TifloUpdatePlugin extends Plugin {
         result.put("flexibleAllowed", info.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE));
         result.put("immediateAllowed", info.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE));
         result.put("installStatus", info.installStatus());
+        return result;
+    }
+
+    private JSObject installStateToJs(InstallState state) {
+        JSObject result = new JSObject();
+        result.put("installStatus", state.installStatus());
+        result.put("bytesDownloaded", state.bytesDownloaded());
+        result.put("totalBytesToDownload", state.totalBytesToDownload());
         return result;
     }
 }

@@ -10,10 +10,15 @@ test('update screen exposes the existing focus-heading convention', () => {
   assert.match(source, /tabIndex = -1/);
 });
 
-test('update screen has explicit update and later actions', () => {
+test('update screen has explicit update and later actions in Spanish', () => {
   assert.match(source, /data-action/);
-  assert.match(source, /update\.now/);
-  assert.match(source, /update\.later/);
+  assert.match(source, /Actualizar ahora/);
+  assert.match(source, /Más tarde/);
+});
+
+test('update screen also contains English labels', () => {
+  assert.match(source, /Update now/);
+  assert.match(source, /Later/);
 });
 
 test('immediate mode omits the later button', () => {

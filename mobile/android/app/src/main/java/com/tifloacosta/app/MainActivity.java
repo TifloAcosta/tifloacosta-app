@@ -10,6 +10,7 @@ public class MainActivity extends BridgeActivity {
         registerPlugin(TifloSavePlugin.class);
         registerPlugin(TifloSharePlugin.class);
         registerPlugin(TifloWebFetchPlugin.class);
+        registerPlugin(TifloUpdatePlugin.class);
         super.onCreate(savedInstanceState);
     }
 }

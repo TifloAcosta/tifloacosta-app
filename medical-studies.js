@@ -24,6 +24,7 @@
       url: 'https://tifloacosta.com/docs/es/reader-1wfRfY4IumYSh7At5iaoizBZTSoQhKhdc.html',
       openUrl: 'https://tifloacosta.com/docs/es/reader-1wfRfY4IumYSh7At5iaoizBZTSoQhKhdc.html',
       new: true,
+      newsDate: '2026-09-23T08:47:29Z',
       mobile: true
     },
     {
@@ -35,6 +36,7 @@
       url: 'https://tifloacosta.com/docs/en/reader-1C317Eva0eE8ekQ9HqmXIvzY1-Zxty1nC.html',
       openUrl: 'https://tifloacosta.com/docs/en/reader-1C317Eva0eE8ekQ9HqmXIvzY1-Zxty1nC.html',
       new: true,
+      newsDate: '2026-09-23T08:47:29Z',
       mobile: true
     },
     {
@@ -46,6 +48,7 @@
       url: 'https://tifloacosta.com/docs/es/rehabilitacion-autonomia-despues-perder-vista.html',
       openUrl: 'https://tifloacosta.com/docs/es/rehabilitacion-autonomia-despues-perder-vista.html',
       new: true,
+      newsDate: '2026-09-24T21:00:44Z',
       mobile: true
     },
     {
@@ -57,6 +60,7 @@
       url: 'https://tifloacosta.com/docs/en/rehabilitation-independence-after-sight-loss.html',
       openUrl: 'https://tifloacosta.com/docs/en/rehabilitation-independence-after-sight-loss.html',
       new: true,
+      newsDate: '2026-09-24T21:00:44Z',
       mobile: true
     },
     {
@@ -67,7 +71,8 @@
       searchText: 'Lo que el calor hace de verdad en nuestro cuerpo, para bien y para mal. A mí el calor no me gusta. Nada.',
       url: 'https://tifloacosta.com/docs/es/reader-1_VyVgtFln1tSznf9ct3990CGZ_i4wOO1.html',
       openUrl: 'https://tifloacosta.com/docs/es/reader-1_VyVgtFln1tSznf9ct3990CGZ_i4wOO1.html',
-      new: true
+      new: true,
+      newsDate: '2026-09-12T11:02:46Z'
     },
     {
       id: 'en-medical-study-heat-2026',
@@ -77,7 +82,8 @@
       searchText: 'What heat really does to our bodies, for better and for worse. I do not like the heat at all.',
       url: 'https://tifloacosta.com/docs/en/reader-1yEGRwTEzGjgEzmYtP2wnlnaACFFbdho6.html',
       openUrl: 'https://tifloacosta.com/docs/en/reader-1yEGRwTEzGjgEzmYtP2wnlnaACFFbdho6.html',
-      new: true
+      new: true,
+      newsDate: '2026-09-12T11:02:46Z'
     }
   ];
 

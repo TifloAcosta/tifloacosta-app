@@ -50,10 +50,8 @@
     article.dataset.tifloNewsKind = 'video';
     const heading = document.createElement('h3');
     const link = document.createElement('a');
-    link.href = item.url;
+    link.href = `videos.html?video=${encodeURIComponent(item.videoId)}`;
     link.textContent = item.title;
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
     heading.append(link);
     const meta = document.createElement('p');
     meta.textContent = item.category;

@@ -5,12 +5,16 @@ import test from 'node:test';
 const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 const repoRead = path => readFile(new URL(`../../${path}`, import.meta.url), 'utf8');
 
-test('Android 1.3.1 release candidate uses version code 10', async () => {
+test('Android keeps 1.3.1 code 10 as the development fallback while allowing release overrides', async () => {
   const gradle = await read('android/app/build.gradle');
-  assert.match(gradle, /versionCode\s+10/);
-  assert.match(gradle, /versionName\s+"1\.3\.1"/);
-  assert.doesNotMatch(gradle, /versionCode\s+9/);
-  assert.doesNotMatch(gradle, /versionName\s+"1\.3\.0"/);
+  assert.match(gradle, /TIFLO_ANDROID_VERSION_NAME/);
+  assert.match(gradle, /TIFLO_ANDROID_VERSION_CODE/);
+  assert.match(gradle, /effectiveVersionName\s*=.*:\s*'1\.3\.1'/);
+  assert.match(gradle, /effectiveVersionCode\s*=.*:\s*10/);
+  assert.match(gradle, /versionCode\s+effectiveVersionCode/);
+  assert.match(gradle, /versionName\s+effectiveVersionName/);
+  assert.doesNotMatch(gradle, /:\s*9\b/);
+  assert.doesNotMatch(gradle, /:\s*'1\.3\.0'/);
 });
 
 test('Android 1.3.1 keeps native Share and bounded web fetch plugins', async () => {

@@ -28,10 +28,11 @@ function createConsentState(storage) {
   return { read, grant };
 }
 
-export function createOneSignalNotifications({ sdk, appId, onDestination = () => {}, storage = null } = {}) {
+export function createOneSignalNotifications({ sdk, appId, appVersion = '', onDestination = () => {}, storage = null } = {}) {
   let started = false;
   let failed = false;
   let startPromise = null;
+  let currentAppVersion = String(appVersion || '').trim();
   const consent = createConsentState(storage);
 
   function pushSubscription() {
@@ -75,6 +76,21 @@ export function createOneSignalNotifications({ sdk, appId, onDestination = () =>
     return (await sdk.Notifications.canRequestPermission()) ? 'not-requested' : 'denied';
   }
 
+  async function tagAudienceMetadata() {
+    try {
+      await sdk.User?.addTag?.('tiflo_client', 'android_app');
+    } catch {
+      // Secondary segmentation aid only.
+    }
+    if (/^\d+\.\d+\.\d+$/.test(currentAppVersion)) {
+      try {
+        await sdk.User?.addTag?.('tiflo_version', currentAppVersion);
+      } catch {
+        // Version targeting is best-effort and must never disable notifications.
+      }
+    }
+  }
+
   function start() {
     if (startPromise) return startPromise;
     startPromise = (async () => {
@@ -99,14 +115,16 @@ export function createOneSignalNotifications({ sdk, appId, onDestination = () =>
         return false;
       }
 
-      try {
-        await sdk.User?.addTag?.('tiflo_client', 'android_app');
-      } catch {
-        // The tag is a secondary segmentation aid. Platform targeting remains authoritative.
-      }
+      await tagAudienceMetadata();
       return true;
     })();
     return startPromise;
+  }
+
+  async function setAppVersion(version) {
+    currentAppVersion = String(version || '').trim();
+    if (started && !failed) await tagAudienceMetadata();
+    return currentAppVersion;
   }
 
   async function ensureStarted() {
@@ -151,5 +169,5 @@ export function createOneSignalNotifications({ sdk, appId, onDestination = () =>
     }
   };
 
-  return { start, adapter };
+  return { start, setAppVersion, adapter };
 }

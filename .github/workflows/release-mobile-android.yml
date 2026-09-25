@@ -8,6 +8,11 @@ on:
         required: true
         default: false
         type: boolean
+  push:
+    branches:
+      - main
+    paths:
+      - 'mobile/release/prepare.once'
 
 permissions:
   contents: read
@@ -73,7 +78,7 @@ jobs:
             echo "GOOGLE_PLAY_SERVICE_ACCOUNT_JSON is not configured."
             exit 1
           fi
-          if [ "${{ inputs.publish }}" = "true" ] && [ -z "${ONESIGNAL_REST_API_KEY:-}" ]; then
+          if [ "${{ github.event_name == 'workflow_dispatch' && inputs.publish }}" = "true" ] && [ -z "${ONESIGNAL_REST_API_KEY:-}" ]; then
             notify="$(node -e "const r=require('./mobile/release/request.json'); process.stdout.write(String(r.notifyUpdate===true))")"
             if [ "$notify" = "true" ]; then
               echo "ONESIGNAL_REST_API_KEY is required because this release requests an update notification."
@@ -117,12 +122,12 @@ jobs:
           } >> "$GITHUB_ENV"
 
       - name: Prepare Android release without publishing
-        if: ${{ !inputs.publish }}
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.publish }}
         working-directory: mobile
         run: node scripts/release-android.mjs
 
       - name: Prepare and publish Android release
-        if: ${{ inputs.publish }}
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.publish }}
         working-directory: mobile
         run: node scripts/release-android.mjs --publish
 

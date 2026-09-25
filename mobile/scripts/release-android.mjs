@@ -26,6 +26,19 @@ function localCode(localState = {}) {
   return Number.isInteger(value) && value >= 0 ? value : 0;
 }
 
+function trackVersionCodes(tracks = []) {
+  const values = [];
+  for (const track of Array.isArray(tracks) ? tracks : []) {
+    for (const release of Array.isArray(track?.releases) ? track.releases : []) {
+      for (const raw of Array.isArray(release?.versionCodes) ? release.versionCodes : []) {
+        const code = Number(raw);
+        if (Number.isInteger(code) && code >= 0) values.push(code);
+      }
+    }
+  }
+  return values;
+}
+
 export async function resolveVersionCode({
   localState = {}, publish = false, env = process.env,
   getAccessToken = createGoogleAccessToken,
@@ -40,7 +53,9 @@ export async function resolveVersionCode({
   const client = makeClient({ packageName: PACKAGE_NAME, accessToken });
   const edit = await client.createEdit();
   const bundles = await client.listBundles(edit.id);
-  const playCodes = bundles.map(bundle => Number(bundle?.versionCode)).filter(Number.isInteger);
+  const tracks = await client.listTracks(edit.id);
+  const bundleCodes = bundles.map(bundle => Number(bundle?.versionCode)).filter(Number.isInteger);
+  const playCodes = [...bundleCodes, ...trackVersionCodes(tracks)];
   return { versionCode: chooseNextVersionCode({ playCodes, localCode: remembered }), source: 'google-play' };
 }
 
@@ -70,7 +85,12 @@ export async function publishRelease({
 
   let notificationSent = false;
   if (request.notifyUpdate) {
-    await sendNotification({ appId: oneSignalAppId, apiKey: oneSignalKey, versionName: request.versionName });
+    await sendNotification({
+      appId: oneSignalAppId,
+      apiKey: oneSignalKey,
+      versionName: request.versionName,
+      versionCode
+    });
     notificationSent = true;
   }
   return { committed: true, notificationSent };

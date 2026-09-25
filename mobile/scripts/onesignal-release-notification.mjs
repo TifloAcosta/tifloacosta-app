@@ -7,15 +7,19 @@ function required(value, name) {
   return clean;
 }
 
-export function buildUpdateNotification({ appId, versionName } = {}) {
+export function buildUpdateNotification({ appId, versionName, versionCode } = {}) {
   const id = required(appId, 'appId');
   const version = required(versionName, 'versionName');
+  const code = Number(versionCode);
   if (!VERSION_RE.test(version)) throw new TypeError('versionName must use x.y.z');
+  if (!Number.isInteger(code) || code < 1) throw new TypeError('versionCode must be a positive integer');
 
   return {
     app_id: id,
-    included_segments: ['Subscribed Users'],
-    isAndroid: true,
+    target_channel: 'push',
+    filters: [
+      { field: 'tag', key: 'tiflo_client', relation: '=', value: 'android_app' }
+    ],
     headings: {
       es: 'Nueva versión de TifloAcosta',
       en: 'New version of TifloAcosta'
@@ -26,15 +30,16 @@ export function buildUpdateNotification({ appId, versionName } = {}) {
     },
     data: {
       tiflo_type: 'update',
-      tiflo_version: version
+      tiflo_version: version,
+      tiflo_version_code: code
     }
   };
 }
 
-export async function sendUpdateNotification({ appId, apiKey, versionName, fetchImpl = globalThis.fetch } = {}) {
+export async function sendUpdateNotification({ appId, apiKey, versionName, versionCode, fetchImpl = globalThis.fetch } = {}) {
   const key = required(apiKey, 'apiKey');
   if (typeof fetchImpl !== 'function') throw new TypeError('fetchImpl must be a function');
-  const body = buildUpdateNotification({ appId, versionName });
+  const body = buildUpdateNotification({ appId, versionName, versionCode });
   const response = await fetchImpl(ONESIGNAL_NOTIFICATIONS_URL, {
     method: 'POST',
     headers: {

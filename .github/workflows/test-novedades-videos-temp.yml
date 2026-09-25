@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -33,3 +35,17 @@ jobs:
             test/mobile-content.test.mjs \
             test/mobile-content-retention.test.mjs \
             test/no-google-drive-library.test.mjs
+      - name: Full suite on feature branch
+        id: feature-full
+        continue-on-error: true
+        run: npm test
+      - name: Full suite on main baseline
+        id: main-full
+        continue-on-error: true
+        run: |
+          git checkout main
+          npm test
+      - name: Report comparison
+        run: |
+          echo "feature=${{ steps.feature-full.outcome }}"
+          echo "main=${{ steps.main-full.outcome }}"

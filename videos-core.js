@@ -125,10 +125,15 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
   ['#back-home', '#back-home-bottom'].forEach(upgradeVideoNavigationLink);
 
   document.addEventListener('DOMContentLoaded', () => {
-    if (document.querySelector('script[data-tiflo-search-accessibility]')) return;
-    const script = document.createElement('script');
-    script.src = new URL('search-accessibility.js?v=1.0', document.baseURI).href;
-    script.dataset.tifloSearchAccessibility = 'true';
-    document.head.append(script);
+    function appendScript(src, marker) {
+      if (document.querySelector(`script[${marker}]`)) return;
+      const script = document.createElement('script');
+      script.src = new URL(src, document.baseURI).href;
+      script.setAttribute(marker, 'true');
+      document.head.append(script);
+    }
+
+    appendScript('search-accessibility.js?v=1.0', 'data-tiflo-search-accessibility');
+    appendScript('video-deeplink.js?v=1.0', 'data-tiflo-video-deeplink');
   }, { once: true });
 }

@@ -26,6 +26,29 @@ test('new resources rotate through the three visible news slots by recency', () 
   assert.ok(resources.some(item => item.id === 'old-third'));
 });
 
+test('videos and resources share the three visible news slots by date', () => {
+  const resources = [
+    { id: 'resource-second', title: 'Resource second', category: 'Tests', new: true, newsDate: '2026-09-24T10:00:00Z' },
+    { id: 'resource-third', title: 'Resource third', category: 'Tests', new: true, newsDate: '2026-09-23T10:00:00Z' },
+    { id: 'resource-old', title: 'Resource old', category: 'Tests', new: true, newsDate: '2026-09-22T10:00:00Z' },
+    { id: 'resource-not-new', title: 'Not a novelty', category: 'Tests', new: false, newsDate: '2026-09-26T10:00:00Z' }
+  ];
+  const videos = [
+    { id: 'video-newest', title: 'Video newest', publishedAt: '2026-09-25T10:00:00Z', url: 'https://www.youtube.com/watch?v=video-newest' },
+    { id: 'video-old', title: 'Video old', publishedAt: '2026-09-21T10:00:00Z', url: 'https://www.youtube.com/watch?v=video-old' }
+  ];
+
+  const selected = core.selectNewsItems(resources, videos, 'Vídeo', 3);
+
+  assert.deepEqual(selected.map(item => item.id), ['youtube-video-newest', 'resource-second', 'resource-third']);
+  assert.equal(selected[0].newsKind, 'video');
+  assert.equal(selected[0].category, 'Vídeo');
+  assert.equal(selected[0].newsDate, '2026-09-25T10:00:00Z');
+  assert.equal(selected[0].url, 'https://www.youtube.com/watch?v=video-newest');
+  assert.ok(resources.some(item => item.id === 'resource-old'));
+  assert.ok(videos.some(item => item.id === 'video-old'));
+});
+
 test('current news uses resource incorporation dates instead of fixed ids', async () => {
   const [catalogSource, supplementalSource] = await Promise.all([
     read('data.js'),

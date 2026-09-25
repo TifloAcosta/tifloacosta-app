@@ -8,6 +8,9 @@ const ROOT = fileURLToPath(new URL('../', import.meta.url));
 const SITE = 'https://tifloacosta.com';
 const DRIVE_RE = /https?:\/\/(?:www\.)?drive\.google\.com\//i;
 const TONES_FOLDER = 'https://drive.google.com/drive/folders/1wfOpHewRIXds1MiQNv6TxJWOd8frNu50';
+const HARRY_ID = '1ObocFW-pPqIgxbMMiUO3BAOO7C5UvESZ';
+const IPHONE_FOLDER_NAME = 'Tonos para el iPhone. (instrumentales. 80 temas)';
+const HARRY_NAME = 'Harry Kalapana - Terang Boelan.m4r';
 
 const p = (...parts) => path.join(ROOT, ...parts);
 
@@ -53,7 +56,7 @@ async function exists(file) {
 }
 
 function downloadDriveFile(id, output) {
-  execFileSync('gdown', [id, '-O', output], { stdio: 'inherit', cwd: ROOT });
+  execFileSync('gdown', [id, '--retries', '4', '-O', output], { stdio: 'inherit', cwd: ROOT });
 }
 
 async function assertHtml(file, label) {
@@ -234,7 +237,18 @@ async function migrateTones() {
   const mediaDir = p('docs', 'media', 'tones');
   await rm(mediaDir, { recursive: true, force: true });
   await mkdir(mediaDir, { recursive: true });
-  execFileSync('gdown', ['--folder', TONES_FOLDER, '-O', mediaDir], { stdio: 'inherit', cwd: ROOT });
+
+  try {
+    execFileSync('gdown', ['--folder', TONES_FOLDER, '--continue', '--retries', '4', '-O', mediaDir], { stdio: 'inherit', cwd: ROOT });
+  } catch (error) {
+    console.warn('Folder download reported one or more failures; retrying known missing files individually.');
+  }
+
+  const harryTarget = path.join(mediaDir, IPHONE_FOLDER_NAME, HARRY_NAME);
+  if (!(await exists(harryTarget))) {
+    await mkdir(path.dirname(harryTarget), { recursive: true });
+    downloadDriveFile(HARRY_ID, harryTarget);
+  }
 
   const files = await walk(mediaDir);
   const audio = files.filter(file => ['.ogg', '.mp3', '.m4r'].includes(path.extname(file).toLowerCase()));

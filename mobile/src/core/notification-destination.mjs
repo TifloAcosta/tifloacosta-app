@@ -1,6 +1,6 @@
 import { youtubeVideoId } from './share-classifier.mjs';
 
-const TYPES = new Set(['general', 'news', 'video', 'resource', 'download']);
+const TYPES = new Set(['general', 'news', 'video', 'resource', 'download', 'update']);
 
 function text(value, max = 200) {
   return typeof value === 'string' ? value.trim().slice(0, max) : '';
@@ -22,11 +22,21 @@ function validYoutubeId(value) {
   return /^[A-Za-z0-9_-]{11}$/.test(id) ? id : '';
 }
 
+function validVersion(value) {
+  const version = text(value, 64);
+  return /^\d+\.\d+\.\d+$/.test(version) ? version : '';
+}
+
 export function normalizeNotificationDestination(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return { type: 'general' };
 
   const type = text(value.tiflo_type, 32).toLowerCase();
   if (!TYPES.has(type) || type === 'general') return { type: 'general' };
+
+  if (type === 'update') {
+    const version = validVersion(value.tiflo_version);
+    return version ? { type, version } : { type: 'general' };
+  }
 
   const url = safeHttpUrl(value.tiflo_url);
   const title = text(value.tiflo_title, 200);

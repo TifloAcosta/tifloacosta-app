@@ -7,6 +7,14 @@ def signingKeyPassword = System.getenv('ANDROID_KEY_PASSWORD')
 def hasReleaseSigning = [signingKeystorePath, signingStorePassword, signingKeyAlias, signingKeyPassword]
         .every { value -> value != null && !value.trim().isEmpty() }
 
+def releaseVersionName = System.getenv('TIFLO_ANDROID_VERSION_NAME')
+def releaseVersionCodeText = System.getenv('TIFLO_ANDROID_VERSION_CODE')
+def effectiveVersionName = releaseVersionName?.trim() ? releaseVersionName.trim() : '1.3.1'
+def effectiveVersionCode = releaseVersionCodeText?.trim() ? Integer.parseInt(releaseVersionCodeText.trim()) : 10
+if (effectiveVersionCode < 1) {
+    throw new GradleException('TIFLO_ANDROID_VERSION_CODE must be a positive integer')
+}
+
 android {
     namespace = "com.tifloacosta.app"
     compileSdk = rootProject.ext.compileSdkVersion
@@ -14,8 +22,8 @@ android {
         applicationId "com.tifloacosta.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 10
-        versionName "1.3.1"
+        versionCode effectiveVersionCode
+        versionName effectiveVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.

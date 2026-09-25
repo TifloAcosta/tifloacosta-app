@@ -28,7 +28,13 @@ function createConsentState(storage) {
   return { read, grant };
 }
 
-export function createOneSignalNotifications({ sdk, appId, onDestination = () => {}, storage = null } = {}) {
+function readVersion(appVersion) {
+  const value = typeof appVersion === 'function' ? appVersion() : appVersion;
+  const version = String(value || '').trim();
+  return /^\d+\.\d+\.\d+$/.test(version) ? version : '';
+}
+
+export function createOneSignalNotifications({ sdk, appId, appVersion = '', onDestination = () => {}, storage = null } = {}) {
   let started = false;
   let failed = false;
   let startPromise = null;
@@ -101,8 +107,10 @@ export function createOneSignalNotifications({ sdk, appId, onDestination = () =>
 
       try {
         await sdk.User?.addTag?.('tiflo_client', 'android_app');
+        const version = readVersion(appVersion);
+        if (version) await sdk.User?.addTag?.('tiflo_version', version);
       } catch {
-        // The tag is a secondary segmentation aid. Platform targeting remains authoritative.
+        // Audience metadata is optional; notification availability must not depend on tagging.
       }
       return true;
     })();

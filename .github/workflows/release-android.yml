@@ -1,0 +1,186 @@
+name: Create TifloAcosta Android Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: 'Publish the verified AAB to the Google Play track declared in mobile/release/request.json'
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tifloacosta-android-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      ONESIGNAL_DISABLE_LOCATION: 'true'
+      TIFLO_RELEASE_PUBLISH: ${{ inputs.publish }}
+      GOOGLE_PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+      ONESIGNAL_REST_API_KEY: ${{ secrets.ONESIGNAL_REST_API_KEY }}
+      ONESIGNAL_APP_ID: ed030723-7f6f-4745-8cd3-6938a9d04377
+
+    steps:
+      - name: Checkout release source
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node with npm cache
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+
+      - name: Setup Java with Gradle cache
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: gradle
+
+      - name: Install mobile dependencies reproducibly
+        working-directory: mobile
+        run: npm ci
+
+      - name: Run repository regression tests
+        run: npm test
+
+      - name: Run mobile tests
+        working-directory: mobile
+        run: npm test
+
+      - name: Resolve release identity
+        id: identity
+        working-directory: mobile
+        shell: bash
+        run: node scripts/release-runner.mjs resolve >> "$GITHUB_OUTPUT"
+
+      - name: Export release identity
+        shell: bash
+        run: |
+          echo "TIFLO_ANDROID_VERSION_NAME=${{ steps.identity.outputs.version_name }}" >> "$GITHUB_ENV"
+          echo "TIFLO_ANDROID_VERSION_CODE=${{ steps.identity.outputs.version_code }}" >> "$GITHUB_ENV"
+
+      - name: Build mobile web bundle
+        working-directory: mobile
+        run: npm run build
+
+      - name: Synchronize Android
+        working-directory: mobile
+        run: npx cap sync android
+
+      - name: Prepare mandatory Android release signing
+        shell: bash
+        env:
+          ANDROID_KEYSTORE_BASE64_SECRET: ${{ secrets.TIFLOACOSTA_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD_SECRET: ${{ secrets.TIFLOACOSTA_KEYSTORE_PASSWORD }}
+        run: |
+          set -euo pipefail
+          if [ -z "$ANDROID_KEYSTORE_BASE64_SECRET" ] || [ -z "$ANDROID_KEYSTORE_PASSWORD_SECRET" ]; then
+            echo "Android release signing secrets are required."
+            exit 1
+          fi
+
+          keystore_path="$RUNNER_TEMP/tifloacosta-upload.p12"
+          printf '%s' "$ANDROID_KEYSTORE_BASE64_SECRET" | base64 --decode > "$keystore_path"
+          chmod 600 "$keystore_path"
+
+          mapfile -t private_key_aliases < <(
+            keytool -list -v \
+              -J-Duser.language=en -J-Duser.country=US \
+              -storetype PKCS12 \
+              -keystore "$keystore_path" \
+              -storepass "$ANDROID_KEYSTORE_PASSWORD_SECRET" 2>/dev/null |
+            awk -F': ' '
+              /^Alias name: / { alias=$2 }
+              /^Entry type: PrivateKeyEntry/ { print alias }
+            '
+          )
+
+          if [ "${#private_key_aliases[@]}" -ne 1 ]; then
+            echo "Expected exactly one private-key entry in the Android upload keystore."
+            exit 1
+          fi
+
+          {
+            echo "ANDROID_KEYSTORE_PATH=$keystore_path"
+            echo "ANDROID_KEYSTORE_PASSWORD=$ANDROID_KEYSTORE_PASSWORD_SECRET"
+            echo "ANDROID_KEY_ALIAS=${private_key_aliases[0]}"
+            echo "ANDROID_KEY_PASSWORD=$ANDROID_KEYSTORE_PASSWORD_SECRET"
+          } >> "$GITHUB_ENV"
+
+      - name: Build versioned Android APK and AAB
+        working-directory: mobile/android
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon assembleDebug bundleRelease
+
+      - name: Verify signed Android release bundle
+        working-directory: mobile/android
+        shell: bash
+        run: |
+          set -euo pipefail
+          aab="app/build/outputs/bundle/release/app-release.aab"
+          test -f "$aab"
+          jarsigner -verify "$aab"
+
+      - name: Verify notification wiring
+        working-directory: mobile/android
+        shell: bash
+        run: |
+          set -euo pipefail
+          merged_manifest="$(find app/build/intermediates/merged_manifests -type f -name AndroidManifest.xml -print -quit)"
+          test -n "$merged_manifest"
+          grep -Fq 'android.permission.POST_NOTIFICATIONS' "$merged_manifest"
+          grep -Fq 'com.onesignal' "$merged_manifest"
+
+      - name: Publish verified release when explicitly requested
+        id: publish
+        if: ${{ inputs.publish }}
+        working-directory: mobile
+        shell: bash
+        env:
+          ANDROID_BUNDLE_PATH: android/app/build/outputs/bundle/release/app-release.aab
+        run: node scripts/release-runner.mjs publish >> "$GITHUB_OUTPUT"
+
+      - name: Build accessible release reports
+        id: report
+        working-directory: mobile
+        shell: bash
+        env:
+          TIFLO_RELEASE_PUBLISHED: ${{ steps.publish.outputs.published || 'false' }}
+          TIFLO_RELEASE_NOTIFICATION_SENT: ${{ steps.publish.outputs.notification_sent || 'false' }}
+        run: node scripts/release-runner.mjs report >> "$GITHUB_OUTPUT"
+
+      - name: Prepare named release package
+        working-directory: mobile
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release-out/package
+          cp android/app/build/outputs/bundle/release/app-release.aab "release-out/package/${{ steps.report.outputs.aab_name }}"
+          cp android/app/build/outputs/apk/debug/app-debug.apk "release-out/package/${{ steps.report.outputs.apk_name }}"
+          cp release-out/INFORMACION-COMPILACION.txt release-out/package/INFORMACION-COMPILACION.txt
+          cp release-out/notas-google-play.txt release-out/package/notas-google-play.txt
+          cd release-out/package
+          zip -q "../${{ steps.report.outputs.zip_name }}" ./*
+
+      - name: Publish accessible GitHub summary
+        working-directory: mobile
+        shell: bash
+        run: cat release-out/github-summary.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload Android release package
+        uses: actions/upload-artifact@v4
+        with:
+          name: tifloacosta-android-${{ steps.identity.outputs.version_name }}-code${{ steps.identity.outputs.version_code }}
+          if-no-files-found: error
+          path: mobile/release-out/${{ steps.report.outputs.zip_name }}

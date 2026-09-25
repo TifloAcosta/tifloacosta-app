@@ -13,6 +13,7 @@ test('ordinary available update becomes a flexible prompt', async () => {
   assert.equal(state.mode, 'flexible');
   assert.equal(state.prompt, true);
   assert.equal((await session.start()).started, true);
+  assert.equal(session.state().prompt, false);
 });
 
 test('dismissal suppresses duplicate prompt for the same update during this session', async () => {
@@ -23,6 +24,20 @@ test('dismissal suppresses duplicate prompt for the same update during this sess
   await session.check();
   session.dismissForSession();
   assert.equal((await session.check()).prompt, false);
+});
+
+test('starting a flexible update suppresses resume prompts until download completes', async () => {
+  let installStatus = 0;
+  const plugin = {
+    async check() { return { available: true, versionCode: 11, priority: 2, flexibleAllowed: true, immediateAllowed: false, installStatus }; },
+    async startFlexible() { return { started: true }; }
+  };
+  const session = createUpdateSession({ plugin });
+  await session.check();
+  await session.start();
+  assert.equal((await session.check()).prompt, false);
+  installStatus = 11;
+  assert.equal((await session.check()).prompt, true);
 });
 
 test('priority 5 immediate update cannot be dismissed', async () => {

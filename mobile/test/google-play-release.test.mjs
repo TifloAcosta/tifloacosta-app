@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { generateKeyPairSync } from 'node:crypto';
 import {
   chooseNextVersionCode,
   createGoogleAccessToken,
@@ -14,11 +15,12 @@ test('chooses one above the highest Play or local code', () => {
 
 test('Google OAuth token request uses the Android Publisher scope and never exposes the private key', async () => {
   const requests = [];
-  const privateKeyMarker = 'PRIVATE-KEY-MUST-NOT-LEAK';
-  const fakeKey = `-----BEGIN PRIVATE KEY-----\n${privateKeyMarker}\n-----END PRIVATE KEY-----`;
+  const { privateKey } = generateKeyPairSync('rsa', { modulusLength: 2048 });
+  const pem = privateKey.export({ type: 'pkcs8', format: 'pem' }).toString();
+  const privateKeyMarker = pem.split('\n')[1];
   const serviceAccount = {
     client_email: 'release-bot@example.iam.gserviceaccount.com',
-    private_key: fakeKey
+    private_key: pem
   };
   const fetchImpl = async (url, options) => {
     requests.push({ url, options });

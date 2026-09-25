@@ -1,5 +1,53 @@
 [
   {
+    "id": "the-verge-4e9c577be323f627",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1000495/microsoft-is-killing-off-the-copilot-plus-pc-brand",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-25T01:25:53.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Microsoft is killing off the ‘Copilot Plus PC’ brand",
+        "summary": "Remember when Microsoft wanted everyone to know that \"Copilot Plus PCs\" were the ones to get, because those were the PCs that that'd have enough built-in AI muscle to get things done? Two and a half years later, Microsoft and Qualcomm seem to be admitting the brand is already dead. Windows Central's Zac Bowden reports […]",
+        "body": "Remember when Microsoft wanted everyone to know that \"Copilot Plus PCs\" were the ones to get, because those were the PCs that that'd have enough built-in AI muscle to get things done? Two and a half years later, Microsoft and Qualcomm seem to be admitting the brand is already dead.\n\nWindows Central 's Zac Bowden reports that even though the new 12-inch Microsoft Surface Pro and 13-inch Surface Laptop technically meet the system requirements for a Copilot Plus PC, Microsoft is not calling them by that name anymore. \"These are not called Copilot Plus PCs,\" Microsoft Surface CVP Brett Ostrom told the publication.\n\nKedar Kondap, Qualcomm's SVP …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-45ce0bcfe950860f",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1000443/qualcomms-new-elite-sound-chip-might-finally-deliver-the-wi-fi-earbud-dream",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-24T23:42:39.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Qualcomm’s new ‘Elite’ sound chip might finally deliver the Wi-Fi earbud dream",
+        "summary": "What if your wireless earbuds - or audio glasses - could stream high-quality lossless audio that doesn't cut out when you leave your phone on the bedside charger or buried in the couch? Qualcomm's new Snapdragon Sound Elite Gen 2 is its first to integrate \"micro-power Wi-Fi 6E\" right into the chip, so they can […]",
+        "body": "What if your wireless earbuds - or audio glasses - could stream high-quality lossless audio that doesn't cut out when you leave your phone on the bedside charger or buried in the couch? Qualcomm's new Snapdragon Sound Elite Gen 2 is its first to integrate \"micro-power Wi-Fi 6E\" right into the chip, so they can connect directly to your home Wi-Fi network, and from there to the cloud.\n\nIf that sounds like a familiar promise, it's probably because Qualcomm promised something similar back in 2023 with the \"S7 Pro sound platform\" and its Expanded Personal Area Network (XPAN) tech, saying that Wi-Fi earbuds can do what Bluetooth alone cannot. Name …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "engadget-05b6b0c987172f8d",
     "type": "news",
     "sourceId": "engadget",
@@ -247,30 +295,6 @@
     "media": null
   },
   {
-    "id": "the-verge-41043260c2411589",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1000140/jensen-huang-nvidia-ai-energy-climate-change-supervillain",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-24T18:04:44.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Jensen Huang talks about AI and climate change like a supervillain",
-        "summary": "As Jensen Huang puts it, AI can help fight climate change - but only if it inflicts \"an enormous amount of pain and suffering\" first. The Nvidia CEO discussed the future of energy and AI's impact on our planet in the latest episode of The Ezra Klein Show. But his comments boil down to the […]",
-        "body": "As Jensen Huang puts it, AI can help fight climate change - but only if it inflicts \"an enormous amount of pain and suffering\" first.\n\nThe Nvidia CEO discussed the future of energy and AI's impact on our planet in the latest episode of The Ezra Klein Show . But his comments boil down to the same accelerationist spin we've seen from a variety of tech leaders as well as President Donald Trump. They promise that AI will be such a gift to humanity that it's worth the damage caused by data centers currently running on dirty energy.\n\nHuang's extreme level of privilege is glaring in the interview. He …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "engadget-3db47c6155dcca45",
     "type": "news",
     "sourceId": "engadget",
@@ -290,31 +314,6 @@
         "title": "Google is sending a teensy-tiny AI data center to space",
         "summary": "It's an experiment to see how the chips hold up in the harsh vacuum of the cosmos.",
         "body": "It's an experiment to see how the chips hold up in the harsh vacuum of the cosmos.\n\nGoogle's Project Suncatcher, which ultimately aims to put large AI installations in low-Earth orbit , is preparing for a milestone event. The company will be sending a teensy-tiny AI data center into space to see how it reacts to the harsh conditions, as reported by The New York Times .\n\nA satellite named MVP will be aboard a SpaceX Falcon 9 rocket set to launch on October 1, where it will be placed into orbit. This isn't a full data center in the conventional sense. It's four specialized computer chips called \"tensor processing units\" which, combined, offer the power of a single server in a data center.\n\nWe're taking AI to space with @Google . 🛰️\n\nProject Suncatcher explores putting AI compute in orbit, powered by the sun. Soon, we'll be sending our first satellite into space to start testing that idea. It's a new approach to AI infrastructure.\n\nCheck out a behind-the-scenes look... pic.twitter.com/cup8uXuyrC\n\n— Planet (@planet) September 24, 2026\n\nSolar panels will supply just one kilowatt of power to juice the chips, which is equivalent to the energy needed to run a hair dryer. Google says this will be enough to test the hardware against the harsh conditions of space. The company plans to let the satellite answer simple AI queries for a year, though it will orbit Earth for six years before it burns up during a descent into the atmosphere.\n\nThese chips have undergone a battery of tests to simulate the void of space, including getting blasted with large amounts of radiation at Crocker Nuclear Laboratory. Radiation can seriously mess with computer chips, causing something called \"bit flips.\" This essentially flips the binary code from a one to a zero, or vice versa.\n\nWhat's the solution to bit flips? Google is taking the tried-and-true PC method. It plans on restarting the chips when they act up. There's also a proprietary cooling system in place that uses layers of conductive material to expel heat into space, though it only works for around 15 minutes before the chips have to be turned off to cool down.\n\nThe initial experiments at Crocker reportedly went well enough to take the next step, which is shooting the chips into the great beyond. However, this doesn't mean we are particularly close to having actual AI data centers in space. James Manyika, the Senior Vice President for Research, Technology & Society at Google, urges the public to temper their expectations. \"We don't expect, to be perfectly frank, that we'll have anything usefully operational in the next few years,\" he said.\n\n\"Expanding from one satellite to a vast network of them that operate like a giant data center will take years and enormous funds,\" Brandon Lucia, a professor of electrical and computer engineering at Carnegie Mellon University, told The New York Times . \"If you do this on a large scale, there are additional engineering problems.\"\n\nThose additional engineering problems are no joke, despite people like Elon Musk pronouncing that putting AI data centers in space will be easy . There's the radiation and that whole bit flip thing, which seems extremely finicky with four chips let alone thousands.\n\nCosmic rays are an issue , as they are actual physical particles traveling quickly through space that could punch through and actually melt semiconductor junctions. It's also extremely expensive to launch this stuff into space. A single Falcon 9 launch, for instance, costs around $74 million .\n\nScaling up the cooling system looks to be incredibly difficult. Remember, Google's current system can only work for 15 minutes, and that's with the small amount of heat generated by just four chips. Standard heat dissipation does not work in space. Power must also be considered. Using a solar array for four chips is quite different from launching a massive array to power a legitimate data center.\n\nDespite these challenges, Google plans on scaling this project up. It wants to launch two similar satellites next year, with the eventual goal of launching 80 satellites that will fly in close formation to better process AI queries. It's also looking into building a much larger satellite, around the size of a football field. The company has not indicated how much money it is pouring into this endeavor."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-cbb6b6f8ffdf8cc4",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/report/1000180/muse-openclaw-instinct-lookalike",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-24T17:10:38.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Muse sure looks a lot like OpenClaw",
-        "summary": "We seem to be entering into an AI agent renaissance. Meta's new consumer-facing AI agent, Muse, topped the App Store charts soon after its release and has 600,000 daily active users in the US, by an Apptopia estimate. And AI agent platform Instinct, whose eponymous creator is fundraising at a $2.5 billion valuation, has been […]",
-        "body": "We seem to be entering into an AI agent renaissance. Meta's new consumer-facing AI agent, Muse, topped the App Store charts soon after its release and has 600,000 daily active users in the US, by an Apptopia estimate. And AI agent platform Instinct, whose eponymous creator is fundraising at a $2.5 billion valuation, has been making the rounds in the tech industry. Under the hood, though, there are some obvious similarities to the platform that started it all: OpenClaw.\n\nFor the past week or so, some social media users have alleged that Muse is directly built on OpenClaw. The two platforms use the same names for core files (SOUL.md, memory, …\n\nRead the full story at The Verge."
       }
     },
     "media": null

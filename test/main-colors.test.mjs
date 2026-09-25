@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 const css = readFileSync(new URL('../styles.css', import.meta.url), 'utf8');
+const serviceWorker = readFileSync(new URL('../sw.js', import.meta.url), 'utf8');
 
 function channel(value) {
   const normalized = value / 255;
@@ -38,4 +39,10 @@ test('los botones principales usan un rojo pastel con texto de alto contraste', 
 test('el enlace de privacidad del pie mantiene contraste suficiente sobre el rojo', () => {
   assert.match(css, /\.site-footer a[\s\S]*color:\s*#FFF/i);
   assert.ok(contrast('#FFFFFF', '#A61B1B') >= 4.5);
+});
+
+test('la hoja de estilos se refresca desde red al actualizar la app', () => {
+  assert.match(serviceWorker, /tifloacosta-app-v2-25-colors/);
+  assert.match(serviceWorker, /url\.pathname\.endsWith\('\/styles\.css'\)/);
+  assert.match(serviceWorker, /freshScript\(url, '\.\/styles\.css\?v=1\.2', request\)/);
 });

@@ -14,7 +14,7 @@ export function buildUpdateNotification({ versionName } = {}) {
     filters: [{ field: 'tag', key: 'tiflo_version', relation: '!=', value: version }],
     headings: {
       es: 'Nueva versión de TifloAcosta',
-      en: 'New TifloAcosta version'
+      en: 'New version of TifloAcosta'
     },
     contents: {
       es: `Ya está disponible TifloAcosta ${version}. Abre la app para actualizar.`,

@@ -14,6 +14,11 @@ test('unavailable update produces none', () => {
   assert.equal(chooseUpdateMode({ available: false }), 'none');
 });
 
-test('falls back to immediate only when flexible is unavailable', () => {
-  assert.equal(chooseUpdateMode({ available: true, priority: 3, flexibleAllowed: false, immediateAllowed: true }), 'immediate');
+test('priorities below 5 never force an immediate update', () => {
+  for (const priority of [0, 1, 2, 3, 4]) {
+    assert.equal(
+      chooseUpdateMode({ available: true, priority, flexibleAllowed: false, immediateAllowed: true }),
+      'none'
+    );
+  }
 });

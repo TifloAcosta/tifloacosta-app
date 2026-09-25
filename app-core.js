@@ -45,6 +45,30 @@
     return aKey < bKey ? -1 : aKey > bKey ? 1 : 0;
   }
 
+  function videoNewsItem(video, category) {
+    if (!video || !video.id || !video.title || !video.publishedAt) return null;
+    const id = String(video.id).trim();
+    const title = String(video.title).trim();
+    const newsDate = String(video.publishedAt).trim();
+    if (!id || !title || !newsDate || newsTimestamp({ newsDate }) === 0) return null;
+    const providedUrl = String(video.url || '').trim();
+    return {
+      id: `youtube-${id}`,
+      title,
+      category: String(category || 'Video'),
+      newsDate,
+      url: providedUrl || `https://www.youtube.com/watch?v=${encodeURIComponent(id)}`,
+      newsKind: 'video'
+    };
+  }
+
+  function selectNewsItems(resources, videos, videoCategory, limit = 3) {
+    const resourceItems = Array.isArray(resources) ? resources.filter(item => item && item.new) : [];
+    const videoItems = (Array.isArray(videos) ? videos : []).map(video => videoNewsItem(video, videoCategory)).filter(Boolean);
+    const maxItems = Number.isInteger(limit) && limit > 0 ? limit : 3;
+    return [...resourceItems, ...videoItems].sort(compareNewsItems).slice(0, maxItems);
+  }
+
   function getStorage(target) {
     try { return target.localStorage; }
     catch (error) { return undefined; }
@@ -103,7 +127,7 @@
     return events;
   }
 
-  return { compareNewsItems, detectInstallPlatform, getInstallAnalyticsEvents, getStorage, normalizeSearchText, readStoredJson, readStoredValue, resourceMatches, writeStoredJson, writeStoredValue };
+  return { compareNewsItems, detectInstallPlatform, getInstallAnalyticsEvents, getStorage, normalizeSearchText, readStoredJson, readStoredValue, resourceMatches, selectNewsItems, writeStoredJson, writeStoredValue };
 }));
 
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
@@ -131,6 +155,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     appendScript('download-config.js?v=1.1', 'data-tiflo-download-config');
     appendScript('downloads.js?v=1.4', 'data-tiflo-download-ui');
     appendScript('downloads-sounds-link.js?v=1.0', 'data-tiflo-download-sounds-link');
+    appendScript('news-videos.js?v=1.0', 'data-tiflo-news-videos');
   }
 
   if (document.readyState === 'loading') {

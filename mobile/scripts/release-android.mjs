@@ -50,8 +50,9 @@ export async function runRelease({
     return { ...identity, published: false, ...packaged };
   }
 
-  if (!aabPath) throw new Error('Signed AAB path is required for publication');
-  await play.uploadBundle(editId, aabPath);
+  const resolvedAabPath = typeof aabPath === 'function' ? aabPath() : aabPath;
+  if (!resolvedAabPath) throw new Error('Signed AAB path is required for publication');
+  await play.uploadBundle(editId, resolvedAabPath);
   await play.updateTrack(editId, request.track, {
     versionName: request.versionName,
     versionCode,
@@ -115,6 +116,8 @@ async function cli() {
         }
       });
       releaseAab = `${androidDir}/app/build/outputs/bundle/release/app-release.aab`;
+      run('jarsigner', ['-verify', releaseAab]);
+      run('bash', ['-lc', "merged=$(find app/build/intermediates/merged_manifests -type f -name AndroidManifest.xml -print -quit); test -n \"$merged\" && grep -Fq 'android.permission.POST_NOTIFICATIONS' \"$merged\" && grep -Fq 'com.onesignal' \"$merged\""], { cwd: androidDir });
     },
     packageRelease: async ({ versionName, versionCode }) => {
       await mkdir(outDir, { recursive: true });
@@ -144,7 +147,7 @@ async function cli() {
       run('zip', ['-j', `${outDir}/${names.zip}`, aabTarget, apkTarget, `${outDir}/INFORMACION-COMPILACION.txt`, `${outDir}/notas-google-play.txt`]);
       return { artifact: `${outDir}/${names.zip}` };
     },
-    get aabPath() { return releaseAab; }
+    aabPath: () => releaseAab
   });
 
   if (publish) {

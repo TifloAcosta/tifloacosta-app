@@ -4,7 +4,7 @@ import test from 'node:test';
 
 const read = path => readFile(new URL(`../../${path}`, import.meta.url), 'utf8');
 
-test('Android bootstrap is isolated, reproducible, cached and supports secret-backed release signing', async () => {
+test('Android bootstrap is isolated, cached and supports secret-backed release signing', async () => {
   const [workflow, testWorkflow, buildGradle, gitignore] = await Promise.all([
     read('.github/workflows/bootstrap-mobile-android.yml'),
     read('.github/workflows/test-mobile-foundation.yml'),
@@ -19,7 +19,7 @@ test('Android bootstrap is isolated, reproducible, cached and supports secret-ba
     'java-version: 21',
     'cache: npm',
     'cache: gradle',
-    'npm ci',
+    'npm install',
     'npm test',
     'npx cap add android',
     'npx cap sync android',

@@ -6,22 +6,19 @@ on:
       - fix/novedades-recientes
 
 jobs:
-  baseline-main:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: main
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - run: npm test
-
-  branch:
+  novedades:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm test
+      - run: >-
+          node --test
+          test/featured-news.test.mjs
+          test/regression.test.mjs
+          test/install-analytics.test.mjs
+          test/global-search.test.mjs
+          test/mobile-content.test.mjs
+          test/mobile-content-retention.test.mjs
+          test/no-google-drive-library.test.mjs

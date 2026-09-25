@@ -18,7 +18,7 @@ export function buildUpdateNotification({ appId, versionName } = {}) {
     isAndroid: true,
     headings: {
       es: 'Nueva versión de TifloAcosta',
-      en: 'New TifloAcosta version'
+      en: 'New version of TifloAcosta'
     },
     contents: {
       es: `Ya está disponible TifloAcosta ${version}. Abre la app para actualizar.`,

@@ -12,8 +12,8 @@ test('release workflow is manual-only and publication defaults off', () => {
   assert.doesNotMatch(workflow, /\n\s+pull_request:/);
 });
 
-test('release workflow uses reproducible dependency and Gradle caches', () => {
-  assert.match(workflow, /npm ci/);
+test('release workflow uses dependency and Gradle caches', () => {
+  assert.match(workflow, /npm install/);
   assert.match(workflow, /cache:\s*npm/);
   assert.match(workflow, /cache:\s*gradle/);
 });

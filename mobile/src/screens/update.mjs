@@ -1,24 +1,44 @@
-export function renderUpdate({ root, session, t, onDismiss = () => {}, onComplete = () => {} } = {}) {
+const COPY = {
+  es: {
+    title: 'Nueva versión disponible',
+    available: 'Hay una actualización disponible para TifloAcosta.',
+    availableVersion: 'La versión {version} está disponible para instalar.',
+    now: 'Actualizar ahora',
+    later: 'Más tarde',
+    restart: 'Reiniciar para completar la actualización'
+  },
+  en: {
+    title: 'New version available',
+    available: 'A TifloAcosta update is available.',
+    availableVersion: 'Version {version} is available to install.',
+    now: 'Update now',
+    later: 'Later',
+    restart: 'Restart to complete the update'
+  }
+};
+
+export function renderUpdate({ root, session, lang = 'es', onDismiss = () => {}, onComplete = () => {} } = {}) {
   const state = session?.state?.() || { mode: 'none', info: null };
+  const copy = lang === 'en' ? COPY.en : COPY.es;
   root.replaceChildren();
 
   const heading = document.createElement('h1');
   heading.dataset.screenHeading = '';
   heading.tabIndex = -1;
-  heading.textContent = t('update.title');
+  heading.textContent = copy.title;
   root.append(heading);
 
   const version = String(state.info?.versionName || '').trim();
   const intro = document.createElement('p');
   intro.textContent = version
-    ? t('update.availableVersion').replace('{version}', version)
-    : t('update.available');
+    ? copy.availableVersion.replace('{version}', version)
+    : copy.available;
   root.append(intro);
 
   const updateButton = document.createElement('button');
   updateButton.type = 'button';
   updateButton.dataset.action = 'update';
-  updateButton.textContent = t('update.now');
+  updateButton.textContent = copy.now;
   updateButton.addEventListener('click', async () => {
     updateButton.disabled = true;
     try {
@@ -33,7 +53,7 @@ export function renderUpdate({ root, session, t, onDismiss = () => {}, onComplet
     const laterButton = document.createElement('button');
     laterButton.type = 'button';
     laterButton.dataset.action = 'later';
-    laterButton.textContent = t('update.later');
+    laterButton.textContent = copy.later;
     laterButton.addEventListener('click', () => {
       session.dismissForSession();
       onDismiss();
@@ -45,7 +65,7 @@ export function renderUpdate({ root, session, t, onDismiss = () => {}, onComplet
     const completeButton = document.createElement('button');
     completeButton.type = 'button';
     completeButton.dataset.action = 'complete';
-    completeButton.textContent = t('update.restart');
+    completeButton.textContent = copy.restart;
     completeButton.addEventListener('click', async () => {
       await session.complete();
       onComplete();

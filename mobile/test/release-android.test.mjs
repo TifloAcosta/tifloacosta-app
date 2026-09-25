@@ -14,11 +14,15 @@ const request = {
   notes: { es: 'Mejoras.', en: 'Improvements.' }
 };
 
-function playHarness({ codes = [10], failCommit = false } = {}) {
+function playHarness({ codes = [10], trackCodes = [], failCommit = false } = {}) {
   const calls = [];
   const client = {
     async createEdit() { calls.push('createEdit'); return { id: 'edit-1' }; },
     async listBundles() { calls.push('listBundles'); return codes.map(versionCode => ({ versionCode })); },
+    async listTracks() {
+      calls.push('listTracks');
+      return trackCodes.length ? [{ track: 'alpha', releases: [{ versionCodes: trackCodes.map(String) }] }] : [];
+    },
     async uploadBundle() { calls.push('uploadBundle'); return { versionCode: 11 }; },
     async updateTrack() { calls.push('updateTrack'); return {}; },
     async validateEdit() { calls.push('validateEdit'); return {}; },
@@ -43,8 +47,8 @@ test('publish resolution requires Google Play credentials before remote work', a
   );
 });
 
-test('publish resolution chooses above both Play and local history', async () => {
-  const fake = playHarness({ codes: [9, 12] });
+test('publish resolution chooses above bundles, tracks and local history', async () => {
+  const fake = playHarness({ codes: [9, 12], trackCodes: [13, 17] });
   const result = await resolveVersionCode({
     localState: { lastSuccessfulVersionCode: 10 },
     publish: true,
@@ -52,9 +56,9 @@ test('publish resolution chooses above both Play and local history', async () =>
     getAccessToken: async () => 'token',
     makeClient: () => fake.client
   });
-  assert.equal(result.versionCode, 13);
+  assert.equal(result.versionCode, 18);
   assert.equal(result.source, 'google-play');
-  assert.deepEqual(fake.calls, ['createEdit', 'listBundles']);
+  assert.deepEqual(fake.calls, ['createEdit', 'listBundles', 'listTracks']);
 });
 
 test('publish uploads validates commits and notifies only after commit', async () => {
@@ -71,10 +75,12 @@ test('publish uploads validates commits and notifies only after commit', async (
     },
     getAccessToken: async () => 'token',
     makeClient: () => fake.client,
-    sendNotification: async () => { events.push('notification'); return { id: 'message-1' }; }
+    sendNotification: async options => { events.push(options); return { id: 'message-1' }; }
   });
   assert.deepEqual(fake.calls, ['createEdit', 'uploadBundle', 'updateTrack', 'validateEdit', 'commitEdit']);
-  assert.deepEqual(events, ['notification']);
+  assert.equal(events.length, 1);
+  assert.equal(events[0].versionName, '1.3.2');
+  assert.equal(events[0].versionCode, 11);
   assert.equal(result.committed, true);
   assert.equal(result.notificationSent, true);
 });

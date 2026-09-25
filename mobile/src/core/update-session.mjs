@@ -1,5 +1,7 @@
 import { chooseUpdateMode } from './update-policy.mjs';
 
+const DOWNLOADED = 11;
+
 export function createUpdateSession({ plugin } = {}) {
   let current = {
     info: null,
@@ -26,12 +28,13 @@ export function createUpdateSession({ plugin } = {}) {
       const info = await plugin.check();
       const mode = chooseUpdateMode(info);
       const versionCode = Number(info?.versionCode || 0);
-      const dismissed = mode !== 'immediate' && versionCode > 0 && current.dismissedVersionCode === versionCode;
+      const downloaded = Number(info?.installStatus || 0) === DOWNLOADED;
+      const dismissed = !downloaded && mode !== 'immediate' && versionCode > 0 && current.dismissedVersionCode === versionCode;
       current = {
         ...current,
         info,
         mode,
-        prompt: mode !== 'none' && !dismissed
+        prompt: (downloaded || mode !== 'none') && !dismissed
       };
       return snapshot();
     } catch {
@@ -45,7 +48,16 @@ export function createUpdateSession({ plugin } = {}) {
       return plugin.startImmediate();
     }
     if (current.mode === 'flexible' && typeof plugin?.startFlexible === 'function') {
-      return plugin.startFlexible();
+      const result = await plugin.startFlexible();
+      if (result?.started === true) {
+        const versionCode = Number(current.info?.versionCode || 0);
+        current = {
+          ...current,
+          prompt: false,
+          dismissedVersionCode: versionCode > 0 ? versionCode : current.dismissedVersionCode
+        };
+      }
+      return result;
     }
     return { started: false };
   }

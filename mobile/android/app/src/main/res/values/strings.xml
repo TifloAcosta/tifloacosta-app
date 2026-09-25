@@ -4,4 +4,11 @@
     <string name="title_activity_main">TifloAcosta</string>
     <string name="package_name">com.tifloacosta.app</string>
     <string name="custom_url_scheme">com.tifloacosta.app</string>
+    <string name="update_available_title">Nueva versión disponible</string>
+    <string name="update_available_message">Hay una actualización de TifloAcosta disponible en Google Play.</string>
+    <string name="update_now">Actualizar ahora</string>
+    <string name="update_later">Más tarde</string>
+    <string name="update_ready_title">Actualización descargada</string>
+    <string name="update_ready_message">La actualización está preparada. Puedes completar la instalación ahora.</string>
+    <string name="update_complete">Completar actualización</string>
 </resources>

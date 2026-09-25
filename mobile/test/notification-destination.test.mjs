@@ -60,6 +60,19 @@ test('resource and download require a safe URL; resource may also carry a stable
   assert.deepEqual(normalizeNotificationDestination({ tiflo_type: 'download' }), { type: 'general' });
 });
 
+test('update accepts only a semantic x.y.z version', () => {
+  assert.deepEqual(
+    normalizeNotificationDestination({ tiflo_type: 'update', tiflo_version: '1.3.2' }),
+    { type: 'update', version: '1.3.2' }
+  );
+  for (const version of ['', '1.3', 'v1.3.2', 'beta', 132]) {
+    assert.deepEqual(
+      normalizeNotificationDestination({ tiflo_type: 'update', tiflo_version: version }),
+      { type: 'general' }
+    );
+  }
+});
+
 test('oversized or non-string fields are bounded safely', () => {
   assert.deepEqual(
     normalizeNotificationDestination({ tiflo_type: { bad: true }, tiflo_url: 'https://example.com' }),

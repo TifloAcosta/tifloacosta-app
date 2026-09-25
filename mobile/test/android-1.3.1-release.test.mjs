@@ -5,10 +5,14 @@ import test from 'node:test';
 const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 const repoRead = path => readFile(new URL(`../../${path}`, import.meta.url), 'utf8');
 
-test('Android 1.3.1 release candidate uses version code 10', async () => {
+test('Android keeps 1.3.1 code 10 only as the development fallback while release identity is overridable', async () => {
   const gradle = await read('android/app/build.gradle');
-  assert.match(gradle, /versionCode\s+10/);
-  assert.match(gradle, /versionName\s+"1\.3\.1"/);
+  assert.match(gradle, /TIFLO_ANDROID_VERSION_NAME/);
+  assert.match(gradle, /TIFLO_ANDROID_VERSION_CODE/);
+  assert.match(gradle, /effectiveVersionName[\s\S]*'1\.3\.1'/);
+  assert.match(gradle, /effectiveVersionCode[\s\S]*:\s*10/);
+  assert.match(gradle, /versionCode\s+effectiveVersionCode/);
+  assert.match(gradle, /versionName\s+effectiveVersionName/);
   assert.doesNotMatch(gradle, /versionCode\s+9/);
   assert.doesNotMatch(gradle, /versionName\s+"1\.3\.0"/);
 });

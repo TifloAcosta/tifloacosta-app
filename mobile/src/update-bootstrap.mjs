@@ -3,6 +3,7 @@ import { TifloUpdate } from './native/update-plugin.mjs';
 import { createUpdateSession } from './core/update-session.mjs';
 import { renderUpdate } from './screens/update.mjs';
 
+const DOWNLOADED = 11;
 const session = createUpdateSession({ plugin: TifloUpdate });
 let dialog = null;
 
@@ -42,3 +43,8 @@ export async function checkAndOfferUpdate() {
 
 void checkAndOfferUpdate();
 void App.addListener('resume', () => { void checkAndOfferUpdate(); });
+void TifloUpdate.addListener('stateChange', event => {
+  if (Number(event?.installStatus) === DOWNLOADED) {
+    void checkAndOfferUpdate();
+  }
+});

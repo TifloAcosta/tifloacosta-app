@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="update_available_title">New version available</string>
+    <string name="update_available_message">A TifloAcosta update is available on Google Play.</string>
+    <string name="update_now">Update now</string>
+    <string name="update_later">Later</string>
+    <string name="update_ready_title">Update downloaded</string>
+    <string name="update_ready_message">The update is ready. You can complete installation now.</string>
+    <string name="update_complete">Complete update</string>
+</resources>

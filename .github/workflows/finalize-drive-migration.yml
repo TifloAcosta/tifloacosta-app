@@ -5,6 +5,7 @@ on:
     branches: ["main"]
     paths:
       - "scripts/finalize-drive-migration.mjs"
+      - "scripts/patch-drive-migration.mjs"
       - ".github/workflows/finalize-drive-migration.yml"
   workflow_dispatch:
 
@@ -24,33 +25,8 @@ jobs:
           python-version: '3.12'
       - name: Install Google Drive downloader
         run: python -m pip install --disable-pip-version-check --upgrade gdown
-      - name: Add resilient recovery for the final blocked ringtone
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          path = Path('scripts/finalize-drive-migration.mjs')
-          source = path.read_text(encoding='utf-8')
-          needle = "  await mkdir(mediaDir, { recursive: true });\n\n  try {\n    execFileSync('gdown', ['--folder', TONES_FOLDER, '--continue', '--retries', '4', '-O', mediaDir], { stdio: 'inherit', cwd: ROOT });"
-          replacement = """  await mkdir(mediaDir, { recursive: true });
-
-  const dingTarget = path.join(mediaDir, 'Nokia', '22_Ding_dong.mp3');
-  await mkdir(path.dirname(dingTarget), { recursive: true });
-  try {
-    downloadDriveFile('1DaQxtU59gjY7r7cmqHpvTEHUBRfSl9N7', dingTarget);
-  } catch (error) {
-    execFileSync('curl', [
-      '-L', '--fail', '--retry', '4', '--retry-delay', '2',
-      '-o', dingTarget,
-      'https://drive.usercontent.google.com/download?id=1DaQxtU59gjY7r7cmqHpvTEHUBRfSl9N7&export=download&confirm=t'
-    ], { stdio: 'inherit', cwd: ROOT });
-  }
-
-  try {
-    execFileSync('gdown', ['--folder', TONES_FOLDER, '--continue', '--retries', '4', '-O', mediaDir], { stdio: 'inherit', cwd: ROOT });"""
-          if needle not in source:
-              raise SystemExit('Migration script patch point was not found')
-          path.write_text(source.replace(needle, replacement, 1), encoding='utf-8')
-          PY
+      - name: Prepare final ringtone recovery
+        run: node scripts/patch-drive-migration.mjs
       - name: Migrate resources and tones from Drive
         run: node scripts/finalize-drive-migration.mjs
       - name: Regenerate mobile content
@@ -60,6 +36,7 @@ jobs:
       - name: Remove one-shot migration files
         run: |
           rm scripts/finalize-drive-migration.mjs
+          rm scripts/patch-drive-migration.mjs
           rm .github/workflows/finalize-drive-migration.yml
       - name: Commit migration
         run: |

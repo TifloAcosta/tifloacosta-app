@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-26T21:12:47.802Z",
+  "generatedAt": "2026-09-26T23:38:57.453Z",
   "resources": [
     {
       "kind": "resource",
@@ -4866,6 +4866,54 @@
   "news": [
     {
       "kind": "news",
+      "id": "engadget-102cfc6e2f6fe217:en",
+      "sourceId": "engadget-102cfc6e2f6fe217",
+      "lang": "en",
+      "title": "iPhone 18 Pro vs. iPhone 17 Pro: What's new?",
+      "summary": "The iPhone 18 Pro iterates on the iPhone 17 Pro while making some minor improvements, but what exactly is different?",
+      "body": "The iPhone 18 Pro isn't a world-changing upgrade, but it has a few cool improvements to offer.\n\nDespite their higher prices, the iPhone 18 Pro and 18 Pro Max aren't revolutionary upgrades. On one hand, they add enough new features and improvements to be named the \"standard setter\" by our iPhone 18 Pro review . But this year's batch is more akin to an incremental \"S\" iPhone than a major redesign. That gets clearer when you compare them with last year's iPhone 17 Pro and iPhone 17 Pro Max .\n\nFortunately, most of the changes in this year's Pro-series phones are identical on the standard and Max models. They have the same camera hardware, so you don't need to buy the bigger phone just to get the better camera. But the larger iPhone 18 Pro Max also gets a bigger battery life boost, along with a (less fortunate) weight increase. So while most categories are a wash between the two sizes, the larger model does have different pros and cons.\n\nFor the 2026 models, Apple stuck with the aluminum unibody design it introduced (or rather, reintroduced) with the iPhone 17 Pro series. The dimensions are also unchanged: the Pro stays at 5.91 x 2.83 x 0.34 inches, while the Pro Max stands pat at 6.43 x 3.07 x 0.34 inches.\n\nBut weight is another story. The iPhone 18 Pro is 2.4 percent heavier than the iPhone 17 Pro (7.44 vs. 7.27 ounces). The iPhone 18 Pro Max's increase is more dramatic: it's about 6.9 percent heavier than its predecessor (8.78 vs. 8.22 ounces). For the larger model especially, that's a difference you may feel in hand. The question is whether the newer model's battery gains make it worth the trade-off.\n\nBoth phone lineups still have Ceramic Shield 2 on the front, Ceramic Shield on the back and IP68 water resistance. Perhaps to make up for the lack of eye-popping upgrades elsewhere, Apple added new color options. The iPhone 18 Pro series trades in last year's Cosmic Orange, Deep Blue and Silver for Black, Silver, Glacier and Burgundy. (That Burgundy finish will be this year's \"Look, I got the new iPhone\" color.)\n\nThe core display specs are unchanged. The standard Pro retains its 6.3-inch OLED display, while the Pro Max uses a 6.9-inch OLED panel. Both 460 PPI displays support variable refresh rates up to 120Hz, always-on functionality and outdoor brightness up to 3,000 nits. It's thus the same as you've come to expect: the Pro is easier to carry and use with one hand, while the Pro Max gives you more screen real estate.\n\nThe one notable change is the smaller Dynamic Island on the iPhone 18 Pro series . Apple pulled this off with a region of brighter pixels that lets just enough infrared light through for Face ID to work beneath the display. This allows for a smaller black cutout. The Dynamic Island also now supports up to three ongoing Live Activities at once, compared to two on the iPhone 17 Pro.\n\nThe most significant change in the iPhone 18 Pro series is the revamped 48-megapixel main camera. But it isn't that megapixel count that's the upgrade; those are unchanged across the board.\n\nThe iPhone 17 Pro and Pro Max use a fixed f/1.78 aperture. But the new main camera in the iPhone 18 Pro and Pro Max can switch between f/1.48, f/1.8, f/2.8 and f/4.0. This means the phone can adjust how much light enters the camera system . In practice, a narrower aperture keeps more of the scene in focus, while a wider one can collect more light and create greater focal contrast between the subject and the background.\n\nThe devices can make those choices automatically, which is likely what most people will opt for. But anyone who wants more control over depth of field can manually adjust the aperture. Apple also added new manual controls for shutter speed and white balance, along with an on-screen histogram. For at least some photographers, the \"Pro\" branding may feel more authentic this year.\n\nOtherwise, both iPhone 18 Pro models have the same three-camera setup and photographic capabilities. Aside from the main camera, they include a 48-megapixel Ultra Wide camera and a 48-megapixel 4x Telephoto camera. Their listed resolution, focal length and aperture specs are unchanged from last year's models.\n\nVideo gets an upgrade, too. Rear-camera Cinematic mode now records in up to 4K at 60 frames per second, compared with 4K/30 fps on the iPhone 17 Pro series. (The new model's front camera remains limited to 4K/30 in Cinematic mode.) The phones can also apply cinematic-style background effects after recording — though in our testing, the results were hit-or-miss. Expect the best results with relatively still, clearly separated subjects.\n\nAnother new feature, Apple Reference Image, can save sensor-signed RAW data alongside the normally processed photograph, giving you a version to compare against edits. An obvious purpose is verifying that a photo was untouched by AI (or regular old editing). But the downside is having to shoot in a special mode; the feature won't activate automatically with normal shots. It thus makes the most sense for professional photographers, journalists and others whose work depends on image integrity.\n\nMeanwhile, Photographic Styles 3 adds texture and grain controls. Fortunately, Apple keeps the effects restrained, so they don't look overly processed or artificial. Texture edit adds Glow, Soft Skin or Film effects (the latter includes an additional Grain slider). The iPhone 17 Pro series doesn't support any of these options, although it's hard to imagine many people upgrading for their sake.\n\nBoth iPhone 18 Pro models use the A20 Pro chip, replacing the A19 Pro from last year's models. The new chip is built on a 2-nanometer process (compared to the 3-nanometer process of the A19 Pro) and offers 50 percent more memory bandwidth than its predecessor, according to Apple . That should help with data-intensive tasks like games, camera processing and on-device AI.\n\nThe A20 Pro sticks with a six-core CPU, but it now includes integrated Neural Accelerators. Meanwhile, the GPU moves from six cores to seven, with Apple claiming up to 40 percent faster graphics performance over the A19 Pro. The new chip's Dual 16-core Neural Engine has 32 total cores, and Apple claims it doubles AI processing power. The A20 Pro's strengths should show more in longer, heavier workloads.\n\nApple also updated the internal cooling system for the new silicon, attaching the A20 Pro directly to a next-gen vapor chamber. Much of Apple's marketing focuses on the sustained performance of the A20 Pro chip; this new layout, which also places the silicon die side-by-side with the memory, likely plays a central part in that. Our experience with the phone found only one instance when the iPhone 18 Pro became hot: during intensive camera testing. (It cooled quickly afterward.)\n\nFor the eSIM-only models sold in the US and several other countries, the standard iPhone 18 Pro is rated for up to 36 hours of video playback, compared with 33 hours for the iPhone 17 Pro. Streamed video jumps from 30 hours in last year's model to 33 in the new one. The iPhone 18 Pro Max has a more dramatic improvement: up to 45 hours of video playback vs. 39 hours on the iPhone 17 Pro Max. Streamed video goes from 35 to 40 hours.\n\nFor the new models, Apple's specs introduced a new \"typical use\" battery life rating. It says the iPhone 18 Pro can last up to 24 hours, while the iPhone 18 Pro Max can reach 30 hours. The company didn't provide those estimates for the iPhone 17 Pro series.\n\nWith almost everything else being equal, this is where the iPhone 18 Pro Max makes its strongest case. Compared to the iPhone 18 Pro, Apple's video-playback rating is 25 percent higher, its streamed-video rating is about 21 percent higher, and its typical-use rating is 25 percent higher for the larger phone. If you also enjoy the bigger screen and can live with the size trade-offs, it's the way to go.\n\nTo charge those improved batteries, Apple says both iPhone 18 Pro models can reach a 50 percent charge in about 15 minutes with the right wall adapter (60 watts or higher with Adjustable Voltage Supply). That's an improvement over the iPhone 17 Pro models, which can reach 50 percent in about 20 minutes with a compatible 40-watt or higher adapter. MagSafe and Qi2 charging are the same on both generations: 25 watts.\n\nAll told, iPhone 17 Pro owners should probably stick with their current device . Those with an older iPhone might find it worth upgrading if the increased price is within their budget.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2267863/iphone-18-pro-vs-17-pro-comparison-explained/",
+      "publishedAt": "2026-09-26T22:45:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-0ff1a14760acf827:en",
+      "sourceId": "techcrunch-0ff1a14760acf827",
+      "lang": "en",
+      "title": "Insurers claim AI is already increasing healthcare costs",
+      "summary": "Blue Cross Blue Shield says hospital use of AI tools led to an additional $942M in healthcare spending over a two-year period.",
+      "body": "Posted:\n\nHospitals’ use of artificial intelligence tools as they submit insurance claims led to an additional $942 million in healthcare spending over a two-year period, according to an analysis by the Blue Cross Blue Shield Association .\n\nThe BCBSA analysis found “a sharp increase in patients being documented as having complex conditions,” but argued there is a “clear disconnect between [medical] coding and treatment,” as there’s “no evidence of corresponding change in care delivered.”\n\nThe New York Times pointed the analysis as just the latest sign that AI is contributing to an increase in healthcare costs . While battles between hospitals and insurers over treatments and payments are nothing new, the NYT said the use of AI on both sides seems to be making it worse.\n\nDr. Shiv Rao, founder of AI startup Abridge, acknowledged that the use of AI could lead to “a horrible dystopic future nobody wants to live in,” with “bots fighting bots, agents fighting agents.” But Rao said it might also reduce tensions and cut costs.\n\nAnd the BCBSA’s senior vice president Luke Chalker resisted characterizing the situation as a battle, claiming, “It’s not a war. It’s a completely one-sided blood bath,” with insurers on the losing side.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/09/26/insurers-claim-ai-is-already-increasing-healthcare-costs/",
+      "publishedAt": "2026-09-26T21:02:06.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "applevis-apps-599efc2fe374670e:en",
+      "sourceId": "applevis-apps-599efc2fe374670e",
+      "lang": "en",
+      "title": "Kodou - Swipe & Connect",
+      "summary": "New: an interactive tutorial lets you practice every chain rule before you play, on iPhone and Apple Watch. Kodou is a swipe-to-connect puzzle where every board plays a little differently and the clock never stops. Drag your finger across matching tiles, or find an ascending run of powers of two, 2 to 4 to 8 to 16 and beyond, for a bigger payoff. HOW TO PLAY - Swipe to connect three or more tiles: match the same value, or chain an ascending sequence of powers of two for double the score. - Watch for special tiles. Wildcards match any value, Ice tiles freeze your clock when cleared, and Bombs clear the block around them. - Plan around Blockers. They cannot be chained through. - The turn timer speeds up the longer you survive, so think fast and keep your eyes on the board. FEATURES - A twelve color palette that adapts to light and dark mode, so no two boards ever look quite the same. - Game Center leaderboards for both Score and Longest Chain, with All Time, Weekly, and Daily standings. - Full VoiceOver support. Explore the board by touch, then drag to connect a chain exactly the way a sighted player would, or build one tap at a time if you prefer. - Play the exact same game on Apple Watch. Kodou is free to play, supported by ads. A one time Remove Ads purchase clears all of them for good.",
+      "body": "New: an interactive tutorial lets you practice every chain rule before you play, on iPhone and Apple Watch.\n\nKodou is a swipe-to-connect puzzle where every board plays a little differently and the clock never stops. Drag your finger across matching tiles, or find an ascending run of powers of two, 2 to 4 to 8 to 16 and beyond, for a bigger payoff.\n\nHOW TO PLAY - Swipe to connect three or more tiles: match the same value, or chain an ascending sequence of powers of two for double the score. - Watch for special tiles. Wildcards match any value, Ice tiles freeze your clock when cleared, and Bombs clear the block around them. - Plan around Blockers. They cannot be chained through. - The turn timer speeds up the longer you survive, so think fast and keep your eyes on the board.\n\nFEATURES - A twelve color palette that adapts to light and dark mode, so no two boards ever look quite the same. - Game Center leaderboards for both Score and Longest Chain, with All Time, Weekly, and Daily standings. - Full VoiceOver support. Explore the board by touch, then drag to connect a chain exactly the way a sighted player would, or build one tap at a time if you prefer. - Play the exact same game on Apple Watch.\n\nKodou is free to play, supported by ads. A one time Remove Ads purchase clears all of them for good.",
+      "sourceName": "AppleVis Apps",
+      "originalUrl": "https://www.applevis.com/apps/ios/games/kodou-swipe-connect",
+      "publishedAt": "2026-09-26T20:06:00.000Z",
+      "categories": [
+        "apple",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "9to5mac-af7db6723a7118e6:en",
       "sourceId": "9to5mac-af7db6723a7118e6",
       "lang": "en",
@@ -4941,23 +4989,6 @@
       "publishedAt": "2026-09-26T16:34:59.000Z",
       "categories": [
         "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-42c981c5107741dc:en",
-      "sourceId": "engadget-42c981c5107741dc",
-      "lang": "en",
-      "title": "The MacBook models that macOS 27 Golden Gate does not support",
-      "summary": "macOS Golden Gate refines the Mac software experience, but not everyone can upgrade.",
-      "body": "Golden Gate supports a lot of Mac models, but it's the end of the line for Intel machines.\n\nThe latest version of macOS, dubbed Golden Gate, has finally arrived. Unfortunately, macOS 27 isn't an update available to all MacBook users. Depending on the age of your machine, you might be stuck with macOS 26 Tahoe indefinitely. However, this doesn't mean that some older MacBook models aren't worth the investment anymore — it depends on the specific chipset inside.\n\nGolden Gate introduces several new features and improvements to your Mac, perhaps the biggest of which is an AI-centric Siri overhaul aimed at making the digital assistant more useful in everyday tasks. Other changes include a more customizable (and in theory, less contentious) Liquid Glass, AI photo editing tools, automatic tab organization in Safari, general performance enhancements and much more. You might need to free up some room for macOS 27, which takes up significantly more space than Tahoe — that is, if your device can run the OS at all.\n\nGolden Gate draws a line at the start of the Apple silicon era, so if your Mac uses an Intel chip, macOS 27 is incompatible across the board. Generally, this means if your MacBook is from 2021 or later, you're all set to upgrade your OS. There are a couple of 2020 release exceptions: the M1 chip versions of the MacBook Pro and MacBook Air can also run Golden Gate.\n\nIn case you're not sure what you have, click the Apple menu at the top-left of the screen and choose About This Mac . If you see Chip followed by an M-series processor like M3 , you're on Apple silicon. Intel Macs will instead say Processor , followed by a CPU model like Intel Core i5 .\n\nThis discontinued support comes as no surprise, considering the Mac transition away from Intel hardware has been in the works since 2020. Though the change may have been sparked by a desire for more in-house tech, according to a former Intel engineer, it may have also come down to increasingly bad quality assurance with Intel's Skylake line. As inconvenient as it may be for those with older MacBooks, Golden Gate being the first macOS release that's Apple silicon-only is simply the final step in this transition.\n\nIf Apple's recent support timelines continue, macOS Tahoe will receive two more years of security updates, so those with an Intel Mac will be covered through September 2028. At that point, it will be time to upgrade. Alongside six-year-old computers getting the latest software update, it's safe to say Apple's older hardware support has been strong.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2266414/macbook-models-macos-27-golden-gate-does-not-support/",
-      "publishedAt": "2026-09-26T16:30:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple",
-        "programas-accesibles"
       ]
     },
     {
@@ -5076,22 +5107,6 @@
     },
     {
       "kind": "news",
-      "id": "techcrunch-da33734d41def4dc:en",
-      "sourceId": "techcrunch-da33734d41def4dc",
-      "lang": "en",
-      "title": "Crusoe abandons $1.25B plan to use Boom turbines at AI data centers",
-      "summary": "Boom Supersonic CEO Blake Scholl said the company's new stationary power plants were no longer in Crusoe's near-term plans.",
-      "body": "Crusoe, a Denver-based AI data center startup that recently raised $3.9 billion , has ended plans to use a new line of stationary power plants developed by fellow Denver company Boom Supersonic.\n\nFounded in 2018 as a bitcoin miner that ran on excess natural gas from oil fields, Crusoe has since become one of the biggest builders of AI data centers , including a massive campus in Abilene, Texas, that supplies computing power to OpenAI.\n\nBoom Supersonic, which is developing a supersonic passenger jet called Overture, launched a new business last year to sell a version of the engine it’s developing for that jet as natural gas-fired stationary power plants. Its Superpower turbine shares about 80% of the same parts with that airborne engine, called Symphony.\n\nCrusoe had signed on to be the first customer for this business, agreeing to spend $1.25 billion on 29 of Boom’s 42-megawatt Superpower turbines. The first deliveries were supposed to begin in 2027. But that deal has since fallen apart, according to Boom Supersonic CEO Blake Scholl.\n\nOn Friday, in a post on X , after congratulating Crusoe founders Cully Cavness and Chase Lochmiller on the company’s recent raise, Scholl said the companies are no longer moving forward with the turbine launch partnership. Although he did note that other customers were in its pipeline.\n\n“Boom will be delivering about 250MW of Superpowers next year to other sites, and we’re targeting 1GW in 2028,” Schooll wrote. “We’re grateful for the help Crusoe gave us in shaping Superpower and continue cheering for their successes. The future is long, and we look forward to potentially teaming up if/when turbines become part of their primary power mix.”\n\nScholl’s initial post include a line which he later removed: “The TL/DR is that turbines are no longer part of Crusoe’s near term primary power mix at Abilene/etc., so a launch partnership just didn’t make sense.” Crusoe spokesperson Andrew Schmitt subsequently told us that the company’s energy plans “haven’t changed” and that it still plans to use turbines, “just not Boom’s.”\n\n“We build AI factories from the power up, and we’re bringing new campuses online across the country, powered by innovative energy sources,” Andrew Schmitt said in an email. “As our portfolio grows, we stay flexible, choosing the energy solutions that are right for each site as its needs evolve — including turbines, along with wind, solar, batteries and the grid. While Boom has been a great partner, the partnership isn’t the right fit today. We wish them well.”\n\nCrusoe’s initial 1.2 gigawatt data center in Abilene that was built for Oracle and OpenAI is powered by the grid, according to the company. There is also a gas-turbine power plant that is used for backup power only. Crusoe is also building a 900 megawatt data center in Abilene for Microsoft, which will be powered by on-site gas turbines.\n\nLosing its launch customer is seemingly a setback for Boom, which raised $300 million last year, largely to commercialize the new business. The idea, Scholl told TechCrunch at the time, was to use profits from the stationary power plant business to fund the development of Overture.\n\nScholl could not be reached for comment before publication; TechCrunch will update this article if he responds.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/09/25/crusoe-abandons-1-25b-plan-to-use-boom-turbines-at-ai-data-centers/",
-      "publishedAt": "2026-09-25T23:11:10.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "ars-technica-35846096a0f6f9b5:en",
       "sourceId": "ars-technica-35846096a0f6f9b5",
       "lang": "en",
@@ -5153,23 +5168,6 @@
         "android",
         "apps-accesibles",
         "tecnologia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-55487bbd322d7819:en",
-      "sourceId": "the-verge-55487bbd322d7819",
-      "lang": "en",
-      "title": "These camera apps give you more control over the iPhone 18 Pro’s aperture",
-      "summary": "One of the questionable limitations of the iPhone 18 Pro's new main camera with a variable aperture is that you're limited to just four settings in the native iOS' camera app in manual mode: f/1.48, f/1.8, f/2.8, and f/4. Those same limitations are also in place when the app is adjusting the iris itself in […]",
-      "body": "One of the questionable limitations of the iPhone 18 Pro's new main camera with a variable aperture is that you're limited to just four settings in the native iOS' camera app in manual mode: f/1.48, f/1.8, f/2.8, and f/4. Those same limitations are also in place when the app is adjusting the iris itself in Auto aperture mode, but it turns out that's not a strict limitation of the iPhone's camera hardware. Apple's SDK allows third-party camera apps to implement more granular control of the aperture.\n\nBlackMagic Design's well-featured and still completely free BlackMagic Camera app for iOS was one of the first third-party options to introduce …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1000729/moment-pro-blackmagic-camera-ii-ios-app-iphone-18-pro-max-aperature-camera",
-      "publishedAt": "2026-09-25T17:23:30.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple",
-        "apps-accesibles"
       ]
     },
     {
@@ -5409,23 +5407,6 @@
         "tecnologia-accesibilidad",
         "proyectos-prototipos",
         "movilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "freedom-scientific-blog-d8254ae4300e75d6:en",
-      "sourceId": "freedom-scientific-blog-d8254ae4300e75d6",
-      "lang": "en",
-      "title": "Learn How to Work More Effectively with PDFs and JAWS",
-      "summary": "PDF documents are everywhere, from reports and forms to manuals and online resources. These documents can be accessed via a web browser or application like Adobe Acrobat Reader. When PDFs are formatted correctly, they can be read using standard navigation commands and JAWS Quick Navigation Keys; however, challenges arise when the PDF is not structured …",
-      "body": "PDF documents are everywhere, from reports and forms to manuals and online resources. These documents can be accessed via a web browser or application like Adobe Acrobat Reader.\n\nWhen PDFs are formatted correctly, they can be read using standard navigation commands and JAWS Quick Navigation Keys; however, challenges arise when the PDF is not structured correctly. Details like headings, reading order, table structure, and labeled form fields — tell JAWS what to say and in what order. Whether that structure exists at all, and whether it matches what a sighted reader sees, is what separates an accessible PDF from an inaccessible one.\n\nJoin us Thursday, September 17 at noon ET for a live webinar, “Beyond the Basics: Working More Effectively with PDF Documents and JAWS.” We’ll delve deeper into these challenges and provide tips for navigating PDFs more efficiently.\n\nIn this webinar, we’ll provide an overview of PDFs, plus show you how to:\n\nRegister for this webinar to improve proficiency and productivity when working with PDFs, and learn some troubleshooting tips along the way. ACVREP credits will be available for those who attend the live webinar.\n\nCan’t attend? We archive all webinars on our Webinars on Demand page. Have questions? Send an email to training@vispero.com .",
-      "sourceName": "Freedom Scientific",
-      "originalUrl": "https://training.vispero.com/learn-how-to-work-more-effectively-with-pdfs-and-jaws/",
-      "publishedAt": "2026-09-16T21:36:48.000Z",
-      "categories": [
-        "windows",
-        "tecnologia-accesibilidad",
-        "jaws"
       ]
     }
   ]

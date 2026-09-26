@@ -31,21 +31,17 @@ function services({ commitFails = false } = {}) {
   };
 }
 
-test('draft request with publish=false builds and packages without Play publication', async () => {
-  const svc = services();
+test('draft request with publish=false builds and packages without Google Play access', async () => {
   const buildCalls = [];
   const result = await runRelease({
     request: baseRequest(),
     state: { lastSuccessfulVersionCode: 10 },
     publish: false,
-    play: svc.play,
-    oneSignal: svc.oneSignal,
     build: async identity => { buildCalls.push(identity); },
     packageRelease: async identity => ({ artifact: `package-${identity.versionCode}.zip` })
   });
   assert.equal(result.versionCode, 11);
   assert.equal(buildCalls.length, 1);
-  assert.deepEqual(svc.calls, ['createEdit', 'listTracks', 'listBundles']);
   assert.equal(result.published, false);
 });
 

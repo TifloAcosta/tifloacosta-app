@@ -7,7 +7,8 @@ Esta guía describe el procedimiento rutinario. Está escrita para poder seguirs
 El sistema se encarga de:
 
 - validar la solicitud de versión;
-- consultar Google Play para obtener un `versionCode` que no se haya usado;
+- calcular localmente el siguiente `versionCode` durante una preparación sin publicar;
+- consultar Google Play y volver a comprobar el `versionCode` justo antes de una publicación autorizada;
 - ejecutar todas las pruebas;
 - compilar la app web móvil;
 - sincronizar Capacitor;
@@ -31,10 +32,12 @@ El repositorio ya utiliza estos secretos para firmar Android:
 - `TIFLOACOSTA_KEYSTORE_BASE64`
 - `TIFLOACOSTA_KEYSTORE_PASSWORD`
 
-Para la automatización completa hay que añadir una sola vez:
+Para publicar automáticamente hay que añadir una sola vez:
 
 - `GOOGLE_PLAY_SERVICE_ACCOUNT_JSON`: credenciales JSON de una cuenta de servicio autorizada para la aplicación TifloAcosta en Google Play Console.
 - `ONESIGNAL_REST_API_KEY`: clave REST de la aplicación de TifloAcosta en OneSignal.
+
+Esas dos credenciales de publicación no son necesarias para preparar y comprobar una compilación con `publish` desactivado.
 
 Nunca deben escribirse esas claves en archivos del repositorio, comentarios, incidencias ni notas de versión.
 
@@ -84,7 +87,9 @@ En GitHub Actions se utiliza el flujo:
 
 Se ejecuta con `publish` desactivado.
 
-El sistema realiza pruebas, obtiene el siguiente código disponible, compila, firma, verifica y crea el paquete final. No asigna la versión a una pista para los usuarios ni envía una notificación de actualización.
+El sistema realiza las pruebas, calcula el siguiente código a partir del último estado local, compila, firma, verifica y crea el paquete final. En este modo no solicita credenciales de Google Play, no abre una edición de Google Play, no asigna la versión a una pista y no envía una notificación de actualización.
+
+El `versionCode` de esta preparación es provisional. Cuando se autoriza una publicación, el flujo consulta Google Play, vuelve a calcular un código que no esté utilizado y recompila con ese código antes de subir el AAB. De este modo, una preparación puede hacerse completamente separada de Play sin arriesgar una colisión al publicar.
 
 Al terminar se obtiene un artefacto llamado:
 
@@ -111,14 +116,15 @@ Si falta cualquiera de las dos, no se publica.
 
 Cuando ambas condiciones se cumplen, el sistema:
 
-1. vuelve a verificar la compilación;
-2. sube el AAB firmado;
-3. asigna la versión a la pista indicada;
-4. incorpora las notas ES/EN;
-5. establece la prioridad;
-6. valida la edición de Google Play;
-7. confirma la edición;
-8. solo después de esa confirmación envía el aviso de actualización si `notifyUpdate` es `true`.
+1. consulta Google Play y confirma el siguiente `versionCode` disponible;
+2. vuelve a verificar y compilar la versión con ese código;
+3. sube el AAB firmado;
+4. asigna la versión a la pista indicada;
+5. incorpora las notas ES/EN;
+6. establece la prioridad;
+7. valida la edición de Google Play;
+8. confirma la edición;
+9. solo después de esa confirmación envía el aviso de actualización si `notifyUpdate` es `true`.
 
 Si Google Play falla antes de confirmar la edición, no se envía el aviso de nueva versión.
 
@@ -139,10 +145,17 @@ Para una actualización crítica de prioridad 5, el procedimiento inmediato pued
 
 El diálogo es independiente de la pantalla que estuviera usando la persona. No sustituye Novedades, Biblioteca, vídeos, lector ni otra sección de la app.
 
+## Comprobaciones automáticas antes de fusionar
+
+Los cambios que afecten a la automatización de versiones Android ejecutan un flujo específico de pruebas en los pull requests. Comprueba las regresiones generales, las pruebas de la app móvil y la construcción del paquete web antes de que el cambio llegue a `main`.
+
+Esto permite detectar el fallo en un paso concreto de GitHub Actions sin tener que recorrer manualmente todo el proceso de una compilación de publicación.
+
 ## Seguridad operativa
 
 - Un commit normal no ejecuta el flujo de publicación.
 - El flujo de publicación solo se inicia manualmente.
+- Preparar con `publish` desactivado no accede a Google Play.
 - La pista de destino procede de `request.json`.
 - Producción exige confirmación adicional.
 - Las claves no aparecen en los argumentos de Gradle ni en los artefactos.

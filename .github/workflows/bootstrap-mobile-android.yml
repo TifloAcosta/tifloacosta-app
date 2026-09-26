@@ -65,11 +65,11 @@ jobs:
           fi
           npx cap sync android
 
-      - name: Run Android unit tests
+      - name: Run Android unit tests and compile instrumentation tests
         working-directory: mobile/android
         run: |
           chmod +x gradlew
-          ./gradlew --no-daemon testDebugUnitTest
+          ./gradlew --no-daemon testDebugUnitTest assembleDebugAndroidTest
 
       - name: Prepare Android release signing when secrets are configured
         shell: bash

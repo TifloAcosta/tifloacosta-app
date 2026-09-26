@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - 'feature/leer-tifloacosta-android-foundation'
     paths:
       - 'mobile/**'
       - '.github/workflows/bootstrap-mobile-android.yml'
@@ -63,6 +64,12 @@ jobs:
             npx cap add android
           fi
           npx cap sync android
+
+      - name: Run Android unit tests
+        working-directory: mobile/android
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon testDebugUnitTest
 
       - name: Prepare Android release signing when secrets are configured
         shell: bash

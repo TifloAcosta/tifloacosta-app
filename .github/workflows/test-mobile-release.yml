@@ -37,7 +37,13 @@ jobs:
         working-directory: mobile
         run: |
           npm install --package-lock-only --ignore-scripts
-          git diff -- package-lock.json
+          node --input-type=module <<'NODE'
+          import lock from './package-lock.json' with { type: 'json' };
+          console.log('ROOT_ONESIGNAL=' + JSON.stringify(lock.packages[''].dependencies['@onesignal/capacitor-plugin']));
+          for (const [key, value] of Object.entries(lock.packages || {})) {
+            if (key.includes('@onesignal')) console.log('ONESIGNAL_ENTRY=' + key + '=' + JSON.stringify(value));
+          }
+          NODE
 
       - name: Install mobile dependencies
         working-directory: mobile

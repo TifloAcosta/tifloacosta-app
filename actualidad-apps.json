@@ -1,5 +1,17 @@
 [
   {
+    "id": "buscaapps-7fa0d7323d75c31d",
+    "title": "EasyWeather - Tiempo Accesible",
+    "sourceId": "buscaapps",
+    "sourceName": "BuscaApps",
+    "sourceUrl": "https://www.buscaapps.com/",
+    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1243",
+    "lang": "es",
+    "platform": "iOS",
+    "summary": "Una app del tiempo precisa, privada y accesible.",
+    "publishedAt": null
+  },
+  {
     "id": "buscaapps-ee92cae77de6709d",
     "title": "SonicRoom",
     "sourceId": "buscaapps",
@@ -108,16 +120,16 @@
     "publishedAt": null
   },
   {
-    "id": "buscaapps-f9e2dc0ec4b3dfa8",
-    "title": "Visionauta",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1232",
-    "lang": "es",
-    "platform": "iOS",
-    "summary": "App multifunción que emplea IA para leer textos, encontrar objetos, describir lo que tenemos delante y más.",
-    "publishedAt": null
+    "id": "applevis-apps-b69b009d167a5b08",
+    "title": "Restaurant Rush: Cook & Serve",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/restaurant-rush-cook-serve",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "Welcome to Restaurant Rush — the cozy kitchen-builder where every shift is a tiny puzzle. Run five themed restaurants across a 100-day story campaign, then push your record in Endless mode. Drag ingredients to the stove, plate orders before the timer ticks out, and bank coins to expand your menu, hire a waiter, or unlock the next neighborhood spot. What you'll do • Serve thirsty customers at Sip Stop, plate noodle bowls at Noodle Pit, toss tacos at Taco Truck, and three more restaurants to discover. • Master the rhythm: tap to take orders, prep at the right station, deliver before patience runs out, chase combos for huge tips. • Upgrade kitchen stations, add trays, hire waiters per restaurant, and unlock 50+ recipes that scale with your skill. • Customize your chef with 8 outfit presets, 4 hair styles, and a wardrobe of premium cosmetic items you unlock as you progress. Live ops that respect your time • Daily missions reset at midnight with shareable rewards. • Weekly challenges with global leaderboards. • Seasonal content drops curated by the live-ops team — new recipes, customer types, and chef gear show up without you needing to update the app. Built for one-handed play Restaurant Rush is designed for short sessions on the bus, in line, or before bed. No timers gating progress, no energy meter to wait out — just keep cooking when you want, pause anywhere. Free to download. Optional in-app purchases support continued development.",
+    "publishedAt": "2026-09-26T02:59:18.000Z"
   },
   {
     "id": "applevis-apps-456cafda828f02e9",
@@ -169,7 +181,7 @@
   },
   {
     "id": "applevis-apps-7b5840f570609115",
-    "title": "No wifi mini games",
+    "title": "No Wifi Mini Games",
     "sourceId": "applevis-apps",
     "sourceName": "AppleVis Apps",
     "sourceUrl": "https://www.applevis.com/",
@@ -180,15 +192,15 @@
     "publishedAt": "2026-09-15T19:19:37.000Z"
   },
   {
-    "id": "applevis-apps-514ff0f035cf5313",
-    "title": "Brainclash",
+    "id": "applevis-apps-4bb3f34ff884dda3",
+    "title": "Brainclash - Trivia Battle",
     "sourceId": "applevis-apps",
     "sourceName": "AppleVis Apps",
     "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/brainclash",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/brainclash-trivia-battle",
     "lang": "en",
     "platform": "Apple",
-    "summary": "New here? Challenge a friend, answer whenever you wish, and let the sharpest mind win. Multiple categories, and a daily reward waiting for you. Brainclash is a quiz game with a different rhythm: a refined battle of minds you take on in your own time, with no pressure. Challenge a friend to a match, let the game pair you with a random opponent, or train first against the computer. Play unfolds turn by turn: you answer, then your opponent answers, and the most accurate one wins. There's no tense timer forcing you both online at the same moment — take your turn whenever you like, and return for the next one anytime. Questions span a wide range of categories — General Knowledge, Science &amp; Nature, History, Geography, Sports, and Arts &amp; Entertainment — so you'll always find something that suits your interests and adds to what you know. And when a hard question comes your way, you have tools to help: remove half the options with 50:50, swap a question that doesn't suit you, or grant yourself a few extra seconds. The more you win, the higher you climb through the levels and the more coins you collect — and each day you can spin the daily wheel for a free reward. The game is made for everyone to enjoy: it works smoothly with TalkBack and VoiceOver, so screen reader users get a complete experience, crafted to be heard and not only seen. Add your friends, exchange messages between matches, and discover together who deserves the title of the smartest. Play in Arabic or English, and switch languages whenever you wish. So, are you ready to compete? Your next opponent is waiting on your move. Heading",
+    "summary": "Brainclash is a quiz game with a different rhythm: a refined battle of minds you take on in your own time, with no pressure. Challenge a friend to a match, let the game pair you with a random opponent, or train first against the computer. Play unfolds turn by turn: you answer, then your opponent answers, and the most accurate one wins. There's no tense timer forcing you both online at the same moment — take your turn whenever you like, and return for the next one anytime. Questions span a wide range of categories — General Knowledge, Science &amp; Nature, History, Geography, Sports, and Arts &amp; Entertainment — so you'll always find something that suits your interests and adds to what you know. And when a hard question comes your way, you have tools to help: remove half the options with 50:50, swap a question that doesn't suit you, or grant yourself a few extra seconds. The more you win, the higher you climb through the levels and the more coins you collect — and each day you can spin the daily wheel for a free reward. The game is made for everyone to enjoy: it works smoothly with TalkBack and VoiceOver, so screen reader users get a complete experience, crafted to be heard and not only seen. Add your friends, exchange messages between matches, and discover together who deserves the title of the smartest. Play in Arabic or English, and switch languages whenever you wish. So, are you ready to compete? Your next opponent is waiting on your move.",
     "publishedAt": "2026-09-14T00:13:01.000Z"
   },
   {
@@ -217,7 +229,7 @@
   },
   {
     "id": "applevis-apps-73bdd5fc2f2d9ef4",
-    "title": "One Line Journal app",
+    "title": "One Line Journal App",
     "sourceId": "applevis-apps",
     "sourceName": "AppleVis Apps",
     "sourceUrl": "https://www.applevis.com/",
@@ -226,17 +238,5 @@
     "platform": "Apple",
     "summary": "One sentence a day. One book at the end of the year. Your life is happening — quietly, quickly, in small moments. One Line, One Year captures 2026 as it unfolds and turns it into a beautifully structured book that's entirely yours. HOW IT WORKS Daily — Write one sentence about your day. That's it. Weekly — Once a week, reflect in 3–5 sentences. Your daily entries appear above for context, so nothing gets lost. Monthly — Write a brief summary that becomes a full chapter in your book. Book View — Watch your year assemble itself in real time — months as chapters, weeks and days woven beneath them. Export — At year's end, export your complete book as Markdown, PDF, or DOCX. BUILT FOR PRIVACY Everything stays on your device. No accounts. No cloud sync. No analytics. Face ID and passcode lock keep your words yours — and auto-lock kicks in the moment you leave the app. THOUGHTFUL DETAILS Highlights to mark the moments worth remembering Tags to thread themes across your year Gentle reminders to keep the habit alive A clean, distraction-free writing interface Simple timeline navigation — no clutter, no feed NO SOCIAL. NO NOTIFICATIONS. NO NOISE. Just you and your words, building something you'll want to read. A year feels long while you're living it. It feels short when you look back. Capture it — one sentence at a time.",
     "publishedAt": "2026-09-12T12:57:56.000Z"
-  },
-  {
-    "id": "applevis-apps-00b63fb62c1ff067",
-    "title": "Idle Dyson Swarm",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/idle-dyson-swarm",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Build an automated solar empire from a single bot into a galaxy-spanning Dyson swarm. Create bots, manufacture solar panels, harness stars for energy, and reinvest your profits into an ever-growing production network. Idle Dyson Swarm expands far beyond the first star: • Unlock Research, Skills, Facilities and Mega-Structures • Break through Infinity and optimise repeated prestige runs • Explore Simulations, Reality and Quantum progression • Process offline progress with configurable Stored Time controls • Inspect detailed production formulas and performance statistics • Customise navigation, number notation, audio and processing speed • Continue an existing same-device save from the original Unity version Play in English, French, German, Latin American Spanish, Brazilian Portuguese, Simplified Chinese, Russian or Japanese. Progress at your own pace, refine your automation, and see how much of reality your swarm can consume.",
-    "publishedAt": "2026-09-12T10:22:06.000Z"
   }
 ]

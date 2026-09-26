@@ -20,23 +20,28 @@ export async function runRelease({
   if (publish && request.status !== 'completed') {
     throw new Error('Publishing requires request status completed');
   }
-  if (!play) throw new Error('Google Play release client is required');
+  if (publish && !play) throw new Error('Google Play release client is required for publishing');
   if (typeof build !== 'function' || typeof packageRelease !== 'function') {
     throw new Error('Release build and packaging functions are required');
   }
 
-  const edit = await play.createEdit();
-  const editId = String(edit?.id || '').trim();
-  if (!editId) throw new Error('Google Play did not return an edit id');
+  let editId = '';
+  let playCodes = [];
+  if (publish) {
+    const edit = await play.createEdit();
+    editId = String(edit?.id || '').trim();
+    if (!editId) throw new Error('Google Play did not return an edit id');
 
-  const [tracksResult, bundlesResult] = await Promise.all([
-    play.listTracks(editId),
-    play.listBundles(editId)
-  ]);
-  const playCodes = collectVersionCodes({
-    tracks: tracksResult?.tracks || [],
-    bundles: bundlesResult?.bundles || []
-  });
+    const [tracksResult, bundlesResult] = await Promise.all([
+      play.listTracks(editId),
+      play.listBundles(editId)
+    ]);
+    playCodes = collectVersionCodes({
+      tracks: tracksResult?.tracks || [],
+      bundles: bundlesResult?.bundles || []
+    });
+  }
+
   const versionCode = chooseNextVersionCode({
     playCodes,
     localCode: Number(state?.lastSuccessfulVersionCode || 0)
@@ -85,11 +90,14 @@ async function cli() {
   const request = parseReleaseRequest(JSON.parse(await readFile(`${releaseDir}/request.json`, 'utf8')));
   const state = JSON.parse(await readFile(`${releaseDir}/state.json`, 'utf8'));
 
-  const serviceAccountRaw = String(process.env.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON || '').trim();
-  if (!serviceAccountRaw) throw new Error('GOOGLE_PLAY_SERVICE_ACCOUNT_JSON is required');
-  const serviceAccount = JSON.parse(serviceAccountRaw);
-  const accessToken = await createGoogleAccessToken(serviceAccount);
-  const play = createPlayReleaseClient({ packageName: 'com.tifloacosta.app', accessToken });
+  let play;
+  if (publish) {
+    const serviceAccountRaw = String(process.env.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON || '').trim();
+    if (!serviceAccountRaw) throw new Error('GOOGLE_PLAY_SERVICE_ACCOUNT_JSON is required for publishing');
+    const serviceAccount = JSON.parse(serviceAccountRaw);
+    const accessToken = await createGoogleAccessToken(serviceAccount);
+    play = createPlayReleaseClient({ packageName: 'com.tifloacosta.app', accessToken });
+  }
 
   let releaseAab = '';
   const result = await runRelease({

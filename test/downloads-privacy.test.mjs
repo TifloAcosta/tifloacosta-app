@@ -28,7 +28,7 @@ test('privacy policy keeps the dormant sound-search disclosure in both languages
 
 test('service worker refreshes only the active simple Downloads feature files', async () => {
   const source = await read('sw.js');
-  assert.match(source, /tifloacosta-app-v2-24-drive-free-library/);
+  assert.match(source, /tifloacosta-app-v2-25-colors/);
   assert.match(source, /downloads-core\.js\?v=1\.1/);
   assert.match(source, /download-config\.js\?v=1\.1/);
   assert.match(source, /downloads\.js\?v=1\.4/);

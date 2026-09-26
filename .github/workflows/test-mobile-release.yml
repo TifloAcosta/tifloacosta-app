@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   test:
@@ -22,9 +22,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
-        with:
-          ref: ${{ github.head_ref }}
-          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v5
@@ -35,31 +32,6 @@ jobs:
 
       - name: Run repository regression tests
         run: npm test
-
-      - name: Diagnose mobile lockfile
-        working-directory: mobile
-        run: |
-          npm install --package-lock-only --ignore-scripts
-          node --input-type=module <<'NODE'
-          import lock from './package-lock.json' with { type: 'json' };
-          console.log('ROOT_ONESIGNAL=' + JSON.stringify(lock.packages[''].dependencies['@onesignal/capacitor-plugin']));
-          for (const [key, value] of Object.entries(lock.packages || {})) {
-            if (key.includes('@onesignal')) console.log('ONESIGNAL_ENTRY=' + key + '=' + JSON.stringify(value));
-          }
-          NODE
-
-      - name: Commit generated mobile lockfile
-        if: github.event_name == 'pull_request'
-        run: |
-          if git diff --quiet -- mobile/package-lock.json; then
-            echo "Lockfile already synchronized."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add mobile/package-lock.json
-          git commit -m "fix: sincronizar lock de OneSignal"
-          git push origin HEAD:${{ github.head_ref }}
 
       - name: Install mobile dependencies
         working-directory: mobile

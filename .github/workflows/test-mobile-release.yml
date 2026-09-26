@@ -33,6 +33,12 @@ jobs:
       - name: Run repository regression tests
         run: npm test
 
+      - name: Diagnose mobile lockfile
+        working-directory: mobile
+        run: |
+          npm install --package-lock-only --ignore-scripts
+          git diff -- package-lock.json
+
       - name: Install mobile dependencies
         working-directory: mobile
         run: npm ci

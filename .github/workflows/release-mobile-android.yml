@@ -74,13 +74,13 @@ jobs:
             echo "Android signing credentials are incomplete."
             exit 1
           fi
-          if [ -z "${GOOGLE_PLAY_SERVICE_ACCOUNT_JSON:-}" ]; then
-            echo "GOOGLE_PLAY_SERVICE_ACCOUNT_JSON is not configured."
-            exit 1
-          fi
-          if [ "${{ github.event_name == 'workflow_dispatch' && inputs.publish }}" = "true" ] && [ -z "${ONESIGNAL_REST_API_KEY:-}" ]; then
+          if [ "${{ github.event_name == 'workflow_dispatch' && inputs.publish }}" = "true" ]; then
+            if [ -z "${GOOGLE_PLAY_SERVICE_ACCOUNT_JSON:-}" ]; then
+              echo "GOOGLE_PLAY_SERVICE_ACCOUNT_JSON is required for publishing."
+              exit 1
+            fi
             notify="$(node -e "const r=require('./mobile/release/request.json'); process.stdout.write(String(r.notifyUpdate===true))")"
-            if [ "$notify" = "true" ]; then
+            if [ "$notify" = "true" ] && [ -z "${ONESIGNAL_REST_API_KEY:-}" ]; then
               echo "ONESIGNAL_REST_API_KEY is required because this release requests an update notification."
               exit 1
             fi

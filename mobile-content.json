@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-26T10:17:47.179Z",
+  "generatedAt": "2026-09-26T14:49:51.471Z",
   "resources": [
     {
       "kind": "resource",
@@ -5364,23 +5364,6 @@
         "windows",
         "tecnologia-accesibilidad",
         "jaws"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "accessible-android-dd64e81e0c3fde69:en",
-      "sourceId": "accessible-android-dd64e81e0c3fde69",
-      "lang": "en",
-      "title": "Jieshuo Touch Focus And Double Tap Delays",
-      "summary": "Whether you are exploring the screen or trying to find a specific element, there is a delay between touching the screen and focusing on the…",
-      "body": "Published 16 September 2026 by Kareen Kiwan\n\nWhether you are exploring the screen or trying to find a specific element, there is a delay between touching the screen and focusing on the element under your finger. Similar to TalkBack, Jieshuo screen reader allows you to change the value of this delay. It also allows you to set the time in which 2 taps are registered as an accessibility double tap.\n\nIn order to change the touch focus delay and double tap delay values, you must first enable handling gestures directly through Jieshuo. To do this, go to Advanced settings > Operation settings and check the Handle gestures in the screen reader checkbox.\n\nThe next item in this section is for setting the touch focus delay value. Available values are 150, 200, 250, and 300 milliseconds. To change the time for double tap registration, select Double tap delay and choose any of the available values. The same values as those available for the touch focus delay are provided here.\n\nIn the same settings section, you will find an option called One-finger system gesture trigger range, with the following ranges: small, medium, big, and maximum. This setting defines the distance the finger needs to cover when performing one-finger system navigation gestures, such as swiping up from the bottom to go to Home.\n\nPublished in Tutorials",
-      "sourceName": "Accessible Android",
-      "originalUrl": "https://accessibleandroid.com/jieshuo-touch-focus-and-double-tap-delays/",
-      "publishedAt": "2026-09-16T13:12:40.000Z",
-      "categories": [
-        "android",
-        "apps-accesibles",
-        "tecnologia-accesibilidad"
       ]
     }
   ]

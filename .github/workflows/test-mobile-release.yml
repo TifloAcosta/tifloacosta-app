@@ -1,0 +1,46 @@
+name: Test Android release automation
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/release-mobile-android.yml'
+      - '.github/workflows/test-mobile-release.yml'
+      - 'mobile/release/**'
+      - 'mobile/scripts/**'
+      - 'mobile/src/**'
+      - 'mobile/test/**'
+      - 'mobile/package.json'
+      - 'mobile/package-lock.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+
+      - name: Run repository regression tests
+        run: npm test
+
+      - name: Install mobile dependencies
+        working-directory: mobile
+        run: npm ci
+
+      - name: Run mobile tests
+        working-directory: mobile
+        run: npm test
+
+      - name: Build mobile web bundle
+        working-directory: mobile
+        run: npm run build

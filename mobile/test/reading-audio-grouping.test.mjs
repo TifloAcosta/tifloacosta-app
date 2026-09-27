@@ -65,15 +65,15 @@ test('picker defers all-audio multi-selection until the user chooses one book in
   }
 });
 
-test('audiobook integration preserves injected plugin fallback and passes tracks into the audio screen', async () => {
-  const [wrapper, readingBook] = await Promise.all([
+test('audiobook integration preserves injected plugin fallback and loads tracks when the caller does not pass them', async () => {
+  const [wrapper, audioScreen] = await Promise.all([
     read('src/native/reading-library-plugin.mjs'),
-    read('src/screens/reading-book.mjs')
+    read('src/screens/reading-audio.mjs')
   ]);
 
   assert.match(wrapper, /audioGroupPlugin\s*=\s*null/);
   assert.match(wrapper, /plugin\s*===\s*NativeTifloReading[\s\S]*NativeTifloReadingAudioGroup[\s\S]*:\s*plugin/);
-  assert.match(readingBook, /tracks:\s*opened\.audioTracks\s*\|\|\s*\[\]/);
+  assert.match(audioScreen, /audioTracks\.length\s*\?\s*Promise\.resolve\(audioTracks\)\s*:\s*client\.listAudioTracks\(book\.id\)/);
 });
 
 test('opened audio exposes ordered tracks and Media3 playlist transition state', async () => {

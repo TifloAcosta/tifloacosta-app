@@ -18,6 +18,7 @@ import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.ActivityCallback;
 import com.getcapacitor.annotation.CapacitorPlugin;
+import com.tifloacosta.app.reading.AndroidReadingAudioProbe;
 import com.tifloacosta.app.reading.PdfBoxReadingPdfBackend;
 import com.tifloacosta.app.reading.ReadingBookQuery;
 import com.tifloacosta.app.reading.ReadingBookRecord;
@@ -84,7 +85,13 @@ public class TifloReadingPlugin extends Plugin {
         database = new ReadingLibraryDatabase(context);
         fileStore = new AndroidReadingFileStore(context);
         pdfExtractor = new ReadingPdfExtractor(new PdfBoxReadingPdfBackend(context));
-        importer = new ReadingImportService(database, fileStore, System::currentTimeMillis, pdfExtractor);
+        importer = new ReadingImportService(
+                database,
+                fileStore,
+                System::currentTimeMillis,
+                pdfExtractor,
+                new AndroidReadingAudioProbe()
+        );
         launchIntent = getActivity().getIntent();
         getBridge().execute(importer::cleanupStaleTemps);
     }
@@ -94,7 +101,22 @@ public class TifloReadingPlugin extends Plugin {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("*/*");
-        intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{"text/plain", "text/html", "application/pdf"});
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{
+                "text/plain",
+                "text/html",
+                "application/pdf",
+                "audio/mpeg",
+                "audio/mp4",
+                "audio/aac",
+                "audio/ogg",
+                "audio/opus",
+                "audio/flac",
+                "audio/wav",
+                "audio/x-m4a",
+                "audio/x-m4b",
+                "audio/x-flac",
+                "audio/x-wav"
+        });
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         startActivityForResult(call, intent, "pickDocumentsResult");
     }
@@ -191,7 +213,7 @@ public class TifloReadingPlugin extends Plugin {
                             return;
                         }
                     }
-                } else {
+                } else if (!"audio".equals(record.getFormat())) {
                     result.put("content", fileStore.readUtf8(record.getRelativePath()));
                 }
                 call.resolve(result);
@@ -753,6 +775,18 @@ public class TifloReadingPlugin extends Plugin {
             return new FileInputStream(new File(tempDirectory, tempName));
         }
 
+        @Override
+        public File tempFile(String tempName) throws IOException {
+            ensureDirectoryForIo(tempDirectory);
+            File file = new File(tempDirectory, tempName);
+            String tempRoot = tempDirectory.getCanonicalPath();
+            String filePath = file.getCanonicalPath();
+            if (!filePath.startsWith(tempRoot + File.separator)) {
+                throw new IOException("Invalid reading temp path");
+            }
+            return file;
+        }
+
         public InputStream openStoredInput(String relativePath) throws IOException {
             return new FileInputStream(safeRelativeFile(relativePath));
         }
@@ -772,17 +806,34 @@ public class TifloReadingPlugin extends Plugin {
 
         @Override
         public String moveTempToItem(String tempName, String id) throws IOException {
-            return moveTempToItem(tempName, id, "txt");
+            return moveTempToItem(tempName, id, "txt", "txt");
         }
 
         @Override
         public String moveTempToItem(String tempName, String id, String format) throws IOException {
+            return moveTempToItem(tempName, id, format, format);
+        }
+
+        @Override
+        public String moveTempToItem(
+                String tempName,
+                String id,
+                String format,
+                String sourceExtension
+        ) throws IOException {
             File source = new File(tempDirectory, tempName);
             File itemDirectory = new File(itemsDirectory, id);
             ensureDirectoryForIo(itemDirectory);
-            String sourceName = "html".equals(format)
-                    ? "source.html"
-                    : "pdf".equals(format) ? "source.pdf" : "source.txt";
+            String sourceName;
+            if ("html".equals(format)) {
+                sourceName = "source.html";
+            } else if ("pdf".equals(format)) {
+                sourceName = "source.pdf";
+            } else if ("audio".equals(format)) {
+                sourceName = "source." + safeAudioExtension(sourceExtension);
+            } else {
+                sourceName = "source.txt";
+            }
             File destination = new File(itemDirectory, sourceName);
             if (!source.renameTo(destination)) {
                 try (InputStream input = new FileInputStream(source); OutputStream output = new FileOutputStream(destination, false)) {
@@ -844,6 +895,23 @@ public class TifloReadingPlugin extends Plugin {
                 throw new IOException("Invalid reading library path");
             }
             return file;
+        }
+
+        private static String safeAudioExtension(String extension) throws IOException {
+            if (extension == null) throw new IOException("Missing reading audio extension");
+            switch (extension.toLowerCase()) {
+                case "mp3":
+                case "m4a":
+                case "m4b":
+                case "aac":
+                case "ogg":
+                case "opus":
+                case "flac":
+                case "wav":
+                    return extension.toLowerCase();
+                default:
+                    throw new IOException("Unsupported reading audio extension");
+            }
         }
 
         private static void ensureDirectory(File directory) {

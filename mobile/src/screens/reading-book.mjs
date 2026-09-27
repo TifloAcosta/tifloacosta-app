@@ -2,6 +2,7 @@ import { parseHtmlDocument } from '../core/reading-html-adapter.mjs';
 import { pageForPosition, parsePdfDocument, positionForPage } from '../core/reading-pdf-adapter.mjs';
 import { normalizeSemanticPosition, parseTextDocument } from '../core/reading-semantic-model.mjs';
 import { createReadingSpeechController } from '../core/reading-speech.mjs';
+import { createReadingAudioView } from './reading-audio.mjs';
 import { createReadingMarksPanel } from './reading-marks.mjs';
 import { createReadingSearchPanel } from './reading-search.mjs';
 import { createReadingSettingsPanel } from './reading-settings.mjs';
@@ -244,6 +245,7 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
   let activeBook = null;
   let documentModel = null;
   let speech = null;
+  let audioView = null;
   let currentPosition = { blockIndex: 0, unitIndex: 0 };
   let searchPanel = null;
   let marksPanel = null;
@@ -457,7 +459,26 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
     marksPanel?.destroy();
     settingsPanel?.destroy();
     if (speech) void speech.destroy();
+    if (audioView) void audioView.destroy();
   });
+
+  async function initializeOpenedAudioBook(opened) {
+    activeBook = opened.book;
+    heading.textContent = activeBook.title || t('readingLibrary.untitled');
+    pdfPasswordForm.hidden = true;
+    clearInteractiveReading();
+    status.textContent = t('readingAudio.preparing');
+    audioView = createReadingAudioView({
+      root: readerContainer,
+      panelsRoot: panels,
+      client,
+      book: activeBook,
+      t
+    });
+    const prepared = await audioView.prepare();
+    if (destroyed) return;
+    status.textContent = prepared ? '' : t('readingAudio.unavailable');
+  }
 
   async function initializeOpenedBook(opened) {
     activeBook = opened.book;
@@ -578,6 +599,10 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
       return;
     }
 
+    if (opened.book.format === 'audio') {
+      await initializeOpenedAudioBook(opened);
+      return;
+    }
     if (opened.book.format === 'pdf' && opened.passwordRequired) {
       showPdfPasswordState(opened);
       return;

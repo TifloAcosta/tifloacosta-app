@@ -1,5 +1,17 @@
 [
   {
+    "id": "buscaapps-7fa0d7323d75c31d",
+    "title": "EasyWeather - Tiempo Accesible",
+    "sourceId": "buscaapps",
+    "sourceName": "BuscaApps",
+    "sourceUrl": "https://www.buscaapps.com/",
+    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1243",
+    "lang": "es",
+    "platform": "iOS",
+    "summary": "Una app del tiempo precisa, privada y accesible.",
+    "publishedAt": null
+  },
+  {
     "id": "buscaapps-ee92cae77de6709d",
     "title": "SonicRoom",
     "sourceId": "buscaapps",
@@ -108,16 +120,28 @@
     "publishedAt": null
   },
   {
-    "id": "buscaapps-f9e2dc0ec4b3dfa8",
-    "title": "Visionauta",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1232",
-    "lang": "es",
-    "platform": "iOS",
-    "summary": "App multifunción que emplea IA para leer textos, encontrar objetos, describir lo que tenemos delante y más.",
-    "publishedAt": null
+    "id": "applevis-apps-599efc2fe374670e",
+    "title": "Kodou - Swipe & Connect",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/kodou-swipe-connect",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "New: an interactive tutorial lets you practice every chain rule before you play, on iPhone and Apple Watch. Kodou is a swipe-to-connect puzzle where every board plays a little differently and the clock never stops. Drag your finger across matching tiles, or find an ascending run of powers of two, 2 to 4 to 8 to 16 and beyond, for a bigger payoff. HOW TO PLAY - Swipe to connect three or more tiles: match the same value, or chain an ascending sequence of powers of two for double the score. - Watch for special tiles. Wildcards match any value, Ice tiles freeze your clock when cleared, and Bombs clear the block around them. - Plan around Blockers. They cannot be chained through. - The turn timer speeds up the longer you survive, so think fast and keep your eyes on the board. FEATURES - A twelve color palette that adapts to light and dark mode, so no two boards ever look quite the same. - Game Center leaderboards for both Score and Longest Chain, with All Time, Weekly, and Daily standings. - Full VoiceOver support. Explore the board by touch, then drag to connect a chain exactly the way a sighted player would, or build one tap at a time if you prefer. - Play the exact same game on Apple Watch. Kodou is free to play, supported by ads. A one time Remove Ads purchase clears all of them for good.",
+    "publishedAt": "2026-09-26T20:06:00.000Z"
+  },
+  {
+    "id": "applevis-apps-b69b009d167a5b08",
+    "title": "Restaurant Rush: Cook & Serve",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/restaurant-rush-cook-serve",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "Welcome to Restaurant Rush — the cozy kitchen-builder where every shift is a tiny puzzle. Run five themed restaurants across a 100-day story campaign, then push your record in Endless mode. Drag ingredients to the stove, plate orders before the timer ticks out, and bank coins to expand your menu, hire a waiter, or unlock the next neighborhood spot. What you'll do • Serve thirsty customers at Sip Stop, plate noodle bowls at Noodle Pit, toss tacos at Taco Truck, and three more restaurants to discover. • Master the rhythm: tap to take orders, prep at the right station, deliver before patience runs out, chase combos for huge tips. • Upgrade kitchen stations, add trays, hire waiters per restaurant, and unlock 50+ recipes that scale with your skill. • Customize your chef with 8 outfit presets, 4 hair styles, and a wardrobe of premium cosmetic items you unlock as you progress. Live ops that respect your time • Daily missions reset at midnight with shareable rewards. • Weekly challenges with global leaderboards. • Seasonal content drops curated by the live-ops team — new recipes, customer types, and chef gear show up without you needing to update the app. Built for one-handed play Restaurant Rush is designed for short sessions on the bus, in line, or before bed. No timers gating progress, no energy meter to wait out — just keep cooking when you want, pause anywhere. Free to download. Optional in-app purchases support continued development.",
+    "publishedAt": "2026-09-26T02:59:18.000Z"
   },
   {
     "id": "applevis-apps-456cafda828f02e9",
@@ -169,7 +193,7 @@
   },
   {
     "id": "applevis-apps-7b5840f570609115",
-    "title": "No wifi mini games",
+    "title": "No Wifi Mini Games",
     "sourceId": "applevis-apps",
     "sourceName": "AppleVis Apps",
     "sourceUrl": "https://www.applevis.com/",
@@ -180,15 +204,15 @@
     "publishedAt": "2026-09-15T19:19:37.000Z"
   },
   {
-    "id": "applevis-apps-514ff0f035cf5313",
-    "title": "Brainclash",
+    "id": "applevis-apps-4bb3f34ff884dda3",
+    "title": "Brainclash - Trivia Battle",
     "sourceId": "applevis-apps",
     "sourceName": "AppleVis Apps",
     "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/brainclash",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/brainclash-trivia-battle",
     "lang": "en",
     "platform": "Apple",
-    "summary": "New here? Challenge a friend, answer whenever you wish, and let the sharpest mind win. Multiple categories, and a daily reward waiting for you. Brainclash is a quiz game with a different rhythm: a refined battle of minds you take on in your own time, with no pressure. Challenge a friend to a match, let the game pair you with a random opponent, or train first against the computer. Play unfolds turn by turn: you answer, then your opponent answers, and the most accurate one wins. There's no tense timer forcing you both online at the same moment — take your turn whenever you like, and return for the next one anytime. Questions span a wide range of categories — General Knowledge, Science &amp; Nature, History, Geography, Sports, and Arts &amp; Entertainment — so you'll always find something that suits your interests and adds to what you know. And when a hard question comes your way, you have tools to help: remove half the options with 50:50, swap a question that doesn't suit you, or grant yourself a few extra seconds. The more you win, the higher you climb through the levels and the more coins you collect — and each day you can spin the daily wheel for a free reward. The game is made for everyone to enjoy: it works smoothly with TalkBack and VoiceOver, so screen reader users get a complete experience, crafted to be heard and not only seen. Add your friends, exchange messages between matches, and discover together who deserves the title of the smartest. Play in Arabic or English, and switch languages whenever you wish. So, are you ready to compete? Your next opponent is waiting on your move. Heading",
+    "summary": "Brainclash is a quiz game with a different rhythm: a refined battle of minds you take on in your own time, with no pressure. Challenge a friend to a match, let the game pair you with a random opponent, or train first against the computer. Play unfolds turn by turn: you answer, then your opponent answers, and the most accurate one wins. There's no tense timer forcing you both online at the same moment — take your turn whenever you like, and return for the next one anytime. Questions span a wide range of categories — General Knowledge, Science &amp; Nature, History, Geography, Sports, and Arts &amp; Entertainment — so you'll always find something that suits your interests and adds to what you know. And when a hard question comes your way, you have tools to help: remove half the options with 50:50, swap a question that doesn't suit you, or grant yourself a few extra seconds. The more you win, the higher you climb through the levels and the more coins you collect — and each day you can spin the daily wheel for a free reward. The game is made for everyone to enjoy: it works smoothly with TalkBack and VoiceOver, so screen reader users get a complete experience, crafted to be heard and not only seen. Add your friends, exchange messages between matches, and discover together who deserves the title of the smartest. Play in Arabic or English, and switch languages whenever you wish. So, are you ready to compete? Your next opponent is waiting on your move.",
     "publishedAt": "2026-09-14T00:13:01.000Z"
   },
   {
@@ -214,29 +238,5 @@
     "platform": "Apple",
     "summary": "Final Fortress is a match-3 puzzle. The whole game is the screen of an old terminal: green text, one cursor, and you, the commandant of the last fortress. It is a quiet game. A working console in the dark, the hum of the systems, static like rain. A watch takes fifteen or twenty minutes: do the day's tasks, read what came in, hand over. Nothing hurries you, and nothing happens while you are away. Come back after a week and the fortress is exactly as you left it. Match tiles to finish the day's tasks. Each task brings supplies. Spend them to repair the fortress: reactor, hydroponics, antenna, armory, infirmary. Every repaired system opens new missions. Match 4 or more to charge special tiles. They clear a line, a block, or every tile of one kind. Swap two charged tiles together and they fire as one bigger shape, up to the whole board. The board gets busier as you go: convoy crates that pay out at the bottom, sealed containers with a special tile inside, interference to clear layer by layer, burned sectors the tiles fall past. Some tasks ask for a pattern: decode a sequence in order, or fill a gauge in every column. AI Madness is a mode of its own, outside the fortress. Each shift bends the rules: boards up to 10 by 13, sometimes only three kinds of tile, cascades that barely stop, tasks that may be impossible. On an iPhone with Apple Intelligence, Apple's on-device model (Foundation Models) picks the shift's character and writes its line in the log. Nothing leaves the phone. Otherwise the terminal does the same on its own. Nothing is at stake and nothing is banked. Every shift has a code. Send it to a friend and they get exactly the same board. There is a story in the log: three acts, four threads, and the notes of the commandants who held the fortress before you. It comes a few lines at a time. Read it or skip it. The game never nags about it. Repair the antenna and you will see a board with other players' stations. It is view-only, there is no chat, and it updates once a day. When the story is over, the log keeps going quietly on its own. The music belongs to your fortress alone. The sound is synthesized live and seeded from your fortress, so your station hums like no other and never loops. The hum changes with what is running, with the hour of the night and with the weather outside. Each kind of tile has its own note, and a cascade climbs the scale. One extra room, The Long Dark, carries a call of its own. Three more stations use the instruments in your phone: a weather post that reads the barometer, an acoustic modem and a direction finder. A home screen widget shows your fortress at a glance, in StandBy too. No ads. No lives, timers, energy or streaks. No pop-ups, no push notifications, no accounts, no daily rewards to come back for. Run out of moves and the terminal just says the packet was lost. Try again, nothing is taken away. You can drop a task at any time. Purchases are cosmetic only: screen colors, one extra soundtrack, custom names. Nothing you can buy helps you play, and no purchase moves you up the board. Works offline, on iPhone and iPad. Fully playable with VoiceOver, with a flicker-free stable phosphor mode and a calm mode that softens the board's flashes and haptics.",
     "publishedAt": "2026-09-12T17:10:00.000Z"
-  },
-  {
-    "id": "applevis-apps-73bdd5fc2f2d9ef4",
-    "title": "One Line Journal app",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/lifestyle/one-line-journal-app",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "One sentence a day. One book at the end of the year. Your life is happening — quietly, quickly, in small moments. One Line, One Year captures 2026 as it unfolds and turns it into a beautifully structured book that's entirely yours. HOW IT WORKS Daily — Write one sentence about your day. That's it. Weekly — Once a week, reflect in 3–5 sentences. Your daily entries appear above for context, so nothing gets lost. Monthly — Write a brief summary that becomes a full chapter in your book. Book View — Watch your year assemble itself in real time — months as chapters, weeks and days woven beneath them. Export — At year's end, export your complete book as Markdown, PDF, or DOCX. BUILT FOR PRIVACY Everything stays on your device. No accounts. No cloud sync. No analytics. Face ID and passcode lock keep your words yours — and auto-lock kicks in the moment you leave the app. THOUGHTFUL DETAILS Highlights to mark the moments worth remembering Tags to thread themes across your year Gentle reminders to keep the habit alive A clean, distraction-free writing interface Simple timeline navigation — no clutter, no feed NO SOCIAL. NO NOTIFICATIONS. NO NOISE. Just you and your words, building something you'll want to read. A year feels long while you're living it. It feels short when you look back. Capture it — one sentence at a time.",
-    "publishedAt": "2026-09-12T12:57:56.000Z"
-  },
-  {
-    "id": "applevis-apps-00b63fb62c1ff067",
-    "title": "Idle Dyson Swarm",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/idle-dyson-swarm",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Build an automated solar empire from a single bot into a galaxy-spanning Dyson swarm. Create bots, manufacture solar panels, harness stars for energy, and reinvest your profits into an ever-growing production network. Idle Dyson Swarm expands far beyond the first star: • Unlock Research, Skills, Facilities and Mega-Structures • Break through Infinity and optimise repeated prestige runs • Explore Simulations, Reality and Quantum progression • Process offline progress with configurable Stored Time controls • Inspect detailed production formulas and performance statistics • Customise navigation, number notation, audio and processing speed • Continue an existing same-device save from the original Unity version Play in English, French, German, Latin American Spanish, Brazilian Portuguese, Simplified Chinese, Russian or Japanese. Progress at your own pace, refine your automation, and see how much of reality your swarm can consume.",
-    "publishedAt": "2026-09-12T10:22:06.000Z"
   }
 ]

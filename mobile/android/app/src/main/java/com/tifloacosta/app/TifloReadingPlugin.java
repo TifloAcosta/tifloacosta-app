@@ -18,6 +18,7 @@ import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.ActivityCallback;
 import com.getcapacitor.annotation.CapacitorPlugin;
+import com.tifloacosta.app.reading.PdfBoxReadingPdfBackend;
 import com.tifloacosta.app.reading.ReadingBookQuery;
 import com.tifloacosta.app.reading.ReadingBookRecord;
 import com.tifloacosta.app.reading.ReadingContentValidator;
@@ -27,6 +28,7 @@ import com.tifloacosta.app.reading.ReadingImportService;
 import com.tifloacosta.app.reading.ReadingImportSource;
 import com.tifloacosta.app.reading.ReadingLibraryDatabase;
 import com.tifloacosta.app.reading.ReadingMarkRecord;
+import com.tifloacosta.app.reading.ReadingPdfExtractor;
 import com.tifloacosta.app.reading.ReadingSettingsRecord;
 
 import java.io.File;
@@ -79,7 +81,8 @@ public class TifloReadingPlugin extends Plugin {
         Context context = getContext().getApplicationContext();
         database = new ReadingLibraryDatabase(context);
         fileStore = new AndroidReadingFileStore(context);
-        importer = new ReadingImportService(database, fileStore, System::currentTimeMillis);
+        ReadingPdfExtractor pdfExtractor = new ReadingPdfExtractor(new PdfBoxReadingPdfBackend(context));
+        importer = new ReadingImportService(database, fileStore, System::currentTimeMillis, pdfExtractor);
         launchIntent = getActivity().getIntent();
         getBridge().execute(importer::cleanupStaleTemps);
     }
@@ -88,8 +91,8 @@ public class TifloReadingPlugin extends Plugin {
     public void pickDocuments(PluginCall call) {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("text/*");
-        intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{"text/plain", "text/html"});
+        intent.setType("*/*");
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{"text/plain", "text/html", "application/pdf"});
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         startActivityForResult(call, intent, "pickDocumentsResult");
     }
@@ -689,6 +692,12 @@ public class TifloReadingPlugin extends Plugin {
         }
 
         @Override
+        public InputStream openTempInput(String tempName) throws IOException {
+            ensureDirectoryForIo(tempDirectory);
+            return new FileInputStream(new File(tempDirectory, tempName));
+        }
+
+        @Override
         public boolean tempHasNonWhitespaceText(String tempName) throws IOException {
             return tempHasReadableText(tempName, "txt");
         }
@@ -711,8 +720,10 @@ public class TifloReadingPlugin extends Plugin {
             File source = new File(tempDirectory, tempName);
             File itemDirectory = new File(itemsDirectory, id);
             ensureDirectoryForIo(itemDirectory);
-            String extension = "html".equals(format) ? "html" : "txt";
-            File destination = new File(itemDirectory, "source." + extension);
+            String sourceName = "html".equals(format)
+                    ? "source.html"
+                    : "pdf".equals(format) ? "source.pdf" : "source.txt";
+            File destination = new File(itemDirectory, sourceName);
             if (!source.renameTo(destination)) {
                 try (InputStream input = new FileInputStream(source); OutputStream output = new FileOutputStream(destination, false)) {
                     byte[] buffer = new byte[8192];
@@ -727,7 +738,7 @@ public class TifloReadingPlugin extends Plugin {
                     throw new IOException("Unable to remove reading import temp file");
                 }
             }
-            return "items/" + id + "/source." + extension;
+            return "items/" + id + "/" + sourceName;
         }
 
         @Override

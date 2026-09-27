@@ -153,7 +153,9 @@ test('PDF vertical slice keeps password/no-text/invalid states separate without 
   assert.match(plugin, /passwordRequired/);
   assert.match(plugin, /passwordRejected/);
   assert.match(plugin, /pdfNoText/);
-  assert.match(client, /openBook\(id, \{ password = null \} = \{\}\)/);
+  assert.match(client, /async function openBook\(id, options = \{\}\)/);
+  assert.match(client, /const password = String\(options\?\.password \?\? ['"]['"]\)/);
+  assert.match(client, /plugin\.openBook\(cleanId, \{ password \}\)/);
   assert.match(screen, /passwordInput\.value\s*=\s*['"]['"]/);
 
   assert.doesNotMatch(database, /password/i);

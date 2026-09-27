@@ -121,6 +121,14 @@ export function createReadingLibraryPlugin(
     return safeCall(audioPlugin, 'setAudioSpeed', options, null);
   }
 
+  async function setAudioSleepTimer(options = {}) {
+    return safeCall(audioPlugin, 'setAudioSleepTimer', options, { scheduled: false });
+  }
+
+  async function cancelAudioSleepTimer() {
+    return safeCall(audioPlugin, 'cancelAudioSleepTimer', undefined, { cancelled: false });
+  }
+
   async function getAudioState() {
     return safeCall(audioPlugin, 'getAudioState', undefined, null);
   }
@@ -190,6 +198,8 @@ export function createReadingLibraryPlugin(
     previousAudioTrack,
     nextAudioTrack,
     setAudioSpeed,
+    setAudioSleepTimer,
+    cancelAudioSleepTimer,
     getAudioState,
     stopAudio,
     listMarks,

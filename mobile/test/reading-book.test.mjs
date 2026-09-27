@@ -64,6 +64,15 @@ test('opening restores position announces progress focuses Play and never starts
   assert.doesNotMatch(screen, /await\s+speech\.play\(\)[\s\S]*playButton\.focus\(\)/);
 });
 
+test('search preview is visual only until continue reading is chosen', async () => {
+  const screen = await read('src/screens/reading-book.mjs');
+
+  assert.match(screen, /renderSemanticPosition\(position,\s*\{\s*focus:\s*true,\s*commit:\s*false\s*\}\)/);
+  assert.match(screen, /renderSemanticPosition\([^)]*,\s*\{[^}]*commit/);
+  assert.match(screen, /if\s*\(commit\)\s*currentPosition\s*=\s*normalized/);
+  assert.match(screen, /onContinue\(position\)[\s\S]*moveToPosition\(position\)/);
+});
+
 test('reading book uses screen cleanup to stop speech and listeners when leaving the document', async () => {
   const screen = await read('src/screens/reading-book.mjs');
 

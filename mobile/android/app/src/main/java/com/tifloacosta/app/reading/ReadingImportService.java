@@ -15,20 +15,31 @@ public final class ReadingImportService {
     private final ReadingBookRepository repository;
     private final ReadingFileStore fileStore;
     private final LongSupplier clock;
+    private final ReadingPdfExtractor pdfExtractor;
 
     public ReadingImportService(
             ReadingBookRepository repository,
             ReadingFileStore fileStore,
             LongSupplier clock
     ) {
+        this(repository, fileStore, clock, null);
+    }
+
+    public ReadingImportService(
+            ReadingBookRepository repository,
+            ReadingFileStore fileStore,
+            LongSupplier clock,
+            ReadingPdfExtractor pdfExtractor
+    ) {
         this.repository = repository;
         this.fileStore = fileStore;
         this.clock = clock;
+        this.pdfExtractor = pdfExtractor;
     }
 
     public ReadingImportResult importOne(ReadingImportSource source, InputStream input) {
         String format = formatFrom(source);
-        if (format == null) {
+        if (format == null || ("pdf".equals(format) && pdfExtractor == null)) {
             return ReadingImportResult.rejected("unsupported");
         }
 
@@ -62,7 +73,10 @@ public final class ReadingImportService {
                 }
             }
 
-            if (!fileStore.tempHasReadableText(tempName, format)) {
+            if ("pdf".equals(format)) {
+                ReadingImportResult pdfValidation = validatePdf(tempName);
+                if (pdfValidation != null) return pdfValidation;
+            } else if (!fileStore.tempHasReadableText(tempName, format)) {
                 return ReadingImportResult.rejected("empty");
             }
 
@@ -112,6 +126,20 @@ public final class ReadingImportService {
         fileStore.cleanupStaleTemps();
     }
 
+    private ReadingImportResult validatePdf(String tempName) throws IOException {
+        try (InputStream source = fileStore.openTempInput(tempName)) {
+            ReadingPdfResult result = pdfExtractor.inspect(source, "");
+            if (ReadingPdfResult.STATUS_READABLE.equals(result.getStatus())
+                    || ReadingPdfResult.STATUS_PASSWORD_REQUIRED.equals(result.getStatus())) {
+                return null;
+            }
+            if (ReadingPdfResult.STATUS_NO_TEXT.equals(result.getStatus())) {
+                return ReadingImportResult.rejected("pdf-no-text");
+            }
+            return ReadingImportResult.rejected("invalid-pdf");
+        }
+    }
+
     private static String formatFrom(ReadingImportSource source) {
         if (source == null) return null;
 
@@ -120,6 +148,9 @@ public final class ReadingImportService {
         String mimeType = source.getMimeType();
         String lowerMime = mimeType == null ? "" : mimeType.trim().toLowerCase(Locale.ROOT);
 
+        if ("application/pdf".equals(lowerMime) || lowerName.endsWith(".pdf")) {
+            return "pdf";
+        }
         if ("text/html".equals(lowerMime) || lowerName.endsWith(".html") || lowerName.endsWith(".htm")) {
             return "html";
         }
@@ -141,6 +172,8 @@ public final class ReadingImportService {
             } else if (lowerTitle.endsWith(".htm")) {
                 title = title.substring(0, title.length() - 4).trim();
             }
+        } else if ("pdf".equals(format) && lowerTitle.endsWith(".pdf")) {
+            title = title.substring(0, title.length() - 4).trim();
         } else if (lowerTitle.endsWith(".txt")) {
             title = title.substring(0, title.length() - 4).trim();
         }
@@ -148,6 +181,7 @@ public final class ReadingImportService {
     }
 
     private static String mimeFrom(String mimeType, String format) {
+        if ("pdf".equals(format)) return "application/pdf";
         if (mimeType != null && !mimeType.trim().isEmpty()) return mimeType;
         return "html".equals(format) ? "text/html" : "text/plain";
     }

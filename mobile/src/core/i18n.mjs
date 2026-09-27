@@ -70,7 +70,7 @@ const DICTIONARIES = {
     },
     library: { empty: 'No hay recursos disponibles en este momento.', open: 'Abrir documento', download: 'Guardar documento' },
     readingLibrary: {
-      continueReading: 'Continuar leyendo', import: 'Importar TXT o HTML', searchLabel: 'Buscar en mi biblioteca',
+      continueReading: 'Continuar leyendo', import: 'Importar TXT, HTML o PDF', searchLabel: 'Buscar en mi biblioteca',
       searchPlaceholder: 'Título del documento', searchSubmit: 'Buscar', myLibrary: 'Mi biblioteca',
       empty: 'Todavía no hay documentos en tu biblioteca.', untitled: 'Documento sin título',
       stateNotRead: 'Sin leer', stateInReading: 'En lectura', stateRead: 'Leído', progress: '{percent}% leído',
@@ -106,6 +106,9 @@ const DICTIONARIES = {
       themeSystem: 'Seguir el sistema', themeLight: 'Claro', themeDark: 'Oscuro', highContrast: 'Alto contraste',
       resetBookSettings: 'Restablecer ajustes de este documento', settingsSaved: 'Ajuste guardado.',
       settingsReset: 'Se han restablecido los ajustes de este documento.',
+      pdfPasswordRequired: 'Este PDF está protegido con contraseña.', pdfPasswordLabel: 'Contraseña del PDF',
+      pdfPasswordOpen: 'Abrir PDF', pdfPasswordRejected: 'La contraseña no es correcta.',
+      pdfNoText: 'Este PDF no contiene texto que TifloAcosta pueda extraer para leer.',
       empty: 'Este documento no contiene texto que se pueda leer.',
       errorHeading: 'No se pudo abrir el documento', error: 'No se pudo abrir la copia guardada en TifloAcosta.'
     },
@@ -206,7 +209,7 @@ const DICTIONARIES = {
     },
     library: { empty: 'There are no resources available right now.', open: 'Open document', download: 'Save document' },
     readingLibrary: {
-      continueReading: 'Continue reading', import: 'Import TXT or HTML', searchLabel: 'Search my library',
+      continueReading: 'Continue reading', import: 'Import TXT, HTML or PDF', searchLabel: 'Search my library',
       searchPlaceholder: 'Document title', searchSubmit: 'Search', myLibrary: 'My library',
       empty: 'There are no documents in your library yet.', untitled: 'Untitled document',
       stateNotRead: 'Not read', stateInReading: 'Reading', stateRead: 'Read', progress: '{percent}% read',
@@ -236,6 +239,9 @@ const DICTIONARIES = {
       themeLight: 'Light', themeDark: 'Dark', highContrast: 'High contrast',
       resetBookSettings: 'Reset settings for this document', settingsSaved: 'Setting saved.',
       settingsReset: 'The settings for this document have been reset.',
+      pdfPasswordRequired: 'This PDF is password protected.', pdfPasswordLabel: 'PDF password',
+      pdfPasswordOpen: 'Open PDF', pdfPasswordRejected: 'The password is incorrect.',
+      pdfNoText: 'This PDF does not contain text that TifloAcosta can extract for reading.',
       empty: 'This document contains no readable text.',
       errorHeading: 'The document could not be opened', error: 'The copy saved in TifloAcosta could not be opened.'
     },

@@ -50,21 +50,22 @@ test('reading android tts contract has session-safe callbacks, android tts, audi
   assert.doesNotMatch(controller, /onAudioFocusChange[\s\S]{0,800}speak\s*\(/, 'Audio-focus gain must never auto-resume speech');
 });
 
-test('reading android native contract uses the document picker for multiple TXT and HTML files', async () => {
+test('reading android native contract uses the document picker for multiple TXT HTML and PDF files', async () => {
   const plugin = await read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java');
 
   assert.match(plugin, /Intent\.ACTION_OPEN_DOCUMENT/);
   assert.match(plugin, /Intent\.CATEGORY_OPENABLE/);
-  assert.match(plugin, /setType\("text\/\*"\)/);
+  assert.match(plugin, /setType\("\*\/\*"\)/);
   assert.match(plugin, /Intent\.EXTRA_MIME_TYPES/);
   assert.match(plugin, /"text\/plain"/);
   assert.match(plugin, /"text\/html"/);
+  assert.match(plugin, /"application\/pdf"/);
   assert.match(plugin, /Intent\.EXTRA_ALLOW_MULTIPLE/);
   assert.match(plugin, /getClipData\(\)/);
   assert.match(plugin, /getData\(\)/);
 });
 
-test('reading android native contract accepts TXT and HTML shared file streams without broad storage permissions', async () => {
+test('reading android native contract accepts TXT HTML and PDF shared file streams without broad storage permissions', async () => {
   const plugin = await read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java');
   const share = await read('android/app/src/main/java/com/tifloacosta/app/TifloSharePlugin.java');
   const manifest = await read('android/app/src/main/AndroidManifest.xml');
@@ -80,7 +81,19 @@ test('reading android native contract accepts TXT and HTML shared file streams w
   assert.match(manifest, /android\.intent\.action\.SEND_MULTIPLE/);
   assert.match(manifest, /android:mimeType="text\/plain"/);
   assert.match(manifest, /android:mimeType="text\/html"/);
+  assert.match(manifest, /android:mimeType="application\/pdf"/);
   assert.doesNotMatch(manifest, /READ_EXTERNAL_STORAGE|WRITE_EXTERNAL_STORAGE|MANAGE_EXTERNAL_STORAGE|READ_MEDIA_/);
+});
+
+test('reading android native contract keeps PDF sources private as source.pdf', async () => {
+  const [plugin, store] = await Promise.all([
+    read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java'),
+    read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingFileStore.java')
+  ]);
+
+  assert.match(plugin, /source\.pdf/);
+  assert.match(store, /openTempInput/);
+  assert.doesNotMatch(plugin, /READ_EXTERNAL_STORAGE|WRITE_EXTERNAL_STORAGE|MANAGE_EXTERNAL_STORAGE|READ_MEDIA_/);
 });
 
 test('reading android native contract excludes the private reading library from backup and cleans stale temps off the UI thread', async () => {

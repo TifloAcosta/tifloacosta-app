@@ -37,8 +37,9 @@ test('audio probe and grouping importer prefer embedded track numbers then filen
 });
 
 test('picker defers all-audio multi-selection until the user chooses one book independent files or cancel', async () => {
-  const [nativePlugin, wrapper, client, screen, i18n] = await Promise.all([
-    read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java'),
+  const [nativePlugin, mainActivity, wrapper, client, screen, i18n] = await Promise.all([
+    read('android/app/src/main/java/com/tifloacosta/app/TifloReadingAudioGroupPlugin.java'),
+    read('android/app/src/main/java/com/tifloacosta/app/MainActivity.java'),
     read('src/native/reading-library-plugin.mjs'),
     read('src/core/reading-library-client.mjs'),
     read('src/screens/reading-library.mjs'),
@@ -49,6 +50,7 @@ test('picker defers all-audio multi-selection until the user chooses one book in
   assert.match(nativePlugin, /audioChoiceRequired/);
   assert.match(nativePlugin, /grouped/);
   assert.match(nativePlugin, /independent/);
+  assert.match(mainActivity, /TifloReadingAudioGroupPlugin\.class/);
   assert.match(wrapper, /resolveAudioSelection/);
   assert.match(client, /resolveAudioSelection/);
   assert.match(screen, /audioChoiceRequired/);

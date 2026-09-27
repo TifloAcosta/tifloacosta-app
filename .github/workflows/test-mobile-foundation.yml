@@ -39,6 +39,11 @@ jobs:
         uses: actions/setup-node@v5
         with:
           node-version: 22
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+      - name: Install mobile dependencies
+        working-directory: mobile
+        run: npm ci
       - name: Run mobile foundation tests
         run: |
           node --test test/actualidad-core.test.mjs

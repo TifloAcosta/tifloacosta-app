@@ -11,6 +11,10 @@ function nonNegativeInteger(value, fallback = 0) {
   return Math.max(0, Math.trunc(numberOr(value, fallback)));
 }
 
+function integerOr(value, fallback = 0) {
+  return Math.trunc(numberOr(value, fallback));
+}
+
 function positiveInteger(value, fallback) {
   const number = Math.trunc(numberOr(value, fallback));
   return number > 0 ? number : fallback;
@@ -18,6 +22,14 @@ function positiveInteger(value, fallback) {
 
 function clampRate(value) {
   return Math.min(2, Math.max(0.5, numberOr(value, 1)));
+}
+
+function clampAudioSpeed(value) {
+  return Math.min(3, Math.max(0.5, numberOr(value, 1)));
+}
+
+function booleanValue(value) {
+  return value === true || value === 1 || value === '1' || value === 'true';
 }
 
 function normalizeBook(value) {
@@ -144,6 +156,26 @@ function normalizeMark(value) {
   };
 }
 
+function normalizeAudioState(value) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return null;
+  return {
+    bookId: String(value.bookId ?? '').trim(),
+    trackIndex: nonNegativeInteger(value.trackIndex, 0),
+    positionMs: nonNegativeInteger(value.positionMs, 0),
+    durationMs: nonNegativeInteger(value.durationMs, 0),
+    playing: booleanValue(value.playing),
+    speed: clampAudioSpeed(value.speed),
+    prepared: booleanValue(value.prepared)
+  };
+}
+
+function normalizeAudioEvent(value) {
+  const state = normalizeAudioState(value);
+  if (!state) return null;
+  const reason = String(value?.reason ?? '').trim();
+  return reason ? { ...state, reason } : state;
+}
+
 function plainSettings(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return {};
   return { ...value };
@@ -261,6 +293,67 @@ export function createReadingLibraryClient(plugin = {}) {
     try { return mutationSucceeded(await plugin.stopTts(), 'stopped'); } catch { return false; }
   }
 
+  async function prepareAudio(options = {}) {
+    const bookId = String(options?.bookId ?? '').trim();
+    const relativePath = String(options?.relativePath ?? '').trim();
+    if (!bookId || !relativePath || !plugin?.prepareAudio) return null;
+    try {
+      return normalizeAudioState(await plugin.prepareAudio({
+        bookId,
+        relativePath,
+        trackIndex: nonNegativeInteger(options.trackIndex, 0),
+        positionMs: nonNegativeInteger(options.positionMs, 0)
+      }));
+    } catch { return null; }
+  }
+
+  async function playAudio() {
+    if (!plugin?.playAudio) return null;
+    try { return normalizeAudioState(await plugin.playAudio()); } catch { return null; }
+  }
+
+  async function pauseAudio() {
+    if (!plugin?.pauseAudio) return null;
+    try { return normalizeAudioState(await plugin.pauseAudio()); } catch { return null; }
+  }
+
+  async function seekAudio(options = {}) {
+    if (!plugin?.seekAudio) return null;
+    try {
+      return normalizeAudioState(await plugin.seekAudio({
+        positionMs: nonNegativeInteger(options.positionMs, 0)
+      }));
+    } catch { return null; }
+  }
+
+  async function skipAudio(options = {}) {
+    if (!plugin?.skipAudio) return null;
+    try {
+      return normalizeAudioState(await plugin.skipAudio({
+        deltaMs: integerOr(options.deltaMs, 0)
+      }));
+    } catch { return null; }
+  }
+
+  async function setAudioSpeed(options = {}) {
+    if (!plugin?.setAudioSpeed) return null;
+    try {
+      return normalizeAudioState(await plugin.setAudioSpeed({
+        speed: clampAudioSpeed(options.speed)
+      }));
+    } catch { return null; }
+  }
+
+  async function getAudioState() {
+    if (!plugin?.getAudioState) return null;
+    try { return normalizeAudioState(await plugin.getAudioState()); } catch { return null; }
+  }
+
+  async function stopAudio() {
+    if (!plugin?.stopAudio) return null;
+    try { return normalizeAudioState(await plugin.stopAudio()); } catch { return null; }
+  }
+
   async function listMarks(bookId, type = null) {
     const cleanBookId = String(bookId ?? '').trim();
     if (!cleanBookId || !plugin?.listMarks) return [];
@@ -332,7 +425,14 @@ export function createReadingLibraryClient(plugin = {}) {
 
   async function addListener(eventName, listener) {
     if (!plugin?.addListener || typeof listener !== 'function') return { remove: async () => {} };
-    try { return await plugin.addListener(eventName, listener); } catch { return { remove: async () => {} }; }
+    const cleanEventName = String(eventName ?? '');
+    const wrappedListener = cleanEventName.startsWith('audio')
+      ? value => {
+          const normalized = normalizeAudioEvent(value);
+          if (normalized) return listener(normalized);
+        }
+      : listener;
+    try { return await plugin.addListener(cleanEventName, wrappedListener); } catch { return { remove: async () => {} }; }
   }
 
   return {
@@ -346,6 +446,14 @@ export function createReadingLibraryClient(plugin = {}) {
     listTtsVoices,
     startTts,
     stopTts,
+    prepareAudio,
+    playAudio,
+    pauseAudio,
+    seekAudio,
+    skipAudio,
+    setAudioSpeed,
+    getAudioState,
+    stopAudio,
     listMarks,
     addMark,
     deleteMark,

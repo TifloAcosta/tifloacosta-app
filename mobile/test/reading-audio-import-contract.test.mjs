@@ -16,9 +16,12 @@ test('reading audio import accepts only the approved local audio families and pr
     read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingFileStore.java')
   ]);
 
-  for (const extension of ['mp3', 'm4a', 'm4b', 'aac', 'ogg', 'opus', 'flac', 'wav']) {
-    assert.match(importer, new RegExp(`\\.${extension}`), `Missing .${extension} audio import support`);
-  }
+  assert.match(
+    importer,
+    /new String\[\]\{"mp3",\s*"m4a",\s*"m4b",\s*"aac",\s*"ogg",\s*"opus",\s*"flac",\s*"wav"\}/,
+    'Approved audio extension set must stay explicit and bounded'
+  );
+  assert.match(importer, /lowerName\.endsWith\("\." \+ extension\)/);
 
   for (const mime of ['audio/mpeg', 'audio/mp4', 'audio/aac', 'audio/ogg', 'audio/opus', 'audio/flac', 'audio/wav']) {
     assert.match(importer, new RegExp(mime.replace('/', '\\/')), `Missing ${mime} audio import support`);

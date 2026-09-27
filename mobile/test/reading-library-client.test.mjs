@@ -23,6 +23,8 @@ test('reading library client applies paged defaults and normalizes book fields',
           state: 'in-reading',
           percent: '25.5',
           blockIndex: '3',
+          mediaTrackIndex: '2',
+          mediaPositionMs: '5000000000',
           importedAt: '1000',
           lastReadAt: '2000',
           sizeBytes: '4096'
@@ -57,6 +59,8 @@ test('reading library client applies paged defaults and normalizes book fields',
     blockIndex: 3,
     unitIndex: 0,
     anchorText: '',
+    mediaTrackIndex: 2,
+    mediaPositionMs: 5000000000,
     importedAt: 1000,
     lastReadAt: 2000,
     sizeBytes: 4096
@@ -90,6 +94,8 @@ test('reading library client normalizes import batches and latest reading item',
   assert.equal(latest.id, 'a');
   assert.equal(latest.percent, 50);
   assert.equal(latest.blockIndex, 4);
+  assert.equal(latest.mediaTrackIndex, 0);
+  assert.equal(latest.mediaPositionMs, 0);
 });
 
 test('reading library client keeps TXT and HTML openBook content behavior unchanged', async () => {
@@ -211,6 +217,29 @@ test('reading library client keeps rejected password and PDF no-text states dist
   const noText = await noTextClient.openBook('scan');
   assert.equal(noText.pdfNoText, true);
   assert.equal(noText.pageCount, 4);
+});
+
+test('reading library client saves exact audio track and long millisecond position without truncation', async () => {
+  const calls = [];
+  const client = createReadingLibraryClient({
+    async saveProgress(progress) {
+      calls.push(progress);
+      return { saved: true };
+    }
+  });
+
+  const saved = await client.saveProgress({
+    id: 'audio-1',
+    mediaTrackIndex: 3,
+    mediaPositionMs: 5000000000,
+    percent: 42.5,
+    state: 'in-reading'
+  });
+
+  assert.equal(saved, true);
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0].mediaTrackIndex, 3);
+  assert.equal(calls[0].mediaPositionMs, 5000000000);
 });
 
 test('reading library client returns safe empty results when optional native functions are absent', async () => {

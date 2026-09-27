@@ -30,12 +30,12 @@ jobs:
           cache: npm
           cache-dependency-path: mobile/package-lock.json
 
-      - name: Run repository regression tests
-        run: npm test
-
       - name: Install mobile dependencies
         working-directory: mobile
         run: npm ci
+
+      - name: Run repository regression tests
+        run: npm test
 
       - name: Run mobile tests
         working-directory: mobile

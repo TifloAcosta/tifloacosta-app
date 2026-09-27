@@ -6,7 +6,7 @@ const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
 test('composition root registers every approved mobile screen exactly as a dedicated route', async () => {
   const app = await read('src/app.mjs');
-  for (const route of ['home','actualidad','search','library','favorites','videos','book','podcast','contact','settings']) {
+  for (const route of ['home','actualidad','search','library','reading-library','favorites','videos','book','podcast','contact','settings']) {
     assert.match(app, new RegExp(`case ['"]${route}['"]`));
   }
   assert.doesNotMatch(app, /renderPlaceholder/);
@@ -28,6 +28,17 @@ test('startup keeps preferences before first render and remote content refresh a
   assert.ok(applyPreferences >= 0 && startHome > applyPreferences, 'preferences must be applied before Home starts');
   assert.ok(loadContent > startHome, 'remote content must load after Home is already rendered');
   assert.match(app, /if \(!shareMode\s*&&\s*!textInputIsActive\(\)\) render\(router\.current\(\)\)/);
+});
+
+test('reading document receiver installs only after Home starts and keeps text Share independent', async () => {
+  const app = await read('src/app.mjs');
+  const startHome = app.indexOf("router.start('home')");
+  const readingReceiver = app.indexOf('installReadingDocumentReceiver()');
+  const shareReceiver = app.indexOf('installShareReceiver()');
+  assert.ok(readingReceiver > startHome, 'reading receiver must install after Home starts');
+  assert.ok(shareReceiver > startHome, 'text Share receiver must remain installed after Home starts');
+  assert.match(app, /consumeInitialSharedDocuments\(\)/);
+  assert.match(app, /documentsReceived/);
 });
 
 test('settings always receives the connected native notification service', async () => {

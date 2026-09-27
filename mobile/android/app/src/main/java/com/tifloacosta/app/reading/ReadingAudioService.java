@@ -81,7 +81,7 @@ public final class ReadingAudioService extends MediaSessionService {
     }
 
     private void prepareAudio(String bookId, String relativePath, long positionMs) throws IOException {
-        File source = resolveReadingFile(relativePath);
+        File source = resolveReadingFile(bookId, relativePath);
         MediaItem item = new MediaItem.Builder()
                 .setMediaId(bookId)
                 .setUri(Uri.fromFile(source))
@@ -92,19 +92,35 @@ public final class ReadingAudioService extends MediaSessionService {
         player.prepare();
     }
 
-    private File resolveReadingFile(String relativePath) throws IOException {
-        if (relativePath == null || relativePath.trim().isEmpty()) {
-            throw new IOException("Missing reading audio path");
+    private File resolveReadingFile(String bookId, String relativePath) throws IOException {
+        File root = new File(getFilesDir(), "reading-library");
+        if (relativePath != null && !relativePath.trim().isEmpty()) {
+            File source = new File(root, relativePath);
+            String rootPath = root.getCanonicalPath();
+            String sourcePath = source.getCanonicalPath();
+            if (!sourcePath.startsWith(rootPath + File.separator) || !source.isFile()) {
+                throw new IOException("Invalid reading audio path");
+            }
+            return source;
         }
 
-        File root = new File(getFilesDir(), "reading-library");
-        File source = new File(root, relativePath);
-        String rootPath = root.getCanonicalPath();
-        String sourcePath = source.getCanonicalPath();
-        if (!sourcePath.startsWith(rootPath + File.separator) || !source.isFile()) {
-            throw new IOException("Invalid reading audio path");
+        String cleanBookId = bookId == null ? "" : bookId.trim();
+        if (cleanBookId.isEmpty() || !cleanBookId.matches("[A-Za-z0-9_-]+")) {
+            throw new IOException("Invalid reading audio book id");
         }
-        return source;
+        File itemsRoot = new File(root, "items");
+        File itemDirectory = new File(itemsRoot, cleanBookId);
+        String itemsPath = itemsRoot.getCanonicalPath();
+        String itemPath = itemDirectory.getCanonicalPath();
+        if (!itemPath.startsWith(itemsPath + File.separator) || !itemDirectory.isDirectory()) {
+            throw new IOException("Reading audio item not found");
+        }
+        File[] candidates = itemDirectory.listFiles(file ->
+                file != null && file.isFile() && file.getName().startsWith("source."));
+        if (candidates == null || candidates.length != 1) {
+            throw new IOException("Reading audio source is ambiguous or missing");
+        }
+        return candidates[0];
     }
 
     private void sendPlaybackEvent(String action, @Nullable String reason) {
@@ -196,7 +212,7 @@ public final class ReadingAudioService extends MediaSessionService {
             String bookId = args.getString(EXTRA_BOOK_ID, "").trim();
             String relativePath = args.getString(EXTRA_RELATIVE_PATH, "").trim();
             long positionMs = Math.max(0L, args.getLong(EXTRA_POSITION_MS, 0L));
-            if (bookId.isEmpty() || relativePath.isEmpty()) {
+            if (bookId.isEmpty()) {
                 return Futures.immediateFuture(
                         new SessionResult(SessionResult.RESULT_ERROR_BAD_VALUE)
                 );

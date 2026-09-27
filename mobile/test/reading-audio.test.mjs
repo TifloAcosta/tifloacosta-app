@@ -277,7 +277,7 @@ test('native wrapper and library client expose the audio bridge and route audio 
 
   const state = await client.getAudioState();
   assert.deepEqual(state, {
-    bookId: 'audio-1', trackIndex: 2, positionMs: 5000000000, durationMs: 6000000000, playing: true, speed: 1.5, prepared: false
+    bookId: 'audio-1', trackIndex: 2, trackCount: 0, positionMs: 5000000000, durationMs: 6000000000, playing: true, speed: 1.5, prepared: false
   });
 
   let event = null;

@@ -4,54 +4,71 @@ import test from 'node:test';
 
 const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
-test('reading book screen opens private TXT content and renders one semantic paragraph', async () => {
+test('reading book selects semantic TXT or HTML adapters and never injects source HTML', async () => {
   const screen = await read('src/screens/reading-book.mjs');
 
-  assert.match(screen, /export function renderReadingBook/);
-  assert.match(screen, /client\.openBook\(bookId\)/);
-  assert.match(screen, /parsePlainText/);
-  assert.match(screen, /createReadingSession/);
-  assert.match(screen, /document\.createElement\(['"]h1['"]\)/);
-  assert.match(screen, /document\.createElement\(['"]p['"]\)/);
-  assert.match(screen, /current\(\)/);
+  assert.match(screen, /parseTextDocument/);
+  assert.match(screen, /parseHtmlDocument/);
+  assert.match(screen, /activeBook\.format/);
+  assert.doesNotMatch(screen, /\.innerHTML\s*=|\.outerHTML\s*=|insertAdjacentHTML\s*\(/);
+  for (const semantic of ['heading', 'paragraph', 'list-item', 'quote', 'table-cell']) {
+    assert.match(screen, new RegExp(`['"]${semantic}['"]`));
+  }
 });
 
-test('reading book screen saves in-reading progress on open and paragraph navigation', async () => {
-  const screen = await read('src/screens/reading-book.mjs');
-
-  assert.match(screen, /client\.saveProgress\(/);
-  assert.match(screen, /state:\s*['"]in-reading['"]/);
-  assert.match(screen, /readingBook\.previousParagraph/);
-  assert.match(screen, /readingBook\.nextParagraph/);
-  assert.match(screen, /session\.previous\(\)/);
-  assert.match(screen, /session\.next\(\)/);
-  assert.match(screen, /readingBook\.resume/);
-  assert.doesNotMatch(screen, /speechSynthesis|\.speak\(|autoplay/i);
-});
-
-test('reading book screen handles empty private content and opening failures and returns to the reading library', async () => {
-  const screen = await read('src/screens/reading-book.mjs');
-
-  assert.match(screen, /readingBook\.empty/);
-  assert.match(screen, /readingBook\.errorHeading/);
-  assert.match(screen, /try\s*\{[\s\S]*client\.openBook\(bookId\)[\s\S]*\}\s*catch/);
-  assert.match(screen, /router\.back\(\)/);
-});
-
-test('app and translations expose the dedicated reading-book route without changing the web reader', async () => {
-  const [app, i18n] = await Promise.all([
-    read('src/app.mjs'),
+test('reading book has explicit play pause navigation search marks state voice and visual controls without autoplay', async () => {
+  const [screen, i18n] = await Promise.all([
+    read('src/screens/reading-book.mjs'),
     read('src/core/i18n.mjs')
   ]);
 
-  assert.match(app, /pendingReadingBookId/);
-  assert.match(app, /case ['"]reading-book['"]/);
-  assert.match(app, /renderReadingBook/);
-  assert.match(app, /router\.navigate\(['"]reading-book['"]/);
-  assert.match(app, /case ['"]reader['"]/);
+  assert.match(screen, /createReadingSpeechController/);
+  assert.match(screen, /readingBook\.play/);
+  assert.match(screen, /readingBook\.pause/);
+  assert.match(screen, /readingBook\.navigation/);
+  assert.match(screen, /readingBook\.search/);
+  assert.match(screen, /readingBook\.marks/);
+  assert.match(screen, /readingBook\.readingState/);
+  assert.match(screen, /readingBook\.voiceAndSpeed/);
+  assert.match(screen, /readingBook\.visualSettings/);
+  assert.match(screen, /playButton\.focus\(\)/);
+  assert.doesNotMatch(screen, /speechSynthesis|autoplay/i);
 
-  assert.match(i18n, /previousParagraph:\s*'Párrafo anterior'/);
-  assert.match(i18n, /nextParagraph:\s*'Párrafo siguiente'/);
-  assert.match(i18n, /previousParagraph:\s*'Previous paragraph'/);
-  assert.match(i18n, /nextParagraph:\s*'Next paragraph'/);
+  for (const label of [
+    'Reproducir', 'Pausa', 'Navegación', 'Buscar', 'Marcas', 'Estado de lectura', 'Voz y velocidad', 'Ajustes visuales',
+    'Play', 'Pause', 'Navigation', 'Search', 'Marks', 'Reading status', 'Voice and speed', 'Visual settings'
+  ]) {
+    assert.ok(i18n.includes(label), `Missing translation: ${label}`);
+  }
+});
+
+test('visual navigation and speech share precise block and sentence position and persist anchor text', async () => {
+  const screen = await read('src/screens/reading-book.mjs');
+
+  assert.match(screen, /speech\.moveTo\(/);
+  assert.match(screen, /unitIndex/);
+  assert.match(screen, /anchorText/);
+  assert.match(screen, /client\.saveProgress\(/);
+  assert.match(screen, /getCurrentUnitText/);
+  assert.match(screen, /previousUnit/);
+  assert.match(screen, /nextUnit/);
+});
+
+test('opening restores position announces progress focuses Play and never starts speech itself', async () => {
+  const screen = await read('src/screens/reading-book.mjs');
+
+  assert.match(screen, /initialPosition:\s*\{[\s\S]*blockIndex:[\s\S]*unitIndex:/);
+  assert.match(screen, /readingBook\.resume/);
+  assert.match(screen, /playButton\.focus\(\)/);
+  assert.match(screen, /playButton\.addEventListener\(['"]click['"]/);
+  assert.doesNotMatch(screen, /await\s+speech\.play\(\)[\s\S]*playButton\.focus\(\)/);
+});
+
+test('reading book uses screen cleanup to stop speech and listeners when leaving the document', async () => {
+  const screen = await read('src/screens/reading-book.mjs');
+
+  assert.match(screen, /setScreenCleanup/);
+  assert.match(screen, /speech\.destroy\(\)/);
+  assert.match(screen, /searchPanel.*destroy|destroy.*searchPanel/s);
+  assert.match(screen, /settingsPanel.*destroy|destroy.*settingsPanel/s);
 });

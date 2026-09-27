@@ -32,6 +32,27 @@ function percentFor(positionMs, durationMs, fallback = 0) {
   return Math.min(100, Math.max(0, (positionMs / durationMs) * 100));
 }
 
+function normalizeTracks(values = []) {
+  return (Array.isArray(values) ? values : [])
+    .map((track, index) => ({
+      trackIndex: nonNegativeInteger(track?.trackIndex, index),
+      durationMs: nonNegativeInteger(track?.durationMs, 0)
+    }))
+    .sort((a, b) => a.trackIndex - b.trackIndex);
+}
+
+function audiobookPercent(tracks, trackIndex, positionMs, currentDurationMs, fallback = 0) {
+  if (!tracks.length) return percentFor(positionMs, currentDurationMs, fallback);
+  const total = tracks.reduce((sum, track) => sum + track.durationMs, 0);
+  if (total <= 0) return percentFor(positionMs, currentDurationMs, fallback);
+  let completed = 0;
+  for (const track of tracks) {
+    if (track.trackIndex < trackIndex) completed += track.durationMs;
+    else if (track.trackIndex === trackIndex) completed += Math.min(positionMs, track.durationMs || positionMs);
+  }
+  return Math.min(100, Math.max(0, (completed / total) * 100));
+}
+
 function defaultTimers() {
   return {
     setTimeout: (callback, delayMs) => globalThis.setTimeout(callback, delayMs),
@@ -42,6 +63,7 @@ function defaultTimers() {
 export function createReadingAudioController({
   client = {},
   book = {},
+  tracks = [],
   initialPosition = {},
   settings = {},
   onPosition = () => {},
@@ -52,10 +74,12 @@ export function createReadingAudioController({
   const relativePath = clean(book?.relativePath);
   const configuredSpeed = clamp(settings?.['audio.speed'], AUDIO_SPEED_MIN, AUDIO_SPEED_MAX, 1);
   const skipSeconds = supportedSkipSeconds(settings?.['audio.skipSeconds']);
+  const audioTracks = normalizeTracks(tracks);
 
   let state = {
     bookId,
     trackIndex: nonNegativeInteger(initialPosition?.trackIndex ?? book?.mediaTrackIndex, 0),
+    trackCount: audioTracks.length,
     positionMs: nonNegativeInteger(initialPosition?.positionMs ?? book?.mediaPositionMs, 0),
     durationMs: 0,
     playing: false,
@@ -74,6 +98,7 @@ export function createReadingAudioController({
     return {
       bookId: state.bookId,
       trackIndex: state.trackIndex,
+      trackCount: state.trackCount,
       positionMs: state.positionMs,
       durationMs: state.durationMs,
       playing: state.playing,
@@ -94,6 +119,9 @@ export function createReadingAudioController({
     if (!value || typeof value !== 'object' || !belongsToCurrentBook(value)) return false;
     if (Object.prototype.hasOwnProperty.call(value, 'trackIndex')) {
       state.trackIndex = nonNegativeInteger(value.trackIndex, state.trackIndex);
+    }
+    if (Object.prototype.hasOwnProperty.call(value, 'trackCount')) {
+      state.trackCount = nonNegativeInteger(value.trackCount, state.trackCount || audioTracks.length);
     }
     if (Object.prototype.hasOwnProperty.call(value, 'positionMs')) {
       state.positionMs = nonNegativeInteger(value.positionMs, state.positionMs);
@@ -130,7 +158,9 @@ export function createReadingAudioController({
       id: bookId,
       mediaTrackIndex: state.trackIndex,
       mediaPositionMs: state.positionMs,
-      percent: percentFor(state.positionMs, state.durationMs, book?.percent),
+      percent: completed
+        ? 100
+        : audiobookPercent(audioTracks, state.trackIndex, state.positionMs, state.durationMs, book?.percent),
       state: readingState
     });
     if (saved) {
@@ -149,7 +179,19 @@ export function createReadingAudioController({
   const listenersReady = Promise.all([
     addNativeListener('audioState', async value => {
       if (destroyed || !belongsToCurrentBook(value)) return;
-      updateFromNative(value);
+      const previousTrackIndex = state.trackIndex;
+      if (!updateFromNative(value)) return;
+      if (state.trackIndex !== previousTrackIndex) {
+        if (sleepAtTrackEnd) {
+          sleepAtTrackEnd = false;
+          if (client?.pauseAudio) {
+            const paused = await client.pauseAudio();
+            if (paused && belongsToCurrentBook(paused)) updateFromNative(paused);
+          }
+          state.playing = false;
+        }
+        await persist({ force: true });
+      }
     }),
     addNativeListener('audioPosition', async value => {
       if (destroyed || !belongsToCurrentBook(value)) return;
@@ -181,7 +223,8 @@ export function createReadingAudioController({
       trackIndex: state.trackIndex,
       positionMs: state.positionMs
     });
-    if (prepared && belongsToCurrentBook(prepared)) updateFromNative(prepared);
+    if (!prepared || !belongsToCurrentBook(prepared)) return null;
+    updateFromNative(prepared);
     state.playing = false;
     state.prepared = true;
 
@@ -237,6 +280,24 @@ export function createReadingAudioController({
     }
     const result = await client.skipAudio({ deltaMs });
     if (result && belongsToCurrentBook(result)) updateFromNative(result);
+    return snapshot();
+  }
+
+  async function previousTrack() {
+    await listenersReady;
+    if (destroyed || !client?.previousAudioTrack) return snapshot();
+    const result = await client.previousAudioTrack();
+    if (result && belongsToCurrentBook(result)) updateFromNative(result);
+    await persist({ force: true });
+    return snapshot();
+  }
+
+  async function nextTrack() {
+    await listenersReady;
+    if (destroyed || !client?.nextAudioTrack) return snapshot();
+    const result = await client.nextAudioTrack();
+    if (result && belongsToCurrentBook(result)) updateFromNative(result);
+    await persist({ force: true });
     return snapshot();
   }
 
@@ -309,6 +370,8 @@ export function createReadingAudioController({
     pause,
     seek,
     skip,
+    previousTrack,
+    nextTrack,
     setSpeed,
     refreshState,
     setSleepTimer,

@@ -187,6 +187,9 @@ test('audio vertical slice reopens the exact saved track and millisecond paused 
   assert.match(service, /setMediaItems\(items,\s*startIndex,\s*Math\.max\(0L, positionMs\)\)/);
   assert.match(service, /player\.prepare\(\)/);
   assert.doesNotMatch(service, /prepareAudio[\s\S]{0,1200}player\.play\(\)/, 'Reopening an audiobook must remain paused');
+  assert.match(screen, /playButton\.addEventListener\(['"]click['"][\s\S]*controller\.play\(\)/);
+  assert.match(controller, /async function play\(\)[\s\S]*client\.playAudio\(\)/);
+  assert.match(controller, /client\.saveProgress\(\{[\s\S]*mediaTrackIndex:\s*state\.trackIndex[\s\S]*mediaPositionMs:\s*state\.positionMs/);
   assert.match(controller, /mediaTrackIndex:\s*state\.trackIndex/);
   assert.match(controller, /mediaPositionMs:\s*state\.positionMs/);
   assert.match(screen, /trackIndex:\s*book\.mediaTrackIndex/);

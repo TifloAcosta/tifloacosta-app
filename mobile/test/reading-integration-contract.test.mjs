@@ -18,7 +18,7 @@ test('reading integration keeps TXT and HTML import open and resume on one seman
   assert.match(importer, /endsWith\("\.htm"\)/);
   assert.match(importer, /"text\/plain"/);
   assert.match(importer, /endsWith\("\.txt"\)/);
-  assert.match(importer, /moveTempToItem\(tempName, id, format\)/);
+  assert.match(importer, /moveTempToItem\(tempName, id, format, sourceExtension\)/);
 
   assert.match(plugin, /public void openBook\(PluginCall call\)/);
   assert.match(plugin, /result\.put\("book", bookJson\(record\)\)/);
@@ -120,7 +120,7 @@ test('PDF vertical slice keeps import storage opening pages and navigation on th
   assert.match(importer, /"application\/pdf"/);
   assert.match(importer, /endsWith\("\.pdf"\)/);
   assert.match(importer, /validatePdf\(tempName\)/);
-  assert.match(importer, /moveTempToItem\(tempName, id, format\)/);
+  assert.match(importer, /moveTempToItem\(tempName, id, format, sourceExtension\)/);
   assert.match(plugin, /"pdf"\.equals\(record\.getFormat\(\)\)/);
   assert.match(plugin, /pdfExtractor\.inspect\(source, password\)/);
   assert.match(plugin, /result\.put\("pdf", pdfJson\(pdf\)\)/);

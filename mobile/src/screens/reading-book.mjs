@@ -105,6 +105,13 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
   status.setAttribute('aria-atomic', 'true');
   status.textContent = t('readingBook.loading');
 
+  const orderWarning = document.createElement('p');
+  orderWarning.className = 'reading-pdf-order-warning';
+  orderWarning.setAttribute('role', 'status');
+  orderWarning.setAttribute('aria-live', 'polite');
+  orderWarning.setAttribute('aria-atomic', 'true');
+  orderWarning.hidden = true;
+
   const pdfPasswordForm = document.createElement('form');
   pdfPasswordForm.className = 'reading-pdf-password';
   pdfPasswordForm.hidden = true;
@@ -213,11 +220,26 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
   nextPage.type = 'button';
   nextPage.textContent = t('readingLibrary.nextPage');
 
-  pdfPageNavigation.append(previousPage, pageStatus, nextPage);
+  const pageForm = document.createElement('form');
+  pageForm.className = 'reading-pdf-page-jump';
+  const pageLabel = document.createElement('label');
+  pageLabel.textContent = t('readingBook.pageNumber');
+  const pageInput = document.createElement('input');
+  pageInput.type = 'number';
+  pageInput.id = 'reading-pdf-page-number';
+  pageInput.min = '1';
+  pageInput.step = '1';
+  pageLabel.htmlFor = pageInput.id;
+  const pageButton = document.createElement('button');
+  pageButton.type = 'submit';
+  pageButton.textContent = t('readingBook.goToPage');
+  pageForm.append(pageLabel, pageInput, pageButton);
+
+  pdfPageNavigation.append(previousPage, pageStatus, nextPage, pageForm);
 
   const panels = document.createElement('div');
   panels.className = 'reading-book-panels';
-  root.append(back, heading, status, pdfPasswordForm, controls, pdfPageNavigation, readerContainer, panels);
+  root.append(back, heading, status, orderWarning, pdfPasswordForm, controls, pdfPageNavigation, readerContainer, panels);
 
   let activeBook = null;
   let documentModel = null;
@@ -231,6 +253,8 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
   function clearInteractiveReading() {
     controls.hidden = true;
     pdfPageNavigation.hidden = true;
+    orderWarning.hidden = true;
+    orderWarning.textContent = '';
     readerContainer.replaceChildren();
   }
 
@@ -290,6 +314,8 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
     const displayPage = pageForPosition(documentModel, position) || currentPage || 1;
     const pages = Math.max(1, Number(documentModel.pageCount) || 1);
     pageStatus.textContent = format(t('readingLibrary.pageStatus'), { page: displayPage, pages });
+    pageInput.max = String(pages);
+    pageInput.value = String(displayPage);
     previousPage.disabled = !readablePdfPageFrom(position, -1);
     nextPage.disabled = !readablePdfPageFrom(position, 1);
   }
@@ -313,12 +339,22 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
       && normalized.unitIndex >= blockUnits - 1;
     renderPdfPageStatus(normalized);
     if (announce) {
-      status.textContent = format(t('readingBook.position'), {
-        block: normalized.blockIndex + 1,
-        blocks: documentModel.blocks.length,
-        unit: normalized.unitIndex + 1,
-        units: blockUnits
-      });
+      const page = pageForPosition(documentModel, normalized);
+      status.textContent = activeBook?.format === 'pdf' && page
+        ? format(t('readingBook.pdfPosition'), {
+            page,
+            pages: Math.max(1, Number(documentModel.pageCount) || 1),
+            block: normalized.blockIndex + 1,
+            blocks: documentModel.blocks.length,
+            unit: normalized.unitIndex + 1,
+            units: blockUnits
+          })
+        : format(t('readingBook.position'), {
+            block: normalized.blockIndex + 1,
+            blocks: documentModel.blocks.length,
+            unit: normalized.unitIndex + 1,
+            units: blockUnits
+          });
     }
     if (focus) element.focus();
     return true;
@@ -373,6 +409,25 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
   nextPage.addEventListener('click', () => { void navigatePdfPage(1); });
   navigationButton.addEventListener('click', () => readerContainer.focus());
 
+  pageForm.addEventListener('submit', event => {
+    event.preventDefault();
+    if (activeBook?.format !== 'pdf' || !documentModel) return;
+    const requestedPage = Number.parseInt(pageInput.value, 10);
+    const pages = Math.max(0, Number(documentModel.pageCount) || 0);
+    if (!Number.isInteger(requestedPage) || requestedPage < 1 || requestedPage > pages) {
+      status.textContent = format(t('readingBook.pdfPageInvalid'), { pages });
+      pageInput.focus();
+      return;
+    }
+    const target = positionForPage(documentModel, requestedPage);
+    if (!target) {
+      status.textContent = format(t('readingBook.pdfPageNoText'), { page: requestedPage });
+      pageInput.focus();
+      return;
+    }
+    void moveToPosition(target);
+  });
+
   playButton.addEventListener('click', () => {
     void (async () => {
       if (!speech) return;
@@ -422,6 +477,14 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
       return;
     }
 
+    if (activeBook.format === 'pdf' && documentModel.orderReliable === false) {
+      orderWarning.textContent = t('readingBook.pdfOrderWarning');
+      orderWarning.hidden = false;
+    } else {
+      orderWarning.textContent = '';
+      orderWarning.hidden = true;
+    }
+
     currentPosition = normalizeSemanticPosition({
       blockIndex: activeBook.blockIndex,
       unitIndex: activeBook.unitIndex
@@ -465,6 +528,11 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
       t,
       getPosition: () => ({ ...currentPosition }),
       getExcerpt: position => getCurrentUnitText(documentModel, position),
+      getReference: position => {
+        if (activeBook.format !== 'pdf') return '';
+        const page = pageForPosition(documentModel, position);
+        return page ? format(t('readingBook.pdfPageReference'), { page }) : '';
+      },
       onJump: position => { void moveToPosition(position); }
     });
 
@@ -478,10 +546,18 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
     });
 
     renderSemanticPosition(currentPosition, { announce: false });
-    status.textContent = format(t('readingBook.resume'), {
-      current: currentPosition.blockIndex + 1,
-      total: documentModel.blocks.length
-    });
+    const resumePage = activeBook.format === 'pdf' ? pageForPosition(documentModel, currentPosition) : null;
+    status.textContent = resumePage
+      ? format(t('readingBook.pdfResume'), {
+          page: resumePage,
+          pages: Math.max(1, Number(documentModel.pageCount) || 1),
+          current: currentPosition.blockIndex + 1,
+          total: documentModel.blocks.length
+        })
+      : format(t('readingBook.resume'), {
+          current: currentPosition.blockIndex + 1,
+          total: documentModel.blocks.length
+        });
     await persistPosition(currentPosition, readingState.value);
     if (!destroyed) queueMicrotask(() => playButton.focus());
   }

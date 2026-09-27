@@ -23,6 +23,20 @@ public interface ReadingBookRepository {
         updateProgress(id, blockIndex, percent, state, lastReadAt);
     }
 
+    default void updateProgress(
+            String id,
+            int blockIndex,
+            int unitIndex,
+            String anchorText,
+            int mediaTrackIndex,
+            long mediaPositionMs,
+            double percent,
+            String state,
+            long lastReadAt
+    ) {
+        updateProgress(id, blockIndex, unitIndex, anchorText, percent, state, lastReadAt);
+    }
+
     default void insertMark(ReadingMarkRecord record) {
         throw new UnsupportedOperationException("Reading marks are not supported by this repository");
     }

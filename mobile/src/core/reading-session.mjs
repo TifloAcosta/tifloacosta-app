@@ -30,7 +30,7 @@ export function createReadingSession({ blocks = [], initialIndex = 0 } = {}) {
     if (!items.length) return { blockIndex: 0, percent: 0 };
     return {
       blockIndex: index,
-      percent: ((index + 1) / items.length) * 100
+      percent: ((index + 1) * 100) / items.length
     };
   }
 

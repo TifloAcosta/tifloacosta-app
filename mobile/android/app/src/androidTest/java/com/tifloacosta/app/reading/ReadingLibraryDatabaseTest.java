@@ -18,6 +18,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
@@ -152,7 +153,45 @@ public class ReadingLibraryDatabaseTest {
     }
 
     @Test
-    public void v1DatabaseMigratesToV3WithoutLosingBookOrProgress() {
+    public void audioTracksStayOrderedAndDeleteWithTheirBook() {
+        ReadingBookRecord audio = new ReadingBookRecord(
+                "audio-book",
+                "audio-sha",
+                "Audiolibro",
+                "audio",
+                "audio/mp4",
+                "items/audio-book/track-0001.m4b",
+                600L,
+                10L,
+                null,
+                "not-read",
+                0,
+                0.0
+        );
+        database.insert(audio);
+
+        List<ReadingAudioTrackRecord> tracks = new ArrayList<>();
+        tracks.add(new ReadingAudioTrackRecord(
+                "audio-book", 0, "items/audio-book/track-0001.m4b", "01.m4b", "Uno", 1000L, 1, 300L
+        ));
+        tracks.add(new ReadingAudioTrackRecord(
+                "audio-book", 1, "items/audio-book/track-0002.m4b", "02.m4b", "Dos", 2000L, 2, 300L
+        ));
+        database.insertAudioTracks("audio-book", tracks);
+
+        List<ReadingAudioTrackRecord> stored = database.listAudioTracks("audio-book");
+        assertEquals(2, stored.size());
+        assertEquals(0, stored.get(0).getTrackIndex());
+        assertEquals(1, stored.get(1).getTrackIndex());
+        assertEquals(2000L, stored.get(1).getDurationMs());
+
+        database.delete("audio-book");
+        assertNull(database.findById("audio-book"));
+        assertEquals(0, database.listAudioTracks("audio-book").size());
+    }
+
+    @Test
+    public void v1DatabaseMigratesToV4WithoutLosingBookOrProgress() {
         database.close();
         context.deleteDatabase(ReadingLibraryDatabase.DATABASE_NAME);
 
@@ -198,7 +237,7 @@ public class ReadingLibraryDatabaseTest {
         ReadingBookRecord migrated = database.findById("legacy");
 
         assertNotNull(migrated);
-        assertEquals(3, database.getReadableDatabase().getVersion());
+        assertEquals(4, database.getReadableDatabase().getVersion());
         assertEquals("Libro anterior", migrated.getTitle());
         assertEquals(9, migrated.getBlockIndex());
         assertEquals(0, migrated.getUnitIndex());
@@ -210,7 +249,7 @@ public class ReadingLibraryDatabaseTest {
     }
 
     @Test
-    public void v2DatabaseMigratesToV3WithoutLosingBookMarksOrProgress() {
+    public void v2DatabaseMigratesToV4WithoutLosingBookMarksOrProgress() {
         database.close();
         context.deleteDatabase(ReadingLibraryDatabase.DATABASE_NAME);
 
@@ -294,7 +333,7 @@ public class ReadingLibraryDatabaseTest {
         ReadingBookRecord migrated = database.findById("v2");
         ReadingMarkRecord mark = database.listMarks("v2", null).get(0);
 
-        assertEquals(3, database.getReadableDatabase().getVersion());
+        assertEquals(4, database.getReadableDatabase().getVersion());
         assertEquals(6, migrated.getBlockIndex());
         assertEquals(2, migrated.getUnitIndex());
         assertEquals("ancla v2", migrated.getAnchorText());

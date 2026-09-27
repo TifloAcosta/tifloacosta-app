@@ -92,6 +92,127 @@ test('reading library client normalizes import batches and latest reading item',
   assert.equal(latest.blockIndex, 4);
 });
 
+test('reading library client keeps TXT and HTML openBook content behavior unchanged', async () => {
+  const calls = [];
+  const client = createReadingLibraryClient({
+    async openBook(id, options) {
+      calls.push({ id, options });
+      return {
+        book: { id, title: 'Texto', format: 'TXT' },
+        content: 'Contenido normal.'
+      };
+    }
+  });
+
+  const result = await client.openBook('txt-1');
+
+  assert.deepEqual(calls, [{ id: 'txt-1', options: { password: '' } }]);
+  assert.equal(result.book.format, 'txt');
+  assert.equal(result.content, 'Contenido normal.');
+  assert.equal('pdf' in result, false);
+});
+
+test('reading library client preserves structured PDF payload without stringifying it', async () => {
+  const client = createReadingLibraryClient({
+    async openBook(id, options) {
+      return {
+        book: { id, title: 'Manual', format: 'PDF' },
+        pdf: {
+          title: 'Manual interno',
+          author: 'Autor',
+          language: 'es',
+          pageCount: '2',
+          orderReliable: false,
+          pages: [
+            { number: '1', text: 'Página uno.' },
+            { number: 2, text: 'Página dos.' }
+          ]
+        }
+      };
+    }
+  });
+
+  const result = await client.openBook('pdf-1');
+
+  assert.equal(result.book.format, 'pdf');
+  assert.deepEqual(result.pdf, {
+    title: 'Manual interno',
+    author: 'Autor',
+    language: 'es',
+    pageCount: 2,
+    orderReliable: false,
+    pages: [
+      { number: 1, text: 'Página uno.' },
+      { number: 2, text: 'Página dos.' }
+    ]
+  });
+  assert.equal(typeof result.pdf, 'object');
+});
+
+test('reading library client forwards a transient PDF password once and never returns it', async () => {
+  const calls = [];
+  const secret = 'clave-temporal-123';
+  const client = createReadingLibraryClient({
+    async openBook(id, options) {
+      calls.push({ id, options: { ...options } });
+      if (!options.password) {
+        return {
+          book: { id, title: 'Protegido', format: 'pdf' },
+          passwordRequired: true,
+          passwordRejected: false
+        };
+      }
+      return {
+        book: { id, title: 'Protegido', format: 'pdf' },
+        pdf: {
+          pageCount: 1,
+          orderReliable: true,
+          pages: [{ number: 1, text: 'Contenido abierto.' }]
+        }
+      };
+    }
+  });
+
+  const challenge = await client.openBook('pdf-secret');
+  assert.equal(challenge.passwordRequired, true);
+  assert.equal(challenge.passwordRejected, false);
+
+  const opened = await client.openBook('pdf-secret', { password: secret });
+  assert.equal(calls.length, 2);
+  assert.deepEqual(calls[1], { id: 'pdf-secret', options: { password: secret } });
+  assert.equal(opened.pdf.pages[0].text, 'Contenido abierto.');
+  assert.equal(JSON.stringify(opened).includes(secret), false);
+});
+
+test('reading library client keeps rejected password and PDF no-text states distinct from generic failure', async () => {
+  const passwordClient = createReadingLibraryClient({
+    async openBook(id) {
+      return {
+        book: { id, title: 'Protegido', format: 'pdf' },
+        passwordRequired: true,
+        passwordRejected: true
+      };
+    }
+  });
+  const noTextClient = createReadingLibraryClient({
+    async openBook(id) {
+      return {
+        book: { id, title: 'Escaneado', format: 'pdf' },
+        pdfNoText: true,
+        pageCount: '4'
+      };
+    }
+  });
+
+  const rejected = await passwordClient.openBook('protected', { password: 'incorrecta' });
+  assert.equal(rejected.passwordRequired, true);
+  assert.equal(rejected.passwordRejected, true);
+
+  const noText = await noTextClient.openBook('scan');
+  assert.equal(noText.pdfNoText, true);
+  assert.equal(noText.pageCount, 4);
+});
+
 test('reading library client returns safe empty results when optional native functions are absent', async () => {
   const client = createReadingLibraryClient({});
 
@@ -103,6 +224,22 @@ test('reading library client returns safe empty results when optional native fun
   assert.equal(await client.saveProgress({ id: 'missing' }), false);
   assert.equal(await client.deleteBook('missing'), false);
   assert.equal(await client.getLatestInProgress(), null);
+});
+
+test('reading library native wrapper forwards transient openBook password and degrades safely', async () => {
+  const calls = [];
+  const native = {
+    async openBook(options) {
+      calls.push({ ...options });
+      return { book: { id: options.id, title: 'PDF', format: 'pdf' }, passwordRequired: true };
+    }
+  };
+  const wrapper = createReadingLibraryPlugin(native);
+
+  const result = await wrapper.openBook('pdf-1', { password: 'secreta' });
+
+  assert.deepEqual(calls, [{ id: 'pdf-1', password: 'secreta' }]);
+  assert.equal(result.passwordRequired, true);
 });
 
 test('reading library native wrapper degrades safely and listener fallback is removable', async () => {

@@ -93,8 +93,8 @@ public class TifloReadingAudioPlugin extends Plugin {
         String relativePath = clean(call.getString("relativePath"));
         int trackIndex = nonNegative(call.getInt("trackIndex"), 0);
         long positionMs = nonNegative(call.getLong("positionMs"), 0L);
-        if (bookId.isEmpty() || relativePath.isEmpty()) {
-            call.reject("Audio book id and relative path are required");
+        if (bookId.isEmpty()) {
+            call.reject("Audio book id is required");
             return;
         }
 

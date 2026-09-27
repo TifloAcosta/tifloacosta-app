@@ -11,11 +11,12 @@ import java.util.List;
 
 public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements ReadingBookRepository {
     public static final String DATABASE_NAME = "tiflo_reading.db";
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 4;
 
     private static final String TABLE_BOOKS = "books";
     private static final String TABLE_MARKS = "marks";
     private static final String TABLE_SETTINGS = "reading_settings";
+    private static final String TABLE_AUDIO_TRACKS = "audio_tracks";
 
     private static final String[] BOOK_COLUMNS = {
             "id",
@@ -57,6 +58,17 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
             "updated_at"
     };
 
+    private static final String[] AUDIO_TRACK_COLUMNS = {
+            "book_id",
+            "track_index",
+            "relative_path",
+            "original_name",
+            "title",
+            "duration_ms",
+            "embedded_track_number",
+            "size_bytes"
+    };
+
     public ReadingLibraryDatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -85,6 +97,7 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
         );
         createBookIndexes(db);
         createV3Tables(db);
+        createV4Tables(db);
     }
 
     @Override
@@ -102,6 +115,11 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
             db.execSQL("ALTER TABLE " + TABLE_MARKS + " ADD COLUMN media_track_index INTEGER NOT NULL DEFAULT 0");
             db.execSQL("ALTER TABLE " + TABLE_MARKS + " ADD COLUMN media_position_ms INTEGER NOT NULL DEFAULT 0");
             version = 3;
+        }
+        if (version == 3 && newVersion >= 4) {
+            createV4Tables(db);
+            backfillLegacyAudioTracks(db);
+            version = 4;
         }
         if (version != newVersion) {
             throw new IllegalStateException(
@@ -149,6 +167,35 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
         );
         createMarkIndexes(db);
         createSettingsTable(db);
+    }
+
+    private static void createV4Tables(SQLiteDatabase db) {
+        db.execSQL(
+                "CREATE TABLE IF NOT EXISTS " + TABLE_AUDIO_TRACKS + " (" +
+                        "book_id TEXT NOT NULL," +
+                        "track_index INTEGER NOT NULL," +
+                        "relative_path TEXT NOT NULL," +
+                        "original_name TEXT NOT NULL," +
+                        "title TEXT," +
+                        "duration_ms INTEGER NOT NULL DEFAULT 0," +
+                        "embedded_track_number INTEGER," +
+                        "size_bytes INTEGER NOT NULL DEFAULT 0," +
+                        "PRIMARY KEY(book_id, track_index)" +
+                        ")"
+        );
+        db.execSQL(
+                "CREATE INDEX IF NOT EXISTS audio_tracks_book_index ON " + TABLE_AUDIO_TRACKS +
+                        "(book_id, track_index)"
+        );
+    }
+
+    private static void backfillLegacyAudioTracks(SQLiteDatabase db) {
+        db.execSQL(
+                "INSERT OR IGNORE INTO " + TABLE_AUDIO_TRACKS +
+                        "(book_id, track_index, relative_path, original_name, title, duration_ms, embedded_track_number, size_bytes) " +
+                        "SELECT id, 0, relative_path, title, title, 0, NULL, size_bytes FROM " + TABLE_BOOKS +
+                        " WHERE format = 'audio'"
+        );
     }
 
     private static void createMarkIndexes(SQLiteDatabase db) {
@@ -236,6 +283,53 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
     }
 
     @Override
+    public void insertAudioTracks(String bookId, List<ReadingAudioTrackRecord> tracks) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
+            db.delete(TABLE_AUDIO_TRACKS, "book_id = ?", new String[]{bookId});
+            int expectedIndex = 0;
+            for (ReadingAudioTrackRecord track : tracks) {
+                if (track == null || !bookId.equals(track.getBookId()) || track.getTrackIndex() != expectedIndex) {
+                    throw new IllegalArgumentException("Audio tracks must belong to the book and use contiguous indexes");
+                }
+                ContentValues values = new ContentValues();
+                values.put("book_id", track.getBookId());
+                values.put("track_index", track.getTrackIndex());
+                values.put("relative_path", track.getRelativePath());
+                values.put("original_name", track.getOriginalName());
+                putNullable(values, "title", track.getTitle());
+                values.put("duration_ms", track.getDurationMs());
+                if (track.getEmbeddedTrackNumber() == null) values.putNull("embedded_track_number");
+                else values.put("embedded_track_number", track.getEmbeddedTrackNumber());
+                values.put("size_bytes", track.getSizeBytes());
+                db.insertOrThrow(TABLE_AUDIO_TRACKS, null, values);
+                expectedIndex += 1;
+            }
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+    }
+
+    @Override
+    public List<ReadingAudioTrackRecord> listAudioTracks(String bookId) {
+        List<ReadingAudioTrackRecord> records = new ArrayList<>();
+        try (Cursor cursor = getReadableDatabase().query(
+                TABLE_AUDIO_TRACKS,
+                AUDIO_TRACK_COLUMNS,
+                "book_id = ?",
+                new String[]{bookId},
+                null,
+                null,
+                "track_index ASC"
+        )) {
+            while (cursor.moveToNext()) records.add(readAudioTrack(cursor));
+        }
+        return records;
+    }
+
+    @Override
     public void updateProgress(String id, int blockIndex, double percent, String state, long lastReadAt) {
         updateProgress(id, blockIndex, 0, null, 0, 0L, percent, state, lastReadAt);
     }
@@ -269,11 +363,8 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
         ContentValues values = new ContentValues();
         values.put("block_index", blockIndex);
         values.put("unit_index", unitIndex);
-        if (anchorText == null) {
-            values.putNull("anchor_text");
-        } else {
-            values.put("anchor_text", anchorText);
-        }
+        if (anchorText == null) values.putNull("anchor_text");
+        else values.put("anchor_text", anchorText);
         values.put("media_track_index", mediaTrackIndex);
         values.put("media_position_ms", mediaPositionMs);
         values.put("percent", percent);
@@ -320,9 +411,7 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
                 null,
                 "block_index ASC, unit_index ASC, media_track_index ASC, media_position_ms ASC, created_at ASC, id ASC"
         )) {
-            while (cursor.moveToNext()) {
-                records.add(readMark(cursor));
-            }
+            while (cursor.moveToNext()) records.add(readMark(cursor));
         }
         return records;
     }
@@ -381,6 +470,7 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
         try {
+            db.delete(TABLE_AUDIO_TRACKS, "book_id = ?", new String[]{id});
             db.delete(TABLE_MARKS, "book_id = ?", new String[]{id});
             db.delete(TABLE_SETTINGS, "scope = ? AND book_id = ?", new String[]{"book", id});
             db.delete(TABLE_BOOKS, "id = ?", new String[]{id});
@@ -401,9 +491,7 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
                 orderBy,
                 "1"
         )) {
-            if (!cursor.moveToFirst()) {
-                return null;
-            }
+            if (!cursor.moveToFirst()) return null;
             return readRecord(cursor);
         }
     }
@@ -419,11 +507,8 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
         values.put("relative_path", record.getRelativePath());
         values.put("size_bytes", record.getSizeBytes());
         values.put("imported_at", record.getImportedAt());
-        if (record.getLastReadAt() == null) {
-            values.putNull("last_read_at");
-        } else {
-            values.put("last_read_at", record.getLastReadAt());
-        }
+        if (record.getLastReadAt() == null) values.putNull("last_read_at");
+        else values.put("last_read_at", record.getLastReadAt());
         values.put("state", record.getState());
         values.put("block_index", record.getBlockIndex());
         values.put("unit_index", record.getUnitIndex());
@@ -456,6 +541,21 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
                 cursor.getInt(cursor.getColumnIndexOrThrow("media_track_index")),
                 cursor.getLong(cursor.getColumnIndexOrThrow("media_position_ms")),
                 cursor.getDouble(cursor.getColumnIndexOrThrow("percent"))
+        );
+    }
+
+    private static ReadingAudioTrackRecord readAudioTrack(Cursor cursor) {
+        int titleColumn = cursor.getColumnIndexOrThrow("title");
+        int embeddedColumn = cursor.getColumnIndexOrThrow("embedded_track_number");
+        return new ReadingAudioTrackRecord(
+                cursor.getString(cursor.getColumnIndexOrThrow("book_id")),
+                cursor.getInt(cursor.getColumnIndexOrThrow("track_index")),
+                cursor.getString(cursor.getColumnIndexOrThrow("relative_path")),
+                cursor.getString(cursor.getColumnIndexOrThrow("original_name")),
+                cursor.isNull(titleColumn) ? null : cursor.getString(titleColumn),
+                cursor.getLong(cursor.getColumnIndexOrThrow("duration_ms")),
+                cursor.isNull(embeddedColumn) ? null : cursor.getInt(embeddedColumn),
+                cursor.getLong(cursor.getColumnIndexOrThrow("size_bytes"))
         );
     }
 

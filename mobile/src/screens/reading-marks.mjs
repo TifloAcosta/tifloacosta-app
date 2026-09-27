@@ -1,6 +1,6 @@
 const MARK_TYPES = ['bookmark', 'important', 'review', 'quote'];
 
-export function createReadingMarksPanel({ root, client, bookId, t, getPosition, getExcerpt, onJump }) {
+export function createReadingMarksPanel({ root, client, bookId, t, getPosition, getExcerpt, getReference, onJump }) {
   const section = document.createElement('section');
   section.className = 'reading-panel reading-marks-panel';
   section.hidden = true;
@@ -95,7 +95,7 @@ export function createReadingMarksPanel({ root, client, bookId, t, getPosition, 
         blockIndex: position.blockIndex,
         unitIndex: position.unitIndex,
         excerpt: getExcerpt?.(position) || '',
-        reference: `${position.blockIndex + 1}:${position.unitIndex + 1}`
+        reference: getReference?.(position) || `${position.blockIndex + 1}:${position.unitIndex + 1}`
       });
       status.textContent = mark ? t('readingBook.markAdded') : t('readingBook.markFailed');
       if (mark) await loadMarks();

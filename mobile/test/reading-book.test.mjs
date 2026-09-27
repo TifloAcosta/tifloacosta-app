@@ -81,3 +81,18 @@ test('reading book uses screen cleanup to stop speech and listeners when leaving
   assert.match(screen, /searchPanel.*destroy|destroy.*searchPanel/s);
   assert.match(screen, /settingsPanel.*destroy|destroy.*settingsPanel/s);
 });
+
+test('reading book uses the PDF semantic adapter and navigates by real PDF pages', async () => {
+  const screen = await read('src/screens/reading-book.mjs');
+
+  assert.match(screen, /parsePdfDocument/);
+  assert.match(screen, /pageForPosition/);
+  assert.match(screen, /positionForPage/);
+  assert.match(screen, /activeBook\.format\s*===\s*['"]pdf['"]/);
+  assert.match(screen, /parsePdfDocument\(opened\.pdf/);
+  assert.match(screen, /pageForPosition\(documentModel,\s*currentPosition\)/);
+  assert.match(screen, /positionForPage\(documentModel,/);
+  assert.match(screen, /readingLibrary\.previousPage/);
+  assert.match(screen, /readingLibrary\.nextPage/);
+  assert.match(screen, /readingLibrary\.pageStatus/);
+});

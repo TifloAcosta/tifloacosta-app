@@ -56,6 +56,13 @@ export function renderReadingBook({ root, router, client, bookId, t }) {
   let activeBook = null;
   let blockCount = 0;
 
+  function showOpenError() {
+    heading.textContent = t('readingBook.errorHeading');
+    status.textContent = t('readingBook.error');
+    paragraph.textContent = '';
+    controls.hidden = true;
+  }
+
   function updateControls() {
     if (!session || blockCount === 0) {
       previous.disabled = true;
@@ -88,12 +95,17 @@ export function renderReadingBook({ root, router, client, bookId, t }) {
   async function persistProgress() {
     if (!session || !activeBook?.id) return false;
     const snapshot = session.snapshot();
-    return client.saveProgress({
-      id: activeBook.id,
-      blockIndex: snapshot.blockIndex,
-      percent: snapshot.percent,
-      state: 'in-reading'
-    });
+    try {
+      await client.saveProgress({
+        id: activeBook.id,
+        blockIndex: snapshot.blockIndex,
+        percent: snapshot.percent,
+        state: 'in-reading'
+      });
+      return true;
+    } catch {
+      return false;
+    }
   }
 
   async function navigate(move) {
@@ -114,12 +126,16 @@ export function renderReadingBook({ root, router, client, bookId, t }) {
   next.addEventListener('click', () => { void navigate('next'); });
 
   void (async () => {
-    const opened = await client.openBook(bookId);
+    let opened;
+    try {
+      opened = await client.openBook(bookId);
+    } catch {
+      showOpenError();
+      return;
+    }
+
     if (!opened?.book) {
-      heading.textContent = t('readingBook.errorHeading');
-      status.textContent = t('readingBook.error');
-      paragraph.textContent = '';
-      controls.hidden = true;
+      showOpenError();
       return;
     }
 

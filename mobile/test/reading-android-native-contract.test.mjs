@@ -15,11 +15,42 @@ test('reading android native contract registers the Capacitor plugin and bridge 
   const activity = await read('android/app/src/main/java/com/tifloacosta/app/MainActivity.java');
 
   assert.match(plugin, /@CapacitorPlugin\(name\s*=\s*"TifloReading"\)/);
-  for (const method of ['pickDocuments', 'consumeInitialSharedDocuments', 'listBooks', 'openBook', 'saveProgress', 'deleteBook', 'getLatestInProgress']) {
+  for (const method of [
+    'pickDocuments',
+    'consumeInitialSharedDocuments',
+    'listBooks',
+    'openBook',
+    'saveProgress',
+    'deleteBook',
+    'getLatestInProgress',
+    'listTtsVoices',
+    'startTts',
+    'stopTts'
+  ]) {
     assert.match(plugin, new RegExp(`public\\s+void\\s+${method}\\s*\\(PluginCall\\s+call\\)`), `Missing ${method}`);
   }
   assert.match(plugin, /notifyListeners\("documentsReceived"/);
+  assert.match(plugin, /notifyListeners\(event\.getName\(\)/);
+  for (const eventName of ['ttsStarted', 'ttsDone', 'ttsError', 'ttsInterrupted']) {
+    assert.match(plugin, new RegExp(eventName));
+  }
   assert.match(activity, /registerPlugin\(TifloReadingPlugin\.class\)/);
+});
+
+test('reading android tts contract has session-safe callbacks, android tts, audio focus and noisy-audio interruption', async () => {
+  const controller = await read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingTtsController.java');
+
+  assert.match(controller, /TextToSpeech/);
+  assert.match(controller, /UtteranceProgressListener/);
+  assert.match(controller, /AudioManager/);
+  assert.match(controller, /AudioFocusRequest/);
+  assert.match(controller, /ACTION_AUDIO_BECOMING_NOISY/);
+  assert.match(controller, /sessionId/);
+  assert.match(controller, /utteranceId/);
+  assert.match(controller, /0\.5f/);
+  assert.match(controller, /2\.0f/);
+  assert.match(controller, /ttsInterrupted/);
+  assert.doesNotMatch(controller, /onAudioFocusChange[\s\S]{0,800}speak\s*\(/, 'Audio-focus gain must never auto-resume speech');
 });
 
 test('reading android native contract uses the document picker for multiple TXT and HTML files', async () => {

@@ -1,12 +1,17 @@
 package com.tifloacosta.app.reading;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 
 public interface ReadingFileStore {
     long usableSpaceBytes();
 
     OutputStream openTemp(String tempName) throws IOException;
+
+    default InputStream openTempInput(String tempName) throws IOException {
+        throw new IOException("Temporary binary input is unavailable");
+    }
 
     boolean tempHasNonWhitespaceText(String tempName) throws IOException;
 

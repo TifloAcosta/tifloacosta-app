@@ -34,18 +34,22 @@ export function createReadingLibraryPlugin(
   plugin = NativeTifloReading,
   ttsPlugin = NativeTifloReadingTts,
   audioPlugin = NativeTifloReadingAudio,
-  audioGroupPlugin = NativeTifloReadingAudioGroup
+  audioGroupPlugin = null
 ) {
+  const groupPlugin = audioGroupPlugin ?? (
+    plugin === NativeTifloReading ? NativeTifloReadingAudioGroup : plugin
+  );
+
   async function pickDocuments() {
-    return safeCall(audioGroupPlugin, 'pickDocuments', undefined, emptyBatch(true));
+    return safeCall(groupPlugin, 'pickDocuments', undefined, emptyBatch(true));
   }
 
   async function resolveAudioSelection(options = {}) {
-    return safeCall(audioGroupPlugin, 'resolveAudioSelection', options, emptyBatch(true));
+    return safeCall(groupPlugin, 'resolveAudioSelection', options, emptyBatch(true));
   }
 
   async function listAudioTracks(options = {}) {
-    return safeCall(audioGroupPlugin, 'listAudioTracks', options, { tracks: [] });
+    return safeCall(groupPlugin, 'listAudioTracks', options, { tracks: [] });
   }
 
   async function consumeInitialSharedDocuments() {

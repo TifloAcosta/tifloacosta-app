@@ -27,7 +27,7 @@ test('reading audio import accepts only the approved local audio families and pr
   assert.match(importer, /return\s+"audio"/);
   assert.match(importer, /audioExtensionFrom/);
   assert.match(importer, /moveTempToItem\(tempName, id, format, sourceExtension\)/);
-  assert.match(store, /moveTempToItem\(String tempName, String id, String format, String sourceExtension\)/);
+  assert.match(store, /moveTempToItem\(\s*String tempName,\s*String id,\s*String format,\s*String sourceExtension\s*\)/);
 });
 
 test('reading audio import validates the private temp file before inserting a library row', async () => {

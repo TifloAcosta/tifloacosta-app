@@ -58,6 +58,7 @@ public class TifloSharePlugin extends Plugin {
 
     private String sharedText(Intent intent) {
         if (intent == null || !Intent.ACTION_SEND.equals(intent.getAction())) return "";
+        if (intent.hasExtra(Intent.EXTRA_STREAM)) return "";
         String type = intent.getType();
         if (type != null && !type.startsWith("text/")) return "";
         CharSequence value = intent.getCharSequenceExtra(Intent.EXTRA_TEXT);

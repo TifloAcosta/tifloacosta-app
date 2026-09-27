@@ -9,6 +9,7 @@ public class MainActivity extends BridgeActivity {
     public void onCreate(Bundle savedInstanceState) {
         registerPlugin(TifloSavePlugin.class);
         registerPlugin(TifloSharePlugin.class);
+        registerPlugin(TifloReadingPlugin.class);
         registerPlugin(TifloWebFetchPlugin.class);
         registerPlugin(TifloUpdatePlugin.class);
         super.onCreate(savedInstanceState);

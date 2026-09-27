@@ -41,6 +41,28 @@ function normalizeBook(value) {
   };
 }
 
+function normalizePdfPage(value) {
+  if (!value || typeof value !== 'object') return null;
+  const number = positiveInteger(value.number, 0);
+  if (number <= 0) return null;
+  return {
+    number,
+    text: String(value.text ?? '')
+  };
+}
+
+function normalizePdfPayload(value) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return null;
+  return {
+    title: String(value.title ?? '').trim(),
+    author: String(value.author ?? '').trim(),
+    language: String(value.language ?? '').trim(),
+    pageCount: nonNegativeInteger(value.pageCount, 0),
+    orderReliable: value.orderReliable === true,
+    pages: (Array.isArray(value.pages) ? value.pages : []).map(normalizePdfPage).filter(Boolean)
+  };
+}
+
 function normalizeRejected(value) {
   if (!value || typeof value !== 'object') return null;
   return {
@@ -140,14 +162,33 @@ export function createReadingLibraryClient(plugin = {}) {
     try { return normalizeList(await plugin.listBooks(requested), requested); } catch { return normalizeList(null, requested); }
   }
 
-  async function openBook(id) {
+  async function openBook(id, options = {}) {
     const cleanId = String(id ?? '').trim();
     if (!cleanId || !plugin?.openBook) return null;
+    const password = String(options?.password ?? '');
     try {
-      const result = await plugin.openBook(cleanId);
+      const result = await plugin.openBook(cleanId, { password });
       if (!result || typeof result !== 'object') return null;
       const book = normalizeBook(result.book);
       if (!book) return null;
+      if (book.format === 'pdf') {
+        if (result.passwordRequired === true) {
+          return {
+            book,
+            passwordRequired: true,
+            passwordRejected: result.passwordRejected === true
+          };
+        }
+        if (result.pdfNoText === true) {
+          return {
+            book,
+            pdfNoText: true,
+            pageCount: nonNegativeInteger(result.pageCount, 0)
+          };
+        }
+        const pdf = normalizePdfPayload(result.pdf);
+        return pdf ? { book, pdf } : null;
+      }
       return { book, content: String(result.content ?? '') };
     } catch { return null; }
   }

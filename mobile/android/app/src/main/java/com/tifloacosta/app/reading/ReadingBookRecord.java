@@ -12,6 +12,8 @@ public final class ReadingBookRecord {
     private final Long lastReadAt;
     private final String state;
     private final int blockIndex;
+    private final int unitIndex;
+    private final String anchorText;
     private final double percent;
 
     public ReadingBookRecord(
@@ -28,6 +30,40 @@ public final class ReadingBookRecord {
             int blockIndex,
             double percent
     ) {
+        this(
+                id,
+                sha256,
+                title,
+                format,
+                mimeType,
+                relativePath,
+                sizeBytes,
+                importedAt,
+                lastReadAt,
+                state,
+                blockIndex,
+                0,
+                null,
+                percent
+        );
+    }
+
+    public ReadingBookRecord(
+            String id,
+            String sha256,
+            String title,
+            String format,
+            String mimeType,
+            String relativePath,
+            long sizeBytes,
+            long importedAt,
+            Long lastReadAt,
+            String state,
+            int blockIndex,
+            int unitIndex,
+            String anchorText,
+            double percent
+    ) {
         this.id = id;
         this.sha256 = sha256;
         this.title = title;
@@ -39,6 +75,8 @@ public final class ReadingBookRecord {
         this.lastReadAt = lastReadAt;
         this.state = state;
         this.blockIndex = blockIndex;
+        this.unitIndex = unitIndex;
+        this.anchorText = anchorText;
         this.percent = percent;
     }
 
@@ -53,5 +91,7 @@ public final class ReadingBookRecord {
     public Long getLastReadAt() { return lastReadAt; }
     public String getState() { return state; }
     public int getBlockIndex() { return blockIndex; }
+    public int getUnitIndex() { return unitIndex; }
+    public String getAnchorText() { return anchorText; }
     public double getPercent() { return percent; }
 }

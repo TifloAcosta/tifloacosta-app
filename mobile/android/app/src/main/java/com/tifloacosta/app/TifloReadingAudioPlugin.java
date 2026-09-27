@@ -106,25 +106,18 @@ public class TifloReadingAudioPlugin extends Plugin {
             args.putInt(ReadingAudioService.EXTRA_TRACK_INDEX, trackIndex);
             args.putLong(ReadingAudioService.EXTRA_POSITION_MS, positionMs);
 
-            ListenableFuture<SessionResult> resultFuture =
-                    mediaController.sendCustomCommand(ReadingAudioService.PREPARE_AUDIO_COMMAND, args);
-            resultFuture.addListener(() -> {
-                try {
-                    SessionResult result = resultFuture.get();
-                    if (result.resultCode != SessionResult.RESULT_SUCCESS) {
-                        call.reject("Unable to prepare reading audio");
-                        return;
+            resolveCommand(
+                    call,
+                    mediaController.sendCustomCommand(ReadingAudioService.PREPARE_AUDIO_COMMAND, args),
+                    "Unable to prepare reading audio",
+                    () -> {
+                        currentBookId = bookId;
+                        currentTrackIndex = Math.max(0, mediaController.getCurrentMediaItemIndex());
+                        JSObject state = stateJson(mediaController);
+                        call.resolve(state);
+                        emitState(mediaController);
                     }
-                    currentBookId = bookId;
-                    currentTrackIndex = Math.max(0, mediaController.getCurrentMediaItemIndex());
-                    JSObject state = stateJson(mediaController);
-                    call.resolve(state);
-                    emitState(mediaController);
-                } catch (ExecutionException | InterruptedException error) {
-                    if (error instanceof InterruptedException) Thread.currentThread().interrupt();
-                    call.reject("Unable to prepare reading audio", error);
-                }
-            }, mainExecutor);
+            );
         });
     }
 
@@ -211,6 +204,46 @@ public class TifloReadingAudioPlugin extends Plugin {
     }
 
     @PluginMethod
+    public void setAudioSleepTimer(PluginCall call) {
+        int minutes = nonNegative(call.getInt("minutes"), 0);
+        boolean atTrackEnd = Boolean.TRUE.equals(call.getBoolean("atTrackEnd"));
+        if (!atTrackEnd && minutes != 15 && minutes != 30 && minutes != 45 && minutes != 60) {
+            call.reject("Audio sleep timer must be 15, 30, 45 or 60 minutes, or track end");
+            return;
+        }
+
+        withController(call, "Unable to set reading audio sleep timer", mediaController -> {
+            Bundle args = new Bundle();
+            args.putInt(ReadingAudioService.EXTRA_SLEEP_MINUTES, minutes);
+            args.putBoolean(ReadingAudioService.EXTRA_SLEEP_AT_TRACK_END, atTrackEnd);
+            resolveCommand(
+                    call,
+                    mediaController.sendCustomCommand(ReadingAudioService.SET_SLEEP_TIMER_COMMAND, args),
+                    "Unable to set reading audio sleep timer",
+                    () -> {
+                        JSObject result = new JSObject();
+                        result.put("scheduled", true);
+                        call.resolve(result);
+                    }
+            );
+        });
+    }
+
+    @PluginMethod
+    public void cancelAudioSleepTimer(PluginCall call) {
+        withController(call, "Unable to cancel reading audio sleep timer", mediaController -> resolveCommand(
+                call,
+                mediaController.sendCustomCommand(ReadingAudioService.CANCEL_SLEEP_TIMER_COMMAND, Bundle.EMPTY),
+                "Unable to cancel reading audio sleep timer",
+                () -> {
+                    JSObject result = new JSObject();
+                    result.put("cancelled", true);
+                    call.resolve(result);
+                }
+        ));
+    }
+
+    @PluginMethod
     public void getAudioState(PluginCall call) {
         withController(call, "Unable to read audio state", mediaController -> call.resolve(stateJson(mediaController)));
     }
@@ -262,6 +295,27 @@ public class TifloReadingAudioPlugin extends Plugin {
                 MediaController mediaController = future.get();
                 action.run(mediaController);
             } catch (ExecutionException | InterruptedException | RuntimeException error) {
+                if (error instanceof InterruptedException) Thread.currentThread().interrupt();
+                call.reject(rejection, error);
+            }
+        }, mainExecutor);
+    }
+
+    private void resolveCommand(
+            PluginCall call,
+            ListenableFuture<SessionResult> resultFuture,
+            String rejection,
+            Runnable onSuccess
+    ) {
+        resultFuture.addListener(() -> {
+            try {
+                SessionResult result = resultFuture.get();
+                if (result.resultCode != SessionResult.RESULT_SUCCESS) {
+                    call.reject(rejection);
+                    return;
+                }
+                onSuccess.run();
+            } catch (ExecutionException | InterruptedException error) {
                 if (error instanceof InterruptedException) Thread.currentThread().interrupt();
                 call.reject(rejection, error);
             }

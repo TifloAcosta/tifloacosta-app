@@ -6,9 +6,10 @@ import { HOME_ITEMS } from '../src/screens/home.mjs';
 
 const read = file => readFile(new URL(`../${file}`, import.meta.url), 'utf8');
 
-test('Downloads follows Library on the mobile home screen', () => {
+test('Reading library sits between Library and Downloads on the mobile home screen', () => {
   const index = HOME_ITEMS.indexOf('library');
-  assert.equal(HOME_ITEMS[index + 1], 'downloads');
+  assert.equal(HOME_ITEMS[index + 1], 'reading-library');
+  assert.equal(HOME_ITEMS[index + 2], 'downloads');
 });
 
 test('Downloads core labels exist in Spanish and English', () => {

@@ -107,3 +107,57 @@ test('reading integration deletion removes only the private copy and book-owned 
   assert.match(database, /db\.delete\(TABLE_BOOKS,\s*"id = \?"/);
   assert.doesNotMatch(database, /db\.delete\(TABLE_SETTINGS,\s*null/);
 });
+
+test('PDF vertical slice keeps import storage opening pages and navigation on the shared reader path', async () => {
+  const [importer, plugin, adapter, screen, marks] = await Promise.all([
+    read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingImportService.java'),
+    read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java'),
+    read('src/core/reading-pdf-adapter.mjs'),
+    read('src/screens/reading-book.mjs'),
+    read('src/screens/reading-marks.mjs')
+  ]);
+
+  assert.match(importer, /"application\/pdf"/);
+  assert.match(importer, /endsWith\("\.pdf"\)/);
+  assert.match(importer, /validatePdf\(tempName\)/);
+  assert.match(importer, /moveTempToItem\(tempName, id, format\)/);
+  assert.match(plugin, /"pdf"\.equals\(record\.getFormat\(\)\)/);
+  assert.match(plugin, /pdfExtractor\.inspect\(source, password\)/);
+  assert.match(plugin, /result\.put\("pdf", pdfJson\(pdf\)\)/);
+  assert.match(plugin, /"source\.pdf"/);
+
+  assert.match(adapter, /export function parsePdfDocument/);
+  assert.match(adapter, /pageNumber/);
+  assert.match(adapter, /export function pageForPosition/);
+  assert.match(adapter, /export function positionForPage/);
+  assert.match(screen, /parsePdfDocument\(opened\.pdf\)/);
+  assert.match(screen, /positionForPage\(documentModel,\s*requestedPage\)/);
+  assert.match(screen, /moveToPosition\(target\)/);
+  assert.match(screen, /getReference:[\s\S]*readingBook\.pdfPageReference/);
+  assert.match(marks, /reference:\s*getReference\?\.\(position\)/);
+});
+
+test('PDF vertical slice keeps password/no-text/invalid states separate without password persistence or OCR claims', async () => {
+  const [importer, plugin, database, client, screen, gradle] = await Promise.all([
+    read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingImportService.java'),
+    read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java'),
+    read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingLibraryDatabase.java'),
+    read('src/core/reading-library-client.mjs'),
+    read('src/screens/reading-book.mjs'),
+    read('android/app/build.gradle')
+  ]);
+
+  assert.match(importer, /STATUS_PASSWORD_REQUIRED/);
+  assert.match(importer, /ReadingImportResult\.rejected\("pdf-no-text"\)/);
+  assert.match(importer, /ReadingImportResult\.rejected\("invalid-pdf"\)/);
+  assert.match(plugin, /passwordRequired/);
+  assert.match(plugin, /passwordRejected/);
+  assert.match(plugin, /pdfNoText/);
+  assert.match(client, /openBook\(id, \{ password = null \} = \{\}\)/);
+  assert.match(screen, /passwordInput\.value\s*=\s*['"]['"]/);
+
+  assert.doesNotMatch(database, /password/i);
+  assert.doesNotMatch(plugin, /book\.put\("password"|result\.put\("password"/i);
+  assert.doesNotMatch(gradle, /tesseract|text-recognition|mlkit.*text|ocr/i);
+  assert.doesNotMatch(screen, /\bOCR\b|reconoc(?:er|imiento).*imagen|scan(?:ned)?\s+text/i);
+});

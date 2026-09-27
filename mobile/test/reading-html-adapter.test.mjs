@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
 import { parseHtmlDocument } from '../src/core/reading-html-adapter.mjs';
+import { normalizeSemanticPosition } from '../src/core/reading-semantic-model.mjs';
 
 const textNode = textContent => ({ nodeType: 3, textContent });
 const element = (tagName, attributes = {}, childNodes = []) => ({
@@ -61,6 +62,28 @@ test('reading html adapter: preserves readable semantic structures as plain data
     { id: 'tc-2', type: 'table-cell', text: 'Dato' }
   ]);
   assert.deepEqual(document.blocks[1].sentences, ['Texto con imagen descrita.']);
+});
+
+test('reading html adapter: uses the same block and sentence position contract as semantic text', () => {
+  const detachedDocument = documentWith(
+    element('h1', {}, [textNode('Capítulo')]),
+    element('p', {}, [textNode('Primera frase. Segunda frase.')])
+  );
+
+  const document = parseHtmlDocument('<h1>Capítulo</h1><p>...</p>', {
+    language: 'es',
+    parseDocument: () => detachedDocument
+  });
+
+  assert.deepEqual(document.blocks[1].sentences, ['Primera frase.', 'Segunda frase.']);
+  assert.deepEqual(normalizeSemanticPosition({ blockIndex: 1, unitIndex: 1 }, document), {
+    blockIndex: 1,
+    unitIndex: 1
+  });
+  assert.deepEqual(normalizeSemanticPosition({ blockIndex: 99, unitIndex: 99 }, document), {
+    blockIndex: 1,
+    unitIndex: 1
+  });
 });
 
 test('reading html adapter: keeps nested list items separate and preserves their level', () => {

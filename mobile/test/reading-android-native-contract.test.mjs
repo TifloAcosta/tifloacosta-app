@@ -10,31 +10,28 @@ const read = async path => {
   }
 };
 
-test('reading android native contract registers the Capacitor plugin and bridge methods', async () => {
+test('reading android native contract registers the reading and tts Capacitor bridges', async () => {
   const plugin = await read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java');
+  const ttsPlugin = await read('android/app/src/main/java/com/tifloacosta/app/TifloReadingTtsPlugin.java');
   const activity = await read('android/app/src/main/java/com/tifloacosta/app/MainActivity.java');
 
   assert.match(plugin, /@CapacitorPlugin\(name\s*=\s*"TifloReading"\)/);
-  for (const method of [
-    'pickDocuments',
-    'consumeInitialSharedDocuments',
-    'listBooks',
-    'openBook',
-    'saveProgress',
-    'deleteBook',
-    'getLatestInProgress',
-    'listTtsVoices',
-    'startTts',
-    'stopTts'
-  ]) {
+  for (const method of ['pickDocuments', 'consumeInitialSharedDocuments', 'listBooks', 'openBook', 'saveProgress', 'deleteBook', 'getLatestInProgress']) {
     assert.match(plugin, new RegExp(`public\\s+void\\s+${method}\\s*\\(PluginCall\\s+call\\)`), `Missing ${method}`);
   }
   assert.match(plugin, /notifyListeners\("documentsReceived"/);
-  assert.match(plugin, /notifyListeners\(event\.getName\(\)/);
-  for (const eventName of ['ttsStarted', 'ttsDone', 'ttsError', 'ttsInterrupted']) {
-    assert.match(plugin, new RegExp(eventName));
+
+  assert.match(ttsPlugin, /@CapacitorPlugin\(name\s*=\s*"TifloReadingTts"\)/);
+  for (const method of ['listTtsVoices', 'startTts', 'stopTts']) {
+    assert.match(ttsPlugin, new RegExp(`public\\s+void\\s+${method}\\s*\\(PluginCall\\s+call\\)`), `Missing ${method}`);
   }
+  assert.match(ttsPlugin, /notifyListeners\(event\.getName\(\)/);
+  for (const eventName of ['ttsStarted', 'ttsDone', 'ttsError', 'ttsInterrupted']) {
+    assert.match(ttsPlugin, new RegExp(eventName));
+  }
+
   assert.match(activity, /registerPlugin\(TifloReadingPlugin\.class\)/);
+  assert.match(activity, /registerPlugin\(TifloReadingTtsPlugin\.class\)/);
 });
 
 test('reading android tts contract has session-safe callbacks, android tts, audio focus and noisy-audio interruption', async () => {

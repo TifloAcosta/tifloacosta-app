@@ -79,7 +79,12 @@ const DICTIONARIES = {
       deleted: 'Documento eliminado de TifloAcosta.', deleteFailed: 'No se pudo eliminar el documento.',
       pagination: 'Páginas de mi biblioteca', previousPage: 'Página anterior', nextPage: 'Página siguiente',
       pageStatus: 'Página {page} de {pages}', importSummary: 'Importados: {imported}. Duplicados: {duplicates}. Rechazados: {rejected}.',
-      openNow: 'Abrir ahora'
+      openNow: 'Abrir ahora', audioGroupHeading: 'Varios archivos de audio',
+      audioGroupQuestion: '¿Cómo quieres importarlos?', audioGroupOneBook: 'Un solo audiolibro',
+      audioGroupIndependent: 'Archivos independientes', audioGroupCancel: 'Cancelar',
+      audioGroupProcessing: 'Preparando la importación…',
+      audioOrderAmbiguous: 'No se puede determinar con seguridad el orden de las pistas. Revisa sus números o nombres e inténtalo de nuevo.',
+      audioDuplicateTrack: 'La selección contiene dos pistas con el mismo contenido. Revisa los archivos e inténtalo de nuevo.'
     },
     readingBook: {
       loading: 'Abriendo documento…', backToLibrary: 'Volver a Leer con TifloAcosta',
@@ -232,7 +237,12 @@ const DICTIONARIES = {
       options: 'Options for {title}', delete: 'Delete from TifloAcosta', confirmDelete: 'Confirm deletion of {title}', cancelDelete: 'Cancel',
       deleted: 'Document deleted from TifloAcosta.', deleteFailed: 'The document could not be deleted.',
       pagination: 'My library pages', previousPage: 'Previous page', nextPage: 'Next page',
-      pageStatus: 'Page {page} of {pages}', importSummary: 'Imported: {imported}. Duplicates: {duplicates}. Rejected: {rejected}.', openNow: 'Open now'
+      pageStatus: 'Page {page} of {pages}', importSummary: 'Imported: {imported}. Duplicates: {duplicates}. Rejected: {rejected}.', openNow: 'Open now',
+      audioGroupHeading: 'Multiple audio files', audioGroupQuestion: 'How do you want to import them?',
+      audioGroupOneBook: 'One audiobook', audioGroupIndependent: 'Independent files', audioGroupCancel: 'Cancel',
+      audioGroupProcessing: 'Preparing import…',
+      audioOrderAmbiguous: 'The track order cannot be determined reliably. Review the track numbers or file names and try again.',
+      audioDuplicateTrack: 'The selection contains two tracks with identical content. Review the files and try again.'
     },
     readingBook: {
       loading: 'Opening document…', backToLibrary: 'Back to Read with TifloAcosta', navigation: 'Navigation',

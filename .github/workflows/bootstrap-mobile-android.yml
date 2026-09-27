@@ -73,9 +73,19 @@ jobs:
 
       - name: Compile Android instrumentation tests
         working-directory: mobile/android
+        shell: bash
         run: |
+          set -o pipefail
           chmod +x gradlew
-          ./gradlew --no-daemon assembleDebugAndroidTest --stacktrace
+          ./gradlew --no-daemon assembleDebugAndroidTest --stacktrace 2>&1 | tee instrumentation-build.log
+
+      - name: Upload instrumentation build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: instrumentation-build-log
+          if-no-files-found: error
+          path: mobile/android/instrumentation-build.log
 
       - name: Prepare Android release signing when secrets are configured
         shell: bash
@@ -89,7 +99,7 @@ jobs:
           fi
 
           if [ -z "$ANDROID_KEYSTORE_BASE64_SECRET" ] || [ -z "$ANDROID_KEYSTORE_PASSWORD_SECRET" ]; then
-            echo "Android signing secrets are incomplete. Configure both TifloAcosta signing secrets."
+            echo "Android signing secrets are incomplete. Configure both TIFLOACOSTA signing secrets."
             exit 1
           fi
 

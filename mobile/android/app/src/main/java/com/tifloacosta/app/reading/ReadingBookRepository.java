@@ -37,6 +37,14 @@ public interface ReadingBookRepository {
         updateProgress(id, blockIndex, unitIndex, anchorText, percent, state, lastReadAt);
     }
 
+    default void insertAudioTracks(String bookId, List<ReadingAudioTrackRecord> tracks) {
+        throw new UnsupportedOperationException("Reading audio tracks are not supported by this repository");
+    }
+
+    default List<ReadingAudioTrackRecord> listAudioTracks(String bookId) {
+        throw new UnsupportedOperationException("Reading audio tracks are not supported by this repository");
+    }
+
     default void insertMark(ReadingMarkRecord record) {
         throw new UnsupportedOperationException("Reading marks are not supported by this repository");
     }

@@ -21,6 +21,8 @@ import com.google.common.util.concurrent.ListenableFuture;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class ReadingAudioService extends MediaSessionService {
     public static final String ACTION_AUDIO_INTERRUPTED =
@@ -40,10 +42,12 @@ public final class ReadingAudioService extends MediaSessionService {
 
     private ExoPlayer player;
     private MediaSession mediaSession;
+    private ReadingLibraryDatabase database;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        database = new ReadingLibraryDatabase(getApplicationContext());
 
         AudioAttributes audioAttributes = new AudioAttributes.Builder()
                 .setUsage(C.USAGE_MEDIA)
@@ -77,19 +81,41 @@ public final class ReadingAudioService extends MediaSessionService {
             player.release();
             player = null;
         }
+        if (database != null) {
+            database.close();
+            database = null;
+        }
         super.onDestroy();
     }
 
-    private void prepareAudio(String bookId, String relativePath, long positionMs) throws IOException {
-        File source = resolveReadingFile(bookId, relativePath);
-        MediaItem item = new MediaItem.Builder()
+    private void prepareAudio(String bookId, String relativePath, int trackIndex, long positionMs) throws IOException {
+        List<ReadingAudioTrackRecord> tracks = database == null
+                ? new ArrayList<>()
+                : database.listAudioTracks(bookId);
+        List<MediaItem> items = new ArrayList<>();
+
+        if (!tracks.isEmpty()) {
+            for (ReadingAudioTrackRecord track : tracks) {
+                File source = resolveReadingFile(bookId, track.getRelativePath());
+                items.add(mediaItem(bookId, source));
+            }
+        } else {
+            File source = resolveReadingFile(bookId, relativePath);
+            items.add(mediaItem(bookId, source));
+        }
+
+        if (items.isEmpty()) throw new IOException("Reading audio source is missing");
+        int startIndex = Math.min(Math.max(0, trackIndex), items.size() - 1);
+        player.pause();
+        player.setMediaItems(items, startIndex, Math.max(0L, positionMs));
+        player.prepare();
+    }
+
+    private static MediaItem mediaItem(String bookId, File source) {
+        return new MediaItem.Builder()
                 .setMediaId(bookId)
                 .setUri(Uri.fromFile(source))
                 .build();
-
-        player.pause();
-        player.setMediaItem(item, Math.max(0L, positionMs));
-        player.prepare();
     }
 
     private File resolveReadingFile(String bookId, String relativePath) throws IOException {
@@ -116,7 +142,7 @@ public final class ReadingAudioService extends MediaSessionService {
             throw new IOException("Reading audio item not found");
         }
         File[] candidates = itemDirectory.listFiles(file ->
-                file != null && file.isFile() && file.getName().startsWith("source."));
+                file != null && file.isFile() && (file.getName().startsWith("source.") || file.getName().startsWith("track-")));
         if (candidates == null || candidates.length != 1) {
             throw new IOException("Reading audio source is ambiguous or missing");
         }
@@ -131,6 +157,7 @@ public final class ReadingAudioService extends MediaSessionService {
 
         MediaItem currentItem = player.getCurrentMediaItem();
         intent.putExtra(EXTRA_BOOK_ID, currentItem == null ? "" : currentItem.mediaId);
+        intent.putExtra(EXTRA_TRACK_INDEX, Math.max(0, player.getCurrentMediaItemIndex()));
         intent.putExtra(EXTRA_POSITION_MS, Math.max(0L, player.getCurrentPosition()));
         long durationMs = player.getDuration();
         intent.putExtra(EXTRA_DURATION_MS, durationMs == C.TIME_UNSET ? 0L : Math.max(0L, durationMs));
@@ -166,9 +193,7 @@ public final class ReadingAudioService extends MediaSessionService {
 
         @Override
         public void onPlaybackStateChanged(@Player.State int playbackState) {
-            if (playbackState == Player.STATE_ENDED) {
-                sendPlaybackEvent(ACTION_AUDIO_ENDED, null);
-            }
+            if (playbackState == Player.STATE_ENDED) sendPlaybackEvent(ACTION_AUDIO_ENDED, null);
         }
     }
 
@@ -204,22 +229,19 @@ public final class ReadingAudioService extends MediaSessionService {
         ) {
             if (!getPackageName().equals(controller.getPackageName())
                     || !COMMAND_PREPARE_AUDIO.equals(customCommand.customAction)) {
-                return Futures.immediateFuture(
-                        new SessionResult(SessionResult.RESULT_ERROR_PERMISSION_DENIED)
-                );
+                return Futures.immediateFuture(new SessionResult(SessionResult.RESULT_ERROR_PERMISSION_DENIED));
             }
 
             String bookId = args.getString(EXTRA_BOOK_ID, "").trim();
             String relativePath = args.getString(EXTRA_RELATIVE_PATH, "").trim();
+            int trackIndex = Math.max(0, args.getInt(EXTRA_TRACK_INDEX, 0));
             long positionMs = Math.max(0L, args.getLong(EXTRA_POSITION_MS, 0L));
             if (bookId.isEmpty()) {
-                return Futures.immediateFuture(
-                        new SessionResult(SessionResult.RESULT_ERROR_BAD_VALUE)
-                );
+                return Futures.immediateFuture(new SessionResult(SessionResult.RESULT_ERROR_BAD_VALUE));
             }
 
             try {
-                prepareAudio(bookId, relativePath, positionMs);
+                prepareAudio(bookId, relativePath, trackIndex, positionMs);
                 return Futures.immediateFuture(new SessionResult(SessionResult.RESULT_SUCCESS));
             } catch (IOException | RuntimeException error) {
                 return Futures.immediateFuture(new SessionResult(SessionResult.RESULT_ERROR_IO));

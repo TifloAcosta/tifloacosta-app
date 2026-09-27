@@ -1,5 +1,6 @@
 package com.tifloacosta.app.reading;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -13,6 +14,10 @@ public interface ReadingFileStore {
         throw new IOException("Temporary binary input is unavailable");
     }
 
+    default File tempFile(String tempName) throws IOException {
+        throw new IOException("Temporary file access is unavailable");
+    }
+
     boolean tempHasNonWhitespaceText(String tempName) throws IOException;
 
     default boolean tempHasReadableText(String tempName, String format) throws IOException {
@@ -23,6 +28,15 @@ public interface ReadingFileStore {
 
     default String moveTempToItem(String tempName, String id, String format) throws IOException {
         return moveTempToItem(tempName, id);
+    }
+
+    default String moveTempToItem(
+            String tempName,
+            String id,
+            String format,
+            String sourceExtension
+    ) throws IOException {
+        return moveTempToItem(tempName, id, format);
     }
 
     void deleteTemp(String tempName);

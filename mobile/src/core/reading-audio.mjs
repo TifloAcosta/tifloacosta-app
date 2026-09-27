@@ -92,6 +92,7 @@ export function createReadingAudioController({
   let destroyed = false;
   let sleepTimerId = null;
   let sleepAtTrackEnd = false;
+  let sleepTimerMode = null;
   const listenerHandles = [];
 
   function snapshot() {
@@ -106,7 +107,7 @@ export function createReadingAudioController({
       prepared: state.prepared,
       readingState: state.readingState,
       interruptionReason: state.interruptionReason,
-      sleepTimer: sleepAtTrackEnd ? 'track-end' : sleepTimerId == null ? null : 'timed'
+      sleepTimer: sleepTimerMode
     };
   }
 
@@ -140,6 +141,11 @@ export function createReadingAudioController({
     }
     if (Object.prototype.hasOwnProperty.call(value, 'reason')) {
       state.interruptionReason = clean(value.reason);
+      if (state.interruptionReason === 'sleep-timer' || state.interruptionReason === 'sleep-track-end') {
+        sleepAtTrackEnd = false;
+        sleepTimerId = null;
+        sleepTimerMode = null;
+      }
     }
     try {
       onPosition(snapshot());
@@ -184,6 +190,7 @@ export function createReadingAudioController({
       if (state.trackIndex !== previousTrackIndex) {
         if (sleepAtTrackEnd) {
           sleepAtTrackEnd = false;
+          sleepTimerMode = null;
           if (client?.pauseAudio) {
             const paused = await client.pauseAudio();
             if (paused && belongsToCurrentBook(paused)) updateFromNative(paused);
@@ -210,6 +217,7 @@ export function createReadingAudioController({
       state.playing = false;
       state.readingState = 'read';
       sleepAtTrackEnd = false;
+      sleepTimerMode = null;
       await persist({ force: true, completed: true });
     })
   ]);
@@ -319,25 +327,57 @@ export function createReadingAudioController({
     return snapshot();
   }
 
-  function cancelSleepTimer() {
+  async function cancelSleepTimer() {
     if (sleepTimerId != null) {
       timers.clearTimeout(sleepTimerId);
       sleepTimerId = null;
     }
     sleepAtTrackEnd = false;
+    sleepTimerMode = null;
+    if (client?.cancelAudioSleepTimer) {
+      try {
+        await client.cancelAudioSleepTimer();
+      } catch {
+      }
+    }
+    return true;
   }
 
   async function setSleepTimer(value) {
-    cancelSleepTimer();
+    await cancelSleepTimer();
     if (value === 'track-end') {
+      if (client?.setAudioSleepTimer) {
+        try {
+          const scheduled = await client.setAudioSleepTimer({ minutes: 0, atTrackEnd: true });
+          if (scheduled) {
+            sleepTimerMode = 'track-end';
+            return true;
+          }
+        } catch {
+        }
+      }
       sleepAtTrackEnd = true;
+      sleepTimerMode = 'track-end';
       return true;
     }
 
     const minutes = Math.trunc(numberOr(value, 0));
     if (!READING_AUDIO_SLEEP_MINUTES.includes(minutes)) return false;
+    if (client?.setAudioSleepTimer) {
+      try {
+        const scheduled = await client.setAudioSleepTimer({ minutes, atTrackEnd: false });
+        if (scheduled) {
+          sleepTimerMode = 'timed';
+          return true;
+        }
+      } catch {
+      }
+    }
+
+    sleepTimerMode = 'timed';
     sleepTimerId = timers.setTimeout(async () => {
       sleepTimerId = null;
+      sleepTimerMode = null;
       if (destroyed) return;
       if (client?.pauseAudio) {
         const result = await client.pauseAudio();
@@ -352,7 +392,7 @@ export function createReadingAudioController({
   async function destroy() {
     if (destroyed) return;
     destroyed = true;
-    cancelSleepTimer();
+    await cancelSleepTimer();
     await listenersReady;
     await persist({ force: true, completed: state.readingState === 'read' });
     const handles = listenerHandles.splice(0);

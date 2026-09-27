@@ -71,30 +71,11 @@ jobs:
           chmod +x gradlew
           ./gradlew --no-daemon testDebugUnitTest --stacktrace
 
-      - name: Diagnose and compile Android instrumentation tests
+      - name: Compile Android instrumentation tests
         working-directory: mobile/android
-        shell: bash
         run: |
-          set -o pipefail
           chmod +x gradlew
-          {
-            echo '=== kotlin-stdlib dependency insight ==='
-            ./gradlew --no-daemon :capacitor-cordova-android-plugins:dependencyInsight --configuration debugAndroidTestRuntimeClasspath --dependency kotlin-stdlib || true
-            echo '=== kotlin-stdlib-jdk7 dependency insight ==='
-            ./gradlew --no-daemon :capacitor-cordova-android-plugins:dependencyInsight --configuration debugAndroidTestRuntimeClasspath --dependency kotlin-stdlib-jdk7 || true
-            echo '=== kotlin-stdlib-jdk8 dependency insight ==='
-            ./gradlew --no-daemon :capacitor-cordova-android-plugins:dependencyInsight --configuration debugAndroidTestRuntimeClasspath --dependency kotlin-stdlib-jdk8 || true
-            echo '=== instrumentation build ==='
-            ./gradlew --no-daemon assembleDebugAndroidTest --stacktrace
-          } 2>&1 | tee instrumentation-build.log
-
-      - name: Upload instrumentation build log
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: instrumentation-build-log
-          if-no-files-found: error
-          path: mobile/android/instrumentation-build.log
+          ./gradlew --no-daemon assembleDebugAndroidTest --stacktrace
 
       - name: Prepare Android release signing when secrets are configured
         shell: bash

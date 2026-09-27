@@ -220,6 +220,8 @@ public class TifloReadingPlugin extends Plugin {
                 int blockIndex = nonNegative(call.getInt("blockIndex"), 0);
                 int unitIndex = nonNegative(call.getInt("unitIndex"), 0);
                 String anchorText = nullableText(call.getString("anchorText"));
+                int mediaTrackIndex = nonNegative(call.getInt("mediaTrackIndex"), 0);
+                long mediaPositionMs = nonNegative(call.getLong("mediaPositionMs"), 0L);
                 double percent = boundedPercent(call.getDouble("percent"));
                 String state = supportedProgressState(call.getString("state"));
                 database.updateProgress(
@@ -227,6 +229,8 @@ public class TifloReadingPlugin extends Plugin {
                         blockIndex,
                         unitIndex,
                         anchorText,
+                        mediaTrackIndex,
+                        mediaPositionMs,
                         percent,
                         state,
                         System.currentTimeMillis()
@@ -277,6 +281,8 @@ public class TifloReadingPlugin extends Plugin {
         }
         int blockIndex = nonNegative(call.getInt("blockIndex"), 0);
         int unitIndex = nonNegative(call.getInt("unitIndex"), 0);
+        int mediaTrackIndex = nonNegative(call.getInt("mediaTrackIndex"), 0);
+        long mediaPositionMs = nonNegative(call.getLong("mediaPositionMs"), 0L);
         String excerpt = nullableText(call.getString("excerpt"));
         String reference = nullableText(call.getString("reference"));
 
@@ -292,6 +298,8 @@ public class TifloReadingPlugin extends Plugin {
                         type,
                         blockIndex,
                         unitIndex,
+                        mediaTrackIndex,
+                        mediaPositionMs,
                         excerpt,
                         reference,
                         System.currentTimeMillis()
@@ -581,6 +589,8 @@ public class TifloReadingPlugin extends Plugin {
         book.put("blockIndex", record.getBlockIndex());
         book.put("unitIndex", record.getUnitIndex());
         book.put("anchorText", record.getAnchorText());
+        book.put("mediaTrackIndex", record.getMediaTrackIndex());
+        book.put("mediaPositionMs", record.getMediaPositionMs());
         book.put("importedAt", record.getImportedAt());
         book.put("lastReadAt", record.getLastReadAt() == null ? 0L : record.getLastReadAt());
         book.put("sizeBytes", record.getSizeBytes());
@@ -613,6 +623,8 @@ public class TifloReadingPlugin extends Plugin {
         mark.put("type", record.getType());
         mark.put("blockIndex", record.getBlockIndex());
         mark.put("unitIndex", record.getUnitIndex());
+        mark.put("mediaTrackIndex", record.getMediaTrackIndex());
+        mark.put("mediaPositionMs", record.getMediaPositionMs());
         mark.put("excerpt", stringOr(record.getExcerpt(), ""));
         mark.put("reference", stringOr(record.getReference(), ""));
         mark.put("createdAt", record.getCreatedAt());
@@ -629,6 +641,10 @@ public class TifloReadingPlugin extends Plugin {
 
     private static int nonNegative(Integer value, int fallback) {
         return value == null ? fallback : Math.max(0, value);
+    }
+
+    private static long nonNegative(Long value, long fallback) {
+        return value == null ? fallback : Math.max(0L, value);
     }
 
     private static double boundedPercent(Double value) {

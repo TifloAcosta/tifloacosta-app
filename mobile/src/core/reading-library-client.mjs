@@ -83,9 +83,32 @@ function normalizeBatch(value, { cancelledDefault = false } = {}) {
   const source = value && typeof value === 'object' ? value : {};
   return {
     cancelled: source.cancelled === true || (value == null && cancelledDefault),
+    audioChoiceRequired: source.audioChoiceRequired === true,
+    selectionId: String(source.selectionId ?? '').trim(),
+    selectedNames: (Array.isArray(source.selectedNames) ? source.selectedNames : [])
+      .map(name => String(name ?? '').trim())
+      .filter(Boolean),
     imported: (Array.isArray(source.imported) ? source.imported : []).map(normalizeBook).filter(Boolean),
     duplicates: (Array.isArray(source.duplicates) ? source.duplicates : []).map(normalizeBook).filter(Boolean),
     rejected: (Array.isArray(source.rejected) ? source.rejected : []).map(normalizeRejected).filter(Boolean)
+  };
+}
+
+function normalizeAudioTrack(value) {
+  if (!value || typeof value !== 'object') return null;
+  const bookId = String(value.bookId ?? '').trim();
+  const relativePath = String(value.relativePath ?? '').trim();
+  if (!bookId || !relativePath) return null;
+  const embeddedTrackNumber = positiveInteger(value.embeddedTrackNumber, 0);
+  return {
+    bookId,
+    trackIndex: nonNegativeInteger(value.trackIndex, 0),
+    relativePath,
+    originalName: String(value.originalName ?? '').trim(),
+    title: String(value.title ?? '').trim(),
+    durationMs: nonNegativeInteger(value.durationMs, 0),
+    embeddedTrackNumber: embeddedTrackNumber > 0 ? embeddedTrackNumber : null,
+    sizeBytes: nonNegativeInteger(value.sizeBytes, 0)
   };
 }
 
@@ -155,6 +178,7 @@ function normalizeAudioState(value) {
   return {
     bookId: String(value.bookId ?? '').trim(),
     trackIndex: nonNegativeInteger(value.trackIndex, 0),
+    trackCount: nonNegativeInteger(value.trackCount, 0),
     positionMs: nonNegativeInteger(value.positionMs, 0),
     durationMs: nonNegativeInteger(value.durationMs, 0),
     playing: booleanValue(value.playing),
@@ -179,6 +203,29 @@ export function createReadingLibraryClient(plugin = {}) {
   async function pickDocuments() {
     if (!plugin?.pickDocuments) return normalizeBatch(null);
     try { return normalizeBatch(await plugin.pickDocuments()); } catch { return normalizeBatch(null); }
+  }
+
+  async function resolveAudioSelection(selection = {}) {
+    if (!plugin?.resolveAudioSelection) return normalizeBatch(null, { cancelledDefault: true });
+    const mode = ['grouped', 'independent', 'cancel'].includes(selection?.mode) ? selection.mode : 'cancel';
+    try {
+      return normalizeBatch(await plugin.resolveAudioSelection({
+        selectionId: String(selection?.selectionId ?? '').trim(),
+        mode
+      }));
+    } catch {
+      return normalizeBatch(null, { cancelledDefault: true });
+    }
+  }
+
+  async function listAudioTracks(bookId) {
+    const cleanBookId = String(bookId ?? '').trim();
+    if (!cleanBookId || !plugin?.listAudioTracks) return [];
+    try {
+      const result = await plugin.listAudioTracks({ bookId: cleanBookId });
+      const values = Array.isArray(result) ? result : Array.isArray(result?.tracks) ? result.tracks : [];
+      return values.map(normalizeAudioTrack).filter(Boolean).sort((a, b) => a.trackIndex - b.trackIndex);
+    } catch { return []; }
   }
 
   async function consumeInitialSharedDocuments() {
@@ -210,6 +257,9 @@ export function createReadingLibraryClient(plugin = {}) {
         }
         const pdf = normalizePdfPayload(result.pdf);
         return pdf ? { book, pdf } : null;
+      }
+      if (book.format === 'audio') {
+        return { book, audioTracks: await listAudioTracks(book.id) };
       }
       return { book, content: String(result.content ?? '') };
     } catch { return null; }
@@ -313,6 +363,16 @@ export function createReadingLibraryClient(plugin = {}) {
     try { return normalizeAudioState(await plugin.skipAudio({ deltaMs: integerOr(options.deltaMs, 0) })); } catch { return null; }
   }
 
+  async function previousAudioTrack() {
+    if (!plugin?.previousAudioTrack) return null;
+    try { return normalizeAudioState(await plugin.previousAudioTrack()); } catch { return null; }
+  }
+
+  async function nextAudioTrack() {
+    if (!plugin?.nextAudioTrack) return null;
+    try { return normalizeAudioState(await plugin.nextAudioTrack()); } catch { return null; }
+  }
+
   async function setAudioSpeed(options = {}) {
     if (!plugin?.setAudioSpeed) return null;
     try { return normalizeAudioState(await plugin.setAudioSpeed({ speed: clampAudioSpeed(options.speed) })); } catch { return null; }
@@ -411,6 +471,8 @@ export function createReadingLibraryClient(plugin = {}) {
 
   return {
     pickDocuments,
+    resolveAudioSelection,
+    listAudioTracks,
     consumeInitialSharedDocuments,
     listBooks,
     openBook,
@@ -425,6 +487,8 @@ export function createReadingLibraryClient(plugin = {}) {
     pauseAudio,
     seekAudio,
     skipAudio,
+    previousAudioTrack,
+    nextAudioTrack,
     setAudioSpeed,
     getAudioState,
     stopAudio,

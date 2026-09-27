@@ -30,6 +30,22 @@ const normalizeInlineText = value => String(value ?? '')
 
 const childNodesOf = node => Array.from(node?.childNodes ?? []);
 
+const tagNameOf = node => String(node?.tagName ?? '').toUpperCase();
+
+const isSemanticStructureTag = tagName => (
+  LIST_CONTAINER_TAGS.has(tagName)
+  || tagName === 'LI'
+  || /^H[1-6]$/u.test(tagName)
+  || STRUCTURAL_TYPES.has(tagName)
+);
+
+const hasSemanticDescendant = node => childNodesOf(node).some(child => {
+  if (child?.nodeType !== 1) return false;
+  const tagName = tagNameOf(child);
+  if (IGNORED_TAGS.has(tagName)) return false;
+  return isSemanticStructureTag(tagName) || hasSemanticDescendant(child);
+});
+
 const textFromNode = node => {
   if (!node) return '';
 
@@ -39,7 +55,7 @@ const textFromNode = node => {
 
   if (node.nodeType !== 1) return '';
 
-  const tagName = String(node.tagName ?? '').toUpperCase();
+  const tagName = tagNameOf(node);
   if (IGNORED_TAGS.has(tagName)) return '';
   if (tagName === 'BR') return ' ';
 
@@ -59,7 +75,7 @@ const textFromListItem = node => {
     if (child.nodeType === 3) return String(child.textContent ?? '');
     if (child.nodeType !== 1) return '';
 
-    const tagName = String(child.tagName ?? '').toUpperCase();
+    const tagName = tagNameOf(child);
     if (IGNORED_TAGS.has(tagName) || LIST_CONTAINER_TAGS.has(tagName)) return '';
     if (tagName === 'BR' || tagName === 'IMG') return textFromNode(child);
 
@@ -130,7 +146,7 @@ export const parseHtmlDocument = (html, options = {}) => {
   const visit = (node, listDepth = 0) => {
     if (!node || node.nodeType !== 1) return;
 
-    const tagName = String(node.tagName ?? '').toUpperCase();
+    const tagName = tagNameOf(node);
     if (IGNORED_TAGS.has(tagName)) return;
 
     if (LIST_CONTAINER_TAGS.has(tagName)) {
@@ -146,7 +162,7 @@ export const parseHtmlDocument = (html, options = {}) => {
 
       for (const child of childNodesOf(node)) {
         if (child?.nodeType !== 1) continue;
-        const childTag = String(child.tagName ?? '').toUpperCase();
+        const childTag = tagNameOf(child);
         if (LIST_CONTAINER_TAGS.has(childTag)) visit(child, listDepth);
       }
       return;
@@ -173,10 +189,21 @@ export const parseHtmlDocument = (html, options = {}) => {
       return;
     }
 
+    if (!hasSemanticDescendant(node)) {
+      const block = makeBlock('paragraph', textFromNode(node));
+      if (block) blocks.push(block);
+      return;
+    }
+
     for (const child of childNodesOf(node)) visit(child, listDepth);
   };
 
   for (const child of childNodesOf(detachedDocument.body)) visit(child);
+
+  if (!blocks.length) {
+    const fallback = makeBlock('paragraph', textFromNode(detachedDocument.body));
+    if (fallback) blocks.push(fallback);
+  }
 
   return { title, language, blocks };
 };

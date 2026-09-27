@@ -24,6 +24,145 @@ public class ReadingImportServiceTest {
     }
 
     @Test
+    public void htmlExtensionIsImportedAsHtmlAndUsesHtmlPrivateSource() {
+        FakeRepository repository = new FakeRepository();
+        FakeFileStore store = new FakeFileStore();
+        ReadingImportService service = new ReadingImportService(repository, store, () -> 1000L);
+
+        ReadingImportResult result = service.importOne(
+                new ReadingImportSource("manual.HTML", "application/octet-stream", null),
+                input("<h1>Manual</h1><p>Contenido.</p>")
+        );
+
+        assertTrue(result.isImported());
+        ReadingBookRecord record = repository.findById(result.getBookId());
+        assertNotNull(record);
+        assertEquals("html", record.getFormat());
+        assertEquals("manual", record.getTitle());
+        assertTrue(record.getRelativePath().endsWith("/source.html"));
+    }
+
+    @Test
+    public void htmExtensionIsNormalizedToHtml() {
+        FakeRepository repository = new FakeRepository();
+        FakeFileStore store = new FakeFileStore();
+        ReadingImportService service = new ReadingImportService(repository, store, () -> 1000L);
+
+        ReadingImportResult result = service.importOne(
+                new ReadingImportSource("guia.htm", null, null),
+                input("<p>Guía accesible.</p>")
+        );
+
+        assertTrue(result.isImported());
+        ReadingBookRecord record = repository.findById(result.getBookId());
+        assertEquals("html", record.getFormat());
+        assertEquals("guia", record.getTitle());
+        assertTrue(record.getRelativePath().endsWith("/source.html"));
+    }
+
+    @Test
+    public void textHtmlMimeWithoutExtensionIsImportedAsHtml() {
+        FakeRepository repository = new FakeRepository();
+        FakeFileStore store = new FakeFileStore();
+        ReadingImportService service = new ReadingImportService(repository, store, () -> 1000L);
+
+        ReadingImportResult result = service.importOne(
+                new ReadingImportSource("documento", "text/html", null),
+                input("<p>Contenido.</p>")
+        );
+
+        assertTrue(result.isImported());
+        ReadingBookRecord record = repository.findById(result.getBookId());
+        assertEquals("html", record.getFormat());
+        assertEquals("documento", record.getTitle());
+        assertEquals("text/html", record.getMimeType());
+    }
+
+    @Test
+    public void txtImportKeepsTxtFormatTitleAndPrivateSource() {
+        FakeRepository repository = new FakeRepository();
+        FakeFileStore store = new FakeFileStore();
+        ReadingImportService service = new ReadingImportService(repository, store, () -> 1000L);
+
+        ReadingImportResult result = service.importOne(
+                new ReadingImportSource("notas.TXT", "text/plain", null),
+                input("Texto normal.")
+        );
+
+        assertTrue(result.isImported());
+        ReadingBookRecord record = repository.findById(result.getBookId());
+        assertEquals("txt", record.getFormat());
+        assertEquals("notas", record.getTitle());
+        assertTrue(record.getRelativePath().endsWith("/source.txt"));
+    }
+
+    @Test
+    public void htmlWithoutReadableTextIsRejectedAsEmpty() {
+        FakeRepository repository = new FakeRepository();
+        FakeFileStore store = new FakeFileStore();
+        ReadingImportService service = new ReadingImportService(repository, store, () -> 1000L);
+
+        ReadingImportResult result = service.importOne(
+                new ReadingImportSource("vacio.html", "text/html", null),
+                input("<!doctype html><html><head><title>Solo metadatos</title></head><body>  <script>ignorar()</script> </body></html>")
+        );
+
+        assertTrue(result.isRejected());
+        assertEquals("empty", result.getReason());
+        assertTrue(repository.records.isEmpty());
+        assertTrue(store.finalItems.isEmpty());
+        assertTrue(store.temps.isEmpty());
+    }
+
+    @Test
+    public void duplicateHtmlBytesWithDifferentNameReturnExistingBook() {
+        FakeRepository repository = new FakeRepository();
+        FakeFileStore store = new FakeFileStore();
+        ReadingImportService service = new ReadingImportService(repository, store, () -> 1000L);
+
+        ReadingImportResult first = service.importOne(
+                new ReadingImportSource("primero.html", "text/html", null),
+                input("<p>Mismo contenido.</p>")
+        );
+        ReadingImportResult second = service.importOne(
+                new ReadingImportSource("renombrado.htm", "text/html", null),
+                input("<p>Mismo contenido.</p>")
+        );
+
+        assertTrue(first.isImported());
+        assertTrue(second.isDuplicate());
+        assertEquals(first.getBookId(), second.getBookId());
+        assertEquals(1, repository.records.size());
+        assertEquals(1, store.finalItems.size());
+        assertTrue(store.temps.isEmpty());
+    }
+
+    @Test
+    public void failedHtmlMoveRollsBackWithoutAffectingExistingTxt() {
+        FakeRepository repository = new FakeRepository();
+        FakeFileStore store = new FakeFileStore();
+        ReadingImportService service = new ReadingImportService(repository, store, () -> 1000L);
+
+        ReadingImportResult first = service.importOne(
+                new ReadingImportSource("estable.txt", "text/plain", null),
+                input("Contenido estable.")
+        );
+        store.failNextMove = true;
+        ReadingImportResult second = service.importOne(
+                new ReadingImportSource("falla.html", "text/html", null),
+                input("<p>Contenido HTML.</p>")
+        );
+
+        assertTrue(first.isImported());
+        assertTrue(second.isRejected());
+        assertEquals("storage-error", second.getReason());
+        assertEquals(1, repository.records.size());
+        assertNotNull(repository.findById(first.getBookId()));
+        assertEquals(1, store.finalItems.size());
+        assertTrue(store.temps.isEmpty());
+    }
+
+    @Test
     public void duplicateBytesWithDifferentNameReturnExistingBook() {
         FakeRepository repository = new FakeRepository();
         FakeFileStore store = new FakeFileStore();

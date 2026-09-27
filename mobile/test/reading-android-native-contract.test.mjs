@@ -151,3 +151,35 @@ test('reading android native contract stores exact audio track and millisecond p
   assert.match(plugin, /"mediaTrackIndex"/);
   assert.match(plugin, /"mediaPositionMs"/);
 });
+
+test('reading audio native contract requires Media3 background playback without autoplay', async () => {
+  const [gradle, service, audioPlugin, activity, manifest] = await Promise.all([
+    read('android/app/build.gradle'),
+    read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingAudioService.java'),
+    read('android/app/src/main/java/com/tifloacosta/app/TifloReadingAudioPlugin.java'),
+    read('android/app/src/main/java/com/tifloacosta/app/MainActivity.java'),
+    read('android/app/src/main/AndroidManifest.xml')
+  ]);
+
+  assert.match(gradle, /androidx\.media3:media3-exoplayer/);
+  assert.match(gradle, /androidx\.media3:media3-session/);
+  assert.match(service, /extends\s+MediaSessionService/);
+  assert.match(service, /ExoPlayer/);
+  assert.match(service, /MediaSession/);
+  assert.match(service, /setMediaItem/);
+  assert.match(service, /prepare\s*\(/);
+  assert.doesNotMatch(service, /prepare\s*\(\)[\s\S]{0,240}play\s*\(/, 'Preparing audio must never auto-play');
+
+  assert.match(audioPlugin, /@CapacitorPlugin\(name\s*=\s*"TifloReadingAudio"\)/);
+  for (const method of ['prepareAudio', 'playAudio', 'pauseAudio', 'seekAudio', 'skipAudio', 'setAudioSpeed', 'getAudioState', 'stopAudio']) {
+    assert.match(audioPlugin, new RegExp(`public\\s+void\\s+${method}\\s*\\(PluginCall\\s+call\\)`), `Missing ${method}`);
+  }
+  for (const eventName of ['audioState', 'audioPosition', 'audioInterrupted', 'audioEnded']) {
+    assert.match(audioPlugin, new RegExp(eventName), `Missing ${eventName}`);
+  }
+
+  assert.match(activity, /registerPlugin\(TifloReadingAudioPlugin\.class\)/);
+  assert.match(manifest, /ReadingAudioService/);
+  assert.match(manifest, /androidx\.media3\.session\.MediaSessionService/);
+  assert.doesNotMatch(manifest, /READ_EXTERNAL_STORAGE|WRITE_EXTERNAL_STORAGE|MANAGE_EXTERNAL_STORAGE|READ_MEDIA_/);
+});

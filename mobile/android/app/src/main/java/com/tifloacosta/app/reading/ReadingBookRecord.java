@@ -14,6 +14,8 @@ public final class ReadingBookRecord {
     private final int blockIndex;
     private final int unitIndex;
     private final String anchorText;
+    private final int mediaTrackIndex;
+    private final long mediaPositionMs;
     private final double percent;
 
     public ReadingBookRecord(
@@ -44,6 +46,8 @@ public final class ReadingBookRecord {
                 blockIndex,
                 0,
                 null,
+                0,
+                0L,
                 percent
         );
     }
@@ -64,6 +68,44 @@ public final class ReadingBookRecord {
             String anchorText,
             double percent
     ) {
+        this(
+                id,
+                sha256,
+                title,
+                format,
+                mimeType,
+                relativePath,
+                sizeBytes,
+                importedAt,
+                lastReadAt,
+                state,
+                blockIndex,
+                unitIndex,
+                anchorText,
+                0,
+                0L,
+                percent
+        );
+    }
+
+    public ReadingBookRecord(
+            String id,
+            String sha256,
+            String title,
+            String format,
+            String mimeType,
+            String relativePath,
+            long sizeBytes,
+            long importedAt,
+            Long lastReadAt,
+            String state,
+            int blockIndex,
+            int unitIndex,
+            String anchorText,
+            int mediaTrackIndex,
+            long mediaPositionMs,
+            double percent
+    ) {
         this.id = id;
         this.sha256 = sha256;
         this.title = title;
@@ -77,6 +119,8 @@ public final class ReadingBookRecord {
         this.blockIndex = blockIndex;
         this.unitIndex = unitIndex;
         this.anchorText = anchorText;
+        this.mediaTrackIndex = mediaTrackIndex;
+        this.mediaPositionMs = mediaPositionMs;
         this.percent = percent;
     }
 
@@ -93,5 +137,7 @@ public final class ReadingBookRecord {
     public int getBlockIndex() { return blockIndex; }
     public int getUnitIndex() { return unitIndex; }
     public String getAnchorText() { return anchorText; }
+    public int getMediaTrackIndex() { return mediaTrackIndex; }
+    public long getMediaPositionMs() { return mediaPositionMs; }
     public double getPercent() { return percent; }
 }

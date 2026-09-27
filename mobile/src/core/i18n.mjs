@@ -81,6 +81,13 @@ const DICTIONARIES = {
       pageStatus: 'Página {page} de {pages}', importSummary: 'Importados: {imported}. Duplicados: {duplicates}. Rechazados: {rejected}.',
       openNow: 'Abrir ahora'
     },
+    readingBook: {
+      loading: 'Abriendo documento…', backToLibrary: 'Volver a Leer con TifloAcosta',
+      navigation: 'Navegación por párrafos', previousParagraph: 'Párrafo anterior', nextParagraph: 'Párrafo siguiente',
+      progress: 'Párrafo {current} de {total}.', resume: 'Lectura reanudada en el párrafo {current} de {total}.',
+      empty: 'Este documento no contiene texto que se pueda leer.',
+      errorHeading: 'No se pudo abrir el documento', error: 'No se pudo abrir la copia guardada en TifloAcosta.'
+    },
     videos: {
       empty: 'No hay vídeos disponibles en este momento.',
       open: 'Abrir vídeo',
@@ -204,6 +211,13 @@ const DICTIONARIES = {
       pagination: 'My library pages', previousPage: 'Previous page', nextPage: 'Next page',
       pageStatus: 'Page {page} of {pages}', importSummary: 'Imported: {imported}. Duplicates: {duplicates}. Rejected: {rejected}.',
       openNow: 'Open now'
+    },
+    readingBook: {
+      loading: 'Opening document…', backToLibrary: 'Back to Read with TifloAcosta',
+      navigation: 'Paragraph navigation', previousParagraph: 'Previous paragraph', nextParagraph: 'Next paragraph',
+      progress: 'Paragraph {current} of {total}.', resume: 'Reading resumed at paragraph {current} of {total}.',
+      empty: 'This document contains no readable text.',
+      errorHeading: 'The document could not be opened', error: 'The copy saved in TifloAcosta could not be opened.'
     },
     videos: {
       empty: 'There are no videos available right now.',

@@ -20,6 +20,7 @@ import com.getcapacitor.annotation.ActivityCallback;
 import com.getcapacitor.annotation.CapacitorPlugin;
 import com.tifloacosta.app.reading.ReadingBookQuery;
 import com.tifloacosta.app.reading.ReadingBookRecord;
+import com.tifloacosta.app.reading.ReadingContentValidator;
 import com.tifloacosta.app.reading.ReadingFileStore;
 import com.tifloacosta.app.reading.ReadingImportResult;
 import com.tifloacosta.app.reading.ReadingImportService;
@@ -61,7 +62,8 @@ public class TifloReadingPlugin extends Plugin {
     public void pickDocuments(PluginCall call) {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("text/plain");
+        intent.setType("text/*");
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{"text/plain", "text/html"});
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         startActivityForResult(call, intent, "pickDocumentsResult");
     }
@@ -446,28 +448,29 @@ public class TifloReadingPlugin extends Plugin {
 
         @Override
         public boolean tempHasNonWhitespaceText(String tempName) throws IOException {
+            return tempHasReadableText(tempName, "txt");
+        }
+
+        @Override
+        public boolean tempHasReadableText(String tempName, String format) throws IOException {
             File file = new File(tempDirectory, tempName);
             try (InputStreamReader reader = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8)) {
-                boolean first = true;
-                int value;
-                while ((value = reader.read()) != -1) {
-                    char character = (char) value;
-                    if (first) {
-                        first = false;
-                        if (character == '\uFEFF') continue;
-                    }
-                    if (!Character.isWhitespace(character)) return true;
-                }
-                return false;
+                return ReadingContentValidator.hasReadableText(reader, format);
             }
         }
 
         @Override
         public String moveTempToItem(String tempName, String id) throws IOException {
+            return moveTempToItem(tempName, id, "txt");
+        }
+
+        @Override
+        public String moveTempToItem(String tempName, String id, String format) throws IOException {
             File source = new File(tempDirectory, tempName);
             File itemDirectory = new File(itemsDirectory, id);
             ensureDirectoryForIo(itemDirectory);
-            File destination = new File(itemDirectory, "source.txt");
+            String extension = "html".equals(format) ? "html" : "txt";
+            File destination = new File(itemDirectory, "source." + extension);
             if (!source.renameTo(destination)) {
                 try (InputStream input = new FileInputStream(source); OutputStream output = new FileOutputStream(destination, false)) {
                     byte[] buffer = new byte[8192];
@@ -482,7 +485,7 @@ public class TifloReadingPlugin extends Plugin {
                     throw new IOException("Unable to remove reading import temp file");
                 }
             }
-            return "items/" + id + "/source.txt";
+            return "items/" + id + "/source." + extension;
         }
 
         @Override

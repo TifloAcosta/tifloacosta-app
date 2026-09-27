@@ -32,7 +32,7 @@ test('audio probe and grouping importer prefer embedded track numbers then filen
   assert.match(androidProbe, /METADATA_KEY_CD_TRACK_NUMBER/);
   assert.match(importer, /importAudioGroup/);
   assert.match(importer, /ambiguous/i);
-  assert.match(importer, /embeddedTrackNumber|trackNumber/);
+  assert.match(importer, /getTrackNumber|embeddedTrackNumber/);
   assert.match(importer, /originalName|displayName/);
 });
 

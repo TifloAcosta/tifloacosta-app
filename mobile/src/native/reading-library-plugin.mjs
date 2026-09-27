@@ -2,6 +2,7 @@ import { registerPlugin } from '@capacitor/core';
 
 const NativeTifloReading = registerPlugin('TifloReading');
 const NativeTifloReadingTts = registerPlugin('TifloReadingTts');
+const NativeTifloReadingAudio = registerPlugin('TifloReadingAudio');
 
 function emptyBatch(cancelled = false) {
   return { cancelled, imported: [], duplicates: [], rejected: [] };
@@ -22,7 +23,8 @@ async function safeCall(plugin, method, args, fallback) {
 
 export function createReadingLibraryPlugin(
   plugin = NativeTifloReading,
-  ttsPlugin = NativeTifloReadingTts
+  ttsPlugin = NativeTifloReadingTts,
+  audioPlugin = NativeTifloReadingAudio
 ) {
   async function pickDocuments() {
     return safeCall(plugin, 'pickDocuments', undefined, emptyBatch(true));
@@ -69,6 +71,38 @@ export function createReadingLibraryPlugin(
     return safeCall(ttsPlugin, 'stopTts', undefined, { stopped: false });
   }
 
+  async function prepareAudio(options = {}) {
+    return safeCall(audioPlugin, 'prepareAudio', options, null);
+  }
+
+  async function playAudio() {
+    return safeCall(audioPlugin, 'playAudio', undefined, null);
+  }
+
+  async function pauseAudio() {
+    return safeCall(audioPlugin, 'pauseAudio', undefined, null);
+  }
+
+  async function seekAudio(options = {}) {
+    return safeCall(audioPlugin, 'seekAudio', options, null);
+  }
+
+  async function skipAudio(options = {}) {
+    return safeCall(audioPlugin, 'skipAudio', options, null);
+  }
+
+  async function setAudioSpeed(options = {}) {
+    return safeCall(audioPlugin, 'setAudioSpeed', options, null);
+  }
+
+  async function getAudioState() {
+    return safeCall(audioPlugin, 'getAudioState', undefined, null);
+  }
+
+  async function stopAudio() {
+    return safeCall(audioPlugin, 'stopAudio', undefined, null);
+  }
+
   async function listMarks(options = {}) {
     return safeCall(plugin, 'listMarks', options, { items: [] });
   }
@@ -95,7 +129,12 @@ export function createReadingLibraryPlugin(
 
   async function addListener(eventName, listener) {
     if (typeof listener !== 'function') return emptyListener();
-    const source = String(eventName ?? '').startsWith('tts') ? ttsPlugin : plugin;
+    const cleanEventName = String(eventName ?? '');
+    const source = cleanEventName.startsWith('tts')
+      ? ttsPlugin
+      : cleanEventName.startsWith('audio')
+        ? audioPlugin
+        : plugin;
     if (!source?.addListener) return emptyListener();
     try {
       return await source.addListener(eventName, listener);
@@ -115,6 +154,14 @@ export function createReadingLibraryPlugin(
     listTtsVoices,
     startTts,
     stopTts,
+    prepareAudio,
+    playAudio,
+    pauseAudio,
+    seekAudio,
+    skipAudio,
+    setAudioSpeed,
+    getAudioState,
+    stopAudio,
     listMarks,
     addMark,
     deleteMark,

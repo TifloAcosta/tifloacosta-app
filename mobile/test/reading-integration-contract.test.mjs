@@ -96,7 +96,8 @@ test('reading integration deletion removes only the private copy and book-owned 
   ]);
 
   assert.match(plugin, /fileStore\.deleteItemDirectory\(id\);[\s\S]*database\.delete\(id\);/);
-  assert.doesNotMatch(plugin, /ContentResolver[\s\S]*\.delete\(/);
+  assert.doesNotMatch(plugin, /getContentResolver\(\)\.delete\s*\(/);
+  assert.doesNotMatch(plugin, /\b(?:resolver|contentResolver)\.delete\s*\(/);
 
   assert.match(database, /db\.delete\(TABLE_MARKS,\s*"book_id = \?"/);
   assert.match(database, /db\.delete\(TABLE_SETTINGS,\s*"scope = \? AND book_id = \?",\s*new String\[\]\{"book", id\}\)/);

@@ -59,10 +59,7 @@ function normalizePdfPage(value) {
   if (!value || typeof value !== 'object') return null;
   const number = positiveInteger(value.number, 0);
   if (number <= 0) return null;
-  return {
-    number,
-    text: String(value.text ?? '')
-  };
+  return { number, text: String(value.text ?? '') };
 }
 
 function normalizePdfPayload(value) {
@@ -79,10 +76,7 @@ function normalizePdfPayload(value) {
 
 function normalizeRejected(value) {
   if (!value || typeof value !== 'object') return null;
-  return {
-    name: String(value.name ?? '').trim(),
-    reason: String(value.reason ?? '').trim()
-  };
+  return { name: String(value.name ?? '').trim(), reason: String(value.reason ?? '').trim() };
 }
 
 function normalizeBatch(value, { cancelledDefault = false } = {}) {
@@ -209,18 +203,10 @@ export function createReadingLibraryClient(plugin = {}) {
       if (!book) return null;
       if (book.format === 'pdf') {
         if (result.passwordRequired === true) {
-          return {
-            book,
-            passwordRequired: true,
-            passwordRejected: result.passwordRejected === true
-          };
+          return { book, passwordRequired: true, passwordRejected: result.passwordRejected === true };
         }
         if (result.pdfNoText === true) {
-          return {
-            book,
-            pdfNoText: true,
-            pageCount: nonNegativeInteger(result.pageCount, 0)
-          };
+          return { book, pdfNoText: true, pageCount: nonNegativeInteger(result.pageCount, 0) };
         }
         const pdf = normalizePdfPayload(result.pdf);
         return pdf ? { book, pdf } : null;
@@ -296,7 +282,7 @@ export function createReadingLibraryClient(plugin = {}) {
   async function prepareAudio(options = {}) {
     const bookId = String(options?.bookId ?? '').trim();
     const relativePath = String(options?.relativePath ?? '').trim();
-    if (!bookId || !relativePath || !plugin?.prepareAudio) return null;
+    if (!bookId || !plugin?.prepareAudio) return null;
     try {
       return normalizeAudioState(await plugin.prepareAudio({
         bookId,
@@ -319,29 +305,17 @@ export function createReadingLibraryClient(plugin = {}) {
 
   async function seekAudio(options = {}) {
     if (!plugin?.seekAudio) return null;
-    try {
-      return normalizeAudioState(await plugin.seekAudio({
-        positionMs: nonNegativeInteger(options.positionMs, 0)
-      }));
-    } catch { return null; }
+    try { return normalizeAudioState(await plugin.seekAudio({ positionMs: nonNegativeInteger(options.positionMs, 0) })); } catch { return null; }
   }
 
   async function skipAudio(options = {}) {
     if (!plugin?.skipAudio) return null;
-    try {
-      return normalizeAudioState(await plugin.skipAudio({
-        deltaMs: integerOr(options.deltaMs, 0)
-      }));
-    } catch { return null; }
+    try { return normalizeAudioState(await plugin.skipAudio({ deltaMs: integerOr(options.deltaMs, 0) })); } catch { return null; }
   }
 
   async function setAudioSpeed(options = {}) {
     if (!plugin?.setAudioSpeed) return null;
-    try {
-      return normalizeAudioState(await plugin.setAudioSpeed({
-        speed: clampAudioSpeed(options.speed)
-      }));
-    } catch { return null; }
+    try { return normalizeAudioState(await plugin.setAudioSpeed({ speed: clampAudioSpeed(options.speed) })); } catch { return null; }
   }
 
   async function getAudioState() {

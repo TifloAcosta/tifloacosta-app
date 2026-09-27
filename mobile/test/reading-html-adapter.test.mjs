@@ -104,6 +104,36 @@ test('reading html adapter: preserves a readable boundary at line breaks', () =>
   assert.deepEqual(document.blocks[0].sentences, ['Primera línea.', 'Segunda línea.']);
 });
 
+test('reading html adapter: retains readable text from generic html wrappers', () => {
+  const detachedDocument = documentWith(
+    element('article', {}, [
+      element('div', {}, [
+        textNode('Texto sin párrafo '),
+        element('span', {}, [textNode('pero legible.')])
+      ])
+    ])
+  );
+
+  const document = parseHtmlDocument('<article><div>Texto sin párrafo <span>pero legible.</span></div></article>', {
+    language: 'es',
+    parseDocument: () => detachedDocument
+  });
+
+  assert.deepEqual(document.blocks.map(block => ({
+    id: block.id,
+    type: block.type,
+    text: block.text,
+    sentences: block.sentences
+  })), [
+    {
+      id: 'p-1',
+      type: 'paragraph',
+      text: 'Texto sin párrafo pero legible.',
+      sentences: ['Texto sin párrafo pero legible.']
+    }
+  ]);
+});
+
 test('reading html adapter: keeps nested list items separate and preserves their level', () => {
   const detachedDocument = documentWith(
     element('ol', {}, [

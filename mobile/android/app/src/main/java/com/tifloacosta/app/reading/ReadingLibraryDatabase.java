@@ -11,7 +11,7 @@ import java.util.List;
 
 public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements ReadingBookRepository {
     public static final String DATABASE_NAME = "tiflo_reading.db";
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 3;
 
     private static final String TABLE_BOOKS = "books";
     private static final String TABLE_MARKS = "marks";
@@ -31,6 +31,8 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
             "block_index",
             "unit_index",
             "anchor_text",
+            "media_track_index",
+            "media_position_ms",
             "percent"
     };
 
@@ -40,6 +42,8 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
             "type",
             "block_index",
             "unit_index",
+            "media_track_index",
+            "media_position_ms",
             "excerpt",
             "reference",
             "created_at"
@@ -74,11 +78,13 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
                         "block_index INTEGER NOT NULL DEFAULT 0," +
                         "unit_index INTEGER NOT NULL DEFAULT 0," +
                         "anchor_text TEXT," +
+                        "media_track_index INTEGER NOT NULL DEFAULT 0," +
+                        "media_position_ms INTEGER NOT NULL DEFAULT 0," +
                         "percent REAL NOT NULL DEFAULT 0" +
                         ")"
         );
         createBookIndexes(db);
-        createV2Tables(db);
+        createV3Tables(db);
     }
 
     @Override
@@ -89,6 +95,13 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
             db.execSQL("ALTER TABLE " + TABLE_BOOKS + " ADD COLUMN anchor_text TEXT");
             createV2Tables(db);
             version = 2;
+        }
+        if (version == 2 && newVersion >= 3) {
+            db.execSQL("ALTER TABLE " + TABLE_BOOKS + " ADD COLUMN media_track_index INTEGER NOT NULL DEFAULT 0");
+            db.execSQL("ALTER TABLE " + TABLE_BOOKS + " ADD COLUMN media_position_ms INTEGER NOT NULL DEFAULT 0");
+            db.execSQL("ALTER TABLE " + TABLE_MARKS + " ADD COLUMN media_track_index INTEGER NOT NULL DEFAULT 0");
+            db.execSQL("ALTER TABLE " + TABLE_MARKS + " ADD COLUMN media_position_ms INTEGER NOT NULL DEFAULT 0");
+            version = 3;
         }
         if (version != newVersion) {
             throw new IllegalStateException(
@@ -115,6 +128,30 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
                         "created_at INTEGER NOT NULL" +
                         ")"
         );
+        createMarkIndexes(db);
+        createSettingsTable(db);
+    }
+
+    private static void createV3Tables(SQLiteDatabase db) {
+        db.execSQL(
+                "CREATE TABLE IF NOT EXISTS " + TABLE_MARKS + " (" +
+                        "id TEXT PRIMARY KEY," +
+                        "book_id TEXT NOT NULL," +
+                        "type TEXT NOT NULL CHECK(type IN ('bookmark','important','review','quote'))," +
+                        "block_index INTEGER NOT NULL," +
+                        "unit_index INTEGER NOT NULL," +
+                        "media_track_index INTEGER NOT NULL DEFAULT 0," +
+                        "media_position_ms INTEGER NOT NULL DEFAULT 0," +
+                        "excerpt TEXT," +
+                        "reference TEXT," +
+                        "created_at INTEGER NOT NULL" +
+                        ")"
+        );
+        createMarkIndexes(db);
+        createSettingsTable(db);
+    }
+
+    private static void createMarkIndexes(SQLiteDatabase db) {
         db.execSQL(
                 "CREATE INDEX IF NOT EXISTS marks_book_position_index ON " + TABLE_MARKS +
                         "(book_id, block_index, unit_index, created_at, id)"
@@ -123,6 +160,9 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
                 "CREATE INDEX IF NOT EXISTS marks_book_type_position_index ON " + TABLE_MARKS +
                         "(book_id, type, block_index, unit_index, created_at, id)"
         );
+    }
+
+    private static void createSettingsTable(SQLiteDatabase db) {
         db.execSQL(
                 "CREATE TABLE IF NOT EXISTS " + TABLE_SETTINGS + " (" +
                         "scope TEXT NOT NULL CHECK(scope IN ('global','book'))," +
@@ -197,7 +237,7 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
 
     @Override
     public void updateProgress(String id, int blockIndex, double percent, String state, long lastReadAt) {
-        updateProgress(id, blockIndex, 0, null, percent, state, lastReadAt);
+        updateProgress(id, blockIndex, 0, null, 0, 0L, percent, state, lastReadAt);
     }
 
     @Override
@@ -206,6 +246,21 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
             int blockIndex,
             int unitIndex,
             String anchorText,
+            double percent,
+            String state,
+            long lastReadAt
+    ) {
+        updateProgress(id, blockIndex, unitIndex, anchorText, 0, 0L, percent, state, lastReadAt);
+    }
+
+    @Override
+    public void updateProgress(
+            String id,
+            int blockIndex,
+            int unitIndex,
+            String anchorText,
+            int mediaTrackIndex,
+            long mediaPositionMs,
             double percent,
             String state,
             long lastReadAt
@@ -219,6 +274,8 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
         } else {
             values.put("anchor_text", anchorText);
         }
+        values.put("media_track_index", mediaTrackIndex);
+        values.put("media_position_ms", mediaPositionMs);
         values.put("percent", percent);
         values.put("state", state);
         values.put("last_read_at", lastReadAt);
@@ -234,6 +291,8 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
         values.put("type", record.getType());
         values.put("block_index", record.getBlockIndex());
         values.put("unit_index", record.getUnitIndex());
+        values.put("media_track_index", record.getMediaTrackIndex());
+        values.put("media_position_ms", record.getMediaPositionMs());
         putNullable(values, "excerpt", record.getExcerpt());
         putNullable(values, "reference", record.getReference());
         values.put("created_at", record.getCreatedAt());
@@ -259,7 +318,7 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
                 args.toArray(new String[0]),
                 null,
                 null,
-                "block_index ASC, unit_index ASC, created_at ASC, id ASC"
+                "block_index ASC, unit_index ASC, media_track_index ASC, media_position_ms ASC, created_at ASC, id ASC"
         )) {
             while (cursor.moveToNext()) {
                 records.add(readMark(cursor));
@@ -369,6 +428,8 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
         values.put("block_index", record.getBlockIndex());
         values.put("unit_index", record.getUnitIndex());
         putNullable(values, "anchor_text", record.getAnchorText());
+        values.put("media_track_index", record.getMediaTrackIndex());
+        values.put("media_position_ms", record.getMediaPositionMs());
         values.put("percent", record.getPercent());
         return values;
     }
@@ -392,6 +453,8 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
                 cursor.getInt(cursor.getColumnIndexOrThrow("block_index")),
                 cursor.getInt(cursor.getColumnIndexOrThrow("unit_index")),
                 anchorText,
+                cursor.getInt(cursor.getColumnIndexOrThrow("media_track_index")),
+                cursor.getLong(cursor.getColumnIndexOrThrow("media_position_ms")),
                 cursor.getDouble(cursor.getColumnIndexOrThrow("percent"))
         );
     }
@@ -405,6 +468,8 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
                 cursor.getString(cursor.getColumnIndexOrThrow("type")),
                 cursor.getInt(cursor.getColumnIndexOrThrow("block_index")),
                 cursor.getInt(cursor.getColumnIndexOrThrow("unit_index")),
+                cursor.getInt(cursor.getColumnIndexOrThrow("media_track_index")),
+                cursor.getLong(cursor.getColumnIndexOrThrow("media_position_ms")),
                 cursor.isNull(excerptColumn) ? null : cursor.getString(excerptColumn),
                 cursor.isNull(referenceColumn) ? null : cursor.getString(referenceColumn),
                 cursor.getLong(cursor.getColumnIndexOrThrow("created_at"))

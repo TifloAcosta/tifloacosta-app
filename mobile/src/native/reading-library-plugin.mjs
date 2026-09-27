@@ -3,9 +3,18 @@ import { registerPlugin } from '@capacitor/core';
 const NativeTifloReading = registerPlugin('TifloReading');
 const NativeTifloReadingTts = registerPlugin('TifloReadingTts');
 const NativeTifloReadingAudio = registerPlugin('TifloReadingAudio');
+const NativeTifloReadingAudioGroup = registerPlugin('TifloReadingAudioGroup');
 
 function emptyBatch(cancelled = false) {
-  return { cancelled, imported: [], duplicates: [], rejected: [] };
+  return {
+    cancelled,
+    audioChoiceRequired: false,
+    selectionId: '',
+    selectedNames: [],
+    imported: [],
+    duplicates: [],
+    rejected: []
+  };
 }
 
 function emptyListener() {
@@ -24,10 +33,19 @@ async function safeCall(plugin, method, args, fallback) {
 export function createReadingLibraryPlugin(
   plugin = NativeTifloReading,
   ttsPlugin = NativeTifloReadingTts,
-  audioPlugin = NativeTifloReadingAudio
+  audioPlugin = NativeTifloReadingAudio,
+  audioGroupPlugin = NativeTifloReadingAudioGroup
 ) {
   async function pickDocuments() {
-    return safeCall(plugin, 'pickDocuments', undefined, emptyBatch(true));
+    return safeCall(audioGroupPlugin, 'pickDocuments', undefined, emptyBatch(true));
+  }
+
+  async function resolveAudioSelection(options = {}) {
+    return safeCall(audioGroupPlugin, 'resolveAudioSelection', options, emptyBatch(true));
+  }
+
+  async function listAudioTracks(options = {}) {
+    return safeCall(audioGroupPlugin, 'listAudioTracks', options, { tracks: [] });
   }
 
   async function consumeInitialSharedDocuments() {
@@ -91,6 +109,14 @@ export function createReadingLibraryPlugin(
     return safeCall(audioPlugin, 'skipAudio', options, null);
   }
 
+  async function previousAudioTrack() {
+    return safeCall(audioPlugin, 'previousAudioTrack', undefined, null);
+  }
+
+  async function nextAudioTrack() {
+    return safeCall(audioPlugin, 'nextAudioTrack', undefined, null);
+  }
+
   async function setAudioSpeed(options = {}) {
     return safeCall(audioPlugin, 'setAudioSpeed', options, null);
   }
@@ -145,6 +171,8 @@ export function createReadingLibraryPlugin(
 
   return {
     pickDocuments,
+    resolveAudioSelection,
+    listAudioTracks,
     consumeInitialSharedDocuments,
     listBooks,
     openBook,
@@ -159,6 +187,8 @@ export function createReadingLibraryPlugin(
     pauseAudio,
     seekAudio,
     skipAudio,
+    previousAudioTrack,
+    nextAudioTrack,
     setAudioSpeed,
     getAudioState,
     stopAudio,

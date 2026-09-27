@@ -27,7 +27,8 @@ public final class ReadingImportService {
     }
 
     public ReadingImportResult importOne(ReadingImportSource source, InputStream input) {
-        if (!isSupported(source)) {
+        String format = formatFrom(source);
+        if (format == null) {
             return ReadingImportResult.rejected("unsupported");
         }
 
@@ -61,7 +62,7 @@ public final class ReadingImportService {
                 }
             }
 
-            if (!fileStore.tempHasNonWhitespaceText(tempName)) {
+            if (!fileStore.tempHasReadableText(tempName, format)) {
                 return ReadingImportResult.rejected("empty");
             }
 
@@ -72,15 +73,15 @@ public final class ReadingImportService {
             }
 
             String id = UUID.randomUUID().toString();
-            String relativePath = fileStore.moveTempToItem(tempName, id);
+            String relativePath = fileStore.moveTempToItem(tempName, id, format);
             movedToFinal = true;
 
             ReadingBookRecord record = new ReadingBookRecord(
                     id,
                     hash,
-                    titleFrom(source.getDisplayName(), id),
-                    "txt",
-                    mimeFrom(source.getMimeType()),
+                    titleFrom(source.getDisplayName(), id, format),
+                    format,
+                    mimeFrom(source.getMimeType(), format),
                     relativePath,
                     actualSize,
                     clock.getAsLong(),
@@ -111,29 +112,44 @@ public final class ReadingImportService {
         fileStore.cleanupStaleTemps();
     }
 
-    private boolean isSupported(ReadingImportSource source) {
-        if (source == null) {
-            return false;
-        }
+    private static String formatFrom(ReadingImportSource source) {
+        if (source == null) return null;
+
         String displayName = source.getDisplayName();
-        boolean txtName = displayName != null
-                && displayName.toLowerCase(Locale.ROOT).endsWith(".txt");
-        return txtName || "text/plain".equals(source.getMimeType());
+        String lowerName = displayName == null ? "" : displayName.trim().toLowerCase(Locale.ROOT);
+        String mimeType = source.getMimeType();
+        String lowerMime = mimeType == null ? "" : mimeType.trim().toLowerCase(Locale.ROOT);
+
+        if ("text/html".equals(lowerMime) || lowerName.endsWith(".html") || lowerName.endsWith(".htm")) {
+            return "html";
+        }
+        if ("text/plain".equals(lowerMime) || lowerName.endsWith(".txt")) {
+            return "txt";
+        }
+        return null;
     }
 
-    private static String titleFrom(String displayName, String fallback) {
+    private static String titleFrom(String displayName, String fallback, String format) {
         if (displayName == null) {
             return fallback;
         }
         String title = displayName.trim();
-        if (title.toLowerCase(Locale.ROOT).endsWith(".txt")) {
+        String lowerTitle = title.toLowerCase(Locale.ROOT);
+        if ("html".equals(format)) {
+            if (lowerTitle.endsWith(".html")) {
+                title = title.substring(0, title.length() - 5).trim();
+            } else if (lowerTitle.endsWith(".htm")) {
+                title = title.substring(0, title.length() - 4).trim();
+            }
+        } else if (lowerTitle.endsWith(".txt")) {
             title = title.substring(0, title.length() - 4).trim();
         }
         return title.isEmpty() ? fallback : title;
     }
 
-    private static String mimeFrom(String mimeType) {
-        return mimeType == null || mimeType.trim().isEmpty() ? "text/plain" : mimeType;
+    private static String mimeFrom(String mimeType, String format) {
+        if (mimeType != null && !mimeType.trim().isEmpty()) return mimeType;
+        return "html".equals(format) ? "text/html" : "text/plain";
     }
 
     private static MessageDigest sha256() {

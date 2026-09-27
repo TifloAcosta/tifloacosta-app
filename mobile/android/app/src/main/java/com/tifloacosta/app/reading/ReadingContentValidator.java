@@ -2,13 +2,15 @@ package com.tifloacosta.app.reading;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class ReadingContentValidator {
-    private static final Set<String> IGNORED_HTML_CONTAINERS = Set.of(
+    private static final Set<String> IGNORED_HTML_CONTAINERS = new HashSet<>(Arrays.asList(
             "head",
             "script",
             "style",
@@ -20,8 +22,8 @@ public final class ReadingContentValidator {
             "textarea",
             "option",
             "datalist"
-    );
-    private static final Set<String> VOID_IGNORED_HTML_TAGS = Set.of("input", "embed");
+    ));
+    private static final Set<String> VOID_IGNORED_HTML_TAGS = new HashSet<>(Arrays.asList("input", "embed"));
     private static final Pattern ALT_ATTRIBUTE = Pattern.compile(
             "(?is)\\balt\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\s/>]+))"
     );

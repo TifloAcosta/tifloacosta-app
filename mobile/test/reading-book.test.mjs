@@ -96,3 +96,30 @@ test('reading book uses the PDF semantic adapter and navigates by real PDF pages
   assert.match(screen, /readingLibrary\.nextPage/);
   assert.match(screen, /readingLibrary\.pageStatus/);
 });
+
+test('protected PDFs request a transient password and no-text PDFs have a distinct accessible state', async () => {
+  const [screen, i18n] = await Promise.all([
+    read('src/screens/reading-book.mjs'),
+    read('src/core/i18n.mjs')
+  ]);
+
+  assert.match(screen, /opened\.passwordRequired/);
+  assert.match(screen, /opened\.passwordRejected/);
+  assert.match(screen, /opened\.pdfNoText/);
+  assert.match(screen, /passwordInput\.type\s*=\s*['"]password['"]/);
+  assert.match(screen, /client\.openBook\(bookId,\s*\{\s*password\s*\}\)/);
+  assert.match(screen, /passwordInput\.value\s*=\s*['"]['"]/);
+  assert.match(screen, /passwordInput\.focus\(\)/);
+  assert.match(screen, /readingBook\.pdfPasswordRequired/);
+  assert.match(screen, /readingBook\.pdfPasswordRejected/);
+  assert.match(screen, /readingBook\.pdfNoText/);
+
+  for (const label of [
+    'Este PDF está protegido con contraseña.', 'Contraseña del PDF', 'Abrir PDF', 'La contraseña no es correcta.',
+    'Este PDF no contiene texto que TifloAcosta pueda extraer para leer.',
+    'This PDF is password protected.', 'PDF password', 'Open PDF', 'The password is incorrect.',
+    'This PDF does not contain text that TifloAcosta can extract for reading.'
+  ]) {
+    assert.ok(i18n.includes(label), `Missing translation: ${label}`);
+  }
+});

@@ -23,7 +23,8 @@ public final class AndroidReadingAudioProbe implements ReadingAudioProbe {
                     durationMs,
                     retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE),
                     retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST),
-                    retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM)
+                    retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM),
+                    parseTrackNumber(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_CD_TRACK_NUMBER))
             );
         } catch (RuntimeException error) {
             return Result.invalid();
@@ -41,6 +42,20 @@ public final class AndroidReadingAudioProbe implements ReadingAudioProbe {
             return Math.max(0L, Long.parseLong(value.trim()));
         } catch (NumberFormatException error) {
             return 0L;
+        }
+    }
+
+    private static Integer parseTrackNumber(String value) {
+        if (value == null) return null;
+        String cleaned = value.trim();
+        if (cleaned.isEmpty()) return null;
+        int slash = cleaned.indexOf('/');
+        if (slash >= 0) cleaned = cleaned.substring(0, slash).trim();
+        try {
+            int number = Integer.parseInt(cleaned);
+            return number > 0 ? number : null;
+        } catch (NumberFormatException error) {
+            return null;
         }
     }
 }

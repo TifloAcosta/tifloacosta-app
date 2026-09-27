@@ -86,6 +86,24 @@ test('reading html adapter: uses the same block and sentence position contract a
   });
 });
 
+test('reading html adapter: preserves a readable boundary at line breaks', () => {
+  const detachedDocument = documentWith(
+    element('p', {}, [
+      textNode('Primera línea.'),
+      element('br'),
+      textNode('Segunda línea.')
+    ])
+  );
+
+  const document = parseHtmlDocument('<p>Primera línea.<br>Segunda línea.</p>', {
+    language: 'es',
+    parseDocument: () => detachedDocument
+  });
+
+  assert.equal(document.blocks[0].text, 'Primera línea. Segunda línea.');
+  assert.deepEqual(document.blocks[0].sentences, ['Primera línea.', 'Segunda línea.']);
+});
+
 test('reading html adapter: keeps nested list items separate and preserves their level', () => {
   const detachedDocument = documentWith(
     element('ol', {}, [

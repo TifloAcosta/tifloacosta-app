@@ -105,6 +105,25 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
   status.setAttribute('aria-atomic', 'true');
   status.textContent = t('readingBook.loading');
 
+  const pdfPasswordForm = document.createElement('form');
+  pdfPasswordForm.className = 'reading-pdf-password';
+  pdfPasswordForm.hidden = true;
+
+  const passwordLabel = document.createElement('label');
+  passwordLabel.textContent = t('readingBook.pdfPasswordLabel');
+
+  const passwordInput = document.createElement('input');
+  passwordInput.type = 'password';
+  passwordInput.id = 'reading-pdf-password';
+  passwordInput.autocomplete = 'off';
+  passwordLabel.htmlFor = passwordInput.id;
+
+  const passwordButton = document.createElement('button');
+  passwordButton.type = 'submit';
+  passwordButton.textContent = t('readingBook.pdfPasswordOpen');
+
+  pdfPasswordForm.append(passwordLabel, passwordInput, passwordButton);
+
   const readerContainer = document.createElement('article');
   readerContainer.className = 'reading-reader';
   readerContainer.tabIndex = -1;
@@ -113,6 +132,7 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
   controls.className = 'reading-book-controls';
   controls.setAttribute('role', 'group');
   controls.setAttribute('aria-label', t('readingBook.navigation'));
+  controls.hidden = true;
 
   const playButton = document.createElement('button');
   playButton.type = 'button';
@@ -197,7 +217,7 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
 
   const panels = document.createElement('div');
   panels.className = 'reading-book-panels';
-  root.append(back, heading, status, controls, pdfPageNavigation, readerContainer, panels);
+  root.append(back, heading, status, pdfPasswordForm, controls, pdfPageNavigation, readerContainer, panels);
 
   let activeBook = null;
   let documentModel = null;
@@ -208,12 +228,38 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
   let settingsPanel = null;
   let destroyed = false;
 
-  function showOpenError() {
-    heading.textContent = t('readingBook.errorHeading');
-    status.textContent = t('readingBook.error');
+  function clearInteractiveReading() {
     controls.hidden = true;
     pdfPageNavigation.hidden = true;
     readerContainer.replaceChildren();
+  }
+
+  function showOpenError() {
+    heading.textContent = t('readingBook.errorHeading');
+    status.textContent = t('readingBook.error');
+    pdfPasswordForm.hidden = true;
+    clearInteractiveReading();
+  }
+
+  function showPdfPasswordState(opened) {
+    activeBook = opened.book;
+    heading.textContent = activeBook.title || t('readingLibrary.untitled');
+    clearInteractiveReading();
+    pdfPasswordForm.hidden = false;
+    status.textContent = opened.passwordRejected
+      ? t('readingBook.pdfPasswordRejected')
+      : t('readingBook.pdfPasswordRequired');
+    queueMicrotask(() => {
+      if (!destroyed) passwordInput.focus();
+    });
+  }
+
+  function showPdfNoTextState(opened) {
+    activeBook = opened.book;
+    heading.textContent = activeBook.title || t('readingLibrary.untitled');
+    pdfPasswordForm.hidden = true;
+    clearInteractiveReading();
+    status.textContent = t('readingBook.pdfNoText');
   }
 
   function readablePdfPageFrom(position, direction) {
@@ -358,22 +404,12 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
     if (speech) void speech.destroy();
   });
 
-  void (async () => {
-    let opened;
-    try {
-      opened = await client.openBook(bookId);
-    } catch {
-      showOpenError();
-      return;
-    }
-    if (destroyed) return;
-    if (!opened?.book) {
-      showOpenError();
-      return;
-    }
-
+  async function initializeOpenedBook(opened) {
     activeBook = opened.book;
     heading.textContent = activeBook.title || t('readingLibrary.untitled');
+    pdfPasswordForm.hidden = true;
+    controls.hidden = false;
+
     documentModel = activeBook.format === 'pdf'
       ? parsePdfDocument(opened.pdf)
       : activeBook.format === 'html'
@@ -382,9 +418,7 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
 
     if (!documentModel.blocks.length) {
       status.textContent = t('readingBook.empty');
-      controls.hidden = true;
-      pdfPageNavigation.hidden = true;
-      readerContainer.replaceChildren();
+      clearInteractiveReading();
       return;
     }
 
@@ -450,5 +484,55 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
     });
     await persistPosition(currentPosition, readingState.value);
     if (!destroyed) queueMicrotask(() => playButton.focus());
-  })();
+  }
+
+  async function loadBook(password = null) {
+    let opened;
+    try {
+      opened = password === null
+        ? await client.openBook(bookId)
+        : await client.openBook(bookId, { password });
+    } catch {
+      showOpenError();
+      return;
+    }
+    if (destroyed) return;
+    if (!opened?.book) {
+      showOpenError();
+      return;
+    }
+
+    if (opened.book.format === 'pdf' && opened.passwordRequired) {
+      showPdfPasswordState(opened);
+      return;
+    }
+    if (opened.book.format === 'pdf' && opened.pdfNoText) {
+      showPdfNoTextState(opened);
+      return;
+    }
+    if (opened.book.format === 'pdf' && !opened.pdf) {
+      showOpenError();
+      return;
+    }
+
+    await initializeOpenedBook(opened);
+  }
+
+  pdfPasswordForm.addEventListener('submit', event => {
+    event.preventDefault();
+    const password = passwordInput.value;
+    passwordInput.value = '';
+    if (!password) {
+      status.textContent = t('readingBook.pdfPasswordRequired');
+      passwordInput.focus();
+      return;
+    }
+    passwordButton.disabled = true;
+    status.textContent = t('readingBook.loading');
+    void loadBook(password).finally(() => {
+      if (!destroyed) passwordButton.disabled = false;
+    });
+  });
+
+  void loadBook();
 }

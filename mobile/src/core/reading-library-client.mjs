@@ -1,6 +1,7 @@
 const BOOK_STATES = new Set(['not-read', 'in-reading', 'read']);
 const BOOK_SORTS = new Set(['title', 'imported', 'lastRead']);
 const MARK_TYPES = new Set(['bookmark', 'important', 'review', 'quote']);
+const AUDIO_SLEEP_MINUTES = new Set([15, 30, 45, 60]);
 
 function numberOr(value, fallback = 0) {
   const number = Number(value);
@@ -378,6 +379,21 @@ export function createReadingLibraryClient(plugin = {}) {
     try { return normalizeAudioState(await plugin.setAudioSpeed({ speed: clampAudioSpeed(options.speed) })); } catch { return null; }
   }
 
+  async function setAudioSleepTimer(options = {}) {
+    if (!plugin?.setAudioSleepTimer) return false;
+    const atTrackEnd = options?.atTrackEnd === true;
+    const minutes = nonNegativeInteger(options?.minutes, 0);
+    if (!atTrackEnd && !AUDIO_SLEEP_MINUTES.has(minutes)) return false;
+    try {
+      return mutationSucceeded(await plugin.setAudioSleepTimer({ minutes, atTrackEnd }), 'scheduled');
+    } catch { return false; }
+  }
+
+  async function cancelAudioSleepTimer() {
+    if (!plugin?.cancelAudioSleepTimer) return false;
+    try { return mutationSucceeded(await plugin.cancelAudioSleepTimer(), 'cancelled'); } catch { return false; }
+  }
+
   async function getAudioState() {
     if (!plugin?.getAudioState) return null;
     try { return normalizeAudioState(await plugin.getAudioState()); } catch { return null; }
@@ -490,6 +506,8 @@ export function createReadingLibraryClient(plugin = {}) {
     previousAudioTrack,
     nextAudioTrack,
     setAudioSpeed,
+    setAudioSleepTimer,
+    cancelAudioSleepTimer,
     getAudioState,
     stopAudio,
     listMarks,

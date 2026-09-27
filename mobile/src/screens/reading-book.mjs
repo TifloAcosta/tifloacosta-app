@@ -194,7 +194,7 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
     readerContainer.replaceChildren();
   }
 
-  function renderSemanticPosition(position, { focus = false, announce = true } = {}) {
+  function renderSemanticPosition(position, { focus = false, announce = true, commit = true } = {}) {
     if (!documentModel?.blocks?.length) return false;
     const normalized = normalizeSemanticPosition(position, documentModel);
     const block = documentModel.blocks[normalized.blockIndex];
@@ -205,7 +205,7 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
     element.dataset.blockIndex = String(normalized.blockIndex);
     element.dataset.unitIndex = String(normalized.unitIndex);
     readerContainer.replaceChildren(element);
-    currentPosition = normalized;
+    if (commit) currentPosition = normalized;
 
     const blockUnits = Math.max(1, unitsFor(block).length);
     previous.disabled = normalized.blockIndex === 0 && normalized.unitIndex === 0;
@@ -351,7 +351,7 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
       documentModel,
       t,
       onPreview(position) {
-        renderSemanticPosition(position, { focus: true });
+        renderSemanticPosition(position, { focus: true, commit: false });
       },
       onContinue(position) {
         void moveToPosition(position);

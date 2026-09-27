@@ -29,10 +29,12 @@ test('reading book screen saves in-reading progress on open and paragraph naviga
   assert.doesNotMatch(screen, /speechSynthesis|\.speak\(|autoplay/i);
 });
 
-test('reading book screen handles empty private content and returns to the reading library', async () => {
+test('reading book screen handles empty private content and opening failures and returns to the reading library', async () => {
   const screen = await read('src/screens/reading-book.mjs');
 
   assert.match(screen, /readingBook\.empty/);
+  assert.match(screen, /readingBook\.errorHeading/);
+  assert.match(screen, /try\s*\{[\s\S]*client\.openBook\(bookId\)[\s\S]*\}\s*catch/);
   assert.match(screen, /router\.back\(\)/);
 });
 

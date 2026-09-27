@@ -102,6 +102,7 @@ test('reading integration deletion removes only the private copy and book-owned 
   assert.doesNotMatch(plugin, /getContentResolver\(\)\.delete\s*\(/);
   assert.doesNotMatch(plugin, /\b(?:resolver|contentResolver)\.delete\s*\(/);
 
+  assert.match(database, /db\.delete\(TABLE_AUDIO_TRACKS,\s*"book_id = \?"/);
   assert.match(database, /db\.delete\(TABLE_MARKS,\s*"book_id = \?"/);
   assert.match(database, /db\.delete\(TABLE_SETTINGS,\s*"scope = \? AND book_id = \?",\s*new String\[\]\{"book", id\}\)/);
   assert.match(database, /db\.delete\(TABLE_BOOKS,\s*"id = \?"/);
@@ -162,4 +163,65 @@ test('PDF vertical slice keeps password/no-text/invalid states separate without 
   assert.doesNotMatch(plugin, /book\.put\("password"|result\.put\("password"/i);
   assert.doesNotMatch(gradle, /tesseract|text-recognition|mlkit.*text|ocr/i);
   assert.doesNotMatch(screen, /\bOCR\b|reconoc(?:er|imiento).*imagen|scan(?:ned)?\s+text/i);
+});
+
+test('audio vertical slice reopens the exact saved track and millisecond paused without autoplay', async () => {
+  const [importer, store, database, libraryPlugin, service, controller, screen] = await Promise.all([
+    read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingImportService.java'),
+    read('android/app/src/main/java/com/tifloacosta/app/reading/AndroidReadingFileStore.java'),
+    read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingLibraryDatabase.java'),
+    read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java'),
+    read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingAudioService.java'),
+    read('src/core/reading-audio.mjs'),
+    read('src/screens/reading-audio.mjs')
+  ]);
+
+  assert.match(importer, /importAudioGroup/);
+  assert.match(importer, /moveTempToAudioTrack/);
+  assert.match(store, /track-%04d/);
+  assert.match(database, /TABLE_AUDIO_TRACKS/);
+  assert.match(database, /updateProgress[\s\S]*mediaTrackIndex[\s\S]*mediaPositionMs/);
+  assert.match(libraryPlugin, /"mediaTrackIndex"/);
+  assert.match(libraryPlugin, /"mediaPositionMs"/);
+  assert.match(service, /listAudioTracks\(bookId\)/);
+  assert.match(service, /setMediaItems\(items,\s*startIndex,\s*Math\.max\(0L, positionMs\)\)/);
+  assert.match(service, /player\.prepare\(\)/);
+  assert.doesNotMatch(service, /prepareAudio[\s\S]{0,1200}player\.play\(\)/, 'Reopening an audiobook must remain paused');
+  assert.match(controller, /mediaTrackIndex:\s*state\.trackIndex/);
+  assert.match(controller, /mediaPositionMs:\s*state\.positionMs/);
+  assert.match(screen, /trackIndex:\s*book\.mediaTrackIndex/);
+  assert.match(screen, /positionMs:\s*book\.mediaPositionMs/);
+});
+
+test('audio background safety persists natively on interruptions periodic playback and sleep timer without auto-resume', async () => {
+  const [service, plugin, wrapper, client, controller] = await Promise.all([
+    read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingAudioService.java'),
+    read('android/app/src/main/java/com/tifloacosta/app/TifloReadingAudioPlugin.java'),
+    read('src/native/reading-library-plugin.mjs'),
+    read('src/core/reading-library-client.mjs'),
+    read('src/core/reading-audio.mjs')
+  ]);
+
+  assert.match(service, /POSITION_PERSIST_INTERVAL_MS\s*=\s*5000L/);
+  assert.match(service, /persistCurrentPosition\(/);
+  assert.match(service, /database\.updateProgress\(/);
+  assert.match(service, /ACTION_AUDIO_INTERRUPTED/);
+  assert.match(service, /AUDIO_FOCUS_LOSS[\s\S]*persistCurrentPosition|persistCurrentPosition[\s\S]*AUDIO_FOCUS_LOSS/);
+  assert.match(service, /AUDIO_BECOMING_NOISY[\s\S]*persistCurrentPosition|persistCurrentPosition[\s\S]*AUDIO_BECOMING_NOISY/);
+  assert.doesNotMatch(service, /onPlayWhenReadyChanged[\s\S]{0,1200}player\.play\(\)/, 'Audio-focus recovery must never auto-resume');
+
+  assert.match(service, /COMMAND_SET_SLEEP_TIMER/);
+  assert.match(service, /COMMAND_CANCEL_SLEEP_TIMER/);
+  assert.match(service, /postDelayed/);
+  assert.match(service, /sleepAtTrackEnd/);
+  assert.match(service, /player\.pause\(\)[\s\S]*persistCurrentPosition/);
+
+  assert.match(plugin, /public void setAudioSleepTimer\(PluginCall call\)/);
+  assert.match(plugin, /public void cancelAudioSleepTimer\(PluginCall call\)/);
+  assert.match(wrapper, /setAudioSleepTimer/);
+  assert.match(wrapper, /cancelAudioSleepTimer/);
+  assert.match(client, /setAudioSleepTimer/);
+  assert.match(client, /cancelAudioSleepTimer/);
+  assert.match(controller, /client\?\.setAudioSleepTimer/);
+  assert.match(controller, /client\?\.cancelAudioSleepTimer/);
 });

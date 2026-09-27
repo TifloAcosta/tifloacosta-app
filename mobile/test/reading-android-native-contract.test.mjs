@@ -49,3 +49,24 @@ test('reading android native contract keeps text sharing separate from shared fi
   assert.match(manifest, /android\.intent\.action\.SEND_MULTIPLE/);
   assert.doesNotMatch(manifest, /READ_EXTERNAL_STORAGE|WRITE_EXTERNAL_STORAGE|MANAGE_EXTERNAL_STORAGE|READ_MEDIA_/);
 });
+
+test('reading android native contract excludes the private reading library from backup and cleans stale temps off the UI thread', async () => {
+  const [plugin, manifest, backupRules, extractionRules] = await Promise.all([
+    read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java'),
+    read('android/app/src/main/AndroidManifest.xml'),
+    read('android/app/src/main/res/xml/backup_rules.xml'),
+    read('android/app/src/main/res/xml/data_extraction_rules.xml')
+  ]);
+
+  assert.match(manifest, /android:fullBackupContent="@xml\/backup_rules"/);
+  assert.match(manifest, /android:dataExtractionRules="@xml\/data_extraction_rules"/);
+
+  assert.match(backupRules, /domain="file"\s+path="reading-library\/"/);
+  assert.match(backupRules, /domain="database"\s+path="tiflo_reading\.db"/);
+
+  assert.match(extractionRules, /<cloud-backup>[\s\S]*domain="file"\s+path="reading-library\/"[\s\S]*domain="database"\s+path="tiflo_reading\.db"[\s\S]*<\/cloud-backup>/);
+  assert.match(extractionRules, /<device-transfer>[\s\S]*domain="file"\s+path="reading-library\/"[\s\S]*domain="database"\s+path="tiflo_reading\.db"[\s\S]*<\/device-transfer>/);
+
+  assert.match(plugin, /getBridge\(\)\.execute\(importer::cleanupStaleTemps\)/);
+  assert.doesNotMatch(manifest, /READ_EXTERNAL_STORAGE|WRITE_EXTERNAL_STORAGE|MANAGE_EXTERNAL_STORAGE|READ_MEDIA_/);
+});

@@ -29,6 +29,7 @@ import com.tifloacosta.app.reading.ReadingImportSource;
 import com.tifloacosta.app.reading.ReadingLibraryDatabase;
 import com.tifloacosta.app.reading.ReadingMarkRecord;
 import com.tifloacosta.app.reading.ReadingPdfExtractor;
+import com.tifloacosta.app.reading.ReadingPdfResult;
 import com.tifloacosta.app.reading.ReadingSettingsRecord;
 
 import java.io.File;
@@ -73,6 +74,7 @@ public class TifloReadingPlugin extends Plugin {
     private ReadingLibraryDatabase database;
     private AndroidReadingFileStore fileStore;
     private ReadingImportService importer;
+    private ReadingPdfExtractor pdfExtractor;
     private Intent launchIntent;
     private boolean initialSharedDocumentsConsumed;
 
@@ -81,7 +83,7 @@ public class TifloReadingPlugin extends Plugin {
         Context context = getContext().getApplicationContext();
         database = new ReadingLibraryDatabase(context);
         fileStore = new AndroidReadingFileStore(context);
-        ReadingPdfExtractor pdfExtractor = new ReadingPdfExtractor(new PdfBoxReadingPdfBackend(context));
+        pdfExtractor = new ReadingPdfExtractor(new PdfBoxReadingPdfBackend(context));
         importer = new ReadingImportService(database, fileStore, System::currentTimeMillis, pdfExtractor);
         launchIntent = getActivity().getIntent();
         getBridge().execute(importer::cleanupStaleTemps);
@@ -159,6 +161,7 @@ public class TifloReadingPlugin extends Plugin {
     @PluginMethod
     public void openBook(PluginCall call) {
         String id = cleanId(call.getString("id"));
+        String password = stringOr(call.getString("password"), "");
         if (id.isEmpty()) {
             call.reject("Book id is required");
             return;
@@ -172,7 +175,25 @@ public class TifloReadingPlugin extends Plugin {
                 }
                 JSObject result = new JSObject();
                 result.put("book", bookJson(record));
-                result.put("content", fileStore.readUtf8(record.getRelativePath()));
+                if ("pdf".equals(record.getFormat())) {
+                    try (InputStream source = fileStore.openStoredInput(record.getRelativePath())) {
+                        ReadingPdfResult pdf = pdfExtractor.inspect(source, password);
+                        if (ReadingPdfResult.STATUS_PASSWORD_REQUIRED.equals(pdf.getStatus())) {
+                            result.put("passwordRequired", true);
+                            result.put("passwordRejected", !password.isEmpty());
+                        } else if (ReadingPdfResult.STATUS_NO_TEXT.equals(pdf.getStatus())) {
+                            result.put("pdfNoText", true);
+                            result.put("pageCount", pdf.getPageCount());
+                        } else if (ReadingPdfResult.STATUS_READABLE.equals(pdf.getStatus())) {
+                            result.put("pdf", pdfJson(pdf));
+                        } else {
+                            call.reject("Unable to open PDF");
+                            return;
+                        }
+                    }
+                } else {
+                    result.put("content", fileStore.readUtf8(record.getRelativePath()));
+                }
                 call.resolve(result);
             } catch (IOException | RuntimeException error) {
                 call.reject("Unable to open book", error);
@@ -566,6 +587,25 @@ public class TifloReadingPlugin extends Plugin {
         return book;
     }
 
+    private static JSObject pdfJson(ReadingPdfResult pdf) {
+        JSObject payload = new JSObject();
+        payload.put("title", pdf.getTitle());
+        payload.put("author", pdf.getAuthor());
+        payload.put("language", pdf.getLanguage());
+        payload.put("pageCount", pdf.getPageCount());
+        payload.put("orderReliable", pdf.isOrderReliable());
+        JSArray pages = new JSArray();
+        for (ReadingPdfResult.Page page : pdf.getPages()) {
+            if (page == null) continue;
+            JSObject pageJson = new JSObject();
+            pageJson.put("number", page.getNumber());
+            pageJson.put("text", page.getText());
+            pages.put(pageJson);
+        }
+        payload.put("pages", pages);
+        return payload;
+    }
+
     private static JSObject markJson(ReadingMarkRecord record) {
         JSObject mark = new JSObject();
         mark.put("id", record.getId());
@@ -695,6 +735,10 @@ public class TifloReadingPlugin extends Plugin {
         public InputStream openTempInput(String tempName) throws IOException {
             ensureDirectoryForIo(tempDirectory);
             return new FileInputStream(new File(tempDirectory, tempName));
+        }
+
+        public InputStream openStoredInput(String relativePath) throws IOException {
+            return new FileInputStream(safeRelativeFile(relativePath));
         }
 
         @Override

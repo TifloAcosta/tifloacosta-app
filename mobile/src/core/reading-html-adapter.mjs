@@ -41,6 +41,7 @@ const textFromNode = node => {
 
   const tagName = String(node.tagName ?? '').toUpperCase();
   if (IGNORED_TAGS.has(tagName)) return '';
+  if (tagName === 'BR') return ' ';
 
   if (tagName === 'IMG') {
     const alt = typeof node.getAttribute === 'function'
@@ -60,7 +61,7 @@ const textFromListItem = node => {
 
     const tagName = String(child.tagName ?? '').toUpperCase();
     if (IGNORED_TAGS.has(tagName) || LIST_CONTAINER_TAGS.has(tagName)) return '';
-    if (tagName === 'IMG') return textFromNode(child);
+    if (tagName === 'BR' || tagName === 'IMG') return textFromNode(child);
 
     return childNodesOf(child).map(read).join('');
   };

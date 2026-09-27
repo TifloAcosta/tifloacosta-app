@@ -22,18 +22,21 @@ test('reading android native contract registers the Capacitor plugin and bridge 
   assert.match(activity, /registerPlugin\(TifloReadingPlugin\.class\)/);
 });
 
-test('reading android native contract uses the Android document picker for multiple plain text files', async () => {
+test('reading android native contract uses the document picker for multiple TXT and HTML files', async () => {
   const plugin = await read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java');
 
   assert.match(plugin, /Intent\.ACTION_OPEN_DOCUMENT/);
   assert.match(plugin, /Intent\.CATEGORY_OPENABLE/);
-  assert.match(plugin, /setType\("text\/plain"\)/);
+  assert.match(plugin, /setType\("text\/\*"\)/);
+  assert.match(plugin, /Intent\.EXTRA_MIME_TYPES/);
+  assert.match(plugin, /"text\/plain"/);
+  assert.match(plugin, /"text\/html"/);
   assert.match(plugin, /Intent\.EXTRA_ALLOW_MULTIPLE/);
   assert.match(plugin, /getClipData\(\)/);
   assert.match(plugin, /getData\(\)/);
 });
 
-test('reading android native contract keeps text sharing separate from shared file streams', async () => {
+test('reading android native contract accepts TXT and HTML shared file streams without broad storage permissions', async () => {
   const plugin = await read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java');
   const share = await read('android/app/src/main/java/com/tifloacosta/app/TifloSharePlugin.java');
   const manifest = await read('android/app/src/main/AndroidManifest.xml');
@@ -47,6 +50,8 @@ test('reading android native contract keeps text sharing separate from shared fi
   assert.match(share, /sharedText\(/);
 
   assert.match(manifest, /android\.intent\.action\.SEND_MULTIPLE/);
+  assert.match(manifest, /android:mimeType="text\/plain"/);
+  assert.match(manifest, /android:mimeType="text\/html"/);
   assert.doesNotMatch(manifest, /READ_EXTERNAL_STORAGE|WRITE_EXTERNAL_STORAGE|MANAGE_EXTERNAL_STORAGE|READ_MEDIA_/);
 });
 

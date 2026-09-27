@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 
+import androidx.annotation.Nullable;
 import androidx.media3.common.C;
 import androidx.media3.common.MediaItem;
 import androidx.media3.common.PlaybackParameters;
@@ -115,7 +116,7 @@ public class TifloReadingAudioPlugin extends Plugin {
                         return;
                     }
                     currentBookId = bookId;
-                    currentTrackIndex = trackIndex;
+                    currentTrackIndex = Math.max(0, mediaController.getCurrentMediaItemIndex());
                     JSObject state = stateJson(mediaController);
                     call.resolve(state);
                     emitState(mediaController);
@@ -172,6 +173,24 @@ public class TifloReadingAudioPlugin extends Plugin {
     }
 
     @PluginMethod
+    public void previousAudioTrack(PluginCall call) {
+        withController(call, "Unable to move to previous reading audio track", mediaController -> {
+            if (mediaController.hasPreviousMediaItem()) mediaController.seekToPreviousMediaItem();
+            call.resolve(stateJson(mediaController));
+            emitState(mediaController);
+        });
+    }
+
+    @PluginMethod
+    public void nextAudioTrack(PluginCall call) {
+        withController(call, "Unable to move to next reading audio track", mediaController -> {
+            if (mediaController.hasNextMediaItem()) mediaController.seekToNextMediaItem();
+            call.resolve(stateJson(mediaController));
+            emitState(mediaController);
+        });
+    }
+
+    @PluginMethod
     public void setAudioSpeed(PluginCall call) {
         Double rawSpeed = call.getDouble("speed");
         if (rawSpeed == null || rawSpeed.isNaN() || rawSpeed.isInfinite()) {
@@ -193,9 +212,7 @@ public class TifloReadingAudioPlugin extends Plugin {
 
     @PluginMethod
     public void getAudioState(PluginCall call) {
-        withController(call, "Unable to read audio state", mediaController ->
-                call.resolve(stateJson(mediaController))
-        );
+        withController(call, "Unable to read audio state", mediaController -> call.resolve(stateJson(mediaController)));
     }
 
     @PluginMethod
@@ -254,7 +271,7 @@ public class TifloReadingAudioPlugin extends Plugin {
     private void syncIdentityFromController(MediaController mediaController) {
         MediaItem item = mediaController.getCurrentMediaItem();
         currentBookId = item == null ? "" : clean(item.mediaId);
-        if (currentBookId.isEmpty()) currentTrackIndex = 0;
+        currentTrackIndex = currentBookId.isEmpty() ? 0 : Math.max(0, mediaController.getCurrentMediaItemIndex());
     }
 
     private JSObject stateJson(MediaController mediaController) {
@@ -262,6 +279,7 @@ public class TifloReadingAudioPlugin extends Plugin {
         JSObject state = new JSObject();
         state.put("bookId", currentBookId);
         state.put("trackIndex", currentTrackIndex);
+        state.put("trackCount", Math.max(0, mediaController.getMediaItemCount()));
         state.put("positionMs", Math.max(0L, mediaController.getCurrentPosition()));
 
         long durationMs = mediaController.getDuration();
@@ -286,14 +304,9 @@ public class TifloReadingAudioPlugin extends Plugin {
         JSObject data = mediaController == null ? new JSObject() : stateJson(mediaController);
         String bookId = intent.getStringExtra(ReadingAudioService.EXTRA_BOOK_ID);
         if (bookId != null && !bookId.trim().isEmpty()) data.put("bookId", bookId.trim());
-        data.put(
-                "positionMs",
-                Math.max(0L, intent.getLongExtra(ReadingAudioService.EXTRA_POSITION_MS, 0L))
-        );
-        data.put(
-                "durationMs",
-                Math.max(0L, intent.getLongExtra(ReadingAudioService.EXTRA_DURATION_MS, 0L))
-        );
+        data.put("trackIndex", Math.max(0, intent.getIntExtra(ReadingAudioService.EXTRA_TRACK_INDEX, currentTrackIndex)));
+        data.put("positionMs", Math.max(0L, intent.getLongExtra(ReadingAudioService.EXTRA_POSITION_MS, 0L)));
+        data.put("durationMs", Math.max(0L, intent.getLongExtra(ReadingAudioService.EXTRA_DURATION_MS, 0L)));
         String reason = intent.getStringExtra(ReadingAudioService.EXTRA_REASON);
         if (reason != null && !reason.isEmpty()) data.put("reason", reason);
         notifyListeners(name, data, true);
@@ -301,17 +314,13 @@ public class TifloReadingAudioPlugin extends Plugin {
 
     private void updatePositionTicker(MediaController mediaController) {
         mainHandler.removeCallbacks(positionTicker);
-        if (mediaController.isPlaying()) {
-            mainHandler.postDelayed(positionTicker, POSITION_EVENT_INTERVAL_MS);
-        }
+        if (mediaController.isPlaying()) mainHandler.postDelayed(positionTicker, POSITION_EVENT_INTERVAL_MS);
     }
 
     private long clampPosition(MediaController mediaController, long positionMs) {
         long normalized = Math.max(0L, positionMs);
         long durationMs = mediaController.getDuration();
-        if (durationMs != C.TIME_UNSET && durationMs >= 0L) {
-            return Math.min(normalized, durationMs);
-        }
+        if (durationMs != C.TIME_UNSET && durationMs >= 0L) return Math.min(normalized, durationMs);
         return normalized;
     }
 
@@ -346,6 +355,12 @@ public class TifloReadingAudioPlugin extends Plugin {
 
         @Override
         public void onPlaybackStateChanged(@Player.State int playbackState) {
+            MediaController mediaController = controller;
+            if (mediaController != null) emitState(mediaController);
+        }
+
+        @Override
+        public void onMediaItemTransition(@Nullable MediaItem mediaItem, @Player.MediaItemTransitionReason int reason) {
             MediaController mediaController = controller;
             if (mediaController != null) emitState(mediaController);
         }

@@ -70,7 +70,7 @@ const DICTIONARIES = {
     },
     library: { empty: 'No hay recursos disponibles en este momento.', open: 'Abrir documento', download: 'Guardar documento' },
     readingLibrary: {
-      continueReading: 'Continuar leyendo', import: 'Importar TXT, HTML o PDF', searchLabel: 'Buscar en mi biblioteca',
+      continueReading: 'Continuar leyendo', import: 'Importar TXT, HTML, PDF o audio', searchLabel: 'Buscar en mi biblioteca',
       searchPlaceholder: 'Título del documento', searchSubmit: 'Buscar', myLibrary: 'Mi biblioteca',
       empty: 'Todavía no hay documentos en tu biblioteca.', untitled: 'Documento sin título',
       stateNotRead: 'Sin leer', stateInReading: 'En lectura', stateRead: 'Leído', progress: '{percent}% leído',
@@ -117,6 +117,16 @@ const DICTIONARIES = {
       pdfNoText: 'Este PDF no contiene texto que TifloAcosta pueda extraer para leer.',
       empty: 'Este documento no contiene texto que se pueda leer.',
       errorHeading: 'No se pudo abrir el documento', error: 'No se pudo abrir la copia guardada en TifloAcosta.'
+    },
+    readingAudio: {
+      controls: 'Controles del audiolibro', preparing: 'Preparando audiolibro…',
+      play: 'Reproducir', pause: 'Pausa', rewind: 'Retroceder {seconds} segundos', forward: 'Avanzar {seconds} segundos',
+      previousTrack: 'Pista anterior', nextTrack: 'Pista siguiente', position: 'Posición', speed: 'Velocidad',
+      timer: 'Temporizador', timerOff: 'Desactivado', timerMinutes: '{minutes} minutos', trackEnd: 'Al final de la pista',
+      marks: 'Marcas', positionStatus: 'Transcurrido {elapsed}. Restante {remaining}.',
+      timerSet: 'Temporizador activado.', timerOffStatus: 'Temporizador desactivado.',
+      markReference: 'Pista {track}, {time}', ready: 'Audiolibro preparado. Posición {elapsed}; quedan {remaining}.',
+      unavailable: 'No se pudo preparar este audiolibro para reproducirlo.'
     },
     videos: {
       empty: 'No hay vídeos disponibles en este momento.',
@@ -215,7 +225,7 @@ const DICTIONARIES = {
     },
     library: { empty: 'There are no resources available right now.', open: 'Open document', download: 'Save document' },
     readingLibrary: {
-      continueReading: 'Continue reading', import: 'Import TXT, HTML or PDF', searchLabel: 'Search my library',
+      continueReading: 'Continue reading', import: 'Import TXT, HTML, PDF or audio', searchLabel: 'Search my library',
       searchPlaceholder: 'Document title', searchSubmit: 'Search', myLibrary: 'My library',
       empty: 'There are no documents in your library yet.', untitled: 'Untitled document',
       stateNotRead: 'Not read', stateInReading: 'Reading', stateRead: 'Read', progress: '{percent}% read',
@@ -256,6 +266,16 @@ const DICTIONARIES = {
       pdfNoText: 'This PDF does not contain text that TifloAcosta can extract for reading.',
       empty: 'This document contains no readable text.',
       errorHeading: 'The document could not be opened', error: 'The copy saved in TifloAcosta could not be opened.'
+    },
+    readingAudio: {
+      controls: 'Audiobook controls', preparing: 'Preparing audiobook…',
+      play: 'Play', pause: 'Pause', rewind: 'Rewind {seconds} seconds', forward: 'Forward {seconds} seconds',
+      previousTrack: 'Previous track', nextTrack: 'Next track', position: 'Position', speed: 'Speed',
+      timer: 'Sleep timer', timerOff: 'Off', timerMinutes: '{minutes} minutes', trackEnd: 'At end of track',
+      marks: 'Marks', positionStatus: 'Elapsed {elapsed}. Remaining {remaining}.',
+      timerSet: 'Sleep timer enabled.', timerOffStatus: 'Sleep timer disabled.',
+      markReference: 'Track {track}, {time}', ready: 'Audiobook ready. Position {elapsed}; {remaining} remaining.',
+      unavailable: 'This audiobook could not be prepared for playback.'
     },
     videos: {
       empty: 'There are no videos available right now.', open: 'Open video', play: 'Open player', playerHeading: 'Video player',

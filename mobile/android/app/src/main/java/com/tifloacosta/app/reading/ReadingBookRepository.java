@@ -10,5 +10,42 @@ public interface ReadingBookRepository {
     ReadingBookRecord latestInProgress();
     void insert(ReadingBookRecord record);
     void updateProgress(String id, int blockIndex, double percent, String state, long lastReadAt);
+
+    default void updateProgress(
+            String id,
+            int blockIndex,
+            int unitIndex,
+            String anchorText,
+            double percent,
+            String state,
+            long lastReadAt
+    ) {
+        updateProgress(id, blockIndex, percent, state, lastReadAt);
+    }
+
+    default void insertMark(ReadingMarkRecord record) {
+        throw new UnsupportedOperationException("Reading marks are not supported by this repository");
+    }
+
+    default List<ReadingMarkRecord> listMarks(String bookId, String type) {
+        throw new UnsupportedOperationException("Reading marks are not supported by this repository");
+    }
+
+    default void deleteMark(String id) {
+        throw new UnsupportedOperationException("Reading marks are not supported by this repository");
+    }
+
+    default ReadingSettingsRecord getReadingSetting(String scope, String bookId, String key) {
+        throw new UnsupportedOperationException("Reading settings are not supported by this repository");
+    }
+
+    default void setReadingSetting(ReadingSettingsRecord record) {
+        throw new UnsupportedOperationException("Reading settings are not supported by this repository");
+    }
+
+    default void resetBookReadingSettings(String bookId) {
+        throw new UnsupportedOperationException("Reading settings are not supported by this repository");
+    }
+
     void delete(String id);
 }

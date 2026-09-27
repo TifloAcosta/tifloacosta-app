@@ -1,0 +1,263 @@
+package com.tifloacosta.app.reading;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.sqlite.SQLiteConstraintException;
+import android.database.sqlite.SQLiteDatabase;
+
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import java.util.List;
+
+@RunWith(AndroidJUnit4.class)
+public class ReadingLibraryDatabaseTest {
+    private Context context;
+    private ReadingLibraryDatabase database;
+
+    @Before
+    public void setUp() {
+        context = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        context.deleteDatabase(ReadingLibraryDatabase.DATABASE_NAME);
+        database = new ReadingLibraryDatabase(context);
+        database.getWritableDatabase();
+    }
+
+    @After
+    public void tearDown() {
+        if (database != null) database.close();
+        context.deleteDatabase(ReadingLibraryDatabase.DATABASE_NAME);
+    }
+
+    private ReadingBookRecord book(
+            String id,
+            String sha,
+            String title,
+            long importedAt,
+            Long lastReadAt,
+            String state,
+            int blockIndex,
+            double percent
+    ) {
+        return new ReadingBookRecord(
+                id,
+                sha,
+                title,
+                "txt",
+                "text/plain",
+                "items/" + id + "/source.txt",
+                100 + importedAt,
+                importedAt,
+                lastReadAt,
+                state,
+                blockIndex,
+                percent
+        );
+    }
+
+    @Test
+    public void insertFindAndShaUniqueness() {
+        ReadingBookRecord first = book("a", "sha-a", "Alpha", 10, null, "not-read", 0, 0);
+        database.insert(first);
+
+        assertEquals("Alpha", database.findById("a").getTitle());
+        assertEquals("a", database.findBySha256("sha-a").getId());
+
+        try {
+            database.insert(book("b", "sha-a", "Duplicate bytes", 20, null, "not-read", 0, 0));
+            fail("Expected duplicate SHA-256 to violate the database uniqueness constraint");
+        } catch (SQLiteConstraintException expected) {
+            // Expected: duplicate source bytes must not create a second library entry.
+        }
+    }
+
+    @Test
+    public void listUsesTenItemPagingAndTitleSearch() {
+        for (int i = 1; i <= 15; i++) {
+            database.insert(book(
+                    "id-" + i,
+                    "sha-" + i,
+                    i == 12 ? "Needle Book" : "Book " + i,
+                    i,
+                    null,
+                    "not-read",
+                    0,
+                    0
+            ));
+        }
+
+        ReadingBookQuery firstPage = new ReadingBookQuery("", "all", "imported", 10, 0);
+        ReadingBookQuery secondPage = new ReadingBookQuery("", "all", "imported", 10, 10);
+        ReadingBookQuery search = new ReadingBookQuery("needle", "all", "title", 10, 0);
+
+        assertEquals(10, database.list(firstPage).size());
+        assertEquals(5, database.list(secondPage).size());
+        assertEquals(15, database.count(firstPage));
+        assertEquals(1, database.count(search));
+        assertEquals("Needle Book", database.list(search).get(0).getTitle());
+    }
+
+    @Test
+    public void preciseProgressStoresBlockSentenceAnchorAndExistingProgressFields() {
+        database.insert(book("a", "sha-a", "Alpha", 10, 100L, "in-reading", 1, 20));
+
+        database.updateProgress("a", 7, 3, "frase cercana", 75.5, "in-reading", 500L);
+        ReadingBookRecord updated = database.findById("a");
+
+        assertEquals(7, updated.getBlockIndex());
+        assertEquals(3, updated.getUnitIndex());
+        assertEquals("frase cercana", updated.getAnchorText());
+        assertEquals(75.5, updated.getPercent(), 0.001);
+        assertEquals(500L, updated.getLastReadAt().longValue());
+    }
+
+    @Test
+    public void v1DatabaseMigratesToV2WithoutLosingBookOrProgress() {
+        database.close();
+        context.deleteDatabase(ReadingLibraryDatabase.DATABASE_NAME);
+
+        SQLiteDatabase legacy = context.openOrCreateDatabase(
+                ReadingLibraryDatabase.DATABASE_NAME,
+                Context.MODE_PRIVATE,
+                null
+        );
+        legacy.execSQL(
+                "CREATE TABLE books (" +
+                        "id TEXT PRIMARY KEY," +
+                        "sha256 TEXT NOT NULL UNIQUE," +
+                        "title TEXT NOT NULL," +
+                        "format TEXT NOT NULL," +
+                        "mime_type TEXT NOT NULL," +
+                        "relative_path TEXT NOT NULL," +
+                        "size_bytes INTEGER NOT NULL," +
+                        "imported_at INTEGER NOT NULL," +
+                        "last_read_at INTEGER," +
+                        "state TEXT NOT NULL DEFAULT 'not-read' CHECK(state IN ('not-read','in-reading','read'))," +
+                        "block_index INTEGER NOT NULL DEFAULT 0," +
+                        "percent REAL NOT NULL DEFAULT 0" +
+                        ")"
+        );
+        ContentValues values = new ContentValues();
+        values.put("id", "legacy");
+        values.put("sha256", "legacy-sha");
+        values.put("title", "Libro anterior");
+        values.put("format", "txt");
+        values.put("mime_type", "text/plain");
+        values.put("relative_path", "items/legacy/source.txt");
+        values.put("size_bytes", 321L);
+        values.put("imported_at", 10L);
+        values.put("last_read_at", 20L);
+        values.put("state", "in-reading");
+        values.put("block_index", 9);
+        values.put("percent", 44.5);
+        legacy.insertOrThrow("books", null, values);
+        legacy.setVersion(1);
+        legacy.close();
+
+        database = new ReadingLibraryDatabase(context);
+        ReadingBookRecord migrated = database.findById("legacy");
+
+        assertNotNull(migrated);
+        assertEquals(2, database.getReadableDatabase().getVersion());
+        assertEquals("Libro anterior", migrated.getTitle());
+        assertEquals(9, migrated.getBlockIndex());
+        assertEquals(0, migrated.getUnitIndex());
+        assertNull(migrated.getAnchorText());
+        assertEquals(44.5, migrated.getPercent(), 0.001);
+        assertEquals("in-reading", migrated.getState());
+    }
+
+    @Test
+    public void marksAreOrderedFilteredAndValidated() {
+        database.insert(book("a", "sha-a", "Alpha", 10, null, "not-read", 0, 0));
+        database.insertMark(new ReadingMarkRecord("m3", "a", "review", 7, 0, "Tres", "Párrafo 8", 300L));
+        database.insertMark(new ReadingMarkRecord("m1", "a", "bookmark", 2, 1, "Uno", "Párrafo 3", 100L));
+        database.insertMark(new ReadingMarkRecord("m2", "a", "quote", 2, 4, "Dos", "Párrafo 3", 200L));
+
+        List<ReadingMarkRecord> all = database.listMarks("a", null);
+        assertEquals(3, all.size());
+        assertEquals("m1", all.get(0).getId());
+        assertEquals("m2", all.get(1).getId());
+        assertEquals("m3", all.get(2).getId());
+
+        List<ReadingMarkRecord> quotes = database.listMarks("a", "quote");
+        assertEquals(1, quotes.size());
+        assertEquals("m2", quotes.get(0).getId());
+
+        database.deleteMark("m2");
+        assertEquals(2, database.listMarks("a", null).size());
+
+        try {
+            database.insertMark(new ReadingMarkRecord("bad", "a", "other", 0, 0, null, null, 400L));
+            fail("Expected unsupported mark type to be rejected");
+        } catch (IllegalArgumentException expected) {
+            // Only the four approved reading mark types are valid.
+        }
+    }
+
+    @Test
+    public void globalSettingsBookOverridesAndResetPreserveInheritance() {
+        database.setReadingSetting(new ReadingSettingsRecord("global", "", "speech.rate", "1.0", 100L));
+        database.setReadingSetting(new ReadingSettingsRecord("global", "", "speech.voice", "voz-global", 110L));
+        database.setReadingSetting(new ReadingSettingsRecord("book", "a", "speech.voice", "voz-libro", 200L));
+
+        assertEquals("1.0", database.getReadingSetting("global", "", "speech.rate").getValue());
+        assertEquals("voz-global", database.getReadingSetting("global", "", "speech.voice").getValue());
+        assertEquals("voz-libro", database.getReadingSetting("book", "a", "speech.voice").getValue());
+
+        database.resetBookReadingSettings("a");
+
+        assertNull(database.getReadingSetting("book", "a", "speech.voice"));
+        assertEquals("voz-global", database.getReadingSetting("global", "", "speech.voice").getValue());
+    }
+
+    @Test
+    public void deletingBookAlsoRemovesMarksAndBookSettingsButNotGlobalSettings() {
+        database.insert(book("a", "sha-a", "Alpha", 10, null, "not-read", 0, 0));
+        database.insertMark(new ReadingMarkRecord("m1", "a", "important", 1, 2, "Texto", "Párrafo 2", 100L));
+        database.setReadingSetting(new ReadingSettingsRecord("book", "a", "speech.rate", "1.2", 100L));
+        database.setReadingSetting(new ReadingSettingsRecord("global", "", "speech.rate", "1.0", 100L));
+
+        database.delete("a");
+
+        assertNull(database.findById("a"));
+        assertEquals(0, database.listMarks("a", null).size());
+        assertNull(database.getReadingSetting("book", "a", "speech.rate"));
+        assertNotNull(database.getReadingSetting("global", "", "speech.rate"));
+    }
+
+    @Test
+    public void statusSortProgressLatestAndDeleteWorkTogether() {
+        database.insert(book("a", "sha-a", "Alpha", 10, 100L, "in-reading", 1, 20));
+        database.insert(book("b", "sha-b", "Beta", 20, 300L, "in-reading", 2, 40));
+        database.insert(book("c", "sha-c", "Gamma", 30, 200L, "read", 9, 100));
+
+        ReadingBookQuery inReading = new ReadingBookQuery("", "in-reading", "lastRead", 10, 0);
+        List<ReadingBookRecord> rows = database.list(inReading);
+
+        assertEquals(2, rows.size());
+        assertEquals("b", rows.get(0).getId());
+        assertEquals("a", rows.get(1).getId());
+
+        database.updateProgress("a", 7, 75.5, "in-reading", 500L);
+        ReadingBookRecord updated = database.findById("a");
+        assertEquals(7, updated.getBlockIndex());
+        assertEquals(75.5, updated.getPercent(), 0.001);
+        assertEquals(500L, updated.getLastReadAt().longValue());
+        assertEquals("a", database.latestInProgress().getId());
+
+        database.delete("a");
+        assertNull(database.findById("a"));
+        assertNotNull(database.findById("b"));
+    }
+}

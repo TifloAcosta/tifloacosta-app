@@ -15,9 +15,10 @@ const IGNORED_TAGS = new Set([
   'DATALIST'
 ]);
 
+const LIST_CONTAINER_TAGS = new Set(['UL', 'OL']);
+
 const STRUCTURAL_TYPES = new Map([
   ['P', 'paragraph'],
-  ['LI', 'list-item'],
   ['BLOCKQUOTE', 'quote'],
   ['TD', 'table-cell'],
   ['TH', 'table-cell']
@@ -49,6 +50,22 @@ const textFromNode = node => {
   }
 
   return childNodesOf(node).map(textFromNode).join('');
+};
+
+const textFromListItem = node => {
+  const read = child => {
+    if (!child) return '';
+    if (child.nodeType === 3) return String(child.textContent ?? '');
+    if (child.nodeType !== 1) return '';
+
+    const tagName = String(child.tagName ?? '').toUpperCase();
+    if (IGNORED_TAGS.has(tagName) || LIST_CONTAINER_TAGS.has(tagName)) return '';
+    if (tagName === 'IMG') return textFromNode(child);
+
+    return childNodesOf(child).map(read).join('');
+  };
+
+  return childNodesOf(node).map(read).join('');
 };
 
 const defaultParseDocument = source => {
@@ -109,11 +126,30 @@ export const parseHtmlDocument = (html, options = {}) => {
   const blocks = [];
   const makeBlock = createBlockFactory(language);
 
-  const visit = node => {
+  const visit = (node, listDepth = 0) => {
     if (!node || node.nodeType !== 1) return;
 
     const tagName = String(node.tagName ?? '').toUpperCase();
     if (IGNORED_TAGS.has(tagName)) return;
+
+    if (LIST_CONTAINER_TAGS.has(tagName)) {
+      for (const child of childNodesOf(node)) visit(child, listDepth + 1);
+      return;
+    }
+
+    if (tagName === 'LI') {
+      const block = makeBlock('list-item', textFromListItem(node), {
+        level: Math.max(1, listDepth)
+      });
+      if (block) blocks.push(block);
+
+      for (const child of childNodesOf(node)) {
+        if (child?.nodeType !== 1) continue;
+        const childTag = String(child.tagName ?? '').toUpperCase();
+        if (LIST_CONTAINER_TAGS.has(childTag)) visit(child, listDepth);
+      }
+      return;
+    }
 
     if (/^H[1-6]$/u.test(tagName)) {
       const block = makeBlock('heading', textFromNode(node), {
@@ -136,7 +172,7 @@ export const parseHtmlDocument = (html, options = {}) => {
       return;
     }
 
-    for (const child of childNodesOf(node)) visit(child);
+    for (const child of childNodesOf(node)) visit(child, listDepth);
   };
 
   for (const child of childNodesOf(detachedDocument.body)) visit(child);

@@ -17,7 +17,7 @@ test('reading native bridge exposes precise progress in books and saves block se
   assert.match(plugin, /book\.put\("anchorText",\s*record\.getAnchorText\(\)/);
   assert.match(plugin, /call\.getInt\("unitIndex"/);
   assert.match(plugin, /call\.getString\("anchorText"/);
-  assert.match(plugin, /database\.updateProgress\(id,\s*blockIndex,\s*unitIndex,\s*anchorText,/s);
+  assert.match(plugin, /database\.updateProgress\(\s*id,\s*blockIndex,\s*unitIndex,\s*anchorText,/s);
 });
 
 test('reading native bridge exposes marks and inherited settings through the same library database', async () => {

@@ -134,6 +134,34 @@ test('reading html adapter: retains readable text from generic html wrappers', (
   ]);
 });
 
+test('reading html adapter: preserves direct wrapper text around semantic blocks without duplication', () => {
+  const detachedDocument = documentWith(
+    element('article', {}, [
+      textNode('Introducción antes del título.'),
+      element('h2', {}, [textNode('Título de sección')]),
+      textNode('Texto entre el título y el párrafo.'),
+      element('p', {}, [textNode('Párrafo estructurado.')]),
+      textNode('Cierre después del párrafo.')
+    ])
+  );
+
+  const document = parseHtmlDocument('<article>...</article>', {
+    language: 'es',
+    parseDocument: () => detachedDocument
+  });
+
+  assert.deepEqual(document.blocks.map(block => ({
+    type: block.type,
+    text: block.text
+  })), [
+    { type: 'paragraph', text: 'Introducción antes del título.' },
+    { type: 'heading', text: 'Título de sección' },
+    { type: 'paragraph', text: 'Texto entre el título y el párrafo.' },
+    { type: 'paragraph', text: 'Párrafo estructurado.' },
+    { type: 'paragraph', text: 'Cierre después del párrafo.' }
+  ]);
+});
+
 test('reading html adapter: keeps nested list items separate and preserves their level', () => {
   const detachedDocument = documentWith(
     element('ol', {}, [

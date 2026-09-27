@@ -17,13 +17,14 @@ test('Android keeps 1.3.1 code 10 as the development fallback while releases can
   assert.doesNotMatch(gradle, /versionName\s+"1\.3\.0"/);
 });
 
-test('Android 1.3.1 keeps native Share and bounded web fetch plugins', async () => {
+test('Android 1.3.1 keeps native Share, Reading and bounded web fetch plugins', async () => {
   const manifest = await read('android/app/src/main/AndroidManifest.xml');
   const mainActivity = await read('android/app/src/main/java/com/tifloacosta/app/MainActivity.java');
   assert.match(manifest, /android\.intent\.action\.SEND/);
+  assert.match(manifest, /android\.intent\.action\.SEND_MULTIPLE/);
   assert.match(manifest, /android:mimeType="text\/plain"/);
-  assert.doesNotMatch(manifest, /SEND_MULTIPLE/);
   assert.match(mainActivity, /registerPlugin\(TifloSharePlugin\.class\)/);
+  assert.match(mainActivity, /registerPlugin\(TifloReadingPlugin\.class\)/);
   assert.match(mainActivity, /registerPlugin\(TifloWebFetchPlugin\.class\)/);
 });
 

@@ -2,6 +2,8 @@ package com.tifloacosta.app.reading;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 
 import androidx.annotation.Nullable;
 import androidx.media3.common.AudioAttributes;
@@ -25,6 +27,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class ReadingAudioService extends MediaSessionService {
+    public static final long POSITION_PERSIST_INTERVAL_MS = 5000L;
+    private static final long MINUTE_MS = 60_000L;
+
     public static final String ACTION_AUDIO_INTERRUPTED =
             "com.tifloacosta.app.reading.ACTION_AUDIO_INTERRUPTED";
     public static final String ACTION_AUDIO_ENDED =
@@ -35,14 +40,44 @@ public final class ReadingAudioService extends MediaSessionService {
     public static final String EXTRA_POSITION_MS = "positionMs";
     public static final String EXTRA_DURATION_MS = "durationMs";
     public static final String EXTRA_REASON = "reason";
+    public static final String EXTRA_SLEEP_MINUTES = "sleepMinutes";
+    public static final String EXTRA_SLEEP_AT_TRACK_END = "sleepAtTrackEnd";
+
     public static final String COMMAND_PREPARE_AUDIO =
             "com.tifloacosta.app.reading.PREPARE_AUDIO";
+    public static final String COMMAND_SET_SLEEP_TIMER =
+            "com.tifloacosta.app.reading.SET_SLEEP_TIMER";
+    public static final String COMMAND_CANCEL_SLEEP_TIMER =
+            "com.tifloacosta.app.reading.CANCEL_SLEEP_TIMER";
+
     public static final SessionCommand PREPARE_AUDIO_COMMAND =
             new SessionCommand(COMMAND_PREPARE_AUDIO, Bundle.EMPTY);
+    public static final SessionCommand SET_SLEEP_TIMER_COMMAND =
+            new SessionCommand(COMMAND_SET_SLEEP_TIMER, Bundle.EMPTY);
+    public static final SessionCommand CANCEL_SLEEP_TIMER_COMMAND =
+            new SessionCommand(COMMAND_CANCEL_SLEEP_TIMER, Bundle.EMPTY);
+
+    private final Handler mainHandler = new Handler(Looper.getMainLooper());
+    private final Runnable positionPersistenceTicker = new Runnable() {
+        @Override
+        public void run() {
+            if (player == null || !player.isPlaying()) return;
+            persistCurrentPosition(false);
+            mainHandler.postDelayed(this, POSITION_PERSIST_INTERVAL_MS);
+        }
+    };
+    private final Runnable sleepTimerAction = () -> {
+        if (player == null) return;
+        player.pause();
+        persistCurrentPosition(false);
+        clearSleepTimerState();
+        sendPlaybackEvent(ACTION_AUDIO_INTERRUPTED, "sleep-timer");
+    };
 
     private ExoPlayer player;
     private MediaSession mediaSession;
     private ReadingLibraryDatabase database;
+    private boolean sleepAtTrackEnd;
 
     @Override
     public void onCreate() {
@@ -73,6 +108,9 @@ public final class ReadingAudioService extends MediaSessionService {
 
     @Override
     public void onDestroy() {
+        mainHandler.removeCallbacks(positionPersistenceTicker);
+        mainHandler.removeCallbacks(sleepTimerAction);
+        persistCurrentPosition(false);
         if (mediaSession != null) {
             mediaSession.release();
             mediaSession = null;
@@ -106,6 +144,7 @@ public final class ReadingAudioService extends MediaSessionService {
 
         if (items.isEmpty()) throw new IOException("Reading audio source is missing");
         int startIndex = Math.min(Math.max(0, trackIndex), items.size() - 1);
+        cancelSleepTimer();
         player.pause();
         player.setMediaItems(items, startIndex, Math.max(0L, positionMs));
         player.prepare();
@@ -149,6 +188,92 @@ public final class ReadingAudioService extends MediaSessionService {
         return candidates[0];
     }
 
+    private void persistCurrentPosition(boolean completed) {
+        if (player == null || database == null) return;
+        MediaItem currentItem = player.getCurrentMediaItem();
+        if (currentItem == null) return;
+        String bookId = currentItem.mediaId == null ? "" : currentItem.mediaId.trim();
+        if (bookId.isEmpty()) return;
+
+        ReadingBookRecord record = database.findById(bookId);
+        if (record == null) return;
+
+        int trackIndex = Math.max(0, player.getCurrentMediaItemIndex());
+        long positionMs = Math.max(0L, player.getCurrentPosition());
+        double percent = completed ? 100.0 : calculateGlobalPercent(bookId, trackIndex, positionMs);
+        database.updateProgress(
+                bookId,
+                record.getBlockIndex(),
+                record.getUnitIndex(),
+                record.getAnchorText(),
+                trackIndex,
+                positionMs,
+                percent,
+                completed ? "read" : "in-reading",
+                System.currentTimeMillis()
+        );
+    }
+
+    private double calculateGlobalPercent(String bookId, int trackIndex, long positionMs) {
+        if (database == null || player == null) return 0.0;
+        List<ReadingAudioTrackRecord> tracks = database.listAudioTracks(bookId);
+        long totalDurationMs = 0L;
+        long elapsedMs = 0L;
+        if (!tracks.isEmpty()) {
+            for (ReadingAudioTrackRecord track : tracks) {
+                long durationMs = Math.max(0L, track.getDurationMs());
+                if (track.getTrackIndex() < trackIndex) elapsedMs = safeAdd(elapsedMs, durationMs);
+                totalDurationMs = safeAdd(totalDurationMs, durationMs);
+            }
+            if (trackIndex < tracks.size()) {
+                long currentDuration = Math.max(0L, tracks.get(trackIndex).getDurationMs());
+                elapsedMs = safeAdd(elapsedMs, currentDuration > 0L ? Math.min(positionMs, currentDuration) : positionMs);
+            }
+        }
+
+        if (totalDurationMs <= 0L && (tracks.isEmpty() || tracks.size() == 1)) {
+            long durationMs = player.getDuration();
+            if (durationMs != C.TIME_UNSET && durationMs > 0L) {
+                totalDurationMs = durationMs;
+                elapsedMs = Math.min(positionMs, durationMs);
+            }
+        }
+        if (totalDurationMs <= 0L) return 0.0;
+        return Math.min(100.0, Math.max(0.0, (elapsedMs * 100.0) / totalDurationMs));
+    }
+
+    private static long safeAdd(long left, long right) {
+        if (right > 0L && left > Long.MAX_VALUE - right) return Long.MAX_VALUE;
+        return left + right;
+    }
+
+    private void schedulePositionPersistence() {
+        mainHandler.removeCallbacks(positionPersistenceTicker);
+        if (player != null && player.isPlaying()) {
+            mainHandler.postDelayed(positionPersistenceTicker, POSITION_PERSIST_INTERVAL_MS);
+        }
+    }
+
+    private boolean setSleepTimer(int minutes, boolean atTrackEnd) {
+        cancelSleepTimer();
+        if (atTrackEnd) {
+            sleepAtTrackEnd = true;
+            return true;
+        }
+        if (minutes != 15 && minutes != 30 && minutes != 45 && minutes != 60) return false;
+        mainHandler.postDelayed(sleepTimerAction, minutes * MINUTE_MS);
+        return true;
+    }
+
+    private void cancelSleepTimer() {
+        mainHandler.removeCallbacks(sleepTimerAction);
+        clearSleepTimerState();
+    }
+
+    private void clearSleepTimerState() {
+        sleepAtTrackEnd = false;
+    }
+
     private void sendPlaybackEvent(String action, @Nullable String reason) {
         if (player == null) return;
 
@@ -167,14 +292,25 @@ public final class ReadingAudioService extends MediaSessionService {
 
     private final class PlaybackListener implements Player.Listener {
         @Override
+        public void onIsPlayingChanged(boolean isPlaying) {
+            if (isPlaying) schedulePositionPersistence();
+            else {
+                mainHandler.removeCallbacks(positionPersistenceTicker);
+                persistCurrentPosition(false);
+            }
+        }
+
+        @Override
         public void onPlayWhenReadyChanged(
                 boolean playWhenReady,
                 @Player.PlayWhenReadyChangeReason int reason
         ) {
             if (playWhenReady) return;
             if (reason == Player.PLAY_WHEN_READY_CHANGE_REASON_AUDIO_FOCUS_LOSS) {
+                persistCurrentPosition(false);
                 sendPlaybackEvent(ACTION_AUDIO_INTERRUPTED, "audio-focus-loss");
             } else if (reason == Player.PLAY_WHEN_READY_CHANGE_REASON_AUDIO_BECOMING_NOISY) {
+                persistCurrentPosition(false);
                 sendPlaybackEvent(ACTION_AUDIO_INTERRUPTED, "audio-becoming-noisy");
             }
         }
@@ -187,13 +323,31 @@ public final class ReadingAudioService extends MediaSessionService {
                     && player != null
                     && player.getPlayWhenReady()) {
                 player.pause();
+                persistCurrentPosition(false);
                 sendPlaybackEvent(ACTION_AUDIO_INTERRUPTED, "audio-focus-loss");
             }
         }
 
         @Override
+        public void onMediaItemTransition(@Nullable MediaItem mediaItem, @Player.MediaItemTransitionReason int reason) {
+            if (mediaItem == null) return;
+            if (sleepAtTrackEnd && reason == Player.MEDIA_ITEM_TRANSITION_REASON_AUTO && player != null) {
+                clearSleepTimerState();
+                player.pause();
+                persistCurrentPosition(false);
+                sendPlaybackEvent(ACTION_AUDIO_INTERRUPTED, "sleep-track-end");
+            } else {
+                persistCurrentPosition(false);
+            }
+        }
+
+        @Override
         public void onPlaybackStateChanged(@Player.State int playbackState) {
-            if (playbackState == Player.STATE_ENDED) sendPlaybackEvent(ACTION_AUDIO_ENDED, null);
+            if (playbackState == Player.STATE_ENDED) {
+                cancelSleepTimer();
+                persistCurrentPosition(true);
+                sendPlaybackEvent(ACTION_AUDIO_ENDED, null);
+            }
         }
     }
 
@@ -212,6 +366,8 @@ public final class ReadingAudioService extends MediaSessionService {
                     MediaSession.ConnectionResult.DEFAULT_SESSION_COMMANDS
                             .buildUpon()
                             .add(PREPARE_AUDIO_COMMAND)
+                            .add(SET_SLEEP_TIMER_COMMAND)
+                            .add(CANCEL_SLEEP_TIMER_COMMAND)
                             .build();
             return Futures.immediateFuture(
                     new MediaSession.ConnectionResult.AcceptedResultBuilder(session, controller)
@@ -227,8 +383,25 @@ public final class ReadingAudioService extends MediaSessionService {
                 SessionCommand customCommand,
                 Bundle args
         ) {
-            if (!getPackageName().equals(controller.getPackageName())
-                    || !COMMAND_PREPARE_AUDIO.equals(customCommand.customAction)) {
+            if (!getPackageName().equals(controller.getPackageName())) {
+                return Futures.immediateFuture(new SessionResult(SessionResult.RESULT_ERROR_PERMISSION_DENIED));
+            }
+
+            if (COMMAND_CANCEL_SLEEP_TIMER.equals(customCommand.customAction)) {
+                cancelSleepTimer();
+                return Futures.immediateFuture(new SessionResult(SessionResult.RESULT_SUCCESS));
+            }
+
+            if (COMMAND_SET_SLEEP_TIMER.equals(customCommand.customAction)) {
+                int minutes = Math.max(0, args.getInt(EXTRA_SLEEP_MINUTES, 0));
+                boolean atTrackEnd = args.getBoolean(EXTRA_SLEEP_AT_TRACK_END, false);
+                int result = setSleepTimer(minutes, atTrackEnd)
+                        ? SessionResult.RESULT_SUCCESS
+                        : SessionResult.RESULT_ERROR_BAD_VALUE;
+                return Futures.immediateFuture(new SessionResult(result));
+            }
+
+            if (!COMMAND_PREPARE_AUDIO.equals(customCommand.customAction)) {
                 return Futures.immediateFuture(new SessionResult(SessionResult.RESULT_ERROR_PERMISSION_DENIED));
             }
 

@@ -2,6 +2,10 @@ import { createReadingAudioController, READING_AUDIO_SLEEP_MINUTES } from '../co
 import { resolveReadingSettings } from '../core/reading-settings.mjs';
 import { createReadingMarksPanel } from './reading-marks.mjs';
 
+const AUDIO_TIMER_CHOICES = READING_AUDIO_SLEEP_MINUTES.length
+  ? READING_AUDIO_SLEEP_MINUTES
+  : [15, 30, 45, 60];
+
 function format(template, values = {}) {
   return Object.entries(values).reduce(
     (text, [key, value]) => text.replaceAll(`{${key}}`, String(value)),
@@ -88,7 +92,7 @@ export function createReadingAudioView({ root, panelsRoot = root, client, book, 
   timer.id = `reading-audio-timer-${book.id}`;
   timerLabel.htmlFor = timer.id;
   option(timer, '', t('readingAudio.timerOff'));
-  for (const minutes of READING_AUDIO_SLEEP_MINUTES) {
+  for (const minutes of AUDIO_TIMER_CHOICES) {
     option(timer, minutes, format(t('readingAudio.timerMinutes'), { minutes }));
   }
   option(timer, 'track-end', t('readingAudio.trackEnd'));
@@ -126,7 +130,7 @@ export function createReadingAudioView({ root, panelsRoot = root, client, book, 
   }
 
   function renderState(snapshot = {}) {
-    if (destroyed) return;
+    if (destroyed || !snapshot) return;
     const positionMs = Math.max(0, Number(snapshot.positionMs) || 0);
     const durationMs = Math.max(0, Number(snapshot.durationMs) || 0);
     position.max = String(Math.max(durationMs, positionMs, 0));
@@ -143,19 +147,9 @@ export function createReadingAudioView({ root, panelsRoot = root, client, book, 
     return client.setReadingSetting({ scope: 'book', bookId: book.id, key, value });
   }
 
-  controller = createReadingAudioController({
-    client,
-    book,
-    initialPosition: {
-      trackIndex: book.mediaTrackIndex,
-      positionMs: book.mediaPositionMs
-    },
-    settings: effectiveSettings,
-    onPosition: renderState
-  });
-
   playButton.addEventListener('click', () => {
     void (async () => {
+      if (!controller) return;
       const snapshot = controller.getState();
       const next = snapshot.playing ? await controller.pause() : await controller.play();
       if (next) renderState(next);
@@ -163,19 +157,20 @@ export function createReadingAudioView({ root, panelsRoot = root, client, book, 
   });
 
   rewindButton.addEventListener('click', () => {
-    void controller.skip(-1).then(renderState);
+    if (controller) void controller.skip(-1).then(renderState);
   });
 
   forwardButton.addEventListener('click', () => {
-    void controller.skip(1).then(renderState);
+    if (controller) void controller.skip(1).then(renderState);
   });
 
   position.addEventListener('change', () => {
-    void controller.seek(Number(position.value) || 0).then(renderState);
+    if (controller) void controller.seek(Number(position.value) || 0).then(renderState);
   });
 
   speed.addEventListener('change', () => {
     void (async () => {
+      if (!controller) return;
       const selected = Number(speed.value) || 1;
       await saveBookSetting('audio.speed', selected);
       const next = await controller.setSpeed(selected);
@@ -184,6 +179,7 @@ export function createReadingAudioView({ root, panelsRoot = root, client, book, 
   });
 
   timer.addEventListener('change', () => {
+    if (!controller) return;
     const value = timer.value === 'track-end' ? 'track-end' : Number(timer.value) || 0;
     void controller.setSleepTimer(value).then(enabled => {
       status.textContent = enabled
@@ -199,6 +195,17 @@ export function createReadingAudioView({ root, panelsRoot = root, client, book, 
     effectiveSettings = resolveReadingSettings(stored.global, stored.book).effective;
     applySkipLabels();
     speed.value = String(effectiveSettings['audio.speed']);
+
+    controller = createReadingAudioController({
+      client,
+      book,
+      initialPosition: {
+        trackIndex: book.mediaTrackIndex,
+        positionMs: book.mediaPositionMs
+      },
+      settings: effectiveSettings,
+      onPosition: renderState
+    });
 
     marksPanel = createReadingMarksPanel({
       root: panelsRoot,
@@ -241,13 +248,13 @@ export function createReadingAudioView({ root, panelsRoot = root, client, book, 
     destroyed = true;
     marksPanel?.destroy();
     marksPanel = null;
-    await controller.destroy();
+    if (controller) await controller.destroy();
   }
 
   return {
     prepare,
     destroy,
     element: section,
-    getState: () => controller.getState()
+    getState: () => controller?.getState?.() || null
   };
 }

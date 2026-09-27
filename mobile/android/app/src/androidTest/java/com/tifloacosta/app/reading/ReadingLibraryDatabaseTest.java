@@ -117,12 +117,42 @@ public class ReadingLibraryDatabaseTest {
         assertEquals(7, updated.getBlockIndex());
         assertEquals(3, updated.getUnitIndex());
         assertEquals("frase cercana", updated.getAnchorText());
+        assertEquals(0, updated.getMediaTrackIndex());
+        assertEquals(0L, updated.getMediaPositionMs());
         assertEquals(75.5, updated.getPercent(), 0.001);
         assertEquals(500L, updated.getLastReadAt().longValue());
     }
 
     @Test
-    public void v1DatabaseMigratesToV2WithoutLosingBookOrProgress() {
+    public void exactAudioProgressAndMarksPreserveLongMillisecondPositions() {
+        database.insert(book("audio", "sha-audio", "Audio", 10, null, "not-read", 0, 0));
+
+        database.updateProgress("audio", 0, 0, null, 3, 5000000000L, 42.5, "in-reading", 700L);
+        database.insertMark(new ReadingMarkRecord(
+                "audio-mark",
+                "audio",
+                "bookmark",
+                0,
+                0,
+                3,
+                5000000000L,
+                null,
+                "Pista 4, 1388:53",
+                710L
+        ));
+
+        ReadingBookRecord updated = database.findById("audio");
+        assertEquals(3, updated.getMediaTrackIndex());
+        assertEquals(5000000000L, updated.getMediaPositionMs());
+        assertEquals(42.5, updated.getPercent(), 0.001);
+
+        ReadingMarkRecord mark = database.listMarks("audio", null).get(0);
+        assertEquals(3, mark.getMediaTrackIndex());
+        assertEquals(5000000000L, mark.getMediaPositionMs());
+    }
+
+    @Test
+    public void v1DatabaseMigratesToV3WithoutLosingBookOrProgress() {
         database.close();
         context.deleteDatabase(ReadingLibraryDatabase.DATABASE_NAME);
 
@@ -168,13 +198,111 @@ public class ReadingLibraryDatabaseTest {
         ReadingBookRecord migrated = database.findById("legacy");
 
         assertNotNull(migrated);
-        assertEquals(2, database.getReadableDatabase().getVersion());
+        assertEquals(3, database.getReadableDatabase().getVersion());
         assertEquals("Libro anterior", migrated.getTitle());
         assertEquals(9, migrated.getBlockIndex());
         assertEquals(0, migrated.getUnitIndex());
         assertNull(migrated.getAnchorText());
+        assertEquals(0, migrated.getMediaTrackIndex());
+        assertEquals(0L, migrated.getMediaPositionMs());
         assertEquals(44.5, migrated.getPercent(), 0.001);
         assertEquals("in-reading", migrated.getState());
+    }
+
+    @Test
+    public void v2DatabaseMigratesToV3WithoutLosingBookMarksOrProgress() {
+        database.close();
+        context.deleteDatabase(ReadingLibraryDatabase.DATABASE_NAME);
+
+        SQLiteDatabase legacy = context.openOrCreateDatabase(
+                ReadingLibraryDatabase.DATABASE_NAME,
+                Context.MODE_PRIVATE,
+                null
+        );
+        legacy.execSQL(
+                "CREATE TABLE books (" +
+                        "id TEXT PRIMARY KEY," +
+                        "sha256 TEXT NOT NULL UNIQUE," +
+                        "title TEXT NOT NULL," +
+                        "format TEXT NOT NULL," +
+                        "mime_type TEXT NOT NULL," +
+                        "relative_path TEXT NOT NULL," +
+                        "size_bytes INTEGER NOT NULL," +
+                        "imported_at INTEGER NOT NULL," +
+                        "last_read_at INTEGER," +
+                        "state TEXT NOT NULL DEFAULT 'not-read' CHECK(state IN ('not-read','in-reading','read'))," +
+                        "block_index INTEGER NOT NULL DEFAULT 0," +
+                        "unit_index INTEGER NOT NULL DEFAULT 0," +
+                        "anchor_text TEXT," +
+                        "percent REAL NOT NULL DEFAULT 0" +
+                        ")"
+        );
+        legacy.execSQL(
+                "CREATE TABLE marks (" +
+                        "id TEXT PRIMARY KEY," +
+                        "book_id TEXT NOT NULL," +
+                        "type TEXT NOT NULL," +
+                        "block_index INTEGER NOT NULL," +
+                        "unit_index INTEGER NOT NULL," +
+                        "excerpt TEXT," +
+                        "reference TEXT," +
+                        "created_at INTEGER NOT NULL" +
+                        ")"
+        );
+        legacy.execSQL(
+                "CREATE TABLE reading_settings (" +
+                        "scope TEXT NOT NULL," +
+                        "book_id TEXT NOT NULL DEFAULT ''," +
+                        "key TEXT NOT NULL," +
+                        "value TEXT NOT NULL," +
+                        "updated_at INTEGER NOT NULL," +
+                        "PRIMARY KEY(scope, book_id, key)" +
+                        ")"
+        );
+
+        ContentValues bookValues = new ContentValues();
+        bookValues.put("id", "v2");
+        bookValues.put("sha256", "v2-sha");
+        bookValues.put("title", "Libro v2");
+        bookValues.put("format", "txt");
+        bookValues.put("mime_type", "text/plain");
+        bookValues.put("relative_path", "items/v2/source.txt");
+        bookValues.put("size_bytes", 400L);
+        bookValues.put("imported_at", 30L);
+        bookValues.put("last_read_at", 40L);
+        bookValues.put("state", "in-reading");
+        bookValues.put("block_index", 6);
+        bookValues.put("unit_index", 2);
+        bookValues.put("anchor_text", "ancla v2");
+        bookValues.put("percent", 62.0);
+        legacy.insertOrThrow("books", null, bookValues);
+
+        ContentValues markValues = new ContentValues();
+        markValues.put("id", "m-v2");
+        markValues.put("book_id", "v2");
+        markValues.put("type", "bookmark");
+        markValues.put("block_index", 6);
+        markValues.put("unit_index", 2);
+        markValues.put("excerpt", "marca v2");
+        markValues.put("reference", "Párrafo 7");
+        markValues.put("created_at", 41L);
+        legacy.insertOrThrow("marks", null, markValues);
+        legacy.setVersion(2);
+        legacy.close();
+
+        database = new ReadingLibraryDatabase(context);
+        ReadingBookRecord migrated = database.findById("v2");
+        ReadingMarkRecord mark = database.listMarks("v2", null).get(0);
+
+        assertEquals(3, database.getReadableDatabase().getVersion());
+        assertEquals(6, migrated.getBlockIndex());
+        assertEquals(2, migrated.getUnitIndex());
+        assertEquals("ancla v2", migrated.getAnchorText());
+        assertEquals(0, migrated.getMediaTrackIndex());
+        assertEquals(0L, migrated.getMediaPositionMs());
+        assertEquals("m-v2", mark.getId());
+        assertEquals(0, mark.getMediaTrackIndex());
+        assertEquals(0L, mark.getMediaPositionMs());
     }
 
     @Test

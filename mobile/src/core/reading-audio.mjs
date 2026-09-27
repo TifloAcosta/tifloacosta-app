@@ -174,7 +174,7 @@ export function createReadingAudioController({
 
   async function prepare() {
     await listenersReady;
-    if (destroyed || !bookId || !relativePath || !client?.prepareAudio) return null;
+    if (destroyed || !bookId || !client?.prepareAudio) return null;
     const prepared = await client.prepareAudio({
       bookId,
       relativePath,

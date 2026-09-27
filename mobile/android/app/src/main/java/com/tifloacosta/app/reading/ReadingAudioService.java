@@ -57,6 +57,11 @@ public final class ReadingAudioService extends MediaSessionService {
     public static final SessionCommand CANCEL_SLEEP_TIMER_COMMAND =
             new SessionCommand(COMMAND_CANCEL_SLEEP_TIMER, Bundle.EMPTY);
 
+    private ExoPlayer player;
+    private MediaSession mediaSession;
+    private ReadingLibraryDatabase database;
+    private boolean sleepAtTrackEnd;
+
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
     private final Runnable positionPersistenceTicker = new Runnable() {
         @Override
@@ -73,11 +78,6 @@ public final class ReadingAudioService extends MediaSessionService {
         clearSleepTimerState();
         sendPlaybackEvent(ACTION_AUDIO_INTERRUPTED, "sleep-timer");
     };
-
-    private ExoPlayer player;
-    private MediaSession mediaSession;
-    private ReadingLibraryDatabase database;
-    private boolean sleepAtTrackEnd;
 
     @Override
     public void onCreate() {

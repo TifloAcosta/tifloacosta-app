@@ -1,5 +1,12 @@
 const MARK_TYPES = ['bookmark', 'important', 'review', 'quote'];
 
+function mediaPosition(value = {}) {
+  return {
+    mediaTrackIndex: Math.max(0, Math.trunc(Number(value?.mediaTrackIndex) || 0)),
+    mediaPositionMs: Math.max(0, Math.trunc(Number(value?.mediaPositionMs) || 0))
+  };
+}
+
 export function createReadingMarksPanel({ root, client, bookId, t, getPosition, getExcerpt, getReference, onJump }) {
   const section = document.createElement('section');
   section.className = 'reading-panel reading-marks-panel';
@@ -70,7 +77,12 @@ export function createReadingMarksPanel({ root, client, bookId, t, getPosition, 
       const jump = document.createElement('button');
       jump.type = 'button';
       jump.textContent = t('readingBook.jumpToMark');
-      jump.addEventListener('click', () => onJump?.({ blockIndex: mark.blockIndex, unitIndex: mark.unitIndex }));
+      jump.addEventListener('click', () => onJump?.({
+        blockIndex: mark.blockIndex,
+        unitIndex: mark.unitIndex,
+        mediaTrackIndex: mark.mediaTrackIndex,
+        mediaPositionMs: mark.mediaPositionMs
+      }));
 
       const remove = document.createElement('button');
       remove.type = 'button';
@@ -88,14 +100,17 @@ export function createReadingMarksPanel({ root, client, bookId, t, getPosition, 
 
   addButton.addEventListener('click', () => {
     void (async () => {
-      const position = getPosition();
+      const position = getPosition() || {};
+      const media = mediaPosition(position);
       const mark = await client.addMark({
         bookId,
         type: typeSelect.value,
-        blockIndex: position.blockIndex,
-        unitIndex: position.unitIndex,
+        blockIndex: Math.max(0, Math.trunc(Number(position.blockIndex) || 0)),
+        unitIndex: Math.max(0, Math.trunc(Number(position.unitIndex) || 0)),
+        mediaTrackIndex: media.mediaTrackIndex,
+        mediaPositionMs: media.mediaPositionMs,
         excerpt: getExcerpt?.(position) || '',
-        reference: getReference?.(position) || `${position.blockIndex + 1}:${position.unitIndex + 1}`
+        reference: getReference?.(position) || `${Math.max(0, Math.trunc(Number(position.blockIndex) || 0)) + 1}:${Math.max(0, Math.trunc(Number(position.unitIndex) || 0)) + 1}`
       });
       status.textContent = mark ? t('readingBook.markAdded') : t('readingBook.markFailed');
       if (mark) await loadMarks();

@@ -29,7 +29,7 @@ function option(select, value, label) {
   select.append(item);
 }
 
-export function createReadingAudioView({ root, panelsRoot = root, client, book, t }) {
+export function createReadingAudioView({ root, panelsRoot = root, client, book, tracks = [], t }) {
   const section = document.createElement('section');
   section.className = 'reading-audio';
   section.setAttribute('aria-label', t('readingAudio.controls'));
@@ -82,9 +82,7 @@ export function createReadingAudioView({ root, panelsRoot = root, client, book, 
   const speed = document.createElement('select');
   speed.id = `reading-audio-speed-${book.id}`;
   speedLabel.htmlFor = speed.id;
-  for (const value of [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.5, 3]) {
-    option(speed, value, `${value}×`);
-  }
+  for (const value of [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.5, 3]) option(speed, value, `${value}×`);
 
   const timerLabel = document.createElement('label');
   timerLabel.textContent = t('readingAudio.timer');
@@ -121,6 +119,7 @@ export function createReadingAudioView({ root, panelsRoot = root, client, book, 
   let destroyed = false;
   let marksPanel = null;
   let controller = null;
+  let audioTracks = Array.isArray(tracks) ? tracks : [];
   let effectiveSettings = resolveReadingSettings().effective;
 
   function applySkipLabels() {
@@ -133,9 +132,13 @@ export function createReadingAudioView({ root, panelsRoot = root, client, book, 
     if (destroyed || !snapshot) return;
     const positionMs = Math.max(0, Number(snapshot.positionMs) || 0);
     const durationMs = Math.max(0, Number(snapshot.durationMs) || 0);
+    const trackIndex = Math.max(0, Number(snapshot.trackIndex) || 0);
+    const trackCount = Math.max(0, Number(snapshot.trackCount) || audioTracks.length);
     position.max = String(Math.max(durationMs, positionMs, 0));
     position.value = String(positionMs);
     position.disabled = durationMs <= 0;
+    previousTrackButton.disabled = trackCount <= 1 || trackIndex <= 0;
+    nextTrackButton.disabled = trackCount <= 1 || trackIndex >= trackCount - 1;
     playButton.textContent = snapshot.playing ? t('readingAudio.pause') : t('readingAudio.play');
     status.textContent = format(t('readingAudio.positionStatus'), {
       elapsed: clock(positionMs),
@@ -164,6 +167,14 @@ export function createReadingAudioView({ root, panelsRoot = root, client, book, 
     if (controller) void controller.skip(1).then(renderState);
   });
 
+  previousTrackButton.addEventListener('click', () => {
+    if (controller) void controller.previousTrack().then(renderState);
+  });
+
+  nextTrackButton.addEventListener('click', () => {
+    if (controller) void controller.nextTrack().then(renderState);
+  });
+
   position.addEventListener('change', () => {
     if (controller) void controller.seek(Number(position.value) || 0).then(renderState);
   });
@@ -182,16 +193,43 @@ export function createReadingAudioView({ root, panelsRoot = root, client, book, 
     if (!controller) return;
     const value = timer.value === 'track-end' ? 'track-end' : Number(timer.value) || 0;
     void controller.setSleepTimer(value).then(enabled => {
-      status.textContent = enabled
-        ? t('readingAudio.timerSet')
-        : t('readingAudio.timerOffStatus');
+      status.textContent = enabled ? t('readingAudio.timerSet') : t('readingAudio.timerOffStatus');
     });
   });
 
   marksButton.addEventListener('click', () => marksPanel?.open());
 
+  async function jumpToAudioMark(value = {}) {
+    if (!controller) return;
+    await controller.pause();
+    const targetTrack = Math.max(0, Number(value.mediaTrackIndex) || 0);
+    let currentTrack = controller.getState().trackIndex;
+    const safetyLimit = Math.max(audioTracks.length, controller.getState().trackCount, 1) + 1;
+    let moves = 0;
+    while (currentTrack < targetTrack && moves < safetyLimit) {
+      await controller.nextTrack();
+      const next = controller.getState().trackIndex;
+      if (next === currentTrack) break;
+      currentTrack = next;
+      moves += 1;
+    }
+    while (currentTrack > targetTrack && moves < safetyLimit * 2) {
+      await controller.previousTrack();
+      const next = controller.getState().trackIndex;
+      if (next === currentTrack) break;
+      currentTrack = next;
+      moves += 1;
+    }
+    const next = await controller.seek(value.mediaPositionMs);
+    if (next) renderState(next);
+  }
+
   async function prepare() {
-    const stored = await client.getReadingSettings(book.id);
+    const [stored, loadedTracks] = await Promise.all([
+      client.getReadingSettings(book.id),
+      audioTracks.length ? Promise.resolve(audioTracks) : client.listAudioTracks(book.id)
+    ]);
+    audioTracks = Array.isArray(loadedTracks) ? loadedTracks : [];
     effectiveSettings = resolveReadingSettings(stored.global, stored.book).effective;
     applySkipLabels();
     speed.value = String(effectiveSettings['audio.speed']);
@@ -199,6 +237,7 @@ export function createReadingAudioView({ root, panelsRoot = root, client, book, 
     controller = createReadingAudioController({
       client,
       book,
+      tracks: audioTracks,
       initialPosition: {
         trackIndex: book.mediaTrackIndex,
         positionMs: book.mediaPositionMs
@@ -222,7 +261,7 @@ export function createReadingAudioView({ root, panelsRoot = root, client, book, 
         time: clock(value?.mediaPositionMs)
       }),
       onJump: value => {
-        void controller.seek(value.mediaPositionMs).then(renderState);
+        void jumpToAudioMark(value);
       }
     });
 

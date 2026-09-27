@@ -39,6 +39,15 @@ public interface ReadingFileStore {
         return moveTempToItem(tempName, id, format);
     }
 
+    default String moveTempToAudioTrack(
+            String tempName,
+            String id,
+            int trackIndex,
+            String sourceExtension
+    ) throws IOException {
+        return moveTempToItem(tempName, id, "audio", sourceExtension);
+    }
+
     void deleteTemp(String tempName);
 
     void cleanupStaleTemps();

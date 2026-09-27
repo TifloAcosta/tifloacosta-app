@@ -38,8 +38,11 @@ export function createReadingLibraryPlugin(
     return safeCall(plugin, 'listBooks', options, { items: [], total: 0, page, pageSize, pages: 0 });
   }
 
-  async function openBook(id) {
-    return safeCall(plugin, 'openBook', { id: String(id ?? '') }, null);
+  async function openBook(id, options = {}) {
+    return safeCall(plugin, 'openBook', {
+      id: String(id ?? ''),
+      password: String(options?.password ?? '')
+    }, null);
   }
 
   async function saveProgress(progress = {}) {

@@ -31,6 +31,7 @@ import { renderActualidad } from './screens/actualidad.mjs';
 import { renderSearch } from './screens/search.mjs';
 import { renderLibrary } from './screens/library.mjs';
 import { renderReadingLibrary } from './screens/reading-library.mjs';
+import { renderReadingBook } from './screens/reading-book.mjs';
 import { renderDownloads } from './screens/downloads.mjs';
 import { renderDownloadLink } from './screens/download-link.mjs';
 import { renderSoundSearch } from './screens/sound-search.mjs';
@@ -63,6 +64,7 @@ let pendingDirectVideo = null;
 let pendingDownloadUrl = '';
 let pendingSearchQuery = '';
 let pendingReadingImportBatch = null;
+let pendingReadingBookId = '';
 let notificationService;
 
 function safeStorage() {
@@ -352,6 +354,14 @@ function openReadingLibraryBatch(batch) {
   return true;
 }
 
+function openReadingBook(bookId) {
+  const cleanId = String(bookId || '').trim();
+  if (!cleanId) return false;
+  pendingReadingBookId = cleanId;
+  router.navigate('reading-book');
+  return true;
+}
+
 async function installReadingDocumentReceiver() {
   const initial = await readingClient.consumeInitialSharedDocuments();
   openReadingLibraryBatch(initial);
@@ -452,13 +462,22 @@ function render(route) {
     }
     case 'library': renderLibrary(context); break;
     case 'reading-library': {
+      pendingReadingBookId = '';
       const initialImportBatch = pendingReadingImportBatch;
       pendingReadingImportBatch = null;
       renderReadingLibrary({
         ...context,
         client: readingClient,
         initialImportBatch,
-        onOpenBook: () => {}
+        onOpenBook: openReadingBook
+      });
+      break;
+    }
+    case 'reading-book': {
+      renderReadingBook({
+        ...context,
+        client: readingClient,
+        bookId: pendingReadingBookId
       });
       break;
     }

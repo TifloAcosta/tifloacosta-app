@@ -55,6 +55,8 @@ test('reading library client applies paged defaults and normalizes book fields',
     state: 'in-reading',
     percent: 25.5,
     blockIndex: 3,
+    unitIndex: 0,
+    anchorText: '',
     importedAt: 1000,
     lastReadAt: 2000,
     sizeBytes: 4096

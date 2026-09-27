@@ -1,9 +1,7 @@
 package com.tifloacosta.app.reading;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -11,6 +9,7 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -375,18 +374,28 @@ public class ReadingImportServiceTest {
         }
 
         @Override
-        public boolean tempHasNonWhitespaceText(String tempName) {
+        public boolean tempHasNonWhitespaceText(String tempName) throws IOException {
+            return tempHasReadableText(tempName, "txt");
+        }
+
+        @Override
+        public boolean tempHasReadableText(String tempName, String format) throws IOException {
             byte[] bytes = temps.get(tempName).toByteArray();
-            int start = bytes.length >= 3 &&
-                    (bytes[0] & 0xff) == 0xef &&
-                    (bytes[1] & 0xff) == 0xbb &&
-                    (bytes[2] & 0xff) == 0xbf ? 3 : 0;
-            String text = new String(bytes, start, bytes.length - start, StandardCharsets.UTF_8);
-            return !text.trim().isEmpty();
+            try (InputStreamReader reader = new InputStreamReader(
+                    new ByteArrayInputStream(bytes),
+                    StandardCharsets.UTF_8
+            )) {
+                return ReadingContentValidator.hasReadableText(reader, format);
+            }
         }
 
         @Override
         public String moveTempToItem(String tempName, String id) throws IOException {
+            return moveTempToItem(tempName, id, "txt");
+        }
+
+        @Override
+        public String moveTempToItem(String tempName, String id, String format) throws IOException {
             if (failNextMove) {
                 failNextMove = false;
                 throw new IOException("move failed");
@@ -394,7 +403,8 @@ public class ReadingImportServiceTest {
             ByteArrayOutputStream output = temps.remove(tempName);
             byte[] bytes = output.toByteArray();
             finalItems.put(id, bytes);
-            return "reading-library/items/" + id + "/source.txt";
+            String extension = "html".equals(format) ? "html" : "txt";
+            return "items/" + id + "/source." + extension;
         }
 
         @Override

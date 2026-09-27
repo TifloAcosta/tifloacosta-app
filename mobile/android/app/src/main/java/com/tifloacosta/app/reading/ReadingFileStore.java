@@ -8,9 +8,17 @@ public interface ReadingFileStore {
 
     OutputStream openTemp(String tempName) throws IOException;
 
-    boolean tempHasReadableText(String tempName, String format) throws IOException;
+    boolean tempHasNonWhitespaceText(String tempName) throws IOException;
 
-    String moveTempToItem(String tempName, String id, String format) throws IOException;
+    default boolean tempHasReadableText(String tempName, String format) throws IOException {
+        return tempHasNonWhitespaceText(tempName);
+    }
+
+    String moveTempToItem(String tempName, String id) throws IOException;
+
+    default String moveTempToItem(String tempName, String id, String format) throws IOException {
+        return moveTempToItem(tempName, id);
+    }
 
     void deleteTemp(String tempName);
 

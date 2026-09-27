@@ -3,7 +3,7 @@ package com.tifloacosta.app.reading;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.fail;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteConstraintException;
@@ -70,9 +70,13 @@ public class ReadingLibraryDatabaseTest {
 
         assertEquals("Alpha", database.findById("a").getTitle());
         assertEquals("a", database.findBySha256("sha-a").getId());
-        assertThrows(SQLiteConstraintException.class, () -> database.insert(
-                book("b", "sha-a", "Duplicate bytes", 20, null, "not-read", 0, 0)
-        ));
+
+        try {
+            database.insert(book("b", "sha-a", "Duplicate bytes", 20, null, "not-read", 0, 0));
+            fail("Expected duplicate SHA-256 to violate the database uniqueness constraint");
+        } catch (SQLiteConstraintException expected) {
+            // Expected: duplicate source bytes must not create a second library entry.
+        }
     }
 
     @Test

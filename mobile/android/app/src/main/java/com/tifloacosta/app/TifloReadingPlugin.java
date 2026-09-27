@@ -53,6 +53,8 @@ public class TifloReadingPlugin extends Plugin {
     private static final String[] SUPPORTED_READING_SETTING_KEYS = {
             "speech.rate",
             "speech.voice",
+            "audio.speed",
+            "audio.skipSeconds",
             "visual.textSize",
             "visual.fontFamily",
             "visual.fontWeight",

@@ -30,7 +30,10 @@ test('reading integration keeps TXT and HTML import open and resume on one seman
   assert.match(screen, /parseHtmlDocument/);
   assert.match(screen, /parseTextDocument/);
   assert.match(screen, /initialPosition:\s*\{[\s\S]*blockIndex:[\s\S]*unitIndex:/);
-  assert.match(screen, /client\.saveProgress\(\{[\s\S]*blockIndex:[\s\S]*unitIndex:[\s\S]*anchorText:/);
+  assert.match(screen, /client\.saveProgress\(\{/);
+  assert.match(screen, /blockIndex:\s*normalized\.blockIndex/);
+  assert.match(screen, /unitIndex:\s*normalized\.unitIndex/);
+  assert.match(screen, /\banchorText\s*,/);
 });
 
 test('reading integration never auto-starts TTS and search preview stays non-destructive until continued', async () => {

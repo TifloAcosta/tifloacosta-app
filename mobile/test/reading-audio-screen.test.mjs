@@ -71,7 +71,8 @@ test('audio marks store and jump to exact track plus milliseconds without starti
 
   assert.match(screen, /mediaTrackIndex/);
   assert.match(screen, /mediaPositionMs/);
-  assert.match(screen, /onJump[\s\S]*controller\.seek\(/);
+  assert.match(screen, /onJump[\s\S]*(?:controller\.seek\(|jumpToAudioMark\()/);
+  assert.match(screen, /jumpToAudioMark[\s\S]*controller\.pause\(\)/);
   assert.doesNotMatch(screen, /onJump[\s\S]{0,300}controller\.play\(/, 'Jumping to an audio mark must not start playback');
 
   assert.match(marks, /mediaTrackIndex/);

@@ -1,6 +1,6 @@
 import { parsePlainText } from '../core/reading-text-model.mjs';
 import { createReadingSession } from '../core/reading-session.mjs';
-import { addScreenHeader, clearScreen } from './shared.mjs';
+import { clearScreen } from './shared.mjs';
 
 function format(template, values = {}) {
   return Object.entries(values).reduce(
@@ -11,11 +11,12 @@ function format(template, values = {}) {
 
 export function renderReadingBook({ root, router, client, bookId, t }) {
   clearScreen(root);
-  addScreenHeader(root, {
-    router,
-    title: t('screen.readingLibrary'),
-    backLabel: t('nav.back')
-  });
+
+  const back = document.createElement('button');
+  back.type = 'button';
+  back.className = 'back-button';
+  back.textContent = t('readingBook.backToLibrary');
+  back.addEventListener('click', () => router.back());
 
   const heading = document.createElement('h1');
   heading.dataset.screenHeading = '';
@@ -49,7 +50,7 @@ export function renderReadingBook({ root, router, client, bookId, t }) {
   next.disabled = true;
 
   controls.append(previous, next);
-  root.append(heading, status, paragraph, controls);
+  root.append(back, heading, status, paragraph, controls);
 
   let session = null;
   let activeBook = null;
@@ -118,12 +119,7 @@ export function renderReadingBook({ root, router, client, bookId, t }) {
       heading.textContent = t('readingBook.errorHeading');
       status.textContent = t('readingBook.error');
       paragraph.textContent = '';
-      controls.replaceChildren();
-      const back = document.createElement('button');
-      back.type = 'button';
-      back.textContent = t('readingBook.backToLibrary');
-      back.addEventListener('click', () => router.back());
-      controls.append(back);
+      controls.hidden = true;
       return;
     }
 
@@ -135,12 +131,7 @@ export function renderReadingBook({ root, router, client, bookId, t }) {
     if (blockCount === 0) {
       status.textContent = t('readingBook.empty');
       paragraph.textContent = '';
-      controls.replaceChildren();
-      const back = document.createElement('button');
-      back.type = 'button';
-      back.textContent = t('readingBook.backToLibrary');
-      back.addEventListener('click', () => router.back());
-      controls.append(back);
+      controls.hidden = true;
       return;
     }
 

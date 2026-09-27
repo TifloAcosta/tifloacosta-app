@@ -1,4 +1,5 @@
 import { parseHtmlDocument } from '../core/reading-html-adapter.mjs';
+import { pageForPosition, parsePdfDocument, positionForPage } from '../core/reading-pdf-adapter.mjs';
 import { normalizeSemanticPosition, parseTextDocument } from '../core/reading-semantic-model.mjs';
 import { createReadingSpeechController } from '../core/reading-speech.mjs';
 import { createReadingMarksPanel } from './reading-marks.mjs';
@@ -174,9 +175,29 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
     visualButton
   );
 
+  const pdfPageNavigation = document.createElement('nav');
+  pdfPageNavigation.className = 'reading-library-pagination reading-pdf-pagination';
+  pdfPageNavigation.setAttribute('aria-label', t('readingBook.navigation'));
+  pdfPageNavigation.hidden = true;
+
+  const previousPage = document.createElement('button');
+  previousPage.type = 'button';
+  previousPage.textContent = t('readingLibrary.previousPage');
+
+  const pageStatus = document.createElement('span');
+  pageStatus.className = 'reading-library-page-status';
+  pageStatus.setAttribute('aria-live', 'polite');
+  pageStatus.setAttribute('aria-atomic', 'true');
+
+  const nextPage = document.createElement('button');
+  nextPage.type = 'button';
+  nextPage.textContent = t('readingLibrary.nextPage');
+
+  pdfPageNavigation.append(previousPage, pageStatus, nextPage);
+
   const panels = document.createElement('div');
   panels.className = 'reading-book-panels';
-  root.append(back, heading, status, controls, readerContainer, panels);
+  root.append(back, heading, status, controls, pdfPageNavigation, readerContainer, panels);
 
   let activeBook = null;
   let documentModel = null;
@@ -191,7 +212,40 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
     heading.textContent = t('readingBook.errorHeading');
     status.textContent = t('readingBook.error');
     controls.hidden = true;
+    pdfPageNavigation.hidden = true;
     readerContainer.replaceChildren();
+  }
+
+  function readablePdfPageFrom(position, direction) {
+    if (activeBook?.format !== 'pdf' || !documentModel) return null;
+    const currentPage = pageForPosition(documentModel, position);
+    const totalPages = Math.max(0, Number(documentModel.pageCount) || 0);
+    if (!currentPage || !totalPages) return null;
+
+    for (
+      let page = currentPage + direction;
+      page >= 1 && page <= totalPages;
+      page += direction
+    ) {
+      const target = positionForPage(documentModel, page);
+      if (target) return { page, position: target };
+    }
+    return null;
+  }
+
+  function renderPdfPageStatus(position = currentPosition) {
+    if (activeBook?.format !== 'pdf' || !documentModel) {
+      pdfPageNavigation.hidden = true;
+      return;
+    }
+
+    pdfPageNavigation.hidden = false;
+    const currentPage = pageForPosition(documentModel, currentPosition);
+    const displayPage = pageForPosition(documentModel, position) || currentPage || 1;
+    const pages = Math.max(1, Number(documentModel.pageCount) || 1);
+    pageStatus.textContent = format(t('readingLibrary.pageStatus'), { page: displayPage, pages });
+    previousPage.disabled = !readablePdfPageFrom(position, -1);
+    nextPage.disabled = !readablePdfPageFrom(position, 1);
   }
 
   function renderSemanticPosition(position, { focus = false, announce = true, commit = true } = {}) {
@@ -211,6 +265,7 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
     previous.disabled = normalized.blockIndex === 0 && normalized.unitIndex === 0;
     next.disabled = normalized.blockIndex === documentModel.blocks.length - 1
       && normalized.unitIndex >= blockUnits - 1;
+    renderPdfPageStatus(normalized);
     if (announce) {
       status.textContent = format(t('readingBook.position'), {
         block: normalized.blockIndex + 1,
@@ -255,6 +310,12 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
     await moveToPosition(target);
   }
 
+  async function navigatePdfPage(direction) {
+    const target = readablePdfPageFrom(currentPosition, direction);
+    if (!target) return;
+    await moveToPosition(positionForPage(documentModel, target.page) || target.position);
+  }
+
   async function startSpeechFromUserAction() {
     if (!speech) return false;
     return speech.play();
@@ -262,6 +323,8 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
 
   previous.addEventListener('click', () => { void navigateSemantic('previous'); });
   next.addEventListener('click', () => { void navigateSemantic('next'); });
+  previousPage.addEventListener('click', () => { void navigatePdfPage(-1); });
+  nextPage.addEventListener('click', () => { void navigatePdfPage(1); });
   navigationButton.addEventListener('click', () => readerContainer.focus());
 
   playButton.addEventListener('click', () => {
@@ -311,13 +374,16 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
 
     activeBook = opened.book;
     heading.textContent = activeBook.title || t('readingLibrary.untitled');
-    documentModel = activeBook.format === 'html'
-      ? parseHtmlDocument(opened.content, { title: activeBook.title })
-      : parseTextDocument(opened.content, { title: activeBook.title });
+    documentModel = activeBook.format === 'pdf'
+      ? parsePdfDocument(opened.pdf)
+      : activeBook.format === 'html'
+        ? parseHtmlDocument(opened.content, { title: activeBook.title })
+        : parseTextDocument(opened.content, { title: activeBook.title });
 
     if (!documentModel.blocks.length) {
       status.textContent = t('readingBook.empty');
       controls.hidden = true;
+      pdfPageNavigation.hidden = true;
       readerContainer.replaceChildren();
       return;
     }

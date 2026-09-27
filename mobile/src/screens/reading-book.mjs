@@ -255,6 +255,11 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
     await moveToPosition(target);
   }
 
+  async function startSpeechFromUserAction() {
+    if (!speech) return false;
+    return speech.play();
+  }
+
   previous.addEventListener('click', () => { void navigateSemantic('previous'); });
   next.addEventListener('click', () => { void navigateSemantic('next'); });
   navigationButton.addEventListener('click', () => readerContainer.focus());
@@ -267,7 +272,7 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
         await speech.pause();
         playButton.textContent = t('readingBook.play');
       } else {
-        const started = await speech.play();
+        const started = await startSpeechFromUserAction();
         playButton.textContent = started ? t('readingBook.pause') : t('readingBook.play');
       }
     })();
@@ -287,7 +292,7 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
     searchPanel?.destroy();
     marksPanel?.destroy();
     settingsPanel?.destroy();
-    void speech?.destroy();
+    if (speech) void speech.destroy();
   });
 
   void (async () => {

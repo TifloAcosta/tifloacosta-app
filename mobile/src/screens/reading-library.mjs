@@ -21,6 +21,12 @@ function batchHasResults(batch) {
 
 function importSummary(batch, t) {
   if (!batchHasResults(batch)) return '';
+  if (batch.rejected?.some(item => item?.reason === 'ambiguous-audio-order')) {
+    return t('readingLibrary.audioOrderAmbiguous');
+  }
+  if (batch.rejected?.some(item => item?.reason === 'duplicate-audio-track')) {
+    return t('readingLibrary.audioDuplicateTrack');
+  }
   return format(t('readingLibrary.importSummary'), {
     imported: batch.imported?.length || 0,
     duplicates: batch.duplicates?.length || 0,
@@ -71,22 +77,28 @@ export function renderReadingLibrary({
 
   const status = document.createElement('p');
   status.className = 'reading-library-status';
+  status.setAttribute('role', 'status');
   status.setAttribute('aria-live', 'polite');
   status.setAttribute('aria-atomic', 'true');
   if (batchHasResults(currentImportBatch)) status.textContent = importSummary(currentImportBatch, t);
+
+  const audioChoiceHost = document.createElement('section');
+  audioChoiceHost.className = 'reading-library-audio-choice';
+  audioChoiceHost.hidden = true;
 
   const importButton = makeButton(t('readingLibrary.import'), async () => {
     importButton.disabled = true;
     const batch = await client.pickDocuments();
     importButton.disabled = false;
     if (batch?.cancelled) return;
-    currentImportBatch = batch;
-    status.textContent = importSummary(batch, t);
-    page = 1;
-    await refresh();
+    if (batch?.audioChoiceRequired) {
+      renderAudioChoice(batch);
+      return;
+    }
+    await applyImportBatch(batch);
   });
   importButton.id = 'reading-library-import';
-  root.append(importButton, status);
+  root.append(importButton, status, audioChoiceHost);
 
   const openNowHost = document.createElement('div');
   openNowHost.className = 'reading-library-open-now';
@@ -100,6 +112,65 @@ export function renderReadingLibrary({
       openNowHost.append(makeButton(t('readingLibrary.openNow'), () => onOpenBook?.(book.id)));
     }
   }
+
+  async function applyImportBatch(batch) {
+    audioChoiceHost.hidden = true;
+    audioChoiceHost.replaceChildren();
+    if (batch?.cancelled) return;
+    currentImportBatch = batch;
+    status.textContent = importSummary(batch, t);
+    page = 1;
+    await refresh();
+  }
+
+  function renderAudioChoice(batch) {
+    audioChoiceHost.replaceChildren();
+    audioChoiceHost.hidden = false;
+
+    const heading = document.createElement('h2');
+    heading.textContent = t('readingLibrary.audioGroupHeading');
+    const explanation = document.createElement('p');
+    explanation.textContent = t('readingLibrary.audioGroupQuestion');
+    audioChoiceHost.append(heading, explanation);
+
+    const names = Array.isArray(batch?.selectedNames) ? batch.selectedNames : [];
+    if (names.length) {
+      const list = document.createElement('ul');
+      for (const name of names) {
+        const item = document.createElement('li');
+        item.textContent = name;
+        list.append(item);
+      }
+      audioChoiceHost.append(list);
+    }
+
+    const selectionId = String(batch?.selectionId ?? '');
+    const runChoice = async mode => {
+      for (const button of audioChoiceHost.querySelectorAll('button')) button.disabled = true;
+      status.textContent = t('readingLibrary.audioGroupProcessing');
+      const result = await client.resolveAudioSelection({ selectionId, mode });
+      status.textContent = '';
+      await applyImportBatch(result);
+      importButton.focus();
+    };
+
+    const grouped = makeButton(
+      t('readingLibrary.audioGroupOneBook'),
+      () => { void runChoice('grouped'); }
+    );
+    const independent = makeButton(
+      t('readingLibrary.audioGroupIndependent'),
+      () => { void runChoice('independent'); }
+    );
+    const cancel = makeButton(
+      t('readingLibrary.audioGroupCancel'),
+      () => { void runChoice('cancel'); }
+    );
+
+    audioChoiceHost.append(grouped, independent, cancel);
+    queueMicrotask(() => grouped.focus());
+  }
+
   renderOpenNow();
 
   const continueSection = document.createElement('section');

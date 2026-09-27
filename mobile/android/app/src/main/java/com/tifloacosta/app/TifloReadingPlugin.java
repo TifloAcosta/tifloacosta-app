@@ -26,6 +26,8 @@ import com.tifloacosta.app.reading.ReadingImportResult;
 import com.tifloacosta.app.reading.ReadingImportService;
 import com.tifloacosta.app.reading.ReadingImportSource;
 import com.tifloacosta.app.reading.ReadingLibraryDatabase;
+import com.tifloacosta.app.reading.ReadingMarkRecord;
+import com.tifloacosta.app.reading.ReadingSettingsRecord;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -39,9 +41,33 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 @CapacitorPlugin(name = "TifloReading")
 public class TifloReadingPlugin extends Plugin {
+    private static final Set<String> SUPPORTED_MARK_TYPES = new HashSet<>();
+    private static final String[] SUPPORTED_READING_SETTING_KEYS = {
+            "speech.rate",
+            "speech.voice",
+            "visual.textSize",
+            "visual.fontFamily",
+            "visual.fontWeight",
+            "visual.lineSpacing",
+            "visual.paragraphSpacing",
+            "visual.readingWidth",
+            "visual.foreground",
+            "visual.background",
+            "visual.highContrast",
+            "visual.theme"
+    };
+
+    static {
+        SUPPORTED_MARK_TYPES.add("bookmark");
+        SUPPORTED_MARK_TYPES.add("important");
+        SUPPORTED_MARK_TYPES.add("review");
+        SUPPORTED_MARK_TYPES.add("quote");
+    }
+
     private ReadingLibraryDatabase database;
     private AndroidReadingFileStore fileStore;
     private ReadingImportService importer;
@@ -168,13 +194,195 @@ public class TifloReadingPlugin extends Plugin {
                     return;
                 }
                 int blockIndex = nonNegative(call.getInt("blockIndex"), 0);
+                int unitIndex = nonNegative(call.getInt("unitIndex"), 0);
+                String anchorText = nullableText(call.getString("anchorText"));
                 double percent = boundedPercent(call.getDouble("percent"));
                 String state = supportedProgressState(call.getString("state"));
-                database.updateProgress(id, blockIndex, percent, state, System.currentTimeMillis());
+                database.updateProgress(
+                        id,
+                        blockIndex,
+                        unitIndex,
+                        anchorText,
+                        percent,
+                        state,
+                        System.currentTimeMillis()
+                );
                 result.put("saved", true);
                 call.resolve(result);
             } catch (RuntimeException error) {
                 call.reject("Unable to save reading progress", error);
+            }
+        });
+    }
+
+    @PluginMethod
+    public void listMarks(PluginCall call) {
+        String bookId = cleanId(call.getString("bookId"));
+        if (bookId.isEmpty()) {
+            call.reject("Book id is required");
+            return;
+        }
+        String requestedType = cleanId(call.getString("type"));
+        String type = requestedType.isEmpty() ? null : supportedMarkType(requestedType);
+        if (!requestedType.isEmpty() && type == null) {
+            call.reject("Unsupported reading mark type");
+            return;
+        }
+        getBridge().execute(() -> {
+            try {
+                JSArray items = new JSArray();
+                for (ReadingMarkRecord record : database.listMarks(bookId, type)) {
+                    items.put(markJson(record));
+                }
+                JSObject result = new JSObject();
+                result.put("items", items);
+                call.resolve(result);
+            } catch (RuntimeException error) {
+                call.reject("Unable to list reading marks", error);
+            }
+        });
+    }
+
+    @PluginMethod
+    public void addMark(PluginCall call) {
+        String bookId = cleanId(call.getString("bookId"));
+        String type = supportedMarkType(call.getString("type"));
+        if (bookId.isEmpty() || type == null) {
+            call.reject("Book id and supported mark type are required");
+            return;
+        }
+        int blockIndex = nonNegative(call.getInt("blockIndex"), 0);
+        int unitIndex = nonNegative(call.getInt("unitIndex"), 0);
+        String excerpt = nullableText(call.getString("excerpt"));
+        String reference = nullableText(call.getString("reference"));
+
+        getBridge().execute(() -> {
+            try {
+                if (database.findById(bookId) == null) {
+                    call.reject("Book not found");
+                    return;
+                }
+                ReadingMarkRecord record = new ReadingMarkRecord(
+                        UUID.randomUUID().toString(),
+                        bookId,
+                        type,
+                        blockIndex,
+                        unitIndex,
+                        excerpt,
+                        reference,
+                        System.currentTimeMillis()
+                );
+                database.insertMark(record);
+                JSObject result = new JSObject();
+                result.put("added", true);
+                result.put("mark", markJson(record));
+                call.resolve(result);
+            } catch (RuntimeException error) {
+                call.reject("Unable to add reading mark", error);
+            }
+        });
+    }
+
+    @PluginMethod
+    public void deleteMark(PluginCall call) {
+        String id = cleanId(call.getString("id"));
+        if (id.isEmpty()) {
+            call.reject("Mark id is required");
+            return;
+        }
+        getBridge().execute(() -> {
+            try {
+                database.deleteMark(id);
+                JSObject result = new JSObject();
+                result.put("deleted", true);
+                call.resolve(result);
+            } catch (RuntimeException error) {
+                call.reject("Unable to delete reading mark", error);
+            }
+        });
+    }
+
+    @PluginMethod
+    public void getReadingSettings(PluginCall call) {
+        String bookId = cleanId(call.getString("bookId"));
+        getBridge().execute(() -> {
+            try {
+                JSObject global = new JSObject();
+                JSObject book = new JSObject();
+                for (String key : SUPPORTED_READING_SETTING_KEYS) {
+                    ReadingSettingsRecord globalSetting = database.getReadingSetting("global", "", key);
+                    if (globalSetting != null) global.put(key, globalSetting.getValue());
+                    if (!bookId.isEmpty()) {
+                        ReadingSettingsRecord bookSetting = database.getReadingSetting("book", bookId, key);
+                        if (bookSetting != null) book.put(key, bookSetting.getValue());
+                    }
+                }
+                JSObject result = new JSObject();
+                result.put("global", global);
+                result.put("book", book);
+                call.resolve(result);
+            } catch (RuntimeException error) {
+                call.reject("Unable to load reading settings", error);
+            }
+        });
+    }
+
+    @PluginMethod
+    public void setReadingSetting(PluginCall call) {
+        String scope = cleanId(call.getString("scope"));
+        String bookId = cleanId(call.getString("bookId"));
+        String key = cleanId(call.getString("key"));
+        String value = call.getString("value");
+        if (!"global".equals(scope) && !"book".equals(scope)) {
+            call.reject("Unsupported reading setting scope");
+            return;
+        }
+        if ("book".equals(scope) && bookId.isEmpty()) {
+            call.reject("Book id is required for book settings");
+            return;
+        }
+        if (!isSupportedReadingSettingKey(key) || value == null) {
+            call.reject("Unsupported reading setting");
+            return;
+        }
+        String normalizedBookId = "global".equals(scope) ? "" : bookId;
+        getBridge().execute(() -> {
+            try {
+                if ("book".equals(scope) && database.findById(normalizedBookId) == null) {
+                    call.reject("Book not found");
+                    return;
+                }
+                database.setReadingSetting(new ReadingSettingsRecord(
+                        scope,
+                        normalizedBookId,
+                        key,
+                        value,
+                        System.currentTimeMillis()
+                ));
+                JSObject result = new JSObject();
+                result.put("saved", true);
+                call.resolve(result);
+            } catch (RuntimeException error) {
+                call.reject("Unable to save reading setting", error);
+            }
+        });
+    }
+
+    @PluginMethod
+    public void resetBookReadingSettings(PluginCall call) {
+        String bookId = cleanId(call.getString("bookId"));
+        if (bookId.isEmpty()) {
+            call.reject("Book id is required");
+            return;
+        }
+        getBridge().execute(() -> {
+            try {
+                database.resetBookReadingSettings(bookId);
+                JSObject result = new JSObject();
+                result.put("reset", true);
+                call.resolve(result);
+            } catch (RuntimeException error) {
+                call.reject("Unable to reset book reading settings", error);
             }
         });
     }
@@ -347,10 +555,25 @@ public class TifloReadingPlugin extends Plugin {
         book.put("state", record.getState());
         book.put("percent", record.getPercent());
         book.put("blockIndex", record.getBlockIndex());
+        book.put("unitIndex", record.getUnitIndex());
+        book.put("anchorText", record.getAnchorText());
         book.put("importedAt", record.getImportedAt());
         book.put("lastReadAt", record.getLastReadAt() == null ? 0L : record.getLastReadAt());
         book.put("sizeBytes", record.getSizeBytes());
         return book;
+    }
+
+    private static JSObject markJson(ReadingMarkRecord record) {
+        JSObject mark = new JSObject();
+        mark.put("id", record.getId());
+        mark.put("bookId", record.getBookId());
+        mark.put("type", record.getType());
+        mark.put("blockIndex", record.getBlockIndex());
+        mark.put("unitIndex", record.getUnitIndex());
+        mark.put("excerpt", stringOr(record.getExcerpt(), ""));
+        mark.put("reference", stringOr(record.getReference(), ""));
+        mark.put("createdAt", record.getCreatedAt());
+        return mark;
     }
 
     private static JSObject emptyBatch(boolean cancelled) {
@@ -374,6 +597,12 @@ public class TifloReadingPlugin extends Plugin {
         return value == null ? "" : value.trim();
     }
 
+    private static String nullableText(String value) {
+        if (value == null) return null;
+        String cleaned = value.trim();
+        return cleaned.isEmpty() ? null : cleaned;
+    }
+
     private static String stringOr(String value, String fallback) {
         return value == null ? fallback : value;
     }
@@ -391,6 +620,19 @@ public class TifloReadingPlugin extends Plugin {
     private static String supportedProgressState(String value) {
         if ("not-read".equals(value) || "read".equals(value)) return value;
         return "in-reading";
+    }
+
+    private static String supportedMarkType(String value) {
+        String cleaned = cleanId(value).toLowerCase();
+        return SUPPORTED_MARK_TYPES.contains(cleaned) ? cleaned : null;
+    }
+
+    private static boolean isSupportedReadingSettingKey(String value) {
+        String key = cleanId(value);
+        for (String supported : SUPPORTED_READING_SETTING_KEYS) {
+            if (supported.equals(key)) return true;
+        }
+        return false;
     }
 
     private static final class BatchBuilder {

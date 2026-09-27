@@ -10,7 +10,8 @@ test('reading library screen keeps import, search, paging and delete actions exp
   assert.match(screen, /export function renderReadingLibrary/);
   assert.match(screen, /client\.getLatestInProgress\(\)/);
   assert.match(screen, /client\.pickDocuments\(\)/);
-  assert.match(screen, /client\.listBooks\(\{[\s\S]*pageSize:\s*10[\s\S]*query/);
+  assert.match(screen, /const PAGE_SIZE\s*=\s*10/);
+  assert.match(screen, /client\.listBooks\(\{[\s\S]*pageSize:\s*PAGE_SIZE[\s\S]*query/);
   assert.match(screen, /addEventListener\(['"]submit['"]/);
   assert.doesNotMatch(screen, /addEventListener\(['"]input['"][\s\S]{0,120}listBooks/);
   assert.match(screen, /aria-live['"],\s*['"]polite['"]/);
@@ -56,8 +57,8 @@ test('composition root consumes initial and live shared documents through the re
   assert.match(app, /case ['"]reading-library['"]/);
   assert.match(app, /case ['"]library['"]/);
 
-  const startHome = app.indexOf("router.start('home')");
-  const installReceiver = app.indexOf('installReadingDocumentReceiver()');
+  const startHome = app.lastIndexOf("router.start('home');");
+  const installReceiver = app.indexOf('void installReadingDocumentReceiver();', startHome);
   assert.ok(startHome >= 0 && installReceiver > startHome, 'reading document receiver must install after Home starts');
 
   assert.match(app, /router\.current\(\)\?\.name\s*===\s*['"]reading-library['"][\s\S]{0,180}render\(router\.current\(\)\)/);

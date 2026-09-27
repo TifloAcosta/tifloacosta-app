@@ -3,11 +3,11 @@ const DICTIONARIES = {
     app: { title: 'TifloAcosta' },
     nav: { back: 'Volver' },
     home: {
-      actualidad: 'Actualidad', search: 'Buscar', library: 'Biblioteca', downloads: 'Descargas', favorites: 'Favoritos', videos: 'Vídeos',
+      actualidad: 'Actualidad', search: 'Buscar', library: 'Biblioteca', readingLibrary: 'Leer con TifloAcosta', downloads: 'Descargas', favorites: 'Favoritos', videos: 'Vídeos',
       book: 'Mi libro', podcast: 'Podcast', contact: 'Contacto', settings: 'Configuración'
     },
     screen: {
-      actualidad: 'Actualidad', search: 'Buscar', library: 'Biblioteca', downloads: 'Descargas', favorites: 'Favoritos', videos: 'Vídeos',
+      actualidad: 'Actualidad', search: 'Buscar', library: 'Biblioteca', readingLibrary: 'Leer con TifloAcosta', downloads: 'Descargas', favorites: 'Favoritos', videos: 'Vídeos',
       book: 'Mi libro', podcast: 'Podcast', contact: 'Contacto', settings: 'Configuración', share: 'Compartido con TifloAcosta'
     },
     common: { empty: 'No hay contenido disponible en este momento.', open: 'Abrir', share: 'Compartir' },
@@ -69,6 +69,18 @@ const DICTIONARIES = {
       newLabel: 'Nuevo', newCount: '{count} novedades desde tu última visita.', source: 'Medio', published: 'Publicado'
     },
     library: { empty: 'No hay recursos disponibles en este momento.', open: 'Abrir documento', download: 'Guardar documento' },
+    readingLibrary: {
+      continueReading: 'Continuar leyendo', import: 'Importar TXT', searchLabel: 'Buscar en mi biblioteca',
+      searchPlaceholder: 'Título del documento', searchSubmit: 'Buscar', myLibrary: 'Mi biblioteca',
+      empty: 'Todavía no hay documentos en tu biblioteca.', untitled: 'Documento sin título',
+      stateNotRead: 'Sin leer', stateInReading: 'En lectura', stateRead: 'Leído', progress: '{percent}% leído',
+      options: 'Opciones de {title}', delete: 'Eliminar de TifloAcosta',
+      confirmDelete: 'Confirmar eliminación de {title}', cancelDelete: 'Cancelar',
+      deleted: 'Documento eliminado de TifloAcosta.', deleteFailed: 'No se pudo eliminar el documento.',
+      pagination: 'Páginas de mi biblioteca', previousPage: 'Página anterior', nextPage: 'Página siguiente',
+      pageStatus: 'Página {page} de {pages}', importSummary: 'Importados: {imported}. Duplicados: {duplicates}. Rechazados: {rejected}.',
+      openNow: 'Abrir ahora'
+    },
     videos: {
       empty: 'No hay vídeos disponibles en este momento.',
       open: 'Abrir vídeo',
@@ -115,11 +127,11 @@ const DICTIONARIES = {
     app: { title: 'TifloAcosta' },
     nav: { back: 'Back' },
     home: {
-      actualidad: 'News', search: 'Search', library: 'Library', downloads: 'Downloads', favorites: 'Favorites', videos: 'Videos',
+      actualidad: 'News', search: 'Search', library: 'Library', readingLibrary: 'Read with TifloAcosta', downloads: 'Downloads', favorites: 'Favorites', videos: 'Videos',
       book: 'My book', podcast: 'Podcast', contact: 'Contact', settings: 'Settings'
     },
     screen: {
-      actualidad: 'News', search: 'Search', library: 'Library', downloads: 'Downloads', favorites: 'Favorites', videos: 'Videos',
+      actualidad: 'News', search: 'Search', library: 'Library', readingLibrary: 'Read with TifloAcosta', downloads: 'Downloads', favorites: 'Favorites', videos: 'Videos',
       book: 'My book', podcast: 'Podcast', contact: 'Contact', settings: 'Settings', share: 'Shared with TifloAcosta'
     },
     common: { empty: 'No content is available right now.', open: 'Open', share: 'Share' },
@@ -181,6 +193,18 @@ const DICTIONARIES = {
       newLabel: 'New', newCount: '{count} new items since your last visit.', source: 'Source', published: 'Published'
     },
     library: { empty: 'There are no resources available right now.', open: 'Open document', download: 'Save document' },
+    readingLibrary: {
+      continueReading: 'Continue reading', import: 'Import TXT', searchLabel: 'Search my library',
+      searchPlaceholder: 'Document title', searchSubmit: 'Search', myLibrary: 'My library',
+      empty: 'There are no documents in your library yet.', untitled: 'Untitled document',
+      stateNotRead: 'Not read', stateInReading: 'Reading', stateRead: 'Read', progress: '{percent}% read',
+      options: 'Options for {title}', delete: 'Delete from TifloAcosta',
+      confirmDelete: 'Confirm deletion of {title}', cancelDelete: 'Cancel',
+      deleted: 'Document deleted from TifloAcosta.', deleteFailed: 'The document could not be deleted.',
+      pagination: 'My library pages', previousPage: 'Previous page', nextPage: 'Next page',
+      pageStatus: 'Page {page} of {pages}', importSummary: 'Imported: {imported}. Duplicates: {duplicates}. Rejected: {rejected}.',
+      openNow: 'Open now'
+    },
     videos: {
       empty: 'There are no videos available right now.',
       open: 'Open video',

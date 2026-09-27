@@ -2,6 +2,7 @@ export const HOME_ITEMS = [
   'actualidad',
   'search',
   'library',
+  'reading-library',
   'downloads',
   'favorites',
   'videos',
@@ -29,7 +30,7 @@ export function renderHome({ root, router, content, t }) {
     button.type = 'button';
     button.id = `home-${key}`;
     button.className = 'home-entry';
-    button.textContent = t(`home.${key}`);
+    button.textContent = t(`home.${key === 'reading-library' ? 'readingLibrary' : key}`);
     button.addEventListener('click', () => router.navigate(key, { originId: button.id }));
     nav.append(button);
   }

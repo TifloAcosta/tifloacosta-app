@@ -5,6 +5,9 @@ import { createReadingLibraryPlugin } from '../src/native/reading-library-plugin
 
 const emptyBatch = {
   cancelled: false,
+  audioChoiceRequired: false,
+  selectionId: '',
+  selectedNames: [],
   imported: [],
   duplicates: [],
   rejected: []
@@ -84,6 +87,9 @@ test('reading library client normalizes import batches and latest reading item',
 
   const batch = await client.pickDocuments();
   assert.equal(batch.cancelled, false);
+  assert.equal(batch.audioChoiceRequired, false);
+  assert.equal(batch.selectionId, '');
+  assert.deepEqual(batch.selectedNames, []);
   assert.equal(batch.imported[0].id, 'a');
   assert.equal(batch.imported[0].title, 'A');
   assert.equal(batch.imported[0].format, 'txt');
@@ -275,10 +281,8 @@ test('reading library native wrapper degrades safely and listener fallback is re
   const wrapper = createReadingLibraryPlugin({});
 
   assert.deepEqual(await wrapper.pickDocuments(), {
-    cancelled: true,
-    imported: [],
-    duplicates: [],
-    rejected: []
+    ...emptyBatch,
+    cancelled: true
   });
   assert.deepEqual(await wrapper.consumeInitialSharedDocuments(), emptyBatch);
   assert.deepEqual(await wrapper.listBooks({ page: 2, pageSize: 10 }), {

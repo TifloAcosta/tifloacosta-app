@@ -200,7 +200,10 @@ public final class ReadingAudioService extends MediaSessionService {
 
         int trackIndex = Math.max(0, player.getCurrentMediaItemIndex());
         long positionMs = Math.max(0L, player.getCurrentPosition());
-        double percent = completed ? 100.0 : calculateGlobalPercent(bookId, trackIndex, positionMs);
+        boolean finished = completed
+                || player.getPlaybackState() == Player.STATE_ENDED
+                || "read".equals(record.getState());
+        double percent = finished ? 100.0 : calculateGlobalPercent(bookId, trackIndex, positionMs);
         database.updateProgress(
                 bookId,
                 record.getBlockIndex(),
@@ -209,7 +212,7 @@ public final class ReadingAudioService extends MediaSessionService {
                 trackIndex,
                 positionMs,
                 percent,
-                completed ? "read" : "in-reading",
+                finished ? "read" : "in-reading",
                 System.currentTimeMillis()
         );
     }

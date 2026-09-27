@@ -96,6 +96,22 @@ test('reading android native contract keeps PDF sources private as source.pdf', 
   assert.doesNotMatch(plugin, /READ_EXTERNAL_STORAGE|WRITE_EXTERNAL_STORAGE|MANAGE_EXTERNAL_STORAGE|READ_MEDIA_/);
 });
 
+test('reading android native contract opens PDFs through the extractor with a call-scoped password and explicit states', async () => {
+  const plugin = await read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java');
+
+  assert.match(plugin, /String\s+password\s*=\s*stringOr\(call\.getString\("password"\),\s*""\)/);
+  assert.match(plugin, /"pdf"\.equals\(record\.getFormat\(\)\)/);
+  assert.match(plugin, /openStoredInput\(record\.getRelativePath\(\)\)/);
+  assert.match(plugin, /pdfExtractor\.inspect\(source,\s*password\)/);
+  assert.match(plugin, /"passwordRequired"/);
+  assert.match(plugin, /"passwordRejected"/);
+  assert.match(plugin, /"pdfNoText"/);
+  assert.match(plugin, /"pageCount"/);
+  assert.match(plugin, /result\.put\("pdf",\s*pdfJson\(/);
+  assert.doesNotMatch(plugin, /put\("password"/);
+  assert.doesNotMatch(plugin, /setReadingSetting[\s\S]{0,200}password/i);
+});
+
 test('reading android native contract excludes the private reading library from backup and cleans stale temps off the UI thread', async () => {
   const [plugin, manifest, backupRules, extractionRules] = await Promise.all([
     read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java'),

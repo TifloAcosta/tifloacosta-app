@@ -55,12 +55,61 @@ test('reading html adapter: preserves readable semantic structures as plain data
   })), [
     { id: 'h-1', type: 'heading', text: 'Sección', level: 2 },
     { id: 'p-1', type: 'paragraph', text: 'Texto con imagen descrita.' },
-    { id: 'li-1', type: 'list-item', text: 'Elemento de lista.' },
+    { id: 'li-1', type: 'list-item', text: 'Elemento de lista.', level: 1 },
     { id: 'q-1', type: 'quote', text: 'Una cita.' },
     { id: 'tc-1', type: 'table-cell', text: 'Cabecera' },
     { id: 'tc-2', type: 'table-cell', text: 'Dato' }
   ]);
   assert.deepEqual(document.blocks[1].sentences, ['Texto con imagen descrita.']);
+});
+
+test('reading html adapter: keeps nested list items separate and preserves their level', () => {
+  const detachedDocument = documentWith(
+    element('ol', {}, [
+      element('li', {}, [
+        textNode('Primer nivel.'),
+        element('ul', {}, [
+          element('li', {}, [textNode('Segundo nivel.')])
+        ])
+      ]),
+      element('li', {}, [textNode('Otro primer nivel.')])
+    ])
+  );
+
+  const document = parseHtmlDocument('<ol><li>...</li></ol>', {
+    language: 'es',
+    parseDocument: () => detachedDocument
+  });
+
+  assert.deepEqual(document.blocks.map(block => ({
+    id: block.id,
+    type: block.type,
+    text: block.text,
+    level: block.level,
+    sentences: block.sentences
+  })), [
+    {
+      id: 'li-1',
+      type: 'list-item',
+      text: 'Primer nivel.',
+      level: 1,
+      sentences: ['Primer nivel.']
+    },
+    {
+      id: 'li-2',
+      type: 'list-item',
+      text: 'Segundo nivel.',
+      level: 2,
+      sentences: ['Segundo nivel.']
+    },
+    {
+      id: 'li-3',
+      type: 'list-item',
+      text: 'Otro primer nivel.',
+      level: 1,
+      sentences: ['Otro primer nivel.']
+    }
+  ]);
 });
 
 test('reading html adapter: drops executable embedded and form content while keeping only non-empty image alt text', () => {

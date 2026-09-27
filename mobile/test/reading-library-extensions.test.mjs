@@ -21,12 +21,15 @@ test('reading client preserves precise position and anchor when normalizing book
   const listed = await client.listBooks();
   assert.equal(listed.items[0].unitIndex, 2);
   assert.equal(listed.items[0].anchorText, 'frase cercana');
+  assert.equal(listed.items[0].mediaTrackIndex, 0);
+  assert.equal(listed.items[0].mediaPositionMs, 0);
 
   assert.equal(await client.saveProgress({
     id: 'a', blockIndex: 4, unitIndex: 2, anchorText: 'frase cercana', percent: 42, state: 'in-reading'
   }), true);
   assert.deepEqual(saved, {
-    id: 'a', blockIndex: 4, unitIndex: 2, anchorText: 'frase cercana', percent: 42, state: 'in-reading'
+    id: 'a', blockIndex: 4, unitIndex: 2, anchorText: 'frase cercana',
+    mediaTrackIndex: 0, mediaPositionMs: 0, percent: 42, state: 'in-reading'
   });
 });
 
@@ -94,6 +97,7 @@ test('reading client normalizes voices, marks and settings and degrades safely',
   assert.equal(await client.stopTts(), true);
   assert.deepEqual((await client.listMarks('a'))[0], {
     id: 'm1', bookId: 'a', type: 'quote', blockIndex: 3, unitIndex: 2,
+    mediaTrackIndex: 0, mediaPositionMs: 0,
     excerpt: 'texto', reference: 'ref', createdAt: 99
   });
   assert.equal((await client.addMark({ bookId: 'a', type: 'bookmark', blockIndex: 0, unitIndex: 0 })).id, 'm2');

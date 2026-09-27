@@ -143,6 +143,11 @@ export const parseHtmlDocument = (html, options = {}) => {
   const blocks = [];
   const makeBlock = createBlockFactory(language);
 
+  const pushParagraph = text => {
+    const block = makeBlock('paragraph', text);
+    if (block) blocks.push(block);
+  };
+
   const visit = (node, listDepth = 0) => {
     if (!node || node.nodeType !== 1) return;
 
@@ -184,21 +189,45 @@ export const parseHtmlDocument = (html, options = {}) => {
     }
 
     if (tagName === 'IMG') {
-      const block = makeBlock('paragraph', textFromNode(node));
-      if (block) blocks.push(block);
+      pushParagraph(textFromNode(node));
       return;
     }
 
     if (!hasSemanticDescendant(node)) {
-      const block = makeBlock('paragraph', textFromNode(node));
-      if (block) blocks.push(block);
+      pushParagraph(textFromNode(node));
       return;
     }
 
-    for (const child of childNodesOf(node)) visit(child, listDepth);
+    let pendingText = '';
+    const flushPendingText = () => {
+      pushParagraph(pendingText);
+      pendingText = '';
+    };
+
+    for (const child of childNodesOf(node)) {
+      if (child?.nodeType === 3) {
+        pendingText += String(child.textContent ?? '');
+        continue;
+      }
+
+      if (child?.nodeType !== 1) continue;
+
+      const childTag = tagNameOf(child);
+      if (IGNORED_TAGS.has(childTag)) continue;
+
+      if (isSemanticStructureTag(childTag) || hasSemanticDescendant(child)) {
+        flushPendingText();
+        visit(child, listDepth);
+        continue;
+      }
+
+      pendingText += textFromNode(child);
+    }
+
+    flushPendingText();
   };
 
-  for (const child of childNodesOf(detachedDocument.body)) visit(child);
+  visit(detachedDocument.body);
 
   if (!blocks.length) {
     const fallback = makeBlock('paragraph', textFromNode(detachedDocument.body));

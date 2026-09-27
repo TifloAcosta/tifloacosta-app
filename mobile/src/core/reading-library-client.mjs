@@ -35,6 +35,8 @@ function normalizeBook(value) {
     blockIndex: nonNegativeInteger(value.blockIndex, 0),
     unitIndex: nonNegativeInteger(value.unitIndex, 0),
     anchorText: String(value.anchorText ?? '').trim(),
+    mediaTrackIndex: nonNegativeInteger(value.mediaTrackIndex, 0),
+    mediaPositionMs: nonNegativeInteger(value.mediaPositionMs, 0),
     importedAt: Math.max(0, numberOr(value.importedAt, 0)),
     lastReadAt: Math.max(0, numberOr(value.lastReadAt, 0)),
     sizeBytes: Math.max(0, numberOr(value.sizeBytes, 0))
@@ -134,6 +136,8 @@ function normalizeMark(value) {
     type,
     blockIndex: nonNegativeInteger(value.blockIndex, 0),
     unitIndex: nonNegativeInteger(value.unitIndex, 0),
+    mediaTrackIndex: nonNegativeInteger(value.mediaTrackIndex, 0),
+    mediaPositionMs: nonNegativeInteger(value.mediaPositionMs, 0),
     excerpt: String(value.excerpt ?? '').trim(),
     reference: String(value.reference ?? '').trim(),
     createdAt: Math.max(0, numberOr(value.createdAt, 0))
@@ -203,6 +207,8 @@ export function createReadingLibraryClient(plugin = {}) {
         blockIndex: nonNegativeInteger(progress.blockIndex, 0),
         unitIndex: nonNegativeInteger(progress.unitIndex, 0),
         anchorText: String(progress.anchorText ?? '').trim(),
+        mediaTrackIndex: nonNegativeInteger(progress.mediaTrackIndex, 0),
+        mediaPositionMs: nonNegativeInteger(progress.mediaPositionMs, 0),
         percent: Math.min(100, Math.max(0, numberOr(progress.percent, 0))),
         state: BOOK_STATES.has(progress.state) ? progress.state : 'in-reading'
       });
@@ -276,6 +282,8 @@ export function createReadingLibraryClient(plugin = {}) {
       type,
       blockIndex: nonNegativeInteger(mark.blockIndex, 0),
       unitIndex: nonNegativeInteger(mark.unitIndex, 0),
+      mediaTrackIndex: nonNegativeInteger(mark.mediaTrackIndex, 0),
+      mediaPositionMs: nonNegativeInteger(mark.mediaPositionMs, 0),
       excerpt: String(mark.excerpt ?? '').trim(),
       reference: String(mark.reference ?? '').trim()
     };

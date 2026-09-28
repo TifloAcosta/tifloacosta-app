@@ -65,7 +65,11 @@ public final class ReadingXml {
     private static void rejectUnexpectedDoctype(DocumentType doctype) throws IOException {
         if (doctype == null) return;
         String name = doctype.getName() == null ? "" : doctype.getName().trim().toLowerCase(Locale.ROOT);
-        if ("html".equals(name) || "ncx".equals(name) || "smil".equals(name)) return;
+        if ("html".equals(name)
+                || "ncx".equals(name)
+                || "smil".equals(name)
+                || "package".equals(name)
+                || "dtbook".equals(name)) return;
         throw new IOException("invalid-xml: doctype is not permitted for package metadata");
     }
 

@@ -35,17 +35,17 @@ function assertMime(source, mime, label) {
 }
 
 test('reading picker exposes every approved v1 document/container family and audio family', async () => {
-  const [groupPlugin, readingPlugin] = await Promise.all([
+  const [groupPlugin, wrapper] = await Promise.all([
     read('android/app/src/main/java/com/tifloacosta/app/TifloReadingAudioGroupPlugin.java'),
-    read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java')
+    read('src/native/reading-library-plugin.mjs')
   ]);
 
-  for (const source of [groupPlugin, readingPlugin]) {
-    assert.match(source, /Intent\.ACTION_OPEN_DOCUMENT/);
-    assert.match(source, /Intent\.EXTRA_ALLOW_MULTIPLE/);
-    for (const mime of REQUIRED_DOCUMENT_MIMES) assertMime(source, mime, 'Picker');
-    for (const mime of REQUIRED_AUDIO_MIMES) assertMime(source, mime, 'Picker');
-  }
+  assert.match(wrapper, /registerPlugin\(['"]TifloReadingAudioGroup['"]\)/);
+  assert.match(wrapper, /safeCall\(groupPlugin,\s*['"]pickDocuments['"]/);
+  assert.match(groupPlugin, /Intent\.ACTION_OPEN_DOCUMENT/);
+  assert.match(groupPlugin, /Intent\.EXTRA_ALLOW_MULTIPLE/);
+  for (const mime of REQUIRED_DOCUMENT_MIMES) assertMime(groupPlugin, mime, 'Picker');
+  for (const mime of REQUIRED_AUDIO_MIMES) assertMime(groupPlugin, mime, 'Picker');
 });
 
 test('reading share target advertises every approved v1 document/container family and audio family without broad storage permissions', async () => {

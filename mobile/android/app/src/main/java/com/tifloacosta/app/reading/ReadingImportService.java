@@ -115,6 +115,7 @@ public final class ReadingImportService {
 
             ReadingAudioProbe.Result audioInfo = null;
             ReadingStructuredDocument epubInfo = null;
+            ReadingStructuredDocument docxInfo = null;
             if ("pdf".equals(format)) {
                 ReadingImportResult pdfValidation = validatePdf(tempName);
                 if (pdfValidation != null) return pdfValidation;
@@ -127,6 +128,12 @@ public final class ReadingImportService {
                 try {
                     epubInfo = validateEpub(tempName);
                 } catch (ReadingEpubAdapter.EpubException error) {
+                    return ReadingImportResult.rejected(error.getCode());
+                }
+            } else if ("docx".equals(format)) {
+                try {
+                    docxInfo = validateDocx(tempName);
+                } catch (ReadingDocxAdapter.DocxException error) {
                     return ReadingImportResult.rejected(error.getCode());
                 }
             } else if (!fileStore.tempHasReadableText(tempName, format)) {
@@ -144,13 +151,14 @@ public final class ReadingImportService {
             movedToFinal = true;
 
             String fallbackTitle = titleFrom(source.getDisplayName(), id, format);
+            ReadingStructuredDocument structuredInfo = epubInfo != null ? epubInfo : docxInfo;
             String title = audioInfo != null && audioInfo.getTitle() != null && !audioInfo.getTitle().trim().isEmpty()
                     ? audioInfo.getTitle().trim()
-                    : epubInfo != null && !epubInfo.getTitle().isEmpty()
-                    ? epubInfo.getTitle()
+                    : structuredInfo != null && !structuredInfo.getTitle().isEmpty()
+                    ? structuredInfo.getTitle()
                     : fallbackTitle;
-            String author = epubInfo == null ? "" : epubInfo.getAuthor();
-            String language = epubInfo == null ? "" : epubInfo.getLanguage();
+            String author = structuredInfo == null ? "" : structuredInfo.getAuthor();
+            String language = structuredInfo == null ? "" : structuredInfo.getLanguage();
             ReadingBookRecord record = new ReadingBookRecord(
                     id,
                     hash,
@@ -476,6 +484,19 @@ public final class ReadingImportService {
         }
     }
 
+    private ReadingStructuredDocument validateDocx(String tempName) throws IOException {
+        File tempFile = fileStore.tempFile(tempName);
+        File parent = tempFile.getParentFile();
+        if (parent == null) throw new IOException("Reading DOCX temp directory is unavailable");
+        File workRoot = new File(parent, "docx-work");
+        try (InputStream source = fileStore.openTempInput(tempName)) {
+            return new ReadingDocxAdapter().read(source, workRoot);
+        } finally {
+            File[] remaining = workRoot.listFiles();
+            if (remaining == null || remaining.length == 0) workRoot.delete();
+        }
+    }
+
     private static String formatFrom(ReadingImportSource source) {
         if (source == null) return null;
 
@@ -486,12 +507,14 @@ public final class ReadingImportService {
 
         if (lowerName.endsWith(".pdf")) return "pdf";
         if (lowerName.endsWith(".epub")) return "epub";
+        if (lowerName.endsWith(".docx")) return "docx";
         if (lowerName.endsWith(".html") || lowerName.endsWith(".htm")) return "html";
         if (lowerName.endsWith(".txt")) return "txt";
         if (audioExtensionFrom(source) != null && audioExtensionFromName(lowerName) != null) return "audio";
 
         if ("application/pdf".equals(lowerMime)) return "pdf";
         if ("application/epub+zip".equals(lowerMime)) return "epub";
+        if ("application/vnd.openxmlformats-officedocument.wordprocessingml.document".equals(lowerMime)) return "docx";
         if ("text/html".equals(lowerMime)) return "html";
         if ("text/plain".equals(lowerMime)) return "txt";
         if (audioExtensionFromMime(lowerMime) != null) return "audio";
@@ -502,6 +525,7 @@ public final class ReadingImportService {
         if ("html".equals(format)) return "html";
         if ("pdf".equals(format)) return "pdf";
         if ("epub".equals(format)) return "epub";
+        if ("docx".equals(format)) return "docx";
         if ("txt".equals(format)) return "txt";
         if ("audio".equals(format)) return audioExtensionFrom(source);
         return null;
@@ -558,6 +582,8 @@ public final class ReadingImportService {
             title = title.substring(0, title.length() - 4).trim();
         } else if ("epub".equals(format) && lowerTitle.endsWith(".epub")) {
             title = title.substring(0, title.length() - 5).trim();
+        } else if ("docx".equals(format) && lowerTitle.endsWith(".docx")) {
+            title = title.substring(0, title.length() - 5).trim();
         } else if ("txt".equals(format) && lowerTitle.endsWith(".txt")) {
             title = title.substring(0, title.length() - 4).trim();
         } else if ("audio".equals(format)) {
@@ -575,6 +601,7 @@ public final class ReadingImportService {
     private static String mimeFrom(String mimeType, String format, String sourceExtension) {
         if ("pdf".equals(format)) return "application/pdf";
         if ("epub".equals(format)) return "application/epub+zip";
+        if ("docx".equals(format)) return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
         if ("audio".equals(format)) return audioMimeFrom(mimeType, sourceExtension);
         if (mimeType != null && !mimeType.trim().isEmpty()) return mimeType;
         return "html".equals(format) ? "text/html" : "text/plain";

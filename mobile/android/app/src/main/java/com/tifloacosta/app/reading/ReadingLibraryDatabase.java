@@ -11,17 +11,20 @@ import java.util.List;
 
 public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements ReadingBookRepository {
     public static final String DATABASE_NAME = "tiflo_reading.db";
-    public static final int DATABASE_VERSION = 4;
+    public static final int DATABASE_VERSION = 5;
 
     private static final String TABLE_BOOKS = "books";
     private static final String TABLE_MARKS = "marks";
     private static final String TABLE_SETTINGS = "reading_settings";
     private static final String TABLE_AUDIO_TRACKS = "audio_tracks";
+    private static final String TABLE_QUEUE = "reading_queue";
 
     private static final String[] BOOK_COLUMNS = {
             "id",
             "sha256",
             "title",
+            "author",
+            "language",
             "format",
             "mime_type",
             "relative_path",
@@ -74,12 +77,20 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
     }
 
     @Override
+    public void onConfigure(SQLiteDatabase db) {
+        super.onConfigure(db);
+        db.setForeignKeyConstraintsEnabled(true);
+    }
+
+    @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(
                 "CREATE TABLE " + TABLE_BOOKS + " (" +
                         "id TEXT PRIMARY KEY," +
                         "sha256 TEXT NOT NULL UNIQUE," +
                         "title TEXT NOT NULL," +
+                        "author TEXT NOT NULL DEFAULT ''," +
+                        "language TEXT NOT NULL DEFAULT ''," +
                         "format TEXT NOT NULL," +
                         "mime_type TEXT NOT NULL," +
                         "relative_path TEXT NOT NULL," +
@@ -98,6 +109,7 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
         createBookIndexes(db);
         createV3Tables(db);
         createV4Tables(db);
+        createV5Tables(db);
     }
 
     @Override
@@ -121,6 +133,13 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
             backfillLegacyAudioTracks(db);
             version = 4;
         }
+        if (version == 4 && newVersion >= 5) {
+            db.execSQL("ALTER TABLE " + TABLE_BOOKS + " ADD COLUMN author TEXT NOT NULL DEFAULT ''");
+            db.execSQL("ALTER TABLE " + TABLE_BOOKS + " ADD COLUMN language TEXT NOT NULL DEFAULT ''");
+            createBookIndexes(db);
+            createV5Tables(db);
+            version = 5;
+        }
         if (version != newVersion) {
             throw new IllegalStateException(
                     "Reading database migration required from version " + version + " to " + newVersion
@@ -130,6 +149,8 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
 
     private static void createBookIndexes(SQLiteDatabase db) {
         db.execSQL("CREATE INDEX IF NOT EXISTS books_title_index ON " + TABLE_BOOKS + "(title COLLATE NOCASE)");
+        db.execSQL("CREATE INDEX IF NOT EXISTS books_author_index ON " + TABLE_BOOKS + "(author COLLATE NOCASE)");
+        db.execSQL("CREATE INDEX IF NOT EXISTS books_format_index ON " + TABLE_BOOKS + "(format)");
         db.execSQL("CREATE INDEX IF NOT EXISTS books_state_last_read_index ON " + TABLE_BOOKS + "(state, last_read_at DESC)");
     }
 
@@ -186,6 +207,21 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
         db.execSQL(
                 "CREATE INDEX IF NOT EXISTS audio_tracks_book_index ON " + TABLE_AUDIO_TRACKS +
                         "(book_id, track_index)"
+        );
+    }
+
+    private static void createV5Tables(SQLiteDatabase db) {
+        db.execSQL(
+                "CREATE TABLE IF NOT EXISTS reading_queue (" +
+                        "book_id TEXT NOT NULL UNIQUE," +
+                        "queue_index INTEGER NOT NULL," +
+                        "added_at INTEGER NOT NULL," +
+                        "FOREIGN KEY(book_id) REFERENCES books(id) ON DELETE CASCADE" +
+                        ")"
+        );
+        db.execSQL(
+                "CREATE INDEX IF NOT EXISTS reading_queue_order_index ON " + TABLE_QUEUE +
+                        "(queue_index ASC, added_at ASC, book_id ASC)"
         );
     }
 
@@ -283,6 +319,110 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
     }
 
     @Override
+    public void updateBookMetadata(String id, String title, String author, String language, String state) {
+        requireState(state);
+        ContentValues values = new ContentValues();
+        values.put("title", title == null ? "" : title);
+        values.put("author", author == null ? "" : author);
+        values.put("language", language == null ? "" : language);
+        values.put("state", state);
+        getWritableDatabase().update(TABLE_BOOKS, values, "id = ?", new String[]{id});
+        if ("read".equals(state)) removeFromQueue(id);
+    }
+
+    @Override
+    public List<ReadingQueueRecord> listQueue() {
+        List<QueueEntry> entries = new ArrayList<>();
+        try (Cursor cursor = getReadableDatabase().query(
+                TABLE_QUEUE,
+                new String[]{"book_id", "queue_index", "added_at"},
+                null,
+                null,
+                null,
+                null,
+                "queue_index ASC, added_at ASC, book_id ASC"
+        )) {
+            while (cursor.moveToNext()) {
+                entries.add(new QueueEntry(cursor.getString(0), cursor.getInt(1), cursor.getLong(2)));
+            }
+        }
+
+        List<ReadingQueueRecord> records = new ArrayList<>();
+        for (QueueEntry entry : entries) {
+            ReadingBookRecord book = findById(entry.bookId);
+            if (book != null) records.add(new ReadingQueueRecord(book, entry.queueIndex, entry.addedAt));
+        }
+        return records;
+    }
+
+    @Override
+    public boolean addToQueue(String bookId) {
+        if (bookId == null || bookId.isEmpty() || findById(bookId) == null) return false;
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
+            if (queueIndex(db, bookId) >= 0) {
+                db.setTransactionSuccessful();
+                return true;
+            }
+            ContentValues values = new ContentValues();
+            values.put("book_id", bookId);
+            values.put("queue_index", nextQueueIndex(db));
+            values.put("added_at", System.currentTimeMillis());
+            db.insertOrThrow(TABLE_QUEUE, null, values);
+            db.setTransactionSuccessful();
+            return true;
+        } finally {
+            db.endTransaction();
+        }
+    }
+
+    @Override
+    public boolean removeFromQueue(String bookId) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
+            boolean removed = removeFromQueue(db, bookId);
+            db.setTransactionSuccessful();
+            return removed;
+        } finally {
+            db.endTransaction();
+        }
+    }
+
+    @Override
+    public boolean moveQueueItem(String bookId, int targetIndex) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
+            List<String> ids = queueIds(db);
+            int fromIndex = ids.indexOf(bookId);
+            if (fromIndex < 0) {
+                db.setTransactionSuccessful();
+                return false;
+            }
+            String moving = ids.remove(fromIndex);
+            int destination = Math.max(0, Math.min(targetIndex, ids.size()));
+            ids.add(destination, moving);
+            writeQueueOrder(db, ids);
+            db.setTransactionSuccessful();
+            return true;
+        } finally {
+            db.endTransaction();
+        }
+    }
+
+    @Override
+    public boolean isQueued(String bookId) {
+        return queueIndex(bookId) >= 0;
+    }
+
+    @Override
+    public int queueIndex(String bookId) {
+        return queueIndex(getReadableDatabase(), bookId);
+    }
+
+    @Override
     public void insertAudioTracks(String bookId, List<ReadingAudioTrackRecord> tracks) {
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
@@ -371,6 +511,7 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
         values.put("state", state);
         values.put("last_read_at", lastReadAt);
         getWritableDatabase().update(TABLE_BOOKS, values, "id = ?", new String[]{id});
+        if ("read".equals(state)) removeFromQueue(id);
     }
 
     @Override
@@ -470,6 +611,8 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
         try {
+            db.delete(TABLE_QUEUE, "book_id = ?", new String[]{id});
+            compactQueue(db);
             db.delete(TABLE_AUDIO_TRACKS, "book_id = ?", new String[]{id});
             db.delete(TABLE_MARKS, "book_id = ?", new String[]{id});
             db.delete(TABLE_SETTINGS, "scope = ? AND book_id = ?", new String[]{"book", id});
@@ -502,6 +645,8 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
         values.put("id", record.getId());
         values.put("sha256", record.getSha256());
         values.put("title", record.getTitle());
+        values.put("author", record.getAuthor());
+        values.put("language", record.getLanguage());
         values.put("format", record.getFormat());
         values.put("mime_type", record.getMimeType());
         values.put("relative_path", record.getRelativePath());
@@ -528,6 +673,8 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
                 cursor.getString(cursor.getColumnIndexOrThrow("id")),
                 cursor.getString(cursor.getColumnIndexOrThrow("sha256")),
                 cursor.getString(cursor.getColumnIndexOrThrow("title")),
+                cursor.getString(cursor.getColumnIndexOrThrow("author")),
+                cursor.getString(cursor.getColumnIndexOrThrow("language")),
                 cursor.getString(cursor.getColumnIndexOrThrow("format")),
                 cursor.getString(cursor.getColumnIndexOrThrow("mime_type")),
                 cursor.getString(cursor.getColumnIndexOrThrow("relative_path")),
@@ -591,12 +738,17 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
         List<String> args = new ArrayList<>();
 
         if (!query.getQuery().isEmpty()) {
-            clauses.add("title LIKE ? COLLATE NOCASE");
+            clauses.add("(title LIKE ? COLLATE NOCASE OR author LIKE ? COLLATE NOCASE)");
+            args.add("%" + query.getQuery() + "%");
             args.add("%" + query.getQuery() + "%");
         }
         if (!"all".equals(query.getStatus())) {
             clauses.add("state = ?");
             args.add(query.getStatus());
+        }
+        if (!query.getFormat().isEmpty()) {
+            clauses.add("format = ?");
+            args.add(query.getFormat());
         }
 
         String sql = clauses.isEmpty() ? null : String.join(" AND ", clauses);
@@ -607,12 +759,74 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
         switch (sort) {
             case "title":
                 return "title COLLATE NOCASE ASC, imported_at DESC, id ASC";
+            case "author":
+                return "author COLLATE NOCASE ASC, title COLLATE NOCASE ASC, id ASC";
             case "imported":
                 return "imported_at DESC, id ASC";
             case "lastRead":
                 return "last_read_at IS NULL ASC, last_read_at DESC, imported_at DESC, id ASC";
             default:
                 throw new IllegalArgumentException("Unsupported reading sort: " + sort);
+        }
+    }
+
+    private static int nextQueueIndex(SQLiteDatabase db) {
+        try (Cursor cursor = db.rawQuery(
+                "SELECT COALESCE(MAX(queue_index), -1) + 1 FROM " + TABLE_QUEUE,
+                null
+        )) {
+            return cursor.moveToFirst() ? cursor.getInt(0) : 0;
+        }
+    }
+
+    private static int queueIndex(SQLiteDatabase db, String bookId) {
+        if (bookId == null || bookId.isEmpty()) return -1;
+        try (Cursor cursor = db.query(
+                TABLE_QUEUE,
+                new String[]{"queue_index"},
+                "book_id = ?",
+                new String[]{bookId},
+                null,
+                null,
+                null,
+                "1"
+        )) {
+            return cursor.moveToFirst() ? cursor.getInt(0) : -1;
+        }
+    }
+
+    private static boolean removeFromQueue(SQLiteDatabase db, String bookId) {
+        if (bookId == null || bookId.isEmpty()) return false;
+        boolean removed = db.delete(TABLE_QUEUE, "book_id = ?", new String[]{bookId}) > 0;
+        if (removed) compactQueue(db);
+        return removed;
+    }
+
+    private static void compactQueue(SQLiteDatabase db) {
+        writeQueueOrder(db, queueIds(db));
+    }
+
+    private static List<String> queueIds(SQLiteDatabase db) {
+        List<String> ids = new ArrayList<>();
+        try (Cursor cursor = db.query(
+                TABLE_QUEUE,
+                new String[]{"book_id"},
+                null,
+                null,
+                null,
+                null,
+                "queue_index ASC, added_at ASC, book_id ASC"
+        )) {
+            while (cursor.moveToNext()) ids.add(cursor.getString(0));
+        }
+        return ids;
+    }
+
+    private static void writeQueueOrder(SQLiteDatabase db, List<String> ids) {
+        for (int index = 0; index < ids.size(); index++) {
+            ContentValues values = new ContentValues();
+            values.put("queue_index", index);
+            db.update(TABLE_QUEUE, values, "book_id = ?", new String[]{ids.get(index)});
         }
     }
 
@@ -663,6 +877,18 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
         private Selection(String sql, String[] args) {
             this.sql = sql;
             this.args = args;
+        }
+    }
+
+    private static final class QueueEntry {
+        private final String bookId;
+        private final int queueIndex;
+        private final long addedAt;
+
+        private QueueEntry(String bookId, int queueIndex, long addedAt) {
+            this.bookId = bookId;
+            this.queueIndex = queueIndex;
+            this.addedAt = addedAt;
         }
     }
 }

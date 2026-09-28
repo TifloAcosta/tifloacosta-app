@@ -37,6 +37,34 @@ public interface ReadingBookRepository {
         updateProgress(id, blockIndex, unitIndex, anchorText, percent, state, lastReadAt);
     }
 
+    default void updateBookMetadata(String id, String title, String author, String language, String state) {
+        throw new UnsupportedOperationException("Reading metadata is not supported by this repository");
+    }
+
+    default List<ReadingQueueRecord> listQueue() {
+        throw new UnsupportedOperationException("Reading queue is not supported by this repository");
+    }
+
+    default boolean addToQueue(String bookId) {
+        throw new UnsupportedOperationException("Reading queue is not supported by this repository");
+    }
+
+    default boolean removeFromQueue(String bookId) {
+        throw new UnsupportedOperationException("Reading queue is not supported by this repository");
+    }
+
+    default boolean moveQueueItem(String bookId, int targetIndex) {
+        throw new UnsupportedOperationException("Reading queue is not supported by this repository");
+    }
+
+    default boolean isQueued(String bookId) {
+        return false;
+    }
+
+    default int queueIndex(String bookId) {
+        return -1;
+    }
+
     default void insertAudioTracks(String bookId, List<ReadingAudioTrackRecord> tracks) {
         throw new UnsupportedOperationException("Reading audio tracks are not supported by this repository");
     }

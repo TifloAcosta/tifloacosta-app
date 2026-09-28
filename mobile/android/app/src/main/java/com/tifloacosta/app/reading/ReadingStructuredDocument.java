@@ -74,13 +74,19 @@ public final class ReadingStructuredDocument {
         private final String text;
         private final int level;
         private final String href;
+        private final List<Link> links;
 
         public Block(String id, String type, String text, int level, String href) {
+            this(id, type, text, level, href, Collections.emptyList());
+        }
+
+        public Block(String id, String type, String text, int level, String href, List<Link> links) {
             this.id = clean(id);
             this.type = clean(type);
             this.text = clean(text);
             this.level = level;
             this.href = clean(href);
+            this.links = immutableCopy(links);
         }
 
         public String getId() { return id; }
@@ -88,6 +94,23 @@ public final class ReadingStructuredDocument {
         public String getText() { return text; }
         public int getLevel() { return level; }
         public String getHref() { return href; }
+        public List<Link> getLinks() { return links; }
+    }
+
+    public static final class Link {
+        private final String text;
+        private final String href;
+        private final boolean external;
+
+        public Link(String text, String href, boolean external) {
+            this.text = clean(text);
+            this.href = clean(href);
+            this.external = external;
+        }
+
+        public String getText() { return text; }
+        public String getHref() { return href; }
+        public boolean isExternal() { return external; }
     }
 
     public static final class NavigationItem {

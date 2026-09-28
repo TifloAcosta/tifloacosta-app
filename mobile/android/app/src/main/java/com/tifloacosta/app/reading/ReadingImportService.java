@@ -1,5 +1,6 @@
 package com.tifloacosta.app.reading;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -113,6 +114,7 @@ public final class ReadingImportService {
             long actualSize = copyToTemp(input, tempName, digest);
 
             ReadingAudioProbe.Result audioInfo = null;
+            ReadingStructuredDocument epubInfo = null;
             if ("pdf".equals(format)) {
                 ReadingImportResult pdfValidation = validatePdf(tempName);
                 if (pdfValidation != null) return pdfValidation;
@@ -120,6 +122,12 @@ public final class ReadingImportService {
                 audioInfo = validateAudio(tempName);
                 if (audioInfo == null || !audioInfo.isReadable()) {
                     return ReadingImportResult.rejected("invalid-audio");
+                }
+            } else if ("epub".equals(format)) {
+                try {
+                    epubInfo = validateEpub(tempName);
+                } catch (ReadingEpubAdapter.EpubException error) {
+                    return ReadingImportResult.rejected(error.getCode());
                 }
             } else if (!fileStore.tempHasReadableText(tempName, format)) {
                 return ReadingImportResult.rejected("empty");
@@ -135,13 +143,20 @@ public final class ReadingImportService {
             String relativePath = fileStore.moveTempToItem(tempName, id, format, sourceExtension);
             movedToFinal = true;
 
-            String title = audioInfo != null && audioInfo.getTitle() != null
-                    ? audioInfo.getTitle()
-                    : titleFrom(source.getDisplayName(), id, format);
+            String fallbackTitle = titleFrom(source.getDisplayName(), id, format);
+            String title = audioInfo != null && audioInfo.getTitle() != null && !audioInfo.getTitle().trim().isEmpty()
+                    ? audioInfo.getTitle().trim()
+                    : epubInfo != null && !epubInfo.getTitle().isEmpty()
+                    ? epubInfo.getTitle()
+                    : fallbackTitle;
+            String author = epubInfo == null ? "" : epubInfo.getAuthor();
+            String language = epubInfo == null ? "" : epubInfo.getLanguage();
             ReadingBookRecord record = new ReadingBookRecord(
                     id,
                     hash,
                     title,
+                    author,
+                    language,
                     format,
                     mimeFrom(source.getMimeType(), format, sourceExtension),
                     relativePath,
@@ -150,6 +165,10 @@ public final class ReadingImportService {
                     null,
                     "not-read",
                     0,
+                    0,
+                    null,
+                    0,
+                    0L,
                     0.0
             );
 
@@ -444,6 +463,19 @@ public final class ReadingImportService {
         return audioProbe.inspect(fileStore.tempFile(tempName));
     }
 
+    private ReadingStructuredDocument validateEpub(String tempName) throws IOException {
+        File tempFile = fileStore.tempFile(tempName);
+        File parent = tempFile.getParentFile();
+        if (parent == null) throw new IOException("Reading EPUB temp directory is unavailable");
+        File workRoot = new File(parent, "epub-work");
+        try (InputStream source = fileStore.openTempInput(tempName)) {
+            return new ReadingEpubAdapter().read(source, workRoot);
+        } finally {
+            File[] remaining = workRoot.listFiles();
+            if (remaining == null || remaining.length == 0) workRoot.delete();
+        }
+    }
+
     private static String formatFrom(ReadingImportSource source) {
         if (source == null) return null;
 
@@ -453,11 +485,13 @@ public final class ReadingImportService {
         String lowerMime = mimeType == null ? "" : mimeType.trim().toLowerCase(Locale.ROOT);
 
         if (lowerName.endsWith(".pdf")) return "pdf";
+        if (lowerName.endsWith(".epub")) return "epub";
         if (lowerName.endsWith(".html") || lowerName.endsWith(".htm")) return "html";
         if (lowerName.endsWith(".txt")) return "txt";
         if (audioExtensionFrom(source) != null && audioExtensionFromName(lowerName) != null) return "audio";
 
         if ("application/pdf".equals(lowerMime)) return "pdf";
+        if ("application/epub+zip".equals(lowerMime)) return "epub";
         if ("text/html".equals(lowerMime)) return "html";
         if ("text/plain".equals(lowerMime)) return "txt";
         if (audioExtensionFromMime(lowerMime) != null) return "audio";
@@ -467,6 +501,7 @@ public final class ReadingImportService {
     private static String sourceExtensionFrom(ReadingImportSource source, String format) {
         if ("html".equals(format)) return "html";
         if ("pdf".equals(format)) return "pdf";
+        if ("epub".equals(format)) return "epub";
         if ("txt".equals(format)) return "txt";
         if ("audio".equals(format)) return audioExtensionFrom(source);
         return null;
@@ -521,6 +556,8 @@ public final class ReadingImportService {
             else if (lowerTitle.endsWith(".htm")) title = title.substring(0, title.length() - 4).trim();
         } else if ("pdf".equals(format) && lowerTitle.endsWith(".pdf")) {
             title = title.substring(0, title.length() - 4).trim();
+        } else if ("epub".equals(format) && lowerTitle.endsWith(".epub")) {
+            title = title.substring(0, title.length() - 5).trim();
         } else if ("txt".equals(format) && lowerTitle.endsWith(".txt")) {
             title = title.substring(0, title.length() - 4).trim();
         } else if ("audio".equals(format)) {
@@ -537,6 +574,7 @@ public final class ReadingImportService {
 
     private static String mimeFrom(String mimeType, String format, String sourceExtension) {
         if ("pdf".equals(format)) return "application/pdf";
+        if ("epub".equals(format)) return "application/epub+zip";
         if ("audio".equals(format)) return audioMimeFrom(mimeType, sourceExtension);
         if (mimeType != null && !mimeType.trim().isEmpty()) return mimeType;
         return "html".equals(format) ? "text/html" : "text/plain";

@@ -23,6 +23,7 @@ import com.tifloacosta.app.reading.PdfBoxReadingPdfBackend;
 import com.tifloacosta.app.reading.ReadingBookQuery;
 import com.tifloacosta.app.reading.ReadingBookRecord;
 import com.tifloacosta.app.reading.ReadingContentValidator;
+import com.tifloacosta.app.reading.ReadingEpubAdapter;
 import com.tifloacosta.app.reading.ReadingFileStore;
 import com.tifloacosta.app.reading.ReadingImportResult;
 import com.tifloacosta.app.reading.ReadingImportService;
@@ -32,6 +33,8 @@ import com.tifloacosta.app.reading.ReadingMarkRecord;
 import com.tifloacosta.app.reading.ReadingPdfExtractor;
 import com.tifloacosta.app.reading.ReadingPdfResult;
 import com.tifloacosta.app.reading.ReadingSettingsRecord;
+import com.tifloacosta.app.reading.ReadingStructuredDocument;
+import com.tifloacosta.app.reading.ReadingStructuredDocumentJson;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -107,6 +110,7 @@ public class TifloReadingPlugin extends Plugin {
                 "text/plain",
                 "text/html",
                 "application/pdf",
+                "application/epub+zip",
                 "audio/mpeg",
                 "audio/mp4",
                 "audio/aac",
@@ -214,6 +218,12 @@ public class TifloReadingPlugin extends Plugin {
                             call.reject("Unable to open PDF");
                             return;
                         }
+                    }
+                } else if ("epub".equals(record.getFormat())) {
+                    try (InputStream source = fileStore.openStoredInput(record.getRelativePath())) {
+                        File workRoot = new File(getContext().getCacheDir(), "reading-epub-open");
+                        ReadingStructuredDocument document = new ReadingEpubAdapter().read(source, workRoot);
+                        result.put("content", ReadingStructuredDocumentJson.serialize(document));
                     }
                 } else if (!"audio".equals(record.getFormat())) {
                     result.put("content", fileStore.readUtf8(record.getRelativePath()));
@@ -607,6 +617,8 @@ public class TifloReadingPlugin extends Plugin {
         JSObject book = new JSObject();
         book.put("id", record.getId());
         book.put("title", record.getTitle());
+        book.put("author", record.getAuthor());
+        book.put("language", record.getLanguage());
         book.put("format", record.getFormat());
         book.put("state", record.getState());
         book.put("percent", record.getPercent());
@@ -831,6 +843,8 @@ public class TifloReadingPlugin extends Plugin {
                 sourceName = "source.html";
             } else if ("pdf".equals(format)) {
                 sourceName = "source.pdf";
+            } else if ("epub".equals(format)) {
+                sourceName = "source.epub";
             } else if ("audio".equals(format)) {
                 sourceName = "source." + safeAudioExtension(sourceExtension);
             } else {

@@ -1,5 +1,6 @@
 package com.tifloacosta.app.reading;
 
+import java.util.Collections;
 import java.util.List;
 
 public interface ReadingBookRepository {
@@ -91,6 +92,10 @@ public interface ReadingBookRepository {
 
     default void setReadingSetting(ReadingSettingsRecord record) {
         throw new UnsupportedOperationException("Reading settings are not supported by this repository");
+    }
+
+    default List<ReadingSettingsRecord> listReadingSettings(String scope, String bookId) {
+        return Collections.emptyList();
     }
 
     default void resetBookReadingSettings(String bookId) {

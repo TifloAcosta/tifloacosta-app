@@ -23,6 +23,55 @@ test('reading library screen keeps import, search, paging and delete actions exp
   assert.match(screen, /readingLibrary\.pageStatus/);
 });
 
+test('reading library follows the approved accessible order and complete filter contract', async () => {
+  const screen = await read('src/screens/reading-library.mjs');
+
+  const search = screen.indexOf("t('readingLibrary.searchLabel')");
+  const continueReading = screen.indexOf("t('readingLibrary.continueReading')");
+  const queue = screen.indexOf("t('readingLibrary.queue')");
+  const importAction = screen.indexOf("t('readingLibrary.import')");
+  const filters = screen.indexOf("t('readingLibrary.filtersHeading')");
+  const settings = screen.indexOf("t('readingLibrary.settings')");
+  const library = screen.indexOf("t('readingLibrary.myLibrary')");
+
+  assert.ok(search >= 0, 'search must be present');
+  assert.ok(search < continueReading, 'search comes before Continue');
+  assert.ok(continueReading < queue, 'Continue comes before Queue');
+  assert.ok(queue < importAction, 'Queue comes before Import');
+  assert.ok(importAction < filters, 'Import comes before Filters');
+  assert.ok(filters < settings, 'Filters come before Settings');
+  assert.ok(settings < library, 'Settings come before My library');
+
+  assert.match(screen, /statusFilter/);
+  assert.match(screen, /formatFilter/);
+  assert.match(screen, /sortSelect/);
+  assert.match(screen, /client\.listBooks\(\{[\s\S]*status[\s\S]*format[\s\S]*sort/);
+  assert.match(screen, /readingLibrary\.filterAll/);
+  assert.match(screen, /readingLibrary\.filterInReading/);
+  assert.match(screen, /readingLibrary\.filterNotRead/);
+  assert.match(screen, /readingLibrary\.filterRead/);
+  assert.match(screen, /readingLibrary\.sortTitle/);
+  assert.match(screen, /readingLibrary\.sortAuthor/);
+  assert.match(screen, /readingLibrary\.sortImported/);
+  assert.match(screen, /readingLibrary\.sortLastRead/);
+});
+
+test('reading library item options expose queue state metadata rename and delete actions', async () => {
+  const screen = await read('src/screens/reading-library.mjs');
+
+  assert.match(screen, /client\.addToQueue\(/);
+  assert.match(screen, /client\.removeFromQueue\(/);
+  assert.match(screen, /client\.updateBookMetadata\(/);
+  assert.match(screen, /readingLibrary\.addToQueue/);
+  assert.match(screen, /readingLibrary\.removeFromQueue/);
+  assert.match(screen, /readingLibrary\.changeState/);
+  assert.match(screen, /readingLibrary\.information/);
+  assert.match(screen, /readingLibrary\.rename/);
+  assert.match(screen, /readingLibrary\.delete/);
+  assert.match(screen, /item\.author/);
+  assert.match(screen, /item\.format/);
+});
+
 test('reading library exposes one open-now action only for one newly imported book', async () => {
   const screen = await read('src/screens/reading-library.mjs');
   assert.match(screen, /initialImportBatch/);
@@ -55,6 +104,7 @@ test('composition root consumes initial and live shared documents through the re
   assert.match(app, /consumeInitialSharedDocuments\(\)/);
   assert.match(app, /addListener\(['"]documentsReceived['"]/);
   assert.match(app, /case ['"]reading-library['"]/);
+  assert.match(app, /case ['"]reading-queue['"]/);
   assert.match(app, /case ['"]library['"]/);
 
   const startHome = app.lastIndexOf("router.start('home');");
@@ -63,4 +113,5 @@ test('composition root consumes initial and live shared documents through the re
 
   assert.match(app, /router\.current\(\)\?\.name\s*===\s*['"]reading-library['"][\s\S]{0,180}render\(router\.current\(\)\)/);
   assert.match(app, /router\.navigate\(['"]reading-library['"]/);
+  assert.match(app, /renderReadingQueue/);
 });

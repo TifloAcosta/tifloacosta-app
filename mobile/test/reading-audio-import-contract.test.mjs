@@ -29,7 +29,7 @@ test('reading audio import accepts only the approved local audio families and pr
 
   assert.match(importer, /return\s+"audio"/);
   assert.match(importer, /audioExtensionFrom/);
-  assert.match(importer, /moveTempToItem\(tempName, id, format, sourceExtension\)/);
+  assert.match(importer, /moveTempToItem\(tempName, id, recordFormat, sourceExtension\)/);
   assert.match(store, /moveTempToItem\(\s*String tempName,\s*String id,\s*String format,\s*String sourceExtension\s*\)/);
 });
 

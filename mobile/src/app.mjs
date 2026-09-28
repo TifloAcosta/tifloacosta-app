@@ -406,12 +406,50 @@ function renderDirectVideo(context) {
   queueMicrotask(() => { void player.open(); });
 }
 
+function renderLanguageChoice() {
+  root.replaceChildren();
+  document.title = 'TifloAcosta';
+
+  const heading = document.createElement('h1');
+  heading.dataset.screenHeading = '';
+  heading.tabIndex = -1;
+  heading.textContent = 'Idioma / Language';
+
+  const intro = document.createElement('p');
+  intro.textContent = 'Elige el idioma de la aplicación. Choose the app language.';
+
+  const group = document.createElement('div');
+  group.setAttribute('role', 'group');
+  group.setAttribute('aria-label', 'Idioma / Language');
+
+  for (const [lang, label] of [['es', 'Español'], ['en', 'English']]) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.lang = lang;
+    button.textContent = label;
+    button.addEventListener('click', () => {
+      const after = preferencesStore.save({ lang });
+      applyPreferences(document.documentElement, after);
+      render(router.current() || { name: 'home' });
+      queueMicrotask(() => focusScreenHeading(root));
+    });
+    group.append(button);
+  }
+
+  root.append(heading, intro, group);
+}
+
 function render(route) {
   activeScreenCleanup?.();
   activeScreenCleanup = null;
   screenBackHandler = null;
   readerController = null;
   shareController = null;
+
+  if (preferencesStore.needsLanguageChoice()) {
+    renderLanguageChoice();
+    return;
+  }
 
   const preferences = preferencesStore.getCurrent();
   document.title = t('app.title');
@@ -625,7 +663,10 @@ const contentStore = createContentStore({
 contentStore.load().then(result => {
   currentContent = result.content || EMPTY_CONTENT;
   currentNewNewsIds = newsSeenStore.compare(currentContent.news);
-  if (!shareMode && !textInputIsActive()) render(router.current());
+  if (!shareMode && !textInputIsActive()) {
+    render(router.current());
+    queueMicrotask(() => focusScreenHeading(root));
+  }
   void notificationCoordinator.markReady();
 });
 

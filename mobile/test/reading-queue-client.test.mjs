@@ -84,7 +84,33 @@ test('reading library client normalizes and mutates the reading queue', async ()
   ]);
 });
 
-test('reading library native wrapper forwards queue operations and degrades safely', async () => {
+test('reading library client updates display metadata and reading state explicitly', async () => {
+  const calls = [];
+  const client = createReadingLibraryClient({
+    async updateBookMetadata(options) {
+      calls.push(options);
+      return { updated: true };
+    }
+  });
+
+  assert.equal(typeof client.updateBookMetadata, 'function');
+  assert.equal(await client.updateBookMetadata({
+    id: ' book-1 ',
+    title: ' Nuevo título ',
+    author: ' Autora ',
+    language: ' ES ',
+    state: 'read'
+  }), true);
+  assert.deepEqual(calls, [{
+    id: 'book-1',
+    title: 'Nuevo título',
+    author: 'Autora',
+    language: 'es',
+    state: 'read'
+  }]);
+});
+
+test('reading library native wrapper forwards queue and metadata operations and degrades safely', async () => {
   const calls = [];
   const wrapper = createReadingLibraryPlugin({
     async listQueue() {
@@ -101,6 +127,10 @@ test('reading library native wrapper forwards queue operations and degrades safe
     async moveQueueItem(options) {
       calls.push(['move', options]);
       return { moved: true };
+    },
+    async updateBookMetadata(options) {
+      calls.push(['metadata', options]);
+      return { updated: true };
     }
   });
 
@@ -108,14 +138,17 @@ test('reading library native wrapper forwards queue operations and degrades safe
   assert.equal(typeof wrapper.addToQueue, 'function');
   assert.equal(typeof wrapper.removeFromQueue, 'function');
   assert.equal(typeof wrapper.moveQueueItem, 'function');
+  assert.equal(typeof wrapper.updateBookMetadata, 'function');
   assert.equal((await wrapper.listQueue()).items.length, 1);
   assert.equal(await wrapper.addToQueue('a'), true);
   assert.equal(await wrapper.removeFromQueue('a'), true);
   assert.equal(await wrapper.moveQueueItem('a', 2), true);
+  assert.equal(await wrapper.updateBookMetadata({ id: 'a', title: 'A2', state: 'read' }), true);
   assert.deepEqual(calls, [
     ['add', { bookId: 'a' }],
     ['remove', { bookId: 'a' }],
-    ['move', { bookId: 'a', targetIndex: 2 }]
+    ['move', { bookId: 'a', targetIndex: 2 }],
+    ['metadata', { id: 'a', title: 'A2', author: '', language: '', state: 'read' }]
   ]);
 
   const empty = createReadingLibraryPlugin({});
@@ -123,4 +156,5 @@ test('reading library native wrapper forwards queue operations and degrades safe
   assert.equal(await empty.addToQueue('a'), false);
   assert.equal(await empty.removeFromQueue('a'), false);
   assert.equal(await empty.moveQueueItem('a', 0), false);
+  assert.equal(await empty.updateBookMetadata({ id: 'a', title: 'A' }), false);
 });

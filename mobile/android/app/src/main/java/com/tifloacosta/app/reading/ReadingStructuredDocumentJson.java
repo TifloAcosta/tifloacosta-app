@@ -23,6 +23,15 @@ public final class ReadingStructuredDocumentJson {
                     item.put("text", block.getText());
                     item.put("level", block.getLevel());
                     item.put("href", block.getHref());
+                    JSONArray links = new JSONArray();
+                    for (ReadingStructuredDocument.Link link : block.getLinks()) {
+                        JSONObject linkJson = new JSONObject();
+                        linkJson.put("text", link.getText());
+                        linkJson.put("href", link.getHref());
+                        linkJson.put("external", link.isExternal());
+                        links.put(linkJson);
+                    }
+                    item.put("links", links);
                     blocks.put(item);
                 }
             }

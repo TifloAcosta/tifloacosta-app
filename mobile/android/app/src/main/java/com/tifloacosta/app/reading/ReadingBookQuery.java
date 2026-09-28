@@ -3,13 +3,19 @@ package com.tifloacosta.app.reading;
 public final class ReadingBookQuery {
     private final String query;
     private final String status;
+    private final String format;
     private final String sort;
     private final int limit;
     private final int offset;
 
     public ReadingBookQuery(String query, String status, String sort, int limit, int offset) {
+        this(query, status, "", sort, limit, offset);
+    }
+
+    public ReadingBookQuery(String query, String status, String format, String sort, int limit, int offset) {
         this.query = query == null ? "" : query.trim();
         this.status = validateStatus(status == null ? "all" : status);
+        this.format = format == null ? "" : format.trim().toLowerCase();
         this.sort = validateSort(sort == null ? "lastRead" : sort);
         if (limit <= 0) {
             throw new IllegalArgumentException("limit must be greater than zero");
@@ -36,6 +42,7 @@ public final class ReadingBookQuery {
     private static String validateSort(String sort) {
         switch (sort) {
             case "title":
+            case "author":
             case "imported":
             case "lastRead":
                 return sort;
@@ -46,6 +53,7 @@ public final class ReadingBookQuery {
 
     public String getQuery() { return query; }
     public String getStatus() { return status; }
+    public String getFormat() { return format; }
     public String getSort() { return sort; }
     public int getLimit() { return limit; }
     public int getOffset() { return offset; }

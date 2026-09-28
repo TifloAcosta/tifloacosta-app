@@ -88,7 +88,7 @@ function addFileShareButton(parent, item, url, nativeActions, t) {
 
   button.addEventListener('click', async () => {
     button.disabled = true;
-    status.textContent = t('library.sharePreparing');
+    status.textContent = t('reader.preparing');
     const shared = await nativeActions?.shareFile({
       url: targetUrl,
       filename,
@@ -96,7 +96,7 @@ function addFileShareButton(parent, item, url, nativeActions, t) {
       title: item.title || filename
     });
     button.disabled = false;
-    status.textContent = shared ? '' : t('library.shareFailed');
+    status.textContent = shared ? '' : t('share.errorHeading');
   });
 
   parent.append(button, status);

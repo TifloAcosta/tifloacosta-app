@@ -1,6 +1,11 @@
+const NEW_CONTENT_LABELS = Object.freeze({
+  es: 'Novedades',
+  en: 'New content'
+});
+
 export const HOME_ITEMS = [
-  'actualidad',
   'search',
+  'actualidad',
   'library',
   'reading-library',
   'downloads',
@@ -12,7 +17,7 @@ export const HOME_ITEMS = [
   'settings'
 ];
 
-export function renderHome({ root, router, content, t }) {
+export function renderHome({ root, router, content, preferences = { lang: 'es' }, t }) {
   root.replaceChildren();
 
   const heading = document.createElement('h1');
@@ -37,14 +42,21 @@ export function renderHome({ root, router, content, t }) {
 
   root.append(nav);
 
-  const preview = Array.isArray(content?.news) ? content.news.slice(0, 5) : [];
-  if (!preview.length) return;
+  const newResources = Array.isArray(content?.resources)
+    ? content.resources.filter(item => item?.isNew === true && item?.lang === preferences.lang)
+    : [];
+  if (!newResources.length) return;
 
   const section = document.createElement('section');
+  section.lang = preferences.lang;
   const sectionHeading = document.createElement('h2');
-  sectionHeading.textContent = t('home.actualidad');
+  const newContentKey = 'home.newContent';
+  const translatedHeading = t(newContentKey);
+  sectionHeading.textContent = translatedHeading === newContentKey
+    ? (NEW_CONTENT_LABELS[preferences.lang] || NEW_CONTENT_LABELS.es)
+    : translatedHeading;
   section.append(sectionHeading);
-  for (const item of preview) {
+  for (const item of newResources) {
     const paragraph = document.createElement('p');
     paragraph.textContent = item.title || '';
     section.append(paragraph);

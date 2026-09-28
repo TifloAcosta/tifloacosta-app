@@ -1,5 +1,5 @@
 const BOOK_STATES = new Set(['not-read', 'in-reading', 'read']);
-const BOOK_SORTS = new Set(['title', 'imported', 'lastRead']);
+const BOOK_SORTS = new Set(['title', 'author', 'imported', 'lastRead']);
 const MARK_TYPES = new Set(['bookmark', 'important', 'review', 'quote']);
 const AUDIO_SLEEP_MINUTES = new Set([15, 30, 45, 60]);
 
@@ -42,8 +42,12 @@ function normalizeBook(value) {
   return {
     id,
     title: String(value.title ?? '').trim(),
+    author: String(value.author ?? '').trim(),
+    language: String(value.language ?? '').trim().toLowerCase(),
     format: String(value.format ?? '').trim().toLowerCase(),
     state,
+    queued: booleanValue(value.queued),
+    queueIndex: nonNegativeInteger(value.queueIndex, 0),
     percent,
     blockIndex: nonNegativeInteger(value.blockIndex, 0),
     unitIndex: nonNegativeInteger(value.unitIndex, 0),
@@ -116,13 +120,16 @@ function normalizeAudioTrack(value) {
 function normalizeListOptions(options = {}) {
   const status = BOOK_STATES.has(options.status) ? options.status : 'all';
   const sort = BOOK_SORTS.has(options.sort) ? options.sort : 'lastRead';
-  return {
+  const format = String(options.format ?? '').trim().toLowerCase();
+  const normalized = {
     page: positiveInteger(options.page, 1),
     pageSize: positiveInteger(options.pageSize, 10),
     query: String(options.query ?? '').trim(),
     status,
     sort
   };
+  if (format) normalized.format = format;
+  return normalized;
 }
 
 function normalizeList(value, requested) {
@@ -238,6 +245,38 @@ export function createReadingLibraryClient(plugin = {}) {
     const requested = normalizeListOptions(options);
     if (!plugin?.listBooks) return normalizeList(null, requested);
     try { return normalizeList(await plugin.listBooks(requested), requested); } catch { return normalizeList(null, requested); }
+  }
+
+  async function listQueue() {
+    if (!plugin?.listQueue) return [];
+    try {
+      const result = await plugin.listQueue();
+      const values = Array.isArray(result) ? result : Array.isArray(result?.items) ? result.items : [];
+      return values.map(normalizeBook).filter(Boolean).sort((a, b) => a.queueIndex - b.queueIndex);
+    } catch { return []; }
+  }
+
+  async function addToQueue(bookId) {
+    const cleanBookId = String(bookId ?? '').trim();
+    if (!cleanBookId || !plugin?.addToQueue) return false;
+    try { return mutationSucceeded(await plugin.addToQueue({ bookId: cleanBookId }), 'queued'); } catch { return false; }
+  }
+
+  async function removeFromQueue(bookId) {
+    const cleanBookId = String(bookId ?? '').trim();
+    if (!cleanBookId || !plugin?.removeFromQueue) return false;
+    try { return mutationSucceeded(await plugin.removeFromQueue({ bookId: cleanBookId }), 'removed'); } catch { return false; }
+  }
+
+  async function moveQueueItem(bookId, targetIndex) {
+    const cleanBookId = String(bookId ?? '').trim();
+    if (!cleanBookId || !plugin?.moveQueueItem) return false;
+    try {
+      return mutationSucceeded(await plugin.moveQueueItem({
+        bookId: cleanBookId,
+        targetIndex: nonNegativeInteger(targetIndex, 0)
+      }), 'moved');
+    } catch { return false; }
   }
 
   async function openBook(id, options = {}) {
@@ -491,6 +530,10 @@ export function createReadingLibraryClient(plugin = {}) {
     listAudioTracks,
     consumeInitialSharedDocuments,
     listBooks,
+    listQueue,
+    addToQueue,
+    removeFromQueue,
+    moveQueueItem,
     openBook,
     saveProgress,
     deleteBook,

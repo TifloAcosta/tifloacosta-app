@@ -4,6 +4,8 @@ public final class ReadingBookRecord {
     private final String id;
     private final String sha256;
     private final String title;
+    private final String author;
+    private final String language;
     private final String format;
     private final String mimeType;
     private final String relativePath;
@@ -36,6 +38,8 @@ public final class ReadingBookRecord {
                 id,
                 sha256,
                 title,
+                "",
+                "",
                 format,
                 mimeType,
                 relativePath,
@@ -72,6 +76,8 @@ public final class ReadingBookRecord {
                 id,
                 sha256,
                 title,
+                "",
+                "",
                 format,
                 mimeType,
                 relativePath,
@@ -106,9 +112,53 @@ public final class ReadingBookRecord {
             long mediaPositionMs,
             double percent
     ) {
+        this(
+                id,
+                sha256,
+                title,
+                "",
+                "",
+                format,
+                mimeType,
+                relativePath,
+                sizeBytes,
+                importedAt,
+                lastReadAt,
+                state,
+                blockIndex,
+                unitIndex,
+                anchorText,
+                mediaTrackIndex,
+                mediaPositionMs,
+                percent
+        );
+    }
+
+    public ReadingBookRecord(
+            String id,
+            String sha256,
+            String title,
+            String author,
+            String language,
+            String format,
+            String mimeType,
+            String relativePath,
+            long sizeBytes,
+            long importedAt,
+            Long lastReadAt,
+            String state,
+            int blockIndex,
+            int unitIndex,
+            String anchorText,
+            int mediaTrackIndex,
+            long mediaPositionMs,
+            double percent
+    ) {
         this.id = id;
         this.sha256 = sha256;
         this.title = title;
+        this.author = author == null ? "" : author;
+        this.language = language == null ? "" : language;
         this.format = format;
         this.mimeType = mimeType;
         this.relativePath = relativePath;
@@ -127,6 +177,8 @@ public final class ReadingBookRecord {
     public String getId() { return id; }
     public String getSha256() { return sha256; }
     public String getTitle() { return title; }
+    public String getAuthor() { return author; }
+    public String getLanguage() { return language; }
     public String getFormat() { return format; }
     public String getMimeType() { return mimeType; }
     public String getRelativePath() { return relativePath; }

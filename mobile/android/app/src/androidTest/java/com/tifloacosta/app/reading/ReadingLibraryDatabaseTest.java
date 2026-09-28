@@ -66,6 +66,37 @@ public class ReadingLibraryDatabaseTest {
         );
     }
 
+    private ReadingBookRecord bookWithMetadata(
+            String id,
+            String sha,
+            String title,
+            String author,
+            String language,
+            String format,
+            long importedAt
+    ) {
+        return new ReadingBookRecord(
+                id,
+                sha,
+                title,
+                author,
+                language,
+                format,
+                "application/octet-stream",
+                "items/" + id + "/source.bin",
+                100 + importedAt,
+                importedAt,
+                null,
+                "not-read",
+                0,
+                0,
+                null,
+                0,
+                0L,
+                0.0
+        );
+    }
+
     @Test
     public void insertFindAndShaUniqueness() {
         ReadingBookRecord first = book("a", "sha-a", "Alpha", 10, null, "not-read", 0, 0);
@@ -106,6 +137,58 @@ public class ReadingLibraryDatabaseTest {
         assertEquals(15, database.count(firstPage));
         assertEquals(1, database.count(search));
         assertEquals("Needle Book", database.list(search).get(0).getTitle());
+    }
+
+    @Test
+    public void metadataFormatFilterAuthorSearchAndAuthorSortWork() {
+        database.insert(bookWithMetadata("a", "sha-a", "Zeta", "Ángela", "es", "epub", 10));
+        database.insert(bookWithMetadata("b", "sha-b", "Alpha", "Beatriz", "es", "docx", 20));
+        database.insert(bookWithMetadata("c", "sha-c", "Beta", "Carlos", "en", "epub", 30));
+
+        ReadingBookQuery epubByAuthor = new ReadingBookQuery("", "all", "epub", "author", 10, 0);
+        List<ReadingBookRecord> epub = database.list(epubByAuthor);
+        assertEquals(2, epub.size());
+        assertEquals("a", epub.get(0).getId());
+        assertEquals("c", epub.get(1).getId());
+        assertEquals("Ángela", epub.get(0).getAuthor());
+        assertEquals("es", epub.get(0).getLanguage());
+
+        ReadingBookQuery authorSearch = new ReadingBookQuery("beatriz", "all", "", "title", 10, 0);
+        assertEquals(1, database.count(authorSearch));
+        assertEquals("b", database.list(authorSearch).get(0).getId());
+    }
+
+    @Test
+    public void queuePreventsDuplicatesReordersCompactsAndCompletionRemovesMembership() {
+        database.insert(book("a", "sha-a", "Alpha", 10, null, "not-read", 0, 0));
+        database.insert(book("b", "sha-b", "Beta", 20, null, "not-read", 0, 0));
+        database.insert(book("c", "sha-c", "Gamma", 30, null, "not-read", 0, 0));
+
+        assertEquals(true, database.addToQueue("a"));
+        assertEquals(true, database.addToQueue("b"));
+        assertEquals(true, database.addToQueue("c"));
+        assertEquals(true, database.addToQueue("b"));
+        assertEquals(3, database.listQueue().size());
+        assertEquals("a", database.listQueue().get(0).getBook().getId());
+        assertEquals("b", database.listQueue().get(1).getBook().getId());
+        assertEquals("c", database.listQueue().get(2).getBook().getId());
+
+        assertEquals(true, database.moveQueueItem("c", 0));
+        List<ReadingQueueRecord> moved = database.listQueue();
+        assertEquals("c", moved.get(0).getBook().getId());
+        assertEquals(0, moved.get(0).getQueueIndex());
+        assertEquals("a", moved.get(1).getBook().getId());
+        assertEquals(1, moved.get(1).getQueueIndex());
+
+        assertEquals(true, database.removeFromQueue("a"));
+        assertEquals(2, database.listQueue().size());
+        assertEquals(0, database.listQueue().get(0).getQueueIndex());
+        assertEquals(1, database.listQueue().get(1).getQueueIndex());
+
+        database.updateProgress("b", 8, 100.0, "read", 500L);
+        assertEquals(false, database.isQueued("b"));
+        assertEquals(1, database.listQueue().size());
+        assertEquals("c", database.listQueue().get(0).getBook().getId());
     }
 
     @Test
@@ -191,7 +274,7 @@ public class ReadingLibraryDatabaseTest {
     }
 
     @Test
-    public void v1DatabaseMigratesToV4WithoutLosingBookOrProgress() {
+    public void v1DatabaseMigratesToV5WithoutLosingBookOrProgress() {
         database.close();
         context.deleteDatabase(ReadingLibraryDatabase.DATABASE_NAME);
 
@@ -237,8 +320,10 @@ public class ReadingLibraryDatabaseTest {
         ReadingBookRecord migrated = database.findById("legacy");
 
         assertNotNull(migrated);
-        assertEquals(4, database.getReadableDatabase().getVersion());
+        assertEquals(5, database.getReadableDatabase().getVersion());
         assertEquals("Libro anterior", migrated.getTitle());
+        assertEquals("", migrated.getAuthor());
+        assertEquals("", migrated.getLanguage());
         assertEquals(9, migrated.getBlockIndex());
         assertEquals(0, migrated.getUnitIndex());
         assertNull(migrated.getAnchorText());
@@ -246,10 +331,12 @@ public class ReadingLibraryDatabaseTest {
         assertEquals(0L, migrated.getMediaPositionMs());
         assertEquals(44.5, migrated.getPercent(), 0.001);
         assertEquals("in-reading", migrated.getState());
+        assertEquals(true, database.addToQueue("legacy"));
+        assertEquals(1, database.listQueue().size());
     }
 
     @Test
-    public void v2DatabaseMigratesToV4WithoutLosingBookMarksOrProgress() {
+    public void v2DatabaseMigratesToV5WithoutLosingBookMarksOrProgress() {
         database.close();
         context.deleteDatabase(ReadingLibraryDatabase.DATABASE_NAME);
 
@@ -333,7 +420,9 @@ public class ReadingLibraryDatabaseTest {
         ReadingBookRecord migrated = database.findById("v2");
         ReadingMarkRecord mark = database.listMarks("v2", null).get(0);
 
-        assertEquals(4, database.getReadableDatabase().getVersion());
+        assertEquals(5, database.getReadableDatabase().getVersion());
+        assertEquals("", migrated.getAuthor());
+        assertEquals("", migrated.getLanguage());
         assertEquals(6, migrated.getBlockIndex());
         assertEquals(2, migrated.getUnitIndex());
         assertEquals("ancla v2", migrated.getAnchorText());
@@ -389,11 +478,12 @@ public class ReadingLibraryDatabaseTest {
     }
 
     @Test
-    public void deletingBookAlsoRemovesMarksAndBookSettingsButNotGlobalSettings() {
+    public void deletingBookAlsoRemovesMarksSettingsAndQueueButNotGlobalSettings() {
         database.insert(book("a", "sha-a", "Alpha", 10, null, "not-read", 0, 0));
         database.insertMark(new ReadingMarkRecord("m1", "a", "important", 1, 2, "Texto", "Párrafo 2", 100L));
         database.setReadingSetting(new ReadingSettingsRecord("book", "a", "speech.rate", "1.2", 100L));
         database.setReadingSetting(new ReadingSettingsRecord("global", "", "speech.rate", "1.0", 100L));
+        database.addToQueue("a");
 
         database.delete("a");
 
@@ -401,6 +491,7 @@ public class ReadingLibraryDatabaseTest {
         assertEquals(0, database.listMarks("a", null).size());
         assertNull(database.getReadingSetting("book", "a", "speech.rate"));
         assertNotNull(database.getReadingSetting("global", "", "speech.rate"));
+        assertEquals(false, database.isQueued("a"));
     }
 
     @Test

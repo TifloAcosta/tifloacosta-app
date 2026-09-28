@@ -15,7 +15,6 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Deque;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -256,7 +255,14 @@ public final class ReadingEpubAdapter {
                 String fragment = clean(element.getAttribute("id"));
                 String href = fragment.isEmpty() ? documentPath : documentPath + "#" + fragment;
                 String id = fragment.isEmpty() ? "epub-" + (++serial[0]) : documentPath + "#" + fragment;
-                output.add(new ReadingStructuredDocument.Block(id, type, text, level, href));
+                output.add(new ReadingStructuredDocument.Block(
+                        id,
+                        type,
+                        text,
+                        level,
+                        href,
+                        collectInlineLinks(element, documentPath)
+                ));
             }
             return;
         }
@@ -265,6 +271,24 @@ public final class ReadingEpubAdapter {
         for (int i = 0; i < children.getLength(); i++) {
             collectBlocks(children.item(i), documentPath, output, serial);
         }
+    }
+
+    private static List<ReadingStructuredDocument.Link> collectInlineLinks(
+            Element element,
+            String documentPath
+    ) throws IOException {
+        List<ReadingStructuredDocument.Link> links = new ArrayList<>();
+        for (Element anchor : descendants(element, "a")) {
+            String rawHref = clean(anchor.getAttribute("href"));
+            if (rawHref.isEmpty()) continue;
+            String text = readableText(anchor);
+            links.add(new ReadingStructuredDocument.Link(
+                    text,
+                    resolveHrefAllowExternal(documentPath, rawHref),
+                    isExternalHref(rawHref)
+            ));
+        }
+        return links;
     }
 
     private static String readableText(Node node) {

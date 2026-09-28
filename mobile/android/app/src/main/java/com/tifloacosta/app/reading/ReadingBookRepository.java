@@ -1,9 +1,26 @@
 package com.tifloacosta.app.reading;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface ReadingBookRepository {
+    String[] PORTABLE_READING_SETTING_KEYS = {
+            "speech.rate",
+            "speech.voice",
+            "audio.speed",
+            "audio.skipSeconds",
+            "visual.textSize",
+            "visual.fontFamily",
+            "visual.fontWeight",
+            "visual.lineSpacing",
+            "visual.paragraphSpacing",
+            "visual.readingWidth",
+            "visual.foreground",
+            "visual.background",
+            "visual.highContrast",
+            "visual.theme"
+    };
+
     ReadingBookRecord findById(String id);
     ReadingBookRecord findBySha256(String sha256);
     List<ReadingBookRecord> list(ReadingBookQuery query);
@@ -95,7 +112,12 @@ public interface ReadingBookRepository {
     }
 
     default List<ReadingSettingsRecord> listReadingSettings(String scope, String bookId) {
-        return Collections.emptyList();
+        List<ReadingSettingsRecord> records = new ArrayList<>();
+        for (String key : PORTABLE_READING_SETTING_KEYS) {
+            ReadingSettingsRecord record = getReadingSetting(scope, bookId, key);
+            if (record != null) records.add(record);
+        }
+        return records;
     }
 
     default void resetBookReadingSettings(String bookId) {

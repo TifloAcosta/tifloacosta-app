@@ -179,7 +179,7 @@ export function createAccessibleVideoPlayer({
   position.type = 'range';
   position.min = '0';
   position.max = '0';
-  position.step = '1';
+  position.step = 'any';
   position.value = '0';
   position.disabled = true;
   position.setAttribute('aria-valuetext', `${formatTime(0)} / ${formatTime(0)}`);
@@ -230,6 +230,7 @@ export function createAccessibleVideoPlayer({
         : Math.max(0, Number(position.value || 0));
       const bounded = duration > 0 ? Math.min(current, duration) : current;
       position.max = String(Math.max(0, Math.round(duration)));
+      position.step = String(Math.max(1, duration * 0.1));
       position.value = String(Math.round(bounded));
       position.setAttribute('aria-valuetext', `${formatTime(bounded)} / ${formatTime(duration)}`);
     } catch {}

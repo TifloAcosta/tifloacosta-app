@@ -23,6 +23,7 @@ import com.tifloacosta.app.reading.PdfBoxReadingPdfBackend;
 import com.tifloacosta.app.reading.ReadingBookQuery;
 import com.tifloacosta.app.reading.ReadingBookRecord;
 import com.tifloacosta.app.reading.ReadingContentValidator;
+import com.tifloacosta.app.reading.ReadingDocxAdapter;
 import com.tifloacosta.app.reading.ReadingEpubAdapter;
 import com.tifloacosta.app.reading.ReadingFileStore;
 import com.tifloacosta.app.reading.ReadingImportResult;
@@ -111,6 +112,7 @@ public class TifloReadingPlugin extends Plugin {
                 "text/html",
                 "application/pdf",
                 "application/epub+zip",
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                 "audio/mpeg",
                 "audio/mp4",
                 "audio/aac",
@@ -223,6 +225,12 @@ public class TifloReadingPlugin extends Plugin {
                     try (InputStream source = fileStore.openStoredInput(record.getRelativePath())) {
                         File workRoot = new File(getContext().getCacheDir(), "reading-epub-open");
                         ReadingStructuredDocument document = new ReadingEpubAdapter().read(source, workRoot);
+                        result.put("content", ReadingStructuredDocumentJson.serialize(document));
+                    }
+                } else if ("docx".equals(record.getFormat())) {
+                    try (InputStream source = fileStore.openStoredInput(record.getRelativePath())) {
+                        File workRoot = new File(getContext().getCacheDir(), "reading-docx-open");
+                        ReadingStructuredDocument document = new ReadingDocxAdapter().read(source, workRoot);
                         result.put("content", ReadingStructuredDocumentJson.serialize(document));
                     }
                 } else if (!"audio".equals(record.getFormat())) {
@@ -845,6 +853,8 @@ public class TifloReadingPlugin extends Plugin {
                 sourceName = "source.pdf";
             } else if ("epub".equals(format)) {
                 sourceName = "source.epub";
+            } else if ("docx".equals(format)) {
+                sourceName = "source.docx";
             } else if ("audio".equals(format)) {
                 sourceName = "source." + safeAudioExtension(sourceExtension);
             } else {

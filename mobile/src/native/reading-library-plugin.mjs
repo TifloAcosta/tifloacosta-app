@@ -1,6 +1,7 @@
 import { registerPlugin } from '@capacitor/core';
 
 const NativeTifloReading = registerPlugin('TifloReading');
+const NativeTifloReadingLibrary = registerPlugin('TifloReadingLibrary');
 const NativeTifloReadingTts = registerPlugin('TifloReadingTts');
 const NativeTifloReadingAudio = registerPlugin('TifloReadingAudio');
 const NativeTifloReadingAudioGroup = registerPlugin('TifloReadingAudioGroup');
@@ -30,6 +31,16 @@ function queueTargetIndex(value, fallback = 0) {
   return Math.max(0, Math.trunc(Number(source) || 0));
 }
 
+function metadataOptions(value = {}) {
+  return {
+    id: String(value?.id ?? '').trim(),
+    title: String(value?.title ?? '').trim(),
+    author: String(value?.author ?? '').trim(),
+    language: String(value?.language ?? '').trim().toLowerCase(),
+    state: String(value?.state ?? '').trim()
+  };
+}
+
 async function safeCall(plugin, method, args, fallback) {
   if (!plugin?.[method]) return fallback;
   try {
@@ -43,10 +54,14 @@ export function createReadingLibraryPlugin(
   plugin = NativeTifloReading,
   ttsPlugin = NativeTifloReadingTts,
   audioPlugin = NativeTifloReadingAudio,
-  audioGroupPlugin = null
+  audioGroupPlugin = null,
+  libraryPlugin = null
 ) {
   const groupPlugin = audioGroupPlugin ?? (
     plugin === NativeTifloReading ? NativeTifloReadingAudioGroup : plugin
+  );
+  const managementPlugin = libraryPlugin ?? (
+    plugin === NativeTifloReading ? NativeTifloReadingLibrary : plugin
   );
 
   async function pickDocuments() {
@@ -68,35 +83,42 @@ export function createReadingLibraryPlugin(
   async function listBooks(options = {}) {
     const page = Number(options?.page) || 1;
     const pageSize = Number(options?.pageSize) || 10;
-    return safeCall(plugin, 'listBooks', options, { items: [], total: 0, page, pageSize, pages: 0 });
+    return safeCall(managementPlugin, 'listBooks', options, { items: [], total: 0, page, pageSize, pages: 0 });
   }
 
   async function listQueue() {
-    return safeCall(plugin, 'listQueue', undefined, { items: [] });
+    return safeCall(managementPlugin, 'listQueue', undefined, { items: [] });
   }
 
   async function addToQueue(value) {
     const bookId = queueBookId(value);
     if (!bookId) return false;
-    const result = await safeCall(plugin, 'addToQueue', { bookId }, { queued: false });
+    const result = await safeCall(managementPlugin, 'addToQueue', { bookId }, { queued: false });
     return result === true || result?.queued === true;
   }
 
   async function removeFromQueue(value) {
     const bookId = queueBookId(value);
     if (!bookId) return false;
-    const result = await safeCall(plugin, 'removeFromQueue', { bookId }, { removed: false });
+    const result = await safeCall(managementPlugin, 'removeFromQueue', { bookId }, { removed: false });
     return result === true || result?.removed === true;
   }
 
   async function moveQueueItem(value, targetIndex = 0) {
     const bookId = queueBookId(value);
     if (!bookId) return false;
-    const result = await safeCall(plugin, 'moveQueueItem', {
+    const result = await safeCall(managementPlugin, 'moveQueueItem', {
       bookId,
       targetIndex: queueTargetIndex(value, targetIndex)
     }, { moved: false });
     return result === true || result?.moved === true;
+  }
+
+  async function updateBookMetadata(value = {}) {
+    const options = metadataOptions(value);
+    if (!options.id || !options.title) return false;
+    const result = await safeCall(managementPlugin, 'updateBookMetadata', options, { updated: false });
+    return result === true || result?.updated === true;
   }
 
   async function openBook(id, options = {}) {
@@ -228,6 +250,7 @@ export function createReadingLibraryPlugin(
     addToQueue,
     removeFromQueue,
     moveQueueItem,
+    updateBookMetadata,
     openBook,
     saveProgress,
     deleteBook,

@@ -27,18 +27,28 @@ function normalize(value = {}) {
 
 export function createPreferencesStore({ storage = globalThis.localStorage } = {}) {
   let current = { ...DEFAULT_PREFERENCES };
+  let languageChosen = false;
 
   function load() {
     try {
       const raw = storage?.getItem?.(PREFERENCES_KEY);
-      current = raw ? normalize(JSON.parse(raw)) : { ...DEFAULT_PREFERENCES };
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        languageChosen = allowed.lang.has(parsed?.lang);
+        current = normalize(parsed);
+      } else {
+        languageChosen = false;
+        current = { ...DEFAULT_PREFERENCES };
+      }
     } catch {
+      languageChosen = false;
       current = { ...DEFAULT_PREFERENCES };
     }
     return { ...current };
   }
 
   function save(changes = {}) {
+    if (allowed.lang.has(changes?.lang)) languageChosen = true;
     current = normalize({ ...current, ...changes });
     try { storage?.setItem?.(PREFERENCES_KEY, JSON.stringify(current)); } catch { /* optional storage */ }
     return { ...current };
@@ -46,7 +56,13 @@ export function createPreferencesStore({ storage = globalThis.localStorage } = {
 
   function reset() {
     current = { ...DEFAULT_PREFERENCES };
-    try { storage?.removeItem?.(PREFERENCES_KEY); } catch { /* optional storage */ }
+    try {
+      if (languageChosen) {
+        storage?.setItem?.(PREFERENCES_KEY, JSON.stringify(current));
+      } else {
+        storage?.removeItem?.(PREFERENCES_KEY);
+      }
+    } catch { /* optional storage */ }
     return { ...current };
   }
 
@@ -54,7 +70,11 @@ export function createPreferencesStore({ storage = globalThis.localStorage } = {
     return { ...current };
   }
 
-  return { load, save, reset, getCurrent };
+  function needsLanguageChoice() {
+    return !languageChosen;
+  }
+
+  return { load, save, reset, getCurrent, needsLanguageChoice };
 }
 
 const preferenceClasses = [

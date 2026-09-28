@@ -78,6 +78,7 @@ export function renderActualidad({
 
   for (const item of items) {
     const article = document.createElement('article');
+    article.lang = item.lang || preferences.lang;
     article.className = 'content-card';
     const heading = document.createElement('h2');
     if (item.originalUrl) {

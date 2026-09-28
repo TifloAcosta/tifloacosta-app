@@ -7,7 +7,7 @@ function format(template, values = {}) {
   );
 }
 
-export function createReadingSearchPanel({ root, documentModel, t, onPreview, onContinue }) {
+export function createReadingSearchPanel({ root, documentModel, t, onPreview, onContinue, onClose, returnFocus }) {
   const section = document.createElement('section');
   section.className = 'reading-panel reading-search-panel';
   section.hidden = true;
@@ -36,7 +36,11 @@ export function createReadingSearchPanel({ root, documentModel, t, onPreview, on
   const results = document.createElement('ul');
   results.className = 'reading-search-results';
 
-  section.append(heading, form, status, results);
+  const returnButton = document.createElement('button');
+  returnButton.type = 'button';
+  returnButton.textContent = t('readingBook.returnToReading');
+
+  section.append(heading, form, status, results, returnButton);
   root.append(section);
 
   const index = createReadingSearchIndex(documentModel, { yieldEvery: 100 });
@@ -54,6 +58,24 @@ export function createReadingSearchPanel({ root, documentModel, t, onPreview, on
     return parts.join('. ');
   }
 
+  function close() {
+    section.hidden = true;
+  }
+
+  function finishAndReturn(action) {
+    let pending;
+    try {
+      pending = action?.();
+    } catch {
+      pending = null;
+    }
+    void Promise.resolve(pending).finally(() => {
+      if (destroyed) return;
+      close();
+      returnFocus?.();
+    });
+  }
+
   async function runSearch() {
     await ready;
     if (destroyed) return;
@@ -68,11 +90,13 @@ export function createReadingSearchPanel({ root, documentModel, t, onPreview, on
     for (const result of found.results) {
       const item = document.createElement('li');
       const text = document.createElement('p');
-      text.textContent = resultLabel(result);
+      const context = resultLabel(result);
+      text.textContent = context;
 
       const previewButton = document.createElement('button');
       previewButton.type = 'button';
       previewButton.textContent = t('readingBook.previewResult');
+      previewButton.setAttribute('aria-label', format(t('readingBook.previewResultLabel'), { result: context }));
       previewButton.addEventListener('click', () => {
         onPreview?.({ blockIndex: result.blockIndex, unitIndex: result.unitIndex, result });
       });
@@ -80,8 +104,9 @@ export function createReadingSearchPanel({ root, documentModel, t, onPreview, on
       const continueButton = document.createElement('button');
       continueButton.type = 'button';
       continueButton.textContent = t('readingBook.continueFromResult');
+      continueButton.setAttribute('aria-label', format(t('readingBook.continueFromResultLabel'), { result: context }));
       continueButton.addEventListener('click', () => {
-        onContinue?.({ blockIndex: result.blockIndex, unitIndex: result.unitIndex, result });
+        finishAndReturn(() => onContinue?.({ blockIndex: result.blockIndex, unitIndex: result.unitIndex, result }));
       });
 
       item.append(text, previewButton, continueButton);
@@ -94,13 +119,13 @@ export function createReadingSearchPanel({ root, documentModel, t, onPreview, on
     void runSearch();
   });
 
+  returnButton.addEventListener('click', () => {
+    finishAndReturn(onClose);
+  });
+
   function open() {
     section.hidden = false;
     queueMicrotask(() => input.focus());
-  }
-
-  function close() {
-    section.hidden = true;
   }
 
   function destroy() {

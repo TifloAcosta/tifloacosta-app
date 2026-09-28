@@ -149,10 +149,12 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
   const previous = document.createElement('button');
   previous.type = 'button';
   previous.textContent = t('readingBook.previousUnit');
+  previous.setAttribute('aria-label', t('readingBook.previousSentence'));
 
   const next = document.createElement('button');
   next.type = 'button';
   next.textContent = t('readingBook.nextUnit');
+  next.setAttribute('aria-label', t('readingBook.nextSentence'));
 
   const navigationButton = document.createElement('button');
   navigationButton.type = 'button';
@@ -252,6 +254,13 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
   let settingsPanel = null;
   let destroyed = false;
 
+  function focusCurrentSemanticUnit() {
+    const element = readerContainer.querySelector('[data-reading-unit="current"]');
+    if (!element) return false;
+    element.focus();
+    return true;
+  }
+
   function clearInteractiveReading() {
     controls.hidden = true;
     pdfPageNavigation.hidden = true;
@@ -332,6 +341,7 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
     element.tabIndex = -1;
     element.dataset.blockIndex = String(normalized.blockIndex);
     element.dataset.unitIndex = String(normalized.unitIndex);
+    element.dataset.readingUnit = 'current';
     readerContainer.replaceChildren(element);
     if (commit) currentPosition = normalized;
 
@@ -358,7 +368,7 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
             units: blockUnits
           });
     }
-    if (focus) element.focus();
+    if (focus) focusCurrentSemanticUnit();
     return true;
   }
 
@@ -409,7 +419,7 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
   next.addEventListener('click', () => { void navigateSemantic('next'); });
   previousPage.addEventListener('click', () => { void navigatePdfPage(-1); });
   nextPage.addEventListener('click', () => { void navigatePdfPage(1); });
-  navigationButton.addEventListener('click', () => readerContainer.focus());
+  navigationButton.addEventListener('click', () => { focusCurrentSemanticUnit(); });
 
   pageForm.addEventListener('submit', event => {
     event.preventDefault();
@@ -538,8 +548,12 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
         renderSemanticPosition(position, { focus: true, commit: false });
       },
       onContinue(position) {
-        void moveToPosition(position);
-      }
+        return moveToPosition(position);
+      },
+      onClose() {
+        renderSemanticPosition(currentPosition, { focus: false, announce: false, commit: false });
+      },
+      returnFocus: focusCurrentSemanticUnit
     });
 
     marksPanel = createReadingMarksPanel({
@@ -554,7 +568,8 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
         const page = pageForPosition(documentModel, position);
         return page ? format(t('readingBook.pdfPageReference'), { page }) : '';
       },
-      onJump: position => { void moveToPosition(position); }
+      onJump: position => moveToPosition(position),
+      returnFocus: focusCurrentSemanticUnit
     });
 
     settingsPanel = createReadingSettingsPanel({
@@ -563,7 +578,8 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
       client,
       bookId: activeBook.id,
       speech,
-      t
+      t,
+      returnFocus: focusCurrentSemanticUnit
     });
 
     renderSemanticPosition(currentPosition, { announce: false });

@@ -1,5 +1,12 @@
 const MARK_TYPES = ['bookmark', 'important', 'review', 'quote'];
 
+function format(template, values = {}) {
+  return Object.entries(values).reduce(
+    (text, [key, value]) => text.replaceAll(`{${key}}`, String(value)),
+    String(template || '')
+  );
+}
+
 function mediaPosition(value = {}) {
   return {
     mediaTrackIndex: Math.max(0, Math.trunc(Number(value?.mediaTrackIndex) || 0)),
@@ -7,7 +14,7 @@ function mediaPosition(value = {}) {
   };
 }
 
-export function createReadingMarksPanel({ root, client, bookId, t, getPosition, getExcerpt, getReference, onJump }) {
+export function createReadingMarksPanel({ root, client, bookId, t, getPosition, getExcerpt, getReference, onJump, returnFocus }) {
   const section = document.createElement('section');
   section.className = 'reading-panel reading-marks-panel';
   section.hidden = true;
@@ -53,10 +60,28 @@ export function createReadingMarksPanel({ root, client, bookId, t, getPosition, 
   const list = document.createElement('ul');
   list.className = 'reading-marks-list';
 
-  section.append(heading, typeLabel, typeSelect, addButton, filterLabel, filter, status, list);
+  const returnButton = document.createElement('button');
+  returnButton.type = 'button';
+  returnButton.textContent = t('readingBook.returnToReading');
+
+  section.append(heading, typeLabel, typeSelect, addButton, filterLabel, filter, status, list, returnButton);
   root.append(section);
 
   let destroyed = false;
+
+  function closeAndReturn(action) {
+    let pending;
+    try {
+      pending = action?.();
+    } catch {
+      pending = null;
+    }
+    void Promise.resolve(pending).finally(() => {
+      if (destroyed) return;
+      close();
+      returnFocus?.();
+    });
+  }
 
   async function loadMarks() {
     if (destroyed) return;
@@ -72,21 +97,24 @@ export function createReadingMarksPanel({ root, client, bookId, t, getPosition, 
     for (const mark of marks) {
       const item = document.createElement('li');
       const description = document.createElement('p');
-      description.textContent = `${t(`readingBook.markType_${mark.type}`)}. ${mark.excerpt || mark.reference || ''}`.trim();
+      const context = `${t(`readingBook.markType_${mark.type}`)}. ${mark.excerpt || mark.reference || ''}`.trim();
+      description.textContent = context;
 
       const jump = document.createElement('button');
       jump.type = 'button';
       jump.textContent = t('readingBook.jumpToMark');
-      jump.addEventListener('click', () => onJump?.({
+      jump.setAttribute('aria-label', format(t('readingBook.jumpToMarkLabel'), { mark: context }));
+      jump.addEventListener('click', () => closeAndReturn(() => onJump?.({
         blockIndex: mark.blockIndex,
         unitIndex: mark.unitIndex,
         mediaTrackIndex: mark.mediaTrackIndex,
         mediaPositionMs: mark.mediaPositionMs
-      }));
+      })));
 
       const remove = document.createElement('button');
       remove.type = 'button';
       remove.textContent = t('readingBook.deleteMark');
+      remove.setAttribute('aria-label', format(t('readingBook.deleteMarkLabel'), { mark: context }));
       remove.addEventListener('click', () => {
         void (async () => {
           const deleted = await client.deleteMark(mark.id);
@@ -118,6 +146,7 @@ export function createReadingMarksPanel({ root, client, bookId, t, getPosition, 
   });
 
   filter.addEventListener('change', () => { void loadMarks(); });
+  returnButton.addEventListener('click', () => closeAndReturn());
 
   function open() {
     section.hidden = false;

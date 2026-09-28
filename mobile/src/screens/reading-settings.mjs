@@ -30,7 +30,7 @@ export function applyReadingVisualSettings(readerContainer, settings) {
   readerContainer.dataset.highContrast = effective['visual.highContrast'] ? 'true' : 'false';
 }
 
-export function createReadingSettingsPanel({ root, readerContainer, client, bookId, speech, t }) {
+export function createReadingSettingsPanel({ root, readerContainer, client, bookId, speech, t, returnFocus }) {
   const voiceSection = document.createElement('section');
   voiceSection.className = 'reading-panel reading-voice-panel';
   voiceSection.hidden = true;
@@ -55,7 +55,15 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
   const rateValue = document.createElement('output');
   rateValue.htmlFor = rate.id;
 
-  voiceSection.append(voiceHeading, voiceLabel, voiceSelect, rateLabel, rate, rateValue);
+  const voiceStatus = document.createElement('p');
+  voiceStatus.setAttribute('role', 'status');
+  voiceStatus.setAttribute('aria-live', 'polite');
+
+  const voiceReturn = document.createElement('button');
+  voiceReturn.type = 'button';
+  voiceReturn.textContent = t('readingBook.returnToReading');
+
+  voiceSection.append(voiceHeading, voiceLabel, voiceSelect, rateLabel, rate, rateValue, voiceStatus, voiceReturn);
 
   const visualSection = document.createElement('section');
   visualSection.className = 'reading-panel reading-visual-panel';
@@ -124,10 +132,15 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
   reset.textContent = t('readingBook.resetBookSettings');
   visualSection.append(reset);
 
-  const status = document.createElement('p');
-  status.setAttribute('role', 'status');
-  status.setAttribute('aria-live', 'polite');
-  visualSection.append(status);
+  const visualStatus = document.createElement('p');
+  visualStatus.setAttribute('role', 'status');
+  visualStatus.setAttribute('aria-live', 'polite');
+  visualSection.append(visualStatus);
+
+  const visualReturn = document.createElement('button');
+  visualReturn.type = 'button';
+  visualReturn.textContent = t('readingBook.returnToReading');
+  visualSection.append(visualReturn);
 
   root.append(voiceSection, visualSection);
 
@@ -135,11 +148,11 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
   let current = null;
   let destroyed = false;
 
-  async function saveBookSetting(key, value) {
+  async function saveBookSetting(key, value, targetStatus) {
     const ok = await client.setReadingSetting({ scope: 'book', bookId, key, value: String(value) });
     if (!ok || destroyed) return false;
     await loadSettings();
-    status.textContent = t('readingBook.settingsSaved');
+    targetStatus.textContent = t('readingBook.settingsSaved');
     return true;
   }
 
@@ -176,31 +189,41 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
     return current;
   }
 
-  voiceSelect.addEventListener('change', () => { void saveBookSetting('speech.voice', voiceSelect.value); });
-  rate.addEventListener('change', () => { void saveBookSetting('speech.rate', rate.value); });
+  voiceSelect.addEventListener('change', () => { void saveBookSetting('speech.voice', voiceSelect.value, voiceStatus); });
+  rate.addEventListener('change', () => { void saveBookSetting('speech.rate', rate.value, voiceStatus); });
   rate.addEventListener('input', () => { rateValue.textContent = rate.value; });
 
   for (const [key,, control] of fields) {
-    control.addEventListener('change', () => { void saveBookSetting(key, control.value); });
+    control.addEventListener('change', () => { void saveBookSetting(key, control.value, visualStatus); });
   }
-  highContrast.addEventListener('change', () => { void saveBookSetting('visual.highContrast', highContrast.checked); });
+  highContrast.addEventListener('change', () => { void saveBookSetting('visual.highContrast', highContrast.checked, visualStatus); });
 
   reset.addEventListener('click', () => {
     void (async () => {
       const ok = await client.resetBookReadingSettings(bookId);
       if (ok) {
         await loadSettings();
-        status.textContent = t('readingBook.settingsReset');
+        visualStatus.textContent = t('readingBook.settingsReset');
       }
     })();
   });
 
+  function returnToReading() {
+    closeAll();
+    returnFocus?.();
+  }
+
+  voiceReturn.addEventListener('click', returnToReading);
+  visualReturn.addEventListener('click', returnToReading);
+
   function openVoice() {
+    visualSection.hidden = true;
     voiceSection.hidden = false;
     void loadSettings();
     queueMicrotask(() => voiceSelect.focus());
   }
   function openVisual() {
+    voiceSection.hidden = true;
     visualSection.hidden = false;
     void loadSettings();
     queueMicrotask(() => textSize.focus());

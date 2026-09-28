@@ -56,7 +56,10 @@ test('Android Back is consumed by Share before normal router navigation', async 
   assert.match(app, /shareController\?\.back/);
 });
 
-test('normal content refresh never replaces an active Share screen', async () => {
+test('normal content refresh never replaces an active Share screen or steals focus from text input', async () => {
   const app = await read('src/app.mjs');
-  assert.match(app, /if\s*\(!shareMode\s*&&\s*!textInputIsActive\(\)\)\s*render\(router\.current\(\)\)/);
+  assert.match(
+    app,
+    /if\s*\(!shareMode\s*&&\s*!textInputIsActive\(\)\)\s*\{[\s\S]{0,220}render\(router\.current\(\)\)[\s\S]{0,220}focusScreenHeading\(root\)/
+  );
 });

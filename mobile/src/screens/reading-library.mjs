@@ -1,12 +1,21 @@
+import { TifloReading } from '../native/reading-library-plugin.mjs';
+import { renderReadingQueue } from './reading-queue.mjs';
 import { addScreenHeader, clearScreen } from './shared.mjs';
 
 const PAGE_SIZE = 10;
+const FORMATS = ['txt', 'html', 'pdf', 'audio'];
 
 function format(template, values = {}) {
   return Object.entries(values).reduce(
     (text, [key, value]) => text.replaceAll(`{${key}}`, String(value)),
     String(template || '')
   );
+}
+
+function fallback(t, key, es, en) {
+  const translated = t(key);
+  if (translated && translated !== key) return translated;
+  return document.documentElement.lang === 'en' ? en : es;
 }
 
 function batchHasResults(batch) {
@@ -55,6 +64,18 @@ function makeButton(label, onClick, className = '') {
   return button;
 }
 
+function makeOption(value, label) {
+  const option = document.createElement('option');
+  option.value = value;
+  option.textContent = label;
+  return option;
+}
+
+function formatLabel(value) {
+  const clean = String(value || '').trim().toUpperCase();
+  return clean === 'AUDIO' ? 'Audio' : clean;
+}
+
 export function renderReadingLibrary({
   root,
   router,
@@ -72,116 +93,21 @@ export function renderReadingLibrary({
 
   let page = 1;
   let query = '';
+  let statusFilter = 'all';
+  let formatFilter = '';
+  let sortSelect = 'lastRead';
   let listGeneration = 0;
   let currentImportBatch = initialImportBatch;
+  let queueController = null;
 
-  const status = document.createElement('p');
-  status.className = 'reading-library-status';
-  status.setAttribute('role', 'status');
-  status.setAttribute('aria-live', 'polite');
-  status.setAttribute('aria-atomic', 'true');
-  if (batchHasResults(currentImportBatch)) status.textContent = importSummary(currentImportBatch, t);
+  const liveStatus = document.createElement('p');
+  liveStatus.className = 'reading-library-status';
+  liveStatus.setAttribute('role', 'status');
+  liveStatus.setAttribute('aria-live', 'polite');
+  liveStatus.setAttribute('aria-atomic', 'true');
+  if (batchHasResults(currentImportBatch)) liveStatus.textContent = importSummary(currentImportBatch, t);
 
-  const audioChoiceHost = document.createElement('section');
-  audioChoiceHost.className = 'reading-library-audio-choice';
-  audioChoiceHost.hidden = true;
-
-  const importButton = makeButton(t('readingLibrary.import'), async () => {
-    importButton.disabled = true;
-    const batch = await client.pickDocuments();
-    importButton.disabled = false;
-    if (batch?.cancelled) return;
-    if (batch?.audioChoiceRequired) {
-      renderAudioChoice(batch);
-      return;
-    }
-    await applyImportBatch(batch);
-  });
-  importButton.id = 'reading-library-import';
-  root.append(importButton, status, audioChoiceHost);
-
-  const openNowHost = document.createElement('div');
-  openNowHost.className = 'reading-library-open-now';
-  root.append(openNowHost);
-
-  function renderOpenNow() {
-    openNowHost.replaceChildren();
-    const imported = Array.isArray(currentImportBatch?.imported) ? currentImportBatch.imported : [];
-    if (imported.length === 1) {
-      const book = imported[0];
-      openNowHost.append(makeButton(t('readingLibrary.openNow'), () => onOpenBook?.(book.id)));
-    }
-  }
-
-  async function applyImportBatch(batch) {
-    audioChoiceHost.hidden = true;
-    audioChoiceHost.replaceChildren();
-    if (batch?.cancelled) return;
-    currentImportBatch = batch;
-    status.textContent = importSummary(batch, t);
-    page = 1;
-    await refresh();
-  }
-
-  function renderAudioChoice(batch) {
-    audioChoiceHost.replaceChildren();
-    audioChoiceHost.hidden = false;
-
-    const heading = document.createElement('h2');
-    heading.textContent = t('readingLibrary.audioGroupHeading');
-    const explanation = document.createElement('p');
-    explanation.textContent = t('readingLibrary.audioGroupQuestion');
-    audioChoiceHost.append(heading, explanation);
-
-    const names = Array.isArray(batch?.selectedNames) ? batch.selectedNames : [];
-    if (names.length) {
-      const list = document.createElement('ul');
-      for (const name of names) {
-        const item = document.createElement('li');
-        item.textContent = name;
-        list.append(item);
-      }
-      audioChoiceHost.append(list);
-    }
-
-    const selectionId = String(batch?.selectionId ?? '');
-    const runChoice = async mode => {
-      for (const button of audioChoiceHost.querySelectorAll('button')) button.disabled = true;
-      status.textContent = t('readingLibrary.audioGroupProcessing');
-      const result = await client.resolveAudioSelection({ selectionId, mode });
-      status.textContent = '';
-      await applyImportBatch(result);
-      importButton.focus();
-    };
-
-    const grouped = makeButton(
-      t('readingLibrary.audioGroupOneBook'),
-      () => { void runChoice('grouped'); }
-    );
-    const independent = makeButton(
-      t('readingLibrary.audioGroupIndependent'),
-      () => { void runChoice('independent'); }
-    );
-    const cancel = makeButton(
-      t('readingLibrary.audioGroupCancel'),
-      () => { void runChoice('cancel'); }
-    );
-
-    audioChoiceHost.append(grouped, independent, cancel);
-    queueMicrotask(() => grouped.focus());
-  }
-
-  renderOpenNow();
-
-  const continueSection = document.createElement('section');
-  continueSection.className = 'reading-library-continue';
-  const continueHeading = document.createElement('h2');
-  continueHeading.textContent = t('readingLibrary.continueReading');
-  continueSection.append(continueHeading);
-  const continueContent = document.createElement('div');
-  continueSection.append(continueContent);
-  root.append(continueSection);
-
+  // Search is deliberately first in the reading-library flow.
   const searchForm = document.createElement('form');
   searchForm.className = 'reading-library-search';
   const searchLabel = document.createElement('label');
@@ -204,6 +130,229 @@ export function renderReadingLibrary({
   });
   root.append(searchForm);
 
+  // Continue reading follows search.
+  const continueSection = document.createElement('section');
+  continueSection.className = 'reading-library-continue';
+  const continueHeading = document.createElement('h2');
+  continueHeading.textContent = t('readingLibrary.continueReading');
+  const continueContent = document.createElement('div');
+  continueSection.append(continueHeading, continueContent);
+  root.append(continueSection);
+
+  // Queue follows Continue and is always explicit; it never auto-opens a book.
+  const queueSection = document.createElement('section');
+  queueSection.className = 'reading-library-queue';
+  const queueLabel = t('readingLibrary.queue');
+  queueSection.setAttribute('aria-label', queueLabel === 'readingLibrary.queue'
+    ? fallback(t, 'readingLibrary.queue', 'Cola de lectura', 'Reading queue')
+    : queueLabel);
+  root.append(queueSection);
+  queueController = renderReadingQueue({ root: queueSection, client, t, onOpenBook });
+
+  // Import follows the queue.
+  const importSection = document.createElement('section');
+  importSection.className = 'reading-library-import-section';
+  const importButton = makeButton(t('readingLibrary.import'), async () => {
+    importButton.disabled = true;
+    const batch = await client.pickDocuments();
+    importButton.disabled = false;
+    if (batch?.cancelled) return;
+    if (batch?.audioChoiceRequired) {
+      renderAudioChoice(batch);
+      return;
+    }
+    await applyImportBatch(batch);
+  });
+  importButton.id = 'reading-library-import';
+  importSection.append(importButton, liveStatus);
+
+  const audioChoiceHost = document.createElement('section');
+  audioChoiceHost.className = 'reading-library-audio-choice';
+  audioChoiceHost.hidden = true;
+  importSection.append(audioChoiceHost);
+
+  const openNowHost = document.createElement('div');
+  openNowHost.className = 'reading-library-open-now';
+  importSection.append(openNowHost);
+  root.append(importSection);
+
+  function renderOpenNow() {
+    openNowHost.replaceChildren();
+    const imported = Array.isArray(currentImportBatch?.imported) ? currentImportBatch.imported : [];
+    if (imported.length === 1) {
+      const book = imported[0];
+      openNowHost.append(makeButton(t('readingLibrary.openNow'), () => onOpenBook?.(book.id)));
+    }
+  }
+
+  async function applyImportBatch(batch) {
+    audioChoiceHost.hidden = true;
+    audioChoiceHost.replaceChildren();
+    if (batch?.cancelled) return;
+    currentImportBatch = batch;
+    liveStatus.textContent = importSummary(batch, t);
+    page = 1;
+    await refresh();
+  }
+
+  function renderAudioChoice(batch) {
+    audioChoiceHost.replaceChildren();
+    audioChoiceHost.hidden = false;
+    const heading = document.createElement('h2');
+    heading.textContent = t('readingLibrary.audioGroupHeading');
+    const explanation = document.createElement('p');
+    explanation.textContent = t('readingLibrary.audioGroupQuestion');
+    audioChoiceHost.append(heading, explanation);
+
+    const names = Array.isArray(batch?.selectedNames) ? batch.selectedNames : [];
+    if (names.length) {
+      const list = document.createElement('ul');
+      for (const name of names) {
+        const item = document.createElement('li');
+        item.textContent = name;
+        list.append(item);
+      }
+      audioChoiceHost.append(list);
+    }
+
+    const selectionId = String(batch?.selectionId ?? '');
+    const runChoice = async mode => {
+      for (const button of audioChoiceHost.querySelectorAll('button')) button.disabled = true;
+      liveStatus.textContent = t('readingLibrary.audioGroupProcessing');
+      const result = await client.resolveAudioSelection({ selectionId, mode });
+      liveStatus.textContent = '';
+      await applyImportBatch(result);
+      importButton.focus();
+    };
+
+    const grouped = makeButton(t('readingLibrary.audioGroupOneBook'), () => { void runChoice('grouped'); });
+    const independent = makeButton(t('readingLibrary.audioGroupIndependent'), () => { void runChoice('independent'); });
+    const cancel = makeButton(t('readingLibrary.audioGroupCancel'), () => { void runChoice('cancel'); });
+    audioChoiceHost.append(grouped, independent, cancel);
+    queueMicrotask(() => grouped.focus());
+  }
+
+  renderOpenNow();
+
+  // Filters follow import.
+  const filtersSection = document.createElement('section');
+  const filtersHeading = document.createElement('h2');
+  filtersHeading.textContent = t('readingLibrary.filtersHeading') === 'readingLibrary.filtersHeading'
+    ? fallback(t, 'readingLibrary.filtersHeading', 'Filtros y orden', 'Filters and sorting')
+    : t('readingLibrary.filtersHeading');
+  filtersSection.append(filtersHeading);
+
+  const filterForm = document.createElement('form');
+  filterForm.className = 'reading-library-filters';
+
+  const statusLabel = document.createElement('label');
+  statusLabel.htmlFor = 'reading-library-status-filter';
+  statusLabel.textContent = fallback(t, 'readingLibrary.statusFilter', 'Estado', 'Status');
+  const statusSelect = document.createElement('select');
+  statusSelect.id = 'reading-library-status-filter';
+  statusSelect.append(
+    makeOption('all', fallback(t, 'readingLibrary.filterAll', 'Todos', 'All')),
+    makeOption('in-reading', fallback(t, 'readingLibrary.filterInReading', 'En lectura', 'Reading')),
+    makeOption('not-read', fallback(t, 'readingLibrary.filterNotRead', 'Sin leer', 'Not read')),
+    makeOption('read', fallback(t, 'readingLibrary.filterRead', 'Leídos', 'Read'))
+  );
+
+  const formatFilterLabel = document.createElement('label');
+  formatFilterLabel.htmlFor = 'reading-library-format-filter';
+  formatFilterLabel.textContent = fallback(t, 'readingLibrary.formatFilter', 'Formato', 'Format');
+  const formatSelect = document.createElement('select');
+  formatSelect.id = 'reading-library-format-filter';
+  formatSelect.append(makeOption('', fallback(t, 'readingLibrary.formatAll', 'Todos los formatos', 'All formats')));
+  for (const value of FORMATS) formatSelect.append(makeOption(value, formatLabel(value)));
+
+  const sortLabel = document.createElement('label');
+  sortLabel.htmlFor = 'reading-library-sort';
+  sortLabel.textContent = fallback(t, 'readingLibrary.sortLabel', 'Ordenar por', 'Sort by');
+  const sortControl = document.createElement('select');
+  sortControl.id = 'reading-library-sort';
+  sortControl.append(
+    makeOption('title', fallback(t, 'readingLibrary.sortTitle', 'Título', 'Title')),
+    makeOption('author', fallback(t, 'readingLibrary.sortAuthor', 'Autor', 'Author')),
+    makeOption('imported', fallback(t, 'readingLibrary.sortImported', 'Importación reciente', 'Recent import')),
+    makeOption('lastRead', fallback(t, 'readingLibrary.sortLastRead', 'Lectura reciente', 'Recent reading'))
+  );
+  sortControl.value = sortSelect;
+
+  const applyFilters = makeButton(fallback(t, 'readingLibrary.applyFilters', 'Aplicar', 'Apply'), () => {
+    statusFilter = statusSelect.value;
+    formatFilter = formatSelect.value;
+    sortSelect = sortControl.value;
+    page = 1;
+    void refreshList();
+  });
+  filterForm.append(statusLabel, statusSelect, formatFilterLabel, formatSelect, sortLabel, sortControl, applyFilters);
+  filtersSection.append(filterForm);
+  root.append(filtersSection);
+
+  // Global reading settings follow filters.
+  const settingsSection = document.createElement('section');
+  const settingsHeading = document.createElement('h2');
+  settingsHeading.textContent = t('readingLibrary.settings') === 'readingLibrary.settings'
+    ? fallback(t, 'readingLibrary.settings', 'Ajustes de lectura', 'Reading settings')
+    : t('readingLibrary.settings');
+  const settingsToggle = makeButton(
+    fallback(t, 'readingLibrary.openSettings', 'Configurar voz y velocidad', 'Configure voice and speed'),
+    () => {
+      settingsPanel.hidden = !settingsPanel.hidden;
+      settingsToggle.setAttribute('aria-expanded', String(!settingsPanel.hidden));
+      if (!settingsPanel.hidden) void loadGlobalSettings();
+    }
+  );
+  settingsToggle.setAttribute('aria-expanded', 'false');
+  const settingsPanel = document.createElement('div');
+  settingsPanel.hidden = true;
+
+  const voiceLabel = document.createElement('label');
+  voiceLabel.htmlFor = 'reading-library-global-voice';
+  voiceLabel.textContent = t('readingBook.voice');
+  const voiceSelect = document.createElement('select');
+  voiceSelect.id = 'reading-library-global-voice';
+
+  const rateLabel = document.createElement('label');
+  rateLabel.htmlFor = 'reading-library-global-rate';
+  rateLabel.textContent = t('readingBook.speed');
+  const rateSelect = document.createElement('select');
+  rateSelect.id = 'reading-library-global-rate';
+  for (const value of ['0.75', '1', '1.25', '1.5', '1.75', '2']) rateSelect.append(makeOption(value, `${value}×`));
+
+  const saveSettings = makeButton(fallback(t, 'readingLibrary.saveSettings', 'Guardar ajustes', 'Save settings'), async () => {
+    saveSettings.disabled = true;
+    const [voiceSaved, rateSaved] = await Promise.all([
+      client.setReadingSetting({ scope: 'global', key: 'speech.voice', value: voiceSelect.value }),
+      client.setReadingSetting({ scope: 'global', key: 'speech.rate', value: rateSelect.value })
+    ]);
+    saveSettings.disabled = false;
+    liveStatus.textContent = voiceSaved && rateSaved
+      ? t('readingBook.settingsSaved')
+      : fallback(t, 'readingLibrary.settingsFailed', 'No se pudieron guardar los ajustes.', 'The settings could not be saved.');
+  });
+
+  settingsPanel.append(voiceLabel, voiceSelect, rateLabel, rateSelect, saveSettings);
+  settingsSection.append(settingsHeading, settingsToggle, settingsPanel);
+  root.append(settingsSection);
+
+  async function loadGlobalSettings() {
+    const [settings, voices] = await Promise.all([
+      client.getReadingSettings(''),
+      client.listTtsVoices()
+    ]);
+    voiceSelect.replaceChildren();
+    voiceSelect.append(makeOption('', t('readingBook.voiceDefault')));
+    for (const voice of voices) {
+      const label = voice.name || voice.locale || voice.id;
+      voiceSelect.append(makeOption(voice.id, label));
+    }
+    voiceSelect.value = String(settings?.global?.['speech.voice'] || '');
+    const rate = String(settings?.global?.['speech.rate'] || '1');
+    rateSelect.value = [...rateSelect.options].some(option => option.value === rate) ? rate : '1';
+  }
+
+  // My library is deliberately last.
   const librarySection = document.createElement('section');
   const libraryHeading = document.createElement('h2');
   libraryHeading.textContent = t('readingLibrary.myLibrary');
@@ -234,6 +383,11 @@ export function renderReadingLibrary({
     continueContent.append(button, detail);
   }
 
+  async function updateMetadata(options) {
+    if (typeof client.updateBookMetadata === 'function') return client.updateBookMetadata(options);
+    return TifloReading.updateBookMetadata(options);
+  }
+
   function renderBook(item) {
     const article = document.createElement('article');
     article.className = 'content-card reading-library-item';
@@ -243,7 +397,8 @@ export function renderReadingLibrary({
 
     const detail = document.createElement('p');
     detail.className = 'muted';
-    detail.textContent = `${stateLabel(item, t)}. ${progressLabel(item, t)}`;
+    const author = item.author ? `${item.author}. ` : '';
+    detail.textContent = `${author}${formatLabel(item.format)}. ${stateLabel(item, t)}. ${progressLabel(item, t)}`;
     article.append(detail);
 
     const options = makeButton(
@@ -259,8 +414,90 @@ export function renderReadingLibrary({
     article.append(options);
 
     const actions = document.createElement('div');
+    actions.className = 'reading-library-item-actions';
     actions.hidden = true;
     const confirmHost = document.createElement('div');
+
+    const queueButton = makeButton(
+      item.queued
+        ? fallback(t, 'readingLibrary.removeFromQueue', 'Quitar de la cola', 'Remove from queue')
+        : fallback(t, 'readingLibrary.addToQueue', 'Añadir a la cola', 'Add to queue'),
+      async () => {
+        queueButton.disabled = true;
+        const changed = item.queued
+          ? await client.removeFromQueue(item.id)
+          : await client.addToQueue(item.id);
+        liveStatus.textContent = changed
+          ? fallback(t, 'readingLibrary.queueUpdated', 'Cola actualizada.', 'Queue updated.')
+          : fallback(t, 'readingLibrary.queueFailed', 'No se pudo actualizar la cola.', 'The queue could not be updated.');
+        await refresh();
+      }
+    );
+
+    const stateField = document.createElement('div');
+    const stateSelectLabel = document.createElement('label');
+    stateSelectLabel.htmlFor = `reading-state-${item.id}`;
+    stateSelectLabel.textContent = fallback(t, 'readingLibrary.changeState', 'Cambiar estado', 'Change status');
+    const stateSelect = document.createElement('select');
+    stateSelect.id = `reading-state-${item.id}`;
+    stateSelect.append(
+      makeOption('not-read', t('readingLibrary.stateNotRead')),
+      makeOption('in-reading', t('readingLibrary.stateInReading')),
+      makeOption('read', t('readingLibrary.stateRead'))
+    );
+    stateSelect.value = item.state;
+    const saveState = makeButton(fallback(t, 'readingLibrary.saveState', 'Guardar estado', 'Save status'), async () => {
+      saveState.disabled = true;
+      const saved = await updateMetadata({ ...item, state: stateSelect.value });
+      liveStatus.textContent = saved
+        ? fallback(t, 'readingLibrary.metadataSaved', 'Cambios guardados.', 'Changes saved.')
+        : fallback(t, 'readingLibrary.metadataFailed', 'No se pudieron guardar los cambios.', 'The changes could not be saved.');
+      await refresh();
+    });
+    stateField.append(stateSelectLabel, stateSelect, saveState);
+
+    const info = document.createElement('details');
+    const infoSummary = document.createElement('summary');
+    infoSummary.textContent = fallback(t, 'readingLibrary.information', 'Información', 'Information');
+    const infoText = document.createElement('p');
+    infoText.textContent = [
+      item.author ? `${fallback(t, 'readingLibrary.author', 'Autor', 'Author')}: ${item.author}` : '',
+      `${fallback(t, 'readingLibrary.format', 'Formato', 'Format')}: ${formatLabel(item.format)}`,
+      item.language ? `${fallback(t, 'readingLibrary.language', 'Idioma', 'Language')}: ${item.language}` : ''
+    ].filter(Boolean).join('. ');
+    info.append(infoSummary, infoText);
+
+    const rename = document.createElement('details');
+    const renameSummary = document.createElement('summary');
+    renameSummary.textContent = fallback(t, 'readingLibrary.rename', 'Cambiar título', 'Rename');
+    const renameForm = document.createElement('form');
+    const renameLabel = document.createElement('label');
+    renameLabel.htmlFor = `reading-rename-${item.id}`;
+    renameLabel.textContent = fallback(t, 'readingLibrary.newTitle', 'Nuevo título', 'New title');
+    const renameInput = document.createElement('input');
+    renameInput.id = `reading-rename-${item.id}`;
+    renameInput.value = item.title || '';
+    const renameSave = document.createElement('button');
+    renameSave.type = 'submit';
+    renameSave.textContent = fallback(t, 'readingLibrary.saveRename', 'Guardar título', 'Save title');
+    renameForm.append(renameLabel, renameInput, renameSave);
+    renameForm.addEventListener('submit', event => {
+      event.preventDefault();
+      void (async () => {
+        const nextTitle = renameInput.value.trim();
+        if (!nextTitle) {
+          renameInput.focus();
+          return;
+        }
+        renameSave.disabled = true;
+        const saved = await updateMetadata({ ...item, title: nextTitle });
+        liveStatus.textContent = saved
+          ? fallback(t, 'readingLibrary.metadataSaved', 'Cambios guardados.', 'Changes saved.')
+          : fallback(t, 'readingLibrary.metadataFailed', 'No se pudieron guardar los cambios.', 'The changes could not be saved.');
+        await refresh();
+      })();
+    });
+    rename.append(renameSummary, renameForm);
 
     const deleteButton = makeButton(t('readingLibrary.delete'), () => {
       confirmHost.replaceChildren();
@@ -271,10 +508,10 @@ export function renderReadingLibrary({
           const deleted = await client.deleteBook(item.id);
           if (!deleted) {
             confirm.disabled = false;
-            status.textContent = t('readingLibrary.deleteFailed');
+            liveStatus.textContent = t('readingLibrary.deleteFailed');
             return;
           }
-          status.textContent = t('readingLibrary.deleted');
+          liveStatus.textContent = t('readingLibrary.deleted');
           await refresh();
         }
       );
@@ -282,7 +519,7 @@ export function renderReadingLibrary({
       confirmHost.append(confirm, cancel);
     });
 
-    actions.append(deleteButton, confirmHost);
+    actions.append(queueButton, stateField, info, rename, deleteButton, confirmHost);
     article.append(actions);
     return article;
   }
@@ -316,7 +553,14 @@ export function renderReadingLibrary({
 
   async function refreshList() {
     const generation = ++listGeneration;
-    const result = await client.listBooks({ page, pageSize: PAGE_SIZE, query });
+    const result = await client.listBooks({
+      page,
+      pageSize: PAGE_SIZE,
+      query,
+      status: statusFilter,
+      format: formatFilter,
+      sort: sortSelect
+    });
     if (generation !== listGeneration) return;
 
     list.replaceChildren();
@@ -333,7 +577,7 @@ export function renderReadingLibrary({
 
   async function refresh() {
     renderOpenNow();
-    await Promise.all([refreshLatest(), refreshList()]);
+    await Promise.all([refreshLatest(), refreshList(), queueController?.refresh?.()]);
   }
 
   void refresh();

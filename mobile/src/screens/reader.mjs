@@ -11,6 +11,7 @@ function validHttpUrl(value) {
 
 export function renderReadableContent({ parent, page, t, linkIdPrefix = 'reader-link', onActivateLink = null } = {}) {
   if (!parent?.append || !page) throw new TypeError('Readable parent and page are required');
+  parent.lang = String(page.lang || document.documentElement?.lang || 'es').trim() || 'es';
   const heading = document.createElement('h1');
   heading.dataset.screenHeading = '';
   heading.tabIndex = -1;

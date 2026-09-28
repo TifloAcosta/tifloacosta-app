@@ -2,6 +2,7 @@ import { parseHtmlDocument } from '../core/reading-html-adapter.mjs';
 import { pageForPosition, parsePdfDocument, positionForPage } from '../core/reading-pdf-adapter.mjs';
 import { normalizeSemanticPosition, parseTextDocument } from '../core/reading-semantic-model.mjs';
 import { createReadingSpeechController } from '../core/reading-speech.mjs';
+import { parseStructuredDocument } from '../core/reading-structured-adapter.mjs';
 import { createReadingAudioView } from './reading-audio.mjs';
 import { createReadingMarksPanel } from './reading-marks.mjs';
 import { createReadingSearchPanel } from './reading-search.mjs';
@@ -19,6 +20,15 @@ function fallback(t, key, es, en) {
   const translated = t(key);
   if (translated && translated !== key) return translated;
   return document.documentElement.lang === 'en' ? en : es;
+}
+
+function parseStructuredPayload(value) {
+  try {
+    const parsed = JSON.parse(String(value ?? ''));
+    return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {};
+  } catch {
+    return {};
+  }
 }
 
 function unitsFor(block) {
@@ -612,9 +622,14 @@ export function renderReadingBook({
 
     documentModel = activeBook.format === 'pdf'
       ? parsePdfDocument(opened.pdf)
-      : activeBook.format === 'html'
-        ? parseHtmlDocument(opened.content, { title: activeBook.title })
-        : parseTextDocument(opened.content, { title: activeBook.title });
+      : activeBook.format === 'epub'
+        ? parseStructuredDocument(parseStructuredPayload(opened.content), {
+            title: activeBook.title,
+            language: activeBook.language
+          })
+        : activeBook.format === 'html'
+          ? parseHtmlDocument(opened.content, { title: activeBook.title })
+          : parseTextDocument(opened.content, { title: activeBook.title });
 
     if (!documentModel.blocks.length) {
       status.textContent = t('readingBook.empty');
@@ -678,9 +693,11 @@ export function renderReadingBook({
       getPosition: () => ({ ...currentPosition }),
       getExcerpt: position => getCurrentUnitText(documentModel, position),
       getReference: position => {
-        if (activeBook.format !== 'pdf') return '';
-        const page = pageForPosition(documentModel, position);
-        return page ? format(t('readingBook.pdfPageReference'), { page }) : '';
+        if (activeBook.format === 'pdf') {
+          const page = pageForPosition(documentModel, position);
+          return page ? format(t('readingBook.pdfPageReference'), { page }) : '';
+        }
+        return String(documentModel?.blocks?.[position?.blockIndex]?.href ?? '');
       },
       onJump: position => moveToPosition(position),
       returnFocus: focusCurrentSemanticUnit

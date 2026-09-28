@@ -27,6 +27,21 @@ test('per-book voice rate and visual changes are persisted immediately as overri
   }
 });
 
+test('voice and visual panels provide visible status feedback and explicit return controls', async () => {
+  const [screen, i18n] = await Promise.all([
+    read('src/screens/reading-settings.mjs'),
+    read('src/core/i18n.mjs')
+  ]);
+
+  assert.match(screen, /voiceStatus/);
+  assert.match(screen, /visualStatus/);
+  assert.match(screen, /readingBook\.returnToReading/);
+  assert.match(screen, /returnFocus/);
+  for (const label of ['Volver a la lectura', 'Return to reading']) {
+    assert.ok(i18n.includes(label), `Missing return-to-reading translation: ${label}`);
+  }
+});
+
 test('reset removes only this book overrides and reapplies inherited values', async () => {
   const screen = await read('src/screens/reading-settings.mjs');
 

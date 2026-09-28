@@ -33,3 +33,20 @@ test('marks screen supports filtering and deletion with accessible native contro
   assert.match(screen, /readingBook\.markFilter/);
   assert.match(screen, /readingBook\.deleteMark/);
 });
+
+test('mark jump and delete actions are distinguishable by context and the panel can return to reading', async () => {
+  const [screen, i18n] = await Promise.all([
+    read('src/screens/reading-marks.mjs'),
+    read('src/core/i18n.mjs')
+  ]);
+
+  assert.match(screen, /jump\.setAttribute\(['"]aria-label['"]/);
+  assert.match(screen, /remove\.setAttribute\(['"]aria-label['"]/);
+  assert.match(screen, /readingBook\.jumpToMarkLabel/);
+  assert.match(screen, /readingBook\.deleteMarkLabel/);
+  assert.match(screen, /readingBook\.returnToReading/);
+  assert.match(screen, /returnFocus/);
+  for (const label of ['Volver a la lectura', 'Return to reading']) {
+    assert.ok(i18n.includes(label), `Missing return-to-reading translation: ${label}`);
+  }
+});

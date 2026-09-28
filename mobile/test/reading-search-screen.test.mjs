@@ -24,6 +24,29 @@ test('search preview is temporary and only explicit continue changes the primary
   assert.doesNotMatch(screen, /client\.saveProgress/);
 });
 
+test('search offers an explicit return to reading that can restore the previewed position', async () => {
+  const [screen, i18n] = await Promise.all([
+    read('src/screens/reading-search.mjs'),
+    read('src/core/i18n.mjs')
+  ]);
+
+  assert.match(screen, /readingBook\.returnToReading/);
+  assert.match(screen, /onClose/);
+  assert.match(screen, /returnFocus/);
+  for (const label of ['Volver a la lectura', 'Return to reading']) {
+    assert.ok(i18n.includes(label), `Missing return-to-reading translation: ${label}`);
+  }
+});
+
+test('search result actions have contextual accessible names instead of repeated generic labels', async () => {
+  const screen = await read('src/screens/reading-search.mjs');
+
+  assert.match(screen, /previewButton\.setAttribute\(['"]aria-label['"]/);
+  assert.match(screen, /continueButton\.setAttribute\(['"]aria-label['"]/);
+  assert.match(screen, /readingBook\.previewResultLabel/);
+  assert.match(screen, /readingBook\.continueFromResultLabel/);
+});
+
 test('search results expose heading context and semantic block sentence positions', async () => {
   const screen = await read('src/screens/reading-search.mjs');
 

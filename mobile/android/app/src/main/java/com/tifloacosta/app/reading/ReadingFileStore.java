@@ -18,6 +18,10 @@ public interface ReadingFileStore {
         throw new IOException("Temporary file access is unavailable");
     }
 
+    default InputStream openStoredInput(String relativePath) throws IOException {
+        throw new IOException("Stored binary input is unavailable");
+    }
+
     boolean tempHasNonWhitespaceText(String tempName) throws IOException;
 
     default boolean tempHasReadableText(String tempName, String format) throws IOException {

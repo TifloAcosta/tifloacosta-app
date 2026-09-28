@@ -94,6 +94,7 @@ public final class AndroidReadingFileStore implements ReadingFileStore {
         String sourceName;
         if ("html".equals(format)) sourceName = "source.html";
         else if ("pdf".equals(format)) sourceName = "source.pdf";
+        else if ("epub".equals(format)) sourceName = "source.epub";
         else if ("audio".equals(format)) sourceName = "source." + safeAudioExtension(sourceExtension);
         else sourceName = "source.txt";
         return moveTemp(tempName, id, sourceName);

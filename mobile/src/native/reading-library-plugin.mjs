@@ -21,6 +21,15 @@ function emptyListener() {
   return { remove: async () => {} };
 }
 
+function queueBookId(value) {
+  return String(value && typeof value === 'object' ? value.bookId ?? '' : value ?? '').trim();
+}
+
+function queueTargetIndex(value, fallback = 0) {
+  const source = value && typeof value === 'object' ? value.targetIndex : fallback;
+  return Math.max(0, Math.trunc(Number(source) || 0));
+}
+
 async function safeCall(plugin, method, args, fallback) {
   if (!plugin?.[method]) return fallback;
   try {
@@ -66,20 +75,26 @@ export function createReadingLibraryPlugin(
     return safeCall(plugin, 'listQueue', undefined, { items: [] });
   }
 
-  async function addToQueue(bookId) {
-    const result = await safeCall(plugin, 'addToQueue', { bookId: String(bookId ?? '') }, { queued: false });
+  async function addToQueue(value) {
+    const bookId = queueBookId(value);
+    if (!bookId) return false;
+    const result = await safeCall(plugin, 'addToQueue', { bookId }, { queued: false });
     return result === true || result?.queued === true;
   }
 
-  async function removeFromQueue(bookId) {
-    const result = await safeCall(plugin, 'removeFromQueue', { bookId: String(bookId ?? '') }, { removed: false });
+  async function removeFromQueue(value) {
+    const bookId = queueBookId(value);
+    if (!bookId) return false;
+    const result = await safeCall(plugin, 'removeFromQueue', { bookId }, { removed: false });
     return result === true || result?.removed === true;
   }
 
-  async function moveQueueItem(bookId, targetIndex) {
+  async function moveQueueItem(value, targetIndex = 0) {
+    const bookId = queueBookId(value);
+    if (!bookId) return false;
     const result = await safeCall(plugin, 'moveQueueItem', {
-      bookId: String(bookId ?? ''),
-      targetIndex: Math.max(0, Math.trunc(Number(targetIndex) || 0))
+      bookId,
+      targetIndex: queueTargetIndex(value, targetIndex)
     }, { moved: false });
     return result === true || result?.moved === true;
   }

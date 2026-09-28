@@ -62,6 +62,28 @@ export function createReadingLibraryPlugin(
     return safeCall(plugin, 'listBooks', options, { items: [], total: 0, page, pageSize, pages: 0 });
   }
 
+  async function listQueue() {
+    return safeCall(plugin, 'listQueue', undefined, { items: [] });
+  }
+
+  async function addToQueue(bookId) {
+    const result = await safeCall(plugin, 'addToQueue', { bookId: String(bookId ?? '') }, { queued: false });
+    return result === true || result?.queued === true;
+  }
+
+  async function removeFromQueue(bookId) {
+    const result = await safeCall(plugin, 'removeFromQueue', { bookId: String(bookId ?? '') }, { removed: false });
+    return result === true || result?.removed === true;
+  }
+
+  async function moveQueueItem(bookId, targetIndex) {
+    const result = await safeCall(plugin, 'moveQueueItem', {
+      bookId: String(bookId ?? ''),
+      targetIndex: Math.max(0, Math.trunc(Number(targetIndex) || 0))
+    }, { moved: false });
+    return result === true || result?.moved === true;
+  }
+
   async function openBook(id, options = {}) {
     return safeCall(plugin, 'openBook', {
       id: String(id ?? ''),
@@ -187,6 +209,10 @@ export function createReadingLibraryPlugin(
     listAudioTracks,
     consumeInitialSharedDocuments,
     listBooks,
+    listQueue,
+    addToQueue,
+    removeFromQueue,
+    moveQueueItem,
     openBook,
     saveProgress,
     deleteBook,

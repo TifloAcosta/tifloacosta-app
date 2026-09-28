@@ -17,6 +17,11 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 public final class ReadingXml {
+    private static final String ACCESS_EXTERNAL_DTD_PROPERTY =
+            "http://javax.xml.XMLConstants/property/accessExternalDTD";
+    private static final String ACCESS_EXTERNAL_SCHEMA_PROPERTY =
+            "http://javax.xml.XMLConstants/property/accessExternalSchema";
+
     private ReadingXml() {}
 
     public static Document parse(InputStream input) throws IOException {
@@ -45,15 +50,15 @@ public final class ReadingXml {
 
     private static void disableExternalAccess(DocumentBuilderFactory factory) {
         try {
-            factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+            factory.setAttribute(ACCESS_EXTERNAL_DTD_PROPERTY, "");
         } catch (IllegalArgumentException ignored) {
             // Older Android XML implementations may not expose this attribute.
             // The entity features and the empty EntityResolver still block access.
         }
         try {
-            factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+            factory.setAttribute(ACCESS_EXTERNAL_SCHEMA_PROPERTY, "");
         } catch (IllegalArgumentException ignored) {
-            // See ACCESS_EXTERNAL_DTD above.
+            // See ACCESS_EXTERNAL_DTD_PROPERTY above.
         }
     }
 

@@ -232,7 +232,7 @@ public final class ReadingPackageExtractor {
         }
     }
 
-    public static final class PackageException extends IOException {
+    public static class PackageException extends IOException {
         private final String code;
 
         PackageException(String code, String message) {

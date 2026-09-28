@@ -15,7 +15,7 @@ test('android reading database migrates metadata and queue without replacing the
   assert.match(db, /author\s+TEXT\s+NOT\s+NULL\s+DEFAULT\s+''/i);
   assert.match(db, /language\s+TEXT\s+NOT\s+NULL\s+DEFAULT\s+''/i);
   assert.match(db, /CREATE TABLE IF NOT EXISTS[^;]*reading_queue/is);
-  assert.match(db, /UNIQUE\s*\(\s*book_id\s*\)/i);
+  assert.match(db, /(?:book_id\s+TEXT\s+NOT\s+NULL\s+UNIQUE|UNIQUE\s*\(\s*book_id\s*\))/i);
   assert.match(db, /FOREIGN KEY\s*\(\s*book_id\s*\)[^;]*ON DELETE CASCADE/is);
   assert.match(db, /version\s*==\s*4\s*&&\s*newVersion\s*>=\s*5/);
 });

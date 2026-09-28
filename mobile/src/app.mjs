@@ -31,6 +31,7 @@ import { renderActualidad } from './screens/actualidad.mjs';
 import { renderSearch } from './screens/search.mjs';
 import { renderLibrary } from './screens/library.mjs';
 import { renderReadingLibrary } from './screens/reading-library.mjs';
+import { renderReadingQueue } from './screens/reading-queue.mjs';
 import { renderReadingBook } from './screens/reading-book.mjs';
 import { renderDownloads } from './screens/downloads.mjs';
 import { renderDownloadLink } from './screens/download-link.mjs';
@@ -511,11 +512,23 @@ function render(route) {
       });
       break;
     }
+    case 'reading-queue': {
+      pendingReadingBookId = '';
+      renderReadingQueue({
+        ...context,
+        client: readingClient,
+        onOpenBook: openReadingBook,
+        standalone: true
+      });
+      break;
+    }
     case 'reading-book': {
       renderReadingBook({
         ...context,
         client: readingClient,
-        bookId: pendingReadingBookId
+        bookId: pendingReadingBookId,
+        onOpenBook: openReadingBook,
+        onOpenQueue: () => router.navigate('reading-queue')
       });
       break;
     }

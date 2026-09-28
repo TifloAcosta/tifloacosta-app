@@ -57,7 +57,7 @@ test('reading integration makes mark jumps adopt the shared reading position', a
   ]);
 
   assert.match(screen, /getPosition:\s*\(\)\s*=>\s*\(\{\s*\.\.\.currentPosition\s*\}\)/);
-  assert.match(screen, /onJump:\s*position\s*=>\s*\{\s*void moveToPosition\(position\);\s*\}/);
+  assert.match(screen, /onJump:\s*position\s*=>\s*moveToPosition\(position\)/);
   assert.match(marks, /client\.addMark/);
   assert.match(marks, /onJump/);
   assert.match(marks, /client\.deleteMark/);

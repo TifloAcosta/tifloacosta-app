@@ -15,6 +15,12 @@ function format(template, values = {}) {
   );
 }
 
+function fallback(t, key, es, en) {
+  const translated = t(key);
+  if (translated && translated !== key) return translated;
+  return document.documentElement.lang === 'en' ? en : es;
+}
+
 function unitsFor(block) {
   const sentences = Array.isArray(block?.sentences)
     ? block.sentences.map(value => String(value ?? '').trim()).filter(Boolean)
@@ -85,7 +91,16 @@ function percentForPosition(documentModel, position) {
   return total ? Math.min(100, (completed * 100) / total) : 0;
 }
 
-export function renderReadingBook({ root, router, client, bookId, t, setScreenCleanup }) {
+export function renderReadingBook({
+  root,
+  router,
+  client,
+  bookId,
+  t,
+  setScreenCleanup,
+  onOpenBook,
+  onOpenQueue
+}) {
   clearScreen(root);
 
   const back = document.createElement('button');
@@ -242,7 +257,46 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
 
   const panels = document.createElement('div');
   panels.className = 'reading-book-panels';
-  root.append(back, heading, status, orderWarning, pdfPasswordForm, controls, pdfPageNavigation, readerContainer, panels);
+
+  const endOfDocument = document.createElement('section');
+  endOfDocument.className = 'reading-end-of-document';
+  endOfDocument.hidden = true;
+  const endHeading = document.createElement('h2');
+  endHeading.textContent = fallback(
+    t,
+    'readingBook.endOfDocument',
+    'Has terminado este documento',
+    'You have finished this document'
+  );
+  const nextSuggestion = document.createElement('p');
+  nextSuggestion.setAttribute('role', 'status');
+  nextSuggestion.setAttribute('aria-live', 'polite');
+  const openNext = document.createElement('button');
+  openNext.type = 'button';
+  openNext.textContent = fallback(t, 'readingBook.openNext', 'Abrir siguiente', 'Open next');
+  openNext.hidden = true;
+  const backToQueue = document.createElement('button');
+  backToQueue.type = 'button';
+  backToQueue.textContent = fallback(
+    t,
+    'readingBook.backToQueue',
+    'Volver a la cola de lectura',
+    'Back to reading queue'
+  );
+  endOfDocument.append(endHeading, nextSuggestion, openNext, backToQueue);
+
+  root.append(
+    back,
+    heading,
+    status,
+    orderWarning,
+    pdfPasswordForm,
+    controls,
+    pdfPageNavigation,
+    readerContainer,
+    panels,
+    endOfDocument
+  );
 
   let activeBook = null;
   let documentModel = null;
@@ -253,12 +307,57 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
   let marksPanel = null;
   let settingsPanel = null;
   let destroyed = false;
+  let nextSuggestedBookId = '';
+  let completionGeneration = 0;
 
   function focusCurrentSemanticUnit() {
     const element = readerContainer.querySelector('[data-reading-unit="current"]');
     if (!element) return false;
     element.focus();
     return true;
+  }
+
+  function hideEndOfDocument() {
+    completionGeneration += 1;
+    nextSuggestedBookId = '';
+    endOfDocument.hidden = true;
+    openNext.hidden = true;
+    nextSuggestion.textContent = '';
+  }
+
+  async function showEndOfDocument() {
+    const generation = ++completionGeneration;
+    endOfDocument.hidden = false;
+    nextSuggestedBookId = '';
+    openNext.hidden = true;
+    nextSuggestion.textContent = fallback(
+      t,
+      'readingBook.nextSuggestion',
+      'Buscando el siguiente título de la cola…',
+      'Looking for the next title in the queue…'
+    );
+
+    const queue = typeof client?.listQueue === 'function' ? await client.listQueue() : [];
+    if (destroyed || generation !== completionGeneration) return;
+    const nextBook = queue.find(item => item?.id && item.id !== activeBook?.id) || null;
+    if (!nextBook) {
+      nextSuggestion.textContent = fallback(
+        t,
+        'readingBook.nextSuggestion',
+        'No hay otro título pendiente en la cola.',
+        'There is no other pending title in the queue.'
+      );
+      return;
+    }
+
+    nextSuggestedBookId = nextBook.id;
+    nextSuggestion.textContent = `${fallback(
+      t,
+      'readingBook.nextSuggestion',
+      'Siguiente sugerencia',
+      'Next suggestion'
+    )}: ${nextBook.title || t('readingLibrary.untitled')}`;
+    openNext.hidden = false;
   }
 
   function clearInteractiveReading() {
@@ -386,6 +485,14 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
     });
   }
 
+  async function persistReadingState(position = currentPosition, state = readingState.value || 'in-reading') {
+    const saved = await persistPosition(position, state);
+    if (destroyed) return saved;
+    if (state === 'read') await showEndOfDocument();
+    else hideEndOfDocument();
+    return saved;
+  }
+
   async function moveToPosition(position, { focus = true } = {}) {
     if (!speech || !documentModel) return;
     const normalized = normalizeSemanticPosition(position, documentModel);
@@ -420,6 +527,10 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
   previousPage.addEventListener('click', () => { void navigatePdfPage(-1); });
   nextPage.addEventListener('click', () => { void navigatePdfPage(1); });
   navigationButton.addEventListener('click', () => { focusCurrentSemanticUnit(); });
+  openNext.addEventListener('click', () => {
+    if (nextSuggestedBookId) onOpenBook?.(nextSuggestedBookId);
+  });
+  backToQueue.addEventListener('click', () => onOpenQueue?.());
 
   pageForm.addEventListener('submit', event => {
     event.preventDefault();
@@ -455,7 +566,7 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
   });
 
   readingState.addEventListener('change', () => {
-    void persistPosition(currentPosition, readingState.value);
+    void persistReadingState(currentPosition, readingState.value);
   });
 
   searchButton.addEventListener('click', () => searchPanel?.open());
@@ -465,6 +576,7 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
 
   setScreenCleanup?.(() => {
     destroyed = true;
+    completionGeneration += 1;
     searchPanel?.destroy();
     marksPanel?.destroy();
     settingsPanel?.destroy();
@@ -477,6 +589,7 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
     heading.textContent = activeBook.title || t('readingLibrary.untitled');
     pdfPasswordForm.hidden = true;
     clearInteractiveReading();
+    hideEndOfDocument();
     status.textContent = t('readingAudio.preparing');
     audioView = createReadingAudioView({
       root: readerContainer,
@@ -495,6 +608,7 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
     heading.textContent = activeBook.title || t('readingLibrary.untitled');
     pdfPasswordForm.hidden = true;
     controls.hidden = false;
+    hideEndOfDocument();
 
     documentModel = activeBook.format === 'pdf'
       ? parsePdfDocument(opened.pdf)
@@ -536,7 +650,7 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
         playButton.textContent = nextPosition?.state === 'read'
           ? t('readingBook.play')
           : speech?.snapshot().playing ? t('readingBook.pause') : t('readingBook.play');
-        void persistPosition(currentPosition, nextPosition?.state || 'in-reading');
+        void persistReadingState(currentPosition, nextPosition?.state || 'in-reading');
       }
     });
 
@@ -595,7 +709,7 @@ export function renderReadingBook({ root, router, client, bookId, t, setScreenCl
           current: currentPosition.blockIndex + 1,
           total: documentModel.blocks.length
         });
-    await persistPosition(currentPosition, readingState.value);
+    await persistReadingState(currentPosition, readingState.value);
     if (!destroyed) queueMicrotask(() => playButton.focus());
   }
 

@@ -19,11 +19,21 @@ function makeButton(label, onClick) {
   return button;
 }
 
-export function renderReadingQueue({ root, client, t, onOpenBook }) {
+export function renderReadingQueue({ root, client, t, onOpenBook, router = null, standalone = false }) {
   root.replaceChildren();
 
-  const heading = document.createElement('h2');
+  if (standalone) {
+    const back = makeButton(t('nav.back'), () => router?.back());
+    back.className = 'back-button';
+    root.append(back);
+  }
+
+  const heading = document.createElement(standalone ? 'h1' : 'h2');
   heading.textContent = fallback(t, 'readingLibrary.queue', 'Cola de lectura', 'Reading queue');
+  if (standalone) {
+    heading.dataset.screenHeading = '';
+    heading.tabIndex = -1;
+  }
 
   const intro = document.createElement('p');
   intro.textContent = fallback(

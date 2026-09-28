@@ -279,6 +279,22 @@ export function createReadingLibraryClient(plugin = {}) {
     } catch { return false; }
   }
 
+  async function updateBookMetadata(book = {}) {
+    if (!plugin?.updateBookMetadata) return false;
+    const id = String(book?.id ?? '').trim();
+    const title = String(book?.title ?? '').trim();
+    if (!id || !title) return false;
+    try {
+      return mutationSucceeded(await plugin.updateBookMetadata({
+        id,
+        title,
+        author: String(book?.author ?? '').trim(),
+        language: String(book?.language ?? '').trim().toLowerCase(),
+        state: BOOK_STATES.has(book?.state) ? book.state : 'not-read'
+      }), 'updated');
+    } catch { return false; }
+  }
+
   async function openBook(id, options = {}) {
     const cleanId = String(id ?? '').trim();
     if (!cleanId || !plugin?.openBook) return null;
@@ -534,6 +550,7 @@ export function createReadingLibraryClient(plugin = {}) {
     addToQueue,
     removeFromQueue,
     moveQueueItem,
+    updateBookMetadata,
     openBook,
     saveProgress,
     deleteBook,

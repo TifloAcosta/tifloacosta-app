@@ -1,6 +1,7 @@
 package com.tifloacosta.app.reading;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -145,10 +146,21 @@ public class ReadingEpubAdapterTest {
             assertEquals(2, blocks.get(0).getLevel());
             assertTrue(blocks.stream().anyMatch(block -> "list-item".equals(block.getType()) && "Elemento de lista".equals(block.getText())));
             assertTrue(blocks.stream().anyMatch(block -> "table-cell".equals(block.getType()) && "Celda accesible".equals(block.getText())));
-            assertTrue(blocks.stream().anyMatch(block -> block.getText().contains("nota interna") && block.getText().contains("enlace externo")));
             assertTrue(blocks.stream().anyMatch(block -> block.getText().contains("Descripción de portada")));
             assertTrue(blocks.stream().anyMatch(block -> block.getText().contains("Contenido de la nota")));
             assertTrue(blocks.stream().noneMatch(block -> block.getText().contains("window.evil")));
+
+            ReadingStructuredDocument.Block linkedParagraph = blocks.stream()
+                    .filter(block -> block.getText().contains("nota interna") && block.getText().contains("enlace externo"))
+                    .findFirst()
+                    .orElseThrow(() -> new AssertionError("Linked EPUB paragraph is missing"));
+            assertEquals(2, linkedParagraph.getLinks().size());
+            assertEquals("nota interna", linkedParagraph.getLinks().get(0).getText());
+            assertEquals("OPS/chapter1.xhtml#note", linkedParagraph.getLinks().get(0).getHref());
+            assertFalse(linkedParagraph.getLinks().get(0).isExternal());
+            assertEquals("enlace externo", linkedParagraph.getLinks().get(1).getText());
+            assertEquals("https://example.com/recurso", linkedParagraph.getLinks().get(1).getHref());
+            assertTrue(linkedParagraph.getLinks().get(1).isExternal());
 
             assertEquals(2, document.getNavigation().size());
             assertEquals("Capítulo 2", document.getNavigation().get(0).getLabel());

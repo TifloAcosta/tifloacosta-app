@@ -17,7 +17,7 @@ test('mobile document keeps one native main landmark and never steals initial fo
   assert.equal((html.match(/<main\b/gi) || []).length, 1);
   assert.doesNotMatch(html, /autofocus/i);
   assert.doesNotMatch(html, /aria-role|role=["']main["']/i);
-  assert.match(html, /href=["']#app["']/i);
+  assert.doesNotMatch(html, /class=["']skip-link["']|href=["']#app["']/i);
 });
 
 test('startup keeps preferences before first render and remote content refresh after Home starts without replacing Share', async () => {
@@ -27,7 +27,7 @@ test('startup keeps preferences before first render and remote content refresh a
   const loadContent = app.indexOf('contentStore.load()');
   assert.ok(applyPreferences >= 0 && startHome > applyPreferences, 'preferences must be applied before Home starts');
   assert.ok(loadContent > startHome, 'remote content must load after Home is already rendered');
-  assert.match(app, /if \(!shareMode\s*&&\s*!textInputIsActive\(\)\) render\(router\.current\(\)\)/);
+  assert.match(app, /if \(!shareMode\s*&&\s*!textInputIsActive\(\)\) \{[\s\S]*?render\(router\.current\(\)\);[\s\S]*?focusScreenHeading\(root\)/);
 });
 
 test('reading document receiver installs only after Home starts and keeps text Share independent', async () => {

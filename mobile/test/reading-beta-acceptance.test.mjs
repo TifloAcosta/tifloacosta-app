@@ -26,18 +26,23 @@ test('beta acceptance wires every approved textual format into the common semant
   }
 });
 
-test('beta acceptance discovers stored audio before routing audio-only DAISY books to the media reader', async () => {
-  const [plugin, screen] = await Promise.all([
+test('beta acceptance preserves DAISY audio capabilities across the native-to-JavaScript bridge', async () => {
+  const [plugin, client, screen] = await Promise.all([
     read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java'),
+    read('src/core/reading-library-client.mjs'),
     read('src/screens/reading-book.mjs')
   ]);
 
   assert.match(plugin, /result\.put\("daisyHasText",\s*daisy\.hasText\(\)\)/);
   assert.match(plugin, /result\.put\("daisyHasAudio",\s*daisy\.hasAudio\(\)\)/);
-  assert.match(screen, /client\.listAudioTracks\(opened\.book\.id\)/);
-  assert.match(screen, /daisyAudioTracks\.length\s*>\s*0/);
-  assert.match(screen, /!daisyHasText/);
-  assert.match(screen, /initializeOpenedAudioBook\(opened,\s*daisyAudioTracks\)/);
+  assert.match(plugin, /result\.put\("daisySynchronized",\s*daisy\.isSynchronized\(\)\)/);
+  assert.match(client, /\['daisy2\.02',\s*'daisy3'\]\.includes\(book\.format\)/);
+  assert.match(client, /daisyHasText:\s*booleanValue\(result\.daisyHasText\)/);
+  assert.match(client, /daisyHasAudio:\s*booleanValue\(result\.daisyHasAudio\)/);
+  assert.match(client, /daisySynchronized:\s*booleanValue\(result\.daisySynchronized\)/);
+  assert.match(client, /audioTracks:\s*result\.daisyHasAudio\s*\?\s*await listAudioTracks\(book\.id\)/);
+  assert.match(screen, /opened\.daisyHasAudio\s*&&\s*!opened\.daisyHasText/);
+  assert.match(screen, /initializeOpenedAudioBook\(opened\)/);
 });
 
 test('beta acceptance keeps container-only ZIP out of the library book format surface', async () => {

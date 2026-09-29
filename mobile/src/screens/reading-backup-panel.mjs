@@ -105,7 +105,7 @@ export function createReadingBackupPanel({ root, returnFocus, client = createRea
       const fieldset = document.createElement('fieldset');
       const legend = document.createElement('legend');
       legend.textContent = bilingual(
-        `Conflicto de posición ${index + 1}`, 
+        `Conflicto de posición ${index + 1}`,
         `Position conflict ${index + 1}`
       );
       const details = document.createElement('p');
@@ -207,13 +207,10 @@ export function createReadingBackupPanel({ root, returnFocus, client = createRea
         positionChoices: choicesFromForm()
       });
       if (destroyed) return;
-      if (restored) {
-        clearPlan();
-        status.textContent = bilingual('Restauración completada.', 'Restore completed.');
-      } else {
-        applyButton.disabled = false;
-        status.textContent = bilingual('No se pudo completar la restauración.', 'The restore could not be completed.');
-      }
+      clearPlan();
+      status.textContent = restored
+        ? bilingual('Restauración completada.', 'Restore completed.')
+        : bilingual('No se pudo completar la restauración. Selecciona de nuevo la copia para reintentarlo.', 'The restore could not be completed. Select the backup again to retry.');
     })();
   });
 
@@ -226,10 +223,12 @@ export function createReadingBackupPanel({ root, returnFocus, client = createRea
   });
 
   function close() {
+    void cancelPendingRestore();
     section.hidden = true;
     const invoker = lastInvoker;
     lastInvoker = null;
-    if (invoker && invoker.isConnected !== false) invoker.focus();
+    const hiddenAncestor = invoker?.closest?.('[hidden]');
+    if (invoker && invoker.isConnected !== false && !hiddenAncestor) invoker.focus();
     else returnFocus?.();
   }
 

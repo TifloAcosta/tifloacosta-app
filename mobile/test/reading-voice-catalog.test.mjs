@@ -24,13 +24,17 @@ test('voice catalog exposes current Android-system providers and reserves future
 });
 
 test('voice settings open an accessible provider catalog, warn before leaving, and keep native installer access', async () => {
-  const screen = await read('src/screens/reading-settings.mjs');
+  const [screen, catalog] = await Promise.all([
+    read('src/screens/reading-settings.mjs'),
+    read('src/core/reading-voice-catalog.mjs')
+  ]);
 
   assert.match(screen, /createReadingVoiceCatalog/);
   assert.match(screen, /voiceCatalog\.open/);
-  assert.match(screen, /confirmExternalProvider/);
-  assert.match(screen, /openTtsVoiceInstaller/);
   assert.match(screen, /refreshVoicesAfterResume/);
+  assert.match(catalog, /confirmExternalProvider/);
+  assert.match(catalog, /openTtsVoiceInstaller/);
+  assert.match(catalog, /Browser\.open|openExternal/);
 });
 
 test('voice catalog copy explains system-wide compatibility and future TifloLector-only services in Spanish and English', async () => {

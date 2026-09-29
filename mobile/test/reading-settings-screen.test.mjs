@@ -43,6 +43,28 @@ test('voice and visual panels provide visible status feedback and explicit retur
   }
 });
 
+test('voice settings provide get-more-voices notice, external navigation and refresh on resume', async () => {
+  const [screen, plugin, client, i18n] = await Promise.all([
+    read('src/screens/reading-settings.mjs'),
+    read('src/native/reading-library-plugin.mjs'),
+    read('src/core/reading-library-client.mjs'),
+    read('src/core/i18n.mjs')
+  ]);
+
+  assert.match(plugin, /openTtsVoiceInstaller/);
+  assert.match(client, /openTtsVoiceInstaller/);
+  assert.match(screen, /readingBook\.getMoreVoices/);
+  assert.match(screen, /readingBook\.voiceInstallerNotice/);
+  assert.match(screen, /client\.openTtsVoiceInstaller\(/);
+  assert.match(screen, /['"]resume['"]/);
+  assert.match(screen, /client\.listTtsVoices\(/);
+  assert.match(screen, /voiceSelect\.value/);
+  assert.match(screen, /lastInvoker/);
+  for (const label of ['Conseguir más voces', 'Get more voices']) {
+    assert.ok(i18n.includes(label), `Missing get-more-voices translation: ${label}`);
+  }
+});
+
 test('reset removes only this book overrides and reapplies inherited values', async () => {
   const screen = await read('src/screens/reading-settings.mjs');
 

@@ -775,7 +775,10 @@ export function renderReadingBook({
       return;
     }
 
-    if (opened.book.format === 'audio') {
+    const daisyAudioOnly = ['daisy2.02', 'daisy3'].includes(opened.book.format)
+      && opened.daisyHasAudio
+      && !opened.daisyHasText;
+    if (opened.book.format === 'audio' || daisyAudioOnly) {
       await initializeOpenedAudioBook(opened);
       return;
     }

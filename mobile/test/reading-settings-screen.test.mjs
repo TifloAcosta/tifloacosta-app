@@ -63,3 +63,15 @@ test('visual settings are scoped to reader container through CSS custom properti
   assert.match(styles, /--reading-width/);
   assert.doesNotMatch(styles, /\.reading-reader[^}]*height:\s*\d+px/s);
 });
+
+test('voice and visual settings behave as modal TalkBack dialogs and restore focus to their opener', async () => {
+  const screen = await read('src/screens/reading-settings.mjs');
+
+  assert.match(screen, /setAttribute\(['"]role['"],\s*['"]dialog['"]\)/);
+  assert.match(screen, /setAttribute\(['"]aria-modal['"],\s*['"]true['"]\)/);
+  assert.match(screen, /lastInvoker/);
+  assert.match(screen, /document\.activeElement/);
+  assert.match(screen, /lastInvoker\?\.focus\(\)/);
+  assert.match(screen, /event\.key\s*===\s*['"]Tab['"]/);
+  assert.match(screen, /focusableElements/);
+});

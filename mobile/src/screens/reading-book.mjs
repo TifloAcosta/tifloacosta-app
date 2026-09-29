@@ -1,6 +1,6 @@
 import { parseHtmlDocument } from '../core/reading-html-adapter.mjs';
 import { pageForPosition, parsePdfDocument, positionForPage } from '../core/reading-pdf-adapter.mjs';
-import { normalizeSemanticPosition, parseTextDocument } from '../core/reading-semantic-model.mjs';
+import { adjacentSemanticUnit, normalizeSemanticPosition, parseTextDocument } from '../core/reading-semantic-model.mjs';
 import { createReadingSpeechController } from '../core/reading-speech.mjs';
 import { parseStructuredDocument } from '../core/reading-structured-adapter.mjs';
 import { createReadingAudioView } from './reading-audio.mjs';
@@ -20,6 +20,45 @@ function fallback(t, key, es, en) {
   const translated = t(key);
   if (translated && translated !== key) return translated;
   return document.documentElement.lang === 'en' ? en : es;
+}
+
+function semanticNavigationLabel(t, kind, direction) {
+  const previous = Number(direction) < 0;
+  switch (kind) {
+    case 'sentence':
+      return t(previous ? 'readingBook.previousSentence' : 'readingBook.nextSentence');
+    case 'heading':
+      return fallback(
+        t,
+        previous ? 'readingBook.previousHeading' : 'readingBook.nextHeading',
+        previous ? 'Encabezado anterior' : 'Encabezado siguiente',
+        previous ? 'Previous heading' : 'Next heading'
+      );
+    case 'listItem':
+      return fallback(
+        t,
+        previous ? 'readingBook.previousListItem' : 'readingBook.nextListItem',
+        previous ? 'Elemento de lista anterior' : 'Elemento de lista siguiente',
+        previous ? 'Previous list item' : 'Next list item'
+      );
+    case 'quote':
+      return fallback(
+        t,
+        previous ? 'readingBook.previousQuote' : 'readingBook.nextQuote',
+        previous ? 'Cita anterior' : 'Cita siguiente',
+        previous ? 'Previous quote' : 'Next quote'
+      );
+    case 'tableCell':
+      return fallback(
+        t,
+        previous ? 'readingBook.previousTableCell' : 'readingBook.nextTableCell',
+        previous ? 'Celda de tabla anterior' : 'Celda de tabla siguiente',
+        previous ? 'Previous table cell' : 'Next table cell'
+      );
+    case 'paragraph':
+    default:
+      return t(previous ? 'readingBook.previousParagraph' : 'readingBook.nextParagraph');
+  }
 }
 
 function parseStructuredPayload(value) {
@@ -46,27 +85,11 @@ function getCurrentUnitText(documentModel, position) {
 }
 
 function previousUnit(documentModel, position) {
-  const current = normalizeSemanticPosition(position, documentModel);
-  if (current.unitIndex > 0) {
-    return { blockIndex: current.blockIndex, unitIndex: current.unitIndex - 1 };
-  }
-  for (let blockIndex = current.blockIndex - 1; blockIndex >= 0; blockIndex -= 1) {
-    const units = unitsFor(documentModel.blocks[blockIndex]);
-    if (units.length) return { blockIndex, unitIndex: units.length - 1 };
-  }
-  return current;
+  return adjacentSemanticUnit(documentModel, position, -1).position;
 }
 
 function nextUnit(documentModel, position) {
-  const current = normalizeSemanticPosition(position, documentModel);
-  const units = unitsFor(documentModel.blocks[current.blockIndex]);
-  if (current.unitIndex + 1 < units.length) {
-    return { blockIndex: current.blockIndex, unitIndex: current.unitIndex + 1 };
-  }
-  for (let blockIndex = current.blockIndex + 1; blockIndex < documentModel.blocks.length; blockIndex += 1) {
-    if (unitsFor(documentModel.blocks[blockIndex]).length) return { blockIndex, unitIndex: 0 };
-  }
-  return current;
+  return adjacentSemanticUnit(documentModel, position, 1).position;
 }
 
 function semanticElement(block) {
@@ -455,9 +478,12 @@ export function renderReadingBook({
     if (commit) currentPosition = normalized;
 
     const blockUnits = Math.max(1, unitsFor(block).length);
-    previous.disabled = normalized.blockIndex === 0 && normalized.unitIndex === 0;
-    next.disabled = normalized.blockIndex === documentModel.blocks.length - 1
-      && normalized.unitIndex >= blockUnits - 1;
+    const previousTarget = adjacentSemanticUnit(documentModel, normalized, -1);
+    const nextTarget = adjacentSemanticUnit(documentModel, normalized, 1);
+    previous.disabled = !previousTarget.moved;
+    next.disabled = !nextTarget.moved;
+    previous.setAttribute('aria-label', semanticNavigationLabel(t, previousTarget.kind, -1));
+    next.setAttribute('aria-label', semanticNavigationLabel(t, nextTarget.kind, 1));
     renderPdfPageStatus(normalized);
     if (announce) {
       const page = pageForPosition(documentModel, normalized);
@@ -514,11 +540,13 @@ export function renderReadingBook({
 
   async function navigateSemantic(direction) {
     if (!documentModel) return;
-    const target = direction === 'previous'
-      ? previousUnit(documentModel, currentPosition)
-      : nextUnit(documentModel, currentPosition);
-    if (target.blockIndex === currentPosition.blockIndex && target.unitIndex === currentPosition.unitIndex) return;
-    await moveToPosition(target);
+    const target = adjacentSemanticUnit(
+      documentModel,
+      currentPosition,
+      direction === 'previous' ? -1 : 1
+    );
+    if (!target.moved) return;
+    await moveToPosition(target.position);
   }
 
   async function navigatePdfPage(direction) {

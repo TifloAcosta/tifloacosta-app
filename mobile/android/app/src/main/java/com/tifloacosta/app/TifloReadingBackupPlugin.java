@@ -1,7 +1,6 @@
 package com.tifloacosta.app;
 
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -17,6 +16,8 @@ import com.getcapacitor.annotation.ActivityCallback;
 import com.getcapacitor.annotation.CapacitorPlugin;
 import com.tifloacosta.app.reading.AndroidReadingFileStore;
 import com.tifloacosta.app.reading.ReadingBackupService;
+import com.tifloacosta.app.reading.ReadingBookQuery;
+import com.tifloacosta.app.reading.ReadingBookRecord;
 import com.tifloacosta.app.reading.ReadingLibraryDatabase;
 import com.tifloacosta.app.reading.ReadingRestorePlan;
 
@@ -165,6 +166,63 @@ public final class TifloReadingBackupPlugin extends Plugin {
         JSObject response = new JSObject();
         response.put("cancelled", true);
         call.resolve(response);
+    }
+
+    @PluginMethod
+    public void checkReadingLibrary(PluginCall call) {
+        getBridge().execute(() -> {
+            List<ReadingBookRecord> books = allBooks();
+            JSArray missingItems = new JSArray();
+            for (ReadingBookRecord book : books) {
+                try (InputStream ignored = fileStore.openStoredInput(book.getRelativePath())) {
+                    // Opening each stored source verifies that the database still points to readable private content.
+                } catch (IOException | RuntimeException error) {
+                    JSObject item = new JSObject();
+                    item.put("id", book.getId());
+                    item.put("title", book.getTitle());
+                    missingItems.put(item);
+                }
+            }
+            JSObject response = new JSObject();
+            response.put("healthy", missingItems.length() == 0);
+            response.put("bookCount", books.size());
+            response.put("missingItems", missingItems);
+            call.resolve(response);
+        });
+    }
+
+    @PluginMethod
+    public void deleteAllReadingData(PluginCall call) {
+        Boolean confirmed = call.getBoolean("confirmed");
+        if (!Boolean.TRUE.equals(confirmed)) {
+            JSObject response = new JSObject();
+            response.put("deleted", false);
+            response.put("confirmationRequired", true);
+            call.resolve(response);
+            return;
+        }
+        getBridge().execute(() -> {
+            try {
+                clearPendingRestore(true);
+                List<ReadingBookRecord> books = allBooks();
+                for (ReadingBookRecord book : books) {
+                    database.delete(book.getId());
+                    fileStore.deleteItemDirectory(book.getId());
+                }
+                database.getWritableDatabase().delete("reading_settings", null, null);
+                fileStore.cleanupStaleTemps();
+                JSObject response = new JSObject();
+                response.put("deleted", true);
+                response.put("booksDeleted", books.size());
+                call.resolve(response);
+            } catch (RuntimeException error) {
+                call.reject("Unable to delete reading data", error);
+            }
+        });
+    }
+
+    private List<ReadingBookRecord> allBooks() {
+        return database.list(new ReadingBookQuery("", "all", "", "imported", Integer.MAX_VALUE, 0));
     }
 
     private static JSObject exportResult(boolean exported, boolean cancelled) {

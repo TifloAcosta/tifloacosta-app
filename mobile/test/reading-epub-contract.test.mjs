@@ -34,7 +34,8 @@ test('reading EPUB common-reader contract consumes native structured documents i
   const adapter = await read('src/core/reading-structured-adapter.mjs');
 
   assert.match(reader, /parseStructuredDocument/);
-  assert.match(reader, /activeBook\.format\s*===\s*'epub'/);
+  assert.match(reader, /structuredFormat/);
+  assert.ok(reader.includes("'epub'"), 'Shared structured-format route must include EPUB');
   assert.match(adapter, /segmentSentences/);
   assert.match(adapter, /navigation/);
   assert.match(adapter, /pageReferences/);

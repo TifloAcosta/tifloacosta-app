@@ -37,3 +37,20 @@ test('reading backup client exposes normalized export plan and restore operation
   assert.match(client, /keep-current/);
   assert.match(client, /use-backup/);
 });
+
+test('reading maintenance can check the library and requires explicit confirmation before deleting all data', async () => {
+  const [plugin, nativeBridge, client] = await Promise.all([
+    read('android/app/src/main/java/com/tifloacosta/app/TifloReadingBackupPlugin.java'),
+    read('src/native/reading-backup-plugin.mjs'),
+    read('src/core/reading-backup-client.mjs')
+  ]);
+
+  for (const method of ['checkReadingLibrary', 'deleteAllReadingData']) {
+    assert.ok(plugin.includes(method), `Android reading backup plugin is missing ${method}`);
+    assert.ok(nativeBridge.includes(method), `Native reading backup bridge is missing ${method}`);
+    assert.ok(client.includes(method), `Reading backup client is missing ${method}`);
+  }
+  assert.match(plugin, /confirmed/);
+  assert.match(plugin, /getBoolean\(['"]confirmed['"]\)/);
+  assert.match(client, /confirmed:\s*true/);
+});

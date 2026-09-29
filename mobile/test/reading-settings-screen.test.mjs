@@ -21,7 +21,8 @@ test('per-book voice rate and visual changes are persisted immediately as overri
   assert.match(screen, /scope:\s*['"]book['"]/);
   for (const key of [
     'speech.voice', 'speech.rate', 'visual.textSize', 'visual.fontFamily', 'visual.fontWeight',
-    'visual.lineSpacing', 'visual.paragraphSpacing', 'visual.readingWidth', 'visual.highContrast', 'visual.theme'
+    'visual.lineSpacing', 'visual.paragraphSpacing', 'visual.readingWidth', 'visual.foreground',
+    'visual.background', 'visual.highContrast', 'visual.theme'
   ]) {
     assert.ok(screen.includes(key), `Missing setting ${key}`);
   }
@@ -50,17 +51,21 @@ test('reset removes only this book overrides and reapplies inherited values', as
   assert.match(screen, /await\s+loadSettings\(\)/);
 });
 
-test('visual settings are scoped to reader container through CSS custom properties', async () => {
+test('visual settings are scoped to reader container through CSS custom properties including text and background colors', async () => {
   const [screen, styles] = await Promise.all([
     read('src/screens/reading-settings.mjs'),
     read('src/styles.css')
   ]);
 
   assert.match(screen, /readerContainer\.style\.setProperty/);
+  assert.match(screen, /--reading-foreground/);
+  assert.match(screen, /--reading-background/);
   assert.match(styles, /--reading-text-scale/);
   assert.match(styles, /--reading-line-spacing/);
   assert.match(styles, /--reading-paragraph-spacing/);
   assert.match(styles, /--reading-width/);
+  assert.match(styles, /--reading-foreground/);
+  assert.match(styles, /--reading-background/);
   assert.doesNotMatch(styles, /\.reading-reader[^}]*height:\s*\d+px/s);
 });
 

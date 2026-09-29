@@ -5,6 +5,9 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
+import android.media.MediaMetadata;
+import android.media.session.MediaSession;
+import android.media.session.PlaybackState;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
@@ -57,6 +60,7 @@ public final class ReadingBackgroundTtsService extends Service {
     private ReadingLibraryDatabase database;
     private ReadingTtsSessionStore.Session session;
     private ReadingTtsPlaybackState playbackState;
+    private MediaSession mediaSession;
     private boolean foregroundStarted;
 
     @Override
@@ -66,6 +70,28 @@ public final class ReadingBackgroundTtsService extends Service {
         database = new ReadingLibraryDatabase(getApplicationContext());
         controller = ReadingTtsController.create(getApplicationContext(), event ->
                 mainHandler.post(() -> handleControllerEvent(event)));
+        mediaSession = new MediaSession(this, "TifloLectorTts");
+        mediaSession.setFlags(
+                MediaSession.FLAG_HANDLES_MEDIA_BUTTONS
+                        | MediaSession.FLAG_HANDLES_TRANSPORT_CONTROLS
+        );
+        mediaSession.setCallback(new MediaSession.Callback() {
+            @Override
+            public void onPlay() {
+                mainHandler.post(() -> playSession());
+            }
+
+            @Override
+            public void onPause() {
+                mainHandler.post(() -> pauseSession(null));
+            }
+
+            @Override
+            public void onStop() {
+                mainHandler.post(() -> stopSession());
+            }
+        });
+        updateMediaSessionState();
         createNotificationChannel();
     }
 
@@ -113,6 +139,11 @@ public final class ReadingBackgroundTtsService extends Service {
             controller.shutdown();
             controller = null;
         }
+        if (mediaSession != null) {
+            mediaSession.setActive(false);
+            mediaSession.release();
+            mediaSession = null;
+        }
         if (database != null) {
             database.close();
             database = null;
@@ -140,6 +171,9 @@ public final class ReadingBackgroundTtsService extends Service {
                 loaded.getStartBlockIndex(),
                 loaded.getStartUnitIndex()
         );
+        updateMediaMetadata();
+        if (mediaSession != null) mediaSession.setActive(true);
+        updateMediaSessionState();
         ensureForeground();
         updateNotification();
         broadcastState();
@@ -157,6 +191,8 @@ public final class ReadingBackgroundTtsService extends Service {
             else broadcastError("tts-session-not-playable");
             return;
         }
+        if (mediaSession != null) mediaSession.setActive(true);
+        updateMediaSessionState();
         ensureForeground();
         updateNotification();
         speakCurrent(utteranceToken);
@@ -167,6 +203,7 @@ public final class ReadingBackgroundTtsService extends Service {
         if (controller != null) controller.stop();
         if (playbackState != null) playbackState.pause();
         persistCurrentPosition(false);
+        updateMediaSessionState();
         updateNotification();
         broadcastState();
         if (reason != null && !reason.trim().isEmpty()) {
@@ -189,6 +226,7 @@ public final class ReadingBackgroundTtsService extends Service {
         boolean continuePlaying = playbackState.isPlaying();
         if (controller != null) controller.stop();
         persistCurrentPosition(false);
+        updateMediaSessionState();
         broadcastPosition();
         broadcastState();
         if (continuePlaying) {
@@ -201,7 +239,9 @@ public final class ReadingBackgroundTtsService extends Service {
         persistCurrentPosition(false);
         if (controller != null) controller.stop();
         if (playbackState != null) playbackState.pause();
+        updateMediaSessionState();
         broadcastState();
+        if (mediaSession != null) mediaSession.setActive(false);
         session = null;
         playbackState = null;
         if (foregroundStarted) {
@@ -228,6 +268,7 @@ public final class ReadingBackgroundTtsService extends Service {
         if (!accepted) {
             playbackState.pause();
             persistCurrentPosition(false);
+            updateMediaSessionState();
             updateNotification();
             broadcastState();
         }
@@ -242,9 +283,11 @@ public final class ReadingBackgroundTtsService extends Service {
             if (!playbackState.complete(event.getUtteranceId())) return;
             if (playbackState.isEnded()) {
                 persistCurrentPosition(true);
+                updateMediaSessionState();
                 broadcastPosition();
                 broadcastState();
                 broadcastEnded();
+                if (mediaSession != null) mediaSession.setActive(false);
                 if (foregroundStarted) {
                     stopForeground(true);
                     foregroundStarted = false;
@@ -253,6 +296,7 @@ public final class ReadingBackgroundTtsService extends Service {
                 return;
             }
             persistCurrentPosition(false);
+            updateMediaSessionState();
             broadcastPosition();
             String nextToken = playbackState.activeUtteranceToken();
             if (nextToken != null) speakCurrent(nextToken);
@@ -262,6 +306,7 @@ public final class ReadingBackgroundTtsService extends Service {
         if ("ttsInterrupted".equals(name)) {
             playbackState.pause();
             persistCurrentPosition(false);
+            updateMediaSessionState();
             updateNotification();
             broadcastState();
             Intent interrupted = eventIntent(ACTION_TTS_INTERRUPTED);
@@ -273,10 +318,52 @@ public final class ReadingBackgroundTtsService extends Service {
         if ("ttsError".equals(name)) {
             playbackState.pause();
             persistCurrentPosition(false);
+            updateMediaSessionState();
             updateNotification();
             broadcastState();
             broadcastError(event.getMessage() == null ? "tts-error" : event.getMessage());
         }
+    }
+
+    private void updateMediaMetadata() {
+        if (mediaSession == null || session == null) return;
+        String title = session.getTitle() == null || session.getTitle().trim().isEmpty()
+                ? "Leer con TifloAcosta"
+                : session.getTitle().trim();
+        MediaMetadata metadata = new MediaMetadata.Builder()
+                .putString(MediaMetadata.METADATA_KEY_TITLE, title)
+                .putString(MediaMetadata.METADATA_KEY_ARTIST, "TifloAcosta")
+                .build();
+        mediaSession.setMetadata(metadata);
+    }
+
+    private void updateMediaSessionState() {
+        if (mediaSession == null) return;
+
+        long actions = PlaybackState.ACTION_PLAY
+                | PlaybackState.ACTION_PAUSE
+                | PlaybackState.ACTION_PLAY_PAUSE
+                | PlaybackState.ACTION_STOP;
+        int state;
+        float speed;
+        if (playbackState == null || !playbackState.isPrepared()) {
+            state = PlaybackState.STATE_NONE;
+            speed = 0f;
+        } else if (playbackState.isEnded()) {
+            state = PlaybackState.STATE_STOPPED;
+            speed = 0f;
+        } else if (playbackState.isPlaying()) {
+            state = PlaybackState.STATE_PLAYING;
+            speed = 1f;
+        } else {
+            state = PlaybackState.STATE_PAUSED;
+            speed = 0f;
+        }
+
+        mediaSession.setPlaybackState(new PlaybackState.Builder()
+                .setActions(actions)
+                .setState(state, PlaybackState.PLAYBACK_POSITION_UNKNOWN, speed)
+                .build());
     }
 
     private void persistCurrentPosition(boolean completed) {

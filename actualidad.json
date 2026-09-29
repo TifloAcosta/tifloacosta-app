@@ -1,5 +1,148 @@
 [
   {
+    "id": "the-verge-5db096b640778075",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1001797/nothings-headphone-1-pro-review",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-29T01:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Nothing’s new flagship Headphone 1 Pro put you in the studio",
+        "summary": "Nothing has been on a bit of an audio tear this year, releasing the solid Headphone A and the surprisingly good Ear 3A earbuds. The Headphone A released at $199, while the earbuds are under $100, leaving room for something fancier. That something is the Nothing Headphone 1 Pro, the company's new $399 flagship over-ears […]",
+        "body": "Nothing has been on a bit of an audio tear this year, releasing the solid Headphone A and the surprisingly good Ear 3A earbuds. The Headphone A released at $199, while the earbuds are under $100, leaving room for something fancier. That something is the Nothing Headphone 1 Pro, the company's new $399 flagship over-ears that surprised me with everything they offer. They include what you'd expect from a pair of flagship headphones, such as active noise cancellation (ANC), multiple sound profiles, and easy-to-use controls. They also have a few things you might not: a triple-driver design, Auracast, and something I've never seen before: a Flat E …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-399f811e5cbb2dd2",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/28/openai-reportedly-ditches-model-over-safety-concerns/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-28T23:39:20.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "OpenAI reportedly ditches model over safety concerns",
+        "summary": "A top executive at the AI lab told the Wall Street Journal that the model in question had displayed a poor aptitude for following orders.",
+        "body": "Posted:\n\nOpenAI had planned to release yet another AI model next month, but has decided to nix the release over safety concerns.\n\nThe Wall Street Journal reports that Astra 6.1 was scheduled to be released as soon as within the next few days. However, the model “showed higher levels of deception” than previous models and exhibited unsafe behavior, the Journal writes.\n\nSaachi Jain, OpenAI’s head of safety systems, told the WSJ that the model tested poorly on alignment, a measure of how well the program adheres to human intent.\n\nTechCrunch reached out to OpenAI for more information and will update the article if it responds.\n\nAstra was released earlier this month and hailed by OpenAI as its most powerful model yet.\n\nQuestions about safety have plagued the AI industry over the past several months — ever since the Hugging Face incident , in which an OpenAI agent broke free of its sandboxed environment and hacked several different companies. Since that incident, more models — including Anthropic’s Claude and Google’s Gemini — have been revealed to have exhibited similar behavior.\n\nThe deluge of concerning stories has, ironically, helped to push the policy conversation in the U.S. toward an outcome desired by top AI labs : the institution of new industry standards for AI safety and potentially a slowdown of the industry itself.\n\nCompanies like OpenAI and Anthropic have claimed that the concern here is safety, although another potential motivation posited by critics is that it could entrench the industry position of those companies at the detriment of less resourced firms."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-595c181478ce4b35",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2269219/warning-signs-replace-iphone-battery/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-28T23:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The warning signs that your iPhone battery needs to be replaced",
+        "summary": "Your iPhone's battery doesn't have infinite longevity. Over time, it degrades, and you'll know that's happening when you see these signs.",
+        "body": "Keep an eye out for red flags that your iPhone battery isn't what it used to be.\n\nWhile Apple's iPhone battery tech is well-integrated with iOS to offer maximum life while reporting health metrics and other important info, even the best engineering can't overcome chemical limitations. Battery cells gradually degrade over every charge cycle, with temperature, age and daily use all playing a role.\n\nApple's battery info page states: \"When you know a little about how they work, they can work that much better for you.\" This also applies to recognizing when a battery starts breaking down on you. Several telltale signs suggest it's time for a battery replacement, and you should watch for them to avoid any day-to-day issues, sluggish performance or sudden shutdowns.\n\nLuckily, pinpointing your iPhone battery's health is much easier than it was a decade ago. Apple has added more battery performance info directly into the iPhone's Settings app. Beyond that, learning about other warning signs of a depleted battery will make it clear when it's time to head to the Genius Bar.\n\nThe easiest way to determine how your battery is doing is by navigating to Settings > Battery > Battery Health. There, you'll find the overall state of your Battery Health , which may be either Normal or Significantly Degraded . The latter will be accompanied by a disclaimer at the top, suggesting you replace the battery to restore full performance.\n\nBelow that, on an iPhone 15 or newer, you'll see the total cycle count. The iPhone 14 and earlier are designed to reach 80 percent battery capacity at 500 cycles; newer models up this to 1,000 cycles.\n\nAny iPhone should show the maximum battery capacity, which indicates the current capacity of your battery compared to when it was new . Once this drops below 80 percent, Apple deems it as worn out and suggests it's time to replace it; you'll notice worse daily battery life at this point.\n\nWhen your battery health is bad enough, odds are that you won't need to check the menu to realize it, though. If you always need to carry a power bank to keep your phone running throughout the day (and have checked for excessive app battery drain ), it's time for a replacement. Other major signs include seeing your battery percentage drop rapidly, and unexpected shutdowns even when the battery percentage is well above single digits.\n\nSluggish performance, especially during heavier tasks like gaming, exporting large videos or streaming 4K video, can be a sign that your phone is throttling itself to avoid shutting down. Another red flag is if your device heats up too quickly when it's unplugged or barely in use; that means your iPhone battery is working overtime and likely needs servicing. And of course, if you see the battery bulge out of the case, you should immediately stop using your phone and contact Apple Support, as this is a safety hazard.\n\nWhen buying a new iPhone, you might have found it difficult to decide whether you wanted to include AppleCare . Your average battery usage might help you make the call. With an active subscription, you won't pay a service fee for replacing a battery that's dropped below 80 percent. For Apple service outside an AppleCare plan, prices range from $69 for a new iPhone 6s battery to $129 to replace an iPhone 18 Pro Max battery."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-ff0b4f3d851aaa47",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2269187/android-phone-how-to-improve-battery-life/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-28T23:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "android"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "How to improve your Android phone's battery life",
+        "summary": "Don't give up just yet on your Android. If the poor battery is your main complaint, give these usage and settings tips a try.",
+        "body": "Fix your Android’s worst power drains in under five minutes.\n\nYou really shouldn't have to worry about your phone's battery levels dropping to half by noon, but here we are — a common frustration among Android users. As frustrating as the situation is, there are fairly easy fixes to this that can add hours back to your day and extend your battery's lifespan in the long run.\n\nMost Android phones are running out of juice for entirely preventable reasons, such as a display set too bright, apps refreshing in the background around the clock, poor charging habits or an app that keeps draining power while you go about your day ignoring it. You don't have to drop to airplane mode, accept a dim screen you can barely see on or turn off Wi-Fi. A few targeted adjustments can realistically add hours of battery life without you noticing any real difference in day-to-day use.\n\nIt's also worth thinking about this problem from two angles. The first is the daily battery drain, and the second is the long-term battery health. You don't want to end up having to replace your battery. Let's figure out the practical steps you can apply immediately without needing to have an IT degree.\n\nYour screen is almost always the biggest battery drain on your phone, so that's where we need to start. Lowering brightness manually or enabling auto-brightness prevents your display from burning unnecessary power in dim environments. You can also cut your screen timeout to 30 seconds so the display doesn't linger when you're not using it. Adaptive brightness can be turned on in Settings > Display in the Brightness section, while the screen timeout can be adjusted from a bit lower in the menu.\n\nIf your phone supports a 120Hz refresh rate, you should also consider dropping it to 60Hz during everyday use. You might have a less smooth experience when scrolling or gaming, but it won't be the end of the world. Change this setting in Settings > Display > Motion smoothness, where you'll pick Standard over Adaptive. You might also want to let your screen turn off sooner by going to Settings > Display > Screen timeout .\n\nUsing dark mode is also an option, but results vary. On OLED or AMOLED screens, dark mode can save between 39 percent and 47 percent of display power at full brightness, according to a Purdue University study . At typical indoor brightness levels, those savings shrink to between 3 and 9 percent.\n\nBeyond the display, there are two system tools that do a lot of quiet work, namely Battery Saver and Adaptive Battery. Battery Saver (also called Power Saving) restricts activity when charge drops below a set threshold. You can find this in Battery > Battery saver and choose between Standard and Maximum. Adaptive Battery takes things one step further and learns which apps you actually use and limits power to the ones you rarely open. You can enable this by going to Settings > Battery > Background usage limits > Three-dot menu > Adaptive battery.\n\nOne thing you can do to protect the long-term health of your battery is to adjust your charging habits. Most Android users plug in their phones overnight and let them charge to 100 percent, but this habit quietly degrades your battery over time. Lithium-ion batteries are healthiest when kept between 20 and 80 percent charge. According to Battery University , maintaining that range keeps voltage lower, which can significantly extend cycle life. Consistently pushing to 100 percent and leaving your phone plugged in, especially in a warm environment, accelerates loss.\n\nThe fix is simple — charge to about 80 percent when you can and unplug before bed if your phone doesn't have a built-in charge limit. Many modern Android phones, however, do offer a charging cap in the battery settings menu. You can go to Settings > Battery > Battery Protection (name varies by brand) and choose a limit between 80 and 95 percent.\n\nIf you'd still prefer to see a full battery level on your phone, you could also go for the Basic setting. This makes charging stop when the phone reaches 100 percent battery and resumes top-up only when the level drops back down to 95 percent. The advice is to run partial charges if you can live with it. Topping up to 70 percent is gentler on your battery than running it to empty and charging it back to full. Fast charging, while convenient, actually generates more heat than standard charging, and heat is the primary cause of battery degradation.\n\nIf your phone is constantly losing charge faster than it should despite making all these adjustments, you should also check out exactly what is draining your battery. Go to Settings > Battery > Battery usage on most Android devices and see which apps have consumed the most power over the last 24 hours or longer. Look for anything that stands out, such as a navigation app that ran in the background all day, a social media app refreshing constantly or a game that didn't fully close.\n\nIf you tap on the app's name, you'll see a ton of extra info. More importantly, you'll get access to a button that lets you set background usage limits, which makes it possible to put the app to sleep or deep sleep. Apps in sleep run in the background occasionally, with updates and notifications getting delayed. Deep sleeping apps will never run in the background. Another reason why your battery may be draining faster than usual is that your phone's infected with malware, so you should find and remove any spyware .\n\nIn case none of this has any real-life impact on your battery levels, you might want to run a battery test. Samsung users will need to launch the Members app, go to Support > Phone diagnostics and run the scan. Check the battery status, and if you get anything but Normal, know your battery may need a replacement. Other phones will have different paths for this, like Settings > Battery > Battery Health , but the point is the same — any rating other than Good or Normal should push you toward looking into a battery replacement."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-ec2e10f13f457cb7",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/28/macos-27-how-to-use-the-new-notify-me-feature-in-safari/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-28T22:53:05.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "macOS 27: How to use the new ‘Notify Me’ feature in Safari",
+        "summary": "9to5Mac is brought to you by CleanMyMac by MacPaw . With the release of macOS 27 Golden Gate, use CleanMyMac first to free up space, optimize your system, and ensure your new Mac runs at 100% on day one. Learn more . One of the many new features included in macOS 27 Golden Gate is Safari’s new “Notify Me” feature, which lets users get alerted when a website updates content they’re interested in. Here’s how to use it. more…",
+        "body": "9to5Mac is brought to you by CleanMyMac by MacPaw . With the release of macOS 27 Golden Gate, use CleanMyMac first to free up space, optimize your system, and ensure your new Mac runs at 100% on day one. Learn more .\n\nOne of the many new features included in macOS 27 Golden Gate is Safari’s new “Notify Me” feature, which lets users get alerted when a website updates content they’re interested in. Here’s how to use it.\n\nOne of the most useful ways Apple has incorporated Apple Intelligence into macOS 27 Golden Gate is through Safari’s new “Notify Me” feature.\n\nWith it, users can ask Safari to monitor a webpage for specific changes and receive a notification when it detects an update.\n\nWhen setting up a new custom notification, in addition to telling Safari what to look for, the user can also set a regular schedule ranging from hourly to monthly.\n\nAfter the custom notification is set up, Safari will check the webpage according to the selected schedule and notify the user when it detects the requested change, such as a price drop, an item coming back in stock, changes to policies, registrations opening, or new information being added to the page.\n\nImportantly, since the feature relies on Apple Intelligence, it may not be available in all languages or regions. To check the current availability status, follow this link .\n\nDo you have a creative idea for how to use Safari’s new Notify Me feature? Let us know in the comments.\n\n9to5Mac is brought to you by CleanMyMac by MacPaw . With the release of macOS 27 Golden Gate, use CleanMyMac first to free up space, optimize your system, and ensure your new Mac runs at 100% on day one. Learn more ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-03208ec06223c7b3",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2269075/iphone-hit-1000-charge-cycles-how-holding-up/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-28T22:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "My iPhone hit 1,000 charge cycles — Here's how it's holding up",
+        "summary": "I've had my iPhone 15 Pro Max for three years and have completed 1,000 battery charge cycles. Here's what the experience has been like.",
+        "body": "What's it like using an iPhone with a \"consumed\" battery? Here's my experience after three years.\n\nYou may recall the \"batterygate\" controversy from 2017 , where iPhone users reported that their iPhones noticeably slowed down as the batteries aged. Apple clarified that this was by design as a way to intentionally manage performance on devices with degraded batteries to keep them from unexpectedly shutting down. Lots of understandable criticism followed, which led to Apple introducing the Battery Health metric and a toggle to override the performance management feature.\n\nThen the iPhone 15 series was the first to display the battery's cycle count in addition to its health. A device completes one charge cycle when it uses 100 percent of its battery capacity, though this doesn't need to be all from one charge. For instance, if your phone goes from 100 to 50 percent, then you charge it back up to 100 percent, a full cycle is completed when the level hits 50 percent again.\n\nThe higher your cycle count, the more your iPhone's battery will have chemically aged. Apple says the iPhone 14 series and older models are designed to retain 80 percent of their original battery capacity at 500 charge cycles. The iPhone 15 models and newer double that figure, with their batteries designed to complete 1,000 charge cycles before battery health drops below 80 percent.\n\nWell, my iPhone 15 Pro Max recently hit 1,000 charge cycles and currently reports a battery health of 81 percent. Its battery technically hasn't depleted enough to warrant the \"battery service warning\" notification in iOS, but I'm noticing the effects of nearly three years of battery wear. The battery capacity of the iPhone 15 Pro Max is rated at 4,422 mAh. I recall it being nearly a two-day battery champ when my phone was still brand new, reaching screen-on times of over 12 hours. These days, though, I'm lucky to make it to the evening without needing to reach for a charger.\n\nThe iPhone 15 series came with iOS 17. As a lifelong Android user, I found switching to the iPhone 15 Pro Max refreshing, given how smooth everything was. The charging speed maxing out around 27W wasn't very impressive, but at least the phone lasted me all day. That changed with iOS 18. Plenty of people complained about lackluster performance, bugs and poor battery life. Apple Intelligence features heated the device up and drained the battery even quicker.\n\nApple eventually ironed out most bugs, but then came iOS 26 in all its Liquid Glass glory . The first few beta builds struggled to run smoothly, but I kept my hopes up that it would improve by the time the stable release rolled around. As it turns out, we had to endure a whole year of iOS 26 slowing down our iPhones and negatively impacting battery life. At this point, I didn't even care about preserving my iPhone's battery health — I just wanted a software experience that didn't suck.\n\nApple was clearly aware of how poorly iOS 26 ran, because a good chunk of what's new in iOS 27 focuses on performance and stability improvements. App launch times are up to 30 percent faster, photos load up to 70 percent quicker and AirDrop transfers are up to 80 percent faster. Even the first developer beta build I tried was significantly smoother than any stable release of iOS 26 I'd used. My iPhone 15 Pro Max now runs like an entirely different phone.\n\nI still need to plug it in at least twice a day, and it still takes obnoxiously long to top up from 80 to 100 percent, but at least the software is no longer a buggy mess.\n\nIt's kind of a running joke in tech communities how the iPhone looks nearly the same year after year, but Apple does switch bits up, even if that doesn't always involve a complete redesign. With the iPhone 15 Pro series in 2023, it was the move from stainless steel to titanium. Not only did the material look different, but it was also noticeably lighter than before. Apple switched back to a unibody aluminum chassis with the iPhone 17 Pro , citing better thermal performance as one of the main reasons for moving away from titanium.\n\nThe new Pro phones may run cooler, but they're also significantly easier to scratch and dent. There are reports of brand-new iPhone 18 Pro devices getting scratched within a few days of regular use. By comparison, the body of my iPhone 15 Pro Max doesn't have a single scratch — and I've mostly used it without a case. Yes, the screen has developed minor scratches over time, but I'm impressed by how the titanium frame and the glass back look nearly brand-new.\n\nThe rest of the hardware has aged well, too. The triple-camera system still takes great photos and videos, the buttons are as clicky as ever and the speakers are some of the best I've heard on a smartphone. Even some of the hardware's limitations that Apple cleverly worked around, like the Dynamic Island, have grown into useful parts of the iOS experience.\n\nSiri AI is also supported on the iPhone 15 Pro models and is one of the few Apple Intelligence features that makes the phone smarter than it was at launch. I'm sure a battery replacement would breathe a few more years of life into my iPhone, especially now that iOS is good again."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "9to5mac-7c5dd6e0f0b9e40e",
     "type": "news",
     "sourceId": "9to5mac",
@@ -19,6 +162,52 @@
         "title": "watchOS 27.0.1 is now available for all compatible Apple Watch models",
         "summary": "Apple today expanded the availability of watchOS 27.0.1 to more Apple Watch models, following last week’s initial release for Apple Watch Series 12 and Apple Watch Ultra 4. Here are the details. more…",
         "body": "Apple today expanded the availability of watchOS 27.0.1 to more Apple Watch models, following last week’s initial release for Apple Watch Series 12 and Apple Watch Ultra 4 . Here are the details.\n\nLast week, Apple released watchOS 27.0.1 exclusively for Apple Watch Series 12 and Apple Watch Ultra 4 , with a fix for an issue that could cause some devices to restart unexpectedly.\n\nToday, the company rolled out watchOS 27.0.1 for all other Apple Watch models compatible with watchOS 27, including:\n\nApple has not changed the release notes for watchOS 27.0.1, which still read:\n\nThis update provides bug fixes for your Apple Watch including fixing an issue where Apple Watch may restart unexpectedly.\n\nLikewise, the release build from today’s release is 24R365, which is the same as last week’s rollout for Apple Watch Series 12 and Apple Watch Ultra 4 .\n\nIn addition to watchOS 27.0.1, Apple today released iOS 27.0.1 , iPadOS 27.0.1, visionOS 27.0.1, iOS 26.7.1 , macOS 27.0.1 Golden Gate , macOS Tahoe 26.7.1, and macOS Sequoia 15.8.1.\n\nWhile iOS 27.0.1 fixed an issue that could cause some iPhone 18 Pro models to restart when using Face ID, the other updates include additional bug fixes and security improvements."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-5ec16df8ff04cb55",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/ai/2026/09/florida-asks-court-to-put-the-brakes-on-openais-frontier-ai-development/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-28T20:49:39.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Florida invokes extinction fears in legal bid to halt OpenAI development",
+        "summary": "State says LLMs threaten civilization as \"the greatest public nuisance ever created.\"",
+        "body": "The state of Florida is seeking a temporary injunction to stop OpenAI from continuing to develop what it calls a \"reckless, unacceptably risky product\" without the deployment of \"third-party approved safety guardrails.\"\n\nThe new legal motion , filed Monday morning, is part of a civil lawsuit the state of Florida originally filed in June, arguing that ChatGPT represented \"a threat to the public safety of Floridians,\" specifically by preying on vulnerable populations like children and violent or delusional adults. But that original lawsuit came before the Hugging Face hacking incident and the subsequent publicized warnings of catastrophic misalignment risk that have spurred industry-wide calls to slow the development and training of so-called frontier models.\n\nFollowing that string of events, OpenAI on Friday announced it had already halted training of its \"most-capable models\" until it could validate safety protocols intended to prevent agents from accessing the open Internet during training. But in seeking an injunction from the state court, Florida argues that OpenAI has \"repeatedly shown they are incapable of monitoring their AI, and hesitant in revealing rogue activity once discovered.\"\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-fc3811bf8f0423c9",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/science/2026/09/new-device-captures-carbon-dioxide-by-pumping-it-across-a-battery/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-28T20:31:06.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "New device captures carbon dioxide by pumping it across a battery",
+        "summary": "The design requires less energy to capture CO 2 than current systems.",
+        "body": "Equipment to capture carbon dioxide from ambient air or smokestacks generally works through a sort of reversible filter. Air is passed through granules or a liquid that absorbs the CO 2 , then that CO 2 -loaded substance undergoes a process (usually heating) that causes it to let go of all that CO 2 . The resulting gas can be collected in a separated stream.\n\nIt’s also possible to do a similar sort of operation on a smaller scale—like inside a battery. A new study from a team led by James Buchen of the University of Delaware demonstrates an example of a battery-based electrochemical carbon-capture technique that they say is more viable than previous attempts. It has the potential to require less energy—and therefore be cheaper—than the reversible-filter designs that currently dominate.\n\nThe basic idea behind a device of this type is that hydroxide produced at the battery cathode reacts with CO 2 , converting it to carbonate or bicarbonate that passes through the separator membrane to the anode. There, the lower pH causes the reaction to reverse, with carbonate turning back into CO 2 gas. The role of the cathode is to produce hydroxide ions; the role of the anode is to consume them.\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -44,29 +233,6 @@
         "title": "Siri AI is available on newer Apple devices only, here’s the full list",
         "summary": "Siri AI is a major upgrade and highlight of iOS 27 and more. But only newer Apple devices support the overhauled Siri. Here’s the full list of Siri AI-compatible hardware across iPhone, iPad, Mac, Apple Watch, and Apple Vision Pro. more…",
         "body": "Siri AI is a major upgrade and highlight of iOS 27 and more. But only newer Apple devices support the overhauled Siri. Here’s the full list of Siri AI-compatible hardware across iPhone, iPad, Mac, Apple Watch, and Apple Vision Pro.\n\niOS 27 and its companion updates include the major Siri overhaul we’ve been waiting for, and it’s called Siri AI.\n\nSiri AI is only available on compatible hardware (and in certain parts of the world ). Here is every Apple product that supports Siri AI.\n\niPhone\n\niPad\n\nMac\n\nApple Watch ( when paired with AI-supported iPhone )\n\nApple Vision Pro\n\nAll of the products above support Siri AI. However, there are certain aspects of the Siri experience that will be even better on select hardware.\n\nFor example, the ability to fully customize the pace and expressivity of Siri AI’s voice is only available on select hardware. Per Apple :\n\nAvailable on iPhone 18 Pro, iPhone 18 Pro Max, iPhone Duo, iPhone 17 Pro, iPhone 17 Pro Max, iPhone Air, iPad models with M4 and later and at least 12GB of unified memory, Mac models with M3 and later and at least 12GB of unified memory, and Apple Vision Pro (M5).\n\nThe reason for this limitation is that Apple’s most powerful on-device AI model is restricted to newer products. Users with these models may or may not get faster performance with Siri AI too.\n\nIs Siri AI motivating you to upgrade to newer Apple hardware? Let us know in the comments."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-4cc97f2440b40a47",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2271249/google-will-support-chromeos-until-2034-as-it-shifts-to-googlebook-os/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-28T19:36:57.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google will support ChromeOS until 2034 as it shifts to Googlebook OS",
-        "summary": "Some recent Chromebook devices will be able to switch to the new operating system.",
-        "body": "Some recent Chromebook devices will be able to switch to the new operating system.\n\nIt's a new era for Google's laptops as the company is set to release the first wave of Googlebooks, which run on an Android-based operating system . Google will still keep ChromeOS going for several more years and the company has shed more light on how long it will continue support for the current operating system.\n\nAccording to a support page for enterprise and education users, Google will keep issuing ChromeOS updates and security patches until mid-2034. Engadget has asked Google to clarify whether the same timeline applies to the consumer version of ChromeOS.\n\nGoogle has promised that Chromebooks will receive 10 years of support, so if you've bought one recently, you may have been wondering how that aligns with the company's move to a new operating system. \"For qualifying devices purchased today whose 10-year support lifecycle extends beyond 2034, Google is committed to supporting your transition to Googlebook OS, with many devices offering direct migration paths,\" the support page states.\n\nA separate note adds that \"Many of our newest Chromebook devices will be eligible to transition over to Googlebook OS.\" Google has promised to share more details on what that looks like soon. It also plans to roll out the first Googlebook OS device management features for enterprise and education users in the second half of 2027.\n\nThe company announced Googlebooks around the time of its I/O developer conference earlier this year, and pulled back the curtain on its new laptops last week, just as it opened pre-orders for these models. The first Googlebooks will arrive on October 4 and we've had a chance to try them out ."
       }
     },
     "media": null
@@ -119,30 +285,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-c92a880ad7acceda",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/28/iphone-duo-accessories-here-are-five-top-picks-for-apples-foldable/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-28T19:24:26.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iPhone Duo accessories: Here are five top picks for Apple’s foldable",
-        "summary": "iPhone Duo will be here soon , so if you want to get a head start on accessories for Apple’s new model, here are our top recommendations. more…",
-        "body": "iPhone Duo will be here soon , so if you want to get a head start on accessories for Apple’s new model, here are our top recommendations.\n\niPhone Duo is the first iPhone that will offer support for Apple Pencil, letting you jot handwritten notes, doodles, and more.\n\nApple Pencil will be supported on iPhone Duo later this year via a software update. But when support comes, Apple says it will require an Apple Pencil (USB-C). No other Pencil models are compatible.\n\niPhone Duo will let you use Apple Pencil both on its outer and inner displays. The design of Apple’s first foldable was even inspired by the proportions of a standard A-series paper notebook.\n\niPhone Duo supports fast charging, letting you charge up to 50 percent in just 20 minutes.\n\nBut in order to get the fastest charging speeds, you’ll need the right power adapter.\n\nApple’s 40W Dynamic Power Adapter with 60W Max supports iPhone Duo fast charging, and a great third-party alternative is Anker’s 100W power brick.\n\nLike other models, iPhone Duo doesn’t come with a power adapter in the box—only a USB-C cable. Most of us have 20W chargers lying around, but if you want to get a power adapter that supports the quickest iPhone Duo charging, these two products are my recommendations.\n\nOne of my top iPhone accessory recommendations is ESR’s MagSafe Car Mount. I’ve used it for years, and it should prove a great accessory for iPhone Duo too.\n\nWith a MagSafe car mount, your iPhone has a secure place to stay while on the go. MagSafe provides a strong magnetic attachment, and you can clip the mount to your A/C vent so it’s made visible and easy to reach as needed.\n\nI like combining my iPhone with CarPlay when driving, so that in Apple Maps I can get the navigation map on my in-vehicle CarPlay screen while the iPhone shows my full step-by-step directions. I expect this to be even better with the iPhone Duo’s large screen.\n\nApple isn’t yet selling its new $129 iPhone Duo Folio with Kickstand . But if you’re looking to buy a far more affordable iPhone Duo case, there are plenty of third-party options already available.\n\nBuying an iPhone Duo case not only gets you ready for October 23, it’s also a nice way to preview the size and shape of the iPhone Duo before committing $1,999 or more.\n\nI haven’t tested these cases, but here are some options I’m interested in.\n\niPhone Duo will include a powerful upgrade to the current iPhone StandBy feature. When iPhone Duo is in “standing” mode, it can display a variety of StandBy views even when it’s not charging.\n\nThose StandBy options include ‘Home Camera’ and ‘Home Modular’ views, both of which provide access to smart home accessories.\n\nThe Home Camera view should be especially useful for keeping track of security cameras throughout your home at a glance. Here are my recommended HomeKit-compatible cameras.\n\nWhat are some iPhone Duo accessories you plan to pick up? Let us know in the comments."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "techcrunch-9101e16724660769",
     "type": "news",
     "sourceId": "techcrunch",
@@ -160,7 +302,7 @@
     "locales": {
       "en": {
         "title": "The AI boom took over Climate Week and not everyone is happy about it",
-        "summary": "Just like the rest of the U.S, data centers and AI are dividing climate tech founders and investors.",
+        "summary": "Just like the rest of the U.S., data centers and AI are dividing climate tech founders and investors.",
         "body": "It was the best of times, it was the worst of times … I’ll spare you the rest, but the cliché Dickens line really does sum up this year’s New York Climate Week.\n\nMuch of the climate tech community — like the rest of the U.S. economy — is eagerly riding the AI wave. Some have reservations about the sheer quantity of natural gas power plants being built to power AI data centers. But because many climate tech startups are energy-focused or energy-adjacent, the buildout has been embraced as an opportunity to get companies through the valley of death .\n\nThe singular focus also means some promising sectors risk being overlooked.\n\nIt’s a continuation of a trend that’s emerged over the last year. As climate tech companies struggled to get financing — either because of canceled federal grants or investor hesitancy — those that could change their pitch to match the AI mania did so.\n\nThe pivot has helped many climate tech startups land fresh funding from investors. Total venture deal value has risen for four consecutive quarters, cresting the $14 billion-mark in the first quarter of this year, according to the most recent available data from PitchBook. It’s the best fundraising environment for climate tech in the last few years, with most of the deal value driven by sectors boosted by data center construction, including the built environment, grid infrastructure, and dispatchable energy that can be turned on or off when it’s needed.\n\nIt’s an opportunity few have wanted to pass up.\n\nOne exchange during a panel at New York Climate Week captured the moment: Two founders, when asked whether they’d prefer the AI buildout to proceed at its current pace or at a more climate-responsible speed, said without hesitation that faster was better. Unsurprisingly, both of their startups were in energy.\n\nAnd yet not everyone agrees.\n\nI heard from several founders who felt that the data center boom was distracting from other promising segments of climate tech, including those that were meeting their targets without having to rely on AI mania.\n\n“Corporates are still interested in climate,” one founder told me. The difference today is that large companies don’t want to crow about it, mostly for fear of drawing the Trump administration’s ire.\n\nThere were also signs that the AI boom was beginning to wear thin on some. For many startups, money for scaling was hard to find three years ago, even if they were showing promising results. Now, customers are clawing their way into demos. “Where was this money three years ago?” I asked several people. I received more than a few knowing eye rolls in reply.\n\nIt’s the world they live in these days, they acknowledged. The smart entrepreneurs are all finding ways to meet customers where they are.\n\nUltimately, the undercurrent at New York Climate Week was that the data center party won’t last forever, but it might last long enough to help startups build durable businesses. Once that happens, they can refocus on the carbon-cutting mission they were founded to pursue."
       }
     },
@@ -186,104 +328,6 @@
         "title": "OpenAI’s AI agents need to catch up",
         "summary": "OpenAI popularized the modern generative AI chatbot, but as its 2026 DevDay event approaches, it's fallen behind in one of the industry's hottest categories: continuously running, consumer-facing AI agents. On Tuesday, it will likely try to capture the lead in that race. Rumors abound that OpenAI will release its own AI agent, dubbed Aeon - […]",
         "body": "OpenAI popularized the modern generative AI chatbot, but as its 2026 DevDay event approaches, it's fallen behind in one of the industry's hottest categories: continuously running, consumer-facing AI agents. On Tuesday, it will likely try to capture the lead in that race. Rumors abound that OpenAI will release its own AI agent, dubbed Aeon - its answer to Meta's Muse, SpaceX's Grok Bot, OpenClaw, and many more.\n\nAeon could have a shot at success, but to beat the competition, it would need to pull together the best features of several different agent platforms. The ideal system would be as useful as the open-source OpenClaw, as cheap and easy …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-c8730e89f1b28628",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2271136/meta-is-starting-an-enterprise-business-to-justify-its-massive-ai-spending/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-28T18:37:57.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta is starting an enterprise business to justify its massive AI spending",
-        "summary": "Meta wants to sell its AI products and services to other companies.",
-        "body": "Meta wants to sell its AI products and services to other companies.\n\nIn case there was any doubt, Meta no longer wants its business to rely solely on advertising. Meta is officially starting a new enterprise business to sell its AI products and services to other companies.\n\nMark Zuckerberg announced the move in a post on Facebook, saying that selling AI-focused enterprise services represents the \"next major pillar of our business.\" To lead the effort, Zuckerberg has tapped Chirantan \"CJ\" Desai as the company's new Chief Enterprise Platform Officer. Desai previously ran the database company MongoDB.\n\nThe company has been laying the groundwork for this shift over the last several months with a slew of AI-focused tools, including business agents and a coding platform . It's also been rumored that Meta has considered leasing some of its data center infrastructure to other companies, though it has yet to announce specific plans to do so.\n\n\"Meta Enterprise Platform will use our strengths that few other companies have: advanced models, leading agents, large-scale infrastructure, and years of working closely with many businesses,\" Zuckerberg wrote. \"Initially, we will focus on bringing our full technology stack, including the Muse agent, Meta Business Agent, Muse API, Muse Code, and more to businesses and developers to help them grow.\"\n\nSpinning up a new enterprise business could help Meta cash in on its massive AI investments. Zuckerberg has said he expects the company to spend $600 billion on AI in the next two years, with much of that going to fund new data centers. That level of spending has raised questions about how Meta plans to make money from its AI business. The company has started to offer AI subscriptions aimed at consumers and small business owners, but it has yet to prove that Facebook and Instagram users are willing to pay for these en masse. A dedicated enterprise business, on the other hand, could be significantly more lucrative."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-da30d23f6b236ee1",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/28/nvidia-launches-new-platform-for-reining-in-rogue-ai-agents/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-28T18:31:23.000Z",
-    "categories": [
-      "tecnologia-general",
-      "programas-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Nvidia launches new platform for reining in rogue AI agents",
-        "summary": "As the debate rages over whether the recent spate of rogue AI agents is a step toward AGI or a more conventional engineering problem, Nvidia is offering its own answer to problem. Nvidia CEO Jensen Huang on Monday introduced a toolkit of software and hardware products that add independent security layers around AI agents to […]",
-        "body": "As the debate rages over whether the recent spate of rogue AI agents is a step toward AGI or a more conventional engineering problem, Nvidia is offering its own answer to problem.\n\nNvidia CEO Jensen Huang on Monday introduced a toolkit of software and hardware products that add independent security layers around AI agents to ensure they stay within their test environments even if they attempt to break out.\n\nThe release follows a string of hacking incidents involving AI models from Anthropic, Google, OpenAI, and Meta that bypassed security controls to escape their testing environments and access real-world systems. The first and most prominent example occurred this summer when OpenAI agents breached Hugging Face while trying to complete a cybersecurity task. And the hits keep on coming — OpenAI published a new site dedicated to reports of its AI agents going rogue.\n\nHuang said Monday during an interview with CNBC that its new Nvidia Open Agent Safety Platform would have prevented these breaches.\n\nNvidia, which has made tens of billions of dollars selling its GPU and CPU chips to AI labs, doesn’t support slowing down development or adding new regulations to the industry to solve the security problem. The answer, the company believes, is to move some security controls outside the agent altogether — creating a constant and independent security guard that will keep AI agents in check.\n\n“AI’s extraordinary potential for society will only be realized if we solve AI safety,” Huang said in a statement. “As we continue to discover the frontier of AI capabilities, we must accelerate discovery at the frontier of AI safety. Safety and security require full-stack engineering.”\n\nThe new Nvidia Open Agent Safety Platform combines OpenShell, its open-source software for controlling what agents can access while they operate, with Sentry, an independent monitoring system that runs on Nvidia’s BlueField-4 data processing units. Nvidia says placing Sentry on a separate processor — rather than on the CPU or GPU where the AI agent operates — provides an isolated view of the agent’s activity.\n\nOpenShell isn’t new; the company announced the software in March. But it’s the combination that Nvidia believes will provide the security layer needed to keep the industry plugging along. OpenShell provides the software boundary around the agent, while Sentry adds another line of defense at the hardware level tha the company says will continuously monitor behavior and “quarantine agents that attempt to move outside their boundaries in milliseconds.”\n\nNvidia listed dozens of companies that have signed on to to support the effort and use the open-source platform including Anthropic, Arm, Microsoft, Oracle, and SpaceX. OpenAI is not listed as a participating company.\n\nHuang told CNBC in an interview Monday that work on this effort started a year ago following the introduction of OpenClaw, an operating system of agents created by Peter Steinberger. In March, Nvidia released NemoClaw , an enterprise-grade AI agent platform and its own version of OpenClaw that baked in security.\n\n“When you deploy an agent, no matter how smart, the first thing you do is to take away all of its rights,” Huang said during his CNBC interview, later comparing these security measures to how human employees and even executives are managed with companies.\n\nNvidia’s release was widely supported by those who have cautioned that a slowdown in development could allow China to surpass the U.S. in AI.\n\nDavid Sacks, a founder, venture capitalist, former White House AI czar, and co-chair the President’s Council of Advisors on Science and Technology, said Nvidia’s announcement is a reminder that agent safety is an engineering problem.\n\n“Recent breakouts weren’t proof that development must stop,” he wrote on X . “They were proof that the sandbox was too weak. The runtime environment was poorly designed and misconfigured.”"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-c3028d8ec943dd4a",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1001427/ai-is-supercharging-hacking-and-your-local-hospitals-and-banks-arent-ready",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-28T18:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "AI is supercharging hacking, and your local hospitals and banks aren’t ready",
-        "summary": "In March, Janice Malone began getting calls about suspicious activity from her nonprofit organization, Vivian's Door. Vivian's Door, headquartered in Alabama, typically provided training, resources, and community to underserved and minority-owned businesses. The work sometimes put it in close contact with these companies' financial data, which was stored on its systems. But suddenly, concerned callers […]",
-        "body": "In March, Janice Malone began getting calls about suspicious activity from her nonprofit organization, Vivian's Door. Vivian's Door, headquartered in Alabama, typically provided training, resources, and community to underserved and minority-owned businesses. The work sometimes put it in close contact with these companies' financial data, which was stored on its systems. But suddenly, concerned callers from all over the world warned they'd been getting emails \"begging for money\" - which she hadn't sent.\n\nThe organization's third-party IT team pulled its systems offline for three days while they investigated the issue and plugged up the vulner …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-1ebf8e2cd9307ff1",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2268945/simple-setting-change-make-android-phone-faster/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-28T18:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "android",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "This setting change can make your Android phone feel instantly faster",
-        "summary": "This easy Android tweak makes navigating your phone and switching apps feel almost immediate. And it's really easy to set up. Here's how.",
-        "body": "You can enable it with just a few taps.\n\nWith how powerful the chips inside our smartphones have gotten, lags and stutters have become something you generally shouldn't experience anymore. Staying up-to-date with the latest Android version and making sure all your apps are updated can help keep things running smoothly. Clearing cache may help with performance, but only in situations where an app's files have become corrupted or bloated. There is, however, a neat trick buried inside Android's settings app that can make your phone feel noticeably snappier.\n\nAll Android phones , regardless of brand or price, let you tweak the speed of system animations. This option has actually been around at least since Android 4.0 Ice Cream Sandwich and is one of the first things I change whenever I set up a new Android phone. You'll find this inside Android's developer options menu, which is hidden by default.\n\nNavigate to Settings > About , and look for the \"Build Number\" option. Depending on your phone's model, it may sometimes be located under a submenu like \"Software Version.\" Tap the label seven times, and you should see a toast message saying \"You are now a developer!\" Head back to the main settings page. You may find the Developer Options menu right there, but if not, navigate to System, and you should now see it.\n\nYou'll find a seemingly endless list of options inside. It's strongly recommended you do not change any options here unless you know exactly what they do. What we're looking for are the animation scale settings under the Drawing section. Set the Window animation scale , Transition animation scale and Animator duration scale values to 0.5x. This will make most animations on your Android phone play twice as fast.\n\nCutting your phone's animation speeds in half doesn't actually make it perform any better. However, I've been using this trick for over a decade and can confirm that it definitely makes everything feel snappier. Unlocking your phone and launching an app feels faster, and so does quickly switching between different apps. I got accustomed to this snappier feel over the years, so not being able to change the animation speed on iOS was one of the first things I noticed when I switched to an iPhone.\n\nThat said, animations do serve another purpose besides just making the interface feel more lively — they mask brief loading times and make transitions between different menus and screens feel smoother. There have been instances, especially with budget-oriented phones , where I've cut the animation speed in half only for the experience to feel worse because apps and menus weren't loading quickly enough to keep up.\n\nSome Android skins like Google's Pixel UI have more drawn-out animations than others, so using this trick to speed things up can make a noticeable difference. In contrast, OxygenOS on OnePlus devices has slightly faster animations by default, so you may not want to cut their duration in half. In my experience, however, OnePlus' flagship phones operate on a different level with this tweak enabled.\n\nNobody's stopping you from slowing down system animations either — there's something soothing about watching every transition play out slowly and seeing where each element comes from or disappears to as you use your phone. One thing to note here is that turning off the Developer Options toggle resets the animation scale settings back to their default values."
       }
     },
     "media": null
@@ -480,54 +524,6 @@
         "title": "Restaurant Rush: Cook & Serve",
         "summary": "Welcome to Restaurant Rush — the cozy kitchen-builder where every shift is a tiny puzzle. Run five themed restaurants across a 100-day story campaign, then push your record in Endless mode. Drag ingredients to the stove, plate orders before the timer ticks out, and bank coins to expand your menu, hire a waiter, or unlock the next neighborhood spot. What you'll do • Serve thirsty customers at Sip Stop, plate noodle bowls at Noodle Pit, toss tacos at Taco Truck, and three more restaurants to discover. • Master the rhythm: tap to take orders, prep at the right station, deliver before patience runs out, chase combos for huge tips. • Upgrade kitchen stations, add trays, hire waiters per restaurant, and unlock 50+ recipes that scale with your skill. • Customize your chef with 8 outfit presets, 4 hair styles, and a wardrobe of premium cosmetic items you unlock as you progress. Live ops that respect your time • Daily missions reset at midnight with shareable rewards. • Weekly challenges with global leaderboards. • Seasonal content drops curated by the live-ops team — new recipes, customer types, and chef gear show up without you needing to update the app. Built for one-handed play Restaurant Rush is designed for short sessions on the bus, in line, or before bed. No timers gating progress, no energy meter to wait out — just keep cooking when you want, pause anywhere. Free to download. Optional in-app purchases support continued development.",
         "body": "Welcome to Restaurant Rush — the cozy kitchen-builder where every shift is a tiny puzzle.\n\nRun five themed restaurants across a 100-day story campaign, then push your record in Endless mode. Drag ingredients to the stove, plate orders before the timer ticks out, and bank coins to expand your menu, hire a waiter, or unlock the next neighborhood spot.\n\nWhat you'll do\n\n• Serve thirsty customers at Sip Stop, plate noodle bowls at Noodle Pit, toss tacos at Taco Truck, and three more restaurants to discover.\n\n• Master the rhythm: tap to take orders, prep at the right station, deliver before patience runs out, chase combos for huge tips.\n\n• Upgrade kitchen stations, add trays, hire waiters per restaurant, and unlock 50+ recipes that scale with your skill.\n\n• Customize your chef with 8 outfit presets, 4 hair styles, and a wardrobe of premium cosmetic items you unlock as you progress.\n\nLive ops that respect your time\n\n• Daily missions reset at midnight with shareable rewards. • Weekly challenges with global leaderboards. • Seasonal content drops curated by the live-ops team — new recipes, customer types, and chef gear show up without you needing to update the app.\n\nBuilt for one-handed play\n\nRestaurant Rush is designed for short sessions on the bus, in line, or before bed. No timers gating progress, no energy meter to wait out — just keep cooking when you want, pause anywhere.\n\nFree to download. Optional in-app purchases support continued development."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-35846096a0f6f9b5",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/tech-policy/2026/09/court-rules-trump-can-blacklist-anthropic-for-refusing-to-enable-claude-features/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-25T21:36:20.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Court rules Pentagon can blacklist Anthropic for refusing to enable Claude features",
-        "summary": "\"Overly constrained AI models\" could cause military operations to fail, judges say.",
-        "body": "A US appeals court today approved the Department of Defense's blacklisting of Anthropic technology. Judges decided the Trump administration had authority to blacklist Anthropic for withholding certain AI features from the military even if Anthropic had no malicious intent.\n\nIn a 2-1 ruling issued by the US Court of Appeals for the District of Columbia Circuit, a panel of judges said the \"case raises profoundly difficult questions about the appropriate military uses of an almost unimaginably powerful new technology.\" The US \"raises the deeply sobering prospect of overly constrained AI models shutting down unexpectedly and thus causing important military operations to fail. Anthropic raises the deeply sobering prospect of unconstrained AI models hallucinating inappropriate targets for lethal military force,\" the ruling said.\n\nTrump and Defense Secretary Pete Hegseth \"must determine how best to balance the competing risks,\" the court said. \"In doing so here, the Secretary did not transgress any limits on his authority under the Supply Chain Security Act or the Constitution. Accordingly, we deny the petitions for review.\" The same court previously denied Anthropic's emergency motion for a stay in April.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-91ddee723a78cf6e",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/apple/2026/09/review-the-iphone-18-pro-is-apples-coolest-smartphone-but-only-literally/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-25T19:34:42.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Review: The iPhone 18 Pro is Apple's coolest smartphone (but only literally)",
-        "summary": "Better thermals and battery life make this iterative update nicer to use.",
-        "body": "As Apple's Tim Cook era draws to a close, we're seeing more experimentation with the iPhone's design than we've seen in a long time, but you wouldn't know it from the iPhone 18 Pro. This absurdly fast, full-featured handset might be eclipsed by the hype around the iPhone Duo this year, but it's still just as good as its immediate predecessor.\n\nOf course, not too much has changed since the iPhone 17 Pro. There's the new variable aperture and other camera controls for those who want to get granular with their mobile photography, a welcome addition given the iPhone's reputation for inflexibly opinionated computational photography.\n\nBeyond that, though, all the most important changes are under the hood: a new chip, better battery life, and much-improved thermals that both give the phone better sustained performance and make it cooler to the touch in many situations.\n\nRead full article\n\nComments"
       }
     },
     "media": null

@@ -1,5 +1,22 @@
 [
   {
+    "id": "mkbhd:https://www.youtube.com/watch?v=rayrrXot17M",
+    "type": "video",
+    "section": "technology",
+    "sourceId": "mkbhd",
+    "sourceName": "MKBHD",
+    "sourceUrl": "https://www.youtube.com/@mkbhd",
+    "originalUrl": "https://www.youtube.com/watch?v=rayrrXot17M",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-29T01:01:35.000Z",
+    "title": "Nothing Headphone 1 Pro: They Copied the Wrong Thing!",
+    "summary": "Nothing decided to join the $400+ ANC headphone ranks, and made just one bizarre mistake...\n\nMKBHD Merch: http://shop.MKBHD.com\n\nPlaylist of MKBHD Intro music: https://goo.gl/B3AWV5\n\nHeadphones provided by Nothing for review.\n\n~\nhttp://twitter.com/MKBHD\nhttp://instagram.com/MKBHD\nhttp://facebook.com/MKBHD",
+    "mediaUrl": null,
+    "embedUrl": "https://www.youtube.com/embed/rayrrXot17M",
+    "platform": "youtube",
+    "categories": []
+  },
+  {
     "id": "the-verge-video:https://www.youtube.com/watch?v=GsVrdvmC_RY",
     "type": "video",
     "section": "technology",
@@ -847,23 +864,6 @@
     "mediaUrl": null,
     "embedUrl": null,
     "platform": "podcast",
-    "categories": []
-  },
-  {
-    "id": "mkbhd:https://www.youtube.com/watch?v=ohqxP8EEumo",
-    "type": "video",
-    "section": "technology",
-    "sourceId": "mkbhd",
-    "sourceName": "MKBHD",
-    "sourceUrl": "https://www.youtube.com/@mkbhd",
-    "originalUrl": "https://www.youtube.com/watch?v=ohqxP8EEumo",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T12:01:27.000Z",
-    "title": "iPhone 18 Pro Review: All About that Chip",
-    "summary": "iPhone 18 Pro is basically an S year upgrade. And one part of it is really impressive.\n\nProtect your new iPhone 18 with a case or screen protector at http://dbrand.com/shop/iphone-18\n\nThe scale of a transistor: https://youtu.be/Jh9pFp1oM7E\n\nMKBHD Merch: http://shop.MKBHD.com\n\nIntro Track: Make You Happy by Betablock3r\nPlaylist of MKBHD Intro music: https://goo.gl/B3AWV5\n\nPhone provided by Apple for review.\n\n~\nhttp://twitter.com/MKBHD\nhttp://instagram.com/MKBHD\nhttp://facebook.com/MKBHD\n\n0:00 Intro\n1:21 This Camera\n6:47 The Chip\n10:20 Battery Boost\n13:04 The Little Things\n14:22 Conclusion",
-    "mediaUrl": null,
-    "embedUrl": "https://www.youtube.com/embed/ohqxP8EEumo",
-    "platform": "youtube",
     "categories": []
   },
   {

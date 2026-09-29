@@ -22,6 +22,13 @@ function normalizeConflict(value) {
   };
 }
 
+function normalizeMissingItem(value) {
+  if (!value || typeof value !== 'object') return null;
+  const id = clean(value.id);
+  if (!id) return null;
+  return { id, title: clean(value.title) };
+}
+
 function normalizePlan(value) {
   if (!value || typeof value !== 'object') return { cancelled: true };
   if (value.cancelled === true) return { cancelled: true };
@@ -97,10 +104,38 @@ export function createReadingBackupClient(plugin = {}) {
     }
   }
 
+  async function checkReadingLibrary() {
+    if (!plugin?.checkReadingLibrary) return { healthy: false, bookCount: 0, missingItems: [] };
+    try {
+      const result = await plugin.checkReadingLibrary();
+      return {
+        healthy: result?.healthy === true,
+        bookCount: nonNegativeInteger(result?.bookCount),
+        missingItems: (Array.isArray(result?.missingItems) ? result.missingItems : [])
+          .map(normalizeMissingItem)
+          .filter(Boolean)
+      };
+    } catch {
+      return { healthy: false, bookCount: 0, missingItems: [] };
+    }
+  }
+
+  async function deleteAllReadingData() {
+    if (!plugin?.deleteAllReadingData) return false;
+    try {
+      const result = await plugin.deleteAllReadingData({ confirmed: true });
+      return result === true || result?.deleted === true;
+    } catch {
+      return false;
+    }
+  }
+
   return {
     exportReadingBackup,
     pickReadingRestore,
     applyReadingRestore,
-    cancelReadingRestore
+    cancelReadingRestore,
+    checkReadingLibrary,
+    deleteAllReadingData
   };
 }

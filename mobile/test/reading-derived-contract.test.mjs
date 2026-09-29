@@ -13,7 +13,12 @@ test('derived content schema is version 6 and migrates from v5 without destructi
   assert.match(database, /createV6Tables\(db\)/);
   assert.match(database, /CHECK\(kind IN \('ocr','translation'\)\)/);
   assert.match(database, /CHECK\(status IN \('partial','complete','error'\)\)/);
-  assert.doesNotMatch(database, /DROP TABLE[\s\S]*version\s*==\s*5/i);
+
+  const migrationV5ToV6 = database.match(
+    /if\s*\(version\s*==\s*5\s*&&\s*newVersion\s*>=\s*6\)\s*\{([\s\S]*?)\n\s*\}/
+  );
+  assert.ok(migrationV5ToV6, 'expected an explicit v5 to v6 migration block');
+  assert.doesNotMatch(migrationV5ToV6[1], /DROP\s+TABLE/i);
 });
 
 test('derived records persist resumable progress and are deleted with their source book', async () => {

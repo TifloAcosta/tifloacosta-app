@@ -65,8 +65,8 @@ test('beta acceptance protects reading queue ordering and never auto-opens the n
   assert.match(queue, /client\.moveQueueItem\(book\.id,\s*index\s*\+\s*1\)/);
   assert.match(queue, /client\.removeFromQueue\(book\.id\)/);
   assert.match(queue, /Nothing opens automatically|Nada se abre automáticamente/);
-  assert.match(reader, /openNext\.addEventListener\(['"]click['"]/);
-  assert.doesNotMatch(reader, /showEndOfDocument\([\s\S]*onOpenBook\?\.\(nextSuggestedBookId\)/);
+  assert.match(reader, /async function showEndOfDocument\(\)[\s\S]*nextSuggestedBookId = nextBook\.id;[\s\S]*openNext\.hidden = false;/);
+  assert.match(reader, /openNext\.addEventListener\(['"]click['"],\s*\(\)\s*=>\s*\{[\s\S]*if \(nextSuggestedBookId\) onOpenBook\?\.\(nextSuggestedBookId\);[\s\S]*\}\);/);
 });
 
 test('beta acceptance protects portable backup review and explicit restore conflicts', async () => {
@@ -79,7 +79,7 @@ test('beta acceptance protects portable backup review and explicit restore confl
   assert.match(backup, /use-backup/);
   assert.match(backup, /client\.applyReadingRestore\(/);
   assert.match(backup, /client\.cancelReadingRestore\(\)/);
-  assert.match(backup, /client\.checkLibrary\(\)/);
+  assert.match(backup, /client\.checkReadingLibrary\(\)/);
   assert.match(backup, /client\.deleteAllReadingData\(/);
 });
 

@@ -13,7 +13,6 @@ test('structured links remain actionable and internal notes return to the exact 
   assert.match(screen, /noteReturnPosition/);
   assert.match(screen, /returnFromInternalLink/);
   assert.match(screen, /moveToPosition\(\{\s*blockIndex:\s*targetBlockIndex,\s*unitIndex:\s*0\s*\}\)/);
-  assert.match(screen, /noopener noreferrer/);
 
   for (const label of [
     'Enlace del documento',
@@ -22,5 +21,28 @@ test('structured links remain actionable and internal notes return to the exact 
     'Return to source'
   ]) {
     assert.ok(screen.includes(label), `Missing note navigation label: ${label}`);
+  }
+});
+
+test('external document links require an accessible warning before leaving TifloAcosta', async () => {
+  const screen = await read('src/screens/reading-book.mjs');
+
+  assert.match(screen, /externalLinkDialog/);
+  assert.match(screen, /setAttribute\(['"]role['"],\s*['"]dialog['"]\)/);
+  assert.match(screen, /setAttribute\(['"]aria-modal['"],\s*['"]true['"]\)/);
+  assert.match(screen, /openExternalLinkWarning/);
+  assert.match(screen, /nativeActions\?\.openExternal/);
+  assert.match(screen, /pendingExternalUrl/);
+  assert.match(screen, /externalLinkInvoker/);
+
+  for (const label of [
+    'Este enlace abre contenido fuera de TifloAcosta.',
+    'This link opens content outside TifloAcosta.',
+    'Abrir enlace externo',
+    'Open external link',
+    'Cancelar',
+    'Cancel'
+  ]) {
+    assert.ok(screen.includes(label), `Missing external-link warning label: ${label}`);
   }
 });

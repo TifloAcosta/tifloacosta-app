@@ -11,11 +11,32 @@ const VISUAL_KEYS = [
   'visual.theme'
 ];
 
+const FOCUSABLE_SELECTOR = [
+  'button:not([disabled])',
+  'select:not([disabled])',
+  'input:not([disabled])',
+  'a[href]',
+  '[tabindex]:not([tabindex="-1"])'
+].join(',');
+
 function option(select, value, label) {
   const element = document.createElement('option');
   element.value = String(value);
   element.textContent = label;
   select.append(element);
+}
+
+function focusableElements(section) {
+  return Array.from(section.querySelectorAll(FOCUSABLE_SELECTOR))
+    .filter(element => !element.hidden && element.getAttribute('aria-hidden') !== 'true');
+}
+
+function configureDialog(section, heading, id) {
+  heading.id = id;
+  section.tabIndex = -1;
+  section.setAttribute('role', 'dialog');
+  section.setAttribute('aria-modal', 'true');
+  section.setAttribute('aria-labelledby', id);
 }
 
 export function applyReadingVisualSettings(readerContainer, settings) {
@@ -36,6 +57,7 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
   voiceSection.hidden = true;
   const voiceHeading = document.createElement('h2');
   voiceHeading.textContent = t('readingBook.voiceAndSpeed');
+  configureDialog(voiceSection, voiceHeading, 'reading-voice-heading');
 
   const voiceLabel = document.createElement('label');
   voiceLabel.textContent = t('readingBook.voice');
@@ -70,6 +92,7 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
   visualSection.hidden = true;
   const visualHeading = document.createElement('h2');
   visualHeading.textContent = t('readingBook.visualSettings');
+  configureDialog(visualSection, visualHeading, 'reading-visual-heading');
 
   const textSize = document.createElement('select');
   option(textSize, 0.9, t('readingBook.textSmall'));
@@ -147,6 +170,31 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
   let voices = [];
   let current = null;
   let destroyed = false;
+  let lastInvoker = null;
+
+  function rememberInvoker() {
+    const active = document.activeElement;
+    lastInvoker = active && typeof active.focus === 'function' ? active : null;
+  }
+
+  function trapDialogFocus(section, event) {
+    if (event.key !== 'Tab' || section.hidden) return;
+    const controls = focusableElements(section);
+    if (!controls.length) {
+      event.preventDefault();
+      section.focus();
+      return;
+    }
+    const first = controls[0];
+    const last = controls[controls.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
 
   async function saveBookSetting(key, value, targetStatus) {
     const ok = await client.setReadingSetting({ scope: 'book', bookId, key, value: String(value) });
@@ -210,19 +258,31 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
 
   function returnToReading() {
     closeAll();
+    const invoker = lastInvoker;
+    lastInvoker = null;
+    if (invoker?.isConnected !== false) {
+      lastInvoker = invoker;
+      lastInvoker?.focus();
+      lastInvoker = null;
+      return;
+    }
     returnFocus?.();
   }
 
   voiceReturn.addEventListener('click', returnToReading);
   visualReturn.addEventListener('click', returnToReading);
+  voiceSection.addEventListener('keydown', event => trapDialogFocus(voiceSection, event));
+  visualSection.addEventListener('keydown', event => trapDialogFocus(visualSection, event));
 
   function openVoice() {
+    rememberInvoker();
     visualSection.hidden = true;
     voiceSection.hidden = false;
     void loadSettings();
     queueMicrotask(() => voiceSelect.focus());
   }
   function openVisual() {
+    rememberInvoker();
     voiceSection.hidden = true;
     visualSection.hidden = false;
     void loadSettings();

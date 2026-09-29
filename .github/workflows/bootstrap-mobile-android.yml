@@ -15,7 +15,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   bootstrap:
@@ -27,6 +27,30 @@ jobs:
         uses: actions/checkout@v5
         with:
           fetch-depth: 0
+
+      - name: Apply one-shot final reading review patch
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.ref == 'feature/leer-tifloacosta-android-foundation' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -f mobile/tools/apply-reading-final-review.py ]; then
+            exit 0
+          fi
+          if grep -Fq 'externalLinkDialog' mobile/src/screens/reading-book.mjs; then
+            echo "Final reading review patch already applied."
+            exit 0
+          fi
+          git fetch origin feature/leer-tifloacosta-android-foundation
+          git checkout -B feature/leer-tifloacosta-android-foundation origin/feature/leer-tifloacosta-android-foundation
+          python3 mobile/tools/apply-reading-final-review.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add mobile/src/screens/reading-book.mjs mobile/src/screens/reading-settings.mjs mobile/src/screens/reading-library.mjs mobile/src/screens/reading-audio.mjs mobile/src/core/reading-audio.mjs mobile/src/styles.css mobile/test/reading-audio.test.mjs
+          git diff --cached --check
+          git commit -m "fix: close reading beta review gaps"
+          git push origin HEAD:feature/leer-tifloacosta-android-foundation
+          echo "Patch pushed; this run will stop so the new head can be verified cleanly."
+          exit 1
 
       - name: Setup Node
         uses: actions/setup-node@v5

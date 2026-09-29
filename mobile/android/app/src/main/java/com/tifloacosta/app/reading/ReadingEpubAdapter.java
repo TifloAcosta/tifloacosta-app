@@ -252,9 +252,10 @@ public final class ReadingEpubAdapter {
         if (type != null) {
             String text = readableText(element);
             if (!text.isEmpty()) {
-                String fragment = clean(element.getAttribute("id"));
-                String href = fragment.isEmpty() ? documentPath : documentPath + "#" + fragment;
-                String id = fragment.isEmpty() ? "epub-" + (++serial[0]) : documentPath + "#" + fragment;
+                String ownFragment = clean(element.getAttribute("id"));
+                String targetFragment = ownFragment.isEmpty() ? nearestAncestorFragment(element) : ownFragment;
+                String href = targetFragment.isEmpty() ? documentPath : documentPath + "#" + targetFragment;
+                String id = ownFragment.isEmpty() ? "epub-" + (++serial[0]) : documentPath + "#" + ownFragment;
                 output.add(new ReadingStructuredDocument.Block(
                         id,
                         type,
@@ -271,6 +272,16 @@ public final class ReadingEpubAdapter {
         for (int i = 0; i < children.getLength(); i++) {
             collectBlocks(children.item(i), documentPath, output, serial);
         }
+    }
+
+    private static String nearestAncestorFragment(Element element) {
+        Node current = element == null ? null : element.getParentNode();
+        while (current instanceof Element) {
+            String fragment = clean(((Element) current).getAttribute("id"));
+            if (!fragment.isEmpty()) return fragment;
+            current = current.getParentNode();
+        }
+        return "";
     }
 
     private static List<ReadingStructuredDocument.Link> collectInlineLinks(

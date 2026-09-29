@@ -134,7 +134,7 @@ test('native interruption pauses at the same position and never auto-resumes', a
   await speech.destroy();
 });
 
-test('controller adopts a matching native session that survived the WebView', async () => {
+test('controller automatically adopts a matching native session that survived the WebView', async () => {
   const client = fakeClient({
     sessionId: 'native-existing',
     bookId: 'book-1',
@@ -151,10 +151,35 @@ test('controller adopts a matching native session that survived the WebView', as
     initialPosition: { blockIndex: 0, unitIndex: 0 }
   });
 
-  await speech.syncNativeState();
+  await flush();
   assert.deepEqual(speech.snapshot().position, { blockIndex: 1, unitIndex: 0 });
   assert.equal(speech.snapshot().playing, true);
   assert.equal(client.begins.length, 0, 'a surviving matching session must not be replaced');
+  await speech.destroy({ preserveNative: true });
+});
+
+test('loading voice and rate while an adopted native session is playing does not fake a pause', async () => {
+  const client = fakeClient({
+    sessionId: 'native-existing',
+    bookId: 'book-1',
+    blockIndex: 0,
+    unitIndex: 1,
+    prepared: true,
+    playing: true,
+    ended: false
+  });
+  const speech = createReadingSpeechController({
+    client,
+    book: { id: 'book-1', title: 'Prueba' },
+    document: documentFixture()
+  });
+
+  await flush();
+  assert.equal(speech.snapshot().playing, true);
+  speech.setVoice('voz-guardada');
+  speech.setRate(1.3);
+  assert.equal(speech.snapshot().playing, true);
+  assert.deepEqual(speech.snapshot().position, { blockIndex: 0, unitIndex: 1 });
   await speech.destroy({ preserveNative: true });
 });
 

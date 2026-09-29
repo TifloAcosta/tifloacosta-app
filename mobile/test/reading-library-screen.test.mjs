@@ -92,6 +92,25 @@ test('reading library exposes one open-now action only for one newly imported bo
   assert.match(screen, /onOpenBook/);
 });
 
+test('global reading defaults expose speech audio and visual settings with immediate persistence and reset', async () => {
+  const screen = await read('src/screens/reading-library.mjs');
+
+  for (const key of [
+    'speech.voice', 'speech.rate', 'audio.speed', 'audio.skipSeconds',
+    'visual.textSize', 'visual.fontFamily', 'visual.fontWeight', 'visual.lineSpacing',
+    'visual.paragraphSpacing', 'visual.readingWidth', 'visual.foreground', 'visual.background',
+    'visual.highContrast', 'visual.theme'
+  ]) {
+    assert.ok(screen.includes(key), `Missing global reading setting ${key}`);
+  }
+
+  assert.match(screen, /scope:\s*['"]global['"]/);
+  assert.match(screen, /addEventListener\(['"]change['"][\s\S]*setReadingSetting/);
+  assert.match(screen, /READING_SETTING_DEFAULTS/);
+  assert.match(screen, /resetGlobalReadingSettings|resetReadingDefaults/);
+  assert.doesNotMatch(screen, /Save settings|Guardar ajustes/);
+});
+
 test('home and translations expose the dedicated reading library without replacing Library', async () => {
   const [home, i18n] = await Promise.all([
     read('src/screens/home.mjs'),

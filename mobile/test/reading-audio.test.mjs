@@ -124,9 +124,7 @@ function createHarness({
 
 test('audio coordinator prepares exact long position without autoplay and applies inherited speed', async () => {
   const { controller, calls } = createHarness();
-
   await controller.prepare();
-
   assert.deepEqual(calls[0], {
     method: 'prepareAudio',
     options: {
@@ -141,7 +139,6 @@ test('audio coordinator prepares exact long position without autoplay and applie
     method: 'setAudioSpeed',
     options: { speed: 1.25 }
   });
-
   await controller.play();
   assert.equal(calls.filter(call => call.method === 'playAudio').length, 1);
 });
@@ -152,10 +149,8 @@ test('audio coordinator clamps configured skip at start and end', async () => {
   await listeners.get('audioState')({
     bookId: 'audio-1', trackIndex: 0, positionMs: 5000, durationMs: 20000, playing: false, speed: 1.25
   });
-
   await controller.skip(-1);
   assert.deepEqual(calls.at(-1), { method: 'skipAudio', options: { deltaMs: -5000 } });
-
   await listeners.get('audioPosition')({
     bookId: 'audio-1', trackIndex: 0, positionMs: 5000, durationMs: 20000, playing: false, speed: 1.25
   });
@@ -169,11 +164,9 @@ test('audio coordinator updates the configured skip interval without recreating 
   await listeners.get('audioState')({
     bookId: 'audio-1', trackIndex: 0, positionMs: 10000, durationMs: 120000, playing: false, speed: 1.25
   });
-
   assert.equal(controller.setSkipSeconds(60), 60);
   await controller.skip(1);
   assert.deepEqual(calls.at(-1), { method: 'skipAudio', options: { deltaMs: 60000 } });
-
   await listeners.get('audioPosition')({
     bookId: 'audio-1', trackIndex: 0, positionMs: 70000, durationMs: 120000, playing: false, speed: 1.25
   });
@@ -185,17 +178,14 @@ test('audio coordinator updates the configured skip interval without recreating 
 test('position persistence is throttled but pause always forces an exact save', async () => {
   const { controller, calls, listeners, setNow } = createHarness({ initialPosition: { trackIndex: 0, positionMs: 1000 } });
   await controller.prepare();
-
   setNow(1000);
   await listeners.get('audioPosition')({ bookId: 'audio-1', trackIndex: 0, positionMs: 2000, durationMs: 10000, playing: true, speed: 1.25 });
   setNow(2000);
   await listeners.get('audioPosition')({ bookId: 'audio-1', trackIndex: 0, positionMs: 3000, durationMs: 10000, playing: true, speed: 1.25 });
   assert.equal(calls.filter(call => call.method === 'saveProgress').length, 1);
-
   setNow(7000);
   await listeners.get('audioPosition')({ bookId: 'audio-1', trackIndex: 0, positionMs: 7000, durationMs: 10000, playing: true, speed: 1.25 });
   assert.equal(calls.filter(call => call.method === 'saveProgress').length, 2);
-
   await controller.pause();
   assert.equal(calls.filter(call => call.method === 'saveProgress').length, 3);
   assert.equal(calls.at(-1).progress.mediaPositionMs, 6000);
@@ -205,7 +195,6 @@ test('sleep timer pauses and persists without resuming audio', async () => {
   const { controller, calls, getPendingTimer, fireTimer } = createHarness({ initialPosition: { trackIndex: 0, positionMs: 5000 } });
   await controller.prepare();
   await controller.setSleepTimer(15);
-
   assert.equal(getPendingTimer().delayMs, 15 * 60 * 1000);
   await fireTimer();
   assert.equal(calls.some(call => call.method === 'pauseAudio'), true);
@@ -216,12 +205,10 @@ test('sleep timer pauses and persists without resuming audio', async () => {
 test('interruption persists once, never resumes, and stale callbacks are ignored', async () => {
   const { controller, calls, listeners } = createHarness();
   await controller.prepare();
-
   await listeners.get('audioInterrupted')({
     bookId: 'other-book', trackIndex: 0, positionMs: 9999, durationMs: 10000, playing: false, reason: 'audio-focus'
   });
   assert.equal(calls.filter(call => call.method === 'saveProgress').length, 0);
-
   await listeners.get('audioInterrupted')({
     bookId: 'audio-1', trackIndex: 2, positionMs: 7000, durationMs: 20000, playing: false, reason: 'audio-focus'
   });
@@ -237,7 +224,6 @@ test('end and destroy force persistence and listener cleanup', async () => {
   });
   assert.equal(calls.filter(call => call.method === 'saveProgress').length, 1);
   assert.equal(calls.at(-1).progress.state, 'read');
-
   await controller.destroy();
   assert.equal(listeners.size, 0);
   assert.equal(calls.filter(call => call.method === 'saveProgress').length, 2);
@@ -262,21 +248,20 @@ test('native wrapper and library client expose the audio bridge and route audio 
     async pauseAudio() { nativeCalls.push(['pauseAudio']); return { playing: false }; },
     async seekAudio(options) { nativeCalls.push(['seekAudio', options]); return options; },
     async skipAudio(options) { nativeCalls.push(['skipAudio', options]); return options; },
-    async previousTrack() { nativeCalls.push(['previousTrack']); return { trackIndex: 0 }; },
-    async nextTrack() { nativeCalls.push(['nextTrack']); return { trackIndex: 1 }; },
-    async setSpeed(options) { nativeCalls.push(['setSpeed', options]); return options; },
-    async getState() { nativeCalls.push(['getState']); return { playing: false }; },
+    async previousAudioTrack() { nativeCalls.push(['previousAudioTrack']); return { trackIndex: 0 }; },
+    async nextAudioTrack() { nativeCalls.push(['nextAudioTrack']); return { trackIndex: 1 }; },
+    async setAudioSpeed(options) { nativeCalls.push(['setAudioSpeed', options]); return options; },
+    async getAudioState() { nativeCalls.push(['getAudioState']); return { playing: false }; },
     async stopAudio() { nativeCalls.push(['stopAudio']); return { playing: false }; },
-    async setSleepTimer(options) { nativeCalls.push(['setSleepTimer', options]); return true; },
-    async cancelSleepTimer() { nativeCalls.push(['cancelSleepTimer']); return true; },
+    async setAudioSleepTimer(options) { nativeCalls.push(['setAudioSleepTimer', options]); return { scheduled: true }; },
+    async cancelAudioSleepTimer() { nativeCalls.push(['cancelAudioSleepTimer']); return { cancelled: true }; },
     async addListener(name, listener) {
       nativeListeners.set(name, listener);
       return { remove: async () => nativeListeners.delete(name) };
     }
   };
-  const plugin = createReadingLibraryPlugin({ audioPlugin });
+  const plugin = createReadingLibraryPlugin(undefined, undefined, audioPlugin);
   const client = createReadingLibraryClient(plugin);
-
   await client.prepareAudio({ bookId: 'book-1', relativePath: 'items/book-1/source.m4b', trackIndex: 1, positionMs: 1234 });
   await client.playAudio();
   await client.pauseAudio();
@@ -291,10 +276,9 @@ test('native wrapper and library client expose the audio bridge and route audio 
   await client.cancelAudioSleepTimer();
   const handle = await client.addListener('audioPosition', () => {});
   await handle.remove();
-
   assert.deepEqual(nativeCalls.map(([name]) => name), [
-    'prepareAudio', 'playAudio', 'pauseAudio', 'seekAudio', 'skipAudio', 'previousTrack', 'nextTrack',
-    'setSpeed', 'getState', 'stopAudio', 'setSleepTimer', 'cancelSleepTimer'
+    'prepareAudio', 'playAudio', 'pauseAudio', 'seekAudio', 'skipAudio', 'previousAudioTrack', 'nextAudioTrack',
+    'setAudioSpeed', 'getAudioState', 'stopAudio', 'setAudioSleepTimer', 'cancelAudioSleepTimer'
   ]);
   assert.equal(nativeListeners.size, 0);
 });

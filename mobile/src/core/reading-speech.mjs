@@ -1,5 +1,6 @@
 import { normalizeSemanticPosition } from './reading-semantic-model.mjs';
 import { TifloBackgroundTts } from '../native/reading-background-tts-plugin.mjs';
+import { TifloReading } from '../native/reading-library-plugin.mjs';
 
 let nextControllerId = 1;
 const SESSION_CHUNK_SIZE = 100;
@@ -76,7 +77,12 @@ export function createReadingSpeechController({
 } = {}) {
   const controllerId = nextControllerId++;
   const tts = supportsBackgroundTts(client) ? client : TifloBackgroundTts;
-  const bookId = String(book?.id ?? document?.bookId ?? document?.id ?? '').trim();
+  const activeBookId = typeof client?.getActiveBookId === 'function'
+    ? client.getActiveBookId()
+    : typeof TifloReading?.getActiveBookId === 'function'
+      ? TifloReading.getActiveBookId()
+      : '';
+  const bookId = String(book?.id ?? document?.bookId ?? document?.id ?? activeBookId ?? '').trim();
   const title = String(book?.title ?? document?.title ?? '').trim();
   let position = normalizeSemanticPosition(initialPosition, document);
   let voiceId = String(settings?.['speech.voice'] ?? '').trim();
@@ -90,6 +96,7 @@ export function createReadingSpeechController({
   let preparedVoiceId = '';
   let preparedRate = 0;
   const handles = [];
+  const visibilityDocument = globalThis?.document;
 
   const report = extra => {
     const payload = {
@@ -310,7 +317,6 @@ export function createReadingSpeechController({
     if (voiceId !== next) {
       voiceId = next;
       prepared = false;
-      playing = false;
     }
     return voiceId;
   }
@@ -320,7 +326,6 @@ export function createReadingSpeechController({
     if (rate !== next) {
       rate = next;
       prepared = false;
-      playing = false;
     }
     return rate;
   }
@@ -338,9 +343,16 @@ export function createReadingSpeechController({
     };
   }
 
+  const handleVisibilityChange = () => {
+    if (!destroyed && visibilityDocument?.visibilityState !== 'hidden') void syncNativeState();
+  };
+  visibilityDocument?.addEventListener?.('visibilitychange', handleVisibilityChange);
+  void syncNativeState();
+
   async function destroy({ preserveNative = false } = {}) {
     if (destroyed) return;
     destroyed = true;
+    visibilityDocument?.removeEventListener?.('visibilitychange', handleVisibilityChange);
     await listenersReady;
     if (!preserveNative && activeSessionId && typeof tts.stopTts === 'function') {
       try { await tts.stopTts(); } catch {}

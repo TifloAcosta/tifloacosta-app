@@ -55,43 +55,47 @@
 - [ ] Run focused JVM and Node tests; expect PASS.
 - [ ] Commit: `feat: add persistent background tts sessions`.
 
-### Task 2: Implement the foreground TTS service
+### Task 2: Implement a pure TTS playback state machine and the foreground service
 
 **Files:**
+- Create: `mobile/android/app/src/main/java/com/tifloacosta/app/reading/ReadingTtsPlaybackState.java`
+- Create: `mobile/android/app/src/test/java/com/tifloacosta/app/reading/ReadingTtsPlaybackStateTest.java`
 - Create: `mobile/android/app/src/main/java/com/tifloacosta/app/reading/ReadingBackgroundTtsService.java`
-- Create: `mobile/android/app/src/test/java/com/tifloacosta/app/reading/ReadingBackgroundTtsServiceStateTest.java`
+- Create: `mobile/android/app/src/androidTest/java/com/tifloacosta/app/reading/ReadingBackgroundTtsServiceInstrumentationTest.java`
 - Modify: `mobile/android/app/src/main/AndroidManifest.xml`
 - Modify: `mobile/android/app/src/main/java/com/tifloacosta/app/reading/ReadingTtsController.java`
 
 **Interfaces:**
+- Pure state machine owns session identity, ordered unit index, `playing/prepared/ended`, stale utterance generation, and transitions for prepare/play/pause/seek/done/error/interruption.
 - Service actions: `PREPARE`, `PLAY`, `PAUSE`, `SEEK`, `STOP`, `QUERY_STATE`.
 - State fields: `sessionId`, `bookId`, `blockIndex`, `unitIndex`, `playing`, `prepared`, `ended`, `voiceId`, `rate`.
 - Broadcast events: `TTS_STATE`, `TTS_POSITION`, `TTS_INTERRUPTED`, `TTS_ENDED`, `TTS_ERROR`.
-- Service owns the `UtteranceProgressListener` completion chain while playing.
-- Service persists progress directly through `ReadingLibraryDatabase.updateProgress(...)`.
+- Service owns the `UtteranceProgressListener` completion chain while playing and persists progress directly through `ReadingLibraryDatabase.updateProgress(...)`.
 
-- [ ] Write failing state-machine tests for prepare-without-play, sentence-to-sentence advance, pause at current unit, end-of-document, stale utterance callback rejection, and restoration in paused state.
-- [ ] Add source/manifest contract assertions for a foreground service and required foreground-service permissions already used by media playback.
-- [ ] Run focused tests; expect FAIL.
-- [ ] Implement service lifecycle, notification channel, foreground notification, audio focus/noisy handling, TTS engine ownership, semantic advancement, and direct DB persistence.
+- [ ] Write failing pure JVM state-machine tests for prepare-without-play, sentence-to-sentence advance, pause at current unit, end-of-document, stale utterance callback rejection, seek, and restoration in paused state.
+- [ ] Add failing instrumentation/source contract assertions for foreground service declaration, service creation, and no-autoplay restoration.
+- [ ] Run JVM tests and instrumentation compile; expect FAIL.
+- [ ] Implement the pure state machine first, then wire it into service lifecycle, notification channel, foreground notification, audio focus/noisy handling, TTS engine ownership, semantic advancement, and direct DB persistence.
 - [ ] Ensure `onDestroy()` persists once and never auto-resumes on recreation.
-- [ ] Run JVM tests plus `./gradlew --no-daemon assembleDebugAndroidTest --stacktrace`; expect PASS.
+- [ ] Run `./gradlew --no-daemon testDebugUnitTest --stacktrace` and `./gradlew --no-daemon assembleDebugAndroidTest --stacktrace`; expect PASS.
 - [ ] Commit: `feat: keep reading tts alive in background`.
 
 ### Task 3: Add platform media-session controls for TTS
 
 **Files:**
 - Modify: `mobile/android/app/src/main/java/com/tifloacosta/app/reading/ReadingBackgroundTtsService.java`
-- Create: `mobile/android/app/src/test/java/com/tifloacosta/app/reading/ReadingTtsMediaSessionTest.java`
+- Modify: `mobile/android/app/src/main/java/com/tifloacosta/app/reading/ReadingTtsPlaybackState.java`
+- Modify: `mobile/android/app/src/test/java/com/tifloacosta/app/reading/ReadingTtsPlaybackStateTest.java`
+- Modify: `mobile/android/app/src/androidTest/java/com/tifloacosta/app/reading/ReadingBackgroundTtsServiceInstrumentationTest.java`
 
 **Interfaces:**
 - Platform `MediaSession` callback maps `onPlay()` -> service play and `onPause()` -> service pause.
-- PlaybackState exposes only actions that are valid for the current TTS session.
+- PlaybackState exposes only actions valid for the current TTS session.
 - Session metadata contains TifloAcosta + current document title.
 - Session is inactive after explicit stop/end and active while a prepared TTS session should receive media commands.
 
-- [ ] Write failing tests for media play/pause mapping, inactive state after stop, repeated pause idempotence, and no action with no prepared session.
-- [ ] Run focused JVM tests; expect FAIL.
+- [ ] Add failing pure tests for media-command transitions and instrumentation assertions for session activation/inactivation.
+- [ ] Run focused tests; expect FAIL.
 - [ ] Implement `MediaSession`, playback state, metadata, and notification MediaStyle token integration.
 - [ ] Run focused tests and Android debug build; expect PASS.
 - [ ] Commit: `feat: expose tts media controls`.
@@ -116,7 +120,7 @@
 - [ ] Add client tests for chunking, normalized state, stale session rejection, pause/resume, and native snapshot precedence.
 - [ ] Run focused Node tests; expect FAIL.
 - [ ] Implement plugin/service command transport and update the shared speech controller.
-- [ ] Keep a temporary compatibility shim only if required by another existing test; remove it before the final acceptance gate.
+- [ ] Remove the old per-utterance chaining path once all callers use the native session contract.
 - [ ] Run all reading speech/client tests and Android unit tests; expect PASS.
 - [ ] Commit: `refactor: move reading speech queue to android`.
 
@@ -151,7 +155,7 @@
 - Modify: `mobile/test/reading-android-native-contract.test.mjs`
 
 **Interfaces:**
-- Add native `deactivateAudio()` that pauses, persists, cancels timers, clears the active media item/session state needed to avoid stale media-key routing, but preserves library progress.
+- Add native `deactivateAudio()` that pauses, persists, cancels timers, and clears the active media item/session state needed to avoid stale media-key routing while preserving library progress.
 - Preparing audio after deactivation restores from requested track/time exactly as before.
 
 - [ ] Add failing tests that deactivation saves position, never marks the book read, and does not auto-resume.
@@ -169,12 +173,12 @@
 - Modify: `mobile/src/screens/video-player.mjs`
 - Modify: `mobile/test/share-native-bootstrap.test.mjs`
 - Modify: `mobile/test/reading-android-native-contract.test.mjs`
-- Modify: `mobile/test/video-player.test.mjs` if present; otherwise create it.
+- Create or modify: `mobile/test/video-player.test.mjs`
 
 **Interfaces:**
 - `activateVideoMediaControls({title})`, `deactivateVideoMediaControls()`.
 - Events: `mediaPlay`, `mediaPause`, `mediaPlayPause`.
-- The native platform MediaSession is active only while the in-app video player is open and usable.
+- Native platform MediaSession is active only while the in-app video player is open and usable.
 - Events call `playVideo()`/`pauseVideo()` only when the YouTube IFrame API player is ready.
 
 - [ ] Write failing native/source tests for plugin registration, media-session activation/deactivation, and safe no-op without a ready player.
@@ -188,14 +192,14 @@
 ### Task 8: Add lock-screen and lifecycle acceptance coverage
 
 **Files:**
-- Create: `mobile/android/app/src/androidTest/java/com/tifloacosta/app/reading/ReadingBackgroundTtsInstrumentationTest.java`
+- Modify: `mobile/android/app/src/androidTest/java/com/tifloacosta/app/reading/ReadingBackgroundTtsServiceInstrumentationTest.java`
 - Modify: `mobile/test/reading-beta-acceptance.test.mjs`
 - Modify: `.github/workflows/bootstrap-mobile-android.yml`
 - Modify: `.github/workflows/test-mobile-release.yml`
 
 **Interfaces:**
 - Acceptance gate must fail if the background service, session bridge, media coordinator, or required manifest declarations disappear.
-- Instrumentation test simulates activity stop/background while native TTS queue advances; real screen-lock behavior remains a mandatory physical-device beta check.
+- Instrumentation simulates activity stop/background while native TTS queue advances; real screen-lock behavior remains a mandatory physical-device beta check.
 
 - [ ] Add failing acceptance assertions before touching workflows.
 - [ ] Add instrumentation coverage for service survival across activity stop/recreate and paused restoration.
@@ -206,7 +210,7 @@
 ### Task 9: Manual Android verification before the next feature block
 
 **Files:**
-- Modify: `docs/superpowers/plans/2026-09-29-reading-background-media.md` only to tick verified items when evidence exists.
+- Modify this plan only to tick verified items when evidence exists.
 
 - [ ] Install the debug/beta build on a physical Android device with TalkBack.
 - [ ] Start a multi-sentence text book, lock the screen, confirm multiple sentences continue for several minutes.

@@ -68,7 +68,6 @@ public final class ReadingDocxAdapter {
                 language = readDefaultLanguage(styles);
             }
 
-            // Parse numbering when present so malformed numbering XML is rejected consistently.
             File numberingFile = relatedPart(root, documentPart, documentRelationships, REL_NUMBERING, "word/numbering.xml");
             if (numberingFile != null && numberingFile.isFile()) parseXmlFile(numberingFile);
 
@@ -407,6 +406,21 @@ public final class ReadingDocxAdapter {
                 result.add(new ReadingStructuredDocument.Link(text, "#" + anchor, false));
             }
         }
+
+        NodeList footnotes = scope.getElementsByTagNameNS("*", "footnoteReference");
+        for (int index = 0; index < footnotes.getLength(); index++) {
+            String id = attributeByLocalName((Element) footnotes.item(index), "id");
+            if (!id.isEmpty() && !id.startsWith("-")) {
+                result.add(new ReadingStructuredDocument.Link(id, "#footnote-" + id, false));
+            }
+        }
+        NodeList endnotes = scope.getElementsByTagNameNS("*", "endnoteReference");
+        for (int index = 0; index < endnotes.getLength(); index++) {
+            String id = attributeByLocalName((Element) endnotes.item(index), "id");
+            if (!id.isEmpty() && !id.startsWith("-")) {
+                result.add(new ReadingStructuredDocument.Link(id, "#endnote-" + id, false));
+            }
+        }
         return result;
     }
 
@@ -433,13 +447,15 @@ public final class ReadingDocxAdapter {
         for (String id : referenced) {
             String text = notes.get(id);
             if (text == null || text.isEmpty()) continue;
+            String target = prefix + "-" + id;
             blocks.add(new ReadingStructuredDocument.Block(
-                    prefix + "-" + id + "-" + (++serial[0]),
+                    target,
                     "paragraph",
                     text,
                     0,
-                    ""
+                    "#" + target
             ));
+            serial[0] += 1;
         }
     }
 

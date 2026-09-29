@@ -44,6 +44,9 @@ jobs:
       - name: Install mobile dependencies
         working-directory: mobile
         run: npm ci
+      - name: Run Leer con TifloAcosta beta acceptance gate
+        working-directory: mobile
+        run: npm run test:reading-beta
       - name: Run mobile foundation tests
         run: |
           node --test test/actualidad-core.test.mjs

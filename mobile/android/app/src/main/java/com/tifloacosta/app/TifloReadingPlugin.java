@@ -23,6 +23,8 @@ import com.tifloacosta.app.reading.PdfBoxReadingPdfBackend;
 import com.tifloacosta.app.reading.ReadingBookQuery;
 import com.tifloacosta.app.reading.ReadingBookRecord;
 import com.tifloacosta.app.reading.ReadingContentValidator;
+import com.tifloacosta.app.reading.ReadingDaisyAdapter;
+import com.tifloacosta.app.reading.ReadingDaisyBook;
 import com.tifloacosta.app.reading.ReadingDocxAdapter;
 import com.tifloacosta.app.reading.ReadingEpubAdapter;
 import com.tifloacosta.app.reading.ReadingFileStore;
@@ -232,6 +234,16 @@ public class TifloReadingPlugin extends Plugin {
                         File workRoot = new File(getContext().getCacheDir(), "reading-docx-open");
                         ReadingStructuredDocument document = new ReadingDocxAdapter().read(source, workRoot);
                         result.put("content", ReadingStructuredDocumentJson.serialize(document));
+                    }
+                } else if ("daisy2.02".equals(record.getFormat()) || "daisy3".equals(record.getFormat())) {
+                    try (InputStream source = fileStore.openStoredInput(record.getRelativePath())) {
+                        File workRoot = new File(getContext().getCacheDir(), "reading-daisy-open");
+                        ReadingDaisyBook daisy = new ReadingDaisyAdapter().read(source, workRoot);
+                        ReadingStructuredDocument document = daisy.getDocument();
+                        result.put("content", ReadingStructuredDocumentJson.serialize(document));
+                        result.put("daisyHasText", daisy.hasText());
+                        result.put("daisyHasAudio", daisy.hasAudio());
+                        result.put("daisySynchronized", daisy.isSynchronized());
                     }
                 } else if (!"audio".equals(record.getFormat())) {
                     result.put("content", fileStore.readUtf8(record.getRelativePath()));

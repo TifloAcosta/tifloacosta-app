@@ -54,6 +54,63 @@ test('beta acceptance keeps container-only ZIP out of the library book format su
   assert.match(importer, /recordFormat = zipPackage\.daisy\.getFormat\(\)/);
 });
 
+test('beta acceptance protects reading queue ordering and never auto-opens the next title', async () => {
+  const [queue, reader] = await Promise.all([
+    read('src/screens/reading-queue.mjs'),
+    read('src/screens/reading-book.mjs')
+  ]);
+
+  assert.match(queue, /client\.listQueue\(\)/);
+  assert.match(queue, /client\.moveQueueItem\(book\.id,\s*index\s*-\s*1\)/);
+  assert.match(queue, /client\.moveQueueItem\(book\.id,\s*index\s*\+\s*1\)/);
+  assert.match(queue, /client\.removeFromQueue\(book\.id\)/);
+  assert.match(queue, /Nothing opens automatically|Nada se abre automáticamente/);
+  assert.match(reader, /openNext\.addEventListener\(['"]click['"]/);
+  assert.doesNotMatch(reader, /showEndOfDocument\([\s\S]*onOpenBook\?\.\(nextSuggestedBookId\)/);
+});
+
+test('beta acceptance protects portable backup review and explicit restore conflicts', async () => {
+  const backup = await read('src/screens/reading-backup-panel.mjs');
+
+  assert.match(backup, /client\.exportReadingBackup\(null\)/);
+  assert.match(backup, /client\.pickReadingRestore\(\)/);
+  assert.match(backup, /positionConflicts/);
+  assert.match(backup, /keep-current/);
+  assert.match(backup, /use-backup/);
+  assert.match(backup, /client\.applyReadingRestore\(/);
+  assert.match(backup, /client\.cancelReadingRestore\(\)/);
+  assert.match(backup, /client\.checkLibrary\(\)/);
+  assert.match(backup, /client\.deleteAllReadingData\(/);
+});
+
+test('beta acceptance protects ten-item library paging across large libraries', async () => {
+  const library = await read('src/screens/reading-library.mjs');
+
+  assert.match(library, /const PAGE_SIZE = 10/);
+  assert.match(library, /pageSize:\s*PAGE_SIZE/);
+  assert.match(library, /readingLibrary\.previousPage/);
+  assert.match(library, /readingLibrary\.nextPage/);
+  assert.match(library, /readingLibrary\.pageStatus/);
+});
+
+test('beta acceptance protects TalkBack dialog semantics and return-to-reading focus', async () => {
+  const [reader, settings, backup] = await Promise.all([
+    read('src/screens/reading-book.mjs'),
+    read('src/screens/reading-settings.mjs'),
+    read('src/screens/reading-backup-panel.mjs')
+  ]);
+
+  assert.match(reader, /focusCurrentSemanticUnit/);
+  assert.match(reader, /previous\.setAttribute\(['"]aria-label['"]/);
+  assert.match(reader, /next\.setAttribute\(['"]aria-label['"]/);
+  assert.match(settings, /setAttribute\(['"]role['"],\s*['"]dialog['"]\)/);
+  assert.match(settings, /setAttribute\(['"]aria-modal['"],\s*['"]true['"]\)/);
+  assert.match(settings, /readingBook\.returnToReading/);
+  assert.match(settings, /returnFocus/);
+  assert.match(backup, /setAttribute\(['"]role['"],\s*['"]dialog['"]\)/);
+  assert.match(backup, /Return to reading|Volver a la lectura/);
+});
+
 test('beta acceptance has a dedicated CI gate before Android packaging', async () => {
   const [packageJson, foundationWorkflow, bootstrapWorkflow] = await Promise.all([
     read('package.json'),

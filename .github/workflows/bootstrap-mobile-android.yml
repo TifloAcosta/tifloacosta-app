@@ -46,6 +46,10 @@ jobs:
         working-directory: mobile
         run: npm install
 
+      - name: Run Leer con TifloAcosta beta acceptance gate
+        working-directory: mobile
+        run: npm run test:reading-beta
+
       - name: Run repository regression tests
         run: npm test
 

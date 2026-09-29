@@ -19,6 +19,7 @@ test('home uses the approved compact order', () => {
     'book',
     'podcast',
     'contact',
+    'privacy',
     'settings'
   ]);
 });

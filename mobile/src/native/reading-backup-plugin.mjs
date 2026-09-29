@@ -28,11 +28,29 @@ export function createReadingBackupPlugin(plugin = NativeTifloReadingBackup) {
     return safeCall(plugin, 'cancelReadingRestore', undefined, { cancelled: true });
   }
 
+  async function checkReadingLibrary() {
+    return safeCall(plugin, 'checkReadingLibrary', undefined, {
+      healthy: false,
+      bookCount: 0,
+      missingItems: []
+    });
+  }
+
+  async function deleteAllReadingData(options = {}) {
+    return safeCall(plugin, 'deleteAllReadingData', options, {
+      deleted: false,
+      confirmationRequired: true,
+      booksDeleted: 0
+    });
+  }
+
   return {
     exportReadingBackup,
     pickReadingRestore,
     applyReadingRestore,
-    cancelReadingRestore
+    cancelReadingRestore,
+    checkReadingLibrary,
+    deleteAllReadingData
   };
 }
 

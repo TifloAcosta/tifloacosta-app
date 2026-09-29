@@ -14,6 +14,7 @@ export const HOME_ITEMS = [
   'book',
   'podcast',
   'contact',
+  'privacy',
   'settings'
 ];
 
@@ -23,11 +24,12 @@ export function renderHome({ root, router, content, preferences = { lang: 'es' }
   const heading = document.createElement('h1');
   heading.dataset.screenHeading = '';
   heading.tabIndex = -1;
+  heading.className = 'app-brand';
   heading.textContent = t('app.title');
   root.append(heading);
 
   const nav = document.createElement('nav');
-  nav.className = 'home-menu';
+  nav.className = 'home-menu section-stack';
   nav.setAttribute('aria-label', t('app.title'));
 
   for (const key of HOME_ITEMS) {
@@ -48,6 +50,7 @@ export function renderHome({ root, router, content, preferences = { lang: 'es' }
   if (!newResources.length) return;
 
   const section = document.createElement('section');
+  section.className = 'section-stack';
   section.lang = preferences.lang;
   const sectionHeading = document.createElement('h2');
   const newContentKey = 'home.newContent';

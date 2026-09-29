@@ -84,6 +84,21 @@ public class TifloReadingTtsPlugin extends Plugin {
     }
 
     @PluginMethod
+    public void openTtsVoiceInstaller(PluginCall call) {
+        getBridge().execute(() -> {
+            try {
+                ReadingTtsController.VoiceInstallerResult installer = ttsController.openVoiceInstaller();
+                JSObject result = new JSObject();
+                result.put("opened", installer.isOpened());
+                result.put("destination", installer.getDestination());
+                call.resolve(result);
+            } catch (RuntimeException error) {
+                call.reject("Unable to open TTS voice installer", error);
+            }
+        });
+    }
+
+    @PluginMethod
     public void beginTtsSession(PluginCall call) {
         String sessionId = clean(call.getString("sessionId"));
         String bookId = clean(call.getString("bookId"));

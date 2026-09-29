@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
+const readRepo = path => readFile(new URL(`../../${path}`, import.meta.url), 'utf8');
 
 test('beta acceptance wires every approved textual format into the common semantic reader', async () => {
   const [plugin, screen] = await Promise.all([
@@ -51,4 +52,17 @@ test('beta acceptance keeps container-only ZIP out of the library book format su
   assert.match(importer, /"zip"\.equals\(detectedFormat\)/);
   assert.match(importer, /if \(!zipPackage\.isDaisy\(\)\) return ReadingImportResult\.rejected\("ambiguous-zip"\)/);
   assert.match(importer, /recordFormat = zipPackage\.daisy\.getFormat\(\)/);
+});
+
+test('beta acceptance has a dedicated CI gate before Android packaging', async () => {
+  const [packageJson, foundationWorkflow, bootstrapWorkflow] = await Promise.all([
+    read('package.json'),
+    readRepo('.github/workflows/test-mobile-foundation.yml'),
+    readRepo('.github/workflows/bootstrap-mobile-android.yml')
+  ]);
+
+  const pkg = JSON.parse(packageJson);
+  assert.equal(pkg.scripts?.['test:reading-beta'], 'node --test test/reading-beta-acceptance.test.mjs');
+  assert.match(foundationWorkflow, /Run Leer con TifloAcosta beta acceptance gate[\s\S]*npm run test:reading-beta/);
+  assert.match(bootstrapWorkflow, /Run Leer con TifloAcosta beta acceptance gate[\s\S]*npm run test:reading-beta/);
 });

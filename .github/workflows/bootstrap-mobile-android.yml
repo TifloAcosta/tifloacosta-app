@@ -71,6 +71,16 @@ jobs:
           chmod +x gradlew
           ./gradlew --no-daemon testDebugUnitTest --stacktrace
 
+      - name: Upload Android unit-test diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-unit-test-diagnostics
+          if-no-files-found: warn
+          path: |
+            mobile/android/app/build/reports/tests/testDebugUnitTest/**
+            mobile/android/app/build/test-results/testDebugUnitTest/**
+
       - name: Compile Android instrumentation tests
         working-directory: mobile/android
         run: |

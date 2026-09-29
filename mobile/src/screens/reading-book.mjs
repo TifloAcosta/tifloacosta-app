@@ -336,6 +336,7 @@ export function renderReadingBook({
   let speech = null;
   let audioView = null;
   let currentPosition = { blockIndex: 0, unitIndex: 0 };
+  let noteReturnPosition = null;
   let searchPanel = null;
   let marksPanel = null;
   let settingsPanel = null;
@@ -398,6 +399,7 @@ export function renderReadingBook({
     pdfPageNavigation.hidden = true;
     orderWarning.hidden = true;
     orderWarning.textContent = '';
+    noteReturnPosition = null;
     readerContainer.replaceChildren();
   }
 
@@ -463,6 +465,87 @@ export function renderReadingBook({
     nextPage.disabled = !readablePdfPageFrom(position, 1);
   }
 
+  function linksForCurrentUnit(block, unitText) {
+    const links = Array.isArray(block?.links) ? block.links.filter(Boolean) : [];
+    const unit = String(unitText ?? '').trim();
+    if (!unit) return links;
+    return links.filter(link => {
+      const label = String(link?.text ?? '').trim();
+      return !label || unit.includes(label);
+    });
+  }
+
+  function targetBlockIndexForHref(href) {
+    const target = String(href ?? '').trim();
+    if (!target || !documentModel?.blocks?.length) return -1;
+    return documentModel.blocks.findIndex(
+      candidate => String(candidate?.href ?? '').trim() === target
+    );
+  }
+
+  async function returnFromInternalLink() {
+    if (!noteReturnPosition) return false;
+    const sourcePosition = { ...noteReturnPosition };
+    noteReturnPosition = null;
+    await moveToPosition(sourcePosition);
+    return true;
+  }
+
+  function renderBlockLinks(block, unitText, sourcePosition) {
+    const fragment = document.createDocumentFragment();
+    const links = linksForCurrentUnit(block, unitText);
+    if (links.length) {
+      const nav = document.createElement('nav');
+      nav.className = 'reading-document-links';
+      nav.setAttribute(
+        'aria-label',
+        fallback(t, 'readingBook.documentLink', 'Enlace del documento', 'Document link')
+      );
+
+      for (const link of links) {
+        const label = String(link?.text ?? '').trim()
+          || fallback(t, 'readingBook.documentLink', 'Enlace del documento', 'Document link');
+        if (link.external === true) {
+          const anchor = document.createElement('a');
+          anchor.href = String(link.href ?? '');
+          anchor.target = '_blank';
+          anchor.rel = 'noopener noreferrer';
+          anchor.textContent = label;
+          nav.append(anchor);
+          continue;
+        }
+
+        const targetBlockIndex = targetBlockIndexForHref(link.href);
+        if (targetBlockIndex < 0) continue;
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.textContent = label;
+        button.addEventListener('click', () => {
+          noteReturnPosition = { ...sourcePosition };
+          void moveToPosition({ blockIndex: targetBlockIndex, unitIndex: 0 });
+        });
+        nav.append(button);
+      }
+
+      if (nav.childElementCount) fragment.append(nav);
+    }
+
+    if (noteReturnPosition) {
+      const returnButton = document.createElement('button');
+      returnButton.type = 'button';
+      returnButton.className = 'reading-note-return';
+      returnButton.textContent = fallback(
+        t,
+        'readingBook.returnToSource',
+        'Volver al punto de origen',
+        'Return to source'
+      );
+      returnButton.addEventListener('click', () => { void returnFromInternalLink(); });
+      fragment.append(returnButton);
+    }
+    return fragment;
+  }
+
   function renderSemanticPosition(position, { focus = false, announce = true, commit = true } = {}) {
     if (!documentModel?.blocks?.length) return false;
     const normalized = normalizeSemanticPosition(position, documentModel);
@@ -475,6 +558,7 @@ export function renderReadingBook({
     element.dataset.unitIndex = String(normalized.unitIndex);
     element.dataset.readingUnit = 'current';
     readerContainer.replaceChildren(element);
+    readerContainer.append(renderBlockLinks(block, unitText, normalized));
     if (commit) currentPosition = normalized;
 
     const blockUnits = Math.max(1, unitsFor(block).length);

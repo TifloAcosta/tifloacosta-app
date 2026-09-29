@@ -1,3 +1,4 @@
+import { App } from '@capacitor/app';
 import { resolveReadingSettings } from '../core/reading-settings.mjs';
 import { createReadingBackupPanel } from './reading-backup-panel.mjs';
 
@@ -84,6 +85,10 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
   const rateValue = document.createElement('output');
   rateValue.htmlFor = rate.id;
 
+  const getMoreVoices = document.createElement('button');
+  getMoreVoices.type = 'button';
+  getMoreVoices.textContent = t('readingBook.getMoreVoices');
+
   const voiceStatus = document.createElement('p');
   voiceStatus.setAttribute('role', 'status');
   voiceStatus.setAttribute('aria-live', 'polite');
@@ -92,7 +97,7 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
   voiceReturn.type = 'button';
   voiceReturn.textContent = t('readingBook.returnToReading');
 
-  voiceSection.append(voiceHeading, voiceLabel, voiceSelect, rateLabel, rate, rateValue, voiceStatus, voiceReturn);
+  voiceSection.append(voiceHeading, voiceLabel, voiceSelect, rateLabel, rate, rateValue, getMoreVoices, voiceStatus, voiceReturn);
 
   const visualSection = document.createElement('section');
   visualSection.className = 'reading-panel reading-visual-panel';
@@ -207,6 +212,7 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
   let current = null;
   let destroyed = false;
   let lastInvoker = null;
+  let resumeHandle = null;
 
   function rememberInvoker() {
     const active = document.activeElement;
@@ -275,9 +281,34 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
     return current;
   }
 
+  async function refreshVoicesAfterResume() {
+    if (destroyed) return;
+    const selectedVoice = voiceSelect.value;
+    const available = await client.listTtsVoices();
+    if (destroyed) return;
+    voices = available;
+    populateVoiceOptions();
+    if (selectedVoice && voices.some(voice => voice.id === selectedVoice)) {
+      voiceSelect.value = selectedVoice;
+    } else if (current) {
+      voiceSelect.value = current.effective['speech.voice'] || '';
+    }
+    voiceStatus.textContent = t('readingBook.voicesRefreshed');
+    if (!voiceSection.hidden) queueMicrotask(() => getMoreVoices.focus());
+  }
+
   voiceSelect.addEventListener('change', () => { void saveBookSetting('speech.voice', voiceSelect.value, voiceStatus); });
   rate.addEventListener('change', () => { void saveBookSetting('speech.rate', rate.value, voiceStatus); });
   rate.addEventListener('input', () => { rateValue.textContent = rate.value; });
+
+  getMoreVoices.addEventListener('click', () => {
+    lastInvoker = getMoreVoices;
+    voiceStatus.textContent = t('readingBook.voiceInstallerNotice');
+    void (async () => {
+      const result = await client.openTtsVoiceInstaller();
+      if (!result?.opened && !destroyed) voiceStatus.textContent = t('readingBook.voiceInstallerUnavailable');
+    })();
+  });
 
   for (const [key,, control] of fields) {
     control.addEventListener('change', () => { void saveBookSetting(key, control.value, visualStatus); });
@@ -301,7 +332,7 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
 
   function returnToReading() {
     closeAll();
-    if (lastInvoker && lastInvoker.isConnected !== false) {
+    if (lastInvoker && lastInvoker.isConnected !== false && lastInvoker !== getMoreVoices) {
       lastInvoker?.focus();
       lastInvoker = null;
       return;
@@ -332,10 +363,17 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
   function closeAll() { voiceSection.hidden = true; visualSection.hidden = true; }
   function destroy() {
     destroyed = true;
+    resumeHandle?.remove();
+    resumeHandle = null;
     backupPanel.destroy();
     voiceSection.remove();
     visualSection.remove();
   }
+
+  void App.addListener('resume', () => { void refreshVoicesAfterResume(); }).then(handle => {
+    if (destroyed) void handle.remove();
+    else resumeHandle = handle;
+  });
 
   void loadSettings();
   return { openVoice, openVisual, closeAll, destroy, loadSettings, visualKeys: VISUAL_KEYS };

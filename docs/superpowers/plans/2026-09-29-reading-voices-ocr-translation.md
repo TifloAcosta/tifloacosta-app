@@ -55,7 +55,7 @@ These versions were checked against current official Android documentation befor
 - Modify: `mobile/android/app/src/test/java/com/tifloacosta/app/reading/ReadingBackupServiceTest.java`
 
 **Interfaces:**
-- Database becomes version `6` with migration `5 -> 6` only; no destructive fallback.
+- Database becomes version `6` with migration `5 -> 6`; no destructive fallback.
 - New table `reading_derived` fields: `book_id`, `kind`, `variant_key`, `relative_path`, `source_sha256`, `source_language`, `target_language`, `engine`, `engine_version`, `status`, `completed_units`, `total_units`, `updated_at`.
 - `kind` exactly `ocr|translation`; `status` exactly `partial|complete|error`.
 - Derived JSON files live under `reading-library/items/<bookId>/derived/...` and are private.
@@ -77,7 +77,7 @@ These versions were checked against current official Android documentation befor
 - Modify: `mobile/test/reading-android-native-contract.test.mjs`
 
 **Interfaces:**
-- Native methods: `getDerivedContent({bookId,kind,variantKey})`, `saveDerivedContent({bookId,kind,variantKey,metadata,content})`, `deleteDerivedContent(...)`, `listDerivedContent({bookId})`.
+- Native methods: `getDerivedContent({bookId,kind,variantKey})`, `saveDerivedContent({bookId,kind,variantKey,metadata,content})`, `deleteDerivedContent({bookId,kind,variantKey})`, `listDerivedContent({bookId})`.
 - Shared client normalizes status/progress and parses semantic JSON only after validation.
 
 - [ ] Write failing client/native-contract tests for all four operations, malformed JSON, stale source SHA, and missing records.
@@ -100,7 +100,7 @@ These versions were checked against current official Android documentation befor
 
 **Interfaces:**
 - Native `openTtsVoiceInstaller()` first resolves `TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA` for the active/default engine.
-- If unavailable, it may open the engine app/package details only when a safe resolvable intent exists.
+- If unavailable, it resolves the engine package launch intent; if that also fails, it returns `none` without inventing a destination.
 - Result reports `{opened:boolean, destination:'installer'|'engine'|'none'}`.
 - App shows an explicit external-navigation notice before calling it.
 - On Capacitor `resume`, settings refreshes `listTtsVoices()` and preserves current selection when still available.
@@ -111,22 +111,24 @@ These versions were checked against current official Android documentation befor
 - [ ] Run focused tests and full mobile suite; expect PASS.
 - [ ] Commit: `feat: help users install more tts voices`.
 
-### Task 4: Add ML Kit OCR dependencies and page renderer
+### Task 4: Add ML Kit OCR dependencies and a testable page renderer
 
 **Files:**
 - Modify: `mobile/android/app/build.gradle`
-- Modify: `mobile/android/app/src/main/AndroidManifest.xml`
 - Create: `mobile/android/app/src/main/java/com/tifloacosta/app/reading/ReadingPdfPageRenderer.java`
 - Create: `mobile/android/app/src/test/java/com/tifloacosta/app/reading/ReadingPdfPageRendererTest.java`
+- Create: `mobile/android/app/src/androidTest/java/com/tifloacosta/app/reading/ReadingPdfPageRendererInstrumentationTest.java`
 
 **Interfaces:**
 - Add the five unbundled Play Services OCR artifacts pinned above.
-- Manifest may request install-time modules via ML Kit dependency metadata only if that does not force all script models; otherwise use on-demand first-use behavior.
-- `renderPage(relativePath,password,pageIndex,maxDimension)` returns one bounded bitmap/page result and releases PDF resources immediately after the requested unit of work.
+- Do not request all OCR models at install time; models remain on-demand to avoid unnecessary downloads.
+- `ReadingPdfPageRenderer` accepts an injectable backend for local JVM bounds/resource tests and uses PDFBox/Android Bitmap in production.
+- `renderPage(relativePath,password,pageIndex,maxDimension)` returns one bounded page image and releases PDF resources immediately after the requested unit of work.
 
-- [ ] Write failing tests/source contracts proving only one page is rendered per call and page indexes are validated.
+- [ ] Write failing JVM tests proving one-page bounds, page-index validation, max-dimension clamping, and backend close on failure.
+- [ ] Write failing instrumentation test for rendering one real fixture page without loading adjacent pages.
 - [ ] Add Gradle dependencies and page renderer using existing private-path validation patterns.
-- [ ] Run `./gradlew testDebugUnitTest` and debug build; expect PASS.
+- [ ] Run unit tests, instrumentation compile, and debug build; expect PASS.
 - [ ] Commit: `feat: prepare pdf pages for ocr`.
 
 ### Task 5: Implement native page-at-a-time OCR
@@ -142,7 +144,7 @@ These versions were checked against current official Android documentation befor
 - Scripts exactly `latin|chinese|devanagari|japanese|korean`.
 - Native method `recognizePdfPage({bookId,password,pageIndex,script})` returns `{pageIndex,text,blocks,status}`.
 - `status` exactly `ok|empty|model-unavailable|unsupported-script|error`.
-- Recognition happens off the UI thread and closes recognizer/page bitmap resources.
+- Recognition happens off the UI thread and closes recognizer/page image resources.
 
 - [ ] Write failing service tests using injectable recognizer/page-renderer fakes for success, empty page, model unavailable, bad script, cancellation/error cleanup.
 - [ ] Add plugin registration/native contract test.
@@ -185,12 +187,11 @@ These versions were checked against current official Android documentation befor
 - Modify: `mobile/test/reading-android-native-contract.test.mjs`
 
 **Interfaces:**
-- Dependencies: `play-services-mlkit-language-id:17.0.0`, `com.google.mlkit:translate:17.0.3`.
-- Native `identifyLanguage({text}) -> {language,confidenceKnown}` with `und` preserved.
+- Dependencies: `com.google.android.gms:play-services-mlkit-language-id:17.0.0`, `com.google.mlkit:translate:17.0.3`.
+- Native `identifyLanguage({text}) -> {language}` preserves `und` for undetermined input.
 - Native `listTranslationLanguages()` returns ML Kit supported language codes.
-- Native `downloadTranslationModel({language})`.
-- Native `translateBatch({sourceLanguage,targetLanguage,texts}) -> {translations}` with bounded batch size enforced by plugin.
-- Native `deleteTranslationModel({language})` may be exposed for storage management but is not required in first UI.
+- Native `downloadTranslationModel({language})` explicitly prepares a model before translation UI starts a long job.
+- Native `translateBatch({sourceLanguage,targetLanguage,texts}) -> {translations}` enforces a maximum of 50 strings per bridge call and preserves input order.
 
 - [ ] Write failing service tests with injectable language-ID/translator adapters for `und`, supported/unsupported pairs, model missing, ordered batch output, and partial task failure.
 - [ ] Add Gradle dependencies and plugin registration/source contract.
@@ -204,9 +205,10 @@ These versions were checked against current official Android documentation befor
 - Create: `mobile/src/core/reading-translation.mjs`
 - Create: `mobile/test/reading-translation.test.mjs`
 - Modify: `mobile/src/core/reading-structured-adapter.mjs`
-- Modify: `mobile/src/core/reading-semantic-model.mjs` only if source-reference metadata cannot be represented without change.
+- Modify: `mobile/src/core/reading-semantic-model.mjs`
 
 **Interfaces:**
+- Semantic blocks accept optional source-reference metadata without changing existing source-document behavior.
 - Each translated block retains `sourceBlockIndex` and source semantic identity.
 - Translation never changes URLs/internal IDs.
 - `createReadingTranslationJob({client,document,sourceLanguage,targetLanguage,sourceSha256,onProgress})` batches translatable text, persists after bounded chunks, and resumes partial caches.
@@ -214,7 +216,7 @@ These versions were checked against current official Android documentation befor
 - Primary reading position remains source `{blockIndex,unitIndex}`.
 
 - [ ] Write failing tests for heading/list/quote/table-cell preservation, URL exclusion, source alignment, partial save/resume, source-SHA invalidation, and deterministic cache key.
-- [ ] Implement pure translation orchestration and derived-content serialization.
+- [ ] Extend semantic model for optional source-reference metadata and implement pure translation orchestration/serialization.
 - [ ] Run focused tests; expect PASS.
 - [ ] Commit: `feat: preserve source positions in translations`.
 
@@ -224,7 +226,6 @@ These versions were checked against current official Android documentation befor
 - Modify: `mobile/src/screens/reading-book.mjs`
 - Create: `mobile/src/screens/reading-translation-panel.mjs`
 - Modify: `mobile/src/core/i18n.mjs`
-- Modify: `mobile/src/screens/reading-settings.mjs` if destination voice selection needs a shared affordance.
 - Create: `mobile/test/reading-translation-screen.test.mjs`
 - Modify: `mobile/test/reading-book.test.mjs`
 
@@ -234,9 +235,9 @@ These versions were checked against current official Android documentation befor
 - Reader exposes `Original / Traducción` only when translated content exists.
 - Switching view keeps the same source semantic position and never auto-starts speech.
 - Marks created while viewing translation are saved against source position.
-- TTS chooses a compatible target-language voice when possible without overwriting the user’s saved source-language preference.
+- Translation view asks the existing TTS voice resolver for a compatible target-language voice for the current session without overwriting the user’s saved source-language voice preference.
 
-- [ ] Write failing UI tests for detected language, manual source override, target selection, download notice, cancel/resume, view toggle, position preservation, mark alignment, and no-autoplay.
+- [ ] Write failing UI tests for detected language, manual source override, target selection, download notice, cancel/resume, view toggle, position preservation, mark alignment, target-language TTS fallback, and no-autoplay.
 - [ ] Implement panel and reader switching using the shared visual/action primitives.
 - [ ] Run focused tests and full suite; expect PASS.
 - [ ] Commit: `feat: translate books inside tiflolector`.
@@ -255,7 +256,7 @@ These versions were checked against current official Android documentation befor
 - Library maintenance can identify orphan derived files and remove only those orphans.
 
 - [ ] Add failing tests for backup summary, restored derived content, SHA mismatch rejection, and orphan cleanup.
-- [ ] Implement client/panel presentation and native cleanup hook if not already exposed by Task 1.
+- [ ] Implement client/panel presentation and expose the native orphan-cleanup operation through the derived-content bridge.
 - [ ] Run backup tests and full suite; expect PASS.
 - [ ] Commit: `feat: preserve derived reading data in backups`.
 

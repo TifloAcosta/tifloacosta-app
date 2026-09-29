@@ -3,7 +3,7 @@ import { renderReadingQueue } from './reading-queue.mjs';
 import { addScreenHeader, clearScreen } from './shared.mjs';
 
 const PAGE_SIZE = 10;
-const FORMATS = ['txt', 'html', 'pdf', 'audio'];
+const FORMATS = ['txt', 'html', 'pdf', 'epub', 'docx', 'daisy2.02', 'daisy3', 'audio'];
 
 function format(template, values = {}) {
   return Object.entries(values).reduce(

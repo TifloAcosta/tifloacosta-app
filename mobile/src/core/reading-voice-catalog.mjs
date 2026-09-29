@@ -82,6 +82,7 @@ export function createReadingVoiceCatalog({ root, client, returnFocus, openExter
 
   const heading = document.createElement('h2');
   heading.id = 'reading-voice-catalog-heading';
+  heading.tabIndex = -1;
   heading.textContent = copy.heading;
 
   const intro = document.createElement('p');
@@ -160,7 +161,7 @@ export function createReadingVoiceCatalog({ root, client, returnFocus, openExter
   return {
     open() {
       section.hidden = false;
-      queueMicrotask(() => heading.focus?.());
+      queueMicrotask(() => heading.focus());
     },
     close() {
       section.hidden = true;

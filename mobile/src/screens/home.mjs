@@ -1,3 +1,5 @@
+import { PRIVACY_LABELS } from './privacy.mjs';
+
 const NEW_CONTENT_LABELS = Object.freeze({
   es: 'Novedades',
   en: 'New content'
@@ -37,7 +39,11 @@ export function renderHome({ root, router, content, preferences = { lang: 'es' }
     button.type = 'button';
     button.id = `home-${key}`;
     button.className = 'home-entry';
-    button.textContent = t(`home.${key === 'reading-library' ? 'readingLibrary' : key}`);
+    if (key === 'privacy') {
+      button.textContent = PRIVACY_LABELS[preferences.lang] || PRIVACY_LABELS.es;
+    } else {
+      button.textContent = t(`home.${key === 'reading-library' ? 'readingLibrary' : key}`);
+    }
     button.addEventListener('click', () => router.navigate(key, { originId: button.id }));
     nav.append(button);
   }

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-29T11:36:57.061Z",
+  "generatedAt": "2026-09-29T17:02:10.810Z",
   "resources": [
     {
       "kind": "resource",
@@ -5386,23 +5386,6 @@
       "categories": [
         "apple",
         "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "accessible-android-31c50c6553225d4d:en",
-      "sourceId": "accessible-android-31c50c6553225d4d",
-      "lang": "en",
-      "title": "Accessimind Screen Reader",
-      "summary": "Accessimind Reader is a screen reader application developed to enable visually impaired and partially sighted users to use their Android phones more clearly, quickly, and…",
-      "body": "Published 19 September 2026 by Sarper Arıkan\n\nAccessimind Reader is a screen reader application developed to enable visually impaired and partially sighted users to use their Android phones more clearly, quickly, and independently.\n\nAccessimind Reader uses the Android AccessibilityService API to provide screen reading functions. AccessibilityService is used to provide audio versions of on-screen content, detect user interface elements, navigate with gestures, provide audio feedback on focused items, and deliver a screen reader experience. This service is necessary for the screen reading feature, which is the core function of the application, to work.\n\nAccessimind Reader does not use AccessibilityService for user tracking, displaying advertisements, remotely recording calls, bypassing Android security mechanisms, or modifying user settings without permission.\n\nThe application presents audio feedback, gesture navigation, keyboard shortcuts, clipboard operations, reading preferences, and tools for the focused item in a practical accessibility flow. The context menu provides quick access to frequently used areas such as reading controls, clipboard operations, notification access, focused item operations, and Accessimind settings.\n\nKey Features:\n\nAccessimind Reader is designed for users who need voice output and fast navigation. It focuses on providing predictable controls, understandable labels, and quick access to frequently used screen reader operations.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nAccessimind is a screen reader. Users can test it to see how well its features work for them and fit their needs.\n\nLast Tested App version and Android version:\n\nAndroid 16",
-      "sourceName": "Accessible Android",
-      "originalUrl": "https://accessibleandroid.com/app/accessimind-screen-reader/",
-      "publishedAt": "2026-09-19T16:31:01.000Z",
-      "categories": [
-        "android",
-        "apps-accesibles",
-        "tecnologia-accesibilidad"
       ]
     }
   ]

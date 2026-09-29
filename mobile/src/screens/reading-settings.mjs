@@ -8,6 +8,8 @@ const VISUAL_KEYS = [
   'visual.lineSpacing',
   'visual.paragraphSpacing',
   'visual.readingWidth',
+  'visual.foreground',
+  'visual.background',
   'visual.highContrast',
   'visual.theme'
 ];
@@ -48,6 +50,10 @@ export function applyReadingVisualSettings(readerContainer, settings) {
   readerContainer.style.setProperty('--reading-width', `${effective['visual.readingWidth'] ?? 72}ch`);
   readerContainer.style.setProperty('--reading-font-family', String(effective['visual.fontFamily'] ?? 'system'));
   readerContainer.style.setProperty('--reading-font-weight', String(effective['visual.fontWeight'] ?? 'normal'));
+  const foreground = String(effective['visual.foreground'] ?? '').trim();
+  const background = String(effective['visual.background'] ?? '').trim();
+  readerContainer.style.setProperty('--reading-foreground', foreground || 'CanvasText');
+  readerContainer.style.setProperty('--reading-background', background || 'Canvas');
   readerContainer.dataset.readingTheme = String(effective['visual.theme'] ?? 'system');
   readerContainer.dataset.highContrast = effective['visual.highContrast'] ? 'true' : 'false';
 }
@@ -121,6 +127,18 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
   option(readingWidth, 45, t('readingBook.widthNarrow'));
   option(readingWidth, 72, t('readingBook.widthNormal'));
   option(readingWidth, 100, t('readingBook.widthWide'));
+  const foreground = document.createElement('select');
+  option(foreground, '', document.documentElement.lang === 'en' ? 'System text colour' : 'Color de texto del sistema');
+  option(foreground, '#000000', document.documentElement.lang === 'en' ? 'Black' : 'Negro');
+  option(foreground, '#ffffff', document.documentElement.lang === 'en' ? 'White' : 'Blanco');
+  option(foreground, '#1f2937', document.documentElement.lang === 'en' ? 'Dark grey' : 'Gris oscuro');
+  option(foreground, '#ffff00', document.documentElement.lang === 'en' ? 'Yellow' : 'Amarillo');
+  const background = document.createElement('select');
+  option(background, '', document.documentElement.lang === 'en' ? 'System background' : 'Fondo del sistema');
+  option(background, '#ffffff', document.documentElement.lang === 'en' ? 'White' : 'Blanco');
+  option(background, '#000000', document.documentElement.lang === 'en' ? 'Black' : 'Negro');
+  option(background, '#fff7cc', document.documentElement.lang === 'en' ? 'Cream' : 'Crema');
+  option(background, '#111827', document.documentElement.lang === 'en' ? 'Dark' : 'Oscuro');
   const theme = document.createElement('select');
   option(theme, 'system', t('readingBook.themeSystem'));
   option(theme, 'light', t('readingBook.themeLight'));
@@ -136,6 +154,8 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
     ['visual.lineSpacing', t('readingBook.lineSpacing'), lineSpacing],
     ['visual.paragraphSpacing', t('readingBook.paragraphSpacing'), paragraphSpacing],
     ['visual.readingWidth', t('readingBook.readingWidth'), readingWidth],
+    ['visual.foreground', document.documentElement.lang === 'en' ? 'Text colour' : 'Color del texto', foreground],
+    ['visual.background', document.documentElement.lang === 'en' ? 'Background colour' : 'Color del fondo', background],
     ['visual.theme', t('readingBook.theme'), theme]
   ];
   for (const [key, labelText, control] of fields) {

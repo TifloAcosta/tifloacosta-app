@@ -73,7 +73,7 @@ export function createReadingAudioController({
   const bookId = clean(book?.id);
   const relativePath = clean(book?.relativePath);
   const configuredSpeed = clamp(settings?.['audio.speed'], AUDIO_SPEED_MIN, AUDIO_SPEED_MAX, 1);
-  const skipSeconds = supportedSkipSeconds(settings?.['audio.skipSeconds']);
+  let skipSeconds = supportedSkipSeconds(settings?.['audio.skipSeconds']);
   const audioTracks = normalizeTracks(tracks);
 
   let state = {
@@ -319,6 +319,11 @@ export function createReadingAudioController({
     return snapshot();
   }
 
+  function setSkipSeconds(value) {
+    skipSeconds = supportedSkipSeconds(value);
+    return skipSeconds;
+  }
+
   async function refreshState() {
     await listenersReady;
     if (destroyed || !client?.getAudioState) return snapshot();
@@ -413,6 +418,7 @@ export function createReadingAudioController({
     previousTrack,
     nextTrack,
     setSpeed,
+    setSkipSeconds,
     refreshState,
     setSleepTimer,
     cancelSleepTimer,

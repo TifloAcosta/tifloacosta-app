@@ -130,6 +130,7 @@ export function renderReadingBook({
   client,
   bookId,
   t,
+  nativeActions,
   setScreenCleanup,
   onOpenBook,
   onOpenQueue
@@ -318,6 +319,32 @@ export function renderReadingBook({
   );
   endOfDocument.append(endHeading, nextSuggestion, openNext, backToQueue);
 
+  const externalLinkDialog = document.createElement('section');
+  externalLinkDialog.className = 'reading-panel reading-external-link-dialog';
+  externalLinkDialog.hidden = true;
+  externalLinkDialog.tabIndex = -1;
+  externalLinkDialog.setAttribute('role', 'dialog');
+  externalLinkDialog.setAttribute('aria-modal', 'true');
+  const externalLinkHeading = document.createElement('h2');
+  externalLinkHeading.id = 'reading-external-link-heading';
+  externalLinkHeading.textContent = document.documentElement.lang === 'en'
+    ? 'Open external link'
+    : 'Abrir enlace externo';
+  externalLinkDialog.setAttribute('aria-labelledby', externalLinkHeading.id);
+  const externalLinkWarning = document.createElement('p');
+  externalLinkWarning.textContent = document.documentElement.lang === 'en'
+    ? 'This link opens content outside TifloAcosta.'
+    : 'Este enlace abre contenido fuera de TifloAcosta.';
+  const externalLinkOpen = document.createElement('button');
+  externalLinkOpen.type = 'button';
+  externalLinkOpen.textContent = document.documentElement.lang === 'en'
+    ? 'Open external link'
+    : 'Abrir enlace externo';
+  const externalLinkCancel = document.createElement('button');
+  externalLinkCancel.type = 'button';
+  externalLinkCancel.textContent = document.documentElement.lang === 'en' ? 'Cancel' : 'Cancelar';
+  externalLinkDialog.append(externalLinkHeading, externalLinkWarning, externalLinkOpen, externalLinkCancel);
+
   root.append(
     back,
     heading,
@@ -328,6 +355,7 @@ export function renderReadingBook({
     pdfPageNavigation,
     readerContainer,
     panels,
+    externalLinkDialog,
     endOfDocument
   );
 
@@ -343,6 +371,50 @@ export function renderReadingBook({
   let destroyed = false;
   let nextSuggestedBookId = '';
   let completionGeneration = 0;
+  let pendingExternalUrl = '';
+  let externalLinkInvoker = null;
+
+  function closeExternalLinkWarning() {
+    externalLinkDialog.hidden = true;
+    pendingExternalUrl = '';
+    const invoker = externalLinkInvoker;
+    externalLinkInvoker = null;
+    if (invoker && invoker.isConnected !== false) queueMicrotask(() => invoker.focus());
+  }
+
+  function openExternalLinkWarning(url, invoker) {
+    const target = String(url ?? '').trim();
+    if (!target) return false;
+    pendingExternalUrl = target;
+    externalLinkInvoker = invoker && typeof invoker.focus === 'function' ? invoker : null;
+    externalLinkDialog.hidden = false;
+    queueMicrotask(() => externalLinkOpen.focus());
+    return true;
+  }
+
+  externalLinkOpen.addEventListener('click', () => {
+    const target = pendingExternalUrl;
+    closeExternalLinkWarning();
+    if (target) void nativeActions?.openExternal?.(target);
+  });
+  externalLinkCancel.addEventListener('click', closeExternalLinkWarning);
+  externalLinkDialog.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      closeExternalLinkWarning();
+      return;
+    }
+    if (event.key !== 'Tab') return;
+    const first = externalLinkOpen;
+    const last = externalLinkCancel;
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
 
   function focusCurrentSemanticUnit() {
     const element = readerContainer.querySelector('[data-reading-unit="current"]');
@@ -506,12 +578,13 @@ export function renderReadingBook({
         const label = String(link?.text ?? '').trim()
           || fallback(t, 'readingBook.documentLink', 'Enlace del documento', 'Document link');
         if (link.external === true) {
-          const anchor = document.createElement('a');
-          anchor.href = String(link.href ?? '');
-          anchor.target = '_blank';
-          anchor.rel = 'noopener noreferrer';
-          anchor.textContent = label;
-          nav.append(anchor);
+          const externalButton = document.createElement('button');
+          externalButton.type = 'button';
+          externalButton.textContent = label;
+          externalButton.addEventListener('click', event => {
+            openExternalLinkWarning(link.href, event.currentTarget);
+          });
+          nav.append(externalButton);
           continue;
         }
 

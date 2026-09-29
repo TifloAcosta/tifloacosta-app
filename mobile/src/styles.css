@@ -230,11 +230,15 @@ select:focus-visible {
   --reading-width: 72ch;
   --reading-font-family: system;
   --reading-font-weight: normal;
+  --reading-foreground: CanvasText;
+  --reading-background: Canvas;
   width: min(100%, var(--reading-width));
   margin-inline: auto;
   font-size: calc(1em * var(--reading-text-scale));
   line-height: var(--reading-line-spacing);
   font-weight: var(--reading-font-weight);
+  color: var(--reading-foreground);
+  background: var(--reading-background);
 }
 
 .reading-reader[data-reading-theme="light"] {

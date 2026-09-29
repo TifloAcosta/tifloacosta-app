@@ -84,6 +84,13 @@ export function createReadingAudioView({ root, panelsRoot = root, client, book, 
   speedLabel.htmlFor = speed.id;
   for (const value of [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.5, 3]) option(speed, value, `${value}×`);
 
+  const skipLabel = document.createElement('label');
+  skipLabel.textContent = document.documentElement.lang === 'en' ? 'Audio skip interval' : 'Intervalo de salto de audio';
+  const skipSelect = document.createElement('select');
+  skipSelect.id = `reading-audio-skip-${book.id}`;
+  skipLabel.htmlFor = skipSelect.id;
+  for (const value of [10, 30, 60]) option(skipSelect, value, `${value} s`);
+
   const timerLabel = document.createElement('label');
   timerLabel.textContent = t('readingAudio.timer');
   const timer = document.createElement('select');
@@ -109,6 +116,8 @@ export function createReadingAudioView({ root, panelsRoot = root, client, book, 
     position,
     speedLabel,
     speed,
+    skipLabel,
+    skipSelect,
     timerLabel,
     timer,
     marksButton
@@ -189,6 +198,17 @@ export function createReadingAudioView({ root, panelsRoot = root, client, book, 
     })();
   });
 
+  skipSelect.addEventListener('change', () => {
+    void (async () => {
+      const selected = Number(skipSelect.value) || 30;
+      const saved = await saveBookSetting('audio.skipSeconds', selected);
+      if (!saved) return;
+      effectiveSettings = { ...effectiveSettings, 'audio.skipSeconds': selected };
+      controller?.setSkipSeconds?.(selected);
+      applySkipLabels();
+    })();
+  });
+
   timer.addEventListener('change', () => {
     if (!controller) return;
     const value = timer.value === 'track-end' ? 'track-end' : Number(timer.value) || 0;
@@ -233,6 +253,7 @@ export function createReadingAudioView({ root, panelsRoot = root, client, book, 
     effectiveSettings = resolveReadingSettings(stored.global, stored.book).effective;
     applySkipLabels();
     speed.value = String(effectiveSettings['audio.speed']);
+    skipSelect.value = String(effectiveSettings['audio.skipSeconds']);
 
     controller = createReadingAudioController({
       client,

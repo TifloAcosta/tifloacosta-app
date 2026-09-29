@@ -163,6 +163,22 @@ test('audio coordinator clamps configured skip at start and end', async () => {
   assert.deepEqual(calls.at(-1), { method: 'skipAudio', options: { deltaMs: 15000 } });
 });
 
+test('audio coordinator updates the configured skip interval without recreating playback', async () => {
+  const { controller, calls, listeners } = createHarness({ initialPosition: { trackIndex: 0, positionMs: 10000 } });
+  await controller.prepare();
+  await listeners.get('audioState')({
+    bookId: 'audio-1', trackIndex: 0, positionMs: 10000, durationMs: 120000, playing: false, speed: 1.25
+  });
+
+  assert.equal(controller.setSkipSeconds(60), 60);
+  await controller.skip(1);
+  assert.deepEqual(calls.at(-1), { method: 'skipAudio', options: { deltaMs: 60000 } });
+
+  assert.equal(controller.setSkipSeconds(45), 30);
+  await controller.skip(-1);
+  assert.deepEqual(calls.at(-1), { method: 'skipAudio', options: { deltaMs: -30000 } });
+});
+
 test('position persistence is throttled but pause always forces an exact save', async () => {
   const { controller, calls, listeners, setNow } = createHarness({ initialPosition: { trackIndex: 0, positionMs: 1000 } });
   await controller.prepare();

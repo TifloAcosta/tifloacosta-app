@@ -1,3 +1,4 @@
+import { READING_SETTING_DEFAULTS, resolveReadingSettings } from '../core/reading-settings.mjs';
 import { TifloReading } from '../native/reading-library-plugin.mjs';
 import { renderReadingQueue } from './reading-queue.mjs';
 import { addScreenHeader, clearScreen } from './shared.mjs';
@@ -292,14 +293,14 @@ export function renderReadingLibrary({
   filtersSection.append(filterForm);
   root.append(filtersSection);
 
-  // Global reading settings follow filters.
+  // Global reading settings follow filters and are persisted immediately.
   const settingsSection = document.createElement('section');
   const settingsHeading = document.createElement('h2');
   settingsHeading.textContent = t('readingLibrary.settings') === 'readingLibrary.settings'
     ? fallback(t, 'readingLibrary.settings', 'Ajustes de lectura', 'Reading settings')
     : t('readingLibrary.settings');
   const settingsToggle = makeButton(
-    fallback(t, 'readingLibrary.openSettings', 'Configurar voz y velocidad', 'Configure voice and speed'),
+    fallback(t, 'readingLibrary.openSettings', 'Configurar ajustes de lectura', 'Configure reading settings'),
     () => {
       settingsPanel.hidden = !settingsPanel.hidden;
       settingsToggle.setAttribute('aria-expanded', String(!settingsPanel.hidden));
@@ -310,34 +311,144 @@ export function renderReadingLibrary({
   const settingsPanel = document.createElement('div');
   settingsPanel.hidden = true;
 
+  function settingSelect(id, labelText, values) {
+    const label = document.createElement('label');
+    label.htmlFor = id;
+    label.textContent = labelText;
+    const control = document.createElement('select');
+    control.id = id;
+    for (const [value, optionLabel] of values) control.append(makeOption(String(value), optionLabel));
+    return { label, control };
+  }
+
   const voiceLabel = document.createElement('label');
   voiceLabel.htmlFor = 'reading-library-global-voice';
   voiceLabel.textContent = t('readingBook.voice');
   const voiceSelect = document.createElement('select');
   voiceSelect.id = 'reading-library-global-voice';
 
-  const rateLabel = document.createElement('label');
-  rateLabel.htmlFor = 'reading-library-global-rate';
-  rateLabel.textContent = t('readingBook.speed');
-  const rateSelect = document.createElement('select');
-  rateSelect.id = 'reading-library-global-rate';
-  for (const value of ['0.75', '1', '1.25', '1.5', '1.75', '2']) rateSelect.append(makeOption(value, `${value}×`));
+  const { label: rateLabel, control: rateSelect } = settingSelect(
+    'reading-library-global-rate', t('readingBook.speed'),
+    [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2].map(value => [value, `${value}×`])
+  );
+  const { label: audioSpeedLabel, control: audioSpeedSelect } = settingSelect(
+    'reading-library-global-audio-speed',
+    document.documentElement.lang === 'en' ? 'Audiobook speed' : 'Velocidad de audiolibros',
+    [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.5, 3].map(value => [value, `${value}×`])
+  );
+  const { label: skipLabel, control: skipSelect } = settingSelect(
+    'reading-library-global-audio-skip',
+    document.documentElement.lang === 'en' ? 'Audio skip interval' : 'Intervalo de salto de audio',
+    [10, 30, 60].map(value => [value, `${value} s`])
+  );
+  const { label: textSizeLabel, control: textSizeSelect } = settingSelect(
+    'reading-library-global-text-size',
+    t('readingBook.textSize'),
+    [[0.75, '75 %'], [0.9, '90 %'], [1, '100 %'], [1.25, '125 %'], [1.5, '150 %'], [2, '200 %']]
+  );
+  const { label: fontFamilyLabel, control: fontFamilySelect } = settingSelect(
+    'reading-library-global-font-family',
+    t('readingBook.fontFamily'),
+    [['system', t('readingBook.fontSystem')], ['serif', t('readingBook.fontSerif')], ['sans-serif', t('readingBook.fontSans')], ['monospace', t('readingBook.fontMono')]]
+  );
+  const { label: fontWeightLabel, control: fontWeightSelect } = settingSelect(
+    'reading-library-global-font-weight',
+    t('readingBook.fontWeight'),
+    [['normal', t('readingBook.weightNormal')], ['medium', t('readingBook.weightMedium')], ['bold', t('readingBook.weightBold')]]
+  );
+  const { label: lineSpacingLabel, control: lineSpacingSelect } = settingSelect(
+    'reading-library-global-line-spacing', t('readingBook.lineSpacing'),
+    [1, 1.5, 2, 2.5].map(value => [value, String(value)])
+  );
+  const { label: paragraphSpacingLabel, control: paragraphSpacingSelect } = settingSelect(
+    'reading-library-global-paragraph-spacing', t('readingBook.paragraphSpacing'),
+    [0, 1, 2, 3].map(value => [value, String(value)])
+  );
+  const { label: readingWidthLabel, control: readingWidthSelect } = settingSelect(
+    'reading-library-global-reading-width', t('readingBook.readingWidth'),
+    [[45, t('readingBook.widthNarrow')], [72, t('readingBook.widthNormal')], [100, t('readingBook.widthWide')]]
+  );
+  const { label: foregroundLabel, control: foregroundSelect } = settingSelect(
+    'reading-library-global-foreground',
+    document.documentElement.lang === 'en' ? 'Text colour' : 'Color del texto',
+    [['', document.documentElement.lang === 'en' ? 'System text colour' : 'Color de texto del sistema'], ['#000000', document.documentElement.lang === 'en' ? 'Black' : 'Negro'], ['#ffffff', document.documentElement.lang === 'en' ? 'White' : 'Blanco'], ['#1f2937', document.documentElement.lang === 'en' ? 'Dark grey' : 'Gris oscuro'], ['#ffff00', document.documentElement.lang === 'en' ? 'Yellow' : 'Amarillo']]
+  );
+  const { label: backgroundLabel, control: backgroundSelect } = settingSelect(
+    'reading-library-global-background',
+    document.documentElement.lang === 'en' ? 'Background colour' : 'Color del fondo',
+    [['', document.documentElement.lang === 'en' ? 'System background' : 'Fondo del sistema'], ['#ffffff', document.documentElement.lang === 'en' ? 'White' : 'Blanco'], ['#000000', document.documentElement.lang === 'en' ? 'Black' : 'Negro'], ['#fff7cc', document.documentElement.lang === 'en' ? 'Cream' : 'Crema'], ['#111827', document.documentElement.lang === 'en' ? 'Dark' : 'Oscuro']]
+  );
+  const { label: themeLabel, control: themeSelect } = settingSelect(
+    'reading-library-global-theme', t('readingBook.theme'),
+    [['system', t('readingBook.themeSystem')], ['light', t('readingBook.themeLight')], ['dark', t('readingBook.themeDark')]]
+  );
+  const highContrast = document.createElement('input');
+  highContrast.type = 'checkbox';
+  highContrast.id = 'reading-library-global-high-contrast';
+  const highContrastLabel = document.createElement('label');
+  highContrastLabel.htmlFor = highContrast.id;
+  highContrastLabel.textContent = t('readingBook.highContrast');
 
-  const saveSettings = makeButton(fallback(t, 'readingLibrary.saveSettings', 'Guardar ajustes', 'Save settings'), async () => {
-    saveSettings.disabled = true;
-    const [voiceSaved, rateSaved] = await Promise.all([
-      client.setReadingSetting({ scope: 'global', key: 'speech.voice', value: voiceSelect.value }),
-      client.setReadingSetting({ scope: 'global', key: 'speech.rate', value: rateSelect.value })
-    ]);
-    saveSettings.disabled = false;
-    liveStatus.textContent = voiceSaved && rateSaved
-      ? t('readingBook.settingsSaved')
-      : fallback(t, 'readingLibrary.settingsFailed', 'No se pudieron guardar los ajustes.', 'The settings could not be saved.');
-  });
+  const settingsStatus = document.createElement('p');
+  settingsStatus.setAttribute('role', 'status');
+  settingsStatus.setAttribute('aria-live', 'polite');
+  settingsStatus.setAttribute('aria-atomic', 'true');
+  const resetSettings = makeButton(
+    document.documentElement.lang === 'en' ? 'Reset global reading settings' : 'Restablecer ajustes generales de lectura',
+    () => { void resetReadingDefaults(); }
+  );
 
-  settingsPanel.append(voiceLabel, voiceSelect, rateLabel, rateSelect, saveSettings);
+  settingsPanel.append(
+    voiceLabel, voiceSelect, rateLabel, rateSelect, audioSpeedLabel, audioSpeedSelect, skipLabel, skipSelect,
+    textSizeLabel, textSizeSelect, fontFamilyLabel, fontFamilySelect, fontWeightLabel, fontWeightSelect,
+    lineSpacingLabel, lineSpacingSelect, paragraphSpacingLabel, paragraphSpacingSelect, readingWidthLabel, readingWidthSelect,
+    foregroundLabel, foregroundSelect, backgroundLabel, backgroundSelect, themeLabel, themeSelect,
+    highContrast, highContrastLabel, resetSettings, settingsStatus
+  );
   settingsSection.append(settingsHeading, settingsToggle, settingsPanel);
   root.append(settingsSection);
+
+  const globalSettingControls = new Map([
+    ['speech.voice', voiceSelect],
+    ['speech.rate', rateSelect],
+    ['audio.speed', audioSpeedSelect],
+    ['audio.skipSeconds', skipSelect],
+    ['visual.textSize', textSizeSelect],
+    ['visual.fontFamily', fontFamilySelect],
+    ['visual.fontWeight', fontWeightSelect],
+    ['visual.lineSpacing', lineSpacingSelect],
+    ['visual.paragraphSpacing', paragraphSpacingSelect],
+    ['visual.readingWidth', readingWidthSelect],
+    ['visual.foreground', foregroundSelect],
+    ['visual.background', backgroundSelect],
+    ['visual.highContrast', highContrast],
+    ['visual.theme', themeSelect]
+  ]);
+
+  for (const [key, control] of globalSettingControls) {
+    control.addEventListener('change', () => { void persistGlobalSetting(key, control); });
+  }
+
+  async function persistGlobalSetting(key, control) {
+    const value = control.type === 'checkbox' ? control.checked : control.value;
+    const saved = await client.setReadingSetting({ scope: 'global', key, value: String(value) });
+    settingsStatus.textContent = saved
+      ? t('readingBook.settingsSaved')
+      : fallback(t, 'readingLibrary.settingsFailed', 'No se pudieron guardar los ajustes.', 'The settings could not be saved.');
+    return saved;
+  }
+
+  async function resetReadingDefaults() {
+    resetSettings.disabled = true;
+    const results = await Promise.all(Object.entries(READING_SETTING_DEFAULTS).map(([key, value]) =>
+      client.setReadingSetting({ scope: 'global', key, value: String(value) })
+    ));
+    resetSettings.disabled = false;
+    await loadGlobalSettings();
+    settingsStatus.textContent = results.every(Boolean)
+      ? (document.documentElement.lang === 'en' ? 'Global reading settings reset.' : 'Ajustes generales de lectura restablecidos.')
+      : fallback(t, 'readingLibrary.settingsFailed', 'No se pudieron guardar los ajustes.', 'The settings could not be saved.');
+  }
 
   async function loadGlobalSettings() {
     const [settings, voices] = await Promise.all([
@@ -350,9 +461,11 @@ export function renderReadingLibrary({
       const label = voice.name || voice.locale || voice.id;
       voiceSelect.append(makeOption(voice.id, label));
     }
-    voiceSelect.value = String(settings?.global?.['speech.voice'] || '');
-    const rate = String(settings?.global?.['speech.rate'] || '1');
-    rateSelect.value = [...rateSelect.options].some(option => option.value === rate) ? rate : '1';
+    const effective = resolveReadingSettings(settings?.global || {}, {}, { availableVoices: voices }).effective;
+    for (const [key, control] of globalSettingControls) {
+      if (control.type === 'checkbox') control.checked = Boolean(effective[key]);
+      else control.value = String(effective[key] ?? '');
+    }
   }
 
   // My library is deliberately last.

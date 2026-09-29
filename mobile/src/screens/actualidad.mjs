@@ -101,13 +101,15 @@ export function renderActualidad({
     if (newIds.has(String(item.id || ''))) addParagraph(article, t('actualidad.newLabel'), 'muted');
     if (item.summary) addParagraph(article, item.summary);
 
+    const actions = document.createElement('div');
+    actions.className = 'action-group';
     if (item.originalUrl) {
-      addExternalLink(article, {
+      addExternalLink(actions, {
         href: item.originalUrl,
         label: t('actualidad.original'),
         onOpen: nativeActions?.openExternal
       });
-      addShareButton(article, {
+      addShareButton(actions, {
         label: t('common.share'),
         title: item.title || '',
         text: item.summary || '',
@@ -115,7 +117,8 @@ export function renderActualidad({
         onShare: nativeActions?.share
       });
     }
-    if (item.id) addFavoriteButton(article, item, favoritesStore, t);
+    if (item.id) addFavoriteButton(actions, item, favoritesStore, t);
+    if (actions.childNodes.length) article.append(actions);
     root.append(article);
   }
 

@@ -178,21 +178,23 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
   }
 
   function trapDialogFocus(section, event) {
-    if (event.key !== 'Tab' || section.hidden) return;
-    const controls = focusableElements(section);
-    if (!controls.length) {
-      event.preventDefault();
-      section.focus();
-      return;
-    }
-    const first = controls[0];
-    const last = controls[controls.length - 1];
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
+    if (section.hidden) return;
+    if (event.key === 'Tab') {
+      const controls = focusableElements(section);
+      if (!controls.length) {
+        event.preventDefault();
+        section.focus();
+        return;
+      }
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     }
   }
 
@@ -258,14 +260,12 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
 
   function returnToReading() {
     closeAll();
-    const invoker = lastInvoker;
-    lastInvoker = null;
-    if (invoker?.isConnected !== false) {
-      lastInvoker = invoker;
+    if (lastInvoker && lastInvoker.isConnected !== false) {
       lastInvoker?.focus();
       lastInvoker = null;
       return;
     }
+    lastInvoker = null;
     returnFocus?.();
   }
 

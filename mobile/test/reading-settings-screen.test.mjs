@@ -43,9 +43,10 @@ test('voice and visual panels provide visible status feedback and explicit retur
   }
 });
 
-test('voice settings provide get-more-voices notice, external navigation and refresh on resume', async () => {
-  const [screen, plugin, client, i18n] = await Promise.all([
+test('voice settings open the provider catalog and refresh installed voices on resume', async () => {
+  const [screen, catalog, plugin, client, i18n] = await Promise.all([
     read('src/screens/reading-settings.mjs'),
+    read('src/core/reading-voice-catalog.mjs'),
     read('src/native/reading-library-plugin.mjs'),
     read('src/core/reading-library-client.mjs'),
     read('src/core/i18n.mjs')
@@ -54,8 +55,10 @@ test('voice settings provide get-more-voices notice, external navigation and ref
   assert.match(plugin, /openTtsVoiceInstaller/);
   assert.match(client, /openTtsVoiceInstaller/);
   assert.match(screen, /readingBook\.getMoreVoices/);
-  assert.match(screen, /readingBook\.voiceInstallerNotice/);
-  assert.match(screen, /client\.openTtsVoiceInstaller\(/);
+  assert.match(screen, /createReadingVoiceCatalog/);
+  assert.match(screen, /voiceCatalog\.open\(/);
+  assert.match(catalog, /client\.openTtsVoiceInstaller\(/);
+  assert.match(catalog, /confirmExternalProvider/);
   assert.match(screen, /['"]resume['"]/);
   assert.match(screen, /client\.listTtsVoices\(/);
   assert.match(screen, /voiceSelect\.value/);

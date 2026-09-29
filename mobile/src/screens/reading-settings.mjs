@@ -1,4 +1,5 @@
 import { resolveReadingSettings } from '../core/reading-settings.mjs';
+import { createReadingBackupPanel } from './reading-backup-panel.mjs';
 
 const VISUAL_KEYS = [
   'visual.textSize',
@@ -155,6 +156,13 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
   reset.textContent = t('readingBook.resetBookSettings');
   visualSection.append(reset);
 
+  const backupButton = document.createElement('button');
+  backupButton.type = 'button';
+  backupButton.textContent = document.documentElement.lang === 'en'
+    ? 'Backup and restore'
+    : 'Copia y restauración';
+  visualSection.append(backupButton);
+
   const visualStatus = document.createElement('p');
   visualStatus.setAttribute('role', 'status');
   visualStatus.setAttribute('aria-live', 'polite');
@@ -166,6 +174,14 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
   visualSection.append(visualReturn);
 
   root.append(voiceSection, visualSection);
+
+  const backupPanel = createReadingBackupPanel({
+    root,
+    returnFocus() {
+      visualSection.hidden = false;
+      queueMicrotask(() => backupButton.focus());
+    }
+  });
 
   let voices = [];
   let current = null;
@@ -258,6 +274,11 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
     })();
   });
 
+  backupButton.addEventListener('click', () => {
+    backupPanel.open();
+    visualSection.hidden = true;
+  });
+
   function returnToReading() {
     closeAll();
     if (lastInvoker && lastInvoker.isConnected !== false) {
@@ -289,7 +310,12 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
     queueMicrotask(() => textSize.focus());
   }
   function closeAll() { voiceSection.hidden = true; visualSection.hidden = true; }
-  function destroy() { destroyed = true; voiceSection.remove(); visualSection.remove(); }
+  function destroy() {
+    destroyed = true;
+    backupPanel.destroy();
+    voiceSection.remove();
+    visualSection.remove();
+  }
 
   void loadSettings();
   return { openVoice, openVisual, closeAll, destroy, loadSettings, visualKeys: VISUAL_KEYS };

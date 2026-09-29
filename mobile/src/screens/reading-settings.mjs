@@ -1,5 +1,6 @@
 import { App } from '@capacitor/app';
 import { resolveReadingSettings } from '../core/reading-settings.mjs';
+import { createReadingVoiceCatalog } from '../core/reading-voice-catalog.mjs';
 import { createReadingBackupPanel } from './reading-backup-panel.mjs';
 
 const VISUAL_KEYS = [
@@ -208,6 +209,15 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
     }
   });
 
+  const voiceCatalog = createReadingVoiceCatalog({
+    root,
+    client,
+    returnFocus() {
+      voiceSection.hidden = false;
+      queueMicrotask(() => getMoreVoices.focus());
+    }
+  });
+
   let voices = [];
   let current = null;
   let destroyed = false;
@@ -303,11 +313,8 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
 
   getMoreVoices.addEventListener('click', () => {
     lastInvoker = getMoreVoices;
-    voiceStatus.textContent = t('readingBook.voiceInstallerNotice');
-    void (async () => {
-      const result = await client.openTtsVoiceInstaller();
-      if (!result?.opened && !destroyed) voiceStatus.textContent = t('readingBook.voiceInstallerUnavailable');
-    })();
+    voiceSection.hidden = true;
+    voiceCatalog.open();
   });
 
   for (const [key,, control] of fields) {
@@ -348,6 +355,7 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
 
   function openVoice() {
     rememberInvoker();
+    voiceCatalog.close();
     visualSection.hidden = true;
     voiceSection.hidden = false;
     void loadSettings();
@@ -355,16 +363,22 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
   }
   function openVisual() {
     rememberInvoker();
+    voiceCatalog.close();
     voiceSection.hidden = true;
     visualSection.hidden = false;
     void loadSettings();
     queueMicrotask(() => textSize.focus());
   }
-  function closeAll() { voiceSection.hidden = true; visualSection.hidden = true; }
+  function closeAll() {
+    voiceCatalog.close();
+    voiceSection.hidden = true;
+    visualSection.hidden = true;
+  }
   function destroy() {
     destroyed = true;
     resumeHandle?.remove();
     resumeHandle = null;
+    voiceCatalog.destroy();
     backupPanel.destroy();
     voiceSection.remove();
     visualSection.remove();

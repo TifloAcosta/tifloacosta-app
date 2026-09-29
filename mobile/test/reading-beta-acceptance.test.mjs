@@ -26,6 +26,18 @@ test('beta acceptance wires every approved textual format into the common semant
   }
 });
 
+test('beta acceptance routes audio-only DAISY books through the shared media reader', async () => {
+  const [plugin, screen] = await Promise.all([
+    read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java'),
+    read('src/screens/reading-book.mjs')
+  ]);
+
+  assert.match(plugin, /result\.put\("daisyHasText",\s*daisy\.hasText\(\)\)/);
+  assert.match(plugin, /result\.put\("daisyHasAudio",\s*daisy\.hasAudio\(\)\)/);
+  assert.match(screen, /opened\.daisyHasAudio\s*&&\s*!opened\.daisyHasText/);
+  assert.match(screen, /initializeOpenedAudioBook\(opened\)/);
+});
+
 test('beta acceptance keeps container-only ZIP out of the library book format surface', async () => {
   const importer = await read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingImportService.java');
 

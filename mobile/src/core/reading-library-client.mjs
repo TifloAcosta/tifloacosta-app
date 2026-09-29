@@ -373,6 +373,17 @@ export function createReadingLibraryClient(plugin = {}) {
     } catch { return []; }
   }
 
+  async function openTtsVoiceInstaller() {
+    if (!plugin?.openTtsVoiceInstaller) return { opened: false, destination: 'none' };
+    try {
+      const result = await plugin.openTtsVoiceInstaller();
+      const destination = ['installer', 'engine'].includes(result?.destination) ? result.destination : 'none';
+      return { opened: result?.opened === true, destination };
+    } catch {
+      return { opened: false, destination: 'none' };
+    }
+  }
+
   async function startTts(options = {}) {
     if (!plugin?.startTts) return false;
     const sessionId = String(options?.sessionId ?? '').trim();
@@ -566,6 +577,7 @@ export function createReadingLibraryClient(plugin = {}) {
     deleteBook,
     getLatestInProgress,
     listTtsVoices,
+    openTtsVoiceInstaller,
     startTts,
     stopTts,
     prepareAudio,

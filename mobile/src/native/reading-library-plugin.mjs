@@ -63,6 +63,7 @@ export function createReadingLibraryPlugin(
   const managementPlugin = libraryPlugin ?? (
     plugin === NativeTifloReading ? NativeTifloReadingLibrary : plugin
   );
+  let activeBookId = '';
 
   async function pickDocuments() {
     return safeCall(groupPlugin, 'pickDocuments', undefined, emptyBatch(true));
@@ -122,10 +123,19 @@ export function createReadingLibraryPlugin(
   }
 
   async function openBook(id, options = {}) {
-    return safeCall(plugin, 'openBook', {
-      id: String(id ?? ''),
+    const requestedId = String(id ?? '').trim();
+    if (!requestedId) return null;
+    const result = await safeCall(plugin, 'openBook', {
+      id: requestedId,
       password: String(options?.password ?? '')
     }, null);
+    const openedId = String(result?.book?.id ?? '').trim();
+    if (openedId) activeBookId = openedId;
+    return result;
+  }
+
+  function getActiveBookId() {
+    return activeBookId;
   }
 
   async function saveProgress(progress = {}) {
@@ -252,6 +262,7 @@ export function createReadingLibraryPlugin(
     moveQueueItem,
     updateBookMetadata,
     openBook,
+    getActiveBookId,
     saveProgress,
     deleteBook,
     getLatestInProgress,

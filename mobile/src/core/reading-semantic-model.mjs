@@ -90,3 +90,77 @@ export const normalizeSemanticPosition = (position, document) => {
 
   return { blockIndex, unitIndex };
 };
+
+const semanticUnitsForBlock = block => {
+  const sentences = Array.isArray(block?.sentences)
+    ? block.sentences.map(normalizeInlineText).filter(Boolean)
+    : [];
+  if (sentences.length > 0) return sentences;
+
+  const text = normalizeInlineText(block?.text);
+  return text ? [text] : [];
+};
+
+const semanticBlockKind = block => {
+  if (block?.type === 'heading') return 'heading';
+  if (block?.type === 'list-item') return 'listItem';
+  if (block?.type === 'quote') return 'quote';
+  if (block?.type === 'table-cell') return 'tableCell';
+  return 'paragraph';
+};
+
+export const adjacentSemanticUnit = (document, position, direction = 1) => {
+  const blocks = Array.isArray(document?.blocks) ? document.blocks : [];
+  if (blocks.length === 0) {
+    return {
+      position: { blockIndex: 0, unitIndex: 0 },
+      kind: 'paragraph',
+      moved: false
+    };
+  }
+
+  const current = normalizeSemanticPosition(position, document);
+  const step = Number(direction) < 0 ? -1 : 1;
+  const currentBlock = blocks[current.blockIndex];
+  const currentUnits = semanticUnitsForBlock(currentBlock);
+
+  if (step < 0 && current.unitIndex > 0) {
+    return {
+      position: { blockIndex: current.blockIndex, unitIndex: current.unitIndex - 1 },
+      kind: 'sentence',
+      moved: true
+    };
+  }
+
+  if (step > 0 && current.unitIndex + 1 < currentUnits.length) {
+    return {
+      position: { blockIndex: current.blockIndex, unitIndex: current.unitIndex + 1 },
+      kind: 'sentence',
+      moved: true
+    };
+  }
+
+  for (
+    let blockIndex = current.blockIndex + step;
+    blockIndex >= 0 && blockIndex < blocks.length;
+    blockIndex += step
+  ) {
+    const units = semanticUnitsForBlock(blocks[blockIndex]);
+    if (units.length === 0) continue;
+
+    return {
+      position: {
+        blockIndex,
+        unitIndex: step < 0 ? units.length - 1 : 0
+      },
+      kind: semanticBlockKind(blocks[blockIndex]),
+      moved: true
+    };
+  }
+
+  return {
+    position: current,
+    kind: semanticBlockKind(currentBlock),
+    moved: false
+  };
+};

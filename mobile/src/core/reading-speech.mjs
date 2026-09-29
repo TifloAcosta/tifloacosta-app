@@ -1,6 +1,8 @@
 import { normalizeSemanticPosition } from './reading-semantic-model.mjs';
+import { TifloBackgroundTts } from '../native/reading-background-tts-plugin.mjs';
 
 let nextControllerId = 1;
+const SESSION_CHUNK_SIZE = 100;
 
 function clampRate(value) {
   const number = Number(value);
@@ -40,37 +42,53 @@ function currentUnit(document, position) {
   return unitsFor(block)[position.unitIndex] ?? null;
 }
 
-function advancePosition(document, position) {
-  const blocks = documentBlocks(document);
-  if (!blocks.length) return null;
-  const currentUnits = unitsFor(blocks[position.blockIndex]);
-  if (position.unitIndex + 1 < currentUnits.length) {
-    return { blockIndex: position.blockIndex, unitIndex: position.unitIndex + 1 };
-  }
-  for (let blockIndex = position.blockIndex + 1; blockIndex < blocks.length; blockIndex++) {
-    if (unitsFor(blocks[blockIndex]).length) return { blockIndex, unitIndex: 0 };
-  }
-  return null;
+function allSemanticUnits(document) {
+  const result = [];
+  documentBlocks(document).forEach((block, blockIndex) => {
+    unitsFor(block).forEach((text, unitIndex) => {
+      result.push({ blockIndex, unitIndex, text });
+    });
+  });
+  return result;
+}
+
+function supportsBackgroundTts(value) {
+  return Boolean(
+    value?.beginTtsSession &&
+    value?.appendTtsUnits &&
+    value?.commitTtsSession &&
+    value?.playTts &&
+    value?.pauseTts &&
+    value?.seekTts &&
+    value?.getTtsState &&
+    value?.stopTts &&
+    value?.addListener
+  );
 }
 
 export function createReadingSpeechController({
   client = {},
+  book = {},
   document = { blocks: [] },
   initialPosition = { blockIndex: 0, unitIndex: 0 },
   settings = {},
   onPositionChange = () => {}
 } = {}) {
   const controllerId = nextControllerId++;
+  const tts = supportsBackgroundTts(client) ? client : TifloBackgroundTts;
+  const bookId = String(book?.id ?? document?.bookId ?? document?.id ?? '').trim();
+  const title = String(book?.title ?? document?.title ?? '').trim();
   let position = normalizeSemanticPosition(initialPosition, document);
   let voiceId = String(settings?.['speech.voice'] ?? '').trim();
   let rate = clampRate(settings?.['speech.rate']);
   let playing = false;
   let ended = documentBlocks(document).length === 0 || currentUnit(document, position) == null;
+  let prepared = false;
   let destroyed = false;
   let sessionSerial = 0;
-  let utteranceSerial = 0;
   let activeSessionId = '';
-  let activeUtteranceId = '';
+  let preparedVoiceId = '';
+  let preparedRate = 0;
   const handles = [];
 
   const report = extra => {
@@ -85,123 +103,225 @@ export function createReadingSpeechController({
     return payload;
   };
 
-  const isCurrentEvent = event => Boolean(
-    !destroyed &&
-    activeSessionId &&
-    String(event?.sessionId ?? '') === activeSessionId &&
-    String(event?.utteranceId ?? '') === activeUtteranceId
-  );
+  const eventMatchesBook = event => {
+    const eventBookId = String(event?.bookId ?? '').trim();
+    return Boolean(bookId && eventBookId && eventBookId === bookId);
+  };
 
-  async function speakCurrent() {
-    const text = currentUnit(document, position);
-    if (!text || destroyed) {
-      playing = false;
-      ended = true;
-      activeUtteranceId = '';
-      report();
-      return false;
-    }
-    if (!activeSessionId) activeSessionId = `reading-${controllerId}-${++sessionSerial}`;
-    const utteranceId = `${activeSessionId}-u${++utteranceSerial}`;
-    activeUtteranceId = utteranceId;
-    playing = true;
-    ended = false;
-    const accepted = await client.startTts?.({
-      sessionId: activeSessionId,
-      utteranceId,
-      text,
-      voiceId,
-      rate
-    });
-    if (accepted !== true) {
-      playing = false;
-      activeUtteranceId = '';
-      return false;
-    }
+  const adoptEventSession = event => {
+    if (!eventMatchesBook(event)) return false;
+    const eventSessionId = String(event?.sessionId ?? '').trim();
+    if (!eventSessionId) return false;
+    if (activeSessionId && activeSessionId !== eventSessionId) return false;
+    activeSessionId = eventSessionId;
+    prepared = event?.prepared !== false;
     return true;
-  }
+  };
 
-  async function handleDone(event) {
-    if (!isCurrentEvent(event) || !playing) return;
-    const next = advancePosition(document, position);
-    if (!next) {
-      playing = false;
+  const updatePositionFromEvent = event => {
+    if (!documentBlocks(document).length) return;
+    position = normalizeSemanticPosition({
+      blockIndex: event?.blockIndex,
+      unitIndex: event?.unitIndex
+    }, document);
+  };
+
+  const handlePosition = event => {
+    if (!adoptEventSession(event)) return;
+    updatePositionFromEvent(event);
+    if (typeof event?.playing === 'boolean') playing = event.playing;
+    if (event?.ended === true) {
       ended = true;
-      activeUtteranceId = '';
-      report();
-      return;
+      playing = false;
     }
-    position = next;
     report();
-    await speakCurrent();
-  }
+  };
 
-  function handleInterrupted(event) {
-    if (!isCurrentEvent(event)) return;
+  const handleState = event => {
+    if (!adoptEventSession(event)) return;
+    updatePositionFromEvent(event);
+    playing = event?.playing === true;
+    ended = event?.ended === true;
+    report();
+  };
+
+  const handleInterrupted = event => {
+    if (!adoptEventSession(event)) return;
+    updatePositionFromEvent(event);
     playing = false;
-    activeSessionId = '';
-    activeUtteranceId = '';
     report({ interrupted: true });
-  }
+  };
 
-  function handleError(event) {
-    if (!isCurrentEvent(event)) return;
+  const handleEnded = event => {
+    if (!adoptEventSession(event)) return;
+    updatePositionFromEvent(event);
     playing = false;
-    activeSessionId = '';
-    activeUtteranceId = '';
+    ended = true;
+    report();
+  };
+
+  const handleError = event => {
+    if (event?.bookId && !eventMatchesBook(event)) return;
+    if (event?.sessionId && activeSessionId && event.sessionId !== activeSessionId) return;
+    playing = false;
     report({ error: String(event?.message ?? 'tts-error') });
-  }
+  };
 
   const listenersReady = (async () => {
-    if (typeof client.addListener !== 'function') return;
+    if (typeof tts?.addListener !== 'function') return;
     for (const [name, listener] of [
-      ['ttsDone', handleDone],
+      ['ttsPosition', handlePosition],
+      ['ttsState', handleState],
       ['ttsInterrupted', handleInterrupted],
+      ['ttsEnded', handleEnded],
       ['ttsError', handleError]
     ]) {
       try {
-        const handle = await client.addListener(name, listener);
+        const handle = await tts.addListener(name, listener);
         if (handle?.remove) handles.push(handle);
       } catch {}
     }
   })();
 
+  async function syncNativeState() {
+    await listenersReady;
+    if (destroyed || !bookId || typeof tts?.getTtsState !== 'function') return snapshot();
+    let state = null;
+    try { state = await tts.getTtsState(); } catch {}
+    if (state && eventMatchesBook(state) && String(state.sessionId ?? '').trim()) {
+      activeSessionId = String(state.sessionId).trim();
+      prepared = state.prepared === true;
+      playing = state.playing === true;
+      ended = state.ended === true;
+      updatePositionFromEvent(state);
+      report();
+    }
+    return snapshot();
+  }
+
+  function configurationMatchesPreparedSession() {
+    return prepared && preparedVoiceId === voiceId && preparedRate === rate;
+  }
+
+  async function prepareNativeSession() {
+    await listenersReady;
+    if (destroyed || ended || !bookId) return false;
+    if (configurationMatchesPreparedSession() && activeSessionId) return true;
+
+    const units = allSemanticUnits(document);
+    if (!units.length) {
+      ended = true;
+      return false;
+    }
+
+    if (activeSessionId && typeof tts.stopTts === 'function') {
+      try { await tts.stopTts(); } catch {}
+    }
+
+    activeSessionId = `reading-${controllerId}-${++sessionSerial}`;
+    prepared = false;
+    playing = false;
+
+    const begun = await tts.beginTtsSession?.({
+      sessionId: activeSessionId,
+      bookId,
+      title,
+      voiceId,
+      rate,
+      blockIndex: position.blockIndex,
+      unitIndex: position.unitIndex
+    });
+    if (begun !== true) {
+      activeSessionId = '';
+      return false;
+    }
+
+    for (let index = 0; index < units.length; index += SESSION_CHUNK_SIZE) {
+      const appended = await tts.appendTtsUnits?.({
+        sessionId: activeSessionId,
+        units: units.slice(index, index + SESSION_CHUNK_SIZE)
+      });
+      if (appended !== true) {
+        try { await tts.stopTts?.(); } catch {}
+        activeSessionId = '';
+        return false;
+      }
+    }
+
+    const committed = await tts.commitTtsSession?.({ sessionId: activeSessionId });
+    if (committed !== true) {
+      try { await tts.stopTts?.(); } catch {}
+      activeSessionId = '';
+      return false;
+    }
+
+    prepared = true;
+    preparedVoiceId = voiceId;
+    preparedRate = rate;
+    return true;
+  }
+
   async function play() {
     await listenersReady;
     if (destroyed || ended) return false;
     if (playing) return true;
-    activeSessionId = `reading-${controllerId}-${++sessionSerial}`;
-    return speakCurrent();
+    if (!prepared || !activeSessionId || !configurationMatchesPreparedSession()) {
+      const ready = await prepareNativeSession();
+      if (!ready) return false;
+    }
+    const accepted = await tts.playTts?.();
+    if (accepted !== true) return false;
+    playing = true;
+    ended = false;
+    return true;
   }
 
   async function pause() {
     await listenersReady;
     if (destroyed) return false;
-    const hadActive = playing || Boolean(activeSessionId);
-    activeSessionId = '';
-    activeUtteranceId = '';
-    playing = false;
-    if (hadActive && typeof client.stopTts === 'function') {
-      try { await client.stopTts(); } catch {}
+    const hadActive = playing || prepared;
+    if (hadActive && typeof tts.pauseTts === 'function') {
+      try { await tts.pauseTts(); } catch {}
     }
+    playing = false;
     return hadActive;
   }
 
   async function moveTo(nextPosition = {}) {
-    await pause();
+    await listenersReady;
+    const wasActive = playing;
+    if (wasActive && typeof tts.pauseTts === 'function') {
+      try { await tts.pauseTts(); } catch {}
+    }
+    playing = false;
     position = normalizeSemanticPosition(nextPosition, document);
     ended = documentBlocks(document).length === 0 || currentUnit(document, position) == null;
+    if (prepared && activeSessionId && !ended && typeof tts.seekTts === 'function') {
+      try {
+        await tts.seekTts({ blockIndex: position.blockIndex, unitIndex: position.unitIndex });
+      } catch {}
+    }
     report();
     return { ...position };
   }
 
   function setVoice(value) {
-    voiceId = String(value ?? '').trim();
+    const next = String(value ?? '').trim();
+    if (voiceId !== next) {
+      voiceId = next;
+      prepared = false;
+      playing = false;
+    }
     return voiceId;
   }
 
   function setRate(value) {
-    rate = clampRate(value);
+    const next = clampRate(value);
+    if (rate !== next) {
+      rate = next;
+      prepared = false;
+      playing = false;
+    }
     return rate;
   }
 
@@ -210,21 +330,39 @@ export function createReadingSpeechController({
       position: { ...position },
       playing,
       ended,
+      prepared,
+      sessionId: activeSessionId,
       voiceId,
       rate,
       percent: ended ? 100 : percentFor(position, document)
     };
   }
 
-  async function destroy() {
+  async function destroy({ preserveNative = false } = {}) {
     if (destroyed) return;
-    await pause();
     destroyed = true;
     await listenersReady;
+    if (!preserveNative && activeSessionId && typeof tts.stopTts === 'function') {
+      try { await tts.stopTts(); } catch {}
+    }
     for (const handle of handles.splice(0)) {
       try { await handle.remove(); } catch {}
     }
+    playing = preserveNative ? playing : false;
+    if (!preserveNative) {
+      prepared = false;
+      activeSessionId = '';
+    }
   }
 
-  return { play, pause, moveTo, setVoice, setRate, snapshot, destroy };
+  return {
+    play,
+    pause,
+    moveTo,
+    setVoice,
+    setRate,
+    snapshot,
+    syncNativeState,
+    destroy
+  };
 }

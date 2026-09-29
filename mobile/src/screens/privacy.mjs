@@ -8,8 +8,8 @@ export const PRIVACY_LABELS = Object.freeze({
 const COPY = Object.freeze({
   es: Object.freeze({
     intro: 'TifloAcosta está diseñada para ofrecer sus funciones principales sin obligarte a crear una cuenta.',
-    localHeading: 'Biblioteca y lectura',
-    localBody: 'Los documentos que importas en Leer con TifloAcosta, junto con tu posición de lectura, marcas, cola y ajustes del lector, se guardan en el espacio privado de la aplicación en este dispositivo. TifloAcosta no modifica ni elimina el archivo original cuando borras su copia de la biblioteca.',
+    localHeading: 'Biblioteca, lectura y datos locales',
+    localBody: 'Los documentos y datos que importas o generas en Leer con TifloAcosta, junto con tu posición de lectura, marcas, cola y ajustes del lector, se guardan en el espacio privado de la aplicación en este dispositivo. TifloAcosta no modifica ni elimina el archivo original cuando borras su copia de la biblioteca.',
     notificationsHeading: 'Notificaciones',
     notificationsBody: 'Las notificaciones son opcionales. Si decides activarlas, Android y el servicio de notificaciones OneSignal utilizan los identificadores técnicos necesarios para poder entregarlas. Puedes retirar el permiso desde la configuración de Android.',
     externalHeading: 'Contenido y servicios externos',
@@ -21,8 +21,8 @@ const COPY = Object.freeze({
   }),
   en: Object.freeze({
     intro: 'TifloAcosta is designed to provide its main features without requiring you to create an account.',
-    localHeading: 'Library and reading',
-    localBody: 'Documents you import into Read with TifloAcosta, together with your reading position, marks, queue and reader settings, are stored in the app private space on this device. TifloAcosta does not modify or delete the original file when you remove its library copy.',
+    localHeading: 'Library, reading and local data',
+    localBody: 'Documents and data you import or create in Read with TifloAcosta, together with your reading position, marks, queue and reader settings, are stored in the app private space on this device. TifloAcosta does not modify or delete the original file when you remove its library copy.',
     notificationsHeading: 'Notifications',
     notificationsBody: 'Notifications are optional. If you choose to enable them, Android and the OneSignal notification service use the technical identifiers required to deliver them. You can withdraw permission from Android settings.',
     externalHeading: 'External content and services',

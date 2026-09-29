@@ -38,7 +38,7 @@ test('background TTS service owns continuous native reading without WebView call
 
 test('preparing a background TTS session never autoplays it', async () => {
   const service = await read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingBackgroundTtsService.java');
-  const prepare = service.match(/private\s+void\s+prepareSession\s*\([^)]*\)\s*\{([\s\S]*?)\n\s*\}/)?.[1] ?? '';
+  const prepare = service.match(/private\s+void\s+prepareSession\s*\([^)]*\)(?:\s+throws\s+[^{]+)?\s*\{([\s\S]*?)\n\s*\}/)?.[1] ?? '';
 
   assert.notEqual(prepare, '', 'Missing prepareSession implementation');
   assert.doesNotMatch(prepare, /\.play\s*\(/, 'Preparing or restoring a session must never autoplay');

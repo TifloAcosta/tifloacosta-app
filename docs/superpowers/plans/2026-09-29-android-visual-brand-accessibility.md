@@ -113,7 +113,7 @@
 - Modify: `mobile/test/home.test.mjs`
 
 **Interfaces:**
-- `HOME_ITEMS` includes `privacy` between contact and settings unless tests reveal a stronger existing ordering constraint.
+- `HOME_ITEMS` includes `privacy` immediately between `contact` and `settings`.
 - Home begins with `addAppBrand(...)`, followed by the accessible `h1` and section navigation.
 - New route `privacy` renders `Privacidad y accesibilidad` / `Privacy and accessibility`.
 - Privacy screen text describes Android local storage/library/progress/marks, notifications/external services, OCR/translation local-processing intent for 1.3.4, accessibility statement, and external full-policy link.
@@ -129,14 +129,14 @@
 **Files:**
 - Modify: `mobile/src/screens/actualidad.mjs`
 - Modify: `mobile/src/styles.css`
-- Modify: `mobile/test/actualidad-screen.test.mjs` if present; otherwise create it.
+- Modify: `mobile/test/actualidad-presentation.test.mjs`
 
 **Interfaces:**
 - Each news article gets a dedicated `.action-group` after summary/meta content.
 - `Abrir fuente original`, `Compartir`, and favorite action are appended to that group.
 - Group wraps with gap and has block spacing from preceding text.
 
-- [ ] Write failing DOM test proving all article actions share one action group and preserve order/names.
+- [ ] Write failing DOM/source test proving all article actions share one action group and preserve order/names.
 - [ ] Refactor helper usage so external link/share/favorite can append into the group without changing behavior.
 - [ ] Run focused test; expect PASS.
 - [ ] Commit: `style: separate actualidad actions`.
@@ -150,12 +150,12 @@
 - Create: `mobile/test/contact-screen.test.mjs`
 
 **Interfaces:**
-- Groups: `Contacto directo`, `Redes sociales`, `Podcast y otros canales` when destinations exist.
+- Groups: `Contacto directo`, `Redes sociales`, `Podcast y otros canales`.
 - Each group uses a semantic heading and `.action-group`.
 - Existing destinations remain links and external behavior remains unchanged.
 
 - [ ] Write failing ES/EN tests for group headings, link count, and no flattened one-line container.
-- [ ] Expand contact destination data to include current podcast destinations already present elsewhere where appropriate.
+- [ ] Expand contact destination data to include the podcast destinations already represented in the app.
 - [ ] Implement grouped layout and spacing.
 - [ ] Run focused test and full suite; expect PASS.
 - [ ] Commit: `feat: group android contact destinations`.
@@ -163,26 +163,26 @@
 ### Task 8: Apply shared action/card spacing across remaining screens
 
 **Files:**
-- Modify as needed: `mobile/src/screens/search.mjs`
-- Modify as needed: `mobile/src/screens/library.mjs`
-- Modify as needed: `mobile/src/screens/reading-library.mjs`
-- Modify as needed: `mobile/src/screens/reading-book.mjs`
-- Modify as needed: `mobile/src/screens/reading-audio.mjs`
-- Modify as needed: `mobile/src/screens/downloads.mjs`
-- Modify as needed: `mobile/src/screens/favorites.mjs`
-- Modify as needed: `mobile/src/screens/videos.mjs`
-- Modify as needed: `mobile/src/screens/book.mjs`
-- Modify as needed: `mobile/src/screens/podcast.mjs`
-- Modify as needed: `mobile/src/screens/settings.mjs`
+- Modify: `mobile/src/screens/search.mjs`
+- Modify: `mobile/src/screens/library.mjs`
+- Modify: `mobile/src/screens/reading-library.mjs`
+- Modify: `mobile/src/screens/reading-book.mjs`
+- Modify: `mobile/src/screens/reading-audio.mjs`
+- Modify: `mobile/src/screens/downloads.mjs`
+- Modify: `mobile/src/screens/favorites.mjs`
+- Modify: `mobile/src/screens/videos.mjs`
+- Modify: `mobile/src/screens/book.mjs`
+- Modify: `mobile/src/screens/podcast.mjs`
+- Modify: `mobile/src/screens/settings.mjs`
 - Modify: `mobile/src/styles.css`
-- Modify: relevant existing screen tests.
+- Modify: relevant existing screen tests touched by these migrations.
 
 **Interfaces:**
 - Repeated actions use `.action-group`; repeated content uses card/section classes rather than ad-hoc margins.
-- Every internal screen uses `addScreenHeader()` or an explicitly tested equivalent.
+- Every internal screen uses `addScreenHeader()` or an explicitly tested equivalent where its navigation model differs.
 
-- [ ] Inventory screens that manually create top back/header controls and add failing source assertions for any inconsistent screen.
-- [ ] Migrate those screens to shared primitives without changing routes or labels.
+- [ ] Inventory the listed screens for manual top back/header construction and add failing source assertions for every inconsistent screen before changing implementation.
+- [ ] Migrate inconsistent screens to the shared primitives without changing routes or labels.
 - [ ] Apply section/card spacing to repeated content.
 - [ ] Run all screen tests and full `npm test`; expect PASS.
 - [ ] Commit: `style: unify android screen spacing`.

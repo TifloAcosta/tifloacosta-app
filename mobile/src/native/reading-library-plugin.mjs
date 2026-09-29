@@ -154,6 +154,10 @@ export function createReadingLibraryPlugin(
     return safeCall(ttsPlugin, 'listTtsVoices', undefined, { voices: [] });
   }
 
+  async function openTtsVoiceInstaller() {
+    return safeCall(ttsPlugin, 'openTtsVoiceInstaller', undefined, { opened: false, destination: 'none' });
+  }
+
   async function startTts(options = {}) {
     return safeCall(ttsPlugin, 'startTts', options, { accepted: false });
   }
@@ -267,6 +271,7 @@ export function createReadingLibraryPlugin(
     deleteBook,
     getLatestInProgress,
     listTtsVoices,
+    openTtsVoiceInstaller,
     startTts,
     stopTts,
     prepareAudio,

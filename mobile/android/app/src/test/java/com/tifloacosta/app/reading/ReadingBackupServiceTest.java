@@ -334,6 +334,9 @@ public class ReadingBackupServiceTest {
             return new ByteArrayInputStream(bytes);
         }
         @Override public boolean tempHasNonWhitespaceText(String tempName) { return true; }
+        @Override public String moveTempToItem(String tempName, String id) {
+            return moveTempToItem(tempName, id, "txt", "txt");
+        }
         @Override public String moveTempToItem(String tempName, String id, String format, String sourceExtension) {
             String extension = sourceExtension == null || sourceExtension.isEmpty() ? format : sourceExtension;
             String path = "items/" + id + "/source." + extension;

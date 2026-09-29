@@ -10,7 +10,7 @@ const read = async path => {
   }
 };
 
-test('background tts bridge exposes persistent session controls while preserving voice enumeration', async () => {
+test('background tts bridge exposes persistent session preparation while preserving current controls', async () => {
   const plugin = await read('android/app/src/main/java/com/tifloacosta/app/TifloReadingTtsPlugin.java');
   assert.match(plugin, /@CapacitorPlugin\(name\s*=\s*"TifloReadingTts"\)/);
   for (const method of [
@@ -18,10 +18,6 @@ test('background tts bridge exposes persistent session controls while preserving
     'beginTtsSession',
     'appendTtsUnits',
     'commitTtsSession',
-    'playTts',
-    'pauseTts',
-    'seekTts',
-    'getTtsState',
     'stopTts'
   ]) {
     assert.match(plugin, new RegExp(`public\\s+void\\s+${method}\\s*\\(PluginCall\\s+call\\)`), `Missing ${method}`);

@@ -5,12 +5,14 @@ import { text } from '../src/core/i18n.mjs';
 import { HOME_ITEMS } from '../src/screens/home.mjs';
 
 const read = file => readFile(new URL(`../${file}`, import.meta.url), 'utf8');
+const translationKey = key => key === 'reading-library' ? 'readingLibrary' : key;
 
 test('home uses the approved compact order', () => {
   assert.deepEqual(HOME_ITEMS, [
-    'actualidad',
     'search',
+    'actualidad',
     'library',
+    'reading-library',
     'downloads',
     'favorites',
     'videos',
@@ -26,8 +28,9 @@ test('home and secondary screen labels exist in Spanish and English', () => {
     assert.ok(text(lang, 'app.title'));
     assert.ok(text(lang, 'nav.back'));
     for (const key of HOME_ITEMS) {
-      assert.ok(text(lang, `home.${key}`), `Missing ${lang} home.${key}`);
-      assert.ok(text(lang, `screen.${key}`), `Missing ${lang} screen.${key}`);
+      const labelKey = translationKey(key);
+      assert.ok(text(lang, `home.${labelKey}`), `Missing ${lang} home.${labelKey}`);
+      assert.ok(text(lang, `screen.${labelKey}`), `Missing ${lang} screen.${labelKey}`);
     }
   }
 });
@@ -52,7 +55,7 @@ test('home module does not leak podcast platforms, social URLs or setting contro
 });
 
 test('secondary mobile screens use a back control and accessible screen heading without autofocus', async () => {
-  const files = ['actualidad.mjs', 'library.mjs', 'videos.mjs', 'book.mjs', 'podcast.mjs', 'contact.mjs', 'settings.mjs'];
+  const files = ['actualidad.mjs', 'library.mjs', 'reading-library.mjs', 'videos.mjs', 'book.mjs', 'podcast.mjs', 'contact.mjs', 'settings.mjs'];
   for (const file of files) {
     const source = await read(`src/screens/${file}`);
     assert.match(source, /addScreenHeader\(/, `${file} must use the shared back + heading header`);

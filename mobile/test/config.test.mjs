@@ -41,7 +41,7 @@ test('mobile shell stays accessible and source entry remains bundle-ready', asyn
     read('scripts/build.mjs')
   ]);
   assert.match(html, /<html\s+lang="es"/i);
-  assert.match(html, /<a[^>]+href="#app"[^>]*>[^<]+<\/a>/i);
+  assert.doesNotMatch(html, /<a[^>]+href="#app"[^>]*>/i);
   assert.equal((html.match(/<main\b/gi) || []).length, 1);
   assert.match(html, /<main\s+id="app"\s+tabindex="-1"><\/main>/i);
   assert.match(html, /<script\s+type="module"\s+src="\.\/app\.mjs"><\/script>/i);

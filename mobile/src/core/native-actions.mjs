@@ -23,6 +23,25 @@ export function createNativeActions({ appPlugin, sharePlugin, browserPlugin, sav
     return true;
   }
 
+  async function shareFile({ url = '', filename = '', mimeType = 'application/octet-stream', title = '' } = {}) {
+    const cleanUrl = String(url || '').trim();
+    const cleanFilename = String(filename || '').trim();
+    const cleanMimeType = String(mimeType || 'application/octet-stream').trim() || 'application/octet-stream';
+    const cleanTitle = String(title || '').trim();
+    if (!cleanUrl || !cleanFilename || !tifloSharePlugin?.shareFile) return false;
+    try {
+      const result = await tifloSharePlugin.shareFile({
+        url: cleanUrl,
+        filename: cleanFilename,
+        mimeType: cleanMimeType,
+        title: cleanTitle
+      });
+      return result?.shared === true;
+    } catch {
+      return false;
+    }
+  }
+
   async function openExternal(url) {
     const value = String(url || '').trim();
     if (!value || !browserPlugin?.open) return false;
@@ -57,5 +76,5 @@ export function createNativeActions({ appPlugin, sharePlugin, browserPlugin, sav
     }
   }
 
-  return { installBackHandler, share, openExternal, saveFile, finishSharedFlow };
+  return { installBackHandler, share, shareFile, openExternal, saveFile, finishSharedFlow };
 }

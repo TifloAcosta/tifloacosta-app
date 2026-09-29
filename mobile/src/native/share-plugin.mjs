@@ -37,7 +37,27 @@ export function createSharePlugin(plugin = NativeTifloShare) {
     }
   }
 
-  return { getInitialShare, addListener, finishShare };
+  async function shareFile({ url = '', filename = '', mimeType = 'application/octet-stream', title = '' } = {}) {
+    const cleanUrl = String(url || '').trim();
+    const cleanFilename = String(filename || '').trim();
+    const cleanMimeType = String(mimeType || 'application/octet-stream').trim() || 'application/octet-stream';
+    const cleanTitle = String(title || '').trim();
+    if (!cleanUrl || !cleanFilename || !plugin?.shareFile) return { shared: false };
+    try {
+      const result = await plugin.shareFile({
+        url: cleanUrl,
+        filename: cleanFilename,
+        mimeType: cleanMimeType,
+        title: cleanTitle,
+        dialogTitle: 'TifloAcosta'
+      });
+      return { shared: result?.shared === true };
+    } catch {
+      return { shared: false };
+    }
+  }
+
+  return { getInitialShare, addListener, finishShare, shareFile };
 }
 
 export const TifloShare = createSharePlugin();

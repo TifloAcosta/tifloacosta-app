@@ -17,17 +17,22 @@ import { resolveLocal } from './core/downloads.mjs';
 import { classifySharedText } from './core/share-classifier.mjs';
 import { createShareSession } from './core/share-session.mjs';
 import { createReaderSession } from './core/reader-session.mjs';
+import { createReadingLibraryClient } from './core/reading-library-client.mjs';
 import { loadReadableTarget, readablePageFromNewsItem } from './core/readable-loader.mjs';
 import { searchResultAction } from './core/search.mjs';
 import { TifloSave } from './core/save-plugin.mjs';
 import { createNotificationService } from './native/notifications.mjs';
 import { createOneSignalNotifications } from './native/onesignal-notifications.mjs';
+import { TifloReading } from './native/reading-library-plugin.mjs';
 import { TifloShare } from './native/share-plugin.mjs';
 import { TifloWebFetch, fetchSharedPage } from './native/web-fetch-plugin.mjs';
 import { renderHome } from './screens/home.mjs';
 import { renderActualidad } from './screens/actualidad.mjs';
 import { renderSearch } from './screens/search.mjs';
 import { renderLibrary } from './screens/library.mjs';
+import { renderReadingLibrary } from './screens/reading-library.mjs';
+import { renderReadingQueue } from './screens/reading-queue.mjs';
+import { renderReadingBook } from './screens/reading-book.mjs';
 import { renderDownloads } from './screens/downloads.mjs';
 import { renderDownloadLink } from './screens/download-link.mjs';
 import { renderSoundSearch } from './screens/sound-search.mjs';
@@ -59,6 +64,8 @@ let pendingVideoId = '';
 let pendingDirectVideo = null;
 let pendingDownloadUrl = '';
 let pendingSearchQuery = '';
+let pendingReadingImportBatch = null;
+let pendingReadingBookId = '';
 let notificationService;
 
 function safeStorage() {
@@ -75,6 +82,7 @@ const favoritesStore = createFavoritesStore(storage);
 const newsSeenStore = createNewsSeenStore(storage);
 const readerSession = createReaderSession();
 const shareSession = createShareSession();
+const readingClient = createReadingLibraryClient(TifloReading);
 const nativeActions = createNativeActions({
   appPlugin: App,
   sharePlugin: Share,
@@ -326,6 +334,43 @@ async function installShareReceiver() {
   });
 }
 
+function readingBatchHasResults(batch) {
+  return Boolean(
+    batch && (
+      (Array.isArray(batch.imported) && batch.imported.length) ||
+      (Array.isArray(batch.duplicates) && batch.duplicates.length) ||
+      (Array.isArray(batch.rejected) && batch.rejected.length)
+    )
+  );
+}
+
+function openReadingLibraryBatch(batch) {
+  if (!readingBatchHasResults(batch)) return false;
+  pendingReadingImportBatch = batch;
+  if (router.current()?.name === 'reading-library') {
+    render(router.current());
+  } else {
+    router.navigate('reading-library');
+  }
+  return true;
+}
+
+function openReadingBook(bookId) {
+  const cleanId = String(bookId || '').trim();
+  if (!cleanId) return false;
+  pendingReadingBookId = cleanId;
+  router.navigate('reading-book');
+  return true;
+}
+
+async function installReadingDocumentReceiver() {
+  const initial = await readingClient.consumeInitialSharedDocuments();
+  openReadingLibraryBatch(initial);
+  await readingClient.addListener('documentsReceived', payload => {
+    openReadingLibraryBatch(payload);
+  });
+}
+
 function renderDirectVideo(context) {
   root.replaceChildren();
   const back = document.createElement('button');
@@ -362,12 +407,50 @@ function renderDirectVideo(context) {
   queueMicrotask(() => { void player.open(); });
 }
 
+function renderLanguageChoice() {
+  root.replaceChildren();
+  document.title = 'TifloAcosta';
+
+  const heading = document.createElement('h1');
+  heading.dataset.screenHeading = '';
+  heading.tabIndex = -1;
+  heading.textContent = 'Idioma / Language';
+
+  const intro = document.createElement('p');
+  intro.textContent = 'Elige el idioma de la aplicación. Choose the app language.';
+
+  const group = document.createElement('div');
+  group.setAttribute('role', 'group');
+  group.setAttribute('aria-label', 'Idioma / Language');
+
+  for (const [lang, label] of [['es', 'Español'], ['en', 'English']]) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.lang = lang;
+    button.textContent = label;
+    button.addEventListener('click', () => {
+      const after = preferencesStore.save({ lang });
+      applyPreferences(document.documentElement, after);
+      render(router.current() || { name: 'home' });
+      queueMicrotask(() => focusScreenHeading(root));
+    });
+    group.append(button);
+  }
+
+  root.append(heading, intro, group);
+}
+
 function render(route) {
   activeScreenCleanup?.();
   activeScreenCleanup = null;
   screenBackHandler = null;
   readerController = null;
   shareController = null;
+
+  if (preferencesStore.needsLanguageChoice()) {
+    renderLanguageChoice();
+    return;
+  }
 
   const preferences = preferencesStore.getCurrent();
   document.title = t('app.title');
@@ -417,6 +500,38 @@ function render(route) {
       break;
     }
     case 'library': renderLibrary(context); break;
+    case 'reading-library': {
+      pendingReadingBookId = '';
+      const initialImportBatch = pendingReadingImportBatch;
+      pendingReadingImportBatch = null;
+      renderReadingLibrary({
+        ...context,
+        client: readingClient,
+        initialImportBatch,
+        onOpenBook: openReadingBook
+      });
+      break;
+    }
+    case 'reading-queue': {
+      pendingReadingBookId = '';
+      renderReadingQueue({
+        ...context,
+        client: readingClient,
+        onOpenBook: openReadingBook,
+        standalone: true
+      });
+      break;
+    }
+    case 'reading-book': {
+      renderReadingBook({
+        ...context,
+        client: readingClient,
+        bookId: pendingReadingBookId,
+        onOpenBook: openReadingBook,
+        onOpenQueue: () => router.navigate('reading-queue')
+      });
+      break;
+    }
     case 'downloads': renderDownloads(context); break;
     case 'downloads-link': {
       const initialUrl = pendingDownloadUrl;
@@ -547,6 +662,7 @@ function onPreferencesChange(changes, { reset = false } = {}) {
 
 router.start('home');
 void installShareReceiver();
+void installReadingDocumentReceiver();
 void loadAppInfo(App).then(info => {
   appInfo = info;
   if (!shareMode && router.current()?.name === 'settings') render(router.current());
@@ -560,7 +676,10 @@ const contentStore = createContentStore({
 contentStore.load().then(result => {
   currentContent = result.content || EMPTY_CONTENT;
   currentNewNewsIds = newsSeenStore.compare(currentContent.news);
-  if (!shareMode && !textInputIsActive()) render(router.current());
+  if (!shareMode && !textInputIsActive()) {
+    render(router.current());
+    queueMicrotask(() => focusScreenHeading(root));
+  }
   void notificationCoordinator.markReady();
 });
 

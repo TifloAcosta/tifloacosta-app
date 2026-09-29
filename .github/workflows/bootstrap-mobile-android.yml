@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - 'feature/leer-tifloacosta-android-foundation'
     paths:
       - 'mobile/**'
       - '.github/workflows/bootstrap-mobile-android.yml'
@@ -45,6 +46,10 @@ jobs:
         working-directory: mobile
         run: npm install
 
+      - name: Run Leer con TifloAcosta beta acceptance gate
+        working-directory: mobile
+        run: npm run test:reading-beta
+
       - name: Run repository regression tests
         run: npm test
 
@@ -64,6 +69,18 @@ jobs:
           fi
           npx cap sync android
 
+      - name: Run Android unit tests
+        working-directory: mobile/android
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon testDebugUnitTest --stacktrace
+
+      - name: Compile Android instrumentation tests
+        working-directory: mobile/android
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon assembleDebugAndroidTest --stacktrace
+
       - name: Prepare Android release signing when secrets are configured
         shell: bash
         env:
@@ -76,7 +93,7 @@ jobs:
           fi
 
           if [ -z "$ANDROID_KEYSTORE_BASE64_SECRET" ] || [ -z "$ANDROID_KEYSTORE_PASSWORD_SECRET" ]; then
-            echo "Android signing secrets are incomplete. Configure both TifloAcosta signing secrets."
+            echo "Android signing secrets are incomplete. Configure both TIFLOACOSTA signing secrets."
             exit 1
           fi
 

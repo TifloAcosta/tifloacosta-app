@@ -1,5 +1,5 @@
 import { resolveLocal } from '../core/downloads.mjs';
-import { addExternalLink, addParagraph, addScreenHeader, addShareButton, clearScreen } from './shared.mjs';
+import { addExternalLink, addParagraph, addScreenHeader, clearScreen } from './shared.mjs';
 
 function addFavoriteButton(parent, item, favoritesStore, t) {
   const ref = { kind: 'resource', id: String(item.id || '') };
@@ -46,8 +46,7 @@ function mimeTypeFromFilename(filename) {
   return 'application/octet-stream';
 }
 
-function addSaveButton(parent, item, url, nativeActions, t) {
-  if (!nativeActions?.saveFile) return;
+function resourceFileTarget(item, url) {
   const resolved = resolveLocal(url);
   const resolvedItem = resolved.kind === 'result' && resolved.items.length ? resolved.items[0] : null;
   const targetUrl = resolvedItem?.url || url;
@@ -55,6 +54,12 @@ function addSaveButton(parent, item, url, nativeActions, t) {
   const mimeType = resolvedItem?.type && resolvedItem.type !== 'unknown'
     ? mimeTypeFromFilename(`archivo.${resolvedItem.type}`)
     : mimeTypeFromFilename(filename);
+  return { targetUrl, filename, mimeType };
+}
+
+function addSaveButton(parent, item, url, nativeActions, t) {
+  if (!nativeActions?.saveFile) return;
+  const { targetUrl, filename, mimeType } = resourceFileTarget(item, url);
   const button = document.createElement('button');
   button.type = 'button';
   button.textContent = `${t('library.download')}: ${item.title || filename}`;
@@ -66,6 +71,35 @@ function addSaveButton(parent, item, url, nativeActions, t) {
     });
   });
   parent.append(button);
+}
+
+function addFileShareButton(parent, item, url, nativeActions, t) {
+  if (!nativeActions?.shareFile) return;
+  const { targetUrl, filename, mimeType } = resourceFileTarget(item, url);
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'share-button';
+  button.textContent = `${t('common.share')}: ${item.title || filename}`;
+
+  const status = document.createElement('p');
+  status.className = 'muted';
+  status.setAttribute('role', 'status');
+  status.setAttribute('aria-live', 'polite');
+
+  button.addEventListener('click', async () => {
+    button.disabled = true;
+    status.textContent = t('reader.preparing');
+    const shared = await nativeActions?.shareFile({
+      url: targetUrl,
+      filename,
+      mimeType,
+      title: item.title || filename
+    });
+    button.disabled = false;
+    status.textContent = shared ? '' : t('share.errorHeading');
+  });
+
+  parent.append(button, status);
 }
 
 function platformSearchText(item) {
@@ -116,18 +150,11 @@ function renderResource(parent, item, favoritesStore, nativeActions, t) {
       onOpen: nativeActions?.openExternal
     });
   }
-  if (downloadUrl) addSaveButton(article, item, downloadUrl, nativeActions, t);
-
-  const shareUrl = openUrl || downloadUrl;
-  if (shareUrl) {
-    addShareButton(article, {
-      label: t('common.share'),
-      title: item.title || '',
-      text: item.category || '',
-      url: shareUrl,
-      onShare: nativeActions?.share
-    });
+  if (downloadUrl) {
+    addSaveButton(article, item, downloadUrl, nativeActions, t);
+    addFileShareButton(article, item, downloadUrl, nativeActions, t);
   }
+
   if (item.id) addFavoriteButton(article, item, favoritesStore, t);
   parent.append(article);
 }

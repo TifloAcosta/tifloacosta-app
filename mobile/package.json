@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "node --test test/*.test.mjs",
+    "test:reading-beta": "node --test test/reading-beta-acceptance.test.mjs",
     "build": "node scripts/build.mjs",
     "sync:android": "npm run build && npx cap sync android",
     "sync:ios": "npm run build && npx cap sync ios"

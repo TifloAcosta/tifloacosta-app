@@ -10,14 +10,19 @@ const read = async path => {
   }
 };
 
-test('Android registers TifloAcosta as a text share target without accepting multi-file shares', async () => {
-  const manifest = await read('android/app/src/main/AndroidManifest.xml');
+test('Android registers text sharing and multi-file TXT reading targets separately', async () => {
+  const [manifest, mainActivity] = await Promise.all([
+    read('android/app/src/main/AndroidManifest.xml'),
+    read('android/app/src/main/java/com/tifloacosta/app/MainActivity.java')
+  ]);
   assert.match(manifest, /android\.intent\.action\.SEND/);
+  assert.match(manifest, /android\.intent\.action\.SEND_MULTIPLE/);
   assert.match(manifest, /android:mimeType="text\/plain"/);
-  assert.doesNotMatch(manifest, /SEND_MULTIPLE/);
+  assert.match(mainActivity, /registerPlugin\(TifloSharePlugin\.class\)/);
+  assert.match(mainActivity, /registerPlugin\(TifloReadingPlugin\.class\)/);
 });
 
-test('native share plugin receives initial/new text shares and can finish the temporary flow', async () => {
+test('native share plugin receives only text shares and leaves file streams to the reading plugin', async () => {
   const [mainActivity, plugin] = await Promise.all([
     read('android/app/src/main/java/com/tifloacosta/app/MainActivity.java'),
     read('android/app/src/main/java/com/tifloacosta/app/TifloSharePlugin.java')
@@ -28,7 +33,7 @@ test('native share plugin receives initial/new text shares and can finish the te
   assert.match(plugin, /handleOnNewIntent/);
   assert.match(plugin, /notifyListeners\("shareReceived"/);
   assert.match(plugin, /moveTaskToBack\(true\)/);
-  assert.doesNotMatch(plugin, /EXTRA_STREAM/);
+  assert.match(plugin, /intent\.hasExtra\(Intent\.EXTRA_STREAM\)/);
 });
 
 test('JavaScript share wrapper has safe non-native fallbacks', async () => {

@@ -56,6 +56,18 @@ test('reading library follows the approved accessible order and complete filter 
   assert.match(screen, /readingLibrary\.sortLastRead/);
 });
 
+test('format filter exposes every library format supported by the Android v1 reader', async () => {
+  const screen = await read('src/screens/reading-library.mjs');
+
+  assert.match(
+    screen,
+    /const FORMATS\s*=\s*\[[^\]]*['"]txt['"][^\]]*['"]html['"][^\]]*['"]pdf['"][^\]]*['"]epub['"][^\]]*['"]docx['"][^\]]*['"]daisy2\.02['"][^\]]*['"]daisy3['"][^\]]*['"]audio['"][^\]]*\]/s
+  );
+  assert.match(screen, /DAISY 2\.02/);
+  assert.match(screen, /DAISY 3/);
+  assert.doesNotMatch(screen, /FORMATS[^\n]*['"]zip['"]/);
+});
+
 test('reading library item options expose queue state metadata rename and delete actions', async () => {
   const screen = await read('src/screens/reading-library.mjs');
 

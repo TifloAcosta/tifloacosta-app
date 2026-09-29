@@ -9,9 +9,18 @@ import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 import com.tifloacosta.app.reading.ReadingTtsController;
+import com.tifloacosta.app.reading.ReadingTtsSessionStore;
+import com.tifloacosta.app.reading.ReadingTtsUnit;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @CapacitorPlugin(name = "TifloReadingTts")
@@ -24,11 +33,13 @@ public class TifloReadingTtsPlugin extends Plugin {
     ));
 
     private ReadingTtsController ttsController;
+    private ReadingTtsSessionStore sessionStore;
 
     @Override
     public void load() {
         Context context = getContext().getApplicationContext();
         ttsController = ReadingTtsController.create(context, this::emitTtsEvent);
+        sessionStore = new ReadingTtsSessionStore(new File(context.getFilesDir(), "reading-tts-sessions"));
     }
 
     @PluginMethod
@@ -50,6 +61,91 @@ public class TifloReadingTtsPlugin extends Plugin {
                 call.resolve(result);
             } catch (RuntimeException error) {
                 call.reject("Unable to list TTS voices", error);
+            }
+        });
+    }
+
+    @PluginMethod
+    public void beginTtsSession(PluginCall call) {
+        String sessionId = clean(call.getString("sessionId"));
+        String bookId = clean(call.getString("bookId"));
+        String title = call.getString("title");
+        String voiceId = clean(call.getString("voiceId"));
+        Double rawRate = call.getDouble("rate");
+        Integer rawBlockIndex = call.getInt("blockIndex");
+        Integer rawUnitIndex = call.getInt("unitIndex");
+        float rate = rawRate == null ? 1.0f : rawRate.floatValue();
+        int blockIndex = rawBlockIndex == null ? 0 : rawBlockIndex;
+        int unitIndex = rawUnitIndex == null ? 0 : rawUnitIndex;
+
+        if (sessionId.isEmpty() || bookId.isEmpty()) {
+            call.reject("TTS session and book id are required");
+            return;
+        }
+
+        getBridge().execute(() -> {
+            try {
+                sessionStore.begin(sessionId, bookId, title, voiceId, rate, blockIndex, unitIndex);
+                JSObject result = new JSObject();
+                result.put("sessionId", sessionId);
+                result.put("prepared", false);
+                call.resolve(result);
+            } catch (IOException | RuntimeException error) {
+                call.reject("Unable to begin TTS session", error);
+            }
+        });
+    }
+
+    @PluginMethod
+    public void appendTtsUnits(PluginCall call) {
+        String sessionId = clean(call.getString("sessionId"));
+        JSArray items = call.getArray("units");
+        if (sessionId.isEmpty() || items == null) {
+            call.reject("TTS session and units are required");
+            return;
+        }
+
+        getBridge().execute(() -> {
+            try {
+                List<ReadingTtsUnit> units = new ArrayList<>(items.length());
+                for (int index = 0; index < items.length(); index++) {
+                    JSONObject item = items.getJSONObject(index);
+                    units.add(new ReadingTtsUnit(
+                            item.getInt("blockIndex"),
+                            item.getInt("unitIndex"),
+                            item.getString("text")
+                    ));
+                }
+                sessionStore.append(sessionId, units);
+                JSObject result = new JSObject();
+                result.put("sessionId", sessionId);
+                result.put("appended", units.size());
+                call.resolve(result);
+            } catch (JSONException | IOException | RuntimeException error) {
+                call.reject("Unable to append TTS units", error);
+            }
+        });
+    }
+
+    @PluginMethod
+    public void commitTtsSession(PluginCall call) {
+        String sessionId = clean(call.getString("sessionId"));
+        if (sessionId.isEmpty()) {
+            call.reject("TTS session is required");
+            return;
+        }
+
+        getBridge().execute(() -> {
+            try {
+                sessionStore.commit(sessionId);
+                ReadingTtsSessionStore.Session session = sessionStore.load(sessionId);
+                JSObject result = new JSObject();
+                result.put("sessionId", sessionId);
+                result.put("prepared", session != null);
+                result.put("unitCount", session == null ? 0 : session.getUnits().size());
+                call.resolve(result);
+            } catch (IOException | RuntimeException error) {
+                call.reject("Unable to commit TTS session", error);
             }
         });
     }

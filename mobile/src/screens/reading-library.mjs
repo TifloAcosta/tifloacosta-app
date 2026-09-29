@@ -73,7 +73,10 @@ function makeOption(value, label) {
 
 function formatLabel(value) {
   const clean = String(value || '').trim().toUpperCase();
-  return clean === 'AUDIO' ? 'Audio' : clean;
+  if (clean === 'AUDIO') return 'Audio';
+  if (clean === 'DAISY2.02') return 'DAISY 2.02';
+  if (clean === 'DAISY3') return 'DAISY 3';
+  return clean;
 }
 
 export function renderReadingLibrary({

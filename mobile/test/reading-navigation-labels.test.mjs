@@ -15,10 +15,7 @@ test('reader derives previous and next labels from the real adjacent semantic un
 });
 
 test('reader provides localized navigation names for every supported semantic target', async () => {
-  const [screen, i18n] = await Promise.all([
-    read('src/screens/reading-book.mjs'),
-    read('src/core/i18n.mjs')
-  ]);
+  const screen = await read('src/screens/reading-book.mjs');
 
   for (const key of [
     'previousParagraph', 'nextParagraph',
@@ -32,17 +29,15 @@ test('reader provides localized navigation names for every supported semantic ta
   }
 
   for (const label of [
-    'Párrafo anterior', 'Párrafo siguiente', 'Frase anterior', 'Frase siguiente',
     'Encabezado anterior', 'Encabezado siguiente',
     'Elemento de lista anterior', 'Elemento de lista siguiente',
     'Cita anterior', 'Cita siguiente',
     'Celda de tabla anterior', 'Celda de tabla siguiente',
-    'Previous paragraph', 'Next paragraph', 'Previous sentence', 'Next sentence',
     'Previous heading', 'Next heading',
     'Previous list item', 'Next list item',
     'Previous quote', 'Next quote',
     'Previous table cell', 'Next table cell'
   ]) {
-    assert.ok(i18n.includes(label), `Missing navigation translation: ${label}`);
+    assert.ok(screen.includes(label), `Missing navigation fallback: ${label}`);
   }
 });

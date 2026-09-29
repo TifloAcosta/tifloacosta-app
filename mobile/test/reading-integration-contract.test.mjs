@@ -138,14 +138,13 @@ test('PDF vertical slice keeps import storage opening pages and navigation on th
   assert.match(marks, /reference:\s*getReference\?\.\(position\)/);
 });
 
-test('PDF vertical slice keeps password/no-text/invalid states separate without password persistence or OCR claims', async () => {
-  const [importer, plugin, database, client, screen, gradle] = await Promise.all([
+test('PDF vertical slice keeps password/no-text/invalid states separate and password data transient before OCR UI wiring', async () => {
+  const [importer, plugin, database, client, screen] = await Promise.all([
     read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingImportService.java'),
     read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java'),
     read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingLibraryDatabase.java'),
     read('src/core/reading-library-client.mjs'),
-    read('src/screens/reading-book.mjs'),
-    read('android/app/build.gradle')
+    read('src/screens/reading-book.mjs')
   ]);
 
   assert.match(importer, /STATUS_PASSWORD_REQUIRED/);
@@ -161,7 +160,6 @@ test('PDF vertical slice keeps password/no-text/invalid states separate without 
 
   assert.doesNotMatch(database, /password/i);
   assert.doesNotMatch(plugin, /book\.put\("password"|result\.put\("password"/i);
-  assert.doesNotMatch(gradle, /tesseract|text-recognition|mlkit.*text|ocr/i);
   assert.doesNotMatch(screen, /\bOCR\b|reconoc(?:er|imiento).*imagen|scan(?:ned)?\s+text/i);
 });
 

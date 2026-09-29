@@ -152,7 +152,7 @@ test('reading android native contract excludes the private reading library from 
   assert.doesNotMatch(manifest, /READ_EXTERNAL_STORAGE|WRITE_EXTERNAL_STORAGE|MANAGE_EXTERNAL_STORAGE|READ_MEDIA_/);
 });
 
-test('reading android native contract keeps exact audio track and millisecond positions through schema v5', async () => {
+test('reading audio positions introduced in schema v5 survive the schema v6 derived-content migration', async () => {
   const [database, bookRecord, markRecord, plugin] = await Promise.all([
     read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingLibraryDatabase.java'),
     read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingBookRecord.java'),
@@ -160,12 +160,13 @@ test('reading android native contract keeps exact audio track and millisecond po
     read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java')
   ]);
 
-  assert.match(database, /DATABASE_VERSION\s*=\s*5/);
+  assert.match(database, /DATABASE_VERSION\s*=\s*6/);
   assert.match(database, /media_track_index INTEGER NOT NULL DEFAULT 0/);
   assert.match(database, /media_position_ms INTEGER NOT NULL DEFAULT 0/);
   assert.match(database, /version\s*==\s*2[\s\S]*ADD COLUMN media_track_index[\s\S]*ADD COLUMN media_position_ms/);
   assert.match(database, /version\s*==\s*3[\s\S]*createV4Tables\(db\)[\s\S]*version\s*=\s*4/);
   assert.match(database, /version\s*==\s*4[\s\S]*createV5Tables\(db\)[\s\S]*version\s*=\s*5/);
+  assert.match(database, /version\s*==\s*5[\s\S]*createV6Tables\(db\)[\s\S]*version\s*=\s*6/);
   assert.match(bookRecord, /long\s+mediaPositionMs/);
   assert.match(markRecord, /long\s+mediaPositionMs/);
   assert.match(plugin, /call\.getLong\("mediaPositionMs"\)/);

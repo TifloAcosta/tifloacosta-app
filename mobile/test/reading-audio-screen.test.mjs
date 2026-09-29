@@ -81,12 +81,16 @@ test('audio marks store and jump to exact track plus milliseconds without starti
   assert.match(marks, /client\.addMark\(\{[\s\S]*mediaTrackIndex:[\s\S]*mediaPositionMs:/);
 });
 
-test('audio reader uses per-book speed and configured 10 30 or 60 second skip setting', async () => {
+test('audio reader lets one book override speed and the configured 10 30 or 60 second skip interval', async () => {
   const screen = await read('src/screens/reading-audio.mjs');
 
   assert.match(screen, /resolveReadingSettings/);
   assert.match(screen, /audio\.speed/);
   assert.match(screen, /audio\.skipSeconds/);
+  assert.match(screen, /skipLabel/);
+  assert.match(screen, /skipSelect/);
+  assert.match(screen, /for \(const value of \[10,\s*30,\s*60\]\)/);
+  assert.match(screen, /saveBookSetting\(['"]audio\.skipSeconds['"]/);
   assert.match(screen, /setReadingSetting/);
   assert.match(screen, /controller\.setSpeed\(/);
   assert.match(screen, /controller\.skip\(-1\)/);

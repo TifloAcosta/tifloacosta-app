@@ -26,7 +26,7 @@ test('beta acceptance wires every approved textual format into the common semant
   }
 });
 
-test('beta acceptance routes audio-only DAISY books through the shared media reader', async () => {
+test('beta acceptance discovers stored audio before routing audio-only DAISY books to the media reader', async () => {
   const [plugin, screen] = await Promise.all([
     read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java'),
     read('src/screens/reading-book.mjs')
@@ -34,8 +34,10 @@ test('beta acceptance routes audio-only DAISY books through the shared media rea
 
   assert.match(plugin, /result\.put\("daisyHasText",\s*daisy\.hasText\(\)\)/);
   assert.match(plugin, /result\.put\("daisyHasAudio",\s*daisy\.hasAudio\(\)\)/);
-  assert.match(screen, /opened\.daisyHasAudio\s*&&\s*!opened\.daisyHasText/);
-  assert.match(screen, /initializeOpenedAudioBook\(opened\)/);
+  assert.match(screen, /client\.listAudioTracks\(opened\.book\.id\)/);
+  assert.match(screen, /daisyAudioTracks\.length\s*>\s*0/);
+  assert.match(screen, /!daisyHasText/);
+  assert.match(screen, /initializeOpenedAudioBook\(opened,\s*daisyAudioTracks\)/);
 });
 
 test('beta acceptance keeps container-only ZIP out of the library book format surface', async () => {

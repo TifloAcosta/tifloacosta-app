@@ -4,12 +4,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.AtomicMoveNotSupportedException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -42,7 +42,9 @@ public final class ReadingTtsSessionStore {
         if (startBlockIndex < 0 || startUnitIndex < 0) {
             throw new IllegalArgumentException("start position must be non-negative");
         }
-        if (!Float.isFinite(rate) || rate <= 0f) throw new IllegalArgumentException("rate must be positive");
+        if (Float.isNaN(rate) || Float.isInfinite(rate) || rate <= 0f) {
+            throw new IllegalArgumentException("rate must be positive");
+        }
 
         File staging = stagingFile(safeSessionId);
         File committed = committedFile(safeSessionId);
@@ -95,19 +97,8 @@ public final class ReadingTtsSessionStore {
         File committed = committedFile(safeSessionId);
         if (!staging.isFile()) throw new IllegalStateException("TTS session is not being prepared");
         if (committed.exists()) throw new IllegalStateException("TTS session is already committed");
-
-        try {
-            Files.move(
-                    staging.toPath(),
-                    committed.toPath(),
-                    StandardCopyOption.ATOMIC_MOVE
-            );
-        } catch (AtomicMoveNotSupportedException error) {
-            Files.move(
-                    staging.toPath(),
-                    committed.toPath(),
-                    StandardCopyOption.REPLACE_EXISTING
-            );
+        if (!staging.renameTo(committed)) {
+            throw new IOException("Unable to commit TTS session atomically");
         }
     }
 
@@ -120,8 +111,8 @@ public final class ReadingTtsSessionStore {
 
     public synchronized void delete(String sessionId) throws IOException {
         String safeSessionId = requireSessionId(sessionId);
-        Files.deleteIfExists(stagingFile(safeSessionId).toPath());
-        Files.deleteIfExists(committedFile(safeSessionId).toPath());
+        deleteIfExists(stagingFile(safeSessionId));
+        deleteIfExists(committedFile(safeSessionId));
     }
 
     private Session parseSession(JSONObject json) throws IOException {
@@ -152,17 +143,32 @@ public final class ReadingTtsSessionStore {
     }
 
     private JSONObject readJson(File file) throws IOException {
-        String raw = Files.readString(file.toPath(), StandardCharsets.UTF_8);
-        try {
-            return new JSONObject(raw);
-        } catch (JSONException error) {
-            throw new IOException("Invalid TTS session JSON", error);
+        try (FileInputStream input = new FileInputStream(file);
+             ByteArrayOutputStream output = new ByteArrayOutputStream()) {
+            byte[] buffer = new byte[8192];
+            int count;
+            while ((count = input.read(buffer)) != -1) output.write(buffer, 0, count);
+            String raw = new String(output.toByteArray(), StandardCharsets.UTF_8);
+            try {
+                return new JSONObject(raw);
+            } catch (JSONException error) {
+                throw new IOException("Invalid TTS session JSON", error);
+            }
         }
     }
 
     private void writeJson(File file, JSONObject json) throws IOException {
         ensureRoot();
-        Files.writeString(file.toPath(), json.toString(), StandardCharsets.UTF_8);
+        byte[] bytes = json.toString().getBytes(StandardCharsets.UTF_8);
+        try (FileOutputStream output = new FileOutputStream(file, false)) {
+            output.write(bytes);
+            output.flush();
+            output.getFD().sync();
+        }
+    }
+
+    private static void deleteIfExists(File file) throws IOException {
+        if (file.exists() && !file.delete()) throw new IOException("Unable to delete TTS session file");
     }
 
     private File stagingFile(String sessionId) {

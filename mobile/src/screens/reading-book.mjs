@@ -648,9 +648,10 @@ export function renderReadingBook({
     controls.hidden = false;
     hideEndOfDocument();
 
+    const structuredFormat = ['epub', 'docx', 'daisy2.02', 'daisy3'].includes(activeBook.format);
     documentModel = activeBook.format === 'pdf'
       ? parsePdfDocument(opened.pdf)
-      : activeBook.format === 'epub'
+      : structuredFormat
         ? parseStructuredDocument(parseStructuredPayload(opened.content), {
             title: activeBook.title,
             language: activeBook.language

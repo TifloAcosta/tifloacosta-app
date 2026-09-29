@@ -68,11 +68,53 @@ export function createReadingBackupPanel({ root, returnFocus, client = createRea
 
   planSection.append(planHeading, planSummary, conflictsHost, applyButton, cancelRestore);
 
+  const maintenanceSection = document.createElement('section');
+  maintenanceSection.className = 'reading-backup-maintenance';
+  const maintenanceHeading = document.createElement('h3');
+  maintenanceHeading.textContent = bilingual('Mantenimiento', 'Maintenance');
+
+  const checkButton = document.createElement('button');
+  checkButton.type = 'button';
+  checkButton.textContent = bilingual('Comprobar biblioteca', 'Check library');
+
+  const maintenanceStatus = document.createElement('p');
+  maintenanceStatus.setAttribute('role', 'status');
+  maintenanceStatus.setAttribute('aria-live', 'polite');
+  maintenanceStatus.setAttribute('aria-atomic', 'true');
+
+  const deleteField = document.createElement('div');
+  deleteField.className = 'reading-delete-all';
+  const confirmDeleteAll = document.createElement('input');
+  confirmDeleteAll.type = 'checkbox';
+  confirmDeleteAll.id = 'reading-confirm-delete-all';
+  const confirmDeleteLabel = document.createElement('label');
+  confirmDeleteLabel.htmlFor = confirmDeleteAll.id;
+  confirmDeleteLabel.textContent = bilingual(
+    'Entiendo que se eliminarán todos los documentos, marcas, posiciones y ajustes de lectura',
+    'I understand that all reading documents, marks, positions and settings will be deleted'
+  );
+
+  const deleteAllButton = document.createElement('button');
+  deleteAllButton.type = 'button';
+  deleteAllButton.textContent = bilingual('Eliminar todos los datos de lectura', 'Delete all reading data');
+  deleteAllButton.disabled = true;
+  deleteField.append(confirmDeleteAll, confirmDeleteLabel, deleteAllButton);
+  maintenanceSection.append(maintenanceHeading, checkButton, maintenanceStatus, deleteField);
+
   const returnButton = document.createElement('button');
   returnButton.type = 'button';
   returnButton.textContent = bilingual('Volver a la lectura', 'Return to reading');
 
-  section.append(heading, explanation, exportButton, restoreButton, status, planSection, returnButton);
+  section.append(
+    heading,
+    explanation,
+    exportButton,
+    restoreButton,
+    status,
+    planSection,
+    maintenanceSection,
+    returnButton
+  );
   root.append(section);
 
   let restorePlan = null;
@@ -210,7 +252,10 @@ export function createReadingBackupPanel({ root, returnFocus, client = createRea
       clearPlan();
       status.textContent = restored
         ? bilingual('Restauración completada.', 'Restore completed.')
-        : bilingual('No se pudo completar la restauración. Selecciona de nuevo la copia para reintentarlo.', 'The restore could not be completed. Select the backup again to retry.');
+        : bilingual(
+            'No se pudo completar la restauración. Selecciona de nuevo la copia para reintentarlo.',
+            'The restore could not be completed. Select the backup again to retry.'
+          );
     })();
   });
 
@@ -219,6 +264,66 @@ export function createReadingBackupPanel({ root, returnFocus, client = createRea
       await cancelPendingRestore();
       status.textContent = bilingual('Restauración cancelada.', 'Restore cancelled.');
       restoreButton.focus();
+    })();
+  });
+
+  checkButton.addEventListener('click', () => {
+    void (async () => {
+      checkButton.disabled = true;
+      maintenanceStatus.textContent = bilingual('Comprobando biblioteca…', 'Checking library…');
+      const result = await client.checkReadingLibrary();
+      checkButton.disabled = false;
+      if (destroyed) return;
+      if (result.healthy) {
+        maintenanceStatus.textContent = bilingual(
+          `Biblioteca comprobada: ${result.bookCount} documentos y ningún archivo perdido.`,
+          `Library checked: ${result.bookCount} documents and no missing files.`
+        );
+      } else if (result.missingItems.length) {
+        maintenanceStatus.textContent = bilingual(
+          `Se han encontrado ${result.missingItems.length} documentos con archivos no disponibles.`,
+          `${result.missingItems.length} documents have missing files.`
+        );
+      } else {
+        maintenanceStatus.textContent = bilingual(
+          'No se pudo completar la comprobación de la biblioteca.',
+          'The library check could not be completed.'
+        );
+      }
+    })();
+  });
+
+  confirmDeleteAll.addEventListener('change', () => {
+    deleteAllButton.disabled = !confirmDeleteAll.checked;
+  });
+
+  deleteAllButton.addEventListener('click', () => {
+    void (async () => {
+      if (!confirmDeleteAll.checked) {
+        deleteAllButton.disabled = true;
+        return;
+      }
+      deleteAllButton.disabled = true;
+      checkButton.disabled = true;
+      maintenanceStatus.textContent = bilingual(
+        'Eliminando todos los datos de lectura…',
+        'Deleting all reading data…'
+      );
+      await cancelPendingRestore();
+      const deleted = await client.deleteAllReadingData();
+      checkButton.disabled = false;
+      if (destroyed) return;
+      confirmDeleteAll.checked = false;
+      deleteAllButton.disabled = true;
+      maintenanceStatus.textContent = deleted
+        ? bilingual(
+            'Se han eliminado todos los datos de lectura. Vuelve a Leer con TifloAcosta para continuar.',
+            'All reading data has been deleted. Return to Read with TifloAcosta to continue.'
+          )
+        : bilingual(
+            'No se pudieron eliminar todos los datos de lectura.',
+            'All reading data could not be deleted.'
+          );
     })();
   });
 
@@ -239,6 +344,8 @@ export function createReadingBackupPanel({ root, returnFocus, client = createRea
     lastInvoker = document.activeElement && typeof document.activeElement.focus === 'function'
       ? document.activeElement
       : null;
+    confirmDeleteAll.checked = false;
+    deleteAllButton.disabled = true;
     section.hidden = false;
     queueMicrotask(() => exportButton.focus());
   }

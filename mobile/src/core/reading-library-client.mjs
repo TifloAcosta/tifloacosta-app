@@ -317,6 +317,16 @@ export function createReadingLibraryClient(plugin = {}) {
       if (book.format === 'audio') {
         return { book, audioTracks: await listAudioTracks(book.id) };
       }
+      if (['daisy2.02', 'daisy3'].includes(book.format)) {
+        return {
+          book,
+          content: String(result.content ?? ''),
+          daisyHasText: booleanValue(result.daisyHasText),
+          daisyHasAudio: booleanValue(result.daisyHasAudio),
+          daisySynchronized: booleanValue(result.daisySynchronized),
+          audioTracks: result.daisyHasAudio ? await listAudioTracks(book.id) : []
+        };
+      }
       return { book, content: String(result.content ?? '') };
     } catch { return null; }
   }

@@ -22,7 +22,7 @@ test('reading android native contract registers the reading and tts Capacitor br
   assert.match(plugin, /notifyListeners\("documentsReceived"/);
 
   assert.match(ttsPlugin, /@CapacitorPlugin\(name\s*=\s*"TifloReadingTts"\)/);
-  for (const method of ['listTtsVoices', 'startTts', 'stopTts']) {
+  for (const method of ['listTtsVoices', 'openTtsVoiceInstaller', 'startTts', 'stopTts']) {
     assert.match(ttsPlugin, new RegExp(`public\\s+void\\s+${method}\\s*\\(PluginCall\\s+call\\)`), `Missing ${method}`);
   }
   assert.match(ttsPlugin, /notifyListeners\(event\.getName\(\)/);
@@ -48,6 +48,25 @@ test('reading android tts contract has session-safe callbacks, android tts, audi
   assert.match(controller, /2\.0f/);
   assert.match(controller, /ttsInterrupted/);
   assert.doesNotMatch(controller, /onAudioFocusChange[\s\S]{0,800}speak\s*\(/, 'Audio-focus gain must never auto-resume speech');
+});
+
+test('reading android tts voice installer resolves installer first then engine and otherwise returns none', async () => {
+  const [controller, plugin] = await Promise.all([
+    read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingTtsController.java'),
+    read('android/app/src/main/java/com/tifloacosta/app/TifloReadingTtsPlugin.java')
+  ]);
+
+  assert.match(controller, /ACTION_INSTALL_TTS_DATA/);
+  assert.match(controller, /getDefaultEngine\s*\(/);
+  assert.match(controller, /resolveActivity\s*\(/);
+  assert.match(controller, /getLaunchIntentForPackage\s*\(/);
+  assert.match(controller, /destination/);
+  assert.match(controller, /installer/);
+  assert.match(controller, /engine/);
+  assert.match(controller, /none/);
+  assert.match(plugin, /openTtsVoiceInstaller/);
+  assert.match(plugin, /result\.put\("opened"/);
+  assert.match(plugin, /result\.put\("destination"/);
 });
 
 test('reading android native contract uses the document picker for multiple TXT HTML and PDF files', async () => {

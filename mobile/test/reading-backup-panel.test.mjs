@@ -34,6 +34,22 @@ test('reading backup panel is an accessible modal with explicit export and resto
   }
 });
 
+test('reading backup panel exposes safe library maintenance with explicit destructive confirmation', async () => {
+  const panel = await read('src/screens/reading-backup-panel.mjs');
+
+  assert.match(panel, /checkReadingLibrary\(/);
+  assert.match(panel, /deleteAllReadingData\(/);
+  assert.match(panel, /confirmDeleteAll/);
+  assert.match(panel, /checked/);
+  for (const label of [
+    'Comprobar biblioteca',
+    'Eliminar todos los datos de lectura',
+    'Entiendo que se eliminarán todos los documentos, marcas, posiciones y ajustes de lectura'
+  ]) {
+    assert.ok(panel.includes(label), `Missing maintenance label: ${label}`);
+  }
+});
+
 test('reading settings exposes the backup panel without merging or publishing anything', async () => {
   const settings = await read('src/screens/reading-settings.mjs');
   assert.match(settings, /createReadingBackupPanel/);

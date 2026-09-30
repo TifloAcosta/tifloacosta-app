@@ -298,6 +298,7 @@ export function createReadingTranslationPanel({
     if (!job) await loadJob();
     running = true;
     cancelRequested = false;
+    cancelButton.disabled = false;
     translateButton.disabled = true;
     resumeButton.hidden = true;
     cancelButton.hidden = false;
@@ -322,6 +323,7 @@ export function createReadingTranslationPanel({
       running = false;
       if (!destroyed) {
         cancelButton.hidden = true;
+        cancelButton.disabled = false;
         const state = job?.getState?.();
         resumeButton.hidden = !state || state.status === 'complete' || state.completedUnits === 0;
       }

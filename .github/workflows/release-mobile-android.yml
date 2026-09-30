@@ -30,6 +30,36 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Resolve Android release mode
+        shell: bash
+        env:
+          MANUAL_PUBLISH: ${{ github.event_name == 'workflow_dispatch' && inputs.publish }}
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('node:fs');
+          const request = require('./mobile/release/request.json');
+          const marker = fs.readFileSync('./mobile/release/prepare.once', 'utf8').trim();
+          let mode = 'prepare';
+
+          if (process.env.MANUAL_PUBLISH === 'true') {
+            mode = 'publish';
+          } else if (marker.startsWith('publish ')) {
+            const expected = `publish ${request.versionName} ${request.track}`;
+            if (!marker.startsWith(`${expected} - authorized `)) {
+              throw new Error('Release marker does not match the requested version and track');
+            }
+            mode = 'publish';
+          } else if (marker.startsWith('prepare ')) {
+            mode = 'prepare';
+          } else {
+            throw new Error('Release marker must start with prepare or publish');
+          }
+
+          fs.appendFileSync(process.env.GITHUB_ENV, `TIFLO_RELEASE_MODE=${mode}\n`);
+          console.log(`Android release mode: ${mode}`);
+          NODE
+
       - name: Setup Node
         uses: actions/setup-node@v5
         with:
@@ -74,7 +104,7 @@ jobs:
             echo "Android signing credentials are incomplete."
             exit 1
           fi
-          if [ "${{ github.event_name == 'workflow_dispatch' && inputs.publish }}" = "true" ]; then
+          if [ "${TIFLO_RELEASE_MODE:-prepare}" = "publish" ]; then
             if [ -z "${GOOGLE_PLAY_SERVICE_ACCOUNT_JSON:-}" ]; then
               echo "GOOGLE_PLAY_SERVICE_ACCOUNT_JSON is required for publishing."
               exit 1
@@ -122,12 +152,12 @@ jobs:
           } >> "$GITHUB_ENV"
 
       - name: Prepare Android release without publishing
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.publish }}
+        if: ${{ env.TIFLO_RELEASE_MODE != 'publish' }}
         working-directory: mobile
         run: node scripts/release-android.mjs
 
       - name: Prepare and publish Android release
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.publish }}
+        if: ${{ env.TIFLO_RELEASE_MODE == 'publish' }}
         working-directory: mobile
         run: node scripts/release-android.mjs --publish
 

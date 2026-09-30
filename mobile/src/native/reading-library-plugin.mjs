@@ -4,6 +4,7 @@ const NativeTifloReading = registerPlugin('TifloReading');
 const NativeTifloReadingLibrary = registerPlugin('TifloReadingLibrary');
 const NativeTifloReadingTts = registerPlugin('TifloReadingTts');
 const NativeTifloReadingOcr = registerPlugin('TifloReadingOcr');
+const NativeTifloReadingDerived = registerPlugin('TifloReadingDerived');
 const NativeTifloReadingAudio = registerPlugin('TifloReadingAudio');
 const NativeTifloReadingAudioGroup = registerPlugin('TifloReadingAudioGroup');
 
@@ -57,7 +58,8 @@ export function createReadingLibraryPlugin(
   audioPlugin = NativeTifloReadingAudio,
   audioGroupPlugin = null,
   libraryPlugin = null,
-  ocrPlugin = null
+  ocrPlugin = null,
+  derivedPlugin = null
 ) {
   const groupPlugin = audioGroupPlugin ?? (
     plugin === NativeTifloReading ? NativeTifloReadingAudioGroup : plugin
@@ -67,6 +69,9 @@ export function createReadingLibraryPlugin(
   );
   const recognitionPlugin = ocrPlugin ?? (
     plugin === NativeTifloReading ? NativeTifloReadingOcr : plugin
+  );
+  const derivedContentPlugin = derivedPlugin ?? (
+    plugin === NativeTifloReading ? NativeTifloReadingDerived : plugin
   );
   let activeBookId = '';
 
@@ -157,6 +162,22 @@ export function createReadingLibraryPlugin(
       blocks: [],
       status: 'error'
     });
+  }
+
+  async function saveDerivedContent(options = {}) {
+    return safeCall(derivedContentPlugin, 'saveDerivedContent', options, { saved: false });
+  }
+
+  async function getDerivedContent(options = {}) {
+    return safeCall(derivedContentPlugin, 'getDerivedContent', options, null);
+  }
+
+  async function listDerivedContent(options = {}) {
+    return safeCall(derivedContentPlugin, 'listDerivedContent', options, { items: [] });
+  }
+
+  async function deleteDerivedContent(options = {}) {
+    return safeCall(derivedContentPlugin, 'deleteDerivedContent', options, { deleted: false });
   }
 
   async function saveProgress(progress = {}) {
@@ -289,6 +310,10 @@ export function createReadingLibraryPlugin(
     openBook,
     getActiveBookId,
     recognizePdfPage,
+    saveDerivedContent,
+    getDerivedContent,
+    listDerivedContent,
+    deleteDerivedContent,
     saveProgress,
     deleteBook,
     getLatestInProgress,

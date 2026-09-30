@@ -13,12 +13,14 @@ test('mobile design system reserves safe areas plus breathing room', async () =>
 
 test('mobile design system exposes brand, spacing and reusable layout classes', async () => {
   const css = await read('src/styles.css');
-  for (const token of ['--brand:', '--brand-deep:', '--background:', '--surface:', '--text:', '--border:', '--focus:', '--space-1:', '--space-6:']) {
+  for (const token of ['--brand:', '--brand-deep:', '--brand-surface:', '--brand-on-surface:', '--background:', '--surface:', '--text:', '--border:', '--focus:', '--space-1:', '--space-6:']) {
     assert.match(css, new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
   }
-  for (const selector of ['.app-brand', '.screen-header', '.action-group', '.content-card', '.section-stack']) {
+  for (const selector of ['.app-brand-header', '.app-brand-mark', '.app-brand', '.screen-header', '.action-group', '.content-card', '.section-stack']) {
     assert.match(css, new RegExp(selector.replace('.', '\\.')));
   }
+  assert.match(css, /\.app-brand-header[\s\S]*flex-wrap\s*:\s*wrap/);
+  assert.match(css, /\.app-brand-mark[\s\S]*max-inline-size\s*:\s*100%/);
   assert.match(css, /\.action-group[\s\S]*gap\s*:/);
   assert.match(css, /\.action-group[\s\S]*flex-wrap\s*:\s*wrap/);
 });

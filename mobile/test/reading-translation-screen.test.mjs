@@ -72,7 +72,8 @@ test('translated view selects a compatible temporary voice without saving it', (
   const controls = read('src/screens/reading-translation-controls.mjs');
 
   assert.match(controls, /matchingVoice/);
-  assert.match(controls, /languageBase\(voice\?\.locale\)\s*===\s*targetLanguage/);
+  assert.match(controls, /const target = languageBase\(targetLanguage\)/);
+  assert.match(controls, /languageBase\(voice\?\.locale\)\s*===\s*target/);
   assert.match(controls, /speech\?\.setVoice\?\.\(targetVoiceId\)/);
   assert.match(controls, /speech\?\.setVoice\?\.\(originalVoiceId\)/);
   assert.doesNotMatch(controls, /setReadingSetting/);

@@ -75,5 +75,7 @@ jobs:
           mobile/test/reading-speech.test.mjs
           mobile/test/reading-tts-media-session-contract.test.mjs
           mobile/test/reading-voice-catalog.test.mjs
+      - name: Run mobile application tests serially
+        run: node --test --test-concurrency=1 mobile/test/*.test.mjs
       - name: Run mobile application tests
         run: node --test mobile/test/*.test.mjs

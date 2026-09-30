@@ -47,8 +47,9 @@ jobs:
       - name: Run Leer con TifloAcosta beta acceptance gate
         working-directory: mobile
         run: npm run test:reading-beta
-      - name: Run mobile foundation tests
-        run: |
-          node --test test/actualidad-core.test.mjs
-          node --test test/mobile-content.test.mjs test/mobile-content-retention.test.mjs
-          node --test mobile/test/*.test.mjs
+      - name: Run actualidad core tests
+        run: node --test test/actualidad-core.test.mjs
+      - name: Run mobile content tests
+        run: node --test test/mobile-content.test.mjs test/mobile-content-retention.test.mjs
+      - name: Run mobile application tests
+        run: node --test mobile/test/*.test.mjs

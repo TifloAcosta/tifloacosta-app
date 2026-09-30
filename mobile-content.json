@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-30T12:38:49.821Z",
+  "generatedAt": "2026-09-30T18:08:36.436Z",
   "resources": [
     {
       "kind": "resource",
@@ -5370,22 +5370,6 @@
         "apple",
         "apps-accesibles",
         "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "applevis-apps-bf0a7ae49816b1e9:en",
-      "sourceId": "applevis-apps-bf0a7ae49816b1e9",
-      "lang": "en",
-      "title": "Pegfall: Bounce Roguelite",
-      "summary": "Pegfall is a one-handed pegboard physics roguelite where every shot draws an orb from your deck. Aim, bounce through a living board, build ruthless combos, and descend into the Maw. NEW: PLAY WITH VOICEOVER Aim by named directions, fire with a double tap or Magic Tap, hear every volley, and inspect the board whenever you need to. Peg types use shapes as well as colour, so every board reads clearly. ▸ FAIR — SKILL, NOT LUCK A dotted trajectory preview shows where your shot lands. Every bounce is yours. ▸ A CAMPAIGN THAT ENDS — 10 CHAPTERS, 200 FLOORS Face ten bosses across distinct boards, palettes and rules. Each chapter starts you bare; every decision rebuilds your run. ▸ BUILDS THAT STACK 20 orbs, 23 relics, 14 upgrade cards and three characters create runs that go in completely different directions. Take a curse when the floor asks for one. ▸ THE BOARD FIGHTS BACK Deeper chapters erode spent pegs, wire circuits through armour, and reshape the board as you play. ▸ ENDLESS, DAILY AND WEEKLY Dive without a floor beneath you, take the same daily board as everyone else, or race one shared weekly board with a single attempt. ▸ GET STRONGER AS YOU PLAY Earn permanent upgrades, unlock ascension tiers, achievements, themes, ball skins, faces and note banks. Never pay to win. ▸ MADE TO BE PLAYED BY MORE PEOPLE VoiceOver support, clear combat feedback, accessible peg shapes, Reduce Motion support, and real 44pt touch targets. Special thanks to accessibility tester Matheus Rheine for helping shape this update. ▸ MOBILE-NATIVE True portrait, one-handed, free to start. No energy timer and no premium wall. Honest monetization: optional rewarded continues, an ad-free purchase, cosmetics and essence pouches. Everything in a pouch is also earnable by playing.",
-      "body": "Pegfall is a one-handed pegboard physics roguelite where every shot draws an orb from your deck. Aim, bounce through a living board, build ruthless combos, and descend into the Maw. NEW: PLAY WITH VOICEOVER Aim by named directions, fire with a double tap or Magic Tap, hear every volley, and inspect the board whenever you need to. Peg types use shapes as well as colour, so every board reads clearly. ▸ FAIR — SKILL, NOT LUCK A dotted trajectory preview shows where your shot lands. Every bounce is yours. ▸ A CAMPAIGN THAT ENDS — 10 CHAPTERS, 200 FLOORS Face ten bosses across distinct boards, palettes and rules. Each chapter starts you bare; every decision rebuilds your run. ▸ BUILDS THAT STACK 20 orbs, 23 relics, 14 upgrade cards and three characters create runs that go in completely different directions. Take a curse when the floor asks for one. ▸ THE BOARD FIGHTS BACK Deeper chapters erode spent pegs, wire circuits through armour, and reshape the board as you play. ▸ ENDLESS, DAILY AND WEEKLY Dive without a floor beneath you, take the same daily board as everyone else, or race one shared weekly board with a single attempt. ▸ GET STRONGER AS YOU PLAY Earn permanent upgrades, unlock ascension tiers, achievements, themes, ball skins, faces and note banks. Never pay to win. ▸ MADE TO BE PLAYED BY MORE PEOPLE VoiceOver support, clear combat feedback, accessible peg shapes, Reduce Motion support, and real 44pt touch targets. Special thanks to accessibility tester Matheus Rheine for helping shape this update. ▸ MOBILE-NATIVE True portrait, one-handed, free to start. No energy timer and no premium wall. Honest monetization: optional rewarded continues, an ad-free purchase, cosmetics and essence pouches. Everything in a pouch is also earnable by playing.",
-      "sourceName": "AppleVis Apps",
-      "originalUrl": "https://www.applevis.com/apps/ios/games/pegfall-bounce-roguelite",
-      "publishedAt": "2026-09-20T16:36:21.000Z",
-      "categories": [
-        "apple",
-        "apps-accesibles"
       ]
     }
   ]

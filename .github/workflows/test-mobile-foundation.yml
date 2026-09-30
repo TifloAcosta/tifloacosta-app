@@ -51,71 +51,11 @@ jobs:
         run: node --test test/actualidad-core.test.mjs
       - name: Run mobile content tests
         run: node --test test/mobile-content.test.mjs test/mobile-content-retention.test.mjs
-      - name: Run changed general mobile tests
-        run: >-
-          node --test
-          mobile/test/home.test.mjs
-          mobile/test/privacy-screen.test.mjs
-          mobile/test/shared-screen-header-layout.test.mjs
-          mobile/test/visual-action-grouping.test.mjs
-          mobile/test/visual-layout-contract.test.mjs
-      - name: Run changed TifloLector tests
-        run: >-
-          node --test
-          mobile/test/reading-android-native-contract.test.mjs
-          mobile/test/reading-background-speech-controller.test.mjs
-          mobile/test/reading-background-tts-contract.test.mjs
-          mobile/test/reading-background-tts-js-bridge.test.mjs
-          mobile/test/reading-background-tts-plugin-contract.test.mjs
-          mobile/test/reading-background-tts-service-contract.test.mjs
-          mobile/test/reading-derived-contract.test.mjs
-          mobile/test/reading-integration-contract.test.mjs
-          mobile/test/reading-native-active-book-context.test.mjs
-          mobile/test/reading-settings-screen.test.mjs
-          mobile/test/reading-speech.test.mjs
-          mobile/test/reading-tts-media-session-contract.test.mjs
-          mobile/test/reading-voice-catalog.test.mjs
-      - name: Diagnostic quarters 1 plus 2
-        continue-on-error: true
-        shell: bash
-        run: |
-          mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
-          n=${#tests[@]}; q=$(( (n + 3) / 4 ))
-          node --test --test-concurrency=1 "${tests[@]:0:2*q}"
-      - name: Diagnostic quarters 3 plus 4
-        continue-on-error: true
-        shell: bash
-        run: |
-          mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
-          n=${#tests[@]}; q=$(( (n + 3) / 4 ))
-          node --test --test-concurrency=1 "${tests[@]:2*q}"
-      - name: Diagnostic quarters 1 plus 3
-        continue-on-error: true
-        shell: bash
-        run: |
-          mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
-          n=${#tests[@]}; q=$(( (n + 3) / 4 ))
-          node --test --test-concurrency=1 "${tests[@]:0:q}" "${tests[@]:2*q:q}"
-      - name: Diagnostic quarters 1 plus 4
-        continue-on-error: true
-        shell: bash
-        run: |
-          mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
-          n=${#tests[@]}; q=$(( (n + 3) / 4 ))
-          node --test --test-concurrency=1 "${tests[@]:0:q}" "${tests[@]:3*q:q}"
-      - name: Diagnostic quarters 2 plus 3
-        continue-on-error: true
-        shell: bash
-        run: |
-          mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
-          n=${#tests[@]}; q=$(( (n + 3) / 4 ))
-          node --test --test-concurrency=1 "${tests[@]:q:q}" "${tests[@]:2*q:q}"
-      - name: Diagnostic quarters 2 plus 4
-        continue-on-error: true
-        shell: bash
-        run: |
-          mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
-          n=${#tests[@]}; q=$(( (n + 3) / 4 ))
-          node --test --test-concurrency=1 "${tests[@]:q:q}" "${tests[@]:3*q:q}"
-      - name: Run mobile application tests
+      - name: Restore tracked files before full mobile suite
+        run: git restore .
+      - name: Run mobile application tests serially
         run: node --test --test-concurrency=1 mobile/test/*.test.mjs
+      - name: Restore tracked files before concurrent mobile suite
+        run: git restore .
+      - name: Run mobile application tests
+        run: node --test mobile/test/*.test.mjs

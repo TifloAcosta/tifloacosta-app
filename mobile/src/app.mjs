@@ -41,6 +41,7 @@ import { renderVideos } from './screens/videos.mjs';
 import { renderBook } from './screens/book.mjs';
 import { renderPodcast } from './screens/podcast.mjs';
 import { renderContact } from './screens/contact.mjs';
+import { renderPrivacy } from './screens/privacy.mjs';
 import { renderSettings } from './screens/settings.mjs';
 import { renderShare } from './screens/share.mjs';
 import { renderReader } from './screens/reader.mjs';
@@ -579,6 +580,7 @@ function render(route) {
     case 'book': renderBook(context); break;
     case 'podcast': renderPodcast(context); break;
     case 'contact': renderContact(context); break;
+    case 'privacy': renderPrivacy(context); break;
     case 'settings': renderSettings(context); break;
     default: renderHome(context);
   }

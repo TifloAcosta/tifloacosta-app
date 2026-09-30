@@ -22,7 +22,7 @@ test('reading android native contract registers the reading and tts Capacitor br
   assert.match(plugin, /notifyListeners\("documentsReceived"/);
 
   assert.match(ttsPlugin, /@CapacitorPlugin\(name\s*=\s*"TifloReadingTts"\)/);
-  for (const method of ['listTtsVoices', 'startTts', 'stopTts']) {
+  for (const method of ['listTtsVoices', 'openTtsVoiceInstaller', 'startTts', 'stopTts']) {
     assert.match(ttsPlugin, new RegExp(`public\\s+void\\s+${method}\\s*\\(PluginCall\\s+call\\)`), `Missing ${method}`);
   }
   assert.match(ttsPlugin, /notifyListeners\(event\.getName\(\)/);
@@ -48,6 +48,25 @@ test('reading android tts contract has session-safe callbacks, android tts, audi
   assert.match(controller, /2\.0f/);
   assert.match(controller, /ttsInterrupted/);
   assert.doesNotMatch(controller, /onAudioFocusChange[\s\S]{0,800}speak\s*\(/, 'Audio-focus gain must never auto-resume speech');
+});
+
+test('reading android tts voice installer resolves installer first then engine and otherwise returns none', async () => {
+  const [controller, plugin] = await Promise.all([
+    read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingTtsController.java'),
+    read('android/app/src/main/java/com/tifloacosta/app/TifloReadingTtsPlugin.java')
+  ]);
+
+  assert.match(controller, /ACTION_INSTALL_TTS_DATA/);
+  assert.match(controller, /getDefaultEngine\s*\(/);
+  assert.match(controller, /resolveActivity\s*\(/);
+  assert.match(controller, /getLaunchIntentForPackage\s*\(/);
+  assert.match(controller, /destination/);
+  assert.match(controller, /installer/);
+  assert.match(controller, /engine/);
+  assert.match(controller, /none/);
+  assert.match(plugin, /openTtsVoiceInstaller/);
+  assert.match(plugin, /result\.put\("opened"/);
+  assert.match(plugin, /result\.put\("destination"/);
 });
 
 test('reading android native contract uses the document picker for multiple TXT HTML and PDF files', async () => {
@@ -133,7 +152,7 @@ test('reading android native contract excludes the private reading library from 
   assert.doesNotMatch(manifest, /READ_EXTERNAL_STORAGE|WRITE_EXTERNAL_STORAGE|MANAGE_EXTERNAL_STORAGE|READ_MEDIA_/);
 });
 
-test('reading android native contract keeps exact audio track and millisecond positions through schema v5', async () => {
+test('reading audio positions introduced in schema v5 survive the schema v6 derived-content migration', async () => {
   const [database, bookRecord, markRecord, plugin] = await Promise.all([
     read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingLibraryDatabase.java'),
     read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingBookRecord.java'),
@@ -141,12 +160,13 @@ test('reading android native contract keeps exact audio track and millisecond po
     read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java')
   ]);
 
-  assert.match(database, /DATABASE_VERSION\s*=\s*5/);
+  assert.match(database, /DATABASE_VERSION\s*=\s*6/);
   assert.match(database, /media_track_index INTEGER NOT NULL DEFAULT 0/);
   assert.match(database, /media_position_ms INTEGER NOT NULL DEFAULT 0/);
   assert.match(database, /version\s*==\s*2[\s\S]*ADD COLUMN media_track_index[\s\S]*ADD COLUMN media_position_ms/);
   assert.match(database, /version\s*==\s*3[\s\S]*createV4Tables\(db\)[\s\S]*version\s*=\s*4/);
   assert.match(database, /version\s*==\s*4[\s\S]*createV5Tables\(db\)[\s\S]*version\s*=\s*5/);
+  assert.match(database, /version\s*==\s*5[\s\S]*createV6Tables\(db\)[\s\S]*version\s*=\s*6/);
   assert.match(bookRecord, /long\s+mediaPositionMs/);
   assert.match(markRecord, /long\s+mediaPositionMs/);
   assert.match(plugin, /call\.getLong\("mediaPositionMs"\)/);

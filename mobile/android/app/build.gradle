@@ -67,6 +67,13 @@ dependencies {
     implementation 'androidx.media3:media3-session:1.11.1'
     implementation 'com.google.android.play:app-update:2.1.0'
     implementation 'com.tom-roush:pdfbox-android:2.0.27.0'
+    implementation 'com.google.android.gms:play-services-mlkit-text-recognition:19.0.1'
+    implementation 'com.google.android.gms:play-services-mlkit-text-recognition-chinese:16.0.1'
+    implementation 'com.google.android.gms:play-services-mlkit-text-recognition-devanagari:16.0.1'
+    implementation 'com.google.android.gms:play-services-mlkit-text-recognition-japanese:16.0.1'
+    implementation 'com.google.android.gms:play-services-mlkit-text-recognition-korean:16.0.1'
+    implementation 'com.google.android.gms:play-services-mlkit-language-id:17.0.0'
+    implementation 'com.google.mlkit:translate:17.0.3'
     implementation project(':capacitor-android')
     testImplementation "junit:junit:$junitVersion"
     testImplementation 'org.json:json:20240303'

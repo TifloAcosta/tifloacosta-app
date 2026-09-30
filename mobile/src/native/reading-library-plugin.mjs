@@ -3,6 +3,8 @@ import { registerPlugin } from '@capacitor/core';
 const NativeTifloReading = registerPlugin('TifloReading');
 const NativeTifloReadingLibrary = registerPlugin('TifloReadingLibrary');
 const NativeTifloReadingTts = registerPlugin('TifloReadingTts');
+const NativeTifloReadingOcr = registerPlugin('TifloReadingOcr');
+const NativeTifloReadingDerived = registerPlugin('TifloReadingDerived');
 const NativeTifloReadingAudio = registerPlugin('TifloReadingAudio');
 const NativeTifloReadingAudioGroup = registerPlugin('TifloReadingAudioGroup');
 
@@ -55,7 +57,9 @@ export function createReadingLibraryPlugin(
   ttsPlugin = NativeTifloReadingTts,
   audioPlugin = NativeTifloReadingAudio,
   audioGroupPlugin = null,
-  libraryPlugin = null
+  libraryPlugin = null,
+  ocrPlugin = null,
+  derivedPlugin = null
 ) {
   const groupPlugin = audioGroupPlugin ?? (
     plugin === NativeTifloReading ? NativeTifloReadingAudioGroup : plugin
@@ -63,6 +67,13 @@ export function createReadingLibraryPlugin(
   const managementPlugin = libraryPlugin ?? (
     plugin === NativeTifloReading ? NativeTifloReadingLibrary : plugin
   );
+  const recognitionPlugin = ocrPlugin ?? (
+    plugin === NativeTifloReading ? NativeTifloReadingOcr : plugin
+  );
+  const derivedContentPlugin = derivedPlugin ?? (
+    plugin === NativeTifloReading ? NativeTifloReadingDerived : plugin
+  );
+  let activeBookId = '';
 
   async function pickDocuments() {
     return safeCall(groupPlugin, 'pickDocuments', undefined, emptyBatch(true));
@@ -122,10 +133,51 @@ export function createReadingLibraryPlugin(
   }
 
   async function openBook(id, options = {}) {
-    return safeCall(plugin, 'openBook', {
-      id: String(id ?? ''),
+    const requestedId = String(id ?? '').trim();
+    if (!requestedId) return null;
+    const result = await safeCall(plugin, 'openBook', {
+      id: requestedId,
       password: String(options?.password ?? '')
     }, null);
+    const openedId = String(result?.book?.id ?? '').trim();
+    if (openedId) activeBookId = openedId;
+    return result;
+  }
+
+  function getActiveBookId() {
+    return activeBookId;
+  }
+
+  async function recognizePdfPage(options = {}) {
+    const pageIndex = Math.max(0, Math.trunc(Number(options?.pageIndex) || 0));
+    const request = {
+      bookId: String(options?.bookId ?? activeBookId ?? '').trim(),
+      password: String(options?.password ?? ''),
+      pageIndex,
+      script: String(options?.script ?? 'latin').trim().toLowerCase() || 'latin'
+    };
+    return safeCall(recognitionPlugin, 'recognizePdfPage', request, {
+      pageIndex,
+      text: '',
+      blocks: [],
+      status: 'error'
+    });
+  }
+
+  async function saveDerivedContent(options = {}) {
+    return safeCall(derivedContentPlugin, 'saveDerivedContent', options, { saved: false });
+  }
+
+  async function getDerivedContent(options = {}) {
+    return safeCall(derivedContentPlugin, 'getDerivedContent', options, null);
+  }
+
+  async function listDerivedContent(options = {}) {
+    return safeCall(derivedContentPlugin, 'listDerivedContent', options, { items: [] });
+  }
+
+  async function deleteDerivedContent(options = {}) {
+    return safeCall(derivedContentPlugin, 'deleteDerivedContent', options, { deleted: false });
   }
 
   async function saveProgress(progress = {}) {
@@ -142,6 +194,10 @@ export function createReadingLibraryPlugin(
 
   async function listTtsVoices() {
     return safeCall(ttsPlugin, 'listTtsVoices', undefined, { voices: [] });
+  }
+
+  async function openTtsVoiceInstaller() {
+    return safeCall(ttsPlugin, 'openTtsVoiceInstaller', undefined, { opened: false, destination: 'none' });
   }
 
   async function startTts(options = {}) {
@@ -252,10 +308,17 @@ export function createReadingLibraryPlugin(
     moveQueueItem,
     updateBookMetadata,
     openBook,
+    getActiveBookId,
+    recognizePdfPage,
+    saveDerivedContent,
+    getDerivedContent,
+    listDerivedContent,
+    deleteDerivedContent,
     saveProgress,
     deleteBook,
     getLatestInProgress,
     listTtsVoices,
+    openTtsVoiceInstaller,
     startTts,
     stopTts,
     prepareAudio,

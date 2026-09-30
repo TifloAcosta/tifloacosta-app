@@ -2,6 +2,9 @@ const BOOK_STATES = new Set(['not-read', 'in-reading', 'read']);
 const BOOK_SORTS = new Set(['title', 'author', 'imported', 'lastRead']);
 const MARK_TYPES = new Set(['bookmark', 'important', 'review', 'quote']);
 const AUDIO_SLEEP_MINUTES = new Set([15, 30, 45, 60]);
+const DERIVED_KINDS = new Set(['ocr', 'translation']);
+const DERIVED_STATUSES = new Set(['partial', 'complete', 'error']);
+const OCR_SCRIPTS = new Set(['latin', 'chinese', 'devanagari', 'japanese', 'korean']);
 
 function numberOr(value, fallback = 0) {
   const number = Number(value);
@@ -207,7 +210,35 @@ function plainSettings(value) {
   return { ...value };
 }
 
-export function createReadingLibraryClient(plugin = {}) {
+function normalizeDerivedMetadata(value) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return null;
+  const bookId = String(value.bookId ?? '').trim();
+  const kind = String(value.kind ?? '').trim();
+  const variantKey = String(value.variantKey ?? '').trim();
+  const status = String(value.status ?? '').trim();
+  if (!bookId || !DERIVED_KINDS.has(kind) || !variantKey || !DERIVED_STATUSES.has(status)) return null;
+  const totalUnits = nonNegativeInteger(value.totalUnits, 0);
+  const completedUnits = nonNegativeInteger(value.completedUnits, 0);
+  if (totalUnits > 0 && completedUnits > totalUnits) return null;
+  return {
+    bookId,
+    kind,
+    variantKey,
+    sourceSha256: String(value.sourceSha256 ?? '').trim(),
+    sourceLanguage: String(value.sourceLanguage ?? '').trim().toLowerCase(),
+    targetLanguage: String(value.targetLanguage ?? '').trim().toLowerCase(),
+    engine: String(value.engine ?? '').trim(),
+    engineVersion: String(value.engineVersion ?? '').trim(),
+    status,
+    completedUnits,
+    totalUnits,
+    updatedAt: Math.max(0, numberOr(value.updatedAt, 0))
+  };
+}
+
+export function createReadingLibraryClient(plugin = {}, derivedPlugin = plugin) {
+  let activeBookId = '';
+
   async function pickDocuments() {
     if (!plugin?.pickDocuments) return normalizeBatch(null);
     try { return normalizeBatch(await plugin.pickDocuments()); } catch { return normalizeBatch(null); }
@@ -304,6 +335,7 @@ export function createReadingLibraryClient(plugin = {}) {
       if (!result || typeof result !== 'object') return null;
       const book = normalizeBook(result.book);
       if (!book) return null;
+      activeBookId = book.id;
       if (book.format === 'pdf') {
         if (result.passwordRequired === true) {
           return { book, passwordRequired: true, passwordRejected: result.passwordRejected === true };
@@ -329,6 +361,98 @@ export function createReadingLibraryClient(plugin = {}) {
       }
       return { book, content: String(result.content ?? '') };
     } catch { return null; }
+  }
+
+  async function recognizePdfPage(options = {}) {
+    const pageIndex = nonNegativeInteger(options?.pageIndex, 0);
+    const bookId = String(options?.bookId ?? activeBookId).trim();
+    const scriptCandidate = String(options?.script ?? 'latin').trim().toLowerCase();
+    const script = OCR_SCRIPTS.has(scriptCandidate) ? scriptCandidate : scriptCandidate || 'latin';
+    const fallback = { pageIndex, text: '', blocks: [], status: 'error' };
+    if (!bookId || !plugin?.recognizePdfPage) return fallback;
+    try {
+      const result = await plugin.recognizePdfPage({
+        bookId,
+        password: String(options?.password ?? ''),
+        pageIndex,
+        script
+      });
+      const status = ['ok', 'empty', 'model-unavailable', 'unsupported-script', 'error'].includes(result?.status)
+        ? result.status
+        : 'error';
+      return {
+        pageIndex: nonNegativeInteger(result?.pageIndex, pageIndex),
+        text: String(result?.text ?? ''),
+        blocks: (Array.isArray(result?.blocks) ? result.blocks : []).map(value => String(value ?? '').trim()).filter(Boolean),
+        status
+      };
+    } catch { return fallback; }
+  }
+
+  async function saveDerivedContent(value = {}) {
+    const bookId = String(value?.bookId ?? activeBookId).trim();
+    const kind = String(value?.kind ?? '').trim();
+    const variantKey = String(value?.variantKey ?? '').trim();
+    const metadata = value?.metadata && typeof value.metadata === 'object' ? value.metadata : {};
+    const status = String(metadata.status ?? 'partial').trim();
+    if (!bookId || !DERIVED_KINDS.has(kind) || !variantKey || !DERIVED_STATUSES.has(status) || !derivedPlugin?.saveDerivedContent) return false;
+    let content;
+    try { content = JSON.stringify(value?.content ?? {}); } catch { return false; }
+    const totalUnits = nonNegativeInteger(metadata.totalUnits, 0);
+    const completedUnits = nonNegativeInteger(metadata.completedUnits, 0);
+    if (totalUnits > 0 && completedUnits > totalUnits) return false;
+    try {
+      return mutationSucceeded(await derivedPlugin.saveDerivedContent({
+        bookId,
+        kind,
+        variantKey,
+        content,
+        sourceSha256: String(metadata.sourceSha256 ?? '').trim(),
+        sourceLanguage: String(metadata.sourceLanguage ?? '').trim().toLowerCase(),
+        targetLanguage: String(metadata.targetLanguage ?? '').trim().toLowerCase(),
+        engine: String(metadata.engine ?? '').trim(),
+        engineVersion: String(metadata.engineVersion ?? '').trim(),
+        status,
+        completedUnits,
+        totalUnits
+      }), 'saved');
+    } catch { return false; }
+  }
+
+  async function getDerivedContent(value = {}) {
+    const bookId = String(value?.bookId ?? activeBookId).trim();
+    const kind = String(value?.kind ?? '').trim();
+    const variantKey = String(value?.variantKey ?? '').trim();
+    if (!bookId || !DERIVED_KINDS.has(kind) || !variantKey || !derivedPlugin?.getDerivedContent) return null;
+    try {
+      const result = await derivedPlugin.getDerivedContent({ bookId, kind, variantKey });
+      if (!result || result.found !== true || result.stale === true) return null;
+      const metadata = normalizeDerivedMetadata(result);
+      if (!metadata) return null;
+      let content;
+      try { content = JSON.parse(String(result.content ?? '')); } catch { return null; }
+      return { ...metadata, content };
+    } catch { return null; }
+  }
+
+  async function listDerivedContent(bookId = activeBookId) {
+    const cleanBookId = String(bookId ?? '').trim();
+    if (!cleanBookId || !derivedPlugin?.listDerivedContent) return [];
+    try {
+      const result = await derivedPlugin.listDerivedContent({ bookId: cleanBookId });
+      const values = Array.isArray(result) ? result : Array.isArray(result?.items) ? result.items : [];
+      return values.map(normalizeDerivedMetadata).filter(Boolean);
+    } catch { return []; }
+  }
+
+  async function deleteDerivedContent(value = {}) {
+    const bookId = String(value?.bookId ?? activeBookId).trim();
+    const kind = String(value?.kind ?? '').trim();
+    const variantKey = String(value?.variantKey ?? '').trim();
+    if (!bookId || !DERIVED_KINDS.has(kind) || !variantKey || !derivedPlugin?.deleteDerivedContent) return false;
+    try {
+      return mutationSucceeded(await derivedPlugin.deleteDerivedContent({ bookId, kind, variantKey }), 'deleted');
+    } catch { return false; }
   }
 
   async function saveProgress(progress = {}) {
@@ -371,6 +495,17 @@ export function createReadingLibraryClient(plugin = {}) {
       const values = Array.isArray(result) ? result : Array.isArray(result?.voices) ? result.voices : [];
       return values.map(normalizeVoice).filter(Boolean);
     } catch { return []; }
+  }
+
+  async function openTtsVoiceInstaller() {
+    if (!plugin?.openTtsVoiceInstaller) return { opened: false, destination: 'none' };
+    try {
+      const result = await plugin.openTtsVoiceInstaller();
+      const destination = ['installer', 'engine'].includes(result?.destination) ? result.destination : 'none';
+      return { opened: result?.opened === true, destination };
+    } catch {
+      return { opened: false, destination: 'none' };
+    }
   }
 
   async function startTts(options = {}) {
@@ -562,10 +697,16 @@ export function createReadingLibraryClient(plugin = {}) {
     moveQueueItem,
     updateBookMetadata,
     openBook,
+    recognizePdfPage,
+    saveDerivedContent,
+    getDerivedContent,
+    listDerivedContent,
+    deleteDerivedContent,
     saveProgress,
     deleteBook,
     getLatestInProgress,
     listTtsVoices,
+    openTtsVoiceInstaller,
     startTts,
     stopTts,
     prepareAudio,

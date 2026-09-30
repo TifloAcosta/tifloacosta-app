@@ -11,6 +11,14 @@ const integer = (value, fallback = 0) => {
 
 const nonNegative = value => Math.max(0, integer(value, 0));
 
+const normalizeSourceRef = value => {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return null;
+  const blockIndex = integer(value.blockIndex, -1);
+  const blockId = clean(value.blockId);
+  if (blockIndex < 0 || !blockId) return null;
+  return { blockIndex, blockId };
+};
+
 const normalizeBlock = (value, index, language) => {
   if (!value || typeof value !== 'object') return null;
   const text = clean(value.text);
@@ -23,6 +31,8 @@ const normalizeBlock = (value, index, language) => {
     sentences: segmentSentences(text, language)
   };
   if (type === 'heading') block.level = Math.min(6, Math.max(1, integer(value.level, 1)));
+  const sourceRef = normalizeSourceRef(value.sourceRef);
+  if (sourceRef) block.sourceRef = sourceRef;
   const href = clean(value.href);
   if (href) block.href = href;
   if (Array.isArray(value.links)) {

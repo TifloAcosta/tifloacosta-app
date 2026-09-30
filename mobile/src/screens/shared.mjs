@@ -3,6 +3,9 @@ export function clearScreen(root) {
 }
 
 export function addScreenHeader(root, { router, title, backLabel }) {
+  const header = document.createElement('header');
+  header.className = 'screen-header';
+
   const back = document.createElement('button');
   back.type = 'button';
   back.className = 'back-button';
@@ -14,8 +17,9 @@ export function addScreenHeader(root, { router, title, backLabel }) {
   heading.tabIndex = -1;
   heading.textContent = title;
 
-  root.append(back, heading);
-  return { back, heading };
+  header.append(back, heading);
+  root.append(header);
+  return { back, heading, header };
 }
 
 export function addExternalLink(parent, { href, label, onOpen = null }) {

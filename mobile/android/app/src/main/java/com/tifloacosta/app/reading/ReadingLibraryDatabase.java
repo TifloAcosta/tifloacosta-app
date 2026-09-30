@@ -11,13 +11,14 @@ import java.util.List;
 
 public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements ReadingBookRepository {
     public static final String DATABASE_NAME = "tiflo_reading.db";
-    public static final int DATABASE_VERSION = 5;
+    public static final int DATABASE_VERSION = 6;
 
     private static final String TABLE_BOOKS = "books";
     private static final String TABLE_MARKS = "marks";
     private static final String TABLE_SETTINGS = "reading_settings";
     private static final String TABLE_AUDIO_TRACKS = "audio_tracks";
     private static final String TABLE_QUEUE = "reading_queue";
+    private static final String TABLE_DERIVED = "reading_derived";
 
     private static final String[] BOOK_COLUMNS = {
             "id",
@@ -72,6 +73,22 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
             "size_bytes"
     };
 
+    private static final String[] DERIVED_COLUMNS = {
+            "book_id",
+            "kind",
+            "variant_key",
+            "relative_path",
+            "source_sha256",
+            "source_language",
+            "target_language",
+            "engine",
+            "engine_version",
+            "status",
+            "completed_units",
+            "total_units",
+            "updated_at"
+    };
+
     public ReadingLibraryDatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -110,6 +127,7 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
         createV3Tables(db);
         createV4Tables(db);
         createV5Tables(db);
+        createV6Tables(db);
     }
 
     @Override
@@ -139,6 +157,10 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
             createBookIndexes(db);
             createV5Tables(db);
             version = 5;
+        }
+        if (version == 5 && newVersion >= 6) {
+            createV6Tables(db);
+            version = 6;
         }
         if (version != newVersion) {
             throw new IllegalStateException(
@@ -222,6 +244,32 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
         db.execSQL(
                 "CREATE INDEX IF NOT EXISTS reading_queue_order_index ON " + TABLE_QUEUE +
                         "(queue_index ASC, added_at ASC, book_id ASC)"
+        );
+    }
+
+    private static void createV6Tables(SQLiteDatabase db) {
+        db.execSQL(
+                "CREATE TABLE IF NOT EXISTS " + TABLE_DERIVED + " (" +
+                        "book_id TEXT NOT NULL," +
+                        "kind TEXT NOT NULL CHECK(kind IN ('ocr','translation'))," +
+                        "variant_key TEXT NOT NULL," +
+                        "relative_path TEXT NOT NULL," +
+                        "source_sha256 TEXT," +
+                        "source_language TEXT," +
+                        "target_language TEXT," +
+                        "engine TEXT," +
+                        "engine_version TEXT," +
+                        "status TEXT NOT NULL CHECK(status IN ('partial','complete','error'))," +
+                        "completed_units INTEGER NOT NULL DEFAULT 0 CHECK(completed_units >= 0)," +
+                        "total_units INTEGER NOT NULL DEFAULT 0 CHECK(total_units >= 0)," +
+                        "updated_at INTEGER NOT NULL," +
+                        "PRIMARY KEY(book_id, kind, variant_key)," +
+                        "FOREIGN KEY(book_id) REFERENCES books(id) ON DELETE CASCADE" +
+                        ")"
+        );
+        db.execSQL(
+                "CREATE INDEX IF NOT EXISTS reading_derived_book_kind_index ON " + TABLE_DERIVED +
+                        "(book_id, kind, updated_at DESC)"
         );
     }
 
@@ -469,6 +517,72 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
         return records;
     }
 
+    public void upsertDerivedContent(ReadingDerivedRecord record) {
+        requireDerivedKind(record.getKind());
+        requireDerivedStatus(record.getStatus());
+        ContentValues values = new ContentValues();
+        values.put("book_id", record.getBookId());
+        values.put("kind", record.getKind());
+        values.put("variant_key", record.getVariantKey());
+        values.put("relative_path", record.getRelativePath());
+        putNullable(values, "source_sha256", record.getSourceSha256());
+        putNullable(values, "source_language", record.getSourceLanguage());
+        putNullable(values, "target_language", record.getTargetLanguage());
+        putNullable(values, "engine", record.getEngine());
+        putNullable(values, "engine_version", record.getEngineVersion());
+        values.put("status", record.getStatus());
+        values.put("completed_units", Math.max(0, record.getCompletedUnits()));
+        values.put("total_units", Math.max(0, record.getTotalUnits()));
+        values.put("updated_at", record.getUpdatedAt());
+        getWritableDatabase().insertWithOnConflict(
+                TABLE_DERIVED,
+                null,
+                values,
+                SQLiteDatabase.CONFLICT_REPLACE
+        );
+    }
+
+    public ReadingDerivedRecord findDerivedContent(String bookId, String kind, String variantKey) {
+        requireDerivedKind(kind);
+        try (Cursor cursor = getReadableDatabase().query(
+                TABLE_DERIVED,
+                DERIVED_COLUMNS,
+                "book_id = ? AND kind = ? AND variant_key = ?",
+                new String[]{bookId, kind, variantKey},
+                null,
+                null,
+                null,
+                "1"
+        )) {
+            return cursor.moveToFirst() ? readDerived(cursor) : null;
+        }
+    }
+
+    public List<ReadingDerivedRecord> listDerivedContent(String bookId) {
+        List<ReadingDerivedRecord> records = new ArrayList<>();
+        try (Cursor cursor = getReadableDatabase().query(
+                TABLE_DERIVED,
+                DERIVED_COLUMNS,
+                "book_id = ?",
+                new String[]{bookId},
+                null,
+                null,
+                "kind ASC, variant_key ASC"
+        )) {
+            while (cursor.moveToNext()) records.add(readDerived(cursor));
+        }
+        return records;
+    }
+
+    public void deleteDerivedContent(String bookId, String kind, String variantKey) {
+        requireDerivedKind(kind);
+        getWritableDatabase().delete(
+                TABLE_DERIVED,
+                "book_id = ? AND kind = ? AND variant_key = ?",
+                new String[]{bookId, kind, variantKey}
+        );
+    }
+
     @Override
     public void updateProgress(String id, int blockIndex, double percent, String state, long lastReadAt) {
         updateProgress(id, blockIndex, 0, null, 0, 0L, percent, state, lastReadAt);
@@ -613,6 +727,7 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
         try {
             db.delete(TABLE_QUEUE, "book_id = ?", new String[]{id});
             compactQueue(db);
+            db.delete(TABLE_DERIVED, "book_id = ?", new String[]{id});
             db.delete(TABLE_AUDIO_TRACKS, "book_id = ?", new String[]{id});
             db.delete(TABLE_MARKS, "book_id = ?", new String[]{id});
             db.delete(TABLE_SETTINGS, "scope = ? AND book_id = ?", new String[]{"book", id});
@@ -706,6 +821,24 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
         );
     }
 
+    private static ReadingDerivedRecord readDerived(Cursor cursor) {
+        return new ReadingDerivedRecord(
+                cursor.getString(cursor.getColumnIndexOrThrow("book_id")),
+                cursor.getString(cursor.getColumnIndexOrThrow("kind")),
+                cursor.getString(cursor.getColumnIndexOrThrow("variant_key")),
+                cursor.getString(cursor.getColumnIndexOrThrow("relative_path")),
+                nullableString(cursor, "source_sha256"),
+                nullableString(cursor, "source_language"),
+                nullableString(cursor, "target_language"),
+                nullableString(cursor, "engine"),
+                nullableString(cursor, "engine_version"),
+                cursor.getString(cursor.getColumnIndexOrThrow("status")),
+                cursor.getInt(cursor.getColumnIndexOrThrow("completed_units")),
+                cursor.getInt(cursor.getColumnIndexOrThrow("total_units")),
+                cursor.getLong(cursor.getColumnIndexOrThrow("updated_at"))
+        );
+    }
+
     private static ReadingMarkRecord readMark(Cursor cursor) {
         int excerptColumn = cursor.getColumnIndexOrThrow("excerpt");
         int referenceColumn = cursor.getColumnIndexOrThrow("reference");
@@ -731,6 +864,11 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
                 cursor.getString(cursor.getColumnIndexOrThrow("value")),
                 cursor.getLong(cursor.getColumnIndexOrThrow("updated_at"))
         );
+    }
+
+    private static String nullableString(Cursor cursor, String column) {
+        int index = cursor.getColumnIndexOrThrow(column);
+        return cursor.isNull(index) ? null : cursor.getString(index);
     }
 
     private static Selection buildSelection(ReadingBookQuery query) {
@@ -859,6 +997,18 @@ public final class ReadingLibraryDatabase extends SQLiteOpenHelper implements Re
             return;
         }
         throw new IllegalArgumentException("Unsupported reading setting scope: " + scope);
+    }
+
+    private static void requireDerivedKind(String kind) {
+        if (!"ocr".equals(kind) && !"translation".equals(kind)) {
+            throw new IllegalArgumentException("Unsupported derived reading kind: " + kind);
+        }
+    }
+
+    private static void requireDerivedStatus(String status) {
+        if (!"partial".equals(status) && !"complete".equals(status) && !"error".equals(status)) {
+            throw new IllegalArgumentException("Unsupported derived reading status: " + status);
+        }
     }
 
     private static String normalizedBookId(String bookId) {

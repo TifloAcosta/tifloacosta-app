@@ -4,18 +4,20 @@ import test from 'node:test';
 
 const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
-test('Android schema v5 retains ordered audiobook tracks without replacing the shared books table', async () => {
+test('Android schema v6 retains ordered audiobook tracks while adding derived OCR and translation content', async () => {
   const [database, record] = await Promise.all([
     read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingLibraryDatabase.java'),
     read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingAudioTrackRecord.java')
   ]);
 
-  assert.match(database, /DATABASE_VERSION\s*=\s*5/);
+  assert.match(database, /DATABASE_VERSION\s*=\s*6/);
   assert.match(database, /audio_tracks/);
   assert.match(database, /insertAudioTracks/);
   assert.match(database, /listAudioTracks/);
   assert.match(database, /version\s*==\s*3[\s\S]*version\s*=\s*4/);
   assert.match(database, /version\s*==\s*4[\s\S]*version\s*=\s*5/);
+  assert.match(database, /version\s*==\s*5[\s\S]*version\s*=\s*6/);
+  assert.match(database, /reading_derived/);
   assert.match(record, /trackIndex/);
   assert.match(record, /relativePath/);
   assert.match(record, /durationMs/);

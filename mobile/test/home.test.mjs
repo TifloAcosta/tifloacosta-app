@@ -19,6 +19,7 @@ test('home uses the approved compact order', () => {
     'book',
     'podcast',
     'contact',
+    'privacy',
     'settings'
   ]);
 });
@@ -33,6 +34,19 @@ test('home and secondary screen labels exist in Spanish and English', () => {
       assert.ok(text(lang, `screen.${labelKey}`), `Missing ${lang} screen.${labelKey}`);
     }
   }
+});
+
+test('home brand header uses the official TifloAcosta symbol without duplicate screen-reader output', async () => {
+  const [home, build] = await Promise.all([
+    read('src/screens/home.mjs'),
+    read('scripts/build.mjs')
+  ]);
+  assert.match(home, /app-brand-header/);
+  assert.match(home, /tifloacosta-simbolo-blanco\.svg/);
+  assert.match(home, /aria-hidden/);
+  assert.match(home, /alt\s*=\s*['"]{2}|\.alt\s*=\s*['"]{2}/);
+  assert.match(home, /document\.createElement\(['"]h1['"]\)/);
+  assert.match(build, /tifloacosta-simbolo-blanco\.svg/);
 });
 
 test('home module does not leak podcast platforms, social URLs or setting controls onto the start screen', async () => {

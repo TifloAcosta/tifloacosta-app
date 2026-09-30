@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.media.AudioAttributes;
 import android.media.AudioFocusRequest;
 import android.media.AudioManager;
@@ -24,6 +25,7 @@ public final class ReadingTtsController {
     public interface Engine {
         List<VoiceInfo> listVoices();
         boolean speak(String text, String utteranceToken, String voiceId, float rate, EngineCallback callback);
+        default VoiceInstallerResult openVoiceInstaller() { return new VoiceInstallerResult(false, "none"); }
         void stop();
         void shutdown();
     }
@@ -63,6 +65,19 @@ public final class ReadingTtsController {
         public String getLanguage() { return language; }
         public String getLocale() { return locale; }
         public boolean isNetworkRequired() { return networkRequired; }
+    }
+
+    public static final class VoiceInstallerResult {
+        private final boolean opened;
+        private final String destination;
+
+        public VoiceInstallerResult(boolean opened, String destination) {
+            this.opened = opened;
+            this.destination = clean(destination);
+        }
+
+        public boolean isOpened() { return opened; }
+        public String getDestination() { return destination; }
     }
 
     public static final class Event {
@@ -114,6 +129,11 @@ public final class ReadingTtsController {
         List<VoiceInfo> voices = engine.listVoices();
         if (voices == null || voices.isEmpty()) return Collections.emptyList();
         return new ArrayList<>(voices);
+    }
+
+    public synchronized VoiceInstallerResult openVoiceInstaller() {
+        VoiceInstallerResult result = engine.openVoiceInstaller();
+        return result == null ? new VoiceInstallerResult(false, "none") : result;
     }
 
     public synchronized boolean start(
@@ -258,12 +278,14 @@ public final class ReadingTtsController {
     }
 
     private static final class AndroidEngine implements Engine {
+        private final Context context;
         private final TextToSpeech tts;
         private final Map<String, EngineCallback> callbacks = new ConcurrentHashMap<>();
         private volatile boolean ready;
 
         private AndroidEngine(Context context) {
-            tts = new TextToSpeech(context, status -> ready = status == TextToSpeech.SUCCESS);
+            this.context = context.getApplicationContext();
+            tts = new TextToSpeech(this.context, status -> ready = status == TextToSpeech.SUCCESS);
             tts.setOnUtteranceProgressListener(new UtteranceProgressListener() {
                 @Override
                 public void onStart(String utteranceId) {
@@ -312,6 +334,30 @@ public final class ReadingTtsController {
             }
             voices.sort(Comparator.comparing(VoiceInfo::getLocale).thenComparing(VoiceInfo::getName));
             return voices;
+        }
+
+        @Override
+        public VoiceInstallerResult openVoiceInstaller() {
+            PackageManager packageManager = context.getPackageManager();
+            String defaultEngine = clean(tts.getDefaultEngine());
+
+            Intent installer = new Intent(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
+            if (!defaultEngine.isEmpty()) installer.setPackage(defaultEngine);
+            if (installer.resolveActivity(packageManager) != null) {
+                installer.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(installer);
+                return new VoiceInstallerResult(true, "installer");
+            }
+
+            if (!defaultEngine.isEmpty()) {
+                Intent engineIntent = packageManager.getLaunchIntentForPackage(defaultEngine);
+                if (engineIntent != null && engineIntent.resolveActivity(packageManager) != null) {
+                    engineIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(engineIntent);
+                    return new VoiceInstallerResult(true, "engine");
+                }
+            }
+            return new VoiceInstallerResult(false, "none");
         }
 
         @Override

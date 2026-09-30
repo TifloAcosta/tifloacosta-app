@@ -14,6 +14,7 @@ on:
       - '.gitignore'
       - '.github/workflows/bootstrap-mobile-android.yml'
       - '.github/workflows/test-mobile-foundation.yml'
+      - '.github/scripts/run-mobile-test-shard.sh'
   pull_request:
     paths:
       - 'scripts/build-mobile-content.mjs'
@@ -25,6 +26,7 @@ on:
       - '.gitignore'
       - '.github/workflows/bootstrap-mobile-android.yml'
       - '.github/workflows/test-mobile-foundation.yml'
+      - '.github/scripts/run-mobile-test-shard.sh'
 
 permissions:
   contents: read
@@ -47,8 +49,71 @@ jobs:
       - name: Run Leer con TifloAcosta beta acceptance gate
         working-directory: mobile
         run: npm run test:reading-beta
-      - name: Run mobile foundation tests
-        run: |
-          node --test test/actualidad-core.test.mjs
-          node --test test/mobile-content.test.mjs test/mobile-content-retention.test.mjs
-          node --test mobile/test/*.test.mjs
+      - name: Run actualidad core tests
+        run: node --test test/actualidad-core.test.mjs
+      - name: Run mobile content tests
+        run: node --test test/mobile-content.test.mjs test/mobile-content-retention.test.mjs
+      - name: Run isolated mobile tests 1 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 0 32
+      - name: Run isolated mobile tests 2 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 1 32
+      - name: Run isolated mobile tests 3 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 2 32
+      - name: Run isolated mobile tests 4 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 3 32
+      - name: Run isolated mobile tests 5 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 4 32
+      - name: Run isolated mobile tests 6 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 5 32
+      - name: Run isolated mobile tests 7 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 6 32
+      - name: Run isolated mobile tests 8 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 7 32
+      - name: Run isolated mobile tests 9 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 8 32
+      - name: Run isolated mobile tests 10 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 9 32
+      - name: Run isolated mobile tests 11 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 10 32
+      - name: Run isolated mobile tests 12 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 11 32
+      - name: Run isolated mobile tests 13 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 12 32
+      - name: Run isolated mobile tests 14 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 13 32
+      - name: Run isolated mobile tests 15 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 14 32
+      - name: Run isolated mobile tests 16 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 15 32
+      - name: Run isolated mobile tests 17 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 16 32
+      - name: Run isolated mobile tests 18 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 17 32
+      - name: Run isolated mobile tests 19 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 18 32
+      - name: Run isolated mobile tests 20 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 19 32
+      - name: Run isolated mobile tests 21 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 20 32
+      - name: Run isolated mobile tests 22 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 21 32
+      - name: Run isolated mobile tests 23 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 22 32
+      - name: Run isolated mobile tests 24 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 23 32
+      - name: Run isolated mobile tests 25 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 24 32
+      - name: Run isolated mobile tests 26 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 25 32
+      - name: Run isolated mobile tests 27 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 26 32
+      - name: Run isolated mobile tests 28 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 27 32
+      - name: Run isolated mobile tests 29 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 28 32
+      - name: Run isolated mobile tests 30 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 29 32
+      - name: Run isolated mobile tests 31 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 30 32
+      - name: Run isolated mobile tests 32 of 32
+        run: bash .github/scripts/run-mobile-test-shard.sh 31 32

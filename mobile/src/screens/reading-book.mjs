@@ -5,6 +5,7 @@ import { createReadingSpeechController } from '../core/reading-speech.mjs';
 import { parseStructuredDocument } from '../core/reading-structured-adapter.mjs';
 import { createReadingAudioView } from './reading-audio.mjs';
 import { createReadingMarksPanel } from './reading-marks.mjs';
+import { createReadingOcrPanel } from './reading-ocr-panel.mjs';
 import { createReadingSearchPanel } from './reading-search.mjs';
 import { createReadingSettingsPanel } from './reading-settings.mjs';
 import { clearScreen } from './shared.mjs';
@@ -363,6 +364,7 @@ export function renderReadingBook({
   let documentModel = null;
   let speech = null;
   let audioView = null;
+  let ocrPanel = null;
   let currentPosition = { blockIndex: 0, unitIndex: 0 };
   let noteReturnPosition = null;
   let searchPanel = null;
@@ -495,12 +497,47 @@ export function renderReadingBook({
     });
   }
 
-  function showPdfNoTextState(opened) {
+  async function showPdfNoTextState(opened, password = '') {
     activeBook = opened.book;
     heading.textContent = activeBook.title || t('readingLibrary.untitled');
     pdfPasswordForm.hidden = true;
     clearInteractiveReading();
+    hideEndOfDocument();
     status.textContent = t('readingBook.pdfNoText');
+    ocrPanel?.destroy();
+    ocrPanel = createReadingOcrPanel({
+      root: panels,
+      client,
+      book: activeBook,
+      pageCount: opened.pageCount,
+      password,
+      t,
+      onOpenRecognized(pages) {
+        void (async () => {
+          if (!pages?.length || destroyed) return;
+          searchPanel?.destroy();
+          marksPanel?.destroy();
+          settingsPanel?.destroy();
+          if (speech) await speech.destroy();
+          searchPanel = null;
+          marksPanel = null;
+          settingsPanel = null;
+          speech = null;
+          await initializeOpenedBook({
+            book: activeBook,
+            pdf: {
+              title: activeBook.title,
+              author: activeBook.author,
+              language: activeBook.language,
+              pageCount: opened.pageCount,
+              orderReliable: true,
+              pages
+            }
+          });
+        })();
+      }
+    });
+    await ocrPanel.load();
   }
 
   function readablePdfPageFrom(position, direction) {
@@ -772,6 +809,7 @@ export function renderReadingBook({
   setScreenCleanup?.(() => {
     destroyed = true;
     completionGeneration += 1;
+    ocrPanel?.destroy();
     searchPanel?.destroy();
     marksPanel?.destroy();
     settingsPanel?.destroy();
@@ -944,7 +982,7 @@ export function renderReadingBook({
       return;
     }
     if (opened.book.format === 'pdf' && opened.pdfNoText) {
-      showPdfNoTextState(opened);
+      await showPdfNoTextState(opened, password ?? '');
       return;
     }
     if (opened.book.format === 'pdf' && !opened.pdf) {

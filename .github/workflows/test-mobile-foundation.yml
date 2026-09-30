@@ -51,10 +51,13 @@ jobs:
         run: node --test test/actualidad-core.test.mjs
       - name: Run mobile content tests
         run: node --test test/mobile-content.test.mjs test/mobile-content-retention.test.mjs
-      - name: Run mobile application tests in isolation
+      - name: Run mobile application tests in isolated worktrees
         shell: bash
         run: |
-          while IFS= read -r test_file; do
+          mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
+          for test_file in "${tests[@]}"; do
+            git restore .
+            git clean -fd
             echo "Running ${test_file}"
             node --test "${test_file}"
-          done < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
+          done

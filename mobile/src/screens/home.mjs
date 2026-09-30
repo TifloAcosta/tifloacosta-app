@@ -23,12 +23,23 @@ export const HOME_ITEMS = [
 export function renderHome({ root, router, content, preferences = { lang: 'es' }, t }) {
   root.replaceChildren();
 
+  const brandHeader = document.createElement('header');
+  brandHeader.className = 'app-brand-header';
+
+  const brandMark = document.createElement('img');
+  brandMark.className = 'app-brand-mark';
+  brandMark.src = './tifloacosta-simbolo-blanco.svg';
+  brandMark.alt = '';
+  brandMark.setAttribute('aria-hidden', 'true');
+
   const heading = document.createElement('h1');
   heading.dataset.screenHeading = '';
   heading.tabIndex = -1;
   heading.className = 'app-brand';
   heading.textContent = t('app.title');
-  root.append(heading);
+
+  brandHeader.append(brandMark, heading);
+  root.append(brandHeader);
 
   const nav = document.createElement('nav');
   nav.className = 'home-menu section-stack';

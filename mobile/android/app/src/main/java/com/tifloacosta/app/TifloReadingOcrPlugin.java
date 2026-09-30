@@ -38,22 +38,21 @@ public class TifloReadingOcrPlugin extends Plugin {
         }
 
         getBridge().execute(() -> {
-            ReadingOcrService.Result result;
             try {
                 ReadingBookRecord book = database.findById(bookId);
                 if (book == null || !"pdf".equalsIgnoreCase(clean(book.getFormat()))) {
-                    result = errorResult(pageIndex);
-                } else {
-                    result = ocrService.recognizePdfPage(
-                            book.getRelativePath(),
-                            password == null ? "" : password,
-                            pageIndex,
-                            script
-                    );
+                    call.resolve(errorJsResult(pageIndex));
+                    return;
                 }
+                ReadingOcrService.Result result = ocrService.recognizePdfPage(
+                        book.getRelativePath(),
+                        password == null ? "" : password,
+                        pageIndex,
+                        script
+                );
                 call.resolve(toJsResult(result));
             } catch (RuntimeException error) {
-                call.resolve(toJsResult(errorResult(pageIndex)));
+                call.resolve(errorJsResult(pageIndex));
             }
         });
     }
@@ -75,8 +74,13 @@ public class TifloReadingOcrPlugin extends Plugin {
         return output;
     }
 
-    private static ReadingOcrService.Result errorResult(int pageIndex) {
-        return new ReadingOcrService.Result(pageIndex, "", java.util.Collections.emptyList(), ReadingOcrService.STATUS_ERROR);
+    private static JSObject errorJsResult(int pageIndex) {
+        JSObject output = new JSObject();
+        output.put("pageIndex", pageIndex);
+        output.put("text", "");
+        output.put("blocks", new JSArray());
+        output.put("status", ReadingOcrService.STATUS_ERROR);
+        return output;
     }
 
     private static String clean(String value) {

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { createReadingLibraryClient } from '../src/core/reading-library-client.mjs';
+import { createReadingTranslationClient } from '../src/core/reading-translation-client.mjs';
 
 function fakePlugin() {
   return {
@@ -14,14 +14,14 @@ function fakePlugin() {
   };
 }
 
-test('reading client exposes normalized language detection and supported translation languages', async () => {
-  const client = createReadingLibraryClient(fakePlugin());
+test('translation client exposes normalized language detection and supported languages', async () => {
+  const client = createReadingTranslationClient(fakePlugin());
   assert.equal(await client.identifyLanguage('Hello'), 'en');
   assert.deepEqual(await client.listTranslationLanguages(), ['en', 'es', 'fr']);
 });
 
-test('reading client downloads models and translates ordered batches', async () => {
-  const client = createReadingLibraryClient(fakePlugin());
+test('translation client downloads models and translates ordered batches', async () => {
+  const client = createReadingTranslationClient(fakePlugin());
   assert.equal(await client.downloadTranslationModel('ES'), true);
   const result = await client.translateBatch({
     sourceLanguage: 'EN',
@@ -31,8 +31,8 @@ test('reading client downloads models and translates ordered batches', async () 
   assert.deepEqual(result, { translations: ['en-es:one', 'en-es:two'], status: 'ok' });
 });
 
-test('reading client reports bridge translation failures without throwing', async () => {
-  const client = createReadingLibraryClient({
+test('translation client reports bridge translation failures without throwing', async () => {
+  const client = createReadingTranslationClient({
     async translateBatch() { return { status: 'model-unavailable', translations: [] }; }
   });
   assert.deepEqual(await client.translateBatch({ sourceLanguage: 'en', targetLanguage: 'es', texts: ['x'] }), {

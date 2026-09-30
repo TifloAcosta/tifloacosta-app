@@ -75,7 +75,37 @@ jobs:
           mobile/test/reading-speech.test.mjs
           mobile/test/reading-tts-media-session-contract.test.mjs
           mobile/test/reading-voice-catalog.test.mjs
-      - name: Run mobile application tests serially
-        run: node --test --test-concurrency=1 mobile/test/*.test.mjs
+      - name: Diagnostic mobile tests quarter 1
+        continue-on-error: true
+        shell: bash
+        run: |
+          mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
+          n=${#tests[@]}
+          q=$(( (n + 3) / 4 ))
+          node --test --test-concurrency=1 "${tests[@]:0:q}"
+      - name: Diagnostic mobile tests quarter 2
+        continue-on-error: true
+        shell: bash
+        run: |
+          mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
+          n=${#tests[@]}
+          q=$(( (n + 3) / 4 ))
+          node --test --test-concurrency=1 "${tests[@]:q:q}"
+      - name: Diagnostic mobile tests quarter 3
+        continue-on-error: true
+        shell: bash
+        run: |
+          mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
+          n=${#tests[@]}
+          q=$(( (n + 3) / 4 ))
+          node --test --test-concurrency=1 "${tests[@]:2*q:q}"
+      - name: Diagnostic mobile tests quarter 4
+        continue-on-error: true
+        shell: bash
+        run: |
+          mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
+          n=${#tests[@]}
+          q=$(( (n + 3) / 4 ))
+          node --test --test-concurrency=1 "${tests[@]:3*q:q}"
       - name: Run mobile application tests
-        run: node --test mobile/test/*.test.mjs
+        run: node --test --test-concurrency=1 mobile/test/*.test.mjs

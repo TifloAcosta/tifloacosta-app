@@ -12,8 +12,9 @@ test('Android release workflow only publishes from an explicit matching release 
   assert.match(workflow, /request\.versionName/);
   assert.match(workflow, /request\.track/);
   assert.match(workflow, /publish \$\{request\.versionName\} \$\{request\.track\}/);
-  assert.match(workflow, /TIFLO_RELEASE_MODE=publish/);
-  assert.match(workflow, /TIFLO_RELEASE_MODE=prepare/);
+  assert.match(workflow, /mode = 'publish'/);
+  assert.match(workflow, /mode = 'prepare'/);
+  assert.match(workflow, /TIFLO_RELEASE_MODE=\$\{mode\}/);
   assert.match(workflow, /env\.TIFLO_RELEASE_MODE == 'publish'/);
   assert.match(workflow, /env\.TIFLO_RELEASE_MODE != 'publish'/);
 });

@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 const mobileDir = fileURLToPath(new URL('../', import.meta.url));
 const srcDir = fileURLToPath(new URL('../src/', import.meta.url));
 const distDir = fileURLToPath(new URL('../dist/', import.meta.url));
+const brandSymbol = fileURLToPath(new URL('../../tifloacosta-simbolo-blanco.svg', import.meta.url));
 
 await rm(distDir, { recursive: true, force: true });
 await mkdir(distDir, { recursive: true });
@@ -15,6 +16,7 @@ const bundledHtml = sourceHtml
   .replace('./update-bootstrap.mjs', './update-bootstrap.js');
 await writeFile(`${distDir}index.html`, bundledHtml, 'utf8');
 await copyFile(`${srcDir}styles.css`, `${distDir}styles.css`);
+await copyFile(brandSymbol, `${distDir}tifloacosta-simbolo-blanco.svg`);
 
 await build({
   entryPoints: {

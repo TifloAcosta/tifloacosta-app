@@ -63,24 +63,24 @@ public class TifloReadingOcrPlugin extends Plugin {
         super.handleOnDestroy();
     }
 
-    private static JSObject toJsResult(ReadingOcrService.Result result) {
-        JSObject output = new JSObject();
-        output.put("pageIndex", result.getPageIndex());
-        output.put("text", result.getText());
+    private static JSObject toJsResult(ReadingOcrService.Result ocrResult) {
+        JSObject result = new JSObject();
+        result.put("pageIndex", ocrResult.getPageIndex());
+        result.put("text", ocrResult.getText());
         JSArray blocks = new JSArray();
-        for (String block : result.getBlocks()) blocks.put(block);
-        output.put("blocks", blocks);
-        output.put("status", result.getStatus());
-        return output;
+        for (String block : ocrResult.getBlocks()) blocks.put(block);
+        result.put("blocks", blocks);
+        result.put("status", ocrResult.getStatus());
+        return result;
     }
 
     private static JSObject errorJsResult(int pageIndex) {
-        JSObject output = new JSObject();
-        output.put("pageIndex", pageIndex);
-        output.put("text", "");
-        output.put("blocks", new JSArray());
-        output.put("status", ReadingOcrService.STATUS_ERROR);
-        return output;
+        JSObject result = new JSObject();
+        result.put("pageIndex", pageIndex);
+        result.put("text", "");
+        result.put("blocks", new JSArray());
+        result.put("status", ReadingOcrService.STATUS_ERROR);
+        return result;
     }
 
     private static String clean(String value) {

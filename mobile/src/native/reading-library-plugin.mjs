@@ -3,6 +3,7 @@ import { registerPlugin } from '@capacitor/core';
 const NativeTifloReading = registerPlugin('TifloReading');
 const NativeTifloReadingLibrary = registerPlugin('TifloReadingLibrary');
 const NativeTifloReadingTts = registerPlugin('TifloReadingTts');
+const NativeTifloReadingOcr = registerPlugin('TifloReadingOcr');
 const NativeTifloReadingAudio = registerPlugin('TifloReadingAudio');
 const NativeTifloReadingAudioGroup = registerPlugin('TifloReadingAudioGroup');
 
@@ -55,13 +56,17 @@ export function createReadingLibraryPlugin(
   ttsPlugin = NativeTifloReadingTts,
   audioPlugin = NativeTifloReadingAudio,
   audioGroupPlugin = null,
-  libraryPlugin = null
+  libraryPlugin = null,
+  ocrPlugin = null
 ) {
   const groupPlugin = audioGroupPlugin ?? (
     plugin === NativeTifloReading ? NativeTifloReadingAudioGroup : plugin
   );
   const managementPlugin = libraryPlugin ?? (
     plugin === NativeTifloReading ? NativeTifloReadingLibrary : plugin
+  );
+  const recognitionPlugin = ocrPlugin ?? (
+    plugin === NativeTifloReading ? NativeTifloReadingOcr : plugin
   );
   let activeBookId = '';
 
@@ -136,6 +141,22 @@ export function createReadingLibraryPlugin(
 
   function getActiveBookId() {
     return activeBookId;
+  }
+
+  async function recognizePdfPage(options = {}) {
+    const pageIndex = Math.max(0, Math.trunc(Number(options?.pageIndex) || 0));
+    const request = {
+      bookId: String(options?.bookId ?? activeBookId ?? '').trim(),
+      password: String(options?.password ?? ''),
+      pageIndex,
+      script: String(options?.script ?? 'latin').trim().toLowerCase() || 'latin'
+    };
+    return safeCall(recognitionPlugin, 'recognizePdfPage', request, {
+      pageIndex,
+      text: '',
+      blocks: [],
+      status: 'error'
+    });
   }
 
   async function saveProgress(progress = {}) {
@@ -267,6 +288,7 @@ export function createReadingLibraryPlugin(
     updateBookMetadata,
     openBook,
     getActiveBookId,
+    recognizePdfPage,
     saveProgress,
     deleteBook,
     getLatestInProgress,

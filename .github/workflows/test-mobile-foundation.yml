@@ -51,37 +51,10 @@ jobs:
         run: node --test test/actualidad-core.test.mjs
       - name: Run mobile content tests
         run: node --test test/mobile-content.test.mjs test/mobile-content-retention.test.mjs
-      - name: Diagnostic quarter 2 part 1
-        continue-on-error: true
+      - name: Run mobile application tests in isolation
         shell: bash
         run: |
-          mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
-          n=${#tests[@]}; q=$(( (n + 3) / 4 )); s=$(( (q + 3) / 4 ))
-          node --test --test-concurrency=1 "${tests[@]:q:s}"
-      - name: Diagnostic quarter 2 part 2
-        continue-on-error: true
-        shell: bash
-        run: |
-          mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
-          n=${#tests[@]}; q=$(( (n + 3) / 4 )); s=$(( (q + 3) / 4 ))
-          node --test --test-concurrency=1 "${tests[@]:q+s:s}"
-      - name: Diagnostic quarter 2 part 3
-        continue-on-error: true
-        shell: bash
-        run: |
-          mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
-          n=${#tests[@]}; q=$(( (n + 3) / 4 )); s=$(( (q + 3) / 4 ))
-          node --test --test-concurrency=1 "${tests[@]:q+2*s:s}"
-      - name: Diagnostic quarter 2 part 4
-        continue-on-error: true
-        shell: bash
-        run: |
-          mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
-          n=${#tests[@]}; q=$(( (n + 3) / 4 )); s=$(( (q + 3) / 4 ))
-          node --test --test-concurrency=1 "${tests[@]:q+3*s:s}"
-      - name: Recheck full quarter 2
-        shell: bash
-        run: |
-          mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
-          n=${#tests[@]}; q=$(( (n + 3) / 4 ))
-          node --test --test-concurrency=1 "${tests[@]:q:q}"
+          while IFS= read -r test_file; do
+            echo "Running ${test_file}"
+            node --test "${test_file}"
+          done < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)

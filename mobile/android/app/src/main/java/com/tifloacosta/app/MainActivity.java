@@ -13,6 +13,7 @@ public class MainActivity extends BridgeActivity {
         registerPlugin(TifloReadingLibraryPlugin.class);
         registerPlugin(TifloReadingBackupPlugin.class);
         registerPlugin(TifloReadingTtsPlugin.class);
+        registerPlugin(TifloReadingOcrPlugin.class);
         registerPlugin(TifloReadingAudioPlugin.class);
         registerPlugin(TifloReadingAudioGroupPlugin.class);
         registerPlugin(TifloWebFetchPlugin.class);

@@ -167,7 +167,8 @@ test('PDF vertical slice keeps password/no-text/invalid states separate, passwor
   assert.match(screen, /showPdfNoTextState\(opened, password \?\? ['"]['"]\)/);
   assert.match(screen, /onOpenRecognized\(pages\)/);
   assert.match(ocrPanel, /export function createReadingOcrPanel/);
-  assert.match(ocrPanel, /client\.recognizePdfPage/);
+  assert.match(ocrPanel, /createReadingOcrFlow/);
+  assert.match(ocrPanel, /flow\.recognizePage\(pageIndex\)/);
 });
 
 test('audio vertical slice reopens the exact saved track and millisecond paused without autoplay', async () => {

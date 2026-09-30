@@ -42,6 +42,19 @@ test('translation cache key is deterministic and includes source identity and la
   assert.notEqual(first, changed);
 });
 
+test('structured translation blocks retain their source reference metadata', () => {
+  const parsed = parseStructuredDocument({
+    language: 'es',
+    blocks: [{
+      id: 'translated-1',
+      type: 'paragraph',
+      text: 'Hola mundo.',
+      sourceRef: { blockIndex: 3, blockId: 'source-4' }
+    }]
+  });
+  assert.deepEqual(parsed.blocks[0].sourceRef, { blockIndex: 3, blockId: 'source-4' });
+});
+
 test('translation preserves semantic block kind and source alignment while excluding URL-only blocks', async () => {
   const client = fakeClient();
   const job = createReadingTranslationJob({

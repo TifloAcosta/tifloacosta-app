@@ -1,5 +1,29 @@
 [
   {
+    "id": "buscaapps-dd759c58258b4f45",
+    "title": "Foreca Weather",
+    "sourceId": "buscaapps",
+    "sourceName": "BuscaApps",
+    "sourceUrl": "https://www.buscaapps.com/",
+    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1245",
+    "lang": "es",
+    "platform": "iOS",
+    "summary": "App del tiempo con alertas meteorológicas",
+    "publishedAt": null
+  },
+  {
+    "id": "buscaapps-544e573da359d046",
+    "title": "Foreca Weather",
+    "sourceId": "buscaapps",
+    "sourceName": "BuscaApps",
+    "sourceUrl": "https://www.buscaapps.com/",
+    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1244",
+    "lang": "es",
+    "platform": "Android",
+    "summary": "App del tiempo con alertas meteorológicas",
+    "publishedAt": null
+  },
+  {
     "id": "buscaapps-7fa0d7323d75c31d",
     "title": "EasyWeather - Tiempo Accesible",
     "sourceId": "buscaapps",
@@ -96,28 +120,16 @@
     "publishedAt": null
   },
   {
-    "id": "buscaapps-a1e548d21a91c7f4",
-    "title": "MundiCapitales",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1234",
-    "lang": "es",
-    "platform": "Web",
-    "summary": "Aprende divirtiéndote a adivinar capitales y países",
-    "publishedAt": null
-  },
-  {
-    "id": "buscaapps-17d4c57012c31161",
-    "title": "TagFit",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1233",
-    "lang": "es",
-    "platform": "iOS",
-    "summary": "Usa la cámara, etiquetas NFC y códigos QR para identificar, localizar y organizar objetos y gestionar caducidades y ropa",
-    "publishedAt": null
+    "id": "applevis-apps-85df4e1093bcf401",
+    "title": "Quiet Grind — Idle RPG",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/quiet-grind-idle-rpg",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "Quiet Grind is an idle RPG for people with lives. Train 30 skills, battle through five adventure zones, and keep making progress — even when you're not playing. Mine ore, chop wood, catch fish, smith gear, steep and enchant. Every skill has its own tools, recipes and mastery track, and they feed each other: what you gather becomes what you craft, and what you craft makes you stronger. PROGRESS WHILE YOU'RE AWAY Close the app and your character keeps training. Come back to a satisfying pile of gains — up to 8 hours of away progress in the free game, 24 with the optional unlock. NO ADS. NO ENERGY BARS. No forced waits you have to pay to skip. No video to sit through before a reward. Quiet Grind asks for your time, not your attention. WHAT'S INSIDE • 30 skills across gathering, artisan and combat • Five adventure zones and fifteen foes to defeat • Daily quests and a rotating merchant • 72 achievements and 9 Game Center leaderboards • Tamed companions that fight alongside you • A calm fantasy soundtrack • Six languages • Cloud save that follows you between devices • Fully playable offline PLAY EVERYWHERE iPhone, iPad, Mac and Apple Watch — one purchase, one save. Start a session on your phone, check on it from your wrist, and carry on at your Mac. FREE TO TRY Quiet Grind is free with 14 of its 30 skills, the first three adventure zones, daily quests and offline progress all included. A single unlock opens the remaining skills and zones. No subscriptions, no ads, no pay-to-win, ever.",
+    "publishedAt": "2026-09-30T00:07:12.000Z"
   },
   {
     "id": "applevis-apps-599efc2fe374670e",
@@ -226,17 +238,5 @@
     "platform": "Apple",
     "summary": "Muse is a personal AI agent that can manage email and schedules, book reservations, track spending, compare prices, plan workouts, and handle multistep tasks. It can connect to apps you choose, keep working after you close it, and ask for approval before taking actions. You can interact with Muse either through the native iOS app, through a browser interface at http://muse.ai or through WhatsApp chat messages. Includes a robust free tier, and optional paid subscriptions if you go over.",
     "publishedAt": "2026-09-13T21:30:23.000Z"
-  },
-  {
-    "id": "applevis-apps-9b1b82d9dfad3d73",
-    "title": "Final Fortress",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/final-fortress",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Final Fortress is a match-3 puzzle. The whole game is the screen of an old terminal: green text, one cursor, and you, the commandant of the last fortress. It is a quiet game. A working console in the dark, the hum of the systems, static like rain. A watch takes fifteen or twenty minutes: do the day's tasks, read what came in, hand over. Nothing hurries you, and nothing happens while you are away. Come back after a week and the fortress is exactly as you left it. Match tiles to finish the day's tasks. Each task brings supplies. Spend them to repair the fortress: reactor, hydroponics, antenna, armory, infirmary. Every repaired system opens new missions. Match 4 or more to charge special tiles. They clear a line, a block, or every tile of one kind. Swap two charged tiles together and they fire as one bigger shape, up to the whole board. The board gets busier as you go: convoy crates that pay out at the bottom, sealed containers with a special tile inside, interference to clear layer by layer, burned sectors the tiles fall past. Some tasks ask for a pattern: decode a sequence in order, or fill a gauge in every column. AI Madness is a mode of its own, outside the fortress. Each shift bends the rules: boards up to 10 by 13, sometimes only three kinds of tile, cascades that barely stop, tasks that may be impossible. On an iPhone with Apple Intelligence, Apple's on-device model (Foundation Models) picks the shift's character and writes its line in the log. Nothing leaves the phone. Otherwise the terminal does the same on its own. Nothing is at stake and nothing is banked. Every shift has a code. Send it to a friend and they get exactly the same board. There is a story in the log: three acts, four threads, and the notes of the commandants who held the fortress before you. It comes a few lines at a time. Read it or skip it. The game never nags about it. Repair the antenna and you will see a board with other players' stations. It is view-only, there is no chat, and it updates once a day. When the story is over, the log keeps going quietly on its own. The music belongs to your fortress alone. The sound is synthesized live and seeded from your fortress, so your station hums like no other and never loops. The hum changes with what is running, with the hour of the night and with the weather outside. Each kind of tile has its own note, and a cascade climbs the scale. One extra room, The Long Dark, carries a call of its own. Three more stations use the instruments in your phone: a weather post that reads the barometer, an acoustic modem and a direction finder. A home screen widget shows your fortress at a glance, in StandBy too. No ads. No lives, timers, energy or streaks. No pop-ups, no push notifications, no accounts, no daily rewards to come back for. Run out of moves and the terminal just says the packet was lost. Try again, nothing is taken away. You can drop a task at any time. Purchases are cosmetic only: screen colors, one extra soundtrack, custom names. Nothing you can buy helps you play, and no purchase moves you up the board. Works offline, on iPhone and iPad. Fully playable with VoiceOver, with a flicker-free stable phosphor mode and a calm mode that softens the board's flashes and haptics.",
-    "publishedAt": "2026-09-12T17:10:00.000Z"
   }
 ]

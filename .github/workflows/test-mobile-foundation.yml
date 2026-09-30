@@ -51,40 +51,17 @@ jobs:
         run: node --test test/actualidad-core.test.mjs
       - name: Run mobile content tests
         run: node --test test/mobile-content.test.mjs test/mobile-content-retention.test.mjs
-      - name: Diagnostic quarters 1 2 3
-        continue-on-error: true
+      - name: Run mobile application tests first half
         shell: bash
         run: |
-          git restore .
           mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
-          n=${#tests[@]}; q=$(( (n + 3) / 4 ))
-          node --test --test-concurrency=1 "${tests[@]:0:3*q}"
-      - name: Diagnostic quarters 1 2 4
-        continue-on-error: true
+          n=${#tests[@]}
+          half=$(( (n + 1) / 2 ))
+          node --test --test-concurrency=1 "${tests[@]:0:half}"
+      - name: Run mobile application tests second half
         shell: bash
         run: |
-          git restore .
           mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
-          n=${#tests[@]}; q=$(( (n + 3) / 4 ))
-          node --test --test-concurrency=1 "${tests[@]:0:2*q}" "${tests[@]:3*q:q}"
-      - name: Diagnostic quarters 1 3 4
-        continue-on-error: true
-        shell: bash
-        run: |
-          git restore .
-          mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
-          n=${#tests[@]}; q=$(( (n + 3) / 4 ))
-          node --test --test-concurrency=1 "${tests[@]:0:q}" "${tests[@]:2*q:2*q}"
-      - name: Diagnostic quarters 2 3 4
-        continue-on-error: true
-        shell: bash
-        run: |
-          git restore .
-          mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
-          n=${#tests[@]}; q=$(( (n + 3) / 4 ))
-          node --test --test-concurrency=1 "${tests[@]:q}"
-      - name: Run mobile application tests
-        shell: bash
-        run: |
-          git restore .
-          node --test --test-concurrency=1 mobile/test/*.test.mjs
+          n=${#tests[@]}
+          half=$(( (n + 1) / 2 ))
+          node --test --test-concurrency=1 "${tests[@]:half}"

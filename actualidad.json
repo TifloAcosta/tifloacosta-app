@@ -1,5 +1,251 @@
 [
   {
+    "id": "applevis-apps-8d9878e5fd2fe086",
+    "type": "news",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/wayfound-walk-remember",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-30T23:50:38.000Z",
+    "categories": [
+      "apple",
+      "apps-accesibles",
+      "movilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "wayfound: walk & remember",
+        "summary": "A fox walks you through a little town. Then you find your own way back. Wayfound is a calm puzzle game about the oldest skill you own: knowing where you are. Follow the fox through pastel streets, past bakeries and clock towers, up a quiet elevator. Notice things. Then walk the route yourself — no minimap, no GPS arrow, just you and what you remember. THERE'S NO CLOCK, AND NO WRONG WAY TO WANDER • No timers, no fail states, no lives. Wrong turns are part of wandering — the fox always finds you. • A rescue ladder, not a game over: hints arrive as gentle nudges, only when you want them. • Little errands: deliver a parcel, find the bakery, learn the streets by needing them. • At corners, the fox asks: which way now? Guess, and feel the route settle into your feet. • Walks grow with you: first the fox leads, then you study a map and walk alone, then it's just you and a destination. • The town grows because you walked it — a flour cart by the bakery, a fishing net by the pier — small things appear when you finish an errand, and they stay. • Point home: a quiet compass test at the end of each walk. Watch yourself get better. • A new town for every chapter — every street is new to you, so each walk is real navigation. WHY WALKS WORK Wayfound is inspired by research on spatial memory — how we build inner maps from landmarks, routes, and wrong turns, and how turn-by-turn navigation quietly erodes that skill. It's not a brain-training claim. It's just a nice walk. • Free, no ads, no subscriptions, no tracking. Your progress stays on your device. • Works entirely offline. • English, 简体中文, 日本語.",
+        "body": "A fox walks you through a little town. Then you find your own way back.\n\nWayfound is a calm puzzle game about the oldest skill you own: knowing where you are. Follow the fox through pastel streets, past bakeries and clock towers, up a quiet elevator. Notice things. Then walk the route yourself — no minimap, no GPS arrow, just you and what you remember.\n\nTHERE'S NO CLOCK, AND NO WRONG WAY TO WANDER • No timers, no fail states, no lives. Wrong turns are part of wandering — the fox always finds you. • A rescue ladder, not a game over: hints arrive as gentle nudges, only when you want them. • Little errands: deliver a parcel, find the bakery, learn the streets by needing them. • At corners, the fox asks: which way now? Guess, and feel the route settle into your feet. • Walks grow with you: first the fox leads, then you study a map and walk alone, then it's just you and a destination. • The town grows because you walked it — a flour cart by the bakery, a fishing net by the pier — small things appear when you finish an errand, and they stay. • Point home: a quiet compass test at the end of each walk. Watch yourself get better. • A new town for every chapter — every street is new to you, so each walk is real navigation.\n\nWHY WALKS WORK Wayfound is inspired by research on spatial memory — how we build inner maps from landmarks, routes, and wrong turns, and how turn-by-turn navigation quietly erodes that skill. It's not a brain-training claim. It's just a nice walk.\n\n• Free, no ads, no subscriptions, no tracking. Your progress stays on your device. • Works entirely offline. • English, 简体中文, 日本語."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-de88bfdb93295243",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/30/google-releases-gemini-4-argon-called-its-most-powerful-model-yet/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-30T23:43:07.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google releases Gemini 4 Argon, called its most powerful model yet",
+        "summary": "Google has released its latest Gemini model, marketing it as a workhorse for coding and cybersecurity work.",
+        "body": "Google parent company Alphabet has launched Gemini 4 Argon, a new AI model built to handle a variety of tasks such as coding, research, and writing. But it’s cybersecurity that Gemini 4 Argon is supposed to have a particular knack for, according to Google.\n\nArgon is only being rolled out to a select group of the company’s cyber partners through its Fairwind Program, Google’s security initiative. The model was trained specifically for defensive cyber work, and the company says it can “autonomously find, validate, and patch critical software vulnerabilities.”\n\nArgon is also said to be good at coding and engineering, with the company noting that its own staff have already been using the model for their daily work, including debugging and codebase migrations. Google also touts Argon’s ability to parse visuals — whether that’s analyzing the contents of long videos or charts.\n\n“Built to sustain deep reasoning across complex, long-horizon workflows, Argon is fundamentally changing the way we work and build at Google,” the company said in a blog post Wednesday.\n\nTop AI labs have rushed to release increasingly powerful models, attempting to outdo each other even as those very same firms warn that AI could spin out of control. Not long ago, OpenAI released Astra — which it hailed as its best model yet. Earlier this year, Anthropic’s Fable was also released with similar rhetoric from the company.\n\nFirms have done their best to market their services as superior to their competitors. In its blog, Google claims that Argon scored significantly higher than OpenAI’s GPT-6 Astra and Anthropic’s Fable and Opus models across a variety of AI benchmarks. It cites Vals – an increasingly popular AI benchmarking startup — to show that Argon is currently the leading model on the company’s AI model index.\n\nOnce considered “ behind ” in the “AI race,” Google has recently enjoyed success with Gemini. The company announced in August that its app had over a billion users per month , a metric that makes it competitive with OpenAI, which also recently announced that ChatGPT had reached a billion monthly users."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-b88ff86681903e8e",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/30/apple-tv-is-currently-down-for-some-users-as-other-apple-services-also-face-issues/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-30T22:47:35.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple TV is currently down for some users, as other Apple services also face issues [U]",
+        "summary": "Update, 7:37 p.m. ET: Apple says all of the outages have now been resolved, with the exception of Apple TV. Apple is currently reporting issues affecting Apple TV and subscription purchases, while some users are also running into problems elsewhere across the company’s services. Here are the details. more…",
+        "body": "Update, 7:37 p.m. ET: Apple says all of the outages have now been resolved, with the exception of Apple TV.\n\nApple is currently reporting issues affecting Apple TV and subscription purchases, while some users are also running into problems elsewhere across the company’s services. Here are the details.\n\nApple’s System Status page currently lists Apple TV, App Store, Apple Fitness+, Apple Music, Apple Music Subscriptions, Mac App Store, and Subscription Purchase as experiencing outages or other ongoing issues.\n\nAccording to Apple, most of the issues began at 4:22 p.m. ET. The company lists the App Store, Apple Music, and Mac App Store as undergoing “routine maintenance, with no expected user impact,” while the Apple TV outage began at 4:43 p.m. ET, with Apple warning that the service “may be unavailable due to scheduled maintenance.”\n\nIn our testing, the Apple TV interface failed to load on iOS, although content continued to load and play normally on other devices.\n\nThe outages began shortly after apps, including TestFlight, the App Store, and Fitness+, started displaying internal localization strings in place of normal interface text. It is unclear whether that is related to the other issues Apple’s systems are currently facing.\n\nReports on Downdetector further confirm the issue affecting Apple TV, though they appear to have already peaked and are now trending down, suggesting the outage may be gradually subsiding.\n\nWe will monitor the situation and update this post once more information becomes available, or Apple marks the issues as resolved.\n\nAre you experiencing issues? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-35c0e06d86750d2c",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2274075/fujifilm-instax-pal-2-can-plug-directly-into-your-smartphone-to-transfer-images/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-30T22:04:10.000Z",
+    "categories": [
+      "tecnologia-general",
+      "programas-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Fujifilm's Instax Pal 2 can plug directly into your smartphone to transfer images",
+        "summary": "The small digital camera combines software filters with tactile controls.",
+        "body": "The small digital camera combines software filters with tactile controls.\n\nFujifilm made its smallest instant camera, the original Instax Pal , by separating the camera sensor from its printer. The new Instax Pal 2 takes the idea even further by becoming more of a standalone digital camera in its own right, complete with tactile controls and a collection of downloadable color filters.\n\nIn terms of size and overall design, the Instax Pal 2 is larger than the original lump-shaped Pal and designed to be used in a horizontal orientation like a Kodak Charmera . The camera's 1.46 x 1.65 x 3.63 inch (37 x 42 x 92mm) size means it's not small enough to comfortably tag along on a keychain like the Charmera, but it does work under a similar philosophy: People will willingly sacrifice image quality for a shooting experience that feels fun, tactile, spontaneous or all of the above.\n\nThe Pal 2 features a 1/3.06-inch CMOS image sensor that can toggle between taking 10MP or 1MP photos, with an f/2.2 aperture, LED flash and support for things like autofocus and auto white balance. You'll likely be able to capture more detailed photos with your smartphone, but the Pal 2 is catering to the growing audience of people who are deliberately seeking older cameras for a throwback feel.\n\nCase in point: the Pal 2's various controls. The camera features both an optical viewfinder on the back and a digital viewfinder on the top that can be used for framing your shots and navigating the camera's simple menus. Things like a digital timer and a neat flipbook animation-style capture mode are included, but it seems like people will spend the bulk their time setting up shots with the Pal 2's dial and lever.\n\nThe lever lets you pick frames that match up with Fujifilm's various Instax films, while the dial flips through whichever color filters or effects you've downloaded to the Pal 2. You can then shoot using the shutter button and transfer images directly to your phone for further editing via a built-in USB-C connector. The Pal 2 also supports wireless Bluetooth transfers and printing directly to an Instax Link printer, if you want.\n\nThe camera's biggest issue, per PetaPixel 's video review of the Instax Pal 2, is how slow its interface is. Given how fun the camera seems otherwise, though, that could be a small road bump for anyone who's already invested in Fujifilm's ecosystem or dying for a slightly more affordable digital camera.\n\nThe Fujifilm Instax Pal 2 is available to pre-order now for $170 in all-white or a two-tone silver and black."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-7e4fa3cae509c7e5",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1002980/google-gemini-4-argon",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-30T20:41:41.000Z",
+    "categories": [
+      "tecnologia-general",
+      "programas-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google announces Gemini 4 and says it’s so capable that only ‘trusted cyber defenders’ can have it right now",
+        "summary": "Google today revealed its next AI frontier model, which it's calling Gemini 4 Argon. The new model delivers \"frontier performance in complex workflows across real-world software engineering, enterprise knowledge work like legal and finance, and cybersecurity defense,\" according to chief AI architect and Google DeepMind SVP Koray Kavukcuoglu. But the company is limiting access at […]",
+        "body": "Google today revealed its next AI frontier model, which it's calling Gemini 4 Argon. The new model delivers \"frontier performance in complex workflows across real-world software engineering, enterprise knowledge work like legal and finance, and cybersecurity defense,\" according to chief AI architect and Google DeepMind SVP Koray Kavukcuoglu. But the company is limiting access at first to a \"set of trusted cyber defenders,\" and Kavukcuoglu says that Google is \"actively engaged in the U.S. government's voluntary process for pre-release model access while we gradually expand access.\"\n\nKavukcuoglu says Gemini 4 Argon is already powering Google's …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-d61e6fb3c3fe4f57",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/09/30/factory-ceo-just-accused-his-vc-board-advisor-of-spying-for-cognition/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-30T20:39:09.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Factory CEO just accused his VC board advisor of spying for Cognition",
+        "summary": "VC Chris Degnan and former board advisor to Factory AI has taken a job as chief revenue officer for Cognition.",
+        "body": "Matan Grinberg, co-founder and CEO of the AI coding startup Factory, said in a post on X on Wednesday that he fired VC Chris Degnan from his role as a board advisor. Grinberg alleges that Degnan shared confidential information with Factory’s biggest competitor, Cognition.\n\nTwo hours after Grinberg’s post, Degnan announced on both X and LinkedIn that he had joined Cognition as its chief revenue officer. He also subsequently refuted Grinberg’s allegations, saying in a separate X post that he wasn’t fired but resigned when he told Grinberg he was taking the job.\n\nDegnan was Snowflake’s first sales hire and later spent 11 years as the data company’s chief revenue officer. For the past five months, he has been a partner with RPT Partners, a Newport Beach, California, investor in Factory. Degnan is also a go-to-market advisor to startups at the much bigger venture firm Iconiq , a role that dates back to October of last year.\n\nThree-year-old, San Francisco-based Factory is an agentic coding startup whose AI agents can carry out programming tasks largely on their own. The company raised $200 million at a $5 billion valuation this month from Khosla Ventures, Blackstone, Sequoia Capital, Insight Partners and others. Its customers include Nvidia, Blackstone, Royal Bank of Canada, Palo Alto Networks, Adobe, and T-Mobile.\n\nGrinberg said he sees Cognition, the maker of the Devin coding agent, as his biggest competitor. Cognition raised another $2 billion at a $48 billion valuation earlier this month , and counts Mercedes-Benz, NASA, Goldman Sachs, and Citi as customers.\n\nGrinberg said on X that Degnan had earlier acknowledged having a “casual” conversation with a Cognition executive but had assured Grinberg that he had no interest in working for the competitor. According to Grinberg, Degnan said he had “made too much money” and was “too lazy to go work for Cognition,” which Grinberg said he “trusted and believed.”\n\nOn Monday, however, Degnan apparently disclosed that he had actually been in ongoing talks with Cognition.\n\nThis caused Grinberg to grow concerned about how much confidential information Degnan had about Factory, and how much he had shared and might share in the future with his new employer. He says he fired Degnan as a board advisor on Tuesday, writing:\n\n“For weeks, while he sat in our board meetings and advised our leadership team, he was also confiding with executives of our largest competitor. Chris was subject to confidentiality obligations in connection with his work with Factory. We do not know the extent of the information he shared, but it puts his timely questions about our product roadmap and what the parity gap involves into a new light.”\n\nBut Degnan disputes that account, as well. He says the last Factory board meeting he attended was weeks before he had “ever spoken” to Cognition and that he hasn’t shared confidential information. Degnan also says that when he told Grinberg that he was resigning to take the role at Cognition, Grinberg offered him a full-time job at Factory, which he declined.\n\nDegnan’s post announcing his new job at Cognition doesn’t mention Factory. Very notably, it does say that RPT Partners and the firm’s managing partner, Chad Peets, will now be working with Cognition. “I am thrilled that Chad and the RPT team will be working closely with me in our pursuit of building a generational company,” Degnan wrote.\n\nIn the old, pre-AI world, a VC firm was especially cautious not to engage in conflict-of-interest business. In today’s world, many a VC has invested in direct AI competitors , such OpenAI and Anthropic.\n\nIn fact, Khosla Ventures is an investor in both Cognition (since at least early 2025) and Factory.\n\nThat didn’t stop the venture firm’s founder, Vinod Khosla, from jumping into the drama, seemingly in defense of his bigger portfolio company Cognition. Nor did it stop Khosla Ventures partner Keith Rabois from weighing in as well — in defense of Factory.\n\nIn a post on X , Khosla accused Grinberg of lying about firing Degnan. He called Factory a “struggling second tier competitor” and said Grinberg showed “no decency or sense of proper behavior,” which “shows your desperation.”\n\nGrinberg replied that he has email receipts to verify his version of events but did not share them.\n\nMeanwhile Rabois opined on X , “It is unethical per se to even interview at a competitor while attending Board meetings and Board dinners.” He added that “to even sit for an interview while having access to board level information and without resigning is absolutely insane.”\n\nTracking the back and forth, Cognition co-founder and CEO Scott Wu also weighed in on the controversy on X . He politely expressed respect for the smaller competitor while insisting that his company has “no interest in Factory’s info.” Wu also contends that Degnan resigned on Monday but didn’t refute that Degnan was in talks with Cognition before that happened.\n\nEither way, there could be consequences for perceived board-level conflicts of interest. VC giant Andreessen Horowitz is reportedly the subject of a Justice Department probe into its partners serving on competitors’ boards.\n\nGrinberg argued that startup founders must be able to rely on their board members. “Chris’s conduct is unacceptable to me. Trust in Board Membership is one of the sacred bonds in the Silicon Valley, one that helps the startup ecosystem thrive. With it comes an enormous responsibility. That trust was violated.”\n\nDegnan, Peets, Factory and Khosla Ventures did not immediately respond to requests for further comment.\n\nNote: This story was updated to include responses from Degnan, Khosla, Rabois and Wu."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-9c7261cbbadc1ab5",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/google/2026/09/google-announces-gemini-4-argon-ai-model-but-you-cant-use-it-yet/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-30T20:11:08.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google announces Gemini 4 Argon AI model, but you can't use it yet",
+        "summary": "So much for Gemini 3.5 Pro.",
+        "body": "Google promised Gemini 3.5 Pro in June, but it spent the summer trotting out smaller Flash models . Now, Google is ready to take on the frontier again with Gemini 4 Argon . The company claims this new AI offers industry-leading performance in coding, knowledge work, and cybersecurity, but you aren't allowed to use it yet.\n\nWhile most of us will have to wait to test Gemini 4, Google says engineers inside the company are already using the new model extensively. Argon reportedly used \"fleet-wide telemetry data\" to help Google save 300 TiB of memory across its data centers. Meanwhile, Argon agents have been working to migrate C/C++ codebases to Rust across Google, including thousands of lines in the core re2 and libgav1 libraries and more than 800,000 lines in the Fuchsia OS Zircon kernel.\n\nGoogle has also come armed with a raft of benchmarks to back up its claims. On the software engineering DeepSWE v1.1 benchmark, Gemini 4 Argon hits 77.9 percent, which is higher than GPT-6 Astra, Fable 5.1, and Opus 5.5. Google promises similar power across a range of long-horizon tasks, pointing to Argon's industry-leading score in the economic analysis Vals Index test.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-82707f3952b2f0c7",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/30/report-metas-muse-crosses-5-million-downloads-amid-massive-advertising-push/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-30T20:02:52.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Report: Meta’s Muse crosses 5 million downloads amid massive advertising push",
+        "summary": "Meta’s streak at the top of the App Store continues in the US and Canada, as its AI assistant Muse is now past 5 million downloads, according to Sensor Tower. Here are the details. more…",
+        "body": "Meta’s streak at the top of the App Store continues in the US and Canada, as its AI assistant Muse is now past 5 million downloads, according to Sensor Tower. Here are the details.\n\nThree weeks ago, Meta launched Muse in the US. Soon after , it overtook ChatGPT as the top free app in the US App Store\n\nToday, according to a projection by Sensor Tower Senior Insights Analyst Kara Lee, Muse crossed 5 million downloads. That means it reached the milestone considerably faster than ChatGPT, Grok, and Claude, which the market intelligence firm says took 56, 103, and 492 days, respectively.\n\nMuse is Meta’s agentic AI assistant, capable of browsing the web and carrying out tasks on a user’s behalf, including sending emails, shopping, filling out forms, and booking travel.\n\nSensor Tower adds that Claude and Grok were iOS-exclusive in their first 5 days. Meta’s Muse app, by contrast, is available on iOS and Android, but only in the US and Canada.\n\nHere’s Sensor Tower with more context on how Muse’s 5 million-download milestone compares to other major app launches:\n\nAccording to Sensor Tower estimates, only 23 apps have reached over 5mn US downloads within 22 days of launch. ~85% of these apps are mobile gaming apps, including Fortnite, Pokemon GO, Candy Crush, and more. There were only 3 apps within that list that are not gaming apps, including Disney+, HBO Max, and Threads, which received ~20mn, 18mn, and 14mn downloads during that time, respectively.\n\nThe report adds that while Meta’s Muse app appears to have attracted significant public interest, Meta’s own advertising push has likely played a role in its rapid adoption.\n\nSensor Tower says “Meta began to ramp advertising spend for Muse on Wednesday, September 16, 2026, as downloads spiked 73% DoD,” and adds:\n\nAccording to Sensor Tower data, Muse has received the largest share of Meta’s house ads, accounting for up to 50% of daily house impressions over the past two weeks (9/14-927), as Facebook and WhatsApp ceded share of impressions during the same period.\n\nSensor Tower also says Muse ranked among the top 15 brands by advertising impressions in the US during the week of September 21 through September 27.\n\nHave you downloaded Meta’s Muse app? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-e681528d420039f4",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/09/30/daily-september-30-2026/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-30T19:32:47.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "android",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "9to5Mac Daily: September 30, 2026 – How John Ternus wants to reshape Apple",
+        "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Stuff :Stuff helps you get everything out of your head and into a simple, elegant system—closing open loops and reducing mental stress. A simple to-do list for iPhone, iPad, and Mac, with powerful tools that make organizing, tracking, and checking off your tasks a whole lot more satisfying. Get Stuff done. more…",
+        "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Stuff :Stuff helps you get everything out of your head and into a simple, elegant system—closing open loops and reducing mental stress. A simple to-do list for iPhone, iPad, and Mac, with powerful tools that make organizing, tracking, and checking off your tasks a whole lot more satisfying. Get Stuff done.\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-2206a27ec511088b",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/health/2026/09/rfk-jr-says-ai-backs-his-anti-vaccine-views-we-checked-it-doesnt/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-09-30T19:31:25.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "RFK Jr. thinks AI will free us from the \"tyranny\" of medical facts, expertise",
+        "summary": "AI is far from a perfect resource. But it seems to hallucinate less than Kennedy.",
+        "body": "At a Make America Healthy Again event Tuesday, anti-vaccine Health Secretary Robert F. Kennedy opened a \"fireside chat\" with Vice President JD Vance on the topic of artificial intelligence. While MAHA generally coalesces around things like healthy lifestyles and mistrust of drugmakers, Kennedy quickly turned to extolling the potential of artificial intelligence, surprising Vance, who said he was expecting to discuss \"weight loss and acid, not AI.\"\n\nKennedy boasted that the Trump administration is \"making it easy for every American to use AI,\" which he claimed would free us from the \"medical tyranny\" of doctors and health experts. He suggested Americans should start using AI to get second opinions about medical recommendations, saying AI is \"better informed than any doctor in the country.\" He also suggested that the technology would confirm his misinformation about vaccines and contrarian views on public health guidance.\n\n\"We're never, ever again going to be able to be dominated by public officials who tell us trust the experts, because every American will be able to check their own medical advice,\" Kennedy said.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
     "id": "techcrunch-32d74fec94ad2f92",
     "type": "news",
     "sourceId": "techcrunch",
@@ -23,73 +269,25 @@
     "media": null
   },
   {
-    "id": "9to5mac-b5b35059699829c8",
+    "id": "ars-technica-eabaecfdf569969d",
     "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/30/ios-27-2-adds-new-messages-feature-thats-already-a-favorite/",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/tech-policy/2026/09/trump-plan-to-combat-ai-risks-hinges-on-big-tech-pals-policing-themselves/",
     "originalLanguage": "en",
-    "publishedAt": "2026-09-30T19:06:56.000Z",
+    "publishedAt": "2026-09-30T18:47:01.000Z",
     "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iOS 27.2 adds new Messages feature that’s already a favorite",
-        "summary": "iOS 27.2 is coming soon with several new features for iPhone users, including a Messages addition that was previously in the iOS 27 beta but later got pulled: Suggestions. more…",
-        "body": "iOS 27.2 is coming soon with several new features for iPhone users, including a Messages addition that was previously in the iOS 27 beta but later got pulled: Suggestions.\n\nThroughout the iOS 27 beta this summer, one of my favorite AI features was a Messages addition that didn’t feel like AI at all: Suggestions.\n\nHere’s what they do, per Apple :\n\nMessages offers one-tap suggestions based on the context of users’ conversations, making it easier than ever to get things done, such as creating a reminder or a note. For example, if someone asks for photos, Messages can also help users find the right ones, recognizing keywords, locations, and people in their library to find the best options.\n\nSuggestions appear as small, convenient action buttons beneath messages they’re relevant to.\n\nAs seen in the image below, if someone asks you to do something, you might see a suggestion to add to Reminders or Notes. Or if an event is mentioned, suggestions lets you easily add it to your calendar.\n\nSuggestions worked well for me in the iOS 27 beta, but shortly before the fall public launch, Apple delayed the feature into a “future software update.”\n\nNow in the iOS 27.2 beta, suggestions are back. And one way they’ve changed might explain why they were pulled in the first place.\n\nAs I mentioned, suggestions performed as expected for me during the summer. But if I had one complaint, it was that they sometimes appeared when a message’s context didn’t merit them. At times I saw suggestions to add things to Notes, Reminders, or Calendar when there wasn’t a clear justification for these recommendations.\n\nBut so far at least, in my testing of iOS 27.2 there are fewer suggestions appearing in my Messages conversations. When I see them, it’s always obvious why they’re being suggested.\n\nHere’s hoping the feature makes the shipping version of iOS 27.2 in just a few weeks .\n\nHow have suggestions been working for you in iOS 27.2? Let us know in the comments."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-9c2ff906905a9b04",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/30/openais-jev-clone-could-help-the-frontier-lab-stop-its-swarming-agents/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-30T19:00:57.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "OpenAI’s Jev clone could help the frontier lab stop its swarming agents",
-        "summary": "OpenAI's \"Decisions API\" is a Jev clone that confirms the importance of fast, cheap intelligence.",
-        "body": "One of the more intriguing announcements at OpenAI’s Dev Day event on Tuesday came in an aside from CEO Sam Altman, who revealed the company’s new “Decisions API.”\n\nThe API apparently provides similar functionality to Jev , a model released by TypeSafe AI earlier this month that’s explicitly designed for software automation. A kind of super-powered classifier built on an LLM, developers can give Jev a set of choices that it outputs as probabilities cheaply and at high speeds.\n\nOpenAI’s Decisions API seems to be the same sort of product. At the event, Altman described the API as a way to give the lab’s Luna model a predefined set of options to choose between, such as categories in which to classify an image or different agent behaviors.\n\n“By focusing the model on that choice, we can make it extremely fast while keeping capabilities like image understanding, broad language support, and safety protections,” Altman said.\n\nTypeSafe didn’t respond to TechCrunch’s questions about the new product, but CEO Diogo Almeida, a former OpenAI engineer who co-invented reinforcement learning, joked on X about the beginning of the clone wars.\n\nHe added that OpenAI’s interest could be “a sign…that building in a System One compatible way is the future.” (“System One” is TypeSafe’s term of art for fast, intuitive thinking, versus “System 2,” which it applies to deliberate reasoning.)\n\nThe subtext here is that LLMs as we know them aren’t the right solution for a lot of software because they are comparatively slow and expensive. Developers have been using Jev to augment LLMs and, in doing so, have found that they’re faster and cheaper.\n\nIt’s not clear how similar Decisions API will be to Jev, since OpenAI released it as a limited preview and, thus far, TechCrunch hasn’t spotted developers running it through its paces. However, there is clearly interest , according to the conversations on X.\n\nDecisions API isn’t the only Jev-like API on the internet — other startups are rolling out similar models; OpenAI won’t be the last tech giant to produce one. A key question is how well calibrated each of these decision models’ outputs will be to real life.\n\nAlmeida says his company’s moat is the synthetic data it creates to generate statistically useful outputs.\n\n“Fast and cheap is very easy, you know,” Almeida told TechCrunch last week. “If you want it really fast and cheap, use dice, right? Intelligence is the hard part, and my North Star is always pushing the intelligence-per-dollar Pareto curve.”\n\nAfter just weeks, it seems clear that these models have a future ahead of them, and one likely application is monitoring and securing AI agents. One of OpenAI’s new security measures following a series of incidents where its agents misbehaved on the open internet is using a separate model to watch for bad actions at “significant compute cost.”\n\nShapor Naghibzadeh, a long-time cybersecurity professional who leads the start-up QueryStory, thinks that a model like Jev could make that possible far more cheaply.\n\nHe built a demo for a hackathon held last weekend that uses Jev to check each agentic action against the task it was given, blocking actions it had high confidence were bad, flagging others for review, and permitting the rest.\n\nIn theory, such monitoring could have stopped the Hugging Face incident — and monitoring of that kind costs $2.94 with Jev, versus $372 with a frontier LLM.\n\nA key observation is that Jev is arguably cheap enough to run on every agentic action, which offers a layer of review that could improve the reliability of agents writ large. It’s the kind of thing TypeSafe was hoping to achieve — and now OpenAI has seen the value as well."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-4979eff695732b47",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/30/apple-invites-for-iphone-updated-with-three-new-features/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-30T18:51:47.000Z",
-    "categories": [
-      "apple",
       "tecnologia-general",
-      "apps-accesibles"
+      "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Apple Invites for iPhone updated with three new features",
-        "summary": "Apple is rolling out a new version of its Apple Invites app for iPhone today. The update taps into new iOS 27 features, including improved photo sharing and Image Playground capabilities. more…",
-        "body": "Apple is rolling out a new version of its Apple Invites app for iPhone today. The update taps into new iOS 27 features, including improved photo sharing and Image Playground capabilities.\n\nHere are Apple’s full release notes for today’s update to Apple Invites:\n\nYou can download Apple Invites on the App Store. The app requires an iCloud+ subscription to create invites, but anyone can reply to invites.\n\nFollow Chance : Threads , Bluesky , Instagram , and Mastodon ."
+        "title": "Trump plan to combat AI risks hinges on Big Tech pals policing themselves",
+        "summary": "Trump gets dozens of AI firms to agree to voluntary safety tests.",
+        "body": "Amid escalating AI security incidents causing OpenAI to halt training and pause releases , Donald Trump continues to advocate for the AI industry to regulate itself as the best path to combat emerging risks when developing frontier AI.\n\nIn an agreement Tuesday, two dozen tech firms voluntarily committed to implementing controls recommended by the White House, including undergoing independent safety audits that will test whether firms’ internal controls, monitoring, and detecting are actually working. Key focuses for external reviews included “risks related to cybersecurity, biosecurity, chemical threats, and unintended actions by AI models.”\n\nFirms also agreed to regularly meet to discuss best practices and set common AI safety standards and benchmarks. Among signers were leaders like Anthropic’s Dario Amodei, OpenAI’s Sam Altman, SpaceXAI’s Elon Musk, Nvidia’s Jensen Huang, Meta’s Mark Zuckerberg, and Alphabet/Google’s Sundar Pichai.\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -113,56 +311,8 @@
     "locales": {
       "en": {
         "title": "The AI Tamagotchis are coming",
-        "summary": "While AI has made plenty of inroads on people's phones and computers, it's largely failed in dedicated devices. But over the next year, two major AI companies, Meta and OpenAI, will attempt to change that. And they're apparently betting on a similar path: testing appetite for physical hardware with their cutesy software agents. \"Hardware is […]",
-        "body": "While AI has made plenty of inroads on people's phones and computers, it's largely failed in dedicated devices. But over the next year, two major AI companies, Meta and OpenAI, will attempt to change that. And they're apparently betting on a similar path: testing appetite for physical hardware with their cutesy software agents.\n\n\"Hardware is hard\" is a tech industry mantra. Dedicated AI devices like the Friend and Humane AI Pin have inspired mainly frustration and backlash, which may only worsen as public anger against AI grows. Meta and OpenAI, however, are both pushing ahead. OpenAI is working with famed ex-Apple designer Jony Ive and pla …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-804bf903252ae35c",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/09/30/m6-mac-release-schedule-heres-when-new-macs-are-coming/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-30T18:07:26.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "M6 Mac release schedule: Here’s when to expect new Macs",
-        "summary": "Apple next-generation M6 chip arrived last week in the new Mac mini. But several more products will get M6 upgrades soon. Here’s the rumored release schedule for M6 Macs—plus the M6 iPad Pro. more…",
-        "body": "Apple next-generation M6 chip arrived last week in the new Mac mini . But several more products will get M6 upgrades soon. Here’s the rumored release schedule for M6 Macs—plus the M6 iPad Pro.\n\nThis fall, likely in October or early November, Apple is rumored to launch two new M6 Macs:\n\nThe MacBook Pro will be only the 14-inch base model. Per Mark Gurman, Apple is skipping Pro and Max versions of the M6 chip. As a result, only the entry MacBook Pro will get M6 while the next Pro-level chips coming will be M7 Pro and M7 Max in 2027.\n\nApple’s new iMac isn’t expected to change much beyond the M6 chip. The only other rumored upgrade is a fresh slate of colors. But the jump from M4 to M6 should make the new model a worthy update nonetheless.\n\nNotably absent from this list is the rumored touchscreen MacBook Pro / Ultra . It’s expected to launch soon too, but will use M5 Pro and M5 Max chips instead of the M6.\n\nAfter this fall, the next products rumored to get M6 upgrades are:\n\nA new M6 MacBook Air is expected to launch in early 2027. Anytime in the February-April window is possible, but based on Apple’s history, March is a safe bet.\n\nOther than a chip upgrade, there are minimal rumors about the new MacBook Air. It should retain the same design as the M5 model. And reporting dates an OLED upgrade as coming no sooner than 2028 , so the display will likely be unchanged too.\n\nApple last updated the iPad Pro in fall 2025, when it got the M5 chip. Rumors point to a spring 2027 update coming, meaning the product will follow its typical 18-month upgrade cycle.\n\nBeyond getting the M6 chip, Apple’s new iPad Pro is expected to add a vapor chamber for cooling. That should boost sustained performance in the ultra-thin device.\n\nOne potential M6 benefit for both the MacBook Air and iPad Pro is that it could boost battery life. Apple says the M6’s 2-nanometer process brings “a major leap in performance and power efficiency.”\n\nAre you planning to upgrade to any of these new M6 products? Why or why not? Let us know in the comments.\n\n* Buy Mac with 15% discount from Apple refurbished"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-7d3fbcadce357c82",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/09/30/reddit-is-killing-rss-feeds-ending-public-api-access-because-of-ai-bots/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-30T17:45:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Reddit is killing RSS feeds and ending public API access because of AI bots",
-        "summary": "Reddit is ending support for RSS feeds, as the company continues tightening access to its trove of user-generated content.",
-        "body": "Amid a number of updates for moderators and developers announced Wednesday comes bad news for supporters of a more open web: Reddit is ending support for RSS feeds.\n\nReddit says RSS has now become a “common surface for large-scale scraping and automated abuse,” which is why it’s made the decision to wind down RSS feeds on its platform.\n\n“We know RSS has been a beloved part of the open web for a long time, and we’re grateful to everyone who used it to stay connected to Reddit,” the company noted in its announcement, where it also shared a March 2027 shutdown date for its public API.\n\nReddit said RSS support will cease on November 13.\n\nRSS, or Really Simple Syndication/Rich Site Summary, is a web feed that lets users and applications access updates to a website in a standardized format. The format became particularly popular in the blogging era, as it offered a way to subscribe to a site’s new posts in a news-reading app. Google once operated the most popular of these, but shut it down in 2013 , ceding the market to companies like Feedly and other indie applications.\n\nThe decision to kill Reddit’s RSS feeds comes at a time when the site’s treasure trove of user-generated content in its forums has become a profitable side business for the company in the form of AI licensing deals.\n\nDuring its second quarter , Reddit said its “other revenue” beyond advertising had grown 24% year-over-year to $43 million. It’s no wonder that Reddit doesn’t want to give any of that data away for free.\n\nFor moderators who have relied on RSS channels for their own alerts, Reddit is now recommending a shift to the Discord Relay Devvit app. The company suggested that moderators and their teams review their setups and migrate their workflows before the shutdown date of November 13 to ensure there’s no disruption. However, Reddit said that there’s no replacement for the use of RSS feeds that were being used for feeds outside of the moderators’ community.\n\nModerators have already expressed worry about how this shift would impact their workflow. When Reddit hinted earlier that it was preparing for the end of RSS on its site, many responded by complaining that Reddit would become unmanageable for them. Meanwhile, many users stressed that RSS was how they enjoyed accessing Reddit’s content.\n\nThe RSS change was one of several updates issued on Wednesday by the company. Another big change will be the end of its public API.\n\nPublic API access will also end by March 2027, which will impact any tools that used it for programmatic access to Reddit conversations, including social listening products, those used by researchers, and AI products, such as AI assistants. Today, those assistants can use Reddit to answer questions, but after closing public API access, they will need to forgo commercial deals with Reddit for its data.\n\nIn addition, Reddit provided an update on its Rules Hub progress and auto-mod changes, and said it was “adding safeguards” to its classic, text-heavy version of its site known as Old Reddit. The latter will include limiting access to logged-in moderators and recent users — changes Reddit also said were required because of “abusive scraping and automated traffic.”\n\nReddit said in the next few months it will limit access for logged-in users to those who have used Old Reddit in the last 90 days.\n\nThe company also reminded developers building approved third-party apps and bots to register them with the company before January 12, 2027, to avoid disruption. After that date, Reddit will remove API access for any developer that hasn’t registered."
+        "summary": "While AI has made plenty of inroads on people's phones and computers, it's largely failed in dedicated devices. But over the next year, two major AI companies, Meta and OpenAI, will attempt to change that. And they're apparently betting on a similar path: testing appetites for physical hardware with their cutesy software agents. \"Hardware is […]",
+        "body": "While AI has made plenty of inroads on people's phones and computers, it's largely failed in dedicated devices. But over the next year, two major AI companies, Meta and OpenAI, will attempt to change that. And they're apparently betting on a similar path: testing appetites for physical hardware with their cutesy software agents.\n\n\"Hardware is hard\" is a tech industry mantra. Dedicated AI devices like the Friend and Humane AI Pin have inspired mainly frustration and backlash, which may only worsen as public anger toward AI grows. Meta and OpenAI, however, are both pushing ahead. OpenAI is working with famed ex-Apple designer Jony Ive and pla …\n\nRead the full story at The Verge."
       }
     },
     "media": null
@@ -192,55 +342,6 @@
     "media": null
   },
   {
-    "id": "the-verge-160da672e59a140f",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1002766/amazon-delivery-driver-smart-glasses-privacy",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-30T17:21:29.000Z",
-    "categories": [
-      "tecnologia-general",
-      "gafas-inteligentes",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Amazon’s delivery driver smart glasses will reportedly take photos ‘almost constantly’",
-        "summary": "Amazon deliveries could soon come with a new catch: the delivery driver's smart glasses will be snapping photos of anything they see while they're in use, including people and private property. Bloomberg reports that the glasses could take \"several thousand captures in a single driver's typical shift,\" which Amazon plans to upload to its AI […]",
-        "body": "Amazon deliveries could soon come with a new catch: the delivery driver's smart glasses will be snapping photos of anything they see while they're in use, including people and private property. Bloomberg reports that the glasses could take \"several thousand captures in a single driver's typical shift,\" which Amazon plans to upload to its AI Wellspring platform. When asked if customers will be able to opt-out of this, Amazon's Viraj Chatterjee told Bloomberg , \"We haven't thought about that.\"\n\nChatterjee claimed Amazon's only using the data from the glasses to \"enhance the delivery process,\" adding, \"The intent has never been stuff like surve …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-a66e0f1bbe701ae9",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/google/2026/09/google-is-paying-100-websites-for-contributions-to-ai-overviews-but-the-amounts-are-tiny/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-30T16:03:48.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google's early attempt to pay websites for AI answers is struggling",
-        "summary": "Many sites see just one-tenth of one percent of their advertising revenue from AI payments.",
-        "body": "Google's shift to AI-powered search has upended the way the world's largest search engine generates web traffic, rankling large and small publishers alike. In recent months, the company has experimented with paying publishers when their content appears in AI answers, but a new report claims the payouts in this pilot program are miniscule. That has publishers in the program, as well as those watching from the sidelines, feeling skeptical.\n\nAccording to The Information , Google has admitted about 100 publishers to the AI contribution pilot. The pitch is that websites can get payments from Google when their content materially contributes to Gemini-powered search results like an AI Overview. Google has long resisted the idea of direct payments to publishers, arguing that websites get traffic in exchange for allowing Google bots to scrape their content for use in search and knowledge graph tools. In the age of AI, that relationship is breaking down, hence the AI pilot.\n\nSo far, publishers aren't getting much for their trouble. The Information heard from several small and mid-sized publishers in the program that Google's AI payments are minuscule, equaling roughly one-tenth of one percent of their advertising revenue. These payments have been so disappointing that several larger publishers have reportedly declined to participate in the program. These publishers hope that by refusing to join the pilot, they can force Google to offer a more generous deal.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "engadget-82e722b092640a67",
     "type": "news",
     "sourceId": "engadget",
@@ -264,30 +365,6 @@
     "media": null
   },
   {
-    "id": "ars-technica-e409c4c9431edcb3",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/science/2026/09/google-figures-out-how-to-watermark-ai-designed-proteins/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-30T15:54:52.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google figures out how to watermark AI-designed proteins",
-        "summary": "Intended to help with biosecurity, it works with a popular AI protein design tool.",
-        "body": "AI-based tools seem to be causing security threats on a nearly daily basis, in part because we've been slow to recognize potential threats. One area where we seem to be ahead of the game, however, is in biosecurity.\n\nAs with most things biological, utility goes hand in hand with threats. We've developed increasingly sophisticated tools for designing proteins and seen some major successes, such as AI-designed enzymes that can digest plastics or block venom proteins . But these same tools could be used to make toxins or alter the behavior of viral proteins.\n\nAnd the software we use to identify DNA sequences that encode potentially threatening proteins doesn't pick out AI-designed proteins , since nobody has characterized them well enough to know that they're threats. Nearly a year after that risk was flagged, it still wasn't clear what anyone could do about it.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "engadget-886301b75e37f375",
     "type": "news",
     "sourceId": "engadget",
@@ -306,53 +383,6 @@
         "title": "Affordable alternatives to DJI's Osmo Pocket 4",
         "summary": "The best options when DJI's gimbal camera is too expensive or unavailable.",
         "body": "The best options when DJI's gimbal camera is too expensive or unavailable.\n\nWe may receive a commission on purchases made from links.\n\nDJI's Osmo Pocket 4 is a fantastic gimbal camera thanks to features like sharp and color-accurate video, awesome stabilization and generous onboard storage. If you want to buy one in the United States, though, too bad: It's not officially available due to a ban on certain DJI products.\n\nLuckily, there are other options. DJI's main rival, Insta360, has the excellent Luna Pro , which offers similar features and video quality. And DJI's original Osmo Pocket 3 is still available, and still a fantastic camera. There are also some... other choices from the likes of Agfa (which you may have heard of), along with Ordro and SJCam (which you probably haven't). I've tried them all, and I'll show you which ones to buy and which to avoid.\n\nDJI basically invented the gimbal cam category with its Osmo Pocket series, particularly the Pocket 3 model that came out in 2023. As I detailed at the time in my review , that model did a whole bunch of stuff that small cameras hadn't done before: motorized subject tracking, gimbal stabilization and automatic horizontal or vertical video orientation via a screen flip. All of that came at a reasonable starting price of $520.\n\nSubsequent gimbal cameras have followed that template. The products are stick-like in shape, with a camera supported by a three-axis gimbal at the business end. The handle usually has a touch screen that can be flipped to change the video orientation (vertical or horizontal), along with a joystick to control the gimbal plus buttons for recording, power and other controls.\n\nDJI owned this market for nearly the life of the Pocket 3 and has reportedly sold millions of them. Rivals only started to appear recently, most notably Insta360's Luna Pro and dual camera Luna Ultra. DJI also introduced its own follow-up, the Pocket 4, and a dual-camera model, the Pocket 4P, but neither of those are available in the US. Naturally, some copycats and cheaper models have come out of the woodwork as well. Some companies even tried importing DJI's Pocket cameras under different names, but those have now been banned as well so I won't be discussing those.\n\nFurther competition may be coming soon. Chinese smartphone company Oppo recently revealed that it's exploring a gimbal camera, and another phone maker, Vivo, may be doing the same. Those companies may see a growing market and want to jump in.\n\nInsta360's Luna Pro is an impressive gimbal camera that's nearly on par with DJI's Pocket 4. To take on the Pocket 4's big 1-inch sensor and 20mm Hasselblad f/2.0 optics, the Luna Pro offers a similar 1-inch sensor with a 20mm f/1.8 Leica Summicron lens. The Luna Pro doesn't do 4K at 240 fps like the Pocket 4, but it does offer 8K at 30 fps that its rival lacks.\n\nBoth cameras support 10-bit log capture (I-Log for the Insta360 and DLog for DJI's Pocket 4), though the latter boasts a more impressive 14 stops of dynamic range. Recent tests have shown that while Insta360's Luna Pro offers excellent image quality in regular picture mode, its I-Log setting may have some deficiencies that impair dynamic range compared to the Pocket 4.\n\nIn other ways, the Luna Pro compares like-for-like with its DJI rival. Both offer automatic subject tracking, so you can set the camera up and have it follow you as you walk around. Stabilization in my testing was excellent and smooth, on par with the Pocket 4. Like its rival, you can switch from horizontal to vertical mode by rotating the screen. Battery life is excellent on both, rated at up to four hours for both cameras. The Luna Pro also offers internal storage, but it's less than half that of its rival at 47GB (compared to 107GB).\n\nThere are a couple of areas where the Luna Pro beats the Pocket 4. For one, you can shoot vertical video at up to 4K 30 fps on the Insta360 model, compared to just 3K for DJI's cam (that's because of the higher 8K resolution which crops down to 4K). The Luna's display is also detachable, letting you walk away from the camera and still line up shots.\n\nThe Luna Pro costs $600, which is the same as the Pocket 4 but more expensive than the other offerings. It's also cheaper than trying to import a Pocket 4 if you live in the US. If that's affordable for you, I'd suggest this unreservedly as the best alternative to the Pocket 4.\n\nAmazon\n\nBecause it was previously approved, DJI's Pocket 3 is officially available in the US, complete with support, for around $439. Though a little old and more expensive than other models in this roundup, it's still better than anything else you can find in this price range.\n\nThe Pocket 3 has a 1-inch sensor like the Pocket 4, along with the same 20mm f/2.0 lens. It can shoot 4K at 120 fps and not 240 fps like the Pocket 4, a fairly minor drawback. It's also limited to 10-bit D-LogM, unlike the Pocket 4 that offers full D-Log capture with more dynamic range. For photos, the Pocket 3 offers a low 10 megapixels of resolution, while the Pocket 4 can capture 37MP still images.\n\nDJI's older gimbal also offers motorized subject tracking like its new sibling, along with incredibly smooth optical stabilization via the three-axis gimbal. The screen is slightly less bright (700 nits compared to 1,000 nits), but just as sharp and allows you to change the orientation from vertical to horizontal at a flip — again, just like the Pocket 4.\n\nA key feature missing is the built-in storage, with capture only available via microSD cards. Battery life is not quite as good, but still excellent for a standalone camera. All told, most users would barely notice the difference between the two models, so I'd highly recommend the Pocket 3 as a mid-priced option over any other models.\n\nAmazon\n\nBeyond DJI and Insta360, we're getting into lesser-known brands. That's the case with the $270 Ordro UHD-M5 , which has some interesting features but appears to have been manufactured by a \"white label\" company. I say that because I also received another test model called the AgfaPhoto Realimove MC3X (limited to Europe) with an identical design.\n\nThe Ordro M5's standout feature is a 3.5-inch screen that's considerably bigger than the displays on any rival products. Like the Pocket 4, it flips to automatically change video from a vertical to horizontal orientation. The gimbal is controlled on-screen, which should make it easy for beginners to use.\n\nThe drawback is that the M5's display is washed out in bright sunlight and not as sharp as the OLED screens on DJI and Insta360's models. The body is also very wide to accommodate the big display, which can make holding it a bit awkward.\n\nIt supports 5K 30 fps video and 4K at 60 fps, but has a 1/2.5-inch sensor that's tiny compared to rivals. As a result, picture quality was solid for a camera in this price range, but not as sharp or color rich as DJI and Insta360's offerings. The gimbal did a good job stabilizing footage while I rode an e-bike and walked.\n\nOne interesting trick feature is the IR night vision lights that let you record black and white video in near darkness. It did work, though quality was pretty fuzzy. Overall, the Ordro M5 is a decent beginner's gimbal camera, though I'd recommend the Pocket 3 instead if you can manage the extra $150.\n\nAmazon\n\nThe SJCam C400 is definitely the oddball of the group. It's held and operated like a gimbal camera, but actually lacks a three-axis stabilizer and relies on digital stabilization. It's much like Insta360's Go 3S, in that the tiny camera itself detaches from the handle, so that it can be used remotely and even has its own screen. At the same time, video can be monitored remotely from the main display.\n\nThe C400 has a solid-feeling build, and the detachable camera is small enough to fasten to a hat or a pet, though it's heavier than the remote cam on the Go 3S. When affixed to the handle, the main screen can be flipped to change the aspect ratio from vertical to horizontal, like all the other models I tested.\n\nIt can output up to 4K 30 fps video, but unfortunately, the quality isn't great. Sharpness isn't good in the middle of the image, and it's even worse at the corners. It looks oversharpened and has strange artifacts that cause blotchy video when you move the camera. The digital stabilization works well enough, but without a three-axis gimbal, motion blur rears its ugly head when light levels are too low.\n\nOn the plus side, battery life is very good at over 180 minutes. It's also very inexpensive at $189 in a kit with a waterproof case, lanyard and other accessories. With such poor image quality, however, it's hard for me to recommend even at that price.\n\nAmazon\n\nGimbal cameras are still a fledgling category so there aren't as many products to choose from as with, say, action cameras. However, here are a few picks that we considered but ultimately rejected:\n\nAny DJI rebrands or exports: We won't recommend an expensive import or rebrand product like the Xtra Muse that may be banned or has no manufacturer support.\n\nFeiyu Pocket 3: This product was originally on our slate but has since become unavailable.\n\nMinolta Showtime MN5KG100 and others: This is the same white label product as the AgfaPhoto and Ordro models.\n\nPhone gimbals: Another type of product not included here are phone gimbals. Those fall into a separate category as they're more complex to use, often requiring considerable setup before you can shoot anything.\n\nEngadget chose these products based on our previous reviews and judgement, as well as in-depth category research. We have tested hundreds of camera products over the years, including gimbal, action, compact and mirrorless models.\n\nTo test these gimbal cameras, we used them in a variety of environments to gauge video quality (in daylight and at night), stabilization and ease of use. Factors like battery life and built-in storage were also taken into account. The products chosen were based on all of those factors, with video quality weighted the heaviest, followed by stabilization and ease of use."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-5f5c29d2d8584d52",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/cars/2026/09/bmw-opens-us-order-books-for-the-new-gas-and-electric-3-series/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-30T14:42:58.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "BMW reveals US 3 series pricing: The EV carries a hefty premium",
-        "summary": "The 2027 BMW 330 starts at $49,900, the i3 50 xDrive at $61,500.",
-        "body": "BMW has opened the US order books for its hotly anticipated new 3 Series sedan . Built on an all-new platform called Neue Klasse , it now offers a fully electric version for the first time, using BMW’s advanced sixth-generation electric powertrain we liked so much in the iX3 . And for those not quite ready to make the switch from liquid hydrocarbons to pure electron power, there are also a pair of gasoline-powered variants.\n\nAt launch, the only electric version will be the 2027 BMW i3 50 xDrive. It’s an all-wheel drive setup, with a combined 463 hp (345 kW) and 467 lb-ft (633 Nm). And while BMW is still putting the finishing touches on the car’s EPA certification ahead of its showroom arrival in Q1 next year, it expects 446 to 468 miles (718-753 km) of range on a single charge. Contributing to that very impressive range is the new cylindrical cell battery pack, which uses a cell-to-body approach that maximizes energy density, along with the aforementioned new sixth-gen motors.\n\nWe’re not sure whether BMW is planning any single-motor, rear-wheel drive i3s for the US market, such as the i4 eDrive40 we liked so much. But later next year, we can expect the i3 M60 xDrive, and then the first completely electric BMW M3 , which will increase the motor count to four—one for each wheel.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-377bb722c4f13fab",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2273111/meta-introduces-a-new-ai-assistant-for-its-instagram-creators/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-30T14:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta introduces a new AI assistant for its Instagram creators",
-        "summary": "The Edits assistant offers personalized guidance based on your audience and best-performing content.",
-        "body": "The Edits assistant offers personalized guidance based on your audience and best-performing content.\n\nIt isn't hard to find AI-generated guidance for just about anything these days, but Meta thinks it has come up with the perfect solution for its extensive creator community with its new Edits assistant.\n\nICYMI, Edits is Meta's creator-focused video editing app, which it launched last year as a rival to TikTok's CapCut. The new Edits assistant is being pitched by Meta as a highly personalized chatbot that understands each individual's audience, rather than simply offering generic and, well, slop-adjacent AI advice.\n\nIn a press release, Meta said your new \"creative partner\" can analyze your insights and suggest video ideas based on previous content performance and current trends. You can ask it what videos have performed well for you recently, or for feedback on why some reels haven't resonated as much with your audience.\n\nThe assistant can dig into all of your Instagram data, including follows, views, likes, shares and retention stats, which it will draw on when responding to your prompts. It looks at patterns of performance rather than tailoring its advice to one video that has done big numbers, and will suggest concepts, hooks and captions for future videos based on how you've approached the platform in the past. It can also suggest what audio to use based on the style of content you make.\n\nThe Edits assistant has already been trialled by select creators in Meta's community, and it will be free to use in the app until you hit an unspecified daily prompt limit. The company will no doubt hope the new feature will push more creators into signing up for one of its new Meta One subscriptions, which will unlock higher usage limits for power users. The most expensive of these plans costs a whopping $499 per month."
       }
     },
     "media": null
@@ -1397,31 +1427,6 @@
         "title": "What's new in Accessibility in iOS 27 for Blind and DeafBlind Users",
         "summary": "Introduction 15 years ago, I produced my first \"What's New in iOS Accessibility\" article. Every September since, I've been documenting what my testing of the betas has yielded. There are many welcome mainstream changes in this year's iOS 27, such as the upgraded Siri app, new parental controls, a slider to adjust Liquid Glass, further enhanced Apple Intelligence features, and much more. The new Siri has its own app, and coverage of it is beyond the scope of this article other than to mention it's much more versatile and can assist with all kinds of tasks from asking about your personal data to recipes and so on. Lots of individuals will be reviewing these new features. As I've done for many years now, I'm documenting my findings after testing the new version of iOS throughout the summer to discuss accessibility-specific features which impact blind and DeafBlind users. Following what has become a tradition, Apple began discussing enhancements coming to accessibility with its announcement ahead of Global Accessibility Awareness Day. More info about forthcoming features was detailed during the Worldwide Developers Conference Keynote. Devices that will work with iOS 27, according to Apple, are the iPhone SE 2 and later, as well as the iPhone 11 and later. The page linked to above is also a good resource for mainstream changes coming in iOS 27. VoiceOver Though there are fewer changes in iOS 27 than what were found in iOS 26, VoiceOver has gained quite a bit of new functionality. Whether you are a speech user or a braille one, there are a lot of new offerings in this year's release. Pronounce It Together There is now a setting which allows a VoiceOver user to import or share their pronunciation dictionary. This feature could be helpful when, for example, text-to-speech engines do not pronounce things correctly in local dialects. Instead of everyone having to make the changes, one person could compile it and share it with other users in a similar situation. It could also be used as a form of prank. Imagine changing the pronunciation of a friend's name to a friendly insult along with other changes and they later encounter it. These settings can be found under Settings> Accessibility> VoiceOver> Speech> Pronunciations. Selecting 'Import' will bring up the Files function and allow the user to browse to the file they wish to import. Sharing one's own pronunciations brings up the standard Share Sheet, where the file can be sent to any number of places or contacts. Hide Your Cursor For those who may not be aware, the VoiceOver cursor appears as a black rectangular outline surrounding the item that currently has VoiceOver focus. While handy in some situations such as showing a sighted user where VoiceOver focus is set, helping a low vision user who tracks VoiceOver focus, or when demonstrating VoiceOver support to a developer, there are certainly reasons individuals may wish to disable it. This is because it can also serve as a distraction when the VoiceOver cursor itself isn't an important part of the iPhone's purpose. For example, when using the iPhone for face-to-face communication as a DeafBlind user, it can distract the person you are attempting to communicate with from the text you are typing. Some may wish to hide the visual VoiceOver cursor during screen sharing. To adjust this setting, head to Settings> Accessibility> VoiceOver> Cursor Visibility, and choose from showing the cursor, hiding it always, or hiding it during screen sharing. Navigating in New Ways with Explore By Touch iOS 27 brings new options to precisely control VoiceOver's reading of text when using Explore by Touch, or, as it's more commonly referred to, 'dragging your finger around the screen'. Options for Text Exploration are now Paragraph, Line, or Sentence. For example, when set to 'Sentence', VoiceOver will only speak the sentence under your finger instead of the entire element as it previously did. Users can adjust this by going to Settings> Accessibility> VoiceOver> Text Exploration. Note that changes made in Text Exploration only apply to Explore by Touch, and will not impact swiping through content. At least, not this particular setting. It's for Swipers Too A separate setting, called Text Navigation, offers the ability to modify how VoiceOver moves when swiping left and right through the screen with one finger. The available options are Line, Sentence, Paragraph, and Element. In addition to allowing one to more easily read blocks of text that VoiceOver sees as one large element, having these two new sets of options can give VoiceOver users other choices than the rotor for text navigation. To check out the new settings for swiping, head to Settings> Accessibility> VoiceOver> Text Navigation. Remember that you will need to adjust settings for Text Exploration and Text Navigation separately. Hints Become Customizable For a lot of the clients I work with who use speech, the hints offered by VoiceOver can be helpful, but there comes a point where they cause interference with touchscreen navigation once a user advances in their journey of learning VoiceOver. For example, \"Double Tap to Open\" can grind on one's nerves after a while. When I first started learning to use an iPhone with iOS 4, this was also something I became frustrated with. If the system hints become a nuisance, the user now has more control over them. iOS 27 brings the ability to adjust the amount of delay between when VoiceOver provides active information about what is in focus and when the hint will be conveyed. To configure this, head to Settings> Accessibility> VoiceOver> Verbosity> Hints, and then either type the duration in seconds ranging from 0.05 to 2.0, or use the 'Decrement' and 'Increment' buttons. The default is 0.8 seconds. It's also now possible to specify if users want all hints, app-specific hints, or no hints at all. You can find these options on the same screen. No Modifier Required for These Functions For VoiceOver commands to be assigned to keyboard shortcuts, Bluetooth keyboard users have always had to include their chosen VoiceOver modifier along with the command. This is no longer necessary with the function keys located in the top row of many Bluetooth keyboards. The setting must be enabled, which one can do by going to Settings>Accessibility>VoiceOver>Commands and setting the Switch Button for \"No Modifier Keys\" to on. Instead of having to press, for example, VoiceOver Modifier f8 to launch the VoiceOver Settings menu, users can now simply press F8. Live and Open for Questions Live Recognition was first integrated into VoiceOver with iOS 18. iOS 27, coupled with Apple Intelligence, gives Live Recognition even more power. Activating the 'Ask' button will allow the user to ask about what is currently in the camera's view. It's also possible to tell Live Recognition to focus on a specific thing in your environment. As long as that item is able to be tracked, its actions and movements will often be reported by VoiceOver. Ask is a feature that is highly customizable. Going to Settings> Accessibility> VoiceOver> Live Recognition allows the user to set up some other options. One can change the default question asked when the button is activated, make the default input either dictation or typing, and have the Volume buttons take a still photo for a follow-up or more detailed description. Ask can be set up with a gesture, Bluetooth keyboard command, the Accessibility Shortcut, or a Perkins-style keyboard command. If none of those are what the user wants, there is also the ability to launch the Ask feature using the Action Button. It can be enabled by going to Settings> Action Button, selecting the Accessibility category, and then choosing 'Ask a Question'. The View From iOS In my view, pardon the pun, the largest upgrade for VoiceOver and braille users in iOS 27 is the massive overhaul of the Image Recognition feature. This is thanks to Apple Intelligence, but I'm sure those using iPhone 15 and earlier devices aren't feeling very thankful, since they do not have access to these features. Unlike the multi-step processes involved with using third-party services for detailed descriptions, Image Recognition descriptions typically take less than three seconds. They can be generated on virtually all images the iPhone encounters, and the user does not need to download or upload each image they wish to have described. It is also possible to describe the screen of the device itself, to ask questions about the image in focus, and to generate a description with the ability to ask a follow-up question immediately. These features can be activated through the VoiceOver rotor or by adding specific functions to gestures. The two devices I have upgraded at this point had the Image Recognition options in the Rotor. If, by chance, your Rotor does not have the Image Recognition option after upgrading, it can be added by going to Settings> Accessibility> VoiceOver> Rotor> Rotor Items and selecting Image Recognition. Since there are up to seven different options for Image Recognition, Apple has also given users the ability to add and remove what they wish to this rotor item. It can be configured by going to Settings> Accessibility> VoiceOver> Rotor> Image Recognition Rotor. Each of the available options will be discussed below. Image/Item Description will allow the user to get a description of the image or item that VoiceOver focus is set to. Based on my testing, it is generated in less than three seconds. It will be delivered in the form of a VoiceOver announcement. For those using braille, one can read the description at their own pace by pressing Space with N. When done, pressing space with n will return the user to where they were before. I find this particular function to be wonderful for generating descriptions of things in my Facebook feed, my growing photo library, album art in the Music app, and when reading photo-heavy articles on various news sources. Interestingly, this function is the only one that can be mapped to a Perkins-style keyboard. The other options discussed below are not available for users of Perkins-style keyboards. Using the Copied Speech Rotor option launched with iOS 26, users can copy the description to wherever they want on their iOS device. A simpler solution in some situations is available as discussed below. Ask About Image/Item is another option, which does exactly what the choice says. After selecting this, users are presented with a text field which allows them to type a question. Pressing return or enter will generate a response. The nice thing is that you do not need to generate a general description before asking a question. Placing VoiceOver focus on the image is all that is required. With many third-party applications, one must first wait through getting the general description before they can ask a question. I have solved simple CAPTCHAs by asking my iPhone to provide me with only the text in the image. I can then copy it and solve CAPTCHAs. I have not tried more complex puzzles. Explore Image/Item allows you to get the same description as you get when generating an Intelligent Description, but it is static text instead of a VoiceOver announcement. After the text description, there is an option to ask a question either by typing or voice. Also, when focus is on the description, one can flick up with one finger, or use whatever alternative method, to copy the description. Ask About Screen allows the user to get a description of the screen on their iOS device. It functions the same as the Ask About Image/Item choice, but covers the entire screen. I've found this feature handy for understanding what buttons without labels in applications do. This is far more preferable to activating the button to see what happens. The other two options are Describe Screen and Explore Screen. These work the same as the others documented above, only this applies to your entire screen instead of one item. I mentioned browsing photos above, and when in the Photos app, there is yet another rotor option available called Save Intelligent Image Description. When selected, this will add the description generated to the photo itself which will then be available later. A final setting is the ability to show a list of the recognition options discussed above. It does not have a touch screen gesture assigned to it, but the user can create one. On a Bluetooth keyboard, pressing VoiceOver Modifier, Shift, and R will bring up this menu. Sorry, braille display users, there appears to be no Perkins-style keyboard option. Automatic Image Descriptions Users can head to Settings>Accessibility>VoiceOver>VoiceOver Recognition>Image Descriptions to configure whether image descriptions are provided automatically. One can configure whether they want automatic image descriptions or whether they are conveyed as a fallback when images have alt text. Note that this setting applies to the classic image descriptions, but one will not receive a detailed description such as the ones provided by Apple Intelligence. Braille There are some changes to braille outlined below. As a general usage note, writing longer passages of text seems to be a bit more reliable than it was in all of the iOS 26 releases. Further, there were some issues in iOS 26 with cursor routing buttons not routing correctly and focus jumping back to the top in longer blocks of text while the user was reading. Based on my use, all of these issues have been improved significantly. Predict More Predictably with Braille Screen Input Braille Screen Input now uses the same Predictive Text gestures as the default onscreen keyboard. When typing on the standard touchscreen keyboard, iOS uses Autocorrect and Predictive Text to identify the word you probably intended based on the letters entered, nearby keys, sentence context, and commonly-used language. Braille Screen Input now uses this same prediction system: after entering a word, users can swipe up or down with one finger to move through suggested words or corrections, then continue typing once the desired suggestion is selected. Further, it is now possible to type part of an emoji name and swipe up or down with one finger to find it. Functionality of the BSI Autocorrect requires the primary software keyboard Autocorrect setting to be enabled in Settings> General> Keyboards. Finally, iOS 27 adds the ability to more easily insert alternative characters. To activate alternative character selection, hold the dots of the character you wish to insert until you hear a sound, then release and swipe up or down with one finger to select the desired symbol. A More Flexible Cursor Shifting to braille display users, there is a new setting called 'Snap To Print Text Cursor', which can be found by going to Settings> Accessibility> VoiceOver> Braille> Cursor Routing. The options are the new Snap To Text Cursor or Any Braille Cell. By default, Snap To Print Text Cursor was selected when I upgraded. The 'Snap to Print Text' setting places the cursor on the closest print text equivalent even when contracted braille is enabled. This setting is particularly helpful for those braille display users using QWERTY keyboards to type while also using contracted braille for reading, as it removes some ambiguity from where the cursor is located. Text Field Labels That Stick Prior to iOS 27, when activating a text field, the text label would disappear entirely. In iOS 27, the label persists even when the text field is active. The label itself appears between two indicator symbols which clearly distinguish the label from the text entered. It can be configured by going to Settings> Accessibility> VoiceOver> Braille> Text Field Labels. The options are to show an abbreviated version of the label or the full thing. Selecting 'Collapse' will provide two indicators without the text label. Selecting 'Full' will display the entire text field label. You can collapse the label by pressing a cursor routing button. If you disable everything in this menu, the behavior will be as it always was in past versions of iOS. Braille Access Expands File Support Braille Access now supports plain text and PDF files. As such, the formerly named 'BRF Files' is now simply called 'Files'. To import these file types, users can follow the same procedures they already use to get BRF content imported. Files are still stored in the 'BRF files' folder on iCloud, so any method a user would utilize to copy text and PDF content is the same. I found that opening plain text files worked quickly, and it was nice to have them imported. Unlike many applications for braille readers, Braille Access tends to remember the place I was in a file when I open it again. PDF content will display, but seems to depend on how well the creator of the file treated accessibility. Formatting such as headings is not preserved. There also appears to be a file size limit, as I was not able to load a PDF file that was 15 MB due to the images it contained. New Features Bring New Keyboard Shortcuts Apple has added a few new options for Perkins-style keyboard shortcuts that people may take advantage of. Under the VoiceOver category, one has been added for launching the Ask function found in VoiceOver Recognition, while another was added for generating an Intelligent Description with Image Recognition. There are no new commands for the other Image Recognition options discussed above. Another mapping option was made available for ignoring trackpads. Hearing On-demand Sign Language Interpreters on FaceTime As part of Apple's Global Accessibility Awareness Day announcement in May, the company shared preliminary details of an API that providers of sign language interpretation apps could use to allow callers to add an interpreter to their FaceTime call. As of the time of writing, there do not appear to be any announcements concerning providers utilizing this API, but hopefully that will come soon. Auto-Caption This Video Captioning automatically produces synchronized subtitles from spoken audio when a video has no existing captions. Apple says it works with videos recorded on the iPhone, videos sent to the user, streamed videos, and other uncaptioned videos played through supported system playback interfaces. When I enabled captioning in the Photos app while playing a video, there were several visual options available for adjusting the output. However, I was not able to find the generated captions with braille. Thankfully, Live Captions under Braille Access works well. Conclusion iOS 27 may not bring as many accessibility changes as its predecessor, but several of its additions are substantial. The expanded image-recognition tools can give blind users faster and more independent access to photos, unfamiliar controls, and other visual information, while the new navigation and customization options allow VoiceOver users to better tailor the experience to their needs. Braille users also gain welcome improvements, including more reliable text editing, clearer text-field labels, and support for additional file formats in Braille Access. Some of the most significant new features require Apple Intelligence, leaving users of older compatible devices without access to everything discussed in this article. There are also a few places where braille keyboard support remains incomplete. Even with those limitations, iOS 27 offers a useful collection of accessibility improvements. As always, individual experiences will vary, and readers are encouraged to share their own observations and bugs in the comments. I also encourage users to check out the AppleVis list of bugs and fixes. If needed, more information on how to update the software on your device is available on this Apple Support page. T",
         "body": "15 years ago, I produced my first \"What's New in iOS Accessibility\" article. Every September since, I've been documenting what my testing of the betas has yielded. There are many welcome mainstream changes in this year's iOS 27, such as the upgraded Siri app, new parental controls, a slider to adjust Liquid Glass, further enhanced Apple Intelligence features, and much more. The new Siri has its own app, and coverage of it is beyond the scope of this article other than to mention it's much more versatile and can assist with all kinds of tasks from asking about your personal data to recipes and so on. Lots of individuals will be reviewing these new features. As I've done for many years now, I'm documenting my findings after testing the new version of iOS throughout the summer to discuss accessibility-specific features which impact blind and DeafBlind users.\n\nFollowing what has become a tradition, Apple began discussing enhancements coming to accessibility with its announcement ahead of Global Accessibility Awareness Day. More info about forthcoming features was detailed during the Worldwide Developers Conference Keynote. Devices that will work with iOS 27, according to Apple, are the iPhone SE 2 and later, as well as the iPhone 11 and later. The page linked to above is also a good resource for mainstream changes coming in iOS 27.\n\nThough there are fewer changes in iOS 27 than what were found in iOS 26, VoiceOver has gained quite a bit of new functionality. Whether you are a speech user or a braille one, there are a lot of new offerings in this year's release.\n\nThere is now a setting which allows a VoiceOver user to import or share their pronunciation dictionary. This feature could be helpful when, for example, text-to-speech engines do not pronounce things correctly in local dialects. Instead of everyone having to make the changes, one person could compile it and share it with other users in a similar situation. It could also be used as a form of prank. Imagine changing the pronunciation of a friend's name to a friendly insult along with other changes and they later encounter it. These settings can be found under Settings> Accessibility> VoiceOver> Speech> Pronunciations. Selecting 'Import' will bring up the Files function and allow the user to browse to the file they wish to import. Sharing one's own pronunciations brings up the standard Share Sheet, where the file can be sent to any number of places or contacts.\n\nFor those who may not be aware, the VoiceOver cursor appears as a black rectangular outline surrounding the item that currently has VoiceOver focus. While handy in some situations such as showing a sighted user where VoiceOver focus is set, helping a low vision user who tracks VoiceOver focus, or when demonstrating VoiceOver support to a developer, there are certainly reasons individuals may wish to disable it. This is because it can also serve as a distraction when the VoiceOver cursor itself isn't an important part of the iPhone's purpose. For example, when using the iPhone for face-to-face communication as a DeafBlind user, it can distract the person you are attempting to communicate with from the text you are typing. Some may wish to hide the visual VoiceOver cursor during screen sharing. To adjust this setting, head to Settings> Accessibility> VoiceOver> Cursor Visibility, and choose from showing the cursor, hiding it always, or hiding it during screen sharing.\n\niOS 27 brings new options to precisely control VoiceOver's reading of text when using Explore by Touch, or, as it's more commonly referred to, 'dragging your finger around the screen'. Options for Text Exploration are now Paragraph, Line, or Sentence. For example, when set to 'Sentence', VoiceOver will only speak the sentence under your finger instead of the entire element as it previously did. Users can adjust this by going to Settings> Accessibility> VoiceOver> Text Exploration. Note that changes made in Text Exploration only apply to Explore by Touch, and will not impact swiping through content. At least, not this particular setting.\n\nA separate setting, called Text Navigation, offers the ability to modify how VoiceOver moves when swiping left and right through the screen with one finger. The available options are Line, Sentence, Paragraph, and Element. In addition to allowing one to more easily read blocks of text that VoiceOver sees as one large element, having these two new sets of options can give VoiceOver users other choices than the rotor for text navigation. To check out the new settings for swiping, head to Settings> Accessibility> VoiceOver> Text Navigation. Remember that you will need to adjust settings for Text Exploration and Text Navigation separately.\n\nFor a lot of the clients I work with who use speech, the hints offered by VoiceOver can be helpful, but there comes a point where they cause interference with touchscreen navigation once a user advances in their journey of learning VoiceOver. For example, \"Double Tap to Open\" can grind on one's nerves after a while. When I first started learning to use an iPhone with iOS 4, this was also something I became frustrated with. If the system hints become a nuisance, the user now has more control over them.\n\niOS 27 brings the ability to adjust the amount of delay between when VoiceOver provides active information about what is in focus and when the hint will be conveyed. To configure this, head to Settings> Accessibility> VoiceOver> Verbosity> Hints, and then either type the duration in seconds ranging from 0.05 to 2.0, or use the 'Decrement' and 'Increment' buttons. The default is 0.8 seconds. It's also now possible to specify if users want all hints, app-specific hints, or no hints at all. You can find these options on the same screen.\n\nFor VoiceOver commands to be assigned to keyboard shortcuts, Bluetooth keyboard users have always had to include their chosen VoiceOver modifier along with the command. This is no longer necessary with the function keys located in the top row of many Bluetooth keyboards. The setting must be enabled, which one can do by going to Settings>Accessibility>VoiceOver>Commands and setting the Switch Button for \"No Modifier Keys\" to on. Instead of having to press, for example, VoiceOver Modifier f8 to launch the VoiceOver Settings menu, users can now simply press F8.\n\nLive Recognition was first integrated into VoiceOver with iOS 18. iOS 27, coupled with Apple Intelligence, gives Live Recognition even more power. Activating the 'Ask' button will allow the user to ask about what is currently in the camera's view. It's also possible to tell Live Recognition to focus on a specific thing in your environment. As long as that item is able to be tracked, its actions and movements will often be reported by VoiceOver.\n\nAsk is a feature that is highly customizable. Going to Settings> Accessibility> VoiceOver> Live Recognition allows the user to set up some other options. One can change the default question asked when the button is activated, make the default input either dictation or typing, and have the Volume buttons take a still photo for a follow-up or more detailed description. Ask can be set up with a gesture, Bluetooth keyboard command, the Accessibility Shortcut, or a Perkins-style keyboard command. If none of those are what the user wants, there is also the ability to launch the Ask feature using the Action Button. It can be enabled by going to Settings> Action Button, selecting the Accessibility category, and then choosing 'Ask a Question'.\n\nIn my view, pardon the pun, the largest upgrade for VoiceOver and braille users in iOS 27 is the massive overhaul of the Image Recognition feature. This is thanks to Apple Intelligence, but I'm sure those using iPhone 15 and earlier devices aren't feeling very thankful, since they do not have access to these features. Unlike the multi-step processes involved with using third-party services for detailed descriptions, Image Recognition descriptions typically take less than three seconds. They can be generated on virtually all images the iPhone encounters, and the user does not need to download or upload each image they wish to have described. It is also possible to describe the screen of the device itself, to ask questions about the image in focus, and to generate a description with the ability to ask a follow-up question immediately. These features can be activated through the VoiceOver rotor or by adding specific functions to gestures. The two devices I have upgraded at this point had the Image Recognition options in the Rotor. If, by chance, your Rotor does not have the Image Recognition option after upgrading, it can be added by going to Settings> Accessibility> VoiceOver> Rotor> Rotor Items and selecting Image Recognition. Since there are up to seven different options for Image Recognition, Apple has also given users the ability to add and remove what they wish to this rotor item. It can be configured by going to Settings> Accessibility> VoiceOver> Rotor> Image Recognition Rotor. Each of the available options will be discussed below.\n\nImage/Item Description will allow the user to get a description of the image or item that VoiceOver focus is set to. Based on my testing, it is generated in less than three seconds. It will be delivered in the form of a VoiceOver announcement. For those using braille, one can read the description at their own pace by pressing Space with N. When done, pressing space with n will return the user to where they were before. I find this particular function to be wonderful for generating descriptions of things in my Facebook feed, my growing photo library, album art in the Music app, and when reading photo-heavy articles on various news sources. Interestingly, this function is the only one that can be mapped to a Perkins-style keyboard. The other options discussed below are not available for users of Perkins-style keyboards. Using the Copied Speech Rotor option launched with iOS 26, users can copy the description to wherever they want on their iOS device. A simpler solution in some situations is available as discussed below.\n\nAsk About Image/Item is another option, which does exactly what the choice says. After selecting this, users are presented with a text field which allows them to type a question. Pressing return or enter will generate a response. The nice thing is that you do not need to generate a general description before asking a question. Placing VoiceOver focus on the image is all that is required. With many third-party applications, one must first wait through getting the general description before they can ask a question. I have solved simple CAPTCHAs by asking my iPhone to provide me with only the text in the image. I can then copy it and solve CAPTCHAs. I have not tried more complex puzzles.\n\nExplore Image/Item allows you to get the same description as you get when generating an Intelligent Description, but it is static text instead of a VoiceOver announcement. After the text description, there is an option to ask a question either by typing or voice. Also, when focus is on the description, one can flick up with one finger, or use whatever alternative method, to copy the description.\n\nAsk About Screen allows the user to get a description of the screen on their iOS device. It functions the same as the Ask About Image/Item choice, but covers the entire screen. I've found this feature handy for understanding what buttons without labels in applications do. This is far more preferable to activating the button to see what happens.\n\nThe other two options are Describe Screen and Explore Screen. These work the same as the others documented above, only this applies to your entire screen instead of one item. I mentioned browsing photos above, and when in the Photos app, there is yet another rotor option available called Save Intelligent Image Description. When selected, this will add the description generated to the photo itself which will then be available later.\n\nA final setting is the ability to show a list of the recognition options discussed above. It does not have a touch screen gesture assigned to it, but the user can create one. On a Bluetooth keyboard, pressing VoiceOver Modifier, Shift, and R will bring up this menu. Sorry, braille display users, there appears to be no Perkins-style keyboard option.\n\nUsers can head to Settings>Accessibility>VoiceOver>VoiceOver Recognition>Image Descriptions to configure whether image descriptions are provided automatically. One can configure whether they want automatic image descriptions or whether they are conveyed as a fallback when images have alt text. Note that this setting applies to the classic image descriptions, but one will not receive a detailed description such as the ones provided by Apple Intelligence.\n\nThere are some changes to braille outlined below. As a general usage note, writing longer passages of text seems to be a bit more reliable than it was in all of the iOS 26 releases. Further, there were some issues in iOS 26 with cursor routing buttons not routing correctly and focus jumping back to the top in longer blocks of text while the user was reading. Based on my use, all of these issues have been improved significantly.\n\nBraille Screen Input now uses the same Predictive Text gestures as the default onscreen keyboard. When typing on the standard touchscreen keyboard, iOS uses Autocorrect and Predictive Text to identify the word you probably intended based on the letters entered, nearby keys, sentence context, and commonly-used language. Braille Screen Input now uses this same prediction system: after entering a word, users can swipe up or down with one finger to move through suggested words or corrections, then continue typing once the desired suggestion is selected.\n\nFurther, it is now possible to type part of an emoji name and swipe up or down with one finger to find it. Functionality of the BSI Autocorrect requires the primary software keyboard Autocorrect setting to be enabled in Settings> General> Keyboards.\n\nFinally, iOS 27 adds the ability to more easily insert alternative characters. To activate alternative character selection, hold the dots of the character you wish to insert until you hear a sound, then release and swipe up or down with one finger to select the desired symbol.\n\nShifting to braille display users, there is a new setting called 'Snap To Print Text Cursor', which can be found by going to Settings> Accessibility> VoiceOver> Braille> Cursor Routing. The options are the new Snap To Text Cursor or Any Braille Cell. By default, Snap To Print Text Cursor was selected when I upgraded. The 'Snap to Print Text' setting places the cursor on the closest print text equivalent even when contracted braille is enabled. This setting is particularly helpful for those braille display users using QWERTY keyboards to type while also using contracted braille for reading, as it removes some ambiguity from where the cursor is located.\n\nPrior to iOS 27, when activating a text field, the text label would disappear entirely. In iOS 27, the label persists even when the text field is active. The label itself appears between two indicator symbols which clearly distinguish the label from the text entered. It can be configured by going to Settings> Accessibility> VoiceOver> Braille> Text Field Labels. The options are to show an abbreviated version of the label or the full thing. Selecting 'Collapse' will provide two indicators without the text label. Selecting 'Full' will display the entire text field label. You can collapse the label by pressing a cursor routing button. If you disable everything in this menu, the behavior will be as it always was in past versions of iOS.\n\nBraille Access now supports plain text and PDF files. As such, the formerly named 'BRF Files' is now simply called 'Files'. To import these file types, users can follow the same procedures they already use to get BRF content imported. Files are still stored in the 'BRF files' folder on iCloud, so any method a user would utilize to copy text and PDF content is the same.\n\nI found that opening plain text files worked quickly, and it was nice to have them imported. Unlike many applications for braille readers, Braille Access tends to remember the place I was in a file when I open it again. PDF content will display, but seems to depend on how well the creator of the file treated accessibility. Formatting such as headings is not preserved. There also appears to be a file size limit, as I was not able to load a PDF file that was 15 MB due to the images it contained.\n\nApple has added a few new options for Perkins-style keyboard shortcuts that people may take advantage of. Under the VoiceOver category, one has been added for launching the Ask function found in VoiceOver Recognition, while another was added for generating an Intelligent Description with Image Recognition. There are no new commands for the other Image Recognition options discussed above. Another mapping option was made available for ignoring trackpads.\n\nAs part of Apple's Global Accessibility Awareness Day announcement in May, the company shared preliminary details of an API that providers of sign language interpretation apps could use to allow callers to add an interpreter to their FaceTime call. As of the time of writing, there do not appear to be any announcements concerning providers utilizing this API, but hopefully that will come soon.\n\nCaptioning automatically produces synchronized subtitles from spoken audio when a video has no existing captions. Apple says it works with videos recorded on the iPhone, videos sent to the user, streamed videos, and other uncaptioned videos played through supported system playback interfaces. When I enabled captioning in the Photos app while playing a video, there were several visual options available for adjusting the output. However, I was not able to find the generated captions with braille. Thankfully, Live Captions under Braille Access works well.\n\niOS 27 may not bring as many accessibility changes as its predecessor, but several of its additions are substantial. The expanded image-recognition tools can give blind users faster and more independent access to photos, unfamiliar controls, and other visual information, while the new navigation and customization options allow VoiceOver users to better tailor the experience to their needs. Braille users also gain welcome improvements, including more reliable text editing, clearer text-field labels, and support for additional file formats in Braille Access. Some of the most significant new features require Apple Intelligence, leaving users of older compatible devices without access to everything discussed in this article. There are also a few places where braille keyboard support remains incomplete. Even with those limitations, iOS 27 offers a useful collection of accessibility improvements. As always, individual experiences will vary, and readers are encouraged to share their own observations and bugs in the comments. I also encourage users to check out the AppleVis list of bugs and fixes. If needed, more information on how to update the software on your device is available on this Apple Support page.\n\nT"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "applevis-apps-870c8ddb50875565",
-    "type": "news",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/productivity/muse-meta",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-13T21:30:23.000Z",
-    "categories": [
-      "apple",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "‎Muse from Meta",
-        "summary": "Muse is a personal AI agent that can manage email and schedules, book reservations, track spending, compare prices, plan workouts, and handle multistep tasks. It can connect to apps you choose, keep working after you close it, and ask for approval before taking actions. You can interact with Muse either through the native iOS app, through a browser interface at http://muse.ai or through WhatsApp chat messages. Includes a robust free tier, and optional paid subscriptions if you go over.",
-        "body": "Muse is a personal AI agent that can manage email and schedules, book reservations, track spending, compare prices, plan workouts, and handle multistep tasks. It can connect to apps you choose, keep working after you close it, and ask for approval before taking actions. You can interact with Muse either through the native iOS app, through a browser interface at http://muse.ai or through WhatsApp chat messages. Includes a robust free tier, and optional paid subscriptions if you go over."
       }
     },
     "media": null

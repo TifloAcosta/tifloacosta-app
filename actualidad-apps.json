@@ -120,6 +120,18 @@
     "publishedAt": null
   },
   {
+    "id": "applevis-apps-8d9878e5fd2fe086",
+    "title": "wayfound: walk & remember",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/wayfound-walk-remember",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "A fox walks you through a little town. Then you find your own way back. Wayfound is a calm puzzle game about the oldest skill you own: knowing where you are. Follow the fox through pastel streets, past bakeries and clock towers, up a quiet elevator. Notice things. Then walk the route yourself — no minimap, no GPS arrow, just you and what you remember. THERE'S NO CLOCK, AND NO WRONG WAY TO WANDER • No timers, no fail states, no lives. Wrong turns are part of wandering — the fox always finds you. • A rescue ladder, not a game over: hints arrive as gentle nudges, only when you want them. • Little errands: deliver a parcel, find the bakery, learn the streets by needing them. • At corners, the fox asks: which way now? Guess, and feel the route settle into your feet. • Walks grow with you: first the fox leads, then you study a map and walk alone, then it's just you and a destination. • The town grows because you walked it — a flour cart by the bakery, a fishing net by the pier — small things appear when you finish an errand, and they stay. • Point home: a quiet compass test at the end of each walk. Watch yourself get better. • A new town for every chapter — every street is new to you, so each walk is real navigation. WHY WALKS WORK Wayfound is inspired by research on spatial memory — how we build inner maps from landmarks, routes, and wrong turns, and how turn-by-turn navigation quietly erodes that skill. It's not a brain-training claim. It's just a nice walk. • Free, no ads, no subscriptions, no tracking. Your progress stays on your device. • Works entirely offline. • English, 简体中文, 日本語.",
+    "publishedAt": "2026-09-30T23:50:38.000Z"
+  },
+  {
     "id": "applevis-apps-85df4e1093bcf401",
     "title": "Quiet Grind — Idle RPG",
     "sourceId": "applevis-apps",
@@ -226,17 +238,5 @@
     "platform": "Apple",
     "summary": "Brainclash is a quiz game with a different rhythm: a refined battle of minds you take on in your own time, with no pressure. Challenge a friend to a match, let the game pair you with a random opponent, or train first against the computer. Play unfolds turn by turn: you answer, then your opponent answers, and the most accurate one wins. There's no tense timer forcing you both online at the same moment — take your turn whenever you like, and return for the next one anytime. Questions span a wide range of categories — General Knowledge, Science &amp; Nature, History, Geography, Sports, and Arts &amp; Entertainment — so you'll always find something that suits your interests and adds to what you know. And when a hard question comes your way, you have tools to help: remove half the options with 50:50, swap a question that doesn't suit you, or grant yourself a few extra seconds. The more you win, the higher you climb through the levels and the more coins you collect — and each day you can spin the daily wheel for a free reward. The game is made for everyone to enjoy: it works smoothly with TalkBack and VoiceOver, so screen reader users get a complete experience, crafted to be heard and not only seen. Add your friends, exchange messages between matches, and discover together who deserves the title of the smartest. Play in Arabic or English, and switch languages whenever you wish. So, are you ready to compete? Your next opponent is waiting on your move.",
     "publishedAt": "2026-09-14T00:13:01.000Z"
-  },
-  {
-    "id": "applevis-apps-870c8ddb50875565",
-    "title": "‎Muse from Meta",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/productivity/muse-meta",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Muse is a personal AI agent that can manage email and schedules, book reservations, track spending, compare prices, plan workouts, and handle multistep tasks. It can connect to apps you choose, keep working after you close it, and ask for approval before taking actions. You can interact with Muse either through the native iOS app, through a browser interface at http://muse.ai or through WhatsApp chat messages. Includes a robust free tier, and optional paid subscriptions if you go over.",
-    "publishedAt": "2026-09-13T21:30:23.000Z"
   }
 ]

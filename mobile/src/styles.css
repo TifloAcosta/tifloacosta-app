@@ -1,6 +1,8 @@
 :root {
   --brand: #A61B1B;
   --brand-deep: #741010;
+  --brand-surface: #741010;
+  --brand-on-surface: #FFFFFF;
   --background: #FFF8F7;
   --surface: #FFFFFF;
   --text: #211A1A;
@@ -76,9 +78,29 @@ body {
   padding-block: var(--safe-top) var(--safe-bottom);
 }
 
+.app-brand-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-block-end: var(--space-5);
+  padding: var(--space-3) var(--space-4);
+  border-radius: 0.75rem;
+  background: var(--brand-surface);
+  color: var(--brand-on-surface);
+}
+
+.app-brand-mark {
+  flex: 0 0 auto;
+  inline-size: clamp(3rem, 16vw, 4.5rem);
+  block-size: auto;
+  max-inline-size: 100%;
+}
+
 .app-brand {
-  margin: 0 0 var(--space-5);
-  color: var(--brand-deep);
+  flex: 1 1 12rem;
+  margin: 0;
+  color: inherit;
   font-size: clamp(1.75rem, 7vw, 2.5rem);
   line-height: 1.15;
 }

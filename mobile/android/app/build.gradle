@@ -72,6 +72,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-mlkit-text-recognition-devanagari:16.0.1'
     implementation 'com.google.android.gms:play-services-mlkit-text-recognition-japanese:16.0.1'
     implementation 'com.google.android.gms:play-services-mlkit-text-recognition-korean:16.0.1'
+    implementation 'com.google.android.gms:play-services-mlkit-language-id:17.0.0'
+    implementation 'com.google.mlkit:translate:17.0.3'
     implementation project(':capacitor-android')
     testImplementation "junit:junit:$junitVersion"
     testImplementation 'org.json:json:20240303'

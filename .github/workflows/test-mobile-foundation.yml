@@ -51,13 +51,59 @@ jobs:
         run: node --test test/actualidad-core.test.mjs
       - name: Run mobile content tests
         run: node --test test/mobile-content.test.mjs test/mobile-content-retention.test.mjs
-      - name: Run mobile application tests in isolated workspaces
+      - name: Run isolated mobile tests 1 of 8
         shell: bash
         run: |
           mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
-          for test_file in "${tests[@]}"; do
-            git restore .
-            git clean -fd
-            echo "Running ${test_file}"
-            node --test "${test_file}"
-          done
+          n=${#tests[@]}; s=$(( (n + 7) / 8 )); start=0
+          chunk=("${tests[@]:start:s}")
+          for test_file in "${chunk[@]}"; do git restore .; git clean -fd; node --test "$test_file"; done
+      - name: Run isolated mobile tests 2 of 8
+        shell: bash
+        run: |
+          mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
+          n=${#tests[@]}; s=$(( (n + 7) / 8 )); start=$((s))
+          chunk=("${tests[@]:start:s}")
+          for test_file in "${chunk[@]}"; do git restore .; git clean -fd; node --test "$test_file"; done
+      - name: Run isolated mobile tests 3 of 8
+        shell: bash
+        run: |
+          mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
+          n=${#tests[@]}; s=$(( (n + 7) / 8 )); start=$((2*s))
+          chunk=("${tests[@]:start:s}")
+          for test_file in "${chunk[@]}"; do git restore .; git clean -fd; node --test "$test_file"; done
+      - name: Run isolated mobile tests 4 of 8
+        shell: bash
+        run: |
+          mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
+          n=${#tests[@]}; s=$(( (n + 7) / 8 )); start=$((3*s))
+          chunk=("${tests[@]:start:s}")
+          for test_file in "${chunk[@]}"; do git restore .; git clean -fd; node --test "$test_file"; done
+      - name: Run isolated mobile tests 5 of 8
+        shell: bash
+        run: |
+          mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
+          n=${#tests[@]}; s=$(( (n + 7) / 8 )); start=$((4*s))
+          chunk=("${tests[@]:start:s}")
+          for test_file in "${chunk[@]}"; do git restore .; git clean -fd; node --test "$test_file"; done
+      - name: Run isolated mobile tests 6 of 8
+        shell: bash
+        run: |
+          mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
+          n=${#tests[@]}; s=$(( (n + 7) / 8 )); start=$((5*s))
+          chunk=("${tests[@]:start:s}")
+          for test_file in "${chunk[@]}"; do git restore .; git clean -fd; node --test "$test_file"; done
+      - name: Run isolated mobile tests 7 of 8
+        shell: bash
+        run: |
+          mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
+          n=${#tests[@]}; s=$(( (n + 7) / 8 )); start=$((6*s))
+          chunk=("${tests[@]:start:s}")
+          for test_file in "${chunk[@]}"; do git restore .; git clean -fd; node --test "$test_file"; done
+      - name: Run isolated mobile tests 8 of 8
+        shell: bash
+        run: |
+          mapfile -t tests < <(find mobile/test -maxdepth 1 -name '*.test.mjs' | sort)
+          n=${#tests[@]}; s=$(( (n + 7) / 8 )); start=$((7*s))
+          chunk=("${tests[@]:start:s}")
+          for test_file in "${chunk[@]}"; do git restore .; git clean -fd; node --test "$test_file"; done

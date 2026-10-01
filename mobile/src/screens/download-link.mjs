@@ -162,7 +162,7 @@ export function renderDownloadLink({ root, router, t, nativeActions, initialUrl 
       setStatus(localizedFallback(t, 'downloadsLink.saving', 'Preparando la descarga…', 'Preparing download…'));
       const saved = await nativeActions.saveFile({
         url: item.url,
-        filename: fileName,
+        filename: item.name || t('downloadsLink.defaultFilename'),
         mimeType: mimeFromType(item.type)
       });
       save.disabled = false;

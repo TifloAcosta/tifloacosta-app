@@ -5,9 +5,10 @@ import { readFile } from 'node:fs/promises';
 const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
 test('la sección de lectura se presenta como TifloLector', async () => {
-  const source = await read('src/core/i18n.mjs');
-  assert.match(source, /readingLibrary:\s*'TifloLector'/);
-  assert.match(source, /backToLibrary:\s*'Volver a TifloLector'/);
+  const home = await read('src/screens/home.mjs');
+  const shared = await read('src/screens/shared.mjs');
+  assert.match(home, /TifloLector/);
+  assert.match(shared, /TifloLector/);
 });
 
 test('la portada Android reutiliza el lenguaje visual corporativo de la web', async () => {

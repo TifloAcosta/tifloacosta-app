@@ -19,26 +19,21 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: '20'
-      - uses: actions/setup-python@v6
-        with:
-          python-version: '3.12'
-      - name: Install Drive downloader
-        run: python -m pip install --disable-pip-version-check --upgrade gdown
-      - name: Download the two HTML editions
-        run: |
-          mkdir -p docs/es docs/en
-          gdown 1bkqhbWO8eYJbqrQrJ6FrjjZoUsSbuPWz -O docs/es/pildoras-tecnologicas-22-2026.html
-          gdown 1c449zc60CorKA8myhvAsfnf5tc_fxjYn -O docs/en/technology-pills-22-2026.html
-      - name: Update resource catalog
-        run: node scripts/publish-pildoras22.mjs
-      - name: Verify downloaded pages and catalog
+      - name: Verify local editions exist
         run: |
           test -s docs/es/pildoras-tecnologicas-22-2026.html
           test -s docs/en/technology-pills-22-2026.html
+          test -s docs/en/technology-pills-22-part1.inc.html
+          test -s docs/en/technology-pills-22-part2.inc.html
+          test -s docs/en/technology-pills-22-part3.inc.html
+          grep -q '<html lang="es"' docs/es/pildoras-tecnologicas-22-2026.html
+          grep -q '<html lang="en"' docs/en/technology-pills-22-2026.html
+      - name: Update resource catalog
+        run: node scripts/publish-pildoras22.mjs
+      - name: Verify catalog
+        run: |
           grep -q "Píldoras 22 2026" data.js
           grep -q "Tech Pills 22 2026" data.js
-          grep -q "<html lang=\"es\"" docs/es/pildoras-tecnologicas-22-2026.html
-          grep -q "<html lang=\"en\"" docs/en/technology-pills-22-2026.html
       - name: Run tests
         run: node --test
       - name: Remove one-shot publication files

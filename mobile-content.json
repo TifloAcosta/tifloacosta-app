@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-01T15:28:44.324Z",
+  "generatedAt": "2026-10-01T20:32:57.547Z",
   "resources": [
     {
       "kind": "resource",
@@ -4886,34 +4886,225 @@
   "news": [
     {
       "kind": "news",
-      "id": "9to5mac-9b5122e5700ea9a7:en",
-      "sourceId": "9to5mac-9b5122e5700ea9a7",
+      "id": "techcrunch-6cb8973c59308e7e:en",
+      "sourceId": "techcrunch-6cb8973c59308e7e",
       "lang": "en",
-      "title": "WhatsApp expands parental controls to teen accounts with group alerts, Meta AI restrictions",
-      "summary": "After introducing parent-managed accounts for pre-teens earlier this year, WhatsApp today expanded its parental controls to teen accounts, adding group activity alerts and additional restrictions for Meta AI. Here are the details. more…",
-      "body": "After introducing parent-managed accounts for pre-teens earlier this year, WhatsApp today expanded its parental controls to teen accounts, adding group activity alerts and additional restrictions for Meta AI. Here are the details.\n\nEarlier this year, WhatsApp announced a series of new features aimed at giving parents more control over their pre-teens’ accounts.\n\nThat included letting parents decide who can contact the account and which groups it can join, review message requests from unknown contacts, and manage its privacy settings, with changes protected by a parent-set PIN.\n\nThen, a few weeks ago, WhatsApp further expanded the feature on iOS by adding a dedicated “Parental controls” section to the Settings app, making it easier for parents to find and set up a managed account.\n\nToday, WhatsApp expanded those controls yet again, this time bringing parental controls to teens rather than just pre-teens, while giving parents more visibility into group activity and more say over how their teens interact with Channels, Status updates, and, perhaps more importantly, Meta AI.\n\nWith the update, parents can now receive notifications when their teen joins or leaves a group, as well as when a group they are already in “grows meaningfully in size.” Parents can now also choose how their teen can use Channels, whose Status updates they can see, and who is allowed to see their own.\n\nAs for Meta AI, parents can now choose between the standard experience designed for users aged 13 and up, or a stricter “Limited Content” option, depending on what they consider appropriate for their teen.\n\nAccording to WhatsApp , the Limited setting further restricts the topics a teen can discuss with Meta AI. Meta AI features that rely on Private Processing are also unavailable when the setting is enabled.\n\nAs before, WhatsApp notes that these parental controls do not give parents access to their teen’s actual messages or calls, which remain protected by end-to-end encryption.\n\nTo learn more about WhatsApp’s new managed teen accounts, follow this link .",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/09/30/whatsapp-expands-parental-controls-to-teen-accounts-with-group-alerts-meta-ai-restrictions/",
-      "publishedAt": "2026-10-01T02:09:00.000Z",
+      "title": "ChatGPT can now virtually try on clothes for you",
+      "summary": "OpenAI is rolling out new shopping features for ChatGPT that let users virtually try on clothing and accessories using their own photos and save products they like to a Favorites library.",
+      "body": "OpenAI is again experimenting with how its conversational AI assistant, ChatGPT, can help users as they shop online. On Thursday, the company announced the global launch of two new shopping features, including a way to virtually try on clothing and accessories and a new favoriting function that can help users save products they like for later reference.\n\nThe updates arrive at a time when AI assistants are exploring consumer use cases around shopping. OpenAI already had to pivot from one of its earlier ideas in this space, an instant checkout feature that ended up not performing well. More recently, agentic AI startup Instinct began pushing product recommendations to users, but some felt that the proactive recommendations were an overreach, more akin to ads than helpful suggestions.\n\nOpenAI said its new shopping features leverage the newly launched ChatGPT Images 2.5 model , which the company claims produces more natural lighting and richer textures, follows editing instructions more reliably, and reduces image generation latency.\n\nTo start, virtual try-on allows ChatGPT users to upload a selfie or a full-body photo in order to visualize how an article of clothing or an accessory might look on them. This option will appear as a new “try on” button in ChatGPT’s shopping results. You can also upload an image of an item, like a web screenshot, and ask ChatGPT to try it on for you.\n\nThe other new option, Favorites, lets you save products you discover to a Library in the app so you can come back to them later. (These items will be saved alongside your try-on images, the company notes.)\n\nOpenAI said that ChatGPT can help users shop in other ways, too.\n\nFor instance, you could describe a style that you’d like to try, then ask it to shop for the pieces needed to complete the look. Or, you could upload photos of celebrities’ outfits and ask it to find the items they’re wearing that are available for purchase.\n\nThe latter sees the assistant moving into areas that Pinterest and Google have dominated in recent years as sources for fashion inspiration and discovery that can convert to sales for online retailers.\n\nWhether ChatGPT will become people’s first choice for this type of activity, however, remains to be seen — especially given that Google launched virtual try-on last year .",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/01/chatgpt-can-now-virtually-try-on-clothes-for-you/",
+      "publishedAt": "2026-10-01T19:21:53.000Z",
       "categories": [
-        "apple",
         "tecnologia-general",
         "ia-accesibilidad"
       ]
     },
     {
       "kind": "news",
-      "id": "the-verge-f6206349a00efcce:en",
-      "sourceId": "the-verge-f6206349a00efcce",
+      "id": "the-verge-03be5a02df9688ed:en",
+      "sourceId": "the-verge-03be5a02df9688ed",
       "lang": "en",
-      "title": "Elon Musk’s Grokipedia has a ‘newly refreshed’ design",
-      "summary": "Grokipedia, SpaceXAI's AI-powered competitor to Wikipedia, recently started incorporating edits again, and today, it got some design tweaks as part of a v0.3 update, including a new logo and refreshes to its homepage and live edits page. SpaceXAI head of design Benji Taylor calls it a \"newly refreshed Grokipedia.\" Grokipedia's old homepage was pretty much […]",
-      "body": "Grokipedia, SpaceXAI's AI-powered competitor to Wikipedia, recently started incorporating edits again , and today, it got some design tweaks as part of a v0.3 update, including a new logo and refreshes to its homepage and live edits page. SpaceXAI head of design Benji Taylor calls it a \"newly refreshed Grokipedia.\"\n\nGrokipedia's old homepage was pretty much just a logo and a search bar, but the updated homepage includes a list of featured articles, a list of the most-read articles, and a tracker showing the \"latest edits.\" The new featured list showcases digital representations of books that you can spin around, and the most read section also …\n\nRead the full story at The Verge.",
+      "title": "Android Central ‘will continue’ despite laying off its staff",
+      "summary": "Android Central, a blog focused on the Android ecosystem, laid off its staff yesterday, but owner Future confirms to The Verge that the site will continue publishing. Yesterday, four of the six staffers on Android Central's staff page posted publicly about the layoffs, including Shruti Shekar, Derrek Lee, Harish Jonnalagadda, and Nicholas Sutrich, and former […]",
+      "body": "Android Central , a blog focused on the Android ecosystem, laid off its staff yesterday, but owner Future confirms to The Verge that the site will continue publishing.\n\nYesterday, four of the six staffers on Android Central 's staff page posted publicly about the layoffs, including Shruti Shekar , Derrek Lee , Harish Jonnalagadda , and Nicholas Sutrich , and former senior editor Namerah Saud Fatmi updated her LinkedIn to indicate that her tenure at Android Central had ended. Both Lee, the site's managing editor, and Sutrich confirmed that all remaining staff were laid off.\n\nThe former staffers weren't told whether the site would shut down. Today, …\n\nRead the full story at The Verge.",
       "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1003068/elon-musk-grokipedia-v-0-3-spacexai",
-      "publishedAt": "2026-10-01T00:23:45.000Z",
+      "originalUrl": "https://www.theverge.com/tech/1003735/android-central-layoffs",
+      "publishedAt": "2026-10-01T19:20:29.000Z",
       "categories": [
         "tecnologia-general",
+        "android"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-50bb8a2699ed31bd:en",
+      "sourceId": "techcrunch-50bb8a2699ed31bd",
+      "lang": "en",
+      "title": "Google thinks SpaceX’s Starship has to launch 1,600 times before space data centers get off the ground",
+      "summary": "Google launched its first advanced chip into orbit to pave the way for space data centers.",
+      "body": "Google’s prototype of its orbital compute satellite took off today onboard a SpaceX rocket launched from California — the first time the tech giant has sent one of its advanced chips into space.\n\nBuilt by Planet Labs , the satellite will prove that a Google Tensor Processing Unit, its competitor to Nvidia’s GPUs, can function in space. That means supplying a kilowatt of continuous power, cooling the chip, and running a series of models through their paces to see if anything goes wrong.\n\n“We’ve done testing on the ground, but you know, there’s no test that’s completely as good as the real thing,” said Travis Beals, the Google executive managing Project Suncatcher , the tech giant’s plan to develop large-scale compute clusters in orbit around the Earth.\n\nOnce commissioned, the satellite will fire up its TPU in 15-minute bursts to avoid straining the satellite’s power and thermal management systems. This satellite is based on a standard platform built by Planet Labs, but the two companies are working on a demo expected to take flight next year that will see two satellites more purpose-built for advanced compute. Those future versions will attempt to collaborate via a laser communications link.\n\nSuncatcher isn’t the only space AI payload on this SpaceX rocket, which is launching more than one hundred different payloads, including missions from Satlyt and Cowboy Space Company.\n\nWhat sets the Google initiative apart from those startups (and indeed from SpaceX itself) is that it’s a long-term project.\n\nThe focus of this “long-term moonshot,” as Beals puts it, is on building for the space infrastructure and AI workloads that will exist in the future. The company envisions a network of 81 satellites flying in close formation, processing in parallel.\n\n“The bandwidth and the latency between TPUs really, really matters when you’re trying to run a multi-rack workload…we’re trying to look ahead to not just what workloads exist today, but where they will be in five years,” Beals said. That’s largely because the rockets required to scale up orbital data centers in a cost-effective way don’t yet exist.\n\nOn Thursday, Google also released a peer-reviewed version of its white paper on orbital data centers, one of the most rigorous analyses available of how compute gets to orbit. The paper will be published in Joule .\n\nOne of the paper’s most notable aspects is how Google thinks about access to space. Although the researchers stress their analysis isn’t an economic feasibility study, it offers an interesting picture of how the company sees rockets becoming cheaper over time.\n\nLike all data center companies, Google is looking to SpaceX to get its spacecraft off the ground. (Google is also a major investor in SpaceX.)\n\nArguing that Elon Musk’s rocket builders have achieved a price-reducing “learning curve” of about 20% a year since they launched the Falcon 1 rocket, the authors believe it’s reasonable to expect the company to deliver launch prices close to $200 per kilogram by 2035.\n\nWhat will it take to do that? Based on the amount of payload launched by the Falcon 9, they think a similar cost-reduction trajectory will require Starship to fly 370,000 tons of payload into orbit. That’s something that would take it about 1,800 launches over the next ten years, or 180 a year—and that’s if it can fly 200 metric tons on each mission.\n\nThat’s a big ask for a vehicle that has never flown more than five times in a year. SpaceX predicts the company will be flying far more than that—Elon Musk has suggested Starship could achieve an hourly flight rate in 2029, for example, but Musk says a lot of things.\n\nThe good news, at least, in Google’s updated research is that it seems likely that its chips will survive the radiation of space. The company had to redo tests blasting the chips in a particle accelerator after they realized the configuration of the chips provided more shielding than they would actually experience. This produced slightly more errors in the chip’s logic circuitry, but the company is still confident its chips can handle large inference workloads in orbit for the five-year lifespan of a satellite.\n\n“The error rate is very low if you’re thinking about typical inference operations, right? Like one in a million,” Beals said. “On the other hand, it was already problematic for doing, say, some mega-scale training run where you’re going to have many thousands of chips running for months.”",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/01/google-thinks-spacexs-starship-has-to-launch-1600-times-before-space-data-centers-get-off-the-ground/",
+      "publishedAt": "2026-10-01T19:18:03.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-9f397d2859834d05:en",
+      "sourceId": "the-verge-9f397d2859834d05",
+      "lang": "en",
+      "title": "Steam Deck 2: Is AMD Gainsborough the chip Valve’s been waiting for?",
+      "summary": "The Steam Deck is nearly four years old, and handheld gamers are eagerly awaiting a Steam Deck 2 - but Valve has consistently said it needs a new chip with a \"generational leap\" in performance and efficiency before building the sequel. There's some reason to believe that chip has now broken cover: AMD Gainsborough. But […]",
+      "body": "The Steam Deck is nearly four years old, and handheld gamers are eagerly awaiting a Steam Deck 2 - but Valve has consistently said it needs a new chip with a \"generational leap\" in performance and efficiency before building the sequel.\n\nThere's some reason to believe that chip has now broken cover: AMD Gainsborough. But I'm a tad skeptical.\n\nAs leaker Moore's Law is Dead and IT Home report, the latest AMD drivers have leaked the codename for a previously unknown chip: an \"AMD Gainsborough.\" The first Steam Deck chip was named \"Aerith\" after Final Fantasy VII 's heartbreaking love interest, and Gainsborough is her last name. Plus, the chip app …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/games/1003593/steam-deck-2-is-amd-gainsborough-the-chip-valves-been-waiting-for",
+      "publishedAt": "2026-10-01T18:52:58.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-a3f412368b68fabb:en",
+      "sourceId": "9to5mac-a3f412368b68fabb",
+      "lang": "en",
+      "title": "Apple says iPhone Duo has ‘replaceable’ folding display layer to minimize crease",
+      "summary": "Foldable displays tend to show a more visible crease over time, but Apple‘s Kate Bergeron says iPhone Duo has a replaceable cover layer on its folding screen to help mitigate that issue. more…",
+      "body": "Foldable displays tend to show a more visible crease over time, but Apple‘s Kate Bergeron says iPhone Duo has a replaceable cover layer on its folding screen to help mitigate that issue.\n\nAfter the iPhone Duo was introduced last month, Apple execs gave interviews explaining how the company very intentionally sought to maximize durability and minimize crease issues that plague other foldables.\n\nAs part of that effort, it seems the iPhone Duo has a unique design feature to ensure a “day one” type experience for years to come: a replaceable cover layer on the folding display .\n\nHere’s Kate Bergeron, Apple VP of Hardware Engineering, speaking to @angietutorials on TikTok :\n\n“The matte display coating does a really nice job of, I’ll say minimizing the crease. But there’s a cover layer on top, and we’ve done a significant amount of engineering work to help that wear in as long of a manner as we can, and to make sure that you get the most out of that layer’s performance. It’s actually replaceable, which is a really nice thing for the customer, that you can peel off that layer and get a new one.”\n\nYou can watch the full clip here on TikTok .\n\nApple refers to this “cover layer” in its list of AppleCare estimated service costs for iPhone Duo. As spotted by Quinn Nelson , a cover layer replacement costs $19 with AppleCare. Its cost without coverage is currently unknown.\n\nSo if you’re worried about spending $2,000+ on an iPhone Duo only to find the display crease become more prominent over time, it sounds like Apple has a solution.\n\nAre you concerned about the iPhone Duo’s crease at all? Let us know in the comments.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/01/apple-says-iphone-duo-has-replaceable-folding-display-layer-to-minimize-crease/",
+      "publishedAt": "2026-10-01T18:44:27.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-79ff92e188162d96:en",
+      "sourceId": "9to5mac-79ff92e188162d96",
+      "lang": "en",
+      "title": "SpaceXAI releases a separate Grok iOS app for enterprise users",
+      "summary": "Back in May, OpenAI released a dedicated version of their mobile app for enterprise. Now SpaceXAI is doing the same thing for Grok. more…",
+      "body": "Back in May, OpenAI released a dedicated version of their mobile app for enterprise. Now SpaceXAI is doing the same thing for Grok.\n\nThe new enterprise-specific app is called Grok for Intune. SpaceXAI says the new dedicated app is “the Microsoft Intune edition of Grok, the AI assistant by xAI — built for organizations that manage apps and data with Intune.”\n\n“It supports Intune Mobile Application Management, honors your organization’s app protection policies, and signs in with your work email,” the company says.\n\nSpaceXAI highlights these features with Grok for Intune:\n\nAI assistant\n\nGrok Imagine\n\nVoice Mode\n\nReal-time information\n\nBuilt for managed devices\n\nGrok for Intune is now available on the App Store .\n\nDo more with your Apple products\n\nAirPods 5 | Apple’s newest wireless headphones\n\nApple AirTag 2 | Add Find My tracking to keys, bags, bikes, more\n\nAirPods Pro 3 | Apple’s best wireless headphones\n\nWireless CarPlay Adapter | No more plugging in required\n\nBeats USB-A to USB-C Cable | The official CarPlay cable",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/01/spacexai-releases-a-separate-grok-ios-app-for-enterprise-users/",
+      "publishedAt": "2026-10-01T18:16:46.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-a0ee3324fa1c5a65:en",
+      "sourceId": "techcrunch-a0ee3324fa1c5a65",
+      "lang": "en",
+      "title": "OpenAI cuts ties with 3 safety researchers, WSJ reports",
+      "summary": "OpenAI has parted ways with three safety researchers after an internal investigation found they mishandled sensitive company information, report says.",
+      "body": "OpenAI has parted ways with three researchers on its safety team who allegedly shared confidential company information with a third-party AI safety organization, The Wall Street Journal reported on Thursday.\n\n“We have parted ways with three individuals for violating our policies on accessing and handling sensitive company information,” an OpenAI spokesperson said in a statement to the WSJ. “Our investigation confirmed that these individuals mishandled sensitive information outside established company procedures, violating our policies and breaking the trust essential to our work.”\n\nThe report did not name the researchers, the organization, or the information involved. OpenAI did not immediately respond to our request for comment.\n\nPosts circulating on X named individuals some users believe were among those dismissed, who had also publicly expressed concerns about AI risk while at OpenAI. TechCrunch has not confirmed their identities.\n\nIn a statement to WSJ, an OpenAI spokesperson said an internal investigation confirmed the researchers had “mishandled sensitive information outside established company procedures.”\n\nThe departures come two days after The New York Times reported that OpenAI executives had brushed aside employees’ warnings about its safety practices, with employees describing a broader pattern of the company deprioritizing security. An OpenAI spokesperson told the Times the company takes security concerns seriously and has internal channels for reporting safety issues, while saying it recognized “a need to move faster.”\n\nIt’s unclear whether the three researchers raised concerns through internal channels before allegedly sharing information outside the organization.\n\nThe departures also come as OpenAI responds to a series of security incidents in which its AI agents escaped containment, posted user images , and hacked government websites . Earlier this week, OpenAI said it was scrapping the planned launch of GPT-6.1 Astra, an AI model, over safety concerns.\n\nThis isn’t the first time OpenAI has dismissed researchers over alleged information sharing. In 2024, the company fired researchers Leopold Aschenbrenner and Pavel Izmailov over alleged leaks, The Information reported .",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/01/openai-cuts-ties-with-three-safety-researchers-wsj-reports/",
+      "publishedAt": "2026-10-01T18:14:42.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-b639a0a770758d7e:en",
+      "sourceId": "the-verge-b639a0a770758d7e",
+      "lang": "en",
+      "title": "Judge dismisses antitrust lawsuits over Google’s AI Overviews",
+      "summary": "A federal judge has dismissed a pair of antitrust lawsuits filed by Chegg and Rolling Stone parent company Penske Media Corporation, which accused Google of driving away web traffic with its AI-powered search features, as reported earlier by Reuters. US District Judge Amit Mehta takes Google's side in a ruling on Wednesday, writing that PMC […]",
+      "body": "A federal judge has dismissed a pair of antitrust lawsuits filed by Chegg and Rolling Stone parent company Penske Media Corporation, which accused Google of driving away web traffic with its AI-powered search features, as reported earlier by Reuters . US District Judge Amit Mehta takes Google's side in a ruling on Wednesday , writing that PMC and Chegg's claims don't stand up to antitrust law.\n\nIn lawsuits filed last year, Chegg and PMC accused Google of abusing its monopoly power by coercing publishers into supplying content for AI Overviews for free, or risk disappearing from search results. The publishers alleged Google's practices diverted …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1003589/google-ai-overviews-chegg-penske-lawsuits-dismissed",
+      "publishedAt": "2026-10-01T17:12:21.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-37b73d9d44f8f84b:en",
+      "sourceId": "engadget-37b73d9d44f8f84b",
+      "lang": "en",
+      "title": "Samsung Galaxy Tab S12 Ultra vs Galaxy Tab S11 Ultra: The difference one year can make",
+      "summary": "An iterative upgrade once again for Samsung's laptop-sized tablet line.",
+      "body": "An iterative upgrade once again for Samsung's laptop-sized tablet line.\n\nHolding up the newly announced Samsung Galaxy Tab S12 Ultra alongside its predecessor from last year, the Galaxy Tab S11 Ultra , you'd be hard pressed to spot a physical difference. The biggest and baddest of Samsung's Android tablets is still a comically large and impossibly thin slab of glass, still rocking a 14.6\" AMOLED display to make it a media consumption and productivity powerhouse.\n\nIt's an iterative update from Samsung, in other words, which has been the case with every tablet in its oversized, top-end lineup. But why mess with a working formula after this many refinements? Aside from removing the ability to remote control your tablet with an S Pen, which was not brought back this time around, the Tab S11 Ultra changed very little compared to the Tab S10 Ultra, and the new Tab S12 Ultra doesn't even look that different from the original Tab S8 Ultra released over four years ago. Tablets are tablets, and it's mostly what's under the hood that makes this year's upgrade worth examining.\n\nThe Galaxy Tab S12 Ultra's laptop-sized display is once again interrupted only by a teardrop camera cutout for its single, ultra-wide lens — a serviceable selfie and video call camera at 12 megapixels. As for the display itself, it's a 2,960 by 1,848 pixel Dynamic AMOLED 2X panel, just like every other tablet before it in this lineup including the S11 Ultra. This year, peak brightness sits at 1,600 nits for HDR content and 1,000 nits in high brightness mode, same as last year. The panels Samsung uses for this line of oversized tablets have always been impressive, and if you haven't held one in your hands, you're missing out on some true eye candy. Engadget's review of the S12 Ultra confirms that hasn't changed.\n\nOne solid upgrade this time around is support for four-channel spatial audio using the onboard four-speaker array. That's up from 2-channel spatial audio on the last-generation tablet. I can confirm that the four-speaker array on Samsung's previous Ultra tablets are second only to their displays in terms of wow factor. Watching TV and movies, especially those with good spatial mixes, I've experienced surprisingly wide soundstages and element positioning.\n\nThere is, predictably, a chip upgrade from the MediaTek Dimensity 9300+ to the Dimensity 9500 inside the S12 Ultra. Like its predecessor, the chip is built on a 3nm process. Samsung claims it represents a 19 percent increase in CPU performance and a 17 percent increase in GPU power, along with a 61 percent jump in NPU (if you're doing heavy AI tasks on your Samsung tablet, please explain what and why). There's also a new 3D vapor chamber for heat dissipation. But as 2nm mobile chips finally make major inroads into the market with the recent Apple A20 Pro and Qualcomm 8 Elite Gen 6 bringing major performance gains to the table, this processor doesn't bring enough uplift to justify the tablet's equally increased price. As is tradition at this point in the RAM-aggedon crisis, the Tab S12 Ultra starts at $1,400 for the 256 GB model with 12 GB of RAM. That's a price hike of $200 over the launch price commanded by the S11 Ultra. You'd be hard pressed to find a more expensive Android tablet from a mainstream vendor.\n\nSadly, there's no increase to the charging speed, which remains at 45W for the 11,600 milliamp-hour battery, which is also the same size found on the S11 Ultra. In a landscape where more nimble competitors like Redmagic are putting out tablets like the Astra 2 with much speedier charging (to say nothing of other specs), it's a bit of a letdown to see Samsung stagnate here. Again, the higher price would go down with more honey had we seen some real upgrades.\n\nThe two tablets are otherwise almost entirely identical. S12 Ultra will ship with the latest One UI 9.0 Android skin out of the box, but the S11 Ultra will get the same update before too long. Both tablets have the same IP68 water and dust resistance rating, so if you want to watch Netflix in the pool, either one will do. Both tablets have the same exact body measurements, the same thickness at 5.1 millimeters and even the same weight down to the gram — 692 grams to be precise.\n\nIf you skipped out on the Galaxy Tab S11 Ultra because of its paltry updates compared to the S10 Ultra, there's very little here to compel you this time around. If you've felt stymied by the performance of the S11 Ultra, you won't get a lot more breathing room from the new chip, and even S10 Ultra owners may not have a compelling reason to upgrade. If you've still got an S9 Ultra or even an S8 Ultra, this will feel like a significant boost, but the price is still difficult to swallow. Samsung didn't release the Tab S12 Ultra with any great fanfare, and nor should it have — a press release launch for an on-paper update. Even so, you're not going to find a more well-specced Android tablet at this size.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2274708/samsung-galaxy-tablet-s12-ultra-vs-tab-s11-ultra-differences/",
+      "publishedAt": "2026-10-01T17:00:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "android"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-1c2ccb5fd0d90d7e:en",
+      "sourceId": "engadget-1c2ccb5fd0d90d7e",
+      "lang": "en",
+      "title": "Audible thinks you want to have an AI-generated conversation with Dracula's beleaguered servant",
+      "summary": "The platform is rolling out \"Interactive Stories\" starting with Bram Stoker's classic.",
+      "body": "The platform is rolling out \"Interactive Stories\" starting with Bram Stoker's classic.\n\nAudible just announced something called Interactive Stories , which lets listeners \"become part of the story's world.\" This is done via generative AI, so people can sort of talk to a character. The first of these experiences will accompany the upcoming Audible Original adaptation of Bram Stoker's Dracula .\n\nThe Interactive Story involves Dracula's long-suffering servant Renfield. Audible says Renfield will assign the listener \"a role, goal and stakes.\" The platform also promises that the \"listener responds in their own words and the character reacts in real time.\" So it's some kind of LARP-ing type thing, which could be fun depending on how well it's done. The generative AI aspect doesn't give me much hope, but we'll have to wait and see.\n\n\"AI is allowing us to create new interactive experiences that today's listeners, especially younger audiences, are craving,\" said Andy Tsao, Chief Product and Analytics Officer at the company. A recent Pew Research survey seems to suggest that younger audiences are wary of AI, but maybe Audible has different data points as to what they're currently \"craving.\"\n\nThe platform says this feature launches later this fall as a beta release. It didn't provide an official date, but that new audio adaptation of Dracula comes out on October 1. It'll probably happen sometime around then.\n\nAudible has announced the next Interactive Story too. It's set in the world of the upcoming Exoplanet original audio novel . The experience was created alongside author Benjamin Percy, and that's set to release on November 5.\n\nThe company is also launching something called the Character Guide to coincide with that new Dracula adaptation. This actually sounds pretty useful. It visually displays who is speaking in real-time directly on the app and includes spoiler-free character cards. It can be tough to keep track of dozens of characters with an audiobook, as there's no visual reference.\n\nThis is already available with the platform's adaptation of George Orwell's 1984 . It's also coming to Bram Stoker's Dracula and the aforementioned Exoplanet .\n\nFinally, Audible has announced something called Visual Explorer. This upcoming tool will display \"relevant imagery and visual context at key moments\" while listening to a story. The platform says \"listeners might glimpse a map\" or be given the ability to \"explore an image tied to a pivotal moment.\" A beta version of this feature will accompany The Cultural Tutor's Grand Tour: The Story of Europe in Six Cities , which is basically an audio tour of various historical destinations throughout the continent.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2274668/audible-thinks-you-want-to-have-an-ai-generated-conversation-with-draculas-beleaguered-servant/",
+      "publishedAt": "2026-10-01T16:21:54.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-28a2b09b9b14068c:en",
+      "sourceId": "9to5mac-28a2b09b9b14068c",
+      "lang": "en",
+      "title": "ESPN app recently got big upgrade on Apple TV 4K and iPhone",
+      "summary": "Fall is a big season for sports fans, and ESPN recently launched a big upgrade for users of its tvOS and iOS apps: 4K HDR streaming. more…",
+      "body": "Fall is a big season for sports fans, and ESPN recently launched a big upgrade for users of its tvOS and iOS apps: 4K HDR streaming.\n\nIn the last few weeks, ESPN began rolling out a big upgrade in its tvOS and iOS apps.\n\nThe streaming service now offers 4K HDR quality for top programming, including live games from the NFL, NBA, NHL, and more.\n\nFrom ESPN’s press release last month :\n\nThis week, ESPN and ESPN2 will begin rolling out in 4K HDR in the U.S., elevating picture quality for fans during one of the highest stakes stretches of the year for live sports. This includes all ESPN productions of Monday Night Football , NBA and NHL plus select live events across college football and US Open tennis, and marquee live events like Super Bowl LXI. This update will deliver clearer edges, sharper colors and smoother movement — all critically important for delivering a richer and more immersive viewing experience for sports fans.\n\nThe ESPN App on iOS and tvOS will be the first to support the new experiences, with additional connected TV platforms to follow, as well as on Disney+ in the U.S. to ESPN Unlimited subscribers.\n\nWhen browsing the ESPN app, you’ll see a new ‘4K HDR’ tag for content that supports the higher-quality video stream.\n\nIf you have a strong internet connection at home or on the go, 4K HDR will provide a more vibrant, crisp, premium image for your favorite sports content.\n\nFor any sports fans tempted to splurge on an Apple TV 4K for the first time, we recommend holding out just a little bit longer. The wait for a new Apple TV model is reportedly almost over .\n\nHave you watched ESPN since it launched 4K HDR content? How did it look? Let us know in the comments.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/01/espn-app-recently-got-big-upgrade-on-apple-tv-4k-and-iphone/",
+      "publishedAt": "2026-10-01T16:04:08.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-40b4df2fc4e1c9ce:en",
+      "sourceId": "engadget-40b4df2fc4e1c9ce",
+      "lang": "en",
+      "title": "Newsom vetoes smart glasses privacy bill",
+      "summary": "The language of the bill was overbroad, in Newsom's opinion.",
+      "body": "The law would have banned people from using wearables to secretly record others in private areas of businesses.\n\nGavin Newsom, the governor of California, has vetoed a bill that would have prohibited people from secretly record others using smart glasses in certain spaces. Those would have included changing rooms and doctors' offices, as the Associated Press notes .\n\nIn addition, SB-1130 would have forced the manufacturers of wearables to include an indicator that's on when the devices are recording video or audio (many already do). It would also have banned the sale of tech designed to mask a recording light or sound.\n\nAs Newsom put it, \"this bill would make it a misdemeanor to operate a wearable recording device to capture sound or video of any other person in any area within a place of business where the person has a reasonable expectation of privacy.\" He wrote in a letter to the State Senate that certain language used in the bill was too broad. \"For example, the bill's definition of 'wearable recording device' could include certain smartwatches or other worn devices widely used in public spaces and capable of recording which could lead to significant confusion and unintended consequences,\" Newsom added.\n\nAs the governor pointed out, California already bans people from using an electronic device to record others in areas where they have a reasonable expectation of privacy. Like some other states, it has a two-party consent law that requires both participants of a conversation (including over the phone) to agree for it to be recorded. Still, more specific legal language could have helped deter people from violating others' privacy using smart glasses. There's a reason why many folks refer to these devices as \"pervert glasses,\" after all.\n\nTechNet, an advocacy group representing a litany of notable tech companies , opposed the law. Had it come into effect, someone found guilty of secretly recording others would have faced fines of up to $1,500 and/or a prison sentence. Companies making wearables without a recording indicator or tech designed to block such indicators would have faced fines of up to $2,500 per violation.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2274526/newsom-vetoes-smart-glasses-privacy-bill/",
+      "publishedAt": "2026-10-01T15:05:20.000Z",
+      "categories": [
+        "tecnologia-general",
+        "gafas-inteligentes"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "cti-once-2343c6da4d529d73:es",
+      "sourceId": "cti-once-2343c6da4d529d73",
+      "lang": "es",
+      "title": "ONCE - CTI - ClubONCE ¡Llegan los 11 a 11 del CTI!",
+      "summary": "Llegan los 11 a 11 del CTI: 11 días con envíos por solo 11 céntimos.",
+      "body": "Llegan los 11 a 11 del CTI: 11 días con envíos por solo 11 céntimos.\n\nDurante 11 días, del 5 al 15 de octubre, tendrás una oportunidad especial para realizar tus compras telemáticas con gastos de envío a solo 11 céntimos.\n\nA lo largo de este periodo, todos los pedidos realizados por teléfono o a través de la tienda online disfrutarán de esta tarifa especial, frente al coste habitual de 7,90 euros.\n\nPuedes realizar tus compras telefónicas de lunes a jueves, de 9:00 a 19:00 horas, y los viernes de 9:00 a 14:00 horas, llamando al 910 109 111 (opción 2).\n\nAdemás, también puedes efectuar tus pedidos a través de la tienda online de ClubONCE, disponible las 24 horas del día.\n\n11 días para ahorrar en tus envíos. ¡No dejes pasar esta oportunidad!",
+      "sourceName": "CTI de la ONCE",
+      "originalUrl": "https://cti.once.es/noticias/llegan-los-11-a-11-del-cti",
+      "publishedAt": "2026-10-01T12:00:00.000Z",
+      "categories": [
+        "tecnologia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "accessible-android-76ccde042a3925e8:en",
+      "sourceId": "accessible-android-76ccde042a3925e8",
+      "lang": "en",
+      "title": "What’s New In Jieshuo 20261001",
+      "summary": "Version 20261001 of the Jieshuo screen reader has been released. Here are the main additions and changes in this version. Support For External AI Models…",
+      "body": "Published 1 October 2026 by Kareen Kiwan\n\nVersion 20261001 of the Jieshuo screen reader has been released. Here are the main additions and changes in this version.\n\nTable of Contents\n\nJieshuo now supports using external AI models for a number of its AI-powered functions.\n\nThe new release allows users to set their preferred AI services for the following functions:\n\nI assume that the functions related to the focused item also cover the corresponding functions that work on the entire screen, such as inquire by voice and detailed description. However, I cannot say this for sure because I have not tested these functions myself.\n\nTo set the models, go to Screen reader settings > Advanced settings > the section that is still in Chinese. There is a toggle for each function to enable the use of a custom AI model, and you can configure a different model for each function. You can customize the necessary parameters, such as the URL of an OpenAI-compatible AI service, model name, prompt, and API key. There is also a Test button that you can use to check whether the configuration works.\n\nThis feature is available to paid users only.\n\nJieshuo now includes new presets for the speech output audio. These are available in a new section that is still in Chinese in the TTS settings .\n\nThe standard preset is selected by default. Other presets include boosted bass, boosted treble, and others. I will not comment on how each preset sounds because hearing preferences are subjective, and the results can also vary depending on the speakers or earphones being used.\n\nThe To top and To end functions can now be used on sliders. These functions are assigned to swiping up then down and down then up with one finger if alternative granularity navigation mode is not being used to move between navigation types. They can also be assigned to user-defined gestures and can be found in the main menu.\n\nWhen a slider is focused, To top moves it to its minimum value, while To end moves it to its maximum value.\n\nLike other slider adjustment mechanisms, these functions work only on sliders that the screen reader can modify.\n\nDuring my testing, To end could not move the brightness slider all the way to its maximum value and stopped at 63%. However, it worked correctly on another slider.\n\nJieshuo now allows users to stop automatic notification reading in three additional situations: when Do not disturb mode is on, when media is playing, and when Jieshuo timers are active.\n\nThese options are available in Notification reading settings.\n\nI cannot comment on how reliably these options work because I do not use automatic notification reading on the device I tested with.\n\nAfter translation functions stopped working because of changes on Google’s end, the new version includes the necessary modifications for translation to work normally again.\n\nThe translation issue also affected some AI-related functions, such as image descriptions. These functions use translation to automatically translate results that come in Chinese from vivo AI services into the user’s target language.\n\nI am not sure if this change was introduced earlier. Another user alerted me to it in this version, and I no longer have an older version installed for comparison.\n\nIt is now possible to extend the duration of the long press and hold function, which is 59 seconds by default, by tapping the screen once or performing any onscreen gesture. This removes the 59-second limit. To release the button, the user must tap the screen again with one finger. Other gestures do not work to release the button.\n\nI do not know if the button is eventually released after a certain amount of time, but I tested it for 2 minutes and 39 seconds without the button being released.\n\nNote that if the user performs the function again while still in the window, the limitation remains lifted. Only one tap is required to release the button.\n\nJieshuo no longer automatically moves between home screen pages when automatic page scrolling is disabled. I tested this with Lawnchair, but I do not know whether it works reliably with all launchers.\n\nThe changelog also mentions fixes for bugs related to some devices, including Vivo devices and others.\n\nA 20% discount is currently available on all Jieshuo plans. The discount is active until October 5.\n\nPublished in News",
+      "sourceName": "Accessible Android",
+      "originalUrl": "https://accessibleandroid.com/whats-new-in-jieshuo-20261001/",
+      "publishedAt": "2026-10-01T10:14:41.000Z",
+      "categories": [
+        "android",
+        "apps-accesibles",
+        "tecnologia-accesibilidad",
         "ia-accesibilidad"
       ]
     },
@@ -4936,87 +5127,6 @@
     },
     {
       "kind": "news",
-      "id": "techcrunch-de88bfdb93295243:en",
-      "sourceId": "techcrunch-de88bfdb93295243",
-      "lang": "en",
-      "title": "Google releases Gemini 4 Argon, called its most powerful model yet",
-      "summary": "Google has released its latest Gemini model, marketing it as a workhorse for coding and cybersecurity work.",
-      "body": "Google parent company Alphabet has launched Gemini 4 Argon, a new AI model built to handle a variety of tasks such as coding, research, and writing. But it’s cybersecurity that Gemini 4 Argon is supposed to have a particular knack for, according to Google.\n\nArgon is only being rolled out to a select group of the company’s cyber partners through its Fairwind Program, Google’s security initiative. The model was trained specifically for defensive cyber work, and the company says it can “autonomously find, validate, and patch critical software vulnerabilities.”\n\nArgon is also said to be good at coding and engineering, with the company noting that its own staff have already been using the model for their daily work, including debugging and codebase migrations. Google also touts Argon’s ability to parse visuals — whether that’s analyzing the contents of long videos or charts.\n\n“Built to sustain deep reasoning across complex, long-horizon workflows, Argon is fundamentally changing the way we work and build at Google,” the company said in a blog post Wednesday.\n\nTop AI labs have rushed to release increasingly powerful models, attempting to outdo each other even as those very same firms warn that AI could spin out of control. Not long ago, OpenAI released Astra — which it hailed as its best model yet. Earlier this year, Anthropic’s Fable was also released with similar rhetoric from the company.\n\nFirms have done their best to market their services as superior to their competitors. In its blog, Google claims that Argon scored significantly higher than OpenAI’s GPT-6 Astra and Anthropic’s Fable and Opus models across a variety of AI benchmarks. It cites Vals – an increasingly popular AI benchmarking startup — to show that Argon is currently the leading model on the company’s AI model index.\n\nOnce considered “ behind ” in the “AI race,” Google has recently enjoyed success with Gemini. The company announced in August that its app had over a billion users per month , a metric that makes it competitive with OpenAI, which also recently announced that ChatGPT had reached a billion monthly users.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/09/30/google-releases-gemini-4-argon-called-its-most-powerful-model-yet/",
-      "publishedAt": "2026-09-30T23:43:07.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-b88ff86681903e8e:en",
-      "sourceId": "9to5mac-b88ff86681903e8e",
-      "lang": "en",
-      "title": "Apple TV is currently down for some users, as other Apple services also face issues [U]",
-      "summary": "Update, 7:37 p.m. ET: Apple says all of the outages have now been resolved, with the exception of Apple TV. Apple is currently reporting issues affecting Apple TV and subscription purchases, while some users are also running into problems elsewhere across the company’s services. Here are the details. more…",
-      "body": "Update, 7:37 p.m. ET: Apple says all of the outages have now been resolved, with the exception of Apple TV.\n\nApple is currently reporting issues affecting Apple TV and subscription purchases, while some users are also running into problems elsewhere across the company’s services. Here are the details.\n\nApple’s System Status page currently lists Apple TV, App Store, Apple Fitness+, Apple Music, Apple Music Subscriptions, Mac App Store, and Subscription Purchase as experiencing outages or other ongoing issues.\n\nAccording to Apple, most of the issues began at 4:22 p.m. ET. The company lists the App Store, Apple Music, and Mac App Store as undergoing “routine maintenance, with no expected user impact,” while the Apple TV outage began at 4:43 p.m. ET, with Apple warning that the service “may be unavailable due to scheduled maintenance.”\n\nIn our testing, the Apple TV interface failed to load on iOS, although content continued to load and play normally on other devices.\n\nThe outages began shortly after apps, including TestFlight, the App Store, and Fitness+, started displaying internal localization strings in place of normal interface text. It is unclear whether that is related to the other issues Apple’s systems are currently facing.\n\nReports on Downdetector further confirm the issue affecting Apple TV, though they appear to have already peaked and are now trending down, suggesting the outage may be gradually subsiding.\n\nWe will monitor the situation and update this post once more information becomes available, or Apple marks the issues as resolved.\n\nAre you experiencing issues? Let us know in the comments.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/09/30/apple-tv-is-currently-down-for-some-users-as-other-apple-services-also-face-issues/",
-      "publishedAt": "2026-09-30T22:47:35.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-35c0e06d86750d2c:en",
-      "sourceId": "engadget-35c0e06d86750d2c",
-      "lang": "en",
-      "title": "Fujifilm's Instax Pal 2 can plug directly into your smartphone to transfer images",
-      "summary": "The small digital camera combines software filters with tactile controls.",
-      "body": "The small digital camera combines software filters with tactile controls.\n\nFujifilm made its smallest instant camera, the original Instax Pal , by separating the camera sensor from its printer. The new Instax Pal 2 takes the idea even further by becoming more of a standalone digital camera in its own right, complete with tactile controls and a collection of downloadable color filters.\n\nIn terms of size and overall design, the Instax Pal 2 is larger than the original lump-shaped Pal and designed to be used in a horizontal orientation like a Kodak Charmera . The camera's 1.46 x 1.65 x 3.63 inch (37 x 42 x 92mm) size means it's not small enough to comfortably tag along on a keychain like the Charmera, but it does work under a similar philosophy: People will willingly sacrifice image quality for a shooting experience that feels fun, tactile, spontaneous or all of the above.\n\nThe Pal 2 features a 1/3.06-inch CMOS image sensor that can toggle between taking 10MP or 1MP photos, with an f/2.2 aperture, LED flash and support for things like autofocus and auto white balance. You'll likely be able to capture more detailed photos with your smartphone, but the Pal 2 is catering to the growing audience of people who are deliberately seeking older cameras for a throwback feel.\n\nCase in point: the Pal 2's various controls. The camera features both an optical viewfinder on the back and a digital viewfinder on the top that can be used for framing your shots and navigating the camera's simple menus. Things like a digital timer and a neat flipbook animation-style capture mode are included, but it seems like people will spend the bulk their time setting up shots with the Pal 2's dial and lever.\n\nThe lever lets you pick frames that match up with Fujifilm's various Instax films, while the dial flips through whichever color filters or effects you've downloaded to the Pal 2. You can then shoot using the shutter button and transfer images directly to your phone for further editing via a built-in USB-C connector. The Pal 2 also supports wireless Bluetooth transfers and printing directly to an Instax Link printer, if you want.\n\nThe camera's biggest issue, per PetaPixel 's video review of the Instax Pal 2, is how slow its interface is. Given how fun the camera seems otherwise, though, that could be a small road bump for anyone who's already invested in Fujifilm's ecosystem or dying for a slightly more affordable digital camera.\n\nThe Fujifilm Instax Pal 2 is available to pre-order now for $170 in all-white or a two-tone silver and black.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2274075/fujifilm-instax-pal-2-can-plug-directly-into-your-smartphone-to-transfer-images/",
-      "publishedAt": "2026-09-30T22:04:10.000Z",
-      "categories": [
-        "tecnologia-general",
-        "programas-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-7e4fa3cae509c7e5:en",
-      "sourceId": "the-verge-7e4fa3cae509c7e5",
-      "lang": "en",
-      "title": "Google announces Gemini 4 and says it’s so capable that only ‘trusted cyber defenders’ can have it right now",
-      "summary": "Google today revealed its next AI frontier model, which it's calling Gemini 4 Argon. The new model delivers \"frontier performance in complex workflows across real-world software engineering, enterprise knowledge work like legal and finance, and cybersecurity defense,\" according to chief AI architect and Google DeepMind SVP Koray Kavukcuoglu. But the company is limiting access at […]",
-      "body": "Google today revealed its next AI frontier model, which it's calling Gemini 4 Argon. The new model delivers \"frontier performance in complex workflows across real-world software engineering, enterprise knowledge work like legal and finance, and cybersecurity defense,\" according to chief AI architect and Google DeepMind SVP Koray Kavukcuoglu. But the company is limiting access at first to a \"set of trusted cyber defenders,\" and Kavukcuoglu says that Google is \"actively engaged in the U.S. government's voluntary process for pre-release model access while we gradually expand access.\"\n\nKavukcuoglu says Gemini 4 Argon is already powering Google's …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1002980/google-gemini-4-argon",
-      "publishedAt": "2026-09-30T20:41:41.000Z",
-      "categories": [
-        "tecnologia-general",
-        "programas-accesibles",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-d61e6fb3c3fe4f57:en",
-      "sourceId": "techcrunch-d61e6fb3c3fe4f57",
-      "lang": "en",
-      "title": "Factory CEO just accused his VC board adviser of spying for Cognition",
-      "summary": "VC Chris Degnan and former board adviser to Factory AI has taken a job as chief revenue officer for competitor Cognition -- and everyone is arguing on X about it.",
-      "body": "Matan Grinberg, co-founder and CEO of the AI coding startup Factory, said in a post on X on Wednesday that he fired VC Chris Degnan from his role as a board advisor. Grinberg alleges that Degnan shared confidential information with Factory’s biggest competitor, Cognition.\n\nTwo hours after Grinberg’s post, Degnan announced on both X and LinkedIn that he had joined Cognition as its chief revenue officer. He also subsequently refuted Grinberg’s allegations, saying in a separate X post that he wasn’t fired but resigned when he told Grinberg he was taking the job.\n\nDegnan was Snowflake’s first sales hire and later spent 11 years as the data company’s chief revenue officer. For the past five months, he has been a partner with RPT Partners, a Newport Beach, California, investor in Factory. Degnan is also a go-to-market advisor to startups at the much bigger venture firm Iconiq , a role that dates back to October of last year.\n\nThree-year-old, San Francisco-based Factory is an agentic coding startup whose AI agents can carry out programming tasks largely on their own. The company raised $200 million at a $5 billion valuation this month from Khosla Ventures, Blackstone, Sequoia Capital, Insight Partners and others. Its customers include Nvidia, Blackstone, Royal Bank of Canada, Palo Alto Networks, Adobe, and T-Mobile.\n\nGrinberg said he sees Cognition, the maker of the Devin coding agent, as his biggest competitor. Cognition raised another $2 billion at a $48 billion valuation earlier this month , and counts Mercedes-Benz, NASA, Goldman Sachs, and Citi as customers.\n\nGrinberg said on X that Degnan had earlier acknowledged having a “casual” conversation with a Cognition executive but had assured Grinberg that he had no interest in working for the competitor. According to Grinberg, Degnan said he had “made too much money” and was “too lazy to go work for Cognition,” which Grinberg said he “trusted and believed.”\n\nOn Monday, however, Degnan apparently disclosed that he had actually been in ongoing talks with Cognition.\n\nThis caused Grinberg to grow concerned about how much confidential information Degnan had about Factory, and how much he had shared and might share in the future with his new employer. He says he fired Degnan as a board advisor on Tuesday, writing:\n\n“For weeks, while he sat in our board meetings and advised our leadership team, he was also confiding with executives of our largest competitor. Chris was subject to confidentiality obligations in connection with his work with Factory. We do not know the extent of the information he shared, but it puts his timely questions about our product roadmap and what the parity gap involves into a new light.”\n\nBut Degnan disputes that account, as well. He says the last Factory board meeting he attended was weeks before he had “ever spoken” to Cognition and that he hasn’t shared confidential information. Degnan also says that when he told Grinberg that he was resigning to take the role at Cognition, Grinberg offered him a full-time job at Factory, which he declined.\n\nDegnan’s post announcing his new job at Cognition doesn’t mention Factory. Very notably, it does say that RPT Partners and the firm’s managing partner, Chad Peets, will now be working with Cognition. “I am thrilled that Chad and the RPT team will be working closely with me in our pursuit of building a generational company,” Degnan wrote.\n\nIn the old, pre-AI world, a VC firm was especially cautious not to engage in conflict-of-interest business. In today’s world, many a VC has invested in direct AI competitors , such OpenAI and Anthropic.\n\nIn fact, Khosla Ventures is an investor in both Cognition (since at least early 2025) and Factory.\n\nThat didn’t stop the venture firm’s founder, Vinod Khosla, from jumping into the drama, seemingly in defense of his bigger portfolio company Cognition. Nor did it stop Khosla Ventures partner Keith Rabois from weighing in as well — in defense of Factory.\n\nIn a post on X , Khosla accused Grinberg of lying about firing Degnan. He called Factory a “struggling second tier competitor” and said Grinberg showed “no decency or sense of proper behavior,” which “shows your desperation.”\n\nGrinberg replied that he has email receipts to verify his version of events but did not share them.\n\nMeanwhile Rabois opined on X , “It is unethical per se to even interview at a competitor while attending Board meetings and Board dinners.” He added that “to even sit for an interview while having access to board level information and without resigning is absolutely insane.”\n\nTracking the back and forth, Cognition co-founder and CEO Scott Wu also weighed in on the controversy on X . He politely expressed respect for the smaller competitor while insisting that his company has “no interest in Factory’s info.” Wu also contends that Degnan resigned on Monday but didn’t refute that Degnan was in talks with Cognition before that happened.\n\nEither way, there could be consequences for perceived board-level conflicts of interest. VC giant Andreessen Horowitz is reportedly the subject of a Justice Department probe into its partners serving on competitors’ boards.\n\nGrinberg argued that startup founders must be able to rely on their board members. “Chris’s conduct is unacceptable to me. Trust in Board Membership is one of the sacred bonds in the Silicon Valley, one that helps the startup ecosystem thrive. With it comes an enormous responsibility. That trust was violated.”\n\nDegnan, Peets, Factory and Khosla Ventures did not immediately respond to requests for further comment.\n\nNote: This story was updated to include responses from Degnan, Khosla, Rabois and Wu.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/09/30/factory-ceo-just-accused-his-vc-board-advisor-of-spying-for-cognition/",
-      "publishedAt": "2026-09-30T20:39:09.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "ars-technica-9c7261cbbadc1ab5:en",
       "sourceId": "ars-technica-9c7261cbbadc1ab5",
       "lang": "en",
@@ -5028,24 +5138,6 @@
       "publishedAt": "2026-09-30T20:11:08.000Z",
       "categories": [
         "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-82707f3952b2f0c7:en",
-      "sourceId": "9to5mac-82707f3952b2f0c7",
-      "lang": "en",
-      "title": "Report: Meta’s Muse crosses 5 million downloads amid massive advertising push",
-      "summary": "Meta’s streak at the top of the App Store continues in the US and Canada, as its AI assistant Muse is now past 5 million downloads, according to Sensor Tower. Here are the details. more…",
-      "body": "Meta’s streak at the top of the App Store continues in the US and Canada, as its AI assistant Muse is now past 5 million downloads, according to Sensor Tower. Here are the details.\n\nThree weeks ago, Meta launched Muse in the US. Soon after , it overtook ChatGPT as the top free app in the US App Store\n\nToday, according to a projection by Sensor Tower Senior Insights Analyst Kara Lee, Muse crossed 5 million downloads. That means it reached the milestone considerably faster than ChatGPT, Grok, and Claude, which the market intelligence firm says took 56, 103, and 492 days, respectively.\n\nMuse is Meta’s agentic AI assistant, capable of browsing the web and carrying out tasks on a user’s behalf, including sending emails, shopping, filling out forms, and booking travel.\n\nSensor Tower adds that Claude and Grok were iOS-exclusive in their first 5 days. Meta’s Muse app, by contrast, is available on iOS and Android, but only in the US and Canada.\n\nHere’s Sensor Tower with more context on how Muse’s 5 million-download milestone compares to other major app launches:\n\nAccording to Sensor Tower estimates, only 23 apps have reached over 5mn US downloads within 22 days of launch. ~85% of these apps are mobile gaming apps, including Fortnite, Pokemon GO, Candy Crush, and more. There were only 3 apps within that list that are not gaming apps, including Disney+, HBO Max, and Threads, which received ~20mn, 18mn, and 14mn downloads during that time, respectively.\n\nThe report adds that while Meta’s Muse app appears to have attracted significant public interest, Meta’s own advertising push has likely played a role in its rapid adoption.\n\nSensor Tower says “Meta began to ramp advertising spend for Muse on Wednesday, September 16, 2026, as downloads spiked 73% DoD,” and adds:\n\nAccording to Sensor Tower data, Muse has received the largest share of Meta’s house ads, accounting for up to 50% of daily house impressions over the past two weeks (9/14-927), as Facebook and WhatsApp ceded share of impressions during the same period.\n\nSensor Tower also says Muse ranked among the top 15 brands by advertising impressions in the US during the week of September 21 through September 27.\n\nHave you downloaded Meta’s Muse app? Let us know in the comments.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/09/30/report-metas-muse-crosses-5-million-downloads-amid-massive-advertising-push/",
-      "publishedAt": "2026-09-30T20:02:52.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "apps-accesibles",
         "ia-accesibilidad"
       ]
     },
@@ -5067,21 +5159,6 @@
     },
     {
       "kind": "news",
-      "id": "techcrunch-32d74fec94ad2f92:en",
-      "sourceId": "techcrunch-32d74fec94ad2f92",
-      "lang": "en",
-      "title": "BMW built the same car for gas and electric. The EV is $4,400 cheaper.",
-      "summary": "The new BMW 3 Series shows just how quickly EVs have caught up to fossil fuel vehicles on pricing.",
-      "body": "For years, automotive analysts have been predicting that electric vehicles would become cheaper than their gas-powered equivalents. They figured it would happen sometime in the latter half of the 2020s. BloombergNEF, for example, expected it to happen in 2026.\n\nThey weren’t far off.\n\nEV prices have dropped significantly in the last few years, but it has been hard to compare prices with fossil fuel vehicles because not every EV has a like-for-like gas-powered model.\n\nBMW has given us one. The 2027 BMW 3 Series comes in both gas and electric versions, and the EV is $4,400 cheaper .\n\nThe gas-powered M350 xDrive will set you back $65,900, while the electric i3 50 xDrive will cost $61,500, neither price includes destination charges. Both are similarly powerful, similarly styled, and aimed at similar pocketbooks. The difference is the EV is 6.7% cheaper.\n\nPedants will point out there’s a significantly cheaper gas-powered 3 Series trim, though it has no electric equivalent yet. The 2027 BMW 330 is priced at $49,900, and its upgraded xDrive trim costs $51,900.\n\nThe two comparable vehicles are built on different platforms, with the EV i3 benefiting from BMW’s newest chassis and technology. The gas-powered 3 Series makes do with an overhauled version of an existing platform.\n\nFor most people, the biggest difference will be the charging or refueling experience, but even there they’re more similar than some might expect.\n\nThe range of the new gas 3 Series is likely similar to previous models, or about 450 miles per tank in all-wheel-drive guise. The electric i3 will travel 468 miles on a full charge, and BMW says the vehicle’s fast charging is speedy enough to replenish 208 miles of range in 10 minutes. The difference might be noticeable to extreme road warriors, but for most drivers, it’ll be academic.\n\nThe generally accepted wisdom is that EVs have cost more up front, even if they’ve delivered a lower total cost of ownership . But now EVs are gaining the upper hand on purchase price, too.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/09/30/bmw-built-the-same-car-for-gas-and-electric-the-ev-is-4400-cheaper/",
-      "publishedAt": "2026-09-30T19:19:40.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "ars-technica-eabaecfdf569969d:en",
       "sourceId": "ars-technica-eabaecfdf569969d",
       "lang": "en",
@@ -5094,53 +5171,6 @@
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-56395a8bf36c2a58:en",
-      "sourceId": "the-verge-56395a8bf36c2a58",
-      "lang": "en",
-      "title": "The AI Tamagotchis are coming",
-      "summary": "While AI has made plenty of inroads on people's phones and computers, it's largely failed in dedicated devices. But over the next year, two major AI companies, Meta and OpenAI, will attempt to change that. And they're apparently betting on a similar path: testing appetites for physical hardware with their cutesy software agents. \"Hardware is […]",
-      "body": "While AI has made plenty of inroads on people's phones and computers, it's largely failed in dedicated devices. But over the next year, two major AI companies, Meta and OpenAI, will attempt to change that. And they're apparently betting on a similar path: testing appetites for physical hardware with their cutesy software agents.\n\n\"Hardware is hard\" is a tech industry mantra. Dedicated AI devices like the Friend and Humane AI Pin have inspired mainly frustration and backlash, which may only worsen as public anger toward AI grows. Meta and OpenAI, however, are both pushing ahead. OpenAI is working with famed ex-Apple designer Jony Ive and pla …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1002779/openai-dots-meta-muse-ai-agents-hardware-devices",
-      "publishedAt": "2026-09-30T18:07:38.000Z",
-      "categories": [
-        "tecnologia-general",
-        "programas-accesibles",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-82e722b092640a67:en",
-      "sourceId": "engadget-82e722b092640a67",
-      "lang": "en",
-      "title": "Freckle's smartphone aims to get kids back outside on their own",
-      "summary": "Freckle's smartphone encourages kids to get outside. What a concept!",
-      "body": "And it could also give parents some peace of mind.\n\nIt's been nearly two decades since the iPhone debuted, and we've yet to see a truly viable smartphone option for kids. For most parents, the wisest choice is to avoid smartphones until the teenage years, or rely on a less capable device (like a cellular Apple Watch) for location tracking and emergency calls. Today, the New York City-based startup Freckle is launching an alternative option with a twist: a small smartphone for kids that will keep them connected to their parents, but also encourage them to go outside and explore the world on their own. You know, like kids used to do.\n\nThe $199 Freckle smartphone (which requires a $25 a cellular subscription) looks like a small square, similar to the Rabbit R1 AI gadget . But on paper, it seems a lot more functional than that defunct device, and it has a far clearer goal: to give kids more freedom in the world while keeping them connected to their parents. At the same time, it also aims to curb the worst aspects of smartphones and the internet for kids aged seven to 13.\n\nThe Freckle runs on a simplified platform called \"ClayOS,\" which doesn't have an app store, access to the open web, addictive streaming video apps or social media. The focus is on delivering capabilities kids may actually want to use when they're playing outside independently. They can take a picture of objects and have Freckle describe them with its AI smarts, or simply ask general questions about how the world works. There's a mini-map to help kids navigate, a walkie talkie feature to talk to friends with nearby Freckles and even basic tap-to-pay functionality for buying snacks or taking public transportation.\n\nParents can also create \"Quests\" with Freckle, like making their kids take pictures of several flowers outside, or rely on on built-in missions from the company. Kids can use the Freckle to call and text, naturally, but only to the limited selection of people determined by their parents. The device itself is built to withstand the horrors of child usage, and the company also offers a case with a lanyard for toting it along on adventures. Its 3.1-inch screen is just big enough to deliver basic information, without taking up too much of a child's attention.\n\nAccording to founder and CEO Sam Terris, Freckle aims to strike the tricky balance between helping kids feel more sovereign and capable in the world, while also giving them access to modern smartphone capabilities and helping them stay connected to their parents and guardians. Freckle isn't selling fear like the AngelSense GPS tracker and similar devices, which often prey on parents worried about their kids being kidnapped. You could say Freckle is actually selling freedom.\n\nAs a parent of a seven-year-old, I get the concerns many parents have about letting their kids roam free (even though data shows that it's safer than we think ). We've also become more hyper-fixated on child surveillance and restrictions in America, compared to previous generations. One parent was arrested for letting their 10-year-old walk to the store on their own , despite there not being any fixed laws for letting kids move about independently.\n\nFreckle seems best-suited to kids in New York City and other walkable locales, where they're used to navigating the streets and aren't car dependent. But I could see it being being useful in museums, parks and other areas where parents may want to encourage independence. As my daughter gets older, I'd love to let her bike around our suburban neighborhood, hang out with friends and explore the world on her own. I was planning to get her an Apple Watch eventually, but something like the Freckle would also let her learn about the world on her terms. It would also be far more useful for navigation and communication than any smartwatch.\n\nWhile I've seen some parents give their under-10-year-olds a smartphone, we already know just how dangerous they can be for kids. Numerous studies have found they can lead to an overall lower quality of life ; mobile game developers are purposefully making their titles addictive ; and the immensely popular platform Roblox is a notoriously unmoderated mess . And that's not even counting the looming specter of social media as kids get older. Even if you're smart enough to lock down a smartphone, or give your kids an ancient device, there's always the chance they can break through your restrictions. (I certainly would have found a way when I was younger.)\n\nI haven't tested the Freckle yet, but I'm intrigued. It seems to avoid the major issues I have with regular smartphones for kids, and it could also encourage independence in useful ways. My daughter is also eager to test it out, after watching a few demo videos. I'm sure she'd rather have an iPhone all her own, but she'll have to wait a long while for that.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2273319/freckles-smartphone-aims-to-get-kids-back-outside-on-their-own/",
-      "publishedAt": "2026-09-30T16:00:00.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-886301b75e37f375:en",
-      "sourceId": "engadget-886301b75e37f375",
-      "lang": "en",
-      "title": "Affordable alternatives to DJI's Osmo Pocket 4",
-      "summary": "The best options when DJI's gimbal camera is too expensive or unavailable.",
-      "body": "The best options when DJI's gimbal camera is too expensive or unavailable.\n\nWe may receive a commission on purchases made from links.\n\nDJI's Osmo Pocket 4 is a fantastic gimbal camera thanks to features like sharp and color-accurate video, awesome stabilization and generous onboard storage. If you want to buy one in the United States, though, too bad: It's not officially available due to a ban on certain DJI products.\n\nLuckily, there are other options. DJI's main rival, Insta360, has the excellent Luna Pro , which offers similar features and video quality. And DJI's original Osmo Pocket 3 is still available, and still a fantastic camera. There are also some... other choices from the likes of Agfa (which you may have heard of), along with Ordro and SJCam (which you probably haven't). I've tried them all, and I'll show you which ones to buy and which to avoid.\n\nDJI basically invented the gimbal cam category with its Osmo Pocket series, particularly the Pocket 3 model that came out in 2023. As I detailed at the time in my review , that model did a whole bunch of stuff that small cameras hadn't done before: motorized subject tracking, gimbal stabilization and automatic horizontal or vertical video orientation via a screen flip. All of that came at a reasonable starting price of $520.\n\nSubsequent gimbal cameras have followed that template. The products are stick-like in shape, with a camera supported by a three-axis gimbal at the business end. The handle usually has a touch screen that can be flipped to change the video orientation (vertical or horizontal), along with a joystick to control the gimbal plus buttons for recording, power and other controls.\n\nDJI owned this market for nearly the life of the Pocket 3 and has reportedly sold millions of them. Rivals only started to appear recently, most notably Insta360's Luna Pro and dual camera Luna Ultra. DJI also introduced its own follow-up, the Pocket 4, and a dual-camera model, the Pocket 4P, but neither of those are available in the US. Naturally, some copycats and cheaper models have come out of the woodwork as well. Some companies even tried importing DJI's Pocket cameras under different names, but those have now been banned as well so I won't be discussing those.\n\nFurther competition may be coming soon. Chinese smartphone company Oppo recently revealed that it's exploring a gimbal camera, and another phone maker, Vivo, may be doing the same. Those companies may see a growing market and want to jump in.\n\nInsta360's Luna Pro is an impressive gimbal camera that's nearly on par with DJI's Pocket 4. To take on the Pocket 4's big 1-inch sensor and 20mm Hasselblad f/2.0 optics, the Luna Pro offers a similar 1-inch sensor with a 20mm f/1.8 Leica Summicron lens. The Luna Pro doesn't do 4K at 240 fps like the Pocket 4, but it does offer 8K at 30 fps that its rival lacks.\n\nBoth cameras support 10-bit log capture (I-Log for the Insta360 and DLog for DJI's Pocket 4), though the latter boasts a more impressive 14 stops of dynamic range. Recent tests have shown that while Insta360's Luna Pro offers excellent image quality in regular picture mode, its I-Log setting may have some deficiencies that impair dynamic range compared to the Pocket 4.\n\nIn other ways, the Luna Pro compares like-for-like with its DJI rival. Both offer automatic subject tracking, so you can set the camera up and have it follow you as you walk around. Stabilization in my testing was excellent and smooth, on par with the Pocket 4. Like its rival, you can switch from horizontal to vertical mode by rotating the screen. Battery life is excellent on both, rated at up to four hours for both cameras. The Luna Pro also offers internal storage, but it's less than half that of its rival at 47GB (compared to 107GB).\n\nThere are a couple of areas where the Luna Pro beats the Pocket 4. For one, you can shoot vertical video at up to 4K 30 fps on the Insta360 model, compared to just 3K for DJI's cam (that's because of the higher 8K resolution which crops down to 4K). The Luna's display is also detachable, letting you walk away from the camera and still line up shots.\n\nThe Luna Pro costs $600, which is the same as the Pocket 4 but more expensive than the other offerings. It's also cheaper than trying to import a Pocket 4 if you live in the US. If that's affordable for you, I'd suggest this unreservedly as the best alternative to the Pocket 4.\n\nAmazon\n\nBecause it was previously approved, DJI's Pocket 3 is officially available in the US, complete with support, for around $439. Though a little old and more expensive than other models in this roundup, it's still better than anything else you can find in this price range.\n\nThe Pocket 3 has a 1-inch sensor like the Pocket 4, along with the same 20mm f/2.0 lens. It can shoot 4K at 120 fps and not 240 fps like the Pocket 4, a fairly minor drawback. It's also limited to 10-bit D-LogM, unlike the Pocket 4 that offers full D-Log capture with more dynamic range. For photos, the Pocket 3 offers a low 10 megapixels of resolution, while the Pocket 4 can capture 37MP still images.\n\nDJI's older gimbal also offers motorized subject tracking like its new sibling, along with incredibly smooth optical stabilization via the three-axis gimbal. The screen is slightly less bright (700 nits compared to 1,000 nits), but just as sharp and allows you to change the orientation from vertical to horizontal at a flip — again, just like the Pocket 4.\n\nA key feature missing is the built-in storage, with capture only available via microSD cards. Battery life is not quite as good, but still excellent for a standalone camera. All told, most users would barely notice the difference between the two models, so I'd highly recommend the Pocket 3 as a mid-priced option over any other models.\n\nAmazon\n\nBeyond DJI and Insta360, we're getting into lesser-known brands. That's the case with the $270 Ordro UHD-M5 , which has some interesting features but appears to have been manufactured by a \"white label\" company. I say that because I also received another test model called the AgfaPhoto Realimove MC3X (limited to Europe) with an identical design.\n\nThe Ordro M5's standout feature is a 3.5-inch screen that's considerably bigger than the displays on any rival products. Like the Pocket 4, it flips to automatically change video from a vertical to horizontal orientation. The gimbal is controlled on-screen, which should make it easy for beginners to use.\n\nThe drawback is that the M5's display is washed out in bright sunlight and not as sharp as the OLED screens on DJI and Insta360's models. The body is also very wide to accommodate the big display, which can make holding it a bit awkward.\n\nIt supports 5K 30 fps video and 4K at 60 fps, but has a 1/2.5-inch sensor that's tiny compared to rivals. As a result, picture quality was solid for a camera in this price range, but not as sharp or color rich as DJI and Insta360's offerings. The gimbal did a good job stabilizing footage while I rode an e-bike and walked.\n\nOne interesting trick feature is the IR night vision lights that let you record black and white video in near darkness. It did work, though quality was pretty fuzzy. Overall, the Ordro M5 is a decent beginner's gimbal camera, though I'd recommend the Pocket 3 instead if you can manage the extra $150.\n\nAmazon\n\nThe SJCam C400 is definitely the oddball of the group. It's held and operated like a gimbal camera, but actually lacks a three-axis stabilizer and relies on digital stabilization. It's much like Insta360's Go 3S, in that the tiny camera itself detaches from the handle, so that it can be used remotely and even has its own screen. At the same time, video can be monitored remotely from the main display.\n\nThe C400 has a solid-feeling build, and the detachable camera is small enough to fasten to a hat or a pet, though it's heavier than the remote cam on the Go 3S. When affixed to the handle, the main screen can be flipped to change the aspect ratio from vertical to horizontal, like all the other models I tested.\n\nIt can output up to 4K 30 fps video, but unfortunately, the quality isn't great. Sharpness isn't good in the middle of the image, and it's even worse at the corners. It looks oversharpened and has strange artifacts that cause blotchy video when you move the camera. The digital stabilization works well enough, but without a three-axis gimbal, motion blur rears its ugly head when light levels are too low.\n\nOn the plus side, battery life is very good at over 180 minutes. It's also very inexpensive at $189 in a kit with a waterproof case, lanyard and other accessories. With such poor image quality, however, it's hard for me to recommend even at that price.\n\nAmazon\n\nGimbal cameras are still a fledgling category so there aren't as many products to choose from as with, say, action cameras. However, here are a few picks that we considered but ultimately rejected:\n\nAny DJI rebrands or exports: We won't recommend an expensive import or rebrand product like the Xtra Muse that may be banned or has no manufacturer support.\n\nFeiyu Pocket 3: This product was originally on our slate but has since become unavailable.\n\nMinolta Showtime MN5KG100 and others: This is the same white label product as the AgfaPhoto and Ordro models.\n\nPhone gimbals: Another type of product not included here are phone gimbals. Those fall into a separate category as they're more complex to use, often requiring considerable setup before you can shoot anything.\n\nEngadget chose these products based on our previous reviews and judgement, as well as in-depth category research. We have tested hundreds of camera products over the years, including gimbal, action, compact and mirrorless models.\n\nTo test these gimbal cameras, we used them in a variety of environments to gauge video quality (in daylight and at night), stabilization and ease of use. Factors like battery life and built-in storage were also taken into account. The products chosen were based on all of those factors, with video quality weighted the heaviest, followed by stabilization and ease of use.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2271706/affordable-alternatives-to-djis-osmo-pocket-4/",
-      "publishedAt": "2026-09-30T15:30:00.000Z",
-      "categories": [
-        "tecnologia-general"
       ]
     },
     {

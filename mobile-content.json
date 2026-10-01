@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-30T22:18:42.340Z",
+  "generatedAt": "2026-10-01T01:36:16.100Z",
   "resources": [
     {
       "kind": "resource",
@@ -4866,6 +4866,172 @@
   "news": [
     {
       "kind": "news",
+      "id": "applevis-apps-8d9878e5fd2fe086:en",
+      "sourceId": "applevis-apps-8d9878e5fd2fe086",
+      "lang": "en",
+      "title": "wayfound: walk & remember",
+      "summary": "A fox walks you through a little town. Then you find your own way back. Wayfound is a calm puzzle game about the oldest skill you own: knowing where you are. Follow the fox through pastel streets, past bakeries and clock towers, up a quiet elevator. Notice things. Then walk the route yourself — no minimap, no GPS arrow, just you and what you remember. THERE'S NO CLOCK, AND NO WRONG WAY TO WANDER • No timers, no fail states, no lives. Wrong turns are part of wandering — the fox always finds you. • A rescue ladder, not a game over: hints arrive as gentle nudges, only when you want them. • Little errands: deliver a parcel, find the bakery, learn the streets by needing them. • At corners, the fox asks: which way now? Guess, and feel the route settle into your feet. • Walks grow with you: first the fox leads, then you study a map and walk alone, then it's just you and a destination. • The town grows because you walked it — a flour cart by the bakery, a fishing net by the pier — small things appear when you finish an errand, and they stay. • Point home: a quiet compass test at the end of each walk. Watch yourself get better. • A new town for every chapter — every street is new to you, so each walk is real navigation. WHY WALKS WORK Wayfound is inspired by research on spatial memory — how we build inner maps from landmarks, routes, and wrong turns, and how turn-by-turn navigation quietly erodes that skill. It's not a brain-training claim. It's just a nice walk. • Free, no ads, no subscriptions, no tracking. Your progress stays on your device. • Works entirely offline. • English, 简体中文, 日本語.",
+      "body": "A fox walks you through a little town. Then you find your own way back.\n\nWayfound is a calm puzzle game about the oldest skill you own: knowing where you are. Follow the fox through pastel streets, past bakeries and clock towers, up a quiet elevator. Notice things. Then walk the route yourself — no minimap, no GPS arrow, just you and what you remember.\n\nTHERE'S NO CLOCK, AND NO WRONG WAY TO WANDER • No timers, no fail states, no lives. Wrong turns are part of wandering — the fox always finds you. • A rescue ladder, not a game over: hints arrive as gentle nudges, only when you want them. • Little errands: deliver a parcel, find the bakery, learn the streets by needing them. • At corners, the fox asks: which way now? Guess, and feel the route settle into your feet. • Walks grow with you: first the fox leads, then you study a map and walk alone, then it's just you and a destination. • The town grows because you walked it — a flour cart by the bakery, a fishing net by the pier — small things appear when you finish an errand, and they stay. • Point home: a quiet compass test at the end of each walk. Watch yourself get better. • A new town for every chapter — every street is new to you, so each walk is real navigation.\n\nWHY WALKS WORK Wayfound is inspired by research on spatial memory — how we build inner maps from landmarks, routes, and wrong turns, and how turn-by-turn navigation quietly erodes that skill. It's not a brain-training claim. It's just a nice walk.\n\n• Free, no ads, no subscriptions, no tracking. Your progress stays on your device. • Works entirely offline. • English, 简体中文, 日本語.",
+      "sourceName": "AppleVis Apps",
+      "originalUrl": "https://www.applevis.com/apps/ios/games/wayfound-walk-remember",
+      "publishedAt": "2026-09-30T23:50:38.000Z",
+      "categories": [
+        "apple",
+        "apps-accesibles",
+        "movilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-de88bfdb93295243:en",
+      "sourceId": "techcrunch-de88bfdb93295243",
+      "lang": "en",
+      "title": "Google releases Gemini 4 Argon, called its most powerful model yet",
+      "summary": "Google has released its latest Gemini model, marketing it as a workhorse for coding and cybersecurity work.",
+      "body": "Google parent company Alphabet has launched Gemini 4 Argon, a new AI model built to handle a variety of tasks such as coding, research, and writing. But it’s cybersecurity that Gemini 4 Argon is supposed to have a particular knack for, according to Google.\n\nArgon is only being rolled out to a select group of the company’s cyber partners through its Fairwind Program, Google’s security initiative. The model was trained specifically for defensive cyber work, and the company says it can “autonomously find, validate, and patch critical software vulnerabilities.”\n\nArgon is also said to be good at coding and engineering, with the company noting that its own staff have already been using the model for their daily work, including debugging and codebase migrations. Google also touts Argon’s ability to parse visuals — whether that’s analyzing the contents of long videos or charts.\n\n“Built to sustain deep reasoning across complex, long-horizon workflows, Argon is fundamentally changing the way we work and build at Google,” the company said in a blog post Wednesday.\n\nTop AI labs have rushed to release increasingly powerful models, attempting to outdo each other even as those very same firms warn that AI could spin out of control. Not long ago, OpenAI released Astra — which it hailed as its best model yet. Earlier this year, Anthropic’s Fable was also released with similar rhetoric from the company.\n\nFirms have done their best to market their services as superior to their competitors. In its blog, Google claims that Argon scored significantly higher than OpenAI’s GPT-6 Astra and Anthropic’s Fable and Opus models across a variety of AI benchmarks. It cites Vals – an increasingly popular AI benchmarking startup — to show that Argon is currently the leading model on the company’s AI model index.\n\nOnce considered “ behind ” in the “AI race,” Google has recently enjoyed success with Gemini. The company announced in August that its app had over a billion users per month , a metric that makes it competitive with OpenAI, which also recently announced that ChatGPT had reached a billion monthly users.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/09/30/google-releases-gemini-4-argon-called-its-most-powerful-model-yet/",
+      "publishedAt": "2026-09-30T23:43:07.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-b88ff86681903e8e:en",
+      "sourceId": "9to5mac-b88ff86681903e8e",
+      "lang": "en",
+      "title": "Apple TV is currently down for some users, as other Apple services also face issues [U]",
+      "summary": "Update, 7:37 p.m. ET: Apple says all of the outages have now been resolved, with the exception of Apple TV. Apple is currently reporting issues affecting Apple TV and subscription purchases, while some users are also running into problems elsewhere across the company’s services. Here are the details. more…",
+      "body": "Update, 7:37 p.m. ET: Apple says all of the outages have now been resolved, with the exception of Apple TV.\n\nApple is currently reporting issues affecting Apple TV and subscription purchases, while some users are also running into problems elsewhere across the company’s services. Here are the details.\n\nApple’s System Status page currently lists Apple TV, App Store, Apple Fitness+, Apple Music, Apple Music Subscriptions, Mac App Store, and Subscription Purchase as experiencing outages or other ongoing issues.\n\nAccording to Apple, most of the issues began at 4:22 p.m. ET. The company lists the App Store, Apple Music, and Mac App Store as undergoing “routine maintenance, with no expected user impact,” while the Apple TV outage began at 4:43 p.m. ET, with Apple warning that the service “may be unavailable due to scheduled maintenance.”\n\nIn our testing, the Apple TV interface failed to load on iOS, although content continued to load and play normally on other devices.\n\nThe outages began shortly after apps, including TestFlight, the App Store, and Fitness+, started displaying internal localization strings in place of normal interface text. It is unclear whether that is related to the other issues Apple’s systems are currently facing.\n\nReports on Downdetector further confirm the issue affecting Apple TV, though they appear to have already peaked and are now trending down, suggesting the outage may be gradually subsiding.\n\nWe will monitor the situation and update this post once more information becomes available, or Apple marks the issues as resolved.\n\nAre you experiencing issues? Let us know in the comments.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/09/30/apple-tv-is-currently-down-for-some-users-as-other-apple-services-also-face-issues/",
+      "publishedAt": "2026-09-30T22:47:35.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-35c0e06d86750d2c:en",
+      "sourceId": "engadget-35c0e06d86750d2c",
+      "lang": "en",
+      "title": "Fujifilm's Instax Pal 2 can plug directly into your smartphone to transfer images",
+      "summary": "The small digital camera combines software filters with tactile controls.",
+      "body": "The small digital camera combines software filters with tactile controls.\n\nFujifilm made its smallest instant camera, the original Instax Pal , by separating the camera sensor from its printer. The new Instax Pal 2 takes the idea even further by becoming more of a standalone digital camera in its own right, complete with tactile controls and a collection of downloadable color filters.\n\nIn terms of size and overall design, the Instax Pal 2 is larger than the original lump-shaped Pal and designed to be used in a horizontal orientation like a Kodak Charmera . The camera's 1.46 x 1.65 x 3.63 inch (37 x 42 x 92mm) size means it's not small enough to comfortably tag along on a keychain like the Charmera, but it does work under a similar philosophy: People will willingly sacrifice image quality for a shooting experience that feels fun, tactile, spontaneous or all of the above.\n\nThe Pal 2 features a 1/3.06-inch CMOS image sensor that can toggle between taking 10MP or 1MP photos, with an f/2.2 aperture, LED flash and support for things like autofocus and auto white balance. You'll likely be able to capture more detailed photos with your smartphone, but the Pal 2 is catering to the growing audience of people who are deliberately seeking older cameras for a throwback feel.\n\nCase in point: the Pal 2's various controls. The camera features both an optical viewfinder on the back and a digital viewfinder on the top that can be used for framing your shots and navigating the camera's simple menus. Things like a digital timer and a neat flipbook animation-style capture mode are included, but it seems like people will spend the bulk their time setting up shots with the Pal 2's dial and lever.\n\nThe lever lets you pick frames that match up with Fujifilm's various Instax films, while the dial flips through whichever color filters or effects you've downloaded to the Pal 2. You can then shoot using the shutter button and transfer images directly to your phone for further editing via a built-in USB-C connector. The Pal 2 also supports wireless Bluetooth transfers and printing directly to an Instax Link printer, if you want.\n\nThe camera's biggest issue, per PetaPixel 's video review of the Instax Pal 2, is how slow its interface is. Given how fun the camera seems otherwise, though, that could be a small road bump for anyone who's already invested in Fujifilm's ecosystem or dying for a slightly more affordable digital camera.\n\nThe Fujifilm Instax Pal 2 is available to pre-order now for $170 in all-white or a two-tone silver and black.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2274075/fujifilm-instax-pal-2-can-plug-directly-into-your-smartphone-to-transfer-images/",
+      "publishedAt": "2026-09-30T22:04:10.000Z",
+      "categories": [
+        "tecnologia-general",
+        "programas-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-7e4fa3cae509c7e5:en",
+      "sourceId": "the-verge-7e4fa3cae509c7e5",
+      "lang": "en",
+      "title": "Google announces Gemini 4 and says it’s so capable that only ‘trusted cyber defenders’ can have it right now",
+      "summary": "Google today revealed its next AI frontier model, which it's calling Gemini 4 Argon. The new model delivers \"frontier performance in complex workflows across real-world software engineering, enterprise knowledge work like legal and finance, and cybersecurity defense,\" according to chief AI architect and Google DeepMind SVP Koray Kavukcuoglu. But the company is limiting access at […]",
+      "body": "Google today revealed its next AI frontier model, which it's calling Gemini 4 Argon. The new model delivers \"frontier performance in complex workflows across real-world software engineering, enterprise knowledge work like legal and finance, and cybersecurity defense,\" according to chief AI architect and Google DeepMind SVP Koray Kavukcuoglu. But the company is limiting access at first to a \"set of trusted cyber defenders,\" and Kavukcuoglu says that Google is \"actively engaged in the U.S. government's voluntary process for pre-release model access while we gradually expand access.\"\n\nKavukcuoglu says Gemini 4 Argon is already powering Google's …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1002980/google-gemini-4-argon",
+      "publishedAt": "2026-09-30T20:41:41.000Z",
+      "categories": [
+        "tecnologia-general",
+        "programas-accesibles",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-d61e6fb3c3fe4f57:en",
+      "sourceId": "techcrunch-d61e6fb3c3fe4f57",
+      "lang": "en",
+      "title": "Factory CEO just accused his VC board advisor of spying for Cognition",
+      "summary": "VC Chris Degnan and former board advisor to Factory AI has taken a job as chief revenue officer for Cognition.",
+      "body": "Matan Grinberg, co-founder and CEO of the AI coding startup Factory, said in a post on X on Wednesday that he fired VC Chris Degnan from his role as a board advisor. Grinberg alleges that Degnan shared confidential information with Factory’s biggest competitor, Cognition.\n\nTwo hours after Grinberg’s post, Degnan announced on both X and LinkedIn that he had joined Cognition as its chief revenue officer. He also subsequently refuted Grinberg’s allegations, saying in a separate X post that he wasn’t fired but resigned when he told Grinberg he was taking the job.\n\nDegnan was Snowflake’s first sales hire and later spent 11 years as the data company’s chief revenue officer. For the past five months, he has been a partner with RPT Partners, a Newport Beach, California, investor in Factory. Degnan is also a go-to-market advisor to startups at the much bigger venture firm Iconiq , a role that dates back to October of last year.\n\nThree-year-old, San Francisco-based Factory is an agentic coding startup whose AI agents can carry out programming tasks largely on their own. The company raised $200 million at a $5 billion valuation this month from Khosla Ventures, Blackstone, Sequoia Capital, Insight Partners and others. Its customers include Nvidia, Blackstone, Royal Bank of Canada, Palo Alto Networks, Adobe, and T-Mobile.\n\nGrinberg said he sees Cognition, the maker of the Devin coding agent, as his biggest competitor. Cognition raised another $2 billion at a $48 billion valuation earlier this month , and counts Mercedes-Benz, NASA, Goldman Sachs, and Citi as customers.\n\nGrinberg said on X that Degnan had earlier acknowledged having a “casual” conversation with a Cognition executive but had assured Grinberg that he had no interest in working for the competitor. According to Grinberg, Degnan said he had “made too much money” and was “too lazy to go work for Cognition,” which Grinberg said he “trusted and believed.”\n\nOn Monday, however, Degnan apparently disclosed that he had actually been in ongoing talks with Cognition.\n\nThis caused Grinberg to grow concerned about how much confidential information Degnan had about Factory, and how much he had shared and might share in the future with his new employer. He says he fired Degnan as a board advisor on Tuesday, writing:\n\n“For weeks, while he sat in our board meetings and advised our leadership team, he was also confiding with executives of our largest competitor. Chris was subject to confidentiality obligations in connection with his work with Factory. We do not know the extent of the information he shared, but it puts his timely questions about our product roadmap and what the parity gap involves into a new light.”\n\nBut Degnan disputes that account, as well. He says the last Factory board meeting he attended was weeks before he had “ever spoken” to Cognition and that he hasn’t shared confidential information. Degnan also says that when he told Grinberg that he was resigning to take the role at Cognition, Grinberg offered him a full-time job at Factory, which he declined.\n\nDegnan’s post announcing his new job at Cognition doesn’t mention Factory. Very notably, it does say that RPT Partners and the firm’s managing partner, Chad Peets, will now be working with Cognition. “I am thrilled that Chad and the RPT team will be working closely with me in our pursuit of building a generational company,” Degnan wrote.\n\nIn the old, pre-AI world, a VC firm was especially cautious not to engage in conflict-of-interest business. In today’s world, many a VC has invested in direct AI competitors , such OpenAI and Anthropic.\n\nIn fact, Khosla Ventures is an investor in both Cognition (since at least early 2025) and Factory.\n\nThat didn’t stop the venture firm’s founder, Vinod Khosla, from jumping into the drama, seemingly in defense of his bigger portfolio company Cognition. Nor did it stop Khosla Ventures partner Keith Rabois from weighing in as well — in defense of Factory.\n\nIn a post on X , Khosla accused Grinberg of lying about firing Degnan. He called Factory a “struggling second tier competitor” and said Grinberg showed “no decency or sense of proper behavior,” which “shows your desperation.”\n\nGrinberg replied that he has email receipts to verify his version of events but did not share them.\n\nMeanwhile Rabois opined on X , “It is unethical per se to even interview at a competitor while attending Board meetings and Board dinners.” He added that “to even sit for an interview while having access to board level information and without resigning is absolutely insane.”\n\nTracking the back and forth, Cognition co-founder and CEO Scott Wu also weighed in on the controversy on X . He politely expressed respect for the smaller competitor while insisting that his company has “no interest in Factory’s info.” Wu also contends that Degnan resigned on Monday but didn’t refute that Degnan was in talks with Cognition before that happened.\n\nEither way, there could be consequences for perceived board-level conflicts of interest. VC giant Andreessen Horowitz is reportedly the subject of a Justice Department probe into its partners serving on competitors’ boards.\n\nGrinberg argued that startup founders must be able to rely on their board members. “Chris’s conduct is unacceptable to me. Trust in Board Membership is one of the sacred bonds in the Silicon Valley, one that helps the startup ecosystem thrive. With it comes an enormous responsibility. That trust was violated.”\n\nDegnan, Peets, Factory and Khosla Ventures did not immediately respond to requests for further comment.\n\nNote: This story was updated to include responses from Degnan, Khosla, Rabois and Wu.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/09/30/factory-ceo-just-accused-his-vc-board-advisor-of-spying-for-cognition/",
+      "publishedAt": "2026-09-30T20:39:09.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-9c7261cbbadc1ab5:en",
+      "sourceId": "ars-technica-9c7261cbbadc1ab5",
+      "lang": "en",
+      "title": "Google announces Gemini 4 Argon AI model, but you can't use it yet",
+      "summary": "So much for Gemini 3.5 Pro.",
+      "body": "Google promised Gemini 3.5 Pro in June, but it spent the summer trotting out smaller Flash models . Now, Google is ready to take on the frontier again with Gemini 4 Argon . The company claims this new AI offers industry-leading performance in coding, knowledge work, and cybersecurity, but you aren't allowed to use it yet.\n\nWhile most of us will have to wait to test Gemini 4, Google says engineers inside the company are already using the new model extensively. Argon reportedly used \"fleet-wide telemetry data\" to help Google save 300 TiB of memory across its data centers. Meanwhile, Argon agents have been working to migrate C/C++ codebases to Rust across Google, including thousands of lines in the core re2 and libgav1 libraries and more than 800,000 lines in the Fuchsia OS Zircon kernel.\n\nGoogle has also come armed with a raft of benchmarks to back up its claims. On the software engineering DeepSWE v1.1 benchmark, Gemini 4 Argon hits 77.9 percent, which is higher than GPT-6 Astra, Fable 5.1, and Opus 5.5. Google promises similar power across a range of long-horizon tasks, pointing to Argon's industry-leading score in the economic analysis Vals Index test.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/google/2026/09/google-announces-gemini-4-argon-ai-model-but-you-cant-use-it-yet/",
+      "publishedAt": "2026-09-30T20:11:08.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-82707f3952b2f0c7:en",
+      "sourceId": "9to5mac-82707f3952b2f0c7",
+      "lang": "en",
+      "title": "Report: Meta’s Muse crosses 5 million downloads amid massive advertising push",
+      "summary": "Meta’s streak at the top of the App Store continues in the US and Canada, as its AI assistant Muse is now past 5 million downloads, according to Sensor Tower. Here are the details. more…",
+      "body": "Meta’s streak at the top of the App Store continues in the US and Canada, as its AI assistant Muse is now past 5 million downloads, according to Sensor Tower. Here are the details.\n\nThree weeks ago, Meta launched Muse in the US. Soon after , it overtook ChatGPT as the top free app in the US App Store\n\nToday, according to a projection by Sensor Tower Senior Insights Analyst Kara Lee, Muse crossed 5 million downloads. That means it reached the milestone considerably faster than ChatGPT, Grok, and Claude, which the market intelligence firm says took 56, 103, and 492 days, respectively.\n\nMuse is Meta’s agentic AI assistant, capable of browsing the web and carrying out tasks on a user’s behalf, including sending emails, shopping, filling out forms, and booking travel.\n\nSensor Tower adds that Claude and Grok were iOS-exclusive in their first 5 days. Meta’s Muse app, by contrast, is available on iOS and Android, but only in the US and Canada.\n\nHere’s Sensor Tower with more context on how Muse’s 5 million-download milestone compares to other major app launches:\n\nAccording to Sensor Tower estimates, only 23 apps have reached over 5mn US downloads within 22 days of launch. ~85% of these apps are mobile gaming apps, including Fortnite, Pokemon GO, Candy Crush, and more. There were only 3 apps within that list that are not gaming apps, including Disney+, HBO Max, and Threads, which received ~20mn, 18mn, and 14mn downloads during that time, respectively.\n\nThe report adds that while Meta’s Muse app appears to have attracted significant public interest, Meta’s own advertising push has likely played a role in its rapid adoption.\n\nSensor Tower says “Meta began to ramp advertising spend for Muse on Wednesday, September 16, 2026, as downloads spiked 73% DoD,” and adds:\n\nAccording to Sensor Tower data, Muse has received the largest share of Meta’s house ads, accounting for up to 50% of daily house impressions over the past two weeks (9/14-927), as Facebook and WhatsApp ceded share of impressions during the same period.\n\nSensor Tower also says Muse ranked among the top 15 brands by advertising impressions in the US during the week of September 21 through September 27.\n\nHave you downloaded Meta’s Muse app? Let us know in the comments.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/09/30/report-metas-muse-crosses-5-million-downloads-amid-massive-advertising-push/",
+      "publishedAt": "2026-09-30T20:02:52.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "apps-accesibles",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-e681528d420039f4:en",
+      "sourceId": "9to5mac-e681528d420039f4",
+      "lang": "en",
+      "title": "9to5Mac Daily: September 30, 2026 – How John Ternus wants to reshape Apple",
+      "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Stuff :Stuff helps you get everything out of your head and into a simple, elegant system—closing open loops and reducing mental stress. A simple to-do list for iPhone, iPad, and Mac, with powerful tools that make organizing, tracking, and checking off your tasks a whole lot more satisfying. Get Stuff done. more…",
+      "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Stuff :Stuff helps you get everything out of your head and into a simple, elegant system—closing open loops and reducing mental stress. A simple to-do list for iPhone, iPad, and Mac, with powerful tools that make organizing, tracking, and checking off your tasks a whole lot more satisfying. Get Stuff done.\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/09/30/daily-september-30-2026/",
+      "publishedAt": "2026-09-30T19:32:47.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "android",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-2206a27ec511088b:en",
+      "sourceId": "ars-technica-2206a27ec511088b",
+      "lang": "en",
+      "title": "RFK Jr. thinks AI will free us from the \"tyranny\" of medical facts, expertise",
+      "summary": "AI is far from a perfect resource. But it seems to hallucinate less than Kennedy.",
+      "body": "At a Make America Healthy Again event Tuesday, anti-vaccine Health Secretary Robert F. Kennedy opened a \"fireside chat\" with Vice President JD Vance on the topic of artificial intelligence. While MAHA generally coalesces around things like healthy lifestyles and mistrust of drugmakers, Kennedy quickly turned to extolling the potential of artificial intelligence, surprising Vance, who said he was expecting to discuss \"weight loss and acid, not AI.\"\n\nKennedy boasted that the Trump administration is \"making it easy for every American to use AI,\" which he claimed would free us from the \"medical tyranny\" of doctors and health experts. He suggested Americans should start using AI to get second opinions about medical recommendations, saying AI is \"better informed than any doctor in the country.\" He also suggested that the technology would confirm his misinformation about vaccines and contrarian views on public health guidance.\n\n\"We're never, ever again going to be able to be dominated by public officials who tell us trust the experts, because every American will be able to check their own medical advice,\" Kennedy said.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/health/2026/09/rfk-jr-says-ai-backs-his-anti-vaccine-views-we-checked-it-doesnt/",
+      "publishedAt": "2026-09-30T19:31:25.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "techcrunch-32d74fec94ad2f92:en",
       "sourceId": "techcrunch-32d74fec94ad2f92",
       "lang": "en",
@@ -4881,50 +5047,18 @@
     },
     {
       "kind": "news",
-      "id": "9to5mac-b5b35059699829c8:en",
-      "sourceId": "9to5mac-b5b35059699829c8",
+      "id": "ars-technica-eabaecfdf569969d:en",
+      "sourceId": "ars-technica-eabaecfdf569969d",
       "lang": "en",
-      "title": "iOS 27.2 adds new Messages feature that’s already a favorite",
-      "summary": "iOS 27.2 is coming soon with several new features for iPhone users, including a Messages addition that was previously in the iOS 27 beta but later got pulled: Suggestions. more…",
-      "body": "iOS 27.2 is coming soon with several new features for iPhone users, including a Messages addition that was previously in the iOS 27 beta but later got pulled: Suggestions.\n\nThroughout the iOS 27 beta this summer, one of my favorite AI features was a Messages addition that didn’t feel like AI at all: Suggestions.\n\nHere’s what they do, per Apple :\n\nMessages offers one-tap suggestions based on the context of users’ conversations, making it easier than ever to get things done, such as creating a reminder or a note. For example, if someone asks for photos, Messages can also help users find the right ones, recognizing keywords, locations, and people in their library to find the best options.\n\nSuggestions appear as small, convenient action buttons beneath messages they’re relevant to.\n\nAs seen in the image below, if someone asks you to do something, you might see a suggestion to add to Reminders or Notes. Or if an event is mentioned, suggestions lets you easily add it to your calendar.\n\nSuggestions worked well for me in the iOS 27 beta, but shortly before the fall public launch, Apple delayed the feature into a “future software update.”\n\nNow in the iOS 27.2 beta, suggestions are back. And one way they’ve changed might explain why they were pulled in the first place.\n\nAs I mentioned, suggestions performed as expected for me during the summer. But if I had one complaint, it was that they sometimes appeared when a message’s context didn’t merit them. At times I saw suggestions to add things to Notes, Reminders, or Calendar when there wasn’t a clear justification for these recommendations.\n\nBut so far at least, in my testing of iOS 27.2 there are fewer suggestions appearing in my Messages conversations. When I see them, it’s always obvious why they’re being suggested.\n\nHere’s hoping the feature makes the shipping version of iOS 27.2 in just a few weeks .\n\nHow have suggestions been working for you in iOS 27.2? Let us know in the comments.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/09/30/ios-27-2-adds-new-messages-feature-thats-already-a-favorite/",
-      "publishedAt": "2026-09-30T19:06:56.000Z",
+      "title": "Trump plan to combat AI risks hinges on Big Tech pals policing themselves",
+      "summary": "Trump gets dozens of AI firms to agree to voluntary safety tests.",
+      "body": "Amid escalating AI security incidents causing OpenAI to halt training and pause releases , Donald Trump continues to advocate for the AI industry to regulate itself as the best path to combat emerging risks when developing frontier AI.\n\nIn an agreement Tuesday, two dozen tech firms voluntarily committed to implementing controls recommended by the White House, including undergoing independent safety audits that will test whether firms’ internal controls, monitoring, and detecting are actually working. Key focuses for external reviews included “risks related to cybersecurity, biosecurity, chemical threats, and unintended actions by AI models.”\n\nFirms also agreed to regularly meet to discuss best practices and set common AI safety standards and benchmarks. Among signers were leaders like Anthropic’s Dario Amodei, OpenAI’s Sam Altman, SpaceXAI’s Elon Musk, Nvidia’s Jensen Huang, Meta’s Mark Zuckerberg, and Alphabet/Google’s Sundar Pichai.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/tech-policy/2026/09/trump-plan-to-combat-ai-risks-hinges-on-big-tech-pals-policing-themselves/",
+      "publishedAt": "2026-09-30T18:47:01.000Z",
       "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-9c2ff906905a9b04:en",
-      "sourceId": "techcrunch-9c2ff906905a9b04",
-      "lang": "en",
-      "title": "OpenAI’s Jev clone could help the frontier lab stop its swarming agents",
-      "summary": "OpenAI's \"Decisions API\" is a Jev clone that confirms the importance of fast, cheap intelligence.",
-      "body": "One of the more intriguing announcements at OpenAI’s Dev Day event on Tuesday came in an aside from CEO Sam Altman, who revealed the company’s new “Decisions API.”\n\nThe API apparently provides similar functionality to Jev , a model released by TypeSafe AI earlier this month that’s explicitly designed for software automation. A kind of super-powered classifier built on an LLM, developers can give Jev a set of choices that it outputs as probabilities cheaply and at high speeds.\n\nOpenAI’s Decisions API seems to be the same sort of product. At the event, Altman described the API as a way to give the lab’s Luna model a predefined set of options to choose between, such as categories in which to classify an image or different agent behaviors.\n\n“By focusing the model on that choice, we can make it extremely fast while keeping capabilities like image understanding, broad language support, and safety protections,” Altman said.\n\nTypeSafe didn’t respond to TechCrunch’s questions about the new product, but CEO Diogo Almeida, a former OpenAI engineer who co-invented reinforcement learning, joked on X about the beginning of the clone wars.\n\nHe added that OpenAI’s interest could be “a sign…that building in a System One compatible way is the future.” (“System One” is TypeSafe’s term of art for fast, intuitive thinking, versus “System 2,” which it applies to deliberate reasoning.)\n\nThe subtext here is that LLMs as we know them aren’t the right solution for a lot of software because they are comparatively slow and expensive. Developers have been using Jev to augment LLMs and, in doing so, have found that they’re faster and cheaper.\n\nIt’s not clear how similar Decisions API will be to Jev, since OpenAI released it as a limited preview and, thus far, TechCrunch hasn’t spotted developers running it through its paces. However, there is clearly interest , according to the conversations on X.\n\nDecisions API isn’t the only Jev-like API on the internet — other startups are rolling out similar models; OpenAI won’t be the last tech giant to produce one. A key question is how well calibrated each of these decision models’ outputs will be to real life.\n\nAlmeida says his company’s moat is the synthetic data it creates to generate statistically useful outputs.\n\n“Fast and cheap is very easy, you know,” Almeida told TechCrunch last week. “If you want it really fast and cheap, use dice, right? Intelligence is the hard part, and my North Star is always pushing the intelligence-per-dollar Pareto curve.”\n\nAfter just weeks, it seems clear that these models have a future ahead of them, and one likely application is monitoring and securing AI agents. One of OpenAI’s new security measures following a series of incidents where its agents misbehaved on the open internet is using a separate model to watch for bad actions at “significant compute cost.”\n\nShapor Naghibzadeh, a long-time cybersecurity professional who leads the start-up QueryStory, thinks that a model like Jev could make that possible far more cheaply.\n\nHe built a demo for a hackathon held last weekend that uses Jev to check each agentic action against the task it was given, blocking actions it had high confidence were bad, flagging others for review, and permitting the rest.\n\nIn theory, such monitoring could have stopped the Hugging Face incident — and monitoring of that kind costs $2.94 with Jev, versus $372 with a frontier LLM.\n\nA key observation is that Jev is arguably cheap enough to run on every agentic action, which offers a layer of review that could improve the reliability of agents writ large. It’s the kind of thing TypeSafe was hoping to achieve — and now OpenAI has seen the value as well.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/09/30/openais-jev-clone-could-help-the-frontier-lab-stop-its-swarming-agents/",
-      "publishedAt": "2026-09-30T19:00:57.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-4979eff695732b47:en",
-      "sourceId": "9to5mac-4979eff695732b47",
-      "lang": "en",
-      "title": "Apple Invites for iPhone updated with three new features",
-      "summary": "Apple is rolling out a new version of its Apple Invites app for iPhone today. The update taps into new iOS 27 features, including improved photo sharing and Image Playground capabilities. more…",
-      "body": "Apple is rolling out a new version of its Apple Invites app for iPhone today. The update taps into new iOS 27 features, including improved photo sharing and Image Playground capabilities.\n\nHere are Apple’s full release notes for today’s update to Apple Invites:\n\nYou can download Apple Invites on the App Store. The app requires an iCloud+ subscription to create invites, but anyone can reply to invites.\n\nFollow Chance : Threads , Bluesky , Instagram , and Mastodon .",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/09/30/apple-invites-for-iphone-updated-with-three-new-features/",
-      "publishedAt": "2026-09-30T18:51:47.000Z",
-      "categories": [
-        "apple",
         "tecnologia-general",
-        "apps-accesibles"
+        "ia-accesibilidad"
       ]
     },
     {
@@ -4933,46 +5067,14 @@
       "sourceId": "the-verge-56395a8bf36c2a58",
       "lang": "en",
       "title": "The AI Tamagotchis are coming",
-      "summary": "While AI has made plenty of inroads on people's phones and computers, it's largely failed in dedicated devices. But over the next year, two major AI companies, Meta and OpenAI, will attempt to change that. And they're apparently betting on a similar path: testing appetite for physical hardware with their cutesy software agents. \"Hardware is […]",
-      "body": "While AI has made plenty of inroads on people's phones and computers, it's largely failed in dedicated devices. But over the next year, two major AI companies, Meta and OpenAI, will attempt to change that. And they're apparently betting on a similar path: testing appetite for physical hardware with their cutesy software agents.\n\n\"Hardware is hard\" is a tech industry mantra. Dedicated AI devices like the Friend and Humane AI Pin have inspired mainly frustration and backlash, which may only worsen as public anger against AI grows. Meta and OpenAI, however, are both pushing ahead. OpenAI is working with famed ex-Apple designer Jony Ive and pla …\n\nRead the full story at The Verge.",
+      "summary": "While AI has made plenty of inroads on people's phones and computers, it's largely failed in dedicated devices. But over the next year, two major AI companies, Meta and OpenAI, will attempt to change that. And they're apparently betting on a similar path: testing appetites for physical hardware with their cutesy software agents. \"Hardware is […]",
+      "body": "While AI has made plenty of inroads on people's phones and computers, it's largely failed in dedicated devices. But over the next year, two major AI companies, Meta and OpenAI, will attempt to change that. And they're apparently betting on a similar path: testing appetites for physical hardware with their cutesy software agents.\n\n\"Hardware is hard\" is a tech industry mantra. Dedicated AI devices like the Friend and Humane AI Pin have inspired mainly frustration and backlash, which may only worsen as public anger toward AI grows. Meta and OpenAI, however, are both pushing ahead. OpenAI is working with famed ex-Apple designer Jony Ive and pla …\n\nRead the full story at The Verge.",
       "sourceName": "The Verge",
       "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1002779/openai-dots-meta-muse-ai-agents-hardware-devices",
       "publishedAt": "2026-09-30T18:07:38.000Z",
       "categories": [
         "tecnologia-general",
         "programas-accesibles",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-804bf903252ae35c:en",
-      "sourceId": "9to5mac-804bf903252ae35c",
-      "lang": "en",
-      "title": "M6 Mac release schedule: Here’s when to expect new Macs",
-      "summary": "Apple next-generation M6 chip arrived last week in the new Mac mini. But several more products will get M6 upgrades soon. Here’s the rumored release schedule for M6 Macs—plus the M6 iPad Pro. more…",
-      "body": "Apple next-generation M6 chip arrived last week in the new Mac mini . But several more products will get M6 upgrades soon. Here’s the rumored release schedule for M6 Macs—plus the M6 iPad Pro.\n\nThis fall, likely in October or early November, Apple is rumored to launch two new M6 Macs:\n\nThe MacBook Pro will be only the 14-inch base model. Per Mark Gurman, Apple is skipping Pro and Max versions of the M6 chip. As a result, only the entry MacBook Pro will get M6 while the next Pro-level chips coming will be M7 Pro and M7 Max in 2027.\n\nApple’s new iMac isn’t expected to change much beyond the M6 chip. The only other rumored upgrade is a fresh slate of colors. But the jump from M4 to M6 should make the new model a worthy update nonetheless.\n\nNotably absent from this list is the rumored touchscreen MacBook Pro / Ultra . It’s expected to launch soon too, but will use M5 Pro and M5 Max chips instead of the M6.\n\nAfter this fall, the next products rumored to get M6 upgrades are:\n\nA new M6 MacBook Air is expected to launch in early 2027. Anytime in the February-April window is possible, but based on Apple’s history, March is a safe bet.\n\nOther than a chip upgrade, there are minimal rumors about the new MacBook Air. It should retain the same design as the M5 model. And reporting dates an OLED upgrade as coming no sooner than 2028 , so the display will likely be unchanged too.\n\nApple last updated the iPad Pro in fall 2025, when it got the M5 chip. Rumors point to a spring 2027 update coming, meaning the product will follow its typical 18-month upgrade cycle.\n\nBeyond getting the M6 chip, Apple’s new iPad Pro is expected to add a vapor chamber for cooling. That should boost sustained performance in the ultra-thin device.\n\nOne potential M6 benefit for both the MacBook Air and iPad Pro is that it could boost battery life. Apple says the M6’s 2-nanometer process brings “a major leap in performance and power efficiency.”\n\nAre you planning to upgrade to any of these new M6 products? Why or why not? Let us know in the comments.\n\n* Buy Mac with 15% discount from Apple refurbished",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/09/30/m6-mac-release-schedule-heres-when-new-macs-are-coming/",
-      "publishedAt": "2026-09-30T18:07:26.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-7d3fbcadce357c82:en",
-      "sourceId": "techcrunch-7d3fbcadce357c82",
-      "lang": "en",
-      "title": "Reddit is killing RSS feeds and ending public API access because of AI bots",
-      "summary": "Reddit is ending support for RSS feeds, as the company continues tightening access to its trove of user-generated content.",
-      "body": "Amid a number of updates for moderators and developers announced Wednesday comes bad news for supporters of a more open web: Reddit is ending support for RSS feeds.\n\nReddit says RSS has now become a “common surface for large-scale scraping and automated abuse,” which is why it’s made the decision to wind down RSS feeds on its platform.\n\n“We know RSS has been a beloved part of the open web for a long time, and we’re grateful to everyone who used it to stay connected to Reddit,” the company noted in its announcement, where it also shared a March 2027 shutdown date for its public API.\n\nReddit said RSS support will cease on November 13.\n\nRSS, or Really Simple Syndication/Rich Site Summary, is a web feed that lets users and applications access updates to a website in a standardized format. The format became particularly popular in the blogging era, as it offered a way to subscribe to a site’s new posts in a news-reading app. Google once operated the most popular of these, but shut it down in 2013 , ceding the market to companies like Feedly and other indie applications.\n\nThe decision to kill Reddit’s RSS feeds comes at a time when the site’s treasure trove of user-generated content in its forums has become a profitable side business for the company in the form of AI licensing deals.\n\nDuring its second quarter , Reddit said its “other revenue” beyond advertising had grown 24% year-over-year to $43 million. It’s no wonder that Reddit doesn’t want to give any of that data away for free.\n\nFor moderators who have relied on RSS channels for their own alerts, Reddit is now recommending a shift to the Discord Relay Devvit app. The company suggested that moderators and their teams review their setups and migrate their workflows before the shutdown date of November 13 to ensure there’s no disruption. However, Reddit said that there’s no replacement for the use of RSS feeds that were being used for feeds outside of the moderators’ community.\n\nModerators have already expressed worry about how this shift would impact their workflow. When Reddit hinted earlier that it was preparing for the end of RSS on its site, many responded by complaining that Reddit would become unmanageable for them. Meanwhile, many users stressed that RSS was how they enjoyed accessing Reddit’s content.\n\nThe RSS change was one of several updates issued on Wednesday by the company. Another big change will be the end of its public API.\n\nPublic API access will also end by March 2027, which will impact any tools that used it for programmatic access to Reddit conversations, including social listening products, those used by researchers, and AI products, such as AI assistants. Today, those assistants can use Reddit to answer questions, but after closing public API access, they will need to forgo commercial deals with Reddit for its data.\n\nIn addition, Reddit provided an update on its Rules Hub progress and auto-mod changes, and said it was “adding safeguards” to its classic, text-heavy version of its site known as Old Reddit. The latter will include limiting access to logged-in moderators and recent users — changes Reddit also said were required because of “abusive scraping and automated traffic.”\n\nReddit said in the next few months it will limit access for logged-in users to those who have used Old Reddit in the last 90 days.\n\nThe company also reminded developers building approved third-party apps and bots to register them with the company before January 12, 2027, to avoid disruption. After that date, Reddit will remove API access for any developer that hasn’t registered.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/09/30/reddit-is-killing-rss-feeds-ending-public-api-access-because-of-ai-bots/",
-      "publishedAt": "2026-09-30T17:45:00.000Z",
-      "categories": [
-        "tecnologia-general",
         "ia-accesibilidad"
       ]
     },
@@ -4987,39 +5089,6 @@
       "sourceName": "The Verge",
       "originalUrl": "https://www.theverge.com/tech/1002788/old-reddit-ai-scraping",
       "publishedAt": "2026-09-30T17:45:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-160da672e59a140f:en",
-      "sourceId": "the-verge-160da672e59a140f",
-      "lang": "en",
-      "title": "Amazon’s delivery driver smart glasses will reportedly take photos ‘almost constantly’",
-      "summary": "Amazon deliveries could soon come with a new catch: the delivery driver's smart glasses will be snapping photos of anything they see while they're in use, including people and private property. Bloomberg reports that the glasses could take \"several thousand captures in a single driver's typical shift,\" which Amazon plans to upload to its AI […]",
-      "body": "Amazon deliveries could soon come with a new catch: the delivery driver's smart glasses will be snapping photos of anything they see while they're in use, including people and private property. Bloomberg reports that the glasses could take \"several thousand captures in a single driver's typical shift,\" which Amazon plans to upload to its AI Wellspring platform. When asked if customers will be able to opt-out of this, Amazon's Viraj Chatterjee told Bloomberg , \"We haven't thought about that.\"\n\nChatterjee claimed Amazon's only using the data from the glasses to \"enhance the delivery process,\" adding, \"The intent has never been stuff like surve …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1002766/amazon-delivery-driver-smart-glasses-privacy",
-      "publishedAt": "2026-09-30T17:21:29.000Z",
-      "categories": [
-        "tecnologia-general",
-        "gafas-inteligentes",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-a66e0f1bbe701ae9:en",
-      "sourceId": "ars-technica-a66e0f1bbe701ae9",
-      "lang": "en",
-      "title": "Google's early attempt to pay websites for AI answers is struggling",
-      "summary": "Many sites see just one-tenth of one percent of their advertising revenue from AI payments.",
-      "body": "Google's shift to AI-powered search has upended the way the world's largest search engine generates web traffic, rankling large and small publishers alike. In recent months, the company has experimented with paying publishers when their content appears in AI answers, but a new report claims the payouts in this pilot program are miniscule. That has publishers in the program, as well as those watching from the sidelines, feeling skeptical.\n\nAccording to The Information , Google has admitted about 100 publishers to the AI contribution pilot. The pitch is that websites can get payments from Google when their content materially contributes to Gemini-powered search results like an AI Overview. Google has long resisted the idea of direct payments to publishers, arguing that websites get traffic in exchange for allowing Google bots to scrape their content for use in search and knowledge graph tools. In the age of AI, that relationship is breaking down, hence the AI pilot.\n\nSo far, publishers aren't getting much for their trouble. The Information heard from several small and mid-sized publishers in the program that Google's AI payments are minuscule, equaling roughly one-tenth of one percent of their advertising revenue. These payments have been so disappointing that several larger publishers have reportedly declined to participate in the program. These publishers hope that by refusing to join the pilot, they can force Google to offer a more generous deal.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/google/2026/09/google-is-paying-100-websites-for-contributions-to-ai-overviews-but-the-amounts-are-tiny/",
-      "publishedAt": "2026-09-30T16:03:48.000Z",
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
@@ -5042,22 +5111,6 @@
     },
     {
       "kind": "news",
-      "id": "ars-technica-e409c4c9431edcb3:en",
-      "sourceId": "ars-technica-e409c4c9431edcb3",
-      "lang": "en",
-      "title": "Google figures out how to watermark AI-designed proteins",
-      "summary": "Intended to help with biosecurity, it works with a popular AI protein design tool.",
-      "body": "AI-based tools seem to be causing security threats on a nearly daily basis, in part because we've been slow to recognize potential threats. One area where we seem to be ahead of the game, however, is in biosecurity.\n\nAs with most things biological, utility goes hand in hand with threats. We've developed increasingly sophisticated tools for designing proteins and seen some major successes, such as AI-designed enzymes that can digest plastics or block venom proteins . But these same tools could be used to make toxins or alter the behavior of viral proteins.\n\nAnd the software we use to identify DNA sequences that encode potentially threatening proteins doesn't pick out AI-designed proteins , since nobody has characterized them well enough to know that they're threats. Nearly a year after that risk was flagged, it still wasn't clear what anyone could do about it.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/science/2026/09/google-figures-out-how-to-watermark-ai-designed-proteins/",
-      "publishedAt": "2026-09-30T15:54:52.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "engadget-886301b75e37f375:en",
       "sourceId": "engadget-886301b75e37f375",
       "lang": "en",
@@ -5069,37 +5122,6 @@
       "publishedAt": "2026-09-30T15:30:00.000Z",
       "categories": [
         "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-5f5c29d2d8584d52:en",
-      "sourceId": "ars-technica-5f5c29d2d8584d52",
-      "lang": "en",
-      "title": "BMW reveals US 3 series pricing: The EV carries a hefty premium",
-      "summary": "The 2027 BMW 330 starts at $49,900, the i3 50 xDrive at $61,500.",
-      "body": "BMW has opened the US order books for its hotly anticipated new 3 Series sedan . Built on an all-new platform called Neue Klasse , it now offers a fully electric version for the first time, using BMW’s advanced sixth-generation electric powertrain we liked so much in the iX3 . And for those not quite ready to make the switch from liquid hydrocarbons to pure electron power, there are also a pair of gasoline-powered variants.\n\nAt launch, the only electric version will be the 2027 BMW i3 50 xDrive. It’s an all-wheel drive setup, with a combined 463 hp (345 kW) and 467 lb-ft (633 Nm). And while BMW is still putting the finishing touches on the car’s EPA certification ahead of its showroom arrival in Q1 next year, it expects 446 to 468 miles (718-753 km) of range on a single charge. Contributing to that very impressive range is the new cylindrical cell battery pack, which uses a cell-to-body approach that maximizes energy density, along with the aforementioned new sixth-gen motors.\n\nWe’re not sure whether BMW is planning any single-motor, rear-wheel drive i3s for the US market, such as the i4 eDrive40 we liked so much. But later next year, we can expect the i3 M60 xDrive, and then the first completely electric BMW M3 , which will increase the motor count to four—one for each wheel.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/cars/2026/09/bmw-opens-us-order-books-for-the-new-gas-and-electric-3-series/",
-      "publishedAt": "2026-09-30T14:42:58.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-377bb722c4f13fab:en",
-      "sourceId": "engadget-377bb722c4f13fab",
-      "lang": "en",
-      "title": "Meta introduces a new AI assistant for its Instagram creators",
-      "summary": "The Edits assistant offers personalized guidance based on your audience and best-performing content.",
-      "body": "The Edits assistant offers personalized guidance based on your audience and best-performing content.\n\nIt isn't hard to find AI-generated guidance for just about anything these days, but Meta thinks it has come up with the perfect solution for its extensive creator community with its new Edits assistant.\n\nICYMI, Edits is Meta's creator-focused video editing app, which it launched last year as a rival to TikTok's CapCut. The new Edits assistant is being pitched by Meta as a highly personalized chatbot that understands each individual's audience, rather than simply offering generic and, well, slop-adjacent AI advice.\n\nIn a press release, Meta said your new \"creative partner\" can analyze your insights and suggest video ideas based on previous content performance and current trends. You can ask it what videos have performed well for you recently, or for feedback on why some reels haven't resonated as much with your audience.\n\nThe assistant can dig into all of your Instagram data, including follows, views, likes, shares and retention stats, which it will draw on when responding to your prompts. It looks at patterns of performance rather than tailoring its advice to one video that has done big numbers, and will suggest concepts, hooks and captions for future videos based on how you've approached the platform in the past. It can also suggest what audio to use based on the style of content you make.\n\nThe Edits assistant has already been trialled by select creators in Meta's community, and it will be free to use in the app until you hit an unspecified daily prompt limit. The company will no doubt hope the new feature will push more creators into signing up for one of its new Meta One subscriptions, which will unlock higher usage limits for power users. The most expensive of these plans costs a whopping $499 per month.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2273111/meta-introduces-a-new-ai-assistant-for-its-instagram-creators/",
-      "publishedAt": "2026-09-30T14:30:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
       ]
     },
     {
@@ -5510,23 +5532,6 @@
         "apple",
         "apps-accesibles",
         "android"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "applevis-apps-795421636c7efda2:en",
-      "sourceId": "applevis-apps-795421636c7efda2",
-      "lang": "en",
-      "title": "RealTime Ai Cam",
-      "summary": "RealTime AI Camera provides instant object detection, English OCR, and Spanish-to-English translation - all offline. Point your camera to identify 600+ objects, read text aloud, or translate Spanish text to English. Features LiDAR distance measurement on supported devices. Perfect for accessibility, language learning, and everyday assistance. Works 100% offline with no data collection. WORKS WITH VOICEOVER Every button is labeled, so you can run the whole app without seeing the screen. It reads printed text out loud, names what the camera is pointed at, and tells you how far away things are on phones with a depth sensor.",
-      "body": "RealTime AI Camera provides instant object detection, English OCR, and Spanish-to-English translation - all offline. Point your camera to identify 600+ objects, read text aloud, or translate Spanish text to English. Features LiDAR distance measurement on supported devices. Perfect for accessibility, language learning, and everyday assistance. Works 100% offline with no data collection.\n\nWORKS WITH VOICEOVER Every button is labeled, so you can run the whole app without seeing the screen. It reads printed text out loud, names what the camera is pointed at, and tells you how far away things are on phones with a depth sensor.",
-      "sourceName": "AppleVis Apps",
-      "originalUrl": "https://www.applevis.com/apps/ios/utilities/realtime-ai-cam",
-      "publishedAt": "2026-09-21T00:19:12.000Z",
-      "categories": [
-        "apple",
-        "apps-accesibles",
-        "ia-accesibilidad"
       ]
     }
   ]

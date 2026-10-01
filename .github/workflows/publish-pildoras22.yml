@@ -27,8 +27,8 @@ jobs:
       - name: Download the two HTML editions
         run: |
           mkdir -p docs/es docs/en
-          gdown --id 1bkqhbWO8eYJbqrQrJ6FrjjZoUsSbuPWz -O docs/es/pildoras-tecnologicas-22-2026.html
-          gdown --id 1c449zc60CorKA8myhvAsfnf5tc_fxjYn -O docs/en/technology-pills-22-2026.html
+          gdown 1bkqhbWO8eYJbqrQrJ6FrjjZoUsSbuPWz -O docs/es/pildoras-tecnologicas-22-2026.html
+          gdown 1c449zc60CorKA8myhvAsfnf5tc_fxjYn -O docs/en/technology-pills-22-2026.html
       - name: Update resource catalog
         run: node scripts/publish-pildoras22.mjs
       - name: Verify downloaded pages and catalog

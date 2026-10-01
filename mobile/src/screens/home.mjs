@@ -5,6 +5,11 @@ const NEW_CONTENT_LABELS = Object.freeze({
   en: 'New content'
 });
 
+const HOME_INTRO = Object.freeze({
+  es: 'Recursos de accesibilidad y tecnología, organizados para llegar a ellos sin perderse por el camino.',
+  en: 'Accessibility and technology resources, organized so you can reach them without getting lost along the way.'
+});
+
 export const HOME_ITEMS = [
   'search',
   'actualidad',
@@ -41,6 +46,11 @@ export function renderHome({ root, router, content, preferences = { lang: 'es' }
   brandHeader.append(brandMark, heading);
   root.append(brandHeader);
 
+  const intro = document.createElement('p');
+  intro.className = 'home-intro';
+  intro.textContent = HOME_INTRO[preferences.lang] || HOME_INTRO.es;
+  root.append(intro);
+
   const nav = document.createElement('nav');
   nav.className = 'home-menu section-stack';
   nav.setAttribute('aria-label', t('app.title'));
@@ -52,8 +62,10 @@ export function renderHome({ root, router, content, preferences = { lang: 'es' }
     button.className = 'home-entry';
     if (key === 'privacy') {
       button.textContent = PRIVACY_LABELS[preferences.lang] || PRIVACY_LABELS.es;
+    } else if (key === 'reading-library') {
+      button.textContent = 'TifloLector';
     } else {
-      button.textContent = t(`home.${key === 'reading-library' ? 'readingLibrary' : key}`);
+      button.textContent = t(`home.${key}`);
     }
     button.addEventListener('click', () => router.navigate(key, { originId: button.id }));
     nav.append(button);

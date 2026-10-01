@@ -2,6 +2,12 @@ export function clearScreen(root) {
   root.replaceChildren();
 }
 
+function normalizeScreenTitle(title) {
+  const value = String(title || '').trim();
+  if (value === 'Leer con TifloAcosta' || value === 'Read with TifloAcosta') return 'TifloLector';
+  return title;
+}
+
 export function addScreenHeader(root, { router, title, backLabel }) {
   const header = document.createElement('header');
   header.className = 'screen-header';
@@ -15,7 +21,7 @@ export function addScreenHeader(root, { router, title, backLabel }) {
   const heading = document.createElement('h1');
   heading.dataset.screenHeading = '';
   heading.tabIndex = -1;
-  heading.textContent = title;
+  heading.textContent = normalizeScreenTitle(title);
 
   header.append(back, heading);
   root.append(header);

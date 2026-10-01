@@ -13,11 +13,14 @@ import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.ActivityCallback;
 import com.getcapacitor.annotation.CapacitorPlugin;
 
+import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
+import java.util.Locale;
 
 @CapacitorPlugin(name = "TifloSave")
 public class TifloSavePlugin extends Plugin {
@@ -67,6 +70,7 @@ public class TifloSavePlugin extends Plugin {
             connection.setConnectTimeout(15000);
             connection.setReadTimeout(30000);
             connection.setRequestProperty("User-Agent", "TifloAcosta/1.0");
+            connection.setRequestProperty("Accept", "*/*");
 
             if (connection instanceof HttpURLConnection) {
                 HttpURLConnection http = (HttpURLConnection) connection;
@@ -77,11 +81,25 @@ public class TifloSavePlugin extends Plugin {
                 }
             }
 
+            String contentType = normalizeContentType(connection.getContentType());
+            String contentDisposition = connection.getHeaderField("Content-Disposition");
+            boolean attachment = isAttachment(contentDisposition);
+
             try (
-                InputStream input = connection.getInputStream();
+                BufferedInputStream input = new BufferedInputStream(connection.getInputStream());
                 OutputStream output = getContext().getContentResolver().openOutputStream(destination, "w")
             ) {
                 if (output == null) throw new IllegalStateException("Unable to open selected destination");
+
+                input.mark(1024);
+                byte[] probe = new byte[512];
+                int probeLength = input.read(probe);
+                input.reset();
+
+                if (!attachment && (isHtmlContentType(contentType) || looksLikeHtml(probe, probeLength))) {
+                    throw new IllegalStateException("The selected address returned a web page instead of the requested file");
+                }
+
                 byte[] buffer = new byte[8192];
                 int read;
                 while ((read = input.read(buffer)) != -1) {
@@ -101,6 +119,35 @@ public class TifloSavePlugin extends Plugin {
                 ((HttpURLConnection) connection).disconnect();
             }
         }
+    }
+
+    private String normalizeContentType(String value) {
+        if (value == null) return "";
+        int separator = value.indexOf(';');
+        String clean = separator >= 0 ? value.substring(0, separator) : value;
+        return clean.trim().toLowerCase(Locale.ROOT);
+    }
+
+    private boolean isHtmlContentType(String value) {
+        return "text/html".equals(value) || "application/xhtml+xml".equals(value);
+    }
+
+    private boolean isAttachment(String contentDisposition) {
+        if (contentDisposition == null) return false;
+        return contentDisposition.toLowerCase(Locale.ROOT).contains("attachment");
+    }
+
+    private boolean looksLikeHtml(byte[] bytes, int length) {
+        if (bytes == null || length <= 0) return false;
+        int safeLength = Math.min(length, bytes.length);
+        String prefix = new String(bytes, 0, safeLength, StandardCharsets.UTF_8)
+            .replace("\uFEFF", "")
+            .trim()
+            .toLowerCase(Locale.ROOT);
+        return prefix.startsWith("<!doctype html")
+            || prefix.startsWith("<html")
+            || prefix.startsWith("<head")
+            || prefix.startsWith("<body");
     }
 
     private boolean isAllowedUrl(String value) {

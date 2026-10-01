@@ -15,7 +15,14 @@ const bundledHtml = sourceHtml
   .replace('./app.mjs', './app.js')
   .replace('./update-bootstrap.mjs', './update-bootstrap.js');
 await writeFile(`${distDir}index.html`, bundledHtml, 'utf8');
-await copyFile(`${srcDir}styles.css`, `${distDir}styles.css`);
+
+const [baseCss, brandRefreshCss] = await Promise.all([
+  readFile(`${srcDir}styles.css`, 'utf8'),
+  readFile(`${srcDir}brand-refresh.css`, 'utf8')
+]);
+const bundledCss = `${baseCss.trim()}\n\n${brandRefreshCss.trim()}\n`;
+await writeFile(`${distDir}app.css`, bundledCss, 'utf8');
+await writeFile(`${distDir}styles.css`, bundledCss, 'utf8');
 await copyFile(brandSymbol, `${distDir}tifloacosta-simbolo-blanco.svg`);
 
 await build({

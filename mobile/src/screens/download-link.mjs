@@ -47,6 +47,12 @@ function errorKey(code) {
   })[code] || 'unavailable';
 }
 
+function localizedFallback(t, key, es, en) {
+  const translated = t(key);
+  if (translated && translated !== key) return translated;
+  return document.documentElement.lang === 'en' ? en : es;
+}
+
 export function renderDownloadLink({ root, router, t, nativeActions, initialUrl = '', analyzeOnOpen = false }) {
   clearScreen(root);
   addScreenHeader(root, {
@@ -57,6 +63,7 @@ export function renderDownloadLink({ root, router, t, nativeActions, initialUrl 
   addParagraph(root, t('downloadsLink.intro'));
 
   const form = document.createElement('form');
+  form.className = 'search-form';
   const label = document.createElement('label');
   const input = document.createElement('input');
   const submit = document.createElement('button');
@@ -75,6 +82,8 @@ export function renderDownloadLink({ root, router, t, nativeActions, initialUrl 
 
   const status = document.createElement('p');
   status.id = 'download-link-status';
+  status.className = 'muted';
+  status.setAttribute('role', 'status');
   status.setAttribute('aria-live', 'polite');
   status.setAttribute('aria-atomic', 'true');
   root.append(status);
@@ -84,7 +93,11 @@ export function renderDownloadLink({ root, router, t, nativeActions, initialUrl 
   const resultCount = document.createElement('p');
   const results = document.createElement('div');
   resultsHeading.textContent = t('downloadsLink.resultsHeading');
+  resultCount.className = 'muted';
+  results.className = 'result-list';
   resultsSection.hidden = true;
+  resultsSection.setAttribute('aria-labelledby', 'download-link-results-heading');
+  resultsHeading.id = 'download-link-results-heading';
   resultsSection.append(resultsHeading, resultCount, results);
   root.append(resultsSection);
 
@@ -107,37 +120,52 @@ export function renderDownloadLink({ root, router, t, nativeActions, initialUrl 
     externalSection.replaceChildren();
   }
 
+  function metadataRow(labelText, value) {
+    const paragraph = document.createElement('p');
+    paragraph.className = 'download-result-meta';
+    const labelNode = document.createElement('strong');
+    labelNode.textContent = `${labelText}: `;
+    paragraph.append(labelNode, document.createTextNode(value));
+    return paragraph;
+  }
+
   function renderResult(item) {
     const article = document.createElement('article');
-    const heading = document.createElement('h3');
-    heading.textContent = item?.name || t('downloadsLink.defaultFilename');
-    article.append(heading);
+    article.className = 'result-card';
 
-    const type = document.createElement('p');
-    type.textContent = item?.type && item.type !== 'unknown'
+    const fileName = item?.name || t('downloadsLink.defaultFilename');
+    const fileType = item?.type && item.type !== 'unknown'
       ? String(item.type).toUpperCase()
       : t('downloadsLink.unknownType');
-    article.append(type);
+    const formattedSize = formatBytes(item?.size) || t('downloadsLink.unknownSize');
+    const sourceName = providerLabel(item?.source);
 
-    const size = document.createElement('p');
-    const formattedSize = formatBytes(item?.size);
-    size.textContent = formattedSize || t('downloadsLink.unknownSize');
-    article.append(size);
+    const heading = document.createElement('h3');
+    heading.textContent = fileName;
+    article.append(heading);
 
-    const source = document.createElement('p');
-    source.textContent = `${t('downloadsLink.source')}: ${providerLabel(item?.source)}`;
-    article.append(source);
+    article.append(
+      metadataRow(localizedFallback(t, 'downloadsLink.filename', 'Archivo', 'File'), fileName),
+      metadataRow(localizedFallback(t, 'downloadsLink.type', 'Tipo', 'Type'), fileType),
+      metadataRow(localizedFallback(t, 'downloadsLink.size', 'Tamaño', 'Size'), formattedSize),
+      metadataRow(t('downloadsLink.source'), sourceName)
+    );
 
     if (!item?.url) return article;
+
     const save = document.createElement('button');
     save.type = 'button';
-    save.textContent = `${t('downloadsLink.save')}: ${item.name || t('downloadsLink.defaultFilename')}`;
+    save.className = 'download-primary-action';
+    save.textContent = `${localizedFallback(t, 'downloadsLink.download', 'Descargar', 'Download')}: ${fileName}`;
     save.addEventListener('click', async () => {
+      save.disabled = true;
+      setStatus(localizedFallback(t, 'downloadsLink.saving', 'Preparando la descarga…', 'Preparing download…'));
       const saved = await nativeActions.saveFile({
         url: item.url,
         filename: item.name || t('downloadsLink.defaultFilename'),
         mimeType: mimeFromType(item.type)
       });
+      save.disabled = false;
       setStatus(saved ? t('downloadsLink.saved') : t('downloadsLink.saveFailed'));
     });
     article.append(save);
@@ -167,6 +195,8 @@ export function renderDownloadLink({ root, router, t, nativeActions, initialUrl 
         : t('downloadsLink.unavailable');
     const notice = document.createElement('p');
     notice.textContent = t('downloadsLink.externalNotice');
+    const actions = document.createElement('div');
+    actions.className = 'action-group';
     const open = document.createElement('button');
     open.type = 'button';
     open.textContent = t('downloadsLink.openExternal');
@@ -178,7 +208,8 @@ export function renderDownloadLink({ root, router, t, nativeActions, initialUrl 
     retry.type = 'button';
     retry.textContent = t('downloadsLink.retry');
     retry.addEventListener('click', () => { void analyzeCurrent(); });
-    externalSection.append(heading, notice, open, retry);
+    actions.append(open, retry);
+    externalSection.append(heading, notice, actions);
     setStatus('');
   }
 

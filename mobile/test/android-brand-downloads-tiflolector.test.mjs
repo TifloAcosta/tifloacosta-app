@@ -12,7 +12,7 @@ test('la sección de lectura se presenta como TifloLector', async () => {
 });
 
 test('la portada Android reutiliza el lenguaje visual corporativo de la web', async () => {
-  const css = await read('src/styles.css');
+  const css = await read('src/brand-refresh.css');
   assert.match(css, /--background:\s*#FFFFFF/i);
   assert.match(css, /--surface-alt:\s*#FFF4F4/i);
   assert.match(css, /--focus:\s*#005FCC/i);

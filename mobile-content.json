@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-01T07:49:52.030Z",
+  "generatedAt": "2026-10-01T15:28:44.324Z",
   "resources": [
     {
       "kind": "resource",
@@ -40,6 +40,26 @@
       "title": "How Am I Supposed to Live My Life Now?",
       "url": "https://tifloacosta.com/docs/en/rehabilitation-independence-after-sight-loss.html",
       "openUrl": "https://tifloacosta.com/docs/en/rehabilitation-independence-after-sight-loss.html",
+      "isNew": true
+    },
+    {
+      "kind": "resource",
+      "id": "es-pildoras-22-2026",
+      "lang": "es",
+      "category": "Noticias",
+      "title": "Píldoras 22 2026",
+      "url": "https://tifloacosta.com/docs/es/pildoras-tecnologicas-22-2026.html",
+      "openUrl": "https://tifloacosta.com/docs/es/pildoras-tecnologicas-22-2026.html",
+      "isNew": true
+    },
+    {
+      "kind": "resource",
+      "id": "en-tech-pills-22-2026",
+      "lang": "en",
+      "category": "News",
+      "title": "Tech Pills 22 2026",
+      "url": "https://tifloacosta.com/docs/en/technology-pills-22-2026.html",
+      "openUrl": "https://tifloacosta.com/docs/en/technology-pills-22-2026.html",
       "isNew": true
     },
     {
@@ -1200,7 +1220,7 @@
       "title": "Píldoras 21 2026",
       "url": "https://tifloacosta.com/docs/es/reader-1Yk652avn7fcQtfNV28nu0VIkqpcZiRos.html",
       "openUrl": "https://tifloacosta.com/docs/es/reader-1Yk652avn7fcQtfNV28nu0VIkqpcZiRos.html",
-      "isNew": true
+      "isNew": false
     },
     {
       "kind": "resource",
@@ -1210,7 +1230,7 @@
       "title": "Tech Pills 21 2026",
       "url": "https://tifloacosta.com/docs/en/reader-1ztd-nsQcYPNa3-Ij40CxlNIGkuEPtX-T.html",
       "openUrl": "https://tifloacosta.com/docs/en/reader-1ztd-nsQcYPNa3-Ij40CxlNIGkuEPtX-T.html",
-      "isNew": true
+      "isNew": false
     },
     {
       "kind": "resource",

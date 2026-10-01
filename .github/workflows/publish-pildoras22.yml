@@ -28,12 +28,28 @@ jobs:
           test -s docs/en/technology-pills-22-part3.inc.html
           grep -q '<html lang="es"' docs/es/pildoras-tecnologicas-22-2026.html
           grep -q '<html lang="en"' docs/en/technology-pills-22-2026.html
+      - name: Add accessible return controls
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFile, writeFile } from 'node:fs/promises';
+          import { addReturnControl } from './scripts/migrate-readers.mjs';
+
+          for (const [path, lang] of [
+            ['docs/es/pildoras-tecnologicas-22-2026.html', 'es'],
+            ['docs/en/technology-pills-22-2026.html', 'en']
+          ]) {
+            const source = await readFile(path, 'utf8');
+            await writeFile(path, addReturnControl(source, lang), 'utf8');
+          }
+          NODE
       - name: Update resource catalog
         run: node scripts/publish-pildoras22.mjs
       - name: Verify catalog
         run: |
           grep -q "Píldoras 22 2026" data.js
           grep -q "Tech Pills 22 2026" data.js
+      - name: Install mobile test dependencies
+        run: npm --prefix mobile ci
       - name: Run tests
         run: node --test
       - name: Remove one-shot publication files

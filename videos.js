@@ -44,6 +44,7 @@
     playerClose: $('#video-player-close'),
     playerYouTube: $('#video-player-youtube'),
     resultsSection: $('#video-results-section'),
+    youtubeAccessibleSection: $('#youtube-accessible-section'),
     resultsHeading: $('#video-results-heading'),
     status: $('#video-status'),
     list: $('#video-list'),
@@ -162,6 +163,7 @@
   let playerControlStatus = 'preparing';
   let detailsOpen = false;
   let positionTimer = null;
+  let lastPlayerTrigger = null;
 
   function readStorage(key) {
     try { return localStorage.getItem(key); } catch { return null; }
@@ -521,6 +523,7 @@
   }
 
   function openPlayer(video) {
+    lastPlayerTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const id = videoId(video);
     if (!id) {
       window.open(youtubeUrl(video), '_blank', 'noopener,noreferrer');
@@ -543,6 +546,7 @@
     }
     els.controlsSection.hidden = true;
     els.resultsSection.hidden = true;
+    if (els.youtubeAccessibleSection) els.youtubeAccessibleSection.hidden = true;
     els.playerSection.hidden = false;
     updateToggleLabel();
 
@@ -578,6 +582,7 @@
     els.playerSection.hidden = true;
     els.controlsSection.hidden = false;
     els.resultsSection.hidden = false;
+    if (els.youtubeAccessibleSection) els.youtubeAccessibleSection.hidden = false;
     activeVideo = null;
     detailsOpen = false;
     renderVideoDetails();
@@ -587,7 +592,10 @@
     setPlayerControlsEnabled(false);
     updateToggleLabel();
     updatePlayerControlStatus('preparing');
-    const trigger = returnId ? els.list.querySelector(`button[data-video-id="${returnId}"]`) : null;
+    const trigger = lastPlayerTrigger && lastPlayerTrigger.isConnected
+      ? lastPlayerTrigger
+      : (returnId ? els.list.querySelector(`button[data-video-id="${returnId}"]`) : null);
+    lastPlayerTrigger = null;
     if (trigger) trigger.focus();
     else els.resultsHeading.focus?.();
   }
@@ -696,6 +704,8 @@
       render();
     }
   }
+
+  window.TifloVideoPlayer = Object.freeze({ open: openPlayer });
 
   els.langEs.addEventListener('click', () => { lang = 'es'; applyLanguage(); });
   els.langEn.addEventListener('click', () => { lang = 'en'; applyLanguage(); });

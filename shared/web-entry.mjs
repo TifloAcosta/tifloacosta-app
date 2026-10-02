@@ -51,3 +51,10 @@ export {
   createReadingLibraryClient,
   normalizeReadingBook
 } from './reading-library-client.mjs';
+
+export { createReadingOcrFlow } from './reading-ocr-flow.mjs';
+export {
+  readingTranslationCacheKey,
+  createReadingTranslationJob
+} from './reading-translation.mjs';
+export { createReadingTranslationClient } from './reading-translation-client.mjs';

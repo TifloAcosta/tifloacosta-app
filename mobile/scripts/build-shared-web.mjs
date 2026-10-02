@@ -6,6 +6,7 @@ const sharedEntry = fileURLToPath(new URL('../../shared/web-entry.mjs', import.m
 const sharedOutfile = fileURLToPath(new URL('../../shared-web.js', import.meta.url));
 const pdfEntry = fileURLToPath(new URL('../../shared/web-pdf-entry.mjs', import.meta.url));
 const pdfOutfile = fileURLToPath(new URL('../../web-pdf.js', import.meta.url));
+const mobileNodeModules = fileURLToPath(new URL('../node_modules', import.meta.url));
 const pdfWorkerSource = fileURLToPath(new URL('../node_modules/pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url));
 const pdfWorkerOutfile = fileURLToPath(new URL('../../pdf.worker.min.mjs', import.meta.url));
 
@@ -30,6 +31,7 @@ await build({
   globalName: 'TIFLO_PDF',
   platform: 'browser',
   target: ['chrome120', 'safari17'],
+  nodePaths: [mobileNodeModules],
   sourcemap: false,
   minify: true,
   logLevel: 'info'

@@ -5,6 +5,7 @@ import test from 'node:test';
 import { resolveReadingSettings } from '../src/core/reading-settings.mjs';
 
 const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
+const readRepo = path => readFile(new URL(`../../${path}`, import.meta.url), 'utf8');
 
 test('reading integration keeps TXT and HTML import open and resume on one semantic reader', async () => {
   const [importer, plugin, screen] = await Promise.all([
@@ -139,11 +140,12 @@ test('PDF vertical slice keeps import storage opening pages and navigation on th
 });
 
 test('PDF vertical slice keeps password/no-text/invalid states separate, password transient and OCR explicit', async () => {
-  const [importer, plugin, database, client, screen, ocrPanel] = await Promise.all([
+  const [importer, plugin, database, mobileClient, client, screen, ocrPanel] = await Promise.all([
     read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingImportService.java'),
     read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java'),
     read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingLibraryDatabase.java'),
     read('src/core/reading-library-client.mjs'),
+    readRepo('shared/reading-library-client.mjs'),
     read('src/screens/reading-book.mjs'),
     read('src/screens/reading-ocr-panel.mjs')
   ]);
@@ -154,6 +156,7 @@ test('PDF vertical slice keeps password/no-text/invalid states separate, passwor
   assert.match(plugin, /passwordRequired/);
   assert.match(plugin, /passwordRejected/);
   assert.match(plugin, /pdfNoText/);
+  assert.match(mobileClient, /shared\/reading-library-client\.mjs/);
   assert.match(client, /async function openBook\(id, options = \{\}\)/);
   assert.match(client, /const password = String\(options\?\.password \?\? ['"]['"]\)/);
   assert.match(client, /plugin\.openBook\(cleanId, \{ password \}\)/);
@@ -172,13 +175,14 @@ test('PDF vertical slice keeps password/no-text/invalid states separate, passwor
 });
 
 test('audio vertical slice reopens the exact saved track and millisecond paused without autoplay', async () => {
-  const [importer, store, database, libraryPlugin, service, controller, screen] = await Promise.all([
+  const [importer, store, database, libraryPlugin, service, mobileController, controller, screen] = await Promise.all([
     read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingImportService.java'),
     read('android/app/src/main/java/com/tifloacosta/app/reading/AndroidReadingFileStore.java'),
     read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingLibraryDatabase.java'),
     read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java'),
     read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingAudioService.java'),
     read('src/core/reading-audio.mjs'),
+    readRepo('shared/reading-audio.mjs'),
     read('src/screens/reading-audio.mjs')
   ]);
 
@@ -194,6 +198,7 @@ test('audio vertical slice reopens the exact saved track and millisecond paused 
   assert.match(service, /player\.prepare\(\)/);
   assert.doesNotMatch(service, /prepareAudio[\s\S]{0,1200}player\.play\(\)/, 'Reopening an audiobook must remain paused');
   assert.match(screen, /playButton\.addEventListener\(['"]click['"][\s\S]*controller\.play\(\)/);
+  assert.match(mobileController, /shared\/reading-audio\.mjs/);
   assert.match(controller, /async function play\(\)[\s\S]*client\.playAudio\(\)/);
   assert.match(controller, /client\.saveProgress\(\{[\s\S]*mediaTrackIndex:\s*state\.trackIndex[\s\S]*mediaPositionMs:\s*state\.positionMs/);
   assert.match(controller, /mediaTrackIndex:\s*state\.trackIndex/);
@@ -203,12 +208,14 @@ test('audio vertical slice reopens the exact saved track and millisecond paused 
 });
 
 test('audio background safety persists natively on interruptions periodic playback and sleep timer without auto-resume', async () => {
-  const [service, plugin, wrapper, client, controller] = await Promise.all([
+  const [service, plugin, wrapper, mobileClient, client, mobileController, controller] = await Promise.all([
     read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingAudioService.java'),
     read('android/app/src/main/java/com/tifloacosta/app/TifloReadingAudioPlugin.java'),
     read('src/native/reading-library-plugin.mjs'),
     read('src/core/reading-library-client.mjs'),
-    read('src/core/reading-audio.mjs')
+    readRepo('shared/reading-library-client.mjs'),
+    read('src/core/reading-audio.mjs'),
+    readRepo('shared/reading-audio.mjs')
   ]);
 
   assert.match(service, /POSITION_PERSIST_INTERVAL_MS\s*=\s*5000L/);
@@ -229,8 +236,10 @@ test('audio background safety persists natively on interruptions periodic playba
   assert.match(plugin, /public void cancelAudioSleepTimer\(PluginCall call\)/);
   assert.match(wrapper, /setAudioSleepTimer/);
   assert.match(wrapper, /cancelAudioSleepTimer/);
+  assert.match(mobileClient, /shared\/reading-library-client\.mjs/);
   assert.match(client, /setAudioSleepTimer/);
   assert.match(client, /cancelAudioSleepTimer/);
+  assert.match(mobileController, /shared\/reading-audio\.mjs/);
   assert.match(controller, /client\?\.setAudioSleepTimer/);
   assert.match(controller, /client\?\.cancelAudioSleepTimer/);
 });

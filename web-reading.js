@@ -14,6 +14,7 @@
     pasteLabel: $('#reading-paste-label'),
     paste: $('#reading-paste'),
     prepare: $('#reading-prepare'),
+    ocr: $('#reading-ocr'),
     status: $('#reading-status'),
     reader: $('#reading-reader'),
     title: $('#reading-document-title'),
@@ -71,7 +72,13 @@
       pdfPasswordIncorrect: 'La contraseña del PDF no es correcta.',
       pdfLoading: 'Leyendo PDF…',
       pdfProgress: (page,total) => `Leyendo página ${page} de ${total}…`,
-      pdfNoText: 'Este PDF no contiene texto extraíble. Está preparado para pasar al reconocimiento OCR.',
+      pdfNoText: 'Este PDF no contiene texto extraíble. Puedes iniciar el reconocimiento OCR.',
+      ocr: 'Reconocer con OCR',
+      ocrLoading: 'Preparando reconocimiento OCR…',
+      ocrPage: (page,total) => `Reconociendo página ${page} de ${total}…`,
+      ocrProgress: percent => `Reconocimiento OCR: ${Math.round(percent)}%.`,
+      ocrFailed: 'No se pudo completar el reconocimiento OCR.',
+      ocrPrivacy: 'El OCR se procesa en este navegador. Los componentes del motor se descargan sólo al activar esta función.',
       failed: 'No se pudo preparar este documento.',
       ready: 'Lectura preparada.',
       document: 'Documento',
@@ -136,7 +143,13 @@
       pdfPasswordIncorrect: 'The PDF password is incorrect.',
       pdfLoading: 'Reading PDF…',
       pdfProgress: (page,total) => `Reading page ${page} of ${total}…`,
-      pdfNoText: 'This PDF has no extractable text. It is ready for the OCR recognition step.',
+      pdfNoText: 'This PDF has no extractable text. You can start OCR recognition.',
+      ocr: 'Recognize with OCR',
+      ocrLoading: 'Preparing OCR recognition…',
+      ocrPage: (page,total) => `Recognizing page ${page} of ${total}…`,
+      ocrProgress: percent => `OCR recognition: ${Math.round(percent)}%.`,
+      ocrFailed: 'OCR recognition could not be completed.',
+      ocrPrivacy: 'OCR is processed in this browser. Recognition components are downloaded only when you activate this feature.',
       failed: 'This document could not be prepared.',
       ready: 'Reading prepared.',
       document: 'Document',
@@ -198,6 +211,8 @@
   let currentFormat = 'txt';
   let currentBookId = '';
   let currentQueued = false;
+  let pendingPdfFile = null;
+  let ocrBundlePromise = null;
 
   const speechAdapter = typeof shared.createWebReadingSpeechAdapter === 'function'
     ? shared.createWebReadingSpeechAdapter()
@@ -224,6 +239,7 @@
     els.fileLabel.textContent = c.file;
     els.pasteLabel.textContent = c.paste;
     els.prepare.textContent = c.prepare;
+    els.ocr.textContent = c.ocr;
     els.pdfPasswordLabel.textContent = c.pdfPassword;
     els.previous.textContent = c.previous;
     els.next.textContent = c.next;
@@ -384,6 +400,23 @@
     els.pdfPasswordWrap.hidden = !isPdfFile(els.file.files?.[0]);
   }
 
+  function loadOcrBundle() {
+    if (globalThis.Tesseract?.createWorker) return Promise.resolve(globalThis.Tesseract);
+    if (ocrBundlePromise) return ocrBundlePromise;
+    ocrBundlePromise = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/tesseract.js@7.0.0/dist/tesseract.min.js';
+      script.async = true;
+      script.crossOrigin = 'anonymous';
+      script.onload = () => globalThis.Tesseract?.createWorker
+        ? resolve(globalThis.Tesseract)
+        : reject(new Error('ocr-engine-unavailable'));
+      script.onerror = () => reject(new Error('ocr-engine-unavailable'));
+      document.head.append(script);
+    });
+    return ocrBundlePromise;
+  }
+
   function loadPdfBundle() {
     if (globalThis.TIFLO_PDF?.extractPdfText) return Promise.resolve(globalThis.TIFLO_PDF);
     if (pdfBundlePromise) return pdfBundlePromise;
@@ -414,8 +447,10 @@
         }
       });
       if (payload.noText) {
+        pendingPdfFile = file;
         throw Object.assign(new Error('pdf-no-text'), { code: 'pdf-no-text', payload });
       }
+      pendingPdfFile = null;
       return {
         source: JSON.stringify(payload),
         format: 'pdf',
@@ -459,11 +494,63 @@
         { source: text, format: 'txt' }
       );
     } catch (error) {
+      els.ocr.hidden = true;
       if (error?.code === 'unsupported') els.status.textContent = t().unsupported;
       else if (error?.code === 'password-required') els.status.textContent = t().pdfPasswordRequired;
       else if (error?.code === 'incorrect-password') els.status.textContent = t().pdfPasswordIncorrect;
-      else if (error?.code === 'pdf-no-text') els.status.textContent = t().pdfNoText;
-      else els.status.textContent = t().failed;
+      else if (error?.code === 'pdf-no-text') {
+        els.status.textContent = `${t().pdfNoText} ${t().ocrPrivacy}`;
+        els.ocr.hidden = false;
+      } else els.status.textContent = t().failed;
+    }
+  }
+
+  async function runPdfOcr() {
+    if (!pendingPdfFile) return;
+    els.ocr.hidden = true;
+    els.status.textContent = t().ocrLoading;
+
+    let worker = null;
+    try {
+      const [pdf, Tesseract] = await Promise.all([loadPdfBundle(), loadOcrBundle()]);
+      const languageCode = language() === 'es' ? 'spa' : 'eng';
+      worker = await Tesseract.createWorker(languageCode, 1, {
+        workerPath: 'https://cdn.jsdelivr.net/npm/tesseract.js@7.0.0/dist/worker.min.js',
+        corePath: 'https://cdn.jsdelivr.net/npm/tesseract.js-core@6.1.2',
+        langPath: 'https://tessdata.projectnaptha.com/4.0.0',
+        logger(message) {
+          const progress = Number(message?.progress);
+          if (Number.isFinite(progress) && progress >= 0) {
+            els.status.textContent = t().ocrProgress(progress * 100);
+          }
+        }
+      });
+
+      const file = pendingPdfFile;
+      const payload = await pdf.extractPdfText(file, {
+        password: els.pdfPassword.value,
+        onProgress({ page, pageCount, source }) {
+          if (source === 'ocr') els.status.textContent = t().ocrPage(page, pageCount);
+        },
+        async recognizePage(canvas, { page, pageCount }) {
+          els.status.textContent = t().ocrPage(page, pageCount);
+          const result = await worker.recognize(canvas);
+          return String(result?.data?.text || '').trim();
+        }
+      });
+
+      if (payload.noText) throw new Error('ocr-empty');
+      pendingPdfFile = null;
+      await useDocument(
+        shared.parsePdfDocument(payload),
+        file.name,
+        { source: JSON.stringify(payload), format: 'pdf' }
+      );
+    } catch {
+      els.status.textContent = t().ocrFailed;
+      els.ocr.hidden = false;
+    } finally {
+      try { await worker?.terminate?.(); } catch {}
     }
   }
 
@@ -789,7 +876,12 @@
   }
 
   els.prepare.addEventListener('click', () => { void prepareReading(); });
-  els.file.addEventListener('change', updatePdfPasswordVisibility);
+  els.ocr.addEventListener('click', () => { void runPdfOcr(); });
+  els.file.addEventListener('change', () => {
+    pendingPdfFile = null;
+    els.ocr.hidden = true;
+    updatePdfPasswordVisibility();
+  });
   els.previous.addEventListener('click', () => move(-1));
   els.next.addEventListener('click', () => move(1));
   els.play.addEventListener('click', () => { void play(); });

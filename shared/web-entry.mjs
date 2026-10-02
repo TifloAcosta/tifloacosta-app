@@ -21,5 +21,6 @@ export {
 export {
   searchContent,
   searchResultAction,
-  normalizeSearchText
+  normalizeSearchText,
+  queryMatches
 } from './search.mjs';

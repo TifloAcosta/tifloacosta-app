@@ -112,9 +112,13 @@
 
     <div class="panel">
       <label id="reading-file-label" for="reading-file">Abrir archivo TXT o HTML</label>
-      <input id="reading-file" type="file" accept=".txt,.html,.htm,text/plain,text/html">
+      <input id="reading-file" type="file" accept=".txt,.html,.htm,.pdf,text/plain,text/html,application/pdf">
       <label id="reading-paste-label" for="reading-paste">O pega aquí el texto</label>
       <textarea id="reading-paste" rows="6"></textarea>
+      <div id="reading-pdf-password-wrap" hidden>
+        <label id="reading-pdf-password-label" for="reading-pdf-password">Contraseña del PDF, si tiene</label>
+        <input id="reading-pdf-password" type="password" autocomplete="off">
+      </div>
       <button id="reading-prepare" type="button">Preparar lectura</button>
       <p id="reading-status" class="muted" role="status" aria-live="polite" aria-atomic="true"></p>
     </div>

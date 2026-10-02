@@ -28,15 +28,17 @@ test('beta acceptance wires every approved textual format into the common semant
 });
 
 test('beta acceptance preserves DAISY audio capabilities across the native-to-JavaScript bridge', async () => {
-  const [plugin, client, screen] = await Promise.all([
+  const [plugin, mobileClient, client, screen] = await Promise.all([
     read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java'),
     read('src/core/reading-library-client.mjs'),
+    readRepo('shared/reading-library-client.mjs'),
     read('src/screens/reading-book.mjs')
   ]);
 
   assert.match(plugin, /result\.put\("daisyHasText",\s*daisy\.hasText\(\)\)/);
   assert.match(plugin, /result\.put\("daisyHasAudio",\s*daisy\.hasAudio\(\)\)/);
   assert.match(plugin, /result\.put\("daisySynchronized",\s*daisy\.isSynchronized\(\)\)/);
+  assert.match(mobileClient, /shared\/reading-library-client\.mjs/);
   assert.match(client, /\['daisy2\.02',\s*'daisy3'\]\.includes\(book\.format\)/);
   assert.match(client, /daisyHasText:\s*booleanValue\(result\.daisyHasText\)/);
   assert.match(client, /daisyHasAudio:\s*booleanValue\(result\.daisyHasAudio\)/);

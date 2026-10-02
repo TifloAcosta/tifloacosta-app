@@ -90,3 +90,15 @@ export {
   WEB_TRANSLATION_LANGUAGES,
   createWebReadingTranslationAdapter
 } from './web-reading-translation-adapter.mjs';
+
+export { parseStructuredDocument } from './reading-structured-adapter.mjs';
+
+export {
+  parseMarkdownDocument,
+  parseRtfDocument,
+  parseFb2Document,
+  parseDocxArchive,
+  parseOdtArchive,
+  parseEpubArchive,
+  parseHtmlStructured
+} from './web-reading-format-adapters.mjs';

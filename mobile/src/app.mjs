@@ -313,6 +313,14 @@ function beginSharedFlow(value = '') {
   if (!shareMode) {
     normalRouterSnapshot = router.snapshot();
   }
+
+  if (result.kind === 'single-url' && result.classification?.kind === 'download') {
+    shareMode = true;
+    pendingDownloadUrl = result.classification.url || result.urls[0] || '';
+    router.start('downloads-link');
+    return true;
+  }
+
   shareSession.begin({ text: result.text, urls: result.urls });
   if (result.kind === 'single-url') {
     shareSession.selectUrl(result.urls[0]);

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { adjacentSemanticUnit } from '../src/core/reading-semantic-model.mjs';
+import { adjacentSemanticBlockOfKind, adjacentSemanticUnit } from '../src/core/reading-semantic-model.mjs';
 
 const documentModel = {
   blocks: [
@@ -55,6 +55,32 @@ test('adjacent semantic navigation reports document boundaries without moving', 
     {
       position: { blockIndex: 4, unitIndex: 0 },
       kind: 'tableCell',
+      moved: false
+    }
+  );
+});
+
+
+test('semantic block navigation skips unrelated units and lands at the start of the selected kind', () => {
+  const heading = adjacentSemanticBlockOfKind(documentModel, { blockIndex: 0, unitIndex: 0 }, 'heading', 1);
+  const quote = adjacentSemanticBlockOfKind(documentModel, { blockIndex: 1, unitIndex: 0 }, 'quote', 1);
+  const previousParagraph = adjacentSemanticBlockOfKind(documentModel, { blockIndex: 4, unitIndex: 0 }, 'paragraph', -1);
+
+  assert.deepEqual(heading, {
+    position: { blockIndex: 1, unitIndex: 0 },
+    kind: 'heading',
+    moved: true
+  });
+  assert.deepEqual(quote.position, { blockIndex: 3, unitIndex: 0 });
+  assert.deepEqual(previousParagraph.position, { blockIndex: 0, unitIndex: 0 });
+});
+
+test('semantic block navigation reports boundaries when the selected kind is unavailable', () => {
+  assert.deepEqual(
+    adjacentSemanticBlockOfKind(documentModel, { blockIndex: 4, unitIndex: 0 }, 'heading', 1),
+    {
+      position: { blockIndex: 4, unitIndex: 0 },
+      kind: 'heading',
       moved: false
     }
   );

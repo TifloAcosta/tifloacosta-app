@@ -6,6 +6,7 @@ on:
       - 'feature/**'
     paths:
       - 'index.html'
+      - 'styles.css'
       - 'app-core.js'
       - 'downloads.js'
       - 'downloads-core.js'
@@ -17,6 +18,10 @@ on:
       - 'privacidad/**'
       - 'download-worker/**'
       - 'test/downloads-*.test.mjs'
+      - 'test/main-colors.test.mjs'
+      - 'test/theme-tifloacosta-colors.test.mjs'
+      - 'test/web-reading.test.mjs'
+      - 'test/actualidad-*.test.mjs'
       - 'test/sound-search-*.test.mjs'
       - '.github/workflows/deploy-download-worker.yml'
       - '.github/workflows/test-downloads.yml'

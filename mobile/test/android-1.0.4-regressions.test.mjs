@@ -38,12 +38,15 @@ test('video destination can open the exact video selected by Search', async () =
   assert.doesNotMatch(source, /\.playVideo\(/);
 });
 
-test('Actualidad headlines open the exact news item through the common reader and keep the original source as a secondary action', async () => {
+test('Actualidad headlines open the exact news item and leave the original source to the common reader', async () => {
   const source = await read('src/screens/actualidad.mjs');
   assert.match(source, /heading\.append\(openButton\)/);
   assert.match(source, /openButton\.textContent\s*=\s*item\.title/);
   assert.match(source, /openButton\.id\s*=\s*`news-open-\$\{item\.id\}`/);
   assert.match(source, /onOpenNews\?\.\(item,\s*openButton\.id\)/);
-  assert.match(source, /label:\s*t\('actualidad\.original'\)/);
+  assert.doesNotMatch(source, /addExternalLink\(actions/);
   assert.doesNotMatch(source, /openButton\.addEventListener\([\s\S]{0,160}nativeActions\?\.openExternal/);
+  const reader = await read('src/screens/reader.mjs');
+  assert.match(reader, /original\.textContent = t\('actualidad\.original'\)/);
+  assert.match(reader, /onOpenOriginal\(state\.url\)/);
 });

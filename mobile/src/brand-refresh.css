@@ -134,3 +134,106 @@ html.theme-dark .home-entry {
   background: #6B3434;
   color: #FFFFFF;
 }
+
+
+/* Shared visual identity for secondary screens. */
+.screen-header {
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-4);
+  border: 0.1rem solid var(--border);
+  border-inline-start: 0.35rem solid var(--brand);
+  border-radius: 0.9rem;
+  background: linear-gradient(135deg, var(--surface), var(--surface-alt));
+  box-shadow: 0 0.25rem 0.8rem rgba(127, 20, 20, 0.08);
+}
+
+.screen-header h1 {
+  color: var(--brand-deep);
+  letter-spacing: -0.015em;
+}
+
+.back-button {
+  border-color: #A85B5B;
+  background: var(--surface-alt);
+  color: var(--brand-deep);
+  font-weight: 700;
+}
+
+.content-card,
+.result-card,
+.video-player-section,
+.reading-panel,
+.podcast-player,
+.reading-end-of-document {
+  border-color: var(--border);
+  border-inline-start: 0.28rem solid var(--brand);
+  background: linear-gradient(135deg, var(--surface), var(--surface-alt));
+  box-shadow: 0 0.22rem 0.7rem rgba(127, 20, 20, 0.07);
+}
+
+.content-card h2,
+.content-card h3,
+.result-card h2,
+.result-card h3,
+.reading-panel h2,
+.video-player-section h2,
+.podcast-player h2 {
+  color: var(--brand-deep);
+}
+
+.action-group button,
+.screen-actions button,
+.reading-book-controls button,
+.reading-library-pagination button {
+  border-color: #A85B5B;
+}
+
+.action-group button:hover,
+.screen-actions button:hover,
+.reading-book-controls button:hover,
+.reading-library-pagination button:hover {
+  background: var(--surface-alt);
+}
+
+.settings-field select,
+.reading-book-controls select,
+.reading-library-filters select,
+.search-form input,
+.reading-library-search input {
+  border: 0.1rem solid var(--border);
+  border-radius: 0.55rem;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.muted,
+.reading-book-status,
+.video-player-status,
+.reading-library-status {
+  color: var(--muted-text);
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not(.theme-light) .screen-header h1,
+  html:not(.theme-light) .content-card h2,
+  html:not(.theme-light) .content-card h3,
+  html:not(.theme-light) .result-card h2,
+  html:not(.theme-light) .result-card h3,
+  html:not(.theme-light) .reading-panel h2,
+  html:not(.theme-light) .video-player-section h2,
+  html:not(.theme-light) .podcast-player h2 {
+    color: #FFFFFF;
+  }
+}
+
+html.theme-dark .screen-header h1,
+html.theme-dark .content-card h2,
+html.theme-dark .content-card h3,
+html.theme-dark .result-card h2,
+html.theme-dark .result-card h3,
+html.theme-dark .reading-panel h2,
+html.theme-dark .video-player-section h2,
+html.theme-dark .podcast-player h2 {
+  color: #FFFFFF;
+}

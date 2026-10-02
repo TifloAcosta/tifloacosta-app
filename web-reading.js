@@ -33,7 +33,13 @@
     search: $('#reading-search'),
     searchButton: $('#reading-search-button'),
     searchStatus: $('#reading-search-status'),
-    searchResults: $('#reading-search-results')
+    searchResults: $('#reading-search-results'),
+    save: $('#reading-save'),
+    libraryHeading: $('#reading-library-heading'),
+    libraryIntro: $('#reading-library-intro'),
+    libraryRefresh: $('#reading-library-refresh'),
+    libraryStatus: $('#reading-library-status'),
+    libraryList: $('#reading-library-list')
   };
   if (!els.section) return;
 
@@ -63,7 +69,21 @@
       searchCount: n => `${n} resultado${n === 1 ? '' : 's'}.`,
       result: n => `Ir al resultado ${n}`,
       position: (current,total) => `Bloque ${current} de ${total}.`,
-      voicesUnavailable: 'El navegador no ha proporcionado ninguna voz adicional todavía.'
+      voicesUnavailable: 'El navegador no ha proporcionado ninguna voz adicional todavía.',
+      save: 'Guardar en mi biblioteca',
+      saved: 'Documento guardado en este navegador.',
+      alreadySaved: 'Este documento ya está guardado en tu biblioteca.',
+      saveFailed: 'No se pudo guardar el documento en este navegador.',
+      libraryHeading: 'Mi biblioteca',
+      libraryIntro: 'Los documentos guardados permanecen únicamente en este navegador.',
+      refresh: 'Actualizar biblioteca',
+      libraryEmpty: 'Todavía no hay documentos guardados.',
+      libraryUnavailable: 'El navegador no permite utilizar la biblioteca local.',
+      openSaved: 'Abrir',
+      deleteSaved: 'Eliminar',
+      deleted: 'Documento eliminado de la biblioteca.',
+      deleteFailed: 'No se pudo eliminar el documento.',
+      progress: percent => `${Math.round(percent)}% leído`
     },
     en: {
       heading: 'Read with TifloAcosta',
@@ -90,7 +110,21 @@
       searchCount: n => `${n} result${n === 1 ? '' : 's'}.`,
       result: n => `Go to result ${n}`,
       position: (current,total) => `Block ${current} of ${total}.`,
-      voicesUnavailable: 'The browser has not provided any additional voices yet.'
+      voicesUnavailable: 'The browser has not provided any additional voices yet.',
+      save: 'Save to my library',
+      saved: 'Document saved in this browser.',
+      alreadySaved: 'This document is already saved in your library.',
+      saveFailed: 'The document could not be saved in this browser.',
+      libraryHeading: 'My library',
+      libraryIntro: 'Saved documents remain only in this browser.',
+      refresh: 'Refresh library',
+      libraryEmpty: 'No documents have been saved yet.',
+      libraryUnavailable: 'This browser does not allow the local library to be used.',
+      openSaved: 'Open',
+      deleteSaved: 'Delete',
+      deleted: 'Document removed from the library.',
+      deleteFailed: 'The document could not be removed.',
+      progress: percent => `${Math.round(percent)}% read`
     }
   };
 
@@ -98,8 +132,18 @@
   let readingSession = null;
   let searchIndex = null;
   let speechController = null;
+  let currentSource = '';
+  let currentFormat = 'txt';
+  let currentBookId = '';
+
   const speechAdapter = typeof shared.createWebReadingSpeechAdapter === 'function'
     ? shared.createWebReadingSpeechAdapter()
+    : null;
+  const libraryAdapter = typeof shared.createWebReadingLibraryAdapter === 'function'
+    ? shared.createWebReadingLibraryAdapter()
+    : null;
+  const libraryClient = libraryAdapter && typeof shared.createReadingLibraryClient === 'function'
+    ? shared.createReadingLibraryClient(libraryAdapter)
     : null;
 
   function language() {
@@ -125,9 +169,14 @@
     els.rateLabel.textContent = c.rate;
     els.searchLabel.textContent = c.search;
     els.searchButton.textContent = c.searchButton;
+    els.save.textContent = c.save;
+    els.libraryHeading.textContent = c.libraryHeading;
+    els.libraryIntro.textContent = c.libraryIntro;
+    els.libraryRefresh.textContent = c.refresh;
     if (!documentModel) els.title.textContent = c.document;
     populateVoices();
     renderPosition();
+    void renderLibrary();
   }
 
   function populateVoices() {
@@ -146,6 +195,20 @@
     }
     if ([...els.voice.options].some(option => option.value === selected)) els.voice.value = selected;
     if (!voices.length) els.status.textContent = els.status.textContent || t().voicesUnavailable;
+  }
+
+  async function persistProgress(extra = {}) {
+    if (!libraryClient || !currentBookId || !readingSession || !documentModel?.blocks?.length) return false;
+    const snapshot = readingSession.snapshot();
+    const current = readingSession.current();
+    return libraryClient.saveProgress({
+      id: currentBookId,
+      blockIndex: snapshot.blockIndex,
+      unitIndex: Number(extra.unitIndex) || 0,
+      anchorText: String(current?.text || '').slice(0, 160),
+      percent: snapshot.percent,
+      state: snapshot.percent >= 100 ? 'read' : 'in-reading'
+    });
   }
 
   function renderBlock() {
@@ -183,7 +246,7 @@
     const snapshot = position || readingSession?.snapshot() || { blockIndex: 0, unitIndex: 0 };
     speechController = shared.createSharedReadingSpeechController({
       client: speechAdapter,
-      book: { id: 'web-local-document', title: els.title.textContent || t().document },
+      book: { id: currentBookId || 'web-local-document', title: els.title.textContent || t().document },
       document: documentModel,
       initialPosition: { blockIndex: snapshot.blockIndex || 0, unitIndex: snapshot.unitIndex || 0 },
       settings: {
@@ -198,30 +261,43 @@
           initialIndex: blockIndex
         });
         renderBlock();
+        void persistProgress({ unitIndex: value?.unitIndex });
       }
     });
   }
 
-  async function useDocument(model, title) {
+  async function useDocument(model, title, {
+    source = '',
+    format = 'txt',
+    bookId = '',
+    initialIndex = 0
+  } = {}) {
     if (!model || !Array.isArray(model.blocks) || !model.blocks.length) {
       els.status.textContent = t().failed;
       return;
     }
     documentModel = model;
-    readingSession = shared.createReadingSession({ blocks: documentModel.blocks, initialIndex: 0 });
+    currentSource = String(source ?? '');
+    currentFormat = String(format || 'txt').toLowerCase();
+    currentBookId = String(bookId || '');
+    readingSession = shared.createReadingSession({
+      blocks: documentModel.blocks,
+      initialIndex: Number(initialIndex) || 0
+    });
     searchIndex = shared.createReadingSearchIndex(documentModel);
     await searchIndex.build();
     els.title.textContent = String(title || model.title || t().document);
     els.reader.hidden = false;
+    els.save.disabled = Boolean(currentBookId);
     els.status.textContent = t().ready;
     els.searchResults.replaceChildren();
     els.searchStatus.textContent = '';
     renderBlock();
-    await rebuildSpeech();
+    await rebuildSpeech({ blockIndex: Number(initialIndex) || 0, unitIndex: 0 });
     queueMicrotask(() => els.title.focus());
   }
 
-  async function modelFromFile(file) {
+  async function documentFromFile(file) {
     const name = String(file?.name || '');
     const lower = name.toLowerCase();
     const type = String(file?.type || '').toLowerCase();
@@ -229,10 +305,14 @@
       throw Object.assign(new Error('unsupported'), { code: 'unsupported' });
     }
     const source = await file.text();
-    if (lower.endsWith('.html') || lower.endsWith('.htm') || type === 'text/html') {
-      return shared.parseHtmlDocument(source, { title: name, language: language() });
-    }
-    return shared.parseTextDocument(source, { title: name, language: language() });
+    const html = lower.endsWith('.html') || lower.endsWith('.htm') || type === 'text/html';
+    return {
+      source,
+      format: html ? 'html' : 'txt',
+      model: html
+        ? shared.parseHtmlDocument(source, { title: name, language: language() })
+        : shared.parseTextDocument(source, { title: name, language: language() })
+    };
   }
 
   async function prepareReading() {
@@ -240,7 +320,11 @@
     try {
       const file = els.file.files?.[0] || null;
       if (file) {
-        await useDocument(await modelFromFile(file), file.name);
+        const prepared = await documentFromFile(file);
+        await useDocument(prepared.model, file.name, {
+          source: prepared.source,
+          format: prepared.format
+        });
         return;
       }
       const text = els.paste.value.trim();
@@ -248,9 +332,117 @@
         els.status.textContent = t().empty;
         return;
       }
-      await useDocument(shared.parseTextDocument(text, { title: t().document, language: language() }), t().document);
+      await useDocument(
+        shared.parseTextDocument(text, { title: t().document, language: language() }),
+        t().document,
+        { source: text, format: 'txt' }
+      );
     } catch (error) {
       els.status.textContent = error?.code === 'unsupported' ? t().unsupported : t().failed;
+    }
+  }
+
+  async function saveCurrentDocument() {
+    if (!libraryAdapter || !documentModel || !currentSource) {
+      els.status.textContent = t().saveFailed;
+      return;
+    }
+    if (currentBookId) {
+      els.status.textContent = t().alreadySaved;
+      return;
+    }
+    try {
+      const saved = await libraryAdapter.importDocument({
+        title: els.title.textContent || t().document,
+        language: language(),
+        format: currentFormat,
+        content: currentSource
+      });
+      if (!saved?.id) throw new Error('save-failed');
+      currentBookId = saved.id;
+      els.save.disabled = true;
+      await persistProgress();
+      els.status.textContent = t().saved;
+      await renderLibrary();
+    } catch {
+      els.status.textContent = t().saveFailed;
+    }
+  }
+
+  async function openSavedBook(id) {
+    if (!libraryClient) return;
+    const opened = await libraryClient.openBook(id);
+    if (!opened?.book) {
+      els.libraryStatus.textContent = t().failed;
+      return;
+    }
+    const source = String(opened.content || '');
+    const format = opened.book.format === 'html' ? 'html' : 'txt';
+    const model = format === 'html'
+      ? shared.parseHtmlDocument(source, { title: opened.book.title, language: opened.book.language || language() })
+      : shared.parseTextDocument(source, { title: opened.book.title, language: opened.book.language || language() });
+    await useDocument(model, opened.book.title, {
+      source,
+      format,
+      bookId: opened.book.id,
+      initialIndex: opened.book.blockIndex
+    });
+  }
+
+  async function deleteSavedBook(id) {
+    if (!libraryClient) return;
+    const deleted = await libraryClient.deleteBook(id);
+    els.libraryStatus.textContent = deleted ? t().deleted : t().deleteFailed;
+    if (deleted && currentBookId === id) {
+      currentBookId = '';
+      els.save.disabled = !documentModel;
+    }
+    await renderLibrary();
+  }
+
+  async function renderLibrary() {
+    els.libraryList.replaceChildren();
+    if (!libraryClient) {
+      els.libraryStatus.textContent = t().libraryUnavailable;
+      return;
+    }
+    try {
+      const page = await libraryClient.listBooks({ page: 1, pageSize: 100, sort: 'lastRead' });
+      if (!page.items.length) {
+        els.libraryStatus.textContent = t().libraryEmpty;
+        return;
+      }
+      els.libraryStatus.textContent = '';
+      for (const book of page.items) {
+        const card = document.createElement('section');
+        card.className = 'resource-card';
+
+        const heading = document.createElement('h4');
+        heading.textContent = book.title || t().document;
+
+        const meta = document.createElement('p');
+        meta.className = 'resource-meta';
+        meta.textContent = `${String(book.format || '').toUpperCase()} · ${t().progress(book.percent || 0)}`;
+
+        const actions = document.createElement('div');
+        actions.className = 'resource-actions';
+
+        const open = document.createElement('button');
+        open.type = 'button';
+        open.textContent = t().openSaved;
+        open.addEventListener('click', () => { void openSavedBook(book.id); });
+
+        const remove = document.createElement('button');
+        remove.type = 'button';
+        remove.textContent = t().deleteSaved;
+        remove.addEventListener('click', () => { void deleteSavedBook(book.id); });
+
+        actions.append(open, remove);
+        card.append(heading, meta, actions);
+        els.libraryList.append(card);
+      }
+    } catch {
+      els.libraryStatus.textContent = t().libraryUnavailable;
     }
   }
 
@@ -259,6 +451,7 @@
     if (direction < 0) readingSession.previous();
     else readingSession.next();
     renderBlock();
+    void persistProgress();
     void rebuildSpeech();
     queueMicrotask(() => els.block.focus());
   }
@@ -270,6 +463,7 @@
 
   async function pause() {
     await speechController?.pause?.();
+    await persistProgress();
   }
 
   async function runSearch(event) {
@@ -295,6 +489,7 @@
       button.addEventListener('click', () => {
         readingSession = shared.createReadingSession({ blocks: documentModel.blocks, initialIndex: result.blockIndex });
         renderBlock();
+        void persistProgress({ unitIndex: result.unitIndex });
         void rebuildSpeech({ blockIndex: result.blockIndex, unitIndex: result.unitIndex });
         queueMicrotask(() => els.block.focus());
       });
@@ -315,10 +510,13 @@
   });
   els.rate.addEventListener('change', () => { void rebuildSpeech(); });
   els.searchForm.addEventListener('submit', runSearch);
+  els.save.addEventListener('click', () => { void saveCurrentDocument(); });
+  els.libraryRefresh.addEventListener('click', () => { void renderLibrary(); });
 
   document.getElementById('lang-es')?.addEventListener('click', () => setTimeout(localize, 0));
   document.getElementById('lang-en')?.addEventListener('click', () => setTimeout(localize, 0));
   globalThis.speechSynthesis?.addEventListener?.('voiceschanged', populateVoices);
 
+  els.save.disabled = true;
   localize();
 })();

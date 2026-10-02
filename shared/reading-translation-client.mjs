@@ -33,6 +33,22 @@ export function createReadingTranslationClient(plugin = {}) {
     }
   }
 
+  async function prepareTranslationPair(sourceLanguage, targetLanguage, onProgress) {
+    const source = cleanLanguage(sourceLanguage);
+    const target = cleanLanguage(targetLanguage);
+    if (!source || !target || source === target || !plugin?.prepareTranslationPair) return false;
+    try {
+      const result = await plugin.prepareTranslationPair({
+        sourceLanguage: source,
+        targetLanguage: target,
+        monitor: typeof onProgress === 'function' ? onProgress : undefined
+      });
+      return result === true || result?.ready === true;
+    } catch {
+      return false;
+    }
+  }
+
   async function translateBatch(options = {}) {
     const sourceLanguage = cleanLanguage(options?.sourceLanguage);
     const targetLanguage = cleanLanguage(options?.targetLanguage);
@@ -60,6 +76,7 @@ export function createReadingTranslationClient(plugin = {}) {
     identifyLanguage,
     listTranslationLanguages,
     downloadTranslationModel,
+    prepareTranslationPair,
     translateBatch
   };
 }

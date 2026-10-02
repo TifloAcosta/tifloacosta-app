@@ -35,6 +35,18 @@
     searchButton: $('#reading-search-button'),
     searchStatus: $('#reading-search-status'),
     searchResults: $('#reading-search-results'),
+    translationHeading: $('#reading-translation-heading'),
+    translationIntro: $('#reading-translation-intro'),
+    translationSourceLabel: $('#reading-translation-source-label'),
+    translationSource: $('#reading-translation-source'),
+    translationTargetLabel: $('#reading-translation-target-label'),
+    translationTarget: $('#reading-translation-target'),
+    translationPrepare: $('#reading-translation-prepare'),
+    translationStart: $('#reading-translation-start'),
+    translationStop: $('#reading-translation-stop'),
+    translationOriginal: $('#reading-translation-original'),
+    translationTranslated: $('#reading-translation-translated'),
+    translationStatus: $('#reading-translation-status'),
     save: $('#reading-save'),
     libraryHeading: $('#reading-library-heading'),
     libraryIntro: $('#reading-library-intro'),
@@ -128,7 +140,27 @@
       marksEmpty: 'Este documento no tiene marcadores.',
       markOpen: 'Ir al marcador',
       markDelete: 'Eliminar marcador',
-      markDeleted: 'Marcador eliminado.'
+      markDeleted: 'Marcador eliminado.',
+      translationHeading: 'Traducción',
+      translationIntro: 'Traduce el documento con el motor disponible en tu navegador. El original se conserva.',
+      translationSource: 'Idioma original',
+      translationTarget: 'Traducir a',
+      translationPrepare: 'Preparar idiomas',
+      translationStart: 'Traducir',
+      translationStop: 'Detener después de este lote',
+      translationOriginal: 'Original',
+      translationTranslated: 'Traducción',
+      translationUnsupported: 'Este navegador no ofrece traducción integrada para TifloLector.',
+      translationChoose: 'Selecciona dos idiomas distintos.',
+      translationPreparing: 'Preparando idiomas…',
+      translationReady: 'Idiomas preparados. Ya puedes traducir.',
+      translationPrepareFailed: 'Este par de idiomas no está disponible en el navegador.',
+      translationWorking: (done,total) => `Traduciendo: ${done} de ${total} bloques.`,
+      translationComplete: (done,total) => `Traducción completa: ${done} de ${total} bloques.`,
+      translationStopped: 'Traducción detenida. Puedes continuar más tarde.',
+      translationError: 'No se pudo continuar la traducción.',
+      translationShowing: 'Mostrando la traducción.',
+      translationShowingOriginal: 'Mostrando el original.'
     },
     en: {
       heading: 'Read with TifloAcosta',
@@ -199,7 +231,27 @@
       marksEmpty: 'This document has no bookmarks.',
       markOpen: 'Go to bookmark',
       markDelete: 'Delete bookmark',
-      markDeleted: 'Bookmark deleted.'
+      markDeleted: 'Bookmark deleted.',
+      translationHeading: 'Translation',
+      translationIntro: 'Translate the document with the engine available in your browser. The original is preserved.',
+      translationSource: 'Source language',
+      translationTarget: 'Translate to',
+      translationPrepare: 'Prepare languages',
+      translationStart: 'Translate',
+      translationStop: 'Stop after this batch',
+      translationOriginal: 'Original',
+      translationTranslated: 'Translation',
+      translationUnsupported: 'This browser does not provide built-in translation for TifloReader.',
+      translationChoose: 'Select two different languages.',
+      translationPreparing: 'Preparing languages…',
+      translationReady: 'Languages are ready. You can translate now.',
+      translationPrepareFailed: 'This language pair is not available in the browser.',
+      translationWorking: (done,total) => `Translating: ${done} of ${total} blocks.`,
+      translationComplete: (done,total) => `Translation complete: ${done} of ${total} blocks.`,
+      translationStopped: 'Translation stopped. You can resume later.',
+      translationError: 'Translation could not continue.',
+      translationShowing: 'Showing translation.',
+      translationShowingOriginal: 'Showing original.'
     }
   };
 
@@ -213,6 +265,14 @@
   let currentQueued = false;
   let pendingPdfFile = null;
   let ocrBundlePromise = null;
+  let originalDocumentModel = null;
+  let translationDocument = null;
+  let translationJob = null;
+  let translationPrepared = false;
+  let translationRunning = false;
+  let translationStopRequested = false;
+  let showingTranslation = false;
+  const translationMemory = new Map();
 
   const speechAdapter = typeof shared.createWebReadingSpeechAdapter === 'function'
     ? shared.createWebReadingSpeechAdapter()
@@ -222,6 +282,12 @@
     : null;
   const libraryClient = libraryAdapter && typeof shared.createReadingLibraryClient === 'function'
     ? shared.createReadingLibraryClient(libraryAdapter)
+    : null;
+  const translationAdapter = typeof shared.createWebReadingTranslationAdapter === 'function'
+    ? shared.createWebReadingTranslationAdapter()
+    : null;
+  const translationClient = translationAdapter && typeof shared.createReadingTranslationClient === 'function'
+    ? shared.createReadingTranslationClient(translationAdapter)
     : null;
 
   function language() {
@@ -258,6 +324,15 @@
     els.queueIntro.textContent = c.queueIntro;
     els.marksHeading.textContent = c.marksHeading;
     els.marksIntro.textContent = c.marksIntro;
+    els.translationHeading.textContent = c.translationHeading;
+    els.translationIntro.textContent = c.translationIntro;
+    els.translationSourceLabel.textContent = c.translationSource;
+    els.translationTargetLabel.textContent = c.translationTarget;
+    els.translationPrepare.textContent = c.translationPrepare;
+    els.translationStart.textContent = c.translationStart;
+    els.translationStop.textContent = c.translationStop;
+    els.translationOriginal.textContent = c.translationOriginal;
+    els.translationTranslated.textContent = c.translationTranslated;
     if (!documentModel) els.title.textContent = c.document;
     populateVoices();
     renderPosition();
@@ -362,6 +437,13 @@
       return;
     }
     documentModel = model;
+    originalDocumentModel = model;
+    translationDocument = null;
+    translationJob = null;
+    translationPrepared = false;
+    translationRunning = false;
+    translationStopRequested = false;
+    showingTranslation = false;
     currentSource = String(source ?? '');
     currentFormat = String(format || 'txt').toLowerCase();
     currentBookId = String(bookId || '');
@@ -385,6 +467,7 @@
     await rebuildSpeech({ blockIndex: Number(initialIndex) || 0, unitIndex: 0 });
     await refreshCurrentQueueState();
     await renderMarks();
+    await prepareTranslationUi();
     queueMicrotask(() => els.title.focus());
   }
 
@@ -552,6 +635,226 @@
     } finally {
       try { await worker?.terminate?.(); } catch {}
     }
+  }
+
+
+  function languageLabel(code) {
+    const value = String(code || '').trim().toLowerCase();
+    if (!value) return '';
+    try {
+      return new Intl.DisplayNames([language()], { type: 'language' }).of(value) || value;
+    } catch {
+      return value;
+    }
+  }
+
+  async function documentFingerprint(model) {
+    const source = JSON.stringify({
+      language: model?.language || '',
+      blocks: (Array.isArray(model?.blocks) ? model.blocks : []).map(block => ({
+        type: block?.type || '',
+        text: block?.text || '',
+        page: block?.page || block?.pageNumber || null
+      }))
+    });
+    try {
+      if (globalThis.crypto?.subtle && globalThis.TextEncoder) {
+        const digest = await globalThis.crypto.subtle.digest('SHA-256', new TextEncoder().encode(source));
+        return Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
+      }
+    } catch {}
+    let hash = 2166136261;
+    for (let index = 0; index < source.length; index += 1) {
+      hash ^= source.charCodeAt(index);
+      hash = Math.imul(hash, 16777619);
+    }
+    return `fallback-${(hash >>> 0).toString(16)}-${source.length}`;
+  }
+
+  function translationStoreKey(options = {}) {
+    return `${options.bookId || 'session'}:${options.kind || ''}:${options.variantKey || ''}`;
+  }
+
+  function translationPersistenceClient() {
+    return {
+      async getDerivedContent(options) {
+        if (currentBookId && libraryClient?.getDerivedContent) {
+          return libraryClient.getDerivedContent(options);
+        }
+        return translationMemory.get(translationStoreKey(options)) || null;
+      },
+      async saveDerivedContent(options) {
+        if (currentBookId && libraryClient?.saveDerivedContent) {
+          return libraryClient.saveDerivedContent(options);
+        }
+        translationMemory.set(translationStoreKey(options), {
+          ...options,
+          sourceSha256: options?.metadata?.sourceSha256 || options?.content?.sourceSha256 || '',
+          sourceLanguage: options?.metadata?.sourceLanguage || options?.content?.sourceLanguage || '',
+          targetLanguage: options?.metadata?.targetLanguage || options?.content?.targetLanguage || ''
+        });
+        return true;
+      },
+      translateBatch: options => translationClient?.translateBatch?.(options)
+    };
+  }
+
+  function renderTranslationViewButtons() {
+    const available = Boolean(translationDocument?.blocks?.length);
+    els.translationOriginal.hidden = !available;
+    els.translationTranslated.hidden = !available;
+    els.translationOriginal.setAttribute('aria-pressed', showingTranslation ? 'false' : 'true');
+    els.translationTranslated.setAttribute('aria-pressed', showingTranslation ? 'true' : 'false');
+  }
+
+  async function fillTranslationLanguages() {
+    els.translationSource.replaceChildren();
+    els.translationTarget.replaceChildren();
+    const languages = await translationClient?.listTranslationLanguages?.() || [];
+    const values = [...new Set(languages.map(value => String(value || '').toLowerCase()).filter(Boolean))].sort();
+    for (const code of values) {
+      const sourceOption = document.createElement('option');
+      sourceOption.value = code;
+      sourceOption.textContent = `${languageLabel(code)} (${code})`;
+      els.translationSource.append(sourceOption);
+      const targetOption = document.createElement('option');
+      targetOption.value = code;
+      targetOption.textContent = `${languageLabel(code)} (${code})`;
+      els.translationTarget.append(targetOption);
+    }
+    const documentLanguage = String(originalDocumentModel?.language || language()).toLowerCase().split(/[-_]/u)[0];
+    if (values.includes(documentLanguage)) els.translationSource.value = documentLanguage;
+    const preferredTarget = values.find(code => code === language() && code !== els.translationSource.value)
+      || values.find(code => code !== els.translationSource.value)
+      || '';
+    if (preferredTarget) els.translationTarget.value = preferredTarget;
+  }
+
+  async function prepareTranslationUi() {
+    translationPrepared = false;
+    translationJob = null;
+    translationDocument = null;
+    showingTranslation = false;
+    renderTranslationViewButtons();
+    els.translationStart.disabled = true;
+    els.translationStop.hidden = true;
+    els.translationStatus.textContent = '';
+    if (!translationClient || typeof globalThis.Translator?.create !== 'function') {
+      els.translationPrepare.disabled = true;
+      els.translationStatus.textContent = t().translationUnsupported;
+      return;
+    }
+    els.translationPrepare.disabled = false;
+    await fillTranslationLanguages();
+  }
+
+  async function prepareTranslationPair() {
+    const source = els.translationSource.value;
+    const target = els.translationTarget.value;
+    translationPrepared = false;
+    els.translationStart.disabled = true;
+    if (!source || !target || source === target) {
+      els.translationStatus.textContent = t().translationChoose;
+      return false;
+    }
+    els.translationStatus.textContent = t().translationPreparing;
+    const ready = await translationClient?.prepareTranslationPair?.(source, target, progress => {
+      if (Number.isFinite(progress)) {
+        els.translationStatus.textContent = `${t().translationPreparing} ${Math.round(progress * 100)}%`;
+      }
+    });
+    translationPrepared = Boolean(ready);
+    els.translationStart.disabled = !translationPrepared;
+    els.translationStatus.textContent = translationPrepared ? t().translationReady : t().translationPrepareFailed;
+    translationJob = null;
+    return translationPrepared;
+  }
+
+  async function ensureTranslationJob() {
+    if (translationJob || !originalDocumentModel) return translationJob;
+    const sourceSha256 = await documentFingerprint(originalDocumentModel);
+    translationJob = shared.createReadingTranslationJob({
+      client: translationPersistenceClient(),
+      bookId: currentBookId || 'web-session-document',
+      document: originalDocumentModel,
+      sourceLanguage: els.translationSource.value,
+      targetLanguage: els.translationTarget.value,
+      sourceSha256,
+      engine: 'browser-translator',
+      engineVersion: '1',
+      batchSize: 20,
+      onProgress(state) {
+        if (!state) return;
+        const done = Number(state.completedUnits) || 0;
+        const total = Number(state.totalUnits) || 0;
+        if (state.status === 'complete') {
+          els.translationStatus.textContent = t().translationComplete(done, total);
+          translationDocument = state.document;
+          renderTranslationViewButtons();
+        } else if (state.status === 'error' || state.status === 'model-unavailable') {
+          els.translationStatus.textContent = t().translationError;
+        } else {
+          els.translationStatus.textContent = t().translationWorking(done, total);
+          if (done > 0) translationDocument = state.document;
+        }
+      }
+    });
+    await translationJob.load();
+    const state = translationJob.getState();
+    if (state.completedUnits > 0) {
+      translationDocument = state.document;
+      renderTranslationViewButtons();
+    }
+    return translationJob;
+  }
+
+  async function runTranslation() {
+    if (translationRunning) return;
+    if (!translationPrepared && !(await prepareTranslationPair())) return;
+    const job = await ensureTranslationJob();
+    if (!job) return;
+    translationRunning = true;
+    translationStopRequested = false;
+    els.translationStop.hidden = false;
+    els.translationPrepare.disabled = true;
+    els.translationStart.disabled = true;
+    try {
+      let state = job.getState();
+      while (!translationStopRequested && state.status !== 'complete') {
+        state = await job.resumeNext();
+        if (state.status === 'error' || state.status === 'model-unavailable') break;
+      }
+      if (translationStopRequested && state.status !== 'complete') {
+        els.translationStatus.textContent = `${t().translationWorking(state.completedUnits, state.totalUnits)} ${t().translationStopped}`;
+      }
+      if (state.completedUnits > 0) {
+        translationDocument = state.document;
+        renderTranslationViewButtons();
+      }
+    } finally {
+      translationRunning = false;
+      els.translationStop.hidden = true;
+      els.translationPrepare.disabled = false;
+      els.translationStart.disabled = false;
+    }
+  }
+
+  async function switchTranslationView(useTranslation) {
+    const nextDocument = useTranslation ? translationDocument : originalDocumentModel;
+    if (!nextDocument?.blocks?.length || !readingSession) return;
+    const snapshot = readingSession.snapshot();
+    documentModel = nextDocument;
+    showingTranslation = Boolean(useTranslation);
+    readingSession = shared.createReadingSession({
+      blocks: documentModel.blocks,
+      initialIndex: snapshot.blockIndex
+    });
+    searchIndex = shared.createReadingSearchIndex(documentModel);
+    await searchIndex.build();
+    renderBlock();
+    await rebuildSpeech({ blockIndex: snapshot.blockIndex, unitIndex: snapshot.unitIndex || 0 });
+    renderTranslationViewButtons();
+    els.translationStatus.textContent = useTranslation ? t().translationShowing : t().translationShowingOriginal;
   }
 
   async function saveCurrentDocument() {
@@ -893,6 +1196,24 @@
   });
   els.rate.addEventListener('change', () => { void rebuildSpeech(); });
   els.searchForm.addEventListener('submit', runSearch);
+  els.translationPrepare.addEventListener('click', () => { void prepareTranslationPair(); });
+  els.translationStart.addEventListener('click', () => { void runTranslation(); });
+  els.translationStop.addEventListener('click', () => {
+    translationStopRequested = true;
+    els.translationStop.disabled = true;
+  });
+  els.translationOriginal.addEventListener('click', () => { void switchTranslationView(false); });
+  els.translationTranslated.addEventListener('click', () => { void switchTranslationView(true); });
+  els.translationSource.addEventListener('change', () => {
+    translationPrepared = false;
+    translationJob = null;
+    els.translationStart.disabled = true;
+  });
+  els.translationTarget.addEventListener('change', () => {
+    translationPrepared = false;
+    translationJob = null;
+    els.translationStart.disabled = true;
+  });
   els.save.addEventListener('click', () => { void saveCurrentDocument(); });
   els.libraryRefresh.addEventListener('click', () => { void Promise.all([renderLibrary(), renderQueue(), renderMarks()]); });
   els.bookmark.addEventListener('click', () => { void addBookmark(); });

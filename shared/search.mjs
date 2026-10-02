@@ -7,8 +7,26 @@ function normalize(value) {
     .trim();
 }
 
+export function queryMatches(text, query) {
+  const normalizedQuery = normalize(query);
+  if (!normalizedQuery) return false;
+  const normalizedText = normalize(text);
+  const words = normalizedQuery.split(/[^a-z0-9]+/).filter(Boolean);
+  return words.length > 0 && words.every(word => normalizedText.includes(word));
+}
+
 function visibleForLanguage(item, lang) {
   return !item?.lang || item.lang === lang;
+}
+
+function supplementalText(item) {
+  return [
+    ...(Array.isArray(item?.keywords) ? item.keywords : []),
+    item?.searchText || '',
+    item?.adaptedText || '',
+    Array.isArray(item?.categories) ? item.categories.join(' ') : '',
+    item?.body || ''
+  ].join(' ');
 }
 
 function resultFrom(kind, item) {
@@ -43,9 +61,10 @@ function resultFrom(kind, item) {
 }
 
 function searchableText(kind, item) {
-  if (kind === 'resource') return `${item.title || ''} ${item.category || ''}`;
-  if (kind === 'video') return `${item.title || ''} ${item.description || ''} ${item.excerpt || ''}`;
-  return `${item.title || ''} ${item.summary || ''} ${item.sourceName || ''}`;
+  const extra = supplementalText(item);
+  if (kind === 'resource') return `${item.title || ''} ${item.category || ''} ${extra}`;
+  if (kind === 'video') return `${item.title || ''} ${item.description || ''} ${item.excerpt || ''} ${extra}`;
+  return `${item.title || ''} ${item.summary || ''} ${item.sourceName || ''} ${extra}`;
 }
 
 function rank(result, query) {
@@ -85,14 +104,14 @@ export function searchContent(content = {}, query = '', lang = 'es') {
 
   for (const item of Array.isArray(content.resources) ? content.resources : []) {
     if (!visibleForLanguage(item, language)) continue;
-    if (normalize(searchableText('resource', item)).includes(term)) results.push(resultFrom('resource', item));
+    if (queryMatches(searchableText('resource', item), term)) results.push(resultFrom('resource', item));
   }
   for (const item of Array.isArray(content.videos) ? content.videos : []) {
-    if (normalize(searchableText('video', item)).includes(term)) results.push(resultFrom('video', item));
+    if (queryMatches(searchableText('video', item), term)) results.push(resultFrom('video', item));
   }
   for (const item of Array.isArray(content.news) ? content.news : []) {
     if (!visibleForLanguage(item, language)) continue;
-    if (normalize(searchableText('news', item)).includes(term)) results.push(resultFrom('news', item));
+    if (queryMatches(searchableText('news', item), term)) results.push(resultFrom('news', item));
   }
 
   return results.sort((a, b) => {

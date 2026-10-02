@@ -18,7 +18,8 @@
     "@capacitor/browser": "8.0.4",
     "@capacitor/core": "8.5.2",
     "@capacitor/share": "8.0.1",
-    "@onesignal/capacitor-plugin": "1.1.6"
+    "@onesignal/capacitor-plugin": "1.1.6",
+    "pdfjs-dist": "6.3.289"
   },
   "devDependencies": {
     "@capacitor/android": "8.5.2",

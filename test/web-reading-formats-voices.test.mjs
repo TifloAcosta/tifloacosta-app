@@ -1,0 +1,63 @@
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import test from 'node:test';
+
+const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
+
+test('web reader exposes common document and image formats', async () => {
+  const [html, source] = await Promise.all([read('index.html'), read('web-reading.js')]);
+  for (const extension of ['.docx','.epub','.odt','.rtf','.md','.markdown','.fb2','.png','.jpg','.jpeg','.webp']) {
+    assert.ok(html.includes(extension), `Missing accepted extension ${extension}`);
+  }
+  for (const token of [
+    'parseDocxArchive',
+    'parseEpubArchive',
+    'parseOdtArchive',
+    'parseRtfDocument',
+    'parseMarkdownDocument',
+    'parseFb2Document',
+    'loadZipBundle',
+    'isImageFile'
+  ]) {
+    assert.ok(source.includes(token), `Missing format handler ${token}`);
+  }
+  assert.ok(source.includes("code:'legacy-doc'") || source.includes("code: 'legacy-doc'"));
+});
+
+test('structured web format adapters cover DOCX EPUB ODT RTF Markdown and FB2', async () => {
+  const source = await read('shared/web-reading-format-adapters.mjs');
+  for (const token of [
+    'parseDocxArchive',
+    'parseEpubArchive',
+    'parseOdtArchive',
+    'parseRtfDocument',
+    'parseMarkdownDocument',
+    'parseFb2Document'
+  ]) {
+    assert.ok(source.includes(`export function ${token}`) || source.includes(`export async function ${token}`));
+  }
+  assert.ok(source.includes("word/document.xml"));
+  assert.ok(source.includes("META-INF/container.xml"));
+  assert.ok(source.includes("content.xml"));
+});
+
+test('web OCR accepts images as well as scanned PDFs', async () => {
+  const source = await read('web-reading.js');
+  assert.ok(source.includes('pendingImageFile'));
+  assert.ok(source.includes("['image/png','image/jpeg','image/webp']"));
+  assert.ok(source.includes('worker.recognize(file)'));
+});
+
+test('web reader exposes external voice providers separately from browser voices', async () => {
+  const [html, source, catalog] = await Promise.all([
+    read('index.html'),
+    read('web-reading.js'),
+    read('shared/reading-voice-catalog.mjs')
+  ]);
+  assert.ok(html.includes('id="reading-external-voices"'));
+  assert.ok(source.includes('WEB_EXTERNAL_VOICE_PROVIDERS'));
+  assert.ok(source.includes('confirmExternalProvider'));
+  for (const provider of ['Acapela Voices','Acapela My-Own-Voice','Code Factory TTS']) {
+    assert.ok(catalog.includes(provider), `Missing voice provider ${provider}`);
+  }
+});

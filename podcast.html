@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0D2B45">
+<meta name="tifloacosta-version" content="2.1">
+<meta name="description" content="Reproductor accesible del podcast Canal TifloAcosta, con episodios y controles de reproducción.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tifloacosta.com/podcast.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="TifloAcosta">
+<meta property="og:title" content="Podcast de TifloAcosta">
+<meta property="og:description" content="Escucha el podcast Canal TifloAcosta con un reproductor accesible.">
+<meta property="og:url" content="https://tifloacosta.com/podcast.html">
+<meta property="og:image" content="https://tifloacosta.com/tifloacosta-icon-512.png">
+<meta property="og:image:alt" content="Símbolo de TifloAcosta">
+<title>Podcast de TifloAcosta</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="tifloacosta-favicon.ico">
+<link rel="apple-touch-icon" href="tifloacosta-apple-touch-icon.png">
+<link rel="stylesheet" href="styles.css?v=1.2">
+<style>
+.podcast-player { border-top:.28rem solid var(--brand-red); }
+.podcast-current-title { font-weight:800; max-width:none; }
+.podcast-position { margin-block:1rem; }
+.podcast-position input[type="range"] { width:100%; }
+.podcast-episode-list { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,24rem),1fr)); gap:1rem; margin-top:1rem; }
+.podcast-episode-card { border:1px solid var(--border); border-top:.28rem solid var(--brand); border-radius:.9rem; padding:1rem; background:var(--surface); box-shadow:var(--shadow); }
+.podcast-episode-card h3 { margin-top:0; }
+.podcast-episode-card button[aria-current="true"] { box-shadow:inset 0 0 0 2px var(--brand-red); }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Saltar al contenido principal</a>
+<div class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="index.html" aria-label="TifloAcosta, inicio">
+      <img class="brand-mark" src="tifloacosta-simbolo-blanco.svg" alt="" aria-hidden="true" width="48" height="48">
+      <span class="brand-name">TifloAcosta</span>
+    </a>
+    <div class="language-switch">
+      <button type="button" id="lang-es" aria-pressed="true">Español</button>
+      <button type="button" id="lang-en" aria-pressed="false">English</button>
+    </div>
+  </div>
+</div>
+
+<main id="main" class="wrap" tabindex="-1">
+  <p><a id="back-home" class="button-link back-link" href="index.html">Volver a la pantalla principal</a></p>
+
+  <section class="hero">
+    <h1 id="podcast-heading">Podcast de TifloAcosta</h1>
+    <p id="podcast-intro">Escucha los episodios del Canal TifloAcosta con controles accesibles de reproducción.</p>
+  </section>
+
+  <p id="podcast-status" class="muted" role="status" aria-live="polite" aria-atomic="true">Cargando episodios…</p>
+
+  <section id="podcast-player" class="panel podcast-player" aria-labelledby="podcast-player-heading" hidden>
+    <h2 id="podcast-player-heading">Reproductor de Podcast</h2>
+    <h3 id="podcast-current-title" class="podcast-current-title" tabindex="-1"></h3>
+    <audio id="podcast-audio" preload="metadata"></audio>
+
+    <div id="podcast-controls" class="resource-actions" role="group" aria-label="Controles accesibles del Podcast">
+      <button id="podcast-rewind" type="button">Retroceder 30 segundos</button>
+      <button id="podcast-toggle" type="button">Reproducir</button>
+      <button id="podcast-forward" type="button">Avanzar 30 segundos</button>
+    </div>
+
+    <div class="podcast-position">
+      <label id="podcast-position-label" for="podcast-position">Posición del episodio</label>
+      <input id="podcast-position" type="range" min="0" max="0" step="1" value="0" aria-valuetext="0:00 / 0:00">
+    </div>
+    <p id="podcast-time" class="muted" aria-live="polite" aria-atomic="true"></p>
+  </section>
+
+  <section aria-labelledby="podcast-episodes-heading">
+    <h2 id="podcast-episodes-heading">Episodios</h2>
+    <div id="podcast-episodes" class="podcast-episode-list"></div>
+  </section>
+
+  <section aria-labelledby="podcast-services-heading">
+    <h2 id="podcast-services-heading">Escuchar en otros servicios</h2>
+    <div class="resource-actions">
+      <a id="podcast-spotify" class="button-link" href="https://open.spotify.com/show/6z5BbrUhRuMANB5BFJfdfB" target="_blank" rel="noopener noreferrer">Spotify</a>
+      <a id="podcast-apple" class="button-link" href="https://podcasts.apple.com/es/podcast/canal-tifloacosta/id1567846456" target="_blank" rel="noopener noreferrer">Apple Podcasts</a>
+      <a id="podcast-ivoox" class="button-link" href="https://www.ivoox.com/podcast-canal-tifloacosta_sq_f11282163_1.html" target="_blank" rel="noopener noreferrer">iVoox</a>
+      <a id="podcast-podimo" class="button-link" href="https://podimo.com/es/shows/canal-tifloacosta" target="_blank" rel="noopener noreferrer">Podimo</a>
+      <a id="podcast-radio" class="button-link" href="https://www.radio.es/podcast/canal-tifloacosta" target="_blank" rel="noopener noreferrer">radio.es</a>
+    </div>
+  </section>
+
+  <p><a id="back-home-bottom" class="button-link back-link" href="index.html">Volver a la pantalla principal</a></p>
+</main>
+
+<div class="site-footer">
+  <div class="wrap">
+    <p id="footer-text">TifloAcosta App · Versión 2.1.</p>
+    <p><a href="privacidad/">Política de privacidad</a></p>
+  </div>
+</div>
+
+<script src="podcast.js?v=1.0"></script>
+</body>
+</html>

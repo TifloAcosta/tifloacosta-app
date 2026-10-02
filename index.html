@@ -55,8 +55,10 @@
     <nav class="resource-actions" aria-label="Secciones de TifloAcosta App">
       <a class="button-link" id="home-open-actualidad" href="actualidad.html">Actualidad</a>
       <a class="button-link" id="home-open-resources" href="#resources">Recursos</a>
+      <a class="button-link" id="home-open-reading" href="#reading">Leer con TifloAcosta</a>
       <a class="button-link" id="home-open-news" href="#news">Novedades</a>
       <a class="button-link" id="home-open-videos" href="videos.html">Vídeos</a>
+      <a class="button-link" id="home-open-podcast" href="podcast.html">Podcast</a>
       <a class="button-link" id="home-open-book" href="#book">Mi libro</a>
       <a class="button-link" id="home-open-contact" href="#contact">Contacto y redes</a>
       <a class="button-link" id="home-open-privacy" href="#privacy">Privacidad y accesibilidad</a>
@@ -100,6 +102,115 @@
       <p id="result-status" class="muted" aria-live="polite" aria-atomic="true"></p>
       <div id="resource-results" class="resource-list" hidden></div>
     </section>
+    <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
+  </section>
+
+
+  <section id="reading-section" hidden tabindex="-1" aria-labelledby="reading-heading">
+    <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
+    <h2 id="reading-heading">Leer con TifloAcosta</h2>
+    <p id="reading-intro">Abre un archivo TXT o HTML, o pega un texto, para leerlo con navegación accesible y las voces disponibles en tu navegador.</p>
+
+    <div class="panel">
+      <label id="reading-file-label" for="reading-file">Abrir archivo TXT o HTML</label>
+      <input id="reading-file" type="file" accept=".txt,.html,.htm,.pdf,.docx,.epub,.odt,.rtf,.md,.markdown,.fb2,.png,.jpg,.jpeg,.webp,text/plain,text/html,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/epub+zip,application/vnd.oasis.opendocument.text,application/rtf,text/markdown,image/png,image/jpeg,image/webp">
+      <label id="reading-paste-label" for="reading-paste">O pega aquí el texto</label>
+      <textarea id="reading-paste" rows="6"></textarea>
+      <div id="reading-pdf-password-wrap" hidden>
+        <label id="reading-pdf-password-label" for="reading-pdf-password">Contraseña del PDF, si tiene</label>
+        <input id="reading-pdf-password" type="password" autocomplete="off">
+      </div>
+      <button id="reading-prepare" type="button">Preparar lectura</button>
+      <button id="reading-ocr" type="button" hidden>Reconocer con OCR</button>
+      <p id="reading-status" class="muted" role="status" aria-live="polite" aria-atomic="true"></p>
+    </div>
+
+    <section id="reading-reader" class="panel" hidden aria-labelledby="reading-document-title">
+      <h3 id="reading-document-title" tabindex="-1">Documento</h3>
+      <p id="reading-position" class="muted" aria-live="polite"></p>
+      <div id="reading-current-block" class="reading-web-block" tabindex="-1"></div>
+
+      <div class="resource-actions" aria-label="Controles de lectura">
+        <button id="reading-previous" type="button">Anterior</button>
+        <button id="reading-next" type="button">Siguiente</button>
+        <button id="reading-play" type="button">Reproducir</button>
+        <button id="reading-pause" type="button">Pausa</button>
+      </div>
+
+      <div class="settings-group">
+        <label id="reading-voice-label" for="reading-voice">Voz</label>
+        <select id="reading-voice"></select>
+        <label id="reading-rate-label" for="reading-rate">Velocidad</label>
+        <input id="reading-rate" type="range" min="0.5" max="2" step="0.1" value="1">
+        <output id="reading-rate-value" for="reading-rate">1</output>
+      </div>
+
+      <section id="reading-external-voices" aria-labelledby="reading-external-voices-heading">
+        <h3 id="reading-external-voices-heading">Conseguir más voces</h3>
+        <p id="reading-external-voices-intro">Consulta proveedores externos para probar, comprar o crear voces distintas de las que ya ofrece el navegador. La compatibilidad depende de cada servicio y plataforma.</p>
+        <div id="reading-external-voices-list" class="resource-list"></div>
+        <p id="reading-external-voices-status" class="muted" role="status" aria-live="polite"></p>
+      </section>
+
+      <form id="reading-search-form">
+        <label id="reading-search-label" for="reading-search">Buscar en el documento</label>
+        <div class="search-row">
+          <input id="reading-search" type="search" autocomplete="off">
+          <button id="reading-search-button" type="submit">Buscar</button>
+        </div>
+      </form>
+      <p id="reading-search-status" class="muted" aria-live="polite"></p>
+      <div id="reading-search-results" class="resource-list"></div>
+
+      <section id="reading-translation-web" aria-labelledby="reading-translation-heading">
+        <h3 id="reading-translation-heading">Traducción</h3>
+        <p id="reading-translation-intro">Traduce el documento con el motor disponible en tu navegador. El original se conserva.</p>
+        <label id="reading-translation-source-label" for="reading-translation-source">Idioma original</label>
+        <select id="reading-translation-source"></select>
+        <label id="reading-translation-target-label" for="reading-translation-target">Traducir a</label>
+        <select id="reading-translation-target"></select>
+        <div class="resource-actions">
+          <button id="reading-translation-prepare" type="button">Preparar idiomas</button>
+          <button id="reading-translation-start" type="button" disabled>Traducir</button>
+          <button id="reading-translation-stop" type="button" hidden>Detener después de este lote</button>
+        </div>
+        <div class="resource-actions">
+          <button id="reading-translation-original" type="button" hidden aria-pressed="true">Original</button>
+          <button id="reading-translation-translated" type="button" hidden aria-pressed="false">Traducción</button>
+        </div>
+        <p id="reading-translation-status" class="muted" role="status" aria-live="polite" aria-atomic="true"></p>
+      </section>
+
+      <div class="resource-actions">
+        <button id="reading-save" type="button">Guardar en mi biblioteca</button>
+        <button id="reading-bookmark" type="button">Añadir marcador</button>
+        <button id="reading-queue-toggle" type="button">Añadir a la cola</button>
+      </div>
+      <p id="reading-mark-status" class="muted" role="status" aria-live="polite"></p>
+    </section>
+
+    <section id="reading-library-web" aria-labelledby="reading-library-heading">
+      <h3 id="reading-library-heading">Mi biblioteca</h3>
+      <p id="reading-library-intro">Los documentos guardados permanecen en este navegador.</p>
+      <button id="reading-library-refresh" type="button">Actualizar biblioteca</button>
+      <p id="reading-library-status" class="muted" role="status" aria-live="polite"></p>
+      <div id="reading-library-list" class="resource-list"></div>
+    </section>
+
+    <section id="reading-queue-web" aria-labelledby="reading-queue-heading">
+      <h3 id="reading-queue-heading">Cola de lectura</h3>
+      <p id="reading-queue-intro">Ordena los documentos que quieres leer después. Nada se abrirá automáticamente.</p>
+      <p id="reading-queue-status" class="muted" role="status" aria-live="polite"></p>
+      <div id="reading-queue-list" class="resource-list"></div>
+    </section>
+
+    <section id="reading-marks-web" aria-labelledby="reading-marks-heading">
+      <h3 id="reading-marks-heading">Marcadores</h3>
+      <p id="reading-marks-intro">Guarda puntos de lectura del documento abierto para volver a ellos más tarde.</p>
+      <p id="reading-marks-status" class="muted" role="status" aria-live="polite"></p>
+      <div id="reading-marks-list" class="resource-list"></div>
+    </section>
+
     <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
   </section>
 
@@ -182,7 +293,7 @@
     <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
     <h2 id="privacy-heading">Privacidad y accesibilidad</h2>
     <h3 id="privacy-subheading">Privacidad</h3>
-    <p id="privacy-text">La app guarda en este navegador el idioma, los favoritos y los ajustes visuales. No necesitas crear una cuenta. Al visitar la app se carga GoatCounter para medir el uso del sitio y OneSignal para ofrecer las notificaciones; si activas estas últimas, el navegador solicita tu permiso. Los enlaces externos pueden recibir información técnica habitual de la navegación.</p>
+    <p id="privacy-text">La app guarda en este navegador el idioma, los favoritos, los ajustes visuales y, si utilizas la biblioteca de TifloLector, los documentos que decidas guardar junto con su progreso de lectura. La traducción compatible se realiza con el motor interno del navegador y el OCR de PDF se procesa localmente; los componentes necesarios se descargan sólo al activar cada función. No necesitas crear una cuenta. Al visitar la app se carga GoatCounter para medir el uso del sitio y OneSignal para ofrecer las notificaciones; si activas estas últimas, el navegador solicita tu permiso. Los enlaces externos pueden recibir información técnica habitual de la navegación.</p>
     <p><a class="button-link" id="privacy-full-policy" href="privacidad/">Leer la política de privacidad completa</a></p>
     <h3 id="accessibility-info-heading">Accesibilidad</h3>
     <p id="accessibility-info-text">La app usa encabezados, etiquetas y controles nativos, incluye un enlace para saltar al contenido y avisos para lector de pantalla. Respeta preferencias del sistema y permite ajustar tamaño, contraste, espaciado y grosor del texto. Si encuentras una barrera, puedes comunicarla mediante las opciones de contacto anteriores.</p>
@@ -274,13 +385,16 @@
 <script src="medical-studies.js?v=1.0"></script>
 <script src="app-core.js?v=1.6"></script>
 <script src="actualidad-core.js?v=1.0"></script>
-<script src="app.js?v=2.1"></script>
+<script src="shared-web.js?v=1.0"></script>
+<script src="web-reading.js?v=1.0"></script>
+<script src="app.js?v=2.2"></script>
 <script>
 (() => {
   'use strict';
 
   const views = {
     resources: document.getElementById('resources-view'),
+    reading: document.getElementById('reading-section'),
     news: document.getElementById('news-view'),
     book: document.getElementById('book-section'),
     contact: document.getElementById('contact-section'),
@@ -292,8 +406,8 @@
   const main = document.getElementById('main');
 
   const labels = {
-    es: { sections:'Secciones', actualidad:'Actualidad', resources:'Recursos', news:'Novedades', videos:'Vídeos', book:'Mi libro', contact:'Contacto y redes', privacy:'Privacidad y accesibilidad', privacyPolicy:'Política de privacidad', fullPrivacy:'Leer la política de privacidad completa', config:'Configuración', back:'Volver al inicio' },
-    en: { sections:'Sections', actualidad:'News', resources:'Resources', news:'What’s new', videos:'Videos', book:'My book', contact:'Contact and social', privacy:'Privacy and accessibility', privacyPolicy:'Privacy policy', fullPrivacy:'Read the full privacy policy', config:'Settings', back:'Back to home' }
+    es: { sections:'Secciones', actualidad:'Actualidad', resources:'Recursos', reading:'Leer con TifloAcosta', news:'Novedades', videos:'Vídeos', podcast:'Podcast', book:'Mi libro', contact:'Contacto y redes', privacy:'Privacidad y accesibilidad', privacyPolicy:'Política de privacidad', fullPrivacy:'Leer la política de privacidad completa', config:'Configuración', back:'Volver al inicio' },
+    en: { sections:'Sections', actualidad:'News', resources:'Resources', reading:'Read with TifloAcosta', news:'What’s new', videos:'Videos', podcast:'Podcast', book:'My book', contact:'Contact and social', privacy:'Privacy and accessibility', privacyPolicy:'Privacy policy', fullPrivacy:'Read the full privacy policy', config:'Settings', back:'Back to home' }
   };
 
   function localizeHomeNavigation() {
@@ -302,8 +416,10 @@
     document.getElementById('home-blocks-heading').textContent = text.sections;
     document.getElementById('home-open-actualidad').textContent = text.actualidad;
     document.getElementById('home-open-resources').textContent = text.resources;
+    document.getElementById('home-open-reading').textContent = text.reading;
     document.getElementById('home-open-news').textContent = text.news;
     document.getElementById('home-open-videos').textContent = text.videos;
+    document.getElementById('home-open-podcast').textContent = text.podcast;
     document.getElementById('home-open-book').textContent = text.book;
     document.getElementById('home-open-contact').textContent = text.contact;
     document.getElementById('home-open-privacy').textContent = text.privacy;

@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
+const readRepo = path => readFile(new URL(`../../${path}`, import.meta.url), 'utf8');
 
 test('reading settings load inherited values voices and apply effective speech settings', async () => {
   const screen = await read('src/screens/reading-settings.mjs');
@@ -44,15 +45,17 @@ test('voice and visual panels provide visible status feedback and explicit retur
 });
 
 test('voice settings open the provider catalog and refresh installed voices on resume', async () => {
-  const [screen, catalog, plugin, client, i18n] = await Promise.all([
+  const [screen, catalog, plugin, mobileClient, client, i18n] = await Promise.all([
     read('src/screens/reading-settings.mjs'),
     read('src/core/reading-voice-catalog.mjs'),
     read('src/native/reading-library-plugin.mjs'),
     read('src/core/reading-library-client.mjs'),
+    readRepo('shared/reading-library-client.mjs'),
     read('src/core/i18n.mjs')
   ]);
 
   assert.match(plugin, /openTtsVoiceInstaller/);
+  assert.match(mobileClient, /shared\/reading-library-client\.mjs/);
   assert.match(client, /openTtsVoiceInstaller/);
   assert.match(screen, /readingBook\.getMoreVoices/);
   assert.match(screen, /createReadingVoiceCatalog/);

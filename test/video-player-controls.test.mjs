@@ -4,17 +4,17 @@ import test from 'node:test';
 
 const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
-test('video player exposes three accessible controls with one-minute jumps', async () => {
+test('video player exposes three accessible controls with 30-second jumps', async () => {
   const [html, source] = await Promise.all([read('videos.html'), read('videos.js')]);
 
-  assert.match(html, /id="video-player-rewind"[^>]*disabled[^>]*>Retroceder 1 minuto</);
+  assert.match(html, /id="video-player-rewind"[^>]*disabled[^>]*>Retroceder 30 segundos</);
   assert.match(html, /id="video-player-toggle"[^>]*disabled[^>]*>Reproducir</);
-  assert.match(html, /id="video-player-forward"[^>]*disabled[^>]*>Avanzar 1 minuto</);
-  assert.match(source, /const SEEK_SECONDS = 60;/);
-  assert.match(source, /rewindOneMinute:\s*'Retroceder 1 minuto'/);
-  assert.match(source, /forwardOneMinute:\s*'Avanzar 1 minuto'/);
-  assert.match(source, /rewindOneMinute:\s*'Rewind 1 minute'/);
-  assert.match(source, /forwardOneMinute:\s*'Forward 1 minute'/);
+  assert.match(html, /id="video-player-forward"[^>]*disabled[^>]*>Avanzar 30 segundos</);
+  assert.match(source, /const SEEK_SECONDS = 30;/);
+  assert.match(source, /rewindThirtySeconds:\s*'Retroceder 30 segundos'/);
+  assert.match(source, /forwardThirtySeconds:\s*'Avanzar 30 segundos'/);
+  assert.match(source, /rewindThirtySeconds:\s*'Rewind 30 seconds'/);
+  assert.match(source, /forwardThirtySeconds:\s*'Forward 30 seconds'/);
 });
 
 test('custom controls drive the official YouTube iframe player and preserve focus return', async () => {

@@ -1,77 +1,50 @@
 import { Browser } from '@capacitor/browser';
+import {
+  READING_VOICE_PROVIDER_TYPES,
+  readingVoiceCatalogCopy,
+  normalizeVoiceProviders,
+  confirmExternalProvider
+} from '../../../shared/reading-voice-catalog.mjs';
 
-export const READING_VOICE_PROVIDER_TYPES = Object.freeze({
-  ANDROID_SYSTEM: 'android-system',
-  TIFLOLECTOR_SERVICE: 'tiflolector-service'
-});
+export { READING_VOICE_PROVIDER_TYPES, readingVoiceCatalogCopy, confirmExternalProvider };
 
-export const READING_VOICE_PROVIDERS = Object.freeze([
+export const READING_VOICE_PROVIDERS = Object.freeze(normalizeVoiceProviders([
   {
     id: 'acapela',
     name: 'Acapela TTS Voices',
-    type: READING_VOICE_PROVIDER_TYPES.ANDROID_SYSTEM,
+    type: READING_VOICE_PROVIDER_TYPES.SYSTEM,
+    platform: 'android',
     url: 'https://play.google.com/store/apps/details?id=com.acapelagroup.android.tts',
     packageName: 'com.acapelagroup.android.tts'
   },
   {
     id: 'vocalizer',
     name: 'Vocalizer TTS',
-    type: READING_VOICE_PROVIDER_TYPES.ANDROID_SYSTEM,
+    type: READING_VOICE_PROVIDER_TYPES.SYSTEM,
+    platform: 'android',
     url: 'https://play.google.com/store/apps/details?id=es.codefactory.vocalizertts',
     packageName: 'es.codefactory.vocalizertts'
   },
   {
     id: 'eloquence',
     name: 'Eloquence TTS',
-    type: READING_VOICE_PROVIDER_TYPES.ANDROID_SYSTEM,
+    type: READING_VOICE_PROVIDER_TYPES.SYSTEM,
+    platform: 'android',
     url: 'https://play.google.com/store/apps/details?id=com.codefactoryglobal.eloquencetts',
     packageName: 'com.codefactoryglobal.eloquencetts'
   }
-]);
+], 'android'));
 
-const COPY = Object.freeze({
-  es: {
-    heading: 'Conseguir más voces',
-    intro: 'Estos proveedores ofrecen voces o motores TTS compatibles con Android. Si instalas o compras una voz compatible, TifloLector podrá mostrarla junto con las demás voces disponibles en el sistema.',
-    systemHeading: 'Voces compatibles con Android',
-    systemDescription: 'Estas voces pueden utilizarse en TifloLector y también en otras aplicaciones que respeten el sistema TTS de Android.',
-    visit: name => `Visitar ${name}`,
-    nativeInstaller: 'Abrir también la gestión de voces de Android',
-    futureHeading: 'Servicios de voz para TifloLector',
-    futureDescription: 'La estructura queda preparada para añadir en el futuro servicios de voz que funcionen solo dentro de TifloLector, aunque Android no pueda utilizarlos como voces generales del sistema.',
-    leaveNotice: name => `Vas a abandonar TifloAcosta para visitar ${name}. La prueba, compra, instalación, cuenta y cualquier pago se gestionan directamente con el proveedor. Cuando termines, vuelve a TifloLector para actualizar las voces disponibles.`,
-    confirmExternalProvider: name => `Vas a abandonar TifloAcosta y abrir ${name} en la web. ¿Quieres continuar?`,
-    close: 'Volver a las voces',
-    unavailable: 'No se pudo abrir el destino externo.'
-  },
-  en: {
-    heading: 'Get more voices',
-    intro: 'These providers offer voices or TTS engines compatible with Android. If you install or buy a compatible voice, TifloLector can show it alongside the other voices available on the system.',
-    systemHeading: 'Voices compatible with Android',
-    systemDescription: 'These voices can be used in TifloLector and in other apps that respect Android system TTS.',
-    visit: name => `Visit ${name}`,
-    nativeInstaller: 'Also open Android voice management',
-    futureHeading: 'Voice services for TifloLector',
-    futureDescription: 'The structure is ready for future voice services that work only inside TifloLector, even when Android cannot use them as general system voices.',
-    leaveNotice: name => `You are leaving TifloAcosta to visit ${name}. Trials, purchases, installation, accounts and any payments are handled directly by the provider. When you finish, return to TifloLector to refresh the available voices.`,
-    confirmExternalProvider: name => `You are leaving TifloAcosta and opening ${name} on the web. Do you want to continue?`,
-    close: 'Back to voices',
-    unavailable: 'The external destination could not be opened.'
-  }
-});
-
-export function readingVoiceCatalogCopy(language = 'es') {
-  return COPY[String(language).toLowerCase().startsWith('en') ? 'en' : 'es'];
-}
-
-export function confirmExternalProvider(provider, language = 'es', confirmFn = globalThis.confirm) {
-  if (!provider || typeof confirmFn !== 'function') return false;
-  return confirmFn(readingVoiceCatalogCopy(language).confirmExternalProvider(provider.name));
-}
-
-export function createReadingVoiceCatalog({ root, client, returnFocus, openExternal = url => Browser.open({ url }) }) {
+export function createReadingVoiceCatalog({
+  root,
+  client,
+  returnFocus,
+  providers = READING_VOICE_PROVIDERS,
+  platform = 'android',
+  openExternal = url => Browser.open({ url })
+}) {
   const language = document.documentElement.lang || 'es';
-  const copy = readingVoiceCatalogCopy(language);
+  const copy = readingVoiceCatalogCopy(language, platform);
   const section = document.createElement('section');
   section.className = 'reading-panel reading-voice-catalog';
   section.hidden = true;
@@ -100,7 +73,7 @@ export function createReadingVoiceCatalog({ root, client, returnFocus, openExter
   status.setAttribute('role', 'status');
   status.setAttribute('aria-live', 'polite');
 
-  for (const provider of READING_VOICE_PROVIDERS.filter(item => item.type === READING_VOICE_PROVIDER_TYPES.ANDROID_SYSTEM)) {
+  for (const provider of normalizeVoiceProviders(providers, platform)) {
     const card = document.createElement('section');
     card.className = 'content-card';
     const providerHeading = document.createElement('h4');
@@ -111,7 +84,7 @@ export function createReadingVoiceCatalog({ root, client, returnFocus, openExter
     visit.type = 'button';
     visit.textContent = copy.visit(provider.name);
     visit.addEventListener('click', () => {
-      if (!confirmExternalProvider(provider, language)) return;
+      if (!provider.url || !confirmExternalProvider(provider, language)) return;
       status.textContent = copy.leaveNotice(provider.name);
       void Promise.resolve(openExternal(provider.url)).catch(() => {
         status.textContent = copy.unavailable;
@@ -124,6 +97,7 @@ export function createReadingVoiceCatalog({ root, client, returnFocus, openExter
   const nativeInstaller = document.createElement('button');
   nativeInstaller.type = 'button';
   nativeInstaller.textContent = copy.nativeInstaller;
+  nativeInstaller.hidden = !copy.nativeInstaller || typeof client?.openTtsVoiceInstaller !== 'function';
   nativeInstaller.addEventListener('click', () => {
     void (async () => {
       const result = await client.openTtsVoiceInstaller();

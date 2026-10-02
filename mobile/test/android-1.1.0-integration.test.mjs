@@ -17,7 +17,9 @@ test('Actualidad title delegates the exact news item to the common reader entry'
   assert.match(source, /openButton\.id\s*=\s*`news-open-\$\{item\.id\}`/);
   assert.match(source, /onOpenNews\?\.\(item,\s*openButton\.id\)/);
   assert.doesNotMatch(source, /openButton\.addEventListener\([\s\S]{0,160}nativeActions\?\.openExternal/);
-  assert.match(source, /actualidad\.original/);
+  const reader = await read('src/screens/reader.mjs');
+  assert.match(reader, /original\.textContent = t\('actualidad\.original'\)/);
+  assert.match(reader, /onOpenOriginal\(state\.url\)/);
 });
 
 test('normal app navigation exposes one reader route backed by the shared loader/session', async () => {

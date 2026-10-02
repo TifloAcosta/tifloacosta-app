@@ -1,14 +1,15 @@
 :root {
   --brand: #A61B1B;
-  --brand-deep: #741010;
-  --brand-surface: #741010;
+  --brand-deep: #7F1414;
+  --brand-surface: #7F1414;
   --brand-on-surface: #FFFFFF;
-  --background: #FFF8F7;
+  --background: #FFFFFF;
   --surface: #FFFFFF;
-  --text: #211A1A;
-  --muted-text: #665C5C;
-  --border: #D8CACA;
-  --focus: #7A3E00;
+  --surface-alt: #FFF4F4;
+  --text: #111111;
+  --muted-text: #4A3A3A;
+  --border: #D9B8B8;
+  --focus: #005FCC;
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -20,14 +21,16 @@
 }
 
 html.theme-dark {
-  --brand: #E36A6A;
-  --brand-deep: #F09A9A;
-  --background: #171212;
-  --surface: #231B1B;
-  --text: #FFF8F7;
-  --muted-text: #D9CCCC;
-  --border: #5A4444;
-  --focus: #FFD18A;
+  --brand: #A61B1B;
+  --brand-deep: #7F1414;
+  --brand-surface: #7F1414;
+  --background: #0B0B0B;
+  --surface: #151010;
+  --surface-alt: #201414;
+  --text: #FFFFFF;
+  --muted-text: #D7CACA;
+  --border: #6E5555;
+  --focus: #FFE36E;
 }
 
 * {
@@ -84,15 +87,15 @@ body {
   flex-wrap: wrap;
   gap: var(--space-3);
   margin-block-end: var(--space-5);
-  padding: var(--space-3) var(--space-4);
-  border-radius: 0.75rem;
-  background: var(--brand-surface);
+  padding: 0.65rem var(--space-4);
+  border-radius: 0.9rem;
+  background: linear-gradient(135deg, var(--brand-deep), var(--brand));
   color: var(--brand-on-surface);
 }
 
 .app-brand-mark {
   flex: 0 0 auto;
-  inline-size: clamp(3rem, 16vw, 4.5rem);
+  inline-size: 2.8rem;
   block-size: auto;
   max-inline-size: 100%;
 }
@@ -101,7 +104,7 @@ body {
   flex: 1 1 12rem;
   margin: 0;
   color: inherit;
-  font-size: clamp(1.75rem, 7vw, 2.5rem);
+  font-size: 1.35rem;
   line-height: 1.15;
 }
 
@@ -152,7 +155,7 @@ button:focus-visible,
 a:focus-visible,
 input:focus-visible,
 select:focus-visible {
-  outline: 0.2rem solid var(--focus);
+  outline: 0.25rem solid var(--focus);
   outline-offset: 0.2rem;
 }
 
@@ -203,7 +206,7 @@ select:focus-visible {
 .content-card,
 .result-card {
   border: 0.1rem solid var(--border);
-  border-radius: 0.75rem;
+  border-radius: 0.9rem;
   padding: var(--space-4);
   background: var(--surface);
 }
@@ -305,7 +308,7 @@ select:focus-visible {
 .video-player-section {
   margin-block: var(--space-4) var(--space-5);
   border: 0.1rem solid var(--border);
-  border-radius: 0.75rem;
+  border-radius: 0.9rem;
   padding: var(--space-4);
   background: var(--surface);
 }
@@ -424,13 +427,15 @@ select:focus-visible {
 
 @media (prefers-color-scheme: dark) {
   html:not(.theme-light) {
-    --brand: #E36A6A;
-    --brand-deep: #F09A9A;
-    --background: #171212;
-    --surface: #231B1B;
-    --text: #FFF8F7;
-    --muted-text: #D9CCCC;
-    --border: #5A4444;
-    --focus: #FFD18A;
+    --brand: #A61B1B;
+    --brand-deep: #7F1414;
+    --brand-surface: #7F1414;
+    --background: #0B0B0B;
+    --surface: #151010;
+    --surface-alt: #201414;
+    --text: #FFFFFF;
+    --muted-text: #D7CACA;
+    --border: #6E5555;
+    --focus: #FFE36E;
   }
 }

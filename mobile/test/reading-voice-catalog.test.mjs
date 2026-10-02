@@ -10,17 +10,29 @@ const read = async path => {
   }
 };
 
-test('voice catalog exposes current Android-system providers and reserves future TifloLector services', async () => {
-  const catalog = await read('src/core/reading-voice-catalog.mjs');
+const readRepo = async path => {
+  try {
+    return await readFile(new URL(`../../${path}`, import.meta.url), 'utf8');
+  } catch {
+    return '';
+  }
+};
+
+test('voice catalog keeps Android providers in the mobile adapter and shared provider types platform-neutral', async () => {
+  const [catalog, sharedCatalog] = await Promise.all([
+    read('src/core/reading-voice-catalog.mjs'),
+    readRepo('shared/reading-voice-catalog.mjs')
+  ]);
 
   for (const provider of ['Acapela', 'Vocalizer', 'Eloquence']) {
     assert.ok(catalog.includes(provider), `Missing provider ${provider}`);
   }
-  assert.match(catalog, /android-system/);
-  assert.match(catalog, /tiflolector-service/);
-  assert.match(catalog, /com\.acapelagroup\.android\.tts/);
-  assert.match(catalog, /es\.codefactory\.vocalizertts/);
-  assert.match(catalog, /com\.codefactoryglobal\.eloquencetts/);
+  assert.ok(catalog.includes("platform: 'android'"));
+  assert.ok(catalog.includes('READING_VOICE_PROVIDER_TYPES.SYSTEM'));
+  assert.ok(sharedCatalog.includes("'tiflolector-service'"));
+  assert.ok(catalog.includes('com.acapelagroup.android.tts'));
+  assert.ok(catalog.includes('es.codefactory.vocalizertts'));
+  assert.ok(catalog.includes('com.codefactoryglobal.eloquencetts'));
 });
 
 test('voice settings open an accessible provider catalog, warn before leaving, and keep native installer access', async () => {
@@ -37,17 +49,21 @@ test('voice settings open an accessible provider catalog, warn before leaving, a
   assert.match(catalog, /Browser\.open|openExternal/);
 });
 
-test('voice catalog copy explains system-wide compatibility and future TifloLector-only services in Spanish and English', async () => {
-  const catalog = await read('src/core/reading-voice-catalog.mjs');
+test('shared voice catalog carries platform-specific copy for Android web and iOS in Spanish and English', async () => {
+  const sharedCatalog = await readRepo('shared/reading-voice-catalog.mjs');
 
   for (const text of [
     'compatibles con Android',
     'compatible with Android',
-    'solo dentro de TifloLector',
-    'only inside TifloLector',
+    'Voces disponibles en el navegador',
+    'voices exposed by the browser',
+    'Voces compatibles con iOS',
+    'Voices compatible with iOS',
+    'servicios de voz',
+    'voice services',
     'Vas a abandonar TifloAcosta',
     'You are leaving TifloAcosta'
   ]) {
-    assert.ok(catalog.includes(text), `Missing catalog copy: ${text}`);
+    assert.ok(sharedCatalog.includes(text), `Missing catalog copy: ${text}`);
   }
 });

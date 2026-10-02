@@ -92,3 +92,31 @@ a { color:var(--accent); text-decoration-thickness:.12em; text-underline-offset:
 .offline-shell { min-height:calc(100vh - 12rem); display:grid; align-items:center; padding-block:2rem; } .offline-card { background:var(--surface); border:1px solid var(--border); border-left:.4rem solid var(--brand-red); border-radius:1rem; padding:clamp(1.2rem,4vw,2rem); box-shadow:var(--shadow-strong); }
 @media (max-width:38rem) { .book-layout { grid-template-columns:1fr; } .book-cover { max-width:11rem; } .brand-mark { width:2.45rem; height:2.45rem; } .brand-name { font-size:1.2rem; } .language-switch { width:100%; } .language-switch button { flex:1 1 8rem; } }
 @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition:none !important; animation:none !important; } }
+
+/* Shared TifloReader web surface */
+#reading-section textarea {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  font: inherit;
+  line-height: 1.5;
+}
+#reading-reader {
+  margin-top: 1rem;
+}
+.reading-web-block {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: .7rem;
+  background: var(--surface-alt);
+  min-height: 4rem;
+}
+.reading-web-block:focus {
+  outline: .2rem solid currentColor;
+  outline-offset: .2rem;
+}
+#reading-search-results .resource-card button {
+  width: 100%;
+  text-align: left;
+}

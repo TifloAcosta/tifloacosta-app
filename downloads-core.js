@@ -11,6 +11,10 @@
   ]);
 
   function normalizeUrl(value) {
+    const shared = globalThis.TIFLO_SHARED;
+    if (shared && typeof shared.normalizeDownloadUrl === 'function') {
+      return shared.normalizeDownloadUrl(value);
+    }
     try {
       const url = new URL(String(value || '').trim());
       return url.protocol === 'http:' || url.protocol === 'https:' ? url : null;
@@ -37,6 +41,10 @@
   }
 
   function classifyUrl(value) {
+    const shared = globalThis.TIFLO_SHARED;
+    if (shared && typeof shared.classifyDownloadUrl === 'function') {
+      return shared.classifyDownloadUrl(value);
+    }
     const url = normalizeUrl(value);
     if (!url) return { provider: 'invalid', url: null };
     const host = url.hostname.toLowerCase();
@@ -58,6 +66,10 @@
   }
 
   function resolveLocal(value) {
+    const shared = globalThis.TIFLO_SHARED;
+    if (shared && typeof shared.resolveDownloadLocal === 'function') {
+      return shared.resolveDownloadLocal(value);
+    }
     const classified = classifyUrl(value);
     const { provider, url } = classified;
     if (!url) return { kind: 'invalid', provider: 'invalid', url: null, items: [] };
@@ -93,6 +105,10 @@
   }
 
   function filterResults(items, query = '', type = 'all') {
+    const shared = globalThis.TIFLO_SHARED;
+    if (shared && typeof shared.filterDownloadResults === 'function') {
+      return shared.filterDownloadResults(items, query, type);
+    }
     const term = normalizeText(query);
     const wantedType = String(type || 'all').toLowerCase();
     return (Array.isArray(items) ? items : []).filter(item => {
@@ -105,6 +121,10 @@
   }
 
   function formatBytes(bytes) {
+    const shared = globalThis.TIFLO_SHARED;
+    if (shared && typeof shared.formatDownloadBytes === 'function') {
+      return shared.formatDownloadBytes(bytes);
+    }
     const value = Number(bytes);
     if (!Number.isFinite(value) || value < 0) return '';
     if (value < 1024) return `${value} B`;

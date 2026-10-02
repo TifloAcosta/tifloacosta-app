@@ -355,7 +355,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
             button.textContent = action.label;
             button.addEventListener('click', () => openReader(story, button));
             actions.append(button);
-          } else {
+          } else if (story.editorialState === 'source-only') {
             const link = document.createElement('a');
             link.className = 'button-link';
             link.href = story.originalUrl;

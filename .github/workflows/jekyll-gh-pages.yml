@@ -24,7 +24,12 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
+      - name: Install shared web build dependencies
+        working-directory: mobile
+        run: npm ci
+      - name: Build shared web bridge
+        run: node mobile/scripts/build-shared-web.mjs
       - name: Synchronize Actualidad
         run: node scripts/sync-actualidad.mjs
       - name: Synchronize Accessible apps

@@ -4,6 +4,7 @@
   const APP_VERSION = '2.1';
   const core = window.TIFLO_APP_CORE;
   const coreActualidad = window.TIFLO_ACTUALIDAD_CORE;
+  const shared = window.TIFLO_SHARED || null;
   const data = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];
   const $ = (selector) => document.querySelector(selector);
 
@@ -58,7 +59,7 @@
       contact: 'Contacto y redes', contactDirect: 'Contacto', contactFollow: 'Sígueme', contactPodcast: 'Escucha el podcast',
       about: { heading: 'Sobre Tony', text: 'Tony Acosta es el autor del libro y la persona que presenta los contenidos y vías de contacto de TifloAcosta reunidos en esta aplicación.' },
       externalLinks: 'Los enlaces de esta sección, del catálogo, de Amazon y de YouTube abren servicios externos, sujetos a sus propias condiciones y prácticas de privacidad.',
-      privacy: { heading: 'Privacidad y accesibilidad', privacyHeading: 'Privacidad', text: 'La app guarda en este navegador el idioma, los favoritos y los ajustes visuales. No necesitas crear una cuenta. Al visitar la app se carga GoatCounter para medir el uso del sitio y OneSignal para ofrecer las notificaciones; si activas estas últimas, el navegador solicita tu permiso. Los enlaces externos pueden recibir información técnica habitual de la navegación.', accessibilityHeading: 'Accesibilidad', accessibilityText: 'La app usa encabezados, etiquetas y controles nativos, incluye un enlace para saltar al contenido y avisos para lector de pantalla. Respeta preferencias del sistema y permite ajustar tamaño, contraste, espaciado y grosor del texto. Si encuentras una barrera, puedes comunicarla mediante las opciones de contacto anteriores.' },
+      privacy: { heading: 'Privacidad y accesibilidad', privacyHeading: 'Privacidad', text: 'La app guarda en este navegador el idioma, los favoritos, los ajustes visuales y, si utilizas la biblioteca de TifloLector, los documentos que decidas guardar junto con su progreso de lectura. La traducción compatible se realiza con el motor interno del navegador y el OCR de PDF se procesa localmente; los componentes necesarios se descargan sólo al activar cada función. No necesitas crear una cuenta. Al visitar la app se carga GoatCounter para medir el uso del sitio y OneSignal para ofrecer las notificaciones; si activas estas últimas, el navegador solicita tu permiso. Los enlaces externos pueden recibir información técnica habitual de la navegación.', accessibilityHeading: 'Accesibilidad', accessibilityText: 'La app usa encabezados, etiquetas y controles nativos, incluye un enlace para saltar al contenido y avisos para lector de pantalla. Respeta preferencias del sistema y permite ajustar tamaño, contraste, espaciado y grosor del texto. Si encuentras una barrera, puedes comunicarla mediante las opciones de contacto anteriores.' },
       contactLabels: { whatsapp: 'Contactar por WhatsApp', email: 'Enviar correo electrónico', instagram: 'Instagram', facebookChannel: 'Facebook — Canal TifloAcosta', facebookPersonal: 'Facebook — Tony Acosta', spotify: 'Spotify', applePodcasts: 'Apple Podcasts', ivoox: 'iVoox', podimo: 'Podimo', radio: 'radio.es' },
       found: n => `${n} recurso${n === 1 ? '' : 's'} encontrado${n === 1 ? '' : 's'}.`, categoryFound: (cat,n) => `Categoría ${cat}. ${n} recurso${n === 1 ? '' : 's'} encontrado${n === 1 ? '' : 's'}.`, favFound: n => `${n} favorito${n === 1 ? '' : 's'}.`,
       noResults: 'No hay recursos que coincidan.', noFavorites: 'Todavía no hay favoritos guardados.', newBadge: 'Nuevo', open: 'Abrir recurso', addFav: 'Añadir a favoritos', removeFav: 'Quitar de favoritos',
@@ -97,7 +98,7 @@
       contact: 'Contact and social', contactDirect: 'Contact', contactFollow: 'Follow TifloAcosta', contactPodcast: 'Listen to the podcast',
       about: { heading: 'About Tony', text: 'Tony Acosta is the author of the book and the person presenting the TifloAcosta content and contact options collected in this application.' },
       externalLinks: 'Links in this section, the catalog, Amazon and YouTube open external services governed by their own terms and privacy practices.',
-      privacy: { heading: 'Privacy and accessibility', privacyHeading: 'Privacy', text: 'The app stores your language, favorites and display settings in this browser. You do not need to create an account. GoatCounter loads when you visit to measure site use, and OneSignal loads to provide notifications; if you activate them, the browser asks for permission. External links may receive the usual technical browsing information.', accessibilityHeading: 'Accessibility', accessibilityText: 'The app uses headings, labels and native controls, and provides a skip link and screen-reader announcements. It respects system preferences and lets you adjust text size, contrast, spacing and weight. If you encounter a barrier, you can report it through the contact options above.' },
+      privacy: { heading: 'Privacy and accessibility', privacyHeading: 'Privacy', text: 'The app stores your language, favorites and display settings in this browser. If you use the TifloReader library, it also stores the documents you choose to save and their reading progress locally. Supported translation uses the browser’s internal engine and PDF OCR is processed locally; required components are downloaded only when you activate each feature. You do not need to create an account. GoatCounter loads when you visit to measure site use, and OneSignal loads to provide notifications; if you activate them, the browser asks for permission. External links may receive the usual technical browsing information.', accessibilityHeading: 'Accessibility', accessibilityText: 'The app uses headings, labels and native controls, and provides a skip link and screen-reader announcements. It respects system preferences and lets you adjust text size, contrast, spacing and weight. If you encounter a barrier, you can report it through the contact options above.' },
       contactLabels: { whatsapp: 'Contact on WhatsApp', email: 'Send email', instagram: 'Instagram', facebookChannel: 'Facebook — Canal TifloAcosta', facebookPersonal: 'Facebook — Tony Acosta', spotify: 'Spotify', applePodcasts: 'Apple Podcasts', ivoox: 'iVoox', podimo: 'Podimo', radio: 'radio.es' },
       found: n => `${n} resource${n === 1 ? '' : 's'} found.`, categoryFound: (cat,n) => `${cat} category. ${n} resource${n === 1 ? '' : 's'} found.`, favFound: n => `${n} favorite${n === 1 ? '' : 's'}.`,
       noResults: 'No matching resources were found.', noFavorites: 'No favorites have been saved yet.', newBadge: 'New', open: 'Open resource', addFav: 'Add to favorites', removeFav: 'Remove from favorites',
@@ -125,23 +126,53 @@
   let actualidadItems = [];
   let actualidadLoaded = false;
   let resourcePlatform = 'all';
-  const storedFavorites = core.readStoredJson(storage,'tifloFavorites',[]);
+  const webFavoritesStore = shared && typeof shared.createFavoritesStore === 'function'
+    ? shared.createFavoritesStore(storage, { key:'tifloFavorites', legacyKind:'resource', storageFormat:'ids' })
+    : null;
+  const storedFavorites = webFavoritesStore
+    ? webFavoritesStore.list().map(ref => ref.id)
+    : core.readStoredJson(storage,'tifloFavorites',[]);
   let favorites = new Set(Array.isArray(storedFavorites) ? storedFavorites.filter(id=>typeof id==='string') : []);
   function isStandalone(){ return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true; }
 
   const prefDefaults = { textSize:'normal', theme:'auto', lineSpacing:'normal', bold:false };
+  function normalizeDisplayPrefs(value = {}) {
+    const source = value && typeof value === 'object' && !Array.isArray(value) ? value : {};
+    if (shared && typeof shared.normalizePreferences === 'function') {
+      const normalized = shared.normalizePreferences({
+        lang,
+        textSize: source.textSize,
+        theme: source.theme,
+        spacing: source.lineSpacing,
+        bold: source.bold
+      });
+      return {
+        textSize: normalized.textSize,
+        theme: normalized.theme,
+        lineSpacing: normalized.spacing,
+        bold: normalized.bold
+      };
+    }
+    return {
+      textSize: ['normal','large','xlarge','max'].includes(source.textSize) ? source.textSize : prefDefaults.textSize,
+      theme: ['auto','light','dark'].includes(source.theme) ? source.theme : prefDefaults.theme,
+      lineSpacing: ['normal','comfortable','wide'].includes(source.lineSpacing) ? source.lineSpacing : prefDefaults.lineSpacing,
+      bold: typeof source.bold === 'boolean' ? source.bold : prefDefaults.bold
+    };
+  }
   const storedPrefs = core.readStoredJson(storage,'tifloDisplayPrefs',{});
-  const validPrefs = storedPrefs && typeof storedPrefs === 'object' && !Array.isArray(storedPrefs) ? storedPrefs : {};
-  let prefs = {
-    textSize: ['normal','large','xlarge','max'].includes(validPrefs.textSize) ? validPrefs.textSize : prefDefaults.textSize,
-    theme: ['auto','light','dark'].includes(validPrefs.theme) ? validPrefs.theme : prefDefaults.theme,
-    lineSpacing: ['normal','comfortable','wide'].includes(validPrefs.lineSpacing) ? validPrefs.lineSpacing : prefDefaults.lineSpacing,
-    bold: typeof validPrefs.bold === 'boolean' ? validPrefs.bold : prefDefaults.bold
-  };
+  let prefs = normalizeDisplayPrefs(storedPrefs);
 
-  const resourcesForLanguage = () => data.filter(item => item.lang === lang);
-  const categories = () => [...new Set(resourcesForLanguage().map(item => item.category))].sort((a,b) => a.localeCompare(b,lang));
-  const saveFavorites = () => core.writeStoredJson(storage,'tifloFavorites',[...favorites]);
+  const resourcesForLanguage = () => shared?.resourcesForLanguage
+    ? shared.resourcesForLanguage(data, lang)
+    : data.filter(item => item.lang === lang);
+  const categories = () => shared?.resourceCategories
+    ? shared.resourceCategories(data, lang)
+    : [...new Set(resourcesForLanguage().map(item => item.category))].sort((a,b) => a.localeCompare(b,lang));
+  const saveFavorites = () => {
+    if (webFavoritesStore) return;
+    core.writeStoredJson(storage,'tifloFavorites',[...favorites]);
+  };
   const savePrefs = () => core.writeStoredJson(storage,'tifloDisplayPrefs',prefs);
 
   const platformCopy = {
@@ -199,12 +230,9 @@
   };
 
   function resourceMatchesPlatform(item, platform=resourcePlatform) {
-    if (platform === 'all') return true;
-    const haystack=`${String(item?.category||'')} ${String(item?.title||'')}`.toLowerCase();
-    if (platform === 'android') return /\bandroid\b|\btalkback\b|\bjieshuo\b/i.test(haystack);
-    if (platform === 'iphone') return /\biphone\b|\bipad\b|\bios\b|\batajos?\b|\bshortcuts?\b/i.test(haystack);
-    if (platform === 'windows') return /\bwindows\b|\bjaws\b|\bnvda\b/i.test(haystack);
-    return true;
+    return shared?.resourceMatchesPlatform
+      ? shared.resourceMatchesPlatform(item, platform)
+      : platform === 'all';
   }
 
   function platformFiltered(items) {
@@ -311,9 +339,15 @@
       if(result==='shared') dialog.close();
     });
     favoriteButton.addEventListener('click',()=>{
-      const nowFavorite=!favorites.has(item.id);
-      if(nowFavorite) favorites.add(item.id); else favorites.delete(item.id);
-      saveFavorites();
+      let nowFavorite;
+      if (webFavoritesStore) {
+        nowFavorite = webFavoritesStore.toggle({ kind:'resource', id:item.id });
+        favorites = new Set(webFavoritesStore.list().map(ref => ref.id));
+      } else {
+        nowFavorite=!favorites.has(item.id);
+        if(nowFavorite) favorites.add(item.id); else favorites.delete(item.id);
+        saveFavorites();
+      }
       const card=trigger.closest?trigger.closest('.resource-card'):null;
       const cardFavorite=card?card.querySelector('[data-favorite-action="true"]'):null;
       if(cardFavorite) {
@@ -383,12 +417,16 @@
     article.append(h3,meta); return article;
   }
 
-  function renderNews(){ const c=copy[lang],items=resourcesForLanguage().filter(item=>item.new).sort(core.compareNewsItems).slice(0,3); els.newsList.innerHTML=''; items.forEach(item=>els.newsList.append(makeNewsItem(item))); els.newsCount.textContent=c.newsCount(items.length); }
+  function renderNews(){ const c=copy[lang],items=(shared?.newestResources ? shared.newestResources(data,{lang,limit:3}) : resourcesForLanguage().filter(item=>item.new).slice(0,3)).sort(core.compareNewsItems); els.newsList.innerHTML=''; items.forEach(item=>els.newsList.append(makeNewsItem(item))); els.newsCount.textContent=c.newsCount(items.length); }
   function renderCategories(){ const c=copy[lang]; els.category.innerHTML=''; const p=document.createElement('option'); p.value='';p.textContent=c.categoryPlaceholder;els.category.append(p);categories().forEach(cat=>{const o=document.createElement('option');o.value=cat;o.textContent=cat;els.category.append(o);}); }
   function showResults(items,message,emptyMessage){ els.results.innerHTML='';els.results.hidden=false;els.clearResults.hidden=false;els.resultStatus.textContent=message;if(!items.length){const p=document.createElement('p');p.className='no-results';p.textContent=emptyMessage;els.results.append(p);return;}items.forEach(item=>els.results.append(makeCard(item))); }
   function clearResults(){els.results.innerHTML='';els.results.hidden=true;els.clearResults.hidden=true;els.resultStatus.textContent='';els.category.value='';els.search.value='';els.favoritesButton.removeAttribute('data-active');resourcePlatform='all';updatePlatformControls();}
-  function searchResources(){const c=copy[lang],term=els.search.value.trim();if(!term){clearResults();els.resultStatus.textContent=c.noResults;return;}els.category.value='';els.favoritesButton.removeAttribute('data-active');const items=platformFiltered(resourcesForLanguage().filter(item=>core.resourceMatches(item,term)));showResults(items,c.found(items.length),c.noResults);}
-  function showCategory(cat){const c=copy[lang];els.search.value='';els.favoritesButton.removeAttribute('data-active');if(!cat){clearResults();return;}const items=platformFiltered(resourcesForLanguage().filter(item=>item.category===cat));showResults(items,c.categoryFound(cat,items.length),c.noResults);}
+  function searchResources(){const c=copy[lang],term=els.search.value.trim();if(!term){clearResults();els.resultStatus.textContent=c.noResults;return;}els.category.value='';els.favoritesButton.removeAttribute('data-active');const items=shared?.selectResources
+  ? shared.selectResources(data,{lang,platform:resourcePlatform,query:term})
+  : platformFiltered(resourcesForLanguage().filter(item=>core.resourceMatches(item,term)));showResults(items,c.found(items.length),c.noResults);}
+  function showCategory(cat){const c=copy[lang];els.search.value='';els.favoritesButton.removeAttribute('data-active');if(!cat){clearResults();return;}const items=shared?.selectResources
+  ? shared.selectResources(data,{lang,platform:resourcePlatform,category:cat})
+  : platformFiltered(resourcesForLanguage().filter(item=>item.category===cat));showResults(items,c.categoryFound(cat,items.length),c.noResults);}
   function showFavorites(){const c=copy[lang];els.search.value='';els.category.value='';els.favoritesButton.setAttribute('data-active','true');const items=platformFiltered(resourcesForLanguage().filter(item=>favorites.has(item.id)));showResults(items,c.favFound(items.length),c.noFavorites);}
   function rerenderCurrentResults(){if(els.favoritesButton.getAttribute('data-active')==='true')return showFavorites();if(els.category.value)return showCategory(els.category.value);if(els.search.value.trim())return searchResources();const c=copy[lang],items=platformFiltered(resourcesForLanguage());showResults(items,c.found(items.length),c.noResults);}
 
@@ -427,7 +465,7 @@
   }
 
   function saveDisplaySettings(message) {
-    prefs={textSize:els.textSize.value,theme:els.theme.value,lineSpacing:els.spacing.value,bold:els.bold.checked};
+    prefs=normalizeDisplayPrefs({textSize:els.textSize.value,theme:els.theme.value,lineSpacing:els.spacing.value,bold:els.bold.checked});
     savePrefs();
     applyPrefs();
     els.settingsStatus.textContent=message;

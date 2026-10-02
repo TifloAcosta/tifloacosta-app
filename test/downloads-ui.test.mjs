@@ -41,12 +41,15 @@ test('pasted mobile URLs reach TifloAcosta validation instead of browser URL con
   assert.match(source, /urlInput\.spellcheck = false/);
 });
 
-test('filters do not move focus and every result gets its own download link', async () => {
+test('filters do not move focus and every result gets its own download action', async () => {
   const source = await read('downloads.js');
   assert.match(source, /resultSearch\.addEventListener\('input', applyFilters\)/);
   assert.match(source, /typeFilter\.addEventListener\('change', applyFilters\)/);
-  assert.match(source, /const link = element\('a'/);
-  assert.match(source, /link\.href = item\.url/);
+  assert.match(source, /const download = element\('button'/);
+  assert.match(source, /saveDownloadItem\(item, download\)/);
+  assert.match(source, /response\.blob\(\)/);
+  assert.match(source, /anchor\.download = filename/);
+  assert.match(source, /trigger\.focus\(\)/);
 });
 
 test('unknown sizes stay unknown instead of becoming zero bytes', async () => {

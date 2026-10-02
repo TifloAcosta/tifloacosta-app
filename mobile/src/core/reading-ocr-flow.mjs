@@ -35,11 +35,13 @@ function firstMissingPage(pages, pageCount) {
   return null;
 }
 
-export function createReadingOcrFlow({ client, bookId, pageCount, script = 'latin', password = '' } = {}) {
+export function createReadingOcrFlow({ client, bookId, pageCount, script = 'latin', password = '', engine = 'mlkit', engineVersion = '1' } = {}) {
   const cleanBookId = String(bookId ?? '').trim();
   const totalUnits = nonNegativeInteger(pageCount, 0);
   const selectedScript = normalizeScript(script);
   const transientPassword = String(password ?? '');
+  const selectedEngine = String(engine ?? 'mlkit').trim().toLowerCase() || 'mlkit';
+  const selectedEngineVersion = String(engineVersion ?? '1').trim() || '1';
   let pages = [];
   let status = 'idle';
 
@@ -81,8 +83,8 @@ export function createReadingOcrFlow({ client, bookId, pageCount, script = 'lati
       kind: 'ocr',
       variantKey: selectedScript,
       metadata: {
-        engine: 'mlkit',
-        engineVersion: '1',
+        engine: selectedEngine,
+        engineVersion: selectedEngineVersion,
         status: complete ? 'complete' : 'partial',
         completedUnits: pages.length,
         totalUnits

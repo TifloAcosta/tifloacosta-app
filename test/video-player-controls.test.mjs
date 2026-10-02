@@ -42,18 +42,19 @@ test('opening the player isolates it from previous catalog chrome for desktop sc
 
   assert.match(source, /els\.controlsSection\.hidden = true/);
   assert.match(source, /els\.resultsSection\.hidden = true/);
+  assert.match(source, /els\.youtubeAccessibleSection\.hidden = true/);
   assert.match(html, /body:has\(#video-player-section:not\(\[hidden\]\)\) > \.site-header/);
   assert.match(html, /body:has\(#video-player-section:not\(\[hidden\]\)\) > \.skip-link/);
   assert.match(html, /body:has\(#video-player-section:not\(\[hidden\]\)\) #back-home/);
   assert.match(html, /body:has\(#video-player-section:not\(\[hidden\]\)\) \.video-hero/);
   assert.match(html, /body:has\(#video-player-section:not\(\[hidden\]\)\) #back-home-bottom/);
   assert.match(html, /body:has\(#video-player-section:not\(\[hidden\]\)\) > \.site-footer/);
-  assert.match(html, /videos\.js\?v=2\.4/);
+  assert.match(html, /videos\.js\?v=2\.5/);
 });
 
-test('YouTube actions bridge leaves videos.js untouched and connects through existing DOM controls', async () => {
+test('YouTube actions bridge connects through the existing player controls', async () => {
   const [html, bridge] = await Promise.all([read('videos.html'), read('youtube-actions-bridge.js')]);
-  assert.match(html, /videos\.js\?v=2\.4/);
+  assert.match(html, /videos\.js\?v=2\.5/);
   assert.match(html, /youtube-actions-bridge\.js\?v=/);
   assert.match(bridge, /\.video-play-button\[data-video-id\]/);
   assert.match(bridge, /const actions = window\.TifloYouTubeActions/);

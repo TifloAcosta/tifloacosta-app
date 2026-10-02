@@ -62,7 +62,7 @@ test('web reader accepts common document formats with heavy engines loaded on de
 
 test('PWA shell caches and refreshes the web reader script', async () => {
   const worker = await read('sw.js');
-  assert.ok(worker.includes('tifloacosta-app-v2-27-reader'));
+  assert.ok(worker.includes('tifloacosta-app-v2-28-youtube-accessible'));
   assert.ok(worker.includes("'./web-reading.js?v=1.0'"));
   assert.ok(worker.includes("url.pathname.endsWith('/web-reading.js')"));
   assert.ok(worker.includes("freshScript(url, './web-reading.js?v=1.0', request)"));

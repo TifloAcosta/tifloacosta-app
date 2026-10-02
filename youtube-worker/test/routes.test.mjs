@@ -7,7 +7,8 @@ const env = {
   ALLOWED_ORIGIN: 'https://tifloacosta.com',
   YOUTUBE_SESSION_SECRET: 'unit-test-session-key-abcdefghijklmnopqrstuvwxyz',
   GOOGLE_CLIENT_ID: 'unit-test-client',
-  GOOGLE_CLIENT_SECRET: 'unit-test-client-key'
+  GOOGLE_CLIENT_SECRET: 'unit-test-client-key',
+  YOUTUBE_API_KEY: 'unit-test-api-key'
 };
 
 function jsonResponse(data, status = 200) {
@@ -42,6 +43,24 @@ function mockFetch({ subscribed = true, rating = 'like', calls = [] } = {}) {
     if (target.includes('/videos/getRating?')) return jsonResponse({ items: [{ rating }] });
     if (target.includes('/videos/rate?')) return new Response(null, { status: 204 });
     if (target.includes('/commentThreads?')) return jsonResponse({ id: 'comment-1' });
+    if (target.includes('/search?')) {
+      return jsonResponse({
+        nextPageToken: 'NEXT_TOKEN',
+        items: [{
+          id: { videoId: 'abcDEF123_-' },
+          snippet: {
+            title: 'Accessible video',
+            channelTitle: 'Example channel',
+            publishedAt: '2026-10-01T12:00:00Z',
+            description: 'Description',
+            thumbnails: { medium: { url: 'https://img.example/video.jpg' } }
+          }
+        }]
+      });
+    }
+    if (target.includes('/videos?')) {
+      return jsonResponse({ items: [{ id: 'abcDEF123_-', contentDetails: { duration: 'PT8M5S' } }] });
+    }
     throw new Error(`Unexpected fetch ${target}`);
   };
 }
@@ -167,4 +186,37 @@ test('POST /comment returns a safe specific YouTube rejection code', async () =>
   ), env, { fetchImpl });
   assert.equal(response.status, 403);
   assert.deepEqual(await response.json(), { error: 'INELIGIBLE_ACCOUNT' });
+});
+
+
+test('GET /search is public to the app origin and does not require OAuth session', async () => {
+  const response = await handleRequest(new Request(
+    'https://youtube-auth.tifloacosta.com/search?q=VoiceOver',
+    { headers: { Origin: env.ALLOWED_ORIGIN } }
+  ), env, { fetchImpl: mockFetch() });
+  assert.equal(response.status, 200);
+  const data = await response.json();
+  assert.equal(data.items.length, 1);
+  assert.equal(data.items[0].id, 'abcDEF123_-');
+  assert.equal(data.items[0].durationSeconds, 485);
+  assert.equal(data.nextPageToken, 'NEXT_TOKEN');
+});
+
+test('GET /search rejects browser origins other than TifloAcosta', async () => {
+  const response = await handleRequest(new Request(
+    'https://youtube-auth.tifloacosta.com/search?q=VoiceOver',
+    { headers: { Origin: 'https://example.com' } }
+  ), env, { fetchImpl: mockFetch() });
+  assert.equal(response.status, 403);
+  assert.deepEqual(await response.json(), { error: 'ORIGIN_NOT_ALLOWED' });
+});
+
+test('GET /search reports unavailable when the Worker has no API key', async () => {
+  const noKeyEnv = { ...env, YOUTUBE_API_KEY: '' };
+  const response = await handleRequest(new Request(
+    'https://youtube-auth.tifloacosta.com/search?q=VoiceOver',
+    { headers: { Origin: env.ALLOWED_ORIGIN } }
+  ), noKeyEnv, { fetchImpl: mockFetch() });
+  assert.equal(response.status, 503);
+  assert.deepEqual(await response.json(), { error: 'SEARCH_UNAVAILABLE' });
 });

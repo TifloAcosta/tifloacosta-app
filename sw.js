@@ -1,9 +1,9 @@
-const CACHE = 'tifloacosta-app-v2-27-reader';
+const CACHE = 'tifloacosta-app-v2-28-youtube-accessible';
 const NAVIGATION_TIMEOUT_MS = 5000;
 const SHELL = [
   './',
   './index.html',
-  './styles.css?v=1.2',
+  './styles.css?v=1.3',
   './data.js?v=0.20',
   './app-core.js?v=1.6',
   './search-accessibility.js?v=1.1',
@@ -117,8 +117,8 @@ self.addEventListener('fetch', event => {
   }
 
   if (isAppOrigin && url.pathname.endsWith('/styles.css')) {
-    url.searchParams.set('v', '1.2');
-    event.respondWith(freshScript(url, './styles.css?v=1.2', request));
+    url.searchParams.set('v', '1.3');
+    event.respondWith(freshScript(url, './styles.css?v=1.3', request));
     return;
   }
 

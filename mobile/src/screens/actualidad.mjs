@@ -1,4 +1,4 @@
-import { addExternalLink, addParagraph, addScreenHeader, addShareButton, clearScreen } from './shared.mjs';
+import { addParagraph, addScreenHeader, clearScreen } from './shared.mjs';
 
 function addFavoriteButton(parent, item, favoritesStore, t) {
   const ref = { kind: 'news', id: String(item.id || '') };
@@ -103,20 +103,6 @@ export function renderActualidad({
 
     const actions = document.createElement('div');
     actions.className = 'action-group';
-    if (item.originalUrl) {
-      addExternalLink(actions, {
-        href: item.originalUrl,
-        label: t('actualidad.original'),
-        onOpen: nativeActions?.openExternal
-      });
-      addShareButton(actions, {
-        label: t('common.share'),
-        title: item.title || '',
-        text: item.summary || '',
-        url: item.originalUrl,
-        onShare: nativeActions?.share
-      });
-    }
     if (item.id) addFavoriteButton(actions, item, favoritesStore, t);
     if (actions.childNodes.length) article.append(actions);
     root.append(article);

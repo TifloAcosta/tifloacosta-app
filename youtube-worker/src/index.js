@@ -18,7 +18,8 @@ import {
   comment,
   getAccountVideoState,
   like,
-  subscribe
+  subscribe,
+  searchVideos
 } from './youtube-api.js';
 
 function corsHeaders(request, env) {
@@ -74,6 +75,8 @@ function safeError(error) {
   const code = String(error?.code || 'YOUTUBE_ERROR');
   if (code === 'INVALID_VIDEO_ID') return appError('INVALID_VIDEO', 400);
   if (code === 'INVALID_COMMENT') return appError('INVALID_COMMENT', 400);
+  if (code === 'INVALID_SEARCH') return appError('INVALID_SEARCH', 400);
+  if (code === 'SEARCH_UNAVAILABLE') return appError('SEARCH_UNAVAILABLE', 503);
   if (code === 'COMMENTS_DISABLED') return appError('COMMENTS_DISABLED', error.status || 403);
   if (code === 'VIDEO_NOT_FOUND') return appError('VIDEO_NOT_FOUND', 404);
   if (code === 'AUTH_REVOKED') return appError('SESSION_EXPIRED', 401, true);
@@ -213,6 +216,23 @@ export async function handleRequest(request, env, deps = {}) {
       return redirect(oauthSuccess(env), [sessionCookie, clearOauth]);
     } catch {
       return redirect(oauthFailure(env), [clearOauth]);
+    }
+  }
+
+  if (url.pathname === '/search' && request.method === 'GET') {
+    if (request.headers.get('Origin') !== env.ALLOWED_ORIGIN) {
+      return json({ error: 'ORIGIN_NOT_ALLOWED' }, 403, cors);
+    }
+    try {
+      const result = await searchVideos(
+        env.YOUTUBE_API_KEY,
+        url.searchParams.get('q') || '',
+        url.searchParams.get('pageToken') || '',
+        fetchImpl
+      );
+      return json(result, 200, cors);
+    } catch (error) {
+      return errorResponse(error, cors);
     }
   }
 

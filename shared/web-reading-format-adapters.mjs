@@ -92,7 +92,7 @@ export function parseRtfDocument(source='', options={}) {
   text = text.replace(/\\tab\b/g, '\t');
   text = text.replace(/\\[a-zA-Z]+-?\d* ?/g, '');
   text = text.replace(/[{}]/g, '');
-  text = cleanText(text);
+  text = text.replace(/[ \t]+/g, ' ').replace(/\n{3,}/g, '\n\n').trim();
   const blocks = text.split(/\n\s*\n+/).map((value, index) => ({
     id:`rtf-${index+1}`, type:'paragraph', text:cleanText(value)
   })).filter(block => block.text);
@@ -163,7 +163,7 @@ export async function parseOdtArchive(zip, options={}) {
   const author = xmlText(metaDoc?.getElementsByTagNameNS?.('*','creator')?.[0]);
   const blocks = [];
   let index = 0;
-  for (const node of [...childElements(doc,'h'), ...childElements(doc,'p')]) {
+  for (const node of [...doc.getElementsByTagName('*')].filter(node => node.localName === 'h' || node.localName === 'p')) {
     const text = xmlText(node);
     if (!text) continue;
     const heading = node.localName === 'h';
@@ -199,7 +199,7 @@ export async function parseEpubArchive(zip, options={}) {
   for (const itemref of opf.getElementsByTagNameNS('*','itemref')) {
     const href = manifest.get(itemref.getAttribute('idref'));
     if (!href) continue;
-    const normalized = new URL(href, 'https://epub.local/' + base).pathname.slice(1);
+    const normalized = decodeURIComponent(new URL(href, 'https://epub.local/' + base).pathname.slice(1));
     const file = zip.file(normalized);
     if (!file) continue;
     const html = await file.async('string');

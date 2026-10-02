@@ -72,3 +72,8 @@ export {
   normalizeVoiceProviders,
   confirmExternalProvider
 } from './reading-voice-catalog.mjs';
+
+export {
+  listWebTtsVoices,
+  createWebReadingSpeechAdapter
+} from './web-reading-speech-adapter.mjs';

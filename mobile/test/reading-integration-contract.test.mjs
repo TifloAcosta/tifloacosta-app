@@ -111,10 +111,11 @@ test('reading integration deletion removes only the private copy and book-owned 
 });
 
 test('PDF vertical slice keeps import storage opening pages and navigation on the shared reader path', async () => {
-  const [importer, plugin, adapter, screen, marks] = await Promise.all([
+  const [importer, plugin, mobileAdapter, adapter, screen, marks] = await Promise.all([
     read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingImportService.java'),
     read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java'),
     read('src/core/reading-pdf-adapter.mjs'),
+    readRepo('shared/reading-pdf-adapter.mjs'),
     read('src/screens/reading-book.mjs'),
     read('src/screens/reading-marks.mjs')
   ]);

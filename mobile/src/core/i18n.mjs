@@ -3,11 +3,11 @@ const DICTIONARIES = {
     app: { title: 'TifloAcosta' },
     nav: { back: 'Volver' },
     home: {
-      actualidad: 'Actualidad', search: 'Buscar', library: 'Biblioteca', readingLibrary: 'Leer con TifloAcosta', downloads: 'Descargas', favorites: 'Favoritos', videos: 'Vídeos',
+      actualidad: 'Actualidad', search: 'Buscar', newContent: 'Novedades', library: 'Biblioteca', readingLibrary: 'Leer con TifloAcosta', downloads: 'Descargas', favorites: 'Favoritos', videos: 'Vídeos',
       book: 'Mi libro', podcast: 'Podcast', contact: 'Contacto', settings: 'Configuración'
     },
     screen: {
-      actualidad: 'Actualidad', search: 'Buscar', library: 'Biblioteca', readingLibrary: 'Leer con TifloAcosta', downloads: 'Descargas', favorites: 'Favoritos', videos: 'Vídeos',
+      actualidad: 'Actualidad', search: 'Buscar', newContent: 'Novedades', library: 'Biblioteca', readingLibrary: 'Leer con TifloAcosta', downloads: 'Descargas', favorites: 'Favoritos', videos: 'Vídeos',
       book: 'Mi libro', podcast: 'Podcast', contact: 'Contacto', settings: 'Configuración', share: 'Compartido con TifloAcosta'
     },
     common: { empty: 'No hay contenido disponible en este momento.', open: 'Abrir', share: 'Compartir' },
@@ -178,11 +178,11 @@ const DICTIONARIES = {
     app: { title: 'TifloAcosta' },
     nav: { back: 'Back' },
     home: {
-      actualidad: 'News', search: 'Search', library: 'Library', readingLibrary: 'Read with TifloAcosta', downloads: 'Downloads', favorites: 'Favorites', videos: 'Videos',
+      actualidad: 'News', search: 'Search', newContent: 'New content', library: 'Library', readingLibrary: 'Read with TifloAcosta', downloads: 'Downloads', favorites: 'Favorites', videos: 'Videos',
       book: 'My book', podcast: 'Podcast', contact: 'Contact', settings: 'Settings'
     },
     screen: {
-      actualidad: 'News', search: 'Search', library: 'Library', readingLibrary: 'Read with TifloAcosta', downloads: 'Downloads', favorites: 'Favorites', videos: 'Videos',
+      actualidad: 'News', search: 'Search', newContent: 'New content', library: 'Library', readingLibrary: 'Read with TifloAcosta', downloads: 'Downloads', favorites: 'Favorites', videos: 'Videos',
       book: 'My book', podcast: 'Podcast', contact: 'Contact', settings: 'Settings', share: 'Shared with TifloAcosta'
     },
     common: { empty: 'No content is available right now.', open: 'Open', share: 'Share' },

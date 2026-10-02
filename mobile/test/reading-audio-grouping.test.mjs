@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
+const readRepo = path => readFile(new URL(`../../${path}`, import.meta.url), 'utf8');
 
 test('Android schema v6 retains ordered audiobook tracks while adding derived OCR and translation content', async () => {
   const [database, record] = await Promise.all([
@@ -40,11 +41,12 @@ test('audio probe and grouping importer prefer embedded track numbers then filen
 });
 
 test('picker defers all-audio multi-selection until the user chooses one book independent files or cancel', async () => {
-  const [nativePlugin, mainActivity, wrapper, client, screen, i18n] = await Promise.all([
+  const [nativePlugin, mainActivity, wrapper, mobileClient, client, screen, i18n] = await Promise.all([
     read('android/app/src/main/java/com/tifloacosta/app/TifloReadingAudioGroupPlugin.java'),
     read('android/app/src/main/java/com/tifloacosta/app/MainActivity.java'),
     read('src/native/reading-library-plugin.mjs'),
     read('src/core/reading-library-client.mjs'),
+    readRepo('shared/reading-library-client.mjs'),
     read('src/screens/reading-library.mjs'),
     read('src/core/i18n.mjs')
   ]);
@@ -55,6 +57,7 @@ test('picker defers all-audio multi-selection until the user chooses one book in
   assert.match(nativePlugin, /independent/);
   assert.match(mainActivity, /TifloReadingAudioGroupPlugin\.class/);
   assert.match(wrapper, /resolveAudioSelection/);
+  assert.match(mobileClient, /shared\/reading-library-client\.mjs/);
   assert.match(client, /resolveAudioSelection/);
   assert.match(screen, /audioChoiceRequired/);
   assert.match(screen, /readingLibrary\.audioGroupOneBook/);
@@ -80,11 +83,13 @@ test('audiobook integration preserves injected plugin fallback and loads tracks 
 });
 
 test('opened audio exposes ordered tracks and Media3 playlist transition state', async () => {
-  const [service, plugin, client, controller, screen] = await Promise.all([
+  const [service, plugin, mobileClient, client, mobileController, controller, screen] = await Promise.all([
     read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingAudioService.java'),
     read('android/app/src/main/java/com/tifloacosta/app/TifloReadingAudioPlugin.java'),
     read('src/core/reading-library-client.mjs'),
+    readRepo('shared/reading-library-client.mjs'),
     read('src/core/reading-audio.mjs'),
+    readRepo('shared/reading-audio.mjs'),
     read('src/screens/reading-audio.mjs')
   ]);
 
@@ -94,7 +99,9 @@ test('opened audio exposes ordered tracks and Media3 playlist transition state',
   assert.match(plugin, /trackCount/);
   assert.match(plugin, /previousAudioTrack/);
   assert.match(plugin, /nextAudioTrack/);
+  assert.match(mobileClient, /shared\/reading-library-client\.mjs/);
   assert.match(client, /audioTracks/);
+  assert.match(mobileController, /shared\/reading-audio\.mjs/);
   assert.match(controller, /tracks/);
   assert.match(controller, /previousTrack/);
   assert.match(controller, /nextTrack/);

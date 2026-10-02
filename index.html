@@ -55,6 +55,7 @@
     <nav class="resource-actions" aria-label="Secciones de TifloAcosta App">
       <a class="button-link" id="home-open-actualidad" href="actualidad.html">Actualidad</a>
       <a class="button-link" id="home-open-resources" href="#resources">Recursos</a>
+      <a class="button-link" id="home-open-reading" href="#reading">Leer con TifloAcosta</a>
       <a class="button-link" id="home-open-news" href="#news">Novedades</a>
       <a class="button-link" id="home-open-videos" href="videos.html">Vídeos</a>
       <a class="button-link" id="home-open-book" href="#book">Mi libro</a>
@@ -100,6 +101,55 @@
       <p id="result-status" class="muted" aria-live="polite" aria-atomic="true"></p>
       <div id="resource-results" class="resource-list" hidden></div>
     </section>
+    <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
+  </section>
+
+
+  <section id="reading-section" hidden tabindex="-1" aria-labelledby="reading-heading">
+    <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
+    <h2 id="reading-heading">Leer con TifloAcosta</h2>
+    <p id="reading-intro">Abre un archivo TXT o HTML, o pega un texto, para leerlo con navegación accesible y las voces disponibles en tu navegador.</p>
+
+    <div class="panel">
+      <label id="reading-file-label" for="reading-file">Abrir archivo TXT o HTML</label>
+      <input id="reading-file" type="file" accept=".txt,.html,.htm,text/plain,text/html">
+      <label id="reading-paste-label" for="reading-paste">O pega aquí el texto</label>
+      <textarea id="reading-paste" rows="6"></textarea>
+      <button id="reading-prepare" type="button">Preparar lectura</button>
+      <p id="reading-status" class="muted" role="status" aria-live="polite" aria-atomic="true"></p>
+    </div>
+
+    <section id="reading-reader" class="panel" hidden aria-labelledby="reading-document-title">
+      <h3 id="reading-document-title" tabindex="-1">Documento</h3>
+      <p id="reading-position" class="muted" aria-live="polite"></p>
+      <div id="reading-current-block" class="reading-web-block" tabindex="-1"></div>
+
+      <div class="resource-actions" aria-label="Controles de lectura">
+        <button id="reading-previous" type="button">Anterior</button>
+        <button id="reading-next" type="button">Siguiente</button>
+        <button id="reading-play" type="button">Reproducir</button>
+        <button id="reading-pause" type="button">Pausa</button>
+      </div>
+
+      <div class="settings-group">
+        <label id="reading-voice-label" for="reading-voice">Voz</label>
+        <select id="reading-voice"></select>
+        <label id="reading-rate-label" for="reading-rate">Velocidad</label>
+        <input id="reading-rate" type="range" min="0.5" max="2" step="0.1" value="1">
+        <output id="reading-rate-value" for="reading-rate">1</output>
+      </div>
+
+      <form id="reading-search-form">
+        <label id="reading-search-label" for="reading-search">Buscar en el documento</label>
+        <div class="search-row">
+          <input id="reading-search" type="search" autocomplete="off">
+          <button id="reading-search-button" type="submit">Buscar</button>
+        </div>
+      </form>
+      <p id="reading-search-status" class="muted" aria-live="polite"></p>
+      <div id="reading-search-results" class="resource-list"></div>
+    </section>
+
     <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
   </section>
 
@@ -275,6 +325,7 @@
 <script src="app-core.js?v=1.6"></script>
 <script src="actualidad-core.js?v=1.0"></script>
 <script src="shared-web.js?v=1.0"></script>
+<script src="web-reading.js?v=1.0"></script>
 <script src="app.js?v=2.2"></script>
 <script>
 (() => {
@@ -282,6 +333,7 @@
 
   const views = {
     resources: document.getElementById('resources-view'),
+    reading: document.getElementById('reading-section'),
     news: document.getElementById('news-view'),
     book: document.getElementById('book-section'),
     contact: document.getElementById('contact-section'),
@@ -293,8 +345,8 @@
   const main = document.getElementById('main');
 
   const labels = {
-    es: { sections:'Secciones', actualidad:'Actualidad', resources:'Recursos', news:'Novedades', videos:'Vídeos', book:'Mi libro', contact:'Contacto y redes', privacy:'Privacidad y accesibilidad', privacyPolicy:'Política de privacidad', fullPrivacy:'Leer la política de privacidad completa', config:'Configuración', back:'Volver al inicio' },
-    en: { sections:'Sections', actualidad:'News', resources:'Resources', news:'What’s new', videos:'Videos', book:'My book', contact:'Contact and social', privacy:'Privacy and accessibility', privacyPolicy:'Privacy policy', fullPrivacy:'Read the full privacy policy', config:'Settings', back:'Back to home' }
+    es: { sections:'Secciones', actualidad:'Actualidad', resources:'Recursos', reading:'Leer con TifloAcosta', news:'Novedades', videos:'Vídeos', book:'Mi libro', contact:'Contacto y redes', privacy:'Privacidad y accesibilidad', privacyPolicy:'Política de privacidad', fullPrivacy:'Leer la política de privacidad completa', config:'Configuración', back:'Volver al inicio' },
+    en: { sections:'Sections', actualidad:'News', resources:'Resources', reading:'Read with TifloAcosta', news:'What’s new', videos:'Videos', book:'My book', contact:'Contact and social', privacy:'Privacy and accessibility', privacyPolicy:'Privacy policy', fullPrivacy:'Read the full privacy policy', config:'Settings', back:'Back to home' }
   };
 
   function localizeHomeNavigation() {
@@ -303,6 +355,7 @@
     document.getElementById('home-blocks-heading').textContent = text.sections;
     document.getElementById('home-open-actualidad').textContent = text.actualidad;
     document.getElementById('home-open-resources').textContent = text.resources;
+    document.getElementById('home-open-reading').textContent = text.reading;
     document.getElementById('home-open-news').textContent = text.news;
     document.getElementById('home-open-videos').textContent = text.videos;
     document.getElementById('home-open-book').textContent = text.book;

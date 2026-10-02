@@ -151,7 +151,10 @@
 
       <div class="resource-actions">
         <button id="reading-save" type="button">Guardar en mi biblioteca</button>
+        <button id="reading-bookmark" type="button">Añadir marcador</button>
+        <button id="reading-queue-toggle" type="button">Añadir a la cola</button>
       </div>
+      <p id="reading-mark-status" class="muted" role="status" aria-live="polite"></p>
     </section>
 
     <section id="reading-library-web" aria-labelledby="reading-library-heading">
@@ -160,6 +163,20 @@
       <button id="reading-library-refresh" type="button">Actualizar biblioteca</button>
       <p id="reading-library-status" class="muted" role="status" aria-live="polite"></p>
       <div id="reading-library-list" class="resource-list"></div>
+    </section>
+
+    <section id="reading-queue-web" aria-labelledby="reading-queue-heading">
+      <h3 id="reading-queue-heading">Cola de lectura</h3>
+      <p id="reading-queue-intro">Ordena los documentos que quieres leer después. Nada se abrirá automáticamente.</p>
+      <p id="reading-queue-status" class="muted" role="status" aria-live="polite"></p>
+      <div id="reading-queue-list" class="resource-list"></div>
+    </section>
+
+    <section id="reading-marks-web" aria-labelledby="reading-marks-heading">
+      <h3 id="reading-marks-heading">Marcadores</h3>
+      <p id="reading-marks-intro">Guarda puntos de lectura del documento abierto para volver a ellos más tarde.</p>
+      <p id="reading-marks-status" class="muted" role="status" aria-live="polite"></p>
+      <div id="reading-marks-list" class="resource-list"></div>
     </section>
 
     <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>

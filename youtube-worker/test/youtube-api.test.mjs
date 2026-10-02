@@ -5,7 +5,8 @@ import {
   getAccountVideoState,
   subscribe,
   like,
-  comment
+  comment,
+  searchVideos
 } from '../src/youtube-api.js';
 
 const token = 'access-token';
@@ -151,4 +152,62 @@ test('YouTube errors are normalized without exposing response bodies', async () 
     () => like(token, videoId, async () => jsonResponse({ error: { message: 'secret detail' } }, 401)),
     error => error?.code === 'AUTH_REVOKED' && error?.status === 401 && !String(error).includes('secret detail')
   );
+});
+
+
+test('searchVideos returns normalized public video results and durations', async () => {
+  const calls = [];
+  const result = await searchVideos('api-key', 'VoiceOver iPhone', '', async (url, options) => {
+    const target = String(url);
+    calls.push({ target, options });
+    if (target.includes('/search?')) {
+      return jsonResponse({
+        nextPageToken: 'NEXT_TOKEN',
+        items: [{
+          id: { videoId: 'abcDEF123_-' },
+          snippet: {
+            title: 'Accessible video',
+            channelTitle: 'Example channel',
+            publishedAt: '2026-10-01T12:00:00Z',
+            description: 'Description',
+            thumbnails: { medium: { url: 'https://img.example/video.jpg' } }
+          }
+        }]
+      });
+    }
+    if (target.includes('/videos?')) {
+      return jsonResponse({
+        items: [{ id: 'abcDEF123_-', contentDetails: { duration: 'PT1H2M3S' } }]
+      });
+    }
+    throw new Error(`unexpected URL ${target}`);
+  });
+
+  assert.deepEqual(result, {
+    items: [{
+      id: 'abcDEF123_-',
+      title: 'Accessible video',
+      channelTitle: 'Example channel',
+      publishedAt: '2026-10-01T12:00:00Z',
+      description: 'Description',
+      thumbnail: 'https://img.example/video.jpg',
+      durationSeconds: 3723
+    }],
+    nextPageToken: 'NEXT_TOKEN'
+  });
+  assert.equal(calls.length, 2);
+  assert.match(calls[0].target, /type=video/);
+  assert.match(calls[0].target, /maxResults=10/);
+  assert.match(calls[0].target, /safeSearch=moderate/);
+  assert.match(calls[0].target, /key=api-key/);
+  assert.equal(calls[0].options.headers.Accept, 'application/json');
+});
+
+test('searchVideos validates the query before calling YouTube', async () => {
+  let called = false;
+  await assert.rejects(
+    () => searchVideos('api-key', ' ', '', async () => { called = true; return jsonResponse({}); }),
+    error => error?.code === 'INVALID_SEARCH' && error?.status === 400
+  );
+  assert.equal(called, false);
 });

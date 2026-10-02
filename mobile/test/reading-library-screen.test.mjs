@@ -146,3 +146,11 @@ test('composition root consumes initial and live shared documents through the re
   assert.match(app, /router\.navigate\(['"]reading-library['"]/);
   assert.match(app, /renderReadingQueue/);
 });
+
+
+test('import control explicitly lists every supported document family', async () => {
+  const screen = await read('src/screens/reading-library.mjs');
+  for (const label of ['Word (DOCX)', 'EPUB', 'PDF', 'TXT', 'HTML', 'DAISY', 'audio']) {
+    assert.ok(screen.includes(label), `Missing import format hint: ${label}`);
+  }
+});

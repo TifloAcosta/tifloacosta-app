@@ -47,14 +47,17 @@ jobs:
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           YOUTUBE_SESSION_SECRET: ${{ secrets.YOUTUBE_SESSION_SECRET }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         shell: bash
         run: |
           test -n "$GOOGLE_CLIENT_ID"
           test -n "$GOOGLE_CLIENT_SECRET"
           test -n "$YOUTUBE_SESSION_SECRET"
+          test -n "$YOUTUBE_API_KEY"
           printf '%s' "$GOOGLE_CLIENT_ID" | npx wrangler secret put GOOGLE_CLIENT_ID
           printf '%s' "$GOOGLE_CLIENT_SECRET" | npx wrangler secret put GOOGLE_CLIENT_SECRET
           printf '%s' "$YOUTUBE_SESSION_SECRET" | npx wrangler secret put YOUTUBE_SESSION_SECRET
+          printf '%s' "$YOUTUBE_API_KEY" | npx wrangler secret put YOUTUBE_API_KEY
 
       - name: Smoke test YouTube Worker health
         shell: bash

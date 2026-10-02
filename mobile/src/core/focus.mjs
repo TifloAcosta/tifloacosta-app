@@ -18,3 +18,15 @@ export function restoreOriginFocus(root, originId) {
   target.focus();
   return true;
 }
+
+
+export function rememberFocusedId(root) {
+  const active = root?.ownerDocument?.activeElement || globalThis.document?.activeElement;
+  const id = String(active?.id || '').trim();
+  if (!id || !root?.contains?.(active)) return '';
+  return id;
+}
+
+export function restoreRememberedFocus(root, id) {
+  return restoreOriginFocus(root, id);
+}

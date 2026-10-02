@@ -40,6 +40,9 @@
     libraryRefresh: $('#reading-library-refresh'),
     libraryStatus: $('#reading-library-status'),
     libraryList: $('#reading-library-list'),
+    pdfPasswordWrap: $('#reading-pdf-password-wrap'),
+    pdfPasswordLabel: $('#reading-pdf-password-label'),
+    pdfPassword: $('#reading-pdf-password'),
     bookmark: $('#reading-bookmark'),
     queueToggle: $('#reading-queue-toggle'),
     markStatus: $('#reading-mark-status'),
@@ -63,6 +66,12 @@
       prepare: 'Preparar lectura',
       empty: 'Selecciona un archivo o pega algún texto antes de preparar la lectura.',
       unsupported: 'Este archivo todavía no puede abrirse en la versión web de TifloLector.',
+      pdfPassword: 'Contraseña del PDF, si tiene',
+      pdfPasswordRequired: 'Este PDF necesita contraseña. Escríbela y vuelve a preparar la lectura.',
+      pdfPasswordIncorrect: 'La contraseña del PDF no es correcta.',
+      pdfLoading: 'Leyendo PDF…',
+      pdfProgress: (page,total) => `Leyendo página ${page} de ${total}…`,
+      pdfNoText: 'Este PDF no contiene texto extraíble. Está preparado para pasar al reconocimiento OCR.',
       failed: 'No se pudo preparar este documento.',
       ready: 'Lectura preparada.',
       document: 'Documento',
@@ -122,6 +131,12 @@
       prepare: 'Prepare reading',
       empty: 'Select a file or paste some text before preparing the reading.',
       unsupported: 'This file cannot yet be opened in the web version of TifloReader.',
+      pdfPassword: 'PDF password, if required',
+      pdfPasswordRequired: 'This PDF requires a password. Enter it and prepare the reading again.',
+      pdfPasswordIncorrect: 'The PDF password is incorrect.',
+      pdfLoading: 'Reading PDF…',
+      pdfProgress: (page,total) => `Reading page ${page} of ${total}…`,
+      pdfNoText: 'This PDF has no extractable text. It is ready for the OCR recognition step.',
       failed: 'This document could not be prepared.',
       ready: 'Reading prepared.',
       document: 'Document',
@@ -209,6 +224,7 @@
     els.fileLabel.textContent = c.file;
     els.pasteLabel.textContent = c.paste;
     els.prepare.textContent = c.prepare;
+    els.pdfPasswordLabel.textContent = c.pdfPassword;
     els.previous.textContent = c.previous;
     els.next.textContent = c.next;
     els.play.textContent = c.play;
@@ -356,10 +372,56 @@
     queueMicrotask(() => els.title.focus());
   }
 
+  let pdfBundlePromise = null;
+
+  function isPdfFile(file) {
+    const name = String(file?.name || '').toLowerCase();
+    const type = String(file?.type || '').toLowerCase();
+    return name.endsWith('.pdf') || type === 'application/pdf';
+  }
+
+  function updatePdfPasswordVisibility() {
+    els.pdfPasswordWrap.hidden = !isPdfFile(els.file.files?.[0]);
+  }
+
+  function loadPdfBundle() {
+    if (globalThis.TIFLO_PDF?.extractPdfText) return Promise.resolve(globalThis.TIFLO_PDF);
+    if (pdfBundlePromise) return pdfBundlePromise;
+    pdfBundlePromise = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = 'web-pdf.js?v=1.0';
+      script.async = true;
+      script.onload = () => globalThis.TIFLO_PDF?.extractPdfText
+        ? resolve(globalThis.TIFLO_PDF)
+        : reject(new Error('pdf-engine-unavailable'));
+      script.onerror = () => reject(new Error('pdf-engine-unavailable'));
+      document.head.append(script);
+    });
+    return pdfBundlePromise;
+  }
+
   async function documentFromFile(file) {
     const name = String(file?.name || '');
     const lower = name.toLowerCase();
     const type = String(file?.type || '').toLowerCase();
+    if (lower.endsWith('.pdf') || type === 'application/pdf') {
+      els.status.textContent = t().pdfLoading;
+      const pdf = await loadPdfBundle();
+      const payload = await pdf.extractPdfText(file, {
+        password: els.pdfPassword.value,
+        onProgress({ page, pageCount }) {
+          els.status.textContent = t().pdfProgress(page, pageCount);
+        }
+      });
+      if (payload.noText) {
+        throw Object.assign(new Error('pdf-no-text'), { code: 'pdf-no-text', payload });
+      }
+      return {
+        source: JSON.stringify(payload),
+        format: 'pdf',
+        model: shared.parsePdfDocument(payload)
+      };
+    }
     if (!(lower.endsWith('.txt') || lower.endsWith('.html') || lower.endsWith('.htm') || type === 'text/plain' || type === 'text/html')) {
       throw Object.assign(new Error('unsupported'), { code: 'unsupported' });
     }
@@ -397,7 +459,11 @@
         { source: text, format: 'txt' }
       );
     } catch (error) {
-      els.status.textContent = error?.code === 'unsupported' ? t().unsupported : t().failed;
+      if (error?.code === 'unsupported') els.status.textContent = t().unsupported;
+      else if (error?.code === 'password-required') els.status.textContent = t().pdfPasswordRequired;
+      else if (error?.code === 'incorrect-password') els.status.textContent = t().pdfPasswordIncorrect;
+      else if (error?.code === 'pdf-no-text') els.status.textContent = t().pdfNoText;
+      else els.status.textContent = t().failed;
     }
   }
 
@@ -440,10 +506,12 @@
       return;
     }
     const source = String(opened.content || '');
-    const format = opened.book.format === 'html' ? 'html' : 'txt';
+    const format = ['html', 'pdf'].includes(opened.book.format) ? opened.book.format : 'txt';
     const model = format === 'html'
       ? shared.parseHtmlDocument(source, { title: opened.book.title, language: opened.book.language || language() })
-      : shared.parseTextDocument(source, { title: opened.book.title, language: opened.book.language || language() });
+      : format === 'pdf'
+        ? shared.parsePdfDocument(JSON.parse(source))
+        : shared.parseTextDocument(source, { title: opened.book.title, language: opened.book.language || language() });
     await useDocument(model, opened.book.title, {
       source,
       format,
@@ -721,6 +789,7 @@
   }
 
   els.prepare.addEventListener('click', () => { void prepareReading(); });
+  els.file.addEventListener('change', updatePdfPasswordVisibility);
   els.previous.addEventListener('click', () => move(-1));
   els.next.addEventListener('click', () => move(1));
   els.play.addEventListener('click', () => { void play(); });

@@ -143,12 +143,12 @@ const DICTIONARIES = {
     videos: {
       empty: 'No hay vídeos disponibles en este momento.',
       open: 'Abrir vídeo', play: 'Abrir reproductor', playerHeading: 'Reproductor de vídeo',
-      controlsLabel: 'Controles accesibles del vídeo', rewindOneMinute: 'Retroceder 1 minuto',
-      playControl: 'Reproducir', pauseControl: 'Pausar', forwardOneMinute: 'Avanzar 1 minuto',
+      controlsLabel: 'Controles accesibles del vídeo', rewindOneMinute: 'Retroceder 30 segundos',
+      playControl: 'Reproducir', pauseControl: 'Pausar', forwardOneMinute: 'Avanzar 30 segundos',
       position: 'Posición del vídeo', details: 'Ver detalles del vídeo', hideDetails: 'Ocultar detalles del vídeo',
       detailsEmpty: 'Este vídeo no tiene detalles adicionales.',
       preparing: 'Preparando los controles accesibles del reproductor…',
-      ready: 'Controles accesibles listos. Puedes avanzar o retroceder un minuto o ajustar directamente la posición del vídeo.',
+      ready: 'Controles accesibles listos. Puedes avanzar o retroceder 30 segundos o ajustar directamente la posición del vídeo.',
       unavailable: 'No se pudieron activar los controles accesibles adicionales. Puedes abrir el vídeo en YouTube.',
       closePlayer: 'Cerrar reproductor y volver a los vídeos', openYouTube: 'Abrir este vídeo en YouTube'
     },
@@ -303,10 +303,10 @@ const DICTIONARIES = {
     },
     videos: {
       empty: 'There are no videos available right now.', open: 'Open video', play: 'Open player', playerHeading: 'Video player',
-      controlsLabel: 'Accessible video controls', rewindOneMinute: 'Rewind 1 minute', playControl: 'Play', pauseControl: 'Pause',
-      forwardOneMinute: 'Forward 1 minute', position: 'Video position', details: 'Show video details', hideDetails: 'Hide video details',
+      controlsLabel: 'Accessible video controls', rewindOneMinute: 'Rewind 30 seconds', playControl: 'Play', pauseControl: 'Pause',
+      forwardOneMinute: 'Forward 30 seconds', position: 'Video position', details: 'Show video details', hideDetails: 'Hide video details',
       detailsEmpty: 'This video has no additional details.', preparing: 'Preparing the accessible player controls…',
-      ready: 'Accessible controls are ready. You can move one minute at a time or adjust the video position directly.',
+      ready: 'Accessible controls are ready. You can move 30 seconds at a time or adjust the video position directly.',
       unavailable: 'The additional accessible controls could not be activated. You can open the video on YouTube.',
       closePlayer: 'Close player and return to videos', openYouTube: 'Open this video on YouTube'
     },

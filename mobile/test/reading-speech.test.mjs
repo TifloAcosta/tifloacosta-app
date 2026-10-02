@@ -91,3 +91,40 @@ test('moving before first playback changes the start position without autoplay',
   assert.equal(client.plays, 1);
   await speech.destroy();
 });
+
+
+test('moving while TTS is playing seeks and resumes automatically', async () => {
+  const client = fakeClient();
+  const speech = createReadingSpeechController({
+    client,
+    book: { id: 'book-1', title: 'Prueba' },
+    document: documentFixture()
+  });
+
+  assert.equal(await speech.play(), true);
+  assert.equal(client.plays, 1);
+  assert.equal(speech.snapshot().playing, true);
+
+  await speech.moveTo({ blockIndex: 1, unitIndex: 0 });
+
+  assert.equal(client.pauses, 1);
+  assert.deepEqual(client.seeks.at(-1), { blockIndex: 1, unitIndex: 0 });
+  assert.equal(client.plays, 2);
+  assert.equal(speech.snapshot().playing, true);
+  assert.deepEqual(speech.snapshot().position, { blockIndex: 1, unitIndex: 0 });
+  await speech.destroy();
+});
+
+test('moving while paused never starts TTS', async () => {
+  const client = fakeClient();
+  const speech = createReadingSpeechController({
+    client,
+    book: { id: 'book-1', title: 'Prueba' },
+    document: documentFixture()
+  });
+
+  await speech.moveTo({ blockIndex: 1, unitIndex: 0 });
+  assert.equal(client.plays, 0);
+  assert.equal(speech.snapshot().playing, false);
+  await speech.destroy();
+});

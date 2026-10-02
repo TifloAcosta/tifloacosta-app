@@ -46,3 +46,20 @@ test('resource screens expose a text download control through native save action
   assert.match(library, /library\.download/);
   assert.doesNotMatch(library, /autofocus/i);
 });
+
+
+test('Android save plugin notifies only after the file has been fully written when notification permission already exists', async () => {
+  const [plugin, manifest] = await Promise.all([
+    readRepo('mobile/android/app/src/main/java/com/tifloacosta/app/TifloSavePlugin.java'),
+    readRepo('mobile/android/app/src/main/AndroidManifest.xml')
+  ]);
+  const flush = plugin.indexOf('output.flush()');
+  const notify = plugin.indexOf('notifyDownloadCompleted(completedFilename)');
+  assert.ok(flush >= 0 && notify > flush, 'completion notification must occur after output.flush()');
+  assert.match(plugin, /POST_NOTIFICATIONS/);
+  assert.match(plugin, /PERMISSION_GRANTED/);
+  assert.match(plugin, /Descarga completada:/);
+  assert.match(plugin, /NotificationChannel/);
+  assert.match(manifest, /android\.permission\.POST_NOTIFICATIONS/);
+  assert.doesNotMatch(plugin, /requestPermissions|requestPermission/);
+});

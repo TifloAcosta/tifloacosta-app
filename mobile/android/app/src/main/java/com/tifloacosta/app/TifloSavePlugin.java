@@ -1,8 +1,13 @@
 package com.tifloacosta.app;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 
 import androidx.activity.result.ActivityResult;
 
@@ -24,6 +29,8 @@ import java.util.Locale;
 
 @CapacitorPlugin(name = "TifloSave")
 public class TifloSavePlugin extends Plugin {
+    private static final String DOWNLOAD_CHANNEL_ID = "tifloacosta_downloads";
+    private static final int DOWNLOAD_NOTIFICATION_ID = 2401;
 
     @PluginMethod
     public void saveUrl(PluginCall call) {
@@ -108,9 +115,14 @@ public class TifloSavePlugin extends Plugin {
                 output.flush();
             }
 
+            String completedFilename = sanitizeFilename(call.getString("filename"));
+            if (completedFilename.isEmpty()) completedFilename = "tifloacosta-documento";
+            notifyDownloadCompleted(completedFilename);
+
             JSObject saved = new JSObject();
             saved.put("saved", true);
             saved.put("cancelled", false);
+            saved.put("filename", completedFilename);
             call.resolve(saved);
         } catch (Exception error) {
             call.reject("Unable to save the selected document", error);
@@ -119,6 +131,38 @@ public class TifloSavePlugin extends Plugin {
                 ((HttpURLConnection) connection).disconnect();
             }
         }
+    }
+
+    private void notifyDownloadCompleted(String filename) {
+        if (Build.VERSION.SDK_INT >= 33
+            && getContext().checkSelfPermission("android.permission.POST_NOTIFICATIONS") != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+
+        NotificationManager manager = (NotificationManager) getContext().getSystemService("notification");
+        if (manager == null) return;
+
+        if (Build.VERSION.SDK_INT >= 26) {
+            NotificationChannel channel = new NotificationChannel(
+                DOWNLOAD_CHANNEL_ID,
+                "Descargas de TifloAcosta",
+                NotificationManager.IMPORTANCE_DEFAULT
+            );
+            channel.setDescription("Avisos cuando termina una descarga iniciada desde TifloAcosta");
+            manager.createNotificationChannel(channel);
+        }
+
+        Notification.Builder builder = Build.VERSION.SDK_INT >= 26
+            ? new Notification.Builder(getContext(), DOWNLOAD_CHANNEL_ID)
+            : new Notification.Builder(getContext());
+
+        builder
+            .setSmallIcon(getContext().getApplicationInfo().icon)
+            .setContentTitle("TifloAcosta")
+            .setContentText("Descarga completada: " + filename)
+            .setAutoCancel(true);
+
+        manager.notify(DOWNLOAD_NOTIFICATION_ID, builder.build());
     }
 
     private String normalizeContentType(String value) {

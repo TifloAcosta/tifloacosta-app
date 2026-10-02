@@ -181,7 +181,8 @@
       removeFavorite: 'Quitar de favoritos',
       cancel: 'Cancelar',
       copied: 'El enlace del documento se ha copiado al portapapeles.',
-      shareUnavailable: 'Este dispositivo no ofrece una opción compatible para compartir este documento.'
+      preparingShare: 'Preparando archivo para compartir…',
+      shareUnavailable: 'No se puede compartir el archivo directamente en este dispositivo. Puedes usar «Descargar documento».'
     },
     en: {
       heading: 'Document options',
@@ -192,7 +193,8 @@
       removeFavorite: 'Remove from favorites',
       cancel: 'Cancel',
       copied: 'The document link has been copied to the clipboard.',
-      shareUnavailable: 'This device does not provide a compatible option for sharing this document.'
+      preparingShare: 'Preparing file to share…',
+      shareUnavailable: 'The file cannot be shared directly on this device. You can use “Download document”.'
     }
   };
 
@@ -235,23 +237,37 @@
 
   async function shareResource(item,status) {
     const labels=resourceMenuCopy[lang];
-    if(navigator.share) {
-      try {
-        await navigator.share({title:item.title,url:item.openUrl||item.url});
-        return 'shared';
-      } catch(error) {
-        if(error&&error.name==='AbortError') return 'cancelled';
-      }
+    const sourceUrl=item.url||item.openUrl||'';
+    if(!sourceUrl||!navigator.share) {
+      status.textContent=labels.shareUnavailable;
+      return 'unavailable';
     }
+
+    status.textContent=labels.preparingShare;
     try {
-      if(navigator.clipboard&&window.isSecureContext) {
-        await navigator.clipboard.writeText(item.openUrl||item.url);
-        status.textContent=labels.copied;
-        return 'copied';
+      const response=await fetch(sourceUrl);
+      if(!response.ok) throw new Error(`HTTP ${response.status}`);
+      const blob=await response.blob();
+      const urlName=(()=>{try{return decodeURIComponent(new URL(sourceUrl,location.href).pathname.split('/').filter(Boolean).pop()||'');}catch(error){return '';}})();
+      const fallbackName=String(item.title||'documento').trim().replace(/[\\/:*?"<>|\p{Cntrl}]+/gu,'-')||'documento';
+      const filename=urlName&&urlName.includes('.')?urlName:fallbackName;
+      const file=new File([blob],filename,{type:blob.type||'application/octet-stream'});
+      const shareData={title:item.title||filename,files:[file]};
+      if(typeof navigator.canShare==='function'&&!navigator.canShare(shareData)) {
+        status.textContent=labels.shareUnavailable;
+        return 'unavailable';
       }
-    } catch(error) {}
-    status.textContent=labels.shareUnavailable;
-    return 'unavailable';
+      await navigator.share(shareData);
+      status.textContent='';
+      return 'shared';
+    } catch(error) {
+      if(error&&error.name==='AbortError') {
+        status.textContent='';
+        return 'cancelled';
+      }
+      status.textContent=labels.shareUnavailable;
+      return 'unavailable';
+    }
   }
 
   function openResourceMenu(item,trigger) {

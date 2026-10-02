@@ -296,8 +296,8 @@ export function createReadingSpeechController({
 
   async function moveTo(nextPosition = {}) {
     await listenersReady;
-    const wasActive = playing;
-    if (wasActive && typeof tts.pauseTts === 'function') {
+    const wasPlaying = playing;
+    if (wasPlaying && typeof tts.pauseTts === 'function') {
       try { await tts.pauseTts(); } catch {}
     }
     playing = false;
@@ -307,6 +307,9 @@ export function createReadingSpeechController({
       try {
         await tts.seekTts({ blockIndex: position.blockIndex, unitIndex: position.unitIndex });
       } catch {}
+    }
+    if (wasPlaying && !ended) {
+      await play();
     }
     report();
     return { ...position };

@@ -171,33 +171,41 @@ export function renderLibrary({ root, router, content, preferences, favoritesSto
     return;
   }
 
-  let activePlatform = '';
-  const filters = document.createElement('div');
-  filters.className = 'library-platform-filters';
-  filters.setAttribute('role', 'group');
-  filters.setAttribute('aria-label', t('screen.library'));
+  let activeCategory = '';
+  const filterField = document.createElement('div');
+  filterField.className = 'settings-field';
 
-  const filterButtons = new Map();
-  const choices = [
-    ['', lang === 'en' ? 'All' : 'Todos'],
-    ['Android', 'Android'],
-    ['iPhone', 'iPhone'],
-    ['Windows', 'Windows']
-  ];
+  const categoryLabel = document.createElement('label');
+  categoryLabel.htmlFor = 'library-category-filter';
+  categoryLabel.textContent = lang === 'en' ? 'Category' : 'Categoría';
+
+  const categorySelect = document.createElement('select');
+  categorySelect.id = 'library-category-filter';
+
+  const allOption = document.createElement('option');
+  allOption.value = '';
+  allOption.textContent = lang === 'en' ? 'All categories' : 'Todas las categorías';
+  categorySelect.append(allOption);
+
+  const categories = [...new Set(items
+    .map(item => String(item?.category || '').trim())
+    .filter(Boolean))]
+    .sort((a, b) => a.localeCompare(b, lang));
+
+  for (const category of categories) {
+    const option = document.createElement('option');
+    option.value = category;
+    option.textContent = category;
+    categorySelect.append(option);
+  }
 
   const list = document.createElement('div');
   list.className = 'content-list';
 
-  function updateFilterState() {
-    for (const [platform, button] of filterButtons) {
-      button.ariaPressed = String(activePlatform === platform);
-    }
-  }
-
   function renderList() {
     list.replaceChildren();
-    const visibleItems = activePlatform
-      ? items.filter(item => resourceMatchesPlatform(item, activePlatform))
+    const visibleItems = activeCategory
+      ? items.filter(item => String(item?.category || '').trim() === activeCategory)
       : items;
 
     if (!visibleItems.length) {
@@ -210,30 +218,18 @@ export function renderLibrary({ root, router, content, preferences, favoritesSto
     }
   }
 
-  function focusFilteredResults() {
+  categorySelect.addEventListener('change', () => {
+    activeCategory = categorySelect.value;
+    renderList();
     const target = list.querySelector('h2, .empty-state');
-    if (!target) return;
-    target.tabIndex = -1;
-    target.focus();
-  }
+    if (target) {
+      target.tabIndex = -1;
+      target.focus();
+    }
+  });
 
-  for (const [platform, label] of choices) {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.id = platform ? `library-filter-${platform.toLowerCase()}` : 'library-filter-all';
-    button.textContent = label;
-    button.ariaPressed = String(activePlatform === platform);
-    button.addEventListener('click', () => {
-      activePlatform = platform;
-      updateFilterState();
-      renderList();
-      focusFilteredResults();
-    });
-    filterButtons.set(platform, button);
-    filters.append(button);
-  }
-
-  root.append(filters, list);
+  filterField.append(categoryLabel, categorySelect);
+  root.append(filterField, list);
   renderList();
   addEndBackButton(root, router, t('nav.back'));
 }

@@ -1,6 +1,6 @@
 import { youtubeVideoId } from '../core/share-classifier.mjs';
 
-const SEEK_SECONDS = 60;
+const SEEK_SECONDS = 30;
 const POSITION_REFRESH_MS = 1000;
 const YOUTUBE_API_TIMEOUT_MS = 10_000;
 let youtubeApiPromise = null;

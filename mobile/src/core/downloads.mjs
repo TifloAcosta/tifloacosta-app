@@ -68,11 +68,13 @@ export function resolveLocal(value) {
   if (!url) return { kind: 'invalid', provider: 'invalid', url: null, items: [] };
 
   if (provider === 'google-drive') {
-    const match = url.pathname.match(/\/file\/d\/([^/]+)/);
-    if (match) {
+    const pathMatch = url.pathname.match(/\/file\/d\/([^/]+)/);
+    const queryId = url.pathname === '/open' ? String(url.searchParams.get('id') || '').trim() : '';
+    const fileId = pathMatch?.[1] || queryId;
+    if (fileId) {
       const direct = new URL('https://drive.google.com/uc');
       direct.searchParams.set('export', 'download');
-      direct.searchParams.set('id', match[1]);
+      direct.searchParams.set('id', fileId);
       return {
         kind: 'result',
         provider,

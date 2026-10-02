@@ -54,18 +54,18 @@ test('visual navigation and speech share precise block and sentence position and
   assert.match(screen, /nextUnit/);
 });
 
-test('previous and next expose the active semantic unit and navigation focuses the rendered reading unit', async () => {
+test('previous and next obey the selected navigation unit without forcing TalkBack focus into the text', async () => {
   const [screen, i18n] = await Promise.all([
     read('src/screens/reading-book.mjs'),
     read('src/core/i18n.mjs')
   ]);
 
-  assert.match(screen, /previous\.setAttribute\(['"]aria-label['"]/);
-  assert.match(screen, /next\.setAttribute\(['"]aria-label['"]/);
-  assert.match(screen, /readingBook\.previousSentence/);
-  assert.match(screen, /readingBook\.nextSentence/);
-  assert.match(screen, /focusCurrentSemanticUnit/);
-  assert.doesNotMatch(screen, /navigationButton\.addEventListener\(['"]click['"],\s*\(\)\s*=>\s*readerContainer\.focus\(\)/);
+  assert.match(screen, /navigationSelect = document\.createElement\('select'\)/);
+  assert.match(screen, /navigationTarget/);
+  assert.match(screen, /navigateSemantic/);
+  assert.match(screen, /moveToPosition\(target\.position, \{ focus: false \}\)/);
+  assert.match(screen, /speech\.snapshot\(\)\.playing/);
+  assert.doesNotMatch(screen, /navigationButton = document\.createElement\('button'\)/);
   for (const label of ['Frase anterior', 'Frase siguiente', 'Previous sentence', 'Next sentence']) {
     assert.ok(i18n.includes(label), `Missing navigation translation: ${label}`);
   }

@@ -1,6 +1,6 @@
 import { parseHtmlDocument } from '../core/reading-html-adapter.mjs';
 import { pageForPosition, parsePdfDocument, positionForPage } from '../core/reading-pdf-adapter.mjs';
-import { adjacentSemanticUnit, normalizeSemanticPosition, parseTextDocument } from '../core/reading-semantic-model.mjs';
+import { adjacentSemanticBlockOfKind, adjacentSemanticUnit, normalizeSemanticPosition, parseTextDocument } from '../core/reading-semantic-model.mjs';
 import { createReadingSpeechController } from '../core/reading-speech.mjs';
 import { parseStructuredDocument } from '../core/reading-structured-adapter.mjs';
 import { createReadingAudioView } from './reading-audio.mjs';
@@ -56,6 +56,8 @@ function semanticNavigationLabel(t, kind, direction) {
         previous ? 'Celda de tabla anterior' : 'Celda de tabla siguiente',
         previous ? 'Previous table cell' : 'Next table cell'
       );
+    case 'page':
+      return t(previous ? 'readingLibrary.previousPage' : 'readingLibrary.nextPage');
     case 'paragraph':
     default:
       return t(previous ? 'readingBook.previousParagraph' : 'readingBook.nextParagraph');
@@ -206,9 +208,11 @@ export function renderReadingBook({
   next.textContent = t('readingBook.nextUnit');
   next.setAttribute('aria-label', t('readingBook.nextSentence'));
 
-  const navigationButton = document.createElement('button');
-  navigationButton.type = 'button';
-  navigationButton.textContent = t('readingBook.navigation');
+  const navigationLabel = document.createElement('label');
+  navigationLabel.textContent = t('readingBook.navigation');
+  const navigationSelect = document.createElement('select');
+  navigationSelect.id = 'reading-navigation-unit';
+  navigationLabel.htmlFor = navigationSelect.id;
 
   const searchButton = document.createElement('button');
   searchButton.type = 'button';
@@ -246,7 +250,8 @@ export function renderReadingBook({
     playButton,
     previous,
     next,
-    navigationButton,
+    navigationLabel,
+    navigationSelect,
     searchButton,
     marksButton,
     readingStateLabel,
@@ -540,6 +545,46 @@ export function renderReadingBook({
     await ocrPanel.load();
   }
 
+  function navigationModeName(kind) {
+    const english = document.documentElement.lang === 'en';
+    const names = {
+      sentence: english ? 'Sentence' : 'Frase',
+      paragraph: english ? 'Paragraph' : 'Párrafo',
+      heading: english ? 'Heading' : 'Encabezado',
+      listItem: english ? 'List item' : 'Elemento de lista',
+      quote: english ? 'Quote' : 'Cita',
+      tableCell: english ? 'Table cell' : 'Celda de tabla',
+      page: english ? 'Page' : 'Página'
+    };
+    return names[kind] || names.sentence;
+  }
+
+  function availableNavigationModes() {
+    const blocks = Array.isArray(documentModel?.blocks) ? documentModel.blocks : [];
+    const modes = ['sentence'];
+    if (blocks.some(block => block?.type === 'paragraph')) modes.push('paragraph');
+    if (blocks.some(block => block?.type === 'heading')) modes.push('heading');
+    if (blocks.some(block => block?.type === 'list-item')) modes.push('listItem');
+    if (blocks.some(block => block?.type === 'quote')) modes.push('quote');
+    if (blocks.some(block => block?.type === 'table-cell')) modes.push('tableCell');
+    if (activeBook?.format === 'pdf' && Number(documentModel?.pageCount) > 0) modes.push('page');
+    return modes;
+  }
+
+  function populateNavigationModes() {
+    const previousValue = navigationSelect.value;
+    navigationSelect.replaceChildren();
+    for (const kind of availableNavigationModes()) {
+      const option = document.createElement('option');
+      option.value = kind;
+      option.textContent = navigationModeName(kind);
+      navigationSelect.append(option);
+    }
+    navigationSelect.value = [...navigationSelect.options].some(option => option.value === previousValue)
+      ? previousValue
+      : 'sentence';
+  }
+
   function readablePdfPageFrom(position, direction) {
     if (activeBook?.format !== 'pdf' || !documentModel) return null;
     const currentPage = pageForPosition(documentModel, position);
@@ -672,12 +717,13 @@ export function renderReadingBook({
     if (commit) currentPosition = normalized;
 
     const blockUnits = Math.max(1, unitsFor(block).length);
-    const previousTarget = adjacentSemanticUnit(documentModel, normalized, -1);
-    const nextTarget = adjacentSemanticUnit(documentModel, normalized, 1);
+    const navigationKind = navigationSelect.value || 'sentence';
+    const previousTarget = navigationTarget(normalized, -1);
+    const nextTarget = navigationTarget(normalized, 1);
     previous.disabled = !previousTarget.moved;
     next.disabled = !nextTarget.moved;
-    previous.setAttribute('aria-label', semanticNavigationLabel(t, previousTarget.kind, -1));
-    next.setAttribute('aria-label', semanticNavigationLabel(t, nextTarget.kind, 1));
+    previous.setAttribute('aria-label', semanticNavigationLabel(t, navigationKind, -1));
+    next.setAttribute('aria-label', semanticNavigationLabel(t, navigationKind, 1));
     renderPdfPageStatus(normalized);
     if (announce) {
       const page = pageForPosition(documentModel, normalized);
@@ -723,24 +769,38 @@ export function renderReadingBook({
     return saved;
   }
 
-  async function moveToPosition(position, { focus = true } = {}) {
+  function navigationTarget(position, direction) {
+    const step = Number(direction) < 0 ? -1 : 1;
+    const kind = navigationSelect.value || 'sentence';
+    if (kind === 'page') {
+      const pageTarget = readablePdfPageFrom(position, step);
+      return pageTarget
+        ? { position: pageTarget.position, kind, moved: true }
+        : { position: normalizeSemanticPosition(position, documentModel), kind, moved: false };
+    }
+    if (kind === 'sentence') {
+      return adjacentSemanticUnit(documentModel, position, step);
+    }
+    return adjacentSemanticBlockOfKind(documentModel, position, kind, step);
+  }
+
+  async function moveToPosition(position, { focus = false } = {}) {
     if (!speech || !documentModel) return;
     const normalized = normalizeSemanticPosition(position, documentModel);
     await speech.moveTo(normalized);
     currentPosition = normalized;
     renderSemanticPosition(normalized, { focus });
-    playButton.textContent = t('readingBook.play');
+    playButton.textContent = speech.snapshot().playing ? t('readingBook.pause') : t('readingBook.play');
   }
 
   async function navigateSemantic(direction) {
     if (!documentModel) return;
-    const target = adjacentSemanticUnit(
-      documentModel,
+    const target = navigationTarget(
       currentPosition,
       direction === 'previous' ? -1 : 1
     );
     if (!target.moved) return;
-    await moveToPosition(target.position);
+    await moveToPosition(target.position, { focus: false });
   }
 
   async function navigatePdfPage(direction) {
@@ -758,7 +818,12 @@ export function renderReadingBook({
   next.addEventListener('click', () => { void navigateSemantic('next'); });
   previousPage.addEventListener('click', () => { void navigatePdfPage(-1); });
   nextPage.addEventListener('click', () => { void navigatePdfPage(1); });
-  navigationButton.addEventListener('click', () => { focusCurrentSemanticUnit(); });
+  navigationSelect.addEventListener('change', () => {
+    renderSemanticPosition(currentPosition, { focus: false, announce: false, commit: false });
+    status.textContent = document.documentElement.lang === 'en'
+      ? `Navigation by ${navigationModeName(navigationSelect.value)}.`
+      : `Navegación por ${navigationModeName(navigationSelect.value).toLowerCase()}.`;
+  });
   openNext.addEventListener('click', () => {
     if (nextSuggestedBookId) onOpenBook?.(nextSuggestedBookId);
   });
@@ -873,6 +938,7 @@ export function renderReadingBook({
       blockIndex: activeBook.blockIndex,
       unitIndex: activeBook.unitIndex
     }, documentModel);
+    populateNavigationModes();
     readingState.value = activeBook.state || 'in-reading';
 
     speech = createReadingSpeechController({

@@ -1,10 +1,5 @@
 import { PRIVACY_LABELS } from './privacy.mjs';
 
-const NEW_CONTENT_LABELS = Object.freeze({
-  es: 'Novedades',
-  en: 'New content'
-});
-
 const HOME_INTRO = Object.freeze({
   es: 'Recursos de accesibilidad y tecnología, organizados para llegar a ellos sin perderse por el camino.',
   en: 'Accessibility and technology resources, organized so you can reach them without getting lost along the way.'
@@ -12,6 +7,7 @@ const HOME_INTRO = Object.freeze({
 
 export const HOME_ITEMS = [
   'search',
+  'new-content',
   'actualidad',
   'library',
   'reading-library',
@@ -72,26 +68,4 @@ export function renderHome({ root, router, content, preferences = { lang: 'es' }
   }
 
   root.append(nav);
-
-  const newResources = Array.isArray(content?.resources)
-    ? content.resources.filter(item => item?.isNew === true && item?.lang === preferences.lang)
-    : [];
-  if (!newResources.length) return;
-
-  const section = document.createElement('section');
-  section.className = 'section-stack';
-  section.lang = preferences.lang;
-  const sectionHeading = document.createElement('h2');
-  const newContentKey = 'home.newContent';
-  const translatedHeading = t(newContentKey);
-  sectionHeading.textContent = translatedHeading === newContentKey
-    ? (NEW_CONTENT_LABELS[preferences.lang] || NEW_CONTENT_LABELS.es)
-    : translatedHeading;
-  section.append(sectionHeading);
-  for (const item of newResources) {
-    const paragraph = document.createElement('p');
-    paragraph.textContent = item.title || '';
-    section.append(paragraph);
-  }
-  root.append(section);
 }

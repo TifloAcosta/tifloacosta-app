@@ -21,11 +21,15 @@ test('Android start screen begins with Search and keeps Leer con TifloAcosta vis
   assert.ok(HOME_ITEMS.includes('reading-library'));
 });
 
-test('home shows language-filtered new resources instead of a duplicate news preview', async () => {
-  const source = await read('src/screens/home.mjs');
-  assert.match(source, /resources[\s\S]*isNew[\s\S]*preferences\.lang/);
-  assert.match(source, /home\.newContent/);
-  assert.doesNotMatch(source, /content\?\.news[\s\S]*slice\(0,\s*5\)/);
+test('home exposes Novedades as a closed destination near the start instead of expanding its items', async () => {
+  const [home, newContent] = await Promise.all([
+    read('src/screens/home.mjs'),
+    read('src/screens/new-content.mjs')
+  ]);
+  assert.equal(HOME_ITEMS[1], 'new-content');
+  assert.doesNotMatch(home, /newResources|sectionHeading|item\.title/);
+  assert.match(newContent, /resources[\s\S]*isNew/);
+  assert.match(newContent, /preferences/);
 });
 
 test('first run requires an explicit Spanish or English language choice', () => {
@@ -62,7 +66,21 @@ test('news and readable pages expose their language to TalkBack', async () => {
 
 test('video position selector moves in ten percent steps while minute buttons remain fixed', async () => {
   const player = await read('src/screens/video-player.mjs');
-  assert.match(player, /const\s+SEEK_SECONDS\s*=\s*60/);
+  assert.match(player, /const\s+SEEK_SECONDS\s*=\s*30/);
   assert.match(player, /position\.step\s*=\s*String\([^\n]*duration[^\n]*0\.1/);
   assert.doesNotMatch(player, /position\.step\s*=\s*['"]1['"]/);
+});
+
+
+test('home remembers the last focused entry and restores it when the WebView regains focus', async () => {
+  const [app, focus] = await Promise.all([
+    read('src/app.mjs'),
+    read('src/core/focus.mjs')
+  ]);
+  assert.match(app, /lastHomeFocusId/);
+  assert.match(app, /addEventListener\('focusin'/);
+  assert.match(app, /window\.addEventListener\('blur'/);
+  assert.match(app, /window\.addEventListener\('focus'/);
+  assert.match(app, /restoreRememberedFocus/);
+  assert.match(focus, /rememberFocusedId/);
 });

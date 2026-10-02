@@ -164,3 +164,40 @@ export const adjacentSemanticUnit = (document, position, direction = 1) => {
     moved: false
   };
 };
+
+
+export const adjacentSemanticBlockOfKind = (document, position, kind, direction = 1) => {
+  const blocks = Array.isArray(document?.blocks) ? document.blocks : [];
+  if (blocks.length === 0) {
+    return {
+      position: { blockIndex: 0, unitIndex: 0 },
+      kind: String(kind || 'paragraph'),
+      moved: false
+    };
+  }
+
+  const current = normalizeSemanticPosition(position, document);
+  const requestedKind = String(kind || 'paragraph');
+  const step = Number(direction) < 0 ? -1 : 1;
+
+  for (
+    let blockIndex = current.blockIndex + step;
+    blockIndex >= 0 && blockIndex < blocks.length;
+    blockIndex += step
+  ) {
+    const block = blocks[blockIndex];
+    if (semanticBlockKind(block) !== requestedKind) continue;
+    if (semanticUnitsForBlock(block).length === 0) continue;
+    return {
+      position: { blockIndex, unitIndex: 0 },
+      kind: requestedKind,
+      moved: true
+    };
+  }
+
+  return {
+    position: current,
+    kind: requestedKind,
+    moved: false
+  };
+};

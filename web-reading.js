@@ -26,6 +26,10 @@
     pause: $('#reading-pause'),
     voiceLabel: $('#reading-voice-label'),
     voice: $('#reading-voice'),
+    externalVoicesHeading: $('#reading-external-voices-heading'),
+    externalVoicesIntro: $('#reading-external-voices-intro'),
+    externalVoicesList: $('#reading-external-voices-list'),
+    externalVoicesStatus: $('#reading-external-voices-status'),
     rateLabel: $('#reading-rate-label'),
     rate: $('#reading-rate'),
     rateValue: $('#reading-rate-value'),
@@ -103,6 +107,10 @@
       pause: 'Pausa',
       voice: 'Voz',
       defaultVoice: 'Voz predeterminada del navegador',
+      externalVoicesHeading: 'Conseguir más voces',
+      externalVoicesIntro: 'Consulta proveedores externos para probar, comprar o crear voces distintas de las que ya ofrece el navegador. La compatibilidad depende de cada servicio y plataforma.',
+      externalVoicesOpen: name => `Visitar ${name}`,
+      externalVoicesNote: 'Se abrirá un servicio externo. La compra, prueba, instalación o cuenta se gestiona directamente con el proveedor.',
       rate: 'Velocidad',
       search: 'Buscar en el documento',
       searchButton: 'Buscar',
@@ -197,6 +205,10 @@
       pause: 'Pause',
       voice: 'Voice',
       defaultVoice: 'Browser default voice',
+      externalVoicesHeading: 'Get more voices',
+      externalVoicesIntro: 'Browse external providers to try, buy or create voices beyond those already exposed by your browser. Compatibility depends on each service and platform.',
+      externalVoicesOpen: name => `Visit ${name}`,
+      externalVoicesNote: 'An external service will open. Trials, purchases, installation and accounts are handled directly by the provider.',
       rate: 'Speed',
       search: 'Search this document',
       searchButton: 'Search',
@@ -320,6 +332,8 @@
     els.play.textContent = c.play;
     els.pause.textContent = c.pause;
     els.voiceLabel.textContent = c.voice;
+    els.externalVoicesHeading.textContent = c.externalVoicesHeading;
+    els.externalVoicesIntro.textContent = c.externalVoicesIntro;
     els.rateLabel.textContent = c.rate;
     els.searchLabel.textContent = c.search;
     els.searchButton.textContent = c.searchButton;
@@ -343,6 +357,7 @@
     els.translationTranslated.textContent = c.translationTranslated;
     if (!documentModel) els.title.textContent = c.document;
     populateVoices();
+    renderExternalVoices();
     renderPosition();
     void Promise.all([renderLibrary(), renderQueue(), renderMarks()]);
   }
@@ -363,6 +378,37 @@
     }
     if ([...els.voice.options].some(option => option.value === selected)) els.voice.value = selected;
     if (!voices.length) els.status.textContent = els.status.textContent || t().voicesUnavailable;
+  }
+
+
+  function renderExternalVoices() {
+    els.externalVoicesList.replaceChildren();
+    const providers = Array.isArray(shared.WEB_EXTERNAL_VOICE_PROVIDERS)
+      ? shared.WEB_EXTERNAL_VOICE_PROVIDERS
+      : [];
+    if (!providers.length) return;
+    for (const provider of providers) {
+      const card = document.createElement('section');
+      card.className = 'resource-card';
+      const heading = document.createElement('h4');
+      heading.textContent = provider.name;
+      const note = document.createElement('p');
+      note.className = 'resource-meta';
+      note.textContent = t().externalVoicesNote;
+      const open = document.createElement('button');
+      open.type = 'button';
+      open.textContent = t().externalVoicesOpen(provider.name);
+      open.addEventListener('click', () => {
+        const allowed = typeof shared.confirmExternalProvider === 'function'
+          ? shared.confirmExternalProvider(provider, language())
+          : globalThis.confirm?.(t().externalVoicesNote);
+        if (!allowed) return;
+        els.externalVoicesStatus.textContent = t().externalVoicesNote;
+        globalThis.open(provider.url, '_blank', 'noopener,noreferrer');
+      });
+      card.append(heading, note, open);
+      els.externalVoicesList.append(card);
+    }
   }
 
   async function persistProgress(extra = {}) {

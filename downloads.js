@@ -19,7 +19,7 @@
       analyzing: 'Analizando enlace…', invalid: 'El enlace no es válido. Utiliza una dirección que empiece por http:// o https://.',
       resultsHeading: 'Archivos encontrados', resultSearch: 'Buscar entre los archivos encontrados', type: 'Tipo de archivo', all: 'Todos',
       found: (visible, total) => visible === total ? `${total} archivo${total === 1 ? '' : 's'} encontrado${total === 1 ? '' : 's'}.` : `${visible} de ${total} archivos visibles.`,
-      noFiltered: 'No hay archivos que coincidan con ese filtro.', download: 'Descargar', unknownType: 'Tipo no identificado', unknownSize: 'Tamaño desconocido', source: 'Procedencia',
+      noFiltered: 'No hay archivos que coincidan con ese filtro.', download: 'Descargar', saving: 'Preparando la descarga…', saved: name => `Descarga preparada: ${name}`, saveFallback: 'El navegador debe completar la descarga directamente desde el servicio externo.', saveFailed: 'No se pudo preparar el archivo en TifloAcosta. Se intentará abrir el enlace de descarga.', unknownType: 'Tipo no identificado', unknownSize: 'Tamaño desconocido', source: 'Procedencia',
       noFiles: 'No se encontraron archivos descargables en ese enlace.', unavailable: 'El análisis avanzado no está disponible temporalmente. Los enlaces directos, Google Drive y Dropbox siguen funcionando.',
       badResponse: 'El analizador devolvió una respuesta que TifloAcosta no pudo interpretar.', timeout: 'El análisis tardó demasiado y se detuvo.', unreachable: 'No se pudo acceder a la página indicada.', unsupported: 'Este enlace no puede analizarse automáticamente.',
       auth: 'Este recurso necesita identificación en el servicio externo.',
@@ -37,7 +37,7 @@
       analyzing: 'Analyzing link…', invalid: 'The link is not valid. Use an address beginning with http:// or https://.',
       resultsHeading: 'Files found', resultSearch: 'Search within the files found', type: 'File type', all: 'All',
       found: (visible, total) => visible === total ? `${total} file${total === 1 ? '' : 's'} found.` : `${visible} of ${total} files visible.`,
-      noFiltered: 'No files match that filter.', download: 'Download', unknownType: 'Type not identified', unknownSize: 'Size unknown', source: 'Source',
+      noFiltered: 'No files match that filter.', download: 'Download', saving: 'Preparing download…', saved: name => `Download prepared: ${name}`, saveFallback: 'The browser must complete the download directly from the external service.', saveFailed: 'TifloAcosta could not prepare the file. The download link will be opened instead.', unknownType: 'Type not identified', unknownSize: 'Size unknown', source: 'Source',
       noFiles: 'No downloadable files were found at that link.', unavailable: 'Advanced analysis is temporarily unavailable. Direct links, Google Drive, and Dropbox still work.',
       badResponse: 'The analyzer returned a response TifloAcosta could not interpret.', timeout: 'The analysis took too long and was stopped.', unreachable: 'The specified page could not be reached.', unsupported: 'This link cannot be analyzed automatically.',
       auth: 'This resource requires sign-in on the external service.',
@@ -196,6 +196,44 @@
     });
   }
 
+  async function saveDownloadItem(item, trigger) {
+    const href = String(item?.url || '').trim();
+    if (!href) return;
+    const filename = String(item?.name || 'archivo').trim() || 'archivo';
+    trigger.disabled = true;
+    setStatus(t().saving);
+
+    try {
+      const response = await fetch(href, { credentials: 'omit' });
+      if (!response.ok) throw new Error(`download-${response.status}`);
+      const blob = await response.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      const anchor = document.createElement('a');
+      anchor.href = objectUrl;
+      anchor.download = filename;
+      anchor.hidden = true;
+      document.body.append(anchor);
+      anchor.click();
+      anchor.remove();
+      setTimeout(() => URL.revokeObjectURL(objectUrl), 30000);
+      setStatus(t().saved(filename));
+    } catch {
+      setStatus(`${t().saveFailed} ${t().saveFallback}`);
+      const anchor = document.createElement('a');
+      anchor.href = href;
+      anchor.rel = 'noopener noreferrer';
+      anchor.download = filename;
+      anchor.target = '_blank';
+      anchor.hidden = true;
+      document.body.append(anchor);
+      anchor.click();
+      anchor.remove();
+    } finally {
+      trigger.disabled = false;
+      trigger.focus();
+    }
+  }
+
   function resultCard(item) {
     const card = element('article', { className: 'download-result-card' });
     const name = element('h4', { text: item.name || 'Archivo' });
@@ -204,10 +242,10 @@
     const hasSize = item.size !== null && item.size !== undefined && item.size !== '' && Number.isFinite(numericSize) && numericSize >= 0;
     const size = element('p', { className: 'download-result-meta', text: hasSize ? core.formatBytes(numericSize) : t().unknownSize });
     const source = element('p', { className: 'download-result-meta', text: `${t().source}: ${providerLabel(item.source)}` });
-    const link = element('a', { className: 'button-link', text: `${t().download}: ${item.name || 'Archivo'}` });
-    link.href = item.url;
-    link.rel = 'noopener noreferrer';
-    card.append(name, type, size, source, link);
+    const download = element('button', { className: 'download-primary-action', text: `${t().download}: ${item.name || 'Archivo'}` });
+    download.type = 'button';
+    download.addEventListener('click', () => { void saveDownloadItem(item, download); });
+    card.append(name, type, size, source, download);
     return card;
   }
 

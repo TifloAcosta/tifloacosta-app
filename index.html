@@ -154,6 +154,25 @@
       <p id="reading-search-status" class="muted" aria-live="polite"></p>
       <div id="reading-search-results" class="resource-list"></div>
 
+      <section id="reading-translation-web" aria-labelledby="reading-translation-heading">
+        <h3 id="reading-translation-heading">Traducción</h3>
+        <p id="reading-translation-intro">Traduce el documento con el motor disponible en tu navegador. El original se conserva.</p>
+        <label id="reading-translation-source-label" for="reading-translation-source">Idioma original</label>
+        <select id="reading-translation-source"></select>
+        <label id="reading-translation-target-label" for="reading-translation-target">Traducir a</label>
+        <select id="reading-translation-target"></select>
+        <div class="resource-actions">
+          <button id="reading-translation-prepare" type="button">Preparar idiomas</button>
+          <button id="reading-translation-start" type="button" disabled>Traducir</button>
+          <button id="reading-translation-stop" type="button" hidden>Detener después de este lote</button>
+        </div>
+        <div class="resource-actions">
+          <button id="reading-translation-original" type="button" hidden aria-pressed="true">Original</button>
+          <button id="reading-translation-translated" type="button" hidden aria-pressed="false">Traducción</button>
+        </div>
+        <p id="reading-translation-status" class="muted" role="status" aria-live="polite" aria-atomic="true"></p>
+      </section>
+
       <div class="resource-actions">
         <button id="reading-save" type="button">Guardar en mi biblioteca</button>
         <button id="reading-bookmark" type="button">Añadir marcador</button>

@@ -40,13 +40,19 @@ test('web reader reuses the shared semantic reader search and speech layers', as
   }
 });
 
-test('web reader accepts local TXT HTML and PDF with PDF loaded on demand', async () => {
+test('web reader accepts common document formats with heavy engines loaded on demand', async () => {
   const [html, source] = await Promise.all([read('index.html'), read('web-reading.js')]);
-  assert.ok(html.includes('accept=".txt,.html,.htm,.pdf,text/plain,text/html,application/pdf"'));
+  for (const extension of ['.txt','.html','.htm','.pdf','.docx','.epub','.odt','.rtf','.md','.markdown','.fb2','.png','.jpg','.jpeg','.webp']) {
+    assert.ok(html.includes(extension), `Missing accepted format ${extension}`);
+  }
   assert.ok(source.includes("lower.endsWith('.txt')"));
   assert.ok(source.includes("lower.endsWith('.html')"));
-  assert.ok(source.includes("lower.endsWith('.htm')"));
   assert.ok(source.includes("lower.endsWith('.pdf')"));
+  assert.ok(source.includes("lower.endsWith('.docx')"));
+  assert.ok(source.includes("lower.endsWith('.epub')"));
+  assert.ok(source.includes("lower.endsWith('.odt')"));
+  assert.ok(source.includes("lower.endsWith('.rtf')"));
+  assert.ok(source.includes("lower.endsWith('.fb2')"));
   assert.ok(source.includes("loadPdfBundle"));
   assert.ok(source.includes("web-pdf.js?v=1.0"));
   assert.ok(source.includes("extractPdfText"));
@@ -63,7 +69,7 @@ test('PWA shell caches and refreshes the web reader script', async () => {
 });
 
 
-test('web reader exposes explicit OCR only for scanned PDFs', async () => {
+test('web reader exposes explicit OCR for scanned PDFs and common image files', async () => {
   const [html, source, pdfAdapter] = await Promise.all([
     read('index.html'),
     read('web-reading.js'),
@@ -75,6 +81,8 @@ test('web reader exposes explicit OCR only for scanned PDFs', async () => {
   assert.ok(source.includes('tesseract.js-core@6.1.2'));
   assert.ok(source.includes('tessdata.projectnaptha.com/4.0.0'));
   assert.ok(source.includes('pendingPdfFile'));
+  assert.ok(source.includes('pendingImageFile'));
+  assert.ok(source.includes('isImageFile'));
   assert.ok(pdfAdapter.includes('recognizePage'));
   assert.ok(pdfAdapter.includes("source = text ? 'embedded' : 'empty'"));
   assert.ok(pdfAdapter.includes("source = text ? 'ocr' : 'empty'"));

@@ -149,3 +149,88 @@ export async function comment(accessToken, videoId, text, fetchImpl = fetch) {
   });
   return { commented: true };
 }
+
+
+function parseIsoDuration(value) {
+  const match = String(value || '').match(/^P(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)?$/);
+  if (!match) return 0;
+  const days = Number(match[1] || 0);
+  const hours = Number(match[2] || 0);
+  const minutes = Number(match[3] || 0);
+  const seconds = Number(match[4] || 0);
+  return days * 86400 + hours * 3600 + minutes * 60 + seconds;
+}
+
+function validSearchTerm(value) {
+  const queryText = String(value || '').trim().replace(/\s+/g, ' ');
+  if (queryText.length < 2 || queryText.length > 100) throw typedError('INVALID_SEARCH', 400);
+  return queryText;
+}
+
+function validPageToken(value) {
+  const token = String(value || '').trim();
+  if (!token) return '';
+  if (token.length > 256 || !/^[A-Za-z0-9_-]+$/.test(token)) throw typedError('INVALID_SEARCH', 400);
+  return token;
+}
+
+async function youtubeKeyFetch(path, apiKey, fetchImpl = fetch) {
+  const key = String(apiKey || '').trim();
+  if (!key) throw typedError('SEARCH_UNAVAILABLE', 503);
+  const separator = path.includes('?') ? '&' : '?';
+  const response = await fetchImpl(`${API_ROOT}${path}${separator}key=${encodeURIComponent(key)}`, {
+    method: 'GET',
+    headers: { Accept: 'application/json' }
+  });
+  if (!response.ok) throw await youtubeError(response);
+  return response.json();
+}
+
+export async function searchVideos(apiKey, searchTerm, pageToken = '', fetchImpl = fetch) {
+  const q = validSearchTerm(searchTerm);
+  const token = validPageToken(pageToken);
+  const entries = [
+    ['part', 'snippet'],
+    ['type', 'video'],
+    ['maxResults', '10'],
+    ['safeSearch', 'moderate'],
+    ['q', q]
+  ];
+  if (token) entries.push(['pageToken', token]);
+
+  const searchData = await youtubeKeyFetch(query('search', entries), apiKey, fetchImpl);
+  const searchItems = Array.isArray(searchData?.items) ? searchData.items : [];
+  const ids = searchItems
+    .map(item => String(item?.id?.videoId || '').trim())
+    .filter(id => VIDEO_ID_RE.test(id));
+
+  let durations = new Map();
+  if (ids.length) {
+    const details = await youtubeKeyFetch(query('videos', [
+      ['part', 'contentDetails'],
+      ['id', ids.join(',')]
+    ]), apiKey, fetchImpl);
+    durations = new Map((Array.isArray(details?.items) ? details.items : []).map(item => [
+      String(item?.id || ''),
+      parseIsoDuration(item?.contentDetails?.duration)
+    ]));
+  }
+
+  return {
+    items: searchItems.flatMap(item => {
+      const id = String(item?.id?.videoId || '').trim();
+      if (!VIDEO_ID_RE.test(id)) return [];
+      const snippet = item?.snippet || {};
+      return [{
+        id,
+        title: String(snippet.title || ''),
+        channelTitle: String(snippet.channelTitle || ''),
+        publishedAt: String(snippet.publishedAt || ''),
+        description: String(snippet.description || ''),
+        thumbnail: String(snippet?.thumbnails?.medium?.url || snippet?.thumbnails?.default?.url || ''),
+        durationSeconds: durations.get(id) || 0
+      }];
+    }),
+    nextPageToken: String(searchData?.nextPageToken || '')
+  };
+}

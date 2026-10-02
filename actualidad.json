@@ -1,5 +1,29 @@
 [
   {
+    "id": "techcrunch-4358325b2419f875",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/01/the-founders-guide-to-techcrunch-disrupt-2026-everything-you-need-to-know/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-02T00:03:23.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The founder’s guide to TechCrunch Disrupt 2026: Everything you need to know",
+        "summary": "TechCrunch Disrupt 2026 is built around one question: How do you build an enduring company in the AI era? Our programming and speaker lineup reflect that.",
+        "body": "TechCrunch Disrupt 2026 is built around one question: How do you build an enduring company in the AI era? Our programming and speaker lineup reflect that, based on the feedback we’ve gotten from the community and the reality on the ground.\n\nLast year at Disrupt, we spoke with founders about their experiences and discovered the results of their attendance firsthand. One founder saw a 3x oversubscription rate after their confirmation for Startup Battlefield and more than 100 investor inbounds helping fuel conversations about a future fundraising round. Another founder had nearly 30 back-to-back conversations with investors who flocked to them after a pitch onstage and followed them to their booth .\n\nThat’s not the exception at Disrupt — that’s the point. And those opportunities aren’t just available for Battlefield finalists. Every conversation in the Expo Hall or in a Side Event can create an opportunity for your startup. For years, whether it’s been held in New York, San Francisco, or elsewhere, Disrupt has brought together thousands of founders, investors, startup team members, and tech leaders.\n\nWe’re keeping that mission alive at SF’s Moscone West, this October 13-15 with a packed lineup of speakers, more than 200 expert sessions, a wealth of organized and serendipitous networking opportunities, and most of all, the chance to be in the same room as the person who could change your nascent idea for a company or your current startup’s trajectory.\n\nThis guide is for the founders out there who are just learning about Disrupt, who need a refresher, or are skeptical of whether it’s worth it. TechCrunch has been around for more than 20 years; we can take it. And before you dive in, we have two discounts that run up until Disrupt begins you should be know about. Founders can bring a team member along for 50% off their ticket by following this link , or you can help laid off members of your network find their next opportunity at Disrupt with our steep discount of Expo+ passes .\n\nIf you’re asking Claude or ChatGPT if TechCrunch Disrupt is worth it, you’re not alone. The reality is that Disrupt is a unique event, and it’s happening at a unique time for the startup community.\n\nThis year’s Disrupt isn’t about predicting the future of AI; it’s about building companies in it. Across six editorially curated stages, founders will hear practical lessons from the CEOs, investors, engineers, and operators shaping the next decade of technology.\n\nWhether you’re raising your first round, scaling your team, or deciding how AI changes your product, every session is designed to answer one question: “What can I take back to my company on Monday morning?”\n\nDisrupt works a bit differently, depending on where you are in your founding journey, with different tracks you can follow to make the most of the three days:\n\nYou’re here to pressure-test your thesis, meet your first angel or pre-seed investors, and figure out who else is building in your space. Prioritize the Builders Stage , the Startup Battlefield semifinalist pitches, and the Expo Hall, along with roundtables tied to your industry and conversations you’ll want to learn more from.\n\nYou’re here for capital and validation above all else, and your time is valuable. Prioritize our investor-matchmaking tools and the connections that come with your Founder Pass, including the networking tools in our app. You also get access to the Deal Flow Café, where we foster one-on-one conversations between founders and investors.\n\nAnd when your schedule isn’t packed with dealmaking, learn from VC perspectives and fundraising-focused sessions at the Builders Stage .\n\nYou’re here in search of talent, strategic partners, and market visibility. Those same networking tools and opportunities can help you meet potential hires and partners and deepen those connections or make new ones. Disrupt’s Side Events aren’t to be missed — there’s one for every industry, interest, or post-event vibe you could be looking to find.\n\nThe Startup Battlefield winner’s reveal packs the Disrupt stage and is each year’s capstone event. But it’s the lead-up to that $100,000 check and the deluge of attention the winner receives that’s the most valuable for founders attending Disrupt.\n\nThe 200 startups chosen on August 20 to compete go through a rigorous prep process and get the opportunity to pitch onstage in front of top-tier VCs and the Disrupt crowds. You’ll also get to watch those pitches, take notes, learn from the peaks and valleys, and potentially meet the teams behind the ideas and innovations. It could be in a follow-up meeting or just walking through the halls of Moscone.\n\nAnd if that all leaves you inspired, here’s an insider tip: Most Battlefield participants, and several winners, have gone through the process multiple times. We’re no longer taking applications for 2026’s competition, but we’re expanding the program to more international markets, and the 2027 process will be similar to this year’s , so take note for the future!\n\nDisrupt 2026 spans several stages , each built around a different founder need:\n\nAnd that’s just the beginning — we’ll have more speakers to announce as we get closer to Disrupt. Check out the full lineup of speakers across all stages and events here .\n\nDisrupt’s prices increase as we get closer to the event, but we have a couple of promotions for Founders looking to save. You can save 50% on a second ticket by following the link here , and bring a coworker or co-founder along for the ride.\n\nIf there are colleagues in your network who have been impacted by layoffs who you’d like to have join up, we have an option for them as well, with a special $75 Expo+ Pass available at a limited volume for those impacted by cutbacks this year .\n\nYour time at Disrupt is valuable, too, so before you head there, check on our regularly updated schedule of speakers and Side Events , get ahead of competitors’ schedules by booking your networking opportunities in advance, and get your own elevator pitches in order to make the most of those magical Disrupt moments that can come at any point October 13-15!"
+      }
+    },
+    "media": null
+  },
+  {
     "id": "9to5mac-a3e201e3611192e1",
     "type": "news",
     "sourceId": "9to5mac",
@@ -269,32 +293,6 @@
     "media": null
   },
   {
-    "id": "accessible-android-efa4abd11093015d",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/lexo-offline-ai-voice-keyboard/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-01T19:48:43.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Lexo Offline AI Voice Keyboard",
-        "summary": "Lexo is a private AI keyboard for Android. Voice typing and next-word prediction both run entirely on device, so once setup is done the keyboard…",
-        "body": "Published 1 October 2026 by Warren Carr\n\nLexo is a private AI keyboard for Android. Voice typing and next-word prediction both run entirely on device, so once setup is done the keyboard keeps working with no internet connection, in airplane mode, and anywhere the signal drops.\n\nAfter installing, open Lexo once to switch it on. The app walks you through it: pick your language, turn Lexo on in Android’s keyboard settings, make it your keyboard, then try it out.\n\nCloud keyboards send what you type to a server and wait for the answer. Lexo puts the models on your phone instead: the typing model downloads once, plus the speech recognizer if you use voice, then they live in the app’s private storage. Nothing you type or say leaves the phone. No sign-up, no ads.\n\nLexo is a paid keyboard. Every install starts with a 30-day Premium trial covering everything the on-device models power: offline voice typing, next-word prediction, the suggestion strip and autocorrect, and glide typing.\n\nAfter that those features stop until you buy Premium: a one-time purchase, not a subscription. Without Premium the keyboard still types: layouts, language switching, emoji, clipboard history, themes, one-handed mode and gestures. No ads either way.\n\nSetup downloads the typing model for your language once, over Wi-Fi by default. Its size depends on the language. Voice typing downloads its own speech pack the first time you use the microphone, and each extra language adds its own. App updates do not re-download any of it.\n\nBuilt on the open-source FlorisBoard project, with open-weight models: SmolLM2, Qwen2.5 and KB-Whisper (Apache-2.0), a Turkish GPT-2 fine-tune (MIT), Gemma (Gemma Terms of Use) and NVIDIA Parakeet (CC-BY-4.0).\n\nQuestions, bug reports, feature requests: reddit.com/r/lexokeyboard .\n\nFree or paid:\n\nAccessibility and User Comments:\n\nFollowing the release of the Pixel 11-series that came onboard with “Rambler,” a new experience of voice typing, more and more Devs are coming up with creative methods of achieving the same experience for non-Pixel 11-series users. Thus, we’re here talking about “Lexo Keyboard,” a keyboard that works entirely offline once you download the model needed for offline use.\n\nI spent a lot of time working with the Developer to make the app accessible, and I’m proud of this Developer for his work in ensuring that the keyboard is accessible.\n\nThus, the keyboard supports “lift-to-type” using TalkBack.\n\nI put the keyboard to use on both my Galaxy S23+, running One UI 8.5 (Android 16), and my Pixel 11 Pro XL, running Android 17. The voice dictation works similarly across the two devices.\n\nWhat is worth mentioning, however, is that in order to be able to double-tap anywhere on the phone to stop voice dictation, you would have to go to TalkBack Settings > Advanced settings > Reduce delay > Typing preference and choose “Hold finger to select letter key, then lift. Double-tap for other keys.”\n\nIf you use “Hold finger to select any key, then lift” instead, you need to tap the voice input key directly to stop voice input, as tapping outside the keyboard area won’t stop it.\n\nThere are lots of settings on the keyboard that you can customize to your liking. Take advantage of those and customize the keyboard to your liking.\n\nThe app is available to anyone with access to the Play Store. When it comes to pricing, there’s a one-time payment of 10 bucks. Without the one-time payment, you can use the app with all features enabled for a period of 30 days.\n\nAfter those 30 days, you wouldn’t have access to the premium features, but even as a free user outside of the 30-day free period, there are no ads.\n\nYou can listen to my Blind Android Users podcast audio demo of the keyboard Here\n\nLast Tested App version and Android version:\n\n2.0.37. Android 17"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "the-verge-081d723722249ca7",
     "type": "news",
     "sourceId": "the-verge",
@@ -368,29 +366,6 @@
     "media": null
   },
   {
-    "id": "techcrunch-50bb8a2699ed31bd",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/01/google-thinks-spacexs-starship-has-to-launch-1600-times-before-space-data-centers-get-off-the-ground/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-01T19:18:03.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google thinks SpaceX’s Starship has to launch 1,800 times before space data centers get off the ground",
-        "summary": "Google launched its first advanced chip into orbit to pave the way for space data centers.",
-        "body": "Google’s prototype of its orbital compute satellite took off today onboard a SpaceX rocket launched from California — the first time the tech giant has sent one of its advanced chips into space.\n\nBuilt by Planet Labs , the satellite will prove that a Google Tensor Processing Unit, its competitor to Nvidia’s GPUs, can function in space. That means supplying a kilowatt of continuous power, cooling the chip, and running a series of models through their paces to see if anything goes wrong.\n\n“We’ve done testing on the ground, but you know, there’s no test that’s completely as good as the real thing,” said Travis Beals, the Google executive managing Project Suncatcher , the tech giant’s plan to develop large-scale compute clusters in orbit around the Earth.\n\nOnce commissioned, the satellite will fire up its TPU in 15-minute bursts to avoid straining the satellite’s power and thermal management systems. This satellite is based on a standard platform built by Planet Labs, but the two companies are working on a demo expected to take flight next year that will see two satellites more purpose-built for advanced compute. Those future versions will attempt to collaborate via a laser communications link.\n\nSuncatcher isn’t the only space AI payload on this SpaceX rocket, which is launching more than one hundred different payloads, including missions from Satlyt and Cowboy Space Company.\n\nWhat sets the Google initiative apart from those startups (and indeed from SpaceX itself) is that it’s a long-term project.\n\nThe focus of this “long-term moonshot,” as Beals puts it, is on building for the space infrastructure and AI workloads that will exist in the future. The company envisions a network of 81 satellites flying in close formation, processing in parallel.\n\n“The bandwidth and the latency between TPUs really, really matters when you’re trying to run a multi-rack workload…we’re trying to look ahead to not just what workloads exist today, but where they will be in five years,” Beals said. That’s largely because the rockets required to scale up orbital data centers in a cost-effective way don’t yet exist.\n\nOn Thursday, Google also released a peer-reviewed version of its white paper on orbital data centers, one of the most rigorous analyses available of how compute gets to orbit. The paper will be published in Joule .\n\nOne of the paper’s most notable aspects is how Google thinks about access to space. Although the researchers stress their analysis isn’t an economic feasibility study, it offers an interesting picture of how the company sees rockets becoming cheaper over time.\n\nLike all data center companies, Google is looking to SpaceX to get its spacecraft off the ground. (Google is also a major investor in SpaceX.)\n\nArguing that Elon Musk’s rocket builders have achieved a price-reducing “learning curve” of about 20% a year since they launched the Falcon 1 rocket, the authors believe it’s reasonable to expect the company to deliver launch prices close to $200 per kilogram by 2035.\n\nWhat will it take to do that? Based on the amount of payload launched by the Falcon 9, they think a similar cost-reduction trajectory will require Starship to fly 370,000 tons of payload into orbit. That’s something that would take it about 1,800 launches over the next ten years, or 180 a year—and that’s if it can fly 200 metric tons on each mission.\n\nThat’s a big ask for a vehicle that has never flown more than five times in a year. SpaceX predicts the company will be flying far more than that—Elon Musk has suggested Starship could achieve an hourly flight rate in 2029, for example, but Musk says a lot of things.\n\nThe good news, at least, in Google’s updated research is that it seems likely that its chips will survive the radiation of space. The company had to redo tests blasting the chips in a particle accelerator after they realized the configuration of the chips provided more shielding than they would actually experience. This produced slightly more errors in the chip’s logic circuitry, but the company is still confident its chips can handle large inference workloads in orbit for the five-year lifespan of a satellite.\n\n“The error rate is very low if you’re thinking about typical inference operations, right? Like one in a million,” Beals said. “On the other hand, it was already problematic for doing, say, some mega-scale training run where you’re going to have many thousands of chips running for months.”"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "cti-once-2343c6da4d529d73",
     "type": "news",
     "sourceId": "cti-once",
@@ -409,32 +384,6 @@
         "title": "ONCE - CTI - ClubONCE ¡Llegan los 11 a 11 del CTI!",
         "summary": "Llegan los 11 a 11 del CTI: 11 días con envíos por solo 11 céntimos.",
         "body": "Llegan los 11 a 11 del CTI: 11 días con envíos por solo 11 céntimos.\n\nDurante 11 días, del 5 al 15 de octubre, tendrás una oportunidad especial para realizar tus compras telemáticas con gastos de envío a solo 11 céntimos.\n\nA lo largo de este periodo, todos los pedidos realizados por teléfono o a través de la tienda online disfrutarán de esta tarifa especial, frente al coste habitual de 7,90 euros.\n\nPuedes realizar tus compras telefónicas de lunes a jueves, de 9:00 a 19:00 horas, y los viernes de 9:00 a 14:00 horas, llamando al 910 109 111 (opción 2).\n\nAdemás, también puedes efectuar tus pedidos a través de la tienda online de ClubONCE, disponible las 24 horas del día.\n\n11 días para ahorrar en tus envíos. ¡No dejes pasar esta oportunidad!"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "accessible-android-76ccde042a3925e8",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/whats-new-in-jieshuo-20261001/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-01T10:14:41.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "What’s New In Jieshuo 20261001",
-        "summary": "Version 20261001 of the Jieshuo screen reader has been released. Here are the main additions and changes in this version. Support For External AI Models…",
-        "body": "Published 1 October 2026 by Kareen Kiwan\n\nVersion 20261001 of the Jieshuo screen reader has been released. Here are the main additions and changes in this version.\n\nTable of Contents\n\nJieshuo now supports using external AI models for a number of its AI-powered functions.\n\nThe new release allows users to set their preferred AI services for the following functions:\n\nI assume that the functions related to the focused item also cover the corresponding functions that work on the entire screen, such as inquire by voice and detailed description. However, I cannot say this for sure because I have not tested these functions myself.\n\nTo set the models, go to Screen reader settings > Advanced settings > the section that is still in Chinese. There is a toggle for each function to enable the use of a custom AI model, and you can configure a different model for each function. You can customize the necessary parameters, such as the URL of an OpenAI-compatible AI service, model name, prompt, and API key. There is also a Test button that you can use to check whether the configuration works.\n\nThis feature is available to paid users only.\n\nJieshuo now includes new presets for the speech output audio. These are available in a new section that is still in Chinese in the TTS settings .\n\nThe standard preset is selected by default. Other presets include boosted bass, boosted treble, and others. I will not comment on how each preset sounds because hearing preferences are subjective, and the results can also vary depending on the speakers or earphones being used.\n\nThe To top and To end functions can now be used on sliders. These functions are assigned to swiping up then down and down then up with one finger if alternative granularity navigation mode is not being used to move between navigation types. They can also be assigned to user-defined gestures and can be found in the main menu.\n\nWhen a slider is focused, To top moves it to its minimum value, while To end moves it to its maximum value.\n\nLike other slider adjustment mechanisms, these functions work only on sliders that the screen reader can modify.\n\nDuring my testing, To end could not move the brightness slider all the way to its maximum value and stopped at 63%. However, it worked correctly on another slider.\n\nJieshuo now allows users to stop automatic notification reading in three additional situations: when Do not disturb mode is on, when media is playing, and when Jieshuo timers are active.\n\nThese options are available in Notification reading settings.\n\nI cannot comment on how reliably these options work because I do not use automatic notification reading on the device I tested with.\n\nAfter translation functions stopped working because of changes on Google’s end, the new version includes the necessary modifications for translation to work normally again.\n\nThe translation issue also affected some AI-related functions, such as image descriptions. These functions use translation to automatically translate results that come in Chinese from vivo AI services into the user’s target language.\n\nI am not sure if this change was introduced earlier. Another user alerted me to it in this version, and I no longer have an older version installed for comparison.\n\nIt is now possible to extend the duration of the long press and hold function, which is 59 seconds by default, by tapping the screen once or performing any onscreen gesture. This removes the 59-second limit. To release the button, the user must tap the screen again with one finger. Other gestures do not work to release the button.\n\nI do not know if the button is eventually released after a certain amount of time, but I tested it for 2 minutes and 39 seconds without the button being released.\n\nNote that if the user performs the function again while still in the window, the limitation remains lifted. Only one tap is required to release the button.\n\nJieshuo no longer automatically moves between home screen pages when automatic page scrolling is disabled. I tested this with Lawnchair, but I do not know whether it works reliably with all launchers.\n\nThe changelog also mentions fixes for bugs related to some devices, including Vivo devices and others.\n\nA 20% discount is currently available on all Jieshuo plans. The discount is active until October 5.\n\nPublished in News"
       }
     },
     "media": null
@@ -484,32 +433,6 @@
         "title": "Google announces Gemini 4 Argon AI model, but you can't use it yet",
         "summary": "So much for Gemini 3.5 Pro.",
         "body": "Google promised Gemini 3.5 Pro in June, but it spent the summer trotting out smaller Flash models . Now, Google is ready to take on the frontier again with Gemini 4 Argon . The company claims this new AI offers industry-leading performance in coding, knowledge work, and cybersecurity, but you aren't allowed to use it yet.\n\nWhile most of us will have to wait to test Gemini 4, Google says engineers inside the company are already using the new model extensively. Argon reportedly used \"fleet-wide telemetry data\" to help Google save 300 TiB of memory across its data centers. Meanwhile, Argon agents have been working to migrate C/C++ codebases to Rust across Google, including thousands of lines in the core re2 and libgav1 libraries and more than 800,000 lines in the Fuchsia OS Zircon kernel.\n\nGoogle has also come armed with a raft of benchmarks to back up its claims. On the software engineering DeepSWE v1.1 benchmark, Gemini 4 Argon hits 77.9 percent, which is higher than GPT-6 Astra, Fable 5.1, and Opus 5.5. Google promises similar power across a range of long-horizon tasks, pointing to Argon's industry-leading score in the economic analysis Vals Index test.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "accessible-android-e28c2f2b636c28ae",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/realtime-ai-cam/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-30T14:02:20.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "RealTime AI Cam",
-        "summary": "RealTime AI Cam tells you what your camera is pointed at, out loud, and every part of it runs on your phone. No account, no…",
-        "body": "Published 30 September 2026 by Kareen Kiwan\n\nRealTime AI Cam tells you what your camera is pointed at, out loud, and every part of it runs on your phone. No account, no ads, nothing to buy. It works in airplane mode, on a subway, or in another country with no data, and nothing the camera sees ever leaves the device.\n\nWHAT IT DOES\n\nLANGUAGES Built for English speakers. It reads English, and translates printed Spanish into English with no internet at all. Other languages download once from Google, then work offline too.\n\nWORKS WITH TALKBACK Every button is labeled, so you can run the whole app without seeing the screen. Nothing is buried behind a gesture you have to discover, and the app tells you what it is doing while it works.\n\nHONEST ABOUT WHAT IT IS The models are small enough to live on your phone, which is exactly why it works with no signal, and it does get things wrong sometimes. It tells you when it is unsure instead of guessing confidently at you.\n\nPRIVATE BY DESIGN\n\nGOOD FOR\n\nBuilt by one person at Nice Dreamz in Northern California, and the same app is on iPhone. Most of what is in here came from blind and low vision users emailing me and me building it that night. If something does not work with TalkBack, or you want it to do something it does not do yet, email ma ** @ ******* mp.com .\n\nFree or paid:\n\nAccessibility and User Comments:\n\nThe most interesting feature of the app is the Help Me Aim feature, which tries to help blind users with the challenge of taking photos. During my testing, the app was able to take photos that included the subject I wanted to focus on, and the guidance was good overall. However, the subject is not always centred in the photo. For example, when taking a photo of a plant on a table, other furniture in the room was also captured along with the plant. The plant was present but was not at the centre of the photo. I captured photos of a few subjects and confirmed with sighted users that they were present in the photos.\n\nAfter the photo is captured, a description is generated, and I find the descriptions decent for an offline model. You can also describe a scene using the dedicated What's This feature. After the scene is described, you can ask additional questions either through voice or by typing. You can also save the photo if you find the scene worth keeping.\n\nI found that the object detection often hallucinates objects that aren't present.\n\nAlthough the app reads the guidance automatically, this is not the case in some other areas. For example, in the text reading feature, which is labeled as English Text to Speech, you have to focus the Detected text item for it to read the recognized text automatically. Also, answers to questions are not read automatically. You have to find them on the screen. My main testing screen reader is Jieshuo, but things could be different with TalkBack.\n\nOverall, the app deserves attention and testing, especially since the developer has shown a clear willingness to improve it, and he is offering it for free without ads. Privacy is also respected because all processing is done offline using the installed on-device model. Speaking of processing, speed might be different across devices. On my Honor 600 Pro, the speed is rather acceptable, both when analysing the view and when answering questions.\n\nLast Tested App version and Android version:\n\nApp version: 1.17, Android 16"
       }
     },
     "media": null
@@ -814,56 +737,6 @@
     "media": null
   },
   {
-    "id": "accessible-android-97589ed9a80c7813",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/playnook-interactive-audiobook/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-26T16:19:52.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "PlayNook Interactive Audiobook",
-        "summary": "PlayNook Interactive Audiobook is an interactive audiobook and story-game app where you listen to narrated stories and make choices that shape what happens next. Professional…",
-        "body": "Published 26 September 2026 by neirin\n\nPlayNook Interactive Audiobook is an interactive audiobook and story-game app where you listen to narrated stories and make choices that shape what happens next.\n\nProfessional voice actors narrate the story while music and sound design build the scene. At key moments, the story pauses and asks you to choose what to do. Choices can be made by tapping or speaking aloud.\n\nThe catalog includes fantasy, mystery, horror, romance, and other genres, with original stories, partnerships, community stories, and shorter one-chapter adventures. First chapters are free, with additional content available through in-app purchases.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nThe user interface is completely accessible with TalkBack. The main issue reported during story playback is that the state of the play/pause button is announced as each story segment appears and starts playing. On the submitted Samsung device, TalkBack audio is shifted to the phone's internal speakers instead of remaining on the connected headset with the rest of the audio. When the dice appears, an indicator is announced, but TalkBack does not explain that the dice can be rolled or clearly announce that it has appeared.\n\nLast Tested App version and Android version:\n\nApp version 3.1.3. Samsung Galaxy S23, Android 16, One UI 8.5."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "accessible-android-b7f56ec7b221a22a",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/__trashed/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-26T08:53:35.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The Podcast App",
-        "summary": "The Podcast App is a podcast player for audio and video by Magnolia Apps. It lets you play audio and video podcasts in one app,…",
-        "body": "Published 26 September 2026 by The Podcast App\n\nThe Podcast App is a podcast player for audio and video by Magnolia Apps. It lets you play audio and video podcasts in one app, download episodes for offline listening, adjust playback speed, skip silence, jump between chapters, and use a sleep timer.\n\nYou can add a show by RSS or search, follow the shows you want, and import or export subscriptions using OPML. You can start listening without an account and sign in if you want synchronization across devices.\n\nOn supported shows, when you skip forward during a known ad break, one tap can jump to where the show resumes. This is never automatic and can be turned off.\n\nThe app does not insert banner or audio ads. Offline downloads and the core player are free, while some optional AI tools require Premium.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nDeveloper submission. We have not had an independent TalkBack audit, so we are not claiming full screen reader support. We would welcome testing and notes from the community, including unlabeled buttons or missing accessibility actions. Please report issues to support@thepodcastapp.dev."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "applevis-apps-b69b009d167a5b08",
     "type": "news",
     "sourceId": "applevis-apps",
@@ -881,33 +754,8 @@
     "locales": {
       "en": {
         "title": "Restaurant Rush: Cook & Serve",
-        "summary": "Welcome to Restaurant Rush — the cozy kitchen-builder where every shift is a tiny puzzle. Run five themed restaurants across a 100-day story campaign, then push your record in Endless mode. Drag ingredients to the stove, plate orders before the timer ticks out, and bank coins to expand your menu, hire a waiter, or unlock the next neighborhood spot. What you'll do • Serve thirsty customers at Sip Stop, plate noodle bowls at Noodle Pit, toss tacos at Taco Truck, and three more restaurants to discover. • Master the rhythm: tap to take orders, prep at the right station, deliver before patience runs out, chase combos for huge tips. • Upgrade kitchen stations, add trays, hire waiters per restaurant, and unlock 50+ recipes that scale with your skill. • Customize your chef with 8 outfit presets, 4 hair styles, and a wardrobe of premium cosmetic items you unlock as you progress. Live ops that respect your time • Daily missions reset at midnight with shareable rewards. • Weekly challenges with global leaderboards. • Seasonal content drops curated by the live-ops team — new recipes, customer types, and chef gear show up without you needing to update the app. Built for one-handed play Restaurant Rush is designed for short sessions on the bus, in line, or before bed. No timers gating progress, no energy meter to wait out — just keep cooking when you want, pause anywhere. Free to download. Optional in-app purchases support continued development.",
+        "summary": "Cook fast, serve happy guests and decorate your own restaurant. Cozy chaos, two cats to pet, and fully playable with VoiceOver. Open your doors and start your shift! Restaurant Rush: Cook & Serve is a fast, cozy restaurant time-management game. Orders pile up, guests get impatient, and you keep the kitchen running one shift at a time. Play your way • Run 5 restaurants, each with its own menu and levels. Start at Sip Stop and work your way up. • Story levels for steady progress, or Endless Shift, where you pick draft cards to shape every run. • Unlock recipes and kitchen upgrades with Dollars, and hire a waiter for the busy rushes. • Finish daily goals and climb the leaderboards. • How to Play: a short guide on the main menu explains the game modes, pace, combos and the screen layout. • Practice: quick lessons and a free practice shift where nobody leaves. Make it yours • Restaurant Studio: decorate with themes, wall decorations, counters and tables. • Spend Coins on chef outfits, music tracks, soundscapes and accessories for the cats. Meet Holosko and Sabri • Two cats live in your restaurant. Pet them to calm down impatient guests. Hear the restaurant come alive • Realistic kitchen and customer sounds: the door, footsteps, chairs, pouring and cooking. Play at your own pace • Fully playable with VoiceOver. • Accessible play and pace settings, including Relaxed, so anyone can play at their own speed. • Left-handed layout. • Available in 9 languages. Tie your apron and open the doors. Your first guests are already waiting.",
         "body": "Welcome to Restaurant Rush — the cozy kitchen-builder where every shift is a tiny puzzle.\n\nRun five themed restaurants across a 100-day story campaign, then push your record in Endless mode. Drag ingredients to the stove, plate orders before the timer ticks out, and bank coins to expand your menu, hire a waiter, or unlock the next neighborhood spot.\n\nWhat you'll do\n\n• Serve thirsty customers at Sip Stop, plate noodle bowls at Noodle Pit, toss tacos at Taco Truck, and three more restaurants to discover.\n\n• Master the rhythm: tap to take orders, prep at the right station, deliver before patience runs out, chase combos for huge tips.\n\n• Upgrade kitchen stations, add trays, hire waiters per restaurant, and unlock 50+ recipes that scale with your skill.\n\n• Customize your chef with 8 outfit presets, 4 hair styles, and a wardrobe of premium cosmetic items you unlock as you progress.\n\nLive ops that respect your time\n\n• Daily missions reset at midnight with shareable rewards. • Weekly challenges with global leaderboards. • Seasonal content drops curated by the live-ops team — new recipes, customer types, and chef gear show up without you needing to update the app.\n\nBuilt for one-handed play\n\nRestaurant Rush is designed for short sessions on the bus, in line, or before bed. No timers gating progress, no energy meter to wait out — just keep cooking when you want, pause anywhere.\n\nFree to download. Optional in-app purchases support continued development."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "accessible-android-8d60a593e8a1f101",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/livecomics/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-25T19:05:40.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "LiveComics",
-        "summary": "LiveComics is a comic, manga, and manhwa reader that performs the page as audio rather than simply displaying it. Every speech bubble is voiced in…",
-        "body": "Published 25 September 2026 by Matt T\n\nLiveComics is a comic, manga, and manhwa reader that performs the page as audio rather than simply displaying it. Every speech bubble is voiced in character, with a separate narrator, while each panel can include its own sound effects and score. The reader advances panel by panel as the scene plays, allowing a whole issue to be followed without seeing the screen.\n\nThe app streams a free shelf of classic public-domain issues. Readers can also import their own CBR and CBZ files on the web and read them on the phone.\n\nA free account covers the core service with no card required. A paid storage tier is available through the website, with no in-app purchases.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nTested with TalkBack. A comic is a purely visual medium, and this app performs the whole issue as audio: every line is voiced in character with a separate narrator, the drawn sound effects actually sound, and a score runs under the scene, so a complete story can be followed with the screen off. On navigation, the library, the store, the menus and the reader controls all work without a mouse and report themselves to the screen reader, and cover tiles are real buttons rather than tappable images. Turning a panel announces your position and nothing else, for example \"page 3, panel 5 of 40\", and that silence is deliberate so the screen reader does not talk over the narration. The panel's own words are available separately, in a hidden region named \"Panel text\" holding the description, the dialogue line by line and the drawn sound lettering; nothing in it is ever announced on its own, so a braille display can read it without fighting the audio. Dialogs take focus when they open and hand it back when they close, Escape closes them, screen changes are announced politely because the app never reloads the page, and segmented controls report which option is selected. Automated checks are clean, with axe reporting 0 serious or critical issues, though that is a floor rather than a claim about real use. For low vision, the reader crops to a single panel, fills the screen with it and then advances on its own as the scene plays, which is magnification you do not have to drive, with no pinching and no hunting for the next balloon. Known issues and limitations, stated plainly: the \"Panel text\" region is easy to miss, because it never announces itself and nothing in the reader tells you it is there; Tab is not trapped inside dialogs; the library's medium filter (All, Comics, Manga, Manhwa) does not report which option is currently selected; there is no audio-first onboarding, so signing up and importing a file still assume you can work an ordinary form; the collision between the screen reader and the narration has never been deliberately tested across a range of devices, so we cannot promise the ducking behaves the same everywhere; and NVDA on Windows and iOS VoiceOver have never been run at all, so with the phone app loading the same code as the website, Windows behaviour in particular is unverified.\n\nLast Tested App version and Android version:\n\nSamsung Galaxy Z Fold 7, Android 16"
       }
     },
     "media": null
@@ -961,32 +809,6 @@
         "title": "Apple Releases watchOS 27.0.1 with fix for unexpected restarts on Apple Watch Series 12 and Apple Watch Ultra 4",
         "summary": "Apple has today released watchOS 27.0.1 for Apple Watch Series 12 and Apple Watch Ultra 4, bringing a fix for an issue that caused the devices to restart unexpectedly. As watchOS 27.0.1 was not distributed to external testers prior to its release, we do not have any information on whether it contains any accessibility fixes for blind, deaf blind, or low vision users at the time of writing. However, as this update appears to have been released to address a specific issue on a small subset of devices, we do not expect it to contain any such fixes. watchOS 27.0.1 Release Notes (via 9to5Mac ) This update provides bug fixes for your Apple Watch including fixing an issue where Apple Watch may restart unexpectedly. How to Update watchOS 27.0.1 is available via Over-the-Air Update (Settings > General > Software Update) or by going to the Watch app on your iPhone and navigating to General > Software Update. To install the update, your Watch must be connected to its charger and have at least 50% battery power.",
         "body": "Apple has today released watchOS 27.0.1 for Apple Watch Series 12 and Apple Watch Ultra 4, bringing a fix for an issue that caused the devices to restart unexpectedly.\n\nAs watchOS 27.0.1 was not distributed to external testers prior to its release, we do not have any information on whether it contains any accessibility fixes for blind, deaf blind, or low vision users at the time of writing. However, as this update appears to have been released to address a specific issue on a small subset of devices, we do not expect it to contain any such fixes.\n\nThis update provides bug fixes for your Apple Watch including fixing an issue where Apple Watch may restart unexpectedly.\n\nwatchOS 27.0.1 is available via Over-the-Air Update (Settings > General > Software Update) or by going to the Watch app on your iPhone and navigating to General > Software Update. To install the update, your Watch must be connected to its charger and have at least 50% battery power."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "accessible-android-818965baf4ceb972",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/google-is-rolling-out-guided-vision-to-gemini-live-heres-how-to-use-it-and-my-early-impressions/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-23T20:00:51.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google Is Rolling Out Guided Vision to Gemini Live: Here’s How to Use It and My Early Impressions",
-        "summary": "Google allows users to turn on the camera feed while in a conversation with Gemini Live, so they can ask about things that are in…",
-        "body": "Published 23 September 2026 by Kareen Kiwan\n\nGoogle allows users to turn on the camera feed while in a conversation with Gemini Live, so they can ask about things that are in view. Although a blind user can take advantage of this feature, it is not designed specifically to assist blind people. Google is now rolling out Guided vision, a mode that uses the camera in a live conversation to help blind people get an overview of their surroundings, read text, and more. This post covers turning the feature on and using it, as well as my first impressions from testing it.\n\nNote that I haven’t done anything special to access Guided vision on my Honor 600 Pro, but I am running a three-month AI Pro trial that came as an offer with my device, so I don’t know if that affected the feature’s arrival on my device. The feature is not available for my other Accessible Android colleagues yet.\n\nTable of Contents\n\nTo enable Guided vision:\n\nA notification appears on the screen with the ability to start a Live session directly. When you use the button to start the Live session, it starts with the camera feed enabled, so you can start talking.\n\nNote that the feature is still not available for everyone, so you should wait if you cannot find the Guided vision toggle in Settings.\n\nAccording to the Google Accessibility help article , it’s possible to assign Guided vision to an accessibility shortcut, and you can launch it through TalkBack too. However, both are still not available on my device. In fact, I haven’t received any TalkBack update recently.\n\nI haven’t tested to see if launching the camera in a Live conversation when Guided vision is active uses the mode without any user’s intervention, but during my tests, I always asked Gemini to start Guided vision to make sure that it works in that mode. When I tried to prompt the assistant to start the feature, it asked me to point the camera at what I wanted described, but that was one of its hallucinations, as it didn’t open the camera feed or start the Live conversation. Starting a Live conversation is still necessary.\n\nAt another time, I asked it to start a Live conversation with Guided vision, but at that instance, it told me that it couldn’t start it automatically and asked me to start Live manually.\n\nNote that turning off Guided vision and then turning it back on from Settings shows the notification to start a Live conversation again, which can be used to start a conversation with the camera turned on.\n\nWhen I had my first conversation with Live with Guided vision turned on, Gemini reminded me that it cannot detect all hazards or guarantee path clearance and that I should use my mobility aid before almost every response. I kept telling it that I understand the risks and that it shouldn’t repeat those warnings. During the later conversations, I didn’t hear any of the warnings. I am not sure, though, if my early prompting helped, or if you hear those warnings only during the first conversation to alert you of the risks or when Gemini thinks that it should do so for your safety.\n\nDuring conversations with Guided vision active, I couldn’t find any indication that a special mode is active. All Live-related controls are the same, with no difference. However, the difference is in how Gemini acts. During my short tests, I found that Gemini tried to be detailed in its descriptions because it was aware that Guided vision is active and that the mode is designed to assist blind users.\n\nI was able to ask it questions about the mode, and I got assurance from it that the mode is to assist blind users. It gave me guidance on how to move the camera to show certain objects or scenes better. When I asked it to tell me how to move to reach something, it told me that it needed to know exactly where I was in relation to the camera’s orientation. Using my hand as a reference, it gave me directions with respect to my hand. It also described the positions of items in the room relative to each other, like the position of a fan relative to the sofa.\n\nAdditionally, Gemini told me the book that I was holding and tried to assist me in putting the full page in view. When I asked it to read the page, it read a part of the page, though. However, when I asked it if that was the only text on the page, it correctly stated that there were other texts and visual diagrams and offered to describe them for me.\n\nThese observations are based on my initial tests, and I haven’t made direct comparisons between using Guided vision with the feature turned on and using the normal Live camera mode with it turned off.\n\nGuided vision changes only how Gemini tries to provide information, as well as making it give more hints to assist a blind user. However, it is still a part of the Live experience. This means that current Live limitations are still present. The most important limitation is the need to prompt it again to tell you about any change, as Live doesn’t have real-time monitoring or continuous picture analysis capabilities.\n\nAnother factor worth mentioning is the model used, as Guided vision doesn’t switch Gemini to a more capable AI model than the one that you are using in your Gemini app.\n\nAlthough image analysis has already advanced and helps in many scenarios, misidentifications are always a part of the formula that shouldn’t be forgotten. For example, a towel hanging on a door was identified more than once as pink, although it wasn’t pink.\n\nAdditionally, leveraging the new mode to take pictures still needs work. After Gemini gave me directions to centre my face and I told it to take a photo, it obeyed my order, opened the camera, and took a photo, but that led to the termination of the Live session. That behavior ended the conversation without being able to make sure that the photo was properly captured or without asking any additional questions about what it includes.\n\nGuided vision is an interesting step forward from Google in tailoring Live camera to blind users. Although Google still has the Lookout app , it decided to make Guided vision a part of the Gemini app. Google decided to launch the feature and mention TalkBack as one of the methods to turn it on before releasing a TalkBack update that includes the necessary shortcut. There is even no accessibility service that can be assigned to an accessibility shortcut at the time of writing. However, an interesting thing for users who rely on other screen readers is that using the feature is not tied to having TalkBack running. I am almost sure that Gemini doesn’t check whether a screen reader is running as a requirement to use the feature.\n\nAlthough it is in its early stages, I am excited to keep Guided vision on, and I am not considering going back to the normal camera mode. This should minimize the need to remind Gemini that I am blind or to try to speak prompts asking it to help me guide my camera toward the subject I am asking about or the text I want it to help me read.\n\nGoogle doesn’t lack the resources to improve how Guided vision works, with the money and ability to make Gemini Live a trusted assistant, as much as “trusted” can be used with AI services, that understands the needs of blind people and helps them live a more independent life.\n\nPublished in Reviews Tutorials"
       }
     },
     "media": null
@@ -1109,7 +931,7 @@
     "locales": {
       "en": {
         "title": "RealTime Ai Cam",
-        "summary": "RealTime AI Camera provides instant object detection, English OCR, and Spanish-to-English translation - all offline. Point your camera to identify 600+ objects, read text aloud, or translate Spanish text to English. Features LiDAR distance measurement on supported devices. Perfect for accessibility, language learning, and everyday assistance. Works 100% offline with no data collection. WORKS WITH VOICEOVER Every button is labeled, so you can run the whole app without seeing the screen. It reads printed text out loud, names what the camera is pointed at, and tells you how far away things are on phones with a depth sensor.",
+        "summary": "RealTime AI Cam tells you what your camera is pointed at, out loud. Every part of it runs on the phone, so it works in airplane mode, on a subway, or in another country with no data. No account, no subscription, nothing to buy. WHAT IT DOES Names what is in front of you, over 600 everyday objects. What's this? describes the whole scene in a sentence and reads it to you. Hold to ask a question about what it sees, and it answers first: yes, no, or the number. Reads printed text out loud, and says numbers and dates the way a person would. Help Me Aim: say what you are looking for, a face, a page, a label, and it talks you into the shot, then takes the picture itself once you are lined up. One tap flashlight for dark rooms. Translates printed text into English. Distance to what is in front of you on iPhones with a depth sensor. LANGUAGES Built for English speakers. It reads English, and translates printed Spanish into English with no internet at all. Other languages download once from Apple, then work offline too (iOS 18 and later). WHAT STAYS ON YOUR PHONE Everything runs on your phone. The only time the app goes online is to download a language pack, once, and only if you want to translate something besides English or Spanish. English and Spanish never touch the internet. WORKS WITH VOICEOVER Every button is labeled, so you can run the whole app without seeing the screen. You can also let VoiceOver do the talking instead of the app if you prefer. HONEST ABOUT WHAT IT IS The models are small enough to live on your phone, which is why it works with no signal, and it does get things wrong sometimes. It tells you when it is unsure rather than guessing confidently. BUILT FROM WHAT USERS ASK FOR Most of what is in here came from blind and low vision users emailing me and me building it that night. If something does not work with VoiceOver, or you want it to do something it does not do yet, email matt@ineedhemp.com .",
         "body": "RealTime AI Camera provides instant object detection, English OCR, and Spanish-to-English translation - all offline. Point your camera to identify 600+ objects, read text aloud, or translate Spanish text to English. Features LiDAR distance measurement on supported devices. Perfect for accessibility, language learning, and everyday assistance. Works 100% offline with no data collection.\n\nWORKS WITH VOICEOVER Every button is labeled, so you can run the whole app without seeing the screen. It reads printed text out loud, names what the camera is pointed at, and tells you how far away things are on phones with a depth sensor."
       }
     },
@@ -1133,33 +955,8 @@
     "locales": {
       "en": {
         "title": "Pegfall: Bounce Roguelite",
-        "summary": "Pegfall is a one-handed pegboard physics roguelite where every shot draws an orb from your deck. Aim, bounce through a living board, build ruthless combos, and descend into the Maw. NEW: PLAY WITH VOICEOVER Aim by named directions, fire with a double tap or Magic Tap, hear every volley, and inspect the board whenever you need to. Peg types use shapes as well as colour, so every board reads clearly. ▸ FAIR — SKILL, NOT LUCK A dotted trajectory preview shows where your shot lands. Every bounce is yours. ▸ A CAMPAIGN THAT ENDS — 10 CHAPTERS, 200 FLOORS Face ten bosses across distinct boards, palettes and rules. Each chapter starts you bare; every decision rebuilds your run. ▸ BUILDS THAT STACK 20 orbs, 23 relics, 14 upgrade cards and three characters create runs that go in completely different directions. Take a curse when the floor asks for one. ▸ THE BOARD FIGHTS BACK Deeper chapters erode spent pegs, wire circuits through armour, and reshape the board as you play. ▸ ENDLESS, DAILY AND WEEKLY Dive without a floor beneath you, take the same daily board as everyone else, or race one shared weekly board with a single attempt. ▸ GET STRONGER AS YOU PLAY Earn permanent upgrades, unlock ascension tiers, achievements, themes, ball skins, faces and note banks. Never pay to win. ▸ MADE TO BE PLAYED BY MORE PEOPLE VoiceOver support, clear combat feedback, accessible peg shapes, Reduce Motion support, and real 44pt touch targets. Special thanks to accessibility tester Matheus Rheine for helping shape this update. ▸ MOBILE-NATIVE True portrait, one-handed, free to start. No energy timer and no premium wall. Honest monetization: optional rewarded continues, an ad-free purchase, cosmetics and essence pouches. Everything in a pouch is also earnable by playing.",
+        "summary": "Pegfall is a one-handed pegboard physics roguelite where every shot draws an orb from your deck. Aim, bounce through a living board, build ruthless combos, and descend into the Maw. PLAY WITH VOICEOVER ON iPHONE Accessible play turns on by itself while VoiceOver is running. The board is built around one Aim control, with Status, Board summary and Last result next to it. By default, swipe up or down on Aim to move through five named directions, from Far left to Far right, and hear the likely first hit. After that, physics decides, and the game tells you when bumpers or bouncing walls can change the path. Double-tap to fire. When the balls stop, you hear the damage and what is left on the board. Board scan reads the board from top to bottom. While aiming, Magic Tap starts it and a second Magic Tap stops it. Optional aim sounds and the Aim practice lesson, whose practice shot costs nothing, help you learn. While Accessible play is on and VoiceOver is running, an interstitial ad can appear at most once every three minutes, and only after a button you press. You hear a warning first and \"Ad closed\" after it, and the game waits until then. VoiceOver play has been tested on iPhone. If something is hard to reach, please tell us. ▸ READ THE BOARD, THEN SHOOT A dotted line previews the start of your shot, up to the first two pegs it hits. After that, physics takes over, so the planning happens before you fire. ▸ A CAMPAIGN THAT ENDS — 10 CHAPTERS, 200 FLOORS Every chapter is its own biome and ends on its own boss, and deeper chapters add new board rules. Each chapter resets your build; only the last relic you took carries over as an heirloom. Leave mid-run and continue from the start of that floor. ▸ BUILDS THAT STACK 20 orbs, 23 relics, 40 cards and three characters send each run in a different direction. Take a curse when the floor asks for one. ▸ THE BOARD FIGHTS BACK From the sixth floor of every chapter, the pegs you spend erode. From chapter 3, pairs of pegs are wired into circuits whose discharge goes straight through armour, and some bosses bring hazard or void pegs onto the board. ▸ ENDLESS, DAILY AND WEEKLY Dive without a floor beneath you, take the same daily board as everyone else, or race one shared weekly board with a single attempt. After a Daily, Weekly or Endless run, join the optional online leaderboard with a nickname. No sign-up. ▸ GET STRONGER AS YOU PLAY Spend essence in the Workshop on permanent upgrades to starting health, damage and block, and on themes, ball skins, faces, ball hats and sound packs. Unlock Dark Depths tiers. ▸ BADGES AND BALLS YOU CANNOT BUY Your achievements are badges on your Profile, with badges for finishing the Weekly Race week after week, playing the Daily Challenge on many days and going deep in Endless. Three of them unlock a ball that is not for sale: Racer, Summit and Abyssal can only be unlocked by playing. ▸ THEMES AND SOUNDS IN THE SHOP The Iznik, Bosphorus and Sakura themes (try each first), the Music Box sound theme and melody packs your pegs play (listen first). ▸ MADE TO BE PLAYED BY MORE PEOPLE VoiceOver play on iPhone, VoiceOver labels and spoken purchase confirmations throughout the Workshop and the Shop, clear combat feedback, special pegs marked by more than colour, Reduce Motion support and 44 pt touch targets. Special thanks to accessibility tester Matheus Rheine, who helped shape VoiceOver play. ▸ MOBILE-NATIVE True portrait, one-handed, free to start. No energy timer and no premium wall. Monetization: optional rewarded continues, a Remove Ads purchase that stops interstitial ads, themes, looks and sound packs, and essence pouches. Essence also comes from playing.",
         "body": "Pegfall is a one-handed pegboard physics roguelite where every shot draws an orb from your deck. Aim, bounce through a living board, build ruthless combos, and descend into the Maw. NEW: PLAY WITH VOICEOVER Aim by named directions, fire with a double tap or Magic Tap, hear every volley, and inspect the board whenever you need to. Peg types use shapes as well as colour, so every board reads clearly. ▸ FAIR — SKILL, NOT LUCK A dotted trajectory preview shows where your shot lands. Every bounce is yours. ▸ A CAMPAIGN THAT ENDS — 10 CHAPTERS, 200 FLOORS Face ten bosses across distinct boards, palettes and rules. Each chapter starts you bare; every decision rebuilds your run. ▸ BUILDS THAT STACK 20 orbs, 23 relics, 14 upgrade cards and three characters create runs that go in completely different directions. Take a curse when the floor asks for one. ▸ THE BOARD FIGHTS BACK Deeper chapters erode spent pegs, wire circuits through armour, and reshape the board as you play. ▸ ENDLESS, DAILY AND WEEKLY Dive without a floor beneath you, take the same daily board as everyone else, or race one shared weekly board with a single attempt. ▸ GET STRONGER AS YOU PLAY Earn permanent upgrades, unlock ascension tiers, achievements, themes, ball skins, faces and note banks. Never pay to win. ▸ MADE TO BE PLAYED BY MORE PEOPLE VoiceOver support, clear combat feedback, accessible peg shapes, Reduce Motion support, and real 44pt touch targets. Special thanks to accessibility tester Matheus Rheine for helping shape this update. ▸ MOBILE-NATIVE True portrait, one-handed, free to start. No energy timer and no premium wall. Honest monetization: optional rewarded continues, an ad-free purchase, cosmetics and essence pouches. Everything in a pouch is also earnable by playing."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "accessible-android-31c50c6553225d4d",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/accessimind-screen-reader/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-19T16:31:01.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Accessimind Screen Reader",
-        "summary": "Accessimind Reader is a screen reader application developed to enable visually impaired and partially sighted users to use their Android phones more clearly, quickly, and…",
-        "body": "Published 19 September 2026 by Sarper Arıkan\n\nAccessimind Reader is a screen reader application developed to enable visually impaired and partially sighted users to use their Android phones more clearly, quickly, and independently.\n\nAccessimind Reader uses the Android AccessibilityService API to provide screen reading functions. AccessibilityService is used to provide audio versions of on-screen content, detect user interface elements, navigate with gestures, provide audio feedback on focused items, and deliver a screen reader experience. This service is necessary for the screen reading feature, which is the core function of the application, to work.\n\nAccessimind Reader does not use AccessibilityService for user tracking, displaying advertisements, remotely recording calls, bypassing Android security mechanisms, or modifying user settings without permission.\n\nThe application presents audio feedback, gesture navigation, keyboard shortcuts, clipboard operations, reading preferences, and tools for the focused item in a practical accessibility flow. The context menu provides quick access to frequently used areas such as reading controls, clipboard operations, notification access, focused item operations, and Accessimind settings.\n\nKey Features:\n\nAccessimind Reader is designed for users who need voice output and fast navigation. It focuses on providing predictable controls, understandable labels, and quick access to frequently used screen reader operations.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nAccessimind is a screen reader. Users can test it to see how well its features work for them and fit their needs.\n\nLast Tested App version and Android version:\n\nAndroid 16"
       }
     },
     "media": null
@@ -1236,31 +1033,6 @@
         "title": "Learn How to Work More Effectively with PDFs and JAWS",
         "summary": "PDF documents are everywhere, from reports and forms to manuals and online resources. These documents can be accessed via a web browser or application like Adobe Acrobat Reader. When PDFs are formatted correctly, they can be read using standard navigation commands and JAWS Quick Navigation Keys; however, challenges arise when the PDF is not structured …",
         "body": "PDF documents are everywhere, from reports and forms to manuals and online resources. These documents can be accessed via a web browser or application like Adobe Acrobat Reader.\n\nWhen PDFs are formatted correctly, they can be read using standard navigation commands and JAWS Quick Navigation Keys; however, challenges arise when the PDF is not structured correctly. Details like headings, reading order, table structure, and labeled form fields — tell JAWS what to say and in what order. Whether that structure exists at all, and whether it matches what a sighted reader sees, is what separates an accessible PDF from an inaccessible one.\n\nJoin us Thursday, September 17 at noon ET for a live webinar, “Beyond the Basics: Working More Effectively with PDF Documents and JAWS.” We’ll delve deeper into these challenges and provide tips for navigating PDFs more efficiently.\n\nIn this webinar, we’ll provide an overview of PDFs, plus show you how to:\n\nRegister for this webinar to improve proficiency and productivity when working with PDFs, and learn some troubleshooting tips along the way. ACVREP credits will be available for those who attend the live webinar.\n\nCan’t attend? We archive all webinars on our Webinars on Demand page. Have questions? Send an email to training@vispero.com ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "accessible-android-dd64e81e0c3fde69",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/jieshuo-touch-focus-and-double-tap-delays/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T13:12:40.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Jieshuo Touch Focus And Double Tap Delays",
-        "summary": "Whether you are exploring the screen or trying to find a specific element, there is a delay between touching the screen and focusing on the…",
-        "body": "Published 16 September 2026 by Kareen Kiwan\n\nWhether you are exploring the screen or trying to find a specific element, there is a delay between touching the screen and focusing on the element under your finger. Similar to TalkBack, Jieshuo screen reader allows you to change the value of this delay. It also allows you to set the time in which 2 taps are registered as an accessibility double tap.\n\nIn order to change the touch focus delay and double tap delay values, you must first enable handling gestures directly through Jieshuo. To do this, go to Advanced settings > Operation settings and check the Handle gestures in the screen reader checkbox.\n\nThe next item in this section is for setting the touch focus delay value. Available values are 150, 200, 250, and 300 milliseconds. To change the time for double tap registration, select Double tap delay and choose any of the available values. The same values as those available for the touch focus delay are provided here.\n\nIn the same settings section, you will find an option called One-finger system gesture trigger range, with the following ranges: small, medium, big, and maximum. This setting defines the distance the finger needs to cover when performing one-finger system navigation gestures, such as swiping up from the bottom to go to Home.\n\nPublished in Tutorials"
       }
     },
     "media": null
@@ -1430,31 +1202,6 @@
     "media": null
   },
   {
-    "id": "accessible-android-54cd8d26641febeb",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/netboard/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T07:00:00.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "NetBoard",
-        "summary": "NetBoard turns your computer into an instant input device for your phone, allowing you to type quickly, accurately, and effortlessly using your computer’s full physical…",
-        "body": "Published 14 September 2026 by Aleksandar Đurić\n\nNetBoard turns your computer into an instant input device for your phone, allowing you to type quickly, accurately, and effortlessly using your computer’s full physical keyboard.\n\nBuilt from the ground up with accessibility (A11y) as a core value, NetBoard is designed for blind, visually impaired, and motor-impaired users who find mobile touchscreen keyboards challenging to use with screen readers such as TalkBack.\n\nWindows app: Download NetBoard for Windows .\n\nNetBoard does not collect, log, or store your keystrokes, clipboard history, or audio files. Data is encrypted and processed strictly in transit. The app contains no ads and has no hidden fees.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nThe app is fully accessible because it was developed by a blind programmer.\n\nLast Tested App version and Android version:\n\nVersion 2.22, Android 16."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "nvda-es-ed501132dbec146b",
     "type": "news",
     "sourceId": "nvda-es",
@@ -1505,56 +1252,6 @@
     "media": null
   },
   {
-    "id": "accessible-android-61b8cf8d7281682c",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/yugosoft-messages/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-13T19:13:53.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "YugoSoft Messages",
-        "summary": "YugoSoft Messages is a modern, fast, and fully accessible SMS application, built with the vision of making messaging easy and barrier-free for everyone. The app…",
-        "body": "YugoSoft Messages is a modern, fast, and fully accessible SMS application, built with the vision of making messaging easy and barrier-free for everyone.\n\nThe app was designed from the ground up in close collaboration with blind and visually impaired users, making it fully optimized for screen readers like TalkBack. Custom TalkBack Actions allow you to delete messages, block senders, or mark conversations as read with a single swipe and double-tap, offering a level of convenience and accessibility that goes beyond mainstream messaging apps.\n\nIn addition to strong accessibility, YugoSoft Messages includes advanced features that make it suitable as a daily messaging app for any user.\n\nTry YugoSoft Messages and experience SMS communication that is simple, fast, and truly accessible to all.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nThe app is completely accessible and supports screen reader actions.\n\nLast Tested App version and Android version:\n\nVersion 1.61, tested on Android 15 and 16."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "accessible-android-5f02a1602de1a94c",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/blind-accessibility-keyboard-bak/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-13T15:27:15.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Blind Accessibility Keyboard (BAK)",
-        "summary": "Blind Accessibility Keyboard (BAK) is an Android keyboard for blind and low-vision users. Refined over many years together with blind users, it was rebuilt from…",
-        "body": "Published 13 September 2026 by Philip Heyse\n\nBlind Accessibility Keyboard (BAK) is an Android keyboard for blind and low-vision users. Refined over many years together with blind users, it was rebuilt from the ground up in summer 2026: modern, faster, and adjustable in great detail.\n\nTwo ways to type, both letting you check a key before it is sent:\n\n– Lift to Type: slide your finger over the keys, hear each one, and commit by lifting it – Double Tap to Type: the first tap reads the key, a second tap confirms it\n\n1. Setup and settings:\n\nSetup is guided step by step and confirms out loud when the keyboard is enabled and selected.\n\nThe settings screen is made for TalkBack: a switch and its label are read as one element, and sections announced with a “Section:” prefix.\n\nSettings can be saved to a file and restored later. A session log can be exported or e-mailed if you need help.\n\n2. Keyboard layouts:\n\n264 layouts are included. For most languages you can choose between Simple (four rows), Fluent Flow (five rows with numbers), Fluent Flow with Cursor (plus cursor keys), PC (Ctrl, Alt and function keys), PC with Num Pad, and Robo Gear (familiar from standard smartphone keyboards).\n\nHold the space bar for the Quick Menu to switch layouts. The full list of languages is at the end of this text.\n\nThe app itself is translated into 30 languages, including Finnish, Malay and Urdu.\n\n3. What you hear:\n\n– Adjustable speed and pitch, with upper and lower case told apart by pitch – Choice of speech engine, with language, country and voice – Optional NATO alphabet, so “B” and “D” are never confused – Spoken names for punctuation, symbols and emoji – Announcements when the keyboard opens or closes, when you move between letters, numbers, symbols and emoji, and on Shift, Alt or Ctrl changes – Key click sounds in three styles, with adjustable volume – Vibration when typing and on gestures, each switchable separately\n\n4. Voice input:\n\nStart dictation with the microphone key or the Quick Menu, and choose between:\n\n– Your device’s own dictation – A model running on your device: no account needed, works offline, though less accurate than the online options – Popular AI services, using your own API key, stored encrypted on your device only\n\n5. Typing support:\n\n– Auto-correct for many of the supported languages. One Backspace restores the original word. Never runs in password fields. – Text shortcuts: “brt” becomes “Best regards, Tom”. One Backspace undoes it. – Clipboard history above the keys. Tap an entry to insert it. – Your own keys for text you often need, such as your e-mail address – Optional capital letter at the start of a sentence – Adjustable delay and repeat speed when holding Delete or Backspace\n\n6. Subscription:\n\nBAK is funded by a small subscription. It costs less than the equivalent of one US dollar per month, and follows the local price level, so in many countries it is lower. It pays for ongoing work: fixing bugs, keeping up with new Android versions, and adding features. Before subscribing, you can try the keyboard in the test field on the app’s home screen. A subscription is needed to use it in other apps.\n\n7. Help and contact: – https://bright-side.de/bak/ – ba * @ ********* de.de\n\nThe Help section in the app has the documentation, the mailing list, and a way to e-mail the developer.\n\n8. Layouts for your language:\n\nArabic (also with French), Belarusian, Bengali, Bulgarian (Cyrillic, Latin, Phonetic), Canadian (also French, Multilingual), Croatian, Czech, Danish, Dutch, English (UK, USA), French (France, Switzerland), German (Germany, Switzerland), Greek, Gujarati, Hebrew, Hindi (also InScript), Hungarian, Indonesian, Italian (Italy, Switzerland), Kannada, Marathi, Norwegian, Persian, Polish (also programmer), Portuguese (also Brazilian ABNT), Punjabi, Romanian, Russian, Serbian, Spanish (Spain, Latin America), Swedish, Tamil, Telugu, Turkish (F and Q), Ukrainian, Vietnamese.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nThe keyboard app was specifically designed for blind or visually impaired users.\n\nLast Tested App version and Android version:\n\n5.0.7"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "cti-once-66c54d7f9f93a856",
     "type": "news",
     "sourceId": "cti-once",
@@ -1574,31 +1271,6 @@
         "title": "Evaluaciones de APP Evaluaciones de APP actualizadas o incorporadas en el ClubONCE en el mes de agosto.",
         "summary": "A lo largo del pasado mes de agosto se han evaluado las siguientes APP:",
         "body": "A lo largo del pasado mes de agosto se han evaluado las siguientes APP:\n\nAndroid\n\nLa aplicación ofrece estadísticas, clasificaciones y diferentes modalidades de juego, proporcionando una experiencia de gestión y competición orientada a los aficionados al fútbol.\n\niOS\n\nLa aplicación ofrece estadísticas, clasificaciones y diferentes modalidades de juego, proporcionando una experiencia de gestión y competición orientada a los aficionados al fútbol.\n\nEn esta ocasión se han evaluado Apps categorizadas en: Utilidades y Entretenimiento.\n\nSi tiene problemas para abrir los enlaces, copie las url que se muestran a continuación en su navegador:\n\nAndroid\n\niOS\n\nRecordamos a las personas afiliadas que estén interesados en estos informes, que pueden suscribirse a Valoraciones Accesibilidad de APP, de esta manera recibirán un correo cada vez que se publique una nueva aplicación, permitiéndoles disponer de la información puntualmente.\n\nEsta información y los documentos completos de evaluación de cada una de estas aplicaciones están disponibles en el apartado de Valoraciones de accesibilidad de aplicaciones para móviles o accediendo con el navegador a la ruta ClubONCE / Servicios / Autonomía Personal y Tecnología / Tiflotecnología / Valoraciones de accesibilidad de aplicaciones móviles."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "accessible-android-9b0ae5a09b4cdf09",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/__trashed-2/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-10T16:53:38.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "HushBook – Read while listening",
-        "summary": "HushBook is an audiobook read-along app built for readers with ADHD, dyslexia, or poor reading comprehension. It plays the audiobook files you already own and…",
-        "body": "Published 10 September 2026 by HushBook\n\nHushBook is an audiobook read-along app built for readers with ADHD, dyslexia, or poor reading comprehension. It plays the audiobook files you already own and highlights every word in sync with the narration, so the eye and ear stay locked together. Fully on-device: offline, no account, no ads, free on Android and iOS, with about 20,000 public-domain titles included.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nThe core accessibility feature is word-by-word highlighting synced to the narrator's voice, designed for readers who struggle to follow text alone or audio alone. Everything works offline with no account required. Screen-reader testing is ongoing and we welcome feedback from blind and low-vision users at hello@hushbook.app."
       }
     },
     "media": null
@@ -1777,31 +1449,6 @@
     "media": null
   },
   {
-    "id": "accessible-android-b9ca93b5272e2f9d",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/itest/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-06T09:07:07.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iTest",
-        "summary": "iTest is a hardware diagnostic and specification testing utility developed by Hugh Jeffreys. It allows users to easily test device components—including audio, display, sensors, cameras,…",
-        "body": "Published 6 September 2026 by Quin\n\niTest is a hardware diagnostic and specification testing utility developed by Hugh Jeffreys. It allows users to easily test device components—including audio, display, sensors, cameras, and connectivity—through either a guided semi-automatic testing mode or individual manual tests, helping users verify device condition and hardware integrity.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nThe application was tested using Google TalkBack. The interface is fully accessible, all interactive controls and buttons are properly labeled, and navigation functions smoothly across all test screens with no accessibility barriers or issues found.\n\nLast Tested App version and Android version:\n\nGoogle Pixel 9a running Android 16 and Android 17 (iTest version 1.3.0)"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "freedom-scientific-blog-47d6926d08cd969b",
     "type": "news",
     "sourceId": "freedom-scientific-blog",
@@ -1897,31 +1544,6 @@
         "title": "Learn How AI Connectors Can Bring Your Everyday Apps and Information Together",
         "summary": "Artificial Intelligence (AI) is changing how we work, helping us automate routine tasks, analyze and summarize data, and generate content. Learn AI with our AI live webinar series and comprehensive online guide, designed to empower you with the knowledge and skills to increase productivity and independence in the workplace. The 14th webinar in this ongoing …",
         "body": "Artificial Intelligence (AI) is changing how we work, helping us automate routine tasks, analyze and summarize data, and generate content. Learn AI with our AI live webinar series and comprehensive online guide, designed to empower you with the knowledge and skills to increase productivity and independence in the workplace. The 14th webinar in this ongoing series, “Using AI Connectors to Bring Your Everyday Apps and Information Together,” will take place Thursday, September 3 at noon ET.\n\nAI becomes even more powerful when it can work with the apps, files, and information you use every day. Instead of copying and pasting content between applications, AI connectors let you access and interact with information across multiple services from a single conversation.\n\nIn this webinar, we’ll demonstrate how AI connectors can simplify everyday tasks and help you work more efficiently.\n\nYou’ll learn how to:\n\nWhether you’re organizing your day, researching a project, or managing documents, register for this webinar to learn how AI connectors can help you spend less time searching for information and more time getting things done. ACVREP credits will be available for those who attend the live webinar.\n\nThis webinar is part of a series designed for all skill levels. It starts with the basics and builds each month, offering a deeper understanding of AI concepts and practical applications. Webinars are held on the first Thursday of every month at noon ET and are archived on our Webinars On Demand page, so you can stream or download sessions anytime. No prior AI experience is needed!\n\nAccess additional details on our page dedicated to helping you learn AI .\n\nHave questions? Send an email to training@vispero.com ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "accessible-android-11c58aaa518e1ff3",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/blindgram/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-01T07:50:30.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "BlindGram",
-        "summary": "blindGram is an independent accessible Telegram client for blind and low-vision Android users, based on Telegram’s open-source Android code. Its optional blindGram Assistant reads text…",
-        "body": "blindGram is an independent accessible Telegram client for blind and low-vision Android users, based on Telegram’s open-source Android code.\n\nIts optional blindGram Assistant reads text inside images, provides offline image labels, and converts voice messages and round videos to text offline in 23 languages without Telegram Premium.\n\nOptional AI features provide detailed image descriptions, summaries, follow-up questions, and questions about any message through the user’s own OpenRouter, OpenAI, Claude, Gemini, or compatible provider. AI features remain off until enabled.\n\nWebsite: https://en.blindgram.ir/\n\nFree or paid:\n\nAccessibility and User Comments:\n\nDesigned specifically for blind and low-vision users . Interface and message actions are optimized for screen-reader navigation, with primary testing using TalkBack .\n\nAssistant results open in accessible dialogs or conversation screens where text can be read, selected, and copied.\n\nOffline OCR , image labels, and voice-to-text require no account or Telegram Premium.\n\nAI features are optional and clearly disclose when content leaves the device.\n\nLast Tested App version and Android version:\n\nBlindGram 15.0; Supports Android 5.0 and newer;"
       }
     },
     "media": null
@@ -2174,83 +1796,6 @@
     "media": null
   },
   {
-    "id": "accessible-android-895057bf19f013f0",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/a-comprehensive-guide-to-the-smart-typer-pro-app/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-08-15T08:40:45.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "A Comprehensive Guide to the Smart Typer Pro App",
-        "summary": "Smart Typer Pro is an all-in-one productivity app for Android devices that completely redefines mobile note-taking, text editing, voice dictation, artificial intelligence assistance, and document…",
-        "body": "Published 15 August 2026 by Syed Sharib Ali\n\nSmart Typer Pro is an all-in-one productivity app for Android devices that completely redefines mobile note-taking, text editing, voice dictation, artificial intelligence assistance, and document management. Rather than operating as a basic text editor or a single simple tool, Smart Typer Pro serves as a central, easy-to-use digital workspace designed for everyone—from everyday users, students, and writers to content creators and users who rely on accessibility features.\n\nThis comprehensive guide breaks down every single feature, setting, handy customization, system integration, and daily shortcut inside Smart Typer Pro in clear, easy-to-understand detail.\n\nDownload the app on Google Play\n\nTable of Contents\n\nSmart Typer Pro keeps all your work neat, organized, and easy to find on your Android phone or tablet. When you open the app, it automatically creates a main folder named Smart Typer directly in your device’s main internal storage root ( /sdcard/Smart Typer ).\n\nLocated at the bottom-right corner of the main screen, the Plus (+) / Create button lets you create new items instantly:\n\nLocated at the top-right of the main screen:\n\nBy default, long-pressing (holding down) any file or folder brings up a comprehensive context menu loaded with quick actions tailored specifically to the file type:\n\nWhen you turn on multi-select mode (or select multi-file options), you can handle several items together:\n\nThe built-in editor screen is the heart of Smart Typer Pro. It handles everything from quick daily scratch notes to large document files smoothly.\n\nSmart Typer Pro makes typing hands-free easy with voice dictation built straight into the text editor.\n\nSet up custom shorthand phrases in Settings. For example:\n\nWhile you speak, Smart Typer Pro automatically detects your custom shortcuts and expands them into full sentences instantly.\n\nSmart Typer Pro offers four writing assistant options to refine your notes according to your needs:\n\nThe AI Typing Assistant screen offers a dedicated, distraction-free space for dictating text, polishing ideas with AI, and sharing messages directly.\n\nAvailable from the main menu side drawer and directly from the text editor’s More Options menu, the Quick AI Assistant gives you a friendly, helpful AI chat companion ready to answer questions or help write content.\n\nThe Text-to-Handwriting feature turns your digital text notes into realistic handwritten PDF files or image pages.\n\nSmart Typer Pro uses high-quality realistic voice technology to convert your text documents into clear, natural-sounding MP3 audio files. Conveniently access this feature directly from the long-press file context menu ( Convert to Audio ) as well as from the Smart Utilities Hub.\n\nSmart Typer Pro includes built-in pop-up media players so you can listen to audio recordings or watch video clips without needing separate apps.\n\nThe Media Scanner tool quickly scans your phone to organize and show all your media files in one clean dashboard.\n\nThe Instant Translator tool offers fast, multi-language document translation. Access it conveniently from the Smart Utilities Hub , the long-press file context menu ( Translate Text ), or directly inside the text editor’s More Options menu while working on a note.\n\nThe Wikipedia Search tool lets you research topics and extract information right inside the app. Access it from the Smart Utilities Hub or directly while editing notes via the text editor’s More Options menu.\n\nWord Helper uses AI to turn any word or phrase into a comprehensive, easy-to-understand dictionary guide. Access it from the Smart Utilities Hub or directly while writing notes via the text editor’s More Options menu.\n\nThe Smart Utilities Hub acts as a central control panel holding all 12 main tools of Smart Typer Pro (including Instant Language Translator, Wikipedia Search, Quick AI Assistant, Word Helper, and Text-to-Audio).\n\nThe Settings screen gives you full control over how Smart Typer Pro works:\n\nSmart Typer Pro fits naturally into your daily Android phone routine.\n\nSmart Typer Pro is set up to handle standard file actions across your system:\n\nDisclaimer: This guide was provided by the Smart Typer Pro developers. It was not written or independently reviewed by the Accessible Android team.\n\nPublished in Tutorials"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "accessible-android-468ee1b22b14846f",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/smart-typer-pro/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-08-14T07:16:42.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Smart Typer Pro",
-        "summary": "Smart Typer is a lightweight yet feature-rich Android productivity application designed to bring notes, file management, advanced text editing, AI tools, and everyday utilities into…",
-        "body": "Published 14 August 2026 by Syed Sharib Ali\n\nSmart Typer is a lightweight yet feature-rich Android productivity application designed to bring notes, file management, advanced text editing, AI tools, and everyday utilities into a single workspace. It allows users to create, edit, organize, copy, move, rename, share, and convert files while also providing an integrated file manager for browsing and managing device storage.\n\nIts powerful text editor supports both regular writing and coding, with features such as Find & Replace, precise text splitting, multi-selection, voice typing, offline voice-input correction, Markdown/blog writing, and multiple AI-powered text refinement modes. Users can also translate text, look up words with Word Helper, search and read Wikipedia articles, and convert text into PDF, realistic handwriting, or natural-sounding audio.\n\nSmart Typer also includes an AI Companion for answering questions with beautifully formatted responses, an AI Typing Assistant, Archive Viewer for ZIP/RAR files, image, audio, video, and Markdown viewers, and enhanced Microsoft Word document support. With extensive customization, tablet and landscape support, and compatibility with numerous text and document formats, Smart Typer aims to provide a versatile productivity environment for students, writers, developers, professionals, and everyday Android users.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nThe UI is designed with accessibility in mind and works with prominent Android screen readers, including TalkBack, CSR, and PSR. Interactive buttons and controls are properly labelled, and accessibility actions are provided where applicable, including for file and folder operations. Screen-reader navigation is supported throughout the app, with particular attention given to accessible text editing, file management, and utility workflows. No significant unlabeled-button or accessibility issues are currently known.\n\nLast Tested App version and Android version:\n\n1.4. Android 15"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "accessible-android-14a8ff643e0a5049",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/unboxr/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-08-09T16:22:27.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Unboxr",
-        "summary": "Unboxr is the ultimate lightweight and secure tool for extracting archives on your Android device. Designed with a beautiful, modern dark theme using Jetpack Compose,…",
-        "body": "Published 9 August 2026 by Warren Carr\n\nUnboxr is the ultimate lightweight and secure tool for extracting archives on your Android device. Designed with a beautiful, modern dark theme using Jetpack Compose, Unboxr makes managing compressed files fast and intuitive.\n\nKey Features:\n\nFree or paid:\n\nAccessibility and User Comments:\n\n“Unboxr” is a simplistic app intended for extracting compressed files, with support for several formats, including password-protected archives.\n\nThe UI is straightforward, with an “Open Folder” button that, when tapped, takes you to your phone’s internal storage, where you can choose the location containing the file you want to extract. The app also appears among the apps that can handle these file types, so you can select supported files from a file manager without using the dedicated button in the app.\n\nIn the top-right corner, there is a “Settings” button where you can customize the app. The customization options are quite limited, though. The Settings section also includes a donation option at the very bottom of the screen labeled “Buy me a coffee”\n\nThe app is completely free and contains no ads.\n\nThe app is very minimalistic. I noticed that it is not possible to make the app ask you where you want the contents to be saved every time you extract a file, despite the presence of an “Always ask” option in Settings, which, based on its explanation, should enable this behavior. Instead, to select the output directory, you have to specify it through the “Default destination folder” option.\n\nWhen it comes to accessibility, I didn’t encounter any issues with the app.\n\nLast Tested App version and Android version:\n\nv1.0. Android 16"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "nvaccess-in-process-61c805765b69b0bb",
     "type": "news",
     "sourceId": "nvaccess-in-process",
@@ -2317,31 +1862,6 @@
         "title": "Modos-ON ¡Ya disponible el informe de Slay the princess - The Pristine Cut para PC!",
         "summary": "Desde el Centro de Tiflotecnología e Innovación de la ONCE (CTI) se ha realizado un análisis detallado evaluando sus distintos apartados y su impacto en la experiencia de juego.",
         "body": "Desde el Centro de Tiflotecnología e Innovación de la ONCE (CTI) se ha realizado un análisis detallado evaluando sus distintos apartados y su impacto en la experiencia de juego.\n\nEn el siguiente enlace encontrarás todo lo relacionado con la accesibilidad de este título:\n\nInforme de evaluación Slay the princess - The Pristine Cut para PC"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "accessible-android-9184590b8a4b5a5d",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/talk-forward/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-08-03T16:03:31.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Talk Forward",
-        "summary": "Talk Forward is a powerful screen reader that makes your Android phone and tablet fully usable by voice and touch — built for blind and…",
-        "body": "Published 3 August 2026 by Yannick Plassiard\n\nTalk Forward is a powerful screen reader that makes your Android phone and tablet fully usable by voice and touch — built for blind and low-vision users who want speed, control, and modern features.\n\nRefined for responsiveness, Talk Forward focuses on what matters most: fast, reliable feedback and deep customization, so the device works the way you do.\n\nKEY FEATURES\n\nTalk Forward is built with and for its community, and improves continuously based on real user feedback.\n\nACCESSIBILITY NOTE\n\nTalk Forward uses Android’s accessibility services to read screen content aloud and let you control your device entirely by touch and gestures. This access is used only to provide screen-reader functionality on your device.\n\nAccessibility and User Comments:\n\nUser feedback plays a central role in the development of Talk Forward. Reports, suggestions, and real-world experiences help improve performance, compatibility, speech feedback, gestures, and overall usability across different Android devices and apps.\n\nLast Tested App version and Android version:\n\n26.8.1. Android 16"
       }
     },
     "media": null
@@ -2461,31 +1981,6 @@
         "title": "XR Accessibility Guidelines 1.0 de Metaverse Standards Forum",
         "summary": "Imagen creada con IA. Descripción textual de la imagen Se han publicado las XR Accessibility Guidelines 1.0, un recurso pionero del Grupo de Trabajo de Accesibilidad del Metaverse Standards Forum. Las XR Accessibility Guidelines 1.0 nacen para ayudar a evaluar la accesibilidad de las experiencias XR. Por ello, las directrices ofrecen criterios verificables e independientes de la tecnología,",
         "body": "Nota 1: como todos los artículos de este blog, este artículo NO está promocionado.\n\nNota 2: como todos los artículos de este blog, este artículo se ha ideado y elaborado sin el uso de herramientas IA, solo se han usado para la revisión final de la ortografía.\n\nAutor: Olga Carreras Montoto\n\nEtiquetas: accesibilidad metaverso , accesibilidad realidad virtual (VR)\n\nCompártelo en:\n\nHistórico de artículos:\n\nSubir al comienzo de la página"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "accessible-android-4142b5e8ce924d4f",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/beyond-the-numbers-do-flagship-processors-make-a-real-difference-in-daily-use/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-07-13T15:30:16.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Beyond the Numbers: Do Flagship Processors Make a Real Difference in Daily Use?",
-        "summary": "Android phones span a wide range of prices, starting at around $80 and reaching as high as $1,500. While it is not reasonable to expect…",
-        "body": "Published 13 July 2026 by Kareen Kiwan\n\nAndroid phones span a wide range of prices, starting at around $80 and reaching as high as $1,500. While it is not reasonable to expect much from a low-end device, midrange phones have proven their place by offering good value for money, with reliable specifications that are more than sufficient for a lot of users without costing a fortune. Midrange devices now offer more RAM and storage than they did in previous years, and MediaTek, Samsung, and Qualcomm all offer capable processors that can comfortably handle light to moderate tasks.\n\nIn recent years, good midrange phones have typically been priced between $300 and $500. However, due to a combination of factors, prices are expected to increase across all price segments, making midrange devices more expensive and pushing the already hard-to-swallow prices of high-end devices even higher.\n\nFor nine years, I used midrange phones, including the Huawei P10 Lite, Huawei P30 Lite, Samsung Galaxy A71, and Samsung Galaxy A55, before switching to the Honor 600 Pro , which is powered by Qualcomm’s Snapdragon 8 Elite, the company’s flagship chipset from last year. It is still considered a very capable chipset today.\n\nIn this article, I will discuss the differences I noticed between using a high-end processor and a midrange one based on my personal experience. Rather than focusing on benchmarks, technical tests, or specifications, my goal is to talk about real-life daily usage and whether a flagship processor actually makes a meaningful difference.\n\nTable of Contents\n\nAs blind users, we need a smooth and responsive screen reader experience on our devices. A screen reader needs to always be running on a blind user’s phone, requiring enough resources to remain responsive and reliable.\n\nWhile noticeable lag should be expected on low-end devices, as these phones sometimes struggle with basic tasks even without a screen reader running, modern midrange devices are generally powerful enough to handle screen readers smoothly. For example, a sighted person I know owned an Honor X5b, a phone with very modest specifications, and used to wait several seconds when answering a call for the phone to react and display the call screen.\n\nHowever, even with capable midrange processors, many Android users notice that screen readers are good overall but not perfect. There can be a short delay between touching the screen or swiping between onscreen elements and hearing the focused item announced. This delay becomes more noticeable when scrolling, as TalkBack needs time to identify the new items and place focus correctly.\n\nBased on my own experience, moving to a high-end processor does not eliminate these delays, or at least the improvement is not dramatic. After switching from midrange phones to the Honor 600 Pro with Qualcomm’s Snapdragon 8 Elite processor, I noticed some improvement in overall responsiveness. However, I am not even sure whether the difference I noticed is a real improvement or partly the placebo effect.\n\nSince TalkBack is not my primary screen reader, I do not use it often. That said, my Accessible Android teammates who use TalkBack as their main screen reader report noticeably better performance on flagship devices, even if it is still not perfect.\n\nOf the third-party screen readers available on Android, I only use Jieshuo , so I cannot comment on the experience with all other screen readers. From my experience, Jieshuo feels more responsive overall than TalkBack, especially while scrolling, although there is still room for improvement. Both TalkBack and Jieshuo offer the ability to reduce the delay between touching the screen and announcing the item under the finger, which improves this part of the experience. However, Jieshuo users should first determine whether this feature is reliable enough for them, as enabling it can still introduce issues in some situations.\n\nAdditionally, TalkBack improves typing responsiveness through the ability to reduce typing focus delay, while Jieshuo allows users to type with screen reader gestures suspended, which can positively affect typing speed.\n\nIn my opinion, the problem with screen reader performance on Android does not come from insufficient processor power, but rather from the communication between the operating system and the screen reader at the software level. There should be a review of how the necessary interactions between the system and accessibility services are handled in order to provide an almost lag-free experience across both midrange and high-end devices.\n\nUnfortunately, many people, including myself, notice a difference in screen reader responsiveness when using VoiceOver on iOS devices, with interactions often feeling smoother and more immediate. This does not mean that the Android screen reader experience is poor. I have been an exclusive Android user for more than 13 years, and Android continues to meet my needs. However, improving screen reader responsiveness is always welcome, especially knowing that even midrange processors are already powerful enough to handle screen readers efficiently.\n\nA lot of blind users rely on speech output from their screen readers to interact with their devices and access information. For those users, no matter how much screen reader responsiveness improves, a slow or unreliable TTS engine can ruin the entire experience.\n\nWith traditional TTS engines, I could not notice a meaningful difference between running them on a midrange device and on a high-end device. For example, Google Text-to-Speech performs similarly on both my Galaxy A55 and my Honor 600 Pro. Although it is the least responsive of the TTS engines I use, including Acapela, Vocalizer, and eSpeak, its responsiveness did not improve simply by moving to a more powerful processor.\n\nHowever, with the emergence of neural and AI-based TTS engines, device performance starts to become more important. While none of the AI TTS engines currently available are ready to replace traditional engines as the primary daily screen reader TTS for most users, testing them, or using them to read articles or other content, is an interesting experience.\n\nWith these newer engines, I started to notice the limitations of a midrange processor. When testing ToBe SAID Pro on my Galaxy A55, powered by the Exynos 1480 processor, increasing the speech rate resulted in choppy speech, eventually reaching a point where the generated speech became almost impossible to understand. Even at lower speeds, speech interruptions could still occur sometimes.\n\nRunning the same engine on the Honor 600 Pro with the Snapdragon 8 Elite processor provided a noticeably better experience. I was able to increase the speech rate without experiencing the same issues, with the engine being able to generate speech quickly enough to keep up.\n\nI also tested the Supertonic model through the BookFusion TTS engine. While the experience is still not completely smooth, the engine was usable. I have not tested this engine on my Galaxy A55, as the update supporting it was released recently, but I would expect the experience to be worse, with more lag and possible issues during speech generation.\n\nTraditional TTS engines are still the most reliable choice regardless of the device being used. However, neural and AI-based engines are clearly here to stay, and they already demonstrate interesting capabilities. As these technologies continue to improve, processor performance may become increasingly important for blind users who want to take advantage of them.\n\nBoth midrange and high-end processors are capable of handling daily tasks, but the difference lies in the time it takes to complete certain operations, especially more complicated or intensive ones.\n\nIt is easy to notice the difference in the time required for the Play Store or third-party app installers to install the same application on a midrange and a high-end device. In-app tasks can also be completed faster with a more powerful processor. For example, converting a video to audio through the AudioLab app takes noticeably less time on a high-end device, with the difference being difficult to ignore.\n\nIt is worth keeping in mind, however, that some very demanding tasks can expose the limitations of a midrange processor, such as intensive gaming, advanced video editing, or other specialized workloads that many users may not need to perform regularly.\n\nOpening apps and performing everyday tasks such as sending messages, making calls, and navigating through applications remain smooth and reliable on midrange devices, as they are already powerful enough to handle these tasks efficiently.\n\nEven with many operations that are completed faster on high-end processors, waiting a few extra seconds for certain tasks on a midrange phone is still a trade-off worth considering, especially when taking into account the large difference in price between the two categories.\n\nThe processor, with both its CPU and GPU components, is a fundamental part of a device’s performance. It plays a major role in determining how well a phone handles daily tasks, ranging from basic operations to more advanced and resource-intensive ones. Its impact can also extend to other areas, such as the maximum connection speeds the device can achieve and the capabilities of other hardware features that depend on it.\n\nHowever, the processor is not the whole story. A mobile phone is a complete package, and the final experience depends on the decisions made when designing the entire device. A powerful processor can deliver excellent performance, but other limitations can prevent it from showing its full potential.\n\nFor example, pairing a high-end processor with limited RAM or slower storage is like having a highly skilled manager without the right resources to work efficiently. The manager may be capable of handling complex tasks, but limited resources can prevent them from reaching their full potential. Poor thermal management can also reduce the advantage of a powerful processor, as the phone may need to throttle performance to control heat and continue operating safely. Battery capacity is another important factor. A high-end processor with a small battery is like having a powerful car with a tiny fuel tank.\n\nSoftware is another important part of the equation. Poor optimization, crashes, stuttering, or badly optimized applications can make even the most powerful processor feel like a much lower-tier one. A great processor can only perform as well as the software around it allows.\n\nSince the goal of this article is to provide an overview of the performance differences between a device running a high-end processor and one running a midrange processor, rather than to serve as a guide on what to look for when purchasing a new Android phone, I will not go into detail about every compromise manufacturers make to keep prices competitive, how those compromises affect users, or provide recommendations regarding purchasing decisions. It is worth noting, however, that midrange devices usually involve more compromises to achieve a lower price, while high-end phones tend to offer a more complete and well-rounded package.\n\nWith the current and expected price hikes, high-end phones are becoming harder and harder for many people to afford. At the same time, flagship killers are becoming closer to the flagships they were meant to challenge, with some now reaching the prices of last year’s high-end devices. Midrange devices are facing their own challenges, as manufacturers are expected to make more compromises to keep their devices within an affordable price segment.\n\nWhile I cannot say that using a midrange device with a midrange processor is comparable to using a more powerful device with a flagship one, I can confidently say that the difference I experienced does not justify the large price gap for many people. Screen reader and TTS performance remain close between both categories, daily tasks can be performed reliably on both, and even when certain operations take longer on midrange processors, the extra waiting time is often a reasonable trade-off.\n\nOn-device AI is another area where high-end chipsets have an advantage, as running AI models locally requires powerful hardware. However, many AI features still rely on cloud processing, and the on-device features currently available are not yet valuable enough for many users to justify paying more.\n\nSpending hundreds of dollars more is not always the best decision. In many cases, saving that money for something else can provide more value. You should not take a loan or put yourself under financial pressure just to buy a smartphone.\n\nBefore going beyond your budget, ask yourself: Do I really need the most powerful processor available? Would a larger battery make a bigger difference for my usage? What aspects of my phone experience do I value the most? What tasks do I perform regularly on my device?\n\nWhether you are a blind or sighted user, you should not expect companies to make midrange devices identical to their high-end models. There needs to be a difference somewhere, with certain improvements reserved for more expensive devices. As a consumer, your purchase should be based on your needs and budget, while understanding that compromises and limitations are part of choosing a more affordable device. However, those limitations are often much smaller than the benefits gained from saving a considerable amount of money.\n\nThat being said, with manufacturers increasing the number of years of software support, looking at a high-end device released one or two years earlier can sometimes be a better choice than buying a new midrange device. This is because a previous-generation flagship processor will often remain more powerful than a current midrange processor.\n\nAt the end of the day, we all like to have the best and newest devices, but we must be wise and balance what we get with what we can afford and what we actually need.\n\nPublished in Articles"
       }
     },
     "media": null

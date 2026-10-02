@@ -3,7 +3,7 @@
 
   const APP_VERSION = '2.1';
   const PAGE_SIZE = 10;
-  const SEEK_SECONDS = 60;
+  const SEEK_SECONDS = 30;
   const POSITION_REFRESH_MS = 1000;
   const YOUTUBE_API_TIMEOUT_MS = 10000;
   const core = window.TifloVideoCore;
@@ -79,16 +79,16 @@
       playLabel: title => `Abrir reproductor para: ${title}`,
       playerHeading: 'Reproductor de vídeo',
       playerControlsLabel: 'Controles accesibles del vídeo',
-      rewindOneMinute: 'Retroceder 1 minuto',
+      rewindThirtySeconds: 'Retroceder 30 segundos',
       playControl: 'Reproducir',
       pauseControl: 'Pausar',
-      forwardOneMinute: 'Avanzar 1 minuto',
+      forwardThirtySeconds: 'Avanzar 30 segundos',
       position: 'Posición del vídeo',
       details: 'Ver detalles del vídeo',
       hideDetails: 'Ocultar detalles del vídeo',
       detailsEmpty: 'Este vídeo no tiene detalles adicionales.',
       playerPreparing: 'Preparando los controles accesibles del reproductor…',
-      playerReady: 'Controles accesibles listos. Puedes avanzar o retroceder un minuto o ajustar directamente la posición del vídeo.',
+      playerReady: 'Controles accesibles listos. Puedes avanzar o retroceder 30 segundos o ajustar directamente la posición del vídeo.',
       playerUnavailable: 'No se pudieron activar los controles accesibles adicionales. Puedes utilizar el reproductor de YouTube o abrir el vídeo en YouTube.',
       closePlayer: 'Cerrar reproductor y volver a los vídeos',
       openYouTube: 'Abrir este vídeo en YouTube',
@@ -123,16 +123,16 @@
       playLabel: title => `Open player for: ${title}`,
       playerHeading: 'Video player',
       playerControlsLabel: 'Accessible video controls',
-      rewindOneMinute: 'Rewind 1 minute',
+      rewindThirtySeconds: 'Rewind 30 seconds',
       playControl: 'Play',
       pauseControl: 'Pause',
-      forwardOneMinute: 'Forward 1 minute',
+      forwardThirtySeconds: 'Forward 30 seconds',
       position: 'Video position',
       details: 'Show video details',
       hideDetails: 'Hide video details',
       detailsEmpty: 'This video has no additional details.',
       playerPreparing: 'Preparing the accessible player controls…',
-      playerReady: 'Accessible controls are ready. You can move one minute at a time or adjust the video position directly.',
+      playerReady: 'Accessible controls are ready. You can move 30 seconds at a time or adjust the video position directly.',
       playerUnavailable: 'The additional accessible controls could not be activated. You can use the YouTube player or open the video on YouTube.',
       closePlayer: 'Close player and return to videos',
       openYouTube: 'Open this video on YouTube',
@@ -331,10 +331,10 @@
     els.sortLabel.textContent = c.sortLabel;
     els.playerHeading.textContent = c.playerHeading;
     els.playerControls.setAttribute('aria-label', c.playerControlsLabel);
-    els.playerRewind.textContent = c.rewindOneMinute;
-    els.playerRewind.setAttribute('aria-label', c.rewindOneMinute);
-    els.playerForward.textContent = c.forwardOneMinute;
-    els.playerForward.setAttribute('aria-label', c.forwardOneMinute);
+    els.playerRewind.textContent = c.rewindThirtySeconds;
+    els.playerRewind.setAttribute('aria-label', c.rewindThirtySeconds);
+    els.playerForward.textContent = c.forwardThirtySeconds;
+    els.playerForward.setAttribute('aria-label', c.forwardThirtySeconds);
     if (els.playerPositionLabel) els.playerPositionLabel.textContent = c.position;
     if (els.playerPosition) els.playerPosition.setAttribute('aria-label', c.position);
     updateToggleLabel();

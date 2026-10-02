@@ -77,3 +77,5 @@ export {
   listWebTtsVoices,
   createWebReadingSpeechAdapter
 } from './web-reading-speech-adapter.mjs';
+
+export { createWebReadingLibraryAdapter } from './web-reading-library-adapter.mjs';

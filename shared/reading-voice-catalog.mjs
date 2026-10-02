@@ -116,3 +116,28 @@ export function confirmExternalProvider(provider, language='es', confirmFn=globa
   if (!provider || typeof confirmFn !== 'function') return false;
   return confirmFn(readingVoiceCatalogCopy(language, provider.platform).confirmExternalProvider(provider.name));
 }
+
+
+export const WEB_EXTERNAL_VOICE_PROVIDERS = Object.freeze(normalizeVoiceProviders([
+  {
+    id: 'acapela-voices',
+    name: 'Acapela Voices',
+    type: READING_VOICE_PROVIDER_TYPES.EXTERNAL,
+    platform: 'web',
+    url: 'https://www.acapela-group.com/voices/'
+  },
+  {
+    id: 'acapela-my-own-voice',
+    name: 'Acapela My-Own-Voice',
+    type: READING_VOICE_PROVIDER_TYPES.EXTERNAL,
+    platform: 'web',
+    url: 'https://www.acapela-group.com/solutions/my-own-voice/'
+  },
+  {
+    id: 'code-factory-apps',
+    name: 'Code Factory TTS',
+    type: READING_VOICE_PROVIDER_TYPES.EXTERNAL,
+    platform: 'web',
+    url: 'https://codefactoryglobal.com/usecases/apps/'
+  }
+], 'web'));

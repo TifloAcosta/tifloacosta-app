@@ -724,8 +724,11 @@
     }
     const documentLanguage = String(originalDocumentModel?.language || language()).toLowerCase().split(/[-_]/u)[0];
     if (values.includes(documentLanguage)) els.translationSource.value = documentLanguage;
-    const preferredTarget = values.find(code => code === language() && code !== els.translationSource.value)
-      || values.find(code => code !== els.translationSource.value)
+    const source = els.translationSource.value;
+    const preferredTarget = (source === 'es' && values.includes('en') ? 'en' : '')
+      || (source === 'en' && values.includes('es') ? 'es' : '')
+      || (values.includes(language()) && language() !== source ? language() : '')
+      || values.find(code => code !== source)
       || '';
     if (preferredTarget) els.translationTarget.value = preferredTarget;
   }
@@ -1206,16 +1209,30 @@
   });
   els.translationOriginal.addEventListener('click', () => { void switchTranslationView(false); });
   els.translationTranslated.addEventListener('click', () => { void switchTranslationView(true); });
-  els.translationSource.addEventListener('change', () => {
+  function resetTranslationSelection() {
     translationPrepared = false;
     translationJob = null;
+    translationDocument = null;
+    showingTranslation = false;
     els.translationStart.disabled = true;
-  });
-  els.translationTarget.addEventListener('change', () => {
-    translationPrepared = false;
-    translationJob = null;
-    els.translationStart.disabled = true;
-  });
+    els.translationStatus.textContent = '';
+    renderTranslationViewButtons();
+    if (documentModel !== originalDocumentModel && originalDocumentModel?.blocks?.length && readingSession) {
+      const snapshot = readingSession.snapshot();
+      documentModel = originalDocumentModel;
+      readingSession = shared.createReadingSession({
+        blocks: documentModel.blocks,
+        initialIndex: snapshot.blockIndex
+      });
+      searchIndex = shared.createReadingSearchIndex(documentModel);
+      void searchIndex.build();
+      renderBlock();
+      void rebuildSpeech({ blockIndex: snapshot.blockIndex, unitIndex: snapshot.unitIndex || 0 });
+    }
+  }
+
+  els.translationSource.addEventListener('change', resetTranslationSelection);
+  els.translationTarget.addEventListener('change', resetTranslationSelection);
   els.save.addEventListener('click', () => { void saveCurrentDocument(); });
   els.libraryRefresh.addEventListener('click', () => { void Promise.all([renderLibrary(), renderQueue(), renderMarks()]); });
   els.bookmark.addEventListener('click', () => { void addBookmark(); });

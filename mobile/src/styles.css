@@ -171,8 +171,21 @@ select:focus-visible {
 }
 
 .home-entry {
+  min-height: 3.5rem;
   border-inline-start: 0.3rem solid var(--brand);
   background: var(--surface);
+  display: flex;
+  align-items: center;
+}
+
+.home-menu {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 36rem) {
+  .home-menu {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .back-button {

@@ -32,3 +32,17 @@ export {
   formatBytes as formatDownloadBytes,
   filterDownloadResults
 } from './downloads.mjs';
+
+export { createReaderSession } from './reader-session.mjs';
+export {
+  segmentSentences,
+  parseTextDocument,
+  normalizeSemanticPosition,
+  adjacentSemanticUnit,
+  adjacentSemanticBlockOfKind
+} from './reading-semantic-model.mjs';
+export { createReadingSearchIndex } from './reading-search.mjs';
+export { resolveReadingSettings, READING_SETTING_DEFAULTS } from './reading-settings.mjs';
+export { createReadingSession } from './reading-session.mjs';
+export { normalizeReadingPosition, percentForBlock, parsePlainText } from './reading-text-model.mjs';
+export { parseHtmlDocument } from './reading-html-adapter.mjs';

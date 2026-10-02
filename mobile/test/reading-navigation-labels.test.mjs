@@ -4,40 +4,32 @@ import test from 'node:test';
 
 const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
-test('reader derives previous and next labels from the real adjacent semantic unit', async () => {
+test('reader exposes a real accessible navigation unit selector', async () => {
   const screen = await read('src/screens/reading-book.mjs');
 
-  assert.match(screen, /adjacentSemanticUnit/);
-  assert.match(screen, /previous\.setAttribute\(['"]aria-label['"],\s*semanticNavigationLabel/);
-  assert.match(screen, /next\.setAttribute\(['"]aria-label['"],\s*semanticNavigationLabel/);
-  assert.match(screen, /adjacentSemanticUnit\(documentModel,\s*normalized,\s*-1\)/);
-  assert.match(screen, /adjacentSemanticUnit\(documentModel,\s*normalized,\s*1\)/);
+  assert.match(screen, /navigationSelect = document\.createElement\('select'\)/);
+  assert.match(screen, /navigationLabel\.htmlFor = navigationSelect\.id/);
+  assert.match(screen, /populateNavigationModes/);
+  assert.match(screen, /availableNavigationModes/);
+  assert.match(screen, /navigationSelect\.addEventListener\('change'/);
+  assert.doesNotMatch(screen, /navigationButton = document\.createElement\('button'\)/);
 });
 
-test('reader provides localized navigation names for every supported semantic target', async () => {
+test('reader supports sentence paragraph heading list quote table cell and PDF page navigation', async () => {
   const screen = await read('src/screens/reading-book.mjs');
 
-  for (const key of [
-    'previousParagraph', 'nextParagraph',
-    'previousSentence', 'nextSentence',
-    'previousHeading', 'nextHeading',
-    'previousListItem', 'nextListItem',
-    'previousQuote', 'nextQuote',
-    'previousTableCell', 'nextTableCell'
-  ]) {
-    assert.match(screen, new RegExp(`readingBook\\.${key}`), `Reader does not use ${key}`);
+  for (const kind of ['sentence', 'paragraph', 'heading', 'listItem', 'quote', 'tableCell', 'page']) {
+    assert.ok(screen.includes(kind), `Missing navigation mode: ${kind}`);
   }
+  assert.match(screen, /adjacentSemanticUnit/);
+  assert.match(screen, /adjacentSemanticBlockOfKind/);
+  assert.match(screen, /readablePdfPageFrom/);
+});
 
-  for (const label of [
-    'Encabezado anterior', 'Encabezado siguiente',
-    'Elemento de lista anterior', 'Elemento de lista siguiente',
-    'Cita anterior', 'Cita siguiente',
-    'Celda de tabla anterior', 'Celda de tabla siguiente',
-    'Previous heading', 'Next heading',
-    'Previous list item', 'Next list item',
-    'Previous quote', 'Next quote',
-    'Previous table cell', 'Next table cell'
-  ]) {
-    assert.ok(screen.includes(label), `Missing navigation fallback: ${label}`);
-  }
+test('previous and next labels describe the selected unit rather than an incidental focus target', async () => {
+  const screen = await read('src/screens/reading-book.mjs');
+
+  assert.match(screen, /const navigationKind = navigationSelect\.value \|\| 'sentence'/);
+  assert.match(screen, /previous\.setAttribute\('aria-label', semanticNavigationLabel\(t, navigationKind, -1\)\)/);
+  assert.match(screen, /next\.setAttribute\('aria-label', semanticNavigationLabel\(t, navigationKind, 1\)\)/);
 });

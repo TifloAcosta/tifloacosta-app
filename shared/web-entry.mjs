@@ -46,3 +46,8 @@ export { resolveReadingSettings, READING_SETTING_DEFAULTS } from './reading-sett
 export { createReadingSession } from './reading-session.mjs';
 export { normalizeReadingPosition, percentForBlock, parsePlainText } from './reading-text-model.mjs';
 export { parseHtmlDocument } from './reading-html-adapter.mjs';
+
+export {
+  createReadingLibraryClient,
+  normalizeReadingBook
+} from './reading-library-client.mjs';

@@ -103,3 +103,13 @@ export {
   parseEpubArchive,
   parseHtmlStructured
 } from './web-reading-format-adapters.mjs';
+
+export {
+  RESOURCE_PLATFORMS,
+  newestResources,
+  resourceCategories,
+  resourceMatchesPlatform,
+  resourceMatchesQuery,
+  resourcesForLanguage,
+  selectResources
+} from './resources.mjs';

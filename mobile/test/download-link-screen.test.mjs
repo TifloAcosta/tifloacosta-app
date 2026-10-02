@@ -51,3 +51,12 @@ test('download-from-link accepts an exact URL and only analyzes it when explicit
   assert.match(source, /input\.value\s*=\s*String\(initialUrl/);
   assert.match(source, /if\s*\(analyzeOnOpen\s*===\s*true/);
 });
+
+
+test('download-from-link offers an accessible paste action and extracts a URL from surrounding text', () => {
+  assert.match(source, /download-link-paste/);
+  assert.match(source, /navigator\.clipboard/);
+  assert.match(source, /extractUrlCandidate/);
+  assert.match(source, /https\?:\\\/\\\//);
+  assert.match(source, /submit\.focus\(\)/);
+});

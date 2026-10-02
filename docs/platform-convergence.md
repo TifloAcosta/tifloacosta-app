@@ -86,3 +86,34 @@ El manejo de foco accesible se ha movido a `shared/focus.mjs`.
 4. Clasificación y presentación de descargas.
 5. Sesión y navegación de TifloLector.
 6. Controles accesibles de vídeo.
+
+
+## TifloLector: núcleo compartido
+
+Ya se han extraído a `shared/`:
+
+- sesión de lector y sesión de lectura;
+- modelo semántico y segmentación por frases;
+- búsqueda dentro del documento;
+- ajustes de lectura;
+- modelo de texto y adaptación HTML;
+- cliente abstracto de biblioteca;
+- cola, marcas, progreso y metadatos a través del cliente de biblioteca;
+- flujo OCR, con motor y versión parametrizables;
+- traducción y cliente de traducción, con motor parametrizable;
+- controlador de audiolibro;
+- controlador TTS desacoplado de Android mediante inyección de adaptadores.
+
+### Adaptadores que siguen siendo de plataforma
+
+Android mantiene actualmente:
+
+- almacenamiento e importación nativa de la biblioteca;
+- ML Kit OCR;
+- ML Kit Translation;
+- TTS en segundo plano;
+- reproducción multimedia y Media3;
+- selector/compartición de archivos;
+- gestión e instalación de voces del sistema Android.
+
+La futura app iOS deberá implementar equivalentes para esas capacidades, reutilizando el mismo núcleo compartido.

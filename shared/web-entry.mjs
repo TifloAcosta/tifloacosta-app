@@ -85,3 +85,8 @@ export {
   pageForPosition,
   positionForPage
 } from './reading-pdf-adapter.mjs';
+
+export {
+  WEB_TRANSLATION_LANGUAGES,
+  createWebReadingTranslationAdapter
+} from './web-reading-translation-adapter.mjs';

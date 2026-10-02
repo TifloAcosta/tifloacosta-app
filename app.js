@@ -126,7 +126,12 @@
   let actualidadItems = [];
   let actualidadLoaded = false;
   let resourcePlatform = 'all';
-  const storedFavorites = core.readStoredJson(storage,'tifloFavorites',[]);
+  const webFavoritesStore = shared && typeof shared.createFavoritesStore === 'function'
+    ? shared.createFavoritesStore(storage, { key:'tifloFavorites', legacyKind:'resource', storageFormat:'ids' })
+    : null;
+  const storedFavorites = webFavoritesStore
+    ? webFavoritesStore.list().map(ref => ref.id)
+    : core.readStoredJson(storage,'tifloFavorites',[]);
   let favorites = new Set(Array.isArray(storedFavorites) ? storedFavorites.filter(id=>typeof id==='string') : []);
   function isStandalone(){ return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true; }
 
@@ -160,7 +165,10 @@
 
   const resourcesForLanguage = () => data.filter(item => item.lang === lang);
   const categories = () => [...new Set(resourcesForLanguage().map(item => item.category))].sort((a,b) => a.localeCompare(b,lang));
-  const saveFavorites = () => core.writeStoredJson(storage,'tifloFavorites',[...favorites]);
+  const saveFavorites = () => {
+    if (webFavoritesStore) return;
+    core.writeStoredJson(storage,'tifloFavorites',[...favorites]);
+  };
   const savePrefs = () => core.writeStoredJson(storage,'tifloDisplayPrefs',prefs);
 
   const platformCopy = {
@@ -330,9 +338,15 @@
       if(result==='shared') dialog.close();
     });
     favoriteButton.addEventListener('click',()=>{
-      const nowFavorite=!favorites.has(item.id);
-      if(nowFavorite) favorites.add(item.id); else favorites.delete(item.id);
-      saveFavorites();
+      let nowFavorite;
+      if (webFavoritesStore) {
+        nowFavorite = webFavoritesStore.toggle({ kind:'resource', id:item.id });
+        favorites = new Set(webFavoritesStore.list().map(ref => ref.id));
+      } else {
+        nowFavorite=!favorites.has(item.id);
+        if(nowFavorite) favorites.add(item.id); else favorites.delete(item.id);
+        saveFavorites();
+      }
       const card=trigger.closest?trigger.closest('.resource-card'):null;
       const cardFavorite=card?card.querySelector('[data-favorite-action="true"]'):null;
       if(cardFavorite) {

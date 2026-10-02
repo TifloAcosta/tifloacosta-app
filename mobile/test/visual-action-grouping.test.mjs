@@ -4,15 +4,18 @@ import test from 'node:test';
 
 const read = file => readFile(new URL(`../${file}`, import.meta.url), 'utf8');
 
-test('Actualidad groups source share and favorite actions with reusable spacing', async () => {
-  const source = await read('src/screens/actualidad.mjs');
+test('Actualidad keeps list actions minimal and leaves the original source inside the reader', async () => {
+  const [source, reader] = await Promise.all([
+    read('src/screens/actualidad.mjs'),
+    read('src/screens/reader.mjs')
+  ]);
 
   assert.match(source, /const actions = document\.createElement\('div'\)/);
   assert.match(source, /actions\.className = 'action-group'/);
-  assert.match(source, /addExternalLink\(actions,/);
-  assert.match(source, /addShareButton\(actions,/);
   assert.match(source, /addFavoriteButton\(actions,/);
-  assert.match(source, /article\.append\(actions\)/);
+  assert.doesNotMatch(source, /addExternalLink\(actions,/);
+  assert.doesNotMatch(source, /addShareButton\(actions,/);
+  assert.match(reader, /original\.textContent = t\('actualidad\.original'\)/);
 });
 
 test('Contact separates direct contact from social networks into accessible sections', async () => {

@@ -61,3 +61,33 @@ test('PWA shell caches and refreshes the web reader script', async () => {
   assert.ok(worker.includes("url.pathname.endsWith('/web-reading.js')"));
   assert.ok(worker.includes("freshScript(url, './web-reading.js?v=1.0', request)"));
 });
+
+
+test('web reader exposes explicit OCR only for scanned PDFs', async () => {
+  const [html, source, pdfAdapter] = await Promise.all([
+    read('index.html'),
+    read('web-reading.js'),
+    read('shared/web-pdf-adapter.mjs')
+  ]);
+  assert.ok(html.includes('id="reading-ocr"'));
+  assert.ok(source.includes('runPdfOcr'));
+  assert.ok(source.includes('tesseract.js@7.0.0'));
+  assert.ok(source.includes('tesseract.js-core@6.1.2'));
+  assert.ok(source.includes('tessdata.projectnaptha.com/4.0.0'));
+  assert.ok(source.includes('pendingPdfFile'));
+  assert.ok(pdfAdapter.includes('recognizePage'));
+  assert.ok(pdfAdapter.includes("source = text ? 'embedded' : 'empty'"));
+  assert.ok(pdfAdapter.includes("source = text ? 'ocr' : 'empty'"));
+});
+
+test('PDF.js is built as a separate on-demand bundle with a local worker', async () => {
+  const [pkg, build] = await Promise.all([
+    read('mobile/package.json'),
+    read('mobile/scripts/build-shared-web.mjs')
+  ]);
+  assert.ok(pkg.includes('"pdfjs-dist": "6.3.289"'));
+  assert.ok(build.includes("globalName: 'TIFLO_PDF'"));
+  assert.ok(build.includes('web-pdf.js'));
+  assert.ok(build.includes('pdf.worker.min.mjs'));
+  assert.ok(build.includes('nodePaths: [mobileNodeModules]'));
+});

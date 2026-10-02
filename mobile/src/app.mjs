@@ -3,7 +3,7 @@ import { Browser } from '@capacitor/browser';
 import { Share } from '@capacitor/share';
 import OneSignal from '@onesignal/capacitor-plugin';
 import { createRouter } from './core/router.mjs';
-import { focusScreenHeading, restoreOriginFocus } from './core/focus.mjs';
+import { focusScreenHeading, rememberFocusedId, restoreOriginFocus, restoreRememberedFocus } from './core/focus.mjs';
 import { createContentStore } from './core/content-store.mjs';
 import { loadAppInfo } from './core/app-info.mjs';
 import { createFavoritesStore } from './core/favorites.mjs';
@@ -592,6 +592,26 @@ export const router = createRouter({
   render,
   focusScreenHeading: () => focusScreenHeading(root),
   restoreOriginFocus: originId => restoreOriginFocus(root, originId)
+});
+
+let lastHomeFocusId = '';
+
+root.addEventListener('focusin', event => {
+  if (router.current()?.name !== 'home') return;
+  const id = String(event?.target?.id || '').trim();
+  if (id && root.contains(event.target)) lastHomeFocusId = id;
+});
+
+window.addEventListener('blur', () => {
+  if (router.current()?.name !== 'home') return;
+  lastHomeFocusId = rememberFocusedId(root) || lastHomeFocusId;
+});
+
+window.addEventListener('focus', () => {
+  if (router.current()?.name !== 'home' || !lastHomeFocusId) return;
+  queueMicrotask(() => {
+    if (router.current()?.name === 'home') restoreRememberedFocus(root, lastHomeFocusId);
+  });
 });
 
 function findContentItem(items, id) {

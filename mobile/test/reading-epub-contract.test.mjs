@@ -9,6 +9,13 @@ const read = async path => {
     return '';
   }
 };
+const readRepo = async path => {
+  try {
+    return await readFile(new URL(`../../${path}`, import.meta.url), 'utf8');
+  } catch {
+    return '';
+  }
+};
 
 test('reading EPUB native contract routes EPUB through import, private storage and structured open', async () => {
   const [plugin, importer, store] = await Promise.all([
@@ -30,12 +37,16 @@ test('reading EPUB native contract routes EPUB through import, private storage a
 });
 
 test('reading EPUB common-reader contract consumes native structured documents instead of treating ZIP bytes as plain text', async () => {
-  const reader = await read('src/screens/reading-book.mjs');
-  const adapter = await read('src/core/reading-structured-adapter.mjs');
+  const [reader, mobileAdapter, adapter] = await Promise.all([
+    read('src/screens/reading-book.mjs'),
+    read('src/core/reading-structured-adapter.mjs'),
+    readRepo('shared/reading-structured-adapter.mjs')
+  ]);
 
   assert.match(reader, /parseStructuredDocument/);
   assert.match(reader, /structuredFormat/);
   assert.ok(reader.includes("'epub'"), 'Shared structured-format route must include EPUB');
+  assert.match(mobileAdapter, /shared\/reading-structured-adapter\.mjs/);
   assert.match(adapter, /segmentSentences/);
   assert.match(adapter, /navigation/);
   assert.match(adapter, /pageReferences/);

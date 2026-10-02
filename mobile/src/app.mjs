@@ -27,6 +27,7 @@ import { TifloReading } from './native/reading-library-plugin.mjs';
 import { TifloShare } from './native/share-plugin.mjs';
 import { TifloWebFetch, fetchSharedPage } from './native/web-fetch-plugin.mjs';
 import { renderHome } from './screens/home.mjs';
+import { renderNewContent } from './screens/new-content.mjs';
 import { renderActualidad } from './screens/actualidad.mjs';
 import { renderSearch } from './screens/search.mjs';
 import { renderLibrary } from './screens/library.mjs';
@@ -475,6 +476,7 @@ function render(route) {
 
   switch (route.name) {
     case 'home': renderHome(context); break;
+    case 'new-content': renderNewContent(context); break;
     case 'actualidad': {
       renderActualidad({
         ...context,

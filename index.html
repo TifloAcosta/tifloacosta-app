@@ -58,6 +58,7 @@
       <a class="button-link" id="home-open-reading" href="#reading">Leer con TifloAcosta</a>
       <a class="button-link" id="home-open-news" href="#news">Novedades</a>
       <a class="button-link" id="home-open-videos" href="videos.html">Vídeos</a>
+      <a class="button-link" id="home-open-podcast" href="podcast.html">Podcast</a>
       <a class="button-link" id="home-open-book" href="#book">Mi libro</a>
       <a class="button-link" id="home-open-contact" href="#contact">Contacto y redes</a>
       <a class="button-link" id="home-open-privacy" href="#privacy">Privacidad y accesibilidad</a>
@@ -405,8 +406,8 @@
   const main = document.getElementById('main');
 
   const labels = {
-    es: { sections:'Secciones', actualidad:'Actualidad', resources:'Recursos', reading:'Leer con TifloAcosta', news:'Novedades', videos:'Vídeos', book:'Mi libro', contact:'Contacto y redes', privacy:'Privacidad y accesibilidad', privacyPolicy:'Política de privacidad', fullPrivacy:'Leer la política de privacidad completa', config:'Configuración', back:'Volver al inicio' },
-    en: { sections:'Sections', actualidad:'News', resources:'Resources', reading:'Read with TifloAcosta', news:'What’s new', videos:'Videos', book:'My book', contact:'Contact and social', privacy:'Privacy and accessibility', privacyPolicy:'Privacy policy', fullPrivacy:'Read the full privacy policy', config:'Settings', back:'Back to home' }
+    es: { sections:'Secciones', actualidad:'Actualidad', resources:'Recursos', reading:'Leer con TifloAcosta', news:'Novedades', videos:'Vídeos', podcast:'Podcast', book:'Mi libro', contact:'Contacto y redes', privacy:'Privacidad y accesibilidad', privacyPolicy:'Política de privacidad', fullPrivacy:'Leer la política de privacidad completa', config:'Configuración', back:'Volver al inicio' },
+    en: { sections:'Sections', actualidad:'News', resources:'Resources', reading:'Read with TifloAcosta', news:'What’s new', videos:'Videos', podcast:'Podcast', book:'My book', contact:'Contact and social', privacy:'Privacy and accessibility', privacyPolicy:'Privacy policy', fullPrivacy:'Read the full privacy policy', config:'Settings', back:'Back to home' }
   };
 
   function localizeHomeNavigation() {
@@ -418,6 +419,7 @@
     document.getElementById('home-open-reading').textContent = text.reading;
     document.getElementById('home-open-news').textContent = text.news;
     document.getElementById('home-open-videos').textContent = text.videos;
+    document.getElementById('home-open-podcast').textContent = text.podcast;
     document.getElementById('home-open-book').textContent = text.book;
     document.getElementById('home-open-contact').textContent = text.contact;
     document.getElementById('home-open-privacy').textContent = text.privacy;

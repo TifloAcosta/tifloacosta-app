@@ -4,6 +4,7 @@
   const APP_VERSION = '2.1';
   const core = window.TIFLO_APP_CORE;
   const coreActualidad = window.TIFLO_ACTUALIDAD_CORE;
+  const shared = window.TIFLO_SHARED || null;
   const data = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];
   const $ = (selector) => document.querySelector(selector);
 
@@ -130,14 +131,32 @@
   function isStandalone(){ return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true; }
 
   const prefDefaults = { textSize:'normal', theme:'auto', lineSpacing:'normal', bold:false };
+  function normalizeDisplayPrefs(value = {}) {
+    const source = value && typeof value === 'object' && !Array.isArray(value) ? value : {};
+    if (shared && typeof shared.normalizePreferences === 'function') {
+      const normalized = shared.normalizePreferences({
+        lang,
+        textSize: source.textSize,
+        theme: source.theme,
+        spacing: source.lineSpacing,
+        bold: source.bold
+      });
+      return {
+        textSize: normalized.textSize,
+        theme: normalized.theme,
+        lineSpacing: normalized.spacing,
+        bold: normalized.bold
+      };
+    }
+    return {
+      textSize: ['normal','large','xlarge','max'].includes(source.textSize) ? source.textSize : prefDefaults.textSize,
+      theme: ['auto','light','dark'].includes(source.theme) ? source.theme : prefDefaults.theme,
+      lineSpacing: ['normal','comfortable','wide'].includes(source.lineSpacing) ? source.lineSpacing : prefDefaults.lineSpacing,
+      bold: typeof source.bold === 'boolean' ? source.bold : prefDefaults.bold
+    };
+  }
   const storedPrefs = core.readStoredJson(storage,'tifloDisplayPrefs',{});
-  const validPrefs = storedPrefs && typeof storedPrefs === 'object' && !Array.isArray(storedPrefs) ? storedPrefs : {};
-  let prefs = {
-    textSize: ['normal','large','xlarge','max'].includes(validPrefs.textSize) ? validPrefs.textSize : prefDefaults.textSize,
-    theme: ['auto','light','dark'].includes(validPrefs.theme) ? validPrefs.theme : prefDefaults.theme,
-    lineSpacing: ['normal','comfortable','wide'].includes(validPrefs.lineSpacing) ? validPrefs.lineSpacing : prefDefaults.lineSpacing,
-    bold: typeof validPrefs.bold === 'boolean' ? validPrefs.bold : prefDefaults.bold
-  };
+  let prefs = normalizeDisplayPrefs(storedPrefs);
 
   const resourcesForLanguage = () => data.filter(item => item.lang === lang);
   const categories = () => [...new Set(resourcesForLanguage().map(item => item.category))].sort((a,b) => a.localeCompare(b,lang));
@@ -427,7 +446,7 @@
   }
 
   function saveDisplaySettings(message) {
-    prefs={textSize:els.textSize.value,theme:els.theme.value,lineSpacing:els.spacing.value,bold:els.bold.checked};
+    prefs=normalizeDisplayPrefs({textSize:els.textSize.value,theme:els.theme.value,lineSpacing:els.spacing.value,bold:els.bold.checked});
     savePrefs();
     applyPrefs();
     els.settingsStatus.textContent=message;

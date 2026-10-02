@@ -816,6 +816,7 @@
     translationRunning = true;
     translationStopRequested = false;
     els.translationStop.hidden = false;
+    els.translationStop.disabled = false;
     els.translationPrepare.disabled = true;
     els.translationStart.disabled = true;
     try {
@@ -834,6 +835,7 @@
     } finally {
       translationRunning = false;
       els.translationStop.hidden = true;
+      els.translationStop.disabled = false;
       els.translationPrepare.disabled = false;
       els.translationStart.disabled = false;
     }

@@ -68,7 +68,7 @@ function addSaveButton(parent, item, url, nativeActions, t) {
   button.type = 'button';
   button.textContent = `${t('library.download')}: ${item.title || filename}`;
   button.addEventListener('click', () => {
-    void nativeActions.saveFile({ url: targetUrl, filename, mimeType });
+    void nativeActions?.saveFile({ url: targetUrl, filename, mimeType });
   });
   parent.append(button);
 }
@@ -87,7 +87,7 @@ function addFileShareButton(parent, item, url, nativeActions, t) {
   button.addEventListener('click', async () => {
     button.disabled = true;
     status.textContent = t('reader.preparing');
-    const shared = await nativeActions.shareFile({
+    const shared = await nativeActions?.shareFile({
       url: targetUrl,
       filename,
       mimeType,

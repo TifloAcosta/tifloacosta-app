@@ -16,12 +16,12 @@ test('search offers an explicit way to clear the previous query and returns focu
   assert.match(searchSource, /results\.replaceChildren\(\)/);
 });
 
-test('library exposes Android, iPhone and Windows platform filters without hiding the complete library by default', () => {
-  assert.match(librarySource, /Android/);
-  assert.match(librarySource, /iPhone/);
-  assert.match(librarySource, /Windows/);
-  assert.match(librarySource, /ariaPressed/);
-  assert.match(librarySource, /activePlatform/);
+test('library exposes one dynamic category selector without hiding the complete library by default', () => {
+  assert.match(librarySource, /library-category-filter/);
+  assert.match(librarySource, /All categories|Todas las categorías/);
+  assert.match(librarySource, /new Set\(items/);
+  assert.match(librarySource, /item\?\.category/);
+  assert.match(librarySource, /activeCategory/);
 });
 
 test('library platform matching works even when the source category is topical instead of an operating system', () => {

@@ -65,3 +65,10 @@ export {
 } from './reading-audio.mjs';
 
 export { createReadingSpeechController as createSharedReadingSpeechController } from './reading-speech-core.mjs';
+
+export {
+  READING_VOICE_PROVIDER_TYPES,
+  readingVoiceCatalogCopy,
+  normalizeVoiceProviders,
+  confirmExternalProvider
+} from './reading-voice-catalog.mjs';

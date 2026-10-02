@@ -73,12 +73,15 @@
   const copy = {
     es: {
       heading: 'Leer con TifloAcosta',
-      intro: 'Abre un archivo TXT o HTML, o pega un texto, para leerlo con navegación accesible y las voces disponibles en tu navegador.',
-      file: 'Abrir archivo TXT o HTML',
+      intro: 'Abre TXT, HTML, PDF, DOCX, EPUB, ODT, RTF, Markdown, FB2 o una imagen, o pega un texto, para leerlo con navegación accesible y las voces disponibles en tu navegador.',
+      file: 'Abrir documento o imagen'
       paste: 'O pega aquí el texto',
       prepare: 'Preparar lectura',
       empty: 'Selecciona un archivo o pega algún texto antes de preparar la lectura.',
       unsupported: 'Este archivo todavía no puede abrirse en la versión web de TifloLector.',
+      legacyDoc: 'El formato DOC antiguo no se puede leer directamente. Ábrelo en Word o LibreOffice y guárdalo como DOCX.',
+      zipLoading: 'Preparando el documento…',
+      imageNeedsOcr: 'Esta imagen necesita reconocimiento OCR para convertirse en texto.',
       pdfPassword: 'Contraseña del PDF, si tiene',
       pdfPasswordRequired: 'Este PDF necesita contraseña. Escríbela y vuelve a preparar la lectura.',
       pdfPasswordIncorrect: 'La contraseña del PDF no es correcta.',
@@ -164,12 +167,15 @@
     },
     en: {
       heading: 'Read with TifloAcosta',
-      intro: 'Open a TXT or HTML file, or paste text, to read it with accessible navigation and the voices available in your browser.',
-      file: 'Open TXT or HTML file',
+      intro: 'Open TXT, HTML, PDF, DOCX, EPUB, ODT, RTF, Markdown, FB2 or an image, or paste text, to read it with accessible navigation and the voices available in your browser.',
+      file: 'Open document or image'
       paste: 'Or paste text here',
       prepare: 'Prepare reading',
       empty: 'Select a file or paste some text before preparing the reading.',
       unsupported: 'This file cannot yet be opened in the web version of TifloReader.',
+      legacyDoc: 'The old DOC format cannot be read directly. Open it in Word or LibreOffice and save it as DOCX.',
+      zipLoading: 'Preparing the document…',
+      imageNeedsOcr: 'This image needs OCR recognition before it can be read as text.',
       pdfPassword: 'PDF password, if required',
       pdfPasswordRequired: 'This PDF requires a password. Enter it and prepare the reading again.',
       pdfPasswordIncorrect: 'The PDF password is incorrect.',
@@ -264,7 +270,9 @@
   let currentBookId = '';
   let currentQueued = false;
   let pendingPdfFile = null;
+  let pendingImageFile = null;
   let ocrBundlePromise = null;
+  let zipBundlePromise = null;
   let originalDocumentModel = null;
   let translationDocument = null;
   let translationJob = null;
@@ -483,6 +491,40 @@
     els.pdfPasswordWrap.hidden = !isPdfFile(els.file.files?.[0]);
   }
 
+  function isImageFile(file) {
+    const name = String(file?.name || '').toLowerCase();
+    const type = String(file?.type || '').toLowerCase();
+    return /\.(png|jpe?g|webp)$/i.test(name) || ['image/png','image/jpeg','image/webp'].includes(type);
+  }
+
+  function loadZipBundle() {
+    if (globalThis.JSZip?.loadAsync) return Promise.resolve(globalThis.JSZip);
+    if (zipBundlePromise) return zipBundlePromise;
+    zipBundlePromise = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/jszip@3.10.2/dist/jszip.min.js';
+      script.async = true;
+      script.crossOrigin = 'anonymous';
+      script.onload = () => globalThis.JSZip?.loadAsync
+        ? resolve(globalThis.JSZip)
+        : reject(new Error('zip-engine-unavailable'));
+      script.onerror = () => reject(new Error('zip-engine-unavailable'));
+      document.head.append(script);
+    });
+    return zipBundlePromise;
+  }
+
+  async function structuredFromArchive(file, kind) {
+    els.status.textContent = t().zipLoading;
+    const JSZip = await loadZipBundle();
+    const zip = await JSZip.loadAsync(await file.arrayBuffer());
+    let raw;
+    if (kind === 'docx') raw = await shared.parseDocxArchive(zip, { title:file.name, language:language() });
+    else if (kind === 'epub') raw = await shared.parseEpubArchive(zip, { title:file.name, language:language() });
+    else raw = await shared.parseOdtArchive(zip, { title:file.name, language:language() });
+    return shared.parseStructuredDocument(raw, { title:file.name, language:raw.language || language() });
+  }
+
   function loadOcrBundle() {
     if (globalThis.Tesseract?.createWorker) return Promise.resolve(globalThis.Tesseract);
     if (ocrBundlePromise) return ocrBundlePromise;
@@ -540,10 +582,35 @@
         model: shared.parsePdfDocument(payload)
       };
     }
+    if (lower.endsWith('.doc')) {
+      throw Object.assign(new Error('legacy-doc'), { code:'legacy-doc' });
+    }
+    if (isImageFile(file)) {
+      pendingImageFile = file;
+      throw Object.assign(new Error('image-needs-ocr'), { code:'image-needs-ocr' });
+    }
+    if (lower.endsWith('.docx') || type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+      return { source:await file.arrayBuffer().then(buffer => Array.from(new Uint8Array(buffer)).join(',')), format:'docx', model:await structuredFromArchive(file,'docx') };
+    }
+    if (lower.endsWith('.epub') || type === 'application/epub+zip') {
+      return { source:await file.arrayBuffer().then(buffer => Array.from(new Uint8Array(buffer)).join(',')), format:'epub', model:await structuredFromArchive(file,'epub') };
+    }
+    if (lower.endsWith('.odt') || type === 'application/vnd.oasis.opendocument.text') {
+      return { source:await file.arrayBuffer().then(buffer => Array.from(new Uint8Array(buffer)).join(',')), format:'odt', model:await structuredFromArchive(file,'odt') };
+    }
+    const source = await file.text();
+    if (lower.endsWith('.rtf') || type === 'application/rtf' || type === 'text/rtf') {
+      return { source, format:'rtf', model:shared.parseStructuredDocument(shared.parseRtfDocument(source,{title:name,language:language()})) };
+    }
+    if (lower.endsWith('.md') || lower.endsWith('.markdown') || type === 'text/markdown') {
+      return { source, format:'md', model:shared.parseStructuredDocument(shared.parseMarkdownDocument(source,{title:name,language:language()})) };
+    }
+    if (lower.endsWith('.fb2')) {
+      return { source, format:'fb2', model:shared.parseStructuredDocument(shared.parseFb2Document(source,{title:name,language:language()})) };
+    }
     if (!(lower.endsWith('.txt') || lower.endsWith('.html') || lower.endsWith('.htm') || type === 'text/plain' || type === 'text/html')) {
       throw Object.assign(new Error('unsupported'), { code: 'unsupported' });
     }
-    const source = await file.text();
     const html = lower.endsWith('.html') || lower.endsWith('.htm') || type === 'text/html';
     return {
       source,
@@ -579,6 +646,11 @@
     } catch (error) {
       els.ocr.hidden = true;
       if (error?.code === 'unsupported') els.status.textContent = t().unsupported;
+      else if (error?.code === 'legacy-doc') els.status.textContent = t().legacyDoc;
+      else if (error?.code === 'image-needs-ocr') {
+        els.status.textContent = `${t().imageNeedsOcr} ${t().ocrPrivacy}`;
+        els.ocr.hidden = false;
+      }
       else if (error?.code === 'password-required') els.status.textContent = t().pdfPasswordRequired;
       else if (error?.code === 'incorrect-password') els.status.textContent = t().pdfPasswordIncorrect;
       else if (error?.code === 'pdf-no-text') {
@@ -589,13 +661,14 @@
   }
 
   async function runPdfOcr() {
-    if (!pendingPdfFile) return;
+    if (!pendingPdfFile && !pendingImageFile) return;
     els.ocr.hidden = true;
     els.status.textContent = t().ocrLoading;
 
     let worker = null;
     try {
-      const [pdf, Tesseract] = await Promise.all([loadPdfBundle(), loadOcrBundle()]);
+      const Tesseract = await loadOcrBundle();
+      const pdf = pendingPdfFile ? await loadPdfBundle() : null;
       const languageCode = language() === 'es' ? 'spa' : 'eng';
       worker = await Tesseract.createWorker(languageCode, 1, {
         workerPath: 'https://cdn.jsdelivr.net/npm/tesseract.js@7.0.0/dist/worker.min.js',
@@ -608,6 +681,21 @@
           }
         }
       });
+
+      if (pendingImageFile) {
+        const file = pendingImageFile;
+        els.status.textContent = t().ocrLoading;
+        const result = await worker.recognize(file);
+        const text = String(result?.data?.text || '').trim();
+        if (!text) throw new Error('ocr-empty');
+        pendingImageFile = null;
+        await useDocument(
+          shared.parseTextDocument(text, { title:file.name, language:language() }),
+          file.name,
+          { source:text, format:(file.name.split('.').pop() || 'image').toLowerCase() }
+        );
+        return;
+      }
 
       const file = pendingPdfFile;
       const payload = await pdf.extractPdfText(file, {
@@ -901,12 +989,24 @@
       return;
     }
     const source = String(opened.content || '');
-    const format = ['html', 'pdf'].includes(opened.book.format) ? opened.book.format : 'txt';
-    const model = format === 'html'
-      ? shared.parseHtmlDocument(source, { title: opened.book.title, language: opened.book.language || language() })
-      : format === 'pdf'
-        ? shared.parsePdfDocument(JSON.parse(source))
-        : shared.parseTextDocument(source, { title: opened.book.title, language: opened.book.language || language() });
+    const format = String(opened.book.format || 'txt').toLowerCase();
+    let model;
+    if (format === 'html') model = shared.parseHtmlDocument(source, { title:opened.book.title, language:opened.book.language || language() });
+    else if (format === 'pdf') model = shared.parsePdfDocument(JSON.parse(source));
+    else if (format === 'rtf') model = shared.parseStructuredDocument(shared.parseRtfDocument(source,{title:opened.book.title,language:opened.book.language || language()}));
+    else if (format === 'md' || format === 'markdown') model = shared.parseStructuredDocument(shared.parseMarkdownDocument(source,{title:opened.book.title,language:opened.book.language || language()}));
+    else if (format === 'fb2') model = shared.parseStructuredDocument(shared.parseFb2Document(source,{title:opened.book.title,language:opened.book.language || language()}));
+    else if (['docx','epub','odt'].includes(format)) {
+      const JSZip = await loadZipBundle();
+      const bytes = Uint8Array.from(source.split(',').filter(Boolean).map(Number));
+      const zip = await JSZip.loadAsync(bytes);
+      const raw = format === 'docx'
+        ? await shared.parseDocxArchive(zip,{title:opened.book.title,language:opened.book.language || language()})
+        : format === 'epub'
+          ? await shared.parseEpubArchive(zip,{title:opened.book.title,language:opened.book.language || language()})
+          : await shared.parseOdtArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
+      model = shared.parseStructuredDocument(raw);
+    } else model = shared.parseTextDocument(source, { title:opened.book.title, language:opened.book.language || language() });
     await useDocument(model, opened.book.title, {
       source,
       format,
@@ -1187,6 +1287,7 @@
   els.ocr.addEventListener('click', () => { void runPdfOcr(); });
   els.file.addEventListener('change', () => {
     pendingPdfFile = null;
+    pendingImageFile = null;
     els.ocr.hidden = true;
     updatePdfPasswordVisibility();
   });

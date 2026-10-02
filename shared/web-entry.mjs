@@ -58,3 +58,8 @@ export {
   createReadingTranslationJob
 } from './reading-translation.mjs';
 export { createReadingTranslationClient } from './reading-translation-client.mjs';
+
+export {
+  READING_AUDIO_SLEEP_MINUTES,
+  createReadingAudioController
+} from './reading-audio.mjs';

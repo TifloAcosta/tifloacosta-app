@@ -22,6 +22,9 @@ test('new shared content snapshots normal navigation only on entry and replaces 
   assert.match(app, /shareSession\.begin\(/);
   assert.match(app, /shareMode\s*=\s*true/);
   assert.match(app, /router\.start\(['"]share['"]\)/);
+  assert.match(app, /result\.classification\?\.kind\s*===\s*['"]download['"]/);
+  assert.match(app, /pendingDownloadUrl\s*=/);
+  assert.match(app, /router\.start\(['"]downloads-link['"]\)/);
 });
 
 test('finishing Share clears temporary state, restores normal navigation and asks Android to return', async () => {
@@ -61,5 +64,14 @@ test('normal content refresh never replaces an active Share screen or steals foc
   assert.match(
     app,
     /if\s*\(!shareMode\s*&&\s*!textInputIsActive\(\)\)\s*\{[\s\S]{0,220}render\(router\.current\(\)\)[\s\S]{0,220}focusScreenHeading\(root\)/
+  );
+});
+
+
+test('one shared downloadable URL bypasses the intermediate Share screen and opens Downloads prepared', async () => {
+  const app = await read('src/app.mjs');
+  assert.match(
+    app,
+    /result\.kind\s*===\s*['"]single-url['"][\s\S]{0,160}classification\?\.kind\s*===\s*['"]download['"][\s\S]{0,260}pendingDownloadUrl[\s\S]{0,160}router\.start\(['"]downloads-link['"]\)/
   );
 });

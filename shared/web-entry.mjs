@@ -70,7 +70,8 @@ export {
   READING_VOICE_PROVIDER_TYPES,
   readingVoiceCatalogCopy,
   normalizeVoiceProviders,
-  confirmExternalProvider
+  confirmExternalProvider,
+  WEB_EXTERNAL_VOICE_PROVIDERS
 } from './reading-voice-catalog.mjs';
 
 export {

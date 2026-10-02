@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-25-colors';
+const CACHE = 'tifloacosta-app-v2-26-shared';
 const NAVIGATION_TIMEOUT_MS = 5000;
 const SHELL = [
   './',
@@ -15,7 +15,8 @@ const SHELL = [
   './actualidad-core.js?v=1.6',
   './actualidad.js?v=1.3',
   './actualidad-media.js?v=1.1',
-  './app.js?v=2.1',
+  './shared-web.js?v=1.0',
+  './app.js?v=2.2',
   './tifloacosta-favicon.ico',
   './tifloacosta-icon-192.png',
   './tifloacosta-icon-512.png',
@@ -124,9 +125,15 @@ self.addEventListener('fetch', event => {
     return;
   }
 
+  if (isAppOrigin && url.pathname.endsWith('/shared-web.js')) {
+    url.searchParams.set('v', '1.0');
+    event.respondWith(freshScript(url, './shared-web.js?v=1.0', request));
+    return;
+  }
+
   if (isAppOrigin && url.pathname.endsWith('/app.js')) {
-    url.searchParams.set('v', '2.1');
-    event.respondWith(freshScript(url, './app.js?v=2.1', request));
+    url.searchParams.set('v', '2.2');
+    event.respondWith(freshScript(url, './app.js?v=2.2', request));
     return;
   }
 

@@ -205,7 +205,7 @@
 
     try {
       const response = await fetch(href, { credentials: 'omit' });
-      if (!response.ok) throw new Error(`download-${response.status}`);
+      if (response.ok !== true) throw new Error(`download-${response.status}`);
       const blob = await response.blob();
       const objectUrl = URL.createObjectURL(blob);
       const anchor = document.createElement('a');

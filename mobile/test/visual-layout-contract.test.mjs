@@ -34,3 +34,12 @@ test('mobile theme color uses the TifloAcosta brand default', async () => {
   const html = await read('src/index.html');
   assert.match(html, /name="theme-color"\s+content="#A61B1B"/i);
 });
+
+
+test('brand refresh extends corporate styling to secondary screens and cards', async () => {
+  const css = await read('src/brand-refresh.css');
+  assert.match(css, /\.screen-header\s*\{[\s\S]*border-inline-start:[^;]*var\(--brand\)/);
+  assert.match(css, /\.screen-header h1\s*\{[\s\S]*color:\s*var\(--brand-deep\)/);
+  assert.match(css, /\.content-card,[\s\S]*\.result-card,[\s\S]*\.reading-panel/);
+  assert.match(css, /linear-gradient\(135deg,\s*var\(--surface\),\s*var\(--surface-alt\)\)/);
+});

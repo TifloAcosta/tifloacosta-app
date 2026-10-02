@@ -207,7 +207,14 @@ export function renderDownloadLink({ root, router, t, nativeActions, initialUrl 
         mimeType: mimeFromType(item.type)
       });
       save.disabled = false;
-      setStatus(saved ? t('downloadsLink.saved') : t('downloadsLink.saveFailed'));
+      setStatus(saved
+        ? localizedFallback(
+            t,
+            'downloadsLink.saved',
+            `Descarga completada: ${fileName}`,
+            `Download completed: ${fileName}`
+          )
+        : t('downloadsLink.saveFailed'));
     });
     article.append(save);
     return article;

@@ -55,7 +55,7 @@ test('shared voice catalog carries platform-specific copy for Android web and iO
   for (const text of [
     'compatibles con Android',
     'compatible with Android',
-    'voces disponibles en tu navegador',
+    'Voces disponibles en el navegador',
     'voices exposed by the browser',
     'Voces compatibles con iOS',
     'Voices compatible with iOS',

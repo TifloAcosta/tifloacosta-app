@@ -11,6 +11,7 @@ on:
       - 'mobile/test/**'
       - 'mobile/package.json'
       - 'mobile/package-lock.json'
+      - 'shared/**'
   workflow_dispatch:
 
 permissions:

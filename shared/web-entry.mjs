@@ -79,3 +79,9 @@ export {
 } from './web-reading-speech-adapter.mjs';
 
 export { createWebReadingLibraryAdapter } from './web-reading-library-adapter.mjs';
+
+export {
+  parsePdfDocument,
+  pageForPosition,
+  positionForPage
+} from './reading-pdf-adapter.mjs';

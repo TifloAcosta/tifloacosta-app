@@ -163,8 +163,12 @@
   const storedPrefs = core.readStoredJson(storage,'tifloDisplayPrefs',{});
   let prefs = normalizeDisplayPrefs(storedPrefs);
 
-  const resourcesForLanguage = () => data.filter(item => item.lang === lang);
-  const categories = () => [...new Set(resourcesForLanguage().map(item => item.category))].sort((a,b) => a.localeCompare(b,lang));
+  const resourcesForLanguage = () => shared?.resourcesForLanguage
+    ? shared.resourcesForLanguage(data, lang)
+    : data.filter(item => item.lang === lang);
+  const categories = () => shared?.resourceCategories
+    ? shared.resourceCategories(data, lang)
+    : [...new Set(resourcesForLanguage().map(item => item.category))].sort((a,b) => a.localeCompare(b,lang));
   const saveFavorites = () => {
     if (webFavoritesStore) return;
     core.writeStoredJson(storage,'tifloFavorites',[...favorites]);
@@ -226,12 +230,9 @@
   };
 
   function resourceMatchesPlatform(item, platform=resourcePlatform) {
-    if (platform === 'all') return true;
-    const haystack=`${String(item?.category||'')} ${String(item?.title||'')}`.toLowerCase();
-    if (platform === 'android') return /\bandroid\b|\btalkback\b|\bjieshuo\b/i.test(haystack);
-    if (platform === 'iphone') return /\biphone\b|\bipad\b|\bios\b|\batajos?\b|\bshortcuts?\b/i.test(haystack);
-    if (platform === 'windows') return /\bwindows\b|\bjaws\b|\bnvda\b/i.test(haystack);
-    return true;
+    return shared?.resourceMatchesPlatform
+      ? shared.resourceMatchesPlatform(item, platform)
+      : platform === 'all';
   }
 
   function platformFiltered(items) {
@@ -416,12 +417,16 @@
     article.append(h3,meta); return article;
   }
 
-  function renderNews(){ const c=copy[lang],items=resourcesForLanguage().filter(item=>item.new).sort(core.compareNewsItems).slice(0,3); els.newsList.innerHTML=''; items.forEach(item=>els.newsList.append(makeNewsItem(item))); els.newsCount.textContent=c.newsCount(items.length); }
+  function renderNews(){ const c=copy[lang],items=(shared?.newestResources ? shared.newestResources(data,{lang,limit:3}) : resourcesForLanguage().filter(item=>item.new).slice(0,3)).sort(core.compareNewsItems); els.newsList.innerHTML=''; items.forEach(item=>els.newsList.append(makeNewsItem(item))); els.newsCount.textContent=c.newsCount(items.length); }
   function renderCategories(){ const c=copy[lang]; els.category.innerHTML=''; const p=document.createElement('option'); p.value='';p.textContent=c.categoryPlaceholder;els.category.append(p);categories().forEach(cat=>{const o=document.createElement('option');o.value=cat;o.textContent=cat;els.category.append(o);}); }
   function showResults(items,message,emptyMessage){ els.results.innerHTML='';els.results.hidden=false;els.clearResults.hidden=false;els.resultStatus.textContent=message;if(!items.length){const p=document.createElement('p');p.className='no-results';p.textContent=emptyMessage;els.results.append(p);return;}items.forEach(item=>els.results.append(makeCard(item))); }
   function clearResults(){els.results.innerHTML='';els.results.hidden=true;els.clearResults.hidden=true;els.resultStatus.textContent='';els.category.value='';els.search.value='';els.favoritesButton.removeAttribute('data-active');resourcePlatform='all';updatePlatformControls();}
-  function searchResources(){const c=copy[lang],term=els.search.value.trim();if(!term){clearResults();els.resultStatus.textContent=c.noResults;return;}els.category.value='';els.favoritesButton.removeAttribute('data-active');const items=platformFiltered(resourcesForLanguage().filter(item=>core.resourceMatches(item,term)));showResults(items,c.found(items.length),c.noResults);}
-  function showCategory(cat){const c=copy[lang];els.search.value='';els.favoritesButton.removeAttribute('data-active');if(!cat){clearResults();return;}const items=platformFiltered(resourcesForLanguage().filter(item=>item.category===cat));showResults(items,c.categoryFound(cat,items.length),c.noResults);}
+  function searchResources(){const c=copy[lang],term=els.search.value.trim();if(!term){clearResults();els.resultStatus.textContent=c.noResults;return;}els.category.value='';els.favoritesButton.removeAttribute('data-active');const items=shared?.selectResources
+  ? shared.selectResources(data,{lang,platform:resourcePlatform,query:term})
+  : platformFiltered(resourcesForLanguage().filter(item=>core.resourceMatches(item,term)));showResults(items,c.found(items.length),c.noResults);}
+  function showCategory(cat){const c=copy[lang];els.search.value='';els.favoritesButton.removeAttribute('data-active');if(!cat){clearResults();return;}const items=shared?.selectResources
+  ? shared.selectResources(data,{lang,platform:resourcePlatform,category:cat})
+  : platformFiltered(resourcesForLanguage().filter(item=>item.category===cat));showResults(items,c.categoryFound(cat,items.length),c.noResults);}
   function showFavorites(){const c=copy[lang];els.search.value='';els.category.value='';els.favoritesButton.setAttribute('data-active','true');const items=platformFiltered(resourcesForLanguage().filter(item=>favorites.has(item.id)));showResults(items,c.favFound(items.length),c.noFavorites);}
   function rerenderCurrentResults(){if(els.favoritesButton.getAttribute('data-active')==='true')return showFavorites();if(els.category.value)return showCategory(els.category.value);if(els.search.value.trim())return searchResources();const c=copy[lang],items=platformFiltered(resourcesForLanguage());showResults(items,c.found(items.length),c.noResults);}
 

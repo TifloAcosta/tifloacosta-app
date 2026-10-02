@@ -53,6 +53,16 @@ function localizedFallback(t, key, es, en) {
   return document.documentElement.lang === 'en' ? en : es;
 }
 
+function extractUrlCandidate(value) {
+  const text = String(value || '').trim();
+  if (!text) return '';
+  const direct = normalizeUrl(text);
+  if (direct) return direct.href;
+  const match = text.match(/https?:\/\/[^\s<>"')\]]+/i);
+  if (!match) return '';
+  return normalizeUrl(match[0])?.href || '';
+}
+
 export function renderDownloadLink({ root, router, t, nativeActions, initialUrl = '', analyzeOnOpen = false }) {
   clearScreen(root);
   addScreenHeader(root, {
@@ -77,7 +87,38 @@ export function renderDownloadLink({ root, router, t, nativeActions, initialUrl 
   label.textContent = t('downloadsLink.label');
   submit.type = 'submit';
   submit.textContent = t('downloadsLink.analyze');
-  form.append(label, input, submit);
+
+  const paste = document.createElement('button');
+  paste.type = 'button';
+  paste.id = 'download-link-paste';
+  paste.textContent = localizedFallback(t, 'downloadsLink.paste', 'Pegar enlace', 'Paste link');
+  paste.addEventListener('click', async () => {
+    let clipboardText = '';
+    try {
+      clipboardText = await navigator.clipboard?.readText?.() || '';
+    } catch {}
+    const extracted = extractUrlCandidate(clipboardText);
+    if (!extracted) {
+      setStatus(localizedFallback(
+        t,
+        'downloadsLink.clipboardInvalid',
+        'El portapapeles no contiene un enlace válido.',
+        'The clipboard does not contain a valid link.'
+      ));
+      paste.focus();
+      return;
+    }
+    input.value = extracted;
+    setStatus(localizedFallback(
+      t,
+      'downloadsLink.pasted',
+      'Enlace pegado. Puedes analizarlo.',
+      'Link pasted. You can analyze it.'
+    ));
+    submit.focus();
+  });
+
+  form.append(label, input, paste, submit);
   root.append(form);
 
   const status = document.createElement('p');
@@ -215,7 +256,8 @@ export function renderDownloadLink({ root, router, t, nativeActions, initialUrl 
 
   async function analyzeCurrent() {
     clearOutput();
-    const normalized = normalizeUrl(input.value);
+    const extracted = extractUrlCandidate(input.value);
+    const normalized = normalizeUrl(extracted || input.value);
     if (!normalized) {
       setStatus(t('downloadsLink.invalid'));
       return;

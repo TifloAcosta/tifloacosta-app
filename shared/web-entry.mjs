@@ -63,3 +63,5 @@ export {
   READING_AUDIO_SLEEP_MINUTES,
   createReadingAudioController
 } from './reading-audio.mjs';
+
+export { createReadingSpeechController as createSharedReadingSpeechController } from './reading-speech-core.mjs';

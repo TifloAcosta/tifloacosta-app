@@ -6,6 +6,10 @@
   'use strict';
 
   function normalizeText(value) {
+    const shared = globalThis.TIFLO_SHARED;
+    if (shared && typeof shared.normalizeSearchText === 'function') {
+      return shared.normalizeSearchText(value);
+    }
     return String(value || '')
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
@@ -15,6 +19,10 @@
   }
 
   function queryMatches(text, query) {
+    const shared = globalThis.TIFLO_SHARED;
+    if (shared && typeof shared.queryMatches === 'function') {
+      return shared.queryMatches(text, query);
+    }
     const normalizedQuery = normalizeText(query);
     if (!normalizedQuery) return false;
     const normalizedText = normalizeText(text);

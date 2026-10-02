@@ -110,3 +110,13 @@ test('analyzer client maps AbortError to timeout', async () => {
   });
   await assert.rejects(() => client.analyze('https://example.com/page'), error => error.code === 'timeout');
 });
+
+
+test('Google Drive open id links resolve like file d links', () => {
+  const result = resolveLocal('https://drive.google.com/open?id=XYZ789&usp=drive_fs');
+  assert.equal(result.kind, 'result');
+  assert.equal(result.provider, 'google-drive');
+  const url = new URL(result.items[0].url);
+  assert.equal(url.searchParams.get('export'), 'download');
+  assert.equal(url.searchParams.get('id'), 'XYZ789');
+});

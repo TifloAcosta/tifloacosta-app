@@ -13,6 +13,7 @@ on:
       - 'videos.html'
       - 'videos.js'
       - 'test/youtube-actions*.test.mjs'
+      - 'test/video-player-controls.test.mjs'
       - '.github/workflows/test-youtube-actions.yml'
   pull_request:
     paths:

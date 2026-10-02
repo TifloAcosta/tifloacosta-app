@@ -24,3 +24,11 @@ export {
   normalizeSearchText,
   queryMatches
 } from './search.mjs';
+
+export {
+  normalizeUrl as normalizeDownloadUrl,
+  classifyUrl as classifyDownloadUrl,
+  resolveLocal as resolveDownloadLocal,
+  formatBytes as formatDownloadBytes,
+  filterDownloadResults
+} from './downloads.mjs';

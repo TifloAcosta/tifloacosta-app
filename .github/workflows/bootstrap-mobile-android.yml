@@ -7,10 +7,12 @@ on:
       - 'feature/leer-tifloacosta-android-foundation'
     paths:
       - 'mobile/**'
+      - 'shared/**'
       - '.github/workflows/bootstrap-mobile-android.yml'
   pull_request:
     paths:
       - 'mobile/**'
+      - 'shared/**'
       - '.github/workflows/bootstrap-mobile-android.yml'
   workflow_dispatch:
 

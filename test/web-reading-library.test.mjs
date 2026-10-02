@@ -65,3 +65,31 @@ test('privacy policy explains that TifloReader documents stay local in the brows
   assert.ok(policy.includes('web TifloReader library'));
   assert.ok(policy.includes('stored locally in the browser'));
 });
+
+
+test('web reader exposes bookmark and queue controls backed by the shared library client', async () => {
+  const [html, source] = await Promise.all([read('index.html'), read('web-reading.js')]);
+  for (const id of [
+    'reading-bookmark',
+    'reading-queue-toggle',
+    'reading-queue-web',
+    'reading-queue-list',
+    'reading-marks-web',
+    'reading-marks-list'
+  ]) {
+    assert.ok(html.includes(`id="${id}"`), `Missing reading control ${id}`);
+  }
+  for (const token of [
+    'libraryClient.addMark',
+    'libraryClient.listMarks',
+    'libraryClient.deleteMark',
+    'libraryClient.listQueue',
+    'libraryClient.addToQueue',
+    'libraryClient.removeFromQueue',
+    'libraryClient.moveQueueItem'
+  ]) {
+    assert.ok(source.includes(token), `Missing shared library operation ${token}`);
+  }
+  assert.ok(source.includes('Nada se abrirá automáticamente.'));
+  assert.ok(source.includes('Nothing opens automatically.'));
+});

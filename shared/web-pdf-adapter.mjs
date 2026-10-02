@@ -33,7 +33,8 @@ function textFromItems(items = []) {
 
 export async function extractPdfText(file, {
   password = '',
-  onProgress = () => {}
+  onProgress = () => {},
+  recognizePage = null
 } = {}) {
   if (!file || typeof file.arrayBuffer !== 'function') {
     throw Object.assign(new Error('invalid-pdf'), { code: 'invalid-pdf' });
@@ -57,10 +58,28 @@ export async function extractPdfText(file, {
     for (let index = 1; index <= pdf.numPages; index += 1) {
       const page = await pdf.getPage(index);
       const textContent = await page.getTextContent();
-      const text = textFromItems(textContent?.items || []);
+      let text = textFromItems(textContent?.items || []);
+      let source = text ? 'embedded' : 'empty';
+
+      if (!text && typeof recognizePage === 'function') {
+        const viewport = page.getViewport({ scale: 2 });
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d', { willReadFrequently: true });
+        if (context) {
+          canvas.width = Math.ceil(viewport.width);
+          canvas.height = Math.ceil(viewport.height);
+          await page.render({ canvasContext: context, viewport }).promise;
+          text = clean(await recognizePage(canvas, {
+            page: index,
+            pageCount: pdf.numPages
+          }));
+          source = text ? 'ocr' : 'empty';
+        }
+      }
+
       if (text) textPages += 1;
-      pages.push({ number: index, text });
-      onProgress({ page: index, pageCount: pdf.numPages, hasText: Boolean(text) });
+      pages.push({ number: index, text, source });
+      onProgress({ page: index, pageCount: pdf.numPages, hasText: Boolean(text), source });
       page.cleanup?.();
     }
 

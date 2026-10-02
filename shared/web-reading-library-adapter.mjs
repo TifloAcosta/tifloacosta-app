@@ -94,32 +94,36 @@ export function createWebReadingLibraryAdapter({
   async function all(storeName) {
     const db = await database();
     const tx = db.transaction(storeName, 'readonly');
+    const done = transactionDone(tx);
     const values = await requestResult(tx.objectStore(storeName).getAll());
-    await transactionDone(tx);
+    await done;
     return Array.isArray(values) ? values : [];
   }
 
   async function get(storeName, key) {
     const db = await database();
     const tx = db.transaction(storeName, 'readonly');
+    const done = transactionDone(tx);
     const value = await requestResult(tx.objectStore(storeName).get(key));
-    await transactionDone(tx);
+    await done;
     return value ?? null;
   }
 
   async function put(storeName, value) {
     const db = await database();
     const tx = db.transaction(storeName, 'readwrite');
+    const done = transactionDone(tx);
     tx.objectStore(storeName).put(value);
-    await transactionDone(tx);
+    await done;
     return value;
   }
 
   async function remove(storeName, key) {
     const db = await database();
     const tx = db.transaction(storeName, 'readwrite');
+    const done = transactionDone(tx);
     tx.objectStore(storeName).delete(key);
-    await transactionDone(tx);
+    await done;
   }
 
   async function importDocument({

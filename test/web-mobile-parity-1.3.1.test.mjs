@@ -54,15 +54,21 @@ test('web player exposes the same adjustable position and independent details co
   assert.match(script, /createElement\(['"]a['"]\)/);
 });
 
-test('web resources mirror Android platform filters with accessible generated controls', async () => {
-  const app = await readRoot('app.js');
-  assert.match(app, /for \(const platform of \['all','android','iphone','windows'\]\)/);
-  assert.match(app, /button\.id=`resource-platform-\$\{platform\}`/);
-  assert.match(app, /resourceMatchesPlatform/);
-  assert.match(app, /aria-pressed/);
-  assert.match(app, /\\bjieshuo\\b/);
-  assert.match(app, /\\bjaws\\b/);
-  assert.match(app, /\\bnvda\\b/);
+test('web and Android resources use the same shared platform and category model', async () => {
+  const [app, shared, mobile] = await Promise.all([
+    readRoot('app.js'),
+    readRoot('shared/resources.mjs'),
+    readMobile('src/screens/library.mjs')
+  ]);
+  assert.match(app, /shared\.resourceCategories/);
+  assert.match(app, /shared\.selectResources/);
+  assert.match(app, /shared\.resourceMatchesPlatform/);
+  assert.match(shared, /RESOURCE_PLATFORMS/);
+  assert.match(shared, /\\bjieshuo\\b/);
+  assert.match(shared, /\\bjaws\\b/);
+  assert.match(shared, /\\bnvda\\b/);
+  assert.match(mobile, /library-platform-filter/);
+  assert.match(mobile, /library-category-filter/);
 });
 
 test('web global search clear returns focus to the search field like Android', async () => {

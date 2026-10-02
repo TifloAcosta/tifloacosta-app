@@ -25,7 +25,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="tifloacosta-favicon.ico">
 <link rel="apple-touch-icon" href="tifloacosta-apple-touch-icon.png">
-<link rel="stylesheet" href="styles.css?v=1.2">
+<link rel="stylesheet" href="styles.css?v=1.3">
 <link rel="stylesheet" href="youtube-actions.css?v=1.0">
 <style>
 body:has(#video-player-section:not([hidden])) > .skip-link,
@@ -139,6 +139,21 @@ body:has(#video-player-section:not([hidden])) > .site-footer {
     </div>
   </section>
 
+  <section id="youtube-accessible-section" class="youtube-accessible-section" aria-labelledby="youtube-accessible-heading">
+    <h2 id="youtube-accessible-heading">YouTube accesible</h2>
+    <p id="youtube-accessible-intro" class="youtube-accessible-intro">Busca vídeos públicos de YouTube desde una pantalla sencilla, pensada para lector de pantalla. No necesitas iniciar sesión en Google para buscar o reproducir.</p>
+    <form id="youtube-accessible-form">
+      <label id="youtube-accessible-label" for="youtube-accessible-search">¿Qué quieres buscar en YouTube?</label>
+      <div class="search-row">
+        <input id="youtube-accessible-search" type="search" autocomplete="off" minlength="2" maxlength="100" placeholder="Por ejemplo: VoiceOver iPhone, TalkBack, tecnología accesible…">
+        <button id="youtube-accessible-search-button" type="submit">Buscar en YouTube</button>
+      </div>
+    </form>
+    <p id="youtube-accessible-status" class="muted" role="status" aria-live="polite" aria-atomic="true" tabindex="-1"></p>
+    <div id="youtube-accessible-results" class="youtube-accessible-results"></div>
+    <button id="youtube-accessible-more" class="youtube-load-more" type="button" hidden>Mostrar 10 resultados más</button>
+  </section>
+
   <p><a id="back-home-bottom" class="button-link back-link" href="index.html" role="button" aria-label="Volver a la pantalla principal de TifloAcosta App">Volver a la pantalla principal</a></p>
 
   <noscript><p>Necesitas JavaScript activado para buscar, ordenar y paginar el catálogo de vídeos.</p></noscript>
@@ -155,7 +170,8 @@ body:has(#video-player-section:not([hidden])) > .site-footer {
 <script src="youtube-actions-config.js?v=1.0"></script>
 <script src="youtube-actions-core.js?v=1.1"></script>
 <script src="youtube-actions.js?v=1.1"></script>
-<script src="videos.js?v=2.4"></script>
+<script src="videos.js?v=2.5"></script>
+<script src="youtube-accessible.js?v=1.0"></script>
 <script src="youtube-actions-bridge.js?v=1.0"></script>
 <script data-goatcounter="https://tifloacosta.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>

@@ -39,7 +39,18 @@
     libraryIntro: $('#reading-library-intro'),
     libraryRefresh: $('#reading-library-refresh'),
     libraryStatus: $('#reading-library-status'),
-    libraryList: $('#reading-library-list')
+    libraryList: $('#reading-library-list'),
+    bookmark: $('#reading-bookmark'),
+    queueToggle: $('#reading-queue-toggle'),
+    markStatus: $('#reading-mark-status'),
+    queueHeading: $('#reading-queue-heading'),
+    queueIntro: $('#reading-queue-intro'),
+    queueStatus: $('#reading-queue-status'),
+    queueList: $('#reading-queue-list'),
+    marksHeading: $('#reading-marks-heading'),
+    marksIntro: $('#reading-marks-intro'),
+    marksStatus: $('#reading-marks-status'),
+    marksList: $('#reading-marks-list')
   };
   if (!els.section) return;
 
@@ -83,7 +94,25 @@
       deleteSaved: 'Eliminar',
       deleted: 'Documento eliminado de la biblioteca.',
       deleteFailed: 'No se pudo eliminar el documento.',
-      progress: percent => `${Math.round(percent)}% leído`
+      progress: percent => `${Math.round(percent)}% leído`,
+      bookmark: 'Añadir marcador',
+      bookmarked: 'Marcador guardado.',
+      bookmarkFailed: 'No se pudo guardar el marcador.',
+      queueAdd: 'Añadir a la cola',
+      queueRemove: 'Quitar de la cola',
+      queueHeading: 'Cola de lectura',
+      queueIntro: 'Ordena los documentos que quieres leer después. Nada se abrirá automáticamente.',
+      queueEmpty: 'La cola está vacía.',
+      queueAdded: 'Documento añadido a la cola.',
+      queueRemoved: 'Documento eliminado de la cola.',
+      queueUp: 'Subir',
+      queueDown: 'Bajar',
+      marksHeading: 'Marcadores',
+      marksIntro: 'Guarda puntos de lectura del documento abierto para volver a ellos más tarde.',
+      marksEmpty: 'Este documento no tiene marcadores.',
+      markOpen: 'Ir al marcador',
+      markDelete: 'Eliminar marcador',
+      markDeleted: 'Marcador eliminado.'
     },
     en: {
       heading: 'Read with TifloAcosta',
@@ -124,7 +153,25 @@
       deleteSaved: 'Delete',
       deleted: 'Document removed from the library.',
       deleteFailed: 'The document could not be removed.',
-      progress: percent => `${Math.round(percent)}% read`
+      progress: percent => `${Math.round(percent)}% read`,
+      bookmark: 'Add bookmark',
+      bookmarked: 'Bookmark saved.',
+      bookmarkFailed: 'The bookmark could not be saved.',
+      queueAdd: 'Add to queue',
+      queueRemove: 'Remove from queue',
+      queueHeading: 'Reading queue',
+      queueIntro: 'Arrange the documents you want to read next. Nothing opens automatically.',
+      queueEmpty: 'The queue is empty.',
+      queueAdded: 'Document added to the queue.',
+      queueRemoved: 'Document removed from the queue.',
+      queueUp: 'Move up',
+      queueDown: 'Move down',
+      marksHeading: 'Bookmarks',
+      marksIntro: 'Save reading points in the open document so you can return to them later.',
+      marksEmpty: 'This document has no bookmarks.',
+      markOpen: 'Go to bookmark',
+      markDelete: 'Delete bookmark',
+      markDeleted: 'Bookmark deleted.'
     }
   };
 
@@ -135,6 +182,7 @@
   let currentSource = '';
   let currentFormat = 'txt';
   let currentBookId = '';
+  let currentQueued = false;
 
   const speechAdapter = typeof shared.createWebReadingSpeechAdapter === 'function'
     ? shared.createWebReadingSpeechAdapter()
@@ -173,10 +221,15 @@
     els.libraryHeading.textContent = c.libraryHeading;
     els.libraryIntro.textContent = c.libraryIntro;
     els.libraryRefresh.textContent = c.refresh;
+    els.bookmark.textContent = c.bookmark;
+    els.queueHeading.textContent = c.queueHeading;
+    els.queueIntro.textContent = c.queueIntro;
+    els.marksHeading.textContent = c.marksHeading;
+    els.marksIntro.textContent = c.marksIntro;
     if (!documentModel) els.title.textContent = c.document;
     populateVoices();
     renderPosition();
-    void renderLibrary();
+    void Promise.all([renderLibrary(), renderQueue(), renderMarks()]);
   }
 
   function populateVoices() {
@@ -280,6 +333,7 @@
     currentSource = String(source ?? '');
     currentFormat = String(format || 'txt').toLowerCase();
     currentBookId = String(bookId || '');
+    currentQueued = false;
     readingSession = shared.createReadingSession({
       blocks: documentModel.blocks,
       initialIndex: Number(initialIndex) || 0
@@ -289,11 +343,16 @@
     els.title.textContent = String(title || model.title || t().document);
     els.reader.hidden = false;
     els.save.disabled = Boolean(currentBookId);
+    els.bookmark.disabled = !currentBookId;
+    els.queueToggle.disabled = !currentBookId;
+    updateQueueToggle();
     els.status.textContent = t().ready;
     els.searchResults.replaceChildren();
     els.searchStatus.textContent = '';
     renderBlock();
     await rebuildSpeech({ blockIndex: Number(initialIndex) || 0, unitIndex: 0 });
+    await refreshCurrentQueueState();
+    await renderMarks();
     queueMicrotask(() => els.title.focus());
   }
 
@@ -360,10 +419,14 @@
       });
       if (!saved?.id) throw new Error('save-failed');
       currentBookId = saved.id;
+      currentQueued = false;
       els.save.disabled = true;
+      els.bookmark.disabled = false;
+      els.queueToggle.disabled = false;
+      updateQueueToggle();
       await persistProgress();
       els.status.textContent = t().saved;
-      await renderLibrary();
+      await Promise.all([renderLibrary(), renderQueue(), renderMarks()]);
     } catch {
       els.status.textContent = t().saveFailed;
     }
@@ -387,6 +450,8 @@
       bookId: opened.book.id,
       initialIndex: opened.book.blockIndex
     });
+    currentQueued = opened.book.queued === true;
+    updateQueueToggle();
   }
 
   async function deleteSavedBook(id) {
@@ -397,7 +462,164 @@
       currentBookId = '';
       els.save.disabled = !documentModel;
     }
-    await renderLibrary();
+    await Promise.all([renderLibrary(), renderQueue(), renderMarks()]);
+  }
+
+  function updateQueueToggle() {
+    els.queueToggle.textContent = currentQueued ? t().queueRemove : t().queueAdd;
+    els.queueToggle.setAttribute('aria-pressed', String(currentQueued));
+  }
+
+  async function refreshCurrentQueueState() {
+    if (!libraryClient || !currentBookId) {
+      currentQueued = false;
+      updateQueueToggle();
+      return;
+    }
+    const queue = await libraryClient.listQueue();
+    currentQueued = queue.some(book => book.id === currentBookId);
+    updateQueueToggle();
+  }
+
+  async function toggleQueue() {
+    if (!libraryClient || !currentBookId) return;
+    const changed = currentQueued
+      ? await libraryClient.removeFromQueue(currentBookId)
+      : await libraryClient.addToQueue(currentBookId);
+    if (!changed) return;
+    currentQueued = !currentQueued;
+    updateQueueToggle();
+    els.markStatus.textContent = currentQueued ? t().queueAdded : t().queueRemoved;
+    await renderQueue();
+  }
+
+  async function addBookmark() {
+    if (!libraryClient || !currentBookId || !readingSession) {
+      els.markStatus.textContent = t().bookmarkFailed;
+      return;
+    }
+    const snapshot = readingSession.snapshot();
+    const block = readingSession.current();
+    const mark = await libraryClient.addMark({
+      bookId: currentBookId,
+      type: 'bookmark',
+      blockIndex: snapshot.blockIndex,
+      unitIndex: 0,
+      excerpt: String(block?.text || '').slice(0, 220),
+      reference: t().position(snapshot.blockIndex + 1, documentModel?.blocks?.length || 0)
+    });
+    els.markStatus.textContent = mark ? t().bookmarked : t().bookmarkFailed;
+    if (mark) await renderMarks();
+  }
+
+  async function renderMarks() {
+    els.marksList.replaceChildren();
+    if (!libraryClient || !currentBookId) {
+      els.marksStatus.textContent = t().marksEmpty;
+      return;
+    }
+    const marks = await libraryClient.listMarks(currentBookId, 'bookmark');
+    if (!marks.length) {
+      els.marksStatus.textContent = t().marksEmpty;
+      return;
+    }
+    els.marksStatus.textContent = '';
+    for (const mark of marks) {
+      const card = document.createElement('section');
+      card.className = 'resource-card';
+      const excerpt = document.createElement('p');
+      excerpt.textContent = mark.excerpt || mark.reference || t().bookmark;
+      const actions = document.createElement('div');
+      actions.className = 'resource-actions';
+      const open = document.createElement('button');
+      open.type = 'button';
+      open.textContent = t().markOpen;
+      open.addEventListener('click', () => {
+        readingSession = shared.createReadingSession({
+          blocks: documentModel.blocks,
+          initialIndex: mark.blockIndex
+        });
+        renderBlock();
+        void persistProgress({ unitIndex: mark.unitIndex });
+        void rebuildSpeech({ blockIndex: mark.blockIndex, unitIndex: mark.unitIndex });
+        queueMicrotask(() => els.block.focus());
+      });
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.textContent = t().markDelete;
+      remove.addEventListener('click', () => {
+        void (async () => {
+          const deleted = await libraryClient.deleteMark(mark.id);
+          if (deleted) els.marksStatus.textContent = t().markDeleted;
+          await renderMarks();
+        })();
+      });
+      actions.append(open, remove);
+      card.append(excerpt, actions);
+      els.marksList.append(card);
+    }
+  }
+
+  async function renderQueue() {
+    els.queueList.replaceChildren();
+    if (!libraryClient) {
+      els.queueStatus.textContent = t().libraryUnavailable;
+      return;
+    }
+    const queue = await libraryClient.listQueue();
+    if (!queue.length) {
+      els.queueStatus.textContent = t().queueEmpty;
+      return;
+    }
+    els.queueStatus.textContent = '';
+    queue.forEach((book, index) => {
+      const card = document.createElement('section');
+      card.className = 'resource-card';
+      const heading = document.createElement('h4');
+      heading.textContent = book.title || t().document;
+      const actions = document.createElement('div');
+      actions.className = 'resource-actions';
+      const open = document.createElement('button');
+      open.type = 'button';
+      open.textContent = t().openSaved;
+      open.addEventListener('click', () => { void openSavedBook(book.id); });
+      const up = document.createElement('button');
+      up.type = 'button';
+      up.textContent = t().queueUp;
+      up.disabled = index === 0;
+      up.addEventListener('click', () => {
+        void (async () => {
+          await libraryClient.moveQueueItem(book.id, index - 1);
+          await renderQueue();
+        })();
+      });
+      const down = document.createElement('button');
+      down.type = 'button';
+      down.textContent = t().queueDown;
+      down.disabled = index === queue.length - 1;
+      down.addEventListener('click', () => {
+        void (async () => {
+          await libraryClient.moveQueueItem(book.id, index + 1);
+          await renderQueue();
+        })();
+      });
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.textContent = t().queueRemove;
+      remove.addEventListener('click', () => {
+        void (async () => {
+          await libraryClient.removeFromQueue(book.id);
+          if (book.id === currentBookId) {
+            currentQueued = false;
+            updateQueueToggle();
+          }
+          await renderQueue();
+        })();
+      });
+      actions.append(open, up, down, remove);
+      card.append(heading, actions);
+      els.queueList.append(card);
+    });
   }
 
   async function renderLibrary() {
@@ -511,12 +733,16 @@
   els.rate.addEventListener('change', () => { void rebuildSpeech(); });
   els.searchForm.addEventListener('submit', runSearch);
   els.save.addEventListener('click', () => { void saveCurrentDocument(); });
-  els.libraryRefresh.addEventListener('click', () => { void renderLibrary(); });
+  els.libraryRefresh.addEventListener('click', () => { void Promise.all([renderLibrary(), renderQueue(), renderMarks()]); });
+  els.bookmark.addEventListener('click', () => { void addBookmark(); });
+  els.queueToggle.addEventListener('click', () => { void toggleQueue(); });
 
   document.getElementById('lang-es')?.addEventListener('click', () => setTimeout(localize, 0));
   document.getElementById('lang-en')?.addEventListener('click', () => setTimeout(localize, 0));
   globalThis.speechSynthesis?.addEventListener?.('voiceschanged', populateVoices);
 
   els.save.disabled = true;
+  els.bookmark.disabled = true;
+  els.queueToggle.disabled = true;
   localize();
 })();

@@ -1,11 +1,11 @@
 {
-  "versionName": "1.3.5",
+  "versionName": "1.3.6",
   "track": "alpha",
   "status": "completed",
   "priority": 2,
   "notifyUpdate": true,
   "notes": {
-    "es": "Nueva imagen visual de la app, TifloLector como nombre visible de la sección de lectura y mejoras importantes en Descargas: información más clara, navegación más estable y validación para evitar guardar páginas web en lugar del archivo real.",
-    "en": "Refreshed app design, TifloReader as the visible name of the reading section, and major Downloads improvements: clearer file information, more stable navigation, and validation to avoid saving web pages instead of the actual file."
+    "es": "Actualización centrada en accesibilidad y estabilidad: mejoras en TifloLector, navegación y foco, exploración táctil, Descargas, Podcast, controles de vídeo, categorías dinámicas, identidad visual, importación de formatos, compartición de archivos y gestión de recursos sin depender de Google Drive.",
+    "en": "Accessibility and stability update: improvements to TifloReader, navigation and focus, touch exploration, Downloads, Podcast, video controls, dynamic categories, visual identity, format imports, file sharing, and resource handling without relying on Google Drive."
   }
 }

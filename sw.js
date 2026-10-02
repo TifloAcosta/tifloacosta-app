@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-26-shared';
+const CACHE = 'tifloacosta-app-v2-27-reader';
 const NAVIGATION_TIMEOUT_MS = 5000;
 const SHELL = [
   './',
@@ -16,6 +16,7 @@ const SHELL = [
   './actualidad.js?v=1.3',
   './actualidad-media.js?v=1.1',
   './shared-web.js?v=1.0',
+  './web-reading.js?v=1.0',
   './app.js?v=2.2',
   './tifloacosta-favicon.ico',
   './tifloacosta-icon-192.png',
@@ -128,6 +129,12 @@ self.addEventListener('fetch', event => {
   if (isAppOrigin && url.pathname.endsWith('/shared-web.js')) {
     url.searchParams.set('v', '1.0');
     event.respondWith(freshScript(url, './shared-web.js?v=1.0', request));
+    return;
+  }
+
+  if (isAppOrigin && url.pathname.endsWith('/web-reading.js')) {
+    url.searchParams.set('v', '1.0');
+    event.respondWith(freshScript(url, './web-reading.js?v=1.0', request));
     return;
   }
 

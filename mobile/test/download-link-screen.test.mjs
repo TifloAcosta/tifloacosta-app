@@ -60,3 +60,11 @@ test('download-from-link offers an accessible paste action and extracts a URL fr
   assert.match(source, /https\?:\\\/\\\//);
   assert.match(source, /submit\.focus\(\)/);
 });
+
+
+test('download completion is announced only after native save resolves and includes the filename', () => {
+  assert.match(source, /const saved = await nativeActions\.saveFile/);
+  assert.match(source, /Descarga completada:/);
+  assert.match(source, /Download completed:/);
+  assert.match(source, /fileName/);
+});

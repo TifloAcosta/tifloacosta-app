@@ -6,9 +6,9 @@ const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
 test('YouTube actions panel lives inside the existing player without replacing playback controls', async () => {
   const html = await read('videos.html');
-  assert.match(html, /id="video-player-rewind"[^>]*>Retroceder 1 minuto</);
+  assert.match(html, /id="video-player-rewind"[^>]*>Retroceder 30 segundos</);
   assert.match(html, /id="video-player-toggle"[^>]*>Reproducir</);
-  assert.match(html, /id="video-player-forward"[^>]*>Avanzar 1 minuto</);
+  assert.match(html, /id="video-player-forward"[^>]*>Avanzar 30 segundos</);
   assert.match(html, /<section id="youtube-actions"[^>]*aria-labelledby="youtube-actions-heading"[^>]*>[\s\S]*?<h3 id="youtube-actions-heading">Acciones de YouTube<\/h3>/);
   assert.match(html, /id="youtube-details"[^>]*>Ver detalles<\/button>/);
   assert.match(html, /id="youtube-details-panel"[^>]*hidden/);

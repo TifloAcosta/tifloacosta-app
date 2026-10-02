@@ -40,12 +40,17 @@ test('web reader reuses the shared semantic reader search and speech layers', as
   }
 });
 
-test('web reader accepts only local TXT and HTML in its first platform slice', async () => {
+test('web reader accepts local TXT HTML and PDF with PDF loaded on demand', async () => {
   const [html, source] = await Promise.all([read('index.html'), read('web-reading.js')]);
-  assert.ok(html.includes('accept=".txt,.html,.htm,text/plain,text/html"'));
+  assert.ok(html.includes('accept=".txt,.html,.htm,.pdf,text/plain,text/html,application/pdf"'));
   assert.ok(source.includes("lower.endsWith('.txt')"));
   assert.ok(source.includes("lower.endsWith('.html')"));
   assert.ok(source.includes("lower.endsWith('.htm')"));
+  assert.ok(source.includes("lower.endsWith('.pdf')"));
+  assert.ok(source.includes("loadPdfBundle"));
+  assert.ok(source.includes("web-pdf.js?v=1.0"));
+  assert.ok(source.includes("extractPdfText"));
+  assert.ok(source.includes("parsePdfDocument"));
   assert.ok(source.includes("code: 'unsupported'"));
 });
 

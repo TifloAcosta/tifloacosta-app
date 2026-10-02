@@ -9,6 +9,7 @@ on:
       - 'youtube-worker/**'
       - 'youtube-actions*.js'
       - 'youtube-actions*.css'
+      - 'youtube-accessible.js'
       - 'videos.html'
       - 'videos.js'
       - 'test/youtube-actions*.test.mjs'

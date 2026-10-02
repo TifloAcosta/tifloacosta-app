@@ -117,3 +117,19 @@ Android mantiene actualmente:
 - gestión e instalación de voces del sistema Android.
 
 La futura app iOS deberá implementar equivalentes para esas capacidades, reutilizando el mismo núcleo compartido.
+
+
+## Traducción web
+
+La web reutiliza `createReadingTranslationJob` y `createReadingTranslationClient` desde `shared/`.
+
+El adaptador `shared/web-reading-translation-adapter.mjs`:
+- utiliza las APIs `Translator` y `LanguageDetector` del navegador cuando están disponibles;
+- prepara el par de idiomas mediante una acción explícita del usuario;
+- traduce por lotes sin sustituir el documento original;
+- permite alternar entre Original y Traducción conservando la posición;
+- guarda contenido derivado en IndexedDB cuando el documento pertenece a la biblioteca;
+- usa memoria de sesión cuando el documento todavía no está guardado;
+- informa de forma accesible cuando el navegador no ofrece traducción integrada.
+
+No se introduce un servicio propio de traducción en servidor. La futura implementación iOS podrá aportar otro adaptador conservando el mismo contrato compartido.

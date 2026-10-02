@@ -168,7 +168,12 @@ export function renderReadingLibrary({
     await applyImportBatch(batch);
   });
   importButton.id = 'reading-library-import';
-  importSection.append(importButton, liveStatus);
+  const importFormats = document.createElement('p');
+  importFormats.className = 'muted';
+  importFormats.textContent = document.documentElement.lang === 'en'
+    ? 'Supports Word (DOCX), EPUB, PDF, TXT, HTML, DAISY and audio.'
+    : 'Admite Word (DOCX), EPUB, PDF, TXT, HTML, DAISY y audio.';
+  importSection.append(importButton, importFormats, liveStatus);
 
   const audioChoiceHost = document.createElement('section');
   audioChoiceHost.className = 'reading-library-audio-choice';

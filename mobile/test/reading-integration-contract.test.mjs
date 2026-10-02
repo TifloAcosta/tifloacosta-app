@@ -128,6 +128,7 @@ test('PDF vertical slice keeps import storage opening pages and navigation on th
   assert.match(plugin, /result\.put\("pdf", pdfJson\(pdf\)\)/);
   assert.match(plugin, /"source\.pdf"/);
 
+  assert.match(mobileAdapter, /shared\/reading-pdf-adapter\.mjs/);
   assert.match(adapter, /export function parsePdfDocument/);
   assert.match(adapter, /pageNumber/);
   assert.match(adapter, /export function pageForPosition/);

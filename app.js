@@ -223,7 +223,7 @@
       if(!response.ok) throw new Error(`HTTP ${response.status}`);
       const blob=await response.blob();
       const urlName=(()=>{try{return decodeURIComponent(new URL(sourceUrl,location.href).pathname.split('/').filter(Boolean).pop()||'');}catch(error){return '';}})();
-      const fallbackName=String(item.title||'documento').trim().replace(/[\\/:*?"<>|\p{Cntrl}]+/gu,'-')||'documento';
+      const fallbackName=String(item.title||'documento').trim().replace(/[\\/:*?"<>|\p{Control}]+/gu,'-')||'documento';
       const filename=urlName&&urlName.includes('.')?urlName:fallbackName;
       const file=new File([blob],filename,{type:blob.type||'application/octet-stream'});
       const shareData={title:item.title||filename,files:[file]};

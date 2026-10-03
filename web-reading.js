@@ -33,6 +33,22 @@
     rateLabel: $('#reading-rate-label'),
     rate: $('#reading-rate'),
     rateValue: $('#reading-rate-value'),
+    settingsToggle: $('#reading-settings-toggle'),
+    settingsPanel: $('#reading-settings-web'),
+    settingsHeading: $('#reading-settings-heading'),
+    settingsStatus: $('#reading-settings-status'),
+    libraryToggle: $('#reading-library-toggle'),
+    queueMenuToggle: $('#reading-queue-menu-toggle'),
+    marksMenuToggle: $('#reading-marks-menu-toggle'),
+    audioSpeed: $('#reading-audio-speed'),
+    textSize: $('#reading-text-size'),
+    fontFamily: $('#reading-font-family'),
+    fontWeight: $('#reading-font-weight'),
+    lineSpacing: $('#reading-line-spacing'),
+    paragraphSpacing: $('#reading-paragraph-spacing'),
+    readingWidth: $('#reading-width'),
+    readingTheme: $('#reading-theme'),
+    highContrast: $('#reading-high-contrast'),
     searchForm: $('#reading-search-form'),
     searchLabel: $('#reading-search-label'),
     search: $('#reading-search'),
@@ -76,9 +92,9 @@
 
   const copy = {
     es: {
-      heading: 'Leer con TifloAcosta',
+      heading: 'TifloLector',
       intro: 'Abre TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 o una imagen, o pega un texto, para leerlo con navegación accesible y las voces disponibles en tu navegador.',
-      file: 'Abrir documento o imagen'
+      file: 'Abrir documento o imagen',
       paste: 'O pega aquí el texto',
       prepare: 'Preparar lectura',
       empty: 'Selecciona un archivo o pega algún texto antes de preparar la lectura.',
@@ -174,9 +190,9 @@
       translationShowingOriginal: 'Mostrando el original.'
     },
     en: {
-      heading: 'Read with TifloAcosta',
+      heading: 'TifloReader',
       intro: 'Open TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 or an image, or paste text, to read it with accessible navigation and the voices available in your browser.',
-      file: 'Open document or image'
+      file: 'Open document or image',
       paste: 'Or paste text here',
       prepare: 'Prepare reading',
       empty: 'Select a file or paste some text before preparing the reading.',
@@ -292,6 +308,12 @@
   let translationRunning = false;
   let translationStopRequested = false;
   let showingTranslation = false;
+  let documentVoiceOverride = '';
+  let documentRateOverride = null;
+  let navigationUnit = 'block';
+  let sentenceCursor = 0;
+  let sentenceUnits = [];
+  let currentUnitIndex = 0;
   const translationMemory = new Map();
 
   const speechAdapter = typeof shared.createWebReadingSpeechAdapter === 'function'
@@ -314,8 +336,300 @@
     return document.documentElement.lang === 'en' ? 'en' : 'es';
   }
 
+  function ensureSentenceMetadata() {
+    if (!Array.isArray(documentModel?.blocks)) return;
+    const segmenter = typeof Intl?.Segmenter === 'function'
+      ? new Intl.Segmenter(language(), { granularity:'sentence' })
+      : null;
+    documentModel.blocks = documentModel.blocks.map(block => {
+      if (Array.isArray(block?.sentences) && block.sentences.length) return block;
+      const text = String(block?.text || '').trim();
+      if (!text) return block;
+      const sentences = segmenter
+        ? [...segmenter.segment(text)].map(item => String(item.segment || '').trim()).filter(Boolean)
+        : text.split(/(?<=[.!?…])\s+/u).map(value => value.trim()).filter(Boolean);
+      return { ...block, sentences: sentences.length ? sentences : [text] };
+    });
+  }
+
+  function buildSentenceUnits() {
+    sentenceUnits = [];
+    const blocks = Array.isArray(documentModel?.blocks) ? documentModel.blocks : [];
+    const segmenter = typeof Intl?.Segmenter === 'function'
+      ? new Intl.Segmenter(language(), { granularity:'sentence' })
+      : null;
+    blocks.forEach((block, blockIndex) => {
+      const text = String(block?.text || '').trim();
+      if (!text) return;
+      const sentences = Array.isArray(block?.sentences) && block.sentences.length ? block.sentences : [text];
+      sentences.forEach((sentence, sentenceIndex) => sentenceUnits.push({ blockIndex, sentenceIndex, text:String(sentence || '').trim() }));
+    });
+    const currentBlock = Number(readingSession?.snapshot?.().blockIndex || 0);
+    const found = sentenceUnits.findIndex(item => item.blockIndex >= currentBlock);
+    sentenceCursor = found >= 0 ? found : 0;
+  }
+
   function t() {
     return copy[language()];
+  }
+
+  function organizeGeneralSettingsMenus() {
+    if (!els.settingsPanel || els.settingsPanel.dataset.organized === 'true') return;
+    els.settingsPanel.dataset.organized = 'true';
+    const fieldsets = [...els.settingsPanel.querySelectorAll(':scope > fieldset')];
+    const audio = fieldsets[0];
+    const visual = fieldsets[1];
+    const voices = els.settingsPanel.querySelector('#reading-external-voices');
+
+    function collapse(node, label, id) {
+      if (!node) return;
+      const details = document.createElement('details');
+      details.id = id;
+      const summary = document.createElement('summary');
+      summary.textContent = label;
+      node.before(details);
+      details.append(summary, node);
+    }
+
+    collapse(audio, language() === 'en' ? 'Audio and voice' : 'Audio y voz', 'reading-audio-settings');
+    collapse(visual, language() === 'en' ? 'Visual presentation' : 'Presentación visual', 'reading-visual-settings');
+    collapse(voices, language() === 'en' ? 'Find more voices' : 'Buscar más voces', 'reading-more-voices-settings');
+
+    if (audio) {
+      const mode = document.createElement('input');
+      mode.type = 'checkbox';
+      mode.id = 'reading-screen-reader-mode';
+      mode.checked = true;
+      const modeLabel = document.createElement('label');
+      modeLabel.htmlFor = mode.id;
+      modeLabel.textContent = language() === 'en'
+        ? 'Screen reader mode: do not start speech automatically when a document opens'
+        : 'Modo lector de pantalla: no iniciar la lectura automáticamente al abrir un documento';
+
+      const auto = document.createElement('input');
+      auto.type = 'checkbox';
+      auto.id = 'reading-auto-play';
+      const autoLabel = document.createElement('label');
+      autoLabel.htmlFor = auto.id;
+      autoLabel.textContent = language() === 'en'
+        ? 'Start TTS automatically when a document opens'
+        : 'Iniciar automáticamente la lectura TTS al abrir un documento';
+
+      const modeRow = document.createElement('div');
+      const autoRow = document.createElement('div');
+      modeRow.append(mode, modeLabel);
+      autoRow.append(auto, autoLabel);
+      const legend = audio.querySelector('legend');
+      if (legend) legend.after(modeRow, autoRow);
+      else audio.prepend(modeRow, autoRow);
+
+      els.screenReaderMode = mode;
+      els.autoPlay = auto;
+      const stored = readWebSettings();
+      mode.checked = stored.screenReaderMode !== false;
+      auto.checked = stored.autoPlay === true;
+      mode.addEventListener('change', () => {
+        if (mode.checked) auto.checked = false;
+        saveWebSettings();
+      });
+      auto.addEventListener('change', () => {
+        if (auto.checked) mode.checked = false;
+        saveWebSettings();
+      });
+    }
+  }
+
+  function ensurePerDocumentControls() {
+    if (!els.reader || document.getElementById('reading-document-controls')) return;
+    const mainControls = els.reader.querySelector('.resource-actions[aria-label="Controles de lectura"]');
+    if (!mainControls) return;
+
+    const section = document.createElement('section');
+    section.id = 'reading-document-controls';
+    const heading = document.createElement('h4');
+    heading.textContent = language() === 'en' ? 'Controls for this document' : 'Controles de este documento';
+
+    const unitLabel = document.createElement('label');
+    unitLabel.htmlFor = 'reading-navigation-unit';
+    unitLabel.textContent = language() === 'en' ? 'Move forward and back by' : 'Avanzar y retroceder por';
+    const unit = document.createElement('select');
+    unit.id = 'reading-navigation-unit';
+    for (const [value, es, en] of [
+      ['block','Bloque','Block'],
+      ['paragraph','Párrafo','Paragraph'],
+      ['sentence','Frase','Sentence']
+    ]) {
+      const option = document.createElement('option');
+      option.value = value;
+      option.textContent = language() === 'en' ? en : es;
+      unit.append(option);
+    }
+
+    const voiceLabel = document.createElement('label');
+    voiceLabel.htmlFor = 'reading-document-voice';
+    voiceLabel.textContent = language() === 'en' ? 'Voice for this document' : 'Voz para este documento';
+    const voice = document.createElement('select');
+    voice.id = 'reading-document-voice';
+
+    const rateLabel = document.createElement('label');
+    rateLabel.htmlFor = 'reading-document-rate';
+    rateLabel.textContent = language() === 'en' ? 'Speed for this document' : 'Velocidad para este documento';
+    const rate = document.createElement('input');
+    rate.type = 'range';
+    rate.id = 'reading-document-rate';
+    rate.min = '0.5';
+    rate.max = '2';
+    rate.step = '0.1';
+    rate.value = String(Number(els.rate?.value || 1));
+    const rateOut = document.createElement('output');
+    rateOut.id = 'reading-document-rate-value';
+    rateOut.value = rate.value;
+    rateOut.textContent = rate.value;
+
+    const actions = document.createElement('div');
+    actions.className = 'resource-actions';
+    const mark = document.createElement('button');
+    mark.type = 'button';
+    mark.textContent = language() === 'en' ? 'Add bookmark' : 'Añadir marca';
+    const reset = document.createElement('button');
+    reset.type = 'button';
+    reset.textContent = language() === 'en' ? 'Use general settings' : 'Usar ajustes generales';
+    actions.append(mark, reset);
+
+    section.append(heading, unitLabel, unit, voiceLabel, voice, rateLabel, rate, rateOut, actions);
+    mainControls.after(section);
+
+    els.navigationUnit = unit;
+    els.documentVoice = voice;
+    els.documentRate = rate;
+    els.documentRateValue = rateOut;
+
+    unit.addEventListener('change', () => {
+      navigationUnit = unit.value || 'block';
+      buildSentenceUnits();
+    });
+    voice.addEventListener('change', () => {
+      documentVoiceOverride = voice.value;
+      void rebuildSpeech({ blockIndex: readingSession?.snapshot?.().blockIndex || 0, unitIndex: currentUnitIndex });
+    });
+    rate.addEventListener('input', () => {
+      rateOut.value = rate.value;
+      rateOut.textContent = rate.value;
+    });
+    rate.addEventListener('change', () => {
+      documentRateOverride = Number(rate.value) || null;
+      void rebuildSpeech({ blockIndex: readingSession?.snapshot?.().blockIndex || 0, unitIndex: currentUnitIndex });
+    });
+    mark.addEventListener('click', () => { void addBookmark(); });
+    reset.addEventListener('click', () => {
+      documentVoiceOverride = '';
+      documentRateOverride = null;
+      voice.value = '';
+      rate.value = String(Number(els.rate?.value || 1));
+      rateOut.value = rate.value;
+      rateOut.textContent = rate.value;
+      void rebuildSpeech({ blockIndex: readingSession?.snapshot?.().blockIndex || 0, unitIndex: currentUnitIndex });
+    });
+  }
+
+  function populatePerDocumentVoices() {
+    if (!els.documentVoice) return;
+    const selected = documentVoiceOverride;
+    els.documentVoice.replaceChildren();
+    const inherit = document.createElement('option');
+    inherit.value = '';
+    inherit.textContent = language() === 'en' ? 'Use general voice' : 'Usar voz general';
+    els.documentVoice.append(inherit);
+    const voices = typeof shared.listWebTtsVoices === 'function' ? shared.listWebTtsVoices() : [];
+    for (const item of voices) {
+      const option = document.createElement('option');
+      option.value = item.id;
+      option.textContent = item.locale ? `${item.name} — ${item.locale}` : item.name;
+      els.documentVoice.append(option);
+    }
+    if ([...els.documentVoice.options].some(option => option.value === selected)) els.documentVoice.value = selected;
+  }
+
+  const WEB_READING_SETTINGS_KEY = 'tifloWebReadingSettingsV1';
+
+  function readWebSettings() {
+    try {
+      const raw = localStorage.getItem(WEB_READING_SETTINGS_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch { return {}; }
+  }
+
+  function saveWebSettings() {
+    const value = {
+      voice: els.voice?.value || '',
+      rate: Number(els.rate?.value || 1),
+      audioSpeed: Number(els.audioSpeed?.value || 1),
+      textSize: Number(els.textSize?.value || 1),
+      fontFamily: els.fontFamily?.value || 'system',
+      fontWeight: els.fontWeight?.value || 'normal',
+      lineSpacing: Number(els.lineSpacing?.value || 1.5),
+      paragraphSpacing: Number(els.paragraphSpacing?.value || 1),
+      readingWidth: Number(els.readingWidth?.value || 72),
+      theme: els.readingTheme?.value || 'system',
+      highContrast: Boolean(els.highContrast?.checked),
+      screenReaderMode: els.screenReaderMode ? Boolean(els.screenReaderMode.checked) : readWebSettings().screenReaderMode !== false,
+      autoPlay: els.autoPlay ? Boolean(els.autoPlay.checked) : readWebSettings().autoPlay === true
+    };
+    try { localStorage.setItem(WEB_READING_SETTINGS_KEY, JSON.stringify(value)); } catch {}
+    applyWebSettings(value);
+    if (els.settingsStatus) {
+      els.settingsStatus.textContent = language() === 'en' ? 'Reading settings saved.' : 'Ajustes de lectura guardados.';
+    }
+  }
+
+  function applyWebSettings(value = readWebSettings()) {
+    if (!els.reader) return;
+    const size = Math.max(.75, Math.min(2, Number(value.textSize || 1)));
+    const line = Math.max(1, Math.min(2.5, Number(value.lineSpacing || 1.5)));
+    const paragraph = Math.max(0, Math.min(3, Number(value.paragraphSpacing || 1)));
+    const width = Math.max(30, Math.min(100, Number(value.readingWidth || 72)));
+    const familyMap = {
+      system: 'inherit',
+      'sans-serif': 'Arial, sans-serif',
+      serif: 'Georgia, serif',
+      monospace: 'ui-monospace, SFMono-Regular, Consolas, monospace'
+    };
+    els.reader.style.setProperty('--reading-text-size', String(size));
+    els.reader.style.setProperty('--reading-line-spacing', String(line));
+    els.reader.style.setProperty('--reading-paragraph-spacing', String(paragraph));
+    els.reader.style.setProperty('--reading-width', width + 'ch');
+    els.reader.style.setProperty('--reading-font-family', familyMap[value.fontFamily] || 'inherit');
+    els.reader.style.setProperty('--reading-font-weight', value.fontWeight === 'bold' ? '700' : value.fontWeight === 'medium' ? '600' : '400');
+    els.reader.dataset.readingTheme = value.theme || 'system';
+    els.reader.dataset.highContrast = value.highContrast ? 'true' : 'false';
+  }
+
+  function restoreWebSettings() {
+    const value = readWebSettings();
+    if (els.rate && value.rate) els.rate.value = String(value.rate);
+    if (els.rateValue) {
+      els.rateValue.value = els.rate.value;
+      els.rateValue.textContent = els.rate.value;
+    }
+    if (els.audioSpeed && value.audioSpeed) els.audioSpeed.value = String(value.audioSpeed);
+    if (els.textSize && value.textSize) els.textSize.value = String(value.textSize);
+    if (els.fontFamily && value.fontFamily) els.fontFamily.value = value.fontFamily;
+    if (els.fontWeight && value.fontWeight) els.fontWeight.value = value.fontWeight;
+    if (els.lineSpacing && value.lineSpacing) els.lineSpacing.value = String(value.lineSpacing);
+    if (els.paragraphSpacing && value.paragraphSpacing !== undefined) els.paragraphSpacing.value = String(value.paragraphSpacing);
+    if (els.readingWidth && value.readingWidth) els.readingWidth.value = String(value.readingWidth);
+    if (els.readingTheme && value.theme) els.readingTheme.value = value.theme;
+    if (els.highContrast) els.highContrast.checked = Boolean(value.highContrast);
+    applyWebSettings(value);
+    return value;
+  }
+
+  function togglePanel(button, panel, heading) {
+    if (!button || !panel) return;
+    const opening = panel.hidden;
+    panel.hidden = !opening;
+    button.setAttribute('aria-expanded', String(opening));
+    if (opening) queueMicrotask(() => heading?.focus?.());
   }
 
   function localize() {
@@ -363,7 +677,8 @@
   }
 
   function populateVoices() {
-    const selected = els.voice.value;
+    const stored = readWebSettings();
+    const selected = els.voice.value || stored.voice || '';
     const voices = typeof shared.listWebTtsVoices === 'function' ? shared.listWebTtsVoices() : [];
     els.voice.replaceChildren();
     const base = document.createElement('option');
@@ -378,6 +693,7 @@
     }
     if ([...els.voice.options].some(option => option.value === selected)) els.voice.value = selected;
     if (!voices.length) els.status.textContent = els.status.textContent || t().voicesUnavailable;
+    populatePerDocumentVoices();
   }
 
 
@@ -447,7 +763,15 @@
     }
     const snapshot = readingSession.snapshot();
     const total = Array.isArray(documentModel.blocks) ? documentModel.blocks.length : 0;
-    els.position.textContent = t().position(Math.min(total, snapshot.blockIndex + 1), total);
+    if (navigationUnit === 'sentence') {
+      const block = documentModel.blocks[snapshot.blockIndex];
+      const count = Array.isArray(block?.sentences) ? block.sentences.length : 1;
+      els.position.textContent = language() === 'en'
+        ? `Block ${Math.min(total, snapshot.blockIndex + 1)} of ${total}. Sentence ${Math.min(count, currentUnitIndex + 1)} of ${count}.`
+        : `Bloque ${Math.min(total, snapshot.blockIndex + 1)} de ${total}. Frase ${Math.min(count, currentUnitIndex + 1)} de ${count}.`;
+    } else {
+      els.position.textContent = t().position(Math.min(total, snapshot.blockIndex + 1), total);
+    }
     els.previous.disabled = snapshot.blockIndex <= 0;
     els.next.disabled = snapshot.blockIndex >= Math.max(0, total - 1);
   }
@@ -464,12 +788,13 @@
       document: documentModel,
       initialPosition: { blockIndex: snapshot.blockIndex || 0, unitIndex: snapshot.unitIndex || 0 },
       settings: {
-        'speech.voice': els.voice.value,
-        'speech.rate': Number(els.rate.value) || 1
+        'speech.voice': documentVoiceOverride || els.voice.value,
+        'speech.rate': documentRateOverride || Number(els.rate.value) || 1
       },
       onPositionChange(value) {
         const blockIndex = Number(value?.blockIndex);
         if (!Number.isFinite(blockIndex) || !documentModel?.blocks?.length) return;
+        currentUnitIndex = Number(value?.unitIndex) || 0;
         readingSession = shared.createReadingSession({
           blocks: documentModel.blocks,
           initialIndex: blockIndex
@@ -491,7 +816,8 @@
       return;
     }
     documentModel = model;
-    originalDocumentModel = model;
+    ensureSentenceMetadata();
+    originalDocumentModel = documentModel;
     translationDocument = null;
     translationJob = null;
     translationPrepared = false;
@@ -517,11 +843,23 @@
     els.status.textContent = t().ready;
     els.searchResults.replaceChildren();
     els.searchStatus.textContent = '';
+    ensureDocumentControls();
+    populateDocumentVoices();
+    navigationUnit = els.navigationUnit?.value || 'block';
+    buildSentenceUnits();
+    currentUnitIndex = 0;
+    ensurePerDocumentControls();
+    populatePerDocumentVoices();
+    buildSentenceUnits();
     renderBlock();
     await rebuildSpeech({ blockIndex: Number(initialIndex) || 0, unitIndex: 0 });
+    const playbackPrefs = readWebSettings();
+    if (playbackPrefs.autoPlay === true && playbackPrefs.screenReaderMode === false) await play();
     await refreshCurrentQueueState();
     await renderMarks();
     await prepareTranslationUi();
+    const playbackPrefs = readWebSettings();
+    if (playbackPrefs.autoPlay === true && playbackPrefs.screenReaderMode === false) await play();
     queueMicrotask(() => els.title.focus());
   }
 
@@ -1286,12 +1624,43 @@
   }
 
   function move(direction) {
-    if (!readingSession) return;
-    if (direction < 0) readingSession.previous();
+    if (!readingSession || !documentModel?.blocks?.length) return;
+    if (navigationUnit === 'sentence') {
+      buildSentenceUnits();
+      const currentBlock = Number(readingSession.snapshot().blockIndex) || 0;
+      let current = sentenceUnits.findIndex(item => item.blockIndex === currentBlock && item.sentenceIndex === currentUnitIndex);
+      if (current < 0) current = sentenceUnits.findIndex(item => item.blockIndex >= currentBlock);
+      if (current < 0) current = 0;
+      sentenceCursor = Math.max(0, Math.min(sentenceUnits.length - 1, current + (direction < 0 ? -1 : 1)));
+      const target = sentenceUnits[sentenceCursor];
+      if (!target) return;
+      currentUnitIndex = target.sentenceIndex;
+      readingSession = shared.createReadingSession({ blocks: documentModel.blocks, initialIndex: target.blockIndex });
+      renderBlock();
+      void persistProgress({ unitIndex: currentUnitIndex });
+      void speechController?.moveTo?.({ blockIndex: target.blockIndex, unitIndex: currentUnitIndex });
+      queueMicrotask(() => els.block.focus());
+      return;
+    }
+
+    currentUnitIndex = 0;
+    if (navigationUnit === 'paragraph') {
+      let index = Number(readingSession.snapshot().blockIndex) || 0;
+      const step = direction < 0 ? -1 : 1;
+      for (index += step; index >= 0 && index < documentModel.blocks.length; index += step) {
+        const type = String(documentModel.blocks[index]?.type || '');
+        if (type === 'paragraph' || type === 'table-cell' || type === 'list-item') {
+          readingSession = shared.createReadingSession({ blocks:documentModel.blocks, initialIndex:index });
+          break;
+        }
+      }
+    } else if (direction < 0) readingSession.previous();
     else readingSession.next();
+
     renderBlock();
-    void persistProgress();
-    void rebuildSpeech();
+    const target = readingSession.snapshot().blockIndex;
+    void persistProgress({ unitIndex: 0 });
+    void speechController?.moveTo?.({ blockIndex: target, unitIndex: 0 });
     queueMicrotask(() => els.block.focus());
   }
 
@@ -1349,12 +1718,19 @@
   els.next.addEventListener('click', () => move(1));
   els.play.addEventListener('click', () => { void play(); });
   els.pause.addEventListener('click', () => { void pause(); });
-  els.voice.addEventListener('change', () => { void rebuildSpeech(); });
+  els.voice.addEventListener('change', () => { saveWebSettings(); void rebuildSpeech(); });
   els.rate.addEventListener('input', () => {
     els.rateValue.value = els.rate.value;
     els.rateValue.textContent = els.rate.value;
   });
-  els.rate.addEventListener('change', () => { void rebuildSpeech(); });
+  els.rate.addEventListener('change', () => { saveWebSettings(); void rebuildSpeech(); });
+  els.settingsToggle?.addEventListener('click', () => togglePanel(els.settingsToggle, els.settingsPanel, els.settingsHeading));
+  els.libraryToggle?.addEventListener('click', () => togglePanel(els.libraryToggle, document.getElementById('reading-library-web'), els.libraryHeading));
+  els.queueMenuToggle?.addEventListener('click', () => togglePanel(els.queueMenuToggle, document.getElementById('reading-queue-web'), els.queueHeading));
+  els.marksMenuToggle?.addEventListener('click', () => togglePanel(els.marksMenuToggle, document.getElementById('reading-marks-web'), els.marksHeading));
+  for (const control of [els.audioSpeed, els.textSize, els.fontFamily, els.fontWeight, els.lineSpacing, els.paragraphSpacing, els.readingWidth, els.readingTheme, els.highContrast]) {
+    control?.addEventListener('change', saveWebSettings);
+  }
   els.searchForm.addEventListener('submit', runSearch);
   els.translationPrepare.addEventListener('click', () => { void prepareTranslationPair(); });
   els.translationStart.addEventListener('click', () => { void runTranslation(); });
@@ -1400,5 +1776,8 @@
   els.save.disabled = true;
   els.bookmark.disabled = true;
   els.queueToggle.disabled = true;
+  organizeGeneralSettingsMenus();
+  organizeGeneralSettingsMenus();
+  restoreWebSettings();
   localize();
 })();

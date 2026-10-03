@@ -131,3 +131,47 @@ a { color:var(--accent); text-decoration-line:underline; text-decoration-thickne
 .youtube-search-card .video-thumbnail { margin-bottom:.6rem; }
 .youtube-search-actions { display:flex; flex-wrap:wrap; gap:.65rem; margin-top:.8rem; }
 .youtube-load-more { margin-top:1rem; }
+
+
+/* TifloLector web navigation and reader settings */
+body:has(#reading-section:not([hidden])) .language-switch { display:none !important; }
+
+.reading-section-menu {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,14rem),1fr));
+  gap:.75rem;
+  margin:1rem 0;
+}
+.reading-section-menu button { width:100%; }
+
+#reading-settings-web fieldset {
+  margin:1rem 0;
+  padding:1rem;
+  border:1px solid var(--border);
+  border-radius:.7rem;
+}
+#reading-settings-web label,
+#reading-settings-web select,
+#reading-settings-web input[type="range"] {
+  display:block;
+  width:100%;
+  max-width:100%;
+}
+#reading-settings-web label { margin-top:.8rem; }
+#reading-settings-web input[type="checkbox"] { width:auto; display:inline-block; }
+
+#reading-reader {
+  max-width:var(--reading-width,72ch);
+  font-size:calc(1rem * var(--reading-text-size,1));
+  line-height:var(--reading-line-spacing,1.5);
+  font-family:var(--reading-font-family,inherit);
+  font-weight:var(--reading-font-weight,400);
+}
+#reading-reader p { margin-block:calc(.5rem * var(--reading-paragraph-spacing,1)); }
+#reading-reader[data-reading-theme="light"] { background:#fff; color:#000; }
+#reading-reader[data-reading-theme="dark"] { background:#000; color:#fff; }
+#reading-reader[data-high-contrast="true"] {
+  background:#000 !important;
+  color:#fff !important;
+  border-color:#fff !important;
+}

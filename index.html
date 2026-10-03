@@ -66,7 +66,7 @@
     <nav class="resource-actions" aria-label="Secciones de TifloAcosta App">
       <a class="button-link" id="home-open-actualidad" href="actualidad.html">Actualidad</a>
       <a class="button-link" id="home-open-resources" href="#resources">Recursos</a>
-      <a class="button-link" id="home-open-reading" href="#reading">Leer con TifloAcosta</a>
+      <a class="button-link" id="home-open-reading" href="#reading">TifloLector</a>
       <a class="button-link" id="home-open-news" href="#news">Novedades</a>
       <a class="button-link" id="home-open-videos" href="videos.html">Vídeos</a>
       <a class="button-link" id="home-open-podcast" href="podcast.html">Podcast</a>
@@ -102,10 +102,11 @@
 
   <section id="reading-section" hidden tabindex="-1" aria-labelledby="reading-heading">
     <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
-    <h2 id="reading-heading">Leer con TifloAcosta</h2>
+    <h2 id="reading-heading">TifloLector</h2>
     <p id="reading-intro">Abre TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB y otros formatos compatibles, o pega un texto, para leerlo con navegación accesible.</p>
 
-    <div class="panel">
+    <div class="panel" aria-labelledby="reading-start-heading">
+      <h3 id="reading-start-heading">Abrir o pegar contenido</h3>
       <label id="reading-file-label" for="reading-file">Abrir documento</label>
       <input id="reading-file" type="file" accept=".txt,.html,.htm,.pdf,.docx,.pptx,.xlsx,.epub,.odt,.rtf,.md,.markdown,.fb2,.png,.jpg,.jpeg,.webp,text/plain,text/html,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/epub+zip,application/vnd.oasis.opendocument.text,application/rtf,text/markdown,image/png,image/jpeg,image/webp">
       <label id="reading-paste-label" for="reading-paste">O pega aquí el texto</label>
@@ -131,20 +132,6 @@
         <button id="reading-pause" type="button">Pausa</button>
       </div>
 
-      <div class="settings-group">
-        <label id="reading-voice-label" for="reading-voice">Voz</label>
-        <select id="reading-voice"></select>
-        <label id="reading-rate-label" for="reading-rate">Velocidad</label>
-        <input id="reading-rate" type="range" min="0.5" max="2" step="0.1" value="1">
-        <output id="reading-rate-value" for="reading-rate">1</output>
-      </div>
-
-      <section id="reading-external-voices" aria-labelledby="reading-external-voices-heading">
-        <h3 id="reading-external-voices-heading">Conseguir más voces</h3>
-        <p id="reading-external-voices-intro">Consulta proveedores externos para probar, comprar o crear voces distintas de las que ya ofrece el navegador. La compatibilidad depende de cada servicio y plataforma.</p>
-        <div id="reading-external-voices-list" class="resource-list"></div>
-        <p id="reading-external-voices-status" class="muted" role="status" aria-live="polite"></p>
-      </section>
 
       <form id="reading-search-form">
         <label id="reading-search-label" for="reading-search">Buscar en el documento</label>
@@ -183,23 +170,126 @@
       <p id="reading-mark-status" class="muted" role="status" aria-live="polite"></p>
     </section>
 
-    <section id="reading-library-web" aria-labelledby="reading-library-heading">
-      <h3 id="reading-library-heading">Mi biblioteca</h3>
+    <nav class="reading-section-menu" aria-label="Opciones de TifloLector">
+      <button id="reading-settings-toggle" type="button" aria-expanded="false" aria-controls="reading-settings-web">Ajustes de lectura</button>
+      <button id="reading-library-toggle" type="button" aria-expanded="false" aria-controls="reading-library-web">Mi biblioteca</button>
+      <button id="reading-queue-menu-toggle" type="button" aria-expanded="false" aria-controls="reading-queue-web">Cola de lectura</button>
+      <button id="reading-marks-menu-toggle" type="button" aria-expanded="false" aria-controls="reading-marks-web">Marcadores</button>
+    </nav>
+
+    <section id="reading-settings-web" class="panel" hidden aria-labelledby="reading-settings-heading">
+      <h3 id="reading-settings-heading" tabindex="-1">Ajustes de lectura</h3>
+
+      <fieldset>
+        <legend>Voz y reproducción TTS</legend>
+        <label id="reading-voice-label" for="reading-voice">Voz</label>
+        <select id="reading-voice"></select>
+
+        <label id="reading-rate-label" for="reading-rate">Velocidad</label>
+        <input id="reading-rate" type="range" min="0.5" max="2" step="0.1" value="1">
+        <output id="reading-rate-value" for="reading-rate">1</output>
+
+        <label for="reading-audio-speed">Velocidad de audiolibros</label>
+        <select id="reading-audio-speed">
+          <option value="0.75">0,75×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1,25×</option>
+          <option value="1.5">1,5×</option>
+          <option value="2">2×</option>
+          <option value="2.5">2,5×</option>
+          <option value="3">3×</option>
+        </select>
+      </fieldset>
+
+      <section id="reading-external-voices" aria-labelledby="reading-external-voices-heading">
+        <h4 id="reading-external-voices-heading">Conseguir más voces</h4>
+        <p id="reading-external-voices-intro">Consulta proveedores externos para probar, comprar o crear voces distintas de las que ya ofrece el navegador. La compatibilidad depende de cada servicio y plataforma.</p>
+        <div id="reading-external-voices-list" class="resource-list"></div>
+        <p id="reading-external-voices-status" class="muted" role="status" aria-live="polite"></p>
+      </section>
+
+      <fieldset>
+        <legend>Presentación visual</legend>
+
+        <label for="reading-text-size">Tamaño del texto</label>
+        <select id="reading-text-size">
+          <option value="0.9">90 %</option>
+          <option value="1" selected>100 %</option>
+          <option value="1.25">125 %</option>
+          <option value="1.5">150 %</option>
+          <option value="2">200 %</option>
+        </select>
+
+        <label for="reading-font-family">Tipo de letra</label>
+        <select id="reading-font-family">
+          <option value="system">Sistema</option>
+          <option value="sans-serif">Sans serif</option>
+          <option value="serif">Serif</option>
+          <option value="monospace">Monoespaciada</option>
+        </select>
+
+        <label for="reading-font-weight">Grosor del texto</label>
+        <select id="reading-font-weight">
+          <option value="normal">Normal</option>
+          <option value="medium">Medio</option>
+          <option value="bold">Negrita</option>
+        </select>
+
+        <label for="reading-line-spacing">Espaciado entre líneas</label>
+        <select id="reading-line-spacing">
+          <option value="1">1</option>
+          <option value="1.5" selected>1,5</option>
+          <option value="2">2</option>
+          <option value="2.5">2,5</option>
+        </select>
+
+        <label for="reading-paragraph-spacing">Espaciado entre párrafos</label>
+        <select id="reading-paragraph-spacing">
+          <option value="0">0</option>
+          <option value="1" selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+
+        <label for="reading-width">Anchura de lectura</label>
+        <select id="reading-width">
+          <option value="45">Estrecha</option>
+          <option value="72" selected>Normal</option>
+          <option value="100">Ancha</option>
+        </select>
+
+        <label for="reading-theme">Tema</label>
+        <select id="reading-theme">
+          <option value="system">Sistema</option>
+          <option value="light">Claro</option>
+          <option value="dark">Oscuro</option>
+        </select>
+
+        <div>
+          <input id="reading-high-contrast" type="checkbox">
+          <label for="reading-high-contrast">Alto contraste</label>
+        </div>
+      </fieldset>
+      <p id="reading-settings-status" class="muted" role="status" aria-live="polite"></p>
+    </section>
+
+    <section id="reading-library-web" hidden aria-labelledby="reading-library-heading">
+      <h3 id="reading-library-heading" tabindex="-1">Mi biblioteca</h3>
       <p id="reading-library-intro">Los documentos guardados permanecen en este navegador.</p>
       <button id="reading-library-refresh" type="button">Actualizar biblioteca</button>
       <p id="reading-library-status" class="muted" role="status" aria-live="polite"></p>
       <div id="reading-library-list" class="resource-list"></div>
     </section>
 
-    <section id="reading-queue-web" aria-labelledby="reading-queue-heading">
-      <h3 id="reading-queue-heading">Cola de lectura</h3>
+    <section id="reading-queue-web" hidden aria-labelledby="reading-queue-heading">
+      <h3 id="reading-queue-heading" tabindex="-1">Cola de lectura</h3>
       <p id="reading-queue-intro">Ordena los documentos que quieres leer después. Nada se abrirá automáticamente.</p>
       <p id="reading-queue-status" class="muted" role="status" aria-live="polite"></p>
       <div id="reading-queue-list" class="resource-list"></div>
     </section>
 
-    <section id="reading-marks-web" aria-labelledby="reading-marks-heading">
-      <h3 id="reading-marks-heading">Marcadores</h3>
+    <section id="reading-marks-web" hidden aria-labelledby="reading-marks-heading">
+      <h3 id="reading-marks-heading" tabindex="-1">Marcadores</h3>
       <p id="reading-marks-intro">Guarda puntos de lectura del documento abierto para volver a ellos más tarde.</p>
       <p id="reading-marks-status" class="muted" role="status" aria-live="polite"></p>
       <div id="reading-marks-list" class="resource-list"></div>

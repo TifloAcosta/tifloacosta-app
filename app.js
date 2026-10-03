@@ -14,8 +14,8 @@
     actualidadHomeIntro: $('#actualidad-home-intro'), actualidadHomeList: $('#actualidad-home-list'), actualidadHomeOpen: $('#actualidad-home-open'),
     searchHeading: $('#search-heading'), searchLabel: $('label[for="search"]'),
     searchForm: $('#search-form'), search: $('#search'), searchButton: $('#search-button'), newsHeading: $('#news-heading'),
-    newsCount: $('#news-count'), newsList: $('#news-list'), exploreHeading: $('#explore-heading'), categoryLabel: $('label[for="category"]'), category: $('#category'),
-    favoritesButton: $('#favorites-button'), clearResults: $('#clear-results'), resultStatus: $('#result-status'), results: $('#resource-results'),
+    newsCount: $('#news-count'), newsList: $('#news-list'), categoryLabel: $('label[for="category"]'), category: $('#category'),
+    resultStatus: $('#result-status'), results: $('#resource-results'),
     videosHomeHeading: $('#videos-home-heading'), videosHomeIntro: $('#videos-home-intro'), videosHomeOpen: $('#videos-home-open'), youtubeHomeChannel: $('#youtube-home-channel'),
     bookHeading: $('#book-heading'), bookCover: $('#book-cover'), bookTitle: $('#book-title'), bookSubtitle: $('#book-subtitle'),
     bookDescription: $('#book-description'), bookDescription2: $('#book-description-2'), bookBuyPrint: $('#book-buy-print'),
@@ -125,7 +125,6 @@
   let lang = storedLang === 'es' || storedLang === 'en' ? storedLang : defaultLang;
   let actualidadItems = [];
   let actualidadLoaded = false;
-  let resourcePlatform = 'all';
   const webFavoritesStore = shared && typeof shared.createFavoritesStore === 'function'
     ? shared.createFavoritesStore(storage, { key:'tifloFavorites', legacyKind:'resource', storageFormat:'ids' })
     : null;
@@ -175,25 +174,6 @@
   };
   const savePrefs = () => core.writeStoredJson(storage,'tifloDisplayPrefs',prefs);
 
-  const platformCopy = {
-    es: { group:'Filtrar recursos por plataforma', all:'Todos', android:'Android', iphone:'iPhone', windows:'Windows' },
-    en: { group:'Filter resources by platform', all:'All', android:'Android', iphone:'iPhone', windows:'Windows' }
-  };
-  const platformGroup = document.createElement('div');
-  platformGroup.className = 'inline-actions';
-  platformGroup.setAttribute('role','group');
-  const platformButtons = {};
-  for (const platform of ['all','android','iphone','windows']) {
-    const button=document.createElement('button');
-    button.type='button';
-    button.id=`resource-platform-${platform}`;
-    button.setAttribute('aria-pressed',String(platform==='all'));
-    button.addEventListener('click',()=>selectResourcePlatform(platform));
-    platformButtons[platform]=button;
-    platformGroup.append(button);
-  }
-  els.category.insertAdjacentElement('afterend',platformGroup);
-
   function applyPrefs() {
     const root = document.documentElement;
     root.dataset.textSize = prefs.textSize;
@@ -228,40 +208,6 @@
       shareUnavailable: 'The file cannot be shared directly on this device. You can use “Download document”.'
     }
   };
-
-  function resourceMatchesPlatform(item, platform=resourcePlatform) {
-    return shared?.resourceMatchesPlatform
-      ? shared.resourceMatchesPlatform(item, platform)
-      : platform === 'all';
-  }
-
-  function platformFiltered(items) {
-    return resourcePlatform === 'all' ? items : items.filter(item=>resourceMatchesPlatform(item,resourcePlatform));
-  }
-
-  function updatePlatformControls() {
-    const labels=platformCopy[lang];
-    platformGroup.setAttribute('aria-label',labels.group);
-    for (const platform of ['all','android','iphone','windows']) {
-      platformButtons[platform].textContent=labels[platform];
-      platformButtons[platform].setAttribute('aria-pressed',String(resourcePlatform===platform));
-    }
-  }
-
-  function selectResourcePlatform(platform) {
-    resourcePlatform=['all','android','iphone','windows'].includes(platform)?platform:'all';
-    updatePlatformControls();
-    if(els.favoritesButton.getAttribute('data-active')==='true') showFavorites();
-    else if(els.category.value) showCategory(els.category.value);
-    else if(els.search.value.trim()) searchResources();
-    else {
-      const c=copy[lang];
-      const items=platformFiltered(resourcesForLanguage());
-      showResults(items,c.found(items.length),c.noResults);
-    }
-    queueMicrotask(()=>els.results.querySelector('h3')?.focus?.());
-  }
-
 
   async function shareResource(item,status) {
     const labels=resourceMenuCopy[lang];
@@ -316,7 +262,6 @@
     status.setAttribute('aria-live','polite');
     status.setAttribute('aria-atomic','true');
     let focusAfterClose=trigger;
-    let rerenderAfterClose=false;
 
     const makeButton=label=>{const button=document.createElement('button');button.type='button';button.textContent=label;return button;};
     const makeLink=(label,href,target='_blank')=>{const link=document.createElement('a');link.className='button-link';link.href=href;link.textContent=label;link.target=target;if(target==='_blank')link.rel='noopener noreferrer';return link;};
@@ -354,10 +299,6 @@
         cardFavorite.textContent=nowFavorite?copy[lang].removeFav:copy[lang].addFav;
         cardFavorite.setAttribute('aria-pressed',String(nowFavorite));
       }
-      if(els.favoritesButton.getAttribute('data-active')==='true'&&!nowFavorite) {
-        rerenderAfterClose=true;
-        focusAfterClose=els.favoritesButton;
-      }
       dialog.close();
     });
     cancelButton.addEventListener('click',()=>dialog.close());
@@ -367,7 +308,6 @@
     document.body.append(dialog);
     dialog.addEventListener('close',()=>{
       dialog.remove();
-      if(rerenderAfterClose) rerenderCurrentResults();
       if(focusAfterClose&&document.contains(focusAfterClose)) focusAfterClose.focus();
     },{once:true});
     dialog.showModal();
@@ -419,16 +359,11 @@
 
   function renderNews(){ const c=copy[lang],items=(shared?.newestResources ? shared.newestResources(data,{lang,limit:3}) : resourcesForLanguage().filter(item=>item.new).slice(0,3)).sort(core.compareNewsItems); els.newsList.innerHTML=''; items.forEach(item=>els.newsList.append(makeNewsItem(item))); els.newsCount.textContent=c.newsCount(items.length); }
   function renderCategories(){ const c=copy[lang]; els.category.innerHTML=''; const p=document.createElement('option'); p.value='';p.textContent=c.categoryPlaceholder;els.category.append(p);categories().forEach(cat=>{const o=document.createElement('option');o.value=cat;o.textContent=cat;els.category.append(o);}); }
-  function showResults(items,message,emptyMessage){ els.results.innerHTML='';els.results.hidden=false;els.clearResults.hidden=false;els.resultStatus.textContent=message;if(!items.length){const p=document.createElement('p');p.className='no-results';p.textContent=emptyMessage;els.results.append(p);return;}items.forEach(item=>els.results.append(makeCard(item))); }
-  function clearResults(){els.results.innerHTML='';els.results.hidden=true;els.clearResults.hidden=true;els.resultStatus.textContent='';els.category.value='';els.search.value='';els.favoritesButton.removeAttribute('data-active');resourcePlatform='all';updatePlatformControls();}
-  function searchResources(){const c=copy[lang],term=els.search.value.trim();if(!term){clearResults();els.resultStatus.textContent=c.noResults;return;}els.category.value='';els.favoritesButton.removeAttribute('data-active');const items=shared?.selectResources
-  ? shared.selectResources(data,{lang,platform:resourcePlatform,query:term})
-  : platformFiltered(resourcesForLanguage().filter(item=>core.resourceMatches(item,term)));showResults(items,c.found(items.length),c.noResults);}
-  function showCategory(cat){const c=copy[lang];els.search.value='';els.favoritesButton.removeAttribute('data-active');if(!cat){clearResults();return;}const items=shared?.selectResources
-  ? shared.selectResources(data,{lang,platform:resourcePlatform,category:cat})
-  : platformFiltered(resourcesForLanguage().filter(item=>item.category===cat));showResults(items,c.categoryFound(cat,items.length),c.noResults);}
-  function showFavorites(){const c=copy[lang];els.search.value='';els.category.value='';els.favoritesButton.setAttribute('data-active','true');const items=platformFiltered(resourcesForLanguage().filter(item=>favorites.has(item.id)));showResults(items,c.favFound(items.length),c.noFavorites);}
-  function rerenderCurrentResults(){if(els.favoritesButton.getAttribute('data-active')==='true')return showFavorites();if(els.category.value)return showCategory(els.category.value);if(els.search.value.trim())return searchResources();const c=copy[lang],items=platformFiltered(resourcesForLanguage());showResults(items,c.found(items.length),c.noResults);}
+  function showResults(items,message,emptyMessage){ els.results.innerHTML='';els.results.hidden=false;els.resultStatus.textContent=message;if(!items.length){const p=document.createElement('p');p.className='no-results';p.textContent=emptyMessage;els.results.append(p);return;}items.forEach(item=>els.results.append(makeCard(item))); }
+  function clearResourceResults(){els.results.innerHTML='';els.results.hidden=true;els.resultStatus.textContent='';els.category.value='';}
+  function showCategory(cat){const c=copy[lang];if(!cat){clearResourceResults();return;}const items=shared?.selectResources
+  ? shared.selectResources(data,{lang,category:cat})
+  : resourcesForLanguage().filter(item=>item.category===cat);showResults(items,c.categoryFound(cat,items.length),c.noResults);}
 
   function option(select,value,label){const o=document.createElement('option');o.value=value;o.textContent=label;select.append(o);}
 
@@ -592,9 +527,9 @@
     }, 100);
   }
 
-  function applyLanguage(){const c=copy[lang];document.documentElement.lang=lang;document.title=c.documentTitle;core.writeStoredValue(storage,'tifloLang',lang);els.langEs.setAttribute('aria-pressed',String(lang==='es'));els.langEn.setAttribute('aria-pressed',String(lang==='en'));els.skip.textContent=c.skip;els.brand.setAttribute('aria-label',c.brandLabel);els.appHeading.textContent=c.appHeading;els.intro.textContent=c.intro;els.searchHeading.textContent=c.searchHeading;els.searchLabel.textContent=c.searchLabel;els.search.placeholder=c.placeholder;els.searchButton.textContent=c.searchButton;els.newsHeading.textContent=c.news;els.exploreHeading.textContent=c.explore;els.categoryLabel.textContent=c.categoryLabel;els.favoritesButton.textContent=c.favorites;els.clearResults.textContent=c.clear;els.videosHomeHeading.textContent=c.videosHome.heading;els.videosHomeIntro.textContent=c.videosHome.intro;els.videosHomeOpen.textContent=c.videosHome.open;els.youtubeHomeChannel.textContent=c.videosHome.channel;els.aboutHeading.textContent=c.about.heading;els.aboutText.textContent=c.about.text;els.externalLinksNote.textContent=c.externalLinks;els.privacyHeading.textContent=c.privacy.heading;els.privacySubheading.textContent=c.privacy.privacyHeading;els.privacyText.textContent=c.privacy.text;els.accessibilityInfoHeading.textContent=c.privacy.accessibilityHeading;els.accessibilityInfoText.textContent=c.privacy.accessibilityText;els.configHeading.textContent=c.configuration;els.accessibilityHeading.textContent=c.accessibility;els.footer.textContent=c.footer;updatePlatformControls();renderActualidadHome();renderCategories();renderNews();localizeBook();localizeContact();localizeSettings();localizeInstall();localizeUpdate();clearResults();}
+  function applyLanguage(){const c=copy[lang];document.documentElement.lang=lang;document.title=c.documentTitle;core.writeStoredValue(storage,'tifloLang',lang);els.langEs.setAttribute('aria-pressed',String(lang==='es'));els.langEn.setAttribute('aria-pressed',String(lang==='en'));els.skip.textContent=c.skip;els.brand.setAttribute('aria-label',c.brandLabel);els.appHeading.textContent=c.appHeading;els.intro.textContent=c.intro;els.searchHeading.textContent=c.searchHeading;els.searchLabel.textContent=c.searchLabel;els.search.placeholder=c.placeholder;els.searchButton.textContent=c.searchButton;els.newsHeading.textContent=c.news;els.categoryLabel.textContent=c.categoryLabel;els.videosHomeHeading.textContent=c.videosHome.heading;els.videosHomeIntro.textContent=c.videosHome.intro;els.videosHomeOpen.textContent=c.videosHome.open;els.youtubeHomeChannel.textContent=c.videosHome.channel;els.aboutHeading.textContent=c.about.heading;els.aboutText.textContent=c.about.text;els.externalLinksNote.textContent=c.externalLinks;els.privacyHeading.textContent=c.privacy.heading;els.privacySubheading.textContent=c.privacy.privacyHeading;els.privacyText.textContent=c.privacy.text;els.accessibilityInfoHeading.textContent=c.privacy.accessibilityHeading;els.accessibilityInfoText.textContent=c.privacy.accessibilityText;els.configHeading.textContent=c.configuration;els.accessibilityHeading.textContent=c.accessibility;els.footer.textContent=c.footer;renderActualidadHome();renderCategories();renderNews();localizeBook();localizeContact();localizeSettings();localizeInstall();localizeUpdate();clearResourceResults();}
 
-  els.langEs.addEventListener('click',()=>{const changed=lang!=='es';lang='es';applyLanguage();if(changed)trackLanguageUse();});els.langEn.addEventListener('click',()=>{const changed=lang!=='en';lang='en';applyLanguage();if(changed)trackLanguageUse();});els.searchForm.addEventListener('submit',e=>{e.preventDefault();searchResources();});els.category.addEventListener('change',()=>showCategory(els.category.value));els.favoritesButton.addEventListener('click',showFavorites);els.clearResults.addEventListener('click',clearResults);
+  els.langEs.addEventListener('click',()=>{const changed=lang!=='es';lang='es';applyLanguage();if(changed)trackLanguageUse();});els.langEn.addEventListener('click',()=>{const changed=lang!=='en';lang='en';applyLanguage();if(changed)trackLanguageUse();});els.category.addEventListener('change',()=>showCategory(els.category.value));
   els.settingsToggle.addEventListener('click',toggleSettings);
   els.settingsForm.addEventListener('submit',e=>e.preventDefault());
   els.textSize.addEventListener('change',()=>saveDisplaySettings(copy[lang].settings.saved));

@@ -54,7 +54,7 @@ test('web player exposes the same adjustable position and independent details co
   assert.match(script, /createElement\(['"]a['"]\)/);
 });
 
-test('web and Android share the category model while web keeps Resources category-only', async () => {
+test('web and Android share the category model and keep Resources category-only', async () => {
   const [app, shared, mobile] = await Promise.all([
     readRoot('app.js'),
     readRoot('shared/resources.mjs'),
@@ -64,8 +64,10 @@ test('web and Android share the category model while web keeps Resources categor
   assert.match(app, /shared\.selectResources/);
   assert.doesNotMatch(app, /shared\.resourceMatchesPlatform/);
   assert.match(shared, /RESOURCE_PLATFORMS/);
-  assert.match(mobile, /library-platform-filter/);
   assert.match(mobile, /library-category-filter/);
+  assert.doesNotMatch(mobile, /library-platform-filter/);
+  assert.doesNotMatch(mobile, /library-search-input/);
+  assert.doesNotMatch(mobile, /labels\.favorites/);
 });
 
 test('web global search clear returns focus to the search field like Android', async () => {

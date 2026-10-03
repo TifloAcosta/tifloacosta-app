@@ -1,7 +1,5 @@
 import { resolveLocal } from '../core/downloads.mjs';
 import {
-  RESOURCE_PLATFORMS,
-  newestResources,
   resourceCategories,
   selectResources
 } from '../core/resources.mjs';
@@ -130,7 +128,6 @@ function renderResource(parent, item, favoritesStore, nativeActions, t, headingL
     addSaveButton(article, item, downloadUrl, nativeActions, t);
     addFileShareButton(article, item, downloadUrl, nativeActions, t);
   }
-  if (item.id) addFavoriteButton(article, item, favoritesStore, t);
   parent.append(article);
 }
 
@@ -154,50 +151,21 @@ export function renderLibrary({ root, router, content, preferences, favoritesSto
   const allItems = Array.isArray(content?.resources) ? content.resources : [];
   const labels = lang === 'en'
     ? {
-        search:'Search resources', searchLabel:'Title or keyword', searchPlaceholder:'For example: VoiceOver, Android, WhatsApp…',
-        searchButton:'Search', newest:'New content', explore:'Explore resources', category:'Category',
-        categoryPlaceholder:'Select a category', platform:'Platform', allPlatforms:'All platforms',
-        android:'Android', iphone:'iPhone', windows:'Windows', favorites:'View favorites',
-        clear:'Clear results', noResults:'No matching resources were found.',
-        intro:'Search first, choose a category or platform, or open Favorites. The complete catalog is not shown automatically.'
+        intro:'Choose a category to browse the resources available in TifloAcosta.',
+        category:'Category',
+        categoryPlaceholder:'Select a category',
+        noResults:'No resources are available in this category.',
+        found:n => `${n} resource${n === 1 ? '' : 's'}.`
       }
     : {
-        search:'Buscar recursos', searchLabel:'Título o palabra clave', searchPlaceholder:'Por ejemplo: VoiceOver, Android, WhatsApp…',
-        searchButton:'Buscar', newest:'Novedades', explore:'Explorar recursos', category:'Categoría',
-        categoryPlaceholder:'Seleccionar una categoría', platform:'Plataforma', allPlatforms:'Todas las plataformas',
-        android:'Android', iphone:'iPhone', windows:'Windows', favorites:'Ver favoritos',
-        clear:'Limpiar resultados', noResults:'No se encontraron recursos coincidentes.',
-        intro:'Busca primero, elige una categoría o plataforma, o abre Favoritos. El catálogo completo no se muestra automáticamente.'
+        intro:'Elige una categoría para consultar los recursos disponibles en TifloAcosta.',
+        category:'Categoría',
+        categoryPlaceholder:'Seleccionar una categoría',
+        noResults:'No hay recursos disponibles en esta categoría.',
+        found:n => `${n} recurso${n === 1 ? '' : 's'}.`
       };
 
   addParagraph(root, labels.intro, 'muted');
-
-  const searchHeading = document.createElement('h2');
-  searchHeading.textContent = labels.search;
-  const form = document.createElement('form');
-  form.className = 'search-form';
-  const searchLabel = document.createElement('label');
-  const searchInput = document.createElement('input');
-  searchInput.id = 'library-search-input';
-  searchInput.type = 'search';
-  searchInput.autocomplete = 'off';
-  searchInput.placeholder = labels.searchPlaceholder;
-  searchLabel.htmlFor = searchInput.id;
-  searchLabel.textContent = labels.searchLabel;
-  const submit = document.createElement('button');
-  submit.type = 'submit';
-  submit.textContent = labels.searchButton;
-  form.append(searchLabel, searchInput, submit);
-
-  const newest = newestResources(allItems, { lang, limit:3 });
-  const newestHeading = document.createElement('h2');
-  newestHeading.textContent = labels.newest;
-  const newestList = document.createElement('div');
-  newestList.className = 'content-list';
-  for (const item of newest) renderResource(newestList, item, favoritesStore, nativeActions, t, 'h3');
-
-  const exploreHeading = document.createElement('h2');
-  exploreHeading.textContent = labels.explore;
 
   const categoryField = document.createElement('div');
   categoryField.className = 'settings-field';
@@ -206,10 +174,12 @@ export function renderLibrary({ root, router, content, preferences, favoritesSto
   categoryLabel.textContent = labels.category;
   const categorySelect = document.createElement('select');
   categorySelect.id = 'library-category-filter';
-  const categoryPlaceholder = document.createElement('option');
-  categoryPlaceholder.value = '';
-  categoryPlaceholder.textContent = labels.categoryPlaceholder;
-  categorySelect.append(categoryPlaceholder);
+
+  const placeholder = document.createElement('option');
+  placeholder.value = '';
+  placeholder.textContent = labels.categoryPlaceholder;
+  categorySelect.append(placeholder);
+
   for (const category of resourceCategories(allItems, lang)) {
     const option = document.createElement('option');
     option.value = category;
@@ -218,116 +188,39 @@ export function renderLibrary({ root, router, content, preferences, favoritesSto
   }
   categoryField.append(categoryLabel, categorySelect);
 
-  const platformField = document.createElement('div');
-  platformField.className = 'settings-field';
-  const platformLabel = document.createElement('label');
-  platformLabel.htmlFor = 'library-platform-filter';
-  platformLabel.textContent = labels.platform;
-  const platformSelect = document.createElement('select');
-  platformSelect.id = 'library-platform-filter';
-  const platformNames = { all:labels.allPlatforms, android:labels.android, iphone:labels.iphone, windows:labels.windows };
-  for (const platform of RESOURCE_PLATFORMS) {
-    const option = document.createElement('option');
-    option.value = platform;
-    option.textContent = platformNames[platform] || platform;
-    platformSelect.append(option);
-  }
-  platformField.append(platformLabel, platformSelect);
-
-  const actions = document.createElement('div');
-  actions.className = 'action-group';
-  const favorites = document.createElement('button');
-  favorites.type = 'button';
-  favorites.textContent = labels.favorites;
-  const clear = document.createElement('button');
-  clear.type = 'button';
-  clear.textContent = labels.clear;
-  clear.hidden = true;
-  actions.append(favorites, clear);
-
   const status = document.createElement('p');
   status.className = 'muted';
-  status.setAttribute('role','status');
-  status.setAttribute('aria-live','polite');
-  status.setAttribute('aria-atomic','true');
+  status.setAttribute('role', 'status');
+  status.setAttribute('aria-live', 'polite');
+  status.setAttribute('aria-atomic', 'true');
 
   const list = document.createElement('div');
   list.className = 'content-list';
   list.hidden = true;
 
-  function renderResults(items) {
+  function renderCategory(category) {
     list.replaceChildren();
-    list.hidden = false;
-    clear.hidden = false;
-    status.textContent = items.length
-      ? (lang === 'en' ? `${items.length} resource${items.length===1?'':'s'} found.` : `${items.length} recurso${items.length===1?'':'s'} encontrado${items.length===1?'':'s'}.`)
-      : labels.noResults;
-    if (!items.length) addParagraph(list, labels.noResults, 'empty-state');
-    for (const item of items) renderResource(list, item, favoritesStore, nativeActions, t);
-    const target = list.querySelector('h2, .empty-state');
-    if (target) {
-      target.tabIndex = -1;
-      queueMicrotask(() => target.focus());
+    if (!category) {
+      list.hidden = true;
+      status.textContent = '';
+      return;
     }
-  }
 
-  function currentSelection(extra={}) {
-    return selectResources(allItems, {
-      lang,
-      platform:platformSelect.value || 'all',
-      category:categorySelect.value,
-      query:searchInput.value.trim(),
-      ...extra
-    });
-  }
+    const items = selectResources(allItems, { lang, category });
+    list.hidden = false;
+    status.textContent = items.length ? labels.found(items.length) : labels.noResults;
 
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-    renderResults(currentSelection());
-  });
+    if (!items.length) {
+      addParagraph(list, labels.noResults, 'empty-state');
+      return;
+    }
+    for (const item of items) renderResource(list, item, favoritesStore, nativeActions, t);
+  }
 
   categorySelect.addEventListener('change', () => {
-    if (!categorySelect.value) {
-      list.hidden = true;
-      clear.hidden = true;
-      status.textContent = '';
-      return;
-    }
-    renderResults(currentSelection({ query:'' }));
+    renderCategory(categorySelect.value);
   });
 
-  platformSelect.addEventListener('change', () => {
-    if (platformSelect.value === 'all' && !categorySelect.value && !searchInput.value.trim()) {
-      list.hidden = true;
-      clear.hidden = true;
-      status.textContent = '';
-      return;
-    }
-    renderResults(currentSelection());
-  });
-
-  favorites.addEventListener('click', () => {
-    renderResults(selectResources(allItems, {
-      lang,
-      platform:platformSelect.value || 'all',
-      category:categorySelect.value,
-      favoriteIds:favoriteIds(favoritesStore)
-    }));
-  });
-
-  clear.addEventListener('click', () => {
-    searchInput.value = '';
-    categorySelect.value = '';
-    platformSelect.value = 'all';
-    list.replaceChildren();
-    list.hidden = true;
-    clear.hidden = true;
-    status.textContent = '';
-    searchInput.focus();
-  });
-
-  root.append(searchHeading, form);
-  if (newest.length) root.append(newestHeading, newestList);
-  root.append(exploreHeading, categoryField, platformField, actions, status, list);
+  root.append(categoryField, status, list);
   addEndBackButton(root, router, t('nav.back'));
 }

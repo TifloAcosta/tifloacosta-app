@@ -77,7 +77,7 @@
   const copy = {
     es: {
       heading: 'Leer con TifloAcosta',
-      intro: 'Abre TXT, HTML, PDF, DOCX, EPUB, ODT, RTF, Markdown, FB2 o una imagen, o pega un texto, para leerlo con navegación accesible y las voces disponibles en tu navegador.',
+      intro: 'Abre TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 o una imagen, o pega un texto, para leerlo con navegación accesible y las voces disponibles en tu navegador.',
       file: 'Abrir documento o imagen'
       paste: 'O pega aquí el texto',
       prepare: 'Preparar lectura',
@@ -175,7 +175,7 @@
     },
     en: {
       heading: 'Read with TifloAcosta',
-      intro: 'Open TXT, HTML, PDF, DOCX, EPUB, ODT, RTF, Markdown, FB2 or an image, or paste text, to read it with accessible navigation and the voices available in your browser.',
+      intro: 'Open TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 or an image, or paste text, to read it with accessible navigation and the voices available in your browser.',
       file: 'Open document or image'
       paste: 'Or paste text here',
       prepare: 'Prepare reading',
@@ -566,6 +566,8 @@
     const zip = await JSZip.loadAsync(await file.arrayBuffer());
     let raw;
     if (kind === 'docx') raw = await shared.parseDocxArchive(zip, { title:file.name, language:language() });
+    else if (kind === 'pptx') raw = await shared.parsePptxArchive(zip, { title:file.name, language:language() });
+    else if (kind === 'xlsx') raw = await shared.parseXlsxArchive(zip, { title:file.name, language:language() });
     else if (kind === 'epub') raw = await shared.parseEpubArchive(zip, { title:file.name, language:language() });
     else raw = await shared.parseOdtArchive(zip, { title:file.name, language:language() });
     return shared.parseStructuredDocument(raw, { title:file.name, language:raw.language || language() });
@@ -637,6 +639,12 @@
     }
     if (lower.endsWith('.docx') || type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
       return { source:await file.arrayBuffer().then(buffer => Array.from(new Uint8Array(buffer)).join(',')), format:'docx', model:await structuredFromArchive(file,'docx') };
+    }
+    if (lower.endsWith('.pptx') || type === 'application/vnd.openxmlformats-officedocument.presentationml.presentation') {
+      return { source:await file.arrayBuffer().then(buffer => Array.from(new Uint8Array(buffer)).join(',')), format:'pptx', model:await structuredFromArchive(file,'pptx') };
+    }
+    if (lower.endsWith('.xlsx') || type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+      return { source:await file.arrayBuffer().then(buffer => Array.from(new Uint8Array(buffer)).join(',')), format:'xlsx', model:await structuredFromArchive(file,'xlsx') };
     }
     if (lower.endsWith('.epub') || type === 'application/epub+zip') {
       return { source:await file.arrayBuffer().then(buffer => Array.from(new Uint8Array(buffer)).join(',')), format:'epub', model:await structuredFromArchive(file,'epub') };

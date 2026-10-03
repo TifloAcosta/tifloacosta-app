@@ -105,6 +105,11 @@ export {
 } from './web-reading-format-adapters.mjs';
 
 export {
+  parsePptxArchive,
+  parseXlsxArchive
+} from './office-openxml-adapters.mjs';
+
+export {
   RESOURCE_PLATFORMS,
   newestResources,
   resourceCategories,

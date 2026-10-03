@@ -35,9 +35,11 @@ import com.tifloacosta.app.reading.ReadingLibraryDatabase;
 import com.tifloacosta.app.reading.ReadingMarkRecord;
 import com.tifloacosta.app.reading.ReadingPdfExtractor;
 import com.tifloacosta.app.reading.ReadingPdfResult;
+import com.tifloacosta.app.reading.ReadingPptxAdapter;
 import com.tifloacosta.app.reading.ReadingSettingsRecord;
 import com.tifloacosta.app.reading.ReadingStructuredDocument;
 import com.tifloacosta.app.reading.ReadingStructuredDocumentJson;
+import com.tifloacosta.app.reading.ReadingXlsxAdapter;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -115,6 +117,8 @@ public class TifloReadingPlugin extends Plugin {
                 "application/pdf",
                 "application/epub+zip",
                 "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 "audio/mpeg",
                 "audio/mp4",
                 "audio/aac",
@@ -233,6 +237,16 @@ public class TifloReadingPlugin extends Plugin {
                     try (InputStream source = fileStore.openStoredInput(record.getRelativePath())) {
                         File workRoot = new File(getContext().getCacheDir(), "reading-docx-open");
                         ReadingStructuredDocument document = new ReadingDocxAdapter().read(source, workRoot);
+                        result.put("content", ReadingStructuredDocumentJson.serialize(document));
+                    }
+                } else if ("pptx".equals(record.getFormat())) {
+                    try (InputStream source = fileStore.openStoredInput(record.getRelativePath())) {
+                        ReadingStructuredDocument document = new ReadingPptxAdapter().read(source);
+                        result.put("content", ReadingStructuredDocumentJson.serialize(document));
+                    }
+                } else if ("xlsx".equals(record.getFormat())) {
+                    try (InputStream source = fileStore.openStoredInput(record.getRelativePath())) {
+                        ReadingStructuredDocument document = new ReadingXlsxAdapter().read(source);
                         result.put("content", ReadingStructuredDocumentJson.serialize(document));
                     }
                 } else if ("daisy2.02".equals(record.getFormat()) || "daisy3".equals(record.getFormat())) {

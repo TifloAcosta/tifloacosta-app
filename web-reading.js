@@ -381,19 +381,37 @@
     const visual = fieldsets[1];
     const voices = els.settingsPanel.querySelector('#reading-external-voices');
 
-    function collapse(node, label, id) {
+    function createButtonPanel(node, label, id) {
       if (!node) return;
-      const details = document.createElement('details');
-      details.id = id;
-      const summary = document.createElement('summary');
-      summary.textContent = label;
-      node.before(details);
-      details.append(summary, node);
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.id = `${id}-button`;
+      button.textContent = label;
+      button.setAttribute('aria-expanded', 'false');
+      button.setAttribute('aria-controls', id);
+
+      const panel = document.createElement('section');
+      panel.id = id;
+      panel.hidden = true;
+      panel.setAttribute('aria-labelledby', button.id);
+
+      node.before(button, panel);
+      panel.append(node);
+
+      button.addEventListener('click', () => {
+        const opening = panel.hidden;
+        panel.hidden = !opening;
+        button.setAttribute('aria-expanded', String(opening));
+        if (opening) {
+          const firstFocusable = panel.querySelector('input, select, button, a[href], textarea, [tabindex]:not([tabindex="-1"])');
+          queueMicrotask(() => firstFocusable?.focus?.());
+        }
+      });
     }
 
-    collapse(audio, language() === 'en' ? 'Audio and voice' : 'Audio y voz', 'reading-audio-settings');
-    collapse(visual, language() === 'en' ? 'Visual presentation' : 'Presentación visual', 'reading-visual-settings');
-    collapse(voices, language() === 'en' ? 'Find more voices' : 'Buscar más voces', 'reading-more-voices-settings');
+    createButtonPanel(audio, language() === 'en' ? 'Audio and voice' : 'Audio y voz', 'reading-audio-settings');
+    createButtonPanel(visual, language() === 'en' ? 'Visual presentation' : 'Presentación visual', 'reading-visual-settings');
+    createButtonPanel(voices, language() === 'en' ? 'Find more voices' : 'Buscar más voces', 'reading-more-voices-settings');
 
     if (audio) {
       const mode = document.createElement('input');
@@ -1776,7 +1794,6 @@
   els.save.disabled = true;
   els.bookmark.disabled = true;
   els.queueToggle.disabled = true;
-  organizeGeneralSettingsMenus();
   organizeGeneralSettingsMenus();
   restoreWebSettings();
   localize();

@@ -1707,10 +1707,6 @@
     els.rateValue.textContent = els.rate.value;
   });
   els.rate.addEventListener('change', () => { saveWebSettings(); void rebuildSpeech(); });
-  els.settingsToggle?.addEventListener('click', () => togglePanel(els.settingsToggle, els.settingsPanel, els.settingsHeading));
-  els.libraryToggle?.addEventListener('click', () => togglePanel(els.libraryToggle, document.getElementById('reading-library-web'), els.libraryHeading));
-  els.queueMenuToggle?.addEventListener('click', () => togglePanel(els.queueMenuToggle, document.getElementById('reading-queue-web'), els.queueHeading));
-  els.marksMenuToggle?.addEventListener('click', () => togglePanel(els.marksMenuToggle, document.getElementById('reading-marks-web'), els.marksHeading));
   for (const control of [els.audioSpeed, els.textSize, els.fontFamily, els.fontWeight, els.lineSpacing, els.paragraphSpacing, els.readingWidth, els.readingTheme, els.highContrast]) {
     control?.addEventListener('change', saveWebSettings);
   }

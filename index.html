@@ -170,14 +170,7 @@
       <p id="reading-mark-status" class="muted" role="status" aria-live="polite"></p>
     </section>
 
-    <nav class="reading-section-menu" aria-label="Opciones de TifloLector">
-      <button id="reading-settings-toggle" type="button" aria-expanded="false" aria-controls="reading-settings-web">Ajustes de lectura</button>
-      <button id="reading-library-toggle" type="button" aria-expanded="false" aria-controls="reading-library-web">Mi biblioteca</button>
-      <button id="reading-queue-menu-toggle" type="button" aria-expanded="false" aria-controls="reading-queue-web">Cola de lectura</button>
-      <button id="reading-marks-menu-toggle" type="button" aria-expanded="false" aria-controls="reading-marks-web">Marcadores</button>
-    </nav>
-
-    <section id="reading-settings-web" class="panel" hidden aria-labelledby="reading-settings-heading">
+    <section id="reading-settings-web" class="panel" aria-labelledby="reading-settings-heading">
       <h3 id="reading-settings-heading" tabindex="-1">Ajustes de lectura</h3>
 
       <h4 id="reading-audio-settings-heading">Audio y voz</h4>
@@ -283,7 +276,7 @@
       <p id="reading-settings-status" class="muted" role="status" aria-live="polite"></p>
     </section>
 
-    <section id="reading-library-web" hidden aria-labelledby="reading-library-heading">
+    <section id="reading-library-web" aria-labelledby="reading-library-heading">
       <h3 id="reading-library-heading" tabindex="-1">Mi biblioteca</h3>
       <p id="reading-library-intro">Los documentos guardados permanecen en este navegador.</p>
       <button id="reading-library-refresh" type="button">Actualizar biblioteca</button>
@@ -291,14 +284,14 @@
       <div id="reading-library-list" class="resource-list"></div>
     </section>
 
-    <section id="reading-queue-web" hidden aria-labelledby="reading-queue-heading">
+    <section id="reading-queue-web" aria-labelledby="reading-queue-heading">
       <h3 id="reading-queue-heading" tabindex="-1">Cola de lectura</h3>
       <p id="reading-queue-intro">Ordena los documentos que quieres leer después. Nada se abrirá automáticamente.</p>
       <p id="reading-queue-status" class="muted" role="status" aria-live="polite"></p>
       <div id="reading-queue-list" class="resource-list"></div>
     </section>
 
-    <section id="reading-marks-web" hidden aria-labelledby="reading-marks-heading">
+    <section id="reading-marks-web" aria-labelledby="reading-marks-heading">
       <h3 id="reading-marks-heading" tabindex="-1">Marcadores</h3>
       <p id="reading-marks-intro">Guarda puntos de lectura del documento abierto para volver a ellos más tarde.</p>
       <p id="reading-marks-status" class="muted" role="status" aria-live="polite"></p>
@@ -480,7 +473,7 @@
 <script src="app-core.js?v=1.6"></script>
 <script src="actualidad-core.js?v=1.0"></script>
 <script src="shared-web.js?v=1.0"></script>
-<script src="web-reading.js?v=1.4"></script>
+<script src="web-reading.js?v=1.5"></script>
 <script src="app.js?v=2.2"></script>
 <script>
 (() => {

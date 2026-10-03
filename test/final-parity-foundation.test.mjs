@@ -18,7 +18,7 @@ test('Actualidad keeps original source inside the clean reader when internal rea
   assert.ok(reader.includes('onOpenOriginal(state.url)'));
 });
 
-test('web and Android resource navigation share the same model', async () => {
+test('web and Android resource navigation share the category-only model', async () => {
   const [shared, web, mobile] = await Promise.all([
     read('shared/resources.mjs'),
     read('app.js'),
@@ -32,12 +32,13 @@ test('web and Android resource navigation share the same model', async () => {
   ]) assert.ok(shared.includes(`export function ${token}`));
   assert.ok(web.includes('shared.resourceCategories'));
   assert.ok(web.includes('shared.selectResources'));
-  assert.ok(web.includes('shared.newestResources'));
   assert.ok(mobile.includes("from '../core/resources.mjs'"));
-  assert.ok(mobile.includes('newestResources(allItems, { lang, limit:3 })'));
+  assert.ok(mobile.includes('resourceCategories(allItems, lang)'));
   assert.ok(mobile.includes('library-category-filter'));
-  assert.ok(mobile.includes('library-platform-filter'));
+  assert.ok(mobile.includes('selectResources(allItems, { lang, category })'));
   assert.ok(mobile.includes('list.hidden = true'));
+  assert.doesNotMatch(mobile, /library-platform-filter/);
+  assert.doesNotMatch(mobile, /library-search-input/);
 });
 
 test('web downloads attempts to save file bytes and restores focus', async () => {

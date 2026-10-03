@@ -1,5 +1,17 @@
 [
   {
+    "id": "buscaapps-21944859a6200ffe",
+    "title": "Reconocedor de Ciudades",
+    "sourceId": "buscaapps",
+    "sourceName": "BuscaApps",
+    "sourceUrl": "https://www.buscaapps.com/",
+    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1246",
+    "lang": "es",
+    "platform": "Windows",
+    "summary": "Explora la ciudad virtualmente, planifica rutas, simula trayectos y crea un mapa mental antes de recorrerla físicamente",
+    "publishedAt": null
+  },
+  {
     "id": "buscaapps-dd759c58258b4f45",
     "title": "Foreca Weather",
     "sourceId": "buscaapps",
@@ -105,18 +117,6 @@
     "lang": "es",
     "platform": "iOS",
     "summary": "Cliente accesible y gratuito de Telegram",
-    "publishedAt": null
-  },
-  {
-    "id": "buscaapps-510558393adc5975",
-    "title": "GhostWriter MarkDown",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1235",
-    "lang": "es",
-    "platform": "iOS",
-    "summary": "Editor de texto MarkDown accesible",
     "publishedAt": null
   },
   {

@@ -182,6 +182,18 @@ public final class ReadingImportService {
                 } catch (ReadingDocxAdapter.DocxException error) {
                     return ReadingImportResult.rejected(error.getCode());
                 }
+            } else if ("pptx".equals(detectedFormat)) {
+                try {
+                    structuredInfo = validatePptx(tempName);
+                } catch (ReadingPptxAdapter.PptxException error) {
+                    return ReadingImportResult.rejected(error.getCode());
+                }
+            } else if ("xlsx".equals(detectedFormat)) {
+                try {
+                    structuredInfo = validateXlsx(tempName);
+                } catch (ReadingXlsxAdapter.XlsxException error) {
+                    return ReadingImportResult.rejected(error.getCode());
+                }
             } else if ("zip".equals(detectedFormat)) {
                 try {
                     zipPackage = inspectZip(tempName);
@@ -727,6 +739,18 @@ public final class ReadingImportService {
         } finally { deleteTreeIfEmpty(workRoot); }
     }
 
+    private ReadingStructuredDocument validatePptx(String tempName) throws IOException {
+        try (InputStream source = fileStore.openTempInput(tempName)) {
+            return new ReadingPptxAdapter().read(source);
+        }
+    }
+
+    private ReadingStructuredDocument validateXlsx(String tempName) throws IOException {
+        try (InputStream source = fileStore.openTempInput(tempName)) {
+            return new ReadingXlsxAdapter().read(source);
+        }
+    }
+
     private static String formatFrom(ReadingImportSource source) {
         if (source == null) return null;
         String displayName = source.getDisplayName();
@@ -737,6 +761,8 @@ public final class ReadingImportService {
         if (lowerName.endsWith(".pdf")) return "pdf";
         if (lowerName.endsWith(".epub")) return "epub";
         if (lowerName.endsWith(".docx")) return "docx";
+        if (lowerName.endsWith(".pptx")) return "pptx";
+        if (lowerName.endsWith(".xlsx")) return "xlsx";
         if (lowerName.endsWith(".zip")) return "zip";
         if (lowerName.endsWith(".html") || lowerName.endsWith(".htm")) return "html";
         if (lowerName.endsWith(".txt")) return "txt";
@@ -745,6 +771,8 @@ public final class ReadingImportService {
         if ("application/pdf".equals(lowerMime)) return "pdf";
         if ("application/epub+zip".equals(lowerMime)) return "epub";
         if ("application/vnd.openxmlformats-officedocument.wordprocessingml.document".equals(lowerMime)) return "docx";
+        if ("application/vnd.openxmlformats-officedocument.presentationml.presentation".equals(lowerMime)) return "pptx";
+        if ("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet".equals(lowerMime)) return "xlsx";
         if ("application/zip".equals(lowerMime) || "application/x-zip-compressed".equals(lowerMime)) return "zip";
         if ("text/html".equals(lowerMime)) return "html";
         if ("text/plain".equals(lowerMime)) return "txt";
@@ -757,6 +785,8 @@ public final class ReadingImportService {
         if ("pdf".equals(format)) return "pdf";
         if ("epub".equals(format)) return "epub";
         if ("docx".equals(format)) return "docx";
+        if ("pptx".equals(format)) return "pptx";
+        if ("xlsx".equals(format)) return "xlsx";
         if ("zip".equals(format) || "daisy2.02".equals(format) || "daisy3".equals(format)) return "zip";
         if ("txt".equals(format)) return "txt";
         if ("audio".equals(format)) return audioExtensionFrom(source);
@@ -803,6 +833,8 @@ public final class ReadingImportService {
         else if ("pdf".equals(format) && lower.endsWith(".pdf")) extension = ".pdf";
         else if ("epub".equals(format) && lower.endsWith(".epub")) extension = ".epub";
         else if ("docx".equals(format) && lower.endsWith(".docx")) extension = ".docx";
+        else if ("pptx".equals(format) && lower.endsWith(".pptx")) extension = ".pptx";
+        else if ("xlsx".equals(format) && lower.endsWith(".xlsx")) extension = ".xlsx";
         else if ("zip".equals(format) && lower.endsWith(".zip")) extension = ".zip";
         else if ("txt".equals(format) && lower.endsWith(".txt")) extension = ".txt";
         else if ("audio".equals(format)) {
@@ -822,6 +854,8 @@ public final class ReadingImportService {
         if ("pdf".equals(format)) return "application/pdf";
         if ("epub".equals(format)) return "application/epub+zip";
         if ("docx".equals(format)) return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+        if ("pptx".equals(format)) return "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+        if ("xlsx".equals(format)) return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
         if ("daisy2.02".equals(format) || "daisy3".equals(format) || "zip".equals(format)) return "application/zip";
         if ("audio".equals(format)) return audioMimeFrom(mimeType, sourceExtension);
         if (mimeType != null && !mimeType.trim().isEmpty()) return mimeType;

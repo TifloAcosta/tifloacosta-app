@@ -153,6 +153,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         loading: 'Buscando en TifloAcosta…',
         empty: 'No se encontraron resultados.',
         count: n => `${n} resultado${n === 1 ? '' : 's'} encontrado${n === 1 ? '' : 's'}.`,
+        groupCount: (label,n) => `${label}: ${n} resultado${n === 1 ? '' : 's'}`,
         groups: {
           resource: 'Recursos',
           video: 'Vídeos de TifloAcosta',
@@ -179,6 +180,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         loading: 'Searching TifloAcosta…',
         empty: 'No results were found.',
         count: n => `${n} result${n === 1 ? '' : 's'} found.`,
+        groupCount: (label,n) => `${label}: ${n} result${n === 1 ? '' : 's'}`,
         groups: {
           resource: 'Resources',
           video: 'TifloAcosta videos',
@@ -350,7 +352,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
           const group = document.createElement('section');
           group.className = 'global-search-group';
           const groupHeading = document.createElement('h3');
-          groupHeading.textContent = `${copy.groups[kind]} (${matches.length})`;
+          groupHeading.textContent = copy.groupCount(copy.groups[kind], matches.length);
           group.append(groupHeading);
           const list = document.createElement('div');
           list.className = 'global-search-list';

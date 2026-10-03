@@ -22,12 +22,25 @@ import {
   searchVideos
 } from './youtube-api.js';
 
+const PUBLIC_SEARCH_ORIGINS = new Set([
+  'https://localhost',
+  'capacitor://localhost'
+]);
+
+function searchOriginAllowed(request, env) {
+  const origin = request.headers.get('Origin') || '';
+  return origin === env.ALLOWED_ORIGIN || PUBLIC_SEARCH_ORIGINS.has(origin);
+}
+
 function corsHeaders(request, env) {
   const origin = request.headers.get('Origin') || '';
-  if (origin !== env.ALLOWED_ORIGIN) return {};
+  const url = new URL(request.url);
+  const allowed = origin === env.ALLOWED_ORIGIN ||
+    (url.pathname === '/search' && PUBLIC_SEARCH_ORIGINS.has(origin));
+  if (!allowed) return {};
   return {
     'Access-Control-Allow-Origin': origin,
-    'Access-Control-Allow-Credentials': 'true',
+    'Access-Control-Allow-Credentials': origin === env.ALLOWED_ORIGIN ? 'true' : 'false',
     'Vary': 'Origin'
   };
 }
@@ -220,7 +233,7 @@ export async function handleRequest(request, env, deps = {}) {
   }
 
   if (url.pathname === '/search' && request.method === 'GET') {
-    if (request.headers.get('Origin') !== env.ALLOWED_ORIGIN) {
+    if (!searchOriginAllowed(request, env)) {
       return json({ error: 'ORIGIN_NOT_ALLOWED' }, 403, cors);
     }
     try {

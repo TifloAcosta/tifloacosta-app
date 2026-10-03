@@ -481,10 +481,56 @@
 <script src="medical-studies.js?v=1.0"></script>
 <script src="app-core.js?v=1.6"></script>
 <script src="actualidad-core.js?v=1.0"></script>
+<script>
+(() => {
+  'use strict';
+
+  const select = document.getElementById('reading-voice');
+  const status = document.getElementById('reading-voice-status');
+  if (!select) return;
+
+  function loadNativeVoices() {
+    const voices = typeof window.speechSynthesis?.getVoices === 'function'
+      ? Array.from(window.speechSynthesis.getVoices() || [])
+      : [];
+
+    const current = select.value;
+    select.replaceChildren();
+
+    const base = document.createElement('option');
+    base.value = '';
+    base.textContent = 'Voz predeterminada del navegador';
+    select.append(base);
+
+    for (const voice of voices) {
+      const option = document.createElement('option');
+      option.value = String(voice.voiceURI || voice.name || '');
+      option.textContent = voice.lang
+        ? String(voice.name || voice.voiceURI) + ' — ' + String(voice.lang)
+        : String(voice.name || voice.voiceURI);
+      select.append(option);
+    }
+
+    if ([...select.options].some(option => option.value === current)) {
+      select.value = current;
+    }
+
+    if (status) {
+      status.textContent = voices.length
+        ? voices.length + (voices.length === 1 ? ' voz disponible en el navegador.' : ' voces disponibles en el navegador.')
+        : 'El navegador todavía no ha proporcionado su lista de voces.';
+    }
+  }
+
+  loadNativeVoices();
+  window.speechSynthesis?.addEventListener?.('voiceschanged', loadNativeVoices);
+  [200, 600, 1500, 3000, 6000].forEach(delay => window.setTimeout(loadNativeVoices, delay));
+})();
+</script>
 <script type="module">
   import * as shared from './shared/web-entry.mjs?v=1.1';
   window.TIFLO_SHARED = shared;
-  await import('./web-reading.js?v=1.7');
+  await import('./web-reading.js?v=1.8');
 </script>
 <script src="app.js?v=2.2"></script>
 <script>

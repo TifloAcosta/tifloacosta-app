@@ -50,6 +50,17 @@
     <p id="intro">Recursos de accesibilidad y tecnología, organizados para llegar a ellos sin perderse por el camino.</p>
   </section>
 
+  <section id="global-search-shell">
+    <h2 id="search-heading">Buscar en TifloAcosta</h2>
+    <form id="search-form">
+      <label for="search">Título, descripción o tema</label>
+      <div class="search-row">
+        <input id="search" type="search" autocomplete="off" placeholder="Por ejemplo: VoiceOver, Android, WhatsApp…">
+        <button type="submit" id="search-button">Buscar</button>
+      </div>
+    </form>
+  </section>
+
   <section id="home-blocks" aria-labelledby="home-blocks-heading">
     <h2 id="home-blocks-heading">Secciones</h2>
     <nav class="resource-actions" aria-label="Secciones de TifloAcosta App">
@@ -79,29 +90,12 @@
   <section id="resources-view" hidden tabindex="-1" aria-labelledby="resources-view-heading">
     <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
     <h2 id="resources-view-heading">Recursos</h2>
-    <section>
-      <h2 id="search-heading">Buscar recursos</h2>
-      <form id="search-form">
-        <label for="search">Título o palabra clave</label>
-        <div class="search-row">
-          <input id="search" type="search" autocomplete="off" placeholder="Por ejemplo: VoiceOver, Android, WhatsApp…">
-          <button type="submit" id="search-button">Buscar</button>
-        </div>
-      </form>
-    </section>
-    <section>
-      <h2 id="explore-heading">Explorar recursos</h2>
-      <label for="category">Categoría</label>
-      <select id="category">
-        <option value="">Seleccionar una categoría</option>
-      </select>
-      <div class="inline-actions">
-        <button type="button" id="favorites-button">Ver favoritos</button>
-        <button type="button" id="clear-results" hidden>Limpiar resultados</button>
-      </div>
-      <p id="result-status" class="muted" aria-live="polite" aria-atomic="true"></p>
-      <div id="resource-results" class="resource-list" hidden></div>
-    </section>
+    <label for="category">Categoría</label>
+    <select id="category">
+      <option value="">Seleccionar una categoría</option>
+    </select>
+    <p id="result-status" class="muted" aria-live="polite" aria-atomic="true"></p>
+    <div id="resource-results" class="resource-list" hidden></div>
     <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
   </section>
 

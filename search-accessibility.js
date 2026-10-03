@@ -412,90 +412,6 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       loadSources();
     }
 
-    function enhanceResourceCategories() {
-      const select = document.querySelector('#category');
-      const label = document.querySelector('label[for="category"]');
-      if (!select || !label || select.dataset.accessibleCategories === 'true') return;
-      select.dataset.accessibleCategories = 'true';
-
-      label.id = label.id || 'category-label';
-      label.removeAttribute('for');
-
-      const categoryToggle = document.createElement('button');
-      categoryToggle.type = 'button';
-      categoryToggle.id = 'category-toggle';
-      categoryToggle.setAttribute('aria-expanded', 'false');
-      categoryToggle.setAttribute('aria-controls', 'category-options');
-      categoryToggle.setAttribute('aria-labelledby', `${label.id} category-toggle`);
-
-      const categoryOptions = document.createElement('div');
-      categoryOptions.id = 'category-options';
-      categoryOptions.className = 'inline-actions category-options';
-      categoryOptions.hidden = true;
-      categoryOptions.setAttribute('role', 'group');
-      categoryOptions.setAttribute('aria-labelledby', label.id);
-
-      select.hidden = true;
-      select.insertAdjacentElement('afterend', categoryToggle);
-      categoryToggle.insertAdjacentElement('afterend', categoryOptions);
-
-      function placeholder() {
-        return select.options[0]?.textContent || (currentLanguage() === 'en' ? 'Select a category' : 'Seleccionar una categoría');
-      }
-
-      function syncToggle() {
-        const selected = [...select.options].find(option => option.value === select.value);
-        categoryToggle.textContent = select.value && selected ? selected.textContent : placeholder();
-      }
-
-      function setOpen(open) {
-        categoryToggle.setAttribute('aria-expanded', String(open));
-        categoryOptions.hidden = !open;
-      }
-
-      function rebuildOptions() {
-        categoryOptions.replaceChildren();
-        [...select.options].filter(option => option.value).forEach(option => {
-          const optionButton = document.createElement('button');
-          optionButton.type = 'button';
-          optionButton.className = 'category-option';
-          optionButton.textContent = option.textContent;
-          optionButton.dataset.categoryValue = option.value;
-          optionButton.addEventListener('click', () => {
-            select.value = option.value;
-            syncToggle();
-            setOpen(false);
-            select.dispatchEvent(new Event('change', { bubbles: true }));
-            categoryToggle.focus();
-          });
-          categoryOptions.append(optionButton);
-        });
-      }
-
-      categoryToggle.addEventListener('click', () => {
-        rebuildOptions();
-        syncToggle();
-        setOpen(categoryToggle.getAttribute('aria-expanded') !== 'true');
-      });
-      categoryOptions.addEventListener('keydown', event => {
-        if (event.key !== 'Escape') return;
-        setOpen(false);
-        categoryToggle.focus();
-      });
-      select.addEventListener('change', syncToggle);
-      document.querySelector('#favorites-button')?.addEventListener('click', () => window.setTimeout(syncToggle, 0));
-      document.querySelector('#clear-results')?.addEventListener('click', () => window.setTimeout(syncToggle, 0));
-
-      const observer = new MutationObserver(() => {
-        rebuildOptions();
-        syncToggle();
-      });
-      observer.observe(select, { childList: true });
-
-      rebuildOptions();
-      syncToggle();
-    }
-
     function submitHiddenVideoSearch(form) {
       form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
     }
@@ -565,7 +481,6 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
 
     function init() {
       enhanceGlobalSearch();
-      enhanceResourceCategories();
       simplifyVideoControls();
     }
 

@@ -194,8 +194,6 @@ test('content-opening controls are wired to their intended handlers', async () =
     read('index.html'), read('app.js'), read('actualidad.js'), read('actualidad-media.js'), read('videos.js'), read('notifications.js')
   ]);
   const homeControls = {
-    'favorites-button': /els\.favoritesButton\.addEventListener\('click',showFavorites\)/,
-    'clear-results': /els\.clearResults\.addEventListener\('click',clearResults\)/,
     'settings-toggle': /els\.settingsToggle\.addEventListener\('click',toggleSettings\)/,
     'settings-reset': /els\.settingsReset\.addEventListener\('click',resetDisplaySettings\)/,
     'app-update': /els\.updateButton\.addEventListener\('click',forceUpdateApplication\)/
@@ -204,6 +202,8 @@ test('content-opening controls are wired to their intended handlers', async () =
     assert.match(home, new RegExp(`\\bid=["']${id}["']`));
     assert.match(app, handler, `#${id} is not wired to its intended handler`);
   }
+  assert.match(home, /<select id="category">/);
+  assert.match(app, /els\.category\.addEventListener\('change',\(\)=>showCategory\(els\.category\.value\)\)/);
   assert.match(notifications, /toggle\.addEventListener\('click', toggleNotifications\)/);
   assert.match(app, /open\.addEventListener\('click',[\s\S]*openResourceMenu/);
   assert.match(app, /openLink\.addEventListener\('click'/);

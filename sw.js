@@ -1,10 +1,10 @@
-const CACHE = 'tifloacosta-app-v2-28-youtube-accessible';
+const CACHE = 'tifloacosta-app-v2-29-pildoras';
 const NAVIGATION_TIMEOUT_MS = 5000;
 const SHELL = [
   './',
   './index.html',
   './styles.css?v=1.3',
-  './data.js?v=0.20',
+  './data.js?v=0.21',
   './app-core.js?v=1.6',
   './search-accessibility.js?v=1.1',
   './contextual-search.js?v=1.0',
@@ -32,6 +32,7 @@ const SHELL = [
 ];
 
 const LIVE_PATHS = new Set([
+  '/data.js',
   '/actualidad.json',
   '/actualidad-media.json',
   '/actualidad-apps.json',

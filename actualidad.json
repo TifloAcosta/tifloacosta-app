@@ -1,24 +1,218 @@
 [
   {
-    "id": "engadget-0c9764cb38bdffcf",
+    "id": "9to5mac-4785bc0aa2816abf",
     "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2270823/handy-ways-reuse-old-android-phone/",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/03/apples-next-ipad-a19-details-release-date/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-03T12:15:00.000Z",
+    "publishedAt": "2026-10-03T16:36:23.000Z",
     "categories": [
-      "tecnologia-general",
-      "android"
+      "apple",
+      "tecnologia-general"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "10 Handy Ways To Reuse Your Old Android Phone",
-        "summary": "Before you toss that aging Android, see how it can become a surprisingly handy tool in your daily routine with a few creative repurposing ideas.",
-        "body": "Because there's still life in the 'ole girl yet!\n\nAn old Android phone doesn't have to become junk just because it's not fast enough, supported enough or convenient enough to be your everyday phone anymore. Even an older device can still have a perfectly good camera, GPS receiver, display, speakers, sensors and Wi-Fi connection.\n\nOne way to repurpose your old phone is to give it a single specific job. It could become a kitchen display, hiking GPS, retro gaming handheld or one of several other useful devices around the house.\n\nA factory reset is the way to go if you want it to be a true dedicated gadget. Back up your photos and other important data beforehand since a reset erases all data on the phone. Once that's done, your device is one step closer to its second life.\n\nIf your old Android phone still has a decent screen, turn it into a dedicated kitchen display. Mount it on a stand or wall and use it for recipes, cooking videos, grocery lists, unit conversions and timers, keeping your everyday phone away from flour, splashes and greasy fingers.\n\nPut apps like Paprika, Google Keep and Google Home front and center, or use whichever apps you already rely on for recipes, shopping lists or music. For a more dedicated cooking setup, Paprika Recipe Manager can store recipes, create grocery lists, plan meals, scale ingredients and convert measurements. It also includes timers and an option to keep the screen on while you're viewing, making it an essential kitchen gadget that's worth your money .\n\nYou can also use the phone for music, podcasts or video while you cook. While internet access isn't required for everyday use, you'll still want to connect it occasionally for app and content updates.\n\nIf you've accumulated enough smart-home devices to make controlling them from your phone feel like too much, an old Android can become a permanent control panel. Mount it somewhere convenient to control compatible lights, thermostats, cameras, plugs, TVs and other smart devices without reaching for your primary phone.\n\nThis works particularly well with a smart-home platform like Home Assistant , which can turn an Android phone into a dashboard for devices throughout your home. A wall-mounted phone running an app like Fully Kiosk Browser can show temperature, lights, cameras and other controls at a glance, while Google's redesigned smart home controls offer another way to organize the devices you use most. You're also able to keep some smart-home apps off your primary phone, reducing the number of apps competing for space and attention.\n\nAn old Android phone can become a capable hiking, camping, hunting or off-roading GPS. Download maps before heading somewhere without cell service, then use the phone's GPS receiver to track your location without a data connection.\n\nApps like AllTrails and Gaia GPS support offline maps, so you can download the area you'll be exploring before you leave home. Both require a paid plan for offline map downloads, though AllTrails says downloaded maps can use your phone's built-in GPS even without a data signal. Google Maps also supports offline maps for national parks , which can be useful for exploring areas without reliable internet access.\n\nDownload the maps for the entire area you'll need while you're connected to Wi-Fi, then test them before heading somewhere remote. Using an old phone also lets you keep your primary device tucked safely away while conserving its battery. Consider bringing a power bank for longer outings.\n\nYour old Android's camera can still be useful even if the phone itself has become too slow for everyday use. With the right app, you can turn it into a webcam, security camera or baby monitor.\n\nOne option is AlfredCamera , which pairs an old phone with another device so you can remotely view its camera feed and listen to what's happening around it. It works across Android and iOS, letting you use the old Android as the camera while viewing the feed from your current phone, tablet or computer. You can position it near a crib, point it toward an entryway or garage, or use it to check on pets while you're away.\n\nYou can also leave the phone plugged in as a dedicated monitor. With AlfredCamera, take advantage of features like video quality, night vision, audio and multi-camera support, and your repurposed Android can stand up to the best baby monitors for a home nursery . Because the phone can see and hear inside your home, use a strong, unique password and enable App Lock even with Alfred's 256-bit AES encryption.\n\nIf your old Android has a decent screen, you already have most of what you need for a portable gaming system. Pair it with a Bluetooth controller, and you have a dedicated gaming device that doesn't compete with your everyday phone for battery life or storage.\n\nFor a retro feel, something like the 8BitDo SN30 Pro for Android supports Android 9 and newer and comes with a mobile gaming clip for attaching the phone directly to the controller.You can use the setup for Android games that support controllers, cloud gaming or legally obtained retro games through compatible emulators. A phone that struggles with newer apps may still have more than enough power for older games.\n\nThe 8BitDo SN30 Pro isn't your only option. Mobile gaming controller options range from traditional Bluetooth gamepads like the Pro 2 to controllers that attach directly to your phone.\n\nApps like Kindle , Libby , Google Play Books and other ebook readers can turn an old Android into a pocket-sized library. Libby is particularly useful if you have a library card, letting you borrow ebooks and audiobooks from participating libraries and download them for offline use.\n\nYou can do the same with podcasts and music. Download a few favorites, pair the phone with headphones or a Bluetooth speaker and use it for bedtime reading, listening around the house or taking a walk without your everyday phone's notifications competing for your attention.\n\nApps for ebooks and audiobooks can cover everything from reading and listening to library borrowing, with options for different ways to keep up with your books.\n\nKeep your old Android on a workbench for repair tutorials, product manuals, timers, music and other project-related tasks without tying up your everyday phone. Apps like iFixit offer step-by-step repair guides and troubleshooting help, so you can pull up instructions while you're working. You can also store PDFs of manuals, wiring diagrams and project plans for easy access.\n\nThe phone's built-in tools can be useful, too. A calculator can handle measurements, the flashlight can illuminate a dark corner, and a level app can help with quick checks. The camera can also serve as a reference by taking photos before disconnecting wires or disassembling something. You can even photograph labels, parts and measurements you don't want to keep in your head.\n\nA retired phone can also be a useful place for workshop-specific files and apps, keeping them separate from the apps and notifications on your everyday device. If you're working with sawdust, grease or paint, it's also a device you don't have to worry about keeping too clean.\n\nAn old Android phone can be perfect for recording things that happen slowly. Set it up on a tripod or stable surface, start a time-lapse and let it record while you go about your day. Capture a garden growing, a room being renovated, a craft project taking shape or even clouds moving across the sky.\n\nMany relatively recent Android phones, including Samsung Galaxy A and S series models and Google Pixel phones, have built-in time-lapse or Hyperlapse modes. If yours doesn't, a third-party camera app can add the functionality. A tripod or stable mount is the more important part, since the phone needs to stay still throughout the recording.\n\nBefore starting a long recording, check how much storage the phone has available and make sure it has enough power to finish. Also be sure to frame the shot, since moving the phone once recording has started can ruin the sequence. Camera quality varies a lot between devices, and the smartphones with the best cameras can make a big difference when recording video.\n\nTravel can give an old Android a useful second job. Load it with offline maps, translation apps and downloaded movies or shows, then take it to the beach, pool, campsite or anywhere you'd rather not expose your newest phone.\n\nOffline maps are especially useful when traveling somewhere with unreliable cellular service or expensive data. Google Maps has offered offline search and navigation for years, so you can download what you need before leaving Wi-Fi and still use your phone for maps and directions when you're offline.\n\nKeep boarding passes, hotel information and reservation details on it, too. You can also use the phone as an entertainment device on a plane or during a long drive without draining the battery on your primary phone. A travel-only phone can hold trip-specific airline, hotel, transit and translation apps without adding them to your daily device. If something happens to your primary phone while you're away, the old Android can serve as a backup. Compatible phones and carriers can support Wi-Fi calling, allowing you to make calls even without cellular service.\n\nSometimes the most useful thing you can do with an old Android is turn it into a collection of small tools. A flashlight, a calculator, a magnifier and a level app are just a few of the everyday tools needed around the house that can all be kept on your device. According to AARP , you can also use the camera to scan QR codes and photograph measurements. Think of it as a digital version of the junk drawer.\n\nThe phone can also hold appliance manuals, home-maintenance notes, emergency information and other documents you may need within arm's reach. Depending on the apps it supports, it can handle other specialized tasks without adding another device to the mix.\n\nYou can even keep photos of things you'll need to reference later, like replacement filter labels, serial numbers or other household information. Keeping those details on the phone can be easier than tracking them down when you need to."
+        "title": "Here’s everything we know so far about Apple’s next entry-level iPad: A19 chip, more",
+        "summary": "Apple’s current iPad, the A16 model, has gone untouched for well over a year. It remains the only device in Apple’s core product lineup without support for Apple Intelligence. Rumors had swirled for quite some time about an A18 model coming this year . Now, it’s sounding like Apple has an even bigger plan. more…",
+        "body": "Apple’s current iPad , the A16 model, has gone untouched for well over a year. It remains the only device in Apple’s core product lineup without support for Apple Intelligence. Rumors had swirled for quite some time about an A18 model coming this year . Now, it’s sounding like Apple has an even bigger plan.\n\nIt’s likely safe to assume that the delays with this product launch have much to do with the ongoing memory crisis affecting the electronics industry. It wouldn’t surprise me if Apple had the A18 refresh roadmapped for earlier this year alongside the debut of the M4 iPad Air , then had to push it.\n\nAs a reminder, Apple raised the price of the base iPad from $349 to $449 this summer alongside the rest of its memory-related price hikes . This brings it back to the price it initially launched at in 2022.\n\nHowever, a new leak from MacRumors contributor Aaron Perris paints a more promising picture. Instead of utilizing the A18 chip, it sounds like the next entry-level iPad will equip the A19 chip. Alongside that, you’ll get the N1 networking chip, as well as the C1X modem on the cellular version. This’ll bring support for Wi-Fi 7 to Apple’s cheapest iPad.\n\nThe A19 iPad will also be equipped with 8GB of memory, allowing users to run Siri AI, though you’ll still miss out on the most capable local models and the more advanced dictation models, as those features require 12GB of memory. It’s not a major loss, but worth pointing out.\n\nAnother possibility is that the A19 iPad might offer a new name . With the debut of the MacBook Neo, Apple marketing exec Greg Joswiak pointed out that calling the MacBook Neo just “MacBook” would leave it without an identity. Hopefully, with the next entry-level iPad , we also get some sort of proper name like “SE” or “Neo” so we have something to call it.\n\nBeyond that, don’t expect any sort of redesign or display improvements. There may be new colors, but probably nothing else. I personally wish Apple would bring USB 3 to the product, so users don’t have to suffer with such slow transfer speeds. It’d certainly help justify the new higher starting price.\n\nApple’s next budget iPad should be releasing next Spring, per Bloomberg’s Mark Gurman . That’ll accompany other products like the M6 MacBook Air , A19 Pro MacBook Neo , M7 14-inch MacBook Pro , and more.\n\nAre you someone in the market for the entry-level iPad ? What are you most looking forward to? Let us know in the comments.\n\nMy favorite Apple accessory recommendations:\n\nFollow Michael: X/Twitter , Bluesky , Instagram"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-a00240af2c9e14c5",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/03/openai-safety-employee-resigns-claiming-the-companys-culture-is-broken/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-03T16:30:01.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "OpenAI safety employee resigns, claiming the company’s ‘culture is broken’",
+        "summary": "By his own admission, David Robinson is “something of a cliché”: an employee at a leading AI company who issues a dire warning while resigning from their job.",
+        "body": "By his own admission, David Robinson is “something of a cliché”: an employee at a leading AI company who issues a dire warning while resigning from their job.\n\nIn an essay published in The Atlantic , Robinson said he led the writing of safety reports that accompanied OpenAI’s major product launches. He also said that with three-and-a-half years at OpenAI, he is “among the longest-tenured employees at the company.” Now he’s quitting, because in his view, the company’s “culture is broken.”\n\nIn some ways, Robinson’s comments echo those of Jacob Coxon, who worked as a researcher at both OpenAI and Anthropic before quitting and declaring that these companies are “gambling with our lives.” Coxon’s comments led to a broader debate about AI safety, with Anthropic CEO Dario Amodei unveiling a plan for more cautious AI development ; AI executives met with President Donald Trump this week and signed what appeared to be hastily written, non-binding pledge to implement more safety controls .\n\nBut in Robinson’s view, the debate needs to go beyond “specific rules or new laws,” addressing the overall culture at these companies. And while much of the reporting around OpenAI has focused on how the company’s CEO Sam Altman lost the trust of former colleagues , Robinson’s essay suggests that OpenAI’s culture issues are the same as those of Silicon Valley at large.\n\n“OpenAI has thrived by trial and error (which it calls ‘iterative deployment’), looking for problems and improving its guardrails in response,” he wrote. “But this approach, by its very nature, guarantees periodic failures — and the scale of those failures is growing as systems get more capable.”\n\nPointing to the recent breach of Hugging Face systems by OpenAI agents, as well as continuing revelations of OpenAI discovering more rogue agents , Robinson argued, “An environment where things like this can happen is no place to grow artificial minds that could be smarter than we are and that might not do what we want them to.”\n\nGiven the increased risk, Robinson argued that frontier AI companies need to start operating “like nuclear-power plants or busy airports, with layers of redundancy and careful, time-consuming planning, so that the occasional and inevitable human error does not open a door to disaster.”\n\nBut Robinson said that in his time at OpenAI, he “never encountered a colleague who had experience making airplanes fly safely or nuclear reactors run without melting down, or helping the financial system grow without collapsing.”\n\nIn response to Robinson’s essay, OpenAI spokesperson Drew Pusateri said the company continues to improve its safety measures.\n\n“We’re making sure our models don’t become more capable than we can safely manage and secure, and we pause training or hold back models when we need to slow down,” Pusateri said in a statement. “We’re making significant changes to strengthen security in our research and testing environments, train models to not just complete tasks but do so responsibly, expand our work with third-party evaluators, and improve real-time monitoring so we can detect and respond to concerning behavior earlier in the training process .”\n\nBeyond calling for changes in OpenAI’s culture, Robinson also said it’s time to ask bigger questions about alignment — something that he admitted could sound “touchy-feely,” but he said it’s critical as companies’ current “measures of how well” AI systems “match human values are coarse.”\n\n“The smarter the industry lets models grow while these problems remain unsolved, the more dangerous our situation becomes,” he said.\n\nRobinson’s departure was first reported by Business Insider . In his essay, he also acknowledged that he’s following an apparently a common step in the AI whistleblower playbook: He’s hired a PR firm . But he insisted, “The decision to speak out is mine alone.”\n\n“Perhaps I should have stayed and fought for fundamental shifts in our staffing and culture, but in practice, my colleagues and I were so busy sprinting that we seldom had the chance to consider big changes, much less to actually make them,” Robinson said. “That’s why I concluded that stronger incentives for safety — coming from outside the company — are a big part of getting this right.”"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-3693804877f5beb4",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2273351/how-to-customize-iphone-camera-control/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-03T16:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "How to customize Camera Control on your iPhone",
+        "summary": "Take a closer look at the iPhone's Camera Control feature and why tweaking it can change the way you shoot, even if you've never touched it before.",
+        "body": "Make your iPhone’s camera behave exactly how you want\n\nAre you getting everything you can out of the button at the lower right of your iPhone 16, 17, and 18 series? The button is the phone's Camera Control, which can be customized to support your mobile photography workflow.\n\nTo clear up any confusion, Camera Control refers to the capacitive button on the right side of your iPhone, which understands a range of gestures, including single- and double-clicks and swipe gestures. You use it to open the camera, take pictures, record videos and work with the advanced photography settings on your iPhone .\n\nPerfect for one-handed photography, Camera Control's default inputs are:\n\nYou can change the default behaviors in Settings > Camera > Camera Control . This takes you to a pane of many options, including two important sections you should explore first: Launch Camera and Controls , alongside several smaller tweaks.\n\nFor Launch Camera , tap Camera to choose which supported app to open when you press the Camera Control button. Camera is enabled by default, but you'll find other options if the relevant app is installed. These may include Instagram, which makes your iPhone an instant story creation tool, Code Scanner to scan QR codes or Magnifier, which turns your iPhone into a high-powered digital magnifying glass. You may also see other third-party apps, some of which may be grayed out pending full support.\n\nThe Controls section includes a range of settings you should explore, including Camera Adjustments . When activated, this makes Camera Control even more useful. When your Camera app is active, light presses or swipes on the button will let you explore camera options and adjustments.\n\nCustomize lets you decide what gestures Camera Control supports while in that mode, including support for light presses and swipes. It also lets you enable and disable the six adjustments potentially supported by Camera Control, which include:\n\nTap to enable and disable the tick beside the function, or press and hold the burger icon (three horizontal lines) beside each item to move it into your preferred order. In the future, when taking a picture, you'll be able to swipe the Camera Control to move through those different adjustments in the order you define.\n\nAlong with the above-referenced features, Camera Control also allows:\n\nThere are several additional customizations available in Settings > Accessibility > Camera Control . Here you can disable the button completely and define the force and speed required to make the button respond to a press, choosing between Default , Slow and Slower .\n\nI've found setting button behaviors to Slow helps stop accidentally opening the Camera when handling my device, and trimming the camera adjustments to Zoom, Exposure and Styles helps me focus on the image, not the controls I don't frequently use.\n\nThat's the point of Camera Control, really — configure it to support your workflow while making it much, much easier to take photos, videos and use Visual Intelligence with one hand."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-9fbd3294bd252bf2",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2276577/former-openai-employee-says-ai-should-be-regulated-like-nuclear-power-plants/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-03T16:25:15.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Former OpenAI employee says AI should be regulated like nuclear power plants",
+        "summary": "The company's former safety lead said frontier AI model releases should have \"layers of redundancy and careful, time-consuming planning.\"",
+        "body": "The company’s former safety lead said frontier AI model releases should have “layers of redundancy and careful, time-consuming planning.”\n\nAnother OpenAI employee tasked with ensuring the safety of its models has left. Following his departure, David Robinson, who used to lead the writing of safety reports that were published with model launches, wrote an article for The Atlantic that warned of a \"broken\" company culture. Among the many points warning of the dangers associated with the trajectory that AI development is on, the former safety lead explained that \"as the company springs from one launch to the next, it is failing to achieve the level of care that I believe is needed.\"\n\nInstead of sprinting ahead with more advanced frontier AI models, Robinson argued that these companies should be modeled after nuclear power plants or busy airports that have \"layers of redundancy and careful, time-consuming planning, so that the occasional and inevitable human error does not open a door to disaster.\"\n\nComparing AI misalignment incidents to a nuclear meltdown, Robinson said that OpenAI and its competitors don't have as much redundancy and rigor as power plants with multiple layers of protection. On top of that, he added that a major loss of control with AI would result in much more harm than a single meltdown. Like Robinson, Anthropic's CEO Dario Amodei recently drew attention to the concerning course of AI development with a three-step proposal to slow things down.\n\nBeyond safeguards and checks, the former OpenAI employee said that the issue of AI \"alignment\" has stakes that \"could not be higher.\" Robinson described a scenario where the latest models may understand they're being tested on alignment and will cater towards a good score in testing environments, but behave completely different when live. Robinson's concerns stem from various incidents recently where AI agents have broken out of their testing environments and into other organizations, well beyond its assigned scope of work."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-cf6f5798c0aa06e0",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2273348/why-windows-11-using-so-much-ram/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-03T16:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Why Windows 11 is always using so much RAM",
+        "summary": "Windows 11 might be using a lot of your RAM, which isn't a problem unless you experience poor performance. It helps your system run more smoothly.",
+        "body": "High RAM usage isn't always a problem that needs a fix.\n\nOpen Task Manager on a Windows 11 PC, and it's easy to panic no matter how much RAM you have. Even without many apps open, your computer will likely be using more than 50 percent of its memory. And while this seems like a problem, most of the time it isn't. While 16GB of RAM is the standard for modern computers, that doesn't mean it's no longer enough just because your PC is using almost all of it. This has more to do with how modern versions of Windows manage memory.\n\nFirst, it's worth taking a look at what RAM is used for . Your computer's memory temporarily stores data that your processor needs to run apps and open files. It offers much faster speeds than your hard drive or SSD, so it's much quicker to access data from. The more RAM you have, the more items your computer can keep open and ready for you to switch between. Multitasking gets a lot better with more RAM.\n\nThe latest versions of Windows treat RAM as something to be used, not something to conserve. In the past, your computer would use only the RAM needed to run the programs you currently have open. However, unused RAM doesn't do anything for you — it ends up being a waste of resources. What Windows does now is figure out what you might need to run soon and keep that in RAM. That could be an app you open often, or a file you're regularly working on. This makes your computer feel a lot faster, because Windows has already preloaded what you need.\n\nAll of this happens under a process called SysMain (or SuperFetch in older versions of Windows). It learns your computer usage habits to keep important parts cached in standby memory. If you open Chrome every morning, there's a good chance Windows will keep it in RAM for you. The time it takes to open an app that's preloaded in RAM is significantly shorter than loading it from your storage drive. As a result, you may notice that your PC is using more than half of its available RAM, or sometimes almost 100 percent.\n\nTo see what's going on, press Ctrl + Shift + Esc to open Task Manager . Then go to the Performance tab on the left and select Memory — ignore In use and look at Available instead. Cached data counts as available because Windows can reclaim it instantly. The more RAM you have, the more Windows can use to keep your apps and files cached. That's why you shouldn't worry about how much RAM is being used in standby.\n\nDespite this smart management, excessive RAM usage can still sometimes be a problem. If you've noticed your computer running slowly or apps crashing, or you're getting alerts that your computer is \"low on memory,\" there might be something else going on.\n\nIn that case, check the Processes tab in Task Manager to see which apps are using the most RAM, and close any you don't need. Restart your PC if it's been a while, too. This will fix memory leaks (an issue where a program doesn't return memory it's done using to the available pool). Be sure to disable startup apps you don't use so they aren't hogging memory in the background.\n\nSome third-party \"memory cleaner\" apps claim to help reduce RAM usage, but there are generally not worth using. While they might reduce the percentage of memory in use, having apps switch to the page file (part of your storage drive Windows uses as backup, pretend RAM) makes them slower. These apps also aren't a long-term solution, since the system will eventually reload everything again.\n\nSome people choose to disable SysMain entirely and revert to the old RAM management system. While we wouldn't recommend this in most cases, on an older PC with a mechanical hard drive, the constant preloading can keep the disk busy and make the system sluggish. If that's the case for you, press Win + R , type services.msc and look for SysMain . Open its Properties , click Stop and set the startup type to Disabled . This will prevent Windows from preloading files and apps into your RAM.\n\nBut again, we don't recommend this unless you're on an old system with an HDD that's starved for RAM. If you're still stuck with 8GB of RAM (or less), the proper solution is upgrading to 16GB or more — even though RAM is more expensive than ever . In the meantime, you can also try changing a few settings to improve your experience on Windows 11 PCs ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-5b1dbe3b3929e6d3",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/entertainment/1004162/splice-ceo-kakul-srivastava-ai-interview",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-03T15:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Splice CEO Kakul Srivastava thinks AI emails are killing conversations",
+        "summary": "Kakul Srivastava is the CEO of Splice, the sample platform countless producers rely on for one-shots and melodic loops. Samples pulled from the service have found their way into massive hits like Lisa's \"Money\" and \"Espresso\" by Sabrina Carpenter. (The original samples are here and here, for the curious.) Before that, Kakul held executive roles […]",
+        "body": "Kakul Srivastava is the CEO of Splice, the sample platform countless producers rely on for one-shots and melodic loops. Samples pulled from the service have found their way into massive hits like Lisa's \" Money \" and \" Espresso \" by Sabrina Carpenter. (The original samples are here and here , for the curious.)\n\nBefore that, Kakul held executive roles at Flickr, Yahoo, GitHub, and Adobe. Throughout her career, Kakul has found herself at the intersection of Silicon Valley and creatives. That's been especially true at Splice, where she's not just expanded the platform's footprint by acquiring Spitfire Audio , but also overseen its forays into the wor …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-053caac2bc16c920",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1004408/openai-safety-quits-sounding-the-alarm",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-03T14:31:56.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "An OpenAI safety employee has quit and is sounding the alarm",
+        "summary": "David Robinson used to write the safety reports that accompanied every major model release at OpenAI. This week, he resigned from his position and is now speaking out in an editorial in The Atlantic. It's understandable if you're feeling a bit cynical about everyone suddenly coming out of the woodwork to warn about how dangerous […]",
+        "body": "David Robinson used to write the safety reports that accompanied every major model release at OpenAI. This week, he resigned from his position and is now speaking out in an editorial in The Atlantic .\n\nIt's understandable if you're feeling a bit cynical about everyone suddenly coming out of the woodwork to warn about how dangerous the thing they helped build is. They did, after all, make this mess. But that doesn't mean we should discount their warnings.\n\nRobinson says that the culture in industry is fundamentally broken. That this is a deeper issue than simply slapping a few new rules or regulations on how we handle training models. Silicon …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-7330ad25e8a4fd0a",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/03/all-the-ai-agents-that-can-live-in-your-text-messages/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-03T14:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "All the AI agents that can live in your text messages",
+        "summary": "We created a list of the most notable AI agents that can live in your text messages, from general assistants to agents designed for families, travel, and work.",
+        "body": "Rather than downloading another app, a growing number of agents can simply be texted like an ordinary person.\n\nYou text it what you need, and it can remember context, connect to the apps and services you already use, and complete tasks on your behalf. That can mean scheduling an appointment, organizing a calendar, researching a trip, sending an email, making a reservation, shopping online, or reminding you about something days later.\n\nWhile Instinct is one of the buzziest AI agents at present, thanks to its $10 billion valuation after its latest funding round of $1 billion, there are many others also making a play for this space.\n\nBelow are some of the most notable options so far, from general-purpose personal assistants to agents designed for families, travel, and work.\n\nCaddy is an AI assistant that turns the information scattered across your phone into things you can actually act on. It lives in iMessage for iPhone users and RCS for Android users, so there’s no separate app or inbox to constantly check.\n\nFor instance, an email contains an appointment that needs to be added to your calendar or a friend sends a list of things to pick up. Instead of worrying about all the details getting buried, Caddy connects to your calendars and conversations, then identifies things that may require action. It can add events to your calendar, set reminders, keep track of follow-ups, and even do research for you.\n\nCaddy has been available in public beta since April 2026.\n\nFambot is an AI-powered “chief of staff” for families, designed to bring together the many moving parts of family life, including school communications, sports activities, meal planning, calendars, and other day-to-day responsibilities, and turn them into an organized plan.\n\nThe service is designed to work across both an app and text messages. Fambot is available on iOS devices, Android devices, and the web, and families can also interact with it directly over SMS. Every night, Fambot automatically sends a summary of the following day, including upcoming events, to-dos, and details such as school uniform or packing requirements. Parents can reply to those messages to ask questions, check information, or make changes to their calendar.\n\nFambot currently connects to Gmail and Google Calendar, with support for Outlook and Apple Calendar planned for the future.\n\nThe company launched in beta in early September 2026 and has raised $3.5 million in pre-seed funding. The service is currently free during the beta period, but Fambot expects to eventually charge roughly the equivalent of a Netflix subscription.\n\nFolk is designed to be an AI assistant you can reach through iMessage, WhatsApp, and Telegram. It can remember personal context, manage reminders, research topics, track flights, handle email, and perform real-world tasks such as restaurant reservations.\n\nOne distinction is that Folk runs on its own private cloud computer. It can also run code and execute multi-step tasks rather than merely responding conversationally.\n\nFolk launched its beta in May 2026, and it’s available for free but also offers a Pro subscription for $8.33/month if you want unlimited tasks running in the background.\n\nInstinct first made headlines after raising $350 million at a $2.5 billion valuation. In September 2026, it raised $1 billion , valuing it at $10 billion.\n\nThe always-available agent can take actions on your behalf, rather than simply answer questions. Users can communicate with Instinct by text or voice and connect it to the apps and services they already use, such as email, calendar, Google Workspace, and more. The company says early users have used Instinct for tasks ranging from planning trips and buying groceries to booking tickets and cancelling subscriptions.\n\nIn September, Instinct began giving users dedicated email addresses for their assistants. The idea is to let Instinct create and manage accounts on a user’s behalf without filling the user’s personal inbox. The agent can use its address to sign up for services, contact businesses, follow up on requests, and handle tasks that require an email account. (However, this level of autonomy has also raised concerns about privacy and security .) It’s also begun rolling out support for placing calls .\n\nThe company remains in private beta.\n\nPowered by Hermes agent, Iris is designed to let users delegate tasks to an AI assistant directly through iMessage. Users can connect the apps they use and hand over a task with a simple message. The agent then works through the required steps, while retaining relevant context from previous interactions. It’s also designed to follow up with users proactively rather than waiting for another request.\n\nMartin is a general-purpose personal assistant reachable through SMS as well as phone, WhatsApp, email, Slack, and its own iOS app.\n\nIt can help manage calendars, email, reminders, tasks, notes, and communications. It can also act on behalf of users by sending messages or making phone calls, while providing daily summaries of what needs attention.\n\nIt’s a bit on the pricier side, with subscriptions starting at $21 per month.\n\nMiso takes the personal-assistant concept and applies it specifically to travel.\n\nIt operates through iMessage and combines AI trip planning with support from a dedicated travel team. Users can arrange flights through messaging while Miso takes into account their travel preferences, loyalty points, and other priorities. Miso also gives travelers access to trip details, flight updates, along with personalized recommendations.\n\nOhai is another family assistant focused on helping households manage the constant stream of information and tasks involved in everyday family life.\n\nUsers can send messages, forward emails, or make voice requests, and the assistant can transform them into schedules, reminders, and plans. It can also coordinate calendars, household chores, and meals across multiple members of a family.\n\nIt includes a free basic option, but also offers different subscriptions based on family size, starting at $9.99 per month.\n\nSimilar to the other family-focused agents, the idea behind Ollie is that families already have the information they need, but it lives across school messages, calendars, task lists, and group chats. Ollie aims to bring those pieces together and keep them in sync. It can keep track of calendars, emails, reminders, tasks, and other household details, then deliver relevant information to users through text.\n\nIts biggest differentiator from other agents is that Ollie is one of the first mainstream, family-focused AI assistants to achieve SOC 2 compliance, a widely used security standard.\n\nLaunched in June 2026, Ollie offers a free tier, as well as paid plans starting at $25 per month for 150 messages. A $100-per-month plan includes up to 1,000 messages.\n\nOrbits also has an AI assistant that is focused on the household.\n\nIt works through both the Orbits app and text messaging, and can bring together calendars, lists, and conversations while also carrying out tasks for you. That can include searching the web, making purchases, booking restaurants, changing appointments, and requesting quotes for household services.\n\nAdditionally, Orbits can remind family members about chores, communicate with service providers, and help coordinate responsibilities beyond the immediate household.\n\nOrbits is backed by investors like Andreessen Horowitz (a16z) Speedrun fund, N49P, and Garage Capital.\n\nUsers can interact with Pally as they would with a friend while giving it access to the apps they already rely on. The assistant can connect information spread across services such as WhatsApp, Gmail, calendars, and Google Drive, helping users keep track of plans, receipts, dates, files, and other details.\n\nThere’s a free plan available, which offers features like 15 minutes of calls per month, or there are paid plans, including $25 per month for 30 minutes of calls and $100 per month for 60 minutes.\n\nPoke launched in March 2026 as a general-purpose assistant that you can reach through text messaging. It can handle tasks involving calendars, planning, health and fitness, smart-home controls, photos, and other everyday activities.\n\nPoke became particularly notable in June 2026 when Apple approved Poke as the first AI agent on the Apple Messages for Business platform. A month later, parent company The Interaction Company of California was acquired by AI coding startup Cognition in a deal valued in the low nine figures.\n\nRene is an AI personal assistant designed to be a user’s “best contact” rather than another productivity agent. It’s text-based and can turn natural-language conversations into tasks, reminders, summaries, and other follow-up actions. Rene also maintains context across conversations, allowing it to remember details and surface things that may need attention later.\n\nAdditionally, it has a browser, can write code, shop for you, as well as create slides and images.\n\nRene is currently available on iMessage, Telegram, and WhatsApp.\n\nInstead of waiting for users to open an app, Skye is an “ agentic homescreen ” for the iPhone that analyzes information from connected services and surfaces what it thinks is relevant through contextual cards, suggestions, and daily briefings. The assistant can generate audio briefings, prepare information ahead of meetings, surface reminders, and identify potentially useful information.\n\nThe company, Signull Labs, raised about $3.6 million in seed funding in 2025. It entered private testing and beta in April 2026, and hasn’t yet announced a public release date.\n\nStanley is an AI content assistant aimed at content creators rather than general personal productivity. Available through iMessage, Telegram, and the web, it acts as a kind of AI head of content, helping users come up with ideas, turn them into posts, and maintain a consistent publishing schedule.\n\nFor instance, Stanley can connect to a user’s Instagram account, using that context to suggest content based on what the user has actually been doing. Users can also send voice notes, which Stanley turns into scripts, captions, and other social assets. It includes a content calendar and can schedule posts, with the broader goal of making content creation a more continuous, automated process rather than something users have to sit down and plan from scratch.\n\nThe biggest differentiator with Tomo ’s personal assistant for iMessage is that, instead of being a private assistant that only you interact with, Tomo can become part of group conversations.\n\nAlso, like other agents, it’s designed to help with goals, accountability, scheduling, and everyday organization. It also has the ability to send reminders, search the web, work with calendars and email, watch videos, and edit photos.\n\nThe basic plan starts at $19.99 per month.\n\nTown is aimed more at professional life. It gives users a “Townie,” an AI assistant designed to learn how they work and handle recurring professional tasks. It can work with email, calendars, documents, Slack, and other platforms.\n\nIn June 2026, the company raised a $55 million Series A led by Andreessen Horowitz and Forerunner.\n\nWajo ’s first consumer agent, Fo, can call businesses, send emails, join group chats, make bookings and purchases, and coordinate with people to complete everyday tasks.\n\nA key part of Wajo’s approach is giving Fo its own identity. The agent has its own email address, phone number, and payment card, allowing it to interact with businesses without requiring users to hand over their own credentials.\n\nNotably, when Fo encounters something it cannot handle on its own, Wajo says it can bring in a human assistant to finish the task.\n\nFo launched publicly in September 2025 with a free tier, while heavier workloads and custom agents are available through a paid Pro offering."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-0b9a4f705650bbd9",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/03/macpaw-leebry/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-03T13:45:00.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles",
+      "programas-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple @ Work: The numbers on AI trust for IT are not great, and one company is trying to fix it",
+        "summary": "Apple @ Work is exclusively brought to you by Mosyle , the only Apple Unified Platform. Mosyle is the only solution that integrates in a single professional grade platform all the solutions necessary to seamlessly and automatically deploy, manage, and protect Apple devices at work. Over 45,000 organizations trust Mosyle to make millions of Apple devices work ready with no effort and at an affordable cost. Request your EXTENDED TRIAL today and understand why Mosyle is everything you need to work with Apple . MacPaw spent nearly two decades building consumer software for Mac users. CleanMyMac is one of the Mac utilities on the market, and it’s my go-to when I need to free up hard drive space, uninstall apps, etc. The company is making a different kind of bet with Leebry , a Work AI platform aimed at helping IT teams. more…",
+        "body": "Apple @ Work is exclusively brought to you by Mosyle , the only Apple Unified Platform. Mosyle is the only solution that integrates in a single professional grade platform all the solutions necessary to seamlessly and automatically deploy, manage, and protect Apple devices at work. Over 45,000 organizations trust Mosyle to make millions of Apple devices work ready with no effort and at an affordable cost. Request your EXTENDED TRIAL today and understand why Mosyle is everything you need to work with Apple .\n\nMacPaw spent nearly two decades building consumer software for Mac users. CleanMyMac is one of the Mac utilities on the market, and it’s my go-to when I need to free up hard drive space, uninstall apps, etc. The company is making a different kind of bet with Leebry , a Work AI platform aimed at helping IT teams.\n\nAbout Apple @ Work: Bradley Chambers has been an Apple IT admin since 2009. Through his experience deploying and managing firewalls, switches, a mobile device management system, enterprise grade WiFi, 1000s of Macs, and 1000s of iPads, Bradley will highlight ways in which Apple IT managers deploy Apple devices, build networks to support them, train users, share stories from the trenches of IT management, and ways Apple could improve its products for IT departments.\n\nMacPaw’s 2026 AI at Work report is where you see the issue IT faces, as they found that 90% of companies deploy AI without thoroughly auditing their internal knowledge base first. That means that internal AI tools are answering employee questions based on whatever it can find, including old product docs, outdated policies, and random Reddit discussion forums.\n\nIn this survey, MacPaw found that 6 in 10 IT leaders see a real disconnect between what their C-Suite expects from AI tools (thanks to LinkedIn feeds) and what their teams can safely and accurately deliver. That gap is where most AI disappointment lives, and it’s the problem Leebry is attempting to solve for IT teams.\n\nLeebry began as an internal MacPaw hackathon project in 2025. The problem it was solving was employees repeatedly asking the same questions internally, even when the answers already existed somewhere in the company’s documentation, intranets, Slack threads, etc. MacPaw built a Slack bot to surface those answers and point employees to the exact source. Within a few months, it was resolving 30% of MacPaw’s own level 1 IT tickets, so that became the foundation for what they’re launching today with Leebry.\n\nThe platform automates level 1 support tickets, handles access provisioning and removal as employees join, move roles, or leave, and answers employee questions across the tools they already use. Every Leebry response links back to its source, so employees can verify the answer rather than just trust it (and prove it), and can flag stale or outdated information that could affect accuracy. That last part is the direct product response to the 90% knowledge audit problem from their own research.\n\nOne detail worth calling out for security-conscious IT folks: Leebry is permission-aware, meaning it authenticates each user and surfaces only the information they are permitted to see. That matters more than it sounds as a lot of AI tools draw on a shared knowledge pool and let users surface things they shouldn’t access. Leebry also ships with an MCP server that exposes the device management control plane to AI agents, with admin-set guardrails on every action, so teams can delegate repetitive work to agents without giving up control over what those agents can actually do.\n\nFor IT orgs that work extensively with Apple, the access provisioning aspect is interesting. Automating access changes as people move within the organization can be a huge pain point for SMBs without a dedicated IAM team. Most of the time, it’s manual, it’s slow, and departing employees end up with access that should have been revoked days earlier. I’ve run into this myself quite a bit.\n\n“Businesses don’t need another tool to check, they need work taken off their plate, without sacrificing oversight or control,” said Dan Jaenicke, Director of B2B Product Development at MacPaw.\n\nThe fair question here is why an IT team should trust a consumer Mac software company to build enterprise tooling. I think the answer is actually in the product’s origin story. MacPaw built Leebry to solve their own internal IT problem first, which is a better foundation than most enterprise software gets. It wasn’t built to make money. It was built to solve a customer (even internal) problem, so it’ll work well for other teams. The reality is all orgs have docs spread out across team chat, file sharing, intranets, etc and we’re all guilty of asking for someone else to find it for us.\n\nLeebry aims to make it easy for IT to solve the same questions folks ask over and over again.\n\nApple @ Work is exclusively brought to you by Mosyle , the only Apple Unified Platform. Mosyle is the only solution that integrates in a single professional grade platform all the solutions necessary to seamlessly and automatically deploy, manage, and protect Apple devices at work. Over 45,000 organizations trust Mosyle to make millions of Apple devices work ready with no effort and at an affordable cost. Request your EXTENDED TRIAL today and understand why Mosyle is everything you need to work with Apple ."
       }
     },
     "media": null
@@ -92,30 +286,6 @@
         "title": "DelveKin: Dungeon Defense",
         "summary": "The heroes are coming. Build a dungeon worthy of stopping them! DelveKin is a charming dungeon defense strategy game where you take the role of the Dungeon Master. Design your defenses, place traps, command monsters, and battle invading heroes across handcrafted encounters and replay-able dungeon challenges. BUILD YOUR DUNGEON - Choose rooms with different layouts and tactical advantages, then fill them with monsters and traps. Every placement matters as heroes advance deeper into your dungeon. COMMAND YOUR MONSTERS - Take direct control during turn-based battles. Move across the battlefield, launch basic attacks, unleash special abilities, and combine your monsters' strengths to overcome each group of heroes. SET CLEVER TRAPS - Slow heroes with snares, strike from the walls with arrow slits, or punish careless movement with hidden hazards. Traps can shape the battlefield and create opportunities for your monsters. GROW YOUR ARSENAL - Unlock new monsters, traps, rooms, and powerful bosses as you progress. Earn experience, level up your defenses, and build stronger dungeon teams for the challenges ahead. FACE NEW HEROES - Each stage introduces different hero combinations, abilities, and tactical threats. Adapt your dungeon to withstand knights, mages, rogues, clerics, and other determined adventurers. VENTURE INTO DEEP DELVE - Put your dungeon building skills to the ultimate test in Deep Delve, a replay-able 20-depth challenge where every run is different. Build a run specific roster, recruit and replace monsters and traps, choose powerful upgrades, evolve your boss, and see how deep your dungeon can survive. CONTINUE INTO DUNGEON RAIDS - Complete the main campaign and enter Dungeon Raids, where increasingly dangerous hero parties push your defenses even further. CHARMING ART STYLE - DelveKin features expressive characters, lively battle animations, and a playful fantasy world. Play the opening chapters for free. A single Premium unlock opens the full campaign, additional progression, Dungeon Raids, and Deep Delve. Build carefully. Fight cleverly. Protect your dungeon.",
         "body": "The heroes are coming. Build a dungeon worthy of stopping them! DelveKin is a charming dungeon defense strategy game where you take the role of the Dungeon Master. Design your defenses, place traps, command monsters, and battle invading heroes across handcrafted encounters and replay-able dungeon challenges. BUILD YOUR DUNGEON - Choose rooms with different layouts and tactical advantages, then fill them with monsters and traps. Every placement matters as heroes advance deeper into your dungeon. COMMAND YOUR MONSTERS - Take direct control during turn-based battles. Move across the battlefield, launch basic attacks, unleash special abilities, and combine your monsters' strengths to overcome each group of heroes. SET CLEVER TRAPS - Slow heroes with snares, strike from the walls with arrow slits, or punish careless movement with hidden hazards. Traps can shape the battlefield and create opportunities for your monsters. GROW YOUR ARSENAL - Unlock new monsters, traps, rooms, and powerful bosses as you progress. Earn experience, level up your defenses, and build stronger dungeon teams for the challenges ahead. FACE NEW HEROES - Each stage introduces different hero combinations, abilities, and tactical threats. Adapt your dungeon to withstand knights, mages, rogues, clerics, and other determined adventurers. VENTURE INTO DEEP DELVE - Put your dungeon building skills to the ultimate test in Deep Delve, a replay-able 20-depth challenge where every run is different. Build a run specific roster, recruit and replace monsters and traps, choose powerful upgrades, evolve your boss, and see how deep your dungeon can survive. CONTINUE INTO DUNGEON RAIDS - Complete the main campaign and enter Dungeon Raids, where increasingly dangerous hero parties push your defenses even further. CHARMING ART STYLE - DelveKin features expressive characters, lively battle animations, and a playful fantasy world. Play the opening chapters for free. A single Premium unlock opens the full campaign, additional progression, Dungeon Raids, and Deep Delve. Build carefully. Fight cleverly. Protect your dungeon."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-37532990e68ddda0",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2276489/apple-att-network-bug-iphone-18-pro-max/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-03T02:10:16.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple acknowledges AT&T network bug on iPhone 18 Pro Max",
-        "summary": "Experiencing SOS mode on your iPhone 18 Pro Max with AT&T? Apple confirms a hardware issue and details who needs a replacement.",
-        "body": "You'll have to get your phone replaced if it has already lost its signal.\n\nFollowing a number of complaints about network issues affecting iPhone 18 Pro Max devices, Apple has now confirmed that there is indeed a problem. It appears that the issue has only affected AT&T users in the US, and an iOS update is already available to fix it. That said, the update won't work for those who have already been affected by the problem. Those will need a hardware replacement, Apple told 9to5Mac .\n\nIt's not hard to tell if your phone has the bug. If that's the case, your iPhone 18 Pro Max will show the \"SOS\" symbol in the status bar instead of signal bars. Calls, text messages and data over 4G or 5G will also stop working. The good news is that not every iPhone 18 Pro Max owner using AT&T has been affected. Apple says it only affects a \"small number\" of users, and gave 9to5Mac the following statement:\n\n\"We have identified an issue affecting a small number of iPhone 18 Pro Max users on the AT&T network that may cause a device to lose service and be unable to make calls. We released iOS 27.0.1 earlier this week and strongly encourage all iPhone 18 Pro Max users to update now, and are also issuing a carrier settings update today. These updates together are meant to help prevent this issue from occurring.\"\n\nInterestingly, the iPhone 18 Pro Max is the only model sold in the US that uses a Qualcomm modem instead of Apple's own — but it's unclear whether there's any direct connection between that and the bug. If you've checked the boxes to get an iPhone 18 Pro Max with an AT&T SIM card, here's what to do. First, update to iOS 27.0.1 as soon as possible . Just go to Settings > General > Software Update and look for the latest version.\n\nIf you've already updated, it's also worth checking to see if you have the latest carrier settings. Also in Settings , go to General and tap About to trigger the update. If you don't see a pop-up about a carrier settings update, you probably already have the latest version. Unfortunately, if your iPhone has already lost its cellular signal, a software update or restore won't work. You should contact Apple Support or AT&T to request a phone replacement instead."
       }
     },
     "media": null
@@ -219,56 +389,6 @@
     "media": null
   },
   {
-    "id": "the-verge-016a39320be14227",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1004295/apple-limit-mac-disk-access-ai-agents",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-02T20:08:40.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple will limit Mac disk access as AI agents ‘substantially’ increase risk",
-        "summary": "Apple will add new limits for \"full disk access\" on Mac in response to risks posed by AI agents, as reported earlier by TechCrunch. In an update on Friday, Apple says it's rolling out new controls to \"ensure that users who genuinely wish to grant an app this extraordinary level of access can only do […]",
-        "body": "Apple will add new limits for \"full disk access\" on Mac in response to risks posed by AI agents, as reported earlier by TechCrunch . In an update on Friday , Apple says it's rolling out new controls to \"ensure that users who genuinely wish to grant an app this extraordinary level of access can only do so with very explicit user action.\"\n\nThe change comes just weeks after Inc 's Jason Aten found that Meta's Muse AI somehow knew the contents of his messages , despite not giving the chatbot explicit permission to access them on his iPhone or Mac. Meta spokesperson Andy Stone pushed back on this report , saying access to Messages is \"entirely opt-in. …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-6a84192e729b3260",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/02/9to5mac-overtime-084-iphone-18-pro-a-fantastic-pro-camera-experience/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-02T20:00:00.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "9to5Mac Overtime 084: iPhone 18 Pro – a fantastic pro camera experience",
-        "summary": "Jeff and Fernando share their excitement about the iPhone 18 Pro’s camera capabilities and explore whether it could truly replace a mirrorless camera for both photography and videography. Plus, they weigh in on whether you should buy the iPhone 18 Pro now or hold out for the iPhone Duo. 9to5Mac Overtime is a weekly video-first podcast exploring fun and interesting observations in the Apple ecosystem, featuring 9to5Mac’s Fernando Silva & Jeff Benjamin. Subscribe to Overtime via Apple Podcasts and our YouTube channel for more. more…",
-        "body": "Jeff and Fernando share their excitement about the iPhone 18 Pro’s camera capabilities and explore whether it could truly replace a mirrorless camera for both photography and videography. Plus, they weigh in on whether you should buy the iPhone 18 Pro now or hold out for the iPhone Duo.\n\n9to5Mac Overtime is a weekly video-first podcast exploring fun and interesting observations in the Apple ecosystem, featuring 9to5Mac’s Fernando Silva & Jeff Benjamin. Subscribe to Overtime via Apple Podcasts and our YouTube channel for more.\n\nJeff's favorite screen cleaning cloth that polishes to a shine."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "freedom-scientific-blog-6fd732650b57c4b4",
     "type": "news",
     "sourceId": "freedom-scientific-blog",
@@ -294,56 +414,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-8c9bf9b0d4fafce3",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/02/ios-27s-siri-gets-one-thing-very-right-that-other-ai-assistants-get-wrong/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-02T19:26:34.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iOS 27’s Siri gets one thing very right that other AI assistants get wrong",
-        "summary": "Siri AI is a major upgrade to Apple’s assistant that’s now available in iOS 27. And there’s one standout area I’ve noticed where it differs greatly from other AI assistants—for the better. more…",
-        "body": "Siri AI is a major upgrade to Apple’s assistant that’s now available in iOS 27. And there’s one standout area I’ve noticed where it differs greatly from other AI assistants—for the better.\n\nI’ve been using Siri AI for nearly four months, since the first iOS 27 beta launched. Overall, it’s checked all the boxes I was hoping for .\n\nThe new Siri is far more capable than its predecessor, delivering on the original promise of being a truly capable assistant on Apple devices.\n\nI’ll admit though: if you need the most powerful, cutting-edge AI tool, you might be better served by competitors like ChatGPT, Claude, and Google Gemini.\n\nHowever, after using Siri AI and comparing it to those third-party tools, I’ve noticed a key difference where I greatly favor Siri.\n\nUnlike other AI chatbots, Siri doesn’t pretend to be human .\n\nIt’s not overly verbose, mimicking a human-like personality that might lull you into forming a personal relationship with it.\n\nSiri is helpful, intelligent, and does what you ask it to do. But the way it responds makes clear that it’s a tool, not a person. It reminds you regularly that it’s an AI, so it can make mistakes. And it won’t faux date you.\n\nWhereas ChatGPT, Claude, and Gemini are all bursting with personality, opinions, and demonstrate more human-like tendencies in a way that, for me, feels disingenuous.\n\nI imagine some users enjoy that more “personal” approach. But I much prefer that AI assistants stay in their lane and don’t pretend to be something they’re not.\n\nAI is changing the world. But AI chatbots are tools, not people. And I love that Apple gets that, and built the new Siri accordingly.\n\nWhat’s your view of how “human-like” an AI assistant should be? Let us know in the comments."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-0a616775012ea02e",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2276186/apple-sounds-the-alarm-on-ai-agents-and-full-disk-access/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-02T19:22:06.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple sounds the alarm on AI agents and 'Full Disk Access'",
-        "summary": "There's an increasingly high cost to convenience.",
-        "body": "The company says some AI developers are risking their users' privacy.\n\nApple is adding new safeguards to how \"Full Disk Access\" works in macOS to address the growing risk posed by AI agents. In an update , the company warned that the increasingly popular tools \"could put users at risk,\" and that it would add \"additional controls\" to the process to ensure users are aware of what they're doing when they grant software such \"extraordinary\" access.\n\nThe company didn't say when the update would roll out or what exactly would change from the current setup. But in its note, the Cupertino company implied that some developers of AI agents are not being upfront with users about the privacy tradeoffs that come with using their software.\n\n\"Some developers are using Full Disk Access in ways that could put users at risk, exposing everything on their systems—including files, mail, messages, and even browsing history—without users' full knowledge and understanding,\" the company said. \"For communication apps, this can also compromise the privacy of the people users are communicating with.\"\n\nDesktop clients for AI agents, like OpenClaw, Dots and Muse, often encourage users to grant \"Full Disk Access\" so the agents can access their files, messages and other data. This allows AI agents to accomplish more kinds of tasks, but it also comes with significant risks . That's why some people opt to use agents on dedicated machines, which has helped fuel Mac Mini shortages this year.\n\nMore recently, the issue of agents getting Full Disk Access has cropped up again with the rise of Meta's AI agent, Muse. Though Apple doesn't specifically cite Muse or Meta, its warning comes after some users have reported that Muse took unintended actions with their data. Jason Aten, a tech columnist for Inc. recently wrote about how the Muse Mac app was able to access his messages even though he thought he had denied that permission. Meta responded saying that if his messages synced, he must have opted in.\n\nApple, it seems, wants to add additional friction to make sure people are aware of what they are allowing their agents to see. \"Going forward, we will introduce additional controls to ensure that users who genuinely wish to grant an app this extraordinary level of access can only do so with very explicit user action,\" the company said. \"Addressing this is critical. As AI agents become increasingly capable and autonomous, the risks associated with this level of access will grow substantially. We are committed to ensuring users clearly understand these risks before granting such access, so they can make informed decisions about their own data and privacy.\""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "ars-technica-5843bacde477c970",
     "type": "news",
     "sourceId": "ars-technica",
@@ -362,79 +432,6 @@
         "title": "US arrests tech CEO accused of smuggling $300M in Nvidia chips into China",
         "summary": "Nvidia’s chip-smuggling problem won’t go away as arrests continue.",
         "body": "The US has arrested another suspect accused of smuggling high-end computer servers containing export-controlled Nvidia chips into China.\n\nIn a press release on Thursday, the Department of Justice accused 38-year-old Greg Lui of using false paperwork to mask shipments of servers worth more than $300 million that he allegedly knew were ultimately destined for China.\n\nAs the CEO of Earthmade Computer, Lui allegedly conspired with freight-forwarding firms in South Asian countries like Malaysia and Singapore to illegally divert chip shipments into China, including Nvidia’s A100 GPUs and H100 GPUs, the FBI’s indictment alleged. These are not Nvidia’s most advanced chips. However, the chips can process large amounts of data and train large language models, which the US fears could pose national security risks if China suddenly gets access to enough chips to drastically advance its AI or strengthen its military.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-c610eaba65c9fc82",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/02/apple-says-its-tightening-macos-full-disk-access-controls-due-to-new-risks-from-ai-agents/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-02T18:11:27.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple says it’s tightening macOS ‘Full Disk Access’ controls due to new risks from AI agents",
-        "summary": "Apple says it will add new controls around macOS’s Full Disk Access permission, warning that increasingly capable AI agents make broad access to users’ files, messages, mail, and browsing history riskier.",
-        "body": "Days after a journalist claimed that Meta’s Muse app on Mac read their private messages — a claim that Meta disputed — Apple announced that it’s introducing additional controls around a setting called “Full Disk Access” on macOS. The feature was designed to allow backups to function properly, but AI agents have now increased “the risks associated with this level of access,” Apple said.\n\nApple’s statement comes shortly after Inc. columnist Jason Aten reported that Muse knew the content of his private messages — even though he claimed to have not given the AI agent permission. The report raised questions about the level of security and trust users have in desktop-based AI, which can control things on their systems and read their files and messages.\n\nThe decision to limit the Mac feature also comes after a Wired report cited that a flaw in ChatGPT’s Mac app could have allowed hackers to access sensitive data.\n\nAI agents that run on the desktop allow users to provide their respective apps with greater access to the files, messages, and other personal content on their computers by adjusting macOS settings.\n\nIn Muse’s case, the AI optionally allows users to enable Full Disk Access. This setting, Apple explains, gives an app permission to access files, mail, messages, and even browsing history.\n\n“Some developers are using Full Disk Access in ways that could put users at risk, exposing everything on their systems…without users’ full knowledge and understanding,” Apple said in a new blog post aimed at developers.\n\nThe company says that, going forward, it will introduce new controls aimed at ensuring that users who “genuinely wish to grant an app this extraordinary level of access” can do so only with “very explicit user action.”\n\n“Addressing this is critical. As AI agents become increasingly capable and autonomous, the risks associated with this level of access will grow substantially. We are committed to ensuring users clearly understand these risks before granting such access, so they can make informed decisions about their own data and privacy,” Apple wrote.\n\nApple did not respond to TechCrunch’s inquiry about the feature change."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-b6427ccc0a420480",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1004096/openai-chatgpt-dots-hands-on-agent",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-02T18:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "programas-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "OpenAI’s Dot agent is enterprise software that can also order your dinner",
-        "summary": "It's a tale as old as last week: OpenAI's new agent platform, called Dots, is full of cute little guys who can do your bidding. But unlike the ultra-approachable Meta Muse, Dots feel very much like using workplace software that happens to be able to order you a burrito - emphasis on work. OpenAI announced […]",
-        "body": "It's a tale as old as last week: OpenAI's new agent platform , called Dots, is full of cute little guys who can do your bidding.\n\nBut unlike the ultra-approachable Meta Muse, Dots feel very much like using workplace software that happens to be able to order you a burrito - emphasis on work.\n\nOpenAI announced Dots earlier this week. Like Muse, Dots have blobby, anthropomorphic avatars and customizable names. In the future, OpenAI says you'll be able to have multiple Dots, but right now you get one. I named mine Dotty McDotface.\n\nThe interface looks similar to Muse's; you chat with the agent in one window and follow its work in another as it …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-95d543b77f1d2564",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/video/its-not-ai-anymore-its-super-intelligence-according-to-the-white-house/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-02T17:48:16.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "It’s not AI anymore, it’s ‘super intelligence’ (according to the White House)",
-        "summary": "This week, the White House got nearly every major tech CEO in one room — Zuckerberg, Bezos, Musk, and Anthropic’s Dario Amodei among them — to sign an AI safety pledge that President Donald Trump called “morally binding.” Trump also signed an executive order officially rebranding AI as “super intelligence,” and meanwhile, Meta and OpenAI are putting friendlier faces on their AI products, even as the biggest money […]",
-        "body": "Loading the player…\n\nThis week, the White House got nearly every major tech CEO in one room — Zuckerberg, Bezos, Musk, and Anthropic’s Dario Amodei among them — to sign an AI safety pledge that President Donald Trump called “morally binding.” Trump also signed an executive order officially rebranding AI as “super intelligence,” and meanwhile, Meta and OpenAI are putting friendlier faces on their AI products , even as the biggest money in AI still appears to be coming from the enterprise.\n\nOn this episode of TechCrunch’s Equity podcast, Kirsten Korosec, Anthony Ha, and Sean O’Kane dig into this week’s AI moves, the ugly economics of consumer AI , plus the shifting IPO market and a handful of startup deals.\n\nAnd speaking of startups, join us at TechCrunch Disrupt 2026, where Equity will kick things off with a live show on the Builders Stage at 9 a.m. Get 25% off your tickets with code Equity25 .\n\nSubscribe to Equity on YouTube , Apple Podcasts , Overcast , Spotify and all the casts. You can also follow Equity on X and Threads , at @EquityPod."
       }
     },
     "media": null

@@ -1,5 +1,22 @@
 [
   {
+    "id": "migue-baena-ia:https://www.youtube.com/watch?v=puf_BjwAFtk",
+    "type": "video",
+    "section": "technology",
+    "sourceId": "migue-baena-ia",
+    "sourceName": "Migue Baena IA",
+    "sourceUrl": "https://www.youtube.com/@MigueBaenaIA",
+    "originalUrl": "https://www.youtube.com/watch?v=puf_BjwAFtk",
+    "originalLanguage": "es",
+    "publishedAt": "2026-10-03T13:07:12.000Z",
+    "title": "Conecta +10.000 prompts gratuitos a Claude Code 🤯",
+    "summary": "¿Sigues buscando prompts de IA uno por uno en Internet? 🫣\n📌 Esta herramienta reúne miles de prompts y workflows de código abierto para tareas de tu día a día.\nPero lo más interesante es que puedes conectarlo como servidor MCP a herramientas como Claude Code. 🤯\n•\nAsí, tu agente puede consultar la biblioteca y encontrar prompts útiles para la tarea que estás realizando, sin que tengas que estar copiando y pegando manualmente. 💡 \n👉🏻 Si quieres probarlo ingresa al link https://prompts.chat/\n🚀 Y si quieres descubrir más herramientas para mejorar tu productividad con Inteligencia Artificial, visita el enlace de mi bio y únete a mi comunidad exclusiva.\n•\n#Prompts #PromptsChat #InteligenciaArtificial #ClaudeCode #MCP #AITools #AgentesIA #Productividad",
+    "mediaUrl": null,
+    "embedUrl": "https://www.youtube.com/embed/puf_BjwAFtk",
+    "platform": "youtube",
+    "categories": []
+  },
+  {
     "id": "imanu-mx:https://www.youtube.com/watch?v=QkDvbc3IPFE",
     "type": "video",
     "section": "technology",
@@ -544,23 +561,6 @@
     "categories": []
   },
   {
-    "id": "migue-baena-ia:https://www.youtube.com/watch?v=-sqPFZX5kr8",
-    "type": "video",
-    "section": "technology",
-    "sourceId": "migue-baena-ia",
-    "sourceName": "Migue Baena IA",
-    "sourceUrl": "https://www.youtube.com/@MigueBaenaIA",
-    "originalUrl": "https://www.youtube.com/watch?v=-sqPFZX5kr8",
-    "originalLanguage": "es",
-    "publishedAt": "2026-10-01T14:08:53.000Z",
-    "title": "Tienes que probar esto antes de crear tus videos con IA 🎬",
-    "summary": "Parece un videojuego, pero es una herramienta para dirigir videos con IA. 🎬😱\n📌 Se llama 3D Shot Builder y está dentro de Topview Film Studio.\n•\nAntes de generar tu video puedes construir la escena en 3D y decidir:\n✔️ Dónde colocar personajes y objetos.\n✔️ Qué movimiento tendrá la cámara.\n✔️ Qué ángulo y plano quieres utilizar.\n✔️ Cómo se mueve cada elemento de la escena.\nY puedes apoyarte en modelos como GPT-6 Astra para construir escenas y mantener la coherencia narrativa. 🤩\n•\nEn lugar de cruzar los dedos después de escribir un prompt, puedes previsualizar y dirigir la escena antes de generar el video.\n👉🏻 Si quieres probarlo ingresa al link https://www.topview.ai/?via=dlws\n•\n#Topview #TopviewFilmStudio #VideoIA #InteligenciaArtificial #GeneracionDeVideo #AITools #CreacionAudiovisual",
-    "mediaUrl": null,
-    "embedUrl": "https://www.youtube.com/embed/-sqPFZX5kr8",
-    "platform": "youtube",
-    "categories": []
-  },
-  {
     "id": "marcianotech:https://www.youtube.com/watch?v=_Ayl89sb8L8",
     "type": "video",
     "section": "technology",
@@ -898,40 +898,6 @@
     "mediaUrl": null,
     "embedUrl": "https://www.youtube.com/embed/eYBEJBfq_Zs",
     "platform": "youtube",
-    "categories": []
-  },
-  {
-    "id": "sucdepoma:https://www.sucdepoma.org/2026/09/22/quedada-de-septiembre-2026-segunda-parte/",
-    "type": "audio",
-    "section": "accessibility",
-    "sourceId": "sucdepoma",
-    "sourceName": "SucDePoma",
-    "sourceUrl": "https://www.sucdepoma.org/",
-    "originalUrl": "https://www.sucdepoma.org/2026/09/22/quedada-de-septiembre-2026-segunda-parte/",
-    "originalLanguage": "es",
-    "publishedAt": "2026-09-22T09:21:21.000Z",
-    "title": "Quedada de septiembre 2026 (Segunda parte)",
-    "summary": "En la segunda parte de la quedada de septiembre Juan Núñez y diversos asistentes hablan sobre algunas de las novedades, peculiaridades y problemas de accesibilidad de los nuevos sistemas operativos iOS 27 y macOS 27 Golden Gate. Se trata de una quedada con un carácter marcadamente práctico, en la que destacan las demos de Juan Núñez y Jaime Franco mostrando las nuevas funciones de descripción y exploración de imágenes presentes en macOS 27 y iOS 27.",
-    "mediaUrl": null,
-    "embedUrl": null,
-    "platform": "podcast",
-    "categories": []
-  },
-  {
-    "id": "sucdepoma:https://www.sucdepoma.org/2026/09/21/quedada-de-septiembre-2026-primera-parte/",
-    "type": "audio",
-    "section": "accessibility",
-    "sourceId": "sucdepoma",
-    "sourceName": "SucDePoma",
-    "sourceUrl": "https://www.sucdepoma.org/",
-    "originalUrl": "https://www.sucdepoma.org/2026/09/21/quedada-de-septiembre-2026-primera-parte/",
-    "originalLanguage": "es",
-    "publishedAt": "2026-09-21T17:08:27.000Z",
-    "title": "Quedada de septiembre 2026 (Primera parte)",
-    "summary": "En la primera parte de la quedada de septiembre Luz del Carmen nos habla de un controlador Hub Certificado Matter, el Tapo TP-Link H110, con el que es posible manejar de forma más accesible y desde nuestro iPhone, o a través de altavoces inteligentes como los de Amazon Alexa, diversos aparatos que requieran un mando a distancia por infrarrojos. A continuación, Juan Núñez y algunos de los asistentes hablan de los nuevos dispositivos presentados por Apple en la Keynote de este mes de septiembre. Principalmente se habla del iPhone Duo, aunque también de los iPhone 18 Pro y los AirPods 5. Enlaces de interés: Tapo TP-Link H110 Smart IR e IoT Hub, Centro de conexión Certificado Matter para aparatos y sensores IR. En Amazon. App TP-Link Tapo para iOS en la AppStore.",
-    "mediaUrl": null,
-    "embedUrl": null,
-    "platform": "podcast",
     "categories": []
   },
   {

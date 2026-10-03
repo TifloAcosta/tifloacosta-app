@@ -6,11 +6,13 @@ const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
 test('web reader exposes common document and image formats', async () => {
   const [html, source] = await Promise.all([read('index.html'), read('web-reading.js')]);
-  for (const extension of ['.docx','.epub','.odt','.rtf','.md','.markdown','.fb2','.png','.jpg','.jpeg','.webp']) {
+  for (const extension of ['.docx','.pptx','.xlsx','.epub','.odt','.rtf','.md','.markdown','.fb2','.png','.jpg','.jpeg','.webp']) {
     assert.ok(html.includes(extension), `Missing accepted extension ${extension}`);
   }
   for (const token of [
     'parseDocxArchive',
+    'parsePptxArchive',
+    'parseXlsxArchive',
     'parseEpubArchive',
     'parseOdtArchive',
     'parseRtfDocument',
@@ -24,7 +26,7 @@ test('web reader exposes common document and image formats', async () => {
   assert.ok(source.includes("code:'legacy-doc'") || source.includes("code: 'legacy-doc'"));
 });
 
-test('structured web format adapters cover DOCX EPUB ODT RTF Markdown and FB2', async () => {
+test('structured web format adapters cover DOCX PPTX XLSX EPUB ODT RTF Markdown and FB2', async () => {
   const source = await read('shared/web-reading-format-adapters.mjs');
   for (const token of [
     'parseDocxArchive',
@@ -37,6 +39,13 @@ test('structured web format adapters cover DOCX EPUB ODT RTF Markdown and FB2', 
     assert.ok(source.includes(`export function ${token}`) || source.includes(`export async function ${token}`));
   }
   assert.ok(source.includes("word/document.xml"));
+  const office = await read('shared/office-openxml-adapters.mjs');
+  assert.ok(office.includes('parsePptxArchive'));
+  assert.ok(office.includes('parseXlsxArchive'));
+  assert.ok(office.includes("ppt/presentation.xml"));
+  assert.ok(office.includes("xl/workbook.xml"));
+  assert.ok(office.includes('Speaker notes') || office.includes('Notas del presentador'));
+  assert.ok(office.includes('Headers') || office.includes('Encabezados'));
   assert.ok(source.includes("META-INF/container.xml"));
   assert.ok(source.includes("content.xml"));
 });

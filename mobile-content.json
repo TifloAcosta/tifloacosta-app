@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-02T22:16:40.357Z",
+  "generatedAt": "2026-10-03T01:14:21.783Z",
   "resources": [
     {
       "kind": "resource",
@@ -4886,19 +4886,151 @@
   "news": [
     {
       "kind": "news",
-      "id": "9to5mac-53f90f5a62ddd141:en",
-      "sourceId": "9to5mac-53f90f5a62ddd141",
+      "id": "techcrunch-1e00709f851df52d:en",
+      "sourceId": "techcrunch-1e00709f851df52d",
       "lang": "en",
-      "title": "Twelve South launches tiny new ‘Airfly Drive’ wireless CarPlay adapter [Updated]",
-      "summary": "Update, October 2: Many of you have asked for a full vehicle compatibility list for the Twelve South Airfly Drive. Our friends over at 9to5Toys have just published exactly that. Take a look! Complete vehicle compatibility list for new Twelve South Airfly Drive CarPlay and Android Auto adapter Twelve South, the company behind a range of premium Apple accessories, has launched a notable expansion of its Airfly brand. The company today unveiled Airfly Drive, a dongle that turns wired CarPlay into wireless CarPlay. It’s available to order starting today for $39.99. Here’s how it works. more…",
-      "body": "Update, October 2: Many of you have asked for a full vehicle compatibility list for the Twelve South Airfly Drive. Our friends over at 9to5Toys have just published exactly that. Take a look!\n\nTwelve South, the company behind a range of premium Apple accessories , has launched a notable expansion of its Airfly brand. The company today unveiled Airfly Drive, a dongle that turns wired CarPlay into wireless CarPlay. It’s available to order starting today for $39.99 . Here’s how it works.\n\nAirfly Drive works with most cars that have factory-wired CarPlay, according to Twelve South. This covers more than 75 makes and model years back to 2014. Airfly Drive itself has a USB-A connector, but Twelve South includes a USB-C adapter in the box. It has a compact, aluminum design and is meant to stay plugged in.\n\nTwelve South’s Airfly Drive doesn’t require an app or account. You simply plug it into your car’s USB port, pair it to your phone once, and you’re set. Going forward, the Airfly Drive will automatically reconnect to your phone to enable the wireless CarPlay experience. It also supports two paired phones, controlled by a single button that switches between them.\n\nTwelve South outlines some specs and features:\n\nWireless CarPlay is significantly more seamless than wired CarPlay, especially for those shorter trips around town. It’s a great quality-of-life update for your CarPlay experience.\n\nYou can order Airfly Drive from Twelve South today for $39.99 . It’s available in black and white . It also works with Android Auto.\n\nFollow Chance : Threads , Bluesky , Instagram , and Mastodon .",
+      "title": "Sean Parker is rebuilding Stability AI around music",
+      "summary": "Sean Parker, who once taught the music industry what asking for forgiveness looks like, is now back with the labels' blessing and money.",
+      "body": "Posted:\n\nSean Parker, the Napster co-founder, has jumped back into the music industry, and he tells The Information that he’s playing by the rules this time. (Asking for forgiveness rather than permission didn’t work out so well last time around, he readily concedes.)\n\nTwo years ago, he joined an $80 million rescue of Stability AI, the image-generator startup that nearly collapsed after overspending and internal turmoil led to founder Emad Mostaque’s ouster. Now Parker and his longtime friend Prem Akkaraju, who became CEO, are taking the wraps off what they’ve been building.\n\nThe big idea, Parker says, is to turn Stability into the go-to AI toolmaker for music professionals. Toward that end, in late August, the company announced $76 million in funding from, among others, Sony, Warner, and Universal, which also licensed their catalogs for training as part of the deal. Stability has since released three new audio models and AI music-editing software. The AI can generate whole instrumental tracks or short snippets from text prompts. Parker says an upcoming update will let users hum a melody or beatbox a drum pattern to steer it.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/02/sean-parker-is-rebuilding-stability-ai-around-music/",
+      "publishedAt": "2026-10-02T21:09:14.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-64e5c1f17f370bdc:en",
+      "sourceId": "the-verge-64e5c1f17f370bdc",
+      "lang": "en",
+      "title": "Meta open sources code to let you make Muse AI gadgets",
+      "summary": "Meta now lets you make your own Muse gadgets that feature the company's new AI agent with code that the company open sourced. The company suggests projects like loading Muse on a color E Ink display to show reminders, adding it to an HDMI stick so you can display Muse on a big screen, or […]",
+      "body": "Meta now lets you make your own Muse gadgets that feature the company's new AI agent with code that the company open sourced . The company suggests projects like loading Muse on a color E Ink display to show reminders, adding it to an HDMI stick so you can display Muse on a big screen, or putting Muse on a small touchscreen device to make what looks kind of like a DIY Muse Charm .\n\n\"Muse gadgets are open source devices you build yourself,\" Meta says. \"Program an off-the-shelf ESP32 board or set up a Raspberry Pi with our SDKs, then connect Muse to your displays, buttons, sensors, actuators, and whatever else you've got lying on your workbench. …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1004330/meta-muse-ai-gadgets-home-link",
+      "publishedAt": "2026-10-02T21:08:37.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-a803c01e42093f25:en",
+      "sourceId": "9to5mac-a803c01e42093f25",
+      "lang": "en",
+      "title": "Apple confirms iPhone 18 Pro Max AT&T cellular issues, affected devices require hardware replacement",
+      "summary": "Apple has confirmed an issue causing a “small number” of iPhone 18 Pro Max devices on AT&T to lose cellular service. Apple released software and carrier updates to prevent the issue from affecting additional users, but the company tells 9to5Mac that devices that have already lost service will require a hardware replacement. more…",
+      "body": "Apple has confirmed an issue causing a “small number” of iPhone 18 Pro Max devices on AT&T to lose cellular service.\n\nApple released software and carrier updates to prevent the issue from affecting additional users, but the company tells 9to5Mac that devices that have already lost service will require a hardware replacement.\n\nIn a statement to 9to5Mac, Apple said:\n\n“We have identified an issue affecting a small number of iPhone 18 Pro Max users on the AT&T network that may cause a device to lose service and be unable to make calls. We released iOS 27.0.1 earlier this week and strongly encourage all iPhone 18 Pro Max users to update now, and are also issuing a carrier settings update today. These updates together are meant to help prevent this issue from occurring.”\n\nThe carrier settings update for the iPhone 18 Pro Max will download automatically over the next 14 days. However, users can manually trigger the download by going to Settings, choosing General, then About.\n\nApple explains that the software updates will help prevent future issues for iPhone 18 Pro Max users on AT&T. The software updates will not restore service on devices that have already lost it.\n\nApple says that iPhone 18 Pro Max users who have already lost service will need a hardware replacement. Those users should contact Apple Support or AT&T, or visit an Apple Store or AT&T location.\n\nAs we reported this morning , iPhone 18 Pro Max users affected by this problem can’t connect to AT&T’s network for calls, texts, and data. Instead, those users see “SOS” in their iPhone’s status bar. The connectivity issues aren’t impacting every iPhone 18 Pro Max user on AT&T.\n\nInterestingly, the iPhone 18 Pro Max in the United States uses a Qualcomm modem . The iPhone 18 Pro, which uses Apple’s C2 modem, is unaffected by these AT&T connectivity issues.\n\nFollow Chance : Threads , X , and Instagram",
       "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/02/twelve-south-launches-tiny-new-airfly-drive-wireless-carplay-adapter/",
-      "publishedAt": "2026-10-02T18:15:26.000Z",
+      "originalUrl": "https://9to5mac.com/2026/10/02/apple-confirms-iphone-18-pro-max-att-cellular-issues-affected-devices-require-hardware-replacement/",
+      "publishedAt": "2026-10-02T20:47:02.000Z",
       "categories": [
         "apple",
         "tecnologia-general",
-        "android"
+        "programas-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-016a39320be14227:en",
+      "sourceId": "the-verge-016a39320be14227",
+      "lang": "en",
+      "title": "Apple will limit Mac disk access as AI agents ‘substantially’ increase risk",
+      "summary": "Apple will add new limits for \"full disk access\" on Mac in response to risks posed by AI agents, as reported earlier by TechCrunch. In an update on Friday, Apple says it's rolling out new controls to \"ensure that users who genuinely wish to grant an app this extraordinary level of access can only do […]",
+      "body": "Apple will add new limits for \"full disk access\" on Mac in response to risks posed by AI agents, as reported earlier by TechCrunch . In an update on Friday , Apple says it's rolling out new controls to \"ensure that users who genuinely wish to grant an app this extraordinary level of access can only do so with very explicit user action.\"\n\nThe change comes just weeks after Inc 's Jason Aten found that Meta's Muse AI somehow knew the contents of his messages , despite not giving the chatbot explicit permission to access them on his iPhone or Mac. Meta spokesperson Andy Stone pushed back on this report , saying access to Messages is \"entirely opt-in. …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1004295/apple-limit-mac-disk-access-ai-agents",
+      "publishedAt": "2026-10-02T20:08:40.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple",
+        "apps-accesibles",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-6a84192e729b3260:en",
+      "sourceId": "9to5mac-6a84192e729b3260",
+      "lang": "en",
+      "title": "9to5Mac Overtime 084: iPhone 18 Pro – a fantastic pro camera experience",
+      "summary": "Jeff and Fernando share their excitement about the iPhone 18 Pro’s camera capabilities and explore whether it could truly replace a mirrorless camera for both photography and videography. Plus, they weigh in on whether you should buy the iPhone 18 Pro now or hold out for the iPhone Duo. 9to5Mac Overtime is a weekly video-first podcast exploring fun and interesting observations in the Apple ecosystem, featuring 9to5Mac’s Fernando Silva & Jeff Benjamin. Subscribe to Overtime via Apple Podcasts and our YouTube channel for more. more…",
+      "body": "Jeff and Fernando share their excitement about the iPhone 18 Pro’s camera capabilities and explore whether it could truly replace a mirrorless camera for both photography and videography. Plus, they weigh in on whether you should buy the iPhone 18 Pro now or hold out for the iPhone Duo.\n\n9to5Mac Overtime is a weekly video-first podcast exploring fun and interesting observations in the Apple ecosystem, featuring 9to5Mac’s Fernando Silva & Jeff Benjamin. Subscribe to Overtime via Apple Podcasts and our YouTube channel for more.\n\nJeff's favorite screen cleaning cloth that polishes to a shine.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/02/9to5mac-overtime-084-iphone-18-pro-a-fantastic-pro-camera-experience/",
+      "publishedAt": "2026-10-02T20:00:00.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "freedom-scientific-blog-6fd732650b57c4b4:en",
+      "sourceId": "freedom-scientific-blog-6fd732650b57c4b4",
+      "lang": "en",
+      "title": "Download the September Update of JAWS, ZoomText, and Fusion 2026",
+      "summary": "The September update of JAWS, ZoomText, and Fusion 2026 is now available, offering new functionality and enhancements that increase efficiency and productivity. Here’s a look at several enhancements. Improved JAWS Support for Facebook and Reddit This release includes enhancements that significantly improve navigation on the Facebook and Reddit social media platforms. These include: These enhancements …",
+      "body": "The September update of JAWS, ZoomText, and Fusion 2026 is now available, offering new functionality and enhancements that increase efficiency and productivity. Here’s a look at several enhancements.\n\nThis release includes enhancements that significantly improve navigation on the Facebook and Reddit social media platforms. These include:\n\nThese enhancements improve the user experience by making content easier to locate and improving overall navigation consistency.\n\nThis release includes several notable enhancements to our Cloud Settings feature, which allows users who are logged into a Vispero account to migrate settings across multiple devices. These include:\n\nThis feature is part of the Early Adopter Program, which provides access to new functionality that is still under active development. It is intended for users who want to try out upcoming features and provide feedback before they are fully released.\n\nTo enable this option:\n\nAfter JAWS restarts, choose Enable Sync when prompted to begin syncing your settings.\n\nFusion now starts more reliably, so it is ready to use when you need it. This update resolves an issue where Fusion could stop responding during startup. It occurred most often the first time Fusion was started after installing and restarting your computer.\n\nWhen a line of text under the mouse pointer or cursor exceeds the width of the Live Text View window, scroll arrows appear at the start or end of the displayed text. Previously, CAPS LOCK+RIGHT ARROW and CAPS LOCK+LEFT ARROW moved through the line one character at a time. You can now press and hold either hotkey to scroll continuously, making it faster to read through long lines of text.\n\nIn many enterprise environments, applications are hosted centrally on a server rather than installed directly on each user’s computer. These remotely hosted applications, often called Published Applications, can appear to the user as though they are running locally.\n\nTo provide speech, visual tracking, and magnification when users interact with Published Applications, ZoomText needs access to information from both the server and the local computer. In these environments, ZoomText is installed on both systems so the server and local components can work together. In this release:\n\nTo download and install the September update of JAWS, ZoomText, or Fusion 2026, follow these steps on a computer connected to the internet:\n\nNote: If you are running the latest version of JAWS, ZoomText, or Fusion 2026 and automatic updates are enabled, you can start the download and installation process from the notification.\n\nOur User Education and Outreach team offers outstanding resources for learning your Freedom Scientific software in our Training Center , which includes videos, FAQs, and instructions for getting started. Keep up with this blog and check out the Freedom Scientific Training schedule page for news of upcoming live training webinars and other events. For questions, email us at training@vispero.com .",
+      "sourceName": "Freedom Scientific",
+      "originalUrl": "https://training.vispero.com/download-the-september-update-of-jaws-zoomtext-and-fusion-2026/",
+      "publishedAt": "2026-10-02T19:44:09.000Z",
+      "categories": [
+        "windows",
+        "tecnologia-accesibilidad",
+        "jaws"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-8c9bf9b0d4fafce3:en",
+      "sourceId": "9to5mac-8c9bf9b0d4fafce3",
+      "lang": "en",
+      "title": "iOS 27’s Siri gets one thing very right that other AI assistants get wrong",
+      "summary": "Siri AI is a major upgrade to Apple’s assistant that’s now available in iOS 27. And there’s one standout area I’ve noticed where it differs greatly from other AI assistants—for the better. more…",
+      "body": "Siri AI is a major upgrade to Apple’s assistant that’s now available in iOS 27. And there’s one standout area I’ve noticed where it differs greatly from other AI assistants—for the better.\n\nI’ve been using Siri AI for nearly four months, since the first iOS 27 beta launched. Overall, it’s checked all the boxes I was hoping for .\n\nThe new Siri is far more capable than its predecessor, delivering on the original promise of being a truly capable assistant on Apple devices.\n\nI’ll admit though: if you need the most powerful, cutting-edge AI tool, you might be better served by competitors like ChatGPT, Claude, and Google Gemini.\n\nHowever, after using Siri AI and comparing it to those third-party tools, I’ve noticed a key difference where I greatly favor Siri.\n\nUnlike other AI chatbots, Siri doesn’t pretend to be human .\n\nIt’s not overly verbose, mimicking a human-like personality that might lull you into forming a personal relationship with it.\n\nSiri is helpful, intelligent, and does what you ask it to do. But the way it responds makes clear that it’s a tool, not a person. It reminds you regularly that it’s an AI, so it can make mistakes. And it won’t faux date you.\n\nWhereas ChatGPT, Claude, and Gemini are all bursting with personality, opinions, and demonstrate more human-like tendencies in a way that, for me, feels disingenuous.\n\nI imagine some users enjoy that more “personal” approach. But I much prefer that AI assistants stay in their lane and don’t pretend to be something they’re not.\n\nAI is changing the world. But AI chatbots are tools, not people. And I love that Apple gets that, and built the new Siri accordingly.\n\nWhat’s your view of how “human-like” an AI assistant should be? Let us know in the comments.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/02/ios-27s-siri-gets-one-thing-very-right-that-other-ai-assistants-get-wrong/",
+      "publishedAt": "2026-10-02T19:26:34.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-0a616775012ea02e:en",
+      "sourceId": "engadget-0a616775012ea02e",
+      "lang": "en",
+      "title": "Apple sounds the alarm on AI agents and 'Full Disk Access'",
+      "summary": "There's an increasingly high cost to convenience.",
+      "body": "The company says some AI developers are risking their users' privacy.\n\nApple is adding new safeguards to how \"Full Disk Access\" works in macOS to address the growing risk posed by AI agents. In an update , the company warned that the increasingly popular tools \"could put users at risk,\" and that it would add \"additional controls\" to the process to ensure users are aware of what they're doing when they grant software such \"extraordinary\" access.\n\nThe company didn't say when the update would roll out or what exactly would change from the current setup. But in its note, the Cupertino company implied that some developers of AI agents are not being upfront with users about the privacy tradeoffs that come with using their software.\n\n\"Some developers are using Full Disk Access in ways that could put users at risk, exposing everything on their systems—including files, mail, messages, and even browsing history—without users' full knowledge and understanding,\" the company said. \"For communication apps, this can also compromise the privacy of the people users are communicating with.\"\n\nDesktop clients for AI agents, like OpenClaw, Dots and Muse, often encourage users to grant \"Full Disk Access\" so the agents can access their files, messages and other data. This allows AI agents to accomplish more kinds of tasks, but it also comes with significant risks . That's why some people opt to use agents on dedicated machines, which has helped fuel Mac Mini shortages this year.\n\nMore recently, the issue of agents getting Full Disk Access has cropped up again with the rise of Meta's AI agent, Muse. Though Apple doesn't specifically cite Muse or Meta, its warning comes after some users have reported that Muse took unintended actions with their data. Jason Aten, a tech columnist for Inc. recently wrote about how the Muse Mac app was able to access his messages even though he thought he had denied that permission. Meta responded saying that if his messages synced, he must have opted in.\n\nApple, it seems, wants to add additional friction to make sure people are aware of what they are allowing their agents to see. \"Going forward, we will introduce additional controls to ensure that users who genuinely wish to grant an app this extraordinary level of access can only do so with very explicit user action,\" the company said. \"Addressing this is critical. As AI agents become increasingly capable and autonomous, the risks associated with this level of access will grow substantially. We are committed to ensuring users clearly understand these risks before granting such access, so they can make informed decisions about their own data and privacy.\"",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2276186/apple-sounds-the-alarm-on-ai-agents-and-full-disk-access/",
+      "publishedAt": "2026-10-02T19:22:06.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-5843bacde477c970:en",
+      "sourceId": "ars-technica-5843bacde477c970",
+      "lang": "en",
+      "title": "US arrests tech CEO accused of smuggling $300M in Nvidia chips into China",
+      "summary": "Nvidia’s chip-smuggling problem won’t go away as arrests continue.",
+      "body": "The US has arrested another suspect accused of smuggling high-end computer servers containing export-controlled Nvidia chips into China.\n\nIn a press release on Thursday, the Department of Justice accused 38-year-old Greg Lui of using false paperwork to mask shipments of servers worth more than $300 million that he allegedly knew were ultimately destined for China.\n\nAs the CEO of Earthmade Computer, Lui allegedly conspired with freight-forwarding firms in South Asian countries like Malaysia and Singapore to illegally divert chip shipments into China, including Nvidia’s A100 GPUs and H100 GPUs, the FBI’s indictment alleged. These are not Nvidia’s most advanced chips. However, the chips can process large amounts of data and train large language models, which the US fears could pose national security risks if China suddenly gets access to enough chips to drastically advance its AI or strengthen its military.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/tech-policy/2026/10/us-arrests-tech-ceo-accused-of-smuggling-300m-in-nvidia-chips-into-china/",
+      "publishedAt": "2026-10-02T18:39:36.000Z",
+      "categories": [
+        "tecnologia-general"
       ]
     },
     {
@@ -4968,22 +5100,6 @@
     },
     {
       "kind": "news",
-      "id": "techcrunch-a024aeeb9ddb2fe4:en",
-      "sourceId": "techcrunch-a024aeeb9ddb2fe4",
-      "lang": "en",
-      "title": "TechCrunch Disrupt 2026: Blackstone’s Jas Khaira on building the next generation of AI giants",
-      "summary": "Blackstone's Jas Khaira will take the Builders Stage at TechCrunch Disrupt 2026 on building next-gen AI. Register for your pass and get 50% off a second.",
-      "body": "AI startups can grow at a speed that would have been difficult to imagine a generation ago. But rapid growth comes with another reality: Scaling AI can require enormous amounts of capital, and founders have to make financing decisions long before they know whether early momentum will turn into an enduring business.\n\nSo what separates the AI companies built to last from those simply growing fast?\n\nAt TechCrunch Disrupt 2026 , Jas Khaira, global head of Blackstone N1, will take the Builders Stage for “ Building the Next Generation of AI Giants .” He’ll share what Blackstone looks for when backing category-defining companies, how founders should think about capital as they scale, and what distinguishes lasting businesses from early traction.\n\nThe right capital can fund the infrastructure, talent, and expansion needed to compete. But raising more money isn’t the same thing as building a stronger company.\n\nSecure your Disrupt pass to hear how one of the world’s largest alternative asset managers evaluates the companies trying to become AI’s next giants. Bring your co-founder, partner, colleague, or peer with a 50% discount on their pass . Bring a group of four or more for additional savings.\n\nBuilding an AI company can mean financing more than product development and customer acquisition. Compute, data centers, and other infrastructure can add significant capital requirements as companies grow.\n\nOne recent Blackstone investment illustrates the scale. Blackstone and co-investors agreed to invest up to $600 million in primary equity in Indian AI infrastructure company Neysa , which planned to raise an additional $600 million in debt financing.\n\nCapital is flowing into more than infrastructure. In July, Anthropic launched Ode with Anthropic , an AI implementation company backed through a $1.5 billion joint venture with Blackstone, Hellman & Friedman, Goldman Sachs, and others.\n\nThose investments put Blackstone close to some of the biggest questions surrounding AI growth: where capital is needed, which opportunities warrant it, and what businesses have the potential to endure.\n\nIf your company is approaching the point where growth requires significantly more capital, get your ticket to Disrupt and hear how Khaira thinks about the decisions that come with scaling. Save 50% on a second pass to share the insights.\n\nFast growth can attract customers, employees, and investors. Khaira will look beyond that early momentum to what makes a business endure and what Blackstone considers when evaluating the next generation of category-defining companies.\n\nRapid growth can force big financing decisions early. Founders may be raising capital while simultaneously building products, hiring teams, competing for customers, and determining whether the advantages driving today’s growth can hold up over time.\n\nAdd “ Building the Next Generation of AI Giants ” to your Disrupt agenda for an investor’s perspective on evaluating early momentum, financing growth, and building for the long term.\n\nJas Khaira joined Blackstone in 2004 and is global head of Blackstone N1 and Blackstone Growth, as well as head of Tactical Opportunities Americas. He serves on several of the firm’s investment committees and founded Blackstone N1, its platform for growth, hybrid, and perpetual private equity investing across the AI ecosystem and next-generation high-growth companies.\n\nWant to know what an investor at Blackstone’s scale looks for before committing capital? Secure your Disrupt pass and hear directly from Khaira on the Builders Stage. Bring another person with you to share the insights at 50% off their pass .\n\n“Building the Next Generation of AI Giants” is one of 200+ sessions across six industry stages, roundtables, and breakouts at Disrupt, taking place October 13–15 at Moscone West in San Francisco . More than 10,000 founders, investors, operators, and tech leaders are expected, along with 250+ speakers and 300+ exhibiting startups .\n\nIn addition, matchmaking, dealmaking, and ad hoc networking give attendees opportunities to connect with potential investors, customers, partners, and other founders tackling many of the same challenges.\n\nFor AI founders, raising capital may be one milestone. Deciding how to use it to build a company that lasts is a much bigger challenge. At Disrupt , Khaira will bring the investor’s perspective to that question and give founders a closer look at what Blackstone sees when it evaluates the companies aiming to define the next generation of AI.\n\nSecure your pass to TechCrunch Disrupt 2026 and get an investor’s perspective on what it takes to build an AI company for the long haul. Bring a co-founder, colleague, partner, or peer at 50% off. Bring four or more for additional discounts.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/02/techcrunch-disrupt-2026-blackstones-jas-khaira-on-building-the-next-generation-of-ai-giants/",
-      "publishedAt": "2026-10-02T17:32:05.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "engadget-c729d5048f450cc7:en",
       "sourceId": "engadget-c729d5048f450cc7",
       "lang": "en",
@@ -5012,85 +5128,6 @@
       "publishedAt": "2026-10-02T17:20:21.000Z",
       "categories": [
         "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-5773f136befe07ea:en",
-      "sourceId": "the-verge-5773f136befe07ea",
-      "lang": "en",
-      "title": "Nacon’s new PS5 controller can mix audio from your phone and console",
-      "summary": "Nacon announced what the company is claiming is the world's first officially licensed PlayStation 5 controller with a built-in screen for adjusting settings like joystick sensitivity or remapping buttons right on the gamepad. The Revolution 5 Unlimited's screen can also be used to mix audio from multiple sources so while using a pair of headphones […]",
-      "body": "Nacon announced what the company is claiming is the world's first officially licensed PlayStation 5 controller with a built-in screen for adjusting settings like joystick sensitivity or remapping buttons right on the gamepad. The Revolution 5 Unlimited 's screen can also be used to mix audio from multiple sources so while using a pair of headphones connected to the gamepad with a cable you can listen to music from your phone and sounds from the game you're playing at the same time.\n\nThe Revolution 5 Unlimited is available for preorder starting today for $229.99 through Nacon's online store and is expected to ship sometime later this year. Whi …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1004053/nacon-sony-playstation-licensed-revolution-5-unlimited-wireless-controller",
-      "publishedAt": "2026-10-02T16:35:13.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-12b58590a17c9955:en",
-      "sourceId": "9to5mac-12b58590a17c9955",
-      "lang": "en",
-      "title": "Using an iPad mini to preview the iPhone Duo experience",
-      "summary": "Alongside using the iPhone 18 Pro , I’ve also been carrying out a little experiment as we await the launch of the iPhone Duo . To get a sense of what it might be like to use the large screen of the upcoming device, I’ve been using my iPad mini as a substitute phone some of the time. Given that the screen is a similar size and shape, I’m hoping that it gives me something of a preview of the experience … more…",
-      "body": "Alongside using the iPhone 18 Pro , I’ve also been carrying out a little experiment as we await the launch of the iPhone Duo .\n\nTo get a sense of what it might be like to use the large screen of the upcoming device, I’ve been using my iPad mini as a substitute phone some of the time. Given that the screen is a similar size and shape, I’m hoping that it gives me something of a preview of the experience …\n\nI’ll be the first to admit that I really have no business owning an iPad mini. Most of the time it’s only used as an ebook reader for library books borrowed via the Libby app, as you can’t read these on a Kindle here in the UK. (Don’t get me started on that bizarre omission …)\n\nGiven the number of ebooks I read, it’s not totally unreasonable to have a second device more or less devoted to this, but I do feel a slight twinge of guilt that such a capable device has such a limited role. I’ve now, however, found at least a temporary additional task for it: getting some sense of the experience we might expect from an iPhone Duo.\n\nAs my colleague Ryan Christoffel recently noted , the interior display of the iPhone Duo is a bit smaller than that of the iPad mini, but the difference isn’t, uh, huge.\n\nDue to the much smaller bezels on iPhone Duo, the difference in screen size isn’t as notable as you might expect: iPhone Duo: 7.6‑inch display iPad mini: 8.3-inch display\n\nWhat I did was to install all of the same apps I have on my iPhone with a similar layout in order to mirror the experience as closely as possible. iPhone Wi-Fi hotspot provides the connectivity needed to allow me to use the iPad on a wide variety of occasions when I would otherwise have been using my iPhone.\n\nIn one way, the iPad mini delivers a better experience than the Duo as it runs iPadOS rather than iOS, giving a more flexible multitasking experience. However, I’m not a fan of windowing on such a small screen, so I primarily use apps either full screen or split screen, making it very similar to the Duo interface.\n\nTo counter the lack of pocketability, I’ve only taken it with me when I have a backpack, but that’s about half the time when I’m out and about.\n\nOf course, the iPad doesn’t support all the Duo features, so it’s only a very rough and ready approximation of the experience, but it has provided a good sense of what it’s like to have access to this sort of size screen in a phone – and I have very much enjoyed it.\n\nAs with many such comparisons, the greatest impact is not when switching to something new, but switching back to the previous product. Whenever I switch from using the iPad mini back to the iPhone 18 Pro, the screen does seem extremely small. This experiment has done absolutely nothing to reduce my technolust for the upcoming device.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/02/using-an-ipad-mini-to-preview-the-iphone-duo-experience/",
-      "publishedAt": "2026-10-02T16:00:00.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-79e26f1e402c03f0:en",
-      "sourceId": "the-verge-79e26f1e402c03f0",
-      "lang": "en",
-      "title": "Dots get up in Muse’s business",
-      "summary": "OpenAI's answer to Muse arrived this week, and it looks a whole lot like Muse dressed up in a suit and tie. Dots is a business-first product - for now, at least - costing a minimum of $100 per month. And sure, you can make a cute little Dot character, just like you can make […]",
-      "body": "OpenAI's answer to Muse arrived this week, and it looks a whole lot like Muse dressed up in a suit and tie. Dots is a business-first product - for now, at least - costing a minimum of $100 per month. And sure, you can make a cute little Dot character, just like you can make a cute little Muse character. But OpenAI's early marketing is all about how you can use it to do Business Things: launch websites, reschedule calls, build slide decks for board meetings. Muse, on the other hand, keeps reminding me to buy a jacket I looked at.\n\nThis week on The Vergecast , we're talking about Dots and the current state of agentic assistants. Our conversatio …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/podcast/1004059/openai-dots-kindle-homepad-cybercab-vergecast",
-      "publishedAt": "2026-10-02T15:47:05.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-9fedf56c87684584:en",
-      "sourceId": "9to5mac-9fedf56c87684584",
-      "lang": "en",
-      "title": "iOS 27.2 gives Apple Podcasts the big fix I’ve wanted for years",
-      "summary": "Apple Podcasts is my podcast app of choice, but I’ve long had major issues with its central Up Next queue feature. I’m happy to report that iOS 27.2 introduces the solution. more…",
-      "body": "Apple Podcasts is my podcast app of choice, but I’ve long had major issues with its central Up Next queue feature. I’m happy to report that iOS 27.2 introduces the solution.\n\nThere’s a lot I appreciate about Apple Podcasts. Transcripts and automatically generated chapters are two killer features that make the app my go-to. And I love all the recent video-related upgrades , too.\n\nBut for years, Apple Podcasts’ central ‘Up Next’ queue has regularly tempted me to use a different app.\n\nI’ve written before about why Up Next feels broken. To summarize:\n\nI’m very excited to report, however, that iOS 27.2 brings an overdue fix for Up Next. And it does that by splitting the feature up into two separate sections:\n\nAt the top of the app is New Episodes, which looks and mostly works just like Up Next did. Except as the name implies, it will only ever show you the latest episodes for each show you follow.\n\nContinue Playing is right underneath it as a central hub for all episodes you’ve started, but haven’t yet completed.\n\nThese two sections jointly address all of my biggest issues with the previous Up Next queue.\n\nIt’s easy to see what’s new at a glance, and I never lose track of episodes anymore, since anything I’ve started will be available in Continue Playing. I still have some smaller quibbles, but these changes alone address my main issues with Up Next.\n\nIf you haven’t tried Apple Podcasts in a while, iOS 27.2 is a great time to revisit it.\n\nDo you use Apple Podcasts or another podcast app? Let us know in the comments.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/02/ios-27-2-gives-apple-podcasts-the-big-fix-ive-wanted-for-years/",
-      "publishedAt": "2026-10-02T15:37:56.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-55abc12ab4873441:en",
-      "sourceId": "engadget-55abc12ab4873441",
-      "lang": "en",
-      "title": "Affordable alternatives to Apple's AirPods Max",
-      "summary": "If you can live without deep iOS integration and the polished design of the AirPods Max, you could save hundreds.",
-      "body": "If you can live without deep iOS integration and the polished design, you could save hundreds.\n\nWe may receive a commission on purchases made from links.\n\nIf you're willing to pay for them, there's a lot to like about the AirPods Max . You get a dose of high-end design with deep iOS integration and smart features like Personalized Spatial Audio, Adaptive EQ, Live Translation, Adaptive Audio and Conversation Awareness. There's also lossless audio over USB-C, if you're into that sort of thing, but it's more common on spec sheets these days.\n\nOf course, the main drawback with the AirPods Max has always been the price. At $549, the headphones rank among the most expensive sets we've reviewed. But if you're willing to give up some features, namely the tools that can only be used with Apple devices, you can save a significant sum without sacrificing too much performance.\n\nCurrently being tested for review.\n\nAt $200, the Space 2 Pro will cost you less than half of a pair of the AirPods Max 2. And yes, you will need to make some sacrifices to save that much dough. First and foremost, you'll give up the deep integration with iOS and Apple devices that the AirPods Max offers. You'll also have to forego the premium design for something that's still refined, but also decidedly plastic. If neither of those are dealbreakers, then there's plenty to like about the Space 2 Pro.\n\nThis most is Anker's first Soundcore headphones with its Thus AI chip inside. The component is responsible for active noise cancellation (ANC), voice quality (on both calls and for voice controls) and HearID customized sound. The ANC setup, which also utilizes eight sensors, does a decent job with human voices and constant noise sources. Voice quality is great, thanks in part to that chip and a six-microphone configuration, but you will notice some slight degradation when the system kicks in to block background noise. And the stock tuning offers crisp highs and deep low-end tone right out of the box.\n\nThe benefit of all that plastic is the Space 2 Pro is very light, so it's comfortable to wear for extended periods of time. These headphones also have intuitive physical controls that are reliable and easy to use instead of touch panels for swipes and taps. Multipoint Bluetooth and 30 hours of battery life (ANC on) are also on the spec sheet.\n\nAmazon\n\n$359 is still a big chunk of change, but in the case of the second-gen QuietComfort Headphones, you're paying for Bose's noise-blocking prowess. The overall sound quality here is nice too, though the company's own Ultra model does better. On these \"regular\" QC headphones, you get Cinema Mode and Immersive Audio, the latter of which is the company's take on spatial sound. The QuietComfort Headphones are no slouch, and you'll be plenty pleased with the performance after saving nearly $200 over the AirPods Max 2.\n\nAmazon\n\nRead our full review here.\n\nAt this point, you've likely seen someone wearing the AirPods Max 2 during a workout. Those headphones aren't a great choice for sweaty activities since the ear pads are made of \"a breathable mesh textile.\" Beats headphones haven't been engineered to withstand sweat either, but they were also popular among gym goers and athletes. With the Beats 360 though, Apple finally has a set of fitness headphones in its lineup with IPX4 sweat resistance.\n\nSince Beats is owned by Apple, you get a lot of the AirPods Max benefits here. Those include one-touch pairing, automatic switching between Apple devices on your iCloud account, Audio Sharing with compatible earbuds/headphones, Find My compatibility and hands-free access to Siri. The Beats 360 lasts for up to 12 hours longer than the AirPods Max 2 (ANC enabled) and there's the ability to swap out both the ear and headband cushions. Plus, Beats' affinity for bass will help keep your energy up during a workout, but it's not as overbearing as was on the company's early models.\n\nAmazon\n\nIf you want a good set of headphones for under $100, you have to make a lot of sacrifices. However, sound quality, battery life and comfort don't have to be on that list. With Audio-Technica's M20xBT, you get a classic design and the company's warm, inviting sound quality. 60-hour battery life is excellent and the headphones are lightweight and very comfy. What you won't find here is ANC, but basics like multipoint Bluetooth and optional wired use are still available.\n\nAmazon\n\nWhen the comparison device is $549, a $299 set is significantly more affordable. In this case, that's the price of the Fender Mix: a set of noise-cancelling headphones that debuted just before CES. The new line of audio devices comes from Fender Audio, a collaboration of the Fender Corporation (of guitar fame) and Riffsound. The result is a cleverly designed set of headphones with a stored lossless Bluetooth dongle and replaceable battery. There's also a crisp, detailed quality to the sound that I really enjoyed. Plus, the company now has an app for settings changes, a key element that was missing during my review.\n\nThe five-way joystick controls are pleasant to use and 52 hours of battery life with ANC enabled is a big perk. Speaking of noise cancellation, the performance is respectable here, though it's not on the level of Bose and some others. Still, it's enough to block mild-to-moderate distractions.\n\nAmazon\n\nSkullcandy Crusher 1080: Haptic bass is the main draw here, but the ANC performance and overall audio quality don't overcome the bulky, dated design.\n\nJBL Live 780NC: This model is comfortable to wear with lots of features and solid active noise cancellation, but the overall sound quality is underwhelming and call quality isn't great either.\n\nSony WH-1000XM4C: This is still a solid set of headphones six years later, but Sony's reboot doesn't offer enough to justify the $300 price tag.\n\nSony WH-1000XM6: The best headphones you can buy right now will only save you $99 over the AirPods Max 2. That's not nothing, but it's also not enough in our book to name it an affordable alternative.\n\nBose QuietComfort Ultra Headphones (2nd gen): This is the best ANC performance you'll find, but at $449, these headphones don't fit the description of an affordable alternative either.\n\nSennheiser HDB 630: I really like the sound quality on these headphones, especially with the lossless audio capabilities. But at $500, these don't offer much savings over the AirPods Max 2.\n\nSennheiser Momentum 5: Sennheiser's well-rounded over-ear headphones are no slouch. The main issue that kept them off of this list is the $400 price.\n\nSonos Ace: Sonos' original headphones are now just $350 following the debut of the Ace Ultra. But unless you also have a Sonos soundbar, these aren't a very compelling alternative for everyday use.\n\nWhen Engadget compiles buyer's guides like these, we initially draw on our decades of product review expertise. Throughout each year, we review well over 100 new devices, which gives us a solid foundation for selecting the best products that fit any given criteria. For this guide specifically, I was able to revisit recently reviewed devices as a refresher, re-familiarize myself with the products on my initial short list and make the best selections based on the affordable alternatives criteria. I write almost all of the headphone reviews at Engadget, and edit those I don't write, so I have a deep knowledge of this particular category.\n\nWe may update our selections as needed, after new products are announced and reviewed.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2275580/affordable-alternatives-to-apples-airpods-max/",
-      "publishedAt": "2026-10-02T15:30:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple"
       ]
     },
     {
@@ -5146,21 +5183,6 @@
         "ia-accesibilidad",
         "braille",
         "sordoceguera"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-203d6ffee6f7660f:en",
-      "sourceId": "ars-technica-203d6ffee6f7660f",
-      "lang": "en",
-      "title": "Hacks of 2 federal agencies in a month have spilled a bonanza of sensitive data",
-      "summary": "It has been a bad month for federal government cybersecurity.",
-      "body": "The Pentagon is informing more than 2 million current and former military members that their personnel records storing sensitive personal information were stolen over a monthslong compromise of one of its networks. The breach is the second one in recent months to expose sensitive government information.\n\nThe records, according to one notification letter posted to Reddit, included Social Security numbers, names, addresses, sex, race, and occupational specialty. This last category could be particularly valuable to foreign adversaries because it could help their intelligence agencies in identifying high-value military personnel. Starting last October, hackers gained access to a system operated by the Defense Manpower Data Center , which collates Department of Defense personnel records. The Pentagon says that the breach compromised the records of 2.8 million living individuals.\n\nThe incident is the second time a major network breach in recent months has exposed sensitive US government personnel records that criminal groups or foreign adversaries could use. Last month, the ransomware group ShinyHunters claimed it hacked into FBI systems and stole records of thousands of the agency’s current or former employees. Reuters reported the job titles in the records included ones related to investigating China or Russia.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/security/2026/10/hacks-of-2-federal-agencies-in-a-month-have-spilled-a-bonanza-of-sensitive-data/",
-      "publishedAt": "2026-10-01T20:28:45.000Z",
-      "categories": [
-        "tecnologia-general"
       ]
     },
     {

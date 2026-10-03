@@ -376,28 +376,11 @@
   function organizeGeneralSettingsMenus() {
     if (!els.settingsPanel || els.settingsPanel.dataset.organized === 'true') return;
     els.settingsPanel.dataset.organized = 'true';
-    const fieldsets = [...els.settingsPanel.querySelectorAll(':scope > fieldset')];
-    const audio = fieldsets[0];
-    const visual = fieldsets[1];
-    const voices = els.settingsPanel.querySelector('#reading-external-voices');
 
-    function createButtonPanel(node, label, id) {
-      if (!node) return;
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.id = `${id}-button`;
-      button.textContent = label;
-      button.setAttribute('aria-expanded', 'false');
-      button.setAttribute('aria-controls', id);
-
-      const panel = document.createElement('section');
-      panel.id = id;
-      panel.hidden = true;
-      panel.setAttribute('aria-labelledby', button.id);
-
-      node.before(button, panel);
-      panel.append(node);
-
+    function wireToggle(buttonId, panelId) {
+      const button = document.getElementById(buttonId);
+      const panel = document.getElementById(panelId);
+      if (!button || !panel) return;
       button.addEventListener('click', () => {
         const opening = panel.hidden;
         panel.hidden = !opening;
@@ -409,11 +392,12 @@
       });
     }
 
-    createButtonPanel(audio, language() === 'en' ? 'Audio and voice' : 'Audio y voz', 'reading-audio-settings');
-    createButtonPanel(visual, language() === 'en' ? 'Visual presentation' : 'Presentación visual', 'reading-visual-settings');
-    createButtonPanel(voices, language() === 'en' ? 'Find more voices' : 'Buscar más voces', 'reading-more-voices-settings');
+    wireToggle('reading-audio-settings-button', 'reading-audio-settings');
+    wireToggle('reading-visual-settings-button', 'reading-visual-settings');
+    wireToggle('reading-more-voices-settings-button', 'reading-more-voices-settings');
 
-    if (audio) {
+    const audio = document.querySelector('#reading-audio-settings fieldset');
+    if (audio && !document.getElementById('reading-screen-reader-mode')) {
       const mode = document.createElement('input');
       mode.type = 'checkbox';
       mode.id = 'reading-screen-reader-mode';

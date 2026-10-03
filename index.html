@@ -458,7 +458,7 @@
   </section>
 </main>
 
-<div class="site-footer">
+<div class="site-footer" id="site-footer">
   <div class="wrap">
     <p id="footer-text">TifloAcosta App · Versión 2.1.</p>
     <p><a id="footer-privacy-link" href="privacidad/">Política de privacidad</a></p>
@@ -470,7 +470,7 @@
 <script src="app-core.js?v=1.6"></script>
 <script src="actualidad-core.js?v=1.0"></script>
 <script src="shared-web.js?v=1.0"></script>
-<script src="web-reading.js?v=1.0"></script>
+<script src="web-reading.js?v=1.1"></script>
 <script src="app.js?v=2.2"></script>
 <script>
 (() => {
@@ -488,10 +488,11 @@
   const hero = document.getElementById('home-hero');
   const menu = document.getElementById('home-blocks');
   const main = document.getElementById('main');
+  const footer = document.getElementById('site-footer');
 
   const labels = {
-    es: { sections:'Secciones', actualidad:'Actualidad', resources:'Recursos', reading:'Leer con TifloAcosta', news:'Novedades', videos:'Vídeos', podcast:'Podcast', book:'Mi libro', contact:'Contacto y redes', privacy:'Privacidad y accesibilidad', privacyPolicy:'Política de privacidad', fullPrivacy:'Leer la política de privacidad completa', config:'Configuración', back:'Volver al inicio' },
-    en: { sections:'Sections', actualidad:'News', resources:'Resources', reading:'Read with TifloAcosta', news:'What’s new', videos:'Videos', podcast:'Podcast', book:'My book', contact:'Contact and social', privacy:'Privacy and accessibility', privacyPolicy:'Privacy policy', fullPrivacy:'Read the full privacy policy', config:'Settings', back:'Back to home' }
+    es: { sections:'Secciones', actualidad:'Actualidad', resources:'Recursos', reading:'TifloLector', news:'Novedades', videos:'Vídeos', podcast:'Podcast', book:'Mi libro', contact:'Contacto y redes', privacy:'Privacidad y accesibilidad', privacyPolicy:'Política de privacidad', fullPrivacy:'Leer la política de privacidad completa', config:'Configuración', back:'Volver al inicio' },
+    en: { sections:'Sections', actualidad:'News', resources:'Resources', reading:'TifloReader', news:'What’s new', videos:'Videos', podcast:'Podcast', book:'My book', contact:'Contact and social', privacy:'Privacy and accessibility', privacyPolicy:'Privacy policy', fullPrivacy:'Read the full privacy policy', config:'Settings', back:'Back to home' }
   };
 
   function localizeHomeNavigation() {
@@ -520,6 +521,7 @@
     const onHome = !target;
     hero.hidden = !onHome;
     menu.hidden = !onHome;
+    if (footer) footer.hidden = !onHome;
     Object.values(views).forEach(section => { section.hidden = section !== target; });
     if (target) target.focus();
     else if (key === 'home') main.focus();

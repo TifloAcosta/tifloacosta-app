@@ -170,15 +170,6 @@
       <p id="reading-mark-status" class="muted" role="status" aria-live="polite"></p>
     </section>
 
-    <nav class="reading-section-menu" aria-label="Ir a una sección de TifloLector">
-      <button type="button" data-reading-jump="reading-audio-settings">Audio y voz</button>
-      <button type="button" data-reading-jump="reading-visual-settings">Presentación visual</button>
-      <button type="button" data-reading-jump="reading-more-voices-settings">Buscar más voces</button>
-      <button type="button" data-reading-jump="reading-library-web">Mi biblioteca</button>
-      <button type="button" data-reading-jump="reading-queue-web">Cola de lectura</button>
-      <button type="button" data-reading-jump="reading-marks-web">Marcadores</button>
-    </nav>
-
     <section id="reading-settings-web" class="panel" aria-labelledby="reading-settings-heading">
       <h3 id="reading-settings-heading" tabindex="-1">Ajustes de lectura</h3>
 
@@ -481,70 +472,10 @@
 <script src="medical-studies.js?v=1.0"></script>
 <script src="app-core.js?v=1.6"></script>
 <script src="actualidad-core.js?v=1.0"></script>
-<script>
-(() => {
-  'use strict';
-
-  const select = document.getElementById('reading-voice');
-  const status = document.getElementById('reading-voice-status');
-  if (!select) return;
-
-  function loadNativeVoices() {
-    const voices = typeof window.speechSynthesis?.getVoices === 'function'
-      ? Array.from(window.speechSynthesis.getVoices() || [])
-      : [];
-
-    const current = select.value;
-    select.replaceChildren();
-
-    const base = document.createElement('option');
-    base.value = '';
-    base.textContent = 'Voz predeterminada del navegador';
-    select.append(base);
-
-    for (const voice of voices) {
-      const option = document.createElement('option');
-      option.value = String(voice.voiceURI || voice.name || '');
-      option.textContent = voice.lang
-        ? String(voice.name || voice.voiceURI) + ' — ' + String(voice.lang)
-        : String(voice.name || voice.voiceURI);
-      select.append(option);
-    }
-
-    if ([...select.options].some(option => option.value === current)) {
-      select.value = current;
-    }
-
-    if (status) {
-      status.textContent = voices.length
-        ? voices.length + (voices.length === 1 ? ' voz disponible en el navegador.' : ' voces disponibles en el navegador.')
-        : 'El navegador todavía no ha proporcionado su lista de voces.';
-    }
-  }
-
-  loadNativeVoices();
-  window.speechSynthesis?.addEventListener?.('voiceschanged', loadNativeVoices);
-  [200, 600, 1500, 3000, 6000].forEach(delay => window.setTimeout(loadNativeVoices, delay));
-})();
-</script>
-<script>
-(() => {
-  document.addEventListener('click', event => {
-    const button = event.target.closest?.('[data-reading-jump]');
-    if (!button) return;
-    const target = document.getElementById(button.dataset.readingJump);
-    if (!target) return;
-    target.scrollIntoView({ block: 'start' });
-    const heading = target.querySelector('legend, h3, h4, [tabindex="-1"]') || target;
-    if (!heading.hasAttribute('tabindex')) heading.setAttribute('tabindex', '-1');
-    heading.focus({ preventScroll: true });
-  });
-})();
-</script>
 <script type="module">
-  import * as shared from './shared/web-entry.mjs?v=1.1';
+  import * as shared from './shared/web-entry.mjs?v=1.2';
   window.TIFLO_SHARED = shared;
-  await import('./web-reading.js?v=1.8');
+  await import('./web-reading.js?v=2.0');
 </script>
 <script src="app.js?v=2.2"></script>
 <script>

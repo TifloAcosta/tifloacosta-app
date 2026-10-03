@@ -361,9 +361,44 @@
   function renderCategories(){ const c=copy[lang]; els.category.innerHTML=''; const p=document.createElement('option'); p.value='';p.textContent=c.categoryPlaceholder;els.category.append(p);categories().forEach(cat=>{const o=document.createElement('option');o.value=cat;o.textContent=cat;els.category.append(o);}); }
   function showResults(items,message,emptyMessage){ els.results.innerHTML='';els.results.hidden=false;els.resultStatus.textContent=message;if(!items.length){const p=document.createElement('p');p.className='no-results';p.textContent=emptyMessage;els.results.append(p);return;}items.forEach(item=>els.results.append(makeCard(item))); }
   function clearResourceResults(){els.results.innerHTML='';els.results.hidden=true;els.resultStatus.textContent='';els.category.value='';}
-  function showCategory(cat){const c=copy[lang];if(!cat){clearResourceResults();return;}const items=shared?.selectResources
-  ? shared.selectResources(data,{lang,category:cat})
-  : resourcesForLanguage().filter(item=>item.category===cat);showResults(items,c.categoryFound(cat,items.length),c.noResults);}
+  function resourceYear(item){const explicit=Number(item?.year);if(Number.isInteger(explicit)&&explicit>1900)return explicit;const match=String(item?.title||'').match(/\b(20\d{2})\b/);return match?Number(match[1]):null;}
+  function showPillsYears(items){
+    els.results.innerHTML='';
+    els.results.hidden=false;
+    const years=[...new Set(items.map(resourceYear).filter(Boolean))].sort((a,b)=>b-a);
+    const heading=document.createElement('h3');
+    heading.textContent=lang==='en'?'Years':'Años';
+    els.results.append(heading);
+    const actions=document.createElement('div');
+    actions.className='resource-actions';
+    years.forEach(year=>{
+      const button=document.createElement('button');
+      button.type='button';
+      button.textContent=String(year);
+      button.addEventListener('click',()=>{
+        const yearItems=items.filter(item=>resourceYear(item)===year);
+        const message=lang==='en'
+          ? year+'. '+yearItems.length+' item'+(yearItems.length===1?'':'s')+'.'
+          : year+'. '+yearItems.length+' edición'+(yearItems.length===1?'':'es')+'.';
+        showResults(yearItems,message,copy[lang].noResults);
+        queueMicrotask(()=>els.results.querySelector('h3')?.focus?.());
+      });
+      actions.append(button);
+    });
+    els.results.append(actions);
+    els.resultStatus.textContent=lang==='en'
+      ? years.length+' year'+(years.length===1?'':'s')+' available.'
+      : years.length+' año'+(years.length===1?'':'s')+' disponible'+(years.length===1?'':'s')+'.';
+  }
+  function showCategory(cat){
+    const c=copy[lang];
+    if(!cat){clearResourceResults();return;}
+    const items=shared?.selectResources
+      ? shared.selectResources(data,{lang,category:cat})
+      : resourcesForLanguage().filter(item=>item.category===cat);
+    if((lang==='es'&&cat==='Píldoras')||(lang==='en'&&cat==='Pills')){showPillsYears(items);return;}
+    showResults(items,c.categoryFound(cat,items.length),c.noResults);
+  }
 
   function option(select,value,label){const o=document.createElement('option');o.value=value;o.textContent=label;select.append(o);}
 

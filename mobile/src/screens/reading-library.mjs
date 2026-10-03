@@ -4,7 +4,7 @@ import { renderReadingQueue } from './reading-queue.mjs';
 import { addScreenHeader, clearScreen } from './shared.mjs';
 
 const PAGE_SIZE = 10;
-const FORMATS = ['txt', 'html', 'pdf', 'epub', 'docx', 'daisy2.02', 'daisy3', 'audio'];
+const FORMATS = ['txt', 'html', 'pdf', 'epub', 'docx', 'pptx', 'xlsx', 'daisy2.02', 'daisy3', 'audio'];
 
 function format(template, values = {}) {
   return Object.entries(values).reduce(
@@ -171,8 +171,8 @@ export function renderReadingLibrary({
   const importFormats = document.createElement('p');
   importFormats.className = 'muted';
   importFormats.textContent = document.documentElement.lang === 'en'
-    ? 'Supports Word (DOCX), EPUB, PDF, TXT, HTML, DAISY and audio.'
-    : 'Admite Word (DOCX), EPUB, PDF, TXT, HTML, DAISY y audio.';
+    ? 'Supports Word (DOCX), PowerPoint (PPTX), Excel (XLSX), EPUB, PDF, TXT, HTML, DAISY and audio.'
+    : 'Admite Word (DOCX), PowerPoint (PPTX), Excel (XLSX), EPUB, PDF, TXT, HTML, DAISY y audio.';
   importSection.append(importButton, importFormats, liveStatus);
 
   const audioChoiceHost = document.createElement('section');

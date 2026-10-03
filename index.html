@@ -180,8 +180,8 @@
     <section id="reading-settings-web" class="panel" hidden aria-labelledby="reading-settings-heading">
       <h3 id="reading-settings-heading" tabindex="-1">Ajustes de lectura</h3>
 
-      <button id="reading-audio-settings-button" type="button" aria-expanded="false" aria-controls="reading-audio-settings" onclick="var p=document.getElementById('reading-audio-settings');var o=p.hidden;p.hidden=!o;this.setAttribute('aria-expanded',String(o));">Audio y voz</button>
-      <section id="reading-audio-settings" hidden aria-labelledby="reading-audio-settings-button">
+      <h4 id="reading-audio-settings-heading">Audio y voz</h4>
+      <section id="reading-audio-settings" aria-labelledby="reading-audio-settings-heading">
         <fieldset>
           <legend>Voz y reproducción TTS</legend>
           <label id="reading-voice-label" for="reading-voice">Voz</label>
@@ -204,8 +204,8 @@
         </fieldset>
       </section>
 
-      <button id="reading-visual-settings-button" type="button" aria-expanded="false" aria-controls="reading-visual-settings" onclick="var p=document.getElementById('reading-visual-settings');var o=p.hidden;p.hidden=!o;this.setAttribute('aria-expanded',String(o));">Presentación visual</button>
-      <section id="reading-visual-settings" hidden aria-labelledby="reading-visual-settings-button">
+      <h4 id="reading-visual-settings-heading">Presentación visual</h4>
+      <section id="reading-visual-settings" aria-labelledby="reading-visual-settings-heading">
         <fieldset>
           <legend>Presentación visual</legend>
 
@@ -270,8 +270,8 @@
         </fieldset>
       </section>
 
-      <button id="reading-more-voices-settings-button" type="button" aria-expanded="false" aria-controls="reading-more-voices-settings" onclick="var p=document.getElementById('reading-more-voices-settings');var o=p.hidden;p.hidden=!o;this.setAttribute('aria-expanded',String(o));">Buscar más voces</button>
-      <section id="reading-more-voices-settings" hidden aria-labelledby="reading-more-voices-settings-button">
+      <h4 id="reading-more-voices-settings-heading">Buscar más voces</h4>
+      <section id="reading-more-voices-settings" aria-labelledby="reading-more-voices-settings-heading">
         <section id="reading-external-voices" aria-labelledby="reading-external-voices-heading">
           <h4 id="reading-external-voices-heading">Conseguir más voces</h4>
           <p id="reading-external-voices-intro">Consulta proveedores externos para probar, comprar o crear voces distintas de las que ya ofrece el navegador. La compatibilidad depende de cada servicio y plataforma.</p>
@@ -480,7 +480,7 @@
 <script src="app-core.js?v=1.6"></script>
 <script src="actualidad-core.js?v=1.0"></script>
 <script src="shared-web.js?v=1.0"></script>
-<script src="web-reading.js?v=1.3"></script>
+<script src="web-reading.js?v=1.4"></script>
 <script src="app.js?v=2.2"></script>
 <script>
 (() => {

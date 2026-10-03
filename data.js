@@ -2,7 +2,7 @@ window.TIFLO_RESOURCES = [
   {
     "id": "es-pildoras-22-2026",
     "lang": "es",
-    "category": "Noticias",
+    "category": "Píldoras tecnológicas",
     "title": "Píldoras 22 2026",
     "url": "https://tifloacosta.com/docs/es/pildoras-tecnologicas-22-2026.html",
     "openUrl": "https://tifloacosta.com/docs/es/pildoras-tecnologicas-22-2026.html",
@@ -11,7 +11,7 @@ window.TIFLO_RESOURCES = [
   {
     "id": "en-tech-pills-22-2026",
     "lang": "en",
-    "category": "News",
+    "category": "Technology Pills",
     "title": "Tech Pills 22 2026",
     "url": "https://tifloacosta.com/docs/en/technology-pills-22-2026.html",
     "openUrl": "https://tifloacosta.com/docs/en/technology-pills-22-2026.html",
@@ -1055,7 +1055,7 @@ window.TIFLO_RESOURCES = [
   {
     "id": "es-1Yk652avn7fcQtfNV28nu0VIkqpcZiRos",
     "lang": "es",
-    "category": "Noticias",
+    "category": "Píldoras tecnológicas",
     "title": "Píldoras 21 2026",
     "url": "https://tifloacosta.com/docs/es/reader-1Yk652avn7fcQtfNV28nu0VIkqpcZiRos.html",
     "openUrl": "https://tifloacosta.com/docs/es/reader-1Yk652avn7fcQtfNV28nu0VIkqpcZiRos.html",
@@ -1064,7 +1064,7 @@ window.TIFLO_RESOURCES = [
   {
     "id": "en-1ztd-nsQcYPNa3-Ij40CxlNIGkuEPtX-T",
     "lang": "en",
-    "category": "News",
+    "category": "Technology Pills",
     "title": "Tech Pills 21 2026",
     "url": "https://tifloacosta.com/docs/en/reader-1ztd-nsQcYPNa3-Ij40CxlNIGkuEPtX-T.html",
     "openUrl": "https://tifloacosta.com/docs/en/reader-1ztd-nsQcYPNa3-Ij40CxlNIGkuEPtX-T.html",

@@ -202,6 +202,31 @@ test('GET /search is public to the app origin and does not require OAuth session
   assert.equal(data.nextPageToken, 'NEXT_TOKEN');
 });
 
+
+
+test('GET /search allows the Android Capacitor origin without enabling authenticated actions', async () => {
+  const response = await handleRequest(new Request(
+    'https://youtube-auth.tifloacosta.com/search?q=TalkBack',
+    { headers: { Origin: 'https://localhost' } }
+  ), env, { fetchImpl: mockFetch() });
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get('Access-Control-Allow-Origin'), 'https://localhost');
+  assert.notEqual(response.headers.get('Access-Control-Allow-Credentials'), 'true');
+
+  const cookie = await authCookie();
+  const protectedAction = await handleRequest(new Request(
+    'https://youtube-auth.tifloacosta.com/subscribe',
+    {
+      method: 'POST',
+      headers: {
+        Origin: 'https://localhost',
+        Cookie: cookie,
+        'X-CSRF-Token': 'csrf-token'
+      }
+    }
+  ), env, { fetchImpl: mockFetch() });
+  assert.equal(protectedAction.status, 403);
+});
 test('GET /search rejects browser origins other than TifloAcosta', async () => {
   const response = await handleRequest(new Request(
     'https://youtube-auth.tifloacosta.com/search?q=VoiceOver',

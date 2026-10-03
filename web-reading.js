@@ -664,18 +664,31 @@
     const selected = els.voice.value || stored.voice || '';
     const voices = typeof shared.listWebTtsVoices === 'function' ? shared.listWebTtsVoices() : [];
     els.voice.replaceChildren();
+
     const base = document.createElement('option');
     base.value = '';
     base.textContent = t().defaultVoice;
     els.voice.append(base);
+
     for (const voice of voices) {
       const option = document.createElement('option');
       option.value = voice.id;
       option.textContent = voice.locale ? `${voice.name} — ${voice.locale}` : voice.name;
       els.voice.append(option);
     }
+
     if ([...els.voice.options].some(option => option.value === selected)) els.voice.value = selected;
-    if (!voices.length) els.status.textContent = els.status.textContent || t().voicesUnavailable;
+
+    if (!voices.length) {
+      const waiting = document.createElement('option');
+      waiting.value = '__loading__';
+      waiting.disabled = true;
+      waiting.textContent = language() === 'en'
+        ? 'Waiting for browser voices…'
+        : 'Esperando las voces del navegador…';
+      els.voice.append(waiting);
+    }
+
     populatePerDocumentVoices();
   }
 
@@ -1751,6 +1764,9 @@
   document.getElementById('lang-es')?.addEventListener('click', () => setTimeout(localize, 0));
   document.getElementById('lang-en')?.addEventListener('click', () => setTimeout(localize, 0));
   globalThis.speechSynthesis?.addEventListener?.('voiceschanged', populateVoices);
+  [150, 500, 1200, 2500].forEach(delay => {
+    globalThis.setTimeout?.(populateVoices, delay);
+  });
 
   els.save.disabled = true;
   els.bookmark.disabled = true;

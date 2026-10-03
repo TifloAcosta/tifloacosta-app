@@ -33,6 +33,22 @@
     rateLabel: $('#reading-rate-label'),
     rate: $('#reading-rate'),
     rateValue: $('#reading-rate-value'),
+    settingsToggle: $('#reading-settings-toggle'),
+    settingsPanel: $('#reading-settings-web'),
+    settingsHeading: $('#reading-settings-heading'),
+    settingsStatus: $('#reading-settings-status'),
+    libraryToggle: $('#reading-library-toggle'),
+    queueMenuToggle: $('#reading-queue-menu-toggle'),
+    marksMenuToggle: $('#reading-marks-menu-toggle'),
+    audioSpeed: $('#reading-audio-speed'),
+    textSize: $('#reading-text-size'),
+    fontFamily: $('#reading-font-family'),
+    fontWeight: $('#reading-font-weight'),
+    lineSpacing: $('#reading-line-spacing'),
+    paragraphSpacing: $('#reading-paragraph-spacing'),
+    readingWidth: $('#reading-width'),
+    readingTheme: $('#reading-theme'),
+    highContrast: $('#reading-high-contrast'),
     searchForm: $('#reading-search-form'),
     searchLabel: $('#reading-search-label'),
     search: $('#reading-search'),
@@ -76,7 +92,7 @@
 
   const copy = {
     es: {
-      heading: 'Leer con TifloAcosta',
+      heading: 'TifloLector',
       intro: 'Abre TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 o una imagen, o pega un texto, para leerlo con navegación accesible y las voces disponibles en tu navegador.',
       file: 'Abrir documento o imagen'
       paste: 'O pega aquí el texto',
@@ -174,7 +190,7 @@
       translationShowingOriginal: 'Mostrando el original.'
     },
     en: {
-      heading: 'Read with TifloAcosta',
+      heading: 'TifloReader',
       intro: 'Open TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 or an image, or paste text, to read it with accessible navigation and the voices available in your browser.',
       file: 'Open document or image'
       paste: 'Or paste text here',
@@ -318,6 +334,86 @@
     return copy[language()];
   }
 
+  const WEB_READING_SETTINGS_KEY = 'tifloWebReadingSettingsV1';
+
+  function readWebSettings() {
+    try {
+      const raw = localStorage.getItem(WEB_READING_SETTINGS_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch { return {}; }
+  }
+
+  function saveWebSettings() {
+    const value = {
+      voice: els.voice?.value || '',
+      rate: Number(els.rate?.value || 1),
+      audioSpeed: Number(els.audioSpeed?.value || 1),
+      textSize: Number(els.textSize?.value || 1),
+      fontFamily: els.fontFamily?.value || 'system',
+      fontWeight: els.fontWeight?.value || 'normal',
+      lineSpacing: Number(els.lineSpacing?.value || 1.5),
+      paragraphSpacing: Number(els.paragraphSpacing?.value || 1),
+      readingWidth: Number(els.readingWidth?.value || 72),
+      theme: els.readingTheme?.value || 'system',
+      highContrast: Boolean(els.highContrast?.checked)
+    };
+    try { localStorage.setItem(WEB_READING_SETTINGS_KEY, JSON.stringify(value)); } catch {}
+    applyWebSettings(value);
+    if (els.settingsStatus) {
+      els.settingsStatus.textContent = language() === 'en' ? 'Reading settings saved.' : 'Ajustes de lectura guardados.';
+    }
+  }
+
+  function applyWebSettings(value = readWebSettings()) {
+    if (!els.reader) return;
+    const size = Math.max(.75, Math.min(2, Number(value.textSize || 1)));
+    const line = Math.max(1, Math.min(2.5, Number(value.lineSpacing || 1.5)));
+    const paragraph = Math.max(0, Math.min(3, Number(value.paragraphSpacing || 1)));
+    const width = Math.max(30, Math.min(100, Number(value.readingWidth || 72)));
+    const familyMap = {
+      system: 'inherit',
+      'sans-serif': 'Arial, sans-serif',
+      serif: 'Georgia, serif',
+      monospace: 'ui-monospace, SFMono-Regular, Consolas, monospace'
+    };
+    els.reader.style.setProperty('--reading-text-size', String(size));
+    els.reader.style.setProperty('--reading-line-spacing', String(line));
+    els.reader.style.setProperty('--reading-paragraph-spacing', String(paragraph));
+    els.reader.style.setProperty('--reading-width', width + 'ch');
+    els.reader.style.setProperty('--reading-font-family', familyMap[value.fontFamily] || 'inherit');
+    els.reader.style.setProperty('--reading-font-weight', value.fontWeight === 'bold' ? '700' : value.fontWeight === 'medium' ? '600' : '400');
+    els.reader.dataset.readingTheme = value.theme || 'system';
+    els.reader.dataset.highContrast = value.highContrast ? 'true' : 'false';
+  }
+
+  function restoreWebSettings() {
+    const value = readWebSettings();
+    if (els.rate && value.rate) els.rate.value = String(value.rate);
+    if (els.rateValue) {
+      els.rateValue.value = els.rate.value;
+      els.rateValue.textContent = els.rate.value;
+    }
+    if (els.audioSpeed && value.audioSpeed) els.audioSpeed.value = String(value.audioSpeed);
+    if (els.textSize && value.textSize) els.textSize.value = String(value.textSize);
+    if (els.fontFamily && value.fontFamily) els.fontFamily.value = value.fontFamily;
+    if (els.fontWeight && value.fontWeight) els.fontWeight.value = value.fontWeight;
+    if (els.lineSpacing && value.lineSpacing) els.lineSpacing.value = String(value.lineSpacing);
+    if (els.paragraphSpacing && value.paragraphSpacing !== undefined) els.paragraphSpacing.value = String(value.paragraphSpacing);
+    if (els.readingWidth && value.readingWidth) els.readingWidth.value = String(value.readingWidth);
+    if (els.readingTheme && value.theme) els.readingTheme.value = value.theme;
+    if (els.highContrast) els.highContrast.checked = Boolean(value.highContrast);
+    applyWebSettings(value);
+    return value;
+  }
+
+  function togglePanel(button, panel, heading) {
+    if (!button || !panel) return;
+    const opening = panel.hidden;
+    panel.hidden = !opening;
+    button.setAttribute('aria-expanded', String(opening));
+    if (opening) queueMicrotask(() => heading?.focus?.());
+  }
+
   function localize() {
     const c = t();
     els.heading.textContent = c.heading;
@@ -363,7 +459,8 @@
   }
 
   function populateVoices() {
-    const selected = els.voice.value;
+    const stored = readWebSettings();
+    const selected = els.voice.value || stored.voice || '';
     const voices = typeof shared.listWebTtsVoices === 'function' ? shared.listWebTtsVoices() : [];
     els.voice.replaceChildren();
     const base = document.createElement('option');
@@ -1349,12 +1446,19 @@
   els.next.addEventListener('click', () => move(1));
   els.play.addEventListener('click', () => { void play(); });
   els.pause.addEventListener('click', () => { void pause(); });
-  els.voice.addEventListener('change', () => { void rebuildSpeech(); });
+  els.voice.addEventListener('change', () => { saveWebSettings(); void rebuildSpeech(); });
   els.rate.addEventListener('input', () => {
     els.rateValue.value = els.rate.value;
     els.rateValue.textContent = els.rate.value;
   });
-  els.rate.addEventListener('change', () => { void rebuildSpeech(); });
+  els.rate.addEventListener('change', () => { saveWebSettings(); void rebuildSpeech(); });
+  els.settingsToggle?.addEventListener('click', () => togglePanel(els.settingsToggle, els.settingsPanel, els.settingsHeading));
+  els.libraryToggle?.addEventListener('click', () => togglePanel(els.libraryToggle, document.getElementById('reading-library-web'), els.libraryHeading));
+  els.queueMenuToggle?.addEventListener('click', () => togglePanel(els.queueMenuToggle, document.getElementById('reading-queue-web'), els.queueHeading));
+  els.marksMenuToggle?.addEventListener('click', () => togglePanel(els.marksMenuToggle, document.getElementById('reading-marks-web'), els.marksHeading));
+  for (const control of [els.audioSpeed, els.textSize, els.fontFamily, els.fontWeight, els.lineSpacing, els.paragraphSpacing, els.readingWidth, els.readingTheme, els.highContrast]) {
+    control?.addEventListener('change', saveWebSettings);
+  }
   els.searchForm.addEventListener('submit', runSearch);
   els.translationPrepare.addEventListener('click', () => { void prepareTranslationPair(); });
   els.translationStart.addEventListener('click', () => { void runTranslation(); });
@@ -1400,5 +1504,6 @@
   els.save.disabled = true;
   els.bookmark.disabled = true;
   els.queueToggle.disabled = true;
+  restoreWebSettings();
   localize();
 })();

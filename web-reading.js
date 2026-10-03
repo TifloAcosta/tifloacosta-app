@@ -313,6 +313,7 @@
   let navigationUnit = 'block';
   let sentenceCursor = 0;
   let sentenceUnits = [];
+  let currentUnitIndex = 0;
   const translationMemory = new Map();
 
   const speechAdapter = typeof shared.createWebReadingSpeechAdapter === 'function'
@@ -335,6 +336,22 @@
     return document.documentElement.lang === 'en' ? 'en' : 'es';
   }
 
+  function ensureSentenceMetadata() {
+    if (!Array.isArray(documentModel?.blocks)) return;
+    const segmenter = typeof Intl?.Segmenter === 'function'
+      ? new Intl.Segmenter(language(), { granularity:'sentence' })
+      : null;
+    documentModel.blocks = documentModel.blocks.map(block => {
+      if (Array.isArray(block?.sentences) && block.sentences.length) return block;
+      const text = String(block?.text || '').trim();
+      if (!text) return block;
+      const sentences = segmenter
+        ? [...segmenter.segment(text)].map(item => String(item.segment || '').trim()).filter(Boolean)
+        : text.split(/(?<=[.!?…])\s+/u).map(value => value.trim()).filter(Boolean);
+      return { ...block, sentences: sentences.length ? sentences : [text] };
+    });
+  }
+
   function buildSentenceUnits() {
     sentenceUnits = [];
     const blocks = Array.isArray(documentModel?.blocks) ? documentModel.blocks : [];
@@ -344,14 +361,8 @@
     blocks.forEach((block, blockIndex) => {
       const text = String(block?.text || '').trim();
       if (!text) return;
-      const sentences = segmenter
-        ? [...segmenter.segment(text)].map(item => String(item.segment || '').trim()).filter(Boolean)
-        : text.split(/(?<=[.!?…])\s+/u).map(value => value.trim()).filter(Boolean);
-      if (!sentences.length) {
-        sentenceUnits.push({ blockIndex, sentenceIndex:0, text });
-        return;
-      }
-      sentences.forEach((sentence, sentenceIndex) => sentenceUnits.push({ blockIndex, sentenceIndex, text:sentence }));
+      const sentences = Array.isArray(block?.sentences) && block.sentences.length ? block.sentences : [text];
+      sentences.forEach((sentence, sentenceIndex) => sentenceUnits.push({ blockIndex, sentenceIndex, text:String(sentence || '').trim() }));
     });
     const currentBlock = Number(readingSession?.snapshot?.().blockIndex || 0);
     const found = sentenceUnits.findIndex(item => item.blockIndex >= currentBlock);
@@ -544,6 +555,183 @@
     return copy[language()];
   }
 
+  function organizeGeneralSettingsMenus() {
+    if (!els.settingsPanel || els.settingsPanel.dataset.organized === 'true') return;
+    els.settingsPanel.dataset.organized = 'true';
+    const fieldsets = [...els.settingsPanel.querySelectorAll(':scope > fieldset')];
+    const audio = fieldsets[0];
+    const visual = fieldsets[1];
+    const voices = els.settingsPanel.querySelector('#reading-external-voices');
+
+    function collapse(node, label, id) {
+      if (!node) return;
+      const details = document.createElement('details');
+      details.id = id;
+      const summary = document.createElement('summary');
+      summary.textContent = label;
+      node.before(details);
+      details.append(summary, node);
+    }
+
+    collapse(audio, language() === 'en' ? 'Audio and voice' : 'Audio y voz', 'reading-audio-settings');
+    collapse(visual, language() === 'en' ? 'Visual presentation' : 'Presentación visual', 'reading-visual-settings');
+    collapse(voices, language() === 'en' ? 'Find more voices' : 'Buscar más voces', 'reading-more-voices-settings');
+
+    if (audio) {
+      const mode = document.createElement('input');
+      mode.type = 'checkbox';
+      mode.id = 'reading-screen-reader-mode';
+      mode.checked = true;
+      const modeLabel = document.createElement('label');
+      modeLabel.htmlFor = mode.id;
+      modeLabel.textContent = language() === 'en'
+        ? 'Screen reader mode: do not start speech automatically when a document opens'
+        : 'Modo lector de pantalla: no iniciar la lectura automáticamente al abrir un documento';
+
+      const auto = document.createElement('input');
+      auto.type = 'checkbox';
+      auto.id = 'reading-auto-play';
+      const autoLabel = document.createElement('label');
+      autoLabel.htmlFor = auto.id;
+      autoLabel.textContent = language() === 'en'
+        ? 'Start TTS automatically when a document opens'
+        : 'Iniciar automáticamente la lectura TTS al abrir un documento';
+
+      const modeRow = document.createElement('div');
+      const autoRow = document.createElement('div');
+      modeRow.append(mode, modeLabel);
+      autoRow.append(auto, autoLabel);
+      const legend = audio.querySelector('legend');
+      if (legend) legend.after(modeRow, autoRow);
+      else audio.prepend(modeRow, autoRow);
+
+      els.screenReaderMode = mode;
+      els.autoPlay = auto;
+      const stored = readWebSettings();
+      mode.checked = stored.screenReaderMode !== false;
+      auto.checked = stored.autoPlay === true;
+      mode.addEventListener('change', () => {
+        if (mode.checked) auto.checked = false;
+        saveWebSettings();
+      });
+      auto.addEventListener('change', () => {
+        if (auto.checked) mode.checked = false;
+        saveWebSettings();
+      });
+    }
+  }
+
+  function ensurePerDocumentControls() {
+    if (!els.reader || document.getElementById('reading-document-controls')) return;
+    const mainControls = els.reader.querySelector('.resource-actions[aria-label="Controles de lectura"]');
+    if (!mainControls) return;
+
+    const section = document.createElement('section');
+    section.id = 'reading-document-controls';
+    const heading = document.createElement('h4');
+    heading.textContent = language() === 'en' ? 'Controls for this document' : 'Controles de este documento';
+
+    const unitLabel = document.createElement('label');
+    unitLabel.htmlFor = 'reading-navigation-unit';
+    unitLabel.textContent = language() === 'en' ? 'Move forward and back by' : 'Avanzar y retroceder por';
+    const unit = document.createElement('select');
+    unit.id = 'reading-navigation-unit';
+    for (const [value, es, en] of [
+      ['block','Bloque','Block'],
+      ['paragraph','Párrafo','Paragraph'],
+      ['sentence','Frase','Sentence']
+    ]) {
+      const option = document.createElement('option');
+      option.value = value;
+      option.textContent = language() === 'en' ? en : es;
+      unit.append(option);
+    }
+
+    const voiceLabel = document.createElement('label');
+    voiceLabel.htmlFor = 'reading-document-voice';
+    voiceLabel.textContent = language() === 'en' ? 'Voice for this document' : 'Voz para este documento';
+    const voice = document.createElement('select');
+    voice.id = 'reading-document-voice';
+
+    const rateLabel = document.createElement('label');
+    rateLabel.htmlFor = 'reading-document-rate';
+    rateLabel.textContent = language() === 'en' ? 'Speed for this document' : 'Velocidad para este documento';
+    const rate = document.createElement('input');
+    rate.type = 'range';
+    rate.id = 'reading-document-rate';
+    rate.min = '0.5';
+    rate.max = '2';
+    rate.step = '0.1';
+    rate.value = String(Number(els.rate?.value || 1));
+    const rateOut = document.createElement('output');
+    rateOut.id = 'reading-document-rate-value';
+    rateOut.value = rate.value;
+    rateOut.textContent = rate.value;
+
+    const actions = document.createElement('div');
+    actions.className = 'resource-actions';
+    const mark = document.createElement('button');
+    mark.type = 'button';
+    mark.textContent = language() === 'en' ? 'Add bookmark' : 'Añadir marca';
+    const reset = document.createElement('button');
+    reset.type = 'button';
+    reset.textContent = language() === 'en' ? 'Use general settings' : 'Usar ajustes generales';
+    actions.append(mark, reset);
+
+    section.append(heading, unitLabel, unit, voiceLabel, voice, rateLabel, rate, rateOut, actions);
+    mainControls.after(section);
+
+    els.navigationUnit = unit;
+    els.documentVoice = voice;
+    els.documentRate = rate;
+    els.documentRateValue = rateOut;
+
+    unit.addEventListener('change', () => {
+      navigationUnit = unit.value || 'block';
+      buildSentenceUnits();
+    });
+    voice.addEventListener('change', () => {
+      documentVoiceOverride = voice.value;
+      void rebuildSpeech({ blockIndex: readingSession?.snapshot?.().blockIndex || 0, unitIndex: currentUnitIndex });
+    });
+    rate.addEventListener('input', () => {
+      rateOut.value = rate.value;
+      rateOut.textContent = rate.value;
+    });
+    rate.addEventListener('change', () => {
+      documentRateOverride = Number(rate.value) || null;
+      void rebuildSpeech({ blockIndex: readingSession?.snapshot?.().blockIndex || 0, unitIndex: currentUnitIndex });
+    });
+    mark.addEventListener('click', () => { void addBookmark(); });
+    reset.addEventListener('click', () => {
+      documentVoiceOverride = '';
+      documentRateOverride = null;
+      voice.value = '';
+      rate.value = String(Number(els.rate?.value || 1));
+      rateOut.value = rate.value;
+      rateOut.textContent = rate.value;
+      void rebuildSpeech({ blockIndex: readingSession?.snapshot?.().blockIndex || 0, unitIndex: currentUnitIndex });
+    });
+  }
+
+  function populatePerDocumentVoices() {
+    if (!els.documentVoice) return;
+    const selected = documentVoiceOverride;
+    els.documentVoice.replaceChildren();
+    const inherit = document.createElement('option');
+    inherit.value = '';
+    inherit.textContent = language() === 'en' ? 'Use general voice' : 'Usar voz general';
+    els.documentVoice.append(inherit);
+    const voices = typeof shared.listWebTtsVoices === 'function' ? shared.listWebTtsVoices() : [];
+    for (const item of voices) {
+      const option = document.createElement('option');
+      option.value = item.id;
+      option.textContent = item.locale ? `${item.name} — ${item.locale}` : item.name;
+      els.documentVoice.append(option);
+    }
+    if ([...els.documentVoice.options].some(option => option.value === selected)) els.documentVoice.value = selected;
+  }
+
   const WEB_READING_SETTINGS_KEY = 'tifloWebReadingSettingsV1';
 
   function readWebSettings() {
@@ -687,7 +875,7 @@
     }
     if ([...els.voice.options].some(option => option.value === selected)) els.voice.value = selected;
     if (!voices.length) els.status.textContent = els.status.textContent || t().voicesUnavailable;
-    populateDocumentVoices();
+    populatePerDocumentVoices();
   }
 
 
@@ -757,7 +945,15 @@
     }
     const snapshot = readingSession.snapshot();
     const total = Array.isArray(documentModel.blocks) ? documentModel.blocks.length : 0;
-    els.position.textContent = t().position(Math.min(total, snapshot.blockIndex + 1), total);
+    if (navigationUnit === 'sentence') {
+      const block = documentModel.blocks[snapshot.blockIndex];
+      const count = Array.isArray(block?.sentences) ? block.sentences.length : 1;
+      els.position.textContent = language() === 'en'
+        ? `Block ${Math.min(total, snapshot.blockIndex + 1)} of ${total}. Sentence ${Math.min(count, currentUnitIndex + 1)} of ${count}.`
+        : `Bloque ${Math.min(total, snapshot.blockIndex + 1)} de ${total}. Frase ${Math.min(count, currentUnitIndex + 1)} de ${count}.`;
+    } else {
+      els.position.textContent = t().position(Math.min(total, snapshot.blockIndex + 1), total);
+    }
     els.previous.disabled = snapshot.blockIndex <= 0;
     els.next.disabled = snapshot.blockIndex >= Math.max(0, total - 1);
   }
@@ -780,6 +976,7 @@
       onPositionChange(value) {
         const blockIndex = Number(value?.blockIndex);
         if (!Number.isFinite(blockIndex) || !documentModel?.blocks?.length) return;
+        currentUnitIndex = Number(value?.unitIndex) || 0;
         readingSession = shared.createReadingSession({
           blocks: documentModel.blocks,
           initialIndex: blockIndex
@@ -801,7 +998,8 @@
       return;
     }
     documentModel = model;
-    originalDocumentModel = model;
+    ensureSentenceMetadata();
+    originalDocumentModel = documentModel;
     translationDocument = null;
     translationJob = null;
     translationPrepared = false;
@@ -831,6 +1029,10 @@
     populateDocumentVoices();
     navigationUnit = els.navigationUnit?.value || 'block';
     buildSentenceUnits();
+    currentUnitIndex = 0;
+    ensurePerDocumentControls();
+    populatePerDocumentVoices();
+    buildSentenceUnits();
     renderBlock();
     await rebuildSpeech({ blockIndex: Number(initialIndex) || 0, unitIndex: 0 });
     const playbackPrefs = readWebSettings();
@@ -838,6 +1040,8 @@
     await refreshCurrentQueueState();
     await renderMarks();
     await prepareTranslationUi();
+    const playbackPrefs = readWebSettings();
+    if (playbackPrefs.autoPlay === true && playbackPrefs.screenReaderMode === false) await play();
     queueMicrotask(() => els.title.focus());
   }
 
@@ -1602,12 +1806,43 @@
   }
 
   function move(direction) {
-    if (!readingSession) return;
-    if (direction < 0) readingSession.previous();
+    if (!readingSession || !documentModel?.blocks?.length) return;
+    if (navigationUnit === 'sentence') {
+      buildSentenceUnits();
+      const currentBlock = Number(readingSession.snapshot().blockIndex) || 0;
+      let current = sentenceUnits.findIndex(item => item.blockIndex === currentBlock && item.sentenceIndex === currentUnitIndex);
+      if (current < 0) current = sentenceUnits.findIndex(item => item.blockIndex >= currentBlock);
+      if (current < 0) current = 0;
+      sentenceCursor = Math.max(0, Math.min(sentenceUnits.length - 1, current + (direction < 0 ? -1 : 1)));
+      const target = sentenceUnits[sentenceCursor];
+      if (!target) return;
+      currentUnitIndex = target.sentenceIndex;
+      readingSession = shared.createReadingSession({ blocks: documentModel.blocks, initialIndex: target.blockIndex });
+      renderBlock();
+      void persistProgress({ unitIndex: currentUnitIndex });
+      void speechController?.moveTo?.({ blockIndex: target.blockIndex, unitIndex: currentUnitIndex });
+      queueMicrotask(() => els.block.focus());
+      return;
+    }
+
+    currentUnitIndex = 0;
+    if (navigationUnit === 'paragraph') {
+      let index = Number(readingSession.snapshot().blockIndex) || 0;
+      const step = direction < 0 ? -1 : 1;
+      for (index += step; index >= 0 && index < documentModel.blocks.length; index += step) {
+        const type = String(documentModel.blocks[index]?.type || '');
+        if (type === 'paragraph' || type === 'table-cell' || type === 'list-item') {
+          readingSession = shared.createReadingSession({ blocks:documentModel.blocks, initialIndex:index });
+          break;
+        }
+      }
+    } else if (direction < 0) readingSession.previous();
     else readingSession.next();
+
     renderBlock();
-    void persistProgress();
-    void rebuildSpeech();
+    const target = readingSession.snapshot().blockIndex;
+    void persistProgress({ unitIndex: 0 });
+    void speechController?.moveTo?.({ blockIndex: target, unitIndex: 0 });
     queueMicrotask(() => els.block.focus());
   }
 
@@ -1723,7 +1958,8 @@
   els.save.disabled = true;
   els.bookmark.disabled = true;
   els.queueToggle.disabled = true;
-  ensureReadingSettingsStructure();
+  organizeGeneralSettingsMenus();
+  organizeGeneralSettingsMenus();
   restoreWebSettings();
   localize();
 })();

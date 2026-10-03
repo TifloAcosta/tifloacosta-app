@@ -94,7 +94,7 @@
     es: {
       heading: 'TifloLector',
       intro: 'Abre TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 o una imagen, o pega un texto, para leerlo con navegación accesible y las voces disponibles en tu navegador.',
-      file: 'Abrir documento o imagen'
+      file: 'Abrir documento o imagen',
       paste: 'O pega aquí el texto',
       prepare: 'Preparar lectura',
       empty: 'Selecciona un archivo o pega algún texto antes de preparar la lectura.',
@@ -192,7 +192,7 @@
     en: {
       heading: 'TifloReader',
       intro: 'Open TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 or an image, or paste text, to read it with accessible navigation and the voices available in your browser.',
-      file: 'Open document or image'
+      file: 'Open document or image',
       paste: 'Or paste text here',
       prepare: 'Prepare reading',
       empty: 'Select a file or paste some text before preparing the reading.',

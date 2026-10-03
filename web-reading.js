@@ -26,7 +26,7 @@
     pause: $('#reading-pause'),
     voiceLabel: $('#reading-voice-label'),
     voice: $('#reading-voice'),
-    externalVoicesHeading: $('#reading-external-voices-heading'),
+    externalVoicesHeading: $('#reading-more-voices-settings-heading'),
     externalVoicesIntro: $('#reading-external-voices-intro'),
     externalVoicesList: $('#reading-external-voices-list'),
     externalVoicesStatus: $('#reading-external-voices-status'),
@@ -34,13 +34,9 @@
     rateLabel: $('#reading-rate-label'),
     rate: $('#reading-rate'),
     rateValue: $('#reading-rate-value'),
-    settingsToggle: $('#reading-settings-toggle'),
     settingsPanel: $('#reading-settings-web'),
     settingsHeading: $('#reading-settings-heading'),
     settingsStatus: $('#reading-settings-status'),
-    libraryToggle: $('#reading-library-toggle'),
-    queueMenuToggle: $('#reading-queue-menu-toggle'),
-    marksMenuToggle: $('#reading-marks-menu-toggle'),
     audioSpeed: $('#reading-audio-speed'),
     textSize: $('#reading-text-size'),
     fontFamily: $('#reading-font-family'),
@@ -608,14 +604,6 @@
     return value;
   }
 
-  function togglePanel(button, panel, heading) {
-    if (!button || !panel) return;
-    const opening = panel.hidden;
-    panel.hidden = !opening;
-    button.setAttribute('aria-expanded', String(opening));
-    if (opening) queueMicrotask(() => heading?.focus?.());
-  }
-
   function localize() {
     const c = t();
     els.heading.textContent = c.heading;
@@ -836,18 +824,13 @@
     els.status.textContent = t().ready;
     els.searchResults.replaceChildren();
     els.searchStatus.textContent = '';
-    ensureDocumentControls();
-    populateDocumentVoices();
     navigationUnit = els.navigationUnit?.value || 'block';
-    buildSentenceUnits();
     currentUnitIndex = 0;
     ensurePerDocumentControls();
     populatePerDocumentVoices();
     buildSentenceUnits();
     renderBlock();
     await rebuildSpeech({ blockIndex: Number(initialIndex) || 0, unitIndex: 0 });
-    const playbackPrefs = readWebSettings();
-    if (playbackPrefs.autoPlay === true && playbackPrefs.screenReaderMode === false) await play();
     await refreshCurrentQueueState();
     await renderMarks();
     await prepareTranslationUi();

@@ -16,14 +16,15 @@ test('search offers an explicit way to clear the previous query and returns focu
   assert.match(searchSource, /results\.replaceChildren\(\)/);
 });
 
-test('library follows the agreed search-first structure and does not expose the complete catalog by default', () => {
-  assert.match(librarySource, /library-search-input/);
+test('library follows the agreed category-only structure and does not expose the complete catalog by default', () => {
   assert.match(librarySource, /library-category-filter/);
-  assert.match(librarySource, /library-platform-filter/);
-  assert.match(librarySource, /newestResources\(allItems, \{ lang, limit:3 \}\)/);
+  assert.match(librarySource, /resourceCategories\(allItems, lang\)/);
+  assert.match(librarySource, /selectResources\(allItems, \{ lang, category \}\)/);
   assert.match(librarySource, /list\.hidden = true/);
-  assert.match(librarySource, /selectResources\(allItems/);
-  assert.match(librarySource, /favorites\.addEventListener/);
+  assert.doesNotMatch(librarySource, /library-search-input/);
+  assert.doesNotMatch(librarySource, /library-platform-filter/);
+  assert.doesNotMatch(librarySource, /newestResources\(allItems/);
+  assert.doesNotMatch(librarySource, /favorites\.addEventListener/);
 });
 
 test('library platform matching works even when the source category is topical instead of an operating system', () => {

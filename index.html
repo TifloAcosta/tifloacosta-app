@@ -170,6 +170,15 @@
       <p id="reading-mark-status" class="muted" role="status" aria-live="polite"></p>
     </section>
 
+    <nav class="reading-section-menu" aria-label="Ir a una sección de TifloLector">
+      <a class="button-link" href="#reading-audio-settings">Audio y voz</a>
+      <a class="button-link" href="#reading-visual-settings">Presentación visual</a>
+      <a class="button-link" href="#reading-more-voices-settings">Buscar más voces</a>
+      <a class="button-link" href="#reading-library-web">Mi biblioteca</a>
+      <a class="button-link" href="#reading-queue-web">Cola de lectura</a>
+      <a class="button-link" href="#reading-marks-web">Marcadores</a>
+    </nav>
+
     <section id="reading-settings-web" class="panel" aria-labelledby="reading-settings-heading">
       <h3 id="reading-settings-heading" tabindex="-1">Ajustes de lectura</h3>
 
@@ -177,7 +186,9 @@
         <fieldset>
           <legend id="reading-audio-settings-heading">Audio y voz</legend>
           <label id="reading-voice-label" for="reading-voice">Voz</label>
-          <select id="reading-voice"></select>
+          <select id="reading-voice">
+            <option value="">Voz predeterminada del navegador</option>
+          </select>
 
           <label id="reading-rate-label" for="reading-rate">Velocidad</label>
           <input id="reading-rate" type="range" min="0.5" max="2" step="0.1" value="1">
@@ -469,7 +480,11 @@
 <script src="medical-studies.js?v=1.0"></script>
 <script src="app-core.js?v=1.6"></script>
 <script src="actualidad-core.js?v=1.0"></script>
-<script src="shared-web.js?v=1.1"></script>
+<script type="module">
+  import * as shared from './shared/web-entry.mjs?v=1.1';
+  window.TIFLO_SHARED = shared;
+  await import('./web-reading.js?v=1.7');
+</script>
 <script src="app.js?v=2.2"></script>
 <script>
 (() => {

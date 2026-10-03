@@ -171,12 +171,12 @@
     </section>
 
     <nav class="reading-section-menu" aria-label="Ir a una sección de TifloLector">
-      <a class="button-link" href="#reading-audio-settings">Audio y voz</a>
-      <a class="button-link" href="#reading-visual-settings">Presentación visual</a>
-      <a class="button-link" href="#reading-more-voices-settings">Buscar más voces</a>
-      <a class="button-link" href="#reading-library-web">Mi biblioteca</a>
-      <a class="button-link" href="#reading-queue-web">Cola de lectura</a>
-      <a class="button-link" href="#reading-marks-web">Marcadores</a>
+      <button type="button" data-reading-jump="reading-audio-settings">Audio y voz</button>
+      <button type="button" data-reading-jump="reading-visual-settings">Presentación visual</button>
+      <button type="button" data-reading-jump="reading-more-voices-settings">Buscar más voces</button>
+      <button type="button" data-reading-jump="reading-library-web">Mi biblioteca</button>
+      <button type="button" data-reading-jump="reading-queue-web">Cola de lectura</button>
+      <button type="button" data-reading-jump="reading-marks-web">Marcadores</button>
     </nav>
 
     <section id="reading-settings-web" class="panel" aria-labelledby="reading-settings-heading">
@@ -525,6 +525,20 @@
   loadNativeVoices();
   window.speechSynthesis?.addEventListener?.('voiceschanged', loadNativeVoices);
   [200, 600, 1500, 3000, 6000].forEach(delay => window.setTimeout(loadNativeVoices, delay));
+})();
+</script>
+<script>
+(() => {
+  document.addEventListener('click', event => {
+    const button = event.target.closest?.('[data-reading-jump]');
+    if (!button) return;
+    const target = document.getElementById(button.dataset.readingJump);
+    if (!target) return;
+    target.scrollIntoView({ block: 'start' });
+    const heading = target.querySelector('legend, h3, h4, [tabindex="-1"]') || target;
+    if (!heading.hasAttribute('tabindex')) heading.setAttribute('tabindex', '-1');
+    heading.focus({ preventScroll: true });
+  });
 })();
 </script>
 <script type="module">

@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-29-pildoras';
+const CACHE = 'tifloacosta-app-v2-28-youtube-accessible';
 const NAVIGATION_TIMEOUT_MS = 5000;
 const SHELL = [
   './',

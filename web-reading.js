@@ -377,25 +377,6 @@
     if (!els.settingsPanel || els.settingsPanel.dataset.organized === 'true') return;
     els.settingsPanel.dataset.organized = 'true';
 
-    function wireToggle(buttonId, panelId) {
-      const button = document.getElementById(buttonId);
-      const panel = document.getElementById(panelId);
-      if (!button || !panel) return;
-      button.addEventListener('click', () => {
-        const opening = panel.hidden;
-        panel.hidden = !opening;
-        button.setAttribute('aria-expanded', String(opening));
-        if (opening) {
-          const firstFocusable = panel.querySelector('input, select, button, a[href], textarea, [tabindex]:not([tabindex="-1"])');
-          queueMicrotask(() => firstFocusable?.focus?.());
-        }
-      });
-    }
-
-    wireToggle('reading-audio-settings-button', 'reading-audio-settings');
-    wireToggle('reading-visual-settings-button', 'reading-visual-settings');
-    wireToggle('reading-more-voices-settings-button', 'reading-more-voices-settings');
-
     const audio = document.querySelector('#reading-audio-settings fieldset');
     if (audio && !document.getElementById('reading-screen-reader-mode')) {
       const mode = document.createElement('input');

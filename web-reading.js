@@ -30,6 +30,7 @@
     externalVoicesIntro: $('#reading-external-voices-intro'),
     externalVoicesList: $('#reading-external-voices-list'),
     externalVoicesStatus: $('#reading-external-voices-status'),
+    voiceStatus: $('#reading-voice-status'),
     rateLabel: $('#reading-rate-label'),
     rate: $('#reading-rate'),
     rateValue: $('#reading-rate-value'),
@@ -679,14 +680,10 @@
 
     if ([...els.voice.options].some(option => option.value === selected)) els.voice.value = selected;
 
-    if (!voices.length) {
-      const waiting = document.createElement('option');
-      waiting.value = '__loading__';
-      waiting.disabled = true;
-      waiting.textContent = language() === 'en'
-        ? 'Waiting for browser voices…'
-        : 'Esperando las voces del navegador…';
-      els.voice.append(waiting);
+    if (els.voiceStatus) {
+      els.voiceStatus.textContent = voices.length
+        ? (language() === 'en' ? `${voices.length} browser voices available.` : `${voices.length} voces disponibles en el navegador.`)
+        : (language() === 'en' ? 'Waiting for browser voices…' : 'Esperando las voces del navegador…');
     }
 
     populatePerDocumentVoices();

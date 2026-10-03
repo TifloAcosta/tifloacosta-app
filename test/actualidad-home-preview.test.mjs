@@ -4,13 +4,17 @@ import test from 'node:test';
 
 const read = file => readFile(new URL(`../${file}`, import.meta.url), 'utf8');
 
-test('Actualidad is the first content block after the home hero', async () => {
+test('global search is promoted on home while Actualidad remains a separate home block', async () => {
   const html = await read('index.html');
-  const actualidad = html.indexOf('id="actualidad-home-section"');
+  const hero = html.indexOf('id="home-hero"');
   const search = html.indexOf('id="search-heading"');
+  const launcher = html.indexOf('id="home-blocks"');
+  const actualidad = html.indexOf('id="actualidad-home-section"');
   const resourceNews = html.indexOf('id="news-heading"');
-  assert.ok(actualidad > 0);
-  assert.ok(search > actualidad);
+  assert.ok(hero >= 0);
+  assert.ok(search > hero);
+  assert.ok(launcher > search);
+  assert.ok(actualidad > launcher);
   assert.ok(resourceNews > actualidad);
 });
 

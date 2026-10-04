@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-35-jaws-stable-playback';
+const CACHE = 'tifloacosta-app-v2-36-continuous-web-tts';
 const NAVIGATION_TIMEOUT_MS = 5000;
 // Resource catalog is refreshed from the network.
 const SHELL = [
@@ -16,7 +16,7 @@ const SHELL = [
   './actualidad-core.js?v=1.6',
   './actualidad.js?v=1.3',
   './actualidad-media.js?v=1.1',
-  './web-reading.js?v=3.1',
+  './web-reading.js?v=3.2',
   './podcast.html',
   './podcast.js?v=1.0',
   './app.js?v=2.2',
@@ -131,8 +131,8 @@ self.addEventListener('fetch', event => {
 
 
   if (isAppOrigin && url.pathname.endsWith('/web-reading.js')) {
-    url.searchParams.set('v', '3.1');
-    event.respondWith(freshScript(url, './web-reading.js?v=3.1', request));
+    url.searchParams.set('v', '3.2');
+    event.respondWith(freshScript(url, './web-reading.js?v=3.2', request));
     return;
   }
 

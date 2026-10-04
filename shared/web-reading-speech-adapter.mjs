@@ -95,12 +95,29 @@ export function createWebReadingSpeechAdapter({
     if (!session || !prepared || ended || !units.length || cursor >= units.length) return false;
     if (typeof Utterance !== 'function' || typeof speechSynthesis?.speak !== 'function') return false;
 
-    const item = units[cursor];
     const token = ++serial;
-    const utterance = new Utterance(clean(item?.text));
+    const baseCursor = cursor;
+    const remaining = units.slice(baseCursor);
+    const starts = [];
+    const parts = [];
+    let offset = 0;
+
+    for (const item of remaining) {
+      const text = clean(item?.text);
+      if (!text) continue;
+      starts.push({ offset, item });
+      parts.push(text);
+      offset += text.length + 2;
+    }
+
+    if (!parts.length) return false;
+
+    const utterance = new Utterance(parts.join('. '));
     utterance.rate = Number(session.rate) || 1;
     const voice = resolveVoice(session.voiceId);
     if (voice) utterance.voice = voice;
+
+    let lastReportedCursor = cursor;
 
     utterance.onstart = () => {
       if (token !== serial) return;
@@ -110,21 +127,37 @@ export function createWebReadingSpeechAdapter({
       emitState('ttsState');
       emitState('ttsPosition');
     };
+
+    utterance.onboundary = event => {
+      if (token !== serial) return;
+      const charIndex = Number(event?.charIndex);
+      if (!Number.isFinite(charIndex)) return;
+
+      let relativeIndex = 0;
+      for (let i = 0; i < starts.length; i += 1) {
+        if (starts[i].offset <= charIndex) relativeIndex = i;
+        else break;
+      }
+
+      const nextCursor = Math.min(units.length - 1, baseCursor + relativeIndex);
+      if (nextCursor === lastReportedCursor) return;
+      cursor = nextCursor;
+      lastReportedCursor = nextCursor;
+      emitState('ttsPosition');
+    };
+
     utterance.onend = () => {
       if (token !== serial) return;
       currentUtterance = null;
-      if (cursor + 1 < units.length) {
-        cursor += 1;
-        emitState('ttsPosition');
-        if (playing) speakCurrent();
-        return;
-      }
+      cursor = units.length - 1;
       playing = false;
       paused = false;
       ended = true;
+      emitState('ttsPosition');
       emitState('ttsEnded');
       emitState('ttsState');
     };
+
     utterance.onerror = event => {
       if (token !== serial) return;
       currentUtterance = null;

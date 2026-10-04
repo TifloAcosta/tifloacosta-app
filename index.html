@@ -173,9 +173,10 @@
     <section id="reading-settings-web" class="panel" aria-labelledby="reading-settings-heading">
       <h3 id="reading-settings-heading" tabindex="-1">Ajustes de lectura</h3>
 
-      <section id="reading-audio-settings" aria-labelledby="reading-audio-settings-heading">
+      <button id="reading-audio-settings-toggle" type="button" aria-expanded="false" aria-controls="reading-audio-settings">Audio y voz</button>
+      <section id="reading-audio-settings" hidden aria-labelledby="reading-audio-settings-toggle">
         <fieldset>
-          <legend id="reading-audio-settings-heading">Audio y voz</legend>
+          <legend>Audio y voz</legend>
           <label id="reading-voice-label" for="reading-voice">Voz</label>
           <select id="reading-voice">
             <option value="">Voz predeterminada del navegador</option>
@@ -199,9 +200,10 @@
         </fieldset>
       </section>
 
-      <section id="reading-visual-settings" aria-labelledby="reading-visual-settings-heading">
+      <button id="reading-visual-settings-toggle" type="button" aria-expanded="false" aria-controls="reading-visual-settings">Presentación visual</button>
+      <section id="reading-visual-settings" hidden aria-labelledby="reading-visual-settings-toggle">
         <fieldset>
-          <legend id="reading-visual-settings-heading">Presentación visual</legend>
+          <legend>Presentación visual</legend>
 
           <label for="reading-text-size">Tamaño del texto</label>
           <select id="reading-text-size">
@@ -264,9 +266,9 @@
         </fieldset>
       </section>
 
-      <section id="reading-more-voices-settings" aria-labelledby="reading-more-voices-settings-heading">
-        <h4 id="reading-more-voices-settings-heading">Buscar más voces</h4>
-        <section id="reading-external-voices" aria-labelledby="reading-more-voices-settings-heading">
+      <button id="reading-more-voices-settings-toggle" type="button" aria-expanded="false" aria-controls="reading-more-voices-settings">Buscar más voces</button>
+      <section id="reading-more-voices-settings" hidden aria-labelledby="reading-more-voices-settings-toggle">
+        <section id="reading-external-voices" aria-labelledby="reading-more-voices-settings-toggle">
           <p id="reading-external-voices-intro">Consulta proveedores externos para probar, comprar o crear voces distintas de las que ya ofrece el navegador. La compatibilidad depende de cada servicio y plataforma.</p>
           <div id="reading-external-voices-list" class="resource-list"></div>
           <p id="reading-external-voices-status" class="muted" role="status" aria-live="polite"></p>
@@ -472,10 +474,33 @@
 <script src="medical-studies.js?v=1.0"></script>
 <script src="app-core.js?v=1.6"></script>
 <script src="actualidad-core.js?v=1.0"></script>
+<script>
+(() => {
+  'use strict';
+
+  const pairs = [
+    ['reading-audio-settings-toggle', 'reading-audio-settings'],
+    ['reading-visual-settings-toggle', 'reading-visual-settings'],
+    ['reading-more-voices-settings-toggle', 'reading-more-voices-settings']
+  ];
+
+  for (const [buttonId, panelId] of pairs) {
+    const button = document.getElementById(buttonId);
+    const panel = document.getElementById(panelId);
+    if (!button || !panel) continue;
+
+    button.addEventListener('click', () => {
+      const opening = panel.hidden;
+      panel.hidden = !opening;
+      button.setAttribute('aria-expanded', String(opening));
+    });
+  }
+})();
+</script>
 <script type="module">
   import * as shared from './shared/web-entry.mjs?v=1.2';
   window.TIFLO_SHARED = shared;
-  await import('./web-reading.js?v=2.0');
+  await import('./web-reading.js?v=2.1');
 </script>
 <script src="app.js?v=2.2"></script>
 <script>

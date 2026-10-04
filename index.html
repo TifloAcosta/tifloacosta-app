@@ -172,11 +172,20 @@
 
     <section id="reading-settings-web" class="panel" aria-labelledby="reading-settings-heading">
       <h3 id="reading-settings-heading" tabindex="-1">Ajustes de lectura</h3>
+      <div class="resource-actions" aria-label="Ajustes de TifloLector">
+        <button type="button" data-reading-view="reading-audio-view">Audio y voz</button>
+        <button type="button" data-reading-view="reading-visual-view">Presentación visual</button>
+        <button type="button" data-reading-view="reading-voices-view">Buscar más voces</button>
+      </div>
+      <p id="reading-settings-status" class="muted" role="status" aria-live="polite"></p>
+    </section>
 
-      <button id="reading-audio-settings-toggle" type="button" aria-expanded="false" aria-controls="reading-audio-settings">Audio y voz</button>
-      <section id="reading-audio-settings" hidden aria-labelledby="reading-audio-settings-toggle">
+    <section id="reading-audio-view" class="panel reading-subview" hidden aria-labelledby="reading-audio-view-heading">
+      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
+      <h3 id="reading-audio-view-heading" tabindex="-1">Audio y voz</h3>
+<section id="reading-audio-settings" aria-labelledby="reading-audio-settings-heading">
         <fieldset>
-          <legend>Audio y voz</legend>
+          <legend id="reading-audio-settings-heading">Audio y voz</legend>
           <label id="reading-voice-label" for="reading-voice">Voz</label>
           <select id="reading-voice">
             <option value="">Voz predeterminada del navegador</option>
@@ -198,13 +207,16 @@
             <option value="3">3×</option>
           </select>
         </fieldset>
-        <button id="reading-audio-settings-close" type="button" data-reading-close="reading-audio-settings">Cerrar Audio y voz</button>
       </section>
+      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
+    </section>
 
-      <button id="reading-visual-settings-toggle" type="button" aria-expanded="false" aria-controls="reading-visual-settings">Presentación visual</button>
-      <section id="reading-visual-settings" hidden aria-labelledby="reading-visual-settings-toggle">
+    <section id="reading-visual-view" class="panel reading-subview" hidden aria-labelledby="reading-visual-view-heading">
+      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
+      <h3 id="reading-visual-view-heading" tabindex="-1">Presentación visual</h3>
+<section id="reading-visual-settings" aria-labelledby="reading-visual-settings-heading">
         <fieldset>
-          <legend>Presentación visual</legend>
+          <legend id="reading-visual-settings-heading">Presentación visual</legend>
 
           <label for="reading-text-size">Tamaño del texto</label>
           <select id="reading-text-size">
@@ -265,20 +277,22 @@
             <label for="reading-high-contrast">Alto contraste</label>
           </div>
         </fieldset>
-        <button id="reading-visual-settings-close" type="button" data-reading-close="reading-visual-settings">Cerrar Presentación visual</button>
       </section>
+      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
+    </section>
 
-      <button id="reading-more-voices-settings-toggle" type="button" aria-expanded="false" aria-controls="reading-more-voices-settings">Buscar más voces</button>
-      <section id="reading-more-voices-settings" hidden aria-labelledby="reading-more-voices-settings-toggle">
-        <section id="reading-external-voices" aria-labelledby="reading-more-voices-settings-toggle">
+    <section id="reading-voices-view" class="panel reading-subview" hidden aria-labelledby="reading-voices-view-heading">
+      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
+      <h3 id="reading-voices-view-heading" tabindex="-1">Buscar más voces</h3>
+<section id="reading-more-voices-settings" aria-labelledby="reading-more-voices-settings-heading">
+        <h3 id="reading-more-voices-settings-heading">Buscar más voces</h3>
+        <section id="reading-external-voices" aria-labelledby="reading-more-voices-settings-heading">
           <p id="reading-external-voices-intro">Consulta proveedores externos para probar, comprar o crear voces distintas de las que ya ofrece el navegador. La compatibilidad depende de cada servicio y plataforma.</p>
           <div id="reading-external-voices-list" class="resource-list"></div>
           <p id="reading-external-voices-status" class="muted" role="status" aria-live="polite"></p>
         </section>
-        <button id="reading-more-voices-settings-close" type="button" data-reading-close="reading-more-voices-settings">Cerrar Buscar más voces</button>
       </section>
-
-      <p id="reading-settings-status" class="muted" role="status" aria-live="polite"></p>
+      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
     </section>
 
     <section id="reading-library-web" aria-labelledby="reading-library-heading">
@@ -481,43 +495,53 @@
 (() => {
   'use strict';
 
-  const pairs = [
-    ['reading-audio-settings-toggle', 'reading-audio-settings'],
-    ['reading-visual-settings-toggle', 'reading-visual-settings'],
-    ['reading-more-voices-settings-toggle', 'reading-more-voices-settings']
-  ];
+  const readingSection = document.getElementById('reading-section');
+  const subviews = [...document.querySelectorAll('.reading-subview')];
+  const mainChildren = readingSection
+    ? [...readingSection.children].filter(node => !node.classList?.contains('reading-subview'))
+    : [];
+  let previousHiddenState = new Map();
 
-  for (const [buttonId, panelId] of pairs) {
-    const button = document.getElementById(buttonId);
-    const panel = document.getElementById(panelId);
-    if (!button || !panel) continue;
+  function showSubview(id) {
+    const target = document.getElementById(id);
+    if (!target) return;
 
-    button.addEventListener('click', () => {
-      const opening = panel.hidden;
-      panel.hidden = !opening;
-      button.setAttribute('aria-expanded', String(opening));
+    previousHiddenState = new Map(mainChildren.map(node => [node, node.hidden]));
+    mainChildren.forEach(node => { node.hidden = true; });
+    subviews.forEach(view => { view.hidden = view !== target; });
+    target.hidden = false;
+
+    const heading = target.querySelector('h3[tabindex="-1"]');
+    queueMicrotask(() => heading?.focus());
+  }
+
+  function showReadingMain() {
+    subviews.forEach(view => { view.hidden = true; });
+    mainChildren.forEach(node => {
+      node.hidden = previousHiddenState.has(node) ? previousHiddenState.get(node) : node.hidden;
     });
+    previousHiddenState = new Map();
+
+    const heading = document.getElementById('reading-heading');
+    queueMicrotask(() => heading?.focus());
   }
 
   document.addEventListener('click', event => {
-    const closeButton = event.target.closest?.('[data-reading-close]');
-    if (!closeButton) return;
-
-    const panelId = closeButton.dataset.readingClose;
-    const panel = document.getElementById(panelId);
-    const toggle = document.querySelector('[aria-controls="' + panelId + '"]');
-    if (!panel || !toggle) return;
-
-    panel.hidden = true;
-    toggle.setAttribute('aria-expanded', 'false');
-    toggle.focus();
+    const open = event.target.closest?.('[data-reading-view]');
+    if (open) {
+      showSubview(open.dataset.readingView);
+      return;
+    }
+    if (event.target.closest?.('[data-reading-back]')) {
+      showReadingMain();
+    }
   });
 })();
 </script>
 <script type="module">
   import * as shared from './shared/web-entry.mjs?v=1.2';
   window.TIFLO_SHARED = shared;
-  await import('./web-reading.js?v=2.2');
+  await import('./web-reading.js?v=2.3');
 </script>
 <script src="app.js?v=2.2"></script>
 <script>

@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "test": "node --test test/*.test.mjs"
+    "test": "node --test test/*.test.mjs",
+    "test:actualidad": "node --test test/actualidad-*.test.mjs test/openai-actualidad-client.test.mjs test/featured-news.test.mjs test/news-videos-integration.test.mjs"
   }
 }

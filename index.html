@@ -122,7 +122,7 @@
 
     <section id="reading-reader" class="panel" hidden aria-labelledby="reading-document-title">
       <h3 id="reading-document-title" tabindex="-1">Documento</h3>
-      <p id="reading-position" class="muted" aria-live="polite"></p>
+      <p id="reading-position" class="muted"></p>
       <div id="reading-current-block" class="reading-web-block" tabindex="-1"></div>
 
       <div class="resource-actions" aria-label="Controles de lectura">
@@ -173,9 +173,9 @@
     <section id="reading-settings-web" class="panel" aria-labelledby="reading-settings-heading">
       <h3 id="reading-settings-heading" tabindex="-1">Ajustes de lectura</h3>
       <div class="resource-actions" aria-label="Ajustes de TifloLector">
-        <button type="button" data-reading-view="reading-audio-view">Audio y voz</button>
-        <button type="button" data-reading-view="reading-visual-view">Presentación visual</button>
-        <button type="button" data-reading-view="reading-voices-view">Buscar más voces</button>
+        <button type="button" data-reading-view="reading-audio-view" aria-haspopup="true">Audio y voz</button>
+        <button type="button" data-reading-view="reading-visual-view" aria-haspopup="true">Presentación visual</button>
+        <button type="button" data-reading-view="reading-voices-view" aria-haspopup="true">Buscar más voces</button>
       </div>
       <p id="reading-settings-status" class="muted" role="status" aria-live="polite"></p>
     </section>
@@ -529,19 +529,25 @@
   document.addEventListener('click', event => {
     const open = event.target.closest?.('[data-reading-view]');
     if (open) {
+      event.preventDefault();
+      event.stopPropagation();
       showSubview(open.dataset.readingView);
       return;
     }
-    if (event.target.closest?.('[data-reading-back]')) {
+
+    const back = event.target.closest?.('[data-reading-back]');
+    if (back) {
+      event.preventDefault();
+      event.stopPropagation();
       showReadingMain();
     }
-  });
+  }, true);
 })();
 </script>
 <script type="module">
   import * as shared from './shared/web-entry.mjs?v=1.2';
   window.TIFLO_SHARED = shared;
-  await import('./web-reading.js?v=2.3');
+  await import('./web-reading.js?v=2.4');
 </script>
 <script src="app.js?v=2.2"></script>
 <script>

@@ -113,6 +113,9 @@
       ocrPrivacy: 'El OCR se procesa en este navegador. Los componentes del motor se descargan sólo al activar esta función.',
       failed: 'No se pudo preparar este documento.',
       ready: 'Lectura preparada.',
+      importedReady: 'Documento abierto y guardado en Mi biblioteca. Pulsa Reproducir para comenzar.',
+      importedPlaying: 'Documento abierto y guardado en Mi biblioteca. Reproducción iniciada.',
+      importedNotSaved: 'Documento abierto y listo para leer, pero no se pudo guardar automáticamente en Mi biblioteca.',
       document: 'Documento',
       previous: 'Anterior',
       next: 'Siguiente',
@@ -211,6 +214,9 @@
       ocrPrivacy: 'OCR is processed in this browser. Recognition components are downloaded only when you activate this feature.',
       failed: 'This document could not be prepared.',
       ready: 'Reading prepared.',
+      importedReady: 'Document opened and saved to My library. Press Play to start.',
+      importedPlaying: 'Document opened and saved to My library. Playback started.',
+      importedNotSaved: 'Document opened and ready to read, but it could not be saved automatically to My library.',
       document: 'Document',
       previous: 'Previous',
       next: 'Next',
@@ -788,11 +794,30 @@
     });
   }
 
+  async function autoSaveImportedDocument(title) {
+    if (!libraryAdapter || !currentSource || currentBookId) return false;
+    try {
+      const saved = await libraryAdapter.importDocument({
+        title: String(title || t().document),
+        language: language(),
+        format: currentFormat,
+        content: currentSource
+      });
+      if (!saved?.id) return false;
+      currentBookId = saved.id;
+      currentQueued = false;
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
   async function useDocument(model, title, {
     source = '',
     format = 'txt',
     bookId = '',
-    initialIndex = 0
+    initialIndex = 0,
+    autoSaveImported = false
   } = {}) {
     if (!model || !Array.isArray(model.blocks) || !model.blocks.length) {
       els.status.textContent = t().failed;
@@ -818,12 +843,19 @@
     searchIndex = shared.createReadingSearchIndex(documentModel);
     await searchIndex.build();
     els.title.textContent = String(title || model.title || t().document);
+
+    const autoSaved = autoSaveImported
+      ? await autoSaveImportedDocument(els.title.textContent)
+      : false;
+
     els.reader.hidden = false;
     els.save.disabled = Boolean(currentBookId);
     els.bookmark.disabled = !currentBookId;
     els.queueToggle.disabled = !currentBookId;
     updateQueueToggle();
-    els.status.textContent = t().ready;
+    els.status.textContent = autoSaveImported
+      ? (autoSaved ? t().importedReady : t().importedNotSaved)
+      : t().ready;
     els.searchResults.replaceChildren();
     els.searchStatus.textContent = '';
     navigationUnit = els.navigationUnit?.value || 'block';
@@ -837,8 +869,21 @@
     await renderMarks();
     await prepareTranslationUi();
     const playbackPrefs = readWebSettings();
-    if (playbackPrefs.autoPlay === true && playbackPrefs.screenReaderMode === false) await play();
-    queueMicrotask(() => els.title.focus());
+    const shouldAutoPlay = playbackPrefs.autoPlay === true && playbackPrefs.screenReaderMode === false;
+    if (shouldAutoPlay) {
+      await play();
+      if (autoSaveImported && autoSaved) els.status.textContent = t().importedPlaying;
+    }
+
+    if (autoSaveImported && autoSaved) {
+      await persistProgress();
+      await renderLibrary();
+    }
+
+    queueMicrotask(() => {
+      els.title.scrollIntoView?.({ block: 'start' });
+      els.title.focus();
+    });
   }
 
   let pdfBundlePromise = null;
@@ -999,7 +1044,8 @@
         const prepared = await documentFromFile(file);
         await useDocument(prepared.model, file.name, {
           source: prepared.source,
-          format: prepared.format
+          format: prepared.format,
+          autoSaveImported: true
         });
         return;
       }
@@ -1062,7 +1108,7 @@
         await useDocument(
           shared.parseTextDocument(text, { title:file.name, language:language() }),
           file.name,
-          { source:text, format:(file.name.split('.').pop() || 'image').toLowerCase() }
+          { source:text, format:(file.name.split('.').pop() || 'image').toLowerCase(), autoSaveImported:true }
         );
         return;
       }
@@ -1085,7 +1131,7 @@
       await useDocument(
         shared.parsePdfDocument(payload),
         file.name,
-        { source: JSON.stringify(payload), format: 'pdf' }
+        { source: JSON.stringify(payload), format: 'pdf', autoSaveImported:true }
       );
     } catch {
       els.status.textContent = t().ocrFailed;

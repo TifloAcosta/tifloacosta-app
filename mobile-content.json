@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-04T08:29:42.614Z",
+  "generatedAt": "2026-10-04T14:24:32.932Z",
   "resources": [
     {
       "kind": "resource",
@@ -6112,24 +6112,6 @@
         "android",
         "apps-accesibles",
         "tecnologia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "conticgo-01b913c94c485bdd:es",
-      "sourceId": "conticgo-01b913c94c485bdd",
-      "lang": "es",
-      "title": "Tact es una nueva herramienta utiliza IA para crear cuentos en Braille con ilustraciones táctiles",
-      "summary": "La inteligencia artificial también está comenzando a explorar nuevas formas de crear materiales accesibles. Un ejemplo reciente es Tact, un proyecto que combina inteligencia artificial, Braille e impresión 3D para generar cuentos infantiles acompañados de ilustraciones táctiles. El sistema, presentado por el investigador Iliano Fasolino, permite introducir una idea para una historia, incluso mediante voz, […] La entrada Tact es una nueva herramienta utiliza IA para crear cuentos en Braille con ilustraciones táctiles se publicó primero en Conticgo .",
-      "body": "La inteligencia artificial también está comenzando a explorar nuevas formas de crear materiales accesibles. Un ejemplo reciente es Tact , un proyecto que combina inteligencia artificial, Braille e impresión 3D para generar cuentos infantiles acompañados de ilustraciones táctiles.\n\nEl sistema, presentado por el investigador Iliano Fasolino, permite introducir una idea para una historia, incluso mediante voz, y generar una página preparada para su impresión con texto en Braille e ilustraciones en relieve . El proyecto está pensado principalmente para niños ciegos y con baja visión de aproximadamente 4 a 10 años.\n\nTact es un sistema basado en navegador que permite crear pequeños cuentos táctiles a partir de una idea introducida por el usuario. Esta propuesta puede escribirse o incluso dictarse mediante voz.\n\nA partir de ella, el sistema genera una historia y prepara una página que combina texto en Braille e ilustraciones en relieve .\n\nEl proyecto está pensado principalmente para niños de entre 4 y 10 años y pretende facilitar que familiares, docentes y profesionales puedan crear materiales personalizados sin necesidad de conocimientos especializados en diseño táctil.\n\nUno de los aspectos más interesantes de Tact es que no convierte directamente una imagen convencional en un relieve.\n\nEl sistema utiliza una biblioteca de formas táctiles previamente diseñadas. Según explica su autor, actualmente incluye 93 formas relacionadas con animales, objetos, naturaleza y otros elementos habituales en los cuentos infantiles.\n\nLa inteligencia artificial selecciona las formas necesarias para representar determinadas escenas y las organiza junto al texto.\n\nEste planteamiento es especialmente relevante porque una ilustración diseñada para verse no siempre funciona cuando se explora mediante el tacto. Las formas deben ser sencillas y estar suficientemente separadas para facilitar su identificación.\n\nUna vez generado el contenido, Tact prepara un archivo STL , que puede utilizarse para fabricar la página mediante una impresora 3D.\n\nEl proyecto utiliza como referencia la norma ISO 17049:2013 para las características del Braille.\n\nDe esta manera, el proceso intenta reunir en una misma herramienta varias tareas: crear la historia, convertir el texto a Braille, seleccionar las formas táctiles y preparar el archivo necesario para su fabricación.\n\nActualmente, el sistema permite generar historias en inglés e italiano , por lo que todavía no ofrece generación directa en español.\n\nLa posibilidad de crear cuentos personalizados puede ser especialmente interesante en el ámbito educativo.\n\nUn docente o una familia podría generar una historia adaptada a los intereses de un niño y acompañarla de una representación táctil relacionada con el contenido.\n\nEsto podría contribuir a ampliar la disponibilidad de materiales accesibles, especialmente aquellos que son demasiado específicos o personalizados como para encontrarlos fácilmente en un catálogo de libros adaptados.\n\nAdemás, el proyecto apuesta por tecnologías relativamente accesibles, como una impresora 3D, para facilitar la fabricación de los materiales.\n\nAunque Tact plantea una propuesta interesante, todavía se encuentra en una fase de desarrollo.\n\nEl propio autor señala que es necesario realizar más trabajo y validar el sistema directamente con personas ciegas y con sordoceguera y con las organizaciones que las representan .\n\nEsta validación será fundamental para comprobar que las ilustraciones generadas son realmente fáciles de interpretar mediante el tacto y que el diseño de las páginas resulta adecuado para los usuarios.\n\nPor tanto, Tact no debe considerarse todavía una solución educativa plenamente validada, sino una propuesta de investigación que explora cómo la inteligencia artificial puede facilitar la creación de materiales táctiles.\n\nTact muestra una de las posibles líneas de evolución de la tecnología accesible: utilizar la inteligencia artificial no solo para describir imágenes o reconocer textos, sino también para crear nuevos recursos accesibles desde cero .\n\nLa combinación de IA, Braille e impresión 3D podría facilitar en el futuro la creación de materiales personalizados para personas ciegas y con baja visión.\n\nEl proyecto todavía tiene retos por delante, pero plantea una posibilidad interesante: que crear determinados materiales táctiles personalizados pueda ser mucho más sencillo y accesible para familias, docentes y entidades.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuentes: zenodo.org , tatto.dev .",
-      "sourceName": "Conticgo",
-      "originalUrl": "https://conticgo.net/tact-es-una-nueva-herramienta-utiliza-ia-para-crear-cuentos-en-braille-con-ilustraciones-tactiles/",
-      "publishedAt": "2026-09-24T10:00:22.000Z",
-      "categories": [
-        "tecnologia-accesibilidad",
-        "proyectos-prototipos",
-        "ia-accesibilidad",
-        "braille"
       ]
     }
   ]

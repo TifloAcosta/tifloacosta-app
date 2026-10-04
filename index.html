@@ -500,20 +500,28 @@
   const mainChildren = readingSection
     ? [...readingSection.children].filter(node => !node.classList?.contains('reading-subview'))
     : [];
+  let previousHiddenState = new Map();
 
   function showSubview(id) {
     const target = document.getElementById(id);
     if (!target) return;
+
+    previousHiddenState = new Map(mainChildren.map(node => [node, node.hidden]));
     mainChildren.forEach(node => { node.hidden = true; });
     subviews.forEach(view => { view.hidden = view !== target; });
     target.hidden = false;
+
     const heading = target.querySelector('h3[tabindex="-1"]');
     queueMicrotask(() => heading?.focus());
   }
 
   function showReadingMain() {
     subviews.forEach(view => { view.hidden = true; });
-    mainChildren.forEach(node => { node.hidden = false; });
+    mainChildren.forEach(node => {
+      node.hidden = previousHiddenState.has(node) ? previousHiddenState.get(node) : node.hidden;
+    });
+    previousHiddenState = new Map();
+
     const heading = document.getElementById('reading-heading');
     queueMicrotask(() => heading?.focus());
   }

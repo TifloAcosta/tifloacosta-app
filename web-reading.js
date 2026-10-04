@@ -784,12 +784,17 @@
       onPositionChange(value) {
         const blockIndex = Number(value?.blockIndex);
         if (!Number.isFinite(blockIndex) || !documentModel?.blocks?.length) return;
+
         currentUnitIndex = Number(value?.unitIndex) || 0;
         readingSession = shared.createReadingSession({
           blocks: documentModel.blocks,
           initialIndex: blockIndex
         });
-        renderBlock();
+
+        // While TTS is speaking, keep the accessible DOM stable so
+        // JAWS/NVDA/VoiceOver do not announce surrounding controls.
+        if (value?.playing !== true) renderBlock();
+
         void persistProgress({ unitIndex: value?.unitIndex });
       }
     });

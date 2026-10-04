@@ -91,28 +91,48 @@ export function createWebReadingSpeechAdapter({
     currentUtterance = null;
   }
 
+  const MAX_UTTERANCE_CHARS = 1800;
+
+  function speechChunkFrom(startCursor) {
+    const starts = [];
+    const parts = [];
+    let length = 0;
+    let endCursor = startCursor;
+
+    for (let index = startCursor; index < units.length; index += 1) {
+      const text = clean(units[index]?.text);
+      if (!text) continue;
+
+      const separatorLength = parts.length ? 2 : 0;
+      const projected = length + separatorLength + text.length;
+      if (parts.length && projected > MAX_UTTERANCE_CHARS) break;
+
+      starts.push({ offset: length + separatorLength, unitCursor: index });
+      parts.push(text);
+      length = projected;
+      endCursor = index;
+
+      // Always allow at least one unit, even if a single row is unusually long.
+      if (length >= MAX_UTTERANCE_CHARS) break;
+    }
+
+    return {
+      text: parts.join('. '),
+      starts,
+      endCursor
+    };
+  }
+
   function speakCurrent() {
     if (!session || !prepared || ended || !units.length || cursor >= units.length) return false;
     if (typeof Utterance !== 'function' || typeof speechSynthesis?.speak !== 'function') return false;
 
     const token = ++serial;
     const baseCursor = cursor;
-    const remaining = units.slice(baseCursor);
-    const starts = [];
-    const parts = [];
-    let offset = 0;
+    const chunk = speechChunkFrom(baseCursor);
+    if (!chunk.text) return false;
 
-    for (const item of remaining) {
-      const text = clean(item?.text);
-      if (!text) continue;
-      starts.push({ offset, item });
-      parts.push(text);
-      offset += text.length + 2;
-    }
-
-    if (!parts.length) return false;
-
-    const utterance = new Utterance(parts.join('. '));
+    const utterance = new Utterance(chunk.text);
     utterance.rate = Number(session.rate) || 1;
     const voice = resolveVoice(session.voiceId);
     if (voice) utterance.voice = voice;
@@ -133,13 +153,12 @@ export function createWebReadingSpeechAdapter({
       const charIndex = Number(event?.charIndex);
       if (!Number.isFinite(charIndex)) return;
 
-      let relativeIndex = 0;
-      for (let i = 0; i < starts.length; i += 1) {
-        if (starts[i].offset <= charIndex) relativeIndex = i;
+      let nextCursor = baseCursor;
+      for (const marker of chunk.starts) {
+        if (marker.offset <= charIndex) nextCursor = marker.unitCursor;
         else break;
       }
 
-      const nextCursor = Math.min(units.length - 1, baseCursor + relativeIndex);
       if (nextCursor === lastReportedCursor) return;
       cursor = nextCursor;
       lastReportedCursor = nextCursor;
@@ -149,12 +168,21 @@ export function createWebReadingSpeechAdapter({
     utterance.onend = () => {
       if (token !== serial) return;
       currentUtterance = null;
-      cursor = units.length - 1;
+      cursor = chunk.endCursor;
+
+      if (cursor + 1 < units.length && playing) {
+        cursor += 1;
+        emitState('ttsPosition');
+        speakCurrent();
+        return;
+      }
+
+      cursor = Math.min(cursor, units.length - 1);
       playing = false;
       paused = false;
-      ended = true;
+      ended = cursor >= units.length - 1;
       emitState('ttsPosition');
-      emitState('ttsEnded');
+      if (ended) emitState('ttsEnded');
       emitState('ttsState');
     };
 

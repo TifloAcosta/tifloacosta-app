@@ -770,40 +770,69 @@
   function setAccessiblePlaybackMode(active) {
     if (!els.reader) return;
 
-    const keep = new Set([els.pause, els.title]);
-    const candidates = [...els.reader.querySelectorAll('button, a, input, select, textarea, [tabindex]')]
-      .filter(node => !keep.has(node));
+    const readingSection = document.getElementById('reading-section');
+    const pauseButton = els.pause;
+    const title = els.title;
 
     if (active) {
       if (playbackAccessibilityState) return;
-      playbackAccessibilityState = new Map();
-      for (const node of candidates) {
-        playbackAccessibilityState.set(node, {
-          ariaHidden: node.getAttribute('aria-hidden'),
-          tabIndex: node.getAttribute('tabindex'),
-          disabled: 'disabled' in node ? node.disabled : undefined
-        });
-        node.setAttribute('aria-hidden', 'true');
-        node.setAttribute('tabindex', '-1');
+
+      // Keep focus on one stable control before removing anything else
+      // from the accessibility tree. Hiding the currently focused Play
+      // button can make JAWS relocate its virtual cursor and re-announce
+      // surrounding menus on every document change.
+      if (pauseButton && document.activeElement !== pauseButton) {
+        pauseButton.focus({ preventScroll: true });
       }
+
+      const state = {
+        readerNodes: new Map(),
+        sectionNodes: new Map()
+      };
+
+      // Hide all interactive/structural content inside the reader except
+      // the document title and Pause button.
+      for (const node of [...els.reader.children]) {
+        if (node === title || node.contains?.(pauseButton)) continue;
+        state.readerNodes.set(node, node.getAttribute('aria-hidden'));
+        node.setAttribute('aria-hidden', 'true');
+      }
+
+      // Hide the rest of TifloLector from screen readers while playback
+      // is active, keeping only the reader itself available.
+      if (readingSection) {
+        for (const node of [...readingSection.children]) {
+          if (node === els.reader || node.contains?.(els.reader)) continue;
+          state.sectionNodes.set(node, node.getAttribute('aria-hidden'));
+          node.setAttribute('aria-hidden', 'true');
+        }
+      }
+
+      // Within the controls row, expose only Pause.
+      const controls = pauseButton?.parentElement;
+      if (controls) {
+        for (const node of [...controls.children]) {
+          if (node === pauseButton) continue;
+          state.readerNodes.set(node, node.getAttribute('aria-hidden'));
+          node.setAttribute('aria-hidden', 'true');
+        }
+      }
+
+      playbackAccessibilityState = state;
       els.reader.setAttribute('aria-busy', 'true');
       els.reader.dataset.ttsPlaying = 'true';
       return;
     }
 
-    if (!playbackAccessibilityState) {
-      els.reader.removeAttribute('aria-busy');
-      delete els.reader.dataset.ttsPlaying;
-      return;
+    const state = playbackAccessibilityState;
+    if (state) {
+      for (const [node, ariaHidden] of [...state.readerNodes, ...state.sectionNodes]) {
+        if (!node?.isConnected) continue;
+        if (ariaHidden == null) node.removeAttribute('aria-hidden');
+        else node.setAttribute('aria-hidden', ariaHidden);
+      }
     }
 
-    for (const [node, state] of playbackAccessibilityState.entries()) {
-      if (!node?.isConnected) continue;
-      if (state.ariaHidden == null) node.removeAttribute('aria-hidden');
-      else node.setAttribute('aria-hidden', state.ariaHidden);
-      if (state.tabIndex == null) node.removeAttribute('tabindex');
-      else node.setAttribute('tabindex', state.tabIndex);
-    }
     playbackAccessibilityState = null;
     els.reader.removeAttribute('aria-busy');
     delete els.reader.dataset.ttsPlaying;

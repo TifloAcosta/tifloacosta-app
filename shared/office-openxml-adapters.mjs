@@ -151,12 +151,15 @@ function slideContent(slideXml, { slideNumber, slideCount, language }) {
     if (description) images.push(description);
   }
 
-  const blocks = [{
-    id:`pptx-slide-${slideNumber}`,
-    type:'heading',
-    level:2,
-    text:copy.slide(slideNumber, slideCount, title)
-  }];
+  const blocks = [];
+  if (title) {
+    blocks.push({
+      id:`pptx-slide-${slideNumber}`,
+      type:'heading',
+      level:2,
+      text:title
+    });
+  }
   let index = 0;
   for (const text of body) {
     for (const paragraph of text.split(/\n+/).map(cleanText).filter(Boolean)) {

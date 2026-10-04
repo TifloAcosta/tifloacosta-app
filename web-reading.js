@@ -738,6 +738,8 @@
   }
 
   function renderPosition() {
+    els.position?.removeAttribute?.('aria-live');
+    els.position?.removeAttribute?.('role');
     if (!documentModel || !readingSession) {
       els.position.textContent = '';
       return;

@@ -96,7 +96,8 @@ export function createWebReadingSpeechAdapter({
     if (typeof Utterance !== 'function' || typeof speechSynthesis?.speak !== 'function') return false;
 
     const token = ++serial;
-    const remaining = units.slice(cursor);
+    const baseCursor = cursor;
+    const remaining = units.slice(baseCursor);
     const starts = [];
     const parts = [];
     let offset = 0;
@@ -138,7 +139,7 @@ export function createWebReadingSpeechAdapter({
         else break;
       }
 
-      const nextCursor = Math.min(units.length - 1, cursor + relativeIndex);
+      const nextCursor = Math.min(units.length - 1, baseCursor + relativeIndex);
       if (nextCursor === lastReportedCursor) return;
       cursor = nextCursor;
       lastReportedCursor = nextCursor;

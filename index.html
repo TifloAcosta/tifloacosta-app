@@ -198,6 +198,7 @@
             <option value="3">3×</option>
           </select>
         </fieldset>
+        <button id="reading-audio-settings-close" type="button" data-reading-close="reading-audio-settings">Cerrar Audio y voz</button>
       </section>
 
       <button id="reading-visual-settings-toggle" type="button" aria-expanded="false" aria-controls="reading-visual-settings">Presentación visual</button>
@@ -264,6 +265,7 @@
             <label for="reading-high-contrast">Alto contraste</label>
           </div>
         </fieldset>
+        <button id="reading-visual-settings-close" type="button" data-reading-close="reading-visual-settings">Cerrar Presentación visual</button>
       </section>
 
       <button id="reading-more-voices-settings-toggle" type="button" aria-expanded="false" aria-controls="reading-more-voices-settings">Buscar más voces</button>
@@ -273,6 +275,7 @@
           <div id="reading-external-voices-list" class="resource-list"></div>
           <p id="reading-external-voices-status" class="muted" role="status" aria-live="polite"></p>
         </section>
+        <button id="reading-more-voices-settings-close" type="button" data-reading-close="reading-more-voices-settings">Cerrar Buscar más voces</button>
       </section>
 
       <p id="reading-settings-status" class="muted" role="status" aria-live="polite"></p>
@@ -495,12 +498,26 @@
       button.setAttribute('aria-expanded', String(opening));
     });
   }
+
+  document.addEventListener('click', event => {
+    const closeButton = event.target.closest?.('[data-reading-close]');
+    if (!closeButton) return;
+
+    const panelId = closeButton.dataset.readingClose;
+    const panel = document.getElementById(panelId);
+    const toggle = document.querySelector('[aria-controls="' + panelId + '"]');
+    if (!panel || !toggle) return;
+
+    panel.hidden = true;
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.focus();
+  });
 })();
 </script>
 <script type="module">
   import * as shared from './shared/web-entry.mjs?v=1.2';
   window.TIFLO_SHARED = shared;
-  await import('./web-reading.js?v=2.1');
+  await import('./web-reading.js?v=2.2');
 </script>
 <script src="app.js?v=2.2"></script>
 <script>

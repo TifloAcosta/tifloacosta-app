@@ -14,10 +14,10 @@ test('web home exposes Leer con TifloAcosta as an accessible routed section', as
   assert.ok(html.includes('data-home-back'));
 });
 
-test('web reader loads after the shared bridge and before the main app', async () => {
+test('web reader loads from the shared module before the main app', async () => {
   const html = await read('index.html');
-  const sharedIndex = html.indexOf('shared-web.js?v=1.0');
-  const readerIndex = html.indexOf('web-reading.js?v=1.0');
+  const sharedIndex = html.indexOf("import * as shared from './shared/web-entry.mjs?v=");
+  const readerIndex = html.indexOf("await import('./web-reading.js?v=");
   const appIndex = html.indexOf('app.js?v=2.2');
   assert.ok(sharedIndex >= 0);
   assert.ok(readerIndex > sharedIndex);
@@ -62,10 +62,10 @@ test('web reader accepts common document formats with heavy engines loaded on de
 
 test('PWA shell caches and refreshes the web reader script', async () => {
   const worker = await read('sw.js');
-  assert.ok(worker.includes('tifloacosta-app-v2-28-youtube-accessible'));
-  assert.ok(worker.includes("'./web-reading.js?v=1.0'"));
+  assert.match(worker, /const CACHE = 'tifloacosta-app-v[^']+'/);
+  assert.match(worker, /'\.\/web-reading\.js\?v=[^']+'/);
   assert.ok(worker.includes("url.pathname.endsWith('/web-reading.js')"));
-  assert.ok(worker.includes("freshScript(url, './web-reading.js?v=1.0', request)"));
+  assert.match(worker, /freshScript\(url, '\.\/web-reading\.js\?v=[^']+', request\)/);
 });
 
 

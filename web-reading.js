@@ -317,6 +317,7 @@
   let sentenceCursor = 0;
   let sentenceUnits = [];
   let currentUnitIndex = 0;
+  let fileImportInProgress = false;
   const translationMemory = new Map();
 
   const speechAdapter = typeof shared.createWebReadingSpeechAdapter === 'function'
@@ -1036,17 +1037,50 @@
     };
   }
 
+  async function importSelectedFile() {
+    const file = els.file.files?.[0] || null;
+    if (!file || fileImportInProgress) return false;
+
+    fileImportInProgress = true;
+    els.prepare.disabled = true;
+    els.status.textContent = language() === 'en'
+      ? 'Importing and preparing the document…'
+      : 'Importando y preparando el documento…';
+
+    try {
+      const prepared = await documentFromFile(file);
+      await useDocument(prepared.model, file.name, {
+        source: prepared.source,
+        format: prepared.format,
+        autoSaveImported: true
+      });
+      return true;
+    } catch (error) {
+      els.ocr.hidden = true;
+      if (error?.code === 'unsupported') els.status.textContent = t().unsupported;
+      else if (error?.code === 'legacy-doc') els.status.textContent = t().legacyDoc;
+      else if (error?.code === 'image-needs-ocr') {
+        els.status.textContent = `${t().imageNeedsOcr} ${t().ocrPrivacy}`;
+        els.ocr.hidden = false;
+      } else if (error?.code === 'password-required') els.status.textContent = t().pdfPasswordRequired;
+      else if (error?.code === 'incorrect-password') els.status.textContent = t().pdfPasswordIncorrect;
+      else if (error?.code === 'pdf-no-text') {
+        els.status.textContent = `${t().pdfNoText} ${t().ocrPrivacy}`;
+        els.ocr.hidden = false;
+      } else els.status.textContent = t().failed;
+      return false;
+    } finally {
+      fileImportInProgress = false;
+      els.prepare.disabled = false;
+    }
+  }
+
   async function prepareReading() {
     els.status.textContent = '';
     try {
       const file = els.file.files?.[0] || null;
       if (file) {
-        const prepared = await documentFromFile(file);
-        await useDocument(prepared.model, file.name, {
-          source: prepared.source,
-          format: prepared.format,
-          autoSaveImported: true
-        });
+        await importSelectedFile();
         return;
       }
       const text = els.paste.value.trim();
@@ -1738,6 +1772,7 @@
     pendingImageFile = null;
     els.ocr.hidden = true;
     updatePdfPasswordVisibility();
+    if (els.file.files?.[0]) void importSelectedFile();
   });
   els.previous.addEventListener('click', () => move(-1));
   els.next.addEventListener('click', () => move(1));

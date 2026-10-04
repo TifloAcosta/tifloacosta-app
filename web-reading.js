@@ -1412,15 +1412,16 @@
     else if (format === 'rtf') model = shared.parseStructuredDocument(shared.parseRtfDocument(source,{title:opened.book.title,language:opened.book.language || language()}));
     else if (format === 'md' || format === 'markdown') model = shared.parseStructuredDocument(shared.parseMarkdownDocument(source,{title:opened.book.title,language:opened.book.language || language()}));
     else if (format === 'fb2') model = shared.parseStructuredDocument(shared.parseFb2Document(source,{title:opened.book.title,language:opened.book.language || language()}));
-    else if (['docx','epub','odt'].includes(format)) {
+    else if (['docx','pptx','xlsx','epub','odt'].includes(format)) {
       const JSZip = await loadZipBundle();
       const bytes = Uint8Array.from(source.split(',').filter(Boolean).map(Number));
       const zip = await JSZip.loadAsync(bytes);
-      const raw = format === 'docx'
-        ? await shared.parseDocxArchive(zip,{title:opened.book.title,language:opened.book.language || language()})
-        : format === 'epub'
-          ? await shared.parseEpubArchive(zip,{title:opened.book.title,language:opened.book.language || language()})
-          : await shared.parseOdtArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
+      let raw;
+      if (format === 'docx') raw = await shared.parseDocxArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
+      else if (format === 'pptx') raw = await shared.parsePptxArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
+      else if (format === 'xlsx') raw = await shared.parseXlsxArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
+      else if (format === 'epub') raw = await shared.parseEpubArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
+      else raw = await shared.parseOdtArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
       model = shared.parseStructuredDocument(raw);
     } else model = shared.parseTextDocument(source, { title:opened.book.title, language:opened.book.language || language() });
     await useDocument(model, opened.book.title, {

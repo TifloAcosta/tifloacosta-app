@@ -26,7 +26,7 @@
     pause: $('#reading-pause'),
     voiceLabel: $('#reading-voice-label'),
     voice: $('#reading-voice'),
-    externalVoicesHeading: $('#reading-more-voices-settings-heading'),
+    externalVoicesHeading: $('#reading-more-voices-settings-toggle'),
     externalVoicesIntro: $('#reading-external-voices-intro'),
     externalVoicesList: $('#reading-external-voices-list'),
     externalVoicesStatus: $('#reading-external-voices-status'),

@@ -107,7 +107,7 @@
 
     <div class="panel" aria-labelledby="reading-start-heading">
       <h3 id="reading-start-heading">Abrir o pegar contenido</h3>
-      <label id="reading-file-label" for="reading-file">Abrir documento</label>
+      <label id="reading-file-label" for="reading-file">Abrir documento; se importará automáticamente al seleccionarlo</label>
       <input id="reading-file" type="file" accept=".txt,.html,.htm,.pdf,.docx,.pptx,.xlsx,.epub,.odt,.rtf,.md,.markdown,.fb2,.png,.jpg,.jpeg,.webp,text/plain,text/html,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/epub+zip,application/vnd.oasis.opendocument.text,application/rtf,text/markdown,image/png,image/jpeg,image/webp">
       <label id="reading-paste-label" for="reading-paste">O pega aquí el texto</label>
       <textarea id="reading-paste" rows="6"></textarea>
@@ -547,7 +547,7 @@
 <script type="module">
   import * as shared from './shared/web-entry.mjs?v=1.2';
   window.TIFLO_SHARED = shared;
-  await import('./web-reading.js?v=2.5');
+  await import('./web-reading.js?v=2.6');
 </script>
 <script src="app.js?v=2.2"></script>
 <script>

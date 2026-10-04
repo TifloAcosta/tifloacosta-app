@@ -318,6 +318,7 @@
   let sentenceUnits = [];
   let currentUnitIndex = 0;
   let fileImportInProgress = false;
+  let playbackAccessibilityState = null;
   const translationMemory = new Map();
 
   const speechAdapter = typeof shared.createWebReadingSpeechAdapter === 'function'
@@ -766,6 +767,48 @@
     els.next.disabled = snapshot.blockIndex >= Math.max(0, total - 1);
   }
 
+  function setAccessiblePlaybackMode(active) {
+    if (!els.reader) return;
+
+    const keep = new Set([els.pause, els.title]);
+    const candidates = [...els.reader.querySelectorAll('button, a, input, select, textarea, [tabindex]')]
+      .filter(node => !keep.has(node));
+
+    if (active) {
+      if (playbackAccessibilityState) return;
+      playbackAccessibilityState = new Map();
+      for (const node of candidates) {
+        playbackAccessibilityState.set(node, {
+          ariaHidden: node.getAttribute('aria-hidden'),
+          tabIndex: node.getAttribute('tabindex'),
+          disabled: 'disabled' in node ? node.disabled : undefined
+        });
+        node.setAttribute('aria-hidden', 'true');
+        node.setAttribute('tabindex', '-1');
+      }
+      els.reader.setAttribute('aria-busy', 'true');
+      els.reader.dataset.ttsPlaying = 'true';
+      return;
+    }
+
+    if (!playbackAccessibilityState) {
+      els.reader.removeAttribute('aria-busy');
+      delete els.reader.dataset.ttsPlaying;
+      return;
+    }
+
+    for (const [node, state] of playbackAccessibilityState.entries()) {
+      if (!node?.isConnected) continue;
+      if (state.ariaHidden == null) node.removeAttribute('aria-hidden');
+      else node.setAttribute('aria-hidden', state.ariaHidden);
+      if (state.tabIndex == null) node.removeAttribute('tabindex');
+      else node.setAttribute('tabindex', state.tabIndex);
+    }
+    playbackAccessibilityState = null;
+    els.reader.removeAttribute('aria-busy');
+    delete els.reader.dataset.ttsPlaying;
+  }
+
   async function rebuildSpeech(position = null) {
     if (!documentModel || !speechAdapter || typeof shared.createSharedReadingSpeechController !== 'function') return;
     if (speechController) {
@@ -791,8 +834,9 @@
           initialIndex: blockIndex
         });
 
-        // While TTS is speaking, keep the accessible DOM stable so
-        // JAWS/NVDA/VoiceOver do not announce surrounding controls.
+        // While TTS is speaking, keep the accessible DOM stable and
+        // keep unrelated controls out of the accessibility tree.
+        setAccessiblePlaybackMode(value?.playing === true);
         if (value?.playing !== true) renderBlock();
 
         void persistProgress({ unitIndex: value?.unitIndex });
@@ -829,6 +873,7 @@
       els.status.textContent = t().failed;
       return;
     }
+    setAccessiblePlaybackMode(false);
     documentModel = model;
     ensureSentenceMetadata();
     originalDocumentModel = documentModel;
@@ -1730,11 +1775,22 @@
 
   async function play() {
     if (!speechController) await rebuildSpeech();
-    await speechController?.play?.();
+    const started = await speechController?.play?.();
+    if (started !== false) setAccessiblePlaybackMode(true);
   }
 
   async function pause() {
     await speechController?.pause?.();
+    setAccessiblePlaybackMode(false);
+    const snapshot = speechController?.snapshot?.();
+    if (snapshot?.position && documentModel?.blocks?.length) {
+      currentUnitIndex = Number(snapshot.position.unitIndex) || 0;
+      readingSession = shared.createReadingSession({
+        blocks: documentModel.blocks,
+        initialIndex: Number(snapshot.position.blockIndex) || 0
+      });
+      renderBlock();
+    }
     await persistProgress();
   }
 

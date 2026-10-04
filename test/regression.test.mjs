@@ -57,10 +57,14 @@ test('homepage loads shared app logic and reserves the lazy book-cover dimension
   const html = await read('index.html');
   const worker = await read('sw.js');
 
-  assert.match(html, /<script src="app-core\.js\?v=1\.6"><\/script>\s*<script src="actualidad-core\.js\?v=[^"]+"><\/script>\s*<script src="shared-web\.js\?v=[^"]+"><\/script>\s*<script src="web-reading\.js\?v=[^"]+"><\/script>\s*<script src="app\.js\?v=[^"]+"><\/script>/);
+  assert.match(html, /<script src="app-core\.js\?v=1\.6"><\/script>/);
+  assert.match(html, /<script src="actualidad-core\.js\?v=[^"]+"><\/script>/);
+  assert.match(html, /import \* as shared from '\.\/shared\/web-entry\.mjs\?v=[^']+';/);
+  assert.match(html, /await import\('\.\/web-reading\.js\?v=[^']+'\);/);
+  assert.match(html, /<script src="app\.js\?v=[^"]+"><\/script>/);
   assert.match(html, /<img id="book-cover"[^>]*loading="lazy"[^>]*width="1600"[^>]*height="2560">/);
   assert.match(worker, /'\.\/app-core\.js\?v=1\.6'/);
-  assert.match(worker, /'\.\/shared-web\.js\?v=1\.0'/);
+  assert.match(worker, /'\.\/web-reading\.js\?v=[^']+'/);
   assert.match(worker, /'\.\/app\.js\?v=2\.2'/);
 });
 

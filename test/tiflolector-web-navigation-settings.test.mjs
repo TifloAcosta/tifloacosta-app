@@ -4,14 +4,16 @@ import test from 'node:test';
 
 const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
-test('TifloLector exposes clear top-level menus with focusable panels', async () => {
+test('TifloLector exposes clear top-level menus with isolated focusable subviews', async () => {
   const html = await read('index.html');
-  for (const id of [
-    'reading-settings-toggle',
-    'reading-library-toggle',
-    'reading-queue-menu-toggle',
-    'reading-marks-menu-toggle'
-  ]) assert.ok(html.includes(`id="${id}"`), `Missing ${id}`);
+  for (const target of [
+    'reading-audio-view',
+    'reading-visual-view',
+    'reading-voices-view',
+    'reading-library-web',
+    'reading-queue-web',
+    'reading-marks-web'
+  ]) assert.ok(html.includes(`data-reading-view="${target}"`), `Missing launcher for ${target}`);
   for (const id of [
     'reading-settings-heading',
     'reading-library-heading',
@@ -19,7 +21,8 @@ test('TifloLector exposes clear top-level menus with focusable panels', async ()
     'reading-marks-heading'
   ]) assert.match(html, new RegExp(`id="${id}"[^>]*tabindex="-1"`));
   assert.ok(html.includes('>TifloLector</'));
-  assert.ok(html.includes('aria-controls="reading-settings-web"'));
+  assert.ok(html.includes('class="panel reading-subview"'));
+  assert.ok(html.includes('data-reading-back'));
 });
 
 test('TifloLector keeps voice, TTS and visual settings discoverable before opening a document', async () => {
@@ -39,21 +42,25 @@ test('TifloLector keeps voice, TTS and visual settings discoverable before openi
   ]) assert.ok(html.includes(`id="${id}"`), `Missing ${id}`);
 });
 
-test('TifloLector panel toggles manage aria-expanded and move focus', async () => {
+test('TifloLector isolated subviews hide the main view and move focus', async () => {
+  const html = await read('index.html');
+  assert.ok(html.includes("mainChildren.forEach(node => { node.hidden = true; });"));
+  assert.ok(html.includes("subviews.forEach(view => { view.hidden = view !== target; });"));
+  assert.ok(html.includes("queueMicrotask(() => heading?.focus());"));
   const source = await read('web-reading.js');
-  assert.ok(source.includes("button.setAttribute('aria-expanded', String(opening))"));
-  assert.ok(source.includes('heading?.focus?.()'));
   assert.ok(source.includes('WEB_READING_SETTINGS_KEY'));
   assert.ok(source.includes("heading: 'TifloLector'"));
 });
 
 
 test('TifloLector separates general settings into audio, visual and more-voices menus', async () => {
-  const source = await read('web-reading.js');
+  const [html, source] = await Promise.all([read('index.html'), read('web-reading.js')]);
   for (const token of [
     'reading-audio-settings',
     'reading-visual-settings',
-    'reading-more-voices-settings',
+    'reading-more-voices-settings'
+  ]) assert.ok(html.includes(token), `Missing ${token}`);
+  for (const token of [
     'Modo lector de pantalla',
     'Iniciar automáticamente la lectura TTS'
   ]) assert.ok(source.includes(token), `Missing ${token}`);

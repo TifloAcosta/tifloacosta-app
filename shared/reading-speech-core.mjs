@@ -104,6 +104,9 @@ export function createReadingSpeechController({
       unitIndex: position.unitIndex,
       percent: ended ? 100 : percentFor(position, document),
       state: ended ? 'read' : 'in-reading',
+      playing,
+      ended,
+      prepared,
       ...extra
     };
     try { onPositionChange(payload); } catch {}

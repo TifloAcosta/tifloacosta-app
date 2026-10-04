@@ -82,8 +82,8 @@ jobs:
             exit 1
           fi
 
-      - name: Run tests
-        run: npm test
+      - name: Run Actualidad tests
+        run: npm run test:actualidad
 
   sync-and-deploy:
     if: github.ref == 'refs/heads/main'
@@ -114,8 +114,8 @@ jobs:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: node scripts/sync-actualidad-media.mjs
 
-      - name: Run tests
-        run: npm test
+      - name: Run Actualidad tests
+        run: npm run test:actualidad
 
       - name: Detect Actualidad changes
         id: changes

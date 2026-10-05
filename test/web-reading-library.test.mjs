@@ -139,3 +139,24 @@ test('web reader exposes one visible navigation set controlled by the unit selec
   assert.ok(source.includes('previousUnit.addEventListener'));
   assert.ok(source.includes('nextUnit.addEventListener'));
 });
+
+
+test('open document uses a dedicated reader-only view and offers a clear way back', async () => {
+  const source = await read('web-reading.js');
+  for (const token of [
+    'enterReaderOnlyView',
+    'exitReaderOnlyView',
+    "back.id = 'reading-reader-back'",
+    'Volver a Mi biblioteca',
+    'Volver a TifloLector',
+    'node.hidden = true'
+  ]) assert.ok(source.includes(token), `Missing dedicated reader behavior ${token}`);
+});
+
+test('saved web book resumes from percent when legacy block index is zero', async () => {
+  const source = await read('web-reading.js');
+  assert.ok(source.includes('storedBlockIndex'));
+  assert.ok(source.includes('storedPercent'));
+  assert.ok(source.includes('storedPercent > 0 && storedBlockIndex === 0'));
+  assert.ok(source.includes('fallbackIndex'));
+});

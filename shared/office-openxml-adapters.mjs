@@ -71,6 +71,7 @@ function localCopy(language='') {
     slide:(n,total,title)=> title ? `Diapositiva ${n} de ${total}: ${title}` : `Diapositiva ${n} de ${total}`,
     notes:'Notas del presentador',
     image:'Descripción de imagen',
+    imageMissing:'Imagen sin descripción disponible',
     table:(r,c)=>`Tabla de ${r} filas y ${c} columnas`,
     row:n=>`Fila ${n}`,
     col:n=>`Columna ${n}`,
@@ -82,6 +83,7 @@ function localCopy(language='') {
     slide:(n,total,title)=> title ? `Slide ${n} of ${total}: ${title}` : `Slide ${n} of ${total}`,
     notes:'Speaker notes',
     image:'Image description',
+    imageMissing:'Image without an available description',
     table:(r,c)=>`Table with ${r} rows and ${c} columns`,
     row:n=>`Row ${n}`,
     col:n=>`Column ${n}`,
@@ -148,7 +150,7 @@ function slideContent(slideXml, { slideNumber, slideCount, language }) {
   for (const pic of nodes(doc, 'pic')) {
     const props = nodes(pic, 'cNvPr')[0];
     const description = cleanText(props?.getAttribute?.('descr') || props?.getAttribute?.('title') || '');
-    if (description) images.push(description);
+    images.push(description || copy.imageMissing);
   }
 
   const blocks = [];
@@ -170,7 +172,11 @@ function slideContent(slideXml, { slideNumber, slideCount, language }) {
   blocks.push(...tableResult.blocks);
   index = tableResult.index;
   for (const description of images) {
-    blocks.push({ id:`pptx-${slideNumber}-${++index}`, type:'paragraph', text:`${copy.image}: ${description}` });
+    blocks.push({
+      id:`pptx-${slideNumber}-${++index}`,
+      type:'paragraph',
+      text: description === copy.imageMissing ? description : `${copy.image}: ${description}`
+    });
   }
   return { blocks, title };
 }

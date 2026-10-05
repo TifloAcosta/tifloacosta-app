@@ -107,7 +107,8 @@ export function normalizeVoiceProviders(providers=[], platform='generic') {
       url,
       platform: String(provider.platform || platformName).toLowerCase(),
       type: String(provider.type || READING_VOICE_PROVIDER_TYPES.EXTERNAL),
-      packageName: String(provider.packageName || '').trim()
+      packageName: String(provider.packageName || '').trim(),
+      languages: Array.isArray(provider.languages) ? provider.languages.map(value => String(value || '').toLowerCase().split('-')[0]).filter(Boolean) : []
     };
   }).filter(Boolean);
 }
@@ -124,20 +125,23 @@ export const WEB_EXTERNAL_VOICE_PROVIDERS = Object.freeze(normalizeVoiceProvider
     name: 'Acapela Voices',
     type: READING_VOICE_PROVIDER_TYPES.EXTERNAL,
     platform: 'web',
-    url: 'https://www.acapela-group.com/voices/'
+    url: 'https://www.acapela-group.com/voices/',
+    languages: ['ar','ca','zh','cs','da','nl','en','fi','fr','de','el','hi','it','ja','ko','no','pl','pt','ru','es','sv','tr']
   },
   {
     id: 'acapela-my-own-voice',
     name: 'Acapela My-Own-Voice',
     type: READING_VOICE_PROVIDER_TYPES.EXTERNAL,
     platform: 'web',
-    url: 'https://www.acapela-group.com/solutions/my-own-voice/'
+    url: 'https://www.acapela-group.com/solutions/my-own-voice/',
+    languages: ['ar','ca','cs','da','nl','en','fi','fr','de','el','it','no','pl','es','sv','tr','pt']
   },
   {
     id: 'code-factory-apps',
     name: 'Code Factory TTS',
     type: READING_VOICE_PROVIDER_TYPES.EXTERNAL,
     platform: 'web',
-    url: 'https://codefactoryglobal.com/usecases/apps/'
+    url: 'https://codefactoryglobal.com/usecases/apps/',
+    languages: ['en','es','de','fi','fr','it','pt','ar','bn','ca','hr','eu','gl','nl','kn','bg','zh','cs','da','el','he','hi','hu','id','ms','ja','ko','mr','no','pl','ro','ru','sk','sv','th','ta','te','tr','uk','val']
   }
 ], 'web'));

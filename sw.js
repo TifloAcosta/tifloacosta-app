@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-41-reader-controls-parity';
+const CACHE = 'tifloacosta-app-v2-42-library-final-layout';
 const NAVIGATION_TIMEOUT_MS = 5000;
 // Resource catalog is refreshed from the network.
 const SHELL = [
@@ -16,7 +16,7 @@ const SHELL = [
   './actualidad-core.js?v=1.6',
   './actualidad.js?v=1.3',
   './actualidad-media.js?v=1.1',
-  './web-reading.js?v=3.7',
+  './web-reading.js?v=3.8',
   './podcast.html',
   './podcast.js?v=1.0',
   './app.js?v=2.2',
@@ -131,8 +131,8 @@ self.addEventListener('fetch', event => {
 
 
   if (isAppOrigin && url.pathname.endsWith('/web-reading.js')) {
-    url.searchParams.set('v', '3.7');
-    event.respondWith(freshScript(url, './web-reading.js?v=3.7', request));
+    url.searchParams.set('v', '3.8');
+    event.respondWith(freshScript(url, './web-reading.js?v=3.8', request));
     return;
   }
 

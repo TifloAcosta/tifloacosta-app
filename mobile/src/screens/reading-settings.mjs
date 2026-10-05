@@ -31,6 +31,19 @@ function option(select, value, label) {
   select.append(element);
 }
 
+function primaryLanguage(value='') {
+  return String(value || '').trim().toLowerCase().split(/[-_]/)[0];
+}
+
+function languageName(code) {
+  const ui = document.documentElement.lang || 'es';
+  try {
+    return new Intl.DisplayNames([ui], { type:'language' }).of(primaryLanguage(code)) || primaryLanguage(code);
+  } catch {
+    return primaryLanguage(code);
+  }
+}
+
 function focusableElements(section) {
   return Array.from(section.querySelectorAll(FOCUSABLE_SELECTOR))
     .filter(element => !element.hidden && element.getAttribute('aria-hidden') !== 'true');
@@ -68,6 +81,12 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
   voiceHeading.textContent = t('readingBook.voiceAndSpeed');
   configureDialog(voiceSection, voiceHeading, 'reading-voice-heading');
 
+  const voiceLanguageLabel = document.createElement('label');
+  voiceLanguageLabel.textContent = document.documentElement.lang === 'en' ? 'Voice language' : 'Idioma de la voz';
+  const voiceLanguage = document.createElement('select');
+  voiceLanguage.id = 'reading-voice-language';
+  voiceLanguageLabel.htmlFor = voiceLanguage.id;
+
   const voiceLabel = document.createElement('label');
   voiceLabel.textContent = t('readingBook.voice');
   const voiceSelect = document.createElement('select');
@@ -98,7 +117,7 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
   voiceReturn.type = 'button';
   voiceReturn.textContent = t('readingBook.returnToReading');
 
-  voiceSection.append(voiceHeading, voiceLabel, voiceSelect, rateLabel, rate, rateValue, getMoreVoices, voiceStatus, voiceReturn);
+  voiceSection.append(voiceHeading, voiceLanguageLabel, voiceLanguage, voiceLabel, voiceSelect, rateLabel, rate, rateValue, getMoreVoices, voiceStatus, voiceReturn);
 
   const visualSection = document.createElement('section');
   visualSection.className = 'reading-panel reading-visual-panel';
@@ -258,15 +277,40 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
     return true;
   }
 
+  function populateVoiceLanguageOptions(preferred='') {
+    const codes = [...new Set(voices.map(voice => primaryLanguage(voice.locale)).filter(Boolean))]
+      .sort((a,b) => languageName(a).localeCompare(languageName(b), document.documentElement.lang || 'es'));
+    voiceLanguage.replaceChildren();
+    option(voiceLanguage, '', document.documentElement.lang === 'en' ? 'All languages' : 'Todos los idiomas');
+    for (const code of codes) option(voiceLanguage, code, languageName(code));
+    const fallback = codes.includes(primaryLanguage(preferred))
+      ? primaryLanguage(preferred)
+      : codes.includes(primaryLanguage(document.documentElement.lang))
+        ? primaryLanguage(document.documentElement.lang)
+        : '';
+    voiceLanguage.value = fallback;
+  }
+
   function populateVoiceOptions() {
+    const selectedLanguage = primaryLanguage(voiceLanguage.value);
+    const visible = selectedLanguage
+      ? voices.filter(voice => primaryLanguage(voice.locale) === selectedLanguage)
+      : voices;
+    const selectedVoice = voiceSelect.value;
     voiceSelect.replaceChildren();
     option(voiceSelect, '', t('readingBook.voiceDefault'));
-    for (const voice of voices) option(voiceSelect, voice.id, `${voice.name} — ${voice.locale}`);
+    for (const voice of visible) option(voiceSelect, voice.id, `${voice.name} — ${voice.locale}`);
+    if (selectedVoice && visible.some(voice => voice.id === selectedVoice)) voiceSelect.value = selectedVoice;
   }
 
   function setControlValues() {
     if (!current) return;
     const effective = current.effective;
+    if (effective['speech.voiceLanguage'] !== undefined) {
+      const preferred = primaryLanguage(effective['speech.voiceLanguage']);
+      if ([...voiceLanguage.options].some(option => option.value === preferred)) voiceLanguage.value = preferred;
+    }
+    populateVoiceOptions();
     voiceSelect.value = effective['speech.voice'] || '';
     rate.value = String(effective['speech.rate']);
     rateValue.value = String(effective['speech.rate']);
@@ -286,6 +330,8 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
     if (destroyed) return null;
     voices = available;
     current = resolveReadingSettings(stored.global, stored.book, { availableVoices: voices });
+    const selectedVoice = voices.find(voice => voice.id === current.effective['speech.voice']);
+    populateVoiceLanguageOptions(current.effective['speech.voiceLanguage'] || selectedVoice?.locale || document.documentElement.lang);
     populateVoiceOptions();
     setControlValues();
     return current;
@@ -294,9 +340,11 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
   async function refreshVoicesAfterResume() {
     if (destroyed) return;
     const selectedVoice = voiceSelect.value;
+    const selectedLanguage = voiceLanguage.value;
     const available = await client.listTtsVoices();
     if (destroyed) return;
     voices = available;
+    populateVoiceLanguageOptions(selectedLanguage);
     populateVoiceOptions();
     if (selectedVoice && voices.some(voice => voice.id === selectedVoice)) {
       voiceSelect.value = selectedVoice;
@@ -307,12 +355,24 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
     if (!voiceSection.hidden) queueMicrotask(() => getMoreVoices.focus());
   }
 
+  voiceLanguage.addEventListener('change', () => {
+    void (async () => {
+      await saveBookSetting('speech.voiceLanguage', voiceLanguage.value, voiceStatus);
+      populateVoiceOptions();
+      if (voiceSelect.value && !voices.some(voice => voice.id === voiceSelect.value && (!voiceLanguage.value || primaryLanguage(voice.locale) === primaryLanguage(voiceLanguage.value)))) {
+        voiceSelect.value = '';
+        await saveBookSetting('speech.voice', '', voiceStatus);
+      }
+      voiceCatalog.setLanguageFilter?.(voiceLanguage.value);
+    })();
+  });
   voiceSelect.addEventListener('change', () => { void saveBookSetting('speech.voice', voiceSelect.value, voiceStatus); });
   rate.addEventListener('change', () => { void saveBookSetting('speech.rate', rate.value, voiceStatus); });
   rate.addEventListener('input', () => { rateValue.textContent = rate.value; });
 
   getMoreVoices.addEventListener('click', () => {
     lastInvoker = getMoreVoices;
+    voiceCatalog.setLanguageFilter?.(voiceLanguage.value);
     voiceSection.hidden = true;
     voiceCatalog.open();
   });
@@ -359,7 +419,7 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
     visualSection.hidden = true;
     voiceSection.hidden = false;
     void loadSettings();
-    queueMicrotask(() => voiceSelect.focus());
+    queueMicrotask(() => voiceLanguage.focus());
   }
   function openVisual() {
     rememberInvoker();

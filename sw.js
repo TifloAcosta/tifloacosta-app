@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-37-safe-tts-chunks';
+const CACHE = 'tifloacosta-app-v2-38-language-filtered-voices';
 const NAVIGATION_TIMEOUT_MS = 5000;
 // Resource catalog is refreshed from the network.
 const SHELL = [
@@ -16,7 +16,7 @@ const SHELL = [
   './actualidad-core.js?v=1.6',
   './actualidad.js?v=1.3',
   './actualidad-media.js?v=1.1',
-  './web-reading.js?v=3.3',
+  './web-reading.js?v=3.4',
   './podcast.html',
   './podcast.js?v=1.0',
   './app.js?v=2.2',
@@ -132,7 +132,7 @@ self.addEventListener('fetch', event => {
 
   if (isAppOrigin && url.pathname.endsWith('/web-reading.js')) {
     url.searchParams.set('v', '3.3');
-    event.respondWith(freshScript(url, './web-reading.js?v=3.3', request));
+    event.respondWith(freshScript(url, './web-reading.js?v=3.4', request));
     return;
   }
 

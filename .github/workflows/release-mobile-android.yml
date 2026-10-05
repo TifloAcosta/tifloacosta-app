@@ -42,8 +42,8 @@ jobs:
           const marker = fs.readFileSync('./mobile/release/prepare.once', 'utf8').trim();
           let mode = 'prepare';
 
-          if (process.env.MANUAL_PUBLISH === 'true') {
-            mode = 'publish';
+          if (process.env.GITHUB_EVENT_NAME === 'workflow_dispatch') {
+            mode = process.env.MANUAL_PUBLISH === 'true' ? 'publish' : 'prepare';
           } else if (marker.startsWith('publish ')) {
             const expected = `publish ${request.versionName} ${request.track}`;
             if (!marker.startsWith(`${expected} - authorized `)) {

@@ -1,7 +1,10 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { readFile } from 'node:fs/promises';
 
 import { adjacentSemanticBlockOfKind, adjacentSemanticUnit } from '../src/core/reading-semantic-model.mjs';
+
+const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
 const documentModel = {
   blocks: [

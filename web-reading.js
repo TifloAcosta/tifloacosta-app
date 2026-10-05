@@ -529,6 +529,8 @@
 
     const section = document.createElement('section');
     section.id = 'reading-document-controls';
+    els.previous.hidden = true;
+    els.next.hidden = true;
     const heading = document.createElement('h4');
     heading.textContent = language() === 'en' ? 'Controls for this document' : 'Controles de este documento';
 
@@ -760,7 +762,7 @@
       primaryActions,
       audioPanel, visualPanel, morePanel
     );
-    mainControls.after(section);
+    mainControls.before(section);
 
     els.navigationUnit = unit;
     els.documentVoiceLanguageLabel = voiceLanguageLabel;
@@ -1410,9 +1412,9 @@
       : t().ready;
     els.searchResults.replaceChildren();
     els.searchStatus.textContent = '';
+    ensurePerDocumentControls();
     navigationUnit = els.navigationUnit?.value || 'block';
     currentUnitIndex = 0;
-    ensurePerDocumentControls();
     populatePerDocumentVoices();
     buildSentenceUnits();
     renderBlock();
@@ -2086,6 +2088,12 @@
     }
   }
 
+  function returnToReadingMainFromSubview() {
+    const visibleSubview = document.querySelector('#reading-section .reading-subview:not([hidden])');
+    const back = visibleSubview?.querySelector?.('[data-reading-back]');
+    back?.click?.();
+  }
+
   async function openSavedBook(id, requestedPercent = null) {
     if (!libraryClient) return;
     const opened = await libraryClient.openBook(id);
@@ -2095,6 +2103,7 @@
     }
     const source = String(opened.content || '');
     const format = String(opened.book.format || 'txt').toLowerCase();
+    returnToReadingMainFromSubview();
     const model = await modelForSavedBook(opened);
     const hasRequestedPercent = Number.isFinite(Number(requestedPercent));
     const percent = hasRequestedPercent ? Math.max(0, Math.min(100, Number(requestedPercent))) : null;
@@ -2333,14 +2342,22 @@
         title.type = 'button';
         title.className = 'reading-library-title';
         title.textContent = book.title || t().document;
-        title.setAttribute('aria-expanded', 'false');
+        title.setAttribute('aria-label', language() === 'en'
+          ? `Open for reading: ${book.title || t().document}`
+          : `Abrir para leer: ${book.title || t().document}`);
+
+        const detailsToggle = document.createElement('button');
+        detailsToggle.type = 'button';
+        detailsToggle.className = 'reading-library-details-toggle';
+        detailsToggle.textContent = language() === 'en' ? 'Details and settings' : 'Detalles y ajustes';
+        detailsToggle.setAttribute('aria-expanded', 'false');
 
         const details = document.createElement('section');
         details.className = 'reading-library-title-details';
         details.hidden = true;
         const detailsHeading = document.createElement('h4');
         detailsHeading.tabIndex = -1;
-        detailsHeading.textContent = book.title || t().document;
+        detailsHeading.textContent = language() === 'en' ? 'Details and settings' : 'Detalles y ajustes';
 
         const meta = document.createElement('p');
         meta.className = 'resource-meta';
@@ -2474,11 +2491,6 @@
 
         const actions = document.createElement('div');
         actions.className = 'resource-actions';
-        const open = document.createElement('button');
-        open.type = 'button';
-        open.textContent = t().openSaved;
-        open.addEventListener('click', () => { void openSavedBook(book.id); });
-
         const exportLabel = document.createElement('label');
         const exportSelectId = `reading-export-${book.id}`;
         exportLabel.htmlFor = exportSelectId;
@@ -2509,7 +2521,7 @@
         const closeMore = document.createElement('button');
         closeMore.type = 'button';
         closeMore.textContent = closeAudio.textContent;
-        actions.append(open, exportLabel, exportSelect, exportButton, remove, closeMore);
+        actions.append(exportLabel, exportSelect, exportButton, remove, closeMore);
         morePanel.append(moreHeading, actions);
 
         function showOnly(panel, heading, opener) {
@@ -2564,7 +2576,10 @@
           visualStatus.textContent = saved ? (language() === 'en' ? 'Visual setting saved.' : 'Ajuste visual guardado.') : (language() === 'en' ? 'Setting could not be saved.' : 'No se pudo guardar el ajuste.');
         });
 
-        jump.addEventListener('change', () => {
+        const openAtPosition = document.createElement('button');
+        openAtPosition.type = 'button';
+        openAtPosition.textContent = language() === 'en' ? 'Open from selected position' : 'Abrir desde la posición seleccionada';
+        openAtPosition.addEventListener('click', () => {
           void openSavedBook(book.id, Number(jump.value) || 0);
         });
 
@@ -2573,14 +2588,14 @@
         close.textContent = language() === 'en' ? 'Back to library titles' : 'Volver a los títulos de la biblioteca';
         close.addEventListener('click', () => {
           details.hidden = true;
-          title.setAttribute('aria-expanded', 'false');
-          title.focus();
+          detailsToggle.setAttribute('aria-expanded', 'false');
+          detailsToggle.focus();
         });
 
         details.append(
           detailsHeading, meta,
           progressLabel, progress, timeStatus,
-          jumpLabel, jump,
+          jumpLabel, jump, openAtPosition,
           groups,
           audioPanel, visualPanel, morePanel,
           close
@@ -2588,11 +2603,15 @@
 
         let estimateLoaded = false;
         title.addEventListener('click', () => {
+          void openSavedBook(book.id);
+        });
+
+        detailsToggle.addEventListener('click', () => {
           const opening = details.hidden;
           for (const other of els.libraryList.querySelectorAll('.reading-library-title-details')) other.hidden = true;
-          for (const otherTitle of els.libraryList.querySelectorAll('.reading-library-title')) otherTitle.setAttribute('aria-expanded', 'false');
+          for (const otherToggle of els.libraryList.querySelectorAll('.reading-library-details-toggle')) otherToggle.setAttribute('aria-expanded', 'false');
           details.hidden = !opening;
-          title.setAttribute('aria-expanded', String(opening));
+          detailsToggle.setAttribute('aria-expanded', String(opening));
           if (opening) {
             queueMicrotask(() => detailsHeading.focus());
             if (!estimateLoaded) {
@@ -2612,7 +2631,7 @@
           }
         });
 
-        card.append(title, details);
+        card.append(title, detailsToggle, details);
         els.libraryList.append(card);
       }
     } catch {

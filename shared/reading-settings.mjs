@@ -1,6 +1,7 @@
 const DEFAULTS = Object.freeze({
   'speech.rate': 1,
   'speech.voice': '',
+  'speech.voiceLanguage': '',
   'audio.speed': 1,
   'audio.skipSeconds': 30,
   'visual.textSize': 1,
@@ -44,6 +45,7 @@ function sanitize(key, value) {
   switch (key) {
     case 'speech.rate': return clamp(value, 0.5, 2, DEFAULTS[key]);
     case 'speech.voice': return String(value ?? '').trim();
+    case 'speech.voiceLanguage': return String(value ?? '').trim().toLowerCase().split(/[-_]/)[0];
     case 'audio.speed': return clamp(value, 0.5, 3, DEFAULTS[key]);
     case 'audio.skipSeconds': return numericChoice(value, new Set([10, 30, 60]), DEFAULTS[key]);
     case 'visual.textSize': return clamp(value, 0.75, 2, DEFAULTS[key]);

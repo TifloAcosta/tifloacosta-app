@@ -1,6 +1,3 @@
-import { getActiveReadingSpeechController } from '../core/reading-speech.mjs';
-import { createReadingTranslationControls } from './reading-translation-controls.mjs';
-
 const MARK_TYPES = ['bookmark', 'important', 'review', 'quote'];
 
 function format(template, values = {}) {
@@ -69,15 +66,6 @@ export function createReadingMarksPanel({ root, client, bookId, t, getPosition, 
 
   section.append(heading, typeLabel, typeSelect, addButton, filterLabel, filter, status, list, returnButton);
   root.append(section);
-
-  const translationControls = createReadingTranslationControls({
-    root,
-    client,
-    bookId,
-    speech: getActiveReadingSpeechController(),
-    t,
-    returnFocus
-  });
 
   let destroyed = false;
 
@@ -169,7 +157,6 @@ export function createReadingMarksPanel({ root, client, bookId, t, getPosition, 
   function close() { section.hidden = true; }
   function destroy() {
     destroyed = true;
-    translationControls?.destroy?.();
     section.remove();
   }
   return { open, close, destroy, element: section };

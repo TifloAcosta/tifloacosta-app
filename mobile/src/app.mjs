@@ -539,11 +539,13 @@ function render(route) {
       break;
     }
     case 'reading-book': {
+      const initialPercent = pendingReadingBookPercent;
+      pendingReadingBookPercent = null;
       renderReadingBook({
         ...context,
         client: readingClient,
         bookId: pendingReadingBookId,
-        initialPercent: pendingReadingBookPercent,
+        initialPercent,
         onOpenBook: openReadingBook,
         onOpenQueue: () => router.navigate('reading-queue')
       });

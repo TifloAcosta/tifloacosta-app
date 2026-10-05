@@ -334,6 +334,8 @@
   let fileImportInProgress = false;
   let playbackAccessibilityState = null;
   let readingTimerHandle = null;
+  let readerViewState = null;
+  let readerReturnView = 'main';
   const translationMemory = new Map();
 
   const speechAdapter = typeof shared.createWebReadingSpeechAdapter === 'function'
@@ -1403,6 +1405,7 @@
       : false;
 
     els.reader.hidden = false;
+    enterReaderOnlyView();
     els.save.disabled = Boolean(currentBookId);
     els.bookmark.disabled = !currentBookId;
     els.queueToggle.disabled = !currentBookId;
@@ -2088,6 +2091,57 @@
     }
   }
 
+  function enterReaderOnlyView() {
+    const readingSection = document.getElementById('reading-section');
+    if (!readingSection || !els.reader) return;
+    if (!readerViewState) {
+      readerViewState = new Map();
+      for (const node of [...readingSection.children]) {
+        if (node === els.reader) continue;
+        readerViewState.set(node, node.hidden);
+        node.hidden = true;
+      }
+    }
+    els.reader.hidden = false;
+
+    if (!document.getElementById('reading-reader-back')) {
+      const back = document.createElement('button');
+      back.id = 'reading-reader-back';
+      back.type = 'button';
+      back.textContent = readerReturnView === 'library'
+        ? (language() === 'en' ? 'Back to My library' : 'Volver a Mi biblioteca')
+        : (language() === 'en' ? 'Back to TifloReader' : 'Volver a TifloLector');
+      back.addEventListener('click', () => { void exitReaderOnlyView(); });
+      els.reader.prepend(back);
+    } else {
+      const back = document.getElementById('reading-reader-back');
+      back.textContent = readerReturnView === 'library'
+        ? (language() === 'en' ? 'Back to My library' : 'Volver a Mi biblioteca')
+        : (language() === 'en' ? 'Back to TifloReader' : 'Volver a TifloLector');
+    }
+  }
+
+  async function exitReaderOnlyView() {
+    await pause();
+    const readingSection = document.getElementById('reading-section');
+    if (readingSection && readerViewState) {
+      for (const [node, wasHidden] of readerViewState) {
+        if (node?.isConnected) node.hidden = wasHidden;
+      }
+    }
+    readerViewState = null;
+    els.reader.hidden = true;
+
+    if (readerReturnView === 'library') {
+      const openLibrary = document.querySelector('[data-reading-view="reading-library-web"]');
+      openLibrary?.click?.();
+    } else {
+      const heading = document.getElementById('reading-heading');
+      queueMicrotask(() => heading?.focus());
+    }
+    readerReturnView = 'main';
+  }
+
   function returnToReadingMainFromSubview() {
     const visibleSubview = document.querySelector('#reading-section .reading-subview:not([hidden])');
     const back = visibleSubview?.querySelector?.('[data-reading-back]');
@@ -2105,11 +2159,19 @@
     const format = String(opened.book.format || 'txt').toLowerCase();
     returnToReadingMainFromSubview();
     const model = await modelForSavedBook(opened);
+    readerReturnView = 'library';
     const hasRequestedPercent = Number.isFinite(Number(requestedPercent));
     const percent = hasRequestedPercent ? Math.max(0, Math.min(100, Number(requestedPercent))) : null;
     const maxIndex = Math.max(0, (model?.blocks?.length || 1) - 1);
+    const storedBlockIndex = Number(opened.book.blockIndex) || 0;
+    const storedPercent = Math.max(0, Math.min(100, Number(opened.book.percent) || 0));
+    const fallbackIndex = storedPercent > 0 && storedBlockIndex === 0
+      ? (storedPercent >= 100
+          ? maxIndex
+          : Math.min(maxIndex, Math.floor((storedPercent / 100) * (model?.blocks?.length || 1))))
+      : storedBlockIndex;
     const requestedIndex = percent == null
-      ? Number(opened.book.blockIndex) || 0
+      ? fallbackIndex
       : percent >= 100
         ? maxIndex
         : Math.min(maxIndex, Math.floor((percent / 100) * (model?.blocks?.length || 1)));

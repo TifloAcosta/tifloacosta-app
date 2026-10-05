@@ -93,3 +93,19 @@ test('web reader filters browser and external voices by language', async () => {
   assert.match(worker, /web-reading\.js\?v=3\.4/);
   assert.match(worker, /tifloacosta-app-v2-38-language-filtered-voices/);
 });
+
+
+test('PowerPoint images without alt text remain visible to accessible reading', async () => {
+  const source = await read('shared/office-openxml-adapters.mjs');
+  assert.ok(source.includes('imageMissing'));
+  assert.ok(source.includes('Imagen sin descripción disponible'));
+  assert.ok(source.includes('Image without an available description'));
+  assert.match(source, /images\.push\(description \|\| copy\.imageMissing\)/);
+});
+
+test('web reader exposes explicit previous and next controls for the selected navigation unit', async () => {
+  const source = await read('web-reading.js');
+  for (const token of ['Previous ${label}', 'Next ${label}', 'Anterior: ${label}', 'Siguiente: ${label}', "previousUnit.addEventListener('click'", "nextUnit.addEventListener('click'"]) {
+    assert.ok(source.includes(token), `Missing navigation control ${token}`);
+  }
+});

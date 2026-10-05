@@ -147,6 +147,13 @@
       libraryUnavailable: 'El navegador no permite utilizar la biblioteca local.',
       openSaved: 'Abrir',
       deleteSaved: 'Eliminar',
+      exportSaved: 'Exportar',
+      exportFormat: 'Formato de exportación',
+      exportOriginal: 'Formato original',
+      exportText: 'TXT accesible',
+      exportHtml: 'HTML accesible',
+      exported: 'Documento exportado.',
+      exportFailed: 'No se pudo exportar el documento.',
       deleted: 'Documento eliminado de la biblioteca.',
       deleteFailed: 'No se pudo eliminar el documento.',
       progress: percent => `${Math.round(percent)}% leído`,
@@ -248,6 +255,13 @@
       libraryUnavailable: 'This browser does not allow the local library to be used.',
       openSaved: 'Open',
       deleteSaved: 'Delete',
+      exportSaved: 'Export',
+      exportFormat: 'Export format',
+      exportOriginal: 'Original format',
+      exportText: 'Accessible TXT',
+      exportHtml: 'Accessible HTML',
+      exported: 'Document exported.',
+      exportFailed: 'The document could not be exported.',
       deleted: 'Document removed from the library.',
       deleteFailed: 'The document could not be removed.',
       progress: percent => `${Math.round(percent)}% read`,
@@ -533,6 +547,22 @@
       unit.append(option);
     }
 
+    const previousUnit = document.createElement('button');
+    previousUnit.type = 'button';
+    const nextUnit = document.createElement('button');
+    nextUnit.type = 'button';
+
+    function updateUnitButtons() {
+      const labels = {
+        block: language() === 'en' ? 'block' : 'bloque',
+        paragraph: language() === 'en' ? 'paragraph' : 'párrafo',
+        sentence: language() === 'en' ? 'sentence' : 'frase'
+      };
+      const label = labels[unit.value] || labels.block;
+      previousUnit.textContent = language() === 'en' ? `Previous ${label}` : `Anterior: ${label}`;
+      nextUnit.textContent = language() === 'en' ? `Next ${label}` : `Siguiente: ${label}`;
+    }
+
     const voiceLanguageLabel = document.createElement('label');
     voiceLanguageLabel.htmlFor = 'reading-document-voice-language';
     voiceLanguageLabel.textContent = language() === 'en' ? 'Voice language for this document' : 'Idioma de la voz para este documento';
@@ -570,7 +600,7 @@
     reset.textContent = language() === 'en' ? 'Use general settings' : 'Usar ajustes generales';
     actions.append(mark, reset);
 
-    section.append(heading, unitLabel, unit, voiceLanguageLabel, voiceLanguage, voiceLabel, voice, rateLabel, rate, rateOut, actions);
+    section.append(heading, unitLabel, unit, previousUnit, nextUnit, voiceLanguageLabel, voiceLanguage, voiceLabel, voice, rateLabel, rate, rateOut, actions);
     mainControls.after(section);
 
     els.navigationUnit = unit;
@@ -583,7 +613,11 @@
     unit.addEventListener('change', () => {
       navigationUnit = unit.value || 'block';
       buildSentenceUnits();
+      updateUnitButtons();
     });
+    previousUnit.addEventListener('click', () => move(-1));
+    nextUnit.addEventListener('click', () => move(1));
+    updateUnitButtons();
     voiceLanguage.addEventListener('change', () => {
       documentVoiceOverride = '';
       populatePerDocumentVoices();
@@ -1634,6 +1668,110 @@
     els.translationStatus.textContent = useTranslation ? t().translationShowing : t().translationShowingOriginal;
   }
 
+  function safeExportFilename(value='Documento') {
+    const clean = String(value || 'Documento').replace(/[\\/:*?"<>|]+/g, '-').replace(/\s+/g, ' ').trim();
+    return clean || (language() === 'en' ? 'Document' : 'Documento');
+  }
+
+  function downloadExport(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.append(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  function accessibleTextFromModel(model) {
+    return (Array.isArray(model?.blocks) ? model.blocks : [])
+      .map(block => String(block?.text || '').trim())
+      .filter(Boolean)
+      .join('\n\n');
+  }
+
+  function escapeHtml(value='') {
+    return String(value).replace(/[&<>"']/g, character => ({
+      '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+    })[character]);
+  }
+
+  function accessibleHtmlFromModel(model, title='Documento') {
+    const parts = [];
+    for (const block of Array.isArray(model?.blocks) ? model.blocks : []) {
+      const text = String(block?.text || '').trim();
+      if (!text) continue;
+      if (block?.type === 'heading') {
+        const level = Math.max(2, Math.min(6, Number(block.level) || 2));
+        parts.push(`<h${level}>${escapeHtml(text)}</h${level}>`);
+      } else if (block?.type === 'list-item') {
+        parts.push(`<p>• ${escapeHtml(text)}</p>`);
+      } else {
+        parts.push(`<p>${escapeHtml(text)}</p>`);
+      }
+    }
+    const lang = language();
+    return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><title>${escapeHtml(title)}</title></head><body><h1>${escapeHtml(title)}</h1>${parts.join('')}</body></html>`;
+  }
+
+  async function modelForSavedBook(opened) {
+    const source = String(opened?.content || '');
+    const format = String(opened?.book?.format || 'txt').toLowerCase();
+    if (format === 'html') return shared.parseHtmlDocument(source, { title:opened.book.title, language:opened.book.language || language() });
+    if (format === 'pdf') return shared.parsePdfDocument(JSON.parse(source));
+    if (format === 'rtf') return shared.parseStructuredDocument(shared.parseRtfDocument(source,{title:opened.book.title,language:opened.book.language || language()}));
+    if (format === 'md' || format === 'markdown') return shared.parseStructuredDocument(shared.parseMarkdownDocument(source,{title:opened.book.title,language:opened.book.language || language()}));
+    if (format === 'fb2') return shared.parseStructuredDocument(shared.parseFb2Document(source,{title:opened.book.title,language:opened.book.language || language()}));
+    if (['docx','pptx','xlsx','epub','odt'].includes(format)) {
+      const JSZip = await loadZipBundle();
+      const bytes = Uint8Array.from(source.split(',').filter(Boolean).map(Number));
+      const zip = await JSZip.loadAsync(bytes);
+      let raw;
+      if (format === 'docx') raw = await shared.parseDocxArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
+      else if (format === 'pptx') raw = await shared.parsePptxArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
+      else if (format === 'xlsx') raw = await shared.parseXlsxArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
+      else if (format === 'epub') raw = await shared.parseEpubArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
+      else raw = await shared.parseOdtArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
+      return shared.parseStructuredDocument(raw);
+    }
+    return shared.parseTextDocument(source, { title:opened.book.title, language:opened.book.language || language() });
+  }
+
+  async function exportSavedBook(id, exportFormat='txt') {
+    if (!libraryClient) return false;
+    try {
+      const opened = await libraryClient.openBook(id);
+      if (!opened?.book) throw new Error('book-not-found');
+      const title = safeExportFilename(opened.book.title || t().document);
+      const sourceFormat = String(opened.book.format || 'txt').toLowerCase();
+      const source = String(opened.content || '');
+
+      if (exportFormat === 'original' && sourceFormat !== 'pdf') {
+        const binaryFormats = new Set(['docx','pptx','xlsx','epub','odt']);
+        if (binaryFormats.has(sourceFormat)) {
+          const bytes = Uint8Array.from(source.split(',').filter(Boolean).map(Number));
+          downloadExport(new Blob([bytes], { type:'application/octet-stream' }), `${title}.${sourceFormat}`);
+        } else {
+          const extension = sourceFormat === 'markdown' ? 'md' : sourceFormat;
+          downloadExport(new Blob([source], { type:'text/plain;charset=utf-8' }), `${title}.${extension || 'txt'}`);
+        }
+      } else {
+        const model = await modelForSavedBook(opened);
+        if (exportFormat === 'html') {
+          downloadExport(new Blob([accessibleHtmlFromModel(model, opened.book.title || t().document)], { type:'text/html;charset=utf-8' }), `${title}.html`);
+        } else {
+          downloadExport(new Blob([accessibleTextFromModel(model)], { type:'text/plain;charset=utf-8' }), `${title}.txt`);
+        }
+      }
+      els.libraryStatus.textContent = t().exported;
+      return true;
+    } catch {
+      els.libraryStatus.textContent = t().exportFailed;
+      return false;
+    }
+  }
+
   async function saveCurrentDocument() {
     if (!libraryAdapter || !documentModel || !currentSource) {
       els.status.textContent = t().saveFailed;
@@ -1674,24 +1812,7 @@
     }
     const source = String(opened.content || '');
     const format = String(opened.book.format || 'txt').toLowerCase();
-    let model;
-    if (format === 'html') model = shared.parseHtmlDocument(source, { title:opened.book.title, language:opened.book.language || language() });
-    else if (format === 'pdf') model = shared.parsePdfDocument(JSON.parse(source));
-    else if (format === 'rtf') model = shared.parseStructuredDocument(shared.parseRtfDocument(source,{title:opened.book.title,language:opened.book.language || language()}));
-    else if (format === 'md' || format === 'markdown') model = shared.parseStructuredDocument(shared.parseMarkdownDocument(source,{title:opened.book.title,language:opened.book.language || language()}));
-    else if (format === 'fb2') model = shared.parseStructuredDocument(shared.parseFb2Document(source,{title:opened.book.title,language:opened.book.language || language()}));
-    else if (['docx','pptx','xlsx','epub','odt'].includes(format)) {
-      const JSZip = await loadZipBundle();
-      const bytes = Uint8Array.from(source.split(',').filter(Boolean).map(Number));
-      const zip = await JSZip.loadAsync(bytes);
-      let raw;
-      if (format === 'docx') raw = await shared.parseDocxArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
-      else if (format === 'pptx') raw = await shared.parsePptxArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
-      else if (format === 'xlsx') raw = await shared.parseXlsxArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
-      else if (format === 'epub') raw = await shared.parseEpubArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
-      else raw = await shared.parseOdtArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
-      model = shared.parseStructuredDocument(raw);
-    } else model = shared.parseTextDocument(source, { title:opened.book.title, language:opened.book.language || language() });
+    const model = await modelForSavedBook(opened);
     await useDocument(model, opened.book.title, {
       source,
       format,
@@ -1902,12 +2023,36 @@
         open.textContent = t().openSaved;
         open.addEventListener('click', () => { void openSavedBook(book.id); });
 
+        const exportLabel = document.createElement('label');
+        const exportSelectId = `reading-export-${book.id}`;
+        exportLabel.htmlFor = exportSelectId;
+        exportLabel.textContent = t().exportFormat;
+        const exportSelect = document.createElement('select');
+        exportSelect.id = exportSelectId;
+        const sourceFormat = String(book.format || '').toLowerCase();
+        if (sourceFormat !== 'pdf') {
+          const original = document.createElement('option');
+          original.value = 'original';
+          original.textContent = t().exportOriginal;
+          exportSelect.append(original);
+        }
+        for (const [value, label] of [['txt', t().exportText], ['html', t().exportHtml]]) {
+          const option = document.createElement('option');
+          option.value = value;
+          option.textContent = label;
+          exportSelect.append(option);
+        }
+        const exportButton = document.createElement('button');
+        exportButton.type = 'button';
+        exportButton.textContent = t().exportSaved;
+        exportButton.addEventListener('click', () => { void exportSavedBook(book.id, exportSelect.value); });
+
         const remove = document.createElement('button');
         remove.type = 'button';
         remove.textContent = t().deleteSaved;
         remove.addEventListener('click', () => { void deleteSavedBook(book.id); });
 
-        actions.append(open, remove);
+        actions.append(open, exportLabel, exportSelect, exportButton, remove);
         card.append(heading, meta, actions);
         els.libraryList.append(card);
       }

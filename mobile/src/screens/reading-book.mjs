@@ -8,6 +8,7 @@ import { createReadingMarksPanel } from './reading-marks.mjs';
 import { createReadingOcrPanel } from './reading-ocr-panel.mjs';
 import { createReadingSearchPanel } from './reading-search.mjs';
 import { createReadingSettingsPanel } from './reading-settings.mjs';
+import { createReadingTranslationControls } from './reading-translation-controls.mjs';
 import { clearScreen } from './shared.mjs';
 
 function format(template, values = {}) {
@@ -127,6 +128,50 @@ function percentForPosition(documentModel, position) {
   return total ? Math.min(100, (completed * 100) / total) : 0;
 }
 
+
+function allReadingUnits(documentModel) {
+  const result = [];
+  for (let blockIndex = 0; blockIndex < (documentModel?.blocks?.length || 0); blockIndex += 1) {
+    const block = documentModel.blocks[blockIndex];
+    const units = unitsFor(block);
+    for (let unitIndex = 0; unitIndex < units.length; unitIndex += 1) {
+      result.push({ blockIndex, unitIndex, text: units[unitIndex] });
+    }
+  }
+  return result;
+}
+
+function positionForPercent(documentModel, percent) {
+  const units = allReadingUnits(documentModel);
+  if (!units.length) return { blockIndex: 0, unitIndex: 0 };
+  const clamped = Math.max(0, Math.min(100, Number(percent) || 0));
+  const index = clamped >= 100
+    ? units.length - 1
+    : Math.min(units.length - 1, Math.floor((clamped / 100) * units.length));
+  return { blockIndex: units[index].blockIndex, unitIndex: units[index].unitIndex };
+}
+
+function estimatedReadingTimes(documentModel, position, rate=1) {
+  const units = allReadingUnits(documentModel);
+  const words = units.map(item => String(item.text || '').trim().split(/\s+/u).filter(Boolean).length);
+  const totalWords = words.reduce((sum, count) => sum + count, 0);
+  const target = units.findIndex(item => item.blockIndex === position?.blockIndex && item.unitIndex === position?.unitIndex);
+  const elapsedWords = words.slice(0, Math.max(0, target) + 1).reduce((sum, count) => sum + count, 0);
+  const wordsPerMinute = Math.max(60, 180 * (Number(rate) || 1));
+  return {
+    elapsedSeconds: Math.round((elapsedWords / wordsPerMinute) * 60),
+    remainingSeconds: Math.round((Math.max(0, totalWords - elapsedWords) / wordsPerMinute) * 60)
+  };
+}
+
+function readableDuration(seconds) {
+  const total = Math.max(0, Math.round(Number(seconds) || 0));
+  const hours = Math.floor(total / 3600);
+  const minutes = Math.floor((total % 3600) / 60);
+  if (hours > 0) return `${hours} h ${minutes} min`;
+  return `${minutes} min`;
+}
+
 export function renderReadingBook({
   root,
   router,
@@ -214,6 +259,28 @@ export function renderReadingBook({
   navigationSelect.id = 'reading-navigation-unit';
   navigationLabel.htmlFor = navigationSelect.id;
 
+  const addMarkButton = document.createElement('button');
+  addMarkButton.type = 'button';
+  addMarkButton.textContent = fallback(t, 'readingBook.addMark', 'Añadir marca', 'Add bookmark');
+
+  const progressStatus = document.createElement('p');
+  progressStatus.className = 'reading-book-progress';
+  progressStatus.setAttribute('role', 'status');
+  progressStatus.setAttribute('aria-live', 'polite');
+  progressStatus.setAttribute('aria-atomic', 'true');
+
+  const progressLabel = document.createElement('label');
+  progressLabel.textContent = document.documentElement.lang === 'en' ? 'Go to position' : 'Ir a posición';
+  const progressSelect = document.createElement('select');
+  progressSelect.id = 'reading-progress-percent';
+  progressLabel.htmlFor = progressSelect.id;
+  for (let value = 0; value <= 100; value += 10) {
+    const option = document.createElement('option');
+    option.value = String(value);
+    option.textContent = `${value} %`;
+    progressSelect.append(option);
+  }
+
   const searchButton = document.createElement('button');
   searchButton.type = 'button';
   searchButton.textContent = t('readingBook.search');
@@ -246,18 +313,61 @@ export function renderReadingBook({
   visualButton.type = 'button';
   visualButton.textContent = t('readingBook.visualSettings');
 
+  const moreActionsButton = document.createElement('button');
+  moreActionsButton.type = 'button';
+  moreActionsButton.textContent = document.documentElement.lang === 'en' ? 'More actions' : 'Más acciones';
+
   controls.append(
     playButton,
     previous,
     next,
     navigationLabel,
     navigationSelect,
+    progressStatus,
+    progressLabel,
+    progressSelect,
+    addMarkButton,
+    voiceButton,
+    visualButton,
+    moreActionsButton
+  );
+
+  const moreActions = document.createElement('section');
+  moreActions.className = 'reading-panel reading-more-actions';
+  moreActions.hidden = true;
+  const moreHeading = document.createElement('h2');
+  moreHeading.tabIndex = -1;
+  moreHeading.textContent = document.documentElement.lang === 'en' ? 'More actions' : 'Más acciones';
+  const timerLabel = document.createElement('label');
+  timerLabel.textContent = document.documentElement.lang === 'en' ? 'Reading timer' : 'Temporizador de lectura';
+  const timerSelect = document.createElement('select');
+  timerSelect.id = 'reading-sleep-timer';
+  timerLabel.htmlFor = timerSelect.id;
+  for (const [value, es, en] of [
+    ['', 'Desactivado', 'Off'],
+    ['10', '10 minutos', '10 minutes'],
+    ['20', '20 minutos', '20 minutes'],
+    ['30', '30 minutos', '30 minutes'],
+    ['45', '45 minutos', '45 minutes'],
+    ['60', '60 minutos', '60 minutes']
+  ]) {
+    const option = document.createElement('option');
+    option.value = value;
+    option.textContent = document.documentElement.lang === 'en' ? en : es;
+    timerSelect.append(option);
+  }
+  const moreReturn = document.createElement('button');
+  moreReturn.type = 'button';
+  moreReturn.textContent = t('readingBook.returnToReading');
+  moreActions.append(
+    moreHeading,
     searchButton,
     marksButton,
     readingStateLabel,
     readingState,
-    voiceButton,
-    visualButton
+    timerLabel,
+    timerSelect,
+    moreReturn
   );
 
   const pdfPageNavigation = document.createElement('nav');
@@ -360,6 +470,7 @@ export function renderReadingBook({
     controls,
     pdfPageNavigation,
     readerContainer,
+    moreActions,
     panels,
     externalLinkDialog,
     endOfDocument
@@ -375,6 +486,8 @@ export function renderReadingBook({
   let searchPanel = null;
   let marksPanel = null;
   let settingsPanel = null;
+  let translationControls = null;
+  let readingTimerHandle = null;
   let destroyed = false;
   let nextSuggestedBookId = '';
   let completionGeneration = 0;
@@ -701,6 +814,18 @@ export function renderReadingBook({
     return fragment;
   }
 
+  function renderReadingProgress(position = currentPosition) {
+    if (!documentModel?.blocks?.length) return;
+    const percent = Math.round(percentForPosition(documentModel, position));
+    const rate = Number(speech?.snapshot?.().rate) || 1;
+    const estimate = estimatedReadingTimes(documentModel, position, rate);
+    progressStatus.textContent = document.documentElement.lang === 'en'
+      ? `Progress: ${percent}%. Elapsed: about ${readableDuration(estimate.elapsedSeconds)}. Remaining: about ${readableDuration(estimate.remainingSeconds)}.`
+      : `Progreso: ${percent} %. Transcurrido: aproximadamente ${readableDuration(estimate.elapsedSeconds)}. Restante: aproximadamente ${readableDuration(estimate.remainingSeconds)}.`;
+    const nearest = Math.max(0, Math.min(100, Math.round(percent / 10) * 10));
+    progressSelect.value = String(nearest);
+  }
+
   function renderSemanticPosition(position, { focus = false, announce = true, commit = true } = {}) {
     if (!documentModel?.blocks?.length) return false;
     const normalized = normalizeSemanticPosition(position, documentModel);
@@ -725,6 +850,7 @@ export function renderReadingBook({
     previous.setAttribute('aria-label', semanticNavigationLabel(t, navigationKind, -1));
     next.setAttribute('aria-label', semanticNavigationLabel(t, navigationKind, 1));
     renderPdfPageStatus(normalized);
+    renderReadingProgress(normalized);
     if (announce) {
       const page = pageForPosition(documentModel, normalized);
       status.textContent = activeBook?.format === 'pdf' && page
@@ -814,6 +940,64 @@ export function renderReadingBook({
     return speech.play();
   }
 
+  progressSelect.addEventListener('change', () => {
+    if (!documentModel) return;
+    void moveToPosition(positionForPercent(documentModel, Number(progressSelect.value) || 0));
+  });
+
+  addMarkButton.addEventListener('click', () => {
+    void (async () => {
+      if (!activeBook?.id) return;
+      const mark = await client.addMark({
+        bookId: activeBook.id,
+        type: 'bookmark',
+        blockIndex: currentPosition.blockIndex,
+        unitIndex: currentPosition.unitIndex,
+        excerpt: getCurrentUnitText(documentModel, currentPosition),
+        reference: activeBook.format === 'pdf'
+          ? format(t('readingBook.pdfPageReference'), { page: pageForPosition(documentModel, currentPosition) || 1 })
+          : ''
+      });
+      status.textContent = mark
+        ? fallback(t, 'readingBook.markAdded', 'Marca añadida.', 'Bookmark added.')
+        : fallback(t, 'readingBook.markFailed', 'No se pudo añadir la marca.', 'Bookmark could not be added.');
+    })();
+  });
+
+  moreActionsButton.addEventListener('click', () => {
+    moreActions.hidden = false;
+    queueMicrotask(() => moreHeading.focus());
+  });
+  moreReturn.addEventListener('click', () => {
+    moreActions.hidden = true;
+    moreActionsButton.focus();
+  });
+
+  timerSelect.addEventListener('change', () => {
+    if (readingTimerHandle) {
+      clearTimeout(readingTimerHandle);
+      readingTimerHandle = null;
+    }
+    const minutes = Number(timerSelect.value) || 0;
+    if (!minutes) {
+      status.textContent = document.documentElement.lang === 'en'
+        ? 'Reading timer off.'
+        : 'Temporizador de lectura desactivado.';
+      return;
+    }
+    status.textContent = document.documentElement.lang === 'en'
+      ? `Reading timer set for ${minutes} minutes.`
+      : `Temporizador establecido en ${minutes} minutos.`;
+    readingTimerHandle = setTimeout(() => {
+      readingTimerHandle = null;
+      void speech?.pause?.();
+      playButton.textContent = t('readingBook.play');
+      status.textContent = document.documentElement.lang === 'en'
+        ? 'Reading timer ended. Playback stopped.'
+        : 'Temporizador finalizado. Reproducción detenida.';
+    }, minutes * 60 * 1000);
+  });
+
   previous.addEventListener('click', () => { void navigateSemantic('previous'); });
   next.addEventListener('click', () => { void navigateSemantic('next'); });
   previousPage.addEventListener('click', () => { void navigatePdfPage(-1); });
@@ -878,6 +1062,9 @@ export function renderReadingBook({
     searchPanel?.destroy();
     marksPanel?.destroy();
     settingsPanel?.destroy();
+    if (readingTimerHandle) clearTimeout(readingTimerHandle);
+    readingTimerHandle = null;
+    translationControls?.destroy?.();
     if (speech) void speech.destroy();
     if (audioView) void audioView.destroy();
   });
@@ -906,6 +1093,7 @@ export function renderReadingBook({
     heading.textContent = activeBook.title || t('readingLibrary.untitled');
     pdfPasswordForm.hidden = true;
     controls.hidden = false;
+    moreActions.hidden = true;
     hideEndOfDocument();
 
     const structuredFormat = ['epub', 'docx', 'daisy2.02', 'daisy3'].includes(activeBook.format);
@@ -1001,6 +1189,19 @@ export function renderReadingBook({
       speech,
       t,
       returnFocus: focusCurrentSemanticUnit
+    });
+
+    translationControls?.destroy?.();
+    translationControls = createReadingTranslationControls({
+      root: moreActions,
+      client,
+      bookId: activeBook.id,
+      speech,
+      t,
+      returnFocus() {
+        moreActions.hidden = false;
+        queueMicrotask(() => moreHeading.focus());
+      }
     });
 
     renderSemanticPosition(currentPosition, { announce: false });

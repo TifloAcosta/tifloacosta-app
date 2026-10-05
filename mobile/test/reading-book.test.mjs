@@ -140,3 +140,20 @@ test('protected PDFs request a transient password and no-text PDFs have a distin
     assert.ok(i18n.includes(label), `Missing translation: ${label}`);
   }
 });
+
+
+test('reading book keeps final progress and grouped controls for the next Android beta', async () => {
+  const screen = await read('src/screens/reading-book.mjs');
+  for (const token of [
+    'reading-book-progress',
+    'reading-progress-percent',
+    'for (let value = 0; value <= 100; value += 10)',
+    'estimatedReadingTimes',
+    'Transcurrido: aproximadamente',
+    'Restante: aproximadamente',
+    'readingBook.voiceAndSpeed',
+    'readingBook.visualSettings',
+    'Más acciones',
+    'Temporizador de lectura'
+  ]) assert.ok(screen.includes(token), `Missing Android parity control: ${token}`);
+});

@@ -333,6 +333,7 @@
   let currentUnitIndex = 0;
   let fileImportInProgress = false;
   let playbackAccessibilityState = null;
+  let readingTimerHandle = null;
   const translationMemory = new Map();
 
   const speechAdapter = typeof shared.createWebReadingSpeechAdapter === 'function'
@@ -563,6 +564,50 @@
       nextUnit.textContent = language() === 'en' ? `Next ${label}` : `Siguiente: ${label}`;
     }
 
+    const progressStatus = document.createElement('p');
+    progressStatus.id = 'reading-document-progress';
+    progressStatus.className = 'muted';
+
+    const progressLabel = document.createElement('label');
+    progressLabel.htmlFor = 'reading-document-progress-percent';
+    progressLabel.textContent = language() === 'en' ? 'Go to position' : 'Ir a posición';
+    const progressSelect = document.createElement('select');
+    progressSelect.id = 'reading-document-progress-percent';
+    for (let value = 0; value <= 100; value += 10) {
+      const option = document.createElement('option');
+      option.value = String(value);
+      option.textContent = `${value} %`;
+      progressSelect.append(option);
+    }
+
+    const primaryActions = document.createElement('div');
+    primaryActions.className = 'resource-actions';
+
+    const mark = document.createElement('button');
+    mark.type = 'button';
+    mark.textContent = language() === 'en' ? 'Add bookmark' : 'Añadir marca';
+
+    const audioButton = document.createElement('button');
+    audioButton.type = 'button';
+    audioButton.textContent = language() === 'en' ? 'Audio and voice' : 'Audio y voz';
+
+    const visualButton = document.createElement('button');
+    visualButton.type = 'button';
+    visualButton.textContent = language() === 'en' ? 'Visual presentation' : 'Presentación visual';
+
+    const moreButton = document.createElement('button');
+    moreButton.type = 'button';
+    moreButton.textContent = language() === 'en' ? 'More actions' : 'Más acciones';
+
+    primaryActions.append(mark, audioButton, visualButton, moreButton);
+
+    const audioPanel = document.createElement('section');
+    audioPanel.id = 'reading-document-audio';
+    audioPanel.hidden = true;
+    const audioHeading = document.createElement('h4');
+    audioHeading.tabIndex = -1;
+    audioHeading.textContent = language() === 'en' ? 'Audio and voice' : 'Audio y voz';
+
     const voiceLanguageLabel = document.createElement('label');
     voiceLanguageLabel.htmlFor = 'reading-document-voice-language';
     voiceLanguageLabel.textContent = language() === 'en' ? 'Voice language for this document' : 'Idioma de la voz para este documento';
@@ -590,17 +635,131 @@
     rateOut.value = rate.value;
     rateOut.textContent = rate.value;
 
-    const actions = document.createElement('div');
-    actions.className = 'resource-actions';
-    const mark = document.createElement('button');
-    mark.type = 'button';
-    mark.textContent = language() === 'en' ? 'Add bookmark' : 'Añadir marca';
-    const reset = document.createElement('button');
-    reset.type = 'button';
-    reset.textContent = language() === 'en' ? 'Use general settings' : 'Usar ajustes generales';
-    actions.append(mark, reset);
+    const resetAudio = document.createElement('button');
+    resetAudio.type = 'button';
+    resetAudio.textContent = language() === 'en' ? 'Use general audio settings' : 'Usar ajustes generales de audio';
+    const closeAudio = document.createElement('button');
+    closeAudio.type = 'button';
+    closeAudio.textContent = language() === 'en' ? 'Back to reading' : 'Volver a la lectura';
+    audioPanel.append(audioHeading, voiceLanguageLabel, voiceLanguage, voiceLabel, voice, rateLabel, rate, rateOut, resetAudio, closeAudio);
 
-    section.append(heading, unitLabel, unit, previousUnit, nextUnit, voiceLanguageLabel, voiceLanguage, voiceLabel, voice, rateLabel, rate, rateOut, actions);
+    const visualPanel = document.createElement('section');
+    visualPanel.id = 'reading-document-visual';
+    visualPanel.hidden = true;
+    const visualHeading = document.createElement('h4');
+    visualHeading.tabIndex = -1;
+    visualHeading.textContent = language() === 'en' ? 'Visual presentation' : 'Presentación visual';
+
+    function visualSelect(id, labelText, options) {
+      const label = document.createElement('label');
+      label.htmlFor = id;
+      label.textContent = labelText;
+      const select = document.createElement('select');
+      select.id = id;
+      for (const [value, text] of options) {
+        const option = document.createElement('option');
+        option.value = String(value);
+        option.textContent = text;
+        select.append(option);
+      }
+      visualPanel.append(label, select);
+      return select;
+    }
+
+    const storedVisual = readWebSettings();
+    const textSize = visualSelect('reading-document-text-size', language() === 'en' ? 'Text size' : 'Tamaño del texto', [
+      ['0.9','90 %'],['1','100 %'],['1.25','125 %'],['1.5','150 %'],['2','200 %']
+    ]);
+    const fontFamily = visualSelect('reading-document-font-family', language() === 'en' ? 'Font' : 'Tipo de letra', [
+      ['system',language() === 'en' ? 'System' : 'Sistema'],
+      ['sans-serif','Sans serif'],['serif','Serif'],['monospace',language() === 'en' ? 'Monospace' : 'Monoespaciada']
+    ]);
+    const fontWeight = visualSelect('reading-document-font-weight', language() === 'en' ? 'Text weight' : 'Grosor del texto', [
+      ['normal',language() === 'en' ? 'Normal' : 'Normal'],
+      ['medium',language() === 'en' ? 'Medium' : 'Medio'],
+      ['bold',language() === 'en' ? 'Bold' : 'Negrita']
+    ]);
+    const lineSpacing = visualSelect('reading-document-line-spacing', language() === 'en' ? 'Line spacing' : 'Espaciado entre líneas', [
+      ['1','1'],['1.5','1,5'],['2','2'],['2.5','2,5']
+    ]);
+    const paragraphSpacing = visualSelect('reading-document-paragraph-spacing', language() === 'en' ? 'Paragraph spacing' : 'Espaciado entre párrafos', [
+      ['0','0'],['1','1'],['2','2'],['3','3']
+    ]);
+    const readingWidth = visualSelect('reading-document-width', language() === 'en' ? 'Reading width' : 'Anchura de lectura', [
+      ['45',language() === 'en' ? 'Narrow' : 'Estrecha'],
+      ['72',language() === 'en' ? 'Normal' : 'Normal'],
+      ['100',language() === 'en' ? 'Wide' : 'Ancha']
+    ]);
+    const theme = visualSelect('reading-document-theme', language() === 'en' ? 'Theme' : 'Tema', [
+      ['system',language() === 'en' ? 'System' : 'Sistema'],
+      ['light',language() === 'en' ? 'Light' : 'Claro'],
+      ['dark',language() === 'en' ? 'Dark' : 'Oscuro']
+    ]);
+    const contrast = document.createElement('input');
+    contrast.type = 'checkbox';
+    contrast.id = 'reading-document-high-contrast';
+    const contrastLabel = document.createElement('label');
+    contrastLabel.htmlFor = contrast.id;
+    contrastLabel.textContent = language() === 'en' ? 'High contrast' : 'Alto contraste';
+    visualPanel.append(contrast, contrastLabel);
+
+    const resetVisual = document.createElement('button');
+    resetVisual.type = 'button';
+    resetVisual.textContent = language() === 'en' ? 'Use general visual settings' : 'Usar ajustes visuales generales';
+    const closeVisual = document.createElement('button');
+    closeVisual.type = 'button';
+    closeVisual.textContent = language() === 'en' ? 'Back to reading' : 'Volver a la lectura';
+    visualPanel.append(resetVisual, closeVisual);
+
+    const morePanel = document.createElement('section');
+    morePanel.id = 'reading-document-more-actions';
+    morePanel.hidden = true;
+    const moreHeading = document.createElement('h4');
+    moreHeading.tabIndex = -1;
+    moreHeading.textContent = language() === 'en' ? 'More actions' : 'Más acciones';
+
+    const timerLabel = document.createElement('label');
+    timerLabel.htmlFor = 'reading-document-timer';
+    timerLabel.textContent = language() === 'en' ? 'Reading timer' : 'Temporizador de lectura';
+    const timerSelect = document.createElement('select');
+    timerSelect.id = 'reading-document-timer';
+    for (const [value, es, en] of [
+      ['','Desactivado','Off'],
+      ['10','10 minutos','10 minutes'],
+      ['20','20 minutos','20 minutes'],
+      ['30','30 minutos','30 minutes'],
+      ['45','45 minutos','45 minutes'],
+      ['60','60 minutos','60 minutes']
+    ]) {
+      const option = document.createElement('option');
+      option.value = value;
+      option.textContent = language() === 'en' ? en : es;
+      timerSelect.append(option);
+    }
+
+    const closeMore = document.createElement('button');
+    closeMore.type = 'button';
+    closeMore.textContent = language() === 'en' ? 'Back to reading' : 'Volver a la lectura';
+    morePanel.append(moreHeading, timerLabel, timerSelect);
+
+    const movable = [
+      els.searchForm,
+      els.searchStatus,
+      els.searchResults,
+      document.getElementById('reading-translation-web'),
+      els.save?.closest?.('.resource-actions'),
+      els.markStatus
+    ].filter(Boolean);
+    movable.forEach(node => morePanel.append(node));
+    morePanel.append(closeMore);
+
+    section.append(
+      heading,
+      unitLabel, unit, previousUnit, nextUnit,
+      progressStatus, progressLabel, progressSelect,
+      primaryActions,
+      audioPanel, visualPanel, morePanel
+    );
     mainControls.after(section);
 
     els.navigationUnit = unit;
@@ -609,6 +768,55 @@
     els.documentVoice = voice;
     els.documentRate = rate;
     els.documentRateValue = rateOut;
+    els.documentProgressStatus = progressStatus;
+    els.documentProgressSelect = progressSelect;
+
+    function showPanel(panel, panelHeading, opener) {
+      for (const item of [audioPanel, visualPanel, morePanel]) item.hidden = item !== panel;
+      panel.hidden = false;
+      panel.dataset.opener = opener.id || '';
+      queueMicrotask(() => panelHeading.focus());
+    }
+
+    function closePanel(panel, opener) {
+      panel.hidden = true;
+      opener.focus();
+    }
+
+    function applyDocumentVisual() {
+      const familyMap = {
+        system: 'inherit',
+        'sans-serif': 'Arial, sans-serif',
+        serif: 'Georgia, serif',
+        monospace: 'ui-monospace, SFMono-Regular, Consolas, monospace'
+      };
+      els.reader.style.setProperty('--reading-text-size', String(Number(textSize.value) || 1));
+      els.reader.style.setProperty('--reading-line-spacing', String(Number(lineSpacing.value) || 1.5));
+      els.reader.style.setProperty('--reading-paragraph-spacing', String(Number(paragraphSpacing.value) || 1));
+      els.reader.style.setProperty('--reading-width', `${Number(readingWidth.value) || 72}ch`);
+      els.reader.style.setProperty('--reading-font-family', familyMap[fontFamily.value] || 'inherit');
+      els.reader.style.setProperty('--reading-font-weight', fontWeight.value === 'bold' ? '700' : fontWeight.value === 'medium' ? '600' : '400');
+      els.reader.dataset.readingTheme = theme.value || 'system';
+      els.reader.dataset.highContrast = contrast.checked ? 'true' : 'false';
+    }
+
+    function restoreDocumentVisualFromGeneral() {
+      const value = readWebSettings();
+      textSize.value = String(value.textSize || 1);
+      fontFamily.value = value.fontFamily || 'system';
+      fontWeight.value = value.fontWeight || 'normal';
+      lineSpacing.value = String(value.lineSpacing || 1.5);
+      paragraphSpacing.value = String(value.paragraphSpacing ?? 1);
+      readingWidth.value = String(value.readingWidth || 72);
+      theme.value = value.theme || 'system';
+      contrast.checked = Boolean(value.highContrast);
+      applyDocumentVisual();
+    }
+
+    restoreDocumentVisualFromGeneral();
+    for (const control of [textSize, fontFamily, fontWeight, lineSpacing, paragraphSpacing, readingWidth, theme, contrast]) {
+      control.addEventListener('change', applyDocumentVisual);
+    }
 
     unit.addEventListener('change', () => {
       navigationUnit = unit.value || 'block';
@@ -618,6 +826,20 @@
     previousUnit.addEventListener('click', () => move(-1));
     nextUnit.addEventListener('click', () => move(1));
     updateUnitButtons();
+
+    progressSelect.addEventListener('change', () => {
+      if (!documentModel?.blocks?.length) return;
+      const percent = Math.max(0, Math.min(100, Number(progressSelect.value) || 0));
+      const maxIndex = Math.max(0, documentModel.blocks.length - 1);
+      const target = percent >= 100 ? maxIndex : Math.min(maxIndex, Math.floor((percent / 100) * documentModel.blocks.length));
+      currentUnitIndex = 0;
+      readingSession = shared.createReadingSession({ blocks: documentModel.blocks, initialIndex: target });
+      renderBlock();
+      void persistProgress({ unitIndex: 0 });
+      void speechController?.moveTo?.({ blockIndex: target, unitIndex: 0 });
+      queueMicrotask(() => els.block.focus());
+    });
+
     voiceLanguage.addEventListener('change', () => {
       documentVoiceOverride = '';
       populatePerDocumentVoices();
@@ -633,17 +855,53 @@
     });
     rate.addEventListener('change', () => {
       documentRateOverride = Number(rate.value) || null;
+      renderPosition();
       void rebuildSpeech({ blockIndex: readingSession?.snapshot?.().blockIndex || 0, unitIndex: currentUnitIndex });
     });
     mark.addEventListener('click', () => { void addBookmark(); });
-    reset.addEventListener('click', () => {
+
+    resetAudio.addEventListener('click', () => {
       documentVoiceOverride = '';
       documentRateOverride = null;
       voice.value = '';
       rate.value = String(Number(els.rate?.value || 1));
       rateOut.value = rate.value;
       rateOut.textContent = rate.value;
+      renderPosition();
       void rebuildSpeech({ blockIndex: readingSession?.snapshot?.().blockIndex || 0, unitIndex: currentUnitIndex });
+    });
+    resetVisual.addEventListener('click', restoreDocumentVisualFromGeneral);
+
+    audioButton.id = 'reading-document-open-audio';
+    visualButton.id = 'reading-document-open-visual';
+    moreButton.id = 'reading-document-open-more';
+    audioButton.addEventListener('click', () => showPanel(audioPanel, audioHeading, audioButton));
+    visualButton.addEventListener('click', () => showPanel(visualPanel, visualHeading, visualButton));
+    moreButton.addEventListener('click', () => showPanel(morePanel, moreHeading, moreButton));
+    closeAudio.addEventListener('click', () => closePanel(audioPanel, audioButton));
+    closeVisual.addEventListener('click', () => closePanel(visualPanel, visualButton));
+    closeMore.addEventListener('click', () => closePanel(morePanel, moreButton));
+
+    timerSelect.addEventListener('change', () => {
+      if (readingTimerHandle) {
+        clearTimeout(readingTimerHandle);
+        readingTimerHandle = null;
+      }
+      const minutes = Number(timerSelect.value) || 0;
+      if (!minutes) {
+        els.status.textContent = language() === 'en' ? 'Reading timer off.' : 'Temporizador de lectura desactivado.';
+        return;
+      }
+      els.status.textContent = language() === 'en'
+        ? `Reading timer set for ${minutes} minutes.`
+        : `Temporizador establecido en ${minutes} minutos.`;
+      readingTimerHandle = setTimeout(() => {
+        readingTimerHandle = null;
+        void pause();
+        els.status.textContent = language() === 'en'
+          ? 'Reading timer ended. Playback stopped.'
+          : 'Temporizador finalizado. Reproducción detenida.';
+      }, minutes * 60 * 1000);
     });
   }
 
@@ -939,6 +1197,7 @@
     els.position?.removeAttribute?.('role');
     if (!documentModel || !readingSession) {
       els.position.textContent = '';
+      if (els.documentProgressStatus) els.documentProgressStatus.textContent = '';
       return;
     }
     const snapshot = readingSession.snapshot();
@@ -952,6 +1211,30 @@
     } else {
       els.position.textContent = t().position(Math.min(total, snapshot.blockIndex + 1), total);
     }
+
+    const percent = Math.max(0, Math.min(100, Number(snapshot.percent) || 0));
+    const words = documentModel.blocks.reduce((sum, block) => {
+      return sum + String(block?.text || '').trim().split(/\s+/u).filter(Boolean).length;
+    }, 0);
+    const wordsPerMinute = Math.max(60, 180 * (Number(documentRateOverride || els.rate?.value || 1) || 1));
+    const totalSeconds = words ? Math.round((words / wordsPerMinute) * 60) : 0;
+    const elapsedSeconds = Math.round(totalSeconds * (percent / 100));
+    const remainingSeconds = Math.max(0, totalSeconds - elapsedSeconds);
+    const duration = seconds => {
+      const value = Math.max(0, Math.round(Number(seconds) || 0));
+      const hours = Math.floor(value / 3600);
+      const minutes = Math.floor((value % 3600) / 60);
+      return hours > 0 ? `${hours} h ${minutes} min` : `${minutes} min`;
+    };
+    if (els.documentProgressStatus) {
+      els.documentProgressStatus.textContent = language() === 'en'
+        ? `Progress: ${Math.round(percent)}%. Elapsed: about ${duration(elapsedSeconds)}. Remaining: about ${duration(remainingSeconds)}.`
+        : `Progreso: ${Math.round(percent)} %. Transcurrido: aproximadamente ${duration(elapsedSeconds)}. Restante: aproximadamente ${duration(remainingSeconds)}.`;
+    }
+    if (els.documentProgressSelect) {
+      els.documentProgressSelect.value = String(Math.max(0, Math.min(100, Math.round(percent / 10) * 10)));
+    }
+
     els.previous.disabled = snapshot.blockIndex <= 0;
     els.next.disabled = snapshot.blockIndex >= Math.max(0, total - 1);
   }

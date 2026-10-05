@@ -15,7 +15,6 @@ test('reading library screen keeps import, search, paging and delete actions exp
   assert.match(screen, /addEventListener\(['"]submit['"]/);
   assert.doesNotMatch(screen, /addEventListener\(['"]input['"][\s\S]{0,120}listBooks/);
   assert.match(screen, /aria-live['"],\s*['"]polite['"]/);
-  assert.match(screen, /readingLibrary\.options/);
   assert.match(screen, /readingLibrary\.confirmDelete/);
   assert.match(screen, /client\.deleteBook\(/);
   assert.match(screen, /readingLibrary\.previousPage/);
@@ -153,4 +152,14 @@ test('import control explicitly lists every supported document family', async ()
   for (const label of ['Word (DOCX)', 'EPUB', 'PDF', 'TXT', 'HTML', 'DAISY', 'audio']) {
     assert.ok(screen.includes(label), `Missing import format hint: ${label}`);
   }
+});
+
+
+test('Android reading library keeps title list clean and reveals controls only after opening a title', async () => {
+  const screen = await read('src/screens/reading-library.mjs');
+  assert.ok(screen.includes('reading-library-item-details'));
+  assert.ok(screen.includes("title.setAttribute('aria-expanded', 'false')"));
+  assert.ok(screen.includes('details.hidden = true'));
+  assert.ok(screen.includes('Abrir para leer'));
+  assert.ok(screen.includes('Volver a los títulos de la biblioteca'));
 });

@@ -513,16 +513,17 @@ export function renderReadingLibrary({
     const article = document.createElement('article');
     article.className = 'content-card reading-library-item';
 
-    const title = makeButton(item.title || t('readingLibrary.untitled'), () => {
-      const expanded = title.getAttribute('aria-expanded') === 'true';
-      title.setAttribute('aria-expanded', String(!expanded));
-      details.hidden = expanded;
-      if (!expanded) {
-        queueMicrotask(() => detailsHeading.focus());
-        if (!timeLoaded) void loadEstimatedTimes();
-      }
-    }, 'reading-library-title');
-    title.setAttribute('aria-expanded', 'false');
+    const title = makeButton(
+      item.title || t('readingLibrary.untitled'),
+      () => onOpenBook?.(item.id),
+      'reading-library-title'
+    );
+    title.setAttribute(
+      'aria-label',
+      document.documentElement.lang === 'en'
+        ? `Open for reading: ${item.title || t('readingLibrary.untitled')}`
+        : `Abrir para leer: ${item.title || t('readingLibrary.untitled')}`
+    );
     article.append(title);
 
     const details = document.createElement('section');
@@ -873,7 +874,6 @@ export function renderReadingLibrary({
       morePanel,
       close
     );
-    article.append(details);
     return article;
   }
 

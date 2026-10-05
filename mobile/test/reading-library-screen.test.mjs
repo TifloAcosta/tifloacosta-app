@@ -155,29 +155,13 @@ test('import control explicitly lists every supported document family', async ()
 });
 
 
-test('Android reading library keeps title list clean and reveals controls only after opening a title', async () => {
+test('Android reading library opens a title directly without exposing an intermediate details view', async () => {
   const screen = await read('src/screens/reading-library.mjs');
-  assert.ok(screen.includes('reading-library-item-details'));
-  assert.ok(screen.includes("title.setAttribute('aria-expanded', 'false')"));
-  assert.ok(screen.includes('details.hidden = true'));
-  assert.ok(screen.includes('Abrir para leer'));
-  assert.ok(screen.includes('Volver a los títulos de la biblioteca'));
-});
-
-
-test('Android reading library uses final title detail layout with progress times grouped settings and 10 percent jumps', async () => {
-  const screen = await read('src/screens/reading-library.mjs');
-  for (const token of [
-    'reading-library-progress-',
-    'Tiempo realizado y tiempo faltante',
-    'Abrir en posición',
-    'Audio y voz',
-    'Presentación visual',
-    'Más acciones',
-    'for (let value = 0; value <= 100; value += 10)',
-    "scope:'book'",
-    'onOpenBook?.(item.id, Number(jumpSelect.value) || 0)'
-  ]) assert.ok(screen.includes(token), `Missing Android library layout token: ${token}`);
+  assert.ok(screen.includes("() => onOpenBook?.(item.id)"));
+  assert.ok(screen.includes("'reading-library-title'"));
+  assert.ok(screen.includes('Abrir para leer:'));
+  assert.ok(screen.includes('article.append(title);'));
+  assert.ok(!screen.includes('article.append(details);'));
 });
 
 test('Android composition carries a requested library percentage into the opened book', async () => {

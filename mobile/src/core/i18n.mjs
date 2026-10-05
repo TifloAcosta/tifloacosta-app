@@ -88,7 +88,7 @@ const DICTIONARIES = {
     },
     readingBook: {
       loading: 'Abriendo documento…', backToLibrary: 'Volver a Leer con TifloAcosta',
-      navigation: 'Navegación', previousParagraph: 'Párrafo anterior', nextParagraph: 'Párrafo siguiente',
+      navigation: 'Avanzar y retroceder por', previousParagraph: 'Párrafo anterior', nextParagraph: 'Párrafo siguiente',
       previousSentence: 'Frase anterior', nextSentence: 'Frase siguiente',
       previousUnit: 'Anterior', nextUnit: 'Siguiente', play: 'Reproducir', pause: 'Pausa',
       search: 'Buscar', marks: 'Marcas', readingState: 'Estado de lectura', returnToReading: 'Volver a la lectura',
@@ -252,7 +252,7 @@ const DICTIONARIES = {
       audioDuplicateTrack: 'The selection contains two tracks with identical content. Review the files and try again.'
     },
     readingBook: {
-      loading: 'Opening document…', backToLibrary: 'Back to Read with TifloAcosta', navigation: 'Navigation',
+      loading: 'Opening document…', backToLibrary: 'Back to Read with TifloAcosta', navigation: 'Move forward and back by',
       previousParagraph: 'Previous paragraph', nextParagraph: 'Next paragraph',
       previousSentence: 'Previous sentence', nextSentence: 'Next sentence', previousUnit: 'Previous', nextUnit: 'Next',
       play: 'Play', pause: 'Pause', search: 'Search', marks: 'Marks', readingState: 'Reading status', returnToReading: 'Return to reading',

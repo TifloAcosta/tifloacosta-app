@@ -320,13 +320,11 @@ export function renderReadingBook({
 
   controls.append(
     playButton,
-    previous,
-    next,
     navigationLabel,
     navigationSelect,
+    previous,
+    next,
     progressStatus,
-    progressLabel,
-    progressSelect,
     addMarkButton,
     voiceButton,
     visualButton,
@@ -362,6 +360,8 @@ export function renderReadingBook({
   moreReturn.textContent = t('readingBook.returnToReading');
   moreActions.append(
     moreHeading,
+    progressLabel,
+    progressSelect,
     searchButton,
     marksButton,
     readingStateLabel,
@@ -821,8 +821,8 @@ export function renderReadingBook({
     const rate = Number(speech?.snapshot?.().rate) || 1;
     const estimate = estimatedReadingTimes(documentModel, position, rate);
     progressStatus.textContent = document.documentElement.lang === 'en'
-      ? `Progress: ${percent}%. Elapsed: about ${readableDuration(estimate.elapsedSeconds)}. Remaining: about ${readableDuration(estimate.remainingSeconds)}.`
-      : `Progreso: ${percent} %. Transcurrido: aproximadamente ${readableDuration(estimate.elapsedSeconds)}. Restante: aproximadamente ${readableDuration(estimate.remainingSeconds)}.`;
+      ? `${percent}% read. About ${readableDuration(estimate.remainingSeconds)} remaining.`
+      : `${percent} % leído. Quedan aproximadamente ${readableDuration(estimate.remainingSeconds)}.`;
     const nearest = Math.max(0, Math.min(100, Math.round(percent / 10) * 10));
     progressSelect.value = String(nearest);
   }

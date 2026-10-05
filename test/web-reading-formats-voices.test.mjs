@@ -70,3 +70,26 @@ test('web reader exposes external voice providers separately from browser voices
     assert.ok(catalog.includes(provider), `Missing voice provider ${provider}`);
   }
 });
+
+
+test('web reader filters browser and external voices by language', async () => {
+  const [source, catalog, html, worker] = await Promise.all([
+    read('web-reading.js'),
+    read('shared/reading-voice-catalog.mjs'),
+    read('index.html'),
+    read('sw.js')
+  ]);
+  for (const token of [
+    'reading-voice-language',
+    'reading-external-voice-language',
+    'voicesForLanguage',
+    'populateLanguageFilter',
+    'voiceLanguage',
+    'externalVoiceLanguage'
+  ]) assert.ok(source.includes(token), `Missing language filter feature ${token}`);
+  assert.ok(source.includes('reading-document-voice-language'));
+  assert.ok(catalog.includes('languages:'));
+  assert.match(html, /web-reading\.js\?v=3\.4/);
+  assert.match(worker, /web-reading\.js\?v=3\.4/);
+  assert.match(worker, /tifloacosta-app-v2-38-language-filtered-voices/);
+});

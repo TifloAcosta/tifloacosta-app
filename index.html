@@ -175,7 +175,6 @@
       <div class="resource-actions" aria-label="Ajustes de TifloLector">
         <button type="button" data-reading-view="reading-audio-view" aria-haspopup="true">Audio y voz</button>
         <button type="button" data-reading-view="reading-visual-view" aria-haspopup="true">Presentación visual</button>
-        <button type="button" data-reading-view="reading-voices-view" aria-haspopup="true">Buscar más voces</button>
       </div>
       <p id="reading-settings-status" class="muted" role="status" aria-live="polite"></p>
     </section>
@@ -208,6 +207,16 @@
           </select>
         </fieldset>
       </section>
+<section id="reading-more-voices-settings" aria-labelledby="reading-more-voices-settings-heading">
+        <h4 id="reading-more-voices-settings-heading">Buscar más voces</h4>
+        <section id="reading-external-voices" aria-labelledby="reading-more-voices-settings-heading">
+          <p id="reading-external-voices-intro">Consulta proveedores externos para probar, comprar o crear voces distintas de las que ya ofrece el navegador. La compatibilidad depende de cada servicio y plataforma.</p>
+          <div id="reading-external-voices-list" class="resource-list"></div>
+          <p id="reading-external-voices-status" class="muted" role="status" aria-live="polite"></p>
+        </section>
+      </section>
+      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
+    
       <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
     </section>
 
@@ -277,20 +286,6 @@
             <label for="reading-high-contrast">Alto contraste</label>
           </div>
         </fieldset>
-      </section>
-      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
-    </section>
-
-    <section id="reading-voices-view" class="panel reading-subview" hidden aria-labelledby="reading-voices-view-heading">
-      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
-      <h3 id="reading-voices-view-heading" tabindex="-1">Buscar más voces</h3>
-<section id="reading-more-voices-settings" aria-labelledby="reading-more-voices-settings-heading">
-        <h3 id="reading-more-voices-settings-heading">Buscar más voces</h3>
-        <section id="reading-external-voices" aria-labelledby="reading-more-voices-settings-heading">
-          <p id="reading-external-voices-intro">Consulta proveedores externos para probar, comprar o crear voces distintas de las que ya ofrece el navegador. La compatibilidad depende de cada servicio y plataforma.</p>
-          <div id="reading-external-voices-list" class="resource-list"></div>
-          <p id="reading-external-voices-status" class="muted" role="status" aria-live="polite"></p>
-        </section>
       </section>
       <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
     </section>
@@ -562,7 +557,7 @@
 <script type="module">
   import * as shared from './shared/web-entry.mjs?v=1.6';
   window.TIFLO_SHARED = shared;
-  await import('./web-reading.js?v=3.11');
+  await import('./web-reading.js?v=3.12');
 </script>
 <script src="app.js?v=2.2"></script>
 <script>

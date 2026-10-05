@@ -110,11 +110,32 @@ test('web library can export saved documents as original, accessible TXT or acce
 });
 
 
-test('web TifloLector library shows only titles until a title is opened', async () => {
+test('web TifloLector library opens a title directly for reading and keeps details separate', async () => {
   const source = await read('web-reading.js');
   assert.ok(source.includes('reading-library-title-card'));
   assert.ok(source.includes('reading-library-title-details'));
-  assert.ok(source.includes("title.setAttribute('aria-expanded', 'false')"));
+  assert.ok(source.includes('reading-library-details-toggle'));
+  assert.ok(source.includes("title.addEventListener('click', () =>"));
+  assert.ok(source.includes('void openSavedBook(book.id);'));
+  assert.ok(source.includes("detailsToggle.setAttribute('aria-expanded', 'false')"));
   assert.ok(source.includes('details.hidden = true'));
+  assert.ok(source.includes('Detalles y ajustes'));
+  assert.ok(source.includes('Abrir desde la posición seleccionada'));
   assert.ok(source.includes('Volver a los títulos de la biblioteca'));
+});
+
+
+test('opening a saved web book exits the library subview before showing the reader', async () => {
+  const source = await read('web-reading.js');
+  assert.ok(source.includes('returnToReadingMainFromSubview'));
+  assert.match(source, /returnToReadingMainFromSubview\(\)[\s\S]{0,1200}useDocument\(/);
+});
+
+test('web reader exposes one visible navigation set controlled by the unit selector', async () => {
+  const source = await read('web-reading.js');
+  assert.ok(source.includes("unit.id = 'reading-navigation-unit'"));
+  assert.ok(source.includes('els.previous.hidden = true'));
+  assert.ok(source.includes('els.next.hidden = true'));
+  assert.ok(source.includes('previousUnit.addEventListener'));
+  assert.ok(source.includes('nextUnit.addEventListener'));
 });

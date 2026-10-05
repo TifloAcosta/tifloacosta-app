@@ -21,7 +21,7 @@ test('per-book voice rate and visual changes are persisted immediately as overri
   assert.match(screen, /client\.setReadingSetting\(/);
   assert.match(screen, /scope:\s*['"]book['"]/);
   for (const key of [
-    'speech.voice', 'speech.rate', 'visual.textSize', 'visual.fontFamily', 'visual.fontWeight',
+    'speech.voice', 'speech.voiceLanguage', 'speech.rate', 'visual.textSize', 'visual.fontFamily', 'visual.fontWeight',
     'visual.lineSpacing', 'visual.paragraphSpacing', 'visual.readingWidth', 'visual.foreground',
     'visual.background', 'visual.highContrast', 'visual.theme'
   ]) {
@@ -107,4 +107,17 @@ test('voice and visual settings behave as modal TalkBack dialogs and restore foc
   assert.match(screen, /lastInvoker\?\.focus\(\)/);
   assert.match(screen, /event\.key\s*===\s*['"]Tab['"]/);
   assert.match(screen, /focusableElements/);
+});
+
+
+test('Android TifloLector filters installed voices by language before voice selection', async () => {
+  const screen = await read('src/screens/reading-settings.mjs');
+  for (const token of [
+    'reading-voice-language',
+    'populateVoiceLanguageOptions',
+    'primaryLanguage',
+    "speech.voiceLanguage",
+    'voiceCatalog.setLanguageFilter'
+  ]) assert.ok(screen.includes(token), `Missing Android voice-language filter feature ${token}`);
+  assert.ok(screen.indexOf('voiceLanguageLabel') < screen.indexOf('voiceLabel'));
 });

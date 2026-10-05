@@ -513,30 +513,32 @@ export function renderReadingLibrary({
     const article = document.createElement('article');
     article.className = 'content-card reading-library-item';
 
-    const title = makeButton(item.title || t('readingLibrary.untitled'), () => onOpenBook?.(item.id), 'reading-library-title');
+    const title = makeButton(item.title || t('readingLibrary.untitled'), () => {
+      const expanded = title.getAttribute('aria-expanded') === 'true';
+      title.setAttribute('aria-expanded', String(!expanded));
+      details.hidden = expanded;
+      if (!expanded) queueMicrotask(() => detailsHeading.focus());
+    }, 'reading-library-title');
+    title.setAttribute('aria-expanded', 'false');
     article.append(title);
+
+    const details = document.createElement('section');
+    details.className = 'reading-library-item-details';
+    details.hidden = true;
+    const detailsHeading = document.createElement('h3');
+    detailsHeading.tabIndex = -1;
+    detailsHeading.textContent = item.title || t('readingLibrary.untitled');
 
     const detail = document.createElement('p');
     detail.className = 'muted';
     const author = item.author ? `${item.author}. ` : '';
     detail.textContent = `${author}${formatLabel(item.format)}. ${stateLabel(item, t)}. ${progressLabel(item, t)}`;
-    article.append(detail);
 
-    const options = makeButton(
-      format(t('readingLibrary.options'), { title: item.title || t('readingLibrary.untitled') }),
-      () => {
-        const expanded = options.getAttribute('aria-expanded') === 'true';
-        options.setAttribute('aria-expanded', String(!expanded));
-        actions.hidden = expanded;
-        if (expanded) confirmHost.replaceChildren();
-      }
+    const openBook = makeButton(
+      fallback(t, 'readingLibrary.open', 'Abrir para leer', 'Open for reading'),
+      () => onOpenBook?.(item.id)
     );
-    options.setAttribute('aria-expanded', 'false');
-    article.append(options);
 
-    const actions = document.createElement('div');
-    actions.className = 'reading-library-item-actions';
-    actions.hidden = true;
     const confirmHost = document.createElement('div');
 
     const queueButton = makeButton(
@@ -640,8 +642,17 @@ export function renderReadingLibrary({
       confirmHost.append(confirm, cancel);
     });
 
-    actions.append(queueButton, stateField, info, rename, deleteButton, confirmHost);
-    article.append(actions);
+    const close = makeButton(
+      fallback(t, 'readingLibrary.backToTitles', 'Volver a los títulos de la biblioteca', 'Back to library titles'),
+      () => {
+        details.hidden = true;
+        title.setAttribute('aria-expanded', 'false');
+        title.focus();
+      }
+    );
+
+    details.append(detailsHeading, detail, openBook, queueButton, stateField, info, rename, deleteButton, confirmHost, close);
+    article.append(details);
     return article;
   }
 

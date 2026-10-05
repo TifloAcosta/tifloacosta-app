@@ -378,11 +378,91 @@
     return copy[language()];
   }
 
+  function primaryLanguage(locale) {
+    return String(locale || '').trim().toLowerCase().split(/[-_]/)[0];
+  }
+
+  function languageName(code) {
+    const normalized = primaryLanguage(code);
+    if (!normalized) return '';
+    try {
+      return new Intl.DisplayNames([language()], { type:'language' }).of(normalized) || normalized;
+    } catch {
+      return normalized;
+    }
+  }
+
+  function uniqueLanguageCodes(values) {
+    return [...new Set((Array.isArray(values) ? values : []).map(primaryLanguage).filter(Boolean))]
+      .sort((a,b) => languageName(a).localeCompare(languageName(b), language()));
+  }
+
+  function populateLanguageFilter(select, codes, preferred = '') {
+    if (!select) return '';
+    const previous = primaryLanguage(preferred || select.value);
+    select.replaceChildren();
+    const all = document.createElement('option');
+    all.value = '';
+    all.textContent = language() === 'en' ? 'All languages' : 'Todos los idiomas';
+    select.append(all);
+    for (const code of uniqueLanguageCodes(codes)) {
+      const option = document.createElement('option');
+      option.value = code;
+      option.textContent = languageName(code);
+      select.append(option);
+    }
+    const fallback = uniqueLanguageCodes(codes).includes(language()) ? language() : '';
+    select.value = [...select.options].some(option => option.value === previous) ? previous : fallback;
+    return select.value;
+  }
+
+  function voicesForLanguage(voices, code) {
+    const selected = primaryLanguage(code);
+    return selected ? voices.filter(voice => primaryLanguage(voice.locale) === selected) : voices;
+  }
+
   function organizeGeneralSettingsMenus() {
     if (!els.settingsPanel || els.settingsPanel.dataset.organized === 'true') return;
     els.settingsPanel.dataset.organized = 'true';
 
     const audio = document.querySelector('#reading-audio-settings fieldset');
+    if (audio && !document.getElementById('reading-voice-language')) {
+      const languageLabel = document.createElement('label');
+      languageLabel.htmlFor = 'reading-voice-language';
+      languageLabel.textContent = language() === 'en' ? 'Voice language' : 'Idioma de la voz';
+      const languageSelect = document.createElement('select');
+      languageSelect.id = 'reading-voice-language';
+      const voiceRow = document.createElement('div');
+      voiceRow.append(languageLabel, languageSelect);
+      const voiceLabel = audio.querySelector('label[for="reading-voice"]');
+      if (voiceLabel) voiceLabel.before(voiceRow);
+      else audio.append(voiceRow);
+      els.voiceLanguageLabel = languageLabel;
+      els.voiceLanguage = languageSelect;
+      languageSelect.addEventListener('change', () => {
+        const previousVoice = els.voice?.value || '';
+        populateVoices();
+        if (els.voice && ![...els.voice.options].some(option => option.value === previousVoice)) els.voice.value = '';
+        saveWebSettings();
+        void rebuildSpeech();
+      });
+    }
+
+    if (els.externalVoicesList && !document.getElementById('reading-external-voice-language')) {
+      const externalLabel = document.createElement('label');
+      externalLabel.htmlFor = 'reading-external-voice-language';
+      externalLabel.textContent = language() === 'en' ? 'Language for more voices' : 'Idioma para buscar más voces';
+      const externalSelect = document.createElement('select');
+      externalSelect.id = 'reading-external-voice-language';
+      els.externalVoicesIntro?.after(externalLabel, externalSelect);
+      els.externalVoiceLanguageLabel = externalLabel;
+      els.externalVoiceLanguage = externalSelect;
+      externalSelect.addEventListener('change', () => {
+        renderExternalVoices();
+        saveWebSettings();
+      });
+    }
+
     if (audio && !document.getElementById('reading-screen-reader-mode')) {
       const mode = document.createElement('input');
       mode.type = 'checkbox';
@@ -453,6 +533,12 @@
       unit.append(option);
     }
 
+    const voiceLanguageLabel = document.createElement('label');
+    voiceLanguageLabel.htmlFor = 'reading-document-voice-language';
+    voiceLanguageLabel.textContent = language() === 'en' ? 'Voice language for this document' : 'Idioma de la voz para este documento';
+    const voiceLanguage = document.createElement('select');
+    voiceLanguage.id = 'reading-document-voice-language';
+
     const voiceLabel = document.createElement('label');
     voiceLabel.htmlFor = 'reading-document-voice';
     voiceLabel.textContent = language() === 'en' ? 'Voice for this document' : 'Voz para este documento';
@@ -484,10 +570,12 @@
     reset.textContent = language() === 'en' ? 'Use general settings' : 'Usar ajustes generales';
     actions.append(mark, reset);
 
-    section.append(heading, unitLabel, unit, voiceLabel, voice, rateLabel, rate, rateOut, actions);
+    section.append(heading, unitLabel, unit, voiceLanguageLabel, voiceLanguage, voiceLabel, voice, rateLabel, rate, rateOut, actions);
     mainControls.after(section);
 
     els.navigationUnit = unit;
+    els.documentVoiceLanguageLabel = voiceLanguageLabel;
+    els.documentVoiceLanguage = voiceLanguage;
     els.documentVoice = voice;
     els.documentRate = rate;
     els.documentRateValue = rateOut;
@@ -495,6 +583,11 @@
     unit.addEventListener('change', () => {
       navigationUnit = unit.value || 'block';
       buildSentenceUnits();
+    });
+    voiceLanguage.addEventListener('change', () => {
+      documentVoiceOverride = '';
+      populatePerDocumentVoices();
+      void rebuildSpeech({ blockIndex: readingSession?.snapshot?.().blockIndex || 0, unitIndex: currentUnitIndex });
     });
     voice.addEventListener('change', () => {
       documentVoiceOverride = voice.value;
@@ -523,19 +616,30 @@
   function populatePerDocumentVoices() {
     if (!els.documentVoice) return;
     const selected = documentVoiceOverride;
+    const voices = typeof shared.listWebTtsVoices === 'function' ? shared.listWebTtsVoices() : [];
+    const selectedVoice = voices.find(item => item.id === selected);
+    const preferredLanguage = els.documentVoiceLanguage?.value
+      || primaryLanguage(selectedVoice?.locale)
+      || els.voiceLanguage?.value
+      || readWebSettings().voiceLanguage
+      || language();
+    if (els.documentVoiceLanguage) {
+      populateLanguageFilter(els.documentVoiceLanguage, voices.map(item => item.locale), preferredLanguage);
+    }
+    const filtered = voicesForLanguage(voices, els.documentVoiceLanguage?.value || preferredLanguage);
     els.documentVoice.replaceChildren();
     const inherit = document.createElement('option');
     inherit.value = '';
     inherit.textContent = language() === 'en' ? 'Use general voice' : 'Usar voz general';
     els.documentVoice.append(inherit);
-    const voices = typeof shared.listWebTtsVoices === 'function' ? shared.listWebTtsVoices() : [];
-    for (const item of voices) {
+    for (const item of filtered) {
       const option = document.createElement('option');
       option.value = item.id;
       option.textContent = item.locale ? `${item.name} — ${item.locale}` : item.name;
       els.documentVoice.append(option);
     }
     if ([...els.documentVoice.options].some(option => option.value === selected)) els.documentVoice.value = selected;
+    else if (selected) documentVoiceOverride = '';
   }
 
   const WEB_READING_SETTINGS_KEY = 'tifloWebReadingSettingsV1';
@@ -550,6 +654,8 @@
   function saveWebSettings() {
     const value = {
       voice: els.voice?.value || '',
+      voiceLanguage: els.voiceLanguage?.value || '',
+      externalVoiceLanguage: els.externalVoiceLanguage?.value || '',
       rate: Number(els.rate?.value || 1),
       audioSpeed: Number(els.audioSpeed?.value || 1),
       textSize: Number(els.textSize?.value || 1),
@@ -594,6 +700,8 @@
 
   function restoreWebSettings() {
     const value = readWebSettings();
+    if (els.voiceLanguage && value.voiceLanguage !== undefined) els.voiceLanguage.value = primaryLanguage(value.voiceLanguage);
+    if (els.externalVoiceLanguage && value.externalVoiceLanguage !== undefined) els.externalVoiceLanguage.value = primaryLanguage(value.externalVoiceLanguage);
     if (els.rate && value.rate) els.rate.value = String(value.rate);
     if (els.rateValue) {
       els.rateValue.value = els.rate.value;
@@ -626,6 +734,9 @@
     els.play.textContent = c.play;
     els.pause.textContent = c.pause;
     els.voiceLabel.textContent = c.voice;
+    if (els.voiceLanguageLabel) els.voiceLanguageLabel.textContent = language() === 'en' ? 'Voice language' : 'Idioma de la voz';
+    if (els.externalVoiceLanguageLabel) els.externalVoiceLanguageLabel.textContent = language() === 'en' ? 'Language for more voices' : 'Idioma para buscar más voces';
+    if (els.documentVoiceLanguageLabel) els.documentVoiceLanguageLabel.textContent = language() === 'en' ? 'Voice language for this document' : 'Idioma de la voz para este documento';
     els.externalVoicesHeading.textContent = c.externalVoicesHeading;
     els.externalVoicesIntro.textContent = c.externalVoicesIntro;
     els.rateLabel.textContent = c.rate;
@@ -658,8 +769,17 @@
 
   function populateVoices() {
     const stored = readWebSettings();
-    const selected = els.voice.value || stored.voice || '';
+    const selected = els.voice?.value || stored.voice || '';
     const voices = typeof shared.listWebTtsVoices === 'function' ? shared.listWebTtsVoices() : [];
+    const selectedVoice = voices.find(voice => voice.id === selected);
+    const preferredLanguage = els.voiceLanguage?.value
+      || stored.voiceLanguage
+      || primaryLanguage(selectedVoice?.locale)
+      || language();
+    if (els.voiceLanguage) {
+      populateLanguageFilter(els.voiceLanguage, voices.map(voice => voice.locale), preferredLanguage);
+    }
+    const filtered = voicesForLanguage(voices, els.voiceLanguage?.value || preferredLanguage);
     els.voice.replaceChildren();
 
     const base = document.createElement('option');
@@ -667,7 +787,7 @@
     base.textContent = t().defaultVoice;
     els.voice.append(base);
 
-    for (const voice of voices) {
+    for (const voice of filtered) {
       const option = document.createElement('option');
       option.value = voice.id;
       option.textContent = voice.locale ? `${voice.name} — ${voice.locale}` : voice.name;
@@ -677,9 +797,14 @@
     if ([...els.voice.options].some(option => option.value === selected)) els.voice.value = selected;
 
     if (els.voiceStatus) {
-      els.voiceStatus.textContent = voices.length
-        ? (language() === 'en' ? `${voices.length} browser voices available.` : `${voices.length} voces disponibles en el navegador.`)
-        : (language() === 'en' ? 'Waiting for browser voices…' : 'Esperando las voces del navegador…');
+      if (!voices.length) {
+        els.voiceStatus.textContent = language() === 'en' ? 'Waiting for browser voices…' : 'Esperando las voces del navegador…';
+      } else {
+        const filterName = els.voiceLanguage?.value ? languageName(els.voiceLanguage.value) : (language() === 'en' ? 'all languages' : 'todos los idiomas');
+        els.voiceStatus.textContent = language() === 'en'
+          ? `${filtered.length} voices shown for ${filterName}.`
+          : `${filtered.length} voces mostradas para ${filterName}.`;
+      }
     }
 
     populatePerDocumentVoices();
@@ -692,11 +817,41 @@
       ? shared.WEB_EXTERNAL_VOICE_PROVIDERS
       : [];
     if (!providers.length) return;
-    for (const provider of providers) {
+
+    const codes = providers.flatMap(provider => Array.isArray(provider.languages) ? provider.languages : []);
+    const stored = readWebSettings();
+    const preferredLanguage = els.externalVoiceLanguage?.value || stored.externalVoiceLanguage || language();
+    if (els.externalVoiceLanguage) populateLanguageFilter(els.externalVoiceLanguage, codes, preferredLanguage);
+    const selectedLanguage = primaryLanguage(els.externalVoiceLanguage?.value || preferredLanguage);
+    const filteredProviders = selectedLanguage
+      ? providers.filter(provider => (provider.languages || []).map(primaryLanguage).includes(selectedLanguage))
+      : providers;
+
+    if (!filteredProviders.length) {
+      els.externalVoicesStatus.textContent = language() === 'en'
+        ? `No external voice providers are listed for ${languageName(selectedLanguage)}.`
+        : `No hay proveedores externos registrados para ${languageName(selectedLanguage)}.`;
+      return;
+    }
+
+    els.externalVoicesStatus.textContent = selectedLanguage
+      ? (language() === 'en'
+          ? `Showing providers with voices for ${languageName(selectedLanguage)}.`
+          : `Mostrando proveedores con voces para ${languageName(selectedLanguage)}.`)
+      : '';
+
+    for (const provider of filteredProviders) {
       const card = document.createElement('section');
       card.className = 'resource-card';
       const heading = document.createElement('h4');
       heading.textContent = provider.name;
+      const languageMeta = document.createElement('p');
+      languageMeta.className = 'resource-meta';
+      languageMeta.textContent = selectedLanguage
+        ? (language() === 'en'
+            ? `Language filter: ${languageName(selectedLanguage)}`
+            : `Filtro de idioma: ${languageName(selectedLanguage)}`)
+        : (language() === 'en' ? 'All supported languages' : 'Todos los idiomas compatibles');
       const note = document.createElement('p');
       note.className = 'resource-meta';
       note.textContent = t().externalVoicesNote;
@@ -711,7 +866,7 @@
         els.externalVoicesStatus.textContent = t().externalVoicesNote;
         globalThis.open(provider.url, '_blank', 'noopener,noreferrer');
       });
-      card.append(heading, note, open);
+      card.append(heading, languageMeta, note, open);
       els.externalVoicesList.append(card);
     }
   }

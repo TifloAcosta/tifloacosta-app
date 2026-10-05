@@ -93,3 +93,18 @@ test('web reader exposes bookmark and queue controls backed by the shared librar
   assert.ok(source.includes('Nada se abrirá automáticamente.'));
   assert.ok(source.includes('Nothing opens automatically.'));
 });
+
+
+test('web library can export saved documents as original, accessible TXT or accessible HTML', async () => {
+  const source = await read('web-reading.js');
+  for (const token of [
+    'exportSavedBook',
+    'Formato de exportación',
+    'TXT accesible',
+    'HTML accesible',
+    'downloadExport',
+    'accessibleTextFromModel',
+    'accessibleHtmlFromModel'
+  ]) assert.ok(source.includes(token), `Missing library export feature ${token}`);
+  assert.match(source, /sourceFormat !== 'pdf'/);
+});

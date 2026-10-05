@@ -108,3 +108,13 @@ test('web library can export saved documents as original, accessible TXT or acce
   ]) assert.ok(source.includes(token), `Missing library export feature ${token}`);
   assert.match(source, /sourceFormat !== 'pdf'/);
 });
+
+
+test('web TifloLector library shows only titles until a title is opened', async () => {
+  const source = await read('web-reading.js');
+  assert.ok(source.includes('reading-library-title-card'));
+  assert.ok(source.includes('reading-library-title-details'));
+  assert.ok(source.includes("title.setAttribute('aria-expanded', 'false')"));
+  assert.ok(source.includes('details.hidden = true'));
+  assert.ok(source.includes('Volver a los títulos de la biblioteca'));
+});

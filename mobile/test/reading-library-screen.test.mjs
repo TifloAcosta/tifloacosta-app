@@ -186,7 +186,9 @@ test('Android composition carries a requested library percentage into the opened
     read('src/screens/reading-book.mjs')
   ]);
   assert.ok(app.includes('pendingReadingBookPercent'));
-  assert.ok(app.includes('initialPercent: pendingReadingBookPercent'));
+  assert.ok(app.includes('const initialPercent = pendingReadingBookPercent'));
+  assert.ok(app.includes('pendingReadingBookPercent = null'));
+  assert.ok(app.includes('initialPercent,'));
   assert.ok(book.includes('initialPercent = null'));
   assert.ok(book.includes('positionForPercent(documentModel, requestedPercent)'));
 });

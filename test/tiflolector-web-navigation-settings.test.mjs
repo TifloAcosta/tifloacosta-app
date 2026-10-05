@@ -89,7 +89,7 @@ test('automatic speech is opt-in and disabled by screen-reader mode', async () =
 });
 
 
-test('TifloLector document view keeps progress, audio, visual and more-actions controls separated', async () => {
+test('TifloLector document view prioritizes playback and keeps compact progress with secondary jumps in More actions', async () => {
   const source = await read('web-reading.js');
   for (const token of [
     'reading-document-progress',
@@ -98,26 +98,20 @@ test('TifloLector document view keeps progress, audio, visual and more-actions c
     'Presentación visual',
     'Más acciones',
     'Temporizador de lectura',
-    'Transcurrido: aproximadamente',
-    'Restante: aproximadamente',
-    'for (let value = 0; value <= 100; value += 10)'
+    '% leído. Quedan aproximadamente',
+    'for (let value = 0; value <= 100; value += 10)',
+    'mainControls.after(section)',
+    'morePanel.append(moreHeading, progressLabel, progressSelect, timerLabel, timerSelect)'
   ]) assert.ok(source.includes(token), `Missing final document control: ${token}`);
   assert.ok(source.includes("movable.forEach(node => morePanel.append(node));"));
   assert.ok(source.includes("resetVisual.addEventListener('click', restoreDocumentVisualFromGeneral)"));
 });
 
 
-test('TifloLector library title details expose progress times grouped controls and 10 percent jumps', async () => {
+test('TifloLector library presents titles as direct reading entry points without an intermediate details card', async () => {
   const source = await read('web-reading.js');
-  for (const token of [
-    'reading-library-progress-',
-    'Tiempo realizado y tiempo faltante',
-    'Abrir en posición',
-    'Audio y voz',
-    'Presentación visual',
-    'Más acciones',
-    'for (let value = 0; value <= 100; value += 10)',
-    "scope:'book'",
-    'openSavedBook(book.id, Number(jump.value) || 0)'
-  ]) assert.ok(source.includes(token), `Missing library final layout token: ${token}`);
+  assert.ok(source.includes("title.addEventListener('click', () =>"));
+  assert.ok(source.includes('void openSavedBook(book.id);'));
+  assert.ok(source.includes('card.append(title);'));
+  assert.ok(!source.includes('card.append(title, detailsToggle, details);'));
 });

@@ -110,18 +110,13 @@ test('web library can export saved documents as original, accessible TXT or acce
 });
 
 
-test('web TifloLector library opens a title directly for reading and keeps details separate', async () => {
+test('web TifloLector library keeps only title buttons as the direct reading entry point', async () => {
   const source = await read('web-reading.js');
   assert.ok(source.includes('reading-library-title-card'));
-  assert.ok(source.includes('reading-library-title-details'));
-  assert.ok(source.includes('reading-library-details-toggle'));
   assert.ok(source.includes("title.addEventListener('click', () =>"));
   assert.ok(source.includes('void openSavedBook(book.id);'));
-  assert.ok(source.includes("detailsToggle.setAttribute('aria-expanded', 'false')"));
-  assert.ok(source.includes('details.hidden = true'));
-  assert.ok(source.includes('Detalles y ajustes'));
-  assert.ok(source.includes('Abrir desde la posición seleccionada'));
-  assert.ok(source.includes('Volver a los títulos de la biblioteca'));
+  assert.ok(source.includes('card.append(title);'));
+  assert.ok(!source.includes('card.append(title, detailsToggle, details);'));
 });
 
 
@@ -159,4 +154,20 @@ test('saved web book resumes from percent when legacy block index is zero', asyn
   assert.ok(source.includes('storedPercent'));
   assert.ok(source.includes('storedPercent > 0 && storedBlockIndex === 0'));
   assert.ok(source.includes('fallbackIndex'));
+});
+
+
+test('document reader prioritizes playback then keeps navigation unit visible', async () => {
+  const source = await read('web-reading.js');
+  assert.ok(source.includes('mainControls.after(section)'));
+  assert.ok(source.includes("unit.id = 'reading-navigation-unit'"));
+  assert.ok(source.includes("unitLabel.textContent = language() === 'en' ? 'Move forward and back by' : 'Avanzar y retroceder por'"));
+  assert.ok(!source.includes("heading.textContent = language() === 'en' ? 'Controls for this document' : 'Controles de este documento'"));
+});
+
+test('percentage jump is kept inside More actions instead of the primary reading flow', async () => {
+  const source = await read('web-reading.js');
+  assert.ok(source.includes('morePanel.append(moreHeading, progressLabel, progressSelect, timerLabel, timerSelect)'));
+  assert.match(source, /section\.append\([\s\S]{0,400}progressStatus,[\s\S]{0,300}primaryActions/);
+  assert.ok(!source.includes('progressStatus, progressLabel, progressSelect'));
 });

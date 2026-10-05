@@ -533,9 +533,6 @@
     section.id = 'reading-document-controls';
     els.previous.hidden = true;
     els.next.hidden = true;
-    const heading = document.createElement('h4');
-    heading.textContent = language() === 'en' ? 'Controls for this document' : 'Controles de este documento';
-
     const unitLabel = document.createElement('label');
     unitLabel.htmlFor = 'reading-navigation-unit';
     unitLabel.textContent = language() === 'en' ? 'Move forward and back by' : 'Avanzar y retroceder por';
@@ -744,7 +741,7 @@
     const closeMore = document.createElement('button');
     closeMore.type = 'button';
     closeMore.textContent = language() === 'en' ? 'Back to reading' : 'Volver a la lectura';
-    morePanel.append(moreHeading, timerLabel, timerSelect);
+    morePanel.append(moreHeading, progressLabel, progressSelect, timerLabel, timerSelect);
 
     const movable = [
       els.searchForm,
@@ -758,13 +755,12 @@
     morePanel.append(closeMore);
 
     section.append(
-      heading,
       unitLabel, unit, previousUnit, nextUnit,
-      progressStatus, progressLabel, progressSelect,
+      progressStatus,
       primaryActions,
       audioPanel, visualPanel, morePanel
     );
-    mainControls.before(section);
+    mainControls.after(section);
 
     els.navigationUnit = unit;
     els.documentVoiceLanguageLabel = voiceLanguageLabel;
@@ -1232,8 +1228,8 @@
     };
     if (els.documentProgressStatus) {
       els.documentProgressStatus.textContent = language() === 'en'
-        ? `Progress: ${Math.round(percent)}%. Elapsed: about ${duration(elapsedSeconds)}. Remaining: about ${duration(remainingSeconds)}.`
-        : `Progreso: ${Math.round(percent)} %. Transcurrido: aproximadamente ${duration(elapsedSeconds)}. Restante: aproximadamente ${duration(remainingSeconds)}.`;
+        ? `${Math.round(percent)}% read. About ${duration(remainingSeconds)} remaining.`
+        : `${Math.round(percent)} % leído. Quedan aproximadamente ${duration(remainingSeconds)}.`;
     }
     if (els.documentProgressSelect) {
       els.documentProgressSelect.value = String(Math.max(0, Math.min(100, Math.round(percent / 10) * 10)));
@@ -2663,37 +2659,11 @@
           close
         );
 
-        let estimateLoaded = false;
         title.addEventListener('click', () => {
           void openSavedBook(book.id);
         });
 
-        detailsToggle.addEventListener('click', () => {
-          const opening = details.hidden;
-          for (const other of els.libraryList.querySelectorAll('.reading-library-title-details')) other.hidden = true;
-          for (const otherToggle of els.libraryList.querySelectorAll('.reading-library-details-toggle')) otherToggle.setAttribute('aria-expanded', 'false');
-          details.hidden = !opening;
-          detailsToggle.setAttribute('aria-expanded', String(opening));
-          if (opening) {
-            queueMicrotask(() => detailsHeading.focus());
-            if (!estimateLoaded) {
-              estimateLoaded = true;
-              void estimateBookTimes(book).then(estimate => {
-                if (!estimate) {
-                  timeStatus.textContent = language() === 'en'
-                    ? 'Elapsed and remaining time could not be estimated for this document.'
-                    : 'No se pudo estimar el tiempo realizado y el tiempo faltante de este documento.';
-                  return;
-                }
-                timeStatus.textContent = language() === 'en'
-                  ? `Elapsed: about ${readableDuration(estimate.elapsedSeconds)}. Remaining: about ${readableDuration(estimate.remainingSeconds)}.`
-                  : `Tiempo realizado: aproximadamente ${readableDuration(estimate.elapsedSeconds)}. Tiempo faltante: aproximadamente ${readableDuration(estimate.remainingSeconds)}.`;
-              });
-            }
-          }
-        });
-
-        card.append(title, detailsToggle, details);
+        card.append(title);
         els.libraryList.append(card);
       }
     } catch {

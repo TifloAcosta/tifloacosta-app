@@ -25,3 +25,10 @@ test('ordinary prepare markers cannot silently publish', async () => {
   assert.match(workflow, /mode = 'prepare'/);
   assert.match(workflow, /Release marker does not match the requested version and track/);
 });
+
+
+test('manual publish=false always stays in prepare mode even when a publish marker exists', async () => {
+  const workflow = await read('.github/workflows/release-mobile-android.yml');
+  assert.match(workflow, /GITHUB_EVENT_NAME === 'workflow_dispatch'/);
+  assert.match(workflow, /MANUAL_PUBLISH === 'true' \? 'publish' : 'prepare'/);
+});

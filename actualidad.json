@@ -1,86 +1,13 @@
 [
   {
-    "id": "9to5mac-1ec52c4b0a543f9b",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/03/indie-app-spotlight-hevcut-iphone-photo-storage/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-03T19:30:00.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Indie App Spotlight: ‘HEVCut’ helps you trim your photo library without deleting anything",
-        "summary": "Welcome to Indie App Spotlight . This is a weekly 9to5Mac series where we showcase the latest apps in the indie app world. If you’re a developer and would like your app featured, get in contact . Everyone has issues with iPhone storage. Even if you use iCloud, Apple has a large gap between tiers, with it immediately jumping from 200GB at $3 to 2TB at $10. If you just want a little bit more than 200GB, it can be hard to justify that upgrade. HEVCut aims to fix this by optimizing your photo library, without needing to delete anything. more…",
-        "body": "Welcome to Indie App Spotlight . This is a weekly 9to5Mac series where we showcase the latest apps in the indie app world. If you’re a developer and would like your app featured, get in contact .\n\nEveryone has issues with iPhone storage. Even if you use iCloud, Apple has a large gap between tiers, with it immediately jumping from 200GB at $3 to 2TB at $10. If you just want a little bit more than 200GB, it can be hard to justify that upgrade. HEVCut aims to fix this by optimizing your photo library, without needing to delete anything.\n\nTo be clear, HEVCut also offers the normal features you’d expect in a photo cleanup app: it helps you find duplicate shots, as well as the ability to easily delete photos in a nice swipe left/right interface.\n\nThat’s not the key highlight, though. As I said earlier, it can go through your photos library and compress media. It’s highly effective, so you save 50-80% on each file, while not losing much in image quality.\n\nIt runs all on device, so you’re not giving up your privacy to compress your images. This can easily help you save hundreds of gigs of local or iCloud storage.\n\nIt also supports a nifty video editor for trimming down videos to shorter lengths to share with friends, in case you tend to record entire events when you only need a few key moments.\n\nHEVCut is available for free on the App Store in a limited capacity, but to unlock the full experience, including the best resolution settings, you’ll need HEVCut Pro for $24.99/year or $39.99 for the lifetime upgrade. There’s a $0.49 1 week trial if you’d like to give it a shot before committing.\n\nMy favorite Apple accessory recommendations:\n\nFollow Michael: X/Twitter , Bluesky , Instagram"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-bf9cf13fff864d97",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/03/heres-why-i-upgraded-from-the-apple-watch-series-10-to-series-12/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-03T18:48:22.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Here’s why I upgraded from the Apple Watch Series 10 to Series 12",
-        "summary": "I’m someone who doesn’t often upgrade my Apple Watch right when a new one comes out. The Apple Watch Series 10 I owned prior was only purchased this January, despite initially coming out in September 2024. That said, Apple Watch Series 12 was a highly compelling purchase, despite the fact that the two largely share the same design language. Here’s why I took the leap. more…",
-        "body": "I’m someone who doesn’t often upgrade my Apple Watch right when a new one comes out. The Apple Watch Series 10 I owned prior was only purchased this January, despite initially coming out in September 2024. That said, Apple Watch Series 12 was a highly compelling purchase, despite the fact that the two largely share the same design language. Here’s why I took the leap.\n\nSo yes, the Series 10 and Series 12 largely share the same design. In fact, the Series 12 is arguably a regression because the bezels are slightly thicker . This didn’t bother me, because I use a watch face with a black background anyways.\n\nHowever, the new features of Apple Watch Series 12 really fascinated me. In particular, I was compelled by the much improved heart-rate monitor, as well as the new ‘Readiness’ app. Everything on the Series 12 also feels substantially faster, especially Siri.\n\nPrevious Apple Watches never really gave me what I wanted in terms of health tracking. Series 12 provides much more insight. Before, you sort of just had your activity rings and a bunch of scattered data in the Health app. Now, the new Health app tells you absolutely everything you need to know in an incredibly useful manner.\n\nI am still wearing my WHOOP , primarily because I’d like to compare the two over a longer term before I ditch it fully, but as of now, Apple’s Health app holds up – and I’m happy with what the Apple Watch Series 12 offers in terms of health tracking.\n\nAlso worth noting that the WHOOP is a $239/year subscription that largely doesn’t offer much over Apple Health anymore.\n\nAll in all, my purchase of the Apple Watch Series 12 can be summarized by the fact that the Apple Watch made a major push into getting serious as a health wearable. It no longer feels like as much of an afterthought.\n\nMy favorite Apple accessory recommendations:\n\nFollow Michael: X/Twitter , Bluesky , Instagram"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-1671a7237250c17e",
+    "id": "engadget-cf494376477113fa",
     "type": "news",
     "sourceId": "engadget",
     "sourceName": "Engadget",
     "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2273462/how-to-check-cpu-temperature/",
+    "originalUrl": "https://www.engadget.com/2275958/extended-warranty-for-laptop-tv-worth-it/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-03T18:45:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "programas-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "How to check the temperature of your PC's CPU",
-        "summary": "There's some solid free software that can help you keep tabs on your computer's health.",
-        "body": "There's some solid free software that can help you keep tabs on your computer's health.\n\nThe temperature of your CPU is one of those things you don't really think about unless something is wrong with your PC. When it's working, this tiny chip makes everything you do on your computer — from having multiple browser tabs open to editing photos and playing your favorite games — run smoothly.\n\nBut if your PC is suddenly more sluggish than usual or your fan is starting to sound like a jet engine , there's a good chance it could be overheating and the culprit might be your CPU.\n\nDon't panic! The CPU's temperature can fluctuate for a lot of different reasons, and there are several free tools available that can tell you how it's doing.\n\nOne of the best tools you can use to check the temperature of your CPU is HWiNFO , a free diagnostic tool that gives you a ton of real-time data about the hardware in your PC or laptop. Once installed, open the program and click on the Sensors tab to bring up a new window with temperature readings (displayed in Celsius) about your CPU.\n\nThere are other free apps like Core Temp and HWMonitor that can provide the same information as well. Whichever you choose, it can be helpful to turn them on every so often to see how your CPU is doing under different conditions. For example, you can fire up a game, video editing software or some other resource-intensive program to see how the CPU temperature changes compared to idle.\n\nWhile the exact figures vary by CPU, an average running temperature of 60 degrees Celsius or below is typically considered a good baseline for everyday use. But if the CPU is consistently hovering between 70 to 90 degrees Celsius, you should look into what's causing the spike and if it's becoming a long-term problem. Pushing 90 degrees and above could indicate some serious overheating and might reduce the CPU's lifespan if it doesn't cool down.\n\nYou'll know ahead of time if it gets to that point: Most modern CPUs will throttle performance once the temperature is too high, significantly slowing down your PC as a way of protecting itself . But if throttling still isn't enough to cool the CPU, you might also experience freezing and crashes.\n\nKeep in mind that these temperature readings are just guidelines and that your experience will vary depending on which CPU model you have. But if you're curious about pushing the limits of your processor (like overclocking for better performance), it's best to consult the original manufacturer for more accurate temperature ranges.\n\nThere are a few steps you can take if your CPU is running hotter than normal. It might be as simple as getting rid of a program that's eating up all your processing power — you can test this yourself by opening up Windows Task Manager and closing any apps that could be taxing the CPU.\n\nBut if the temperature still doesn't drop, your PC might have more of a hygiene problem than a software one. You can open up your tower to see if any dust has accumulated in the fans or on the components themselves. Use a can of compressed air to push the dust out and improve the airflow in your case. Many cases also have dust filters that can be removed and cleaned out.\n\nYou might also need to reapply thermal paste on the CPU, which can dry up over time. The paste serves as a thin layer of connection between the CPU and its heatsink, helping dissipate heat as the temperature rises. This isn't particularly challenging to do yourself, but will require temporarily removing the cooling hardware from your CPU, so find a good guide online and follow along.\n\nThe temperature of your CPU is just one indicator of your PC's overall health. But in a time where the price of PCs and laptops have sharply increased due to the AI bubble , it's more important than ever to be proactive about taking care of your electronics.\n\nIn addition to GPUs, RAM, and storage, prices of CPUs have been steadily climbing. Earlier this year, both AMD and Intel — two of the biggest chip manufacturers for PCs — increased their CPU prices and reportedly plan on doing it again. So normal check-ups like this can help extend the longevity of your PC and avoid the need to buy costly replacement parts."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-e0c3942d9e3eb9e5",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2273354/playstation-2-security-chip-reverse-engineered/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-03T18:00:00.000Z",
+    "publishedAt": "2026-10-05T22:00:00.000Z",
     "categories": [
       "tecnologia-general"
     ],
@@ -88,46 +15,141 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "The original PlayStation 2 security chip has been reverse engineered",
-        "summary": "A long‑hidden PS2 security component has finally been decoded, revealing surprising design choices and opening the door to fresh hardware insights.",
-        "body": "The last unmapped part of the fat PS2 has been dumped.\n\nMore than 25 years after the fat PlayStation 2 launched , a dev known as DiscoStarslayer has managed to pull firmware out of the stubborn SPC970 MechaCon chip responsible for authorizing discs and handling most of the console's security.\n\nIn a Bluesky post , the dev credited Libby, the collaborator who found an exploit that made the extraction possible. According to the dump tool's docs , that exploit told the chip that an incoming batch of settings data would be empty, and sent more data than it had room for. Before this, in an effort covering some four years, there had been struggles with a slower method of stripping the chip's packaging and reading its contents, which produced only rough dumps.\n\nEverything has been pushed to GitHub alongside 22 firmware images covering fat PS2s from the Japan-only SCPH-15000 of 2000 to the 39000-series models of 2002. They also cover the Namco System 246 and 256 arcade boards that used the same chip. These early machines were some of the final unread parts of the PS2 after the 2003 \"Dragon\" MechaCon was dumped in 2021.\n\nThe SPC970 chip keeps its code in mask ROM, which can't be written or patched, and stores only calibration and config data in a separate 1KB EEPROM. To get around this, the \"spc970-dumper-union\" enthusiast group abused how the chip writes to that EEPROM.\n\nThe group found that by opening a config write session with a block count of zero, the chip's internal counter would underflow. Pushing more data than the seven-block buffer can hold overflows into RAM that holds the EEPROM write task. Overwriting that task's source address points it at the chip's ROM instead, meaning that the MechaCon copies 256 bytes of its firmware into the EEPROM. Once there, the PS2 can read it back with a standard command. Once repeated around 1,000 times, the full 256KB image sits on a USB stick.\n\nEach of those 1,000 passes rewrites the EEPROM, but every dump shortens its life because it has no wear leveling and a smaller write budget than flash memory. To safeguard against this, the tool backs up the EEPROM before it starts, restoring it word by word after and checking the result against the chip's power-on checksum routine. There's still a risk, though, and Libby's original dumper warns that it can leave a PS2 \"unable to operate normally, or require hardware-level repair. Use it entirely at your own risk.\"\n\nDragon MechaCon firmware images were released back in 2021. MechaPwn, the exploit that makes later PS2s region-free and lets them read backup discs, was released a month later. That exploit's README says that older consoles don't use a Dragon-based MechaCon and therefore aren't supported, and that no support is planned. That affects roughly 20 model numbers from the PS2's first three years between 2000 and 2003. Those machines can still run backups through memory card and hard drive exploits, but couldn't be unlocked at the chip level until now because nobody could see its code. These dumps make that search possible for the first time.\n\nThe images alone don't hold enough information to build an optical drive emulator, but they could support a modchip that replaces the MechaCon, while keeping the drive's DSP to read discs. Since PS2 games weren't encrypted, nothing new is unlocked here. But the firmware does expose the code behind Sony's \"MagicGate\" encryption for memory cards and KELF executables the console boots from disc and memory cards. That'll eventually feed \"full-system low-level emulation,\" says contributor uyjulian . PCSX2 and other emulators , which can also emulate the weaker GameCube , don't run the chip's code at all: PCSX2 reimplements MechaCon's commands in C++ and reads a 1KB NVRAM file and a four-byte version number from disk to stand in for the real part. DiscoStarslayer maintains a PCSX2 fork called Reliquary, aimed at the PS2's authed paths. They acknowledge in its README that generated stand-in data isn't a substitute for hardware values when a security check inspects console identity.\n\nAs for the SPC970, the first job of its dump is to find a bug that opens up the early consoles. With MechaPwn, people could read the Dragon chip's code and find a weakness in how Sony let that chip update itself. uyjulian says a MechaPwn or TonyHax-style unlock for the SPC970 is one of the goals here, but it won't come as fast. It took researchers only a month to crack Dragon because Sony built that chip to accept patches. That gave researchers something to break. The SPC970 can't be updated at all; its code was baked into the chip in 2000 and has never changed."
+        "title": "Are extended warranties on TVs and laptops ever really worth it?",
+        "summary": "TV and laptop repairs can get expensive in a hurry, so getting a warranty sounds smart. But is it really?",
+        "body": "Or are they just another useless upsell?\n\nHave mercy on retail clerks. To keep their jobs, they're often asked to push promotions they know most customers don't want, such as memberships and credit cards. Upselling looks good on a manager's ledger, even if it irritates a good portion of their customers.\n\nIf you've been shopping for smart TVs , laptops or just about any major piece of electronics in the past decade, you've no doubt been pitched on the idea of an extended warranty, AppleCare+ and Best Buy Protection being a couple of familiar examples. At a glance, they're more reasonable than most in-store promotions. Everything breaks eventually, and the cost of some repairs can be eye-watering. Just ask anyone who's smashed the display on their MacBook.\n\nDespite this, you can safely skip an extended warranty in most circumstances. They mostly exist for the sake of an upsell, which you can tell by the strings attached and the fundamental nature of consumer electronics. When an extended plan is justified, you'll likely know before you walk in the door.\n\nFor starters, extended warranties are typically focused around defects, and any TV, laptop or similarly expensive device is likely to be covered by the manufacturer for 90 days to a year or more. This matters because if a product is defective, it's going to fail under relatively normal strain, by definition. You're liable to find out quickly if it's faulty, though there are obviously outliers.\n\nAnother point is that while planned obsolescence is real, a product that survives the first year is likely to survive past the two- or three-year window that's common for many extended warranties. In an accelerated longevity test by RTINGS , 102 TVs were run nonstop between November 2022 and September 2025. Only two actually failed before they reached 3,000 hours, and most made it to at least 8,000. This longevity test employed TVs that had already been used for hundreds of hours, so the results didn't show an initial spike for models that failed right away — a spike that would be present if the TVs were all brand-new. But again, those failures often are covered by the manufacturer and wouldn't require an extended warranty. If you watched TV for four hours a day, every day, it would take you over two years to reach that 3,000-hour mark, by which point just 2 percent of the TVs had failed.\n\nUnbiased reliability figures are harder to come by for laptops, but it almost doesn't matter for a couple of reasons. The first is that planned obsolescence factor. Within two or three years, just about any device you buy — especially a laptop — is going to be supplanted by something with improved performance for a similar price. Meanwhile, equivalent products are going to become cheaper and cheaper, especially if you're willing to buy a used or refurbished model.\n\nThat factors into the second point, which is the cost of an extended warranty vs. just saving up for a replacement or repair. To cover a $1,300 TV, for example, Best Buy charges approximately $160 for two years of Geek Squad TV Protection, and $280 for five years. While the cost of replacing the display panel could vastly exceed either sum, the retailer estimates that other repairs will typically fall between $255 and $395. You could spend most or all of the cost of a repair on a warranty you may never use, and you'll still be stuck with old hardware if you successfully pursue a claim.\n\nSome warranties include loopholes, on that note. We can't make blanket statements, but it's important to watch out for clauses that prevent you from seeking repairs if there are signs of liquid exposure or anything else that could be branded user error, regardless of whether it's the source of your problems. In other situations, you may be forced to use a manufacturer's warranty first if it's still in effect, Geek Squad Protection being a prime example.\n\nThough TVs are rarely mission-critical, there are professionals who simply can't afford any downtime with a laptop or other productivity tools, and put the equipment they own through the wringer. The cost of an extended warranty is nothing by comparison, though if you're in this camp, it's essential that you pick a plan that allows for loaner units or rapid repairs or replacements. In fact, you may be looking at special business-oriented warranties that aren't pitched over the checkout counter.\n\nIf you hate the idea of downtime but you're not necessarily a professional, it can make sense to invest in a plan like AppleCare+. That incorporates theft and loss replacements for some devices and vastly reduced prices for fixing accidental damage, including liquids. Considering that many cities have an Apple Store or at least an authorized service site, same-day repairs and replacements are a real possibility.\n\nUnfortunately, most vendors don't have such an extensive support network. If you need a repair, there's a strong chance your device is going to be shipped to a depot in another city, then back a few days later. And they may ship it back unrepaired if they can't replicate the issue you reported — something we've experienced directly. Every warranty is a gamble, in that respect."
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-4785bc0aa2816abf",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/03/apples-next-ipad-a19-details-release-date/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-03T16:36:23.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Here’s everything we know so far about Apple’s next entry-level iPad: A19 chip, more",
-        "summary": "Apple’s current iPad, the A16 model, has gone untouched for well over a year. It remains the only device in Apple’s core product lineup without support for Apple Intelligence. Rumors had swirled for quite some time about an A18 model coming this year . Now, it’s sounding like Apple has an even bigger plan. more…",
-        "body": "Apple’s current iPad , the A16 model, has gone untouched for well over a year. It remains the only device in Apple’s core product lineup without support for Apple Intelligence. Rumors had swirled for quite some time about an A18 model coming this year . Now, it’s sounding like Apple has an even bigger plan.\n\nIt’s likely safe to assume that the delays with this product launch have much to do with the ongoing memory crisis affecting the electronics industry. It wouldn’t surprise me if Apple had the A18 refresh roadmapped for earlier this year alongside the debut of the M4 iPad Air , then had to push it.\n\nAs a reminder, Apple raised the price of the base iPad from $349 to $449 this summer alongside the rest of its memory-related price hikes . This brings it back to the price it initially launched at in 2022.\n\nHowever, a new leak from MacRumors contributor Aaron Perris paints a more promising picture. Instead of utilizing the A18 chip, it sounds like the next entry-level iPad will equip the A19 chip. Alongside that, you’ll get the N1 networking chip, as well as the C1X modem on the cellular version. This’ll bring support for Wi-Fi 7 to Apple’s cheapest iPad.\n\nThe A19 iPad will also be equipped with 8GB of memory, allowing users to run Siri AI, though you’ll still miss out on the most capable local models and the more advanced dictation models, as those features require 12GB of memory. It’s not a major loss, but worth pointing out.\n\nAnother possibility is that the A19 iPad might offer a new name . With the debut of the MacBook Neo, Apple marketing exec Greg Joswiak pointed out that calling the MacBook Neo just “MacBook” would leave it without an identity. Hopefully, with the next entry-level iPad , we also get some sort of proper name like “SE” or “Neo” so we have something to call it.\n\nBeyond that, don’t expect any sort of redesign or display improvements. There may be new colors, but probably nothing else. I personally wish Apple would bring USB 3 to the product, so users don’t have to suffer with such slow transfer speeds. It’d certainly help justify the new higher starting price.\n\nApple’s next budget iPad should be releasing next Spring, per Bloomberg’s Mark Gurman . That’ll accompany other products like the M6 MacBook Air , A19 Pro MacBook Neo , M7 14-inch MacBook Pro , and more.\n\nAre you someone in the market for the entry-level iPad ? What are you most looking forward to? Let us know in the comments.\n\nMy favorite Apple accessory recommendations:\n\nFollow Michael: X/Twitter , Bluesky , Instagram"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-a00240af2c9e14c5",
+    "id": "techcrunch-38228d1705fb3c30",
     "type": "news",
     "sourceId": "techcrunch",
     "sourceName": "TechCrunch",
     "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/03/openai-safety-employee-resigns-claiming-the-companys-culture-is-broken/",
+    "originalUrl": "https://techcrunch.com/2026/10/05/lucid-motors-ev-output-falls-to-lowest-level-in-almost-two-years/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-03T16:30:01.000Z",
+    "publishedAt": "2026-10-05T21:54:01.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Lucid Motors’ EV output falls to lowest level in almost two years",
+        "summary": "The company is deliberately limiting production after years of struggling to find mass-market demand for its EVs.",
+        "body": "Lucid Motors built 2,954 electric vehicles (EVs) in the third quarter of this year, a 54% drop from a year ago, as the company purposely limits production to better meet demand for its EVs.\n\nThis was the third straight quarter in which the number of EVs Lucid built has declined. It’s also the lowest quarterly output since the first quarter of 2025, which was just after Lucid Motors started production of its second EV, the Gravity SUV .\n\nLucid delivered 3,806 EVs in the third quarter, roughly flat with the second quarter and down about 200 vehicles from the third quarter of 2025. The company has struggled to find buyers for either of its first two luxury EVs. In five of the last six quarters, it built more vehicles than it delivered.\n\nLucid’s new CEO, Silvio Napoli, has spent the last few months leading an effort to “simplify the company.” That effort has included laying off around 1,500 employees, streamlining the company’s leadership, and eliminating a second shift at its factory in Arizona in a bid to reach cost savings of $1.4 billion . Lucid also delayed the release of its third EV , the Cosmos. That model is supposed to be much cheaper, starting at under $50,000.\n\nThe third quarter figures, released Monday afternoon, come just a few days after rival EV upstart Rivian posted its best quarter in history on the back of the R2, its new, more affordable SUV . Although Rivian didn’t break out specific delivery figures for the R2, the company shipped nearly 20,000 vehicles in the third quarter , the first full quarter with the R2 in production, up from 12,194 in the second quarter .\n\nLucid’s failure to find a large market of buyers for its EVs is even more stark when compared with the promises the company made when it went public in 2021. That year, Lucid Motors merged with a special purpose acquisition company and estimated it would ship as many as 90,000 EVs in 2024 alone . The company raised $4 billion in the transaction.\n\nOn Lucid’s second-quarter earnings call in August, Napoli spoke about why he thinks the company has failed to make a dent in the EV market.\n\n“While there is no question that Lucid brought leading innovations and outstanding products to the market, we have disappointed on several fronts, and for far too long,” he said. “We have not executed consistently. We missed commitments, launched products before they were ready, underinvested in service, responded too slowly to quality issues, and allowed complexity to slow decisions down.”\n\nThe Cosmos’ lower price could, in theory, let Lucid access a wider market, but Napoli cautioned shareholders that rushing the new EV out could create more trouble.\n\n“We will not repeat the mistakes of the past by bringing a product to market before it is ready,” Napoli said on the call."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-c7f38c73971f4036",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/05/macos-27-2-reveals-new-clues-about-apples-touchscreen-macbook-pro/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-05T21:34:48.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "macOS 27.2 reveals new clues about Apple’s touchscreen MacBook Pro",
+        "summary": "Apple is widely expected to release a new touchscreen MacBook Pro as soon as this month. This will mark the first-ever touchscreen Mac, and Apple is laying the groundwork in macOS 27.2 to accommodate touch gestures. more…",
+        "body": "Apple is widely expected to release a new touchscreen MacBook Pro as soon as this month. This will mark the first-ever touchscreen Mac, and Apple is laying the groundwork in macOS 27.2 to accommodate touch gestures.\n\nApple released macOS 27.2 beta 3 to developers today, and it includes new references to upcoming support for touchscreen interactivity. As discovered by Aaron Perris for MacRumors , there are “gesture recognition tools” for several stock Apple apps:\n\nmacOS 27.2 beta 3 also adds a new long-press animation for the Dock, which could also be a hint at the forthcoming touchscreen MacBook Pro:\n\nApple has gradually made a number of changes to macOS 27 in preparation for touchscreen support, including pull-to-refresh support for the first time. macOS 27 also added touch input to Sidecar, a feature that lets you use your iPad as a secondary display for your Mac.\n\nBloomberg has also reported on Apple’s work to optimize macOS for the impending touchscreen MacBook Pro. For instance, tapping a button or control will prompt macOS to dynamically display relevant touch options. Similarly, tapping the menu bar will automatically enlarge controls for easier touch navigation.\n\nIn addition to a touchscreen, the new MacBook Pro will reportedly have an OLED display and be “significantly lighter” than the current models.\n\nApple is expected to introduce the new MacBook Pro (or MacBook Ultra?) as soon as this month, though Bloomberg has cautioned it could slip to November.\n\nFollow Chance : Threads , X , and Instagram"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-d251027b71998516",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/policy/1004926/matic-fcc-ban-waiver-conditional-approval",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-05T21:15:05.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The Matic is the first robovac to get an FCC ban waiver, not that it needs it",
+        "summary": "The Matic is our favorite robot vacuum and robo-mop, and it's also now the first to escape the FCC's Roomba ban. Well, sort of - because the Matic wasn't banned to begin with. Here's what's actually happening: On October 2nd, the FCC added the original Matic, model 4MA0001, and its charging dock model 4DK0008 to […]",
+        "body": "The Matic is our favorite robot vacuum and robo-mop , and it's also now the first to escape the FCC's Roomba ban .\n\nWell, sort of - because the Matic wasn't banned to begin with.\n\nHere's what's actually happening: On October 2nd, the FCC added the original Matic, model 4MA0001, and its charging dock model 4DK0008 to its ban waiver list . That allows the FCC to approve these radio products for import, marketing, and sale.\n\nBut the Matic doesn't need a waiver, because its radios were already approved years ago. The FCC's foreign drone, robot, and router bans only keep future products from getting imported into the United States, not existing o …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-f324ca964447b3ad",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/05/this-is-apple-musics-new-logo-probably/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-05T20:50:43.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "This is Apple Music’s new logo, probably",
+        "summary": "Apple Music seems to be rolling out a new logo, as spotted in several places including iOS 27 beta 3. more…",
+        "body": "Apple Music seems to be rolling out a new logo, as spotted in several places including iOS 27 beta 3.\n\nWhen Apple announced the opening of Apple Music Hall last month, it showcased a new logo not seen before.\n\nYou can see the new logo on the venue’s official website here , with a light version in the header and dark version in the footer.\n\nAt the time though, it was unclear whether the logo would remain exclusive to the venue branding. Its bold typeface matches that of Apple Music Hall’s overall look.\n\nSince then, however, Apple has used the new logo in Instagram Reels that are unrelated to Apple Music Hall. And now today, Aaron Perris found evidence of it in iOS 27.2 beta 3.\n\nThe official Apple Music website still has the old look, but if we learned anything from Apple’s very slow transition from Apple TV+ to Apple TV last year, it’s that the company can take its time with rebrands.\n\nA name change is a much bigger undertaking than a new logo, but it’s understandable that Apple might take a similar approach to rolling out the redesigned Apple Music logo.\n\nWhat do you think of the new Apple Music logo? Let us know in the comments.\n\nApple Music is available for $11.99/month , or you can get it as part of the Apple One bundle ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-f8febba458de79d3",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/05/openai-details-new-text-watermarking-system-for-chatgpt-codex-and-the-api/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-05T20:46:17.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "OpenAI details new text watermarking system for ChatGPT, Codex, and the API",
+        "summary": "OpenAI today announced how it will comply with the EU AI Act, which requires providers of generative AI systems to mark AI-generated text in a way that makes it identifiable. Here are the details. more…",
+        "body": "OpenAI today announced how it will comply with the EU AI Act, which requires providers of generative AI systems to mark AI-generated text in a way that makes it identifiable. Here are the details.\n\nA few months ago, Anthropic sparked controversy when it announced that, to comply with the EU AI Act, Claude would start watermarking text by slightly adjusting its word choice.\n\nIn a nutshell, every so often, Claude chooses between words that would work equally well based on a hidden pattern, which Anthropic says has no practical impact on the meaning, quality, or readability of its responses.\n\nAnthropic also developed a detector that can look for that pattern in a piece of text, and can tell whether it likely came from Claude.\n\nThe detector can’t be used to determine whether text came from OpenAI or any other competitor, since Claude’s watermark is generated using a secret key specific to Anthropic’s system.\n\nAt the height of the controversy, Anthropic stressed that Claude would not be alone, noting that several other major AI providers were also implementing marking systems to comply with the EU’s requirements.\n\nToday, OpenAI announced its own solution, which relies on a similar approach, albeit with a much more limited rollout and scope.\n\nAccording to OpenAI , “API customers globally will be able to opt in to text watermarking for select models” starting today, while the company “will add an invisible watermark to eligible ChatGPT and Codex text output in the European Union” in the coming weeks.\n\nThis means that in the API, text watermarking will remain off by default for now, while in ChatGPT and Codex, it will initially be limited to eligible users only in the European Union.\n\nOpenAI also opened applications for access to its text watermark detector, which will initially be limited to approved researchers and expert organizations as the company works to evaluate and improve the technology.\n\nAnd speaking of accuracy, OpenAI is very clear that the detection technology still has significant limitations, as it can produce both false negatives and false positives, particularly with shorter texts or content in specific domains, “such as mathematics, where there is less flexibility in word choice.”\n\nHere’s OpenAI on textGrain, which is its text watermarking technology:\n\nOur text watermarking technology, textGrain, adds an invisible statistical signal to the model’s word choices. Our detector looks for that signal to assess whether a passage contains an OpenAI watermark. More details about how textGrain works can be found in our technical report⁠ , which will be updated with additional details in the coming weeks. We also plan to make the technology available in open source so that others can build on it.\n\nThe company also noted that, in addition to being harder to detect in shorter passages, the watermark can be significantly weakened by editing:\n\nIn an evaluation of 400-token passages, replacing 10% of words with synonyms reduced detection from about 92% to 66%. Replacing 25% of words reduced it to 17%.\n\nInterestingly, OpenAI’s comparison of watermarked and unwatermarked text showed that watermarked outputs actually scored slightly higher on several benchmarks, despite the company saying it found no meaningful difference in overall performance.\n\nOpenAI also stressed that, in addition to the false positive and false negative shortcomings, a watermark “does not measure human contribution,” “does not establish ownership or responsibility,” “does not identify the user,” and “does not verify accuracy.”\n\nOpenAI added that “the absence of a detected watermark does not prove human authorship” either.\n\nFinally, the company said it expects to revisit its approach as the technology, standards, and evidence evolve, while continuing to study how well watermarks survive editing and translation and whether they can more meaningfully distinguish AI assistance from AI authorship.\n\nTo read OpenAI’s announcement in full, follow this link .\n\nWhat’s your take on how OpenIA is implementing text watermarking? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-94e1c58bf34f10d9",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/05/openai-will-start-watermarking-chatgpts-text-in-the-eu/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-05T20:36:48.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -136,22 +158,119 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "OpenAI safety employee resigns, claiming the company’s ‘culture is broken’",
-        "summary": "By his own admission, David Robinson is “something of a cliché”: an employee at a leading AI company who issues a dire warning while resigning from their job.",
-        "body": "By his own admission, David Robinson is “something of a cliché”: an employee at a leading AI company who issues a dire warning while resigning from their job.\n\nIn an essay published in The Atlantic , Robinson said he led the writing of safety reports that accompanied OpenAI’s major product launches. He also said that with three-and-a-half years at OpenAI, he is “among the longest-tenured employees at the company.” Now he’s quitting, because in his view, the company’s “culture is broken.”\n\nIn some ways, Robinson’s comments echo those of Jacob Coxon, who worked as a researcher at both OpenAI and Anthropic before quitting and declaring that these companies are “gambling with our lives.” Coxon’s comments led to a broader debate about AI safety, with Anthropic CEO Dario Amodei unveiling a plan for more cautious AI development ; AI executives met with President Donald Trump this week and signed what appeared to be hastily written, non-binding pledge to implement more safety controls .\n\nBut in Robinson’s view, the debate needs to go beyond “specific rules or new laws,” addressing the overall culture at these companies. And while much of the reporting around OpenAI has focused on how the company’s CEO Sam Altman lost the trust of former colleagues , Robinson’s essay suggests that OpenAI’s culture issues are the same as those of Silicon Valley at large.\n\n“OpenAI has thrived by trial and error (which it calls ‘iterative deployment’), looking for problems and improving its guardrails in response,” he wrote. “But this approach, by its very nature, guarantees periodic failures — and the scale of those failures is growing as systems get more capable.”\n\nPointing to the recent breach of Hugging Face systems by OpenAI agents, as well as continuing revelations of OpenAI discovering more rogue agents , Robinson argued, “An environment where things like this can happen is no place to grow artificial minds that could be smarter than we are and that might not do what we want them to.”\n\nGiven the increased risk, Robinson argued that frontier AI companies need to start operating “like nuclear-power plants or busy airports, with layers of redundancy and careful, time-consuming planning, so that the occasional and inevitable human error does not open a door to disaster.”\n\nBut Robinson said that in his time at OpenAI, he “never encountered a colleague who had experience making airplanes fly safely or nuclear reactors run without melting down, or helping the financial system grow without collapsing.”\n\nIn response to Robinson’s essay, OpenAI spokesperson Drew Pusateri said the company continues to improve its safety measures.\n\n“We’re making sure our models don’t become more capable than we can safely manage and secure, and we pause training or hold back models when we need to slow down,” Pusateri said in a statement. “We’re making significant changes to strengthen security in our research and testing environments, train models to not just complete tasks but do so responsibly, expand our work with third-party evaluators, and improve real-time monitoring so we can detect and respond to concerning behavior earlier in the training process .”\n\nBeyond calling for changes in OpenAI’s culture, Robinson also said it’s time to ask bigger questions about alignment — something that he admitted could sound “touchy-feely,” but he said it’s critical as companies’ current “measures of how well” AI systems “match human values are coarse.”\n\n“The smarter the industry lets models grow while these problems remain unsolved, the more dangerous our situation becomes,” he said.\n\nRobinson’s departure was first reported by Business Insider . In his essay, he also acknowledged that he’s following an apparently a common step in the AI whistleblower playbook: He’s hired a PR firm . But he insisted, “The decision to speak out is mine alone.”\n\n“Perhaps I should have stayed and fought for fundamental shifts in our staffing and culture, but in practice, my colleagues and I were so busy sprinting that we seldom had the chance to consider big changes, much less to actually make them,” Robinson said. “That’s why I concluded that stronger incentives for safety — coming from outside the company — are a big part of getting this right.”"
+        "title": "OpenAI will start watermarking ChatGPT’s text in the EU",
+        "summary": "OpenAI will watermark ChatGPT and Codex text in the EU to comply with the AI Act. Editing can make the invisible marks harder to detect, it says.",
+        "body": "OpenAI will start adding an invisible watermark to text generated by ChatGPT and Codex in the European Union to comply with the EU AI Act, the company said Monday in a blog post .\n\nThe EU AI Act’s transparency rules , which took effect on August 2, require AI companies to mark AI-generated content in a way other systems can identify.\n\nOpenAI said the watermark will roll out over the coming weeks to eligible ChatGPT and Codex users on all plans, but only in the EU. Developers using OpenAI’s API anywhere in the world can turn it on for select models starting today; it’s off by default. OpenAI said it is not making text watermarking a global default at launch.\n\nThe watermark is not an actual symbol, but works by subtly shaping the model’s word choices, leaving a pattern readers can’t see, but a detector can pick up. Because it lives in the words themselves, it travels with the text when it’s copied and pasted. OpenAI said the watermark doesn’t identify the user, and that it saw no meaningful change in its models’ performance with it switched on.\n\nOpenAI also published a technical report for its method, called textGrain, alongside the announcement. Co-written with researchers from the University of Pennsylvania and Yale, it walks through an example of using a secret key to sort next-word predictions to finish the sentence. Add hundreds of these nudges together, and the detector can spot AI-generated content using only the text and the key.\n\nCan the watermark be removed by editing? OpenAI’s tests suggest yes. In one test, replacing 10% of words with synonyms dropped detection from about 92% to 66%. The company also said short passages, math answers, and translated text are harder to detect.\n\n“These limitations contribute to our decision to provide initial detector access only to approved researchers and expert organizations, who can help us evaluate reliability and responsible uses,” said the company.\n\nOpenAI also cautioned that a missing watermark “does not prove human authorship.” The text could be too short or too heavily edited, or it could come from another company’s AI.\n\n“[Watermarks] can indicate that an OpenAI system generated or processed part of a passage, but not how much human judgment, editing, or creativity went into it,” the company said.\n\nThe announcement comes two months after Anthropic said it would watermark text generated by Claude, a move it’s applying worldwide. That decision drew backlash from some Claude users , who argued they had supplied “the instructions, context, decisions” while Claude was just “the tool.”\n\nOpenAI had built a text watermark before but held off on releasing it, partly over concerns that users would switch to rivals that didn’t watermark, The Wall Street Journal reported in 2024.\n\nAnthropic, Google, Meta, Microsoft, and OpenAI are among the companies that have committed to following the EU’s code of practice on AI-generated content."
       }
     },
     "media": null
   },
   {
-    "id": "engadget-3693804877f5beb4",
+    "id": "the-verge-b6161f08b67f25ce",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1005075/nolla-health-acne-ai-prescriptions",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-05T20:14:57.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "This startup is issuing AI-generated acne prescriptions",
+        "summary": "People in Utah can now use AI to get a prescription for acne treatment. On Monday, healthcare startup Nolla Health announced that users in the state can scan their faces using its app, allowing its AI system to analyze acne severity and autonomously write a prescription, as reported earlier by Bloomberg. The service is launching […]",
+        "body": "People in Utah can now use AI to get a prescription for acne treatment. On Monday, healthcare startup Nolla Health announced that users in the state can scan their faces using its app, allowing its AI system to analyze acne severity and autonomously write a prescription, as reported earlier by Bloomberg .\n\nThe service is launching as a pilot program with gradually loosening physician oversight. Two physicians will approve each AI-generated prescription before they're issued for the first 100 patients, but will start reviewing them only after they're prescribed for up to 500 patients. \"After that, physicians review a sample of at least 10% of …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-b5562072c78dd344",
     "type": "news",
     "sourceId": "engadget",
     "sourceName": "Engadget",
     "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2273351/how-to-customize-iphone-camera-control/",
+    "originalUrl": "https://www.engadget.com/2278051/wikimedia-links-openai-agents-to-an-outage-and-unauthorized-activity/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-03T16:30:00.000Z",
+    "publishedAt": "2026-10-05T19:55:11.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Wikimedia links OpenAI agents to an outage and unauthorized activity",
+        "summary": "Wikimedia says it's \"deeply concerned about the impact of 'rogue' AI agents on platforms like ours.",
+        "body": "The foundation says it's \"deeply concerned about the impact of 'rogue' AI agents on platforms like ours.\n\nOpenAI agents have been running amok online , and it seems the Wikimedia Foundation has been affected too. The foundation says it detected unauthorized activity from OpenAI agents on its platforms, including edits to some wikis and failed attempts to compromise a note-taking tool. It reiterated that bots have been crawling data from its platforms en masse, while agents that appear to be operated by OpenAI have made millions of requests to its public APIs.\n\nAn investigation didn't turn up any evidence that AI agents were using Wikimedia systems to coordinate their activity (as they appear to have done on non-Wikimedia-operated wikis ) and nor did the foundation detect signs of its data or systems being compromised. \"However, we are concerned about what could have occurred here, the difficulty and effort involved in investigating and attributing this activity, and the growing risks of agentic AI activity on our platforms in general,\" Selena Deckelmann, the foundation's chief product and technology officer, wrote in a blog post . \"The open web is a public good. We should not allow this behavior to become the 'new normal' for the people or organizations that maintain it.\" Engadget has contacted OpenAI for comment.\n\nIt appears OpenAI agents edited some Wikimedia wikis without permission. Almost all of these were test edits in sandbox sections of wikis and weren't visible on pages that users would generally access. There were also \"a few edits to the configuration for a citation tool, which we believe were potentially malicious edits that were intended to misuse this tool as a proxy for fetching data from remote services,\" Deckelmann wrote. While bots are permitted to edit Wikipedia under certain conditions, approval was not sought in these cases. (The English version of Wikipedia prohibits AI-generated articles .)\n\nMoreover, agents that Wikimedia believes to stem from OpenAI attempted to compromise a note-taking tool called Etherpad, but those efforts failed. \"Agents unsuccessfully tried to use it to fetch data from other websites as a proxy,\" Deckelmann wrote. \"Other agents also likely operated by OpenAI took notes about their tasks, though this did not appear to turn into coordination.\"\n\nThe Wikimedia Foundation previously said that bots have been hammering its platforms since early 2024 to scrape data for generative AI training purposes. It now says agents have crawled millions of pages — mainly from Wikidata and Wikimedia Commons — and made \"hundreds of thousands of data queries\" to the Wikidata Query Service, which may have helped cause an outage in May .\n\n\"AI companies are not doing enough to secure their systems and protect the public from the harm they cause,\" Deckelmann argued, adding that Wikimedia is \"deeply concerned\" about the effect rogue AI agents can have on open knowledge platforms such as the ones it operates.\n\n\"Bots and agents are part of the future of the web, and the companies who unleash and profit from them must directly help avoid and repair damage they can do,\" Deckelmann wrote. \"Our collective priority should be the health of the overall web ecosystem so that it continues to benefit all people — not just a handful of billionaires.\"\n\nWikimedia has offered a dataset for AI training purposes in an attempt to dissuade crawlers from scraping its platforms, which increases its costs and can potentially overload its systems. The foundation has also partnered with several tech companies to offer them streamlined access to data, but OpenAI isn't among them ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-2ebcc56b848b18c4",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/05/reflection-debuts-beam-a-open-weight-ai-model-to-rival-chinese-models-at-lower-compute-cost/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-05T19:33:53.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Reflection debuts Beam, an open-weight AI model to rival Chinese models at lower compute cost",
+        "summary": "Reflection is aiming Beam and future models at enterprises and sovereign nations. The pitch is to build “AI factories,” a product that would let institutions build their own customized, local AI system by training Reflection’s AI models on their own proprietary data.",
+        "body": "Reflection AI is officially unveiling Beam, its first frontier, open-weight AI model. The two-year-old, Brooklyn-based startup claims Beam matches the performance of leading Chinese open models on advanced reasoning benchmarks at dramatically lower costs, a claim that could heat up the race to build a Western answer to DeepSeek, Qwen, and Z.ai.\n\nReflection’s announcement confirms reporting from Axios over the weekend that the startup was close to a launch. The company shared new details in a lengthy blog post Monday , which described Beam as a text-only mixture-of-experts model trained on high-compute reinforcement learning to be effective at reasoning, coding, and agentic tasks at “a fraction of the token cost and inference time compute” of rivals.\n\nBeam is a 501-billion-parameter model with 23 billion active parameters. It was pretrained on 23.8 trillion tokens and has a 1 million token context window. To compare, Z.ai’s GLM-5.2 has roughly 744 billion total parameters with 40 billion active.\n\nReflection’s performance claims haven’t been independently verified, but on advanced reasoning benchmarks, the company says Beam scores on par with Z.ai’s GLM-5.2 and outperforms today’s leading Western open models while using “3-4x less inference compute.” Reflection calls it a “workhorse model” for enterprises, the public sector, and developers.\n\nReflection is positioning itself against closed labs like Anthropic and OpenAI, against popular open models from Chinese developers, and against Western players like Mistral, Meta, and Cohere. Its most direct U.S. rival might be Inkling , the open model from Mira Murati’s Thinking Machines Lab released in July. Reflection’s own benchmarks show that Beam outscores Inkling on four coding tests where both report results, but Inkling is a multimodal model and Beam is text-only.\n\nReflection was founded in 2024 by two former Google DeepMind researchers and has raised roughly $4.7 billion from backers, including Nvidia, Sequoia Capital, and Lightspeed Venture Partners, per PitchBook. Its last round valued the company at a $25 billion pre-money valuation .\n\nThe startup has also been locking up compute — a key ingredient needed to train frontier models capable of luring customers away from Anthropic’s and OpenAI’s closed models, as well as the cheaper open-weight models from Chinese labs. This summer, Reflection signed deals collectively worth more than $7 billion with SpaceX and Nebius to secure access to Nvidia’s GB300 chips through 2029.\n\nReflection is aiming Beam and future models at enterprises and sovereign nations. The pitch is to build “AI factories,” a product that would let institutions build their own customized, local AI system by training Reflection’s AI models on their own proprietary data. Nvidia CEO Jensen Huang, whose company backs Reflection, has long championed the “AI factory” idea and pushed to strengthen the open AI ecosystem — a vision that would also benefit Nvidia, whose GPUs would power those systems.\n\nAxios reported that hedge funds and trading firms are among those eager to build such systems. Reflection has already begun testing the concept of a sovereign AI factory partnership with Shinsegae Group in South Korea .\n\nReflection says it will release Beam’s weights and full technical details this month, with distribution through hyperscalers and neoclouds and integrations across open source libraries at launch.\n\nReflection did not respond in time to TechCrunch’s requests for more information."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-6c05203e03a027fe",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1004933/ai-math-openai-breakthrough-solution",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-05T19:28:59.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "All the drama around AI’s takeover of mathematics",
+        "summary": "This past year, OpenAI, Anthropic, and other labs have announced breakthroughs on numerous long-standing mathematical problems, in some cases pushing well beyond what researchers expected current systems to be capable of — including resolving one of the famous Millennium Prize problems. But in classic Silicon Valley style, AI labs are moving fast and breaking things, […]",
+        "body": "This past year, OpenAI, Anthropic, and other labs have announced breakthroughs on numerous long-standing mathematical problems, in some cases pushing well beyond what researchers expected current systems to be capable of — including resolving one of the famous Millennium Prize problems. But in classic Silicon Valley style, AI labs are moving fast and breaking things , barreling through the discipline with all the grace of a runaway bulldozer . Results that might normally have been celebrated have instead sparked backlash . AI labs say they are learning from earlier mistakes. Whether those promises bear fruit remains to be seen.\n\nRead on below for the latest updates in the AI takeover of mathematics."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-ee435db39f46a603",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/apple/2026/10/command-line-tool-quickly-removes-apple-intelligence-from-macos-27/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-05T19:14:44.000Z",
     "categories": [
       "tecnologia-general",
       "apple"
@@ -160,22 +279,22 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "How to customize Camera Control on your iPhone",
-        "summary": "Take a closer look at the iPhone's Camera Control feature and why tweaking it can change the way you shoot, even if you've never touched it before.",
-        "body": "Make your iPhone’s camera behave exactly how you want\n\nAre you getting everything you can out of the button at the lower right of your iPhone 16, 17, and 18 series? The button is the phone's Camera Control, which can be customized to support your mobile photography workflow.\n\nTo clear up any confusion, Camera Control refers to the capacitive button on the right side of your iPhone, which understands a range of gestures, including single- and double-clicks and swipe gestures. You use it to open the camera, take pictures, record videos and work with the advanced photography settings on your iPhone .\n\nPerfect for one-handed photography, Camera Control's default inputs are:\n\nYou can change the default behaviors in Settings > Camera > Camera Control . This takes you to a pane of many options, including two important sections you should explore first: Launch Camera and Controls , alongside several smaller tweaks.\n\nFor Launch Camera , tap Camera to choose which supported app to open when you press the Camera Control button. Camera is enabled by default, but you'll find other options if the relevant app is installed. These may include Instagram, which makes your iPhone an instant story creation tool, Code Scanner to scan QR codes or Magnifier, which turns your iPhone into a high-powered digital magnifying glass. You may also see other third-party apps, some of which may be grayed out pending full support.\n\nThe Controls section includes a range of settings you should explore, including Camera Adjustments . When activated, this makes Camera Control even more useful. When your Camera app is active, light presses or swipes on the button will let you explore camera options and adjustments.\n\nCustomize lets you decide what gestures Camera Control supports while in that mode, including support for light presses and swipes. It also lets you enable and disable the six adjustments potentially supported by Camera Control, which include:\n\nTap to enable and disable the tick beside the function, or press and hold the burger icon (three horizontal lines) beside each item to move it into your preferred order. In the future, when taking a picture, you'll be able to swipe the Camera Control to move through those different adjustments in the order you define.\n\nAlong with the above-referenced features, Camera Control also allows:\n\nThere are several additional customizations available in Settings > Accessibility > Camera Control . Here you can disable the button completely and define the force and speed required to make the button respond to a press, choosing between Default , Slow and Slower .\n\nI've found setting button behaviors to Slow helps stop accidentally opening the Camera when handling my device, and trimming the camera adjustments to Zoom, Exposure and Styles helps me focus on the image, not the controls I don't frequently use.\n\nThat's the point of Camera Control, really — configure it to support your workflow while making it much, much easier to take photos, videos and use Visual Intelligence with one hand."
+        "title": "Command-line tool quickly removes Apple Intelligence from macOS 27",
+        "summary": "The tool can free up over 12GB of storage.",
+        "body": "A new tool is allowing Mac users the ability again to easily turn off Apple Intelligence with one click and free up to 12GB of storage.\n\nUnlike with previous versions of macOS, macOS 27 Golden Gate doesn’t have a toggle for turning off Apple Intelligence. That makes disabling AI features that you may not want more difficult. It also means that the AI models necessary for running Apple Intelligence will take up space on your disk , even if you don’t use them or if you go through your settings to individually find and disable AI capabilities.\n\nIn response, a developer known as Om Lahore on GitHub last week created RemoveMacAI, a command-line tool that allows macOS 27 users to “turn off Apple Intelligence on macOS 27\" in a way that is “fully reversible,” per the GitHub page . They said that Apple's Intelligence models take up \"about 12GB,\" but the models can actually take up over 30GB, The Verge noted.\n\nRead full article\n\nComments"
       }
     },
     "media": null
   },
   {
-    "id": "the-verge-5b1dbe3b3929e6d3",
+    "id": "engadget-2d712418155af4c0",
     "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/entertainment/1004162/splice-ceo-kakul-srivastava-ai-interview",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2277866/openai-will-add-a-digital-watermark-to-text-and-code-generated-in-the-eu/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-03T15:00:00.000Z",
+    "publishedAt": "2026-10-05T18:55:40.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -184,45 +303,46 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Splice CEO Kakul Srivastava thinks AI emails are killing conversations",
-        "summary": "Kakul Srivastava is the CEO of Splice, the sample platform countless producers rely on for one-shots and melodic loops. Samples pulled from the service have found their way into massive hits like Lisa's \"Money\" and \"Espresso\" by Sabrina Carpenter. (The original samples are here and here, for the curious.) Before that, Kakul held executive roles […]",
-        "body": "Kakul Srivastava is the CEO of Splice, the sample platform countless producers rely on for one-shots and melodic loops. Samples pulled from the service have found their way into massive hits like Lisa's \" Money \" and \" Espresso \" by Sabrina Carpenter. (The original samples are here and here , for the curious.)\n\nBefore that, Kakul held executive roles at Flickr, Yahoo, GitHub, and Adobe. Throughout her career, Kakul has found herself at the intersection of Silicon Valley and creatives. That's been especially true at Splice, where she's not just expanded the platform's footprint by acquiring Spitfire Audio , but also overseen its forays into the wor …\n\nRead the full story at The Verge."
+        "title": "OpenAI will add a digital watermark to text and code generated in the EU",
+        "summary": "This move is to comply with the EU's new AI transparency rules.",
+        "body": "This is to comply with the region's new AI transparency rules.\n\nOpenAI just announced its plans to comply with part of the European Union's new AI transparency rules . The company will soon begin adding an invisible watermark to text and code generated in the EU. This follows a similar move by Anthropic earlier this year.\n\nOpenAI is using a proprietary system called textGrain that \"adds an invisible statistical signal to the model's word choices.\" Once added, a detector can spot these signals and ascertain if there's a watermark.\n\nThe company says the system \"matched or exceeded\" the performance of other approaches, like SynthID for text . However, it still cautions that \"strong performance under ideal conditions does not guarantee reliable detection in everyday use.\"\n\nThat's corporate speak for \"it may not always work.\" It admits that shorter text is harder to detect, with around an 80 percent success rate. The same goes for \"content such as mathematics.\" Even editing text seems to bring down the success rate. OpenAI does plan on making the technology available in open source so others can tweak it.\n\nThe watermark will not be enabled by default, except for \"eligible ChatGPT and Codex text output in the European Union.\" Customers will be able to opt-in \"for select models,\" though it didn't specify which models would be available to the general global public.\n\nOpenAI is being a bit more cautious when it comes to the detection software. Access will initially be limited to \"approved researchers and expert organizations.\" Also, the detector doesn't identify the user or reveal prompts or conversations.\n\nArticle 50 of the EU's AI Act mandates that providers of generative AI systems make text outputs identifiable in a machine-readable way. This already pertains to new companies entering the market, but pre-existing entities have until December 2 to comply. This includes organizations like OpenAI and Anthropic, of course, but also Microsoft, Google and Meta, among others."
       }
     },
     "media": null
   },
   {
-    "id": "the-verge-053caac2bc16c920",
+    "id": "ars-technica-81d68ba44a5f7987",
     "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1004408/openai-safety-quits-sounding-the-alarm",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/cars/2026/10/f1-in-bahrain-in-malaysia-the-race-needed-a-software-update-to-start/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-03T14:31:56.000Z",
+    "publishedAt": "2026-10-05T16:09:07.000Z",
     "categories": [
-      "tecnologia-general"
+      "tecnologia-general",
+      "programas-accesibles"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "An OpenAI safety employee has quit and is sounding the alarm",
-        "summary": "David Robinson used to write the safety reports that accompanied every major model release at OpenAI. This week, he resigned from his position and is now speaking out in an editorial in The Atlantic. It's understandable if you're feeling a bit cynical about everyone suddenly coming out of the woodwork to warn about how dangerous […]",
-        "body": "David Robinson used to write the safety reports that accompanied every major model release at OpenAI. This week, he resigned from his position and is now speaking out in an editorial in The Atlantic .\n\nIt's understandable if you're feeling a bit cynical about everyone suddenly coming out of the woodwork to warn about how dangerous the thing they helped build is. They did, after all, make this mess. But that doesn't mean we should discount their warnings.\n\nRobinson says that the culture in industry is fundamentally broken. That this is a deeper issue than simply slapping a few new rules or regulations on how we handle training models. Silicon …\n\nRead the full story at The Verge."
+        "title": "F1 in Bahrain... in Malaysia: The race needed a software update to start",
+        "summary": "A software bug waylaid half the field and required a race reboot.",
+        "body": "Well, it’s safe to say no Bahrain Grand Prix has been affected by torrential rain quite like the 2026 race.\n\nFor one thing, it was held several thousand miles from Bahrain itself. The ongoing war with Iran ruled such things out, so the Sepang International Circuit in Malaysia stepped in to fill its spot. One of the best examples of a late-'90s “Tilke track”—named for its designer, Herman Tilke—it’s characterized by a couple of long straights and the always-brutal tropical weather that provides one of the toughest physical challenges on the calendar. And this weekend was no exception.\n\nHeavy rain arrived about half an hour before the start time, delaying things significantly. Although the sport has two different kinds of treaded tires for use in the rain, the full wet tire generates so much spray, and such slow lap times, that it's essentially only useful for circulating behind the safety car. If it’s wet enough to need it, it will be too wet to see where you’re going. The intermediate tire, by contrast, has much shallower grooves and is good for racing on damp but not soaked tracks, although it quickly overheats and degrades as the track dries.\n\nRead full article\n\nComments"
       }
     },
     "media": null
   },
   {
-    "id": "techcrunch-7330ad25e8a4fd0a",
+    "id": "ars-technica-e598de1e81836cd2",
     "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/03/all-the-ai-agents-that-can-live-in-your-text-messages/",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/ai/2026/10/ai-glasses-face-their-first-major-government-crackdown/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-03T14:00:00.000Z",
+    "publishedAt": "2026-10-05T13:39:30.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -231,9 +351,57 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "All the AI agents that can live in your text messages",
-        "summary": "We created a list of the most notable AI agents that can live in your text messages, from general assistants to agents designed for families, travel, and work.",
-        "body": "Rather than downloading another app, a growing number of agents can simply be texted like an ordinary person.\n\nYou text it what you need, and it can remember context, connect to the apps and services you already use, and complete tasks on your behalf. That can mean scheduling an appointment, organizing a calendar, researching a trip, sending an email, making a reservation, shopping online, or reminding you about something days later.\n\nWhile Instinct is one of the buzziest AI agents at present, thanks to its $10 billion valuation after its latest funding round of $1 billion, there are many others also making a play for this space.\n\nBelow are some of the most notable options so far, from general-purpose personal assistants to agents designed for families, travel, and work.\n\nCaddy is an AI assistant that turns the information scattered across your phone into things you can actually act on. It lives in iMessage for iPhone users and RCS for Android users, so there’s no separate app or inbox to constantly check.\n\nFor instance, an email contains an appointment that needs to be added to your calendar or a friend sends a list of things to pick up. Instead of worrying about all the details getting buried, Caddy connects to your calendars and conversations, then identifies things that may require action. It can add events to your calendar, set reminders, keep track of follow-ups, and even do research for you.\n\nCaddy has been available in public beta since April 2026.\n\nFambot is an AI-powered “chief of staff” for families, designed to bring together the many moving parts of family life, including school communications, sports activities, meal planning, calendars, and other day-to-day responsibilities, and turn them into an organized plan.\n\nThe service is designed to work across both an app and text messages. Fambot is available on iOS devices, Android devices, and the web, and families can also interact with it directly over SMS. Every night, Fambot automatically sends a summary of the following day, including upcoming events, to-dos, and details such as school uniform or packing requirements. Parents can reply to those messages to ask questions, check information, or make changes to their calendar.\n\nFambot currently connects to Gmail and Google Calendar, with support for Outlook and Apple Calendar planned for the future.\n\nThe company launched in beta in early September 2026 and has raised $3.5 million in pre-seed funding. The service is currently free during the beta period, but Fambot expects to eventually charge roughly the equivalent of a Netflix subscription.\n\nFolk is designed to be an AI assistant you can reach through iMessage, WhatsApp, and Telegram. It can remember personal context, manage reminders, research topics, track flights, handle email, and perform real-world tasks such as restaurant reservations.\n\nOne distinction is that Folk runs on its own private cloud computer. It can also run code and execute multi-step tasks rather than merely responding conversationally.\n\nFolk launched its beta in May 2026, and it’s available for free but also offers a Pro subscription for $8.33/month if you want unlimited tasks running in the background.\n\nInstinct first made headlines after raising $350 million at a $2.5 billion valuation. In September 2026, it raised $1 billion , valuing it at $10 billion.\n\nThe always-available agent can take actions on your behalf, rather than simply answer questions. Users can communicate with Instinct by text or voice and connect it to the apps and services they already use, such as email, calendar, Google Workspace, and more. The company says early users have used Instinct for tasks ranging from planning trips and buying groceries to booking tickets and cancelling subscriptions.\n\nIn September, Instinct began giving users dedicated email addresses for their assistants. The idea is to let Instinct create and manage accounts on a user’s behalf without filling the user’s personal inbox. The agent can use its address to sign up for services, contact businesses, follow up on requests, and handle tasks that require an email account. (However, this level of autonomy has also raised concerns about privacy and security .) It’s also begun rolling out support for placing calls .\n\nThe company remains in private beta.\n\nPowered by Hermes agent, Iris is designed to let users delegate tasks to an AI assistant directly through iMessage. Users can connect the apps they use and hand over a task with a simple message. The agent then works through the required steps, while retaining relevant context from previous interactions. It’s also designed to follow up with users proactively rather than waiting for another request.\n\nMartin is a general-purpose personal assistant reachable through SMS as well as phone, WhatsApp, email, Slack, and its own iOS app.\n\nIt can help manage calendars, email, reminders, tasks, notes, and communications. It can also act on behalf of users by sending messages or making phone calls, while providing daily summaries of what needs attention.\n\nIt’s a bit on the pricier side, with subscriptions starting at $21 per month.\n\nMiso takes the personal-assistant concept and applies it specifically to travel.\n\nIt operates through iMessage and combines AI trip planning with support from a dedicated travel team. Users can arrange flights through messaging while Miso takes into account their travel preferences, loyalty points, and other priorities. Miso also gives travelers access to trip details, flight updates, along with personalized recommendations.\n\nOhai is another family assistant focused on helping households manage the constant stream of information and tasks involved in everyday family life.\n\nUsers can send messages, forward emails, or make voice requests, and the assistant can transform them into schedules, reminders, and plans. It can also coordinate calendars, household chores, and meals across multiple members of a family.\n\nIt includes a free basic option, but also offers different subscriptions based on family size, starting at $9.99 per month.\n\nSimilar to the other family-focused agents, the idea behind Ollie is that families already have the information they need, but it lives across school messages, calendars, task lists, and group chats. Ollie aims to bring those pieces together and keep them in sync. It can keep track of calendars, emails, reminders, tasks, and other household details, then deliver relevant information to users through text.\n\nIts biggest differentiator from other agents is that Ollie is one of the first mainstream, family-focused AI assistants to achieve SOC 2 compliance, a widely used security standard.\n\nLaunched in June 2026, Ollie offers a free tier, as well as paid plans starting at $25 per month for 150 messages. A $100-per-month plan includes up to 1,000 messages.\n\nOrbits also has an AI assistant that is focused on the household.\n\nIt works through both the Orbits app and text messaging, and can bring together calendars, lists, and conversations while also carrying out tasks for you. That can include searching the web, making purchases, booking restaurants, changing appointments, and requesting quotes for household services.\n\nAdditionally, Orbits can remind family members about chores, communicate with service providers, and help coordinate responsibilities beyond the immediate household.\n\nOrbits is backed by investors like Andreessen Horowitz (a16z) Speedrun fund, N49P, and Garage Capital.\n\nUsers can interact with Pally as they would with a friend while giving it access to the apps they already rely on. The assistant can connect information spread across services such as WhatsApp, Gmail, calendars, and Google Drive, helping users keep track of plans, receipts, dates, files, and other details.\n\nThere’s a free plan available, which offers features like 15 minutes of calls per month, or there are paid plans, including $25 per month for 30 minutes of calls and $100 per month for 60 minutes.\n\nPoke launched in March 2026 as a general-purpose assistant that you can reach through text messaging. It can handle tasks involving calendars, planning, health and fitness, smart-home controls, photos, and other everyday activities.\n\nPoke became particularly notable in June 2026 when Apple approved Poke as the first AI agent on the Apple Messages for Business platform. A month later, parent company The Interaction Company of California was acquired by AI coding startup Cognition in a deal valued in the low nine figures.\n\nRene is an AI personal assistant designed to be a user’s “best contact” rather than another productivity agent. It’s text-based and can turn natural-language conversations into tasks, reminders, summaries, and other follow-up actions. Rene also maintains context across conversations, allowing it to remember details and surface things that may need attention later.\n\nAdditionally, it has a browser, can write code, shop for you, as well as create slides and images.\n\nRene is currently available on iMessage, Telegram, and WhatsApp.\n\nInstead of waiting for users to open an app, Skye is an “ agentic homescreen ” for the iPhone that analyzes information from connected services and surfaces what it thinks is relevant through contextual cards, suggestions, and daily briefings. The assistant can generate audio briefings, prepare information ahead of meetings, surface reminders, and identify potentially useful information.\n\nThe company, Signull Labs, raised about $3.6 million in seed funding in 2025. It entered private testing and beta in April 2026, and hasn’t yet announced a public release date.\n\nStanley is an AI content assistant aimed at content creators rather than general personal productivity. Available through iMessage, Telegram, and the web, it acts as a kind of AI head of content, helping users come up with ideas, turn them into posts, and maintain a consistent publishing schedule.\n\nFor instance, Stanley can connect to a user’s Instagram account, using that context to suggest content based on what the user has actually been doing. Users can also send voice notes, which Stanley turns into scripts, captions, and other social assets. It includes a content calendar and can schedule posts, with the broader goal of making content creation a more continuous, automated process rather than something users have to sit down and plan from scratch.\n\nThe biggest differentiator with Tomo ’s personal assistant for iMessage is that, instead of being a private assistant that only you interact with, Tomo can become part of group conversations.\n\nAlso, like other agents, it’s designed to help with goals, accountability, scheduling, and everyday organization. It also has the ability to send reminders, search the web, work with calendars and email, watch videos, and edit photos.\n\nThe basic plan starts at $19.99 per month.\n\nTown is aimed more at professional life. It gives users a “Townie,” an AI assistant designed to learn how they work and handle recurring professional tasks. It can work with email, calendars, documents, Slack, and other platforms.\n\nIn June 2026, the company raised a $55 million Series A led by Andreessen Horowitz and Forerunner.\n\nWajo ’s first consumer agent, Fo, can call businesses, send emails, join group chats, make bookings and purchases, and coordinate with people to complete everyday tasks.\n\nA key part of Wajo’s approach is giving Fo its own identity. The agent has its own email address, phone number, and payment card, allowing it to interact with businesses without requiring users to hand over their own credentials.\n\nNotably, when Fo encounters something it cannot handle on its own, Wajo says it can bring in a human assistant to finish the task.\n\nFo launched publicly in September 2025 with a free tier, while heavier workloads and custom agents are available through a paid Pro offering."
+        "title": "AI glasses face their first major government crackdown",
+        "summary": "Norway wants time to write permanent rules for glasses that can record bystanders.",
+        "body": "Norway has become the first major country to propose a temporary ban on the use of AI glasses in selected public places amid growing privacy concerns over wearable technology.\n\nThe rich Scandinavian country’s center-left government said on Monday that it would introduce a law to parliament soon on a temporary ban for places such as parks, beaches, schools, and kindergartens. It will also set up an expert group to propose permanent national rules.\n\n“I am concerned about the introduction of powerful new technology where people risk being photographed, filmed, or recorded without their knowledge,” said Torgeir Micaelsen, Norway’s digitalization minister. A temporary ban “will give us time to conduct a thorough assessment and hold an informed debate that can lay the foundation for permanent regulation,” he said.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "conticgo-6f4c37587f2fed67",
+    "type": "news",
+    "sourceId": "conticgo",
+    "sourceName": "Conticgo",
+    "sourceUrl": "https://conticgo.net/",
+    "originalUrl": "https://conticgo.net/nueva-formacion-gratuita-repaso-de-atajos-basicos-para-la-intercomunicacion-con-smartphones-de-personas-con-baja-vision/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-10-05T09:41:09.000Z",
+    "categories": [
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "Nueva formación gratuita: repaso de atajos básicos para la intercomunicación con smartphones de personas con baja visión",
+        "summary": "Desde Conticgo ponemos en marcha una nueva formación gratuita dirigida a repasar atajos básicos que facilitan la intercomunicación y el manejo de smartphones. La sesión tendrá lugar este martes 6 de octubre a las 11:00 h y podrá seguirse de forma presencial o online a través de Jitsi Meet. Sesión online También será posible participar […] La entrada Nueva formación gratuita: repaso de atajos básicos para la intercomunicación con smartphones de personas con baja visión se publicó primero en Conticgo .",
+        "body": "Desde Conticgo ponemos en marcha una nueva formación gratuita dirigida a repasar atajos básicos que facilitan la intercomunicación y el manejo de smartphones.\n\nLa sesión tendrá lugar este martes 6 de octubre a las 11:00 h y podrá seguirse de forma presencial o online a través de Jitsi Meet .\n\nTambién será posible participar online a través de Jitsi Meet , en la sala de grupo, el mismo martes 6 de octubre a las 11:00 h.\n\nPara acceder a la sesión online, puedes hacerlo haciendo click en el siguiente enlace el mismo día 6 de octubre a las 11:00:\n\nEnlace directo a sala de grupo JitsiMeet\n\nLa formación presencial se realizará a las 11:00 h en nuestra sede de Avilés:\n\nAvda. Gijón, 7 Centro Municipal de Asociaciones El Arbolón Sala de Actividades 3\n\nUna vez termine la formación, estará disponible en nuestro canal de YouTube para todos aquellos que no os hayáis podido concectar.\n\n¡Os esperamos!"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "conticgo-5fc888b270a2cdbd",
+    "type": "news",
+    "sourceId": "conticgo",
+    "sourceName": "Conticgo",
+    "sourceUrl": "https://conticgo.net/",
+    "originalUrl": "https://conticgo.net/monarch-2-0-lleva-la-ia-al-braille-y-los-graficos-tactiles/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-10-05T06:00:22.000Z",
+    "categories": [
+      "tecnologia-accesibilidad",
+      "ia-accesibilidad",
+      "braille"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "Monarch 2.0 lleva la IA al braille y los gráficos táctiles",
+        "summary": "HumanWare ha lanzado Monarch 2.0, una importante actualización de su dispositivo de braille multilineal y gráficos táctiles, con nuevas funciones de inteligencia artificial y mejoras para explorar matemáticas, gráficos y contenidos digitales. El Monarch combina 10 líneas de braille con gráficos táctiles dinámicos en una misma superficie, permitiendo acceder mediante el tacto a información que […] La entrada Monarch 2.0 lleva la IA al braille y los gráficos táctiles se publicó primero en Conticgo .",
+        "body": "HumanWare ha lanzado Monarch 2.0, una importante actualización de su dispositivo de braille multilineal y gráficos táctiles, con nuevas funciones de inteligencia artificial y mejoras para explorar matemáticas, gráficos y contenidos digitales.\n\nEl Monarch combina 10 líneas de braille con gráficos táctiles dinámicos en una misma superficie , permitiendo acceder mediante el tacto a información que tradicionalmente se presenta de forma visual. La actualización 2.0 fue anunciada por HumanWare el 14 de septiembre de 2026.\n\nMonarch es un dispositivo de tecnología de apoyo desarrollado por HumanWare en colaboración con la American Printing House for the Blind (APH) y la National Federation of the Blind (NFB) .\n\nSu característica principal es combinar braille multilineal y gráficos táctiles en una única pantalla dinámica. El dispositivo cuenta con 10 líneas de 32 celdas de braille , además de una superficie formada por miles de puntos que permite representar información gráfica mediante el tacto.\n\nDe esta forma, una persona puede explorar mediante el tacto textos, diagramas, mapas, gráficos y contenidos matemáticos , sin depender exclusivamente de materiales impresos o gráficos táctiles estáticos.\n\nUna de las novedades de Monarch 2.0 es Describe with AI , una función capaz de generar una descripción verbal de una imagen .\n\nEsta herramienta se incorpora al visor de gráficos táctiles y permite obtener información mediante una descripción generada por inteligencia artificial.\n\nLa función puede resultar especialmente interesante cuando se trabaja con contenidos que contienen información visual y puede complementar la exploración táctil.\n\nNo obstante, HumanWare no presenta Describe with AI como un sustituto de la representación táctil . Se trata de una función de descripción de imágenes integrada en el dispositivo.\n\nMonarch 2.0 también incorpora mejoras destinadas a facilitar el acceso a información matemática y gráfica.\n\nEl visor de gráficos KeyMath ha sido rediseñado para ofrecer más detalle y simplificar la exploración de gráficos. Además, la integración de MathCAT mejora la conversión de contenidos matemáticos entre la representación impresa y el braille.\n\nPor otro lado, Tactile Viewer incorpora nuevos niveles de zoom para determinados gráficos, incluidos los archivos SVG .\n\nEsto permite ampliar las posibilidades de exploración de diagramas y otros contenidos gráficos mediante el tacto.\n\nLas nuevas funciones pueden tener especial interés en el ámbito educativo.\n\nEl Monarch está diseñado para que estudiantes ciegos y con baja visión puedan acceder a contenidos que tradicionalmente presentan importantes barreras de accesibilidad, como gráficos, mapas, diagramas, ecuaciones o libros de texto digitales .\n\nLa actualización también incorpora un modo examen , que permite al personal educativo seleccionar qué aplicaciones y herramientas puede utilizar el estudiante durante una evaluación.\n\nDe esta manera, el alumno puede seguir utilizando las capacidades de braille y gráficos táctiles del Monarch mientras se restringe el acceso a determinadas herramientas durante una prueba.\n\nMonarch 2.0 introduce mejoras en el intercambio y la colaboración mediante KeyDrive y añade estilos integrados para archivos eBraille en VictorReader.\n\nEstas mejoras buscan facilitar el acceso a documentos digitales y ampliar las posibilidades de trabajo con contenidos en braille electrónico.\n\nLa evolución del Monarch muestra cómo diferentes tecnologías de apoyo pueden combinarse en un mismo dispositivo.\n\nHasta ahora, acceder a determinados contenidos visuales podía requerir disponer de un gráfico táctil específicamente preparado. Con Monarch, los usuarios pueden explorar gráficos dinámicos y braille en una misma superficie, mientras que Describe with AI añade una vía adicional para obtener información verbal sobre imágenes .\n\nPara ámbitos como la educación, las matemáticas, la lectura de gráficos o el acceso a información visual, esta combinación puede abrir nuevas posibilidades de interacción con contenidos digitales.\n\nLa actualización Monarch 2.0 ya ha sido anunciada por HumanWare y amplía las funciones del dispositivo con herramientas centradas en braille, gráficos táctiles, matemáticas e inteligencia artificial.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuentes: Human Ware , Human Ware ."
       }
     },
     "media": null
@@ -281,7 +449,7 @@
     "locales": {
       "en": {
         "title": "Piggy Smash: Hammer Clicker",
-        "summary": "[TRY BEFORE YOU BUY!] Smash piggy banks. Collect coins. Pay ridiculous bills. Upgrade your build and take on the next chapter. Hold to swing your hammer. Chase the fast piggies, crack the tough ones, and scoop up their coins. Some piggies are even on fire. Upgrade your hammer, luck and stamina. Unlock hammers and abilities that change how you play. Your job changes your bills. Clear chapters, decorate your apartment, and move into better places. Play through a campaign with a real ending. Optional Overtime is there when you want more smashing. ACCESSIBILITY Play with VoiceOver: every piggy is read out, and you swing by timing, on a beat you feel. Choose your swing window. Bigger text across the game. FREE TO TRY The first 2 chapters are free. One purchase unlocks the full game. Optional extras for decorating, a few extra coins, supporting the game or an extra shift. Never required. No ads. No energy timers. Every swing you paid for is one you could have earned. Works offline. The bills are pretend. The coins stay in the game.",
+        "summary": "[TRY BEFORE YOU BUY!] NEW: the Piggy Foundry, a second way to smash. Smash piggy banks. Collect coins. Pay ridiculous bills. Upgrade your build and take on the next chapter. Hold to swing your hammer. Chase the fast piggies, crack the tough ones, and scoop up their coins. Some piggies are even on fire. Upgrade your hammer, luck and stamina. Unlock hammers and abilities that change how you play. Your job changes your bills. Clear chapters, decorate your apartment, and move into better places. Play through a campaign with a real ending. Optional Overtime is there when you want more smashing. PIGGY FOUNDRY A second mode. Drag your target onto the piggies and your hammer does the rest. Upgrade it, pay the building's bills, and come back to the coins it smashed while you were away. ACCESSIBILITY Play with VoiceOver: every piggy is read out, and you swing by timing, on a beat you feel. Choose your swing window. Bigger text across the game. FREE TO TRY The first 2 chapters are free. One purchase unlocks the full game. Optional extras for decorating, a few extra coins, supporting the game, an extra shift or Piggy Foundry gems. 100% optional, never required. No ads. No energy timers. Every swing you paid for is one you could have earned. Works offline. The bills are pretend. The coins stay in the game.",
         "body": "[TRY BEFORE YOU BUY!] Smash piggy banks. Collect coins. Pay ridiculous bills. Upgrade your build and take on the next chapter. Hold to swing your hammer. Chase the fast piggies, crack the tough ones, and scoop up their coins. Some piggies are even on fire. Upgrade your hammer, luck and stamina. Unlock hammers and abilities that change how you play. Your job changes your bills. Clear chapters, decorate your apartment, and move into better places. Play through a campaign with a real ending. Optional Overtime is there when you want more smashing. ACCESSIBILITY Play with VoiceOver: every piggy is read out, and you swing by timing, on a beat you feel. Choose your swing window. Bigger text across the game. FREE TO TRY The first 2 chapters are free. One purchase unlocks the full game. Optional extras for decorating, a few extra coins, supporting the game or an extra shift. Never required. No ads. No energy timers. Every swing you paid for is one you could have earned. Works offline. The bills are pretend. The coins stay in the game."
       }
     },
@@ -312,74 +480,26 @@
     "media": null
   },
   {
-    "id": "ars-technica-fefe83d7d841b0e2",
+    "id": "freedom-scientific-blog-ebf1af5d85f12f9a",
     "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/security/2026/10/apple-changes-full-disk-access-permissions-to-curb-abuse-from-ai-agents/",
+    "sourceId": "freedom-scientific-blog",
+    "sourceName": "Freedom Scientific",
+    "sourceUrl": "https://blog.freedomscientific.com/",
+    "originalUrl": "https://training.vispero.com/beyond-the-basics-navigate-review-and-present-more-effectively-in-powerpoint-using-jaws/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-02T23:03:16.000Z",
+    "publishedAt": "2026-10-03T00:03:00.000Z",
     "categories": [
-      "tecnologia-general",
-      "apple",
-      "ia-accesibilidad"
+      "windows",
+      "tecnologia-accesibilidad",
+      "jaws"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Apple changes full-disk access permissions to curb abuse from AI agents",
-        "summary": "Meta says FDA isn't sufficient to Muse reading messages. Apple begs to differ.",
-        "body": "Apple says it is changing its macOS privacy settings to stop third-party app developers from misusing them to access message histories.\n\nFriday's announcement comes two weeks after tech columnist Jason Aten said that Meta’s new general-purpose AI agent Muse sent him an unsolicited notification referencing a thread between him and a co-worker over Apple Messages. Aten said he never granted Muse permissions to read his messages and had assumed they were off-limits. Social media last week blew up with masses of people who agreed and said the incident showed that AI assistants given access to calendars, emails, messages, shopping accounts, and other resources are akin to a skill saw or other power tool. While potentially useful, they can do real damage if not used carefully.\n\nMeta CTO David Singleton joined the fray with a rebuttal that appeared solid. For Muse to access Apple Messages, a user must manually give it two privileges. One is full-disk access, a macOS system-level permission. The other is to enable a Messages connector setting in Muse.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-1e00709f851df52d",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/02/sean-parker-is-rebuilding-stability-ai-around-music/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-02T21:09:14.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Sean Parker is rebuilding Stability AI around music",
-        "summary": "Sean Parker, who once taught the music industry what asking for forgiveness looks like, is now back with the labels' blessing and money.",
-        "body": "Posted:\n\nSean Parker, the Napster co-founder, has jumped back into the music industry, and he tells The Information that he’s playing by the rules this time. (Asking for forgiveness rather than permission didn’t work out so well last time around, he readily concedes.)\n\nTwo years ago, he joined an $80 million rescue of Stability AI, the image-generator startup that nearly collapsed after overspending and internal turmoil led to founder Emad Mostaque’s ouster. Now Parker and his longtime friend Prem Akkaraju, who became CEO, are taking the wraps off what they’ve been building.\n\nThe big idea, Parker says, is to turn Stability into the go-to AI toolmaker for music professionals. Toward that end, in late August, the company announced $76 million in funding from, among others, Sony, Warner, and Universal, which also licensed their catalogs for training as part of the deal. Stability has since released three new audio models and AI music-editing software. The AI can generate whole instrumental tracks or short snippets from text prompts. Parker says an upcoming update will let users hum a melody or beatbox a drum pattern to steer it."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-64e5c1f17f370bdc",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1004330/meta-muse-ai-gadgets-home-link",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-02T21:08:37.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta open sources code to let you make Muse AI gadgets",
-        "summary": "Meta now lets you make your own Muse gadgets that feature the company's new AI agent with code that the company open sourced. The company suggests projects like loading Muse on a color E Ink display to show reminders, adding it to an HDMI stick so you can display Muse on a big screen, or […]",
-        "body": "Meta now lets you make your own Muse gadgets that feature the company's new AI agent with code that the company open sourced . The company suggests projects like loading Muse on a color E Ink display to show reminders, adding it to an HDMI stick so you can display Muse on a big screen, or putting Muse on a small touchscreen device to make what looks kind of like a DIY Muse Charm .\n\n\"Muse gadgets are open source devices you build yourself,\" Meta says. \"Program an off-the-shelf ESP32 board or set up a Raspberry Pi with our SDKs, then connect Muse to your displays, buttons, sensors, actuators, and whatever else you've got lying on your workbench. …\n\nRead the full story at The Verge."
+        "title": "Beyond the Basics: Navigate, Review, and Present More Effectively in PowerPoint Using JAWS",
+        "summary": "Advanced PowerPoint skills can help you navigate complex slides, examine visual elements, and deliver presentations with confidence. This webinar will demonstrate practical strategies for working more efficiently with PowerPoint using JAWS. Oct 15, 2026 12:00 PM in Eastern Time (US and Canada) In this webinar, we’ll show you how to: Join us to strengthen your PowerPoint skills …",
+        "body": "Advanced PowerPoint skills can help you navigate complex slides, examine visual elements, and deliver presentations with confidence. This webinar will demonstrate practical strategies for working more efficiently with PowerPoint using JAWS.\n\nOct 15, 2026 12:00 PM in Eastern Time (US and Canada)\n\nIn this webinar, we’ll show you how to:\n\nJoin us to strengthen your PowerPoint skills and take greater control of reviewing, improving, and delivering presentations with JAWS.\n\nVispero Presenters: Elizabeth Whitaker and Rachel Buchanan\n\nACVREP Credits: ACVREP credits will be available for those who attend the live webinar."
       }
     },
     "media": null
@@ -405,53 +525,6 @@
         "title": "Download the September Update of JAWS, ZoomText, and Fusion 2026",
         "summary": "The September update of JAWS, ZoomText, and Fusion 2026 is now available, offering new functionality and enhancements that increase efficiency and productivity. Here’s a look at several enhancements. Improved JAWS Support for Facebook and Reddit This release includes enhancements that significantly improve navigation on the Facebook and Reddit social media platforms. These include: These enhancements …",
         "body": "The September update of JAWS, ZoomText, and Fusion 2026 is now available, offering new functionality and enhancements that increase efficiency and productivity. Here’s a look at several enhancements.\n\nThis release includes enhancements that significantly improve navigation on the Facebook and Reddit social media platforms. These include:\n\nThese enhancements improve the user experience by making content easier to locate and improving overall navigation consistency.\n\nThis release includes several notable enhancements to our Cloud Settings feature, which allows users who are logged into a Vispero account to migrate settings across multiple devices. These include:\n\nThis feature is part of the Early Adopter Program, which provides access to new functionality that is still under active development. It is intended for users who want to try out upcoming features and provide feedback before they are fully released.\n\nTo enable this option:\n\nAfter JAWS restarts, choose Enable Sync when prompted to begin syncing your settings.\n\nFusion now starts more reliably, so it is ready to use when you need it. This update resolves an issue where Fusion could stop responding during startup. It occurred most often the first time Fusion was started after installing and restarting your computer.\n\nWhen a line of text under the mouse pointer or cursor exceeds the width of the Live Text View window, scroll arrows appear at the start or end of the displayed text. Previously, CAPS LOCK+RIGHT ARROW and CAPS LOCK+LEFT ARROW moved through the line one character at a time. You can now press and hold either hotkey to scroll continuously, making it faster to read through long lines of text.\n\nIn many enterprise environments, applications are hosted centrally on a server rather than installed directly on each user’s computer. These remotely hosted applications, often called Published Applications, can appear to the user as though they are running locally.\n\nTo provide speech, visual tracking, and magnification when users interact with Published Applications, ZoomText needs access to information from both the server and the local computer. In these environments, ZoomText is installed on both systems so the server and local components can work together. In this release:\n\nTo download and install the September update of JAWS, ZoomText, or Fusion 2026, follow these steps on a computer connected to the internet:\n\nNote: If you are running the latest version of JAWS, ZoomText, or Fusion 2026 and automatic updates are enabled, you can start the download and installation process from the notification.\n\nOur User Education and Outreach team offers outstanding resources for learning your Freedom Scientific software in our Training Center , which includes videos, FAQs, and instructions for getting started. Keep up with this blog and check out the Freedom Scientific Training schedule page for news of upcoming live training webinars and other events. For questions, email us at training@vispero.com ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-5843bacde477c970",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/tech-policy/2026/10/us-arrests-tech-ceo-accused-of-smuggling-300m-in-nvidia-chips-into-china/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-02T18:39:36.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "US arrests tech CEO accused of smuggling $300M in Nvidia chips into China",
-        "summary": "Nvidia’s chip-smuggling problem won’t go away as arrests continue.",
-        "body": "The US has arrested another suspect accused of smuggling high-end computer servers containing export-controlled Nvidia chips into China.\n\nIn a press release on Thursday, the Department of Justice accused 38-year-old Greg Lui of using false paperwork to mask shipments of servers worth more than $300 million that he allegedly knew were ultimately destined for China.\n\nAs the CEO of Earthmade Computer, Lui allegedly conspired with freight-forwarding firms in South Asian countries like Malaysia and Singapore to illegally divert chip shipments into China, including Nvidia’s A100 GPUs and H100 GPUs, the FBI’s indictment alleged. These are not Nvidia’s most advanced chips. However, the chips can process large amounts of data and train large language models, which the US fears could pose national security risks if China suddenly gets access to enough chips to drastically advance its AI or strengthen its military.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-caef5c2a2c85c06e",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/gadgets/2026/10/the-7-year-old-nvidia-shield-tv-is-now-100-more-expensive-thanks-to-ai/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-02T14:52:16.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The 7-year-old Nvidia Shield TV is now $100 more expensive due to AI",
-        "summary": "Initially launched in 2019, the Nvidia Shield TV Pro now retails for $299.99.",
-        "body": "The era of generative AI has upended technology supply chains, and there is one ironclad rule in 2026: If it has memory or storage, it's getting more expensive. Even devices with years-old tech inside are still apparently subject to that unwritten rule. Nvidia has just announced that the Shield TV Pro is getting $100 more expensive, effective immediately.\n\nThe most recent version of the Shield streaming box debuted in 2019, running Android TV with AI upscaling and hardware decoding for almost any type of media. While it ran an aging Tegra X1+ processor, that was (and still is) fast for a TV media streamer. The device launched at $199.99, with a non-Pro variant at $149.99. The non-Pro Shield has since been discontinued, but the Shield TV Pro lives on at the new $299.99 price.\n\nNvidia has confirmed that you can blame AI for the higher Shield TV pricing. \"Starting October 2, SHIELD Pro will be priced at $299. The cost of components, including memory, has increased substantially across the industry,\" a spokesperson told Ars.\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -1036,32 +1109,6 @@
     "media": null
   },
   {
-    "id": "conticgo-01b913c94c485bdd",
-    "type": "news",
-    "sourceId": "conticgo",
-    "sourceName": "Conticgo",
-    "sourceUrl": "https://conticgo.net/",
-    "originalUrl": "https://conticgo.net/tact-es-una-nueva-herramienta-utiliza-ia-para-crear-cuentos-en-braille-con-ilustraciones-tactiles/",
-    "originalLanguage": "es",
-    "publishedAt": "2026-09-24T10:00:22.000Z",
-    "categories": [
-      "tecnologia-accesibilidad",
-      "proyectos-prototipos",
-      "ia-accesibilidad",
-      "braille"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "es": {
-        "title": "Tact es una nueva herramienta utiliza IA para crear cuentos en Braille con ilustraciones táctiles",
-        "summary": "La inteligencia artificial también está comenzando a explorar nuevas formas de crear materiales accesibles. Un ejemplo reciente es Tact, un proyecto que combina inteligencia artificial, Braille e impresión 3D para generar cuentos infantiles acompañados de ilustraciones táctiles. El sistema, presentado por el investigador Iliano Fasolino, permite introducir una idea para una historia, incluso mediante voz, […] La entrada Tact es una nueva herramienta utiliza IA para crear cuentos en Braille con ilustraciones táctiles se publicó primero en Conticgo .",
-        "body": "La inteligencia artificial también está comenzando a explorar nuevas formas de crear materiales accesibles. Un ejemplo reciente es Tact , un proyecto que combina inteligencia artificial, Braille e impresión 3D para generar cuentos infantiles acompañados de ilustraciones táctiles.\n\nEl sistema, presentado por el investigador Iliano Fasolino, permite introducir una idea para una historia, incluso mediante voz, y generar una página preparada para su impresión con texto en Braille e ilustraciones en relieve . El proyecto está pensado principalmente para niños ciegos y con baja visión de aproximadamente 4 a 10 años.\n\nTact es un sistema basado en navegador que permite crear pequeños cuentos táctiles a partir de una idea introducida por el usuario. Esta propuesta puede escribirse o incluso dictarse mediante voz.\n\nA partir de ella, el sistema genera una historia y prepara una página que combina texto en Braille e ilustraciones en relieve .\n\nEl proyecto está pensado principalmente para niños de entre 4 y 10 años y pretende facilitar que familiares, docentes y profesionales puedan crear materiales personalizados sin necesidad de conocimientos especializados en diseño táctil.\n\nUno de los aspectos más interesantes de Tact es que no convierte directamente una imagen convencional en un relieve.\n\nEl sistema utiliza una biblioteca de formas táctiles previamente diseñadas. Según explica su autor, actualmente incluye 93 formas relacionadas con animales, objetos, naturaleza y otros elementos habituales en los cuentos infantiles.\n\nLa inteligencia artificial selecciona las formas necesarias para representar determinadas escenas y las organiza junto al texto.\n\nEste planteamiento es especialmente relevante porque una ilustración diseñada para verse no siempre funciona cuando se explora mediante el tacto. Las formas deben ser sencillas y estar suficientemente separadas para facilitar su identificación.\n\nUna vez generado el contenido, Tact prepara un archivo STL , que puede utilizarse para fabricar la página mediante una impresora 3D.\n\nEl proyecto utiliza como referencia la norma ISO 17049:2013 para las características del Braille.\n\nDe esta manera, el proceso intenta reunir en una misma herramienta varias tareas: crear la historia, convertir el texto a Braille, seleccionar las formas táctiles y preparar el archivo necesario para su fabricación.\n\nActualmente, el sistema permite generar historias en inglés e italiano , por lo que todavía no ofrece generación directa en español.\n\nLa posibilidad de crear cuentos personalizados puede ser especialmente interesante en el ámbito educativo.\n\nUn docente o una familia podría generar una historia adaptada a los intereses de un niño y acompañarla de una representación táctil relacionada con el contenido.\n\nEsto podría contribuir a ampliar la disponibilidad de materiales accesibles, especialmente aquellos que son demasiado específicos o personalizados como para encontrarlos fácilmente en un catálogo de libros adaptados.\n\nAdemás, el proyecto apuesta por tecnologías relativamente accesibles, como una impresora 3D, para facilitar la fabricación de los materiales.\n\nAunque Tact plantea una propuesta interesante, todavía se encuentra en una fase de desarrollo.\n\nEl propio autor señala que es necesario realizar más trabajo y validar el sistema directamente con personas ciegas y con sordoceguera y con las organizaciones que las representan .\n\nEsta validación será fundamental para comprobar que las ilustraciones generadas son realmente fáciles de interpretar mediante el tacto y que el diseño de las páginas resulta adecuado para los usuarios.\n\nPor tanto, Tact no debe considerarse todavía una solución educativa plenamente validada, sino una propuesta de investigación que explora cómo la inteligencia artificial puede facilitar la creación de materiales táctiles.\n\nTact muestra una de las posibles líneas de evolución de la tecnología accesible: utilizar la inteligencia artificial no solo para describir imágenes o reconocer textos, sino también para crear nuevos recursos accesibles desde cero .\n\nLa combinación de IA, Braille e impresión 3D podría facilitar en el futuro la creación de materiales personalizados para personas ciegas y con baja visión.\n\nEl proyecto todavía tiene retos por delante, pero plantea una posibilidad interesante: que crear determinados materiales táctiles personalizados pueda ser mucho más sencillo y accesible para familias, docentes y entidades.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuentes: zenodo.org , tatto.dev ."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "applevis-blog-888f90102a766838",
     "type": "news",
     "sourceId": "applevis-blog",
@@ -1134,32 +1181,6 @@
         "title": "Accesibilidad y Tecnología Novedades de accesibilidad en iOS 27",
         "summary": "El 14 de septiembre, Apple liberó la última versión de su sistema operativo iOS 27.0 para dispositivos móviles, en la que una vez más, entre sus novedades, ha implementado funciones de accesibilidad que facilitan la adaptación e integración de las personas con discapacidad.",
         "body": "El 14 de septiembre, Apple liberó la última versión de su sistema operativo iOS 27.0 para dispositivos móviles, en la que una vez más, entre sus novedades, ha implementado funciones de accesibilidad que facilitan la adaptación e integración de las personas con discapacidad.\n\nEn el siguiente enlace se puede acceder a todas las novedades de iOS 27:\n\nhttps://www.apple.com/es/os/ios/\n\nEn el CTI se ha elaborado un extenso informe en el que se recopilan novedades y errores detectados en las pruebas realizadas, y también otros que han sido identificados gracias al aporte de algunos usuarios y de contenidos publicados en el portal AppleVis.\n\nCabe señalar que, en el momento de redactar este documento, iOS 27 se encuentra en su lanzamiento inicial por lo que algunos de los aspectos aquí recogidos podrían variar en versiones posteriores.\n\nPara acceder a esta información, puede pulsar en el siguiente enlace, donde podrá descargar una versión en pdf.\n\nDescargar informe en pdf\n\nSi lo desea, también hay disponible una versión en HTML, pulsando en el siguiente enlace.\n\nAccede al informe en html"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "conticgo-0719cc5de6ab7a3e",
-    "type": "news",
-    "sourceId": "conticgo",
-    "sourceName": "Conticgo",
-    "sourceUrl": "https://conticgo.net/",
-    "originalUrl": "https://conticgo.net/como-navegar-por-soundscape-con-el-voiceover-la-ultima-aplicacion-de-guiado-para-personas-con-baja-vision/",
-    "originalLanguage": "es",
-    "publishedAt": "2026-09-23T09:00:14.000Z",
-    "categories": [
-      "tecnologia-accesibilidad",
-      "apple",
-      "apps-accesibles",
-      "proyectos-prototipos"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "es": {
-        "title": "Cómo navegar por SoundScape con el VoiceOver: la última aplicación de guiado para personas con baja visión",
-        "summary": "Desde EsRetina seguimos trabajando para acercar la tecnología de forma accesible a todas las personas. En esta ocasión, compartimos un nuevo videotutorial accesible donde explicamos paso a paso cómo usar la aplicación SoundScape con el voice over. Este contenido forma parte del proyecto Conticgo y ha sido creado con un enfoque claro: fomentar la autonomía digital, […] La entrada Cómo navegar por SoundScape con el VoiceOver: la última aplicación de guiado para personas con baja visión se publicó primero en Conticgo .",
-        "body": "Desde EsRetina seguimos trabajando para acercar la tecnología de forma accesible a todas las personas. En esta ocasión, compartimos un nuevo videotutorial accesible donde explicamos paso a paso cómo usar la aplicación SoundScape con el voice over .\n\nEste contenido forma parte del proyecto Conticgo y ha sido creado con un enfoque claro: fomentar la autonomía digital, el conocimiento y la accesibilidad tecnológica.\n\nSoundscape G.P.S para personas invidentes. Voice Over activado Anterior 1 de 1 Siguiente Soundscape G.P.S para personas invidentes. Voice Over activado Anterior 1 de 1 Siguiente\n\nEn esta nueva píldora formativa te mostramos cómo utilizar Soundscape , una aplicación de guiado y orientación pensada para facilitar la movilidad de personas con ceguera y baja visión . La herramienta permite explorar el entorno y obtener información sobre lugares y puntos de interés cercanos mediante indicaciones y referencias sonoras.\n\nEn el vídeo explicamos de forma sencilla los principales pasos para comenzar a utilizar Soundscape. También mostramos cómo utilizar la aplicación junto con VoiceOver , el lector de pantalla integrado en los dispositivos de Apple. De esta forma, las personas con discapacidad visual pueden acceder a las diferentes opciones de la aplicación de manera más accesible.\n\nLa combinación de Soundscape y VoiceOver puede ser especialmente útil para las personas que buscan mejorar su orientación durante los desplazamientos. La aplicación permite conocer qué elementos se encuentran alrededor y utilizar referencias del entorno para facilitar la navegación.\n\nEsta píldora formativa está pensada como un recurso práctico y accesible. En ella encontrarás una explicación paso a paso para familiarizarte con Soundscape y aprender a utilizar sus funciones básicas con VoiceOver. Te invitamos a ver el vídeo y descubrir cómo esta herramienta puede ayudarte a moverte por tu entorno con mayor autonomía.\n\nOs dejamos nuestro canal de YouTube en donde podéis encontrar todos nuestros tutoriales, píldoras y formaciones."
       }
     },
     "media": null
@@ -2020,31 +2041,6 @@
         "title": "Take the WebAIM Survey",
         "summary": "Web Accessibility In Mind (WebAIM) is surveying screen reader users to collect information that will impact the future development of web content and web standards. WebAIM, part of Utah State University, provides training, tools, and information to assist in the creation of websites that are accessible to individuals with disabilities. Why Web Accessibility Matters Web …",
         "body": "Web Accessibility In Mind (WebAIM) is surveying screen reader users to collect information that will impact the future development of web content and web standards. WebAIM, part of Utah State University, provides training, tools, and information to assist in the creation of websites that are accessible to individuals with disabilities.\n\nWeb accessibility is crucial to ensure screen reader users can readily access information on the web. This includes content such as:\n\nWebsites are often used to shop online, complete school assignments, and perform essential work tasks. This makes accessibility a necessary part of website development.\n\nWhether you consider yourself a novice or an advanced JAWS user, we ask that you contribute to the future of web accessibility by taking the WebAIM Screen Reader Survey . It will remain open through Monday, August 31, 2026 , and takes around five to ten minutes to complete."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "freedom-scientific-blog-34a67daf62cbad1b",
-    "type": "news",
-    "sourceId": "freedom-scientific-blog",
-    "sourceName": "Freedom Scientific",
-    "sourceUrl": "https://blog.freedomscientific.com/",
-    "originalUrl": "https://training.vispero.com/four-classic-jaws-features-that-can-transform-your-workflow/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-08-26T20:26:18.000Z",
-    "categories": [
-      "windows",
-      "tecnologia-accesibilidad",
-      "jaws"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Four Classic JAWS Features That Can Transform Your Workflow",
-        "summary": "Are you looking to enhance your JAWS skills and learn more about its powerful features? Join us Thursday, August 27 at noon ET for a live webinar, “Four Classic JAWS Features That Can Transform Your Workflow.” What We’ll Cover Some of the most useful JAWS features have been around for years, but they aren’t always …",
-        "body": "Are you looking to enhance your JAWS skills and learn more about its powerful features? Join us Thursday, August 27 at noon ET for a live webinar, “Four Classic JAWS Features That Can Transform Your Workflow.”\n\nSome of the most useful JAWS features have been around for years, but they aren’t always the ones we talk about most often. In this webinar, we’ll revisit four powerful features that can help you save time, increase productivity, and customize JAWS to better support the way you work with documents and web pages. In this session, you’ll learn how to use:\n\nRegister for this webinar to learn customization techniques that can increase proficiency and enhance how you work. ACVREP credits will be available for those who attend the live webinar.\n\nCan’t attend? We archive all webinars on our Webinars on Demand page. Have questions? Send an email to training@vispero.com ."
       }
     },
     "media": null

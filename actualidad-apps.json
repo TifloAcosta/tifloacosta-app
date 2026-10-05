@@ -1,5 +1,17 @@
 [
   {
+    "id": "buscaapps-6ecc16af0394397c",
+    "title": "Youtube-downloader",
+    "sourceId": "buscaapps",
+    "sourceName": "BuscaApps",
+    "sourceUrl": "https://www.buscaapps.com/",
+    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1247",
+    "lang": "es",
+    "platform": "Windows",
+    "summary": "Descarga y reproduce vídeos y listas de Youtube",
+    "publishedAt": null
+  },
+  {
     "id": "buscaapps-21944859a6200ffe",
     "title": "Reconocedor de Ciudades",
     "sourceId": "buscaapps",
@@ -108,18 +120,6 @@
     "publishedAt": null
   },
   {
-    "id": "buscaapps-4a84d11a60d0943f",
-    "title": "Zerogram",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1237",
-    "lang": "es",
-    "platform": "iOS",
-    "summary": "Cliente accesible y gratuito de Telegram",
-    "publishedAt": null
-  },
-  {
     "id": "applevis-apps-5b3e3d796c6a1c8c",
     "title": "Piggy Smash: Hammer Clicker",
     "sourceId": "applevis-apps",
@@ -128,7 +128,7 @@
     "originalUrl": "https://www.applevis.com/apps/ios/games/piggy-smash-hammer-clicker",
     "lang": "en",
     "platform": "Apple",
-    "summary": "[TRY BEFORE YOU BUY!] Smash piggy banks. Collect coins. Pay ridiculous bills. Upgrade your build and take on the next chapter. Hold to swing your hammer. Chase the fast piggies, crack the tough ones, and scoop up their coins. Some piggies are even on fire. Upgrade your hammer, luck and stamina. Unlock hammers and abilities that change how you play. Your job changes your bills. Clear chapters, decorate your apartment, and move into better places. Play through a campaign with a real ending. Optional Overtime is there when you want more smashing. ACCESSIBILITY Play with VoiceOver: every piggy is read out, and you swing by timing, on a beat you feel. Choose your swing window. Bigger text across the game. FREE TO TRY The first 2 chapters are free. One purchase unlocks the full game. Optional extras for decorating, a few extra coins, supporting the game or an extra shift. Never required. No ads. No energy timers. Every swing you paid for is one you could have earned. Works offline. The bills are pretend. The coins stay in the game.",
+    "summary": "[TRY BEFORE YOU BUY!] NEW: the Piggy Foundry, a second way to smash. Smash piggy banks. Collect coins. Pay ridiculous bills. Upgrade your build and take on the next chapter. Hold to swing your hammer. Chase the fast piggies, crack the tough ones, and scoop up their coins. Some piggies are even on fire. Upgrade your hammer, luck and stamina. Unlock hammers and abilities that change how you play. Your job changes your bills. Clear chapters, decorate your apartment, and move into better places. Play through a campaign with a real ending. Optional Overtime is there when you want more smashing. PIGGY FOUNDRY A second mode. Drag your target onto the piggies and your hammer does the rest. Upgrade it, pay the building's bills, and come back to the coins it smashed while you were away. ACCESSIBILITY Play with VoiceOver: every piggy is read out, and you swing by timing, on a beat you feel. Choose your swing window. Bigger text across the game. FREE TO TRY The first 2 chapters are free. One purchase unlocks the full game. Optional extras for decorating, a few extra coins, supporting the game, an extra shift or Piggy Foundry gems. 100% optional, never required. No ads. No energy timers. Every swing you paid for is one you could have earned. Works offline. The bills are pretend. The coins stay in the game.",
     "publishedAt": "2026-10-03T03:28:44.000Z"
   },
   {

@@ -105,3 +105,19 @@ test('TifloLector document view keeps progress, audio, visual and more-actions c
   assert.ok(source.includes("movable.forEach(node => morePanel.append(node));"));
   assert.ok(source.includes("resetVisual.addEventListener('click', restoreDocumentVisualFromGeneral)"));
 });
+
+
+test('TifloLector library title details expose progress times grouped controls and 10 percent jumps', async () => {
+  const source = await read('web-reading.js');
+  for (const token of [
+    'reading-library-progress-',
+    'Tiempo realizado y tiempo faltante',
+    'Abrir en posición',
+    'Audio y voz',
+    'Presentación visual',
+    'Más acciones',
+    'for (let value = 0; value <= 100; value += 10)',
+    "scope:'book'",
+    'openSavedBook(book.id, Number(jump.value) || 0)'
+  ]) assert.ok(source.includes(token), `Missing library final layout token: ${token}`);
+});

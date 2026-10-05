@@ -35,8 +35,8 @@ test('reading book has explicit play pause navigation search marks state voice a
   assert.doesNotMatch(screen, /speechSynthesis|autoplay/i);
 
   for (const label of [
-    'Reproducir', 'Pausa', 'Navegación', 'Buscar', 'Marcas', 'Estado de lectura', 'Voz y velocidad', 'Ajustes visuales',
-    'Play', 'Pause', 'Navigation', 'Search', 'Marks', 'Reading status', 'Voice and speed', 'Visual settings'
+    'Reproducir', 'Pausa', 'Avanzar y retroceder por', 'Buscar', 'Marcas', 'Estado de lectura', 'Voz y velocidad', 'Ajustes visuales',
+    'Play', 'Pause', 'Move forward and back by', 'Search', 'Marks', 'Reading status', 'Voice and speed', 'Visual settings'
   ]) {
     assert.ok(i18n.includes(label), `Missing translation: ${label}`);
   }
@@ -142,15 +142,14 @@ test('protected PDFs request a transient password and no-text PDFs have a distin
 });
 
 
-test('reading book keeps final progress and grouped controls for the next Android beta', async () => {
+test('reading book keeps compact progress and grouped controls for the next Android beta', async () => {
   const screen = await read('src/screens/reading-book.mjs');
   for (const token of [
     'reading-book-progress',
     'reading-progress-percent',
     'for (let value = 0; value <= 100; value += 10)',
     'estimatedReadingTimes',
-    'Transcurrido: aproximadamente',
-    'Restante: aproximadamente',
+    '% leído. Quedan aproximadamente',
     'readingBook.voiceAndSpeed',
     'readingBook.visualSettings',
     'Más acciones',

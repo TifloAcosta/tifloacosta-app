@@ -87,3 +87,21 @@ test('automatic speech is opt-in and disabled by screen-reader mode', async () =
   assert.ok(source.includes("if (mode.checked) auto.checked = false"));
   assert.ok(source.includes("if (auto.checked) mode.checked = false"));
 });
+
+
+test('TifloLector document view keeps progress, audio, visual and more-actions controls separated', async () => {
+  const source = await read('web-reading.js');
+  for (const token of [
+    'reading-document-progress',
+    'reading-document-progress-percent',
+    'Audio y voz',
+    'Presentación visual',
+    'Más acciones',
+    'Temporizador de lectura',
+    'Transcurrido: aproximadamente',
+    'Restante: aproximadamente',
+    'for (let value = 0; value <= 100; value += 10)'
+  ]) assert.ok(source.includes(token), `Missing final document control: ${token}`);
+  assert.ok(source.includes("movable.forEach(node => morePanel.append(node));"));
+  assert.ok(source.includes("resetVisual.addEventListener('click', restoreDocumentVisualFromGeneral)"));
+});

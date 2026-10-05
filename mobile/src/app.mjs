@@ -68,6 +68,7 @@ let pendingDownloadUrl = '';
 let pendingSearchQuery = '';
 let pendingReadingImportBatch = null;
 let pendingReadingBookId = '';
+let pendingReadingBookPercent = null;
 let notificationService;
 
 function safeStorage() {
@@ -365,10 +366,13 @@ function openReadingLibraryBatch(batch) {
   return true;
 }
 
-function openReadingBook(bookId) {
+function openReadingBook(bookId, percent = null) {
   const cleanId = String(bookId || '').trim();
   if (!cleanId) return false;
   pendingReadingBookId = cleanId;
+  pendingReadingBookPercent = Number.isFinite(Number(percent))
+    ? Math.max(0, Math.min(100, Number(percent)))
+    : null;
   router.navigate('reading-book');
   return true;
 }
@@ -513,6 +517,7 @@ function render(route) {
     case 'library': renderLibrary(context); break;
     case 'reading-library': {
       pendingReadingBookId = '';
+      pendingReadingBookPercent = null;
       const initialImportBatch = pendingReadingImportBatch;
       pendingReadingImportBatch = null;
       renderReadingLibrary({
@@ -534,10 +539,13 @@ function render(route) {
       break;
     }
     case 'reading-book': {
+      const initialPercent = pendingReadingBookPercent;
+      pendingReadingBookPercent = null;
       renderReadingBook({
         ...context,
         client: readingClient,
         bookId: pendingReadingBookId,
+        initialPercent,
         onOpenBook: openReadingBook,
         onOpenQueue: () => router.navigate('reading-queue')
       });

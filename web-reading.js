@@ -2086,7 +2086,7 @@
     }
   }
 
-  async function openSavedBook(id) {
+  async function openSavedBook(id, requestedPercent = null) {
     if (!libraryClient) return;
     const opened = await libraryClient.openBook(id);
     if (!opened?.book) {
@@ -2096,12 +2096,21 @@
     const source = String(opened.content || '');
     const format = String(opened.book.format || 'txt').toLowerCase();
     const model = await modelForSavedBook(opened);
+    const hasRequestedPercent = Number.isFinite(Number(requestedPercent));
+    const percent = hasRequestedPercent ? Math.max(0, Math.min(100, Number(requestedPercent))) : null;
+    const maxIndex = Math.max(0, (model?.blocks?.length || 1) - 1);
+    const requestedIndex = percent == null
+      ? Number(opened.book.blockIndex) || 0
+      : percent >= 100
+        ? maxIndex
+        : Math.min(maxIndex, Math.floor((percent / 100) * (model?.blocks?.length || 1)));
     await useDocument(model, opened.book.title, {
       source,
       format,
       bookId: opened.book.id,
-      initialIndex: opened.book.blockIndex
+      initialIndex: requestedIndex
     });
+    if (percent != null) await persistProgress({ unitIndex: 0 });
     currentQueued = opened.book.queued === true;
     updateQueueToggle();
   }
@@ -2280,6 +2289,34 @@
       els.libraryStatus.textContent = t().libraryUnavailable;
       return;
     }
+
+    const readableDuration = seconds => {
+      const total = Math.max(0, Math.round(Number(seconds) || 0));
+      const hours = Math.floor(total / 3600);
+      const minutes = Math.floor((total % 3600) / 60);
+      return hours > 0 ? `${hours} h ${minutes} min` : `${minutes} min`;
+    };
+
+    async function estimateBookTimes(book) {
+      try {
+        const opened = await libraryClient.openBook(book.id);
+        if (!opened?.book) return null;
+        const model = await modelForSavedBook(opened);
+        const words = Array.isArray(model?.blocks)
+          ? model.blocks.reduce((sum, block) => sum + String(block?.text || '').trim().split(/\s+/u).filter(Boolean).length, 0)
+          : 0;
+        if (!words) return null;
+        const settings = await libraryClient.getReadingSettings(book.id);
+        const rate = Number(settings?.book?.['speech.rate'] || settings?.global?.['speech.rate'] || 1) || 1;
+        const totalSeconds = Math.round((words / Math.max(60, 180 * rate)) * 60);
+        const percent = Math.max(0, Math.min(100, Number(book.percent) || 0));
+        const elapsedSeconds = Math.round(totalSeconds * percent / 100);
+        return { elapsedSeconds, remainingSeconds: Math.max(0, totalSeconds - elapsedSeconds) };
+      } catch {
+        return null;
+      }
+    }
+
     try {
       const page = await libraryClient.listBooks({ page: 1, pageSize: 100, sort: 'lastRead' });
       if (!page.items.length) {
@@ -2287,6 +2324,7 @@
         return;
       }
       els.libraryStatus.textContent = '';
+
       for (const book of page.items) {
         const card = document.createElement('section');
         card.className = 'resource-card reading-library-title-card';
@@ -2301,15 +2339,141 @@
         details.className = 'reading-library-title-details';
         details.hidden = true;
         const detailsHeading = document.createElement('h4');
+        detailsHeading.tabIndex = -1;
         detailsHeading.textContent = book.title || t().document;
 
         const meta = document.createElement('p');
         meta.className = 'resource-meta';
         meta.textContent = `${String(book.format || '').toUpperCase()} · ${t().progress(book.percent || 0)}`;
 
+        const progressLabel = document.createElement('label');
+        const progressId = `reading-library-progress-${book.id}`;
+        progressLabel.htmlFor = progressId;
+        progressLabel.textContent = language() === 'en' ? 'Reading progress' : 'Progreso de lectura';
+        const progress = document.createElement('progress');
+        progress.id = progressId;
+        progress.max = 100;
+        progress.value = Math.max(0, Math.min(100, Number(book.percent) || 0));
+        progress.textContent = `${Math.round(progress.value)} %`;
+
+        const timeStatus = document.createElement('p');
+        timeStatus.className = 'muted';
+        timeStatus.textContent = language() === 'en'
+          ? 'Elapsed and remaining time: calculating…'
+          : 'Tiempo realizado y tiempo faltante: calculando…';
+
+        const jumpLabel = document.createElement('label');
+        const jumpId = `reading-library-jump-${book.id}`;
+        jumpLabel.htmlFor = jumpId;
+        jumpLabel.textContent = language() === 'en' ? 'Open at position' : 'Abrir en posición';
+        const jump = document.createElement('select');
+        jump.id = jumpId;
+        for (let value = 0; value <= 100; value += 10) {
+          const option = document.createElement('option');
+          option.value = String(value);
+          option.textContent = `${value} %`;
+          jump.append(option);
+        }
+        jump.value = String(Math.max(0, Math.min(100, Math.round((Number(book.percent) || 0) / 10) * 10)));
+
+        const groups = document.createElement('div');
+        groups.className = 'resource-actions';
+        const audioButton = document.createElement('button');
+        audioButton.type = 'button';
+        audioButton.textContent = language() === 'en' ? 'Audio and voice' : 'Audio y voz';
+        const visualButton = document.createElement('button');
+        visualButton.type = 'button';
+        visualButton.textContent = language() === 'en' ? 'Visual presentation' : 'Presentación visual';
+        const moreButton = document.createElement('button');
+        moreButton.type = 'button';
+        moreButton.textContent = language() === 'en' ? 'More actions' : 'Más acciones';
+        groups.append(audioButton, visualButton, moreButton);
+
+        const audioPanel = document.createElement('section');
+        audioPanel.hidden = true;
+        const audioHeading = document.createElement('h5');
+        audioHeading.tabIndex = -1;
+        audioHeading.textContent = audioButton.textContent;
+        const voiceLabel = document.createElement('label');
+        const voiceId = `reading-library-voice-${book.id}`;
+        voiceLabel.htmlFor = voiceId;
+        voiceLabel.textContent = language() === 'en' ? 'Voice for this document' : 'Voz para este documento';
+        const voice = document.createElement('select');
+        voice.id = voiceId;
+        const defaultVoice = document.createElement('option');
+        defaultVoice.value = '';
+        defaultVoice.textContent = language() === 'en' ? 'Use general voice' : 'Usar voz general';
+        voice.append(defaultVoice);
+        const voices = typeof shared.listWebTtsVoices === 'function' ? shared.listWebTtsVoices() : [];
+        for (const item of voices) {
+          const option = document.createElement('option');
+          option.value = item.id;
+          option.textContent = item.locale ? `${item.name} — ${item.locale}` : item.name;
+          voice.append(option);
+        }
+        const rateLabel = document.createElement('label');
+        const rateId = `reading-library-rate-${book.id}`;
+        rateLabel.htmlFor = rateId;
+        rateLabel.textContent = language() === 'en' ? 'Speed for this document' : 'Velocidad para este documento';
+        const rate = document.createElement('select');
+        rate.id = rateId;
+        for (const value of [0.5,0.75,1,1.25,1.5,1.75,2]) {
+          const option = document.createElement('option');
+          option.value = String(value);
+          option.textContent = `${value}×`;
+          rate.append(option);
+        }
+        const audioStatus = document.createElement('p');
+        audioStatus.className = 'muted';
+        const closeAudio = document.createElement('button');
+        closeAudio.type = 'button';
+        closeAudio.textContent = language() === 'en' ? 'Back to book details' : 'Volver a los datos del libro';
+        audioPanel.append(audioHeading, voiceLabel, voice, rateLabel, rate, audioStatus, closeAudio);
+
+        const visualPanel = document.createElement('section');
+        visualPanel.hidden = true;
+        const visualHeading = document.createElement('h5');
+        visualHeading.tabIndex = -1;
+        visualHeading.textContent = visualButton.textContent;
+        const sizeLabel = document.createElement('label');
+        const sizeId = `reading-library-size-${book.id}`;
+        sizeLabel.htmlFor = sizeId;
+        sizeLabel.textContent = language() === 'en' ? 'Text size' : 'Tamaño del texto';
+        const size = document.createElement('select');
+        size.id = sizeId;
+        for (const [value,label] of [['0.9','90 %'],['1','100 %'],['1.25','125 %'],['1.5','150 %'],['2','200 %']]) {
+          const option = document.createElement('option'); option.value = value; option.textContent = label; size.append(option);
+        }
+        const themeLabel = document.createElement('label');
+        const themeId = `reading-library-theme-${book.id}`;
+        themeLabel.htmlFor = themeId;
+        themeLabel.textContent = language() === 'en' ? 'Theme' : 'Tema';
+        const theme = document.createElement('select');
+        theme.id = themeId;
+        for (const [value,es,en] of [['system','Sistema','System'],['light','Claro','Light'],['dark','Oscuro','Dark']]) {
+          const option = document.createElement('option'); option.value = value; option.textContent = language() === 'en' ? en : es; theme.append(option);
+        }
+        const contrast = document.createElement('input');
+        contrast.type = 'checkbox';
+        contrast.id = `reading-library-contrast-${book.id}`;
+        const contrastLabel = document.createElement('label');
+        contrastLabel.htmlFor = contrast.id;
+        contrastLabel.textContent = language() === 'en' ? 'High contrast' : 'Alto contraste';
+        const visualStatus = document.createElement('p');
+        visualStatus.className = 'muted';
+        const closeVisual = document.createElement('button');
+        closeVisual.type = 'button';
+        closeVisual.textContent = closeAudio.textContent;
+        visualPanel.append(visualHeading, sizeLabel, size, themeLabel, theme, contrast, contrastLabel, visualStatus, closeVisual);
+
+        const morePanel = document.createElement('section');
+        morePanel.hidden = true;
+        const moreHeading = document.createElement('h5');
+        moreHeading.tabIndex = -1;
+        moreHeading.textContent = moreButton.textContent;
+
         const actions = document.createElement('div');
         actions.className = 'resource-actions';
-
         const open = document.createElement('button');
         open.type = 'button';
         open.textContent = t().openSaved;
@@ -2334,16 +2498,75 @@
           option.textContent = label;
           exportSelect.append(option);
         }
-
         const exportButton = document.createElement('button');
         exportButton.type = 'button';
         exportButton.textContent = t().exportSaved;
         exportButton.addEventListener('click', () => { void exportSavedBook(book.id, exportSelect.value); });
-
         const remove = document.createElement('button');
         remove.type = 'button';
         remove.textContent = t().deleteSaved;
         remove.addEventListener('click', () => { void deleteSavedBook(book.id); });
+        const closeMore = document.createElement('button');
+        closeMore.type = 'button';
+        closeMore.textContent = closeAudio.textContent;
+        actions.append(open, exportLabel, exportSelect, exportButton, remove, closeMore);
+        morePanel.append(moreHeading, actions);
+
+        function showOnly(panel, heading, opener) {
+          for (const item of [audioPanel, visualPanel, morePanel]) item.hidden = item !== panel;
+          panel.hidden = false;
+          queueMicrotask(() => heading.focus());
+          opener.setAttribute('aria-expanded', 'true');
+        }
+        function closePanel(panel, opener) {
+          panel.hidden = true;
+          opener.setAttribute('aria-expanded', 'false');
+          opener.focus();
+        }
+        for (const button of [audioButton, visualButton, moreButton]) button.setAttribute('aria-expanded', 'false');
+
+        audioButton.addEventListener('click', async () => {
+          const settings = await libraryClient.getReadingSettings(book.id);
+          voice.value = settings?.book?.['speech.voice'] || '';
+          rate.value = String(settings?.book?.['speech.rate'] || settings?.global?.['speech.rate'] || 1);
+          showOnly(audioPanel, audioHeading, audioButton);
+        });
+        visualButton.addEventListener('click', async () => {
+          const settings = await libraryClient.getReadingSettings(book.id);
+          size.value = String(settings?.book?.['visual.textSize'] || settings?.global?.['visual.textSize'] || 1);
+          theme.value = settings?.book?.['visual.theme'] || settings?.global?.['visual.theme'] || 'system';
+          contrast.checked = String(settings?.book?.['visual.highContrast'] ?? settings?.global?.['visual.highContrast'] ?? 'false') === 'true';
+          showOnly(visualPanel, visualHeading, visualButton);
+        });
+        moreButton.addEventListener('click', () => showOnly(morePanel, moreHeading, moreButton));
+        closeAudio.addEventListener('click', () => closePanel(audioPanel, audioButton));
+        closeVisual.addEventListener('click', () => closePanel(visualPanel, visualButton));
+        closeMore.addEventListener('click', () => closePanel(morePanel, moreButton));
+
+        voice.addEventListener('change', async () => {
+          const saved = await libraryClient.setReadingSetting({ scope:'book', bookId:book.id, key:'speech.voice', value:voice.value });
+          audioStatus.textContent = saved ? (language() === 'en' ? 'Voice saved.' : 'Voz guardada.') : (language() === 'en' ? 'Voice could not be saved.' : 'No se pudo guardar la voz.');
+        });
+        rate.addEventListener('change', async () => {
+          const saved = await libraryClient.setReadingSetting({ scope:'book', bookId:book.id, key:'speech.rate', value:rate.value });
+          audioStatus.textContent = saved ? (language() === 'en' ? 'Speed saved.' : 'Velocidad guardada.') : (language() === 'en' ? 'Speed could not be saved.' : 'No se pudo guardar la velocidad.');
+        });
+        size.addEventListener('change', async () => {
+          const saved = await libraryClient.setReadingSetting({ scope:'book', bookId:book.id, key:'visual.textSize', value:size.value });
+          visualStatus.textContent = saved ? (language() === 'en' ? 'Visual setting saved.' : 'Ajuste visual guardado.') : (language() === 'en' ? 'Setting could not be saved.' : 'No se pudo guardar el ajuste.');
+        });
+        theme.addEventListener('change', async () => {
+          const saved = await libraryClient.setReadingSetting({ scope:'book', bookId:book.id, key:'visual.theme', value:theme.value });
+          visualStatus.textContent = saved ? (language() === 'en' ? 'Visual setting saved.' : 'Ajuste visual guardado.') : (language() === 'en' ? 'Setting could not be saved.' : 'No se pudo guardar el ajuste.');
+        });
+        contrast.addEventListener('change', async () => {
+          const saved = await libraryClient.setReadingSetting({ scope:'book', bookId:book.id, key:'visual.highContrast', value:String(contrast.checked) });
+          visualStatus.textContent = saved ? (language() === 'en' ? 'Visual setting saved.' : 'Ajuste visual guardado.') : (language() === 'en' ? 'Setting could not be saved.' : 'No se pudo guardar el ajuste.');
+        });
+
+        jump.addEventListener('change', () => {
+          void openSavedBook(book.id, Number(jump.value) || 0);
+        });
 
         const close = document.createElement('button');
         close.type = 'button';
@@ -2354,19 +2577,41 @@
           title.focus();
         });
 
-        actions.append(open, exportLabel, exportSelect, exportButton, remove, close);
-        details.append(detailsHeading, meta, actions);
+        details.append(
+          detailsHeading, meta,
+          progressLabel, progress, timeStatus,
+          jumpLabel, jump,
+          groups,
+          audioPanel, visualPanel, morePanel,
+          close
+        );
 
+        let estimateLoaded = false;
         title.addEventListener('click', () => {
           const opening = details.hidden;
           for (const other of els.libraryList.querySelectorAll('.reading-library-title-details')) other.hidden = true;
           for (const otherTitle of els.libraryList.querySelectorAll('.reading-library-title')) otherTitle.setAttribute('aria-expanded', 'false');
           details.hidden = !opening;
           title.setAttribute('aria-expanded', String(opening));
-          if (opening) queueMicrotask(() => detailsHeading.focus?.());
+          if (opening) {
+            queueMicrotask(() => detailsHeading.focus());
+            if (!estimateLoaded) {
+              estimateLoaded = true;
+              void estimateBookTimes(book).then(estimate => {
+                if (!estimate) {
+                  timeStatus.textContent = language() === 'en'
+                    ? 'Elapsed and remaining time could not be estimated for this document.'
+                    : 'No se pudo estimar el tiempo realizado y el tiempo faltante de este documento.';
+                  return;
+                }
+                timeStatus.textContent = language() === 'en'
+                  ? `Elapsed: about ${readableDuration(estimate.elapsedSeconds)}. Remaining: about ${readableDuration(estimate.remainingSeconds)}.`
+                  : `Tiempo realizado: aproximadamente ${readableDuration(estimate.elapsedSeconds)}. Tiempo faltante: aproximadamente ${readableDuration(estimate.remainingSeconds)}.`;
+              });
+            }
+          }
         });
 
-        detailsHeading.tabIndex = -1;
         card.append(title, details);
         els.libraryList.append(card);
       }

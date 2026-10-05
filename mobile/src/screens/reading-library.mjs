@@ -517,7 +517,10 @@ export function renderReadingLibrary({
       const expanded = title.getAttribute('aria-expanded') === 'true';
       title.setAttribute('aria-expanded', String(!expanded));
       details.hidden = expanded;
-      if (!expanded) queueMicrotask(() => detailsHeading.focus());
+      if (!expanded) {
+        queueMicrotask(() => detailsHeading.focus());
+        if (!timeLoaded) void loadEstimatedTimes();
+      }
     }, 'reading-library-title');
     title.setAttribute('aria-expanded', 'false');
     article.append(title);
@@ -534,13 +537,158 @@ export function renderReadingLibrary({
     const author = item.author ? `${item.author}. ` : '';
     detail.textContent = `${author}${formatLabel(item.format)}. ${stateLabel(item, t)}. ${progressLabel(item, t)}`;
 
+    const progressLabelElement = document.createElement('label');
+    progressLabelElement.textContent = fallback(t, 'readingLibrary.progressLabel', 'Progreso de lectura', 'Reading progress');
+    const progress = document.createElement('progress');
+    progress.id = `reading-library-progress-${item.id}`;
+    progress.max = 100;
+    progress.value = Math.max(0, Math.min(100, Number(item.percent) || 0));
+    progressLabelElement.htmlFor = progress.id;
+
+    const timeStatus = document.createElement('p');
+    timeStatus.className = 'muted';
+    timeStatus.textContent = fallback(
+      t,
+      'readingLibrary.timeCalculating',
+      'Tiempo realizado y tiempo faltante: calculando…',
+      'Elapsed and remaining time: calculating…'
+    );
+    let timeLoaded = false;
+
+    function readableDuration(seconds) {
+      const total = Math.max(0, Math.round(Number(seconds) || 0));
+      const hours = Math.floor(total / 3600);
+      const minutes = Math.floor((total % 3600) / 60);
+      return hours > 0 ? `${hours} h ${minutes} min` : `${minutes} min`;
+    }
+
+    function countWords(value) {
+      if (typeof value === 'string') return value.trim().split(/\s+/u).filter(Boolean).length;
+      if (Array.isArray(value)) return value.reduce((sum, entry) => sum + countWords(entry), 0);
+      if (value && typeof value === 'object') return Object.values(value).reduce((sum, entry) => sum + countWords(entry), 0);
+      return 0;
+    }
+
+    async function loadEstimatedTimes() {
+      timeLoaded = true;
+      try {
+        const opened = await client.openBook(item.id);
+        const words = countWords(opened?.content) + countWords(opened?.pdf);
+        if (!words) throw new Error('no-words');
+        const settings = await client.getReadingSettings(item.id);
+        const rate = Number(settings?.book?.['speech.rate'] || settings?.global?.['speech.rate'] || 1) || 1;
+        const totalSeconds = Math.round((words / Math.max(60, 180 * rate)) * 60);
+        const percent = Math.max(0, Math.min(100, Number(item.percent) || 0));
+        const elapsed = Math.round(totalSeconds * percent / 100);
+        const remaining = Math.max(0, totalSeconds - elapsed);
+        timeStatus.textContent = document.documentElement.lang === 'en'
+          ? `Elapsed: about ${readableDuration(elapsed)}. Remaining: about ${readableDuration(remaining)}.`
+          : `Tiempo realizado: aproximadamente ${readableDuration(elapsed)}. Tiempo faltante: aproximadamente ${readableDuration(remaining)}.`;
+      } catch {
+        timeStatus.textContent = document.documentElement.lang === 'en'
+          ? 'Elapsed and remaining time could not be estimated for this document.'
+          : 'No se pudo estimar el tiempo realizado y el tiempo faltante de este documento.';
+      }
+    }
+
+    const jumpLabel = document.createElement('label');
+    jumpLabel.textContent = document.documentElement.lang === 'en' ? 'Open at position' : 'Abrir en posición';
+    const jumpSelect = document.createElement('select');
+    jumpSelect.id = `reading-library-jump-${item.id}`;
+    jumpLabel.htmlFor = jumpSelect.id;
+    for (let value = 0; value <= 100; value += 10) {
+      jumpSelect.append(makeOption(value, `${value} %`));
+    }
+    jumpSelect.value = String(Math.max(0, Math.min(100, Math.round((Number(item.percent) || 0) / 10) * 10)));
+    jumpSelect.addEventListener('change', () => onOpenBook?.(item.id, Number(jumpSelect.value) || 0));
+
+    const groupButtons = document.createElement('div');
+    groupButtons.className = 'reading-library-item-groups';
+
+    const audioButton = makeButton(
+      document.documentElement.lang === 'en' ? 'Audio and voice' : 'Audio y voz',
+      () => { void openAudioPanel(); }
+    );
+    const visualButton = makeButton(
+      document.documentElement.lang === 'en' ? 'Visual presentation' : 'Presentación visual',
+      () => { void openVisualPanel(); }
+    );
+    const moreButton = makeButton(
+      document.documentElement.lang === 'en' ? 'More actions' : 'Más acciones',
+      () => openPanel(morePanel, moreHeading, moreButton)
+    );
+    for (const button of [audioButton, visualButton, moreButton]) button.setAttribute('aria-expanded', 'false');
+    groupButtons.append(audioButton, visualButton, moreButton);
+
+    const audioPanel = document.createElement('section');
+    audioPanel.hidden = true;
+    const audioHeading = document.createElement('h4');
+    audioHeading.tabIndex = -1;
+    audioHeading.textContent = audioButton.textContent;
+    const voiceLabel = document.createElement('label');
+    voiceLabel.textContent = document.documentElement.lang === 'en' ? 'Voice for this document' : 'Voz para este documento';
+    const voiceSelect = document.createElement('select');
+    voiceSelect.id = `reading-library-voice-${item.id}`;
+    voiceLabel.htmlFor = voiceSelect.id;
+    const rateLabel = document.createElement('label');
+    rateLabel.textContent = document.documentElement.lang === 'en' ? 'Speed for this document' : 'Velocidad para este documento';
+    const rateSelect = document.createElement('select');
+    rateSelect.id = `reading-library-rate-${item.id}`;
+    rateLabel.htmlFor = rateSelect.id;
+    for (const value of [0.5,0.75,1,1.25,1.5,1.75,2]) rateSelect.append(makeOption(value, `${value}×`));
+    const audioStatus = document.createElement('p');
+    audioStatus.className = 'muted';
+    const closeAudio = makeButton(
+      document.documentElement.lang === 'en' ? 'Back to book details' : 'Volver a los datos del libro',
+      () => closePanel(audioPanel, audioButton)
+    );
+    audioPanel.append(audioHeading, voiceLabel, voiceSelect, rateLabel, rateSelect, audioStatus, closeAudio);
+
+    const visualPanel = document.createElement('section');
+    visualPanel.hidden = true;
+    const visualHeading = document.createElement('h4');
+    visualHeading.tabIndex = -1;
+    visualHeading.textContent = visualButton.textContent;
+    const sizeLabel = document.createElement('label');
+    sizeLabel.textContent = document.documentElement.lang === 'en' ? 'Text size' : 'Tamaño del texto';
+    const sizeSelect = document.createElement('select');
+    sizeSelect.id = `reading-library-size-${item.id}`;
+    sizeLabel.htmlFor = sizeSelect.id;
+    for (const [value,label] of [['0.9','90 %'],['1','100 %'],['1.25','125 %'],['1.5','150 %'],['2','200 %']]) sizeSelect.append(makeOption(value,label));
+    const themeLabel = document.createElement('label');
+    themeLabel.textContent = document.documentElement.lang === 'en' ? 'Theme' : 'Tema';
+    const themeSelect = document.createElement('select');
+    themeSelect.id = `reading-library-theme-${item.id}`;
+    themeLabel.htmlFor = themeSelect.id;
+    for (const [value,es,en] of [['system','Sistema','System'],['light','Claro','Light'],['dark','Oscuro','Dark']]) {
+      themeSelect.append(makeOption(value, document.documentElement.lang === 'en' ? en : es));
+    }
+    const contrast = document.createElement('input');
+    contrast.type = 'checkbox';
+    contrast.id = `reading-library-contrast-${item.id}`;
+    const contrastLabel = document.createElement('label');
+    contrastLabel.htmlFor = contrast.id;
+    contrastLabel.textContent = document.documentElement.lang === 'en' ? 'High contrast' : 'Alto contraste';
+    const visualStatus = document.createElement('p');
+    visualStatus.className = 'muted';
+    const closeVisual = makeButton(
+      document.documentElement.lang === 'en' ? 'Back to book details' : 'Volver a los datos del libro',
+      () => closePanel(visualPanel, visualButton)
+    );
+    visualPanel.append(visualHeading, sizeLabel, sizeSelect, themeLabel, themeSelect, contrast, contrastLabel, visualStatus, closeVisual);
+
+    const morePanel = document.createElement('section');
+    morePanel.hidden = true;
+    const moreHeading = document.createElement('h4');
+    moreHeading.tabIndex = -1;
+    moreHeading.textContent = moreButton.textContent;
+
     const openBook = makeButton(
       fallback(t, 'readingLibrary.open', 'Abrir para leer', 'Open for reading'),
       () => onOpenBook?.(item.id)
     );
 
     const confirmHost = document.createElement('div');
-
     const queueButton = makeButton(
       item.queued
         ? fallback(t, 'readingLibrary.removeFromQueue', 'Quitar de la cola', 'Remove from queue')
@@ -642,6 +790,66 @@ export function renderReadingLibrary({
       confirmHost.append(confirm, cancel);
     });
 
+    const closeMore = makeButton(
+      document.documentElement.lang === 'en' ? 'Back to book details' : 'Volver a los datos del libro',
+      () => closePanel(morePanel, moreButton)
+    );
+    morePanel.append(moreHeading, openBook, queueButton, stateField, info, rename, deleteButton, confirmHost, closeMore);
+
+    function openPanel(panel, heading, opener) {
+      for (const other of [audioPanel, visualPanel, morePanel]) other.hidden = other !== panel;
+      panel.hidden = false;
+      for (const button of [audioButton, visualButton, moreButton]) button.setAttribute('aria-expanded', String(button === opener));
+      queueMicrotask(() => heading.focus());
+    }
+    function closePanel(panel, opener) {
+      panel.hidden = true;
+      opener.setAttribute('aria-expanded', 'false');
+      opener.focus();
+    }
+
+    async function openAudioPanel() {
+      const [settings, voices] = await Promise.all([
+        client.getReadingSettings(item.id),
+        client.listTtsVoices()
+      ]);
+      voiceSelect.replaceChildren();
+      voiceSelect.append(makeOption('', document.documentElement.lang === 'en' ? 'Use general voice' : 'Usar voz general'));
+      for (const voice of voices) voiceSelect.append(makeOption(voice.id, voice.name || voice.locale || voice.id));
+      voiceSelect.value = settings?.book?.['speech.voice'] || '';
+      rateSelect.value = String(settings?.book?.['speech.rate'] || settings?.global?.['speech.rate'] || 1);
+      openPanel(audioPanel, audioHeading, audioButton);
+    }
+
+    async function openVisualPanel() {
+      const settings = await client.getReadingSettings(item.id);
+      sizeSelect.value = String(settings?.book?.['visual.textSize'] || settings?.global?.['visual.textSize'] || 1);
+      themeSelect.value = settings?.book?.['visual.theme'] || settings?.global?.['visual.theme'] || 'system';
+      contrast.checked = String(settings?.book?.['visual.highContrast'] ?? settings?.global?.['visual.highContrast'] ?? 'false') === 'true';
+      openPanel(visualPanel, visualHeading, visualButton);
+    }
+
+    voiceSelect.addEventListener('change', async () => {
+      const saved = await client.setReadingSetting({ scope:'book', bookId:item.id, key:'speech.voice', value:voiceSelect.value });
+      audioStatus.textContent = saved ? (document.documentElement.lang === 'en' ? 'Voice saved.' : 'Voz guardada.') : (document.documentElement.lang === 'en' ? 'Voice could not be saved.' : 'No se pudo guardar la voz.');
+    });
+    rateSelect.addEventListener('change', async () => {
+      const saved = await client.setReadingSetting({ scope:'book', bookId:item.id, key:'speech.rate', value:rateSelect.value });
+      audioStatus.textContent = saved ? (document.documentElement.lang === 'en' ? 'Speed saved.' : 'Velocidad guardada.') : (document.documentElement.lang === 'en' ? 'Speed could not be saved.' : 'No se pudo guardar la velocidad.');
+    });
+    sizeSelect.addEventListener('change', async () => {
+      const saved = await client.setReadingSetting({ scope:'book', bookId:item.id, key:'visual.textSize', value:sizeSelect.value });
+      visualStatus.textContent = saved ? (document.documentElement.lang === 'en' ? 'Visual setting saved.' : 'Ajuste visual guardado.') : (document.documentElement.lang === 'en' ? 'Setting could not be saved.' : 'No se pudo guardar el ajuste.');
+    });
+    themeSelect.addEventListener('change', async () => {
+      const saved = await client.setReadingSetting({ scope:'book', bookId:item.id, key:'visual.theme', value:themeSelect.value });
+      visualStatus.textContent = saved ? (document.documentElement.lang === 'en' ? 'Visual setting saved.' : 'Ajuste visual guardado.') : (document.documentElement.lang === 'en' ? 'Setting could not be saved.' : 'No se pudo guardar el ajuste.');
+    });
+    contrast.addEventListener('change', async () => {
+      const saved = await client.setReadingSetting({ scope:'book', bookId:item.id, key:'visual.highContrast', value:String(contrast.checked) });
+      visualStatus.textContent = saved ? (document.documentElement.lang === 'en' ? 'Visual setting saved.' : 'Ajuste visual guardado.') : (document.documentElement.lang === 'en' ? 'Setting could not be saved.' : 'No se pudo guardar el ajuste.');
+    });
+
     const close = makeButton(
       fallback(t, 'readingLibrary.backToTitles', 'Volver a los títulos de la biblioteca', 'Back to library titles'),
       () => {
@@ -651,7 +859,20 @@ export function renderReadingLibrary({
       }
     );
 
-    details.append(detailsHeading, detail, openBook, queueButton, stateField, info, rename, deleteButton, confirmHost, close);
+    details.append(
+      detailsHeading,
+      detail,
+      progressLabelElement,
+      progress,
+      timeStatus,
+      jumpLabel,
+      jumpSelect,
+      groupButtons,
+      audioPanel,
+      visualPanel,
+      morePanel,
+      close
+    );
     article.append(details);
     return article;
   }

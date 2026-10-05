@@ -177,6 +177,7 @@ export function renderReadingBook({
   router,
   client,
   bookId,
+  initialPercent = null,
   t,
   nativeActions,
   setScreenCleanup,
@@ -1122,10 +1123,15 @@ export function renderReadingBook({
       orderWarning.hidden = true;
     }
 
-    currentPosition = normalizeSemanticPosition({
-      blockIndex: activeBook.blockIndex,
-      unitIndex: activeBook.unitIndex
-    }, documentModel);
+    const requestedPercent = Number.isFinite(Number(initialPercent))
+      ? Math.max(0, Math.min(100, Number(initialPercent)))
+      : null;
+    currentPosition = requestedPercent == null
+      ? normalizeSemanticPosition({
+          blockIndex: activeBook.blockIndex,
+          unitIndex: activeBook.unitIndex
+        }, documentModel)
+      : normalizeSemanticPosition(positionForPercent(documentModel, requestedPercent), documentModel);
     populateNavigationModes();
     readingState.value = activeBook.state || 'in-reading';
 

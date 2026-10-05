@@ -39,16 +39,17 @@ test('translation panel performs bounded resumable work without autoplay', () =>
 });
 
 test('reader mounts translation controls after speech is created', () => {
-  const [screen, marks] = [
-    read('src/screens/reading-book.mjs'),
-    read('src/screens/reading-marks.mjs')
-  ];
+  const screen = read('src/screens/reading-book.mjs');
 
   assert.match(screen, /speech = createReadingSpeechController/);
-  assert.match(screen, /marksPanel = createReadingMarksPanel/);
-  assert.ok(screen.indexOf('speech = createReadingSpeechController') < screen.indexOf('marksPanel = createReadingMarksPanel'));
-  assert.match(marks, /createReadingTranslationControls/);
-  assert.match(marks, /getActiveReadingSpeechController\(\)/);
+  assert.match(screen, /translationControls = createReadingTranslationControls/);
+  assert.ok(
+    screen.indexOf('speech = createReadingSpeechController')
+      < screen.indexOf('translationControls = createReadingTranslationControls'),
+    'translation controls must receive an already-created speech controller'
+  );
+  assert.match(screen, /root: moreActions/);
+  assert.match(screen, /speech,/);
 });
 
 test('translated view preserves the source semantic position and never autoplays', () => {

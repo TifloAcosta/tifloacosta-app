@@ -52,5 +52,5 @@ test('service worker keeps Actualidad scripts cached and its catalogs live', asy
   assert.match(worker, /'\/actualidad-media\.json'/);
   assert.match(worker, /request\.mode === 'navigate'/);
   assert.match(worker, /LIVE_PATHS\.has\(url\.pathname\)/);
-  assert.match(worker, /tifloacosta-app-v2-45-reader-final-cleanup/);
+  assert.match(worker, /tifloacosta-app-v2-46-reader-chrome-voices/);
 });

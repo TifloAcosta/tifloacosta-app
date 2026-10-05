@@ -335,6 +335,7 @@
   let playbackAccessibilityState = null;
   let readingTimerHandle = null;
   let readerViewState = null;
+  let readerChromeState = null;
   let readerReturnView = 'main';
   const translationMemory = new Map();
 
@@ -2100,6 +2101,17 @@
     }
     els.reader.hidden = false;
 
+    if (!readerChromeState) {
+      readerChromeState = new Map();
+      for (const node of [
+        document.querySelector('.skip-link'),
+        document.querySelector('.site-header')
+      ].filter(Boolean)) {
+        readerChromeState.set(node, node.hidden);
+        node.hidden = true;
+      }
+    }
+
     if (!document.getElementById('reading-reader-back')) {
       const back = document.createElement('button');
       back.id = 'reading-reader-back';
@@ -2126,6 +2138,12 @@
       }
     }
     readerViewState = null;
+    if (readerChromeState) {
+      for (const [node, wasHidden] of readerChromeState) {
+        if (node?.isConnected) node.hidden = wasHidden;
+      }
+    }
+    readerChromeState = null;
     els.reader.hidden = true;
 
     if (readerReturnView === 'library') {

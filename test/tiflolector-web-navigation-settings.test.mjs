@@ -9,7 +9,6 @@ test('TifloLector exposes clear top-level menus with isolated focusable subviews
   for (const target of [
     'reading-audio-view',
     'reading-visual-view',
-    'reading-voices-view',
     'reading-library-web',
     'reading-queue-web',
     'reading-marks-web'
@@ -53,7 +52,7 @@ test('TifloLector isolated subviews hide the main view and move focus', async ()
 });
 
 
-test('TifloLector separates general settings into audio, visual and more-voices menus', async () => {
+test('TifloLector keeps more voices inside Audio and voice instead of a top-level menu', async () => {
   const [html, source] = await Promise.all([read('index.html'), read('web-reading.js')]);
   for (const token of [
     'reading-audio-settings',
@@ -114,4 +113,22 @@ test('TifloLector library presents titles as direct reading entry points without
   assert.ok(source.includes('void openSavedBook(book.id);'));
   assert.ok(source.includes('card.append(title);'));
   assert.ok(!source.includes('card.append(title, detailsToggle, details);'));
+});
+
+
+test('reader-only mode hides global skip link and site header then restores them on exit', async () => {
+  const source = await read('web-reading.js');
+  assert.ok(source.includes("document.querySelector('.skip-link')"));
+  assert.ok(source.includes("document.querySelector('.site-header')"));
+  assert.ok(source.includes('readerChromeState.set(node, node.hidden)'));
+  assert.ok(source.includes('node.hidden = true'));
+  assert.ok(source.includes('node.hidden = wasHidden'));
+});
+
+test('more voices is nested inside Audio and voice with no separate launcher', async () => {
+  const html = await read('index.html');
+  assert.ok(html.includes('id="reading-more-voices-settings"'));
+  assert.ok(html.includes('<h4 id="reading-more-voices-settings-heading">Buscar más voces</h4>'));
+  assert.ok(!html.includes('data-reading-view="reading-voices-view"'));
+  assert.ok(!html.includes('id="reading-voices-view"'));
 });

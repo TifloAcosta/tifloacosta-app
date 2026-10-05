@@ -131,7 +131,7 @@ self.addEventListener('fetch', event => {
 
 
   if (isAppOrigin && url.pathname.endsWith('/web-reading.js')) {
-    url.searchParams.set('v', '3.6');
+    url.searchParams.set('v', '3.7');
     event.respondWith(freshScript(url, './web-reading.js?v=3.7', request));
     return;
   }

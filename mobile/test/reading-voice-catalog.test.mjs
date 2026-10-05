@@ -67,3 +67,18 @@ test('shared voice catalog carries platform-specific copy for Android web and iO
     assert.ok(sharedCatalog.includes(text), `Missing catalog copy: ${text}`);
   }
 });
+
+
+test('Android external voice catalog is filterable by language and providers carry language metadata', async () => {
+  const [catalog, sharedCatalog] = await Promise.all([
+    read('src/core/reading-voice-catalog.mjs'),
+    readRepo('shared/reading-voice-catalog.mjs')
+  ]);
+  for (const token of [
+    'reading-provider-language-filter',
+    'renderProviders',
+    'setLanguageFilter',
+    'provider.languages'
+  ]) assert.ok(catalog.includes(token), `Missing provider language filter feature ${token}`);
+  assert.ok(sharedCatalog.includes('languages: Array.isArray(provider.languages)'));
+});

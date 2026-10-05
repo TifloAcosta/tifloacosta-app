@@ -2006,10 +2006,19 @@
       els.libraryStatus.textContent = '';
       for (const book of page.items) {
         const card = document.createElement('section');
-        card.className = 'resource-card';
+        card.className = 'resource-card reading-library-title-card';
 
-        const heading = document.createElement('h4');
-        heading.textContent = book.title || t().document;
+        const title = document.createElement('button');
+        title.type = 'button';
+        title.className = 'reading-library-title';
+        title.textContent = book.title || t().document;
+        title.setAttribute('aria-expanded', 'false');
+
+        const details = document.createElement('section');
+        details.className = 'reading-library-title-details';
+        details.hidden = true;
+        const detailsHeading = document.createElement('h4');
+        detailsHeading.textContent = book.title || t().document;
 
         const meta = document.createElement('p');
         meta.className = 'resource-meta';
@@ -2042,6 +2051,7 @@
           option.textContent = label;
           exportSelect.append(option);
         }
+
         const exportButton = document.createElement('button');
         exportButton.type = 'button';
         exportButton.textContent = t().exportSaved;
@@ -2052,8 +2062,29 @@
         remove.textContent = t().deleteSaved;
         remove.addEventListener('click', () => { void deleteSavedBook(book.id); });
 
-        actions.append(open, exportLabel, exportSelect, exportButton, remove);
-        card.append(heading, meta, actions);
+        const close = document.createElement('button');
+        close.type = 'button';
+        close.textContent = language() === 'en' ? 'Back to library titles' : 'Volver a los títulos de la biblioteca';
+        close.addEventListener('click', () => {
+          details.hidden = true;
+          title.setAttribute('aria-expanded', 'false');
+          title.focus();
+        });
+
+        actions.append(open, exportLabel, exportSelect, exportButton, remove, close);
+        details.append(detailsHeading, meta, actions);
+
+        title.addEventListener('click', () => {
+          const opening = details.hidden;
+          for (const other of els.libraryList.querySelectorAll('.reading-library-title-details')) other.hidden = true;
+          for (const otherTitle of els.libraryList.querySelectorAll('.reading-library-title')) otherTitle.setAttribute('aria-expanded', 'false');
+          details.hidden = !opening;
+          title.setAttribute('aria-expanded', String(opening));
+          if (opening) queueMicrotask(() => detailsHeading.focus?.());
+        });
+
+        detailsHeading.tabIndex = -1;
+        card.append(title, details);
         els.libraryList.append(card);
       }
     } catch {

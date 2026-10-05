@@ -43,6 +43,6 @@ test('dormant bridge remains accessible but is not precached by the simple shell
   const [bridge, sw] = await Promise.all([read('downloads-iphone-bridge.js'), read('sw.js')]);
   assert.match(bridge, /setAttribute\('role',\s*'status'\)/);
   assert.match(bridge, /setAttribute\('aria-live',\s*'assertive'\)/);
-  assert.match(sw, /tifloacosta-app-v2-45-reader-final-cleanup/);
+  assert.match(sw, /tifloacosta-app-v2-46-reader-chrome-voices/);
   assert.doesNotMatch(sw, /downloads-iphone-bridge\.js/);
 });

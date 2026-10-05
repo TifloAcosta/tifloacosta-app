@@ -85,3 +85,31 @@ test('semantic block navigation reports boundaries when the selected kind is una
     }
   );
 });
+
+
+test('Android document reader mirrors the final compact TifloLector control hierarchy', async () => {
+  const [screen, i18n, settings] = await Promise.all([
+    read('src/screens/reading-book.mjs'),
+    read('src/core/i18n.mjs'),
+    read('src/screens/reading-settings.mjs')
+  ]);
+
+  const controls = screen.slice(screen.indexOf('controls.append('), screen.indexOf(');', screen.indexOf('controls.append(')) + 2);
+  assert.ok(controls.indexOf('playButton') < controls.indexOf('navigationLabel'));
+  assert.ok(controls.indexOf('navigationSelect') < controls.indexOf('previous'));
+  assert.ok(controls.indexOf('previous') < controls.indexOf('next'));
+  assert.ok(!controls.includes('progressLabel'));
+  assert.ok(!controls.includes('progressSelect'));
+
+  const more = screen.slice(screen.indexOf('moreActions.append('), screen.indexOf(');', screen.indexOf('moreActions.append(')) + 2);
+  assert.ok(more.includes('progressLabel'));
+  assert.ok(more.includes('progressSelect'));
+  assert.ok(screen.includes('% leído. Quedan aproximadamente'));
+  assert.ok(!screen.includes('Transcurrido: aproximadamente'));
+
+  assert.ok(i18n.includes("navigation: 'Avanzar y retroceder por'"));
+  assert.ok(i18n.includes("navigation: 'Move forward and back by'"));
+
+  assert.ok(settings.indexOf('voiceSelect') < settings.indexOf('getMoreVoices'));
+  assert.ok(settings.includes('createReadingVoiceCatalog'));
+});

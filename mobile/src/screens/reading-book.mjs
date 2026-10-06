@@ -495,6 +495,13 @@ export function renderReadingBook({
   let pendingExternalUrl = '';
   let externalLinkInvoker = null;
 
+  function setContinuousReadingAnnouncements(playing) {
+    const liveMode = playing ? 'off' : 'polite';
+    status.setAttribute('aria-live', liveMode);
+    progressStatus.setAttribute('aria-live', liveMode);
+    pageStatus.setAttribute('aria-live', liveMode);
+  }
+
   function closeExternalLinkWarning() {
     externalLinkDialog.hidden = true;
     pendingExternalUrl = '';
@@ -1039,9 +1046,12 @@ export function renderReadingBook({
       const snapshot = speech.snapshot();
       if (snapshot.playing) {
         await speech.pause();
+        setContinuousReadingAnnouncements(false);
         playButton.textContent = t('readingBook.play');
       } else {
+        setContinuousReadingAnnouncements(true);
         const started = await startSpeechFromUserAction();
+        setContinuousReadingAnnouncements(started);
         playButton.textContent = started ? t('readingBook.pause') : t('readingBook.play');
       }
     })();
@@ -1145,10 +1155,12 @@ export function renderReadingBook({
       settings: {},
       onPositionChange(nextPosition) {
         currentPosition = normalizeSemanticPosition(nextPosition, documentModel);
-        renderSemanticPosition(currentPosition, { announce: true });
+        const isPlaying = nextPosition?.playing === true;
+        setContinuousReadingAnnouncements(isPlaying);
+        renderSemanticPosition(currentPosition, { announce: !isPlaying });
         playButton.textContent = nextPosition?.state === 'read'
           ? t('readingBook.play')
-          : speech?.snapshot().playing ? t('readingBook.pause') : t('readingBook.play');
+          : isPlaying ? t('readingBook.pause') : t('readingBook.play');
         void persistReadingState(currentPosition, nextPosition?.state || 'in-reading');
       }
     });

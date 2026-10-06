@@ -60,10 +60,10 @@ test('web reader connects shared translation job and preserves original/translat
   assert.ok(source.includes("engine: 'browser-translator'"));
 });
 
-test('privacy policy explains browser-local translation behavior', async () => {
+test('privacy policy explains local translation behavior on web and Android', async () => {
   const policy = await read('privacidad/index.html');
-  assert.ok(policy.includes('modelo interno del propio navegador'));
-  assert.ok(policy.includes('no envía el texto a un servicio de traducción propio'));
-  assert.ok(policy.includes("browser's own internal model"));
-  assert.ok(policy.includes('does not send document text to its own translation service'));
+  assert.ok(policy.includes('capacidades locales del navegador o del dispositivo'));
+  assert.ok(policy.includes('no envía el texto del documento a un servicio de traducción propio'));
+  assert.ok(policy.includes('Translation and OCR use local capabilities of the browser or device'));
+  assert.ok(policy.includes('does not send document text or document images to its own translation or OCR service'));
 });

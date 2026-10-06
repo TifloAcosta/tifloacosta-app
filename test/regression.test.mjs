@@ -159,3 +159,17 @@ test('YouTube workflow uses one sync implementation and deploys changed catalog 
   assert.match(sync, /if: steps\.changes\.outputs\.changed == 'true'/);
   assert.match(pages, /actions\/deploy-pages@v5/);
 });
+
+
+test('resources expose direct accessible category buttons alongside the native select', async () => {
+  const html = await read('index.html');
+  const source = await read('app.js');
+
+  assert.match(html, /id="category-buttons"[^>]*aria-label="Categorías de recursos"/);
+  assert.match(source, /categoryButtons:\s*\$\('#category-buttons'\)/);
+  assert.match(source, /categoryButtonsLabel: 'Categorías de recursos'/);
+  assert.match(source, /categoryButtonsLabel: 'Resource categories'/);
+  assert.match(source, /button\.dataset\.resourceCategory=cat/);
+  assert.match(source, /button\.setAttribute\('aria-pressed','false'\)/);
+  assert.match(source, /button\.addEventListener\('click',\(\)=>\{ setActiveCategory\(cat\); showCategory\(cat\); \}\)/);
+});

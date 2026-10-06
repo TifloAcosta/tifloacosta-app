@@ -57,13 +57,14 @@ test('web reader exposes accessible local-library controls', async () => {
   assert.ok(html.includes('aria-live="polite"'));
 });
 
-test('privacy policy explains that TifloReader documents stay local in the browser', async () => {
+test('privacy policy explains that TifloReader documents stay local on web and Android', async () => {
   const [home, policy] = await Promise.all([read('index.html'), read('privacidad/index.html')]);
   assert.ok(home.includes('los documentos que decidas guardar'));
-  assert.ok(policy.includes('biblioteca web de <strong>TifloLector</strong>'));
-  assert.ok(policy.includes('no se envían a una base de datos de TifloAcosta'));
-  assert.ok(policy.includes('web TifloReader library'));
-  assert.ok(policy.includes('stored locally in the browser'));
+  assert.ok(policy.includes('En la versión web se almacenan en el navegador'));
+  assert.ok(policy.includes('En Android se guardan en el espacio privado de la aplicación'));
+  assert.ok(policy.includes('no lo envía por sí mismo a una base de datos de TifloAcosta'));
+  assert.ok(policy.includes('On the web they are stored in the browser'));
+  assert.ok(policy.includes('On Android they are stored in the app private space on the device'));
 });
 
 

@@ -66,10 +66,14 @@ test('one global search is promoted to the home screen and video search is hidde
   assert.match(css, /#video-results-section\s*\{[^}]*margin-top:1\.75rem;[^}]*\}/s);
 });
 
-test('resource categories use the native select control for reliable screen-reader interaction', async () => {
+test('resource categories keep the native select and add direct accessible buttons for iPhone VoiceOver', async () => {
   const [html, app, source] = await Promise.all([read('index.html'), read('app.js'), read('search-accessibility.js')]);
   assert.match(html, /<label for="category">Categoría<\/label>/);
   assert.match(html, /<select id="category">/);
-  assert.match(app, /els\.category\.addEventListener\('change',\(\)=>showCategory\(els\.category\.value\)\)/);
+  assert.match(html, /id="category-buttons"/);
+  assert.match(app, /els\.category\.addEventListener\('change',[\s\S]*showCategory\(els\.category\.value\)/);
+  assert.match(app, /button\.dataset\.resourceCategory=cat/);
+  assert.match(app, /button\.setAttribute\('aria-pressed','false'\)/);
+  assert.match(app, /button\.addEventListener\('click',[\s\S]*showCategory\(cat\)/);
   assert.doesNotMatch(source, /enhanceResourceCategories|categoryToggle|category-options/);
 });

@@ -203,7 +203,9 @@ test('content-opening controls are wired to their intended handlers', async () =
     assert.match(app, handler, `#${id} is not wired to its intended handler`);
   }
   assert.match(home, /<select id="category">/);
-  assert.match(app, /els\.category\.addEventListener\('change',\(\)=>showCategory\(els\.category\.value\)\)/);
+  assert.match(home, /id="category-buttons"/);
+  assert.match(app, /els\.category\.addEventListener\('change',[\s\S]*showCategory\(els\.category\.value\)/);
+  assert.match(app, /button\.addEventListener\('click',[\s\S]*showCategory\(cat\)/);
   assert.match(notifications, /toggle\.addEventListener\('click', toggleNotifications\)/);
   assert.match(app, /open\.addEventListener\('click',[\s\S]*openResourceMenu/);
   assert.match(app, /openLink\.addEventListener\('click'/);

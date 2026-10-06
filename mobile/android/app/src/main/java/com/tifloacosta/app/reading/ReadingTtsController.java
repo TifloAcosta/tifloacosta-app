@@ -273,6 +273,13 @@ public final class ReadingTtsController {
         return Math.max(0.5f, Math.min(2.0f, rate));
     }
 
+    static boolean shouldInterruptForAudioFocusChange(int focusChange) {
+        // TalkBack and other accessibility speech can take transient focus while the
+        // user navigates. Do not tear down continuous reading for those short-lived
+        // focus changes; only a permanent focus loss ends the current utterance.
+        return focusChange == AudioManager.AUDIOFOCUS_LOSS;
+    }
+
     private static String clean(String value) {
         return value == null ? "" : value.trim();
     }
@@ -487,11 +494,7 @@ public final class ReadingTtsController {
         }
 
         private void onAudioFocusChange(int focusChange) {
-            if (focusChange == AudioManager.AUDIOFOCUS_LOSS
-                    || focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT
-                    || focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
-                interrupt();
-            }
+            if (shouldInterruptForAudioFocusChange(focusChange)) interrupt();
         }
 
         private void interrupt() {

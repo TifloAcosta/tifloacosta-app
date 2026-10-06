@@ -170,5 +170,16 @@ test('resources use a collapsed accessible category menu instead of exposing all
   assert.match(source, /categoryToggle: 'Buscar un apartado'/);
   assert.match(source, /categoryToggle: 'Find a section'/);
   assert.match(source, /function setCategoryMenuExpanded\(expanded\)/);
-  assert.match(source, /button\.addEventListener\('click',[\s\S]*setCategoryMenuExpanded\(false\)[\s\S]*showCategory\(cat\)/);
+  assert.doesNotMatch(source, /button\.setAttribute\('aria-pressed'/);
+  assert.match(source, /button\.addEventListener\('click',[\s\S]*setCategoryMenuExpanded\(false\)[\s\S]*showCategory\(cat\)[\s\S]*els\.resultStatus\.focus\(\)/);
+});
+
+
+test('resource category selection moves VoiceOver focus to the opened result status', async () => {
+  const html = await read('index.html');
+  const source = await read('app.js');
+
+  assert.match(html, /id="result-status"[^>]*tabindex="-1"/);
+  assert.doesNotMatch(source, /button\.setAttribute\('aria-pressed'/);
+  assert.match(source, /queueMicrotask\(\(\)=>els\.resultStatus\.focus\(\)\)/);
 });

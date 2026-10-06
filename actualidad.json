@@ -1,5 +1,30 @@
 [
   {
+    "id": "nvda-es-4824d343899e5a64",
+    "type": "news",
+    "sourceId": "nvda-es",
+    "sourceName": "NVDA en español",
+    "sourceUrl": "https://nvda.es/",
+    "originalUrl": "https://nvda.es/2026/10/06/ya-disponible-la-cuarta-beta-de-nvda-2026-3/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-10-06T05:37:22.000Z",
+    "categories": [
+      "nvda",
+      "windows",
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "Ya disponible la cuarta beta de NVDA 2026.3",
+        "summary": "Tal y como ha anunciado NV Access mediante esta publicación, la beta 4 de NVDA 2026.3 ya se encuentra disponible para descarga y pruebas. Si quieres saber qué ofrece la próxima versión de NVDA antes de que se libere oficialmente, no dudes en descargar esta beta y proporcionar comentarios por los canales de la comunidad, … Continuar leyendo \"Ya disponible la cuarta beta de NVDA 2026.3\" La entrada Ya disponible la cuarta beta de NVDA 2026.3 se publicó primero en NVDA en español .",
+        "body": "Tal y como ha anunciado NV Access mediante esta publicación , la beta 4 de NVDA 2026.3 ya se encuentra disponible para descarga y pruebas. Si quieres saber qué ofrece la próxima versión de NVDA antes de que se libere oficialmente, no dudes en descargar esta beta y proporcionar comentarios por los canales de la comunidad, o por el sistema de informe de fallos de NV Access . Esta versión no es apta para entornos de producción. Al instalar esta beta te unirás al canal beta, y sólo recibirás avisos de actualización de compilaciones beta y candidatas a liberación (rc). El canal beta/rc siempre te mantendrá al día con la versión más reciente de NVDA. La última rc de un ciclo de liberación es idéntica a la última versión estable. Para regresar al canal de versiones estables, instala a mano la última versión estable.\n\nEsta versión incorpora importantes mejoras de rendimiento, mejoras en los diálogos de NVDA, y entrada expandida por la pantalla táctil. Se han hecho varias mejoras para reducir los retrasos y aumentar el rendimiento. Ahora NVDA recupera y captura más información sobre los controles en segundo plano, mejorando el rendimiento en controles como cuadros combinados y el explorador de archivos. NVDA ya no hace que se rompan el explorador de archivos u otras aplicaciones al cerrarlo o reiniciarlo. NVDA se recupera ahora más rápido cuando una aplicación deja de responder, y ya no se colgará ni inundará el registro con errores en aplicaciones que no responden. En regiones vivas de texto, como las terminales, NVDA ya no se cuelga cuando se vuelcan en pantalla importantes cantidades de texto. Se han añadido menús de contexto y atajos de teclado a los diálogos de perfiles de configuración, gestos de entrada y diccionarios del habla, haciendo que estos diálogos sean más fáciles de usar con el teclado. Ahora también es posible cambiar directamente un gesto existente en el diálogo Gestos de entrada. Se ha modernizado el diálogo que presenta mensajes explorables y ahora soporta mejor cambiar su tamaño, maximizarlo y minimizarlo. Se ha expandido significativamente la entrada por pantalla táctil. Los gestos de dos deslizamientos secuenciales ahora combinan dos deslizamientos en rápida sucesión en un solo gesto, incrementando enormemente la cantidad de gestos asociables. También se soportan ahora los gestos de borde, permitiendo que los gestos que comiencen a 15 mm de cualquier borde de la pantalla se asocien independientemente de los mismos gestos realizados en el centro de la pantalla. Se ha añadido una nueva orden sin asignar para mover el cursor del ratón al centro de la vista ampliada. Se puede usar el OCR de Windows con la lupa o la cortina de pantalla activadas. Se ha actualizado Liblouis con nuevas tablas braille en Elfdaliano, sami, maorí, braille unificado inglés de Nueva Zelanda, y aitiano criollo, una tabla noruega para texto en español, y variantes adicionales de sueco de 6 y 8 puntos. Se ha actualizado Espeak NG añadiendo soporte para liguriano y abkhaz. Para instalar esta beta, puedes configurar el canal «rc y beta» en el complemento Selector del canal de actualización y buscar actualizaciones desde el menú Ayuda de NVDA, o actualizar desde una beta anterior. Y como siempre, también puedes descargar manualmente el instalador de NVDA 2026.3 beta 4 . Su suma de comprobación SHA256, que te permitirá garantizar la integridad del archivo descargado, es 8be91476179710c4abffe5094459df9be1696d92e5d6cd0ace47d52321bb87ab. ¡Feliz martes!\n\nLa entrada Ya disponible la cuarta beta de NVDA 2026.3 se publicó primero en NVDA en español ."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "the-verge-804296941d389fc9",
     "type": "news",
     "sourceId": "the-verge",
@@ -2163,31 +2188,6 @@
         "title": "Lectura Fácil y Web Comprensible. Modelo de los tres umbrales. Reglamento de condiciones básicas de accesibilidad cognitiva.",
         "summary": "Nombre: Lectura Fácil y Web Comprensible. Un libro blanco en el marco del nuevo reglamento Autores: María Xesús Bello Rivas y Óscar García Muñoz Nº páginas: 244 Idioma: español Formato: papel y PDF (gratuito) Fecha de publicación: 2026 Descarga del libro en PDF: Lectura Fácil y web comprensible. Un libro blanco en el marco del nuevo reglamento Podéis",
         "body": "Nota 1: como todos los artículos de este blog, este artículo NO está promocionado.\n\nNota 2: como todos los artículos de este blog, este artículo se ha ideado y elaborado sin el uso de herramientas IA, solo se han usado para la revisión final de la ortografía.\n\nAutor: Olga Carreras Montoto\n\nEtiquetas: accesibilidad discapacidad cognitiva , lectura fácil\n\nCompártelo en:\n\nHistórico de artículos:\n\nSubir al comienzo de la página"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "nvda-es-438c784a29be67e9",
-    "type": "news",
-    "sourceId": "nvda-es",
-    "sourceName": "NVDA en español",
-    "sourceUrl": "https://nvda.es/",
-    "originalUrl": "https://nvda.es/2026/08/17/ya-disponible-la-undecima-beta-de-nvda-2026-2/",
-    "originalLanguage": "es",
-    "publishedAt": "2026-08-17T06:21:17.000Z",
-    "categories": [
-      "nvda",
-      "windows",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "es": {
-        "title": "Ya disponible la undécima beta de NVDA 2026.2",
-        "summary": "Tal y como ha anunciado NV Access mediante esta publicación, la beta 11 de NVDA 2026.2 ya se encuentra disponible para descarga y pruebas. Si quieres saber qué ofrece la próxima versión de NVDA antes de que se libere oficialmente, no dudes en descargar esta beta y proporcionar comentarios por los canales de la comunidad, … Continuar leyendo \"Ya disponible la undécima beta de NVDA 2026.2\" La entrada Ya disponible la undécima beta de NVDA 2026.2 se publicó primero en NVDA en español .",
-        "body": "Tal y como ha anunciado NV Access mediante esta publicación , la beta 11 de NVDA 2026.2 ya se encuentra disponible para descarga y pruebas. Si quieres saber qué ofrece la próxima versión de NVDA antes de que se libere oficialmente, no dudes en descargar esta beta y proporcionar comentarios por los canales de la comunidad, o por el sistema de informe de fallos de NV Access . Esta versión no es apta para entornos de producción. Al instalar esta beta te unirás al canal beta, y sólo recibirás avisos de actualización de compilaciones beta y candidatas a liberación (rc). El canal beta/rc siempre te mantendrá al día con la versión más reciente de NVDA. La última rc de un ciclo de liberación es idéntica a la última versión estable. Para regresar al canal de versiones estables, instala a mano la última versión estable.\n\nEsta versión incluye una nueva función de ampliación, mejoras en los gestos táctiles y la navegación, y capacidades mejoradas de voz y braille. El ampliador proporciona opciones de zoom y filtro de color para asistir a usuarios con baja visión. Actualmente, el ampliador sólo soporta el modo a pantalla completa, dejando los modos acoplados planificados para una futura versión. Se ha expandido significativamente el soporte táctil con nuevos gestos de pellizcar y con navegación en modo exploración táctil en contenido web. Ahora se puede navegar por enlaces, encabezados, campos de formulario y otros elementos usando deslizamientos táctiles. Se han mejorado las funciones de voz con soporte de diccionarios del habla personalizados que pueden proporcionarse en complementos y nuevos tipos de entradas de diccionario que proporcionan un control más granular. Se ha añadido una nueva opción en las voces OneCore para controlar las pausas después de la puntuación. Una nueva orden permite repetir la última información verbalizada, con la capacidad de mostrarla en un mensaje explorable. El gesto predeterminado para repetir la última información verbalizada es NVDA+x, y se puede cambiar desde el diálogo Gestos de entrada. La pantalla braille ahora puede desplazarse automáticamente, y los dispositivos DotPad soportan combinaciones multibotón. Liblouis se ha actualizado con nuevas tablas braille en italiano y estonio. Al restablecer NVDA a los valores de fábrica, ahora hay disponible un botón de deshacer para restaurar la configuración anterior. Para instalar esta beta, puedes configurar el canal «rc y beta» en el complemento Selector del canal de actualización y buscar actualizaciones desde el menú Ayuda de NVDA, o actualizar desde una beta anterior. Y como siempre, también puedes descargar manualmente el instalador de NVDA 2026.2 beta 11 . Su suma de comprobación SHA256, que te permitirá garantizar la integridad del archivo descargado, es 4ff801c17ffde76290ec6f487cbc24228b0f9fa958ad31f9bc68cad9034a0f5d. ¡Feliz lunes!\n\nLa entrada Ya disponible la undécima beta de NVDA 2026.2 se publicó primero en NVDA en español ."
       }
     },
     "media": null

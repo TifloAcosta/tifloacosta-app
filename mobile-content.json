@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-06T02:31:39.687Z",
+  "generatedAt": "2026-10-06T09:26:34.320Z",
   "resources": [
     {
       "kind": "resource",
@@ -5416,6 +5416,55 @@
   "news": [
     {
       "kind": "news",
+      "id": "the-verge-804296941d389fc9:en",
+      "sourceId": "the-verge-804296941d389fc9",
+      "lang": "en",
+      "title": "Gemini Call for Me might tell your mom you’re running late",
+      "summary": "Google may be expanding its \"Call for Me\" AI feature beyond business calls so you can use it to send messages to friends and family. Android Authority reports finding a \"Gemini Calling\" introductory screen in an APK teardown with examples that include \"Call Mom and tell her I will be 15 minutes late\" and \"Call […]",
+      "body": "Google may be expanding its \"Call for Me\" AI feature beyond business calls so you can use it to send messages to friends and family. Android Authority reports finding a \"Gemini Calling\" introductory screen in an APK teardown with examples that include \"Call Mom and tell her I will be 15 minutes late\" and \"Call John and ask if he is coming for dinner.\"\n\nBased on those examples, even with this expansion, Gemini would likely be limited to basic, text message-like calls. While Google's AI might not automate an entire catch-up phone call with your relatives, it could deliver quick messages to people who prefer a phone call, miss texts often, or …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1005177/google-gemini-call-for-me-expansion-rumors",
+      "publishedAt": "2026-10-05T23:09:55.000Z",
+      "categories": [
+        "tecnologia-general",
+        "android",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-88a5b15fd474afb1:en",
+      "sourceId": "engadget-88a5b15fd474afb1",
+      "lang": "en",
+      "title": "Mini PC vs. laptop: Which is better for your home office?",
+      "summary": "Mini PCs offer a convenient form factor, but a laptop is ready to go with you anywhere. There's no perfect answer.",
+      "body": "A laptop can become a desktop with one cable, making the home-office choice less obvious than it looks.\n\nI own both a mini PC and a laptop, and I prefer to have the mini PC on my desk. It doesn't take up much space and fades into a setup that revolves around the monitor, keyboard and mouse I actually use. The small box becomes a part of the office and an organized desk .\n\nHowever, a laptop can do the same. Plug one into a big screen via HDMI, throw in a wireless keyboard and mouse, and the basic experience is pretty close. This can get even better with a compatible USB-C or Thunderbolt dock to manage displays, peripherals, networking and charging all in one. When both computers are set up at a desk, the gap between them becomes tiny.\n\nWhat you're paying for and whether the computer needs to leave that desk are the more important questions.\n\nWhile their name implies a desktop PC that's been hit with a shrink ray, there are plenty of mini PCs based on hardware that would be perfectly normal in a laptop. For instance, the ASUS NUC 15 Pro supports Intel's Core Ultra 7 265H (a mobile processor), along with SO-DIMM memory and M.2 SSD storage.\n\nThere's a practical explanation for that. When you're attempting to fit a whole computer into a box that's small enough to fit behind a monitor, laptop components are quite convenient. But similar parts don't guarantee identical performance. Cooling, firmware and manufacturer-set power limits all have an impact on what a processor can sustain, especially when you put it to work for more than a quick benchmark. Thus, two machines with the same CPU name can still behave differently.\n\nUpgradeability varies too, which is one of the main downsides of a mini PC . The NUC 15 Pro offers two SO-DIMM slots and two M.2 storage slots on supported configurations, offering greater flexibility for memory and storage upgrades than some thin laptops with soldered memory. Not all configurations include memory or storage from ASUS, however.\n\nThat last detail is important for fair price comparisons. When you start adding RAM, an SSD and perhaps an operating system to the list of items, a bargain-looking barebones mini PC can turn into less of a value.\n\nThe same reality check applies to graphics. Integrated graphics are just fine for email, office apps, video calls and browser-intensive tasks. If you're doing demanding video editing, 3D work or any other GPU-intensive task, don't assume that the small desktop box has more graphics power than a laptop.\n\nA mini PC has straightforward appeal compared to a laptop: you're buying the computer without the built-in screen, battery, keyboard and trackpad that may go unused for the majority of its lifespan. That's largely why I enjoy mine. I prefer to have a machine that's part of the workspace and always available. But a laptop has a pretty good response to that argument, and it's a single cable.\n\nWith a compatible docking station , a laptop can connect to external displays, Ethernet, a keyboard, mouse and other USB devices simultaneously. Supported models can also be powered from the same dock (specific capabilities vary by laptop and dock). Close the lid, tuck the machine into a stand and your day-to-day setup can feel like one built around a mini PC.\n\nThe difference is evident when you have to travel. Unplug the laptop and the same computer comes with you, including your local files, apps, browser sessions and settings. There's only one machine to maintain — no need to wonder which computer has the document you definitely saved five minutes before a meeting.\n\nBut that doesn't mean a laptop is the obvious home-office option. Mini PCs can be compact, flexible and even more cost-effective if your computer doesn't move around much and you already have a monitor and peripherals. If you're a frequent traveler, work in various locations or want to keep everything on one machine, a docked laptop might be the better choice.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2276431/mini-pc-vs-laptop-better-for-home-office/",
+      "publishedAt": "2026-10-05T23:00:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "windows"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-afbb9aff22beae89:en",
+      "sourceId": "9to5mac-afbb9aff22beae89",
+      "lang": "en",
+      "title": "This tool frees up Apple Intelligence storage on macOS, but think twice before using it",
+      "summary": "A new open-source tool is going viral over its promise to let users who aren’t interested in Apple Intelligence reclaim 12GB or more of storage on their Macs. Here are the details. more…",
+      "body": "A new open-source tool is going viral over its promise to let users who aren’t interested in Apple Intelligence reclaim 12GB or more of storage on their Macs. Here are the details.\n\nLike many companies adding AI tools and models across their platforms, Apple has faced criticism for features that take up storage space some users consider unnecessary.\n\nWhile Apple Intelligence required up to 7GB of storage on macOS 26, that figure has increased significantly on macOS 27 , with Apple now saying its latest models can require up to 14GB on newer Macs.\n\nIn response to this, indie developer Om Lahore published a project called RemoveMacAI on GitHub late last week, which promises to “turn off Apple Intelligence on macOS 27 and remove its downloaded models.”\n\nAs Lahore explains, his tool enables a configuration profile that applies Apple’s own restriction keys to turn off Apple Intelligence features, while also using the company’s asset service to remove downloaded models and prevent macOS from downloading them again.\n\nHe also explains exactly what the tool removes, which features it disables, and what users can expect after running it:\n\nFeatures turned off: Siri (including “Hey Siri” and the menu bar icon), Writing Tools, Genmoji, Image Playground, the ChatGPT extension, summaries in Mail, Messages, Safari, Notes and notifications, Mail smart replies, inline text predictions, Spatial Photos, Photos Clean Up and Xcode predictive code completion.\n\nModels removed: the Apple Intelligence foundation models and the models for image generation and Genmoji, Spatial Photos, Photos Clean Up and Xcode code completion.\n\nAnd\n\nWhat stops working? The features listed above, apps that use Apple’s on-device models (the Foundation Models framework and the Use Model action in Shortcuts), Visual Intelligence and natural-language editing in Calendar.\n\nLahore notes that dictation still works after running RemoveMacAI, as it “is a separate setting, and its speech models are not removed.”\n\nFinally, he adds that the entire process can be reversed, with full details and instructions available here .\n\nWhile part of the outcry over how much storage Apple Intelligence takes up on the Mac appears to be the same knee-jerk reaction against anything AI-related, there is a legitimate argument to be made for users with limited internal storage, particularly on 256GB Macs, where reclaiming 12GB or more can make a meaningful difference.\n\nThere is also a broader question of basic control over one’s own operating system, as users who have no interest in Apple Intelligence should arguably have a straightforward way to turn it off completely and recover the storage its models occupy, just as they can with other apps and certain optional parts of the system.\n\nThat said, there is no telling whether Apple will attempt to get the project removed from GitHub, or change the underlying mechanisms in macOS to make Apple Intelligence models harder to remove.\n\nLikewise, there is no way to know how disabling or removing these components could affect macOS itself going forward, or even third-party apps that increasingly rely on Apple’s models to provide basic functionality.\n\nWhile RemoveMacAI is open source and does not require disabling System Integrity Protection, it still relies on configuration profiles, restriction keys, and system services that Apple could change at any time.\n\nThat means a future macOS update could render parts of the tool ineffective, or potentially leave users dealing with unexpected behavior until the project is updated.\n\nFor now, anyone considering RemoveMacAI should understand that this is an unofficial third-party tool making system-level changes, and should be comfortable with the way it works.\n\nTo be completely clear , RemoveMacAI seems like a well-intentioned open-source project aimed at giving Mac users more autonomy and control over what runs on their computers and how their storage is used. It’s just impossible to know whether Apple will view it the same way.\n\nTo check out RemoveMacAI on GitHub, follow this link .",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/05/this-tool-frees-up-apple-intelligence-storage-on-macos-but-think-twice-before-using-it/",
+      "publishedAt": "2026-10-05T22:55:49.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "engadget-cf494376477113fa:en",
       "sourceId": "engadget-cf494376477113fa",
       "lang": "en",
@@ -5434,7 +5483,7 @@
       "id": "techcrunch-38228d1705fb3c30:en",
       "sourceId": "techcrunch-38228d1705fb3c30",
       "lang": "en",
-      "title": "Lucid Motors’ EV output falls to lowest level in almost two years",
+      "title": "Lucid Motors’ EV output falls to lowest level in almost 2 years",
       "summary": "The company is deliberately limiting production after years of struggling to find mass-market demand for its EVs.",
       "body": "Lucid Motors built 2,954 electric vehicles (EVs) in the third quarter of this year, a 54% drop from a year ago, as the company purposely limits production to better meet demand for its EVs.\n\nThis was the third straight quarter in which the number of EVs Lucid built has declined. It’s also the lowest quarterly output since the first quarter of 2025, which was just after Lucid Motors started production of its second EV, the Gravity SUV .\n\nLucid delivered 3,806 EVs in the third quarter, roughly flat with the second quarter and down about 200 vehicles from the third quarter of 2025. The company has struggled to find buyers for either of its first two luxury EVs. In five of the last six quarters, it built more vehicles than it delivered.\n\nLucid’s new CEO, Silvio Napoli, has spent the last few months leading an effort to “simplify the company.” That effort has included laying off around 1,500 employees, streamlining the company’s leadership, and eliminating a second shift at its factory in Arizona in a bid to reach cost savings of $1.4 billion . Lucid also delayed the release of its third EV , the Cosmos. That model is supposed to be much cheaper, starting at under $50,000.\n\nThe third quarter figures, released Monday afternoon, come just a few days after rival EV upstart Rivian posted its best quarter in history on the back of the R2, its new, more affordable SUV . Although Rivian didn’t break out specific delivery figures for the R2, the company shipped nearly 20,000 vehicles in the third quarter , the first full quarter with the R2 in production, up from 12,194 in the second quarter .\n\nLucid’s failure to find a large market of buyers for its EVs is even more stark when compared with the promises the company made when it went public in 2021. That year, Lucid Motors merged with a special purpose acquisition company and estimated it would ship as many as 90,000 EVs in 2024 alone . The company raised $4 billion in the transaction.\n\nOn Lucid’s second-quarter earnings call in August, Napoli spoke about why he thinks the company has failed to make a dent in the EV market.\n\n“While there is no question that Lucid brought leading innovations and outstanding products to the market, we have disappointed on several fronts, and for far too long,” he said. “We have not executed consistently. We missed commitments, launched products before they were ready, underinvested in service, responded too slowly to quality issues, and allowed complexity to slow decisions down.”\n\nThe Cosmos’ lower price could, in theory, let Lucid access a wider market, but Napoli cautioned shareholders that rushing the new EV out could create more trouble.\n\n“We will not repeat the mistakes of the past by bringing a product to market before it is ready,” Napoli said on the call.",
       "sourceName": "TechCrunch",
@@ -5489,23 +5538,6 @@
       "categories": [
         "apple",
         "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-f8febba458de79d3:en",
-      "sourceId": "9to5mac-f8febba458de79d3",
-      "lang": "en",
-      "title": "OpenAI details new text watermarking system for ChatGPT, Codex, and the API",
-      "summary": "OpenAI today announced how it will comply with the EU AI Act, which requires providers of generative AI systems to mark AI-generated text in a way that makes it identifiable. Here are the details. more…",
-      "body": "OpenAI today announced how it will comply with the EU AI Act, which requires providers of generative AI systems to mark AI-generated text in a way that makes it identifiable. Here are the details.\n\nA few months ago, Anthropic sparked controversy when it announced that, to comply with the EU AI Act, Claude would start watermarking text by slightly adjusting its word choice.\n\nIn a nutshell, every so often, Claude chooses between words that would work equally well based on a hidden pattern, which Anthropic says has no practical impact on the meaning, quality, or readability of its responses.\n\nAnthropic also developed a detector that can look for that pattern in a piece of text, and can tell whether it likely came from Claude.\n\nThe detector can’t be used to determine whether text came from OpenAI or any other competitor, since Claude’s watermark is generated using a secret key specific to Anthropic’s system.\n\nAt the height of the controversy, Anthropic stressed that Claude would not be alone, noting that several other major AI providers were also implementing marking systems to comply with the EU’s requirements.\n\nToday, OpenAI announced its own solution, which relies on a similar approach, albeit with a much more limited rollout and scope.\n\nAccording to OpenAI , “API customers globally will be able to opt in to text watermarking for select models” starting today, while the company “will add an invisible watermark to eligible ChatGPT and Codex text output in the European Union” in the coming weeks.\n\nThis means that in the API, text watermarking will remain off by default for now, while in ChatGPT and Codex, it will initially be limited to eligible users only in the European Union.\n\nOpenAI also opened applications for access to its text watermark detector, which will initially be limited to approved researchers and expert organizations as the company works to evaluate and improve the technology.\n\nAnd speaking of accuracy, OpenAI is very clear that the detection technology still has significant limitations, as it can produce both false negatives and false positives, particularly with shorter texts or content in specific domains, “such as mathematics, where there is less flexibility in word choice.”\n\nHere’s OpenAI on textGrain, which is its text watermarking technology:\n\nOur text watermarking technology, textGrain, adds an invisible statistical signal to the model’s word choices. Our detector looks for that signal to assess whether a passage contains an OpenAI watermark. More details about how textGrain works can be found in our technical report⁠ , which will be updated with additional details in the coming weeks. We also plan to make the technology available in open source so that others can build on it.\n\nThe company also noted that, in addition to being harder to detect in shorter passages, the watermark can be significantly weakened by editing:\n\nIn an evaluation of 400-token passages, replacing 10% of words with synonyms reduced detection from about 92% to 66%. Replacing 25% of words reduced it to 17%.\n\nInterestingly, OpenAI’s comparison of watermarked and unwatermarked text showed that watermarked outputs actually scored slightly higher on several benchmarks, despite the company saying it found no meaningful difference in overall performance.\n\nOpenAI also stressed that, in addition to the false positive and false negative shortcomings, a watermark “does not measure human contribution,” “does not establish ownership or responsibility,” “does not identify the user,” and “does not verify accuracy.”\n\nOpenAI added that “the absence of a detected watermark does not prove human authorship” either.\n\nFinally, the company said it expects to revisit its approach as the technology, standards, and evidence evolve, while continuing to study how well watermarks survive editing and translation and whether they can more meaningfully distinguish AI assistance from AI authorship.\n\nTo read OpenAI’s announcement in full, follow this link .\n\nWhat’s your take on how OpenIA is implementing text watermarking? Let us know in the comments.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/05/openai-details-new-text-watermarking-system-for-chatgpt-codex-and-the-api/",
-      "publishedAt": "2026-10-05T20:46:17.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "ia-accesibilidad"
       ]
     },
     {
@@ -5575,22 +5607,6 @@
     },
     {
       "kind": "news",
-      "id": "the-verge-6c05203e03a027fe:en",
-      "sourceId": "the-verge-6c05203e03a027fe",
-      "lang": "en",
-      "title": "All the drama around AI’s takeover of mathematics",
-      "summary": "This past year, OpenAI, Anthropic, and other labs have announced breakthroughs on numerous long-standing mathematical problems, in some cases pushing well beyond what researchers expected current systems to be capable of — including resolving one of the famous Millennium Prize problems. But in classic Silicon Valley style, AI labs are moving fast and breaking things, […]",
-      "body": "This past year, OpenAI, Anthropic, and other labs have announced breakthroughs on numerous long-standing mathematical problems, in some cases pushing well beyond what researchers expected current systems to be capable of — including resolving one of the famous Millennium Prize problems. But in classic Silicon Valley style, AI labs are moving fast and breaking things , barreling through the discipline with all the grace of a runaway bulldozer . Results that might normally have been celebrated have instead sparked backlash . AI labs say they are learning from earlier mistakes. Whether those promises bear fruit remains to be seen.\n\nRead on below for the latest updates in the AI takeover of mathematics.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1004933/ai-math-openai-breakthrough-solution",
-      "publishedAt": "2026-10-05T19:28:59.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "ars-technica-ee435db39f46a603:en",
       "sourceId": "ars-technica-ee435db39f46a603",
       "lang": "en",
@@ -5603,22 +5619,6 @@
       "categories": [
         "tecnologia-general",
         "apple"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-2d712418155af4c0:en",
-      "sourceId": "engadget-2d712418155af4c0",
-      "lang": "en",
-      "title": "OpenAI will add a digital watermark to text and code generated in the EU",
-      "summary": "This move is to comply with the EU's new AI transparency rules.",
-      "body": "This is to comply with the region's new AI transparency rules.\n\nOpenAI just announced its plans to comply with part of the European Union's new AI transparency rules . The company will soon begin adding an invisible watermark to text and code generated in the EU. This follows a similar move by Anthropic earlier this year.\n\nOpenAI is using a proprietary system called textGrain that \"adds an invisible statistical signal to the model's word choices.\" Once added, a detector can spot these signals and ascertain if there's a watermark.\n\nThe company says the system \"matched or exceeded\" the performance of other approaches, like SynthID for text . However, it still cautions that \"strong performance under ideal conditions does not guarantee reliable detection in everyday use.\"\n\nThat's corporate speak for \"it may not always work.\" It admits that shorter text is harder to detect, with around an 80 percent success rate. The same goes for \"content such as mathematics.\" Even editing text seems to bring down the success rate. OpenAI does plan on making the technology available in open source so others can tweak it.\n\nThe watermark will not be enabled by default, except for \"eligible ChatGPT and Codex text output in the European Union.\" Customers will be able to opt-in \"for select models,\" though it didn't specify which models would be available to the general global public.\n\nOpenAI is being a bit more cautious when it comes to the detection software. Access will initially be limited to \"approved researchers and expert organizations.\" Also, the detector doesn't identify the user or reveal prompts or conversations.\n\nArticle 50 of the EU's AI Act mandates that providers of generative AI systems make text outputs identifiable in a machine-readable way. This already pertains to new companies entering the market, but pre-existing entities have until December 2 to comply. This includes organizations like OpenAI and Anthropic, of course, but also Microsoft, Google and Meta, among others.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2277866/openai-will-add-a-digital-watermark-to-text-and-code-generated-in-the-eu/",
-      "publishedAt": "2026-10-05T18:55:40.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
       ]
     },
     {
@@ -6111,39 +6111,6 @@
         "android",
         "apps-accesibles",
         "tecnologia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "accessible-android-b7f56ec7b221a22a:en",
-      "sourceId": "accessible-android-b7f56ec7b221a22a",
-      "lang": "en",
-      "title": "The Podcast App",
-      "summary": "The Podcast App is a podcast player for audio and video by Magnolia Apps. It lets you play audio and video podcasts in one app,…",
-      "body": "Published 26 September 2026 by The Podcast App\n\nThe Podcast App is a podcast player for audio and video by Magnolia Apps. It lets you play audio and video podcasts in one app, download episodes for offline listening, adjust playback speed, skip silence, jump between chapters, and use a sleep timer.\n\nYou can add a show by RSS or search, follow the shows you want, and import or export subscriptions using OPML. You can start listening without an account and sign in if you want synchronization across devices.\n\nOn supported shows, when you skip forward during a known ad break, one tap can jump to where the show resumes. This is never automatic and can be turned off.\n\nThe app does not insert banner or audio ads. Offline downloads and the core player are free, while some optional AI tools require Premium.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nDeveloper submission. We have not had an independent TalkBack audit, so we are not claiming full screen reader support. We would welcome testing and notes from the community, including unlabeled buttons or missing accessibility actions. Please report issues to support@thepodcastapp.dev.\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nRate accessibility only — not the app’s features, price, or overall quality.\n\nPlease log in to rate this app’s accessibility.",
-      "sourceName": "Accessible Android",
-      "originalUrl": "https://accessibleandroid.com/app/__trashed/",
-      "publishedAt": "2026-09-26T08:53:35.000Z",
-      "categories": [
-        "android",
-        "apps-accesibles",
-        "tecnologia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "applevis-apps-b69b009d167a5b08:en",
-      "sourceId": "applevis-apps-b69b009d167a5b08",
-      "lang": "en",
-      "title": "Restaurant Rush: Cook & Serve",
-      "summary": "Cook fast, serve happy guests and decorate your own restaurant. Cozy chaos, two cats to pet, and fully playable with VoiceOver. Open your doors and start your shift! Restaurant Rush: Cook & Serve is a fast, cozy restaurant time-management game. Orders pile up, guests get impatient, and you keep the kitchen running one shift at a time. Play your way • Run 5 restaurants, each with its own menu and levels. Start at Sip Stop and work your way up. • Story levels for steady progress, or Endless Shift, where you pick draft cards to shape every run. • Unlock recipes and kitchen upgrades with Dollars, and hire a waiter for the busy rushes. • Finish daily goals and climb the leaderboards. • How to Play: a short guide on the main menu explains the game modes, pace, combos and the screen layout. • Practice: quick lessons and a free practice shift where nobody leaves. Make it yours • Restaurant Studio: decorate with themes, wall decorations, counters and tables. • Spend Coins on chef outfits, music tracks, soundscapes and accessories for the cats. Meet Holosko and Sabri • Two cats live in your restaurant. Pet them to calm down impatient guests. Hear the restaurant come alive • Realistic kitchen and customer sounds: the door, footsteps, chairs, pouring and cooking. Play at your own pace • Fully playable with VoiceOver. • Accessible play and pace settings, including Relaxed, so anyone can play at their own speed. • Left-handed layout. • Available in 9 languages. Tie your apron and open the doors. Your first guests are already waiting.",
-      "body": "Welcome to Restaurant Rush — the cozy kitchen-builder where every shift is a tiny puzzle.\n\nRun five themed restaurants across a 100-day story campaign, then push your record in Endless mode. Drag ingredients to the stove, plate orders before the timer ticks out, and bank coins to expand your menu, hire a waiter, or unlock the next neighborhood spot.\n\nWhat you'll do\n\n• Serve thirsty customers at Sip Stop, plate noodle bowls at Noodle Pit, toss tacos at Taco Truck, and three more restaurants to discover.\n\n• Master the rhythm: tap to take orders, prep at the right station, deliver before patience runs out, chase combos for huge tips.\n\n• Upgrade kitchen stations, add trays, hire waiters per restaurant, and unlock 50+ recipes that scale with your skill.\n\n• Customize your chef with 8 outfit presets, 4 hair styles, and a wardrobe of premium cosmetic items you unlock as you progress.\n\nLive ops that respect your time\n\n• Daily missions reset at midnight with shareable rewards. • Weekly challenges with global leaderboards. • Seasonal content drops curated by the live-ops team — new recipes, customer types, and chef gear show up without you needing to update the app.\n\nBuilt for one-handed play\n\nRestaurant Rush is designed for short sessions on the bus, in line, or before bed. No timers gating progress, no energy meter to wait out — just keep cooking when you want, pause anywhere.\n\nFree to download. Optional in-app purchases support continued development.",
-      "sourceName": "AppleVis Apps",
-      "originalUrl": "https://www.applevis.com/apps/ios/games/restaurant-rush-cook-serve",
-      "publishedAt": "2026-09-26T02:59:18.000Z",
-      "categories": [
-        "apple",
-        "apps-accesibles"
       ]
     }
   ]

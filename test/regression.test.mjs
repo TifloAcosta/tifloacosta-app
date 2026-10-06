@@ -68,13 +68,13 @@ test('homepage loads shared app logic and reserves the lazy book-cover dimension
   assert.match(worker, /'\.\/app\.js\?v=2\.2'/);
 });
 
-test('homepage localization uses explicit form-label references', async () => {
+test('homepage localization uses explicit search label and accessible resource menu copy', async () => {
   const source = await read('app.js');
 
   assert.match(source, /searchLabel:\s*\$\('label\[for="search"\]'\)/);
-  assert.match(source, /categoryLabel:\s*\$\('label\[for="category"\]'\)/);
+  assert.match(source, /categoryToggle:\s*\$\('#category-toggle'\)/);
   assert.match(source, /els\.searchLabel\.textContent=c\.searchLabel/);
-  assert.match(source, /els\.categoryLabel\.textContent=c\.categoryLabel/);
+  assert.match(source, /els\.categoryToggle\.textContent=c\.categoryToggle/);
   assert.doesNotMatch(source, /previousElementSibling/);
 });
 
@@ -161,15 +161,14 @@ test('YouTube workflow uses one sync implementation and deploys changed catalog 
 });
 
 
-test('resources expose direct accessible category buttons alongside the native select', async () => {
+test('resources use a collapsed accessible category menu instead of exposing all categories at once', async () => {
   const html = await read('index.html');
   const source = await read('app.js');
 
-  assert.match(html, /id="category-buttons"[^>]*aria-label="Categorías de recursos"/);
-  assert.match(source, /categoryButtons:\s*\$\('#category-buttons'\)/);
-  assert.match(source, /categoryButtonsLabel: 'Categorías de recursos'/);
-  assert.match(source, /categoryButtonsLabel: 'Resource categories'/);
-  assert.match(source, /button\.dataset\.resourceCategory=cat/);
-  assert.match(source, /button\.setAttribute\('aria-pressed','false'\)/);
-  assert.match(source, /button\.addEventListener\('click',\(\)=>\{ setActiveCategory\(cat\); showCategory\(cat\); \}\)/);
+  assert.match(html, /id="category-toggle"[^>]*aria-expanded="false"[^>]*aria-controls="category-menu"/);
+  assert.match(html, /id="category-menu" hidden/);
+  assert.match(source, /categoryToggle: 'Buscar un apartado'/);
+  assert.match(source, /categoryToggle: 'Find a section'/);
+  assert.match(source, /function setCategoryMenuExpanded\(expanded\)/);
+  assert.match(source, /button\.addEventListener\('click',[\s\S]*setCategoryMenuExpanded\(false\)[\s\S]*showCategory\(cat\)/);
 });

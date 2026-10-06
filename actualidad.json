@@ -1,5 +1,292 @@
 [
   {
+    "id": "9to5mac-39fd54bfa1875481",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/06/macos-27-2-public-beta-2-now-available-heres-whats-coming/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-06T17:04:33.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "macOS 27.2 public beta 2 now available, here’s what’s coming",
+        "summary": "One day after rolling out macOS 27.2 beta 3 to developers , Apple is now rolling out the equivalent build for users enrolled in the public beta program. Here’s what’s new. more…",
+        "body": "One day after rolling out macOS 27.2 beta 3 to developers , Apple is now rolling out the equivalent build for users enrolled in the public beta program. Here’s what’s new.\n\nAfter a two-week hiatus, Apple released macOS 27.2 beta 3 for developers yesterday, continuing its round of testing ahead of the system’s official release in the coming weeks.\n\nWhile the iOS 27.2 betas have introduced a few new features, including a redesigned Health app , dual-capture mode for Group FaceTime sessions, and Apple TV profiles in the TV app, macOS 27.2 has been less eventful, with its headline feature being the addition of five new languages to Siri AI.\n\nAs the company announced during last month’s iPhone 18 Pro and iPhone Duo event, Siri AI will soon expand to French, Japanese, Korean, Portuguese, and Spanish, joining English as a supported language.\n\nThe release build for macOS 27.2 public beta 2 is 26B5101f, which is the same as yesterday’s build.\n\nIf you’d like to join Apple’s free public beta program, visit beta.apple.com .\n\nDid you spot anything new in today’s public beta? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-bf98ea8d28f1315b",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/06/apple-releases-second-ios-27-2-public-beta-with-new-iphone-health-app/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-06T17:04:16.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple releases second iOS 27.2 public beta with new iPhone Health app",
+        "summary": "Apple has released the second iOS 27.2 public beta, which includes the all-new Health app on iPhone. more…",
+        "body": "Apple has released the second iOS 27.2 public beta, which includes the all-new Health app on iPhone.\n\niOS 27.2 is the next release that will follow the official launch of iOS 27 from September 14. iOS 27.1 is just for iPhone Duo.\n\nThe first iOS 27.2 public beta included these changes:\n\niOS 27.2 is set to be released officially later this month. For now, there’s both a developer beta and public beta path for iPhone users looking to test the new Apple Health app early.\n\nDo more with your Apple products\n\nAirPods 5 | Apple’s newest wireless headphones\n\nApple AirTag 2 | Add Find My tracking to keys, bags, bikes, more\n\nAirPods Pro 3 | Apple’s best wireless headphones\n\nWireless CarPlay Adapter | No more plugging in required\n\nBeats USB-A to USB-C Cable | The official CarPlay cable"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-5793f60c66d5596d",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2277441/dont-throw-away-old-digital-camera-do-this-instead/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-06T16:45:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Don't throw away your old digital camera — do this instead",
+        "summary": "Your old camera might give video calls an upgrade, as long as USB support or clean HDMI keeps the setup sensible.",
+        "body": "Your old camera might give video calls an upgrade.\n\nOld digital cameras are making a weird comeback, so it may feel a bit more difficult to justify throwing one in the electronics recycling bin than it would have a few years ago. According to the Camera & Imaging Products Association, shipments of built-in-lens digital cameras grew 29.6 percent in 2025 to approximately 2.44 million units, and are projected to increase an additional 13.6 percent in 2026. (CIPA didn't attribute that growth specifically to the current trend of retro digicams.)\n\nIf you already have one lying around, however, there's another reason to keep it. There are a lot of older DSLRs, mirrorless cameras and even some compact cameras that can be used as webcams. That can translate to improved low-light performance, greater control over framing or the natural background blur that laptop webcams devote a lot of software to trying to replicate. The trick is finding out whether yours can do it without turning a free upgrade into an expensive side project.\n\nStart with the specific model number and the manufacturer's webcam compatibility list. Canon's EOS 6D and EOS Rebel T6 are still supported, as are Nikon's D5300 and D750 with its Webcam Utility and Sony's A5100, A7 II and RX100 IV with Imaging Edge Webcam.\n\nIf your camera is listed, then setup can be rather simple. Install the manufacturer's webcam software if required, connect the camera using a USB data cable , put it into the appropriate video or remote mode and select it as the camera in Zoom, Google Meet or Microsoft Teams. You might already have everything you need.\n\nHowever, a larger camera does not necessarily result in a clearer webcam picture. Some older supported Nikon DSLRs use only the VGA portion of Nikon's XGA live-view display, so a newer dedicated webcam might be able to capture more detail. Depending on the camera model, the camera can compensate for some of this ground with a larger sensor, better low-light performance and control over the lens.\n\nAudio and power should be checked as well. Nikon and Sony say their webcam utilities don't send the camera's microphone audio to the computer, which means using your laptop mic or a separate microphone. If you're using live view for a long meeting, it will also drain the battery, so if the camera allows, external power might be worth setting up.\n\nThe experiment doesn't have to stop if there is no support for USB webcam. Cameras with clean HDMI output can be connected through a capture device, which then shows up as a webcam on your computer. \"Clean\" is the important word here. No one wants autofocus boxes, exposure settings and a flashing battery icon on the weekly Teams call.\n\nContinuous operation matters as well. Elgato suggests checking if power saving can be turned off and if the camera can be powered externally while transmitting video. There are some older cameras that were not meant to be used as desk accessories for hours.\n\nThe issue is cost. Elgato's Cam Link 4K is priced at $99.99, excluding an HDMI cable, mount and/or possibly a dummy battery. Our current webcam guide , on the other hand, covers the 2K Anker PowerConf C200 at $60, which comes with microphones and a much simpler USB setup. Mac users might also be able to use a compatible iPhone, while Windows 11 users can use a compatible Android phone as a webcam for free.\n\nAlso consider the resale value of the camera before buying accessories. Some of the older digicams have been sold for much more than owners would expect because of the interest in them. According to B&H , one of its writers purchased a Canon PowerShot S95 for $130 in 2023, and it was selling for an average of over $400 in 2026."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-ce7792867a50fc5c",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/column/1005697/we-cant-just-change-the-definition-of-recording",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-06T16:29:44.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "We can’t just change the definition of ‘recording’",
+        "summary": "With AI hardware, tech companies are pushing the definition of what does and doesn't constitute a recording. For most of gadget history, it'd be reasonable to assume that a device with a microphone or camera is either recording you or it isn't; it's either on or off, without much gray area. Microphones capture sound. Cameras […]",
+        "body": "With AI hardware, tech companies are pushing the definition of what does and doesn't constitute a recording. For most of gadget history, it'd be reasonable to assume that a device with a microphone or camera is either recording you or it isn't; it's either on or off, without much gray area. Microphones capture sound. Cameras capture images. That data is saved onto a device. Sometimes, it's also sent to the cloud - hopefully with end-to-end encryption - for processing. That data is a preserved instant in time and is therefore a recording.\n\nPerhaps not anymore.\n\nLast week, Bloomberg 's Mark Gurman reported that Apple is working on a smart hom …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-df175c86bc129523",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2277410/android-phone-how-to-check-security-updates/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-06T16:15:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "android"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "How to check if your Android phone is still getting security updates",
+        "summary": "Your Android device will only receive updates for so long, and it might have already left its support period without you realizing.",
+        "body": "Your phone could be out of support even though it seems to be running fine otherwise.\n\nYour phone doesn't blare an alarm the day it stops getting security patches; there's no banner warning or anything else like that. Support simply ends, and your device keeps working exactly as it did the day before. This can make you think everything's perfectly OK, and for a while, it is. But that false sense of security is exactly how people keep using phones that can become targets due to their outdated software.\n\nSecurity updates matter more than all the fancy new features you get with Android version upgrades. While version updates add features, security patches close the vulnerabilities that attackers can exploit to steal data or install malware. A phone can look and feel fine while running for a long time without the patches that actually keep it safe.\n\nThe tricky part is that your device can't tell you whether more updates are coming; it can only show you the last one it received. Figuring out where you stand takes a little digging across a few different sources.\n\nStart on your phone: open Settings , tap About Phone , then look for Android version (or Software information for Samsung phones). This is where you can see the Android version, security patch date and Google Play system update status. The patch date tells you when your phone last received a fix, not whether it's still eligible for future ones. As a general rule of thumb, if the date is more than three to six months old, it's a good sign that your device could be approaching, or has already passed, its support cutoff.\n\nIt's also worth checking Settings > System > Software update , where you can see if there's an update waiting for you. You also shouldn't overlook Google Play system updates, either — these roll out separately from full OS updates and patch core components like media playback and connectivity, giving your phone extra protection between bigger releases. To do so, open the Play Store , tap your profile icon, choose Manage apps & device , then hit See details under Updates available to view the apps (including Google Play Services) that have a new version ready.\n\nIt's great that you can check all this on your phone, but none of it confirms your device's remaining support window. For that, you need to look to other sources.\n\nManufacturers rarely advertise an expiration date, which is where endoflife.date comes in handy. Under Operating Systems > Android OS , compare the version of Android on your device to see if it's still supported with security updates. Then, open the Device list and search by brand to pull up a table listing the exact date when each model will stop receiving security patches. The Samsung Galaxy S26 FE , for instance, will get both Android and security updates until September 2033, while the Google Pixel 6 Pro reached end of support in October 2026.\n\nEach manufacturer has its own calendars. Google builds Android, but the manufacturer decides how long your phone gets updates for. Each one takes the Android release, builds its own interface on top (like One UI for Samsung or OxygenOS for OnePlus) and bundles in the security fixes along with its own features. That extra layer is also why updates don't land everywhere at once. Pixel phones get them faster since Google prioritizes its own hardware, while other brands need time to adapt each patch to their own software.\n\nManufacturers' commitment to updates differs too. A few examples:\n\nGoogle : Pixel 8 and newer models get seven years of security and OS updates.\n\nSamsung : Starting with the Galaxy S24 line and Z Fold/Flip6, the company offers seven years of support. Older Galaxy A-series and flagships from 2019 and later get four years, while some budget models stretch to six years.\n\nOnePlus : For the OnePlus 12, the company offers four years of OS updates and five years of security patches. The latter is upped to six years for the OnePlus 13.\n\nNote that these timelines apply from when the phone was first sold, not when you buy one. Interestingly, the European Union is working to make phones last longer. Starting June 2025, the EU's Ecodesign for Sustainable Product Regulation requires manufacturers to provide at least five years of software updates for new smartphones sold within the region.\n\nAn unsupported phone doesn't stop working, but it does become a growing liability, especially if you use it for sensitive purpose like banking apps and password managers. Replacing an old device isn't always something you can do immediately, so there are some changes you should make to limit exposure if your phone is in its last year of support or already expired.\n\nFirst, to ensure your Android phone is secure , you should enable automatic app updates through Google Play to avoid security flaws within apps. Also, avoid sideloading apps from outside the Play Store. Turn on two-factor authentication for your Google account and other sensitive logins, and enable automatic backups so you don't lose data if something goes wrong. You should also run an audit on your installed apps and delete those you no longer use, while revoking sensitive permissions where they aren't strictly necessary. Avoid using public Wi-Fi networks unless you're running a VPN . In this way, you protect your data as best you can without OS updates.\n\nIf your phone's last security patch is more than six months old or you've realized you're past your model's cutoff, it's time to consider upgrading to one of the best Android phones . Pixel and Samsung flagship devices currently offer the longest update periods. Whatever you end up choosing, make sure to check its update promise before you buy so you don't have to think about this for a while."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-9946171a0d90d331",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/06/anthropic-gives-startups-a-free-year-of-enterprise-service-and-1000-in-token-credits/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-06T16:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Anthropic is giving startups a free year of Claude Team and $1,000 in credits",
+        "summary": "\"We created this program because we believe the benefits of AI will reach most people through the companies that build on top of models, rather than through the models alone.\"",
+        "body": "Posted:\n\nOn Tuesday, Anthropic announced an expansion of its Claude for Startups program, offering subsidized access to its AI models and a variety of other benefits to qualifying companies.\n\nThe new version of the program, which launched as part of Anthropic’s SF Tech Week event , provides a free year of Claude Team, Anthropic’s paid plan for groups, with up to five premium seats, as well as $1,000 in API credits for building with Claude. Companies will also get access to Claude Marketplace, which lets them build plug-ins for the service. Companies can also book virtual office hours with Anthropic’s Applied AI team.\n\n“We created this program because we believe the benefits of AI will reach most people through the companies that build on top of models, rather than through the models alone,” Anthropic said in an announcement. “That makes partnering closely with founders and developers central to our mission.”\n\nCompanies are eligible if they were founded in the last five years or received funding in the last two years. Interested companies can apply through the Claude for Startups program page."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-eab743a695812aa1",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/gadgets/1005671/arturia-astrolab-synth-firmware-update",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-06T16:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Arturia adds proper sound design tools to its AstroLab synths",
+        "summary": "Arturia's AstroLab series was already amongst the best stage keyboards out there. They essentially put the company's AnalogLab suite of vintage synth emulations, sampled pianos, and original instrument plugins into playable hardware. But they were ultimately glorified preset browsers. You could lightly tweak patches using the four macro controls, or dial in some effects, but […]",
+        "body": "Arturia's AstroLab series was already amongst the best stage keyboards out there. They essentially put the company's AnalogLab suite of vintage synth emulations , sampled pianos, and original instrument plugins into playable hardware. But they were ultimately glorified preset browsers. You could lightly tweak patches using the four macro controls, or dial in some effects, but you couldn't do any real sound design. That's all changed now with the AstroLab 2.0 update.\n\nThe latest firmware adds a Sound Edit menu that lets you dig into the individual parameters of any instrument. It's not super intuitive to quickly fire up a blank patch from the …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-fb9a54b156e9d50e",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2277240/how-to-supercharge-windows-11-pc-built-in-automation-tool-task-scheduler/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-06T15:45:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "How to supercharge your Windows 11 PC with this built-in automation tool",
+        "summary": "Task Scheduler isn't a particularly pretty part of Windows, but it's a powerful tool if you take the time to understand it.",
+        "body": "Windows 11 can automate more of your PC routine than its aging Task Scheduler interface suggests.\n\nTask Scheduler has been part of Windows for years, but it's so old-school that you might have written it off. Ignore the gray menus, though, and there's a surprisingly capable automation tool underneath. Microsoft explains that Task Scheduler waits for a trigger you configure, then runs the associated task when it fires. This trigger may be a specific time, Windows startup, your login or even a system event.\n\nTask Scheduler won't magically make your processor faster, and that's not its intended purpose. What it can do is take repetitive tasks off your hands, delay apps that normally flood Windows the moment you log in and execute commands or scripts while you're busy with something more fun. Those are pretty neat tricks for a tool that appears to have been absent from the last decade of Windows redesign meetings.\n\nTo get started, type \"Task Scheduler\" into the Start menu and click it. You'll be greeted with a fairly busy interface; ignore most of it for now. Select Create Task in the right Actions pane. Avoid Create Basic Task ; it's friendlier, but the full option reveals the controls that make Task Scheduler worth using.\n\nFrom there, here's how to set up a task:\n\nThose conditions are of special concern to those on a laptop. According to Microsoft , a task that runs every five minutes will prevent a PC from entering a low-power idle state. Instead, you should use event, idle or maintenance triggers for tasks that do not require constant polling.\n\nDon't enable Run with highest privileges unless the task truly needs to run as an administrator. Automation is great, but the less running as an administrator, especially without your explicit input, the better.\n\nAn example of putting the task manager to good use is keeping supported apps up to date with WinGet. Microsoft's package manager can check for newer versions of installed software, and winget upgrade --all will attempt to upgrade eligible installed packages it recognizes.\n\nYou can make it a weekly task with this:\n\nwinget upgrade --all --silent --accept-package-agreements --accept-source-agreements --disable-interactivity\n\nExecute the command manually prior to scheduling it. Not all apps are managed by WinGet, and pinned packages are skipped by default. Some installers may still require elevation.\n\nAnother option addresses the well-known startup frenzy. Trimming unnecessary startup apps can make the logon process faster, but Task Scheduler gives you a middle ground: disable an app's normal startup entry, then launch it with a delayed logon trigger instead. A cloud storage client or other commonly used app can appear a few minutes later, rather than competing with everything else to get your desktop ready to go.\n\nTask Scheduler also works well with PowerShell if you have scripts you've already tested, like copying files to another location or doing your own PC housekeeping . Conditions can ensure the job waits for idle time or AC power instead of barging in halfway through something important.\n\nPower Automate for desktop is better suited to automations that require clicking through apps or interacting with interfaces. However, broader cloud and unattended automation can require paid licenses.\n\nAlso, there's little reason to automate maintenance Windows already performs itself. Storage Sense can automatically delete temporary files and items in the Recycle Bin, while Windows automatically optimizes both HDDs and SSDs."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-5ba545ede88493b3",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/06/apples-huge-macbook-pro-overhaul-is-coming-soon-heres-what-we-know/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-06T15:25:02.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple’s MacBook Pro overhaul is coming soon, here’s what to expect",
+        "summary": "Apple just released a MacBook Pro update in March, but there’s more coming soon. Apple is expected to debut one of its biggest MacBook Pro updates ever as soon as later this year. Here’s everything we know so far … including details on a surprising recent twist. more…",
+        "body": "Apple just released a MacBook Pro update in March, but there’s more coming soon. Apple is expected to debut one of its biggest MacBook Pro updates ever as soon as later this year. Here’s everything we know so far … including details on a surprising recent twist.\n\n9to5Mac is supported by Sony : Sony is running a massive sale on its best BRAVIA TVs, ranging from its entry-level to flagship options — shop now to save !\n\nThe new MacBook Pro will switch from mini-LED to OLED display technology. This will mark the first time Apple has used OLED in a Mac, having previously used it on the iPhone, iPad, and Apple Watch. This has been reported by sources including Ming-Chi Kuo and Bloomberg .\n\nThe MacBook Pro’s rumored OLED display would offer true blacks, higher contrast, and potentially more vibrant colors compared to today’s mini-LED screens. That’s because OLED can turn individual pixels completely off, while mini-LED still relies on a backlight system.\n\nOLED isn’t the only big display change coming with the refreshed MacBook Pro, though. It will also be Apple’s first-ever touchscreen Mac .\n\nAs reported by Bloomberg , Apple is optimizing macOS to take advantage of the MacBook Pro’s touchscreen. For example, when you touch a button or a control, macOS will dynamically adjust to show you relevant touch controls. If you tap on the menu bar, controls will automatically enlarge to make it easier to navigate with your finger.\n\nIt will also support common touch interface interaction methods, like pinching and zooming, and faster scrolling.\n\nSo, it’s a lot more than Apple simply adding a touchscreen to a Mac. It’s a rethink of macOS to make touch navigation feel fluid and natural.\n\nCurrently, the MacBook Pro features a notch cutout that houses the FaceTime camera. With this year’s MacBook Pro, however, Apple will reportedly ditch the notch in favor of a hole-punch cutout for the camera.\n\nAdditionally, Apple is planning to bring the Dynamic Island to the Mac for the first time. This will likely work like the iPhone, where the Dynamic Island masks the cutout for the FaceTime camera and displays software interface elements such as Live Activities and notifications.\n\nWith the 2021 MacBook Pro, Apple reversed course and made it thicker than its predecessor. It also added back ports, including MagSafe, HDMI, and an SD card slot. The 2016-2020 MacBook Pro’s industrial design famously had only four USB-C ports.\n\nThis year, however, Apple is reportedly planning to make the MacBook Pro thinner once again. We don’t have any specifics on this just yet, and it’s unclear whether Apple will remove any ports to accommodate this change.\n\nOne key difference nowadays is Apple Silicon. The 2016-2020 MacBook Pro models used Intel chips that were less efficient than Apple’s own M-series chips. Apple Silicon should mean Apple can make the MacBook Pro thinner without compromising on those things.\n\nThe new MacBook Pro will also be “significantly” lighter than its predecessor, according to Mark Gurman:\n\nBut there is one other major difference, I’m told: The new MacBook Pros are lighter — significantly lighter. Apple has reengineered the machine’s interior, miniaturizing parts and rearranging components to make the computer much easier to carry.\n\nIt was widely expected that the new MacBook Pro models would be powered by the M6 Pro and M6 Max chips.\n\nIn a new twist, however, it sounds like this update will actually use the same M5 Pro and M5 Max chips as the current MacBook Pro models.\n\nThe decision comes as Apple is reportedly skipping higher-end chips in the forthcoming M6 generation. Instead, the M6 will be available only in its base configuration, with no M6 Pro, M6 Max, or M6 Ultra variants.\n\nApple is shifting its focus to the M7 generation, including the M7 Pro and M7 Max chips. These will reportedly focus on significant improvements to AI performance.\n\nFinally, it wouldn’t be an Apple rumor cycle without speculation about naming.\n\nMark Gurman has speculated that Apple might brand these laptops as MacBook Ultra. This name would “more clearly signal their position at the top of the lineup,” he reasoned.\n\nThe latest development that the new MacBook models will use M5 Pro and M5 Max chips adds a new wrinkle to the marketing decisions Apple will have to make.\n\nApple is expected to debut the new MacBook Pro lineup in October or November. It may seem weird that Apple would update the MacBook Pro twice this year, but it’s not unprecedented .\n\nWhat do you think of Apple’s plans for a major MacBook Pro overhaul coming soon? Are you planning to buy a MacBook Pro? Let us know down in the comments.\n\nFollow Chance : Threads , X , and Instagram"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-2b2369b2eb3e8cb3",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/06/libreoffice-says-no-ai-is-now-a-software-feature/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-06T15:25:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "programas-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "LibreOffice says ‘no AI’ is now a software feature",
+        "summary": "The maker of the open source document editor says it has no plans to add AI to its software's default configuration, citing user privacy.",
+        "body": "If you’re looking for a document editor that doesn’t use artificial intelligence, LibreOffice may be just the software for you.\n\nThe Document Foundation, the nonprofit software maker behind the open source document editor LibreOffice, said in a blog post this week that while it does not reject AI out of hand, it “will not add” AI to its software for the foreseeable future.\n\nThe blog post comes weeks after the release of the latest version of LibreOffice in late August, in which the nonprofit reiterated that the software “contains no generative AI features.”\n\nLibreOffice said at the time that this was a “deliberate design position” to ensure that users’ documents are not uploaded to a server for processing and that no part of the software requires a network connection to function. The nonprofit added that its software is used by tens of millions of people and organizations, and that users should retain control over their data.\n\n“Any organisation handling confidential, legally privileged or personal data needs to know where that data goes, and the only assurance that survives an audit is that it does not leave the machine,” the organization said.\n\nLibreOffice says users can still choose to use AI tools by installing software extensions that connect the document editor to local AI models.\n\nThe decision to eschew including AI features bucks the trend of many software makers today that try to pack in as much AI as possible, even to the detriment of the user experience. The so-called “enshittification” of modern software by packing in unnecessary and bloated features, like chatbots and AI assistants, prompted some developers to create or include features that block or remove AI features altogether.\n\nAI tools often require the users’ data to be uploaded and processed on a remote server, which the user has no control over how the data is stored or for how long.\n\nLibreOffice said that there is currently “no integration” that meets all of its requirements, such as ensuring that the users’ data stays on their device and that there is no reliance on a single AI provider, among other considerations. The organization’s criteria for including AI into its software is not a “definitive rejection,” but the decision was an assessment of the technology today, rather than a “judgement on the value of the sector.”\n\n“Until then, there will be no AI of any kind in the default installation; extensions will be available for those who wish to integrate AI features, and we will closely monitor where the technology is actually heading,” said LibreOffice’s blog post .\n\nLibreOffice is one of the many kinds of open source and alternative software used to escape the clutches of Silicon Valley tech giants."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-3a986ae329d2d6d3",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/06/mistrals-new-1t-model-aims-to-leapfrog-closed-and-open-rivals/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-06T14:33:16.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Mistral’s new 1T model aims to leapfrog closed and open rivals",
+        "summary": "French AI lab Mistral AI has released Mistral Large 4, a new large multimodal model aiming to leapfrog both American and Chinese rivals.",
+        "body": "The race between open and closed AI is on, and Europe is still in the mix. On Tuesday, French AI lab Mistral AI released Mistral Large 4 (ML4), a new large multimodal model aiming to leapfrog both American and Chinese rivals — following what French president Macron described as “a third way in AI.”\n\nAmid a growing divide between closed models that can be unplugged and open models that are often made in China, Mistral is positioning ML4 as an alternative to both. Nicknamed Le Chonk in reference to its 1 trillion parameters, ML4 is definitely not small; but is not an open-weight model yet. For the time being, it can only be accessed via a public guardrail endpoint, but Mistral plans to make its weights available in just three weeks, after safety testing is complete.\n\n“In the meantime, we’ll work with trusted partners and governments to make sure that the open source weights can be used to defend, but not to [perform] malicious attacks,” Mistral VP Science Pierre Stock told TechCrunch.\n\nSecurity concerns have been mounting in recent months, particularly among Mistral’s core audience — enterprises and institutions. At the same time, an open-weight model is easier to audit, Stock said.\n\nAnother important behind-the-scenes aspect is that ML4 was trained entirely on Mistral’s compute; using only 4,000 Nvidia GPUs “which is two to three times less than our Chinese competitors, and significantly less than the closed source competitors,” Stock said.\n\nWith benchmark results still pending, Mistral hopes ML4 will be best in class among open-weight models, especially outside of China, but not only, Stock said. Thanks to focused training, it could also outperform closed models in specific areas that are key to its customers, and where multimodal capabilities can add value.\n\nAccording to Stock, ML4’s optimized use cases include cybersecurity and finance, but also chip design, which is core to two of Mistral’s main backers — Dutch giant ASML, which led its Series C , and Samsung, which led its Series D last month at a €21 billion valuation (about $24.39 billion).\n\nAt the time, the company tried to convey that its decision to host Chinese models wasn’t a pivot into becoming a mere inference provider . With Le Chonk in its corner, the company believes it should still be considered a frontier lab as well."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-4afb8a7f44205ead",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/security/2026/10/openai-agents-tried-to-hack-wikipedia-tools-and-flooded-it-with-traffic/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-06T12:21:53.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "OpenAI agents tried to hack Wikipedia tools and flooded it with traffic",
+        "summary": "The reports of OpenAI agents harming 3rd party sites keep coming.",
+        "body": "The publisher of Wikipedia said Monday that OpenAI agents attempted to hack a note-taking tool it hosts, made unauthorized edits, and sent millions of resource-intensive requests to its infrastructure, in the latest instance of OpenAI systems taking harmful and potentially dangerous actions.\n\nThe objective of some of the OpenAI agents’ actions, the Wikimedia Foundation said , was to use Wikipedia as a proxy for fetching data from third-party sites. In one case, the agents posted “malicious edits” that were intended to repurpose a citation tool as a proxy. In another, the agents made unsuccessful attempts to compromise the Wikipedia Etherpad note-taking tool so it would serve the same purpose.\n\nThe agents also made millions of automated API requests, crawled millions of pages, and made hundreds of thousands of queries to the Wikidata Query Service. The last action may have contributed to a partial shutdown of the query service in May, the publisher said.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
     "id": "nvda-es-4824d343899e5a64",
     "type": "news",
     "sourceId": "nvda-es",
@@ -20,293 +307,6 @@
         "title": "Ya disponible la cuarta beta de NVDA 2026.3",
         "summary": "Tal y como ha anunciado NV Access mediante esta publicación, la beta 4 de NVDA 2026.3 ya se encuentra disponible para descarga y pruebas. Si quieres saber qué ofrece la próxima versión de NVDA antes de que se libere oficialmente, no dudes en descargar esta beta y proporcionar comentarios por los canales de la comunidad, … Continuar leyendo \"Ya disponible la cuarta beta de NVDA 2026.3\" La entrada Ya disponible la cuarta beta de NVDA 2026.3 se publicó primero en NVDA en español .",
         "body": "Tal y como ha anunciado NV Access mediante esta publicación , la beta 4 de NVDA 2026.3 ya se encuentra disponible para descarga y pruebas. Si quieres saber qué ofrece la próxima versión de NVDA antes de que se libere oficialmente, no dudes en descargar esta beta y proporcionar comentarios por los canales de la comunidad, o por el sistema de informe de fallos de NV Access . Esta versión no es apta para entornos de producción. Al instalar esta beta te unirás al canal beta, y sólo recibirás avisos de actualización de compilaciones beta y candidatas a liberación (rc). El canal beta/rc siempre te mantendrá al día con la versión más reciente de NVDA. La última rc de un ciclo de liberación es idéntica a la última versión estable. Para regresar al canal de versiones estables, instala a mano la última versión estable.\n\nEsta versión incorpora importantes mejoras de rendimiento, mejoras en los diálogos de NVDA, y entrada expandida por la pantalla táctil. Se han hecho varias mejoras para reducir los retrasos y aumentar el rendimiento. Ahora NVDA recupera y captura más información sobre los controles en segundo plano, mejorando el rendimiento en controles como cuadros combinados y el explorador de archivos. NVDA ya no hace que se rompan el explorador de archivos u otras aplicaciones al cerrarlo o reiniciarlo. NVDA se recupera ahora más rápido cuando una aplicación deja de responder, y ya no se colgará ni inundará el registro con errores en aplicaciones que no responden. En regiones vivas de texto, como las terminales, NVDA ya no se cuelga cuando se vuelcan en pantalla importantes cantidades de texto. Se han añadido menús de contexto y atajos de teclado a los diálogos de perfiles de configuración, gestos de entrada y diccionarios del habla, haciendo que estos diálogos sean más fáciles de usar con el teclado. Ahora también es posible cambiar directamente un gesto existente en el diálogo Gestos de entrada. Se ha modernizado el diálogo que presenta mensajes explorables y ahora soporta mejor cambiar su tamaño, maximizarlo y minimizarlo. Se ha expandido significativamente la entrada por pantalla táctil. Los gestos de dos deslizamientos secuenciales ahora combinan dos deslizamientos en rápida sucesión en un solo gesto, incrementando enormemente la cantidad de gestos asociables. También se soportan ahora los gestos de borde, permitiendo que los gestos que comiencen a 15 mm de cualquier borde de la pantalla se asocien independientemente de los mismos gestos realizados en el centro de la pantalla. Se ha añadido una nueva orden sin asignar para mover el cursor del ratón al centro de la vista ampliada. Se puede usar el OCR de Windows con la lupa o la cortina de pantalla activadas. Se ha actualizado Liblouis con nuevas tablas braille en Elfdaliano, sami, maorí, braille unificado inglés de Nueva Zelanda, y aitiano criollo, una tabla noruega para texto en español, y variantes adicionales de sueco de 6 y 8 puntos. Se ha actualizado Espeak NG añadiendo soporte para liguriano y abkhaz. Para instalar esta beta, puedes configurar el canal «rc y beta» en el complemento Selector del canal de actualización y buscar actualizaciones desde el menú Ayuda de NVDA, o actualizar desde una beta anterior. Y como siempre, también puedes descargar manualmente el instalador de NVDA 2026.3 beta 4 . Su suma de comprobación SHA256, que te permitirá garantizar la integridad del archivo descargado, es 8be91476179710c4abffe5094459df9be1696d92e5d6cd0ace47d52321bb87ab. ¡Feliz martes!\n\nLa entrada Ya disponible la cuarta beta de NVDA 2026.3 se publicó primero en NVDA en español ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-804296941d389fc9",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1005177/google-gemini-call-for-me-expansion-rumors",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-05T23:09:55.000Z",
-    "categories": [
-      "tecnologia-general",
-      "android",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Gemini Call for Me might tell your mom you’re running late",
-        "summary": "Google may be expanding its \"Call for Me\" AI feature beyond business calls so you can use it to send messages to friends and family. Android Authority reports finding a \"Gemini Calling\" introductory screen in an APK teardown with examples that include \"Call Mom and tell her I will be 15 minutes late\" and \"Call […]",
-        "body": "Google may be expanding its \"Call for Me\" AI feature beyond business calls so you can use it to send messages to friends and family. Android Authority reports finding a \"Gemini Calling\" introductory screen in an APK teardown with examples that include \"Call Mom and tell her I will be 15 minutes late\" and \"Call John and ask if he is coming for dinner.\"\n\nBased on those examples, even with this expansion, Gemini would likely be limited to basic, text message-like calls. While Google's AI might not automate an entire catch-up phone call with your relatives, it could deliver quick messages to people who prefer a phone call, miss texts often, or …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-88a5b15fd474afb1",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2276431/mini-pc-vs-laptop-better-for-home-office/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-05T23:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Mini PC vs. laptop: Which is better for your home office?",
-        "summary": "Mini PCs offer a convenient form factor, but a laptop is ready to go with you anywhere. There's no perfect answer.",
-        "body": "A laptop can become a desktop with one cable, making the home-office choice less obvious than it looks.\n\nI own both a mini PC and a laptop, and I prefer to have the mini PC on my desk. It doesn't take up much space and fades into a setup that revolves around the monitor, keyboard and mouse I actually use. The small box becomes a part of the office and an organized desk .\n\nHowever, a laptop can do the same. Plug one into a big screen via HDMI, throw in a wireless keyboard and mouse, and the basic experience is pretty close. This can get even better with a compatible USB-C or Thunderbolt dock to manage displays, peripherals, networking and charging all in one. When both computers are set up at a desk, the gap between them becomes tiny.\n\nWhat you're paying for and whether the computer needs to leave that desk are the more important questions.\n\nWhile their name implies a desktop PC that's been hit with a shrink ray, there are plenty of mini PCs based on hardware that would be perfectly normal in a laptop. For instance, the ASUS NUC 15 Pro supports Intel's Core Ultra 7 265H (a mobile processor), along with SO-DIMM memory and M.2 SSD storage.\n\nThere's a practical explanation for that. When you're attempting to fit a whole computer into a box that's small enough to fit behind a monitor, laptop components are quite convenient. But similar parts don't guarantee identical performance. Cooling, firmware and manufacturer-set power limits all have an impact on what a processor can sustain, especially when you put it to work for more than a quick benchmark. Thus, two machines with the same CPU name can still behave differently.\n\nUpgradeability varies too, which is one of the main downsides of a mini PC . The NUC 15 Pro offers two SO-DIMM slots and two M.2 storage slots on supported configurations, offering greater flexibility for memory and storage upgrades than some thin laptops with soldered memory. Not all configurations include memory or storage from ASUS, however.\n\nThat last detail is important for fair price comparisons. When you start adding RAM, an SSD and perhaps an operating system to the list of items, a bargain-looking barebones mini PC can turn into less of a value.\n\nThe same reality check applies to graphics. Integrated graphics are just fine for email, office apps, video calls and browser-intensive tasks. If you're doing demanding video editing, 3D work or any other GPU-intensive task, don't assume that the small desktop box has more graphics power than a laptop.\n\nA mini PC has straightforward appeal compared to a laptop: you're buying the computer without the built-in screen, battery, keyboard and trackpad that may go unused for the majority of its lifespan. That's largely why I enjoy mine. I prefer to have a machine that's part of the workspace and always available. But a laptop has a pretty good response to that argument, and it's a single cable.\n\nWith a compatible docking station , a laptop can connect to external displays, Ethernet, a keyboard, mouse and other USB devices simultaneously. Supported models can also be powered from the same dock (specific capabilities vary by laptop and dock). Close the lid, tuck the machine into a stand and your day-to-day setup can feel like one built around a mini PC.\n\nThe difference is evident when you have to travel. Unplug the laptop and the same computer comes with you, including your local files, apps, browser sessions and settings. There's only one machine to maintain — no need to wonder which computer has the document you definitely saved five minutes before a meeting.\n\nBut that doesn't mean a laptop is the obvious home-office option. Mini PCs can be compact, flexible and even more cost-effective if your computer doesn't move around much and you already have a monitor and peripherals. If you're a frequent traveler, work in various locations or want to keep everything on one machine, a docked laptop might be the better choice."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-afbb9aff22beae89",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/05/this-tool-frees-up-apple-intelligence-storage-on-macos-but-think-twice-before-using-it/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-05T22:55:49.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "This tool frees up Apple Intelligence storage on macOS, but think twice before using it",
-        "summary": "A new open-source tool is going viral over its promise to let users who aren’t interested in Apple Intelligence reclaim 12GB or more of storage on their Macs. Here are the details. more…",
-        "body": "A new open-source tool is going viral over its promise to let users who aren’t interested in Apple Intelligence reclaim 12GB or more of storage on their Macs. Here are the details.\n\nLike many companies adding AI tools and models across their platforms, Apple has faced criticism for features that take up storage space some users consider unnecessary.\n\nWhile Apple Intelligence required up to 7GB of storage on macOS 26, that figure has increased significantly on macOS 27 , with Apple now saying its latest models can require up to 14GB on newer Macs.\n\nIn response to this, indie developer Om Lahore published a project called RemoveMacAI on GitHub late last week, which promises to “turn off Apple Intelligence on macOS 27 and remove its downloaded models.”\n\nAs Lahore explains, his tool enables a configuration profile that applies Apple’s own restriction keys to turn off Apple Intelligence features, while also using the company’s asset service to remove downloaded models and prevent macOS from downloading them again.\n\nHe also explains exactly what the tool removes, which features it disables, and what users can expect after running it:\n\nFeatures turned off: Siri (including “Hey Siri” and the menu bar icon), Writing Tools, Genmoji, Image Playground, the ChatGPT extension, summaries in Mail, Messages, Safari, Notes and notifications, Mail smart replies, inline text predictions, Spatial Photos, Photos Clean Up and Xcode predictive code completion.\n\nModels removed: the Apple Intelligence foundation models and the models for image generation and Genmoji, Spatial Photos, Photos Clean Up and Xcode code completion.\n\nAnd\n\nWhat stops working? The features listed above, apps that use Apple’s on-device models (the Foundation Models framework and the Use Model action in Shortcuts), Visual Intelligence and natural-language editing in Calendar.\n\nLahore notes that dictation still works after running RemoveMacAI, as it “is a separate setting, and its speech models are not removed.”\n\nFinally, he adds that the entire process can be reversed, with full details and instructions available here .\n\nWhile part of the outcry over how much storage Apple Intelligence takes up on the Mac appears to be the same knee-jerk reaction against anything AI-related, there is a legitimate argument to be made for users with limited internal storage, particularly on 256GB Macs, where reclaiming 12GB or more can make a meaningful difference.\n\nThere is also a broader question of basic control over one’s own operating system, as users who have no interest in Apple Intelligence should arguably have a straightforward way to turn it off completely and recover the storage its models occupy, just as they can with other apps and certain optional parts of the system.\n\nThat said, there is no telling whether Apple will attempt to get the project removed from GitHub, or change the underlying mechanisms in macOS to make Apple Intelligence models harder to remove.\n\nLikewise, there is no way to know how disabling or removing these components could affect macOS itself going forward, or even third-party apps that increasingly rely on Apple’s models to provide basic functionality.\n\nWhile RemoveMacAI is open source and does not require disabling System Integrity Protection, it still relies on configuration profiles, restriction keys, and system services that Apple could change at any time.\n\nThat means a future macOS update could render parts of the tool ineffective, or potentially leave users dealing with unexpected behavior until the project is updated.\n\nFor now, anyone considering RemoveMacAI should understand that this is an unofficial third-party tool making system-level changes, and should be comfortable with the way it works.\n\nTo be completely clear , RemoveMacAI seems like a well-intentioned open-source project aimed at giving Mac users more autonomy and control over what runs on their computers and how their storage is used. It’s just impossible to know whether Apple will view it the same way.\n\nTo check out RemoveMacAI on GitHub, follow this link ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-cf494376477113fa",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2275958/extended-warranty-for-laptop-tv-worth-it/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-05T22:00:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Are extended warranties on TVs and laptops ever really worth it?",
-        "summary": "TV and laptop repairs can get expensive in a hurry, so getting a warranty sounds smart. But is it really?",
-        "body": "Or are they just another useless upsell?\n\nHave mercy on retail clerks. To keep their jobs, they're often asked to push promotions they know most customers don't want, such as memberships and credit cards. Upselling looks good on a manager's ledger, even if it irritates a good portion of their customers.\n\nIf you've been shopping for smart TVs , laptops or just about any major piece of electronics in the past decade, you've no doubt been pitched on the idea of an extended warranty, AppleCare+ and Best Buy Protection being a couple of familiar examples. At a glance, they're more reasonable than most in-store promotions. Everything breaks eventually, and the cost of some repairs can be eye-watering. Just ask anyone who's smashed the display on their MacBook.\n\nDespite this, you can safely skip an extended warranty in most circumstances. They mostly exist for the sake of an upsell, which you can tell by the strings attached and the fundamental nature of consumer electronics. When an extended plan is justified, you'll likely know before you walk in the door.\n\nFor starters, extended warranties are typically focused around defects, and any TV, laptop or similarly expensive device is likely to be covered by the manufacturer for 90 days to a year or more. This matters because if a product is defective, it's going to fail under relatively normal strain, by definition. You're liable to find out quickly if it's faulty, though there are obviously outliers.\n\nAnother point is that while planned obsolescence is real, a product that survives the first year is likely to survive past the two- or three-year window that's common for many extended warranties. In an accelerated longevity test by RTINGS , 102 TVs were run nonstop between November 2022 and September 2025. Only two actually failed before they reached 3,000 hours, and most made it to at least 8,000. This longevity test employed TVs that had already been used for hundreds of hours, so the results didn't show an initial spike for models that failed right away — a spike that would be present if the TVs were all brand-new. But again, those failures often are covered by the manufacturer and wouldn't require an extended warranty. If you watched TV for four hours a day, every day, it would take you over two years to reach that 3,000-hour mark, by which point just 2 percent of the TVs had failed.\n\nUnbiased reliability figures are harder to come by for laptops, but it almost doesn't matter for a couple of reasons. The first is that planned obsolescence factor. Within two or three years, just about any device you buy — especially a laptop — is going to be supplanted by something with improved performance for a similar price. Meanwhile, equivalent products are going to become cheaper and cheaper, especially if you're willing to buy a used or refurbished model.\n\nThat factors into the second point, which is the cost of an extended warranty vs. just saving up for a replacement or repair. To cover a $1,300 TV, for example, Best Buy charges approximately $160 for two years of Geek Squad TV Protection, and $280 for five years. While the cost of replacing the display panel could vastly exceed either sum, the retailer estimates that other repairs will typically fall between $255 and $395. You could spend most or all of the cost of a repair on a warranty you may never use, and you'll still be stuck with old hardware if you successfully pursue a claim.\n\nSome warranties include loopholes, on that note. We can't make blanket statements, but it's important to watch out for clauses that prevent you from seeking repairs if there are signs of liquid exposure or anything else that could be branded user error, regardless of whether it's the source of your problems. In other situations, you may be forced to use a manufacturer's warranty first if it's still in effect, Geek Squad Protection being a prime example.\n\nThough TVs are rarely mission-critical, there are professionals who simply can't afford any downtime with a laptop or other productivity tools, and put the equipment they own through the wringer. The cost of an extended warranty is nothing by comparison, though if you're in this camp, it's essential that you pick a plan that allows for loaner units or rapid repairs or replacements. In fact, you may be looking at special business-oriented warranties that aren't pitched over the checkout counter.\n\nIf you hate the idea of downtime but you're not necessarily a professional, it can make sense to invest in a plan like AppleCare+. That incorporates theft and loss replacements for some devices and vastly reduced prices for fixing accidental damage, including liquids. Considering that many cities have an Apple Store or at least an authorized service site, same-day repairs and replacements are a real possibility.\n\nUnfortunately, most vendors don't have such an extensive support network. If you need a repair, there's a strong chance your device is going to be shipped to a depot in another city, then back a few days later. And they may ship it back unrepaired if they can't replicate the issue you reported — something we've experienced directly. Every warranty is a gamble, in that respect."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-38228d1705fb3c30",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/05/lucid-motors-ev-output-falls-to-lowest-level-in-almost-two-years/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-05T21:54:01.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Lucid Motors’ EV output falls to lowest level in almost 2 years",
-        "summary": "The company is deliberately limiting production after years of struggling to find mass-market demand for its EVs.",
-        "body": "Lucid Motors built 2,954 electric vehicles (EVs) in the third quarter of this year, a 54% drop from a year ago, as the company purposely limits production to better meet demand for its EVs.\n\nThis was the third straight quarter in which the number of EVs Lucid built has declined. It’s also the lowest quarterly output since the first quarter of 2025, which was just after Lucid Motors started production of its second EV, the Gravity SUV .\n\nLucid delivered 3,806 EVs in the third quarter, roughly flat with the second quarter and down about 200 vehicles from the third quarter of 2025. The company has struggled to find buyers for either of its first two luxury EVs. In five of the last six quarters, it built more vehicles than it delivered.\n\nLucid’s new CEO, Silvio Napoli, has spent the last few months leading an effort to “simplify the company.” That effort has included laying off around 1,500 employees, streamlining the company’s leadership, and eliminating a second shift at its factory in Arizona in a bid to reach cost savings of $1.4 billion . Lucid also delayed the release of its third EV , the Cosmos. That model is supposed to be much cheaper, starting at under $50,000.\n\nThe third quarter figures, released Monday afternoon, come just a few days after rival EV upstart Rivian posted its best quarter in history on the back of the R2, its new, more affordable SUV . Although Rivian didn’t break out specific delivery figures for the R2, the company shipped nearly 20,000 vehicles in the third quarter , the first full quarter with the R2 in production, up from 12,194 in the second quarter .\n\nLucid’s failure to find a large market of buyers for its EVs is even more stark when compared with the promises the company made when it went public in 2021. That year, Lucid Motors merged with a special purpose acquisition company and estimated it would ship as many as 90,000 EVs in 2024 alone . The company raised $4 billion in the transaction.\n\nOn Lucid’s second-quarter earnings call in August, Napoli spoke about why he thinks the company has failed to make a dent in the EV market.\n\n“While there is no question that Lucid brought leading innovations and outstanding products to the market, we have disappointed on several fronts, and for far too long,” he said. “We have not executed consistently. We missed commitments, launched products before they were ready, underinvested in service, responded too slowly to quality issues, and allowed complexity to slow decisions down.”\n\nThe Cosmos’ lower price could, in theory, let Lucid access a wider market, but Napoli cautioned shareholders that rushing the new EV out could create more trouble.\n\n“We will not repeat the mistakes of the past by bringing a product to market before it is ready,” Napoli said on the call."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-c7f38c73971f4036",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/05/macos-27-2-reveals-new-clues-about-apples-touchscreen-macbook-pro/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-05T21:34:48.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "macOS 27.2 reveals new clues about Apple’s touchscreen MacBook Pro",
-        "summary": "Apple is widely expected to release a new touchscreen MacBook Pro as soon as this month. This will mark the first-ever touchscreen Mac, and Apple is laying the groundwork in macOS 27.2 to accommodate touch gestures. more…",
-        "body": "Apple is widely expected to release a new touchscreen MacBook Pro as soon as this month. This will mark the first-ever touchscreen Mac, and Apple is laying the groundwork in macOS 27.2 to accommodate touch gestures.\n\nApple released macOS 27.2 beta 3 to developers today, and it includes new references to upcoming support for touchscreen interactivity. As discovered by Aaron Perris for MacRumors , there are “gesture recognition tools” for several stock Apple apps:\n\nmacOS 27.2 beta 3 also adds a new long-press animation for the Dock, which could also be a hint at the forthcoming touchscreen MacBook Pro:\n\nApple has gradually made a number of changes to macOS 27 in preparation for touchscreen support, including pull-to-refresh support for the first time. macOS 27 also added touch input to Sidecar, a feature that lets you use your iPad as a secondary display for your Mac.\n\nBloomberg has also reported on Apple’s work to optimize macOS for the impending touchscreen MacBook Pro. For instance, tapping a button or control will prompt macOS to dynamically display relevant touch options. Similarly, tapping the menu bar will automatically enlarge controls for easier touch navigation.\n\nIn addition to a touchscreen, the new MacBook Pro will reportedly have an OLED display and be “significantly lighter” than the current models.\n\nApple is expected to introduce the new MacBook Pro (or MacBook Ultra?) as soon as this month, though Bloomberg has cautioned it could slip to November.\n\nFollow Chance : Threads , X , and Instagram"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-d251027b71998516",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/policy/1004926/matic-fcc-ban-waiver-conditional-approval",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-05T21:15:05.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The Matic is the first robovac to get an FCC ban waiver, not that it needs it",
-        "summary": "The Matic is our favorite robot vacuum and robo-mop, and it's also now the first to escape the FCC's Roomba ban. Well, sort of - because the Matic wasn't banned to begin with. Here's what's actually happening: On October 2nd, the FCC added the original Matic, model 4MA0001, and its charging dock model 4DK0008 to […]",
-        "body": "The Matic is our favorite robot vacuum and robo-mop , and it's also now the first to escape the FCC's Roomba ban .\n\nWell, sort of - because the Matic wasn't banned to begin with.\n\nHere's what's actually happening: On October 2nd, the FCC added the original Matic, model 4MA0001, and its charging dock model 4DK0008 to its ban waiver list . That allows the FCC to approve these radio products for import, marketing, and sale.\n\nBut the Matic doesn't need a waiver, because its radios were already approved years ago. The FCC's foreign drone, robot, and router bans only keep future products from getting imported into the United States, not existing o …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-f324ca964447b3ad",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/05/this-is-apple-musics-new-logo-probably/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-05T20:50:43.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "This is Apple Music’s new logo, probably",
-        "summary": "Apple Music seems to be rolling out a new logo, as spotted in several places including iOS 27 beta 3. more…",
-        "body": "Apple Music seems to be rolling out a new logo, as spotted in several places including iOS 27 beta 3.\n\nWhen Apple announced the opening of Apple Music Hall last month, it showcased a new logo not seen before.\n\nYou can see the new logo on the venue’s official website here , with a light version in the header and dark version in the footer.\n\nAt the time though, it was unclear whether the logo would remain exclusive to the venue branding. Its bold typeface matches that of Apple Music Hall’s overall look.\n\nSince then, however, Apple has used the new logo in Instagram Reels that are unrelated to Apple Music Hall. And now today, Aaron Perris found evidence of it in iOS 27.2 beta 3.\n\nThe official Apple Music website still has the old look, but if we learned anything from Apple’s very slow transition from Apple TV+ to Apple TV last year, it’s that the company can take its time with rebrands.\n\nA name change is a much bigger undertaking than a new logo, but it’s understandable that Apple might take a similar approach to rolling out the redesigned Apple Music logo.\n\nWhat do you think of the new Apple Music logo? Let us know in the comments.\n\nApple Music is available for $11.99/month , or you can get it as part of the Apple One bundle ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-94e1c58bf34f10d9",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/05/openai-will-start-watermarking-chatgpts-text-in-the-eu/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-05T20:36:48.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "OpenAI will start watermarking ChatGPT’s text in the EU",
-        "summary": "OpenAI will watermark ChatGPT and Codex text in the EU to comply with the AI Act. Editing can make the invisible marks harder to detect, it says.",
-        "body": "OpenAI will start adding an invisible watermark to text generated by ChatGPT and Codex in the European Union to comply with the EU AI Act, the company said Monday in a blog post .\n\nThe EU AI Act’s transparency rules , which took effect on August 2, require AI companies to mark AI-generated content in a way other systems can identify.\n\nOpenAI said the watermark will roll out over the coming weeks to eligible ChatGPT and Codex users on all plans, but only in the EU. Developers using OpenAI’s API anywhere in the world can turn it on for select models starting today; it’s off by default. OpenAI said it is not making text watermarking a global default at launch.\n\nThe watermark is not an actual symbol, but works by subtly shaping the model’s word choices, leaving a pattern readers can’t see, but a detector can pick up. Because it lives in the words themselves, it travels with the text when it’s copied and pasted. OpenAI said the watermark doesn’t identify the user, and that it saw no meaningful change in its models’ performance with it switched on.\n\nOpenAI also published a technical report for its method, called textGrain, alongside the announcement. Co-written with researchers from the University of Pennsylvania and Yale, it walks through an example of using a secret key to sort next-word predictions to finish the sentence. Add hundreds of these nudges together, and the detector can spot AI-generated content using only the text and the key.\n\nCan the watermark be removed by editing? OpenAI’s tests suggest yes. In one test, replacing 10% of words with synonyms dropped detection from about 92% to 66%. The company also said short passages, math answers, and translated text are harder to detect.\n\n“These limitations contribute to our decision to provide initial detector access only to approved researchers and expert organizations, who can help us evaluate reliability and responsible uses,” said the company.\n\nOpenAI also cautioned that a missing watermark “does not prove human authorship.” The text could be too short or too heavily edited, or it could come from another company’s AI.\n\n“[Watermarks] can indicate that an OpenAI system generated or processed part of a passage, but not how much human judgment, editing, or creativity went into it,” the company said.\n\nThe announcement comes two months after Anthropic said it would watermark text generated by Claude, a move it’s applying worldwide. That decision drew backlash from some Claude users , who argued they had supplied “the instructions, context, decisions” while Claude was just “the tool.”\n\nOpenAI had built a text watermark before but held off on releasing it, partly over concerns that users would switch to rivals that didn’t watermark, The Wall Street Journal reported in 2024.\n\nAnthropic, Google, Meta, Microsoft, and OpenAI are among the companies that have committed to following the EU’s code of practice on AI-generated content."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-b6161f08b67f25ce",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1005075/nolla-health-acne-ai-prescriptions",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-05T20:14:57.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "This startup is issuing AI-generated acne prescriptions",
-        "summary": "People in Utah can now use AI to get a prescription for acne treatment. On Monday, healthcare startup Nolla Health announced that users in the state can scan their faces using its app, allowing its AI system to analyze acne severity and autonomously write a prescription, as reported earlier by Bloomberg. The service is launching […]",
-        "body": "People in Utah can now use AI to get a prescription for acne treatment. On Monday, healthcare startup Nolla Health announced that users in the state can scan their faces using its app, allowing its AI system to analyze acne severity and autonomously write a prescription, as reported earlier by Bloomberg .\n\nThe service is launching as a pilot program with gradually loosening physician oversight. Two physicians will approve each AI-generated prescription before they're issued for the first 100 patients, but will start reviewing them only after they're prescribed for up to 500 patients. \"After that, physicians review a sample of at least 10% of …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-b5562072c78dd344",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2278051/wikimedia-links-openai-agents-to-an-outage-and-unauthorized-activity/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-05T19:55:11.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Wikimedia links OpenAI agents to an outage and unauthorized activity",
-        "summary": "Wikimedia says it's \"deeply concerned about the impact of 'rogue' AI agents on platforms like ours.",
-        "body": "The foundation says it's \"deeply concerned about the impact of 'rogue' AI agents on platforms like ours.\n\nOpenAI agents have been running amok online , and it seems the Wikimedia Foundation has been affected too. The foundation says it detected unauthorized activity from OpenAI agents on its platforms, including edits to some wikis and failed attempts to compromise a note-taking tool. It reiterated that bots have been crawling data from its platforms en masse, while agents that appear to be operated by OpenAI have made millions of requests to its public APIs.\n\nAn investigation didn't turn up any evidence that AI agents were using Wikimedia systems to coordinate their activity (as they appear to have done on non-Wikimedia-operated wikis ) and nor did the foundation detect signs of its data or systems being compromised. \"However, we are concerned about what could have occurred here, the difficulty and effort involved in investigating and attributing this activity, and the growing risks of agentic AI activity on our platforms in general,\" Selena Deckelmann, the foundation's chief product and technology officer, wrote in a blog post . \"The open web is a public good. We should not allow this behavior to become the 'new normal' for the people or organizations that maintain it.\" Engadget has contacted OpenAI for comment.\n\nIt appears OpenAI agents edited some Wikimedia wikis without permission. Almost all of these were test edits in sandbox sections of wikis and weren't visible on pages that users would generally access. There were also \"a few edits to the configuration for a citation tool, which we believe were potentially malicious edits that were intended to misuse this tool as a proxy for fetching data from remote services,\" Deckelmann wrote. While bots are permitted to edit Wikipedia under certain conditions, approval was not sought in these cases. (The English version of Wikipedia prohibits AI-generated articles .)\n\nMoreover, agents that Wikimedia believes to stem from OpenAI attempted to compromise a note-taking tool called Etherpad, but those efforts failed. \"Agents unsuccessfully tried to use it to fetch data from other websites as a proxy,\" Deckelmann wrote. \"Other agents also likely operated by OpenAI took notes about their tasks, though this did not appear to turn into coordination.\"\n\nThe Wikimedia Foundation previously said that bots have been hammering its platforms since early 2024 to scrape data for generative AI training purposes. It now says agents have crawled millions of pages — mainly from Wikidata and Wikimedia Commons — and made \"hundreds of thousands of data queries\" to the Wikidata Query Service, which may have helped cause an outage in May .\n\n\"AI companies are not doing enough to secure their systems and protect the public from the harm they cause,\" Deckelmann argued, adding that Wikimedia is \"deeply concerned\" about the effect rogue AI agents can have on open knowledge platforms such as the ones it operates.\n\n\"Bots and agents are part of the future of the web, and the companies who unleash and profit from them must directly help avoid and repair damage they can do,\" Deckelmann wrote. \"Our collective priority should be the health of the overall web ecosystem so that it continues to benefit all people — not just a handful of billionaires.\"\n\nWikimedia has offered a dataset for AI training purposes in an attempt to dissuade crawlers from scraping its platforms, which increases its costs and can potentially overload its systems. The foundation has also partnered with several tech companies to offer them streamlined access to data, but OpenAI isn't among them ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-2ebcc56b848b18c4",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/05/reflection-debuts-beam-a-open-weight-ai-model-to-rival-chinese-models-at-lower-compute-cost/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-05T19:33:53.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Reflection debuts Beam, an open-weight AI model to rival Chinese models at lower compute cost",
-        "summary": "Reflection is aiming Beam and future models at enterprises and sovereign nations. The pitch is to build “AI factories,” a product that would let institutions build their own customized, local AI system by training Reflection’s AI models on their own proprietary data.",
-        "body": "Reflection AI is officially unveiling Beam, its first frontier, open-weight AI model. The two-year-old, Brooklyn-based startup claims Beam matches the performance of leading Chinese open models on advanced reasoning benchmarks at dramatically lower costs, a claim that could heat up the race to build a Western answer to DeepSeek, Qwen, and Z.ai.\n\nReflection’s announcement confirms reporting from Axios over the weekend that the startup was close to a launch. The company shared new details in a lengthy blog post Monday , which described Beam as a text-only mixture-of-experts model trained on high-compute reinforcement learning to be effective at reasoning, coding, and agentic tasks at “a fraction of the token cost and inference time compute” of rivals.\n\nBeam is a 501-billion-parameter model with 23 billion active parameters. It was pretrained on 23.8 trillion tokens and has a 1 million token context window. To compare, Z.ai’s GLM-5.2 has roughly 744 billion total parameters with 40 billion active.\n\nReflection’s performance claims haven’t been independently verified, but on advanced reasoning benchmarks, the company says Beam scores on par with Z.ai’s GLM-5.2 and outperforms today’s leading Western open models while using “3-4x less inference compute.” Reflection calls it a “workhorse model” for enterprises, the public sector, and developers.\n\nReflection is positioning itself against closed labs like Anthropic and OpenAI, against popular open models from Chinese developers, and against Western players like Mistral, Meta, and Cohere. Its most direct U.S. rival might be Inkling , the open model from Mira Murati’s Thinking Machines Lab released in July. Reflection’s own benchmarks show that Beam outscores Inkling on four coding tests where both report results, but Inkling is a multimodal model and Beam is text-only.\n\nReflection was founded in 2024 by two former Google DeepMind researchers and has raised roughly $4.7 billion from backers, including Nvidia, Sequoia Capital, and Lightspeed Venture Partners, per PitchBook. Its last round valued the company at a $25 billion pre-money valuation .\n\nThe startup has also been locking up compute — a key ingredient needed to train frontier models capable of luring customers away from Anthropic’s and OpenAI’s closed models, as well as the cheaper open-weight models from Chinese labs. This summer, Reflection signed deals collectively worth more than $7 billion with SpaceX and Nebius to secure access to Nvidia’s GB300 chips through 2029.\n\nReflection is aiming Beam and future models at enterprises and sovereign nations. The pitch is to build “AI factories,” a product that would let institutions build their own customized, local AI system by training Reflection’s AI models on their own proprietary data. Nvidia CEO Jensen Huang, whose company backs Reflection, has long championed the “AI factory” idea and pushed to strengthen the open AI ecosystem — a vision that would also benefit Nvidia, whose GPUs would power those systems.\n\nAxios reported that hedge funds and trading firms are among those eager to build such systems. Reflection has already begun testing the concept of a sovereign AI factory partnership with Shinsegae Group in South Korea .\n\nReflection says it will release Beam’s weights and full technical details this month, with distribution through hyperscalers and neoclouds and integrations across open source libraries at launch.\n\nReflection did not respond in time to TechCrunch’s requests for more information."
       }
     },
     "media": null
@@ -355,30 +355,6 @@
         "title": "F1 in Bahrain... in Malaysia: The race needed a software update to start",
         "summary": "A software bug waylaid half the field and required a race reboot.",
         "body": "Well, it’s safe to say no Bahrain Grand Prix has been affected by torrential rain quite like the 2026 race.\n\nFor one thing, it was held several thousand miles from Bahrain itself. The ongoing war with Iran ruled such things out, so the Sepang International Circuit in Malaysia stepped in to fill its spot. One of the best examples of a late-'90s “Tilke track”—named for its designer, Herman Tilke—it’s characterized by a couple of long straights and the always-brutal tropical weather that provides one of the toughest physical challenges on the calendar. And this weekend was no exception.\n\nHeavy rain arrived about half an hour before the start time, delaying things significantly. Although the sport has two different kinds of treaded tires for use in the rain, the full wet tire generates so much spray, and such slow lap times, that it's essentially only useful for circulating behind the safety car. If it’s wet enough to need it, it will be too wet to see where you’re going. The intermediate tire, by contrast, has much shallower grooves and is good for racing on damp but not soaked tracks, although it quickly overheats and degrades as the track dries.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-e598de1e81836cd2",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/10/ai-glasses-face-their-first-major-government-crackdown/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-05T13:39:30.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "AI glasses face their first major government crackdown",
-        "summary": "Norway wants time to write permanent rules for glasses that can record bystanders.",
-        "body": "Norway has become the first major country to propose a temporary ban on the use of AI glasses in selected public places amid growing privacy concerns over wearable technology.\n\nThe rich Scandinavian country’s center-left government said on Monday that it would introduce a law to parliament soon on a temporary ban for places such as parks, beaches, schools, and kindergartens. It will also set up an expert group to propose permanent national rules.\n\n“I am concerned about the introduction of powerful new technology where people risk being photographed, filmed, or recorded without their knowledge,” said Torgeir Micaelsen, Norway’s digitalization minister. A temporary ban “will give us time to conduct a thorough assessment and hold an informed debate that can lay the foundation for permanent regulation,” he said.\n\nRead full article\n\nComments"
       }
     },
     "media": null

@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import android.media.AudioManager;
+
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -125,6 +127,14 @@ public class ReadingTtsControllerTest {
         assertEquals("session-3", events.last().getSessionId());
         assertEquals("utt-4", events.last().getUtteranceId());
         assertEquals(1, engine.speakCount);
+    }
+
+    @Test
+    public void transientAccessibilityFocusLossDoesNotStopContinuousReading() {
+        assertTrue(ReadingTtsController.shouldInterruptForAudioFocusChange(AudioManager.AUDIOFOCUS_LOSS));
+        assertFalse(ReadingTtsController.shouldInterruptForAudioFocusChange(AudioManager.AUDIOFOCUS_LOSS_TRANSIENT));
+        assertFalse(ReadingTtsController.shouldInterruptForAudioFocusChange(AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK));
+        assertFalse(ReadingTtsController.shouldInterruptForAudioFocusChange(AudioManager.AUDIOFOCUS_GAIN));
     }
 
     @Test

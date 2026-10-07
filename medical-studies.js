@@ -84,6 +84,30 @@
       openUrl: 'https://tifloacosta.com/docs/en/reader-1yEGRwTEzGjgEzmYtP2wnlnaACFFbdho6.html',
       new: true,
       newsDate: '2026-09-12T11:02:46Z'
+    },
+    {
+      id: 'es-estudio-medico-causas-ceguera-2026',
+      lang: 'es',
+      category: 'Estudios médicos',
+      title: '¿Por qué se queda ciega la gente?',
+      searchText: 'Un análisis sin bata blanca sobre las principales causas de ceguera y pérdida de visión en el mundo, las diferencias entre regiones y cuánto podría evitarse.',
+      url: 'https://tifloacosta.com/docs/es/por-que-se-queda-ciega-la-gente.html',
+      openUrl: 'https://tifloacosta.com/docs/es/por-que-se-queda-ciega-la-gente.html',
+      new: true,
+      newsDate: '2026-10-07T15:39:00Z',
+      mobile: true
+    },
+    {
+      id: 'en-medical-study-causes-blindness-2026',
+      lang: 'en',
+      category: 'Medical Studies',
+      title: 'Why Do People Go Blind?',
+      searchText: 'An analysis without a white coat about the main causes of blindness and vision loss worldwide, regional inequalities and how much could be avoided.',
+      url: 'https://tifloacosta.com/docs/en/why-do-people-go-blind.html',
+      openUrl: 'https://tifloacosta.com/docs/en/why-do-people-go-blind.html',
+      new: true,
+      newsDate: '2026-10-07T15:39:00Z',
+      mobile: true
     }
   ];
 

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-07T00:44:42.389Z",
+  "generatedAt": "2026-10-07T06:33:51.292Z",
   "resources": [
     {
       "kind": "resource",
@@ -5416,18 +5416,114 @@
   "news": [
     {
       "kind": "news",
+      "id": "engadget-396f3e3b4dc936b4:en",
+      "sourceId": "engadget-396f3e3b4dc936b4",
+      "lang": "en",
+      "title": "How to help stop spam calls on iPhone and Android",
+      "summary": "Spam calls don't have to grab your attention and waste your time. Use these built-in options to silence and block them without having to pay.",
+      "body": "Spam calls are apparently here to stay, but you have ways to fight back.\n\nSpam calls should be a bygone concern, but unfortunately they're still a plague many of us deal with. Services like Truecaller have helped with caller identification and spam filtering for years. But since Android and iOS have gotten great at handling spam calls on their own, you don't need to rely on a third-party app — much less pay a subscription — to avoid unwanted callers.\n\nIn addition to functions on your phone, your carrier may offer its own spam protection features. Depending on the company, these might be enabled by default. If not, check your online account or the carrier's app for a spam protection toggle.\n\nIf you have an iPhone, navigate to Settings > Apps > Phone . The most important option is under the Call Filtering section; enable Spam and calls that your carrier identifies as junk won't ring. They'll be automatically sent to voicemail, and in the Phone app's Calls tab, they appear under the Spam section (accessible under the top-right button).\n\nTo further keep your call logs tidy, enable the Unknown Callers option in the same Settings box. With this, recent calls from non-contacts appear under the Unknown Callers section (available via the mentioned top-right button in the Phone app). Use Mark as Known to remove a given number from this section if needed.\n\nBack on the Settings page, review the Screen Unknown Callers section, where you have three options. Never is the default, where every incoming call rings normally. The most aggressive approach is Silence , which mutes all incoming calls from numbers not saved in your contacts and sends them to voicemail. You can view these silenced calls on the same Calls tab of the Phone app.\n\nAsk Reason for Calling is a good middle ground; with this, your iPhone will screen unknown callers and ask them why they're calling. You're able to view a live transcript of the caller's response on your screen and decide whether the call is worth answering. Call Screening is only available in select countries on iPhones running iOS 26 or newer.\n\nWhile you presumably have friends and family saved in your contacts already, make sure to save any other numbers that contact you regularly, like doctors' offices or work clients. These options are great for shutting up spammers, but you'll need to be a little more vigilant to avoid missing legitimate calls from unsaved numbers.\n\nMost Android phones offer spam detection for calls, although availability and capabilities vary depending on your phone's model, its Android version and the dialer app you use. The official Phone app by Google is what most Android manufacturers ship with their devices, and it comes with caller ID and spam detection built-in. If your phone uses a different dialer, poke through its settings to look for a similar solution, or download Google's Phone app and set it as the default dialer.\n\nLaunch the Phone app, tap the hamburger menu (three horizontal lines) at the top-left and choose Settings . Under the Call Assist section, tap Caller ID and spam . Here, enable See caller and spam ID to have the app warn you of an incoming potential spam call before you answer it. To go further, enable Filter spam calls to automatically silence suspected junk calls.\n\nYou can still view missed calls and voicemails from unknown callers in the Phone app. For both of these features to work, you'll need a phone running Android 6.0 or newer, with the latest version of the Phone app by Google installed and set as the default.\n\nSome Android phones, including ones from Samsung and Google, feature enhanced call screening options akin to the Ask Reason for Calling feature on iPhone. If you own a Pixel 6 or newer, launch the Phone app and navigate to Settings > Spam and Call Screen > Call Screen to set up this feature. On supported Samsung phones, open the Phone app, tap the three-dot icon in the top-right corner and navigate to Settings > Call screening .",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2277629/how-to-stop-spam-calls-iphone-android/",
+      "publishedAt": "2026-10-06T23:30:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple",
+        "android"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-576684ff23462b50:en",
+      "sourceId": "the-verge-576684ff23462b50",
+      "lang": "en",
+      "title": "OpenAI drops another batch of mathematical breakthroughs",
+      "summary": "OpenAI has revealed solutions to a number of long-standing mathematics problems produced by an unreleased frontier model in a batch of 722 manuscripts, covering 372 result families that group related papers. It extends a run of breakthroughs that have both impressed and unsettled parts of the mathematical community while raising questions about research ethics and […]",
+      "body": "OpenAI has revealed solutions to a number of long-standing mathematics problems produced by an unreleased frontier model in a batch of 722 manuscripts, covering 372 result families that group related papers. It extends a run of breakthroughs that have both impressed and unsettled parts of the mathematical community while raising questions about research ethics and academic conduct. According to AGMAI, the newly formed independent advisory group of elite mathematicians put together to work on communicating the results responsibly, the release includes solutions to \"hundreds\" of open questions.\n\nThe results have been expected for weeks, althou …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1005004/openai-math-release-github",
+      "publishedAt": "2026-10-06T23:26:38.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-556b62cb37818831:en",
+      "sourceId": "engadget-556b62cb37818831",
+      "lang": "en",
+      "title": "Apple reportedly worked with LG on gadgets for its upcoming smart home push",
+      "summary": "The doorbell, security cameras, thermostats and more could be announced next week.",
+      "body": "The doorbell, security cameras, thermostats and more could be announced next week.\n\nWe've been hearing a lot about Apple's renewed smart home endeavors from Mark Gurman at Bloomberg over the past few months, and he's back today with a report that the company co-developed several new gadgets in partnership with LG Electronics. Based on recent regulatory filings by LG, Bloomberg reports that the results of this collaboration are expected to include a smart doorbell, a smart thermostat, a smart deadbolt lock, indoor and outdoor security cameras, and a floodlight camera. Rather than Apple's iconic fruit symbol, the hardware will reportedly be sold under LG's banner, with the South Korean business responsible for the devices' manufacturing and product support.\n\nThis smart home slate is expected to be unveiled next week , and the LG product lineup is likely to center around a new hub device from Apple that has been in development for several years . A revamped HomePod Mini and TV set-top box may also be coming as part of Apple's move toward offering a bigger system of connected home tech. While the Apple-branded devices are expected to be available soon, Bloomberg says the LG accessories won't hit the market for \"at least a few more months.\"\n\nThis co-development effort also marks a shift for LG. The brand has long been known for appliances and large electronics rather than smart home products. LG has been a partner for Apple in other verticals in the past, such offering Apple software via its smart TVs and serving as a third-party monitor option for the MacBook ecosystem. It also produces the panels for Apple's current lineup of Mac monitors, the Studio Display and Studio Display XDR .",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2279541/apple-reportedly-worked-with-lg-on-gadgets-for-its-upcoming-smart-home-push/",
+      "publishedAt": "2026-10-06T22:32:36.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-9a6653a19652a219:en",
+      "sourceId": "9to5mac-9a6653a19652a219",
+      "lang": "en",
+      "title": "iFixit tears down Apple Watch Series 12 and Ultra 4, finds mixed repairability results",
+      "summary": "Concluding iFixit’s teardown sequence for Apple’s September launches, iFixit today published the teardown of the new Apple Watch Series 12 and Ultra 4. Here’s what they found. more…",
+      "body": "Concluding iFixit’s teardown sequence for Apple’s September launches, iFixit today published the teardown of the new Apple Watch Series 12 and Ultra 4 . Here’s what they found.\n\nAfter applying heat to the new Apple Watch Ultra 4 ’s screen, iFixit’s Shahram Mokhtari uses the company’s new metal pick to pry the screen open, exposing the battery and the Taptic Engine.\n\nHe notes that replacing the 2.444 Wh battery (versus 2.313 Wh in the Ultra 3) still requires removing the screen, which remains a significant repairability drawback. The four screws on the bottom of the case provide access only to the sensor assembly on the underside of the back cover and the S11 chip on the case itself.\n\nOnce the screen is unglued, though, removing the battery and disconnecting the display’s press connector seems straightforward enough, provided that the initial step was done carefully enough to avoid slicing through any of the flex cables underneath.\n\nThat said, with no significant improvements in repairability, the Apple Watch Ultra 4 scored 4/10 on iFixit’s repairability scale, the same as its predecessor.\n\niFixit’s teardown of the new Apple Watch Series 12 revealed a slight repairability improvement, with Apple adding stretch-release adhesive and a pull tab that make the 1.461 Wh battery (versus 1.403 Wh in the 46mm Series 11) easier to remove.\n\nStill, as with the Apple Watch Ultra 4, the Series 12 also requires prying off the glued display to get inside, which remains the biggest obstacle to repairs. Mokhtari noted that the tolerances around the Series 12 ’s display are even tighter than on the Ultra 4, requiring enough force to make him concerned about potentially damaging the screen.\n\nMokhtari also noted that Apple replaced the ZIF connector and tape used for the display on previous models with a simpler press connector.\n\nThe tradeoff is that replacing the screen now also requires removing and replacing the battery, “which, if you’ve come this far, why wouldn’t you?” he adds.\n\nAll in all, the modest repairability improvements were enough for iFixit to give the Series 12 a 4/10 repairability score, a 1-point bump from the last base-model Apple Watch it scored.\n\nFor comparison, iFixit gave Google’s Pixel Watch 5 a 9/10 repairability score, noting that its display can be removed with just two Torx screws and a gasket, while its battery can also be removed without dealing with adhesive.\n\nYou can watch iFixit’s teardown of the Apple Watch Series 12 and Ultra 4 below:",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/06/ifixit-tears-down-apple-watch-series-12-and-ultra-4-finds-mixed-repairability-results/",
+      "publishedAt": "2026-10-06T22:09:49.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-36ecec8bd8140041:en",
+      "sourceId": "engadget-36ecec8bd8140041",
+      "lang": "en",
+      "title": "Remember MapQuest? You can now use it with Android Auto",
+      "summary": "If you use Android Auto, you can try out the beta mapping service today.",
+      "body": "If you use Android Auto, you can try out the beta mapping service today.\n\nLaunched in 1996, MapQuest, the world's oldest commercially available web mapping service, recently introduced Android Auto support, making it an alternative to Google and Apple Maps with the added distinction of calling a certain body of water in North America Lake Ontario, despite pressure from President Donald Trump.\n\nThe decision to retain the lake's 380-year-old name drew a lot of attention. While both Apple and Google bowed to that pressure and changed how the name appears to map users in the US, MapQuest did not. This refusal prompted a huge spike in interest in its service, the company said. Usage grew to 50 times its normal rate, and the apps it offers generated over 1.5 million downloads. MapQuest quickly became the No. 1 mapping app on Apple's App Store. \"Hundreds of thousands of people signaled to us this weekend that we got it right, by downloading our app,\" said Doug Berger, general manager of MapQuest in a statement.\n\nThe company is feeding this interest with the introduction of beta support for Android Auto on Google Play.\n\nUsing MapQuest with Android Auto is simple:\n\nOnce these steps are complete — including joining the beta program — you should find MapQuest available to you in your vehicle.\n\nInitial user feedback on MapQuest's Android Auto beta suggests the application remains a little rough around the edges in comparison to Google or Apple Maps. Various reports claim there have been complaints of app crashes, delayed response times and voice navigation prompts that cut off in the middle of sentences. Interface quirks have been identified, and there may be some frustration that some real-time features are limited to North America (US and Canada).\n\nTo be fair, this is beta software; flaws and foibles are to be expected, and the company's social media feeds suggest its developers are actively working to improve the app, including regular software patches.\n\nMapQuest's Android Auto solution currently provides:\n\nWhile the software moves through the beta process, drivers seeking immediate alternatives for Android Auto or Apple's CarPlay may also want to try and download Waze , Sygic or TomTom Go .",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2277445/use-mapquest-with-android-auto/",
+      "publishedAt": "2026-10-06T22:00:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "android"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "the-verge-c84bb539e253c9e4:en",
       "sourceId": "the-verge-c84bb539e253c9e4",
       "lang": "en",
       "title": "Apple and LG team up on new smart home gear, starting with a lock, doorbell, and thermostat",
       "summary": "Apple is collaborating with LG on a new lineup of smart home devices, including a video doorbell, thermostat, indoor camera, and more, according to a report from Bloomberg. The products will reportedly feature LG branding but integrate with the company's rumored smart home hub that's expected to launch during an event on October 13th. Sources […]",
-      "body": "Apple is collaborating with LG on a new lineup of smart home devices, including a video doorbell, thermostat, indoor camera, and more, according to a report from Bloomberg . The products will reportedly feature LG branding but integrate with the company's rumored smart home hub that's expected to launch during an event on October 13th.\n\nSources tell Bloomberg that the upcoming line of devices also includes a deadbolt lock, outdoor security camera, and a floodlight camera. Several of the devices will reportedly come with support for the smart home protocols Thread and Matter. The door lock also comes with an ultra-wideband feature that could a …\n\nRead the full story at The Verge.",
+      "body": "Apple is collaborating with LG on a new lineup of smart home devices, including a video doorbell, thermostat, indoor camera, and more, according to a report from Bloomberg . The products will reportedly feature LG branding but integrate with the company's rumored smart home hub that's expected to launch during an event on October 13th.\n\nSources tell Bloomberg that the upcoming line of devices also includes a deadbolt lock, outdoor security camera, and a floodlight camera.\n\nSeveral of the devices will reportedly come with support for the smart home protocols Thread and Matter amid a \"formal reboot\" for Apple's HomeKit platform. T …\n\nRead the full story at The Verge.",
       "sourceName": "The Verge",
       "originalUrl": "https://www.theverge.com/news/1006238/apple-lg-homekit-rumor-fcc",
       "publishedAt": "2026-10-06T21:39:53.000Z",
       "categories": [
         "tecnologia-general",
         "apple"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-cdd02f7a876c64c6:en",
+      "sourceId": "ars-technica-cdd02f7a876c64c6",
+      "lang": "en",
+      "title": "OpenAI will watermark ChatGPT outputs by default—but only in the EU",
+      "summary": "Like other solutions, it is not especially reliable, and it's easy to circumvent.",
+      "body": "OpenAI will begin automatically watermarking text generated with ChatGPT in the European Union, the company has announced. It will also offer the watermarking feature in other regions, but it will be off by default outside of the EU.\n\nThe move in Europe is driven by a need to comply with the EU AI Act, which took effect in August. It requires marking content produced by AI models in a way that another tool can detect. Unfortunately, there is still no completely effective and reliable way to do that. A few standards already exist, like SynthID and the C2PA project, but they are relatively easy to circumvent for anyone with basic know-how.\n\nThe same is likely true for OpenAI's watermark. Its method is proprietary; the company calls it textGrain, and has published a technical paper explaining how it works. But in general, it works like other LLM watermarking tools we've seen in the past: It puts patterns in the word choices that are not clear to a human reader, and that don't meaningfully change the general quality of the output, but that someone with a key can use a specialized detector to find. OpenAI says it will be giving access to the detector to a limited number of researchers and organizations, and providing a request-for-approval process for others to be added over time.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/ai/2026/10/openai-will-watermark-chatgpt-outputs-by-default-but-only-in-the-eu/",
+      "publishedAt": "2026-10-06T20:50:32.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
       ]
     },
     {
@@ -5528,37 +5624,6 @@
     },
     {
       "kind": "news",
-      "id": "9to5mac-befe7f09bfbaf296:en",
-      "sourceId": "9to5mac-befe7f09bfbaf296",
-      "lang": "en",
-      "title": "iOS 27.2 beta 3: Here’s everything new",
-      "summary": "Apple released iOS 27.2 beta 3 to developers yesterday, and it includes a handful of changes and hints at future features. Here’s everything new in the latest beta. more…",
-      "body": "Apple released iOS 27.2 beta 3 to developers yesterday, and it includes a handful of changes and hints at future features. Here’s everything new in the latest beta.\n\n9to5Mac is supported by Sony : Sony is running a massive sale on its best BRAVIA TVs, ranging from its entry-level to flagship options — shop now to save !\n\nApple released iOS 27.2 beta 3 on Monday for developers, with build number 24B5099f. It comes two weeks after the release of the second beta. A new public beta was released on Tuesday, ahead of a final release to everyone before the end of the month.\n\nNew Apple Music logo\n\nApple teased a new Apple Music logo when it announced Apple Music Hall last month, and iOS 27.2 beta 3 suggests it’s about to roll out everywhere. The new logo uses a bolder typeface than the old logo, plus a lowercase “m” in “music.”\n\nApple has also started rolling it out to the Apple Music sign-up flow in iOS 27.2 beta 3.\n\nNew Messages settings in the works\n\nCode references in iOS 27.2 beta 3 suggest Apple is working on a new setting that gives users more control over the suggested actions that appear in the Messages app, such as the “Add to Calendar” button.\n\nThe code hints that you’ll be able to disable suggested actions for individual apps, including Calendar, Reminders, Notes, and Maps. The change isn’t actually enabled yet, and it’s possible Apple scraps it before releasing it.\n\nApple Books design tweaks\n\nAs spotted by Beta Profiles on X , iOS 27.2 beta 3 brings new Liquid Glass design changes to the Apple Books app. There’s also a new progress bar for tracking your progress when reading a book.\n\nRyan has some more details on it here.\n\nmacOS 27.2 beta 3: Touchscreen Mac hints\n\nApple is expected to unveil the touchscreen MacBook Pro as soon as this month. macOS 27.2 beta 3 includes even more hints at Apple’s work optimizing macOS to support touch interactions. The update includes new “gesture recognition tools” for several stock Apple apps.\n\nThere’s also a new long-press animation for the Dock that seems perfect for touch interaction:\n\nMore tidbits\n\nHave you spotted anything else new in iOS 27.2 beta 3? Let us know down in the comments.\n\nFollow Chance : Threads , X , and Instagram",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/06/ios-27-2-beta-3-heres-everything-new/",
-      "publishedAt": "2026-10-06T17:52:04.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-5793f60c66d5596d:en",
-      "sourceId": "engadget-5793f60c66d5596d",
-      "lang": "en",
-      "title": "Don't throw away your old digital camera — do this instead",
-      "summary": "Your old camera might give video calls an upgrade, as long as USB support or clean HDMI keeps the setup sensible.",
-      "body": "Your old camera might give video calls an upgrade.\n\nOld digital cameras are making a weird comeback, so it may feel a bit more difficult to justify throwing one in the electronics recycling bin than it would have a few years ago. According to the Camera & Imaging Products Association, shipments of built-in-lens digital cameras grew 29.6 percent in 2025 to approximately 2.44 million units, and are projected to increase an additional 13.6 percent in 2026. (CIPA didn't attribute that growth specifically to the current trend of retro digicams.)\n\nIf you already have one lying around, however, there's another reason to keep it. There are a lot of older DSLRs, mirrorless cameras and even some compact cameras that can be used as webcams. That can translate to improved low-light performance, greater control over framing or the natural background blur that laptop webcams devote a lot of software to trying to replicate. The trick is finding out whether yours can do it without turning a free upgrade into an expensive side project.\n\nStart with the specific model number and the manufacturer's webcam compatibility list. Canon's EOS 6D and EOS Rebel T6 are still supported, as are Nikon's D5300 and D750 with its Webcam Utility and Sony's A5100, A7 II and RX100 IV with Imaging Edge Webcam.\n\nIf your camera is listed, then setup can be rather simple. Install the manufacturer's webcam software if required, connect the camera using a USB data cable , put it into the appropriate video or remote mode and select it as the camera in Zoom, Google Meet or Microsoft Teams. You might already have everything you need.\n\nHowever, a larger camera does not necessarily result in a clearer webcam picture. Some older supported Nikon DSLRs use only the VGA portion of Nikon's XGA live-view display, so a newer dedicated webcam might be able to capture more detail. Depending on the camera model, the camera can compensate for some of this ground with a larger sensor, better low-light performance and control over the lens.\n\nAudio and power should be checked as well. Nikon and Sony say their webcam utilities don't send the camera's microphone audio to the computer, which means using your laptop mic or a separate microphone. If you're using live view for a long meeting, it will also drain the battery, so if the camera allows, external power might be worth setting up.\n\nThe experiment doesn't have to stop if there is no support for USB webcam. Cameras with clean HDMI output can be connected through a capture device, which then shows up as a webcam on your computer. \"Clean\" is the important word here. No one wants autofocus boxes, exposure settings and a flashing battery icon on the weekly Teams call.\n\nContinuous operation matters as well. Elgato suggests checking if power saving can be turned off and if the camera can be powered externally while transmitting video. There are some older cameras that were not meant to be used as desk accessories for hours.\n\nThe issue is cost. Elgato's Cam Link 4K is priced at $99.99, excluding an HDMI cable, mount and/or possibly a dummy battery. Our current webcam guide , on the other hand, covers the 2K Anker PowerConf C200 at $60, which comes with microphones and a much simpler USB setup. Mac users might also be able to use a compatible iPhone, while Windows 11 users can use a compatible Android phone as a webcam for free.\n\nAlso consider the resale value of the camera before buying accessories. Some of the older digicams have been sold for much more than owners would expect because of the interest in them. According to B&H , one of its writers purchased a Canon PowerShot S95 for $130 in 2023, and it was selling for an average of over $400 in 2026.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2277441/dont-throw-away-old-digital-camera-do-this-instead/",
-      "publishedAt": "2026-10-06T16:45:00.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "ars-technica-d502be88e582466f:en",
       "sourceId": "ars-technica-d502be88e582466f",
       "lang": "en",
@@ -5575,38 +5640,6 @@
     },
     {
       "kind": "news",
-      "id": "engadget-df175c86bc129523:en",
-      "sourceId": "engadget-df175c86bc129523",
-      "lang": "en",
-      "title": "How to check if your Android phone is still getting security updates",
-      "summary": "Your Android device will only receive updates for so long, and it might have already left its support period without you realizing.",
-      "body": "Your phone could be out of support even though it seems to be running fine otherwise.\n\nYour phone doesn't blare an alarm the day it stops getting security patches; there's no banner warning or anything else like that. Support simply ends, and your device keeps working exactly as it did the day before. This can make you think everything's perfectly OK, and for a while, it is. But that false sense of security is exactly how people keep using phones that can become targets due to their outdated software.\n\nSecurity updates matter more than all the fancy new features you get with Android version upgrades. While version updates add features, security patches close the vulnerabilities that attackers can exploit to steal data or install malware. A phone can look and feel fine while running for a long time without the patches that actually keep it safe.\n\nThe tricky part is that your device can't tell you whether more updates are coming; it can only show you the last one it received. Figuring out where you stand takes a little digging across a few different sources.\n\nStart on your phone: open Settings , tap About Phone , then look for Android version (or Software information for Samsung phones). This is where you can see the Android version, security patch date and Google Play system update status. The patch date tells you when your phone last received a fix, not whether it's still eligible for future ones. As a general rule of thumb, if the date is more than three to six months old, it's a good sign that your device could be approaching, or has already passed, its support cutoff.\n\nIt's also worth checking Settings > System > Software update , where you can see if there's an update waiting for you. You also shouldn't overlook Google Play system updates, either — these roll out separately from full OS updates and patch core components like media playback and connectivity, giving your phone extra protection between bigger releases. To do so, open the Play Store , tap your profile icon, choose Manage apps & device , then hit See details under Updates available to view the apps (including Google Play Services) that have a new version ready.\n\nIt's great that you can check all this on your phone, but none of it confirms your device's remaining support window. For that, you need to look to other sources.\n\nManufacturers rarely advertise an expiration date, which is where endoflife.date comes in handy. Under Operating Systems > Android OS , compare the version of Android on your device to see if it's still supported with security updates. Then, open the Device list and search by brand to pull up a table listing the exact date when each model will stop receiving security patches. The Samsung Galaxy S26 FE , for instance, will get both Android and security updates until September 2033, while the Google Pixel 6 Pro reached end of support in October 2026.\n\nEach manufacturer has its own calendars. Google builds Android, but the manufacturer decides how long your phone gets updates for. Each one takes the Android release, builds its own interface on top (like One UI for Samsung or OxygenOS for OnePlus) and bundles in the security fixes along with its own features. That extra layer is also why updates don't land everywhere at once. Pixel phones get them faster since Google prioritizes its own hardware, while other brands need time to adapt each patch to their own software.\n\nManufacturers' commitment to updates differs too. A few examples:\n\nGoogle : Pixel 8 and newer models get seven years of security and OS updates.\n\nSamsung : Starting with the Galaxy S24 line and Z Fold/Flip6, the company offers seven years of support. Older Galaxy A-series and flagships from 2019 and later get four years, while some budget models stretch to six years.\n\nOnePlus : For the OnePlus 12, the company offers four years of OS updates and five years of security patches. The latter is upped to six years for the OnePlus 13.\n\nNote that these timelines apply from when the phone was first sold, not when you buy one. Interestingly, the European Union is working to make phones last longer. Starting June 2025, the EU's Ecodesign for Sustainable Product Regulation requires manufacturers to provide at least five years of software updates for new smartphones sold within the region.\n\nAn unsupported phone doesn't stop working, but it does become a growing liability, especially if you use it for sensitive purpose like banking apps and password managers. Replacing an old device isn't always something you can do immediately, so there are some changes you should make to limit exposure if your phone is in its last year of support or already expired.\n\nFirst, to ensure your Android phone is secure , you should enable automatic app updates through Google Play to avoid security flaws within apps. Also, avoid sideloading apps from outside the Play Store. Turn on two-factor authentication for your Google account and other sensitive logins, and enable automatic backups so you don't lose data if something goes wrong. You should also run an audit on your installed apps and delete those you no longer use, while revoking sensitive permissions where they aren't strictly necessary. Avoid using public Wi-Fi networks unless you're running a VPN . In this way, you protect your data as best you can without OS updates.\n\nIf your phone's last security patch is more than six months old or you've realized you're past your model's cutoff, it's time to consider upgrading to one of the best Android phones . Pixel and Samsung flagship devices currently offer the longest update periods. Whatever you end up choosing, make sure to check its update promise before you buy so you don't have to think about this for a while.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2277410/android-phone-how-to-check-security-updates/",
-      "publishedAt": "2026-10-06T16:15:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "android"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-fb9a54b156e9d50e:en",
-      "sourceId": "engadget-fb9a54b156e9d50e",
-      "lang": "en",
-      "title": "How to supercharge your Windows 11 PC with this built-in automation tool",
-      "summary": "Task Scheduler isn't a particularly pretty part of Windows, but it's a powerful tool if you take the time to understand it.",
-      "body": "Windows 11 can automate more of your PC routine than its aging Task Scheduler interface suggests.\n\nTask Scheduler has been part of Windows for years, but it's so old-school that you might have written it off. Ignore the gray menus, though, and there's a surprisingly capable automation tool underneath. Microsoft explains that Task Scheduler waits for a trigger you configure, then runs the associated task when it fires. This trigger may be a specific time, Windows startup, your login or even a system event.\n\nTask Scheduler won't magically make your processor faster, and that's not its intended purpose. What it can do is take repetitive tasks off your hands, delay apps that normally flood Windows the moment you log in and execute commands or scripts while you're busy with something more fun. Those are pretty neat tricks for a tool that appears to have been absent from the last decade of Windows redesign meetings.\n\nTo get started, type \"Task Scheduler\" into the Start menu and click it. You'll be greeted with a fairly busy interface; ignore most of it for now. Select Create Task in the right Actions pane. Avoid Create Basic Task ; it's friendlier, but the full option reveals the controls that make Task Scheduler worth using.\n\nFrom there, here's how to set up a task:\n\nThose conditions are of special concern to those on a laptop. According to Microsoft , a task that runs every five minutes will prevent a PC from entering a low-power idle state. Instead, you should use event, idle or maintenance triggers for tasks that do not require constant polling.\n\nDon't enable Run with highest privileges unless the task truly needs to run as an administrator. Automation is great, but the less running as an administrator, especially without your explicit input, the better.\n\nAn example of putting the task manager to good use is keeping supported apps up to date with WinGet. Microsoft's package manager can check for newer versions of installed software, and winget upgrade --all will attempt to upgrade eligible installed packages it recognizes.\n\nYou can make it a weekly task with this:\n\nwinget upgrade --all --silent --accept-package-agreements --accept-source-agreements --disable-interactivity\n\nExecute the command manually prior to scheduling it. Not all apps are managed by WinGet, and pinned packages are skipped by default. Some installers may still require elevation.\n\nAnother option addresses the well-known startup frenzy. Trimming unnecessary startup apps can make the logon process faster, but Task Scheduler gives you a middle ground: disable an app's normal startup entry, then launch it with a delayed logon trigger instead. A cloud storage client or other commonly used app can appear a few minutes later, rather than competing with everything else to get your desktop ready to go.\n\nTask Scheduler also works well with PowerShell if you have scripts you've already tested, like copying files to another location or doing your own PC housekeeping . Conditions can ensure the job waits for idle time or AC power instead of barging in halfway through something important.\n\nPower Automate for desktop is better suited to automations that require clicking through apps or interacting with interfaces. However, broader cloud and unattended automation can require paid licenses.\n\nAlso, there's little reason to automate maintenance Windows already performs itself. Storage Sense can automatically delete temporary files and items in the Recycle Bin, while Windows automatically optimizes both HDDs and SSDs.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2277240/how-to-supercharge-windows-11-pc-built-in-automation-tool-task-scheduler/",
-      "publishedAt": "2026-10-06T15:45:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "windows"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "ars-technica-96bca7004ebf212a:en",
       "sourceId": "ars-technica-96bca7004ebf212a",
       "lang": "en",
@@ -5616,21 +5649,6 @@
       "sourceName": "Ars Technica",
       "originalUrl": "https://arstechnica.com/cars/2026/10/this-self-parking-electric-travel-trailer-gets-a-solar-upgrade-for-2027/",
       "publishedAt": "2026-10-06T15:23:28.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-4afb8a7f44205ead:en",
-      "sourceId": "ars-technica-4afb8a7f44205ead",
-      "lang": "en",
-      "title": "OpenAI agents tried to hack Wikipedia tools and flooded it with traffic",
-      "summary": "The reports of OpenAI agents harming third-party sites keep coming.",
-      "body": "The publisher of Wikipedia said Monday that OpenAI agents attempted to hack a note-taking tool it hosts, made unauthorized edits, and sent millions of resource-intensive requests to its infrastructure, in the latest instance of OpenAI systems taking harmful and potentially dangerous actions.\n\nThe objective of some of the OpenAI agents’ actions, the Wikimedia Foundation said , was to use Wikipedia as a proxy for fetching data from third-party sites. In one case, the agents posted “malicious edits” that were intended to repurpose a citation tool as a proxy. In another, the agents made unsuccessful attempts to compromise the Wikipedia Etherpad note-taking tool so it would serve the same purpose.\n\nThe agents also made millions of automated API requests, crawled millions of pages, and made hundreds of thousands of queries to the Wikidata Query Service. The last action may have contributed to a partial shutdown of the query service in May, the publisher said.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/security/2026/10/openai-agents-tried-to-hack-wikipedia-tools-and-flooded-it-with-traffic/",
-      "publishedAt": "2026-10-06T12:21:53.000Z",
       "categories": [
         "tecnologia-general"
       ]

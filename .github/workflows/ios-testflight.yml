@@ -33,8 +33,25 @@ jobs:
         run: |
           umask 077
           mkdir -p "$HOME/.appstoreconnect/private_keys"
-          printf '%s' "$API_PRIVATE" > "$HOME/.appstoreconnect/private_keys/AuthKey_${API_ID}.p8"
-          echo "ASC_KEY_PATH=$HOME/.appstoreconnect/private_keys/AuthKey_${API_ID}.p8" >> "$GITHUB_ENV"
+          export TARGET_KEY="$HOME/.appstoreconnect/private_keys/AuthKey_${API_ID}.p8"
+          python3 - <<'PY'
+          import os, base64
+          from pathlib import Path
+          raw = os.environ['API_PRIVATE'].strip().strip('"').strip("'")
+          if '\\n' in raw:
+              raw = raw.replace('\\r\\n', '\\n').replace('\\n', '\\n')
+          if '-----BEGIN' not in raw:
+              try:
+                  decoded = base64.b64decode(raw, validate=True).decode('utf-8')
+                  if '-----BEGIN' in decoded:
+                      raw = decoded
+              except (ValueError, UnicodeDecodeError):
+                  pass
+          if '-----BEGIN PRIVATE KEY-----' not in raw or '-----END PRIVATE KEY-----' not in raw:
+              raise SystemExit('La clave almacenada no tiene formato PEM PKCS8 reconocible. No se muestra su contenido.')
+          Path(os.environ['TARGET_KEY']).write_text(raw.strip() + '\\n')
+          PY
+          echo "ASC_KEY_PATH=$TARGET_KEY" >> "$GITHUB_ENV"
       - name: Preparar proyecto iOS
         working-directory: ios-build
         run: |

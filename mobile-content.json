@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-08T13:34:28.287Z",
+  "generatedAt": "2026-10-08T19:29:03.079Z",
   "resources": [
     {
       "kind": "resource",
@@ -6115,24 +6115,6 @@
         "proyectos-prototipos",
         "ia-accesibilidad",
         "movilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "applevis-blog-971fdf15fe31663c:en",
-      "sourceId": "applevis-blog-971fdf15fe31663c",
-      "lang": "en",
-      "title": "Apple Releases Version 27.0.1 of iOS, iPadOS, and macOS with fix for Face ID on iPhone 18 Pro and More",
-      "summary": "Apple has today released version 27.0.1 of iOS, iPadOS, and macOS, bringing assorted bug fixes, including for issues with Face ID on iPhone 18 Pro and iPhone 18 Pro Max. Apple has also released iOS 26.7.1, iPadOS 26.7.1, macOS Tahoe 26.7.1, and macOS Sequoia 15.8.1 for devices not running version 27 of their respective operating systems. As iOS 27.0.1, iPadOS 27.0.1, and macOS Golden Gate 27.0.1 were not distributed to external testers prior to their release, we do not have any information on whether they contain any accessibility fixes for blind, deaf blind, or low vision users at the time of writing. However, as these updates appear to have been released to address a small number of specific issues, we do not expect them to contain any such fixes. Release Notes iOS 27.0.1 This update provides bug fixes for your iPhone, including fixes for the following issues: iPhone 18 Pro and iPhone 18 Pro Max may unexpectedly restart when Face ID fails to authenticate A color artifact may appear on photos captured at 2x under certain lighting conditions at f/1.48 on a small number of iPhone 18 Pro and iPhone 18 Pro Max devices Opening Notification Center and Control Center simultaneously may cause the touchscreen to become unresponsive macOS Golden Gate 27.0.1 This update provides bug fixes for your Mac. How to Update iOS and iPadOS 27.0.1 are available via Over-the-Air Update (Settings > General > Software Update), via Finder on a Mac with macOS Catalina or later, or via iTunes on a PC or Mac with macOS Mojave or earlier. Before updating, we strongly recommend making a full and complete backup of your device (either locally or in iCloud, depending on personal preference). This will ensure that, in the unlikely event that something goes wrong during the update process, you will have a current backup on hand in case a device restore becomes necessary. Also, if using OTA update, we recommend plugging your device into a power source for the duration of the download/installation process, so as to prevent the unlikely event of your battery going dead during the update. To install macOS Golden Gate 27.0.1, choose System Settings from the Apple menu, select General in the table, click Software Update in the scroll area, and click the Update Now button to begin the update process. If other updates are available, you can click the Info button to see details about them and select specific updates to install.",
-      "body": "Apple has today released version 27.0.1 of iOS, iPadOS, and macOS, bringing assorted bug fixes, including for issues with Face ID on iPhone 18 Pro and iPhone 18 Pro Max. Apple has also released iOS 26.7.1 and iPadOS 26.7.1 for devices not yet upgraded to iOS 27.\n\nAs iOS 27.0.1, iPadOS 27.0.1, and macOS Golden Gate 27.0.1 were not distributed to external testers prior to their release, we do not have any information on whether they contain any accessibility fixes for blind, deaf blind, or low vision users at the time of writing. However, as these updates appear to have been released to address a small number of specific issues, we do not expect them to contain any such fixes.\n\nThis update provides bug fixes for your iPhone, including fixes for the following issues:\n\nThis update provides bug fixes for your Mac.\n\niOS and iPadOS 27.0.1 are available via Over-the-Air Update (Settings > General > Software Update), via Finder on a Mac with macOS Catalina or later, or via iTunes on a PC or Mac with macOS Mojave or earlier.\n\nBefore updating, we strongly recommend making a full and complete backup of your device (either locally or in iCloud, depending on personal preference). This will ensure that, in the unlikely event that something goes wrong during the update process, you will have a current backup on hand in case a device restore becomes necessary. Also, if using OTA update, we recommend plugging your device into a power source for the duration of the download/installation process, so as to prevent the unlikely event of your battery going dead during the update.\n\nTo install macOS Golden Gate 27.0.1, choose System Settings from the Apple menu, select General in the table, click Software Update in the scroll area, and click the Update Now button to begin the update process. If other updates are available, you can click the Info button to see details about them and select specific updates to install.",
-      "sourceName": "AppleVis Blog",
-      "originalUrl": "https://www.applevis.com/blog/apple-releases-version-2701-ios-ipados-macos-fix-face-id-iphone-18-pro-more",
-      "publishedAt": "2026-09-28T17:45:16.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-accesibilidad",
-        "programas-accesibles",
-        "sordoceguera"
       ]
     }
   ]

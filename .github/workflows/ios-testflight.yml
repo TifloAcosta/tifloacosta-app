@@ -58,24 +58,21 @@ jobs:
           npm install --no-audit --no-fund
           npm run prepare:web
           npx cap add ios
-      - name: Configurar firma de distribución solo para la app
+      - name: Verificar que la aplicación compila sin firma
         working-directory: ios-build
         run: |
-          ruby <<'RUBY'
-          require 'xcodeproj'
-          project_path = 'ios/App/App.xcodeproj'
-          project = Xcodeproj::Project.open(project_path)
-          target = project.targets.find { |item| item.name == 'App' }
-          abort 'No se ha encontrado el target App' unless target
-          target.build_configurations.each do |config|
-            next unless config.name == 'Release'
-            config.build_settings['CODE_SIGN_STYLE'] = 'Automatic'
-            config.build_settings['CODE_SIGN_IDENTITY'] = 'Apple Distribution'
-            config.build_settings['DEVELOPMENT_TEAM'] = '3A8G8A62YZ'
-            config.build_settings['PRODUCT_BUNDLE_IDENTIFIER'] = 'com.tifloacosta.app'
-          end
-          project.save
-          RUBY
+          xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build
+      - name: Comprobar recursos para distribución en App Store
+        env:
+          IOS_CERT: ${{ secrets.IOS_DISTRIBUTION_CERTIFICATE_BASE64 }}
+          IOS_CERT_PASSWORD: ${{ secrets.IOS_DISTRIBUTION_CERTIFICATE_PASSWORD }}
+          IOS_PROFILE: ${{ secrets.IOS_APPSTORE_PROFILE_BASE64 }}
+        run: |
+          if [ -z "$IOS_CERT" ] || [ -z "$IOS_CERT_PASSWORD" ] || [ -z "$IOS_PROFILE" ]; then
+            echo "::error::Faltan recursos de firma para distribución iOS: certificado Apple Distribution .p12 y perfil App Store. Las claves APPSTORE_API_* sirven para autenticación, pero no sustituyen estos recursos."
+            echo "No se han cambiado los secretos existentes. La aplicación se ha comprobado previamente sin firmar."
+            exit 1
+          fi
       - name: Archivar aplicación con firma automática
         working-directory: ios-build
         env:

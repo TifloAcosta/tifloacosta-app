@@ -58,13 +58,31 @@ jobs:
           npm install --no-audit --no-fund
           npm run prepare:web
           npx cap add ios
+      - name: Configurar firma de distribución solo para la app
+        working-directory: ios-build
+        run: |
+          ruby <<'RUBY'
+          require 'xcodeproj'
+          project_path = 'ios/App/App.xcodeproj'
+          project = Xcodeproj::Project.open(project_path)
+          target = project.targets.find { |item| item.name == 'App' }
+          abort 'No se ha encontrado el target App' unless target
+          target.build_configurations.each do |config|
+            next unless config.name == 'Release'
+            config.build_settings['CODE_SIGN_STYLE'] = 'Automatic'
+            config.build_settings['CODE_SIGN_IDENTITY'] = 'Apple Distribution'
+            config.build_settings['DEVELOPMENT_TEAM'] = '3A8G8A62YZ'
+            config.build_settings['PRODUCT_BUNDLE_IDENTIFIER'] = 'com.tifloacosta.app'
+          end
+          project.save
+          RUBY
       - name: Archivar aplicación con firma automática
         working-directory: ios-build
         env:
           API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
           API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
         run: |
-          xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination 'generic/platform=iOS' -archivePath "$RUNNER_TEMP/TifloAcosta.xcarchive" DEVELOPMENT_TEAM=3A8G8A62YZ PRODUCT_BUNDLE_IDENTIFIER=com.tifloacosta.app CODE_SIGN_STYLE=Automatic -allowProvisioningUpdates -authenticationKeyPath "$ASC_KEY_PATH" -authenticationKeyID "$API_ID" -authenticationKeyIssuerID "$API_ISSUER" archive
+          xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination 'generic/platform=iOS' -archivePath "$RUNNER_TEMP/TifloAcosta.xcarchive" -allowProvisioningUpdates -authenticationKeyPath "$ASC_KEY_PATH" -authenticationKeyID "$API_ID" -authenticationKeyIssuerID "$API_ISSUER" archive
       - name: Configurar exportación App Store Connect
         run: |
           cat > "$RUNNER_TEMP/ExportOptions.plist" <<'PLIST'

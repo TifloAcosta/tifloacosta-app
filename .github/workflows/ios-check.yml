@@ -1,0 +1,31 @@
+name: Verificar base iOS (sin publicar)
+on:
+  workflow_dispatch:
+  push:
+    branches: [preparacion-ios]
+    paths:
+      - 'ios-build/**'
+      - '.github/workflows/ios-check.yml'
+jobs:
+  ios-unsigned-build:
+    runs-on: macos-15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Instalar dependencias
+        working-directory: ios-build
+        run: npm install --no-audit --no-fund
+      - name: Preparar contenido web
+        working-directory: ios-build
+        run: npm run prepare:web
+      - name: Generar plataforma iOS
+        working-directory: ios-build
+        run: npx cap add ios
+      - name: Comprobar compilacion de simulador sin firma
+        working-directory: ios-build
+        run: |
+          xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build

@@ -1,0 +1,52 @@
+name: Preparar solicitud CSR de distribución iOS
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  generar-csr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verificar contraseña de cifrado
+        env:
+          KEY_PASSPHRASE: ${{ secrets.IOS_SIGNING_KEY_PASSPHRASE }}
+        shell: bash
+        run: |
+          if [ -z "$KEY_PASSPHRASE" ]; then
+            echo "::error::Falta el secreto IOS_SIGNING_KEY_PASSPHRASE. Configúralo antes de ejecutar."
+            exit 1
+          fi
+          if [ "${#KEY_PASSPHRASE}" -lt 16 ]; then
+            echo "::error::La contraseña del secreto debe tener al menos 16 caracteres."
+            exit 1
+          fi
+      - name: Generar CSR y clave privada protegida
+        env:
+          KEY_PASSPHRASE: ${{ secrets.IOS_SIGNING_KEY_PASSPHRASE }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          mkdir -p "$RUNNER_TEMP/ios-csr"
+          cd "$RUNNER_TEMP/ios-csr"
+          trap 'rm -f signing-private-unencrypted.key' EXIT
+          openssl req -new -newkey rsa:2048 -nodes \
+            -keyout signing-private-unencrypted.key \
+            -out TifloAcosta.certSigningRequest \
+            -subj "/CN=TifloAcosta Apple Distribution"
+          openssl pkcs8 -topk8 -v2 aes-256-cbc \
+            -in signing-private-unencrypted.key \
+            -out TifloAcosta-private-encrypted.pem \
+            -passout env:KEY_PASSPHRASE
+          chmod 600 TifloAcosta-private-encrypted.pem
+          rm -f signing-private-unencrypted.key
+          openssl req -in TifloAcosta.certSigningRequest -noout -verify
+      - name: Descargar CSR y clave cifrada como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: TifloAcosta-CSR-y-clave-cifrada
+          path: |
+            ${{ runner.temp }}/ios-csr/TifloAcosta.certSigningRequest
+            ${{ runner.temp }}/ios-csr/TifloAcosta-private-encrypted.pem
+          if-no-files-found: error
+          retention-days: 7

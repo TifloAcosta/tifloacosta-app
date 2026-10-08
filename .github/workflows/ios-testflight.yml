@@ -1,0 +1,80 @@
+name: Preparar y enviar TifloAcosta iOS a TestFlight
+on:
+  workflow_dispatch:
+  push:
+    branches: [preparacion-ios]
+    paths: ['.github/workflows/ios-testflight.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  build-upload:
+    runs-on: macos-15
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Comprobar credenciales sin revelarlas
+        env:
+          API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+          API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+          API_PRIVATE: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+        run: |
+          test -n "$API_ID" || { echo "Falta APPSTORE_API_KEY_ID"; exit 1; }
+          test -n "$API_ISSUER" || { echo "Falta APPSTORE_API_ISSUER_ID"; exit 1; }
+          test -n "$API_PRIVATE" || { echo "Falta APPSTORE_API_PRIVATE_KEY"; exit 1; }
+      - name: Preparar clave de firma y subida
+        env:
+          API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+          API_PRIVATE: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+        run: |
+          umask 077
+          mkdir -p "$HOME/.appstoreconnect/private_keys"
+          printf '%s' "$API_PRIVATE" > "$HOME/.appstoreconnect/private_keys/AuthKey_${API_ID}.p8"
+          echo "ASC_KEY_PATH=$HOME/.appstoreconnect/private_keys/AuthKey_${API_ID}.p8" >> "$GITHUB_ENV"
+      - name: Preparar proyecto iOS
+        working-directory: ios-build
+        run: |
+          npm install --no-audit --no-fund
+          npm run prepare:web
+          npx cap add ios
+      - name: Archivar aplicación con firma automática
+        working-directory: ios-build
+        env:
+          API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+          API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+        run: |
+          xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination 'generic/platform=iOS' -archivePath "$RUNNER_TEMP/TifloAcosta.xcarchive" DEVELOPMENT_TEAM=3A8G8A62YZ PRODUCT_BUNDLE_IDENTIFIER=com.tifloacosta.app CODE_SIGN_STYLE=Automatic -allowProvisioningUpdates -authenticationKeyPath "$ASC_KEY_PATH" -authenticationKeyID "$API_ID" -authenticationKeyIssuerID "$API_ISSUER" archive
+      - name: Configurar exportación App Store Connect
+        run: |
+          cat > "$RUNNER_TEMP/ExportOptions.plist" <<'PLIST'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0"><dict>
+            <key>method</key><string>app-store-connect</string>
+            <key>destination</key><string>export</string>
+            <key>signingStyle</key><string>automatic</string>
+            <key>teamID</key><string>3A8G8A62YZ</string>
+          </dict></plist>
+          PLIST
+      - name: Exportar IPA firmada
+        env:
+          API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+          API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+        run: |
+          xcodebuild -exportArchive -archivePath "$RUNNER_TEMP/TifloAcosta.xcarchive" -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist" -exportPath "$RUNNER_TEMP/ios-export" -allowProvisioningUpdates -authenticationKeyPath "$ASC_KEY_PATH" -authenticationKeyID "$API_ID" -authenticationKeyIssuerID "$API_ISSUER"
+      - name: Enviar compilación a App Store Connect para TestFlight
+        env:
+          API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+          API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+        run: |
+          IPA=$(find "$RUNNER_TEMP/ios-export" -maxdepth 1 -name '*.ipa' -print -quit)
+          test -n "$IPA" || { echo "No se ha generado IPA"; exit 1; }
+          xcrun altool --upload-app --type ios --file "$IPA" --apiKey "$API_ID" --apiIssuer "$API_ISSUER"
+      - name: Borrar credencial privada del equipo temporal
+        if: always()
+        run: |
+          if [ -n "${ASC_KEY_PATH:-}" ]; then rm -f "$ASC_KEY_PATH"; fi

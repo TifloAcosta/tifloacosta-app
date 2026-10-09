@@ -72,6 +72,7 @@ jobs:
           openssl pkcs12 \
             -in TifloAcosta.p12 \
             -info -noout \
+            -legacy \
             -passin env:KEY_PASSPHRASE
 
           rm -f private-decrypted.pem

@@ -70,7 +70,7 @@ jobs:
           app.build_configurations.each do |config|
             next unless config.name == 'Release'
             config.build_settings['DEVELOPMENT_TEAM'] = '3A8G8A62YZ'
-            config.build_settings['CODE_SIGN_STYLE'] = 'Automatic'
+            config.build_settings['CODE_SIGN_STYLE'] = 'Manual'
             config.build_settings['CODE_SIGN_IDENTITY'] = 'Apple Distribution'
             config.build_settings['CODE_SIGN_IDENTITY[sdk=iphoneos*]'] = 'Apple Distribution'
           end
@@ -122,13 +122,87 @@ jobs:
           security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
           echo "IOS_TEMP_KEYCHAIN=$KEYCHAIN" >> "$GITHUB_ENV"
           rm -f "$RUNNER_TEMP/ios-signing/TifloAcosta.p12"
-      - name: Archivar aplicación con firma automática
+      - name: Crear e instalar perfil App Store con la API de Apple
+        env:
+          API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+          API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+        run: |
+          set -euo pipefail
+          SIGNING_SHA="$(security find-identity -v -p codesigning "$IOS_TEMP_KEYCHAIN" | awk 'NR==1 {print $2}')"
+          test -n "$SIGNING_SHA" || { echo "::error::No hay identidad válida de firma"; exit 1; }
+          export SIGNING_SHA
+          node <<'NODE'
+          const fs = require('node:fs');
+          const crypto = require('node:crypto');
+          const path = require('node:path');
+          const enc = x => Buffer.from(JSON.stringify(x)).toString('base64url');
+          const now = Math.floor(Date.now()/1000);
+          const header = enc({alg:'ES256',kid:process.env.API_ID,typ:'JWT'});
+          const payload = enc({iss:process.env.API_ISSUER,iat:now,exp:now+1100,aud:'appstoreconnect-v1'});
+          const input = header+'.'+payload;
+          const signature = crypto.sign('sha256', Buffer.from(input), {
+            key:fs.readFileSync(process.env.ASC_KEY_PATH),dsaEncoding:'ieee-p1363'
+          }).toString('base64url');
+          const token = input+'.'+signature;
+          const api = async (endpoint,options={}) => {
+            const response=await fetch('https://api.appstoreconnect.apple.com/v1/'+endpoint,{
+              ...options,headers:{Authorization:'Bearer '+token,'Content-Type':'application/json',...options.headers}
+            });
+            const body=await response.json();
+            if(!response.ok) throw Error('API de Apple '+response.status+': '+JSON.stringify(body.errors||body).slice(0,700));
+            return body;
+          };
+          const certs=await api('certificates?limit=200');
+          const sha=process.env.SIGNING_SHA.replaceAll(':','').toUpperCase();
+          const cert=certs.data.find(x=>{
+            const content=x.attributes.certificateContent;
+            if(!content) return false;
+            return new crypto.X509Certificate(Buffer.from(content,'base64')).fingerprint.replaceAll(':','').toUpperCase()===sha;
+          });
+          if(!cert) throw Error('El certificado P12 importado no coincide con ningún certificado vigente de Apple Developer.');
+          const bundles=await api('bundleIds?filter[identifier]=com.tifloacosta.app');
+          const bundle=bundles.data.find(x=>x.attributes.identifier==='com.tifloacosta.app');
+          if(!bundle) throw Error('No existe el identificador com.tifloacosta.app en Apple Developer');
+          const profileName='TifloAcosta AppStore '+process.env.GITHUB_RUN_ID;
+          const created=await api('profiles',{method:'POST',body:JSON.stringify({data:{
+            type:'profiles',attributes:{name:profileName,profileType:'IOS_APP_STORE'},
+            relationships:{
+              bundleId:{data:{type:'bundleIds',id:bundle.id}},
+              certificates:{data:[{type:'certificates',id:cert.id}]}
+            }
+          }})});
+          const profile=created.data;
+          const dir=path.join(process.env.HOME,'Library/MobileDevice/Provisioning Profiles');
+          fs.mkdirSync(dir,{recursive:true});
+          fs.writeFileSync(path.join(dir,profile.attributes.uuid+'.mobileprovision'),Buffer.from(profile.attributes.profileContent,'base64'),{mode:0o600});
+          fs.appendFileSync(process.env.GITHUB_ENV,'IOS_PROFILE_NAME='+profileName+'\n');
+          console.log('Perfil de distribución App Store generado e instalado.');
+          NODE
+      - name: Asignar perfil manual únicamente a la app
+        working-directory: ios-build
+        run: |
+          ruby <<'RUBY'
+          require 'xcodeproj'
+          project = Xcodeproj::Project.open('ios/App/App.xcodeproj')
+          app = project.targets.find { |target| target.name == 'App' }
+          abort 'No existe target App' unless app
+          app.build_configurations.each do |config|
+            next unless config.name == 'Release'
+            config.build_settings['CODE_SIGN_STYLE'] = 'Manual'
+            config.build_settings['DEVELOPMENT_TEAM'] = '3A8G8A62YZ'
+            config.build_settings['CODE_SIGN_IDENTITY'] = 'Apple Distribution'
+            config.build_settings['CODE_SIGN_IDENTITY[sdk=iphoneos*]'] = 'Apple Distribution'
+            config.build_settings['PROVISIONING_PROFILE_SPECIFIER'] = ENV.fetch('IOS_PROFILE_NAME')
+          end
+          project.save
+          RUBY
+      - name: Archivar aplicación con perfil de distribución
         working-directory: ios-build
         env:
           API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
           API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
         run: |
-          xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination 'generic/platform=iOS' -archivePath "$RUNNER_TEMP/TifloAcosta.xcarchive" -allowProvisioningUpdates -authenticationKeyPath "$ASC_KEY_PATH" -authenticationKeyID "$API_ID" -authenticationKeyIssuerID "$API_ISSUER" DEVELOPMENT_TEAM=3A8G8A62YZ CODE_SIGN_STYLE=Automatic archive
+          xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination 'generic/platform=iOS' -archivePath "$RUNNER_TEMP/TifloAcosta.xcarchive" -allowProvisioningUpdates -authenticationKeyPath "$ASC_KEY_PATH" -authenticationKeyID "$API_ID" -authenticationKeyIssuerID "$API_ISSUER" archive
       - name: Configurar exportación App Store Connect
         run: |
           cat > "$RUNNER_TEMP/ExportOptions.plist" <<'PLIST'
@@ -137,10 +211,11 @@ jobs:
           <plist version="1.0"><dict>
             <key>method</key><string>app-store-connect</string>
             <key>destination</key><string>export</string>
-            <key>signingStyle</key><string>automatic</string>
+            <key>signingStyle</key><string>manual</string>\n            <key>signingCertificate</key><string>Apple Distribution</string>\n            <key>provisioningProfiles</key><dict><key>com.tifloacosta.app</key><string>PROFILE_REPLACEME</string></dict>
             <key>teamID</key><string>3A8G8A62YZ</string>
           </dict></plist>
           PLIST
+          sed -i '' "s/PROFILE_REPLACEME/$IOS_PROFILE_NAME/g" "$RUNNER_TEMP/ExportOptions.plist"
       - name: Exportar IPA firmada
         env:
           API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}

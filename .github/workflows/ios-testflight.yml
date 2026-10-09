@@ -67,7 +67,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: TifloAcosta-P12-protegido
-          run-id: 37862894584
+          run-id: 37864699270
           github-token: ${{ github.token }}
           path: ${{ runner.temp }}/ios-signing
       - name: Importar certificado de distribución en llavero temporal
@@ -84,7 +84,14 @@ jobs:
           security set-keychain-settings -lut 21600 "$KEYCHAIN"
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
           security list-keychains -d user -s "$KEYCHAIN" $(security list-keychains -d user | tr -d '"')
-          security import "$RUNNER_TEMP/ios-signing/TifloAcosta.p12" -k "$KEYCHAIN" -P "$P12_PASSWORD" -T /usr/bin/codesign -T /usr/bin/security
+          # Convertir el P12 heredado al formato moderno compatible con macOS.
+          OPENSSL3="$(brew --prefix openssl@3)/bin/openssl"
+          SIGNING_DIR="$RUNNER_TEMP/ios-signing"
+          trap 'rm -f "$SIGNING_DIR/tifloacosta-temp.pem" "$SIGNING_DIR/TifloAcosta-moderno.p12"' EXIT
+          "$OPENSSL3" pkcs12 -legacy -in "$SIGNING_DIR/TifloAcosta.p12" -passin env:P12_PASSWORD -nodes -out "$SIGNING_DIR/tifloacosta-temp.pem"
+          "$OPENSSL3" pkcs12 -export -in "$SIGNING_DIR/tifloacosta-temp.pem" -out "$SIGNING_DIR/TifloAcosta-moderno.p12" -passout env:P12_PASSWORD -name "TifloAcosta Apple Distribution"
+          rm -f "$SIGNING_DIR/tifloacosta-temp.pem"
+          security import "$SIGNING_DIR/TifloAcosta-moderno.p12" -k "$KEYCHAIN" -P "$P12_PASSWORD" -T /usr/bin/codesign -T /usr/bin/security
           security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
           echo "IOS_TEMP_KEYCHAIN=$KEYCHAIN" >> "$GITHUB_ENV"
           rm -f "$RUNNER_TEMP/ios-signing/TifloAcosta.p12"

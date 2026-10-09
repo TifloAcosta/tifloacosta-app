@@ -49,3 +49,14 @@ test('PDF reader announces unreliable reading order once during initialization',
   assert.ok(i18n.includes('El orden de lectura de este PDF puede no ser fiable.'));
   assert.ok(i18n.includes('The reading order of this PDF may not be reliable.'));
 });
+
+
+test('PDF speech receives the active book identity needed to start native TTS', async () => {
+  const [screen, speechCore] = await Promise.all([
+    read('src/screens/reading-book.mjs'),
+    read('../shared/reading-speech-core.mjs')
+  ]);
+
+  assert.match(screen, /speech\s*=\s*createReadingSpeechController\(\{\s*client,\s*book:\s*activeBook,\s*document:\s*documentModel,/);
+  assert.match(speechCore, /if\s*\(destroyed\s*\|\|\s*ended\s*\|\|\s*!bookId\)\s*return false/);
+});

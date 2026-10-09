@@ -693,10 +693,21 @@
     catalogLoaded = false;
     els.status.textContent = copy[lang].loading;
     try {
-      const response = await fetch('./videos.json', { cache: 'no-store' });
-      if (!response.ok) throw new Error(`Catalog request failed: ${response.status}`);
-      const data = await response.json();
+      let data = null;
+      try {
+        const response = await fetch('https://tifloacosta.com/videos.json', { cache: 'no-store' });
+        if (response.ok) data = await response.json();
+      } catch {}
+      if (!Array.isArray(data?.videos) || !data.videos.length) {
+        data = window.TIFLO_IOS_VIDEOS || null;
+      }
+      if (!Array.isArray(data?.videos) || !data.videos.length) {
+        const response = await fetch('./videos.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error(`Catalog request failed: ${response.status}`);
+        data = await response.json();
+      }
       catalog = Array.isArray(data.videos) ? data.videos : [];
+      if (!catalog.length) throw new Error('Empty catalog');
       catalogLoaded = true;
       render();
     } catch (error) {

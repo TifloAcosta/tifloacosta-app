@@ -3,7 +3,13 @@ on:
   workflow_dispatch:
   push:
     branches: [preparacion-ios]
-    paths: ['.github/workflows/ios-testflight.yml']
+    paths:
+      - '.github/workflows/ios-testflight.yml'
+      - 'ios-build/**'
+      - 'index.html'
+      - 'videos.js'
+      - 'podcast.js'
+      - 'downloads.js'
 
 permissions:
   contents: read

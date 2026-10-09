@@ -609,8 +609,16 @@
     menu.hidden = !onHome;
     if (footer) footer.hidden = !onHome;
     Object.values(views).forEach(section => { section.hidden = section !== target; });
-    if (target) target.focus();
-    else if (key === 'home') main.focus();
+    // Move VoiceOver to the beginning of the newly opened screen.
+    const heading = target?.querySelector('[aria-labelledby]') || (target?.getAttribute('aria-labelledby') ? document.getElementById(target.getAttribute('aria-labelledby')) : null);
+    if (target) {
+      const screenHeading = target.getAttribute('aria-labelledby') ? document.getElementById(target.getAttribute('aria-labelledby')) : heading;
+      if (screenHeading) {
+        screenHeading.setAttribute('tabindex', '-1');
+        requestAnimationFrame(() => screenHeading.focus({ preventScroll: true }));
+      } else requestAnimationFrame(() => target.focus({ preventScroll: true }));
+    } else if (key === 'home') requestAnimationFrame(() => document.getElementById('app-heading')?.focus({ preventScroll: true }));
+    window.scrollTo(0, 0);
   }
 
   window.addEventListener('hashchange', showHomeView);

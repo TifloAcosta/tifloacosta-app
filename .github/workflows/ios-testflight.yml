@@ -131,10 +131,10 @@ jobs:
           SIGNING_SHA="$(security find-identity -v -p codesigning "$IOS_TEMP_KEYCHAIN" | awk 'NR==1 {print $2}')"
           test -n "$SIGNING_SHA" || { echo "::error::No hay identidad válida de firma"; exit 1; }
           export SIGNING_SHA
-          node <<'NODE'
-          const fs = require('node:fs');
-          const crypto = require('node:crypto');
-          const path = require('node:path');
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import crypto from 'node:crypto';
+          import path from 'node:path';
           const enc = x => Buffer.from(JSON.stringify(x)).toString('base64url');
           const now = Math.floor(Date.now()/1000);
           const header = enc({alg:'ES256',kid:process.env.API_ID,typ:'JWT'});

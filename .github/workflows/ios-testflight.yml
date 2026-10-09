@@ -68,6 +68,22 @@ jobs:
           npm install --no-audit --no-fund
           npm run prepare:web
           npx cap add ios
+      - name: Asignar número de compilación único para TestFlight
+        working-directory: ios-build
+        env:
+          BUILD_NUMBER: ${{ github.run_number }}
+        run: |
+          ruby <<'RUBY'
+          require 'xcodeproj'
+          project = Xcodeproj::Project.open('ios/App/App.xcodeproj')
+          app = project.targets.find { |target| target.name == 'App' }
+          abort 'No se encontró el target App' unless app
+          app.build_configurations.each do |config|
+            config.build_settings['CURRENT_PROJECT_VERSION'] = ENV.fetch('BUILD_NUMBER')
+          end
+          project.save
+          puts "Número de compilación TestFlight: #{ENV.fetch('BUILD_NUMBER')}"
+          RUBY
       - name: Configurar firma de distribución solo para App
         working-directory: ios-build
         run: |

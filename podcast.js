@@ -28,6 +28,10 @@
     time: $('#podcast-time'),
     episodesHeading: $('#podcast-episodes-heading'),
     episodes: $('#podcast-episodes'),
+    pagination: $('#podcast-pagination'),
+    pageStatus: $('#podcast-page-status'),
+    previousPage: $('#podcast-prev'),
+    nextPage: $('#podcast-next'),
     servicesHeading: $('#podcast-services-heading'),
     footer: $('#footer-text')
   };
@@ -80,6 +84,8 @@
   };
 
   let lang = readStorage('tifloLang') || (navigator.language?.toLowerCase().startsWith('en') ? 'en' : 'es');
+  const EPISODES_PER_PAGE = 10;
+  let currentPage = 1;
   let episodes = [];
   let activeEpisode = null;
   let activeButton = null;
@@ -214,7 +220,10 @@
 
   function renderEpisodes() {
     els.episodes.replaceChildren();
-    for (const episode of episodes) {
+    const totalPages = Math.max(1, Math.ceil(episodes.length / EPISODES_PER_PAGE));
+    currentPage = Math.min(Math.max(1, currentPage), totalPages);
+    const start = (currentPage - 1) * EPISODES_PER_PAGE;
+    for (const episode of episodes.slice(start, start + EPISODES_PER_PAGE)) {
       const article = document.createElement('article');
       article.className = 'podcast-episode-card';
 
@@ -244,6 +253,15 @@
       article.append(listen);
       els.episodes.append(article);
     }
+    els.pagination.hidden = episodes.length === 0;
+    els.previousPage.hidden = currentPage <= 1;
+    els.nextPage.hidden = currentPage >= totalPages;
+    els.previousPage.textContent = lang === 'en' ? 'Previous 10 episodes' : '10 episodios anteriores en la lista';
+    els.nextPage.textContent = lang === 'en' ? 'Next 10 episodes' : 'Siguientes 10 episodios';
+    els.pagination.setAttribute('aria-label', lang === 'en' ? 'Episode pages' : 'Páginas de episodios');
+    els.pageStatus.textContent = lang === 'en'
+      ? `Showing episodes ${start + 1}–${Math.min(start + EPISODES_PER_PAGE, episodes.length)} of ${episodes.length}. Page ${currentPage} of ${totalPages}.`
+      : `Mostrando episodios ${start + 1} a ${Math.min(start + EPISODES_PER_PAGE, episodes.length)} de ${episodes.length}. Página ${currentPage} de ${totalPages}.`;
   }
 
   function applyLanguage() {
@@ -279,6 +297,8 @@
       const response = await fetch(FEED_URL, { cache: 'no-store' });
       if (!response.ok) throw new Error(`Feed request failed: ${response.status}`);
       episodes = parseEpisodes(await response.text());
+      episodes.sort((a, b) => Date.parse(b.published || 0) - Date.parse(a.published || 0));
+      currentPage = 1;
       if (!episodes.length) throw new Error('empty');
       els.status.textContent = '';
       renderEpisodes();
@@ -286,6 +306,21 @@
       els.status.textContent = copy[lang].error;
     }
   }
+
+  els.previousPage.addEventListener('click', () => {
+    if (currentPage <= 1) return;
+    currentPage--;
+    renderEpisodes();
+    els.episodesHeading.setAttribute('tabindex', '-1');
+    els.episodesHeading.focus();
+  });
+  els.nextPage.addEventListener('click', () => {
+    if (currentPage * EPISODES_PER_PAGE >= episodes.length) return;
+    currentPage++;
+    renderEpisodes();
+    els.episodesHeading.setAttribute('tabindex', '-1');
+    els.episodesHeading.focus();
+  });
 
   els.langEs.addEventListener('click', () => { lang = 'es'; applyLanguage(); });
   els.langEn.addEventListener('click', () => { lang = 'en'; applyLanguage(); });

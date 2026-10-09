@@ -14,6 +14,15 @@ jobs:
     runs-on: macos-15
     timeout-minutes: 60
     steps:
+      - name: Seleccionar Xcode 26 y SDK iOS 26 requerido por Apple
+        run: |
+          set -euo pipefail
+          XCODE="$(find /Applications -maxdepth 1 -type d -name 'Xcode_26*.app' -print | sort | tail -n 1)"
+          test -n "$XCODE" || { echo "::error::El corredor macOS no tiene Xcode 26 instalado"; exit 1; }
+          sudo xcode-select --switch "$XCODE/Contents/Developer"
+          xcodebuild -version
+          SDK_VERSION="$(xcrun --sdk iphoneos --show-sdk-version)"
+          case "$SDK_VERSION" in 26.*|27.*|28.*) echo "SDK válido: $SDK_VERSION";; *) echo "::error::SDK iOS antiguo: $SDK_VERSION"; exit 1;; esac
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:

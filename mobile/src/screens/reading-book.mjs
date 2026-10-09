@@ -1147,6 +1147,7 @@ export function renderReadingBook({
 
     speech = createReadingSpeechController({
       client,
+      book: activeBook,
       document: documentModel,
       initialPosition: {
         blockIndex: currentPosition.blockIndex,

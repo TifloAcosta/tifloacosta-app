@@ -1,0 +1,85 @@
+
+name: Crear certificado P12 iOS TifloAcosta
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  crear-p12:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Recuperar clave privada cifrada
+        uses: actions/download-artifact@v4
+        with:
+          name: TifloAcosta-CSR-y-clave-cifrada
+          run-id: 37858744365
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/firma-ios
+
+      - name: Generar certificado P12
+        shell: bash
+        env:
+          KEY_PASSPHRASE: ${{ secrets.IOS_SIGNING_KEY_PASSPHRASE }}
+        run: |
+          set -euo pipefail
+          umask 077
+
+          if [ -z "$KEY_PASSPHRASE" ]; then
+            echo "::error::Falta la contraseña de cifrado."
+            exit 1
+          fi
+
+          cd "$RUNNER_TEMP/firma-ios"
+          trap 'rm -f private-decrypted.pem' EXIT
+
+          openssl x509 -inform DER \
+            -in "$GITHUB_WORKSPACE/distribution.cer" \
+            -out certificate.pem
+
+          openssl pkey \
+            -in TifloAcosta-private-encrypted.pem \
+            -passin env:KEY_PASSPHRASE \
+            -out private-decrypted.pem
+
+          openssl x509 -in certificate.pem \
+            -pubkey -noout > certificado-publico.pem
+
+          openssl pkey -in private-decrypted.pem \
+            -pubout > clave-publica.pem
+
+          if ! cmp -s certificado-publico.pem clave-publica.pem; then
+            echo "::error::El certificado no corresponde a la clave privada."
+            exit 1
+          fi
+
+          openssl pkcs12 -export \
+            -inkey private-decrypted.pem \
+            -in certificate.pem \
+            -out TifloAcosta.p12 \
+            -name "TifloAcosta Apple Distribution" \
+            -passout env:KEY_PASSPHRASE
+
+          openssl pkcs12 \
+            -in TifloAcosta.p12 \
+            -info -noout \
+            -passin env:KEY_PASSPHRASE
+
+          rm -f private-decrypted.pem
+          echo "Certificado P12 generado correctamente."
+
+      - name: Guardar P12 protegido
+        uses: actions/upload-artifact@v4
+        with:
+          name: TifloAcosta-P12-protegido
+          path: ${{ runner.temp }}/firma-ios/TifloAcosta.p12
+          if-no-files-found: error
+          retention-days: 3

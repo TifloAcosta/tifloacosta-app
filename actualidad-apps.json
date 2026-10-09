@@ -1,5 +1,17 @@
 [
   {
+    "id": "buscaapps-imagetype-1249",
+    "title": "ImageType | Accessible Editor",
+    "sourceId": "buscaapps",
+    "sourceName": "BuscaApps",
+    "sourceUrl": "https://www.buscaapps.com/",
+    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1249",
+    "lang": "es",
+    "platform": "Android",
+    "summary": "Editor de imágenes accesible para añadir texto y estilos personalizados a fotografías.",
+    "publishedAt": null
+  },
+  {
     "id": "buscaapps-6ecc16af0394397c",
     "title": "Youtube-downloader",
     "sourceId": "buscaapps",

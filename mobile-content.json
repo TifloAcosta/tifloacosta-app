@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-09T19:01:32.241Z",
+  "generatedAt": "2026-10-09T23:17:38.838Z",
   "resources": [
     {
       "kind": "resource",
@@ -6062,23 +6062,6 @@
       "categories": [
         "apple",
         "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "freedom-scientific-blog-88193542e3a8ac88:en",
-      "sourceId": "freedom-scientific-blog-88193542e3a8ac88",
-      "lang": "en",
-      "title": "Learn How You Can Get Organized with AI Projects",
-      "summary": "Artificial Intelligence (AI) is changing how we work, helping us automate routine tasks, analyze and summarize data, and generate content. Learn AI with our AI live webinar series and comprehensive online guide, designed to empower you with the knowledge and skills to increase productivity and independence in the workplace. The 15th webinar in this ongoing …",
-      "body": "Artificial Intelligence (AI) is changing how we work, helping us automate routine tasks, analyze and summarize data, and generate content. Learn AI with our AI live webinar series and comprehensive online guide, designed to empower you with the knowledge and skills to increase productivity and independence in the workplace. The 15th webinar in this ongoing series, “Get Organized with AI Projects,” will take place Thursday, October 1 at noon ET.\n\nAI Projects are dedicated workspaces that keep related conversations, files, and instructions together. They provide AI with the context needed to support ongoing work while helping you stay organized and avoid starting over each time.\n\nLearn how an AI Project can support an ongoing task from start to finish. We’ll show you how to:\n\nRegister for this webinar to learn how AI Projects can bring greater organization, continuity, and efficiency to your everyday tasks. ACVREP credits will be available for those who attend the live webinar.\n\nThis webinar is part of a series designed for all skill levels. It starts with the basics and builds each month, offering a deeper understanding of AI concepts and practical applications. Webinars are held on the first Thursday of every month at noon ET and are archived on our Webinars On Demand page, so you can stream or download sessions anytime. No prior AI experience is needed!\n\nAccess additional details on our page dedicated to helping you learn AI .\n\nHave questions? Send an email to training@vispero.com .",
-      "sourceName": "Freedom Scientific",
-      "originalUrl": "https://training.vispero.com/learn-how-you-can-get-organized-with-ai-projects/",
-      "publishedAt": "2026-09-29T22:19:51.000Z",
-      "categories": [
-        "windows",
-        "tecnologia-accesibilidad",
-        "ia-accesibilidad"
       ]
     }
   ]

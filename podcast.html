@@ -75,11 +75,6 @@
     <p id="podcast-time" class="muted" aria-live="polite" aria-atomic="true"></p>
   </section>
 
-  <section aria-labelledby="podcast-episodes-heading">
-    <h2 id="podcast-episodes-heading">Episodios</h2>
-    <div id="podcast-episodes" class="podcast-episode-list"></div>
-  </section>
-
   <section aria-labelledby="podcast-services-heading">
     <h2 id="podcast-services-heading">Escuchar en otros servicios</h2>
     <div class="resource-actions">
@@ -89,6 +84,18 @@
       <a id="podcast-podimo" class="button-link" href="https://podimo.com/es/shows/canal-tifloacosta" target="_blank" rel="noopener noreferrer">Podimo</a>
       <a id="podcast-radio" class="button-link" href="https://www.radio.es/podcast/canal-tifloacosta" target="_blank" rel="noopener noreferrer">radio.es</a>
     </div>
+  </section>
+
+  <section aria-labelledby="podcast-episodes-heading">
+    <h2 id="podcast-episodes-heading">Episodios</h2>
+    <div id="podcast-episodes" class="podcast-episode-list"></div>
+    <nav id="podcast-pagination" aria-label="Navegación de episodios" hidden>
+      <p id="podcast-page-status" class="muted" role="status" aria-live="polite"></p>
+      <div class="resource-actions">
+        <button id="podcast-prev" type="button">10 episodios anteriores en la lista</button>
+        <button id="podcast-next" type="button">Siguientes 10 episodios</button>
+      </div>
+    </nav>
   </section>
 
   <p><a id="back-home-bottom" class="button-link back-link" href="index.html">Volver a la pantalla principal</a></p>

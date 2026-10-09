@@ -66,6 +66,7 @@ jobs:
             -in certificate.pem \
             -out TifloAcosta.p12 \
             -name "TifloAcosta Apple Distribution" \
+            -legacy \
             -passout env:KEY_PASSPHRASE
 
           openssl pkcs12 \

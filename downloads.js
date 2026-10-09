@@ -122,9 +122,27 @@
     urlInput.autocapitalize = 'none';
     urlInput.spellcheck = false;
     urlInput.placeholder = t().placeholder;
+    const pasteLink = element('button', { id: 'download-paste-link', text: document.documentElement.lang === 'en' ? 'Paste link' : 'Pegar enlace' });
+    pasteLink.type = 'button';
+    pasteLink.addEventListener('click', async () => {
+      try {
+        const clipboardText = await navigator.clipboard.readText();
+        const match = clipboardText.match(/https?:\/\/[^\s<>"']+/i);
+        const candidate = core.normalizeUrl(match ? match[0] : clipboardText.trim());
+        if (!candidate) {
+          setStatus(document.documentElement.lang === 'en' ? 'The clipboard does not contain a valid link.' : 'El portapapeles no contiene un enlace válido.', true);
+          return;
+        }
+        urlInput.value = candidate.href;
+        setStatus(document.documentElement.lang === 'en' ? 'Link pasted. Press Analyze link.' : 'Enlace pegado. Pulsa Analizar enlace.');
+        analyze.focus();
+      } catch {
+        setStatus(document.documentElement.lang === 'en' ? 'Clipboard access was denied. Paste the link into the input field.' : 'No se ha permitido leer el portapapeles. Pega el enlace en el campo.', true);
+      }
+    });
     const analyze = element('button', { id: 'download-analyze', text: t().analyze });
     analyze.type = 'submit';
-    row.append(urlInput, analyze);
+    row.append(urlInput, pasteLink, analyze);
     form.append(row);
     section.append(form);
 
@@ -411,7 +429,14 @@
       .forEach(id => { const node = document.getElementById(id); if (node) node.hidden = true; });
     document.querySelectorAll('.site-header,.site-footer,.skip-link').forEach(node => { node.hidden = true; });
     section.hidden = false;
-    urlInput.focus();
+    headingFocus();
+  }
+
+  function headingFocus() {
+    const heading = document.getElementById('downloads-heading');
+    if (!heading) return;
+    heading.tabIndex = -1;
+    requestAnimationFrame(() => heading.focus({ preventScroll: true }));
   }
 
   if (!buildSurface()) return;

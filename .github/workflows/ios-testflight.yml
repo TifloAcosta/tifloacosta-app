@@ -59,6 +59,30 @@ jobs:
           npm install --no-audit --no-fund
           npm run prepare:web
           npx cap add ios
+      - name: Configurar firma de distribución solo para App
+        working-directory: ios-build
+        run: |
+          ruby <<'RUBY'
+          require 'xcodeproj'
+          project = Xcodeproj::Project.open('ios/App/App.xcodeproj')
+          app = project.targets.find { |target| target.name == 'App' }
+          abort 'No se encontró el target App' unless app
+          app.build_configurations.each do |config|
+            next unless config.name == 'Release'
+            config.build_settings['DEVELOPMENT_TEAM'] = '3A8G8A62YZ'
+            config.build_settings['CODE_SIGN_STYLE'] = 'Automatic'
+            config.build_settings['CODE_SIGN_IDENTITY'] = 'Apple Distribution'
+            config.build_settings['CODE_SIGN_IDENTITY[sdk=iphoneos*]'] = 'Apple Distribution'
+          end
+          project.save
+          pods = Xcodeproj::Project.open('ios/App/Pods/Pods.xcodeproj')
+          pods.targets.each do |target|
+            target.build_configurations.each do |config|
+              config.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'
+            end
+          end
+          pods.save
+          RUBY
       - name: Verificar que la aplicación compila sin firma
         working-directory: ios-build
         run: |

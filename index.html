@@ -610,14 +610,17 @@
     if (footer) footer.hidden = !onHome;
     Object.values(views).forEach(section => { section.hidden = section !== target; });
     // Move VoiceOver to the beginning of the newly opened screen.
-    const heading = target?.querySelector('[aria-labelledby]') || (target?.getAttribute('aria-labelledby') ? document.getElementById(target.getAttribute('aria-labelledby')) : null);
     if (target) {
-      const screenHeading = target.getAttribute('aria-labelledby') ? document.getElementById(target.getAttribute('aria-labelledby')) : heading;
+      const screenHeading = target.getAttribute('aria-labelledby') ? document.getElementById(target.getAttribute('aria-labelledby')) : target.querySelector('h1, h2, h3');
       if (screenHeading) {
         screenHeading.setAttribute('tabindex', '-1');
         requestAnimationFrame(() => screenHeading.focus({ preventScroll: true }));
       } else requestAnimationFrame(() => target.focus({ preventScroll: true }));
-    } else if (key === 'home') requestAnimationFrame(() => document.getElementById('app-heading')?.focus({ preventScroll: true }));
+    } else if (key === 'home') requestAnimationFrame(() => {
+      const homeHeading = document.getElementById('app-heading');
+      homeHeading?.setAttribute('tabindex', '-1');
+      homeHeading?.focus({ preventScroll: true });
+    });
     window.scrollTo(0, 0);
   }
 

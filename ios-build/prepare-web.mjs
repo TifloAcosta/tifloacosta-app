@@ -70,7 +70,7 @@ const iosLanguage = `<script id="tiflo-ios-settings">
 const bundledVideos = JSON.parse(await readFile(join(output, 'videos.json'), 'utf8'));
 if (!Array.isArray(bundledVideos.videos) || !bundledVideos.videos.length) throw new Error('Catálogo de vídeos vacío');
 await writeFile(join(output, 'ios-videos-fallback.js'),
-  'window.TIFLO_IOS_VIDEOS = ' + JSON.stringify(bundledVideos).replace(/</g, '\\u003c') + ';\\n');
+  'window.TIFLO_IOS_VIDEOS = ' + JSON.stringify(bundledVideos).replace(/</g, '\\u003c') + ';');
 for (const name of ['index.html','videos.html','podcast.html','actualidad.html']) {
   const path = join(output, name);
   let html = await readFile(path, 'utf8');

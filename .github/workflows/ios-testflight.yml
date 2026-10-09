@@ -211,7 +211,9 @@ jobs:
           <plist version="1.0"><dict>
             <key>method</key><string>app-store-connect</string>
             <key>destination</key><string>export</string>
-            <key>signingStyle</key><string>manual</string>\n            <key>signingCertificate</key><string>Apple Distribution</string>\n            <key>provisioningProfiles</key><dict><key>com.tifloacosta.app</key><string>PROFILE_REPLACEME</string></dict>
+            <key>signingStyle</key><string>manual</string> 
+            <key>signingCertificate</key><string>Apple Distribution</string> 
+            <key>provisioningProfiles</key><dict><key>com.tifloacosta.app</key><string>PROFILE_REPLACEME</string></dict>
             <key>teamID</key><string>3A8G8A62YZ</string>
           </dict></plist>
           PLIST

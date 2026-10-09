@@ -66,12 +66,18 @@ const iosLanguage = `<script id="tiflo-ios-settings">
   heading.insertAdjacentElement('afterend', wrapper);
 })();
 <\/script>`;
+// Bundle an executable fallback: WKWebView file:// fetch may reject local JSON.
+const bundledVideos = JSON.parse(await readFile(join(output, 'videos.json'), 'utf8'));
+if (!Array.isArray(bundledVideos.videos) || !bundledVideos.videos.length) throw new Error('Catálogo de vídeos vacío');
+await writeFile(join(output, 'ios-videos-fallback.js'),
+  'window.TIFLO_IOS_VIDEOS = ' + JSON.stringify(bundledVideos).replace(/</g, '\\u003c') + ';\\n');
 for (const name of ['index.html','videos.html','podcast.html','actualidad.html']) {
   const path = join(output, name);
   let html = await readFile(path, 'utf8');
   if (!html.includes('</head>')) throw new Error('Falta el cierre de cabecera: ' + name);
   html = html.replace('</head>', iosOverrides + '\n</head>');
   if (name === 'index.html') html = html.replace('</body>', iosLanguage + '\n</body>');
+  if (name === 'videos.html') html = html.replace('<script src="videos.js?v=2.5"></script>', '<script src="ios-videos-fallback.js"></script>\n<script src="videos.js?v=2.5"></script>');
   await writeFile(path, html);
 }
 

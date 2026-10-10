@@ -149,8 +149,28 @@ iosApp = iosApp.replace(iosCategoryRender,
     });`);
 await writeFile(iosAppPath, iosApp);
 
+// In Actualidad the video uses a plain iframe, not the YT.Player controller.
+// Keep an accessible, direct playback alternative in the same expanded panel.
+const iosMediaPath = join(output, 'actualidad-media.js');
+let iosMedia = await readFile(iosMediaPath, 'utf8');
+const mediaRender = '            container.replaceChildren(frame);';
+if (!iosMedia.includes(mediaRender)) throw new Error('No se encuentra reproductor de Actualidad');
+iosMedia = iosMedia.replace(mediaRender, `            container.replaceChildren(frame);
+            if (item.originalUrl) {
+              const alternative = document.createElement('a');
+              alternative.className = 'button-link';
+              alternative.href = item.originalUrl;
+              alternative.target = '_blank';
+              alternative.rel = 'noopener noreferrer';
+              alternative.textContent = currentLanguage() === 'en'
+                ? 'Open this video at the original source'
+                : 'Abrir este vídeo en su fuente original';
+              container.append(alternative);
+            }`);
+await writeFile(iosMediaPath, iosMedia);
+
 // Fail before signing or uploading if an injected iOS-only script is invalid.
-for (const file of ['app.js', 'videos.js', 'ios-videos-fallback.js']) {
+for (const file of ['app.js', 'videos.js', 'actualidad-media.js', 'ios-videos-fallback.js']) {
   execFileSync(process.execPath, ['--check', join(output, file)], { stdio: 'pipe' });
 }
 console.log('Validación sintáctica de scripts iOS completada');

@@ -1,6 +1,12 @@
 name: Validar preparación iOS sin publicar
 on:
   workflow_dispatch:
+  pull_request:
+    branches:
+      - preparacion-ios
+    paths:
+      - 'ios-build/**'
+      - '.github/workflows/ios-preflight.yml'
   push:
     branches:
       - fix/ios-auditoria-153-compartir

@@ -59,26 +59,17 @@ test('current news uses resource incorporation dates instead of fixed ids', asyn
   vm.runInNewContext(supplementalSource, context);
   const resources = context.window.TIFLO_RESOURCES;
 
-  const expectedByLanguage = {
-    es: [
-      'es-rehabilitacion-autonomia-2026',
-      'es-1wfRfY4IumYSh7At5iaoizBZTSoQhKhdc',
-      'es-estudio-medico-calor-2026'
-    ],
-    en: [
-      'en-rehabilitation-independence-2026',
-      'en-1C317Eva0eE8ekQ9HqmXIvzY1-Zxty1nC',
-      'en-medical-study-heat-2026'
-    ]
-  };
-
   for (const lang of ['es', 'en']) {
-    const selected = resources
-      .filter(item => item.lang === lang && item.new)
-      .sort(core.compareNewsItems)
-      .slice(0, 3)
-      .map(item => item.id);
+    const candidates = resources.filter(item => item.lang === lang && item.new);
+    assert.ok(candidates.length >= 3, `Expected at least three new resources in ${lang}`);
 
-    assert.deepEqual([...selected], expectedByLanguage[lang]);
+    const selected = [...candidates].sort(core.compareNewsItems).slice(0, 3);
+    const expectedDates = candidates
+      .map(item => Date.parse(item.newsDate))
+      .sort((a, b) => b - a)
+      .slice(0, 3);
+
+    assert.ok(expectedDates.every(Number.isFinite), `Invalid news dates in ${lang}`);
+    assert.deepEqual(selected.map(item => Date.parse(item.newsDate)), expectedDates);
   }
 });

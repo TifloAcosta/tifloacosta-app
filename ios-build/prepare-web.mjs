@@ -28,13 +28,16 @@ const iosOverrides = `<style id="tiflo-ios-ui">
 .site-footer, #install-section, #notifications-heading, #notifications-heading + .panel,
 #update-heading, #update-heading + .panel { display:none!important; }
 .language-switch { display:none!important; }
+/* En la aplicación nativa no hace falta el enlace de salto propio de la web. */
+.skip-link { display:none!important; }
 html[data-ios-first-language="true"] .language-switch { display:flex!important; }
 </style>`;
 const iosLanguage = `<script id="tiflo-ios-settings">
 (() => {
   const key = 'tifloIosLanguageChosen';
   const selected = (() => { try { return localStorage.getItem(key) === '1'; } catch { return false; } })();
-  if (!selected) document.documentElement.dataset.iosFirstLanguage = 'true';
+  const hasLanguage = (() => { try { return Boolean(localStorage.getItem('tifloLang')); } catch { return false; } })();
+  if (!selected && !hasLanguage) document.documentElement.dataset.iosFirstLanguage = 'true';
   const switcher = document.querySelector('.language-switch');
   for (const button of [document.getElementById('lang-es'), document.getElementById('lang-en')]) {
     button?.addEventListener('click', () => {

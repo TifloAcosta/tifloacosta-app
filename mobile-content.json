@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-10T09:53:44.740Z",
+  "generatedAt": "2026-10-10T15:53:00.361Z",
   "resources": [
     {
       "kind": "resource",
@@ -5961,57 +5961,6 @@
         "apple",
         "apps-accesibles",
         "movilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "accessible-android-e28c2f2b636c28ae:en",
-      "sourceId": "accessible-android-e28c2f2b636c28ae",
-      "lang": "en",
-      "title": "RealTime AI Cam",
-      "summary": "RealTime AI Cam tells you what your camera is pointed at, out loud, and every part of it runs on your phone. No account, no…",
-      "body": "Published 30 September 2026 by Kareen Kiwan\n\nRealTime AI Cam tells you what your camera is pointed at, out loud, and every part of it runs on your phone. No account, no ads, nothing to buy. It works in airplane mode, on a subway, or in another country with no data, and nothing the camera sees ever leaves the device.\n\nWHAT IT DOES\n\nLANGUAGES Built for English speakers. It reads English, and translates printed Spanish into English with no internet at all. Other languages download once from Google, then work offline too.\n\nWORKS WITH TALKBACK Every button is labeled, so you can run the whole app without seeing the screen. Nothing is buried behind a gesture you have to discover, and the app tells you what it is doing while it works.\n\nHONEST ABOUT WHAT IT IS The models are small enough to live on your phone, which is exactly why it works with no signal, and it does get things wrong sometimes. It tells you when it is unsure instead of guessing confidently at you.\n\nPRIVATE BY DESIGN\n\nGOOD FOR\n\nBuilt by one person at Nice Dreamz in Northern California, and the same app is on iPhone. Most of what is in here came from blind and low vision users emailing me and me building it that night. If something does not work with TalkBack, or you want it to do something it does not do yet, email ma ** @ ******* mp.com .\n\nFree or paid:\n\nAccessibility and User Comments:\n\nThe most interesting feature of the app is the Help Me Aim feature, which tries to help blind users with the challenge of taking photos. During my testing, the app was able to take photos that included the subject I wanted to focus on, and the guidance was good overall. However, the subject is not always centred in the photo. For example, when taking a photo of a plant on a table, other furniture in the room was also captured along with the plant. The plant was present but was not at the centre of the photo. I captured photos of a few subjects and confirmed with sighted users that they were present in the photos.\n\nAfter the photo is captured, a description is generated, and I find the descriptions decent for an offline model. You can also describe a scene using the dedicated What's This feature. After the scene is described, you can ask additional questions either through voice or by typing. You can also save the photo if you find the scene worth keeping.\n\nI found that the object detection often hallucinates objects that aren't present.\n\nAlthough the app reads the guidance automatically, this is not the case in some other areas. For example, in the text reading feature, which is labeled as English Text to Speech, you have to focus the Detected text item for it to read the recognized text automatically. Also, answers to questions are not read automatically. You have to find them on the screen. My main testing screen reader is Jieshuo, but things could be different with TalkBack.\n\nOverall, the app deserves attention and testing, especially since the developer has shown a clear willingness to improve it, and he is offering it for free without ads. Privacy is also respected because all processing is done offline using the installed on-device model. Speaking of processing, speed might be different across devices. On my Honor 600 Pro, the speed is rather acceptable, both when analysing the view and when answering questions.\n\nLast Tested App version and Android version:\n\nApp version: 1.17, Android 16\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nRate accessibility only — not the app’s features, price, or overall quality.\n\nPlease log in to rate this app’s accessibility.",
-      "sourceName": "Accessible Android",
-      "originalUrl": "https://accessibleandroid.com/app/realtime-ai-cam/",
-      "publishedAt": "2026-09-30T14:02:20.000Z",
-      "categories": [
-        "android",
-        "apps-accesibles",
-        "tecnologia-accesibilidad",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "cti-once-1e68c52375af5b51:es",
-      "sourceId": "cti-once-1e68c52375af5b51",
-      "lang": "es",
-      "title": "Arroba Sonora Disponible para su descarga el podcast de septiembre de \"Arroba Sonora\"",
-      "summary": "Disponible el número 50 de “Arroba Sonora”, el podcast de tecnología del CTI, que puede descargarse desde el Gestor ONCE de Libros Digitales, el ClubONCE o escucharse a través de las principales plataformas de podcast o desde la Web del CTI.",
-      "body": "Disponible el número 50 de “Arroba Sonora”, el podcast de tecnología del CTI, que puede descargarse desde el Gestor ONCE de Libros Digitales, el ClubONCE o escucharse a través de las principales plataformas de podcast o desde la Web del CTI.\n\nEn este número, con el que “Arroba Sonora” alcanza su edición número 50, se comienza repasando las principales novedades en materia de accesibilidad que incorpora iOS 27 . Se analizarán algunas de las nuevas funciones y mejoras que pueden resultar de especial interés para las personas con ceguera o deficiencia visual grave, así como otros cambios relacionados con la accesibilidad y el uso de los dispositivos de Apple.\n\nA continuación, se presenta TagFit , una aplicación pensada para etiquetar y organizar productos. Durante el episodio se explicará en qué consiste esta herramienta, cuáles son sus principales funcionalidades y de qué manera puede facilitar la identificación, clasificación y organización de distintos productos en el día a día.\n\nTambién se ofrece una comparativa de las aplicaciones móviles de diferentes cadenas de supermercados e hipermercados para realizar la compra. Se analizarán sus principales características y, especialmente, su grado de accesibilidad y facilidad de uso para las personas con ceguera o deficiencia visual grave, prestando atención a aspectos como la navegación, la identificación de productos, la gestión de la cesta y el proceso de compra.\n\nLa edición se completa con la presentación del chatbot de Aena para WhatsApp , una herramienta que permite consultar información relacionada con vuelos y aeropuertos a través de esta popular aplicación de mensajería. Se explicará su funcionamiento y las posibilidades que ofrece para obtener información útil antes y durante un viaje.\n\nEl contenido íntegro de “Arroba Sonora” en formato texto puede descargarse desde el Gestor ONCE de Libros Digitales, o consultarse en la sección correspondiente de “Arroba Sonora” dentro de la Web del CTI.\n\nEscúchalo en:",
-      "sourceName": "CTI de la ONCE",
-      "originalUrl": "https://cti.once.es/noticias/disponible-para-su-descarga-el-podcast-de-septiembre-de-arroba-sonora-2",
-      "publishedAt": "2026-09-30T12:00:00.000Z",
-      "categories": [
-        "tecnologia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "freedom-scientific-blog-ab0566ab6a1d1ed8:en",
-      "sourceId": "freedom-scientific-blog-ab0566ab6a1d1ed8",
-      "lang": "en",
-      "title": "Vispero Connect: September 2026 – Exciting Company News, Global Survey On Braille, And A Bit On Math And Student Life",
-      "summary": "This month, we check in with Ryan Jones, Glen Gordon, and Sriram Ramathan to unpack some exciting changes here at Vispero. Then, we chat with Campbell Rutherford about student life at Harvard and practical applications of math. With Nicholas Hoekstra, we explore the Global Braille Survey. And finally, Elizabeth Whitaker previews upcoming training opportunities. Activate …",
-      "body": "This month, we check in with Ryan Jones, Glen Gordon, and Sriram Ramathan to unpack some exciting changes here at Vispero. Then, we chat with Campbell Rutherford about student life at Harvard and practical applications of math. With Nicholas Hoekstra, we explore the Global Braille Survey. And finally, Elizabeth Whitaker previews upcoming training opportunities. Activate to listen, right-click to download. Read the transcript.",
-      "sourceName": "Freedom Scientific",
-      "originalUrl": "https://training.vispero.com/vispero-connect-september-2026-exciting-company-news-global-survey-on-braille-and-a-bit-on-math-and-student-life/",
-      "publishedAt": "2026-09-30T11:12:51.000Z",
-      "categories": [
-        "windows",
-        "tecnologia-accesibilidad",
-        "jaws",
-        "braille"
       ]
     }
   ]

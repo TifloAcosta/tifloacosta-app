@@ -28,6 +28,7 @@ const iosOverrides = `<style id="tiflo-ios-ui">
 .site-footer, #install-section, #notifications-heading, #notifications-heading + .panel,
 #update-heading, #update-heading + .panel { display:none!important; }
 .language-switch { display:none!important; }
+.skip-link { display:none!important; }
 html[data-ios-first-language="true"] .language-switch { display:flex!important; }
 </style>`;
 const iosLanguage = `<script id="tiflo-ios-settings">
@@ -64,6 +65,18 @@ const iosLanguage = `<script id="tiflo-ios-settings">
   });
   wrapper.append(label, select);
   heading.insertAdjacentElement('afterend', wrapper);
+
+  // In the native iOS shell the visual preferences should be directly
+  // discoverable after the language choice, without an extra collapsed menu.
+  // Leave the web and Android navigation untouched.
+  const visualToggle = document.getElementById('settings-toggle');
+  const visualPanel = document.getElementById('settings-panel');
+  if (visualToggle && visualPanel) {
+    visualToggle.setAttribute('aria-expanded', 'true');
+    visualPanel.hidden = false;
+    visualToggle.hidden = true;
+    visualPanel.removeAttribute('inert');
+  }
 })();
 <\/script>`;
 // Bundle an executable fallback: WKWebView file:// fetch may reject local JSON.

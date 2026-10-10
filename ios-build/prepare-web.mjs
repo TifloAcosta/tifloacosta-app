@@ -129,4 +129,18 @@ iosVideos = iosVideos.replace(readyDeclaration, `  function handleIosPlayerError
 ` + readyDeclaration);
 await writeFile(iosVideosPath, iosVideos);
 
+// In iOS, category pages already identify the category in the result status.
+// Avoid announcing that same label after every title, while retaining it for
+// global search results and other contexts where the category adds information.
+const iosAppPath = join(output, 'app.js');
+let iosApp = await readFile(iosAppPath, 'utf8');
+const iosCategoryRender = 'showResults(items,c.categoryFound(cat,items.length),c.noResults);';
+if (!iosApp.includes(iosCategoryRender)) throw new Error('No se encuentra el renderizado por categoría');
+iosApp = iosApp.replace(iosCategoryRender,
+  `showResults(items,c.categoryFound(cat,items.length),c.noResults);
+    els.results.querySelectorAll('.resource-meta').forEach(meta => {
+      if (meta.textContent.trim() === String(cat).trim()) meta.remove();
+    });`);
+await writeFile(iosAppPath, iosApp);
+
 console.log('Archivos preparados para iOS:',copied);

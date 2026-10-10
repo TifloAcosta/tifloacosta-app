@@ -1,5 +1,6 @@
 import { cp, mkdir, readdir, rm, stat, readFile, writeFile } from 'node:fs/promises';
 import { resolve, join, extname } from 'node:path';
+import { execFileSync } from 'node:child_process';
 const root = resolve(import.meta.dirname, '..');
 const output = resolve(import.meta.dirname, 'www');
 const allowed = new Set(['.html','.js','.mjs','.css','.json','.webmanifest','.svg','.png','.jpg','.jpeg','.webp','.ico','.gif','.woff','.woff2','.ttf','.txt','.xml','.pdf','.mp3','.mp4','.vtt','.srt','.epub','.zip']);
@@ -142,5 +143,11 @@ iosApp = iosApp.replace(iosCategoryRender,
       if (meta.textContent.trim() === String(cat).trim()) meta.remove();
     });`);
 await writeFile(iosAppPath, iosApp);
+
+// Fail before signing or uploading if an injected iOS-only script is invalid.
+for (const file of ['app.js', 'videos.js', 'ios-videos-fallback.js']) {
+  execFileSync(process.execPath, ['--check', join(output, file)], { stdio: 'pipe' });
+}
+console.log('Validación sintáctica de scripts iOS completada');
 
 console.log('Archivos preparados para iOS:',copied);

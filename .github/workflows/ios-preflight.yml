@@ -32,12 +32,18 @@ jobs:
           const app = readFileSync(root + 'app.js', 'utf8');
           const index = readFileSync(root + 'index.html', 'utf8');
           const media = readFileSync(root + 'actualidad-media.js', 'utf8');
+          const videosHtml = readFileSync(root + 'videos.html', 'utf8');
+          const capacitor = JSON.parse(readFileSync('ios-build/capacitor.config.json', 'utf8'));
           assert.match(videos, /function handleIosPlayerError/);
           assert.match(videos, /onError: handleIosPlayerError/);
           assert.match(videos, /removeAttribute\('role'\)/);
           assert.match(videos, /Abrir este vídeo en YouTube/);
           assert.match(app, /querySelectorAll\('\.resource-meta'\)/);
           assert.match(media, /Abrir este vídeo en su fuente original/);
+          assert.match(media, /strict-origin-when-cross-origin/);
+          assert.match(videosHtml, /referrerpolicy="strict-origin-when-cross-origin"/);
+          assert.equal(capacitor.appId, 'com.tifloacosta.app');
+          assert.ok(!capacitor.server?.url, 'La app no debe migrar a un servidor remoto sin revisión de seguridad');
           assert.match(media, /container.append\(alternative\)/);
           assert.match(index, /id="tiflo-ios-settings"/);
           assert.match(index, /#config-section #settings-toggle/);

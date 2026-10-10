@@ -128,6 +128,11 @@ iosVideos = iosVideos.replace(readyDeclaration, `  function handleIosPlayerError
   }
 
 ` + readyDeclaration);
+// Avoid carrying a stale VoiceOver error announcement into a working video.
+const iosReadyCode = '    youtubePlayer = event.target;\n    playerReady = true;';
+if (!iosVideos.includes(iosReadyCode)) throw new Error('No se encuentra la inicialización del reproductor iOS');
+iosVideos = iosVideos.replace(iosReadyCode,
+  "    youtubePlayer = event.target;\\n    els.playerNote?.removeAttribute('role');\\n    playerReady = true;".replaceAll('\\n', '\n'));
 await writeFile(iosVideosPath, iosVideos);
 
 // In iOS, category pages already identify the category in the result status.

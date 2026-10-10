@@ -53,6 +53,7 @@ jobs:
           assert.match(media, /container.append\(alternative\)/);
           assert.match(index, /id="tiflo-ios-settings"/);
           assert.match(index, /#config-section #settings-toggle/);
+          assert.match(index, /!target.hidden && screenHeading.isConnected/);
           assert.match(index, /id="settings-panel"/);
           assert.match(index, /id="config-heading"/);
           assert.match(index, /data-home-back/);

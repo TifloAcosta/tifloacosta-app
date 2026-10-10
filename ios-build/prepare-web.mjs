@@ -27,6 +27,9 @@ await stat(join(output,'index.html'));
 const iosOverrides = `<style id="tiflo-ios-ui">
 .site-footer, #install-section, #notifications-heading, #notifications-heading + .panel,
 #update-heading, #update-heading + .panel { display:none!important; }
+/* Keep visual settings open and their toggle out of VoiceOver's swipe order on iOS. */
+#config-section:not([hidden]) #settings-panel { display:block!important; }
+#config-section #settings-toggle { display:none!important; }
 .language-switch { display:none!important; }
 .skip-link { display:none!important; }
 html[data-ios-first-language="true"] .language-switch { display:flex!important; }

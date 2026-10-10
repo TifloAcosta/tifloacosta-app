@@ -11,8 +11,8 @@ permissions:
   contents: read
 jobs:
   preflight:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
+    runs-on: macos-15
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -43,3 +43,13 @@ jobs:
           assert.match(index, /#config-section #settings-toggle/);
           console.log('Comprobaciones de integración iOS correctas.');
           NODE
+      - name: Comprobar Xcode y compilar iOS sin firma ni publicación
+        working-directory: ios-build
+        run: |
+          set -euo pipefail
+          XCODE="$(find /Applications -maxdepth 1 -type d -name 'Xcode_26*.app' -print | sort | tail -n 1)"
+          test -n "$XCODE" || { echo "::error::No se encuentra Xcode 26"; exit 1; }
+          sudo xcode-select --switch "$XCODE/Contents/Developer"
+          npm install --no-audit --no-fund
+          npx cap add ios
+          xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build

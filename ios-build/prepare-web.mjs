@@ -98,6 +98,16 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
   await writeFile(path, html);
 }
 
+// Keep VoiceOver focus in the active iOS view even if a rapid hash change
+// schedules an older requestAnimationFrame callback.
+const iosIndexPath = join(output, 'index.html');
+let iosIndex = await readFile(iosIndexPath, 'utf8');
+const oldFocus = "requestAnimationFrame(() => screenHeading.focus({ preventScroll: true }))";
+const newFocus = "requestAnimationFrame(() => { if (!target.hidden && screenHeading.isConnected) screenHeading.focus({ preventScroll: true }); })";
+if (!iosIndex.includes(oldFocus)) throw new Error('No se encuentra gestión de foco de la vista iOS');
+iosIndex = iosIndex.replace(oldFocus, newFocus);
+await writeFile(iosIndexPath, iosIndex);
+
 // Only patch the packaged iOS video controller: preserve Android and web behavior.
 // Report YouTube IFrame failures, disable unusable transport controls and keep the
 // direct YouTube link reachable for VoiceOver users.

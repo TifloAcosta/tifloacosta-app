@@ -1,0 +1,75 @@
+name: Validar preparación iOS sin publicar
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - preparacion-ios
+    paths:
+      - 'ios-build/**'
+      - '.github/workflows/ios-preflight.yml'
+  push:
+    branches:
+      - fix/ios-auditoria-153-compartir
+    paths:
+      - 'ios-build/**'
+      - '.github/workflows/ios-preflight.yml'
+permissions:
+  contents: read
+jobs:
+  preflight:
+    runs-on: macos-15
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validar sintaxis del preparador
+        run: node --check ios-build/prepare-web.mjs
+      - name: Preparar contenido y validar scripts iOS
+        run: node ios-build/prepare-web.mjs
+      - name: Comprobar modificaciones iOS empaquetadas
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          import assert from 'node:assert/strict';
+          const root = 'ios-build/www/';
+          const videos = readFileSync(root + 'videos.js', 'utf8');
+          const app = readFileSync(root + 'app.js', 'utf8');
+          const index = readFileSync(root + 'index.html', 'utf8');
+          const media = readFileSync(root + 'actualidad-media.js', 'utf8');
+          const videosHtml = readFileSync(root + 'videos.html', 'utf8');
+          const capacitor = JSON.parse(readFileSync('ios-build/capacitor.config.json', 'utf8'));
+          assert.match(videos, /function handleIosPlayerError/);
+          assert.match(videos, /onError: handleIosPlayerError/);
+          assert.match(videos, /removeAttribute\('role'\)/);
+          assert.match(videos, /Abrir este vídeo en YouTube/);
+          assert.match(app, /querySelectorAll\('\.resource-meta'\)/);
+          assert.match(media, /Abrir este vídeo en su fuente original/);
+          assert.match(media, /strict-origin-when-cross-origin/);
+          assert.match(videosHtml, /referrerpolicy="strict-origin-when-cross-origin"/);
+          assert.equal(capacitor.appId, 'com.tifloacosta.app');
+          assert.ok(!capacitor.server?.url, 'La app no debe migrar a un servidor remoto sin revisión de seguridad');
+          assert.match(media, /container.append\(alternative\)/);
+          assert.match(index, /id="tiflo-ios-settings"/);
+          assert.match(index, /#config-section #settings-toggle/);
+          assert.match(index, /!target.hidden && screenHeading.isConnected/);
+          assert.match(index, /id="settings-panel"/);
+          assert.match(index, /id="config-heading"/);
+          assert.match(index, /data-home-back/);
+          assert.match(readFileSync(root + 'actualidad.html', 'utf8'), /id="home-link-top"/);
+          assert.match(readFileSync(root + 'actualidad.html', 'utf8'), /id="home-link-bottom"/);
+          assert.match(readFileSync(root + 'videos.html', 'utf8'), /id="back-home"/);
+          assert.match(readFileSync(root + 'podcast.html', 'utf8'), /id="back-home"/);
+          console.log('Comprobaciones de integración iOS correctas.');
+          NODE
+      - name: Comprobar Xcode y compilar iOS sin firma ni publicación
+        working-directory: ios-build
+        run: |
+          set -euo pipefail
+          XCODE="$(find /Applications -maxdepth 1 -type d -name 'Xcode_26*.app' -print | sort | tail -n 1)"
+          test -n "$XCODE" || { echo "::error::No se encuentra Xcode 26"; exit 1; }
+          sudo xcode-select --switch "$XCODE/Contents/Developer"
+          npm install --no-audit --no-fund
+          npx cap add ios
+          xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build

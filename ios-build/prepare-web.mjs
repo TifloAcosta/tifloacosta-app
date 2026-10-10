@@ -102,7 +102,6 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
 // direct YouTube link reachable for VoiceOver users.
 const iosVideosPath = join(output, 'videos.js');
 let iosVideos = await readFile(iosVideosPath, 'utf8');
-const eventsSnippet = 'onReady: handlePlayerReady,\\n            onStateChange: handlePlayerStateChange';
 const originalEvents = 'onReady: handlePlayerReady,\n            onStateChange: handlePlayerStateChange';
 if (!iosVideos.includes(originalEvents)) throw new Error('No se encuentra el registro de eventos YouTube para iOS');
 iosVideos = iosVideos.replace(originalEvents,

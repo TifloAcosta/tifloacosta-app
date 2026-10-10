@@ -97,4 +97,37 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
   await writeFile(path, html);
 }
 
+// Only patch the packaged iOS video controller: preserve Android and web behavior.
+// Report YouTube IFrame failures, disable unusable transport controls and keep the
+// direct YouTube link reachable for VoiceOver users.
+const iosVideosPath = join(output, 'videos.js');
+let iosVideos = await readFile(iosVideosPath, 'utf8');
+const eventsSnippet = 'onReady: handlePlayerReady,\\n            onStateChange: handlePlayerStateChange';
+const originalEvents = 'onReady: handlePlayerReady,\n            onStateChange: handlePlayerStateChange';
+if (!iosVideos.includes(originalEvents)) throw new Error('No se encuentra el registro de eventos YouTube para iOS');
+iosVideos = iosVideos.replace(originalEvents,
+  'onReady: handlePlayerReady,\n            onStateChange: handlePlayerStateChange,\n            onError: handleIosPlayerError');
+const readyDeclaration = '  function handlePlayerReady(event) {';
+if (!iosVideos.includes(readyDeclaration)) throw new Error('No se encuentra handlePlayerReady');
+iosVideos = iosVideos.replace(readyDeclaration, `  function handleIosPlayerError(event) {
+    const code = Number(event?.data);
+    playerReady = false;
+    playerIsPlaying = false;
+    stopPositionTimer();
+    setPlayerControlsEnabled(false);
+    updateToggleLabel();
+    updatePlayerControlStatus('unavailable');
+    if (els.playerNote) {
+      const detail = Number.isFinite(code) ? ' (YouTube ' + code + ')' : '';
+      const guidance = lang === 'en'
+        ? 'Playback failed' + detail + '. Use the Open in YouTube link to play this video.'
+        : 'Error de reproducción' + detail + '. Utiliza el enlace Abrir este vídeo en YouTube.';
+      els.playerNote.textContent = guidance;
+      els.playerNote.setAttribute('role', 'alert');
+    }
+  }
+
+` + readyDeclaration);
+await writeFile(iosVideosPath, iosVideos);
+
 console.log('Archivos preparados para iOS:',copied);

@@ -73,6 +73,9 @@ jobs:
         run: |
           npm install --no-audit --no-fund
           npm run prepare:web
+          node --check www/app.js
+          node --check www/videos.js
+          node --check www/actualidad-media.js
           npx cap add ios
       - name: Asignar número de compilación único para TestFlight
         working-directory: ios-build

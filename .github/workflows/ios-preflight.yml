@@ -1,0 +1,40 @@
+name: Validar preparación iOS sin publicar
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - fix/ios-auditoria-153-compartir
+    paths:
+      - 'ios-build/**'
+      - '.github/workflows/ios-preflight.yml'
+permissions:
+  contents: read
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validar sintaxis del preparador
+        run: node --check ios-build/prepare-web.mjs
+      - name: Preparar contenido y validar scripts iOS
+        run: node ios-build/prepare-web.mjs
+      - name: Comprobar modificaciones iOS empaquetadas
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          import assert from 'node:assert/strict';
+          const root = 'ios-build/www/';
+          const videos = readFileSync(root + 'videos.js', 'utf8');
+          const app = readFileSync(root + 'app.js', 'utf8');
+          const index = readFileSync(root + 'index.html', 'utf8');
+          assert.match(videos, /onError: handleIosPlayerError/);
+          assert.match(videos, /function handleIosPlayerError/);
+          assert.match(app, /querySelectorAll\('\.resource-meta'\)/);
+          assert.match(index, /id="tiflo-ios-settings"/);
+          assert.match(index, /#config-section #settings-toggle/);
+          console.log('Comprobaciones de integración iOS correctas.');
+          NODE

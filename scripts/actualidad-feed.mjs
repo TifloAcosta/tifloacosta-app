@@ -240,6 +240,30 @@ export function stableStoryId(sourceId, canonicalUrl) {
   return `${source}-${hash}`;
 }
 
+// RSS <enclosure> and Atom rel="enclosure" carry the actual podcast audio URL.
+// Preserve the original query string: signed media links can depend on it.
+function extractPodcastEnclosure(block, atom, source) {
+  const tags = atom ? /<link\\b([^>]*)>/gi : /<enclosure\\b([^>]*)>/gi;
+  const getAttr = (attrs, name) => {
+    const match = attrs.match(new RegExp('(?:^|\\\\s)' + name + '\\\\s*=\\\\s*(["\\\'])(.*?)\\\\1', 'i'));
+    return match ? decodeEntities(match[2]).trim() : '';
+  };
+  for (const match of String(block || '').matchAll(tags)) {
+    const attrs = match[1] || '';
+    if (atom && getAttr(attrs, 'rel').toLowerCase() !== 'enclosure') continue;
+    const href = getAttr(attrs, atom ? 'href' : 'url');
+    const mime = getAttr(attrs, 'type').toLowerCase();
+    if (!href || (mime && !mime.startsWith('audio/') && mime !== 'application/octet-stream')) continue;
+    try {
+      const url = new URL(href, source.homepage || source.endpoint || source.feedUrl);
+      if (!['https:', 'http:'].includes(url.protocol)) continue;
+      if (!mime && !/\\.(?:mp3|m4a|aac|ogg|oga|opus|wav)(?:$|\\?)/i.test(url.toString())) continue;
+      return url.toString();
+    } catch { /* Ignore malformed enclosures and keep the source link. */ }
+  }
+  return '';
+}
+
 export function parseFeedXml(xml, source = {}) {
   const text = String(xml || '');
   const rssItems = extractBlocks(text, 'item');
@@ -249,12 +273,14 @@ export function parseFeedXml(xml, source = {}) {
   return blocks.map(block => {
     const contentHtml = extractRawTag(block, atom ? ['content'] : ['content:encoded']);
     const summary = extractTag(block, atom ? ['summary'] : ['description']) || cleanText(contentHtml);
+    const mediaUrl = extractPodcastEnclosure(block, atom, source);
     return {
       title: extractTag(block, ['title']),
       url: atom ? extractAtomLink(block) : extractTag(block, ['link']),
       publishedAt: extractTag(block, atom ? ['published', 'updated'] : ['pubDate', 'dc:date', 'date']),
       summary,
-      contentHtml
+      contentHtml,
+      ...(mediaUrl ? { mediaUrl } : {})
     };
   }).filter(item => item.title && item.url);
 }

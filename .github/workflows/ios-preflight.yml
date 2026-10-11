@@ -32,6 +32,8 @@ jobs:
         run: node --check ios-build/prepare-web.mjs
       - name: Comprobar pruebas automáticas de multimedia y RSS
         run: node --test test/actualidad-media-*.test.mjs test/actualidad-feed.test.mjs
+      - name: Comprobar contrato de controles nativos TifloReproductor
+        run: node --test ios-build/test/*.test.mjs
       - name: Preparar contenido y validar scripts iOS
         run: node ios-build/prepare-web.mjs
       - name: Comprobar modificaciones iOS empaquetadas
@@ -51,7 +53,7 @@ jobs:
           const videosHtml = readFileSync(root + 'videos.html', 'utf8');
           const capacitor = JSON.parse(readFileSync('ios-build/capacitor.config.json', 'utf8'));
           assert.match(videos, /function handleIosPlayerError/);
-          assert.match(videos, /native\.open\(\{ videoId: nativeId \}\)/);
+          assert.match(videos, /native\.open\(\{ videoId: nativeId,/);
           assert.match(videos, /onError: handleIosPlayerError/);
           assert.match(videos, /removeAttribute\('role'\)/);
           assert.match(videos, /Abrir este vídeo en YouTube/);

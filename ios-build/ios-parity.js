@@ -152,8 +152,56 @@
     });
   }
 
+  // Preserve the launcher button when a user returns from a section.
+  // Running this after the main hash router prevents its heading focus from
+  // overriding the intended VoiceOver return position.
+  function preserveBackNavigationFocus() {
+    const returnKey = 'tiflo-ios-restore-home-origin';
+    const lastEntryKey = 'tiflo-last-home-entry';
+    const isHome = () => !window.location.hash || window.location.hash === '#home';
+    const stored = key => {
+      try { return window.sessionStorage.getItem(key) || ''; } catch { return ''; }
+    };
+    const write = (key, value) => {
+      try { window.sessionStorage.setItem(key, value); } catch {}
+    };
+    const remove = key => {
+      try { window.sessionStorage.removeItem(key); } catch {}
+    };
+    function focusLauncher() {
+      if (!isHome()) return;
+      const id = stored(lastEntryKey);
+      if (!/^home-open-[a-z-]+$/.test(id)) return;
+      const control = document.getElementById(id);
+      if (!control || control.closest('[hidden]')) return;
+      control.focus({ preventScroll: true });
+      control.scrollIntoView?.({ block: 'nearest' });
+    }
+    function restoreAfterRender() {
+      requestAnimationFrame(() => requestAnimationFrame(focusLauncher));
+      // WKWebView may reset its accessibility cursor after the DOM focus event.
+      setTimeout(focusLauncher, 180);
+    }
+    document.getElementById('home-blocks')?.addEventListener('click', event => {
+      const entry = event.target.closest?.('[id^="home-open-"]');
+      const href = entry?.getAttribute?.('href') || '';
+      if (/^(actualidad|videos|podcast)\.html(?:#.*)?$/.test(href)) write(returnKey, '1');
+    }, true);
+    let previousHash = window.location.hash;
+    window.addEventListener('hashchange', () => {
+      const nextHash = window.location.hash;
+      if (isHome() && previousHash && previousHash !== '#home') restoreAfterRender();
+      previousHash = nextHash;
+    });
+    if (isHome() && stored(returnKey) === '1') {
+      remove(returnKey);
+      restoreAfterRender();
+    }
+  }
+
   function init() {
     if (isIndex) {
+      preserveBackNavigationFocus();
       alignHomeSections();
       addResourcesDirectory();
       configureNativeSettings();

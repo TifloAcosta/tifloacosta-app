@@ -136,9 +136,9 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
     if (!html.includes(script)) throw new Error('No se encuentra el script de multimedia en Actualidad');
     html = html.replace(script, '<script src="ios-actualidad-media-fallback.js"></script>\n' + script);
   }
-  html = html.replace('</body>', '<script src="ios-choice-groups.js"></script>\\n</body>');
+  html = html.replace('</body>', '<script src="ios-choice-groups.js"></script>' + '\n</body>');
   if (name === 'podcast.html') {
-    html = html.replace('</body>', '<script>requestAnimationFrame(() => { const heading = document.getElementById("podcast-heading"); heading?.setAttribute("tabindex", "-1"); heading?.focus({preventScroll:true}); });<\\/script>\\n</body>');
+    html = html.replace('</body>', '<script>requestAnimationFrame(() => { const heading = document.getElementById("podcast-heading"); heading?.setAttribute("tabindex", "-1"); heading?.focus({preventScroll:true}); });</script>' + '\n</body>');
   }
   await writeFile(path, html);
 }

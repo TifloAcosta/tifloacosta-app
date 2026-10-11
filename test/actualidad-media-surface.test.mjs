@@ -22,7 +22,9 @@ test('multimedia loads independently from news and apps without autoplay', async
   const js = await read('actualidad-media.js');
   assert.match(js, /fetch\(['"]actualidad-media\.json['"]/);
   assert.equal((js.match(/fetch\(['"]actualidad-media\.json['"]/g) || []).length, 1);
-  assert.doesNotMatch(js, /autoplay=1|\.play\(\)/);
+  assert.doesNotMatch(js, /autoplay=1|audio\.autoplay\s*=\s*true|setAttribute\(['"]autoplay/);
+  assert.match(js, /toggle\.addEventListener\('click',/);
+  assert.match(js, /audio\.play\(\)/);
 });
 
 test('multimedia rendering keeps source section authoritative and external source access', async () => {

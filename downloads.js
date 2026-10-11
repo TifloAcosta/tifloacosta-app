@@ -81,7 +81,7 @@
     const button = element('button', { className: 'button-link back-link', text: t().back });
     button.type = 'button';
     button.dataset.downloadBack = 'true';
-    button.addEventListener('click', () => { window.location.hash = '#home'; });
+    button.addEventListener('click', () => { window.location.hash = '#downloads'; });
     wrapper.append(button);
     return wrapper;
   }
@@ -422,10 +422,10 @@
 
   function applyVisibility() {
     if (!section) return;
-    const active = window.location.hash.replace(/^#/, '') === 'downloads';
+    const active = window.location.hash.replace(/^#/, '') === 'downloads-link';
     section.hidden = !active;
     if (!active) return;
-    ['home-hero','home-blocks','global-search-section','resources-view','news-view','book-section','contact-section','privacy-section','config-section']
+    ['home-hero','home-blocks','global-search-section','resources-view','favorites-view','news-view','book-section','contact-section','privacy-section','config-section','downloads-hub','sound-search-section']
       .forEach(id => { const node = document.getElementById(id); if (node) node.hidden = true; });
     document.querySelectorAll('.site-header,.site-footer,.skip-link').forEach(node => { node.hidden = true; });
     section.hidden = false;

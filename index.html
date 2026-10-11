@@ -623,7 +623,8 @@
   function showHomeView() {
     const key = location.hash.replace(/^#/, '');
     const target = views[key] || null;
-    const onHome = !target;
+    const inDownloads = key === 'downloads' || key === 'downloads-link' || key === 'downloads-sounds';
+    const onHome = !target && !inDownloads;
     hero.hidden = !onHome;
     searchShell.hidden = !onHome;
     menu.hidden = !onHome;

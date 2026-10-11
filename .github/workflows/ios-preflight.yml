@@ -139,7 +139,8 @@ jobs:
           grep -Fq 'player.seekTo(' ios/App/App/public/tiflo-youtube-player.html
           # VoiceOver trial: ambient audio mixes without stealing speech priority,
           # restores mode/category/options and keeps the iframe out of VO focus.
-          grep -Fq 'setCategory(.ambient, mode: .default)' ios/App/App/AppDelegate.swift
+          grep -Fq "navigator.audioSession.type = enabled ? 'ambient' : 'auto'" ios/App/App/AppDelegate.swift
+          grep -Fq 'forMainFrameOnly: false' ios/App/App/AppDelegate.swift
           grep -Fq 'setCategory(category, mode: mode, options: options)' ios/App/App/AppDelegate.swift
           grep -Fq 'webView.accessibilityElementsHidden = true' ios/App/App/AppDelegate.swift
           grep -Fq 'audioMix.restore()' ios/App/App/AppDelegate.swift

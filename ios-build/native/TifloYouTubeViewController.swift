@@ -379,6 +379,49 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
         // even though WKWebView does not count a UIKit tap as a web gesture.
         configuration.mediaTypesRequiringUserActionForPlayback = []
         configuration.userContentController.add(self, name: "tifloPlayer")
+        // WebKit plays the cross-origin YouTube iframe in its own process.
+        // The app's AVAudioSession.mixWithOthers alone does not control that process.
+        // Set the document audio session to a mixing category in every iframe when
+        // VoiceOver compatibility is active. Normal YouTube audio remains unchanged
+        // when compatibility is disabled. This is intentionally iOS-only.
+        let audioSessionPolicy = """
+        (() => {
+          'use strict';
+          const marker = 'tiflo-voiceover-audio-policy-v1';
+          let enabled = \(shouldMixAudio ? "true" : "false");
+          const apply = () => {
+            try {
+              if ('audioSession' in navigator && navigator.audioSession) {
+                navigator.audioSession.type = enabled ? 'ambient' : 'auto';
+              }
+            } catch {}
+          };
+          const relay = message => {
+            for (const frame of document.querySelectorAll('iframe')) {
+              try { frame.contentWindow?.postMessage(message, '*'); } catch {}
+            }
+          };
+          window.addEventListener('message', event => {
+            if (event.source !== window && event.source !== window.parent) return;
+            if (event.data?.type !== marker || typeof event.data.enabled !== 'boolean') return;
+            enabled = event.data.enabled;
+            apply();
+            relay(event.data);
+          });
+          apply();
+          document.addEventListener('DOMContentLoaded', apply, { once: true });
+          document.addEventListener('play', () => {
+            apply();
+            // HTMLMediaElement can switch WebKit back to exclusive playback.
+            // Reapply only around a new play event, never in a polling loop.
+            setTimeout(apply, 0);
+            setTimeout(apply, 350);
+          }, true);
+        })();
+        """
+        configuration.userContentController.addUserScript(
+            WKUserScript(source: audioSessionPolicy, injectionTime: .atDocumentStart, forMainFrameOnly: false)
+        )
         webView = WKWebView(frame: .zero, configuration: configuration)
         webView.navigationDelegate = self
         // The embedded YouTube iframe may capture the VoiceOver cursor as
@@ -604,6 +647,11 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
             pendingMixRefresh = nil
             audioMix.restore()
         }
+        // Update the audio policy in the top document and its cross-origin
+        // children without reloading the video or losing the playback position.
+        let enabled = shouldMixAudio ? "true" : "false"
+        let script = "window.postMessage({type:'tiflo-voiceover-audio-policy-v1',enabled:" + enabled + "},'*');"
+        webView?.evaluateJavaScript(script, completionHandler: nil)
         audioCompatibilityButton.setTitle(audioCompatibilityTitle(), for: .normal)
         UIAccessibility.post(notification: .announcement, argument: audioCompatibilityTitle())
     }

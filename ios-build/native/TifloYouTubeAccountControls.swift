@@ -8,7 +8,7 @@ final class TifloYouTubeAccountControls: UIView {
     private let spanish: Bool
 
     private let toggleButton = UIButton(type: .system)
-    private let accountScroller = UIScrollView()
+    private let accountPanel = UIStackView()
     private let signInButton = UIButton(type: .system)
     private let subscribeButton = UIButton(type: .system)
     private let likeButton = UIButton(type: .system)
@@ -86,17 +86,12 @@ final class TifloYouTubeAccountControls: UIView {
         list.spacing = 8
         list.translatesAutoresizingMaskIntoConstraints = false
 
-        accountScroller.addSubview(list)
-        accountScroller.translatesAutoresizingMaskIntoConstraints = false
-        accountScroller.heightAnchor.constraint(equalToConstant: 175).isActive = true
-        NSLayoutConstraint.activate([
-            list.leadingAnchor.constraint(equalTo: accountScroller.contentLayoutGuide.leadingAnchor),
-            list.trailingAnchor.constraint(equalTo: accountScroller.contentLayoutGuide.trailingAnchor),
-            list.topAnchor.constraint(equalTo: accountScroller.contentLayoutGuide.topAnchor),
-            list.bottomAnchor.constraint(equalTo: accountScroller.contentLayoutGuide.bottomAnchor),
-            list.widthAnchor.constraint(equalTo: accountScroller.frameLayoutGuide.widthAnchor)
-        ])
-        let root = UIStackView(arrangedSubviews: [toggleButton, accountScroller])
+        // Use a single parent screen scroll view. A nested 175-point scroll
+        // hides subscription and comment controls from VoiceOver exploration.
+        accountPanel.axis = .vertical
+        accountPanel.spacing = 8
+        accountPanel.addArrangedSubview(list)
+        let root = UIStackView(arrangedSubviews: [toggleButton, accountPanel])
         root.axis = .vertical
         root.spacing = 4
         root.translatesAutoresizingMaskIntoConstraints = false
@@ -107,7 +102,7 @@ final class TifloYouTubeAccountControls: UIView {
             root.topAnchor.constraint(equalTo: topAnchor),
             root.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
-        accountScroller.isHidden = true
+        accountPanel.isHidden = true
         editor.isHidden = true
         publishButton.isHidden = true
         cancelButton.isHidden = true
@@ -182,7 +177,7 @@ final class TifloYouTubeAccountControls: UIView {
 
     @objc private func toggle() {
         expanded.toggle()
-        accountScroller.isHidden = !expanded
+        accountPanel.isHidden = !expanded
         toggleButton.accessibilityValue = expanded
             ? (spanish ? "Expandido" : "Expanded")
             : (spanish ? "Contraído" : "Collapsed")
@@ -218,7 +213,10 @@ final class TifloYouTubeAccountControls: UIView {
             switch result {
             case .success:
                 self.announce(success)
-                if action == "comment" { self.closeEditor() }
+                if action == "comment" {
+                    self.editor.text = ""
+                    self.closeEditor()
+                }
                 self.refresh()
             case .failure:
                 self.announce(self.spanish ? "YouTube no pudo completar la acción." : "YouTube could not complete the action.")
@@ -248,6 +246,7 @@ final class TifloYouTubeAccountControls: UIView {
         editor.isHidden = true
         publishButton.isHidden = true
         cancelButton.isHidden = true
+        UIAccessibility.post(notification: .layoutChanged, argument: commentButton)
     }
 
     @objc private func cancelEditor() { closeEditor() }

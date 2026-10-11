@@ -158,15 +158,20 @@ public final class TifloYouTubePlugin: CAPPlugin, CAPBridgedPlugin {
 private final class TifloVoiceOverAudioMix {
     private var previousCategory: AVAudioSession.Category?
     private var previousOptions: AVAudioSession.CategoryOptions = []
+    private var previousMode: AVAudioSession.Mode?
 
     func activate() -> Bool {
         let session = AVAudioSession.sharedInstance()
         if previousCategory == nil {
             previousCategory = session.category
             previousOptions = session.categoryOptions
+            previousMode = session.mode
         }
         do {
-            try session.setCategory(.playback, options: [.mixWithOthers])
+            // An ambient session mixes by default instead of claiming audio
+            // priority over VoiceOver speech while YouTube is playing.
+            // Only use this mode for the VoiceOver compatibility option.
+            try session.setCategory(.ambient, mode: .default)
             return true
         } catch {
             restore()
@@ -177,8 +182,10 @@ private final class TifloVoiceOverAudioMix {
     func restore() {
         guard let category = previousCategory else { return }
         let options = previousOptions
+        let mode = previousMode ?? .default
         previousCategory = nil
-        try? AVAudioSession.sharedInstance().setCategory(category, options: options)
+        previousMode = nil
+        try? AVAudioSession.sharedInstance().setCategory(category, mode: mode, options: options)
     }
 }
 
@@ -372,7 +379,12 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
         configuration.userContentController.add(self, name: "tifloPlayer")
         webView = WKWebView(frame: .zero, configuration: configuration)
         webView.navigationDelegate = self
-        webView.accessibilityLabel = spanish ? "Reproductor de YouTube" : "YouTube player"
+        // The embedded YouTube iframe may capture the VoiceOver cursor as
+        // playback starts. Keep the picture usable for sighted users, but
+        // expose the complete transport and account actions as native controls.
+        webView.isAccessibilityElement = false
+        webView.accessibilityElementsHidden = true
+        webView.scrollView.accessibilityElementsHidden = true
         webView.scrollView.isScrollEnabled = false
 
         statusLabel.text = spanish

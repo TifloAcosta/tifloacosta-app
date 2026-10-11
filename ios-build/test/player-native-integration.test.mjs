@@ -23,8 +23,9 @@ test('las acciones nativas no sustituyen el motor de YouTube ni alteran la sesi√
   assert.match(player, /tiflo-youtube-player/);
   assert.match(player, /webView\.loadHTMLString\(html, baseURL: baseURL\)/);
   assert.match(player, /https:\/\/www\.youtube\.com\/watch\?v=/);
-  assert.match(player, /setCategory\(\.playback, options: \[\.mixWithOthers\]\)/);
-  assert.match(player, /setCategory\(category, options: options\)/);
+  assert.match(player, /setCategory\(\.ambient, mode: \.default\)/);
+  assert.match(player, /setCategory\(category, mode: mode, options: options\)/);
+  assert.match(player, /webView\.accessibilityElementsHidden = true/);
   assert.match(player, /override func viewWillDisappear/);
   assert.match(player, /audioMix\.restore\(\)/);
 });

@@ -244,7 +244,39 @@ const networkFirst = file =>
 const appNewsCall = "fetch('actualidad.json',{cache:'no-cache'})";
 if (!iosApp.includes(appNewsCall)) throw new Error('No se encuentra el feed de Actualidad en el inicio');
 iosApp = iosApp.replace(appNewsCall, networkFirst('actualidad.json'));
+
+const oldCatalogDeclaration = '  const data = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];';
+if (!iosApp.includes(oldCatalogDeclaration)) throw new Error('No se encuentra la declaración de recursos iOS');
+iosApp = iosApp.replace(oldCatalogDeclaration,
+  '  let data = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];');
+const newsRenderPoint = '  function makeNewsItem(item) {';
+if (!iosApp.includes(newsRenderPoint)) throw new Error('No se encuentra renderizado de Novedades');
+iosApp = iosApp.replace(newsRenderPoint, "  async function refreshIosResourceCatalog() {\n    try {\n      const response = await fetch('https://tifloacosta.com/data.js', { cache: 'no-store' });\n      if (!response.ok) return;\n      const source = await response.text();\n      const match = /^\\s*window\\.TIFLO_RESOURCES\\s*=\\s*(\\[[\\s\\S]*\\]);?\\s*$/.exec(source);\n      if (!match) return;\n      const items = JSON.parse(match[1]);\n      if (!Array.isArray(items) || items.length === 0) return;\n      const valid = items.every(item => item && typeof item.id === 'string' &&\n        typeof item.title === 'string' && (item.lang === 'es' || item.lang === 'en'));\n      if (!valid) return;\n      data = items;\n      window.TIFLO_RESOURCES = items;\n      renderNews();\n      renderCategories();\n      renderFavoritesScreen();\n      window.dispatchEvent(new CustomEvent('tiflo-resources-updated', { detail: { items } }));\n    } catch {\n      // Offline and network failures must preserve the packaged catalog.\n    }\n  }\n\n" + newsRenderPoint);
+const iosStartPoint = 'applyPrefs();applyLanguage();loadActualidadHome();trackLanguageUse();announceCompletedUpdate();';
+if (!iosApp.includes(iosStartPoint)) throw new Error('No se encuentra inicialización de Novedades');
+iosApp = iosApp.replace(iosStartPoint, iosStartPoint + 'void refreshIosResourceCatalog();');
+
 await writeFile(iosAppPath, iosApp);
+
+const iosNewsVideoPath = join(output, 'news-videos.js');
+let iosNewsVideo = await readFile(iosNewsVideoPath, 'utf8');
+const oldSnapshot = '  const resources = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];';
+if (!iosNewsVideo.includes(oldSnapshot)) throw new Error('No se encuentra captura inicial de Novedades');
+iosNewsVideo = iosNewsVideo.replace(oldSnapshot,
+  '  let resources = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];');
+const newsVideoFetch = "fetch('videos.json', { cache: 'no-store' })";
+if (!iosNewsVideo.includes(newsVideoFetch)) throw new Error('No se encuentra refresco de vídeo de Novedades');
+iosNewsVideo = iosNewsVideo.replace(newsVideoFetch, networkFirst('videos.json'));
+const newsVideoStart = '  void loadVideos();';
+if (!iosNewsVideo.includes(newsVideoStart)) throw new Error('No se encuentra inicio de noticias con vídeo');
+iosNewsVideo = iosNewsVideo.replace(newsVideoStart,
+  "  window.addEventListener('tiflo-resources-updated', event => {\n" +
+  "    if (!Array.isArray(event.detail?.items)) return;\n" +
+  "    resources = event.detail.items;\n" +
+  "    renderCombinedNews();\n" +
+  "  });\n" + newsVideoStart);
+await writeFile(iosNewsVideoPath, iosNewsVideo);
+
 
 // iOS WKWebView uses a local/custom origin: YouTube can reject embeds that
 // cannot provide an HTTP Referer (player error 153). Never show a Play button
@@ -329,7 +361,7 @@ await writeFile(iosActualidadPath, iosActualidad);
 
 
 // Fail before signing or uploading if an injected iOS-only script is invalid.
-for (const file of ['app.js', 'videos.js', 'actualidad.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-choice-groups.js', 'ios-videos-fallback.js', 'ios-actualidad-media-fallback.js', 'ios-choice-collapse.js']) {
+for (const file of ['app.js', 'videos.js', 'actualidad.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-choice-groups.js', 'ios-videos-fallback.js', 'ios-actualidad-media-fallback.js', 'ios-choice-collapse.js', 'news-videos.js']) {
   execFileSync(process.execPath, ['--check', join(output, file)], { stdio: 'pipe' });
 }
 console.log('Validación sintáctica de scripts iOS completada');

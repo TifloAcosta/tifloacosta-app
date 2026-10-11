@@ -55,6 +55,12 @@ jobs:
           assert.match(videos, /onError: handleIosPlayerError/);
           assert.match(videos, /removeAttribute\('role'\)/);
           assert.match(videos, /Abrir este vídeo en YouTube/);
+          assert.match(app, /refreshIosResourceCatalog/, 'Novedades iOS debe actualizar el catálogo remoto');
+          assert.ok(app.includes('https://tifloacosta.com/data.js'), 'El feed de recursos iOS debe usar el sitio publicado');
+          assert.match(app, /window\.TIFLO_RESOURCES = items/);
+          const newsVideos = readFileSync(root + 'news-videos.js', 'utf8');
+          assert.match(newsVideos, /tiflo-resources-updated/);
+          assert.ok(newsVideos.includes('https://tifloacosta.com/videos.json'));
           assert.match(app, /querySelectorAll\('\.resource-meta'\)/);
           assert.match(media, /const iosExternalVideo = true;/);
           assert.match(media, /item\.type === 'video' && item\.embedUrl && iosExternalVideo/);

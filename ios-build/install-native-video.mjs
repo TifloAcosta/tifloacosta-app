@@ -24,7 +24,7 @@ if (!appDelegate.includes('import Capacitor') ||
 for (const required of [
   'bridge?.registerPluginInstance(TifloYouTubePlugin())',
   'CAPBridgedPlugin',
-  'request.setValue(referer, forHTTPHeaderField: "Referer")',
+  'webView.loadHTMLString(html, baseURL: baseURL)',
   'UIAccessibility.post(notification: .screenChanged, argument: closeButton)',
   'TifloNativeYouTubeAccount.shared'
 ]) {

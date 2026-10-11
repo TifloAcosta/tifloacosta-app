@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - 'feature/youtube-actions'
+      - 'feature/ios-tifloreproductor-fase1-20261011'
       - 'main'
     paths:
       - 'youtube-worker/**'

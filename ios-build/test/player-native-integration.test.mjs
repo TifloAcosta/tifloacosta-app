@@ -40,3 +40,19 @@ test('el cierre del reproductor espera a salir para restaurar el foco en el enla
   assert.match(player, /controller\.onClose = \{ call\.resolve\(\) \}/);
   assert.match(player, /dismiss\(animated: true, completion: completion\)/);
 });
+
+test('VoiceOver puede recorrer toda la pantalla y el iframe mantiene el tamaño mínimo', () => {
+  assert.match(player, /let scroll = UIScrollView\(\)/);
+  assert.match(player, /scroll\.contentLayoutGuide/);
+  assert.match(player, /scroll\.frameLayoutGuide/);
+  assert.match(player, /webView\.heightAnchor\.constraint\(greaterThanOrEqualToConstant: 225\)/);
+  assert.match(player, /header, titleLabel, audioCompatibilityButton, controls, statusLabel, detailsPanel, accountControls, webView/);
+});
+
+test('el ajuste de audio se activa solo durante el reproductor y ofrece alternativa accesible', () => {
+  assert.match(player, /Self\.audioMixPreference \?\? UIAccessibility\.isVoiceOverRunning/);
+  assert.match(player, /override func viewWillAppear/);
+  assert.match(player, /override func viewWillDisappear/);
+  assert.match(player, /Audio compatible con VoiceOver: activado/);
+  assert.match(player, /Audio compatible con VoiceOver: desactivado/);
+});

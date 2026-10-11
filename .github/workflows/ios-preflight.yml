@@ -57,7 +57,8 @@ jobs:
           assert.match(videos, /Abrir este vídeo en YouTube/);
           assert.match(app, /querySelectorAll\('\.resource-meta'\)/);
           assert.match(media, /const iosExternalVideo = true;/);
-          assert.match(media, /item\.type === 'video' && item\.embedUrl && !iosExternalVideo/);
+          assert.match(media, /item\.type === 'video' && item\.embedUrl && iosExternalVideo/);
+          assert.match(media, /native video|native|TifloYouTube/);
           assert.match(media, /Reproducir dentro de TifloAcosta/);
           assert.match(media, /TifloYouTube/);
           assert.match(media, /Abrir vídeo en YouTube/);

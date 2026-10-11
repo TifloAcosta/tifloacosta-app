@@ -1,7 +1,29 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { parseTifloAudioHtml, youtubeEntriesFromApi } from '../scripts/actualidad-media-adapters.mjs';
+import { feedEntriesFromXml, parseTifloAudioHtml, youtubeEntriesFromApi } from '../scripts/actualidad-media-adapters.mjs';
 import { buildMediaCatalog, mergeMediaEditorial, orderMediaItems } from '../scripts/sync-actualidad-media.mjs';
+
+test('RSS podcast enclosure provides the playable audio without replacing the original source', () => {
+  const xml = '<?xml version="1.0"?><rss><channel><item><title>Episodio accesible</title><link>https://example.com/podcast/episodio-1</link><pubDate>Sat, 12 Sep 2026 10:00:00 GMT</pubDate><enclosure length="123456" type="audio/mpeg" url="https://cdn.example.com/episodio-1.mp3?token=abc&amp;expires=xyz" /></item></channel></rss>';
+  const [entry] = feedEntriesFromXml(xml, { homepage: 'https://example.com/', type: 'audio' });
+  assert.equal(entry.originalUrl, 'https://example.com/podcast/episodio-1');
+  assert.equal(entry.mediaUrl, 'https://cdn.example.com/episodio-1.mp3?token=abc&expires=xyz');
+});
+
+test('Atom podcast enclosure is preserved and unrelated links cannot become audio', () => {
+  const xml = '<feed><entry><title>Podcast Atom</title><link rel="alternate" href="https://example.com/atom/e1"/><link rel="enclosure" type="audio/mp4" href="https://cdn.example.com/e1.m4a"/><updated>2026-09-12T10:00:00Z</updated></entry></feed>';
+  assert.equal(feedEntriesFromXml(xml, { homepage: 'https://example.com', type: 'audio' })[0].mediaUrl, 'https://cdn.example.com/e1.m4a');
+  const unsafe = '<rss><channel><item><title>Unsafe</title><link>https://example.com/e1</link><pubDate>Sat, 12 Sep 2026 10:00:00 GMT</pubDate><enclosure url="javascript:alert(1)" type="audio/mpeg" /></item></channel></rss>';
+  assert.equal(feedEntriesFromXml(unsafe, { homepage: 'https://example.com', type: 'audio' })[0].mediaUrl, undefined);
+});
+
+test('a playable RSS enclosure survives catalogue normalization', async () => {
+  const source = { id: 'good', name: 'Good', homepage: 'https://good.example/', endpoint: 'https://good.example/feed', section: 'accessibility', type: 'audio', lang: 'es', adapter: 'feed', enabled: true, maxItems: 2 };
+  const xml = '<rss><channel><item><title>Enlace de audio</title><link>https://good.example/e1</link><pubDate>Sat, 12 Sep 2026 10:00:00 GMT</pubDate><enclosure url="https://good.example/media/audio.mp3" type="audio/mpeg"/></item></channel></rss>';
+  const result = await buildMediaCatalog({ sources: [source], fetchImpl: async () => ({ ok: true, text: async () => xml }), env: {}, now: new Date('2026-09-14T12:00:00Z'), editorial: [] });
+  assert.equal(result.items[0].mediaUrl, 'https://good.example/media/audio.mp3');
+  assert.equal(result.items[0].originalUrl, 'https://good.example/e1');
+});
 
 test('Tiflo Audio HTML yields dated episodes and an official MP3 when present', () => {
   const html = `<article>

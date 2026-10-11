@@ -42,7 +42,7 @@
   }
 
   function setGlobalChromeHidden(hidden) {
-    ['home-hero', 'home-blocks', 'global-search-section', 'resources-view', 'favorites-view', 'news-view', 'book-section', 'contact-section', 'privacy-section', 'config-section']
+    ['home-hero', 'home-blocks', 'global-search-shell', 'resources-view', 'favorites-view', 'news-view', 'book-section', 'contact-section', 'privacy-section', 'config-section']
       .forEach(id => {
         const node = document.getElementById(id);
         if (node && hidden) node.hidden = true;

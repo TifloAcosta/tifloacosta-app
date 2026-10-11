@@ -240,12 +240,12 @@ export function stableStoryId(sourceId, canonicalUrl) {
   return `${source}-${hash}`;
 }
 
-// RSS <enclosure> and Atom rel="enclosure" carry the actual podcast audio URL.
+// RSS <enclosure> and Atom rel="enclosure" carry the podcast audio URL.
 // Preserve the original query string: signed media links can depend on it.
 function extractPodcastEnclosure(block, atom, source) {
-  const tags = atom ? /<link\\b([^>]*)>/gi : /<enclosure\\b([^>]*)>/gi;
+  const tags = atom ? /<link\b([^>]*)>/gi : /<enclosure\b([^>]*)>/gi;
   const getAttr = (attrs, name) => {
-    const match = attrs.match(new RegExp('(?:^|\\\\s)' + name + '\\\\s*=\\\\s*(["\\\'])(.*?)\\\\1', 'i'));
+    const match = attrs.match(new RegExp("(?:^|\\s)" + name + "\\s*=\\s*([\"'])(.*?)\\1", "i"));
     return match ? decodeEntities(match[2]).trim() : '';
   };
   for (const match of String(block || '').matchAll(tags)) {
@@ -257,7 +257,7 @@ function extractPodcastEnclosure(block, atom, source) {
     try {
       const url = new URL(href, source.homepage || source.endpoint || source.feedUrl);
       if (!['https:', 'http:'].includes(url.protocol)) continue;
-      if (!mime && !/\\.(?:mp3|m4a|aac|ogg|oga|opus|wav)(?:$|\\?)/i.test(url.toString())) continue;
+      if (!mime && !/\.(?:mp3|m4a|aac|ogg|oga|opus|wav)(?:$|\?)/i.test(url.toString())) continue;
       return url.toString();
     } catch { /* Ignore malformed enclosures and keep the source link. */ }
   }

@@ -16,9 +16,12 @@ import {
 } from './google-oauth.js';
 import {
   comment,
+  commentOnVideoChannel,
   getAccountVideoState,
+  getAccountVideoStateForVideo,
   like,
   subscribe,
+  subscribeToVideoChannel,
   searchVideos
 } from './youtube-api.js';
 
@@ -259,7 +262,10 @@ export async function handleRequest(request, env, deps = {}) {
   if (url.pathname === '/state' && request.method === 'GET') {
     try {
       const { accessToken } = await authenticatedContext(request, env, fetchImpl);
-      const state = await getAccountVideoState(accessToken, url.searchParams.get('videoId') || '', fetchImpl);
+      const videoId = url.searchParams.get('videoId') || '';
+      const state = url.searchParams.get('channelScope') === 'video'
+        ? await getAccountVideoStateForVideo(accessToken, videoId, fetchImpl)
+        : await getAccountVideoState(accessToken, videoId, fetchImpl);
       return json({ authenticated: true, ...state }, 200, cors);
     } catch (error) {
       return errorResponse(error, cors);
@@ -290,12 +296,18 @@ export async function handleRequest(request, env, deps = {}) {
       const body = await readJson(request);
 
       if (url.pathname === '/subscribe') {
-        return json(await subscribe(accessToken, fetchImpl), 200, cors);
+        // Optional video-specific subscription; the legacy request without a
+        // videoId remains scoped to TifloAcosta to preserve published clients.
+        return json(body.videoId
+          ? await subscribeToVideoChannel(accessToken, body.videoId, fetchImpl)
+          : await subscribe(accessToken, fetchImpl), 200, cors);
       }
       if (url.pathname === '/like') {
         return json(await like(accessToken, body.videoId, fetchImpl), 200, cors);
       }
-      return json(await comment(accessToken, body.videoId, body.text, fetchImpl), 200, cors);
+      return json(body.channelScope === 'video'
+        ? await commentOnVideoChannel(accessToken, body.videoId, body.text, fetchImpl)
+        : await comment(accessToken, body.videoId, body.text, fetchImpl), 200, cors);
     } catch (error) {
       return errorResponse(error, cors);
     }

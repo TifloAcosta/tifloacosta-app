@@ -10,6 +10,17 @@ on:
       - 'videos.js'
       - 'podcast.js'
       - 'downloads.js'
+      - 'app.js'
+      - 'styles.css'
+      - 'actualidad*.js'
+      - 'actualidad*.html'
+      - 'actualidad-media.json'
+      - 'podcast.html'
+      - 'videos.html'
+      - 'videos.json'
+      - 'resources*.js'
+      - 'tiflolector/**'
+      - 'shared/**'
 
 permissions:
   contents: read
@@ -77,6 +88,8 @@ jobs:
           node --check www/videos.js
           node --check www/actualidad-media.js
           npx cap add ios
+          node install-native-video.mjs
+          grep -q 'registerPluginInstance(TifloYouTubePlugin())' ios/App/App/AppDelegate.swift
       - name: Asignar número de compilación único para TestFlight
         working-directory: ios-build
         env:

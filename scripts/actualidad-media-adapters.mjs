@@ -22,6 +22,7 @@ export function feedEntriesFromXml(xml, source = {}) {
     originalUrl: item.url,
     publishedAt: item.publishedAt,
     summary: item.summary || '',
+    ...(item.mediaUrl ? { mediaUrl: item.mediaUrl } : {}),
     platform: source.platform || 'podcast'
   }));
 }

@@ -1,6 +1,7 @@
 import { cp, mkdir, readdir, rm, stat, readFile, writeFile } from 'node:fs/promises';
 import { resolve, join, extname } from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { enrichIosMediaCatalog } from './enrich-actualidad-media.mjs';
 const root = resolve(import.meta.dirname, '..');
 const output = resolve(import.meta.dirname, 'www');
 const allowed = new Set(['.html','.js','.mjs','.css','.json','.webmanifest','.svg','.png','.jpg','.jpeg','.webp','.ico','.gif','.woff','.woff2','.ttf','.txt','.xml','.pdf','.mp3','.mp4','.vtt','.srt','.epub','.zip']);
@@ -22,6 +23,28 @@ async function visit(from, to, depth = 0) {
 await rm(output,{recursive:true,force:true});
 await visit(root,output);
 await stat(join(output,'index.html'));
+
+// Only the packaged iOS copy receives episode enclosures: no change to the
+// published website, Android resources, or repository source catalogue.
+const mediaPath = join(output, 'actualidad-media.json');
+const sourceCatalog = JSON.parse(await readFile(join(root, 'actualidad-media-sources.json'), 'utf8'));
+const mediaCatalog = JSON.parse(await readFile(mediaPath, 'utf8'));
+const iosAudio = await enrichIosMediaCatalog({ items: mediaCatalog, sources: sourceCatalog });
+console.log('Audio iOS: ' + iosAudio.stats.playableCount + ' de ' + iosAudio.stats.audioCount +
+  ' episodios con URL directa; fuentes RSS accesibles: ' + iosAudio.stats.feedsOk +
+  '; fuentes fallidas: ' + iosAudio.stats.feedsFailed.join(', '));
+if (iosAudio.stats.audioCount && !iosAudio.stats.playableCount) {
+  throw new Error('No hay enlaces de audio reproducibles en el catálogo iOS. Se cancela la compilación.');
+}
+await writeFile(mediaPath, JSON.stringify(iosAudio.items, null, 2) + '\n');
+// Native WKWebView may reject fetch of local JSON depending on the custom
+// URL scheme. Ship the same enriched episodes in a small JavaScript fallback,
+// preserving the local file as the primary source.
+await writeFile(join(output, 'ios-actualidad-media-fallback.js'),
+  'window.TIFLO_IOS_ACTUALIDAD_MEDIA = ' +
+  JSON.stringify(iosAudio.items).replace(/</g, '\\u003c') + ';\n');
+
+
 
 /* iOS uses a packaged copy of the web UI. Remove PWA-only controls without
    changing the public website or Android implementation. */
@@ -95,6 +118,11 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
   html = html.replace('</head>', iosOverrides + '\n</head>');
   if (name === 'index.html') html = html.replace('</body>', iosLanguage + '\n</body>');
   if (name === 'videos.html') html = html.replace('<script src="videos.js?v=2.5"></script>', '<script src="ios-videos-fallback.js"></script>\n<script src="videos.js?v=2.5"></script>');
+  if (name === 'actualidad.html') {
+    const script = '<script src="actualidad-media.js?v=1.1"></script>';
+    if (!html.includes(script)) throw new Error('No se encuentra el script de multimedia en Actualidad');
+    html = html.replace(script, '<script src="ios-actualidad-media-fallback.js"></script>\n' + script);
+  }
   await writeFile(path, html);
 }
 
@@ -107,6 +135,23 @@ const newFocus = "requestAnimationFrame(() => { if (!target.hidden && screenHead
 if (!iosIndex.includes(oldFocus)) throw new Error('No se encuentra gestión de foco de la vista iOS');
 iosIndex = iosIndex.replace(oldFocus, newFocus);
 await writeFile(iosIndexPath, iosIndex);
+
+// The iOS home page already focuses the active heading after navigation.
+// Disable a second, synchronous focus movement from actualidad-core.js on
+// this packaged copy; keep the Actualidad subview focus controller intact.
+const iosNavigationCorePath = join(output, 'actualidad-core.js');
+let iosNavigationCore = await readFile(iosNavigationCorePath, 'utf8');
+const oldHomeFocus = [
+  '    if (!focusChangedView) return;',
+  '    const target = home ? hero : document.getElementById(state.view);',
+  "    const heading = target?.querySelector('h1, h2, h3') || target;",
+  '    focusElement(heading);'
+].join('\n');
+if (!iosNavigationCore.includes(oldHomeFocus)) throw new Error('No se encuentra el movimiento de foco duplicado del inicio iOS');
+iosNavigationCore = iosNavigationCore.replace(oldHomeFocus,
+  '    // El foco del inicio lo controla showHomeView de index.html.\n    return;');
+await writeFile(iosNavigationCorePath, iosNavigationCore);
+
 
 // Only patch the packaged iOS video controller: preserve Android and web behavior.
 // Report YouTube IFrame failures, disable unusable transport controls and keep the
@@ -143,6 +188,9 @@ const iosReadyCode = '    youtubePlayer = event.target;\n    playerReady = true;
 if (!iosVideos.includes(iosReadyCode)) throw new Error('No se encuentra la inicialización del reproductor iOS');
 iosVideos = iosVideos.replace(iosReadyCode,
   "    youtubePlayer = event.target;\\n    els.playerNote?.removeAttribute('role');\\n    playerReady = true;".replaceAll('\\n', '\n'));
+const iosVideoOpen = "  function openPlayer(video) {\n    lastPlayerTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;";
+if (!iosVideos.includes(iosVideoOpen)) throw new Error('No se encuentra openPlayer de Vídeos');
+iosVideos = iosVideos.replace(iosVideoOpen, "  function openPlayer(video) {\n    const nativeId = videoId(video);\n    const native = window.Capacitor?.Plugins?.TifloYouTube;\n    if (native && /^[A-Za-z0-9_-]{11}$/.test(nativeId)) {\n      void native.open({ videoId: nativeId }).catch(() => {\n        window.open(youtubeUrl(video), '_blank', 'noopener');\n      });\n      return;\n    }\n    // Do not retry the embedded WKWebView iframe that gave YouTube error 153.\n    window.open(youtubeUrl(video), '_blank', 'noopener');\n    return;\n    lastPlayerTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;");
 await writeFile(iosVideosPath, iosVideos);
 
 // In iOS, category pages already identify the category in the result status.
@@ -159,28 +207,72 @@ iosApp = iosApp.replace(iosCategoryRender,
     });`);
 await writeFile(iosAppPath, iosApp);
 
-// In Actualidad the video uses a plain iframe, not the YT.Player controller.
-// Keep an accessible, direct playback alternative in the same expanded panel.
+// iOS WKWebView uses a local/custom origin: YouTube can reject embeds that
+// cannot provide an HTTP Referer (player error 153). Never show a Play button
+// leading to a known unreliable iframe. Keep Web and Android unchanged.
 const iosMediaPath = join(output, 'actualidad-media.js');
 let iosMedia = await readFile(iosMediaPath, 'utf8');
-const mediaRender = '            container.replaceChildren(frame);';
-if (!iosMedia.includes(mediaRender)) throw new Error('No se encuentra reproductor de Actualidad');
-iosMedia = iosMedia.replace(mediaRender, `            container.replaceChildren(frame);
-            if (item.originalUrl) {
-              const alternative = document.createElement('a');
-              alternative.className = 'button-link';
-              alternative.href = item.originalUrl;
-              alternative.target = '_blank';
-              alternative.rel = 'noopener noreferrer';
-              alternative.textContent = currentLanguage() === 'en'
-                ? 'Open this video at the original source'
-                : 'Abrir este vídeo en su fuente original';
-              container.append(alternative);
-            }`);
+const coreDeclaration = '    const core = window.TIFLO_ACTUALIDAD_CORE;';
+if (!iosMedia.includes(coreDeclaration)) throw new Error('No se encuentra la declaración del navegador de Actualidad');
+iosMedia = iosMedia.replace(coreDeclaration,
+  coreDeclaration + '\n    const iosExternalVideo = true;');
+const videoCard = "if (item.type === 'video' && item.embedUrl) {";
+if (!iosMedia.includes(videoCard)) throw new Error('No se encuentra botón de reproducción de vídeos en Actualidad');
+iosMedia = iosMedia.replace(videoCard,
+  "if (item.type === 'video' && item.embedUrl && iosExternalVideo) {");
+const iosNativeVideoAnchor = "      if (item.type === 'video' && item.embedUrl && button) {";
+if (!iosMedia.includes(iosNativeVideoAnchor)) throw new Error('No se encuentra addPlayer de Actualidad');
+iosMedia = iosMedia.replace(iosNativeVideoAnchor, "      if (item.type === 'video' && item.embedUrl && button && iosExternalVideo) {\n        button.removeAttribute('aria-expanded');\n        let parsed;\n        try { parsed = new URL(item.embedUrl); } catch { parsed = null; }\n        const match = /^\\/embed\\/([A-Za-z0-9_-]{11})(?:\\/|$)/.exec(parsed?.pathname || '');\n        const validYouTube = parsed && /^(?:www\\.)?youtube(?:-nocookie)?\\.com$/.test(parsed.hostname) && match;\n        if (!validYouTube) { button.remove(); return; }\n        const videoId = match[1];\n        button.textContent = currentLanguage() === 'es' ? 'Reproducir dentro de TifloAcosta' : 'Play inside TifloAcosta';\n        button.addEventListener('click', () => {\n          const plugin = window.Capacitor?.Plugins?.TifloYouTube;\n          if (!plugin) { window.open(item.originalUrl, '_blank', 'noopener'); return; }\n          void plugin.open({ videoId }).catch(() => { window.open(item.originalUrl, '_blank', 'noopener'); });\n        });\n        return;\n      }\n      if (item.type === 'video' && item.embedUrl && button) {");
+const originalLabel = "mediaOriginal.textContent = item.type === 'audio' && !item.mediaUrl";
+if (!iosMedia.includes(originalLabel)) throw new Error('No se encuentra etiqueta de enlace de fuente original');
+iosMedia = iosMedia.replace(originalLabel,
+  "mediaOriginal.textContent = item.type === 'video' && iosExternalVideo\n" +
+  "          ? (currentLanguage() === 'es' ? 'Abrir vídeo en YouTube' : 'Open video on YouTube')\n" +
+  "          : item.type === 'audio' && !item.mediaUrl");
+// Load packaged media catalogue as the fallback when WKWebView cannot fetch
+// the same JSON. Do not use external or insecure content in this recovery path.
+const jsonLoad = [
+  "      fetch('actualidad-media.json', { cache: 'no-cache' })",
+  '        .then(response => {'
+].join('\n');
+if (!iosMedia.includes(jsonLoad)) throw new Error('No se encuentra carga de catálogo de Actualidad');
+iosMedia = iosMedia.replace(jsonLoad, [
+  "      fetch('actualidad-media.json', { cache: 'no-cache' })",
+  '        .then(response => {'
+].join('\n'));
+const jsonError = [
+  '        .catch(() => {',
+  '          items = [];',
+  '          loadFailed = true;',
+  '          mediaLoaded = false;',
+  '          mediaLoading = false;',
+  '          render();',
+  '        });'
+].join('\n');
+if (!iosMedia.includes(jsonError)) throw new Error('No se encuentra la recuperación de catálogo de Actualidad');
+iosMedia = iosMedia.replace(jsonError, [
+  '        .catch(() => {',
+  '          const packaged = window.TIFLO_IOS_ACTUALIDAD_MEDIA;',
+  '          items = Array.isArray(packaged) ? packaged : [];',
+  '          loadFailed = !items.length;',
+  '          mediaLoaded = Boolean(items.length);',
+  '          mediaLoading = false;',
+  '          render();',
+  '        });'
+].join('\n'));
+
+// The isolation controller already moves VoiceOver focus after hashchange;
+// its job must not be duplicated by the media script's link click listener.
+const focusStart = iosMedia.indexOf('    // Move VoiceOver focus only after an explicit section navigation action.');
+const focusEnd = iosMedia.indexOf("    window.addEventListener('hashchange', ensureMediaForRoute);",focusStart);
+if (focusStart < 0 || focusEnd < focusStart) throw new Error('No se encuentra controlador de foco redundante');
+iosMedia = iosMedia.slice(0,focusStart) +
+  '    // VoiceOver focus belongs exclusively to actualidad-core.js navigation.\n' +
+  iosMedia.slice(focusEnd);
 await writeFile(iosMediaPath, iosMedia);
 
 // Fail before signing or uploading if an injected iOS-only script is invalid.
-for (const file of ['app.js', 'videos.js', 'actualidad-media.js', 'ios-videos-fallback.js']) {
+for (const file of ['app.js', 'videos.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-videos-fallback.js', 'ios-actualidad-media-fallback.js']) {
   execFileSync(process.execPath, ['--check', join(output, file)], { stdio: 'pipe' });
 }
 console.log('Validación sintáctica de scripts iOS completada');

@@ -22,7 +22,9 @@ test('multimedia loads independently from news and apps without autoplay', async
   const js = await read('actualidad-media.js');
   assert.match(js, /fetch\(['"]actualidad-media\.json['"]/);
   assert.equal((js.match(/fetch\(['"]actualidad-media\.json['"]/g) || []).length, 1);
-  assert.doesNotMatch(js, /autoplay=1|\.play\(\)/);
+  assert.doesNotMatch(js, /autoplay=1|audio\.autoplay\s*=\s*true|setAttribute\(['"]autoplay/);
+  assert.match(js, /toggle\.addEventListener\('click',/);
+  assert.match(js, /audio\.play\(\)/);
 });
 
 test('multimedia rendering keeps source section authoritative and external source access', async () => {
@@ -54,6 +56,15 @@ test('audio uses native controls without a redundant play toggle', async () => {
   const js = await read('actualidad-media.js');
   assert.match(js, /item\.type === 'audio' && item\.mediaUrl/);
   assert.doesNotMatch(js, /\(item\.type === 'video' && item\.embedUrl\) \|\| \(item\.type === 'audio' && item\.mediaUrl\)/);
+});
+
+test('podcast media includes accessible transport, seek position and external fallback', async () => {
+  const js = await read('actualidad-media.js');
+  assert.match(js, /progress\.type = 'range'/);
+  assert.match(js, /progress\.setAttribute\('aria-valuetext'/);
+  assert.match(js, /controls\.setAttribute\('role', 'group'\)/);
+  assert.match(js, /audio\.addEventListener\('error'/);
+  assert.match(js, /Escuchar en la fuente original/);
 });
 
 test('reader and section visibility is governed by the isolated navigation controller only', async () => {

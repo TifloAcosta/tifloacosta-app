@@ -6,6 +6,10 @@ on:
       - preparacion-ios
     paths:
       - 'ios-build/**'
+      - 'actualidad-media.js'
+      - 'scripts/actualidad-*.mjs'
+      - 'scripts/sync-actualidad-media.mjs'
+      - 'test/actualidad-*.test.mjs'
       - '.github/workflows/ios-preflight.yml'
   push:
     branches:
@@ -26,6 +30,8 @@ jobs:
           node-version: '22'
       - name: Validar sintaxis del preparador
         run: node --check ios-build/prepare-web.mjs
+      - name: Comprobar pruebas automáticas de multimedia y RSS
+        run: node --test test/actualidad-media-*.test.mjs test/actualidad-feed.test.mjs
       - name: Preparar contenido y validar scripts iOS
         run: node ios-build/prepare-web.mjs
       - name: Comprobar modificaciones iOS empaquetadas
@@ -38,19 +44,41 @@ jobs:
           const app = readFileSync(root + 'app.js', 'utf8');
           const index = readFileSync(root + 'index.html', 'utf8');
           const media = readFileSync(root + 'actualidad-media.js', 'utf8');
+          const navigation = readFileSync(root + 'actualidad-core.js', 'utf8');
+          const mediaFallback = readFileSync(root + 'ios-actualidad-media-fallback.js', 'utf8');
+          const mediaCatalog = JSON.parse(readFileSync(root + 'actualidad-media.json', 'utf8'));
+          const actualidadHtml = readFileSync(root + 'actualidad.html', 'utf8');
           const videosHtml = readFileSync(root + 'videos.html', 'utf8');
           const capacitor = JSON.parse(readFileSync('ios-build/capacitor.config.json', 'utf8'));
           assert.match(videos, /function handleIosPlayerError/);
+          assert.match(videos, /native\.open\(\{ videoId: nativeId \}\)/);
           assert.match(videos, /onError: handleIosPlayerError/);
           assert.match(videos, /removeAttribute\('role'\)/);
           assert.match(videos, /Abrir este vídeo en YouTube/);
           assert.match(app, /querySelectorAll\('\.resource-meta'\)/);
-          assert.match(media, /Abrir este vídeo en su fuente original/);
+          assert.match(media, /const iosExternalVideo = true;/);
+          assert.match(media, /item\.type === 'video' && item\.embedUrl && iosExternalVideo/);
+          assert.match(media, /native video|native|TifloYouTube/);
+          assert.match(media, /Reproducir dentro de TifloAcosta/);
+          assert.match(media, /TifloYouTube/);
+          assert.match(media, /Abrir vídeo en YouTube/);
+          assert.match(media, /window\.TIFLO_IOS_ACTUALIDAD_MEDIA/);
+          assert.match(actualidadHtml, /ios-actualidad-media-fallback\.js/);
+          assert.ok(mediaFallback.startsWith('window.TIFLO_IOS_ACTUALIDAD_MEDIA = ['));
+          const prefix = 'window.TIFLO_IOS_ACTUALIDAD_MEDIA = ';
+          const backupCatalog = JSON.parse(mediaFallback.slice(prefix.length).trim().replace(/;$/, ''));
+          assert.deepEqual(backupCatalog, mediaCatalog, 'El respaldo iOS debe contener exactamente el mismo catálogo que el JSON');
+          assert.equal((mediaCatalog.filter(item => item.type === 'audio' && item.mediaUrl)).length, (mediaCatalog.filter(item => item.type === 'audio')).length);
+          assert.ok(mediaCatalog.some(item => item.type === 'audio' && item.mediaUrl), 'El catálogo iOS debe conservar enlaces de audio directos');
+          assert.doesNotMatch(media, /link\.addEventListener\('click',/);
+          assert.match(navigation, /El foco del inicio lo controla showHomeView/);
+          assert.match(navigation, /focusTopBackControl/);
+          assert.doesNotMatch(navigation, /const target = home \? hero : document\.getElementById\(state\.view\)/);
           assert.match(media, /strict-origin-when-cross-origin/);
           assert.match(videosHtml, /referrerpolicy="strict-origin-when-cross-origin"/);
           assert.equal(capacitor.appId, 'com.tifloacosta.app');
           assert.ok(!capacitor.server?.url, 'La app no debe migrar a un servidor remoto sin revisión de seguridad');
-          assert.match(media, /container.append\(alternative\)/);
+          assert.match(media, /mediaOriginal\.target = '_blank'/);
           assert.match(index, /id="tiflo-ios-settings"/);
           assert.match(index, /#config-section #settings-toggle/);
           assert.match(index, /!target.hidden && screenHeading.isConnected/);
@@ -72,4 +100,7 @@ jobs:
           sudo xcode-select --switch "$XCODE/Contents/Developer"
           npm install --no-audit --no-fund
           npx cap add ios
+          node install-native-video.mjs
+          grep -q 'registerPluginInstance(TifloYouTubePlugin())' ios/App/App/AppDelegate.swift
+          grep -q 'forHTTPHeaderField: "Referer"' ios/App/App/AppDelegate.swift
           xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build

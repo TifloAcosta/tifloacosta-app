@@ -99,17 +99,115 @@
 
     function addPlayer(card, item, button) {
       if (item.type === 'audio' && item.mediaUrl) {
+        const lang = currentLanguage();
+        const player = document.createElement('section');
+        player.className = 'panel podcast-player';
+        player.setAttribute('aria-label', (lang === 'es' ? 'Reproductor de Podcast: ' : 'Podcast player: ') + localizedContent(item).title);
         const audio = document.createElement('audio');
-        audio.controls = true;
-        audio.preload = 'none';
+        audio.preload = 'metadata';
         audio.src = item.mediaUrl;
-        card.append(audio);
+        audio.setAttribute('aria-label', localizedContent(item).title);
+        const controls = document.createElement('div');
+        controls.className = 'resource-actions';
+        controls.setAttribute('role', 'group');
+        controls.setAttribute('aria-label', lang === 'es' ? 'Controles accesibles del Podcast' : 'Accessible podcast controls');
+        const rewind = document.createElement('button');
+        rewind.type = 'button';
+        rewind.textContent = lang === 'es' ? 'Retroceder 30 segundos' : 'Rewind 30 seconds';
+        const toggle = document.createElement('button');
+        toggle.type = 'button';
+        const forward = document.createElement('button');
+        forward.type = 'button';
+        forward.textContent = lang === 'es' ? 'Avanzar 30 segundos' : 'Forward 30 seconds';
+        const progress = document.createElement('input');
+        progress.type = 'range';
+        progress.min = '0';
+        progress.max = '0';
+        progress.step = '1';
+        progress.value = '0';
+        progress.disabled = true;
+        progress.style.width = '100%';
+        progress.setAttribute('aria-label', lang === 'es' ? 'Posición del episodio' : 'Episode position');
+        progress.setAttribute('aria-valuetext', '0:00 / 0:00');
+        const time = document.createElement('p');
+        time.className = 'muted';
+        time.setAttribute('aria-live', 'polite');
+        const labelTime = seconds => {
+          const total = Math.max(0, Math.floor(Number(seconds) || 0));
+          const hours = Math.floor(total / 3600);
+          const minutes = Math.floor(total % 3600 / 60);
+          const rest = total % 60;
+          return hours
+            ? hours + ':' + String(minutes).padStart(2, '0') + ':' + String(rest).padStart(2, '0')
+            : minutes + ':' + String(rest).padStart(2, '0');
+        };
+        const updateTime = (announce = false) => {
+          const duration = Number.isFinite(audio.duration) ? audio.duration : 0;
+          const position = Number.isFinite(audio.currentTime) ? audio.currentTime : 0;
+          progress.disabled = duration <= 0;
+          progress.max = String(Math.floor(Math.max(duration, 0)));
+          progress.value = String(Math.floor(Math.max(position, 0)));
+          const value = labelTime(position) + ' / ' + labelTime(duration);
+          progress.setAttribute('aria-valuetext', value);
+          if (announce || !time.textContent) {
+            time.textContent = labelTime(position) + (lang === 'es' ? ' de ' : ' of ') + labelTime(duration);
+          }
+        };
+        const updateToggle = () => {
+          toggle.textContent = audio.paused
+            ? (lang === 'es' ? 'Reproducir' : 'Play')
+            : (lang === 'es' ? 'Pausar' : 'Pause');
+        };
+        const seek = delta => {
+          if (!Number.isFinite(audio.currentTime)) return;
+          const upper = Number.isFinite(audio.duration) ? audio.duration : audio.currentTime + Math.max(delta, 0);
+          audio.currentTime = Math.max(0, Math.min(upper, audio.currentTime + delta));
+          updateTime(true);
+        };
+        rewind.addEventListener('click', () => seek(-30));
+        forward.addEventListener('click', () => seek(30));
+        toggle.addEventListener('click', () => {
+          if (!audio.paused) { audio.pause(); return; }
+          card.closest('#media-browser')?.querySelectorAll('audio').forEach(other => {
+            if (other !== audio) other.pause();
+          });
+          audio.play().catch(() => {
+            time.textContent = lang === 'es'
+              ? 'No se pudo reproducir aquí. Utiliza Abrir en la fuente.'
+              : 'Playback is unavailable here. Use Open at source.';
+            time.setAttribute('role', 'alert');
+            updateToggle();
+          });
+        });
+        progress.addEventListener('input', () => {
+          audio.currentTime = Math.max(0, Number(progress.value) || 0);
+          updateTime(true);
+        });
+        audio.addEventListener('loadedmetadata', () => updateTime(true));
+        audio.addEventListener('timeupdate', () => updateTime());
+        audio.addEventListener('play', () => { time.removeAttribute('role'); updateToggle(); });
+        audio.addEventListener('pause', updateToggle);
+        audio.addEventListener('ended', () => { updateToggle(); updateTime(true); });
+        audio.addEventListener('error', () => {
+          time.textContent = lang === 'es'
+            ? 'No se pudo cargar el audio. Puedes abrirlo en la fuente original.'
+            : 'Audio could not be loaded. You can open it at its original source.';
+          time.setAttribute('role', 'alert');
+        });
+        controls.append(rewind, toggle, forward);
+        player.append(audio, controls, progress, time);
+        card.append(player);
+        updateToggle();
+        updateTime();
         return;
       }
 
       if (item.type === 'video' && item.embedUrl && button) {
         const container = document.createElement('div');
         container.hidden = true;
+        const notice = document.createElement('p');
+        notice.className = 'muted';
+        notice.textContent = currentLanguage() === 'es' ? 'Si YouTube no permite reproducir aquí, usa Abrir en la fuente.' : 'If YouTube cannot play here, use Open at source.';
         card.append(container);
         button.addEventListener('click', () => {
           const opening = container.hidden;
@@ -125,7 +223,7 @@
             frame.allowFullscreen = true;
             frame.setAttribute('allow', 'encrypted-media; picture-in-picture');
             frame.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
-            container.replaceChildren(frame);
+            container.replaceChildren(notice, frame);
           } else {
             container.replaceChildren();
           }
@@ -181,7 +279,9 @@
         mediaOriginal.href = item.originalUrl;
         mediaOriginal.target = '_blank';
         mediaOriginal.rel = 'noopener noreferrer';
-        mediaOriginal.textContent = c.open;
+        mediaOriginal.textContent = item.type === 'audio' && !item.mediaUrl
+          ? (currentLanguage() === 'es' ? 'Escuchar en la fuente original' : 'Listen at original source')
+          : c.open;
         actions.append(mediaOriginal);
         card.append(actions);
 
@@ -258,6 +358,23 @@
     });
     languageObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
 
+    // Move VoiceOver focus only after an explicit section navigation action.
+    // Never steal focus when media loads or the preferred language changes.
+    for (const [link, target] of [
+      [topMediaLink, heading],
+      [accessibilityLink, accessibilityHeading],
+      [technologyLink, technologyHeading]
+    ]) {
+      if (!link || !target) continue;
+      target.setAttribute('tabindex', '-1');
+      link.addEventListener('click', () => {
+        requestAnimationFrame(() => {
+          if (document.activeElement === link || document.activeElement === document.body) {
+            target.focus({ preventScroll: true });
+          }
+        });
+      });
+    }
     window.addEventListener('hashchange', ensureMediaForRoute);
     applyCopy();
     ensureMediaForRoute();

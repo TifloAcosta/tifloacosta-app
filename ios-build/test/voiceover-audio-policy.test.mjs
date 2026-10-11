@@ -20,7 +20,7 @@ function harness(initial = true, hasAudioSession = true) {
   };
   const audioSession = { type: 'auto' };
   const navigator = hasAudioSession ? { audioSession } : {};
-  const script = policy.replace(/\(shouldMixAudio \? "true" : "false"\)/, String(initial));
+  const script = policy.replace(/\\\(shouldMixAudio \? "true" : "false"\)/, String(initial));
   assert.doesNotMatch(script, /\(shouldMixAudio/);
   runInNewContext(script, {
     window, document, navigator,

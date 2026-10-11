@@ -148,3 +148,37 @@ jobs:
           WRAPPER=$(find "$HOME/Library/Developer/Xcode/DerivedData" -type f -path '*/Build/Products/Release-iphoneos/App.app/public/tiflo-youtube-player.html' -print -quit)
           test -n "$WRAPPER" || { echo "::error::Falta reproductor HTML en el paquete App.app/public"; exit 1; }
           grep -Fq 'window.tifloControl' "$WRAPPER"
+
+  worker-readiness:
+    name: Verificar servicio publicado para YouTube iOS
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comprobar compatibilidad del Worker sin desplegar
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -f ios-build/native/TifloYouTubeAuth.swift ]; then
+            echo "Sin OAuth nativo en esta rama; verificación no necesaria."
+            exit 0
+          fi
+          response="$(mktemp)"
+          trap 'rm -f "$response"' EXIT
+          code="$(curl -sS --retry 2 --retry-delay 2 --connect-timeout 10 --max-time 25 \
+            -o "$response" -w '%{http_code}' \
+            https://youtube-auth.tifloacosta.com/native/capabilities)"
+          if [ "$code" != "200" ]; then
+            echo "::error::El Worker de YouTube aún no anuncia compatibilidad nativa (HTTP $code). Desplegarlo antes de TestFlight."
+            exit 1
+          fi
+          YOUTUBE_CAPABILITIES_FILE="$response" node <<'NODE'
+          const fs = require('node:fs');
+          const response = JSON.parse(fs.readFileSync(process.env.YOUTUBE_CAPABILITIES_FILE, 'utf8'));
+          if (response.nativeAuth !== true || response.protocol !== 1 ||
+              !Array.isArray(response.youtubeActions) ||
+              !['like', 'subscribe', 'comment'].every(x => response.youtubeActions.includes(x))) {
+            throw new Error('El servicio publicado no admite aún las tres acciones nativas de YouTube');
+          }
+          console.log('Worker público compatible con TifloReproductor iOS (protocolo 1).');
+          NODE

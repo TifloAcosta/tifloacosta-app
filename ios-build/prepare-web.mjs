@@ -273,7 +273,7 @@ iosMedia = iosMedia.replace(mediaDataLine, [
   '          const packaged = Array.isArray(window.TIFLO_IOS_ACTUALIDAD_MEDIA) ? window.TIFLO_IOS_ACTUALIDAD_MEDIA : [];',
   '          const enclosures = new Map(packaged.filter(i => i.type === "audio" && i.mediaUrl).map(i => [i.id, i.mediaUrl]));',
   '          items = items.map(i => i.type === "audio" && !i.mediaUrl && enclosures.has(i.id) ? { ...i, mediaUrl: enclosures.get(i.id) } : i);'
-].join('\\n'));
+].join("\n"));
 const jsonError = [
   '        .catch(() => {',
   '          items = [];',

@@ -92,3 +92,62 @@ test('Abrir Actualidad guarda la restauración para el retorno desde otra págin
   app.handlers['menu-click']({ target: { closest() { return entry; } } });
   assert.equal(app.values.get('tiflo-ios-restore-home-origin'), '1');
 });
+
+function createActualidadHarness(hash) {
+  const handlers = {};
+  const timers = [];
+  const targets = Object.fromEntries([
+    'section-news-link', 'section-media-link',
+    'media-accessibility-link', 'media-technology-link'
+  ].map(id => [id, {
+    focused: 0,
+    scrolled: 0,
+    closest() { return null; },
+    focus() { this.focused += 1; },
+    scrollIntoView() { this.scrolled += 1; }
+  }]));
+  const location = { hash };
+  const document = {
+    readyState: 'complete',
+    documentElement: { lang: 'es' },
+    getElementById(id) {
+      return id === 'actualidad-sections' ? {} : targets[id] ?? null;
+    },
+    querySelector() { return null; }
+  };
+  const window = {
+    location,
+    addEventListener(name, handler) { handlers[name] = handler; }
+  };
+  runInNewContext(script, {
+    window, document, requestAnimationFrame: callback => callback(),
+    setTimeout: callback => { timers.push(callback); }
+  });
+  return { handlers, location, targets, timers };
+}
+
+test('Atrás de Noticias en Actualidad devuelve VoiceOver a Noticias, no al encabezado', () => {
+  const app = createActualidadHarness('#news-browser');
+  app.location.hash = '#actualidad-home';
+  app.handlers.hashchange();
+  for (const callback of app.timers) callback();
+  assert.ok(app.targets['section-news-link'].focused > 0);
+  assert.ok(app.targets['section-news-link'].scrolled > 0);
+});
+
+test('Atrás de una categoría multimedia retorna a su control de origen', () => {
+  const app = createActualidadHarness('#media-technology');
+  app.location.hash = '#media-browser';
+  app.handlers.hashchange();
+  for (const callback of app.timers) callback();
+  assert.ok(app.targets['media-technology-link'].focused > 0);
+  assert.equal(app.targets['media-accessibility-link'].focused, 0);
+});
+
+test('Entrar en una sección no restaura un foco anterior', () => {
+  const app = createActualidadHarness('#actualidad-home');
+  app.location.hash = '#media-browser';
+  app.handlers.hashchange();
+  for (const callback of app.timers) callback();
+  assert.equal(app.targets['section-media-link'].focused, 0);
+});

@@ -18,8 +18,68 @@ public final class TifloYouTubePlugin: CAPPlugin, CAPBridgedPlugin {
     public let pluginMethods: [CAPPluginMethod] = [
         CAPPluginMethod(name: "open", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "info", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "publicFile", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "publicFile", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "authStatus", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "signIn", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "accountState", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "accountAction", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "signOut", returnType: CAPPluginReturnPromise)
     ]
+
+    @objc public func authStatus(_ call: CAPPluginCall) {
+        call.resolve(["authenticated": TifloNativeYouTubeAccount.shared.hasLocalSession])
+    }
+
+    @objc public func signIn(_ call: CAPPluginCall) {
+        DispatchQueue.main.async { [weak self] in
+            guard let controller = self?.bridge?.viewController else {
+                call.reject("No se puede abrir Google")
+                return
+            }
+            let presenter = controller.presentedViewController ?? controller
+            TifloNativeYouTubeAccount.shared.signIn(from: presenter) { result in
+                switch result {
+                case .success:
+                    call.resolve(["authenticated": true])
+                case .failure:
+                    call.reject("No se pudo completar la identificación en Google")
+                }
+            }
+        }
+    }
+
+    @objc public func accountState(_ call: CAPPluginCall) {
+        guard let videoId = call.getString("videoId") else {
+            call.reject("Vídeo no válido")
+            return
+        }
+        TifloNativeYouTubeAccount.shared.state(videoId: videoId) { result in
+            switch result {
+            case .success(let data): call.resolve(data)
+            case .failure: call.reject("No se pudo consultar la cuenta de YouTube")
+            }
+        }
+    }
+
+    @objc public func accountAction(_ call: CAPPluginCall) {
+        guard let action = call.getString("action"), let videoId = call.getString("videoId") else {
+            call.reject("Acción incompleta")
+            return
+        }
+        TifloNativeYouTubeAccount.shared.perform(
+            action: action, videoId: videoId, text: call.getString("text") ?? ""
+        ) { result in
+            switch result {
+            case .success(let data): call.resolve(data)
+            case .failure: call.reject("YouTube no pudo completar la acción")
+            }
+        }
+    }
+
+    @objc public func signOut(_ call: CAPPluginCall) {
+        TifloNativeYouTubeAccount.shared.signOut()
+        call.resolve(["authenticated": false])
+    }
 
     @objc public func info(_ call: CAPPluginCall) {
         call.resolve([

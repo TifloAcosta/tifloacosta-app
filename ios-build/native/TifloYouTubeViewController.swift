@@ -17,7 +17,8 @@ public final class TifloYouTubePlugin: CAPPlugin, CAPBridgedPlugin {
     public let jsName = "TifloYouTube"
     public let pluginMethods: [CAPPluginMethod] = [
         CAPPluginMethod(name: "open", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "info", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "info", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "publicFile", returnType: CAPPluginReturnPromise)
     ]
 
     @objc public func info(_ call: CAPPluginCall) {
@@ -25,6 +26,38 @@ public final class TifloYouTubePlugin: CAPPlugin, CAPBridgedPlugin {
             "version": Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "",
             "build": Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
         ])
+    }
+
+    // A limited same-origin catalog fetch avoids WKWebView custom-scheme CORS restrictions.
+    // No arbitrary URLs or private account data are accepted by this native bridge.
+    @objc public func publicFile(_ call: CAPPluginCall) {
+        let allowed: Set<String> = [
+            "actualidad.json", "actualidad-apps.json", "actualidad-media.json",
+            "videos.json", "data.js"
+        ]
+        guard let file = call.getString("file"),
+              allowed.contains(file),
+              let url = URL(string: "https://tifloacosta.com/" + file)
+        else {
+            call.reject("Archivo público no admitido")
+            return
+        }
+        var request = URLRequest(url: url)
+        request.cachePolicy = .reloadIgnoringLocalCacheData
+        request.timeoutInterval = 12
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard error == nil,
+                  let http = response as? HTTPURLResponse,
+                  (200..<300).contains(http.statusCode),
+                  let data = data,
+                  data.count <= 2_000_000,
+                  let body = String(data: data, encoding: .utf8)
+            else {
+                call.reject("No se pudo actualizar el catálogo público")
+                return
+            }
+            call.resolve(["text": body, "status": http.statusCode])
+        }.resume()
     }
 
     @objc public func open(_ call: CAPPluginCall) {

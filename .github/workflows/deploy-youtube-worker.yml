@@ -67,3 +67,20 @@ jobs:
           cat health.json
           test "$status" = "200"
           grep -q '"service":"youtube-actions"' health.json
+
+      - name: Confirmar protocolo de autenticación iOS publicado
+        shell: bash
+        run: |
+          set -euo pipefail
+          code=$(curl -sS -o youtube-native-capabilities.json -w "%{http_code}" \
+            https://youtube-auth.tifloacosta.com/native/capabilities)
+          test "$code" = "200"
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const data = JSON.parse(fs.readFileSync('youtube-native-capabilities.json', 'utf8'));
+          if (data.nativeAuth !== true || data.protocol !== 1 ||
+              !['like', 'subscribe', 'comment'].every(action => data.youtubeActions?.includes(action))) {
+            throw new Error('El Worker no está listo para OAuth y acciones nativas de iOS');
+          }
+          console.log('Worker compatible con TifloReproductor iOS: protocolo 1');
+          NODE

@@ -39,6 +39,26 @@ Para iOS aún hay que:
 - Ampliar cuidadosamente la suscripción a otros canales; la implementación actual solo suscribe al canal TifloAcosta.
 - Asegurar que ver vídeos no requiere iniciar sesión y que un error de cuenta no detiene la reproducción.
 
+## Avance del «sigue 2» — autorización y acciones en rama
+
+- Se mantiene el único cliente Google existente y su redirección HTTPS al Worker.
+- Nuevo inicio nativo con ASWebAuthenticationSession, desafío SHA-256 generado en iPhone y retorno por esquema tifloacosta.
+- El Worker envía un ticket cifrado de 90 segundos ligado al desafío del dispositivo; la app lo canjea sin entregar la contraseña a TifloAcosta ni exponer tokens en JavaScript.
+- El Worker devuelve una sesión opaca cifrada que el iPhone guarda en Keychain, accesible solo desde el componente nativo.
+- Rutas nativas protegidas para estado, «Me gusta», suscripción al canal real y publicación explícita de comentarios.
+- Se incorpora un grupo plegable de controles de cuenta en el reproductor nativo: conectar, consultar estado, suscribirse, Me gusta, escribir, publicar/cancelar y desconectar.
+- No se cambia el flujo web publicado, ni la app Android. El Worker y el binario iOS **deberán distribuirse en orden coordinado** después de las pruebas.
+- El ticket tiene caducidad corta y prueba de posesión del desafío, pero **sin almacenamiento persistente en el servidor no es estrictamente de un único uso**. Si el requisito de un solo canje resulta necesario se necesitará KV/Durable Object u otro almacenamiento.
+- Desconectar elimina la credencial de Keychain, pero no revoca automáticamente el permiso de Google ni otros ejemplares de la sesión cifrada en el servidor. No afirmar lo contrario.
+
+### Antes de publicar
+
+- Preflight Xcode verde con los nuevos controles y AuthManager.
+- Verificar el intercambio real OAuth Google/Worker/iPhone, el retorno al mismo vídeo y la conservación de VoiceOver.
+- Actualizar la política de privacidad de iOS para explicar que se usa Google cuando el usuario conecta YouTube; revisar los metadatos de App Store.
+- Corregir que VoiceOver deje de hablar durante la reproducción y completar controles de avance, retroceso y posición.
+- Confirmar que la API productiva de Cloudflare Worker está publicada y responde antes de distribuir el IPA que la utiliza.
+
 ## Verificación y distribución
 
 La rama solo se integrará en `preparacion-ios` después de que pase el preflight de Xcode y se hayan resuelto los problemas detectados. Una vez integrado, el workflow de TestFlight podrá generar la siguiente compilación. No confundir compilación correcta con accesibilidad comprobada: esta última requiere prueba en iPhone.

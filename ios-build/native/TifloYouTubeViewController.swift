@@ -1,7 +1,6 @@
 import UIKit
 import WebKit
 import Capacitor
-import AVFAudio
 
 // This file replaces the generated Capacitor ViewController.swift only in the
 // iOS build. No changes to the public website or Android implementation.
@@ -17,8 +16,16 @@ public final class TifloYouTubePlugin: CAPPlugin, CAPBridgedPlugin {
     public let identifier = "TifloYouTubePlugin"
     public let jsName = "TifloYouTube"
     public let pluginMethods: [CAPPluginMethod] = [
-        CAPPluginMethod(name: "open", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "open", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "info", returnType: CAPPluginReturnPromise)
     ]
+
+    @objc public func info(_ call: CAPPluginCall) {
+        call.resolve([
+            "version": Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "",
+            "build": Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
+        ])
+    }
 
     @objc public func open(_ call: CAPPluginCall) {
         guard let videoId = call.getString("videoId"),
@@ -39,9 +46,9 @@ public final class TifloYouTubePlugin: CAPPlugin, CAPBridgedPlugin {
             }
             let controller = TifloYouTubeViewController(videoId: videoId)
             controller.modalPresentationStyle = .fullScreen
-            presenting.present(controller, animated: true) {
-                call.resolve()
-            }
+            // Resolve only after dismissal so JavaScript can restore the triggering button.
+            controller.onClose = { call.resolve() }
+            presenting.present(controller, animated: true)
         }
     }
 }
@@ -54,9 +61,7 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
     private var closeButton = UIButton(type: .system)
     private var statusLabel = UILabel()
     private var webView: WKWebView!
-    private var previousAudioCategory: AVAudioSession.Category?
-    private var previousAudioMode: AVAudioSession.Mode?
-    private var previousAudioOptions: AVAudioSession.CategoryOptions?
+    var onClose: (() -> Void)?
 
     init(videoId: String) {
         self.videoId = videoId
@@ -71,13 +76,8 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
 
-        // Permit spoken accessibility audio to mix with video playback.
-        // This is a mitigation; validate VoiceOver on the device.
-        let session = AVAudioSession.sharedInstance()
-        previousAudioCategory = session.category
-        previousAudioMode = session.mode
-        previousAudioOptions = session.categoryOptions
-        try? session.setCategory(.playback, mode: .moviePlayback, options: [.mixWithOthers])
+        // Do not override AVAudioSession: iOS controls media mixing and VoiceOver speech.
+        // Validate spoken VoiceOver feedback while the YouTube video is playing on device.
 
         let header = UIStackView()
         header.axis = .horizontal
@@ -161,12 +161,9 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
     @objc private func closePlayer() {
         webView.stopLoading()
         webView.loadHTMLString("", baseURL: nil)
-        if let category = previousAudioCategory,
-           let mode = previousAudioMode,
-           let options = previousAudioOptions {
-            try? AVAudioSession.sharedInstance().setCategory(category, mode: mode, options: options)
+        dismiss(animated: true) { [weak self] in
+            self?.onClose?()
         }
-        dismiss(animated: true)
     }
 
     @objc private func openOriginal() {

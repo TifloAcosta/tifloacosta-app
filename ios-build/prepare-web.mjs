@@ -150,7 +150,7 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
   }
   html = html.replace('</body>', '<script src="ios-choice-groups.js"></script>' + '\n</body>');
   if (name === 'actualidad.html') html = html.replace('</body>', '<script src="ios-choice-collapse.js"></script>' + '\n</body>');
-  if (name === 'index.html' || name === 'actualidad.html') html = html.replace('</body>', '<script src="ios-parity.js"></script>' + '\n</body>');
+  if (name === 'index.html' || name === 'actualidad.html' || name === 'videos.html') html = html.replace('</body>', '<script src="ios-parity.js"></script>' + '\n</body>');
   if (name === 'podcast.html') {
     html = html.replace('</body>', '<script>requestAnimationFrame(() => { const heading = document.getElementById("podcast-heading"); heading?.setAttribute("tabindex", "-1"); heading?.focus({preventScroll:true}); });</script>' + '\n</body>');
   }

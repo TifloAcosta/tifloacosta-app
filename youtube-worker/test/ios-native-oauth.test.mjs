@@ -130,3 +130,22 @@ test('ticket y bearer manipulados o incompletos no conceden acceso', async () =>
   }), env);
   assert.equal(unauthorized.status, 401);
 });
+
+test('iOS puede comprobar sin credenciales si está disponible la identificación nativa', async () => {
+  const response = await handleRequest(new Request(
+    'https://youtube-auth.tifloacosta.com/native/capabilities',
+    { headers: { Origin: 'capacitor://localhost' } }
+  ), env);
+  assert.equal(response.status, 200);
+  assert.deepEqual(await response.json(), {
+    nativeAuth: true,
+    youtubeActions: ['like', 'subscribe', 'comment'],
+    protocol: 1
+  });
+  assert.equal(response.headers.get('Access-Control-Allow-Origin'), null);
+
+  const notConfigured = await handleRequest(new Request(
+    'https://youtube-auth.tifloacosta.com/native/capabilities'
+  ), { ...env, GOOGLE_CLIENT_SECRET: '' });
+  assert.equal((await notConfigured.json()).nativeAuth, false);
+});

@@ -5,6 +5,7 @@ import { execFileSync } from 'node:child_process';
 const root = resolve(import.meta.dirname);
 const source = resolve(root, 'native/TifloYouTubeViewController.swift');
 const authSource = resolve(root, 'native/TifloYouTubeAuth.swift');
+const actionSource = resolve(root, 'native/TifloYouTubeAccountControls.swift');
 const infoPath = resolve(root, 'ios/App/App/Info.plist');
 const appDelegatePath = resolve(root, 'ios/App/App/AppDelegate.swift');
 const storyboardPath = resolve(root, 'ios/App/App/Base.lproj/Main.storyboard');
@@ -13,6 +14,7 @@ const appDelegate = await readFile(appDelegatePath, 'utf8');
 const storyboard = await readFile(storyboardPath, 'utf8');
 const player = await readFile(source, 'utf8');
 const authentication = await readFile(authSource, 'utf8');
+const actions = await readFile(actionSource, 'utf8');
 if (!appDelegate.includes('import Capacitor') ||
     !storyboard.includes('customClass="CAPBridgeViewController"')) {
   throw new Error('No se reconoce el proyecto nativo Capacitor: no se modifica la compilación');
@@ -36,7 +38,8 @@ const authBody = authentication.replace(/^import UIKit\nimport AuthenticationSer
 const delegateWithAuth = delegateWithWebKit.includes('import AuthenticationServices')
   ? delegateWithWebKit
   : delegateWithWebKit.replace('import UIKit', 'import UIKit\nimport AuthenticationServices\nimport CryptoKit\nimport Security');
-await writeFile(appDelegatePath, delegateWithAuth.trimEnd() + '\n\n' + swiftBody + '\n\n' + authBody);
+const actionsBody = actions.replace(/^import UIKit\n/, '');
+await writeFile(appDelegatePath, delegateWithAuth.trimEnd() + '\n\n' + swiftBody + '\n\n' + authBody + '\n\n' + actionsBody);
 
 // The Capacitor starter storyboard creates the default bridge by class name.
 // Point that existing scene at the subclass that registers our native plugin.

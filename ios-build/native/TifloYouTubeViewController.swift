@@ -77,7 +77,13 @@ public final class TifloYouTubePlugin: CAPPlugin, CAPBridgedPlugin {
                 call.reject("Ya hay otra pantalla abierta")
                 return
             }
-            let controller = TifloYouTubeViewController(videoId: videoId)
+            let controller = TifloYouTubeViewController(
+                videoId: videoId,
+                title: String((call.getString("title") ?? "").prefix(250)),
+                description: String((call.getString("description") ?? "").prefix(6000)),
+                channel: String((call.getString("channel") ?? "").prefix(160)),
+                publishedAt: String((call.getString("publishedAt") ?? "").prefix(40))
+            )
             controller.modalPresentationStyle = .fullScreen
             // Resolve only after dismissal so JavaScript can restore the triggering button.
             controller.onClose = { call.resolve() }
@@ -90,14 +96,26 @@ public final class TifloYouTubePlugin: CAPPlugin, CAPBridgedPlugin {
 /// It does not pretend to originate from youtube.com and does not proxy media.
 private final class TifloYouTubeViewController: UIViewController, WKNavigationDelegate {
     private let videoId: String
+    private let videoTitle: String
+    private let videoDescription: String
+    private let videoChannel: String
+    private let videoPublishedAt: String
     private let spanish = Locale.preferredLanguages.first?.lowercased().hasPrefix("es") ?? true
-    private var closeButton = UIButton(type: .system)
-    private var statusLabel = UILabel()
+    private let closeButton = UIButton(type: .system)
+    private let playbackButton = UIButton(type: .system)
+    private let detailsButton = UIButton(type: .system)
+    private let detailsPanel = UITextView()
+    private let statusLabel = UILabel()
     private var webView: WKWebView!
+    private var pausedFromNative = false
     var onClose: (() -> Void)?
 
-    init(videoId: String) {
+    init(videoId: String, title: String, description: String, channel: String, publishedAt: String) {
         self.videoId = videoId
+        self.videoTitle = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.videoDescription = description.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.videoChannel = channel.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.videoPublishedAt = publishedAt.trimmingCharacters(in: .whitespacesAndNewlines)
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -109,61 +127,110 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
 
-        // Do not override AVAudioSession: iOS controls media mixing and VoiceOver speech.
-        // Validate spoken VoiceOver feedback while the YouTube video is playing on device.
-
+        // Do not take over AVAudioSession. VoiceOver speech must be checked
+        // on the device before changing audio-session policy.
         let header = UIStackView()
         header.axis = .horizontal
         header.alignment = .center
         header.distribution = .fillEqually
         header.spacing = 12
-        header.translatesAutoresizingMaskIntoConstraints = false
 
-        closeButton.setTitle(spanish ? "Cerrar vídeo y volver" : "Close video and return", for: .normal)
-        closeButton.accessibilityLabel = closeButton.title(for: .normal)
+        closeButton.setTitle(spanish ? "Cerrar y volver" : "Close and return", for: .normal)
+        closeButton.accessibilityHint = spanish
+            ? "Regresa al contenido desde el que abriste el vídeo."
+            : "Returns to the item from which you opened this video."
         closeButton.addTarget(self, action: #selector(closePlayer), for: .touchUpInside)
         closeButton.titleLabel?.numberOfLines = 2
 
         let openYouTube = UIButton(type: .system)
         openYouTube.setTitle(spanish ? "Abrir en YouTube" : "Open in YouTube", for: .normal)
-        openYouTube.accessibilityLabel = openYouTube.title(for: .normal)
         openYouTube.addTarget(self, action: #selector(openOriginal), for: .touchUpInside)
         openYouTube.titleLabel?.numberOfLines = 2
         header.addArrangedSubview(closeButton)
         header.addArrangedSubview(openYouTube)
+
+        let titleLabel = UILabel()
+        titleLabel.text = videoTitle.isEmpty ? (spanish ? "Reproductor TifloAcosta" : "TifloAcosta player") : videoTitle
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
+        titleLabel.adjustsFontForContentSizeCategory = true
+        titleLabel.numberOfLines = 2
+        titleLabel.accessibilityTraits.insert(.header)
+
+        playbackButton.setTitle(spanish ? "Pausar vídeo" : "Pause video", for: .normal)
+        playbackButton.isEnabled = false
+        playbackButton.accessibilityHint = spanish
+            ? "Para comenzar, activa primero Reproducir en el vídeo de YouTube."
+            : "First activate Play within the YouTube video."
+        playbackButton.addTarget(self, action: #selector(togglePlayback), for: .touchUpInside)
+
+        detailsButton.setTitle(spanish ? "Ver detalles" : "Show details", for: .normal)
+        detailsButton.accessibilityTraits.insert(.button)
+        detailsButton.accessibilityValue = spanish ? "Contraído" : "Collapsed"
+        detailsButton.addTarget(self, action: #selector(toggleDetails), for: .touchUpInside)
+
+        let controls = UIStackView(arrangedSubviews: [playbackButton, detailsButton])
+        controls.axis = .horizontal
+        controls.distribution = .fillEqually
+        controls.spacing = 12
+
+        var detailLines: [String] = []
+        if !videoChannel.isEmpty {
+            detailLines.append((spanish ? "Canal: " : "Channel: ") + videoChannel)
+        }
+        if !videoPublishedAt.isEmpty {
+            detailLines.append((spanish ? "Publicado: " : "Published: ") + videoPublishedAt)
+        }
+        if !videoDescription.isEmpty {
+            detailLines.append(videoDescription)
+        }
+        detailsPanel.text = detailLines.isEmpty
+            ? (spanish ? "No hay más detalles disponibles." : "No additional details available.")
+            : detailLines.joined(separator: "\n\n")
+        detailsPanel.font = UIFont.preferredFont(forTextStyle: .body)
+        detailsPanel.adjustsFontForContentSizeCategory = true
+        detailsPanel.isEditable = false
+        detailsPanel.isSelectable = true
+        detailsPanel.isHidden = true
+        detailsPanel.backgroundColor = .secondarySystemBackground
+        detailsPanel.layer.cornerRadius = 8
+        detailsPanel.accessibilityLabel = spanish ? "Detalles del vídeo" : "Video details"
+        detailsPanel.heightAnchor.constraint(equalToConstant: 144).isActive = true
 
         let configuration = WKWebViewConfiguration()
         configuration.allowsInlineMediaPlayback = true
         configuration.mediaTypesRequiringUserActionForPlayback = .all
         webView = WKWebView(frame: .zero, configuration: configuration)
         webView.navigationDelegate = self
-        webView.translatesAutoresizingMaskIntoConstraints = false
         webView.accessibilityLabel = spanish ? "Reproductor de YouTube" : "YouTube player"
         webView.scrollView.isScrollEnabled = false
 
-        statusLabel.text = spanish ? "Cargando reproductor de vídeo." : "Loading video player."
+        statusLabel.text = spanish
+            ? "Cargando vídeo. Los controles de YouTube inician la reproducción."
+            : "Loading video. Start playback with the YouTube controls."
+        statusLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
+        statusLabel.adjustsFontForContentSizeCategory = true
         statusLabel.numberOfLines = 0
-        statusLabel.textAlignment = .center
-        statusLabel.translatesAutoresizingMaskIntoConstraints = false
         statusLabel.accessibilityTraits = .staticText
 
-        view.addSubview(header)
-        view.addSubview(statusLabel)
-        view.addSubview(webView)
+        let stack = UIStackView(arrangedSubviews: [
+            header, titleLabel, controls, statusLabel, detailsPanel, webView
+        ])
+        stack.axis = .vertical
+        stack.alignment = .fill
+        stack.distribution = .fill
+        stack.spacing = 12
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(stack)
 
         let safe = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            header.leadingAnchor.constraint(equalTo: safe.leadingAnchor, constant: 16),
-            header.trailingAnchor.constraint(equalTo: safe.trailingAnchor, constant: -16),
-            header.topAnchor.constraint(equalTo: safe.topAnchor, constant: 12),
+            stack.leadingAnchor.constraint(equalTo: safe.leadingAnchor, constant: 16),
+            stack.trailingAnchor.constraint(equalTo: safe.trailingAnchor, constant: -16),
+            stack.topAnchor.constraint(equalTo: safe.topAnchor, constant: 12),
+            stack.bottomAnchor.constraint(equalTo: safe.bottomAnchor, constant: -12),
             header.heightAnchor.constraint(greaterThanOrEqualToConstant: 50),
-            statusLabel.topAnchor.constraint(equalTo: header.bottomAnchor, constant: 8),
-            statusLabel.leadingAnchor.constraint(equalTo: safe.leadingAnchor, constant: 16),
-            statusLabel.trailingAnchor.constraint(equalTo: safe.trailingAnchor, constant: -16),
-            webView.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 12),
-            webView.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
-            webView.trailingAnchor.constraint(equalTo: safe.trailingAnchor),
-            webView.bottomAnchor.constraint(equalTo: safe.bottomAnchor)
+            controls.heightAnchor.constraint(greaterThanOrEqualToConstant: 48),
+            webView.heightAnchor.constraint(greaterThanOrEqualToConstant: 140)
         ])
 
         let appId = Bundle.main.bundleIdentifier ?? "com.tifloacosta.app"
@@ -181,8 +248,48 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        statusLabel.text = spanish ? "Reproductor cargado. Usa sus controles para reproducir." :
-          "Player loaded. Use its controls to play."
+        playbackButton.isEnabled = true
+        statusLabel.text = spanish
+            ? "Vídeo preparado. Puedes utilizar sus controles y volver a esta fila para pausarlo."
+            : "Video ready. Use the player controls, then return here to pause."
+    }
+
+    @objc private func togglePlayback() {
+        guard webView != nil, playbackButton.isEnabled else { return }
+        if pausedFromNative {
+            webView.resumeAllMediaPlayback()
+            pausedFromNative = false
+            playbackButton.setTitle(spanish ? "Pausar vídeo" : "Pause video", for: .normal)
+            statusLabel.text = spanish ? "Reanudando vídeo." : "Resuming video."
+        } else {
+            webView.pauseAllMediaPlayback { [weak self] in
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                    self.pausedFromNative = true
+                    self.playbackButton.setTitle(self.spanish ? "Reanudar vídeo" : "Resume video", for: .normal)
+                    self.statusLabel.text = self.spanish ? "Vídeo en pausa." : "Video paused."
+                }
+            }
+        }
+    }
+
+    @objc private func toggleDetails() {
+        let expanded = detailsPanel.isHidden
+        detailsPanel.isHidden = !expanded
+        detailsButton.setTitle(
+            expanded ? (spanish ? "Ocultar detalles" : "Hide details")
+                     : (spanish ? "Ver detalles" : "Show details"),
+            for: .normal
+        )
+        detailsButton.accessibilityValue = expanded
+            ? (spanish ? "Expandido" : "Expanded")
+            : (spanish ? "Contraído" : "Collapsed")
+    }
+
+    override func accessibilityPerformMagicTap() -> Bool {
+        guard playbackButton.isEnabled else { return false }
+        togglePlayback()
+        return true
     }
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {

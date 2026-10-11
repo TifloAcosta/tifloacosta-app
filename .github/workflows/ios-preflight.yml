@@ -61,6 +61,9 @@ jobs:
           assert.match(media, /window\.TIFLO_IOS_ACTUALIDAD_MEDIA/);
           assert.match(actualidadHtml, /ios-actualidad-media-fallback\.js/);
           assert.ok(mediaFallback.startsWith('window.TIFLO_IOS_ACTUALIDAD_MEDIA = ['));
+          const prefix = 'window.TIFLO_IOS_ACTUALIDAD_MEDIA = ';
+          const backupCatalog = JSON.parse(mediaFallback.slice(prefix.length).trim().replace(/;$/, ''));
+          assert.deepEqual(backupCatalog, mediaCatalog, 'El respaldo iOS debe contener exactamente el mismo catálogo que el JSON');
           assert.equal((mediaCatalog.filter(item => item.type === 'audio' && item.mediaUrl)).length, (mediaCatalog.filter(item => item.type === 'audio')).length);
           assert.ok(mediaCatalog.some(item => item.type === 'audio' && item.mediaUrl), 'El catálogo iOS debe conservar enlaces de audio directos');
           assert.doesNotMatch(media, /link\.addEventListener\('click',/);

@@ -30,8 +30,8 @@ jobs:
           node-version: '22'
       - name: Validar sintaxis del preparador
         run: node --check ios-build/prepare-web.mjs
-      - name: Comprobar pruebas automáticas de Actualidad
-        run: npm run test:actualidad
+      - name: Comprobar pruebas automáticas de multimedia y RSS
+        run: node --test test/actualidad-media-*.test.mjs test/actualidad-feed.test.mjs
       - name: Preparar contenido y validar scripts iOS
         run: node ios-build/prepare-web.mjs
       - name: Comprobar modificaciones iOS empaquetadas

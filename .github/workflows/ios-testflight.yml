@@ -78,7 +78,7 @@ jobs:
           node --check www/actualidad-media.js
           npx cap add ios
           node install-native-video.mjs
-          grep -q 'registerPluginInstance(TifloYouTubePlugin())' ios/App/App/ViewController.swift
+          grep -q 'registerPluginInstance(TifloYouTubePlugin())' ios/App/App/AppDelegate.swift
       - name: Asignar número de compilación único para TestFlight
         working-directory: ios-build
         env:

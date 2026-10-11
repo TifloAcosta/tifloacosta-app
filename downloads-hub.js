@@ -42,7 +42,7 @@
   }
 
   function setGlobalChromeHidden(hidden) {
-    ['home-hero', 'home-blocks', 'global-search-section', 'resources-view', 'news-view', 'book-section', 'contact-section', 'privacy-section', 'config-section']
+    ['home-hero', 'home-blocks', 'global-search-section', 'resources-view', 'favorites-view', 'news-view', 'book-section', 'contact-section', 'privacy-section', 'config-section']
       .forEach(id => {
         const node = document.getElementById(id);
         if (node && hidden) node.hidden = true;
@@ -74,7 +74,7 @@
 
     section.hidden = !active;
     if (inDownloads) setGlobalChromeHidden(true);
-    else if (!route || route === 'home' || ['resources', 'news', 'book', 'contact', 'privacy', 'config'].includes(route)) setGlobalChromeHidden(false);
+    else if (!route || route === 'home' || ['resources', 'favorites', 'news', 'book', 'contact', 'privacy', 'config'].includes(route)) setGlobalChromeHidden(false);
 
     if (!active) return;
     const linkSection = document.getElementById('downloads-section');

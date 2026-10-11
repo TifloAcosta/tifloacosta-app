@@ -194,7 +194,9 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
         detailsPanel.backgroundColor = .secondarySystemBackground
         detailsPanel.layer.cornerRadius = 8
         detailsPanel.accessibilityLabel = spanish ? "Detalles del vídeo" : "Video details"
-        detailsPanel.heightAnchor.constraint(equalToConstant: 144).isActive = true
+        let detailHeight = detailsPanel.heightAnchor.constraint(equalToConstant: 144)
+        detailHeight.priority = .defaultHigh
+        detailHeight.isActive = true
 
         let configuration = WKWebViewConfiguration()
         configuration.allowsInlineMediaPlayback = true

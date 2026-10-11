@@ -141,7 +141,7 @@ test('privacy and external-service information is present and bilingual', async 
   for (const id of ['about-heading', 'external-links-note', 'privacy-heading', 'privacy-text', 'accessibility-info-text']) {
     assert.match(html, new RegExp(`id="${id}"`));
   }
-  for (const expected of ['GoatCounter', 'OneSignal', "heading: 'About Tony'", "heading: 'Privacy and accessibility'", 'els.privacyText.textContent=c.privacy.text']) {
+  for (const expected of ['GoatCounter', 'OneSignal', "about: { heading: 'Contacto'", "about: { heading: 'Contact'", "heading: 'Privacy and accessibility'", 'els.aboutHeading.textContent=c.about.heading', 'els.privacyText.textContent=c.privacy.text']) {
     assert.ok(source.includes(expected), `Missing localized audit information: ${expected}`);
   }
 });

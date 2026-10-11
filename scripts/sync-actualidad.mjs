@@ -243,6 +243,17 @@ async function main() {
   const outputChanged = await writeJsonIfChanged(new URL('actualidad.json', root), result.stories);
 
   if (result.failedSources.length) console.warn(`Actualidad sources unavailable: ${result.failedSources.join(', ')}`);
+  const datedStories = result.stories.map(item => Date.parse(item.publishedAt)).filter(Number.isFinite);
+  const mostRecent = datedStories.length ? Math.max(...datedStories) : NaN;
+  if (Number.isFinite(mostRecent)) {
+    const lastPublished = new Date(mostRecent).toISOString();
+    const ageHours = Math.max(0, Math.floor((now.getTime() - mostRecent) / 3600000));
+    console.log(`Actualidad newest article: ${lastPublished}; age: ${ageHours} hours.`);
+    if (ageHours <= 48) console.log(`::notice::Actualidad newest article: ${lastPublished} (${ageHours} hours old).`);
+    if (ageHours > 48) console.warn(`::warning::Actualidad feed is stale: last published article is ${ageHours} hours old.`);
+  } else {
+    console.warn('::warning::Actualidad catalog has no valid publication dates.');
+  }
   console.log(`Actualidad stories: ${result.stories.length}. Changed: ${outputChanged ? 'yes' : 'no'}.`);
 }
 

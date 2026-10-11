@@ -64,7 +64,7 @@ test('current news uses resource incorporation dates instead of fixed ids', asyn
     assert.ok(candidates.length >= 3, `Expected at least three new resources in ${lang}`);
 
     const selected = [...candidates].sort(core.compareNewsItems).slice(0, 3);
-    const expectedDates = candidates
+    const expectedDates = [...candidates]
       .map(item => Date.parse(item.newsDate))
       .sort((a, b) => b - a)
       .slice(0, 3);

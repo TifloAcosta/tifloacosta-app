@@ -584,12 +584,25 @@
     const entry = event.target.closest?.('[id^="home-open-"]');
     if (!entry?.id) return;
     lastHomeEntryId = entry.id;
-    try { sessionStorage.setItem('tiflo-last-home-entry', entry.id); } catch {}
+    try {
+      sessionStorage.setItem('tiflo-last-home-entry', entry.id);
+      // WKWebView may omit document.referrer when returning from another
+      // packaged screen. This flag makes VoiceOver focus restoration explicit.
+      if (/^(?:actualidad|videos|podcast)\.html$/.test(entry.getAttribute('href') || '')) {
+        sessionStorage.setItem('tiflo-restore-home-focus', '1');
+      }
+    } catch {}
   });
   let returnFromSubpage = false;
   try {
     const previous = new URL(document.referrer);
     returnFromSubpage = previous.origin === location.origin && /\/(actualidad|videos|podcast)\.html$/.test(previous.pathname);
+  } catch {}
+  try {
+    if (sessionStorage.getItem('tiflo-restore-home-focus') === '1') {
+      returnFromSubpage = true;
+      sessionStorage.removeItem('tiflo-restore-home-focus');
+    }
   } catch {}
 
   const labels = {

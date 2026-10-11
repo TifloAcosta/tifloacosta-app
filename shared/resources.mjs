@@ -51,5 +51,10 @@ export function selectResources(items=[], {
 export function newestResources(items=[], { lang='es', limit=3 }={}) {
   return resourcesForLanguage(items, lang)
     .filter(item => item?.new === true || item?.isNew === true)
+    .sort((a, b) => {
+      const aTime = Date.parse(a?.newsDate || a?.publishedAt || '') || 0;
+      const bTime = Date.parse(b?.newsDate || b?.publishedAt || '') || 0;
+      return bTime - aTime || String(a?.id || '').localeCompare(String(b?.id || ''));
+    })
     .slice(0, Math.max(0, Number(limit) || 0));
 }

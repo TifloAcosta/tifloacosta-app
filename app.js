@@ -14,7 +14,7 @@
     actualidadHomeIntro: $('#actualidad-home-intro'), actualidadHomeList: $('#actualidad-home-list'), actualidadHomeOpen: $('#actualidad-home-open'),
     searchHeading: $('#search-heading'), searchLabel: $('label[for="search"]'),
     searchForm: $('#search-form'), search: $('#search'), searchButton: $('#search-button'), newsHeading: $('#news-heading'),
-    newsCount: $('#news-count'), newsList: $('#news-list'), categoryToggle: $('#category-toggle'), categoryMenu: $('#category-menu'),
+    newsCount: $('#news-count'), newsList: $('#news-list'), favoritesList: $('#favorites-list'), favoritesStatus: $('#favorites-status'), categoryToggle: $('#category-toggle'), categoryMenu: $('#category-menu'),
     categoryButtons: $('#category-buttons'), resultStatus: $('#result-status'), results: $('#resource-results'),
     videosHomeHeading: $('#videos-home-heading'), videosHomeIntro: $('#videos-home-intro'), videosHomeOpen: $('#videos-home-open'), youtubeHomeChannel: $('#youtube-home-channel'),
     bookHeading: $('#book-heading'), bookCover: $('#book-cover'), bookTitle: $('#book-title'), bookSubtitle: $('#book-subtitle'),
@@ -43,7 +43,7 @@
       documentTitle: 'TifloAcosta App — Recursos de accesibilidad', skip: 'Saltar al contenido principal', brandLabel: 'TifloAcosta, inicio', appHeading: 'TifloAcosta App',
       intro: 'Recursos de accesibilidad y tecnología, organizados para llegar a ellos sin perderse por el camino.',
       actualidadHome: { heading:'Actualidad', intro:'Noticias y novedades de accesibilidad y tecnología seleccionadas para llegar a lo importante sin tener que apartar ruido por el camino.', open:'Ver toda la actualidad', source:'Fuente', count:n => `${n} noticia${n === 1 ? '' : 's'} reciente${n === 1 ? '' : 's'}.` },
-      searchHeading: 'Buscar recursos', searchLabel: 'Título o palabra clave', placeholder: 'Por ejemplo: VoiceOver, Android, WhatsApp…', searchButton: 'Buscar',
+      searchHeading: 'Buscar recursos', searchLabel: 'Escribe aquí lo que quieres buscar', placeholder: 'Por ejemplo: VoiceOver, Android, WhatsApp…', searchButton: 'Buscar',
       news: 'Novedades', newsCount: n => `${n} novedad${n === 1 ? '' : 'es'} reciente${n === 1 ? '' : 's'}.`,
       explore: 'Explorar recursos', categoryToggle: 'Buscar un apartado', categoryButtonsLabel: 'Categorías de recursos', favorites: 'Ver favoritos', clear: 'Limpiar resultados',
       configuration: 'Configuración', accessibility: 'Accesibilidad visual',
@@ -57,7 +57,7 @@
         printUrl: 'https://www.amazon.es/s?k=9798185909218&i=stripbooks', kindleUrl: 'https://www.amazon.es/s?k=La+vida+vista+desde+donde+estoy+Tony+Acosta&i=digital-text'
       },
       contact: 'Contacto y redes', contactDirect: 'Contacto', contactFollow: 'Sígueme', contactPodcast: 'Escucha el podcast',
-      about: { heading: 'Sobre Tony', text: 'Tony Acosta es el autor del libro y la persona que presenta los contenidos y vías de contacto de TifloAcosta reunidos en esta aplicación.' },
+      about: { heading: 'Contacto', text: 'Si quieres contactar con Tony Acosta, puedes hacerlo por los siguientes medios:' },
       externalLinks: 'Los enlaces de esta sección, del catálogo, de Amazon y de YouTube abren servicios externos, sujetos a sus propias condiciones y prácticas de privacidad.',
       privacy: { heading: 'Privacidad y accesibilidad', privacyHeading: 'Privacidad', text: 'La app guarda en este navegador el idioma, los favoritos, los ajustes visuales y, si utilizas la biblioteca de TifloLector, los documentos que decidas guardar junto con su progreso de lectura. La traducción compatible se realiza con el motor interno del navegador y el OCR de PDF se procesa localmente; los componentes necesarios se descargan sólo al activar cada función. No necesitas crear una cuenta. Al visitar la app se carga GoatCounter para medir el uso del sitio y OneSignal para ofrecer las notificaciones; si activas estas últimas, el navegador solicita tu permiso. Los enlaces externos pueden recibir información técnica habitual de la navegación.', accessibilityHeading: 'Accesibilidad', accessibilityText: 'La app usa encabezados, etiquetas y controles nativos, incluye un enlace para saltar al contenido y avisos para lector de pantalla. Respeta preferencias del sistema y permite ajustar tamaño, contraste, espaciado y grosor del texto. Si encuentras una barrera, puedes comunicarla mediante las opciones de contacto anteriores.' },
       contactLabels: { whatsapp: 'Contactar por WhatsApp', email: 'Enviar correo electrónico', instagram: 'Instagram', facebookChannel: 'Facebook — Canal TifloAcosta', facebookPersonal: 'Facebook — Tony Acosta', spotify: 'Spotify', applePodcasts: 'Apple Podcasts', ivoox: 'iVoox', podimo: 'Podimo', radio: 'radio.es' },
@@ -82,7 +82,7 @@
       documentTitle: 'TifloAcosta App — Accessibility resources', skip: 'Skip to main content', brandLabel: 'TifloAcosta, home', appHeading: 'TifloAcosta App',
       intro: 'Accessibility and technology resources, organized so you can reach what you need without getting lost along the way.',
       actualidadHome: { heading:'News', intro:'Accessibility and technology news selected to help you reach what matters without having to clear away the noise first.', open:'View all news', source:'Source', count:n => `${n} recent news item${n === 1 ? '' : 's'}.` },
-      searchHeading: 'Search resources', searchLabel: 'Title or keyword', placeholder: 'For example: VoiceOver, Android, WhatsApp…', searchButton: 'Search',
+      searchHeading: 'Search resources', searchLabel: 'Type what you want to search for', placeholder: 'For example: VoiceOver, Android, WhatsApp…', searchButton: 'Search',
       news: 'What’s new', newsCount: n => `${n} recent item${n === 1 ? '' : 's'}.`,
       explore: 'Explore resources', categoryToggle: 'Find a section', categoryButtonsLabel: 'Resource categories', favorites: 'View favorites', clear: 'Clear results',
       configuration: 'Settings', accessibility: 'Visual accessibility',
@@ -96,7 +96,7 @@
         printUrl: 'https://www.amazon.com/s?k=9798185909218&i=stripbooks', kindleUrl: 'https://www.amazon.com/s?k=La+vida+vista+desde+donde+estoy+Tony+Acosta&i=digital-text'
       },
       contact: 'Contact and social', contactDirect: 'Contact', contactFollow: 'Follow TifloAcosta', contactPodcast: 'Listen to the podcast',
-      about: { heading: 'About Tony', text: 'Tony Acosta is the author of the book and the person presenting the TifloAcosta content and contact options collected in this application.' },
+      about: { heading: 'Contact', text: 'If you want to contact Tony Acosta, you can use any of the following methods:' },
       externalLinks: 'Links in this section, the catalog, Amazon and YouTube open external services governed by their own terms and privacy practices.',
       privacy: { heading: 'Privacy and accessibility', privacyHeading: 'Privacy', text: 'The app stores your language, favorites and display settings in this browser. If you use the TifloReader library, it also stores the documents you choose to save and their reading progress locally. Supported translation uses the browser’s internal engine and PDF OCR is processed locally; required components are downloaded only when you activate each feature. You do not need to create an account. GoatCounter loads when you visit to measure site use, and OneSignal loads to provide notifications; if you activate them, the browser asks for permission. External links may receive the usual technical browsing information.', accessibilityHeading: 'Accessibility', accessibilityText: 'The app uses headings, labels and native controls, and provides a skip link and screen-reader announcements. It respects system preferences and lets you adjust text size, contrast, spacing and weight. If you encounter a barrier, you can report it through the contact options above.' },
       contactLabels: { whatsapp: 'Contact on WhatsApp', email: 'Send email', instagram: 'Instagram', facebookChannel: 'Facebook — Canal TifloAcosta', facebookPersonal: 'Facebook — Tony Acosta', spotify: 'Spotify', applePodcasts: 'Apple Podcasts', ivoox: 'iVoox', podimo: 'Podimo', radio: 'radio.es' },
@@ -293,6 +293,7 @@
         if(nowFavorite) favorites.add(item.id); else favorites.delete(item.id);
         saveFavorites();
       }
+      if (location.hash === '#favorites') queueMicrotask(renderFavoritesScreen);
       const card=trigger.closest?trigger.closest('.resource-card'):null;
       const cardFavorite=card?card.querySelector('[data-favorite-action="true"]'):null;
       if(cardFavorite) {
@@ -356,6 +357,18 @@
     const meta=document.createElement('p'); meta.textContent=item.category;
     article.append(h3,meta); return article;
   }
+
+  function renderFavoritesScreen() {
+    if (!els.favoritesList || !els.favoritesStatus) return;
+    const items = resourcesForLanguage().filter(item => favorites.has(item.id));
+    els.favoritesList.replaceChildren();
+    const c = copy[lang];
+    els.favoritesStatus.textContent = items.length
+      ? (lang === 'en' ? items.length + ' saved resource(s).' : items.length + ' recurso(s) guardado(s).')
+      : c.noFavorites;
+    items.forEach(item => els.favoritesList.append(makeCard(item)));
+  }
+  window.TifloRenderFavorites = renderFavoritesScreen;
 
   function renderNews(){ const c=copy[lang],items=(shared?.newestResources ? shared.newestResources(data,{lang,limit:3}) : resourcesForLanguage().filter(item=>item.new).slice(0,3)).sort(core.compareNewsItems); els.newsList.innerHTML=''; items.forEach(item=>els.newsList.append(makeNewsItem(item))); els.newsCount.textContent=c.newsCount(items.length); }
   function setCategoryMenuExpanded(expanded){ const open=Boolean(expanded); els.categoryToggle.setAttribute('aria-expanded',String(open)); els.categoryMenu.hidden=!open; }
@@ -472,17 +485,11 @@
     els.contactHeading.textContent=c.contact;
     els.contactDirectHeading.textContent=c.contactDirect;
     els.contactFollowHeading.textContent=c.contactFollow;
-    els.contactPodcastHeading.textContent=c.contactPodcast;
     els.contactWhatsapp.textContent=l.whatsapp;
     els.contactEmail.textContent=l.email;
     els.contactInstagram.textContent=l.instagram;
     els.contactFacebookChannel.textContent=l.facebookChannel;
     els.contactFacebookPersonal.textContent=l.facebookPersonal;
-    els.contactSpotify.textContent=l.spotify;
-    els.contactApplePodcasts.textContent=l.applePodcasts;
-    els.contactIvoox.textContent=l.ivoox;
-    els.contactPodimo.textContent=l.podimo;
-    els.contactRadio.textContent=l.radio;
   }
 
   function localizeInstall(){

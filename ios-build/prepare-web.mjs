@@ -77,20 +77,31 @@ const iosLanguage = `<script id="tiflo-ios-settings">
   const label = document.createElement('label');
   label.htmlFor = 'ios-app-language';
   label.textContent = document.documentElement.lang === 'en' ? 'App language' : 'Idioma de la aplicación';
-  const select = document.createElement('select');
-  select.id = 'ios-app-language';
+  const choices = document.createElement('div');
+  choices.id = 'ios-app-language';
+  choices.className = 'resource-actions';
+  choices.setAttribute('role', 'group');
+  choices.setAttribute('aria-label', label.textContent);
+  const current = (() => { try { return localStorage.getItem('tifloLang') === 'en' ? 'en' : 'es'; } catch { return 'es'; } })();
+  const buttons = [];
+  const update = value => {
+    buttons.forEach(([key, button]) => button.setAttribute('aria-pressed', String(key === value)));
+    label.textContent = value === 'en' ? 'App language' : 'Idioma de la aplicación';
+    choices.setAttribute('aria-label', label.textContent);
+  };
   for (const [value, text] of [['es', 'Español'], ['en', 'English']]) {
-    const option = document.createElement('option');
-    option.value = value;
-    option.textContent = text;
-    select.append(option);
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = text;
+    button.addEventListener('click', () => {
+      document.getElementById(value === 'en' ? 'lang-en' : 'lang-es')?.click();
+      update(value);
+    });
+    buttons.push([value, button]);
+    choices.append(button);
   }
-  select.value = (() => { try { return localStorage.getItem('tifloLang') === 'en' ? 'en' : 'es'; } catch { return 'es'; } })();
-  select.addEventListener('change', () => {
-    document.getElementById(select.value === 'en' ? 'lang-en' : 'lang-es')?.click();
-    label.textContent = select.value === 'en' ? 'App language' : 'Idioma de la aplicación';
-  });
-  wrapper.append(label, select);
+  update(current);
+  wrapper.append(label, choices);
   heading.insertAdjacentElement('afterend', wrapper);
 
   // In the native iOS shell the visual preferences should be directly
@@ -107,6 +118,8 @@ const iosLanguage = `<script id="tiflo-ios-settings">
 })();
 <\/script>`;
 // Bundle an executable fallback: WKWebView file:// fetch may reject local JSON.
+// iOS-only button groups avoid the WKWebView native picker in VoiceOver.
+await writeFile(join(output, 'ios-choice-groups.js'), "(() => {\n  'use strict';\n  // WKWebView/VoiceOver: bypass the native select popup in frequently used\n  // navigation and filtering controls. Preserve the original change events.\n  const ids = [\n    'video-sort', 'news-category', 'apps-platform',\n    'download-type-filter', 'setting-text-size', 'setting-theme',\n    'setting-spacing', 'sound-category', 'sound-provider'\n  ];\n  for (const id of ids) {\n    const select = document.getElementById(id);\n    if (!(select instanceof HTMLSelectElement)) continue;\n    const label = document.querySelector('label[for=\"' + id + '\"]');\n    const group = document.createElement('div');\n    group.className = 'resource-actions ios-choice-buttons';\n    group.setAttribute('role', 'group');\n    group.setAttribute('aria-label', label?.textContent?.trim() || id);\n    select.insertAdjacentElement('afterend', group);\n    function markActive() {\n      for (const button of group.querySelectorAll('button')) {\n        button.setAttribute('aria-pressed', String(button.dataset.value === select.value));\n      }\n    }\n    function repaint() {\n      const options = [...select.options];\n      if (options.length < 2 || options.length > 40) {\n        group.hidden = true;\n        select.hidden = false;\n        if (label) label.hidden = false;\n        return;\n      }\n      select.hidden = true;\n      if (label) label.hidden = true;\n      group.hidden = false;\n      group.setAttribute('aria-label', label?.textContent?.trim() || id);\n      group.replaceChildren();\n      for (const option of options) {\n        const button = document.createElement('button');\n        button.type = 'button';\n        button.dataset.value = option.value;\n        button.textContent = option.textContent;\n        button.disabled = option.disabled;\n        button.addEventListener('click', () => {\n          select.value = option.value;\n          select.dispatchEvent(new Event('change', { bubbles: true }));\n          markActive();\n        });\n        group.append(button);\n      }\n      markActive();\n    }\n    new MutationObserver(repaint).observe(select, { childList: true, subtree: true });\n    select.addEventListener('change', markActive);\n    repaint();\n  }\n})();\n");
 const bundledVideos = JSON.parse(await readFile(join(output, 'videos.json'), 'utf8'));
 if (!Array.isArray(bundledVideos.videos) || !bundledVideos.videos.length) throw new Error('Catálogo de vídeos vacío');
 await writeFile(join(output, 'ios-videos-fallback.js'),
@@ -122,6 +135,10 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
     const script = '<script src="actualidad-media.js?v=1.1"></script>';
     if (!html.includes(script)) throw new Error('No se encuentra el script de multimedia en Actualidad');
     html = html.replace(script, '<script src="ios-actualidad-media-fallback.js"></script>\n' + script);
+  }
+  html = html.replace('</body>', '<script src="ios-choice-groups.js"></script>' + '\n</body>');
+  if (name === 'podcast.html') {
+    html = html.replace('</body>', '<script>requestAnimationFrame(() => { const heading = document.getElementById("podcast-heading"); heading?.setAttribute("tabindex", "-1"); heading?.focus({preventScroll:true}); });</script>' + '\n</body>');
   }
   await writeFile(path, html);
 }
@@ -205,6 +222,15 @@ iosApp = iosApp.replace(iosCategoryRender,
     els.results.querySelectorAll('.resource-meta').forEach(meta => {
       if (meta.textContent.trim() === String(cat).trim()) meta.remove();
     });`);
+// In the native bundle prefer the freshly published web catalogs, but keep
+// the embedded data available when offline or when WKWebView blocks cross-origin IO.
+const networkFirst = file =>
+  "fetch('https://tifloacosta.com/" + file + "', { cache: 'no-store' })" +
+  ".then(response => response.ok ? response : fetch('" + file + "', { cache: 'no-cache' }))" +
+  ".catch(() => fetch('" + file + "', { cache: 'no-cache' }))";
+const appNewsCall = "fetch('actualidad.json',{cache:'no-cache'})";
+if (!iosApp.includes(appNewsCall)) throw new Error('No se encuentra el feed de Actualidad en el inicio');
+iosApp = iosApp.replace(appNewsCall, networkFirst('actualidad.json'));
 await writeFile(iosAppPath, iosApp);
 
 // iOS WKWebView uses a local/custom origin: YouTube can reject embeds that
@@ -229,17 +255,25 @@ iosMedia = iosMedia.replace(originalLabel,
   "mediaOriginal.textContent = item.type === 'video' && iosExternalVideo\n" +
   "          ? (currentLanguage() === 'es' ? 'Abrir vídeo en YouTube' : 'Open video on YouTube')\n" +
   "          : item.type === 'audio' && !item.mediaUrl");
-// Load packaged media catalogue as the fallback when WKWebView cannot fetch
-// the same JSON. Do not use external or insecure content in this recovery path.
+// Prefer the live HTTPS catalog with the packaged catalog as offline fallback.
+// Existing episodes retain the playable audio URLs generated at build time.
 const jsonLoad = [
   "      fetch('actualidad-media.json', { cache: 'no-cache' })",
   '        .then(response => {'
 ].join('\n');
 if (!iosMedia.includes(jsonLoad)) throw new Error('No se encuentra carga de catálogo de Actualidad');
 iosMedia = iosMedia.replace(jsonLoad, [
-  "      fetch('actualidad-media.json', { cache: 'no-cache' })",
+  "      " + networkFirst('actualidad-media.json'),
   '        .then(response => {'
 ].join('\n'));
+const mediaDataLine = '          items = Array.isArray(data) ? data : [];';
+if (!iosMedia.includes(mediaDataLine)) throw new Error('No se encuentra normalización del catálogo multimedia');
+iosMedia = iosMedia.replace(mediaDataLine, [
+  '          items = Array.isArray(data) ? data : [];',
+  '          const packaged = Array.isArray(window.TIFLO_IOS_ACTUALIDAD_MEDIA) ? window.TIFLO_IOS_ACTUALIDAD_MEDIA : [];',
+  '          const enclosures = new Map(packaged.filter(i => i.type === "audio" && i.mediaUrl).map(i => [i.id, i.mediaUrl]));',
+  '          items = items.map(i => i.type === "audio" && !i.mediaUrl && enclosures.has(i.id) ? { ...i, mediaUrl: enclosures.get(i.id) } : i);'
+].join("\n"));
 const jsonError = [
   '        .catch(() => {',
   '          items = [];',
@@ -270,9 +304,19 @@ iosMedia = iosMedia.slice(0,focusStart) +
   '    // VoiceOver focus belongs exclusively to actualidad-core.js navigation.\n' +
   iosMedia.slice(focusEnd);
 await writeFile(iosMediaPath, iosMedia);
+// News and the accessible-app directory must also refresh without a new IPA.
+const iosActualidadPath = join(output, 'actualidad.js');
+let iosActualidad = await readFile(iosActualidadPath, 'utf8');
+for (const file of ['actualidad.json', 'actualidad-apps.json']) {
+  const localFetch = "fetch('" + file + "', { cache: 'no-cache' })";
+  if (!iosActualidad.includes(localFetch)) throw new Error('No se encuentra catálogo local: ' + file);
+  iosActualidad = iosActualidad.replace(localFetch, networkFirst(file));
+}
+await writeFile(iosActualidadPath, iosActualidad);
+
 
 // Fail before signing or uploading if an injected iOS-only script is invalid.
-for (const file of ['app.js', 'videos.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-videos-fallback.js', 'ios-actualidad-media-fallback.js']) {
+for (const file of ['app.js', 'videos.js', 'actualidad.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-choice-groups.js', 'ios-videos-fallback.js', 'ios-actualidad-media-fallback.js']) {
   execFileSync(process.execPath, ['--check', join(output, file)], { stdio: 'pipe' });
 }
 console.log('Validación sintáctica de scripts iOS completada');

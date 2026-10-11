@@ -83,6 +83,16 @@ Para iOS aún hay que:
 - Las pruebas incluyen ejecución real, simulada sin red, del controlador JavaScript para reproducir, pausar, buscar, verificar progreso y avisar errores 153.
 - Pendiente: prueba física con VoiceOver en iPhone, comprobar reproducción dentro de la app, que los controles vuelven a recibir voz durante el vídeo, y respuesta al doble toque con dos dedos. No equivale a una validación real de accesibilidad ni a un permiso para publicar.
 
+## Sigue 5 — preparación de inicio de sesión y errores VoiceOver
+
+- El Worker ofrece `GET /native/capabilities` con versión de protocolo y funciones disponibles. Solo devuelve estados generales; nunca credenciales, claves ni cookies.
+- Antes de presentar el consentimiento de Google, el cliente iOS comprueba por URLSession si el Worker publicado acepta el protocolo 1. Si aún no está disponible, anuncia la indisponibilidad sin pedir al usuario autenticarse en vano.
+- Cuando el servidor rechaza un comentario, suscripción o «Me gusta», VoiceOver distingue sesión caducada, comentarios desactivados, cuentas no autorizadas, permisos insuficientes, límites temporales y vídeo desaparecido.
+- Si una operación devuelve código 401, iOS borra la sesión local del llavero, muestra «Conectar mi cuenta de YouTube» y restaura el foco.
+- Se amplían pruebas de seguridad y accesibilidad para el contrato de capacidades y se exige el esquema de retorno `tifloacosta` en el `Info.plist` de la app generada.
+- El workflow de despliegue de Cloudflare añade una comprobación de `/native/capabilities` **posterior** a publicar el Worker: debe responder que ofrece el protocolo 1 y las tres operaciones. Esta comprobación NO despliega por sí misma cambios ni acredita un inicio de sesión real.
+- Sigue siendo necesario publicar primero la API compatible y después la actualización de TestFlight. El servicio web existente no debe interrumpirse durante la transición.
+
 ## Verificación y distribución
 
 La rama solo se integrará en `preparacion-ios` después de que pase el preflight de Xcode y se hayan resuelto los problemas detectados. Una vez integrado, el workflow de TestFlight podrá generar la siguiente compilación. No confundir compilación correcta con accesibilidad comprobada: esta última requiere prueba en iPhone.

@@ -53,7 +53,7 @@
   <section id="global-search-shell">
     <h2 id="search-heading">Buscar en TifloAcosta</h2>
     <form id="search-form">
-      <label for="search">Título, descripción o tema</label>
+      <label for="search">Escribe aquí lo que quieres buscar</label>
       <div class="search-row">
         <input id="search" type="search" autocomplete="off" placeholder="Por ejemplo: VoiceOver, Android, WhatsApp…">
         <button type="submit" id="search-button">Buscar</button>
@@ -66,6 +66,7 @@
     <nav class="resource-actions" aria-label="Secciones de TifloAcosta App">
       <a class="button-link" id="home-open-actualidad" href="actualidad.html">Actualidad</a>
       <a class="button-link" id="home-open-resources" href="#resources">Recursos</a>
+      <a class="button-link" id="home-open-favorites" href="#favorites">Favoritos</a>
       <a class="button-link" id="home-open-reading" href="#reading">TifloLector</a>
       <a class="button-link" id="home-open-news" href="#news">Novedades</a>
       <a class="button-link" id="home-open-videos" href="videos.html">Vídeos</a>
@@ -99,6 +100,14 @@
     <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
   </section>
 
+
+  <section id="favorites-view" hidden tabindex="-1" aria-labelledby="favorites-view-heading">
+    <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
+    <h2 id="favorites-view-heading">Favoritos</h2>
+    <p id="favorites-status" class="muted" role="status" aria-live="polite"></p>
+    <div id="favorites-list" class="resource-list"></div>
+    <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
+  </section>
 
   <section id="reading-section" hidden tabindex="-1" aria-labelledby="reading-heading">
     <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
@@ -375,8 +384,8 @@
     <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
     <h2 id="contact-heading">Contacto y redes</h2>
 
-    <h3 id="about-heading">Sobre Tony</h3>
-    <p id="about-text">Tony Acosta es el autor del libro y la persona que presenta los contenidos y vías de contacto de TifloAcosta reunidos en esta aplicación.</p>
+    <h3 id="about-heading" hidden>Contacto</h3>
+    <p id="about-text">Si quieres contactar con Tony Acosta, puedes hacerlo por los siguientes medios:</p>
 
     <h3 id="contact-direct-heading">Contacto</h3>
     <div class="contact-links">
@@ -391,14 +400,6 @@
       <a class="button-link" id="contact-facebook-personal" href="https://facebook.com/tony.acostaacosta" target="_blank" rel="noopener noreferrer">Facebook — Tony Acosta</a>
     </div>
 
-    <h3 id="contact-podcast-heading">Escucha el podcast</h3>
-    <div class="contact-links">
-      <a class="button-link" id="contact-spotify" href="https://open.spotify.com/show/6z5BbrUhRuMANB5BFJfdfB" target="_blank" rel="noopener noreferrer">Spotify</a>
-      <a class="button-link" id="contact-apple-podcasts" href="https://podcasts.apple.com/es/podcast/canal-tifloacosta/id1567846456" target="_blank" rel="noopener noreferrer">Apple Podcasts</a>
-      <a class="button-link" id="contact-ivoox" href="https://www.ivoox.com/podcast-canal-tifloacosta_sq_f11282163_1.html" target="_blank" rel="noopener noreferrer">iVoox</a>
-      <a class="button-link" id="contact-podimo" href="https://podimo.com/es/shows/canal-tifloacosta" target="_blank" rel="noopener noreferrer">Podimo</a>
-      <a class="button-link" id="contact-radio" href="https://www.radio.es/podcast/canal-tifloacosta" target="_blank" rel="noopener noreferrer">radio.es</a>
-    </div>
     <p id="external-links-note" class="muted">Los enlaces de esta sección, del catálogo, de Amazon y de YouTube abren servicios externos, sujetos a sus propias condiciones y prácticas de privacidad.</p>
     <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
   </section>
@@ -564,6 +565,7 @@
 
   const views = {
     resources: document.getElementById('resources-view'),
+    favorites: document.getElementById('favorites-view'),
     reading: document.getElementById('reading-section'),
     news: document.getElementById('news-view'),
     book: document.getElementById('book-section'),
@@ -575,10 +577,15 @@
   const menu = document.getElementById('home-blocks');
   const main = document.getElementById('main');
   const footer = document.getElementById('site-footer');
+  let lastHomeEntryId = '';
+  menu.addEventListener('click', event => {
+    const entry = event.target.closest?.('[id^="home-open-"]');
+    if (entry?.id) lastHomeEntryId = entry.id;
+  });
 
   const labels = {
-    es: { sections:'Secciones', actualidad:'Actualidad', resources:'Recursos', reading:'TifloLector', news:'Novedades', videos:'Vídeos', podcast:'Podcast', book:'Mi libro', contact:'Contacto y redes', privacy:'Privacidad y accesibilidad', privacyPolicy:'Política de privacidad', fullPrivacy:'Leer la política de privacidad completa', config:'Configuración', back:'Volver al inicio' },
-    en: { sections:'Sections', actualidad:'News', resources:'Resources', reading:'TifloReader', news:'What’s new', videos:'Videos', podcast:'Podcast', book:'My book', contact:'Contact and social', privacy:'Privacy and accessibility', privacyPolicy:'Privacy policy', fullPrivacy:'Read the full privacy policy', config:'Settings', back:'Back to home' }
+    es: { sections:'Secciones', actualidad:'Actualidad', resources:'Recursos', favorites:'Favoritos', reading:'TifloLector', news:'Novedades', videos:'Vídeos', podcast:'Podcast', book:'Mi libro', contact:'Contacto y redes', privacy:'Privacidad y accesibilidad', privacyPolicy:'Política de privacidad', fullPrivacy:'Leer la política de privacidad completa', config:'Configuración', back:'Volver al inicio' },
+    en: { sections:'Sections', actualidad:'News', resources:'Resources', favorites:'Favorites', reading:'TifloReader', news:'What’s new', videos:'Videos', podcast:'Podcast', book:'My book', contact:'Contact and social', privacy:'Privacy and accessibility', privacyPolicy:'Privacy policy', fullPrivacy:'Read the full privacy policy', config:'Settings', back:'Back to home' }
   };
 
   function localizeHomeNavigation() {
@@ -587,6 +594,8 @@
     document.getElementById('home-blocks-heading').textContent = text.sections;
     document.getElementById('home-open-actualidad').textContent = text.actualidad;
     document.getElementById('home-open-resources').textContent = text.resources;
+    document.getElementById('home-open-favorites').textContent = text.favorites;
+    document.getElementById('favorites-view-heading').textContent = text.favorites;
     document.getElementById('home-open-reading').textContent = text.reading;
     document.getElementById('home-open-news').textContent = text.news;
     document.getElementById('home-open-videos').textContent = text.videos;
@@ -598,6 +607,7 @@
     document.getElementById('privacy-full-policy').textContent = text.fullPrivacy;
     document.getElementById('footer-privacy-link').textContent = text.privacyPolicy;
     document.getElementById('resources-view-heading').textContent = text.resources;
+    window.TifloRenderFavorites?.();
     document.querySelectorAll('[data-home-back]').forEach(link => { link.textContent = text.back; });
   }
 
@@ -609,6 +619,7 @@
     menu.hidden = !onHome;
     if (footer) footer.hidden = !onHome;
     Object.values(views).forEach(section => { section.hidden = section !== target; });
+    if (key === 'favorites') window.TifloRenderFavorites?.();
     // Move VoiceOver to the beginning of the newly opened screen.
     if (target) {
       const screenHeading = target.getAttribute('aria-labelledby') ? document.getElementById(target.getAttribute('aria-labelledby')) : target.querySelector('h1, h2, h3');
@@ -617,11 +628,17 @@
         requestAnimationFrame(() => screenHeading.focus({ preventScroll: true }));
       } else requestAnimationFrame(() => target.focus({ preventScroll: true }));
     } else if (key === 'home') requestAnimationFrame(() => {
-      const homeHeading = document.getElementById('app-heading');
-      homeHeading?.setAttribute('tabindex', '-1');
-      homeHeading?.focus({ preventScroll: true });
+      const origin = document.getElementById(lastHomeEntryId);
+      if (origin && !origin.closest('[hidden]')) {
+        origin.focus({ preventScroll: true });
+        origin.scrollIntoView({ block: 'nearest' });
+      } else {
+        const homeHeading = document.getElementById('app-heading');
+        homeHeading?.setAttribute('tabindex', '-1');
+        homeHeading?.focus({ preventScroll: true });
+      }
     });
-    window.scrollTo(0, 0);
+    if (target || (onHome && !lastHomeEntryId)) window.scrollTo(0, 0);
   }
 
   window.addEventListener('hashchange', showHomeView);

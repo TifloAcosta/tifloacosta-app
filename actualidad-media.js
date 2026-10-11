@@ -296,6 +296,23 @@
     });
     languageObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
 
+    // Move VoiceOver focus only after an explicit section navigation action.
+    // Never steal focus when media loads or the preferred language changes.
+    for (const [link, target] of [
+      [topMediaLink, heading],
+      [accessibilityLink, accessibilityHeading],
+      [technologyLink, technologyHeading]
+    ]) {
+      if (!link || !target) continue;
+      target.setAttribute('tabindex', '-1');
+      link.addEventListener('click', () => {
+        requestAnimationFrame(() => {
+          if (document.activeElement === link || document.activeElement === document.body) {
+            target.focus({ preventScroll: true });
+          }
+        });
+      });
+    }
     window.addEventListener('hashchange', ensureMediaForRoute);
     applyCopy();
     ensureMediaForRoute();

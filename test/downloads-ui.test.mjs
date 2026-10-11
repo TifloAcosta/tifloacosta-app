@@ -17,18 +17,22 @@ test('download UI preserves pending external context and accessible focus behavi
   assert.match(source, /does not receive or store your credentials/);
 });
 
-test('simple link downloader owns the downloads route and returns directly to home', async () => {
-  const source = await read('downloads.js');
-  assert.match(source, /=== 'downloads'/);
-  assert.match(source, /window\.location\.hash = '#home'/);
-  assert.match(source, /Volver al inicio/);
-  assert.match(source, /Back to home/);
-  assert.doesNotMatch(source, /=== 'downloads-link'/);
+test('downloads hub exposes link and sounds routes and returns to home', async () => {
+  const hub = await read('downloads-hub.js');
+  const downloader = await read('downloads.js');
+  assert.match(hub, /route === 'downloads'/);
+  assert.match(hub, /window\.location\.hash = '#downloads-link'/);
+  assert.match(hub, /window\.location\.hash = '#downloads-sounds'/);
+  assert.match(hub, /window\.location\.hash = '#home'/);
+  assert.match(hub, /Volver al inicio/);
+  assert.match(hub, /Back to home/);
+  assert.match(downloader, /=== 'downloads-link'/);
 });
 
-test('opening the download section focuses the URL input', async () => {
+test('opening link downloads focuses its heading without stealing focus from a pasted URL', async () => {
   const source = await read('downloads.js');
-  assert.match(source, /section\.hidden = false;\s*urlInput\.focus\(\);/);
+  assert.match(source, /section\.hidden = false;\s*headingFocus\(\);/);
+  assert.match(source, /requestAnimationFrame\(\(\) => heading\.focus\(\{ preventScroll: true \}\)\)/);
 });
 
 // Regression: Safari/iPhone must not pre-empt the app's own URL cleanup and validation.

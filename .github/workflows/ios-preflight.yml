@@ -32,6 +32,10 @@ jobs:
         run: node --check ios-build/prepare-web.mjs
       - name: Comprobar pruebas automáticas de multimedia y RSS
         run: node --test test/actualidad-media-*.test.mjs test/actualidad-feed.test.mjs
+      - name: Comprobar OAuth y acciones de YouTube sin cuentas reales
+        run: node --test youtube-worker/test/*.test.mjs
+      - name: Comprobar contrato de controles nativos TifloReproductor
+        run: node --test ios-build/test/*.test.mjs
       - name: Preparar contenido y validar scripts iOS
         run: node ios-build/prepare-web.mjs
       - name: Comprobar modificaciones iOS empaquetadas
@@ -51,7 +55,7 @@ jobs:
           const videosHtml = readFileSync(root + 'videos.html', 'utf8');
           const capacitor = JSON.parse(readFileSync('ios-build/capacitor.config.json', 'utf8'));
           assert.match(videos, /function handleIosPlayerError/);
-          assert.match(videos, /native\.open\(\{ videoId: nativeId \}\)/);
+          assert.match(videos, /native\.open\(\{ videoId: nativeId,/);
           assert.match(videos, /onError: handleIosPlayerError/);
           assert.match(videos, /removeAttribute\('role'\)/);
           assert.match(videos, /Abrir este vídeo en YouTube/);
@@ -129,11 +133,52 @@ jobs:
           ruby configure-ios-compliance.rb
           (cd ios/App && pod install)
           test "$(/usr/libexec/PlistBuddy -c 'Print :ITSAppUsesNonExemptEncryption' ios/App/App/Info.plist)" = false
-          grep -q 'forHTTPHeaderField: "Referer"' ios/App/App/AppDelegate.swift
-          # The iOS YouTube player must not override the audio session used by VoiceOver.
-          if grep -q 'setCategory(' ios/App/App/AppDelegate.swift; then
-            echo 'Native video player must not change AVAudioSession category.' >&2
-            exit 1
-          fi
+          test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleURLTypes:0:CFBundleURLSchemes:0' ios/App/App/Info.plist)" = tifloacosta
+          grep -Fq 'webView.loadHTMLString(html, baseURL: baseURL)' ios/App/App/AppDelegate.swift
+          grep -Fq 'https://www.youtube.com/iframe_api' ios/App/App/public/tiflo-youtube-player.html
+          grep -Fq 'player.seekTo(' ios/App/App/public/tiflo-youtube-player.html
+          # The VoiceOver audio compatibility trial must mix, not interrupt,
+          # other sound and restore the previous session upon dismissal.
+          grep -Fq 'setCategory(.playback, options: [.mixWithOthers])' ios/App/App/AppDelegate.swift
+          grep -Fq 'setCategory(category, options: options)' ios/App/App/AppDelegate.swift
+          grep -Fq 'audioMix.restore()' ios/App/App/AppDelegate.swift
           grep -q 'name: "info"' ios/App/App/AppDelegate.swift
           xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build
+          # The HTML wrapper must be in the built .app, not just in the source tree.
+          WRAPPER=$(find "$HOME/Library/Developer/Xcode/DerivedData" -type f -path '*/Build/Products/Release-iphoneos/App.app/public/tiflo-youtube-player.html' -print -quit)
+          test -n "$WRAPPER" || { echo "::error::Falta reproductor HTML en el paquete App.app/public"; exit 1; }
+          grep -Fq 'window.tifloControl' "$WRAPPER"
+
+  worker-readiness:
+    name: Verificar servicio publicado para YouTube iOS
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comprobar compatibilidad del Worker sin desplegar
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -f ios-build/native/TifloYouTubeAuth.swift ]; then
+            echo "Sin OAuth nativo en esta rama; verificación no necesaria."
+            exit 0
+          fi
+          response="$(mktemp)"
+          trap 'rm -f "$response"' EXIT
+          code="$(curl -sS --retry 2 --retry-delay 2 --connect-timeout 10 --max-time 25 \
+            -o "$response" -w '%{http_code}' \
+            https://youtube-auth.tifloacosta.com/native/capabilities)"
+          if [ "$code" != "200" ]; then
+            echo "::error::El Worker de YouTube aún no anuncia compatibilidad nativa (HTTP $code). Desplegarlo antes de TestFlight."
+            exit 1
+          fi
+          YOUTUBE_CAPABILITIES_FILE="$response" node <<'NODE'
+          const fs = require('node:fs');
+          const response = JSON.parse(fs.readFileSync(process.env.YOUTUBE_CAPABILITIES_FILE, 'utf8'));
+          if (response.nativeAuth !== true || response.protocol !== 1 ||
+              !Array.isArray(response.youtubeActions) ||
+              !['like', 'subscribe', 'comment'].every(x => response.youtubeActions.includes(x))) {
+            throw new Error('El servicio publicado no admite aún las tres acciones nativas de YouTube');
+          }
+          console.log('Worker público compatible con TifloReproductor iOS (protocolo 1).');
+          NODE

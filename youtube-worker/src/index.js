@@ -1,4 +1,4 @@
-import { pkceChallenge, randomToken } from './security.js';
+import { pkceChallenge, randomToken, seal, unseal } from './security.js';
 import {
   OAUTH_COOKIE,
   SESSION_COOKIE,
@@ -16,9 +16,12 @@ import {
 } from './google-oauth.js';
 import {
   comment,
+  commentOnVideoChannel,
   getAccountVideoState,
+  getAccountVideoStateForVideo,
   like,
   subscribe,
+  subscribeToVideoChannel,
   searchVideos
 } from './youtube-api.js';
 
@@ -74,6 +77,70 @@ function oauthFailure(env) {
 
 function oauthSuccess(env) {
   return withQuery(env.APP_RETURN_URL, 'youtubeAuth', 'ok');
+}
+
+
+// OAuth for the installed iOS app keeps credentials on the Worker and the
+// encrypted bearer session in iOS Keychain. The public web flow is unchanged.
+const IOS_CALLBACK = 'tifloacosta://youtube-auth';
+const IOS_CHALLENGE_RE = /^[A-Za-z0-9_-]{43}$/;
+const IOS_TICKET_MS = 90_000;
+const IOS_SESSION_MS = 30 * 24 * 60 * 60 * 1000;
+
+function iosCallback(result = 'error', ticket = '') {
+  const url = new URL(IOS_CALLBACK);
+  url.searchParams.set('result', result);
+  if (ticket) url.searchParams.set('ticket', ticket);
+  return url.toString();
+}
+function iosOauthFailure(oauthState, env) {
+  return oauthState?.iosChallenge ? iosCallback('error') : oauthFailure(env);
+}
+
+async function redeemIosTicket(ticket, verifier, secret) {
+  if (typeof ticket !== 'string' || ticket.length > 15000 ||
+      typeof verifier !== 'string' || verifier.length < 43 || verifier.length > 128 ||
+      !/^[A-Za-z0-9_-]+$/.test(verifier)) throw appError('SESSION_EXPIRED', 401);
+  let content;
+  try { content = await unseal(ticket, secret); }
+  catch { throw appError('SESSION_EXPIRED', 401); }
+  if (content?.kind !== 'ios-authorization' ||
+      !Number.isFinite(content.exp) || content.exp <= Date.now() ||
+      !IOS_CHALLENGE_RE.test(content.challenge) ||
+      await pkceChallenge(verifier) !== content.challenge ||
+      typeof content.refreshToken !== 'string' || !content.refreshToken) {
+    throw appError('SESSION_EXPIRED', 401);
+  }
+  return content;
+}
+
+async function iosBearerSession(request, env) {
+  const header = request.headers.get('Authorization') || '';
+  if (!header.startsWith('Bearer ') || header.length > 15000) throw appError('SESSION_EXPIRED', 401);
+  let session;
+  try { session = await unseal(header.slice(7), env.YOUTUBE_SESSION_SECRET); }
+  catch { throw appError('SESSION_EXPIRED', 401); }
+  if (session?.kind !== 'ios-session' || !Number.isFinite(session.exp) ||
+      session.exp <= Date.now() || !session.refreshToken) throw appError('SESSION_EXPIRED', 401);
+  return session;
+}
+
+async function iosAuthenticatedContext(request, env, fetchImpl) {
+  const session = await iosBearerSession(request, env);
+  if (session.accessToken && Number(session.accessExp) > Date.now() + 60_000) {
+    return { session, accessToken: session.accessToken };
+  }
+  try {
+    const token = await refreshAccessToken({
+      refreshToken: session.refreshToken,
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
+      fetchImpl
+    });
+    return { session, accessToken: token.access_token };
+  } catch {
+    throw appError('SESSION_EXPIRED', 401);
+  }
 }
 
 function appError(code, status = 400, clearSession = false) {
@@ -157,6 +224,16 @@ export async function handleRequest(request, env, deps = {}) {
   const url = new URL(request.url);
   const cors = corsHeaders(request, env);
 
+  // Feature-gate native login until the matching Worker is deployed.
+  // Public and read-only; no secrets, credentials or browser cookies.
+  if (url.pathname === '/native/capabilities' && request.method === 'GET') {
+    return json({
+      nativeAuth: Boolean(env.GOOGLE_CLIENT_ID && env.GOOGLE_CLIENT_SECRET && env.YOUTUBE_SESSION_SECRET),
+      youtubeActions: ['like', 'subscribe', 'comment'],
+      protocol: 1
+    }, 200, {});
+  }
+
   if (url.pathname === '/health' && request.method === 'GET') {
     return json({ ok: true, service: 'youtube-actions' }, 200, cors);
   }
@@ -173,8 +250,13 @@ export async function handleRequest(request, env, deps = {}) {
   }
 
   if (url.pathname === '/auth/start' && request.method === 'GET') {
+    const iosRequested = url.searchParams.has('iosChallenge');
     if (!env.GOOGLE_CLIENT_ID || !env.YOUTUBE_SESSION_SECRET) {
-      return redirect(oauthFailure(env));
+      return redirect(iosRequested ? iosCallback('error') : oauthFailure(env));
+    }
+    const iosChallenge = url.searchParams.get('iosChallenge') || '';
+    if (iosRequested && !IOS_CHALLENGE_RE.test(iosChallenge)) {
+      return redirect(iosCallback('error'));
     }
     const verifier = randomToken(48);
     const state = randomToken(32);
@@ -182,6 +264,7 @@ export async function handleRequest(request, env, deps = {}) {
     const oauthCookie = await createOauthCookie({
       state,
       verifier,
+      ...(iosRequested ? { iosChallenge } : {}),
       exp: Date.now() + 10 * 60 * 1000
     }, env.YOUTUBE_SESSION_SECRET);
     const authorization = buildAuthorizationUrl({
@@ -201,7 +284,7 @@ export async function handleRequest(request, env, deps = {}) {
     const denied = url.searchParams.has('error');
 
     if (denied || !oauthState || !code || !state || oauthState.state !== state) {
-      return redirect(oauthFailure(env), [clearOauth]);
+      return redirect(iosOauthFailure(oauthState, env), [clearOauth]);
     }
 
     try {
@@ -214,7 +297,7 @@ export async function handleRequest(request, env, deps = {}) {
         fetchImpl
       });
       if (typeof tokens.refresh_token !== 'string' || !tokens.refresh_token) {
-        return redirect(oauthFailure(env), [clearOauth]);
+        return redirect(iosOauthFailure(oauthState, env), [clearOauth]);
       }
 
       const expiresIn = Number(tokens.expires_in);
@@ -225,10 +308,78 @@ export async function handleRequest(request, env, deps = {}) {
         csrf: randomToken(32),
         exp: Date.now() + 30 * 24 * 60 * 60 * 1000
       };
+      if (oauthState.iosChallenge) {
+        const ticket = await seal({
+          kind: 'ios-authorization',
+          refreshToken: session.refreshToken,
+          accessToken: session.accessToken,
+          accessExp: session.accessExp,
+          challenge: oauthState.iosChallenge,
+          exp: Date.now() + IOS_TICKET_MS
+        }, env.YOUTUBE_SESSION_SECRET);
+        return redirect(iosCallback('ok', ticket), [clearOauth]);
+      }
       const sessionCookie = await createSessionCookie(session, env.YOUTUBE_SESSION_SECRET);
       return redirect(oauthSuccess(env), [sessionCookie, clearOauth]);
     } catch {
-      return redirect(oauthFailure(env), [clearOauth]);
+      return redirect(iosOauthFailure(oauthState, env), [clearOauth]);
+    }
+  }
+
+
+  // ASWebAuthenticationSession receives only an opaque, short-lived ticket.
+  // Keychain stores the encrypted session; tokens are never sent to web JavaScript.
+  if (url.pathname === '/native/redeem' && request.method === 'POST') {
+    try {
+      if (!env.YOUTUBE_SESSION_SECRET) throw appError('SESSION_EXPIRED', 401);
+      const body = await readJson(request);
+      const verified = await redeemIosTicket(body.ticket, body.verifier, env.YOUTUBE_SESSION_SECRET);
+      const sessionToken = await seal({
+        kind: 'ios-session',
+        refreshToken: verified.refreshToken,
+        accessToken: verified.accessToken,
+        accessExp: verified.accessExp,
+        exp: Date.now() + IOS_SESSION_MS
+      }, env.YOUTUBE_SESSION_SECRET);
+      return json({ sessionToken });
+    } catch (error) {
+      return errorResponse(error, {});
+    }
+  }
+
+  if (url.pathname === '/native/session' && request.method === 'GET') {
+    try {
+      await iosBearerSession(request, env);
+      return json({ authenticated: true });
+    } catch (error) {
+      return errorResponse(error, {});
+    }
+  }
+
+  if (url.pathname === '/native/state' && request.method === 'GET') {
+    try {
+      const { accessToken } = await iosAuthenticatedContext(request, env, fetchImpl);
+      const state = await getAccountVideoStateForVideo(accessToken, url.searchParams.get('videoId') || '', fetchImpl);
+      return json({ authenticated: true, ...state });
+    } catch (error) {
+      return errorResponse(error, {});
+    }
+  }
+
+  if (['/native/subscribe', '/native/like', '/native/comment'].includes(url.pathname) && request.method === 'POST') {
+    try {
+      const { accessToken } = await iosAuthenticatedContext(request, env, fetchImpl);
+      const body = await readJson(request);
+      const videoId = body.videoId || '';
+      if (url.pathname === '/native/subscribe') {
+        return json(await subscribeToVideoChannel(accessToken, videoId, fetchImpl));
+      }
+      if (url.pathname === '/native/like') {
+        return json(await like(accessToken, videoId, fetchImpl));
+      }
+      return json(await commentOnVideoChannel(accessToken, videoId, body.text, fetchImpl));
+    } catch (error) {
+      return errorResponse(error, {});
     }
   }
 
@@ -259,7 +410,10 @@ export async function handleRequest(request, env, deps = {}) {
   if (url.pathname === '/state' && request.method === 'GET') {
     try {
       const { accessToken } = await authenticatedContext(request, env, fetchImpl);
-      const state = await getAccountVideoState(accessToken, url.searchParams.get('videoId') || '', fetchImpl);
+      const videoId = url.searchParams.get('videoId') || '';
+      const state = url.searchParams.get('channelScope') === 'video'
+        ? await getAccountVideoStateForVideo(accessToken, videoId, fetchImpl)
+        : await getAccountVideoState(accessToken, videoId, fetchImpl);
       return json({ authenticated: true, ...state }, 200, cors);
     } catch (error) {
       return errorResponse(error, cors);
@@ -290,12 +444,18 @@ export async function handleRequest(request, env, deps = {}) {
       const body = await readJson(request);
 
       if (url.pathname === '/subscribe') {
-        return json(await subscribe(accessToken, fetchImpl), 200, cors);
+        // Optional video-specific subscription; the legacy request without a
+        // videoId remains scoped to TifloAcosta to preserve published clients.
+        return json(body.videoId
+          ? await subscribeToVideoChannel(accessToken, body.videoId, fetchImpl)
+          : await subscribe(accessToken, fetchImpl), 200, cors);
       }
       if (url.pathname === '/like') {
         return json(await like(accessToken, body.videoId, fetchImpl), 200, cors);
       }
-      return json(await comment(accessToken, body.videoId, body.text, fetchImpl), 200, cors);
+      return json(body.channelScope === 'video'
+        ? await commentOnVideoChannel(accessToken, body.videoId, body.text, fetchImpl)
+        : await comment(accessToken, body.videoId, body.text, fetchImpl), 200, cors);
     } catch (error) {
       return errorResponse(error, cors);
     }

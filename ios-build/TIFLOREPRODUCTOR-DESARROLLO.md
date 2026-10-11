@@ -59,6 +59,17 @@ Para iOS aún hay que:
 - Corregir que VoiceOver deje de hablar durante la reproducción y completar controles de avance, retroceso y posición.
 - Confirmar que la API productiva de Cloudflare Worker está publicada y responde antes de distribuir el IPA que la utiliza.
 
+## Sigue 3 — interfaz desplazable y ensayo de audio VoiceOver
+
+- Toda la pantalla nativa del reproductor usa una única zona desplazable: los botones, detalles, cuenta y comentario siguen visibles con letra grande.
+- La zona de vídeo conserva al menos 225 puntos de alto (YouTube exige un mínimo de 200 por 200).
+- El panel de cuenta ya no encierra botones en otra lista desplazable de altura fija.
+- Al completar Me gusta o suscripción, cerrar el editor de comentario o desconectar, el foco vuelve a un control/estado estable.
+- El nuevo botón «Audio compatible con VoiceOver» permite activar/desactivar una **prueba reversible** de AVAudioSession `.playback` con `.mixWithOthers`. Al cerrar el vídeo se restaura la categoría y opciones previas.
+- Por defecto la prueba está activada solamente cuando VoiceOver funciona. Puede desactivarse desde el propio reproductor.
+- **La prueba no constituye una garantía de que el vídeo permita hablar a VoiceOver en el dispositivo.** Si iOS/YouTube sigue silenciando la voz, no publicar como solucionado: comprobar en iPhone y ofrecer una ruta alternativa accesible.
+- Las pruebas de Swift, código empaquetado y autorización siguen corriendo en preflight sin distribuir a TestFlight.
+
 ## Verificación y distribución
 
 La rama solo se integrará en `preparacion-ios` después de que pase el preflight de Xcode y se hayan resuelto los problemas detectados. Una vez integrado, el workflow de TestFlight podrá generar la siguiente compilación. No confundir compilación correcta con accesibilidad comprobada: esta última requiere prueba en iPhone.

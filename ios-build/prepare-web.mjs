@@ -51,9 +51,10 @@ await writeFile(join(output, 'ios-actualidad-media-fallback.js'),
 const iosOverrides = `<style id="tiflo-ios-ui">
 .site-footer, #install-section, #notifications-heading, #notifications-heading + .panel,
 #update-heading, #update-heading + .panel { display:none!important; }
-/* Keep visual settings open and their toggle out of VoiceOver's swipe order on iOS. */
-#config-section:not([hidden]) #settings-panel { display:block!important; }
-#config-section #settings-toggle { display:none!important; }
+/* Keep visual controls in the reading order and close the optional panel initially. */
+#config-section #settings-toggle { display:inline-flex; }
+#apps-browser [data-isolated-back] { display:none!important; }
+#download-paste-link { display:none!important; }
 .language-switch { display:none!important; }
 .skip-link { display:none!important; }
 html[data-ios-first-language="true"] .language-switch { display:flex!important; }
@@ -104,15 +105,13 @@ const iosLanguage = `<script id="tiflo-ios-settings">
   wrapper.append(label, choices);
   heading.insertAdjacentElement('afterend', wrapper);
 
-  // In the native iOS shell the visual preferences should be directly
-  // discoverable after the language choice, without an extra collapsed menu.
-  // Leave the web and Android navigation untouched.
+  // Optional settings must remain collapsed until the user activates them.
   const visualToggle = document.getElementById('settings-toggle');
   const visualPanel = document.getElementById('settings-panel');
   if (visualToggle && visualPanel) {
-    visualToggle.setAttribute('aria-expanded', 'true');
-    visualPanel.hidden = false;
-    visualToggle.hidden = true;
+    visualToggle.setAttribute('aria-expanded', 'false');
+    visualPanel.hidden = true;
+    visualToggle.hidden = false;
     visualPanel.removeAttribute('inert');
   }
 })();
@@ -125,6 +124,7 @@ const bundledVideos = JSON.parse(await readFile(join(output, 'videos.json'), 'ut
 if (!Array.isArray(bundledVideos.videos) || !bundledVideos.videos.length) throw new Error('Catálogo de vídeos vacío');
 await writeFile(join(output, 'ios-videos-fallback.js'),
   'window.TIFLO_IOS_VIDEOS = ' + JSON.stringify(bundledVideos).replace(/</g, '\\u003c') + ';');
+await cp(join(root, 'ios-build/ios-parity.js'), join(output, 'ios-parity.js'));
 for (const name of ['index.html','videos.html','podcast.html','actualidad.html']) {
   const path = join(output, name);
   let html = await readFile(path, 'utf8');
@@ -150,6 +150,7 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
   }
   html = html.replace('</body>', '<script src="ios-choice-groups.js"></script>' + '\n</body>');
   if (name === 'actualidad.html') html = html.replace('</body>', '<script src="ios-choice-collapse.js"></script>' + '\n</body>');
+  if (name === 'index.html' || name === 'actualidad.html') html = html.replace('</body>', '<script src="ios-parity.js"></script>' + '\n</body>');
   if (name === 'podcast.html') {
     html = html.replace('</body>', '<script>requestAnimationFrame(() => { const heading = document.getElementById("podcast-heading"); heading?.setAttribute("tabindex", "-1"); heading?.focus({preventScroll:true}); });</script>' + '\n</body>');
   }
@@ -220,7 +221,7 @@ iosVideos = iosVideos.replace(iosReadyCode,
   "    youtubePlayer = event.target;\\n    els.playerNote?.removeAttribute('role');\\n    playerReady = true;".replaceAll('\\n', '\n'));
 const iosVideoOpen = "  function openPlayer(video) {\n    lastPlayerTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;";
 if (!iosVideos.includes(iosVideoOpen)) throw new Error('No se encuentra openPlayer de Vídeos');
-iosVideos = iosVideos.replace(iosVideoOpen, "  function openPlayer(video) {\n    const nativeId = videoId(video);\n    const native = window.Capacitor?.Plugins?.TifloYouTube;\n    if (native && /^[A-Za-z0-9_-]{11}$/.test(nativeId)) {\n      void native.open({ videoId: nativeId }).catch(() => {\n        window.open(youtubeUrl(video), '_blank', 'noopener');\n      });\n      return;\n    }\n    // Do not retry the embedded WKWebView iframe that gave YouTube error 153.\n    window.open(youtubeUrl(video), '_blank', 'noopener');\n    return;\n    lastPlayerTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;");
+iosVideos = iosVideos.replace(iosVideoOpen, "  function openPlayer(video) {\n    lastPlayerTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;\n    const nativeId = videoId(video);\n    const native = window.Capacitor?.Plugins?.TifloYouTube;\n    if (native && /^[A-Za-z0-9_-]{11}$/.test(nativeId)) {\n      void native.open({ videoId: nativeId }).then(() => {\n        if (lastPlayerTrigger?.isConnected) lastPlayerTrigger.focus({ preventScroll: true });\n      }).catch(() => {\n        window.open(youtubeUrl(video), '_blank', 'noopener');\n      });\n      return;\n    }\n    // Do not retry the embedded WKWebView iframe that gave YouTube error 153.\n    window.open(youtubeUrl(video), '_blank', 'noopener');\n    return;\n    lastPlayerTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;");
 await writeFile(iosVideosPath, iosVideos);
 
 // In iOS, category pages already identify the category in the result status.
@@ -293,7 +294,7 @@ iosMedia = iosMedia.replace(videoCard,
   "if (item.type === 'video' && item.embedUrl && iosExternalVideo) {");
 const iosNativeVideoAnchor = "      if (item.type === 'video' && item.embedUrl && button) {";
 if (!iosMedia.includes(iosNativeVideoAnchor)) throw new Error('No se encuentra addPlayer de Actualidad');
-iosMedia = iosMedia.replace(iosNativeVideoAnchor, "      if (item.type === 'video' && item.embedUrl && button && iosExternalVideo) {\n        button.removeAttribute('aria-expanded');\n        let parsed;\n        try { parsed = new URL(item.embedUrl); } catch { parsed = null; }\n        const match = /^\\/embed\\/([A-Za-z0-9_-]{11})(?:\\/|$)/.exec(parsed?.pathname || '');\n        const validYouTube = parsed && /^(?:www\\.)?youtube(?:-nocookie)?\\.com$/.test(parsed.hostname) && match;\n        if (!validYouTube) { button.remove(); return; }\n        const videoId = match[1];\n        button.textContent = currentLanguage() === 'es' ? 'Reproducir dentro de TifloAcosta' : 'Play inside TifloAcosta';\n        button.addEventListener('click', () => {\n          const plugin = window.Capacitor?.Plugins?.TifloYouTube;\n          if (!plugin) { window.open(item.originalUrl, '_blank', 'noopener'); return; }\n          void plugin.open({ videoId }).catch(() => { window.open(item.originalUrl, '_blank', 'noopener'); });\n        });\n        return;\n      }\n      if (item.type === 'video' && item.embedUrl && button) {");
+iosMedia = iosMedia.replace(iosNativeVideoAnchor, "      if (item.type === 'video' && item.embedUrl && button && iosExternalVideo) {\n        button.removeAttribute('aria-expanded');\n        let parsed;\n        try { parsed = new URL(item.embedUrl); } catch { parsed = null; }\n        const match = /^\\/embed\\/([A-Za-z0-9_-]{11})(?:\\/|$)/.exec(parsed?.pathname || '');\n        const validYouTube = parsed && /^(?:www\\.)?youtube(?:-nocookie)?\\.com$/.test(parsed.hostname) && match;\n        if (!validYouTube) { button.remove(); return; }\n        const videoId = match[1];\n        button.textContent = currentLanguage() === 'es' ? 'Reproducir dentro de TifloAcosta' : 'Play inside TifloAcosta';\n        button.addEventListener('click', () => {\n          const plugin = window.Capacitor?.Plugins?.TifloYouTube;\n          if (!plugin) { window.open(item.originalUrl, '_blank', 'noopener'); return; }\n          void plugin.open({ videoId }).then(() => { if (button.isConnected) button.focus({ preventScroll: true }); }).catch(() => { window.open(item.originalUrl, '_blank', 'noopener'); });\n        });\n        return;\n      }\n      if (item.type === 'video' && item.embedUrl && button) {");
 const originalLabel = "mediaOriginal.textContent = item.type === 'audio' && !item.mediaUrl";
 if (!iosMedia.includes(originalLabel)) throw new Error('No se encuentra etiqueta de enlace de fuente original');
 iosMedia = iosMedia.replace(originalLabel,
@@ -361,7 +362,7 @@ await writeFile(iosActualidadPath, iosActualidad);
 
 
 // Fail before signing or uploading if an injected iOS-only script is invalid.
-for (const file of ['app.js', 'videos.js', 'actualidad.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-choice-groups.js', 'ios-videos-fallback.js', 'ios-actualidad-media-fallback.js', 'ios-choice-collapse.js', 'news-videos.js']) {
+for (const file of ['app.js', 'videos.js', 'actualidad.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-choice-groups.js', 'ios-videos-fallback.js', 'ios-actualidad-media-fallback.js', 'ios-choice-collapse.js', 'ios-parity.js', 'news-videos.js']) {
   execFileSync(process.execPath, ['--check', join(output, file)], { stdio: 'pipe' });
 }
 console.log('Validación sintáctica de scripts iOS completada');

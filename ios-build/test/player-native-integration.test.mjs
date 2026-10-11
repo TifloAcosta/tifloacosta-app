@@ -82,3 +82,11 @@ test('TifloReproductor usa la API oficial de YouTube para desplazarse y consulta
   assert.doesNotMatch(player, /setAllMediaPlaybackSuspended/);
   assert.doesNotMatch(player, /resumeAllMediaPlayback/);
 });
+
+test('el botón nativo puede solicitar reproducción sin autoplay', () => {
+  const html = readFileSync(resolve(root, 'native/tiflo-youtube-player.html'), 'utf8');
+  assert.match(player, /configuration\.mediaTypesRequiringUserActionForPlayback = \[\]/);
+  assert.match(player, /playbackButton\.addTarget\(self, action: #selector\(togglePlayback\)/);
+  assert.match(player, /sendPlayerCommand\(playerState == 1/);
+  assert.doesNotMatch(html, /autoplay:\s*1/);
+});

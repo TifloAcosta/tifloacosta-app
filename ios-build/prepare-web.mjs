@@ -124,6 +124,23 @@ if (!iosIndex.includes(oldFocus)) throw new Error('No se encuentra gestión de f
 iosIndex = iosIndex.replace(oldFocus, newFocus);
 await writeFile(iosIndexPath, iosIndex);
 
+// The iOS home page already focuses the active heading after navigation.
+// Disable a second, synchronous focus movement from actualidad-core.js on
+// this packaged copy; keep the Actualidad subview focus controller intact.
+const iosNavigationCorePath = join(output, 'actualidad-core.js');
+let iosNavigationCore = await readFile(iosNavigationCorePath, 'utf8');
+const oldHomeFocus = [
+  '    if (!focusChangedView) return;',
+  '    const target = home ? hero : document.getElementById(state.view);',
+  "    const heading = target?.querySelector('h1, h2, h3') || target;",
+  '    focusElement(heading);'
+].join('\n');
+if (!iosNavigationCore.includes(oldHomeFocus)) throw new Error('No se encuentra el movimiento de foco duplicado del inicio iOS');
+iosNavigationCore = iosNavigationCore.replace(oldHomeFocus,
+  '    // El foco del inicio lo controla showHomeView de index.html.\n    return;');
+await writeFile(iosNavigationCorePath, iosNavigationCore);
+
+
 // Only patch the packaged iOS video controller: preserve Android and web behavior.
 // Report YouTube IFrame failures, disable unusable transport controls and keep the
 // direct YouTube link reachable for VoiceOver users.

@@ -139,7 +139,7 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
       'sound-search-core.js', 'sound-search-config.js',
       'downloads.js', 'downloads-hub.js', 'sound-search.js',
       'downloads-iphone-bridge.js'
-    ].map(src => '<script src="' + src + '"></script>').join('\\n');
+    ].map(src => '<script src="' + src + '"></script>').join('\n');
     html = html.replace('</body>', downloadScripts + '\n' + iosLanguage + '\n</body>');
   }
   if (name === 'videos.html') html = html.replace('<script src="videos.js?v=2.5"></script>', '<script src="ios-videos-fallback.js"></script>\n<script src="videos.js?v=2.5"></script>');

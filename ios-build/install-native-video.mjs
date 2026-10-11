@@ -38,8 +38,11 @@ const authBody = authentication.replace(/^import UIKit\nimport AuthenticationSer
 const delegateWithAuth = delegateWithWebKit.includes('import AuthenticationServices')
   ? delegateWithWebKit
   : delegateWithWebKit.replace('import UIKit', 'import UIKit\nimport AuthenticationServices\nimport CryptoKit\nimport Security');
+const delegateWithAudio = delegateWithAuth.includes('import AVFAudio')
+  ? delegateWithAuth
+  : delegateWithAuth.replace('import UIKit', 'import UIKit\nimport AVFAudio');
 const actionsBody = actions.replace(/^import UIKit\n/, '');
-await writeFile(appDelegatePath, delegateWithAuth.trimEnd() + '\n\n' + swiftBody + '\n\n' + authBody + '\n\n' + actionsBody);
+await writeFile(appDelegatePath, delegateWithAudio.trimEnd() + '\n\n' + swiftBody + '\n\n' + authBody + '\n\n' + actionsBody);
 
 // The Capacitor starter storyboard creates the default bridge by class name.
 // Point that existing scene at the subclass that registers our native plugin.

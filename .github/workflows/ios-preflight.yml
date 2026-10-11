@@ -133,7 +133,9 @@ jobs:
           ruby configure-ios-compliance.rb
           (cd ios/App && pod install)
           test "$(/usr/libexec/PlistBuddy -c 'Print :ITSAppUsesNonExemptEncryption' ios/App/App/Info.plist)" = false
-          grep -q 'forHTTPHeaderField: "Referer"' ios/App/App/AppDelegate.swift
+          grep -Fq 'webView.loadHTMLString(html, baseURL: baseURL)' ios/App/App/AppDelegate.swift
+          grep -Fq 'https://www.youtube.com/iframe_api' ios/App/App/public/tiflo-youtube-player.html
+          grep -Fq 'player.seekTo(' ios/App/App/public/tiflo-youtube-player.html
           # The VoiceOver audio compatibility trial must mix, not interrupt,
           # other sound and restore the previous session upon dismissal.
           grep -Fq 'setCategory(.playback, options: [.mixWithOthers])' ios/App/App/AppDelegate.swift

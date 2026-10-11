@@ -44,6 +44,7 @@ jobs:
           const app = readFileSync(root + 'app.js', 'utf8');
           const index = readFileSync(root + 'index.html', 'utf8');
           const media = readFileSync(root + 'actualidad-media.js', 'utf8');
+          const navigation = readFileSync(root + 'actualidad-core.js', 'utf8');
           const videosHtml = readFileSync(root + 'videos.html', 'utf8');
           const capacitor = JSON.parse(readFileSync('ios-build/capacitor.config.json', 'utf8'));
           assert.match(videos, /function handleIosPlayerError/);
@@ -55,6 +56,9 @@ jobs:
           assert.match(media, /item\.type === 'video' && item\.embedUrl && !iosExternalVideo/);
           assert.match(media, /Reproducir vídeo en YouTube/);
           assert.doesNotMatch(media, /link\.addEventListener\('click',/);
+          assert.match(navigation, /El foco del inicio lo controla showHomeView/);
+          assert.match(navigation, /focusTopBackControl/);
+          assert.doesNotMatch(navigation, /const target = home \? hero : document\.getElementById\(state\.view\)/);
           assert.match(media, /strict-origin-when-cross-origin/);
           assert.match(videosHtml, /referrerpolicy="strict-origin-when-cross-origin"/);
           assert.equal(capacitor.appId, 'com.tifloacosta.app');

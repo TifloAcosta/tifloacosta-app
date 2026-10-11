@@ -282,11 +282,11 @@
         mediaOriginal.textContent = item.type === 'audio' && !item.mediaUrl
           ? (currentLanguage() === 'es' ? 'Escuchar en la fuente original' : 'Listen at original source')
           : c.open;
+        // Prioritize the accessible audio player in reading order.
+        if (item.type === 'audio' && item.mediaUrl) addPlayer(card, item, null);
         actions.append(mediaOriginal);
         card.append(actions);
-
-        if (item.type === 'audio' && item.mediaUrl) addPlayer(card, item, null);
-        else if (playerButton) addPlayer(card, item, playerButton);
+        if (item.type !== 'audio' && playerButton) addPlayer(card, item, playerButton);
         list.append(card);
       }
       return visible.length;

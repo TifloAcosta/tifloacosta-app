@@ -96,6 +96,14 @@ jobs:
           assert.match(chooser, /aria-expanded/);
           assert.match(chooser, /requestAnimationFrame/);
           assert.match(index, /id="tiflo-ios-settings"/);
+          assert.match(index, /src="ios-parity\.js"/);
+          assert.match(actualidadHtml, /src="ios-parity\.js"/);
+          assert.match(videosHtml, /src="ios-parity\.js"/);
+          assert.match(readFileSync(root + 'ios-parity.js', 'utf8'), /ios-native-app-info/);
+          assert.match(readFileSync(root + 'ios-parity.js', 'utf8'), /ios-apps-back-to-resources/);
+          assert.match(readFileSync(root + 'ios-parity.js', 'utf8'), /correctDownloadsFocus/);
+          assert.match(videos, /lastPlayerTrigger\.focus/);
+          assert.match(media, /button\.focus/);
           assert.match(index, /#config-section #settings-toggle/);
           assert.match(index, /!target.hidden && screenHeading.isConnected/);
           assert.match(index, /id="settings-panel"/);
@@ -122,6 +130,10 @@ jobs:
           (cd ios/App && pod install)
           test "$(/usr/libexec/PlistBuddy -c 'Print :ITSAppUsesNonExemptEncryption' ios/App/App/Info.plist)" = false
           grep -q 'forHTTPHeaderField: "Referer"' ios/App/App/AppDelegate.swift
-          grep -q 'mixWithOthers' ios/App/App/AppDelegate.swift
-          grep -q 'import AVFAudio' ios/App/App/AppDelegate.swift
+          # The iOS YouTube player must not override the audio session used by VoiceOver.
+          if grep -q 'setCategory(' ios/App/App/AppDelegate.swift; then
+            echo 'Native video player must not change AVAudioSession category.' >&2
+            exit 1
+          fi
+          grep -q 'name: "info"' ios/App/App/AppDelegate.swift
           xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build

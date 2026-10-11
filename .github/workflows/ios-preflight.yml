@@ -79,6 +79,16 @@ jobs:
           assert.equal(capacitor.appId, 'com.tifloacosta.app');
           assert.ok(!capacitor.server?.url, 'La app no debe migrar a un servidor remoto sin revisión de seguridad');
           assert.match(media, /mediaOriginal\.target = '_blank'/);
+          assert.match(index, /src="downloads.js"/, 'Las descargas deben existir dentro del paquete iOS');
+          assert.match(index, /src="downloads-hub.js"/);
+          assert.match(index, /src="sound-search.js"/);
+          assert.match(index, /src="downloads-iphone-bridge.js"/);
+          assert.match(index, /href="downloads.css/);
+          assert.match(index, /tiflo-restore-home-focus/);
+          assert.match(actualidadHtml, /src="ios-choice-collapse.js"/);
+          const chooser = readFileSync(root + 'ios-choice-collapse.js', 'utf8');
+          assert.match(chooser, /aria-expanded/);
+          assert.match(chooser, /requestAnimationFrame/);
           assert.match(index, /id="tiflo-ios-settings"/);
           assert.match(index, /#config-section #settings-toggle/);
           assert.match(index, /!target.hidden && screenHeading.isConnected/);
@@ -106,4 +116,6 @@ jobs:
           (cd ios/App && pod install)
           test "$(/usr/libexec/PlistBuddy -c 'Print :ITSAppUsesNonExemptEncryption' ios/App/App/Info.plist)" = false
           grep -q 'forHTTPHeaderField: "Referer"' ios/App/App/AppDelegate.swift
+          grep -q 'mixWithOthers' ios/App/App/AppDelegate.swift
+          grep -q 'import AVFAudio' ios/App/App/AppDelegate.swift
           xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build

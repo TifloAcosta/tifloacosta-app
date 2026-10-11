@@ -244,6 +244,18 @@ const networkFirst = file =>
 const appNewsCall = "fetch('actualidad.json',{cache:'no-cache'})";
 if (!iosApp.includes(appNewsCall)) throw new Error('No se encuentra el feed de Actualidad en el inicio');
 iosApp = iosApp.replace(appNewsCall, networkFirst('actualidad.json'));
+
+const oldCatalogDeclaration = '  const data = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];';
+if (!iosApp.includes(oldCatalogDeclaration)) throw new Error('No se encuentra la declaración de recursos iOS');
+iosApp = iosApp.replace(oldCatalogDeclaration,
+  '  let data = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];');
+const newsRenderPoint = '  function makeNewsItem(item) {';
+if (!iosApp.includes(newsRenderPoint)) throw new Error('No se encuentra renderizado de Novedades');
+iosApp = iosApp.replace(newsRenderPoint, "  async function refreshIosResourceCatalog() {\n    try {\n      const response = await fetch('https://tifloacosta.com/data.js', { cache: 'no-store' });\n      if (!response.ok) return;\n      const source = await response.text();\n      const match = /^\\s*window\\.TIFLO_RESOURCES\\s*=\\s*(\\[[\\s\\S]*\\]);?\\s*$/.exec(source);\n      if (!match) return;\n      const items = JSON.parse(match[1]);\n      if (!Array.isArray(items) || items.length === 0) return;\n      const valid = items.every(item => item && typeof item.id === 'string' &&\n        typeof item.title === 'string' && (item.lang === 'es' || item.lang === 'en'));\n      if (!valid) return;\n      data = items;\n      window.TIFLO_RESOURCES = items;\n      renderNews();\n      renderCategories();\n      renderFavoritesScreen();\n      window.dispatchEvent(new CustomEvent('tiflo-resources-updated', { detail: { items } }));\n    } catch {\n      // Offline and network failures must preserve the packaged catalog.\n    }\n  }\n\n" + newsRenderPoint);
+const iosStartPoint = 'applyPrefs();applyLanguage();loadActualidadHome();trackLanguageUse();announceCompletedUpdate();';
+if (!iosApp.includes(iosStartPoint)) throw new Error('No se encuentra inicialización de Novedades');
+iosApp = iosApp.replace(iosStartPoint, iosStartPoint + 'void refreshIosResourceCatalog();');
+
 await writeFile(iosAppPath, iosApp);
 
 // iOS WKWebView uses a local/custom origin: YouTube can reject embeds that

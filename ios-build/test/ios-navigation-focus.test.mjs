@@ -39,7 +39,12 @@ function createHomeHarness({ hash = '', stored = {} } = {}) {
   const window = {
     location,
     sessionStorage,
-    addEventListener(name, callback) { handlers[name] = callback; }
+    addEventListener(name, callback) {
+      const previous = handlers[name];
+      handlers[name] = previous
+        ? (...args) => { previous(...args); callback(...args); }
+        : callback;
+    }
   };
   runInNewContext(script, {
     document, window, requestAnimationFrame: callback => callback(),

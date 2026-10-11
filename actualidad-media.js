@@ -145,6 +145,9 @@
       if (item.type === 'video' && item.embedUrl && button) {
         const container = document.createElement('div');
         container.hidden = true;
+        const notice = document.createElement('p');
+        notice.className = 'muted';
+        notice.textContent = currentLanguage() === 'es' ? 'Si YouTube no permite reproducir aquí, usa Abrir en la fuente.' : 'If YouTube cannot play here, use Open at source.';
         card.append(container);
         button.addEventListener('click', () => {
           const opening = container.hidden;
@@ -160,7 +163,7 @@
             frame.allowFullscreen = true;
             frame.setAttribute('allow', 'encrypted-media; picture-in-picture');
             frame.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
-            container.replaceChildren(frame);
+            container.replaceChildren(notice, frame);
           } else {
             container.replaceChildren();
           }

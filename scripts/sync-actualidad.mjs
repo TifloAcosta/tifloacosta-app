@@ -249,6 +249,7 @@ async function main() {
     const lastPublished = new Date(mostRecent).toISOString();
     const ageHours = Math.max(0, Math.floor((now.getTime() - mostRecent) / 3600000));
     console.log(`Actualidad newest article: ${lastPublished}; age: ${ageHours} hours.`);
+    if (ageHours <= 48) console.log(`::notice::Actualidad newest article: ${lastPublished} (${ageHours} hours old).`);
     if (ageHours > 48) console.warn(`::warning::Actualidad feed is stale: last published article is ${ageHours} hours old.`);
   } else {
     console.warn('::warning::Actualidad catalog has no valid publication dates.');

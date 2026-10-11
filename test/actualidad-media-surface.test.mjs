@@ -58,6 +58,15 @@ test('audio uses native controls without a redundant play toggle', async () => {
   assert.doesNotMatch(js, /\(item\.type === 'video' && item\.embedUrl\) \|\| \(item\.type === 'audio' && item\.mediaUrl\)/);
 });
 
+test('podcast media includes accessible transport, seek position and external fallback', async () => {
+  const js = await read('actualidad-media.js');
+  assert.match(js, /progress\.type = 'range'/);
+  assert.match(js, /progress\.setAttribute\('aria-valuetext'/);
+  assert.match(js, /controls\.setAttribute\('role', 'group'\)/);
+  assert.match(js, /audio\.addEventListener\('error'/);
+  assert.match(js, /Escuchar en la fuente original/);
+});
+
 test('reader and section visibility is governed by the isolated navigation controller only', async () => {
   const [mediaJs, coreJs] = await Promise.all([read('actualidad-media.js'), read('actualidad-core.js')]);
   assert.doesNotMatch(mediaJs, /readerObserver/);

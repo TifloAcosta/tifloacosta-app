@@ -14,8 +14,8 @@ test('el reproductor iOS expone los controles nativos a VoiceOver', () => {
   assert.match(player, /func accessibilityPerformMagicTap\(\) -> Bool/);
   assert.match(player, /func togglePlayback\(\)/);
   assert.match(player, /func toggleDetails\(\)/);
-  assert.match(player, /webView\.pauseAllMediaPlayback/);
-  assert.match(player, /webView\.resumeAllMediaPlayback/);
+  assert.match(player, /webView\.setAllMediaPlaybackSuspended\(shouldSuspend\)/);
+  assert.doesNotMatch(player, /webView\.resumeAllMediaPlayback/);
   assert.match(player, /titleLabel\.accessibilityTraits\.insert\(\.header\)/);
 });
 

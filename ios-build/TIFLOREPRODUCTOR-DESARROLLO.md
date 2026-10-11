@@ -96,3 +96,14 @@ Para iOS aún hay que:
 ## Verificación y distribución
 
 La rama solo se integrará en `preparacion-ios` después de que pase el preflight de Xcode y se hayan resuelto los problemas detectados. Una vez integrado, el workflow de TestFlight podrá generar la siguiente compilación. No confundir compilación correcta con accesibilidad comprobada: esta última requiere prueba en iPhone.
+
+## Sigue 6 — resultado del preflight y bloqueo de distribución prematura
+
+- GitHub Actions 38162877682 (preflight iOS) completó correctamente, incluida la compilación de Xcode 26 Release sin firma y comprobaciones de integración, cifrado exento y esquema de retorno.
+- GitHub Actions 38162877683 (Test YouTube actions): pasan 50 de 50 pruebas específicas del Worker. La suite general pasa 365 de 369: cuatro fallos en Descargas (dos), Novedades (uno) y Privacidad (uno), ajenos a los ficheros modificados para el reproductor. No considerar aprobado el conjunto.
+- El workflow ios-testflight.yml tiene ahora una barrera anterior a numeración, firma y subida. Si existe el gestor nativo YouTube, comprueba HTTP 200, nativeAuth=true, protocol=1 y acciones like/subscribe/comment en el Worker publicado. Sin esos resultados no se envía ninguna nueva beta.
+- Esta barrera NO despliega Cloudflare Worker. El despliegue tiene su workflow separado y deberá verificar su respuesta sin afectar la reproducción web/Android.
+- La comprobación HTTP desde el entorno de revisión no resolvió el dominio youtube-auth.tifloacosta.com: no constituye prueba de indisponibilidad real ni de compatibilidad. El runner de GitHub hará la comprobación en la distribución.
+- PR #148 permanece como borrador, sin integración en preparacion-ios. No se ha generado, firmado ni enviado nuevo IPA a TestFlight en este paso.
+- Pendiente prueba física: continuidad del habla de VoiceOver, gesto mágico, controles de tiempo, retorno del foco, error 153, OAuth Google y acciones autenticadas sobre vídeo/canal real.
+- El workflow ya contiene verificaciones del indicador de cifrado exento y mínimo iOS 15.0, sin garantizar que Apple no pida otras intervenciones.

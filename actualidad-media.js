@@ -99,11 +99,46 @@
 
     function addPlayer(card, item, button) {
       if (item.type === 'audio' && item.mediaUrl) {
+        const c = copy[currentLanguage()];
+        const player = document.createElement('section');
+        player.setAttribute('aria-label', `${c.play}: ${localizedContent(item).title}`);
         const audio = document.createElement('audio');
         audio.controls = true;
         audio.preload = 'none';
         audio.src = item.mediaUrl;
-        card.append(audio);
+        audio.setAttribute('aria-label', localizedContent(item).title);
+        const controls = document.createElement('div');
+        controls.className = 'resource-actions';
+        const rewind = document.createElement('button');
+        rewind.type = 'button';
+        rewind.textContent = currentLanguage() === 'es' ? 'Retroceder 30 segundos' : 'Rewind 30 seconds';
+        rewind.addEventListener('click', () => {
+          if (Number.isFinite(audio.currentTime)) audio.currentTime = Math.max(0, audio.currentTime - 30);
+        });
+        const toggle = document.createElement('button');
+        toggle.type = 'button';
+        const updateToggle = () => {
+          toggle.textContent = audio.paused ? (currentLanguage() === 'es' ? 'Reproducir' : 'Play') : (currentLanguage() === 'es' ? 'Pausar' : 'Pause');
+        };
+        toggle.addEventListener('click', () => {
+          if (audio.paused) audio.play().catch(() => { updateToggle(); });
+          else audio.pause();
+        });
+        audio.addEventListener('play', updateToggle);
+        audio.addEventListener('pause', updateToggle);
+        audio.addEventListener('ended', updateToggle);
+        const forward = document.createElement('button');
+        forward.type = 'button';
+        forward.textContent = currentLanguage() === 'es' ? 'Avanzar 30 segundos' : 'Forward 30 seconds';
+        forward.addEventListener('click', () => {
+          if (!Number.isFinite(audio.currentTime)) return;
+          const end = Number.isFinite(audio.duration) ? audio.duration : audio.currentTime + 30;
+          audio.currentTime = Math.min(end, audio.currentTime + 30);
+        });
+        controls.append(rewind, toggle, forward);
+        player.append(audio, controls);
+        card.append(player);
+        updateToggle();
         return;
       }
 

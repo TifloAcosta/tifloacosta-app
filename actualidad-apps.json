@@ -1,6 +1,6 @@
 [
   {
-    "id": "buscaapps-imagetype-1249",
+    "id": "buscaapps-340a79d460e20512",
     "title": "ImageType | Accessible Editor",
     "sourceId": "buscaapps",
     "sourceName": "BuscaApps",
@@ -8,7 +8,19 @@
     "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1249",
     "lang": "es",
     "platform": "Android",
-    "summary": "Editor de imágenes accesible para añadir texto y estilos personalizados a fotografías.",
+    "summary": "Editor de imágenes accesible para añadir texto y estilos personalizados a tus fotos de forma perfecta.",
+    "publishedAt": null
+  },
+  {
+    "id": "buscaapps-99bef765dd708e48",
+    "title": "Afinador de guitarra Victoria",
+    "sourceId": "buscaapps",
+    "sourceName": "BuscaApps",
+    "sourceUrl": "https://www.buscaapps.com/",
+    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1248",
+    "lang": "es",
+    "platform": "Web",
+    "summary": "afinador de guitarra gratuito y accesible desarrollado siguiendo los principios del diseño universal",
     "publishedAt": null
   },
   {
@@ -108,28 +120,64 @@
     "publishedAt": null
   },
   {
-    "id": "buscaapps-f6202e94961ce1f9",
-    "title": "Nexus Image",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1239",
-    "lang": "es",
-    "platform": "Windows",
-    "summary": "edición de vídeo accesible y grabación de audio para todos",
-    "publishedAt": null
+    "id": "applevis-apps-14b03ffce5eb56c2",
+    "title": "Word Tack",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/word-tack",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "Sort scattered words into their hidden groups in Word Tack, a cozy word puzzle with a handmade feel: washi tape, typewriter labels and paper tiles that look cut out by hand. Every puzzle hides eight groups of five words. Drag tiles between rows, and when a row holds all five words of a group, it's sealed and its category is revealed. There's no timer and no penalty for a wrong guess, so take your time. PLAY YOUR WAY • A growing campaign of handcrafted levels, from everyday categories to clever wordplay and real head-scratchers, with more added in updates • Every level is marked easy, medium or hard • A Daily Puzzle to play each day, with shareable emoji results and a streak to keep GENTLE HELP WHEN YOU'RE STUCK • Inklings link two words from the same group • Clues reveal the names of up to three groups • Solve a puzzle without help to earn all three stars MAKE THE DESK YOUR OWN • Earn stamps as you play • Spend them in the shop on washi tape, tile styles, row seals, desk backgrounds and confetti, including dazzling gold and holographic finishes MADE WITH CARE • Satisfying sounds, gentle haptics and a soft soundtrack, each with its own setting • Statistics, star ratings and daily streaks to track your progress • Works with VoiceOver: hear when rows are solved and where each tile sits on the board • A Reduce Motion setting for calmer play • No ads, no in-app purchases and no account needed. Works offline.",
+    "publishedAt": "2026-10-11T06:14:34.000Z"
   },
   {
-    "id": "buscaapps-42783766e98438c5",
-    "title": "Visor Universal",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1238",
-    "lang": "es",
-    "platform": "Windows",
-    "summary": "El visor/lector de libros definitivo para usuarios con lectores de pantalla",
-    "publishedAt": null
+    "id": "applevis-apps-8738c066fab145d1",
+    "title": "ArcFlush: Roguelike Solitaire",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/arcflush-roguelike-solitaire",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "Cards don't line up politely here. They're stacked in layers — the way mahjong tiles are stacked, except these are playing cards, and one of the maps is on fire. Which means there are two games sitting on top of each other: getting a card out of the pile, and knowing what to do with it once you have it. HOW IT WORKS · The map is a layered formation. Anything underneath is locked until you clear what's covering it, so every card you take decides what you're allowed to take next. That half is solitaire. · Play up to five of the cards you've taken as a poker hand. A pair is fine. A Flush is better. A Straight Flush means you planned ahead — or got lucky and will claim you planned ahead. That half is poker. · Beat the stage's target score, spend what you earned in the Shop, and do it again. And again. Until the target has grown a couple of digits and you're no longer certain which of your trinkets is doing the heavy lifting. WHAT'S IN IT · Every map is built around exactly one idea. Ice Lake freezes cards. Furnace sets them alight. Dark Pool turns the lights off and invites you to feel your way out. · Clear a map and its Twist unlocks: the same map, in a considerably worse mood. · Trinkets. Some add points. Some quietly rewrite a rule you'd assumed was permanent. The legendary ones turn up rarely enough that finding the right one feels like the run has decided to help you, just this once. · A Shop between stages, because a roguelite without a shop is just a difficult puzzle. · A tutorial that leaves quickly and waits in Settings in case you ever want it back. WHAT'S NOT IN IT · Ads. · In-app purchases. · A season pass, a battle pass, or a little bar that refills while you sleep. · An internet connection. This app has never phoned home and wouldn't know who to call. Buy it once and own all of it — every map, every trinket, every Twist. There is nothing else to sell you, and we are not going to think of anything. One deck, thirteen languages. Good luck.",
+    "publishedAt": "2026-10-10T09:23:54.000Z"
+  },
+  {
+    "id": "applevis-apps-5a0a43f780341ef5",
+    "title": "Quintra",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/quintra",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "Quintra brings poker hands to a shared board. Place cards to build pairs, straights, flushes, and more across rows and columns. Connect with cards already in play, find the right opening, and turn one card into points in two directions. ONE BOARD. SO MANY POSSIBILITIES. Build on what's there, line up bonus spaces, and watch for opportunities where hands cross. Your best move could also give your opponent something to work with. PLAY FRIENDS AT YOUR PACE Trade turns through Game Center whenever you're ready. Match Play spans two rounds with the same deal and swapped seats, giving both players a chance to make the most of each hand. A FRESH PUZZLE EVERY DAY Fit the cards to match every marked poker hand. Choose Easy, Medium, or Hard, then see how your completion time stacks up on the daily puzzle leaderboards. EIGHT TURNS. MAKE EACH ONE COUNT. Take on the Daily Challenge: a daily deal, eight solo turns, and a leaderboard to climb. Find the connections that turn a good score into a great one. PLAY SOLO Learn the board in Practice or take on the computer in Match Play. Choose your difficulty and try new approaches at your own pace. MAKE IT YOURS Earn XP, level up, and chase goals and achievements as you play. Unlock new card decks and board looks to make Quintra feel like yours. Every poker hand changes the game.",
+    "publishedAt": "2026-10-09T00:39:30.000Z"
+  },
+  {
+    "id": "applevis-apps-4bdcc9691bb56455",
+    "title": "SortFlow",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/sortflow",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "SortFlow is a relaxing water-sort puzzle. Pour colored liquids between tubes until each tube holds a single color. • Four ways to play: Standard, Classic (the traditional rules), Time Attack and Zen • Hundreds of handcrafted puzzles across eight difficulty tiers, up to Legendary • A new Daily Challenge every day, with streaks and trophy celebrations • Weekly Leagues: earn XP in any mode, climb from Bronze to Diamond, and claim coins every Monday • Leaderboards in the app for every mode and difficulty, Global or Friends, plus Game Center achievements • Daily and weekly quests with coins to claim • Challenge a friend: share a puzzle and see who scores higher on the same board • Level up, earn coins, and unlock themes, tube skins, sound packs and win celebrations • Leave any puzzle and resume right where you left off — all modes save automatically • Build combo streaks with a burning combo counter and sound effects • Play offline, anytime No pressure, no clutter — just satisfying, colorful logic.",
+    "publishedAt": "2026-10-08T20:55:49.000Z"
+  },
+  {
+    "id": "applevis-apps-17ed748161e9aeaf",
+    "title": "Sky Go (Glass / Stream)",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/entertainment/sky-go-glass-stream",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "Important: This version of Sky Go is exclusively available for Sky Glass and Sky Stream customers. If you have Sky Q or Sky+ please continue using the existing Sky Go app. Watch your favourite content wherever you are with access to Sky channels and free-to-air channels including ITV, Channel 4 and 5. Enjoy live TV, catch up on demand, or download shows and films to watch later. With a refreshed design and improved ways to find and watch content, this latest version delivers a more streamlined and personalised viewing experience across mobile and tablet devices. In this release, you can enjoy: A new interface aligned with the Sky Glass and Sky Stream experience. Streaming across Live TV, On Demand, Sky Sports events and Downloads. A redesigned browse experience with improved TV Guide and Search functionality. Personalised recommendations to help you discover more of the content you love. Seamless viewing across your compatible Sky devices at home.",
+    "publishedAt": "2026-10-08T20:36:43.000Z"
   },
   {
     "id": "applevis-apps-7c78087dce6280d9",
@@ -140,7 +188,7 @@
     "originalUrl": "https://www.applevis.com/apps/ios/games/ringbloom-garden-puzzle",
     "lang": "en",
     "platform": "Apple",
-    "summary": "Rotate a ring. Match three petals. Watch the garden bloom. Ringbloom is a calm rotational puzzle with a simple choice behind every move: select the inner, middle or outer ring, then turn it left or right. Align matching petals across a spoke, make a bloom and keep your garden growing before your moves run out. TWO WAYS TO PLAY • Garden — an endless, steadily growing puzzle for a quick break or a longer run. • Flower Show — focused Classes with fresh objectives and new ways to think about each turn. Start free with endless Garden and the first five Flower Show Classes. When you want a bigger challenge, one permanent purchase unlocks 25 more campaign Classes and the Champion Circuit. There is no subscription, energy system or advertising. Build bloom chains, chase stronger results and replay Classes to improve your rating. Clear objectives arrive as you play, with labelled controls, Undo and Hint support when you need a hand. Ringbloom is designed for one-thumb play, with distinct glyphs alongside colour, VoiceOver support, Larger Text layouts and Reduce Motion support. Gameplay works offline and progress is kept on your device. Ringbloom began as an AI app-building benchmark and has been refined through play and testing. Ringbloom uses limited analytics and advertising attribution. No account is required. See the privacy policy for the information used and the choices available.",
+    "summary": "Rotate a ring. Align matching petals. Watch the garden bloom. Ringbloom is a calm rotational puzzle with a simple choice behind every move: select the inner, middle or outer ring, then turn it left or right. Align matching petals across a spoke, make a bloom and keep your garden growing before your moves run out. TWO WAYS TO PLAY • Garden — an endless, steadily growing puzzle for a quick break or a longer run. • Flower Show — focused Classes with fresh objectives and new ways to think about each turn. Start free with endless Garden and the first five Flower Show Classes. When you want a bigger challenge, one permanent purchase unlocks 25 more campaign Classes and the Champion Circuit. There is no subscription, energy system or advertising. Build bloom chains, chase stronger results and replay Classes to improve your rating. Clear objectives arrive as you play, with labelled controls, Undo and Hint support when you need a hand. Ringbloom is designed for one-thumb play, with distinct glyphs alongside colour, VoiceOver support, Larger Text layouts and Reduce Motion support. Gameplay works offline and progress is kept on your device. Ringbloom began as an AI app-building benchmark and has been refined through play and testing. Ringbloom uses limited analytics and advertising attribution. No account is required. See the privacy policy for the information used and the choices available.",
     "publishedAt": "2026-10-07T03:56:42.000Z"
   },
   {
@@ -164,7 +212,7 @@
     "originalUrl": "https://www.applevis.com/apps/ios/games/piggy-smash-hammer-clicker",
     "lang": "en",
     "platform": "Apple",
-    "summary": "[TRY BEFORE YOU BUY!] NEW: the Piggy Foundry, a second way to smash. Smash piggy banks. Collect coins. Pay ridiculous bills. Upgrade your build and take on the next chapter. Hold to swing your hammer. Chase the fast piggies, crack the tough ones, and scoop up their coins. Some piggies are even on fire. Upgrade your hammer, luck and stamina. Unlock hammers and abilities that change how you play. Your job changes your bills. Clear chapters, decorate your apartment, and move into better places. Play through a campaign with a real ending. Optional Overtime is there when you want more smashing. PIGGY FOUNDRY A second mode. Drag your target onto the piggies and your hammer does the rest. Upgrade it, pay the building's bills, and come back to the coins it smashed while you were away. ACCESSIBILITY Play with VoiceOver: every piggy is read out, and you swing by timing, on a beat you feel. Choose your swing window. Bigger text across the game. FREE TO TRY The first 2 chapters are free. One purchase unlocks the full game. Optional extras for decorating, a few extra coins, supporting the game, an extra shift or Piggy Foundry gems. 100% optional, never required. No ads. No energy timers. Every swing you paid for is one you could have earned. Works offline. The bills are pretend. The coins stay in the game.",
+    "summary": "Smash piggy banks, collect the coins, pay your bills, then upgrade your hammer and smash harder. [TRY BEFORE YOU BUY!] Swing your hammer. Chase the fast piggies, crack the tough ones, and scoop up their coins. Some piggies are even on fire. - Upgrade your hammer, luck and stamina. Unlock hammers and abilities that change how you play. - Clear chapters, decorate your apartment, and move into better places. - Play through a full campaign. Optional Overtime is there when you want more smashing. PIGGY FOUNDRY A second mode. Drag your target onto the piggies and your hammer does the rest. Upgrade it, pay the building's bills, and come back to the coins it smashed while you were away. ACCESSIBILITY Play with VoiceOver: every piggy is read out, and you swing by timing, on a beat you feel. Choose your swing window. Bigger text across the game. FREE TO TRY The first 2 chapters are free. One purchase unlocks the full game. Optional extras for decorating, a few extra coins, supporting the game, an extra shift or Piggy Foundry gems. 100% optional, never required. No ads. No energy timers. Every swing you paid for is one you could have earned. Works offline. The bills are pretend. The coins stay in the game.",
     "publishedAt": "2026-10-03T03:28:44.000Z"
   },
   {
@@ -190,65 +238,5 @@
     "platform": "Apple",
     "summary": "A fox walks you through a little town. Then you find your own way back. Wayfound is a calm puzzle game about the oldest skill you own: knowing where you are. Follow the fox through pastel streets, past bakeries and clock towers, up a quiet elevator. Notice things. Then walk the route yourself — no minimap, no GPS arrow, just you and what you remember. THERE'S NO CLOCK, AND NO WRONG WAY TO WANDER • No timers, no fail states, no lives. Wrong turns are part of wandering — the fox always finds you. • A rescue ladder, not a game over: hints arrive as gentle nudges, only when you want them. • Little errands: deliver a parcel, find the bakery, learn the streets by needing them. • At corners, the fox asks: which way now? Guess, and feel the route settle into your feet. • Walks grow with you: first the fox leads, then you study a map and walk alone, then it's just you and a destination. • The town grows because you walked it — a flour cart by the bakery, a fishing net by the pier — small things appear when you finish an errand, and they stay. • Point home: a quiet compass test at the end of each walk. Watch yourself get better. • A new town for every chapter — every street is new to you, so each walk is real navigation. WHY WALKS WORK Wayfound is inspired by research on spatial memory — how we build inner maps from landmarks, routes, and wrong turns, and how turn-by-turn navigation quietly erodes that skill. It's not a brain-training claim. It's just a nice walk. • Free, no ads, no subscriptions, no tracking. Your progress stays on your device. • Works entirely offline. • English, 简体中文, 日本語.",
     "publishedAt": "2026-09-30T23:50:38.000Z"
-  },
-  {
-    "id": "applevis-apps-85df4e1093bcf401",
-    "title": "Quiet Grind — Idle RPG",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/quiet-grind-idle-rpg",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Quiet Grind is an idle RPG for people with lives. Train 30 skills, battle through five adventure zones, and keep making progress — even when you're not playing. Mine ore, chop wood, catch fish, smith gear, steep and enchant. Every skill has its own tools, recipes and mastery track, and they feed each other: what you gather becomes what you craft, and what you craft makes you stronger. PROGRESS WHILE YOU'RE AWAY Close the app and your character keeps training. Come back to a satisfying pile of gains — up to 8 hours of away progress in the free game, 24 with the optional unlock. NO ADS. NO ENERGY BARS. No forced waits you have to pay to skip. No video to sit through before a reward. Quiet Grind asks for your time, not your attention. WHAT'S INSIDE • 30 skills across gathering, artisan and combat • Five adventure zones and fifteen foes to defeat • Daily quests and a rotating merchant • 72 achievements and 9 Game Center leaderboards • Tamed companions that fight alongside you • A calm fantasy soundtrack • Six languages • Cloud save that follows you between devices • Fully playable offline PLAY EVERYWHERE iPhone, iPad, Mac and Apple Watch — one purchase, one save. Start a session on your phone, check on it from your wrist, and carry on at your Mac. FREE TO TRY Quiet Grind is free with 14 of its 30 skills, the first three adventure zones, daily quests and offline progress all included. A single unlock opens the remaining skills and zones. No subscriptions, no ads, no pay-to-win, ever.",
-    "publishedAt": "2026-09-30T00:07:12.000Z"
-  },
-  {
-    "id": "applevis-apps-599efc2fe374670e",
-    "title": "Kodou - Swipe & Connect",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/kodou-swipe-connect",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Kodou is a swipe-to-connect puzzle where every board plays a little differently and the clock never stops. Drag your finger across matching tiles, or find an ascending run of powers of two, 2 to 4 to 8 to 16 and beyond, for a bigger payoff. HOW TO PLAY - Swipe to connect three or more tiles: match the same value, or chain an ascending sequence of powers of two for double the score. - Watch for special tiles. Wildcards match any value, Ice tiles freeze your clock when cleared, and Bombs clear the block around them. - Plan around Blockers. They cannot be chained through. - The turn timer speeds up the longer you survive, so think fast and keep your eyes on the board. FEATURES - A twelve color palette that adapts to light and dark mode, so no two boards ever look quite the same. - Game Center leaderboards for both Score and Longest Chain, with All Time, Weekly, and Daily standings. - Full VoiceOver support. Explore the board by touch, then drag to connect a chain exactly the way a sighted player would, or build one tap at a time if you prefer. - Play the exact same game on Apple Watch. Kodou is free to play, supported by ads. A one time Remove Ads purchase clears all of them for good.",
-    "publishedAt": "2026-09-26T20:06:00.000Z"
-  },
-  {
-    "id": "applevis-apps-b69b009d167a5b08",
-    "title": "Restaurant Rush: Cook & Serve",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/restaurant-rush-cook-serve",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Cook fast, serve happy guests and decorate your own restaurant. Cozy chaos, two cats to pet, and fully playable with VoiceOver. Open your doors and start your shift! Restaurant Rush: Cook &amp; Serve is a fast, cozy restaurant time-management game. Orders pile up, guests get impatient, and you keep the kitchen running one shift at a time. Play your way • Run 5 restaurants, each with its own menu and levels. Start at Sip Stop and work your way up. • Story levels for steady progress, or Endless Shift, where you pick draft cards to shape every run. • Unlock recipes and kitchen upgrades with Dollars, and hire a waiter for the busy rushes. • Finish daily goals and climb the leaderboards. • How to Play: a short guide on the main menu explains the game modes, pace, combos and the screen layout. • Practice: quick lessons and a free practice shift where nobody leaves. Make it yours • Restaurant Studio: decorate with themes, wall decorations, counters and tables. • Spend Coins on chef outfits, music tracks, soundscapes and accessories for the cats. Meet Holosko and Sabri • Two cats live in your restaurant. Pet them to calm down impatient guests. Hear the restaurant come alive • Realistic kitchen and customer sounds: the door, footsteps, chairs, pouring and cooking. Play at your own pace • Fully playable with VoiceOver. • Accessible play and pace settings, including Relaxed, so anyone can play at their own speed. • Left-handed layout. • Available in 9 languages. Tie your apron and open the doors. Your first guests are already waiting.",
-    "publishedAt": "2026-09-26T02:59:18.000Z"
-  },
-  {
-    "id": "applevis-apps-456cafda828f02e9",
-    "title": "Scratch Mancer: Card Roguelike",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/scratch-mancer-card-roguelike",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "A scratch-card roguelike. You work the night counter of a House that sells luck sealed under foil. The quota is due by dawn. Miss it, and the House keeps you. Every ticket is a grid of foil hiding cash, multipliers and skulls. Your thumb is the budget — stamina runs out long before the tickets do, so where you scratch matters as much as what's under it. THE DECISION YOU MAKE ALL GAME • Scratch a cell to 20% and you can read the fragment — it doesn't count and it doesn't trigger • Scratch to 45% and it counts for real, skulls included • One revealed skull halves the payout. Two void the ticket • Cash out whenever you like. Only what you revealed pays BUILD A RUN THAT BENDS THE ODDS • 40 charms across 5 slots: reroll skulls into coins, drift sevens toward corners, make a graze count as a hit • A warden calls every third night. Each one bends a rule you were leaning on. There are six of them • Seven ticket types, each with its own payout rule — match three, complete a crossword, climb a rising ladder, or reveal a single cell on an Offering and stop • Four single-use tools in three pockets: spray the foil to see straight through it, magnet a symbol sideways, sticker a skull into a seven • Nine nights, each with a quota due at dawn. Then endless, if you're still standing • Beat the House and the Seals open: seven stacked terms for the players who won, one added per win. Higher quotas, a skull on every ticket, wardens arriving early, two on the last night. Break all seven NO ADS. NO PAYWALLS. JUST SCRATCHING. One purchase, the whole game. The odds don't know what you paid, because there is no second payment to make: no coins to buy, no subscription, no season pass, no timers. • Plays fully offline • Family Sharing enabled • Game Center achievements and leaderboards • One thumb, portrait, a night finishes on a bus ride • Built for iPhone and iPad by one developer Scratch the foil, read what you can, and try to leave before the House notices. Scratchmancer is a work of fiction. No real money changes hands, no real lottery products appear, and the odds in it are invented.",
-    "publishedAt": "2026-09-22T20:35:01.000Z"
-  },
-  {
-    "id": "applevis-apps-f5993d0cc238bd5f",
-    "title": "Chess Meets Necromancy",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/chess-meets-necromancy",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Chess you already know. An army you have to raise. Chess Meets Necromancy is a turn-based roguelike played on a real chessboard with real chess movement. Your hero is one piece. Everything you capture is a corpse you can raise. THE RUN Twenty waves across four acts. Enemies move like the pieces they are - grunts step like pawns, lancers leap like knights, imp matrons slide like queens. Clear the board, take a relic, spend your gold, march on. Die and the run is over. RAISE AN ARMY Spend souls next to your hero to raise Skeletons, Bone Knights, Wraiths, Bone Golems and Seraphs. Every summon moves as a chess piece. Give them a stance - Hunt, Hold or Guard - and they act after you, every turn. Army slots are limited, so choose what you bring. RELICS AND TRAITS Nineteen relics, each with levels that stack across a run. Seventeen lasting traits bought in the town between waves: extra turns before a wave lands, fewer enemies per wave, a free summon every wave, bank interest, a doubled army cap. No two runs build the same. BOSSES Ten bosses with real HP bars, from the Ogre Warchief to the Lich King, the Stone Titan and the Brood Queen. Act IV stops sending one king and starts sending a court - the final board holds three at once. THE TOWN Between waves, spend gold. Buy traits, promote your King into a Warlord, hire a new champion, or put gold in the bank and let it earn interest. FOUR HEROES Necromancer, Death Knight, Priestess, Ranger. Each moves differently, starts differently, and each has a relic only they can find. TAP ANYTHING Tap any piece to see its name, movement, attack and health. Gold squares preview where it steps, red squares preview what it can take. Learn the board before you commit. - Plays entirely offline, no required account - No ads, no timers, no energy system - Optional Game Center leaderboards and achievements - No in-app purchases; everything is earned in-run - Game controller support - iPhone and iPad - Pixel art and haptics If you can play chess, you can start. Whether you finish is another question.",
-    "publishedAt": "2026-09-22T00:07:10.000Z"
   }
 ]

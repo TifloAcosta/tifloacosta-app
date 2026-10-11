@@ -46,7 +46,7 @@ test('VoiceOver puede recorrer toda la pantalla y el iframe mantiene el tamaño 
   assert.match(player, /scroll\.contentLayoutGuide/);
   assert.match(player, /scroll\.frameLayoutGuide/);
   assert.match(player, /webView\.heightAnchor\.constraint\(greaterThanOrEqualToConstant: 225\)/);
-  assert.match(player, /header, titleLabel, audioCompatibilityButton, controls, statusLabel, detailsPanel, accountControls, webView/);
+  assert.match(player, /header, titleLabel, audioCompatibilityButton, controls, positionSlider, detailsRow, statusLabel, detailsPanel, accountControls, webView/);
 });
 
 test('el ajuste de audio se activa solo durante el reproductor y ofrece alternativa accesible', () => {

@@ -6,6 +6,10 @@ on:
       - preparacion-ios
     paths:
       - 'ios-build/**'
+      - 'actualidad-media.js'
+      - 'scripts/actualidad-*.mjs'
+      - 'scripts/sync-actualidad-media.mjs'
+      - 'test/actualidad-*.test.mjs'
       - '.github/workflows/ios-preflight.yml'
   push:
     branches:
@@ -26,6 +30,8 @@ jobs:
           node-version: '22'
       - name: Validar sintaxis del preparador
         run: node --check ios-build/prepare-web.mjs
+      - name: Comprobar pruebas automáticas de Actualidad
+        run: npm run test:actualidad
       - name: Preparar contenido y validar scripts iOS
         run: node ios-build/prepare-web.mjs
       - name: Comprobar modificaciones iOS empaquetadas

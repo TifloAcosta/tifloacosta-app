@@ -37,6 +37,13 @@ if (iosAudio.stats.audioCount && !iosAudio.stats.playableCount) {
   throw new Error('No hay enlaces de audio reproducibles en el catálogo iOS. Se cancela la compilación.');
 }
 await writeFile(mediaPath, JSON.stringify(iosAudio.items, null, 2) + '\n');
+// Native WKWebView may reject fetch of local JSON depending on the custom
+// URL scheme. Ship the same enriched episodes in a small JavaScript fallback,
+// preserving the local file as the primary source.
+await writeFile(join(output, 'ios-actualidad-media-fallback.js'),
+  'window.TIFLO_IOS_ACTUALIDAD_MEDIA = ' +
+  JSON.stringify(iosAudio.items).replace(/</g, '\\u003c') + ';\n');
+
 
 
 /* iOS uses a packaged copy of the web UI. Remove PWA-only controls without
@@ -111,6 +118,11 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
   html = html.replace('</head>', iosOverrides + '\n</head>');
   if (name === 'index.html') html = html.replace('</body>', iosLanguage + '\n</body>');
   if (name === 'videos.html') html = html.replace('<script src="videos.js?v=2.5"></script>', '<script src="ios-videos-fallback.js"></script>\n<script src="videos.js?v=2.5"></script>');
+  if (name === 'actualidad.html') {
+    const script = '<script src="actualidad-media.js?v=1.1"></script>';
+    if (!html.includes(script)) throw new Error('No se encuentra el script de multimedia en Actualidad');
+    html = html.replace(script, '<script src="ios-actualidad-media-fallback.js"></script>\n' + script);
+  }
   await writeFile(path, html);
 }
 
@@ -211,6 +223,38 @@ iosMedia = iosMedia.replace(originalLabel,
   "mediaOriginal.textContent = item.type === 'video' && iosExternalVideo\n" +
   "          ? (currentLanguage() === 'es' ? 'Reproducir vídeo en YouTube' : 'Play video on YouTube')\n" +
   "          : item.type === 'audio' && !item.mediaUrl");
+// Load packaged media catalogue as the fallback when WKWebView cannot fetch
+// the same JSON. Do not use external or insecure content in this recovery path.
+const jsonLoad = [
+  "      fetch('actualidad-media.json', { cache: 'no-cache' })",
+  '        .then(response => {'
+].join('\n');
+if (!iosMedia.includes(jsonLoad)) throw new Error('No se encuentra carga de catálogo de Actualidad');
+iosMedia = iosMedia.replace(jsonLoad, [
+  "      fetch('actualidad-media.json', { cache: 'no-cache' })",
+  '        .then(response => {'
+].join('\n'));
+const jsonError = [
+  '        .catch(() => {',
+  '          items = [];',
+  '          loadFailed = true;',
+  '          mediaLoaded = false;',
+  '          mediaLoading = false;',
+  '          render();',
+  '        });'
+].join('\n');
+if (!iosMedia.includes(jsonError)) throw new Error('No se encuentra la recuperación de catálogo de Actualidad');
+iosMedia = iosMedia.replace(jsonError, [
+  '        .catch(() => {',
+  '          const packaged = window.TIFLO_IOS_ACTUALIDAD_MEDIA;',
+  '          items = Array.isArray(packaged) ? packaged : [];',
+  '          loadFailed = !items.length;',
+  '          mediaLoaded = Boolean(items.length);',
+  '          mediaLoading = false;',
+  '          render();',
+  '        });'
+].join('\n'));
+
 // The isolation controller already moves VoiceOver focus after hashchange;
 // its job must not be duplicated by the media script's link click listener.
 const focusStart = iosMedia.indexOf('    // Move VoiceOver focus only after an explicit section navigation action.');
@@ -222,7 +266,7 @@ iosMedia = iosMedia.slice(0,focusStart) +
 await writeFile(iosMediaPath, iosMedia);
 
 // Fail before signing or uploading if an injected iOS-only script is invalid.
-for (const file of ['app.js', 'videos.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-videos-fallback.js']) {
+for (const file of ['app.js', 'videos.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-videos-fallback.js', 'ios-actualidad-media-fallback.js']) {
   execFileSync(process.execPath, ['--check', join(output, file)], { stdio: 'pipe' });
 }
 console.log('Validación sintáctica de scripts iOS completada');

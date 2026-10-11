@@ -134,10 +134,10 @@ jobs:
           (cd ios/App && pod install)
           test "$(/usr/libexec/PlistBuddy -c 'Print :ITSAppUsesNonExemptEncryption' ios/App/App/Info.plist)" = false
           grep -q 'forHTTPHeaderField: "Referer"' ios/App/App/AppDelegate.swift
-          # The iOS YouTube player must not override the audio session used by VoiceOver.
-          if grep -q 'setCategory(' ios/App/App/AppDelegate.swift; then
-            echo 'Native video player must not change AVAudioSession category.' >&2
-            exit 1
-          fi
+          # The VoiceOver audio compatibility trial must mix, not interrupt,
+          # other sound and restore the previous session upon dismissal.
+          grep -Fq 'setCategory(.playback, options: [.mixWithOthers])' ios/App/App/AppDelegate.swift
+          grep -Fq 'setCategory(category, options: options)' ios/App/App/AppDelegate.swift
+          grep -Fq 'audioMix.restore()' ios/App/App/AppDelegate.swift
           grep -q 'name: "info"' ios/App/App/AppDelegate.swift
           xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build

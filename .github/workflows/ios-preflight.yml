@@ -98,6 +98,7 @@ jobs:
           assert.match(index, /id="tiflo-ios-settings"/);
           assert.match(index, /src="ios-parity\.js"/);
           assert.match(actualidadHtml, /src="ios-parity\.js"/);
+          assert.match(videosHtml, /src="ios-parity\.js"/);
           assert.match(readFileSync(root + 'ios-parity.js', 'utf8'), /ios-native-app-info/);
           assert.match(readFileSync(root + 'ios-parity.js', 'utf8'), /ios-apps-back-to-resources/);
           assert.match(readFileSync(root + 'ios-parity.js', 'utf8'), /correctDownloadsFocus/);

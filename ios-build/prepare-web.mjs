@@ -222,7 +222,7 @@ iosMedia = iosMedia.slice(0,focusStart) +
 await writeFile(iosMediaPath, iosMedia);
 
 // Fail before signing or uploading if an injected iOS-only script is invalid.
-for (const file of ['app.js', 'videos.js', 'actualidad-media.js', 'ios-videos-fallback.js']) {
+for (const file of ['app.js', 'videos.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-videos-fallback.js']) {
   execFileSync(process.execPath, ['--check', join(output, file)], { stdio: 'pipe' });
 }
 console.log('Validación sintáctica de scripts iOS completada');

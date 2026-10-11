@@ -23,10 +23,12 @@ for (const required of [
 }
 // AppDelegate.swift already belongs to the generated Xcode target. Append
 // the native player there so it is compiled without manual .pbxproj edits.
-const swiftBody = player.replace(/^import UIKit\nimport WebKit\nimport Capacitor\n/, '');
+const swiftBody = player.replace(/^import UIKit\nimport WebKit\nimport Capacitor\nimport AVFAudio\n/, '');
 const delegateWithWebKit = appDelegate.includes('import WebKit')
   ? appDelegate : appDelegate.replace('import UIKit', 'import UIKit\nimport WebKit');
-await writeFile(appDelegatePath, delegateWithWebKit.trimEnd() + '\n\n' + swiftBody);
+const delegateWithAudio = delegateWithWebKit.includes('import AVFAudio')
+  ? delegateWithWebKit : delegateWithWebKit.replace('import UIKit', 'import UIKit\nimport AVFAudio');
+await writeFile(appDelegatePath, delegateWithAudio.trimEnd() + '\n\n' + swiftBody);
 
 // The Capacitor starter storyboard creates the default bridge by class name.
 // Point that existing scene at the subclass that registers our native plugin.

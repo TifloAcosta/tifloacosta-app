@@ -163,6 +163,9 @@ final class TifloYouTubeAccountControls: UIView {
                 self.accountStatus.text = items.isEmpty
                     ? (self.spanish ? "Cuenta conectada." : "Account connected.")
                     : items.joined(separator: " ")
+                // A completed Like/Subscribe action may hide its triggering
+                // button; move VoiceOver to a stable status instead.
+                UIAccessibility.post(notification: .layoutChanged, argument: self.accountStatus)
             case .failure(let error):
                 if (error as NSError).code == 401 {
                     self.announce(self.spanish ? "La sesión ha caducado. Identifícate otra vez." : "Your session expired. Sign in again.")
@@ -264,5 +267,6 @@ final class TifloYouTubeAccountControls: UIView {
         TifloNativeYouTubeAccount.shared.signOut()
         updateAccess()
         announce(spanish ? "Cuenta desconectada de TifloAcosta." : "Account disconnected from TifloAcosta.")
+        UIAccessibility.post(notification: .layoutChanged, argument: signInButton)
     }
 }

@@ -84,6 +84,72 @@ export async function resolveChannelId(accessToken, fetchImpl = fetch) {
   return channelId;
 }
 
+// Resolve the actual author of an arbitrary YouTube video using YouTube's
+// own API, never a channel id supplied by the application or an external link.
+export async function resolveVideoChannel(accessToken, videoId, fetchImpl = fetch) {
+  const id = validVideoId(videoId);
+  const data = await youtubeFetch(query('videos', [
+    ['part', 'snippet'],
+    ['id', id]
+  ]), { accessToken, fetchImpl });
+  const snippet = data?.items?.[0]?.snippet || {};
+  const channelId = String(snippet.channelId || '').trim();
+  if (!channelId) throw typedError('VIDEO_NOT_FOUND', 404);
+  return {
+    channelId,
+    channelTitle: String(snippet.channelTitle || '').trim()
+  };
+}
+
+export async function getAccountVideoStateForVideo(accessToken, videoId, fetchImpl = fetch) {
+  const id = validVideoId(videoId);
+  const { channelId, channelTitle } = await resolveVideoChannel(accessToken, id, fetchImpl);
+  const subscribed = await subscriptionState(accessToken, channelId, fetchImpl);
+  const ratingData = await youtubeFetch(query('videos/getRating', [['id', id]]), {
+    accessToken,
+    fetchImpl
+  });
+  return { channelId, channelTitle, subscribed, rating: normalizeRating(ratingData?.items?.[0]?.rating) };
+}
+
+export async function subscribeToVideoChannel(accessToken, videoId, fetchImpl = fetch) {
+  const { channelId } = await resolveVideoChannel(accessToken, videoId, fetchImpl);
+  return subscribeToChannelId(accessToken, channelId, fetchImpl);
+}
+
+async function subscribeToChannelId(accessToken, channelId, fetchImpl) {
+  if (await subscriptionState(accessToken, channelId, fetchImpl)) {
+    return { subscribed: true, changed: false };
+  }
+  await youtubeFetch(query('subscriptions', [['part', 'snippet']]), {
+    accessToken,
+    method: 'POST',
+    body: { snippet: { resourceId: { kind: 'youtube#channel', channelId } } },
+    fetchImpl
+  });
+  return { subscribed: true, changed: true };
+}
+
+export async function commentOnVideoChannel(accessToken, videoId, text, fetchImpl = fetch) {
+  const id = validVideoId(videoId);
+  const cleanText = String(text || '').trim();
+  if (!cleanText) throw typedError('INVALID_COMMENT', 400);
+  const { channelId } = await resolveVideoChannel(accessToken, id, fetchImpl);
+  await youtubeFetch(query('commentThreads', [['part', 'snippet']]), {
+    accessToken,
+    method: 'POST',
+    body: {
+      snippet: {
+        channelId,
+        videoId: id,
+        topLevelComment: { snippet: { textOriginal: cleanText } }
+      }
+    },
+    fetchImpl
+  });
+  return { commented: true };
+}
+
 export async function getAccountVideoState(accessToken, videoId, fetchImpl = fetch) {
   const id = validVideoId(videoId);
   const channelId = await resolveChannelId(accessToken, fetchImpl);

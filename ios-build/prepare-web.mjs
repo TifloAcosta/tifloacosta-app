@@ -222,6 +222,15 @@ iosApp = iosApp.replace(iosCategoryRender,
     els.results.querySelectorAll('.resource-meta').forEach(meta => {
       if (meta.textContent.trim() === String(cat).trim()) meta.remove();
     });`);
+// In the native bundle prefer the freshly published web catalogs, but keep
+// the embedded data available when offline or when WKWebView blocks cross-origin IO.
+const networkFirst = file =>
+  "fetch('https://tifloacosta.com/" + file + "', { cache: 'no-store' })" +
+  ".then(response => response.ok ? response : fetch('" + file + "', { cache: 'no-cache' }))" +
+  ".catch(() => fetch('" + file + "', { cache: 'no-cache' }))";
+const appNewsCall = "fetch('actualidad.json',{cache:'no-cache'})";
+if (!iosApp.includes(appNewsCall)) throw new Error('No se encuentra el feed de Actualidad en el inicio');
+iosApp = iosApp.replace(appNewsCall, networkFirst('actualidad.json'));
 await writeFile(iosAppPath, iosApp);
 
 // iOS WKWebView uses a local/custom origin: YouTube can reject embeds that
@@ -246,17 +255,25 @@ iosMedia = iosMedia.replace(originalLabel,
   "mediaOriginal.textContent = item.type === 'video' && iosExternalVideo\n" +
   "          ? (currentLanguage() === 'es' ? 'Abrir vídeo en YouTube' : 'Open video on YouTube')\n" +
   "          : item.type === 'audio' && !item.mediaUrl");
-// Load packaged media catalogue as the fallback when WKWebView cannot fetch
-// the same JSON. Do not use external or insecure content in this recovery path.
+// Prefer the live HTTPS catalog with the packaged catalog as offline fallback.
+// Existing episodes retain the playable audio URLs generated at build time.
 const jsonLoad = [
   "      fetch('actualidad-media.json', { cache: 'no-cache' })",
   '        .then(response => {'
 ].join('\n');
 if (!iosMedia.includes(jsonLoad)) throw new Error('No se encuentra carga de catálogo de Actualidad');
 iosMedia = iosMedia.replace(jsonLoad, [
-  "      fetch('actualidad-media.json', { cache: 'no-cache' })",
+  "      " + networkFirst('actualidad-media.json'),
   '        .then(response => {'
 ].join('\n'));
+const mediaDataLine = '          items = Array.isArray(data) ? data : [];';
+if (!iosMedia.includes(mediaDataLine)) throw new Error('No se encuentra normalización del catálogo multimedia');
+iosMedia = iosMedia.replace(mediaDataLine, [
+  '          items = Array.isArray(data) ? data : [];',
+  '          const packaged = Array.isArray(window.TIFLO_IOS_ACTUALIDAD_MEDIA) ? window.TIFLO_IOS_ACTUALIDAD_MEDIA : [];',
+  '          const enclosures = new Map(packaged.filter(i => i.type === "audio" && i.mediaUrl).map(i => [i.id, i.mediaUrl]));',
+  '          items = items.map(i => i.type === "audio" && !i.mediaUrl && enclosures.has(i.id) ? { ...i, mediaUrl: enclosures.get(i.id) } : i);'
+].join('\\n'));
 const jsonError = [
   '        .catch(() => {',
   '          items = [];',
@@ -287,9 +304,19 @@ iosMedia = iosMedia.slice(0,focusStart) +
   '    // VoiceOver focus belongs exclusively to actualidad-core.js navigation.\n' +
   iosMedia.slice(focusEnd);
 await writeFile(iosMediaPath, iosMedia);
+// News and the accessible-app directory must also refresh without a new IPA.
+const iosActualidadPath = join(output, 'actualidad.js');
+let iosActualidad = await readFile(iosActualidadPath, 'utf8');
+for (const file of ['actualidad.json', 'actualidad-apps.json']) {
+  const localFetch = "fetch('" + file + "', { cache: 'no-cache' })";
+  if (!iosActualidad.includes(localFetch)) throw new Error('No se encuentra catálogo local: ' + file);
+  iosActualidad = iosActualidad.replace(localFetch, networkFirst(file));
+}
+await writeFile(iosActualidadPath, iosActualidad);
+
 
 // Fail before signing or uploading if an injected iOS-only script is invalid.
-for (const file of ['app.js', 'videos.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-videos-fallback.js', 'ios-actualidad-media-fallback.js']) {
+for (const file of ['app.js', 'videos.js', 'actualidad.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-choice-groups.js', 'ios-videos-fallback.js', 'ios-actualidad-media-fallback.js']) {
   execFileSync(process.execPath, ['--check', join(output, file)], { stdio: 'pipe' });
 }
 console.log('Validación sintáctica de scripts iOS completada');

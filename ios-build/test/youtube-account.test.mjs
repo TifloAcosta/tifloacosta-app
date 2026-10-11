@@ -44,3 +44,11 @@ test('la interfaz VoiceOver mantiene reproducción libre y editor explícito', (
   assert.match(ui, /guard !message\.isEmpty/);
   assert.doesNotMatch(ui, /password|refreshToken/);
 });
+
+test('acciones de cuenta accesibles sin segundo desplazamiento y con retorno del foco', () => {
+  assert.match(ui, /private let accountPanel = UIStackView\(\)/);
+  assert.doesNotMatch(ui, /private let accountScroller = UIScrollView/);
+  assert.match(ui, /UIAccessibility\.post\(notification: \.layoutChanged, argument: self\.accountStatus\)/);
+  assert.match(ui, /UIAccessibility\.post\(notification: \.layoutChanged, argument: commentButton\)/);
+  assert.match(ui, /UIAccessibility\.post\(notification: \.layoutChanged, argument: signInButton\)/);
+});

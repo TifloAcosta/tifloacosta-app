@@ -258,6 +258,26 @@ iosApp = iosApp.replace(iosStartPoint, iosStartPoint + 'void refreshIosResourceC
 
 await writeFile(iosAppPath, iosApp);
 
+const iosNewsVideoPath = join(output, 'news-videos.js');
+let iosNewsVideo = await readFile(iosNewsVideoPath, 'utf8');
+const oldSnapshot = '  const resources = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];';
+if (!iosNewsVideo.includes(oldSnapshot)) throw new Error('No se encuentra captura inicial de Novedades');
+iosNewsVideo = iosNewsVideo.replace(oldSnapshot,
+  '  let resources = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];');
+const newsVideoFetch = "fetch('videos.json', { cache: 'no-store' })";
+if (!iosNewsVideo.includes(newsVideoFetch)) throw new Error('No se encuentra refresco de vídeo de Novedades');
+iosNewsVideo = iosNewsVideo.replace(newsVideoFetch, networkFirst('videos.json'));
+const newsVideoStart = '  void loadVideos();';
+if (!iosNewsVideo.includes(newsVideoStart)) throw new Error('No se encuentra inicio de noticias con vídeo');
+iosNewsVideo = iosNewsVideo.replace(newsVideoStart,
+  "  window.addEventListener('tiflo-resources-updated', event => {\n" +
+  "    if (!Array.isArray(event.detail?.items)) return;\n" +
+  "    resources = event.detail.items;\n" +
+  "    renderCombinedNews();\n" +
+  "  });\n" + newsVideoStart);
+await writeFile(iosNewsVideoPath, iosNewsVideo);
+
+
 // iOS WKWebView uses a local/custom origin: YouTube can reject embeds that
 // cannot provide an HTTP Referer (player error 153). Never show a Play button
 // leading to a known unreliable iframe. Keep Web and Android unchanged.
@@ -341,7 +361,7 @@ await writeFile(iosActualidadPath, iosActualidad);
 
 
 // Fail before signing or uploading if an injected iOS-only script is invalid.
-for (const file of ['app.js', 'videos.js', 'actualidad.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-choice-groups.js', 'ios-videos-fallback.js', 'ios-actualidad-media-fallback.js', 'ios-choice-collapse.js']) {
+for (const file of ['app.js', 'videos.js', 'actualidad.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-choice-groups.js', 'ios-videos-fallback.js', 'ios-actualidad-media-fallback.js', 'ios-choice-collapse.js', 'news-videos.js']) {
   execFileSync(process.execPath, ['--check', join(output, file)], { stdio: 'pipe' });
 }
 console.log('Validación sintáctica de scripts iOS completada');

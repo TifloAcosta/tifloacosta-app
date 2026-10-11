@@ -120,6 +120,7 @@ const iosLanguage = `<script id="tiflo-ios-settings">
 // Bundle an executable fallback: WKWebView file:// fetch may reject local JSON.
 // iOS-only button groups avoid the WKWebView native picker in VoiceOver.
 await writeFile(join(output, 'ios-choice-groups.js'), "(() => {\n  'use strict';\n  // WKWebView/VoiceOver: bypass the native select popup in frequently used\n  // navigation and filtering controls. Preserve the original change events.\n  const ids = [\n    'video-sort', 'news-category', 'apps-platform',\n    'download-type-filter', 'setting-text-size', 'setting-theme',\n    'setting-spacing', 'sound-category', 'sound-provider'\n  ];\n  for (const id of ids) {\n    const select = document.getElementById(id);\n    if (!(select instanceof HTMLSelectElement)) continue;\n    const label = document.querySelector('label[for=\"' + id + '\"]');\n    const group = document.createElement('div');\n    group.className = 'resource-actions ios-choice-buttons';\n    group.setAttribute('role', 'group');\n    group.setAttribute('aria-label', label?.textContent?.trim() || id);\n    select.insertAdjacentElement('afterend', group);\n    function markActive() {\n      for (const button of group.querySelectorAll('button')) {\n        button.setAttribute('aria-pressed', String(button.dataset.value === select.value));\n      }\n    }\n    function repaint() {\n      const options = [...select.options];\n      if (options.length < 2 || options.length > 40) {\n        group.hidden = true;\n        select.hidden = false;\n        if (label) label.hidden = false;\n        return;\n      }\n      select.hidden = true;\n      if (label) label.hidden = true;\n      group.hidden = false;\n      group.setAttribute('aria-label', label?.textContent?.trim() || id);\n      group.replaceChildren();\n      for (const option of options) {\n        const button = document.createElement('button');\n        button.type = 'button';\n        button.dataset.value = option.value;\n        button.textContent = option.textContent;\n        button.disabled = option.disabled;\n        button.addEventListener('click', () => {\n          select.value = option.value;\n          select.dispatchEvent(new Event('change', { bubbles: true }));\n          markActive();\n        });\n        group.append(button);\n      }\n      markActive();\n    }\n    new MutationObserver(repaint).observe(select, { childList: true, subtree: true });\n    select.addEventListener('change', markActive);\n    repaint();\n  }\n})();\n");
+await cp(join(root, 'ios-build/ios-choice-collapse.js'), join(output, 'ios-choice-collapse.js'));
 const bundledVideos = JSON.parse(await readFile(join(output, 'videos.json'), 'utf8'));
 if (!Array.isArray(bundledVideos.videos) || !bundledVideos.videos.length) throw new Error('Catálogo de vídeos vacío');
 await writeFile(join(output, 'ios-videos-fallback.js'),
@@ -129,7 +130,18 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
   let html = await readFile(path, 'utf8');
   if (!html.includes('</head>')) throw new Error('Falta el cierre de cabecera: ' + name);
   html = html.replace('</head>', iosOverrides + '\n</head>');
-  if (name === 'index.html') html = html.replace('</body>', iosLanguage + '\n</body>');
+  if (name === 'index.html') {
+    // Build the actual download screens in the packaged app. Previously the
+    // route existed but none of the scripts mounting its content were loaded.
+    html = html.replace('</head>', '<link rel="stylesheet" href="downloads.css?v=1.1">\n</head>');
+    const downloadScripts = [
+      'download-config.js', 'downloads-core.js',
+      'sound-search-core.js', 'sound-search-config.js',
+      'downloads.js', 'downloads-hub.js', 'sound-search.js',
+      'downloads-iphone-bridge.js'
+    ].map(src => '<script src="' + src + '"></script>').join('\\n');
+    html = html.replace('</body>', downloadScripts + '\n' + iosLanguage + '\n</body>');
+  }
   if (name === 'videos.html') html = html.replace('<script src="videos.js?v=2.5"></script>', '<script src="ios-videos-fallback.js"></script>\n<script src="videos.js?v=2.5"></script>');
   if (name === 'actualidad.html') {
     const script = '<script src="actualidad-media.js?v=1.1"></script>';
@@ -137,6 +149,7 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
     html = html.replace(script, '<script src="ios-actualidad-media-fallback.js"></script>\n' + script);
   }
   html = html.replace('</body>', '<script src="ios-choice-groups.js"></script>' + '\n</body>');
+  if (name === 'actualidad.html') html = html.replace('</body>', '<script src="ios-choice-collapse.js"></script>' + '\n</body>');
   if (name === 'podcast.html') {
     html = html.replace('</body>', '<script>requestAnimationFrame(() => { const heading = document.getElementById("podcast-heading"); heading?.setAttribute("tabindex", "-1"); heading?.focus({preventScroll:true}); });</script>' + '\n</body>');
   }
@@ -316,7 +329,7 @@ await writeFile(iosActualidadPath, iosActualidad);
 
 
 // Fail before signing or uploading if an injected iOS-only script is invalid.
-for (const file of ['app.js', 'videos.js', 'actualidad.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-choice-groups.js', 'ios-videos-fallback.js', 'ios-actualidad-media-fallback.js']) {
+for (const file of ['app.js', 'videos.js', 'actualidad.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-choice-groups.js', 'ios-videos-fallback.js', 'ios-actualidad-media-fallback.js', 'ios-choice-collapse.js']) {
   execFileSync(process.execPath, ['--check', join(output, file)], { stdio: 'pipe' });
 }
 console.log('Validación sintáctica de scripts iOS completada');

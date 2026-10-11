@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-10T23:35:16.231Z",
+  "generatedAt": "2026-10-11T02:13:36.964Z",
   "resources": [
     {
       "kind": "resource",
@@ -5944,23 +5944,6 @@
         "apps-accesibles",
         "tecnologia-accesibilidad",
         "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "applevis-apps-8d9878e5fd2fe086:en",
-      "sourceId": "applevis-apps-8d9878e5fd2fe086",
-      "lang": "en",
-      "title": "wayfound: walk & remember",
-      "summary": "A fox walks you through a little town. Then you find your own way back. Wayfound is a calm puzzle game about the oldest skill you own: knowing where you are. Follow the fox through pastel streets, past bakeries and clock towers, up a quiet elevator. Notice things. Then walk the route yourself — no minimap, no GPS arrow, just you and what you remember. THERE'S NO CLOCK, AND NO WRONG WAY TO WANDER • No timers, no fail states, no lives. Wrong turns are part of wandering — the fox always finds you. • A rescue ladder, not a game over: hints arrive as gentle nudges, only when you want them. • Little errands: deliver a parcel, find the bakery, learn the streets by needing them. • At corners, the fox asks: which way now? Guess, and feel the route settle into your feet. • Walks grow with you: first the fox leads, then you study a map and walk alone, then it's just you and a destination. • The town grows because you walked it — a flour cart by the bakery, a fishing net by the pier — small things appear when you finish an errand, and they stay. • Point home: a quiet compass test at the end of each walk. Watch yourself get better. • A new town for every chapter — every street is new to you, so each walk is real navigation. WHY WALKS WORK Wayfound is inspired by research on spatial memory — how we build inner maps from landmarks, routes, and wrong turns, and how turn-by-turn navigation quietly erodes that skill. It's not a brain-training claim. It's just a nice walk. • Free, no ads, no subscriptions, no tracking. Your progress stays on your device. • Works entirely offline. • English, 简体中文, 日本語.",
-      "body": "A fox walks you through a little town. Then you find your own way back.\n\nWayfound is a calm puzzle game about the oldest skill you own: knowing where you are. Follow the fox through pastel streets, past bakeries and clock towers, up a quiet elevator. Notice things. Then walk the route yourself — no minimap, no GPS arrow, just you and what you remember.\n\nTHERE'S NO CLOCK, AND NO WRONG WAY TO WANDER • No timers, no fail states, no lives. Wrong turns are part of wandering — the fox always finds you. • A rescue ladder, not a game over: hints arrive as gentle nudges, only when you want them. • Little errands: deliver a parcel, find the bakery, learn the streets by needing them. • At corners, the fox asks: which way now? Guess, and feel the route settle into your feet. • Walks grow with you: first the fox leads, then you study a map and walk alone, then it's just you and a destination. • The town grows because you walked it — a flour cart by the bakery, a fishing net by the pier — small things appear when you finish an errand, and they stay. • Point home: a quiet compass test at the end of each walk. Watch yourself get better. • A new town for every chapter — every street is new to you, so each walk is real navigation.\n\nWHY WALKS WORK Wayfound is inspired by research on spatial memory — how we build inner maps from landmarks, routes, and wrong turns, and how turn-by-turn navigation quietly erodes that skill. It's not a brain-training claim. It's just a nice walk.\n\n• Free, no ads, no subscriptions, no tracking. Your progress stays on your device. • Works entirely offline. • English, 简体中文, 日本語.",
-      "sourceName": "AppleVis Apps",
-      "originalUrl": "https://www.applevis.com/apps/ios/games/wayfound-walk-remember",
-      "publishedAt": "2026-09-30T23:50:38.000Z",
-      "categories": [
-        "apple",
-        "apps-accesibles",
-        "movilidad"
       ]
     }
   ]

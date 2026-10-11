@@ -10,6 +10,17 @@ on:
       - 'videos.js'
       - 'podcast.js'
       - 'downloads.js'
+      - 'app.js'
+      - 'styles.css'
+      - 'actualidad*.js'
+      - 'actualidad*.html'
+      - 'actualidad-media.json'
+      - 'podcast.html'
+      - 'videos.html'
+      - 'videos.json'
+      - 'resources*.js'
+      - 'tiflolector/**'
+      - 'shared/**'
 
 permissions:
   contents: read

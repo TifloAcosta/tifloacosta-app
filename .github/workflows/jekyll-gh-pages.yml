@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -21,10 +21,25 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Fechar automaticamente los recursos nuevos
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --test test/stamp-resource-news.test.mjs
+          node scripts/stamp-resource-news.mjs
+          if ! git diff --quiet -- data.js; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add data.js
+            git commit -m 'chore: fecha de incorporacion de nuevos recursos'
+            git push origin HEAD:main
+          fi
       - name: Install shared web build dependencies
         working-directory: mobile
         run: npm ci

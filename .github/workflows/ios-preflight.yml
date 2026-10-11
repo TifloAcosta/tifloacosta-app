@@ -133,6 +133,7 @@ jobs:
           ruby configure-ios-compliance.rb
           (cd ios/App && pod install)
           test "$(/usr/libexec/PlistBuddy -c 'Print :ITSAppUsesNonExemptEncryption' ios/App/App/Info.plist)" = false
+          test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleURLTypes:0:CFBundleURLSchemes:0' ios/App/App/Info.plist)" = tifloacosta
           grep -Fq 'webView.loadHTMLString(html, baseURL: baseURL)' ios/App/App/AppDelegate.swift
           grep -Fq 'https://www.youtube.com/iframe_api' ios/App/App/public/tiflo-youtube-player.html
           grep -Fq 'player.seekTo(' ios/App/App/public/tiflo-youtube-player.html

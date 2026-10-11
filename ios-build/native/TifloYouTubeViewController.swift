@@ -365,7 +365,10 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
 
         let configuration = WKWebViewConfiguration()
         configuration.allowsInlineMediaPlayback = true
-        configuration.mediaTypesRequiringUserActionForPlayback = .all
+        // Playback is always initiated explicitly from the native Play button
+        // or YouTube's own controls. Permit the native-to-JavaScript command
+        // even though WKWebView does not count a UIKit tap as a web gesture.
+        configuration.mediaTypesRequiringUserActionForPlayback = []
         configuration.userContentController.add(self, name: "tifloPlayer")
         webView = WKWebView(frame: .zero, configuration: configuration)
         webView.navigationDelegate = self

@@ -240,10 +240,10 @@ export async function handleRequest(request, env, deps = {}) {
   }
 
   if (url.pathname === '/auth/start' && request.method === 'GET') {
-    if (!env.GOOGLE_CLIENT_ID || !env.YOUTUBE_SESSION_SECRET) {
-      return redirect(oauthFailure(env));
-    }
     const iosRequested = url.searchParams.has('iosChallenge');
+    if (!env.GOOGLE_CLIENT_ID || !env.YOUTUBE_SESSION_SECRET) {
+      return redirect(iosRequested ? iosCallback('error') : oauthFailure(env));
+    }
     const iosChallenge = url.searchParams.get('iosChallenge') || '';
     if (iosRequested && !IOS_CHALLENGE_RE.test(iosChallenge)) {
       return redirect(iosCallback('error'));

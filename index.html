@@ -578,10 +578,18 @@
   const main = document.getElementById('main');
   const footer = document.getElementById('site-footer');
   let lastHomeEntryId = '';
+  try { lastHomeEntryId = sessionStorage.getItem('tiflo-last-home-entry') || ''; } catch {}
   menu.addEventListener('click', event => {
     const entry = event.target.closest?.('[id^="home-open-"]');
-    if (entry?.id) lastHomeEntryId = entry.id;
+    if (!entry?.id) return;
+    lastHomeEntryId = entry.id;
+    try { sessionStorage.setItem('tiflo-last-home-entry', entry.id); } catch {}
   });
+  let returnFromSubpage = false;
+  try {
+    const previous = new URL(document.referrer);
+    returnFromSubpage = previous.origin === location.origin && /\/(actualidad|videos|podcast)\.html$/.test(previous.pathname);
+  } catch {}
 
   const labels = {
     es: { sections:'Secciones', actualidad:'Actualidad', resources:'Recursos', favorites:'Favoritos', reading:'TifloLector', news:'Novedades', videos:'Vídeos', podcast:'Podcast', book:'Mi libro', contact:'Contacto y redes', privacy:'Privacidad y accesibilidad', privacyPolicy:'Política de privacidad', fullPrivacy:'Leer la política de privacidad completa', config:'Configuración', back:'Volver al inicio' },
@@ -627,7 +635,7 @@
         screenHeading.setAttribute('tabindex', '-1');
         requestAnimationFrame(() => screenHeading.focus({ preventScroll: true }));
       } else requestAnimationFrame(() => target.focus({ preventScroll: true }));
-    } else if (key === 'home') requestAnimationFrame(() => {
+    } else if (key === 'home' || (onHome && returnFromSubpage)) requestAnimationFrame(() => {
       const origin = document.getElementById(lastHomeEntryId);
       if (origin && !origin.closest('[hidden]')) {
         origin.focus({ preventScroll: true });

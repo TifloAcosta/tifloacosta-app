@@ -59,26 +59,17 @@ test('current news uses resource incorporation dates instead of fixed ids', asyn
   vm.runInNewContext(supplementalSource, context);
   const resources = context.window.TIFLO_RESOURCES;
 
-  const expectedByLanguage = {
-    es: [
-      'es-rehabilitacion-autonomia-2026',
-      'es-1wfRfY4IumYSh7At5iaoizBZTSoQhKhdc',
-      'es-estudio-medico-calor-2026'
-    ],
-    en: [
-      'en-rehabilitation-independence-2026',
-      'en-1C317Eva0eE8ekQ9HqmXIvzY1-Zxty1nC',
-      'en-medical-study-heat-2026'
-    ]
-  };
-
   for (const lang of ['es', 'en']) {
-    const selected = resources
-      .filter(item => item.lang === lang && item.new)
-      .sort(core.compareNewsItems)
-      .slice(0, 3)
-      .map(item => item.id);
-
-    assert.deepEqual([...selected], expectedByLanguage[lang]);
+    const candidates = resources.filter(item => item.lang === lang && item.new);
+    const selected = [...candidates].sort(core.compareNewsItems).slice(0, 3);
+    assert.equal(selected.length, 3, `Debe haber tres novedades en ${lang}`);
+    assert.equal(new Set(selected.map(item => item.id)).size, 3, 'No debe haber novedades duplicadas');
+    const timestamp = item => Date.parse(String(item.newsDate || '')) || 0;
+    for (let i = 1; i < selected.length; i++) {
+      assert.ok(timestamp(selected[i - 1]) >= timestamp(selected[i]), 'Orden cronológico descendente');
+    }
+    const cutoff = timestamp(selected[2]);
+    assert.ok(candidates.every(item => timestamp(item) <= cutoff || selected.includes(item)),
+      'Ninguna novedad más reciente puede quedar fuera de los tres primeros puestos');
   }
 });

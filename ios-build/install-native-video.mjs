@@ -1,4 +1,4 @@
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile, copyFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 
@@ -6,6 +6,8 @@ const root = resolve(import.meta.dirname);
 const source = resolve(root, 'native/TifloYouTubeViewController.swift');
 const authSource = resolve(root, 'native/TifloYouTubeAuth.swift');
 const actionSource = resolve(root, 'native/TifloYouTubeAccountControls.swift');
+const iframeSource = resolve(root, 'native/tiflo-youtube-player.html');
+const iframeTarget = resolve(root, 'ios/App/App/public/tiflo-youtube-player.html');
 const infoPath = resolve(root, 'ios/App/App/Info.plist');
 const appDelegatePath = resolve(root, 'ios/App/App/AppDelegate.swift');
 const storyboardPath = resolve(root, 'ios/App/App/Base.lproj/Main.storyboard');
@@ -43,6 +45,7 @@ const delegateWithAudio = delegateWithAuth.includes('import AVFAudio')
   : delegateWithAuth.replace('import UIKit', 'import UIKit\nimport AVFAudio');
 const actionsBody = actions.replace(/^import UIKit\n/, '');
 await writeFile(appDelegatePath, delegateWithAudio.trimEnd() + '\n\n' + swiftBody + '\n\n' + authBody + '\n\n' + actionsBody);
+await copyFile(iframeSource, iframeTarget);
 
 // The Capacitor starter storyboard creates the default bridge by class name.
 // Point that existing scene at the subclass that registers our native plugin.

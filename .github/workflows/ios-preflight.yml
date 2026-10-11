@@ -137,10 +137,11 @@ jobs:
           grep -Fq 'webView.loadHTMLString(html, baseURL: baseURL)' ios/App/App/AppDelegate.swift
           grep -Fq 'https://www.youtube.com/iframe_api' ios/App/App/public/tiflo-youtube-player.html
           grep -Fq 'player.seekTo(' ios/App/App/public/tiflo-youtube-player.html
-          # The VoiceOver audio compatibility trial must mix, not interrupt,
-          # other sound and restore the previous session upon dismissal.
-          grep -Fq 'setCategory(.playback, options: [.mixWithOthers])' ios/App/App/AppDelegate.swift
-          grep -Fq 'setCategory(category, options: options)' ios/App/App/AppDelegate.swift
+          # VoiceOver trial: ambient audio mixes without stealing speech priority,
+          # restores mode/category/options and keeps the iframe out of VO focus.
+          grep -Fq 'setCategory(.ambient, mode: .default)' ios/App/App/AppDelegate.swift
+          grep -Fq 'setCategory(category, mode: mode, options: options)' ios/App/App/AppDelegate.swift
+          grep -Fq 'webView.accessibilityElementsHidden = true' ios/App/App/AppDelegate.swift
           grep -Fq 'audioMix.restore()' ios/App/App/AppDelegate.swift
           grep -q 'name: "info"' ios/App/App/AppDelegate.swift
           xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build

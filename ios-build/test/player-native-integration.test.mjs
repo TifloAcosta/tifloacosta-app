@@ -23,7 +23,10 @@ test('las acciones nativas no sustituyen el motor de YouTube ni alteran la sesiÃ
   assert.match(player, /https:\/\/www\.youtube\.com\/embed\//);
   assert.match(player, /request\.setValue\(referer, forHTTPHeaderField: "Referer"\)/);
   assert.match(player, /https:\/\/www\.youtube\.com\/watch\?v=/);
-  assert.doesNotMatch(player, /setCategory\(/);
+  assert.match(player, /setCategory\(\.playback, options: \[\.mixWithOthers\]\)/);
+  assert.match(player, /setCategory\(category, options: options\)/);
+  assert.match(player, /override func viewWillDisappear/);
+  assert.match(player, /audioMix\.restore\(\)/);
 });
 
 test('VÃ­deos y Actualidad transmiten metadatos al componente iOS', () => {

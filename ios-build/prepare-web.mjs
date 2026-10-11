@@ -175,24 +175,33 @@ iosApp = iosApp.replace(iosCategoryRender,
     });`);
 await writeFile(iosAppPath, iosApp);
 
-// In Actualidad the video uses a plain iframe, not the YT.Player controller.
-// Keep an accessible, direct playback alternative in the same expanded panel.
+// iOS WKWebView uses a local/custom origin: YouTube can reject embeds that
+// cannot provide an HTTP Referer (player error 153). Never show a Play button
+// leading to a known unreliable iframe. Keep Web and Android unchanged.
 const iosMediaPath = join(output, 'actualidad-media.js');
 let iosMedia = await readFile(iosMediaPath, 'utf8');
-const mediaRender = '            container.replaceChildren(notice, frame);';
-if (!iosMedia.includes(mediaRender)) throw new Error('No se encuentra reproductor de Actualidad con aviso accesible');
-iosMedia = iosMedia.replace(mediaRender, `            container.replaceChildren(notice, frame);
-            if (item.originalUrl) {
-              const alternative = document.createElement('a');
-              alternative.className = 'button-link';
-              alternative.href = item.originalUrl;
-              alternative.target = '_blank';
-              alternative.rel = 'noopener noreferrer';
-              alternative.textContent = currentLanguage() === 'en'
-                ? 'Open this video at the original source'
-                : 'Abrir este vídeo en su fuente original';
-              container.append(alternative);
-            }`);
+const coreDeclaration = '    const core = window.TIFLO_ACTUALIDAD_CORE;';
+if (!iosMedia.includes(coreDeclaration)) throw new Error('No se encuentra la declaración del navegador de Actualidad');
+iosMedia = iosMedia.replace(coreDeclaration,
+  coreDeclaration + '\n    const iosExternalVideo = true;');
+const videoCard = "if (item.type === 'video' && item.embedUrl) {";
+if (!iosMedia.includes(videoCard)) throw new Error('No se encuentra botón de reproducción de vídeos en Actualidad');
+iosMedia = iosMedia.replace(videoCard,
+  "if (item.type === 'video' && item.embedUrl && !iosExternalVideo) {");
+const originalLabel = "mediaOriginal.textContent = item.type === 'audio' && !item.mediaUrl";
+if (!iosMedia.includes(originalLabel)) throw new Error('No se encuentra etiqueta de enlace de fuente original');
+iosMedia = iosMedia.replace(originalLabel,
+  "mediaOriginal.textContent = item.type === 'video' && iosExternalVideo\n" +
+  "          ? (currentLanguage() === 'es' ? 'Reproducir vídeo en YouTube' : 'Play video on YouTube')\n" +
+  "          : item.type === 'audio' && !item.mediaUrl");
+// The isolation controller already moves VoiceOver focus after hashchange;
+// its job must not be duplicated by the media script's link click listener.
+const focusStart = iosMedia.indexOf('    // Move VoiceOver focus only after an explicit section navigation action.');
+const focusEnd = iosMedia.indexOf("    window.addEventListener('hashchange', ensureMediaForRoute);",focusStart);
+if (focusStart < 0 || focusEnd < focusStart) throw new Error('No se encuentra controlador de foco redundante');
+iosMedia = iosMedia.slice(0,focusStart) +
+  '    // VoiceOver focus belongs exclusively to actualidad-core.js navigation.\n' +
+  iosMedia.slice(focusEnd);
 await writeFile(iosMediaPath, iosMedia);
 
 // Fail before signing or uploading if an injected iOS-only script is invalid.

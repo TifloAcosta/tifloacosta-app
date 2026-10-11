@@ -52,3 +52,22 @@ test('acciones de cuenta accesibles sin segundo desplazamiento y con retorno del
   assert.match(ui, /UIAccessibility\.post\(notification: \.layoutChanged, argument: commentButton\)/);
   assert.match(ui, /UIAccessibility\.post\(notification: \.layoutChanged, argument: signInButton\)/);
 });
+
+test('la app exige servidor YouTube compatible antes de presentar Google', () => {
+  assert.match(account, /send\(path: "\/native\/capabilities", method: "GET"/);
+  assert.match(account, /data\["nativeAuth"\] as\? Bool/);
+  assert.match(account, /data\["protocol"\] as\? Int/);
+  assert.match(account, /guard ready && protocolVersion == 1/);
+  assert.match(account, /self\.beginSignIn\(from: presenter, completion: completion\)/);
+});
+
+test('VoiceOver explica errores concretos de la cuenta sin exponer el servidor', () => {
+  for (const code of [
+    'SESSION_EXPIRED', 'COMMENTS_DISABLED', 'INELIGIBLE_ACCOUNT',
+    'INSUFFICIENT_PERMISSIONS', 'QUOTA_EXCEEDED', 'RATE_LIMITED',
+    'VIDEO_NOT_FOUND', 'YOUTUBE_FORBIDDEN', 'COMMENT_TOO_LONG'
+  ]) {
+    assert.ok(account.includes('"' + code + '"'), code);
+  }
+  assert.match(ui, /spokenError\(error, spanish: self\.spanish\)/);
+});

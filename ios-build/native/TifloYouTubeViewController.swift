@@ -168,10 +168,9 @@ private final class TifloVoiceOverAudioMix {
             previousMode = session.mode
         }
         do {
-            // An ambient session mixes by default instead of claiming audio
-            // priority over VoiceOver speech while YouTube is playing.
-            // Only use this mode for the VoiceOver compatibility option.
-            try session.setCategory(.ambient, mode: .default)
+            // WebKit may claim a nonmixing playback session after opening.
+            // Mix video audio with spoken accessibility audio without interrupting it.
+            try session.setCategory(.playback, mode: .moviePlayback, options: [.mixWithOthers])
             return true
         } catch {
             restore()
@@ -217,6 +216,7 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
     private var positionSeconds: Double = 0
     private var playerError = false
     private var needsInitialVoiceOverFocus = true
+    private var pendingMixRefresh: DispatchWorkItem?
     private var shouldMixAudio: Bool {
         Self.audioMixPreference ?? UIAccessibility.isVoiceOverRunning
     }
@@ -253,6 +253,8 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
     }
 
     override func viewWillDisappear(_ animated: Bool) {
+        pendingMixRefresh?.cancel()
+        pendingMixRefresh = nil
         audioMix.restore()
         super.viewWillDisappear(animated)
     }
@@ -491,9 +493,31 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
         }
     }
 
+    // YouTube can replace the app audio category after viewWillAppear.
+    // Reapply the mixing policy at the actual PLAYING transition, not at
+    // every 1-second progress update.
+    private func refreshAudioMixAfterPlaybackBegins() {
+        pendingMixRefresh?.cancel()
+        guard shouldMixAudio else { return }
+        let refresh = DispatchWorkItem { [weak self] in
+            guard let self = self,
+                  self.isViewLoaded, self.view.window != nil,
+                  self.shouldMixAudio, self.playerState == 1 else { return }
+            if !self.audioMix.activate() {
+                self.statusLabel.text = self.spanish
+                    ? "No se pudo mantener la mezcla de audio con VoiceOver."
+                    : "Could not maintain VoiceOver audio mixing."
+            }
+        }
+        pendingMixRefresh = refresh
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(450), execute: refresh)
+    }
+
     private func updatePlaybackState(_ state: Int) {
         guard !playerError else { return }
+        let playbackJustStarted = state == 1 && playerState != 1
         playerState = state
+        if playbackJustStarted { refreshAudioMixAfterPlaybackBegins() }
         // YouTube state 1 = playing; 2 = paused; 0 = ended; 3 = buffering.
         let playing = state == 1 || state == 3
         playbackButton.setTitle(
@@ -572,8 +596,12 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
                 statusLabel.text = spanish
                     ? "No se pudo activar la mezcla de audio."
                     : "Could not enable audio mixing."
+            } else if playerState == 1 {
+                refreshAudioMixAfterPlaybackBegins()
             }
         } else {
+            pendingMixRefresh?.cancel()
+            pendingMixRefresh = nil
             audioMix.restore()
         }
         audioCompatibilityButton.setTitle(audioCompatibilityTitle(), for: .normal)

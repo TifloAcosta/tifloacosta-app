@@ -12,6 +12,7 @@ final class TifloNativeYouTubeAccount: NSObject, ASWebAuthenticationPresentation
     private let keychainService = "com.tifloacosta.app.youtube.ios"
     private let account = "youtube-session"
     private var webSession: ASWebAuthenticationSession?
+    private var checkingService = false
     private weak var presentingWindow: UIWindow?
 
     private func accountError(_ message: String, code: Int = -1) -> NSError {
@@ -70,10 +71,37 @@ final class TifloNativeYouTubeAccount: NSObject, ASWebAuthenticationPresentation
     }
 
     func signIn(from presenter: UIViewController, completion: @escaping (Result<Void, Error>) -> Void) {
-        guard webSession == nil else {
+        guard webSession == nil && !checkingService else {
             completion(.failure(accountError("Ya hay un inicio de sesión en curso.")))
             return
         }
+        checkingService = true
+        // An iPhone update must not ask the user to authorize Google until
+        // the independently deployed Worker can actually accept that login.
+        send(path: "/native/capabilities", method: "GET", body: nil, requiresSession: false) {
+            [weak self, weak presenter] result in
+            guard let self = self else { return }
+            self.checkingService = false
+            guard let presenter = presenter else {
+                completion(.failure(self.accountError("Se ha cerrado el reproductor.")))
+                return
+            }
+            switch result {
+            case .failure:
+                completion(.failure(self.accountError("El acceso a YouTube aún no está disponible. Inténtalo más tarde.")))
+            case .success(let data):
+                let ready = (data["nativeAuth"] as? Bool) == true
+                let protocolVersion = (data["protocol"] as? Int) ?? -1
+                guard ready && protocolVersion == 1 else {
+                    completion(.failure(self.accountError("El servicio de conexión con YouTube todavía no está preparado.")))
+                    return
+                }
+                self.beginSignIn(from: presenter, completion: completion)
+            }
+        }
+    }
+
+    private func beginSignIn(from presenter: UIViewController, completion: @escaping (Result<Void, Error>) -> Void) {
         var bytes = [UInt8](repeating: 0, count: 32)
         guard SecRandomCopyBytes(kSecRandomDefault, bytes.count, &bytes) == errSecSuccess else {
             completion(.failure(accountError("No se pudo iniciar la autenticación segura.")))
@@ -133,6 +161,49 @@ final class TifloNativeYouTubeAccount: NSObject, ASWebAuthenticationPresentation
             webSession = nil
             presentingWindow = nil
             completion(.failure(accountError("No se pudo abrir el inicio de sesión de Google.")))
+        }
+    }
+
+    func spokenError(_ error: Error, spanish: Bool) -> String {
+        let ns = error as NSError
+        let code = ns.localizedDescription
+        switch code {
+        case "SESSION_EXPIRED":
+            return spanish ? "La sesión de YouTube ha caducado. Conecta la cuenta de nuevo."
+                           : "Your YouTube session expired. Connect again."
+        case "COMMENTS_DISABLED":
+            return spanish ? "El canal tiene desactivados los comentarios en este vídeo."
+                           : "Comments are disabled for this video."
+        case "INELIGIBLE_ACCOUNT":
+            return spanish ? "Esta cuenta no permite publicar comentarios en YouTube."
+                           : "This account cannot publish YouTube comments."
+        case "INSUFFICIENT_PERMISSIONS":
+            return spanish ? "Google no ha autorizado esta acción. Revisa los permisos de la cuenta."
+                           : "Google has not authorized this action. Check account permissions."
+        case "QUOTA_EXCEEDED", "RATE_LIMITED":
+            return spanish ? "YouTube ha limitado temporalmente las solicitudes. Prueba más tarde."
+                           : "YouTube has temporarily limited requests. Try again later."
+        case "VIDEO_NOT_FOUND":
+            return spanish ? "El vídeo ya no está disponible."
+                           : "This video is no longer available."
+        case "YOUTUBE_FORBIDDEN", "CHANNEL_NOT_FOUND":
+            return spanish ? "YouTube no permite esta operación para el canal o el vídeo."
+                           : "YouTube does not allow this action on the channel or video."
+        case "COMMENT_TOO_LONG", "INVALID_COMMENT":
+            return spanish ? "El comentario no es válido o es demasiado largo."
+                           : "The comment is invalid or too long."
+        case "YOUTUBE_ERROR", "PROCESSING_FAILURE", "SEARCH_UNAVAILABLE":
+            return spanish ? "YouTube no ha podido completar la operación."
+                           : "YouTube could not complete this operation."
+        default:
+            if ns.code == 401 {
+                return spanish ? "La sesión de YouTube ha caducado. Vuelve a conectar la cuenta."
+                               : "Your YouTube session expired. Connect again."
+            }
+            // Native-local errors have deliberately authored non-sensitive copy.
+            if ns.domain == "TifloYouTube" && !code.isEmpty { return code }
+            return spanish ? "No se pudo completar la operación. Comprueba la conexión."
+                           : "The action could not be completed. Check your connection."
         }
     }
 

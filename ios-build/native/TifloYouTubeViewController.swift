@@ -201,6 +201,7 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
     private let statusLabel = UILabel()
     private var webView: WKWebView!
     private var pausedFromNative = false
+    private var needsInitialVoiceOverFocus = true
     private var shouldMixAudio: Bool {
         Self.audioMixPreference ?? UIAccessibility.isVoiceOverRunning
     }
@@ -225,6 +226,14 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
             statusLabel.text = spanish
                 ? "No se ha podido activar la compatibilidad de audio."
                 : "Audio compatibility could not be enabled."
+        }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if needsInitialVoiceOverFocus {
+            needsInitialVoiceOverFocus = false
+            UIAccessibility.post(notification: .screenChanged, argument: closeButton)
         }
     }
 
@@ -384,7 +393,6 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
         var request = URLRequest(url: url)
         request.setValue(referer, forHTTPHeaderField: "Referer")
         webView.load(request)
-        UIAccessibility.post(notification: .screenChanged, argument: closeButton)
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {

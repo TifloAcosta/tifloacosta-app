@@ -278,6 +278,14 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
         let accountControls = TifloYouTubeAccountControls(
             videoId: videoId, spanish: spanish, presenter: self
         )
+        // Every native control remains reachable when large type expands the
+        // interface or the comments editor opens the keyboard.
+        let scroll = UIScrollView()
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        scroll.alwaysBounceVertical = true
+        scroll.keyboardDismissMode = .interactive
+        scroll.accessibilityIdentifier = "tiflo-video-screen-scroll"
+
         let stack = UIStackView(arrangedSubviews: [
             header, titleLabel, controls, statusLabel, detailsPanel, accountControls, webView
         ])
@@ -286,17 +294,24 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
         stack.distribution = .fill
         stack.spacing = 12
         stack.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(stack)
+        scroll.addSubview(stack)
+        view.addSubview(scroll)
 
         let safe = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            stack.leadingAnchor.constraint(equalTo: safe.leadingAnchor, constant: 16),
-            stack.trailingAnchor.constraint(equalTo: safe.trailingAnchor, constant: -16),
-            stack.topAnchor.constraint(equalTo: safe.topAnchor, constant: 12),
-            stack.bottomAnchor.constraint(equalTo: safe.bottomAnchor, constant: -12),
+            scroll.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
+            scroll.trailingAnchor.constraint(equalTo: safe.trailingAnchor),
+            scroll.topAnchor.constraint(equalTo: safe.topAnchor),
+            scroll.bottomAnchor.constraint(equalTo: safe.bottomAnchor),
+            stack.leadingAnchor.constraint(equalTo: scroll.contentLayoutGuide.leadingAnchor, constant: 16),
+            stack.trailingAnchor.constraint(equalTo: scroll.contentLayoutGuide.trailingAnchor, constant: -16),
+            stack.topAnchor.constraint(equalTo: scroll.contentLayoutGuide.topAnchor, constant: 12),
+            stack.bottomAnchor.constraint(equalTo: scroll.contentLayoutGuide.bottomAnchor, constant: -12),
+            stack.widthAnchor.constraint(equalTo: scroll.frameLayoutGuide.widthAnchor, constant: -32),
             header.heightAnchor.constraint(greaterThanOrEqualToConstant: 50),
             controls.heightAnchor.constraint(greaterThanOrEqualToConstant: 48),
-            webView.heightAnchor.constraint(greaterThanOrEqualToConstant: 140)
+            // YouTube requires its iframe viewport to be at least 200x200.
+            webView.heightAnchor.constraint(greaterThanOrEqualToConstant: 225)
         ])
 
         let appId = Bundle.main.bundleIdentifier ?? "com.tifloacosta.app"

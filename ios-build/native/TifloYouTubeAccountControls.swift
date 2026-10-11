@@ -167,12 +167,11 @@ final class TifloYouTubeAccountControls: UIView {
                 // button; move VoiceOver to a stable status instead.
                 UIAccessibility.post(notification: .layoutChanged, argument: self.accountStatus)
             case .failure(let error):
+                self.announce(TifloNativeYouTubeAccount.shared.spokenError(error, spanish: self.spanish))
                 if (error as NSError).code == 401 {
-                    self.announce(self.spanish ? "La sesión ha caducado. Identifícate otra vez." : "Your session expired. Sign in again.")
                     TifloNativeYouTubeAccount.shared.signOut()
                     self.updateAccess()
-                } else {
-                    self.announce(self.spanish ? "No se pudo consultar YouTube. Inténtalo de nuevo." : "Could not reach YouTube. Try again.")
+                    UIAccessibility.post(notification: .layoutChanged, argument: self.signInButton)
                 }
             }
         }
@@ -197,8 +196,8 @@ final class TifloYouTubeAccountControls: UIView {
             case .success:
                 self.announce(self.spanish ? "Cuenta conectada correctamente." : "Account connected successfully.")
                 self.refresh()
-            case .failure:
-                self.announce(self.spanish ? "No se completó la conexión con Google." : "Google sign-in was not completed.")
+            case .failure(let error):
+                self.announce(TifloNativeYouTubeAccount.shared.spokenError(error, spanish: self.spanish))
             }
         }
     }
@@ -221,8 +220,13 @@ final class TifloYouTubeAccountControls: UIView {
                     self.closeEditor()
                 }
                 self.refresh()
-            case .failure:
-                self.announce(self.spanish ? "YouTube no pudo completar la acción." : "YouTube could not complete the action.")
+            case .failure(let error):
+                self.announce(TifloNativeYouTubeAccount.shared.spokenError(error, spanish: self.spanish))
+                if (error as NSError).code == 401 {
+                    TifloNativeYouTubeAccount.shared.signOut()
+                    self.updateAccess()
+                    UIAccessibility.post(notification: .layoutChanged, argument: self.signInButton)
+                }
             }
         }
     }

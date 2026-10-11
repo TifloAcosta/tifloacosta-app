@@ -70,6 +70,19 @@ Para iOS aún hay que:
 - **La prueba no constituye una garantía de que el vídeo permita hablar a VoiceOver en el dispositivo.** Si iOS/YouTube sigue silenciando la voz, no publicar como solucionado: comprobar en iPhone y ofrecer una ruta alternativa accesible.
 - Las pruebas de Swift, código empaquetado y autorización siguen corriendo en preflight sin distribuir a TestFlight.
 
+## Sigue 4 — controles reales YouTube IFrame API
+
+- Se sustituyó la antigua pausa de toda la WKWebView por control del reproductor IFrame mediante la biblioteca pública `https://www.youtube.com/iframe_api`.
+- El HTML empaquetado `native/tiflo-youtube-player.html` instancia `YT.Player` con `enablejsapi=1`, `playsinline=1` y sin reproducción automática.
+- Se carga mediante `WKWebView.loadHTMLString(_:baseURL:)` con una base HTTPS identificada por el bundle ID. Esto sigue el mecanismo de Referer publicado por YouTube para WebViews con HTML local; no garantiza por sí solo que no ocurra el error 153 en todos los dispositivos.
+- Botones nativos `Reproducir/Pausar`, `Retroceder 30 segundos`, `Avanzar 30 segundos`. Barra de posición nativa `UISlider` ajustable con VoiceOver.
+- El texto de posición y duración procede de `getCurrentTime()` y `getDuration()`; no se anuncia cada segundo ni se inventan duraciones.
+- La lógica rechaza saltos inválidos, limita los saltos a la duración real, y deja inactivas las funciones de posición hasta conocer una duración válida.
+- Mensajes del IFrame al código Swift pasan por `WKScriptMessageHandler` y solo se aceptan cuando proceden del marco principal del HTML empaquetado.
+- Los errores de YouTube, en particular el 153, desactivan controles que no funcionan y mantienen `Abrir en YouTube` como alternativa. Los bloqueos de reproducción automática remiten al botón dentro del reproductor de YouTube.
+- Las pruebas incluyen ejecución real, simulada sin red, del controlador JavaScript para reproducir, pausar, buscar, verificar progreso y avisar errores 153.
+- Pendiente: prueba física con VoiceOver en iPhone, comprobar reproducción dentro de la app, que los controles vuelven a recibir voz durante el vídeo, y respuesta al doble toque con dos dedos. No equivale a una validación real de accesibilidad ni a un permiso para publicar.
+
 ## Verificación y distribución
 
 La rama solo se integrará en `preparacion-ios` después de que pase el preflight de Xcode y se hayan resuelto los problemas detectados. Una vez integrado, el workflow de TestFlight podrá generar la siguiente compilación. No confundir compilación correcta con accesibilidad comprobada: esta última requiere prueba en iPhone.

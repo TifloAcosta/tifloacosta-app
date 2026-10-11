@@ -117,7 +117,12 @@ function createActualidadHarness(hash) {
   };
   const window = {
     location,
-    addEventListener(name, handler) { handlers[name] = handler; }
+    addEventListener(name, handler) {
+      const previous = handlers[name];
+      handlers[name] = previous
+        ? (...args) => { previous(...args); handler(...args); }
+        : handler;
+    }
   };
   runInNewContext(script, {
     window, document, requestAnimationFrame: callback => callback(),

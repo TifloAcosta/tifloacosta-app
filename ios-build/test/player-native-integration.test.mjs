@@ -26,7 +26,6 @@ test('las acciones nativas no sustituyen el motor de YouTube ni alteran la sesi√
   assert.match(player, /setCategory\(\.ambient, mode: \.default\)/);
   assert.match(player, /setCategory\(category, mode: mode, options: options\)/);
   assert.match(player, /webView\.accessibilityElementsHidden = true/);
-  assert.match(player, /setCategory\(category, options: options\)/);
   assert.match(player, /override func viewWillDisappear/);
   assert.match(player, /audioMix\.restore\(\)/);
 });

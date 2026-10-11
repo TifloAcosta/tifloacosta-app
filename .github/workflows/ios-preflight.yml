@@ -32,6 +32,8 @@ jobs:
         run: node --check ios-build/prepare-web.mjs
       - name: Comprobar pruebas automáticas de multimedia y RSS
         run: node --test test/actualidad-media-*.test.mjs test/actualidad-feed.test.mjs
+      - name: Comprobar OAuth y acciones de YouTube sin cuentas reales
+        run: node --test youtube-worker/test/*.test.mjs
       - name: Comprobar contrato de controles nativos TifloReproductor
         run: node --test ios-build/test/*.test.mjs
       - name: Preparar contenido y validar scripts iOS

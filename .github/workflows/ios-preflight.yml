@@ -143,3 +143,7 @@ jobs:
           grep -Fq 'audioMix.restore()' ios/App/App/AppDelegate.swift
           grep -q 'name: "info"' ios/App/App/AppDelegate.swift
           xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build
+          # The HTML wrapper must be in the built .app, not just in the source tree.
+          WRAPPER=$(find "$HOME/Library/Developer/Xcode/DerivedData" -type f -path '*/Build/Products/Release-iphoneos/App.app/public/tiflo-youtube-player.html' -print -quit)
+          test -n "$WRAPPER" || { echo "::error::Falta reproductor HTML en el paquete App.app/public"; exit 1; }
+          grep -Fq 'window.tifloControl' "$WRAPPER"

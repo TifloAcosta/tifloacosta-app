@@ -1,6 +1,7 @@
 import UIKit
 import WebKit
 import Capacitor
+import AVFAudio
 
 // This file replaces the generated Capacitor ViewController.swift only in the
 // iOS build. No changes to the public website or Android implementation.
@@ -152,6 +153,35 @@ public final class TifloYouTubePlugin: CAPPlugin, CAPBridgedPlugin {
     }
 }
 
+/// Trial audio setting for VoiceOver speech coexistence. Verified only after
+/// the user tests YouTube playback on an iPhone, never assumed from CI.
+private final class TifloVoiceOverAudioMix {
+    private var previousCategory: AVAudioSession.Category?
+    private var previousOptions: AVAudioSession.CategoryOptions = []
+
+    func activate() -> Bool {
+        let session = AVAudioSession.sharedInstance()
+        if previousCategory == nil {
+            previousCategory = session.category
+            previousOptions = session.categoryOptions
+        }
+        do {
+            try session.setCategory(.playback, options: [.mixWithOthers])
+            return true
+        } catch {
+            restore()
+            return false
+        }
+    }
+
+    func restore() {
+        guard let category = previousCategory else { return }
+        let options = previousOptions
+        previousCategory = nil
+        try? AVAudioSession.sharedInstance().setCategory(category, options: options)
+    }
+}
+
 /// Uses Google's documented WKWebView loadRequest with an app-ID Referer.
 /// It does not pretend to originate from youtube.com and does not proxy media.
 private final class TifloYouTubeViewController: UIViewController, WKNavigationDelegate {
@@ -164,10 +194,16 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
     private let closeButton = UIButton(type: .system)
     private let playbackButton = UIButton(type: .system)
     private let detailsButton = UIButton(type: .system)
+    private let audioCompatibilityButton = UIButton(type: .system)
+    private let audioMix = TifloVoiceOverAudioMix()
+    private static var audioMixPreference: Bool?
     private let detailsPanel = UITextView()
     private let statusLabel = UILabel()
     private var webView: WKWebView!
     private var pausedFromNative = false
+    private var shouldMixAudio: Bool {
+        Self.audioMixPreference ?? UIAccessibility.isVoiceOverRunning
+    }
     var onClose: (() -> Void)?
 
     init(videoId: String, title: String, description: String, channel: String, publishedAt: String) {
@@ -183,12 +219,26 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
         return nil
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if shouldMixAudio && !audioMix.activate() {
+            statusLabel.text = spanish
+                ? "No se ha podido activar la compatibilidad de audio."
+                : "Audio compatibility could not be enabled."
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        audioMix.restore()
+        super.viewWillDisappear(animated)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
 
-        // Do not take over AVAudioSession. VoiceOver speech must be checked
-        // on the device before changing audio-session policy.
+        // Audio compatibility is a reversible experiment, not a confirmed
+        // VoiceOver fix until playback is verified on the device.
         let header = UIStackView()
         header.axis = .horizontal
         header.alignment = .center
@@ -227,6 +277,15 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
         detailsButton.accessibilityTraits.insert(.button)
         detailsButton.accessibilityValue = spanish ? "Contraído" : "Collapsed"
         detailsButton.addTarget(self, action: #selector(toggleDetails), for: .touchUpInside)
+
+        audioCompatibilityButton.setTitle(audioCompatibilityTitle(), for: .normal)
+        audioCompatibilityButton.titleLabel?.numberOfLines = 0
+        audioCompatibilityButton.contentHorizontalAlignment = .leading
+        audioCompatibilityButton.accessibilityHint = spanish
+            ? "Prueba la mezcla de audio con VoiceOver. Se restaura al salir."
+            : "Try audio mixing with VoiceOver. Restores the prior setting on exit."
+        audioCompatibilityButton.addTarget(self, action: #selector(toggleAudioCompatibility), for: .touchUpInside)
+        audioCompatibilityButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
 
         let controls = UIStackView(arrangedSubviews: [playbackButton, detailsButton])
         controls.axis = .horizontal
@@ -287,7 +346,7 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
         scroll.accessibilityIdentifier = "tiflo-video-screen-scroll"
 
         let stack = UIStackView(arrangedSubviews: [
-            header, titleLabel, controls, statusLabel, detailsPanel, accountControls, webView
+            header, titleLabel, audioCompatibilityButton, controls, statusLabel, detailsPanel, accountControls, webView
         ])
         stack.axis = .vertical
         stack.alignment = .fill
@@ -333,6 +392,32 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
         statusLabel.text = spanish
             ? "Vídeo preparado. Puedes utilizar sus controles y volver a esta fila para pausarlo."
             : "Video ready. Use the player controls, then return here to pause."
+    }
+
+    private func audioCompatibilityTitle() -> String {
+        if spanish {
+            return shouldMixAudio ? "Audio compatible con VoiceOver: activado"
+                                  : "Audio compatible con VoiceOver: desactivado"
+        }
+        return shouldMixAudio ? "VoiceOver audio mixing: on"
+                              : "VoiceOver audio mixing: off"
+    }
+
+    @objc private func toggleAudioCompatibility() {
+        let desired = !shouldMixAudio
+        Self.audioMixPreference = desired
+        if desired {
+            if !audioMix.activate() {
+                Self.audioMixPreference = false
+                statusLabel.text = spanish
+                    ? "No se pudo activar la mezcla de audio."
+                    : "Could not enable audio mixing."
+            }
+        } else {
+            audioMix.restore()
+        }
+        audioCompatibilityButton.setTitle(audioCompatibilityTitle(), for: .normal)
+        UIAccessibility.post(notification: .announcement, argument: audioCompatibilityTitle())
     }
 
     @objc private func togglePlayback() {

@@ -99,46 +99,106 @@
 
     function addPlayer(card, item, button) {
       if (item.type === 'audio' && item.mediaUrl) {
-        const c = copy[currentLanguage()];
+        const lang = currentLanguage();
         const player = document.createElement('section');
-        player.setAttribute('aria-label', `${c.play}: ${localizedContent(item).title}`);
+        player.className = 'panel podcast-player';
+        player.setAttribute('aria-label', (lang === 'es' ? 'Reproductor de Podcast: ' : 'Podcast player: ') + localizedContent(item).title);
         const audio = document.createElement('audio');
-        audio.controls = true;
-        audio.preload = 'none';
+        audio.preload = 'metadata';
         audio.src = item.mediaUrl;
         audio.setAttribute('aria-label', localizedContent(item).title);
         const controls = document.createElement('div');
         controls.className = 'resource-actions';
+        controls.setAttribute('role', 'group');
+        controls.setAttribute('aria-label', lang === 'es' ? 'Controles accesibles del Podcast' : 'Accessible podcast controls');
         const rewind = document.createElement('button');
         rewind.type = 'button';
-        rewind.textContent = currentLanguage() === 'es' ? 'Retroceder 30 segundos' : 'Rewind 30 seconds';
-        rewind.addEventListener('click', () => {
-          if (Number.isFinite(audio.currentTime)) audio.currentTime = Math.max(0, audio.currentTime - 30);
-        });
+        rewind.textContent = lang === 'es' ? 'Retroceder 30 segundos' : 'Rewind 30 seconds';
         const toggle = document.createElement('button');
         toggle.type = 'button';
-        const updateToggle = () => {
-          toggle.textContent = audio.paused ? (currentLanguage() === 'es' ? 'Reproducir' : 'Play') : (currentLanguage() === 'es' ? 'Pausar' : 'Pause');
-        };
-        toggle.addEventListener('click', () => {
-          if (audio.paused) audio.play().catch(() => { updateToggle(); });
-          else audio.pause();
-        });
-        audio.addEventListener('play', updateToggle);
-        audio.addEventListener('pause', updateToggle);
-        audio.addEventListener('ended', updateToggle);
         const forward = document.createElement('button');
         forward.type = 'button';
-        forward.textContent = currentLanguage() === 'es' ? 'Avanzar 30 segundos' : 'Forward 30 seconds';
-        forward.addEventListener('click', () => {
+        forward.textContent = lang === 'es' ? 'Avanzar 30 segundos' : 'Forward 30 seconds';
+        const progress = document.createElement('input');
+        progress.type = 'range';
+        progress.min = '0';
+        progress.max = '0';
+        progress.step = '1';
+        progress.value = '0';
+        progress.disabled = true;
+        progress.style.width = '100%';
+        progress.setAttribute('aria-label', lang === 'es' ? 'Posición del episodio' : 'Episode position');
+        progress.setAttribute('aria-valuetext', '0:00 / 0:00');
+        const time = document.createElement('p');
+        time.className = 'muted';
+        time.setAttribute('aria-live', 'polite');
+        const labelTime = seconds => {
+          const total = Math.max(0, Math.floor(Number(seconds) || 0));
+          const hours = Math.floor(total / 3600);
+          const minutes = Math.floor(total % 3600 / 60);
+          const rest = total % 60;
+          return hours
+            ? hours + ':' + String(minutes).padStart(2, '0') + ':' + String(rest).padStart(2, '0')
+            : minutes + ':' + String(rest).padStart(2, '0');
+        };
+        const updateTime = (announce = false) => {
+          const duration = Number.isFinite(audio.duration) ? audio.duration : 0;
+          const position = Number.isFinite(audio.currentTime) ? audio.currentTime : 0;
+          progress.disabled = duration <= 0;
+          progress.max = String(Math.floor(Math.max(duration, 0)));
+          progress.value = String(Math.floor(Math.max(position, 0)));
+          const value = labelTime(position) + ' / ' + labelTime(duration);
+          progress.setAttribute('aria-valuetext', value);
+          if (announce || !time.textContent) {
+            time.textContent = labelTime(position) + (lang === 'es' ? ' de ' : ' of ') + labelTime(duration);
+          }
+        };
+        const updateToggle = () => {
+          toggle.textContent = audio.paused
+            ? (lang === 'es' ? 'Reproducir' : 'Play')
+            : (lang === 'es' ? 'Pausar' : 'Pause');
+        };
+        const seek = delta => {
           if (!Number.isFinite(audio.currentTime)) return;
-          const end = Number.isFinite(audio.duration) ? audio.duration : audio.currentTime + 30;
-          audio.currentTime = Math.min(end, audio.currentTime + 30);
+          const upper = Number.isFinite(audio.duration) ? audio.duration : audio.currentTime + Math.max(delta, 0);
+          audio.currentTime = Math.max(0, Math.min(upper, audio.currentTime + delta));
+          updateTime(true);
+        };
+        rewind.addEventListener('click', () => seek(-30));
+        forward.addEventListener('click', () => seek(30));
+        toggle.addEventListener('click', () => {
+          if (!audio.paused) { audio.pause(); return; }
+          card.closest('#media-browser')?.querySelectorAll('audio').forEach(other => {
+            if (other !== audio) other.pause();
+          });
+          audio.play().catch(() => {
+            time.textContent = lang === 'es'
+              ? 'No se pudo reproducir aquí. Utiliza Abrir en la fuente.'
+              : 'Playback is unavailable here. Use Open at source.';
+            time.setAttribute('role', 'alert');
+            updateToggle();
+          });
+        });
+        progress.addEventListener('input', () => {
+          audio.currentTime = Math.max(0, Number(progress.value) || 0);
+          updateTime(true);
+        });
+        audio.addEventListener('loadedmetadata', () => updateTime(true));
+        audio.addEventListener('timeupdate', () => updateTime());
+        audio.addEventListener('play', () => { time.removeAttribute('role'); updateToggle(); });
+        audio.addEventListener('pause', updateToggle);
+        audio.addEventListener('ended', () => { updateToggle(); updateTime(true); });
+        audio.addEventListener('error', () => {
+          time.textContent = lang === 'es'
+            ? 'No se pudo cargar el audio. Puedes abrirlo en la fuente original.'
+            : 'Audio could not be loaded. You can open it at its original source.';
+          time.setAttribute('role', 'alert');
         });
         controls.append(rewind, toggle, forward);
-        player.append(audio, controls);
+        player.append(audio, controls, progress, time);
         card.append(player);
         updateToggle();
+        updateTime();
         return;
       }
 
@@ -219,7 +279,9 @@
         mediaOriginal.href = item.originalUrl;
         mediaOriginal.target = '_blank';
         mediaOriginal.rel = 'noopener noreferrer';
-        mediaOriginal.textContent = c.open;
+        mediaOriginal.textContent = item.type === 'audio' && !item.mediaUrl
+          ? (currentLanguage() === 'es' ? 'Escuchar en la fuente original' : 'Listen at original source')
+          : c.open;
         actions.append(mediaOriginal);
         card.append(actions);
 

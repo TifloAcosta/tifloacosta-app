@@ -45,6 +45,9 @@ jobs:
           const index = readFileSync(root + 'index.html', 'utf8');
           const media = readFileSync(root + 'actualidad-media.js', 'utf8');
           const navigation = readFileSync(root + 'actualidad-core.js', 'utf8');
+          const mediaFallback = readFileSync(root + 'ios-actualidad-media-fallback.js', 'utf8');
+          const mediaCatalog = JSON.parse(readFileSync(root + 'actualidad-media.json', 'utf8'));
+          const actualidadHtml = readFileSync(root + 'actualidad.html', 'utf8');
           const videosHtml = readFileSync(root + 'videos.html', 'utf8');
           const capacitor = JSON.parse(readFileSync('ios-build/capacitor.config.json', 'utf8'));
           assert.match(videos, /function handleIosPlayerError/);
@@ -55,6 +58,11 @@ jobs:
           assert.match(media, /const iosExternalVideo = true;/);
           assert.match(media, /item\.type === 'video' && item\.embedUrl && !iosExternalVideo/);
           assert.match(media, /Reproducir vídeo en YouTube/);
+          assert.match(media, /window\.TIFLO_IOS_ACTUALIDAD_MEDIA/);
+          assert.match(actualidadHtml, /ios-actualidad-media-fallback\.js/);
+          assert.ok(mediaFallback.startsWith('window.TIFLO_IOS_ACTUALIDAD_MEDIA = ['));
+          assert.equal((mediaCatalog.filter(item => item.type === 'audio' && item.mediaUrl)).length, (mediaCatalog.filter(item => item.type === 'audio')).length);
+          assert.ok(mediaCatalog.some(item => item.type === 'audio' && item.mediaUrl), 'El catálogo iOS debe conservar enlaces de audio directos');
           assert.doesNotMatch(media, /link\.addEventListener\('click',/);
           assert.match(navigation, /El foco del inicio lo controla showHomeView/);
           assert.match(navigation, /focusTopBackControl/);

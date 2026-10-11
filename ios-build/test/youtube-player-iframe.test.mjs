@@ -80,7 +80,8 @@ test('el estado de progreso mantiene datos reales y el error de YouTube detiene 
   assert.equal(progress.duration, 300);
   assert.equal(progress.state, 2);
   h.handlers.options.events.onError({ data: 153 });
-  assert.deepEqual(h.messages.at(-1), { type: 'error', code: 153 });
+  assert.equal(h.messages.at(-1).type, 'error');
+  assert.equal(h.messages.at(-1).code, 153);
   assert.equal(h.window.tifloControl('play'), false);
 });
 

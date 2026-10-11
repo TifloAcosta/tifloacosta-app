@@ -275,8 +275,11 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
         statusLabel.numberOfLines = 0
         statusLabel.accessibilityTraits = .staticText
 
+        let accountControls = TifloYouTubeAccountControls(
+            videoId: videoId, spanish: spanish, presenter: self
+        )
         let stack = UIStackView(arrangedSubviews: [
-            header, titleLabel, controls, statusLabel, detailsPanel, webView
+            header, titleLabel, controls, statusLabel, detailsPanel, accountControls, webView
         ])
         stack.axis = .vertical
         stack.alignment = .fill

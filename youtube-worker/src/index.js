@@ -224,6 +224,16 @@ export async function handleRequest(request, env, deps = {}) {
   const url = new URL(request.url);
   const cors = corsHeaders(request, env);
 
+  // Feature-gate native login until the matching Worker is deployed.
+  // Public and read-only; no secrets, credentials or browser cookies.
+  if (url.pathname === '/native/capabilities' && request.method === 'GET') {
+    return json({
+      nativeAuth: Boolean(env.GOOGLE_CLIENT_ID && env.GOOGLE_CLIENT_SECRET && env.YOUTUBE_SESSION_SECRET),
+      youtubeActions: ['like', 'subscribe', 'comment'],
+      protocol: 1
+    }, 200, {});
+  }
+
   if (url.pathname === '/health' && request.method === 'GET') {
     return json({ ok: true, service: 'youtube-actions' }, 200, cors);
   }

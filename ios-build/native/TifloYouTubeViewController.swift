@@ -259,20 +259,22 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
 
     @objc private func togglePlayback() {
         guard webView != nil, playbackButton.isEnabled else { return }
-        if pausedFromNative {
-            webView.resumeAllMediaPlayback()
-            pausedFromNative = false
-            playbackButton.setTitle(spanish ? "Pausar vídeo" : "Pause video", for: .normal)
-            statusLabel.text = spanish ? "Reanudando vídeo." : "Resuming video."
-        } else {
-            webView.pauseAllMediaPlayback { [weak self] in
-                DispatchQueue.main.async {
-                    guard let self = self else { return }
-                    self.pausedFromNative = true
-                    self.playbackButton.setTitle(self.spanish ? "Reanudar vídeo" : "Resume video", for: .normal)
-                    self.statusLabel.text = self.spanish ? "Vídeo en pausa." : "Video paused."
-                }
-            }
+        // Paired suspension is available on iOS 15+; pauseAllMediaPlayback()
+        // has no corresponding public Swift resumeAllMediaPlayback() method.
+        let shouldSuspend = !pausedFromNative
+        playbackButton.isEnabled = false
+        webView.setAllMediaPlaybackSuspended(shouldSuspend) { [weak self] in
+            guard let self = self else { return }
+            self.pausedFromNative = shouldSuspend
+            self.playbackButton.isEnabled = true
+            self.playbackButton.setTitle(
+                shouldSuspend ? (self.spanish ? "Reanudar vídeo" : "Resume video")
+                              : (self.spanish ? "Pausar vídeo" : "Pause video"),
+                for: .normal
+            )
+            self.statusLabel.text = shouldSuspend
+                ? (self.spanish ? "Vídeo en pausa." : "Video paused.")
+                : (self.spanish ? "Reanudando vídeo." : "Resuming video.")
         }
     }
 

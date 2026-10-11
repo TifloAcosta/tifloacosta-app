@@ -102,5 +102,8 @@ jobs:
           npx cap add ios
           node install-native-video.mjs
           grep -q 'registerPluginInstance(TifloYouTubePlugin())' ios/App/App/AppDelegate.swift
+          ruby configure-ios-compliance.rb
+          (cd ios/App && pod install)
+          test "$(/usr/libexec/PlistBuddy -c 'Print :ITSAppUsesNonExemptEncryption' ios/App/App/Info.plist)" = false
           grep -q 'forHTTPHeaderField: "Referer"' ios/App/App/AppDelegate.swift
           xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build

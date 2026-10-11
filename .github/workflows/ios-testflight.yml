@@ -90,6 +90,9 @@ jobs:
           npx cap add ios
           node install-native-video.mjs
           grep -q 'registerPluginInstance(TifloYouTubePlugin())' ios/App/App/AppDelegate.swift
+          ruby configure-ios-compliance.rb
+          (cd ios/App && pod install)
+          test "$(/usr/libexec/PlistBuddy -c 'Print :ITSAppUsesNonExemptEncryption' ios/App/App/Info.plist)" = false
       - name: Asignar número de compilación único para TestFlight
         working-directory: ios-build
         env:
@@ -250,6 +253,16 @@ jobs:
           API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
         run: |
           xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination 'generic/platform=iOS' -archivePath "$RUNNER_TEMP/TifloAcosta.xcarchive" -allowProvisioningUpdates -authenticationKeyPath "$ASC_KEY_PATH" -authenticationKeyID "$API_ID" -authenticationKeyIssuerID "$API_ISSUER" archive
+      - name: Verificar cifrado exento e iOS 15 en la app archivada
+        run: |
+          set -euo pipefail
+          APP_PLIST="$RUNNER_TEMP/TifloAcosta.xcarchive/Products/Applications/App.app/Info.plist"
+          test -f "$APP_PLIST" || { echo "::error::Falta Info.plist de la app archivada"; exit 1; }
+          ENCRYPTION="$(/usr/libexec/PlistBuddy -c 'Print :ITSAppUsesNonExemptEncryption' "$APP_PLIST")"
+          MIN_IOS="$(/usr/libexec/PlistBuddy -c 'Print :MinimumOSVersion' "$APP_PLIST")"
+          test "$ENCRYPTION" = false || { echo "::error::Falta declaración de cifrado exento"; exit 1; }
+          test "$MIN_IOS" = 15.0 || { echo "::error::iOS mínimo incorrecto: $MIN_IOS"; exit 1; }
+          echo "Archivo iOS comprobado: cifrado exento declarado e iOS mínimo $MIN_IOS"
       - name: Configurar exportación App Store Connect
         run: |
           cat > "$RUNNER_TEMP/ExportOptions.plist" <<'PLIST'

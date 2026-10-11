@@ -194,9 +194,8 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
     @objc private func closePlayer() {
         webView.stopLoading()
         webView.loadHTMLString("", baseURL: nil)
-        dismiss(animated: true) { [weak self] in
-            self?.onClose?()
-        }
+        let completion = onClose
+        dismiss(animated: true, completion: completion)
     }
 
     @objc private func openOriginal() {

@@ -3,9 +3,34 @@
   // iOS-only parity adjustments: never loaded by the public website or Android.
   const isIndex = Boolean(document.getElementById('home-blocks'));
   const isActualidad = Boolean(document.getElementById('actualidad-sections'));
+  const isVideos = Boolean(document.getElementById('youtube-accessible-section'));
   const english = () => document.documentElement.lang === 'en';
 
   function text(es, en) { return english() ? en : es; }
+
+  function alignHomeSections() {
+    const navigation = document.querySelector('#home-blocks nav');
+    if (!navigation) return;
+    // Follow the Android logical order; no controls are removed.
+    const ids = [
+      'home-open-news', 'home-open-actualidad', 'home-open-resources',
+      'home-open-reading', 'home-open-downloads', 'home-open-favorites',
+      'home-open-videos', 'home-open-book', 'home-open-podcast',
+      'home-open-contact', 'home-open-privacy', 'home-open-config'
+    ];
+    ids.forEach(id => {
+      const control = document.getElementById(id);
+      if (control && control.parentElement === navigation) navigation.append(control);
+    });
+  }
+
+  function alignVideoSections() {
+    const youtube = document.getElementById('youtube-accessible-section');
+    const ownCatalog = document.getElementById('video-controls-section');
+    if (youtube && ownCatalog && youtube.parentElement === ownCatalog.parentElement) {
+      ownCatalog.parentElement.insertBefore(youtube, ownCatalog);
+    }
+  }
 
   function addResourcesDirectory() {
     const view = document.getElementById('resources-view');
@@ -129,6 +154,7 @@
 
   function init() {
     if (isIndex) {
+      alignHomeSections();
       addResourcesDirectory();
       configureNativeSettings();
       replaceUnavailableClipboardAction();
@@ -138,6 +164,7 @@
       });
       correctDownloadsFocus();
     }
+    if (isVideos) alignVideoSections();
     if (isActualidad) {
       moveAppsOutOfActualidad();
       window.addEventListener('hashchange', correctAppsFocus);

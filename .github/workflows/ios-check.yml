@@ -22,9 +22,14 @@ jobs:
       - name: Preparar contenido web
         working-directory: ios-build
         run: npm run prepare:web
-      - name: Generar plataforma iOS
+      - name: Generar y configurar plataforma iOS
         working-directory: ios-build
-        run: npx cap add ios
+        run: |
+          npx cap add ios
+          node install-native-video.mjs
+          ruby configure-ios-compliance.rb
+          (cd ios/App && pod install)
+          test "$(/usr/libexec/PlistBuddy -c 'Print :ITSAppUsesNonExemptEncryption' ios/App/App/Info.plist)" = false
       - name: Comprobar compilacion de simulador sin firma
         working-directory: ios-build
         run: |

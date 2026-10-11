@@ -574,6 +574,7 @@
     config: document.getElementById('config-section')
   };
   const hero = document.getElementById('home-hero');
+  const searchShell = document.getElementById('global-search-shell');
   const menu = document.getElementById('home-blocks');
   const main = document.getElementById('main');
   const footer = document.getElementById('site-footer');
@@ -624,6 +625,7 @@
     const target = views[key] || null;
     const onHome = !target;
     hero.hidden = !onHome;
+    searchShell.hidden = !onHome;
     menu.hidden = !onHome;
     if (footer) footer.hidden = !onHome;
     Object.values(views).forEach(section => { section.hidden = section !== target; });

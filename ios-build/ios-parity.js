@@ -181,6 +181,9 @@
       requestAnimationFrame(() => requestAnimationFrame(focusLauncher));
       // WKWebView may reset its accessibility cursor after the DOM focus event.
       setTimeout(focusLauncher, 180);
+      // A returning WKWebView page can update its VoiceOver tree after the
+      // first DOM focus. Restore the same origin once after that update.
+      setTimeout(focusLauncher, 420);
     }
     document.getElementById('home-blocks')?.addEventListener('click', event => {
       const entry = event.target.closest?.('[id^="home-open-"]');
@@ -197,6 +200,48 @@
       remove(returnKey);
       restoreAfterRender();
     }
+    // BFCache returns do not recreate the document, so run on pageshow too.
+    window.addEventListener('pageshow', () => {
+      if (!isHome() || stored(returnKey) !== '1') return;
+      remove(returnKey);
+      restoreAfterRender();
+    });
+  }
+
+  // A system Back gesture does not use the custom back button and therefore
+  // does not set actualidad-core's pendingFocusSelector. Infer the source
+  // view from the hash transition and restore its launcher after rendering.
+  function preserveActualidadBackFocus() {
+    const returnTargets = {
+      '#actualidad-home': {
+        '#news-browser': 'section-news-link',
+        '#apps-browser': 'section-apps-link',
+        '#media-browser': 'section-media-link',
+        '#media-accessibility': 'section-media-link',
+        '#media-technology': 'section-media-link'
+      },
+      '#media-browser': {
+        '#media-accessibility': 'media-accessibility-link',
+        '#media-technology': 'media-technology-link'
+      }
+    };
+    let previousHash = window.location.hash;
+    window.addEventListener('hashchange', () => {
+      const destination = window.location.hash;
+      const origin = previousHash;
+      previousHash = destination;
+      const targetId = returnTargets[destination]?.[origin];
+      if (!targetId) return;
+      const restore = () => {
+        if (window.location.hash !== destination) return;
+        const target = document.getElementById(targetId);
+        if (!target || target.closest?.('[hidden]')) return;
+        target.focus({ preventScroll: true });
+        target.scrollIntoView?.({ block: 'nearest' });
+      };
+      requestAnimationFrame(() => requestAnimationFrame(restore));
+      setTimeout(restore, 180);
+    });
   }
 
   function init() {
@@ -214,6 +259,7 @@
     }
     if (isVideos) alignVideoSections();
     if (isActualidad) {
+      preserveActualidadBackFocus();
       moveAppsOutOfActualidad();
       window.addEventListener('hashchange', correctAppsFocus);
       correctAppsFocus();

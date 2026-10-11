@@ -184,7 +184,7 @@ private final class TifloVoiceOverAudioMix {
 
 /// Uses Google's documented WKWebView loadRequest with an app-ID Referer.
 /// It does not pretend to originate from youtube.com and does not proxy media.
-private final class TifloYouTubeViewController: UIViewController, WKNavigationDelegate {
+private final class TifloYouTubeViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
     private let videoId: String
     private let videoTitle: String
     private let videoDescription: String
@@ -193,6 +193,10 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
     private let spanish = Locale.preferredLanguages.first?.lowercased().hasPrefix("es") ?? true
     private let closeButton = UIButton(type: .system)
     private let playbackButton = UIButton(type: .system)
+    private let rewindButton = UIButton(type: .system)
+    private let forwardButton = UIButton(type: .system)
+    private let positionSlider = UISlider()
+    private let progressLabel = UILabel()
     private let detailsButton = UIButton(type: .system)
     private let audioCompatibilityButton = UIButton(type: .system)
     private let audioMix = TifloVoiceOverAudioMix()
@@ -200,7 +204,11 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
     private let detailsPanel = UITextView()
     private let statusLabel = UILabel()
     private var webView: WKWebView!
-    private var pausedFromNative = false
+    private var playerReady = false
+    private var playerState = -1
+    private var durationSeconds: Double = 0
+    private var positionSeconds: Double = 0
+    private var playerError = false
     private var needsInitialVoiceOverFocus = true
     private var shouldMixAudio: Bool {
         Self.audioMixPreference ?? UIAccessibility.isVoiceOverRunning
@@ -275,12 +283,37 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
         titleLabel.numberOfLines = 2
         titleLabel.accessibilityTraits.insert(.header)
 
-        playbackButton.setTitle(spanish ? "Pausar vídeo" : "Pause video", for: .normal)
+        playbackButton.setTitle(spanish ? "Reproducir vídeo" : "Play video", for: .normal)
         playbackButton.isEnabled = false
         playbackButton.accessibilityHint = spanish
-            ? "Para comenzar, activa primero Reproducir en el vídeo de YouTube."
-            : "First activate Play within the YouTube video."
+            ? "También puedes iniciar el vídeo desde el reproductor de YouTube."
+            : "You can also start the video using the YouTube player."
         playbackButton.addTarget(self, action: #selector(togglePlayback), for: .touchUpInside)
+
+        rewindButton.setTitle(spanish ? "Retroceder 30 segundos" : "Back 30 seconds", for: .normal)
+        rewindButton.addTarget(self, action: #selector(rewindThirtySeconds), for: .touchUpInside)
+        rewindButton.isEnabled = false
+        rewindButton.titleLabel?.numberOfLines = 0
+
+        forwardButton.setTitle(spanish ? "Avanzar 30 segundos" : "Forward 30 seconds", for: .normal)
+        forwardButton.addTarget(self, action: #selector(forwardThirtySeconds), for: .touchUpInside)
+        forwardButton.isEnabled = false
+        forwardButton.titleLabel?.numberOfLines = 0
+
+        positionSlider.minimumValue = 0
+        positionSlider.maximumValue = 1
+        positionSlider.isContinuous = false
+        positionSlider.isEnabled = false
+        positionSlider.accessibilityLabel = spanish ? "Posición del vídeo" : "Video position"
+        positionSlider.accessibilityHint = spanish
+            ? "Ajusta la posición del vídeo hacia adelante o atrás."
+            : "Adjust video position forward or backward."
+        positionSlider.addTarget(self, action: #selector(changePosition), for: .valueChanged)
+
+        progressLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
+        progressLabel.adjustsFontForContentSizeCategory = true
+        progressLabel.text = spanish ? "Tiempo: sin determinar." : "Time: unknown."
+        progressLabel.numberOfLines = 0
 
         detailsButton.setTitle(spanish ? "Ver detalles" : "Show details", for: .normal)
         detailsButton.accessibilityTraits.insert(.button)
@@ -296,10 +329,13 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
         audioCompatibilityButton.addTarget(self, action: #selector(toggleAudioCompatibility), for: .touchUpInside)
         audioCompatibilityButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
 
-        let controls = UIStackView(arrangedSubviews: [playbackButton, detailsButton])
+        let controls = UIStackView(arrangedSubviews: [rewindButton, playbackButton, forwardButton])
         controls.axis = .horizontal
         controls.distribution = .fillEqually
-        controls.spacing = 12
+        controls.spacing = 8
+        let detailsRow = UIStackView(arrangedSubviews: [detailsButton, progressLabel])
+        detailsRow.axis = .vertical
+        detailsRow.spacing = 6
 
         var detailLines: [String] = []
         if !videoChannel.isEmpty {
@@ -330,6 +366,7 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
         let configuration = WKWebViewConfiguration()
         configuration.allowsInlineMediaPlayback = true
         configuration.mediaTypesRequiringUserActionForPlayback = .all
+        configuration.userContentController.add(self, name: "tifloPlayer")
         webView = WKWebView(frame: .zero, configuration: configuration)
         webView.navigationDelegate = self
         webView.accessibilityLabel = spanish ? "Reproductor de YouTube" : "YouTube player"
@@ -355,7 +392,7 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
         scroll.accessibilityIdentifier = "tiflo-video-screen-scroll"
 
         let stack = UIStackView(arrangedSubviews: [
-            header, titleLabel, audioCompatibilityButton, controls, statusLabel, detailsPanel, accountControls, webView
+            header, titleLabel, audioCompatibilityButton, controls, positionSlider, detailsRow, statusLabel, detailsPanel, accountControls, webView
         ])
         stack.axis = .vertical
         stack.alignment = .fill
@@ -382,24 +419,124 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
             webView.heightAnchor.constraint(greaterThanOrEqualToConstant: 225)
         ])
 
-        let appId = Bundle.main.bundleIdentifier ?? "com.tifloacosta.app"
-        let referer = "https://" + appId.lowercased()
-        let urlString = "https://www.youtube.com/embed/" + videoId
-            + "?playsinline=1&rel=0&origin=" + (referer.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? referer)
-        guard let url = URL(string: urlString) else {
-            statusLabel.text = spanish ? "No se pudo preparar el vídeo." : "Could not prepare video."
+        // YouTube's documented embedded-player integration uses loadHTMLString
+        // with an app-identified HTTPS baseURL so requests carry a Referer.
+        guard let file = Bundle.main.url(
+            forResource: "tiflo-youtube-player", withExtension: "html", subdirectory: "public"
+        ),
+        let template = try? String(contentsOf: file, encoding: .utf8) else {
+            presentPlayerError(0)
             return
         }
-        var request = URLRequest(url: url)
-        request.setValue(referer, forHTTPHeaderField: "Referer")
-        webView.load(request)
+        let appId = Bundle.main.bundleIdentifier ?? "com.tifloacosta.app"
+        guard let baseURL = URL(string: "https://" + appId.lowercased() + "/") else {
+            presentPlayerError(0)
+            return
+        }
+        // videoId was strictly checked before this controller was created.
+        let html = template.replacingOccurrences(of: "__TIFLO_YOUTUBE_VIDEO_ID__", with: videoId)
+        webView.loadHTMLString(html, baseURL: baseURL)
+    }
+
+    // A single main-frame HTML wrapper invokes the official YouTube IFrame API.
+    // Never evaluate arbitrary video metadata or other untrusted strings as JS.
+    private func sendPlayerCommand(_ command: String, at seconds: Double = 0) {
+        guard playerReady && !playerError,
+              ["play", "pause", "seek", "report"].contains(command) else { return }
+        let safeSeconds = seconds.isFinite ? Int(max(0, min(seconds, durationSeconds))) : 0
+        let script = "window.tifloControl('" + command + "', " + String(safeSeconds) + ");"
+        webView.evaluateJavaScript(script, completionHandler: nil)
+    }
+
+    private func formattedTime(_ value: Double) -> String {
+        let seconds = max(0, Int(value.isFinite ? value : 0))
+        let hours = seconds / 3600
+        let minutes = (seconds % 3600) / 60
+        let remaining = seconds % 60
+        return hours > 0
+            ? String(format: "%d:%02d:%02d", hours, minutes, remaining)
+            : String(format: "%02d:%02d", minutes, remaining)
+    }
+
+    private func updateProgress(position: Double, duration: Double) {
+        guard position.isFinite, duration.isFinite else { return }
+        durationSeconds = max(0, duration)
+        positionSeconds = max(0, min(position, durationSeconds))
+        if durationSeconds > 0 {
+            positionSlider.maximumValue = Float(min(durationSeconds, Double(Float.greatestFiniteMagnitude)))
+            positionSlider.value = Float(positionSeconds)
+            positionSlider.isEnabled = playerReady && !playerError
+            rewindButton.isEnabled = positionSeconds > 0 && !playerError
+            forwardButton.isEnabled = positionSeconds < durationSeconds && !playerError
+            let positionText = formattedTime(positionSeconds)
+            let durationText = formattedTime(durationSeconds)
+            positionSlider.accessibilityValue = positionText + (spanish ? " de " : " of ") + durationText
+            progressLabel.text = (spanish ? "Tiempo: " : "Time: ")
+                + positionText + " / " + durationText
+        }
+    }
+
+    private func updatePlaybackState(_ state: Int) {
+        guard !playerError else { return }
+        playerState = state
+        // YouTube state 1 = playing; 2 = paused; 0 = ended; 3 = buffering.
+        let playing = state == 1 || state == 3
+        playbackButton.setTitle(
+            playing ? (spanish ? "Pausar vídeo" : "Pause video")
+                    : (spanish ? "Reproducir vídeo" : "Play video"), for: .normal
+        )
+        playbackButton.isEnabled = playerReady
+    }
+
+    private func presentPlayerError(_ code: Int) {
+        playerError = true
+        playerReady = false
+        playbackButton.isEnabled = false
+        rewindButton.isEnabled = false
+        forwardButton.isEnabled = false
+        positionSlider.isEnabled = false
+        let number = code > 0 ? " (YouTube " + String(code) + ")" : ""
+        statusLabel.text = (spanish
+            ? "No se pudo reproducir el vídeo" : "Video playback failed") + number
+            + (spanish ? ". Utiliza Abrir en YouTube." : ". Use Open in YouTube.")
+        UIAccessibility.post(notification: .announcement, argument: statusLabel.text)
+    }
+
+    // Only main-frame messages from our bundled HTML are accepted; arbitrary
+    // third-party frame messages cannot control the native UI.
+    func userContentController(_ userContentController: WKUserContentController,
+                               didReceive message: WKScriptMessage) {
+        guard message.name == "tifloPlayer", message.frameInfo.isMainFrame,
+              let data = message.body as? [String: Any],
+              let event = data["type"] as? String else { return }
+        switch event {
+        case "ready":
+            playerReady = true
+            playerError = false
+            playbackButton.isEnabled = true
+            statusLabel.text = spanish
+                ? "Vídeo preparado. Usa los controles de reproducción."
+                : "Video ready. Use playback controls."
+        case "state":
+            if let state = data["state"] as? Int { updatePlaybackState(state) }
+        case "progress":
+            guard let position = data["position"] as? Double,
+                  let duration = data["duration"] as? Double else { return }
+            updateProgress(position: position, duration: duration)
+            if let state = data["state"] as? Int { updatePlaybackState(state) }
+        case "error":
+            presentPlayerError(data["code"] as? Int ?? 0)
+        case "blocked":
+            statusLabel.text = spanish
+                ? "La reproducción automática está bloqueada. Activa Reproducir dentro del vídeo de YouTube."
+                : "Automatic playback is blocked. Activate Play inside the YouTube video."
+        default: break
+        }
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        playbackButton.isEnabled = true
-        statusLabel.text = spanish
-            ? "Vídeo preparado. Puedes utilizar sus controles y volver a esta fila para pausarlo."
-            : "Video ready. Use the player controls, then return here to pause."
+        // Loading the HTML wrapper does not mean the YouTube player is ready.
+        // Wait for onReady via WKScriptMessageHandler.
     }
 
     private func audioCompatibilityTitle() -> String {
@@ -429,24 +566,30 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
     }
 
     @objc private func togglePlayback() {
-        guard webView != nil, playbackButton.isEnabled else { return }
-        // Paired suspension is available on iOS 15+; pauseAllMediaPlayback()
-        // has no corresponding public Swift resumeAllMediaPlayback() method.
-        let shouldSuspend = !pausedFromNative
-        playbackButton.isEnabled = false
-        webView.setAllMediaPlaybackSuspended(shouldSuspend) { [weak self] in
-            guard let self = self else { return }
-            self.pausedFromNative = shouldSuspend
-            self.playbackButton.isEnabled = true
-            self.playbackButton.setTitle(
-                shouldSuspend ? (self.spanish ? "Reanudar vídeo" : "Resume video")
-                              : (self.spanish ? "Pausar vídeo" : "Pause video"),
-                for: .normal
-            )
-            self.statusLabel.text = shouldSuspend
-                ? (self.spanish ? "Vídeo en pausa." : "Video paused.")
-                : (self.spanish ? "Reanudando vídeo." : "Resuming video.")
-        }
+        guard playerReady && !playerError else { return }
+        sendPlayerCommand(playerState == 1 || playerState == 3 ? "pause" : "play")
+    }
+
+    @objc private func rewindThirtySeconds() {
+        seek(by: -30)
+    }
+
+    @objc private func forwardThirtySeconds() {
+        seek(by: 30)
+    }
+
+    private func seek(by seconds: Double) {
+        guard durationSeconds > 0 else { return }
+        let target = max(0, min(durationSeconds, positionSeconds + seconds))
+        sendPlayerCommand("seek", at: target)
+        // Announce only user-triggered seeks, not automatic progress updates.
+        let message = (spanish ? "Posición: " : "Position: ") + formattedTime(target)
+        UIAccessibility.post(notification: .announcement, argument: message)
+    }
+
+    @objc private func changePosition() {
+        guard playerReady && durationSeconds > 0 else { return }
+        sendPlayerCommand("seek", at: Double(positionSlider.value))
     }
 
     @objc private func toggleDetails() {
@@ -476,6 +619,7 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
 
     @objc private func closePlayer() {
         webView.stopLoading()
+        webView.configuration.userContentController.removeScriptMessageHandler(forName: "tifloPlayer")
         webView.loadHTMLString("", baseURL: nil)
         let completion = onClose
         dismiss(animated: true, completion: completion)

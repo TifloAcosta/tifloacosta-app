@@ -51,13 +51,16 @@ jobs:
           const videosHtml = readFileSync(root + 'videos.html', 'utf8');
           const capacitor = JSON.parse(readFileSync('ios-build/capacitor.config.json', 'utf8'));
           assert.match(videos, /function handleIosPlayerError/);
+          assert.match(videos, /native\.open\(\{ videoId: nativeId \}\)/);
           assert.match(videos, /onError: handleIosPlayerError/);
           assert.match(videos, /removeAttribute\('role'\)/);
           assert.match(videos, /Abrir este vídeo en YouTube/);
           assert.match(app, /querySelectorAll\('\.resource-meta'\)/);
           assert.match(media, /const iosExternalVideo = true;/);
           assert.match(media, /item\.type === 'video' && item\.embedUrl && !iosExternalVideo/);
-          assert.match(media, /Reproducir vídeo en YouTube/);
+          assert.match(media, /Reproducir dentro de TifloAcosta/);
+          assert.match(media, /TifloYouTube/);
+          assert.match(media, /Abrir vídeo en YouTube/);
           assert.match(media, /window\.TIFLO_IOS_ACTUALIDAD_MEDIA/);
           assert.match(actualidadHtml, /ios-actualidad-media-fallback\.js/);
           assert.ok(mediaFallback.startsWith('window.TIFLO_IOS_ACTUALIDAD_MEDIA = ['));
@@ -96,4 +99,7 @@ jobs:
           sudo xcode-select --switch "$XCODE/Contents/Developer"
           npm install --no-audit --no-fund
           npx cap add ios
+          node install-native-video.mjs
+          grep -q 'registerPluginInstance(TifloYouTubePlugin())' ios/App/App/ViewController.swift
+          grep -q 'forHTTPHeaderField: "Referer"' ios/App/App/ViewController.swift
           xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build

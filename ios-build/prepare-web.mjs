@@ -1,6 +1,7 @@
 import { cp, mkdir, readdir, rm, stat, readFile, writeFile } from 'node:fs/promises';
 import { resolve, join, extname } from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { enrichIosMediaCatalog } from './enrich-actualidad-media.mjs';
 const root = resolve(import.meta.dirname, '..');
 const output = resolve(import.meta.dirname, 'www');
 const allowed = new Set(['.html','.js','.mjs','.css','.json','.webmanifest','.svg','.png','.jpg','.jpeg','.webp','.ico','.gif','.woff','.woff2','.ttf','.txt','.xml','.pdf','.mp3','.mp4','.vtt','.srt','.epub','.zip']);
@@ -22,6 +23,21 @@ async function visit(from, to, depth = 0) {
 await rm(output,{recursive:true,force:true});
 await visit(root,output);
 await stat(join(output,'index.html'));
+
+// Only the packaged iOS copy receives episode enclosures: no change to the
+// published website, Android resources, or repository source catalogue.
+const mediaPath = join(output, 'actualidad-media.json');
+const sourceCatalog = JSON.parse(await readFile(join(root, 'actualidad-media-sources.json'), 'utf8'));
+const mediaCatalog = JSON.parse(await readFile(mediaPath, 'utf8'));
+const iosAudio = await enrichIosMediaCatalog({ items: mediaCatalog, sources: sourceCatalog });
+console.log('Audio iOS: ' + iosAudio.stats.playableCount + ' de ' + iosAudio.stats.audioCount +
+  ' episodios con URL directa; fuentes RSS accesibles: ' + iosAudio.stats.feedsOk +
+  '; fuentes fallidas: ' + iosAudio.stats.feedsFailed.join(', '));
+if (iosAudio.stats.audioCount && !iosAudio.stats.playableCount) {
+  throw new Error('No hay enlaces de audio reproducibles en el catálogo iOS. Se cancela la compilación.');
+}
+await writeFile(mediaPath, JSON.stringify(iosAudio.items, null, 2) + '\n');
+
 
 /* iOS uses a packaged copy of the web UI. Remove PWA-only controls without
    changing the public website or Android implementation. */

@@ -93,6 +93,45 @@ jobs:
           ruby configure-ios-compliance.rb
           (cd ios/App && pod install)
           test "$(/usr/libexec/PlistBuddy -c 'Print :ITSAppUsesNonExemptEncryption' ios/App/App/Info.plist)" = false
+      - name: Verificar que la API YouTube para iOS está desplegada
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Solo se exige este protocolo a compilaciones con la nueva cuenta nativa.
+          if [ ! -f ios-build/native/TifloYouTubeAuth.swift ]; then
+            echo "Esta compilación no incorpora la autenticación nativa de YouTube."
+            exit 0
+          fi
+          response="$(mktemp)"
+          trap 'rm -f "$response"' EXIT
+          if ! code="$(curl -sS --retry 2 --retry-delay 3 --connect-timeout 10 --max-time 30 \
+            -o "$response" -w '%{http_code}' \
+            https://youtube-auth.tifloacosta.com/native/capabilities)"; then
+            echo "::error::El servicio YouTube no es accesible. No enviar esta compilación a TestFlight."
+            exit 1
+          fi
+          if [ "$code" != "200" ]; then
+            echo "::error::El servicio YouTube devuelve HTTP $code. No enviar esta compilación a TestFlight."
+            exit 1
+          fi
+          YOUTUBE_CAPABILITIES_FILE="$response" node <<'NODE'
+          const fs = require('node:fs');
+          let payload;
+          try {
+            payload = JSON.parse(fs.readFileSync(process.env.YOUTUBE_CAPABILITIES_FILE, 'utf8'));
+          } catch {
+            console.error('::error::El servicio YouTube devolvió una respuesta inválida.');
+            process.exit(1);
+          }
+          const actions = payload.youtubeActions;
+          if (payload.protocol !== 1 || payload.nativeAuth !== true ||
+              !Array.isArray(actions) ||
+              !['like', 'subscribe', 'comment'].every(action => actions.includes(action))) {
+            console.error('::error::El Worker no admite aún las acciones de YouTube de iOS. No enviar a TestFlight.');
+            process.exit(1);
+          }
+          console.log('Compatibilidad YouTube iOS verificada antes de la firma y subida.');
+          NODE
       - name: Asignar número de compilación único para TestFlight
         working-directory: ios-build
         env:

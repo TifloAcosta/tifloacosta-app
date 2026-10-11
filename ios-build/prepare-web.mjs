@@ -163,9 +163,9 @@ await writeFile(iosAppPath, iosApp);
 // Keep an accessible, direct playback alternative in the same expanded panel.
 const iosMediaPath = join(output, 'actualidad-media.js');
 let iosMedia = await readFile(iosMediaPath, 'utf8');
-const mediaRender = '            container.replaceChildren(frame);';
-if (!iosMedia.includes(mediaRender)) throw new Error('No se encuentra reproductor de Actualidad');
-iosMedia = iosMedia.replace(mediaRender, `            container.replaceChildren(frame);
+const mediaRender = '            container.replaceChildren(notice, frame);';
+if (!iosMedia.includes(mediaRender)) throw new Error('No se encuentra reproductor de Actualidad con aviso accesible');
+iosMedia = iosMedia.replace(mediaRender, `            container.replaceChildren(notice, frame);
             if (item.originalUrl) {
               const alternative = document.createElement('a');
               alternative.className = 'button-link';

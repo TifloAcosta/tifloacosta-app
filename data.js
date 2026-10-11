@@ -8,7 +8,8 @@ window.TIFLO_RESOURCES = [
     "searchText": "Píldoras tecnológicas 22 2026",
     "url": "https://tifloacosta.com/docs/es/pildoras/2026/pildoras-22-2026.html",
     "openUrl": "https://tifloacosta.com/docs/es/pildoras/2026/pildoras-22-2026.html",
-    "new": true
+    "new": true,
+    "newsDate": "2026-10-03T17:17:44Z"
   },
   {
     "id": "es-pildoras-2026-21",
@@ -613,7 +614,8 @@ window.TIFLO_RESOURCES = [
     "searchText": "Technology Pills Tech Pills 22 2026",
     "url": "https://tifloacosta.com/docs/en/technology-pills-22-2026.html",
     "openUrl": "https://tifloacosta.com/docs/en/technology-pills-22-2026.html",
-    "new": true
+    "new": true,
+    "newsDate": "2026-10-01T11:43:58Z"
   },
   {
     "id": "es-13crgHIVB9E0YUYNmF6hlyFgi-ymhwb_V",
@@ -622,7 +624,8 @@ window.TIFLO_RESOURCES = [
     "title": "Apple 2026: todo lo nuevo de la keynote",
     "url": "https://tifloacosta.com/docs/es/reader-13crgHIVB9E0YUYNmF6hlyFgi-ymhwb_V.html",
     "openUrl": "https://tifloacosta.com/docs/es/reader-13crgHIVB9E0YUYNmF6hlyFgi-ymhwb_V.html",
-    "new": true
+    "new": true,
+    "newsDate": "2026-09-09T19:29:29Z"
   },
   {
     "id": "en-1NhzNbXNly2cv_QB2WQgxjo5Ex0L4HHuB",
@@ -631,7 +634,8 @@ window.TIFLO_RESOURCES = [
     "title": "Apple 2026: Everything New from the Keynote",
     "url": "https://tifloacosta.com/docs/en/reader-1NhzNbXNly2cv_QB2WQgxjo5Ex0L4HHuB.html",
     "openUrl": "https://tifloacosta.com/docs/en/reader-1NhzNbXNly2cv_QB2WQgxjo5Ex0L4HHuB.html",
-    "new": true
+    "new": true,
+    "newsDate": "2026-09-09T19:29:34Z"
   },
   {
     "id": "es-1G66sYkWuXIwYggrMvHq74W1E1EsX_Vvx",
@@ -793,7 +797,8 @@ window.TIFLO_RESOURCES = [
     "title": "Cuando el mismo iPhone no hace lo mismo",
     "url": "https://tifloacosta.com/docs/es/reader-1uTEYvSDBUxzvxPmLFkQa78VSqJtEHsGI.html",
     "openUrl": "https://tifloacosta.com/docs/es/reader-1uTEYvSDBUxzvxPmLFkQa78VSqJtEHsGI.html",
-    "new": true
+    "new": true,
+    "newsDate": "2026-09-09T13:28:21Z"
   },
   {
     "id": "es-foal-america-latina-2026",
@@ -1495,7 +1500,8 @@ window.TIFLO_RESOURCES = [
     "title": "When the same iPhone doesn’t do the same thing",
     "url": "https://tifloacosta.com/docs/en/reader-1ZEgNb3rI49H28DWmDnSUaB2OVFrHyK_9.html",
     "openUrl": "https://tifloacosta.com/docs/en/reader-1ZEgNb3rI49H28DWmDnSUaB2OVFrHyK_9.html",
-    "new": true
+    "new": true,
+    "newsDate": "2026-09-09T13:28:23Z"
   },
   {
     "id": "en-1Q6jUzIRoBlbpiHE4Wc6VCDnCH8axd9W4",

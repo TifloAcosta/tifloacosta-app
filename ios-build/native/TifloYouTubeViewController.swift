@@ -193,7 +193,8 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
         detailsPanel.isHidden = true
         detailsPanel.backgroundColor = .secondarySystemBackground
         detailsPanel.layer.cornerRadius = 8
-        detailsPanel.accessibilityLabel = spanish ? "Detalles del vídeo" : "Video details"
+        // Keep the text view's spoken value: an accessibilityLabel here would
+        // hide the actual video description from VoiceOver.
         let detailHeight = detailsPanel.heightAnchor.constraint(equalToConstant: 144)
         detailHeight.priority = .defaultHigh
         detailHeight.isActive = true

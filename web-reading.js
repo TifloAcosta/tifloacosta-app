@@ -2431,6 +2431,11 @@
 
   async function deleteSavedBook(id) {
     if (!libraryClient) return;
+    // Deleting a saved document must never be a single accidental VoiceOver tap.
+    const question = language() === 'en'
+      ? 'Delete this document from My library? This cannot be undone.'
+      : '¿Eliminar este documento de Mi biblioteca? Esta acción no se puede deshacer.';
+    if (globalThis.confirm?.(question) !== true) return;
     const deleted = await libraryClient.deleteBook(id);
     els.libraryStatus.textContent = deleted ? t().deleted : t().deleteFailed;
     if (deleted && currentBookId === id) {

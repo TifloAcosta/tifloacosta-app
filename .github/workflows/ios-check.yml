@@ -21,6 +21,8 @@ jobs:
           node-version: '22'
       - name: Probar controles y contratos de TifloLector sin publicar
         run: node --test ios-build/test/tiflolector-structure.test.mjs
+      - name: Ejecutar las pruebas existentes del lector web
+        run: node --test test/web-reading*.test.mjs
   ios-unsigned-build:
     runs-on: macos-15
     permissions:

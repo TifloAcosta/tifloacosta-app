@@ -91,7 +91,7 @@ test('web reader filters browser and external voices by language', async () => {
   assert.ok(catalog.includes('languages:'));
   assert.match(html, /web-reading\.js\?v=3\.15/);
   assert.match(worker, /web-reading\.js\?v=3\.15/);
-  assert.match(worker, /tifloacosta-app-v2-47-reader-audit/);
+  assert.match(worker, /tifloacosta-app-v2-48-guide-library/);
 });
 
 

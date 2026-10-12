@@ -4,7 +4,8 @@ import test from 'node:test';
 import {
   buildMobileContent,
   MOBILE_NEWS_MAX_AGE_DAYS,
-  MOBILE_NEWS_MAX_PER_LANGUAGE
+  MOBILE_NEWS_MAX_PER_LANGUAGE,
+  validateNewResourceDates
 } from '../scripts/build-mobile-content.mjs';
 
 test('mobile content feed normalizes resources, videos and localized news', () => {
@@ -201,4 +202,18 @@ test('Actualidad mobile retention orders newest first and uses stable id order f
   });
 
   assert.deepEqual(feed.news.map(item => item.sourceId), ['a', 'b', 'older']);
+});
+
+
+test('Novedades rejects missing or invalid editorial dates before generating the public feed', () => {
+  assert.throws(() => validateNewResourceDates([{ id: 'sin-fecha', new: true }]), /sin-fecha/);
+  assert.throws(() => validateNewResourceDates([{ id: 'fecha-invalida', new: true, newsDate: 'ayer' }]), /fecha-invalida/);
+  assert.equal(validateNewResourceDates([{ id: 'fechado', new: true, newsDate: '2026-10-07T15:39:00Z' }]), true);
+  assert.equal(validateNewResourceDates([{ id: 'recurso-antiguo', new: false }]), true);
+});
+
+test('the committed mobile content feed includes editorial dates for all visible Novedades', async () => {
+  const feed = JSON.parse(await readFile(new URL('../mobile-content.json', import.meta.url), 'utf8'));
+  const missing = feed.resources.filter(item => item.isNew && !Number.isFinite(Date.parse(item.newsDate || '')));
+  assert.deepEqual(missing.map(item => item.id), []);
 });

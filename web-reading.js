@@ -755,7 +755,49 @@
       els.markStatus
     ].filter(Boolean);
     movable.forEach(node => morePanel.append(node));
-    morePanel.append(closeMore);
+    // Allow removal from within the open document, not only from Library.
+    // Two explicit accessible actions avoid accidental deletion.
+    const deleteDocument = document.createElement('button');
+    deleteDocument.type = 'button';
+    deleteDocument.textContent = language() === 'en' ? 'Delete this document from My library' : 'Eliminar este documento de Mi biblioteca';
+    const deleteConfirmation = document.createElement('div');
+    deleteConfirmation.hidden = true;
+    const deleteQuestion = document.createElement('p');
+    deleteQuestion.textContent = language() === 'en'
+      ? 'Remove this document from the library? This cannot be undone.'
+      : '¿Eliminar este documento de la biblioteca? Esta acción no se puede deshacer.';
+    const deleteConfirm = document.createElement('button');
+    deleteConfirm.type = 'button';
+    deleteConfirm.textContent = language() === 'en' ? 'Confirm deletion' : 'Confirmar eliminación';
+    const deleteCancel = document.createElement('button');
+    deleteCancel.type = 'button';
+    deleteCancel.textContent = language() === 'en' ? 'Cancel' : 'Cancelar';
+    deleteDocument.addEventListener('click', () => {
+      if (!currentBookId) return;
+      deleteConfirmation.hidden = false;
+      deleteConfirm.focus();
+    });
+    deleteCancel.addEventListener('click', () => {
+      deleteConfirmation.hidden = true;
+      deleteDocument.focus();
+    });
+    deleteConfirm.addEventListener('click', async () => {
+      const id = currentBookId;
+      if (!id) return;
+      deleteConfirm.disabled = true;
+      await deleteSavedBook(id);
+      deleteConfirm.disabled = false;
+      if (!currentBookId) {
+        deleteConfirmation.hidden = true;
+        deleteDocument.hidden = true;
+        els.markStatus.textContent = t().deleted;
+        moreHeading.focus();
+      } else {
+        els.markStatus.textContent = t().deleteFailed;
+      }
+    });
+    deleteConfirmation.append(deleteQuestion, deleteConfirm, deleteCancel);
+    morePanel.append(deleteDocument, deleteConfirmation, closeMore);
 
     section.append(
       unitLabel, unit, previousUnit, nextUnit,
@@ -880,7 +922,11 @@
     moreButton.id = 'reading-document-open-more';
     audioButton.addEventListener('click', () => showPanel(audioPanel, audioHeading, audioButton));
     visualButton.addEventListener('click', () => showPanel(visualPanel, visualHeading, visualButton));
-    moreButton.addEventListener('click', () => showPanel(morePanel, moreHeading, moreButton));
+    moreButton.addEventListener('click', () => {
+      deleteDocument.hidden = !currentBookId;
+      deleteConfirmation.hidden = true;
+      showPanel(morePanel, moreHeading, moreButton);
+    });
     closeAudio.addEventListener('click', () => closePanel(audioPanel, audioButton));
     closeVisual.addEventListener('click', () => closePanel(visualPanel, visualButton));
     closeMore.addEventListener('click', () => closePanel(morePanel, moreButton));
@@ -1419,6 +1465,9 @@
     els.searchResults.replaceChildren();
     els.searchStatus.textContent = '';
     ensurePerDocumentControls();
+    if (els.navigationUnit) {
+      els.navigationUnit.dataset.iosBookKey = currentBookId || (currentFormat + ':' + els.title.textContent);
+    }
     navigationUnit = els.navigationUnit?.value || 'block';
     currentUnitIndex = 0;
     populatePerDocumentVoices();

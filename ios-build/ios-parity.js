@@ -190,10 +190,33 @@
       const href = entry?.getAttribute?.('href') || '';
       if (/^(actualidad|videos|podcast)\.html(?:#.*)?$/.test(href)) write(returnKey, '1');
     }, true);
+    const sourceLaunchers = {
+      '#resources': 'home-open-resources',
+      '#favorites': 'home-open-favorites',
+      '#reading': 'home-open-reading',
+      '#news': 'home-open-news',
+      '#book': 'home-open-book',
+      '#contact': 'home-open-contact',
+      '#privacy': 'home-open-privacy',
+      '#config': 'home-open-config',
+      '#downloads': 'home-open-downloads',
+      '#downloads-link': 'home-open-downloads',
+      '#downloads-sounds': 'home-open-downloads'
+    };
+    document.addEventListener?.('click', event => {
+      if (!event.target?.closest?.('[data-home-back]')) return;
+      const id = sourceLaunchers[window.location.hash];
+      if (id) write(lastEntryKey, id);
+      write(returnKey, '1');
+    }, true);
     let previousHash = window.location.hash;
     window.addEventListener('hashchange', () => {
       const nextHash = window.location.hash;
-      if (isHome() && previousHash && previousHash !== '#home') restoreAfterRender();
+      if (isHome() && previousHash && previousHash !== '#home') {
+        const origin = sourceLaunchers[previousHash];
+        if (origin) write(lastEntryKey, origin);
+        restoreAfterRender();
+      }
       previousHash = nextHash;
     });
     if (isHome() && stored(returnKey) === '1') {
@@ -257,10 +280,226 @@
     update();
     window.addEventListener('hashchange',update);
   }
+
+  // iOS reading experience uses the packaged web reader, not Android's native plugins.
+  function improveReaderExperience() {
+    const section = document.getElementById('reading-section');
+    if (!section) return;
+    const localized = (es, en) => text(es, en);
+    const storageGet = (key, otherwise = '') => {
+      try { return window.localStorage?.getItem(key) || otherwise; } catch { return otherwise; }
+    };
+    const storageSet = (key, value) => {
+      try { window.localStorage?.setItem(key, value); } catch {}
+    };
+    const validUnits = ['block', 'paragraph', 'sentence'];
+    const globalUnitKey = 'tiflo-ios-default-reading-unit-v1';
+    const overrideKey = 'tiflo-ios-document-units-v1';
+    function globalUnit() {
+      const saved = storageGet(globalUnitKey, 'block');
+      return validUnits.includes(saved) ? saved : 'block';
+    }
+    function readOverrides() {
+      try {
+        const value = JSON.parse(storageGet(overrideKey, '{}'));
+        return value && typeof value === 'object' && !Array.isArray(value) ? value : {};
+      } catch { return {}; }
+    }
+
+    // A permanent entry describes OCR before a user imports a scanned file.
+    const fileInput = document.getElementById('reading-file');
+    const fileLabel = document.getElementById('reading-file-label');
+    if (fileInput && fileLabel && !document.getElementById('ios-ocr-import')) {
+      const entry = document.createElement('div');
+      entry.id = 'ios-ocr-import';
+      const description = document.createElement('p');
+      description.textContent = localized(
+        'OCR: selecciona una imagen o un PDF escaneado. Si no contiene texto extraíble, TifloLector ofrecerá reconocerlo.',
+        'OCR: choose an image or scanned PDF. If it has no extractable text, TifloReader will offer recognition.'
+      );
+      const action = document.createElement('button');
+      action.type = 'button';
+      action.textContent = localized('Reconocer imagen o PDF con OCR', 'Recognize an image or PDF with OCR');
+      action.addEventListener('click', () => fileInput.click());
+      entry.append(description, action);
+      fileLabel.before(entry);
+    }
+
+    // One global default. Each document may override it without changing the default.
+    const settings = document.getElementById('reading-settings-web');
+    if (settings && !document.getElementById('ios-reading-default-unit')) {
+      const label = document.createElement('label');
+      label.htmlFor = 'ios-reading-default-unit';
+      label.textContent = localized('Avance predeterminado para todos los documentos', 'Default navigation unit for all documents');
+      const select = document.createElement('select');
+      select.id = 'ios-reading-default-unit';
+      for (const [value, es, en] of [
+        ['block', 'Bloque', 'Block'], ['paragraph', 'Párrafo', 'Paragraph'],
+        ['sentence', 'Frase', 'Sentence']
+      ]) {
+        const option = document.createElement('option');
+        option.value = value;
+        option.textContent = localized(es, en);
+        select.append(option);
+      }
+      select.value = globalUnit();
+      select.addEventListener('change', () => {
+        storageSet(globalUnitKey, select.value);
+        const notice = document.getElementById('reading-settings-status');
+        if (notice) notice.textContent = localized(
+          'Unidad predeterminada guardada. Podrás cambiarla dentro de cada documento.',
+          'Default unit saved. You can override it inside each document.'
+        );
+      });
+      const note = document.createElement('p');
+      note.textContent = localized(
+        'Este ajuste se aplica al abrir documentos sin una preferencia particular.',
+        'This setting applies to documents without their own preference.'
+      );
+      const container = document.createElement('div');
+      container.append(label, select, note);
+      settings.append(container);
+    }
+
+    // Correct browser-oriented language without claiming unavailable native voices.
+    function amendText(node, replacements) {
+      if (!node) return;
+      const normalize = () => {
+        let value = node.textContent || '';
+        for (const [from, to] of replacements) value = value.replace(from, to);
+        if (value !== node.textContent) node.textContent = value;
+      };
+      new MutationObserver(normalize).observe(node, { childList: true, subtree: true, characterData: true });
+      normalize();
+    }
+    const voiceSelect = document.getElementById('reading-voice');
+    if (voiceSelect) {
+      const adjust = () => {
+        for (const option of voiceSelect.options) {
+          const next = option.textContent
+            .replace('Voz predeterminada del navegador', 'Voz predeterminada del lector')
+            .replace('Browser default voice', 'Reader default voice');
+          if (option.textContent !== next) option.textContent = next;
+        }
+      };
+      new MutationObserver(adjust).observe(voiceSelect, { childList: true });
+      adjust();
+    }
+    amendText(document.getElementById('reading-voice-status'), [
+      [/Esperando las voces del navegador/g, 'Consultando las voces disponibles para este lector en iOS'],
+      [/Waiting for browser voices/g, 'Checking voices available to this iOS reader']
+    ]);
+    amendText(document.getElementById('reading-external-voices-intro'), [
+      [/Consulta proveedores externos[^.]*\.[^.]*\./g,
+        'Las voces disponibles aquí pueden ser menos que las configuradas para VoiceOver. Para gestionar las voces del iPhone, consulta Ajustes, Accesibilidad y las opciones de voz del sistema. Los proveedores externos no garantizan integración con TifloLector.'],
+      [/Browse external providers[^.]*\.[^.]*\./g,
+        'The voices available here may differ from your VoiceOver voices. Manage iPhone voices in Settings, Accessibility and the system voice options. External providers may not work with TifloReader.']
+    ]);
+    amendText(document.getElementById('reading-translation-intro'), [
+      [/Traduce el documento con el motor disponible en tu navegador\. El original se conserva\./g,
+        'La traducción mantiene el documento original, pero esta compilación aún no dispone de un motor de traducción nativo para iOS.'],
+      [/Translate the document with the engine available in your browser\. The original is preserved\./g,
+        'The original document is preserved, but this build does not yet have a native iOS translation engine.']
+    ]);
+    amendText(document.getElementById('reading-translation-status'), [
+      [/Este navegador no ofrece traducción integrada para TifloLector\./g,
+        'La traducción integrada todavía no está disponible en esta versión de TifloLector para iPhone.'],
+      [/This browser does not provide built-in translation for TifloReader\./g,
+        'Built-in translation is not yet available in this iPhone version of TifloReader.']
+    ]);
+
+    function installDocumentControls() {
+      const controls = document.getElementById('reading-document-controls');
+      if (!controls || controls.dataset.iosReadingImproved) return;
+      const audio = document.getElementById('reading-document-open-audio');
+      const visual = document.getElementById('reading-document-open-visual');
+      const more = document.getElementById('reading-document-open-more');
+      const unit = document.getElementById('reading-navigation-unit');
+      const title = document.getElementById('reading-document-title');
+      if (!audio || !visual || !more || !unit || !title) return;
+      controls.dataset.iosReadingImproved = '1';
+
+      // A single settings menu contains sound/voices and visual preferences.
+      const group = document.createElement('div');
+      group.className = 'resource-actions';
+      group.hidden = true;
+      const menu = document.createElement('button');
+      menu.type = 'button';
+      menu.textContent = localized('Ajustes de lectura', 'Reading settings');
+      menu.setAttribute('aria-expanded', 'false');
+      const wrapper = document.createElement('div');
+      wrapper.append(menu, group);
+      more.before(wrapper);
+      group.append(audio, visual);
+      menu.addEventListener('click', () => {
+        group.hidden = !group.hidden;
+        menu.setAttribute('aria-expanded', String(!group.hidden));
+        if (!group.hidden) audio.focus();
+        else menu.focus();
+      });
+
+      // Translation is easy to find without hiding its availability message.
+      const translate = document.createElement('button');
+      translate.type = 'button';
+      translate.textContent = localized('Traducción', 'Translation');
+      translate.addEventListener('click', () => {
+        more.click();
+        queueMicrotask(() => {
+          const heading = document.getElementById('reading-translation-heading');
+          if (heading && !heading.closest('[hidden]')) {
+            heading.tabIndex = -1;
+            heading.focus();
+          }
+        });
+      });
+      more.before(translate);
+
+      // OCR for another scanned document, without exposing an unusable OCR command.
+      const morePanel = document.getElementById('reading-document-more-actions');
+      if (morePanel) {
+        const ocr = document.createElement('button');
+        ocr.type = 'button';
+        ocr.textContent = localized('OCR: abrir imagen o PDF escaneado', 'OCR: open an image or scanned PDF');
+        ocr.addEventListener('click', () => {
+          const back = document.getElementById('reading-reader-back');
+          back?.click();
+          queueMicrotask(() => fileInput?.focus());
+        });
+        morePanel.append(ocr);
+      }
+
+      let documentKey = null;
+      const restoreUnit = () => {
+        const key = unit.dataset.iosBookKey || '';
+        if (!key || key === documentKey) return;
+        documentKey = key;
+        const overrides = readOverrides();
+        const selected = overrides[key];
+        unit.value = validUnits.includes(selected) ? selected : globalUnit();
+        unit.dispatchEvent(new Event('change', { bubbles: true }));
+      };
+      // Initialization is separate so restoring a setting does not store a spurious override.
+      restoreUnit();
+      unit.addEventListener('change', () => {
+        const key = unit.dataset.iosBookKey || documentKey;
+        if (!key || !validUnits.includes(unit.value)) return;
+        const overrides = readOverrides();
+        overrides[key] = unit.value;
+        storageSet(overrideKey, JSON.stringify(overrides));
+      });
+      new MutationObserver(restoreUnit).observe(title, { childList: true, subtree: true, characterData: true });
+      new MutationObserver(restoreUnit).observe(unit, { attributes: true, attributeFilter: ['data-ios-book-key'] });
+    }
+
+    installDocumentControls();
+    new MutationObserver(installDocumentControls).observe(section, { childList: true, subtree: true });
+  }
+
   function init() {
     maintainSingleBackAction();
     if (isIndex) {
       preserveBackNavigationFocus();
+      improveReaderExperience();
       alignHomeSections();
       // Accessible apps now live under the Apps resource category.
       configureNativeSettings();

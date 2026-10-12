@@ -558,6 +558,27 @@ export function renderReadingLibrary({
     const details = document.createElement('section');
     details.className = 'reading-library-item-details';
     details.hidden = true;
+    details.id = `reading-library-details-${String(item.id).replace(/[^a-zA-Z0-9_-]/g, '-')}`;
+    const actionsToggle = makeButton(
+      document.documentElement.lang === 'en'
+        ? `Actions for ${item.title || t('readingLibrary.untitled')}`
+        : `Acciones de ${item.title || t('readingLibrary.untitled')}`,
+      () => {
+        const opening = details.hidden;
+        details.hidden = !opening;
+        actionsToggle.setAttribute('aria-expanded', String(opening));
+        if (opening) {
+          if (!timeLoaded) void loadEstimatedTimes();
+          queueMicrotask(() => detailsHeading.focus());
+        } else {
+          actionsToggle.focus();
+        }
+      },
+      'reading-library-actions-toggle'
+    );
+    actionsToggle.id = `reading-library-actions-${String(item.id).replace(/[^a-zA-Z0-9_-]/g, '-')}`;
+    actionsToggle.setAttribute('aria-controls', details.id);
+    actionsToggle.setAttribute('aria-expanded', 'false');
     const detailsHeading = document.createElement('h3');
     detailsHeading.tabIndex = -1;
     detailsHeading.textContent = item.title || t('readingLibrary.untitled');
@@ -884,8 +905,8 @@ export function renderReadingLibrary({
       fallback(t, 'readingLibrary.backToTitles', 'Volver a los títulos de la biblioteca', 'Back to library titles'),
       () => {
         details.hidden = true;
-        title.setAttribute('aria-expanded', 'false');
-        title.focus();
+        actionsToggle.setAttribute('aria-expanded', 'false');
+        actionsToggle.focus();
       }
     );
 
@@ -903,6 +924,7 @@ export function renderReadingLibrary({
       morePanel,
       close
     );
+    article.append(actionsToggle, details);
     return article;
   }
 

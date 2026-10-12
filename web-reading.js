@@ -1385,8 +1385,8 @@
     return Math.min(100, Math.max(0, (completed * 100) / total));
   }
 
-  function blockIndexForPercent(percent) {
-    const blocks = Array.isArray(documentModel?.blocks) ? documentModel.blocks : [];
+  function blockIndexForPercent(percent, model = documentModel) {
+    const blocks = Array.isArray(model?.blocks) ? model.blocks : [];
     if (!blocks.length) return 0;
     const weights = blocks.map(block => countReadingWords(block?.text));
     const target = Math.max(0, Math.min(100, Number(percent) || 0)) / 100
@@ -1584,6 +1584,8 @@
     }
     setAccessiblePlaybackMode(false);
     clearActiveAudio();
+    els.previous.textContent = t().previous;
+    els.next.textContent = t().next;
     documentModel = model;
     ensureSentenceMetadata();
     originalDocumentModel = documentModel;
@@ -2365,6 +2367,7 @@
     }
     readerChromeState = null;
     els.reader.hidden = true;
+    clearActiveAudio();
 
     if (readerReturnView === 'library') {
       const openLibrary = document.querySelector('[data-reading-view="reading-library-web"]');
@@ -2394,7 +2397,7 @@
     returnToReadingMainFromSubview();
     const model = await modelForSavedBook(opened);
     readerReturnView = 'library';
-    const hasRequestedPercent = Number.isFinite(Number(requestedPercent));
+    const hasRequestedPercent = requestedPercent !== null && requestedPercent !== undefined && Number.isFinite(Number(requestedPercent));
     const percent = hasRequestedPercent ? Math.max(0, Math.min(100, Number(requestedPercent))) : null;
     const maxIndex = Math.max(0, (model?.blocks?.length || 1) - 1);
     const storedBlockIndex = Number(opened.book.blockIndex) || 0;
@@ -2402,13 +2405,13 @@
     const fallbackIndex = storedPercent > 0 && storedBlockIndex === 0
       ? (storedPercent >= 100
           ? maxIndex
-          : Math.min(maxIndex, Math.floor((storedPercent / 100) * (model?.blocks?.length || 1))))
+          : blockIndexForPercent(storedPercent, model))
       : storedBlockIndex;
     const requestedIndex = percent == null
       ? fallbackIndex
       : percent >= 100
         ? maxIndex
-        : Math.min(maxIndex, Math.floor((percent / 100) * (model?.blocks?.length || 1)));
+        : blockIndexForPercent(percent, model);
     await useDocument(model, opened.book.title, {
       source,
       format,

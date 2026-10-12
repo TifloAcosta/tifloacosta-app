@@ -1,3 +1,4 @@
+import { annotationAt, loadAnnotations, saveAnnotations } from '../core/reading-annotations.mjs';
 const MARK_TYPES = ['bookmark', 'important', 'review', 'quote'];
 
 function format(template, values = {}) {
@@ -14,7 +15,7 @@ function mediaPosition(value = {}) {
   };
 }
 
-export function createReadingMarksPanel({ root, client, bookId, t, getPosition, getExcerpt, getReference, onJump, returnFocus }) {
+export function createReadingMarksPanel({ root, client, bookId, t, getPosition, getExcerpt, getReference, onJump, onAnnotationsChanged, returnFocus }) {
   const section = document.createElement('section');
   section.className = 'reading-panel reading-marks-panel';
   section.hidden = true;
@@ -63,6 +64,77 @@ export function createReadingMarksPanel({ root, client, bookId, t, getPosition, 
   const returnButton = document.createElement('button');
   returnButton.type = 'button';
   returnButton.textContent = t('readingBook.returnToReading');
+
+  const annotationHeading = document.createElement('h3');
+  annotationHeading.textContent = document.documentElement.lang === 'en' ? 'Highlights and notes' : 'Resaltados y notas';
+  const annotationForm = document.createElement('form');
+  const annotationLabel = document.createElement('label');
+  annotationLabel.textContent = document.documentElement.lang === 'en' ? 'Note for current reading position' : 'Nota para la posición de lectura actual';
+  const annotationText = document.createElement('textarea');
+  annotationText.maxLength = 4000;
+  annotationLabel.append(annotationText);
+  const annotationHighlightLabel = document.createElement('label');
+  const annotationHighlight = document.createElement('input');
+  annotationHighlight.type = 'checkbox';
+  annotationHighlightLabel.append(annotationHighlight, document.createTextNode(document.documentElement.lang === 'en' ? ' Highlight this passage' : ' Resaltar este fragmento'));
+  const annotationSave = document.createElement('button');
+  annotationSave.type = 'submit';
+  annotationSave.textContent = document.documentElement.lang === 'en' ? 'Save note or highlight' : 'Guardar nota o resaltado';
+  const annotationStatus = document.createElement('p');
+  annotationStatus.setAttribute('role', 'status');
+  const annotationList = document.createElement('ul');
+  annotationForm.append(annotationLabel, annotationHighlightLabel, annotationSave);
+  section.append(annotationHeading, annotationForm, annotationStatus, annotationList);
+
+  function renderAnnotations() {
+    annotationList.replaceChildren();
+    for (const item of loadAnnotations(bookId)) {
+      const line = document.createElement('li');
+      const description = document.createElement('p');
+      description.textContent = [item.excerpt, item.highlight ? (document.documentElement.lang === 'en' ? 'Highlighted' : 'Resaltado') : '', item.note].filter(Boolean).join('. ');
+      const jump = document.createElement('button');
+      jump.type = 'button';
+      jump.textContent = document.documentElement.lang === 'en' ? 'Go to annotation' : 'Ir a la anotación';
+      jump.addEventListener('click', () => closeAndReturn(() => onJump?.(item)));
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.textContent = document.documentElement.lang === 'en' ? 'Delete annotation' : 'Eliminar anotación';
+      remove.addEventListener('click', () => {
+        const next = loadAnnotations(bookId).filter(value => !(value.blockIndex === item.blockIndex && value.unitIndex === item.unitIndex));
+        if (!saveAnnotations(bookId, next)) return;
+        onAnnotationsChanged?.();
+        renderAnnotations();
+        annotationStatus.textContent = document.documentElement.lang === 'en' ? 'Annotation removed.' : 'Anotación eliminada.';
+      });
+      line.append(description, jump, remove);
+      annotationList.append(line);
+    }
+  }
+
+  function populateCurrentAnnotation() {
+    const existing = annotationAt(loadAnnotations(bookId), getPosition?.() || {});
+    annotationText.value = existing?.note || '';
+    annotationHighlight.checked = existing?.highlight === true;
+  }
+
+  annotationForm.addEventListener('submit', event => {
+    event.preventDefault();
+    const position = getPosition?.() || {};
+    const note = annotationText.value.trim();
+    const highlight = annotationHighlight.checked;
+    const next = loadAnnotations(bookId).filter(item => !(item.blockIndex === position.blockIndex && item.unitIndex === position.unitIndex));
+    if (note || highlight) next.push({
+      blockIndex: position.blockIndex, unitIndex: position.unitIndex,
+      note, highlight, excerpt: String(getExcerpt?.(position) || '').slice(0, 300)
+    });
+    if (!saveAnnotations(bookId, next)) {
+      annotationStatus.textContent = document.documentElement.lang === 'en' ? 'Could not save annotation.' : 'No se pudo guardar la anotación.';
+      return;
+    }
+    onAnnotationsChanged?.();
+    renderAnnotations();
+    annotationStatus.textContent = document.documentElement.lang === 'en' ? 'Annotation saved.' : 'Anotación guardada.';
+  });
 
   section.append(heading, typeLabel, typeSelect, addButton, filterLabel, filter, status, list, returnButton);
   root.append(section);
@@ -151,6 +223,8 @@ export function createReadingMarksPanel({ root, client, bookId, t, getPosition, 
   function open() {
     section.hidden = false;
     void loadMarks();
+    populateCurrentAnnotation();
+    renderAnnotations();
     queueMicrotask(() => typeSelect.focus());
   }
 

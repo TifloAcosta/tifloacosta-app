@@ -42,8 +42,8 @@ const found = await api('builds', {
 });
 const builds = found.data || [];
 console.log('RECENT_BUILDS', builds.length);
-const target = builds.find(b => b.attributes?.version === '200066');
-console.log('TARGET_200066', target
+const target = builds.find(b => b.attributes?.version === '200067');
+console.log('TARGET_200067', target
   ? `id=${target.id} processing=${target.attributes?.processingState} uploaded=${target.attributes?.uploadedDate}`
   : 'NOT_VISIBLE_IN_APP_STORE_CONNECT_BUILDS_YET');
 for (const build of builds.slice(0, 20)) {
@@ -53,7 +53,7 @@ for (const build of builds.slice(0, 20)) {
     'audience='+a.buildAudienceType,
     'uploaded='+a.uploadedDate,
     'expired='+a.expired);
-  if (['100063','100064','200062','200063','200064','200065','200066'].includes(a.version)) {
+  if (['100063','100064','200062','200063','200064','200065','200066','200067'].includes(a.version)) {
     try {
       const details = await api('buildBetaDetails', { 'filter[build]':build.id, limit:10 });
       for (const d of details.data || []) console.log('BETA_DETAIL', a.version,
@@ -66,7 +66,7 @@ for (const build of builds.slice(0, 20)) {
     }
   }
 }
-for (const version of ['100063','100064','200063','200064','200065','200066']) {
+for (const version of ['100063','100064','200063','200064','200065','200066','200067']) {
   if (!builds.some(b => b.attributes?.version === version)) console.log('BUILD_' + version + '_NOT_VISIBLE_IN_APP_STORE_CONNECT_API');
 }
 
@@ -89,7 +89,7 @@ try {
   console.log('UPLOAD_STATUS_QUERY_ERROR', error.message);
 }
 
-for (const version of ['100063','100064','200063','200064','200065','200066']) {
+for (const version of ['100063','100064','200063','200064','200065','200066','200067']) {
   try {
     const exact = await api('apps/' + app.id + '/buildUploads', {
       'filter[cfBundleVersion]':version, limit:20
@@ -116,7 +116,8 @@ for (const group of groups.data || []) {
     console.log('GROUP_BUILDS', a.name, versions.slice(0, 18).join(',') || '(empty)',
       'has200063='+versions.includes('200063'),
       'has100064='+versions.includes('100064'),
-      'has200066='+versions.includes('200066'));
+      'has200066='+versions.includes('200066'),
+      'has200067='+versions.includes('200067'));
   } catch (error) { console.log('GROUP_BUILDS_ERROR', a.name, error.message); }
   try {
     const testers = await api('betaGroups/' + group.id + '/betaTesters', { limit:50 });

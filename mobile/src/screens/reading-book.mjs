@@ -406,6 +406,23 @@ export function renderReadingBook({
     moreReturn
   );
 
+  const contentsSection = document.createElement('section');
+  contentsSection.hidden = true;
+  const contentsHeading = document.createElement('h2');
+  contentsHeading.textContent = document.documentElement.lang === 'en' ? 'Chapters and headings' : 'Capítulos y encabezados';
+  const contentsLabel = document.createElement('label');
+  contentsLabel.textContent = document.documentElement.lang === 'en' ? 'Choose heading' : 'Seleccionar encabezado';
+  const contentsSelect = document.createElement('select');
+  contentsSelect.id = 'reading-contents-select';
+  contentsLabel.htmlFor = contentsSelect.id;
+  const contentsGo = document.createElement('button');
+  contentsGo.type = 'button';
+  contentsGo.textContent = document.documentElement.lang === 'en' ? 'Go to heading' : 'Ir al encabezado';
+  const contentsStatus = document.createElement('p');
+  contentsStatus.setAttribute('role', 'status');
+  contentsStatus.setAttribute('aria-live', 'polite');
+  contentsSection.append(contentsHeading, contentsLabel, contentsSelect, contentsGo, contentsStatus);
+
   const pdfPageNavigation = document.createElement('nav');
   pdfPageNavigation.className = 'reading-library-pagination reading-pdf-pagination';
   pdfPageNavigation.setAttribute('aria-label', t('readingBook.navigation'));
@@ -505,6 +522,7 @@ export function renderReadingBook({
     pdfPasswordForm,
     controls,
     pdfPageNavigation,
+    contentsSection,
     readerContainer,
     moreActions,
     panels,
@@ -941,6 +959,31 @@ export function renderReadingBook({
     return saved;
   }
 
+  function populateTableOfContents() {
+    contentsSelect.replaceChildren();
+    const blocks = Array.isArray(documentModel?.blocks) ? documentModel.blocks : [];
+    const headings = blocks.map((block, index) => ({ block, index }))
+      .filter(({ block }) => block?.type === 'heading' && String(block.text || '').trim());
+    contentsSection.hidden = headings.length === 0;
+    for (const { block, index } of headings) {
+      const choice = document.createElement('option');
+      choice.value = String(index);
+      choice.textContent = String(block.text).trim();
+      contentsSelect.append(choice);
+    }
+    contentsStatus.textContent = headings.length
+      ? (document.documentElement.lang === 'en'
+        ? headings.length + ' headings available.'
+        : headings.length + ' encabezados disponibles.')
+      : '';
+  }
+
+  contentsGo.addEventListener('click', () => {
+    const index = Number(contentsSelect.value);
+    if (!Number.isInteger(index) || !documentModel?.blocks?.[index] || documentModel.blocks[index].type !== 'heading') return;
+    void moveToPosition({ blockIndex: index, unitIndex: 0 }, { focus: true });
+  });
+
   function navigationTarget(position, direction) {
     const step = Number(direction) < 0 ? -1 : 1;
     const kind = navigationSelect.value || 'sentence';
@@ -1177,6 +1220,7 @@ export function renderReadingBook({
           ? parseHtmlDocument(opened.content, { title: activeBook.title })
           : parseTextDocument(opened.content, { title: activeBook.title });
 
+    populateTableOfContents();
     if (!documentModel.blocks.length) {
       status.textContent = t('readingBook.empty');
       clearInteractiveReading();

@@ -1,4 +1,5 @@
 import { normalizeSemanticPosition } from './reading-semantic-model.mjs';
+import { applyPronunciationRules, loadPronunciationRules, normalizePronunciationRules } from './reading-pronunciation.mjs';
 
 let nextControllerId = 1;
 const SESSION_CHUNK_SIZE = 100;
@@ -87,6 +88,9 @@ export function createReadingSpeechController({
   let position = normalizeSemanticPosition(initialPosition, document);
   let voiceId = String(settings?.['speech.voice'] ?? '').trim();
   let rate = clampRate(settings?.['speech.rate']);
+  let pronunciationRules = loadPronunciationRules();
+  let preparedPronunciationVersion = -1;
+  let pronunciationVersion = 0;
   let playing = false;
   let ended = documentBlocks(document).length === 0 || currentUnit(document, position) == null;
   let prepared = false;
@@ -210,7 +214,7 @@ export function createReadingSpeechController({
   }
 
   function configurationMatchesPreparedSession() {
-    return prepared && preparedVoiceId === voiceId && preparedRate === rate;
+    return prepared && preparedVoiceId === voiceId && preparedRate === rate && preparedPronunciationVersion === pronunciationVersion;
   }
 
   async function prepareNativeSession() {
@@ -249,7 +253,10 @@ export function createReadingSpeechController({
     for (let index = 0; index < units.length; index += SESSION_CHUNK_SIZE) {
       const appended = await tts.appendTtsUnits?.({
         sessionId: activeSessionId,
-        units: units.slice(index, index + SESSION_CHUNK_SIZE)
+        units: units.slice(index, index + SESSION_CHUNK_SIZE).map(unit => ({
+          ...unit,
+          text: applyPronunciationRules(unit.text, pronunciationRules)
+        }))
       });
       if (appended !== true) {
         try { await tts.stopTts?.(); } catch {}
@@ -268,6 +275,7 @@ export function createReadingSpeechController({
     prepared = true;
     preparedVoiceId = voiceId;
     preparedRate = rate;
+    preparedPronunciationVersion = pronunciationVersion;
     return true;
   }
 
@@ -336,6 +344,13 @@ export function createReadingSpeechController({
     return rate;
   }
 
+  function setPronunciationRules(value) {
+    pronunciationRules = normalizePronunciationRules(value);
+    pronunciationVersion += 1;
+    prepared = false;
+    return pronunciationRules.length;
+  }
+
   function snapshot() {
     return {
       position: { ...position },
@@ -379,6 +394,7 @@ export function createReadingSpeechController({
     moveTo,
     setVoice,
     setRate,
+    setPronunciationRules,
     snapshot,
     syncNativeState,
     destroy

@@ -333,8 +333,43 @@ iosApp = iosApp.replace(successEvent, successEvent + '\n' +
   '      window.dispatchEvent(new CustomEvent("tiflo-refresh-novedades-result", { detail: { ok: true, newestDate: newest?.newsDate || "" } }));');
 const refreshCatch = '    } catch {\n      // Offline and network failures must preserve the packaged catalog.\n    }';
 if (!iosApp.includes(refreshCatch)) throw new Error('Falta protección offline de Novedades iOS');
-iosApp = iosApp.replace(refreshCatch,
-  '    } catch {\n      // Offline and network failures must preserve the packaged catalog.\n      window.dispatchEvent(new CustomEvent("tiflo-refresh-novedades-result", { detail: { ok: false } }));\n    }');
+// Keep the latest dated publications available even if the separate data.js
+// endpoint fails, without suppressing the error when neither feed is usable.
+const invalidResourceCatalog = '      if (!valid) return;';
+if (!iosApp.includes(invalidResourceCatalog)) throw new Error('Falta comprobación de validez de Novedades');
+iosApp = iosApp.replace(invalidResourceCatalog, '      if (!valid) throw new Error("Invalid resource catalog");');
+const independentNewsRecovery = [
+  "    } catch {",
+  "      // data.js may be unreachable or malformed while mobile-content.json is available.",
+  "      // The dated feed must therefore have its own independent recovery path.",
+  "      try {",
+  '        const feedResponse = await ' + networkFirst('mobile-content.json') + ';',
+  "        if (!feedResponse?.ok) throw new Error('Mobile news feed unavailable');",
+  "        const feed = await feedResponse.json();",
+  "        if (feed?.schemaVersion !== 1 || !Array.isArray(feed.resources)) throw new Error('Invalid mobile news feed');",
+  "        const merged = new Map((Array.isArray(data) ? data : []).filter(item => item?.id).map(item => [item.id, item]));",
+  "        let dated = 0;",
+  "        for (const item of feed.resources) {",
+  "          if (!item?.isNew || !item.id || !item.title || !Number.isFinite(Date.parse(item.newsDate || ''))) continue;",
+  "          merged.set(item.id, { ...(merged.get(item.id) || {}), ...item, new: true });",
+  "          dated++;",
+  "        }",
+  "        if (!dated) throw new Error('No dated publications in mobile news feed');",
+  "        data = [...merged.values()];",
+  "        window.TIFLO_RESOURCES = data;",
+  "        renderNews();",
+  "        renderCategories();",
+  "        renderFavoritesScreen();",
+  "        window.dispatchEvent(new CustomEvent('tiflo-resources-updated', { detail: { items: data } }));",
+  "        const newest = data.filter(item => item?.new && Number.isFinite(Date.parse(item.newsDate || ''))).sort((a, b) => Date.parse(b.newsDate) - Date.parse(a.newsDate))[0];",
+  "        window.dispatchEvent(new CustomEvent('tiflo-refresh-novedades-result', { detail: { ok: true, source: 'mobile-feed', newestDate: newest?.newsDate || '' } }));",
+  "      } catch {",
+  "        // Keep previously displayed publications, but never claim that a check succeeded.",
+  "        window.dispatchEvent(new CustomEvent('tiflo-refresh-novedades-result', { detail: { ok: false } }));",
+  "      }",
+  "    }",
+].join('\n');
+iosApp = iosApp.replace(refreshCatch, independentNewsRecovery);
 
 const iosStartPoint = 'applyPrefs();applyLanguage();loadActualidadHome();trackLanguageUse();announceCompletedUpdate();';
 if (!iosApp.includes(iosStartPoint)) throw new Error('No se encuentra inicialización de Novedades');

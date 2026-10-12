@@ -402,10 +402,13 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
     if (Capacitor.getPlatform() === 'ios') {
       // iOS does not offer a supported URL that opens its voice download screen.
       // Remain in the voice chooser; refresh voices when the app becomes active.
-      voiceStatus.textContent = document.documentElement.lang === 'en'
-        ? 'To install system voices, open iPhone Settings > Accessibility > Spoken Content > Voices. Return here and the list will refresh.'
-        : 'Para instalar voces, abre Ajustes del iPhone, Accesibilidad, Contenido leído, Voces. Al regresar aquí, se actualizará la lista.';
-      void refreshVoicesAfterResume();
+      void (async () => {
+        await refreshVoicesAfterResume();
+        if (destroyed) return;
+        voiceStatus.textContent = document.documentElement.lang === 'en'
+          ? 'To install voices, open iPhone Settings, Accessibility, Spoken Content, Voices. Return here to refresh the list.'
+          : 'Para instalar voces, abre Ajustes del iPhone, Accesibilidad, Contenido leído, Voces. Regresa aquí para actualizar la lista.';
+      })();
       return;
     }
     lastInvoker = getMoreVoices;

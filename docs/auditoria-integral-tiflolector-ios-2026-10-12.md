@@ -50,6 +50,31 @@ La build iOS **300071** empaquetó la ruta web. Pasar los comprobadores anterior
 - **Ramas con trabajo no consolidado:** `feat/ios-tiflolector-library-first-20261012`, `feat/ios-tiflolector-compact-library-20261012` y `feat/guia-accesible-tiflolector-20261012` contienen trabajo potencialmente útil (guía y biblioteca más directa) no presente íntegramente en `preparacion-ios`. No fusionar a ciegas porque la rama de biblioteca compacta también conserva partes viejas de la interfaz. Comparar funcionalidad y migrar conscientemente cada cambio.
 - **Diferencia de modelos de datos:** la base web en IndexedDB no equivale al almacenamiento nativo Android. La actualización de TestFlight no debe borrar datos y el cambio de arquitectura exigirá una migración probada.
 
+## Conciliación de las nueve mejoras pendientes acordadas
+
+Esta lista procede de los acuerdos con el usuario del 12/10 y debe preservarse **por completo**; no basta con registrar las incidencias recientes.
+
+| N.º | Mejora pendiente | Comprobación de la ruta publicada en iOS / obligación |
+| --- | --- | --- |
+| 1 | **Acciones mediante gestos arriba/abajo de VoiceOver sobre cada título** | No existe plugin nativo en iOS para `UIAccessibilityCustomAction` por documento. **Bloqueado**. El botón convencional de acciones es un respaldo, no sustitución. |
+| 2 | **Diccionario de pronunciación** (sustituciones específicas de palabras) | No aparece controlador de diccionario pronunciación en `web-reading.js` ni `ios-reader-native.js`. **Sin implementar** en iOS. Definir alcance por idioma/documento, guardar entradas y aplicarlas sin modificar el original. |
+| 3 | **Navegación por capítulos y encabezamientos** además de frase/párrafo, y niveles DAISY | Lector web se limita a bloque/párrafo/frase; el móvil usa navegación semántica más amplia. **Sin paridad**. |
+| 4 | **Seguimiento visual durante la lectura** (identificar el texto actual) | No se ha localizado resaltado automático sincronizado con TTS dentro del lector web. **Sin implementar**; debe ser opcional y no mover el foco de VoiceOver. |
+| 5 | **Buscar y filtrar Mi biblioteca** | Existe búsqueda dentro del documento; la biblioteca web solo muestra hasta 100 libros recientes y no ofrece filtros en `preparacion-ios`. El desarrollo `feat/ios-tiflolector-library-first-20261012` tiene filtros y biblioteca visible, pero no está integrado en la ruta actual. **Pendiente de portar y probar**. |
+| 6 | **Resaltados y notas asociadas a fragmentos** | Hay marcadores/etiquetas, pero no se ha verificado edición de notas ni resaltado libre con retorno a texto. **Pendiente**. |
+| 7 | **Renombrar documentos** | `shared/web-reading-library-adapter.mjs` ya tenía `updateBookMetadata` y la pantalla móvil formulario; faltaba opción visible en iOS. **Implementada en la interfaz web de la rama iOS** (commits `bc17df5`, `9e926bc`), pendiente prueba real de conservación del foco y de metadatos. |
+| 8 | **Traducción persistente, recuperable y exportable** | Traducción nativa con resultado original/traducción y almacenamiento derivado cuando el libro está guardado; `exportSavedBook` exporta el original, no una variante traducida elegida. **Parcial**, falta recorrer guardado, reapertura y exportación explícita de la traducción. |
+| 9 | **OCR fiable, accesible y verificable** para PDF/imágenes | Existen rutas pdf.js/Tesseract de uso bajo demanda; dependen de librerías externas y no hay aceptación de casos reales con VoiceOver ni desconexión. **Parcial**. |
+
+### Otras decisiones previas que no deben perderse
+
+- Pantalla inicial de TifloLector: **Importar documento o imagen**, Ajustes de lectura **cerrados** con Audio y voz / Presentación visual / General y formatos dentro de General, **Mi biblioteca visible** con **Todos los documentos** preseleccionado y **Marcadores al final**. Evitar pegar texto y botones redundantes de regresar al inicio. La rama iOS actual **todavía no cumple por entero este orden**.
+- Un solo botón cambiante **Reproducir/Pausa**. No copiar el HTML de la rama `feat/ios-tiflolector-library-first-20261012` sin revisión: contiene **dos botones distintos** en su versión antigua.
+- Acceso a voces del **iPhone** y traducción **nativa**; controles ajustables accesibles durante TTS, conservar foco y progreso global.
+- DAISY comprimido 2.02/3 con niveles, encabezamientos, capítulos/páginas/SMIL y audio; archivos MP3/M4A y multipistas con estructura y tiempos, sin prometer soporte no probado.
+- **Guía accesible de uso** con capítulos desplegables, en la portada antes de las secciones. Existen ramas con guías de 16 capítulos, pero no se ha integrado su versión final de forma verificada en `preparacion-ios`.
+- Conservar biblioteca y datos al actualizar y preservar las mejoras existentes de Novedades, TifloReproductor, Recursos y navegación general; **no fusionar archivos completos de otras ramas sin auditoría de compatibilidad**.
+
 ## Plan de ejecución, orden obligatorio
 
 1. **Unificar el producto:** fijar como contrato funcional el lector avanzado de `mobile/src`. Decidir cómo llevarlo a iOS sin depender de los plugins Android. No confundir frontend avanzado con funcionalidad nativa instalada.

@@ -5,6 +5,41 @@
   // buttons instead, including for dynamically inserted reader controls.
   const section = document.getElementById('reading-section');
   if (!section) return;
+  // iOS-only import entry: a real button is announced in the chosen app
+  // language, while the WKWebView file input is kept solely as a picker bridge.
+  // Do not limit the native Files picker by a long HTML accept list: some
+  // system document providers wrongly disable supported PDF/EPUB/Office files.
+  // TifloLector still checks the selected file content and format itself.
+  function installDocumentImporter() {
+    const input = section.querySelector('#reading-file');
+    if (!(input instanceof HTMLInputElement) || input.type !== 'file' ||
+        section.querySelector('#ios-reading-file-button')) return;
+    const label = section.querySelector('label[for="reading-file"]');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.id = 'ios-reading-file-button';
+    button.className = 'button-link ios-reading-import';
+    const update = () => {
+      const english = document.documentElement.lang?.toLowerCase().startsWith('en');
+      button.textContent = english ? 'Import document or image' : 'Importar documento o imagen';
+    };
+    button.addEventListener('click', () => input.click());
+    input.removeAttribute('accept');
+    input.hidden = true;
+    input.style.display = 'none';
+    input.tabIndex = -1;
+    input.setAttribute('aria-hidden', 'true');
+    if (label) {
+      label.hidden = true;
+      label.insertAdjacentElement('afterend', button);
+    } else {
+      input.insertAdjacentElement('beforebegin', button);
+    }
+    new MutationObserver(update).observe(document.documentElement,
+      { attributes: true, attributeFilter: ['lang'] });
+    update();
+  }
+  installDocumentImporter();
   function install(select) {
     if (!(select instanceof HTMLSelectElement) || select.dataset.iosAccessibleChoice) return;
     select.dataset.iosAccessibleChoice = '1';

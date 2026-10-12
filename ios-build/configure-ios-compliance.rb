@@ -23,6 +23,28 @@ location_value, location_status = Open3.capture2e(plist_buddy, '-c', "Print #{lo
 location_action = location_status.success? ? "Set #{location_key} #{location_reason}" : "Add #{location_key} string #{location_reason}"
 location_result, location_result_status = Open3.capture2e(plist_buddy, '-c', location_action, plist_path)
 raise 'Could not configure location purpose' unless location_result_status.success?
+# The native iOS Files/photo chooser uses bundle localization, not the
+# JavaScript language switch. The Capacitor-generated project defaults to
+# English unless we explicitly register Spanish before the IPA is archived.
+def set_plist_string(plist_buddy, plist_path, key, value)
+  _, current = Open3.capture2e(plist_buddy, '-c', "Print :#{key}", plist_path)
+  command = current.success? ? "Set :#{key} #{value}" : "Add :#{key} string #{value}"
+  output, status = Open3.capture2e(plist_buddy, '-c', command, plist_path)
+  raise "Unable to configure #{key}: #{output.strip}" unless status.success?
+end
+
+set_plist_string(plist_buddy, plist_path, 'CFBundleDevelopmentRegion', 'es')
+_, locales_status = Open3.capture2e(plist_buddy, '-c', 'Print :CFBundleLocalizations', plist_path)
+if locales_status.success?
+  _, removed = Open3.capture2e(plist_buddy, '-c', 'Delete :CFBundleLocalizations', plist_path)
+  raise 'Unable to reset iOS localizations' unless removed.success?
+end
+['Add :CFBundleLocalizations array', 'Add :CFBundleLocalizations:0 string es',
+ 'Add :CFBundleLocalizations:1 string en'].each do |command|
+  output, status = Open3.capture2e(plist_buddy, '-c', command, plist_path)
+  raise "Unable to configure iOS locale: #{output.strip}" unless status.success?
+end
+
 # Set the correct declaration: no *non-exempt* encryption. Standard HTTPS
 # through Apple/OS networking remains allowed. Reassess if crypto changes.
 key = ':ITSAppUsesNonExemptEncryption'
@@ -34,6 +56,7 @@ value, value_status = Open3.capture2e(plist_buddy, '-c', "Print #{key}", plist_p
 raise 'Encryption export declaration is not Boolean false' unless value_status.success? && value.strip.downcase == 'false'
 
 project = Xcodeproj::Project.open(project_path)
+project.root_object.development_region = 'es'
 app_target = project.targets.find { |target| target.name == 'App' }
 raise 'Generated iOS application target not found' unless app_target
 app_target.build_configurations.each do |configuration|

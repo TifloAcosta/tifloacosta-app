@@ -80,7 +80,7 @@ jobs:
           PY
           echo "ASC_KEY_PATH=$TARGET_KEY" >> "$GITHUB_ENV"
       - name: Comprobar accesibilidad de biblioteca y actualización de Novedades
-        run: node --test ios-build/test/live-novedades-library-actions.test.mjs
+        run: node --test ios-build/test/live-novedades-library-actions.test.mjs ios-build/test/ios-reader-import-localization.test.mjs
       - name: Preparar proyecto iOS
         working-directory: ios-build
         run: |

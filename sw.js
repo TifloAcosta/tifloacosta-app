@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-47-reader-audit';
+const CACHE = 'tifloacosta-app-v2-48-guide-library';
 const NAVIGATION_TIMEOUT_MS = 5000;
 // Resource catalog is refreshed from the network.
 const SHELL = [
@@ -17,6 +17,7 @@ const SHELL = [
   './actualidad.js?v=1.3',
   './actualidad-media.js?v=1.1',
   './web-reading.js?v=3.15',
+  './tifloacosta-guide.js',
   './podcast.html',
   './podcast.js?v=1.0',
   './app.js?v=2.3',

@@ -1078,6 +1078,9 @@
     els.translationStop.textContent = c.translationStop;
     els.translationOriginal.textContent = c.translationOriginal;
     els.translationTranslated.textContent = c.translationTranslated;
+    if (els.translationRead) els.translationRead.textContent = language() === 'en' ? 'Read the translated document' : 'Leer el documento traducido';
+    const settingsSummary = document.getElementById('reading-settings-summary');
+    if (settingsSummary) settingsSummary.textContent = language() === 'en' ? 'Reading settings' : 'Ajustes de lectura';
     if (!documentModel) els.title.textContent = c.document;
     populateVoices();
     renderExternalVoices();

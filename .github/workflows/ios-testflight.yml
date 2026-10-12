@@ -99,6 +99,27 @@ jobs:
           /usr/libexec/PlistBuddy -c "Add :CFBundleLocalizations:0 string es" ios/App/App/Info.plist || true
           /usr/libexec/PlistBuddy -c "Add :CFBundleDevelopmentRegion string es" ios/App/App/Info.plist || /usr/libexec/PlistBuddy -c "Set :CFBundleDevelopmentRegion es" ios/App/App/Info.plist
           test -s ios/App/App/Info.plist
+      - name: Ajustar OneSignal a la versión mínima iOS 15 requerida por sus dependencias
+        working-directory: mobile
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          package = Path('node_modules/@onesignal/capacitor-plugin/Package.swift')
+          if not package.is_file():
+              raise SystemExit('No se encontró el manifiesto SwiftPM de OneSignal')
+          original = package.read_text()
+          updated, count = re.subn(r'\.iOS\(\.v14(?:_0)?\)', '.iOS(.v15)', original)
+          if count == 0 and '.iOS(.v15)' in original:
+              print('OneSignal ya declara iOS 15')
+          elif count == 1:
+              package.write_text(updated)
+              print('OneSignal alineado: iOS mínimo 15')
+          else:
+              raise SystemExit('Versión iOS inesperada en OneSignal; comprobar Package.swift')
+          PY
       - name: Asignar número de compilación único para TestFlight
         working-directory: mobile
         env:

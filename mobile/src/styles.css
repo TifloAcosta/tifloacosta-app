@@ -366,6 +366,12 @@ select:focus-visible {
   background: var(--reading-background);
 }
 
+.reading-reader .reading-current-unit[aria-current="true"] {
+  outline: 0.12rem solid currentColor;
+  outline-offset: 0.16rem;
+  border-radius: 0.2rem;
+}
+
 .reading-reader[data-reading-theme="light"] {
   color-scheme: light;
 }

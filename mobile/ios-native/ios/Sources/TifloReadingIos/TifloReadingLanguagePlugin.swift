@@ -2,6 +2,7 @@ import Foundation
 import NaturalLanguage
 import Capacitor
 import SwiftUI
+import UIKit
 import Translation
 
 /// Uses Apple's on-device Translation framework, never a browser or remote translator.

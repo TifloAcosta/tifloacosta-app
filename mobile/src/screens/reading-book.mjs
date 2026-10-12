@@ -880,6 +880,9 @@ export function renderReadingBook({
     element.dataset.blockIndex = String(normalized.blockIndex);
     element.dataset.unitIndex = String(normalized.unitIndex);
     element.dataset.readingUnit = 'current';
+    // Mark the actively spoken unit for accessible and visual reading follow-along.
+    element.classList.add('reading-current-unit');
+    element.setAttribute('aria-current', 'true');
     readerContainer.replaceChildren(element);
     readerContainer.append(renderBlockLinks(block, unitText, normalized));
     if (commit) currentPosition = normalized;

@@ -1,0 +1,52 @@
+name: Comprobar llegada real a TestFlight
+on:
+  push:
+    branches: [preparacion-ios]
+    paths:
+      - '.github/workflows/testflight-status.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Consultar compilación 300070 directamente en App Store Connect
+        env:
+          API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+          API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+          API_PRIVATE: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+        run: |
+          node <<'NODE'
+          const crypto = require('node:crypto');
+          const enc = x => Buffer.from(JSON.stringify(x)).toString('base64url');
+          const now = Math.floor(Date.now()/1000);
+          let key = process.env.API_PRIVATE.trim().replace(/^["']|["']$/g,'').replace(/\\r\\n/g,'\n').replace(/\\n/g,'\n');
+          if (!key.includes('-----BEGIN')) {
+            try { key=Buffer.from(key,'base64').toString(); } catch {}
+          }
+          if (!key.includes('-----BEGIN PRIVATE KEY-----')) throw Error('No hay credencial válida para consultar Apple');
+          const base = enc({alg:'ES256',kid:process.env.API_ID,typ:'JWT'})+'.'+enc({iss:process.env.API_ISSUER,iat:now,exp:now+1000,aud:'appstoreconnect-v1'});
+          const token = base+'.'+crypto.sign('sha256', Buffer.from(base), {key,dsaEncoding:'ieee-p1363'}).toString('base64url');
+          async function api(route) {
+            const res=await fetch('https://api.appstoreconnect.apple.com/v1/'+route, {headers:{Authorization:'Bearer '+token}});
+            const payload=await res.json();
+            if (!res.ok) throw Error('Apple HTTP '+res.status+': '+JSON.stringify(payload.errors||payload).slice(0,500));
+            return payload;
+          }
+          const builds = await api('builds?filter%5Bapp%5D=6820517829&sort=-uploadedDate&limit=35&include=buildBetaDetail,betaGroups');
+          const target=builds.data.find(x=>x.attributes.version==='300070');
+          console.log('Ultimas compilaciones Apple: '+JSON.stringify(builds.data.slice(0,8).map(x=>({numero:x.attributes.version,estado:x.attributes.processingState,fecha:x.attributes.uploadedDate}))));
+          if (!target) { console.error('Todavía no figura 300070 en App Store Connect. Subida aceptada no equivale a entrega en TestFlight.'); process.exitCode=2; return; }
+          const rel=target.relationships||{};
+          const ids=(rel.betaGroups?.data||[]).map(x=>x.id);
+          const assigned=builds.included?.filter(x=>x.type==='betaGroups' && ids.includes(x.id)).map(x=>({nombre:x.attributes.name,interno:x.attributes.isInternalGroup,auto:x.attributes.hasAccessToAllBuilds}))||[];
+          const detailId=rel.buildBetaDetail?.data?.id;
+          let beta=builds.included?.find(x=>x.type==='buildBetaDetails' && x.id===detailId)?.attributes;
+          if (!beta && detailId) beta=(await api('buildBetaDetails/'+detailId)).data.attributes;
+          console.log('ESTADO COMPILACION 300070 '+JSON.stringify({procesamiento:target.attributes.processingState,subida:target.attributes.uploadedDate,estadoInterno:beta?.internalBuildState,grupos:assigned,gruposIds:ids}));
+          if (target.attributes.processingState==='FAILED'||target.attributes.processingState==='INVALID') { console.error('Apple rechazó el procesamiento de la compilación.'); process.exitCode=2; }
+          else if (target.attributes.processingState!=='VALID') { console.log('Aún no está disponible en TestFlight.'); process.exitCode=2; }
+          else console.log('Compilación VALID en Apple; verificar estado interno y grupo asignado antes de comunicar disponibilidad.');
+          NODE

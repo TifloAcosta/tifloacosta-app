@@ -36,3 +36,16 @@ test('app compares every resolved catalog and consumes only the language actuall
   assert.match(source, /filter\(id\s*=>\s*!visitedIds\.has\(id\)\)/);
   assert.match(source, /newIds:\s*currentNewNewsIds/);
 });
+
+
+test('Novedades refreshes after iOS resumes while retaining a stable VoiceOver focus', async () => {
+  const [app, news] = await Promise.all([read('src/app.mjs'), read('src/screens/new-content.mjs')]);
+  assert.match(app, /onAppResume\(\(\) => \{ void refreshMobileContent\(\); \}\)/);
+  assert.match(app, /contentStore\.load\(\)/);
+  assert.match(app, /rememberFocusedId\(root\)/);
+  assert.match(app, /restoreOriginFocus\(root, focusedId\)/);
+  assert.match(app, /contentScreens\.has\(router\.current\(\)\?\.name\)/);
+  assert.match(news, /Date\.parse\(b\.newsDate/);
+  assert.match(news, /Publicado:/);
+  assert.match(news, /Última novedad publicada:/);
+});

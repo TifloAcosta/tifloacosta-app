@@ -313,23 +313,27 @@
       <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
     </section>
 
-    <section id="reading-management-web" class="panel" aria-labelledby="reading-management-heading">
-      <h3 id="reading-management-heading">Biblioteca y lectura</h3>
-      <div class="resource-actions" aria-label="Biblioteca y lectura">
-        <button type="button" data-reading-view="reading-library-web">Mi biblioteca</button>
-        <button type="button" data-reading-view="reading-queue-web">Cola de lectura</button>
-        <button type="button" data-reading-view="reading-marks-web">Marcadores</button>
-      </div>
-    </section>
-
-    <section id="reading-library-web" class="panel reading-subview" hidden aria-labelledby="reading-library-heading">
-      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
+    <section id="reading-library-web" class="panel" aria-labelledby="reading-library-heading">
       <h3 id="reading-library-heading" tabindex="-1">Mi biblioteca</h3>
       <p id="reading-library-intro">Los documentos se guardan localmente en esta instalación de TifloLector. No se sincronizan automáticamente con otros dispositivos.</p>
+      <label id="reading-library-filter-label" for="reading-library-filter">Mostrar en Mi biblioteca</label>
+      <select id="reading-library-filter">
+        <option value="all" selected>Todos los documentos</option>
+        <option value="recent">Importados recientemente</option>
+        <option value="in-reading">En lectura</option>
+        <option value="not-read">Sin leer</option>
+        <option value="read">Leídos</option>
+        <option value="queue">Cola de lectura</option>
+      </select>
+      <label id="reading-library-query-label" for="reading-library-query">Buscar un documento por título o autor</label>
+      <input id="reading-library-query" type="search" autocomplete="off">
       <button id="reading-library-refresh" type="button">Actualizar biblioteca</button>
       <p id="reading-library-status" class="muted" role="status" aria-live="polite"></p>
       <div id="reading-library-list" class="resource-list"></div>
-      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
+      <div class="resource-actions" aria-label="Navegar por la biblioteca">
+        <button type="button" data-reading-view="reading-queue-web" aria-controls="reading-queue-web">Gestionar cola de lectura</button>
+        <button type="button" data-reading-view="reading-marks-web" aria-controls="reading-marks-web">Marcadores</button>
+      </div>
     </section>
 
     <section id="reading-queue-web" class="panel reading-subview" hidden aria-labelledby="reading-queue-heading">

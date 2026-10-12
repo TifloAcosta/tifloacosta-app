@@ -2834,7 +2834,55 @@
         closeMore.type = 'button';
         closeMore.textContent = closeAudio.textContent;
         actions.append(exportLabel, exportSelect, exportButton, remove, closeMore);
-        morePanel.append(moreHeading, actions);
+
+        // Per-book metadata already has a persistent adapter in IndexedDB.
+        // Expose it in the accessible actions panel instead of losing this
+        // feature when the Android reader is not the packaged iOS reader.
+        const renameDetails = document.createElement('details');
+        const renameSummary = document.createElement('summary');
+        renameSummary.textContent = language() === 'en' ? 'Rename document' : 'Cambiar título';
+        const renameForm = document.createElement('form');
+        const renameLabel = document.createElement('label');
+        const renameInput = document.createElement('input');
+        const renameId = 'reading-library-rename-' + String(book.id).replace(/[^a-zA-Z0-9_-]/g, '-');
+        renameLabel.htmlFor = renameId;
+        renameLabel.textContent = language() === 'en' ? 'New document title' : 'Nuevo título del documento';
+        renameInput.id = renameId;
+        renameInput.type = 'text';
+        renameInput.required = true;
+        renameInput.value = book.title || '';
+        const renameButton = document.createElement('button');
+        renameButton.type = 'submit';
+        renameButton.textContent = language() === 'en' ? 'Save title' : 'Guardar título';
+        const renameStatus = document.createElement('p');
+        renameStatus.setAttribute('role', 'status');
+        renameStatus.setAttribute('aria-live', 'polite');
+        renameForm.append(renameLabel, renameInput, renameButton, renameStatus);
+        renameForm.addEventListener('submit', event => {
+          event.preventDefault();
+          const updatedTitle = renameInput.value.trim();
+          if (!updatedTitle) { renameInput.focus(); return; }
+          renameButton.disabled = true;
+          void (async () => {
+            const saved = await libraryClient.updateBookMetadata({ ...book, title: updatedTitle });
+            if (!saved) {
+              renameStatus.textContent = language() === 'en'
+                ? 'The title could not be saved.' : 'No se pudo guardar el título.';
+              renameButton.disabled = false;
+              return;
+            }
+            if (currentBookId === book.id) els.title.textContent = updatedTitle;
+            await renderLibrary();
+            // Restoring focus after a rerender is essential for VoiceOver.
+            const nextTitle = [...els.libraryList.querySelectorAll('button.reading-library-title')]
+              .find(button => button.textContent === updatedTitle);
+            nextTitle?.focus({ preventScroll: true });
+            els.libraryStatus.textContent = language() === 'en'
+              ? 'Document title saved.' : 'Título del documento guardado.';
+          })();
+        });
+        renameDetails.append(renameSummary, renameForm);
+        morePanel.append(moreHeading, actions, renameDetails);
 
         function showOnly(panel, heading, opener) {
           for (const item of [audioPanel, visualPanel, morePanel]) item.hidden = item !== panel;

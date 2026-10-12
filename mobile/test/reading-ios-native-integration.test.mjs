@@ -53,7 +53,9 @@ test('native iOS translation uses the Apple Translation framework', async () => 
   const plugin = await file('ios-native/ios/Sources/TifloReadingIos/TifloReadingLanguagePlugin.swift');
   const panel = await file('src/screens/reading-translation-panel.mjs');
   assert.match(plugin, /import Translation/);
-  assert.match(plugin, /TranslationSession\(installedSource:/);
+  assert.match(plugin, /private struct TifloTranslationBatchView/);
+  assert.match(plugin, /await session\.translate\(/);
+  assert.doesNotMatch(plugin, /TranslationSession\(installedSource:/);
   assert.match(plugin, /\.translationTask\(source:/);
   assert.match(plugin, /prepareTranslationPair/);
   assert.match(panel, /prepareTranslationPair/);

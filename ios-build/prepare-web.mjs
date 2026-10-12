@@ -287,7 +287,7 @@ const iosOnlyBaseReplacement = [
   '      data = items;',
   '      window.TIFLO_RESOURCES = items;',
   '      renderNews();'
-].join('\\n');
+].join('\n');
 if (!iosApp.includes(iosOnlyBaseReplacement)) throw new Error('Novedades iOS no conserva el catálogo completo');
 const iosCompleteCatalog = [
   '      // Preserve items supplied by the packaged supplemental catalogs.',
@@ -308,7 +308,7 @@ const iosCompleteCatalog = [
   '      data = [...merged.values()];',
   '      window.TIFLO_RESOURCES = data;',
   '      renderNews();'
-].join('\\n');
+].join('\n');
 iosApp = iosApp.replace(iosOnlyBaseReplacement, iosCompleteCatalog);
 
 const iosStartPoint = 'applyPrefs();applyLanguage();loadActualidadHome();trackLanguageUse();announceCompletedUpdate();';

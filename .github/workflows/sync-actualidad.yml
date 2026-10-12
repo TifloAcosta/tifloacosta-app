@@ -35,8 +35,9 @@ permissions:
   pages: write
   id-token: write
 
+# Feed generation and GitHub Pages publishing should not cancel one another.
 concurrency:
-  group: pages
+  group: actualidad-sync
   cancel-in-progress: false
 
 jobs:

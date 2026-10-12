@@ -66,6 +66,17 @@ export function createReadingAudioView({ root, panelsRoot = root, client, book, 
   nextTrackButton.textContent = t('readingAudio.nextTrack');
   nextTrackButton.disabled = true;
 
+  const trackJumpLabel = document.createElement('label');
+  trackJumpLabel.textContent = document.documentElement.lang === 'en' ? 'Choose chapter or audio file' : 'Elegir capítulo o archivo de audio';
+  const trackJump = document.createElement('select');
+  trackJump.id = 'reading-audio-track-jump';
+  trackJumpLabel.htmlFor = trackJump.id;
+  trackJumpLabel.hidden = true;
+  const trackJumpButton = document.createElement('button');
+  trackJumpButton.type = 'button';
+  trackJumpButton.textContent = document.documentElement.lang === 'en' ? 'Go to selected chapter or file' : 'Ir al capítulo o archivo elegido';
+  trackJumpButton.hidden = true;
+
   const positionLabel = document.createElement('label');
   positionLabel.textContent = t('readingAudio.position');
   const position = document.createElement('input');
@@ -112,6 +123,9 @@ export function createReadingAudioView({ root, panelsRoot = root, client, book, 
     forwardButton,
     previousTrackButton,
     nextTrackButton,
+    trackJumpLabel,
+    trackJump,
+    trackJumpButton,
     positionLabel,
     position,
     speedLabel,
@@ -149,6 +163,7 @@ export function createReadingAudioView({ root, panelsRoot = root, client, book, 
     previousTrackButton.disabled = trackCount <= 1 || trackIndex <= 0;
     nextTrackButton.disabled = trackCount <= 1 || trackIndex >= trackCount - 1;
     playButton.textContent = snapshot.playing ? t('readingAudio.pause') : t('readingAudio.play');
+    if (!trackJumpLabel.hidden) trackJump.value = String(trackIndex);
     status.textContent = format(t('readingAudio.positionStatus'), {
       elapsed: clock(positionMs),
       remaining: clock(Math.max(0, durationMs - positionMs))
@@ -182,6 +197,13 @@ export function createReadingAudioView({ root, panelsRoot = root, client, book, 
 
   nextTrackButton.addEventListener('click', () => {
     if (controller) void controller.nextTrack().then(renderState);
+  });
+
+  trackJumpButton.addEventListener('click', () => {
+    if (!controller || trackJumpLabel.hidden) return;
+    const target = Number(trackJump.value);
+    if (!Number.isInteger(target) || target < 0 || target >= audioTracks.length) return;
+    void jumpToAudioMark({ mediaTrackIndex: target, mediaPositionMs: 0 }).then(() => trackJumpButton.focus());
   });
 
   position.addEventListener('change', () => {
@@ -251,6 +273,13 @@ export function createReadingAudioView({ root, panelsRoot = root, client, book, 
     ]);
     audioTracks = Array.isArray(loadedTracks) ? loadedTracks : [];
     effectiveSettings = resolveReadingSettings(stored.global, stored.book).effective;
+    trackJump.replaceChildren();
+    audioTracks.forEach((track, index) => {
+      const title = String(track?.title || track?.label || track?.name || track?.filename || '').trim();
+      option(trackJump, index, title || ((document.documentElement.lang === 'en' ? 'File ' : 'Archivo ') + (index + 1)));
+    });
+    trackJumpLabel.hidden = audioTracks.length < 2;
+    trackJumpButton.hidden = audioTracks.length < 2;
     applySkipLabels();
     speed.value = String(effectiveSettings['audio.speed']);
     skipSelect.value = String(effectiveSettings['audio.skipSeconds']);

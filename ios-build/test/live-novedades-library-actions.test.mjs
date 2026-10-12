@@ -119,7 +119,7 @@ test('TifloLector iOS integrates the complete reading queue within the library f
   assert.match(reader, /await renderQueue\(\)/);
   assert.match(reader, /libraryClient\.moveQueueItem/);
   assert.match(reader, /libraryClient\.removeFromQueue/);
-  assert.match(guide, /Mostrar en la biblioteca/);
+  assert.match(guide, /Mi biblioteca permanece a la vista/);
   assert.match(guide, /Recently imported/);
 });
 

@@ -111,8 +111,7 @@ public final class TifloReadingLanguagePlugin: CAPPlugin, CAPBridgedPlugin {
             }
             // All supported iOS versions use a TranslationSession supplied by SwiftUI.
             // The initializer documented for future SDKs is not available in Xcode 26.3.
-            {
-                guard let presenter = self.bridge?.viewController else {
+            guard let presenter = self.bridge?.viewController else {
                     call.resolve(["translations": [], "status": "error"])
                     return
                 }
@@ -129,7 +128,6 @@ public final class TifloReadingLanguagePlugin: CAPPlugin, CAPBridgedPlugin {
                 host.isModalInPresentation = true
                 controller = host
                 presenter.present(host, animated: true)
-            }
         }
     }
 }

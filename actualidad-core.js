@@ -202,6 +202,7 @@
     if (page === 'home') {
       const routes = {
         resources: 'resources-view',
+        reading: 'reading-section',
         news: 'news-view',
         book: 'book-section',
         contact: 'contact-section',
@@ -369,20 +370,42 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     });
   }
 
+  let previousHomeHash = window.location.hash.replace(/^#/, '');
   function applyHomeIsolation(focusChangedView = false) {
     if (!navigationCore || !document.getElementById('home-blocks')) return;
     const state = navigationCore.resolveIsolatedView('home', window.location.hash);
     const hero = document.getElementById('home-hero');
     const homeBlocks = document.getElementById('home-blocks');
     const home = state.view === 'home';
-    const viewIds = ['resources-view', 'news-view', 'book-section', 'contact-section', 'privacy-section', 'config-section'];
+    const viewIds = ['resources-view', 'reading-section', 'news-view', 'book-section', 'contact-section', 'privacy-section', 'config-section'];
 
     setPageChromeVisible(state.chromeVisible);
     setHidden(hero, !home);
     setHidden(homeBlocks, !home);
     viewIds.forEach(id => setHidden(document.getElementById(id), state.view !== id));
 
+    const leavingHash = previousHomeHash;
+    previousHomeHash = window.location.hash.replace(/^#/, '');
     if (!focusChangedView) return;
+    if (home && (previousHomeHash === 'home' || !previousHomeHash)) {
+      const originIds = {
+        resources: 'home-open-resources',
+        reading: 'home-open-reading',
+        news: 'home-open-news',
+        book: 'home-open-book',
+        contact: 'home-open-contact',
+        privacy: 'home-open-privacy',
+        config: 'home-open-config',
+        downloads: 'home-open-downloads',
+        'downloads-link': 'home-open-downloads',
+        'downloads-sounds': 'home-open-downloads'
+      };
+      const origin = document.getElementById(originIds[leavingHash] || '');
+      if (origin) {
+        queueMicrotask(() => focusElement(origin));
+        return;
+      }
+    }
     const target = home ? hero : document.getElementById(state.view);
     const heading = target?.querySelector('h1, h2, h3') || target;
     focusElement(heading);

@@ -451,11 +451,15 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       render();
     }
 
+    let lastNewsLoadAt = 0;
+    let lastAppsLoadAt = 0;
+    const REFRESH_INTERVAL_MS = 60 * 1000;
+
     function loadNews() {
-      if (newsLoaded || newsLoading) return;
+      if (newsLoading || (newsLoaded && Date.now() - lastNewsLoadAt < REFRESH_INTERVAL_MS)) return;
       newsLoading = true;
       newsLoadFailed = false;
-      fetch('actualidad.json', { cache: 'no-cache' })
+      fetch(`actualidad.json?t=${Date.now()}`, { cache: 'no-store' })
         .then(response => {
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
           return response.json();
@@ -463,6 +467,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         .then(data => {
           stories = Array.isArray(data) ? data : [];
           newsLoaded = true;
+          lastNewsLoadAt = Date.now();
           newsLoading = false;
           rebuildCategories();
           renderList();
@@ -478,10 +483,10 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     }
 
     function loadApps() {
-      if (appsLoaded || appsLoading) return;
+      if (appsLoading || (appsLoaded && Date.now() - lastAppsLoadAt < REFRESH_INTERVAL_MS)) return;
       appsLoading = true;
       appsLoadFailed = false;
-      fetch('actualidad-apps.json', { cache: 'no-cache' })
+      fetch(`actualidad-apps.json?t=${Date.now()}`, { cache: 'no-store' })
         .then(response => {
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
           return response.json();
@@ -490,6 +495,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
           apps = Array.isArray(data) ? data : [];
           appsLoadFailed = false;
           appsLoaded = true;
+          lastAppsLoadAt = Date.now();
           appsLoading = false;
           rebuildPlatforms();
           renderApps();

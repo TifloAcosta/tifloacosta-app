@@ -63,6 +63,16 @@ function chronologicalNews(news, generatedAt) {
   return retained.sort(compare);
 }
 
+export function validateNewResourceDates(resources) {
+  const missing = (Array.isArray(resources) ? resources : [])
+    .filter(item => item?.new === true && !Number.isFinite(Date.parse(item.newsDate || item.publishedAt || '')))
+    .map(item => String(item?.id || item?.title || 'desconocido'));
+  if (missing.length) {
+    throw new Error(`Novedades sin fecha editorial: ${missing.join(', ')}. Añade newsDate antes de publicar.`);
+  }
+  return true;
+}
+
 export function buildMobileContent({ resources = [], videos = [], news = [], generatedAt = new Date().toISOString() }) {
   const retainedNews = chronologicalNews(news, generatedAt);
   return {
@@ -155,6 +165,7 @@ async function loadNews() {
 
 async function main() {
   const [resources, videos, news] = await Promise.all([loadResources(), loadVideos(), loadNews()]);
+  validateNewResourceDates(resources);
   const feed = buildMobileContent({ resources, videos, news });
   const output = new URL('../mobile-content.json', import.meta.url);
   await writeFile(output, `${JSON.stringify(feed, null, 2)}\n`, 'utf8');

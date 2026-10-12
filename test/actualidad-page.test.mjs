@@ -24,8 +24,8 @@ test('Actualidad page loads one shared feed and resolves interface language thro
   assert.match(html, /actualidad-core\.js/);
   assert.match(html, /actualidad\.js/);
   assert.match(js, /core\.publicStories\(stories, lang\)/);
-  assert.match(js, /fetch\(['"]actualidad\.json['"]/);
-  assert.equal((js.match(/fetch\(['"]actualidad\.json['"]/g) || []).length, 1);
+  assert.match(js, /fetch\(`actualidad\\.json/);
+  assert.equal((js.match(/fetch\(`actualidad\\.json/g) || []).length, 1);
   assert.doesNotMatch(js, /setInterval|setTimeout/);
 });
 

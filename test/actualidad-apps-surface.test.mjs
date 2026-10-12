@@ -46,14 +46,17 @@ test('Apps surface is a semantic section with direct navigation and a platform f
 
   assert.match(html, /<nav[^>]*id="actualidad-sections"/);
   assert.match(html, /href="#news-browser"/);
-  assert.match(html, /href="#apps-browser"/);
+  assert.match(html, /id="section-apps-link"[^>]*hidden/);
+  const resourcesJs = await read('app.js');
+  assert.match(resourcesJs, /showAccessibleAppsCatalog/);
+  assert.match(resourcesJs, /if \(\/\^apps\?\$\/i\.test\(cat\)\)/);
   assert.match(html, /<section[^>]*id="apps-browser"/);
   assert.match(html, /<h2[^>]*id="apps-heading"/);
   assert.match(html, /<label[^>]*for="apps-platform"/);
   assert.match(html, /<select[^>]*id="apps-platform"/);
   assert.match(html, /id="apps-status"[^>]*aria-live="polite"/);
   assert.match(html, /id="apps-list"/);
-  assert.match(js, /fetch\(['"]actualidad-apps\.json['"]/);
+  assert.match(js, /fetch\(`actualidad-apps\\.json/);
   assert.match(js, /app\.publishedAt/);
 });
 

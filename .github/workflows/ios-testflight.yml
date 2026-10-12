@@ -79,6 +79,8 @@ jobs:
           Path(os.environ['TARGET_KEY']).write_text(raw.strip() + '\n')
           PY
           echo "ASC_KEY_PATH=$TARGET_KEY" >> "$GITHUB_ENV"
+      - name: Comprobar accesibilidad de biblioteca y actualización de Novedades
+        run: node --test ios-build/test/live-novedades-library-actions.test.mjs
       - name: Preparar proyecto iOS
         working-directory: ios-build
         run: |

@@ -296,8 +296,14 @@
     const globalUnitKey = 'tiflo-ios-default-reading-unit-v1';
     const overrideKey = 'tiflo-ios-document-units-v1';
     function globalUnit() {
-      const saved = storageGet(globalUnitKey, 'block');
-      return validUnits.includes(saved) ? saved : 'block';
+      // The existing General setting is the sole source of truth.
+      // Older iOS builds used a separate key; keep it as a migration fallback.
+      try {
+        const common = JSON.parse(storageGet('tifloWebReadingSettingsV1', '{}'));
+        if (validUnits.includes(common?.defaultNavigationMode)) return common.defaultNavigationMode;
+      } catch {}
+      const previous = storageGet(globalUnitKey, 'block');
+      return validUnits.includes(previous) ? previous : 'block';
     }
     function readOverrides() {
       try {
@@ -309,57 +315,9 @@
     // Images and scanned PDFs already use the main document import control.
     // OCR remains contextual when the imported file needs recognition.
 
-    // One global default. Each document may override it without changing the default.
-    const settings = document.getElementById('reading-settings-web');
-    if (settings && !document.getElementById('ios-reading-settings-disclosure')) {
-      const toggle = document.createElement('button');
-      toggle.id = 'ios-reading-settings-disclosure';
-      toggle.type = 'button';
-      toggle.textContent = localized('Ajustes de lectura', 'Reading settings');
-      toggle.setAttribute('aria-controls', settings.id);
-      toggle.setAttribute('aria-expanded', 'false');
-      settings.before(toggle);
-      settings.hidden = true;
-      toggle.addEventListener('click', () => {
-        settings.hidden = !settings.hidden;
-        toggle.setAttribute('aria-expanded', String(!settings.hidden));
-        if (!settings.hidden) settings.querySelector('h3')?.focus({ preventScroll: true });
-        else toggle.focus({ preventScroll: true });
-      });
-    }
-    if (settings && !document.getElementById('ios-reading-default-unit')) {
-      const label = document.createElement('label');
-      label.htmlFor = 'ios-reading-default-unit';
-      label.textContent = localized('Avance predeterminado para todos los documentos', 'Default navigation unit for all documents');
-      const select = document.createElement('select');
-      select.id = 'ios-reading-default-unit';
-      for (const [value, es, en] of [
-        ['block', 'Bloque', 'Block'], ['paragraph', 'Párrafo', 'Paragraph'],
-        ['sentence', 'Frase', 'Sentence']
-      ]) {
-        const option = document.createElement('option');
-        option.value = value;
-        option.textContent = localized(es, en);
-        select.append(option);
-      }
-      select.value = globalUnit();
-      select.addEventListener('change', () => {
-        storageSet(globalUnitKey, select.value);
-        const notice = document.getElementById('reading-settings-status');
-        if (notice) notice.textContent = localized(
-          'Unidad predeterminada guardada. Podrás cambiarla dentro de cada documento.',
-          'Default unit saved. You can override it inside each document.'
-        );
-      });
-      const note = document.createElement('p');
-      note.textContent = localized(
-        'Este ajuste se aplica al abrir documentos sin una preferencia particular.',
-        'This setting applies to documents without their own preference.'
-      );
-      const container = document.createElement('div');
-      container.append(label, select, note);
-      settings.append(container);
-    }
+    // Settings are already collapsed under reading-settings-disclosure.
+    // Do not inject a second Settings button or a second General unit selector.
+    // The document's navigation unit still inherits from globalUnit().
 
     // Correct browser-oriented language without claiming unavailable native voices.
     function amendText(node, replacements) {

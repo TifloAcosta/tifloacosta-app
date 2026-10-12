@@ -1,5 +1,8 @@
 import { READING_SETTING_DEFAULTS, resolveReadingSettings } from '../core/reading-settings.mjs';
 import { TifloReading } from '../native/reading-library-plugin.mjs';
+import { registerPlugin } from '@capacitor/core';
+
+const NativeDocumentAccessibility = registerPlugin('TifloReadingAccessibility');
 import { renderReadingQueue } from './reading-queue.mjs';
 import { addScreenHeader, clearScreen } from './shared.mjs';
 
@@ -103,6 +106,13 @@ export function renderReadingLibrary({
   let listGeneration = 0;
   let currentImportBatch = initialImportBatch;
   let queueController = null;
+  let focusedDocumentId = '';
+  const nativeActionsByDocument = new Map();
+  // Native UIKit actions are advisory: normal HTML buttons remain fully functional.
+  void NativeDocumentAccessibility.addListener('documentAction', ({ documentId, action }) => {
+    if (String(documentId) !== focusedDocumentId) return;
+    nativeActionsByDocument.get(focusedDocumentId)?.(action);
+  }).catch(() => {});
 
   const liveStatus = document.createElement('p');
   liveStatus.className = 'reading-library-status';
@@ -554,6 +564,18 @@ export function renderReadingLibrary({
         : `Abrir para leer: ${item.title || t('readingLibrary.untitled')}`
     );
     article.append(title);
+    title.addEventListener('focus', () => {
+      focusedDocumentId = String(item.id);
+      void NativeDocumentAccessibility.setDocumentActions({
+        documentId: focusedDocumentId,
+        actions: [
+          { id: 'open', label: fallback(t, 'readingLibrary.open', 'Abrir', 'Open') },
+          { id: 'details', label: fallback(t, 'readingLibrary.actions', 'Más acciones', 'More actions') },
+          { id: 'rename', label: fallback(t, 'readingLibrary.rename', 'Cambiar título', 'Rename') },
+          { id: 'delete', label: fallback(t, 'readingLibrary.delete', 'Eliminar', 'Delete') }
+        ]
+      }).catch(() => {});
+    });
 
     const details = document.createElement('section');
     details.className = 'reading-library-item-details';
@@ -933,6 +955,22 @@ export function renderReadingLibrary({
       morePanel,
       close
     );
+    nativeActionsByDocument.set(String(item.id), action => {
+      if (action === 'open') onOpenBook?.(item.id);
+      if (action === 'details') actionsToggle.click();
+      if (action === 'rename') {
+        if (details.hidden) actionsToggle.click();
+        if (morePanel.hidden) moreButton.click();
+        rename.open = true;
+        renameInput.focus();
+      }
+      if (action === 'delete') {
+        if (details.hidden) actionsToggle.click();
+        if (morePanel.hidden) moreButton.click();
+        deleteButton.click();
+        confirmHost.querySelector('button')?.focus();
+      }
+    });
     article.append(actionsToggle, details);
     return article;
   }
@@ -976,6 +1014,9 @@ export function renderReadingLibrary({
     });
     if (generation !== listGeneration) return;
 
+    nativeActionsByDocument.clear();
+    focusedDocumentId = '';
+    void NativeDocumentAccessibility.clearDocumentActions().catch(() => {});
     list.replaceChildren();
     if (!result.items?.length) {
       const empty = document.createElement('p');

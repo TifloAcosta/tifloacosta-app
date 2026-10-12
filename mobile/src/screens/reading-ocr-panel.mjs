@@ -253,8 +253,8 @@ export function createReadingOcrPanel({
         .sort((a, b) => a.pageIndex - b.pageIndex);
       if (!pages.length) return;
       const recognized = pages.map(page =>
-        (document.documentElement.lang === 'en' ? 'Page ' : 'Página ') + (page.pageIndex + 1) + '\\n' + page.text
-      ).join('\\n\\n');
+        (document.documentElement.lang === 'en' ? 'Page ' : 'Página ') + (page.pageIndex + 1) + '\n' + page.text
+      ).join('\n\n');
       exportOcrButton.disabled = true;
       try {
         const outcome = await NativeExport.shareTextFile({

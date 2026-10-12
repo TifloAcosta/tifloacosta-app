@@ -46,6 +46,37 @@ test('iOS native speech and translation are registered and bridged', () => {
   assert.match(ios, /TifloReadingLanguage/);
 });
 
+
+test('My library is always a visible reader section with search and status filters', () => {
+  assert.match(html, /<section id="reading-library-web" class="panel" aria-labelledby="reading-library-heading">/);
+  assert.doesNotMatch(html, /<section id="reading-library-web"[^>]*hidden/);
+  for (const id of ['reading-library-filter','reading-library-query','reading-library-list']) {
+    assert.ok(html.includes('id="' + id + '"'));
+  }
+  assert.match(web, /els\.libraryFilter\?\.addEventListener\('change'/);
+  assert.match(web, /els\.libraryQuery\?\.addEventListener\('input'/);
+  assert.match(web, /sort: isRecentView \? 'imported' : 'lastRead'/);
+  assert.doesNotMatch(html, /id="reading-management-web"/);
+});
+
+test('document management requires confirmation and supports rename with focus return', () => {
+  assert.match(web, /globalThis\.confirm\?\.\(question\) !== true/);
+  assert.match(web, /libraryClient\.updateBookMetadata\(\{ \.\.\.book, title: updatedTitle \}\)/);
+  assert.match(web, /document\.getElementById\(title\.id\)\?\.focus/);
+});
+
+test('the accessible guide is reachable before navigation and remains available offline', () => {
+  const guide = read('tifloacosta-guide.js');
+  const worker = read('sw.js');
+  assert.match(html, /id="home-open-guide" href="#guide"/);
+  assert.match(html, /guide: document\.getElementById\('guide-view'\)/);
+  assert.ok(html.indexOf('id="home-open-guide"') < html.indexOf('id="home-blocks"'));
+  assert.match(html, /src="tifloacosta-guide\.js"/);
+  assert.match(guide, /guide-chapters/);
+  assert.match(guide, /VoiceOver/);
+  assert.match(worker, /tifloacosta-guide\.js/);
+});
+
 // Still blocked by prepare-web.mjs and issue #170:
 // * DAISY ZIP import / SMIL navigation;
 // * UIAccessibilityCustomAction on each VoiceOver-focused document title;

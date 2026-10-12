@@ -5,7 +5,9 @@ on:
     branches: [release/ios-testflight-20261012]
     paths:
       - '.github/workflows/ios-testflight.yml'
-      - 'mobile/**'\n      - 'shared/**'\n      - 'ios-build/ensure-signing.mjs'
+      - 'mobile/**'
+      - 'shared/**'
+      - 'ios-build/ensure-signing.mjs'
       - 'index.html'
       - 'videos.js'
       - 'podcast.js'

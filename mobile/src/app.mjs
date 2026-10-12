@@ -733,12 +733,14 @@ function refreshMobileContent() {
     // Never rerender an open book, translation, video or another active session:
     // only update catalog screens, restoring the exact VoiceOver focus when possible.
     const contentScreens = new Set(['home', 'new-content', 'actualidad', 'library', 'videos', 'podcast', 'search']);
-    if (changed && !shareMode && !textInputIsActive() && contentScreens.has(router.current()?.name)) {
-      const focusedId = rememberFocusedId(root);
-      render(router.current());
-      queueMicrotask(() => {
-        if (!focusedId || !restoreOriginFocus(root, focusedId)) focusScreenHeading(root);
-      });
+    if (changed) {
+      if (!shareMode && !textInputIsActive() && contentScreens.has(router.current()?.name)) {
+        const focusedId = rememberFocusedId(root);
+        render(router.current());
+        queueMicrotask(() => {
+          if (!focusedId || !restoreOriginFocus(root, focusedId)) focusScreenHeading(root);
+        });
+      }
     }
   }).catch(() => {
     // An offline refresh must not discard the content already on screen.

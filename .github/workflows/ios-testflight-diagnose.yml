@@ -1,4 +1,5 @@
 name: Diagnose TifloAcosta TestFlight availability
+# Include direct Apple build-upload IDs when processing delays prevent TestFlight visibility.
 on:
   push:
     branches: [release/ios-testflight-20261012]

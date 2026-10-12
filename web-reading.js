@@ -2142,9 +2142,12 @@
 
     if (readerReturnView === 'library') {
       // The library is already on the main TifloLector screen.
-      queueMicrotask(() => document.getElementById('reading-library-title-' +
-        String(readerReturnBookId || '').replace(/[^a-zA-Z0-9_-]/g, '-'))?.focus({ preventScroll: true }) ||
-        els.libraryHeading?.focus({ preventScroll: true }));
+      queueMicrotask(() => {
+        const title = document.getElementById('reading-library-title-' +
+          String(readerReturnBookId || '').replace(/[^a-zA-Z0-9_-]/g, '-'));
+        if (title?.isConnected && !title.closest('[hidden]')) title.focus({ preventScroll: true });
+        else els.libraryHeading?.focus({ preventScroll: true });
+      });
     } else {
       const heading = document.getElementById('reading-heading');
       queueMicrotask(() => heading?.focus());

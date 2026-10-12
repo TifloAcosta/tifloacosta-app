@@ -273,7 +273,7 @@
       const isHome=isIndex&&(!location.hash||location.hash==='#home');
       if(brand){brand.hidden=!isHome;brand.setAttribute('aria-hidden',String(!isHome));}
     }
-    document.querySelectorAll('main > section').forEach(section=>{
+    (document.querySelectorAll?.('main > section') || []).forEach(section=>{
       const backs=[...section.querySelectorAll('[data-home-back]')];
       for(const item of backs.slice(1))item.closest('p')?.remove();
     });

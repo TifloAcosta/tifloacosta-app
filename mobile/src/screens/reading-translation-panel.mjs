@@ -47,6 +47,7 @@ export function createReadingTranslationPanel({
   sourceSha256 = '',
   t,
   onTranslationReady,
+  onOpenTranslation,
   returnFocus
 }) {
   const section = document.createElement('section');
@@ -98,6 +99,11 @@ export function createReadingTranslationPanel({
   cancelButton.textContent = text(t, 'readingBook.translationCancel', 'Detener después de este lote', 'Stop after this batch');
   cancelButton.hidden = true;
 
+  const readTranslationButton = document.createElement('button');
+  readTranslationButton.type = 'button';
+  readTranslationButton.hidden = true;
+  readTranslationButton.textContent = text(t, 'readingBook.translationReadResult', 'Leer el documento traducido', 'Read translated document');
+
   const closeButton = document.createElement('button');
   closeButton.type = 'button';
   closeButton.textContent = text(t, 'readingBook.translationClose', 'Cerrar', 'Close');
@@ -120,6 +126,7 @@ export function createReadingTranslationPanel({
     resumeButton,
     cancelButton,
     closeButton,
+    readTranslationButton,
     progress
   );
   root.append(section);
@@ -207,6 +214,7 @@ export function createReadingTranslationPanel({
     if (!state) return;
     progress.textContent = statusText(state);
     const complete = state.status === 'complete';
+    readTranslationButton.hidden = !complete || !state.document?.blocks?.length;
     resumeButton.hidden = complete || state.completedUnits === 0 || running;
     translateButton.hidden = complete || state.completedUnits > 0;
     cancelButton.hidden = !running;
@@ -322,6 +330,14 @@ export function createReadingTranslationPanel({
       }
       if (!destroyed) {
         renderState(state);
+        if (state.status === 'complete') {
+          progress.textContent = `${statusText(state)} ${text(
+            t, 'readingBook.translationReadInstruction',
+            'La traducción está lista. Activa «Leer el documento traducido» para abrir el resultado.',
+            'Translation is ready. Activate “Read translated document” to open the result.'
+          )}`;
+          queueMicrotask(() => readTranslationButton.focus());
+        }
         if (cancelRequested && state.status !== 'complete') {
           progress.textContent = `${statusText(state)} ${text(
             t,
@@ -379,6 +395,15 @@ export function createReadingTranslationPanel({
     );
   });
   closeButton.addEventListener('click', close);
+  readTranslationButton.addEventListener('click', () => {
+    void (async () => {
+      const opened = await onOpenTranslation?.();
+      if (!opened || destroyed) return;
+      section.hidden = true;
+      const readingUnit = root?.parentElement?.querySelector?.('.reading-reader [data-reading-unit="current"]');
+      queueMicrotask(() => readingUnit?.focus?.());
+    })();
+  });
 
   function destroy() {
     destroyed = true;

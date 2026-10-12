@@ -18,8 +18,8 @@ jobs:
           API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
           API_PRIVATE: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
         run: |
-          node <<'NODE'
-          const crypto = require('node:crypto');
+          node --input-type=module <<'NODE'
+          import crypto from 'node:crypto';
           const enc = x => Buffer.from(JSON.stringify(x)).toString('base64url');
           const now = Math.floor(Date.now()/1000);
           let key = process.env.API_PRIVATE.trim().replace(/^["']|["']$/g,'').replace(/\\r\\n/g,'\n').replace(/\\n/g,'\n');
@@ -38,7 +38,7 @@ jobs:
           const builds = await api('builds?filter%5Bapp%5D=6820517829&sort=-uploadedDate&limit=35&include=buildBetaDetail,betaGroups');
           const target=builds.data.find(x=>x.attributes.version==='300070');
           console.log('Ultimas compilaciones Apple: '+JSON.stringify(builds.data.slice(0,8).map(x=>({numero:x.attributes.version,estado:x.attributes.processingState,fecha:x.attributes.uploadedDate}))));
-          if (!target) { console.error('Todavía no figura 300070 en App Store Connect. Subida aceptada no equivale a entrega en TestFlight.'); process.exitCode=2; return; }
+          if (!target) { console.error('Todavía no figura 300070 en App Store Connect. Subida aceptada no equivale a entrega en TestFlight.'); process.exit(2); }
           const rel=target.relationships||{};
           const ids=(rel.betaGroups?.data||[]).map(x=>x.id);
           const assigned=builds.included?.filter(x=>x.type==='betaGroups' && ids.includes(x.id)).map(x=>({nombre:x.attributes.name,interno:x.attributes.isInternalGroup,auto:x.attributes.hasAccessToAllBuilds}))||[];

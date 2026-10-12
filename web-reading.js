@@ -610,7 +610,12 @@
     readingSettingsMenu.className = 'reading-settings-disclosure';
     const readingSettingsSummary = document.createElement('summary');
     readingSettingsSummary.textContent = language() === 'en' ? 'Reading settings' : 'Ajustes de lectura';
-    readingSettingsMenu.append(readingSettingsSummary, audioButton, visualButton);
+    const generalSettings = document.createElement('details');
+    generalSettings.className = 'reading-settings-disclosure';
+    const generalSettingsSummary = document.createElement('summary');
+    generalSettingsSummary.textContent = 'General';
+    generalSettings.append(generalSettingsSummary, unitLabel, unit);
+    readingSettingsMenu.append(readingSettingsSummary, audioButton, visualButton, generalSettings);
     primaryActions.append(mark, readingSettingsMenu, moreButton);
 
     const audioPanel = document.createElement('section');
@@ -766,7 +771,7 @@
     morePanel.append(closeMore);
 
     section.append(
-      unitLabel, unit, previousUnit, nextUnit,
+      previousUnit, nextUnit,
       progressStatus,
       primaryActions,
       audioPanel, visualPanel, morePanel

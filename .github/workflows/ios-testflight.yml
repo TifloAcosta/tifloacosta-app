@@ -176,13 +176,21 @@ jobs:
         working-directory: ios-build
         run: |
           xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build
-      - name: Recuperar P12 de la ejecución verificada
-        uses: actions/download-artifact@v4
+      - name: Recuperar o regenerar firma de distribución protegida
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+          API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+          P12_PASSWORD: ${{ secrets.IOS_SIGNING_KEY_PASSPHRASE }}
+        run: node ios-build/ensure-signing.mjs
+      - name: Conservar P12 cifrado para próximas compilaciones
+        if: env.NEW_P12 == 'true'
+        uses: actions/upload-artifact@v4
         with:
           name: TifloAcosta-P12-protegido
-          run-id: 37864699270
-          github-token: ${{ github.token }}
-          path: ${{ runner.temp }}/ios-signing
+          path: ${{ runner.temp }}/ios-signing/TifloAcosta.p12
+          if-no-files-found: error
+          retention-days: 90
       - name: Importar certificado de distribución en llavero temporal
         shell: bash
         env:

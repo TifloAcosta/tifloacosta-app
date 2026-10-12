@@ -68,3 +68,19 @@ test('iOS offers refresh status, CDN cache bypass and official home-screen icon 
   assert.match(workflow, /tifloacosta-icon-512\.png/);
   assert.match(workflow, /AppIcon-512@2x\.png/);
 });
+
+test('iOS recovers dated Novedades independently if primary data.js is blocked', async () => {
+  const [prepare, refresh] = await Promise.all([
+    read('ios-build/prepare-web.mjs'),
+    read('ios-build/ios-new-content-refresh.js')
+  ]);
+  assert.match(prepare, /const independentNewsRecovery = \[/);
+  assert.match(prepare, /Mobile news feed unavailable/);
+  assert.match(prepare, /Invalid resource catalog/);
+  assert.match(prepare, /source: 'mobile-feed'/);
+  assert.match(prepare, /renderFavoritesScreen\(\)/);
+  assert.match(prepare, /tiflo-resources-updated/);
+  assert.match(prepare, /ok: false/);
+  assert.match(refresh, /source === 'mobile-feed'/);
+  assert.match(refresh, /Novedades cargadas/);
+});

@@ -85,7 +85,7 @@ test('web Downloads stays independent while Search sounds is available on an iso
   assert.doesNotMatch(appCore, /sound-search/);
   assert.doesNotMatch(appCore, /downloads-hub/);
   assert.match(downloads, /descargables disponibles/);
-  assert.match(appCore, /downloads-sounds-link\.js/);
+  assert.doesNotMatch(appCore, /downloads-sounds-link\.js/, 'Sound search remains separately launched');
   assert.match(launcher, /sounds\.html/);
   assert.match(launcher, /Buscar sonidos/);
   assert.doesNotMatch(launcher, /sound-search/);

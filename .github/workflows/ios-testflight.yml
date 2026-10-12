@@ -90,6 +90,7 @@ jobs:
           npm run build
           npx cap add ios
           npx cap sync ios
+          (cd ios/App && pod install)
           ruby -rjson -e '
             path="ios/App/App/Info.plist"
             abort "Info.plist ausente" unless File.exist?(path)

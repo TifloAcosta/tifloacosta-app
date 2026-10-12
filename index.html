@@ -520,6 +520,11 @@
 
   const readingSection = document.getElementById('reading-section');
   const subviews = [...document.querySelectorAll('.reading-subview')];
+  // One return action per subsection prevents duplicate VoiceOver stops.
+  for (const view of subviews) {
+    const controls = [...view.querySelectorAll('[data-reading-back]')];
+    controls.slice(1).forEach(control => control.remove());
+  }
   const mainChildren = readingSection
     ? [...readingSection.children].filter(node => !node.classList?.contains('reading-subview'))
     : [];
@@ -594,6 +599,11 @@
   document.getElementById('home-blocks-heading')?.setAttribute('tabindex', '-1');
   const main = document.getElementById('main');
   const footer = document.getElementById('site-footer');
+  // Global sections expose one Back to home control, not one at each end.
+  for (const view of Object.values(views)) {
+    const links = [...view.querySelectorAll('a[data-home-back]')];
+    links.slice(1).forEach(link => link.closest('p')?.remove());
+  }
 
   const labels = {
     es: { sections:'Secciones', actualidad:'Actualidad', resources:'Recursos', reading:'TifloLector', news:'Novedades', videos:'Vídeos', podcast:'Podcast', book:'Mi libro', contact:'Contacto y redes', privacy:'Privacidad y accesibilidad', privacyPolicy:'Política de privacidad', fullPrivacy:'Leer la política de privacidad completa', config:'Configuración', back:'Volver al inicio' },
@@ -643,7 +653,9 @@
         else document.getElementById('home-blocks-heading')?.focus();
       } else {
         const headingId = target?.getAttribute('aria-labelledby');
-        (headingId ? document.getElementById(headingId) : target?.querySelector('h2'))?.focus?.();
+        const heading = headingId ? document.getElementById(headingId) : target?.querySelector('h2');
+        heading?.setAttribute('tabindex', '-1');
+        heading?.focus?.();
       }
     });
   }

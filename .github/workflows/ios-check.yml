@@ -6,6 +6,8 @@ on:
     paths:
       - 'ios-build/**'
       - 'web-reading.js'
+      - 'sw.js'
+      - 'test/web-reading*.test.mjs'
       - 'index.html'
       - 'mobile/src/screens/reading-*.mjs'
       - '.github/workflows/ios-check.yml'

@@ -27,7 +27,8 @@ test('startup keeps preferences before first render and remote content refresh a
   const loadContent = app.indexOf('contentStore.load()');
   assert.ok(applyPreferences >= 0 && startHome > applyPreferences, 'preferences must be applied before Home starts');
   assert.ok(loadContent > startHome, 'remote content must load after Home is already rendered');
-  assert.match(app, /if \(!shareMode\s*&&\s*!textInputIsActive\(\)\) \{[\s\S]*?render\(router\.current\(\)\);[\s\S]*?focusScreenHeading\(root\)/);
+  assert.match(app, /if \(!shareMode\s*&&\s*!textInputIsActive\(\)\s*&&\s*contentScreens\.has\(router\.current\(\)\?\.name\)\) \{[\s\S]*?render\(router\.current\(\)\);[\s\S]*?focusScreenHeading\(root\)/);
+  assert.match(app, /restoreOriginFocus\(root, focusedId\)/);
 });
 
 test('reading document receiver installs only after Home starts and keeps text Share independent', async () => {

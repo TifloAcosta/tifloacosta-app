@@ -327,6 +327,22 @@
 
     // One global default. Each document may override it without changing the default.
     const settings = document.getElementById('reading-settings-web');
+    if (settings && !document.getElementById('ios-reading-settings-disclosure')) {
+      const toggle = document.createElement('button');
+      toggle.id = 'ios-reading-settings-disclosure';
+      toggle.type = 'button';
+      toggle.textContent = localized('Ajustes de lectura', 'Reading settings');
+      toggle.setAttribute('aria-controls', settings.id);
+      toggle.setAttribute('aria-expanded', 'false');
+      settings.before(toggle);
+      settings.hidden = true;
+      toggle.addEventListener('click', () => {
+        settings.hidden = !settings.hidden;
+        toggle.setAttribute('aria-expanded', String(!settings.hidden));
+        if (!settings.hidden) settings.querySelector('h3')?.focus({ preventScroll: true });
+        else toggle.focus({ preventScroll: true });
+      });
+    }
     if (settings && !document.getElementById('ios-reading-default-unit')) {
       const label = document.createElement('label');
       label.htmlFor = 'ios-reading-default-unit';
@@ -397,15 +413,15 @@
     ]);
     amendText(document.getElementById('reading-translation-intro'), [
       [/Traduce el documento con el motor disponible en tu navegador\. El original se conserva\./g,
-        'La traducción mantiene el documento original, pero esta compilación aún no dispone de un motor de traducción nativo para iOS.'],
+        'La traducción utiliza los idiomas del sistema iOS y conserva el documento original.'],
       [/Translate the document with the engine available in your browser\. The original is preserved\./g,
-        'The original document is preserved, but this build does not yet have a native iOS translation engine.']
+        'Translation uses iOS language models and preserves your original document.']
     ]);
     amendText(document.getElementById('reading-translation-status'), [
       [/Este navegador no ofrece traducción integrada para TifloLector\./g,
-        'La traducción integrada todavía no está disponible en esta versión de TifloLector para iPhone.'],
+        'Comprueba la disponibilidad de los idiomas necesarios en el sistema.'],
       [/This browser does not provide built-in translation for TifloReader\./g,
-        'Built-in translation is not yet available in this iPhone version of TifloReader.']
+        'Check that the required translation languages are available in iOS.']
     ]);
 
     function installDocumentControls() {

@@ -6,7 +6,8 @@ export function renderNewContent({ root, router, content, preferences, nativeAct
 
   const lang = preferences?.lang === 'en' ? 'en' : 'es';
   const resources = (Array.isArray(content?.resources) ? content.resources : [])
-    .filter(item => item?.isNew === true && (!item.lang || item.lang === lang));
+    .filter(item => item?.isNew === true && (!item.lang || item.lang === lang))
+    .sort((a, b) => (Date.parse(b.newsDate || '') || 0) - (Date.parse(a.newsDate || '') || 0));
 
   if (!resources.length) {
     addParagraph(
@@ -15,6 +16,12 @@ export function renderNewContent({ root, router, content, preferences, nativeAct
       'empty-state'
     );
     return;
+  }
+
+  const newestDate = resources.map(item => Date.parse(item.newsDate || '')).find(Number.isFinite);
+  if (Number.isFinite(newestDate)) {
+    const dateLabel = new Intl.DateTimeFormat(lang, { dateStyle: 'long' }).format(new Date(newestDate));
+    addParagraph(root, lang === 'en' ? `Latest published item: ${dateLabel}.` : `Última novedad publicada: ${dateLabel}.`, 'muted');
   }
 
   const list = document.createElement('div');

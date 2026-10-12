@@ -481,6 +481,7 @@ function render(route) {
     preferences,
     favoritesStore,
     nativeActions,
+    onRefreshContent: () => refreshMobileContent(),
     notificationService,
     appInfo,
     t,
@@ -728,7 +729,7 @@ function refreshMobileContent() {
     const currentTimestamp = Date.parse(currentContent?.generatedAt || '');
     const incomingTimestamp = Date.parse(incoming?.generatedAt || '');
     if (result.status === 'cached' && Number.isFinite(currentTimestamp) &&
-        (!Number.isFinite(incomingTimestamp) || incomingTimestamp < currentTimestamp)) return;
+        (!Number.isFinite(incomingTimestamp) || incomingTimestamp < currentTimestamp)) return result;
     const changed = JSON.stringify(currentContent) !== JSON.stringify(incoming);
     currentContent = incoming;
     currentNewNewsIds = newsSeenStore.compare(currentContent.news);
@@ -744,8 +745,10 @@ function refreshMobileContent() {
         });
       }
     }
+    return result;
   }).catch(() => {
     // An offline refresh must not discard the content already on screen.
+    return { status: 'error', content: currentContent };
   }).finally(() => {
     contentRefreshPending = null;
     void notificationCoordinator.markReady();

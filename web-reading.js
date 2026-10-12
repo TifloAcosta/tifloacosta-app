@@ -1005,7 +1005,13 @@
 
   function restoreWebSettings() {
     const value = readWebSettings();
-    if (els.defaultNavigationMode) els.defaultNavigationMode.value = ['block', 'paragraph', 'sentence'].includes(value.defaultNavigationMode) ? value.defaultNavigationMode : 'block';
+    if (els.defaultNavigationMode) {
+      let unit = value.defaultNavigationMode;
+      if (!['block', 'paragraph', 'sentence'].includes(unit)) {
+        try { unit = localStorage.getItem('tiflo-ios-default-reading-unit-v1'); } catch {}
+      }
+      els.defaultNavigationMode.value = ['block', 'paragraph', 'sentence'].includes(unit) ? unit : 'block';
+    }
     if (els.voiceLanguage && value.voiceLanguage !== undefined) els.voiceLanguage.value = primaryLanguage(value.voiceLanguage);
     if (els.externalVoiceLanguage && value.externalVoiceLanguage !== undefined) els.externalVoiceLanguage.value = primaryLanguage(value.externalVoiceLanguage);
     if (els.rate && value.rate) els.rate.value = String(value.rate);

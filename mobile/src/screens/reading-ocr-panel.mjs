@@ -1,4 +1,7 @@
 import { createReadingOcrFlow } from '../core/reading-ocr-flow.mjs';
+import { registerPlugin } from '@capacitor/core';
+
+const NativeExport = registerPlugin('TifloReadingExport');
 
 function text(t, key, es, en) {
   const translated = typeof t === 'function' ? t(key) : '';
@@ -81,6 +84,13 @@ export function createReadingOcrPanel({
   openRecognizedButton.textContent = text(t, 'readingBook.ocrOpenText', 'Leer el texto ya reconocido', 'Read recognized text');
   openRecognizedButton.disabled = true;
 
+  const exportOcrButton = document.createElement('button');
+  exportOcrButton.type = 'button';
+  exportOcrButton.disabled = true;
+  exportOcrButton.textContent = document.documentElement.lang === 'en'
+    ? 'Save or share recognized text as TXT'
+    : 'Guardar o compartir texto reconocido en TXT';
+
   const progress = document.createElement('p');
   progress.className = 'reading-ocr-progress';
   progress.setAttribute('role', 'status');
@@ -104,6 +114,7 @@ export function createReadingOcrPanel({
     recognizeButton,
     resumeButton,
     openRecognizedButton,
+    exportOcrButton,
     progress,
     pageResult
   );
@@ -145,6 +156,7 @@ export function createReadingOcrPanel({
     const state = flow?.getState?.() || { pages: [], completedUnits: 0, pageCount };
     progress.textContent = stateText(state);
     openRecognizedButton.disabled = !state.pages?.length;
+    exportOcrButton.disabled = !state.pages?.some(page => String(page?.text || '').trim());
     resumeButton.disabled = state.nextMissingPage == null;
     if (state.nextMissingPage != null && !focusPage) pageInput.value = String(state.nextMissingPage + 1);
     return state;
@@ -231,6 +243,35 @@ export function createReadingOcrPanel({
       text: page.text
     }));
     if (pages.length) onOpenRecognized?.(pages, state.script);
+  });
+
+  exportOcrButton.addEventListener('click', () => {
+    void (async () => {
+      const state = renderState({ focusPage: true });
+      const pages = (state.pages || [])
+        .filter(page => String(page?.text || '').trim())
+        .sort((a, b) => a.pageIndex - b.pageIndex);
+      if (!pages.length) return;
+      const recognized = pages.map(page =>
+        (document.documentElement.lang === 'en' ? 'Page ' : 'Página ') + (page.pageIndex + 1) + '\n' + page.text
+      ).join('\n\n');
+      exportOcrButton.disabled = true;
+      try {
+        const outcome = await NativeExport.shareTextFile({
+          text: recognized,
+          filename: 'tiflolector-ocr-' + String(book?.id || 'documento').replace(/[^a-zA-Z0-9_-]/g, '_') + '.txt'
+        });
+        progress.textContent = outcome?.shared
+          ? (document.documentElement.lang === 'en' ? 'Recognized text shared.' : 'Texto reconocido compartido.')
+          : (document.documentElement.lang === 'en' ? 'Export cancelled.' : 'Exportación cancelada.');
+      } catch {
+        progress.textContent = document.documentElement.lang === 'en'
+          ? 'OCR export is unavailable on this device.'
+          : 'La exportación OCR no está disponible en este dispositivo.';
+      } finally {
+        if (!destroyed) renderState({ focusPage: true });
+      }
+    })();
   });
 
   function destroy() {

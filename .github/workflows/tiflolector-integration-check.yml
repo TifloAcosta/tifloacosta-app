@@ -1,0 +1,33 @@
+name: Verify TifloLector integration
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'mobile/**'
+      - 'shared/**'
+      - '.github/workflows/tiflolector-integration-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reader-tests-and-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: mobile
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Run all tests
+        run: npm test
+      - name: Build Capacitor web assets
+        run: npm run build

@@ -717,21 +717,42 @@ const contentStore = createContentStore({
   storage
 });
 
-contentStore.load().then(result => {
-  currentContent = result.content || EMPTY_CONTENT;
-  currentNewNewsIds = newsSeenStore.compare(currentContent.news);
-  // A background content refresh must never destroy a reader session or reset
-  // VoiceOver to the beginning of the current screen.
-  const contentScreens = new Set(['home', 'new-content', 'actualidad', 'library', 'videos', 'podcast', 'search']);
-  if (!shareMode && !textInputIsActive() && contentScreens.has(router.current()?.name)) {
-    const focusedId = rememberFocusedId(root);
-    render(router.current());
-    queueMicrotask(() => {
-      if (!focusedId || !restoreOriginFocus(root, focusedId)) focusScreenHeading(root);
-    });
-  }
-  void notificationCoordinator.markReady();
-});
+let contentRefreshPending = null;
+function refreshMobileContent() {
+  if (contentRefreshPending) return contentRefreshPending;
+  contentRefreshPending = contentStore.load().then(result => {
+    // Keep the last fresh snapshot if the network fails while the app is open.
+    const incoming = result.content || EMPTY_CONTENT;
+    const currentTimestamp = Date.parse(currentContent?.generatedAt || '');
+    const incomingTimestamp = Date.parse(incoming?.generatedAt || '');
+    if (result.status === 'cached' && Number.isFinite(currentTimestamp) &&
+        (!Number.isFinite(incomingTimestamp) || incomingTimestamp < currentTimestamp)) return;
+    const changed = JSON.stringify(currentContent) !== JSON.stringify(incoming);
+    currentContent = incoming;
+    currentNewNewsIds = newsSeenStore.compare(currentContent.news);
+    // Never rerender an open book, translation, video or another active session:
+    // only update catalog screens, restoring the exact VoiceOver focus when possible.
+    const contentScreens = new Set(['home', 'new-content', 'actualidad', 'library', 'videos', 'podcast', 'search']);
+    if (changed) {
+      if (!shareMode && !textInputIsActive() && contentScreens.has(router.current()?.name)) {
+        const focusedId = rememberFocusedId(root);
+        render(router.current());
+        queueMicrotask(() => {
+          if (!focusedId || !restoreOriginFocus(root, focusedId)) focusScreenHeading(root);
+        });
+      }
+    }
+  }).catch(() => {
+    // An offline refresh must not discard the content already on screen.
+  }).finally(() => {
+    contentRefreshPending = null;
+    void notificationCoordinator.markReady();
+  });
+  return contentRefreshPending;
+}
+
+void refreshMobileContent();
+onAppResume(() => { void refreshMobileContent(); });
 
 export function getContent() {
   return currentContent;

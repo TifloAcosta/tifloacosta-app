@@ -155,13 +155,20 @@ test('import control explicitly lists every supported document family', async ()
 });
 
 
-test('Android reading library opens a title directly without exposing an intermediate details view', async () => {
+test('library retains direct reading and offers an accessible per-document actions panel', async () => {
   const screen = await read('src/screens/reading-library.mjs');
-  assert.ok(screen.includes("() => onOpenBook?.(item.id)"));
+  assert.ok(screen.includes("() => onOpenBook?.(item.id)"), 'title continues to open the book');
   assert.ok(screen.includes("'reading-library-title'"));
   assert.ok(screen.includes('Abrir para leer:'));
   assert.ok(screen.includes('article.append(title);'));
-  assert.ok(!screen.includes('article.append(details);'));
+  assert.ok(screen.includes('article.append(actionsToggle, details);'), 'additional actions must be reachable');
+  assert.ok(screen.includes('Acciones de'), 'accessibility actions menu needs a discernible label');
+  assert.ok(screen.includes("actionsToggle.setAttribute('aria-controls', details.id)"));
+  assert.ok(screen.includes("actionsToggle.setAttribute('aria-expanded', 'false')"));
+  assert.ok(screen.includes("details.hidden = !opening;"), 'actions menu must toggle without navigating away');
+  assert.ok(screen.includes("detailsHeading.focus()"), 'opening should focus the panel heading');
+  assert.ok(screen.includes("actionsToggle.focus()"), 'closing should return to its opener');
+  assert.ok(screen.includes('client.deleteBook(item.id)'), 'deletion stays behind confirmation');
 });
 
 test('Android composition carries a requested library percentage into the opened book', async () => {

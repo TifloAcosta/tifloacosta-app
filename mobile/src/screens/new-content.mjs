@@ -37,6 +37,11 @@ export function renderNewContent({ root, router, content, preferences, nativeAct
     article.append(heading);
 
     if (item.category) addParagraph(article, item.category, 'muted');
+    const publishedAt = Date.parse(item.newsDate || '');
+    if (Number.isFinite(publishedAt)) {
+      const publishedLabel = new Intl.DateTimeFormat(lang, { dateStyle: 'long' }).format(new Date(publishedAt));
+      addParagraph(article, lang === 'en' ? `Published: ${publishedLabel}.` : `Publicado: ${publishedLabel}.`, 'muted');
+    }
 
     const target = item.openUrl || item.url || '';
     if (target) {

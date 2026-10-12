@@ -1,7 +1,11 @@
 import { READING_SETTING_DEFAULTS, resolveReadingSettings } from '../core/reading-settings.mjs';
 import { TifloReading } from '../native/reading-library-plugin.mjs';
+import { registerPlugin } from '@capacitor/core';
+
 import { renderReadingQueue } from './reading-queue.mjs';
 import { addScreenHeader, clearScreen } from './shared.mjs';
+
+const NativeDocumentAccessibility = registerPlugin('TifloReadingAccessibility');
 
 const PAGE_SIZE = 10;
 const FORMATS = ['txt', 'html', 'pdf', 'epub', 'docx', 'pptx', 'xlsx', 'daisy2.02', 'daisy3', 'audio'];
@@ -103,6 +107,14 @@ export function renderReadingLibrary({
   let listGeneration = 0;
   let currentImportBatch = initialImportBatch;
   let queueController = null;
+  let focusedDocumentId = '';
+  let documentActionGeneration = 0;
+  const nativeActionsByDocument = new Map();
+  // Native UIKit actions are advisory: normal HTML buttons remain fully functional.
+  void NativeDocumentAccessibility.addListener('documentAction', ({ documentId, action }) => {
+    if (String(documentId) !== focusedDocumentId) return;
+    nativeActionsByDocument.get(focusedDocumentId)?.(action);
+  }).catch(() => {});
 
   const liveStatus = document.createElement('p');
   liveStatus.className = 'reading-library-status';
@@ -173,7 +185,7 @@ export function renderReadingLibrary({
   importFormats.textContent = document.documentElement.lang === 'en'
     ? 'Supports Word (DOCX), PowerPoint (PPTX), Excel (XLSX), EPUB, PDF, TXT, HTML, DAISY and audio.'
     : 'Admite Word (DOCX), PowerPoint (PPTX), Excel (XLSX), EPUB, PDF, TXT, HTML, DAISY y audio.';
-  importSection.append(importButton, importFormats, liveStatus);
+  importSection.append(importButton, liveStatus);
 
   const audioChoiceHost = document.createElement('section');
   audioChoiceHost.className = 'reading-library-audio-choice';
@@ -435,7 +447,7 @@ export function renderReadingLibrary({
       ['page', document.documentElement.lang === 'en' ? 'PDF page' : 'Página PDF']
     ]
   );
-  generalGroup.append(navigationModeLabel, navigationModeSelect, resetSettings, settingsStatus);
+  generalGroup.append(navigationModeLabel, navigationModeSelect, importFormats, resetSettings, settingsStatus);
   settingsPanel.append(audioGroup, visualGroup, generalGroup);
   settingsSection.append(settingsHeading, settingsToggle, settingsPanel);
   root.append(settingsSection);
@@ -554,10 +566,55 @@ export function renderReadingLibrary({
         : `Abrir para leer: ${item.title || t('readingLibrary.untitled')}`
     );
     article.append(title);
+    title.addEventListener('focus', () => {
+      focusedDocumentId = String(item.id);
+      const generation = ++documentActionGeneration;
+      void NativeDocumentAccessibility.setDocumentActions({
+        documentId: focusedDocumentId,
+        actions: [
+          { id: 'open', label: fallback(t, 'readingLibrary.open', 'Abrir', 'Open') },
+          { id: 'details', label: fallback(t, 'readingLibrary.actions', 'Más acciones', 'More actions') },
+          { id: 'rename', label: fallback(t, 'readingLibrary.rename', 'Cambiar título', 'Rename') },
+          { id: 'delete', label: fallback(t, 'readingLibrary.delete', 'Eliminar', 'Delete') }
+        ]
+      }).then(result => {
+        if (generation !== documentActionGeneration || focusedDocumentId !== String(item.id)) return;
+        if (result?.configured !== true) title.dataset.nativeActions = 'unavailable';
+      }).catch(() => { title.dataset.nativeActions = 'unavailable'; });
+    });
+    title.addEventListener('blur', () => {
+      if (focusedDocumentId !== String(item.id)) return;
+      focusedDocumentId = '';
+      ++documentActionGeneration;
+      void NativeDocumentAccessibility.clearDocumentActions({
+        documentId: String(item.id)
+      }).catch(() => {});
+    });
 
     const details = document.createElement('section');
     details.className = 'reading-library-item-details';
     details.hidden = true;
+    details.id = `reading-library-details-${String(item.id).replace(/[^a-zA-Z0-9_-]/g, '-')}`;
+    const actionsToggle = makeButton(
+      document.documentElement.lang === 'en'
+        ? `Actions for ${item.title || t('readingLibrary.untitled')}`
+        : `Acciones de ${item.title || t('readingLibrary.untitled')}`,
+      () => {
+        const opening = details.hidden;
+        details.hidden = !opening;
+        actionsToggle.setAttribute('aria-expanded', String(opening));
+        if (opening) {
+          if (!timeLoaded) void loadEstimatedTimes();
+          queueMicrotask(() => detailsHeading.focus());
+        } else {
+          actionsToggle.focus();
+        }
+      },
+      'reading-library-actions-toggle'
+    );
+    actionsToggle.id = `reading-library-actions-${String(item.id).replace(/[^a-zA-Z0-9_-]/g, '-')}`;
+    actionsToggle.setAttribute('aria-controls', details.id);
+    actionsToggle.setAttribute('aria-expanded', 'false');
     const detailsHeading = document.createElement('h3');
     detailsHeading.tabIndex = -1;
     detailsHeading.textContent = item.title || t('readingLibrary.untitled');
@@ -796,6 +853,15 @@ export function renderReadingLibrary({
           ? fallback(t, 'readingLibrary.metadataSaved', 'Cambios guardados.', 'Changes saved.')
           : fallback(t, 'readingLibrary.metadataFailed', 'No se pudieron guardar los cambios.', 'The changes could not be saved.');
         await refresh();
+        // After renaming, return VoiceOver to this document instead of the start of the library.
+        if (saved) {
+          const documentButton = root.querySelector(
+            `[id="reading-library-actions-${String(item.id).replace(/[^a-zA-Z0-9_-]/g, '-')}" ]`
+          );
+          documentButton?.focus();
+        } else {
+          renameSave.disabled = false;
+        }
       })();
     });
     rename.append(renameSummary, renameForm);
@@ -884,8 +950,8 @@ export function renderReadingLibrary({
       fallback(t, 'readingLibrary.backToTitles', 'Volver a los títulos de la biblioteca', 'Back to library titles'),
       () => {
         details.hidden = true;
-        title.setAttribute('aria-expanded', 'false');
-        title.focus();
+        actionsToggle.setAttribute('aria-expanded', 'false');
+        actionsToggle.focus();
       }
     );
 
@@ -903,6 +969,23 @@ export function renderReadingLibrary({
       morePanel,
       close
     );
+    nativeActionsByDocument.set(String(item.id), action => {
+      if (action === 'open') onOpenBook?.(item.id);
+      if (action === 'details') actionsToggle.click();
+      if (action === 'rename') {
+        if (details.hidden) actionsToggle.click();
+        if (morePanel.hidden) moreButton.click();
+        rename.open = true;
+        renameInput.focus();
+      }
+      if (action === 'delete') {
+        if (details.hidden) actionsToggle.click();
+        if (morePanel.hidden) moreButton.click();
+        deleteButton.click();
+        confirmHost.querySelector('button')?.focus();
+      }
+    });
+    article.append(actionsToggle, details);
     return article;
   }
 
@@ -945,6 +1028,10 @@ export function renderReadingLibrary({
     });
     if (generation !== listGeneration) return;
 
+    nativeActionsByDocument.clear();
+    ++documentActionGeneration;
+    focusedDocumentId = '';
+    void NativeDocumentAccessibility.clearDocumentActions().catch(() => {});
     list.replaceChildren();
     if (!result.items?.length) {
       const empty = document.createElement('p');

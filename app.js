@@ -359,8 +359,9 @@
 
   function renderNews(){
     const c=copy[lang];
-    const items=(shared?.newestResources ? shared.newestResources(data,{lang,limit:3}) : resourcesForLanguage().filter(item=>item.new).slice(0,3))
-      .sort((a,b)=>(Date.parse(b.newsDate||'')||0)-(Date.parse(a.newsDate||'')||0));
+    const items=(shared?.newestResources ? shared.newestResources(data,{lang,limit:3}) : resourcesForLanguage().filter(item=>item.new))
+      .sort((a,b)=>(Date.parse(b.newsDate||'')||0)-(Date.parse(a.newsDate||'')||0))
+      .slice(0,3);
     els.newsList.innerHTML='';
     items.forEach(item=>els.newsList.append(makeNewsItem(item)));
     const latestDate=items.map(item=>Date.parse(item.newsDate||'')).find(Number.isFinite);

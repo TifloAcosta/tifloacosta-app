@@ -5,6 +5,7 @@ import { createReadingSpeechController } from '../core/reading-speech.mjs';
 import { resolveReadingSettings } from '../core/reading-settings.mjs';
 import { parseStructuredDocument } from '../core/reading-structured-adapter.mjs';
 import { createReadingAudioView } from './reading-audio.mjs';
+import { annotationAt, loadAnnotations } from '../core/reading-annotations.mjs';
 import { createReadingMarksPanel } from './reading-marks.mjs';
 import { createReadingOcrPanel } from './reading-ocr-panel.mjs';
 import { createReadingSearchPanel } from './reading-search.mjs';
@@ -406,6 +407,23 @@ export function renderReadingBook({
     moreReturn
   );
 
+  const contentsSection = document.createElement('section');
+  contentsSection.hidden = true;
+  const contentsHeading = document.createElement('h2');
+  contentsHeading.textContent = document.documentElement.lang === 'en' ? 'Chapters and headings' : 'Capítulos y encabezados';
+  const contentsLabel = document.createElement('label');
+  contentsLabel.textContent = document.documentElement.lang === 'en' ? 'Choose heading' : 'Seleccionar encabezado';
+  const contentsSelect = document.createElement('select');
+  contentsSelect.id = 'reading-contents-select';
+  contentsLabel.htmlFor = contentsSelect.id;
+  const contentsGo = document.createElement('button');
+  contentsGo.type = 'button';
+  contentsGo.textContent = document.documentElement.lang === 'en' ? 'Go to heading' : 'Ir al encabezado';
+  const contentsStatus = document.createElement('p');
+  contentsStatus.setAttribute('role', 'status');
+  contentsStatus.setAttribute('aria-live', 'polite');
+  contentsSection.append(contentsHeading, contentsLabel, contentsSelect, contentsGo, contentsStatus);
+
   const pdfPageNavigation = document.createElement('nav');
   pdfPageNavigation.className = 'reading-library-pagination reading-pdf-pagination';
   pdfPageNavigation.setAttribute('aria-label', t('readingBook.navigation'));
@@ -505,6 +523,7 @@ export function renderReadingBook({
     pdfPasswordForm,
     controls,
     pdfPageNavigation,
+    contentsSection,
     readerContainer,
     moreActions,
     panels,
@@ -880,7 +899,22 @@ export function renderReadingBook({
     element.dataset.blockIndex = String(normalized.blockIndex);
     element.dataset.unitIndex = String(normalized.unitIndex);
     element.dataset.readingUnit = 'current';
-    readerContainer.replaceChildren(element);
+    // Mark the actively spoken unit for accessible and visual reading follow-along.
+    element.classList.add('reading-current-unit');
+    element.setAttribute('aria-current', 'true');
+    const annotation = activeBook?.id ? annotationAt(loadAnnotations(activeBook.id), normalized) : null;
+    if (annotation?.highlight) {
+      element.classList.add('reading-annotated-highlight');
+      element.dataset.highlighted = 'true';
+    }
+    if (annotation?.note) {
+      const noteDescription = document.createElement('p');
+      noteDescription.textContent = (document.documentElement.lang === 'en' ? 'Note: ' : 'Nota: ') + annotation.note;
+      noteDescription.className = 'reading-annotation-note';
+      readerContainer.replaceChildren(element, noteDescription);
+    } else {
+      readerContainer.replaceChildren(element);
+    }
     readerContainer.append(renderBlockLinks(block, unitText, normalized));
     if (commit) currentPosition = normalized;
 
@@ -937,6 +971,31 @@ export function renderReadingBook({
     else hideEndOfDocument();
     return saved;
   }
+
+  function populateTableOfContents() {
+    contentsSelect.replaceChildren();
+    const blocks = Array.isArray(documentModel?.blocks) ? documentModel.blocks : [];
+    const headings = blocks.map((block, index) => ({ block, index }))
+      .filter(({ block }) => block?.type === 'heading' && String(block.text || '').trim());
+    contentsSection.hidden = headings.length === 0;
+    for (const { block, index } of headings) {
+      const choice = document.createElement('option');
+      choice.value = String(index);
+      choice.textContent = String(block.text).trim();
+      contentsSelect.append(choice);
+    }
+    contentsStatus.textContent = headings.length
+      ? (document.documentElement.lang === 'en'
+        ? headings.length + ' headings available.'
+        : headings.length + ' encabezados disponibles.')
+      : '';
+  }
+
+  contentsGo.addEventListener('click', () => {
+    const index = Number(contentsSelect.value);
+    if (!Number.isInteger(index) || !documentModel?.blocks?.[index] || documentModel.blocks[index].type !== 'heading') return;
+    void moveToPosition({ blockIndex: index, unitIndex: 0 }, { focus: true });
+  });
 
   function navigationTarget(position, direction) {
     const step = Number(direction) < 0 ? -1 : 1;
@@ -1174,6 +1233,7 @@ export function renderReadingBook({
           ? parseHtmlDocument(opened.content, { title: activeBook.title })
           : parseTextDocument(opened.content, { title: activeBook.title });
 
+    populateTableOfContents();
     if (!documentModel.blocks.length) {
       status.textContent = t('readingBook.empty');
       clearInteractiveReading();
@@ -1264,6 +1324,7 @@ export function renderReadingBook({
         return String(documentModel?.blocks?.[position?.blockIndex]?.href ?? '');
       },
       onJump: position => moveToPosition(position),
+      onAnnotationsChanged: () => renderSemanticPosition(currentPosition, { focus: false, announce: false, commit: false }),
       returnFocus: focusCurrentSemanticUnit
     });
 

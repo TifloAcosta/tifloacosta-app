@@ -270,7 +270,7 @@
   function maintainSingleBackAction() {
     const brand=document.querySelector('.site-header .brand');
     function update() {
-      const isHome=isIndex&&(!location.hash||location.hash==='#home');
+      const isHome=isIndex&&(!window.location.hash||window.location.hash==='#home');
       if(brand){brand.hidden=!isHome;brand.setAttribute('aria-hidden',String(!isHome));}
     }
     (document.querySelectorAll?.('main > section') || []).forEach(section=>{

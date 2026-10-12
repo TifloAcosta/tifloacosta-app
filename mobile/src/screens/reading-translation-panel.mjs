@@ -247,6 +247,11 @@ export function createReadingTranslationPanel({
       if (detectedLanguage === 'und') detectedLanguage = '';
     }
     languages = [...new Set(languages.map(cleanLanguage).filter(Boolean))].sort();
+    if (!languages.length) {
+      progress.textContent = document.documentElement.lang === 'en'
+        ? 'On-device translation is not available. An iOS build with the native translation component and iOS 18 or later is required.'
+        : 'La traducción nativa no está disponible. Se necesita una versión de la aplicación con el componente de traducción de iOS e iOS 18 o posterior.';
+    }
     fillLanguages();
     modelsReady = false;
     translateButton.disabled = true;

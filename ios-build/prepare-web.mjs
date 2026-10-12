@@ -29,6 +29,7 @@ await stat(join(output,'index.html'));
 const mediaPath = join(output, 'actualidad-media.json');
 const sourceCatalog = JSON.parse(await readFile(join(root, 'actualidad-media-sources.json'), 'utf8'));
 const mediaCatalog = JSON.parse(await readFile(mediaPath, 'utf8'));
+// The shared RSS parser must preserve audio enclosures; do not ship a bundle with unplayable podcast entries.
 const iosAudio = await enrichIosMediaCatalog({ items: mediaCatalog, sources: sourceCatalog });
 console.log('Audio iOS: ' + iosAudio.stats.playableCount + ' de ' + iosAudio.stats.audioCount +
   ' episodios con URL directa; fuentes RSS accesibles: ' + iosAudio.stats.feedsOk +

@@ -98,9 +98,14 @@ test('Android document reader mirrors the final compact TifloLector control hier
   ]);
 
   const controls = screen.slice(screen.indexOf('controls.append('), screen.indexOf(');', screen.indexOf('controls.append(')) + 2);
-  assert.ok(controls.indexOf('playButton') < controls.indexOf('navigationLabel'));
-  assert.ok(controls.indexOf('navigationSelect') < controls.indexOf('previous'));
+  // Playback controls stay visible; mode selection lives inside Reading settings > General.
+  assert.ok(controls.indexOf('playButton') < controls.indexOf('previous'));
   assert.ok(controls.indexOf('previous') < controls.indexOf('next'));
+  assert.ok(!controls.includes('navigationLabel'));
+  assert.ok(!controls.includes('navigationSelect'));
+  const general = screen.slice(screen.indexOf('generalSettings.append('), screen.indexOf(');', screen.indexOf('generalSettings.append(')) + 2);
+  assert.ok(general.includes('navigationLabel'));
+  assert.ok(general.includes('navigationSelect'));
   assert.ok(!controls.includes('progressLabel'));
   assert.ok(!controls.includes('progressSelect'));
 

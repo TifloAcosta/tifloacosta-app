@@ -160,6 +160,7 @@
         <div class="resource-actions">
           <button id="reading-translation-original" type="button" hidden aria-pressed="true">Original</button>
           <button id="reading-translation-translated" type="button" hidden aria-pressed="false">Traducción</button>
+          <button id="reading-translation-read" type="button" hidden>Leer la traducción en el documento</button>
         </div>
         <p id="reading-translation-status" class="muted" role="status" aria-live="polite" aria-atomic="true"></p>
       </section>
@@ -172,14 +173,26 @@
       <p id="reading-mark-status" class="muted" role="status" aria-live="polite"></p>
     </section>
 
-    <section id="reading-settings-web" class="panel" aria-labelledby="reading-settings-heading">
-      <h3 id="reading-settings-heading" tabindex="-1">Ajustes de lectura</h3>
+    <details id="reading-settings-disclosure" class="panel reading-settings-disclosure">
+      <summary id="reading-settings-summary">Ajustes de lectura</summary>
+      <section id="reading-settings-web" aria-labelledby="reading-settings-heading">
+      <h3 id="reading-settings-heading" tabindex="-1">Tipos de ajustes</h3>
       <div class="resource-actions" aria-label="Ajustes de TifloLector">
         <button type="button" data-reading-view="reading-audio-view" aria-controls="reading-audio-view">Audio y voz</button>
         <button type="button" data-reading-view="reading-visual-view" aria-controls="reading-visual-view">Presentación visual</button>
       </div>
+      <details id="reading-general-settings">
+        <summary id="reading-general-settings-summary">General</summary>
+        <label id="reading-default-navigation-label" for="reading-default-navigation">Modo de avance predeterminado para nuevos documentos</label>
+        <select id="reading-default-navigation">
+          <option value="block">Bloque</option>
+          <option value="paragraph">Párrafo</option>
+          <option value="sentence">Frase</option>
+        </select>
+      </details>
       <p id="reading-settings-status" class="muted" role="status" aria-live="polite"></p>
-    </section>
+      </section>
+    </details>
 
     <section id="reading-audio-view" class="panel reading-subview" hidden aria-labelledby="reading-audio-view-heading">
       <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
@@ -302,7 +315,7 @@
     <section id="reading-library-web" class="panel reading-subview" hidden aria-labelledby="reading-library-heading">
       <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
       <h3 id="reading-library-heading" tabindex="-1">Mi biblioteca</h3>
-      <p id="reading-library-intro">Los documentos guardados permanecen en este navegador.</p>
+      <p id="reading-library-intro">Los documentos se guardan localmente en esta instalación de TifloLector. No se sincronizan automáticamente con otros dispositivos.</p>
       <button id="reading-library-refresh" type="button">Actualizar biblioteca</button>
       <p id="reading-library-status" class="muted" role="status" aria-live="polite"></p>
       <div id="reading-library-list" class="resource-list"></div>
@@ -507,6 +520,11 @@
 
   const readingSection = document.getElementById('reading-section');
   const subviews = [...document.querySelectorAll('.reading-subview')];
+  // One return action per subsection prevents duplicate VoiceOver stops.
+  for (const view of subviews) {
+    const controls = [...view.querySelectorAll('[data-reading-back]')];
+    controls.slice(1).forEach(control => control.remove());
+  }
   const mainChildren = readingSection
     ? [...readingSection.children].filter(node => !node.classList?.contains('reading-subview'))
     : [];
@@ -560,9 +578,9 @@
 <script type="module">
   import * as shared from './shared/web-entry.mjs?v=1.6';
   window.TIFLO_SHARED = shared;
-  await import('./web-reading.js?v=3.13');
+  await import('./web-reading.js?v=3.14');
 </script>
-<script src="app.js?v=2.3"></script>
+<script src="app.js?v=2.4"></script>
 <script>
 (() => {
   'use strict';
@@ -578,8 +596,14 @@
   };
   const hero = document.getElementById('home-hero');
   const menu = document.getElementById('home-blocks');
+  document.getElementById('home-blocks-heading')?.setAttribute('tabindex', '-1');
   const main = document.getElementById('main');
   const footer = document.getElementById('site-footer');
+  // Global sections expose one Back to home control, not one at each end.
+  for (const view of Object.values(views)) {
+    const links = [...view.querySelectorAll('a[data-home-back]')];
+    links.slice(1).forEach(link => link.closest('p')?.remove());
+  }
 
   const labels = {
     es: { sections:'Secciones', actualidad:'Actualidad', resources:'Recursos', reading:'TifloLector', news:'Novedades', videos:'Vídeos', podcast:'Podcast', book:'Mi libro', contact:'Contacto y redes', privacy:'Privacidad y accesibilidad', privacyPolicy:'Política de privacidad', fullPrivacy:'Leer la política de privacidad completa', config:'Configuración', back:'Volver al inicio' },
@@ -606,7 +630,14 @@
     document.querySelectorAll('[data-home-back]').forEach(link => { link.textContent = text.back; });
   }
 
-  function showHomeView() {
+  let returnFocusId = '';
+  document.addEventListener('click', event => {
+    const link = event.target.closest?.('a[href^="#"]');
+    const destination = link?.getAttribute('href')?.slice(1);
+    if (destination && views[destination] && link?.id) returnFocusId = link.id;
+  });
+
+  function showHomeView({ focus = false } = {}) {
     const key = location.hash.replace(/^#/, '');
     const target = views[key] || null;
     const onHome = !target;
@@ -614,10 +645,22 @@
     menu.hidden = !onHome;
     if (footer) footer.hidden = !onHome;
     Object.values(views).forEach(section => { section.hidden = section !== target; });
-    // Focus is restored by the isolated navigation controller.
+    if (!focus) return;
+    queueMicrotask(() => {
+      if (onHome) {
+        const opener = returnFocusId && document.getElementById(returnFocusId);
+        if (opener && !opener.hidden) opener.focus();
+        else document.getElementById('home-blocks-heading')?.focus();
+      } else {
+        const headingId = target?.getAttribute('aria-labelledby');
+        const heading = headingId ? document.getElementById(headingId) : target?.querySelector('h2');
+        heading?.setAttribute('tabindex', '-1');
+        heading?.focus?.();
+      }
+    });
   }
 
-  window.addEventListener('hashchange', showHomeView);
+  window.addEventListener('hashchange', () => showHomeView({ focus: true }));
   document.getElementById('lang-es').addEventListener('click', () => setTimeout(localizeHomeNavigation, 0));
   document.getElementById('lang-en').addEventListener('click', () => setTimeout(localizeHomeNavigation, 0));
   localizeHomeNavigation();

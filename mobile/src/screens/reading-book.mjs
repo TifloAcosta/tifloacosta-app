@@ -345,7 +345,12 @@ export function renderReadingBook({
   const defaultModeStatus = document.createElement('p');
   defaultModeStatus.setAttribute('role', 'status');
   defaultModeStatus.setAttribute('aria-live', 'polite');
-  readingSettings.append(readingSettingsSummary, voiceButton, visualButton, defaultModeLabel, defaultModeSelect, defaultModeStatus);
+  const generalSettings = document.createElement('details');
+  generalSettings.className = 'reading-settings-disclosure';
+  const generalSettingsSummary = document.createElement('summary');
+  generalSettingsSummary.textContent = document.documentElement.lang === 'en' ? 'General' : 'General';
+  generalSettings.append(generalSettingsSummary, navigationLabel, navigationSelect, defaultModeLabel, defaultModeSelect, defaultModeStatus);
+  readingSettings.append(readingSettingsSummary, voiceButton, visualButton, generalSettings);
 
   const moreActionsButton = document.createElement('button');
   moreActionsButton.type = 'button';
@@ -353,8 +358,6 @@ export function renderReadingBook({
 
   controls.append(
     playButton,
-    navigationLabel,
-    navigationSelect,
     previous,
     next,
     progressStatus,

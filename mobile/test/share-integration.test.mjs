@@ -63,7 +63,7 @@ test('normal content refresh never replaces an active Share screen or steals foc
   const app = await read('src/app.mjs');
   assert.match(
     app,
-    /if\s*\(!shareMode\s*&&\s*!textInputIsActive\(\)\)\s*\{[\s\S]{0,220}render\(router\.current\(\)\)[\s\S]{0,220}focusScreenHeading\(root\)/
+    /if\s*\(!shareMode\s*&&\s*!textInputIsActive\(\)\s*&&\s*contentScreens\.has\(router\.current\(\)\?\.name\)\)\s*\{[\s\S]{0,420}render\(router\.current\(\)\)[\s\S]{0,420}focusScreenHeading\(root\)/
   );
 });
 

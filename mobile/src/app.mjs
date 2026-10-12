@@ -373,7 +373,11 @@ function openReadingBook(bookId, percent = null) {
   pendingReadingBookPercent = Number.isFinite(Number(percent))
     ? Math.max(0, Math.min(100, Number(percent)))
     : null;
-  router.navigate('reading-book');
+  const currentRoute = router.current()?.name;
+  const originId = currentRoute === 'reading-library'
+    ? `reading-library-title-${cleanId.replace(/[^a-zA-Z0-9_-]/g, '-')}`
+    : rememberFocusedId(root) || (currentRoute === 'home' ? 'home-reading-library' : null);
+  router.navigate('reading-book', { originId });
   return true;
 }
 
@@ -716,9 +720,15 @@ const contentStore = createContentStore({
 contentStore.load().then(result => {
   currentContent = result.content || EMPTY_CONTENT;
   currentNewNewsIds = newsSeenStore.compare(currentContent.news);
-  if (!shareMode && !textInputIsActive()) {
+  // A background content refresh must never destroy a reader session or reset
+  // VoiceOver to the beginning of the current screen.
+  const contentScreens = new Set(['home', 'new-content', 'actualidad', 'library', 'videos', 'podcast', 'search']);
+  if (!shareMode && !textInputIsActive() && contentScreens.has(router.current()?.name)) {
+    const focusedId = rememberFocusedId(root);
     render(router.current());
-    queueMicrotask(() => focusScreenHeading(root));
+    queueMicrotask(() => {
+      if (!focusedId || !restoreOriginFocus(root, focusedId)) focusScreenHeading(root);
+    });
   }
   void notificationCoordinator.markReady();
 });

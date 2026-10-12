@@ -216,6 +216,7 @@ export function createReadingTranslationControls({
         targetLanguage = clean(state?.targetLanguage || documentModel?.targetLanguage || documentModel?.language);
         updateViewButtons();
       },
+      onOpenTranslation: () => showTranslation(),
       returnFocus() {
         translateButton.focus();
       }

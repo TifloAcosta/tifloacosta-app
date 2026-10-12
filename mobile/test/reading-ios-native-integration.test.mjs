@@ -10,7 +10,8 @@ test('reading preferences are collapsed and expose audio, visual and inherited n
   const reader = await file('src/screens/reading-book.mjs');
   assert.match(reader, /readingSettings = document.createElement\('details'\)/);
   assert.match(reader, /readingSettingsSummary = document.createElement\('summary'\)/);
-  assert.match(reader, /readingSettings\.append\(readingSettingsSummary, voiceButton, visualButton, defaultModeLabel/);
+  assert.match(reader, /readingSettings\.append\(readingSettingsSummary, voiceButton, visualButton, generalSettings\)/);
+  assert.match(reader, /generalSettings\.append\(generalSettingsSummary, navigationLabel, navigationSelect, defaultModeLabel/);
   assert.match(reader, /readingSettings,\s*moreActionsButton/);
   assert.match(reader, /scope: 'global', key: 'reading.navigationMode'/);
   assert.match(reader, /scope: 'book', bookId: activeBook.id/);

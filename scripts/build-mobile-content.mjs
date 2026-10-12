@@ -76,7 +76,8 @@ export function buildMobileContent({ resources = [], videos = [], news = [], gen
       title: item.title,
       url: item.url,
       openUrl: item.openUrl || item.url,
-      isNew: Boolean(item.new)
+      isNew: Boolean(item.new),
+      newsDate: item.newsDate || item.publishedAt || ''
     })),
     videos: videos.map(item => ({
       kind: 'video',

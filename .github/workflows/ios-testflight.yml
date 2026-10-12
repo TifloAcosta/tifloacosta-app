@@ -135,18 +135,21 @@ jobs:
       - name: Asignar número de compilación único para TestFlight
         working-directory: ios-build
         env:
-          BUILD_NUMBER: ${{ github.run_number }}
+          BUILD_RUN_NUMBER: ${{ github.run_number }}
         run: |
           ruby <<'RUBY'
           require 'xcodeproj'
+          # Builds anteriores (p. ej. 200062) no pueden reemplazarse con 69.
+          # Mantener una serie creciente separada del contador de GitHub Actions.
+          build_number = (300000 + Integer(ENV.fetch('BUILD_RUN_NUMBER'))).to_s
           project = Xcodeproj::Project.open('ios/App/App.xcodeproj')
           app = project.targets.find { |target| target.name == 'App' }
           abort 'No se encontró el target App' unless app
           app.build_configurations.each do |config|
-            config.build_settings['CURRENT_PROJECT_VERSION'] = ENV.fetch('BUILD_NUMBER')
+            config.build_settings['CURRENT_PROJECT_VERSION'] = build_number
           end
           project.save
-          puts "Número de compilación TestFlight: #{ENV.fetch('BUILD_NUMBER')}"
+          puts "Número de compilación TestFlight: #{build_number}"
           RUBY
       - name: Configurar firma de distribución solo para App
         working-directory: ios-build
@@ -307,9 +310,14 @@ jobs:
           test -f "$APP_PLIST" || { echo "::error::Falta Info.plist de la app archivada"; exit 1; }
           ENCRYPTION="$(/usr/libexec/PlistBuddy -c 'Print :ITSAppUsesNonExemptEncryption' "$APP_PLIST")"
           MIN_IOS="$(/usr/libexec/PlistBuddy -c 'Print :MinimumOSVersion' "$APP_PLIST")"
+          BUILD_VERSION="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "$APP_PLIST")"
+          EXPECTED_BUILD="$((300000 + GITHUB_RUN_NUMBER))"
+          LOCATION_PURPOSE="$(/usr/libexec/PlistBuddy -c 'Print :NSLocationWhenInUseUsageDescription' "$APP_PLIST")"
           test "$ENCRYPTION" = false || { echo "::error::Falta declaración de cifrado exento"; exit 1; }
           test "$MIN_IOS" = 15.0 || { echo "::error::iOS mínimo incorrecto: $MIN_IOS"; exit 1; }
-          echo "Archivo iOS comprobado: cifrado exento declarado e iOS mínimo $MIN_IOS"
+          test "$BUILD_VERSION" = "$EXPECTED_BUILD" || { echo "::error::Número de compilación incorrecto: $BUILD_VERSION (esperado $EXPECTED_BUILD)"; exit 1; }
+          test -n "$LOCATION_PURPOSE" || { echo "::error::Falta explicación de uso de ubicación en Info.plist"; exit 1; }
+          echo "Archivo iOS comprobado: compilación $BUILD_VERSION, cifrado exento, privacidad e iOS mínimo $MIN_IOS"
       - name: Configurar exportación App Store Connect
         run: |
           cat > "$RUNNER_TEMP/ExportOptions.plist" <<'PLIST'

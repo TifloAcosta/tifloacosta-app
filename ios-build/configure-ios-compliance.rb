@@ -25,6 +25,15 @@ raise "Unable to configure encryption declaration: #{result.strip}" unless resul
 value, value_status = Open3.capture2e(plist_buddy, '-c', "Print #{key}", plist_path)
 raise 'Encryption export declaration is not Boolean false' unless value_status.success? && value.strip.downcase == 'false'
 
+# Apple ITMS-90683: SDKs enlazados pueden hacer referencia a APIs de ubicación
+# incluso si el lector no solicita ubicación en sus funciones habituales.
+location_key = ':NSLocationWhenInUseUsageDescription'
+location_purpose = 'TifloAcosta solo solicitará tu ubicación si utilizas una función que la necesite para ofrecer servicios cercanos y siempre con tu permiso.'
+_, existing_location_status = Open3.capture2e(plist_buddy, '-c', "Print #{location_key}", plist_path)
+location_action = existing_location_status.success? ? "Set #{location_key} #{location_purpose}" : "Add #{location_key} string #{location_purpose}"
+location_output, location_status = Open3.capture2e(plist_buddy, '-c', location_action, plist_path)
+raise "Unable to declare location usage: #{location_output.strip}" unless location_status.success?
+
 project = Xcodeproj::Project.open(project_path)
 app_target = project.targets.find { |target| target.name == 'App' }
 raise 'Generated iOS application target not found' unless app_target

@@ -8,14 +8,10 @@
   const els = {
     section: $('#reading-section'),
     heading: $('#reading-heading'),
-    intro: $('#reading-intro'),
     formatsToggle: $('#reading-formats-toggle'),
     formatsList: $('#reading-formats-list'),
     fileLabel: $('#reading-file-label'),
     file: $('#reading-file'),
-    pasteLabel: $('#reading-paste-label'),
-    paste: $('#reading-paste'),
-    prepare: $('#reading-prepare'),
     ocr: $('#reading-ocr'),
     status: $('#reading-status'),
     reader: $('#reading-reader'),
@@ -70,8 +66,6 @@
     translationStatus: $('#reading-translation-status'),
     save: $('#reading-save'),
     libraryHeading: $('#reading-library-heading'),
-    libraryIntro: $('#reading-library-intro'),
-    libraryRefresh: $('#reading-library-refresh'),
     libraryStatus: $('#reading-library-status'),
     libraryList: $('#reading-library-list'),
     libraryFilterLabel: $('#reading-library-filter-label'),
@@ -97,10 +91,7 @@
   const copy = {
     es: {
       heading: 'TifloLector',
-      intro: 'Importa un archivo o pega un texto para leerlo y escucharlo de forma accesible en TifloAcosta.',
       file: 'Abrir documento o imagen',
-      paste: 'O pega aquí el texto',
-      prepare: 'Leer texto pegado',
       empty: 'Selecciona un archivo o pega algún texto antes de preparar la lectura.',
       unsupported: 'Este archivo todavía no puede abrirse en la versión web de TifloLector.',
       legacyDoc: 'El formato DOC antiguo no se puede leer directamente. Ábrelo en Word o LibreOffice y guárdalo como DOCX.',
@@ -207,10 +198,7 @@
     },
     en: {
       heading: 'TifloReader',
-      intro: 'Import a file or paste text to read and listen to it accessibly in TifloAcosta.',
       file: 'Open document or image',
-      paste: 'Or paste text here',
-      prepare: 'Read pasted text',
       empty: 'Select a file or paste some text before preparing the reading.',
       unsupported: 'This file cannot yet be opened in the web version of TifloReader.',
       legacyDoc: 'The old DOC format cannot be read directly. Open it in Word or LibreOffice and save it as DOCX.',
@@ -348,6 +336,7 @@
   let readerViewState = null;
   let readerChromeState = null;
   let readerReturnView = 'main';
+  let readerReturnBookId = '';
   const translationMemory = new Map();
 
   const speechAdapter = typeof shared.createWebReadingSpeechAdapter === 'function'
@@ -1040,14 +1029,11 @@
   function localize() {
     const c = t();
     els.heading.textContent = c.heading;
-    els.intro.textContent = c.intro;
     if (els.formatsToggle) els.formatsToggle.textContent = language() === 'en' ? 'Show supported file types' : 'Consultar formatos admitidos';
     if (els.formatsList) els.formatsList.textContent = language() === 'en'
       ? 'TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 and PNG, JPG or WebP images using OCR.'
       : 'TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 e imágenes PNG, JPG y WebP mediante OCR.';
     els.fileLabel.textContent = c.file;
-    els.pasteLabel.textContent = c.paste;
-    els.prepare.textContent = c.prepare;
     els.ocr.textContent = c.ocr;
     els.pdfPasswordLabel.textContent = c.pdfPassword;
     els.previous.textContent = c.previous;
@@ -1073,8 +1059,6 @@
     if (els.libraryFilter) for (const option of els.libraryFilter.options) {
       option.textContent = c.libraryFilterOptions[option.value] || option.textContent;
     }
-    els.libraryIntro.textContent = c.libraryIntro;
-    els.libraryRefresh.textContent = c.refresh;
     els.bookmark.textContent = c.bookmark;
     els.queueHeading.textContent = c.queueHeading;
     els.queueIntro.textContent = c.queueIntro;
@@ -1635,7 +1619,6 @@
     if (!file || fileImportInProgress) return false;
 
     fileImportInProgress = true;
-    els.prepare.disabled = true;
     els.status.textContent = language() === 'en'
       ? 'Importing and preparing the document…'
       : 'Importando y preparando el documento…';
@@ -1664,42 +1647,6 @@
       return false;
     } finally {
       fileImportInProgress = false;
-      els.prepare.disabled = false;
-    }
-  }
-
-  async function prepareReading() {
-    els.status.textContent = '';
-    try {
-      const file = els.file.files?.[0] || null;
-      if (file) {
-        await importSelectedFile();
-        return;
-      }
-      const text = els.paste.value.trim();
-      if (!text) {
-        els.status.textContent = t().empty;
-        return;
-      }
-      await useDocument(
-        shared.parseTextDocument(text, { title: t().document, language: language() }),
-        t().document,
-        { source: text, format: 'txt' }
-      );
-    } catch (error) {
-      els.ocr.hidden = true;
-      if (error?.code === 'unsupported') els.status.textContent = t().unsupported;
-      else if (error?.code === 'legacy-doc') els.status.textContent = t().legacyDoc;
-      else if (error?.code === 'image-needs-ocr') {
-        els.status.textContent = `${t().imageNeedsOcr} ${t().ocrPrivacy}`;
-        els.ocr.hidden = false;
-      }
-      else if (error?.code === 'password-required') els.status.textContent = t().pdfPasswordRequired;
-      else if (error?.code === 'incorrect-password') els.status.textContent = t().pdfPasswordIncorrect;
-      else if (error?.code === 'pdf-no-text') {
-        els.status.textContent = `${t().pdfNoText} ${t().ocrPrivacy}`;
-        els.ocr.hidden = false;
-      } else els.status.textContent = t().failed;
     }
   }
 
@@ -2194,8 +2141,10 @@
     els.reader.hidden = true;
 
     if (readerReturnView === 'library') {
-      const openLibrary = document.querySelector('[data-reading-view="reading-library-web"]');
-      openLibrary?.click?.();
+      // The library is already on the main TifloLector screen.
+      queueMicrotask(() => document.getElementById('reading-library-title-' +
+        String(readerReturnBookId || '').replace(/[^a-zA-Z0-9_-]/g, '-'))?.focus({ preventScroll: true }) ||
+        els.libraryHeading?.focus({ preventScroll: true }));
     } else {
       const heading = document.getElementById('reading-heading');
       queueMicrotask(() => heading?.focus());
@@ -2221,6 +2170,7 @@
     returnToReadingMainFromSubview();
     const model = await modelForSavedBook(opened);
     readerReturnView = 'library';
+    readerReturnBookId = String(id);
     const hasRequestedPercent = Number.isFinite(Number(requestedPercent));
     const percent = hasRequestedPercent ? Math.max(0, Math.min(100, Number(requestedPercent))) : null;
     const maxIndex = Math.max(0, (model?.blocks?.length || 1) - 1);
@@ -2479,6 +2429,7 @@
         const title = document.createElement('button');
         title.type = 'button';
         title.className = 'reading-library-title';
+        title.id = 'reading-library-title-' + String(book.id).replace(/[^a-zA-Z0-9_-]/g, '-');
         title.textContent = book.title || t().document;
         title.setAttribute('aria-label', language() === 'en'
           ? `Open for reading: ${book.title || t().document}`
@@ -2902,12 +2853,6 @@
     });
   }
 
-  els.formatsToggle?.addEventListener('click', () => {
-    const open = els.formatsToggle.getAttribute('aria-expanded') !== 'true';
-    els.formatsToggle.setAttribute('aria-expanded', String(open));
-    els.formatsList.hidden = !open;
-  });
-  els.prepare.addEventListener('click', () => { void prepareReading(); });
   els.ocr.addEventListener('click', () => { void runPdfOcr(); });
   els.file.addEventListener('change', () => {
     pendingPdfFile = null;
@@ -2972,7 +2917,6 @@
   els.translationSource.addEventListener('change', resetTranslationSelection);
   els.translationTarget.addEventListener('change', resetTranslationSelection);
   els.save.addEventListener('click', () => { void saveCurrentDocument(); });
-  els.libraryRefresh.addEventListener('click', () => { void Promise.all([renderLibrary(), renderQueue(), renderMarks()]); });
   els.libraryFilter?.addEventListener('change', () => { void renderLibrary(); });
   els.bookmark.addEventListener('click', () => { void addBookmark(); });
   els.queueToggle.addEventListener('click', () => { void toggleQueue(); });

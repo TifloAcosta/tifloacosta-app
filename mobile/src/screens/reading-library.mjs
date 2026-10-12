@@ -2,9 +2,10 @@ import { READING_SETTING_DEFAULTS, resolveReadingSettings } from '../core/readin
 import { TifloReading } from '../native/reading-library-plugin.mjs';
 import { registerPlugin } from '@capacitor/core';
 
-const NativeDocumentAccessibility = registerPlugin('TifloReadingAccessibility');
 import { renderReadingQueue } from './reading-queue.mjs';
 import { addScreenHeader, clearScreen } from './shared.mjs';
+
+const NativeDocumentAccessibility = registerPlugin('TifloReadingAccessibility');
 
 const PAGE_SIZE = 10;
 const FORMATS = ['txt', 'html', 'pdf', 'epub', 'docx', 'pptx', 'xlsx', 'daisy2.02', 'daisy3', 'audio'];

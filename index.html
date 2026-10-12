@@ -117,7 +117,7 @@
 
     <div class="panel" aria-labelledby="reading-start-heading">
       <h3 id="reading-start-heading">Abrir o pegar contenido</h3>
-      <label id="reading-file-label" for="reading-file">Abrir documento; se importará automáticamente al seleccionarlo</label>
+      <label id="reading-file-label" for="reading-file">Importar documento o imagen; se abrirá al seleccionarlo y se ofrecerá OCR cuando sea necesario</label>
       <input id="reading-file" type="file" accept=".txt,.html,.htm,.pdf,.docx,.pptx,.xlsx,.epub,.odt,.rtf,.md,.markdown,.fb2,.png,.jpg,.jpeg,.webp,text/plain,text/html,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/epub+zip,application/vnd.oasis.opendocument.text,application/rtf,text/markdown,image/png,image/jpeg,image/webp">
       <label id="reading-paste-label" for="reading-paste">O pega aquí el texto</label>
       <textarea id="reading-paste" rows="6"></textarea>
@@ -315,7 +315,6 @@
       <h3 id="reading-management-heading">Biblioteca y lectura</h3>
       <div class="resource-actions" aria-label="Biblioteca y lectura">
         <button type="button" data-reading-view="reading-library-web">Mi biblioteca</button>
-        <button type="button" data-reading-view="reading-queue-web">Cola de lectura</button>
         <button type="button" data-reading-view="reading-marks-web">Marcadores</button>
       </div>
     </section>
@@ -324,18 +323,24 @@
       <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
       <h3 id="reading-library-heading" tabindex="-1">Mi biblioteca</h3>
       <p id="reading-library-intro">Los documentos se guardan localmente en esta instalación de TifloLector. No se sincronizan automáticamente con otros dispositivos.</p>
+      <label id="reading-library-filter-label" for="reading-library-filter">Mostrar en la biblioteca</label>
+      <select id="reading-library-filter">
+        <option value="all">Todos los documentos</option>
+        <option value="recent">Importados recientemente</option>
+        <option value="in-reading">En lectura</option>
+        <option value="not-read">Sin leer</option>
+        <option value="read">Leídos</option>
+        <option value="queue">Cola de lectura</option>
+      </select>
       <button id="reading-library-refresh" type="button">Actualizar biblioteca</button>
       <p id="reading-library-status" class="muted" role="status" aria-live="polite"></p>
       <div id="reading-library-list" class="resource-list"></div>
-      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
-    </section>
-
-    <section id="reading-queue-web" class="panel reading-subview" hidden aria-labelledby="reading-queue-heading">
-      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
-      <h3 id="reading-queue-heading" tabindex="-1">Cola de lectura</h3>
-      <p id="reading-queue-intro">Ordena los documentos que quieres leer después. Nada se abrirá automáticamente.</p>
-      <p id="reading-queue-status" class="muted" role="status" aria-live="polite"></p>
-      <div id="reading-queue-list" class="resource-list"></div>
+      <section id="reading-library-queue-panel" hidden aria-labelledby="reading-queue-heading">
+        <h4 id="reading-queue-heading">Cola de lectura</h4>
+        <p id="reading-queue-intro">Ordena los documentos que quieres leer después. Nada se abrirá automáticamente.</p>
+        <p id="reading-queue-status" class="muted" role="status" aria-live="polite"></p>
+        <div id="reading-queue-list" class="resource-list"></div>
+      </section>
       <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
     </section>
 

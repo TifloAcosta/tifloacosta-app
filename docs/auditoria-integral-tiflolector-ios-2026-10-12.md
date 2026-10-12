@@ -41,6 +41,15 @@ La build iOS **300071** empaquetó la ruta web. Pasar los comprobadores anterior
 3. **Añadir pruebas de regresión estáticas:** `ios-build/test/tiflolector-structure.test.mjs` y ejecución separada `tiflolector-static-audit` en `.github/workflows/ios-check.yml`. No prueban un iPhone real, por lo que no autorizan entrega.
 4. **Seguir bloqueando las compilaciones incompletas:** `ios-build/prepare-web.mjs` impide continuar cuando DAISY/acciones nativas faltan. **Importante:** el control actual comprueba señales de implementación, NO funcionalidad real, y debe completarse con tests y evidencias, no saltarse creando archivos vacíos.
 
+## Hallazgos adicionales de pruebas y ramas no fusionadas
+
+- **Biblioteca: prueba antigua invertida.** `test/web-reading-library.test.mjs` exigía expresamente `card.append(title)` y prohibía `card.append(title, detailsToggle, details)`. Esa expectativa ocultaba el fallo. Reescrita para exigir los controles visibles.
+- **Caché desincronizada:** `index.html` solicitaba `web-reading.js?v=3.15`, pero `sw.js` conservaba la versión `3.12` e incluso forzaba `v=3.8` en peticiones. También `app.js` aparecía en versión vieja. Corregido en `sw.js` y pruebas asociadas; ello evita regresiones de caché en la web, aunque **no demuestra** por sí solo la causa de la regresión nativa TestFlight.
+- **Borrado sin confirmación:** `deleteSavedBook` borraba inmediatamente. Añadida confirmación explícita, con cancelación segura cuando no exista diálogo.
+- **Resultado CI tras reparar pruebas caducadas:** 5 comprobaciones estáticas nuevas más 32 pruebas existentes del lector web, con resultado correcto en el trabajo independiente `tiflolector-static-audit`. La tarea separada de empaquetado iOS **sigue fallando intencionadamente** en `prepare-web.mjs` por faltar DAISY y acciones nativas; no se ha producido una compilación apta.
+- **Ramas con trabajo no consolidado:** `feat/ios-tiflolector-library-first-20261012`, `feat/ios-tiflolector-compact-library-20261012` y `feat/guia-accesible-tiflolector-20261012` contienen trabajo potencialmente útil (guía y biblioteca más directa) no presente íntegramente en `preparacion-ios`. No fusionar a ciegas porque la rama de biblioteca compacta también conserva partes viejas de la interfaz. Comparar funcionalidad y migrar conscientemente cada cambio.
+- **Diferencia de modelos de datos:** la base web en IndexedDB no equivale al almacenamiento nativo Android. La actualización de TestFlight no debe borrar datos y el cambio de arquitectura exigirá una migración probada.
+
 ## Plan de ejecución, orden obligatorio
 
 1. **Unificar el producto:** fijar como contrato funcional el lector avanzado de `mobile/src`. Decidir cómo llevarlo a iOS sin depender de los plugins Android. No confundir frontend avanzado con funcionalidad nativa instalada.

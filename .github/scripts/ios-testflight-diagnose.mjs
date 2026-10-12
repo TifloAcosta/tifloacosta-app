@@ -40,18 +40,16 @@ console.log('APP', app.attributes?.name, 'id='+app.id);
 const found = await api('builds', {
   'filter[app]':app.id, 'sort':'-uploadedDate', 'limit':30
 });
-const builds = (found.data || []).filter(entry =>
-  /^2000(?:5[4-9]|6[0-9]|7[0-9])$/.test(entry.attributes?.version || '')
-);
+const builds = found.data || [];
 console.log('RECENT_BUILDS', builds.length);
-for (const build of builds.slice(0, 12)) {
+for (const build of builds.slice(0, 20)) {
   const a = build.attributes || {};
   console.log('BUILD', a.version, 'id='+build.id,
     'processing='+a.processingState,
     'audience='+a.buildAudienceType,
     'uploaded='+a.uploadedDate,
     'expired='+a.expired);
-  if (a.version === '200063' || a.version === '200062') {
+  if (['100063','100064','200062','200063','200064'].includes(a.version)) {
     try {
       const details = await api('buildBetaDetails', { 'filter[build]':build.id, limit:10 });
       for (const d of details.data || []) console.log('BETA_DETAIL', a.version,
@@ -64,8 +62,8 @@ for (const build of builds.slice(0, 12)) {
     }
   }
 }
-if (!builds.some(b => b.attributes?.version === '200063')) {
-  console.log('BUILD_200063_NOT_VISIBLE_IN_APP_STORE_CONNECT_API');
+for (const version of ['100063','100064','200063','200064']) {
+  if (!builds.some(b => b.attributes?.version === version)) console.log('BUILD_' + version + '_NOT_VISIBLE_IN_APP_STORE_CONNECT_API');
 }
 
 try {
@@ -87,7 +85,7 @@ try {
   console.log('UPLOAD_STATUS_QUERY_ERROR', error.message);
 }
 
-for (const version of ['200063','200064']) {
+for (const version of ['100063','100064','200063','200064']) {
   try {
     const exact = await api('apps/' + app.id + '/buildUploads', {
       'filter[cfBundleVersion]':version, limit:20
@@ -112,7 +110,8 @@ for (const group of groups.data || []) {
     const related = await api('betaGroups/' + group.id + '/builds', { limit:100 });
     const versions = (related.data || []).map(b => b.attributes?.version).filter(Boolean);
     console.log('GROUP_BUILDS', a.name, versions.slice(0, 18).join(',') || '(empty)',
-      'has200063='+versions.includes('200063'));
+      'has200063='+versions.includes('200063'),
+      'has100064='+versions.includes('100064'));
   } catch (error) { console.log('GROUP_BUILDS_ERROR', a.name, error.message); }
   try {
     const testers = await api('betaGroups/' + group.id + '/betaTesters', { limit:50 });

@@ -170,8 +170,11 @@ const iosIndexPath = join(output, 'index.html');
 let iosIndex = await readFile(iosIndexPath, 'utf8');
 const oldFocus = "requestAnimationFrame(() => screenHeading.focus({ preventScroll: true }))";
 const newFocus = "requestAnimationFrame(() => { if (!target.hidden && screenHeading.isConnected) screenHeading.focus({ preventScroll: true }); })";
-if (!iosIndex.includes(oldFocus)) throw new Error('No se encuentra gestión de foco de la vista iOS');
-iosIndex = iosIndex.replace(oldFocus, newFocus);
+if (iosIndex.includes(oldFocus)) {
+  iosIndex = iosIndex.replace(oldFocus, newFocus);
+} else if (!iosIndex.includes('returnFocusId') || !iosIndex.includes('function showHomeView')) {
+  throw new Error('La navegación principal iOS no tiene restauración de foco verificable');
+}
 await writeFile(iosIndexPath, iosIndex);
 
 // The iOS home page already focuses the active heading after navigation.
@@ -185,9 +188,20 @@ const oldHomeFocus = [
   "    const heading = target?.querySelector('h1, h2, h3') || target;",
   '    focusElement(heading);'
 ].join('\n');
-if (!iosNavigationCore.includes(oldHomeFocus)) throw new Error('No se encuentra el movimiento de foco duplicado del inicio iOS');
-iosNavigationCore = iosNavigationCore.replace(oldHomeFocus,
-  '    // El foco del inicio lo controla showHomeView de index.html.\n    return;');
+if (iosNavigationCore.includes(oldHomeFocus)) {
+  iosNavigationCore = iosNavigationCore.replace(oldHomeFocus,
+    '    // El foco del inicio lo controla showHomeView de index.html.\n    return;');
+} else {
+  const mainViewStart = iosNavigationCore.indexOf('  function applyHomeIsolation(');
+  const focusStart = iosNavigationCore.indexOf('    if (!focusChangedView) return;', mainViewStart);
+  const focusEnd = iosNavigationCore.indexOf('\n  }\n\n  function applyActualidadIsolation', focusStart);
+  if (mainViewStart < 0 || focusStart < mainViewStart || focusEnd < focusStart) {
+    throw new Error('La nueva navegación iOS no permite aislar el foco de Inicio');
+  }
+  iosNavigationCore = iosNavigationCore.slice(0, focusStart) +
+    '    if (!focusChangedView) return;\n    // El foco de Inicio lo restaura showHomeView de index.html.\n    return;' +
+    iosNavigationCore.slice(focusEnd);
+}
 await writeFile(iosNavigationCorePath, iosNavigationCore);
 
 
@@ -314,11 +328,19 @@ const iosNativeVideoAnchor = "      if (item.type === 'video' && item.embedUrl &
 if (!iosMedia.includes(iosNativeVideoAnchor)) throw new Error('No se encuentra addPlayer de Actualidad');
 iosMedia = iosMedia.replace(iosNativeVideoAnchor, "      if (item.type === 'video' && item.embedUrl && button && iosExternalVideo) {\n        button.removeAttribute('aria-expanded');\n        let parsed;\n        try { parsed = new URL(item.embedUrl); } catch { parsed = null; }\n        const match = /^\\/embed\\/([A-Za-z0-9_-]{11})(?:\\/|$)/.exec(parsed?.pathname || '');\n        const validYouTube = parsed && /^(?:www\\.)?youtube(?:-nocookie)?\\.com$/.test(parsed.hostname) && match;\n        if (!validYouTube) { button.remove(); return; }\n        const videoId = match[1];\n        button.textContent = currentLanguage() === 'es' ? 'Reproducir dentro de TifloAcosta' : 'Play inside TifloAcosta';\n        button.addEventListener('click', () => {\n          const plugin = window.Capacitor?.Plugins?.TifloYouTube;\n          if (!plugin) { window.open(item.originalUrl, '_blank', 'noopener'); return; }\n          void plugin.open({ videoId, title: String(item.title || ''), description: String(item.summary || ''), channel: String(item.sourceName || ''), publishedAt: String(item.publishedAt || '') }).then(() => { if (button.isConnected) button.focus({ preventScroll: true }); }).catch(() => { window.open(item.originalUrl, '_blank', 'noopener'); });\n        });\n        return;\n      }\n      if (item.type === 'video' && item.embedUrl && button) {");
 const originalLabel = "mediaOriginal.textContent = item.type === 'audio' && !item.mediaUrl";
-if (!iosMedia.includes(originalLabel)) throw new Error('No se encuentra etiqueta de enlace de fuente original');
-iosMedia = iosMedia.replace(originalLabel,
-  "mediaOriginal.textContent = item.type === 'video' && iosExternalVideo\n" +
-  "          ? (currentLanguage() === 'es' ? 'Abrir vídeo en YouTube' : 'Open video on YouTube')\n" +
-  "          : item.type === 'audio' && !item.mediaUrl");
+if (iosMedia.includes(originalLabel)) {
+  iosMedia = iosMedia.replace(originalLabel,
+    "mediaOriginal.textContent = item.type === 'video' && iosExternalVideo\n" +
+    "          ? (currentLanguage() === 'es' ? 'Abrir vídeo en YouTube' : 'Open video on YouTube')\n" +
+    "          : item.type === 'audio' && !item.mediaUrl");
+} else {
+  const revisedLabel = 'mediaOriginal.textContent = c.open;';
+  if (!iosMedia.includes(revisedLabel)) throw new Error('No existe etiqueta de fuente original multimedia');
+  iosMedia = iosMedia.replace(revisedLabel,
+    "mediaOriginal.textContent = item.type === 'video' && iosExternalVideo\n" +
+    "          ? (currentLanguage() === 'es' ? 'Abrir vídeo en YouTube' : 'Open video on YouTube')\n" +
+    "          : c.open;");
+}
 // Prefer the live HTTPS catalog with the packaged catalog as offline fallback.
 // Existing episodes retain the playable audio URLs generated at build time.
 const jsonLoad = [
@@ -363,16 +385,21 @@ iosMedia = iosMedia.replace(jsonError, [
 // its job must not be duplicated by the media script's link click listener.
 const focusStart = iosMedia.indexOf('    // Move VoiceOver focus only after an explicit section navigation action.');
 const focusEnd = iosMedia.indexOf("    window.addEventListener('hashchange', ensureMediaForRoute);",focusStart);
-if (focusStart < 0 || focusEnd < focusStart) throw new Error('No se encuentra controlador de foco redundante');
-iosMedia = iosMedia.slice(0,focusStart) +
-  '    // VoiceOver focus belongs exclusively to actualidad-core.js navigation.\n' +
-  iosMedia.slice(focusEnd);
+if (focusStart >= 0 && focusEnd >= focusStart) {
+  iosMedia = iosMedia.slice(0,focusStart) +
+    '    // VoiceOver focus belongs exclusively to actualidad-core.js navigation.\n' +
+    iosMedia.slice(focusEnd);
+} else if (!iosMedia.includes("window.addEventListener('hashchange', ensureMediaForRoute);")) {
+  throw new Error('Navegación multimedia iOS desconocida');
+}
 await writeFile(iosMediaPath, iosMedia);
 // News and the accessible-app directory must also refresh without a new IPA.
 const iosActualidadPath = join(output, 'actualidad.js');
 let iosActualidad = await readFile(iosActualidadPath, 'utf8');
 for (const file of ['actualidad.json', 'actualidad-apps.json']) {
-  const localFetch = "fetch('" + file + "', { cache: 'no-cache' })";
+  const originalFetch = "fetch('" + file + "', { cache: 'no-cache' })";
+  const refreshedFetch = 'fetch(`' + file + '?t=${Date.now()}`, { cache: \'no-store\' })';
+  const localFetch = iosActualidad.includes(originalFetch) ? originalFetch : refreshedFetch;
   if (!iosActualidad.includes(localFetch)) throw new Error('No se encuentra catálogo local: ' + file);
   iosActualidad = iosActualidad.replace(localFetch, networkFirst(file));
 }

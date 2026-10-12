@@ -19,7 +19,7 @@ const SHELL = [
   './web-reading.js?v=3.15',
   './podcast.html',
   './podcast.js?v=1.0',
-  './app.js?v=2.4',
+  './app.js?v=2.5',
   './tifloacosta-favicon.ico',
   './tifloacosta-icon-192.png',
   './tifloacosta-icon-512.png',
@@ -143,8 +143,8 @@ self.addEventListener('fetch', event => {
   }
 
   if (isAppOrigin && url.pathname.endsWith('/app.js')) {
-    url.searchParams.set('v', '2.4');
-    event.respondWith(freshScript(url, './app.js?v=2.4', request));
+    url.searchParams.set('v', '2.5');
+    event.respondWith(freshScript(url, './app.js?v=2.5', request));
     return;
   }
 

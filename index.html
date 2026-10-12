@@ -181,6 +181,15 @@
         <button type="button" data-reading-view="reading-audio-view" aria-controls="reading-audio-view">Audio y voz</button>
         <button type="button" data-reading-view="reading-visual-view" aria-controls="reading-visual-view">Presentación visual</button>
       </div>
+      <details id="reading-general-settings">
+        <summary id="reading-general-settings-summary">General</summary>
+        <label id="reading-default-navigation-label" for="reading-default-navigation">Modo de avance predeterminado para nuevos documentos</label>
+        <select id="reading-default-navigation">
+          <option value="block">Bloque</option>
+          <option value="paragraph">Párrafo</option>
+          <option value="sentence">Frase</option>
+        </select>
+      </details>
       <p id="reading-settings-status" class="muted" role="status" aria-live="polite"></p>
       </section>
     </details>

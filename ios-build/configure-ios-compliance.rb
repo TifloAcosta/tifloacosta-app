@@ -15,6 +15,14 @@ plist_buddy = '/usr/libexec/PlistBuddy'
 raise 'Missing generated Info.plist' unless File.file?(plist_path)
 raise 'Missing generated Podfile' unless File.file?(podfile_path)
 
+# Declare the purpose string required by Apple's location API validation.
+# This entry does not itself request or collect the user's location.
+location_key = ':NSLocationWhenInUseUsageDescription'
+location_reason = 'TifloAcosta utiliza tu ubicación, si lo autorizas, para funciones que muestran información o recursos relacionados con tu zona.'
+location_value, location_status = Open3.capture2e(plist_buddy, '-c', "Print #{location_key}", plist_path)
+location_action = location_status.success? ? "Set #{location_key} #{location_reason}" : "Add #{location_key} string #{location_reason}"
+location_result, location_result_status = Open3.capture2e(plist_buddy, '-c', location_action, plist_path)
+raise 'Could not configure location purpose' unless location_result_status.success?
 # Set the correct declaration: no *non-exempt* encryption. Standard HTTPS
 # through Apple/OS networking remains allowed. Reassess if crypto changes.
 key = ':ITSAppUsesNonExemptEncryption'

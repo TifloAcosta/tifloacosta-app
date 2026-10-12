@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-46-reader-chrome-voices';
+const CACHE = 'tifloacosta-app-v2-47-reader-audit';
 const NAVIGATION_TIMEOUT_MS = 5000;
 // Resource catalog is refreshed from the network.
 const SHELL = [
@@ -16,10 +16,10 @@ const SHELL = [
   './actualidad-core.js?v=1.6',
   './actualidad.js?v=1.3',
   './actualidad-media.js?v=1.1',
-  './web-reading.js?v=3.12',
+  './web-reading.js?v=3.15',
   './podcast.html',
   './podcast.js?v=1.0',
-  './app.js?v=2.2',
+  './app.js?v=2.3',
   './tifloacosta-favicon.ico',
   './tifloacosta-icon-192.png',
   './tifloacosta-icon-512.png',
@@ -131,8 +131,8 @@ self.addEventListener('fetch', event => {
 
 
   if (isAppOrigin && url.pathname.endsWith('/web-reading.js')) {
-    url.searchParams.set('v', '3.8');
-    event.respondWith(freshScript(url, './web-reading.js?v=3.12', request));
+    url.searchParams.set('v', '3.15');
+    event.respondWith(freshScript(url, './web-reading.js?v=3.15', request));
     return;
   }
 
@@ -143,8 +143,8 @@ self.addEventListener('fetch', event => {
   }
 
   if (isAppOrigin && url.pathname.endsWith('/app.js')) {
-    url.searchParams.set('v', '2.2');
-    event.respondWith(freshScript(url, './app.js?v=2.2', request));
+    url.searchParams.set('v', '2.3');
+    event.respondWith(freshScript(url, './app.js?v=2.3', request));
     return;
   }
 

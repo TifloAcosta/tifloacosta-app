@@ -546,6 +546,7 @@ export function renderReadingLibrary({
       () => onOpenBook?.(item.id),
       'reading-library-title'
     );
+    title.id = `reading-library-title-${String(item.id).replace(/[^a-zA-Z0-9_-]/g, '-')}`;
     title.setAttribute(
       'aria-label',
       document.documentElement.lang === 'en'

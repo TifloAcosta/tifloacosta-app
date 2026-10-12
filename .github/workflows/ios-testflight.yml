@@ -90,6 +90,26 @@ jobs:
           node --check www/videos.js
           node --check www/actualidad-media.js
           npx cap add ios
+          # The Capacitor default icon is not the TifloAcosta brand icon.
+          # Generate the official 1024px RGB icon for every TestFlight archive.
+          ICON_DIR="ios/App/App/Assets.xcassets/AppIcon.appiconset"
+          mkdir -p "$ICON_DIR"
+          swift make-app-icon.swift ../tifloacosta-icon-512.png "$ICON_DIR/AppIcon-512@2x.png"
+          cat > "$ICON_DIR/Contents.json" <<'JSON'
+          {
+            "images": [
+              {
+                "filename": "AppIcon-512@2x.png",
+                "idiom": "universal",
+                "platform": "ios",
+                "size": "1024x1024"
+              }
+            ],
+            "info": { "author": "xcode", "version": 1 }
+          }
+          JSON
+          sips -g pixelWidth -g pixelHeight "$ICON_DIR/AppIcon-512@2x.png"
+          test -s "$ICON_DIR/AppIcon-512@2x.png"
           node install-native-video.mjs
           grep -q 'registerPluginInstance(TifloYouTubePlugin())' ios/App/App/AppDelegate.swift
           ruby configure-ios-compliance.rb

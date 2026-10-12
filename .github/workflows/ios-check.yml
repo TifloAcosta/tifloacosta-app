@@ -5,8 +5,22 @@ on:
     branches: [preparacion-ios, work/ios-tiflolector-native-20261012]
     paths:
       - 'ios-build/**'
+      - 'web-reading.js'
+      - 'index.html'
+      - 'mobile/src/screens/reading-*.mjs'
       - '.github/workflows/ios-check.yml'
 jobs:
+  tiflolector-static-audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Probar controles y contratos de TifloLector sin publicar
+        run: node --test ios-build/test/tiflolector-structure.test.mjs
   ios-unsigned-build:
     runs-on: macos-15
     permissions:

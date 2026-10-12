@@ -1,6 +1,7 @@
 import { App } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
 import { resolveReadingSettings } from '../core/reading-settings.mjs';
+import { loadPronunciationRules, savePronunciationRules } from '../../../shared/reading-pronunciation.mjs';
 import { createReadingVoiceCatalog } from '../core/reading-voice-catalog.mjs';
 import { createReadingBackupPanel } from './reading-backup-panel.mjs';
 
@@ -118,7 +119,79 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
   voiceReturn.type = 'button';
   voiceReturn.textContent = t('readingBook.returnToReading');
 
-  voiceSection.append(voiceHeading, voiceLanguageLabel, voiceLanguage, voiceLabel, voiceSelect, rateLabel, rate, rateValue, getMoreVoices, voiceStatus, voiceReturn);
+
+  const dictionary = document.createElement('details');
+  const dictionaryHeading = document.createElement('summary');
+  dictionaryHeading.textContent = document.documentElement.lang === 'en' ? 'Pronunciation dictionary' : 'Diccionario de pronunciación';
+  const dictionaryList = document.createElement('ul');
+  const dictionaryForm = document.createElement('form');
+  const termInput = document.createElement('input');
+  const replacementInput = document.createElement('input');
+  termInput.required = replacementInput.required = true;
+  termInput.maxLength = 100;
+  replacementInput.maxLength = 200;
+  const termLabel = document.createElement('label');
+  termLabel.textContent = document.documentElement.lang === 'en' ? 'Written word' : 'Palabra escrita';
+  termLabel.append(termInput);
+  const replacementLabel = document.createElement('label');
+  replacementLabel.textContent = document.documentElement.lang === 'en' ? 'Pronounce as' : 'Pronunciar como';
+  replacementLabel.append(replacementInput);
+  const savePronunciation = document.createElement('button');
+  savePronunciation.type = 'submit';
+  savePronunciation.textContent = document.documentElement.lang === 'en' ? 'Save pronunciation' : 'Guardar pronunciación';
+  const dictionaryStatus = document.createElement('p');
+  dictionaryStatus.setAttribute('role', 'status');
+  dictionaryStatus.setAttribute('aria-live', 'polite');
+  dictionaryForm.append(termLabel, replacementLabel, savePronunciation);
+  dictionary.append(dictionaryHeading, dictionaryList, dictionaryForm, dictionaryStatus);
+
+  function renderDictionary() {
+    dictionaryList.replaceChildren();
+    for (const rule of loadPronunciationRules()) {
+      const item = document.createElement('li');
+      const label = document.createElement('span');
+      label.textContent = rule.term + ': ' + rule.replacement + '. ';
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.textContent = (document.documentElement.lang === 'en' ? 'Remove ' : 'Eliminar ') + rule.term;
+      remove.addEventListener('click', () => {
+        const rules = loadPronunciationRules().filter(entry => entry.term.toLocaleLowerCase() !== rule.term.toLocaleLowerCase());
+        if (!savePronunciationRules(rules)) return;
+        speech?.setPronunciationRules?.(rules);
+        renderDictionary();
+        dictionaryStatus.textContent = document.documentElement.lang === 'en' ? 'Pronunciation removed.' : 'Pronunciación eliminada.';
+        dictionaryHeading.focus();
+      });
+      item.append(label, remove);
+      dictionaryList.append(item);
+    }
+  }
+  dictionaryHeading.tabIndex = -1;
+  dictionaryForm.addEventListener('submit', event => {
+    event.preventDefault();
+    const term = termInput.value.trim();
+    const replacement = replacementInput.value.trim();
+    if (!term || !replacement) return;
+    const rules = loadPronunciationRules().filter(entry => entry.term.toLocaleLowerCase() !== term.toLocaleLowerCase());
+    if (rules.length >= 200) {
+      dictionaryStatus.textContent = document.documentElement.lang === 'en' ? 'Maximum 200 entries.' : 'Máximo 200 entradas.';
+      return;
+    }
+    rules.push({ term, replacement });
+    if (!savePronunciationRules(rules)) {
+      dictionaryStatus.textContent = document.documentElement.lang === 'en' ? 'Unable to save.' : 'No se pudo guardar.';
+      return;
+    }
+    speech?.setPronunciationRules?.(rules);
+    renderDictionary();
+    termInput.value = '';
+    replacementInput.value = '';
+    dictionaryStatus.textContent = document.documentElement.lang === 'en' ? 'Saved. Applies at next playback.' : 'Guardado. Se aplicará en la siguiente reproducción.';
+    termInput.focus();
+  });
+  renderDictionary();
+
+  voiceSection.append(voiceHeading, voiceLanguageLabel, voiceLanguage, voiceLabel, voiceSelect, rateLabel, rate, rateValue, getMoreVoices, voiceStatus, dictionary, voiceReturn);
 
   const visualSection = document.createElement('section');
   visualSection.className = 'reading-panel reading-visual-panel';

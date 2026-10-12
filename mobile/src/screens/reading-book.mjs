@@ -116,21 +116,6 @@ function semanticElement(block) {
   }
 }
 
-function percentForPosition(documentModel, position) {
-  const blocks = Array.isArray(documentModel?.blocks) ? documentModel.blocks : [];
-  if (!blocks.length) return 0;
-  let total = 0;
-  let completed = 0;
-  blocks.forEach((block, blockIndex) => {
-    const count = Math.max(1, unitsFor(block).length);
-    total += count;
-    if (blockIndex < position.blockIndex) completed += count;
-    else if (blockIndex === position.blockIndex) completed += Math.min(count, position.unitIndex + 1);
-  });
-  return total ? Math.min(100, (completed * 100) / total) : 0;
-}
-
-
 function allReadingUnits(documentModel) {
   const result = [];
   for (let blockIndex = 0; blockIndex < (documentModel?.blocks?.length || 0); blockIndex += 1) {
@@ -143,22 +128,52 @@ function allReadingUnits(documentModel) {
   return result;
 }
 
+function readingUnitWordCount(text) {
+  return Math.max(1, String(text || '').trim().split(/\s+/u).filter(Boolean).length);
+}
+
+// The reading position is the START of the current unit. Do not count that
+// sentence or paragraph as already heard when playback has only just begun.
+// Weigh units by words so a short heading does not count as much as a chapter.
+function percentForPosition(documentModel, position) {
+  const units = allReadingUnits(documentModel);
+  const total = units.reduce((sum, unit) => sum + readingUnitWordCount(unit.text), 0);
+  if (!total) return 0;
+  const completed = units.reduce((sum, unit) => (
+    unit.blockIndex < position.blockIndex ||
+    (unit.blockIndex === position.blockIndex && unit.unitIndex < position.unitIndex)
+      ? sum + readingUnitWordCount(unit.text)
+      : sum
+  ), 0);
+  return Math.min(100, Math.max(0, (completed * 100) / total));
+}
+
 function positionForPercent(documentModel, percent) {
   const units = allReadingUnits(documentModel);
   if (!units.length) return { blockIndex: 0, unitIndex: 0 };
   const clamped = Math.max(0, Math.min(100, Number(percent) || 0));
-  const index = clamped >= 100
-    ? units.length - 1
-    : Math.min(units.length - 1, Math.floor((clamped / 100) * units.length));
-  return { blockIndex: units[index].blockIndex, unitIndex: units[index].unitIndex };
+  if (clamped === 100) {
+    const last = units[units.length - 1];
+    return { blockIndex: last.blockIndex, unitIndex: last.unitIndex };
+  }
+  const weights = units.map(unit => readingUnitWordCount(unit.text));
+  const target = (clamped / 100) * weights.reduce((sum, weight) => sum + weight, 0);
+  let completed = 0;
+  for (let index = 0; index < units.length; index += 1) {
+    if (completed + weights[index] > target || index === units.length - 1) {
+      return { blockIndex: units[index].blockIndex, unitIndex: units[index].unitIndex };
+    }
+    completed += weights[index];
+  }
+  return { blockIndex: 0, unitIndex: 0 };
 }
 
-function estimatedReadingTimes(documentModel, position, rate=1) {
+function estimatedReadingTimes(documentModel, position, rate = 1) {
   const units = allReadingUnits(documentModel);
-  const words = units.map(item => String(item.text || '').trim().split(/\s+/u).filter(Boolean).length);
+  const words = units.map(item => readingUnitWordCount(item.text));
   const totalWords = words.reduce((sum, count) => sum + count, 0);
   const target = units.findIndex(item => item.blockIndex === position?.blockIndex && item.unitIndex === position?.unitIndex);
-  const elapsedWords = words.slice(0, Math.max(0, target) + 1).reduce((sum, count) => sum + count, 0);
+  const elapsedWords = words.slice(0, Math.max(0, target)).reduce((sum, count) => sum + count, 0);
   const wordsPerMinute = Math.max(60, 180 * (Number(rate) || 1));
   return {
     elapsedSeconds: Math.round((elapsedWords / wordsPerMinute) * 60),
@@ -882,8 +897,8 @@ export function renderReadingBook({
     const rate = Number(speech?.snapshot?.().rate) || 1;
     const estimate = estimatedReadingTimes(documentModel, position, rate);
     progressStatus.textContent = document.documentElement.lang === 'en'
-      ? `${percent}% read. About ${readableDuration(estimate.remainingSeconds)} remaining.`
-      : `${percent} % leído. Quedan aproximadamente ${readableDuration(estimate.remainingSeconds)}.`;
+      ? `Position in entire book: ${percent}%. About ${readableDuration(estimate.remainingSeconds)} remaining.`
+      : `Posición en el libro completo: ${percent} %. Quedan aproximadamente ${readableDuration(estimate.remainingSeconds)}.`;
     const nearest = Math.max(0, Math.min(100, Math.round(percent / 10) * 10));
     progressSelect.value = String(nearest);
   }

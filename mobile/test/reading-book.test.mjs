@@ -149,7 +149,7 @@ test('reading book keeps compact progress and grouped controls for the next Andr
     'reading-progress-percent',
     'for (let value = 0; value <= 100; value += 10)',
     'estimatedReadingTimes',
-    '% leído. Quedan aproximadamente',
+    'Posición en el libro completo:',
     'readingBook.voiceAndSpeed',
     'readingBook.visualSettings',
     'Más acciones',

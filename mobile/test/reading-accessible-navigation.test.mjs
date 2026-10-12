@@ -112,7 +112,7 @@ test('Android document reader mirrors the final compact TifloLector control hier
   const more = screen.slice(screen.indexOf('moreActions.append('), screen.indexOf(');', screen.indexOf('moreActions.append(')) + 2);
   assert.ok(more.includes('progressLabel'));
   assert.ok(more.includes('progressSelect'));
-  assert.ok(screen.includes('% leído. Quedan aproximadamente'));
+  assert.ok(screen.includes('Posición en el libro completo:'));
   assert.ok(!screen.includes('Transcurrido: aproximadamente'));
 
   assert.ok(i18n.includes("navigation: 'Avanzar y retroceder por'"));

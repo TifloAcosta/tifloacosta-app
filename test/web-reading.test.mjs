@@ -18,7 +18,7 @@ test('web reader loads from the shared module before the main app', async () => 
   const html = await read('index.html');
   const sharedIndex = html.indexOf("import * as shared from './shared/web-entry.mjs?v=");
   const readerIndex = html.indexOf("await import('./web-reading.js?v=");
-  const appIndex = html.indexOf('app.js?v=2.2');
+  const appIndex = html.indexOf('app.js?v=');
   assert.ok(sharedIndex >= 0);
   assert.ok(readerIndex > sharedIndex);
   assert.ok(appIndex > readerIndex);

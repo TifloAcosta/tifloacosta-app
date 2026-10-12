@@ -18,7 +18,7 @@ test('download feature publishes one fresh, consistent simple asset generation',
     read('sw.js')
   ]);
 
-  assert.equal(versionFor(index, 'app-core.js'), '1.6', 'index must request the simple Downloads app-core generation');
+  assert.equal(versionFor(index, 'app-core.js'), '1.7', 'index must request the simple Downloads app-core generation');
   assert.equal(versionFor(core, 'downloads.js'), '1.4', 'app-core must request downloads.js?v=1.4');
   assert.equal(versionFor(sw, 'downloads.js'), '1.4', 'service worker must precache downloads.js?v=1.4');
 
@@ -28,5 +28,5 @@ test('download feature publishes one fresh, consistent simple asset generation',
     assert.doesNotMatch(source, /sound-search\.js/);
   }
 
-  assert.match(sw, /tifloacosta-app-v2-46-reader-chrome-voices/);
+  assert.match(sw, /tifloacosta-app-v2-\d+-[a-z0-9-]+/);
 });

@@ -25,7 +25,6 @@
     previous: $('#reading-previous'),
     next: $('#reading-next'),
     play: $('#reading-play'),
-    pause: $('#reading-pause'),
     voiceLabel: $('#reading-voice-label'),
     voice: $('#reading-voice'),
     externalVoicesHeading: $('#reading-more-voices-settings-heading'),
@@ -337,6 +336,9 @@
   let currentUnitIndex = 0;
   let fileImportInProgress = false;
   let playbackAccessibilityState = null;
+  let activeAudio = null;
+  let audioObjectUrl = '';
+  let audioTools = null;
   let readingTimerHandle = null;
   let readerViewState = null;
   let readerChromeState = null;
@@ -847,7 +849,7 @@
       if (!documentModel?.blocks?.length) return;
       const percent = Math.max(0, Math.min(100, Number(progressSelect.value) || 0));
       const maxIndex = Math.max(0, documentModel.blocks.length - 1);
-      const target = percent >= 100 ? maxIndex : Math.min(maxIndex, Math.floor((percent / 100) * documentModel.blocks.length));
+      const target = blockIndexForPercent(percent);
       currentUnitIndex = 0;
       readingSession = shared.createReadingSession({ blocks: documentModel.blocks, initialIndex: target });
       renderBlock();
@@ -1036,8 +1038,8 @@
     els.intro.textContent = c.intro;
     if (els.formatsToggle) els.formatsToggle.textContent = language() === 'en' ? 'Show supported file types' : 'Consultar formatos admitidos';
     if (els.formatsList) els.formatsList.textContent = language() === 'en'
-      ? 'TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 and PNG, JPG or WebP images using OCR.'
-      : 'TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 e imágenes PNG, JPG y WebP mediante OCR.';
+      ? 'TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2, MP3 audio and PNG, JPG or WebP images using OCR.'
+      : 'TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2, audio MP3 e imágenes PNG, JPG y WebP mediante OCR.';
     els.fileLabel.textContent = c.file;
     els.pasteLabel.textContent = c.paste;
     els.prepare.textContent = c.prepare;
@@ -1045,8 +1047,7 @@
     els.pdfPasswordLabel.textContent = c.pdfPassword;
     els.previous.textContent = c.previous;
     els.next.textContent = c.next;
-    els.play.textContent = c.play;
-    els.pause.textContent = c.pause;
+    updatePlaybackLabel(activeAudio ? !activeAudio.paused : speechController?.snapshot?.().playing === true);
     els.voiceLabel.textContent = c.voice;
     if (els.voiceLanguageLabel) els.voiceLanguageLabel.textContent = language() === 'en' ? 'Voice language' : 'Idioma de la voz';
     if (els.externalVoiceLanguageLabel) els.externalVoiceLanguageLabel.textContent = language() === 'en' ? 'Language for more voices' : 'Idioma para buscar más voces';
@@ -1201,9 +1202,155 @@
       blockIndex: snapshot.blockIndex,
       unitIndex: Number(extra.unitIndex) || 0,
       anchorText: String(current?.text || '').slice(0, 160),
-      percent: snapshot.percent,
-      state: snapshot.percent >= 100 ? 'read' : 'in-reading'
+      percent: extra.completed === true ? 100 : wholeBookPercent(snapshot.blockIndex, Number(extra.unitIndex) || currentUnitIndex),
+      state: extra.completed === true ? 'read' : 'in-reading'
     });
+  }
+
+  function updatePlaybackLabel(playing) {
+    if (!els.play) return;
+    const label = playing ? t().pause : t().play;
+    els.play.textContent = label;
+    els.play.setAttribute('aria-label', label);
+  }
+
+  function clearActiveAudio() {
+    if (activeAudio) {
+      activeAudio.pause();
+      activeAudio.removeAttribute('src');
+      activeAudio.load();
+      activeAudio = null;
+    }
+    if (audioObjectUrl) URL.revokeObjectURL(audioObjectUrl);
+    audioObjectUrl = '';
+    if (audioTools) audioTools.hidden = true;
+    updatePlaybackLabel(false);
+  }
+
+  function formatAudioTime(value) {
+    const seconds = Math.max(0, Math.floor(Number(value) || 0));
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const remainder = seconds % 60;
+    return hours > 0
+      ? `${hours}:${String(minutes).padStart(2, '0')}:${String(remainder).padStart(2, '0')}`
+      : `${minutes}:${String(remainder).padStart(2, '0')}`;
+  }
+
+  function ensureAudioTools() {
+    if (audioTools) return audioTools;
+    audioTools = document.createElement('div');
+    audioTools.className = 'reading-audio-file-controls';
+    audioTools.id = 'reading-audio-file-controls';
+    const label = document.createElement('label');
+    label.htmlFor = 'reading-audio-seek';
+    label.textContent = language() === 'en' ? 'Audio position' : 'Posición del audio';
+    const seek = document.createElement('input');
+    seek.type = 'range';
+    seek.id = 'reading-audio-seek';
+    seek.min = '0';
+    seek.max = '0';
+    seek.step = '1';
+    seek.value = '0';
+    seek.disabled = true;
+    seek.addEventListener('change', () => {
+      if (activeAudio && Number.isFinite(activeAudio.duration)) activeAudio.currentTime = Number(seek.value) || 0;
+    });
+    const speedLabel = document.createElement('label');
+    speedLabel.htmlFor = 'reading-audio-file-speed';
+    speedLabel.textContent = language() === 'en' ? 'Audio playback speed' : 'Velocidad de reproducción del audio';
+    const speed = document.createElement('select');
+    speed.id = 'reading-audio-file-speed';
+    for (const rate of [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]) {
+      const item = document.createElement('option');
+      item.value = String(rate);
+      item.textContent = `${rate}×`;
+      speed.append(item);
+    }
+    speed.value = '1';
+    speed.addEventListener('change', () => {
+      if (activeAudio) activeAudio.playbackRate = Number(speed.value) || 1;
+    });
+    const progress = document.createElement('p');
+    progress.id = 'reading-audio-total-progress';
+    progress.className = 'muted';
+    // Progress is available on demand; do not interrupt VoiceOver each second.
+    progress.setAttribute('aria-live', 'off');
+    audioTools.append(label, seek, speedLabel, speed, progress);
+    els.block.after(audioTools);
+    return audioTools;
+  }
+
+  async function useMp3File(file) {
+    await pause();
+    setAccessiblePlaybackMode(false);
+    if (speechController) {
+      try { await speechController.destroy(); } catch {}
+      speechController = null;
+    }
+    clearActiveAudio();
+    audioObjectUrl = URL.createObjectURL(file);
+    const audio = new Audio(audioObjectUrl);
+    activeAudio = audio;
+    documentModel = null;
+    readingSession = null;
+    searchIndex = null;
+    currentBookId = '';
+    currentSource = '';
+    currentFormat = 'audio';
+    els.title.textContent = file.name;
+    els.reader.hidden = false;
+    enterReaderOnlyView();
+    els.block.textContent = language() === 'en'
+      ? 'MP3 audiobook ready to listen.'
+      : 'Audiolibro MP3 listo para escuchar.';
+    els.previous.disabled = false;
+    els.next.disabled = false;
+    els.previous.textContent = language() === 'en' ? 'Back 10 seconds' : 'Retroceder 10 segundos';
+    els.next.textContent = language() === 'en' ? 'Forward 10 seconds' : 'Adelantar 10 segundos';
+    els.save.disabled = true;
+    els.bookmark.disabled = true;
+    els.queueToggle.disabled = true;
+    const tools = ensureAudioTools();
+    tools.hidden = false;
+    const seek = tools.querySelector('#reading-audio-seek');
+    const progress = tools.querySelector('#reading-audio-total-progress');
+    function updateAudioPosition() {
+      if (activeAudio !== audio) return;
+      const duration = Number.isFinite(audio.duration) ? audio.duration : 0;
+      if (seek) {
+        seek.max = String(Math.max(0, Math.floor(duration)));
+        seek.value = String(Math.max(0, Math.floor(audio.currentTime || 0)));
+        seek.disabled = duration <= 0;
+      }
+      els.position.textContent = (language() === 'en' ? 'Audio: ' : 'Audio: ')
+        + formatAudioTime(audio.currentTime) + ' / ' + (duration ? formatAudioTime(duration) : '--:--');
+      const progressText = duration
+        ? (language() === 'en'
+            ? `Entire audiobook: ${Math.round(audio.currentTime / duration * 100)}%.`
+            : `Audiolibro completo: ${Math.round(audio.currentTime / duration * 100)} %.`)
+        : (language() === 'en' ? 'Total duration unavailable.' : 'Duración total no disponible.');
+      if (progress) progress.textContent = progressText;
+      if (els.documentProgressStatus) els.documentProgressStatus.textContent = progressText;
+    }
+    audio.addEventListener('loadedmetadata', updateAudioPosition);
+    audio.addEventListener('durationchange', updateAudioPosition);
+    audio.addEventListener('timeupdate', updateAudioPosition);
+    audio.addEventListener('play', () => updatePlaybackLabel(true));
+    audio.addEventListener('pause', () => updatePlaybackLabel(false));
+    audio.addEventListener('ended', () => updatePlaybackLabel(false));
+    audio.addEventListener('error', () => {
+      if (activeAudio !== audio) return;
+      els.status.textContent = language() === 'en'
+        ? 'This MP3 could not be decoded by the device.'
+        : 'El dispositivo no pudo descodificar este MP3.';
+    });
+    updateAudioPosition();
+    updatePlaybackLabel(false);
+    els.status.textContent = language() === 'en'
+      ? 'MP3 opened. You can listen now. Audio files are not yet saved to My library.'
+      : 'MP3 abierto. Ya puedes escucharlo. Los archivos de audio todavía no se guardan en Mi biblioteca.';
+    queueMicrotask(() => els.title.focus());
   }
 
   function renderBlock() {
@@ -1219,6 +1366,43 @@
       els.block.append(element);
     }
     renderPosition();
+  }
+
+  // The book-wide percentage is based on preceding words, not the ordinal
+  // number of the current block (a short heading must not count as a chapter).
+  function countReadingWords(value) {
+    return Math.max(1, String(value || '').trim().split(/\s+/u).filter(Boolean).length);
+  }
+
+  function wholeBookPercent(blockIndex, unitIndex = 0) {
+    const blocks = Array.isArray(documentModel?.blocks) ? documentModel.blocks : [];
+    if (!blocks.length) return 0;
+    let total = 0;
+    let completed = 0;
+    blocks.forEach((block, index) => {
+      const count = countReadingWords(block?.text);
+      total += count;
+      if (index < blockIndex) completed += count;
+      else if (index === blockIndex && unitIndex > 0 && Array.isArray(block?.sentences)) {
+        completed += Math.min(count, block.sentences.slice(0, unitIndex)
+          .reduce((sum, sentence) => sum + countReadingWords(sentence), 0));
+      }
+    });
+    return Math.min(100, Math.max(0, (completed * 100) / total));
+  }
+
+  function blockIndexForPercent(percent, model = documentModel) {
+    const blocks = Array.isArray(model?.blocks) ? model.blocks : [];
+    if (!blocks.length) return 0;
+    const weights = blocks.map(block => countReadingWords(block?.text));
+    const target = Math.max(0, Math.min(100, Number(percent) || 0)) / 100
+      * weights.reduce((sum, value) => sum + value, 0);
+    let completed = 0;
+    for (let index = 0; index < blocks.length; index += 1) {
+      if (completed + weights[index] > target || index === blocks.length - 1) return index;
+      completed += weights[index];
+    }
+    return 0;
   }
 
   function renderPosition() {
@@ -1241,7 +1425,7 @@
       els.position.textContent = t().position(Math.min(total, snapshot.blockIndex + 1), total);
     }
 
-    const percent = Math.max(0, Math.min(100, Number(snapshot.percent) || 0));
+    const percent = wholeBookPercent(snapshot.blockIndex, currentUnitIndex);
     const words = documentModel.blocks.reduce((sum, block) => {
       return sum + String(block?.text || '').trim().split(/\s+/u).filter(Boolean).length;
     }, 0);
@@ -1257,8 +1441,8 @@
     };
     if (els.documentProgressStatus) {
       els.documentProgressStatus.textContent = language() === 'en'
-        ? `${Math.round(percent)}% read. About ${duration(remainingSeconds)} remaining.`
-        : `${Math.round(percent)} % leído. Quedan aproximadamente ${duration(remainingSeconds)}.`;
+        ? `Position in entire book: ${Math.round(percent)}%. About ${duration(remainingSeconds)} remaining.`
+        : `Posición en el libro completo: ${Math.round(percent)} %. Quedan aproximadamente ${duration(remainingSeconds)}.`;
     }
     if (els.documentProgressSelect) {
       els.documentProgressSelect.value = String(Math.max(0, Math.min(100, Math.round(percent / 10) * 10)));
@@ -1272,7 +1456,7 @@
     if (!els.reader) return;
 
     const readingSection = document.getElementById('reading-section');
-    const pauseButton = els.pause;
+    const pauseButton = els.play;
     const title = els.title;
 
     if (active) {
@@ -1369,7 +1553,8 @@
         setAccessiblePlaybackMode(value?.playing === true);
         if (value?.playing !== true) renderBlock();
 
-        void persistProgress({ unitIndex: value?.unitIndex });
+        updatePlaybackLabel(value?.playing === true);
+        void persistProgress({ unitIndex: value?.unitIndex, completed: value?.state === 'read' });
       }
     });
   }
@@ -1404,6 +1589,9 @@
       return;
     }
     setAccessiblePlaybackMode(false);
+    clearActiveAudio();
+    els.previous.textContent = t().previous;
+    els.next.textContent = t().next;
     documentModel = model;
     ensureSentenceMetadata();
     originalDocumentModel = documentModel;
@@ -1630,6 +1818,10 @@
       : 'Importando y preparando el documento…';
 
     try {
+      if (/\.mp3$/iu.test(file.name) || String(file.type || '').toLowerCase() === 'audio/mpeg') {
+        await useMp3File(file);
+        return true;
+      }
       const prepared = await documentFromFile(file);
       await useDocument(prepared.model, file.name, {
         source: prepared.source,
@@ -2181,6 +2373,7 @@
     }
     readerChromeState = null;
     els.reader.hidden = true;
+    clearActiveAudio();
 
     if (readerReturnView === 'library') {
       const openLibrary = document.querySelector('[data-reading-view="reading-library-web"]');
@@ -2210,7 +2403,7 @@
     returnToReadingMainFromSubview();
     const model = await modelForSavedBook(opened);
     readerReturnView = 'library';
-    const hasRequestedPercent = Number.isFinite(Number(requestedPercent));
+    const hasRequestedPercent = requestedPercent !== null && requestedPercent !== undefined && Number.isFinite(Number(requestedPercent));
     const percent = hasRequestedPercent ? Math.max(0, Math.min(100, Number(requestedPercent))) : null;
     const maxIndex = Math.max(0, (model?.blocks?.length || 1) - 1);
     const storedBlockIndex = Number(opened.book.blockIndex) || 0;
@@ -2218,13 +2411,13 @@
     const fallbackIndex = storedPercent > 0 && storedBlockIndex === 0
       ? (storedPercent >= 100
           ? maxIndex
-          : Math.min(maxIndex, Math.floor((storedPercent / 100) * (model?.blocks?.length || 1))))
+          : blockIndexForPercent(storedPercent, model))
       : storedBlockIndex;
     const requestedIndex = percent == null
       ? fallbackIndex
       : percent >= 100
         ? maxIndex
-        : Math.min(maxIndex, Math.floor((percent / 100) * (model?.blocks?.length || 1)));
+        : blockIndexForPercent(percent, model);
     await useDocument(model, opened.book.title, {
       source,
       format,
@@ -2767,13 +2960,30 @@
   }
 
   async function play() {
+    if (activeAudio) {
+      try {
+        await activeAudio.play();
+        updatePlaybackLabel(true);
+      } catch {
+        els.status.textContent = language() === 'en' ? 'Audio playback could not start.' : 'No se pudo iniciar la reproducción del audio.';
+        updatePlaybackLabel(false);
+      }
+      return;
+    }
     if (!speechController) await rebuildSpeech();
     const started = await speechController?.play?.();
     if (started !== false) setAccessiblePlaybackMode(true);
+    updatePlaybackLabel(started !== false);
   }
 
   async function pause() {
+    if (activeAudio) {
+      activeAudio.pause();
+      updatePlaybackLabel(false);
+      return;
+    }
     await speechController?.pause?.();
+    updatePlaybackLabel(false);
     setAccessiblePlaybackMode(false);
     const snapshot = speechController?.snapshot?.();
     if (snapshot?.position && documentModel?.blocks?.length) {
@@ -2833,10 +3043,18 @@
     updatePdfPasswordVisibility();
     if (els.file.files?.[0]) void importSelectedFile();
   });
-  els.previous.addEventListener('click', () => move(-1));
-  els.next.addEventListener('click', () => move(1));
-  els.play.addEventListener('click', () => { void play(); });
-  els.pause.addEventListener('click', () => { void pause(); });
+  els.previous.addEventListener('click', () => {
+    if (activeAudio) activeAudio.currentTime = Math.max(0, activeAudio.currentTime - 10);
+    else move(-1);
+  });
+  els.next.addEventListener('click', () => {
+    if (activeAudio) activeAudio.currentTime = Math.min(Number.isFinite(activeAudio.duration) ? activeAudio.duration : Number.MAX_SAFE_INTEGER, activeAudio.currentTime + 10);
+    else move(1);
+  });
+  els.play.addEventListener('click', () => {
+    const playing = activeAudio ? !activeAudio.paused : speechController?.snapshot?.().playing === true;
+    void (playing ? pause() : play());
+  });
   els.voice.addEventListener('change', () => { saveWebSettings(); void rebuildSpeech(); });
   els.rate.addEventListener('input', () => {
     els.rateValue.value = els.rate.value;

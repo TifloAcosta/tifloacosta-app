@@ -97,7 +97,7 @@ test('TifloLector document view prioritizes playback and keeps compact progress 
     'Presentación visual',
     'Más acciones',
     'Temporizador de lectura',
-    '% leído. Quedan aproximadamente',
+    'Posición en el libro completo:',
     'for (let value = 0; value <= 100; value += 10)',
     'mainControls.after(section)',
     'morePanel.append(moreHeading, progressLabel, progressSelect, timerLabel, timerSelect)'

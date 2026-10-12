@@ -2608,6 +2608,17 @@
 
         const actions = document.createElement('div');
         actions.className = 'resource-actions';
+        // Keep the title's direct activation as the fastest reading path.
+        // A separate contextual action makes resuming explicit, inspired by
+        // familiar accessible book readers without claiming native swipe actions.
+        if (Number(book.percent) > 0 && Number(book.percent) < 100) {
+          const resume = document.createElement('button');
+          resume.type = 'button';
+          resume.className = 'reading-library-resume';
+          resume.textContent = language() === 'en' ? 'Resume reading' : 'Continuar lectura';
+          resume.addEventListener('click', () => { void openSavedBook(book.id); });
+          actions.append(resume);
+        }
         const exportLabel = document.createElement('label');
         const exportSelectId = `reading-export-${book.id}`;
         exportLabel.htmlFor = exportSelectId;

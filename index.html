@@ -172,14 +172,17 @@
       <p id="reading-mark-status" class="muted" role="status" aria-live="polite"></p>
     </section>
 
-    <section id="reading-settings-web" class="panel" aria-labelledby="reading-settings-heading">
-      <h3 id="reading-settings-heading" tabindex="-1">Ajustes de lectura</h3>
+    <details id="reading-settings-disclosure" class="panel reading-settings-disclosure">
+      <summary id="reading-settings-summary">Ajustes de lectura</summary>
+      <section id="reading-settings-web" aria-labelledby="reading-settings-heading">
+      <h3 id="reading-settings-heading" tabindex="-1">Tipos de ajustes</h3>
       <div class="resource-actions" aria-label="Ajustes de TifloLector">
         <button type="button" data-reading-view="reading-audio-view" aria-controls="reading-audio-view">Audio y voz</button>
         <button type="button" data-reading-view="reading-visual-view" aria-controls="reading-visual-view">Presentación visual</button>
       </div>
       <p id="reading-settings-status" class="muted" role="status" aria-live="polite"></p>
-    </section>
+      </section>
+    </details>
 
     <section id="reading-audio-view" class="panel reading-subview" hidden aria-labelledby="reading-audio-view-heading">
       <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
@@ -302,7 +305,7 @@
     <section id="reading-library-web" class="panel reading-subview" hidden aria-labelledby="reading-library-heading">
       <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
       <h3 id="reading-library-heading" tabindex="-1">Mi biblioteca</h3>
-      <p id="reading-library-intro">Los documentos guardados permanecen en este navegador.</p>
+      <p id="reading-library-intro">Los documentos se guardan localmente en esta instalación de TifloLector. No se sincronizan automáticamente con otros dispositivos.</p>
       <button id="reading-library-refresh" type="button">Actualizar biblioteca</button>
       <p id="reading-library-status" class="muted" role="status" aria-live="polite"></p>
       <div id="reading-library-list" class="resource-list"></div>
@@ -578,6 +581,7 @@
   };
   const hero = document.getElementById('home-hero');
   const menu = document.getElementById('home-blocks');
+  document.getElementById('home-blocks-heading')?.setAttribute('tabindex', '-1');
   const main = document.getElementById('main');
   const footer = document.getElementById('site-footer');
 
@@ -606,7 +610,14 @@
     document.querySelectorAll('[data-home-back]').forEach(link => { link.textContent = text.back; });
   }
 
-  function showHomeView() {
+  let returnFocusId = '';
+  document.addEventListener('click', event => {
+    const link = event.target.closest?.('a[href^="#"]');
+    const destination = link?.getAttribute('href')?.slice(1);
+    if (destination && views[destination] && link?.id) returnFocusId = link.id;
+  });
+
+  function showHomeView({ focus = false } = {}) {
     const key = location.hash.replace(/^#/, '');
     const target = views[key] || null;
     const onHome = !target;
@@ -614,10 +625,20 @@
     menu.hidden = !onHome;
     if (footer) footer.hidden = !onHome;
     Object.values(views).forEach(section => { section.hidden = section !== target; });
-    // Focus is restored by the isolated navigation controller.
+    if (!focus) return;
+    queueMicrotask(() => {
+      if (onHome) {
+        const opener = returnFocusId && document.getElementById(returnFocusId);
+        if (opener && !opener.hidden) opener.focus();
+        else document.getElementById('home-blocks-heading')?.focus();
+      } else {
+        const headingId = target?.getAttribute('aria-labelledby');
+        (headingId ? document.getElementById(headingId) : target?.querySelector('h2'))?.focus?.();
+      }
+    });
   }
 
-  window.addEventListener('hashchange', showHomeView);
+  window.addEventListener('hashchange', () => showHomeView({ focus: true }));
   document.getElementById('lang-es').addEventListener('click', () => setTimeout(localizeHomeNavigation, 0));
   document.getElementById('lang-en').addEventListener('click', () => setTimeout(localizeHomeNavigation, 0));
   localizeHomeNavigation();

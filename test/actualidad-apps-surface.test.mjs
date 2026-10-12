@@ -56,7 +56,7 @@ test('Apps surface is a semantic section with direct navigation and a platform f
   assert.match(html, /<select[^>]*id="apps-platform"/);
   assert.match(html, /id="apps-status"[^>]*aria-live="polite"/);
   assert.match(html, /id="apps-list"/);
-  assert.match(js, /fetch\(`actualidad-apps\\.json/);
+  assert.match(js, /fetch\(`actualidad-apps\.json/);
   assert.match(js, /app\.publishedAt/);
 });
 

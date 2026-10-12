@@ -117,6 +117,12 @@ jobs:
       - name: Build mobile content from latest Actualidad
         run: node scripts/build-mobile-content.mjs
 
+      - name: Verify shipped JavaScript syntax
+        run: |
+          node --check actualidad.js
+          node --check app.js
+          node --check web-reading.js
+
       - name: Run Actualidad tests
         run: npm run test:actualidad
 

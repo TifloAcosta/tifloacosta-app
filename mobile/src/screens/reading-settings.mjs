@@ -280,6 +280,20 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
     return true;
   }
 
+  async function saveSpeechSettingDuringPlayback(key, value) {
+    const wasPlaying = speech?.snapshot?.().playing === true;
+    if (wasPlaying) await speech.pause();
+    const saved = await saveBookSetting(key, value, voiceStatus);
+    if (wasPlaying && saved && !destroyed) {
+      const resumed = await speech.play();
+      if (!resumed) {
+        voiceStatus.textContent = document.documentElement.lang === 'en'
+          ? 'Setting saved. Resume playback using Play.'
+          : 'Ajuste guardado. Puedes reanudar la lectura con Reproducir.';
+      }
+    }
+  }
+
   function populateVoiceLanguageOptions(preferred='') {
     const codes = [...new Set(voices.map(voice => primaryLanguage(voice.locale)).filter(Boolean))]
       .sort((a,b) => languageName(a).localeCompare(languageName(b), document.documentElement.lang || 'es'));
@@ -380,11 +394,20 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
       voiceCatalog.setLanguageFilter?.(voiceLanguage.value);
     })();
   });
-  voiceSelect.addEventListener('change', () => { void saveBookSetting('speech.voice', voiceSelect.value, voiceStatus); });
-  rate.addEventListener('change', () => { void saveBookSetting('speech.rate', rate.value, voiceStatus); });
+  voiceSelect.addEventListener('change', () => { void saveSpeechSettingDuringPlayback('speech.voice', voiceSelect.value); });
+  rate.addEventListener('change', () => { void saveSpeechSettingDuringPlayback('speech.rate', rate.value); });
   rate.addEventListener('input', () => { rateValue.textContent = rate.value; });
 
   getMoreVoices.addEventListener('click', () => {
+    if (Capacitor.getPlatform() === 'ios') {
+      // iOS does not offer a supported URL that opens its voice download screen.
+      // Remain in the voice chooser; refresh voices when the app becomes active.
+      voiceStatus.textContent = document.documentElement.lang === 'en'
+        ? 'To install system voices, open iPhone Settings > Accessibility > Spoken Content > Voices. Return here and the list will refresh.'
+        : 'Para instalar voces, abre Ajustes del iPhone, Accesibilidad, Contenido leído, Voces. Al regresar aquí, se actualizará la lista.';
+      void refreshVoicesAfterResume();
+      return;
+    }
     lastInvoker = getMoreVoices;
     voiceCatalog.setLanguageFilter?.(voiceLanguage.value);
     voiceSection.hidden = true;

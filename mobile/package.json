@@ -19,7 +19,8 @@
     "@capacitor/core": "8.5.2",
     "@capacitor/share": "8.0.1",
     "@onesignal/capacitor-plugin": "1.1.6",
-    "pdfjs-dist": "6.3.289"
+    "pdfjs-dist": "6.3.289",
+    "@tifloacosta/ios-native": "file:./ios-native"
   },
   "devDependencies": {
     "@capacitor/android": "8.5.2",

@@ -103,21 +103,21 @@
   <section id="reading-section" hidden tabindex="-1" aria-labelledby="reading-heading">
     <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
     <h2 id="reading-heading">TifloLector</h2>
-    <p id="reading-intro">Importa un archivo o pega un texto para leerlo y escucharlo de forma accesible en TifloAcosta.</p>
-    <button id="reading-formats-toggle" type="button" aria-expanded="false" aria-controls="reading-formats-list">Consultar formatos admitidos</button>
-    <p id="reading-formats-list" hidden>TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 e imágenes PNG, JPG y WebP mediante OCR.</p>
+    <p id="reading-intro">Abre un libro o documento para escucharlo, continuar la lectura y gestionar tus marcadores.</p>
 
     <div class="panel" aria-labelledby="reading-start-heading">
-      <h3 id="reading-start-heading">Abrir o pegar contenido</h3>
-      <label id="reading-file-label" for="reading-file">Abrir documento; se importará automáticamente al seleccionarlo</label>
+      <h3 id="reading-start-heading">Abrir documento</h3>
+      <label id="reading-file-label" for="reading-file">Seleccionar un libro o documento</label>
       <input id="reading-file" type="file" accept=".txt,.html,.htm,.pdf,.docx,.pptx,.xlsx,.epub,.odt,.rtf,.md,.markdown,.fb2,.png,.jpg,.jpeg,.webp,text/plain,text/html,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/epub+zip,application/vnd.oasis.opendocument.text,application/rtf,text/markdown,image/png,image/jpeg,image/webp">
-      <label id="reading-paste-label" for="reading-paste">O pega aquí el texto</label>
-      <textarea id="reading-paste" rows="6"></textarea>
+      <div hidden aria-hidden="true">
+        <label id="reading-paste-label" for="reading-paste">Pegar texto</label>
+        <textarea id="reading-paste" rows="6"></textarea>
+        <button id="reading-prepare" type="button" tabindex="-1">Leer texto pegado</button>
+      </div>
       <div id="reading-pdf-password-wrap" hidden>
         <label id="reading-pdf-password-label" for="reading-pdf-password">Contraseña del PDF, si tiene</label>
         <input id="reading-pdf-password" type="password" autocomplete="off">
       </div>
-      <button id="reading-prepare" type="button">Leer texto pegado</button>
       <button id="reading-ocr" type="button" hidden>Reconocer con OCR</button>
       <p id="reading-status" class="muted" role="status" aria-live="polite" aria-atomic="true"></p>
     </div>
@@ -189,6 +189,8 @@
           <option value="paragraph">Párrafo</option>
           <option value="sentence">Frase</option>
         </select>
+        <button id="reading-formats-toggle" type="button" aria-expanded="false" aria-controls="reading-formats-list">Consultar formatos admitidos</button>
+    <p id="reading-formats-list" hidden>TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 e imágenes PNG, JPG y WebP mediante OCR.</p>
       </details>
       <p id="reading-settings-status" class="muted" role="status" aria-live="polite"></p>
       </section>

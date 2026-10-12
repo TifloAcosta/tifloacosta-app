@@ -1,4 +1,5 @@
 import { App } from '@capacitor/app';
+import { Capacitor } from '@capacitor/core';
 import { resolveReadingSettings } from '../core/reading-settings.mjs';
 import { createReadingVoiceCatalog } from '../core/reading-voice-catalog.mjs';
 import { createReadingBackupPanel } from './reading-backup-panel.mjs';
@@ -231,6 +232,8 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
   const voiceCatalog = createReadingVoiceCatalog({
     root,
     client,
+    platform: Capacitor.getPlatform(),
+    providers: Capacitor.getPlatform() === 'ios' ? [] : undefined,
     returnFocus() {
       voiceSection.hidden = false;
       queueMicrotask(() => getMoreVoices.focus());
@@ -328,8 +331,19 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
       client.listTtsVoices()
     ]);
     if (destroyed) return null;
-    voices = available;
-    current = resolveReadingSettings(stored.global, stored.book, { availableVoices: voices });
+    voices = Array.isArray(available) ? available : [];
+    if (!voices.length) {
+      voiceStatus.textContent = Capacitor.getPlatform() === 'ios'
+        ? (document.documentElement.lang === 'en'
+            ? 'No iOS system voices were returned. TifloReader needs the native iOS speech voice bridge to list the voices on this device.'
+            : 'iOS no devolvió voces del sistema. Se necesita la conexión nativa de voces de iOS para mostrar las disponibles en este dispositivo.')
+        : (document.documentElement.lang === 'en' ? 'No voices available.' : 'No hay voces disponibles.');
+    } else {
+      voiceStatus.textContent = document.documentElement.lang === 'en'
+        ? `${voices.length} system voices available.`
+        : `${voices.length} voces del sistema disponibles.`;
+    }
+    current = resolveReadingSettings(stored?.global, stored?.book, { availableVoices: voices });
     const selectedVoice = voices.find(voice => voice.id === current.effective['speech.voice']);
     populateVoiceLanguageOptions(current.effective['speech.voiceLanguage'] || selectedVoice?.locale || document.documentElement.lang);
     populateVoiceOptions();

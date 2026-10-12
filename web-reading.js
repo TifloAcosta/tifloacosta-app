@@ -847,7 +847,7 @@
       if (!documentModel?.blocks?.length) return;
       const percent = Math.max(0, Math.min(100, Number(progressSelect.value) || 0));
       const maxIndex = Math.max(0, documentModel.blocks.length - 1);
-      const target = percent >= 100 ? maxIndex : Math.min(maxIndex, Math.floor((percent / 100) * documentModel.blocks.length));
+      const target = blockIndexForPercent(percent);
       currentUnitIndex = 0;
       readingSession = shared.createReadingSession({ blocks: documentModel.blocks, initialIndex: target });
       renderBlock();
@@ -1201,8 +1201,8 @@
       blockIndex: snapshot.blockIndex,
       unitIndex: Number(extra.unitIndex) || 0,
       anchorText: String(current?.text || '').slice(0, 160),
-      percent: snapshot.percent,
-      state: snapshot.percent >= 100 ? 'read' : 'in-reading'
+      percent: extra.completed === true ? 100 : wholeBookPercent(snapshot.blockIndex, Number(extra.unitIndex) || currentUnitIndex),
+      state: extra.completed === true ? 'read' : 'in-reading'
     });
   }
 
@@ -1219,6 +1219,43 @@
       els.block.append(element);
     }
     renderPosition();
+  }
+
+  // The book-wide percentage is based on preceding words, not the ordinal
+  // number of the current block (a short heading must not count as a chapter).
+  function countReadingWords(value) {
+    return Math.max(1, String(value || '').trim().split(/\s+/u).filter(Boolean).length);
+  }
+
+  function wholeBookPercent(blockIndex, unitIndex = 0) {
+    const blocks = Array.isArray(documentModel?.blocks) ? documentModel.blocks : [];
+    if (!blocks.length) return 0;
+    let total = 0;
+    let completed = 0;
+    blocks.forEach((block, index) => {
+      const count = countReadingWords(block?.text);
+      total += count;
+      if (index < blockIndex) completed += count;
+      else if (index === blockIndex && unitIndex > 0 && Array.isArray(block?.sentences)) {
+        completed += Math.min(count, block.sentences.slice(0, unitIndex)
+          .reduce((sum, sentence) => sum + countReadingWords(sentence), 0));
+      }
+    });
+    return Math.min(100, Math.max(0, (completed * 100) / total));
+  }
+
+  function blockIndexForPercent(percent) {
+    const blocks = Array.isArray(documentModel?.blocks) ? documentModel.blocks : [];
+    if (!blocks.length) return 0;
+    const weights = blocks.map(block => countReadingWords(block?.text));
+    const target = Math.max(0, Math.min(100, Number(percent) || 0)) / 100
+      * weights.reduce((sum, value) => sum + value, 0);
+    let completed = 0;
+    for (let index = 0; index < blocks.length; index += 1) {
+      if (completed + weights[index] > target || index === blocks.length - 1) return index;
+      completed += weights[index];
+    }
+    return 0;
   }
 
   function renderPosition() {
@@ -1241,7 +1278,7 @@
       els.position.textContent = t().position(Math.min(total, snapshot.blockIndex + 1), total);
     }
 
-    const percent = Math.max(0, Math.min(100, Number(snapshot.percent) || 0));
+    const percent = wholeBookPercent(snapshot.blockIndex, currentUnitIndex);
     const words = documentModel.blocks.reduce((sum, block) => {
       return sum + String(block?.text || '').trim().split(/\s+/u).filter(Boolean).length;
     }, 0);
@@ -1257,8 +1294,8 @@
     };
     if (els.documentProgressStatus) {
       els.documentProgressStatus.textContent = language() === 'en'
-        ? `${Math.round(percent)}% read. About ${duration(remainingSeconds)} remaining.`
-        : `${Math.round(percent)} % leído. Quedan aproximadamente ${duration(remainingSeconds)}.`;
+        ? `Position in entire book: ${Math.round(percent)}%. About ${duration(remainingSeconds)} remaining.`
+        : `Posición en el libro completo: ${Math.round(percent)} %. Quedan aproximadamente ${duration(remainingSeconds)}.`;
     }
     if (els.documentProgressSelect) {
       els.documentProgressSelect.value = String(Math.max(0, Math.min(100, Math.round(percent / 10) * 10)));
@@ -1369,7 +1406,7 @@
         setAccessiblePlaybackMode(value?.playing === true);
         if (value?.playing !== true) renderBlock();
 
-        void persistProgress({ unitIndex: value?.unitIndex });
+        void persistProgress({ unitIndex: value?.unitIndex, completed: value?.state === 'read' });
       }
     });
   }

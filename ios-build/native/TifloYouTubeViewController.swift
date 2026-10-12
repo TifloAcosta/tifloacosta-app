@@ -100,7 +100,7 @@ public final class TifloYouTubePlugin: CAPPlugin, CAPBridgedPlugin {
         ]
         guard let file = call.getString("file"),
               allowed.contains(file),
-              let url = URL(string: "https://tifloacosta.com/" + file)
+              let url = URL(string: "https://tifloacosta.com/" + file + "?refresh=" + String(Int(Date().timeIntervalSince1970)))
         else {
             call.reject("Archivo público no admitido")
             return

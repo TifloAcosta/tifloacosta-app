@@ -74,6 +74,9 @@
     libraryRefresh: $('#reading-library-refresh'),
     libraryStatus: $('#reading-library-status'),
     libraryList: $('#reading-library-list'),
+    libraryFilterLabel: $('#reading-library-filter-label'),
+    libraryFilter: $('#reading-library-filter'),
+    libraryQueuePanel: $('#reading-library-queue-panel'),
     pdfPasswordWrap: $('#reading-pdf-password-wrap'),
     pdfPasswordLabel: $('#reading-pdf-password-label'),
     pdfPassword: $('#reading-pdf-password'),
@@ -145,6 +148,8 @@
       alreadySaved: 'Este documento ya está guardado en tu biblioteca.',
       saveFailed: 'No se pudo guardar el documento en este navegador.',
       libraryHeading: 'Mi biblioteca',
+      libraryFilterLabel: 'Mostrar en la biblioteca',
+      libraryFilterOptions: { all: 'Todos los documentos', recent: 'Importados recientemente', 'in-reading': 'En lectura', 'not-read': 'Sin leer', read: 'Leídos', queue: 'Cola de lectura' },
       libraryIntro: 'Los documentos se conservan localmente en esta instalación de TifloLector. No se sincronizan con otros dispositivos; si eliminas los datos de la aplicación, puedes perderlos.',
       refresh: 'Actualizar biblioteca',
       libraryEmpty: 'Todavía no hay documentos guardados.',
@@ -253,6 +258,8 @@
       alreadySaved: 'This document is already saved in your library.',
       saveFailed: 'The document could not be saved in this browser.',
       libraryHeading: 'My library',
+      libraryFilterLabel: 'Show in library',
+      libraryFilterOptions: { all: 'All documents', recent: 'Recently imported', 'in-reading': 'In progress', 'not-read': 'Unread', read: 'Completed', queue: 'Reading queue' },
       libraryIntro: 'Documents are kept locally in this TifloReader installation. They are not synced to other devices; clearing app data may remove them.',
       refresh: 'Refresh library',
       libraryEmpty: 'No documents have been saved yet.',
@@ -1062,6 +1069,10 @@
     els.searchButton.textContent = c.searchButton;
     els.save.textContent = c.save;
     els.libraryHeading.textContent = c.libraryHeading;
+    if (els.libraryFilterLabel) els.libraryFilterLabel.textContent = c.libraryFilterLabel;
+    if (els.libraryFilter) for (const option of els.libraryFilter.options) {
+      option.textContent = c.libraryFilterOptions[option.value] || option.textContent;
+    }
     els.libraryIntro.textContent = c.libraryIntro;
     els.libraryRefresh.textContent = c.refresh;
     els.bookmark.textContent = c.bookmark;
@@ -2405,6 +2416,15 @@
   }
 
   async function renderLibrary() {
+    const view = els.libraryFilter?.value || 'all';
+    const queueView = view === 'queue';
+    if (els.libraryQueuePanel) els.libraryQueuePanel.hidden = !queueView;
+    els.libraryList.hidden = queueView;
+    if (queueView) {
+      els.libraryStatus.textContent = '';
+      await renderQueue();
+      return;
+    }
     els.libraryList.replaceChildren();
     if (!libraryClient) {
       els.libraryStatus.textContent = t().libraryUnavailable;
@@ -2439,7 +2459,13 @@
     }
 
     try {
-      const page = await libraryClient.listBooks({ page: 1, pageSize: 100, sort: 'lastRead' });
+      const status = ['in-reading', 'not-read', 'read'].includes(view) ? view : 'all';
+      const page = await libraryClient.listBooks({
+        page: 1, pageSize: 100,
+        status,
+        sort: view === 'recent' ? 'imported' : 'lastRead'
+      });
+      if ((els.libraryFilter?.value || 'all') !== view) return;
       if (!page.items.length) {
         els.libraryStatus.textContent = t().libraryEmpty;
         return;
@@ -2947,6 +2973,7 @@
   els.translationTarget.addEventListener('change', resetTranslationSelection);
   els.save.addEventListener('click', () => { void saveCurrentDocument(); });
   els.libraryRefresh.addEventListener('click', () => { void Promise.all([renderLibrary(), renderQueue(), renderMarks()]); });
+  els.libraryFilter?.addEventListener('change', () => { void renderLibrary(); });
   els.bookmark.addEventListener('click', () => { void addBookmark(); });
   els.queueToggle.addEventListener('click', () => { void toggleQueue(); });
 

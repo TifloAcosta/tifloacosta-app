@@ -58,7 +58,7 @@ if (!readerScript.includes("intro: 'Abre un libro o documento para escucharlo") 
 // Fail closed until iOS has genuine DAISY ZIP import AND native document actions.
 // The full visual/VoiceOver acceptance still needs a device test (issue #170).
 const daisyZipSupported = /daisy/i.test(readerScript) && /smil/i.test(readerScript)
-  && /(?:\\.zip|application\\/zip|zipBundle)/i.test(readerScript);
+  && readerScript.includes('zipBundle');
 const nativeAccessibleDocumentActions = await stat(
   join(root, 'ios-build/native/TifloReadingAccessibilityPlugin.swift')
 ).then(() => true, () => false);

@@ -75,6 +75,16 @@ Esta lista procede de los acuerdos con el usuario del 12/10 y debe preservarse *
 - **Guía accesible de uso** con capítulos desplegables, en la portada antes de las secciones. Existen ramas con guías de 16 capítulos, pero no se ha integrado su versión final de forma verificada en `preparacion-ios`.
 - Conservar biblioteca y datos al actualizar y preservar las mejoras existentes de Novedades, TifloReproductor, Recursos y navegación general; **no fusionar archivos completos de otras ramas sin auditoría de compatibilidad**.
 
+## Mejoras de interfaz recuperadas y validadas a nivel de código durante la auditoría
+
+- **Mi biblioteca en la pantalla inicial de TifloLector:** la antigua vista `reading-library-web` ya no está escondida en un submenú. Se presenta después de ajustes generales cerrados. Commit `5d82738`. Esto preserva la ruta MP3 y el botón único reproducir/pausa, a diferencia del HTML antiguo de la rama de biblioteca.
+- **Buscar y filtrar la biblioteca:** `reading-library-filter` ofrece Todos por defecto, recientes, en lectura, sin leer, leídos y cola, y `reading-library-query` filtra título o autor. `web-reading.js:renderLibrary()` usa `listBooks({query,status,sort})` o `listQueue()`. Commit `52ed74b`. La limitación a 100 resultados aún debe sustituirse por paginación antes de considerar óptima la biblioteca.
+- **Volver del libro al título correcto:** al salir del lector, la ruta de retorno busca el mismo título por un ID estable; evita abrir una vista de biblioteca oculta. Commit `52ed74b`.
+- **Guía de uso accesible:** rescatada la guía ES/EN con capítulos plegables en `tifloacosta-guide.js`, enlace de portada antes del menú de secciones y vista interna `#guide`; se diferencia expresamente las acciones convencionales de las nativas pendientes. Se incorporó a caché offline. Commits `d41a0b6`, `ce7559c`, `82127f1`.
+- **Más comprobaciones** en `ios-build/test/tiflolector-structure.test.mjs` contra retrocesos de biblioteca, guía y borrado sin confirmación. Trabajo `tiflolector-static-audit` independiente del empaquetado bloqueado; ampliado a 8 pruebas estructurales más 32 web. **Estos tests no equivalen a validación con VoiceOver en un iPhone.**
+
+Estos cambios se han efectuado en la rama de preparación de iOS, **sin habilitar su publicación**. Mantener abiertos los criterios críticos DAISY, audio persistente, rotor, diccionario, navegación avanzada, resaltado, exportación traducida, OCR en entorno real y preservación de datos.
+
 ## Plan de ejecución, orden obligatorio
 
 1. **Unificar el producto:** fijar como contrato funcional el lector avanzado de `mobile/src`. Decidir cómo llevarlo a iOS sin depender de los plugins Android. No confundir frontend avanzado con funcionalidad nativa instalada.

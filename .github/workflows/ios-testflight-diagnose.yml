@@ -5,6 +5,7 @@ on:
     branches: [release/ios-testflight-20261012]
     paths:
       - '.github/workflows/ios-testflight-diagnose.yml'
+      - '.github/scripts/ios-testflight-diagnose.mjs'
   workflow_dispatch:
 permissions:
   contents: read

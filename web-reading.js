@@ -2651,6 +2651,7 @@
         const title = document.createElement('button');
         title.type = 'button';
         title.className = 'reading-library-title';
+        title.id = 'reading-library-title-' + String(book.id).replace(/[^a-zA-Z0-9_-]/g, '-');
         title.textContent = book.title || t().document;
         title.setAttribute('aria-label', language() === 'en'
           ? `Open for reading: ${book.title || t().document}`
@@ -2874,9 +2875,7 @@
             if (currentBookId === book.id) els.title.textContent = updatedTitle;
             await renderLibrary();
             // Restoring focus after a rerender is essential for VoiceOver.
-            const nextTitle = [...els.libraryList.querySelectorAll('button.reading-library-title')]
-              .find(button => button.textContent === updatedTitle);
-            nextTitle?.focus({ preventScroll: true });
+            document.getElementById(title.id)?.focus({ preventScroll: true });
             els.libraryStatus.textContent = language() === 'en'
               ? 'Document title saved.' : 'Título del documento guardado.';
           })();

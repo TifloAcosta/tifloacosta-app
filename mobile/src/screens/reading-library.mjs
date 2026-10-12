@@ -817,6 +817,15 @@ export function renderReadingLibrary({
           ? fallback(t, 'readingLibrary.metadataSaved', 'Cambios guardados.', 'Changes saved.')
           : fallback(t, 'readingLibrary.metadataFailed', 'No se pudieron guardar los cambios.', 'The changes could not be saved.');
         await refresh();
+        // After renaming, return VoiceOver to this document instead of the start of the library.
+        if (saved) {
+          const documentButton = root.querySelector(
+            `[id="reading-library-actions-${String(item.id).replace(/[^a-zA-Z0-9_-]/g, '-')}" ]`
+          );
+          documentButton?.focus();
+        } else {
+          renameSave.disabled = false;
+        }
       })();
     });
     rename.append(renameSummary, renameForm);

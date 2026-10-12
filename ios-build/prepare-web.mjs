@@ -128,6 +128,7 @@ if (!Array.isArray(bundledVideos.videos) || !bundledVideos.videos.length) throw 
 await writeFile(join(output, 'ios-videos-fallback.js'),
   'window.TIFLO_IOS_VIDEOS = ' + JSON.stringify(bundledVideos).replace(/</g, '\\u003c') + ';');
 await cp(join(root, 'ios-build/ios-parity.js'), join(output, 'ios-parity.js'));
+await cp(join(root, 'ios-build/ios-guide.js'), join(output, 'ios-guide.js'));
 for (const name of ['index.html','videos.html','podcast.html','actualidad.html']) {
   const path = join(output, name);
   let html = await readFile(path, 'utf8');
@@ -154,6 +155,7 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
   html = html.replace('</body>', '<script src="ios-choice-groups.js"></script>' + '\n</body>');
   if (name === 'actualidad.html') html = html.replace('</body>', '<script src="ios-choice-collapse.js"></script>' + '\n</body>');
   if (name === 'index.html' || name === 'actualidad.html' || name === 'videos.html') html = html.replace('</body>', '<script src="ios-parity.js"></script>' + '\n</body>');
+  if (name === 'index.html') html = html.replace('</body>', '<script src="ios-guide.js"></script>' + '\n</body>');
   if (name === 'index.html') {
     html = html.replace('</head>', '<script src="ios-reader-native.js"></script>\n</head>');
     html = html.replace('</body>', '<script src="ios-reader-selects.js"></script>' + '\n</body>');

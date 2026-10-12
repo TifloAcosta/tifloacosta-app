@@ -129,6 +129,7 @@ await writeFile(join(output, 'ios-videos-fallback.js'),
   'window.TIFLO_IOS_VIDEOS = ' + JSON.stringify(bundledVideos).replace(/</g, '\\u003c') + ';');
 await cp(join(root, 'ios-build/ios-parity.js'), join(output, 'ios-parity.js'));
 await cp(join(root, 'ios-build/ios-guide.js'), join(output, 'ios-guide.js'));
+await cp(join(root, 'ios-build/ios-new-content-refresh.js'), join(output, 'ios-new-content-refresh.js'));
 for (const name of ['index.html','videos.html','podcast.html','actualidad.html']) {
   const path = join(output, name);
   let html = await readFile(path, 'utf8');
@@ -155,7 +156,7 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
   html = html.replace('</body>', '<script src="ios-choice-groups.js"></script>' + '\n</body>');
   if (name === 'actualidad.html') html = html.replace('</body>', '<script src="ios-choice-collapse.js"></script>' + '\n</body>');
   if (name === 'index.html' || name === 'actualidad.html' || name === 'videos.html') html = html.replace('</body>', '<script src="ios-parity.js"></script>' + '\n</body>');
-  if (name === 'index.html') html = html.replace('</body>', '<script src="ios-guide.js"></script>' + '\n</body>');
+  if (name === 'index.html') html = html.replace('</body>', '<script src="ios-guide.js"></script>\n<script src="ios-new-content-refresh.js"></script>' + '\n</body>');
   if (name === 'index.html') {
     html = html.replace('</head>', '<script src="ios-reader-native.js"></script>\n</head>');
     html = html.replace('</body>', '<script src="ios-reader-selects.js"></script>' + '\n</body>');
@@ -312,12 +313,35 @@ const iosCompleteCatalog = [
   '      renderNews();'
 ].join('\n');
 iosApp = iosApp.replace(iosOnlyBaseReplacement, iosCompleteCatalog);
+// Report an actual remote catalog check to the iOS accessible refresh button.
+const noResponse = '      if (!response.ok) return;\n      const source = await response.text();';
+if (!iosApp.includes(noResponse)) throw new Error('No se encuentra control HTTP de Novedades iOS');
+iosApp = iosApp.replace(noResponse,
+  '      if (!response.ok) throw new Error("HTTP");\n      const source = await response.text();');
+const noMatch = '      if (!match) return;\n      const items = JSON.parse(match[1]);';
+if (!iosApp.includes(noMatch)) throw new Error('No se encuentra validación de catálogo iOS');
+iosApp = iosApp.replace(noMatch,
+  '      if (!match) throw new Error("Invalid catalog");\n      const items = JSON.parse(match[1]);');
+const noItems = '      if (!Array.isArray(items) || items.length === 0) return;';
+if (!iosApp.includes(noItems)) throw new Error('No se encuentra comprobación de recursos iOS');
+iosApp = iosApp.replace(noItems,
+  '      if (!Array.isArray(items) || items.length === 0) throw new Error("Empty catalog");');
+const successEvent = "      window.dispatchEvent(new CustomEvent('tiflo-resources-updated', { detail: { items } }));";
+if (!iosApp.includes(successEvent)) throw new Error('Falta aviso de catálogo actualizado');
+iosApp = iosApp.replace(successEvent, successEvent + '\n' +
+  '      const newest = data.filter(item => item?.new && Number.isFinite(Date.parse(item.newsDate || ""))).sort((a,b) => Date.parse(b.newsDate) - Date.parse(a.newsDate))[0];\n' +
+  '      window.dispatchEvent(new CustomEvent("tiflo-refresh-novedades-result", { detail: { ok: true, newestDate: newest?.newsDate || "" } }));');
+const refreshCatch = '    } catch {\n      // Offline and network failures must preserve the packaged catalog.\n    }';
+if (!iosApp.includes(refreshCatch)) throw new Error('Falta protección offline de Novedades iOS');
+iosApp = iosApp.replace(refreshCatch,
+  '    } catch {\n      // Offline and network failures must preserve the packaged catalog.\n      window.dispatchEvent(new CustomEvent("tiflo-refresh-novedades-result", { detail: { ok: false } }));\n    }');
 
 const iosStartPoint = 'applyPrefs();applyLanguage();loadActualidadHome();trackLanguageUse();announceCompletedUpdate();';
 if (!iosApp.includes(iosStartPoint)) throw new Error('No se encuentra inicialización de Novedades');
 iosApp = iosApp.replace(iosStartPoint, iosStartPoint +
   'void refreshIosResourceCatalog();\n' +
   'window.addEventListener("hashchange",()=>{if(location.hash==="#news")void refreshIosResourceCatalog();});\n' +
+  'window.addEventListener("tiflo-refresh-novedades-request",()=>{void refreshIosResourceCatalog();});\n' +
   'document.addEventListener("visibilitychange",()=>{if(!document.hidden){void refreshIosResourceCatalog();loadActualidadHome();}});');
 
 await writeFile(iosAppPath, iosApp);

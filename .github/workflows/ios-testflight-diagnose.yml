@@ -1,0 +1,24 @@
+name: Diagnose TifloAcosta TestFlight availability
+on:
+  push:
+    branches: [release/ios-testflight-20261012]
+    paths:
+      - '.github/workflows/ios-testflight-diagnose.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect-apple:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Read App Store Connect build, beta status and groups
+        env:
+          APPSTORE_API_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+          APPSTORE_API_ISSUER_ID: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+          APPSTORE_API_PRIVATE_KEY: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+        run: node ios-build/check-testflight-status.mjs

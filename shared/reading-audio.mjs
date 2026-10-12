@@ -41,16 +41,31 @@ function normalizeTracks(values = []) {
     .sort((a, b) => a.trackIndex - b.trackIndex);
 }
 
-function audiobookPercent(tracks, trackIndex, positionMs, currentDurationMs, fallback = 0) {
-  if (!tracks.length) return percentFor(positionMs, currentDurationMs, fallback);
-  const total = tracks.reduce((sum, track) => sum + track.durationMs, 0);
-  if (total <= 0) return percentFor(positionMs, currentDurationMs, fallback);
+// Only claim whole-audiobook progress when the full track duration is known.
+// A DAISY book can contain many short clips; progress in the active clip is
+// never an accurate substitute for progress in the complete audiobook.
+export function audiobookPercent(tracks, trackIndex, positionMs, currentDurationMs, fallback = 0, trackCount = tracks.length) {
+  const previous = Math.min(100, Math.max(0, numberOr(fallback, 0)));
+  const declaredCount = Math.max(nonNegativeInteger(trackCount, 0), tracks.length);
+  if (declaredCount <= 1) return percentFor(positionMs, currentDurationMs, previous);
+  if (tracks.length !== declaredCount) return previous;
+
+  const durations = tracks.map(track => (
+    track.trackIndex === trackIndex && currentDurationMs > 0
+      ? nonNegativeInteger(currentDurationMs, 0)
+      : track.durationMs
+  ));
+  if (durations.some(duration => duration <= 0)) return previous;
+
+  const total = durations.reduce((sum, duration) => sum + duration, 0);
   let completed = 0;
-  for (const track of tracks) {
-    if (track.trackIndex < trackIndex) completed += track.durationMs;
-    else if (track.trackIndex === trackIndex) completed += Math.min(positionMs, track.durationMs || positionMs);
+  for (let index = 0; index < tracks.length; index += 1) {
+    if (tracks[index].trackIndex < trackIndex) completed += durations[index];
+    else if (tracks[index].trackIndex === trackIndex) {
+      completed += Math.min(Math.max(0, positionMs), durations[index]);
+    }
   }
-  return Math.min(100, Math.max(0, (completed / total) * 100));
+  return total ? Math.min(100, Math.max(0, (completed / total) * 100)) : previous;
 }
 
 function defaultTimers() {
@@ -166,7 +181,7 @@ export function createReadingAudioController({
       mediaPositionMs: state.positionMs,
       percent: completed
         ? 100
-        : audiobookPercent(audioTracks, state.trackIndex, state.positionMs, state.durationMs, book?.percent),
+        : audiobookPercent(audioTracks, state.trackIndex, state.positionMs, state.durationMs, book?.percent, state.trackCount),
       state: readingState
     });
     if (saved) {

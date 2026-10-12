@@ -113,7 +113,7 @@ test('request bypasses stale CDN query caches and older feeds cannot overwrite s
     storage
   });
   const result = await store.load();
-  assert.match(requested, /[?&]refresh=\\d+/);
+  assert.match(requested, /[?&]refresh=\d+/);
   assert.equal(result.status, 'cached');
   assert.deepEqual(result.content, cached);
   assert.deepEqual(JSON.parse(storage.value('tiflo-mobile-content-v1')), cached);

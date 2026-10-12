@@ -39,6 +39,7 @@
     settingsPanel: $('#reading-settings-web'),
     settingsHeading: $('#reading-settings-heading'),
     settingsStatus: $('#reading-settings-status'),
+    defaultNavigationMode: $('#reading-default-navigation'),
     audioSpeed: $('#reading-audio-speed'),
     textSize: $('#reading-text-size'),
     fontFamily: $('#reading-font-family'),
@@ -969,6 +970,7 @@
       theme: els.readingTheme?.value || 'system',
       highContrast: Boolean(els.highContrast?.checked),
       screenReaderMode: els.screenReaderMode ? Boolean(els.screenReaderMode.checked) : readWebSettings().screenReaderMode !== false,
+      defaultNavigationMode: els.defaultNavigationMode?.value || 'block',
       autoPlay: els.autoPlay ? Boolean(els.autoPlay.checked) : readWebSettings().autoPlay === true
     };
     try { localStorage.setItem(WEB_READING_SETTINGS_KEY, JSON.stringify(value)); } catch {}
@@ -1002,6 +1004,7 @@
 
   function restoreWebSettings() {
     const value = readWebSettings();
+    if (els.defaultNavigationMode) els.defaultNavigationMode.value = ['block', 'paragraph', 'sentence'].includes(value.defaultNavigationMode) ? value.defaultNavigationMode : 'block';
     if (els.voiceLanguage && value.voiceLanguage !== undefined) els.voiceLanguage.value = primaryLanguage(value.voiceLanguage);
     if (els.externalVoiceLanguage && value.externalVoiceLanguage !== undefined) els.externalVoiceLanguage.value = primaryLanguage(value.externalVoiceLanguage);
     if (els.rate && value.rate) els.rate.value = String(value.rate);
@@ -1043,6 +1046,10 @@
     if (els.voiceLanguageLabel) els.voiceLanguageLabel.textContent = language() === 'en' ? 'Voice language' : 'Idioma de la voz';
     if (els.externalVoiceLanguageLabel) els.externalVoiceLanguageLabel.textContent = language() === 'en' ? 'Language for more voices' : 'Idioma para buscar más voces';
     if (els.documentVoiceLanguageLabel) els.documentVoiceLanguageLabel.textContent = language() === 'en' ? 'Voice language for this document' : 'Idioma de la voz para este documento';
+    const generalLabel = document.getElementById('reading-default-navigation-label');
+    if (generalLabel) generalLabel.textContent = language() === 'en' ? 'Default navigation for new documents' : 'Modo de avance predeterminado para nuevos documentos';
+    const generalSummary = document.getElementById('reading-general-settings-summary');
+    if (generalSummary) generalSummary.textContent = language() === 'en' ? 'General' : 'General';
     els.externalVoicesHeading.textContent = c.externalVoicesHeading;
     els.externalVoicesIntro.textContent = c.externalVoicesIntro;
     els.rateLabel.textContent = c.rate;
@@ -1426,6 +1433,7 @@
     els.searchResults.replaceChildren();
     els.searchStatus.textContent = '';
     ensurePerDocumentControls();
+    if (els.navigationUnit) els.navigationUnit.value = readWebSettings().defaultNavigationMode || 'block';
     navigationUnit = els.navigationUnit?.value || 'block';
     currentUnitIndex = 0;
     populatePerDocumentVoices();
@@ -2827,6 +2835,7 @@
     els.rateValue.textContent = els.rate.value;
   });
   els.rate.addEventListener('change', () => { saveWebSettings(); void rebuildSpeech(); });
+  els.defaultNavigationMode?.addEventListener('change', saveWebSettings);
   for (const control of [els.audioSpeed, els.textSize, els.fontFamily, els.fontWeight, els.lineSpacing, els.paragraphSpacing, els.readingWidth, els.readingTheme, els.highContrast]) {
     control?.addEventListener('change', saveWebSettings);
   }

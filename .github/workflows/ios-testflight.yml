@@ -7,6 +7,7 @@ on:
       - '.github/workflows/ios-testflight.yml'
       - 'ios-build/**'
       - 'index.html'
+      - 'web-reading.js'
       - 'videos.js'
       - 'podcast.js'
       - 'downloads.js'

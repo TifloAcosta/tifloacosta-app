@@ -17,6 +17,7 @@
       'reading-navigation-unit',
       'reading-document-progress-percent',
       'ios-reading-default-unit',
+      'reading-default-navigation',
       'reading-audio-speed'
     ]);
     if (adjustableIds.has(select.id) && select.options.length >= 2) {

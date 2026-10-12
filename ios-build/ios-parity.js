@@ -296,6 +296,8 @@
     const globalUnitKey = 'tiflo-ios-default-reading-unit-v1';
     const overrideKey = 'tiflo-ios-document-units-v1';
     function globalUnit() {
+      const canonical = document.getElementById('reading-default-navigation')?.value;
+      if (validUnits.includes(canonical)) return canonical;
       const saved = storageGet(globalUnitKey, 'block');
       return validUnits.includes(saved) ? saved : 'block';
     }
@@ -327,7 +329,7 @@
 
     // One global default. Each document may override it without changing the default.
     const settings = document.getElementById('reading-settings-web');
-    if (settings && !document.getElementById('ios-reading-settings-disclosure')) {
+    if (settings && !document.getElementById('reading-settings-disclosure') && !document.getElementById('ios-reading-settings-disclosure')) {
       const toggle = document.createElement('button');
       toggle.id = 'ios-reading-settings-disclosure';
       toggle.type = 'button';
@@ -343,7 +345,7 @@
         else toggle.focus({ preventScroll: true });
       });
     }
-    if (settings && !document.getElementById('ios-reading-default-unit')) {
+    if (settings && !document.getElementById('reading-default-navigation') && !document.getElementById('ios-reading-default-unit')) {
       const label = document.createElement('label');
       label.htmlFor = 'ios-reading-default-unit';
       label.textContent = localized('Avance predeterminado para todos los documentos', 'Default navigation unit for all documents');

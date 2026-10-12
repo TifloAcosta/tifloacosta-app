@@ -38,6 +38,7 @@
     settingsPanel: $('#reading-settings-web'),
     settingsHeading: $('#reading-settings-heading'),
     settingsStatus: $('#reading-settings-status'),
+    defaultNavigationMode: $('#reading-default-navigation'),
     audioSpeed: $('#reading-audio-speed'),
     textSize: $('#reading-text-size'),
     fontFamily: $('#reading-font-family'),
@@ -64,6 +65,7 @@
     translationStop: $('#reading-translation-stop'),
     translationOriginal: $('#reading-translation-original'),
     translationTranslated: $('#reading-translation-translated'),
+    translationRead: $('#reading-translation-read'),
     translationStatus: $('#reading-translation-status'),
     save: $('#reading-save'),
     libraryHeading: $('#reading-library-heading'),
@@ -91,7 +93,7 @@
   const copy = {
     es: {
       heading: 'TifloLector',
-      intro: 'Importa un archivo o pega un texto para leerlo y escucharlo de forma accesible en TifloAcosta.',
+      intro: 'Abre un libro o documento para escucharlo, continuar la lectura y gestionar tus marcadores.',
       file: 'Abrir documento o imagen',
       paste: 'O pega aquí el texto',
       prepare: 'Leer texto pegado',
@@ -142,7 +144,7 @@
       alreadySaved: 'Este documento ya está guardado en tu biblioteca.',
       saveFailed: 'No se pudo guardar el documento en este navegador.',
       libraryHeading: 'Mi biblioteca',
-      libraryIntro: 'Los documentos guardados permanecen únicamente en este navegador.',
+      libraryIntro: 'Los documentos se conservan localmente en esta instalación de TifloLector. No se sincronizan con otros dispositivos; si eliminas los datos de la aplicación, puedes perderlos.',
       refresh: 'Actualizar biblioteca',
       libraryEmpty: 'Todavía no hay documentos guardados.',
       libraryUnavailable: 'El navegador no permite utilizar la biblioteca local.',
@@ -199,7 +201,7 @@
     },
     en: {
       heading: 'TifloReader',
-      intro: 'Import a file or paste text to read and listen to it accessibly in TifloAcosta.',
+      intro: 'Open a book or document to listen, resume reading, and manage your bookmarks.',
       file: 'Open document or image',
       paste: 'Or paste text here',
       prepare: 'Read pasted text',
@@ -250,7 +252,7 @@
       alreadySaved: 'This document is already saved in your library.',
       saveFailed: 'The document could not be saved in this browser.',
       libraryHeading: 'My library',
-      libraryIntro: 'Saved documents remain only in this browser.',
+      libraryIntro: 'Documents are kept locally in this TifloReader installation. They are not synced to other devices; clearing app data may remove them.',
       refresh: 'Refresh library',
       libraryEmpty: 'No documents have been saved yet.',
       libraryUnavailable: 'This browser does not allow the local library to be used.',
@@ -605,7 +607,18 @@
     moreButton.type = 'button';
     moreButton.textContent = language() === 'en' ? 'More actions' : 'Más acciones';
 
-    primaryActions.append(mark, audioButton, visualButton, moreButton);
+    // Per-document settings have a single closed-by-default accessible menu.
+    const readingSettingsMenu = document.createElement('details');
+    readingSettingsMenu.className = 'reading-settings-disclosure';
+    const readingSettingsSummary = document.createElement('summary');
+    readingSettingsSummary.textContent = language() === 'en' ? 'Reading settings' : 'Ajustes de lectura';
+    const generalSettings = document.createElement('details');
+    generalSettings.className = 'reading-settings-disclosure';
+    const generalSettingsSummary = document.createElement('summary');
+    generalSettingsSummary.textContent = 'General';
+    generalSettings.append(generalSettingsSummary, unitLabel, unit);
+    readingSettingsMenu.append(readingSettingsSummary, audioButton, visualButton, generalSettings);
+    primaryActions.append(mark, readingSettingsMenu, moreButton);
 
     const audioPanel = document.createElement('section');
     audioPanel.id = 'reading-document-audio';
@@ -757,52 +770,10 @@
       els.markStatus
     ].filter(Boolean);
     movable.forEach(node => morePanel.append(node));
-    // Allow removal from within the open document, not only from Library.
-    // Two explicit accessible actions avoid accidental deletion.
-    const deleteDocument = document.createElement('button');
-    deleteDocument.type = 'button';
-    deleteDocument.textContent = language() === 'en' ? 'Delete this document from My library' : 'Eliminar este documento de Mi biblioteca';
-    const deleteConfirmation = document.createElement('div');
-    deleteConfirmation.hidden = true;
-    const deleteQuestion = document.createElement('p');
-    deleteQuestion.textContent = language() === 'en'
-      ? 'Remove this document from the library? This cannot be undone.'
-      : '¿Eliminar este documento de la biblioteca? Esta acción no se puede deshacer.';
-    const deleteConfirm = document.createElement('button');
-    deleteConfirm.type = 'button';
-    deleteConfirm.textContent = language() === 'en' ? 'Confirm deletion' : 'Confirmar eliminación';
-    const deleteCancel = document.createElement('button');
-    deleteCancel.type = 'button';
-    deleteCancel.textContent = language() === 'en' ? 'Cancel' : 'Cancelar';
-    deleteDocument.addEventListener('click', () => {
-      if (!currentBookId) return;
-      deleteConfirmation.hidden = false;
-      deleteConfirm.focus();
-    });
-    deleteCancel.addEventListener('click', () => {
-      deleteConfirmation.hidden = true;
-      deleteDocument.focus();
-    });
-    deleteConfirm.addEventListener('click', async () => {
-      const id = currentBookId;
-      if (!id) return;
-      deleteConfirm.disabled = true;
-      await deleteSavedBook(id);
-      deleteConfirm.disabled = false;
-      if (!currentBookId) {
-        deleteConfirmation.hidden = true;
-        deleteDocument.hidden = true;
-        els.markStatus.textContent = t().deleted;
-        moreHeading.focus();
-      } else {
-        els.markStatus.textContent = t().deleteFailed;
-      }
-    });
-    deleteConfirmation.append(deleteQuestion, deleteConfirm, deleteCancel);
-    morePanel.append(deleteDocument, deleteConfirmation, closeMore);
+    morePanel.append(closeMore);
 
     section.append(
-      unitLabel, unit, previousUnit, nextUnit,
+      previousUnit, nextUnit,
       progressStatus,
       primaryActions,
       audioPanel, visualPanel, morePanel
@@ -924,11 +895,7 @@
     moreButton.id = 'reading-document-open-more';
     audioButton.addEventListener('click', () => showPanel(audioPanel, audioHeading, audioButton));
     visualButton.addEventListener('click', () => showPanel(visualPanel, visualHeading, visualButton));
-    moreButton.addEventListener('click', () => {
-      deleteDocument.hidden = !currentBookId;
-      deleteConfirmation.hidden = true;
-      showPanel(morePanel, moreHeading, moreButton);
-    });
+    moreButton.addEventListener('click', () => showPanel(morePanel, moreHeading, moreButton));
     closeAudio.addEventListener('click', () => closePanel(audioPanel, audioButton));
     closeVisual.addEventListener('click', () => closePanel(visualPanel, visualButton));
     closeMore.addEventListener('click', () => closePanel(morePanel, moreButton));
@@ -1010,6 +977,7 @@
       theme: els.readingTheme?.value || 'system',
       highContrast: Boolean(els.highContrast?.checked),
       screenReaderMode: els.screenReaderMode ? Boolean(els.screenReaderMode.checked) : readWebSettings().screenReaderMode !== false,
+      defaultNavigationMode: els.defaultNavigationMode?.value || 'block',
       autoPlay: els.autoPlay ? Boolean(els.autoPlay.checked) : readWebSettings().autoPlay === true
     };
     try { localStorage.setItem(WEB_READING_SETTINGS_KEY, JSON.stringify(value)); } catch {}
@@ -1043,6 +1011,7 @@
 
   function restoreWebSettings() {
     const value = readWebSettings();
+    if (els.defaultNavigationMode) els.defaultNavigationMode.value = ['block', 'paragraph', 'sentence'].includes(value.defaultNavigationMode) ? value.defaultNavigationMode : 'block';
     if (els.voiceLanguage && value.voiceLanguage !== undefined) els.voiceLanguage.value = primaryLanguage(value.voiceLanguage);
     if (els.externalVoiceLanguage && value.externalVoiceLanguage !== undefined) els.externalVoiceLanguage.value = primaryLanguage(value.externalVoiceLanguage);
     if (els.rate && value.rate) els.rate.value = String(value.rate);
@@ -1083,6 +1052,10 @@
     if (els.voiceLanguageLabel) els.voiceLanguageLabel.textContent = language() === 'en' ? 'Voice language' : 'Idioma de la voz';
     if (els.externalVoiceLanguageLabel) els.externalVoiceLanguageLabel.textContent = language() === 'en' ? 'Language for more voices' : 'Idioma para buscar más voces';
     if (els.documentVoiceLanguageLabel) els.documentVoiceLanguageLabel.textContent = language() === 'en' ? 'Voice language for this document' : 'Idioma de la voz para este documento';
+    const generalLabel = document.getElementById('reading-default-navigation-label');
+    if (generalLabel) generalLabel.textContent = language() === 'en' ? 'Default navigation for new documents' : 'Modo de avance predeterminado para nuevos documentos';
+    const generalSummary = document.getElementById('reading-general-settings-summary');
+    if (generalSummary) generalSummary.textContent = language() === 'en' ? 'General' : 'General';
     els.externalVoicesHeading.textContent = c.externalVoicesHeading;
     els.externalVoicesIntro.textContent = c.externalVoicesIntro;
     els.rateLabel.textContent = c.rate;
@@ -1106,6 +1079,9 @@
     els.translationStop.textContent = c.translationStop;
     els.translationOriginal.textContent = c.translationOriginal;
     els.translationTranslated.textContent = c.translationTranslated;
+    if (els.translationRead) els.translationRead.textContent = language() === 'en' ? 'Read the translated document' : 'Leer el documento traducido';
+    const settingsSummary = document.getElementById('reading-settings-summary');
+    if (settingsSummary) settingsSummary.textContent = language() === 'en' ? 'Reading settings' : 'Ajustes de lectura';
     if (!documentModel) els.title.textContent = c.document;
     populateVoices();
     renderExternalVoices();
@@ -1653,9 +1629,7 @@
     els.searchResults.replaceChildren();
     els.searchStatus.textContent = '';
     ensurePerDocumentControls();
-    if (els.navigationUnit) {
-      els.navigationUnit.dataset.iosBookKey = currentBookId || (currentFormat + ':' + els.title.textContent);
-    }
+    if (els.navigationUnit) els.navigationUnit.value = readWebSettings().defaultNavigationMode || 'block';
     navigationUnit = els.navigationUnit?.value || 'block';
     currentUnitIndex = 0;
     populatePerDocumentVoices();
@@ -2041,6 +2015,7 @@
     const available = Boolean(translationDocument?.blocks?.length);
     els.translationOriginal.hidden = !available;
     els.translationTranslated.hidden = !available;
+    if (els.translationRead) els.translationRead.hidden = !available;
     els.translationOriginal.setAttribute('aria-pressed', showingTranslation ? 'false' : 'true');
     els.translationTranslated.setAttribute('aria-pressed', showingTranslation ? 'true' : 'false');
   }
@@ -2172,6 +2147,12 @@
       if (state.completedUnits > 0) {
         translationDocument = state.document;
         renderTranslationViewButtons();
+        if (state.status === 'complete') {
+          els.translationStatus.textContent = language() === 'en'
+            ? 'Translation complete. Select “Read the translated document” to hear or explore the result.'
+            : 'Traducción completa. Pulsa «Leer la traducción en el documento» para escuchar o recorrer el resultado.';
+          queueMicrotask(() => els.translationRead?.focus?.());
+        }
       }
     } finally {
       translationRunning = false;
@@ -3080,6 +3061,7 @@
     els.rateValue.textContent = els.rate.value;
   });
   els.rate.addEventListener('change', () => { saveWebSettings(); void rebuildSpeech(); });
+  els.defaultNavigationMode?.addEventListener('change', saveWebSettings);
   for (const control of [els.audioSpeed, els.textSize, els.fontFamily, els.fontWeight, els.lineSpacing, els.paragraphSpacing, els.readingWidth, els.readingTheme, els.highContrast]) {
     control?.addEventListener('change', saveWebSettings);
   }
@@ -3092,6 +3074,14 @@
   });
   els.translationOriginal.addEventListener('click', () => { void switchTranslationView(false); });
   els.translationTranslated.addEventListener('click', () => { void switchTranslationView(true); });
+  els.translationRead?.addEventListener('click', () => {
+    void (async () => {
+      await switchTranslationView(true);
+      const morePanel = document.getElementById('reading-document-more-actions');
+      if (morePanel) morePanel.hidden = true;
+      queueMicrotask(() => els.block?.focus?.());
+    })();
+  });
   function resetTranslationSelection() {
     translationPrepared = false;
     translationJob = null;

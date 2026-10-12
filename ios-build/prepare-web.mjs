@@ -24,6 +24,38 @@ await rm(output,{recursive:true,force:true});
 await visit(root,output);
 await stat(join(output,'index.html'));
 
+// Build-time safety barrier: never ship the obsolete TifloLector screen.
+// The iOS pipeline packages the root web UI, not mobile/src. A stale release
+// branch previously brought back the old paste-based reader after corrections.
+const readerHtml = await readFile(join(output, 'index.html'), 'utf8');
+const readerStart = readerHtml.indexOf('  <section id="reading-section"');
+const readerEnd = readerHtml.indexOf('  <section id="news-view"', readerStart);
+if (readerStart < 0 || readerEnd <= readerStart) {
+  throw new Error('iOS: no se encuentra la pantalla de TifloLector para verificarla.');
+}
+const readerSection = readerHtml.slice(readerStart, readerEnd);
+const mandatoryReaderMarkup = [
+  'Abre un libro o documento para escucharlo',
+  'id="reading-settings-disclosure"',
+  'id="reading-default-navigation"',
+  'id="reading-reader"',
+  '<div hidden aria-hidden="true">'
+];
+const obsoleteReaderMarkup = [
+  'Abrir o pegar contenido',
+  'Los documentos guardados permanecen en este navegador.'
+];
+if (mandatoryReaderMarkup.some(marker => !readerSection.includes(marker)) ||
+    obsoleteReaderMarkup.some(marker => readerSection.includes(marker))) {
+  throw new Error('iOS: detectada una versión antigua de TifloLector. Se impide el envío a TestFlight.');
+}
+const readerScript = await readFile(join(output, 'web-reading.js'), 'utf8');
+if (!readerScript.includes("intro: 'Abre un libro o documento para escucharlo") ||
+    readerScript.includes("intro: 'Importa un archivo o pega un texto")) {
+  throw new Error('iOS: el guion de TifloLector no corresponde a la interfaz vigente.');
+}
+console.log('TifloLector: interfaz actual validada; versión antigua bloqueada.');
+
 // Only the packaged iOS copy receives episode enclosures: no change to the
 // published website, Android resources, or repository source catalogue.
 const mediaPath = join(output, 'actualidad-media.json');

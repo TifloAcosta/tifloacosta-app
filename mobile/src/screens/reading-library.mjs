@@ -582,6 +582,14 @@ export function renderReadingLibrary({
         if (result?.configured !== true) title.dataset.nativeActions = 'unavailable';
       }).catch(() => { title.dataset.nativeActions = 'unavailable'; });
     });
+    title.addEventListener('blur', () => {
+      if (focusedDocumentId !== String(item.id)) return;
+      focusedDocumentId = '';
+      ++documentActionGeneration;
+      void NativeDocumentAccessibility.clearDocumentActions({
+        documentId: String(item.id)
+      }).catch(() => {});
+    });
 
     const details = document.createElement('section');
     details.className = 'reading-library-item-details';

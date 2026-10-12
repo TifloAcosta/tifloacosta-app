@@ -17,6 +17,7 @@ export function createReadingSpeechController(options = {}) {
     moveTo: (...args) => core.moveTo(...args),
     setVoice: (...args) => core.setVoice(...args),
     setRate: (...args) => core.setRate(...args),
+    setPronunciationRules: (...args) => core.setPronunciationRules(...args),
     snapshot: (...args) => core.snapshot(...args),
     syncNativeState: (...args) => core.syncNativeState(...args),
     getDocument() {

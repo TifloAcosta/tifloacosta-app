@@ -1,0 +1,21 @@
+{
+  "name": "@tifloacosta/ios-native",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Puentes nativos de voces y traducción iOS para TifloLector",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "Package.swift",
+    "ios/Sources",
+    "TifloReadingIos.podspec"
+  ],
+  "peerDependencies": {
+    "@capacitor/core": ">=8.0.0"
+  },
+  "capacitor": {
+    "ios": {
+      "src": "ios"
+    }
+  }
+}

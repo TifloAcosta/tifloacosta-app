@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-12T09:47:40.612Z",
+  "generatedAt": "2026-10-12T19:49:11.192Z",
   "resources": [
     {
       "kind": "resource",
@@ -6085,23 +6085,6 @@
       "sourceName": "Freedom Scientific",
       "originalUrl": "https://training.vispero.com/beyond-the-basics-navigate-review-and-present-more-effectively-in-powerpoint-using-jaws/",
       "publishedAt": "2026-10-03T00:03:00.000Z",
-      "categories": [
-        "windows",
-        "tecnologia-accesibilidad",
-        "jaws"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "freedom-scientific-blog-6fd732650b57c4b4:en",
-      "sourceId": "freedom-scientific-blog-6fd732650b57c4b4",
-      "lang": "en",
-      "title": "Download the September Update of JAWS, ZoomText, and Fusion 2026",
-      "summary": "The September update of JAWS, ZoomText, and Fusion 2026 is now available, offering new functionality and enhancements that increase efficiency and productivity. Here’s a look at several enhancements. Improved JAWS Support for Facebook and Reddit This release includes enhancements that significantly improve navigation on the Facebook and Reddit social media platforms. These include: These enhancements …",
-      "body": "The September update of JAWS, ZoomText, and Fusion 2026 is now available, offering new functionality and enhancements that increase efficiency and productivity. Here’s a look at several enhancements.\n\nThis release includes enhancements that significantly improve navigation on the Facebook and Reddit social media platforms. These include:\n\nThese enhancements improve the user experience by making content easier to locate and improving overall navigation consistency.\n\nThis release includes several notable enhancements to our Cloud Settings feature, which allows users who are logged into a Vispero account to migrate settings across multiple devices. These include:\n\nThis feature is part of the Early Adopter Program, which provides access to new functionality that is still under active development. It is intended for users who want to try out upcoming features and provide feedback before they are fully released.\n\nTo enable this option:\n\nAfter JAWS restarts, choose Enable Sync when prompted to begin syncing your settings.\n\nFusion now starts more reliably, so it is ready to use when you need it. This update resolves an issue where Fusion could stop responding during startup. It occurred most often the first time Fusion was started after installing and restarting your computer.\n\nWhen a line of text under the mouse pointer or cursor exceeds the width of the Live Text View window, scroll arrows appear at the start or end of the displayed text. Previously, CAPS LOCK+RIGHT ARROW and CAPS LOCK+LEFT ARROW moved through the line one character at a time. You can now press and hold either hotkey to scroll continuously, making it faster to read through long lines of text.\n\nIn many enterprise environments, applications are hosted centrally on a server rather than installed directly on each user’s computer. These remotely hosted applications, often called Published Applications, can appear to the user as though they are running locally.\n\nTo provide speech, visual tracking, and magnification when users interact with Published Applications, ZoomText needs access to information from both the server and the local computer. In these environments, ZoomText is installed on both systems so the server and local components can work together. In this release:\n\nTo download and install the September update of JAWS, ZoomText, or Fusion 2026, follow these steps on a computer connected to the internet:\n\nNote: If you are running the latest version of JAWS, ZoomText, or Fusion 2026 and automatic updates are enabled, you can start the download and installation process from the notification.\n\nOur User Education and Outreach team offers outstanding resources for learning your Freedom Scientific software in our Training Center , which includes videos, FAQs, and instructions for getting started. Keep up with this blog and check out the Freedom Scientific Training schedule page for news of upcoming live training webinars and other events. For questions, email us at training@vispero.com .",
-      "sourceName": "Freedom Scientific",
-      "originalUrl": "https://training.vispero.com/download-the-september-update-of-jaws-zoomtext-and-fusion-2026/",
-      "publishedAt": "2026-10-02T19:44:09.000Z",
       "categories": [
         "windows",
         "tecnologia-accesibilidad",

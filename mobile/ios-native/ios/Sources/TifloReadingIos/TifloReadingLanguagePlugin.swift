@@ -109,19 +109,25 @@ public final class TifloReadingLanguagePlugin: CAPPlugin, CAPBridgedPlugin {
                 ])
                 return
             }
-            let session = TranslationSession(installedSource: source, target: target)
-            do {
-                var results: [String] = []
-                results.reserveCapacity(texts.count)
-                // Batches are small and bounded; preserve source order for the reader.
-                for value in texts {
-                    let translated = try await session.translate(value)
-                    results.append(translated.targetText)
+            // All supported iOS versions use a TranslationSession supplied by SwiftUI.
+            // The initializer documented for future SDKs is not available in Xcode 26.3.
+            guard let presenter = self.bridge?.viewController else {
+                    call.resolve(["translations": [], "status": "error"])
+                    return
                 }
-                call.resolve(["translations": results, "status": "ok"])
-            } catch {
-                call.resolve(["translations": [], "status": "error"])
-            }
+                var controller: UIViewController?
+                let view = TifloTranslationBatchView(source: source, target: target, texts: texts) { result in
+                    controller?.dismiss(animated: true)
+                    call.resolve([
+                        "translations": result ?? [],
+                        "status": result == nil ? "error" : "ok"
+                    ])
+                }
+                let host = UIHostingController(rootView: view)
+                host.modalPresentationStyle = .formSheet
+                host.isModalInPresentation = true
+                controller = host
+                presenter.present(host, animated: true)
         }
     }
 }
@@ -164,6 +170,40 @@ private struct TifloLanguagePreparationView: View {
                 } catch {
                     finish(false)
                 }
+            }
+        }
+    }
+}
+
+@available(iOS 18.0, *)
+private struct TifloTranslationBatchView: View {
+    let source: Locale.Language
+    let target: Locale.Language
+    let texts: [String]
+    let completion: ([String]?) -> Void
+    @State private var finished = false
+
+    private func finish(_ value: [String]?) {
+        guard !finished else { return }
+        finished = true
+        completion(value)
+    }
+
+    var body: some View {
+        VStack(spacing: 16) {
+            Text("Traduciendo documento").font(.headline).accessibilityAddTraits(.isHeader)
+            ProgressView().accessibilityLabel("Traducción en curso")
+        }
+        .padding()
+        .translationTask(source: source, target: target) { session in
+            do {
+                var result: [String] = []
+                for value in texts {
+                    result.append(try await session.translate(value).targetText)
+                }
+                finish(result)
+            } catch {
+                finish(nil)
             }
         }
     }

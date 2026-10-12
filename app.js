@@ -372,7 +372,8 @@
 
   function renderNews(){ const c=copy[lang],items=(shared?.newestResources ? shared.newestResources(data,{lang,limit:3}) : resourcesForLanguage().filter(item=>item.new).slice(0,3)).sort(core.compareNewsItems); els.newsList.innerHTML=''; items.forEach(item=>els.newsList.append(makeNewsItem(item))); els.newsCount.textContent=c.newsCount(items.length); }
   function setCategoryMenuExpanded(expanded){ const open=Boolean(expanded); els.categoryToggle.setAttribute('aria-expanded',String(open)); els.categoryMenu.hidden=!open; }
-  function setActiveCategory(cat=''){ return String(cat||''); }
+  let activeCategoryKey='';
+  function setActiveCategory(cat=''){activeCategoryKey=String(cat||'');return activeCategoryKey;}
   function renderCategories(){ const c=copy[lang]; els.categoryToggle.textContent=c.categoryToggle; setCategoryMenuExpanded(false); if(els.categoryButtons){ els.categoryButtons.innerHTML=''; els.categoryButtons.setAttribute('aria-label',c.categoryButtonsLabel); } categories().forEach(cat=>{ if(els.categoryButtons){ const button=document.createElement('button'); button.type='button'; button.dataset.resourceCategory=cat; button.textContent=cat; button.addEventListener('click',()=>{ setActiveCategory(cat); setCategoryMenuExpanded(false); showCategory(cat); queueMicrotask(()=>els.resultStatus.focus()); }); els.categoryButtons.append(button); }}); }
   function showResults(items,message,emptyMessage){ els.results.innerHTML='';els.results.hidden=false;els.resultStatus.textContent=message;if(!items.length){const p=document.createElement('p');p.className='no-results';p.textContent=emptyMessage;els.results.append(p);return;}items.forEach(item=>els.results.append(makeCard(item))); }
   function clearResourceResults(){els.results.innerHTML='';els.results.hidden=true;els.resultStatus.textContent='';setActiveCategory('');}
@@ -405,6 +406,42 @@
       ? years.length+' year'+(years.length===1?'':'s')+' available.'
       : years.length+' año'+(years.length===1?'':'s')+' disponible'+(years.length===1?'':'s')+'.';
   }
+  async function showAccessibleAppsCatalog(category){
+    const section=document.createElement('section');
+    const heading=document.createElement('h3');
+    heading.textContent=lang==='en'?'Accessible apps catalog':'Catálogo de apps accesibles';
+    const status=document.createElement('p');
+    status.setAttribute('role','status');
+    status.setAttribute('aria-live','polite');
+    status.textContent=lang==='en'?'Updating app catalog…':'Actualizando catálogo de aplicaciones…';
+    section.append(heading,status);
+    els.results.append(section);
+    const language=lang;
+    try{
+      const native=window.Capacitor?.Plugins?.TifloYouTube;
+      const response=native?.publicFile
+        ? await native.publicFile({file:'actualidad-apps.json'}).then(r=>new Response(r.text,{status:r.status||200}))
+        : await fetch('https://tifloacosta.com/actualidad-apps.json',{cache:'no-store'});
+      if(!response.ok)throw Error('HTTP '+response.status);
+      const catalog=await response.json();
+      if(activeCategoryKey!==category||lang!==language||!section.isConnected)return;
+      const apps=(Array.isArray(catalog)?catalog:[]).filter(a=>a&&a.title&&(!a.lang||a.lang===lang));
+      status.textContent=lang==='en'?apps.length+' accessible apps available.':apps.length+' aplicaciones accesibles disponibles.';
+      const list=document.createElement('div');list.className='resource-list';
+      for(const app of apps){
+        const article=document.createElement('article');article.className='resource-card';
+        const title=document.createElement('h4');title.textContent=app.title;article.append(title);
+        if(app.platform){const p=document.createElement('p');p.textContent=app.platform;article.append(p);}
+        if(app.summary){const p=document.createElement('p');p.textContent=app.summary;article.append(p);}
+        if(/^https:\/\//i.test(String(app.originalUrl||''))){
+          const a=document.createElement('a');a.href=app.originalUrl;a.target='_blank';a.rel='noopener noreferrer';a.className='button-link';a.textContent=lang==='en'?'Open app at source':'Abrir ficha de la aplicación';article.append(a);
+        }
+        list.append(article);
+      }section.append(list);
+    }catch{
+      if(section.isConnected&&activeCategoryKey===category)status.textContent=lang==='en'?'The app catalog could not be updated.':'No se pudo actualizar el catálogo.';
+    }
+  }
   function showCategory(cat){
     const c=copy[lang];
     if(!cat){clearResourceResults();return;}
@@ -414,6 +451,7 @@
       : resourcesForLanguage().filter(item=>item.category===cat);
     if((lang==='es'&&cat==='Píldoras')||(lang==='en'&&cat==='Pills')){showPillsYears(items);return;}
     showResults(items,c.categoryFound(cat,items.length),c.noResults);
+    if(/^apps?$/i.test(cat))void showAccessibleAppsCatalog(cat);
   }
 
   function option(select,value,label){const o=document.createElement('option');o.value=value;o.textContent=label;select.append(o);}

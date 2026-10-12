@@ -263,7 +263,10 @@ if (!iosApp.includes(originalResourceFetch)) throw new Error('Falta lectura de N
 iosApp = iosApp.replace(originalResourceFetch, "await " + networkFirst('data.js'));
 const iosStartPoint = 'applyPrefs();applyLanguage();loadActualidadHome();trackLanguageUse();announceCompletedUpdate();';
 if (!iosApp.includes(iosStartPoint)) throw new Error('No se encuentra inicialización de Novedades');
-iosApp = iosApp.replace(iosStartPoint, iosStartPoint + 'void refreshIosResourceCatalog();');
+iosApp = iosApp.replace(iosStartPoint, iosStartPoint +
+  'void refreshIosResourceCatalog();\n' +
+  'window.addEventListener("hashchange",()=>{if(location.hash==="#news")void refreshIosResourceCatalog();});\n' +
+  'document.addEventListener("visibilitychange",()=>{if(!document.hidden){void refreshIosResourceCatalog();loadActualidadHome();}});');
 
 await writeFile(iosAppPath, iosApp);
 

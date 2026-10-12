@@ -202,6 +202,7 @@
     if (page === 'home') {
       const routes = {
         resources: 'resources-view',
+        reading: 'reading-section',
         news: 'news-view',
         book: 'book-section',
         contact: 'contact-section',
@@ -375,7 +376,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     const hero = document.getElementById('home-hero');
     const homeBlocks = document.getElementById('home-blocks');
     const home = state.view === 'home';
-    const viewIds = ['resources-view', 'news-view', 'book-section', 'contact-section', 'privacy-section', 'config-section'];
+    const viewIds = ['resources-view', 'reading-section', 'news-view', 'book-section', 'contact-section', 'privacy-section', 'config-section'];
 
     setPageChromeVisible(state.chromeVisible);
     setHidden(hero, !home);

@@ -451,8 +451,11 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       render();
     }
 
+    let lastNewsLoadAt=0;
+    let lastAppsLoadAt=0;
+    const refreshInterval=60000;
     function loadNews() {
-      if (newsLoaded || newsLoading) return;
+      if(newsLoading||(newsLoaded&&Date.now()-lastNewsLoadAt<refreshInterval))return;
       newsLoading = true;
       newsLoadFailed = false;
       fetch('actualidad.json', { cache: 'no-cache' })
@@ -463,6 +466,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         .then(data => {
           stories = Array.isArray(data) ? data : [];
           newsLoaded = true;
+          lastNewsLoadAt=Date.now();
           newsLoading = false;
           rebuildCategories();
           renderList();
@@ -478,7 +482,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     }
 
     function loadApps() {
-      if (appsLoaded || appsLoading) return;
+      if(appsLoading||(appsLoaded&&Date.now()-lastAppsLoadAt<refreshInterval))return;
       appsLoading = true;
       appsLoadFailed = false;
       fetch('actualidad-apps.json', { cache: 'no-cache' })
@@ -490,6 +494,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
           apps = Array.isArray(data) ? data : [];
           appsLoadFailed = false;
           appsLoaded = true;
+          lastAppsLoadAt=Date.now();
           appsLoading = false;
           rebuildPlatforms();
           renderApps();

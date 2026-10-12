@@ -176,10 +176,10 @@ jobs:
           app = project.targets.find { |target| target.name == 'App' }
           abort 'No se encontró el target App' unless app
           app.build_configurations.each do |config|
-            config.build_settings['CURRENT_PROJECT_VERSION'] = (100000 + ENV.fetch('BUILD_NUMBER').to_i).to_s
+            config.build_settings['CURRENT_PROJECT_VERSION'] = (200000 + ENV.fetch('BUILD_NUMBER').to_i).to_s
           end
           project.save
-          puts "Número de compilación TestFlight: #{100000 + ENV.fetch('BUILD_NUMBER').to_i}"
+          puts "Número de compilación TestFlight: #{200000 + ENV.fetch('BUILD_NUMBER').to_i}"
           RUBY
       - name: Configurar firma de distribución solo para App
         working-directory: ios-build

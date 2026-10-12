@@ -244,11 +244,25 @@
     });
   }
 
+  function maintainSingleBackAction() {
+    const brand=document.querySelector('.site-header .brand');
+    function update() {
+      const isHome=isIndex&&(!location.hash||location.hash==='#home');
+      if(brand){brand.hidden=!isHome;brand.setAttribute('aria-hidden',String(!isHome));}
+    }
+    document.querySelectorAll('main > section').forEach(section=>{
+      const backs=[...section.querySelectorAll('[data-home-back]')];
+      for(const item of backs.slice(1))item.closest('p')?.remove();
+    });
+    update();
+    window.addEventListener('hashchange',update);
+  }
   function init() {
+    maintainSingleBackAction();
     if (isIndex) {
       preserveBackNavigationFocus();
       alignHomeSections();
-      addResourcesDirectory();
+      // Accessible apps now live under the Apps resource category.
       configureNativeSettings();
       replaceUnavailableClipboardAction();
       window.addEventListener('hashchange', () => {

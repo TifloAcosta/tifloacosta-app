@@ -48,6 +48,7 @@
   <section class="hero" id="home-hero">
     <h1 id="app-heading">TifloAcosta App</h1>
     <p id="intro">Recursos de accesibilidad y tecnología, organizados para llegar a ellos sin perderse por el camino.</p>
+    <p><a class="button-link" id="home-open-guide" href="#guide">Guía de uso de TifloAcosta</a></p>
   </section>
 
   <section id="global-search-shell">
@@ -75,6 +76,13 @@
       <a class="button-link" id="home-open-privacy" href="#privacy">Privacidad y accesibilidad</a>
       <a class="button-link" id="home-open-config" href="#config">Configuración</a>
     </nav>
+  </section>
+
+  <section id="guide-view" hidden tabindex="-1" aria-labelledby="guide-view-heading">
+    <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
+    <h2 id="guide-view-heading">Guía de uso de TifloAcosta</h2>
+    <p id="guide-introduction"></p>
+    <div id="guide-chapters" aria-label="Capítulos de la guía"></div>
   </section>
 
   <section id="actualidad-home-section" hidden>
@@ -586,6 +594,7 @@
   'use strict';
 
   const views = {
+    guide: document.getElementById('guide-view'),
     resources: document.getElementById('resources-view'),
     reading: document.getElementById('reading-section'),
     news: document.getElementById('news-view'),
@@ -606,14 +615,15 @@
   }
 
   const labels = {
-    es: { sections:'Secciones', actualidad:'Actualidad', resources:'Recursos', reading:'TifloLector', news:'Novedades', videos:'Vídeos', podcast:'Podcast', book:'Mi libro', contact:'Contacto y redes', privacy:'Privacidad y accesibilidad', privacyPolicy:'Política de privacidad', fullPrivacy:'Leer la política de privacidad completa', config:'Configuración', back:'Volver al inicio' },
-    en: { sections:'Sections', actualidad:'News', resources:'Resources', reading:'TifloReader', news:'What’s new', videos:'Videos', podcast:'Podcast', book:'My book', contact:'Contact and social', privacy:'Privacy and accessibility', privacyPolicy:'Privacy policy', fullPrivacy:'Read the full privacy policy', config:'Settings', back:'Back to home' }
+    es: { guide:'Guía de uso de TifloAcosta', sections:'Secciones', actualidad:'Actualidad', resources:'Recursos', reading:'TifloLector', news:'Novedades', videos:'Vídeos', podcast:'Podcast', book:'Mi libro', contact:'Contacto y redes', privacy:'Privacidad y accesibilidad', privacyPolicy:'Política de privacidad', fullPrivacy:'Leer la política de privacidad completa', config:'Configuración', back:'Volver al inicio' },
+    en: { guide:'TifloAcosta user guide', sections:'Sections', actualidad:'News', resources:'Resources', reading:'TifloReader', news:'What’s new', videos:'Videos', podcast:'Podcast', book:'My book', contact:'Contact and social', privacy:'Privacy and accessibility', privacyPolicy:'Privacy policy', fullPrivacy:'Read the full privacy policy', config:'Settings', back:'Back to home' }
   };
 
   function localizeHomeNavigation() {
     const language = document.documentElement.lang === 'en' ? 'en' : 'es';
     const text = labels[language];
     document.getElementById('home-blocks-heading').textContent = text.sections;
+    document.getElementById('home-open-guide').textContent = text.guide;
     document.getElementById('home-open-actualidad').textContent = text.actualidad;
     document.getElementById('home-open-resources').textContent = text.resources;
     document.getElementById('home-open-reading').textContent = text.reading;

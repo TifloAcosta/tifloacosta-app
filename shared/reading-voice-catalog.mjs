@@ -28,10 +28,10 @@ const PLATFORM_COPY = Object.freeze({
       nativeInstaller: ''
     },
     ios: {
-      intro: 'TifloLector para iOS utilizará las voces disponibles en el sistema y los servicios de voz que se incorporen de forma compatible con iPhone y iPad.',
-      systemHeading: 'Voces compatibles con iOS',
-      systemDescription: 'La disponibilidad dependerá de las voces instaladas y de las capacidades que ofrezca iOS.',
-      nativeInstaller: 'Abrir la gestión de voces de iOS'
+      intro: 'Las voces del dispositivo que iOS ofrece para síntesis se muestran en el selector de voz. No son las cuatro voces limitadas del navegador.',
+      systemHeading: 'Voces del iPhone y del iPad',
+      systemDescription: 'Para descargar otras voces, abre Ajustes de iOS, Accesibilidad, Contenido leído, Voces. Después, regresa a TifloLector para actualizar la lista. Algunas voces de VoiceOver pueden no estar disponibles para otras aplicaciones.',
+      nativeInstaller: ''
     },
     visit: name => `Visitar ${name}`,
     leaveNotice: name => `Vas a abandonar TifloAcosta para visitar ${name}. La prueba, compra, instalación, cuenta y cualquier pago se gestionan directamente con el proveedor. Cuando termines, vuelve a TifloLector para actualizar las voces disponibles.`,
@@ -62,10 +62,10 @@ const PLATFORM_COPY = Object.freeze({
       nativeInstaller: ''
     },
     ios: {
-      intro: 'TifloReader for iOS will use voices available to the system and voice services added in a way that is compatible with iPhone and iPad.',
-      systemHeading: 'Voices compatible with iOS',
-      systemDescription: 'Availability will depend on installed voices and the capabilities exposed by iOS.',
-      nativeInstaller: 'Open iOS voice management'
+      intro: 'The voice picker lists speech-synthesis voices made available by iOS itself, rather than the smaller browser voice list.',
+      systemHeading: 'iPhone and iPad system voices',
+      systemDescription: 'To download more voices, open iOS Settings, Accessibility, Spoken Content, Voices. Return to TifloReader to refresh the list. Some VoiceOver voices may not be exposed to other apps.',
+      nativeInstaller: ''
     },
     visit: name => `Visit ${name}`,
     leaveNotice: name => `You are leaving TifloAcosta to visit ${name}. Trials, purchases, installation, accounts and any payments are handled directly by the provider. When you finish, return to TifloReader to refresh the available voices.`,

@@ -1038,7 +1038,7 @@
     els.intro.textContent = c.intro;
     if (els.formatsToggle) els.formatsToggle.textContent = language() === 'en' ? 'Show supported file types' : 'Consultar formatos admitidos';
     if (els.formatsList) els.formatsList.textContent = language() === 'en'
-      ? 'TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 and PNG, JPG or WebP images using OCR.'
+      ? 'TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2, MP3 audio and PNG, JPG or WebP images using OCR.'
       : 'TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2, audio MP3 e imágenes PNG, JPG y WebP mediante OCR.';
     els.fileLabel.textContent = c.file;
     els.pasteLabel.textContent = c.paste;
@@ -1271,7 +1271,12 @@
     speed.addEventListener('change', () => {
       if (activeAudio) activeAudio.playbackRate = Number(speed.value) || 1;
     });
-    audioTools.append(label, seek, speedLabel, speed);
+    const progress = document.createElement('p');
+    progress.id = 'reading-audio-total-progress';
+    progress.className = 'muted';
+    // Progress is available on demand; do not interrupt VoiceOver each second.
+    progress.setAttribute('aria-live', 'off');
+    audioTools.append(label, seek, speedLabel, speed, progress);
     els.block.after(audioTools);
     return audioTools;
   }
@@ -1309,6 +1314,7 @@
     const tools = ensureAudioTools();
     tools.hidden = false;
     const seek = tools.querySelector('#reading-audio-seek');
+    const progress = tools.querySelector('#reading-audio-total-progress');
     function updateAudioPosition() {
       if (activeAudio !== audio) return;
       const duration = Number.isFinite(audio.duration) ? audio.duration : 0;
@@ -1319,13 +1325,13 @@
       }
       els.position.textContent = (language() === 'en' ? 'Audio: ' : 'Audio: ')
         + formatAudioTime(audio.currentTime) + ' / ' + (duration ? formatAudioTime(duration) : '--:--');
-      if (els.documentProgressStatus) {
-        els.documentProgressStatus.textContent = duration
-          ? (language() === 'en'
-              ? `Entire audiobook: ${Math.round(audio.currentTime / duration * 100)}%.`
-              : `Audiolibro completo: ${Math.round(audio.currentTime / duration * 100)} %.`)
-          : (language() === 'en' ? 'Total duration unavailable.' : 'Duración total no disponible.');
-      }
+      const progressText = duration
+        ? (language() === 'en'
+            ? `Entire audiobook: ${Math.round(audio.currentTime / duration * 100)}%.`
+            : `Audiolibro completo: ${Math.round(audio.currentTime / duration * 100)} %.`)
+        : (language() === 'en' ? 'Total duration unavailable.' : 'Duración total no disponible.');
+      if (progress) progress.textContent = progressText;
+      if (els.documentProgressStatus) els.documentProgressStatus.textContent = progressText;
     }
     audio.addEventListener('loadedmetadata', updateAudioPosition);
     audio.addEventListener('durationchange', updateAudioPosition);

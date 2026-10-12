@@ -107,6 +107,7 @@ export function renderReadingLibrary({
   let currentImportBatch = initialImportBatch;
   let queueController = null;
   let focusedDocumentId = '';
+  let documentActionGeneration = 0;
   const nativeActionsByDocument = new Map();
   // Native UIKit actions are advisory: normal HTML buttons remain fully functional.
   void NativeDocumentAccessibility.addListener('documentAction', ({ documentId, action }) => {
@@ -566,6 +567,7 @@ export function renderReadingLibrary({
     article.append(title);
     title.addEventListener('focus', () => {
       focusedDocumentId = String(item.id);
+      const generation = ++documentActionGeneration;
       void NativeDocumentAccessibility.setDocumentActions({
         documentId: focusedDocumentId,
         actions: [
@@ -574,7 +576,10 @@ export function renderReadingLibrary({
           { id: 'rename', label: fallback(t, 'readingLibrary.rename', 'Cambiar título', 'Rename') },
           { id: 'delete', label: fallback(t, 'readingLibrary.delete', 'Eliminar', 'Delete') }
         ]
-      }).catch(() => {});
+      }).then(result => {
+        if (generation !== documentActionGeneration || focusedDocumentId !== String(item.id)) return;
+        if (result?.configured !== true) title.dataset.nativeActions = 'unavailable';
+      }).catch(() => { title.dataset.nativeActions = 'unavailable'; });
     });
 
     const details = document.createElement('section');
@@ -1015,6 +1020,7 @@ export function renderReadingLibrary({
     if (generation !== listGeneration) return;
 
     nativeActionsByDocument.clear();
+    ++documentActionGeneration;
     focusedDocumentId = '';
     void NativeDocumentAccessibility.clearDocumentActions().catch(() => {});
     list.replaceChildren();

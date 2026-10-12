@@ -14,6 +14,7 @@ on:
   push:
     branches:
       - fix/ios-auditoria-153-compartir
+      - work/ios-tiflolector-native-20261012
     paths:
       - 'ios-build/**'
       - '.github/workflows/ios-preflight.yml'

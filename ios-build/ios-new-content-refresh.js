@@ -15,7 +15,7 @@
     window.dispatchEvent(new Event('tiflo-refresh-novedades-request'));
   });
   window.addEventListener('tiflo-refresh-novedades-result', event => {
-    const { ok, newestDate } = event.detail || {};
+    const { ok, newestDate, source } = event.detail || {};
     if (!ok) {
       status.textContent = english()
         ? 'Could not check for new publications. The saved catalog is still available.'
@@ -26,8 +26,13 @@
     if (Number.isFinite(Date.parse(newestDate || ''))) {
       last = new Intl.DateTimeFormat(english() ? 'en' : 'es', { dateStyle: 'long' }).format(new Date(newestDate));
     }
+    const fallback = source === 'mobile-feed';
     status.textContent = english()
-      ? (last ? 'Catalog checked. Latest publication: ' + last + '.': 'Catalog checked. No new publications were found.')
-      : (last ? 'Catálogo comprobado. Última publicación: ' + last + '.': 'Catálogo comprobado. No hay nuevas publicaciones.');
+      ? (last
+        ? (fallback ? 'Publications loaded. Latest publication: ' : 'Catalog checked. Latest publication: ') + last + '.'
+        : (fallback ? 'Saved publications loaded.' : 'Catalog checked. No new publications were found.'))
+      : (last
+        ? (fallback ? 'Novedades cargadas. Última publicación: ' : 'Catálogo comprobado. Última publicación: ') + last + '.'
+        : (fallback ? 'Se han cargado las novedades guardadas.' : 'Catálogo comprobado. No hay nuevas publicaciones.'));
   });
 })();

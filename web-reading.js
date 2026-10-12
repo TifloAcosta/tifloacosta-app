@@ -1597,6 +1597,38 @@
     if (lower.endsWith('.odt') || type === 'application/vnd.oasis.opendocument.text') {
       return { source:await file.arrayBuffer().then(buffer => Array.from(new Uint8Array(buffer)).join(',')), format:'odt', model:await structuredFromArchive(file,'odt') };
     }
+    // Generic ZIP containers are not automatically books. Import exactly one
+    // supported book/document inside; never silently select among many items.
+    if (lower.endsWith('.zip') || type === 'application/zip' || type === 'application/x-zip-compressed') {
+      let zip;
+      try {
+        const JSZip = await loadZipBundle();
+        zip = await JSZip.loadAsync(await file.arrayBuffer());
+      } catch {
+        throw Object.assign(new Error('invalid-zip'), { code: 'invalid-zip' });
+      }
+      const extensions = /\.(?:txt|html?|pdf|docx|pptx|xlsx|epub|odt|rtf|md|markdown|fb2)$/i;
+      const entries = Object.values(zip.files).filter(entry =>
+        !entry.dir && !entry.name.startsWith('__MACOSX/') &&
+        !entry.name.split('/').some(part => part.startsWith('.')) &&
+        extensions.test(entry.name)
+      );
+      if (!entries.length) throw Object.assign(new Error('zip-empty'), { code: 'zip-empty' });
+      if (entries.length !== 1) throw Object.assign(new Error('zip-multiple'), { code: 'zip-multiple', count: entries.length });
+      const entry = entries[0];
+      if (Number(entry._data?.uncompressedSize) > 30 * 1024 * 1024) {
+        throw Object.assign(new Error('zip-too-large'), { code: 'zip-too-large' });
+      }
+      const content = await entry.async('blob');
+      if (content.size > 30 * 1024 * 1024) throw Object.assign(new Error('zip-too-large'), { code: 'zip-too-large' });
+      const extractedName = entry.name.split('/').pop();
+      const nested = new File([content], extractedName);
+      const prepared = await documentFromFile(nested);
+      return { ...prepared, importName: extractedName };
+    }
+    if (type.startsWith('audio/') || /\.(?:mp3|m4a|m4b|aac|ogg|opus|flac|wav)$/i.test(lower)) {
+      throw Object.assign(new Error('audio-unsupported'), { code: 'audio-unsupported' });
+    }
     const source = await file.text();
     if (lower.endsWith('.rtf') || type === 'application/rtf' || type === 'text/rtf') {
       return { source, format:'rtf', model:shared.parseStructuredDocument(shared.parseRtfDocument(source,{title:name,language:language()})) };
@@ -1631,7 +1663,7 @@
 
     try {
       const prepared = await documentFromFile(file);
-      await useDocument(prepared.model, file.name, {
+      await useDocument(prepared.model, prepared.importName || file.name, {
         source: prepared.source,
         format: prepared.format,
         autoSaveImported: true
@@ -1640,6 +1672,21 @@
     } catch (error) {
       els.ocr.hidden = true;
       if (error?.code === 'unsupported') els.status.textContent = t().unsupported;
+      else if (error?.code === 'audio-unsupported') els.status.textContent = language() === 'en'
+        ? 'Audio import is not available in this iOS reader yet. No audiobook has been added to the library.'
+        : 'La importación de audio todavía no está disponible en este lector para iOS. No se ha añadido ningún audiolibro a la biblioteca.';
+      else if (error?.code === 'zip-empty') els.status.textContent = language() === 'en'
+        ? 'The ZIP contains no supported document. Extract a book or document from the archive and import it.'
+        : 'El ZIP no contiene documentos compatibles. Extrae el libro o documento y vuelve a importarlo.';
+      else if (error?.code === 'zip-multiple') els.status.textContent = language() === 'en'
+        ? 'The ZIP contains several documents. Extract the one you want to read and import it.'
+        : 'El ZIP contiene varios documentos. Extrae el que quieras leer y vuelve a importarlo.';
+      else if (error?.code === 'invalid-zip') els.status.textContent = language() === 'en'
+        ? 'The ZIP cannot be opened or is damaged.'
+        : 'El ZIP no se ha podido abrir o está dañado.';
+      else if (error?.code === 'zip-too-large') els.status.textContent = language() === 'en'
+        ? 'The ZIP document is too large to import safely (30 MB limit).'
+        : 'El documento del ZIP supera el límite de seguridad de 30 MB.';
       else if (error?.code === 'legacy-doc') els.status.textContent = t().legacyDoc;
       else if (error?.code === 'image-needs-ocr') {
         els.status.textContent = `${t().imageNeedsOcr} ${t().ocrPrivacy}`;
@@ -2506,6 +2553,7 @@
         visualButton.textContent = language() === 'en' ? 'Visual presentation' : 'Presentación visual';
         const moreButton = document.createElement('button');
         moreButton.type = 'button';
+        moreButton.className = 'reading-library-more-actions';
         moreButton.textContent = language() === 'en' ? 'More actions' : 'Más acciones';
         groups.append(audioButton, visualButton, moreButton);
 
@@ -2587,6 +2635,7 @@
         visualPanel.append(visualHeading, sizeLabel, size, themeLabel, theme, contrast, contrastLabel, visualStatus, closeVisual);
 
         const morePanel = document.createElement('section');
+        morePanel.className = 'reading-library-more-panel';
         morePanel.hidden = true;
         const moreHeading = document.createElement('h5');
         moreHeading.tabIndex = -1;
@@ -2630,6 +2679,7 @@
         exportButton.addEventListener('click', () => { void exportSavedBook(book.id, exportSelect.value); });
         const remove = document.createElement('button');
         remove.type = 'button';
+        remove.className = 'reading-library-delete';
         remove.textContent = t().deleteSaved;
         const confirmation = document.createElement('div');
         confirmation.hidden = true;

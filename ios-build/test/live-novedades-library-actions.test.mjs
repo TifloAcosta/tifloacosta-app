@@ -26,6 +26,9 @@ test('iOS library displays per-document actions and requires deletion confirmati
   assert.match(source, /card\.append\(title, detailsToggle, details\)/);
   assert.match(source, /confirmDelete\.addEventListener\('click'/);
   assert.match(source, /confirmation\.hidden = false/);
+  assert.match(source, /reading-library-more-actions/);
+  assert.match(source, /reading-library-more-panel/);
+  assert.match(source, /reading-library-delete/);
   assert.match(source, /estimateBookTimes\(book\)/);
   assert.match(source, /detailsToggle\.focus/);
 });

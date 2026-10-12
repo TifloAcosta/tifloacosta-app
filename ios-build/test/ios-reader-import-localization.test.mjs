@@ -70,6 +70,35 @@ test('iOS importer preserves native Files access and a localized VoiceOver butto
   assert.equal(button.textContent, 'Import document or image');
 });
 
+test('ZIP and audio imports report precise status instead of a misleading browser error', () => {
+  const reader = readFileSync(resolve(root, '../web-reading.js'), 'utf8');
+  assert.match(reader, /code: 'zip-empty'/);
+  assert.match(reader, /code: 'zip-multiple'/);
+  assert.match(reader, /code: 'invalid-zip'/);
+  assert.match(reader, /code: 'audio-unsupported'/);
+  assert.match(reader, /importName: extractedName/);
+  assert.match(reader, /El ZIP contiene varios documentos/);
+  assert.match(reader, /La importación de audio todavía no está disponible/);
+});
+
+test('iOS native actions target the focused document, not the entire WKWebView', () => {
+  const native = readFileSync(resolve(root, 'native/TifloReadingDocumentActionsPlugin.swift'), 'utf8');
+  const bridge = readFileSync(resolve(root, 'ios-reader-actions.js'), 'utf8');
+  const installer = readFileSync(resolve(root, 'install-native-video.mjs'), 'utf8');
+  const wrapper = readFileSync(resolve(root, 'prepare-web.mjs'), 'utf8');
+  const player = readFileSync(resolve(root, 'native/TifloYouTubeViewController.swift'), 'utf8');
+  assert.match(native, /UIAccessibility.focusedElement\(using: \.notificationVoiceOver\)/);
+  assert.match(native, /element.accessibilityCustomActions = \[/);
+  assert.doesNotMatch(native, /webView\?\.accessibilityCustomActions/);
+  assert.match(native, /self\.reset\(\)/);
+  assert.match(bridge, /reading-library-title/);
+  assert.match(bridge, /reading-library-delete/);
+  assert.match(bridge, /if \(action === 'details'\) return/);
+  assert.match(installer, /documentActionsBody/);
+  assert.match(wrapper, /ios-reader-actions\.js/);
+  assert.match(player, /registerPluginInstance\(TifloReadingDocumentActionsPlugin\(\)\)/);
+});
+
 test('native iOS project declares Spanish and English rather than defaulting to English', () => {
   assert.match(localization, /CFBundleDevelopmentRegion', 'es'/);
   assert.match(localization, /CFBundleLocalizations:0 string es/);

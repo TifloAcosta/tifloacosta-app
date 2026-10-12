@@ -9,6 +9,8 @@ class ViewController: CAPBridgeViewController {
     override func capacitorDidLoad() {
         super.capacitorDidLoad()
         bridge?.registerPluginInstance(TifloYouTubePlugin())
+        bridge?.registerPluginInstance(TifloReadingTtsPlugin())
+        bridge?.registerPluginInstance(TifloReadingLanguagePlugin())
     }
 }
 

@@ -18,10 +18,10 @@ replaceOnce(
   "const translationAdapter = typeof shared.createWebReadingTranslationAdapter === 'function'\n    ? shared.createWebReadingTranslationAdapter()\n    : null;",
   "const translationAdapter = iosReader?.createTranslationAdapter?.() || (typeof shared.createWebReadingTranslationAdapter === 'function'\n    ? shared.createWebReadingTranslationAdapter() : null);"
 );
-replaceOnce(
-  "const voices = typeof shared.listWebTtsVoices === 'function' ? shared.listWebTtsVoices() : [];",
-  "const voices = iosReader ? iosReader.listVoices() : (typeof shared.listWebTtsVoices === 'function' ? shared.listWebTtsVoices() : []);"
-);
+const oldVoices = "const voices = typeof shared.listWebTtsVoices === 'function' ? shared.listWebTtsVoices() : [];";
+const newVoices = "const voices = iosReader ? iosReader.listVoices() : (typeof shared.listWebTtsVoices === 'function' ? shared.listWebTtsVoices() : []);";
+if (source.split(oldVoices).length !== 4) throw new Error('iOS expected three voice chooser locations');
+source = source.split(oldVoices).join(newVoices);
 replaceOnce(
   "els.voiceStatus.textContent = language() === 'en' ? 'Waiting for browser voices…' : 'Esperando las voces del navegador…';",
   "els.voiceStatus.textContent = iosReader ? (language() === 'en' ? 'Waiting for iOS voices. Check the native reader.' : 'Esperando las voces del iPhone. Comprueba el lector nativo.') : (language() === 'en' ? 'Waiting for browser voices…' : 'Esperando las voces del navegador…');"

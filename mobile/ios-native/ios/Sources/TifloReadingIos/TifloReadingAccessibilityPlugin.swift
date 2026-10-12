@@ -50,6 +50,12 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin 
 
     @objc public func clearDocumentActions(_ call: CAPPluginCall) {
         DispatchQueue.main.async {
+            // Avoid clearing a newer focused book when an older blur arrives late.
+            let expectedId = call.getString("documentId") ?? ""
+            if !expectedId.isEmpty && self.documentId != expectedId {
+                call.resolve(["cleared": false])
+                return
+            }
             self.documentId = ""
             self.actionIds.removeAll()
             self.webView?.accessibilityCustomActions = nil

@@ -65,6 +65,7 @@
     translationStop: $('#reading-translation-stop'),
     translationOriginal: $('#reading-translation-original'),
     translationTranslated: $('#reading-translation-translated'),
+    translationRead: $('#reading-translation-read'),
     translationStatus: $('#reading-translation-status'),
     save: $('#reading-save'),
     libraryHeading: $('#reading-library-heading'),
@@ -143,7 +144,7 @@
       alreadySaved: 'Este documento ya está guardado en tu biblioteca.',
       saveFailed: 'No se pudo guardar el documento en este navegador.',
       libraryHeading: 'Mi biblioteca',
-      libraryIntro: 'Los documentos guardados permanecen únicamente en este navegador.',
+      libraryIntro: 'Los documentos se conservan localmente en esta instalación de TifloLector. No se sincronizan con otros dispositivos; si eliminas los datos de la aplicación, puedes perderlos.',
       refresh: 'Actualizar biblioteca',
       libraryEmpty: 'Todavía no hay documentos guardados.',
       libraryUnavailable: 'El navegador no permite utilizar la biblioteca local.',
@@ -251,7 +252,7 @@
       alreadySaved: 'This document is already saved in your library.',
       saveFailed: 'The document could not be saved in this browser.',
       libraryHeading: 'My library',
-      libraryIntro: 'Saved documents remain only in this browser.',
+      libraryIntro: 'Documents are kept locally in this TifloReader installation. They are not synced to other devices; clearing app data may remove them.',
       refresh: 'Refresh library',
       libraryEmpty: 'No documents have been saved yet.',
       libraryUnavailable: 'This browser does not allow the local library to be used.',
@@ -603,7 +604,13 @@
     moreButton.type = 'button';
     moreButton.textContent = language() === 'en' ? 'More actions' : 'Más acciones';
 
-    primaryActions.append(mark, audioButton, visualButton, moreButton);
+    // Per-document settings have a single closed-by-default accessible menu.
+    const readingSettingsMenu = document.createElement('details');
+    readingSettingsMenu.className = 'reading-settings-disclosure';
+    const readingSettingsSummary = document.createElement('summary');
+    readingSettingsSummary.textContent = language() === 'en' ? 'Reading settings' : 'Ajustes de lectura';
+    readingSettingsMenu.append(readingSettingsSummary, audioButton, visualButton);
+    primaryActions.append(mark, readingSettingsMenu, moreButton);
 
     const audioPanel = document.createElement('section');
     audioPanel.id = 'reading-document-audio';
@@ -1800,6 +1807,7 @@
     const available = Boolean(translationDocument?.blocks?.length);
     els.translationOriginal.hidden = !available;
     els.translationTranslated.hidden = !available;
+    if (els.translationRead) els.translationRead.hidden = !available;
     els.translationOriginal.setAttribute('aria-pressed', showingTranslation ? 'false' : 'true');
     els.translationTranslated.setAttribute('aria-pressed', showingTranslation ? 'true' : 'false');
   }
@@ -1931,6 +1939,12 @@
       if (state.completedUnits > 0) {
         translationDocument = state.document;
         renderTranslationViewButtons();
+        if (state.status === 'complete') {
+          els.translationStatus.textContent = language() === 'en'
+            ? 'Translation complete. Select “Read the translated document” to hear or explore the result.'
+            : 'Traducción completa. Pulsa «Leer la traducción en el documento» para escuchar o recorrer el resultado.';
+          queueMicrotask(() => els.translationRead?.focus?.());
+        }
       }
     } finally {
       translationRunning = false;
@@ -2825,6 +2839,14 @@
   });
   els.translationOriginal.addEventListener('click', () => { void switchTranslationView(false); });
   els.translationTranslated.addEventListener('click', () => { void switchTranslationView(true); });
+  els.translationRead?.addEventListener('click', () => {
+    void (async () => {
+      await switchTranslationView(true);
+      const morePanel = document.getElementById('reading-document-more-actions');
+      if (morePanel) morePanel.hidden = true;
+      queueMicrotask(() => els.block?.focus?.());
+    })();
+  });
   function resetTranslationSelection() {
     translationPrepared = false;
     translationJob = null;

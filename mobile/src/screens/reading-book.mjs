@@ -5,6 +5,7 @@ import { createReadingSpeechController } from '../core/reading-speech.mjs';
 import { resolveReadingSettings } from '../core/reading-settings.mjs';
 import { parseStructuredDocument } from '../core/reading-structured-adapter.mjs';
 import { createReadingAudioView } from './reading-audio.mjs';
+import { annotationAt, loadAnnotations } from '../core/reading-annotations.mjs';
 import { createReadingMarksPanel } from './reading-marks.mjs';
 import { createReadingOcrPanel } from './reading-ocr-panel.mjs';
 import { createReadingSearchPanel } from './reading-search.mjs';
@@ -901,7 +902,19 @@ export function renderReadingBook({
     // Mark the actively spoken unit for accessible and visual reading follow-along.
     element.classList.add('reading-current-unit');
     element.setAttribute('aria-current', 'true');
-    readerContainer.replaceChildren(element);
+    const annotation = activeBook?.id ? annotationAt(loadAnnotations(activeBook.id), normalized) : null;
+    if (annotation?.highlight) {
+      element.classList.add('reading-annotated-highlight');
+      element.dataset.highlighted = 'true';
+    }
+    if (annotation?.note) {
+      const noteDescription = document.createElement('p');
+      noteDescription.textContent = (document.documentElement.lang === 'en' ? 'Note: ' : 'Nota: ') + annotation.note;
+      noteDescription.className = 'reading-annotation-note';
+      readerContainer.replaceChildren(element, noteDescription);
+    } else {
+      readerContainer.replaceChildren(element);
+    }
     readerContainer.append(renderBlockLinks(block, unitText, normalized));
     if (commit) currentPosition = normalized;
 
@@ -1311,6 +1324,7 @@ export function renderReadingBook({
         return String(documentModel?.blocks?.[position?.blockIndex]?.href ?? '');
       },
       onJump: position => moveToPosition(position),
+      onAnnotationsChanged: () => renderSemanticPosition(currentPosition, { focus: false, announce: false, commit: false }),
       returnFocus: focusCurrentSemanticUnit
     });
 

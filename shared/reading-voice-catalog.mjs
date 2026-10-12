@@ -29,7 +29,7 @@ const PLATFORM_COPY = Object.freeze({
     },
     ios: {
       intro: 'Las voces del dispositivo que iOS ofrece para síntesis se muestran en el selector de voz. No son las cuatro voces limitadas del navegador.',
-      systemHeading: 'Voces del iPhone y del iPad',
+      systemHeading: 'Voces compatibles con iOS del iPhone y del iPad',
       systemDescription: 'Para descargar otras voces, abre Ajustes de iOS, Accesibilidad, Contenido leído, Voces. Después, regresa a TifloLector para actualizar la lista. Algunas voces de VoiceOver pueden no estar disponibles para otras aplicaciones.',
       nativeInstaller: ''
     },
@@ -63,7 +63,7 @@ const PLATFORM_COPY = Object.freeze({
     },
     ios: {
       intro: 'The voice picker lists speech-synthesis voices made available by iOS itself, rather than the smaller browser voice list.',
-      systemHeading: 'iPhone and iPad system voices',
+      systemHeading: 'Voices compatible with iOS on iPhone and iPad',
       systemDescription: 'To download more voices, open iOS Settings, Accessibility, Spoken Content, Voices. Return to TifloReader to refresh the list. Some VoiceOver voices may not be exposed to other apps.',
       nativeInstaller: ''
     },

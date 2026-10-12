@@ -2659,7 +2659,9 @@
 
         const details = document.createElement('section');
         details.className = 'reading-library-title-details';
+        details.id = 'reading-library-details-' + String(book.id).replace(/[^a-zA-Z0-9_-]/g, '-');
         details.hidden = true;
+        detailsToggle.setAttribute('aria-controls', details.id);
         const detailsHeading = document.createElement('h4');
         detailsHeading.tabIndex = -1;
         detailsHeading.textContent = language() === 'en' ? 'Details and settings' : 'Detalles y ajustes';
@@ -2910,7 +2912,29 @@
           void openSavedBook(book.id);
         });
 
-        card.append(title);
+        detailsToggle.addEventListener('click', () => {
+          const opening = details.hidden;
+          details.hidden = !opening;
+          detailsToggle.setAttribute('aria-expanded', String(opening));
+          if (opening) {
+            queueMicrotask(() => detailsHeading.focus({ preventScroll: true }));
+            void estimateBookTimes(book).then(result => {
+              if (!details.isConnected) return;
+              timeStatus.textContent = result
+                ? (language() === 'en'
+                    ? `Elapsed: about ${readableDuration(result.elapsedSeconds)}. Remaining: about ${readableDuration(result.remainingSeconds)}.`
+                    : `Tiempo realizado: aproximadamente ${readableDuration(result.elapsedSeconds)}. Tiempo faltante: aproximadamente ${readableDuration(result.remainingSeconds)}.`)
+                : (language() === 'en'
+                    ? 'Reading time could not be estimated for this document.'
+                    : 'No se pudo estimar el tiempo de lectura de este documento.');
+            });
+          } else detailsToggle.focus({ preventScroll: true });
+        });
+
+        // Do not silently discard the document actions and settings: they must
+        // be reachable as explicit controls even when native VoiceOver actions
+        // are unavailable. Native flick actions remain a separate iOS task.
+        card.append(title, detailsToggle, details);
         els.libraryList.append(card);
       }
     } catch {

@@ -2461,11 +2461,16 @@
         const detailsToggle = document.createElement('button');
         detailsToggle.type = 'button';
         detailsToggle.className = 'reading-library-details-toggle';
-        detailsToggle.textContent = language() === 'en' ? 'Details and settings' : 'Detalles y ajustes';
+        detailsToggle.textContent = language() === 'en' ? 'Document actions' : 'Acciones del documento';
+        detailsToggle.setAttribute('aria-label', language() === 'en'
+          ? `Actions for ${book.title || t().document}`
+          : `Acciones de ${book.title || t().document}`);
         detailsToggle.setAttribute('aria-expanded', 'false');
 
         const details = document.createElement('section');
         details.className = 'reading-library-title-details';
+        details.id = `reading-library-details-${String(book.id).replace(/[^a-zA-Z0-9_-]/g, '-')}`;
+        detailsToggle.setAttribute('aria-controls', details.id);
         details.hidden = true;
         const detailsHeading = document.createElement('h4');
         detailsHeading.tabIndex = -1;
@@ -2629,11 +2634,34 @@
         const remove = document.createElement('button');
         remove.type = 'button';
         remove.textContent = t().deleteSaved;
-        remove.addEventListener('click', () => { void deleteSavedBook(book.id); });
+        const confirmation = document.createElement('div');
+        confirmation.hidden = true;
+        confirmation.setAttribute('role', 'group');
+        confirmation.setAttribute('aria-label', language() === 'en' ? 'Confirm deletion' : 'Confirmar eliminación');
+        const warning = document.createElement('p');
+        warning.textContent = language() === 'en'
+          ? `Permanently delete ${book.title || t().document} from the library?`
+          : `¿Eliminar definitivamente ${book.title || t().document} de la biblioteca?`;
+        const confirmDelete = document.createElement('button');
+        confirmDelete.type = 'button';
+        confirmDelete.textContent = language() === 'en' ? 'Yes, delete document' : 'Sí, eliminar documento';
+        confirmDelete.addEventListener('click', () => { void deleteSavedBook(book.id); });
+        const cancelDelete = document.createElement('button');
+        cancelDelete.type = 'button';
+        cancelDelete.textContent = language() === 'en' ? 'Cancel' : 'Cancelar';
+        cancelDelete.addEventListener('click', () => {
+          confirmation.hidden = true;
+          remove.focus();
+        });
+        confirmation.append(warning, confirmDelete, cancelDelete);
+        remove.addEventListener('click', () => {
+          confirmation.hidden = false;
+          confirmDelete.focus();
+        });
         const closeMore = document.createElement('button');
         closeMore.type = 'button';
         closeMore.textContent = closeAudio.textContent;
-        actions.append(exportLabel, exportSelect, exportButton, remove, closeMore);
+        actions.append(exportLabel, exportSelect, exportButton, remove, confirmation, closeMore);
         morePanel.append(moreHeading, actions);
 
         function showOnly(panel, heading, opener) {
@@ -2717,7 +2745,25 @@
           void openSavedBook(book.id);
         });
 
-        card.append(title);
+        detailsToggle.addEventListener('click', () => {
+          const opening = details.hidden;
+          details.hidden = !opening;
+          detailsToggle.setAttribute('aria-expanded', String(opening));
+          if (opening) {
+            queueMicrotask(() => detailsHeading.focus({ preventScroll: true }));
+            void estimateBookTimes(book).then(times => {
+              if (!details.isConnected || details.hidden) return;
+              timeStatus.textContent = times
+                ? (language() === 'en'
+                  ? `Elapsed: about ${readableDuration(times.elapsedSeconds)}. Remaining: about ${readableDuration(times.remainingSeconds)}.`
+                  : `Tiempo realizado: aproximadamente ${readableDuration(times.elapsedSeconds)}. Tiempo faltante: aproximadamente ${readableDuration(times.remainingSeconds)}.`)
+                : (language() === 'en' ? 'Reading times unavailable.' : 'No se pudieron calcular los tiempos de lectura.');
+            });
+          } else {
+            detailsToggle.focus({ preventScroll: true });
+          }
+        });
+        card.append(title, detailsToggle, details);
         els.libraryList.append(card);
       }
     } catch {

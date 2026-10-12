@@ -96,7 +96,7 @@ public final class TifloYouTubePlugin: CAPPlugin, CAPBridgedPlugin {
     @objc public func publicFile(_ call: CAPPluginCall) {
         let allowed: Set<String> = [
             "actualidad.json", "actualidad-apps.json", "actualidad-media.json",
-            "videos.json", "data.js"
+            "videos.json", "data.js", "mobile-content.json"
         ]
         guard let file = call.getString("file"),
               allowed.contains(file),

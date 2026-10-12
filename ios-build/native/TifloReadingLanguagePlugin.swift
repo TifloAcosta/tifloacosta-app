@@ -109,22 +109,9 @@ public final class TifloReadingLanguagePlugin: CAPPlugin, CAPBridgedPlugin {
                 ])
                 return
             }
-            if #available(iOS 26.0, *) {
-                // iOS 26 provides a session without a view when both models are installed.
-                let session = TranslationSession(installedSource: source, target: target)
-                do {
-                    var results: [String] = []
-                    results.reserveCapacity(texts.count)
-                    for value in texts {
-                        let translated = try await session.translate(value)
-                        results.append(translated.targetText)
-                    }
-                    call.resolve(["translations": results, "status": "ok"])
-                } catch {
-                    call.resolve(["translations": [], "status": "error"])
-                }
-            } else {
-                // iOS 18-25 needs a session supplied by a SwiftUI translationTask.
+            // All supported iOS versions use a TranslationSession supplied by SwiftUI.
+            // The initializer documented for future SDKs is not available in Xcode 26.3.
+            {
                 guard let presenter = self.bridge?.viewController else {
                     call.resolve(["translations": [], "status": "error"])
                     return

@@ -269,12 +269,19 @@ export function createReadingTranslationPanel({
     downloadButton.disabled = true;
     translateButton.disabled = true;
     progress.textContent = text(t, 'readingBook.translationDownloading', 'Descargando idiomas…', 'Downloading languages…');
-    const [sourceReady, targetReady] = await Promise.all([
-      translationClient?.downloadTranslationModel?.(sourceLanguage),
-      translationClient?.downloadTranslationModel?.(targetLanguage)
-    ]);
+    // iOS Translation downloads are authorized for a LANGUAGE PAIR, not per language.
+    // Prefer the native pair preparation and retain the legacy per-language path for Android.
+    const pairReady = await translationClient?.prepareTranslationPair?.(sourceLanguage, targetLanguage);
+    let modelsPrepared = Boolean(pairReady);
+    if (!modelsPrepared) {
+      const [sourceReady, targetReady] = await Promise.all([
+        translationClient?.downloadTranslationModel?.(sourceLanguage),
+        translationClient?.downloadTranslationModel?.(targetLanguage)
+      ]);
+      modelsPrepared = Boolean(sourceReady && targetReady);
+    }
     if (destroyed) return false;
-    modelsReady = Boolean(sourceReady && targetReady);
+    modelsReady = modelsPrepared;
     downloadButton.disabled = false;
     translateButton.disabled = !modelsReady;
     progress.textContent = modelsReady

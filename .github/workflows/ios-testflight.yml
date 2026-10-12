@@ -90,7 +90,6 @@ jobs:
           npm run build
           npx cap add ios
           npx cap sync ios
-          (cd ios/App && pod install)
           ruby -rjson -e '
             path="ios/App/App/Info.plist"
             abort "Info.plist ausente" unless File.exist?(path)
@@ -132,18 +131,11 @@ jobs:
             config.build_settings['CODE_SIGN_IDENTITY[sdk=iphoneos*]'] = 'Apple Distribution'
           end
           project.save
-          pods = Xcodeproj::Project.open('ios/App/Pods/Pods.xcodeproj')
-          pods.targets.each do |target|
-            target.build_configurations.each do |config|
-              config.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'
-            end
-          end
-          pods.save
           RUBY
       - name: Verificar que la aplicación compila sin firma
         working-directory: mobile
         run: |
-          xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build
+          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Release -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build
       - name: Recuperar o regenerar firma de distribución protegida
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -267,7 +259,7 @@ jobs:
           API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
           API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
         run: |
-          xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination 'generic/platform=iOS' -archivePath "$RUNNER_TEMP/TifloAcosta.xcarchive" -allowProvisioningUpdates -authenticationKeyPath "$ASC_KEY_PATH" -authenticationKeyID "$API_ID" -authenticationKeyIssuerID "$API_ISSUER" archive
+          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Release -destination 'generic/platform=iOS' -archivePath "$RUNNER_TEMP/TifloAcosta.xcarchive" -allowProvisioningUpdates -authenticationKeyPath "$ASC_KEY_PATH" -authenticationKeyID "$API_ID" -authenticationKeyIssuerID "$API_ISSUER" archive
       - name: Verificar cifrado exento e iOS 15 en la app archivada
         run: |
           set -euo pipefail

@@ -173,7 +173,7 @@ export function renderReadingLibrary({
   importFormats.textContent = document.documentElement.lang === 'en'
     ? 'Supports Word (DOCX), PowerPoint (PPTX), Excel (XLSX), EPUB, PDF, TXT, HTML, DAISY and audio.'
     : 'Admite Word (DOCX), PowerPoint (PPTX), Excel (XLSX), EPUB, PDF, TXT, HTML, DAISY y audio.';
-  importSection.append(importButton, importFormats, liveStatus);
+  importSection.append(importButton, liveStatus);
 
   const audioChoiceHost = document.createElement('section');
   audioChoiceHost.className = 'reading-library-audio-choice';
@@ -435,7 +435,7 @@ export function renderReadingLibrary({
       ['page', document.documentElement.lang === 'en' ? 'PDF page' : 'Página PDF']
     ]
   );
-  generalGroup.append(navigationModeLabel, navigationModeSelect, resetSettings, settingsStatus);
+  generalGroup.append(navigationModeLabel, navigationModeSelect, importFormats, resetSettings, settingsStatus);
   settingsPanel.append(audioGroup, visualGroup, generalGroup);
   settingsSection.append(settingsHeading, settingsToggle, settingsPanel);
   root.append(settingsSection);

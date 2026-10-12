@@ -103,7 +103,9 @@
   <section id="reading-section" hidden tabindex="-1" aria-labelledby="reading-heading">
     <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
     <h2 id="reading-heading">TifloLector</h2>
-    <p id="reading-intro">Abre TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB y otros formatos compatibles, o pega un texto, para leerlo con navegación accesible.</p>
+    <p id="reading-intro">Importa un archivo o pega un texto para leerlo y escucharlo de forma accesible en TifloAcosta.</p>
+    <button id="reading-formats-toggle" type="button" aria-expanded="false" aria-controls="reading-formats-list">Consultar formatos admitidos</button>
+    <p id="reading-formats-list" hidden>TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 e imágenes PNG, JPG y WebP mediante OCR.</p>
 
     <div class="panel" aria-labelledby="reading-start-heading">
       <h3 id="reading-start-heading">Abrir o pegar contenido</h3>
@@ -115,7 +117,7 @@
         <label id="reading-pdf-password-label" for="reading-pdf-password">Contraseña del PDF, si tiene</label>
         <input id="reading-pdf-password" type="password" autocomplete="off">
       </div>
-      <button id="reading-prepare" type="button">Preparar lectura</button>
+      <button id="reading-prepare" type="button">Leer texto pegado</button>
       <button id="reading-ocr" type="button" hidden>Reconocer con OCR</button>
       <p id="reading-status" class="muted" role="status" aria-live="polite" aria-atomic="true"></p>
     </div>
@@ -173,8 +175,8 @@
     <section id="reading-settings-web" class="panel" aria-labelledby="reading-settings-heading">
       <h3 id="reading-settings-heading" tabindex="-1">Ajustes de lectura</h3>
       <div class="resource-actions" aria-label="Ajustes de TifloLector">
-        <button type="button" data-reading-view="reading-audio-view" aria-haspopup="true">Audio y voz</button>
-        <button type="button" data-reading-view="reading-visual-view" aria-haspopup="true">Presentación visual</button>
+        <button type="button" data-reading-view="reading-audio-view" aria-controls="reading-audio-view">Audio y voz</button>
+        <button type="button" data-reading-view="reading-visual-view" aria-controls="reading-visual-view">Presentación visual</button>
       </div>
       <p id="reading-settings-status" class="muted" role="status" aria-live="polite"></p>
     </section>
@@ -497,8 +499,8 @@
 
 <script src="data.js?v=0.21"></script>
 <script src="medical-studies.js?v=1.0"></script>
-<script src="app-core.js?v=1.6"></script>
-<script src="actualidad-core.js?v=1.0"></script>
+<script src="app-core.js?v=1.7"></script>
+<script src="actualidad-core.js?v=1.7"></script>
 <script>
 (() => {
   'use strict';
@@ -509,8 +511,10 @@
     ? [...readingSection.children].filter(node => !node.classList?.contains('reading-subview'))
     : [];
   let previousHiddenState = new Map();
+  let lastReadingOpener = null;
 
-  function showSubview(id) {
+  function showSubview(id, opener = null) {
+    lastReadingOpener = opener;
     const target = document.getElementById(id);
     if (!target) return;
 
@@ -530,8 +534,9 @@
     });
     previousHiddenState = new Map();
 
-    const heading = document.getElementById('reading-heading');
-    queueMicrotask(() => heading?.focus());
+    const target = lastReadingOpener?.isConnected ? lastReadingOpener : document.getElementById('reading-heading');
+    lastReadingOpener = null;
+    queueMicrotask(() => target?.focus());
   }
 
   document.addEventListener('click', event => {
@@ -539,7 +544,7 @@
     if (open) {
       event.preventDefault();
       event.stopPropagation();
-      showSubview(open.dataset.readingView);
+      showSubview(open.dataset.readingView, open);
       return;
     }
 
@@ -555,9 +560,9 @@
 <script type="module">
   import * as shared from './shared/web-entry.mjs?v=1.6';
   window.TIFLO_SHARED = shared;
-  await import('./web-reading.js?v=3.12');
+  await import('./web-reading.js?v=3.13');
 </script>
-<script src="app.js?v=2.2"></script>
+<script src="app.js?v=2.3"></script>
 <script>
 (() => {
   'use strict';
@@ -609,8 +614,7 @@
     menu.hidden = !onHome;
     if (footer) footer.hidden = !onHome;
     Object.values(views).forEach(section => { section.hidden = section !== target; });
-    if (target) target.focus();
-    else if (key === 'home') main.focus();
+    // Focus is restored by the isolated navigation controller.
   }
 
   window.addEventListener('hashchange', showHomeView);

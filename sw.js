@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-46-reader-chrome-voices';
+const CACHE = 'tifloacosta-app-v2-47-navigation-content-reader';
 const NAVIGATION_TIMEOUT_MS = 5000;
 // Resource catalog is refreshed from the network.
 const SHELL = [
@@ -6,20 +6,20 @@ const SHELL = [
   './index.html',
   './styles.css?v=1.3',
   './data.js?v=0.21',
-  './app-core.js?v=1.6',
+  './app-core.js?v=1.7',
   './search-accessibility.js?v=1.1',
   './contextual-search.js?v=1.0',
   './downloads-core.js?v=1.1',
   './download-config.js?v=1.1',
   './downloads.js?v=1.4',
   './downloads.css?v=1.1',
-  './actualidad-core.js?v=1.6',
-  './actualidad.js?v=1.3',
+  './actualidad-core.js?v=1.7',
+  './actualidad.js?v=1.4',
   './actualidad-media.js?v=1.1',
-  './web-reading.js?v=3.12',
+  './web-reading.js?v=3.13',
   './podcast.html',
   './podcast.js?v=1.0',
-  './app.js?v=2.2',
+  './app.js?v=2.3',
   './tifloacosta-favicon.ico',
   './tifloacosta-icon-192.png',
   './tifloacosta-icon-512.png',
@@ -124,15 +124,15 @@ self.addEventListener('fetch', event => {
   }
 
   if (isAppOrigin && url.pathname.endsWith('/app-core.js')) {
-    url.searchParams.set('v', '1.6');
-    event.respondWith(freshScript(url, './app-core.js?v=1.6', request));
+    url.searchParams.set('v', '1.7');
+    event.respondWith(freshScript(url, './app-core.js?v=1.7', request));
     return;
   }
 
 
   if (isAppOrigin && url.pathname.endsWith('/web-reading.js')) {
-    url.searchParams.set('v', '3.8');
-    event.respondWith(freshScript(url, './web-reading.js?v=3.12', request));
+    url.searchParams.set('v', '3.13');
+    event.respondWith(freshScript(url, './web-reading.js?v=3.13', request));
     return;
   }
 
@@ -143,8 +143,8 @@ self.addEventListener('fetch', event => {
   }
 
   if (isAppOrigin && url.pathname.endsWith('/app.js')) {
-    url.searchParams.set('v', '2.2');
-    event.respondWith(freshScript(url, './app.js?v=2.2', request));
+    url.searchParams.set('v', '2.3');
+    event.respondWith(freshScript(url, './app.js?v=2.3', request));
     return;
   }
 

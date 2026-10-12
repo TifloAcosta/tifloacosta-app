@@ -9,6 +9,8 @@
     section: $('#reading-section'),
     heading: $('#reading-heading'),
     intro: $('#reading-intro'),
+    formatsToggle: $('#reading-formats-toggle'),
+    formatsList: $('#reading-formats-list'),
     fileLabel: $('#reading-file-label'),
     file: $('#reading-file'),
     pasteLabel: $('#reading-paste-label'),
@@ -90,10 +92,10 @@
   const copy = {
     es: {
       heading: 'TifloLector',
-      intro: 'Abre TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 o una imagen, o pega un texto, para leerlo con navegación accesible y las voces disponibles en tu navegador.',
+      intro: 'Importa un archivo o pega un texto para leerlo y escucharlo de forma accesible en TifloAcosta.',
       file: 'Abrir documento o imagen',
       paste: 'O pega aquí el texto',
-      prepare: 'Preparar lectura',
+      prepare: 'Leer texto pegado',
       empty: 'Selecciona un archivo o pega algún texto antes de preparar la lectura.',
       unsupported: 'Este archivo todavía no puede abrirse en la versión web de TifloLector.',
       legacyDoc: 'El formato DOC antiguo no se puede leer directamente. Ábrelo en Word o LibreOffice y guárdalo como DOCX.',
@@ -198,10 +200,10 @@
     },
     en: {
       heading: 'TifloReader',
-      intro: 'Open TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 or an image, or paste text, to read it with accessible navigation and the voices available in your browser.',
+      intro: 'Import a file or paste text to read and listen to it accessibly in TifloAcosta.',
       file: 'Open document or image',
       paste: 'Or paste text here',
-      prepare: 'Prepare reading',
+      prepare: 'Read pasted text',
       empty: 'Select a file or paste some text before preparing the reading.',
       unsupported: 'This file cannot yet be opened in the web version of TifloReader.',
       legacyDoc: 'The old DOC format cannot be read directly. Open it in Word or LibreOffice and save it as DOCX.',
@@ -1017,6 +1019,10 @@
     const c = t();
     els.heading.textContent = c.heading;
     els.intro.textContent = c.intro;
+    if (els.formatsToggle) els.formatsToggle.textContent = language() === 'en' ? 'Show supported file types' : 'Consultar formatos admitidos';
+    if (els.formatsList) els.formatsList.textContent = language() === 'en'
+      ? 'TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 and PNG, JPG or WebP images using OCR.'
+      : 'TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 e imágenes PNG, JPG y WebP mediante OCR.';
     els.fileLabel.textContent = c.file;
     els.pasteLabel.textContent = c.paste;
     els.prepare.textContent = c.prepare;
@@ -2783,6 +2789,11 @@
     });
   }
 
+  els.formatsToggle?.addEventListener('click', () => {
+    const open = els.formatsToggle.getAttribute('aria-expanded') !== 'true';
+    els.formatsToggle.setAttribute('aria-expanded', String(open));
+    els.formatsList.hidden = !open;
+  });
   els.prepare.addEventListener('click', () => { void prepareReading(); });
   els.ocr.addEventListener('click', () => { void runPdfOcr(); });
   els.file.addEventListener('change', () => {

@@ -10,7 +10,7 @@
     select.dataset.iosAccessibleChoice = '1';
     const label = select.id ? section.querySelector('label[for="' + select.id + '"]') : null;
     const fallbackLabel = label?.textContent?.trim() || select.getAttribute('aria-label') || 'Opción de lectura';
-    const name = fallbackLabel.replace(/\s+/g, ' ').trim();
+    const name = () => (label?.textContent?.trim() || select.getAttribute('aria-label') || fallbackLabel).replace(/\s+/g, ' ').trim();
     // VoiceOver exposes range inputs as adjustable controls: flick up/down
     // instead of entering the web select popup. Reserve this for ordered values.
     const adjustableIds = new Set([
@@ -26,13 +26,14 @@
       slider.min = '0';
       slider.max = String(select.options.length - 1);
       slider.step = '1';
-      slider.setAttribute('aria-label', name);
+      slider.setAttribute('aria-label', name());
       function syncFromSelect() {
         slider.max = String(Math.max(0, select.options.length - 1));
+        slider.setAttribute('aria-label', name());
         slider.value = String(Math.max(0, select.selectedIndex));
         const choice = select.selectedOptions[0];
         slider.setAttribute('aria-valuetext', choice?.textContent?.trim() || '');
-        slider.title = name + ': ' + (choice?.textContent?.trim() || '');
+        slider.title = name() + ': ' + (choice?.textContent?.trim() || '');
       }
       function selectBySlider() {
         const index = Math.max(0, Math.min(select.options.length - 1, Number(slider.value) || 0));
@@ -68,7 +69,7 @@
       return select.selectedOptions?.[0]?.textContent?.trim() || 'Sin seleccionar';
     }
     function update() {
-      chooser.textContent = name + ': ' + selectedName();
+      chooser.textContent = name() + ': ' + selectedName();
     }
     function close() {
       expanded = false;
@@ -122,6 +123,7 @@
     select.addEventListener('change', update);
     const observer = new MutationObserver(update);
     observer.observe(select, {childList:true,subtree:true,characterData:true});
+    if (label) observer.observe(label, {childList:true,subtree:true,characterData:true});
     select.hidden = true;
     select.style.display = 'none';
     select.tabIndex = -1;

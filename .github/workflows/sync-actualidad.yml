@@ -22,6 +22,7 @@ on:
       - 'scripts/sync-actualidad-media.mjs'
       - 'scripts/validate-actualidad-discovery.mjs'
       - 'test/actualidad-auto-*.test.mjs'
+      - 'test/actualidad-home-preview.test.mjs'
       - 'test/openai-actualidad-client.test.mjs'
       - 'test/actualidad-media-*.test.mjs'
       - 'docs/actualidad-multimedia-candidates.md'

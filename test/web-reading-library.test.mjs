@@ -111,13 +111,14 @@ test('web library can export saved documents as original, accessible TXT or acce
 });
 
 
-test('web TifloLector library keeps only title buttons as the direct reading entry point', async () => {
+test('web TifloLector library exposes its title AND accessible details/actions', async () => {
   const source = await read('web-reading.js');
   assert.ok(source.includes('reading-library-title-card'));
   assert.ok(source.includes("title.addEventListener('click', () =>"));
   assert.ok(source.includes('void openSavedBook(book.id);'));
-  assert.ok(source.includes('card.append(title);'));
-  assert.ok(!source.includes('card.append(title, detailsToggle, details);'));
+  assert.ok(source.includes('card.append(title, detailsToggle, details);'));
+  assert.ok(source.includes("detailsToggle.addEventListener('click'"));
+  assert.ok(source.includes("detailsToggle.setAttribute('aria-expanded', String(opening))"));
 });
 
 

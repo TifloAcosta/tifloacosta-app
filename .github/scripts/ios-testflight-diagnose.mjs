@@ -87,6 +87,20 @@ try {
   console.log('UPLOAD_STATUS_QUERY_ERROR', error.message);
 }
 
+for (const version of ['200063','200064']) {
+  try {
+    const exact = await api('apps/' + app.id + '/buildUploads', {
+      'filter[cfBundleVersion]':version, limit:20
+    });
+    if (!(exact.data || []).length) console.log('EXACT_UPLOAD', version, 'NOT_LISTED');
+    for (const entry of exact.data || []) {
+      const a = entry.attributes || {};
+      console.log('EXACT_UPLOAD', version, 'status='+JSON.stringify(a.state || {}),
+        'created='+a.createdDate, 'uploaded='+a.uploadedDate);
+    }
+  } catch (error) { console.log('EXACT_UPLOAD_ERROR', version, error.message); }
+}
+
 const groups = await api('apps/' + app.id + '/betaGroups', { limit:100 });
 console.log('BETA_GROUPS', groups.data?.length || 0);
 for (const group of groups.data || []) {

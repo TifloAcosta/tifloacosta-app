@@ -14,5 +14,5 @@ test('Actualidad cache busts all corrected iPhone assets and PWA shell', async (
   assert.match(sw, /actualidad-core\.js\?v=1\.7/);
   assert.match(sw, /actualidad\.js\?v=1\.4/);
   assert.match(sw, /actualidad-media\.js\?v=1\.1/);
-  assert.match(sw, /tifloacosta-app-v2-\\d+-[a-z0-9-]+/);
+  assert.match(sw, /tifloacosta-app-v2-\d+-[a-z0-9-]+/);
 });

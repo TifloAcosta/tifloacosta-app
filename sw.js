@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-48-reading-accessibility';
+const CACHE = 'tifloacosta-app-v2-49-reading-audio-progress';
 const NAVIGATION_TIMEOUT_MS = 5000;
 // Resource catalog is refreshed from the network.
 const SHELL = [
@@ -16,7 +16,7 @@ const SHELL = [
   './actualidad-core.js?v=1.7',
   './actualidad.js?v=1.4',
   './actualidad-media.js?v=1.1',
-  './web-reading.js?v=3.14',
+  './web-reading.js?v=3.15',
   './podcast.html',
   './podcast.js?v=1.0',
   './app.js?v=2.4',
@@ -131,8 +131,8 @@ self.addEventListener('fetch', event => {
 
 
   if (isAppOrigin && url.pathname.endsWith('/web-reading.js')) {
-    url.searchParams.set('v', '3.14');
-    event.respondWith(freshScript(url, './web-reading.js?v=3.14', request));
+    url.searchParams.set('v', '3.15');
+    event.respondWith(freshScript(url, './web-reading.js?v=3.15', request));
     return;
   }
 

@@ -54,7 +54,20 @@ if (!readerScript.includes("intro: 'Abre un libro o documento para escucharlo") 
     readerScript.includes("intro: 'Importa un archivo o pega un texto")) {
   throw new Error('iOS: el guion de TifloLector no corresponde a la interfaz vigente.');
 }
-console.log('TifloLector: interfaz actual validada; versión antigua bloqueada.');
+// A markup check alone passed build 300071 but shipped a legacy web reader.
+// Fail closed until iOS has genuine DAISY ZIP import AND native document actions.
+// The full visual/VoiceOver acceptance still needs a device test (issue #170).
+const daisyZipSupported = /daisy/i.test(readerScript) && /smil/i.test(readerScript)
+  && /(?:\\.zip|application\\/zip|zipBundle)/i.test(readerScript);
+const nativeAccessibleDocumentActions = await stat(
+  join(root, 'ios-build/native/TifloReadingAccessibilityPlugin.swift')
+).then(() => true, () => false);
+if (!daisyZipSupported || !nativeAccessibleDocumentActions) {
+  throw new Error('BLOQUEO PREVENTIVO iOS: lector web antiguo incompleto. Falta importar DAISY ZIP'
+    + ' y/o integrar acciones nativas de documentos para VoiceOver. Se prohíbe publicar'
+    + ' otra compilación que resucite TifloLector anterior. Ver issue #170.');
+}
+console.log('Prechequeos de estructura, DAISY y accesibilidad completados; queda validación real en dispositivo.');
 
 // Only the packaged iOS copy receives episode enclosures: no change to the
 // published website, Android resources, or repository source catalogue.

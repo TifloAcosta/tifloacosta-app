@@ -10,6 +10,14 @@ const translationKey = key => ({
   'new-content': 'newContent'
 })[key] || key;
 
+test('user guide has its own button before the home navigation, preserving compact section order', async () => {
+  const [home, app] = await Promise.all([read('src/screens/home.mjs'), read('src/app.mjs')]);
+  assert.match(home, /guide\.id = 'home-guide'/);
+  assert.ok(home.indexOf('root.append(guide)') < home.indexOf('root.append(nav)'));
+  assert.match(home, /router\.navigate\('guide', \{ originId: guide\.id \}\)/);
+  assert.match(app, /case 'guide': renderGuide\(context\); break;/);
+});
+
 test('home uses the approved compact order', () => {
   assert.deepEqual(HOME_ITEMS, [
     'search',

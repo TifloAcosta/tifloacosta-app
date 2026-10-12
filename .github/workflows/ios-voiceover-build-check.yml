@@ -36,6 +36,6 @@ jobs:
       - name: Check Xcode build for simulator
         working-directory: mobile
         run: |
-          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build
+          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' IPHONEOS_DEPLOYMENT_TARGET=15.0 CODE_SIGNING_ALLOWED=NO build
       - name: Record device-verification requirement
         run: echo 'VoiceOver rotor actions, picker labels, focus, audio/DAISY and share sheet remain unverified until installed on a physical iPhone.'

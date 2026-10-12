@@ -11,6 +11,50 @@
     const label = select.id ? section.querySelector('label[for="' + select.id + '"]') : null;
     const fallbackLabel = label?.textContent?.trim() || select.getAttribute('aria-label') || 'Opción de lectura';
     const name = fallbackLabel.replace(/\s+/g, ' ').trim();
+    // VoiceOver exposes range inputs as adjustable controls: flick up/down
+    // instead of entering the web select popup. Reserve this for ordered values.
+    const adjustableIds = new Set([
+      'reading-navigation-unit',
+      'reading-document-progress-percent',
+      'ios-reading-default-unit',
+      'reading-audio-speed'
+    ]);
+    if (adjustableIds.has(select.id) && select.options.length >= 2) {
+      const slider = document.createElement('input');
+      slider.type = 'range';
+      slider.className = 'ios-reader-adjustable';
+      slider.min = '0';
+      slider.max = String(select.options.length - 1);
+      slider.step = '1';
+      slider.setAttribute('aria-label', name);
+      function syncFromSelect() {
+        slider.max = String(Math.max(0, select.options.length - 1));
+        slider.value = String(Math.max(0, select.selectedIndex));
+        const choice = select.selectedOptions[0];
+        slider.setAttribute('aria-valuetext', choice?.textContent?.trim() || '');
+        slider.title = name + ': ' + (choice?.textContent?.trim() || '');
+      }
+      function selectBySlider() {
+        const index = Math.max(0, Math.min(select.options.length - 1, Number(slider.value) || 0));
+        if (select.selectedIndex !== index) {
+          select.selectedIndex = index;
+          select.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        syncFromSelect();
+      }
+      slider.addEventListener('input', selectBySlider);
+      slider.addEventListener('change', selectBySlider);
+      select.addEventListener('change', syncFromSelect);
+      new MutationObserver(syncFromSelect).observe(select, { childList: true, subtree: true });
+      select.hidden = true;
+      select.style.display = 'none';
+      select.tabIndex = -1;
+      select.setAttribute('aria-hidden', 'true');
+      if (label) label.hidden = true;
+      select.insertAdjacentElement('afterend', slider);
+      syncFromSelect();
+      return;
+    }
     const chooser = document.createElement('button');
     chooser.type = 'button';
     chooser.className = 'button-link ios-reader-choice';

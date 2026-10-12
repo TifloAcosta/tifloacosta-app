@@ -2,6 +2,7 @@ import { parseHtmlDocument } from '../core/reading-html-adapter.mjs';
 import { pageForPosition, parsePdfDocument, positionForPage } from '../core/reading-pdf-adapter.mjs';
 import { adjacentSemanticBlockOfKind, adjacentSemanticUnit, normalizeSemanticPosition, parseTextDocument } from '../core/reading-semantic-model.mjs';
 import { createReadingSpeechController } from '../core/reading-speech.mjs';
+import { resolveReadingSettings } from '../core/reading-settings.mjs';
 import { parseStructuredDocument } from '../core/reading-structured-adapter.mjs';
 import { createReadingAudioView } from './reading-audio.mjs';
 import { createReadingMarksPanel } from './reading-marks.mjs';
@@ -314,6 +315,38 @@ export function renderReadingBook({
   visualButton.type = 'button';
   visualButton.textContent = t('readingBook.visualSettings');
 
+  // All reading preferences live in one closed-by-default, screen-reader-native disclosure.
+  // <details>/<summary> exposes expanded/collapsed state to VoiceOver without a custom menu.
+  const readingSettings = document.createElement('details');
+  readingSettings.className = 'reading-settings-disclosure';
+  const readingSettingsSummary = document.createElement('summary');
+  readingSettingsSummary.textContent = fallback(t, 'readingBook.readingSettings', 'Ajustes de lectura', 'Reading settings');
+  const defaultModeLabel = document.createElement('label');
+  defaultModeLabel.textContent = document.documentElement.lang === 'en'
+    ? 'Default navigation mode for new documents'
+    : 'Modo de avance predeterminado para nuevos documentos';
+  const defaultModeSelect = document.createElement('select');
+  defaultModeSelect.id = 'reading-default-navigation-mode';
+  defaultModeLabel.htmlFor = defaultModeSelect.id;
+  for (const [mode, es, en] of [
+    ['sentence', 'Frase', 'Sentence'],
+    ['paragraph', 'Párrafo', 'Paragraph'],
+    ['heading', 'Encabezamiento', 'Heading'],
+    ['listItem', 'Elemento de lista', 'List item'],
+    ['quote', 'Cita', 'Quote'],
+    ['tableCell', 'Celda de tabla', 'Table cell'],
+    ['page', 'Página (PDF)', 'Page (PDF)']
+  ]) {
+    const item = document.createElement('option');
+    item.value = mode;
+    item.textContent = document.documentElement.lang === 'en' ? en : es;
+    defaultModeSelect.append(item);
+  }
+  const defaultModeStatus = document.createElement('p');
+  defaultModeStatus.setAttribute('role', 'status');
+  defaultModeStatus.setAttribute('aria-live', 'polite');
+  readingSettings.append(readingSettingsSummary, voiceButton, visualButton, defaultModeLabel, defaultModeSelect, defaultModeStatus);
+
   const moreActionsButton = document.createElement('button');
   moreActionsButton.type = 'button';
   moreActionsButton.textContent = document.documentElement.lang === 'en' ? 'More actions' : 'Más acciones';
@@ -326,8 +359,7 @@ export function renderReadingBook({
     next,
     progressStatus,
     addMarkButton,
-    voiceButton,
-    visualButton,
+    readingSettings,
     moreActionsButton
   );
 
@@ -1011,6 +1043,12 @@ export function renderReadingBook({
   previousPage.addEventListener('click', () => { void navigatePdfPage(-1); });
   nextPage.addEventListener('click', () => { void navigatePdfPage(1); });
   navigationSelect.addEventListener('change', () => {
+    if (activeBook?.id) {
+      void client.setReadingSetting({
+        scope: 'book', bookId: activeBook.id,
+        key: 'reading.navigationMode', value: navigationSelect.value
+      });
+    }
     renderSemanticPosition(currentPosition, { focus: false, announce: false, commit: false });
     status.textContent = document.documentElement.lang === 'en'
       ? `Navigation by ${navigationModeName(navigationSelect.value)}.`
@@ -1063,6 +1101,20 @@ export function renderReadingBook({
 
   searchButton.addEventListener('click', () => searchPanel?.open());
   marksButton.addEventListener('click', () => marksPanel?.open());
+  defaultModeSelect.addEventListener('change', () => {
+    void (async () => {
+      const ok = await client.setReadingSetting({
+        scope: 'global', key: 'reading.navigationMode', value: defaultModeSelect.value
+      });
+      defaultModeStatus.textContent = ok
+        ? (document.documentElement.lang === 'en'
+            ? 'Default navigation saved. Each document can have its own navigation mode.'
+            : 'Avance predeterminado guardado. Cada documento puede tener su propio modo de avance.')
+        : (document.documentElement.lang === 'en'
+            ? 'Could not save the default navigation mode.'
+            : 'No se pudo guardar el modo de avance predeterminado.');
+    })();
+  });
   voiceButton.addEventListener('click', () => settingsPanel?.openVoice());
   visualButton.addEventListener('click', () => settingsPanel?.openVisual());
 
@@ -1143,6 +1195,18 @@ export function renderReadingBook({
         }, documentModel)
       : normalizeSemanticPosition(positionForPercent(documentModel, requestedPercent), documentModel);
     populateNavigationModes();
+    try {
+      const storedReadingSettings = await client.getReadingSettings(activeBook.id);
+      if (destroyed) return;
+      const globalMode = resolveReadingSettings(storedReadingSettings?.global).effective['reading.navigationMode'];
+      const effectiveMode = resolveReadingSettings(storedReadingSettings?.global, storedReadingSettings?.book).effective['reading.navigationMode'];
+      defaultModeSelect.value = globalMode;
+      navigationSelect.value = Array.from(navigationSelect.options).some(option => option.value === effectiveMode)
+        ? effectiveMode
+        : 'sentence';
+    } catch {
+      defaultModeSelect.value = 'sentence';
+    }
     readingState.value = activeBook.state || 'in-reading';
 
     speech = createReadingSpeechController({

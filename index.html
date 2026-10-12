@@ -111,21 +111,13 @@
   <section id="reading-section" hidden tabindex="-1" aria-labelledby="reading-heading">
     <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
     <h2 id="reading-heading">TifloLector</h2>
-    <p id="reading-intro">Importa un archivo o pega un texto para leerlo y escucharlo de forma accesible en TifloAcosta.</p>
-    <button id="reading-formats-toggle" type="button" aria-expanded="false" aria-controls="reading-formats-list">Consultar formatos admitidos</button>
-    <p id="reading-formats-list" hidden>TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 e imágenes PNG, JPG y WebP mediante OCR.</p>
-
-    <div class="panel" aria-labelledby="reading-start-heading">
-      <h3 id="reading-start-heading">Abrir o pegar contenido</h3>
-      <label id="reading-file-label" for="reading-file">Importar documento o imagen; se abrirá al seleccionarlo y se ofrecerá OCR cuando sea necesario</label>
+    <div class="panel" aria-label="Importar documentos e imágenes">
+      <label id="reading-file-label" for="reading-file">Importar documento o imagen</label>
       <input id="reading-file" type="file" accept=".txt,.html,.htm,.pdf,.docx,.pptx,.xlsx,.epub,.odt,.rtf,.md,.markdown,.fb2,.png,.jpg,.jpeg,.webp,text/plain,text/html,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/epub+zip,application/vnd.oasis.opendocument.text,application/rtf,text/markdown,image/png,image/jpeg,image/webp">
-      <label id="reading-paste-label" for="reading-paste">O pega aquí el texto</label>
-      <textarea id="reading-paste" rows="6"></textarea>
       <div id="reading-pdf-password-wrap" hidden>
         <label id="reading-pdf-password-label" for="reading-pdf-password">Contraseña del PDF, si tiene</label>
         <input id="reading-pdf-password" type="password" autocomplete="off">
       </div>
-      <button id="reading-prepare" type="button">Leer texto pegado</button>
       <button id="reading-ocr" type="button" hidden>Reconocer con OCR</button>
       <p id="reading-status" class="muted" role="status" aria-live="polite" aria-atomic="true"></p>
     </div>
@@ -197,6 +189,10 @@
           <option value="paragraph">Párrafo</option>
           <option value="sentence">Frase</option>
         </select>
+        <details id="reading-formats-disclosure">
+          <summary id="reading-formats-toggle">Consultar formatos compatibles</summary>
+          <p id="reading-formats-list">TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 e imágenes PNG, JPG y WebP mediante OCR.</p>
+        </details>
       </details>
       <p id="reading-settings-status" class="muted" role="status" aria-live="polite"></p>
       </section>
@@ -311,18 +307,8 @@
       <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
     </section>
 
-    <section id="reading-management-web" class="panel" aria-labelledby="reading-management-heading">
-      <h3 id="reading-management-heading">Biblioteca y lectura</h3>
-      <div class="resource-actions" aria-label="Biblioteca y lectura">
-        <button type="button" data-reading-view="reading-library-web">Mi biblioteca</button>
-        <button type="button" data-reading-view="reading-marks-web">Marcadores</button>
-      </div>
-    </section>
-
-    <section id="reading-library-web" class="panel reading-subview" hidden aria-labelledby="reading-library-heading">
-      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
+    <section id="reading-library-web" class="panel" aria-labelledby="reading-library-heading">
       <h3 id="reading-library-heading" tabindex="-1">Mi biblioteca</h3>
-      <p id="reading-library-intro">Los documentos se guardan localmente en esta instalación de TifloLector. No se sincronizan automáticamente con otros dispositivos.</p>
       <label id="reading-library-filter-label" for="reading-library-filter">Mostrar en la biblioteca</label>
       <select id="reading-library-filter">
         <option value="all">Todos los documentos</option>
@@ -332,7 +318,6 @@
         <option value="read">Leídos</option>
         <option value="queue">Cola de lectura</option>
       </select>
-      <button id="reading-library-refresh" type="button">Actualizar biblioteca</button>
       <p id="reading-library-status" class="muted" role="status" aria-live="polite"></p>
       <div id="reading-library-list" class="resource-list"></div>
       <section id="reading-library-queue-panel" hidden aria-labelledby="reading-queue-heading">
@@ -341,7 +326,7 @@
         <p id="reading-queue-status" class="muted" role="status" aria-live="polite"></p>
         <div id="reading-queue-list" class="resource-list"></div>
       </section>
-      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
+      <button type="button" data-reading-view="reading-marks-web" aria-controls="reading-marks-web">Marcadores</button>
     </section>
 
     <section id="reading-marks-web" class="panel reading-subview" hidden aria-labelledby="reading-marks-heading">

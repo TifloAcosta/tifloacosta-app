@@ -93,7 +93,7 @@ test('TifloLector iOS uses one document/image importer without duplicated OCR en
   assert.match(index, /id="reading-file" type="file"/);
   assert.match(index, /image\/png,image\/jpeg,image\/webp/);
   assert.match(index, /id="reading-ocr" type="button" hidden/);
-  assert.match(index, /id="reading-paste"/);
+  assert.doesNotMatch(index, /id="reading-paste"/);
   assert.doesNotMatch(parity, /ios-ocr-import/);
   assert.doesNotMatch(parity, /OCR: abrir imagen o PDF escaneado/);
   assert.match(parity, /Images and scanned PDFs already use the main document import control/);
@@ -119,6 +119,42 @@ test('TifloLector iOS integrates the complete reading queue within the library f
   assert.match(reader, /await renderQueue\(\)/);
   assert.match(reader, /libraryClient\.moveQueueItem/);
   assert.match(reader, /libraryClient\.removeFromQueue/);
-  assert.match(guide, /Mostrar en la biblioteca/);
+  assert.match(guide, /Mi biblioteca permanece a la vista/);
   assert.match(guide, /Recently imported/);
+});
+
+test('iOS TifloLector starts with import, collapsed reading settings and visible library', async () => {
+  const [index, reader, parity] = await Promise.all([
+    read('index.html'), read('web-reading.js'), read('ios-build/ios-parity.js')
+  ]);
+  const section = index.slice(index.indexOf('<section id="reading-section"'), index.indexOf('<section id="news-view"'));
+  assert.ok(section.indexOf('id="reading-file"') < section.indexOf('id="reading-settings-disclosure"'));
+  assert.ok(section.indexOf('id="reading-settings-disclosure"') < section.indexOf('id="reading-library-web"'));
+  assert.match(section, /<section id="reading-library-web" class="panel" aria-labelledby="reading-library-heading">/);
+  assert.doesNotMatch(section, /id="reading-start-heading"|id="reading-management-web"|id="reading-prepare"|id="reading-paste"|id="reading-intro"|id="reading-library-refresh"/);
+  assert.doesNotMatch(section, /data-reading-view="reading-library-web"/);
+  assert.match(section, /<details id="reading-settings-disclosure"/);
+  assert.ok(section.indexOf('data-reading-view="reading-audio-view"') < section.indexOf('data-reading-view="reading-visual-view"'));
+  assert.ok(section.indexOf('data-reading-view="reading-visual-view"') < section.indexOf('id="reading-general-settings"'));
+  const general = section.slice(section.indexOf('id="reading-general-settings"'), section.indexOf('id="reading-settings-status"'));
+  assert.match(general, /id="reading-formats-disclosure"/);
+  assert.match(general, /id="reading-formats-list"/);
+  assert.match(general, /id="reading-default-navigation"/);
+  assert.ok(section.indexOf('id="reading-library-list"') < section.indexOf('data-reading-view="reading-marks-web"'));
+  assert.match(section, /<option value="all">Todos los documentos<\/option>/);
+  assert.doesNotMatch(reader, /els\.prepare|els\.paste|function prepareReading\(/);
+  assert.match(reader, /readerReturnBookId = String\(id\)/);
+  assert.match(reader, /title\.focus\(\{ preventScroll: true \}\)/);
+  assert.doesNotMatch(parity, /ios-reading-settings-disclosure|ios-reading-default-unit/);
+  assert.match(parity, /tifloWebReadingSettingsV1/);
+});
+
+test('iOS guide accurately describes the compact reader navigation and existing OCR', async () => {
+  const guide = await read('ios-build/ios-guide.js');
+  assert.match(guide, /Mi biblioteca permanece a la vista/);
+  assert.match(guide, /cuadro para pegar textos/);
+  assert.match(guide, /General puedes establecer una única unidad de avance/);
+  assert.match(guide, /My library is visible by default/);
+  assert.match(guide, /Bookmarks button follows the titles/);
+  assert.match(guide, /gestos verticales personalizados de VoiceOver/);
 });

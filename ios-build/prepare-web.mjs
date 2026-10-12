@@ -282,6 +282,35 @@ iosApp = iosApp.replace(newsRenderPoint, "  async function refreshIosResourceCat
 const originalResourceFetch = "await fetch('https://tifloacosta.com/data.js', { cache: 'no-store' })";
 if (!iosApp.includes(originalResourceFetch)) throw new Error('Falta lectura de Novedades remotas');
 iosApp = iosApp.replace(originalResourceFetch, "await " + networkFirst('data.js'));
+
+const iosOnlyBaseReplacement = [
+  '      data = items;',
+  '      window.TIFLO_RESOURCES = items;',
+  '      renderNews();'
+].join('\\n');
+if (!iosApp.includes(iosOnlyBaseReplacement)) throw new Error('Novedades iOS no conserva el catálogo completo');
+const iosCompleteCatalog = [
+  '      // Preserve items supplied by the packaged supplemental catalogs.',
+  '      const merged = new Map((Array.isArray(data) ? data : []).filter(item => item?.id).map(item => [item.id, item]));',
+  '      for (const item of items) merged.set(item.id, { ...(merged.get(item.id) || {}), ...item });',
+  '      try {',
+  '        const feedResponse = await '+networkFirst('mobile-content.json').replaceAll('\\n',' ' )+';',
+  '        if (feedResponse?.ok) {',
+  '          const feed = await feedResponse.json();',
+  '          if (feed?.schemaVersion === 1 && Array.isArray(feed.resources)) {',
+  '            for (const item of feed.resources) {',
+  '              if (!item?.isNew || !item.id || !item.title || !Number.isFinite(Date.parse(item.newsDate || ""))) continue;',
+  '              merged.set(item.id, { ...(merged.get(item.id) || {}), ...item, new: true });',
+  '            }',
+  '          }',
+  '        }',
+  '      } catch { /* Keep the packaged and primary resource catalog offline. */ }',
+  '      data = [...merged.values()];',
+  '      window.TIFLO_RESOURCES = data;',
+  '      renderNews();'
+].join('\\n');
+iosApp = iosApp.replace(iosOnlyBaseReplacement, iosCompleteCatalog);
+
 const iosStartPoint = 'applyPrefs();applyLanguage();loadActualidadHome();trackLanguageUse();announceCompletedUpdate();';
 if (!iosApp.includes(iosStartPoint)) throw new Error('No se encuentra inicialización de Novedades');
 iosApp = iosApp.replace(iosStartPoint, iosStartPoint +

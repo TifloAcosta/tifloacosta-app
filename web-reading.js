@@ -71,6 +71,8 @@
     libraryHeading: $('#reading-library-heading'),
     libraryIntro: $('#reading-library-intro'),
     libraryRefresh: $('#reading-library-refresh'),
+    libraryFilter: $('#reading-library-filter'),
+    libraryQuery: $('#reading-library-query'),
     libraryStatus: $('#reading-library-status'),
     libraryList: $('#reading-library-list'),
     pdfPasswordWrap: $('#reading-pdf-password-wrap'),
@@ -2376,8 +2378,10 @@
     clearActiveAudio();
 
     if (readerReturnView === 'library') {
-      const openLibrary = document.querySelector('[data-reading-view="reading-library-web"]');
-      openLibrary?.click?.();
+      const currentTitle = currentBookId
+        ? document.getElementById('reading-library-title-' + String(currentBookId).replace(/[^a-zA-Z0-9_-]/g, '-'))
+        : null;
+      queueMicrotask(() => (currentTitle || els.libraryHeading)?.focus({ preventScroll: true }));
     } else {
       const heading = document.getElementById('reading-heading');
       queueMicrotask(() => heading?.focus());
@@ -2637,7 +2641,18 @@
     }
 
     try {
-      const page = await libraryClient.listBooks({ page: 1, pageSize: 100, sort: 'lastRead' });
+      const libraryView = els.libraryFilter?.value || 'all';
+      const query = els.libraryQuery?.value?.trim() || '';
+      const isQueueView = libraryView === 'queue';
+      const isRecentView = libraryView === 'recent';
+      const status = ['in-reading','not-read','read'].includes(libraryView) ? libraryView : 'all';
+      const page = isQueueView
+        ? { items: (await libraryClient.listQueue()).filter(book =>
+            !query || (book.title + ' ' + (book.author || '')).toLocaleLowerCase().includes(query.toLocaleLowerCase())) }
+        : await libraryClient.listBooks({
+            page: 1, pageSize: 100, query, status,
+            sort: isRecentView ? 'imported' : 'lastRead'
+          });
       if (!page.items.length) {
         els.libraryStatus.textContent = t().libraryEmpty;
         return;
@@ -3184,6 +3199,8 @@
   els.translationTarget.addEventListener('change', resetTranslationSelection);
   els.save.addEventListener('click', () => { void saveCurrentDocument(); });
   els.libraryRefresh.addEventListener('click', () => { void Promise.all([renderLibrary(), renderQueue(), renderMarks()]); });
+  els.libraryFilter?.addEventListener('change', () => { void renderLibrary(); });
+  els.libraryQuery?.addEventListener('input', () => { void renderLibrary(); });
   els.bookmark.addEventListener('click', () => { void addBookmark(); });
   els.queueToggle.addEventListener('click', () => { void toggleQueue(); });
 

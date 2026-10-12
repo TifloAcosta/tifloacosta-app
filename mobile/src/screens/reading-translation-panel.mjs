@@ -1,4 +1,7 @@
 import { createReadingTranslationJob } from '../core/reading-translation.mjs';
+import { registerPlugin } from '@capacitor/core';
+
+const NativeExport = registerPlugin('TifloReadingExport');
 
 function text(t, key, es, en) {
   const translated = typeof t === 'function' ? t(key) : '';
@@ -104,6 +107,11 @@ export function createReadingTranslationPanel({
   readTranslationButton.hidden = true;
   readTranslationButton.textContent = text(t, 'readingBook.translationReadResult', 'Leer el documento traducido', 'Read translated document');
 
+  const exportButton = document.createElement('button');
+  exportButton.type = 'button';
+  exportButton.hidden = true;
+  exportButton.textContent = document.documentElement.lang === 'en' ? 'Save or share translation as TXT' : 'Guardar o compartir traducción en TXT';
+
   const closeButton = document.createElement('button');
   closeButton.type = 'button';
   closeButton.textContent = text(t, 'readingBook.translationClose', 'Cerrar', 'Close');
@@ -127,6 +135,7 @@ export function createReadingTranslationPanel({
     cancelButton,
     closeButton,
     readTranslationButton,
+    exportButton,
     progress
   );
   root.append(section);
@@ -215,6 +224,7 @@ export function createReadingTranslationPanel({
     progress.textContent = statusText(state);
     const complete = state.status === 'complete';
     readTranslationButton.hidden = !complete || !state.document?.blocks?.length;
+    exportButton.hidden = !complete || !state.document?.blocks?.length;
     resumeButton.hidden = complete || state.completedUnits === 0 || running;
     translateButton.hidden = complete || state.completedUnits > 0;
     cancelButton.hidden = !running;
@@ -358,6 +368,50 @@ export function createReadingTranslationPanel({
     }
   }
 
+  async function exportTranslation() {
+    const state = job?.getState?.();
+    if (state?.status !== 'complete' || !state.document?.blocks?.length) return;
+    const resultText = state.document.blocks.map(block => String(block?.text || '').trim()).filter(Boolean).join('\n\n');
+    if (!resultText) return;
+    const filename = 'tiflolector-traduccion-' + (cleanLanguage(state.targetLanguage || targetSelect.value) || 'txt') + '.txt';
+    exportButton.disabled = true;
+    try {
+      if (globalThis.navigator?.share && globalThis.File) {
+        const file = new File([resultText], filename, { type: 'text/plain;charset=utf-8' });
+        if (!globalThis.navigator.canShare || globalThis.navigator.canShare({ files: [file] })) {
+          await globalThis.navigator.share({ files: [file], title: filename });
+          progress.textContent = document.documentElement.lang === 'en' ? 'Translation sent to the system share sheet.' : 'Traducción enviada a las opciones de compartir.';
+          return;
+        }
+      }
+      const response = await NativeExport.shareTextFile({ text: resultText, filename });
+      if (response?.shared === true) {
+        progress.textContent = document.documentElement.lang === 'en' ? 'Translation shared.' : 'Traducción compartida.';
+        return;
+      }
+      if (response?.shared === false) {
+        progress.textContent = document.documentElement.lang === 'en' ? 'Export cancelled.' : 'Exportación cancelada.';
+        return;
+      }
+    } catch (error) {
+      if (error?.name === 'AbortError') {
+        progress.textContent = document.documentElement.lang === 'en' ? 'Export cancelled.' : 'Exportación cancelada.';
+        return;
+      }
+    } finally {
+      exportButton.disabled = false;
+    }
+    // Browser fallback; never use this as a substitute for the native iOS sheet.
+    const blob = new Blob([resultText], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(url), 30000);
+    progress.textContent = document.documentElement.lang === 'en' ? 'Download initiated.' : 'Descarga iniciada.';
+  }
+
   function close() {
     section.hidden = true;
     returnFocus?.();
@@ -395,6 +449,7 @@ export function createReadingTranslationPanel({
     );
   });
   closeButton.addEventListener('click', close);
+  exportButton.addEventListener('click', () => { void exportTranslation(); });
   readTranslationButton.addEventListener('click', () => {
     void (async () => {
       const opened = await onOpenTranslation?.();

@@ -403,19 +403,47 @@ export function renderReadingLibrary({
     () => { void resetReadingDefaults(); }
   );
 
-  settingsPanel.append(
-    voiceLabel, voiceSelect, rateLabel, rateSelect, audioSpeedLabel, audioSpeedSelect, skipLabel, skipSelect,
+  function settingsGroup(es, en) {
+    const details = document.createElement('details');
+    details.className = 'reading-settings-disclosure';
+    const summary = document.createElement('summary');
+    summary.textContent = document.documentElement.lang === 'en' ? en : es;
+    details.append(summary);
+    return details;
+  }
+
+  const audioGroup = settingsGroup('Audio y voz', 'Audio and voice');
+  audioGroup.append(voiceLabel, voiceSelect, rateLabel, rateSelect, audioSpeedLabel, audioSpeedSelect, skipLabel, skipSelect);
+  const visualGroup = settingsGroup('Presentación visual', 'Visual presentation');
+  visualGroup.append(
     textSizeLabel, textSizeSelect, fontFamilyLabel, fontFamilySelect, fontWeightLabel, fontWeightSelect,
-    lineSpacingLabel, lineSpacingSelect, paragraphSpacingLabel, paragraphSpacingSelect, readingWidthLabel, readingWidthSelect,
-    foregroundLabel, foregroundSelect, backgroundLabel, backgroundSelect, themeLabel, themeSelect,
-    highContrast, highContrastLabel, resetSettings, settingsStatus
+    lineSpacingLabel, lineSpacingSelect, paragraphSpacingLabel, paragraphSpacingSelect,
+    readingWidthLabel, readingWidthSelect, foregroundLabel, foregroundSelect,
+    backgroundLabel, backgroundSelect, themeLabel, themeSelect, highContrast, highContrastLabel
   );
+  const generalGroup = settingsGroup('General', 'General');
+  const { label: navigationModeLabel, control: navigationModeSelect } = settingSelect(
+    'reading-library-global-navigation',
+    document.documentElement.lang === 'en' ? 'Default navigation mode for documents' : 'Modo de avance predeterminado para documentos',
+    [
+      ['sentence', document.documentElement.lang === 'en' ? 'Sentence' : 'Frase'],
+      ['paragraph', document.documentElement.lang === 'en' ? 'Paragraph' : 'Párrafo'],
+      ['heading', document.documentElement.lang === 'en' ? 'Heading' : 'Encabezamiento'],
+      ['listItem', document.documentElement.lang === 'en' ? 'List item' : 'Elemento de lista'],
+      ['quote', document.documentElement.lang === 'en' ? 'Quote' : 'Cita'],
+      ['tableCell', document.documentElement.lang === 'en' ? 'Table cell' : 'Celda de tabla'],
+      ['page', document.documentElement.lang === 'en' ? 'PDF page' : 'Página PDF']
+    ]
+  );
+  generalGroup.append(navigationModeLabel, navigationModeSelect, resetSettings, settingsStatus);
+  settingsPanel.append(audioGroup, visualGroup, generalGroup);
   settingsSection.append(settingsHeading, settingsToggle, settingsPanel);
   root.append(settingsSection);
 
   const globalSettingControls = new Map([
     ['speech.voice', voiceSelect],
     ['speech.rate', rateSelect],
+    ['reading.navigationMode', navigationModeSelect],
     ['audio.speed', audioSpeedSelect],
     ['audio.skipSeconds', skipSelect],
     ['visual.textSize', textSizeSelect],

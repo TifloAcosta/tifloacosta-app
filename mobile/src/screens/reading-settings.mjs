@@ -145,6 +145,19 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
   dictionaryForm.append(termLabel, replacementLabel, savePronunciation);
   dictionary.append(dictionaryHeading, dictionaryList, dictionaryForm, dictionaryStatus);
 
+  async function applyDictionaryToSpeech(rules) {
+    if (!speech?.setPronunciationRules) return;
+    const wasPlaying = speech.snapshot?.().playing === true;
+    if (wasPlaying) await speech.pause();
+    speech.setPronunciationRules(rules);
+    if (wasPlaying) {
+      const resumed = await speech.play();
+      if (!resumed) dictionaryStatus.textContent = document.documentElement.lang === 'en'
+        ? 'Dictionary saved. Select Play to continue reading.'
+        : 'Diccionario guardado. Pulsa Reproducir para continuar.';
+    }
+  }
+
   function renderDictionary() {
     dictionaryList.replaceChildren();
     for (const rule of loadPronunciationRules()) {
@@ -157,7 +170,7 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
       remove.addEventListener('click', () => {
         const rules = loadPronunciationRules().filter(entry => entry.term.toLocaleLowerCase() !== rule.term.toLocaleLowerCase());
         if (!savePronunciationRules(rules)) return;
-        speech?.setPronunciationRules?.(rules);
+        void applyDictionaryToSpeech(rules);
         renderDictionary();
         dictionaryStatus.textContent = document.documentElement.lang === 'en' ? 'Pronunciation removed.' : 'Pronunciación eliminada.';
         dictionaryHeading.focus();
@@ -182,7 +195,7 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
       dictionaryStatus.textContent = document.documentElement.lang === 'en' ? 'Unable to save.' : 'No se pudo guardar.';
       return;
     }
-    speech?.setPronunciationRules?.(rules);
+    void applyDictionaryToSpeech(rules);
     renderDictionary();
     termInput.value = '';
     replacementInput.value = '';

@@ -109,19 +109,22 @@ public final class TifloReadingLanguagePlugin: CAPPlugin, CAPBridgedPlugin {
                 ])
                 return
             }
-            let session = TranslationSession(installedSource: source, target: target)
-            do {
-                var results: [String] = []
-                results.reserveCapacity(texts.count)
-                // Batches are small and bounded; preserve source order for the reader.
-                for value in texts {
-                    let translated = try await session.translate(value)
-                    results.append(translated.targetText)
-                }
-                call.resolve(["translations": results, "status": "ok"])
-            } catch {
+            // Apple's TranslationSession cannot be created manually. A SwiftUI
+            // translationTask owns its lifetime and provides a supported session.
+            guard let presenter = self.bridge?.viewController else {
                 call.resolve(["translations": [], "status": "error"])
+                return
             }
+            var host: UIViewController?
+            let view = TifloTranslationBatchView(source: source, target: target, texts: texts) { translated, result in
+                host?.dismiss(animated: true)
+                call.resolve(["translations": translated, "status": result])
+            }
+            let controller = UIHostingController(rootView: view)
+            controller.modalPresentationStyle = .overFullScreen
+            controller.isModalInPresentation = true
+            host = controller
+            presenter.present(controller, animated: true)
         }
     }
 }
@@ -164,6 +167,44 @@ private struct TifloLanguagePreparationView: View {
                 } catch {
                     finish(false)
                 }
+            }
+        }
+    }
+}
+
+@available(iOS 18.0, *)
+private struct TifloTranslationBatchView: View {
+    let source: Locale.Language
+    let target: Locale.Language
+    let texts: [String]
+    let completion: ([String], String) -> Void
+
+    @State private var finished = false
+
+    private func finish(_ values: [String], status: String) {
+        guard !finished else { return }
+        finished = true
+        completion(values, status)
+    }
+
+    var body: some View {
+        VStack(spacing: 16) {
+            Text("Traducción en el dispositivo").font(.headline)
+                .accessibilityAddTraits(.isHeader)
+            ProgressView().accessibilityLabel("Traduciendo el documento")
+        }
+        .padding()
+        .translationTask(source: source, target: target) { session in
+            do {
+                var translations: [String] = []
+                translations.reserveCapacity(texts.count)
+                for text in texts {
+                    let response = try await session.translate(text)
+                    translations.append(response.targetText)
+                }
+                finish(translations, status: "ok")
+            } catch {
+                finish([], status: "error")
             }
         }
     }

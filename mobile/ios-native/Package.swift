@@ -2,10 +2,10 @@
 import PackageDescription
 
 let package = Package(
-    name: "TifloReadingIos",
+    name: "TifloacostaIosNative",
     platforms: [.iOS(.v15)],
     products: [
-        .library(name: "TifloReadingIos", targets: ["TifloReadingIos"])
+        .library(name: "TifloacostaIosNative", targets: ["TifloReadingIos"])
     ],
     dependencies: [
         .package(url: "https://github.com/ionic-team/capacitor-swift-pm.git", from: "8.0.0")

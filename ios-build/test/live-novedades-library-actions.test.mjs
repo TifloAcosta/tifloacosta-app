@@ -84,3 +84,41 @@ test('iOS recovers dated Novedades independently if primary data.js is blocked',
   assert.match(refresh, /source === 'mobile-feed'/);
   assert.match(refresh, /Novedades cargadas/);
 });
+
+test('TifloLector iOS uses one document/image importer without duplicated OCR entry', async () => {
+  const [index, parity] = await Promise.all([
+    read('index.html'),
+    read('ios-build/ios-parity.js')
+  ]);
+  assert.match(index, /id="reading-file" type="file"/);
+  assert.match(index, /image\/png,image\/jpeg,image\/webp/);
+  assert.match(index, /id="reading-ocr" type="button" hidden/);
+  assert.match(index, /id="reading-paste"/);
+  assert.doesNotMatch(parity, /ios-ocr-import/);
+  assert.doesNotMatch(parity, /OCR: abrir imagen o PDF escaneado/);
+  assert.match(parity, /Images and scanned PDFs already use the main document import control/);
+});
+
+test('TifloLector iOS integrates the complete reading queue within the library filter', async () => {
+  const [index, reader, guide] = await Promise.all([
+    read('index.html'),
+    read('web-reading.js'),
+    read('ios-build/ios-guide.js')
+  ]);
+  for (const value of ['all', 'recent', 'in-reading', 'not-read', 'read', 'queue']) {
+    assert.match(index, new RegExp('<option value="' + value + '">'));
+  }
+  assert.match(index, /id="reading-library-queue-panel" hidden/);
+  assert.doesNotMatch(index, /data-reading-view="reading-queue-web"/);
+  assert.doesNotMatch(index, /id="reading-queue-web"/);
+  assert.match(reader, /libraryQueuePanel\.hidden = !queueView/);
+  assert.match(reader, /els\.libraryList\.hidden = queueView/);
+  assert.match(reader, /sort: view === 'recent' \? 'imported' : 'lastRead'/);
+  assert.match(reader, /status,/);
+  assert.match(reader, /els\.libraryFilter\?\.addEventListener\('change'/);
+  assert.match(reader, /await renderQueue\(\)/);
+  assert.match(reader, /libraryClient\.moveQueueItem/);
+  assert.match(reader, /libraryClient\.removeFromQueue/);
+  assert.match(guide, /Mostrar en la biblioteca/);
+  assert.match(guide, /Recently imported/);
+});

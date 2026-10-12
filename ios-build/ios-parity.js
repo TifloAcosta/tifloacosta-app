@@ -306,24 +306,8 @@
       } catch { return {}; }
     }
 
-    // A permanent entry describes OCR before a user imports a scanned file.
-    const fileInput = document.getElementById('reading-file');
-    const fileLabel = document.getElementById('reading-file-label');
-    if (fileInput && fileLabel && !document.getElementById('ios-ocr-import')) {
-      const entry = document.createElement('div');
-      entry.id = 'ios-ocr-import';
-      const description = document.createElement('p');
-      description.textContent = localized(
-        'OCR: selecciona una imagen o un PDF escaneado. Si no contiene texto extraíble, TifloLector ofrecerá reconocerlo.',
-        'OCR: choose an image or scanned PDF. If it has no extractable text, TifloReader will offer recognition.'
-      );
-      const action = document.createElement('button');
-      action.type = 'button';
-      action.textContent = localized('Reconocer imagen o PDF con OCR', 'Recognize an image or PDF with OCR');
-      action.addEventListener('click', () => fileInput.click());
-      entry.append(description, action);
-      fileLabel.before(entry);
-    }
+    // Images and scanned PDFs already use the main document import control.
+    // OCR remains contextual when the imported file needs recognition.
 
     // One global default. Each document may override it without changing the default.
     const settings = document.getElementById('reading-settings-web');
@@ -470,19 +454,7 @@
       });
       more.before(translate);
 
-      // OCR for another scanned document, without exposing an unusable OCR command.
-      const morePanel = document.getElementById('reading-document-more-actions');
-      if (morePanel) {
-        const ocr = document.createElement('button');
-        ocr.type = 'button';
-        ocr.textContent = localized('OCR: abrir imagen o PDF escaneado', 'OCR: open an image or scanned PDF');
-        ocr.addEventListener('click', () => {
-          const back = document.getElementById('reading-reader-back');
-          back?.click();
-          queueMicrotask(() => fileInput?.focus());
-        });
-        morePanel.append(ocr);
-      }
+      // The document importer remains the single entry point for scanned files.
 
       let documentKey = null;
       const restoreUnit = () => {

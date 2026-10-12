@@ -61,6 +61,8 @@ public class TifloReadingPlugin extends Plugin {
     private static final String[] SUPPORTED_READING_SETTING_KEYS = {
             "speech.rate",
             "speech.voice",
+            "speech.voiceLanguage",
+            "reading.navigationMode",
             "audio.speed",
             "audio.skipSeconds",
             "visual.textSize",

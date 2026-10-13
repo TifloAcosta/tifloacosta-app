@@ -14,6 +14,8 @@ test('iOS library title is a native VoiceOver element, not a view-wide WKWebView
   assert.match(swift, /UIAccessibilityCustomAction\(name: details,/);
   assert.match(swift, /UIAccessibilityCustomAction\(name: delete,/);
   assert.match(swift, /accessibilityHint = english/);
+  assert.match(swift, /screen\.focusFirstBook\(\)/);
+  assert.match(swift, /UIAccessibility\.post\(notification: \.screenChanged, argument: first \?\? table\)/);
   assert.match(swift, /notifyListeners\("readingLibraryAction"/);
   assert.match(controller, /registerPluginInstance\(TifloReadingAccessibilityPlugin\(\)\)/);
   assert.match(installer, /TifloReadingAccessibilityPlugin\.swift/);

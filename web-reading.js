@@ -1859,6 +1859,62 @@
       previous: () => seekSynchronizedDaisyClip(clipIndex - 1, null, !audio.paused),
       next: () => seekSynchronizedDaisyClip(clipIndex + 1, null, !audio.paused)
     };
+    if (marksHost && savedBook?.id && libraryAdapter?.addMark && libraryAdapter?.listMarks) {
+      marksHost.hidden = false;
+      const saveMark = document.createElement('button');
+      saveMark.type = 'button';
+      saveMark.textContent = language() === 'en'
+        ? 'Bookmark DAISY audio position' : 'Marcar posición del audio DAISY';
+      const markList = document.createElement('ul');
+      const markStatus = document.createElement('p');
+      markStatus.setAttribute('role', 'status');
+      const displayDaisyMarks = async () => {
+        const marks = await libraryAdapter.listMarks({ bookId: savedBook.id });
+        if (activeAudio !== audio) return;
+        markList.replaceChildren();
+        for (const mark of marks.filter(value => value.type === 'bookmark')) {
+          const item = document.createElement('li');
+          const jump = document.createElement('button');
+          jump.type = 'button';
+          jump.textContent = (language() === 'en' ? 'Go to ' : 'Ir a ')
+            + (mark.reference || ('Segmento ' + (mark.mediaTrackIndex + 1)));
+          jump.addEventListener('click', () => {
+            void seekSynchronizedDaisyClip(mark.mediaTrackIndex, mark.mediaPositionMs, false)
+              .then(() => jump.focus());
+          });
+          const remove = document.createElement('button');
+          remove.type = 'button';
+          remove.textContent = language() === 'en' ? 'Delete bookmark' : 'Eliminar marcador';
+          remove.addEventListener('click', () => {
+            void libraryAdapter.deleteMark({ id: mark.id }).then(displayDaisyMarks).then(() => {
+              saveMark.focus();
+              markStatus.textContent = language() === 'en' ? 'Bookmark deleted.' : 'Marcador eliminado.';
+            });
+          });
+          item.append(jump, remove);
+          markList.append(item);
+        }
+      };
+      saveMark.addEventListener('click', () => {
+        const clip = clips[clipIndex];
+        const timeMs = Math.round(Math.max(0, Number(audio.currentTime) || 0) * 1000);
+        void libraryAdapter.addMark({
+          bookId: savedBook.id, type:'bookmark', blockIndex:0, unitIndex:0,
+          mediaTrackIndex:clipIndex, mediaPositionMs:timeMs,
+          reference: (language() === 'en' ? 'Segment ' : 'Segmento ')
+            + (clipIndex + 1) + ', ' + formatAudioTime(timeMs / 1000),
+          excerpt: clip?.audioHref || savedBook.title
+        }).then(displayDaisyMarks).then(() => {
+          markStatus.textContent = language() === 'en' ? 'Bookmark saved.' : 'Marcador guardado.';
+          saveMark.focus();
+        }).catch(() => {
+          markStatus.textContent = language() === 'en'
+            ? 'Could not save bookmark.' : 'No se pudo guardar el marcador.';
+        });
+      });
+      marksHost.append(saveMark, markList, markStatus);
+      void displayDaisyMarks();
+    }
     navGo.addEventListener('click', () => {
       const entry = daisy.navigation[Number(navSelect.value)];
       if (!entry) return;

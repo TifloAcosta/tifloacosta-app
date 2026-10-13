@@ -2512,6 +2512,10 @@
     });
     els.markStatus.textContent = mark ? t().bookmarked : t().bookmarkFailed;
     if (mark) await renderMarks();
+    const marksView = document.getElementById('reading-marks-web');
+    if (els.marksStatus && marksView && !marksView.hidden) {
+      els.marksStatus.textContent = mark ? t().bookmarked : t().bookmarkFailed;
+    }
   }
 
   async function renderMarks() {

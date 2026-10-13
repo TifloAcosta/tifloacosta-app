@@ -74,7 +74,7 @@ jobs:
           import assert from 'node:assert/strict';
           const identity = JSON.parse(fs.readFileSync('www/tiflo-build-identity.json', 'utf8'));
           assert.equal(identity.sourceSha, process.env.GITHUB_SHA);
-          assert.equal(identity.buildCode, String(300000 + Number(process.env.GITHUB_RUN_NUMBER)));
+          assert.equal(identity.buildCode, String(400000 + Number(process.env.GITHUB_RUN_NUMBER)));
           assert.equal(identity.reader, 'web-reading.js');
           const reader = fs.readFileSync('www/web-reading.js', 'utf8');
           for (const marker of ['useDaisyAudioFile(', 'persistDaisyPosition(', 'ensureNativeLibraryActions(']) {
@@ -139,7 +139,7 @@ jobs:
           require 'xcodeproj'
           # Builds anteriores (p. ej. 200062) no pueden reemplazarse con 69.
           # Mantener una serie creciente separada del contador de GitHub Actions.
-          build_number = (300000 + Integer(ENV.fetch('BUILD_RUN_NUMBER'))).to_s
+          build_number = (400000 + Integer(ENV.fetch('BUILD_RUN_NUMBER'))).to_s
           project = Xcodeproj::Project.open('ios/App/App.xcodeproj')
           app = project.targets.find { |target| target.name == 'App' }
           abort 'No se encontró el target App' unless app
@@ -309,7 +309,7 @@ jobs:
           ENCRYPTION="$(/usr/libexec/PlistBuddy -c 'Print :ITSAppUsesNonExemptEncryption' "$APP_PLIST")"
           MIN_IOS="$(/usr/libexec/PlistBuddy -c 'Print :MinimumOSVersion' "$APP_PLIST")"
           BUILD_VERSION="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "$APP_PLIST")"
-          EXPECTED_BUILD="$((300000 + GITHUB_RUN_NUMBER))"
+          EXPECTED_BUILD="$((400000 + GITHUB_RUN_NUMBER))"
           LOCATION_PURPOSE="$(/usr/libexec/PlistBuddy -c 'Print :NSLocationWhenInUseUsageDescription' "$APP_PLIST")"
           test "$ENCRYPTION" = false || { echo "::error::Falta declaración de cifrado exento"; exit 1; }
           test "$MIN_IOS" = 15.0 || { echo "::error::iOS mínimo incorrecto: $MIN_IOS"; exit 1; }

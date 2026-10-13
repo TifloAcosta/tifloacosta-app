@@ -343,6 +343,13 @@
       <button id="reading-library-refresh" type="button">Actualizar biblioteca</button>
       <p id="reading-library-status" class="muted" role="status" aria-live="polite"></p>
       <div id="reading-library-list" class="resource-list"></div>
+      <nav id="reading-library-pager" aria-label="Páginas de Mi biblioteca" hidden>
+        <p id="reading-library-page-status" role="status" aria-live="polite" tabindex="-1"></p>
+        <div class="resource-actions">
+          <button id="reading-library-prev-page" type="button">Página anterior</button>
+          <button id="reading-library-next-page" type="button">Página siguiente</button>
+        </div>
+      </nav>
       <div class="resource-actions" aria-label="Navegar por la biblioteca">
         <button type="button" data-reading-view="reading-queue-web" aria-controls="reading-queue-web">Gestionar cola de lectura</button>
         <button type="button" data-reading-view="reading-marks-web" aria-controls="reading-marks-web">Marcadores</button>

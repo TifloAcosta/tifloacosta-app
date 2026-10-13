@@ -168,5 +168,5 @@ test('iOS app exposes packaged code and build fingerprint to verify installed re
   assert.match(build,/tiflo-build-identity\.json/);
   assert.match(build,/tiflo-build-identity\.js/);
   assert.match(build,/TIFLO_IOS_BUILD_IDENTITY/);
-  assert.match(action,/300000 \+ Integer\(ENV\.fetch\('BUILD_RUN_NUMBER'\)\)/);
+  assert.match(action,/400000 \+ Integer\(ENV\.fetch\('BUILD_RUN_NUMBER'\)\)/);
 });

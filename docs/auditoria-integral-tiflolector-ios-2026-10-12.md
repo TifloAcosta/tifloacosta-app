@@ -125,3 +125,10 @@ Se añadieron `test/web-reading-navigation.test.mjs` y `test/web-reading-restore
 6. **Migración segura de datos y origen único del lector**, prueba no destructiva en iPhone y comprobación de componentes dentro de IPA antes de autorizar envío.
 
 **Política de distribución:** no habilitar el workflow automático. No crear nueva compilación ni comunicar disponibilidad hasta cerrar los criterios de aceptación y comprobar Apple/TestFlight de extremo a extremo.
+
+
+### Cierre de protección del paquete iOS — 13/10/2026
+
+Se reforzó `ios-build/prepare-web.mjs`: además de rechazar el formulario viejo, ahora exige los controles de filtro, búsqueda y paginación, tipos de marca, selector de encabezado principal, botón único de reproducir, navegación semántica, controles MP3 en modo audio y guía accesible. Verifica expresamente que **no** haya un segundo botón de Pausa, que la biblioteca incluya su menú de acciones y que el módulo de navegación esté físicamente dentro de `ios-build/www`. Suprimir cualquiera de estas señales aborta el empaquetado.
+
+La barrera DAISY ZIP + plugin Swift de acciones nativas VoiceOver **permanece intacta**, por lo que este endurecimiento **no autoriza una compilación de TestFlight**. Se agregó prueba de regresión del guardián y comprobación sintáctica de `prepare-web.mjs` en el CI sin publicar.

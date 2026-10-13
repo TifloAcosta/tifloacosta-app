@@ -1,8 +1,11 @@
 name: Preparar y enviar TifloAcosta iOS a TestFlight
-# La auditoría de TifloLector impide publicar por cada push.
-# Solo lanzar manualmente cuando los criterios de aceptación estén verificados.
+# Prueba interna aislada autorizada: no es publicación pública en App Store.
+# Nunca se dispara desde main, preparacion-ios ni las ramas de desarrollo.
+# Verificación real de Apple y grupo interno obligatoria antes de anunciarlo.
 on:
   workflow_dispatch:
+  push:
+    branches: [release/ios-tiflolector-interno-20261013]
 
 permissions:
   contents: read

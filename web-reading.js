@@ -66,6 +66,8 @@
     translationOriginal: $('#reading-translation-original'),
     translationTranslated: $('#reading-translation-translated'),
     translationRead: $('#reading-translation-read'),
+    translationExportTxt: $('#reading-translation-export-txt'),
+    translationExportHtml: $('#reading-translation-export-html'),
     translationStatus: $('#reading-translation-status'),
     save: $('#reading-save'),
     libraryHeading: $('#reading-library-heading'),
@@ -347,12 +349,15 @@
   let libraryRenderToken = 0;
   let playbackAccessibilityState = null;
   let activeAudio = null;
+  let persistActiveAudio = null;
   let audioObjectUrl = '';
   let audioTools = null;
   let readingTimerHandle = null;
   let readerViewState = null;
   let readerChromeState = null;
   let readerReturnView = 'main';
+  let pronunciationEntries = [];
+  let pronunciationRestart = Promise.resolve();
   const translationMemory = new Map();
 
   const speechAdapter = typeof shared.createWebReadingSpeechAdapter === 'function'
@@ -981,6 +986,142 @@
     } catch { return {}; }
   }
 
+  const PRONUNCIATION_STORAGE_KEY = 'tifloWebPronunciationV1';
+
+  function loadPronunciationEntries() {
+    try {
+      const stored = JSON.parse(localStorage.getItem(PRONUNCIATION_STORAGE_KEY) || '[]');
+      return shared.normalizePronunciationEntries?.(stored) || [];
+    } catch {
+      return [];
+    }
+  }
+
+  function persistPronunciationEntries(nextEntries) {
+    const sanitized = shared.normalizePronunciationEntries?.(nextEntries) || [];
+    try {
+      localStorage.setItem(PRONUNCIATION_STORAGE_KEY, JSON.stringify(sanitized));
+      pronunciationEntries = sanitized;
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  // A rule changes TTS input only. No source document, selection or mark is edited.
+  function restartSpeechForPronunciation() {
+    if (!documentModel || !speechController) return;
+    pronunciationRestart = pronunciationRestart.then(async () => {
+      const snapshot = speechController?.snapshot?.();
+      const wasPlaying = snapshot?.playing === true;
+      const position = snapshot?.position || {
+        blockIndex: readingSession?.snapshot?.().blockIndex || 0,
+        unitIndex: currentUnitIndex
+      };
+      if (wasPlaying) await speechController.pause();
+      await rebuildSpeech(position);
+      if (wasPlaying) await speechController?.play?.();
+    }).catch(() => {
+      const status = document.getElementById('reading-pronunciation-status');
+      if (status) status.textContent = language() === 'en'
+        ? 'Speech could not be refreshed. The rule has been saved.'
+        : 'No se pudo actualizar la voz. La sustitución ha quedado guardada.';
+    });
+  }
+
+  function renderPronunciationEntries() {
+    const list = document.getElementById('reading-pronunciation-list');
+    if (!list) return;
+    list.replaceChildren();
+    list.setAttribute('aria-label', language() === 'en' ? 'Saved pronunciations' : 'Pronunciaciones guardadas');
+    if (!pronunciationEntries.length) {
+      const empty = document.createElement('li');
+      empty.textContent = language() === 'en' ? 'No saved pronunciations.' : 'No hay pronunciaciones guardadas.';
+      list.append(empty);
+    }
+    for (const rule of pronunciationEntries) {
+      const item = document.createElement('li');
+      const label = document.createElement('span');
+      label.textContent = rule.original + ' → ' + rule.replacement + '. ';
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.textContent = language() === 'en' ? 'Delete pronunciation' : 'Eliminar pronunciación';
+      remove.setAttribute('aria-label', remove.textContent + ': ' + rule.original);
+      remove.addEventListener('click', () => {
+        const remaining = pronunciationEntries.filter(entry =>
+          entry.original.toLocaleLowerCase() !== rule.original.toLocaleLowerCase());
+        const status = document.getElementById('reading-pronunciation-status');
+        if (!persistPronunciationEntries(remaining)) {
+          if (status) status.textContent = language() === 'en'
+            ? 'Could not save the changes.' : 'No se pudieron guardar los cambios.';
+          return;
+        }
+        renderPronunciationEntries();
+        const original = document.getElementById('reading-pronunciation-original');
+        original?.focus();
+        if (status) status.textContent = language() === 'en'
+          ? 'Pronunciation deleted.' : 'Pronunciación eliminada.';
+        restartSpeechForPronunciation();
+      });
+      item.append(label, remove);
+      list.append(item);
+    }
+  }
+
+  function localizePronunciationEditor() {
+    const labels = {
+      'reading-pronunciation-summary': ['Diccionario de pronunciación', 'Pronunciation dictionary'],
+      'reading-pronunciation-help': [
+        'Sustituye palabras o expresiones únicamente al leer en voz alta. El texto original no cambia.',
+        'Replace words or phrases only in spoken audio. The original text is unchanged.'
+      ],
+      'reading-pronunciation-original-label': ['Palabra o expresión original', 'Original word or phrase'],
+      'reading-pronunciation-replacement-label': ['Cómo debe pronunciarse', 'How it should be spoken'],
+      'reading-pronunciation-add': ['Guardar pronunciación', 'Save pronunciation']
+    };
+    const en = language() === 'en';
+    for (const [id, values] of Object.entries(labels)) {
+      const element = document.getElementById(id);
+      if (element) element.textContent = values[en ? 1 : 0];
+    }
+    renderPronunciationEntries();
+  }
+
+  function setupPronunciationDictionary() {
+    pronunciationEntries = loadPronunciationEntries();
+    const form = document.getElementById('reading-pronunciation-form');
+    const original = document.getElementById('reading-pronunciation-original');
+    const replacement = document.getElementById('reading-pronunciation-replacement');
+    const status = document.getElementById('reading-pronunciation-status');
+    form?.addEventListener('submit', event => {
+      event.preventDefault();
+      const candidate = shared.normalizePronunciationEntries?.([
+        ...pronunciationEntries,
+        { original: original?.value, replacement: replacement?.value }
+      ]) || [];
+      if (candidate.length === pronunciationEntries.length) {
+        if (status) status.textContent = language() === 'en'
+          ? 'Invalid or duplicate pronunciation. Check the fields.'
+          : 'Pronunciación repetida o no válida. Revisa los campos.';
+        return;
+      }
+      if (!persistPronunciationEntries(candidate)) {
+        if (status) status.textContent = language() === 'en'
+          ? 'Could not save the pronunciation.'
+          : 'No se pudo guardar la pronunciación.';
+        return;
+      }
+      if (original) original.value = '';
+      if (replacement) replacement.value = '';
+      renderPronunciationEntries();
+      original?.focus();
+      if (status) status.textContent = language() === 'en'
+        ? 'Pronunciation saved. Source text is unchanged.'
+        : 'Pronunciación guardada. El texto original no cambia.';
+      restartSpeechForPronunciation();
+    });
+  }
+
   function saveWebSettings() {
     const value = {
       voice: els.voice?.value || '',
@@ -1058,8 +1199,8 @@
     els.intro.textContent = c.intro;
     if (els.formatsToggle) els.formatsToggle.textContent = language() === 'en' ? 'Show supported file types' : 'Consultar formatos admitidos';
     if (els.formatsList) els.formatsList.textContent = language() === 'en'
-      ? 'TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2, MP3 audio and PNG, JPG or WebP images using OCR.'
-      : 'TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2, audio MP3 e imágenes PNG, JPG y WebP mediante OCR.';
+      ? 'TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2, DAISY ZIP with text, MP3 audio and PNG, JPG or WebP images using OCR. Synchronized DAISY audio is not available yet.'
+      : 'TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2, DAISY ZIP con texto, audio MP3 e imágenes PNG, JPG y WebP mediante OCR. El audio DAISY sincronizado todavía no está disponible.';
     els.fileLabel.textContent = c.file;
     els.pasteLabel.textContent = c.paste;
     els.prepare.textContent = c.prepare;
@@ -1102,11 +1243,14 @@
     els.translationOriginal.textContent = c.translationOriginal;
     els.translationTranslated.textContent = c.translationTranslated;
     if (els.translationRead) els.translationRead.textContent = language() === 'en' ? 'Read the translated document' : 'Leer el documento traducido';
+    if (els.translationExportTxt) els.translationExportTxt.textContent = language() === 'en' ? 'Export translation as TXT' : 'Exportar traducción TXT';
+    if (els.translationExportHtml) els.translationExportHtml.textContent = language() === 'en' ? 'Export translation as HTML' : 'Exportar traducción HTML';
     const settingsSummary = document.getElementById('reading-settings-summary');
     if (settingsSummary) settingsSummary.textContent = language() === 'en' ? 'Reading settings' : 'Ajustes de lectura';
     if (!documentModel) els.title.textContent = c.document;
     populateVoices();
     renderExternalVoices();
+    localizePronunciationEditor();
     renderPosition();
     void Promise.all([renderLibrary(), renderQueue(), renderMarks()]);
   }
@@ -1238,6 +1382,7 @@
 
   function clearActiveAudio() {
     if (activeAudio) {
+      void persistActiveAudio?.({ force: true });
       activeAudio.pause();
       activeAudio.removeAttribute('src');
       activeAudio.load();
@@ -1245,6 +1390,7 @@
     }
     if (audioObjectUrl) URL.revokeObjectURL(audioObjectUrl);
     audioObjectUrl = '';
+    persistActiveAudio = null;
     if (audioTools) audioTools.hidden = true;
     updatePlaybackLabel(false);
   }
@@ -1298,7 +1444,10 @@
     progress.className = 'muted';
     // Progress is available on demand; do not interrupt VoiceOver each second.
     progress.setAttribute('aria-live', 'off');
-    audioTools.append(label, seek, speedLabel, speed, progress);
+    const marksHost = document.createElement('section');
+    marksHost.id = 'reading-audio-marks-controls';
+    marksHost.setAttribute('aria-label', language() === 'en' ? 'Audiobook bookmarks' : 'Marcadores del audiolibro');
+    audioTools.append(label, seek, speedLabel, speed, progress, marksHost);
     els.block.after(audioTools);
     return audioTools;
   }
@@ -1327,24 +1476,35 @@
     els.next.hidden = !audioOnly;
   }
 
-  async function useMp3File(file) {
+  async function useMp3File(file, { existingBook = null, requestedPercent = null } = {}) {
     await pause();
+    await persistActiveAudio?.({ force: true });
     setAccessiblePlaybackMode(false);
     if (speechController) {
       try { await speechController.destroy(); } catch {}
       speechController = null;
     }
     clearActiveAudio();
+    let savedBook = existingBook;
+    if (!savedBook && libraryAdapter?.importAudioFile) {
+      try {
+        savedBook = await libraryAdapter.importAudioFile({
+          file, title: file.name || 'Audiolibro MP3', language: language()
+        });
+      } catch {
+        // Still permit temporary playback, but tell the user that it was not saved.
+      }
+    }
     audioObjectUrl = URL.createObjectURL(file);
     const audio = new Audio(audioObjectUrl);
     activeAudio = audio;
     documentModel = null;
     readingSession = null;
     searchIndex = null;
-    currentBookId = '';
+    currentBookId = savedBook?.id || '';
     currentSource = '';
     currentFormat = 'audio';
-    els.title.textContent = file.name;
+    els.title.textContent = file.name || savedBook?.title || 'Audiolibro MP3';
     els.reader.hidden = false;
     enterReaderOnlyView();
     setReaderAudioOnlyMode(true);
@@ -1357,11 +1517,102 @@
     els.next.textContent = language() === 'en' ? 'Forward 10 seconds' : 'Adelantar 10 segundos';
     els.save.disabled = true;
     els.bookmark.disabled = true;
-    els.queueToggle.disabled = true;
+    els.queueToggle.disabled = !savedBook?.id;
     const tools = ensureAudioTools();
     tools.hidden = false;
     const seek = tools.querySelector('#reading-audio-seek');
     const progress = tools.querySelector('#reading-audio-total-progress');
+    const audioMarks = tools.querySelector('#reading-audio-marks-controls');
+    audioMarks?.replaceChildren();
+    if (audioMarks) audioMarks.hidden = !savedBook?.id;
+    if (audioMarks && savedBook?.id && libraryAdapter?.addMark && libraryAdapter?.listMarks) {
+      const saveMark = document.createElement('button');
+      saveMark.type = 'button';
+      saveMark.textContent = language() === 'en' ? 'Bookmark current audio position' : 'Marcar posición del audio';
+      const list = document.createElement('ul');
+      const markStatus = document.createElement('p');
+      markStatus.setAttribute('role', 'status');
+      markStatus.setAttribute('aria-live', 'polite');
+      const renderAudioMarks = async () => {
+        const marks = await libraryAdapter.listMarks({ bookId: savedBook.id });
+        if (activeAudio !== audio) return;
+        list.replaceChildren();
+        for (const mark of marks.filter(item => item.type === 'bookmark')) {
+          const item = document.createElement('li');
+          const open = document.createElement('button');
+          open.type = 'button';
+          open.textContent = (language() === 'en' ? 'Go to ' : 'Ir a ') + (mark.reference || formatAudioTime(mark.mediaPositionMs / 1000));
+          open.addEventListener('click', () => {
+            if (activeAudio !== audio) return;
+            try { audio.currentTime = Math.max(0, Number(mark.mediaPositionMs) / 1000 || 0); } catch {}
+            updateAudioPosition();
+            void persistPosition({ force: true });
+            open.focus();
+          });
+          const remove = document.createElement('button');
+          remove.type = 'button';
+          remove.textContent = (language() === 'en' ? 'Delete audio bookmark' : 'Eliminar marcador del audio');
+          remove.addEventListener('click', async () => {
+            await libraryAdapter.deleteMark({ id: mark.id });
+            await renderAudioMarks();
+            saveMark.focus();
+            markStatus.textContent = language() === 'en' ? 'Bookmark deleted.' : 'Marcador eliminado.';
+          });
+          item.append(open, remove);
+          list.append(item);
+        }
+      };
+      saveMark.addEventListener('click', async () => {
+        const offset = Math.max(0, Math.round((Number(audio.currentTime) || 0) * 1000));
+        const result = await libraryAdapter.addMark({
+          bookId: savedBook.id, type: 'bookmark', mediaTrackIndex: 0,
+          mediaPositionMs: offset, excerpt: savedBook.title, reference: formatAudioTime(offset / 1000)
+        });
+        if (result?.added) await renderAudioMarks();
+        markStatus.textContent = result?.added
+          ? (language() === 'en' ? 'Audio bookmark saved.' : 'Marcador del audio guardado.')
+          : (language() === 'en' ? 'Could not save the bookmark.' : 'No se pudo guardar el marcador.');
+        saveMark.focus();
+      });
+      audioMarks.append(saveMark, list, markStatus);
+      void renderAudioMarks();
+    }
+    const resumeSeconds = Math.max(0, (Number(savedBook?.mediaPositionMs) || 0) / 1000);
+    let lastPersistedAt = 0;
+    let queuedSave = Promise.resolve();
+    async function persistPosition({ force = false, completed = false } = {}) {
+      if (!savedBook?.id || !libraryAdapter?.saveProgress) return false;
+      const timestamp = Date.now();
+      if (!force && timestamp - lastPersistedAt < 5000) return true;
+      const duration = Number.isFinite(audio.duration) ? audio.duration : 0;
+      const position = Math.max(0, Number(audio.currentTime) || 0);
+      const finished = completed || audio.ended;
+      const snapshot = {
+        id: savedBook.id, blockIndex: 0, unitIndex: 0,
+        mediaTrackIndex: 0, mediaPositionMs: Math.round(position * 1000),
+        percent: finished ? 100 : duration > 0
+          ? Math.min(99.9, Math.max(0, position / duration * 100))
+          : Math.max(0, Number(savedBook.percent) || 0),
+        state: finished ? 'read' : 'in-reading'
+      };
+      // Serialize snapshots: an earlier timeupdate must not overwrite pause.
+      queuedSave = queuedSave.catch(() => {}).then(() => libraryAdapter.saveProgress(snapshot));
+      const result = await queuedSave.catch(() => ({ saved: false }));
+      if (result?.saved) lastPersistedAt = timestamp;
+      return result?.saved === true;
+    }
+    persistActiveAudio = persistPosition;
+    function restoreAudioPosition() {
+      if (activeAudio !== audio) return;
+      const duration = Number.isFinite(audio.duration) ? audio.duration : 0;
+      const target = requestedPercent !== null && Number.isFinite(Number(requestedPercent)) && duration > 0
+        ? Math.max(0, Math.min(99.9, Number(requestedPercent))) * duration / 100
+        : (savedBook?.state === 'read' ? 0 : resumeSeconds);
+      if (!target) return;
+      try { audio.currentTime = duration ? Math.min(target, duration) : target; } catch {}
+      updateAudioPosition();
+    }
+    audio.addEventListener('loadedmetadata', restoreAudioPosition, { once: true });
     function updateAudioPosition() {
       if (activeAudio !== audio) return;
       const duration = Number.isFinite(audio.duration) ? audio.duration : 0;
@@ -1382,10 +1633,19 @@
     }
     audio.addEventListener('loadedmetadata', updateAudioPosition);
     audio.addEventListener('durationchange', updateAudioPosition);
-    audio.addEventListener('timeupdate', updateAudioPosition);
+    audio.addEventListener('timeupdate', () => {
+      updateAudioPosition();
+      void persistPosition();
+    });
     audio.addEventListener('play', () => updatePlaybackLabel(true));
-    audio.addEventListener('pause', () => updatePlaybackLabel(false));
-    audio.addEventListener('ended', () => updatePlaybackLabel(false));
+    audio.addEventListener('pause', () => {
+      updatePlaybackLabel(false);
+      void persistPosition({ force: true });
+    });
+    audio.addEventListener('ended', () => {
+      updatePlaybackLabel(false);
+      void persistPosition({ force: true, completed: true });
+    });
     audio.addEventListener('error', () => {
       if (activeAudio !== audio) return;
       els.status.textContent = language() === 'en'
@@ -1394,9 +1654,14 @@
     });
     updateAudioPosition();
     updatePlaybackLabel(false);
-    els.status.textContent = language() === 'en'
-      ? 'MP3 opened. You can listen now. Audio files are not yet saved to My library.'
-      : 'MP3 abierto. Ya puedes escucharlo. Los archivos de audio todavía no se guardan en Mi biblioteca.';
+    els.status.textContent = savedBook?.id
+      ? (language() === 'en'
+        ? 'MP3 saved to My library. Your listening position will be restored.'
+        : 'MP3 guardado en Mi biblioteca. Se recuperará la posición de escucha.')
+      : (language() === 'en'
+        ? 'Temporary MP3 playback. The audio could not be saved. Check free storage.'
+        : 'Reproducción temporal del MP3. No se pudo guardar. Revisa el espacio disponible.');
+    if (savedBook?.id && !existingBook) await renderLibrary();
     queueMicrotask(() => els.title.focus());
   }
 
@@ -1577,7 +1842,9 @@
     }
     const snapshot = position || readingSession?.snapshot() || { blockIndex: 0, unitIndex: 0 };
     speechController = shared.createSharedReadingSpeechController({
-      client: speechAdapter,
+      client: typeof shared.createPronunciationSpeechAdapter === 'function'
+        ? shared.createPronunciationSpeechAdapter(speechAdapter, () => pronunciationEntries)
+        : speechAdapter,
       book: { id: currentBookId || 'web-local-document', title: els.title.textContent || t().document },
       document: documentModel,
       initialPosition: { blockIndex: snapshot.blockIndex || 0, unitIndex: snapshot.unitIndex || 0 },
@@ -1829,6 +2096,21 @@
     if (lower.endsWith('.epub') || type === 'application/epub+zip') {
       return { source:await file.arrayBuffer().then(buffer => Array.from(new Uint8Array(buffer)).join(',')), format:'epub', model:await structuredFromArchive(file,'epub') };
     }
+    if (lower.endsWith('.zip') || type === 'application/zip' || type === 'application/x-zip-compressed') {
+      if (file.size > 40 * 1024 * 1024) {
+        throw Object.assign(new Error('daisy-too-large'), { code: 'daisy-too-large' });
+      }
+      const JSZip = await loadZipBundle();
+      const bytes = await file.arrayBuffer();
+      const zip = await JSZip.loadAsync(bytes);
+      const daisy = await shared.parseDaisyArchive(zip, { title: name, language: language() });
+      return {
+        source: Array.from(new Uint8Array(bytes)).join(','),
+        format: daisy.format,
+        model: shared.parseStructuredDocument(daisy),
+        audioUnavailable: daisy.audioUnavailable
+      };
+    }
     if (lower.endsWith('.odt') || type === 'application/vnd.oasis.opendocument.text') {
       return { source:await file.arrayBuffer().then(buffer => Array.from(new Uint8Array(buffer)).join(',')), format:'odt', model:await structuredFromArchive(file,'odt') };
     }
@@ -1876,10 +2158,22 @@
         format: prepared.format,
         autoSaveImported: true
       });
+      if (prepared.audioUnavailable) els.status.textContent = language() === 'en'
+        ? 'DAISY text imported. Synchronized DAISY audio is not yet supported by this iOS reader.'
+        : 'Texto DAISY importado. Este lector iOS todavía no reproduce su audio sincronizado.';
       return true;
     } catch (error) {
       els.ocr.hidden = true;
-      if (error?.code === 'unsupported') els.status.textContent = t().unsupported;
+      if (error?.code === 'daisy-audio-only') els.status.textContent = language() === 'en'
+        ? 'Audio-only DAISY needs synchronized playback, not yet supported. The book was not imported.'
+        : 'Este DAISY solo contiene audio y necesita reproducción sincronizada, todavía no disponible. No se importó.';
+      else if (['invalid-daisy','not-daisy','daisy-missing-resource','daisy-no-text'].includes(error?.code)) els.status.textContent = language() === 'en'
+        ? 'Invalid DAISY ZIP or missing required resources.'
+        : 'Archivo DAISY ZIP no válido o con recursos obligatorios ausentes.';
+      else if (error?.code === 'daisy-too-large') els.status.textContent = language() === 'en'
+        ? 'DAISY ZIP exceeds this text-only import limit of 40 MB.'
+        : 'El DAISY ZIP supera el límite de 40 MB para importar texto.';
+      else if (error?.code === 'unsupported') els.status.textContent = t().unsupported;
       else if (error?.code === 'legacy-doc') els.status.textContent = t().legacyDoc;
       else if (error?.code === 'image-needs-ocr') {
         els.status.textContent = `${t().imageNeedsOcr} ${t().ocrPrivacy}`;
@@ -1917,7 +2211,16 @@
       );
     } catch (error) {
       els.ocr.hidden = true;
-      if (error?.code === 'unsupported') els.status.textContent = t().unsupported;
+      if (error?.code === 'daisy-audio-only') els.status.textContent = language() === 'en'
+        ? 'Audio-only DAISY needs synchronized playback, not yet supported. The book was not imported.'
+        : 'Este DAISY solo contiene audio y necesita reproducción sincronizada, todavía no disponible. No se importó.';
+      else if (['invalid-daisy','not-daisy','daisy-missing-resource','daisy-no-text'].includes(error?.code)) els.status.textContent = language() === 'en'
+        ? 'Invalid DAISY ZIP or missing required resources.'
+        : 'Archivo DAISY ZIP no válido o con recursos obligatorios ausentes.';
+      else if (error?.code === 'daisy-too-large') els.status.textContent = language() === 'en'
+        ? 'DAISY ZIP exceeds this text-only import limit of 40 MB.'
+        : 'El DAISY ZIP supera el límite de 40 MB para importar texto.';
+      else if (error?.code === 'unsupported') els.status.textContent = t().unsupported;
       else if (error?.code === 'legacy-doc') els.status.textContent = t().legacyDoc;
       else if (error?.code === 'image-needs-ocr') {
         els.status.textContent = `${t().imageNeedsOcr} ${t().ocrPrivacy}`;
@@ -2064,6 +2367,9 @@
     els.translationOriginal.hidden = !available;
     els.translationTranslated.hidden = !available;
     if (els.translationRead) els.translationRead.hidden = !available;
+    const exportReady = available && translationJob?.getState?.()?.status === 'complete';
+    if (els.translationExportTxt) els.translationExportTxt.hidden = !exportReady;
+    if (els.translationExportHtml) els.translationExportHtml.hidden = !exportReady;
     els.translationOriginal.setAttribute('aria-pressed', showingTranslation ? 'false' : 'true');
     els.translationTranslated.setAttribute('aria-pressed', showingTranslation ? 'true' : 'false');
   }
@@ -2284,7 +2590,7 @@
     if (format === 'rtf') return shared.parseStructuredDocument(shared.parseRtfDocument(source,{title:opened.book.title,language:opened.book.language || language()}));
     if (format === 'md' || format === 'markdown') return shared.parseStructuredDocument(shared.parseMarkdownDocument(source,{title:opened.book.title,language:opened.book.language || language()}));
     if (format === 'fb2') return shared.parseStructuredDocument(shared.parseFb2Document(source,{title:opened.book.title,language:opened.book.language || language()}));
-    if (['docx','pptx','xlsx','epub','odt'].includes(format)) {
+    if (['docx','pptx','xlsx','epub','odt','daisy2.02','daisy3'].includes(format)) {
       const JSZip = await loadZipBundle();
       const bytes = Uint8Array.from(source.split(',').filter(Boolean).map(Number));
       const zip = await JSZip.loadAsync(bytes);
@@ -2293,6 +2599,7 @@
       else if (format === 'pptx') raw = await shared.parsePptxArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
       else if (format === 'xlsx') raw = await shared.parseXlsxArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
       else if (format === 'epub') raw = await shared.parseEpubArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
+      else if (format === 'daisy2.02' || format === 'daisy3') raw = await shared.parseDaisyArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
       else raw = await shared.parseOdtArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
       return shared.parseStructuredDocument(raw);
     }
@@ -2308,11 +2615,15 @@
       const sourceFormat = String(opened.book.format || 'txt').toLowerCase();
       const source = String(opened.content || '');
 
-      if (exportFormat === 'original' && sourceFormat !== 'pdf') {
-        const binaryFormats = new Set(['docx','pptx','xlsx','epub','odt']);
+      if (sourceFormat === 'audio') {
+        const savedAudio = await libraryAdapter?.openAudioFile?.(id);
+        if (!savedAudio?.blob) throw new Error('missing-saved-audio');
+        downloadExport(savedAudio.blob, title + '.mp3');
+      } else if (exportFormat === 'original' && sourceFormat !== 'pdf') {
+        const binaryFormats = new Set(['docx','pptx','xlsx','epub','odt','daisy2.02','daisy3']);
         if (binaryFormats.has(sourceFormat)) {
           const bytes = Uint8Array.from(source.split(',').filter(Boolean).map(Number));
-          downloadExport(new Blob([bytes], { type:'application/octet-stream' }), `${title}.${sourceFormat}`);
+          downloadExport(new Blob([bytes], { type:'application/octet-stream' }), `${title}.${sourceFormat.startsWith('daisy') ? 'zip' : sourceFormat}`);
         } else {
           const extension = sourceFormat === 'markdown' ? 'md' : sourceFormat;
           downloadExport(new Blob([source], { type:'text/plain;charset=utf-8' }), `${title}.${extension || 'txt'}`);
@@ -2421,6 +2732,7 @@
     }
     readerChromeState = null;
     els.reader.hidden = true;
+    await persistActiveAudio?.({ force: true });
     clearActiveAudio();
 
     if (readerReturnView === 'library') {
@@ -2451,6 +2763,20 @@
     const source = String(opened.content || '');
     const format = String(opened.book.format || 'txt').toLowerCase();
     returnToReadingMainFromSubview();
+    if (format === 'audio') {
+      const savedAudio = await libraryAdapter?.openAudioFile?.(opened.book.id);
+      if (!savedAudio?.blob) {
+        els.libraryStatus.textContent = language() === 'en'
+          ? 'The saved MP3 is missing or cannot be read.'
+          : 'No se encuentra el MP3 guardado o no se puede leer.';
+        return;
+      }
+      readerReturnView = 'library';
+      await useMp3File(savedAudio.blob, { existingBook: savedAudio.book, requestedPercent });
+      currentQueued = savedAudio.book.queued === true;
+      updateQueueToggle();
+      return;
+    }
     const model = await modelForSavedBook(opened);
     readerReturnView = 'library';
     const hasRequestedPercent = requestedPercent !== null && requestedPercent !== undefined && Number.isFinite(Number(requestedPercent));
@@ -2751,8 +3077,8 @@
         title.id = 'reading-library-title-' + String(book.id).replace(/[^a-zA-Z0-9_-]/g, '-');
         title.textContent = book.title || t().document;
         title.setAttribute('aria-label', language() === 'en'
-          ? `Open for reading: ${book.title || t().document}`
-          : `Abrir para leer: ${book.title || t().document}`);
+          ? `${book.format === 'audio' ? 'Open for listening' : 'Open for reading'}: ${book.title || t().document}`
+          : `${book.format === 'audio' ? 'Abrir para escuchar' : 'Abrir para leer'}: ${book.title || t().document}`);
 
         const detailsToggle = document.createElement('button');
         detailsToggle.type = 'button';
@@ -2914,7 +3240,7 @@
           original.textContent = t().exportOriginal;
           exportSelect.append(original);
         }
-        for (const [value, label] of [['txt', t().exportText], ['html', t().exportHtml]]) {
+        for (const [value, label] of (sourceFormat === 'audio' ? [] : [['txt', t().exportText], ['html', t().exportHtml]])) {
           const option = document.createElement('option');
           option.value = value;
           option.textContent = label;
@@ -3216,6 +3542,7 @@
   });
   els.prepare.addEventListener('click', () => { void prepareReading(); });
   els.ocr.addEventListener('click', () => { void runPdfOcr(); });
+  window.addEventListener('pagehide', () => { void persistActiveAudio?.({ force: true }); });
   els.file.addEventListener('change', () => {
     pendingPdfFile = null;
     pendingImageFile = null;
@@ -3254,6 +3581,36 @@
   });
   els.translationOriginal.addEventListener('click', () => { void switchTranslationView(false); });
   els.translationTranslated.addEventListener('click', () => { void switchTranslationView(true); });
+  function exportCompletedTranslation(format) {
+    if (!translationDocument?.blocks?.length || translationJob?.getState?.()?.status !== 'complete') {
+      els.translationStatus.textContent = language() === 'en'
+        ? 'Finish translating before exporting.'
+        : 'Termina la traducción antes de exportarla.';
+      return;
+    }
+    const title = safeExportFilename(els.title?.textContent || 'Documento');
+    const code = String(els.translationTarget?.value || 'translation');
+    try {
+      if (format === 'html') {
+        downloadExport(new Blob([accessibleHtmlFromModel(translationDocument, title)], {
+          type: 'text/html;charset=utf-8'
+        }), title + '-' + code + '-traduccion.html');
+      } else {
+        downloadExport(new Blob([accessibleTextFromModel(translationDocument)], {
+          type: 'text/plain;charset=utf-8'
+        }), title + '-' + code + '-traduccion.txt');
+      }
+      els.translationStatus.textContent = language() === 'en'
+        ? 'Completed translation exported. The original document is unchanged.'
+        : 'Traducción completa exportada. El documento original no se ha modificado.';
+    } catch {
+      els.translationStatus.textContent = language() === 'en'
+        ? 'Translation export failed.'
+        : 'No se pudo exportar la traducción.';
+    }
+  }
+  els.translationExportTxt?.addEventListener('click', () => exportCompletedTranslation('txt'));
+  els.translationExportHtml?.addEventListener('click', () => exportCompletedTranslation('html'));
   els.translationRead?.addEventListener('click', () => {
     void (async () => {
       await switchTranslationView(true);
@@ -3316,5 +3673,6 @@
   els.queueToggle.disabled = true;
   organizeGeneralSettingsMenus();
   restoreWebSettings();
+  setupPronunciationDictionary();
   localize();
 })();

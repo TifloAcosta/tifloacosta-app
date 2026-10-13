@@ -1197,8 +1197,8 @@
     els.intro.textContent = c.intro;
     if (els.formatsToggle) els.formatsToggle.textContent = language() === 'en' ? 'Show supported file types' : 'Consultar formatos admitidos';
     if (els.formatsList) els.formatsList.textContent = language() === 'en'
-      ? 'TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2, MP3 audio and PNG, JPG or WebP images using OCR.'
-      : 'TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2, audio MP3 e imágenes PNG, JPG y WebP mediante OCR.';
+      ? 'TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2, DAISY ZIP with text, MP3 audio and PNG, JPG or WebP images using OCR. Synchronized DAISY audio is not available yet.'
+      : 'TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2, DAISY ZIP con texto, audio MP3 e imágenes PNG, JPG y WebP mediante OCR. El audio DAISY sincronizado todavía no está disponible.';
     els.fileLabel.textContent = c.file;
     els.pasteLabel.textContent = c.paste;
     els.prepare.textContent = c.prepare;

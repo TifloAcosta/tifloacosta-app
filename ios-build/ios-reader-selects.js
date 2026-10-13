@@ -18,9 +18,23 @@
       'reading-document-progress-percent',
       'ios-reading-default-unit',
       'reading-default-navigation',
-      'reading-audio-speed'
+      'reading-audio-speed',
+      'reading-library-filter',
+      'ios-reading-library-sort',
+      'reading-voice',
+      'reading-text-size',
+      'reading-font-family',
+      'reading-font-weight',
+      'reading-line-spacing',
+      'reading-paragraph-spacing',
+      'reading-width',
+      'reading-theme',
+      'reading-translation-source',
+      'reading-translation-target',
+      'reading-marks-new-type'
     ]);
-    if (adjustableIds.has(select.id) && select.options.length >= 2) {
+    const perBookAdjustable = /^reading-library-(?:jump|rate|voice|size|theme)-/.test(select.id);
+    if (adjustableIds.has(select.id) || perBookAdjustable) {
       const slider = document.createElement('input');
       slider.type = 'range';
       slider.className = 'ios-reader-adjustable';
@@ -45,6 +59,16 @@
       }
       slider.addEventListener('input', selectBySlider);
       slider.addEventListener('change', selectBySlider);
+      slider.addEventListener('keydown', event => {
+        if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return;
+        // HTML ranges expose VoiceOver's adjustable swipe; keyboard fallback
+        // must follow the same direction and persist the selected option.
+        const direction = event.key === 'ArrowUp' ? 1 : -1;
+        const current = Number(slider.value) || 0;
+        slider.value = String(Math.max(0, Math.min(Number(slider.max), current + direction)));
+        selectBySlider();
+        event.preventDefault();
+      });
       select.addEventListener('change', syncFromSelect);
       new MutationObserver(syncFromSelect).observe(select, { childList: true, subtree: true });
       select.hidden = true;

@@ -1,5 +1,65 @@
 window.TIFLO_RESOURCES = [
   {
+    "id": "en-medical-study-causes-blindness-2026",
+    "lang": "en",
+    "category": "Medical Studies",
+    "title": "Why Do People Go Blind?",
+    "url": "https://tifloacosta.com/docs/en/why-do-people-go-blind.html",
+    "openUrl": "https://tifloacosta.com/docs/en/why-do-people-go-blind.html",
+    "new": true,
+    "newsDate": "2026-10-07T15:39:00Z"
+  },
+  {
+    "id": "es-estudio-medico-causas-ceguera-2026",
+    "lang": "es",
+    "category": "Estudios médicos",
+    "title": "¿Por qué se queda ciega la gente?",
+    "url": "https://tifloacosta.com/docs/es/por-que-se-queda-ciega-la-gente.html",
+    "openUrl": "https://tifloacosta.com/docs/es/por-que-se-queda-ciega-la-gente.html",
+    "new": true,
+    "newsDate": "2026-10-07T15:39:00Z"
+  },
+  {
+    "id": "en-rehabilitation-independence-2026",
+    "lang": "en",
+    "category": "Research and Studies",
+    "title": "How Am I Supposed to Live My Life Now?",
+    "url": "https://tifloacosta.com/docs/en/rehabilitation-independence-after-sight-loss.html",
+    "openUrl": "https://tifloacosta.com/docs/en/rehabilitation-independence-after-sight-loss.html",
+    "new": true,
+    "newsDate": "2026-09-24T21:00:44Z"
+  },
+  {
+    "id": "es-rehabilitacion-autonomia-2026",
+    "lang": "es",
+    "category": "Estudios",
+    "title": "¿Y ahora cómo voy a hacer mi vida?",
+    "url": "https://tifloacosta.com/docs/es/rehabilitacion-autonomia-despues-perder-vista.html",
+    "openUrl": "https://tifloacosta.com/docs/es/rehabilitacion-autonomia-despues-perder-vista.html",
+    "new": true,
+    "newsDate": "2026-09-24T21:00:44Z"
+  },
+  {
+    "id": "en-1C317Eva0eE8ekQ9HqmXIvzY1-Zxty1nC",
+    "lang": "en",
+    "category": "iPhone",
+    "title": "Complete Course on Braille Screen Input on iPhone",
+    "url": "https://tifloacosta.com/docs/en/reader-1C317Eva0eE8ekQ9HqmXIvzY1-Zxty1nC.html",
+    "openUrl": "https://tifloacosta.com/docs/en/reader-1C317Eva0eE8ekQ9HqmXIvzY1-Zxty1nC.html",
+    "new": true,
+    "newsDate": "2026-09-23T08:47:29Z"
+  },
+  {
+    "id": "es-1wfRfY4IumYSh7At5iaoizBZTSoQhKhdc",
+    "lang": "es",
+    "category": "iPhone",
+    "title": "Curso completo de Entrada braille en pantalla en iPhone",
+    "url": "https://tifloacosta.com/docs/es/reader-1wfRfY4IumYSh7At5iaoizBZTSoQhKhdc.html",
+    "openUrl": "https://tifloacosta.com/docs/es/reader-1wfRfY4IumYSh7At5iaoizBZTSoQhKhdc.html",
+    "new": true,
+    "newsDate": "2026-09-23T08:47:29Z"
+  },
+  {
     "id": "es-pildoras-2026-22",
     "lang": "es",
     "category": "Píldoras",

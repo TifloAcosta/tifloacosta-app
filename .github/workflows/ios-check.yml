@@ -2,7 +2,7 @@ name: Verificar base iOS (sin publicar)
 on:
   workflow_dispatch:
   push:
-    branches: [preparacion-ios, work/ios-tiflolector-native-20261012]
+    branches: [preparacion-ios, work/ios-tiflolector-native-20261012, fix/ios-novedades-lector-regresion-20261013]
   pull_request:
     branches: [preparacion-ios]
     paths:

@@ -228,6 +228,18 @@ const iosLanguage = `<script id="tiflo-ios-settings">
 await writeFile(join(output, 'ios-choice-groups.js'), "(() => {\n  'use strict';\n  // WKWebView/VoiceOver: bypass the native select popup in frequently used\n  // navigation and filtering controls. Preserve the original change events.\n  const ids = [\n    'video-sort', 'news-category', 'apps-platform',\n    'download-type-filter', 'setting-text-size', 'setting-theme',\n    'setting-spacing', 'sound-category', 'sound-provider'\n  ];\n  for (const id of ids) {\n    const select = document.getElementById(id);\n    if (!(select instanceof HTMLSelectElement)) continue;\n    const label = document.querySelector('label[for=\"' + id + '\"]');\n    const group = document.createElement('div');\n    group.className = 'resource-actions ios-choice-buttons';\n    group.setAttribute('role', 'group');\n    group.setAttribute('aria-label', label?.textContent?.trim() || id);\n    select.insertAdjacentElement('afterend', group);\n    function markActive() {\n      for (const button of group.querySelectorAll('button')) {\n        button.setAttribute('aria-pressed', String(button.dataset.value === select.value));\n      }\n    }\n    function repaint() {\n      const options = [...select.options];\n      if (options.length < 2 || options.length > 40) {\n        group.hidden = true;\n        select.hidden = false;\n        if (label) label.hidden = false;\n        return;\n      }\n      select.hidden = true;\n      if (label) label.hidden = true;\n      group.hidden = false;\n      group.setAttribute('aria-label', label?.textContent?.trim() || id);\n      group.replaceChildren();\n      for (const option of options) {\n        const button = document.createElement('button');\n        button.type = 'button';\n        button.dataset.value = option.value;\n        button.textContent = option.textContent;\n        button.disabled = option.disabled;\n        button.addEventListener('click', () => {\n          select.value = option.value;\n          select.dispatchEvent(new Event('change', { bubbles: true }));\n          markActive();\n        });\n        group.append(button);\n      }\n      markActive();\n    }\n    new MutationObserver(repaint).observe(select, { childList: true, subtree: true });\n    select.addEventListener('change', markActive);\n    repaint();\n  }\n})();\n");
 await cp(join(root, 'ios-build/ios-choice-collapse.js'), join(output, 'ios-choice-collapse.js'));
 await cp(join(root, 'ios-build/ios-reader-selects.js'), join(output, 'ios-reader-selects.js'));
+await cp(join(root, 'ios-build/ios-reader-home.js'), join(output, 'ios-reader-home.js'));
+// Apply sorting only to the iOS package. The public website and Android retain
+// their current library implementation and data without migration.
+const packagedReaderPath = join(output, 'web-reading.js');
+const packagedReaderSource = await readFile(packagedReaderPath, 'utf8');
+const oldLibrarySort = "sort: isRecentView ? 'imported' : 'lastRead'";
+if (!packagedReaderSource.includes(oldLibrarySort)) {
+  throw new Error('iOS: ha cambiado la ordenación del lector; revisar antes de publicar.');
+}
+await writeFile(packagedReaderPath, packagedReaderSource.replace(oldLibrarySort,
+  "sort: document.getElementById('ios-reading-library-sort')?.value || (isRecentView ? 'imported' : 'lastRead')"));
+
 await cp(join(root, 'ios-build/ios-reader-native.js'), join(output, 'ios-reader-native.js'));
 
 const commitSha = String(process.env.GITHUB_SHA ||
@@ -248,7 +260,7 @@ await writeFile(join(output, 'tiflo-build-identity.js'), [
   '    if (!label) return;',
   "    label.textContent = 'TifloLector iOS · compilación ' + build.buildCode +",
   "      ' · código ' + build.sourceSha.slice(0, 12);",
-  '    label.hidden = false;',
+  '    // Build identity stays available to diagnostics and Settings, not on the reader landing screen.',
   '  }, { once: true });',
   '})();',
   ''
@@ -292,6 +304,7 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
     html = html.replace('</head>', '<script src="ios-reader-native.js"></script>\n</head>');
     html = html.replace('</head>', '<script src="tiflo-build-identity.js"></script>\n</head>');
     html = html.replace('</body>', '<script src="ios-reader-selects.js"></script>' + '\n</body>');
+    html = html.replace('</body>', '<script src="ios-reader-home.js"></script>' + '\n</body>');
   }
   if (name === 'podcast.html') {
     html = html.replace('</body>', '<script>requestAnimationFrame(() => { const heading = document.getElementById("podcast-heading"); heading?.setAttribute("tabindex", "-1"); heading?.focus({preventScroll:true}); });</script>' + '\n</body>');
@@ -399,7 +412,7 @@ iosApp = iosApp.replace(oldCatalogDeclaration,
   '  let data = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];');
 const newsRenderPoint = '  function makeNewsItem(item) {';
 if (!iosApp.includes(newsRenderPoint)) throw new Error('No se encuentra renderizado de Novedades');
-iosApp = iosApp.replace(newsRenderPoint, "  async function refreshIosResourceCatalog() {\n    try {\n      const response = await fetch('https://tifloacosta.com/data.js', { cache: 'no-store' });\n      if (!response.ok) return;\n      const source = await response.text();\n      const match = /^\\s*window\\.TIFLO_RESOURCES\\s*=\\s*(\\[[\\s\\S]*\\]);?\\s*$/.exec(source);\n      if (!match) return;\n      const items = JSON.parse(match[1]);\n      if (!Array.isArray(items) || items.length === 0) return;\n      const valid = items.every(item => item && typeof item.id === 'string' &&\n        typeof item.title === 'string' && (item.lang === 'es' || item.lang === 'en'));\n      if (!valid) return;\n      data = items;\n      window.TIFLO_RESOURCES = items;\n      renderNews();\n      renderCategories();\n      renderFavoritesScreen();\n      window.dispatchEvent(new CustomEvent('tiflo-resources-updated', { detail: { items } }));\n    } catch {\n      // Offline and network failures must preserve the packaged catalog.\n    }\n  }\n\n" + newsRenderPoint);
+iosApp = iosApp.replace(newsRenderPoint, "  async function refreshIosResourceCatalog() {\n    try {\n      const response = await fetch('https://tifloacosta.com/data.js', { cache: 'no-store' });\n      if (!response.ok) return;\n      const source = await response.text();\n      const match = /^\\s*window\\.TIFLO_RESOURCES\\s*=\\s*(\\[[\\s\\S]*\\]);?\\s*$/.exec(source);\n      if (!match) return;\n      const items = JSON.parse(match[1]);\n      if (!Array.isArray(items) || items.length === 0) return;\n      const valid = items.every(item => item && typeof item.id === 'string' &&\n        typeof item.title === 'string' && (item.lang === 'es' || item.lang === 'en'));\n      if (!valid) return;\n      const existing = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];\n      const merged = new Map(existing.filter(item => item && typeof item.id === 'string').map(item => [item.id, item]));\n      for (const item of items) merged.set(item.id, item);\n      data = [...merged.values()];\n      window.TIFLO_RESOURCES = data;\n      renderNews();\n      renderCategories();\n      renderFavoritesScreen();\n      window.dispatchEvent(new CustomEvent('tiflo-resources-updated', { detail: { items: data } }));\n    } catch {\n      // Offline and network failures must preserve the packaged catalog.\n    }\n  }\n\n" + newsRenderPoint);
 const originalResourceFetch = "await fetch('https://tifloacosta.com/data.js', { cache: 'no-store' })";
 if (!iosApp.includes(originalResourceFetch)) throw new Error('Falta lectura de Novedades remotas');
 iosApp = iosApp.replace(originalResourceFetch, "await " + networkFirst('data.js'));
@@ -518,7 +531,7 @@ await writeFile(iosActualidadPath, iosActualidad);
 await import('./patch-reading-native.mjs');
 
 // Fail before signing or uploading if an injected iOS-only script is invalid.
-for (const file of ['app.js', 'videos.js', 'actualidad.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-choice-groups.js', 'ios-videos-fallback.js', 'ios-actualidad-media-fallback.js', 'ios-choice-collapse.js', 'ios-reader-selects.js', 'ios-reader-native.js', 'web-reading.js', 'ios-parity.js', 'news-videos.js']) {
+for (const file of ['app.js', 'videos.js', 'actualidad.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-choice-groups.js', 'ios-videos-fallback.js', 'ios-actualidad-media-fallback.js', 'ios-choice-collapse.js', 'ios-reader-selects.js', 'ios-reader-home.js', 'ios-reader-native.js', 'web-reading.js', 'ios-parity.js', 'news-videos.js']) {
   execFileSync(process.execPath, ['--check', join(output, file)], { stdio: 'pipe' });
 }
 console.log('Validación sintáctica de scripts iOS completada');

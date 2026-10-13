@@ -1,4 +1,4 @@
-import { createReadingAudioController, READING_AUDIO_SLEEP_MINUTES } from '../core/reading-audio.mjs';
+import { createReadingAudioController, READING_AUDIO_SLEEP_MINUTES, verifiedAudiobookPercent } from '../core/reading-audio.mjs';
 import { resolveReadingSettings } from '../core/reading-settings.mjs';
 import { createReadingMarksPanel } from './reading-marks.mjs';
 
@@ -67,14 +67,14 @@ export function createReadingAudioView({ root, panelsRoot = root, client, book, 
   nextTrackButton.disabled = true;
 
   const trackJumpLabel = document.createElement('label');
-  trackJumpLabel.textContent = document.documentElement.lang === 'en' ? 'Choose chapter or audio file' : 'Elegir capítulo o archivo de audio';
+  trackJumpLabel.textContent = document.documentElement.lang === 'en' ? 'Choose audio track or file' : 'Elegir pista o archivo de audio';
   const trackJump = document.createElement('select');
   trackJump.id = 'reading-audio-track-jump';
   trackJumpLabel.htmlFor = trackJump.id;
   trackJumpLabel.hidden = true;
   const trackJumpButton = document.createElement('button');
   trackJumpButton.type = 'button';
-  trackJumpButton.textContent = document.documentElement.lang === 'en' ? 'Go to selected chapter or file' : 'Ir al capítulo o archivo elegido';
+  trackJumpButton.textContent = document.documentElement.lang === 'en' ? 'Go to selected audio track or file' : 'Ir a la pista o archivo elegido';
   trackJumpButton.hidden = true;
 
   const positionLabel = document.createElement('label');
@@ -164,10 +164,25 @@ export function createReadingAudioView({ root, panelsRoot = root, client, book, 
     nextTrackButton.disabled = trackCount <= 1 || trackIndex >= trackCount - 1;
     playButton.textContent = snapshot.playing ? t('readingAudio.pause') : t('readingAudio.play');
     if (!trackJumpLabel.hidden) trackJump.value = String(trackIndex);
-    status.textContent = format(t('readingAudio.positionStatus'), {
+    // The elapsed and remaining times refer to the CURRENT TRACK, not the book.
+    // A total percentage is displayed only when the duration of every track is known.
+    const wholePercent = verifiedAudiobookPercent(audioTracks, trackIndex, positionMs, durationMs, trackCount);
+    const english = document.documentElement.lang === 'en';
+    const trackContext = trackCount > 1
+      ? (english ? `Track ${trackIndex + 1} of ${trackCount}. ` : `Pista ${trackIndex + 1} de ${trackCount}. `)
+      : '';
+    const currentTrackTime = format(t('readingAudio.positionStatus'), {
       elapsed: clock(positionMs),
       remaining: clock(Math.max(0, durationMs - positionMs))
     });
+    const wholeBookStatus = wholePercent === null
+      ? (trackCount > 1
+        ? (english ? ' Total audiobook progress unavailable until all track durations are known.' : ' Progreso total del audiolibro no disponible hasta conocer la duración de todas las pistas.')
+        : '')
+      : (english ? ` Total audiobook progress: ${Math.floor(wholePercent)}%.` : ` Progreso total del audiolibro: ${Math.floor(wholePercent)} %.`);
+    // Do not interrupt VoiceOver every second while audio is playing.
+    status.setAttribute('aria-live', snapshot.playing ? 'off' : 'polite');
+    status.textContent = `${trackContext}${currentTrackTime}${wholeBookStatus}`;
   }
 
   async function saveBookSetting(key, value) {

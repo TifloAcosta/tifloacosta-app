@@ -1065,8 +1065,10 @@
     els.prepare.textContent = c.prepare;
     els.ocr.textContent = c.ocr;
     els.pdfPasswordLabel.textContent = c.pdfPassword;
-    els.previous.textContent = c.previous;
-    els.next.textContent = c.next;
+    els.previous.textContent = activeAudio
+      ? (language() === 'en' ? 'Back 10 seconds' : 'Retroceder 10 segundos') : c.previous;
+    els.next.textContent = activeAudio
+      ? (language() === 'en' ? 'Forward 10 seconds' : 'Adelantar 10 segundos') : c.next;
     updatePlaybackLabel(activeAudio ? !activeAudio.paused : speechController?.snapshot?.().playing === true);
     els.voiceLabel.textContent = c.voice;
     if (els.voiceLanguageLabel) els.voiceLanguageLabel.textContent = language() === 'en' ? 'Voice language' : 'Idioma de la voz';

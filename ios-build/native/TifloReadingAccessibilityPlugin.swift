@@ -62,7 +62,7 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin 
                 }
             }
             presenter.present(nav, animated: true) {
-                UIAccessibility.post(notification: .screenChanged, argument: screen.navigationItem.title)
+                screen.focusFirstBook()
             }
             call.resolve(["opened": true, "count": books.count])
         }
@@ -122,6 +122,13 @@ private final class ReadingLibraryNativeScreen: UIViewController, UITableViewDat
             table.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             table.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
+    }
+
+    // The cursor must land on an actual book title, not on a decorative heading.
+    func focusFirstBook() {
+        table.layoutIfNeeded()
+        let first = table.cellForRow(at: IndexPath(row: 0, section: 0))
+        UIAccessibility.post(notification: .screenChanged, argument: first ?? table)
     }
 
     @objc private func close() { onDismiss?() }

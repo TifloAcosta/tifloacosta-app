@@ -3,6 +3,7 @@
   // This bridge ships ONLY inside the iOS app. No browser voices or remote translation.
   const tts = () => window.Capacitor?.Plugins?.TifloReadingTts;
   const translator = () => window.Capacitor?.Plugins?.TifloReadingLanguage;
+  const accessibleLibrary = () => window.Capacitor?.Plugins?.TifloReadingAccessibility;
   let voices = [];
   let pending = null;
   const bool = (x, field) => x === true || x?.[field] === true;
@@ -11,6 +12,10 @@
   const reader = {
     get hasNativeSpeech() { return !!tts()?.beginTtsSession; },
     get hasNativeTranslation() { return !!translator()?.translateBatch; },
+    get hasNativeLibraryActions() { return !!accessibleLibrary()?.presentLibrary; },
+    presentLibrary: options => accessibleLibrary()?.presentLibrary?.(options),
+    onLibraryAction: callback => accessibleLibrary()?.addListener?.('readingLibraryAction', callback),
+    onLibraryClosed: callback => accessibleLibrary()?.addListener?.('readingLibraryClosed', callback),
     listVoices() { return voices.slice(); },
     onVoicesChanged: null,
     async refreshVoices() {

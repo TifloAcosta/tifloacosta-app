@@ -50,7 +50,9 @@ test('publication remains manually guarded pending DAISY and native VoiceOver ac
   const workflow = read('.github/workflows/ios-testflight.yml');
   const prepare = read('ios-build/prepare-web.mjs');
   assert.match(workflow, /on:\s*\n\s+workflow_dispatch:/);
-  assert.doesNotMatch(workflow.slice(0, workflow.indexOf('permissions:')), /\n\s+push:/);
+  // Only the explicit, isolated internal canary branch may launch a beta.
+  assert.match(workflow, /push:\s*\n\s+branches: \[release\/ios-tiflolector-interno-20261013\]/);
+  assert.doesNotMatch(workflow.slice(0, workflow.indexOf('permissions:')), /branches: \[(?!release\/ios-tiflolector-interno-20261013)/);
   assert.match(prepare, /BLOQUEO PREVENTIVO iOS/);
   assert.match(prepare, /TifloReadingAccessibilityPlugin\.swift/);
 });

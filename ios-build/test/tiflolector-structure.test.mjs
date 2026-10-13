@@ -121,18 +121,18 @@ test('the iOS bundler rejects accidental loss of restored reader features', () =
 test('news refresh preserves local supplemental resources and sorts the three most recent', () => {
   const prepare = read('ios-build/prepare-web.mjs');
   const resources = read('shared/resources.mjs');
-  assert.match(prepare, /const merged = new Map\\(existing\\.filter/);
-  assert.match(prepare, /for \\(const item of items\\) merged\\.set\\(item\\.id, item\\)/);
-  assert.match(prepare, /window\\.TIFLO_RESOURCES = data/);
-  assert.match(resources, /\\.sort\\(\\(a, b\\) =>/);
-  assert.match(resources, /\\.slice\\(0, Math\\.max\\(0, Number\\(limit\\)/);
+  assert.match(prepare, /const merged = new Map\(existing\.filter/);
+  assert.match(prepare, /for \(const item of items\) merged\.set\(item\.id, item\)/);
+  assert.match(prepare, /window\.TIFLO_RESOURCES = data/);
+  assert.match(resources, /\.sort\(\(a, b\) =>/);
+  assert.match(resources, /\.slice\(0, Math\.max\(0, Number\(limit\)/);
 });
 
 test('iOS reader does not duplicate its OCR import control or display a build banner', () => {
   const parity = read('ios-build/ios-parity.js');
   const prepare = read('ios-build/prepare-web.mjs');
-  assert.doesNotMatch(parity, /entry\\.id = 'ios-ocr-import'/);
-  assert.doesNotMatch(prepare, /'    label\\.hidden = false;'/);
+  assert.doesNotMatch(parity, /entry\.id = 'ios-ocr-import'/);
+  assert.doesNotMatch(prepare, /'    label\.hidden = false;'/);
   assert.match(html, /id="reading-ocr" type="button" hidden/);
   assert.match(html, /id="reading-build-identity" class="muted" hidden/);
 });

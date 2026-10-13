@@ -88,6 +88,17 @@ test('iOS preserves pronunciation rules without changing document text or weaken
   assert.match(prepare, /BLOQUEO PREVENTIVO iOS/);
 });
 
+test('iOS packages its own local ZIP engine instead of fetching CDN JSZip', () => {
+  const pkg = JSON.parse(read('ios-build/package.json'));
+  const prepare = read('ios-build/prepare-web.mjs');
+  const patch = read('ios-build/patch-reading-native.mjs');
+  assert.equal(pkg.dependencies.jszip, '3.10.1');
+  assert.match(prepare, /node_modules\/jszip\/dist\/jszip\.min\.js/);
+  assert.match(prepare, /ios-jszip\.min\.js/);
+  assert.match(patch, /script\.src = 'ios-jszip\.min\.js'/);
+  assert.match(web, /loadZipBundle\(\)/);
+});
+
 test('the iOS bundler rejects accidental loss of restored reader features', () => {
   const prepare = read('ios-build/prepare-web.mjs');
   for (const token of [

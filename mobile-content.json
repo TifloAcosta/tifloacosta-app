@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-12T20:24:49.761Z",
+  "generatedAt": "2026-10-13T00:44:28.810Z",
   "resources": [
     {
       "kind": "resource",
@@ -5448,6 +5448,102 @@
   "news": [
     {
       "kind": "news",
+      "id": "engadget-58c1c657435e5a92:en",
+      "sourceId": "engadget-58c1c657435e5a92",
+      "lang": "en",
+      "title": "Don't buy a cheap Android phone without these non-negotiable features",
+      "summary": "Android phones can be had at many different price points, but the most important features aren't always found in the cheapest available devices.",
+      "body": "What good is a phone that can't keep up with the average person's day-to-day needs?\n\nYou don't have to spend an arm and a leg on an Android phone, even if it's brand-new. You can find plenty of great cheap Android phone options for $300 or less, if you know what to look for. And that's the biggest thing to consider: knowing what features are crucial to have and where you can make concessions. Paying less for a phone that doesn't have a sleek titanium frame, for example, is totally fine; you probably will (and should) put a case on it, anyway. But getting a phone with insufficient RAM, horrible battery life, poor cameras, a bad processor, or a small screen is where you want to draw the line.\n\nIn some cases, what you're willing to sacrifice is an individual decision. If you're a casual content creator, for example, the cameras need to be at least above average. But if you're getting a secondary phone for basic messaging, you may be fine with just decent cameras. Nonetheless, there are some non-negotiable limits that anyone seeking out a cheap Android phone should focus on, no matter how you plan to use it.\n\nRemember when phones had tiny screens? The original iPhone's 4.5-inch screen seemed groundbreaking at the time, but by today's standards, that just doesn't cut it. A phone should have at least a 5.6-inch screen, though most nowadays are at least 6.1 inches. This allows you to enjoy a comfortable experience when holding the phone and typing two-handed while still being able to clearly see the content on it. That screen should also be an AMOLED panel with HD resolution and a decent peak brightness of at least 1,000 nits, so it's viewable in direct sunlight.\n\nMemory is another factor to consider. You'll want at least 6GB RAM; otherwise, multitasking, video streaming, and casual gaming could be slow or inconsistent, and the phone won't respond quickly enough to your demands. If you play a lot of mobile games, consider even going up to 8GB. Also, if there's no expandable storage (which is a rarity nowadays), 128GB is the minimum you should consider. For peace-of-mind, go with at least 256GB. Otherwise, you'll end up with a \"phone full\" message before you know it, and you'll be forced to clear out the device or sign up for cloud storage.\n\nFinally, the processor matters. While you might not need the best, fastest, most up-to-date processor, you don't want one that's slow as molasses. Check the age of the processor, as well as reviews for its performance, and factor this into your decision. There's no value in getting a cheap device if it's slow and laggy when you want to stream a movie, and a great processor is vital for gaming on an Android phone .\n\nBattery life and cameras are also important. A battery that's at least 4,500mAh is sufficient, especially if the phone doesn't handle heavy AI processing. But 5,000mAh is a better starting point nowadays to keep you going all day, even with moderate use. With cameras, you want a phone that can at least take photos that are good enough for sharing on social media and keeping for posterity. This means having at least a 32MP sensor for the rear camera, but also a large sensor that can capture more light and yield better photos overall, even if the megapixels are lower in one camera versus another. Don't discount the front sensor and resolution as well, as this is what you'll use to take selfies. Look for at least a 12MP front camera with, again, a good sensor size.\n\nConsider other basics like NFC for tap-to-pay and more recent Bluetooth versions for reliable connectivity to headphones and speakers. For older models, confirm that there's at least a few years left of software and security support. This sounds like a lot, but you'll find plenty of devices that fit, like Samsung's Galaxy A series phones (see our review of the Samsung Galaxy A17 , for example) and phones from brands like Nothing and Motorola.\n\nEven older-model Google Pixel phones can fit the criteria. You can find a renewed Google Pixel 8a for just over $300 nowadays, and it comes with just about every vital feature mentioned previously. Ideally, wait for seasonal promotions to find a decked-out mid-range phone for the price of a budget one. You'll have to make compromises to go cheap, but there are many phones in the $300 range that meet or exceed non-negotiable features and specs.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2281663/android-phone-dont-buy-cheap-without-non-negotiable-features/",
+      "publishedAt": "2026-10-13T00:30:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "android"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-fd2eef70ba802cff:en",
+      "sourceId": "engadget-fd2eef70ba802cff",
+      "lang": "en",
+      "title": "How to use Google Gemini to automate tasks",
+      "summary": "Spark is Google's AI tool that can perform tasks on your behalf.",
+      "body": "Spark is Google's AI tool that can perform tasks on your behalf.\n\nOne of AI's promises, on the less \"humanity-destroying\" end of the spectrum , is to make everyday life a little smoother. Instead of tackling each item on your to-do list by yourself, perhaps a reliable AI tool could cross a few entries off for you, leaving you to attend to the more important bits. Getting a recap of the last 20 emails in your inbox might let you dive into your work faster in the mornings, or at least give you a couple of extra minutes to stare into the middle distance while sipping your coffee.\n\nIf you're committed to the Google ecosystem, Gemini Spark might offer a way to automate the tasks you'd rather farm out. Spark is an agentic personal assistant announced in May at Google's annual I/O developer conference . You can give it a task, and it can run in the background, taking what Google describes as \"proactive action,\" while still adhering to your instructions.\n\nThe Gemini Spark website gives a few examples of what you can do with it, like turning your last 50 email responses into a style guide covering how you answer emails, or setting up a tracker for internships. It's integrated into Google Workspace apps like Docs, Calendar, Slides and Gmail, as well as Personal Intelligence, a feature Gemini uses to customize suggestions based on information from your Google apps.\n\nHere's how to use Gemini Spark to automate tasks.\n\nTo access Gemini Spark, you'll need to be a Google AI Pro or Ultra subscriber . Certain business subscribers might also have access. (You also can't be located in the European Economic Area, Switzerland, the UK or Nigeria.) You'll also need \"Keep activity\" switched on, which the company says \"lets you pick up chats where you left off.\" Spark is available through the Gemini mobile app, the Gemini Mac app and the web app. Spark also works with Gemini in Chrome using auto browse to do tasks like book restaurant reservations, travel and the like.\n\nAside from the basics of getting set up, Google also has some words of caution. As glorious as it would be to just set it and forget it, it's worth the reminder that AI can still make mistakes, so keep an eye on whatever tasks you've set up. Google itself also warns not to put sensitive information into the task thread. That means you shouldn't be giving Gemini login or payment information. Instead, Google recommends entering that type of info yourself directly on the relevant website. Google also cautions against scheduling tasks that are too sensitive, particularly if the task is set to run while you're offline. Consider whether a mistake like a hallucination could cause actual harm.\n\nWhether you're on the mobile or web app, select Menu , and then select Spark . Then, you can type into the textbox whatever task you want Spark to accomplish. The Spark website gives this prompt, for example: \"When I receive an email inquiring about my photography services, automatically extract the client's name, requested date, and log the lead in my 'Client Tracker' Sheet. Then create a new Google Drive folder named after the client.\" If needed, it's at this point that you can also upload a relevant file, or something from your Drive or a Notebook. Then, tap or click Submit .\n\nGoogle emphasizes monitoring your tasks in case Gemini needs something from you, like taking over a task in the browser. To keep an eye on your tasks, once again go to Menu > Spark and then Tasks . That will let you see the thread associated with the task, and if you need to make updates, you can do it right there. You can also look at the work panel, which shows you information like the completed, current and planned steps, by tapping the progress chip at the top of the thread.\n\nAt the end of September, Google said it would replace Gemini Gems with skills as the method for dictating instructions for tasks. In a blog post, the company described how you can use skills to automate repetitive tasks . A skill might be instructions for preparing for presentations or adopting a specific writing style. Google said that once you've created a skill, if you want to use it again on a task, you'll be able to type a forward slash and the skill's name when you're writing your prompt.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2281539/how-to-use-google-gemini-automate-tasks/",
+      "publishedAt": "2026-10-12T22:30:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-f9382cd8ceb85752:en",
+      "sourceId": "9to5mac-f9382cd8ceb85752",
+      "lang": "en",
+      "title": "Apple gets a $360 price target from JP Morgan despite iPhone demand concerns",
+      "summary": "Just days after Apple’s stock took a hit over reports of iPhone 18 Pro production cuts, JP Morgan has raised its AAPL price target by $20. Here are the details. more…",
+      "body": "Just days after Apple’s stock took a hit over reports of iPhone 18 Pro production cuts, JP Morgan has raised its AAPL price target by $20. Here are the details.\n\nLast Friday, Nikkei Asia reported that , according to “multiple people familiar with the matter,” Apple had told select suppliers to cut component production for the iPhone 18 Pro and the iPhone 18 Pro Max due to “soft demand.”\n\nThe report sent Apple shares down roughly 2.5% in early trading, although the stock has recovered much of that loss and closed at $340.97 today.\n\nThat said, JP Morgan released a new investor note today (via AppleInsider ), arguing that the reported cuts are consistent with Apple’s usual production patterns and don’t necessarily point to an unexpected drop in demand.\n\nThe report also comments on Apple’s staggered iPhone launch schedule, with JP Morgan expecting the iPhone Duo to offset the sales shortfall caused by the absence of the regular iPhone 18, which is expected to hit shelves early next year.\n\nInterestingly, earlier today, a separate report from China’s Securities Times claimed that Apple had increased its iPhone Duo orders by 30% , potentially bringing its production for the remainder of 2026 close to 10 million units.\n\nLooking ahead to the December quarter, JP Morgan expects Apple to sell 8.5 million iPhone Duo units. JP Morgan also projects a roughly 2% decline in iPhone revenue year-over-year, but a 2% increase in Apple’s overall revenue.\n\nThe firm also continues to flag supply constraints and broader economic pressures that could affect consumer demand.\n\nAll in all, JP Morgan raised its AAPL price target from $340 to $360, while maintaining its Overweight rating on the stock.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/12/apple-gets-a-360-price-target-from-jp-morgan-despite-iphone-demand-concerns/",
+      "publishedAt": "2026-10-12T22:23:50.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-21b8bfc826ded8a1:en",
+      "sourceId": "engadget-21b8bfc826ded8a1",
+      "lang": "en",
+      "title": "Why are your iPhone photos so blurry (and how to improve it)",
+      "summary": "Blurry iPhone photos can come down to more than just a dirty lens. Here's how to expertly sharpen your shots and fine-tune your camera settings.",
+      "body": "Blurry photos usually go deeper than a little grease on your lens.\n\nPhone cameras are a modern convenience that's all too often taken for granted, making casual photography accessible to millions in a lightweight package. While your phone's camera probably won't beat out a device designed exclusively for taking photos and video, there are ways to take some especially pretty pictures with just your smartphone. That makes it all the more cumbersome when those pictures come out blurry — an all-too-common problem for iPhone users.\n\nWhile any phone can take a blurry photo, the proliferation of the iPhone has led most complaints of this sort to center on it. Luckily, the iPhone has an incredible number of camera settings, including a whole host of ways to avoid blurry pictures — and you won't even need the fancy AI Clean Up tools from iOS 27 for great results. Whether it's making sure your lens is clean or turning on the right toggles for dark video, blurry photos are easy to fix.\n\nBefore messing with any settings, you'll want to make sure your camera lens isn't what's causing the issue. If your lens is smudged up, don't just dab it with tissue paper or the end of your shirt; take off the case, grab a microfiber cloth, and wipe the lens down. If marks are persistent, add a very light dab of distilled water to the cloth (not right on the lens!) and wipe gently.\n\nThat's just the tip of the iceberg, though, as a lot of iPhone footage and photos can still turn out blocky or blurry, lacking the crispness you might be looking for. The next issue you want to look at is the light level you're working with, which is a prime culprit behind so many blurry shots. Low light levels make it harder for cameras to focus reliably, often require slower shutter speeds, and can introduce more noise — all of which can leave photos and videos looking blurry, grainy, or blocky after compression. If you want to improve your smartphone photography , you'll need to deal with low-light conditions.\n\nA good start is the camera settings on your iPhone (Settings > Camera), where you can change the resolution at the top (there are different frame rates and resolution settings here, but anything above 720p will generally produce crisper image quality). However, some of the more helpful features are in the camera itself, such as locking focus: Instead of letting your camera shift focus all over the place, you can tap the image and hold on the area you want to focus on until the \"AE/AF LOCK\" prompt appears on-screen. On models iPhone 11 and newer, you can also turn on Night Mode (signified by the moon icon at the top of the camera interface), though it will turn on automatically if you're in low light. Night Mode will automatically brighten and capture low-light images with more detail.\n\nWhen it comes to adjusting shutter speeds and changing your ISO settings — slower shutter speeds can introduce motion blur, while higher ISO settings can increase visible noise and reduce image quality — you'll need a third-party app like Camera+. Apps like these let you dig into the minute controls of your camera and give you a leg up if you're on an older device. In addition to digital tools, you should consider getting a tripod to stabilize your shots if you're serious about avoiding blur. A tripod keeps the iPhone still during longer exposures, reducing camera shake that can otherwise turn small movements into visible blur — especially in low light.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2281499/how-to-improve-blurry-iphone-photo/",
+      "publishedAt": "2026-10-12T22:00:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-fb39666f1a7b44a0:en",
+      "sourceId": "ars-technica-fb39666f1a7b44a0",
+      "lang": "en",
+      "title": "After a 10-year redemption arc, No Man's Sky is coming to the iPhone and iPad",
+      "summary": "You can get a universe in your pocket if you have an iPhone 11 or later.",
+      "body": "Just over 10 years after its initial release, space exploration and survival crafting game No Man's Sky is making its way to the iPhone and iPad, Apple and developer Hello Games announced today.\n\nIt will run on devices as far back as the iPhone 11 and the third-generation iPad Air. No Man's Sky might not have the most cutting-edge AAA graphics (though they're still strong, and they've come a long way since launch via updates), but the game's uncommon method of generating galaxies of incomprehensible scale on device consistently for all players from a single-seed happening on a phone is remarkable for those of us who remember phones performing far behind consoles or desktop PCs.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/gaming/2026/10/after-a-10-year-redemption-arc-no-mans-sky-is-coming-to-the-iphone-and-ipad/",
+      "publishedAt": "2026-10-12T20:26:14.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-d7792bc7e4f751cc:en",
+      "sourceId": "9to5mac-d7792bc7e4f751cc",
+      "lang": "en",
+      "title": "iPhone hits record Q3 shipment share as global smartphone market plunges 20%, per report",
+      "summary": "According to Counterpoint Research , Apple saw its share of global smartphone shipments cross 20% for the first time in a third quarter, despite an industry-wide decline. Here are the details. more…",
+      "body": "According to Counterpoint Research , Apple saw its share of global smartphone shipments cross 20% for the first time in a third quarter, despite an industry-wide decline. Here are the details.\n\nIn a report released today, Counterpoint Research says memory constraints and rising prices have pushed global smartphone shipments to their lowest third-quarter level in 14 years, with a 20% year-over-year decline. The report doesn’t say what that translates to in absolute numbers.\n\nAccording to Counterpoint Research, Apple shipped 22% of all smartphones during Q3 2026, up from 18% in the year-ago period. That helped it narrow the gap with Samsung, which remained in first place with a 23% share.\n\nThe top five also included Xiaomi (10%), OPPO (9%), and vivo (8%), all of which saw their shipment shares decline compared to Q3 2025.\n\nHere’s Counterpoint Research on Apple’s performance for the period:\n\nApple’s market share crossed 20% for the first time in any Q3, reaching 22%, despite a YoY decline in shipments. The volume decline was largely driven by the absence of a base iPhone 18, which resulted in a smaller launch-month channel fill than the full iPhone 17 lineup a year earlier. Apple also joined the industry wide shift toward price hikes, although the impact was limited to the final weeks of the quarter. However, the iPhone 18 Pro models saw a stronger launch than their predecessors, particularly in China and India, while sustained momentum from the iPhone 17 series helped offset a higher shipment decline.\n\nLooking ahead, the report noted that things don’t look particularly encouraging for the remainder of the year, “with OEMs increasingly prioritizing profitability over shipment volumes amid elevated component costs and weaker affordability.”\n\nCounterpoint added that price-sensitive segments will likely face further pressure from higher device prices and limited component availability, with a meaningful recovery in shipment volumes unlikely until costs come down and supply conditions improve.\n\nTo read Counterpoint’s full report, follow this link .",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/12/iphone-hits-record-q3-shipment-share-as-global-smartphone-market-plunges-20-per-report/",
+      "publishedAt": "2026-10-12T20:25:16.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "9to5mac-f903b764385023aa:en",
       "sourceId": "9to5mac-f903b764385023aa",
       "lang": "en",
@@ -5464,34 +5560,18 @@
     },
     {
       "kind": "news",
-      "id": "engadget-ae2995e4549a95d2:en",
-      "sourceId": "engadget-ae2995e4549a95d2",
+      "id": "ars-technica-e95cb2b7a5fa73a7:en",
+      "sourceId": "ars-technica-e95cb2b7a5fa73a7",
       "lang": "en",
-      "title": "Meta says it's caught up to the frontier with its latest Wonder AI models",
-      "summary": "The models add \"active memory\" and \"active focus\" abilities.",
-      "body": "The models add \"active memory\" and \"active focus\" abilities.\n\nAfter spending more than a year and tens of billions of dollars rebuilding its AI efforts, Meta says that it has caught up with the frontier. The company introduced its two latest AI models, Muse Wonder and Muse Wonder Full, both of which represent \"a major leap toward personal superintelligence.\"\n\nAccording to Meta, the models are particularly adept at navigating legal, financial and health-related tasks, and are able to deliver \"frontier coding performance.\" Both models also add \"active memory\" and \"active focus,\" which Meta says will help people accomplish more over long periods of time.\n\nThat's notable because Meta says it plans to bring Wonder to its personal agent Muse , beginning with paid subscribers. Active memory, according to the company, is \"the ability to carry what matters to you across conversations and bring back the details that are relevant to the task at hand\" while active focus will allow an agent to \"keep working toward your goal when a task gets hard.\"\n\nThe models are a notable milestone for Meta, which has said it expects to spend as much as $145 billion this year to fuel its ambitious AI plans. In an interview with the Financial Times , CEO Mark Zuckerberg said that \"getting to this point both required a large amount of compute and investment, and a lot of very rigorous scientific work\" from the company's superintelligence team.\n\nThe new models are rolling out now to subscribers. Muse Wonder is available via Meta's API and in Muse Code. It's priced at $4 per million input tokens and $20 per million output tokens. Muse Wonder Full is available to people who subscribe to the $50/month \"power usage\" or $200/month \"maximum usage\" tiers of Muse Code.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2284478/meta-says-its-caught-up-to-the-frontier-with-its-latest-wonder-ai-models/",
-      "publishedAt": "2026-10-12T18:51:52.000Z",
+      "title": "Anthropic's Claude AI submitted false murder tip to Philadelphia police",
+      "summary": "“I may have information regarding this case,\" Claude AI told Philly police.",
+      "body": "An Anthropic AI model submitted a false tip about an unsolved murder to Philadelphia police, the company and police department confirmed on Friday.\n\nA Claude model sent the false tip on July 18 to the Philadelphia Police Department's website for submitting information about unsolved murders, but it was flagged by a spam filter. Anthropic apparently discovered the incident on September 28 and informed the police department about it on October 8.\n\nDuring internal testing, Claude Haiku 4.5 was instructed to complete various forms up to the final submission stage and to stop before submitting those forms. \"Several times Claude mistakenly submitted the form instead, expecting there to be an additional confirmation page,\" Anthropic said in a report describing \"unintended model actions we’ve observed during evaluations and internal use of Claude.\"\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/tech-policy/2026/10/anthropics-claude-ai-submitted-false-murder-tip-to-philadelphia-police/",
+      "publishedAt": "2026-10-12T18:21:36.000Z",
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-e00874d6bc868c66:en",
-      "sourceId": "9to5mac-e00874d6bc868c66",
-      "lang": "en",
-      "title": "Apple unveils immersive horror film coming to Vision Pro this week",
-      "summary": "Apple has announced that ‘Remnants,’ the first immersive horror film on Vision Pro, is coming this week. Here’s a teaser video. more…",
-      "body": "Apple has announced that ‘Remnants,’ the first immersive horror film on Vision Pro, is coming this week. Here’s a teaser video.\n\nApple Immersive is a unique 180-degree video format designed for Vision Pro. And while we’ve seen immersive videos that capture sports and plenty of documentary-style short films, Apple just announced the first horror film is coming soon.\n\nRemnants premieres this Friday, October 16 in the Apple TV app exclusively on Vision Pro.\n\nFrom writer and director Ti West, Remnants takes viewers inside Woldmere Castle and the “terrifying world” created by West.\n\nHere’s a teaser video Apple just shared that shows real viewer reactions:\n\nIf you’re a fan of horror, Apple Immersive on Vision Pro should make for an especially unique viewing experience for enjoying the genre.\n\nWill you watch Remnants when it hits Apple Vision Pro? Let us know in the comments.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/12/apple-unveils-immersive-horror-film-coming-to-vision-pro-this-week/",
-      "publishedAt": "2026-10-12T17:39:41.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
       ]
     },
     {
@@ -5524,53 +5604,6 @@
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-a41f4d7ddf3bd3cb:en",
-      "sourceId": "engadget-a41f4d7ddf3bd3cb",
-      "lang": "en",
-      "title": "Here's what typically drains an EV battery the fastest",
-      "summary": "EVs are improving their range all the time, but you're looking to maximize your car's miles, right? Certain things will drain your battery most quickly.",
-      "body": "Fast highway driving, carrying excess weight, heat and air-conditioning will cut your EV's range.\n\nMaximum electric-vehicle ranges are on the rise. And while some models still struggle to reach the 250-mile mark , advancements in battery and charging technologies have made EVs are more capable of handling long commutes and road trips.\n\nAccording to electric vehicle watchdog Recurrent , the average real-world range of 2026 EV models rose to 325 miles, an impressive number somewhat tempered by the market's shift toward the less efficient trucks and SUVs. Some models, like the Lucid Air, Chevrolet Silverado EV and BMW i3 can travel well over 400 miles between charges. Likewise, charging times are shortening, with many drivers able to add 100 miles of range in less than 10 minutes due to the spread of 800-volt architectures, better thermal management systems, and flat charging curves.\n\nWhen it comes to electric vehicles, however, not every drive is created equal. Instead, factors like speed, weather, car weight and air-conditioning can have an outsized effect on your car's energy usage. So underwhelming performance may not mean that it's time to replace your EV battery . Instead, understanding these factors and how to navigate them is key to realizing your EV's peak performance. And just a few simple fixes can easily extend your car's battery.\n\nUnlike your typical gas guzzler, whose internal battery is charged while in motion, driving your EV inherently drains your battery. Of course, certain driving behaviors are likely to drain your EV battery faster than others. However, much of the logic governing gas conservation is counterintuitive to driving your EV.\n\nOne major difference is that EVs burn through their battery stores faster on the highway than in stop-and-go traffic. For one thing, higher speeds require your battery to consume more energy. This is particularly true when accelerating, as sudden bursts of speed require larger stores of electricity. Highway driving also leads to more aerodynamic drag and tire friction, making this energy expenditure less efficient. Moreover, driving on the highway means your battery doesn't benefit from the gains of regenerative braking, in which your EV redirects the kinetic energy lost while braking into its battery's cells, extending your battery life as much as 20%.\n\nYour internal electronics can also lower your EV's range. Your car's air-conditioner can drain several miles of range from your battery every hour. Having your car's heater on can similarly take a toll on your EV's battery. However, the effect of your navigation, infotainment, and USB devices is minimal.\n\nExtraneous factors can also drain your battery. Extreme weather, for instance, can cause your battery's range to fluctuate. A 2025 study by Recurrent , for instance, found that an EV's range could drop by nearly a third when temperatures drop below freezing. Recurrent found that, though the degree of drainage varies widely depending on your car's manufacturer. When temperatures reach a blazing 100 degrees, meanwhile, Recurrent found that EV range can dip around 18%. Other outside influences, such as the weight of your car's cargo and passengers, can further reduce your vehicle's operating range.\n\nYou can take several steps to maximize your EV's battery life . For one thing, eliminating unnecessary weight can help limit the drain on your car's battery. Removing unnecessary objects from your trunk, like heavy equipment, will go a long way. Other simple lifestyle changes, such as reducing your AC or heater usage, can maximize your car's range. Since your EV is already operating on lower performance thresholds during extreme weather, moderating your climate control usage could prevent yourself from compounding the adverse effects on its range. If a comfortable cabin is a must, you can turn on your heater or air-conditioning while your car is still connected to the charger to ensure you don't waste valuable battery life.\n\nPerhaps the greatest change you can make is to your driving style. For one thing, refrain from attempting to set any speed records when driving your electric vehicle. Of course, this doesn't mean you need to drive like your grandmother in the rain; it's about striking a balance between convenience and sustainability. According to GridServe , driving 60 mph rather than 70 can significantly reduce your battery's energy consumption, potentially saving you roughly six miles of battery life per hour. And it helps to increase your speed gradually rather than rapid accelerations that consume large bursts of energy. Avoid using features like your car's boost button if range may be a concern. Driving in ways that take advantage of regenerative braking can do wonders for your range.\n\nMost EVs help drivers maximize their battery usage. Several manufacturers, including Chevrolet, Hyundai, and Mercedes-Benz enable drivers to monitor energy consumption directly in their infotainment or phone apps. To check what may be affecting your car's battery health, dive into your car's manual, app, and infotainment system.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2281487/what-drains-ev-batteries-fastest/",
-      "publishedAt": "2026-10-12T16:45:00.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-6f1efd9bc706d7c5:en",
-      "sourceId": "9to5mac-6f1efd9bc706d7c5",
-      "lang": "en",
-      "title": "You can now start the iPhone Duo pre-order process",
-      "summary": "iPhone Duo pre-orders officially kick off on Friday, but Apple is letting you prepare now . Starting today, you can head to the Apple Store Online or Apple Store app and save your exact iPhone Duo configuration. more…",
-      "body": "iPhone Duo pre-orders officially kick off on Friday, but Apple is letting you prepare now . Starting today, you can head to the Apple Store Online or Apple Store app and save your exact iPhone Duo configuration.\n\nApple has offered this “get ready for pre-order” window for the last several years. It allows you to streamline the pre-order process by preparing key details ahead of time. This includes the iPhone Duo color, storage, and carrier options.\n\nYou can also prepare your iPhone Duo pre-order payment method. You can pay in full, finance with Apple Card, join the Apple Upgrade program, or check for applicable carrier offers.\n\nIf you complete this process ahead of time, you can check out in just a couple of taps when iPhone Duo pre-orders officially begin on Friday morning.\n\nThe new “get ready” option is available today and will likely run through much of the day on Friday, October 15. You’ll then have to return to the Apple Store app or website on Friday, October 16 at 5 a.m. PT/8 a.m. ET to finalize your order.\n\nAre you pre-ordering an iPhone Duo? If so, are you choosing Night Sky or Star White? Let us know down in the comments.\n\nFollow Chance : Threads , X , and Instagram",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/12/you-can-now-start-the-iphone-duo-pre-order-process/",
-      "publishedAt": "2026-10-12T16:13:36.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-65a339d9bb271569:en",
-      "sourceId": "engadget-65a339d9bb271569",
-      "lang": "en",
-      "title": "Smart just unveiled a new ultra-compact EV at the Paris Motor Show",
-      "summary": "A little car with decent mileage per charge.",
-      "body": "The Smart #2 is absolutely teensy and gets around 180 miles per charge.\n\nSmart just unveiled its #2 ultra-compact EV at the Paris Motor Show , four years after the company introduced the Smart #1 . The Smart #2 looks to be a return to (miniature) form for the company, after a string of SUV releases. This thing is teensy and similar to the iconic Smart Fortwo ultra-compact.\n\nThe Smart #2 fits two people and has been designed to make \"navigating tight city streets and parking in narrow spaces effortless.\" They will be available in a variety of two-tone color options, which recall the original Fortwo.\n\nThere's a rear-mounted 60kW electric motor that provides 130Nm of torque to the back wheels. These rear tires are actually larger than the front wheels, which should enhance stability.\n\nThe floor-mounted battery can get up to 180 miles (290km) per charge, which is a decent enough metric for an ultra-compact. The car also supports fast-charging, which can go from 10 to 80 percent in 20 minutes at the outlet. Smart promises \"sportier handling and greater comfort,\" due to a five-link rear suspension system.\n\nThe Smart #2 may look like an old-school Fortwo, but it's packed with modern features. It comes equipped with driver assistance systems, a 10.1-inch central screen and an 8.8-inch driver display. These EVs can connect wirelessly to devices via 4G, Wi-Fi and Bluetooth.\n\nThere will be several trims available to choose from here. The Pure is the entry-level model, and includes everything I mentioned above. The Pure+ adds 11kW AC charging and a heated driver seat. The Premium adds even more perks, like a glass roof, heated leather seats and a seven-speaker Sennheiser sound system. There are also more color options here. Finally, the Couture Edition includes a white exterior, a gold-painted roof and tires with gold detailing. This one will be limited to 999 units.\n\nWe don't have exact pricing or availability just yet, but Smart says the starting price will be under $26,500 (£20,000.) Preorders will open in the Spring and deliveries should happen at some point during the summer.\n\nHowever, this car likely won't be coming across the pond. Smart hasn't sold anything in America since 2019 and this country seems to dislike small and budget-friendly EVs .",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2283979/smart-just-unveiled-a-new-ultra-compact-ev-at-the-paris-motor-show/",
-      "publishedAt": "2026-10-12T15:59:21.000Z",
-      "categories": [
-        "tecnologia-general"
       ]
     },
     {
@@ -5651,21 +5684,6 @@
       "sourceName": "The Verge",
       "originalUrl": "https://www.theverge.com/tech/1008191/nothing-cmf-speaker-m-s-series-bluetooth-design-customize",
       "publishedAt": "2026-10-12T13:00:00.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-2f249163a002623c:en",
-      "sourceId": "ars-technica-2f249163a002623c",
-      "lang": "en",
-      "title": "Amazon has over 1 million robot workers. What’s next for human employees?",
-      "summary": "The second-largest corporate employer has bet big on robot workers to scale.",
-      "body": "No organization in the world operates more robots than Amazon. The company already has more than 1 million robots working in warehouses around the clock to make tens of millions of same-day and one-day package deliveries happen on a daily basis—and Amazon is poised to significantly grow that robotic fleet in the coming years as it establishes new factories to churn out increasingly more capable robot workers.\n\nDespite deploying so many robots, Amazon is also the second-largest corporate employer in the world, with more than 1.5 million full-time and part-time human workers, according to its 2025 annual report . Amazon executives say that the growing robot fleet has eased the burden on its human workforce by taking on the toughest fulfillment center tasks that carry the greatest risks of physical fatigue and injury. But labor advocacy groups and independent researchers point to evidence suggesting that warehouse automation driven by AI is not all upside for the humans who work alongside robots.\n\n“For the last 100 years, most of the automation that we've seen usually happens away from workers—you're taking that high-risk task away from the worker, and you're doing so in a way that is not physically proximate,” Brian Greenwood , professor of business at George Mason University, told Ars. “The rise of collaborative robots really changes that dynamic for two reasons: one is that it is physically proximate, and two, the robot has the ability to dictate the pace of work.”\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/ai/2026/10/inside-amazons-robotic-arms-race-and-what-it-means-for-the-future-of-human-work/",
-      "publishedAt": "2026-10-12T12:43:10.000Z",
       "categories": [
         "tecnologia-general"
       ]
@@ -5766,22 +5784,6 @@
       "categories": [
         "apple",
         "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-1aa8a73b8d2269ba:en",
-      "sourceId": "ars-technica-1aa8a73b8d2269ba",
-      "lang": "en",
-      "title": "Ukraine’s drones knock out AI data center belonging to \"Russia’s Google\"",
-      "summary": "One damaged data center has supercomputers used for training Yandex’s AI model.",
-      "body": "Ukrainian drone strikes have knocked out two of five data centers belonging to the Russian tech giant Yandex. The damage has left Yandex, known as “Russia’s Google” because it operates the country’s most popular search engine, struggling to maintain its AI chatbot and other online services.\n\nThe Ukrainian drones struck Yandex data centers in the Sasovo and Kaluga regions of Russia on October 8 and October 9, according to Reuters . Those actions came as a direct response to a Russian drone strike campaign targeting Ukraine’s data centers , which has disrupted mobile phone and Internet services for thousands of Ukrainians since late September.\n\n“We continue to respond to Russia’s attacks on Ukraine, and we’re doing so with high precision,” said Ukrainian President Volodymyr Zelenskyy in a post on X. “Another data center was hit as well—our symmetrical response.”\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/gadgets/2026/10/ukraines-drones-knock-out-ai-data-center-belonging-to-russias-google/",
-      "publishedAt": "2026-10-09T22:04:07.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
       ]
     },
     {
@@ -6071,23 +6073,6 @@
       "categories": [
         "apple",
         "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "freedom-scientific-blog-ebf1af5d85f12f9a:en",
-      "sourceId": "freedom-scientific-blog-ebf1af5d85f12f9a",
-      "lang": "en",
-      "title": "Beyond the Basics: Navigate, Review, and Present More Effectively in PowerPoint Using JAWS",
-      "summary": "Advanced PowerPoint skills can help you navigate complex slides, examine visual elements, and deliver presentations with confidence. This webinar will demonstrate practical strategies for working more efficiently with PowerPoint using JAWS. Oct 15, 2026 12:00 PM in Eastern Time (US and Canada) In this webinar, we’ll show you how to: Join us to strengthen your PowerPoint skills …",
-      "body": "Advanced PowerPoint skills can help you navigate complex slides, examine visual elements, and deliver presentations with confidence. This webinar will demonstrate practical strategies for working more efficiently with PowerPoint using JAWS.\n\nOct 15, 2026 12:00 PM in Eastern Time (US and Canada)\n\nIn this webinar, we’ll show you how to:\n\nJoin us to strengthen your PowerPoint skills and take greater control of reviewing, improving, and delivering presentations with JAWS.\n\nVispero Presenters: Elizabeth Whitaker and Rachel Buchanan\n\nACVREP Credits: ACVREP credits will be available for those who attend the live webinar.",
-      "sourceName": "Freedom Scientific",
-      "originalUrl": "https://training.vispero.com/beyond-the-basics-navigate-review-and-present-more-effectively-in-powerpoint-using-jaws/",
-      "publishedAt": "2026-10-03T00:03:00.000Z",
-      "categories": [
-        "windows",
-        "tecnologia-accesibilidad",
-        "jaws"
       ]
     }
   ]

@@ -21,6 +21,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Validar sintaxis del lector que se empaqueta en iOS
+        run: |
+          node --check web-reading.js
+          node --check shared/web-reading-navigation.mjs
+          node --check ios-build/ios-parity.js
+          node --check tifloacosta-guide.js
       - name: Probar controles y contratos de TifloLector sin publicar
         run: node --test ios-build/test/tiflolector-structure.test.mjs
       - name: Ejecutar las pruebas existentes del lector web

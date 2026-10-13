@@ -347,6 +347,7 @@
   let libraryRenderToken = 0;
   let playbackAccessibilityState = null;
   let activeAudio = null;
+  let persistActiveAudio = null;
   let audioObjectUrl = '';
   let audioTools = null;
   let readingTimerHandle = null;
@@ -1377,6 +1378,7 @@
 
   function clearActiveAudio() {
     if (activeAudio) {
+      void persistActiveAudio?.({ force: true });
       activeAudio.pause();
       activeAudio.removeAttribute('src');
       activeAudio.load();
@@ -1384,6 +1386,7 @@
     }
     if (audioObjectUrl) URL.revokeObjectURL(audioObjectUrl);
     audioObjectUrl = '';
+    persistActiveAudio = null;
     if (audioTools) audioTools.hidden = true;
     updatePlaybackLabel(false);
   }
@@ -1466,24 +1469,35 @@
     els.next.hidden = !audioOnly;
   }
 
-  async function useMp3File(file) {
+  async function useMp3File(file, { existingBook = null } = {}) {
     await pause();
+    await persistActiveAudio?.({ force: true });
     setAccessiblePlaybackMode(false);
     if (speechController) {
       try { await speechController.destroy(); } catch {}
       speechController = null;
     }
     clearActiveAudio();
+    let savedBook = existingBook;
+    if (!savedBook && libraryAdapter?.importAudioFile) {
+      try {
+        savedBook = await libraryAdapter.importAudioFile({
+          file, title: file.name || 'Audiolibro MP3', language: language()
+        });
+      } catch {
+        // Still permit temporary playback, but tell the user that it was not saved.
+      }
+    }
     audioObjectUrl = URL.createObjectURL(file);
     const audio = new Audio(audioObjectUrl);
     activeAudio = audio;
     documentModel = null;
     readingSession = null;
     searchIndex = null;
-    currentBookId = '';
+    currentBookId = savedBook?.id || '';
     currentSource = '';
     currentFormat = 'audio';
-    els.title.textContent = file.name;
+    els.title.textContent = file.name || savedBook?.title || 'Audiolibro MP3';
     els.reader.hidden = false;
     enterReaderOnlyView();
     setReaderAudioOnlyMode(true);
@@ -1496,11 +1510,43 @@
     els.next.textContent = language() === 'en' ? 'Forward 10 seconds' : 'Adelantar 10 segundos';
     els.save.disabled = true;
     els.bookmark.disabled = true;
-    els.queueToggle.disabled = true;
+    els.queueToggle.disabled = !savedBook?.id;
     const tools = ensureAudioTools();
     tools.hidden = false;
     const seek = tools.querySelector('#reading-audio-seek');
     const progress = tools.querySelector('#reading-audio-total-progress');
+    const resumeSeconds = Math.max(0, (Number(savedBook?.mediaPositionMs) || 0) / 1000);
+    let lastPersistedAt = 0;
+    let queuedSave = Promise.resolve();
+    async function persistPosition({ force = false, completed = false } = {}) {
+      if (!savedBook?.id || !libraryAdapter?.saveProgress) return false;
+      const timestamp = Date.now();
+      if (!force && timestamp - lastPersistedAt < 5000) return true;
+      const duration = Number.isFinite(audio.duration) ? audio.duration : 0;
+      const position = Math.max(0, Number(audio.currentTime) || 0);
+      const finished = completed || audio.ended;
+      const snapshot = {
+        id: savedBook.id, blockIndex: 0, unitIndex: 0,
+        mediaTrackIndex: 0, mediaPositionMs: Math.round(position * 1000),
+        percent: finished ? 100 : duration > 0
+          ? Math.min(99.9, Math.max(0, position / duration * 100))
+          : Math.max(0, Number(savedBook.percent) || 0),
+        state: finished ? 'read' : 'in-reading'
+      };
+      // Serialize snapshots: an earlier timeupdate must not overwrite pause.
+      queuedSave = queuedSave.catch(() => {}).then(() => libraryAdapter.saveProgress(snapshot));
+      const result = await queuedSave.catch(() => ({ saved: false }));
+      if (result?.saved) lastPersistedAt = timestamp;
+      return result?.saved === true;
+    }
+    persistActiveAudio = persistPosition;
+    function restoreAudioPosition() {
+      if (activeAudio !== audio || !resumeSeconds || savedBook?.state === 'read') return;
+      const duration = Number.isFinite(audio.duration) ? audio.duration : 0;
+      try { audio.currentTime = duration ? Math.min(resumeSeconds, duration) : resumeSeconds; } catch {}
+      updateAudioPosition();
+    }
+    audio.addEventListener('loadedmetadata', restoreAudioPosition, { once: true });
     function updateAudioPosition() {
       if (activeAudio !== audio) return;
       const duration = Number.isFinite(audio.duration) ? audio.duration : 0;
@@ -1521,10 +1567,19 @@
     }
     audio.addEventListener('loadedmetadata', updateAudioPosition);
     audio.addEventListener('durationchange', updateAudioPosition);
-    audio.addEventListener('timeupdate', updateAudioPosition);
+    audio.addEventListener('timeupdate', () => {
+      updateAudioPosition();
+      void persistPosition();
+    });
     audio.addEventListener('play', () => updatePlaybackLabel(true));
-    audio.addEventListener('pause', () => updatePlaybackLabel(false));
-    audio.addEventListener('ended', () => updatePlaybackLabel(false));
+    audio.addEventListener('pause', () => {
+      updatePlaybackLabel(false);
+      void persistPosition({ force: true });
+    });
+    audio.addEventListener('ended', () => {
+      updatePlaybackLabel(false);
+      void persistPosition({ force: true, completed: true });
+    });
     audio.addEventListener('error', () => {
       if (activeAudio !== audio) return;
       els.status.textContent = language() === 'en'
@@ -1533,9 +1588,14 @@
     });
     updateAudioPosition();
     updatePlaybackLabel(false);
-    els.status.textContent = language() === 'en'
-      ? 'MP3 opened. You can listen now. Audio files are not yet saved to My library.'
-      : 'MP3 abierto. Ya puedes escucharlo. Los archivos de audio todavía no se guardan en Mi biblioteca.';
+    els.status.textContent = savedBook?.id
+      ? (language() === 'en'
+        ? 'MP3 saved to My library. Your listening position will be restored.'
+        : 'MP3 guardado en Mi biblioteca. Se recuperará la posición de escucha.')
+      : (language() === 'en'
+        ? 'Temporary MP3 playback. The audio could not be saved. Check free storage.'
+        : 'Reproducción temporal del MP3. No se pudo guardar. Revisa el espacio disponible.');
+    if (savedBook?.id && !existingBook) await renderLibrary();
     queueMicrotask(() => els.title.focus());
   }
 
@@ -2562,6 +2622,7 @@
     }
     readerChromeState = null;
     els.reader.hidden = true;
+    await persistActiveAudio?.({ force: true });
     clearActiveAudio();
 
     if (readerReturnView === 'library') {
@@ -3357,6 +3418,7 @@
   });
   els.prepare.addEventListener('click', () => { void prepareReading(); });
   els.ocr.addEventListener('click', () => { void runPdfOcr(); });
+  window.addEventListener('pagehide', () => { void persistActiveAudio?.({ force: true }); });
   els.file.addEventListener('change', () => {
     pendingPdfFile = null;
     pendingImageFile = null;

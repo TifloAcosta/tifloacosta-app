@@ -51,6 +51,8 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: Preparar contenido web
         working-directory: ios-build
+        env:
+          TIFLO_IOS_AUDIT_UNSIGNED: '1'
         run: npm run prepare:web
       - name: Generar y configurar plataforma iOS
         working-directory: ios-build

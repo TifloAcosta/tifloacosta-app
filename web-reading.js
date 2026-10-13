@@ -66,6 +66,8 @@
     translationOriginal: $('#reading-translation-original'),
     translationTranslated: $('#reading-translation-translated'),
     translationRead: $('#reading-translation-read'),
+    translationExportTxt: $('#reading-translation-export-txt'),
+    translationExportHtml: $('#reading-translation-export-html'),
     translationStatus: $('#reading-translation-status'),
     save: $('#reading-save'),
     libraryHeading: $('#reading-library-heading'),
@@ -1241,6 +1243,8 @@
     els.translationOriginal.textContent = c.translationOriginal;
     els.translationTranslated.textContent = c.translationTranslated;
     if (els.translationRead) els.translationRead.textContent = language() === 'en' ? 'Read the translated document' : 'Leer el documento traducido';
+    if (els.translationExportTxt) els.translationExportTxt.textContent = language() === 'en' ? 'Export translation as TXT' : 'Exportar traducción TXT';
+    if (els.translationExportHtml) els.translationExportHtml.textContent = language() === 'en' ? 'Export translation as HTML' : 'Exportar traducción HTML';
     const settingsSummary = document.getElementById('reading-settings-summary');
     if (settingsSummary) settingsSummary.textContent = language() === 'en' ? 'Reading settings' : 'Ajustes de lectura';
     if (!documentModel) els.title.textContent = c.document;
@@ -2363,6 +2367,9 @@
     els.translationOriginal.hidden = !available;
     els.translationTranslated.hidden = !available;
     if (els.translationRead) els.translationRead.hidden = !available;
+    const exportReady = available && translationJob?.getState?.()?.status === 'complete';
+    if (els.translationExportTxt) els.translationExportTxt.hidden = !exportReady;
+    if (els.translationExportHtml) els.translationExportHtml.hidden = !exportReady;
     els.translationOriginal.setAttribute('aria-pressed', showingTranslation ? 'false' : 'true');
     els.translationTranslated.setAttribute('aria-pressed', showingTranslation ? 'true' : 'false');
   }
@@ -3574,6 +3581,36 @@
   });
   els.translationOriginal.addEventListener('click', () => { void switchTranslationView(false); });
   els.translationTranslated.addEventListener('click', () => { void switchTranslationView(true); });
+  function exportCompletedTranslation(format) {
+    if (!translationDocument?.blocks?.length || translationJob?.getState?.()?.status !== 'complete') {
+      els.translationStatus.textContent = language() === 'en'
+        ? 'Finish translating before exporting.'
+        : 'Termina la traducción antes de exportarla.';
+      return;
+    }
+    const title = safeExportFilename(els.title?.textContent || 'Documento');
+    const code = String(els.translationTarget?.value || 'translation');
+    try {
+      if (format === 'html') {
+        downloadExport(new Blob([accessibleHtmlFromModel(translationDocument, title)], {
+          type: 'text/html;charset=utf-8'
+        }), title + '-' + code + '-traduccion.html');
+      } else {
+        downloadExport(new Blob([accessibleTextFromModel(translationDocument)], {
+          type: 'text/plain;charset=utf-8'
+        }), title + '-' + code + '-traduccion.txt');
+      }
+      els.translationStatus.textContent = language() === 'en'
+        ? 'Completed translation exported. The original document is unchanged.'
+        : 'Traducción completa exportada. El documento original no se ha modificado.';
+    } catch {
+      els.translationStatus.textContent = language() === 'en'
+        ? 'Translation export failed.'
+        : 'No se pudo exportar la traducción.';
+    }
+  }
+  els.translationExportTxt?.addEventListener('click', () => exportCompletedTranslation('txt'));
+  els.translationExportHtml?.addEventListener('click', () => exportCompletedTranslation('html'));
   els.translationRead?.addEventListener('click', () => {
     void (async () => {
       await switchTranslationView(true);

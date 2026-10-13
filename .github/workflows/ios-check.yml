@@ -3,11 +3,15 @@ on:
   workflow_dispatch:
   push:
     branches: [preparacion-ios, work/ios-tiflolector-native-20261012]
+  pull_request:
+    branches: [preparacion-ios]
     paths:
       - 'ios-build/**'
       - 'web-reading.js'
       - 'sw.js'
       - 'test/web-reading*.test.mjs'
+      - 'shared/web-reading-pronunciation.mjs'
+      - 'shared/web-entry.mjs'
       - 'index.html'
       - 'mobile/src/screens/reading-*.mjs'
       - '.github/workflows/ios-check.yml'
@@ -26,6 +30,7 @@ jobs:
           node --check ios-build/prepare-web.mjs
           node --check web-reading.js
           node --check shared/web-reading-navigation.mjs
+          node --check shared/web-reading-pronunciation.mjs
           node --check ios-build/ios-parity.js
           node --check tifloacosta-guide.js
       - name: Probar controles y contratos de TifloLector sin publicar

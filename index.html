@@ -244,6 +244,19 @@
             <option value="3">3×</option>
           </select>
         </fieldset>
+        <details id="reading-pronunciation-settings">
+          <summary id="reading-pronunciation-summary">Diccionario de pronunciación</summary>
+          <p id="reading-pronunciation-help">Sustituye palabras o expresiones únicamente al leer en voz alta. El texto original no cambia.</p>
+          <form id="reading-pronunciation-form">
+            <label id="reading-pronunciation-original-label" for="reading-pronunciation-original">Palabra o expresión original</label>
+            <input id="reading-pronunciation-original" type="text" maxlength="80" required autocomplete="off">
+            <label id="reading-pronunciation-replacement-label" for="reading-pronunciation-replacement">Cómo debe pronunciarse</label>
+            <input id="reading-pronunciation-replacement" type="text" maxlength="120" required autocomplete="off">
+            <button id="reading-pronunciation-add" type="submit">Guardar pronunciación</button>
+          </form>
+          <ul id="reading-pronunciation-list" aria-label="Pronunciaciones guardadas"></ul>
+          <p id="reading-pronunciation-status" role="status" aria-live="polite"></p>
+        </details>
       </section>
 <section id="reading-more-voices-settings" aria-labelledby="reading-more-voices-settings-heading">
         <h4 id="reading-more-voices-settings-heading">Buscar más voces</h4>
@@ -607,7 +620,7 @@
 <script type="module">
   import * as shared from './shared/web-entry.mjs?v=1.7';
   window.TIFLO_SHARED = shared;
-  await import('./web-reading.js?v=3.16');
+  await import('./web-reading.js?v=3.17');
 </script>
 <script src="app.js?v=2.3"></script>
 <script>

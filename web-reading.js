@@ -353,6 +353,8 @@
   let readerViewState = null;
   let readerChromeState = null;
   let readerReturnView = 'main';
+  let pronunciationEntries = [];
+  let pronunciationRestart = Promise.resolve();
   const translationMemory = new Map();
 
   const speechAdapter = typeof shared.createWebReadingSpeechAdapter === 'function'
@@ -981,6 +983,142 @@
     } catch { return {}; }
   }
 
+  const PRONUNCIATION_STORAGE_KEY = 'tifloWebPronunciationV1';
+
+  function loadPronunciationEntries() {
+    try {
+      const stored = JSON.parse(localStorage.getItem(PRONUNCIATION_STORAGE_KEY) || '[]');
+      return shared.normalizePronunciationEntries?.(stored) || [];
+    } catch {
+      return [];
+    }
+  }
+
+  function persistPronunciationEntries(nextEntries) {
+    const sanitized = shared.normalizePronunciationEntries?.(nextEntries) || [];
+    try {
+      localStorage.setItem(PRONUNCIATION_STORAGE_KEY, JSON.stringify(sanitized));
+      pronunciationEntries = sanitized;
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  // A rule changes TTS input only. No source document, selection or mark is edited.
+  function restartSpeechForPronunciation() {
+    if (!documentModel || !speechController) return;
+    pronunciationRestart = pronunciationRestart.then(async () => {
+      const snapshot = speechController?.snapshot?.();
+      const wasPlaying = snapshot?.playing === true;
+      const position = snapshot?.position || {
+        blockIndex: readingSession?.snapshot?.().blockIndex || 0,
+        unitIndex: currentUnitIndex
+      };
+      if (wasPlaying) await speechController.pause();
+      await rebuildSpeech(position);
+      if (wasPlaying) await speechController?.play?.();
+    }).catch(() => {
+      const status = document.getElementById('reading-pronunciation-status');
+      if (status) status.textContent = language() === 'en'
+        ? 'Speech could not be refreshed. The rule has been saved.'
+        : 'No se pudo actualizar la voz. La sustitución ha quedado guardada.';
+    });
+  }
+
+  function renderPronunciationEntries() {
+    const list = document.getElementById('reading-pronunciation-list');
+    if (!list) return;
+    list.replaceChildren();
+    list.setAttribute('aria-label', language() === 'en' ? 'Saved pronunciations' : 'Pronunciaciones guardadas');
+    if (!pronunciationEntries.length) {
+      const empty = document.createElement('li');
+      empty.textContent = language() === 'en' ? 'No saved pronunciations.' : 'No hay pronunciaciones guardadas.';
+      list.append(empty);
+    }
+    for (const rule of pronunciationEntries) {
+      const item = document.createElement('li');
+      const label = document.createElement('span');
+      label.textContent = rule.original + ' → ' + rule.replacement + '. ';
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.textContent = language() === 'en' ? 'Delete pronunciation' : 'Eliminar pronunciación';
+      remove.setAttribute('aria-label', remove.textContent + ': ' + rule.original);
+      remove.addEventListener('click', () => {
+        const remaining = pronunciationEntries.filter(entry =>
+          entry.original.toLocaleLowerCase() !== rule.original.toLocaleLowerCase());
+        const status = document.getElementById('reading-pronunciation-status');
+        if (!persistPronunciationEntries(remaining)) {
+          if (status) status.textContent = language() === 'en'
+            ? 'Could not save the changes.' : 'No se pudieron guardar los cambios.';
+          return;
+        }
+        renderPronunciationEntries();
+        const original = document.getElementById('reading-pronunciation-original');
+        original?.focus();
+        if (status) status.textContent = language() === 'en'
+          ? 'Pronunciation deleted.' : 'Pronunciación eliminada.';
+        restartSpeechForPronunciation();
+      });
+      item.append(label, remove);
+      list.append(item);
+    }
+  }
+
+  function localizePronunciationEditor() {
+    const labels = {
+      'reading-pronunciation-summary': ['Diccionario de pronunciación', 'Pronunciation dictionary'],
+      'reading-pronunciation-help': [
+        'Sustituye palabras o expresiones únicamente al leer en voz alta. El texto original no cambia.',
+        'Replace words or phrases only in spoken audio. The original text is unchanged.'
+      ],
+      'reading-pronunciation-original-label': ['Palabra o expresión original', 'Original word or phrase'],
+      'reading-pronunciation-replacement-label': ['Cómo debe pronunciarse', 'How it should be spoken'],
+      'reading-pronunciation-add': ['Guardar pronunciación', 'Save pronunciation']
+    };
+    const en = language() === 'en';
+    for (const [id, values] of Object.entries(labels)) {
+      const element = document.getElementById(id);
+      if (element) element.textContent = values[en ? 1 : 0];
+    }
+    renderPronunciationEntries();
+  }
+
+  function setupPronunciationDictionary() {
+    pronunciationEntries = loadPronunciationEntries();
+    const form = document.getElementById('reading-pronunciation-form');
+    const original = document.getElementById('reading-pronunciation-original');
+    const replacement = document.getElementById('reading-pronunciation-replacement');
+    const status = document.getElementById('reading-pronunciation-status');
+    form?.addEventListener('submit', event => {
+      event.preventDefault();
+      const candidate = shared.normalizePronunciationEntries?.([
+        ...pronunciationEntries,
+        { original: original?.value, replacement: replacement?.value }
+      ]) || [];
+      if (candidate.length === pronunciationEntries.length) {
+        if (status) status.textContent = language() === 'en'
+          ? 'Invalid or duplicate pronunciation. Check the fields.'
+          : 'Pronunciación repetida o no válida. Revisa los campos.';
+        return;
+      }
+      if (!persistPronunciationEntries(candidate)) {
+        if (status) status.textContent = language() === 'en'
+          ? 'Could not save the pronunciation.'
+          : 'No se pudo guardar la pronunciación.';
+        return;
+      }
+      if (original) original.value = '';
+      if (replacement) replacement.value = '';
+      renderPronunciationEntries();
+      original?.focus();
+      if (status) status.textContent = language() === 'en'
+        ? 'Pronunciation saved. Source text is unchanged.'
+        : 'Pronunciación guardada. El texto original no cambia.';
+      restartSpeechForPronunciation();
+    });
+  }
+
   function saveWebSettings() {
     const value = {
       voice: els.voice?.value || '',
@@ -1107,6 +1245,7 @@
     if (!documentModel) els.title.textContent = c.document;
     populateVoices();
     renderExternalVoices();
+    localizePronunciationEditor();
     renderPosition();
     void Promise.all([renderLibrary(), renderQueue(), renderMarks()]);
   }
@@ -1577,7 +1716,9 @@
     }
     const snapshot = position || readingSession?.snapshot() || { blockIndex: 0, unitIndex: 0 };
     speechController = shared.createSharedReadingSpeechController({
-      client: speechAdapter,
+      client: typeof shared.createPronunciationSpeechAdapter === 'function'
+        ? shared.createPronunciationSpeechAdapter(speechAdapter, () => pronunciationEntries)
+        : speechAdapter,
       book: { id: currentBookId || 'web-local-document', title: els.title.textContent || t().document },
       document: documentModel,
       initialPosition: { blockIndex: snapshot.blockIndex || 0, unitIndex: snapshot.unitIndex || 0 },
@@ -3316,5 +3457,6 @@
   els.queueToggle.disabled = true;
   organizeGeneralSettingsMenus();
   restoreWebSettings();
+  setupPronunciationDictionary();
   localize();
 })();

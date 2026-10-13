@@ -139,7 +139,7 @@ export function createWebReadingLibraryAdapter({
   } = {}) {
     const source = String(content ?? '');
     const cleanFormat = clean(format).toLowerCase();
-    if (!source || !['txt','html','htm','pdf','docx','pptx','xlsx','epub','odt','rtf','md','markdown','fb2','png','jpg','jpeg','webp'].includes(cleanFormat)) return null;
+    if (!source || !['txt','html','htm','pdf','docx','pptx','xlsx','epub','odt','rtf','md','markdown','fb2','daisy2.02','daisy3','png','jpg','jpeg','webp'].includes(cleanFormat)) return null;
     const timestamp = now();
     const book = normalizeBook({
       id: createId('web-book'),

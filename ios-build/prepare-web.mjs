@@ -71,6 +71,8 @@ const requiredReaderFeatures = [
   'await useMp3File(savedAudio.blob',
   'persistActiveAudio = persistPosition',
   'reading-audio-marks-controls',
+  'shared.parseDaisyArchive(',
+  'daisy-audio-only',
   'Marcar posición del audio',
   'setReaderAudioOnlyMode(true)',
   'setReaderAudioOnlyMode(false)',
@@ -81,6 +83,7 @@ const requiredReaderFeatures = [
 const structuralNav = await readFile(join(output, 'shared/web-reading-navigation.mjs'), 'utf8');
 const pronunciationEngine = await readFile(join(output, 'shared/web-reading-pronunciation.mjs'), 'utf8');
 const mediaStorage = await readFile(join(output, 'shared/web-reading-library-adapter.mjs'), 'utf8');
+const daisyAdapter = await readFile(join(output, 'shared/web-reading-daisy-adapter.mjs'), 'utf8');
 const readerGuide = await readFile(join(output, 'tifloacosta-guide.js'), 'utf8');
 if (requiredReaderFeatures.some(marker => !readerScript.includes(marker)) ||
     !structuralNav.includes('export function adjacentWebReadingStructure(') ||
@@ -88,6 +91,7 @@ if (requiredReaderFeatures.some(marker => !readerScript.includes(marker)) ||
     !mediaStorage.includes("createObjectStore('media'") ||
     !mediaStorage.includes('async function openAudioFile(id)') ||
     !mediaStorage.includes('async function importAudioFile(') ||
+    !daisyAdapter.includes('export async function parseDaisyArchive(') ||
     !readerHtml.includes('src="tifloacosta-guide.js"') ||
     !readerGuide.includes('guide-chapters') ||
     (readerSection.match(/id="reading-play"/g) || []).length !== 1 ||

@@ -2509,7 +2509,11 @@
       const sourceFormat = String(opened.book.format || 'txt').toLowerCase();
       const source = String(opened.content || '');
 
-      if (exportFormat === 'original' && sourceFormat !== 'pdf') {
+      if (sourceFormat === 'audio') {
+        const savedAudio = await libraryAdapter?.openAudioFile?.(id);
+        if (!savedAudio?.blob) throw new Error('missing-saved-audio');
+        downloadExport(savedAudio.blob, title + '.mp3');
+      } else if (exportFormat === 'original' && sourceFormat !== 'pdf') {
         const binaryFormats = new Set(['docx','pptx','xlsx','epub','odt']);
         if (binaryFormats.has(sourceFormat)) {
           const bytes = Uint8Array.from(source.split(',').filter(Boolean).map(Number));
@@ -2653,6 +2657,20 @@
     const source = String(opened.content || '');
     const format = String(opened.book.format || 'txt').toLowerCase();
     returnToReadingMainFromSubview();
+    if (format === 'audio') {
+      const savedAudio = await libraryAdapter?.openAudioFile?.(opened.book.id);
+      if (!savedAudio?.blob) {
+        els.libraryStatus.textContent = language() === 'en'
+          ? 'The saved MP3 is missing or cannot be read.'
+          : 'No se encuentra el MP3 guardado o no se puede leer.';
+        return;
+      }
+      readerReturnView = 'library';
+      await useMp3File(savedAudio.blob, { existingBook: savedAudio.book });
+      currentQueued = savedAudio.book.queued === true;
+      updateQueueToggle();
+      return;
+    }
     const model = await modelForSavedBook(opened);
     readerReturnView = 'library';
     const hasRequestedPercent = requestedPercent !== null && requestedPercent !== undefined && Number.isFinite(Number(requestedPercent));
@@ -2953,8 +2971,8 @@
         title.id = 'reading-library-title-' + String(book.id).replace(/[^a-zA-Z0-9_-]/g, '-');
         title.textContent = book.title || t().document;
         title.setAttribute('aria-label', language() === 'en'
-          ? `Open for reading: ${book.title || t().document}`
-          : `Abrir para leer: ${book.title || t().document}`);
+          ? `${book.format === 'audio' ? 'Open for listening' : 'Open for reading'}: ${book.title || t().document}`
+          : `${book.format === 'audio' ? 'Abrir para escuchar' : 'Abrir para leer'}: ${book.title || t().document}`);
 
         const detailsToggle = document.createElement('button');
         detailsToggle.type = 'button';
@@ -3116,7 +3134,7 @@
           original.textContent = t().exportOriginal;
           exportSelect.append(original);
         }
-        for (const [value, label] of [['txt', t().exportText], ['html', t().exportHtml]]) {
+        for (const [value, label] of (sourceFormat === 'audio' ? [] : [['txt', t().exportText], ['html', t().exportHtml]])) {
           const option = document.createElement('option');
           option.value = value;
           option.textContent = label;

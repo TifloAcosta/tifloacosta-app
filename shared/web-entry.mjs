@@ -79,6 +79,11 @@ export {
   listWebTtsVoices,
   createWebReadingSpeechAdapter
 } from './web-reading-speech-adapter.mjs';
+export {
+  normalizePronunciationEntries,
+  applyPronunciationEntries,
+  createPronunciationSpeechAdapter
+} from './web-reading-pronunciation.mjs';
 
 export { createWebReadingLibraryAdapter } from './web-reading-library-adapter.mjs';
 

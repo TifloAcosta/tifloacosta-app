@@ -153,3 +153,20 @@ test('packaged DAISY playback actually loads audio clips and persists SMIL track
   assert.match(library,/async function openDaisyArchive\(/);
   assert.match(library,/blob: file\.slice\(0, file\.size, 'application\/zip'\)/);
 });
+
+
+
+test('iOS app exposes packaged code and build fingerprint to verify installed reader', async () => {
+  const [html, build, action] = await Promise.all([
+    readFile(new URL('../index.html',import.meta.url),'utf8'),
+    readFile(new URL('../ios-build/prepare-web.mjs',import.meta.url),'utf8'),
+    readFile(new URL('../.github/workflows/ios-testflight.yml',import.meta.url),'utf8')
+  ]);
+  assert.match(html,/id="reading-build-identity"/);
+  assert.match(build,/GITHUB_SHA/);
+  assert.match(build,/GITHUB_RUN_NUMBER/);
+  assert.match(build,/tiflo-build-identity\.json/);
+  assert.match(build,/tiflo-build-identity\.js/);
+  assert.match(build,/TIFLO_IOS_BUILD_IDENTITY/);
+  assert.match(action,/300000 \+ Integer\(ENV\.fetch\('BUILD_RUN_NUMBER'\)\)/);
+});

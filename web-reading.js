@@ -2092,6 +2092,21 @@
     if (lower.endsWith('.epub') || type === 'application/epub+zip') {
       return { source:await file.arrayBuffer().then(buffer => Array.from(new Uint8Array(buffer)).join(',')), format:'epub', model:await structuredFromArchive(file,'epub') };
     }
+    if (lower.endsWith('.zip') || type === 'application/zip' || type === 'application/x-zip-compressed') {
+      if (file.size > 40 * 1024 * 1024) {
+        throw Object.assign(new Error('daisy-too-large'), { code: 'daisy-too-large' });
+      }
+      const JSZip = await loadZipBundle();
+      const bytes = await file.arrayBuffer();
+      const zip = await JSZip.loadAsync(bytes);
+      const daisy = await shared.parseDaisyArchive(zip, { title: name, language: language() });
+      return {
+        source: Array.from(new Uint8Array(bytes)).join(','),
+        format: daisy.format,
+        model: shared.parseStructuredDocument(daisy),
+        audioUnavailable: daisy.audioUnavailable
+      };
+    }
     if (lower.endsWith('.odt') || type === 'application/vnd.oasis.opendocument.text') {
       return { source:await file.arrayBuffer().then(buffer => Array.from(new Uint8Array(buffer)).join(',')), format:'odt', model:await structuredFromArchive(file,'odt') };
     }
@@ -2139,10 +2154,22 @@
         format: prepared.format,
         autoSaveImported: true
       });
+      if (prepared.audioUnavailable) els.status.textContent = language() === 'en'
+        ? 'DAISY text imported. Synchronized DAISY audio is not yet supported by this iOS reader.'
+        : 'Texto DAISY importado. Este lector iOS todavía no reproduce su audio sincronizado.';
       return true;
     } catch (error) {
       els.ocr.hidden = true;
-      if (error?.code === 'unsupported') els.status.textContent = t().unsupported;
+      if (error?.code === 'daisy-audio-only') els.status.textContent = language() === 'en'
+        ? 'Audio-only DAISY needs synchronized playback, not yet supported. The book was not imported.'
+        : 'Este DAISY solo contiene audio y necesita reproducción sincronizada, todavía no disponible. No se importó.';
+      else if (['invalid-daisy','not-daisy','daisy-missing-resource','daisy-no-text'].includes(error?.code)) els.status.textContent = language() === 'en'
+        ? 'Invalid DAISY ZIP or missing required resources.'
+        : 'Archivo DAISY ZIP no válido o con recursos obligatorios ausentes.';
+      else if (error?.code === 'daisy-too-large') els.status.textContent = language() === 'en'
+        ? 'DAISY ZIP exceeds this text-only import limit of 40 MB.'
+        : 'El DAISY ZIP supera el límite de 40 MB para importar texto.';
+      else if (error?.code === 'unsupported') els.status.textContent = t().unsupported;
       else if (error?.code === 'legacy-doc') els.status.textContent = t().legacyDoc;
       else if (error?.code === 'image-needs-ocr') {
         els.status.textContent = `${t().imageNeedsOcr} ${t().ocrPrivacy}`;
@@ -2180,7 +2207,16 @@
       );
     } catch (error) {
       els.ocr.hidden = true;
-      if (error?.code === 'unsupported') els.status.textContent = t().unsupported;
+      if (error?.code === 'daisy-audio-only') els.status.textContent = language() === 'en'
+        ? 'Audio-only DAISY needs synchronized playback, not yet supported. The book was not imported.'
+        : 'Este DAISY solo contiene audio y necesita reproducción sincronizada, todavía no disponible. No se importó.';
+      else if (['invalid-daisy','not-daisy','daisy-missing-resource','daisy-no-text'].includes(error?.code)) els.status.textContent = language() === 'en'
+        ? 'Invalid DAISY ZIP or missing required resources.'
+        : 'Archivo DAISY ZIP no válido o con recursos obligatorios ausentes.';
+      else if (error?.code === 'daisy-too-large') els.status.textContent = language() === 'en'
+        ? 'DAISY ZIP exceeds this text-only import limit of 40 MB.'
+        : 'El DAISY ZIP supera el límite de 40 MB para importar texto.';
+      else if (error?.code === 'unsupported') els.status.textContent = t().unsupported;
       else if (error?.code === 'legacy-doc') els.status.textContent = t().legacyDoc;
       else if (error?.code === 'image-needs-ocr') {
         els.status.textContent = `${t().imageNeedsOcr} ${t().ocrPrivacy}`;
@@ -2547,7 +2583,7 @@
     if (format === 'rtf') return shared.parseStructuredDocument(shared.parseRtfDocument(source,{title:opened.book.title,language:opened.book.language || language()}));
     if (format === 'md' || format === 'markdown') return shared.parseStructuredDocument(shared.parseMarkdownDocument(source,{title:opened.book.title,language:opened.book.language || language()}));
     if (format === 'fb2') return shared.parseStructuredDocument(shared.parseFb2Document(source,{title:opened.book.title,language:opened.book.language || language()}));
-    if (['docx','pptx','xlsx','epub','odt'].includes(format)) {
+    if (['docx','pptx','xlsx','epub','odt','daisy2.02','daisy3'].includes(format)) {
       const JSZip = await loadZipBundle();
       const bytes = Uint8Array.from(source.split(',').filter(Boolean).map(Number));
       const zip = await JSZip.loadAsync(bytes);
@@ -2556,6 +2592,7 @@
       else if (format === 'pptx') raw = await shared.parsePptxArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
       else if (format === 'xlsx') raw = await shared.parseXlsxArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
       else if (format === 'epub') raw = await shared.parseEpubArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
+      else if (format === 'daisy2.02' || format === 'daisy3') raw = await shared.parseDaisyArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
       else raw = await shared.parseOdtArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
       return shared.parseStructuredDocument(raw);
     }
@@ -2576,10 +2613,10 @@
         if (!savedAudio?.blob) throw new Error('missing-saved-audio');
         downloadExport(savedAudio.blob, title + '.mp3');
       } else if (exportFormat === 'original' && sourceFormat !== 'pdf') {
-        const binaryFormats = new Set(['docx','pptx','xlsx','epub','odt']);
+        const binaryFormats = new Set(['docx','pptx','xlsx','epub','odt','daisy2.02','daisy3']);
         if (binaryFormats.has(sourceFormat)) {
           const bytes = Uint8Array.from(source.split(',').filter(Boolean).map(Number));
-          downloadExport(new Blob([bytes], { type:'application/octet-stream' }), `${title}.${sourceFormat}`);
+          downloadExport(new Blob([bytes], { type:'application/octet-stream' }), `${title}.${sourceFormat.startsWith('daisy') ? 'zip' : sourceFormat}`);
         } else {
           const extension = sourceFormat === 'markdown' ? 'md' : sourceFormat;
           downloadExport(new Blob([source], { type:'text/plain;charset=utf-8' }), `${title}.${extension || 'txt'}`);

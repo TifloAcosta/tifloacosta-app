@@ -54,3 +54,20 @@ test('publication remains manually guarded pending DAISY and native VoiceOver ac
   assert.match(prepare, /BLOQUEO PREVENTIVO iOS/);
   assert.match(prepare, /TifloReadingAccessibilityPlugin\.swift/);
 });
+
+test('MP3 retains accessible ten-second controls without stale document actions', () => {
+  assert.match(reader, /function setReaderAudioOnlyMode\(audioOnly\)/);
+  assert.match(reader, /els\.previous\.hidden = !audioOnly/);
+  assert.match(reader, /els\.next\.hidden = !audioOnly/);
+  assert.match(reader, /node\.dataset\.readerPreviousHidden/);
+  assert.match(reader, /setReaderAudioOnlyMode\(true\)/);
+  assert.match(reader, /setReaderAudioOnlyMode\(false\)/);
+  assert.match(reader, /activeAudio\.currentTime = Math\.max\(0, activeAudio\.currentTime - 10\)/);
+  assert.match(reader, /activeAudio\.currentTime = Math\.min\(/);
+  assert.match(reader, /No se pudo iniciar la reproducción del audio/);
+});
+
+test('navigation does not silently fall back to wrong units when helper is missing', () => {
+  assert.match(reader, /typeof shared\.adjacentWebReadingStructure !== 'function'/);
+  assert.match(reader, /La posición no se ha modificado/);
+});

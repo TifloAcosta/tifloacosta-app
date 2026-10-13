@@ -39,6 +39,12 @@ const mandatoryReaderMarkup = [
   'id="reading-settings-disclosure"',
   'id="reading-default-navigation"',
   'id="reading-reader"',
+  'id="reading-library-filter"',
+  'id="reading-library-query"',
+  'id="reading-library-pager"',
+  'id="reading-marks-new-type"',
+  'id="reading-play"',
+  'value="mainHeading"',
   '<div hidden aria-hidden="true">'
 ];
 const obsoleteReaderMarkup = [
@@ -54,6 +60,28 @@ if (!readerScript.includes("intro: 'Abre un libro o documento para escucharlo") 
     readerScript.includes("intro: 'Importa un archivo o pega un texto")) {
   throw new Error('iOS: el guion de TifloLector no corresponde a la interfaz vigente.');
 }
+// Protect restored functionality, not just the visible heading and labels.
+// These checks are not acceptance tests, but catch regression to stale sources
+// before any IPA can be created; DAISY and real VoiceOver still block release.
+const requiredReaderFeatures = [
+  'shared.adjacentWebReadingStructure(',
+  'setReaderAudioOnlyMode(true)',
+  'setReaderAudioOnlyMode(false)',
+  'libraryClient.listMarks(currentBookId)',
+  'card.append(title, detailsToggle, details)',
+  'libraryPage = 1'
+];
+const structuralNav = await readFile(join(output, 'shared/web-reading-navigation.mjs'), 'utf8');
+const readerGuide = await readFile(join(output, 'tifloacosta-guide.js'), 'utf8');
+if (requiredReaderFeatures.some(marker => !readerScript.includes(marker)) ||
+    !structuralNav.includes('export function adjacentWebReadingStructure(') ||
+    !readerHtml.includes('src="tifloacosta-guide.js"') ||
+    !readerGuide.includes('guide-chapters') ||
+    (readerSection.match(/id="reading-play"/g) || []).length !== 1 ||
+    readerSection.includes('id="reading-pause"')) {
+  throw new Error('iOS: faltan mejoras recuperadas de TifloLector, su guía o el botón único Reproducir/Pausa. Se impide empaquetar.');
+}
+
 // A markup check alone passed build 300071 but shipped a legacy web reader.
 // Fail closed until iOS has genuine DAISY ZIP import AND native document actions.
 // The full visual/VoiceOver acceptance still needs a device test (issue #170).

@@ -89,9 +89,9 @@ test('web reader filters browser and external voices by language', async () => {
   ]) assert.ok(source.includes(token), `Missing language filter feature ${token}`);
   assert.ok(source.includes('reading-document-voice-language'));
   assert.ok(catalog.includes('languages:'));
-  assert.match(html, /web-reading\.js\?v=3\.18/);
-  assert.match(worker, /web-reading\.js\?v=3\.18/);
-  assert.match(worker, /tifloacosta-app-v2-51-reader-audio/);
+  assert.match(html, /web-reading\.js\?v=3\.19/);
+  assert.match(worker, /web-reading\.js\?v=3\.19/);
+  assert.match(worker, /tifloacosta-app-v2-52-reader-daisy-text/);
 });
 
 

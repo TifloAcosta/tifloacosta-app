@@ -2341,7 +2341,7 @@
       return { source:await file.arrayBuffer().then(buffer => Array.from(new Uint8Array(buffer)).join(',')), format:'epub', model:await structuredFromArchive(file,'epub') };
     }
     if (lower.endsWith('.zip') || type === 'application/zip' || type === 'application/x-zip-compressed') {
-      if (file.size > 40 * 1024 * 1024) {
+      if (file.size > 300 * 1024 * 1024) {
         throw Object.assign(new Error('daisy-too-large'), { code: 'daisy-too-large' });
       }
       const JSZip = await loadZipBundle();
@@ -2349,10 +2349,10 @@
       const zip = await JSZip.loadAsync(bytes);
       const daisy = await shared.parseDaisyArchive(zip, { title: name, language: language() });
       return {
-        source: Array.from(new Uint8Array(bytes)).join(','),
+        source: '',
         format: daisy.format,
         model: shared.parseStructuredDocument(daisy),
-        audioUnavailable: daisy.audioUnavailable
+        daisyPackage: { file, zip, parsed: daisy }
       };
     }
     if (lower.endsWith('.odt') || type === 'application/vnd.oasis.opendocument.text') {
@@ -2397,14 +2397,32 @@
         return true;
       }
       const prepared = await documentFromFile(file);
+      if (prepared.daisyPackage) {
+        if (prepared.daisyPackage.parsed.audioClips?.length) {
+          await useDaisyAudioFile(file, {
+            preparedZip: prepared.daisyPackage.zip,
+            preparedDaisy: prepared.daisyPackage.parsed
+          });
+        } else {
+          let saved = null;
+          try {
+            saved = await libraryAdapter?.importDaisyArchive?.({
+              file, title: file.name, language: language(), format: prepared.format
+            });
+          } catch {}
+          await useDocument(prepared.model, file.name, {
+            source: '', format: prepared.format, bookId: saved?.id || ''
+          });
+          els.status.textContent = saved?.id
+            ? (language() === 'en' ? 'DAISY text saved to My library.' : 'Texto DAISY guardado en Mi biblioteca.')
+            : (language() === 'en' ? 'DAISY text opened, but could not be saved.' : 'Texto DAISY abierto, pero no se pudo guardar.');
+          if (saved?.id) await renderLibrary();
+        }
+        return true;
+      }
       await useDocument(prepared.model, file.name, {
-        source: prepared.source,
-        format: prepared.format,
-        autoSaveImported: true
+        source: prepared.source, format: prepared.format, autoSaveImported: true
       });
-      if (prepared.audioUnavailable) els.status.textContent = language() === 'en'
-        ? 'DAISY text imported. Synchronized DAISY audio is not yet supported by this iOS reader.'
-        : 'Texto DAISY importado. Este lector iOS todavía no reproduce su audio sincronizado.';
       return true;
     } catch (error) {
       els.ocr.hidden = true;
@@ -2415,8 +2433,8 @@
         ? 'Invalid DAISY ZIP or missing required resources.'
         : 'Archivo DAISY ZIP no válido o con recursos obligatorios ausentes.';
       else if (error?.code === 'daisy-too-large') els.status.textContent = language() === 'en'
-        ? 'DAISY ZIP exceeds this text-only import limit of 40 MB.'
-        : 'El DAISY ZIP supera el límite de 40 MB para importar texto.';
+        ? 'DAISY ZIP exceeds the temporary 300 MB file-size limit.'
+        : 'El DAISY ZIP supera el límite temporal de 300 MB.';
       else if (error?.code === 'unsupported') els.status.textContent = t().unsupported;
       else if (error?.code === 'legacy-doc') els.status.textContent = t().legacyDoc;
       else if (error?.code === 'image-needs-ocr') {
@@ -2462,8 +2480,8 @@
         ? 'Invalid DAISY ZIP or missing required resources.'
         : 'Archivo DAISY ZIP no válido o con recursos obligatorios ausentes.';
       else if (error?.code === 'daisy-too-large') els.status.textContent = language() === 'en'
-        ? 'DAISY ZIP exceeds this text-only import limit of 40 MB.'
-        : 'El DAISY ZIP supera el límite de 40 MB para importar texto.';
+        ? 'DAISY ZIP exceeds the temporary 300 MB file-size limit.'
+        : 'El DAISY ZIP supera el límite temporal de 300 MB.';
       else if (error?.code === 'unsupported') els.status.textContent = t().unsupported;
       else if (error?.code === 'legacy-doc') els.status.textContent = t().legacyDoc;
       else if (error?.code === 'image-needs-ocr') {
@@ -2836,7 +2854,11 @@
     if (format === 'fb2') return shared.parseStructuredDocument(shared.parseFb2Document(source,{title:opened.book.title,language:opened.book.language || language()}));
     if (['docx','pptx','xlsx','epub','odt','daisy2.02','daisy3'].includes(format)) {
       const JSZip = await loadZipBundle();
-      const bytes = Uint8Array.from(source.split(',').filter(Boolean).map(Number));
+      const storedDaisy = format.startsWith('daisy')
+        ? await libraryAdapter?.openDaisyArchive?.(opened.book.id) : null;
+      const bytes = storedDaisy?.blob
+        ? new Uint8Array(await storedDaisy.blob.arrayBuffer())
+        : Uint8Array.from(source.split(',').filter(Boolean).map(Number));
       const zip = await JSZip.loadAsync(bytes);
       let raw;
       if (format === 'docx') raw = await shared.parseDocxArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
@@ -2859,7 +2881,22 @@
       const sourceFormat = String(opened.book.format || 'txt').toLowerCase();
       const source = String(opened.content || '');
 
-      if (sourceFormat === 'audio') {
+      if (sourceFormat === 'daisy2.02' || sourceFormat === 'daisy3') {
+        const storedDaisy = await libraryAdapter?.openDaisyArchive?.(id);
+        if (storedDaisy?.blob && exportFormat === 'original') {
+          downloadExport(storedDaisy.blob, title + '.zip');
+        } else if (exportFormat === 'original') {
+          const bytes = Uint8Array.from(source.split(',').filter(Boolean).map(Number));
+          downloadExport(new Blob([bytes], { type: 'application/zip' }), title + '.zip');
+        } else {
+          const model = await modelForSavedBook(opened);
+          if (exportFormat === 'html') {
+            downloadExport(new Blob([accessibleHtmlFromModel(model, opened.book.title)], { type:'text/html;charset=utf-8' }), title + '.html');
+          } else {
+            downloadExport(new Blob([accessibleTextFromModel(model)], { type:'text/plain;charset=utf-8' }), title + '.txt');
+          }
+        }
+      } else if (sourceFormat === 'audio') {
         const savedAudio = await libraryAdapter?.openAudioFile?.(id);
         if (!savedAudio?.blob) throw new Error('missing-saved-audio');
         downloadExport(savedAudio.blob, title + '.mp3');
@@ -3007,6 +3044,31 @@
     const source = String(opened.content || '');
     const format = String(opened.book.format || 'txt').toLowerCase();
     returnToReadingMainFromSubview();
+    if (format === 'daisy2.02' || format === 'daisy3') {
+      const storedDaisy = await libraryAdapter?.openDaisyArchive?.(opened.book.id);
+      if (storedDaisy?.blob) {
+        const zipEngine = await loadZipBundle();
+        const archive = await zipEngine.loadAsync(await storedDaisy.blob.arrayBuffer());
+        const parsed = await shared.parseDaisyArchive(archive, {
+          title: storedDaisy.book.title, language: storedDaisy.book.language || language()
+        });
+        readerReturnView = 'library';
+        if (parsed.audioClips?.length) {
+          await useDaisyAudioFile(storedDaisy.blob, {
+            existingBook: storedDaisy.book, preparedZip: archive,
+            preparedDaisy: parsed, requestedPercent
+          });
+          currentQueued = storedDaisy.book.queued === true;
+          updateQueueToggle();
+        } else {
+          await useDocument(shared.parseStructuredDocument(parsed), storedDaisy.book.title, {
+            source: '', format, bookId: storedDaisy.book.id,
+            initialIndex: storedDaisy.book.blockIndex
+          });
+        }
+        return;
+      }
+    }
     if (format === 'audio') {
       const savedAudio = await libraryAdapter?.openAudioFile?.(opened.book.id);
       if (!savedAudio?.blob) {

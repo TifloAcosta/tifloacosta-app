@@ -351,6 +351,7 @@
   let nativeLibrarySubscribed = false;
   let playbackAccessibilityState = null;
   let activeAudio = null;
+  let daisyAudioControls = null;
   let persistActiveAudio = null;
   let audioObjectUrl = '';
   let audioTools = null;
@@ -1393,6 +1394,8 @@
     if (audioObjectUrl) URL.revokeObjectURL(audioObjectUrl);
     audioObjectUrl = '';
     persistActiveAudio = null;
+    daisyAudioControls = null;
+    audioTools?.querySelector('#reading-daisy-navigation-controls')?.remove();
     if (audioTools) audioTools.hidden = true;
     updatePlaybackLabel(false);
   }
@@ -1663,6 +1666,245 @@
       : (language() === 'en'
         ? 'Temporary MP3 playback. The audio could not be saved. Check free storage.'
         : 'Reproducción temporal del MP3. No se pudo guardar. Revisa el espacio disponible.');
+    if (savedBook?.id && !existingBook) await renderLibrary();
+    queueMicrotask(() => els.title.focus());
+  }
+
+  // Replays actual compressed DAISY audio segments in SMIL order. Keeps the
+  // original ZIP binary on-device so saved books need no second file import.
+  async function useDaisyAudioFile(file, { existingBook = null, preparedZip = null,
+    preparedDaisy = null, requestedPercent = null } = {}) {
+    await pause();
+    await persistActiveAudio?.({ force: true });
+    setAccessiblePlaybackMode(false);
+    if (speechController) {
+      try { await speechController.destroy(); } catch {}
+      speechController = null;
+    }
+    clearActiveAudio();
+    const JSZip = await loadZipBundle();
+    const zip = preparedZip || await JSZip.loadAsync(await file.arrayBuffer());
+    const daisy = preparedDaisy || await shared.parseDaisyArchive(zip, {
+      title: existingBook?.title || file.name || '', language: language()
+    });
+    const clips = daisy.audioClips || [];
+    if (!clips.length) throw Object.assign(new Error('daisy-no-audio'), { code: 'daisy-no-audio' });
+    let savedBook = existingBook;
+    if (!savedBook && libraryAdapter?.importDaisyArchive) {
+      try {
+        savedBook = await libraryAdapter.importDaisyArchive({
+          file, title: file.name || 'Libro DAISY',
+          language: language(), format: daisy.format
+        });
+      } catch {
+        // Playback still works temporarily if the device has too little storage.
+      }
+    }
+    const audio = new Audio();
+    activeAudio = audio;
+    documentModel = shared.parseStructuredDocument(daisy);
+    originalDocumentModel = documentModel;
+    readingSession = null;
+    searchIndex = null;
+    currentBookId = savedBook?.id || '';
+    currentSource = '';
+    currentFormat = daisy.format;
+    els.title.textContent = savedBook?.title || file.name || 'Libro DAISY';
+    els.reader.hidden = false;
+    enterReaderOnlyView();
+    setReaderAudioOnlyMode(true);
+    els.save.disabled = true;
+    els.bookmark.disabled = true;
+    els.queueToggle.disabled = !savedBook?.id;
+    els.previous.hidden = false;
+    els.next.hidden = false;
+    els.previous.textContent = language() === 'en' ? 'Previous DAISY segment' : 'Segmento DAISY anterior';
+    els.next.textContent = language() === 'en' ? 'Next DAISY segment' : 'Segmento DAISY siguiente';
+    const tools = ensureAudioTools();
+    tools.hidden = false;
+    const seek = tools.querySelector('#reading-audio-seek');
+    const progress = tools.querySelector('#reading-audio-total-progress');
+    const marksHost = tools.querySelector('#reading-audio-marks-controls');
+    if (marksHost) { marksHost.replaceChildren(); marksHost.hidden = true; }
+    const navigation = document.createElement('div');
+    navigation.id = 'reading-daisy-navigation-controls';
+    navigation.setAttribute('role', 'group');
+    navigation.setAttribute('aria-label', language() === 'en'
+      ? 'DAISY chapter and segment navigation' : 'Navegación de capítulos y segmentos DAISY');
+    const navLabel = document.createElement('label');
+    navLabel.textContent = language() === 'en' ? 'Choose chapter or heading' : 'Elegir capítulo o encabezado';
+    navLabel.htmlFor = 'reading-daisy-chapter-select';
+    const navSelect = document.createElement('select');
+    navSelect.id = 'reading-daisy-chapter-select';
+    const navGo = document.createElement('button');
+    navGo.type = 'button';
+    navGo.textContent = language() === 'en' ? 'Go to chapter' : 'Ir al capítulo';
+    const status = document.createElement('p');
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    for (const [index, nav] of (daisy.navigation || []).entries()) {
+      const option = document.createElement('option');
+      option.value = String(index);
+      option.textContent = nav.label;
+      navSelect.append(option);
+    }
+    navigation.append(navLabel, navSelect, navGo, status);
+    tools.append(navigation);
+    const clipDurations = clips.map(clip =>
+      clip.clipEndMs > clip.clipBeginMs ? clip.clipEndMs - clip.clipBeginMs : 0);
+    const fullDurationKnown = clipDurations.every(ms => ms > 0);
+    const totalMs = fullDurationKnown ? clipDurations.reduce((sum, ms) => sum + ms, 0) : 0;
+    let clipIndex = Math.min(clips.length - 1, Math.max(0, Number(savedBook?.mediaTrackIndex) || 0));
+    let loaderToken = 0;
+    let advancing = false;
+    let queuedSave = Promise.resolve();
+    let lastSavedAt = 0;
+    const pausedBefore = savedBook?.state === 'read';
+    const resumeMs = pausedBefore ? 0 : Math.max(0, Number(savedBook?.mediaPositionMs) || 0);
+
+    function updateDaisyPosition() {
+      if (activeAudio !== audio) return;
+      const clip = clips[clipIndex];
+      if (!clip) return;
+      const currentMs = Math.round(Math.max(0, Number(audio.currentTime) || 0) * 1000);
+      const before = clipDurations.slice(0, clipIndex).reduce((sum, ms) => sum + ms, 0);
+      const elapsed = before + Math.max(0, currentMs - clip.clipBeginMs);
+      const percent = totalMs > 0 ? Math.min(100, elapsed * 100 / totalMs) : null;
+      els.position.textContent = language() === 'en'
+        ? 'DAISY segment ' + (clipIndex + 1) + ' of ' + clips.length + '. ' + formatAudioTime(audio.currentTime)
+        : 'Segmento DAISY ' + (clipIndex + 1) + ' de ' + clips.length + '. ' + formatAudioTime(audio.currentTime);
+      const label = percent == null
+        ? (language() === 'en' ? 'Entire audiobook duration unknown.' : 'Duración total del audiolibro desconocida.')
+        : (language() === 'en' ? 'Entire DAISY audiobook: ' : 'Audiolibro DAISY completo: ')
+          + Math.round(percent) + ' %.';
+      if (progress) progress.textContent = label;
+      if (els.documentProgressStatus) els.documentProgressStatus.textContent = label;
+      if (seek) {
+        const duration = Number(audio.duration);
+        seek.max = String(Number.isFinite(duration) ? Math.max(0, Math.floor(duration)) : 0);
+        seek.value = String(Math.max(0, Math.floor(audio.currentTime || 0)));
+        seek.disabled = !Number.isFinite(duration) || duration <= 0;
+      }
+      els.block.textContent = (daisy.navigation || []).filter(nav => nav.href === clip.smilPath)
+        .map(nav => nav.label).slice(0, 1)[0] || (language() === 'en' ? 'DAISY audiobook' : 'Audiolibro DAISY');
+    }
+    async function persistDaisyPosition({ force = false, completed = false } = {}) {
+      if (!savedBook?.id || !libraryAdapter?.saveProgress) return false;
+      const stamp = Date.now();
+      if (!force && stamp - lastSavedAt < 5000) return true;
+      const currentMs = Math.round(Math.max(0, Number(audio.currentTime) || 0) * 1000);
+      const before = clipDurations.slice(0, clipIndex).reduce((sum, ms) => sum + ms, 0);
+      const percent = completed ? 100 : totalMs
+        ? Math.min(99.9, (before + Math.max(0, currentMs - clips[clipIndex].clipBeginMs)) * 100 / totalMs)
+        : 0;
+      const snapshot = { id: savedBook.id, mediaTrackIndex: clipIndex, mediaPositionMs: currentMs,
+        percent, state: completed ? 'read' : 'in-reading', blockIndex: 0, unitIndex: 0 };
+      queuedSave = queuedSave.catch(() => {}).then(() => libraryAdapter.saveProgress(snapshot));
+      const result = await queuedSave.catch(() => ({ saved: false }));
+      if (result?.saved) lastSavedAt = stamp;
+      return result?.saved === true;
+    }
+    persistActiveAudio = persistDaisyPosition;
+    async function seekSynchronizedDaisyClip(index, positionMs = null, autoPlay = false) {
+      if (activeAudio !== audio) return false;
+      const target = Math.max(0, Math.min(clips.length - 1, Math.trunc(Number(index) || 0)));
+      const token = ++loaderToken;
+      const clip = clips[target];
+      const movingFrom = clipIndex;
+      if (movingFrom !== target) await persistDaisyPosition({ force: true });
+      advancing = true;
+      audio.pause();
+      clipIndex = target;
+      const resource = zip.file(clip.audioHref);
+      if (!resource) { status.textContent = 'DAISY: audio no encontrado.'; advancing = false; return false; }
+      const contents = await resource.async('blob');
+      if (activeAudio !== audio || loaderToken !== token) return false;
+      if (audioObjectUrl) URL.revokeObjectURL(audioObjectUrl);
+      const type = /\.m4a$/iu.test(clip.audioHref) ? 'audio/mp4' : 'audio/mpeg';
+      audioObjectUrl = URL.createObjectURL(contents.type ? contents : new Blob([contents], { type }));
+      audio.src = audioObjectUrl;
+      audio.playbackRate = Number(tools.querySelector('#reading-audio-file-speed')?.value) || 1;
+      const startMs = Number.isFinite(Number(positionMs)) && positionMs !== null
+        ? Math.max(clip.clipBeginMs, Math.round(Number(positionMs))) : clip.clipBeginMs;
+      const loadPosition = () => {
+        if (activeAudio !== audio || token !== loaderToken) return;
+        const max = Number.isFinite(audio.duration) ? audio.duration * 1000 : Infinity;
+        try { audio.currentTime = Math.min(startMs, max) / 1000; } catch {}
+        updateDaisyPosition();
+        if (autoPlay) void audio.play().catch(() => {
+          status.textContent = language() === 'en' ? 'Tap Play to continue audio.' : 'Pulsa Reproducir para continuar.';
+        });
+        advancing = false;
+      };
+      if (audio.readyState >= 1) loadPosition();
+      else audio.addEventListener('loadedmetadata', loadPosition, { once: true });
+      return true;
+    }
+    async function playSynchronizedDaisyAudio() {
+      if (activeAudio !== audio) return false;
+      return audio.play().then(() => true, () => false);
+    }
+    async function resumeSynchronizedDaisyClip() { return playSynchronizedDaisyAudio(); }
+    async function nextClip() {
+      if (clipIndex >= clips.length - 1) {
+        audio.pause();
+        await persistDaisyPosition({ force: true, completed: true });
+        updatePlaybackLabel(false);
+        status.textContent = language() === 'en' ? 'End of DAISY audiobook.' : 'Fin del audiolibro DAISY.';
+        return;
+      }
+      await seekSynchronizedDaisyClip(clipIndex + 1, null, true);
+    }
+    daisyAudioControls = {
+      previous: () => seekSynchronizedDaisyClip(clipIndex - 1, null, !audio.paused),
+      next: () => seekSynchronizedDaisyClip(clipIndex + 1, null, !audio.paused)
+    };
+    navGo.addEventListener('click', () => {
+      const entry = daisy.navigation[Number(navSelect.value)];
+      if (!entry) return;
+      const located = clips.findIndex(clip => clip.smilPath === entry.href
+        && (!entry.smilId || clip.smilId === entry.smilId));
+      const fallback = clips.findIndex(clip => clip.smilPath === entry.href);
+      const target = located >= 0 ? located : fallback;
+      if (target < 0) {
+        status.textContent = language() === 'en'
+          ? 'This chapter has no associated audio segment.'
+          : 'Este capítulo no tiene un segmento de audio asociado.';
+        return;
+      }
+      void seekSynchronizedDaisyClip(target, null, !audio.paused).then(() => navGo.focus());
+    });
+    audio.addEventListener('loadedmetadata', updateDaisyPosition);
+    audio.addEventListener('timeupdate', () => {
+      updateDaisyPosition();
+      void persistDaisyPosition();
+      const clip = clips[clipIndex];
+      if (!advancing && clip?.clipEndMs > clip.clipBeginMs
+        && audio.currentTime * 1000 >= clip.clipEndMs - 80) {
+        advancing = true;
+        void nextClip();
+      }
+    });
+    audio.addEventListener('ended', () => { if (!advancing) { advancing = true; void nextClip(); } });
+    audio.addEventListener('play', () => updatePlaybackLabel(true));
+    audio.addEventListener('pause', () => updatePlaybackLabel(false));
+    const totalIsKnown = totalMs > 0;
+    let startIndex = clipIndex;
+    let startMs = resumeMs || clips[startIndex].clipBeginMs;
+    if (requestedPercent !== null && Number.isFinite(Number(requestedPercent)) && totalIsKnown) {
+      let offset = totalMs * Math.min(100, Math.max(0, Number(requestedPercent))) / 100;
+      for (let i = 0; i < clipDurations.length; i += 1) {
+        if (offset <= clipDurations[i] || i === clipDurations.length - 1) {
+          startIndex = i; startMs = clips[i].clipBeginMs + offset; break;
+        }
+        offset -= clipDurations[i];
+      }
+    }
+    await seekSynchronizedDaisyClip(startIndex, startMs, false);
+    updatePlaybackLabel(false);
+    els.status.textContent = savedBook?.id
+      ? (language() === 'en' ? 'DAISY audio saved in My library.' : 'Audio DAISY guardado en Mi biblioteca.')
+      : (language() === 'en' ? 'DAISY audio playback is temporary: unable to save file.' : 'Reproducción DAISY temporal: no se pudo guardar el archivo.');
     if (savedBook?.id && !existingBook) await renderLibrary();
     queueMicrotask(() => els.title.focus());
   }
@@ -3627,10 +3869,12 @@
     if (els.file.files?.[0]) void importSelectedFile();
   });
   els.previous.addEventListener('click', () => {
+    if (daisyAudioControls) { void daisyAudioControls.previous(); return; }
     if (activeAudio) activeAudio.currentTime = Math.max(0, activeAudio.currentTime - 10);
     else move(-1);
   });
   els.next.addEventListener('click', () => {
+    if (daisyAudioControls) { void daisyAudioControls.next(); return; }
     if (activeAudio) activeAudio.currentTime = Math.min(Number.isFinite(activeAudio.duration) ? activeAudio.duration : Number.MAX_SAFE_INTEGER, activeAudio.currentTime + 10);
     else move(1);
   });

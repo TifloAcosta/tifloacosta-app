@@ -125,7 +125,7 @@ test('web TifloLector library exposes its title AND accessible details/actions',
 test('opening a saved web book exits the library subview before showing the reader', async () => {
   const source = await read('web-reading.js');
   assert.ok(source.includes('returnToReadingMainFromSubview'));
-  assert.match(source, /returnToReadingMainFromSubview\(\)[\s\S]{0,1200}useDocument\(/);
+  assert.match(source, /returnToReadingMainFromSubview\(\)[\s\S]{0,2400}useDocument\(/);
 });
 
 test('web reader exposes one visible navigation set controlled by the unit selector', async () => {

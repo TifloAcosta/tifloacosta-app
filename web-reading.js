@@ -66,6 +66,8 @@
     translationOriginal: $('#reading-translation-original'),
     translationTranslated: $('#reading-translation-translated'),
     translationRead: $('#reading-translation-read'),
+    translationExportTxt: $('#reading-translation-export-txt'),
+    translationExportHtml: $('#reading-translation-export-html'),
     translationStatus: $('#reading-translation-status'),
     save: $('#reading-save'),
     libraryHeading: $('#reading-library-heading'),
@@ -92,6 +94,7 @@
     marksHeading: $('#reading-marks-heading'),
     marksIntro: $('#reading-marks-intro'),
     marksType: $('#reading-marks-new-type'),
+    marksNote: $('#reading-marks-note'),
     marksAdd: $('#reading-marks-add'),
     marksStatus: $('#reading-marks-status'),
     marksList: $('#reading-marks-list')
@@ -345,14 +348,20 @@
   let fileImportInProgress = false;
   let libraryPage = 1;
   let libraryRenderToken = 0;
+  let nativeLibraryPage = [];
+  let nativeLibrarySubscribed = false;
   let playbackAccessibilityState = null;
   let activeAudio = null;
+  let daisyAudioControls = null;
+  let persistActiveAudio = null;
   let audioObjectUrl = '';
   let audioTools = null;
   let readingTimerHandle = null;
   let readerViewState = null;
   let readerChromeState = null;
   let readerReturnView = 'main';
+  let pronunciationEntries = [];
+  let pronunciationRestart = Promise.resolve();
   const translationMemory = new Map();
 
   const speechAdapter = typeof shared.createWebReadingSpeechAdapter === 'function'
@@ -981,6 +990,142 @@
     } catch { return {}; }
   }
 
+  const PRONUNCIATION_STORAGE_KEY = 'tifloWebPronunciationV1';
+
+  function loadPronunciationEntries() {
+    try {
+      const stored = JSON.parse(localStorage.getItem(PRONUNCIATION_STORAGE_KEY) || '[]');
+      return shared.normalizePronunciationEntries?.(stored) || [];
+    } catch {
+      return [];
+    }
+  }
+
+  function persistPronunciationEntries(nextEntries) {
+    const sanitized = shared.normalizePronunciationEntries?.(nextEntries) || [];
+    try {
+      localStorage.setItem(PRONUNCIATION_STORAGE_KEY, JSON.stringify(sanitized));
+      pronunciationEntries = sanitized;
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  // A rule changes TTS input only. No source document, selection or mark is edited.
+  function restartSpeechForPronunciation() {
+    if (!documentModel || !speechController) return;
+    pronunciationRestart = pronunciationRestart.then(async () => {
+      const snapshot = speechController?.snapshot?.();
+      const wasPlaying = snapshot?.playing === true;
+      const position = snapshot?.position || {
+        blockIndex: readingSession?.snapshot?.().blockIndex || 0,
+        unitIndex: currentUnitIndex
+      };
+      if (wasPlaying) await speechController.pause();
+      await rebuildSpeech(position);
+      if (wasPlaying) await speechController?.play?.();
+    }).catch(() => {
+      const status = document.getElementById('reading-pronunciation-status');
+      if (status) status.textContent = language() === 'en'
+        ? 'Speech could not be refreshed. The rule has been saved.'
+        : 'No se pudo actualizar la voz. La sustitución ha quedado guardada.';
+    });
+  }
+
+  function renderPronunciationEntries() {
+    const list = document.getElementById('reading-pronunciation-list');
+    if (!list) return;
+    list.replaceChildren();
+    list.setAttribute('aria-label', language() === 'en' ? 'Saved pronunciations' : 'Pronunciaciones guardadas');
+    if (!pronunciationEntries.length) {
+      const empty = document.createElement('li');
+      empty.textContent = language() === 'en' ? 'No saved pronunciations.' : 'No hay pronunciaciones guardadas.';
+      list.append(empty);
+    }
+    for (const rule of pronunciationEntries) {
+      const item = document.createElement('li');
+      const label = document.createElement('span');
+      label.textContent = rule.original + ' → ' + rule.replacement + '. ';
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.textContent = language() === 'en' ? 'Delete pronunciation' : 'Eliminar pronunciación';
+      remove.setAttribute('aria-label', remove.textContent + ': ' + rule.original);
+      remove.addEventListener('click', () => {
+        const remaining = pronunciationEntries.filter(entry =>
+          entry.original.toLocaleLowerCase() !== rule.original.toLocaleLowerCase());
+        const status = document.getElementById('reading-pronunciation-status');
+        if (!persistPronunciationEntries(remaining)) {
+          if (status) status.textContent = language() === 'en'
+            ? 'Could not save the changes.' : 'No se pudieron guardar los cambios.';
+          return;
+        }
+        renderPronunciationEntries();
+        const original = document.getElementById('reading-pronunciation-original');
+        original?.focus();
+        if (status) status.textContent = language() === 'en'
+          ? 'Pronunciation deleted.' : 'Pronunciación eliminada.';
+        restartSpeechForPronunciation();
+      });
+      item.append(label, remove);
+      list.append(item);
+    }
+  }
+
+  function localizePronunciationEditor() {
+    const labels = {
+      'reading-pronunciation-summary': ['Diccionario de pronunciación', 'Pronunciation dictionary'],
+      'reading-pronunciation-help': [
+        'Sustituye palabras o expresiones únicamente al leer en voz alta. El texto original no cambia.',
+        'Replace words or phrases only in spoken audio. The original text is unchanged.'
+      ],
+      'reading-pronunciation-original-label': ['Palabra o expresión original', 'Original word or phrase'],
+      'reading-pronunciation-replacement-label': ['Cómo debe pronunciarse', 'How it should be spoken'],
+      'reading-pronunciation-add': ['Guardar pronunciación', 'Save pronunciation']
+    };
+    const en = language() === 'en';
+    for (const [id, values] of Object.entries(labels)) {
+      const element = document.getElementById(id);
+      if (element) element.textContent = values[en ? 1 : 0];
+    }
+    renderPronunciationEntries();
+  }
+
+  function setupPronunciationDictionary() {
+    pronunciationEntries = loadPronunciationEntries();
+    const form = document.getElementById('reading-pronunciation-form');
+    const original = document.getElementById('reading-pronunciation-original');
+    const replacement = document.getElementById('reading-pronunciation-replacement');
+    const status = document.getElementById('reading-pronunciation-status');
+    form?.addEventListener('submit', event => {
+      event.preventDefault();
+      const candidate = shared.normalizePronunciationEntries?.([
+        ...pronunciationEntries,
+        { original: original?.value, replacement: replacement?.value }
+      ]) || [];
+      if (candidate.length === pronunciationEntries.length) {
+        if (status) status.textContent = language() === 'en'
+          ? 'Invalid or duplicate pronunciation. Check the fields.'
+          : 'Pronunciación repetida o no válida. Revisa los campos.';
+        return;
+      }
+      if (!persistPronunciationEntries(candidate)) {
+        if (status) status.textContent = language() === 'en'
+          ? 'Could not save the pronunciation.'
+          : 'No se pudo guardar la pronunciación.';
+        return;
+      }
+      if (original) original.value = '';
+      if (replacement) replacement.value = '';
+      renderPronunciationEntries();
+      original?.focus();
+      if (status) status.textContent = language() === 'en'
+        ? 'Pronunciation saved. Source text is unchanged.'
+        : 'Pronunciación guardada. El texto original no cambia.';
+      restartSpeechForPronunciation();
+    });
+  }
+
   function saveWebSettings() {
     const value = {
       voice: els.voice?.value || '',
@@ -1058,8 +1203,8 @@
     els.intro.textContent = c.intro;
     if (els.formatsToggle) els.formatsToggle.textContent = language() === 'en' ? 'Show supported file types' : 'Consultar formatos admitidos';
     if (els.formatsList) els.formatsList.textContent = language() === 'en'
-      ? 'TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2, MP3 audio and PNG, JPG or WebP images using OCR.'
-      : 'TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2, audio MP3 e imágenes PNG, JPG y WebP mediante OCR.';
+      ? 'TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2, DAISY ZIP with text, MP3 audio and PNG, JPG or WebP images using OCR. Synchronized DAISY audio is not available yet.'
+      : 'TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2, DAISY ZIP con texto, audio MP3 e imágenes PNG, JPG y WebP mediante OCR. El audio DAISY sincronizado todavía no está disponible.';
     els.fileLabel.textContent = c.file;
     els.pasteLabel.textContent = c.paste;
     els.prepare.textContent = c.prepare;
@@ -1102,11 +1247,14 @@
     els.translationOriginal.textContent = c.translationOriginal;
     els.translationTranslated.textContent = c.translationTranslated;
     if (els.translationRead) els.translationRead.textContent = language() === 'en' ? 'Read the translated document' : 'Leer el documento traducido';
+    if (els.translationExportTxt) els.translationExportTxt.textContent = language() === 'en' ? 'Export translation as TXT' : 'Exportar traducción TXT';
+    if (els.translationExportHtml) els.translationExportHtml.textContent = language() === 'en' ? 'Export translation as HTML' : 'Exportar traducción HTML';
     const settingsSummary = document.getElementById('reading-settings-summary');
     if (settingsSummary) settingsSummary.textContent = language() === 'en' ? 'Reading settings' : 'Ajustes de lectura';
     if (!documentModel) els.title.textContent = c.document;
     populateVoices();
     renderExternalVoices();
+    localizePronunciationEditor();
     renderPosition();
     void Promise.all([renderLibrary(), renderQueue(), renderMarks()]);
   }
@@ -1238,6 +1386,7 @@
 
   function clearActiveAudio() {
     if (activeAudio) {
+      void persistActiveAudio?.({ force: true });
       activeAudio.pause();
       activeAudio.removeAttribute('src');
       activeAudio.load();
@@ -1245,6 +1394,9 @@
     }
     if (audioObjectUrl) URL.revokeObjectURL(audioObjectUrl);
     audioObjectUrl = '';
+    persistActiveAudio = null;
+    daisyAudioControls = null;
+    audioTools?.querySelector('#reading-daisy-navigation-controls')?.remove();
     if (audioTools) audioTools.hidden = true;
     updatePlaybackLabel(false);
   }
@@ -1298,7 +1450,10 @@
     progress.className = 'muted';
     // Progress is available on demand; do not interrupt VoiceOver each second.
     progress.setAttribute('aria-live', 'off');
-    audioTools.append(label, seek, speedLabel, speed, progress);
+    const marksHost = document.createElement('section');
+    marksHost.id = 'reading-audio-marks-controls';
+    marksHost.setAttribute('aria-label', language() === 'en' ? 'Audiobook bookmarks' : 'Marcadores del audiolibro');
+    audioTools.append(label, seek, speedLabel, speed, progress, marksHost);
     els.block.after(audioTools);
     return audioTools;
   }
@@ -1327,24 +1482,35 @@
     els.next.hidden = !audioOnly;
   }
 
-  async function useMp3File(file) {
+  async function useMp3File(file, { existingBook = null, requestedPercent = null } = {}) {
     await pause();
+    await persistActiveAudio?.({ force: true });
     setAccessiblePlaybackMode(false);
     if (speechController) {
       try { await speechController.destroy(); } catch {}
       speechController = null;
     }
     clearActiveAudio();
+    let savedBook = existingBook;
+    if (!savedBook && libraryAdapter?.importAudioFile) {
+      try {
+        savedBook = await libraryAdapter.importAudioFile({
+          file, title: file.name || 'Audiolibro MP3', language: language()
+        });
+      } catch {
+        // Still permit temporary playback, but tell the user that it was not saved.
+      }
+    }
     audioObjectUrl = URL.createObjectURL(file);
     const audio = new Audio(audioObjectUrl);
     activeAudio = audio;
     documentModel = null;
     readingSession = null;
     searchIndex = null;
-    currentBookId = '';
+    currentBookId = savedBook?.id || '';
     currentSource = '';
     currentFormat = 'audio';
-    els.title.textContent = file.name;
+    els.title.textContent = file.name || savedBook?.title || 'Audiolibro MP3';
     els.reader.hidden = false;
     enterReaderOnlyView();
     setReaderAudioOnlyMode(true);
@@ -1357,11 +1523,102 @@
     els.next.textContent = language() === 'en' ? 'Forward 10 seconds' : 'Adelantar 10 segundos';
     els.save.disabled = true;
     els.bookmark.disabled = true;
-    els.queueToggle.disabled = true;
+    els.queueToggle.disabled = !savedBook?.id;
     const tools = ensureAudioTools();
     tools.hidden = false;
     const seek = tools.querySelector('#reading-audio-seek');
     const progress = tools.querySelector('#reading-audio-total-progress');
+    const audioMarks = tools.querySelector('#reading-audio-marks-controls');
+    audioMarks?.replaceChildren();
+    if (audioMarks) audioMarks.hidden = !savedBook?.id;
+    if (audioMarks && savedBook?.id && libraryAdapter?.addMark && libraryAdapter?.listMarks) {
+      const saveMark = document.createElement('button');
+      saveMark.type = 'button';
+      saveMark.textContent = language() === 'en' ? 'Bookmark current audio position' : 'Marcar posición del audio';
+      const list = document.createElement('ul');
+      const markStatus = document.createElement('p');
+      markStatus.setAttribute('role', 'status');
+      markStatus.setAttribute('aria-live', 'polite');
+      const renderAudioMarks = async () => {
+        const marks = await libraryAdapter.listMarks({ bookId: savedBook.id });
+        if (activeAudio !== audio) return;
+        list.replaceChildren();
+        for (const mark of marks.filter(item => item.type === 'bookmark')) {
+          const item = document.createElement('li');
+          const open = document.createElement('button');
+          open.type = 'button';
+          open.textContent = (language() === 'en' ? 'Go to ' : 'Ir a ') + (mark.reference || formatAudioTime(mark.mediaPositionMs / 1000));
+          open.addEventListener('click', () => {
+            if (activeAudio !== audio) return;
+            try { audio.currentTime = Math.max(0, Number(mark.mediaPositionMs) / 1000 || 0); } catch {}
+            updateAudioPosition();
+            void persistPosition({ force: true });
+            open.focus();
+          });
+          const remove = document.createElement('button');
+          remove.type = 'button';
+          remove.textContent = (language() === 'en' ? 'Delete audio bookmark' : 'Eliminar marcador del audio');
+          remove.addEventListener('click', async () => {
+            await libraryAdapter.deleteMark({ id: mark.id });
+            await renderAudioMarks();
+            saveMark.focus();
+            markStatus.textContent = language() === 'en' ? 'Bookmark deleted.' : 'Marcador eliminado.';
+          });
+          item.append(open, remove);
+          list.append(item);
+        }
+      };
+      saveMark.addEventListener('click', async () => {
+        const offset = Math.max(0, Math.round((Number(audio.currentTime) || 0) * 1000));
+        const result = await libraryAdapter.addMark({
+          bookId: savedBook.id, type: 'bookmark', mediaTrackIndex: 0,
+          mediaPositionMs: offset, excerpt: savedBook.title, reference: formatAudioTime(offset / 1000)
+        });
+        if (result?.added) await renderAudioMarks();
+        markStatus.textContent = result?.added
+          ? (language() === 'en' ? 'Audio bookmark saved.' : 'Marcador del audio guardado.')
+          : (language() === 'en' ? 'Could not save the bookmark.' : 'No se pudo guardar el marcador.');
+        saveMark.focus();
+      });
+      audioMarks.append(saveMark, list, markStatus);
+      void renderAudioMarks();
+    }
+    const resumeSeconds = Math.max(0, (Number(savedBook?.mediaPositionMs) || 0) / 1000);
+    let lastPersistedAt = 0;
+    let queuedSave = Promise.resolve();
+    async function persistPosition({ force = false, completed = false } = {}) {
+      if (!savedBook?.id || !libraryAdapter?.saveProgress) return false;
+      const timestamp = Date.now();
+      if (!force && timestamp - lastPersistedAt < 5000) return true;
+      const duration = Number.isFinite(audio.duration) ? audio.duration : 0;
+      const position = Math.max(0, Number(audio.currentTime) || 0);
+      const finished = completed || audio.ended;
+      const snapshot = {
+        id: savedBook.id, blockIndex: 0, unitIndex: 0,
+        mediaTrackIndex: 0, mediaPositionMs: Math.round(position * 1000),
+        percent: finished ? 100 : duration > 0
+          ? Math.min(99.9, Math.max(0, position / duration * 100))
+          : Math.max(0, Number(savedBook.percent) || 0),
+        state: finished ? 'read' : 'in-reading'
+      };
+      // Serialize snapshots: an earlier timeupdate must not overwrite pause.
+      queuedSave = queuedSave.catch(() => {}).then(() => libraryAdapter.saveProgress(snapshot));
+      const result = await queuedSave.catch(() => ({ saved: false }));
+      if (result?.saved) lastPersistedAt = timestamp;
+      return result?.saved === true;
+    }
+    persistActiveAudio = persistPosition;
+    function restoreAudioPosition() {
+      if (activeAudio !== audio) return;
+      const duration = Number.isFinite(audio.duration) ? audio.duration : 0;
+      const target = requestedPercent !== null && Number.isFinite(Number(requestedPercent)) && duration > 0
+        ? Math.max(0, Math.min(99.9, Number(requestedPercent))) * duration / 100
+        : (savedBook?.state === 'read' ? 0 : resumeSeconds);
+      if (!target) return;
+      try { audio.currentTime = duration ? Math.min(target, duration) : target; } catch {}
+      updateAudioPosition();
+    }
+    audio.addEventListener('loadedmetadata', restoreAudioPosition, { once: true });
     function updateAudioPosition() {
       if (activeAudio !== audio) return;
       const duration = Number.isFinite(audio.duration) ? audio.duration : 0;
@@ -1382,10 +1639,19 @@
     }
     audio.addEventListener('loadedmetadata', updateAudioPosition);
     audio.addEventListener('durationchange', updateAudioPosition);
-    audio.addEventListener('timeupdate', updateAudioPosition);
+    audio.addEventListener('timeupdate', () => {
+      updateAudioPosition();
+      void persistPosition();
+    });
     audio.addEventListener('play', () => updatePlaybackLabel(true));
-    audio.addEventListener('pause', () => updatePlaybackLabel(false));
-    audio.addEventListener('ended', () => updatePlaybackLabel(false));
+    audio.addEventListener('pause', () => {
+      updatePlaybackLabel(false);
+      void persistPosition({ force: true });
+    });
+    audio.addEventListener('ended', () => {
+      updatePlaybackLabel(false);
+      void persistPosition({ force: true, completed: true });
+    });
     audio.addEventListener('error', () => {
       if (activeAudio !== audio) return;
       els.status.textContent = language() === 'en'
@@ -1394,9 +1660,312 @@
     });
     updateAudioPosition();
     updatePlaybackLabel(false);
-    els.status.textContent = language() === 'en'
-      ? 'MP3 opened. You can listen now. Audio files are not yet saved to My library.'
-      : 'MP3 abierto. Ya puedes escucharlo. Los archivos de audio todavía no se guardan en Mi biblioteca.';
+    els.status.textContent = savedBook?.id
+      ? (language() === 'en'
+        ? 'MP3 saved to My library. Your listening position will be restored.'
+        : 'MP3 guardado en Mi biblioteca. Se recuperará la posición de escucha.')
+      : (language() === 'en'
+        ? 'Temporary MP3 playback. The audio could not be saved. Check free storage.'
+        : 'Reproducción temporal del MP3. No se pudo guardar. Revisa el espacio disponible.');
+    if (savedBook?.id && !existingBook) await renderLibrary();
+    queueMicrotask(() => els.title.focus());
+  }
+
+  // Replays actual compressed DAISY audio segments in SMIL order. Keeps the
+  // original ZIP binary on-device so saved books need no second file import.
+  async function useDaisyAudioFile(file, { existingBook = null, preparedZip = null,
+    preparedDaisy = null, requestedPercent = null } = {}) {
+    await pause();
+    await persistActiveAudio?.({ force: true });
+    setAccessiblePlaybackMode(false);
+    if (speechController) {
+      try { await speechController.destroy(); } catch {}
+      speechController = null;
+    }
+    clearActiveAudio();
+    const JSZip = await loadZipBundle();
+    const zip = preparedZip || await JSZip.loadAsync(await file.arrayBuffer());
+    const daisy = preparedDaisy || await shared.parseDaisyArchive(zip, {
+      title: existingBook?.title || file.name || '', language: language()
+    });
+    const clips = daisy.audioClips || [];
+    if (!clips.length) throw Object.assign(new Error('daisy-no-audio'), { code: 'daisy-no-audio' });
+    let savedBook = existingBook;
+    if (!savedBook && libraryAdapter?.importDaisyArchive) {
+      try {
+        savedBook = await libraryAdapter.importDaisyArchive({
+          file, title: file.name || 'Libro DAISY',
+          language: language(), format: daisy.format
+        });
+      } catch {
+        // Playback still works temporarily if the device has too little storage.
+      }
+    }
+    const audio = new Audio();
+    activeAudio = audio;
+    documentModel = shared.parseStructuredDocument(daisy);
+    originalDocumentModel = documentModel;
+    readingSession = null;
+    searchIndex = null;
+    currentBookId = savedBook?.id || '';
+    currentSource = '';
+    currentFormat = daisy.format;
+    els.title.textContent = savedBook?.title || file.name || 'Libro DAISY';
+    els.reader.hidden = false;
+    enterReaderOnlyView();
+    setReaderAudioOnlyMode(true);
+    els.save.disabled = true;
+    els.bookmark.disabled = true;
+    els.queueToggle.disabled = !savedBook?.id;
+    els.previous.hidden = false;
+    els.next.hidden = false;
+    els.previous.textContent = language() === 'en' ? 'Previous DAISY segment' : 'Segmento DAISY anterior';
+    els.next.textContent = language() === 'en' ? 'Next DAISY segment' : 'Segmento DAISY siguiente';
+    const tools = ensureAudioTools();
+    tools.hidden = false;
+    const seek = tools.querySelector('#reading-audio-seek');
+    const progress = tools.querySelector('#reading-audio-total-progress');
+    const marksHost = tools.querySelector('#reading-audio-marks-controls');
+    if (marksHost) { marksHost.replaceChildren(); marksHost.hidden = true; }
+    const navigation = document.createElement('div');
+    navigation.id = 'reading-daisy-navigation-controls';
+    navigation.setAttribute('role', 'group');
+    navigation.setAttribute('aria-label', language() === 'en'
+      ? 'DAISY chapter and segment navigation' : 'Navegación de capítulos y segmentos DAISY');
+    const navLabel = document.createElement('label');
+    navLabel.textContent = language() === 'en' ? 'Choose chapter or heading' : 'Elegir capítulo o encabezado';
+    navLabel.htmlFor = 'reading-daisy-chapter-select';
+    const navSelect = document.createElement('select');
+    navSelect.id = 'reading-daisy-chapter-select';
+    const navGo = document.createElement('button');
+    navGo.type = 'button';
+    navGo.textContent = language() === 'en' ? 'Go to chapter' : 'Ir al capítulo';
+    const status = document.createElement('p');
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    for (const [index, nav] of (daisy.navigation || []).entries()) {
+      const option = document.createElement('option');
+      option.value = String(index);
+      option.textContent = nav.label;
+      navSelect.append(option);
+    }
+    navigation.append(navLabel, navSelect, navGo, status);
+    tools.append(navigation);
+    const clipDurations = clips.map(clip =>
+      clip.clipEndMs > clip.clipBeginMs ? clip.clipEndMs - clip.clipBeginMs : 0);
+    const fullDurationKnown = clipDurations.every(ms => ms > 0);
+    const totalMs = fullDurationKnown ? clipDurations.reduce((sum, ms) => sum + ms, 0) : 0;
+    let clipIndex = Math.min(clips.length - 1, Math.max(0, Number(savedBook?.mediaTrackIndex) || 0));
+    let loaderToken = 0;
+    let advancing = false;
+    let queuedSave = Promise.resolve();
+    let lastSavedAt = 0;
+    const pausedBefore = savedBook?.state === 'read';
+    const resumeMs = pausedBefore ? 0 : Math.max(0, Number(savedBook?.mediaPositionMs) || 0);
+
+    function updateDaisyPosition() {
+      if (activeAudio !== audio) return;
+      const clip = clips[clipIndex];
+      if (!clip) return;
+      const currentMs = Math.round(Math.max(0, Number(audio.currentTime) || 0) * 1000);
+      const before = clipDurations.slice(0, clipIndex).reduce((sum, ms) => sum + ms, 0);
+      const elapsed = before + Math.max(0, currentMs - clip.clipBeginMs);
+      const percent = totalMs > 0 ? Math.min(100, elapsed * 100 / totalMs) : null;
+      els.position.textContent = language() === 'en'
+        ? 'DAISY segment ' + (clipIndex + 1) + ' of ' + clips.length + '. ' + formatAudioTime(audio.currentTime)
+        : 'Segmento DAISY ' + (clipIndex + 1) + ' de ' + clips.length + '. ' + formatAudioTime(audio.currentTime);
+      const label = percent == null
+        ? (language() === 'en' ? 'Entire audiobook duration unknown.' : 'Duración total del audiolibro desconocida.')
+        : (language() === 'en' ? 'Entire DAISY audiobook: ' : 'Audiolibro DAISY completo: ')
+          + Math.round(percent) + ' %.';
+      if (progress) progress.textContent = label;
+      if (els.documentProgressStatus) els.documentProgressStatus.textContent = label;
+      if (seek) {
+        const duration = Number(audio.duration);
+        seek.max = String(Number.isFinite(duration) ? Math.max(0, Math.floor(duration)) : 0);
+        seek.value = String(Math.max(0, Math.floor(audio.currentTime || 0)));
+        seek.disabled = !Number.isFinite(duration) || duration <= 0;
+      }
+      els.block.textContent = (daisy.navigation || []).filter(nav => nav.href === clip.smilPath)
+        .map(nav => nav.label).slice(0, 1)[0] || (language() === 'en' ? 'DAISY audiobook' : 'Audiolibro DAISY');
+    }
+    async function persistDaisyPosition({ force = false, completed = false } = {}) {
+      if (!savedBook?.id || !libraryAdapter?.saveProgress) return false;
+      const stamp = Date.now();
+      if (!force && stamp - lastSavedAt < 5000) return true;
+      const currentMs = Math.round(Math.max(0, Number(audio.currentTime) || 0) * 1000);
+      const before = clipDurations.slice(0, clipIndex).reduce((sum, ms) => sum + ms, 0);
+      const percent = completed ? 100 : totalMs
+        ? Math.min(99.9, (before + Math.max(0, currentMs - clips[clipIndex].clipBeginMs)) * 100 / totalMs)
+        : 0;
+      const snapshot = { id: savedBook.id, mediaTrackIndex: clipIndex, mediaPositionMs: currentMs,
+        percent, state: completed ? 'read' : 'in-reading', blockIndex: 0, unitIndex: 0 };
+      queuedSave = queuedSave.catch(() => {}).then(() => libraryAdapter.saveProgress(snapshot));
+      const result = await queuedSave.catch(() => ({ saved: false }));
+      if (result?.saved) lastSavedAt = stamp;
+      return result?.saved === true;
+    }
+    persistActiveAudio = persistDaisyPosition;
+    async function seekSynchronizedDaisyClip(index, positionMs = null, autoPlay = false) {
+      if (activeAudio !== audio) return false;
+      const target = Math.max(0, Math.min(clips.length - 1, Math.trunc(Number(index) || 0)));
+      const token = ++loaderToken;
+      const clip = clips[target];
+      const movingFrom = clipIndex;
+      if (movingFrom !== target) await persistDaisyPosition({ force: true });
+      advancing = true;
+      audio.pause();
+      clipIndex = target;
+      const resource = zip.file(clip.audioHref);
+      if (!resource) { status.textContent = 'DAISY: audio no encontrado.'; advancing = false; return false; }
+      const contents = await resource.async('blob');
+      if (activeAudio !== audio || loaderToken !== token) return false;
+      if (audioObjectUrl) URL.revokeObjectURL(audioObjectUrl);
+      const type = /\.m4a$/iu.test(clip.audioHref) ? 'audio/mp4' : 'audio/mpeg';
+      audioObjectUrl = URL.createObjectURL(new Blob([contents], { type }));
+      audio.src = audioObjectUrl;
+      audio.playbackRate = Number(tools.querySelector('#reading-audio-file-speed')?.value) || 1;
+      const startMs = Number.isFinite(Number(positionMs)) && positionMs !== null
+        ? Math.max(clip.clipBeginMs, Math.round(Number(positionMs))) : clip.clipBeginMs;
+      const loadPosition = () => {
+        if (activeAudio !== audio || token !== loaderToken) return;
+        const max = Number.isFinite(audio.duration) ? audio.duration * 1000 : Infinity;
+        try { audio.currentTime = Math.min(startMs, max) / 1000; } catch {}
+        updateDaisyPosition();
+        if (autoPlay) void audio.play().catch(() => {
+          status.textContent = language() === 'en' ? 'Tap Play to continue audio.' : 'Pulsa Reproducir para continuar.';
+        });
+        advancing = false;
+      };
+      if (audio.readyState >= 1) loadPosition();
+      else audio.addEventListener('loadedmetadata', loadPosition, { once: true });
+      return true;
+    }
+    async function playSynchronizedDaisyAudio() {
+      if (activeAudio !== audio) return false;
+      return audio.play().then(() => true, () => false);
+    }
+    async function resumeSynchronizedDaisyClip() { return playSynchronizedDaisyAudio(); }
+    async function nextClip() {
+      if (clipIndex >= clips.length - 1) {
+        audio.pause();
+        await persistDaisyPosition({ force: true, completed: true });
+        updatePlaybackLabel(false);
+        status.textContent = language() === 'en' ? 'End of DAISY audiobook.' : 'Fin del audiolibro DAISY.';
+        return;
+      }
+      await seekSynchronizedDaisyClip(clipIndex + 1, null, true);
+    }
+    daisyAudioControls = {
+      previous: () => seekSynchronizedDaisyClip(clipIndex - 1, null, !audio.paused),
+      next: () => seekSynchronizedDaisyClip(clipIndex + 1, null, !audio.paused)
+    };
+    if (marksHost && savedBook?.id && libraryAdapter?.addMark && libraryAdapter?.listMarks) {
+      marksHost.hidden = false;
+      const saveMark = document.createElement('button');
+      saveMark.type = 'button';
+      saveMark.textContent = language() === 'en'
+        ? 'Bookmark DAISY audio position' : 'Marcar posición del audio DAISY';
+      const markList = document.createElement('ul');
+      const markStatus = document.createElement('p');
+      markStatus.setAttribute('role', 'status');
+      const displayDaisyMarks = async () => {
+        const marks = await libraryAdapter.listMarks({ bookId: savedBook.id });
+        if (activeAudio !== audio) return;
+        markList.replaceChildren();
+        for (const mark of marks.filter(value => value.type === 'bookmark')) {
+          const item = document.createElement('li');
+          const jump = document.createElement('button');
+          jump.type = 'button';
+          jump.textContent = (language() === 'en' ? 'Go to ' : 'Ir a ')
+            + (mark.reference || ('Segmento ' + (mark.mediaTrackIndex + 1)));
+          jump.addEventListener('click', () => {
+            void seekSynchronizedDaisyClip(mark.mediaTrackIndex, mark.mediaPositionMs, false)
+              .then(() => jump.focus());
+          });
+          const remove = document.createElement('button');
+          remove.type = 'button';
+          remove.textContent = language() === 'en' ? 'Delete bookmark' : 'Eliminar marcador';
+          remove.addEventListener('click', () => {
+            void libraryAdapter.deleteMark({ id: mark.id }).then(displayDaisyMarks).then(() => {
+              saveMark.focus();
+              markStatus.textContent = language() === 'en' ? 'Bookmark deleted.' : 'Marcador eliminado.';
+            });
+          });
+          item.append(jump, remove);
+          markList.append(item);
+        }
+      };
+      saveMark.addEventListener('click', () => {
+        const clip = clips[clipIndex];
+        const timeMs = Math.round(Math.max(0, Number(audio.currentTime) || 0) * 1000);
+        void libraryAdapter.addMark({
+          bookId: savedBook.id, type:'bookmark', blockIndex:0, unitIndex:0,
+          mediaTrackIndex:clipIndex, mediaPositionMs:timeMs,
+          reference: (language() === 'en' ? 'Segment ' : 'Segmento ')
+            + (clipIndex + 1) + ', ' + formatAudioTime(timeMs / 1000),
+          excerpt: clip?.audioHref || savedBook.title
+        }).then(displayDaisyMarks).then(() => {
+          markStatus.textContent = language() === 'en' ? 'Bookmark saved.' : 'Marcador guardado.';
+          saveMark.focus();
+        }).catch(() => {
+          markStatus.textContent = language() === 'en'
+            ? 'Could not save bookmark.' : 'No se pudo guardar el marcador.';
+        });
+      });
+      marksHost.append(saveMark, markList, markStatus);
+      void displayDaisyMarks();
+    }
+    navGo.addEventListener('click', () => {
+      const entry = daisy.navigation[Number(navSelect.value)];
+      if (!entry) return;
+      const located = clips.findIndex(clip => clip.smilPath === entry.href
+        && (!entry.smilId || clip.smilId === entry.smilId));
+      const fallback = clips.findIndex(clip => clip.smilPath === entry.href);
+      const target = located >= 0 ? located : fallback;
+      if (target < 0) {
+        status.textContent = language() === 'en'
+          ? 'This chapter has no associated audio segment.'
+          : 'Este capítulo no tiene un segmento de audio asociado.';
+        return;
+      }
+      void seekSynchronizedDaisyClip(target, null, !audio.paused).then(() => navGo.focus());
+    });
+    audio.addEventListener('loadedmetadata', updateDaisyPosition);
+    audio.addEventListener('timeupdate', () => {
+      updateDaisyPosition();
+      void persistDaisyPosition();
+      const clip = clips[clipIndex];
+      if (!advancing && clip?.clipEndMs > clip.clipBeginMs
+        && audio.currentTime * 1000 >= clip.clipEndMs - 80) {
+        advancing = true;
+        void nextClip();
+      }
+    });
+    audio.addEventListener('ended', () => { if (!advancing) { advancing = true; void nextClip(); } });
+    audio.addEventListener('play', () => updatePlaybackLabel(true));
+    audio.addEventListener('pause', () => {
+      updatePlaybackLabel(false);
+      void persistDaisyPosition({ force: true });
+    });
+    const totalIsKnown = totalMs > 0;
+    let startIndex = clipIndex;
+    let startMs = resumeMs || clips[startIndex].clipBeginMs;
+    if (requestedPercent !== null && Number.isFinite(Number(requestedPercent)) && totalIsKnown) {
+      let offset = totalMs * Math.min(100, Math.max(0, Number(requestedPercent))) / 100;
+      for (let i = 0; i < clipDurations.length; i += 1) {
+        if (offset <= clipDurations[i] || i === clipDurations.length - 1) {
+          startIndex = i; startMs = clips[i].clipBeginMs + offset; break;
+        }
+        offset -= clipDurations[i];
+      }
+    }
+    await seekSynchronizedDaisyClip(startIndex, startMs, false);
+    updatePlaybackLabel(false);
+    els.status.textContent = savedBook?.id
+      ? (language() === 'en' ? 'DAISY audio saved in My library.' : 'Audio DAISY guardado en Mi biblioteca.')
+      : (language() === 'en' ? 'DAISY audio playback is temporary: unable to save file.' : 'Reproducción DAISY temporal: no se pudo guardar el archivo.');
+    if (savedBook?.id && !existingBook) await renderLibrary();
     queueMicrotask(() => els.title.focus());
   }
 
@@ -1411,6 +1980,20 @@
         : document.createElement('p');
       element.textContent = text;
       els.block.append(element);
+      // For visual readers, an Important mark highlights its entire passage.
+      // Do not move the VoiceOver focus when the asynchronous marks lookup ends.
+      if (currentBookId && libraryAdapter?.listMarks) {
+        const bookId = currentBookId;
+        const blockIndex = readingSession.snapshot().blockIndex;
+        void libraryAdapter.listMarks({ bookId, type: 'important' }).then(marks => {
+          if (bookId !== currentBookId || !readingSession ||
+              readingSession.snapshot().blockIndex !== blockIndex ||
+              !element.isConnected || !marks.some(mark => mark.blockIndex === blockIndex)) return;
+          const highlight = document.createElement('mark');
+          highlight.textContent = text;
+          element.replaceChildren(highlight);
+        }).catch(() => {});
+      }
     }
     renderPosition();
   }
@@ -1577,7 +2160,9 @@
     }
     const snapshot = position || readingSession?.snapshot() || { blockIndex: 0, unitIndex: 0 };
     speechController = shared.createSharedReadingSpeechController({
-      client: speechAdapter,
+      client: typeof shared.createPronunciationSpeechAdapter === 'function'
+        ? shared.createPronunciationSpeechAdapter(speechAdapter, () => pronunciationEntries)
+        : speechAdapter,
       book: { id: currentBookId || 'web-local-document', title: els.title.textContent || t().document },
       document: documentModel,
       initialPosition: { blockIndex: snapshot.blockIndex || 0, unitIndex: snapshot.unitIndex || 0 },
@@ -1829,6 +2414,21 @@
     if (lower.endsWith('.epub') || type === 'application/epub+zip') {
       return { source:await file.arrayBuffer().then(buffer => Array.from(new Uint8Array(buffer)).join(',')), format:'epub', model:await structuredFromArchive(file,'epub') };
     }
+    if (lower.endsWith('.zip') || type === 'application/zip' || type === 'application/x-zip-compressed') {
+      if (file.size > 300 * 1024 * 1024) {
+        throw Object.assign(new Error('daisy-too-large'), { code: 'daisy-too-large' });
+      }
+      const JSZip = await loadZipBundle();
+      const bytes = await file.arrayBuffer();
+      const zip = await JSZip.loadAsync(bytes);
+      const daisy = await shared.parseDaisyArchive(zip, { title: name, language: language() });
+      return {
+        source: '',
+        format: daisy.format,
+        model: shared.parseStructuredDocument(daisy),
+        daisyPackage: { file, zip, parsed: daisy }
+      };
+    }
     if (lower.endsWith('.odt') || type === 'application/vnd.oasis.opendocument.text') {
       return { source:await file.arrayBuffer().then(buffer => Array.from(new Uint8Array(buffer)).join(',')), format:'odt', model:await structuredFromArchive(file,'odt') };
     }
@@ -1871,15 +2471,45 @@
         return true;
       }
       const prepared = await documentFromFile(file);
+      if (prepared.daisyPackage) {
+        if (prepared.daisyPackage.parsed.audioClips?.length) {
+          await useDaisyAudioFile(file, {
+            preparedZip: prepared.daisyPackage.zip,
+            preparedDaisy: prepared.daisyPackage.parsed
+          });
+        } else {
+          let saved = null;
+          try {
+            saved = await libraryAdapter?.importDaisyArchive?.({
+              file, title: file.name, language: language(), format: prepared.format
+            });
+          } catch {}
+          await useDocument(prepared.model, file.name, {
+            source: '', format: prepared.format, bookId: saved?.id || ''
+          });
+          els.status.textContent = saved?.id
+            ? (language() === 'en' ? 'DAISY text saved to My library.' : 'Texto DAISY guardado en Mi biblioteca.')
+            : (language() === 'en' ? 'DAISY text opened, but could not be saved.' : 'Texto DAISY abierto, pero no se pudo guardar.');
+          if (saved?.id) await renderLibrary();
+        }
+        return true;
+      }
       await useDocument(prepared.model, file.name, {
-        source: prepared.source,
-        format: prepared.format,
-        autoSaveImported: true
+        source: prepared.source, format: prepared.format, autoSaveImported: true
       });
       return true;
     } catch (error) {
       els.ocr.hidden = true;
-      if (error?.code === 'unsupported') els.status.textContent = t().unsupported;
+      if (error?.code === 'daisy-audio-only') els.status.textContent = language() === 'en'
+        ? 'Audio-only DAISY needs synchronized playback, not yet supported. The book was not imported.'
+        : 'Este DAISY solo contiene audio y necesita reproducción sincronizada, todavía no disponible. No se importó.';
+      else if (['invalid-daisy','not-daisy','daisy-missing-resource','daisy-no-text'].includes(error?.code)) els.status.textContent = language() === 'en'
+        ? 'Invalid DAISY ZIP or missing required resources.'
+        : 'Archivo DAISY ZIP no válido o con recursos obligatorios ausentes.';
+      else if (error?.code === 'daisy-too-large') els.status.textContent = language() === 'en'
+        ? 'DAISY ZIP exceeds the temporary 300 MB file-size limit.'
+        : 'El DAISY ZIP supera el límite temporal de 300 MB.';
+      else if (error?.code === 'unsupported') els.status.textContent = t().unsupported;
       else if (error?.code === 'legacy-doc') els.status.textContent = t().legacyDoc;
       else if (error?.code === 'image-needs-ocr') {
         els.status.textContent = `${t().imageNeedsOcr} ${t().ocrPrivacy}`;
@@ -1917,7 +2547,16 @@
       );
     } catch (error) {
       els.ocr.hidden = true;
-      if (error?.code === 'unsupported') els.status.textContent = t().unsupported;
+      if (error?.code === 'daisy-audio-only') els.status.textContent = language() === 'en'
+        ? 'Audio-only DAISY needs synchronized playback, not yet supported. The book was not imported.'
+        : 'Este DAISY solo contiene audio y necesita reproducción sincronizada, todavía no disponible. No se importó.';
+      else if (['invalid-daisy','not-daisy','daisy-missing-resource','daisy-no-text'].includes(error?.code)) els.status.textContent = language() === 'en'
+        ? 'Invalid DAISY ZIP or missing required resources.'
+        : 'Archivo DAISY ZIP no válido o con recursos obligatorios ausentes.';
+      else if (error?.code === 'daisy-too-large') els.status.textContent = language() === 'en'
+        ? 'DAISY ZIP exceeds the temporary 300 MB file-size limit.'
+        : 'El DAISY ZIP supera el límite temporal de 300 MB.';
+      else if (error?.code === 'unsupported') els.status.textContent = t().unsupported;
       else if (error?.code === 'legacy-doc') els.status.textContent = t().legacyDoc;
       else if (error?.code === 'image-needs-ocr') {
         els.status.textContent = `${t().imageNeedsOcr} ${t().ocrPrivacy}`;
@@ -2064,6 +2703,9 @@
     els.translationOriginal.hidden = !available;
     els.translationTranslated.hidden = !available;
     if (els.translationRead) els.translationRead.hidden = !available;
+    const exportReady = available && translationJob?.getState?.()?.status === 'complete';
+    if (els.translationExportTxt) els.translationExportTxt.hidden = !exportReady;
+    if (els.translationExportHtml) els.translationExportHtml.hidden = !exportReady;
     els.translationOriginal.setAttribute('aria-pressed', showingTranslation ? 'false' : 'true');
     els.translationTranslated.setAttribute('aria-pressed', showingTranslation ? 'true' : 'false');
   }
@@ -2284,15 +2926,20 @@
     if (format === 'rtf') return shared.parseStructuredDocument(shared.parseRtfDocument(source,{title:opened.book.title,language:opened.book.language || language()}));
     if (format === 'md' || format === 'markdown') return shared.parseStructuredDocument(shared.parseMarkdownDocument(source,{title:opened.book.title,language:opened.book.language || language()}));
     if (format === 'fb2') return shared.parseStructuredDocument(shared.parseFb2Document(source,{title:opened.book.title,language:opened.book.language || language()}));
-    if (['docx','pptx','xlsx','epub','odt'].includes(format)) {
+    if (['docx','pptx','xlsx','epub','odt','daisy2.02','daisy3'].includes(format)) {
       const JSZip = await loadZipBundle();
-      const bytes = Uint8Array.from(source.split(',').filter(Boolean).map(Number));
+      const storedDaisy = format.startsWith('daisy')
+        ? await libraryAdapter?.openDaisyArchive?.(opened.book.id) : null;
+      const bytes = storedDaisy?.blob
+        ? new Uint8Array(await storedDaisy.blob.arrayBuffer())
+        : Uint8Array.from(source.split(',').filter(Boolean).map(Number));
       const zip = await JSZip.loadAsync(bytes);
       let raw;
       if (format === 'docx') raw = await shared.parseDocxArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
       else if (format === 'pptx') raw = await shared.parsePptxArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
       else if (format === 'xlsx') raw = await shared.parseXlsxArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
       else if (format === 'epub') raw = await shared.parseEpubArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
+      else if (format === 'daisy2.02' || format === 'daisy3') raw = await shared.parseDaisyArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
       else raw = await shared.parseOdtArchive(zip,{title:opened.book.title,language:opened.book.language || language()});
       return shared.parseStructuredDocument(raw);
     }
@@ -2308,11 +2955,30 @@
       const sourceFormat = String(opened.book.format || 'txt').toLowerCase();
       const source = String(opened.content || '');
 
-      if (exportFormat === 'original' && sourceFormat !== 'pdf') {
-        const binaryFormats = new Set(['docx','pptx','xlsx','epub','odt']);
+      if (sourceFormat === 'daisy2.02' || sourceFormat === 'daisy3') {
+        const storedDaisy = await libraryAdapter?.openDaisyArchive?.(id);
+        if (storedDaisy?.blob && exportFormat === 'original') {
+          downloadExport(storedDaisy.blob, title + '.zip');
+        } else if (exportFormat === 'original') {
+          const bytes = Uint8Array.from(source.split(',').filter(Boolean).map(Number));
+          downloadExport(new Blob([bytes], { type: 'application/zip' }), title + '.zip');
+        } else {
+          const model = await modelForSavedBook(opened);
+          if (exportFormat === 'html') {
+            downloadExport(new Blob([accessibleHtmlFromModel(model, opened.book.title)], { type:'text/html;charset=utf-8' }), title + '.html');
+          } else {
+            downloadExport(new Blob([accessibleTextFromModel(model)], { type:'text/plain;charset=utf-8' }), title + '.txt');
+          }
+        }
+      } else if (sourceFormat === 'audio') {
+        const savedAudio = await libraryAdapter?.openAudioFile?.(id);
+        if (!savedAudio?.blob) throw new Error('missing-saved-audio');
+        downloadExport(savedAudio.blob, title + '.mp3');
+      } else if (exportFormat === 'original' && sourceFormat !== 'pdf') {
+        const binaryFormats = new Set(['docx','pptx','xlsx','epub','odt','daisy2.02','daisy3']);
         if (binaryFormats.has(sourceFormat)) {
           const bytes = Uint8Array.from(source.split(',').filter(Boolean).map(Number));
-          downloadExport(new Blob([bytes], { type:'application/octet-stream' }), `${title}.${sourceFormat}`);
+          downloadExport(new Blob([bytes], { type:'application/octet-stream' }), `${title}.${sourceFormat.startsWith('daisy') ? 'zip' : sourceFormat}`);
         } else {
           const extension = sourceFormat === 'markdown' ? 'md' : sourceFormat;
           downloadExport(new Blob([source], { type:'text/plain;charset=utf-8' }), `${title}.${extension || 'txt'}`);
@@ -2421,6 +3087,7 @@
     }
     readerChromeState = null;
     els.reader.hidden = true;
+    await persistActiveAudio?.({ force: true });
     clearActiveAudio();
 
     if (readerReturnView === 'library') {
@@ -2451,6 +3118,45 @@
     const source = String(opened.content || '');
     const format = String(opened.book.format || 'txt').toLowerCase();
     returnToReadingMainFromSubview();
+    if (format === 'daisy2.02' || format === 'daisy3') {
+      const storedDaisy = await libraryAdapter?.openDaisyArchive?.(opened.book.id);
+      if (storedDaisy?.blob) {
+        const zipEngine = await loadZipBundle();
+        const archive = await zipEngine.loadAsync(await storedDaisy.blob.arrayBuffer());
+        const parsed = await shared.parseDaisyArchive(archive, {
+          title: storedDaisy.book.title, language: storedDaisy.book.language || language()
+        });
+        readerReturnView = 'library';
+        if (parsed.audioClips?.length) {
+          await useDaisyAudioFile(storedDaisy.blob, {
+            existingBook: storedDaisy.book, preparedZip: archive,
+            preparedDaisy: parsed, requestedPercent
+          });
+          currentQueued = storedDaisy.book.queued === true;
+          updateQueueToggle();
+        } else {
+          await useDocument(shared.parseStructuredDocument(parsed), storedDaisy.book.title, {
+            source: '', format, bookId: storedDaisy.book.id,
+            initialIndex: storedDaisy.book.blockIndex
+          });
+        }
+        return;
+      }
+    }
+    if (format === 'audio') {
+      const savedAudio = await libraryAdapter?.openAudioFile?.(opened.book.id);
+      if (!savedAudio?.blob) {
+        els.libraryStatus.textContent = language() === 'en'
+          ? 'The saved MP3 is missing or cannot be read.'
+          : 'No se encuentra el MP3 guardado o no se puede leer.';
+        return;
+      }
+      readerReturnView = 'library';
+      await useMp3File(savedAudio.blob, { existingBook: savedAudio.book, requestedPercent });
+      currentQueued = savedAudio.book.queued === true;
+      updateQueueToggle();
+      return;
+    }
     const model = await modelForSavedBook(opened);
     readerReturnView = 'library';
     const hasRequestedPercent = requestedPercent !== null && requestedPercent !== undefined && Number.isFinite(Number(requestedPercent));
@@ -2530,14 +3236,21 @@
     }
     const snapshot = readingSession.snapshot();
     const block = readingSession.current();
-    const mark = await libraryClient.addMark({
+    const note = String(els.marksNote?.value || '').trim();
+    const request = {
       bookId: currentBookId,
       type: ['bookmark', 'important', 'review', 'quote'].includes(type) ? type : 'bookmark',
       blockIndex: snapshot.blockIndex,
       unitIndex: 0,
       excerpt: String(block?.text || '').slice(0, 220),
-      reference: t().position(snapshot.blockIndex + 1, documentModel?.blocks?.length || 0)
-    });
+      reference: t().position(snapshot.blockIndex + 1, documentModel?.blocks?.length || 0),
+      note
+    };
+    const mark = note && libraryAdapter?.addMark
+      ? (await libraryAdapter.addMark(request))?.mark
+      : await libraryClient.addMark(request);
+    if (mark && els.marksNote) els.marksNote.value = '';
+    if (mark && request.type === 'important') renderBlock();
     els.markStatus.textContent = mark ? t().bookmarked : t().bookmarkFailed;
     if (mark) await renderMarks();
     const marksView = document.getElementById('reading-marks-web');
@@ -2553,7 +3266,9 @@
       els.marksStatus.textContent = t().marksEmpty;
       return;
     }
-    const marks = await libraryClient.listMarks(currentBookId);
+    const marks = libraryAdapter?.listMarks
+      ? await libraryAdapter.listMarks({ bookId: currentBookId })
+      : await libraryClient.listMarks(currentBookId);
     if (!marks.length) {
       els.marksStatus.textContent = t().marksEmpty;
       return;
@@ -2597,8 +3312,33 @@
           await renderMarks();
         })();
       });
+      const noteLabel = document.createElement('label');
+      const noteEdit = document.createElement('textarea');
+      const editId = 'reading-edit-note-' + mark.id.replace(/[^a-zA-Z0-9_-]/g, '-');
+      noteEdit.id = editId;
+      noteEdit.rows = 2;
+      noteEdit.maxLength = 4000;
+      noteEdit.value = String(mark.note || '');
+      noteLabel.htmlFor = editId;
+      noteLabel.textContent = language() === 'en' ? 'Note for this passage' : 'Nota para este fragmento';
+      const saveNote = document.createElement('button');
+      saveNote.type = 'button';
+      saveNote.textContent = language() === 'en' ? 'Save note' : 'Guardar nota';
+      const noteStatus = document.createElement('p');
+      noteStatus.setAttribute('role', 'status');
+      saveNote.addEventListener('click', () => {
+        void (async () => {
+          const result = await libraryAdapter?.updateMark?.({
+            id: mark.id, bookId: currentBookId, note: noteEdit.value
+          });
+          noteStatus.textContent = result?.updated
+            ? (language() === 'en' ? 'Note saved.' : 'Nota guardada.')
+            : (language() === 'en' ? 'Could not save note.' : 'No se pudo guardar la nota.');
+          saveNote.focus();
+        })();
+      });
       actions.append(open, remove);
-      card.append(excerpt, actions);
+      card.append(excerpt, noteLabel, noteEdit, saveNote, noteStatus, actions);
       els.marksList.append(card);
     }
   }
@@ -2665,9 +3405,82 @@
     });
   }
 
+  // Each title in this native iOS library is a UIKit accessibility element
+  // with actions on the focused title itself, unlike a WKWebView overlay.
+  // Preserve the web list as fallback until real-device VoiceOver acceptance.
+  function ensureNativeLibraryActions(items = []) {
+    const native = globalThis.TifloIOSReading;
+    const old = document.getElementById('reading-library-native-actions');
+    if (!native?.hasNativeLibraryActions) {
+      old?.remove();
+      return;
+    }
+    nativeLibraryPage = (Array.isArray(items) ? items : []).map(book => ({
+      id: String(book.id),
+      title: String(book.title || (language() === 'en' ? 'Document' : 'Documento')),
+      format: String(book.format || ''),
+      percent: Number(book.percent) || 0
+    }));
+    let button = old;
+    if (!button) {
+      button = document.createElement('button');
+      button.type = 'button';
+      button.id = 'reading-library-native-actions';
+      els.libraryList.before(button);
+      button.addEventListener('click', () => {
+        const pages = nativeLibraryPage.slice(0, 60);
+        if (!pages.length) return;
+        Promise.resolve(native.presentLibrary({ items: pages, language: language() }))
+          .catch(() => {
+            els.libraryStatus.textContent = language() === 'en'
+              ? 'Native library unavailable. Use the document titles below.'
+              : 'Biblioteca nativa no disponible. Utiliza los títulos de los documentos que aparecen debajo.';
+            button.focus();
+          });
+      });
+    }
+    button.textContent = language() === 'en'
+      ? 'Open library with VoiceOver actions'
+      : 'Abrir biblioteca con acciones de VoiceOver';
+    button.disabled = !nativeLibraryPage.length;
+    if (nativeLibrarySubscribed) return;
+    nativeLibrarySubscribed = true;
+    Promise.resolve(native.onLibraryClosed?.(() => button.focus({ preventScroll: true })))
+      .catch(() => {});
+    Promise.resolve(native.onLibraryAction?.(event => {
+      const id = String(event?.id || '');
+      const action = String(event?.action || '');
+      if (!id || !nativeLibraryPage.some(book => book.id === id)) return;
+      void (async () => {
+        if (action === 'open' || action === 'read') {
+          await openSavedBook(id);
+          if (action === 'read' && (currentBookId === id)) await play();
+        } else if (action === 'delete') {
+          await deleteSavedBook(id); // The existing confirmation is mandatory.
+          els.libraryHeading?.focus({ preventScroll: true });
+        } else if (action === 'details') {
+          const title = document.getElementById('reading-library-title-'
+            + id.replace(/[^a-zA-Z0-9_-]/g, '-'));
+          const toggle = title?.closest('.reading-library-title-card')
+            ?.querySelector('.reading-library-details-toggle');
+          if (toggle?.getAttribute('aria-expanded') !== 'true') toggle?.click();
+          toggle?.focus({ preventScroll: true });
+        }
+      })().catch(() => {
+        els.libraryStatus.textContent = language() === 'en'
+          ? 'Unable to perform the selected book action.'
+          : 'No se pudo ejecutar la acción del documento.';
+        button.focus();
+      });
+    })).catch(() => {
+      nativeLibrarySubscribed = false;
+    });
+  }
+
   async function renderLibrary() {
     const token = ++libraryRenderToken;
     els.libraryList.replaceChildren();
+    ensureNativeLibraryActions([]);
     if (els.libraryPager) els.libraryPager.hidden = true;
     if (!libraryClient) {
       els.libraryStatus.textContent = t().libraryUnavailable;
@@ -2741,6 +3554,7 @@
       if (els.libraryPrevPage) els.libraryPrevPage.disabled = libraryPage <= 1;
       if (els.libraryNextPage) els.libraryNextPage.disabled = libraryPage >= pages;
 
+      ensureNativeLibraryActions(page.items);
       for (const book of page.items) {
         const card = document.createElement('section');
         card.className = 'resource-card reading-library-title-card';
@@ -2751,8 +3565,8 @@
         title.id = 'reading-library-title-' + String(book.id).replace(/[^a-zA-Z0-9_-]/g, '-');
         title.textContent = book.title || t().document;
         title.setAttribute('aria-label', language() === 'en'
-          ? `Open for reading: ${book.title || t().document}`
-          : `Abrir para leer: ${book.title || t().document}`);
+          ? `${book.format === 'audio' ? 'Open for listening' : 'Open for reading'}: ${book.title || t().document}`
+          : `${book.format === 'audio' ? 'Abrir para escuchar' : 'Abrir para leer'}: ${book.title || t().document}`);
 
         const detailsToggle = document.createElement('button');
         detailsToggle.type = 'button';
@@ -2914,7 +3728,7 @@
           original.textContent = t().exportOriginal;
           exportSelect.append(original);
         }
-        for (const [value, label] of [['txt', t().exportText], ['html', t().exportHtml]]) {
+        for (const [value, label] of (sourceFormat === 'audio' ? [] : [['txt', t().exportText], ['html', t().exportHtml]])) {
           const option = document.createElement('option');
           option.value = value;
           option.textContent = label;
@@ -3216,6 +4030,7 @@
   });
   els.prepare.addEventListener('click', () => { void prepareReading(); });
   els.ocr.addEventListener('click', () => { void runPdfOcr(); });
+  window.addEventListener('pagehide', () => { void persistActiveAudio?.({ force: true }); });
   els.file.addEventListener('change', () => {
     pendingPdfFile = null;
     pendingImageFile = null;
@@ -3224,10 +4039,12 @@
     if (els.file.files?.[0]) void importSelectedFile();
   });
   els.previous.addEventListener('click', () => {
+    if (daisyAudioControls) { void daisyAudioControls.previous(); return; }
     if (activeAudio) activeAudio.currentTime = Math.max(0, activeAudio.currentTime - 10);
     else move(-1);
   });
   els.next.addEventListener('click', () => {
+    if (daisyAudioControls) { void daisyAudioControls.next(); return; }
     if (activeAudio) activeAudio.currentTime = Math.min(Number.isFinite(activeAudio.duration) ? activeAudio.duration : Number.MAX_SAFE_INTEGER, activeAudio.currentTime + 10);
     else move(1);
   });
@@ -3254,6 +4071,36 @@
   });
   els.translationOriginal.addEventListener('click', () => { void switchTranslationView(false); });
   els.translationTranslated.addEventListener('click', () => { void switchTranslationView(true); });
+  function exportCompletedTranslation(format) {
+    if (!translationDocument?.blocks?.length || translationJob?.getState?.()?.status !== 'complete') {
+      els.translationStatus.textContent = language() === 'en'
+        ? 'Finish translating before exporting.'
+        : 'Termina la traducción antes de exportarla.';
+      return;
+    }
+    const title = safeExportFilename(els.title?.textContent || 'Documento');
+    const code = String(els.translationTarget?.value || 'translation');
+    try {
+      if (format === 'html') {
+        downloadExport(new Blob([accessibleHtmlFromModel(translationDocument, title)], {
+          type: 'text/html;charset=utf-8'
+        }), title + '-' + code + '-traduccion.html');
+      } else {
+        downloadExport(new Blob([accessibleTextFromModel(translationDocument)], {
+          type: 'text/plain;charset=utf-8'
+        }), title + '-' + code + '-traduccion.txt');
+      }
+      els.translationStatus.textContent = language() === 'en'
+        ? 'Completed translation exported. The original document is unchanged.'
+        : 'Traducción completa exportada. El documento original no se ha modificado.';
+    } catch {
+      els.translationStatus.textContent = language() === 'en'
+        ? 'Translation export failed.'
+        : 'No se pudo exportar la traducción.';
+    }
+  }
+  els.translationExportTxt?.addEventListener('click', () => exportCompletedTranslation('txt'));
+  els.translationExportHtml?.addEventListener('click', () => exportCompletedTranslation('html'));
   els.translationRead?.addEventListener('click', () => {
     void (async () => {
       await switchTranslationView(true);
@@ -3316,5 +4163,6 @@
   els.queueToggle.disabled = true;
   organizeGeneralSettingsMenus();
   restoreWebSettings();
+  setupPronunciationDictionary();
   localize();
 })();

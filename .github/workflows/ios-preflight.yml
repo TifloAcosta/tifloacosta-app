@@ -38,7 +38,9 @@ jobs:
       - name: Comprobar contrato de controles nativos TifloReproductor
         run: node --test ios-build/test/*.test.mjs
       - name: Preparar contenido y validar scripts iOS
-        run: node ios-build/prepare-web.mjs
+        run: |
+          npm install --prefix ios-build --no-audit --no-fund
+          node ios-build/prepare-web.mjs
       - name: Comprobar modificaciones iOS empaquetadas
         run: |
           node --input-type=module <<'NODE'

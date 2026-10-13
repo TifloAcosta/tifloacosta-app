@@ -120,12 +120,13 @@
   <section id="reading-section" hidden tabindex="-1" aria-labelledby="reading-heading">
     <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
     <h2 id="reading-heading">TifloLector</h2>
+    <p id="reading-build-identity" class="muted" hidden></p>
     <p id="reading-intro">Abre un libro o documento para escucharlo, continuar la lectura y gestionar tus marcadores.</p>
 
     <div class="panel" aria-labelledby="reading-start-heading">
       <h3 id="reading-start-heading">Abrir documento</h3>
       <label id="reading-file-label" for="reading-file">Seleccionar un libro o documento</label>
-      <input id="reading-file" type="file" accept=".mp3,audio/mpeg,.txt,.html,.htm,.pdf,.docx,.pptx,.xlsx,.epub,.odt,.rtf,.md,.markdown,.fb2,.png,.jpg,.jpeg,.webp,text/plain,text/html,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/epub+zip,application/vnd.oasis.opendocument.text,application/rtf,text/markdown,image/png,image/jpeg,image/webp">
+      <input id="reading-file" type="file" accept=".mp3,audio/mpeg,.zip,application/zip,application/x-zip-compressed,.txt,.html,.htm,.pdf,.docx,.pptx,.xlsx,.epub,.odt,.rtf,.md,.markdown,.fb2,.png,.jpg,.jpeg,.webp,text/plain,text/html,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/epub+zip,application/vnd.oasis.opendocument.text,application/rtf,text/markdown,image/png,image/jpeg,image/webp">
       <div hidden aria-hidden="true">
         <label id="reading-paste-label" for="reading-paste">Pegar texto</label>
         <textarea id="reading-paste" rows="6"></textarea>
@@ -177,6 +178,8 @@
           <button id="reading-translation-original" type="button" hidden aria-pressed="true">Original</button>
           <button id="reading-translation-translated" type="button" hidden aria-pressed="false">Traducción</button>
           <button id="reading-translation-read" type="button" hidden>Leer la traducción en el documento</button>
+          <button id="reading-translation-export-txt" type="button" hidden>Exportar traducción TXT</button>
+          <button id="reading-translation-export-html" type="button" hidden>Exportar traducción HTML</button>
         </div>
         <p id="reading-translation-status" class="muted" role="status" aria-live="polite" aria-atomic="true"></p>
       </section>
@@ -211,7 +214,7 @@
           <option value="tableCell">Celda de tabla</option>
         </select>
         <button id="reading-formats-toggle" type="button" aria-expanded="false" aria-controls="reading-formats-list">Consultar formatos admitidos</button>
-    <p id="reading-formats-list" hidden>TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 e imágenes PNG, JPG y WebP mediante OCR.</p>
+    <p id="reading-formats-list" hidden>TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 y DAISY ZIP con texto, e imágenes PNG, JPG y WebP mediante OCR. El audio DAISY sincronizado todavía no está disponible.</p>
       </details>
       <p id="reading-settings-status" class="muted" role="status" aria-live="polite"></p>
       </section>
@@ -244,6 +247,19 @@
             <option value="3">3×</option>
           </select>
         </fieldset>
+        <details id="reading-pronunciation-settings">
+          <summary id="reading-pronunciation-summary">Diccionario de pronunciación</summary>
+          <p id="reading-pronunciation-help">Sustituye palabras o expresiones únicamente al leer en voz alta. El texto original no cambia.</p>
+          <form id="reading-pronunciation-form">
+            <label id="reading-pronunciation-original-label" for="reading-pronunciation-original">Palabra o expresión original</label>
+            <input id="reading-pronunciation-original" type="text" maxlength="80" required autocomplete="off">
+            <label id="reading-pronunciation-replacement-label" for="reading-pronunciation-replacement">Cómo debe pronunciarse</label>
+            <input id="reading-pronunciation-replacement" type="text" maxlength="120" required autocomplete="off">
+            <button id="reading-pronunciation-add" type="submit">Guardar pronunciación</button>
+          </form>
+          <ul id="reading-pronunciation-list" aria-label="Pronunciaciones guardadas"></ul>
+          <p id="reading-pronunciation-status" role="status" aria-live="polite"></p>
+        </details>
       </section>
 <section id="reading-more-voices-settings" aria-labelledby="reading-more-voices-settings-heading">
         <h4 id="reading-more-voices-settings-heading">Buscar más voces</h4>
@@ -376,6 +392,8 @@
         <option value="review">Revisar después</option>
         <option value="quote">Cita</option>
       </select>
+      <label for="reading-marks-note">Nota opcional para la posición actual</label>
+      <textarea id="reading-marks-note" rows="3" maxlength="4000"></textarea>
       <button type="button" id="reading-marks-add">Guardar marca en la posición actual</button>
       <p id="reading-marks-status" class="muted" role="status" aria-live="polite"></p>
       <div id="reading-marks-list" class="resource-list"></div>
@@ -607,7 +625,7 @@
 <script type="module">
   import * as shared from './shared/web-entry.mjs?v=1.7';
   window.TIFLO_SHARED = shared;
-  await import('./web-reading.js?v=3.16');
+  await import('./web-reading.js?v=3.21');
 </script>
 <script src="app.js?v=2.3"></script>
 <script>

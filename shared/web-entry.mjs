@@ -45,6 +45,7 @@ export { createReadingSearchIndex } from './reading-search.mjs';
 export { resolveReadingSettings, READING_SETTING_DEFAULTS } from './reading-settings.mjs';
 export { createReadingSession } from './reading-session.mjs';
 export { adjacentWebReadingStructure, WEB_READING_STRUCTURE_MODES } from './web-reading-navigation.mjs';
+export { parseDaisyArchive, resolveDaisyZipPath, daisyClockMs } from './web-reading-daisy-adapter.mjs';
 export { normalizeReadingPosition, percentForBlock, parsePlainText } from './reading-text-model.mjs';
 export { parseHtmlDocument } from './reading-html-adapter.mjs';
 
@@ -79,6 +80,11 @@ export {
   listWebTtsVoices,
   createWebReadingSpeechAdapter
 } from './web-reading-speech-adapter.mjs';
+export {
+  normalizePronunciationEntries,
+  applyPronunciationEntries,
+  createPronunciationSpeechAdapter
+} from './web-reading-pronunciation.mjs';
 
 export { createWebReadingLibraryAdapter } from './web-reading-library-adapter.mjs';
 

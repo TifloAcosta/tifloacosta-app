@@ -1440,7 +1440,10 @@
     progress.className = 'muted';
     // Progress is available on demand; do not interrupt VoiceOver each second.
     progress.setAttribute('aria-live', 'off');
-    audioTools.append(label, seek, speedLabel, speed, progress);
+    const marksHost = document.createElement('section');
+    marksHost.id = 'reading-audio-marks-controls';
+    marksHost.setAttribute('aria-label', language() === 'en' ? 'Audiobook bookmarks' : 'Marcadores del audiolibro');
+    audioTools.append(label, seek, speedLabel, speed, progress, marksHost);
     els.block.after(audioTools);
     return audioTools;
   }
@@ -1515,6 +1518,61 @@
     tools.hidden = false;
     const seek = tools.querySelector('#reading-audio-seek');
     const progress = tools.querySelector('#reading-audio-total-progress');
+    const audioMarks = tools.querySelector('#reading-audio-marks-controls');
+    audioMarks?.replaceChildren();
+    if (audioMarks) audioMarks.hidden = !savedBook?.id;
+    if (audioMarks && savedBook?.id && libraryAdapter?.addMark && libraryAdapter?.listMarks) {
+      const saveMark = document.createElement('button');
+      saveMark.type = 'button';
+      saveMark.textContent = language() === 'en' ? 'Bookmark current audio position' : 'Marcar posición del audio';
+      const list = document.createElement('ul');
+      const markStatus = document.createElement('p');
+      markStatus.setAttribute('role', 'status');
+      markStatus.setAttribute('aria-live', 'polite');
+      const renderAudioMarks = async () => {
+        const marks = await libraryAdapter.listMarks({ bookId: savedBook.id });
+        if (activeAudio !== audio) return;
+        list.replaceChildren();
+        for (const mark of marks.filter(item => item.type === 'bookmark')) {
+          const item = document.createElement('li');
+          const open = document.createElement('button');
+          open.type = 'button';
+          open.textContent = (language() === 'en' ? 'Go to ' : 'Ir a ') + (mark.reference || formatAudioTime(mark.mediaPositionMs / 1000));
+          open.addEventListener('click', () => {
+            if (activeAudio !== audio) return;
+            try { audio.currentTime = Math.max(0, Number(mark.mediaPositionMs) / 1000 || 0); } catch {}
+            updateAudioPosition();
+            void persistPosition({ force: true });
+            open.focus();
+          });
+          const remove = document.createElement('button');
+          remove.type = 'button';
+          remove.textContent = (language() === 'en' ? 'Delete audio bookmark' : 'Eliminar marcador del audio');
+          remove.addEventListener('click', async () => {
+            await libraryAdapter.deleteMark({ id: mark.id });
+            await renderAudioMarks();
+            saveMark.focus();
+            markStatus.textContent = language() === 'en' ? 'Bookmark deleted.' : 'Marcador eliminado.';
+          });
+          item.append(open, remove);
+          list.append(item);
+        }
+      };
+      saveMark.addEventListener('click', async () => {
+        const offset = Math.max(0, Math.round((Number(audio.currentTime) || 0) * 1000));
+        const result = await libraryAdapter.addMark({
+          bookId: savedBook.id, type: 'bookmark', mediaTrackIndex: 0,
+          mediaPositionMs: offset, excerpt: savedBook.title, reference: formatAudioTime(offset / 1000)
+        });
+        if (result?.added) await renderAudioMarks();
+        markStatus.textContent = result?.added
+          ? (language() === 'en' ? 'Audio bookmark saved.' : 'Marcador del audio guardado.')
+          : (language() === 'en' ? 'Could not save the bookmark.' : 'No se pudo guardar el marcador.');
+        saveMark.focus();
+      });
+      audioMarks.append(saveMark, list, markStatus);
+      void renderAudioMarks();
+    }
     const resumeSeconds = Math.max(0, (Number(savedBook?.mediaPositionMs) || 0) / 1000);
     let lastPersistedAt = 0;
     let queuedSave = Promise.resolve();

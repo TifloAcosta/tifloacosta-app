@@ -1301,6 +1301,30 @@
     return audioTools;
   }
 
+  // The book reader and MP3 audiobook share the same screen but not the
+  // same controls. Never leave the document-only actions above a bare MP3.
+  function setReaderAudioOnlyMode(audioOnly) {
+    const controls = [
+      document.getElementById('reading-document-controls'),
+      els.searchForm, els.searchStatus, els.searchResults,
+      document.getElementById('reading-translation-web'),
+      els.save?.closest?.('.resource-actions'), els.markStatus
+    ].filter(Boolean);
+    for (const node of controls) {
+      if (audioOnly) {
+        if (node.dataset.readerPreviousHidden === undefined) {
+          node.dataset.readerPreviousHidden = String(node.hidden);
+        }
+        node.hidden = true;
+      } else if (node.dataset.readerPreviousHidden !== undefined) {
+        node.hidden = node.dataset.readerPreviousHidden === 'true';
+        delete node.dataset.readerPreviousHidden;
+      }
+    }
+    els.previous.hidden = !audioOnly;
+    els.next.hidden = !audioOnly;
+  }
+
   async function useMp3File(file) {
     await pause();
     setAccessiblePlaybackMode(false);
@@ -1321,6 +1345,7 @@
     els.title.textContent = file.name;
     els.reader.hidden = false;
     enterReaderOnlyView();
+    setReaderAudioOnlyMode(true);
     els.block.textContent = language() === 'en'
       ? 'MP3 audiobook ready to listen.'
       : 'Audiolibro MP3 listo para escuchar.';
@@ -1649,6 +1674,7 @@
     els.searchResults.replaceChildren();
     els.searchStatus.textContent = '';
     ensurePerDocumentControls();
+    setReaderAudioOnlyMode(false);
     if (els.navigationUnit) els.navigationUnit.value = readWebSettings().defaultNavigationMode || 'block';
     navigationUnit = els.navigationUnit?.value || 'block';
     currentUnitIndex = 0;

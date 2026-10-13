@@ -1943,7 +1943,10 @@
     });
     audio.addEventListener('ended', () => { if (!advancing) { advancing = true; void nextClip(); } });
     audio.addEventListener('play', () => updatePlaybackLabel(true));
-    audio.addEventListener('pause', () => updatePlaybackLabel(false));
+    audio.addEventListener('pause', () => {
+      updatePlaybackLabel(false);
+      void persistDaisyPosition({ force: true });
+    });
     const totalIsKnown = totalMs > 0;
     let startIndex = clipIndex;
     let startMs = resumeMs || clips[startIndex].clipBeginMs;

@@ -70,6 +70,8 @@ const requiredReaderFeatures = [
   'setupPronunciationDictionary()',
   'await useMp3File(savedAudio.blob',
   'persistActiveAudio = persistPosition',
+  'reading-audio-marks-controls',
+  'Marcar posición del audio',
   'setReaderAudioOnlyMode(true)',
   'setReaderAudioOnlyMode(false)',
   'libraryClient.listMarks(currentBookId)',

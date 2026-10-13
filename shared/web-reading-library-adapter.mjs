@@ -57,6 +57,7 @@ function openDatabase(indexedDB) {
 }
 
 function normalizeBook(value={}) {
+  if (!value || typeof value !== 'object') return null;
   const id = clean(value.id);
   if (!id) return null;
   return {

@@ -41,10 +41,20 @@ export function createContentStore({ fetchFn = globalThis.fetch, storage = globa
   async function load() {
     const cached = readCached(storage);
     try {
-      const response = await fetchFn(url, { cache: 'no-store' });
+      // The deployed JSON can be cached by a CDN even when WebKit requests no-store.
+      // A fresh query parameter forces a new feed lookup without changing its format.
+      const requestUrl = `${url}${url.includes('?') ? '&' : '?'}refresh=${Date.now()}`;
+      const response = await fetchFn(requestUrl, { cache: 'no-store' });
       if (!response?.ok) throw new Error(`Content request failed: ${response?.status || 'unknown'}`);
       const content = await response.json();
       if (!isValidContent(content)) throw new Error('Invalid mobile content schema');
+      const cachedDate = Date.parse(cached?.generatedAt || '');
+      const incomingDate = Date.parse(content?.generatedAt || '');
+      if (cached && Number.isFinite(cachedDate) &&
+          (!Number.isFinite(incomingDate) || incomingDate < cachedDate)) {
+        current = cached;
+        return { status: 'cached', content: cached };
+      }
       current = content;
       writeCached(storage, content);
       return { status: 'fresh', content };

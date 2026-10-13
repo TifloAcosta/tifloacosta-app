@@ -27,6 +27,7 @@ import { TifloReading } from './native/reading-library-plugin.mjs';
 import { TifloShare } from './native/share-plugin.mjs';
 import { TifloWebFetch, fetchSharedPage } from './native/web-fetch-plugin.mjs';
 import { renderHome } from './screens/home.mjs';
+import { renderGuide } from './screens/guide.mjs';
 import { renderNewContent } from './screens/new-content.mjs';
 import { renderActualidad } from './screens/actualidad.mjs';
 import { renderSearch } from './screens/search.mjs';
@@ -480,6 +481,7 @@ function render(route) {
     preferences,
     favoritesStore,
     nativeActions,
+    onRefreshContent: () => refreshMobileContent(),
     notificationService,
     appInfo,
     t,
@@ -492,6 +494,7 @@ function render(route) {
 
   switch (route.name) {
     case 'home': renderHome(context); break;
+    case 'guide': renderGuide(context); break;
     case 'new-content': renderNewContent(context); break;
     case 'actualidad': {
       renderActualidad({
@@ -726,7 +729,7 @@ function refreshMobileContent() {
     const currentTimestamp = Date.parse(currentContent?.generatedAt || '');
     const incomingTimestamp = Date.parse(incoming?.generatedAt || '');
     if (result.status === 'cached' && Number.isFinite(currentTimestamp) &&
-        (!Number.isFinite(incomingTimestamp) || incomingTimestamp < currentTimestamp)) return;
+        (!Number.isFinite(incomingTimestamp) || incomingTimestamp < currentTimestamp)) return result;
     const changed = JSON.stringify(currentContent) !== JSON.stringify(incoming);
     currentContent = incoming;
     currentNewNewsIds = newsSeenStore.compare(currentContent.news);
@@ -742,8 +745,10 @@ function refreshMobileContent() {
         });
       }
     }
+    return result;
   }).catch(() => {
     // An offline refresh must not discard the content already on screen.
+    return { status: 'error', content: currentContent };
   }).finally(() => {
     contentRefreshPending = null;
     void notificationCoordinator.markReady();

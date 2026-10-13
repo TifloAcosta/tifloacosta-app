@@ -91,6 +91,8 @@
     queueList: $('#reading-queue-list'),
     marksHeading: $('#reading-marks-heading'),
     marksIntro: $('#reading-marks-intro'),
+    marksType: $('#reading-marks-new-type'),
+    marksAdd: $('#reading-marks-add'),
     marksStatus: $('#reading-marks-status'),
     marksList: $('#reading-marks-list')
   };
@@ -2493,7 +2495,7 @@
     await renderQueue();
   }
 
-  async function addBookmark() {
+  async function addBookmark(type = 'bookmark') {
     if (!libraryClient || !currentBookId || !readingSession) {
       els.markStatus.textContent = t().bookmarkFailed;
       return;
@@ -2502,7 +2504,7 @@
     const block = readingSession.current();
     const mark = await libraryClient.addMark({
       bookId: currentBookId,
-      type: 'bookmark',
+      type: ['bookmark', 'important', 'review', 'quote'].includes(type) ? type : 'bookmark',
       blockIndex: snapshot.blockIndex,
       unitIndex: 0,
       excerpt: String(block?.text || '').slice(0, 220),
@@ -2514,11 +2516,12 @@
 
   async function renderMarks() {
     els.marksList.replaceChildren();
+    if (els.marksAdd) els.marksAdd.disabled = !libraryClient || !currentBookId || !readingSession;
     if (!libraryClient || !currentBookId) {
       els.marksStatus.textContent = t().marksEmpty;
       return;
     }
-    const marks = await libraryClient.listMarks(currentBookId, 'bookmark');
+    const marks = await libraryClient.listMarks(currentBookId);
     if (!marks.length) {
       els.marksStatus.textContent = t().marksEmpty;
       return;
@@ -2528,13 +2531,21 @@
       const card = document.createElement('section');
       card.className = 'resource-card';
       const excerpt = document.createElement('p');
-      excerpt.textContent = mark.excerpt || mark.reference || t().bookmark;
+      const kind = {
+        bookmark: language() === 'en' ? 'Bookmark' : 'Marcador',
+        important: language() === 'en' ? 'Important' : 'Importante',
+        review: language() === 'en' ? 'Review later' : 'Revisar después',
+        quote: language() === 'en' ? 'Quote' : 'Cita'
+      };
+      excerpt.textContent = (kind[mark.type] || kind.bookmark) + '. ' + (mark.excerpt || mark.reference || '');
       const actions = document.createElement('div');
       actions.className = 'resource-actions';
       const open = document.createElement('button');
       open.type = 'button';
       open.textContent = t().markOpen;
       open.addEventListener('click', () => {
+        returnToReadingMainFromSubview();
+        enterReaderOnlyView();
         readingSession = shared.createReadingSession({
           blocks: documentModel.blocks,
           initialIndex: mark.blockIndex
@@ -3252,6 +3263,7 @@
     void renderLibrary().then(() => { if (!els.libraryPager?.hidden) els.libraryPageStatus?.focus({ preventScroll: true }); });
   });
   els.bookmark.addEventListener('click', () => { void addBookmark(); });
+  els.marksAdd?.addEventListener('click', () => { void addBookmark(els.marksType?.value || 'bookmark'); });
   els.queueToggle.addEventListener('click', () => { void toggleQueue(); });
 
   document.getElementById('lang-es')?.addEventListener('click', () => setTimeout(localize, 0));

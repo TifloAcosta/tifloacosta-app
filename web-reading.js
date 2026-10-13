@@ -75,6 +75,10 @@
     libraryQuery: $('#reading-library-query'),
     libraryStatus: $('#reading-library-status'),
     libraryList: $('#reading-library-list'),
+    libraryPager: $('#reading-library-pager'),
+    libraryPageStatus: $('#reading-library-page-status'),
+    libraryPrevPage: $('#reading-library-prev-page'),
+    libraryNextPage: $('#reading-library-next-page'),
     pdfPasswordWrap: $('#reading-pdf-password-wrap'),
     pdfPasswordLabel: $('#reading-pdf-password-label'),
     pdfPassword: $('#reading-pdf-password'),
@@ -337,6 +341,7 @@
   let sentenceUnits = [];
   let currentUnitIndex = 0;
   let fileImportInProgress = false;
+  let libraryPage = 1;
   let playbackAccessibilityState = null;
   let activeAudio = null;
   let audioObjectUrl = '';
@@ -2618,6 +2623,7 @@
 
   async function renderLibrary() {
     els.libraryList.replaceChildren();
+    if (els.libraryPager) els.libraryPager.hidden = true;
     if (!libraryClient) {
       els.libraryStatus.textContent = t().libraryUnavailable;
       return;
@@ -2656,18 +2662,37 @@
       const isQueueView = libraryView === 'queue';
       const isRecentView = libraryView === 'recent';
       const status = ['in-reading','not-read','read'].includes(libraryView) ? libraryView : 'all';
+      const pageSize = 30;
+      const filteredQueue = isQueueView
+        ? (await libraryClient.listQueue()).filter(book =>
+            !query || (book.title + ' ' + (book.author || '')).toLocaleLowerCase().includes(query.toLocaleLowerCase()))
+        : null;
       const page = isQueueView
-        ? { items: (await libraryClient.listQueue()).filter(book =>
-            !query || (book.title + ' ' + (book.author || '')).toLocaleLowerCase().includes(query.toLocaleLowerCase())) }
+        ? {
+            items: filteredQueue.slice((libraryPage - 1) * pageSize, libraryPage * pageSize),
+            total: filteredQueue.length,
+            pages: Math.ceil(filteredQueue.length / pageSize)
+          }
         : await libraryClient.listBooks({
-            page: 1, pageSize: 100, query, status,
+            page: libraryPage, pageSize, query, status,
             sort: isRecentView ? 'imported' : 'lastRead'
           });
+      if (!page.items.length && libraryPage > 1) {
+        libraryPage = Math.max(1, Math.min(libraryPage - 1, page.pages || 1));
+        return renderLibrary();
+      }
       if (!page.items.length) {
         els.libraryStatus.textContent = t().libraryEmpty;
         return;
       }
       els.libraryStatus.textContent = '';
+      const pages = Math.max(1, Number(page.pages) || 1);
+      if (els.libraryPager) els.libraryPager.hidden = pages <= 1;
+      if (els.libraryPageStatus) els.libraryPageStatus.textContent = language() === 'en'
+        ? `Page ${libraryPage} of ${pages}. ${Number(page.total) || 0} documents.`
+        : `Página ${libraryPage} de ${pages}. ${Number(page.total) || 0} documentos.`;
+      if (els.libraryPrevPage) els.libraryPrevPage.disabled = libraryPage <= 1;
+      if (els.libraryNextPage) els.libraryNextPage.disabled = libraryPage >= pages;
 
       for (const book of page.items) {
         const card = document.createElement('section');
@@ -3210,8 +3235,18 @@
   els.translationTarget.addEventListener('change', resetTranslationSelection);
   els.save.addEventListener('click', () => { void saveCurrentDocument(); });
   els.libraryRefresh.addEventListener('click', () => { void Promise.all([renderLibrary(), renderQueue(), renderMarks()]); });
-  els.libraryFilter?.addEventListener('change', () => { void renderLibrary(); });
-  els.libraryQuery?.addEventListener('input', () => { void renderLibrary(); });
+  els.libraryFilter?.addEventListener('change', () => { libraryPage = 1; void renderLibrary(); });
+  els.libraryQuery?.addEventListener('input', () => { libraryPage = 1; void renderLibrary(); });
+  els.libraryPrevPage?.addEventListener('click', () => {
+    if (libraryPage <= 1) return;
+    libraryPage -= 1;
+    void renderLibrary().then(() => els.libraryPageStatus?.focus({ preventScroll: true }));
+  });
+  els.libraryNextPage?.addEventListener('click', () => {
+    if (els.libraryNextPage.disabled) return;
+    libraryPage += 1;
+    void renderLibrary().then(() => els.libraryPageStatus?.focus({ preventScroll: true }));
+  });
   els.bookmark.addEventListener('click', () => { void addBookmark(); });
   els.queueToggle.addEventListener('click', () => { void toggleQueue(); });
 

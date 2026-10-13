@@ -369,6 +369,14 @@
       <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
       <h3 id="reading-marks-heading" tabindex="-1">Marcadores</h3>
       <p id="reading-marks-intro">Guarda puntos de lectura del documento abierto para volver a ellos más tarde.</p>
+      <label for="reading-marks-new-type">Tipo de marca</label>
+      <select id="reading-marks-new-type">
+        <option value="bookmark">Marcador</option>
+        <option value="important">Importante</option>
+        <option value="review">Revisar después</option>
+        <option value="quote">Cita</option>
+      </select>
+      <button type="button" id="reading-marks-add">Guardar marca en la posición actual</button>
       <p id="reading-marks-status" class="muted" role="status" aria-live="polite"></p>
       <div id="reading-marks-list" class="resource-list"></div>
       <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>

@@ -110,9 +110,14 @@ const nativeAccessibleDocumentActions = await stat(
   join(root, 'ios-build/native/TifloReadingAccessibilityPlugin.swift')
 ).then(() => true, () => false);
 if (!daisyZipSupported || !nativeAccessibleDocumentActions) {
-  throw new Error('BLOQUEO PREVENTIVO iOS: lector web antiguo incompleto. Falta importar DAISY ZIP'
+  // Diagnostic unsigned builds may compile native Swift, but NEVER publish an IPA.
+  // The TestFlight workflow does not opt in to this bypass.
+  if (process.env.TIFLO_IOS_AUDIT_UNSIGNED !== '1') {
+    throw new Error('BLOQUEO PREVENTIVO iOS: lector web antiguo incompleto. Falta importar DAISY ZIP'
     + ' y/o integrar acciones nativas de documentos para VoiceOver. Se prohíbe publicar'
     + ' otra compilación que resucite TifloLector anterior. Ver issue #170.');
+  }
+  console.warn('DIAGNÓSTICO iOS SIN FIRMA: se omite SOLO el bloqueo de aceptación DAISY/VoiceOver. PROHIBIDO DISTRIBUIR.');
 }
 console.log('Prechequeos de estructura, DAISY y accesibilidad completados; queda validación real en dispositivo.');
 

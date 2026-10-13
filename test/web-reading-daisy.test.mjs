@@ -37,7 +37,8 @@ test('iOS ZIP importer distinguishes DAISY text from unsupported audio-only DAIS
   assert.match(web, /shared\.parseDaisyArchive/);
   assert.match(web, /format === 'daisy2\.02' \|\| format === 'daisy3'/);
   assert.match(web, /daisy-audio-only/);
-  assert.match(web, /audioUnavailable/);
+  assert.match(web, /daisyPackage/);
+  assert.match(web, /useDaisyAudioFile/);
   assert.match(entry, /web-reading-daisy-adapter/);
   assert.match(library, /'daisy2\.02','daisy3'/);
   assert.match(build, /BLOQUEO PREVENTIVO iOS/);

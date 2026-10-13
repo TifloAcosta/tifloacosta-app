@@ -115,6 +115,7 @@ export async function parseDaisyArchive(zip, options = {}) {
   const navigation = (isDaisy2 ? navFromNcc(document) : navFromNcx(document))
     .map(item => ({
       ...item,
+      smilId: String(item.href || '').split('#')[1] || '',
       href: mediaPath(navFile, item.href)
     })).filter(item => item.href);
   if (!navigation.length) fail();
@@ -122,6 +123,7 @@ export async function parseDaisyArchive(zip, options = {}) {
     .filter(path => /\.smil$/iu.test(path)))];
   const textPaths = [];
   const mediaSyncReferences = [];
+  const audioClips = [];
   let containsAudio = false;
   for (const smilPath of smilPaths) {
     const source = await findEntry(zip, smilPath)?.file?.async('string');
@@ -136,6 +138,18 @@ export async function parseDaisyArchive(zip, options = {}) {
       const audioPath = mediaPath(smilPath, sourceAudio);
       if (textPath && !textPaths.includes(textPath)) textPaths.push(textPath);
       if (audioPath) containsAudio = true;
+      if (audioPath) {
+        if (!/\.(?:mp3|m4a|aac|mp4)$/iu.test(audioPath) || !findEntry(zip, audioPath)) {
+          fail('daisy-missing-resource');
+        }
+        const begin = daisyClockMs(audioItem.getAttribute('clip-begin') || audioItem.getAttribute('clipBegin'));
+        const end = daisyClockMs(audioItem.getAttribute('clip-end') || audioItem.getAttribute('clipEnd'));
+        if (end && end < begin) fail('invalid-daisy');
+        audioClips.push({
+          smilPath, smilId: String(pair.getAttribute?.('id') || ''),
+          audioHref: audioPath, textHref: textPath, clipBeginMs: begin, clipEndMs: end
+        });
+      }
       if (textPath && audioPath) mediaSyncReferences.push({
         textHref: textPath, audioHref: audioPath,
         clipBeginMs: daisyClockMs(audioItem.getAttribute('clip-begin') || audioItem.getAttribute('clipBegin')),
@@ -168,13 +182,19 @@ export async function parseDaisyArchive(zip, options = {}) {
       ...block, id: 'daisy-' + (blocks.length + index + 1)
     })));
   }
-  if (!blocks.length) fail(containsAudio ? 'daisy-audio-only' : 'daisy-no-text');
+  if (!blocks.length && !audioClips.length) fail('daisy-no-text');
+  if (!blocks.length) {
+    for (const [index, item] of navigation.entries()) {
+      blocks.push({ id: 'daisy-audio-' + index, type: 'heading',
+        level: item.level, text: item.label });
+    }
+  }
   return {
     title: String(options.title || ''),
     language: String(options.language || ''),
     format: isDaisy2 ? 'daisy2.02' : 'daisy3',
     blocks, navigation,
-    mediaSyncReferences,
-    audioUnavailable: containsAudio
+    mediaSyncReferences, audioClips,
+    audioUnavailable: false, containsAudio
   };
 }

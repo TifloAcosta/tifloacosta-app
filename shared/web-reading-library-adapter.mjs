@@ -1,7 +1,8 @@
 import { listWebTtsVoices } from './web-reading-speech-adapter.mjs';
 
 const DB_NAME = 'tifloacosta-reading-web';
-const DB_VERSION = 1;
+// Incremental schema migration: preserve existing books, marks, settings and derivatives.
+const DB_VERSION = 2;
 const BOOK_STATES = new Set(['not-read', 'in-reading', 'read']);
 const MARK_TYPES = new Set(['bookmark', 'important', 'review', 'quote']);
 
@@ -48,6 +49,7 @@ function openDatabase(indexedDB) {
       if (!db.objectStoreNames.contains('marks')) db.createObjectStore('marks', { keyPath: 'id' });
       if (!db.objectStoreNames.contains('settings')) db.createObjectStore('settings', { keyPath: 'key' });
       if (!db.objectStoreNames.contains('derived')) db.createObjectStore('derived', { keyPath: 'key' });
+      if (!db.objectStoreNames.contains('media')) db.createObjectStore('media', { keyPath: 'id' });
     };
     request.onsuccess = () => resolve(request.result);
     request.onerror = () => reject(request.error || new Error('IndexedDB open failed'));
@@ -159,6 +161,38 @@ export function createWebReadingLibraryAdapter({
     return { ...book, content: undefined };
   }
 
+  // Store real binary data in IndexedDB, never a temporary object: URL or a
+  // base64-encoded string. Older document records are preserved unchanged.
+  async function importAudioFile({ file, title = '', language = '' } = {}) {
+    if (typeof Blob === 'undefined' || !(file instanceof Blob) ||
+        !file.size || !/^audio\/(mpeg|mp3)$/i.test(file.type || 'audio/mpeg')) return null;
+    const book = normalizeBook({
+      id: createId('web-audio'), title: clean(title) || 'Audiolibro MP3',
+      language, format: 'audio', state: 'not-read',
+      sizeBytes: file.size, importedAt: now(), content: ''
+    });
+    // Write the media first. A failure must not insert an unplayable library row.
+    await put('media', { id: book.id, blob: file.slice(0, file.size, 'audio/mpeg'), mime: 'audio/mpeg' });
+    try {
+      await put('books', book);
+    } catch (error) {
+      await remove('media', book.id).catch(() => {});
+      throw error;
+    }
+    const { content, ...metadata } = book;
+    return metadata;
+  }
+
+  async function openAudioFile(id) {
+    const book = normalizeBook(await get('books', clean(id)));
+    if (!book || book.format !== 'audio') return null;
+    const media = await get('media', book.id);
+    if (typeof Blob === 'undefined' || !(media?.blob instanceof Blob) || !media.blob.size) return null;
+    const { content, ...metadata } = book;
+    activeBookId = book.id;
+    return { book: metadata, blob: media.blob };
+  }
+
   async function listBooks(options={}) {
     const query = clean(options.query).toLocaleLowerCase();
     const status = clean(options.status) || 'all';
@@ -222,6 +256,7 @@ export function createWebReadingLibraryAdapter({
     const bookId = clean(id);
     if (!bookId) return { deleted: false };
     await remove('books', bookId);
+    await remove('media', bookId);
     for (const mark of await all('marks')) if (mark.bookId === bookId) await remove('marks', mark.id);
     for (const item of await all('derived')) if (item.bookId === bookId) await remove('derived', item.key);
     if (activeBookId === bookId) activeBookId = '';
@@ -403,6 +438,8 @@ export function createWebReadingLibraryAdapter({
 
   return {
     importDocument,
+    importAudioFile,
+    openAudioFile,
     listBooks,
     openBook,
     saveProgress,

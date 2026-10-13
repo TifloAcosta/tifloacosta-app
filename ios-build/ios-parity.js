@@ -292,7 +292,7 @@
     const storageSet = (key, value) => {
       try { window.localStorage?.setItem(key, value); } catch {}
     };
-    const validUnits = ['block', 'paragraph', 'sentence'];
+    const validUnits = ['block', 'paragraph', 'sentence', 'heading', 'mainHeading', 'listItem', 'quote', 'tableCell'];
     const globalUnitKey = 'tiflo-ios-default-reading-unit-v1';
     const overrideKey = 'tiflo-ios-document-units-v1';
     function globalUnit() {
@@ -353,7 +353,10 @@
       select.id = 'ios-reading-default-unit';
       for (const [value, es, en] of [
         ['block', 'Bloque', 'Block'], ['paragraph', 'Párrafo', 'Paragraph'],
-        ['sentence', 'Frase', 'Sentence']
+        ['sentence', 'Frase', 'Sentence'], ['heading', 'Encabezado', 'Heading'],
+        ['mainHeading', 'Encabezado principal', 'Main heading'],
+        ['listItem', 'Elemento de lista', 'List item'],
+        ['quote', 'Cita', 'Quote'], ['tableCell', 'Celda de tabla', 'Table cell']
       ]) {
         const option = document.createElement('option');
         option.value = value;

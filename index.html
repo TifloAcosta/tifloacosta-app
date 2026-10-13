@@ -211,7 +211,7 @@
           <option value="tableCell">Celda de tabla</option>
         </select>
         <button id="reading-formats-toggle" type="button" aria-expanded="false" aria-controls="reading-formats-list">Consultar formatos admitidos</button>
-    <p id="reading-formats-list" hidden>TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 e imágenes PNG, JPG y WebP mediante OCR.</p>
+    <p id="reading-formats-list" hidden>TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 y DAISY ZIP con texto, e imágenes PNG, JPG y WebP mediante OCR. El audio DAISY sincronizado todavía no está disponible.</p>
       </details>
       <p id="reading-settings-status" class="muted" role="status" aria-live="polite"></p>
       </section>
@@ -620,7 +620,7 @@
 <script type="module">
   import * as shared from './shared/web-entry.mjs?v=1.7';
   window.TIFLO_SHARED = shared;
-  await import('./web-reading.js?v=3.18');
+  await import('./web-reading.js?v=3.19');
 </script>
 <script src="app.js?v=2.3"></script>
 <script>

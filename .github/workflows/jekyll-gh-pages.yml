@@ -55,6 +55,8 @@ jobs:
         run: node scripts/sync-actualidad-media.mjs
       - name: Build mobile content feed
         run: node scripts/build-mobile-content.mjs
+      - name: Comprobar que Novedades iOS y web comparten las publicaciones recientes
+        run: node --test test/featured-news.test.mjs
       - name: Build video search index
         run: node scripts/build-video-search-index.mjs
       - name: Setup Pages

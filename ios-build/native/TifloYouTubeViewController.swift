@@ -11,6 +11,7 @@ class ViewController: CAPBridgeViewController {
         bridge?.registerPluginInstance(TifloYouTubePlugin())
         bridge?.registerPluginInstance(TifloReadingTtsPlugin())
         bridge?.registerPluginInstance(TifloReadingLanguagePlugin())
+        bridge?.registerPluginInstance(TifloReadingAccessibilityPlugin())
     }
 }
 

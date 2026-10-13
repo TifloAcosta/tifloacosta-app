@@ -20,6 +20,9 @@ test('web reader exposes accessible translation controls', async () => {
   ]) {
     assert.ok(html.includes(`id="${id}"`), `Missing translation control ${id}`);
   }
+  for (const id of ['reading-translation-export-txt', 'reading-translation-export-html']) {
+    assert.ok(html.includes('id="' + id + '"'));
+  }
   assert.ok(html.includes('aria-live="polite"'));
   assert.ok(html.includes('aria-pressed="true"'));
 });
@@ -66,4 +69,15 @@ test('privacy policy explains local translation behavior on web and Android', as
   assert.ok(policy.includes('no envía el texto del documento a un servicio de traducción propio'));
   assert.ok(policy.includes('Translation and OCR use local capabilities of the browser or device'));
   assert.ok(policy.includes('does not send document text or document images to its own translation or OCR service'));
+});
+
+
+test('translated exports are available only after completion, preserving the original', async () => {
+  const source = await read('web-reading.js');
+  assert.match(source, /function exportCompletedTranslation\(format\)/);
+  assert.match(source, /translationJob\?\.getState\?\.\(\)\?\.status === 'complete'/);
+  assert.match(source, /accessibleTextFromModel\(translationDocument\)/);
+  assert.match(source, /accessibleHtmlFromModel\(translationDocument, title\)/);
+  assert.match(source, /translationExportTxt\?\.addEventListener/);
+  assert.match(source, /translationExportHtml\?\.addEventListener/);
 });

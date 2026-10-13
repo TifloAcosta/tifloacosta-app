@@ -73,3 +73,20 @@ test('current news uses resource incorporation dates instead of fixed ids', asyn
     assert.deepEqual(selected.map(item => Date.parse(item.newsDate)), expectedDates);
   }
 });
+
+test('web catalogue retains every recent mobile publication used by iOS', async () => {
+  const [catalogSource, mobileSource] = await Promise.all([
+    read('data.js'),
+    read('mobile-content.json')
+  ]);
+  const context = { window: {} };
+  vm.runInNewContext(catalogSource, context);
+  const published = new Map(context.window.TIFLO_RESOURCES.map(item => [item.id, item]));
+  const mobile = JSON.parse(mobileSource);
+  for (const article of mobile.resources.filter(item => item.isNew === true)) {
+    const resource = published.get(article.id);
+    assert.ok(resource, 'Missing published novelty: ' + article.id);
+    assert.equal(resource.new, true, 'Novelty flag missing: ' + article.id);
+    assert.equal(resource.newsDate, article.newsDate, 'Publication date mismatch: ' + article.id);
+  }
+});

@@ -140,3 +140,42 @@ test('packaged reader supports direct MP3 reopening and precise bookmark-free re
   assert.match(store, /await remove\('media', bookId\)/);
   assert.match(build, /BLOQUEO PREVENTIVO iOS/);
 });
+
+
+test('DAISY compressed archive survives relaunch with exact SMIL index/time and without losing original documents', async () => {
+  const db = memoryDatabase({
+    books:[{id:'old-document',title:'Anterior',format:'txt',content:'No borrar'}],
+    marks:[{id:'old-mark',bookId:'old-document',type:'bookmark'}],
+    derived:[{key:'old-translation',bookId:'old-document',content:'Hola'}],
+    settings:[{key:'general',value:'persist'}]
+  });
+  const first = createWebReadingLibraryAdapter({ indexedDB: db, now:()=>5000 });
+  const compressed = new Blob([Uint8Array.from([80,75,3,4,1,2,3,4])], {type:'application/zip'});
+  const stored = await first.importDaisyArchive({file:compressed,title:'Un DAISY',language:'es',format:'daisy2.02'});
+  assert.equal(stored.format, 'daisy2.02');
+  assert.equal(stored.sizeBytes, 8);
+  assert.equal((await first.openBook(stored.id)).content, '');
+  assert.deepEqual(await first.saveProgress({
+    id:stored.id,mediaTrackIndex:4,mediaPositionMs:188250,percent:37.5,state:'in-reading'
+  }),{saved:true});
+  const mark = await first.addMark({
+    bookId:stored.id,type:'bookmark',mediaTrackIndex:4,mediaPositionMs:188250,
+    reference:'Segmento 5, 3:08'
+  });
+  assert.equal(mark.added,true);
+  const second = createWebReadingLibraryAdapter({ indexedDB:db });
+  const opened = await second.openDaisyArchive(stored.id);
+  assert.equal(opened.book.mediaTrackIndex,4);
+  assert.equal(opened.book.mediaPositionMs,188250);
+  assert.equal(opened.book.percent,37.5);
+  assert.deepEqual(new Uint8Array(await opened.blob.arrayBuffer()),
+    new Uint8Array(await compressed.arrayBuffer()));
+  assert.equal((await second.listMarks({bookId:stored.id}))[0].mediaTrackIndex,4);
+  assert.equal((await second.openBook('old-document')).content,'No borrar');
+  assert.equal(db.stores.get('derived').size,1);
+  assert.deepEqual(await second.deleteBook(stored.id), {deleted:true});
+  assert.equal(await second.openDaisyArchive(stored.id),null);
+  assert.equal((await second.listMarks({bookId:stored.id})).length,0);
+  assert.equal((await second.openBook('old-document')).content,'No borrar');
+  assert.equal(db.stores.get('derived').size,1);
+});

@@ -15,7 +15,9 @@ const workflow = read('.github/workflows/ios-testflight.yml');
 
 test('iOS production retains a single non-autopublishing upload workflow', () => {
   assert.match(workflow, /on:\s*\n\s+workflow_dispatch:/);
-  assert.doesNotMatch(workflow.slice(0, workflow.indexOf('permissions:')), /\n\s+push:/);
+  // Only the explicit, isolated internal canary branch may launch a beta.
+  assert.match(workflow, /push:\s*\n\s+branches: \[release\/ios-tiflolector-interno-20261013\]/);
+  assert.doesNotMatch(workflow.slice(0, workflow.indexOf('permissions:')), /branches: \[(?!release\/ios-tiflolector-interno-20261013)/);
 });
 
 test('reader import accepts MP3 and the play/pause button is one control', () => {

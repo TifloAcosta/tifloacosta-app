@@ -94,6 +94,7 @@
     marksHeading: $('#reading-marks-heading'),
     marksIntro: $('#reading-marks-intro'),
     marksType: $('#reading-marks-new-type'),
+    marksNote: $('#reading-marks-note'),
     marksAdd: $('#reading-marks-add'),
     marksStatus: $('#reading-marks-status'),
     marksList: $('#reading-marks-list')
@@ -1979,6 +1980,20 @@
         : document.createElement('p');
       element.textContent = text;
       els.block.append(element);
+      // For visual readers, an Important mark highlights its entire passage.
+      // Do not move the VoiceOver focus when the asynchronous marks lookup ends.
+      if (currentBookId && libraryAdapter?.listMarks) {
+        const bookId = currentBookId;
+        const blockIndex = readingSession.snapshot().blockIndex;
+        void libraryAdapter.listMarks({ bookId, type: 'important' }).then(marks => {
+          if (bookId !== currentBookId || !readingSession ||
+              readingSession.snapshot().blockIndex !== blockIndex ||
+              !element.isConnected || !marks.some(mark => mark.blockIndex === blockIndex)) return;
+          const highlight = document.createElement('mark');
+          highlight.textContent = text;
+          element.replaceChildren(highlight);
+        }).catch(() => {});
+      }
     }
     renderPosition();
   }
@@ -3221,14 +3236,21 @@
     }
     const snapshot = readingSession.snapshot();
     const block = readingSession.current();
-    const mark = await libraryClient.addMark({
+    const note = String(els.marksNote?.value || '').trim();
+    const request = {
       bookId: currentBookId,
       type: ['bookmark', 'important', 'review', 'quote'].includes(type) ? type : 'bookmark',
       blockIndex: snapshot.blockIndex,
       unitIndex: 0,
       excerpt: String(block?.text || '').slice(0, 220),
-      reference: t().position(snapshot.blockIndex + 1, documentModel?.blocks?.length || 0)
-    });
+      reference: t().position(snapshot.blockIndex + 1, documentModel?.blocks?.length || 0),
+      note
+    };
+    const mark = note && libraryAdapter?.addMark
+      ? (await libraryAdapter.addMark(request))?.mark
+      : await libraryClient.addMark(request);
+    if (mark && els.marksNote) els.marksNote.value = '';
+    if (mark && request.type === 'important') renderBlock();
     els.markStatus.textContent = mark ? t().bookmarked : t().bookmarkFailed;
     if (mark) await renderMarks();
     const marksView = document.getElementById('reading-marks-web');
@@ -3244,7 +3266,9 @@
       els.marksStatus.textContent = t().marksEmpty;
       return;
     }
-    const marks = await libraryClient.listMarks(currentBookId);
+    const marks = libraryAdapter?.listMarks
+      ? await libraryAdapter.listMarks({ bookId: currentBookId })
+      : await libraryClient.listMarks(currentBookId);
     if (!marks.length) {
       els.marksStatus.textContent = t().marksEmpty;
       return;
@@ -3288,8 +3312,33 @@
           await renderMarks();
         })();
       });
+      const noteLabel = document.createElement('label');
+      const noteEdit = document.createElement('textarea');
+      const editId = 'reading-edit-note-' + mark.id.replace(/[^a-zA-Z0-9_-]/g, '-');
+      noteEdit.id = editId;
+      noteEdit.rows = 2;
+      noteEdit.maxLength = 4000;
+      noteEdit.value = String(mark.note || '');
+      noteLabel.htmlFor = editId;
+      noteLabel.textContent = language() === 'en' ? 'Note for this passage' : 'Nota para este fragmento';
+      const saveNote = document.createElement('button');
+      saveNote.type = 'button';
+      saveNote.textContent = language() === 'en' ? 'Save note' : 'Guardar nota';
+      const noteStatus = document.createElement('p');
+      noteStatus.setAttribute('role', 'status');
+      saveNote.addEventListener('click', () => {
+        void (async () => {
+          const result = await libraryAdapter?.updateMark?.({
+            id: mark.id, bookId: currentBookId, note: noteEdit.value
+          });
+          noteStatus.textContent = result?.updated
+            ? (language() === 'en' ? 'Note saved.' : 'Nota guardada.')
+            : (language() === 'en' ? 'Could not save note.' : 'No se pudo guardar la nota.');
+          saveNote.focus();
+        })();
+      });
       actions.append(open, remove);
-      card.append(excerpt, actions);
+      card.append(excerpt, noteLabel, noteEdit, saveNote, noteStatus, actions);
       els.marksList.append(card);
     }
   }

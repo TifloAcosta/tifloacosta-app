@@ -33,6 +33,27 @@
   const libraryIntro = document.getElementById('reading-library-intro');
   if (libraryIntro) libraryIntro.hidden = true;
 
+  // Keep "Buscar más voces" alongside the voice selector, closed until
+  // explicitly requested. Do not add a second top-level reader control.
+  const moreVoices = document.getElementById('reading-more-voices-settings');
+  const voiceStatus = document.getElementById('reading-voice-status');
+  if (moreVoices && voiceStatus) {
+    const voiceDetails = document.createElement('details');
+    voiceDetails.id = 'ios-reading-more-voices';
+    const voiceSummary = document.createElement('summary');
+    voiceSummary.textContent = tr('Buscar más voces', 'Find more voices');
+    voiceDetails.append(voiceSummary);
+    moreVoices.querySelector('h4')?.setAttribute('hidden', '');
+    voiceDetails.append(moreVoices);
+    voiceStatus.after(voiceDetails);
+    document.getElementById('lang-es')?.addEventListener('click', () => {
+      voiceSummary.textContent = 'Buscar más voces';
+    });
+    document.getElementById('lang-en')?.addEventListener('click', () => {
+      voiceSummary.textContent = 'Find more voices';
+    });
+  }
+
   // The existing persistent library remains the source of truth. Only this
   // presentation and the sort criterion change in the iOS package.
   const sortLabel = document.createElement('label');

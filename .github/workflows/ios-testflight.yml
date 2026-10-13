@@ -69,7 +69,23 @@ jobs:
           node --check www/app.js
           node --check www/videos.js
           node --check www/actualidad-media.js
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import assert from 'node:assert/strict';
+          const identity = JSON.parse(fs.readFileSync('www/tiflo-build-identity.json', 'utf8'));
+          assert.equal(identity.sourceSha, process.env.GITHUB_SHA);
+          assert.equal(identity.buildCode, String(300000 + Number(process.env.GITHUB_RUN_NUMBER)));
+          assert.equal(identity.reader, 'web-reading.js');
+          const reader = fs.readFileSync('www/web-reading.js', 'utf8');
+          for (const marker of ['useDaisyAudioFile(', 'persistDaisyPosition(', 'ensureNativeLibraryActions(']) {
+            assert.ok(reader.includes(marker), 'Missing TifloLector recovery '+marker);
+          }
+          console.log('TifloLector iOS source confirmed: '+identity.sourceSha.slice(0,12)+
+            '; build '+identity.buildCode);
+          NODE
           npx cap add ios
+          test -s ios/App/App/public/tiflo-build-identity.js
+          test -s ios/App/App/public/shared/web-reading-daisy-adapter.mjs
           node install-native-video.mjs
           grep -q 'registerPluginInstance(TifloYouTubePlugin())' ios/App/App/AppDelegate.swift
           ruby configure-ios-compliance.rb

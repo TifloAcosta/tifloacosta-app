@@ -77,6 +77,18 @@ test('the accessible guide is reachable before navigation and remains available 
   assert.match(worker, /tifloacosta-guide\.js/);
 });
 
+test('the iOS bundler rejects accidental loss of restored reader features', () => {
+  const prepare = read('ios-build/prepare-web.mjs');
+  for (const token of [
+    'reading-library-filter', 'reading-library-query', 'reading-library-pager',
+    'reading-marks-new-type', 'shared.adjacentWebReadingStructure(',
+    'setReaderAudioOnlyMode(true)', 'setReaderAudioOnlyMode(false)',
+    'card.append(title, detailsToggle, details)', 'tifloacosta-guide.js'
+  ]) assert.ok(prepare.includes(token), 'Missing package safeguard: ' + token);
+  assert.match(prepare, /readerSection\.includes\('id="reading-pause"'\)/);
+  assert.match(prepare, /BLOQUEO PREVENTIVO iOS/);
+});
+
 // Still blocked by prepare-web.mjs and issue #170:
 // * DAISY ZIP import / SMIL navigation;
 // * UIAccessibilityCustomAction on each VoiceOver-focused document title;

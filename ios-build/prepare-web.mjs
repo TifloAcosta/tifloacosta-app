@@ -235,7 +235,7 @@ const commitSha = String(process.env.GITHUB_SHA ||
 if (!/^[a-f0-9]{40}$/iu.test(commitSha)) throw new Error('No se puede identificar la revisión de código iOS');
 const runNumber = Number(process.env.GITHUB_RUN_NUMBER);
 const buildCode = Number.isInteger(runNumber) && runNumber >= 0
-  ? String(300000 + runNumber) : 'desarrollo';
+  ? String(400000 + runNumber) : 'desarrollo';
 const buildIdentity = { sourceSha: commitSha, buildCode, reader: 'web-reading.js',
   schema: 'tiflolector-ios-reader-2' };
 await writeFile(join(output, 'tiflo-build-identity.json'), JSON.stringify(buildIdentity, null, 2));

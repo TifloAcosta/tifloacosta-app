@@ -194,6 +194,37 @@ export function createWebReadingLibraryAdapter({
     return { book: metadata, blob: media.blob };
   }
 
+  // Persist the compressed DAISY package as a Blob instead of serializing
+  // millions of byte values. This is an additive change to the v2 media store.
+  async function importDaisyArchive({ file, title = '', language = '', format = '' } = {}) {
+    const value = clean(format).toLowerCase();
+    if (!['daisy2.02', 'daisy3'].includes(value) ||
+        typeof Blob === 'undefined' || !(file instanceof Blob) || !file.size) return null;
+    const book = normalizeBook({
+      id: createId('web-daisy'), title: clean(title) || 'Libro DAISY',
+      language, format: value, state: 'not-read', importedAt: now(),
+      sizeBytes: file.size, content: ''
+    });
+    await put('media', { id: book.id, blob: file.slice(0, file.size, 'application/zip'), mime: 'application/zip' });
+    try { await put('books', book); }
+    catch (error) {
+      await remove('media', book.id).catch(() => {});
+      throw error;
+    }
+    const { content, ...metadata } = book;
+    return metadata;
+  }
+
+  async function openDaisyArchive(id) {
+    const book = normalizeBook(await get('books', clean(id)));
+    if (!book || !['daisy2.02','daisy3'].includes(book.format)) return null;
+    const media = await get('media', book.id);
+    if (typeof Blob === 'undefined' || !(media?.blob instanceof Blob) || !media.blob.size) return null;
+    activeBookId = book.id;
+    const { content, ...metadata } = book;
+    return { book: metadata, blob: media.blob };
+  }
+
   async function listBooks(options={}) {
     const query = clean(options.query).toLocaleLowerCase();
     const status = clean(options.status) || 'all';
@@ -441,6 +472,8 @@ export function createWebReadingLibraryAdapter({
     importDocument,
     importAudioFile,
     openAudioFile,
+    importDaisyArchive,
+    openDaisyArchive,
     listBooks,
     openBook,
     saveProgress,

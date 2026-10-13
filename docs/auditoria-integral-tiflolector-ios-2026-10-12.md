@@ -99,3 +99,29 @@ Estos cambios se han efectuado en la rama de preparación de iOS, **sin habilita
 ## Criterio de terminado
 
 No se considera terminada la auditoría ni apta la entrega mientras haya bloqueos anteriores. **No existe una compilación que haya superado todos esos criterios en esta fecha.** El éxito de GitHub Actions, la compilación Xcode, el envío IPA o la confirmación de Apple por sí solos no demuestran que el lector final esté corregido.
+
+
+## Continuación 13/10/2026 — restitución de funciones de TifloLector
+
+### Cambios implementados en la ruta que se empaqueta para iOS (rama `preparacion-ios`)
+
+| Función perdida | Evidencia actual | Qué falta |
+| --- | --- | --- |
+| Navegación por elementos semánticos | `shared/web-reading-navigation.mjs` recupera saltos anteriores/siguientes por **encabezado**, **encabezado principal nivel 1–2**, **párrafo**, **lista**, **cita** y **celda de tabla**; se conecta desde `web-reading.js` y `shared/web-entry.mjs`. `ios-parity.js` conserva esos valores como preferencias de documento. Pruebas funcionales de navegación bidireccional en Node. | No es navegación DAISY por capítulos/niveles SMIL; exige adaptación y pruebas iPhone. |
+| Unidad predeterminada para documentos nuevos | Los modos adicionales están en `index.html` y `restoreWebSettings()`. Se mantiene la selección por documento. | Validar reajuste de controles VoiceOver y persistencia en el iPhone. |
+| Mi biblioteca con muchos libros | Paginación de 30 títulos, páginas anterior/siguiente, estado «Página X de Y», filtros y búsqueda, cola paginada. El número de búsqueda protege frente a respuestas antiguas. | Verificar paginación con 31+ libros, foco y lector de pantalla real. |
+| Tipos de marca | Recuperados **Marcador, Importante, Revisar después y Cita**, que ya existían en `reading-library-client.mjs` y la base local. Se puede guardar en la posición del libro y recuperar el punto desde el apartado Marcadores, con anuncio de estado. | Aún no hay subrayado de texto seleccionado ni notas libres vinculadas al fragmento. |
+| MP3: navegación y controles | `web-reading.js` vuelve a mostrar los botones **retroceder/adelantar 10 segundos** al abrir MP3 y oculta controles exclusivos de textos; restaura los ajustes del lector cuando se abre un libro. Conserva etiquetas de salto al cambiar idioma. | El MP3 sigue sin guardarse en la biblioteca. Audios largos, interrupciones, controles del sistema, background y M4A deben probarse en el iPhone. |
+
+Se añadieron `test/web-reading-navigation.test.mjs` y `test/web-reading-restored-features.test.mjs`, que se ejecutan con las demás pruebas de lector web. `ios-check.yml` también comprueba sintaxis de `web-reading.js`, `ios-parity.js`, módulo de navegación y guía. La tarea `tiflolector-static-audit` completó satisfactoriamente las comprobaciones en los últimos cambios. La tarea `ios-unsigned-build` **debe fallar** en «Preparar contenido web» porque continúa activo el bloqueo preventivo por DAISY ZIP y rotor nativo de VoiceOver. Esto **NO ES** un fallo que se deba solucionar retirando el bloqueo.
+
+### Próximas prioridades que siguen abiertas
+
+1. **DAISY 2.02/3 ZIP completo** (NCC/NCX/SMIL y audio): sin esto no hay paridad del lector móvil en iOS.
+2. **Acciones de VoiceOver reales sobre los títulos** (rotor/deslizamientos, no sustituidas por el selector ajustable).
+3. **Audiolibros persistentes** (MP3, M4A, multipista) y reanudación tras cerrar la app.
+4. **Diccionario de pronunciación, seguimiento/resaltado opcional y notas editables** vinculadas a fragmentos.
+5. **Traducción guardada, reabrible y exportable**, OCR y lectura PDF en pruebas reales.
+6. **Migración segura de datos y origen único del lector**, prueba no destructiva en iPhone y comprobación de componentes dentro de IPA antes de autorizar envío.
+
+**Política de distribución:** no habilitar el workflow automático. No crear nueva compilación ni comunicar disponibilidad hasta cerrar los criterios de aceptación y comprobar Apple/TestFlight de extremo a extremo.

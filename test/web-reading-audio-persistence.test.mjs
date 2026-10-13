@@ -88,6 +88,14 @@ test('MP3 binary survives reload, saves precise position, exports and deletes wi
   assert.equal((await adapter.openBook('old-book')).content, 'Texto');
   assert.equal((await adapter.listMarks({ bookId: 'old-book' })).length, 1);
   assert.equal((await adapter.getReadingSettings()).global['speech.rate'], '1.25');
+  const bookmark = await adapter.addMark({
+    bookId: saved.id, type: 'bookmark', mediaTrackIndex: 0,
+    mediaPositionMs: 45000, reference: '0:45', excerpt: 'Audiolibro.mp3'
+  });
+  assert.equal(bookmark.added, true);
+  const audioBookmarks = await adapter.listMarks({ bookId: saved.id });
+  assert.equal(audioBookmarks.length, 1);
+  assert.equal(audioBookmarks[0].mediaPositionMs, 45000);
 
   assert.deepEqual(await adapter.saveProgress({
     id: saved.id, mediaTrackIndex: 0, mediaPositionMs: 123456,
@@ -102,6 +110,7 @@ test('MP3 binary survives reload, saves precise position, exports and deletes wi
   assert.deepEqual(await reloaded.deleteBook(saved.id), { deleted: true });
   assert.equal(await reloaded.openAudioFile(saved.id), null);
   assert.equal(db.stores.get('media').size, 0);
+  assert.equal((await reloaded.listMarks({ bookId: saved.id })).length, 0);
   assert.equal((await reloaded.openBook('old-book')).content, 'Texto');
 });
 
@@ -122,7 +131,8 @@ test('packaged reader supports direct MP3 reopening and precise bookmark-free re
   ]);
   assert.match(html, /id="reading-file"[^>]+\.mp3/);
   for (const symbol of ['importAudioFile', 'openAudioFile', 'persistPosition', 'mediaPositionMs',
-    'restoreAudioPosition', 'await useMp3File(savedAudio.blob', 'downloadExport(savedAudio.blob']) {
+    'restoreAudioPosition', 'await useMp3File(savedAudio.blob', 'downloadExport(savedAudio.blob',
+    'reading-audio-marks-controls', 'Marcar posición del audio', 'mark.mediaPositionMs']) {
     assert.ok(web.includes(symbol), 'Missing audio path ' + symbol);
   }
   assert.match(store, /DB_VERSION = 2/);

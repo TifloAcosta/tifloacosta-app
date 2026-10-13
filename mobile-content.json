@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-13T02:02:29.287Z",
+  "generatedAt": "2026-10-13T07:45:48.007Z",
   "resources": [
     {
       "kind": "resource",
@@ -5448,6 +5448,22 @@
   "news": [
     {
       "kind": "news",
+      "id": "9to5mac-1a66c3c2dded9649:en",
+      "sourceId": "9to5mac-1a66c3c2dded9649",
+      "lang": "en",
+      "title": "The iPhone Duo’s cooling system hides a clever trick inside its hinge",
+      "summary": "While a folding iPhone posed a new challenge for Apple’s thermal engineering team, they came up with a creative way to leverage the device’s hinge to their advantage. Here are the details. more…",
+      "body": "While a folding iPhone posed a new challenge for Apple’s thermal engineering team, they came up with a creative way to leverage the device’s hinge to their advantage. Here are the details.\n\nPCMag recently sat down with Dan Murray, Apple’s vice president of silicon engineering, and Banafsheh Barabadi, the company’s senior manager of thermal product design, to discuss the architecture of the A20 Pro chip.\n\nThe new SoC, which powers the iPhone 18 Pro, iPhone 18 Pro Max, and iPhone Duo, is Apple’s first iPhone chip built on a 2 nm process, following the technology’s debut with the M6 chip in the Mac mini in August.\n\nAnd while the A20 Pro was designed with all three new iPhones in mind, the iPhone Duo version packs some additional capabilities. These include a second display engine to run both screens simultaneously.\n\nFrom PCMag :\n\nThe iPhone Duo’s A20 Pro variant is just slightly different. “For iPhone Duo, we added a second display engine to support simultaneous operation of the inner and outer displays,” says Murray, “and with the increased CPU and GPU performance, we ensure we can deliver a smooth user experience across the displays. For the inner display, we also added support for placing the FaceTime camera behind the display.”\n\nThe report offers a really interesting, in-depth look at the A20 Pro’s thermals and the new vapor chamber Apple developed to keep them at bay. That includes what Apple calls “metal over foam,” a material that iFixit also examined during its recent teardown of the iPhone 18 Pro.\n\nThe second pillar is a new material that bridges the gap between the A20 Pro and the vapor chamber. “We call it metal over foam,” says Barabadi, and it “basically creates a direct thermal and mechanically compliant coupling between the SoC and the vapor chamber. It is highly effective in removing the heat, meeting the strict mechanical requirements of the system. It took us months of development to get the material properties exactly right to be able to use this material.”\n\nPerhaps the most interesting tidbit from the story is what Apple did to improve the iPhone Duo’s thermal performance, particularly given the challenges of dissipating heat in a device that doubles in thickness when folded.\n\nFrom the report :\n\n“This was one of the most technically challenging aspects of our design,” says Barabadi. To surmount the issue, Apple routed a flexible graphite pipe through the hinge itself to transfer heat between the two halves, thereby increasing the surface area available for heat dissipation. “This part need[ed] to be co-engineered between our thermal team and the mechanical team. It’s a flexible material that needs to survive, as you can imagine, many hinge cycles while maintaining its thermal connectivity, and also its structural integrity throughout the product life cycle.”\n\nPCMag ’s interview with Murray and Barabadi also goes into the A20 Pro’s architecture, including the benefits of placing the DRAM next to the processor rather than stacking it on top, and you can read it in full here .",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/12/the-iphone-duos-cooling-system-hides-a-clever-trick-inside-its-hinge/",
+      "publishedAt": "2026-10-13T01:34:29.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "engadget-58c1c657435e5a92:en",
       "sourceId": "engadget-58c1c657435e5a92",
       "lang": "en",
@@ -5537,22 +5553,6 @@
       "sourceName": "9to5Mac",
       "originalUrl": "https://9to5mac.com/2026/10/12/iphone-hits-record-q3-shipment-share-as-global-smartphone-market-plunges-20-per-report/",
       "publishedAt": "2026-10-12T20:25:16.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-f903b764385023aa:en",
-      "sourceId": "9to5mac-f903b764385023aa",
-      "lang": "en",
-      "title": "M6 MacBook Pro: Three new upgrades launching later this month",
-      "summary": "Apple has a new M6 MacBook Pro launching later this month with a 14-inch screen and the current industrial design. And with its M6 chip, there are three upgrades we can expect from the new MacBook Pro. more…",
-      "body": "Apple has a new M6 MacBook Pro launching later this month with a 14-inch screen and the current industrial design. And with its M6 chip, there are three upgrades we can expect from the new MacBook Pro.\n\nIf AI is in any way significant to your workflows—and with macOS 27’s AI features, it will be for more users—then the M6 MacBook Pro could be a big upgrade.\n\nThat’s because the M6 chip includes a Dual 16-core Neural Engine, up from the standard 16-core version available in M5 and prior. Per Apple :\n\nM6 also introduces a Dual 16-core Neural Engine, providing up to 2x the peak compute over previous generations to make on-device AI workflows run even faster. System frameworks can automatically utilize both engines simultaneously, enabling applications to see faster model execution.\n\nThe base M6 chip offers a 12-core CPU and 12-core GPU. Both are solid upgrades over the M5, which was limited to 10 cores each.\n\nM6’s CPU cores are especially interesting, as Apple is bringing three distinct core types to its base chip for the first time. It has 2 super cores, 4 performance cores, and 6 efficiency cores. Here’s what Apple says about each core:\n\nPreviously only M5 Pro, M5 Max, and M5 Ultra provided super cores and performance cores in a single chip. But now these Pro-level capabilities are available for standard M6 users.\n\nM6 is the first Apple chip built on a new 2nm process. And the company says that brings the benefit of “a major leap in performance and power efficiency.”\n\nCurrently the only product with an M6 is the new Mac mini , which doesn’t run on a battery.\n\nBut in the MacBook Pro, MacBook Air, and other upcoming M6 products , the new chip’s “major leap” in power efficiency is likely to enable longer battery life.\n\nApple could always opt to shrink the physical battery to offer comparable performance as before, but here’s hoping it uses M6’s improved efficiency to deliver better battery life instead.\n\nWhat other new features do you want to see in the M6 MacBook Pro? Let us know in the comments.\n\n* Buy Mac with 15% discount from Apple refurbished",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/12/m6-macbook-pro-three-new-upgrades-launching-this-fall/",
-      "publishedAt": "2026-10-12T20:23:21.000Z",
       "categories": [
         "apple",
         "tecnologia-general"
@@ -6057,22 +6057,6 @@
         "android",
         "apps-accesibles",
         "tecnologia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "applevis-apps-5b3e3d796c6a1c8c:en",
-      "sourceId": "applevis-apps-5b3e3d796c6a1c8c",
-      "lang": "en",
-      "title": "Piggy Smash: Hammer Clicker",
-      "summary": "Smash piggy banks, collect the coins, pay your bills, then upgrade your hammer and smash harder. [TRY BEFORE YOU BUY!] Swing your hammer. Chase the fast piggies, crack the tough ones, and scoop up their coins. Some piggies are even on fire. - Upgrade your hammer, luck and stamina. Unlock hammers and abilities that change how you play. - Clear chapters, decorate your apartment, and move into better places. - Play through a full campaign. Optional Overtime is there when you want more smashing. PIGGY FOUNDRY A second mode. Drag your target onto the piggies and your hammer does the rest. Upgrade it, pay the building's bills, and come back to the coins it smashed while you were away. ACCESSIBILITY Play with VoiceOver: every piggy is read out, and you swing by timing, on a beat you feel. Choose your swing window. Bigger text across the game. FREE TO TRY The first 2 chapters are free. One purchase unlocks the full game. Optional extras for decorating, a few extra coins, supporting the game, an extra shift or Piggy Foundry gems. 100% optional, never required. No ads. No energy timers. Every swing you paid for is one you could have earned. Works offline. The bills are pretend. The coins stay in the game.",
-      "body": "[TRY BEFORE YOU BUY!] Smash piggy banks. Collect coins. Pay ridiculous bills. Upgrade your build and take on the next chapter. Hold to swing your hammer. Chase the fast piggies, crack the tough ones, and scoop up their coins. Some piggies are even on fire. Upgrade your hammer, luck and stamina. Unlock hammers and abilities that change how you play. Your job changes your bills. Clear chapters, decorate your apartment, and move into better places. Play through a campaign with a real ending. Optional Overtime is there when you want more smashing. ACCESSIBILITY Play with VoiceOver: every piggy is read out, and you swing by timing, on a beat you feel. Choose your swing window. Bigger text across the game. FREE TO TRY The first 2 chapters are free. One purchase unlocks the full game. Optional extras for decorating, a few extra coins, supporting the game or an extra shift. Never required. No ads. No energy timers. Every swing you paid for is one you could have earned. Works offline. The bills are pretend. The coins stay in the game.",
-      "sourceName": "AppleVis Apps",
-      "originalUrl": "https://www.applevis.com/apps/ios/games/piggy-smash-hammer-clicker",
-      "publishedAt": "2026-10-03T03:28:44.000Z",
-      "categories": [
-        "apple",
-        "apps-accesibles"
       ]
     }
   ]

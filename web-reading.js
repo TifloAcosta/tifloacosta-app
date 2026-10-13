@@ -342,6 +342,7 @@
   let currentUnitIndex = 0;
   let fileImportInProgress = false;
   let libraryPage = 1;
+  let libraryRenderToken = 0;
   let playbackAccessibilityState = null;
   let activeAudio = null;
   let audioObjectUrl = '';
@@ -2622,6 +2623,7 @@
   }
 
   async function renderLibrary() {
+    const token = ++libraryRenderToken;
     els.libraryList.replaceChildren();
     if (els.libraryPager) els.libraryPager.hidden = true;
     if (!libraryClient) {
@@ -2677,6 +2679,8 @@
             page: libraryPage, pageSize, query, status,
             sort: isRecentView ? 'imported' : 'lastRead'
           });
+      // Ignore an older asynchronous search/filter response after a newer one.
+      if (token !== libraryRenderToken) return;
       if (!page.items.length && libraryPage > 1) {
         libraryPage = Math.max(1, Math.min(libraryPage - 1, page.pages || 1));
         return renderLibrary();
@@ -3240,12 +3244,12 @@
   els.libraryPrevPage?.addEventListener('click', () => {
     if (libraryPage <= 1) return;
     libraryPage -= 1;
-    void renderLibrary().then(() => els.libraryPageStatus?.focus({ preventScroll: true }));
+    void renderLibrary().then(() => { if (!els.libraryPager?.hidden) els.libraryPageStatus?.focus({ preventScroll: true }); });
   });
   els.libraryNextPage?.addEventListener('click', () => {
     if (els.libraryNextPage.disabled) return;
     libraryPage += 1;
-    void renderLibrary().then(() => els.libraryPageStatus?.focus({ preventScroll: true }));
+    void renderLibrary().then(() => { if (!els.libraryPager?.hidden) els.libraryPageStatus?.focus({ preventScroll: true }); });
   });
   els.bookmark.addEventListener('click', () => { void addBookmark(); });
   els.queueToggle.addEventListener('click', () => { void toggleQueue(); });

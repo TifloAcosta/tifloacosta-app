@@ -37,6 +37,7 @@ const readerSection = readerHtml.slice(readerStart, readerEnd);
 const mandatoryReaderMarkup = [
   'Abre un libro o documento para escucharlo',
   'id="reading-settings-disclosure"',
+  'id="reading-pronunciation-settings"',
   'id="reading-default-navigation"',
   'id="reading-reader"',
   'id="reading-library-filter"',
@@ -65,6 +66,12 @@ if (!readerScript.includes("intro: 'Abre un libro o documento para escucharlo") 
 // before any IPA can be created; DAISY and real VoiceOver still block release.
 const requiredReaderFeatures = [
   'shared.adjacentWebReadingStructure(',
+  'shared.createPronunciationSpeechAdapter(',
+  'setupPronunciationDictionary()',
+  'await useMp3File(savedAudio.blob',
+  'persistActiveAudio = persistPosition',
+  'reading-audio-marks-controls',
+  'Marcar posición del audio',
   'setReaderAudioOnlyMode(true)',
   'setReaderAudioOnlyMode(false)',
   'libraryClient.listMarks(currentBookId)',
@@ -72,9 +79,15 @@ const requiredReaderFeatures = [
   'libraryPage = 1'
 ];
 const structuralNav = await readFile(join(output, 'shared/web-reading-navigation.mjs'), 'utf8');
+const pronunciationEngine = await readFile(join(output, 'shared/web-reading-pronunciation.mjs'), 'utf8');
+const mediaStorage = await readFile(join(output, 'shared/web-reading-library-adapter.mjs'), 'utf8');
 const readerGuide = await readFile(join(output, 'tifloacosta-guide.js'), 'utf8');
 if (requiredReaderFeatures.some(marker => !readerScript.includes(marker)) ||
     !structuralNav.includes('export function adjacentWebReadingStructure(') ||
+    !pronunciationEngine.includes('export function createPronunciationSpeechAdapter(') ||
+    !mediaStorage.includes("createObjectStore('media'") ||
+    !mediaStorage.includes('async function openAudioFile(id)') ||
+    !mediaStorage.includes('async function importAudioFile(') ||
     !readerHtml.includes('src="tifloacosta-guide.js"') ||
     !readerGuide.includes('guide-chapters') ||
     (readerSection.match(/id="reading-play"/g) || []).length !== 1 ||
@@ -195,6 +208,9 @@ await writeFile(join(output, 'ios-choice-groups.js'), "(() => {\n  'use strict';
 await cp(join(root, 'ios-build/ios-choice-collapse.js'), join(output, 'ios-choice-collapse.js'));
 await cp(join(root, 'ios-build/ios-reader-selects.js'), join(output, 'ios-reader-selects.js'));
 await cp(join(root, 'ios-build/ios-reader-native.js'), join(output, 'ios-reader-native.js'));
+// Bundled archive decoder: TifloLector must import local EPUB/Office archives offline.
+await cp(join(root, 'ios-build/node_modules/jszip/dist/jszip.min.js'), join(output, 'ios-jszip.min.js'));
+
 const bundledVideos = JSON.parse(await readFile(join(output, 'videos.json'), 'utf8'));
 if (!Array.isArray(bundledVideos.videos) || !bundledVideos.videos.length) throw new Error('Catálogo de vídeos vacío');
 await writeFile(join(output, 'ios-videos-fallback.js'),

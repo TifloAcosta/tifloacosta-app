@@ -10,6 +10,12 @@ function replaceOnce(original, replacement) {
   source = source.replace(original, replacement);
 }
 
+// A packaged iOS reader must never depend on a remote CDN to open local archives.
+replaceOnce(
+  "script.src = 'https://cdn.jsdelivr.net/npm/jszip@3.10.2/dist/jszip.min.js';",
+  "script.src = 'ios-jszip.min.js';"
+);
+
 replaceOnce(
   "const speechAdapter = typeof shared.createWebReadingSpeechAdapter === 'function'\n    ? shared.createWebReadingSpeechAdapter()\n    : null;",
   "const iosReader = globalThis.TifloIOSReading || null;\n  const speechAdapter = iosReader?.createSpeechAdapter?.() || (typeof shared.createWebReadingSpeechAdapter === 'function'\n    ? shared.createWebReadingSpeechAdapter() : null);"

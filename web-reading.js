@@ -1821,7 +1821,7 @@
       if (activeAudio !== audio || loaderToken !== token) return false;
       if (audioObjectUrl) URL.revokeObjectURL(audioObjectUrl);
       const type = /\.m4a$/iu.test(clip.audioHref) ? 'audio/mp4' : 'audio/mpeg';
-      audioObjectUrl = URL.createObjectURL(contents.type ? contents : new Blob([contents], { type }));
+      audioObjectUrl = URL.createObjectURL(new Blob([contents], { type }));
       audio.src = audioObjectUrl;
       audio.playbackRate = Number(tools.querySelector('#reading-audio-file-speed')?.value) || 1;
       const startMs = Number.isFinite(Number(positionMs)) && positionMs !== null

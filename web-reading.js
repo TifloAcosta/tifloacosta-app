@@ -3110,7 +3110,13 @@
     }
 
     currentUnitIndex = 0;
-    if (navigationUnit !== 'block' && typeof shared.adjacentWebReadingStructure === 'function') {
+    if (navigationUnit !== 'block') {
+      if (typeof shared.adjacentWebReadingStructure !== 'function') {
+        els.status.textContent = language() === 'en'
+          ? 'Structural navigation is unavailable. Reading position was not changed.'
+          : 'La navegación estructural no está disponible. La posición no se ha modificado.';
+        return;
+      }
       const next = shared.adjacentWebReadingStructure(
         documentModel, readingSession.snapshot(), navigationUnit, direction
       );

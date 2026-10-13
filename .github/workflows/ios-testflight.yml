@@ -11,7 +11,7 @@ permissions:
 jobs:
   build-upload:
     runs-on: macos-15
-    timeout-minutes: 60
+    timeout-minutes: 95
     steps:
       - name: Seleccionar Xcode 26 y SDK iOS 26 requerido por Apple
         run: |
@@ -345,6 +345,12 @@ jobs:
           IPA=$(find "$RUNNER_TEMP/ios-export" -maxdepth 1 -name '*.ipa' -print -quit)
           test -n "$IPA" || { echo "No se ha generado IPA"; exit 1; }
           xcrun altool --upload-app --type ios --file "$IPA" --apiKey "$API_ID" --apiIssuer "$API_ISSUER"
+      - name: Confirmar disponibilidad real en Apple TestFlight
+        timeout-minutes: 26
+        env:
+          APPSTORE_API_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+          APPSTORE_API_ISSUER_ID: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+        run: node ios-build/check-testflight-ready.mjs
       - name: Borrar credencial privada del equipo temporal
         if: always()
         run: |

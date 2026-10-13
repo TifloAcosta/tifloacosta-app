@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-13T09:27:46.014Z",
+  "generatedAt": "2026-10-13T16:02:36.344Z",
   "resources": [
     {
       "kind": "resource",
@@ -5448,47 +5448,32 @@
   "news": [
     {
       "kind": "news",
-      "id": "9to5mac-1a66c3c2dded9649:en",
-      "sourceId": "9to5mac-1a66c3c2dded9649",
+      "id": "engadget-945646e914af7af2:en",
+      "sourceId": "engadget-945646e914af7af2",
       "lang": "en",
-      "title": "The iPhone Duo’s cooling system hides a clever trick inside its hinge",
-      "summary": "While a folding iPhone posed a new challenge for Apple’s thermal engineering team, they came up with a creative way to leverage the device’s hinge to their advantage. Here are the details. more…",
-      "body": "While a folding iPhone posed a new challenge for Apple’s thermal engineering team, they came up with a creative way to leverage the device’s hinge to their advantage. Here are the details.\n\nPCMag recently sat down with Dan Murray, Apple’s vice president of silicon engineering, and Banafsheh Barabadi, the company’s senior manager of thermal product design, to discuss the architecture of the A20 Pro chip.\n\nThe new SoC, which powers the iPhone 18 Pro, iPhone 18 Pro Max, and iPhone Duo, is Apple’s first iPhone chip built on a 2 nm process, following the technology’s debut with the M6 chip in the Mac mini in August.\n\nAnd while the A20 Pro was designed with all three new iPhones in mind, the iPhone Duo version packs some additional capabilities. These include a second display engine to run both screens simultaneously.\n\nFrom PCMag :\n\nThe iPhone Duo’s A20 Pro variant is just slightly different. “For iPhone Duo, we added a second display engine to support simultaneous operation of the inner and outer displays,” says Murray, “and with the increased CPU and GPU performance, we ensure we can deliver a smooth user experience across the displays. For the inner display, we also added support for placing the FaceTime camera behind the display.”\n\nThe report offers a really interesting, in-depth look at the A20 Pro’s thermals and the new vapor chamber Apple developed to keep them at bay. That includes what Apple calls “metal over foam,” a material that iFixit also examined during its recent teardown of the iPhone 18 Pro.\n\nThe second pillar is a new material that bridges the gap between the A20 Pro and the vapor chamber. “We call it metal over foam,” says Barabadi, and it “basically creates a direct thermal and mechanically compliant coupling between the SoC and the vapor chamber. It is highly effective in removing the heat, meeting the strict mechanical requirements of the system. It took us months of development to get the material properties exactly right to be able to use this material.”\n\nPerhaps the most interesting tidbit from the story is what Apple did to improve the iPhone Duo’s thermal performance, particularly given the challenges of dissipating heat in a device that doubles in thickness when folded.\n\nFrom the report :\n\n“This was one of the most technically challenging aspects of our design,” says Barabadi. To surmount the issue, Apple routed a flexible graphite pipe through the hinge itself to transfer heat between the two halves, thereby increasing the surface area available for heat dissipation. “This part need[ed] to be co-engineered between our thermal team and the mechanical team. It’s a flexible material that needs to survive, as you can imagine, many hinge cycles while maintaining its thermal connectivity, and also its structural integrity throughout the product life cycle.”\n\nPCMag ’s interview with Murray and Barabadi also goes into the A20 Pro’s architecture, including the benefits of placing the DRAM next to the processor rather than stacking it on top, and you can read it in full here .",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/12/the-iphone-duos-cooling-system-hides-a-clever-trick-inside-its-hinge/",
-      "publishedAt": "2026-10-13T01:34:29.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-58c1c657435e5a92:en",
-      "sourceId": "engadget-58c1c657435e5a92",
-      "lang": "en",
-      "title": "Don't buy a cheap Android phone without these non-negotiable features",
-      "summary": "Android phones can be had at many different price points, but the most important features aren't always found in the cheapest available devices.",
-      "body": "What good is a phone that can't keep up with the average person's day-to-day needs?\n\nYou don't have to spend an arm and a leg on an Android phone, even if it's brand-new. You can find plenty of great cheap Android phone options for $300 or less, if you know what to look for. And that's the biggest thing to consider: knowing what features are crucial to have and where you can make concessions. Paying less for a phone that doesn't have a sleek titanium frame, for example, is totally fine; you probably will (and should) put a case on it, anyway. But getting a phone with insufficient RAM, horrible battery life, poor cameras, a bad processor, or a small screen is where you want to draw the line.\n\nIn some cases, what you're willing to sacrifice is an individual decision. If you're a casual content creator, for example, the cameras need to be at least above average. But if you're getting a secondary phone for basic messaging, you may be fine with just decent cameras. Nonetheless, there are some non-negotiable limits that anyone seeking out a cheap Android phone should focus on, no matter how you plan to use it.\n\nRemember when phones had tiny screens? The original iPhone's 4.5-inch screen seemed groundbreaking at the time, but by today's standards, that just doesn't cut it. A phone should have at least a 5.6-inch screen, though most nowadays are at least 6.1 inches. This allows you to enjoy a comfortable experience when holding the phone and typing two-handed while still being able to clearly see the content on it. That screen should also be an AMOLED panel with HD resolution and a decent peak brightness of at least 1,000 nits, so it's viewable in direct sunlight.\n\nMemory is another factor to consider. You'll want at least 6GB RAM; otherwise, multitasking, video streaming, and casual gaming could be slow or inconsistent, and the phone won't respond quickly enough to your demands. If you play a lot of mobile games, consider even going up to 8GB. Also, if there's no expandable storage (which is a rarity nowadays), 128GB is the minimum you should consider. For peace-of-mind, go with at least 256GB. Otherwise, you'll end up with a \"phone full\" message before you know it, and you'll be forced to clear out the device or sign up for cloud storage.\n\nFinally, the processor matters. While you might not need the best, fastest, most up-to-date processor, you don't want one that's slow as molasses. Check the age of the processor, as well as reviews for its performance, and factor this into your decision. There's no value in getting a cheap device if it's slow and laggy when you want to stream a movie, and a great processor is vital for gaming on an Android phone .\n\nBattery life and cameras are also important. A battery that's at least 4,500mAh is sufficient, especially if the phone doesn't handle heavy AI processing. But 5,000mAh is a better starting point nowadays to keep you going all day, even with moderate use. With cameras, you want a phone that can at least take photos that are good enough for sharing on social media and keeping for posterity. This means having at least a 32MP sensor for the rear camera, but also a large sensor that can capture more light and yield better photos overall, even if the megapixels are lower in one camera versus another. Don't discount the front sensor and resolution as well, as this is what you'll use to take selfies. Look for at least a 12MP front camera with, again, a good sensor size.\n\nConsider other basics like NFC for tap-to-pay and more recent Bluetooth versions for reliable connectivity to headphones and speakers. For older models, confirm that there's at least a few years left of software and security support. This sounds like a lot, but you'll find plenty of devices that fit, like Samsung's Galaxy A series phones (see our review of the Samsung Galaxy A17 , for example) and phones from brands like Nothing and Motorola.\n\nEven older-model Google Pixel phones can fit the criteria. You can find a renewed Google Pixel 8a for just over $300 nowadays, and it comes with just about every vital feature mentioned previously. Ideally, wait for seasonal promotions to find a decked-out mid-range phone for the price of a budget one. You'll have to make compromises to go cheap, but there are many phones in the $300 range that meet or exceed non-negotiable features and specs.",
+      "title": "Google's Gemini 4 Argon is now available in the Gemini app and AI Mode in Search",
+      "summary": "Google has rolled out Gemini 4 Argon to more users.",
+      "body": "But only Google AI Ultra and Pro subscribers can access it for now.\n\nGoogle's latest AI model, Gemini 4 Argon , is now available for more people. It first rolled out to members of Google's Fairwind Program, made up of governments and trusted partners that need access to the company's models with the most advanced cybersecurity capabilities, earlier this month. Now, developers can access it via the Gemini API and Google's agentic software developer platform Antigravity, while Google AI Ultra and Pro subscribers will be able to use it through the Gemini app and AI Mode in Search.\n\nIn the US, Google AI Pro costs $20 a month, while the Ultra tier costs at least $100. Access to Argon will set users back $2 per million input tokens and $10 per million output tokens. But those are just introductory prices valid until November 30. After that, Argon will cost users double those amounts.\n\nGoogle was supposed to launch a 3.5 Pro model, but it moved on and released Argon instead. The company said during its launch that the model can handle complex tasks involving finance, software engineering, coding, creative writing and cybersecurity defense. According to AI benchmarking company Artificial Analysis, Gemini 4 Argon matches OpenAI GPT-6 Astra's score for its Intelligence Index, which is its composite score for multiple AI benchmarks, at 60 percent of the cost per task at its introductory prices.\n\nJosh Woodward, VP of Product for Gemini and Google Labs, said that in the Gemini app, Argon answers more quickly and with less hedging, repetitions and clichés. It can also return responses while it's still thinking when dealing with longer tasks that would usually mean waiting a bit — or a long while, depending on the AI being used — for results. Google is also making it easier to toggle between chat and tasks within the Gemini app. Plus, it's adding Antigravity's agentic coding interface inside Gemini's macOS app.",
       "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2281663/android-phone-dont-buy-cheap-without-non-negotiable-features/",
-      "publishedAt": "2026-10-13T00:30:00.000Z",
+      "originalUrl": "https://www.engadget.com/2285023/google-gemini-4-argon-is-now-available-in-the-gemini-app-and-ai-mode-in-search/",
+      "publishedAt": "2026-10-13T16:00:00.000Z",
       "categories": [
         "tecnologia-general",
-        "android"
+        "apps-accesibles",
+        "ia-accesibilidad"
       ]
     },
     {
       "kind": "news",
-      "id": "engadget-fd2eef70ba802cff:en",
-      "sourceId": "engadget-fd2eef70ba802cff",
+      "id": "the-verge-adca3f57e5f5cd0a:en",
+      "sourceId": "the-verge-adca3f57e5f5cd0a",
       "lang": "en",
-      "title": "How to use Google Gemini to automate tasks",
-      "summary": "Spark is Google's AI tool that can perform tasks on your behalf.",
-      "body": "Spark is Google's AI tool that can perform tasks on your behalf.\n\nOne of AI's promises, on the less \"humanity-destroying\" end of the spectrum , is to make everyday life a little smoother. Instead of tackling each item on your to-do list by yourself, perhaps a reliable AI tool could cross a few entries off for you, leaving you to attend to the more important bits. Getting a recap of the last 20 emails in your inbox might let you dive into your work faster in the mornings, or at least give you a couple of extra minutes to stare into the middle distance while sipping your coffee.\n\nIf you're committed to the Google ecosystem, Gemini Spark might offer a way to automate the tasks you'd rather farm out. Spark is an agentic personal assistant announced in May at Google's annual I/O developer conference . You can give it a task, and it can run in the background, taking what Google describes as \"proactive action,\" while still adhering to your instructions.\n\nThe Gemini Spark website gives a few examples of what you can do with it, like turning your last 50 email responses into a style guide covering how you answer emails, or setting up a tracker for internships. It's integrated into Google Workspace apps like Docs, Calendar, Slides and Gmail, as well as Personal Intelligence, a feature Gemini uses to customize suggestions based on information from your Google apps.\n\nHere's how to use Gemini Spark to automate tasks.\n\nTo access Gemini Spark, you'll need to be a Google AI Pro or Ultra subscriber . Certain business subscribers might also have access. (You also can't be located in the European Economic Area, Switzerland, the UK or Nigeria.) You'll also need \"Keep activity\" switched on, which the company says \"lets you pick up chats where you left off.\" Spark is available through the Gemini mobile app, the Gemini Mac app and the web app. Spark also works with Gemini in Chrome using auto browse to do tasks like book restaurant reservations, travel and the like.\n\nAside from the basics of getting set up, Google also has some words of caution. As glorious as it would be to just set it and forget it, it's worth the reminder that AI can still make mistakes, so keep an eye on whatever tasks you've set up. Google itself also warns not to put sensitive information into the task thread. That means you shouldn't be giving Gemini login or payment information. Instead, Google recommends entering that type of info yourself directly on the relevant website. Google also cautions against scheduling tasks that are too sensitive, particularly if the task is set to run while you're offline. Consider whether a mistake like a hallucination could cause actual harm.\n\nWhether you're on the mobile or web app, select Menu , and then select Spark . Then, you can type into the textbox whatever task you want Spark to accomplish. The Spark website gives this prompt, for example: \"When I receive an email inquiring about my photography services, automatically extract the client's name, requested date, and log the lead in my 'Client Tracker' Sheet. Then create a new Google Drive folder named after the client.\" If needed, it's at this point that you can also upload a relevant file, or something from your Drive or a Notebook. Then, tap or click Submit .\n\nGoogle emphasizes monitoring your tasks in case Gemini needs something from you, like taking over a task in the browser. To keep an eye on your tasks, once again go to Menu > Spark and then Tasks . That will let you see the thread associated with the task, and if you need to make updates, you can do it right there. You can also look at the work panel, which shows you information like the completed, current and planned steps, by tapping the progress chip at the top of the thread.\n\nAt the end of September, Google said it would replace Gemini Gems with skills as the method for dictating instructions for tasks. In a blog post, the company described how you can use skills to automate repetitive tasks . A skill might be instructions for preparing for presentations or adopting a specific writing style. Google said that once you've created a skill, if you want to use it again on a task, you'll be able to type a forward slash and the skill's name when you're writing your prompt.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2281539/how-to-use-google-gemini-automate-tasks/",
-      "publishedAt": "2026-10-12T22:30:00.000Z",
+      "title": "Google finally releases Gemini 4 Argon",
+      "summary": "After months sitting on the sidelines of the frontier AI race, Google has finally launched its long-awaited Gemini 4 Argon model, claiming it can compete with the best the industry has to offer. Google says Argon delivers \"frontier reasoning and improved performance across complex workflows,\" while cutting down on hedging, repetition, and the cliches that […]",
+      "body": "After months sitting on the sidelines of the frontier AI race, Google has finally launched its long-awaited Gemini 4 Argon model, claiming it can compete with the best the industry has to offer.\n\nGoogle says Argon delivers \"frontier reasoning and improved performance across complex workflows,\" while cutting down on hedging, repetition, and the cliches that continue to plague AI chatbots. The company claims Argon outperforms rival models like GPT-6 Astra, Claude Fable 5.1, and Claude Opus 5.5 across a range of benchmarks, including coding, cybersecurity, science, finance, and law.\n\nGoogle says it's already putting Argon to use internally, s …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1009862/google-releases-gemini-4-argon",
+      "publishedAt": "2026-10-13T16:00:00.000Z",
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
@@ -5496,15 +5481,131 @@
     },
     {
       "kind": "news",
-      "id": "9to5mac-f9382cd8ceb85752:en",
-      "sourceId": "9to5mac-f9382cd8ceb85752",
+      "id": "engadget-918a651d62495939:en",
+      "sourceId": "engadget-918a651d62495939",
       "lang": "en",
-      "title": "Apple gets a $360 price target from JP Morgan despite iPhone demand concerns",
-      "summary": "Just days after Apple’s stock took a hit over reports of iPhone 18 Pro production cuts, JP Morgan has raised its AAPL price target by $20. Here are the details. more…",
-      "body": "Just days after Apple’s stock took a hit over reports of iPhone 18 Pro production cuts, JP Morgan has raised its AAPL price target by $20. Here are the details.\n\nLast Friday, Nikkei Asia reported that , according to “multiple people familiar with the matter,” Apple had told select suppliers to cut component production for the iPhone 18 Pro and the iPhone 18 Pro Max due to “soft demand.”\n\nThe report sent Apple shares down roughly 2.5% in early trading, although the stock has recovered much of that loss and closed at $340.97 today.\n\nThat said, JP Morgan released a new investor note today (via AppleInsider ), arguing that the reported cuts are consistent with Apple’s usual production patterns and don’t necessarily point to an unexpected drop in demand.\n\nThe report also comments on Apple’s staggered iPhone launch schedule, with JP Morgan expecting the iPhone Duo to offset the sales shortfall caused by the absence of the regular iPhone 18, which is expected to hit shelves early next year.\n\nInterestingly, earlier today, a separate report from China’s Securities Times claimed that Apple had increased its iPhone Duo orders by 30% , potentially bringing its production for the remainder of 2026 close to 10 million units.\n\nLooking ahead to the December quarter, JP Morgan expects Apple to sell 8.5 million iPhone Duo units. JP Morgan also projects a roughly 2% decline in iPhone revenue year-over-year, but a 2% increase in Apple’s overall revenue.\n\nThe firm also continues to flag supply constraints and broader economic pressures that could affect consumer demand.\n\nAll in all, JP Morgan raised its AAPL price target from $340 to $360, while maintaining its Overweight rating on the stock.",
+      "title": "iPhone Duo vs Xiaomi 18 Fold: How these foldables stack up",
+      "summary": "We compare the two on their design, displays, durability and more.",
+      "body": "We compare the two on their design, displays, durability and more.\n\nUnveiled just two days apart, the iPhone Duo and the Xiaomi 18 Fold are similar in many ways. They are both premium foldable phones in a passport-style design, moving away from the more square shape that has defined the foldable smartphone category for years.\n\nBut that's where their similarities end. Cameras and software are areas where the two are quite different from one another, in addition to price and availability. The Duo starts at $1,999 and goes on sale October 23, with pre-orders opening October 16. The Xiaomi 18 Fold starts at 10,999 yuan, or about $1,640, and is China-only for now. Yet, depending on where you are, comparing these two phones makes perfect sense. Neither of them have undergone an in-depth review yet, but we can already take a look at each one's specs to see how they stack up.\n\nIn terms of design and display, the specs of both devices are quite similar. You'll find a 7.6-inch inner screen when these phones are open, and a 5.4-inch outer screen when they're closed — both with a 120Hz refresh rate. But Xiaomi claims that its phone reaches a peak brightness of 4,000 nits, while Apple's only goes up to 3,000 nits. More nits mean a brighter screen, which makes it easier to see content in more environments. Also, the iPhone Duo's internal screen has a nano-textured layer that helps reduce glare and also makes the crease much less visible. The Duo's front-facing camera is also hidden beneath the display and only appears when you need it.\n\nEven though they look similar, the materials on each device are different. Apple built the iPhone Duo with a titanium frame and Ceramic Shield glass for greater durability. It's also certified IP68 for water- and dust-resistance. The Xiaomi 18 Fold, on the other hand, is made of an aluminum frame with its own Shield Glass 3.0. Xiaomi didn't share an IP rating, which is a bit concerning given that these phones tend to be more fragile.\n\nBut the 18 Fold tops the iPhone Duo in some areas. For instance, it weighs just 219 grams, compared to the iPhone Duo's 254 grams. It's also one of the lightest foldable phones on the market. The 35-gram difference may not seem huge, but a heavier phone tends to be more uncomfortable when you hold it for long periods of time.\n\nBoth the iPhone Duo and the Xiaomi 18 Fold are powered by custom chips designed by their respective companies. The A20 Pro is Apple's most powerful mobile chip, and is also the first built on a 2-nanometer architecture for improved energy efficiency. Xiaomi's XRING O3 is still based on 3-nanometer architecture. Another major difference is RAM — the 18 Fold has 16 GB of RAM, while the Duo is limited to 12 GB. It won't make a difference for most users, but does matter when you're running demanding games and AI tasks.\n\nCameras are what really sets these phones apart. Apple opted for a dual-camera setup with two 48-megapixel sensors — one wide and one ultra-wide. There's no optical zoom like on the iPhone Pro models, so users will need to rely on digital zoom. Xiaomi has delivered a more impressive camera setup with a 200-megapixel main sensor and two additional 50-megapixel sensors — an ultrawide and one for optical zoom. It's a shame that Apple isn't offering its best camera setup to those buying the most expensive iPhone yet.\n\nWhen it comes to the battery, Xiaomi offers a large 6,000mAh silicon-carbon cell. Apple hasn't disclosed the specs for the iPhone Duo, and since it hasn't hit stores yet, we don't have that information. The Xiaomi 18 Fold also charges faster than the iPhone Duo, since it supports up to 67W wired and 50W wireless charging. The Duo is limited to 60W wired and 35W via wireless MagSafe.\n\nSoftware is the Duo's strength , with iOS 27 adding Split View multitasking and Siri AI, and Apple Pencil support arriving later this year. There are also sleek animations and apps that really take advantage of the new form factor — something we have yet to see on the Android side. The real question is which one you can actually buy, since Xiaomi doesn't officially sell its phones in the US and local carriers don't certify them. But if you live in China, it's certainly a strong choice against the iPhone Duo.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2282149/iphone-duo-vs-xiaomi-18-fold-foldable-comparison/",
+      "publishedAt": "2026-10-13T15:45:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-6c8a0062971564ff:en",
+      "sourceId": "the-verge-6c8a0062971564ff",
+      "lang": "en",
+      "title": "Here are all the new HomePod Mini 2 colors",
+      "summary": "Apple's HomePod Mini 2 is here, and we've gotten a close-up look at the second-gen smart speaker. The HomePod Mini 2 comes with an upgraded S10 chip capable of powering Siri AI, though Apple says support for new AI features will roll out as part of a future update. It also offers a sound glow […]",
+      "body": "Apple's HomePod Mini 2 is here, and we've gotten a close-up look at the second-gen smart speaker.\n\nThe HomePod Mini 2 comes with an upgraded S10 chip capable of powering Siri AI, though Apple says support for new AI features will roll out as part of a future update. It also offers a sound glow feature that matches its LED lights with the colors of a song's album art and can work as your Mac's default speaker.\n\nPhysically, the HomePod Mini 2 is almost identical to its predecessor, but the colors have changed. There's now a pink model and a green model, and the blue has changed colors. There's still black and white for those who want basics a …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1009935/apple-homepod-mini-2-hands-on",
+      "publishedAt": "2026-10-13T15:27:56.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-2ed9ef31fa9b448d:en",
+      "sourceId": "engadget-2ed9ef31fa9b448d",
+      "lang": "en",
+      "title": "Some older Apple TV models are also getting Siri AI",
+      "summary": "Siri AI functionality goes all the way back to back to the second-gen Apple TV 4K box from 2021.",
+      "body": "Functionality goes all the way back to back to the second-gen 4K box from 2021.\n\nApple just announced a brand new Apple TV 4K streaming box that was designed to accommodate Siri AI. This looks like a nifty bit of kit, but not everyone has $300 to spend on an updated streaming device. Luckily, the company also revealed that Siri AI would work with several older Apple TV 4K models , which is a nice surprise.\n\nSiri AI will be available as beta software in units going all the way back to the second-gen Apple TV 4K, which was released in 2021 . It'll be part of tvOS 27.2, which arrives this fall. We don't have an exact date just yet, but the new Apple TV 4K comes out on November 13, so it'll be on or before that.\n\nThere are some questions as to which aspects of Siri AI the older boxes will be able to leverage. They weren't designed with the assistant in mind and they don't have as much horsepower as the upcoming model. For instance, the new Apple TV 4K includes far-field microphones, allowing for hands-free control without a remote. Older units don't have integrated microphones, though the remotes do.\n\nWe also don't know if the older boxes will be able to access all of the updated smart home controls offered by tvOS 27.2. Engadget has reached out to Apple to ask for some clarification here regarding the feature set. We'll update this post when we find out.\n\nThe company announced several other smart home gadgets today , beyond the redesigned Apple TV 4K. There's a smart home hub called HomeView and a refresh of the HomePod mini speaker. Apple also announced several standard smart home devices, like a lock, cameras, a doorbell and more.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2285346/some-older-apple-tv-models-are-also-getting-siri-ai/",
+      "publishedAt": "2026-10-13T15:21:26.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-2a1ed04232e8ecee:en",
+      "sourceId": "9to5mac-2a1ed04232e8ecee",
+      "lang": "en",
+      "title": "Apple confirms HomePod mini 2 won’t have Siri AI at launch",
+      "summary": "Today Apple introduced HomePod mini 2 with Siri AI as a major tentpole feature. HomePod mini 2 ships on October 30, but checking the fine print on Apple’s website, it seems Siri AI won’t be available on launch day. more…",
+      "body": "Today Apple introduced HomePod mini 2 with Siri AI as a major tentpole feature. HomePod mini 2 ships on October 30, but checking the fine print on Apple’s website, it seems Siri AI won’t be available on launch day.\n\nHomePod users have been waiting for Apple to reveal when Siri AI is coming to its home devices. And today it became official : Siri AI will be available soon on the new HomePod mini 2.\n\nBut unfortunately, if you buy HomePod mini 2 for launch day delivery on October 30, you’ll be left waiting a bit longer to access Siri AI.\n\nFrom Apple’s website , in the ‘Meet Siri AI’ section for HomePod mini 2:\n\nSiri on HomePod mini 2 puts a powerful, AI assistant right at the center of your home. 1 Once set up with your iPhone or iPad, Siri draws on broad world knowledge and your personal context to help you find what you need and get more done every day.\n\nEnjoy more natural conversations, richer answers, and effortless smart home control — while your privacy is protected at every step. Just ask to play your favorite music, check your schedule, or catch up on podcasts, completely hands-free.\n\n1 Coming in a future software update. Usage limits may apply.\n\nThe footnote above says that Siri AI won’t be arriving until a future software update. This is further confirmed in Apple’s press release here near the bottom.\n\nHomePod mini 2 arrives two weeks ahead of HomeView and the new Apple TV 4K , both of which ship November 13. Each of those products support Siri AI at launch, so here’s hoping that means HomePod mini 2 will gain support by mid-November too.\n\nIf that’s the case though, it’s certainly curious why Apple wouldn’t just launch all three products the same day with Siri AI.\n\nWhen do you expect HomePod mini 2 to gain Siri AI support? Let us know in the comments.",
       "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/12/apple-gets-a-360-price-target-from-jp-morgan-despite-iphone-demand-concerns/",
-      "publishedAt": "2026-10-12T22:23:50.000Z",
+      "originalUrl": "https://9to5mac.com/2026/10/13/apple-confirms-homepod-mini-2-wont-have-siri-ai-at-launch/",
+      "publishedAt": "2026-10-13T14:47:06.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-fbdefbd4c435af8f:en",
+      "sourceId": "techcrunch-fbdefbd4c435af8f",
+      "lang": "en",
+      "title": "Spotify users on iOS 27 can now ask Siri to play music without having to say ‘on Spotify’",
+      "summary": "Siri can now learn users' preferred music app, allowing Spotify listeners to request songs, podcasts, and playlists without specifying which app to use.",
+      "body": "Posted:\n\nIt’s now easier to use Spotify by talking to Siri on iPhones updated to iOS 27, Spotify said on Tuesday. Users will no longer need to specify “on Spotify” when they’re asking Siri to play music or other content using the streaming service’s apps.\n\nInstead, users can just say whatever it is they want to hear, and Spotify will play the content, whether that’s a specific track, album, podcast, audiobook, or a broader query, like “play workout music,” or a request for one of Spotify’s features, like “play my DJ.”\n\nSiri’s voice control can also be used to do things like request personalized recommendations, resume podcasts, search your library, or even create a Prompted Playlist with AI.\n\nSpotify says removing the extra voice command will make hands-free listening feel more natural, as users can just focus on what they want to hear, not how to phrase the request properly to get their preferred music app to respond.\n\nThis feature works because Siri can now learn your music app preference. If you consistently use Spotify, it will route your audio requests to that app automatically.\n\nThe new feature is available globally for users with an iPhone 15 Pro or later, outside the EU, if Apple Intelligence is enabled in Settings.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/13/spotify-users-on-ios-27-can-now-ask-siri-to-play-music-without-having-to-say-on-spotify/",
+      "publishedAt": "2026-10-13T14:30:12.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-3f556ae1a26caf5c:en",
+      "sourceId": "the-verge-3f556ae1a26caf5c",
+      "lang": "en",
+      "title": "Apple’s HomePod Mini 2 is available to preorder",
+      "summary": "After nearly six years, Apple debuted a new, improved HomePod Mini. The $149 HomePod Mini 2 will launch on Friday, October 30th, and you can place a preorder now through Apple. The speaker includes the S10 chip, which debuted in the Apple Watch Series 10, and it can power a host of features. It will […]",
+      "body": "After nearly six years, Apple debuted a new, improved HomePod Mini . The $149 HomePod Mini 2 will launch on Friday, October 30th, and you can place a preorder now through Apple .\n\nThe speaker includes the S10 chip, which debuted in the Apple Watch Series 10, and it can power a host of features. It will support Siri AI after a future update, pairing you with a better, more helpful voice assistant. The speaker can be integrated into a four-speaker surround system with the new Apple TV 4K, and they can serve as speakers for a Mac computer (so long as it supports Wi-Fi 6E). Lastly, the top of th …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/gadgets/1009971/apple-homepod-mini-2-preorder-buy",
+      "publishedAt": "2026-10-13T14:15:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-93d14be73d42108c:en",
+      "sourceId": "techcrunch-93d14be73d42108c",
+      "lang": "en",
+      "title": "SpaceXSI bundles X Premium, Grok, and Cursor into one subscription",
+      "summary": "The new X Subscription combines X's paid features with AI tools like Grok and Cursor, offering plans ranging from $8 to $200 per month.",
+      "body": "Posted:\n\nIn a bid to attract more subscribers, the company now known as SpaceX Super Intelligence is bundling all its subscriptions, including X Premium, Grok, and Cursor, into one plan called simply “The X Subscription.”\n\nThe idea is that the combined offering could potentially attract more subscribers than any single subscription, given the competitive paid AI subscription market, where SpaceXSI faces rivals like OpenAI, Anthropic, and others.\n\nWith The X Subscription, users can gain access to Grok for AI-powered chat, with support for voice, images, video, and the API. Grok’s agentic AI Bot is also available, as is Cursor for AI coding and the paid features that come with an X Premium subscription, like the blue verified checkmark, creator tools, and fewer ads.\n\nThere are five plans available on the new subscription: free, Plus ($8/month), Premium ($30/month), Super ($100/month), and Ultra ($200/month), with AI usage caps increasing as you move up through the tiers. The free plan will only offer limited chat and agent usage, and Premium or higher is required to access the latest Grok models.\n\nThere’s another draw for existing X Premium+ subscribers: The comparable plan on the new X subscription costs the same or less, the company noted.\n\nExisting users can either switch from their subscription settings on X to upgrade to the new bundle, or maintain their current plan. The option to upgrade will roll out gradually, so interested customers will need to keep an eye on their billing settings for the offer to upgrade.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/13/spacexsi-bundles-x-premium-grok-and-cursor-into-one-subscription/",
+      "publishedAt": "2026-10-13T13:50:19.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-83a55610edbec215:en",
+      "sourceId": "9to5mac-83a55610edbec215",
+      "lang": "en",
+      "title": "You can buy the new, improved Siri Remote for your existing Apple TV 4K",
+      "summary": "Today Apple unveiled the long-awaited new Apple TV 4K model , which includes an updated Siri Remote with a built-in speaker as part of its Find My and Precision Finding support. But even if you’re not upgrading, you can still buy the new Siri Remote for your current Apple TV. more…",
+      "body": "Today Apple unveiled the long-awaited new Apple TV 4K model , which includes an updated Siri Remote with a built-in speaker as part of its Find My and Precision Finding support. But even if you’re not upgrading, you can still buy the new Siri Remote for your current Apple TV.\n\nAre you always losing your Siri Remote for Apple TV? Then you might be interested in the new Siri Remote that comes with the fourth-gen Apple TV 4K.\n\nThe new Apple TV 4K is available to pre-order now and ships November 13. But its $299 price tag may put off prospective upgraders.\n\nIf you just want the new Siri Remote, you can order that instead .\n\nFrom Apple’s press release :\n\nThe new Siri Remote is compatible with Apple TV HD and Apple TV 4K, and is also available for purchase separately.\n\nThe latest Siri Remote has the same basic design as the prior model. But it adds Precision Finding support for Find My, and a built-in speaker so you can play a sound on the remote when it’s lost.\n\nPrecision Finding will be a significant upgrade when trying to recover your lost remote, as it can guide you directly to the remote on your iPhone or Apple Watch.\n\nYou can order the Siri Remote (4th generation) from the Apple Store for $59 .\n\nThe remote will ship to customers on November 13, the same day the new Apple TV 4K delivers.\n\nWill you buy the new Siri Remote, or the fourth-gen Apple TV 4K? Let us know in the comments.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/13/you-can-buy-the-new-improved-siri-remote-for-your-existing-apple-tv-4k/",
+      "publishedAt": "2026-10-13T13:46:26.000Z",
       "categories": [
         "apple",
         "tecnologia-general"
@@ -5512,18 +5613,53 @@
     },
     {
       "kind": "news",
-      "id": "engadget-21b8bfc826ded8a1:en",
-      "sourceId": "engadget-21b8bfc826ded8a1",
+      "id": "techcrunch-1def4606697fd956:en",
+      "sourceId": "techcrunch-1def4606697fd956",
       "lang": "en",
-      "title": "Why are your iPhone photos so blurry (and how to improve it)",
-      "summary": "Blurry iPhone photos can come down to more than just a dirty lens. Here's how to expertly sharpen your shots and fine-tune your camera settings.",
-      "body": "Blurry photos usually go deeper than a little grease on your lens.\n\nPhone cameras are a modern convenience that's all too often taken for granted, making casual photography accessible to millions in a lightweight package. While your phone's camera probably won't beat out a device designed exclusively for taking photos and video, there are ways to take some especially pretty pictures with just your smartphone. That makes it all the more cumbersome when those pictures come out blurry — an all-too-common problem for iPhone users.\n\nWhile any phone can take a blurry photo, the proliferation of the iPhone has led most complaints of this sort to center on it. Luckily, the iPhone has an incredible number of camera settings, including a whole host of ways to avoid blurry pictures — and you won't even need the fancy AI Clean Up tools from iOS 27 for great results. Whether it's making sure your lens is clean or turning on the right toggles for dark video, blurry photos are easy to fix.\n\nBefore messing with any settings, you'll want to make sure your camera lens isn't what's causing the issue. If your lens is smudged up, don't just dab it with tissue paper or the end of your shirt; take off the case, grab a microfiber cloth, and wipe the lens down. If marks are persistent, add a very light dab of distilled water to the cloth (not right on the lens!) and wipe gently.\n\nThat's just the tip of the iceberg, though, as a lot of iPhone footage and photos can still turn out blocky or blurry, lacking the crispness you might be looking for. The next issue you want to look at is the light level you're working with, which is a prime culprit behind so many blurry shots. Low light levels make it harder for cameras to focus reliably, often require slower shutter speeds, and can introduce more noise — all of which can leave photos and videos looking blurry, grainy, or blocky after compression. If you want to improve your smartphone photography , you'll need to deal with low-light conditions.\n\nA good start is the camera settings on your iPhone (Settings > Camera), where you can change the resolution at the top (there are different frame rates and resolution settings here, but anything above 720p will generally produce crisper image quality). However, some of the more helpful features are in the camera itself, such as locking focus: Instead of letting your camera shift focus all over the place, you can tap the image and hold on the area you want to focus on until the \"AE/AF LOCK\" prompt appears on-screen. On models iPhone 11 and newer, you can also turn on Night Mode (signified by the moon icon at the top of the camera interface), though it will turn on automatically if you're in low light. Night Mode will automatically brighten and capture low-light images with more detail.\n\nWhen it comes to adjusting shutter speeds and changing your ISO settings — slower shutter speeds can introduce motion blur, while higher ISO settings can increase visible noise and reduce image quality — you'll need a third-party app like Camera+. Apps like these let you dig into the minute controls of your camera and give you a leg up if you're on an older device. In addition to digital tools, you should consider getting a tripod to stabilize your shots if you're serious about avoiding blur. A tripod keeps the iPhone still during longer exposures, reducing camera shake that can otherwise turn small movements into visible blur — especially in low light.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2281499/how-to-improve-blurry-iphone-photo/",
-      "publishedAt": "2026-10-12T22:00:00.000Z",
+      "title": "Apple refreshes its HomePod mini with a new chip and $149 price tag",
+      "summary": "The new $149 HomePod mini with Siri AI and a 'SoundGlow' visual feature will be available starting October 30.",
+      "body": "Apple’s new HomeView device was the center of the show at its smart home event on Tuesday, but the company also refreshed its HomePod mini smart speaker with a new chip and Siri AI integration, the latter of which will be available through a future update.\n\nThe $149 update is $50 more expensive than the original version launched over six years ago in 2020 . The new HomePod mini has an S10 chip that helps improve optimize dynamic range, loudness, and acoustic performance.\n\nWith the new HomePod mini, users can control their smart home devices through voice commands. Plus, the speaker can listen for sounds like a smoke alarm and send a notification to users’ phones — a feature that Alexa devices have offered for years.\n\nApple said that with Siri AI, users will be able to have multi-turn conversations, but it didn’t provide a date for when the new assistant will be available to HomePod mini 2 buyers.\n\nThe company also said the new speaker works better with its other devices. For instance, users could form a four-speaker home entertainment system paired with the new Apple TV 4K . Plus, the HomePod mini 2 speakers can be the default speaker for Mac for video calls or music playback instead of built-in speakers.\n\nThe device has another new feature, as well: a visual canvas called “Sound Glow,” which uses the color scheme of the album art to turn the top of the HomePod mini into a visual canvas that will glow and pulse in sync with the music. Users can also pick soundscapes like rain or ocean waves to start animations.\n\nThe new speaker comes in pink, green, blue, white, and midnight colorways and will be available starting October 30. Consumers can preorder starting today.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/13/apple-refreshes-its-homepod-mini-with-a-new-chip-and-149-price-tag/",
+      "publishedAt": "2026-10-13T13:38:03.000Z",
       "categories": [
         "tecnologia-general",
-        "apple"
+        "apple",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-1b8ac3e7e0b533f4:en",
+      "sourceId": "9to5mac-1b8ac3e7e0b533f4",
+      "lang": "en",
+      "title": "Siri AI coming to older Apple TV 4K models, here’s what’s compatible",
+      "summary": "Today Apple introduced a fourth-generation Apple TV 4K with Siri AI, and A19 chip, and more. But the company also shared welcome news for current Apple TV users: Siri AI is compatible with select older models too. more…",
+      "body": "Today Apple introduced a fourth-generation Apple TV 4K with Siri AI, and A19 chip, and more. But the company also shared welcome news for current Apple TV users: Siri AI is compatible with select older models too.\n\nThe new Apple TV 4K is packed with a variety of upgrades, but it also has a higher $299 starting price.\n\nWhile it’s previously been expected that the rumored Siri AI support in tvOS would require the new hardware, it seems that’s not the case.\n\nIn Apple’s press release , it says:\n\nSiri AI is available as a beta on Apple TV 4K (2nd generation or later), and is available at launch in the U.S. , Australia , Canada , India , New Zealand , Singapore , South Africa , and the UK in English.\n\nThis means users of the last two generations of Apple TV 4K can benefit from Siri AI too with a forthcoming software update for tvOS.\n\nSiri AI will almost certainly perform better on the latest-generation hardware, but it’s great to see it supported on some older models too.\n\nDoes this news change your upgrade plans? Let us know in the comments.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/13/siri-ai-coming-to-older-apple-tv-4k-models-heres-whats-compatible/",
+      "publishedAt": "2026-10-13T13:12:28.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "applevis-apps-e1785f27098d9bd0:en",
+      "sourceId": "applevis-apps-e1785f27098d9bd0",
+      "lang": "en",
+      "title": "Astonischika",
+      "summary": "Astonischika is a turn-based pixel role-playing game with a roguelite loop. Build a party from bold classes, climb a branching map and fight turn by turn against monsters, elites and bosses. Every run is different: you choose your path across battles, rest sites, treasure, merchants and minigames. When your party falls, the city remains your permanent home — your heroes, their gold and their gear grow from run to run. FEATURES • Build your party from a range of classes — warrior, mage, cleric, rogue, archer and more • Turn-based battles with skills, spells, elements and status effects • Branching map: battle, elite, boss, rest, treasure and merchant • Level-ups, attribute points, equipment and learnable spells • Minigames: shell game, dice, memory, coin flip and more • A permanent city hub — your progress stays after every run • Endless scaling for long-term motivation • 22 languages, music and sound effects GREAT FOR Quick battle rounds in between, or long dungeon sessions.",
+      "body": "Astonischika is a turn-based pixel role-playing game with a roguelite loop. Build a party from bold classes, climb a branching map and fight turn by turn against monsters, elites and bosses.\n\nEvery run is different: you choose your path across battles, rest sites, treasure, merchants and minigames. When your party falls, the city remains your permanent home — your heroes, their gold and their gear grow from run to run.\n\nFEATURES • Build your party from a range of classes — warrior, mage, cleric, rogue, archer and more • Turn-based battles with skills, spells, elements and status effects • Branching map: battle, elite, boss, rest, treasure and merchant • Level-ups, attribute points, equipment and learnable spells • Minigames: shell game, dice, memory, coin flip and more • A permanent city hub — your progress stays after every run • Endless scaling for long-term motivation • 22 languages, music and sound effects\n\nGREAT FOR Quick battle rounds in between, or long dungeon sessions.",
+      "sourceName": "AppleVis Apps",
+      "originalUrl": "https://www.applevis.com/apps/ios/games/astonischika",
+      "publishedAt": "2026-10-13T11:30:06.000Z",
+      "categories": [
+        "apple",
+        "apps-accesibles",
+        "android"
       ]
     },
     {
@@ -5544,22 +5680,6 @@
     },
     {
       "kind": "news",
-      "id": "9to5mac-d7792bc7e4f751cc:en",
-      "sourceId": "9to5mac-d7792bc7e4f751cc",
-      "lang": "en",
-      "title": "iPhone hits record Q3 shipment share as global smartphone market plunges 20%, per report",
-      "summary": "According to Counterpoint Research , Apple saw its share of global smartphone shipments cross 20% for the first time in a third quarter, despite an industry-wide decline. Here are the details. more…",
-      "body": "According to Counterpoint Research , Apple saw its share of global smartphone shipments cross 20% for the first time in a third quarter, despite an industry-wide decline. Here are the details.\n\nIn a report released today, Counterpoint Research says memory constraints and rising prices have pushed global smartphone shipments to their lowest third-quarter level in 14 years, with a 20% year-over-year decline. The report doesn’t say what that translates to in absolute numbers.\n\nAccording to Counterpoint Research, Apple shipped 22% of all smartphones during Q3 2026, up from 18% in the year-ago period. That helped it narrow the gap with Samsung, which remained in first place with a 23% share.\n\nThe top five also included Xiaomi (10%), OPPO (9%), and vivo (8%), all of which saw their shipment shares decline compared to Q3 2025.\n\nHere’s Counterpoint Research on Apple’s performance for the period:\n\nApple’s market share crossed 20% for the first time in any Q3, reaching 22%, despite a YoY decline in shipments. The volume decline was largely driven by the absence of a base iPhone 18, which resulted in a smaller launch-month channel fill than the full iPhone 17 lineup a year earlier. Apple also joined the industry wide shift toward price hikes, although the impact was limited to the final weeks of the quarter. However, the iPhone 18 Pro models saw a stronger launch than their predecessors, particularly in China and India, while sustained momentum from the iPhone 17 series helped offset a higher shipment decline.\n\nLooking ahead, the report noted that things don’t look particularly encouraging for the remainder of the year, “with OEMs increasingly prioritizing profitability over shipment volumes amid elevated component costs and weaker affordability.”\n\nCounterpoint added that price-sensitive segments will likely face further pressure from higher device prices and limited component availability, with a meaningful recovery in shipment volumes unlikely until costs come down and supply conditions improve.\n\nTo read Counterpoint’s full report, follow this link .",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/12/iphone-hits-record-q3-shipment-share-as-global-smartphone-market-plunges-20-per-report/",
-      "publishedAt": "2026-10-12T20:25:16.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "ars-technica-e95cb2b7a5fa73a7:en",
       "sourceId": "ars-technica-e95cb2b7a5fa73a7",
       "lang": "en",
@@ -5572,88 +5692,6 @@
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-bb13b0092b1fe404:en",
-      "sourceId": "techcrunch-bb13b0092b1fe404",
-      "lang": "en",
-      "title": "WindBorne wins a hefty US Air Force contract for its balloon data",
-      "summary": "A Silicon Valley startup that uses weather balloons and AI to predict the weather won a U.S. military contract worth almost $50 million.",
-      "body": "The U.S. Air Force will buy data collected by WindBorne Systems ‘ fleet of autonomous weather balloons under a new contract that could be worth nearly $50 million to the startup.\n\nWindBorne currently has about 700 weather balloons flying around the globe, collecting atmospheric sensor readings that the company sells to customers and also feeds into its own AI weather forecasting model. WindBorne, founded in 2015 and based in Redwood City, California, is one of the first organizations to directly feed empirical data into a deep-learning weather model.\n\nThe company has worked closely with the U.S. government, particularly the National Weather Service and the U.S. Air Force and Navy, but this is the single-largest contract the company has participated in. The contract is worth up to $49 million, but the Air Force pays only as it needs data. It can place orders for specific regions at specific times. So far, it has ordered $1.7 million worth, and executives expect more orders to follow.\n\n“This is largely a vehicle through which continued growth of the constellation can be supported, as well as some work on research and development to continue to improve the hardware and performance of the balloons,” WindBorne co-founder and CTO Andrey Sushko told TechCrunch. He added that the contract, which was awarded without competitive bidding, is “a determination by the government that for this capability of collecting global data, we were the only company able to provide it in the way that met their needs for these operations.”\n\nWindBorne CEO John Dean told TechCrunch in August that the company had raised a $37 million Series B round to continue scaling its business. Earlier this summer, the company released the latest version of its forecasting model, WeatherMesh 6, which it says provides more accurate forecasts than the traditional model run by the European Centre for Medium-Range Weather Forecasts (ECMWF), which simulates the atmosphere using the laws of physics.\n\nSince the arrival of transformer model architectures and the ECMWF’s release of a massive weather dataset a few years ago, AI weather forecasting has become one of the more productive uses of deep-learning technology. Meteorologists previously relied on expensive supercomputers running detailed equations that approximate how the atmosphere behaves. Now, end-to-end learning can ingest decades of weather data and issue predictions more quickly.\n\nModels built by frontier labs and government agencies are proving more accurate than traditional forecasts, although it is still a jagged frontier, with both types of forecasts required to enable useful understanding of the weather. Google DeepMind’s latest weather model offers important new capabilities, and its cyclone forecasting tools are becoming increasingly central to how the U.S. government responds to hurricane season.\n\nIn August WindBorne became the first organization to send an unpowered flight system — one with no engine — to collect data in the eye of a typhoon . The company maneuvers its balloons by adjusting their altitude, bleeding air, or dropping sand carried as ballast, to send the vehicles into winds that take them where they need to go.\n\n“That’s a pretty novel step, and the two ingredients for that are one, having good wind and weather models, and knowing how to navigate them; and two, having a large enough constellation that you have balloons in the right places,” Sushko said. “It’s one of the first times that a deep-learning model was used for actual operational decisions.”",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/12/windborne-wins-a-hefty-us-air-force-contract-for-its-balloon-data/",
-      "publishedAt": "2026-10-12T17:19:14.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-ac2873f2701be7c0:en",
-      "sourceId": "the-verge-ac2873f2701be7c0",
-      "lang": "en",
-      "title": "Meta has some Wonder Full new AI models",
-      "summary": "Meta is making up for lost time in the AI race. After launching Muse Spark, the first model from its revamped Superintelligence Labs division, and buzzy AI agent Muse, it's now launching two new models it claims can go toe-to-toe with the industry's best. The new models, Muse Wonder and Muse Wonder Full, are available […]",
-      "body": "Meta is making up for lost time in the AI race. After launching Muse Spark , the first model from its revamped Superintelligence Labs division, and buzzy AI agent Muse , it's now launching two new models it claims can go toe-to-toe with the industry's best.\n\nThe new models, Muse Wonder and Muse Wonder Full, are available for Muse Code subscribers starting today. Wonder can also be accessed through the Meta Model API, Meta said.\n\nMeta says it eventually plans to power its Muse AI agent with Wonder, starting with subscribers, and will develop specialized models it \"can bring to everyone using Muse.\" It hasn't shared specifics or provided a tim …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1009479/meta-muse-wonder-full-ai-model",
-      "publishedAt": "2026-10-12T17:00:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-8cdab68bc672ad25:en",
-      "sourceId": "techcrunch-8cdab68bc672ad25",
-      "lang": "en",
-      "title": "Honeyjar offers AI tools to improve PR and comms at every company",
-      "summary": "Journalists, entrepreneurs, and even some public relations professionals will tell you that the PR process is broken. But could AI actually make things better?",
-      "body": "Journalists, entrepreneurs, and even some public relations professionals will tell you that the PR process is broken (buy me a drink sometime, and I’ll give you my rant). But could AI actually make things better?\n\nHoneyjar , which will be attending this week’s TechCrunch Disrupt as part of the Startup Battlefield 200 , wants to use AI to make the expertise and judgment of the best PR pros available to everyone, including founders who have no idea where to start.\n\nThe startup’s founders, CEO Michelle Masek and CCO Nadia Jamshidi, certainly fit the bill when it comes to PR expertise. They’ve both spent decades in the field, doing in-house communications and working at agencies. Masek recently served as senior vice president of marketing and communications for Ev Williams’ venture firm, Obvious Ventures .\n\nAs Masek described the challenges involved in “helping with the why and when of comms and marketing for 110 portfolio companies” (the startups her firm had invested in), I flashed back to my own brief stint leading marketing at an early-stage VC firm , where founders were constantly asking for help getting into TechCrunch. So I wasn’t surprised that Masek found herself asking, “Is there a way to scale the senior-level expertise into AI [in a way] that actually helps users do the work of comms in the proactive and skilled way that we do?”\n\nHoneyjar is her answer to that question. It automates processes like writing announcements, finding the best journalists to pitch, and identifying the most promising speaking opportunities. But Jamshidi told me in a follow-up email that Honeyjar’s vision goes beyond getting press coverage and beyond specific AI tools.\n\n“Honeyjar can find reporters, build media lists, scan news and social, track coverage, and surface opportunities,” she said. “Those capabilities are important, but they’re just one piece of what we’re building. The bigger idea is bringing the whole communications workflow together: signals, context, strategy, judgment, timing, and execution.”\n\nAnd it’s not just for founders. Masek said she’s come to realize there are “millions and millions of unassigned communicators responsible for the work of comms.”\n\n“They don’t have the title of comms, but they’re marketers, investors, authors, creators, school superintendents, sports team leaders,” she added. “It’s incredibly horizontal, this need to nail strategic communications. It’s always passed around, but the problems are very often not solved.”\n\nNor is Honeyjar trying to replace PR professionals. Masek said she and Jamshidi built the tool they wanted to use themselves. She argued that Honeyjar can make PR firms and in-house comms teams more effective, while allowing individual PR practitioners to “take on that third client without any scaling cost.”\n\nWhen Honeyjar opened its waitlist, it received 10,000 signups in the first 24 hours, said Masek. Beta testers include Nextdoor, tech startup Coco Robotics, investor Bloomberg Beta, and agencies Mission North and Full Picture.\n\nThat sounds promising for companies looking to get more attention, but it could be a nightmare for journalists. We receive more pitches than we can respond to, many of them already written by AI chatbots.\n\nWhen I raised my fears about getting inundated with even more PR slop, Masek noted that while Honeyjar can draft a pitch email or a social media post in the customer’s voice, the customer actually has to hit send or publish.\n\n“We never want a world where the human is removed from the loop,” she said.\n\nAnd that’s also where judgment is key. Masek said she and Jamshidi tried to “infuse and encode Honeyjar with our wisdom.” Through a broader initiative called the Comms Lab, they’re now training the product on the judgment of other PR pros as well.\n\n“For us, judgment is knowing what to do, what not to do, when to act, and how to adapt to the situation,” Jamshidi added. “That comes from understanding a company’s goals and priorities, what’s happening inside and outside the organization, and knowing what to say, to whom, where, and when.”\n\nIn some cases, Masek said Honeyjar might even tell a founder that they’re simply not ready for coverage.\n\n“We hear from reporters all the time who want better pitches, who want to hear from experts directly,” she said. “We actually see a future where there are more credible pitches in your inbox from sources who you actually want to hear from.”",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/12/honeyjar-offers-ai-tools-to-improve-pr-and-comms-at-every-company/",
-      "publishedAt": "2026-10-12T15:45:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-b0fb3bf2122f749d:en",
-      "sourceId": "techcrunch-b0fb3bf2122f749d",
-      "lang": "en",
-      "title": "Microsoft president says UK is best placed to drive AI regulation",
-      "summary": "Microsoft president Brad Smith calls for urgent AI regulation, saying milk and washing machines have more oversight than AI companies.",
-      "body": "Microsoft president Brad Smith is calling for urgent regulation of AI, and his argument is that consumer products like milk and washing machines have more oversight than the companies building artificial intelligence.\n\nOn a recent BBC podcast , Smith called AI both a “weapon and a tool” that is putting the world’s cybersecurity at risk and said the “moment has arrived” to institute global safety rules.\n\nSmith also said the U.K., and not the U.S. or European Union, is best placed to lead on global safety rules. Britain’s AI Security Institute (AISI), launched in 2023, receives access to major models from U.S. frontier labs before they are deployed and has quickly become a leader in AI safety testing.\n\nThat role has been under threat in recent weeks, with U.S. president Donald Trump warning against “globalist” organizations, which he claims are interfering with American companies. Last month, he reportedly asked Anthropic and OpenAI to withhold new models from British testers, but AISI confirmed on Monday that it is able to access and test the latest models.\n\nDespite the president’s pushback, however, Smith argued the U.K. can regulate AI in ways that the U.S. cannot.\n\n“In Washington, D.C., people don’t look at the U.K. and they don’t look at London the way they look at Brussels,” he told the BBC. “That’s a strength.”\n\nHis comments come amid rallying cries from tech leaders, including Anthropic’s Dario Amodei and OpenAI’s Sam Altman, to slow the pace of AI development in the wake of several incidents where AI agents went rogue.\n\nLast month, Trump hosted tech leaders of companies, including OpenAI, Anthropic, Nvidia, AMD, SpaceX, Meta, and Google, at the White House to discuss AI safety. They signed a “morally binding” document in which they agreed to work with “independent auditors” to assess the safety and capabilities of their AI models.\n\nSmith says the document is a “good step,” but it stops short of the type of regulation that is necessary. The problem with voluntary self-regulation, he said, is that only the “good companies” will comply.\n\n“It’s the companies that are not as responsible that you need to worry about,” he said.\n\nSmith outlined several AI safety rules he’d like to see put into place, like a legal obligation to alert an organization if its system was breached by rogue AI agents. He also appears to be in favor of AI labs getting the approval of outside evaluators before an AI product is released and spoke positively about kill switches to pause or slow down AI if humans lose control of it.\n\n“Let’s speak calmly, maybe even softly, but firmly, and start to bring people together,” Smith said. “I hope that’s the role we can play as a company. I hope that’s the role the U.K. can play as a country.”",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/12/microsoft-president-says-uk-is-best-placed-to-drive-ai-regulation/",
-      "publishedAt": "2026-10-12T15:31:19.000Z",
-      "categories": [
-        "tecnologia-general",
-        "windows",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-55840c9c4e87e5dd:en",
-      "sourceId": "the-verge-55840c9c4e87e5dd",
-      "lang": "en",
-      "title": "Android is the best and worst thing about Googlebooks",
-      "summary": "My first week with the new Android-powered laptops has been about as rocky as anyone's, but I've slowly learned to like them, even if love still feels a ways off. Every moment that's impressed me has been thanks to Android, whether I've been accessing a native version of a useful app or quickly checking my […]",
-      "body": "My first week with the new Android-powered laptops has been about as rocky as anyone's , but I've slowly learned to like them, even if love still feels a ways off. Every moment that's impressed me has been thanks to Android, whether I've been accessing a native version of a useful app or quickly checking my phone notifications from the laptop user interface.\n\nBut man, sometimes it just sucks .\n\nPhone connectivity is flaky, app casting is awkward, and file-sharing seems to be flat-out broken. And that's just the interaction between a Googlebook and a phone - I have a whole other set of gripes about the limitations of native Android apps on a $ …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1008750/googlebooks-android-best-worst-notifications-app-cast-file-sharing",
-      "publishedAt": "2026-10-12T14:00:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "android",
-        "apps-accesibles"
       ]
     },
     {
@@ -5671,21 +5709,6 @@
         "tecnologia-general",
         "android",
         "windows"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-adf1afb346c00c0c:en",
-      "sourceId": "the-verge-adf1afb346c00c0c",
-      "lang": "en",
-      "title": "CMF’s first wireless speakers look like musical milk cartons",
-      "summary": "The CMF Speaker Series are the first portable Bluetooth speakers from the budget-focused brand that Nothing created but is in the process of spinning off into an India-based standalone subsidiary. As with many of CMF's products, like the Headphone Pro that launched a year ago, the new speakers deliver affordability alongside unique designs and bright […]",
-      "body": "The CMF Speaker Series are the first portable Bluetooth speakers from the budget-focused brand that Nothing created but is in the process of spinning off into an India-based standalone subsidiary. As with many of CMF's products, like the Headphone Pro that launched a year ago, the new speakers deliver affordability alongside unique designs and bright color options that help them stand out from the competition. While the company doesn't directly cite a grocery store's dairy aisle as the inspiration for its latest hardware, it's hard not to look at these and immediately see electronic milk cartons.\n\nThere are two versions of the CMF Speaker Se …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1008191/nothing-cmf-speaker-m-s-series-bluetooth-design-customize",
-      "publishedAt": "2026-10-12T13:00:00.000Z",
-      "categories": [
-        "tecnologia-general"
       ]
     },
     {
@@ -6040,23 +6063,6 @@
         "tecnologia-accesibilidad",
         "ia-accesibilidad",
         "braille"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "accessible-android-0fdb63313e7c0995:en",
-      "sourceId": "accessible-android-0fdb63313e7c0995",
-      "lang": "en",
-      "title": "Shortcut Menu",
-      "summary": "Shortcut Menu lets the Android accessibility shortcut, such as holding both volume keys, turn your choice of screen reader or other accessibility service on or…",
-      "body": "Published 3 October 2026 by Kareen Kiwan\n\nShortcut Menu lets the Android accessibility shortcut, such as holding both volume keys, turn your choice of screen reader or other accessibility service on or off. It works like the accessibility shortcut menu on iPhone:\n\nTurning a screen reader on turns any other screen reader off, so two never talk at once. Services with the same name, such as Google’s and Samsung’s TalkBack, are told apart by their maker, such as “TalkBack (Samsung)”. Pressing the shortcut again while the menu is open closes it.\n\nWithout Shortcut Menu, a shortcut with more than one feature on it asks which one to use, and that question is not spoken when no screen reader is on.\n\nWith Shizuku, run the same command without adb shell. In Settings, Accessibility, open Shortcut Menu and turn on its shortcut, such as the volume keys. Make Shortcut Menu the only feature on that shortcut. Open the Shortcut Menu app and choose which services the menu offers. Until you choose, it offers your screen readers. The app also shows whether the permission is granted and what each shortcut is assigned to, and has a button to try the menu. How it works The shortcut turns Shortcut Menu’s accessibility service on, and the service opens the menu. When the menu closes, the service turns itself off, so the next press turns it on again. A press while the menu is open turns the service off, which closes the menu.\n\nChoosing a service changes Android’s list of enabled accessibility services directly, so Android does not ask “Allow full control?” each time. The menu speaks with the phone’s text-to-speech engine, at the accessibility volume.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nSamsung UI is the only Android UI that offers 3 accessibility shortcuts: pressing and holding the volume keys, short pressing the power and volume up keys, and the accessibility onscreen button or gesture, based on the navigation mode being used. Other OEMs offer only the first and third shortcuts. Honor even excludes the accessibility button and gesture, leaving the user with only 1 shortcut, and that shortcut can only be assigned to 1 accessibility service. On UIs that allow more than 1 accessibility service to be assigned to the shortcut, Android asks the user to choose which one to activate every time the shortcut is used. However, this dialog is not accessible if no screen reader is running.\n\nShortcut Menu aims to address these shortcomings by allowing the user to choose the accessibility services they want to launch from the shortcut. The user can then launch any of the selected services in an accessible way. When no screen reader is active, the service speaks the items as the user moves their finger over them, and lifting the finger activates the selected service. If a screen reader is already active, the service makes sure to turn it off before launching another screen reader to avoid potential conflicts.\n\nSetting up the app requires an ADB command, which can be run either using ADB on a computer or directly on the phone through an ADB app that uses wireless debugging. Working with ADB is not covered here, but I personally used the ADB AppControl mobile app to enter the command that grants the app the required permission.\n\nThe app's UI is straightforward. It shows whether the permission has been granted and which shortcut is assigned to the service. It also includes a menu where you can turn services on or off without using the shortcut. The user can select which services should be included, although screen readers are checked by default. For me, Jieshuo Main, Jieshuo Helper Service, TalkBack, and AI Subtitles were all included.\n\nWhen using the shortcut, the app currently speaks through Google TTS. When a screen reader is active, it behaves like a regular screen that the screen reader can interact with.\n\nFor Samsung users who keep both Samsung TalkBack and Google's TalkBack on their devices and wish to switch between them, both can be added to the services list. I haven't tested this on a Samsung device to see if there are any issues. Anyway, starting with One UI 9, Samsung TalkBack is replaced with Google TalkBack, so there are no longer two TalkBack versions.\n\nLast Tested App version and Android version:\n\nApp version: 0.2, Android 16\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility.",
-      "sourceName": "Accessible Android",
-      "originalUrl": "https://accessibleandroid.com/app/shortcut-menu/",
-      "publishedAt": "2026-10-03T11:49:18.000Z",
-      "categories": [
-        "android",
-        "apps-accesibles",
-        "tecnologia-accesibilidad"
       ]
     }
   ]

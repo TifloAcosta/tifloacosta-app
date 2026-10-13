@@ -120,6 +120,18 @@
     "publishedAt": null
   },
   {
+    "id": "applevis-apps-e1785f27098d9bd0",
+    "title": "Astonischika",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/astonischika",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "Astonischika is a turn-based pixel role-playing game with a roguelite loop. Build a party from bold classes, climb a branching map and fight turn by turn against monsters, elites and bosses. Every run is different: you choose your path across battles, rest sites, treasure, merchants and minigames. When your party falls, the city remains your permanent home — your heroes, their gold and their gear grow from run to run. FEATURES • Build your party from a range of classes — warrior, mage, cleric, rogue, archer and more • Turn-based battles with skills, spells, elements and status effects • Branching map: battle, elite, boss, rest, treasure and merchant • Level-ups, attribute points, equipment and learnable spells • Minigames: shell game, dice, memory, coin flip and more • A permanent city hub — your progress stays after every run • Endless scaling for long-term motivation • 22 languages, music and sound effects GREAT FOR Quick battle rounds in between, or long dungeon sessions.",
+    "publishedAt": "2026-10-13T11:30:06.000Z"
+  },
+  {
     "id": "applevis-apps-965dfa0d128b3a6c",
     "title": "RedCoach",
     "sourceId": "applevis-apps",
@@ -226,17 +238,5 @@
     "platform": "Apple",
     "summary": "Pour, sort and collect. Nail Sort is a relaxing color puzzle where you organize polish bottles until each one holds a single shade. HOW TO PLAY Tap a bottle to pick up the top layer, then tap another bottle to pour it. Colors only stack on matching colors. Clear the level when every bottle holds one pure shade. Easy to learn, hard to put down. BUILD YOUR COLLECTION Every level you finish paints a nail in your collection. Complete full seasonal sets: Coral, Nude, Midnight Blue, Rose Gold, Emerald and many more. NO RUSH, NO PRESSURE No timers. No lives to wait for. No scores to chase. Play one level while your coffee brews, or lose an hour to it. Your call. FEATURES - Hundreds of levels with a smooth difficulty curve - 12 polish shades to collect - Unlimited undo while you think - Extra bottles when you get stuck - Plays fully offline - Clean, elegant design with no visual noise Perfect for unwinding, relaxing and giving your mind a break. Download Nail Sort and start your collection.",
     "publishedAt": "2026-10-07T02:31:26.000Z"
-  },
-  {
-    "id": "applevis-apps-5b3e3d796c6a1c8c",
-    "title": "Piggy Smash: Hammer Clicker",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/piggy-smash-hammer-clicker",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Smash piggy banks, collect the coins, pay your bills, then upgrade your hammer and smash harder. [TRY BEFORE YOU BUY!] Swing your hammer. Chase the fast piggies, crack the tough ones, and scoop up their coins. Some piggies are even on fire. - Upgrade your hammer, luck and stamina. Unlock hammers and abilities that change how you play. - Clear chapters, decorate your apartment, and move into better places. - Play through a full campaign. Optional Overtime is there when you want more smashing. PIGGY FOUNDRY A second mode. Drag your target onto the piggies and your hammer does the rest. Upgrade it, pay the building's bills, and come back to the coins it smashed while you were away. ACCESSIBILITY Play with VoiceOver: every piggy is read out, and you swing by timing, on a beat you feel. Choose your swing window. Bigger text across the game. FREE TO TRY The first 2 chapters are free. One purchase unlocks the full game. Optional extras for decorating, a few extra coins, supporting the game, an extra shift or Piggy Foundry gems. 100% optional, never required. No ads. No energy timers. Every swing you paid for is one you could have earned. Works offline. The bills are pretend. The coins stay in the game.",
-    "publishedAt": "2026-10-03T03:28:44.000Z"
   }
 ]

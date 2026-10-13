@@ -73,6 +73,8 @@ const requiredReaderFeatures = [
   'reading-audio-marks-controls',
   'shared.parseDaisyArchive(',
   'daisy-audio-only',
+  'exportCompletedTranslation(',
+  'reading-translation-export-txt',
   'Marcar posición del audio',
   'setReaderAudioOnlyMode(true)',
   'setReaderAudioOnlyMode(false)',

@@ -42,3 +42,53 @@ test('iOS ZIP importer distinguishes DAISY text from unsupported audio-only DAIS
   assert.match(library, /'daisy2\.02','daisy3'/);
   assert.match(build, /BLOQUEO PREVENTIVO iOS/);
 });
+
+test('DAISY 2.02 NCC and SMIL form a navigable text book without falsely enabling audio', async () => {
+  const originalParser = globalThis.DOMParser;
+  class FixtureParser {
+    parseFromString(source) {
+      if (source === 'NCC') return {
+        querySelectorAll: () => [{
+          tagName: 'H1', textContent: 'Capítulo uno',
+          querySelector: () => ({ getAttribute: () => 'chapter.smil#nav1' })
+        }]
+      };
+      if (source === 'SMIL') {
+        const textNode = { getAttribute: key => key === 'src' ? 'chapter.html#p1' : null };
+        const audioNode = { getAttribute: key => ({
+          src: 'chapter.mp3', 'clip-begin': 'npt=5.25s', 'clip-end': 'npt=9.50s'
+        })[key] || null };
+        const par = { getElementsByTagNameNS: (ns, name) =>
+          name === 'text' ? [textNode] : name === 'audio' ? [audioNode] : [] };
+        return {
+          getElementsByTagNameNS: (ns, name) => name === 'par' ? [par] : [],
+          querySelector: () => null
+        };
+      }
+      if (source === 'CHAPTER') return {
+        querySelectorAll: () => [{
+          tagName: 'H2', textContent: 'Comienzo del capítulo'
+        }, { tagName: 'P', textContent: 'Un párrafo de prueba.' }]
+      };
+      throw new Error('unknown fixture source');
+    }
+  }
+  globalThis.DOMParser = FixtureParser;
+  try {
+    const files = Object.fromEntries([
+      ['ncc.html', 'NCC'], ['chapter.smil', 'SMIL'], ['chapter.html', 'CHAPTER']
+    ].map(([key, source]) => [key, { dir: false, async: async () => source }]));
+    const zip = { files, file: name => files[name] || null };
+    const result = await parseDaisyArchive(zip, { title: 'Libro DAISY', language: 'es' });
+    assert.equal(result.format, 'daisy2.02');
+    assert.deepEqual(result.navigation.map(item => item.label), ['Capítulo uno']);
+    assert.equal(result.audioUnavailable, true);
+    assert.deepEqual(result.blocks.map(item => item.text), ['Comienzo del capítulo', 'Un párrafo de prueba.']);
+    assert.deepEqual(result.mediaSyncReferences, [{
+      textHref: 'chapter.html', audioHref: 'chapter.mp3',
+      clipBeginMs: 5250, clipEndMs: 9500
+    }]);
+  } finally {
+    globalThis.DOMParser = originalParser;
+  }
+});

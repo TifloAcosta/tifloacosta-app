@@ -136,3 +136,32 @@ test('iOS reader does not duplicate its OCR import control or display a build ba
   assert.match(html, /id="reading-ocr" type="button" hidden/);
   assert.match(html, /id="reading-build-identity" class="muted" hidden/);
 });
+
+
+test('iOS reader packages one Import button and keeps the document-reading screen intact', () => {
+  const home = read('ios-build/ios-reader-home.js');
+  const prepare = read('ios-build/prepare-web.mjs');
+  assert.match(home, /importButton\.id = 'ios-reading-import'/);
+  assert.match(home, /importButton\.addEventListener\('click', \(\) => file\.click\(\)\)/);
+  assert.match(home, /importHeading\.hidden = true/);
+  assert.match(home, /intro\.hidden = true/);
+  assert.match(home, /readerFilter|libraryFilter/);
+  assert.match(prepare, /ios-reader-home\.js/);
+  assert.match(prepare, /packagedReaderSource\.replace\(oldLibrarySort/);
+  assert.match(html, /id="reading-reader"/);
+});
+
+test('iOS VoiceOver offers adjustable one-choice controls without opening extra menus', () => {
+  const choices = read('ios-build/ios-reader-selects.js');
+  for (const id of [
+    'reading-library-filter', 'ios-reading-library-sort',
+    'reading-voice', 'reading-default-navigation', 'reading-audio-speed',
+    'reading-text-size', 'reading-font-family', 'reading-theme'
+  ]) assert.ok(choices.includes("'" + id + "'"), 'Missing adjustable control ' + id);
+  assert.match(choices, /slider\.type = 'range'/);
+  assert.match(choices, /slider\.setAttribute\('aria-valuetext'/);
+  assert.match(choices, /select\.dispatchEvent\(new Event\('change'/);
+  const home = read('ios-build/ios-reader-home.js');
+  assert.match(home, /tiflo-ios-library-filter/);
+  assert.match(home, /tiflo-ios-library-sort/);
+});

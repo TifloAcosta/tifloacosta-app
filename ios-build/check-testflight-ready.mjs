@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import crypto from 'node:crypto';
 
 const runNumber = Number(process.env.GITHUB_RUN_NUMBER);
-const buildNumber = String(300000 + runNumber);
+const buildNumber = String(400000 + runNumber);
 const appId = '6820517829';
 const groupName = 'Probadores TifloAcosta';
 if (!Number.isInteger(runNumber) || runNumber <= 0 ||

@@ -386,10 +386,20 @@ export function createWebReadingLibraryAdapter({
       mediaPositionMs: nonNegativeInteger(value.mediaPositionMs),
       excerpt: clean(value.excerpt),
       reference: clean(value.reference),
+      note: clean(value.note).slice(0, 4000),
       createdAt: now()
     };
     await put('marks', mark);
     return { added: true, mark };
+  }
+
+  async function updateMark({ id, bookId, note } = {}) {
+    const key = clean(id);
+    const saved = key ? await get('marks', key) : null;
+    if (!saved || saved.bookId !== clean(bookId)) return { updated: false };
+    const updated = { ...saved, note: clean(note).slice(0, 4000) };
+    await put('marks', updated);
+    return { updated: true, mark: updated };
   }
 
   async function deleteMark({ id }={}) {
@@ -486,6 +496,7 @@ export function createWebReadingLibraryAdapter({
     updateBookMetadata,
     listMarks,
     addMark,
+    updateMark,
     deleteMark,
     getReadingSettings,
     setReadingSetting,

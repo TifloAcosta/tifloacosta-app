@@ -23,6 +23,7 @@ jobs:
           node-version: '22'
       - name: Validar sintaxis del lector que se empaqueta en iOS
         run: |
+          node --check ios-build/prepare-web.mjs
           node --check web-reading.js
           node --check shared/web-reading-navigation.mjs
           node --check ios-build/ios-parity.js

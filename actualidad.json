@@ -1,62 +1,59 @@
 [
   {
-    "id": "engadget-945646e914af7af2",
+    "id": "techcrunch-81cc7ba4a9ffd257",
     "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2285023/google-gemini-4-argon-is-now-available-in-the-gemini-app-and-ai-mode-in-search/",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/13/fbi-arrests-openai-employee-accused-of-planting-hidden-recording-device-in-conference-room/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-13T16:00:00.000Z",
+    "publishedAt": "2026-10-13T20:59:11.000Z",
     "categories": [
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
+      "tecnologia-general"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Google's Gemini 4 Argon is now available in the Gemini app and AI Mode in Search",
-        "summary": "Google has rolled out Gemini 4 Argon to more users.",
-        "body": "But only Google AI Ultra and Pro subscribers can access it for now.\n\nGoogle's latest AI model, Gemini 4 Argon , is now available for more people. It first rolled out to members of Google's Fairwind Program, made up of governments and trusted partners that need access to the company's models with the most advanced cybersecurity capabilities, earlier this month. Now, developers can access it via the Gemini API and Google's agentic software developer platform Antigravity, while Google AI Ultra and Pro subscribers will be able to use it through the Gemini app and AI Mode in Search.\n\nIn the US, Google AI Pro costs $20 a month, while the Ultra tier costs at least $100. Access to Argon will set users back $2 per million input tokens and $10 per million output tokens. But those are just introductory prices valid until November 30. After that, Argon will cost users double those amounts.\n\nGoogle was supposed to launch a 3.5 Pro model, but it moved on and released Argon instead. The company said during its launch that the model can handle complex tasks involving finance, software engineering, coding, creative writing and cybersecurity defense. According to AI benchmarking company Artificial Analysis, Gemini 4 Argon matches OpenAI GPT-6 Astra's score for its Intelligence Index, which is its composite score for multiple AI benchmarks, at 60 percent of the cost per task at its introductory prices.\n\nJosh Woodward, VP of Product for Gemini and Google Labs, said that in the Gemini app, Argon answers more quickly and with less hedging, repetitions and clichés. It can also return responses while it's still thinking when dealing with longer tasks that would usually mean waiting a bit — or a long while, depending on the AI being used — for results. Google is also making it easier to toggle between chat and tasks within the Gemini app. Plus, it's adding Antigravity's agentic coding interface inside Gemini's macOS app."
+        "title": "FBI arrests OpenAI employee accused of planting hidden recording device in conference room",
+        "summary": "It's not clear exactly for what purpose the recording device was used, but FBI director Kash Patel said the scheme was to \"capture sensitive communications about the company’s super intelligence technology.\"",
+        "body": "OpenAI said it has alerted the FBI after discovering that an employee allegedly planted a hidden recording device in one of the AI maker’s office executive conference rooms.\n\nThe employee, named by federal prosecutors as Saudi national Abdulrahman Alfozan, was fired and arrested on October 9, about a week after OpenAI discovered the surveillance device.\n\nThe company said in a post on X that it used its internal AI models to understand the “sophisticated” device. OpenAI told TechCrunch that the device contained “advanced encryption, audio monitoring capabilities, and a mechanism for transferring data designed to evade monitoring,” though it is unclear to what degree this device is technically distinct from other recording devices.\n\n“At this time, we have no indications of this individual inappropriately accessing or exfiltrating model weights, source code, or customer data,” said OpenAI in its post on X.\n\nOpenAI’s spokesperson, Nate Evans, confirmed that the employee started with the AI model maker in July 2025 and worked on the product team.\n\nProsecutors with the U.S. Attorney’s Office for the Northern District of California said Alfozan was charged with using an electronic device to intercept oral communications — effectively accusing him of covertly recording people’s voice audio without their permission. Prosecutors said OpenAI caught the device after it was inserted into a USB port on the back of a television in OpenAI’s San Francisco office.\n\nPer the prosecutors, Alfozan was caught looking behind the television where the recording device was placed, and where OpenAI had placed a camera that allegedly caught the employee.\n\nIt’s not clear exactly for what purpose the recording device was used, but FBI director Kash Patel said the scheme was to “capture sensitive communications about the company’s super intelligence technology.”\n\nNeither Alfozan nor his attorney could be immediately reached for comment. He faces five years in prison if convicted.\n\nWhen reached, a spokesperson for the FBI reiterated a statement made by Patel.\n\n“Protecting American SI innovation is essential to safeguarding our nation’s economic strength and national security, and the FBI views that mission as one of our highest counterintelligence priorities,” Patel said."
       }
     },
     "media": null
   },
   {
-    "id": "the-verge-adca3f57e5f5cd0a",
+    "id": "the-verge-3da0077832841826",
     "type": "news",
     "sourceId": "the-verge",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1009862/google-releases-gemini-4-argon",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1010642/openai-employee-arrested-recording-device",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-13T16:00:00.000Z",
+    "publishedAt": "2026-10-13T20:45:25.000Z",
     "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
+      "tecnologia-general"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Google finally releases Gemini 4 Argon",
-        "summary": "After months sitting on the sidelines of the frontier AI race, Google has finally launched its long-awaited Gemini 4 Argon model, claiming it can compete with the best the industry has to offer. Google says Argon delivers \"frontier reasoning and improved performance across complex workflows,\" while cutting down on hedging, repetition, and the cliches that […]",
-        "body": "After months sitting on the sidelines of the frontier AI race, Google has finally launched its long-awaited Gemini 4 Argon model, claiming it can compete with the best the industry has to offer.\n\nGoogle says Argon delivers \"frontier reasoning and improved performance across complex workflows,\" while cutting down on hedging, repetition, and the cliches that continue to plague AI chatbots. The company claims Argon outperforms rival models like GPT-6 Astra, Claude Fable 5.1, and Claude Opus 5.5 across a range of benchmarks, including coding, cybersecurity, science, finance, and law.\n\nGoogle says it's already putting Argon to use internally, s …\n\nRead the full story at The Verge."
+        "title": "OpenAI employee arrested for allegedly planting a bug in a conference room",
+        "summary": "An OpenAI engineer was arrested after the company said it discovered a \"sophisticated recording device\" hidden in one of its offices. The employee, 35-year-old Abdulrahman Alfozan, is charged with using or attempting to use a device to intercept oral communications, according to a report from The San Francisco Standard. OpenAI's post about the incident says […]",
+        "body": "An OpenAI engineer was arrested after the company said it discovered a \"sophisticated recording device\" hidden in one of its offices. The employee, 35-year-old Abdulrahman Alfozan, is charged with using or attempting to use a device to intercept oral communications, according to a report from The San Francisco Standard .\n\nOpenAI's post about the incident says it used its AI models to \"understand the device and where it had come from, identifying that a specific employee had planted it a few days earlier.\"\n\nAs reported by The San Francisco Standard , OpenAI found the device plugged into a TV's USB port in an executive conference room. The devic …\n\nRead the full story at The Verge."
       }
     },
     "media": null
   },
   {
-    "id": "engadget-918a651d62495939",
+    "id": "techcrunch-b61b3410e8aa593e",
     "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2282149/iphone-duo-vs-xiaomi-18-fold-foldable-comparison/",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/13/judge-orders-openai-to-turn-over-hiring-records-in-apple-trade-secrets-case/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-13T15:45:00.000Z",
+    "publishedAt": "2026-10-13T20:36:44.000Z",
     "categories": [
       "tecnologia-general",
       "apple"
@@ -65,97 +62,22 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "iPhone Duo vs Xiaomi 18 Fold: How these foldables stack up",
-        "summary": "We compare the two on their design, displays, durability and more.",
-        "body": "We compare the two on their design, displays, durability and more.\n\nUnveiled just two days apart, the iPhone Duo and the Xiaomi 18 Fold are similar in many ways. They are both premium foldable phones in a passport-style design, moving away from the more square shape that has defined the foldable smartphone category for years.\n\nBut that's where their similarities end. Cameras and software are areas where the two are quite different from one another, in addition to price and availability. The Duo starts at $1,999 and goes on sale October 23, with pre-orders opening October 16. The Xiaomi 18 Fold starts at 10,999 yuan, or about $1,640, and is China-only for now. Yet, depending on where you are, comparing these two phones makes perfect sense. Neither of them have undergone an in-depth review yet, but we can already take a look at each one's specs to see how they stack up.\n\nIn terms of design and display, the specs of both devices are quite similar. You'll find a 7.6-inch inner screen when these phones are open, and a 5.4-inch outer screen when they're closed — both with a 120Hz refresh rate. But Xiaomi claims that its phone reaches a peak brightness of 4,000 nits, while Apple's only goes up to 3,000 nits. More nits mean a brighter screen, which makes it easier to see content in more environments. Also, the iPhone Duo's internal screen has a nano-textured layer that helps reduce glare and also makes the crease much less visible. The Duo's front-facing camera is also hidden beneath the display and only appears when you need it.\n\nEven though they look similar, the materials on each device are different. Apple built the iPhone Duo with a titanium frame and Ceramic Shield glass for greater durability. It's also certified IP68 for water- and dust-resistance. The Xiaomi 18 Fold, on the other hand, is made of an aluminum frame with its own Shield Glass 3.0. Xiaomi didn't share an IP rating, which is a bit concerning given that these phones tend to be more fragile.\n\nBut the 18 Fold tops the iPhone Duo in some areas. For instance, it weighs just 219 grams, compared to the iPhone Duo's 254 grams. It's also one of the lightest foldable phones on the market. The 35-gram difference may not seem huge, but a heavier phone tends to be more uncomfortable when you hold it for long periods of time.\n\nBoth the iPhone Duo and the Xiaomi 18 Fold are powered by custom chips designed by their respective companies. The A20 Pro is Apple's most powerful mobile chip, and is also the first built on a 2-nanometer architecture for improved energy efficiency. Xiaomi's XRING O3 is still based on 3-nanometer architecture. Another major difference is RAM — the 18 Fold has 16 GB of RAM, while the Duo is limited to 12 GB. It won't make a difference for most users, but does matter when you're running demanding games and AI tasks.\n\nCameras are what really sets these phones apart. Apple opted for a dual-camera setup with two 48-megapixel sensors — one wide and one ultra-wide. There's no optical zoom like on the iPhone Pro models, so users will need to rely on digital zoom. Xiaomi has delivered a more impressive camera setup with a 200-megapixel main sensor and two additional 50-megapixel sensors — an ultrawide and one for optical zoom. It's a shame that Apple isn't offering its best camera setup to those buying the most expensive iPhone yet.\n\nWhen it comes to the battery, Xiaomi offers a large 6,000mAh silicon-carbon cell. Apple hasn't disclosed the specs for the iPhone Duo, and since it hasn't hit stores yet, we don't have that information. The Xiaomi 18 Fold also charges faster than the iPhone Duo, since it supports up to 67W wired and 50W wireless charging. The Duo is limited to 60W wired and 35W via wireless MagSafe.\n\nSoftware is the Duo's strength , with iOS 27 adding Split View multitasking and Siri AI, and Apple Pencil support arriving later this year. There are also sleek animations and apps that really take advantage of the new form factor — something we have yet to see on the Android side. The real question is which one you can actually buy, since Xiaomi doesn't officially sell its phones in the US and local carriers don't certify them. But if you live in China, it's certainly a strong choice against the iPhone Duo."
+        "title": "Judge orders OpenAI to turn over hiring records in Apple trade secrets case",
+        "summary": "A federal judge ruled that Apple can access OpenAI's interview materials involving former Apple employees, as well as private messages and testimony from key figures in the case.",
+        "body": "A judge has ruled that Apple will gain expedited access to OpenAI’s hiring materials in the trade secrets-focused lawsuit the iPhone maker filed against OpenAI in July.\n\nSpecifically, the court will allow Apple to view documents associated with OpenAI’s interviews with former Apple employees who applied for roles within its consumer hardware and robotics groups ahead of the rumored launch of OpenAI’s first hardware device.\n\nThese documents could include interview checklists, guides, instructions, manuals, and scripts, as well as technical presentations and records showing that interview discussions had included references to Apple technology or components.\n\nThe court gave OpenAI five days to turn over materials it has already collected and 14 days for any other materials related to this request, agreeing with Apple that these documents should be expedited.\n\nThe case comes as OpenAI develops a consumer hardware device that could one day potentially rival the iPhone — or smartphones more generally — if the AI device becomes a central part of consumers’ lives and how they engage with software and services.\n\nIn its lawsuit, Apple accused OpenAI of a pattern of theft, which includes direct complaints about former employees using Apple laptops to download confidential material and files that contained information about unannounced technologies, features, and products, including technical specifications, engineering presentations, and proprietary project data.\n\nApple also said that former Apple employees at OpenAI coached others considering leaving Apple for OpenAI on what information to bring to their interviews, among other allegations.\n\nU.S. District Judge Edward Davila didn’t greenlight all of Apple’s requests for expedited access to OpenAI documents and messages relevant to the case. But he did rule that Apple could access the interview materials, alongside private LINE messages (from a messaging app) between individuals named in the case, including OpenAI employees Chang Liu and Alyssa Peng.\n\nThe judge also approved depositions for Liu and Peng, along with a third individual, OpenAI’s chief hardware officer, Tang Yew Tan. All three are former Apple employees.\n\nHowever, the judge denied Apple’s request to expedite its access to OpenAI’s research and development in specific areas, like metal finishes and power management. He also denied several of Apple’s broader discovery requests, like access to OpenAI’s hardware research or information about what its former employees created while working at OpenAI.\n\nThat denial isn’t final, though; the judge left the door open for Apple to narrow its requests and try again."
       }
     },
     "media": null
   },
   {
-    "id": "the-verge-6c8a0062971564ff",
+    "id": "the-verge-2a1c487a0075db73",
     "type": "news",
     "sourceId": "the-verge",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1009935/apple-homepod-mini-2-hands-on",
+    "originalUrl": "https://www.theverge.com/tech/1010619/apple-music-new-icon-ios-27-beta",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-13T15:27:56.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Here are all the new HomePod Mini 2 colors",
-        "summary": "Apple's HomePod Mini 2 is here, and we've gotten a close-up look at the second-gen smart speaker. The HomePod Mini 2 comes with an upgraded S10 chip capable of powering Siri AI, though Apple says support for new AI features will roll out as part of a future update. It also offers a sound glow […]",
-        "body": "Apple's HomePod Mini 2 is here, and we've gotten a close-up look at the second-gen smart speaker.\n\nThe HomePod Mini 2 comes with an upgraded S10 chip capable of powering Siri AI, though Apple says support for new AI features will roll out as part of a future update. It also offers a sound glow feature that matches its LED lights with the colors of a song's album art and can work as your Mac's default speaker.\n\nPhysically, the HomePod Mini 2 is almost identical to its predecessor, but the colors have changed. There's now a pink model and a green model, and the blue has changed colors. There's still black and white for those who want basics a …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-2ed9ef31fa9b448d",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2285346/some-older-apple-tv-models-are-also-getting-siri-ai/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-13T15:21:26.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Some older Apple TV models are also getting Siri AI",
-        "summary": "Siri AI functionality goes all the way back to back to the second-gen Apple TV 4K box from 2021.",
-        "body": "Functionality goes all the way back to back to the second-gen 4K box from 2021.\n\nApple just announced a brand new Apple TV 4K streaming box that was designed to accommodate Siri AI. This looks like a nifty bit of kit, but not everyone has $300 to spend on an updated streaming device. Luckily, the company also revealed that Siri AI would work with several older Apple TV 4K models , which is a nice surprise.\n\nSiri AI will be available as beta software in units going all the way back to the second-gen Apple TV 4K, which was released in 2021 . It'll be part of tvOS 27.2, which arrives this fall. We don't have an exact date just yet, but the new Apple TV 4K comes out on November 13, so it'll be on or before that.\n\nThere are some questions as to which aspects of Siri AI the older boxes will be able to leverage. They weren't designed with the assistant in mind and they don't have as much horsepower as the upcoming model. For instance, the new Apple TV 4K includes far-field microphones, allowing for hands-free control without a remote. Older units don't have integrated microphones, though the remotes do.\n\nWe also don't know if the older boxes will be able to access all of the updated smart home controls offered by tvOS 27.2. Engadget has reached out to Apple to ask for some clarification here regarding the feature set. We'll update this post when we find out.\n\nThe company announced several other smart home gadgets today , beyond the redesigned Apple TV 4K. There's a smart home hub called HomeView and a refresh of the HomePod mini speaker. Apple also announced several standard smart home devices, like a lock, cameras, a doorbell and more."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-2a1ed04232e8ecee",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/13/apple-confirms-homepod-mini-2-wont-have-siri-ai-at-launch/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-13T14:47:06.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple confirms HomePod mini 2 won’t have Siri AI at launch",
-        "summary": "Today Apple introduced HomePod mini 2 with Siri AI as a major tentpole feature. HomePod mini 2 ships on October 30, but checking the fine print on Apple’s website, it seems Siri AI won’t be available on launch day. more…",
-        "body": "Today Apple introduced HomePod mini 2 with Siri AI as a major tentpole feature. HomePod mini 2 ships on October 30, but checking the fine print on Apple’s website, it seems Siri AI won’t be available on launch day.\n\nHomePod users have been waiting for Apple to reveal when Siri AI is coming to its home devices. And today it became official : Siri AI will be available soon on the new HomePod mini 2.\n\nBut unfortunately, if you buy HomePod mini 2 for launch day delivery on October 30, you’ll be left waiting a bit longer to access Siri AI.\n\nFrom Apple’s website , in the ‘Meet Siri AI’ section for HomePod mini 2:\n\nSiri on HomePod mini 2 puts a powerful, AI assistant right at the center of your home. 1 Once set up with your iPhone or iPad, Siri draws on broad world knowledge and your personal context to help you find what you need and get more done every day.\n\nEnjoy more natural conversations, richer answers, and effortless smart home control — while your privacy is protected at every step. Just ask to play your favorite music, check your schedule, or catch up on podcasts, completely hands-free.\n\n1 Coming in a future software update. Usage limits may apply.\n\nThe footnote above says that Siri AI won’t be arriving until a future software update. This is further confirmed in Apple’s press release here near the bottom.\n\nHomePod mini 2 arrives two weeks ahead of HomeView and the new Apple TV 4K , both of which ship November 13. Each of those products support Siri AI at launch, so here’s hoping that means HomePod mini 2 will gain support by mid-November too.\n\nIf that’s the case though, it’s certainly curious why Apple wouldn’t just launch all three products the same day with Siri AI.\n\nWhen do you expect HomePod mini 2 to gain Siri AI support? Let us know in the comments."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-fbdefbd4c435af8f",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/13/spotify-users-on-ios-27-can-now-ask-siri-to-play-music-without-having-to-say-on-spotify/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-13T14:30:12.000Z",
+    "publishedAt": "2026-10-13T20:05:02.000Z",
     "categories": [
       "tecnologia-general",
       "apple",
@@ -165,46 +87,22 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Spotify users on iOS 27 can now ask Siri to play music without having to say ‘on Spotify’",
-        "summary": "Siri can now learn users' preferred music app, allowing Spotify listeners to request songs, podcasts, and playlists without specifying which app to use.",
-        "body": "Posted:\n\nIt’s now easier to use Spotify by talking to Siri on iPhones updated to iOS 27, Spotify said on Tuesday. Users will no longer need to specify “on Spotify” when they’re asking Siri to play music or other content using the streaming service’s apps.\n\nInstead, users can just say whatever it is they want to hear, and Spotify will play the content, whether that’s a specific track, album, podcast, audiobook, or a broader query, like “play workout music,” or a request for one of Spotify’s features, like “play my DJ.”\n\nSiri’s voice control can also be used to do things like request personalized recommendations, resume podcasts, search your library, or even create a Prompted Playlist with AI.\n\nSpotify says removing the extra voice command will make hands-free listening feel more natural, as users can just focus on what they want to hear, not how to phrase the request properly to get their preferred music app to respond.\n\nThis feature works because Siri can now learn your music app preference. If you consistently use Spotify, it will route your audio requests to that app automatically.\n\nThe new feature is available globally for users with an iPhone 15 Pro or later, outside the EU, if Apple Intelligence is enabled in Settings."
+        "title": "It looks like Apple Music is getting a new icon",
+        "summary": "Apple Music's iconic red app icon has reportedly been replaced with a black-and-white version in the latest iOS 27.2 beta, 9to5Mac reports. The eighth note on the icon also appears to have a slightly sharper angle than the original. A new Apple Music logo was also spotted last month on the Apple Music Hall website, […]",
+        "body": "Apple Music's iconic red app icon has reportedly been replaced with a black-and-white version in the latest iOS 27.2 beta, 9to5Mac reports. The eighth note on the icon also appears to have a slightly sharper angle than the original. A new Apple Music logo was also spotted last month on the Apple Music Hall website, so the company could be refreshing its app icon to match.\n\nAccording to 9to5Mac , the new icon is a black music note on a white background in light mode, or the opposite in dark mode. The icon's not the only thing that's been drained of color, either - 9to5Mac also says Apple Music widgets now have black backgrounds and the app now …\n\nRead the full story at The Verge."
       }
     },
     "media": null
   },
   {
-    "id": "the-verge-3f556ae1a26caf5c",
+    "id": "the-verge-9445eb5ae18b88c3",
     "type": "news",
     "sourceId": "the-verge",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/gadgets/1009971/apple-homepod-mini-2-preorder-buy",
+    "originalUrl": "https://www.theverge.com/news/1010365/shopify-opens-its-catalog-up-to-more-ai-agents",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-13T14:15:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple’s HomePod Mini 2 is available to preorder",
-        "summary": "After nearly six years, Apple debuted a new, improved HomePod Mini. The $149 HomePod Mini 2 will launch on Friday, October 30th, and you can place a preorder now through Apple. The speaker includes the S10 chip, which debuted in the Apple Watch Series 10, and it can power a host of features. It will […]",
-        "body": "After nearly six years, Apple debuted a new, improved HomePod Mini . The $149 HomePod Mini 2 will launch on Friday, October 30th, and you can place a preorder now through Apple .\n\nThe speaker includes the S10 chip, which debuted in the Apple Watch Series 10, and it can power a host of features. It will support Siri AI after a future update, pairing you with a better, more helpful voice assistant. The speaker can be integrated into a four-speaker surround system with the new Apple TV 4K, and they can serve as speakers for a Mac computer (so long as it supports Wi-Fi 6E). Lastly, the top of th …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-93d14be73d42108c",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/13/spacexsi-bundles-x-premium-grok-and-cursor-into-one-subscription/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-13T13:50:19.000Z",
+    "publishedAt": "2026-10-13T19:42:42.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -213,22 +111,47 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "SpaceXSI bundles X Premium, Grok, and Cursor into one subscription",
-        "summary": "The new X Subscription combines X's paid features with AI tools like Grok and Cursor, offering plans ranging from $8 to $200 per month.",
-        "body": "Posted:\n\nIn a bid to attract more subscribers, the company now known as SpaceX Super Intelligence is bundling all its subscriptions, including X Premium, Grok, and Cursor, into one plan called simply “The X Subscription.”\n\nThe idea is that the combined offering could potentially attract more subscribers than any single subscription, given the competitive paid AI subscription market, where SpaceXSI faces rivals like OpenAI, Anthropic, and others.\n\nWith The X Subscription, users can gain access to Grok for AI-powered chat, with support for voice, images, video, and the API. Grok’s agentic AI Bot is also available, as is Cursor for AI coding and the paid features that come with an X Premium subscription, like the blue verified checkmark, creator tools, and fewer ads.\n\nThere are five plans available on the new subscription: free, Plus ($8/month), Premium ($30/month), Super ($100/month), and Ultra ($200/month), with AI usage caps increasing as you move up through the tiers. The free plan will only offer limited chat and agent usage, and Premium or higher is required to access the latest Grok models.\n\nThere’s another draw for existing X Premium+ subscribers: The comparable plan on the new X subscription costs the same or less, the company noted.\n\nExisting users can either switch from their subscription settings on X to upgrade to the new bundle, or maintain their current plan. The option to upgrade will roll out gradually, so interested customers will need to keep an eye on their billing settings for the offer to upgrade."
+        "title": "Shopify opens its catalog up to more AI agents",
+        "summary": "More AI agents will soon be able to browse and purchase from Shopify listings, marking an expansion of the company's agentic commerce ambitions. Shopify announced Tuesday it will let shoppers configure their AI agents to purchase products on their behalf, giving more agents access to over a billion listings in Shopify's catalog. (The catalog consists […]",
+        "body": "More AI agents will soon be able to browse and purchase from Shopify listings, marking an expansion of the company's agentic commerce ambitions.\n\nShopify announced Tuesday it will let shoppers configure their AI agents to purchase products on their behalf, giving more agents access to over a billion listings in Shopify's catalog. (The catalog consists of both items on and off Shopify storefronts.) In September, Shopify announced it was partnering with Meta to allow its Muse agent to browse and purchase items on a human's behalf; now, shoppers can use any agent without a partnership integration.\n\nTo set up the feature, customers connect an …\n\nRead the full story at The Verge."
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-83a55610edbec215",
+    "id": "accessible-android-2ace7b704d0866e9",
+    "type": "news",
+    "sourceId": "accessible-android",
+    "sourceName": "Accessible Android",
+    "sourceUrl": "https://accessibleandroid.com/",
+    "originalUrl": "https://accessibleandroid.com/app/viskey/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-13T19:33:00.000Z",
+    "categories": [
+      "android",
+      "apps-accesibles",
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Viskey",
+        "summary": "Viskey is a low vision large text keyboard with high contrast and customizable themes. It supports also dictation. It currently does not work with Talkback.",
+        "body": "Published 13 October 2026 by Harri\n\nViskey is a low vision large text keyboard with high contrast and customizable themes. It supports also dictation. It currently does not work with Talkback.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nNot usable with Talkback, for low vision users only, with some self voicing.\n\nLast Tested App version and Android version:\n\n4.1, Android 13, Android 15\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-9763a2379ff2eef3",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/13/you-can-buy-the-new-improved-siri-remote-for-your-existing-apple-tv-4k/",
+    "originalUrl": "https://9to5mac.com/2026/10/13/homeview-apple-tv-4k-and-more-now-available-for-amazon-pre-order/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-13T13:46:26.000Z",
+    "publishedAt": "2026-10-13T19:29:22.000Z",
     "categories": [
       "apple",
       "tecnologia-general"
@@ -237,59 +160,279 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "You can buy the new, improved Siri Remote for your existing Apple TV 4K",
-        "summary": "Today Apple unveiled the long-awaited new Apple TV 4K model , which includes an updated Siri Remote with a built-in speaker as part of its Find My and Precision Finding support. But even if you’re not upgrading, you can still buy the new Siri Remote for your current Apple TV. more…",
-        "body": "Today Apple unveiled the long-awaited new Apple TV 4K model , which includes an updated Siri Remote with a built-in speaker as part of its Find My and Precision Finding support. But even if you’re not upgrading, you can still buy the new Siri Remote for your current Apple TV.\n\nAre you always losing your Siri Remote for Apple TV? Then you might be interested in the new Siri Remote that comes with the fourth-gen Apple TV 4K.\n\nThe new Apple TV 4K is available to pre-order now and ships November 13. But its $299 price tag may put off prospective upgraders.\n\nIf you just want the new Siri Remote, you can order that instead .\n\nFrom Apple’s press release :\n\nThe new Siri Remote is compatible with Apple TV HD and Apple TV 4K, and is also available for purchase separately.\n\nThe latest Siri Remote has the same basic design as the prior model. But it adds Precision Finding support for Find My, and a built-in speaker so you can play a sound on the remote when it’s lost.\n\nPrecision Finding will be a significant upgrade when trying to recover your lost remote, as it can guide you directly to the remote on your iPhone or Apple Watch.\n\nYou can order the Siri Remote (4th generation) from the Apple Store for $59 .\n\nThe remote will ship to customers on November 13, the same day the new Apple TV 4K delivers.\n\nWill you buy the new Siri Remote, or the fourth-gen Apple TV 4K? Let us know in the comments."
+        "title": "HomeView, Apple TV 4K, and more now available for Amazon pre-order",
+        "summary": "Apple today unveiled its next big foray into the smart home world, including the new HomeView smart display and a new Apple TV 4K. Following Apple’s announcement, the new Apple home gear is also now available for pre-order on Amazon: HomeView: $299 Apple TV 4K: $299 Apple TV Siri Remote: $59 HomePod mini 2: $149 more…",
+        "body": "Apple today unveiled its next big foray into the smart home world, including the new HomeView smart display and a new Apple TV 4K. Following Apple’s announcement, the new Apple home gear is also now available for pre-order on Amazon:\n\nThe new HomeView display is the headlining product from Apple’s smart home launch today. Highlights include:\n\nHomeView is available to pre-order today for $299 , with the first orders arriving on November 13.\n\nThe new Apple TV 4K , meanwhile, also packs Siri AI support thanks to its new A19 chip inside, among other changes:\n\nThe Apple TV 4K (4th Generation) is available to pre-order today for $299 , with the first orders arriving on November 13.\n\nThe new Apple TV 4K also comes with a new Siri Remote , which adds Find My integration and a built-in speaker. Luckily, you can buy the new Siri Remote separately, so you don’t have to shell out $299 for those new features.\n\nYou can pre-order the new Siri Remote today for $59 , with the first orders arriving November 13.\n\nFinally, Apple today announced the HomePod mini 2:\n\nThe new HomePod mini 2 is available to pre-order today for $149 , with the first orders arriving October 30.\n\nFollow Chance : Threads , X , and Instagram"
       }
     },
     "media": null
   },
   {
-    "id": "techcrunch-1def4606697fd956",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/13/apple-refreshes-its-homepod-mini-with-a-new-chip-and-149-price-tag/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-13T13:38:03.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple refreshes its HomePod mini with a new chip and $149 price tag",
-        "summary": "The new $149 HomePod mini with Siri AI and a 'SoundGlow' visual feature will be available starting October 30.",
-        "body": "Apple’s new HomeView device was the center of the show at its smart home event on Tuesday, but the company also refreshed its HomePod mini smart speaker with a new chip and Siri AI integration, the latter of which will be available through a future update.\n\nThe $149 update is $50 more expensive than the original version launched over six years ago in 2020 . The new HomePod mini has an S10 chip that helps improve optimize dynamic range, loudness, and acoustic performance.\n\nWith the new HomePod mini, users can control their smart home devices through voice commands. Plus, the speaker can listen for sounds like a smoke alarm and send a notification to users’ phones — a feature that Alexa devices have offered for years.\n\nApple said that with Siri AI, users will be able to have multi-turn conversations, but it didn’t provide a date for when the new assistant will be available to HomePod mini 2 buyers.\n\nThe company also said the new speaker works better with its other devices. For instance, users could form a four-speaker home entertainment system paired with the new Apple TV 4K . Plus, the HomePod mini 2 speakers can be the default speaker for Mac for video calls or music playback instead of built-in speakers.\n\nThe device has another new feature, as well: a visual canvas called “Sound Glow,” which uses the color scheme of the album art to turn the top of the HomePod mini into a visual canvas that will glow and pulse in sync with the music. Users can also pick soundscapes like rain or ocean waves to start animations.\n\nThe new speaker comes in pink, green, blue, white, and midnight colorways and will be available starting October 30. Consumers can preorder starting today."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-1b8ac3e7e0b533f4",
+    "id": "9to5mac-429e63f2c1165e8a",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/13/siri-ai-coming-to-older-apple-tv-4k-models-heres-whats-compatible/",
+    "originalUrl": "https://9to5mac.com/2026/10/13/apple-rolls-out-new-airpods-beta-firmware-for-several-models-including-airpods-pro-3/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-13T13:12:28.000Z",
+    "publishedAt": "2026-10-13T19:24:36.000Z",
     "categories": [
       "apple",
-      "tecnologia-general",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple rolls out new AirPods beta firmware for several models, including AirPods Pro 3",
+        "summary": "In addition to the rollout of developer beta 4 for macOS 27.2, iOS 27.2, iPadOS 27.2, and more, Apple also rolled out developer and public firmware betas for several AirPods models. Here are the details. more…",
+        "body": "In addition to the rollout of developer beta 4 for macOS 27.2, iOS 27.2, iPadOS 27.2, and more, Apple also rolled out developer and public firmware betas for several AirPods models. Here are the details.\n\nToday has been quite a busy day in Cupertino. In a matter of hours, Apple unveiled the new Apple TV 4K , the new HomePod mini, the new $299 HomeView smart display, the Apple Home Collection, and multiple OS betas.\n\nThat includes macOS 27.2 Golden Gate developer beta 4, and its counterparts for iPhone, iPad, Apple Watch, and Apple Vision Pro.\n\nOn top of all that, Apple is also rolling out public and developer firmware betas for several AirPods models, including:\n\nAll firmware updates carry build number 9B5043a. Apple has yet to detail what is included in the new firmware.\n\nIf you’d like to join the public AirPods beta, you can do that by enabling that option from the AirPods settings screen on your iPhone.\n\nHere are Apple’s official instructions to update AirPods and AirPods Pro firmware\n\nIf you still can’t update your firmware, reset your AirPods , then try to update your firmware again.\n\nAnd here is Apple’s step-by-step guide to update AirPods Max firmware.\n\nIf you still can’t update your firmware, reset your AirPods Max , then try to update your firmware again.\n\nWhich AirPods do you own? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "applevis-blog-c021df7c88b4c3dd",
+    "type": "news",
+    "sourceId": "applevis-blog",
+    "sourceName": "AppleVis Blog",
+    "sourceUrl": "https://www.applevis.com/blog",
+    "originalUrl": "https://www.applevis.com/blog/welcome-home-apple-announces-updated-homepod-mini-apple-tv-all-new-homeview-new-home",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-13T19:17:05.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-accesibilidad",
+      "apps-accesibles",
+      "programas-accesibles",
       "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Siri AI coming to older Apple TV 4K models, here’s what’s compatible",
-        "summary": "Today Apple introduced a fourth-generation Apple TV 4K with Siri AI, and A19 chip, and more. But the company also shared welcome news for current Apple TV users: Siri AI is compatible with select older models too. more…",
-        "body": "Today Apple introduced a fourth-generation Apple TV 4K with Siri AI, and A19 chip, and more. But the company also shared welcome news for current Apple TV users: Siri AI is compatible with select older models too.\n\nThe new Apple TV 4K is packed with a variety of upgrades, but it also has a higher $299 starting price.\n\nWhile it’s previously been expected that the rumored Siri AI support in tvOS would require the new hardware, it seems that’s not the case.\n\nIn Apple’s press release , it says:\n\nSiri AI is available as a beta on Apple TV 4K (2nd generation or later), and is available at launch in the U.S. , Australia , Canada , India , New Zealand , Singapore , South Africa , and the UK in English.\n\nThis means users of the last two generations of Apple TV 4K can benefit from Siri AI too with a forthcoming software update for tvOS.\n\nSiri AI will almost certainly perform better on the latest-generation hardware, but it’s great to see it supported on some older models too.\n\nDoes this news change your upgrade plans? Let us know in the comments."
+        "title": "Welcome Home: Apple Announces Updated HomePod Mini, Apple TV, All-New HomeView, and New Home Accessories",
+        "summary": "Apple today announced updated models of the HomePod Mini and Apple TV 4K ; as well as an all-new HomeView smart home hub and a collection of smart home accessories . HomePod Mini 2 Powered by the S10 chip and what Apple calls \"advanced computational audio,\" up to four HomePod Mini 2 or HomePod (2nd generation) speakers can be paired to create a surround sound experience with the new Apple TV 4K. Siri AI will be available on HomePod Mini 2 with a future software update. It can recognize up to six people in a household, and can use a user's Apple Intelligence-capable iPhone or iPad to draw on their personal context. With Sound Glow, the top of HomePod Mini 2 can glow and pulse in sync with the currently playing song. Users can additionally customize the displayed animations to promote a relaxing atmosphere. HomePod Mini 2 features 100 percent recycled rare earth elements in all magnets, and 100 percent recycled copper, gold plating, and tin solder in all Apple-designed circuit boards. It can be pre-ordered from Apple starting today in pink, green, blue, white and midnight for US $149, and will begin shipping to customers on Friday, October 30. HomeView HomeView is a smart home hub with a speaker and 7-inch display, which can either be placed on a table or mounted on a wall. It features a variety of Apple apps and widgets on the Home Screen, and allows users to play music, view photos and videos, make and receive FaceTime calls, monitor and control their home, and more using Siri or the touch interface. HomeView can display a generic screen for everyone in the household, or recognize up to six faces to show personalized content for individual users. Apple Silicon and HomeView's speaker array can optimize audio for loudness and bass response at any volume, with tailored profiles for the table-top and wall-mounted models. Siri AI can be used to play media on HomeView, answer general knowledge questions, discuss recipes, and if a user has an Apple Intelligence-capable iPhone or iPad, draw on their personal context for more helpful responses. Like other Apple Intelligence-capable devices, conversations with Siri AI on HomeView are synced via iCloud and viewable in the Siri app on iOS, iPadOS, and macOS. Changes made to Siri's pace or expressiveness on compatible devices are synced to HomeView. HomeView features a wide variety of watchOS-style faces that can display snippets of information at a glance, a user's photos, or interactive art. With a supported iCloud+ subscription, HomeView can integrate with compatible cameras to recognize people, pets, packages, and vehicles, and can describe captured video using AI. With Sound Recognition, HomeView can alert users to smoke and carbon monoxide detectors on their iPhone, iPad, or Apple Watch. Similar to the security and privacy features of other Apple products, data processed by the A18 chip's Secure Exclaves is isolated from the HomeView software and does not leave the device. Users' personal content, like messages and calendar, is only displayed when the user's face is recognized and their iPhone or iPad is present and has been recently unlocked. The wall-mounted HomeView model can optionally be professionally installed. HomeView is made with 100 percent recycled aluminum in the enclosure base and in the enclosure of the wall-mounted model, 100 percent gold plating and tin solder in all Apple-designed circuit boards, and 100 percent recycled rare earth elements in all magnets. It can be pre-ordered from Apple starting today for US $299, and will begin shipping to customers on Friday, November 13. The table-top model is available in silver, starlight, rose pink, and space gray finishes, with the wall-mounted model available in space gray and silver finishes. Apple TV 4K With the A19 chip, Apple claims the new Apple TV 4K delivers up to 50 percent faster CPU performance and up to 2X faster GPU performance when compared to the previous generation. In addition, a new, dedicated AV1 decoder enables more efficient streaming while using less bandwidth. Continuing on the theme of recent Apple product unveilings, the new Apple TV 4K supports Siri AI for smarter voice interactions. Users can find entertainment and control their smart home with more flexible natural language, and Siri AI's awareness of personal context and onscreen content can be used to answer questions about home events or what's currently playing. Users with an Apple Intelligence-capable iPhone or iPad will be able to use Siri AI on Apple TV 4K (2nd and 3rd generation). Three far-field microphones on the new Apple TV 4K support Siri hands-free, allowing users to prompt it by saying \"Siri\" or \"Hey Siri,\" as they do on other Apple devices. The new Siri Remote supports Find My with Precision Finding, which can guide users to the remote's precise location, useful if it, for example, falls between couch cushions. Like other Find My-capable devices, the remote can also play a sound to help users locate it. Similar to other Apple products, data processed by the Secure Exclaves is isolated from tvOS and does not leave the device. The new Apple TV 4K features 100 percent recycled gold plating and tin solder in all Apple-designed circuit boards, and 100 percent recycled rare earth elements in all magnets. It can be pre-ordered from Apple starting today for US $299, and will begin shipping to customers on Friday, November 13. Home Collection In collaboration with LG Electronics and Schneider Electric, Apple has launched a collection of smart home accessories, including a lock, doorbell, thermostats, temperature sensors, and indoor and outdoor cameras. These accessories support NFC for one-tap setup on iPhone, and will begin rolling out in December.",
+        "body": "Apple today announced updated models of the HomePod Mini and Apple TV 4K ; as well as an all-new HomeView smart home hub and a collection of smart home accessories ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-d266934768ef3f11",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/13/ios-27-2-adds-new-app-icon-for-apple-music-more-design-updates/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-13T19:06:29.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iOS 27.2 adds new app icon for Apple Music, more design updates",
+        "summary": "iOS 27.2 beta 4 debuted today for developers, and the update includes a new app icon for Apple Music alongside other design updates in the Music app. more…",
+        "body": "iOS 27.2 beta 4 debuted today for developers, and the update includes a new app icon for Apple Music alongside other design updates in the Music app.\n\nApple appears in the midst of a gradual branding refresh for Apple Music.\n\nThe company recently debuted an all-new Apple Music logo that’s started spreading to more places, including an appearance in iOS 27.2 beta 3 last week.\n\nAnd now today with beta 4, iOS 27.2 has a new app icon for Music too.\n\nAs seen above, the new app icon removes color from the branding. It’s a white icon with black music logo by default, and in dark mode it’s black with a white logo.\n\nAlongside this change, the Music app in iOS 27.2 now uses blue in the tab bar for the currently active tab—a stark shift from the previous red/pink branding. Widgets for the Music app similarly now use simple black backgrounds instead of the iconic red/pink.\n\nAdditionally, in your Library, the list of different sections like Playlists, Albums, Artists, and Songs have all had color removed in favor of a black-and-white design.\n\nWhat do you think of the Apple Music design updates in iOS 27.2? Let us know in the comments.\n\nApple Music is available for $11.99/month , or you can get it as part of the Apple One bundle ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-763394ccf07b322c",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/13/niobia-takes-the-guesswork-out-of-some-of-techs-most-expensive-mistakes/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-13T19:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Niobia takes the guesswork out of some of tech’s most expensive mistakes",
+        "summary": "The San Francisco startup aims to help battery and chip manufacturers identify defects on production lines, reducing downtime and costly mistakes.",
+        "body": "San Francisco-based startup Niobia is betting big on a critical but often overlooked part of battery and chip making: helping engineers understand how and why things go wrong. Its AI software flags production defects and lets engineers ask a chatbot what caused them, aiming to deliver answers in minutes rather than days.\n\nHow it works (broadly): The company’s customers place AI agents on their production lines to look for defects, then loop in human engineers to work out what might cause a product to fail. The agents run on self-contained GPUs mounted directly on manufacturing equipment, much like a sensor. They can spot pinhole-sized flaws such as scratches. Niobia’s AI also gathers all the data in one place so engineers can ask a chatbot what went wrong and dig deeper into the cause.\n\nSpeed is so critical because chips and batteries are some of the world’s most important products, while also increasingly in short supply. As manufacturers continue to develop and improve their technologies, things inevitably go awry during research and development. Engineers then spend days or longer figuring out a fix before they can restart production. Each flaw or mistake can prove costly — sometimes running into the millions of dollars — and set back manufacturing timelines.\n\nNiobia co-founders Gaurav Jha and Harveen Kaur both have PhDs in chemistry and have worked at chipmakers and battery manufacturers, giving them firsthand experience with the challenges within the industry. In a call ahead of TechCrunch Disrupt 2026, where the company is a Battlefield finalist, Jha explained that while what Niobia does is specialized, it serves a multibillion-dollar market that includes some of the biggest battery and semiconductor makers today.\n\n“It’s extremely niche; maybe people will never know about it,” said Jha, speaking of the battery and chip manufacturing market that his company aims to serve. “But it’s like behind the scenes, this is powering everything… we just don’t see it in the regular world.”\n\n“Every product around you, like glasses or shoes, slippers, wallets, and headphones — these processes touch every single part of it,” added Jha.\n\nNiobia’s agents run on open source models that the company trains further with battery and chip research and other data. That training is what lets them identify pinhole-sized defects. Jha said that Niobia chose open source models largely because its customers don’t want their highly sensitive company information going into a public AI cloud where it might be used to train the model.\n\n“None of our customers want their proprietary data to go to the cloud, even if we tell them it’s safe,” said Jha. The startup also outlines how it approaches cybersecurity, given the high-stakes race among adversarial nations to innovate in the battery and chip space. Niobia, for instance, lets its customers hold their own encryption keys so that the startup cannot decrypt the customers’ data.\n\nJha said that the company’s priority for now is to focus on three specialties, such as film coating, electroplating (which is coating a surface with metal using an electric current), and fluidized bed reaction (a chemical process where solid particles are suspended in a gas or liquid).\n\nHe said that the company also wants its technology to become more autonomous, with the eventual aim of building out a fully self-driving factory for its customers.\n\nIf you’re curious to learn more, Niobia will present onstage at TechCrunch Disrupt this afternoon in San Francisco. Join us to catch the company and the 19 startups against which it’s competing as part of our storied Startup Battlefield competition, happening today, Tuesday, through Thursday, October 15."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-10869685edad292a",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2281734/what-is-nvidia-dlss-how-works/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-13T18:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "programas-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "What is NVIDIA DLSS and how does it work?",
+        "summary": "NVIDIA's upscaling software is truly powerful when used in the right situations.",
+        "body": "The company's upscaling software is truly powerful when used in the right situations.\n\nIf you own a recent NVIDIA GPU (or Nintendo Switch 2 ), there's a good chance you bought it partly from hearing good things about DLSS . Short for Deep Learning Super Sampling, DLSS is a proprietary upscaling technology designed to increase game performance. With DLSS enabled, your GPU will first render a game at a lower internal resolution, meaning it will need to draw fewer pixels. DLSS will then upsample the image to your monitor's native resolution using a machine learning algorithm trained by NVIDIA.\n\nWhen it's implemented well in a game, DLSS allows you to effectively turn up the graphical settings higher than your GPU would normally allow at a native resolution while still getting a playable framerate. Alternatively, you run a game at lower settings and push the framerate even higher, which can be useful if own a high refresh rate monitor.\n\nThe above gives a decent starting point for how DLSS works, but knowing a bit more can help with tweaking to get the most out of the tech and your GPU. As mentioned already, with DLSS enabled your GPU will first render a game at a lower resolution before upscaling the image it produces to whatever resolution you've set as the target. In almost every case, you'll want to configure the target resolution to match your monitor's native resolution. So if you own a 1440p monitor, set the output resolution to 1440p. In most games, you do this simply by setting the \"display\" resolution.\n\nNow comes the more complicated part. DLSS can feel like magic, but ultimately it involves a compromise. The different machine learning models that underpin the tech are trained to interpret motion vectors, as well as depth and brightness information when they upscale an image. Over the years, NVIDIA's GPUs and models have gotten better at doing that, but at the end of the day, some amount of fidelity is lost any time you upscale an image. How much is lost depends on the DLSS mode you use, which determines the internal render (or starting) resolution your GPU has to upscale from:\n\nQuality : When set to Quality mode, your GPU will render a game at 66.7 percent of your target output resolution. For a 4K monitor, that means you're starting with a 1440p image. With a 1440p monitor, your starting point is 960p. DLSS Quality offers the best image quality of the different presets, but expect only a moderate increase in frame rate.\n\nBalanced : When set to Balanced mode, your GPU will render a game at 58 percent of your target output resolution. At 4K, that means a starting point of 1253p. At 1440p, meanwhile, you're upscaling from an 835p image. As the name suggests, Balanced mode is intended to offer a middle ground between image quality and a higher frame rate.\n\nPerformance : When set to Performance mode, your GPU will render a game at 50 percent of your target output resolution. That translate to 720p internal resolution when used in conjunction with a 1440p monitor and a 1080p internal resolution when the output is a 4K resolution.\n\nUltra Performance : When set to Ultra Performance, your GPU will render a game at 33.3 percent of your output resolution. This mode is intended to be used with 8K monitors. Expect a blurry image if used in conjunction with a 1440p or 4K monitor.\n\nAs a rule of thumb, if you're running a 1440p monitor, DLSS Quality is a good starting point for most games. If you're not happy with your performance or chasing an even higher frame rate, drop down to Balanced mode. Beyond that, the final image can get quite blurry. For 4K monitors, Balanced mode is a good starting, and then bump things down to Performance if you need or want more frames.\n\nOne of the confusing things about DLSS is that the branding has come to encompass a handful of related technologies that you can use in combination with one another.\n\nDeep Learning Super Sampling : The initial version of DLSS arrived in 2019, following the release of NVIDIA's RTX 20 series GPUs . At launch, only a handful of games supported DLSS, namely Battlefield V and Metro Exodus , due to a limitation that meant NVIDIA had to train the algorithm specifically for the game it was meant to enhance. Since the release of DLSS 2 in 2020, that limitation no longer exists, and according to NVIDIA more than 1,000 games and apps offer DLSS support as of the start of 2025.\n\nFollowing 2020, the biggest upgrade to DLSS came at the start of 2025 when NVIDIA reworked the algorithm to take advantage of a new transformer-based machine learning architecture and released DLSS 4. The new model offers better image quality, reduced ghosting and improved image stability. On older RTX GPUs, running DLSS 4 can result in worse performance relative to previous versions of DLSS due to a higher overhead. For that reason, NVIDIA gives users access to different DLSS \"presets\" (separate from the modes described above), which they can use to access older models.\n\nDeep Learning Anti-Aliasing : Where DLSS is primarily designed to increase performance at the cost of image quality, Deep Learning Anti-Aliasing or DLAA does the opposite. Rather than upscaling an image, DLAA takes a native output and makes it more stable by reducing the amount of shimmer and flickering. Think of it a better version of temporal anti-aliasing or TAA. Not every game natively supports DLAA, but even in the ones that don't, you can use the NVIDIA app to add DLAA.\n\nFrame Generation : Originally introduced as part of DLSS 3 , frame generation allows NVIDIA RTX 40 series GPUs and up to generate a single interpolated frame from every two traditionally rendered frames, thereby increasing the overall framerate of a game. Frame generation is best used when your GPU can render a game at a consistent 60 FPS or more, and you have a high-refresh rate monitor that will benefit from the extra frames.\n\nWith DLSS 4 , NVIDIA introduced multi frame generation, which allows RTX 50 series GPUs to generate and interpolate a greater number of frames based on a single traditionally rendered frame. As of the release DLSS 4.5 this past March, the current limit is six generated frames for every rendered frame.\n\nRay reconstruction : With DLSS 3.5 NVIDIA introduced ray reconstruction, a denoising algorithm designed to reduce artifacting from ray tracing effects. The algorithm works by sampling the light rays in a scene and then generating high quality pixels in between those rays. While ray reconstruction can offer performance gains, it's primarily designed to make games with ray and path tracing look better and more coherent.\n\nDLSS 5 is an altogether different beast from the features described above. Rather than upscaling an image, DLSS 5 interprets a game's color and motion vectors to apply, in the words of NVIDIA, \"photoreal lighting and materials that are anchored to source 3D content and consistent from frame to frame.\" In short, DLSS 5 is adding an AI filter to your games.\n\nIn early demos , the effect was uncanny, making it look like the tech was yassifing characters. But used more carefully, it can add more layers of realistic shows and textures to a game. Unfortunately, unlike other iterations of DLSS, DLSS 5 does not improve your framerate. It instead lowers it due to the overhead required to run the tech.\n\nAs of October 2026, DLSS 5 is officially available in just a single game: NBA 2K27 . At this early stage, it's unclear if DLSS 5 will see widespread developer adoption, but that hasn't stopped modders from adding the tech to all sorts of games ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-fc71c6252bf0a86e",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2285699/apple-tv-4k-2026-and-homepod-mini-2-hands-on-siri-ai-audio-upgrade/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-13T18:18:54.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple TV 4K and HomePod mini 2 hands-on: A look at the audio updates and Siri AI",
+        "summary": "Listening to Apple's new audio features with Siri as our binge-watching companion.",
+        "body": "Listening to Apple's new sound features with Siri as our binge-watching companion.\n\nApple's \"Welcome home\" event may have been mostly for the HomeView debut, but the company also announced updated versions of the HomePod mini speaker and Apple TV 4K . After spending some time with the main attraction this morning, I was also able to check out the HomePod mini 2's revamped home theater features and see Siri AI in action on Apple's streaming box. I also listened to a pair of the new speakers connected to an iMac as part of an enhanced desktop audio setup, and can confirm the new colors match up nicely with the company's all-in-one computer.\n\nLet's start with the Apple TV 4K. The main upgrades here are meant to bring Siri AI to the living room, primarily for content discovery. Thanks to the assistant's ability to pull in context from places like Messages, you can ask it to do things like \"play the show Sam texted me about.\" The new Apple TV 4K has far field microphones built in, so the Siri experience is now hands-free, meaning you could shout at it from your couch. This worked well the demo area I was in, though I have to point out the environment was relatively quiet.\n\nSiri AI can also answer questions about content, like whether Ted Lasso is a real person or if AFC Richmond is an actual football club. Thankfully, Siri's responses are tucked in the corner of the TV screen, so you can see them without the text blocking your movie or show. What's more, they're text only, and the assistant won't respond to you by speaking over the audio from whatever you're watching. I saw this in action a few different times, and I think it's a clean implementation of Siri on the Apple TV 4K. I really like that I won't have to hear competing sounds from Siri and a TV show, forcing me to try to decipher the info I asked for.\n\nAnother welcome upgrade for the Apple TV 4K is an overhauled remote. While it looks the same on the outside, a new feature inside will play a sound when you ask Siri for help finding it. I prefer this approach since it's much quicker to determine where something is if it's beeping than having to wave a phone around to see how close I'm getting to it. If you've ever played a sound to find your AirPods, that works the same way. I'm constantly looking for my Apple TV remote after one of my kids has stashed it somewhere, so this will all be handy at my house.\n\nThe HomePod mini 2 has also been updated for Siri AI. Right off the top, the speaker is now powered by the S10 chip, a big upgrade over the S5 that was in the 2020 model. This hardware will eventually enable Siri AI, but the next-gen — or now current-gen — assistant won't be on the HomePod mini 2 at launch. Apple says that feature is coming at a later date.\n\nFor now, the two big new features are Sound Glow and expanded surround sound functionality. Sound Glow mimics album artwork on the HomePod mini 2's back-lit touch panel. If you're listening to a soundscape, the lights will mirror things like rain drops and waves. This is a neat addition, but I wonder how often I'll actually see it since I don't tend to sit near or even look at my HomePod speakers. Next, you can now use up to four HomePod speakers with the new Apple TV 4K for home theater audio. Before, you could only use two as a stereo pair.\n\nAfter hearing two different configurations at Apple's event, I'm convinced this is going to be an audio upgrade for those willing to buy four HomePods. I enjoyed the setup of two second-gen HomePods in the front and two HomePod mini 2 speakers in the back as it offered more bass and rumble during my demo. However, a quartet of HomePod mini 2 speakers holds its own, providing dimensional sound that enveloped the sofa I was sitting on. But again, this is all dependent upon you buying four HomePods and putting them all in your living room, which seems like a rare scenario.\n\nLastly, I got to hear a pair of HomePod mini 2 speakers being used for audio from an iMac. These new speakers can sync with any Mac over AirPlay to function as a set of desktop speakers. This setup provides an obvious upgrade over built-in iMac speakers, and the stereo pair offered solid directional sound for basic games like Angry Birds. At around $300 for two of the HomePod mini 2, this seems like a more plausible arrangement than the four-pack in the living room."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-1f1e0a353ae401d8",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2282217/iphone-duo-vs-iphone-18-pro-camera-differences/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-13T18:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "How the iPhone Duo's camera is different from the iPhone 18 Pro's",
+        "summary": "Going beyond the number of cameras and megapixels.",
+        "body": "Going beyond the number of cameras and megapixels.\n\nThe iPhone Duo has by far the highest starting price of any iPhone to date. Which makes sense in a way, since it's basically two devices in one. But at $1,999, it still lacks the iPhone 18 Pro's more advanced camera hardware. A telephoto lens and variable aperture are out, while tricks that take advantage of its foldable design are in. Most of the differences exist due to the limitations and benefits of any dual-screen phone, including challenges around squeezing more cameras into an already crowded device and being able to use an external display for more content. Here's exactly what your photography gives up (and gains) if you choose the Duo over the iPhone 18 Pro .\n\nSensor resolution isn't where the iPhone Duo loses ground. It has two 48-megapixel rear cameras: a main camera and an ultrawide, which also handles macro shots. But camera count is another story, as Apple does not offer the telephoto camera on the Duo.\n\nWith their high resolution, both phones offer a 2x view by cropping into their 48MP main sensors. But the iPhone 18 Pro has a dedicated 4x telephoto camera, which can also crop its 48MP sensor to make a 12MP \"optical quality\" 8x zoomed shot. The best the Duo can do is 2x optical-quality zoom.\n\nIn practice, that means the iPhone Duo probably won't be a great choice for shooting distant subjects like a performer on a concert stage or athlete at a sporting event. Sure, you can use digital zoom to go past that \"optical\" limit, but quality will suffer the farther you go past 2x.\n\nWhy would Apple leave something as basic as a telephoto lens out of its first $2,000 iPhone? Well, the company hasn't said, but it may be as simple as physical constraints. Since a foldable phone opens into a bigger device, its cameras have to fit into one very thin half. Camera modules also have to compete with other hardware (especially batteries) for extremely limited internal space.\n\nThat doesn't mean future versions of the Duo won't get a dedicated zoom lens. After all, other foldable manufacturers have managed to squeeze one in . And it leaves at least one obvious place for Apple to entice upgraders with sequels.\n\nAnother big omission is variable aperture , which is one of the iPhone 18 Pro's headline features. It can physically widen or narrow its opening, adjusting how much light enters (and how much of the scene stays in focus). The Duo's aperture is fixed, just like on all previous iPhones. It still supports portrait-mode background blur, but that digital effect isn't the same.\n\nSince the Duo can stay upright and basically prop itself up when partially folded, its camera can take advantage of this faux built-in tripod. This makes it an interesting choice for things like group photos and video calls.\n\nThe Duo has a 12MP selfie camera on its outer screen, along with a separate 1080p FaceTime camera hidden beneath the inner folding display. The outer screen can also act as a viewfinder for the higher-resolution 48MP rear cameras, and if you open the Duo all the way, you can point those cameras at your face while still seeing what's in the shot. Perfect for high-res selfies.\n\nYou can also set it down somewhere and join the shot while using the outer screen to check the framing. Traditional slab-like iPhones can't do that.\n\nA Duo-specific feature called Smart Take goes a step further: it recognizes when everyone in a group photo is ready and takes the photo automatically.\n\nThe Duo also has a trick for video calls: Duo FaceTime lets someone around you join the call using the outer display and camera, rather than crowding next to you for the inner screen. Then there's Kid Cue, which shows Peanuts animations on the outer display to get kids to look toward the phone.\n\nSo, it's not that the Duo's camera setup is without its own unique (if quirkier) perks. It's just that the iPhone 18 Pro provides the more complete and traditional camera experience.\n\nThe two still have plenty of overlap. Both support 24MP and 48MP photos, adjustable portraits and updated Photographic Styles, including texture and grain adjustments. They can each record in 4K Dolby Vision at up to 120 fps, and both let you apply Cinematic effects after the fact.\n\nBut the Pro's advantages become clearer when you want to take over from the phone's automatic settings. Thanks to the new variable aperture, the Pro offers, well, Pro Controls, which are manual adjustments for things like shutter speed, white balance and aperture. The Duo doesn't offer that.\n\nThe Duo also lacks ProRAW photos, which preserve extra sensor data for advanced editing in apps like Lightroom. Video gets shorted, too: there's no ProRes, ProRes RAW or Apple Log 2 for more flexibility in post-production. Of course, those features will be missed by those who are into fine-tuning professional-class shots with professional-class tools. But if your photography doesn't go much farther than selfies and capturing the dog doing something funny? Well, you probably won't miss them.\n\nOther features are also MIA. The iPhone 18 Pro has second-generation sensor-shift stabilization (the Duo uses the older version), an Adaptive True Tone flash (the Duo's isn't adaptive) and a studio-quality four-microphone array. The Duo also can't record spatial photos or videos, and it lacks Apple's new Reference Image feature, which captures signed sensor data alongside the photo to verify what the camera originally saw.\n\nSo, the iPhone 18 Pro is better if you want to shoot distant subjects, more advanced manual control or edits or the more all-around capable camera system.\n\nWith cameras that are a step down in several ways, the Duo isn't simply an iPhone 18 Pro that folds. For $2,000 and up, that might be a hard pill to swallow. If you're forking that over, it's probably because you like the folding design and have disposable income. But hey, as a bonus, at least it's also easier to prop up, join the group shot and let everyone check their framing."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-1ac83d54db037072",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/cars/2026/10/europe-shows-a-better-alternative-to-big-suvs-at-the-paris-auto-show/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-13T17:33:20.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The Paris Auto Show is full of interesting cars Americans can’t have",
+        "summary": "Small EVs and efficient people carriers update familiar names for the modern age.",
+        "body": "Perhaps the days when auto shows debuted new models aren’t entirely over. The big trade shows for cars were a gateway drug for many, expos where you could see the newest models of today and the concepts of tomorrow. But automakers increasingly got tired of sharing the spotlight with each other. New reveals moved offsite to events the night or even the week before the show itself. One by one, brands pulled out of auto show after auto show until there was little left to see . And then the pandemic hit.\n\nBut the news out of Paris, where its auto show held media day yesterday, seems like we stepped back into a time when automakers would debut new cars aplenty. That retro vibe extends to the cars themselves, with plenty of familiar nameplates reimagined.\n\nFrance’s Renault has a long and glorious history of delightful concept cars, and more on what it brought to Paris later. But the star of the show was arguably Stellantis, with strong work from Citroen, Peugeot, and Fiat, to name but three. But this article is meant to irritate you, because I’m pretty sure none of the stuff you’re seeing here will come to the United States. And it’s doubly irritating considering what Stellantis’ brands do offer us over here, doubling down on the same malign trends I saw back in 2020 : did you know they’re about to relaunch a V8 Hellcat-powered Charger ?\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-8909a68657bc1753",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/google/2026/10/google-wants-to-host-your-personal-vibe-coded-apps-in-the-play-store/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-13T17:00:39.000Z",
+    "categories": [
+      "tecnologia-general",
+      "android",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google wants to host your personal vibe-coded apps in the Play Store",
+        "summary": "Google plans to help turn those personal AI-generated apps into wide releases.",
+        "body": "Google has already added a few AI features to the Play Store, but a lot more are coming . The previously released Ask Play feature is expanding to offer more AI-powered discovery options in Google's app store, and Google is also using AI to build a recommendation engine called Game Finder. For people who have embraced AI to build their own apps, the Play Store will soon offer a way to privately host and share those creations.\n\nGoogle rolled out Ask Play in 2025 as a small chatbot interface on Play Store listings. It lets you ask questions about an app or game, either by typing it in manually or choosing from a list of suggested queries. Starting today, Ask Play is expanding into a more general way to search for apps and games. You ask the robot questions, and it generates recommendations that can include detailed comparison charts. Gemini will roll out a similar capability soon.\n\nGoogle's other AI discovery announcement focuses on games. The new Game Finder feature leans on all the usage data Google's app platform has hoovered up over the years, featuring insights into the way 1.2 billion people play games on Android. It builds a profile called Gamer DNA and matches you with players who have similar DNA.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "applevis-apps-93f3a39eda1b82c8",
+    "type": "news",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/tindrift-merge-roguelike",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-13T16:54:07.000Z",
+    "categories": [
+      "apple",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Tindrift: Merge Roguelike",
+        "summary": "One slide moves your whole army. Tindrift is a tactics roguelike built on slide-merge combat: same-class, same-rank soldiers merge into a higher rank, and every shadow acts by rule — no dice, ever. 100 floors across five acts, plus an Endless Drift, a Daily Seed and 1v1 duels. The campaign plays offline. NO LUCK TO BLAME Shadows telegraph the move they are about to make, gates cycle on a visible clock, and pits sit where you can plan around them. When a run ends you can name the exact slide that ended it — and when you win, you out-thought the board. YOU COMMAND AN ARMY, NOT A HERO Six soldier classes — vanguard, tank, medic, marksman, poisoner, support — merge only with their own kind, so every squad trades coverage against raw power. Set the formation before you climb: tank into the crowd, marksman down the long lane, medic in the middle. WHAT IS IN THE GAME • A 5-act campaign across 100 floors — 20 per act, with 3 mini-boss fights and one signature boss in each • The Sunken Tray, The Rusthold, The Shivering Span, The Frostlight, The Surface: five acts, one climb, ending in daylight • 46 synergy blueprints (15 common, 23 uncommon, 8 rare) — pierce a lane, detonate poison chains, strip terrain for scrap, or take a drawback for reach • 24 shadow archetypes, 5 mini-bosses and 5 act bosses among them, each with a rule you have to read before you can answer it • 8 terrain types — sealed exits, timed gates, pits, fog and mazes: the map fights back • 7 kinds of tactic across 8 placeable tools, plus a TINKER STATION between floors to heal, promote, recruit and re-arm • An 18-node cog tree worth 2,335 cog — side-grades and finishes, never raw stats • 22 achievements and 3 daily quests drawn from 7 types • Endless Drift, and a Daily Seed with streaks and a result you can share • 1v1 duels, same seed and separate boards: three bot difficulties offline, or trade a 6-character code with a friend, send sabotage between floors and replay their round • Four languages: English, Turkish, German and Spanish • VoiceOver reads the board and re-announces it after every slide, and hazards are named instead of signalled by colour alone VARIETY UNLOCKS, POWER DOES NOT Nothing here is pay-to-win. Loadouts, tactics and blueprints stay behind cog for every player, and the limits per run are the same for everyone: one continue, two rerolls, three undos. ADS, PLAINLY Rewarded videos are always your choice — five spots, all opt-in. Full-screen breaks land on floor transitions and after a run, at most one every two minutes, never mid-move and never on the way into a boss or mini-boss floor. Duels carry none. TINDRIFT PREMIUM — one purchase, no subscription • Removes every ad • Lets you HOST duel rooms (joining a room is always free) • Unlocks the 10 cosmetics the workshop sells: 8 soldier finishes and 2 tray themes Slide. Merge. Climb.",
+        "body": "One slide moves your whole army. Tindrift is a tactics roguelike built on slide-merge combat: same-class, same-rank soldiers merge into a higher rank, and every shadow acts by rule — no dice, ever. 100 floors across five acts, plus an Endless Drift, a Daily Seed and 1v1 duels. The campaign plays offline. NO LUCK TO BLAME Shadows telegraph the move they are about to make, gates cycle on a visible clock, and pits sit where you can plan around them. When a run ends you can name the exact slide that ended it — and when you win, you out-thought the board. YOU COMMAND AN ARMY, NOT A HERO Six soldier classes — vanguard, tank, medic, marksman, poisoner, support — merge only with their own kind, so every squad trades coverage against raw power. Set the formation before you climb: tank into the crowd, marksman down the long lane, medic in the middle. WHAT IS IN THE GAME • A 5-act campaign across 100 floors — 20 per act, with 3 mini-boss fights and one signature boss in each • The Sunken Tray, The Rusthold, The Shivering Span, The Frostlight, The Surface: five acts, one climb, ending in daylight • 46 synergy blueprints (15 common, 23 uncommon, 8 rare) — pierce a lane, detonate poison chains, strip terrain for scrap, or take a drawback for reach • 24 shadow archetypes, 5 mini-bosses and 5 act bosses among them, each with a rule you have to read before you can answer it • 8 terrain types — sealed exits, timed gates, pits, fog and mazes: the map fights back • 7 kinds of tactic across 8 placeable tools, plus a TINKER STATION between floors to heal, promote, recruit and re-arm • An 18-node cog tree worth 2,335 cog — side-grades and finishes, never raw stats • 22 achievements and 3 daily quests drawn from 7 types • Endless Drift, and a Daily Seed with streaks and a result you can share • 1v1 duels, same seed and separate boards: three bot difficulties offline, or trade a 6-character code with a friend, send sabotage between floors and replay their round • Four languages: English, Turkish, German and Spanish • VoiceOver reads the board and re-announces it after every slide, and hazards are named instead of signalled by colour alone VARIETY UNLOCKS, POWER DOES NOT Nothing here is pay-to-win. Loadouts, tactics and blueprints stay behind cog for every player, and the limits per run are the same for everyone: one continue, two rerolls, three undos. ADS, PLAINLY Rewarded videos are always your choice — five spots, all opt-in. Full-screen breaks land on floor transitions and after a run, at most one every two minutes, never mid-move and never on the way into a boss or mini-boss floor. Duels carry none. TINDRIFT PREMIUM — one purchase, no subscription • Removes every ad • Lets you HOST duel rooms (joining a room is always free) • Unlocks the 10 cosmetics the workshop sells: 8 soldier finishes and 2 tray themes Slide. Merge. Climb."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-b0a35a784cafab57",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/ai/2026/10/gemini-4-argon-begins-rolling-out-in-gemini-app-and-antigravity-but-only-if-you-pay/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-13T16:00:02.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Gemini 4 Argon begins rolling out in Gemini app and Antigravity, but only if you pay",
+        "summary": "Developers will get 50 percent discounted API rates through November.",
+        "body": "Google revealed Gemini 4 Argon a few weeks ago, saying that it needed to move cautiously toward a full release because of the potential for nefarious use. Google seems to have worked all that out pretty quickly, though. Argon is beginning its wide rollout today , but it's only coming to paying users at this time, and even those on lower-tier plans won't have full access.\n\nNothing about Gemini 4 Argon's capabilities has changed. Google still points to the benchmarks it published late last month as evidence of the model's advanced reasoning and agentic coding capabilities. The model is supposedly trained to refuse malicious instructions, and an automated misalignment monitor can stop processing if it detects an unintended workflow. Google claims Argon needs that because it's so capable.\n\nThe company has a few new examples of how Argon has helped inside Google, where it has been used by thousands of Googlers. Argon has reportedly been instrumental in making YouTube's comment system more efficient. Argon identified redundant emoji rendering that, when eliminated, dropped server load by 45 percent. Engineers also turned Gemini 4 loose on the proprietary drone physics simulator used in Project Wing, and the AI found critical bugs that had been in the codebase since 2018. Google also notes that Argon has advanced its robotics program, showing a measurable step increase in embodied reasoning.\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -315,79 +458,6 @@
         "title": "Astonischika",
         "summary": "Astonischika is a turn-based pixel role-playing game with a roguelite loop. Build a party from bold classes, climb a branching map and fight turn by turn against monsters, elites and bosses. Every run is different: you choose your path across battles, rest sites, treasure, merchants and minigames. When your party falls, the city remains your permanent home — your heroes, their gold and their gear grow from run to run. FEATURES • Build your party from a range of classes — warrior, mage, cleric, rogue, archer and more • Turn-based battles with skills, spells, elements and status effects • Branching map: battle, elite, boss, rest, treasure and merchant • Level-ups, attribute points, equipment and learnable spells • Minigames: shell game, dice, memory, coin flip and more • A permanent city hub — your progress stays after every run • Endless scaling for long-term motivation • 22 languages, music and sound effects GREAT FOR Quick battle rounds in between, or long dungeon sessions.",
         "body": "Astonischika is a turn-based pixel role-playing game with a roguelite loop. Build a party from bold classes, climb a branching map and fight turn by turn against monsters, elites and bosses.\n\nEvery run is different: you choose your path across battles, rest sites, treasure, merchants and minigames. When your party falls, the city remains your permanent home — your heroes, their gold and their gear grow from run to run.\n\nFEATURES • Build your party from a range of classes — warrior, mage, cleric, rogue, archer and more • Turn-based battles with skills, spells, elements and status effects • Branching map: battle, elite, boss, rest, treasure and merchant • Level-ups, attribute points, equipment and learnable spells • Minigames: shell game, dice, memory, coin flip and more • A permanent city hub — your progress stays after every run • Endless scaling for long-term motivation • 22 languages, music and sound effects\n\nGREAT FOR Quick battle rounds in between, or long dungeon sessions."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-fb39666f1a7b44a0",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/gaming/2026/10/after-a-10-year-redemption-arc-no-mans-sky-is-coming-to-the-iphone-and-ipad/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-12T20:26:14.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "After a 10-year redemption arc, No Man's Sky is coming to the iPhone and iPad",
-        "summary": "You can get a universe in your pocket if you have an iPhone 11 or later.",
-        "body": "Just over 10 years after its initial release, space exploration and survival crafting game No Man's Sky is making its way to the iPhone and iPad, Apple and developer Hello Games announced today.\n\nIt will run on devices as far back as the iPhone 11 and the third-generation iPad Air. No Man's Sky might not have the most cutting-edge AAA graphics (though they're still strong, and they've come a long way since launch via updates), but the game's uncommon method of generating galaxies of incomprehensible scale on device consistently for all players from a single-seed happening on a phone is remarkable for those of us who remember phones performing far behind consoles or desktop PCs.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-e95cb2b7a5fa73a7",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/tech-policy/2026/10/anthropics-claude-ai-submitted-false-murder-tip-to-philadelphia-police/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-12T18:21:36.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Anthropic's Claude AI submitted false murder tip to Philadelphia police",
-        "summary": "“I may have information regarding this case,\" Claude AI told Philly police.",
-        "body": "An Anthropic AI model submitted a false tip about an unsolved murder to Philadelphia police, the company and police department confirmed on Friday.\n\nA Claude model sent the false tip on July 18 to the Philadelphia Police Department's website for submitting information about unsolved murders, but it was flagged by a spam filter. Anthropic apparently discovered the incident on September 28 and informed the police department about it on October 8.\n\nDuring internal testing, Claude Haiku 4.5 was instructed to complete various forms up to the final submission stage and to stop before submitting those forms. \"Several times Claude mistakenly submitted the form instead, expecting there to be an additional confirmation page,\" Anthropic said in a report describing \"unintended model actions we’ve observed during evaluations and internal use of Claude.\"\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-66e121796c88cddc",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/gadgets/2026/10/google-announces-the-fitbit-edge-a-middle-ground-between-pixel-watch-5-and-fitbit-air/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-12T13:00:52.000Z",
-    "categories": [
-      "tecnologia-general",
-      "android",
-      "windows"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google announces the Fitbit Edge, a middle ground between Pixel Watch 5 and Fitbit Air",
-        "summary": "The Fitbit Edge offers more than the Air, but it's not a real smartwatch.",
-        "body": "Google is releasing its second Fitbit tracker of 2026, offering fans of the aging Charge 6 a more refined option. The new Fitbit Edge slots right in between the Pixel Watch 5 and the Fitbit Air , featuring a compact screen and more health sensors than the Air. You won't get all the apps and features of the Pixel Watch 5, but the Edge is only about half as expensive.\n\nThe Fitbit Edge is essentially a new Charge 6, but it has more of a Pixel Watch aesthetic. Squish Google's smartwatch from the sides, and you've got the Edge. It has a pill-shaped 1.34-inch OLED touch display inside a slender aluminum frame that is rated IP68 (5 ATM) for water and dust protection. Google says the screen has 46 percent more viewable area compared to the Charge 6. It's very close in overall size to the Fitbit Air and uses the same magnetic charging puck.\n\nThe Edge works with Android or iPhones via the Google Health app, and it can run for about seven days on a charge. If the tracker is away from your phone, it can still follow your activity all week with support for seven days of full health data storage (or 30 days of basic data). However, the generous weeklong battery life does not include always-on display mode. If you turn it on, battery life drops to about two days, barely longer than the Pixel Watch 5.\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -813,30 +883,6 @@
         "title": "Ringbloom: The Garden Puzzle",
         "summary": "Rotate a ring. Align matching petals. Watch the garden bloom. Ringbloom is a calm rotational puzzle with a simple choice behind every move: select the inner, middle or outer ring, then turn it left or right. Align matching petals across a spoke, make a bloom and keep your garden growing before your moves run out. TWO WAYS TO PLAY • Garden — an endless, steadily growing puzzle for a quick break or a longer run. • Flower Show — focused Classes with fresh objectives and new ways to think about each turn. Start free with endless Garden and the first five Flower Show Classes. When you want a bigger challenge, one permanent purchase unlocks 25 more campaign Classes and the Champion Circuit. There is no subscription, energy system or advertising. Build bloom chains, chase stronger results and replay Classes to improve your rating. Clear objectives arrive as you play, with labelled controls, Undo and Hint support when you need a hand. Ringbloom is designed for one-thumb play, with distinct glyphs alongside colour, VoiceOver support, Larger Text layouts and Reduce Motion support. Gameplay works offline and progress is kept on your device. Ringbloom began as an AI app-building benchmark and has been refined through play and testing. Ringbloom uses limited analytics and advertising attribution. No account is required. See the privacy policy for the information used and the choices available.",
         "body": "Rotate a ring. Match three petals. Watch the garden bloom.\n\nRingbloom is a calm rotational puzzle with a simple choice behind every move: select the inner, middle or outer ring, then turn it left or right. Align matching petals across a spoke, make a bloom and keep your garden growing before your moves run out.\n\nTWO WAYS TO PLAY\n\n• Garden — an endless, steadily growing puzzle for a quick break or a longer run. • Flower Show — focused Classes with fresh objectives and new ways to think about each turn.\n\nStart free with endless Garden and the first five Flower Show Classes. When you want a bigger challenge, one permanent purchase unlocks 25 more campaign Classes and the Champion Circuit. There is no subscription, energy system or advertising.\n\nBuild bloom chains, chase stronger results and replay Classes to improve your rating. Clear objectives arrive as you play, with labelled controls, Undo and Hint support when you need a hand.\n\nRingbloom is designed for one-thumb play, with distinct glyphs alongside colour, VoiceOver support, Larger Text layouts and Reduce Motion support. Gameplay works offline and progress is kept on your device.\n\nRingbloom began as an AI app-building benchmark and has been refined through play and testing.\n\nRingbloom uses limited analytics and advertising attribution. No account is required. See the privacy policy for the information used and the choices available."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "applevis-apps-719bf10bb457e37c",
-    "type": "news",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/nail-sort-polish-puzzle",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-07T02:31:26.000Z",
-    "categories": [
-      "apple",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Nail Sort: Polish Puzzle",
-        "summary": "Pour, sort and collect. Nail Sort is a relaxing color puzzle where you organize polish bottles until each one holds a single shade. HOW TO PLAY Tap a bottle to pick up the top layer, then tap another bottle to pour it. Colors only stack on matching colors. Clear the level when every bottle holds one pure shade. Easy to learn, hard to put down. BUILD YOUR COLLECTION Every level you finish paints a nail in your collection. Complete full seasonal sets: Coral, Nude, Midnight Blue, Rose Gold, Emerald and many more. NO RUSH, NO PRESSURE No timers. No lives to wait for. No scores to chase. Play one level while your coffee brews, or lose an hour to it. Your call. FEATURES - Hundreds of levels with a smooth difficulty curve - 12 polish shades to collect - Unlimited undo while you think - Extra bottles when you get stuck - Plays fully offline - Clean, elegant design with no visual noise Perfect for unwinding, relaxing and giving your mind a break. Download Nail Sort and start your collection.",
-        "body": "Pour, sort and collect. Nail Sort is a relaxing color puzzle where you organize polish bottles until each one holds a single shade.\n\nHOW TO PLAY Tap a bottle to pick up the top layer, then tap another bottle to pour it. Colors only stack on matching colors. Clear the level when every bottle holds one pure shade.\n\nEasy to learn, hard to put down.\n\nBUILD YOUR COLLECTION Every level you finish paints a nail in your collection. Complete full seasonal sets: Coral, Nude, Midnight Blue, Rose Gold, Emerald and many more.\n\nNO RUSH, NO PRESSURE No timers. No lives to wait for. No scores to chase. Play one level while your coffee brews, or lose an hour to it. Your call.\n\nFEATURES - Hundreds of levels with a smooth difficulty curve - 12 polish shades to collect - Unlimited undo while you think - Extra bottles when you get stuck - Plays fully offline - Clean, elegant design with no visual noise\n\nPerfect for unwinding, relaxing and giving your mind a break.\n\nDownload Nail Sort and start your collection."
       }
     },
     "media": null
@@ -1653,34 +1699,6 @@
         "title": "macOS Golden Gate: New Features, Changes, Improvements, and Bugs for Blind and Low Vision Users",
         "summary": "Apple has today released macOS 27 Golden Gate to the public. As usual, we won’t cover the mainstream features here, concentrating instead on what's new and changed for blind, DeafBlind, and low vision users. For an overview of the mainstream changes, we recommend this in-depth review by MacStories . Please remember to check the section about bugs to see if now is the right time to upgrade. There’s no harm in holding off a few weeks or months to let Apple address a problem you may find too disruptive to deal with. A note to braille users: the AppleVis team members doing testing with macOS Golden Gate are not heavy braille users. We have no information as to how well braille works in this release, so please keep this in mind when upgrading. If you are a braille user who has experience with Golden Gate, please share your findings in the comments to help the community. Changes for VoiceOver and Braille Users Improved Image and Screen Descriptions As on iOS 27 and iPadOS 27, VoiceOver in macOS Golden Gate can use Apple Intelligence to describe and answer questions about images or the current screen as it appears visually. Focusing on an image and pressing VO-Shift-L will describe the image, and you can find additional options, such as the ability to ask about an image, explore the image spatially, or describe the current screen, by pressing VO-Shift-R from anywhere in macOS. For added convenience, commands in this menu can be mapped in VoiceOver Utility > Commands. Note that while VoiceOver can describe and answer questions about what's on the screen, it cannot directly interact with elements like VOCR or Screen Recognition on iOS and iPadOS can. New Verbosity Options for Coding With macOS Golden Gate, you can customize how information such as line numbers, errors, and warnings are reported by VoiceOver in code editors like Xcode. These settings can be found in the new \"Coding\" tab in VoiceOver Utility > Verbosity. We do not currently know which code editors besides Xcode respect these settings. New \"Actions\" rotor for trackpad users With macOS Golden Gate, you can perform custom actions for the focused element, the same actions available in VoiceOver's Actions menu, using trackpad commands. To do this, enable trackpad commands if they're not already enabled, turn the rotor to \"Actions,\" swipe up or down with one finger to select a custom action, and double-tap to activate it. \"Ducking Amount\" setting The \"Ducking Amount\" setting for determining how much other audio is ducked when VoiceOver is speaking, originally introduced with iOS 18 and iPadOS 18, has been brought to macOS with the release of Golden Gate. It can be found in VoiceOver Utility > Sound. Braille Improvements While it is not something we have been able to test, we are aware of the following improvements for braille users in macOS Golden Gate: As on iOS 27 and iPadOS 27, text field labels can now be shown in braille. You can change the format these labels are presented in, or hide them entirely, by going to VoiceOver Utility > Braille > Layout, and clicking Text Field Labels. As on iOS 27 and iPadOS 27, Braille Access in macOS Golden Gate supports plain text (txt) and portable document format (PDF) files. Improvements for Low Vision Users While it is not something we have been able to test, we are aware of the following improvement for low vision users: As on iOS 27 and iPadOS 27, content in Accessibility Reader can now be summarized and translated while retaining its original formatting on macOS Golden Gate. If you are a low vision Mac user, we would love to hear in the comments your experience and thoughts on this and any additional enhancements you encounter in macOS Golden Gate. Other Changes As on iOS 27 and iPadOS 27, the Aaron (English US), Arthur (English UK), Catherine (English Australia), Gordon (English Australia), and Martha (English UK) voices have been reintroduced with macOS Golden Gate. Like other voices, they can be used with Siri, as well as for accessibility functions like VoiceOver and Read & Speak. As on iOS 27 and iPadOS 27, subtitles for spoken dialog in videos where captioning is not already provided can be generated automatically in macOS Golden Gate. These can be turned on and adjusted when playing a video by clicking the \"show legible media selection menu\" button in the playback controls group. Writing Tools, previously accessed from many apps' Edit menus, as well as many text fields' context menus, is now accessed with VoiceOver by focusing on a text field and choosing \"Show Writing Tools\" from the Actions Menu. When toggling Cursor Tracking with VO-F3, its state is reflected in the \"Mouse pointer:\" popup menu in VoiceOver Utility. In prior versions of macOS, the state of Cursor Tracking was not reflected in this popup menu, which had the potential to confuse users. Change List In its support documentation, Apple lists the following changes for VoiceOver users in macOS Golden Gate: You can now turn off announcements that webpages send automatically, such as live scores, new messages, or status updates. Turn off Enable Web Announcements to silence announcements from a single area of a webpage or from the entire page. VoiceOver remembers your choice for that website, so the area stays silent the next time you visit. With the new Coding tab in the Verbosity category of VoiceOver Utility, you can choose whether VoiceOver announces line numbers, and whether it plays a tone or speaks a description when it encounters an error, a breakpoint, or the program counter. Bug Fixes and New Bugs for VoiceOver Users Below are lists of the bugs we believe to have been resolved in macOS Golden Gate, as well as new bugs introduced in this release. We strongly recommend that you read through the list of new bugs and any replies before updating, as this will allow you to make an informed decision on whether to install macOS Golden Gate or wait for a future release. While we are confident in the status of issues contained in this post, we do not claim that our bug list is definitive or that our assessments are infallible. Some issues may manifest only under specific conditions; this is all the more likely as software continues to add more features, and the number of available configurations and use cases in Apple's ecosystem continues to grow. You likely will not experience every bug that we list, and it is also likely that you will encounter issues that we did not experience during our own testing and daily use of macOS Golden Gate. To ensure the information here is as complete and accurate as possible, we would appreciate input from those who have installed macOS Golden Gate. Please confirm if you are encountering the same problems listed or if you have found workarounds. Please also let us know about any additional issues not mentioned here. Of course, it's even more important that you report any new bugs directly to Apple - they're already aware of the ones listed here. For an explanation of why and how to report bugs to Apple, see this post. Accessibility Bugs Resolved in macOS Golden Gate To the best of our knowledge, Apple does not routinely publish lists of bug fixes for VoiceOver or Braille across releases; thus, it is difficult to get a complete accounting of every issue that has been resolved or what fixes users can expect to see upon upgrading to macOS Golden Gate. With this in mind, our testing suggests that the following issues present in macOS Tahoe have been resolved or meaningfully improved in macOS Golden Gate: VoiceOver no longer speaks list items on webpages unreliably. Pauses between sentences are no longer extended when using VoiceOver's \"Say All\" command. It is once again possible to reply to a message in the Message app by selecting the \"Reply\" action in the Actions menu. The Actions menu for Messages in the Messages app no longer contains redundant tapback actions. New Bugs for VoiceOver Users in macOS Golden Gate Our testing suggests that the following bugs have been introduced in macOS Golden Gate: After clicking the “Proofread” button in the Writing Tools popover using VoiceOver, only the Next, Previous, and Close buttons are visible, with no way to view the specific changes made to the text. There is no way to open or redownload apps from the “Apps & Purchases” page in the App Store using VoiceOver, with each app conveyed only as a button with no actions available and nothing to interact with besides the app’s name. To redownload a previously purchased app, you must click the [app name] button to open the product page, and then click the \"Redownload\" button in the toolbar. The sections and buttons in Safari’s Page Menu lack accessibility labels. Interacting with a section and pressing VO-Space on an item (all of which are clearly labeled) works to activate the item; however, interacting with each item in a section reveals an unlabeled button. When playing audio or video, VoiceOver announces “system has new window” once the media has started playing. The identity and purpose of this window is not clear from this announcement, and no new items appear in the application or window chooser menus. Other Possible Bugs In addition to the bugs listed here, we strongly recommend you read this Megathread about the macOS Golden Gate RC , , as it contains a wealth of community reports about and experiences with the Release Candidate version of the software that may differ from our own. macOS Golden Gate release notes macOS 27 introduces Siri AI powered by Apple Intelligence, new parental controls, and an expansive set of improvements that make your Mac even more responsive, reliable, and delightful. Experience the new Siri AI Introducing Siri AI, an entirely new version of Siri powered by Apple Intelligence that’s more personal, more capable, and more conversational. It is integrated into Spotlight, so you can search for answers about almost any topic right from where you already search for things across your system. It can draw on personal context to find things across your messages, mail, photos, and more. And it can get things done across your apps, just by asking. Revisit and resume past conversations in the new dedicated Siri app, synced with iCloud across your Apple devices. Siri AI is rolling out to users, and you can get started by turning it on in Settings. Take action on what’s onscreen With Visual Intelligence, you can select a window of your screen and Siri can answer questions or take action with what’s onscreen, like adding events to your calendar. You can access Visual Intelligence with a dedicated keyboard shortcut — Command-Shift-Space. Powerful new ways to edit photos Use intelligent photo editing tools to reframe a photo after it’s been taken with Spatial Reframing or expand your shot with the Extend tool. And enhancements to Clean Up let you remove distractions with better quality and more realistic infill, even when the scene is complex. New tools to browse in Safari Automatically group your tabs into topics, so related pages are easier to find. With Notify Me, Safari can monitor pages for changes like price drops or restocks and alert you when it’s time to act. Describe an Extension lets you use natural language to create custom extensions, like adding a button to save your favorite recipes. Easily create Shortcuts using natural language With Describe a Shortcut, you can automate daily tasks with a simple description and all of the required steps are assembled on your behalf. For example, you can describe a shortcut to automatically text your partner when you’re headed home from work with an estimated arrival time based on traffic. Even more refined design Updates to Liquid Glass improve readability, and a new slider lets you customize how it looks, from ultra-clear to fully tinted. Uniform toolbars, edge-to-edge sidebars, and more detailed app icons further elevate the design. New child safety features Powerful new parental controls help parents manage what content their children see, who they can communicate with, and when they can access apps. Ask to Browse requires kids to request permission before visiting any new website in Safari. Communication Safety expands its protections to help keep conversations safe. Time Allowances gives parents more flexible ways to manage kids’ time in apps across categories. Schedules manage which apps kids can access at different times of day and throughout the week. A more responsive and delightful experience An expansive set of improvements make your Mac even faster, more reliable, and easier to use. Better search in Spotlight and Mail helps you find what you’re looking for with greater ease. AirDrop Transfers and network file browsing happen faster. And many more improvements make your day-to-day use more enjoyable. Learn more Discover even more powerful capabilities in the next release by visiting apple.com/os/macos . For information on the security content of Apple software updates, please visit: support.apple.com/100100 . Some features may not be available in all regions or on all Apple devices. To learn more, please visit: apple.com/macos/feature-availability . Usage limits may apply for some Apple Intelligence features. To learn more, please visit: apple.com/apple-intelligence . Software updates, like this one, add new features and improvements that may affect performance and battery life. To learn more, please visit: support.apple.com/125039 . In Conclusion We would like to thank everyone in our community who contributed to AppleVis' testing and bug-reporting efforts during the macOS Golden Gate beta cycle - be it through our Community Bug Program or just by posting on our Forum. Our information about this release is more complete because of you, and we are very grateful to all who took the time to contribute. We'd love to hear your thoughts after you've had a chance to install the upgrade. What new features do you find most useful? Are there any changes you don't like? Please share your feedback in the comments below. When doing so, we ask that you please keep the discussion focused on accessibility issues specifically introduced or fixed in macOS Golden Gate. Our release posts tend to be widely read and garner many helpful responses, so it is all the more important that readers can easily find relevant information. Also, please remember that upgrade decisions are personal, with each user's situation unique - there is no right or wrong choice. Comments criticizing others' decisions are not constructive and do nothing to add to the discussion; but they do set a negative tone and get in the way of readers finding helpful information. Furthermore, not experiencing an issue yourself does not mean that it doesn't exist for others, as bugs can be configuration-specific. Stating that an issue doesn't exist simply because you haven't encountered it is unhelpful. Our aim with these posts is to provide a forum for respectful, constructive, and honest sharing of experiences that inform decisions and empower people. In closing, we thank Apple's Accessibility team for their prompt response in fixing many of the bugs reported during the macOS Golden Gate beta cycle. However, many longstanding issues remain unresolved, and we find the inability to fully use the Proofread function, a key feature of Apple Intelligence, during a cycle where enhancements to Apple Intelligence were heavily emphasized, incredibly disappointing. We encourage Apple to promptly address this and other outstanding accessibility issues discussed in this post and the comments below so that macOS can be as accessible, usable, and enjoyable as possible for all users. To install macOS Golden Gate, choose System Settings from the Apple menu, select General in the table, click Software Update in the scroll area, and click the Upgrade Now button to begin the upgrade process. If other updates are available, you can click the Info button to see details about them and select specific updates to install. More information on how to update the software on your Mac is available on this Apple Support page.",
         "body": "Apple has today released macOS 27 Golden Gate to the public. As usual, we won’t cover the mainstream features here, concentrating instead on what's new and changed for blind, DeafBlind, and low vision users. For an overview of the mainstream changes, we recommend this in-depth review by MacStories .\n\nPlease remember to check the section about bugs to see if now is the right time to upgrade. There’s no harm in holding off a few weeks or months to let Apple address a problem you may find too disruptive to deal with.\n\nA note to braille users: the AppleVis team members doing testing with macOS Golden Gate are not heavy braille users. We have no information as to how well braille works in this release, so please keep this in mind when upgrading. If you are a braille user who has experience with Golden Gate, please share your findings in the comments to help the community.\n\nAs on iOS 27 and iPadOS 27, VoiceOver in macOS Golden Gate can use Apple Intelligence to describe and answer questions about images or the current screen as it appears visually. Focusing on an image and pressing VO-Shift-L will describe the image, and you can find additional options, such as the ability to ask about an image, explore the image spatially, or describe the current screen, by pressing VO-Shift-R from anywhere in macOS. For added convenience, commands in this menu can be mapped in VoiceOver Utility > Commands. Note that while VoiceOver can describe and answer questions about what's on the screen, it cannot directly interact with elements like VOCR or Screen Recognition on iOS and iPadOS can.\n\nWith macOS Golden Gate, you can customize how information such as line numbers, errors, and warnings are reported by VoiceOver in code editors like Xcode. These settings can be found in the new \"Coding\" tab in VoiceOver Utility > Verbosity. We do not currently know which code editors besides Xcode respect these settings.\n\nWith macOS Golden Gate, you can perform custom actions for the focused element, the same actions available in VoiceOver's Actions menu, using trackpad commands. To do this, enable trackpad commands if they're not already enabled, turn the rotor to \"Actions,\" swipe up or down with one finger to select a custom action, and double-tap to activate it.\n\nThe \"Ducking Amount\" setting for determining how much other audio is ducked when VoiceOver is speaking, originally introduced with iOS 18 and iPadOS 18, has been brought to macOS with the release of Golden Gate. It can be found in VoiceOver Utility > Sound.\n\nWhile it is not something we have been able to test, we are aware of the following improvements for braille users in macOS Golden Gate:\n\nWhile it is not something we have been able to test, we are aware of the following improvement for low vision users:\n\nIf you are a low vision Mac user, we would love to hear in the comments your experience and thoughts on this and any additional enhancements you encounter in macOS Golden Gate.\n\nIn its support documentation, Apple lists the following changes for VoiceOver users in macOS Golden Gate:\n\nBelow are lists of the bugs we believe to have been resolved in macOS Golden Gate, as well as new bugs introduced in this release. We strongly recommend that you read through the list of new bugs and any replies before updating, as this will allow you to make an informed decision on whether to install macOS Golden Gate or wait for a future release.\n\nWhile we are confident in the status of issues contained in this post, we do not claim that our bug list is definitive or that our assessments are infallible. Some issues may manifest only under specific conditions; this is all the more likely as software continues to add more features, and the number of available configurations and use cases in Apple's ecosystem continues to grow. You likely will not experience every bug that we list, and it is also likely that you will encounter issues that we did not experience during our own testing and daily use of macOS Golden Gate.\n\nTo ensure the information here is as complete and accurate as possible, we would appreciate input from those who have installed macOS Golden Gate. Please confirm if you are encountering the same problems listed or if you have found workarounds. Please also let us know about any additional issues not mentioned here. Of course, it's even more important that you report any new bugs directly to Apple - they're already aware of the ones listed here. For an explanation of why and how to report bugs to Apple, see this post.\n\nTo the best of our knowledge, Apple does not routinely publish lists of bug fixes for VoiceOver or Braille across releases; thus, it is difficult to get a complete accounting of every issue that has been resolved or what fixes users can expect to see upon upgrading to macOS Golden Gate. With this in mind, our testing suggests that the following issues present in macOS Tahoe have been resolved or meaningfully improved in macOS Golden Gate:\n\nOur testing suggests that the following bugs have been introduced in macOS Golden Gate:\n\nIn addition to the bugs listed here, we strongly recommend you read this Megathread about the macOS Golden Gate RC , , as it contains a wealth of community reports about and experiences with the Release Candidate version of the software that may differ from our own.\n\nmacOS 27 introduces Siri AI powered by Apple Intelligence, new parental controls, and an expansive set of improvements that make your Mac even more responsive, reliable, and delightful.\n\nExperience the new Siri AI\n\nIntroducing Siri AI, an entirely new version of Siri powered by Apple Intelligence that’s more personal, more capable, and more conversational. It is integrated into Spotlight, so you can search for answers about almost any topic right from where you already search for things across your system. It can draw on personal context to find things across your messages, mail, photos, and more. And it can get things done across your apps, just by asking. Revisit and resume past conversations in the new dedicated Siri app, synced with iCloud across your Apple devices. Siri AI is rolling out to users, and you can get started by turning it on in Settings.\n\nTake action on what’s onscreen\n\nWith Visual Intelligence, you can select a window of your screen and Siri can answer questions or take action with what’s onscreen, like adding events to your calendar. You can access Visual Intelligence with a dedicated keyboard shortcut — Command-Shift-Space.\n\nPowerful new ways to edit photos\n\nUse intelligent photo editing tools to reframe a photo after it’s been taken with Spatial Reframing or expand your shot with the Extend tool. And enhancements to Clean Up let you remove distractions with better quality and more realistic infill, even when the scene is complex.\n\nNew tools to browse in Safari\n\nAutomatically group your tabs into topics, so related pages are easier to find. With Notify Me, Safari can monitor pages for changes like price drops or restocks and alert you when it’s time to act. Describe an Extension lets you use natural language to create custom extensions, like adding a button to save your favorite recipes.\n\nEasily create Shortcuts using natural language\n\nWith Describe a Shortcut, you can automate daily tasks with a simple description and all of the required steps are assembled on your behalf. For example, you can describe a shortcut to automatically text your partner when you’re headed home from work with an estimated arrival time based on traffic.\n\nEven more refined design\n\nUpdates to Liquid Glass improve readability, and a new slider lets you customize how it looks, from ultra-clear to fully tinted. Uniform toolbars, edge-to-edge sidebars, and more detailed app icons further elevate the design.\n\nNew child safety features\n\nPowerful new parental controls help parents manage what content their children see, who they can communicate with, and when they can access apps. Ask to Browse requires kids to request permission before visiting any new website in Safari. Communication Safety expands its protections to help keep conversations safe. Time Allowances gives parents more flexible ways to manage kids’ time in apps across categories. Schedules manage which apps kids can access at different times of day and throughout the week.\n\nA more responsive and delightful experience\n\nAn expansive set of improvements make your Mac even faster, more reliable, and easier to use. Better search in Spotlight and Mail helps you find what you’re looking for with greater ease. AirDrop Transfers and network file browsing happen faster. And many more improvements make your day-to-day use more enjoyable.\n\nLearn more\n\nDiscover even more powerful capabilities in the next release by visiting apple.com/os/macos .\n\nFor information on the security content of Apple software updates, please visit: support.apple.com/100100 .\n\nSome features may not be available in all regions or on all Apple devices. To learn more, please visit: apple.com/macos/feature-availability .\n\nUsage limits may apply for some Apple Intelligence features. To learn more, please visit: apple.com/apple-intelligence .\n\nSoftware updates, like this one, add new features and improvements that may affect performance and battery life. To learn more, please visit: support.apple.com/125039 .\n\nWe would like to thank everyone in our community who contributed to AppleVis' testing and bug-reporting efforts during the macOS Golden Gate beta cycle - be it through our Community Bug Program or just by posting on our Forum. Our information about this release is more complete because of you, and we are very grateful to all who took the time to contribute.\n\nWe'd love to hear your thoughts after you've had a chance to install the upgrade. What new features do you find most useful? Are there any changes you don't like? Please share your feedback in the comments below. When doing so, we ask that you please keep the discussion focused on accessibility issues specifically introduced or fixed in macOS Golden Gate. Our release posts tend to be widely read and garner many helpful responses, so it is all the more important that readers can easily find relevant information.\n\nAlso, please remember that upgrade decisions are personal, with each user's situation unique - there is no right or wrong choice. Comments criticizing others' decisions are not constructive and do nothing to add to the discussion; but they do set a negative tone and get in the way of readers finding helpful information. Furthermore, not experiencing an issue yourself does not mean that it doesn't exist for others, as bugs can be configuration-specific. Stating that an issue doesn't exist simply because you haven't encountered it is unhelpful. Our aim with these posts is to provide a forum for respectful, constructive, and honest sharing of experiences that inform decisions and empower people.\n\nIn closing, we thank Apple's Accessibility team for their prompt response in fixing many of the bugs reported during the macOS Golden Gate beta cycle. However, many longstanding issues remain unresolved, and we find the inability to fully use the Proofread function, a key feature of Apple Intelligence, during a cycle where enhancements to Apple Intelligence were heavily emphasized, incredibly disappointing. We encourage Apple to promptly address this and other outstanding accessibility issues discussed in this post and the comments below so that macOS can be as accessible, usable, and enjoyable as possible for all users.\n\nTo install macOS Golden Gate, choose System Settings from the Apple menu, select General in the table, click Software Update in the scroll area, and click the Upgrade Now button to begin the upgrade process. If other updates are available, you can click the Info button to see details about them and select specific updates to install.\n\nMore information on how to update the software on your Mac is available on this Apple Support page."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "applevis-blog-edf0c1197fbfe301",
-    "type": "news",
-    "sourceId": "applevis-blog",
-    "sourceName": "AppleVis Blog",
-    "sourceUrl": "https://www.applevis.com/blog",
-    "originalUrl": "https://www.applevis.com/blog/watchos-27-summary-voiceover-features-issues-improvements",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-14T17:16:04.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-accesibilidad",
-      "apps-accesibles",
-      "programas-accesibles",
-      "ia-accesibilidad",
-      "braille"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "watchOS 27: A Summary of VoiceOver Features, Issues, and Improvements",
-        "summary": "Apple has today released watchOS 27 to the public. watchOS 27 is compatible with the Apple Watch Series 9 and later and the Apple Watch Ultra 2 and later. Due to the inherent challenges of beta software testing on watchOS, our testing of watchOS 27 has been quite limited. That said, for VoiceOver users, there is at least one new bug that we are aware of and a handful of new features and improvements. New VoiceOver Bugs in watchOS 27 There is rather significant latency with VoiceOver speech when swiping through the user interface. Specifically, there is a delay between when the VoiceOver sound effects/haptics play, and when VoiceOver speaks. Our testing suggests that this issue is not synthesizer-specific. It is unclear to us whether this behavior is simply a function of the newer operating system encountering the limits of hardware (something that has historically been a challenge on Apple Watch devices), or whether this is something that can be resolved by Apple in a future software update. A Feedback report has been filed, and we will keep the community advised as additional information becomes available. If you identify any additional vision accessibility bugs in watchOS 27, please let us know by posting a comment. New VoiceOver Features and Improvements in watchOS 27 There is a new \"Tap to Wake\" toggle in VoiceOver settings. By default, the setting is enabled, and the Watch will be woken when you tap on the screen. Our best understanding is that disabling this feature should prevent the device from waking when the screen is tapped. It is now possible to customize the speaking of VoiceOver hints in watchOS. Available options are 'Always', 'Never', and 'App-Specific Hints'. On the Clock Face, VoiceOver now speaks the names of Complications before speaking their content. For example, VoiceOver might say, \"Weather, Mostly Sunny 65 Degrees,\" instead of just saying \"Mostly Sunny 65 Degrees.\" For braille display users, there is a new setting, \"Translate After a Delay.\" There are other braille settings that we also believe may be new in this release, but our braille-related testing in watchOS is very limited and so this is not something we are able to comment on with any level of certainty. If you spot any other new features/changes in watchOS 27 or have any corrections to the above, please do let us know by posting a comment. watchOS 27 Release Notes watchOS 27 features the next generation of Apple Intelligence and Siri AI, updates to Workout Buddy, a new tap gesture, a dynamic app grid to make it easier to access your most used apps, and improvements that make watchOS 27 more responsive and delightful to use. Siri AI is an entirely new version of Siri that is more intelligent, knowledgeable, and capable. With improvements that span areas like fitness, design, performance, and more, the experience on watchOS 27 has been refined and elevated, so it feels even better to use. Siri AI A more capable and conversational version of Siri is rolling out to users. It helps you find what you need and get more done, drawing on capabilities like personal context understanding, app actions, onscreen awareness, and access to broad world knowledge. New voice experience offers more expressive and natural-sounding voices, and lets you customize expressivity and pace to make Siri more personal to you using powerful on-device models on paired iPhone Air and iPhone 17 Pro models and later. Dedicated Siri app provides an easy way to revisit an existing conversation or kick off a new one, and privately syncs conversations across your Apple products with iCloud. Apple Intelligence across apps Workout Buddy delivers motivation with new insights and is now available without your iPhone nearby when you have a Wi-Fi or cellular connection. Call Context in the Phone app understands when you’re speaking to certain businesses and proactively surfaces relevant information from across your apps, like a confirmation code or a reservation number. Cycle Tracking Cycle deviation notifications that are suggestive of perimenopause can be received by those age 40 and over. Watch Faces Siri Modular face features a rectangular complication that mirrors the top widget of the Smart Stack, which dynamically updates to show the most relevant widget, as well as a Siri complication to quickly invoke Siri. Smart Stack Single-handed tap gesture enables you to tap your index finger and thumb together once to select a widget in the Smart Stack, even if your other hand is occupied. New suggestion widgets will be surfaced when most relevant to you, including a Parked Car location, birthday reminders for a close contact, balance changes on a transit card, Noise app after a loud noise notification, and more. System Improvements Dynamic app grid highlights your most popular and recently used apps. Find My app is now consolidated into one app to show People, Devices, and Items with a map-centric interface. Media playback now starts faster. Workout app makes distance calculations during treadmill workouts even more accurate from the first step of every walk or run. Fitness app features more accurate route maps after workouts. Battery extension notifications may be proactively offered to disable certain features to increase battery life, including gestures, Start Workout reminders, and Raise to Speak method of invoking Siri. Shazam in the Smart Stack and Music Recognition app identifies songs offline without an internet connection and delivers results automatically when you’re back online. Liquid Glass refinements improve readability with more uniform refraction and improved contrast. For information on the security content of Apple software updates, please visit: https://support.apple.com/100100 Usage limits may apply for some Apple Intelligence features. To learn more, please visit: https://www.apple.com/apple-intelligence Software updates, like this one, add new features and improvements that may affect performance and/or battery life. To learn more, please visit: https://support.apple.com/125039 How to Update watchOS 27 is available via Over-the-Air Update (Settings > General > Software Update) or by going to the Watch app on your iPhone and navigating to General > Software Update. To install the update, your Watch must be connected to its charger and have at least 50% battery power.",
-        "body": "Apple has today released watchOS 27 to the public. watchOS 27 is compatible with the Apple Watch Series 9 and later and the Apple Watch Ultra 2 and later.\n\nDue to the inherent challenges of beta software testing on watchOS, our testing of watchOS 27 has been quite limited. That said, for VoiceOver users, there is at least one new bug that we are aware of and a handful of new features and improvements.\n\nIf you identify any additional vision accessibility bugs in watchOS 27, please let us know by posting a comment.\n\nIf you spot any other new features/changes in watchOS 27 or have any corrections to the above, please do let us know by posting a comment.\n\nwatchOS 27 features the next generation of Apple Intelligence and Siri AI, updates to Workout Buddy, a new tap gesture, a dynamic app grid to make it easier to access your most used apps, and improvements that make watchOS 27 more responsive and delightful to use. Siri AI is an entirely new version of Siri that is more intelligent, knowledgeable, and capable. With improvements that span areas like fitness, design, performance, and more, the experience on watchOS 27 has been refined and elevated, so it feels even better to use.\n\nSiri AI\n\nCycle Tracking\n\nWatch Faces\n\nSmart Stack\n\nSystem Improvements\n\nFor information on the security content of Apple software updates, please visit: https://support.apple.com/100100 Usage limits may apply for some Apple Intelligence features. To learn more, please visit: https://www.apple.com/apple-intelligence Software updates, like this one, add new features and improvements that may affect performance and/or battery life. To learn more, please visit: https://support.apple.com/125039\n\nwatchOS 27 is available via Over-the-Air Update (Settings > General > Software Update) or by going to the Watch app on your iPhone and navigating to General > Software Update. To install the update, your Watch must be connected to its charger and have at least 50% battery power."
       }
     },
     "media": null

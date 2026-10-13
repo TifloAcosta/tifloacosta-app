@@ -120,6 +120,18 @@
     "publishedAt": null
   },
   {
+    "id": "applevis-apps-93f3a39eda1b82c8",
+    "title": "Tindrift: Merge Roguelike",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/tindrift-merge-roguelike",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "One slide moves your whole army. Tindrift is a tactics roguelike built on slide-merge combat: same-class, same-rank soldiers merge into a higher rank, and every shadow acts by rule — no dice, ever. 100 floors across five acts, plus an Endless Drift, a Daily Seed and 1v1 duels. The campaign plays offline. NO LUCK TO BLAME Shadows telegraph the move they are about to make, gates cycle on a visible clock, and pits sit where you can plan around them. When a run ends you can name the exact slide that ended it — and when you win, you out-thought the board. YOU COMMAND AN ARMY, NOT A HERO Six soldier classes — vanguard, tank, medic, marksman, poisoner, support — merge only with their own kind, so every squad trades coverage against raw power. Set the formation before you climb: tank into the crowd, marksman down the long lane, medic in the middle. WHAT IS IN THE GAME • A 5-act campaign across 100 floors — 20 per act, with 3 mini-boss fights and one signature boss in each • The Sunken Tray, The Rusthold, The Shivering Span, The Frostlight, The Surface: five acts, one climb, ending in daylight • 46 synergy blueprints (15 common, 23 uncommon, 8 rare) — pierce a lane, detonate poison chains, strip terrain for scrap, or take a drawback for reach • 24 shadow archetypes, 5 mini-bosses and 5 act bosses among them, each with a rule you have to read before you can answer it • 8 terrain types — sealed exits, timed gates, pits, fog and mazes: the map fights back • 7 kinds of tactic across 8 placeable tools, plus a TINKER STATION between floors to heal, promote, recruit and re-arm • An 18-node cog tree worth 2,335 cog — side-grades and finishes, never raw stats • 22 achievements and 3 daily quests drawn from 7 types • Endless Drift, and a Daily Seed with streaks and a result you can share • 1v1 duels, same seed and separate boards: three bot difficulties offline, or trade a 6-character code with a friend, send sabotage between floors and replay their round • Four languages: English, Turkish, German and Spanish • VoiceOver reads the board and re-announces it after every slide, and hazards are named instead of signalled by colour alone VARIETY UNLOCKS, POWER DOES NOT Nothing here is pay-to-win. Loadouts, tactics and blueprints stay behind cog for every player, and the limits per run are the same for everyone: one continue, two rerolls, three undos. ADS, PLAINLY Rewarded videos are always your choice — five spots, all opt-in. Full-screen breaks land on floor transitions and after a run, at most one every two minutes, never mid-move and never on the way into a boss or mini-boss floor. Duels carry none. TINDRIFT PREMIUM — one purchase, no subscription • Removes every ad • Lets you HOST duel rooms (joining a room is always free) • Unlocks the 10 cosmetics the workshop sells: 8 soldier finishes and 2 tray themes Slide. Merge. Climb.",
+    "publishedAt": "2026-10-13T16:54:07.000Z"
+  },
+  {
     "id": "applevis-apps-e1785f27098d9bd0",
     "title": "Astonischika",
     "sourceId": "applevis-apps",
@@ -226,17 +238,5 @@
     "platform": "Apple",
     "summary": "Rotate a ring. Align matching petals. Watch the garden bloom. Ringbloom is a calm rotational puzzle with a simple choice behind every move: select the inner, middle or outer ring, then turn it left or right. Align matching petals across a spoke, make a bloom and keep your garden growing before your moves run out. TWO WAYS TO PLAY • Garden — an endless, steadily growing puzzle for a quick break or a longer run. • Flower Show — focused Classes with fresh objectives and new ways to think about each turn. Start free with endless Garden and the first five Flower Show Classes. When you want a bigger challenge, one permanent purchase unlocks 25 more campaign Classes and the Champion Circuit. There is no subscription, energy system or advertising. Build bloom chains, chase stronger results and replay Classes to improve your rating. Clear objectives arrive as you play, with labelled controls, Undo and Hint support when you need a hand. Ringbloom is designed for one-thumb play, with distinct glyphs alongside colour, VoiceOver support, Larger Text layouts and Reduce Motion support. Gameplay works offline and progress is kept on your device. Ringbloom began as an AI app-building benchmark and has been refined through play and testing. Ringbloom uses limited analytics and advertising attribution. No account is required. See the privacy policy for the information used and the choices available.",
     "publishedAt": "2026-10-07T03:56:42.000Z"
-  },
-  {
-    "id": "applevis-apps-719bf10bb457e37c",
-    "title": "Nail Sort: Polish Puzzle",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/nail-sort-polish-puzzle",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Pour, sort and collect. Nail Sort is a relaxing color puzzle where you organize polish bottles until each one holds a single shade. HOW TO PLAY Tap a bottle to pick up the top layer, then tap another bottle to pour it. Colors only stack on matching colors. Clear the level when every bottle holds one pure shade. Easy to learn, hard to put down. BUILD YOUR COLLECTION Every level you finish paints a nail in your collection. Complete full seasonal sets: Coral, Nude, Midnight Blue, Rose Gold, Emerald and many more. NO RUSH, NO PRESSURE No timers. No lives to wait for. No scores to chase. Play one level while your coffee brews, or lose an hour to it. Your call. FEATURES - Hundreds of levels with a smooth difficulty curve - 12 polish shades to collect - Unlimited undo while you think - Extra bottles when you get stuck - Plays fully offline - Clean, elegant design with no visual noise Perfect for unwinding, relaxing and giving your mind a break. Download Nail Sort and start your collection.",
-    "publishedAt": "2026-10-07T02:31:26.000Z"
   }
 ]

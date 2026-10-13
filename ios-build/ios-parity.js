@@ -310,6 +310,7 @@
 
     // OCR remains available contextually after an image or a scanned PDF is opened.
     // Do not duplicate file selection or clutter the main TifloLector screen.
+    const fileInput = document.getElementById('reading-file');
 
     // One global default. Each document may override it without changing the default.
     const settings = document.getElementById('reading-settings-web');

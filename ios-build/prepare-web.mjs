@@ -229,6 +229,31 @@ await writeFile(join(output, 'ios-choice-groups.js'), "(() => {\n  'use strict';
 await cp(join(root, 'ios-build/ios-choice-collapse.js'), join(output, 'ios-choice-collapse.js'));
 await cp(join(root, 'ios-build/ios-reader-selects.js'), join(output, 'ios-reader-selects.js'));
 await cp(join(root, 'ios-build/ios-reader-native.js'), join(output, 'ios-reader-native.js'));
+
+const commitSha = String(process.env.GITHUB_SHA ||
+  execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim());
+if (!/^[a-f0-9]{40}$/iu.test(commitSha)) throw new Error('No se puede identificar la revisión de código iOS');
+const runNumber = Number(process.env.GITHUB_RUN_NUMBER);
+const buildCode = Number.isInteger(runNumber) && runNumber >= 0
+  ? String(300000 + runNumber) : 'desarrollo';
+const buildIdentity = { sourceSha: commitSha, buildCode, reader: 'web-reading.js',
+  schema: 'tiflolector-ios-reader-2' };
+await writeFile(join(output, 'tiflo-build-identity.json'), JSON.stringify(buildIdentity, null, 2));
+await writeFile(join(output, 'tiflo-build-identity.js'), [
+  '(() => {',
+  '  const build = ' + JSON.stringify(buildIdentity) + ';',
+  '  window.TIFLO_IOS_BUILD_IDENTITY = Object.freeze(build);',
+  "  document.addEventListener('DOMContentLoaded', () => {",
+  "    const label = document.getElementById('reading-build-identity');",
+  '    if (!label) return;',
+  "    label.textContent = 'TifloLector iOS · compilación ' + build.buildCode +",
+  "      ' · código ' + build.sourceSha.slice(0, 12);",
+  '    label.hidden = false;',
+  '  }, { once: true });',
+  '})();',
+  ''
+].join('\n'));
+
 // Bundled archive decoder: TifloLector must import local EPUB/Office archives offline.
 await cp(join(root, 'ios-build/node_modules/jszip/dist/jszip.min.js'), join(output, 'ios-jszip.min.js'));
 
@@ -265,6 +290,7 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
   if (name === 'index.html' || name === 'actualidad.html' || name === 'videos.html') html = html.replace('</body>', '<script src="ios-parity.js"></script>' + '\n</body>');
   if (name === 'index.html') {
     html = html.replace('</head>', '<script src="ios-reader-native.js"></script>\n</head>');
+    html = html.replace('</head>', '<script src="tiflo-build-identity.js"></script>\n</head>');
     html = html.replace('</body>', '<script src="ios-reader-selects.js"></script>' + '\n</body>');
   }
   if (name === 'podcast.html') {

@@ -550,7 +550,12 @@
     for (const [value, es, en] of [
       ['block','Bloque','Block'],
       ['paragraph','Párrafo','Paragraph'],
-      ['sentence','Frase','Sentence']
+      ['sentence','Frase','Sentence'],
+      ['heading','Encabezado','Heading'],
+      ['mainHeading','Encabezado principal (niveles 1 y 2)','Main heading (levels 1 and 2)'],
+      ['listItem','Elemento de lista','List item'],
+      ['quote','Cita','Quote'],
+      ['tableCell','Celda de tabla','Table cell']
     ]) {
       const option = document.createElement('option');
       option.value = value;
@@ -567,7 +572,12 @@
       const labels = {
         block: language() === 'en' ? 'block' : 'bloque',
         paragraph: language() === 'en' ? 'paragraph' : 'párrafo',
-        sentence: language() === 'en' ? 'sentence' : 'frase'
+        sentence: language() === 'en' ? 'sentence' : 'frase',
+        heading: language() === 'en' ? 'heading' : 'encabezado',
+        mainHeading: language() === 'en' ? 'main heading' : 'encabezado principal',
+        listItem: language() === 'en' ? 'list item' : 'elemento de lista',
+        quote: language() === 'en' ? 'quote' : 'cita',
+        tableCell: language() === 'en' ? 'table cell' : 'celda de tabla'
       };
       const label = labels[unit.value] || labels.block;
       previousUnit.textContent = language() === 'en' ? `Previous ${label}` : `Anterior: ${label}`;
@@ -1013,7 +1023,7 @@
 
   function restoreWebSettings() {
     const value = readWebSettings();
-    if (els.defaultNavigationMode) els.defaultNavigationMode.value = ['block', 'paragraph', 'sentence'].includes(value.defaultNavigationMode) ? value.defaultNavigationMode : 'block';
+    if (els.defaultNavigationMode) els.defaultNavigationMode.value = ['block', 'paragraph', 'sentence', 'heading', 'mainHeading', 'listItem', 'quote', 'tableCell'].includes(value.defaultNavigationMode) ? value.defaultNavigationMode : 'block';
     if (els.voiceLanguage && value.voiceLanguage !== undefined) els.voiceLanguage.value = primaryLanguage(value.voiceLanguage);
     if (els.externalVoiceLanguage && value.externalVoiceLanguage !== undefined) els.externalVoiceLanguage.value = primaryLanguage(value.externalVoiceLanguage);
     if (els.rate && value.rate) els.rate.value = String(value.rate);
@@ -3030,16 +3040,17 @@
     }
 
     currentUnitIndex = 0;
-    if (navigationUnit === 'paragraph') {
-      let index = Number(readingSession.snapshot().blockIndex) || 0;
-      const step = direction < 0 ? -1 : 1;
-      for (index += step; index >= 0 && index < documentModel.blocks.length; index += step) {
-        const type = String(documentModel.blocks[index]?.type || '');
-        if (type === 'paragraph' || type === 'table-cell' || type === 'list-item') {
-          readingSession = shared.createReadingSession({ blocks:documentModel.blocks, initialIndex:index });
-          break;
-        }
+    if (navigationUnit !== 'block' && typeof shared.adjacentWebReadingStructure === 'function') {
+      const next = shared.adjacentWebReadingStructure(
+        documentModel, readingSession.snapshot(), navigationUnit, direction
+      );
+      if (!next.moved) {
+        els.status.textContent = language() === 'en'
+          ? 'No more matching sections in that direction.'
+          : 'No hay más elementos de ese tipo en esa dirección.';
+        return;
       }
+      readingSession = shared.createReadingSession({ blocks: documentModel.blocks, initialIndex: next.position.blockIndex });
     } else if (direction < 0) readingSession.previous();
     else readingSession.next();
 

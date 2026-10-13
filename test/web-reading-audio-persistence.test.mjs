@@ -179,3 +179,33 @@ test('DAISY compressed archive survives relaunch with exact SMIL index/time and 
   assert.equal((await second.openBook('old-document')).content,'No borrar');
   assert.equal(db.stores.get('derived').size,1);
 });
+
+
+
+test('editable notes preserve existing highlights, marks and old documents after reopening', async () => {
+  const db = memoryDatabase({
+    books:[{id:'book-1',title:'Libro previo',format:'txt',content:'Párrafo de prueba'}],
+    marks:[{id:'old-highlight',bookId:'book-1',type:'important',blockIndex:0,excerpt:'Párrafo de prueba'}],
+    derived:[],settings:[]
+  });
+  const first = createWebReadingLibraryAdapter({indexedDB:db});
+  const created = await first.addMark({
+    bookId:'book-1',type:'review',blockIndex:0,reference:'Bloque 1',note:'Recordar el pasaje'
+  });
+  assert.equal(created.added,true);
+  assert.equal(created.mark.note,'Recordar el pasaje');
+  const revised = await first.updateMark({
+    id:created.mark.id,bookId:'book-1',note:'Nota corregida, sin alterar el original'
+  });
+  assert.equal(revised.updated,true);
+  assert.equal((await first.updateMark({
+    id:created.mark.id,bookId:'otro-libro',note:'Acceso indebido'
+  })).updated,false);
+  const afterReload = createWebReadingLibraryAdapter({indexedDB:db});
+  const marks = await afterReload.listMarks({bookId:'book-1'});
+  assert.equal(marks.length,2);
+  assert.equal(marks.find(mark=>mark.id===created.mark.id).note,
+    'Nota corregida, sin alterar el original');
+  assert.equal(marks.find(mark=>mark.id==='old-highlight').type,'important');
+  assert.equal((await afterReload.openBook('book-1')).content,'Párrafo de prueba');
+});

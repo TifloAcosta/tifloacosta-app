@@ -37,6 +37,7 @@ const readerSection = readerHtml.slice(readerStart, readerEnd);
 const mandatoryReaderMarkup = [
   'Abre un libro o documento para escucharlo',
   'id="reading-settings-disclosure"',
+  'id="reading-pronunciation-settings"',
   'id="reading-default-navigation"',
   'id="reading-reader"',
   'id="reading-library-filter"',
@@ -65,6 +66,8 @@ if (!readerScript.includes("intro: 'Abre un libro o documento para escucharlo") 
 // before any IPA can be created; DAISY and real VoiceOver still block release.
 const requiredReaderFeatures = [
   'shared.adjacentWebReadingStructure(',
+  'shared.createPronunciationSpeechAdapter(',
+  'setupPronunciationDictionary()',
   'setReaderAudioOnlyMode(true)',
   'setReaderAudioOnlyMode(false)',
   'libraryClient.listMarks(currentBookId)',
@@ -72,9 +75,11 @@ const requiredReaderFeatures = [
   'libraryPage = 1'
 ];
 const structuralNav = await readFile(join(output, 'shared/web-reading-navigation.mjs'), 'utf8');
+const pronunciationEngine = await readFile(join(output, 'shared/web-reading-pronunciation.mjs'), 'utf8');
 const readerGuide = await readFile(join(output, 'tifloacosta-guide.js'), 'utf8');
 if (requiredReaderFeatures.some(marker => !readerScript.includes(marker)) ||
     !structuralNav.includes('export function adjacentWebReadingStructure(') ||
+    !pronunciationEngine.includes('export function createPronunciationSpeechAdapter(') ||
     !readerHtml.includes('src="tifloacosta-guide.js"') ||
     !readerGuide.includes('guide-chapters') ||
     (readerSection.match(/id="reading-play"/g) || []).length !== 1 ||

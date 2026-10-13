@@ -1469,7 +1469,7 @@
     els.next.hidden = !audioOnly;
   }
 
-  async function useMp3File(file, { existingBook = null } = {}) {
+  async function useMp3File(file, { existingBook = null, requestedPercent = null } = {}) {
     await pause();
     await persistActiveAudio?.({ force: true });
     setAccessiblePlaybackMode(false);
@@ -1541,9 +1541,13 @@
     }
     persistActiveAudio = persistPosition;
     function restoreAudioPosition() {
-      if (activeAudio !== audio || !resumeSeconds || savedBook?.state === 'read') return;
+      if (activeAudio !== audio) return;
       const duration = Number.isFinite(audio.duration) ? audio.duration : 0;
-      try { audio.currentTime = duration ? Math.min(resumeSeconds, duration) : resumeSeconds; } catch {}
+      const target = requestedPercent !== null && Number.isFinite(Number(requestedPercent)) && duration > 0
+        ? Math.max(0, Math.min(99.9, Number(requestedPercent))) * duration / 100
+        : (savedBook?.state === 'read' ? 0 : resumeSeconds);
+      if (!target) return;
+      try { audio.currentTime = duration ? Math.min(target, duration) : target; } catch {}
       updateAudioPosition();
     }
     audio.addEventListener('loadedmetadata', restoreAudioPosition, { once: true });
@@ -2666,7 +2670,7 @@
         return;
       }
       readerReturnView = 'library';
-      await useMp3File(savedAudio.blob, { existingBook: savedAudio.book });
+      await useMp3File(savedAudio.blob, { existingBook: savedAudio.book, requestedPercent });
       currentQueued = savedAudio.book.queued === true;
       updateQueueToggle();
       return;

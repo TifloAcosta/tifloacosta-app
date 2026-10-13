@@ -308,24 +308,8 @@
       } catch { return {}; }
     }
 
-    // A permanent entry describes OCR before a user imports a scanned file.
-    const fileInput = document.getElementById('reading-file');
-    const fileLabel = document.getElementById('reading-file-label');
-    if (fileInput && fileLabel && !document.getElementById('ios-ocr-import')) {
-      const entry = document.createElement('div');
-      entry.id = 'ios-ocr-import';
-      const description = document.createElement('p');
-      description.textContent = localized(
-        'OCR: selecciona una imagen o un PDF escaneado. Si no contiene texto extraíble, TifloLector ofrecerá reconocerlo.',
-        'OCR: choose an image or scanned PDF. If it has no extractable text, TifloReader will offer recognition.'
-      );
-      const action = document.createElement('button');
-      action.type = 'button';
-      action.textContent = localized('Reconocer imagen o PDF con OCR', 'Recognize an image or PDF with OCR');
-      action.addEventListener('click', () => fileInput.click());
-      entry.append(description, action);
-      fileLabel.before(entry);
-    }
+    // OCR remains available contextually after an image or a scanned PDF is opened.
+    // Do not duplicate file selection or clutter the main TifloLector screen.
 
     // One global default. Each document may override it without changing the default.
     const settings = document.getElementById('reading-settings-web');

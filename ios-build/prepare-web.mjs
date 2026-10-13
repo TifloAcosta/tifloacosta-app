@@ -104,11 +104,21 @@ if (requiredReaderFeatures.some(marker => !readerScript.includes(marker)) ||
 // A markup check alone passed build 300071 but shipped a legacy web reader.
 // Fail closed until iOS has genuine DAISY ZIP import AND native document actions.
 // The full visual/VoiceOver acceptance still needs a device test (issue #170).
-const daisyZipSupported = /daisy/i.test(readerScript) && /smil/i.test(readerScript)
-  && readerScript.includes('zipBundle');
-const nativeAccessibleDocumentActions = await stat(
-  join(root, 'ios-build/native/TifloReadingAccessibilityPlugin.swift')
-).then(() => true, () => false);
+// A filename or a mention of SMIL must never count as complete DAISY audio.
+// Only explicit synchronized playback and on-device validation can release it.
+const daisyZipSupported = readerScript.includes('playSynchronizedDaisyAudio(')
+  && readerScript.includes('seekSynchronizedDaisyClip(')
+  && readerScript.includes('resumeSynchronizedDaisyClip(');
+const accessibilityNativePath = join(root, 'ios-build/native/TifloReadingAccessibilityPlugin.swift');
+const nativeAccessibilitySource = await readFile(accessibilityNativePath, 'utf8').catch(() => '');
+const nativeControllerSource = await readFile(
+  join(root, 'ios-build/native/TifloYouTubeViewController.swift'), 'utf8'
+).catch(() => '');
+const nativeAccessibleDocumentActions =
+  nativeAccessibilitySource.includes('cell.accessibilityCustomActions = [')
+  && nativeAccessibilitySource.includes('notifyListeners("readingLibraryAction"')
+  && nativeControllerSource.includes('registerPluginInstance(TifloReadingAccessibilityPlugin())')
+  && readerScript.includes('ensureNativeLibraryActions(page.items)');
 if (!daisyZipSupported || !nativeAccessibleDocumentActions) {
   // Diagnostic unsigned builds may compile native Swift, but NEVER publish an IPA.
   // The TestFlight workflow does not opt in to this bypass.

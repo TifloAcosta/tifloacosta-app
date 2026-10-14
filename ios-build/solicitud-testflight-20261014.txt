@@ -18,3 +18,11 @@ CI de verificación para iPhone y simulador sin firma: ejecución 155, conclusi�
 Alcance: cerrar General y devolver el foco; agrupar Controles y ajustes personalizados dentro del documento; registrar acciones de VoiceOver de cada título sin activación previa; corregir la etiqueta audible.
 No cambiar Android, web, importación, pantalla principal ni funcionalidades aceptadas.
 Destino: exclusivamente TestFlight interno, sólo confirmar entrega tras VALID comprobado por Apple.
+
+
+Nueva solicitud de envío desde la BASE 400079: 14-10-2026.
+Revisión corregida de la rama preparacion-ios: c73f6fd1c00ae63c19fd84469cda2aae59e73d07.
+Validación iOS sin firma número 162: SUCCESS (simulador, iPhone, tests estáticos y regresiones).
+Correcciones exclusivamente iOS: Ajustes como botón de entrada a carpeta aislada; subcarpetas Audio y voz, Presentación visual y General con Cerrar y retorno de foco; aviso ocioso «Lectura preparada» oculto; controles por documento reunidos; etiquetas y correspondencia de acciones VoiceOver de títulos mejoradas.
+No restaurar builds anteriores ni modificar Android/Web. Mantener Importar directo, PDF, MP3, DAISY, diccionario, marcas y contenido local.
+Solicitar solo un nuevo build TestFlight interno y comprobar procesamiento Apple y asignación al grupo antes de anunciarlo como disponible.

@@ -99,10 +99,14 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
             clearInstalledActions()
             return
         }
+        // No vaciar las acciones del título que continúa bajo el foco.
+        if documentId == id, (installedOnElement != nil || installedOnView != nil) { return }
         clearInstalledActions()
         documentId = id
         let selectors: [String: Selector] = [
-            "open": #selector(openDocument(_:)), "export": #selector(exportDocument(_:)),
+            "open": #selector(openDocument(_:)), "continue": #selector(continueDocument(_:)),
+            "queue": #selector(queueDocument(_:)), "info": #selector(infoDocument(_:)),
+            "move": #selector(moveDocument(_:)), "export": #selector(exportDocument(_:)),
             "rename": #selector(renameDocument(_:)), "delete": #selector(deleteDocument(_:))
         ]
         let actions = entries.compactMap { entry -> UIAccessibilityCustomAction? in
@@ -177,6 +181,10 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
             let entries = call.getArray("actions") as? [[String: Any]] ?? []
             let selectors: [String: Selector] = [
                 "open": #selector(self.openDocument(_:)),
+                "continue": #selector(self.continueDocument(_:)),
+                "queue": #selector(self.queueDocument(_:)),
+                "info": #selector(self.infoDocument(_:)),
+                "move": #selector(self.moveDocument(_:)),
                 "export": #selector(self.exportDocument(_:)),
                 "rename": #selector(self.renameDocument(_:)),
                 "delete": #selector(self.deleteDocument(_:))
@@ -241,6 +249,10 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
     }
 
     @objc private func openDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("open") }
+    @objc private func continueDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("continue") }
+    @objc private func queueDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("queue") }
+    @objc private func infoDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("info") }
+    @objc private func moveDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("move") }
     @objc private func exportDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("export") }
     @objc private func renameDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("rename") }
     @objc private func deleteDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("delete") }

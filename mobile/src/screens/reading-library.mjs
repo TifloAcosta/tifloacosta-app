@@ -312,18 +312,19 @@ export function renderReadingLibrary({
 
   // Global reading settings follow filters and are persisted immediately.
   const settingsSection = document.createElement('section');
-  const settingsHeading = document.createElement('h2');
-  settingsHeading.textContent = t('readingLibrary.settings') === 'readingLibrary.settings'
-    ? fallback(t, 'readingLibrary.settings', 'Ajustes de lectura', 'Reading settings')
-    : t('readingLibrary.settings');
+  const translatedSettingsLabel = t('readingLibrary.settings');
   const settingsToggle = makeButton(
-    fallback(t, 'readingLibrary.openSettings', 'Configurar ajustes de lectura', 'Configure reading settings'),
+    document.documentElement.lang === 'en' ? 'Settings' : 'Ajustes',
     () => {
       settingsPanel.hidden = !settingsPanel.hidden;
       settingsToggle.setAttribute('aria-expanded', String(!settingsPanel.hidden));
-      if (!settingsPanel.hidden) void loadGlobalSettings();
+      if (!settingsPanel.hidden) {
+        void loadGlobalSettings();
+        queueMicrotask(() => settingsMenu.querySelector('button')?.focus());
+      }
     }
   );
+  settingsToggle.dataset.context = translatedSettingsLabel;
   settingsToggle.setAttribute('aria-expanded', 'false');
   const settingsPanel = document.createElement('div');
   settingsPanel.hidden = true;
@@ -415,13 +416,23 @@ export function renderReadingLibrary({
     () => { void resetReadingDefaults(); }
   );
 
+  // One choice at a time. A closed submenu is excluded from VoiceOver traversal.
+  const settingsMenu = document.createElement('div');
+  const settingGroups = [];
   function settingsGroup(es, en) {
-    const details = document.createElement('details');
-    details.className = 'reading-settings-disclosure';
-    const summary = document.createElement('summary');
-    summary.textContent = document.documentElement.lang === 'en' ? en : es;
-    details.append(summary);
-    return details;
+    const group = document.createElement('section');
+    group.hidden = true;
+    const opener = makeButton(document.documentElement.lang === 'en' ? en : es, () => {
+      for (const entry of settingGroups) {
+        entry.group.hidden = entry.group !== group;
+        entry.opener.setAttribute('aria-expanded', String(entry.group === group));
+      }
+      queueMicrotask(() => group.querySelector('select, input, button')?.focus());
+    });
+    opener.setAttribute('aria-expanded', 'false');
+    settingGroups.push({ group, opener });
+    settingsMenu.append(opener);
+    return group;
   }
 
   const audioGroup = settingsGroup('Audio y voz', 'Audio and voice');
@@ -447,9 +458,21 @@ export function renderReadingLibrary({
       ['page', document.documentElement.lang === 'en' ? 'PDF page' : 'Página PDF']
     ]
   );
-  generalGroup.append(navigationModeLabel, navigationModeSelect, importFormats, resetSettings, settingsStatus);
-  settingsPanel.append(audioGroup, visualGroup, generalGroup);
-  settingsSection.append(settingsHeading, settingsToggle, settingsPanel);
+  generalGroup.append(navigationModeLabel, navigationModeSelect, importFormats, resetSettings);
+  for (const { group, opener } of settingGroups) {
+    group.append(makeButton(document.documentElement.lang === 'en' ? 'Close' : 'Cerrar', () => {
+      group.hidden = true;
+      opener.setAttribute('aria-expanded', 'false');
+      opener.focus();
+    }));
+  }
+  const closeSettings = makeButton(document.documentElement.lang === 'en' ? 'Close settings' : 'Cerrar ajustes', () => {
+    settingsPanel.hidden = true;
+    settingsToggle.setAttribute('aria-expanded', 'false');
+    settingsToggle.focus();
+  });
+  settingsPanel.append(settingsMenu, audioGroup, visualGroup, generalGroup, settingsStatus, closeSettings);
+  settingsSection.append(settingsToggle, settingsPanel);
   root.append(settingsSection);
 
   const globalSettingControls = new Map([
@@ -555,15 +578,15 @@ export function renderReadingLibrary({
 
     const title = makeButton(
       item.title || t('readingLibrary.untitled'),
-      () => onOpenBook?.(item.id),
+      () => actionsToggle.click(),
       'reading-library-title'
     );
     title.id = `reading-library-title-${String(item.id).replace(/[^a-zA-Z0-9_-]/g, '-')}`;
     title.setAttribute(
       'aria-label',
       document.documentElement.lang === 'en'
-        ? `Open for reading: ${item.title || t('readingLibrary.untitled')}`
-        : `Abrir para leer: ${item.title || t('readingLibrary.untitled')}`
+        ? `Options for: ${item.title || t('readingLibrary.untitled')}`
+        : `Opciones de: ${item.title || t('readingLibrary.untitled')}`
     );
     article.append(title);
     title.addEventListener('focus', () => {

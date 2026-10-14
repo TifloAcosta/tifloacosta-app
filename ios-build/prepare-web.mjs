@@ -37,6 +37,7 @@ const readerSection = readerHtml.slice(readerStart, readerEnd);
 const mandatoryReaderMarkup = [
   'Abre un libro o documento para escucharlo',
   'id="reading-settings-disclosure"',
+  'id="reading-pronunciation-settings"',
   'id="reading-default-navigation"',
   'id="reading-reader"',
   'id="reading-library-filter"',
@@ -65,6 +66,16 @@ if (!readerScript.includes("intro: 'Abre un libro o documento para escucharlo") 
 // before any IPA can be created; DAISY and real VoiceOver still block release.
 const requiredReaderFeatures = [
   'shared.adjacentWebReadingStructure(',
+  'shared.createPronunciationSpeechAdapter(',
+  'setupPronunciationDictionary()',
+  'await useMp3File(savedAudio.blob',
+  'persistActiveAudio = persistPosition',
+  'reading-audio-marks-controls',
+  'shared.parseDaisyArchive(',
+  'daisy-audio-only',
+  'exportCompletedTranslation(',
+  'reading-translation-export-txt',
+  'Marcar posición del audio',
   'setReaderAudioOnlyMode(true)',
   'setReaderAudioOnlyMode(false)',
   'libraryClient.listMarks(currentBookId)',
@@ -72,9 +83,17 @@ const requiredReaderFeatures = [
   'libraryPage = 1'
 ];
 const structuralNav = await readFile(join(output, 'shared/web-reading-navigation.mjs'), 'utf8');
+const pronunciationEngine = await readFile(join(output, 'shared/web-reading-pronunciation.mjs'), 'utf8');
+const mediaStorage = await readFile(join(output, 'shared/web-reading-library-adapter.mjs'), 'utf8');
+const daisyAdapter = await readFile(join(output, 'shared/web-reading-daisy-adapter.mjs'), 'utf8');
 const readerGuide = await readFile(join(output, 'tifloacosta-guide.js'), 'utf8');
 if (requiredReaderFeatures.some(marker => !readerScript.includes(marker)) ||
     !structuralNav.includes('export function adjacentWebReadingStructure(') ||
+    !pronunciationEngine.includes('export function createPronunciationSpeechAdapter(') ||
+    !mediaStorage.includes("createObjectStore('media'") ||
+    !mediaStorage.includes('async function openAudioFile(id)') ||
+    !mediaStorage.includes('async function importAudioFile(') ||
+    !daisyAdapter.includes('export async function parseDaisyArchive(') ||
     !readerHtml.includes('src="tifloacosta-guide.js"') ||
     !readerGuide.includes('guide-chapters') ||
     (readerSection.match(/id="reading-play"/g) || []).length !== 1 ||
@@ -85,15 +104,37 @@ if (requiredReaderFeatures.some(marker => !readerScript.includes(marker)) ||
 // A markup check alone passed build 300071 but shipped a legacy web reader.
 // Fail closed until iOS has genuine DAISY ZIP import AND native document actions.
 // The full visual/VoiceOver acceptance still needs a device test (issue #170).
-const daisyZipSupported = /daisy/i.test(readerScript) && /smil/i.test(readerScript)
-  && readerScript.includes('zipBundle');
-const nativeAccessibleDocumentActions = await stat(
-  join(root, 'ios-build/native/TifloReadingAccessibilityPlugin.swift')
-).then(() => true, () => false);
+// A filename or a mention of SMIL must never count as complete DAISY audio.
+// Only explicit synchronized playback and on-device validation can release it.
+const daisyZipSupported = readerScript.includes('playSynchronizedDaisyAudio(')
+  && readerScript.includes('seekSynchronizedDaisyClip(')
+  && readerScript.includes('resumeSynchronizedDaisyClip(');
+const accessibilityNativePath = join(root, 'ios-build/native/TifloReadingAccessibilityPlugin.swift');
+const nativeAccessibilitySource = await readFile(accessibilityNativePath, 'utf8').catch(() => '');
+const nativeControllerSource = await readFile(
+  join(root, 'ios-build/native/TifloYouTubeViewController.swift'), 'utf8'
+).catch(() => '');
+const nativeReaderBridge = await readFile(
+  join(root, 'ios-build/ios-reader-native.js'), 'utf8'
+).catch(() => '');
+const nativeAccessibleDocumentActions =
+  nativeAccessibilitySource.includes('UIAccessibilityCustomAction(name: name, target: self, selector: selector)')
+  && nativeAccessibilitySource.includes('notifyListeners("documentAction"')
+  && nativeAccessibilitySource.includes('setDocumentActions')
+  && nativeAccessibilitySource.includes('pickDocument')
+  && nativeControllerSource.includes('registerPluginInstance(TifloReadingAccessibilityPlugin())')
+  && nativeReaderBridge.includes("installLibraryNativeActions()")
+  && nativeReaderBridge.includes("installNativeFilesImport()")
+  && nativeReaderBridge.includes("plugin.pickDocument()");
 if (!daisyZipSupported || !nativeAccessibleDocumentActions) {
-  throw new Error('BLOQUEO PREVENTIVO iOS: lector web antiguo incompleto. Falta importar DAISY ZIP'
+  // Diagnostic unsigned builds may compile native Swift, but NEVER publish an IPA.
+  // The TestFlight workflow does not opt in to this bypass.
+  if (process.env.TIFLO_IOS_AUDIT_UNSIGNED !== '1') {
+    throw new Error('BLOQUEO PREVENTIVO iOS: lector web antiguo incompleto. Falta importar DAISY ZIP'
     + ' y/o integrar acciones nativas de documentos para VoiceOver. Se prohíbe publicar'
     + ' otra compilación que resucite TifloLector anterior. Ver issue #170.');
+  }
+  console.warn('DIAGNÓSTICO iOS SIN FIRMA: se omite SOLO el bloqueo de aceptación DAISY/VoiceOver. PROHIBIDO DISTRIBUIR.');
 }
 console.log('Prechequeos de estructura, DAISY y accesibilidad completados; queda validación real en dispositivo.');
 
@@ -195,6 +236,34 @@ await writeFile(join(output, 'ios-choice-groups.js'), "(() => {\n  'use strict';
 await cp(join(root, 'ios-build/ios-choice-collapse.js'), join(output, 'ios-choice-collapse.js'));
 await cp(join(root, 'ios-build/ios-reader-selects.js'), join(output, 'ios-reader-selects.js'));
 await cp(join(root, 'ios-build/ios-reader-native.js'), join(output, 'ios-reader-native.js'));
+
+const commitSha = String(process.env.GITHUB_SHA ||
+  execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim());
+if (!/^[a-f0-9]{40}$/iu.test(commitSha)) throw new Error('No se puede identificar la revisión de código iOS');
+const runNumber = Number(process.env.GITHUB_RUN_NUMBER);
+const buildCode = Number.isInteger(runNumber) && runNumber >= 0
+  ? String(400000 + runNumber) : 'desarrollo';
+const buildIdentity = { sourceSha: commitSha, buildCode, reader: 'web-reading.js',
+  schema: 'tiflolector-ios-reader-2' };
+await writeFile(join(output, 'tiflo-build-identity.json'), JSON.stringify(buildIdentity, null, 2));
+await writeFile(join(output, 'tiflo-build-identity.js'), [
+  '(() => {',
+  '  const build = ' + JSON.stringify(buildIdentity) + ';',
+  '  window.TIFLO_IOS_BUILD_IDENTITY = Object.freeze(build);',
+  "  document.addEventListener('DOMContentLoaded', () => {",
+  "    const label = document.getElementById('reading-build-identity');",
+  '    if (!label) return;',
+  "    label.textContent = 'TifloLector iOS · compilación ' + build.buildCode +",
+  "      ' · código ' + build.sourceSha.slice(0, 12);",
+  '    label.hidden = false;',
+  '  }, { once: true });',
+  '})();',
+  ''
+].join('\n'));
+
+// Bundled archive decoder: TifloLector must import local EPUB/Office archives offline.
+await cp(join(root, 'ios-build/node_modules/jszip/dist/jszip.min.js'), join(output, 'ios-jszip.min.js'));
+
 const bundledVideos = JSON.parse(await readFile(join(output, 'videos.json'), 'utf8'));
 if (!Array.isArray(bundledVideos.videos) || !bundledVideos.videos.length) throw new Error('Catálogo de vídeos vacío');
 await writeFile(join(output, 'ios-videos-fallback.js'),
@@ -228,6 +297,7 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
   if (name === 'index.html' || name === 'actualidad.html' || name === 'videos.html') html = html.replace('</body>', '<script src="ios-parity.js"></script>' + '\n</body>');
   if (name === 'index.html') {
     html = html.replace('</head>', '<script src="ios-reader-native.js"></script>\n</head>');
+    html = html.replace('</head>', '<script src="tiflo-build-identity.js"></script>\n</head>');
     html = html.replace('</body>', '<script src="ios-reader-selects.js"></script>' + '\n</body>');
   }
   if (name === 'podcast.html') {

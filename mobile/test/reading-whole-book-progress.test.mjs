@@ -55,3 +55,15 @@ test('DAISY multi-track percentage never substitutes current clip duration for e
   assert.equal(audiobookPercent(complete, 1, 180000, 180000, 0, 2), 100);
   assert.equal(audiobookPercent([], 0, 2000, 20000, 0, 1), 10, 'A single MP3 may use its own duration');
 });
+
+test('verified audiobook percent is unavailable for unknown or missing track durations', async () => {
+  const { verifiedAudiobookPercent } = await import('../../shared/reading-audio.mjs');
+  assert.equal(verifiedAudiobookPercent([], 0, 2000, 20000, 10), null);
+  assert.equal(verifiedAudiobookPercent([{ trackIndex: 0, durationMs: 20000 }, { trackIndex: 1, durationMs: 0 }], 0, 2000, 20000, 2), null);
+  assert.equal(verifiedAudiobookPercent([{ trackIndex: 1, durationMs: 20000 }, { trackIndex: 1, durationMs: 180000 }], 0, 2000, 20000, 2), null);
+  assert.equal(verifiedAudiobookPercent([], 0, 2000, 0, 1), null);
+  assert.equal(verifiedAudiobookPercent([], 0, 2000, 20000, 1), 10);
+  const complete = [{ trackIndex: 0, durationMs: 20000 }, { trackIndex: 1, durationMs: 180000 }];
+  assert.equal(verifiedAudiobookPercent(complete, 0, 2000, 20000, 2), 1);
+  assert.equal(verifiedAudiobookPercent(complete, 1, 180000, 180000, 2), 100);
+});

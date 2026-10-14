@@ -1,4 +1,5 @@
 export {
   READING_AUDIO_SLEEP_MINUTES,
-  createReadingAudioController
+  createReadingAudioController,
+  verifiedAudiobookPercent
 } from '../../../shared/reading-audio.mjs';

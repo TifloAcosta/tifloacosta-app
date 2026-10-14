@@ -120,6 +120,18 @@
     "publishedAt": null
   },
   {
+    "id": "applevis-apps-96260ccb3321472c",
+    "title": "Dog Genome Puppy Distribution System",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/dog-genome-puppy-distribution-system",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "THE PUPPY DISTRIBUTION SYSTEM FOUND YOU Rescue stray puppies, breed champion pups, unlock rare colors, and dress your pack in 100+ fun props. Free to play, fully offline, no ads. UNLIMITED PUPPIES • No energy meter, no lives, no waiting to play • Answer as many rescue calls as you like • Breed as many litters as you want RARE COMBINATIONS TO CHASE • 800 looks to discover across six trait axes • Hidden genes resurface generations later, so rare colors run in families • Rarest of all: the prismatic puppy, with a rainbow coat, blue eyes, and a head start on every stat FOUR WAYS TO BREED • Let nature surprise you • Add a guaranteed extra puppy to every litter • Lock the traits you want • Or hand-pick every last one FOR THE SCIENCE MINDED • Two genes per trait, with dominance deciding what you actually see • The real odds, shown before you commit to a litter • A DNA scanner that reveals which dogs are quietly carrying what • Preserve a genome in the DNA Lab, then clone it exactly • Splice: lock individual traits, or choose which parent each stat gene comes from • Weave two or three saved genomes into a single hybrid RAISE, COMPETE, AND DRESS UP • Grow puppies in the nursery, and enter the little ones in Puppy League events • 10+ fun competitions across seven tiers, Backyard to Legends • Fashion Shows judged mostly on the outfit • 100+ props to drag, resize, and rotate BUILD A BLOODLINE • Trace every relationship in the family tree • Fill your Dog-Dex with every look you have discovered • Trade for new bloodlines on the Dog Exchange • A traveling trader visits each weekend, paying well above the going rate EVERY UPGRADE IS EARNABLE • Your dogs earn coins from rescues, competitions, and the Dog Exchange • Spend them on props, kennel space, breeding tools, and DNA Lab upgrades • 100% playable without spending real money PLAYING WITH VOICEOVER • Each dog, event, show and store item is one stop, with its name first • Double-tap the competitor, tier, theme or a breeding parent to choose from a list • Hear pet descriptions, clear action costs and competition results • Coin purchases ask first, and Settings > VoiceOver lets you choose Brief or Detailed screens • Find recent messages and the Accessibility Guide in Settings NO ADS. NO ACCOUNTS. NO LOOT BOXES. • Fully offline, with optional iCloud backup • In-app purchases are optional shortcuts and extras, never requirements • Coin packs, the Quick Compete planner, the Genome Loom, and the Wolf Pack supporter bundle",
+    "publishedAt": "2026-10-14T02:44:15.000Z"
+  },
+  {
     "id": "applevis-apps-93f3a39eda1b82c8",
     "title": "Tindrift: Merge Roguelike",
     "sourceId": "applevis-apps",
@@ -226,17 +238,5 @@
     "platform": "Apple",
     "summary": "Important: This version of Sky Go is exclusively available for Sky Glass and Sky Stream customers. If you have Sky Q or Sky+ please continue using the existing Sky Go app. Watch your favourite content wherever you are with access to Sky channels and free-to-air channels including ITV, Channel 4 and 5. Enjoy live TV, catch up on demand, or download shows and films to watch later. With a refreshed design and improved ways to find and watch content, this latest version delivers a more streamlined and personalised viewing experience across mobile and tablet devices. In this release, you can enjoy: A new interface aligned with the Sky Glass and Sky Stream experience. Streaming across Live TV, On Demand, Sky Sports events and Downloads. A redesigned browse experience with improved TV Guide and Search functionality. Personalised recommendations to help you discover more of the content you love. Seamless viewing across your compatible Sky devices at home.",
     "publishedAt": "2026-10-08T20:36:43.000Z"
-  },
-  {
-    "id": "applevis-apps-7c78087dce6280d9",
-    "title": "Ringbloom: The Garden Puzzle",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/ringbloom-garden-puzzle",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Rotate a ring. Align matching petals. Watch the garden bloom. Ringbloom is a calm rotational puzzle with a simple choice behind every move: select the inner, middle or outer ring, then turn it left or right. Align matching petals across a spoke, make a bloom and keep your garden growing before your moves run out. TWO WAYS TO PLAY • Garden — an endless, steadily growing puzzle for a quick break or a longer run. • Flower Show — focused Classes with fresh objectives and new ways to think about each turn. Start free with endless Garden and the first five Flower Show Classes. When you want a bigger challenge, one permanent purchase unlocks 25 more campaign Classes and the Champion Circuit. There is no subscription, energy system or advertising. Build bloom chains, chase stronger results and replay Classes to improve your rating. Clear objectives arrive as you play, with labelled controls, Undo and Hint support when you need a hand. Ringbloom is designed for one-thumb play, with distinct glyphs alongside colour, VoiceOver support, Larger Text layouts and Reduce Motion support. Gameplay works offline and progress is kept on your device. Ringbloom began as an AI app-building benchmark and has been refined through play and testing. Ringbloom uses limited analytics and advertising attribution. No account is required. See the privacy policy for the information used and the choices available.",
-    "publishedAt": "2026-10-07T03:56:42.000Z"
   }
 ]

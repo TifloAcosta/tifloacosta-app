@@ -1,13 +1,37 @@
 [
   {
-    "id": "techcrunch-81cc7ba4a9ffd257",
+    "id": "cti-once-c10668e67914dda3",
     "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/13/fbi-arrests-openai-employee-accused-of-planting-hidden-recording-device-in-conference-room/",
+    "sourceId": "cti-once",
+    "sourceName": "CTI de la ONCE",
+    "sourceUrl": "https://cti.once.es/",
+    "originalUrl": "https://cti.once.es/noticias/evaluaciones-de-app-actualizadas-o-incorporadas-en-el-clubonce-en-el-mes-de-septiembre-6",
+    "originalLanguage": "es",
+    "publishedAt": "2026-10-14T12:00:00.000Z",
+    "categories": [
+      "tecnologia-accesibilidad",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "Evaluaciones de APP Evaluaciones de APP actualizadas o incorporadas en el ClubONCE en el mes de septiembre.",
+        "summary": "A lo largo del pasado mes de septiembre se han evaluado las siguientes APP:",
+        "body": "A lo largo del pasado mes de septiembre se han evaluado las siguientes APP:\n\nAndroid\n\niOS\n\nEn esta ocasión se han evaluado Apps categorizadas en: ayudas para la discapacidad visual, acceso a la información, utilidades y entretenimiento.\n\nSi tiene problemas para abrir los enlaces, copie las url que se muestran a continuación en su navegador:\n\nAndroid\n\niOS\n\nRecordamos a las personas afiliadas que estén interesados en estos informes, que pueden suscribirse a Valoraciones Accesibilidad de APP, de esta manera recibirán un correo cada vez que se publique una nueva aplicación, permitiéndoles disponer de la información puntualmente.\n\nEsta información y los documentos completos de evaluación de cada una de estas aplicaciones están disponibles en el apartado de Valoraciones de accesibilidad de aplicaciones para móviles o accediendo con el navegador a la ruta ClubONCE / Servicios / Autonomía Personal y Tecnología / Tiflotecnología / Valoraciones de accesibilidad de aplicaciones móviles."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-c69f889103f2a3b8",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2286321/cmfs-first-portable-speakers-are-shaped-like-milk-cartons-and-pair-together-hands-on/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-13T20:59:11.000Z",
+    "publishedAt": "2026-10-14T12:00:00.000Z",
     "categories": [
       "tecnologia-general"
     ],
@@ -15,9 +39,273 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "FBI arrests OpenAI employee accused of planting hidden recording device in conference room",
-        "summary": "It's not clear exactly for what purpose the recording device was used, but FBI director Kash Patel said the scheme was to \"capture sensitive communications about the company’s super intelligence technology.\"",
-        "body": "OpenAI said it has alerted the FBI after discovering that an employee allegedly planted a hidden recording device in one of the AI maker’s office executive conference rooms.\n\nThe employee, named by federal prosecutors as Saudi national Abdulrahman Alfozan, was fired and arrested on October 9, about a week after OpenAI discovered the surveillance device.\n\nThe company said in a post on X that it used its internal AI models to understand the “sophisticated” device. OpenAI told TechCrunch that the device contained “advanced encryption, audio monitoring capabilities, and a mechanism for transferring data designed to evade monitoring,” though it is unclear to what degree this device is technically distinct from other recording devices.\n\n“At this time, we have no indications of this individual inappropriately accessing or exfiltrating model weights, source code, or customer data,” said OpenAI in its post on X.\n\nOpenAI’s spokesperson, Nate Evans, confirmed that the employee started with the AI model maker in July 2025 and worked on the product team.\n\nProsecutors with the U.S. Attorney’s Office for the Northern District of California said Alfozan was charged with using an electronic device to intercept oral communications — effectively accusing him of covertly recording people’s voice audio without their permission. Prosecutors said OpenAI caught the device after it was inserted into a USB port on the back of a television in OpenAI’s San Francisco office.\n\nPer the prosecutors, Alfozan was caught looking behind the television where the recording device was placed, and where OpenAI had placed a camera that allegedly caught the employee.\n\nIt’s not clear exactly for what purpose the recording device was used, but FBI director Kash Patel said the scheme was to “capture sensitive communications about the company’s super intelligence technology.”\n\nNeither Alfozan nor his attorney could be immediately reached for comment. He faces five years in prison if convicted.\n\nWhen reached, a spokesperson for the FBI reiterated a statement made by Patel.\n\n“Protecting American SI innovation is essential to safeguarding our nation’s economic strength and national security, and the FBI views that mission as one of our highest counterintelligence priorities,” Patel said."
+        "title": "CMF's first portable speakers are shaped like milk cartons and pair together",
+        "summary": "Nothing's sister company CMF announced some playful bluetooth speakers that can be paired together and even work with Auracast.",
+        "body": "They look like something from Teenage Engineering or IKEA.\n\nSurprisingly, CMF (nor its sister brand Nothing) has only now tried its hand at portable speakers. Naturally, it had to do it differently and the result is two different speaker options, both shaped like cute, vivid milk cartons.\n\nAvailable now, the CMF Speaker S ($59) and Speaker M ($109) look great, with a few features and specs I'm surprised to see at this price point. Both speakers come in orange, turquoise and white, and the control knob come in different shapes and colors too; I told you: cute. You can even swap out the cover plate and knob between devices. The knob controls volume but can also skip tracks and rewind. I like the hole in the top corner of the speakers, which makes it easy to attach to a bag or tent.\n\nThe smaller Speaker S has a 45mm full-range driver, and a pair of passive radiators boost bassier tones. Meanwhile, the Speaker M has a 10W tweeter, dual drivers and even a 25W woofer, with two speaker outlets, and is roughly double the height of the Speaker S. Both speakers have Bluetooth 6.0 connectivity, IP68 dust and water resistance ratings and CMF claims both can play music for up to 18 hours. They have USB-C ports for charging, but this can also be used as audio input. The new speakers also support NFC pairing, Google Fast Pair and even Microsoft Swift Pair.\n\nAt this price, I was most surprised to see the option to pair two Speaker S or Speaker M together. Oddly, you can't combine an S and an M. They also support Auracast, which is appearing in increasingly more devices from more companies. I received a pair of the smaller speakers and they're surprisingly rich-sounding, given the size (and price). One warning: there's no USB-C cable included, but I'm sure many of us have a spare.\n\nLike some past Teenage Engineering products, CMF says it will release the design files so devoted listeners can 3D print custom handles and accessories. Both speakers are available now on Nothing's retail site ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-81c4d6e7938d9805",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/tech-policy/2026/10/openai-google-pushing-new-ai-models-easily-tricked-into-making-nudes-researchers-say/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-14T11:00:30.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "OpenAI, Google pushing new AI models easily tricked into making nudes, researchers say",
+        "summary": "Attack method exposes flaws in OpenAI, Google safeguards against AI nudes.",
+        "body": "Safety researchers continue to warn that a large volume of AI-generated explicit content is spreading unchecked, while regulators do little to meaningfully stop it.\n\nThis non-consensual content is commonly shared in text and direct messages or stored in private clouds where it’s less likely to be detected or reported, a Google co-authored study of Internet users across the United States, Australia, and the United Kingdom found this July. That’s why the “most critical intervention point” remains at the source: the harmful AI tools used to make the fake sexual images, Google researchers concluded.\n\nYet red-teaming in recent months suggests that as some of the leading AI image generators from Google and OpenAI become more capable, they may be getting worse at blocking explicit outputs.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-f9a4781c758a0fa7",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2284584/beat-preorder-iphone-duo-rush-apple-get-ready-tool/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-14T11:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Beat the iPhone Duo pre-order rush with Apple's Get Ready tool",
+        "summary": "You can already set up your pre-order now, before the pre-orders open on Friday (October 16).",
+        "body": "It's basically a pre-order opportunity before the pre-order window opens.\n\nApple announced the iPhone Duo last month , but it won't hit stores until October 23. However, pre-orders for the highly anticipated foldable iPhone begin this week on October 16. And if you really can't wait, here's some good news: you can already get a head start on your pre-order on Apple's website. Not only that, but carriers and retailers are already advertising their special offers for the iPhone Duo — which will probably be helpful since it isn't exactly cheap. So here's how to secure your iPhone Duo with as little hassle as possible.\n\nIf you're planning to buy the iPhone Duo directly from Apple, the company has launched a tool called Get Ready, which is the best way to speed things up. Starting today (October 12), you can already choose which model you want. Go to the Apple Online Store or use the Apple Store app and look for the iPhone Duo. Choose a color (Star White or Night Sky) and storage capacity (from 256GB to 2TB). Then, choose your carrier, decide whether or not you want to trade in your old phone and maybe add a few accessories to your purchase as well — you'll probably want to protect your new $2,000 phone with a case. AppleCare+ is also a good deal , and you can sign up for it from the purchase screen.\n\nWhen all that's set, Get Ready saves you some pre-order anxiety by letting you set up a payment method and your shipping address now, before the purchase window opens on Friday. As soon as it does, Apple will place your order and ensure that you receive your new iPhone in time for launch day. Waiting until Friday to pre-order your iPhone could end up delaying shipping if you aren't quick enough, since there's usually strong demand for new products. Also, rumors suggest that there won't be many iPhone Duo units available at launch. If you use Apple's Get Ready, your chances of receiving the iPhone Duo on October 23 increase considerably.\n\nOnce again, you can buy your iPhone Duo directly from Apple — it's usually the easiest option, especially if you don't want to buy it tied to a specific plan or carrier. Apple is offering up to $885 in credit when you trade in an eligible iPhone, so giving up your old iPhone might be a good way to make the Duo a little less expensive. The full price starts at $1,999 for the 256GB model and can go as high as $3,199 for the 2TB model.\n\nYou can also split payments over up to 24 months, so buying the 256GB model would cost you $83.29 per month. If you sign up for the new Apple Upgrade program, the cost drops to $57.99 per month. Just now that after two years, you'll have to hand your iPhone back to Apple, pay the remaining balance to keep it or upgrade to a new device and keep paying.\n\nCarriers are also already announcing their deals for the iPhone Duo. AT&T, for example, offers up to $1,200 in eligible trade-ins , and if you order online, you'll also earn an extra $200 per line on your plan. Best Buy will also have special deals for the iPhone Duo launch , with prices starting at $55.96 per month on an installment plan with AT&T. It's worth comparing each of these offers side by side to see which one works best for you."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-0d0293d642e873fa",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/14/scimplify-raises-25m-to-challenge-chinas-grip-on-critical-materials-with-ai/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-14T11:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Scimplify raises $25M to challenge China’s grip on critical materials with AI",
+        "summary": "Scimplify's annualized revenue run rate has tripled to $200 million as it eyes U.S. expansion.",
+        "body": "As manufacturers across industries strive to reduce their reliance on Chinese suppliers, Indian startup Scimplify has raised $25 million to expand its AI-powered approach to producing specialty chemicals and critical materials, with semiconductors, defense and energy emerging as key growth markets.\n\nThe all-equity strategic round was led by Hitachi Ventures, with customers Henkel and Teknor Apex joining as new investors. Existing backers Accel India, Bertelsmann India Investments, Omnivore, and 3one4 Capital also participated. The round values the Bengaluru-based startup at $250 million after the investment, according to a person familiar with the transaction, up from $150 million after a $40 million Series B round in March 2025. The latest investment brings Scimplify’s total equity funding to $80 million, the startup said, though it declined to disclose its valuation.\n\nThe growing adoption of AI and advanced computational tools has accelerated materials discovery and research. However, turning promising chemistry into commercially available products at scale remains a slow and complex process. Manufacturers need to develop production processes, qualify facilities, and meet stringent quality standards, all while navigating supply chains limited to a handful of countries. Scimplify is seeking to shorten that process.\n\nIn some cases, the startup, founded in 2023, has gone from receiving a customer’s requirements to delivering the finished material in just two months, compared with the 12 to 18 months such work would typically take, co-founder Sachin Santhosh (pictured above) said in an interview.\n\nOnce it receives an order, Scimplify develops chemical manufacturing processes at its research facilities in Bengaluru and Hyderabad and then transfers them to partner factories for commercial production. Its proprietary AI platform, Scinode, helps coordinate the work by identifying suitable production routes and manufacturing facilities, while tracking quality and regulatory requirements. The platform uses specialized AI agents for different functions, including research, manufacturing and quality control, Santhosh told TechCrunch.\n\n“Each of these agents is basically solving for what [a customer] would want, working backward from the customer’s requirement,” Santhosh said. “This helps us move a lot faster and remember customer context even for future references.”\n\nScimplify’s in-house team of scientists and engineers oversees production across a network of more than 500 manufacturing facilities. It helps customers establish alternative sources for materials whose supply is concentrated in China and a few other countries.\n\nAbout 90% of Scimplify’s manufacturing currently takes place in India. The startup, however, plans to expand its production network to the U.S. and Japan over the next year as it seeks to attract more customers in both markets, Santhosh said.\n\nThe U.S. has emerged as a key growth market, with Simplify’s annualized revenue run rate in the country rising sixfold to about $60 million from $10 million a year ago, according to Santhosh. The market now accounts for roughly 30% of its business, while customers outside India collectively contribute more than half of its revenue, compared with less than 5% about 18 months ago.\n\nOverall, Scimplify, which serves more than 1,000 customers and has delivered products to more than 40 countries, has reached an annualized revenue run rate of about $200 million, tripling from a year earlier, Santhosh told TechCrunch. The startup is targeting a $400 million annualized revenue run rate over the next year. Scimplify has also been EBITDA-positive for the past two months and expects to turn profitable after tax this month, he said.\n\nEnergy, electronics and defense now account for about 45% to 50% of Scimplify’s revenue, up from less than 15% a year ago, Santhosh stated. The growth comes as AI fuels demand for materials used in electronics and energy infrastructure, while ongoing wars drive demand from the defense industry.\n\nScimplify is working on producing tungsten derivatives from scrap, offering customers an alternative source of materials whose supply is heavily concentrated in China. The startup is also working on rare earth materials, another category where global supply chains remain heavily dependent on China.\n\nThe startup works with customers including Japanese electronics manufacturer TDK, German chemicals group BASF, and Hitachi. Santhosh cited a project involving TDK as an example of how the startup can shorten the time needed to develop and deliver specialty materials. Timelines, he said, vary depending on the project.\n\nWith its latest funding, Scimplify plans to deploy around $7.5 million for its U.S. expansion, including building out its manufacturing network, Santhosh said. It also earmarked another $2 million for further development of Scinode.\n\nThe startup employs about 340 people, including roughly 70 scientists. Most of its workforce is based in India, though it also has local teams in the U.S., Japan, Indonesia, and the UAE."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-6b847af225c6f836",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1010906/fairphone-fairbuds-2-price-release-audio-repairability",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-14T11:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Fairphone’s latest repairable earbuds are smaller, lighter, and longer-lasting",
+        "summary": "Repairable, ethical phone brand Fairphone has released its second pair of earbuds. The Fairbuds 2 are just as repairable as the first generation, but deliver improved audio and almost twice the battery life. The Fairbuds 2 are out now in the UK and Europe from £99 / €119, and a US launch at $119 will […]",
+        "body": "Repairable, ethical phone brand Fairphone has released its second pair of earbuds. The Fairbuds 2 are just as repairable as the first generation , but deliver improved audio and almost twice the battery life. The Fairbuds 2 are out now in the UK and Europe from &pound;99 / &euro;119, and a US launch at $119 will follow on November 2nd.\n\nThe Fairbuds 2 have been redesigned from the ground up, moving to a stemmed design, available in black or green, and a case that's 37 percent smaller than the first generation. Despite that shrinking hardware, Fairphone has almost doubled the buds' battery life, which now totals 40 hours without active noise cancellation …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "conticgo-f44d84bb4d4c1bef",
+    "type": "news",
+    "sourceId": "conticgo",
+    "sourceName": "Conticgo",
+    "sourceUrl": "https://conticgo.net/",
+    "originalUrl": "https://conticgo.net/sparkvision-glasses-2-un-nuevo-modelo-de-gafas-con-ia-para-ceguera-y-baja-vision/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-10-14T06:00:09.000Z",
+    "categories": [
+      "tecnologia-accesibilidad",
+      "gafas-inteligentes",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "SparkVision Glasses 2: un nuevo modelo de gafas con IA para ceguera y baja visión",
+        "summary": "Las nuevas gafas asistivas de SparkVision leen etiquetas, describen entornos y responden a preguntas mediante inteligencia artificial. Hay dos versiones disponibles, con precios desde 1.500 euros. Las gafas inteligentes con inteligencia artificial siguen ganando terreno en el ámbito de la accesibilidad visual. Una de las propuestas más recientes es SparkVision Glasses 2, una familia de […] La entrada SparkVision Glasses 2: un nuevo modelo de gafas con IA para ceguera y baja visión se publicó primero en Conticgo .",
+        "body": "Las nuevas gafas asistivas de SparkVision leen etiquetas, describen entornos y responden a preguntas mediante inteligencia artificial. Hay dos versiones disponibles, con precios desde 1.500 euros.\n\nLas gafas inteligentes con inteligencia artificial siguen ganando terreno en el ámbito de la accesibilidad visual. Una de las propuestas más recientes es SparkVision Glasses 2 , una familia de gafas diseñadas para ayudar a las personas ciegas y con baja visión a acceder a información visual mediante respuestas habladas.\n\nLa empresa búlgara SparkVision ha presentado esta nueva generación en demostraciones presenciales y eventos tecnológicos durante septiembre de 2026. Sin embargo, hay una diferencia importante respecto a otras novedades del sector: las gafas ya aparecen a la venta en la tienda oficial de la compañía .\n\nLa gama incluye dos versiones, con diferentes prestaciones y precios. Según la tienda oficial, ambas se comercializan con IVA incluido.\n\nAmbas versiones incluyen el anillo inteligente SparkVision Smart Ring, que permite controlar funciones sin tener que manipular continuamente las gafas.\n\nLa compañía ofrece información de compra en su tienda oficial . También indica que realiza envíos a los países de la Unión Europea cuando existe disponibilidad para la dirección o modalidad de entrega seleccionada.\n\nNo obstante, antes de comprar desde España conviene confirmar el plazo de entrega, las condiciones de envío y las prestaciones incluidas en cada paquete.\n\nEl objetivo de SparkVision Glasses 2 es convertir información visual en respuestas habladas. Para ello, incorporan una cámara, micrófonos y un sistema de control integrado en la montura.\n\nEstas son algunas de sus funciones principales.\n\nLas gafas pueden reconocer textos impresos y reproducirlos mediante voz. Esta función puede ser útil para consultar cartas de restaurantes, envases, etiquetas de productos, recibos y documentos cotidianos.\n\nTambién ofrecen lectura de varias páginas y herramientas para facilitar el posicionamiento de los textos frente a la cámara.\n\nOtra de las funciones anunciadas es la descripción del entorno. El usuario puede obtener información hablada sobre lo que aparece delante de la cámara y utilizar el asistente para preguntar sobre una escena.\n\nEl sistema también incorpora una función para buscar objetos. El usuario indica qué quiere localizar y recibe orientación hablada para encontrarlo dentro del campo de visión.\n\nEstas posibilidades pueden facilitar algunas tareas cotidianas, aunque las respuestas de la inteligencia artificial pueden ser incorrectas o incompletas.\n\nLas gafas también incluyen herramientas para identificar colores, detectar luz y reconocer billetes.\n\nLa versión Ultra añade funciones como el recuento estimado de dinero visible y la lectura de información presente en los recibos. Como sucede con otros sistemas de reconocimiento visual, es importante comprobar los resultados antes de realizar pagos o tomar decisiones económicas.\n\nSparkVision Glasses 2 incorpora un asistente de IA para responder preguntas y ofrecer información sobre el entorno.\n\nAdemás, permite iniciar una llamada a una persona de confianza previamente elegida. Durante esa llamada, el usuario puede compartir la perspectiva de la cámara para recibir ayuda humana cuando la inteligencia artificial no sea suficiente.\n\nLa posibilidad de recurrir a una persona es especialmente interesante en situaciones en las que una descripción automática no proporciona toda la información necesaria.\n\nLa diferencia entre las dos versiones no se limita al precio.\n\nSparkVision Glasses 2 Ultra incorpora funciones adicionales de orientación y acceso a información durante los desplazamientos. Entre ellas se encuentran la navegación asistida y la consulta de información sobre transporte público, como paradas, líneas y salidas.\n\nTambién incluye una batería externa que, según el fabricante, permite alcanzar hasta 12 horas de uso, dependiendo de las condiciones y del modo utilizado. La versión Lite anuncia hasta cuatro horas de uso activo.\n\nEl equipo pesa aproximadamente 38,5 gramos, según las especificaciones técnicas publicadas por SparkVision. La cámara integrada tiene una resolución de 12 megapíxeles y la conectividad incluye Wi-Fi 6 y Bluetooth 5.3.\n\nNo todas las funciones dependen necesariamente de la nube, pero tampoco conviene afirmar que las gafas funcionan completamente sin Internet.\n\nEl manual oficial explica que determinados procesos se realizan localmente, mientras que otros utilizan la aplicación SparkVision Assistant y los servicios de la compañía. Las funciones en línea pueden transmitir datos a los servicios de SparkVision o a proveedores de procesamiento.\n\nLa aplicación complementaria está destinada a Android, según la documentación técnica. Por eso, antes de adquirirlas, conviene comprobar la compatibilidad con el teléfono y las funciones que requieren conexión o acceso adicional.\n\nLas gafas de inteligencia artificial pueden facilitar el acceso a información visual, pero es importante conocer sus límites.\n\nSparkVision advierte en su manual que el dispositivo no debe utilizarse como único apoyo para desplazarse en entornos peligrosos. Tampoco debe confiarse exclusivamente en sus respuestas para cruzar calles, acercarse a vehículos o tomar decisiones relacionadas con la seguridad.\n\nEstas herramientas deben entenderse como un complemento a los apoyos habituales de movilidad y accesibilidad, no como un sustituto del bastón blanco, del perro guía o de las técnicas de orientación y movilidad.\n\nTambién es recomendable tener en cuenta la privacidad. Las gafas incorporan cámara y micrófonos, por lo que su utilización debe respetar la intimidad de las personas y las normas aplicables a la captación de imágenes y sonido.\n\nLa propuesta de SparkVision destaca por reunir lectura de textos, reconocimiento de objetos, descripción de escenas y asistencia mediante IA en un dispositivo portátil.\n\nLa versión Lite ofrece un conjunto de funciones básicas por 1.500 euros, mientras que la Ultra amplía las posibilidades de orientación y transporte público por 5.566 euros. La diferencia de precio es considerable, por lo que conviene comparar las necesidades de cada usuario con las funciones realmente incluidas.\n\nPor ahora, la información oficial confirma que las dos versiones forman parte de la oferta comercial de SparkVision , aunque la disponibilidad concreta y los plazos de entrega deben comprobarse durante el proceso de compra.\n\nPara las personas ciegas y con baja visión interesadas en nuevas herramientas de asistencia visual, estas gafas son una opción que merece seguimiento, especialmente por la combinación de lectura, descripción del entorno y posibilidad de contactar con una persona de confianza.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuentes consultadas: Spark Vision Tienda , ficha técnica del producto , manual de usuario , demostraciones presenciales"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "nvda-es-7d8684af9c1bbf3a",
+    "type": "news",
+    "sourceId": "nvda-es",
+    "sourceName": "NVDA en español",
+    "sourceUrl": "https://nvda.es/",
+    "originalUrl": "https://nvda.es/2026/10/14/ya-disponible-la-quinta-beta-de-nvda-2026-3/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-10-14T05:40:23.000Z",
+    "categories": [
+      "nvda",
+      "windows",
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "Ya disponible la quinta beta de NVDA 2026.3",
+        "summary": "Tal y como ha anunciado NV Access mediante esta publicación, la beta 5 de NVDA 2026.3 ya se encuentra disponible para descarga y pruebas. Si quieres saber qué ofrece la próxima versión de NVDA antes de que se libere oficialmente, no dudes en descargar esta beta y proporcionar comentarios por los canales de la comunidad, … Continuar leyendo \"Ya disponible la quinta beta de NVDA 2026.3\" La entrada Ya disponible la quinta beta de NVDA 2026.3 se publicó primero en NVDA en español .",
+        "body": "Tal y como ha anunciado NV Access mediante esta publicación , la beta 5 de NVDA 2026.3 ya se encuentra disponible para descarga y pruebas. Si quieres saber qué ofrece la próxima versión de NVDA antes de que se libere oficialmente, no dudes en descargar esta beta y proporcionar comentarios por los canales de la comunidad, o por el sistema de informe de fallos de NV Access . Esta versión no es apta para entornos de producción. Al instalar esta beta te unirás al canal beta, y sólo recibirás avisos de actualización de compilaciones beta y candidatas a liberación (rc). El canal beta/rc siempre te mantendrá al día con la versión más reciente de NVDA. La última rc de un ciclo de liberación es idéntica a la última versión estable. Para regresar al canal de versiones estables, instala a mano la última versión estable.\n\nEsta versión incorpora importantes mejoras de rendimiento, mejoras en los diálogos de NVDA, y entrada expandida por la pantalla táctil. Se han hecho varias mejoras para reducir los retrasos y aumentar el rendimiento. Ahora NVDA recupera y captura más información sobre los controles en segundo plano, mejorando el rendimiento en controles como cuadros combinados y el explorador de archivos. NVDA ya no hace que se rompan el explorador de archivos u otras aplicaciones al cerrarlo o reiniciarlo. NVDA se recupera ahora más rápido cuando una aplicación deja de responder, y ya no se colgará ni inundará el registro con errores en aplicaciones que no responden. En regiones vivas de texto, como las terminales, NVDA ya no se cuelga cuando se vuelcan en pantalla importantes cantidades de texto. Se han añadido menús de contexto y atajos de teclado a los diálogos de perfiles de configuración, gestos de entrada y diccionarios del habla, haciendo que estos diálogos sean más fáciles de usar con el teclado. Ahora también es posible cambiar directamente un gesto existente en el diálogo Gestos de entrada. Se ha modernizado el diálogo que presenta mensajes explorables y ahora soporta mejor cambiar su tamaño, maximizarlo y minimizarlo. Se ha expandido significativamente la entrada por pantalla táctil. Los gestos de dos deslizamientos secuenciales ahora combinan dos deslizamientos en rápida sucesión en un solo gesto, incrementando enormemente la cantidad de gestos asociables. También se soportan ahora los gestos de borde, permitiendo que los gestos que comiencen a 15 mm de cualquier borde de la pantalla se asocien independientemente de los mismos gestos realizados en el centro de la pantalla. Se ha añadido una nueva orden sin asignar para mover el cursor del ratón al centro de la vista ampliada. Se puede usar el OCR de Windows con la lupa o la cortina de pantalla activadas. Se ha actualizado Liblouis con nuevas tablas braille en Elfdaliano, sami, maorí, braille unificado inglés de Nueva Zelanda, y aitiano criollo, una tabla noruega para texto en español, y variantes adicionales de sueco de 6 y 8 puntos. Se ha actualizado Espeak NG añadiendo soporte para liguriano y abkhaz. Para instalar esta beta, puedes configurar el canal «rc y beta» en el complemento Selector del canal de actualización y buscar actualizaciones desde el menú Ayuda de NVDA, o actualizar desde una beta anterior. Y como siempre, también puedes descargar manualmente el instalador de NVDA 2026.3 beta 5 . Su suma de comprobación SHA256, que te permitirá garantizar la integridad del archivo descargado, es c1d2cc7bc21126a224fdc0733fef5f20adf212d6098fd31863c89f7d05195544. ¡Feliz miércoles!\n\nLa entrada Ya disponible la quinta beta de NVDA 2026.3 se publicó primero en NVDA en español ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "applevis-apps-96260ccb3321472c",
+    "type": "news",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/dog-genome-puppy-distribution-system",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-14T02:44:15.000Z",
+    "categories": [
+      "apple",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Dog Genome Puppy Distribution System",
+        "summary": "THE PUPPY DISTRIBUTION SYSTEM FOUND YOU Rescue stray puppies, breed champion pups, unlock rare colors, and dress your pack in 100+ fun props. Free to play, fully offline, no ads. UNLIMITED PUPPIES • No energy meter, no lives, no waiting to play • Answer as many rescue calls as you like • Breed as many litters as you want RARE COMBINATIONS TO CHASE • 800 looks to discover across six trait axes • Hidden genes resurface generations later, so rare colors run in families • Rarest of all: the prismatic puppy, with a rainbow coat, blue eyes, and a head start on every stat FOUR WAYS TO BREED • Let nature surprise you • Add a guaranteed extra puppy to every litter • Lock the traits you want • Or hand-pick every last one FOR THE SCIENCE MINDED • Two genes per trait, with dominance deciding what you actually see • The real odds, shown before you commit to a litter • A DNA scanner that reveals which dogs are quietly carrying what • Preserve a genome in the DNA Lab, then clone it exactly • Splice: lock individual traits, or choose which parent each stat gene comes from • Weave two or three saved genomes into a single hybrid RAISE, COMPETE, AND DRESS UP • Grow puppies in the nursery, and enter the little ones in Puppy League events • 10+ fun competitions across seven tiers, Backyard to Legends • Fashion Shows judged mostly on the outfit • 100+ props to drag, resize, and rotate BUILD A BLOODLINE • Trace every relationship in the family tree • Fill your Dog-Dex with every look you have discovered • Trade for new bloodlines on the Dog Exchange • A traveling trader visits each weekend, paying well above the going rate EVERY UPGRADE IS EARNABLE • Your dogs earn coins from rescues, competitions, and the Dog Exchange • Spend them on props, kennel space, breeding tools, and DNA Lab upgrades • 100% playable without spending real money PLAYING WITH VOICEOVER • Each dog, event, show and store item is one stop, with its name first • Double-tap the competitor, tier, theme or a breeding parent to choose from a list • Hear pet descriptions, clear action costs and competition results • Coin purchases ask first, and Settings > VoiceOver lets you choose Brief or Detailed screens • Find recent messages and the Accessibility Guide in Settings NO ADS. NO ACCOUNTS. NO LOOT BOXES. • Fully offline, with optional iCloud backup • In-app purchases are optional shortcuts and extras, never requirements • Coin packs, the Quick Compete planner, the Genome Loom, and the Wolf Pack supporter bundle",
+        "body": "THE PUPPY DISTRIBUTION SYSTEM FOUND YOU Rescue stray puppies, breed champion pups, unlock rare colors, and dress your pack in 100+ fun props. Free to play, fully offline, no ads.\n\nUNLIMITED PUPPIES • No energy meter, no lives, no waiting to play • Answer as many rescue calls as you like • Breed as many litters as you want\n\nRARE COMBINATIONS TO CHASE • 800 looks to discover across six trait axes • Hidden genes resurface generations later, so rare colors run in families • Rarest of all: the prismatic puppy, with a rainbow coat, blue eyes, and a head start on every stat\n\nFOUR WAYS TO BREED • Let nature surprise you • Add a guaranteed extra puppy to every litter • Lock the traits you want • Or hand-pick every last one\n\nFOR THE SCIENCE MINDED • Two genes per trait, with dominance deciding what you actually see • The real odds, shown before you commit to a litter • A DNA scanner that reveals which dogs are quietly carrying what • Preserve a genome in the DNA Lab, then clone it exactly • Splice: lock individual traits, or choose which parent each stat gene comes from • Weave two or three saved genomes into a single hybrid\n\nRAISE, COMPETE, AND DRESS UP • Grow puppies in the nursery, and enter the little ones in Puppy League events • 10+ fun competitions across seven tiers, Backyard to Legends • Fashion Shows judged mostly on the outfit • 100+ props to drag, resize, and rotate\n\nBUILD A BLOODLINE • Trace every relationship in the family tree • Fill your Dog-Dex with every look you have discovered • Trade for new bloodlines on the Dog Exchange • A traveling trader visits each weekend, paying well above the going rate\n\nEVERY UPGRADE IS EARNABLE • Your dogs earn coins from rescues, competitions, and the Dog Exchange • Spend them on props, kennel space, breeding tools, and DNA Lab upgrades • 100% playable without spending real money\n\nPLAYING WITH VOICEOVER • Each dog, event, show and store item is one stop, with its name first • Double-tap the competitor, tier, theme or a breeding parent to choose from a list • Hear pet descriptions, clear action costs and competition results • Coin purchases ask first, and Settings > VoiceOver lets you choose Brief or Detailed screens • Find recent messages and the Accessibility Guide in Settings\n\nNO ADS. NO ACCOUNTS. NO LOOT BOXES. • Fully offline, with optional iCloud backup • In-app purchases are optional shortcuts and extras, never requirements • Coin packs, the Quick Compete planner, the Genome Loom, and the Wolf Pack supporter bundle"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-e3f32f8a899fbd7a",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2282502/smart-tv-brands-offer-longest-software-support/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-14T00:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "programas-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Which smart TV brands offer the longest software support?",
+        "summary": "When you spend a lot on on a TV, you expect it to last a while. But that support period varies wildly by manufacturer.",
+        "body": "Not all smart TVs will receive updates for long, and some don't have any specific policy.\n\nWe may receive a commission on purchases made from links.\n\nNo matter the price of a TV you buy, you likely consider it as a long-term investment. You thus expect it to receive support from the manufacturer for as long as possible.\n\nIn olden times, when you bought a TV, the only worry you had was it eventually breaking. But with smart TVs, there's also software to consider. Most modern TVs come with their own operating systems and apps, and need to be updated semi-regularly for the best performance and to patch security issues.\n\nUnfortunately, there's no universal standard for how long you can expect a TV to get support for. It varies significantly by manufacturer, and the relevant information isn't always easy to find. But you're in luck, as we've done the tedious work of finding out.\n\nIf you have a Samsung TV from 2024 or later, Samsung will provide seven years of software updates for its Linux-based Tizen OS. This commitment, made in 2024, also applies to select models from 2023. That means if you have a Samsung TV from 2024, you can expect apps to work smoothly and firmware updates to roll out until at least 2031. Older models won't get major new versions of Tizen. They'll likely receive occasional maintenance or security firmware updates, though.\n\nIn early 2024, LG introduced the webOS Re:New program, which guarantees four years of webOS updates for TV models from 2022 onwards. These come with a one-year delay compared to the latest webOS release on the newest TV models. For example, webOS 26 debuted with 2026's TVs, and will come to a 2025 TV one year later.\n\nSony doesn't offer a fixed period of support for its TVs. Rather, it differs depending on which model you own. For example, for 2025's Sony Bravia K-65XR80M2 OLED, Sony's support page has April 2029 as the end-of-life date. Meanwhile, the Sony Bravia 2 II K-65S25VM2, which was also part of the 2025 lineup, will apparently receive security updates until June 2030.\n\nUnlike LG and Samsung, Sony doesn't have use a proprietary TV operating system. Models released after 2021 use the Google TV platform; prior to that it was Android TV.\n\nLike Sony, TCL doesn't guarantee a fixed period of support. All we really have to go on is the company's Software Security page , where it claims to \"typically\" provide security updates for at least two years after \"the first shipment of a certain device model.\" This page doesn't explicitly mention TVs, though. Depending on the model, TCL sets primarily run on Google TV (or Android TV for older models) or Roku TV.\n\nIn Europe, the majority of Hisense TVs run on the company's proprietary VIDAA OS. Since 2025, it has pledged support for \"up to\" a whopping eight years on these models. Unfortunately for those in the US, you're less likely to pick up a Hisense TV that uses VIDAA, with many models instead running Android TV, Fire TV, Google TV or Roku TV. Therefore, long-term support is in the hands of the company whose OS your TV ships with.\n\nFor a long time, Roku was known for its streaming devices and operating system that it licenses to TV brands like those listed above. But what if you buy one of Roku's own Pro, Plus or Select Series TVs ? Roku doesn't specify a fixed period of support for these, and the first came out in 2023, so it's still too early to establish a pattern. But given that software is the company's focus and it frequently pushes out updates, you can reasonably expect a healthy lifespan for its TVs. Roku doesn't publish end-of-life dates for its streaming boxes either, though some people claim to have used one unit for as long as 10 years.\n\nWhat about the ultra-affordable TV brands like Vizio and Insignia ? The former runs its own Vizio OS, which functions in much the same way as its better-known rivals and includes more than 300 apps. Vizio pushes out automatic firmware updates regularly, but doesn't guarantee a fixed period of support for any of its models.\n\nInsignia TVs employ Amazon's Fire OS, so you can assume you'll get software and security updates for as long as Amazon commits to with its own devices. The Amazon Fire TV Software Security Updates page says that commitment is at least four years.\n\nDon't fret once your model is out of support. Buying a streaming box is an inexpensive way to extend your smart TV's life and maintain access to updated versions of your favorite apps."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-6757c02e4a799228",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/13/science-corporation-implants-its-vision-restoring-chip-in-its-first-stargardt-disease-patient/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-13T23:13:31.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Science Corporation implants its vision-restoring chip in its first Stargardt disease patient",
+        "summary": "Max Hodak, the former president and co-founder of Neuralink, detailed onstage at TechCrunch Disrupt how his company's work with PRIMA is part of its path toward a novel brain-computer interface (BCI).",
+        "body": "Science Corporation CEO Max Hodak announced that the company has implanted its vision-restoring chip , PRIMA, into its first patient with Stargardt disease, an inherited eye disease that gradually destroys central vision. Hodak, the former president and co-founder of Neuralink, the brain implant company, explained onstage at TechCrunch Disrupt how the company’s work with PRIMA fits into its broader pursuit of a novel brain-computer interface (BCI).\n\n“The retina is part of the central nervous system,” Hodak said. “We consider cochlear implants, retinal prostheses, motor prostheses, these are all different types of BCIs.”\n\nHodak outlined a vision in which BCIs expand into a wide range of medical technology applications, rather than simply being a way to control computers.\n\nWhile PRIMA is commercially available in Europe for patients who’ve lost their sight to geographic atrophy, an advanced form of age-related macular degeneration, the company believes its approach can be applied to multiple diseases, including Stargardt disease, which is currently considered incurable.\n\nStargardt disease affects the outer retina, causing the gradual death of the eye’s light-sensing cells while potentially sparing the inner retina, the part that passes visual signals onto the brain. It causes a central blind spot that gradually enlarges over time. Approximately 150,000 people worldwide have lost vision due to the disease.\n\n“One of the nice things about this device approach, when I was saying the brain’s a computer, vision is electrical potential, like electrical activity down the optic nerve,” Hodak said. “That’s all vision is to the brain, and so if you can get the optic nerve to signal the rest of the brain correctly, then you can provide vision to it.”\n\nThe company says its first patient with Stargardt disease received the PRIMA implant in May as part of its ongoing trial at the Sydney Eye Hospital in Australia. During the patient’s first rehabilitation session, he saw a letter, and during the second, he was able to read a word.\n\nTo use the device, patients undergo an hourlong procedure that plants a small chip in the back of their eye, where the photoreceptors have degenerated. Then they wear camera-equipped glasses that transmit a view of the world to the chip. The implant essentially works like artificial photoreceptors.\n\n“The device that this patient has is a two millimeter by two millimeter implant placed in the back of the eye, and so it’s like looking through a straw,” Hodak said. “It is not a big field of view color vision. It’s a patch in their central vision where … it’s black and white, but it is sharp. It’s high-contrast sharp, and so they can see a couple letters at a time. The next step is to make the field of view bigger. So to make a bigger implant, you have to deal with the curvature of the eye, and we need to make the electrodes smaller so that we get closer to native levels of detail.”\n\nHe continued, “I think we have a clear path. There’s a ‘next generation’ that’s being worked on that’ll be in humans in the next year, and over the next five years, I think we’ll be able to get pretty close to native acuity.”\n\nWhen Hodak founded Science Corporation in 2021 after leaving Neuralink, the company outlined plans to develop advanced neural engineering and brain-computer interface technology. But first, the company wants to prove its methods work and develop a sustainable business, which is why it’s working to restore vision with the visually impaired.\n\nAs for Science Corporation’s brain-computer interface technology, it has previously said that its sensor will be implanted inside the skull and rest on top of the brain, unlike a Neuralink device, which is inserted directly into brain tissue.\n\nThe company has said it believes the device could help address neurological conditions, such as possibly monitoring neurological activity in patients with brain tumors.\n\n“In the near term, we’re going to be applying our first clinical indication, which hasn’t been announced publicly, is a neurodegenerative disease that everybody’s heard of,” Hodak said. “We’re also looking at stroke. For example, if you’ve lost part of your brain because it’s been dead due to stroke, if you can get connections into the deep brain in two different areas, you can imagine adding new cortical areas, just like adding new brain areas entirely — something simply not possible with conventional electrodes. But, I’d say longer term, the long-term mission of the company is to understand how the brain creates the mind and to learn to build engineered brains.”\n\nHodak went on to note that Science Corporation’s belief is that many people will eventually use some kind of BCI. While the company isn’t designing for “healthy 40-year-olds,” he said, it believes people will eventually need some kind of BCI by the age of 60 or 70.\n\n“We want to figure out how do we extend not just lifespan but health span,” Hodak said."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-e2c4f120bffe32b1",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/13/idc-apple-gains-ground-as-chinas-smartphone-shipments-plunge-15-4-in-q3-2026/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-13T23:06:47.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "IDC: Apple gains ground as China’s smartphone shipments plunge 15.4% in Q3 2026",
+        "summary": "According to a new report from IDC, Apple’s share of smartphone shipments in China grew during Q3 2026, despite a 4.3% year-over-year decline in iPhone shipments. Here are the details. more…",
+        "body": "According to a new report from IDC, Apple’s share of smartphone shipments in China grew during Q3 2026, despite a 4.3% year-over-year decline in iPhone shipments. Here are the details.\n\nIn a new report released today, IDC says that rising component costs and retail prices continue to weigh on the broader Chinese smartphone market.\n\nAccording to IDC, Apple accounted for 17.8% of smartphone shipments in China during Q3 2026, up from 15.8% in the year-ago period. The gain came despite a 15.4% year-over-year decline in overall smartphone shipments in China, with Apple itself seeing a 4.3% year-over-year decline and a 15.1% drop from the previous quarter.\n\nThis means that while Apple lost ground, it didn’t lose as much as most of its competitors, thus increasing its overall shipment share.\n\nAnd speaking of Apple’s competitors, Huawei was the uncontested winner for the quarter, with a massive 17.3% year-over-year increase in shipments, bringing its market share to 21.1%, up from 15.2% in Q3 2025. However, its shipments still declined 17.6% from the previous quarter.\n\nOther than Huawei, Lenovo was the only other brand in China’s top 10 to record year-over-year shipment growth, at 1.1%. On a quarter-over-quarter basis, however, Lenovo, Honor, and Samsung all recorded increases, with Samsung posting a whopping 106.5% jump.\n\nOn the other end of the spectrum, Wiko saw the biggest year-over-year decline among the top 10, with shipments plunging 74% in Q3 2026, bringing its shipment share down to 0.8%, from 2.6% in the year-ago period.\n\nHere’s IDC on these numbers, which it notes are preliminary (translation ours):\n\nDespite the overall market downturn, Huawei maintained its strong performance throughout the year, supported by its diverse product lineup and relatively restrained price increases. Its shipments recorded double-digit year-over-year growth.\n\nApple’s newly released iPhones received a better-than-expected market reception. However, shipments declined slightly year-over-year due to fewer models available this year.\n\nOther major Chinese smartphone brands faced significant challenges but continued to demonstrate varying degrees of resilience under pressure.\n\nAmong them, Honor was the only major manufacturer to record quarter-over-quarter shipment growth, suggesting a potential rebound.\n\nIDC says it expects component costs “ to remain elevated over the next several quarters,” which will in turn keep increasing device prices and stretch replacement cycles further as consumers “accept and adapt to higher prices.”\n\nThe company doesn’t expect cost pressures to subside “through much of 2027, with the market likely to continue experiencing significant declines.”\n\nFor IDC’s full report, follow this link ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-3adfb13607818c33",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/13/cerebras-ceo-says-were-nearing-a-future-where-everyone-has-a-personal-ai-assistant-at-home/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-13T23:05:34.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Cerebras CEO says we’re nearing a future where everyone has a personal AI assistant at home",
+        "summary": "Cerebras CEO Andrew Feldman predicts a future where personal AI assistants become as commonplace as household appliances, running partly on local devices and partly in the cloud.",
+        "body": "Cerebras Systems CEO and co-founder Andrew Feldman believes we’re nearing a future where everyone will have an AI appliance in their own home.\n\nSpeaking on stage at TechCrunch Disrupt 2026 on Tuesday, the chipmaker executive answered a question about what would need to happen for AI to become a home appliance, saying, “Actually, I don’t think that’s very far away.”\n\nHe pointed to the advances in consumer AI agents, like Meta’s Muse and Instinct, the startup now valued at $10 billion, as examples of how AI is finding its footing with everyday users.\n\nAs for home AI? He predicts that we’ll have personal AI assistants that run locally.\n\n“Just like your cell phone, they’ll do some work on device and some work going back to the cloud,” Feldman explained. “But I think they will get to know you very well, and you will have a security perimeter around them. And they will certainly have access to credit cards and be able to buy things for you,” he continued. “I think they will make a meaningful impact in making our lives better.”\n\nOf course, for an AI chipmaker, the vision of a home AI appliance, or at least widespread consumer adoption of agentic technology, is certainly appealing.\n\nBut Feldman isn’t just working on the hardware infrastructure; he’s a personal AI user himself, saying that he now uses “a collection of agents” to sweep his calendar, pull up information about the people he’s going to have a call with, and more. While AI is already doing many of the things we used to do manually, Feldman is most excited about the new possibilities — things that weren’t possible before.\n\nHe’s leaving it up to other founders to figure out what those might be, though.\n\n“One of the reasons I love being in infrastructure is because I don’t need the consumer-facing idea … I like building the platforms that other people’s ideas take flight on,” he said."
       }
     },
     "media": null
@@ -39,32 +327,8 @@
     "locales": {
       "en": {
         "title": "OpenAI employee arrested for allegedly planting a bug in a conference room",
-        "summary": "An OpenAI engineer was arrested after the company said it discovered a \"sophisticated recording device\" hidden in one of its offices. The employee, 35-year-old Abdulrahman Alfozan, is charged with using or attempting to use a device to intercept oral communications, according to a report from The San Francisco Standard. OpenAI's post about the incident says […]",
-        "body": "An OpenAI engineer was arrested after the company said it discovered a \"sophisticated recording device\" hidden in one of its offices. The employee, 35-year-old Abdulrahman Alfozan, is charged with using or attempting to use a device to intercept oral communications, according to a report from The San Francisco Standard .\n\nOpenAI's post about the incident says it used its AI models to \"understand the device and where it had come from, identifying that a specific employee had planted it a few days earlier.\"\n\nAs reported by The San Francisco Standard , OpenAI found the device plugged into a TV's USB port in an executive conference room. The devic …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-b61b3410e8aa593e",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/13/judge-orders-openai-to-turn-over-hiring-records-in-apple-trade-secrets-case/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-13T20:36:44.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Judge orders OpenAI to turn over hiring records in Apple trade secrets case",
-        "summary": "A federal judge ruled that Apple can access OpenAI's interview materials involving former Apple employees, as well as private messages and testimony from key figures in the case.",
-        "body": "A judge has ruled that Apple will gain expedited access to OpenAI’s hiring materials in the trade secrets-focused lawsuit the iPhone maker filed against OpenAI in July.\n\nSpecifically, the court will allow Apple to view documents associated with OpenAI’s interviews with former Apple employees who applied for roles within its consumer hardware and robotics groups ahead of the rumored launch of OpenAI’s first hardware device.\n\nThese documents could include interview checklists, guides, instructions, manuals, and scripts, as well as technical presentations and records showing that interview discussions had included references to Apple technology or components.\n\nThe court gave OpenAI five days to turn over materials it has already collected and 14 days for any other materials related to this request, agreeing with Apple that these documents should be expedited.\n\nThe case comes as OpenAI develops a consumer hardware device that could one day potentially rival the iPhone — or smartphones more generally — if the AI device becomes a central part of consumers’ lives and how they engage with software and services.\n\nIn its lawsuit, Apple accused OpenAI of a pattern of theft, which includes direct complaints about former employees using Apple laptops to download confidential material and files that contained information about unannounced technologies, features, and products, including technical specifications, engineering presentations, and proprietary project data.\n\nApple also said that former Apple employees at OpenAI coached others considering leaving Apple for OpenAI on what information to bring to their interviews, among other allegations.\n\nU.S. District Judge Edward Davila didn’t greenlight all of Apple’s requests for expedited access to OpenAI documents and messages relevant to the case. But he did rule that Apple could access the interview materials, alongside private LINE messages (from a messaging app) between individuals named in the case, including OpenAI employees Chang Liu and Alyssa Peng.\n\nThe judge also approved depositions for Liu and Peng, along with a third individual, OpenAI’s chief hardware officer, Tang Yew Tan. All three are former Apple employees.\n\nHowever, the judge denied Apple’s request to expedite its access to OpenAI’s research and development in specific areas, like metal finishes and power management. He also denied several of Apple’s broader discovery requests, like access to OpenAI’s hardware research or information about what its former employees created while working at OpenAI.\n\nThat denial isn’t final, though; the judge left the door open for Apple to narrow its requests and try again."
+        "summary": "An OpenAI engineer was arrested after the company said it discovered a \"sophisticated recording device\" hidden in one of its offices. The employee was identified as Abdulrahman Alfozan, a 35-year-old Saudi national. Alfozan is charged with using or endeavoring to use a device to intercept oral communications, according to a press release from the Department […]",
+        "body": "An OpenAI engineer was arrested after the company said it discovered a \"sophisticated recording device\" hidden in one of its offices. The employee was identified as Abdulrahman Alfozan, a 35-year-old Saudi national. Alfozan is charged with using or endeavoring to use a device to intercept oral communications, according to a press release from the Department of Justice .\n\nOpenAI's post about the incident says it used its AI models to \"understand the device and where it had come from, identifying that a specific employee had planted it a few days earlier.\"\n\nAs noted by the DOJ, OpenAI found the device plugged into a TV's USB port in an executiv …\n\nRead the full story at The Verge."
       }
     },
     "media": null
@@ -90,30 +354,6 @@
         "title": "It looks like Apple Music is getting a new icon",
         "summary": "Apple Music's iconic red app icon has reportedly been replaced with a black-and-white version in the latest iOS 27.2 beta, 9to5Mac reports. The eighth note on the icon also appears to have a slightly sharper angle than the original. A new Apple Music logo was also spotted last month on the Apple Music Hall website, […]",
         "body": "Apple Music's iconic red app icon has reportedly been replaced with a black-and-white version in the latest iOS 27.2 beta, 9to5Mac reports. The eighth note on the icon also appears to have a slightly sharper angle than the original. A new Apple Music logo was also spotted last month on the Apple Music Hall website, so the company could be refreshing its app icon to match.\n\nAccording to 9to5Mac , the new icon is a black music note on a white background in light mode, or the opposite in dark mode. The icon's not the only thing that's been drained of color, either - 9to5Mac also says Apple Music widgets now have black backgrounds and the app now …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-9445eb5ae18b88c3",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/news/1010365/shopify-opens-its-catalog-up-to-more-ai-agents",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-13T19:42:42.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Shopify opens its catalog up to more AI agents",
-        "summary": "More AI agents will soon be able to browse and purchase from Shopify listings, marking an expansion of the company's agentic commerce ambitions. Shopify announced Tuesday it will let shoppers configure their AI agents to purchase products on their behalf, giving more agents access to over a billion listings in Shopify's catalog. (The catalog consists […]",
-        "body": "More AI agents will soon be able to browse and purchase from Shopify listings, marking an expansion of the company's agentic commerce ambitions.\n\nShopify announced Tuesday it will let shoppers configure their AI agents to purchase products on their behalf, giving more agents access to over a billion listings in Shopify's catalog. (The catalog consists of both items on and off Shopify storefronts.) In September, Shopify announced it was partnering with Meta to allow its Muse agent to browse and purchase items on a human's behalf; now, shoppers can use any agent without a partnership integration.\n\nTo set up the feature, customers connect an …\n\nRead the full story at The Verge."
       }
     },
     "media": null
@@ -219,122 +459,25 @@
     "media": null
   },
   {
-    "id": "9to5mac-d266934768ef3f11",
+    "id": "ars-technica-de90dd08e948234f",
     "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/13/ios-27-2-adds-new-app-icon-for-apple-music-more-design-updates/",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/tech-policy/2026/10/disney-offers-20m-for-character-ais-scandal-plagued-chatbot-tech/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-13T19:06:29.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iOS 27.2 adds new app icon for Apple Music, more design updates",
-        "summary": "iOS 27.2 beta 4 debuted today for developers, and the update includes a new app icon for Apple Music alongside other design updates in the Music app. more…",
-        "body": "iOS 27.2 beta 4 debuted today for developers, and the update includes a new app icon for Apple Music alongside other design updates in the Music app.\n\nApple appears in the midst of a gradual branding refresh for Apple Music.\n\nThe company recently debuted an all-new Apple Music logo that’s started spreading to more places, including an appearance in iOS 27.2 beta 3 last week.\n\nAnd now today with beta 4, iOS 27.2 has a new app icon for Music too.\n\nAs seen above, the new app icon removes color from the branding. It’s a white icon with black music logo by default, and in dark mode it’s black with a white logo.\n\nAlongside this change, the Music app in iOS 27.2 now uses blue in the tab bar for the currently active tab—a stark shift from the previous red/pink branding. Widgets for the Music app similarly now use simple black backgrounds instead of the iconic red/pink.\n\nAdditionally, in your Library, the list of different sections like Playlists, Albums, Artists, and Songs have all had color removed in favor of a black-and-white design.\n\nWhat do you think of the Apple Music design updates in iOS 27.2? Let us know in the comments.\n\nApple Music is available for $11.99/month , or you can get it as part of the Apple One bundle ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-763394ccf07b322c",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/13/niobia-takes-the-guesswork-out-of-some-of-techs-most-expensive-mistakes/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-13T19:00:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Niobia takes the guesswork out of some of tech’s most expensive mistakes",
-        "summary": "The San Francisco startup aims to help battery and chip manufacturers identify defects on production lines, reducing downtime and costly mistakes.",
-        "body": "San Francisco-based startup Niobia is betting big on a critical but often overlooked part of battery and chip making: helping engineers understand how and why things go wrong. Its AI software flags production defects and lets engineers ask a chatbot what caused them, aiming to deliver answers in minutes rather than days.\n\nHow it works (broadly): The company’s customers place AI agents on their production lines to look for defects, then loop in human engineers to work out what might cause a product to fail. The agents run on self-contained GPUs mounted directly on manufacturing equipment, much like a sensor. They can spot pinhole-sized flaws such as scratches. Niobia’s AI also gathers all the data in one place so engineers can ask a chatbot what went wrong and dig deeper into the cause.\n\nSpeed is so critical because chips and batteries are some of the world’s most important products, while also increasingly in short supply. As manufacturers continue to develop and improve their technologies, things inevitably go awry during research and development. Engineers then spend days or longer figuring out a fix before they can restart production. Each flaw or mistake can prove costly — sometimes running into the millions of dollars — and set back manufacturing timelines.\n\nNiobia co-founders Gaurav Jha and Harveen Kaur both have PhDs in chemistry and have worked at chipmakers and battery manufacturers, giving them firsthand experience with the challenges within the industry. In a call ahead of TechCrunch Disrupt 2026, where the company is a Battlefield finalist, Jha explained that while what Niobia does is specialized, it serves a multibillion-dollar market that includes some of the biggest battery and semiconductor makers today.\n\n“It’s extremely niche; maybe people will never know about it,” said Jha, speaking of the battery and chip manufacturing market that his company aims to serve. “But it’s like behind the scenes, this is powering everything… we just don’t see it in the regular world.”\n\n“Every product around you, like glasses or shoes, slippers, wallets, and headphones — these processes touch every single part of it,” added Jha.\n\nNiobia’s agents run on open source models that the company trains further with battery and chip research and other data. That training is what lets them identify pinhole-sized defects. Jha said that Niobia chose open source models largely because its customers don’t want their highly sensitive company information going into a public AI cloud where it might be used to train the model.\n\n“None of our customers want their proprietary data to go to the cloud, even if we tell them it’s safe,” said Jha. The startup also outlines how it approaches cybersecurity, given the high-stakes race among adversarial nations to innovate in the battery and chip space. Niobia, for instance, lets its customers hold their own encryption keys so that the startup cannot decrypt the customers’ data.\n\nJha said that the company’s priority for now is to focus on three specialties, such as film coating, electroplating (which is coating a surface with metal using an electric current), and fluidized bed reaction (a chemical process where solid particles are suspended in a gas or liquid).\n\nHe said that the company also wants its technology to become more autonomous, with the eventual aim of building out a fully self-driving factory for its customers.\n\nIf you’re curious to learn more, Niobia will present onstage at TechCrunch Disrupt this afternoon in San Francisco. Join us to catch the company and the 19 startups against which it’s competing as part of our storied Startup Battlefield competition, happening today, Tuesday, through Thursday, October 15."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-10869685edad292a",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2281734/what-is-nvidia-dlss-how-works/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-13T18:30:00.000Z",
+    "publishedAt": "2026-10-13T18:23:33.000Z",
     "categories": [
       "tecnologia-general",
-      "programas-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "What is NVIDIA DLSS and how does it work?",
-        "summary": "NVIDIA's upscaling software is truly powerful when used in the right situations.",
-        "body": "The company's upscaling software is truly powerful when used in the right situations.\n\nIf you own a recent NVIDIA GPU (or Nintendo Switch 2 ), there's a good chance you bought it partly from hearing good things about DLSS . Short for Deep Learning Super Sampling, DLSS is a proprietary upscaling technology designed to increase game performance. With DLSS enabled, your GPU will first render a game at a lower internal resolution, meaning it will need to draw fewer pixels. DLSS will then upsample the image to your monitor's native resolution using a machine learning algorithm trained by NVIDIA.\n\nWhen it's implemented well in a game, DLSS allows you to effectively turn up the graphical settings higher than your GPU would normally allow at a native resolution while still getting a playable framerate. Alternatively, you run a game at lower settings and push the framerate even higher, which can be useful if own a high refresh rate monitor.\n\nThe above gives a decent starting point for how DLSS works, but knowing a bit more can help with tweaking to get the most out of the tech and your GPU. As mentioned already, with DLSS enabled your GPU will first render a game at a lower resolution before upscaling the image it produces to whatever resolution you've set as the target. In almost every case, you'll want to configure the target resolution to match your monitor's native resolution. So if you own a 1440p monitor, set the output resolution to 1440p. In most games, you do this simply by setting the \"display\" resolution.\n\nNow comes the more complicated part. DLSS can feel like magic, but ultimately it involves a compromise. The different machine learning models that underpin the tech are trained to interpret motion vectors, as well as depth and brightness information when they upscale an image. Over the years, NVIDIA's GPUs and models have gotten better at doing that, but at the end of the day, some amount of fidelity is lost any time you upscale an image. How much is lost depends on the DLSS mode you use, which determines the internal render (or starting) resolution your GPU has to upscale from:\n\nQuality : When set to Quality mode, your GPU will render a game at 66.7 percent of your target output resolution. For a 4K monitor, that means you're starting with a 1440p image. With a 1440p monitor, your starting point is 960p. DLSS Quality offers the best image quality of the different presets, but expect only a moderate increase in frame rate.\n\nBalanced : When set to Balanced mode, your GPU will render a game at 58 percent of your target output resolution. At 4K, that means a starting point of 1253p. At 1440p, meanwhile, you're upscaling from an 835p image. As the name suggests, Balanced mode is intended to offer a middle ground between image quality and a higher frame rate.\n\nPerformance : When set to Performance mode, your GPU will render a game at 50 percent of your target output resolution. That translate to 720p internal resolution when used in conjunction with a 1440p monitor and a 1080p internal resolution when the output is a 4K resolution.\n\nUltra Performance : When set to Ultra Performance, your GPU will render a game at 33.3 percent of your output resolution. This mode is intended to be used with 8K monitors. Expect a blurry image if used in conjunction with a 1440p or 4K monitor.\n\nAs a rule of thumb, if you're running a 1440p monitor, DLSS Quality is a good starting point for most games. If you're not happy with your performance or chasing an even higher frame rate, drop down to Balanced mode. Beyond that, the final image can get quite blurry. For 4K monitors, Balanced mode is a good starting, and then bump things down to Performance if you need or want more frames.\n\nOne of the confusing things about DLSS is that the branding has come to encompass a handful of related technologies that you can use in combination with one another.\n\nDeep Learning Super Sampling : The initial version of DLSS arrived in 2019, following the release of NVIDIA's RTX 20 series GPUs . At launch, only a handful of games supported DLSS, namely Battlefield V and Metro Exodus , due to a limitation that meant NVIDIA had to train the algorithm specifically for the game it was meant to enhance. Since the release of DLSS 2 in 2020, that limitation no longer exists, and according to NVIDIA more than 1,000 games and apps offer DLSS support as of the start of 2025.\n\nFollowing 2020, the biggest upgrade to DLSS came at the start of 2025 when NVIDIA reworked the algorithm to take advantage of a new transformer-based machine learning architecture and released DLSS 4. The new model offers better image quality, reduced ghosting and improved image stability. On older RTX GPUs, running DLSS 4 can result in worse performance relative to previous versions of DLSS due to a higher overhead. For that reason, NVIDIA gives users access to different DLSS \"presets\" (separate from the modes described above), which they can use to access older models.\n\nDeep Learning Anti-Aliasing : Where DLSS is primarily designed to increase performance at the cost of image quality, Deep Learning Anti-Aliasing or DLAA does the opposite. Rather than upscaling an image, DLAA takes a native output and makes it more stable by reducing the amount of shimmer and flickering. Think of it a better version of temporal anti-aliasing or TAA. Not every game natively supports DLAA, but even in the ones that don't, you can use the NVIDIA app to add DLAA.\n\nFrame Generation : Originally introduced as part of DLSS 3 , frame generation allows NVIDIA RTX 40 series GPUs and up to generate a single interpolated frame from every two traditionally rendered frames, thereby increasing the overall framerate of a game. Frame generation is best used when your GPU can render a game at a consistent 60 FPS or more, and you have a high-refresh rate monitor that will benefit from the extra frames.\n\nWith DLSS 4 , NVIDIA introduced multi frame generation, which allows RTX 50 series GPUs to generate and interpolate a greater number of frames based on a single traditionally rendered frame. As of the release DLSS 4.5 this past March, the current limit is six generated frames for every rendered frame.\n\nRay reconstruction : With DLSS 3.5 NVIDIA introduced ray reconstruction, a denoising algorithm designed to reduce artifacting from ray tracing effects. The algorithm works by sampling the light rays in a scene and then generating high quality pixels in between those rays. While ray reconstruction can offer performance gains, it's primarily designed to make games with ray and path tracing look better and more coherent.\n\nDLSS 5 is an altogether different beast from the features described above. Rather than upscaling an image, DLSS 5 interprets a game's color and motion vectors to apply, in the words of NVIDIA, \"photoreal lighting and materials that are anchored to source 3D content and consistent from frame to frame.\" In short, DLSS 5 is adding an AI filter to your games.\n\nIn early demos , the effect was uncanny, making it look like the tech was yassifing characters. But used more carefully, it can add more layers of realistic shows and textures to a game. Unfortunately, unlike other iterations of DLSS, DLSS 5 does not improve your framerate. It instead lowers it due to the overhead required to run the tech.\n\nAs of October 2026, DLSS 5 is officially available in just a single game: NBA 2K27 . At this early stage, it's unclear if DLSS 5 will see widespread developer adoption, but that hasn't stopped modders from adding the tech to all sorts of games ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-fc71c6252bf0a86e",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2285699/apple-tv-4k-2026-and-homepod-mini-2-hands-on-siri-ai-audio-upgrade/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-13T18:18:54.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
       "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Apple TV 4K and HomePod mini 2 hands-on: A look at the audio updates and Siri AI",
-        "summary": "Listening to Apple's new audio features with Siri as our binge-watching companion.",
-        "body": "Listening to Apple's new sound features with Siri as our binge-watching companion.\n\nApple's \"Welcome home\" event may have been mostly for the HomeView debut, but the company also announced updated versions of the HomePod mini speaker and Apple TV 4K . After spending some time with the main attraction this morning, I was also able to check out the HomePod mini 2's revamped home theater features and see Siri AI in action on Apple's streaming box. I also listened to a pair of the new speakers connected to an iMac as part of an enhanced desktop audio setup, and can confirm the new colors match up nicely with the company's all-in-one computer.\n\nLet's start with the Apple TV 4K. The main upgrades here are meant to bring Siri AI to the living room, primarily for content discovery. Thanks to the assistant's ability to pull in context from places like Messages, you can ask it to do things like \"play the show Sam texted me about.\" The new Apple TV 4K has far field microphones built in, so the Siri experience is now hands-free, meaning you could shout at it from your couch. This worked well the demo area I was in, though I have to point out the environment was relatively quiet.\n\nSiri AI can also answer questions about content, like whether Ted Lasso is a real person or if AFC Richmond is an actual football club. Thankfully, Siri's responses are tucked in the corner of the TV screen, so you can see them without the text blocking your movie or show. What's more, they're text only, and the assistant won't respond to you by speaking over the audio from whatever you're watching. I saw this in action a few different times, and I think it's a clean implementation of Siri on the Apple TV 4K. I really like that I won't have to hear competing sounds from Siri and a TV show, forcing me to try to decipher the info I asked for.\n\nAnother welcome upgrade for the Apple TV 4K is an overhauled remote. While it looks the same on the outside, a new feature inside will play a sound when you ask Siri for help finding it. I prefer this approach since it's much quicker to determine where something is if it's beeping than having to wave a phone around to see how close I'm getting to it. If you've ever played a sound to find your AirPods, that works the same way. I'm constantly looking for my Apple TV remote after one of my kids has stashed it somewhere, so this will all be handy at my house.\n\nThe HomePod mini 2 has also been updated for Siri AI. Right off the top, the speaker is now powered by the S10 chip, a big upgrade over the S5 that was in the 2020 model. This hardware will eventually enable Siri AI, but the next-gen — or now current-gen — assistant won't be on the HomePod mini 2 at launch. Apple says that feature is coming at a later date.\n\nFor now, the two big new features are Sound Glow and expanded surround sound functionality. Sound Glow mimics album artwork on the HomePod mini 2's back-lit touch panel. If you're listening to a soundscape, the lights will mirror things like rain drops and waves. This is a neat addition, but I wonder how often I'll actually see it since I don't tend to sit near or even look at my HomePod speakers. Next, you can now use up to four HomePod speakers with the new Apple TV 4K for home theater audio. Before, you could only use two as a stereo pair.\n\nAfter hearing two different configurations at Apple's event, I'm convinced this is going to be an audio upgrade for those willing to buy four HomePods. I enjoyed the setup of two second-gen HomePods in the front and two HomePod mini 2 speakers in the back as it offered more bass and rumble during my demo. However, a quartet of HomePod mini 2 speakers holds its own, providing dimensional sound that enveloped the sofa I was sitting on. But again, this is all dependent upon you buying four HomePods and putting them all in your living room, which seems like a rare scenario.\n\nLastly, I got to hear a pair of HomePod mini 2 speakers being used for audio from an iMac. These new speakers can sync with any Mac over AirPlay to function as a set of desktop speakers. This setup provides an obvious upgrade over built-in iMac speakers, and the stereo pair offered solid directional sound for basic games like Angry Birds. At around $300 for two of the HomePod mini 2, this seems like a more plausible arrangement than the four-pack in the living room."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-1f1e0a353ae401d8",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2282217/iphone-duo-vs-iphone-18-pro-camera-differences/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-13T18:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "How the iPhone Duo's camera is different from the iPhone 18 Pro's",
-        "summary": "Going beyond the number of cameras and megapixels.",
-        "body": "Going beyond the number of cameras and megapixels.\n\nThe iPhone Duo has by far the highest starting price of any iPhone to date. Which makes sense in a way, since it's basically two devices in one. But at $1,999, it still lacks the iPhone 18 Pro's more advanced camera hardware. A telephoto lens and variable aperture are out, while tricks that take advantage of its foldable design are in. Most of the differences exist due to the limitations and benefits of any dual-screen phone, including challenges around squeezing more cameras into an already crowded device and being able to use an external display for more content. Here's exactly what your photography gives up (and gains) if you choose the Duo over the iPhone 18 Pro .\n\nSensor resolution isn't where the iPhone Duo loses ground. It has two 48-megapixel rear cameras: a main camera and an ultrawide, which also handles macro shots. But camera count is another story, as Apple does not offer the telephoto camera on the Duo.\n\nWith their high resolution, both phones offer a 2x view by cropping into their 48MP main sensors. But the iPhone 18 Pro has a dedicated 4x telephoto camera, which can also crop its 48MP sensor to make a 12MP \"optical quality\" 8x zoomed shot. The best the Duo can do is 2x optical-quality zoom.\n\nIn practice, that means the iPhone Duo probably won't be a great choice for shooting distant subjects like a performer on a concert stage or athlete at a sporting event. Sure, you can use digital zoom to go past that \"optical\" limit, but quality will suffer the farther you go past 2x.\n\nWhy would Apple leave something as basic as a telephoto lens out of its first $2,000 iPhone? Well, the company hasn't said, but it may be as simple as physical constraints. Since a foldable phone opens into a bigger device, its cameras have to fit into one very thin half. Camera modules also have to compete with other hardware (especially batteries) for extremely limited internal space.\n\nThat doesn't mean future versions of the Duo won't get a dedicated zoom lens. After all, other foldable manufacturers have managed to squeeze one in . And it leaves at least one obvious place for Apple to entice upgraders with sequels.\n\nAnother big omission is variable aperture , which is one of the iPhone 18 Pro's headline features. It can physically widen or narrow its opening, adjusting how much light enters (and how much of the scene stays in focus). The Duo's aperture is fixed, just like on all previous iPhones. It still supports portrait-mode background blur, but that digital effect isn't the same.\n\nSince the Duo can stay upright and basically prop itself up when partially folded, its camera can take advantage of this faux built-in tripod. This makes it an interesting choice for things like group photos and video calls.\n\nThe Duo has a 12MP selfie camera on its outer screen, along with a separate 1080p FaceTime camera hidden beneath the inner folding display. The outer screen can also act as a viewfinder for the higher-resolution 48MP rear cameras, and if you open the Duo all the way, you can point those cameras at your face while still seeing what's in the shot. Perfect for high-res selfies.\n\nYou can also set it down somewhere and join the shot while using the outer screen to check the framing. Traditional slab-like iPhones can't do that.\n\nA Duo-specific feature called Smart Take goes a step further: it recognizes when everyone in a group photo is ready and takes the photo automatically.\n\nThe Duo also has a trick for video calls: Duo FaceTime lets someone around you join the call using the outer display and camera, rather than crowding next to you for the inner screen. Then there's Kid Cue, which shows Peanuts animations on the outer display to get kids to look toward the phone.\n\nSo, it's not that the Duo's camera setup is without its own unique (if quirkier) perks. It's just that the iPhone 18 Pro provides the more complete and traditional camera experience.\n\nThe two still have plenty of overlap. Both support 24MP and 48MP photos, adjustable portraits and updated Photographic Styles, including texture and grain adjustments. They can each record in 4K Dolby Vision at up to 120 fps, and both let you apply Cinematic effects after the fact.\n\nBut the Pro's advantages become clearer when you want to take over from the phone's automatic settings. Thanks to the new variable aperture, the Pro offers, well, Pro Controls, which are manual adjustments for things like shutter speed, white balance and aperture. The Duo doesn't offer that.\n\nThe Duo also lacks ProRAW photos, which preserve extra sensor data for advanced editing in apps like Lightroom. Video gets shorted, too: there's no ProRes, ProRes RAW or Apple Log 2 for more flexibility in post-production. Of course, those features will be missed by those who are into fine-tuning professional-class shots with professional-class tools. But if your photography doesn't go much farther than selfies and capturing the dog doing something funny? Well, you probably won't miss them.\n\nOther features are also MIA. The iPhone 18 Pro has second-generation sensor-shift stabilization (the Duo uses the older version), an Adaptive True Tone flash (the Duo's isn't adaptive) and a studio-quality four-microphone array. The Duo also can't record spatial photos or videos, and it lacks Apple's new Reference Image feature, which captures signed sensor data alongside the photo to verify what the camera originally saw.\n\nSo, the iPhone 18 Pro is better if you want to shoot distant subjects, more advanced manual control or edits or the more all-around capable camera system.\n\nWith cameras that are a step down in several ways, the Duo isn't simply an iPhone 18 Pro that folds. For $2,000 and up, that might be a hard pill to swallow. If you're forking that over, it's probably because you like the folding design and have disposable income. But hey, as a bonus, at least it's also easier to prop up, join the group shot and let everyone check their framing."
+        "title": "Disney offers $20M for Character.AI’s scandal-plagued chatbot tech",
+        "summary": "Disney may acquire tech from one of the first chatbot makers linked to child suicide.",
+        "body": "In a bankruptcy proceeding that kicked off yesterday, Disney has offered to buy some of the technology that powers the controversy-plagued chatbot Character.AI.\n\nDisney is willing to pay $20 million for “a non-exclusive perpetual license” of certain Character Technologies intellectual property, the chatbot maker said in a press release that did not go into much further detail on which assets Disney wanted.\n\nThe move may be surprising. In September 2025, Disney joined others in publicly criticizing Character.AI for stealing content and harming kids. Specifically, Disney sent a strongly worded cease-and-desist letter that accused Character Technologies of weaponizing Disney characters “in a way that could damage its brand long term,” Axios reported .\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -363,32 +506,6 @@
     "media": null
   },
   {
-    "id": "ars-technica-8909a68657bc1753",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/google/2026/10/google-wants-to-host-your-personal-vibe-coded-apps-in-the-play-store/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-13T17:00:39.000Z",
-    "categories": [
-      "tecnologia-general",
-      "android",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google wants to host your personal vibe-coded apps in the Play Store",
-        "summary": "Google plans to help turn those personal AI-generated apps into wide releases.",
-        "body": "Google has already added a few AI features to the Play Store, but a lot more are coming . The previously released Ask Play feature is expanding to offer more AI-powered discovery options in Google's app store, and Google is also using AI to build a recommendation engine called Game Finder. For people who have embraced AI to build their own apps, the Play Store will soon offer a way to privately host and share those creations.\n\nGoogle rolled out Ask Play in 2025 as a small chatbot interface on Play Store listings. It lets you ask questions about an app or game, either by typing it in manually or choosing from a list of suggested queries. Starting today, Ask Play is expanding into a more general way to search for apps and games. You ask the robot questions, and it generates recommendations that can include detailed comparison charts. Gemini will roll out a similar capability soon.\n\nGoogle's other AI discovery announcement focuses on games. The new Game Finder feature leans on all the usage data Google's app platform has hoovered up over the years, featuring insights into the way 1.2 billion people play games on Android. It builds a profile called Gamer DNA and matches you with players who have similar DNA.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "applevis-apps-93f3a39eda1b82c8",
     "type": "news",
     "sourceId": "applevis-apps",
@@ -408,31 +525,6 @@
         "title": "Tindrift: Merge Roguelike",
         "summary": "One slide moves your whole army. Tindrift is a tactics roguelike built on slide-merge combat: same-class, same-rank soldiers merge into a higher rank, and every shadow acts by rule — no dice, ever. 100 floors across five acts, plus an Endless Drift, a Daily Seed and 1v1 duels. The campaign plays offline. NO LUCK TO BLAME Shadows telegraph the move they are about to make, gates cycle on a visible clock, and pits sit where you can plan around them. When a run ends you can name the exact slide that ended it — and when you win, you out-thought the board. YOU COMMAND AN ARMY, NOT A HERO Six soldier classes — vanguard, tank, medic, marksman, poisoner, support — merge only with their own kind, so every squad trades coverage against raw power. Set the formation before you climb: tank into the crowd, marksman down the long lane, medic in the middle. WHAT IS IN THE GAME • A 5-act campaign across 100 floors — 20 per act, with 3 mini-boss fights and one signature boss in each • The Sunken Tray, The Rusthold, The Shivering Span, The Frostlight, The Surface: five acts, one climb, ending in daylight • 46 synergy blueprints (15 common, 23 uncommon, 8 rare) — pierce a lane, detonate poison chains, strip terrain for scrap, or take a drawback for reach • 24 shadow archetypes, 5 mini-bosses and 5 act bosses among them, each with a rule you have to read before you can answer it • 8 terrain types — sealed exits, timed gates, pits, fog and mazes: the map fights back • 7 kinds of tactic across 8 placeable tools, plus a TINKER STATION between floors to heal, promote, recruit and re-arm • An 18-node cog tree worth 2,335 cog — side-grades and finishes, never raw stats • 22 achievements and 3 daily quests drawn from 7 types • Endless Drift, and a Daily Seed with streaks and a result you can share • 1v1 duels, same seed and separate boards: three bot difficulties offline, or trade a 6-character code with a friend, send sabotage between floors and replay their round • Four languages: English, Turkish, German and Spanish • VoiceOver reads the board and re-announces it after every slide, and hazards are named instead of signalled by colour alone VARIETY UNLOCKS, POWER DOES NOT Nothing here is pay-to-win. Loadouts, tactics and blueprints stay behind cog for every player, and the limits per run are the same for everyone: one continue, two rerolls, three undos. ADS, PLAINLY Rewarded videos are always your choice — five spots, all opt-in. Full-screen breaks land on floor transitions and after a run, at most one every two minutes, never mid-move and never on the way into a boss or mini-boss floor. Duels carry none. TINDRIFT PREMIUM — one purchase, no subscription • Removes every ad • Lets you HOST duel rooms (joining a room is always free) • Unlocks the 10 cosmetics the workshop sells: 8 soldier finishes and 2 tray themes Slide. Merge. Climb.",
         "body": "One slide moves your whole army. Tindrift is a tactics roguelike built on slide-merge combat: same-class, same-rank soldiers merge into a higher rank, and every shadow acts by rule — no dice, ever. 100 floors across five acts, plus an Endless Drift, a Daily Seed and 1v1 duels. The campaign plays offline. NO LUCK TO BLAME Shadows telegraph the move they are about to make, gates cycle on a visible clock, and pits sit where you can plan around them. When a run ends you can name the exact slide that ended it — and when you win, you out-thought the board. YOU COMMAND AN ARMY, NOT A HERO Six soldier classes — vanguard, tank, medic, marksman, poisoner, support — merge only with their own kind, so every squad trades coverage against raw power. Set the formation before you climb: tank into the crowd, marksman down the long lane, medic in the middle. WHAT IS IN THE GAME • A 5-act campaign across 100 floors — 20 per act, with 3 mini-boss fights and one signature boss in each • The Sunken Tray, The Rusthold, The Shivering Span, The Frostlight, The Surface: five acts, one climb, ending in daylight • 46 synergy blueprints (15 common, 23 uncommon, 8 rare) — pierce a lane, detonate poison chains, strip terrain for scrap, or take a drawback for reach • 24 shadow archetypes, 5 mini-bosses and 5 act bosses among them, each with a rule you have to read before you can answer it • 8 terrain types — sealed exits, timed gates, pits, fog and mazes: the map fights back • 7 kinds of tactic across 8 placeable tools, plus a TINKER STATION between floors to heal, promote, recruit and re-arm • An 18-node cog tree worth 2,335 cog — side-grades and finishes, never raw stats • 22 achievements and 3 daily quests drawn from 7 types • Endless Drift, and a Daily Seed with streaks and a result you can share • 1v1 duels, same seed and separate boards: three bot difficulties offline, or trade a 6-character code with a friend, send sabotage between floors and replay their round • Four languages: English, Turkish, German and Spanish • VoiceOver reads the board and re-announces it after every slide, and hazards are named instead of signalled by colour alone VARIETY UNLOCKS, POWER DOES NOT Nothing here is pay-to-win. Loadouts, tactics and blueprints stay behind cog for every player, and the limits per run are the same for everyone: one continue, two rerolls, three undos. ADS, PLAINLY Rewarded videos are always your choice — five spots, all opt-in. Full-screen breaks land on floor transitions and after a run, at most one every two minutes, never mid-move and never on the way into a boss or mini-boss floor. Duels carry none. TINDRIFT PREMIUM — one purchase, no subscription • Removes every ad • Lets you HOST duel rooms (joining a room is always free) • Unlocks the 10 cosmetics the workshop sells: 8 soldier finishes and 2 tray themes Slide. Merge. Climb."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-b0a35a784cafab57",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/10/gemini-4-argon-begins-rolling-out-in-gemini-app-and-antigravity-but-only-if-you-pay/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-13T16:00:02.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Gemini 4 Argon begins rolling out in Gemini app and Antigravity, but only if you pay",
-        "summary": "Developers will get 50 percent discounted API rates through November.",
-        "body": "Google revealed Gemini 4 Argon a few weeks ago, saying that it needed to move cautiously toward a full release because of the potential for nefarious use. Google seems to have worked all that out pretty quickly, though. Argon is beginning its wide rollout today , but it's only coming to paying users at this time, and even those on lower-tier plans won't have full access.\n\nNothing about Gemini 4 Argon's capabilities has changed. Google still points to the benchmarks it published late last month as evidence of the model's advanced reasoning and agentic coding capabilities. The model is supposedly trained to refuse malicious instructions, and an automated misalignment monitor can stop processing if it detects an unintended workflow. Google claims Argon needs that because it's so capable.\n\nThe company has a few new examples of how Argon has helped inside Google, where it has been used by thousands of Googlers. Argon has reportedly been instrumental in making YouTube's comment system more efficient. Argon identified redundant emoji rendering that, when eliminated, dropped server load by 45 percent. Engineers also turned Gemini 4 loose on the proprietary drone physics simulator used in Project Wing, and the AI found critical bugs that had been in the codebase since 2018. Google also notes that Argon has advanced its robotics program, showing a measurable step increase in embodied reasoning.\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -863,31 +955,6 @@
     "media": null
   },
   {
-    "id": "applevis-apps-7c78087dce6280d9",
-    "type": "news",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/ringbloom-garden-puzzle",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-07T03:56:42.000Z",
-    "categories": [
-      "apple",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Ringbloom: The Garden Puzzle",
-        "summary": "Rotate a ring. Align matching petals. Watch the garden bloom. Ringbloom is a calm rotational puzzle with a simple choice behind every move: select the inner, middle or outer ring, then turn it left or right. Align matching petals across a spoke, make a bloom and keep your garden growing before your moves run out. TWO WAYS TO PLAY • Garden — an endless, steadily growing puzzle for a quick break or a longer run. • Flower Show — focused Classes with fresh objectives and new ways to think about each turn. Start free with endless Garden and the first five Flower Show Classes. When you want a bigger challenge, one permanent purchase unlocks 25 more campaign Classes and the Champion Circuit. There is no subscription, energy system or advertising. Build bloom chains, chase stronger results and replay Classes to improve your rating. Clear objectives arrive as you play, with labelled controls, Undo and Hint support when you need a hand. Ringbloom is designed for one-thumb play, with distinct glyphs alongside colour, VoiceOver support, Larger Text layouts and Reduce Motion support. Gameplay works offline and progress is kept on your device. Ringbloom began as an AI app-building benchmark and has been refined through play and testing. Ringbloom uses limited analytics and advertising attribution. No account is required. See the privacy policy for the information used and the choices available.",
-        "body": "Rotate a ring. Match three petals. Watch the garden bloom.\n\nRingbloom is a calm rotational puzzle with a simple choice behind every move: select the inner, middle or outer ring, then turn it left or right. Align matching petals across a spoke, make a bloom and keep your garden growing before your moves run out.\n\nTWO WAYS TO PLAY\n\n• Garden — an endless, steadily growing puzzle for a quick break or a longer run. • Flower Show — focused Classes with fresh objectives and new ways to think about each turn.\n\nStart free with endless Garden and the first five Flower Show Classes. When you want a bigger challenge, one permanent purchase unlocks 25 more campaign Classes and the Champion Circuit. There is no subscription, energy system or advertising.\n\nBuild bloom chains, chase stronger results and replay Classes to improve your rating. Clear objectives arrive as you play, with labelled controls, Undo and Hint support when you need a hand.\n\nRingbloom is designed for one-thumb play, with distinct glyphs alongside colour, VoiceOver support, Larger Text layouts and Reduce Motion support. Gameplay works offline and progress is kept on your device.\n\nRingbloom began as an AI app-building benchmark and has been refined through play and testing.\n\nRingbloom uses limited analytics and advertising attribution. No account is required. See the privacy policy for the information used and the choices available."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "nvda-es-4824d343899e5a64",
     "type": "news",
     "sourceId": "nvda-es",
@@ -1031,32 +1098,6 @@
         "title": "Download the September Update of JAWS, ZoomText, and Fusion 2026",
         "summary": "The September update of JAWS, ZoomText, and Fusion 2026 is now available, offering new functionality and enhancements that increase efficiency and productivity. Here’s a look at several enhancements. Improved JAWS Support for Facebook and Reddit This release includes enhancements that significantly improve navigation on the Facebook and Reddit social media platforms. These include: These enhancements …",
         "body": "The September update of JAWS, ZoomText, and Fusion 2026 is now available, offering new functionality and enhancements that increase efficiency and productivity. Here’s a look at several enhancements.\n\nThis release includes enhancements that significantly improve navigation on the Facebook and Reddit social media platforms. These include:\n\nThese enhancements improve the user experience by making content easier to locate and improving overall navigation consistency.\n\nThis release includes several notable enhancements to our Cloud Settings feature, which allows users who are logged into a Vispero account to migrate settings across multiple devices. These include:\n\nThis feature is part of the Early Adopter Program, which provides access to new functionality that is still under active development. It is intended for users who want to try out upcoming features and provide feedback before they are fully released.\n\nTo enable this option:\n\nAfter JAWS restarts, choose Enable Sync when prompted to begin syncing your settings.\n\nFusion now starts more reliably, so it is ready to use when you need it. This update resolves an issue where Fusion could stop responding during startup. It occurred most often the first time Fusion was started after installing and restarting your computer.\n\nWhen a line of text under the mouse pointer or cursor exceeds the width of the Live Text View window, scroll arrows appear at the start or end of the displayed text. Previously, CAPS LOCK+RIGHT ARROW and CAPS LOCK+LEFT ARROW moved through the line one character at a time. You can now press and hold either hotkey to scroll continuously, making it faster to read through long lines of text.\n\nIn many enterprise environments, applications are hosted centrally on a server rather than installed directly on each user’s computer. These remotely hosted applications, often called Published Applications, can appear to the user as though they are running locally.\n\nTo provide speech, visual tracking, and magnification when users interact with Published Applications, ZoomText needs access to information from both the server and the local computer. In these environments, ZoomText is installed on both systems so the server and local components can work together. In this release:\n\nTo download and install the September update of JAWS, ZoomText, or Fusion 2026, follow these steps on a computer connected to the internet:\n\nNote: If you are running the latest version of JAWS, ZoomText, or Fusion 2026 and automatic updates are enabled, you can start the download and installation process from the notification.\n\nOur User Education and Outreach team offers outstanding resources for learning your Freedom Scientific software in our Training Center , which includes videos, FAQs, and instructions for getting started. Keep up with this blog and check out the Freedom Scientific Training schedule page for news of upcoming live training webinars and other events. For questions, email us at training@vispero.com ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "conticgo-80ef4ab211114bcd",
-    "type": "news",
-    "sourceId": "conticgo",
-    "sourceName": "Conticgo",
-    "sourceUrl": "https://conticgo.net/",
-    "originalUrl": "https://conticgo.net/lucid-inteligencia-artificial-para-aprender-braille/",
-    "originalLanguage": "es",
-    "publishedAt": "2026-10-02T05:30:05.000Z",
-    "categories": [
-      "tecnologia-accesibilidad",
-      "ia-accesibilidad",
-      "braille",
-      "movilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "es": {
-        "title": "LUCID: inteligencia artificial para aprender Braille",
-        "summary": "La inteligencia artificial también está abriendo nuevas posibilidades en el aprendizaje del Braille. Un ejemplo es LUCID, un sistema de aprendizaje diseñado por el Product Experience Design Lab (PXD Lab) de la Universidad de Houston, en Estados Unidos. La propuesta combina interacción táctil, una pantalla Braille y orientación mediante audio asistida por inteligencia artificial. Su […] La entrada LUCID: inteligencia artificial para aprender Braille se publicó primero en Conticgo .",
-        "body": "La inteligencia artificial también está abriendo nuevas posibilidades en el aprendizaje del Braille. Un ejemplo es LUCID , un sistema de aprendizaje diseñado por el Product Experience Design Lab (PXD Lab) de la Universidad de Houston , en Estados Unidos.\n\nLa propuesta combina interacción táctil, una pantalla Braille y orientación mediante audio asistida por inteligencia artificial . Su objetivo es acompañar a las personas ciegas y con baja visión desde el aprendizaje de las primeras letras hasta la práctica de la lectura.\n\nEl proyecto ha recibido además un Red Dot Award en la categoría de Inclusive Design , un reconocimiento internacional relacionado con el diseño de soluciones innovadoras.\n\nLUCID es un concepto de tecnología asistiva para el aprendizaje del Braille desarrollado por el equipo del PXD Lab de la Universidad de Houston.\n\nEl sistema está formado por dos dispositivos complementarios: LUCID-ALT y LUCID-ARC . Cada uno está pensado para una etapa diferente del aprendizaje.\n\nLa idea es que la persona pueda avanzar progresivamente, comenzando por el reconocimiento de los caracteres Braille y pasando después a ejercicios de lectura con una pantalla Braille de tamaño real.\n\nLa primera parte del sistema es LUCID-ALT .\n\nSe trata de un dispositivo con un teclado ampliado de seis puntos , basado en la estructura de la celda Braille. El usuario puede explorar mediante el tacto las diferentes combinaciones de puntos y familiarizarse con la formación de las letras.\n\nEste planteamiento pone el tacto en el centro del aprendizaje , en lugar de sustituir la experiencia Braille por una interacción exclusivamente sonora.\n\nA medida que la persona progresa, el sistema plantea una transición hacia una experiencia de lectura más cercana a la que encontrará posteriormente en una pantalla Braille convencional.\n\nLa segunda parte es LUCID-ARC , que incorpora una pantalla Braille de tamaño real .\n\nSu función es permitir que el aprendizaje avance desde el reconocimiento de letras hacia la práctica de la lectura. De esta manera, el usuario no se queda únicamente en ejercicios básicos con los seis puntos, sino que puede familiarizarse progresivamente con una experiencia de lectura más próxima a la de otros dispositivos Braille.\n\nSegún la Universidad de Houston, esta transición pretende preparar al estudiante para las herramientas que utilizará fuera del proceso de aprendizaje.\n\nUno de los elementos más llamativos de LUCID es la incorporación de inteligencia artificial como apoyo durante el aprendizaje .\n\nEl sistema utiliza orientaciones y comentarios de audio en tiempo real para acompañar al usuario mientras realiza los ejercicios. La intención es ofrecer indicaciones durante la práctica y reducir la necesidad de contar continuamente con un instructor al lado.\n\nDe esta forma, LUCID combina dos vías de interacción:\n\nLa Universidad de Houston explica que esta combinación busca favorecer una práctica más autónoma y permitir que cada estudiante avance a su propio ritmo.\n\nUno de los aspectos más interesantes de LUCID es que no plantea la inteligencia artificial como sustituta del Braille.\n\nAl contrario, el sistema mantiene la experiencia táctil como elemento fundamental y utiliza la IA como apoyo durante el proceso de aprendizaje.\n\nEsto resulta especialmente relevante en un contexto en el que cada vez existen más herramientas tecnológicas basadas en voz. Para las personas ciegas y con baja visión, la tecnología puede facilitar el acceso a la información, pero el Braille continúa siendo una herramienta fundamental para la alfabetización, la lectura y la escritura.\n\nLa propuesta de LUCID busca precisamente combinar ambos mundos: la información sonora que puede proporcionar la inteligencia artificial y la información táctil que proporciona el Braille .\n\nEl proyecto ha sido reconocido con un Red Dot Award en la categoría de Inclusive Design .\n\nEl reconocimiento corresponde al trabajo de la diseñadora Varshini Chouthri y del profesor Min Kang , director del Product Experience Design Lab de la Universidad de Houston.\n\nPara el PXD Lab, este reconocimiento se suma a otros proyectos relacionados con el diseño centrado en las personas y la tecnología.\n\nEs importante hacer una aclaración.\n\nLUCID no debe confundirse con un producto comercial que ya pueda adquirirse. La información publicada por la Universidad de Houston presenta el proyecto como un sistema diseñado por su laboratorio y muestra representaciones del dispositivo. No hemos encontrado información oficial que indique que esté actualmente disponible para su compra o implantado de forma generalizada en centros educativos.\n\nPor tanto, hablamos de una propuesta de diseño y tecnología asistiva , no de un producto que actualmente podamos recomendar para aprender Braille.\n\nLUCID forma parte de una tendencia más amplia: el desarrollo de herramientas de inteligencia artificial que pueden utilizarse como apoyo para las personas ciegas y con baja visión.\n\nLa American Foundation for the Blind (AFB) ha analizado durante 2026 el uso de inteligencia artificial por parte de personas con discapacidad. Sus investigaciones muestran que la IA ya se utiliza para tareas como leer textos, describir imágenes y facilitar el acceso a información, aunque también advierten de problemas relacionados con la accesibilidad, la precisión y la necesidad de supervisión humana.\n\nEn este contexto, propuestas como LUCID muestran otra posibilidad: utilizar la IA no solamente para describir el mundo visual , sino también para acompañar procesos de aprendizaje relacionados con la tecnología asistiva .\n\nLa evolución de la tiflotecnología no consiste únicamente en desarrollar gafas inteligentes, aplicaciones de navegación o herramientas capaces de reconocer imágenes.\n\nTambién implica buscar nuevas formas de aprender, leer y escribir de manera accesible .\n\nLUCID plantea precisamente esta combinación entre Braille, tecnología háptica, audio e inteligencia artificial . Aunque todavía no se trata de una solución comercial disponible para el público, su diseño muestra una posible dirección para las futuras herramientas de aprendizaje accesible.\n\nLa tecnología puede cambiar la forma en la que utilizamos el Braille, pero propuestas como LUCID ponen el foco en algo fundamental: la tecnología debe servir para facilitar el acceso al aprendizaje sin dejar de lado la experiencia táctil que hace posible la lectura y escritura Braille.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuentes: University Of Houston , Red Dot , UhnPlus ."
       }
     },
     "media": null
@@ -2249,31 +2290,6 @@
     "media": null
   },
   {
-    "id": "nvda-es-a9095c89975572e2",
-    "type": "news",
-    "sourceId": "nvda-es",
-    "sourceName": "NVDA en español",
-    "sourceUrl": "https://nvda.es/",
-    "originalUrl": "https://nvda.es/2026/08/24/ya-disponible-la-primera-candidata-a-liberacion-de-nvda-2026-2/",
-    "originalLanguage": "es",
-    "publishedAt": "2026-08-24T06:19:31.000Z",
-    "categories": [
-      "nvda",
-      "windows",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "es": {
-        "title": "Ya disponible la primera candidata a liberación de NVDA 2026.2",
-        "summary": "Tal y como ha anunciado NV Access mediante esta publicación, la rc 1 de NVDA 2026.2 ya se encuentra disponible para descarga y pruebas. Se recomienda a todos los usuarios descargar esta versión y proporcionar comentarios por los canales de la comunidad, o por el sistema de informe de fallos de NV Access. A menos … Continuar leyendo \"Ya disponible la primera candidata a liberación de NVDA 2026.2\" La entrada Ya disponible la primera candidata a liberación de NVDA 2026.2 se publicó primero en NVDA en español .",
-        "body": "Tal y como ha anunciado NV Access mediante esta publicación , la rc 1 de NVDA 2026.2 ya se encuentra disponible para descarga y pruebas. Se recomienda a todos los usuarios descargar esta versión y proporcionar comentarios por los canales de la comunidad, o por el sistema de informe de fallos de NV Access . A menos que se detecten fallos críticos de última hora, esta versión será idéntica a la versión final de NVDA 2026.2. Esta versión no es apta para entornos de producción.\n\nEsta versión incluye una nueva función de ampliación, mejoras en los gestos táctiles y la navegación, y capacidades mejoradas de voz y braille. El ampliador proporciona opciones de zoom y filtro de color para asistir a usuarios con baja visión. Actualmente, el ampliador sólo soporta el modo a pantalla completa, dejando los modos acoplados planificados para una futura versión. Se ha expandido significativamente el soporte táctil con nuevos gestos de pellizcar y con navegación en modo exploración táctil en contenido web. Ahora se puede navegar por enlaces, encabezados, campos de formulario y otros elementos usando deslizamientos táctiles. Se han mejorado las funciones de voz con soporte de diccionarios del habla personalizados que pueden proporcionarse en complementos y nuevos tipos de entradas de diccionario que proporcionan un control más granular. Se ha añadido una nueva opción en las voces OneCore para controlar las pausas después de la puntuación. Una nueva orden permite repetir la última información verbalizada, con la capacidad de mostrarla en un mensaje explorable. El gesto predeterminado para repetir la última información verbalizada es NVDA+x, y se puede cambiar desde el diálogo Gestos de entrada. La pantalla braille ahora puede desplazarse automáticamente, y los dispositivos DotPad soportan combinaciones multibotón. Liblouis se ha actualizado con nuevas tablas braille en italiano y estonio. Al restablecer NVDA a los valores de fábrica, ahora hay disponible un botón de deshacer para restaurar la configuración anterior. Para instalar esta candidata a liberación, puedes configurar el canal «rc y beta» en el complemento Selector del canal de actualización y buscar actualizaciones desde el menú Ayuda de NVDA, o actualizar desde una beta anterior. Y como siempre, también puedes descargar manualmente el instalador de NVDA 2026.2 rc 1 . Su suma de comprobación SHA256, que te permitirá garantizar la integridad del archivo descargado, es 09dfba7e03f37598a50e8495370a063864acd4de48ce6ebdf9ee320c536803f5. ¡Feliz lunes!\n\nLa entrada Ya disponible la primera candidata a liberación de NVDA 2026.2 se publicó primero en NVDA en español ."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "usable-y-accesible-a31e16ba9e4be535",
     "type": "news",
     "sourceId": "usable-y-accesible",
@@ -2417,29 +2433,6 @@
         "title": "Evaluaciones de APP Evaluaciones de APP actualizadas o incorporadas en el ClubONCE en el mes de julio.",
         "summary": "A lo largo del pasado mes de julio se han evaluado las siguientes APP:",
         "body": "A lo largo del pasado mes de julio se han evaluado las siguientes APP:\n\nAndroid\n\niOS\n\nEn esta ocasión se han evaluado Apps categorizadas en: Entretenimiento, redes sociales y utilidades.\n\nSi tiene problemas para abrir los enlaces, copie las url que se muestran a continuación en su navegador:\n\nAndroid\n\niOS\n\nRecordamos a las personas afiliadas que estén interesados en estos informes, que pueden suscribirse a Valoraciones Accesibilidad de APP, de esta manera recibirán un correo cada vez que se publique una nueva aplicación, permitiéndoles disponer de la información puntualmente.\n\nEsta información y los documentos completos de evaluación de cada una de estas aplicaciones están disponibles en el apartado de Valoraciones de accesibilidad de aplicaciones para móviles o accediendo con el navegador a la ruta ClubONCE / Servicios / Autonomía Personal y Tecnología / Tiflotecnología / Valoraciones de accesibilidad de aplicaciones móviles."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "cti-once-0a5cc819ff520e54",
-    "type": "news",
-    "sourceId": "cti-once",
-    "sourceName": "CTI de la ONCE",
-    "sourceUrl": "https://cti.once.es/",
-    "originalUrl": "https://cti.once.es/noticias/ya-disponible-el-informe-de-slay-the-princess-the-pristine-cut-para-pc",
-    "originalLanguage": "es",
-    "publishedAt": "2026-08-04T12:00:00.000Z",
-    "categories": [
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "es": {
-        "title": "Modos-ON ¡Ya disponible el informe de Slay the princess - The Pristine Cut para PC!",
-        "summary": "Desde el Centro de Tiflotecnología e Innovación de la ONCE (CTI) se ha realizado un análisis detallado evaluando sus distintos apartados y su impacto en la experiencia de juego.",
-        "body": "Desde el Centro de Tiflotecnología e Innovación de la ONCE (CTI) se ha realizado un análisis detallado evaluando sus distintos apartados y su impacto en la experiencia de juego.\n\nEn el siguiente enlace encontrarás todo lo relacionado con la accesibilidad de este título:\n\nInforme de evaluación Slay the princess - The Pristine Cut para PC"
       }
     },
     "media": null

@@ -8,10 +8,12 @@ const repoFile = async path => readFile(new URL(`../../${path}`, import.meta.url
 
 test('reading preferences are collapsed and expose audio, visual and inherited navigation mode', async () => {
   const reader = await file('src/screens/reading-book.mjs');
-  assert.match(reader, /readingSettings = document.createElement\('details'\)/);
-  assert.match(reader, /readingSettingsSummary = document.createElement\('summary'\)/);
-  assert.match(reader, /readingSettings\.append\(readingSettingsSummary, voiceButton, visualButton, generalSettings\)/);
-  assert.match(reader, /generalSettings\.append\(generalSettingsSummary, navigationLabel, navigationSelect, defaultModeLabel/);
+  assert.match(reader, /readingSettings = document.createElement\('div'\)/);
+  assert.match(reader, /readingSettingsSummary = document.createElement\('button'\)/);
+  assert.match(reader, /readingSettingsContent\.hidden = true/);
+  assert.match(reader, /generalSettings\.hidden = true/);
+  assert.match(reader, /readingSettingsContent\.append\(voiceButton, visualButton, dictionaryButton, generalSettingsSummary, generalSettings\)/);
+  assert.match(reader, /generalSettings\.append\(navigationLabel, navigationSelect, defaultModeLabel/);
   assert.match(reader, /readingSettings,\s*moreActionsButton/);
   assert.match(reader, /scope: 'global', key: 'reading.navigationMode'/);
   assert.match(reader, /scope: 'book', bookId: activeBook.id/);

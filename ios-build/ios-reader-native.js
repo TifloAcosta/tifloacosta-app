@@ -122,6 +122,10 @@
   let focusSequence = 0;
   const voiceOverActions = [
     ['open', 'Abrir para leer', 'Open for reading'],
+    ['continue', 'Continuar lectura', 'Continue reading'],
+    ['queue', 'Añadir o quitar de cola', 'Add or remove from queue'],
+    ['info', 'Información', 'Information'],
+    ['move', 'Mover a carpeta', 'Move to folder'],
     ['export', 'Exportar', 'Export'],
     ['rename', 'Cambiar título', 'Rename document'],
     ['delete', 'Eliminar', 'Delete']
@@ -135,50 +139,19 @@
     if (!plugin?.setDocumentActions || !list || list.dataset.iosNativeActions) return;
     list.dataset.iosNativeActions = '1';
 
-    const detailsControl = card => card.querySelector('.reading-library-details-toggle');
-    const expandedDetails = card => card.querySelector('.reading-library-title-details');
-    const expand = card => {
-      const toggle = detailsControl(card);
-      if (expandedDetails(card)?.hidden) toggle?.click();
-    };
-    function moreControls(card) {
-      const choices = [...card.querySelectorAll('button')];
-      const button = choices.find(entry => entry.textContent?.trim() === iosText('Más acciones', 'More actions'));
-      if (button) button.click();
-      return button;
-    }
     function dispatch(id, action) {
       const title = document.getElementById(id);
       const card = title?.closest('.reading-library-title-card');
-      if (!title || !card) return;
-      if (action === 'open') { title.click(); return; }
-      if (action === 'export') {
-        const bookId = card.dataset.iosBookId;
-        if (bookId) void window.TifloIOSBookActions?.exportBook?.(bookId, 'original');
-        return;
-      }
-      if (action === 'rename') {
-        expand(card);
-        moreControls(card);
-        const form = expandedDetails(card)?.querySelector('details');
-        if (!form) return;
-        form.open = true;
-        form.querySelector('input')?.focus({ preventScroll: true });
-        return;
-      }
-      if (action === 'delete' && card.dataset.iosBookId && window.TifloIOSBookActions?.deleteBook) {
-        void window.TifloIOSBookActions.deleteBook(card.dataset.iosBookId);
-        return;
-      }
-      if (action === 'delete') {
-        expand(card);
-        moreControls(card);
-        const deleteButton = [...(expandedDetails(card)?.querySelectorAll('button') || [])].find(
-          button => button.textContent?.trim() === iosText('Eliminar', 'Delete')
-        );
-        // Existing deleteSavedBook uses a mandatory confirmation dialog.
-        deleteButton?.click();
-      }
+      const bookId = card?.dataset.iosBookId;
+      const api = window.TifloIOSBookActions;
+      if (!title || !bookId || !api) return;
+      if (action === 'open' || action === 'continue') { title.click(); return; }
+      if (action === 'export') { void api.exportBook(bookId, 'original'); return; }
+      if (action === 'rename') { void api.renameBook(bookId); return; }
+      if (action === 'delete') { void api.deleteBook(bookId); return; }
+      if (action === 'queue') { void api.queueBook(bookId); return; }
+      if (action === 'move') { window.TifloIOSFolders?.promptAssignment?.(bookId); return; }
+      if (action === 'info') { void api.infoBook(bookId); }
     }
 
     if (!nativeDocumentListenerInstalled) {
@@ -193,28 +166,8 @@
       }).catch(() => {});
     }
 
-    list.addEventListener('focusin', event => {
-      const title = event.target.closest?.('.reading-library-title');
-      if (!title?.id || !title.closest('.reading-library-title-card')) return;
-      const id = title.id;
-      activeDocumentId = id;
-      const sequence = ++focusSequence;
-      const actions = voiceOverActions.map(([id, es, en]) => ({
-        id, label: iosText(es, en)
-      }));
-      void plugin.setDocumentActions({ documentId: id, actions }).then(result => {
-        if (activeDocumentId !== id || sequence !== focusSequence) return;
-        // A separate settings button is unnecessary for a VoiceOver user
-        // when the custom rotor actions have been successfully installed.
-        const card = title.closest('.reading-library-title-card');
-        const control = card && detailsControl(card);
-        if (control && result?.configured && result?.voiceOverEnabled) {
-          control.hidden = true;
-          control.setAttribute('aria-hidden', 'true');
-          control.tabIndex = -1;
-        }
-      }).catch(() => {});
-    });
+    // UIKit is the single owner of VoiceOver focus. DOM focusin often
+    // points elsewhere, causing the web bridge to erase the rotor actions.
     // El foco accesible de WKWebView no siempre genera focusin/focusout.
     // Registrar todos los títulos y dejar que UIKit detecte el foco real.
     let lastRegistered = '';
@@ -232,22 +185,7 @@
       void plugin.registerLibraryTitles({ documents }).catch(() => {});
     };
     registerVisibleTitles();
-    list.addEventListener('focusout', event => {
-      if (plugin.registerLibraryTitles) return; // UIKit gestiona el foco real.
-      const title = event.target.closest?.('.reading-library-title');
-      if (!title || activeDocumentId !== title.id) return;
-      activeDocumentId = '';
-      ++focusSequence;
-      void plugin.clearDocumentActions({ documentId: title.id }).catch(() => {});
-    });
-    const observer = new MutationObserver(() => {
-      registerVisibleTitles();
-      if (activeDocumentId && !document.getElementById(activeDocumentId)) {
-        activeDocumentId = '';
-        ++focusSequence;
-        void plugin.clearDocumentActions({}).catch(() => {});
-      }
-    });
+    const observer = new MutationObserver(registerVisibleTitles);
     observer.observe(list, { childList: true, subtree: true, attributes: true, attributeFilter: ['aria-label'] });
   }
 

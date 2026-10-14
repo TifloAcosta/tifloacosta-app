@@ -31,7 +31,10 @@
       'reading-theme',
       'reading-translation-source',
       'reading-translation-target',
-      'reading-marks-new-type'
+      'reading-marks-new-type',
+      'reading-playback-mode',
+      'reading-voice-language',
+      'reading-document-voice-language'
     ]);
     const perBookAdjustable = /^reading-library-(?:jump|rate|voice|size|theme)-/.test(select.id);
     if (adjustableIds.has(select.id) || perBookAdjustable) {
@@ -44,6 +47,7 @@
       slider.setAttribute('aria-label', name);
       function syncFromSelect() {
         slider.max = String(Math.max(0, select.options.length - 1));
+        slider.disabled = select.options.length < 2;
         slider.value = String(Math.max(0, select.selectedIndex));
         const choice = select.selectedOptions[0];
         slider.setAttribute('aria-valuetext', choice?.textContent?.trim() || '');

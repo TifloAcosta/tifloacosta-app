@@ -219,6 +219,7 @@
       const documents = [...list.querySelectorAll('.reading-library-title')].map(title => ({
         id: title.id,
         label: title.getAttribute('aria-label') || title.textContent?.trim() || '',
+        plainLabel: title.textContent?.trim() || '',
         actions: voiceOverActions.map(([id, es, en]) => ({ id, label: iosText(es, en) }))
       })).filter(item => item.id && item.label);
       const next = JSON.stringify(documents);

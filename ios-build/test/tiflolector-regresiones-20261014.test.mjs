@@ -64,7 +64,7 @@ test('la importación directa y acciones VoiceOver por documento no retroceden',
   const prep = read('ios-build/prepare-web.mjs');
   assert.match(bridge, /const picked = await plugin\.pickDocument\(\)/);
   assert.match(bridge, /fileInput\.hidden = true/);
-  assert.match(bridge, /list\.addEventListener\('focusin'/);
+  assert.match(bridge, /registerVisibleTitles\(\)/);
   assert.match(swift, /UIAccessibilityCustomAction\(name: name, target: self, selector: selector\)/);
   assert.match(web, /setupPronunciationDictionary\(\)/);
   assert.match(web, /shared\.parseDaisyArchive\(/);
@@ -77,7 +77,7 @@ test('iOS conserva General global cerrado y elimina el General redundante del li
   const minimal = read('ios-build/ios-reader-minimal.js');
   assert.match(minimal, /dataset\.iosCloseGeneral/);
   assert.match(minimal, /dataset\.iosCloseSettings/);
-  assert.match(minimal, /general\?\.remove\(\)/);
+  assert.match(minimal, /querySelector\('details\.reading-settings-disclosure'\)\?\.remove\(\)/);
   assert.match(minimal, /ios-reading-document-controls-toggle/);
   assert.match(minimal, /tr\('Controles', 'Controls'\)/);
   assert.match(minimal, /reading-document-progress-percent/);

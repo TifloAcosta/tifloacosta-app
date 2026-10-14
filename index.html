@@ -221,6 +221,7 @@
         </select>
         <button id="reading-formats-toggle" type="button" aria-expanded="false" aria-controls="reading-formats-list">Consultar formatos admitidos</button>
         <p id="reading-formats-list" hidden>TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 e imágenes PNG, JPG y WebP mediante OCR.</p>
+        <button id="reading-library-refresh" type="button">Actualizar la lista de documentos</button>
       </div>
     </section>
 
@@ -341,7 +342,7 @@
       </select>
       <label id="reading-library-query-label" for="reading-library-query">Buscar un documento por título o autor</label>
       <input id="reading-library-query" type="search" autocomplete="off">
-      <button id="reading-library-refresh" type="button">Actualizar biblioteca</button>
+      
       <p id="reading-library-status" class="muted" role="status" aria-live="polite"></p>
       <div id="reading-library-list" class="resource-list"></div>
       <nav id="reading-library-pager" aria-label="Páginas de Mi biblioteca" hidden>

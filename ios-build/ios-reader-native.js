@@ -168,17 +168,12 @@
       }
       if (action === 'delete') {
         expand(card);
-        const more = moreControls(card);
-        // The delete action only focuses the original delete command.
-        // Never bypass its confirmation dialog by deleting directly.
-        const panel = more?.parentElement?.nextElementSibling;
-        const deleteLabel = iosText('Eliminar', 'Delete');
-        const deleteButton = [...(panel?.querySelectorAll('button') || [])].find(
-          button => button.textContent?.toLocaleLowerCase().includes(deleteLabel.toLocaleLowerCase())
-        ) || [...(expandedDetails(card)?.querySelectorAll('button') || [])].find(
-          button => button.textContent?.toLocaleLowerCase().includes(deleteLabel.toLocaleLowerCase())
+        moreControls(card);
+        const deleteButton = [...(expandedDetails(card)?.querySelectorAll('button') || [])].find(
+          button => button.textContent?.trim() === iosText('Eliminar', 'Delete')
         );
-        deleteButton?.focus({ preventScroll: true });
+        // Existing deleteSavedBook uses a mandatory confirmation dialog.
+        deleteButton?.click();
       }
     }
 

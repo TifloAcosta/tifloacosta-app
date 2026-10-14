@@ -1,0 +1,141 @@
+import Foundation
+import UIKit
+import UniformTypeIdentifiers
+import Capacitor
+
+/// Native Files picker and automatic VoiceOver actions for the focused library title.
+/// Installed only in the packaged iOS application.
+@objc(TifloReadingAccessibilityPlugin)
+public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin, UIDocumentPickerDelegate {
+    public let identifier = "TifloReadingAccessibilityPlugin"
+    public let jsName = "TifloReadingAccessibility"
+    public let pluginMethods: [CAPPluginMethod] = [
+        CAPPluginMethod(name: "pickDocument", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "setDocumentActions", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "clearDocumentActions", returnType: CAPPluginReturnPromise)
+    ]
+
+    private var pendingPicker: CAPPluginCall?
+    private var lastPickedCopy: URL?
+    private var documentId = ""
+    private var installedOnElement: UIAccessibilityElement?
+    private var installedOnView: UIView?
+
+    @objc public func pickDocument(_ call: CAPPluginCall) {
+        DispatchQueue.main.async {
+            guard self.pendingPicker == nil else {
+                call.reject("A document picker is already open")
+                return
+            }
+            guard let controller = self.bridge?.viewController else {
+                call.reject("Cannot present Files")
+                return
+            }
+            self.pendingPicker = call
+            let picker = UIDocumentPickerViewController(forOpeningContentTypes: [UTType.item], asCopy: true)
+            picker.allowsMultipleSelection = false
+            picker.delegate = self
+            controller.present(picker, animated: true)
+        }
+    }
+
+    public func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        let call = pendingPicker
+        pendingPicker = nil
+        call?.resolve(["cancelled": true])
+    }
+
+    public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        let call = pendingPicker
+        pendingPicker = nil
+        guard let url = urls.first else {
+            call?.resolve(["cancelled": true])
+            return
+        }
+        let accessing = url.startAccessingSecurityScopedResource()
+        defer { if accessing { url.stopAccessingSecurityScopedResource() } }
+        do {
+            let folder = FileManager.default.temporaryDirectory
+                .appendingPathComponent("tifloacosta-imports", isDirectory: true)
+            try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+            let copy = folder.appendingPathComponent(UUID().uuidString + "-" + url.lastPathComponent)
+            try FileManager.default.copyItem(at: url, to: copy)
+            // The web reader must finish reading the previous copy before it is removed.
+            if let old = lastPickedCopy { try? FileManager.default.removeItem(at: old) }
+            lastPickedCopy = copy
+            call?.resolve(["cancelled": false, "name": url.lastPathComponent, "uri": copy.absoluteString])
+        } catch {
+            call?.reject("Unable to read the chosen file")
+        }
+    }
+
+    @objc public func setDocumentActions(_ call: CAPPluginCall) {
+        DispatchQueue.main.async {
+            let id = (call.getString("documentId") ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+            guard !id.isEmpty else { call.reject("Missing document ID"); return }
+            self.clearInstalledActions()
+            self.documentId = id
+            let entries = call.getArray("actions") as? [[String: Any]] ?? []
+            let selectors: [String: Selector] = [
+                "open": #selector(self.openDocument(_:)),
+                "details": #selector(self.showDetails(_:)),
+                "rename": #selector(self.renameDocument(_:)),
+                "delete": #selector(self.deleteDocument(_:))
+            ]
+            var actions: [UIAccessibilityCustomAction] = []
+            var used = Set<String>()
+            for entry in entries {
+                guard let key = entry["id"] as? String,
+                      let name = entry["label"] as? String,
+                      !name.isEmpty, let selector = selectors[key],
+                      used.insert(key).inserted else { continue }
+                actions.append(UIAccessibilityCustomAction(name: name, target: self, selector: selector))
+            }
+            // VoiceOver acts on the focused accessibility node, not on the WKWebView
+            // container. Installing the actions only on webView hides them from the rotor.
+            let focused = UIAccessibility.focusedElement(using: .notificationVoiceOver)
+            if let element = focused as? UIAccessibilityElement {
+                element.accessibilityCustomActions = actions
+                self.installedOnElement = element
+            } else if let view = focused as? UIView {
+                view.accessibilityCustomActions = actions
+                self.installedOnView = view
+            } else {
+                self.webView?.accessibilityCustomActions = actions
+            }
+            call.resolve(["configured": !actions.isEmpty, "count": actions.count])
+        }
+    }
+
+    private func clearInstalledActions() {
+        installedOnElement?.accessibilityCustomActions = nil
+        installedOnView?.accessibilityCustomActions = nil
+        installedOnElement = nil
+        installedOnView = nil
+        webView?.accessibilityCustomActions = nil
+    }
+
+    @objc public func clearDocumentActions(_ call: CAPPluginCall) {
+        DispatchQueue.main.async {
+            let expected = call.getString("documentId") ?? ""
+            guard expected.isEmpty || expected == self.documentId else {
+                call.resolve(["cleared": false])
+                return
+            }
+            self.documentId = ""
+            self.clearInstalledActions()
+            call.resolve(["cleared": true])
+        }
+    }
+
+    private func emit(_ action: String) -> Bool {
+        guard !documentId.isEmpty else { return false }
+        notifyListeners("documentAction", data: ["documentId": documentId, "action": action])
+        return true
+    }
+
+    @objc private func openDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("open") }
+    @objc private func showDetails(_ action: UIAccessibilityCustomAction) -> Bool { emit("details") }
+    @objc private func renameDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("rename") }
+    @objc private func deleteDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("delete") }
+}

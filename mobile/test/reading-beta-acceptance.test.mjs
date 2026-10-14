@@ -107,7 +107,8 @@ test('beta acceptance protects TalkBack dialog semantics and return-to-reading f
   assert.match(reader, /next\.setAttribute\(['"]aria-label['"]/);
   assert.match(settings, /setAttribute\(['"]role['"],\s*['"]dialog['"]\)/);
   assert.match(settings, /setAttribute\(['"]aria-modal['"],\s*['"]true['"]\)/);
-  assert.match(settings, /readingBook\.returnToReading/);
+  assert.match(settings, /voiceReturn\.textContent = document\.documentElement\.lang === 'en' \? 'Close' : 'Cerrar'/);
+  assert.match(settings, /returnToReading\(\)/);
   assert.match(settings, /returnFocus/);
   assert.match(backup, /setAttribute\(['"]role['"],\s*['"]dialog['"]\)/);
   assert.match(backup, /Return to reading|Volver a la lectura/);

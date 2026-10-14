@@ -10,15 +10,20 @@ test('iOS library reading settings are grouped under Audio, Visual and General w
   assert.match(source, /const audioGroup = settingsGroup/);
   assert.match(source, /const visualGroup = settingsGroup/);
   assert.match(source, /const generalGroup = settingsGroup/);
-  assert.match(source, /settingsPanel\.append\(audioGroup, visualGroup, generalGroup\)/);
+  assert.match(source, /settingsPanel\.append\(settingsMenu, audioGroup, visualGroup, generalGroup, settingsStatus, closeSettings\)/);
+  assert.match(source, /group\.hidden = entry\.group !== group/);
+  assert.match(source, /group\.hidden = true/);
+  assert.match(source, /opener\.focus\(\)/);
   assert.match(source, /'reading\.navigationMode', navigationModeSelect/);
 });
 
-test('document navigation settings are inside an initially closed disclosure', async () => {
+test('document navigation settings stay inside initially closed, labelled controls', async () => {
   const source = await readMobile('src/screens/reading-book.mjs');
-  assert.match(source, /document\.createElement\('details'\)/);
-  assert.match(source, /generalSettings\.append\(generalSettingsSummary, navigationLabel, navigationSelect/);
-  assert.match(source, /readingSettings\.append\(readingSettingsSummary, voiceButton, visualButton, generalSettings\)/);
+  assert.match(source, /readingSettingsContent\.hidden = true/);
+  assert.match(source, /generalSettings\.hidden = true/);
+  assert.match(source, /readingSettingsSummary\.setAttribute\('aria-expanded', 'false'\)/);
+  assert.match(source, /generalSettings\.append\(navigationLabel, navigationSelect/);
+  assert.match(source, /readingSettingsContent\.append\(voiceButton, visualButton, dictionaryButton, generalSettingsSummary, generalSettings\)/);
 });
 
 test('iOS native document translation offers a visible read result action and focuses content', async () => {

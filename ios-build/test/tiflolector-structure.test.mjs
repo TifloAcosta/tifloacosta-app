@@ -13,9 +13,12 @@ const ios = read('ios-build/ios-reader-native.js');
 const native = read('ios-build/native/TifloYouTubeViewController.swift');
 const workflow = read('.github/workflows/ios-testflight.yml');
 
-test('iOS production retains a single non-autopublishing upload workflow', () => {
+test('iOS production only publishes on manual dispatch or an explicit release-marker commit', () => {
   assert.match(workflow, /on:\s*\n\s+workflow_dispatch:/);
-  assert.doesNotMatch(workflow.slice(0, workflow.indexOf('permissions:')), /\n\s+push:/);
+  const triggers = workflow.slice(0, workflow.indexOf('permissions:'));
+  assert.match(triggers, /push:\s*\n\s+branches: \[preparacion-ios\]/);
+  assert.match(triggers, /'ios-build\/solicitud-testflight-20261014\.txt'/);
+  assert.doesNotMatch(triggers, /'web-reading\.js'/);
 });
 
 test('reader import accepts MP3 and the play/pause button is one control', () => {
@@ -115,3 +118,20 @@ test('the iOS bundler rejects accidental loss of restored reader features', () =
 // * DAISY ZIP import / SMIL navigation;
 // * UIAccessibilityCustomAction on each VoiceOver-focused document title;
 // * real iPhone verification of MP3, OCR, translation, progress and retained data.
+
+test('iOS Importar abre Archivos directamente y cada título dispone de acciones nativas sin botón previo', () => {
+  const bridge = read('ios-build/ios-reader-native.js');
+  const accessibility = read('ios-build/native/TifloReadingAccessibilityPlugin.swift');
+  const parity = read('ios-build/ios-parity.js');
+  assert.match(bridge, /trigger\.textContent = iosText\('Importar', 'Import'\)/);
+  assert.match(bridge, /const picked = await plugin\.pickDocument\(\)/);
+  assert.match(bridge, /fileInput\.hidden = true/);
+  assert.match(accessibility, /UIDocumentPickerViewController\(forOpeningContentTypes: \[UTType\.item\], asCopy: true\)/);
+  assert.doesNotMatch(parity, /entry\.id = 'ios-ocr-import'/);
+  assert.match(bridge, /list\.addEventListener\('focusin'/);
+  assert.match(accessibility, /UIAccessibilityCustomAction\(name: name, target: self, selector: selector\)/);
+  assert.match(accessibility, /notifyListeners\("documentAction"/);
+  assert.doesNotMatch(web, /button\.id = 'reading-library-native-actions'/);
+  assert.match(bridge, /control\.hidden = true/);
+  assert.match(web, /globalThis\.confirm\?\.\(question\) !== true/);
+});

@@ -73,10 +73,11 @@ test('la importación directa y acciones VoiceOver por documento no retroceden',
   assert.match(prep, /BLOQUEO PREVENTIVO iOS/);
 });
 
-test('iOS 400078 conserva General delimitado y reúne las personalizaciones en Controles', () => {
+test('iOS conserva General global cerrado y elimina el General redundante del libro', () => {
   const minimal = read('ios-build/ios-reader-minimal.js');
-  assert.match(minimal, /data\.iosCloseGeneral/);
-  assert.match(minimal, /data\.iosCloseSettings/);
+  assert.match(minimal, /dataset\.iosCloseGeneral/);
+  assert.match(minimal, /dataset\.iosCloseSettings/);
+  assert.match(minimal, /general\?\.remove\(\)/);
   assert.match(minimal, /ios-reading-document-controls-toggle/);
   assert.match(minimal, /tr\('Controles', 'Controls'\)/);
   assert.match(minimal, /reading-document-progress-percent/);

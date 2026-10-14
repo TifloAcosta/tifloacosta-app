@@ -3,6 +3,12 @@ name: Preparar y enviar TifloAcosta iOS a TestFlight
 # Solo lanzar manualmente cuando los criterios de aceptación estén verificados.
 on:
   workflow_dispatch:
+  # A one-off release-request file explicitly authorizes a single build from
+  # preparacion-ios. Ordinary source pushes NEVER trigger a TestFlight upload.
+  push:
+    branches: [preparacion-ios]
+    paths:
+      - 'ios-build/solicitud-testflight-20261014.txt'
 
 permissions:
   contents: read

@@ -120,12 +120,24 @@
     "publishedAt": null
   },
   {
-    "id": "applevis-apps-96260ccb3321472c",
-    "title": "Dog Genome Puppy Distribution System",
+    "id": "applevis-apps-cb620b19c318d97b",
+    "title": "Cat Genome Kitten Distribution System",
     "sourceId": "applevis-apps",
     "sourceName": "AppleVis Apps",
     "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/dog-genome-puppy-distribution-system",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/cat-genome-kitten-distribution-system",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "THE KITTEN DISTRIBUTION SYSTEM FOUND YOU Rescue stray kittens, breed champion cats, unlock rare coats, and dress your cattery in 100+ fun props. Free to play, fully offline, no ads. UNLIMITED KITTENS • No energy meter, no lives, no waiting to play • Answer as many rescue calls as you like • Breed as many litters as you want RARE COMBINATIONS TO CHASE • 312 looks to discover across four trait axes • Hidden genes resurface generations later, so rare coats run in families • Chase calico, tortoiseshell, colorpoint, and the fully recessive long coat • Rarest of all: the prismatic kitten, with a rainbow coat, blue eyes, and a head start on every stat FOUR WAYS TO BREED • Let nature surprise you • Add a guaranteed extra kitten to every litter • Lock the traits you want • Or hand-pick every last one FOR THE SCIENCE MINDED • Real cat genetics: white masks every pattern, and tri-color coats need the right base • Two genes per trait, with dominance deciding what you actually see • A DNA scanner that reveals which cats are quietly carrying what • Preserve a favorite's genome in the DNA Lab, then clone it exactly • Splice: lock individual traits, or choose which parent each stat gene comes from • Weave two or three saved genomes into a single hybrid RAISE, COMPETE, AND DRESS UP • Grow kittens in the nursery, and enter the little ones in Kitten League events • 10+ fun competitions across seven tiers, Backyard to Legends • Fashion Shows judged mostly on the outfit • 100+ props to drag, resize, and rotate BUILD A BLOODLINE • Trace every relationship in the family tree • Fill your Cat-Dex with every look you have discovered • Trade for new bloodlines on the Cat Exchange • A traveling trader visits each weekend, paying well above the going rate EVERY UPGRADE IS EARNABLE • Your cats earn coins from rescues, competitions, and the Cat Exchange • Spend them on props, cattery space, breeding tools, and DNA Lab upgrades • 100% playable without spending real money PLAYING WITH VOICEOVER • Each cat, event, show and store item is one stop, with its name first • Double-tap the competitor, tier, theme or a breeding parent to choose from a list • Hear pet descriptions, clear action costs and competition results • Coin purchases ask first, and Settings > VoiceOver lets you choose Brief or Detailed screens • Find recent messages and the Accessibility Guide in Settings NO ADS. NO ACCOUNTS. NO LOOT BOXES. • Fully offline, with optional iCloud backup • In-app purchases are optional shortcuts and extras, never requirements • Coin packs, the Quick Compete planner, the Genome Loom, and the Wild Cat Pack",
+    "publishedAt": "2026-10-14T16:13:37.000Z"
+  },
+  {
+    "id": "applevis-apps-b89919a58b5b2a6b",
+    "title": "Dog Genome",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/dog-genome",
     "lang": "en",
     "platform": "Apple",
     "summary": "THE PUPPY DISTRIBUTION SYSTEM FOUND YOU Rescue stray puppies, breed champion pups, unlock rare colors, and dress your pack in 100+ fun props. Free to play, fully offline, no ads. UNLIMITED PUPPIES • No energy meter, no lives, no waiting to play • Answer as many rescue calls as you like • Breed as many litters as you want RARE COMBINATIONS TO CHASE • 800 looks to discover across six trait axes • Hidden genes resurface generations later, so rare colors run in families • Rarest of all: the prismatic puppy, with a rainbow coat, blue eyes, and a head start on every stat FOUR WAYS TO BREED • Let nature surprise you • Add a guaranteed extra puppy to every litter • Lock the traits you want • Or hand-pick every last one FOR THE SCIENCE MINDED • Two genes per trait, with dominance deciding what you actually see • The real odds, shown before you commit to a litter • A DNA scanner that reveals which dogs are quietly carrying what • Preserve a genome in the DNA Lab, then clone it exactly • Splice: lock individual traits, or choose which parent each stat gene comes from • Weave two or three saved genomes into a single hybrid RAISE, COMPETE, AND DRESS UP • Grow puppies in the nursery, and enter the little ones in Puppy League events • 10+ fun competitions across seven tiers, Backyard to Legends • Fashion Shows judged mostly on the outfit • 100+ props to drag, resize, and rotate BUILD A BLOODLINE • Trace every relationship in the family tree • Fill your Dog-Dex with every look you have discovered • Trade for new bloodlines on the Dog Exchange • A traveling trader visits each weekend, paying well above the going rate EVERY UPGRADE IS EARNABLE • Your dogs earn coins from rescues, competitions, and the Dog Exchange • Spend them on props, kennel space, breeding tools, and DNA Lab upgrades • 100% playable without spending real money PLAYING WITH VOICEOVER • Each dog, event, show and store item is one stop, with its name first • Double-tap the competitor, tier, theme or a breeding parent to choose from a list • Hear pet descriptions, clear action costs and competition results • Coin purchases ask first, and Settings > VoiceOver lets you choose Brief or Detailed screens • Find recent messages and the Accessibility Guide in Settings NO ADS. NO ACCOUNTS. NO LOOT BOXES. • Fully offline, with optional iCloud backup • In-app purchases are optional shortcuts and extras, never requirements • Coin packs, the Quick Compete planner, the Genome Loom, and the Wolf Pack supporter bundle",
@@ -226,17 +238,5 @@
     "platform": "Apple",
     "summary": "SortFlow is a relaxing water-sort puzzle. Pour colored liquids between tubes until each tube holds a single color. • Four ways to play: Standard, Classic (the traditional rules), Time Attack and Zen • Hundreds of handcrafted puzzles across eight difficulty tiers, up to Legendary • A new Daily Challenge every day, with streaks and trophy celebrations • Weekly Leagues: earn XP in any mode, climb from Bronze to Diamond, and claim coins every Monday • Leaderboards in the app for every mode and difficulty, Global or Friends, plus Game Center achievements • Daily and weekly quests with coins to claim • Challenge a friend: share a puzzle and see who scores higher on the same board • Level up, earn coins, and unlock themes, tube skins, sound packs and win celebrations • Leave any puzzle and resume right where you left off — all modes save automatically • Build combo streaks with a burning combo counter and sound effects • Play offline, anytime No pressure, no clutter — just satisfying, colorful logic.",
     "publishedAt": "2026-10-08T20:55:49.000Z"
-  },
-  {
-    "id": "applevis-apps-17ed748161e9aeaf",
-    "title": "Sky Go (Glass / Stream)",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/entertainment/sky-go-glass-stream",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Important: This version of Sky Go is exclusively available for Sky Glass and Sky Stream customers. If you have Sky Q or Sky+ please continue using the existing Sky Go app. Watch your favourite content wherever you are with access to Sky channels and free-to-air channels including ITV, Channel 4 and 5. Enjoy live TV, catch up on demand, or download shows and films to watch later. With a refreshed design and improved ways to find and watch content, this latest version delivers a more streamlined and personalised viewing experience across mobile and tablet devices. In this release, you can enjoy: A new interface aligned with the Sky Glass and Sky Stream experience. Streaming across Live TV, On Demand, Sky Sports events and Downloads. A redesigned browse experience with improved TV Guide and Search functionality. Personalised recommendations to help you discover more of the content you love. Seamless viewing across your compatible Sky devices at home.",
-    "publishedAt": "2026-10-08T20:36:43.000Z"
   }
 ]

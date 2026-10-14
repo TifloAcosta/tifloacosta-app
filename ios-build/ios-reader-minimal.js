@@ -99,33 +99,27 @@
       }
       disclosure.replaceWith(toggle, options);
 
-      // Todas las personalizaciones específicas de este libro deben estar en
-      // Controles > General y no escondidas detrás de Más acciones.
+      // Una única barra del libro: avance, posición y autoapagado accesibles.
       const general = options.querySelector('details.reading-settings-disclosure');
-      const morePanel = document.getElementById('reading-document-more-actions');
-      if (general && morePanel) {
-        for (const id of ['reading-document-progress-percent', 'reading-document-timer']) {
-          const select = document.getElementById(id);
-          const label = select && document.querySelector('label[for="' + id + '"]');
-          if (!select || !label) continue;
-          const companion = select.nextElementSibling;
-          const accessible = companion?.classList.contains('ios-reader-adjustable')
-            || companion?.classList.contains('ios-reader-choice');
-          const choices = accessible && companion.nextElementSibling?.classList.contains('ios-reader-choice-options')
-            ? companion.nextElementSibling : null;
-          general.append(label, select);
-          if (accessible) general.append(companion);
-          if (choices) general.append(choices);
-        }
-        const closeGeneral = document.createElement('button');
-        closeGeneral.type = 'button';
-        setText(closeGeneral, tr('Cerrar', 'Close'));
-        closeGeneral.addEventListener('click', () => {
-          general.open = false;
-          general.querySelector('summary')?.focus({ preventScroll: true });
-        });
-        general.append(closeGeneral);
+      function toReadingBar(id) {
+        const select = document.getElementById(id);
+        const label = select && document.querySelector('label[for="' + id + '"]');
+        if (!select || !label) return;
+        const companion = select.nextElementSibling;
+        const adjusted = companion?.classList.contains('ios-reader-adjustable')
+          || companion?.classList.contains('ios-reader-choice');
+        const choices = adjusted && companion.nextElementSibling?.classList.contains('ios-reader-choice-options')
+          ? companion.nextElementSibling : null;
+        controls.insertBefore(label, toggle);
+        controls.insertBefore(select, toggle);
+        if (adjusted) controls.insertBefore(companion, toggle);
+        if (choices) controls.insertBefore(choices, toggle);
       }
+      for (const id of ['reading-navigation-unit', 'reading-document-progress-percent', 'reading-document-timer']) {
+        toReadingBar(id);
+      }
+      // Ya no hay otra carpeta General dentro del documento.
+      general?.remove();
       // Traducción, búsqueda y las acciones complementarias permanecen
       // disponibles dentro de Controles; no hay un segundo menú exterior.
       const more = document.getElementById('reading-document-open-more');
@@ -141,7 +135,6 @@
       close.type = 'button';
       setText(close, tr('Cerrar', 'Close'));
       const collapse = () => {
-        if (general) general.open = false;
         options.hidden = true;
         toggle.setAttribute('aria-expanded', 'false');
         toggle.focus({ preventScroll: true });

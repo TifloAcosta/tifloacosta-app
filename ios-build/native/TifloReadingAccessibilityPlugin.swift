@@ -102,7 +102,7 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
         clearInstalledActions()
         documentId = id
         let selectors: [String: Selector] = [
-            "open": #selector(openDocument(_:)), "details": #selector(showDetails(_:)),
+            "open": #selector(openDocument(_:)), "export": #selector(exportDocument(_:)),
             "rename": #selector(renameDocument(_:)), "delete": #selector(deleteDocument(_:))
         ]
         let actions = entries.compactMap { entry -> UIAccessibilityCustomAction? in
@@ -177,7 +177,7 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
             let entries = call.getArray("actions") as? [[String: Any]] ?? []
             let selectors: [String: Selector] = [
                 "open": #selector(self.openDocument(_:)),
-                "details": #selector(self.showDetails(_:)),
+                "export": #selector(self.exportDocument(_:)),
                 "rename": #selector(self.renameDocument(_:)),
                 "delete": #selector(self.deleteDocument(_:))
             ]
@@ -241,7 +241,7 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
     }
 
     @objc private func openDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("open") }
-    @objc private func showDetails(_ action: UIAccessibilityCustomAction) -> Bool { emit("details") }
+    @objc private func exportDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("export") }
     @objc private func renameDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("rename") }
     @objc private func deleteDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("delete") }
 }

@@ -158,6 +158,7 @@
     const more = document.getElementById('reading-document-more-actions');
     if (!audio || !visual || !more) { documentInstalled = null; return; }
     options.append(audio, visual, more);
+    installBookManagement(options);
     const general = options.querySelector('details.reading-settings-disclosure');
     let generalFolder = null;
     let generalButton = null;
@@ -218,7 +219,131 @@
     });
   }
 
+
+  function installLibrarySort() {
+    const selection = document.getElementById('reading-library-filter');
+    const search = document.getElementById('reading-library-query-label');
+    if (!selection || !search || document.getElementById('ios-reading-library-sort')) return;
+    const label = document.createElement('label');
+    label.htmlFor = 'ios-reading-library-sort';
+    label.textContent = tr('Ordenar por', 'Sort by');
+    const select = document.createElement('select');
+    select.id = 'ios-reading-library-sort';
+    for (const [value, es, en] of [
+      ['lastRead', 'Última lectura', 'Last read'],
+      ['imported', 'Fecha de importación', 'Date imported'],
+      ['title', 'Título', 'Title'],
+      ['author', 'Autor', 'Author'],
+      ['format', 'Formato', 'Format']
+    ]) {
+      const option = document.createElement('option');
+      option.value = value;
+      option.textContent = tr(es, en);
+      select.append(option);
+    }
+    select.value = 'lastRead';
+    search.before(label, select);
+  }
+
+  function compactLibraryCards() {
+    const list = document.getElementById('reading-library-list');
+    if (!list) return;
+    for (const card of list.querySelectorAll('.reading-library-title-card')) {
+      const actions = card.querySelector('.reading-library-details-toggle');
+      const details = card.querySelector('.reading-library-title-details');
+      if (!actions || !details) continue;
+      actions.textContent = tr('Acciones', 'Actions');
+      const heading = details.querySelector('h4');
+      if (heading) heading.textContent = tr('Acciones del documento', 'Document actions');
+      // Los controles especializados de audio/visual se conservan internamente
+      // para sus gestores, pero no se presentan en la lista de documentos.
+      const group = [...details.querySelectorAll('.resource-actions')].find(el =>
+        [...el.children].some(button => button.textContent?.trim() === tr('Audio y voz', 'Audio and voice')));
+      if (group) for (const button of group.children) {
+        if (['Audio y voz', 'Presentación visual', 'Audio and voice', 'Visual presentation'].includes(button.textContent?.trim())) {
+          button.hidden = true;
+        }
+      }
+    }
+  }
+
+  function installBookManagement(options) {
+    if (options.querySelector('#ios-reading-book-actions')) return;
+    const section = document.createElement('section');
+    section.id = 'ios-reading-book-actions';
+    section.setAttribute('aria-label', tr('Gestión del libro', 'Book management'));
+    const label = document.createElement('label');
+    label.htmlFor = 'ios-reading-book-export-format';
+    label.textContent = tr('Formato de exportación', 'Export format');
+    const format = document.createElement('select');
+    format.id = 'ios-reading-book-export-format';
+    for (const [v, es, en] of [['original', 'Original', 'Original'],
+      ['txt', 'TXT', 'TXT'], ['html', 'HTML accesible', 'Accessible HTML']]) {
+      const option = document.createElement('option');
+      option.value = v; option.textContent = tr(es, en); format.append(option);
+    }
+    const feedback = document.createElement('p');
+    feedback.setAttribute('role', 'status');
+    feedback.setAttribute('aria-live', 'polite');
+    const exportButton = button(tr('Exportar', 'Export'), 'ios-reading-book-export', () => {
+      void (async () => {
+        if (!window.TifloIOSBookActions?.hasSavedBook()) {
+          feedback.textContent = tr('Primero guarda el libro.', 'Save the book first.'); return;
+        }
+        const ok = await window.TifloIOSBookActions.exportCurrent(format.value);
+        feedback.textContent = ok ? tr('Exportación preparada.', 'Export prepared.')
+          : tr('No se pudo exportar.', 'Export failed.');
+      })();
+    });
+    const rename = button(tr('Cambiar título', 'Rename'), 'ios-reading-book-rename', () => {
+      if (!window.TifloIOSBookActions?.hasSavedBook()) {
+        feedback.textContent = tr('Primero guarda el libro.', 'Save the book first.'); return;
+      }
+      form.hidden = false;
+      name.value = document.getElementById('reading-document-title')?.textContent?.trim() || '';
+      focus(name);
+    });
+    const form = document.createElement('form');
+    form.hidden = true;
+    const nameLabel = document.createElement('label');
+    nameLabel.htmlFor = 'ios-reading-book-name';
+    nameLabel.textContent = tr('Nuevo título', 'New title');
+    const name = document.createElement('input');
+    name.id = 'ios-reading-book-name';
+    name.required = true;
+    const save = document.createElement('button');
+    save.type = 'submit';
+    save.textContent = tr('Guardar título', 'Save title');
+    form.append(nameLabel, name, save);
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      void (async () => {
+        const done = await window.TifloIOSBookActions?.renameCurrent(name.value);
+        feedback.textContent = done ? tr('Título guardado.', 'Title saved.')
+          : tr('No se pudo cambiar el título.', 'Rename failed.');
+        if (done) { form.hidden = true; focus(rename); }
+      })();
+    });
+    const remove = button(tr('Eliminar', 'Delete'), 'ios-reading-book-delete', () => {
+      void (async () => {
+        if (!window.TifloIOSBookActions?.hasSavedBook()) {
+          feedback.textContent = tr('Libro no guardado.', 'Book not saved.'); return;
+        }
+        const done = await window.TifloIOSBookActions.deleteCurrent();
+        if (done) document.getElementById('reading-reader-back')?.click();
+        else feedback.textContent = tr('Eliminación cancelada o fallida.', 'Deletion cancelled or failed.');
+      })();
+    });
+    section.append(label, format, exportButton, rename, form, remove, feedback);
+    const close = [...options.children].find(el => el.tagName === 'BUTTON'
+      && el.textContent?.trim() === tr('Cerrar', 'Close'));
+    if (close) close.before(section);
+    else options.append(section);
+  }
+
   function reconcile() {
+    installLibrarySort();
+    compactLibraryCards();
     installSettingsFolders();
     tidyIdleStatus();
     labelUnannouncedControls();

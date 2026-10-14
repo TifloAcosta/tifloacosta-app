@@ -163,3 +163,19 @@ test('UIKit reconoce la etiqueta VoiceOver exacta sin imponer activación adicio
   assert.match(bridge, /plainLabel: title\.textContent/);
   assert.match(bridge, /registerLibraryTitles\(\{ documents \}\)/);
 });
+
+
+test('iOS separa mostrar y ordenar sin duplicar Controles dentro del documento', () => {
+  const folders=read('ios-build/ios-reader-folders.js');
+  const minimal=read('ios-build/ios-reader-minimal.js');
+  const patched=read('ios-build/patch-reading-native.mjs');
+  assert.match(folders, /installLibrarySort\(\)/);
+  assert.match(folders, /ios-reading-library-sort/);
+  assert.match(folders, /installBookManagement\(options\)/);
+  assert.match(folders, /ios-reading-book-delete/);
+  assert.match(folders, /ios-reading-book-export/);
+  assert.match(minimal, /general\?\.remove\(\)/);
+  assert.match(minimal, /reading-document-timer/);
+  assert.match(patched, /sort: librarySort/);
+  assert.match(patched, /TifloIOSBookActions/);
+});

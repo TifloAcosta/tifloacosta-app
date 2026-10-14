@@ -122,7 +122,7 @@
   let focusSequence = 0;
   const voiceOverActions = [
     ['open', 'Abrir para leer', 'Open for reading'],
-    ['details', 'Detalles y ajustes', 'Details and settings'],
+    ['export', 'Exportar', 'Export'],
     ['rename', 'Cambiar título', 'Rename document'],
     ['delete', 'Eliminar', 'Delete']
   ];
@@ -152,9 +152,12 @@
       const card = title?.closest('.reading-library-title-card');
       if (!title || !card) return;
       if (action === 'open') { title.click(); return; }
-      if (action === 'details') {
+      if (action === 'export') {
         expand(card);
-        expandedDetails(card)?.querySelector('h4')?.focus({ preventScroll: true });
+        moreControls(card);
+        const exportButton = [...(expandedDetails(card)?.querySelectorAll('button') || [])]
+          .find(button => /exportar|export/i.test(button.textContent?.trim() || ''));
+        exportButton?.click();
         return;
       }
       if (action === 'rename') {

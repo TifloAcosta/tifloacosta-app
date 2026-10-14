@@ -56,4 +56,29 @@ replaceOnce(
   "globalThis.speechSynthesis?.addEventListener?.('voiceschanged', populateVoices);",
   "if (iosReader) {\n    iosReader.onVoicesChanged = populateVoices;\n    void iosReader.refreshVoices();\n  } else globalThis.speechSynthesis?.addEventListener?.('voiceschanged', populateVoices);"
 );
+
+// Cambios exclusivamente en el lector EMPAQUETADO para iOS, no en la web pública.
+replaceOnce(
+  "      const isRecentView = libraryView === 'recent';",
+  "      const isRecentView = libraryView === 'recent';\n      const librarySort = document.getElementById('ios-reading-library-sort')?.value || (isRecentView ? 'imported' : 'lastRead');"
+);
+replaceOnce(
+  "            sort: isRecentView ? 'imported' : 'lastRead'",
+  "            sort: librarySort"
+);
+replaceOnce(
+  "  els.libraryFilter?.addEventListener('change', () => { libraryPage = 1; void renderLibrary(); });",
+  "  els.libraryFilter?.addEventListener('change', () => { libraryPage = 1; void renderLibrary(); });\n  document.addEventListener('change', event => { if (event.target?.id === 'ios-reading-library-sort') { libraryPage = 1; void renderLibrary(); } });"
+);
+replaceOnce(
+  "  setupPronunciationDictionary();\n  localize();",
+  "  window.TifloIOSBookActions = {\n    hasSavedBook: () => Boolean(currentBookId),\n    exportCurrent: format => currentBookId ? exportSavedBook(currentBookId, format) : Promise.resolve(false),\n    async renameCurrent(value) {\n      const name = String(value || '').trim();\n      if (!name || !currentBookId || !libraryClient) return false;\n      try {\n        const opened = await libraryClient.openBook(currentBookId);\n        if (!opened?.book) return false;\n        const saved = await libraryClient.updateBookMetadata({ ...opened.book, title: name });\n        if (!saved) return false;\n        els.title.textContent = name;\n        await renderLibrary();\n        return true;\n      } catch { return false; }\n    },\n    async deleteCurrent() {\n      if (!currentBookId || !libraryClient) return false;\n      const id = currentBookId;\n      await deleteSavedBook(id);\n      return !(await libraryClient.openBook(id))?.book;\n    }\n  };\n  setupPronunciationDictionary();\n  localize();"
+);
 await writeFile(path, source);
+const adapterPath = resolve(import.meta.dirname, 'www/shared/web-reading-library-adapter.mjs');
+let adapter = await readFile(adapterPath, 'utf8');
+const sortAnchor = "      if (sort === 'author') return a.author.localeCompare(b.author);";
+if (adapter.split(sortAnchor).length !== 2) throw new Error('Falta clasificación por autor en adaptador iOS');
+adapter = adapter.replace(sortAnchor, sortAnchor + "\n      if (sort === 'format') return a.format.localeCompare(b.format) || a.title.localeCompare(b.title);");
+await writeFile(adapterPath, adapter);
+

@@ -192,16 +192,24 @@
       <p id="reading-mark-status" class="muted" role="status" aria-live="polite"></p>
     </section>
 
-    <details id="reading-settings-disclosure" class="panel reading-settings-disclosure">
-      <summary id="reading-settings-summary">Ajustes de lectura</summary>
-      <section id="reading-settings-web" aria-labelledby="reading-settings-heading">
-      <h3 id="reading-settings-heading" tabindex="-1">Tipos de ajustes</h3>
-      <div class="resource-actions" aria-label="Ajustes de TifloLector">
+    <section id="reading-settings-disclosure" class="panel reading-settings-entry">
+      <button id="reading-settings-summary" type="button" data-reading-view="reading-settings-web" aria-controls="reading-settings-web">Ajustes de lectura</button>
+    </section>
+
+    <section id="reading-settings-web" class="panel reading-subview" hidden aria-labelledby="reading-settings-heading">
+      <h3 id="reading-settings-heading" tabindex="-1">Ajustes de lectura</h3>
+      <div class="resource-actions" aria-label="Categorías de ajustes">
         <button type="button" data-reading-view="reading-audio-view" aria-controls="reading-audio-view">Audio y voz</button>
         <button type="button" data-reading-view="reading-visual-view" aria-controls="reading-visual-view">Presentación visual</button>
+        <button type="button" data-reading-view="reading-general-view" aria-controls="reading-general-view">General</button>
       </div>
-      <details id="reading-general-settings">
-        <summary id="reading-general-settings-summary">General</summary>
+      <p id="reading-settings-status" class="muted" role="status" aria-live="polite" hidden></p>
+      <button type="button" class="reading-subview-back" data-reading-close>Cerrar</button>
+    </section>
+
+    <section id="reading-general-view" class="panel reading-subview" hidden aria-labelledby="reading-general-settings-summary">
+      <h3 id="reading-general-settings-summary" tabindex="-1">General</h3>
+      <div id="reading-general-settings">
         <label id="reading-default-navigation-label" for="reading-default-navigation">Modo de avance predeterminado para nuevos documentos</label>
         <select id="reading-default-navigation">
           <option value="block">Bloque</option>
@@ -214,18 +222,15 @@
           <option value="tableCell">Celda de tabla</option>
         </select>
         <button id="reading-formats-toggle" type="button" aria-expanded="false" aria-controls="reading-formats-list">Consultar formatos admitidos</button>
-    <p id="reading-formats-list" hidden>TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 y DAISY ZIP con texto, e imágenes PNG, JPG y WebP mediante OCR. El audio DAISY sincronizado todavía no está disponible.</p>
-      </details>
-      <p id="reading-settings-status" class="muted" role="status" aria-live="polite"></p>
-      </section>
-    </details>
+        <p id="reading-formats-list" hidden>TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 y DAISY ZIP con texto, e imágenes PNG, JPG y WebP mediante OCR. El audio DAISY sincronizado todavía no está disponible.</p>
+        <button id="reading-library-refresh" type="button">Actualizar la lista de documentos</button>
+      </div>
+      <button type="button" class="reading-subview-back" data-reading-close>Cerrar</button>
+    </section>
 
     <section id="reading-audio-view" class="panel reading-subview" hidden aria-labelledby="reading-audio-view-heading">
-      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
       <h3 id="reading-audio-view-heading" tabindex="-1">Audio y voz</h3>
-<section id="reading-audio-settings" aria-labelledby="reading-audio-settings-heading">
-        <fieldset>
-          <legend id="reading-audio-settings-heading">Audio y voz</legend>
+<section id="reading-audio-settings">
           <label id="reading-voice-label" for="reading-voice">Voz</label>
           <select id="reading-voice">
             <option value="">Voz predeterminada del navegador</option>
@@ -246,7 +251,6 @@
             <option value="2.5">2,5×</option>
             <option value="3">3×</option>
           </select>
-        </fieldset>
         <details id="reading-pronunciation-settings">
           <summary id="reading-pronunciation-summary">Diccionario de pronunciación</summary>
           <p id="reading-pronunciation-help">Sustituye palabras o expresiones únicamente al leer en voz alta. El texto original no cambia.</p>
@@ -269,15 +273,13 @@
           <p id="reading-external-voices-status" class="muted" role="status" aria-live="polite"></p>
         </section>
       </section>
-      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
+      
+      <button type="button" class="reading-subview-back" data-reading-close>Cerrar</button>
     </section>
 
     <section id="reading-visual-view" class="panel reading-subview" hidden aria-labelledby="reading-visual-view-heading">
-      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
       <h3 id="reading-visual-view-heading" tabindex="-1">Presentación visual</h3>
-<section id="reading-visual-settings" aria-labelledby="reading-visual-settings-heading">
-        <fieldset>
-          <legend id="reading-visual-settings-heading">Presentación visual</legend>
+<section id="reading-visual-settings">
 
           <label for="reading-text-size">Tamaño del texto</label>
           <select id="reading-text-size">
@@ -337,9 +339,9 @@
             <input id="reading-high-contrast" type="checkbox">
             <label for="reading-high-contrast">Alto contraste</label>
           </div>
-        </fieldset>
       </section>
-      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
+      
+      <button type="button" class="reading-subview-back" data-reading-close>Cerrar</button>
     </section>
 
     <section id="reading-library-web" class="panel" aria-labelledby="reading-library-heading">
@@ -356,7 +358,7 @@
       </select>
       <label id="reading-library-query-label" for="reading-library-query">Buscar un documento por título o autor</label>
       <input id="reading-library-query" type="search" autocomplete="off">
-      <button id="reading-library-refresh" type="button">Actualizar biblioteca</button>
+      
       <p id="reading-library-status" class="muted" role="status" aria-live="polite"></p>
       <div id="reading-library-list" class="resource-list"></div>
       <nav id="reading-library-pager" aria-label="Páginas de Mi biblioteca" hidden>
@@ -373,16 +375,14 @@
     </section>
 
     <section id="reading-queue-web" class="panel reading-subview" hidden aria-labelledby="reading-queue-heading">
-      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
       <h3 id="reading-queue-heading" tabindex="-1">Cola de lectura</h3>
       <p id="reading-queue-intro">Ordena los documentos que quieres leer después. Nada se abrirá automáticamente.</p>
       <p id="reading-queue-status" class="muted" role="status" aria-live="polite"></p>
       <div id="reading-queue-list" class="resource-list"></div>
-      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
+      <button type="button" class="reading-subview-back" data-reading-close>Cerrar</button>
     </section>
 
     <section id="reading-marks-web" class="panel reading-subview" hidden aria-labelledby="reading-marks-heading">
-      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
       <h3 id="reading-marks-heading" tabindex="-1">Marcadores</h3>
       <p id="reading-marks-intro">Guarda puntos de lectura del documento abierto para volver a ellos más tarde.</p>
       <label for="reading-marks-new-type">Tipo de marca</label>
@@ -397,7 +397,7 @@
       <button type="button" id="reading-marks-add">Guardar marca en la posición actual</button>
       <p id="reading-marks-status" class="muted" role="status" aria-live="polite"></p>
       <div id="reading-marks-list" class="resource-list"></div>
-      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
+      <button type="button" class="reading-subview-back" data-reading-close>Cerrar</button>
     </section>
 
     <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
@@ -571,37 +571,46 @@
   'use strict';
 
   const readingSection = document.getElementById('reading-section');
-  const subviews = [...document.querySelectorAll('.reading-subview')];
-  const mainChildren = readingSection
-    ? [...readingSection.children].filter(node => !node.classList?.contains('reading-subview'))
-    : [];
-  let previousHiddenState = new Map();
-  let lastReadingOpener = null;
+  const subviews = [...readingSection.querySelectorAll('.reading-subview')];
+  const mainChildren = [...readingSection.children].filter(node => !node.classList?.contains('reading-subview'));
+  let mainHiddenState = null;
+  const readingViewStack = [];
 
+  // Cada submenú se presenta solo. Cerrar recupera el nivel anterior
+  // y el botón que lo abrió, sin recorrer paneles ajenos.
   function showSubview(id, opener = null) {
-    lastReadingOpener = opener;
     const target = document.getElementById(id);
-    if (!target) return;
-
-    previousHiddenState = new Map(mainChildren.map(node => [node, node.hidden]));
-    mainChildren.forEach(node => { node.hidden = true; });
+    if (!target || !target.classList.contains('reading-subview')) return;
+    const current = subviews.find(view => !view.hidden) || null;
+    if (!current) {
+      mainHiddenState = new Map(mainChildren.map(node => [node, node.hidden]));
+      mainChildren.forEach(node => { node.hidden = true; });
+    }
+    readingViewStack.push({ viewId: current?.id || null, opener });
     subviews.forEach(view => { view.hidden = view !== target; });
     target.hidden = false;
-
     const heading = target.querySelector('h3[tabindex="-1"]');
     queueMicrotask(() => heading?.focus());
   }
 
-  function showReadingMain() {
+  function closeReadingSubview() {
+    const previous = readingViewStack.pop();
     subviews.forEach(view => { view.hidden = true; });
-    mainChildren.forEach(node => {
-      node.hidden = previousHiddenState.has(node) ? previousHiddenState.get(node) : node.hidden;
-    });
-    previousHiddenState = new Map();
-
-    const target = lastReadingOpener?.isConnected ? lastReadingOpener : document.getElementById('reading-heading');
-    lastReadingOpener = null;
-    queueMicrotask(() => target?.focus());
+    if (previous?.viewId) {
+      const parent = document.getElementById(previous.viewId);
+      if (parent) parent.hidden = false;
+    } else if (mainHiddenState) {
+      mainChildren.forEach(node => {
+        node.hidden = mainHiddenState.has(node) ? mainHiddenState.get(node) : node.hidden;
+      });
+      mainHiddenState = null;
+    }
+    const focusTarget = previous?.opener?.isConnected
+      ? previous.opener
+      : (previous?.viewId
+          ? document.getElementById(previous.viewId)?.querySelector('h3[tabindex="-1"]')
+          : document.getElementById('reading-heading'));
+    queueMicrotask(() => focusTarget?.focus());
   }
 
   document.addEventListener('click', event => {
@@ -613,11 +622,11 @@
       return;
     }
 
-    const back = event.target.closest?.('[data-reading-back]');
-    if (back) {
+    const close = event.target.closest?.('[data-reading-close]');
+    if (close) {
       event.preventDefault();
       event.stopPropagation();
-      showReadingMain();
+      closeReadingSubview();
     }
   }, true);
 })();

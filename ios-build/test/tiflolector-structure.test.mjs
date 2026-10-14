@@ -77,6 +77,28 @@ test('the accessible guide is reachable before navigation and remains available 
   assert.match(worker, /tifloacosta-guide\.js/);
 });
 
+test('iOS preserves pronunciation rules without changing document text or weakening package gate', () => {
+  const prepare = read('ios-build/prepare-web.mjs');
+  const speech = read('shared/web-reading-pronunciation.mjs');
+  assert.match(html, /id="reading-pronunciation-settings"/);
+  assert.match(web, /createPronunciationSpeechAdapter\(speechAdapter/);
+  assert.match(web, /PRONUNCIATION_STORAGE_KEY/);
+  assert.match(speech, /export function applyPronunciationEntries/);
+  assert.match(prepare, /setupPronunciationDictionary\(\)/);
+  assert.match(prepare, /BLOQUEO PREVENTIVO iOS/);
+});
+
+test('iOS packages its own local ZIP engine instead of fetching CDN JSZip', () => {
+  const pkg = JSON.parse(read('ios-build/package.json'));
+  const prepare = read('ios-build/prepare-web.mjs');
+  const patch = read('ios-build/patch-reading-native.mjs');
+  assert.equal(pkg.dependencies.jszip, '3.10.1');
+  assert.match(prepare, /node_modules\/jszip\/dist\/jszip\.min\.js/);
+  assert.match(prepare, /ios-jszip\.min\.js/);
+  assert.match(patch, /script\.src = 'ios-jszip\.min\.js'/);
+  assert.match(web, /loadZipBundle\(\)/);
+});
+
 test('the iOS bundler rejects accidental loss of restored reader features', () => {
   const prepare = read('ios-build/prepare-web.mjs');
   for (const token of [

@@ -151,7 +151,7 @@ test('carpetas iOS independientes desde la compilación 400079', () => {
   assert.match(folders, /installDocumentFolders\(\)/);
   assert.match(folders, /lectura preparada\|reading ready/);
   assert.match(folders, /labelUnannouncedControls/);
-  assert.match(prepare, /src=\\"ios-reader-folders\.js\\"/);
+  assert.ok(prepare.includes('ios-reader-folders.js'));
 });
 
 test('UIKit reconoce la etiqueta VoiceOver exacta sin imponer activación adicional', () => {

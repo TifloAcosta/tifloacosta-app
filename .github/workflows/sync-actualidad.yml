@@ -36,9 +36,10 @@ permissions:
   pages: write
   id-token: write
 
-# Feed generation and GitHub Pages publishing should not cancel one another.
+# Serializar las publicaciones de Actualidad y YouTube en GitHub Pages.
+# Ambos flujos escriben mobile-content.json; sin bloqueo compiten por main.
 concurrency:
-  group: actualidad-sync
+  group: pages
   cancel-in-progress: false
 
 jobs:
@@ -140,13 +141,44 @@ jobs:
 
       - name: Commit Actualidad
         if: steps.changes.outputs.changed == 'true'
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         shell: bash
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add actualidad.json actualidad-apps.json actualidad-media.json actualidad-editorial.json actualidad-auto-state.json mobile-content.json
-          git commit -m "chore: sync Actualidad"
-          git push
+
+          # Una publicación externa puede avanzar main durante la descarga de feeds.
+          # No hacer push forzado: recargar main y regenerar los catálogos desde él.
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+              echo "main avanzó; regenerando Actualidad desde la última revisión (intento $attempt)."
+              git reset --hard origin/main
+              node scripts/sync-actualidad.mjs
+              node scripts/sync-actualidad-apps.mjs
+              node scripts/sync-actualidad-media.mjs
+              node scripts/build-mobile-content.mjs
+              npm run test:actualidad
+            fi
+
+            if [ -z "$(git status --porcelain -- actualidad.json actualidad-apps.json actualidad-media.json actualidad-editorial.json actualidad-auto-state.json mobile-content.json)" ]; then
+              echo "Los catálogos ya están actualizados en main."
+              exit 0
+            fi
+
+            git add actualidad.json actualidad-apps.json actualidad-media.json actualidad-editorial.json actualidad-auto-state.json mobile-content.json
+            git commit -m "chore: sync Actualidad"
+            if git push origin HEAD:main; then
+              echo "Actualidad publicada sin sobrescribir otros cambios."
+              exit 0
+            fi
+            echo "::warning::Otro proceso avanzó main mientras publicábamos; reintentando ($attempt/4)."
+          done
+
+          echo "::error::No se pudo publicar Actualidad después de 4 intentos."
+          exit 1
 
       - name: Configure Pages
         if: steps.changes.outputs.changed == 'true'

@@ -100,7 +100,12 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
             return
         }
         // No vaciar las acciones del título que continúa bajo el foco.
-        if documentId == id, (installedOnElement != nil || installedOnView != nil) { return }
+        if documentId == id {
+            if let element = focused as? UIAccessibilityElement,
+               let attached = installedOnElement, attached === element { return }
+            if let view = focused as? UIView,
+               let attached = installedOnView, attached === view { return }
+        }
         clearInstalledActions()
         documentId = id
         let selectors: [String: Selector] = [

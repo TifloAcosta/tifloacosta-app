@@ -87,6 +87,15 @@ replaceOnce(
   "        card.append(title, detailsToggle, details);",
   "        card.append(title); // iOS: VoiceOver muestra las acciones sobre el título."
 );
+// Aplicar la carpeta activa antes de generar los títulos del listado iOS.
+replaceOnce(
+  "      const page = isQueueView",
+  "      let page = isQueueView"
+);
+replaceOnce(
+  "      // Ignore an older asynchronous search/filter response after a newer one.",
+  "      const folderId = window.TifloIOSFolders?.activeFolder || '';\\n      if (folderId) {\\n        const all = await libraryClient.listBooks({ page:1, pageSize:100000, query, status, sort:librarySort });\\n        const selected = all.items.filter(book => window.TifloIOSFolders?.folderFor(book.id) === folderId);\\n        page = { items:selected.slice((libraryPage-1)*pageSize,libraryPage*pageSize), total:selected.length, pages:Math.ceil(selected.length/pageSize) };\\n      }\\n      // Ignore an older asynchronous search/filter response after a newer one."
+);
 await writeFile(path, source);
 const adapterPath = resolve(import.meta.dirname, 'www/shared/web-reading-library-adapter.mjs');
 let adapter = await readFile(adapterPath, 'utf8');

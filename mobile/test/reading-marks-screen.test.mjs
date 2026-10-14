@@ -44,7 +44,8 @@ test('mark jump and delete actions are distinguishable by context and the panel 
   assert.match(screen, /remove\.setAttribute\(['"]aria-label['"]/);
   assert.match(screen, /readingBook\.jumpToMarkLabel/);
   assert.match(screen, /readingBook\.deleteMarkLabel/);
-  assert.match(screen, /readingBook\.returnToReading/);
+  assert.match(screen, /returnButton\.textContent = document\.documentElement\.lang === 'en' \? 'Close' : 'Cerrar'/);
+  assert.match(screen, /returnFocus\?\.\(\)/);
   assert.match(screen, /returnFocus/);
   for (const label of ['Volver a la lectura', 'Return to reading']) {
     assert.ok(i18n.includes(label), `Missing return-to-reading translation: ${label}`);

@@ -331,12 +331,15 @@ export function renderReadingBook({
   visualButton.type = 'button';
   visualButton.textContent = t('readingBook.visualSettings');
 
-  // All reading preferences live in one closed-by-default, screen-reader-native disclosure.
-  // <details>/<summary> exposes expanded/collapsed state to VoiceOver without a custom menu.
-  const readingSettings = document.createElement('details');
+  // Simple controls menu: one activatable button, with no duplicate summary or region.
+  const readingSettings = document.createElement('div');
   readingSettings.className = 'reading-settings-disclosure';
-  const readingSettingsSummary = document.createElement('summary');
-  readingSettingsSummary.textContent = fallback(t, 'readingBook.readingSettings', 'Ajustes de lectura', 'Reading settings');
+  const readingSettingsSummary = document.createElement('button');
+  readingSettingsSummary.type = 'button';
+  readingSettingsSummary.textContent = document.documentElement.lang === 'en' ? 'Controls' : 'Controles';
+  readingSettingsSummary.setAttribute('aria-expanded', 'false');
+  const readingSettingsContent = document.createElement('div');
+  readingSettingsContent.hidden = true;
   const defaultModeLabel = document.createElement('label');
   defaultModeLabel.textContent = document.documentElement.lang === 'en'
     ? 'Default navigation mode for new documents'
@@ -361,12 +364,39 @@ export function renderReadingBook({
   const defaultModeStatus = document.createElement('p');
   defaultModeStatus.setAttribute('role', 'status');
   defaultModeStatus.setAttribute('aria-live', 'polite');
-  const generalSettings = document.createElement('details');
+  const generalSettings = document.createElement('section');
   generalSettings.className = 'reading-settings-disclosure';
-  const generalSettingsSummary = document.createElement('summary');
-  generalSettingsSummary.textContent = document.documentElement.lang === 'en' ? 'General' : 'General';
-  generalSettings.append(generalSettingsSummary, navigationLabel, navigationSelect, defaultModeLabel, defaultModeSelect, defaultModeStatus);
-  readingSettings.append(readingSettingsSummary, voiceButton, visualButton, generalSettings);
+  generalSettings.hidden = true;
+  const generalSettingsSummary = document.createElement('button');
+  generalSettingsSummary.type = 'button';
+  generalSettingsSummary.textContent = 'General';
+  generalSettingsSummary.setAttribute('aria-expanded', 'false');
+  generalSettings.append(navigationLabel, navigationSelect, defaultModeLabel, defaultModeSelect, defaultModeStatus);
+  const closeGeneral = document.createElement('button');
+  closeGeneral.type = 'button';
+  closeGeneral.textContent = document.documentElement.lang === 'en' ? 'Close' : 'Cerrar';
+  closeGeneral.addEventListener('click', () => {
+    generalSettings.hidden = true;
+    generalSettingsSummary.setAttribute('aria-expanded', 'false');
+    generalSettingsSummary.focus();
+  });
+  generalSettings.append(closeGeneral);
+  generalSettingsSummary.addEventListener('click', () => {
+    generalSettings.hidden = !generalSettings.hidden;
+    generalSettingsSummary.setAttribute('aria-expanded', String(!generalSettings.hidden));
+    if (!generalSettings.hidden) queueMicrotask(() => navigationSelect.focus());
+  });
+  const dictionaryButton = document.createElement('button');
+  dictionaryButton.type = 'button';
+  dictionaryButton.textContent = document.documentElement.lang === 'en' ? 'Dictionary' : 'Diccionario';
+  readingSettingsContent.append(voiceButton, visualButton, dictionaryButton, generalSettingsSummary, generalSettings);
+  readingSettings.append(readingSettingsSummary, readingSettingsContent);
+  readingSettingsSummary.addEventListener('click', () => {
+    readingSettingsContent.hidden = !readingSettingsContent.hidden;
+    readingSettingsSummary.setAttribute('aria-expanded', String(!readingSettingsContent.hidden));
+    if (!readingSettingsContent.hidden) queueMicrotask(() => voiceButton.focus());
+    else readingSettingsSummary.focus();
+  });
 
   const moreActionsButton = document.createElement('button');
   moreActionsButton.type = 'button';
@@ -378,6 +408,7 @@ export function renderReadingBook({
     next,
     progressStatus,
     addMarkButton,
+    marksButton,
     readingSettings,
     moreActionsButton
   );
@@ -385,9 +416,7 @@ export function renderReadingBook({
   const moreActions = document.createElement('section');
   moreActions.className = 'reading-panel reading-more-actions';
   moreActions.hidden = true;
-  const moreHeading = document.createElement('h2');
-  moreHeading.tabIndex = -1;
-  moreHeading.textContent = document.documentElement.lang === 'en' ? 'More actions' : 'Más acciones';
+  // The opener already says "Más acciones"; a repeated heading is unnecessary.
   const timerLabel = document.createElement('label');
   timerLabel.textContent = document.documentElement.lang === 'en' ? 'Reading timer' : 'Temporizador de lectura';
   const timerSelect = document.createElement('select');
@@ -408,18 +437,15 @@ export function renderReadingBook({
   }
   const moreReturn = document.createElement('button');
   moreReturn.type = 'button';
-  moreReturn.textContent = t('readingBook.returnToReading');
+  moreReturn.textContent = document.documentElement.lang === 'en' ? 'Close' : 'Cerrar';
   moreActions.append(
-    moreHeading,
     progressLabel,
     progressSelect,
     searchButton,
-    marksButton,
     readingStateLabel,
     readingState,
     timerLabel,
-    timerSelect,
-    moreReturn
+    timerSelect
   );
 
   const contentsSection = document.createElement('section');
@@ -545,6 +571,11 @@ export function renderReadingBook({
     externalLinkDialog,
     endOfDocument
   );
+  const closeBook = document.createElement('button');
+  closeBook.type = 'button';
+  closeBook.textContent = document.documentElement.lang === 'en' ? 'Close book' : 'Cerrar libro';
+  closeBook.addEventListener('click', () => router.back());
+  root.append(closeBook);
 
   let activeBook = null;
   let documentModel = null;
@@ -560,6 +591,7 @@ export function renderReadingBook({
   let readingTimerHandle = null;
   let destroyed = false;
   let nextSuggestedBookId = '';
+  let bookHasNavigationOverride = false;
   let completionGeneration = 0;
   let pendingExternalUrl = '';
   let externalLinkInvoker = null;
@@ -1083,10 +1115,12 @@ export function renderReadingBook({
 
   moreActionsButton.addEventListener('click', () => {
     moreActions.hidden = false;
-    queueMicrotask(() => moreHeading.focus());
+    moreActionsButton.setAttribute('aria-expanded', 'true');
+    queueMicrotask(() => moreActions.querySelector('select, button')?.focus());
   });
   moreReturn.addEventListener('click', () => {
     moreActions.hidden = true;
+    moreActionsButton.setAttribute('aria-expanded', 'false');
     moreActionsButton.focus();
   });
 
@@ -1125,6 +1159,7 @@ export function renderReadingBook({
         scope: 'book', bookId: activeBook.id,
         key: 'reading.navigationMode', value: navigationSelect.value
       });
+      bookHasNavigationOverride = true;
     }
     renderSemanticPosition(currentPosition, { focus: false, announce: false, commit: false });
     status.textContent = document.documentElement.lang === 'en'
@@ -1183,16 +1218,23 @@ export function renderReadingBook({
       const ok = await client.setReadingSetting({
         scope: 'global', key: 'reading.navigationMode', value: defaultModeSelect.value
       });
-      defaultModeStatus.textContent = ok
-        ? (document.documentElement.lang === 'en'
-            ? 'Default navigation saved. Each document can have its own navigation mode.'
-            : 'Avance predeterminado guardado. Cada documento puede tener su propio modo de avance.')
-        : (document.documentElement.lang === 'en'
-            ? 'Could not save the default navigation mode.'
-            : 'No se pudo guardar el modo de avance predeterminado.');
+      if (ok && !bookHasNavigationOverride &&
+          Array.from(navigationSelect.options).some(option => option.value === defaultModeSelect.value)) {
+        navigationSelect.value = defaultModeSelect.value;
+      }
+      defaultModeStatus.textContent = !ok
+        ? (document.documentElement.lang === 'en' ? 'Could not save the default navigation mode.' : 'No se pudo guardar el modo de avance predeterminado.')
+        : bookHasNavigationOverride
+          ? (document.documentElement.lang === 'en'
+              ? 'Default saved. This book has its own navigation mode; change it in General.'
+              : 'Predeterminado guardado. Este libro tiene su propio modo; cámbialo en General.')
+          : (document.documentElement.lang === 'en'
+              ? 'Default saved and applied to this book when available.'
+              : 'Predeterminado guardado y aplicado a este libro cuando está disponible.');
     })();
   });
   voiceButton.addEventListener('click', () => settingsPanel?.openVoice());
+  dictionaryButton.addEventListener('click', () => settingsPanel?.openDictionary());
   visualButton.addEventListener('click', () => settingsPanel?.openVisual());
 
   setScreenCleanup?.(() => {
@@ -1279,6 +1321,7 @@ export function renderReadingBook({
       const globalMode = resolveReadingSettings(storedReadingSettings?.global).effective['reading.navigationMode'];
       const effectiveMode = resolveReadingSettings(storedReadingSettings?.global, storedReadingSettings?.book).effective['reading.navigationMode'];
       defaultModeSelect.value = globalMode;
+      bookHasNavigationOverride = Object.prototype.hasOwnProperty.call(storedReadingSettings?.book || {}, 'reading.navigationMode');
       navigationSelect.value = Array.from(navigationSelect.options).some(option => option.value === effectiveMode)
         ? effectiveMode
         : 'sentence';
@@ -1362,9 +1405,11 @@ export function renderReadingBook({
       t,
       returnFocus() {
         moreActions.hidden = false;
-        queueMicrotask(() => moreHeading.focus());
+        queueMicrotask(() => moreActions.querySelector('select, button')?.focus());
       }
     });
+    // Keep Close after translation and other advanced controls.
+    moreActions.append(moreReturn);
 
     renderSemanticPosition(currentPosition, { announce: false });
     const resumePage = activeBook.format === 'pdf' ? pageForPosition(documentModel, currentPosition) : null;

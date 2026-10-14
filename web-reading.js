@@ -3408,73 +3408,10 @@
   // Each title in this native iOS library is a UIKit accessibility element
   // with actions on the focused title itself, unlike a WKWebView overlay.
   // Preserve the web list as fallback until real-device VoiceOver acceptance.
+  // VoiceOver document actions belong directly to each title in the iPhone app.
+  // Never require a separate "open accessible library" activation button.
   function ensureNativeLibraryActions(items = []) {
-    const native = globalThis.TifloIOSReading;
-    const old = document.getElementById('reading-library-native-actions');
-    if (!native?.hasNativeLibraryActions) {
-      old?.remove();
-      return;
-    }
-    nativeLibraryPage = (Array.isArray(items) ? items : []).map(book => ({
-      id: String(book.id),
-      title: String(book.title || (language() === 'en' ? 'Document' : 'Documento')),
-      format: String(book.format || ''),
-      percent: Number(book.percent) || 0
-    }));
-    let button = old;
-    if (!button) {
-      button = document.createElement('button');
-      button.type = 'button';
-      button.id = 'reading-library-native-actions';
-      els.libraryList.before(button);
-      button.addEventListener('click', () => {
-        const pages = nativeLibraryPage.slice(0, 60);
-        if (!pages.length) return;
-        Promise.resolve(native.presentLibrary({ items: pages, language: language() }))
-          .catch(() => {
-            els.libraryStatus.textContent = language() === 'en'
-              ? 'Native library unavailable. Use the document titles below.'
-              : 'Biblioteca nativa no disponible. Utiliza los títulos de los documentos que aparecen debajo.';
-            button.focus();
-          });
-      });
-    }
-    button.textContent = language() === 'en'
-      ? 'Open library with VoiceOver actions'
-      : 'Abrir biblioteca con acciones de VoiceOver';
-    button.disabled = !nativeLibraryPage.length;
-    if (nativeLibrarySubscribed) return;
-    nativeLibrarySubscribed = true;
-    Promise.resolve(native.onLibraryClosed?.(() => button.focus({ preventScroll: true })))
-      .catch(() => {});
-    Promise.resolve(native.onLibraryAction?.(event => {
-      const id = String(event?.id || '');
-      const action = String(event?.action || '');
-      if (!id || !nativeLibraryPage.some(book => book.id === id)) return;
-      void (async () => {
-        if (action === 'open' || action === 'read') {
-          await openSavedBook(id);
-          if (action === 'read' && (currentBookId === id)) await play();
-        } else if (action === 'delete') {
-          await deleteSavedBook(id); // The existing confirmation is mandatory.
-          els.libraryHeading?.focus({ preventScroll: true });
-        } else if (action === 'details') {
-          const title = document.getElementById('reading-library-title-'
-            + id.replace(/[^a-zA-Z0-9_-]/g, '-'));
-          const toggle = title?.closest('.reading-library-title-card')
-            ?.querySelector('.reading-library-details-toggle');
-          if (toggle?.getAttribute('aria-expanded') !== 'true') toggle?.click();
-          toggle?.focus({ preventScroll: true });
-        }
-      })().catch(() => {
-        els.libraryStatus.textContent = language() === 'en'
-          ? 'Unable to perform the selected book action.'
-          : 'No se pudo ejecutar la acción del documento.';
-        button.focus();
-      });
-    })).catch(() => {
-      nativeLibrarySubscribed = false;
-    });
+    document.getElementById('reading-library-native-actions')?.remove();
   }
 
   async function renderLibrary() {

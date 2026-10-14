@@ -128,11 +128,11 @@ test('iOS Importar abre Archivos directamente y cada título dispone de acciones
   assert.match(bridge, /fileInput\.hidden = true/);
   assert.match(accessibility, /UIDocumentPickerViewController\(forOpeningContentTypes: \[UTType\.item\], asCopy: true\)/);
   assert.doesNotMatch(parity, /entry\.id = 'ios-ocr-import'/);
-  assert.match(bridge, /list\.addEventListener\('focusin'/);
+  assert.match(bridge, /registerVisibleTitles\(\)/);
   assert.match(accessibility, /UIAccessibilityCustomAction\(name: name, target: self, selector: selector\)/);
   assert.match(accessibility, /notifyListeners\("documentAction"/);
   assert.doesNotMatch(web, /button\.id = 'reading-library-native-actions'/);
-  assert.match(bridge, /control\.hidden = true/);
+  assert.match(read('ios-build/patch-reading-native.mjs'), /card\.append\(title\);/);
   assert.match(web, /globalThis\.confirm\?\.\(question\) !== true/);
 });
 
@@ -147,7 +147,7 @@ test('carpetas iOS independientes desde la compilación 400079', () => {
   assert.match(folders, /focus\(opener\)/);
   assert.match(folders, /'ios-reading-general-open'/);
   assert.match(folders, /options\.append\(audio, visual, more\)/);
-  assert.match(folders, /general\.replaceWith\(generalButton, generalFolder\)/);
+  assert.match(folders, /function enterFolder\(\)/);
   assert.match(folders, /installDocumentFolders\(\)/);
   assert.match(folders, /lectura preparada\|reading ready/);
   assert.match(folders, /labelUnannouncedControls/);
@@ -174,7 +174,7 @@ test('iOS separa mostrar y ordenar sin duplicar Controles dentro del documento',
   assert.match(folders, /installBookManagement\(options\)/);
   assert.match(folders, /ios-reading-book-delete/);
   assert.match(folders, /ios-reading-book-export/);
-  assert.match(minimal, /general\?\.remove\(\)/);
+  assert.match(minimal, /querySelector\('details\.reading-settings-disclosure'\)\?\.remove\(\)/);
   assert.match(minimal, /reading-document-timer/);
   assert.match(patched, /sort: librarySort/);
   assert.match(patched, /TifloIOSBookActions/);

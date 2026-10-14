@@ -17,7 +17,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: catalog-sync
+  group: pages
   cancel-in-progress: false
 
 jobs:

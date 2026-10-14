@@ -18,9 +18,12 @@
       'reading-document-progress-percent',
       'ios-reading-default-unit',
       'reading-default-navigation',
-      'reading-audio-speed'
+      'reading-audio-speed',
+      'reading-playback-mode',
+      'reading-voice-language',
+      'reading-document-voice-language'
     ]);
-    if (adjustableIds.has(select.id) && select.options.length >= 2) {
+    if (adjustableIds.has(select.id)) {
       const slider = document.createElement('input');
       slider.type = 'range';
       slider.className = 'ios-reader-adjustable';
@@ -30,6 +33,7 @@
       slider.setAttribute('aria-label', name);
       function syncFromSelect() {
         slider.max = String(Math.max(0, select.options.length - 1));
+        slider.disabled = select.options.length < 2;
         slider.value = String(Math.max(0, select.selectedIndex));
         const choice = select.selectedOptions[0];
         slider.setAttribute('aria-valuetext', choice?.textContent?.trim() || '');

@@ -179,3 +179,11 @@ test('iOS separa mostrar y ordenar sin duplicar Controles dentro del documento',
   assert.match(patched, /sort: librarySort/);
   assert.match(patched, /TifloIOSBookActions/);
 });
+
+
+test('iOS ordena recientes y cola sin romper la separación entre Mostrar y Ordenar', () => {
+  const patch=read('ios-build/patch-reading-native.mjs');
+  assert.match(patch, /recentItems/);
+  assert.match(patch, /orderBooks/);
+  assert.match(patch, /librarySort !== 'lastRead'/);
+});

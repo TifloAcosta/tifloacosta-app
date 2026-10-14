@@ -25,12 +25,15 @@ jobs:
       - name: Validar sintaxis del lector que se empaqueta en iOS
         run: |
           node --check ios-build/prepare-web.mjs
+          node --check ios-build/patch-reading-native.mjs
+          node --check ios-build/ios-reader-folders.js
+          node --check ios-build/ios-reader-native.js
           node --check web-reading.js
           node --check shared/web-reading-navigation.mjs
           node --check ios-build/ios-parity.js
           node --check tifloacosta-guide.js
       - name: Probar controles y contratos de TifloLector sin publicar
-        run: node --test ios-build/test/tiflolector-structure.test.mjs
+        run: node --test ios-build/test/tiflolector-structure.test.mjs ios-build/test/tiflolector-regresiones-20261014.test.mjs
       - name: Ejecutar las pruebas existentes del lector web
         run: node --test test/web-reading*.test.mjs
   ios-unsigned-build:

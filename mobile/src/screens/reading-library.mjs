@@ -427,6 +427,8 @@ export function renderReadingLibrary({
         entry.group.hidden = entry.group !== group;
         entry.opener.setAttribute('aria-expanded', String(entry.group === group));
       }
+      settingsMenu.hidden = true;
+      closeSettings.hidden = true;
       queueMicrotask(() => group.querySelector('select, input, button')?.focus());
     });
     opener.setAttribute('aria-expanded', 'false');
@@ -462,11 +464,18 @@ export function renderReadingLibrary({
   for (const { group, opener } of settingGroups) {
     group.append(makeButton(document.documentElement.lang === 'en' ? 'Close' : 'Cerrar', () => {
       group.hidden = true;
+      settingsMenu.hidden = false;
+      closeSettings.hidden = false;
       opener.setAttribute('aria-expanded', 'false');
       opener.focus();
     }));
   }
   const closeSettings = makeButton(document.documentElement.lang === 'en' ? 'Close settings' : 'Cerrar ajustes', () => {
+    for (const { group, opener } of settingGroups) {
+      group.hidden = true;
+      opener.setAttribute('aria-expanded', 'false');
+    }
+    settingsMenu.hidden = false;
     settingsPanel.hidden = true;
     settingsToggle.setAttribute('aria-expanded', 'false');
     settingsToggle.focus();

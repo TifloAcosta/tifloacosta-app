@@ -255,7 +255,7 @@ await writeFile(join(output, 'tiflo-build-identity.js'), [
   '    if (!label) return;',
   "    label.textContent = 'TifloLector iOS · compilación ' + build.buildCode +",
   "      ' · código ' + build.sourceSha.slice(0, 12);",
-  '    label.hidden = false;',
+  '    label.hidden = true;',
   '  }, { once: true });',
   '})();',
   ''

@@ -94,16 +94,23 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
             // VoiceOver acts on the focused accessibility node, not on the WKWebView
             // container. Installing the actions only on webView hides them from the rotor.
             let focused = UIAccessibility.focusedElement(using: .notificationVoiceOver)
+            var attachedToFocusedTitle = false
             if let element = focused as? UIAccessibilityElement {
+                attachedToFocusedTitle = true
                 element.accessibilityCustomActions = actions
                 self.installedOnElement = element
             } else if let view = focused as? UIView {
+                attachedToFocusedTitle = true
                 view.accessibilityCustomActions = actions
                 self.installedOnView = view
             } else {
                 self.webView?.accessibilityCustomActions = actions
             }
-            call.resolve(["configured": !actions.isEmpty, "count": actions.count])
+            call.resolve([
+                "configured": !actions.isEmpty && attachedToFocusedTitle,
+                "count": actions.count,
+                "voiceOverEnabled": UIAccessibility.isVoiceOverRunning
+            ])
         }
     }
 

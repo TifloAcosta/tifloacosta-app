@@ -11,3 +11,10 @@ Revisión de cambios aceptada: PR #180 (ca67624688614bb2965c19dce0d88a7cd91bea62
 Preflight y compilación iOS sin firma superados antes del envío.
 Nuevo criterio: pantalla minimalista, un solo menú Ajustes, VoiceOver ajustable y compatibilidad de importación/marcas/diccionario.
 Enviar exclusivamente a TestFlight interno. No afirmar disponibilidad hasta la verificación final de Apple y asignación al grupo.
+
+Actualización exclusiva derivada de la compilación validada 400078.
+Base inicial: ebcad99cf28694eed2e66a400d855d68b7b6640d; revisiones iOS sobre esa misma base: 5e0bf666c3ca0ee1f30ea405deb3979bbf950cd4 y 1c65f8882af051fe40f5c247d329aa54785d25e0.
+CI de verificación para iPhone y simulador sin firma: ejecución 155, conclusión SUCCESS.
+Alcance: cerrar General y devolver el foco; agrupar Controles y ajustes personalizados dentro del documento; registrar acciones de VoiceOver de cada título sin activación previa; corregir la etiqueta audible.
+No cambiar Android, web, importación, pantalla principal ni funcionalidades aceptadas.
+Destino: exclusivamente TestFlight interno, sólo confirmar entrega tras VALID comprobado por Apple.

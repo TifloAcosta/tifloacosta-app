@@ -60,8 +60,10 @@ test('TifloLector keeps more voices inside Audio and voice instead of a top-leve
     'reading-more-voices-settings'
   ]) assert.ok(html.includes(token), `Missing ${token}`);
   for (const token of [
-    'Modo lector de pantalla',
-    'Iniciar automáticamente la lectura TTS'
+    'reading-playback-mode',
+    'Inicio de lectura al abrir un documento',
+    'Manual: iniciar al pulsar Reproducir',
+    'Automático: iniciar al abrir'
   ]) assert.ok(source.includes(token), `Missing ${token}`);
 });
 
@@ -83,8 +85,10 @@ test('TifloLector exposes per-document voice, rate, bookmark and semantic naviga
 test('automatic speech is opt-in and disabled by screen-reader mode', async () => {
   const source = await read('web-reading.js');
   assert.ok(source.includes("playbackPrefs.autoPlay === true && playbackPrefs.screenReaderMode === false"));
-  assert.ok(source.includes("if (mode.checked) auto.checked = false"));
-  assert.ok(source.includes("if (auto.checked) mode.checked = false"));
+  assert.ok(source.includes("mode.value = stored.autoPlay === true && stored.screenReaderMode === false ? 'automatic' : 'manual'"));
+  assert.ok(source.includes("mode.addEventListener('change', saveWebSettings)"));
+  assert.ok(source.includes("screenReaderMode: els.playbackMode ? els.playbackMode.value === 'manual'"));
+  assert.ok(source.includes("autoPlay: els.playbackMode ? els.playbackMode.value === 'automatic'"));
 });
 
 
@@ -131,4 +135,24 @@ test('more voices is nested inside Audio and voice with no separate launcher', a
   assert.ok(html.includes('<h4 id="reading-more-voices-settings-heading">Buscar más voces</h4>'));
   assert.ok(!html.includes('data-reading-view="reading-voices-view"'));
   assert.ok(!html.includes('id="reading-voices-view"'));
+});
+
+
+test('TifloLector separates settings and preserves VoiceOver focus through nested returns', async () => {
+  const html = await read('index.html');
+  assert.match(html, /id="reading-settings-summary"[^>]*data-reading-view="reading-settings-web"/);
+  assert.match(html, /id="reading-settings-web"[^>]*class="panel reading-subview" hidden/);
+  assert.match(html, /data-reading-view="reading-general-view"/);
+  assert.match(html, /id="reading-general-view"[^>]*hidden/);
+  assert.ok(!html.includes('Tipos de ajustes'));
+  assert.ok(!html.includes('id="reading-audio-settings-heading"'));
+  assert.ok(!html.includes('id="reading-visual-settings-heading"'));
+  assert.match(html, /readingViewStack\.push\(/);
+  assert.match(html, /const previous = readingViewStack\.pop\(\)/);
+  assert.match(html, /previous\?\.opener\?\.isConnected/);
+  assert.match(html, /mainHiddenState/);
+  assert.match(html, /id="reading-settings-status"[^>]*hidden/);
+  const native = await read('ios-build/ios-reader-selects.js');
+  for (const id of ['reading-default-navigation','reading-playback-mode','reading-voice-language','reading-document-voice-language'])
+    assert.ok(native.includes("'" + id + "'"), 'Missing adjustable VoiceOver control: ' + id);
 });

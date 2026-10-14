@@ -11,6 +11,7 @@ on:
       - 'index.html'
       - 'mobile/src/screens/reading-*.mjs'
       - '.github/workflows/ios-check.yml'
+      - '.github/workflows/ios-testflight.yml'
 jobs:
   tiflolector-static-audit:
     runs-on: ubuntu-latest

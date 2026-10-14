@@ -78,86 +78,47 @@
 
   function compactDocument() {
     const controls = document.getElementById('reading-document-controls');
-    if (!controls) return;
+    if (!controls || document.getElementById('ios-reading-document-controls-toggle')) return;
     const disclosure = controls.querySelector('details.reading-settings-disclosure');
-    if (disclosure && !document.getElementById('ios-reading-document-controls-toggle')) {
-      // Un botón auténtico elimina el triángulo de <summary> que VoiceOver
-      // puede anunciar por separado sin nombre. No se alteran los manejadores
-      // de los controles originales.
-      const summary = disclosure.querySelector(':scope > summary');
-      const toggle = document.createElement('button');
-      toggle.id = 'ios-reading-document-controls-toggle';
-      toggle.type = 'button';
-      setText(toggle, tr('Controles', 'Controls'));
-      const options = document.createElement('div');
-      options.id = 'ios-reading-document-controls-options';
-      options.hidden = true;
-      toggle.setAttribute('aria-controls', options.id);
-      toggle.setAttribute('aria-expanded', 'false');
-      for (const child of [...disclosure.children]) {
-        if (child !== summary) options.append(child);
-      }
-      disclosure.replaceWith(toggle, options);
-
-      // Una única barra del libro: avance, posición y autoapagado accesibles.
-      const general = options.querySelector('details.reading-settings-disclosure');
-      function toReadingBar(id) {
-        const select = document.getElementById(id);
-        const label = select && document.querySelector('label[for="' + id + '"]');
-        if (!select || !label) return;
-        const companion = select.nextElementSibling;
-        const adjusted = companion?.classList.contains('ios-reader-adjustable')
-          || companion?.classList.contains('ios-reader-choice');
-        const choices = adjusted && companion.nextElementSibling?.classList.contains('ios-reader-choice-options')
-          ? companion.nextElementSibling : null;
-        controls.insertBefore(label, toggle);
-        controls.insertBefore(select, toggle);
-        if (adjusted) controls.insertBefore(companion, toggle);
-        if (choices) controls.insertBefore(choices, toggle);
-      }
-      for (const id of ['reading-navigation-unit', 'reading-document-progress-percent', 'reading-document-timer']) {
-        toReadingBar(id);
-      }
-      // Ya no hay otra carpeta General dentro del documento.
-      general?.remove();
-      // Traducción, búsqueda y las acciones complementarias permanecen
-      // disponibles dentro de Controles; no hay un segundo menú exterior.
-      const more = document.getElementById('reading-document-open-more');
-      // La adaptación iOS puede haber creado el acceso a Traducción
-      // antes que este menú. Reunir también esa acción dentro de Controles.
-      const translation = more?.previousElementSibling;
-      if (translation?.tagName === 'BUTTON' &&
-          translation.textContent?.trim() === tr('Traducción', 'Translation')) {
-        options.append(translation);
-      }
-      if (more) options.append(more);
-      const close = document.createElement('button');
-      close.type = 'button';
-      setText(close, tr('Cerrar', 'Close'));
-      const collapse = () => {
-        options.hidden = true;
-        toggle.setAttribute('aria-expanded', 'false');
-        toggle.focus({ preventScroll: true });
-      };
-      close.addEventListener('click', collapse);
-      options.append(close);
-      toggle.addEventListener('click', () => {
-        if (!options.hidden) { collapse(); return; }
-        options.hidden = false;
-        toggle.setAttribute('aria-expanded', 'true');
-        options.querySelector('button:not([hidden]), summary')?.focus({ preventScroll: true });
-      });
-    }
-
-    for (const id of ['reading-document-audio', 'reading-document-visual', 'reading-document-more-actions']) {
-      const panel = document.getElementById(id);
-      if (!panel) continue;
-      for (const button of panel.querySelectorAll('button')) {
-        if (['Volver a la lectura', 'Back to reading'].includes(button.textContent?.trim())) {
-          setText(button, tr('Cerrar', 'Close'));
-        }
+    if (!disclosure) return;
+    const summary = disclosure.querySelector(':scope > summary');
+    const toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.id = 'ios-reading-document-controls-toggle';
+    toggle.textContent = tr('Controles', 'Controls');
+    const options = document.createElement('section');
+    options.id = 'ios-reading-document-controls-options';
+    options.hidden = true;
+    options.setAttribute('aria-label', tr('Controles del documento', 'Document controls'));
+    for (const node of [...disclosure.children]) if (node !== summary) options.append(node);
+    disclosure.replaceWith(toggle, options);
+    function moveSetting(id, target, before) {
+      const select = document.getElementById(id);
+      const label = select && document.querySelector('label[for="' + id + '"]');
+      if (!select || !label) return;
+      const companion = select.nextElementSibling;
+      const adjusted = companion?.classList.contains('ios-reader-adjustable') ||
+        companion?.classList.contains('ios-reader-choice');
+      const choices = adjusted && companion.nextElementSibling?.classList.contains('ios-reader-choice-options')
+        ? companion.nextElementSibling : null;
+      for (const node of [label, select, adjusted ? companion : null, choices].filter(Boolean)) {
+        if (before) target.insertBefore(node, before);
+        else target.append(node);
       }
     }
+    // Autoapagado y avance siempre a mano en la pantalla de lectura.
+    const actions = controls.querySelector('.resource-actions');
+    moveSetting('reading-document-timer', controls, actions);
+    moveSetting('reading-navigation-unit', controls, actions);
+    // La posición está en Controles, no en un General duplicado.
+    moveSetting('reading-document-progress-percent', options, options.firstElementChild);
+    options.querySelector('details.reading-settings-disclosure')?.remove();
+    const more = document.getElementById('reading-document-open-more');
+    const translation = more?.previousElementSibling;
+    if (translation?.tagName === 'BUTTON' && /^(Traducción|Translation)$/.test(translation.textContent?.trim() || '')) {
+      options.append(translation);
+    }
+    if (more) options.append(more);
   }
 
   function reconcile() {

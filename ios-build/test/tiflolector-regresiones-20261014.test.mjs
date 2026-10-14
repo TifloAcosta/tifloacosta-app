@@ -72,3 +72,23 @@ test('la importación directa y acciones VoiceOver por documento no retroceden',
   assert.match(html, /id="reading-marks-new-type"/);
   assert.match(prep, /BLOQUEO PREVENTIVO iOS/);
 });
+
+test('iOS 400078 conserva General delimitado y reúne las personalizaciones en Controles', () => {
+  const minimal = read('ios-build/ios-reader-minimal.js');
+  assert.match(minimal, /data\.iosCloseGeneral/);
+  assert.match(minimal, /data\.iosCloseSettings/);
+  assert.match(minimal, /ios-reading-document-controls-toggle/);
+  assert.match(minimal, /tr\('Controles', 'Controls'\)/);
+  assert.match(minimal, /reading-document-progress-percent/);
+  assert.match(minimal, /reading-document-timer/);
+});
+
+test('acciones de biblioteca vinculadas al foco REAL de UIKit sin activación previa', () => {
+  const bridge = read('ios-build/ios-reader-native.js');
+  const swift = read('ios-build/native/TifloReadingAccessibilityPlugin.swift');
+  assert.match(bridge, /registerLibraryTitles\(\{ documents \}\)/);
+  assert.match(bridge, /title\?\.closest\('\.reading-library-title-card'\)/);
+  assert.match(swift, /UIAccessibility\.elementFocusedNotification/);
+  assert.match(swift, /func updateFocusedLibraryTitle/);
+  assert.match(swift, /func registerLibraryTitles/);
+});

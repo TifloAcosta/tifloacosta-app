@@ -180,8 +180,12 @@
     if (!nativeDocumentListenerInstalled) {
       nativeDocumentListenerInstalled = true;
       void plugin.addListener('documentAction', ({ documentId, action }) => {
-        if (String(documentId) !== activeDocumentId) return;
-        dispatch(String(documentId), String(action));
+        // El evento nativo puede venir del foco de VoiceOver sin un focusin
+        // del DOM; solo actuar si el título aún pertenece a la biblioteca.
+        const title = document.getElementById(String(documentId));
+        if (title?.closest('.reading-library-title-card')) {
+          dispatch(String(documentId), String(action));
+        }
       }).catch(() => {});
     }
 
@@ -207,7 +211,24 @@
         }
       }).catch(() => {});
     });
+    // El foco accesible de WKWebView no siempre genera focusin/focusout.
+    // Registrar todos los títulos y dejar que UIKit detecte el foco real.
+    let lastRegistered = '';
+    const registerVisibleTitles = () => {
+      if (!plugin.registerLibraryTitles) return;
+      const documents = [...list.querySelectorAll('.reading-library-title')].map(title => ({
+        id: title.id,
+        label: title.getAttribute('aria-label') || title.textContent?.trim() || '',
+        actions: voiceOverActions.map(([id, es, en]) => ({ id, label: iosText(es, en) }))
+      })).filter(item => item.id && item.label);
+      const next = JSON.stringify(documents);
+      if (next === lastRegistered) return;
+      lastRegistered = next;
+      void plugin.registerLibraryTitles({ documents }).catch(() => {});
+    };
+    registerVisibleTitles();
     list.addEventListener('focusout', event => {
+      if (plugin.registerLibraryTitles) return; // UIKit gestiona el foco real.
       const title = event.target.closest?.('.reading-library-title');
       if (!title || activeDocumentId !== title.id) return;
       activeDocumentId = '';
@@ -215,13 +236,14 @@
       void plugin.clearDocumentActions({ documentId: title.id }).catch(() => {});
     });
     const observer = new MutationObserver(() => {
+      registerVisibleTitles();
       if (activeDocumentId && !document.getElementById(activeDocumentId)) {
         activeDocumentId = '';
         ++focusSequence;
         void plugin.clearDocumentActions({}).catch(() => {});
       }
     });
-    observer.observe(list, { childList: true, subtree: false });
+    observer.observe(list, { childList: true, subtree: true, attributes: true, attributeFilter: ['aria-label'] });
   }
 
   function installIOSReadingBridges() {

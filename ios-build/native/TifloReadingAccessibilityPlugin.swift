@@ -12,6 +12,7 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
     public let pluginMethods: [CAPPluginMethod] = [
         CAPPluginMethod(name: "pickDocument", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "setDocumentActions", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "registerLibraryTitles", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "clearDocumentActions", returnType: CAPPluginReturnPromise)
     ]
 
@@ -20,6 +21,82 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
     private var documentId = ""
     private var installedOnElement: UIAccessibilityElement?
     private var installedOnView: UIView?
+    private var registeredLibraryTitles: [[String: Any]] = []
+
+    public override func load() {
+        super.load()
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(voiceOverFocusChanged(_:)),
+            name: UIAccessibility.elementFocusedNotification, object: nil
+        )
+    }
+
+    deinit { NotificationCenter.default.removeObserver(self) }
+
+    @objc public func registerLibraryTitles(_ call: CAPPluginCall) {
+        DispatchQueue.main.async {
+            self.registeredLibraryTitles = call.getArray("documents") as? [[String: Any]] ?? []
+            self.updateFocusedLibraryTitle()
+            call.resolve(["registered": self.registeredLibraryTitles.count,
+                          "voiceOverEnabled": UIAccessibility.isVoiceOverRunning])
+        }
+    }
+
+    @objc private func voiceOverFocusChanged(_ notification: Notification) {
+        let focused = notification.userInfo?[UIAccessibility.focusedElementUserInfoKey]
+        updateFocusedLibraryTitle(focused)
+    }
+
+    private func updateFocusedLibraryTitle(_ focusedCandidate: Any? = nil) {
+        guard UIAccessibility.isVoiceOverRunning else {
+            documentId = ""
+            clearInstalledActions()
+            return
+        }
+        let focused = focusedCandidate ?? UIAccessibility.focusedElement(using: .notificationVoiceOver)
+        let label: String
+        if let element = focused as? UIAccessibilityElement {
+            label = element.accessibilityLabel ?? ""
+        } else if let view = focused as? UIView {
+            label = view.accessibilityLabel ?? ""
+        } else {
+            documentId = ""
+            clearInstalledActions()
+            return
+        }
+        // No confundir dos libros con el mismo título ni asociar acciones a
+        // elementos ajenos a la biblioteca.
+        let normalized = label.trimmingCharacters(in: .whitespacesAndNewlines)
+        let matches = registeredLibraryTitles.filter {
+            ($0["label"] as? String)?.trimmingCharacters(in: .whitespacesAndNewlines) == normalized
+        }
+        guard matches.count == 1, let title = matches.first,
+              let id = title["id"] as? String, !id.isEmpty,
+              let entries = title["actions"] as? [[String: Any]] else {
+            documentId = ""
+            clearInstalledActions()
+            return
+        }
+        clearInstalledActions()
+        documentId = id
+        let selectors: [String: Selector] = [
+            "open": #selector(openDocument(_:)), "details": #selector(showDetails(_:)),
+            "rename": #selector(renameDocument(_:)), "delete": #selector(deleteDocument(_:))
+        ]
+        let actions = entries.compactMap { entry -> UIAccessibilityCustomAction? in
+            guard let key = entry["id"] as? String,
+                  let name = entry["label"] as? String, !name.isEmpty,
+                  let selector = selectors[key] else { return nil }
+            return UIAccessibilityCustomAction(name: name, target: self, selector: selector)
+        }
+        if let element = focused as? UIAccessibilityElement {
+            element.accessibilityCustomActions = actions
+            installedOnElement = element
+        } else if let view = focused as? UIView {
+            view.accessibilityCustomActions = actions
+            installedOnView = view
+        }
+    }
 
     @objc public func pickDocument(_ call: CAPPluginCall) {
         DispatchQueue.main.async {

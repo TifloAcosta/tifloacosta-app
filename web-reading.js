@@ -2741,9 +2741,8 @@
         title.className = 'reading-library-title';
         title.id = 'reading-library-title-' + String(book.id).replace(/[^a-zA-Z0-9_-]/g, '-');
         title.textContent = book.title || t().document;
-        title.setAttribute('aria-label', language() === 'en'
-          ? `Open for reading: ${book.title || t().document}`
-          : `Abrir para leer: ${book.title || t().document}`);
+        const bookProgress = t().progress(book.percent || 0);
+        title.setAttribute('aria-label', `${book.title || t().document}. ${bookProgress}`);
 
         const detailsToggle = document.createElement('button');
         detailsToggle.type = 'button';
@@ -3075,6 +3074,11 @@
         // be reachable as explicit controls even when native VoiceOver actions
         // are unavailable. Native flick actions remain a separate iOS task.
         card.append(title, detailsToggle, details);
+        const progressSummary = document.createElement('p');
+        progressSummary.className = 'muted reading-library-title-progress';
+        progressSummary.textContent = bookProgress;
+        progressSummary.setAttribute('aria-hidden', 'true');
+        card.insertBefore(progressSummary, detailsToggle);
         els.libraryList.append(card);
       }
     } catch {

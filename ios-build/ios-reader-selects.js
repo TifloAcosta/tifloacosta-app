@@ -14,7 +14,7 @@
     // VoiceOver exposes range inputs as adjustable controls: flick up/down
     // instead of entering the web select popup. Reserve this for ordered values.
     const adjustableIds = new Set([
-      'ios-reading-library-sort', 'ios-reading-book-export-format',
+      'ios-reading-library-sort', 'ios-reading-book-export-format', 'ios-reading-book-folder',
       'reading-navigation-unit',
       'reading-document-progress-percent',
       'ios-reading-default-unit',

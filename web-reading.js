@@ -468,7 +468,7 @@
     if (!els.settingsPanel || els.settingsPanel.dataset.organized === 'true') return;
     els.settingsPanel.dataset.organized = 'true';
 
-    const audio = document.querySelector('#reading-audio-settings fieldset');
+    const audio = document.querySelector('#reading-audio-settings');
     if (audio && !document.getElementById('reading-voice-language')) {
       const languageLabel = document.createElement('label');
       languageLabel.htmlFor = 'reading-voice-language';
@@ -506,47 +506,30 @@
       });
     }
 
-    if (audio && !document.getElementById('reading-screen-reader-mode')) {
-      const mode = document.createElement('input');
-      mode.type = 'checkbox';
-      mode.id = 'reading-screen-reader-mode';
-      mode.checked = true;
-      const modeLabel = document.createElement('label');
-      modeLabel.htmlFor = mode.id;
-      modeLabel.textContent = language() === 'en'
-        ? 'Screen reader mode: do not start speech automatically when a document opens'
-        : 'Modo lector de pantalla: no iniciar la lectura automáticamente al abrir un documento';
-
-      const auto = document.createElement('input');
-      auto.type = 'checkbox';
-      auto.id = 'reading-auto-play';
-      const autoLabel = document.createElement('label');
-      autoLabel.htmlFor = auto.id;
-      autoLabel.textContent = language() === 'en'
-        ? 'Start TTS automatically when a document opens'
-        : 'Iniciar automáticamente la lectura TTS al abrir un documento';
-
+    if (audio && !document.getElementById('reading-playback-mode')) {
+      // Una sola elección persistente; iOS la presenta como valor ajustable.
       const modeRow = document.createElement('div');
-      const autoRow = document.createElement('div');
-      modeRow.append(mode, modeLabel);
-      autoRow.append(auto, autoLabel);
-      const legend = audio.querySelector('legend');
-      if (legend) legend.after(modeRow, autoRow);
-      else audio.prepend(modeRow, autoRow);
-
-      els.screenReaderMode = mode;
-      els.autoPlay = auto;
+      const modeLabel = document.createElement('label');
+      modeLabel.htmlFor = 'reading-playback-mode';
+      modeLabel.textContent = language() === 'en' ? 'Start reading when opening a document' : 'Inicio de lectura al abrir un documento';
+      const mode = document.createElement('select');
+      mode.id = 'reading-playback-mode';
+      for (const [value, es, en] of [
+        ['manual', 'Manual: iniciar al pulsar Reproducir', 'Manual: start when Play is pressed'],
+        ['automatic', 'Automático: iniciar al abrir', 'Automatic: start on open']
+      ]) {
+        const choice = document.createElement('option');
+        choice.value = value;
+        choice.textContent = language() === 'en' ? en : es;
+        mode.append(choice);
+      }
       const stored = readWebSettings();
-      mode.checked = stored.screenReaderMode !== false;
-      auto.checked = stored.autoPlay === true;
-      mode.addEventListener('change', () => {
-        if (mode.checked) auto.checked = false;
-        saveWebSettings();
-      });
-      auto.addEventListener('change', () => {
-        if (auto.checked) mode.checked = false;
-        saveWebSettings();
-      });
+      mode.value = stored.autoPlay === true && stored.screenReaderMode === false ? 'automatic' : 'manual';
+      modeRow.append(modeLabel, mode);
+      audio.prepend(modeRow);
+      els.playbackMode = mode;
+      els.playbackModeLabel = modeLabel;
+      mode.addEventListener('change', saveWebSettings);
     }
   }
 
@@ -1141,13 +1124,14 @@
       readingWidth: Number(els.readingWidth?.value || 72),
       theme: els.readingTheme?.value || 'system',
       highContrast: Boolean(els.highContrast?.checked),
-      screenReaderMode: els.screenReaderMode ? Boolean(els.screenReaderMode.checked) : readWebSettings().screenReaderMode !== false,
+      screenReaderMode: els.playbackMode ? els.playbackMode.value === 'manual' : readWebSettings().screenReaderMode !== false,
       defaultNavigationMode: els.defaultNavigationMode?.value || 'block',
-      autoPlay: els.autoPlay ? Boolean(els.autoPlay.checked) : readWebSettings().autoPlay === true
+      autoPlay: els.playbackMode ? els.playbackMode.value === 'automatic' : readWebSettings().autoPlay === true
     };
     try { localStorage.setItem(WEB_READING_SETTINGS_KEY, JSON.stringify(value)); } catch {}
     applyWebSettings(value);
-    if (els.settingsStatus) {
+    if (els.settingsStatus && !els.settingsPanel?.hidden) {
+      els.settingsStatus.hidden = false;
       els.settingsStatus.textContent = language() === 'en' ? 'Reading settings saved.' : 'Ajustes de lectura guardados.';
     }
   }
@@ -1177,6 +1161,7 @@
   function restoreWebSettings() {
     const value = readWebSettings();
     if (els.defaultNavigationMode) els.defaultNavigationMode.value = ['block', 'paragraph', 'sentence', 'heading', 'mainHeading', 'listItem', 'quote', 'tableCell'].includes(value.defaultNavigationMode) ? value.defaultNavigationMode : 'block';
+    if (els.playbackMode) els.playbackMode.value = value.autoPlay === true && value.screenReaderMode === false ? 'automatic' : 'manual';
     if (els.voiceLanguage && value.voiceLanguage !== undefined) els.voiceLanguage.value = primaryLanguage(value.voiceLanguage);
     if (els.externalVoiceLanguage && value.externalVoiceLanguage !== undefined) els.externalVoiceLanguage.value = primaryLanguage(value.externalVoiceLanguage);
     if (els.rate && value.rate) els.rate.value = String(value.rate);
@@ -1199,6 +1184,12 @@
 
   function localize() {
     const c = t();
+    if (els.playbackModeLabel) els.playbackModeLabel.textContent = language() === 'en' ? 'Start reading when opening a document' : 'Inicio de lectura al abrir un documento';
+    if (els.playbackMode) {
+      for (const item of els.playbackMode.options) item.textContent = language() === 'en'
+        ? (item.value === 'manual' ? 'Manual: start when Play is pressed' : 'Automatic: start on open')
+        : (item.value === 'manual' ? 'Manual: iniciar al pulsar Reproducir' : 'Automático: iniciar al abrir');
+    }
     els.heading.textContent = c.heading;
     els.intro.textContent = c.intro;
     if (els.formatsToggle) els.formatsToggle.textContent = language() === 'en' ? 'Show supported file types' : 'Consultar formatos admitidos';
@@ -3564,9 +3555,11 @@
         title.className = 'reading-library-title';
         title.id = 'reading-library-title-' + String(book.id).replace(/[^a-zA-Z0-9_-]/g, '-');
         title.textContent = book.title || t().document;
-        title.setAttribute('aria-label', language() === 'en'
-          ? `${book.format === 'audio' ? 'Open for listening' : 'Open for reading'}: ${book.title || t().document}`
-          : `${book.format === 'audio' ? 'Abrir para escuchar' : 'Abrir para leer'}: ${book.title || t().document}`);
+        const bookProgress = t().progress(book.percent || 0);
+        const readingAction = language() === 'en'
+          ? (book.format === 'audio' ? 'Open for listening' : 'Open for reading')
+          : (book.format === 'audio' ? 'Abrir para escuchar' : 'Abrir para leer');
+        title.setAttribute('aria-label', `${book.title || t().document}. ${bookProgress}. ${readingAction}`);
 
         const detailsToggle = document.createElement('button');
         detailsToggle.type = 'button';
@@ -3898,6 +3891,11 @@
         // be reachable as explicit controls even when native VoiceOver actions
         // are unavailable. Native flick actions remain a separate iOS task.
         card.append(title, detailsToggle, details);
+        const progressSummary = document.createElement('p');
+        progressSummary.className = 'muted reading-library-title-progress';
+        progressSummary.textContent = bookProgress;
+        progressSummary.setAttribute('aria-hidden', 'true');
+        card.insertBefore(progressSummary, detailsToggle);
         els.libraryList.append(card);
       }
     } catch {

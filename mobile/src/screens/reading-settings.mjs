@@ -53,6 +53,8 @@ function focusableElements(section) {
 
 function configureDialog(section, heading, id) {
   heading.id = id;
+  // The dialog announces this title once; do not repeat it as a navigable heading.
+  heading.hidden = true;
   section.tabIndex = -1;
   section.setAttribute('role', 'dialog');
   section.setAttribute('aria-modal', 'true');
@@ -547,6 +549,11 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
     void loadSettings();
     queueMicrotask(() => voiceLanguage.focus());
   }
+  function openDictionary() {
+    openVoice();
+    dictionary.open = true;
+    queueMicrotask(() => dictionaryHeading.focus());
+  }
   function openVisual() {
     rememberInvoker();
     voiceCatalog.close();
@@ -576,5 +583,5 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
   });
 
   void loadSettings();
-  return { openVoice, openVisual, closeAll, destroy, loadSettings, visualKeys: VISUAL_KEYS };
+  return { openVoice, openVisual, openDictionary, closeAll, destroy, loadSettings, visualKeys: VISUAL_KEYS };
 }

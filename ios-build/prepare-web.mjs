@@ -561,7 +561,8 @@ console.log('Validación sintáctica de scripts iOS completada');
      || mustAdjust.some(id => !iosSelects.includes("'" + id + "'"))
      || iosParity.includes('more.before(wrapper);')
      || !iosBridge.includes('const picked = await plugin.pickDocument()')
-     || !iosBridge.includes("list.addEventListener('focusin'")
+     || !iosBridge.includes('registerVisibleTitles();')
+     || !iosFolders.includes('installLibraryFolders()')
      || !packagedReaderMarkup.includes('id="reading-marks-new-type"')
      || !packagedReaderMarkup.includes('id="reading-pronunciation-settings"')) {
    throw new Error('BLOQUEO PREVENTIVO iOS: regresión en diseño minimalista, controles VoiceOver, importación o marcas.');

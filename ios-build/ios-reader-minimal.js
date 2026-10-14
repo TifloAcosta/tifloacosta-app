@@ -129,6 +129,13 @@
       // Traducción, búsqueda y las acciones complementarias permanecen
       // disponibles dentro de Controles; no hay un segundo menú exterior.
       const more = document.getElementById('reading-document-open-more');
+      // La adaptación iOS puede haber creado el acceso a Traducción
+      // antes que este menú. Reunir también esa acción dentro de Controles.
+      const translation = more?.previousElementSibling;
+      if (translation?.tagName === 'BUTTON' &&
+          translation.textContent?.trim() === tr('Traducción', 'Translation')) {
+        options.append(translation);
+      }
       if (more) options.append(more);
       const close = document.createElement('button');
       close.type = 'button';

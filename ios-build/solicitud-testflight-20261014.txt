@@ -5,3 +5,9 @@ Biblioteca: acciones de VoiceOver por título, sin activación previa; confirmac
 Preservar funciones del lector: PDF, MP3, DAISY ZIP, ajustes, diccionario, marcas, búsqueda y filtros.
 Publicar únicamente si superan los controles preventivos, la firma de Apple y el procesamiento VALID.
 Confirmar al usuario sólo después de verificar la disponibilidad en TestFlight y el grupo interno.
+
+Solicitud de compilación revisada tras auditoría iOS 14-10-2026.
+Revisión de cambios aceptada: PR #180 (ca67624688614bb2965c19dce0d88a7cd91bea62).
+Preflight y compilación iOS sin firma superados antes del envío.
+Nuevo criterio: pantalla minimalista, un solo menú Ajustes, VoiceOver ajustable y compatibilidad de importación/marcas/diccionario.
+Enviar exclusivamente a TestFlight interno. No afirmar disponibilidad hasta la verificación final de Apple y asignación al grupo.

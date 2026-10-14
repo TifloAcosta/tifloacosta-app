@@ -151,74 +151,105 @@
     const root = document.getElementById('reading-document-controls');
     const options = document.getElementById('ios-reading-document-controls-options');
     const toggle = document.getElementById('ios-reading-document-controls-toggle');
-    if (!root || !options || !toggle || documentInstalled === root) return;
-    documentInstalled = root;
+    const bookView = document.getElementById('reading-reader');
+    if (!root || !options || !toggle || !bookView || documentInstalled === root) return;
     const audio = document.getElementById('reading-document-audio');
     const visual = document.getElementById('reading-document-visual');
     const more = document.getElementById('reading-document-more-actions');
-    if (!audio || !visual || !more) { documentInstalled = null; return; }
+    if (!audio || !visual || !more) return;
+    documentInstalled = root;
     options.append(audio, visual, more);
     installBookManagement(options);
-    const general = options.querySelector('details.reading-settings-disclosure');
-    let generalFolder = null;
-    let generalButton = null;
-    if (general) {
-      generalFolder = document.createElement('section');
-      generalFolder.id = 'ios-reading-document-general-folder';
-      generalFolder.setAttribute('aria-label', 'General');
-      generalFolder.hidden = true;
-      generalButton = button('General', 'ios-reading-document-general-open', () => showPanel(generalFolder, generalButton));
-      for (const el of [...general.children]) {
-        if (el.tagName !== 'SUMMARY' && !el.dataset?.iosCloseGeneral) generalFolder.append(el);
-      }
-      general.replaceWith(generalButton, generalFolder);
-      generalFolder.append(button(tr('Cerrar', 'Close'), 'ios-reading-document-general-close', closePanel));
-    }
-    const panels = [audio, visual, more, generalFolder].filter(Boolean);
     const audioButton = document.getElementById('reading-document-open-audio');
     const visualButton = document.getElementById('reading-document-open-visual');
     const moreButton = document.getElementById('reading-document-open-more');
-    let current = null;
-    let currentOpener = null;
-    const primary = [...options.children].filter(item => !panels.includes(item));
-    function closePanel() {
-      if (!current) return;
-      current.hidden = true;
-      current = null;
-      for (const item of primary) item.hidden = false;
-      focus(currentOpener || toggle);
-      currentOpener = null;
+    const panels = [audio, visual, more];
+    let previous = null;
+    let selected = null;
+    let source = null;
+    const close = button(tr('Cerrar', 'Close'), 'ios-reading-document-close', leaveFolder);
+    options.append(close);
+    function restore() {
+      if (!previous) return;
+      for (const [element, hidden] of previous) if (element.isConnected) element.hidden = hidden;
+      previous = null;
     }
-    function showPanel(panel, opener) {
-      if (!panel) return;
-      for (const sibling of panels) sibling.hidden = sibling !== panel;
-      for (const item of primary) item.hidden = true;
-      current = panel;
-      currentOpener = opener;
-      // Solo controles de la subcarpeta activa: el lector no sigue hasta Biblioteca.
-      const first = [...panel.querySelectorAll('select, input, textarea, button')]
-        .find(el => !el.hidden && !el.disabled && el.textContent.trim() !== tr('Cerrar', 'Close'));
+    function enterFolder() {
+      if (previous) return;
+      previous = new Map();
+      for (const element of [...bookView.children]) {
+        if (element === root) continue;
+        previous.set(element, element.hidden);
+        element.hidden = true;
+      }
+      const primary = root.querySelector('.resource-actions');
+      for (const element of [...root.children]) {
+        previous.set(element, element.hidden);
+        element.hidden = element !== primary;
+      }
+      if (primary) for (const element of [...primary.children]) {
+        previous.set(element, element.hidden);
+        element.hidden = element !== options;
+      }
+      toggle.hidden = true;
+      options.hidden = false;
+      for (const panel of panels) panel.hidden = true;
+      selected = null;
+      source = null;
+      focus(audioButton || visualButton || moreButton || close);
+    }
+    function leaveFolder() {
+      if (!previous) return;
+      selected = null; source = null;
+      for (const panel of panels) panel.hidden = true;
+      options.hidden = true;
+      restore();
+      toggle.hidden = false;
+      focus(toggle);
+    }
+    function listFolders() {
+      if (!selected) return;
+      selected.hidden = true;
+      selected = null;
+      for (const child of [...options.children]) if (!panels.includes(child)) child.hidden = false;
+      focus(source || toggle);
+      source = null;
+    }
+    function openSubfolder(panel, button) {
+      if (!previous) enterFolder();
+      for (const item of panels) item.hidden = item !== panel;
+      for (const item of [...options.children]) if (!panels.includes(item)) item.hidden = true;
+      selected = panel;
+      source = button;
+      const first = [...panel.querySelectorAll('input,select,button,textarea')]
+        .find(item => !item.hidden && !item.disabled && !item.closest('[hidden]'));
       focus(first || panel);
     }
-    for (const [launch, panel] of [[audioButton, audio], [visualButton, visual], [moreButton, more]]) {
-      launch?.addEventListener('click', () => queueMicrotask(() => showPanel(panel, launch)));
-    }
+    toggle.removeAttribute('aria-expanded');
+    toggle.removeAttribute('aria-controls');
+    toggle.addEventListener('click', enterFolder);
     options.addEventListener('click', event => {
-      const close = event.target.closest('button');
-      if (!current || !close || !current.contains(close)) return;
-      if (close.textContent.trim() !== tr('Cerrar', 'Close')) return;
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      closePanel();
+      const target = event.target.closest('button');
+      if (!target) return;
+      if ([audioButton, visualButton, moreButton].includes(target)) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        openSubfolder(target === audioButton ? audio : target === visualButton ? visual : more, target);
+      } else if (selected && selected.contains(target) &&
+        ['Volver a la lectura', 'Back to reading', 'Cerrar', 'Close'].includes(target.textContent?.trim())) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        listFolders();
+      }
     }, true);
-    toggle.addEventListener('click', () => {
-      if (options.hidden && current) closePanel();
-    });
     options.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && current) { event.preventDefault(); closePanel(); }
+      if (event.key !== 'Escape') return;
+      event.preventDefault();
+      if (selected) listFolders(); else leaveFolder();
     });
+    // The back-to-library control must never leave a hidden document state.
+    document.getElementById('reading-reader-back')?.addEventListener('click', leaveFolder, true);
   }
-
 
   function installLibrarySort() {
     const selection = document.getElementById('reading-library-filter');
@@ -243,30 +274,6 @@
     }
     select.value = 'lastRead';
     search.before(label, select);
-  }
-
-  function compactLibraryCards() {
-    const list = document.getElementById('reading-library-list');
-    if (!list) return;
-    for (const card of list.querySelectorAll('.reading-library-title-card')) {
-      const actions = card.querySelector('.reading-library-details-toggle');
-      const details = card.querySelector('.reading-library-title-details');
-      if (!actions || !details) continue;
-      if (actions.textContent !== tr('Acciones', 'Actions')) actions.textContent = tr('Acciones', 'Actions');
-      const heading = details.querySelector('h4');
-      if (heading && heading.textContent !== tr('Acciones del documento', 'Document actions')) {
-        heading.textContent = tr('Acciones del documento', 'Document actions');
-      }
-      // Los controles especializados de audio/visual se conservan internamente
-      // para sus gestores, pero no se presentan en la lista de documentos.
-      const group = [...details.querySelectorAll('.resource-actions')].find(el =>
-        [...el.children].some(button => button.textContent?.trim() === tr('Audio y voz', 'Audio and voice')));
-      if (group) for (const button of group.children) {
-        if (['Audio y voz', 'Presentación visual', 'Audio and voice', 'Visual presentation'].includes(button.textContent?.trim())) {
-          button.hidden = true;
-        }
-      }
-    }
   }
 
   function installBookManagement(options) {
@@ -345,7 +352,6 @@
 
   function reconcile() {
     installLibrarySort();
-    compactLibraryCards();
     installSettingsFolders();
     tidyIdleStatus();
     labelUnannouncedControls();

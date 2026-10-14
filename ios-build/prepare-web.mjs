@@ -236,6 +236,7 @@ await writeFile(join(output, 'ios-choice-groups.js'), "(() => {\n  'use strict';
 await cp(join(root, 'ios-build/ios-choice-collapse.js'), join(output, 'ios-choice-collapse.js'));
 await cp(join(root, 'ios-build/ios-reader-selects.js'), join(output, 'ios-reader-selects.js'));
 await cp(join(root, 'ios-build/ios-reader-minimal.js'), join(output, 'ios-reader-minimal.js'));
+await cp(join(root, 'ios-build/ios-reader-folders.js'), join(output, 'ios-reader-folders.js'));
 await cp(join(root, 'ios-build/ios-reader-native.js'), join(output, 'ios-reader-native.js'));
 
 const commitSha = String(process.env.GITHUB_SHA ||
@@ -299,7 +300,7 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
   if (name === 'index.html') {
     html = html.replace('</head>', '<script src="ios-reader-native.js"></script>\n</head>');
     html = html.replace('</head>', '<script src="tiflo-build-identity.js"></script>\n</head>');
-    html = html.replace('</body>', '<script src="ios-reader-selects.js"></script><script src="ios-reader-minimal.js"></script>' + '\n</body>');
+    html = html.replace('</body>', '<script src="ios-reader-selects.js"></script><script src="ios-reader-minimal.js"></script><script src="ios-reader-folders.js"></script>' + '\n</body>');
   }
   if (name === 'podcast.html') {
     html = html.replace('</body>', '<script>requestAnimationFrame(() => { const heading = document.getElementById("podcast-heading"); heading?.setAttribute("tabindex", "-1"); heading?.focus({preventScroll:true}); });</script>' + '\n</body>');
@@ -526,7 +527,7 @@ await writeFile(iosActualidadPath, iosActualidad);
 await import('./patch-reading-native.mjs');
 
 // Fail before signing or uploading if an injected iOS-only script is invalid.
-for (const file of ['app.js', 'videos.js', 'actualidad.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-choice-groups.js', 'ios-videos-fallback.js', 'ios-actualidad-media-fallback.js', 'ios-choice-collapse.js', 'ios-reader-selects.js', 'ios-reader-minimal.js', 'ios-reader-native.js', 'web-reading.js', 'ios-parity.js', 'news-videos.js']) {
+for (const file of ['app.js', 'videos.js', 'actualidad.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-choice-groups.js', 'ios-videos-fallback.js', 'ios-actualidad-media-fallback.js', 'ios-choice-collapse.js', 'ios-reader-selects.js', 'ios-reader-minimal.js', 'ios-reader-folders.js', 'ios-reader-native.js', 'web-reading.js', 'ios-parity.js', 'news-videos.js']) {
   execFileSync(process.execPath, ['--check', join(output, file)], { stdio: 'pipe' });
 }
 console.log('Validación sintáctica de scripts iOS completada');
@@ -535,6 +536,7 @@ console.log('Validación sintáctica de scripts iOS completada');
  // verificamos la COPIA EMPAQUETADA y no solo el árbol de origen.
  const packagedReaderMarkup = await readFile(join(output, 'index.html'), 'utf8');
  const iosMinimal = await readFile(join(output, 'ios-reader-minimal.js'), 'utf8');
+ const iosFolders = await readFile(join(output, 'ios-reader-folders.js'), 'utf8');
  const iosSelects = await readFile(join(output, 'ios-reader-selects.js'), 'utf8');
  const iosParity = await readFile(join(output, 'ios-parity.js'), 'utf8');
  const iosBridge = await readFile(join(output, 'ios-reader-native.js'), 'utf8');
@@ -550,6 +552,9 @@ console.log('Validación sintáctica de scripts iOS completada');
    'reading-document-theme'
  ];
  if (!packagedReaderMarkup.includes('src="ios-reader-minimal.js"')
+     || !packagedReaderMarkup.includes('src="ios-reader-folders.js"')
+     || !iosFolders.includes('installSettingsFolders()')
+     || !iosFolders.includes('installDocumentFolders()')
      || !iosMinimal.includes("tr('Ajustes', 'Settings')")
      || !iosMinimal.includes("tr('Cerrar', 'Close')")
      || !iosSelects.includes('aria-valuetext')

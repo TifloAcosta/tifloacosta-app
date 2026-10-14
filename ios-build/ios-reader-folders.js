@@ -251,6 +251,121 @@
     document.getElementById('reading-reader-back')?.addEventListener('click', leaveFolder, true);
   }
 
+  // Carpetas personales locales; nunca contienen una copia de los libros,
+  // sólo la relación libro-carpeta, preservando progreso y marcadores.
+  const folderKey = 'tifloacosta-ios-folders-v1';
+  function readFolders() {
+    try {
+      const parsed = JSON.parse(localStorage.getItem(folderKey) || '{}');
+      return { folders: Array.isArray(parsed.folders) ? parsed.folders : [],
+        books: parsed.books && typeof parsed.books === 'object' ? parsed.books : {} };
+    } catch { return {folders:[],books:{}}; }
+  }
+  function writeFolders(data) {
+    try { localStorage.setItem(folderKey, JSON.stringify(data)); return true; }
+    catch { return false; }
+  }
+  let activeFolder = '';
+  const folders = {
+    get activeFolder() { return activeFolder; },
+    list: () => readFolders().folders,
+    folderFor: id => readFolders().books[String(id)] || '',
+    assign(id, folderId) {
+      if (!id) return false;
+      const data = readFolders();
+      if (folderId && !data.folders.some(item => item.id === folderId)) return false;
+      if (folderId) data.books[String(id)] = folderId;
+      else delete data.books[String(id)];
+      if (!writeFolders(data)) return false;
+      document.dispatchEvent(new Event('tiflo-ios-folder-change'));
+      return true;
+    },
+    promptAssignment(id) {
+      const names = readFolders().folders;
+      if (!names.length) {
+        globalThis.alert?.(tr('Primero crea una carpeta.', 'Create a folder first.')); return;
+      }
+      const question = tr('Escribe el nombre de la carpeta:', 'Enter folder name:') +
+        '\\n' + names.map(item => item.name).join(', ');
+      const name = globalThis.prompt?.(question);
+      if (!name) return;
+      const target = names.find(item => item.name.toLocaleLowerCase() === name.trim().toLocaleLowerCase());
+      if (target) folders.assign(id, target.id);
+      else globalThis.alert?.(tr('Carpeta no encontrada.', 'Folder not found.'));
+    }
+  };
+  window.TifloIOSFolders = folders;
+
+  function installLibraryFolders() {
+    const list = document.getElementById('reading-library-list');
+    if (!list || document.getElementById('ios-reading-folders')) return;
+    const section = document.createElement('section');
+    section.id = 'ios-reading-folders';
+    const create = button(tr('Crear carpeta', 'Create folder'), 'ios-reading-create-folder', () => {
+      const name = globalThis.prompt?.(tr('Nombre de la nueva carpeta:', 'New folder name:'))?.trim();
+      if (!name) return;
+      const data = readFolders();
+      if (data.folders.some(item => item.name.toLocaleLowerCase() === name.toLocaleLowerCase())) {
+        globalThis.alert?.(tr('Ya existe una carpeta con ese nombre.', 'A folder with that name exists.')); return;
+      }
+      data.folders.push({id:'folder-'+Date.now()+'-'+data.folders.length,name});
+      if (writeFolders(data)) render();
+    });
+    const current = document.createElement('p');
+    current.id = 'ios-reading-current-folder';
+    const exit = button(tr('Cerrar carpeta', 'Close folder'), 'ios-reading-exit-folder', () => {
+      activeFolder = '';
+      render(); refresh();
+    });
+    const names = document.createElement('div');
+    names.id = 'ios-reading-folder-list';
+    const label = document.createElement('p');
+    label.textContent = tr('Carpetas', 'Folders');
+    function refresh() {
+      document.getElementById('reading-library-filter')?.dispatchEvent(new Event('change', {bubbles:true}));
+    }
+    function render() {
+      const all = readFolders().folders;
+      const folder = all.find(x=>x.id===activeFolder);
+      current.textContent = folder ? tr('Carpeta: ', 'Folder: ') + folder.name : '';
+      current.hidden = !folder;
+      exit.hidden = !folder;
+      names.hidden = Boolean(folder);
+      names.replaceChildren();
+      for (const item of all) {
+        const line = document.createElement('div');
+        line.className = 'resource-actions';
+        const open = button(item.name, 'ios-folder-open-'+item.id, () => {
+          activeFolder = item.id; render(); refresh();
+        });
+        const rename = button(tr('Cambiar nombre', 'Rename'), 'ios-folder-rename-'+item.id, () => {
+          const name = globalThis.prompt?.(tr('Nuevo nombre:', 'New name:'), item.name)?.trim();
+          if (!name) return;
+          const data = readFolders();
+          if (data.folders.some(f=>f.id!==item.id && f.name.toLocaleLowerCase()===name.toLocaleLowerCase())) return;
+          const match = data.folders.find(f=>f.id===item.id);
+          if (match) match.name = name;
+          if (writeFolders(data)) render();
+        });
+        const remove = button(tr('Eliminar carpeta', 'Delete folder'), 'ios-folder-delete-'+item.id, () => {
+          if (!globalThis.confirm?.(tr('¿Eliminar esta carpeta? Los documentos se conservarán.', 'Delete this folder? Documents will be kept.'))) return;
+          const data = readFolders();
+          data.folders = data.folders.filter(f=>f.id!==item.id);
+          for (const book of Object.keys(data.books)) if (data.books[book]===item.id) delete data.books[book];
+          if (writeFolders(data)) {
+            if (activeFolder===item.id) activeFolder='';
+            render(); refresh();
+          }
+        });
+        line.append(open, rename, remove); names.append(line);
+      }
+      document.dispatchEvent(new Event('tiflo-ios-folder-change'));
+    }
+    section.append(create, current, exit, label, names);
+    list.before(section);
+    render();
+  }
+
   function installLibrarySort() {
     const selection = document.getElementById('reading-library-filter');
     const search = document.getElementById('reading-library-query-label');
@@ -343,7 +458,32 @@
         else feedback.textContent = tr('Eliminación cancelada o fallida.', 'Deletion cancelled or failed.');
       })();
     });
-    section.append(label, format, exportButton, rename, form, remove, feedback);
+    const folderLabel = document.createElement('label');
+    folderLabel.htmlFor = 'ios-reading-book-folder';
+    folderLabel.textContent = tr('Guardar en carpeta', 'Place in folder');
+    const folderSelect = document.createElement('select');
+    folderSelect.id = 'ios-reading-book-folder';
+    function syncFolders() {
+      const api = window.TifloIOSFolders;
+      const selected = api?.folderFor?.(window.TifloIOSBookActions?.currentId?.() || '') || '';
+      folderSelect.replaceChildren();
+      for (const folder of [{id:'',name:tr('Sin carpeta','No folder')}, ...(api?.list?.() || [])]) {
+        const option = document.createElement('option');
+        option.value = folder.id;
+        option.textContent = folder.name;
+        folderSelect.append(option);
+      }
+      folderSelect.value = selected;
+    }
+    syncFolders();
+    document.addEventListener('tiflo-ios-folder-change', syncFolders);
+    const assign = button(tr('Mover a carpeta', 'Move to folder'), 'ios-reading-book-folder-save', () => {
+      const id = window.TifloIOSBookActions?.currentId?.();
+      const done = id && window.TifloIOSFolders?.assign?.(id, folderSelect.value);
+      feedback.textContent = done ? tr('Carpeta actualizada.', 'Folder updated.')
+        : tr('Guarda el documento antes de moverlo.', 'Save before moving.');
+    });
+    section.append(label, format, exportButton, rename, form, folderLabel, folderSelect, assign, remove, feedback);
     const close = [...options.children].find(el => el.tagName === 'BUTTON'
       && el.textContent?.trim() === tr('Cerrar', 'Close'));
     if (close) close.before(section);
@@ -352,6 +492,7 @@
 
   function reconcile() {
     installLibrarySort();
+    installLibraryFolders();
     installSettingsFolders();
     tidyIdleStatus();
     labelUnannouncedControls();

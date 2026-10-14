@@ -39,7 +39,7 @@ permissions:
 # Serializar los procesos que escriben los catálogos de Actualidad y YouTube.
 # Ambos flujos escriben mobile-content.json y actualizan main.
 concurrency:
-  group: catalog-sync
+  group: pages
   cancel-in-progress: false
 
 jobs:

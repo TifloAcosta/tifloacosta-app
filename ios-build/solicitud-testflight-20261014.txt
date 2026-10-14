@@ -33,3 +33,9 @@ Base validada exclusivamente iOS: SHA b721643131d3409f2ca5b4571751ca732fd0029a.
 CI #168: pruebas estáticas SUCCESS y dos BUILD SUCCEEDED comprobados en los logs del workflow 38615055648 (simulador e iPhone sin firma).
 Alcance: filtros independientes, biblioteca sin personalizaciones repetidas, avance/posición/autoapagado directos, exportación/cambio de título/eliminación dentro del libro, refuerzo de acciones de VoiceOver y pruebas.
 Preservar datos locales, Importar Archivos y todas las secciones anteriores. Destino: TestFlight interno Probadores TifloAcosta. Confirmar Apple VALID antes de decir disponible.
+
+
+Solicitud de envío TestFlight tras reparar defectos observados en la compilación 400081, 14/10/2026.
+Base exclusiva: 4d20fd288e76a48d085585bcbc737fde0d6312cb. Verificación preflight #183, run 38625713773: SUCCESS en pruebas estáticas, preparación iOS, compilación Xcode simulador y iPhone sin firma.
+Sin modificar Web ni Android. Cambios: eliminar botón secundario y panel Detalles/Acciones en fichas; asociar rotor UIKit al título y su identificador, acción de cola corregida; Controles botón de navegación real, subcarpetas aisladas, Más acciones operativo y Autoapagado inmediato; crear/abrir/renombrar/eliminar carpetas sin eliminar documentos, guardar y mover libros a carpetas locales.
+Solo destino grupo interno Probadores TifloAcosta; comprobar procesamiento VALID de Apple y asignación al grupo antes de anunciar disponibilidad. El éxito de CI no certifica rotor hasta prueba de VoiceOver en iPhone real.

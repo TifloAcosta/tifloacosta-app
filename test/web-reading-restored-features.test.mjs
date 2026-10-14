@@ -50,7 +50,10 @@ test('publication remains manually guarded pending DAISY and native VoiceOver ac
   const workflow = read('.github/workflows/ios-testflight.yml');
   const prepare = read('ios-build/prepare-web.mjs');
   assert.match(workflow, /on:\s*\n\s+workflow_dispatch:/);
-  assert.doesNotMatch(workflow.slice(0, workflow.indexOf('permissions:')), /\n\s+push:/);
+  const triggers = workflow.slice(0, workflow.indexOf('permissions:'));
+  assert.match(triggers, /push:\s*\n\s+branches: \[preparacion-ios\]/);
+  assert.match(triggers, /'ios-build\/solicitud-testflight-20261014\.txt'/);
+  assert.doesNotMatch(triggers, /'web-reading\.js'/);
   assert.match(prepare, /BLOQUEO PREVENTIVO iOS/);
   assert.match(prepare, /TifloReadingAccessibilityPlugin\.swift/);
 });

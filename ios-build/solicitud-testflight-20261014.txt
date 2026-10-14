@@ -39,3 +39,13 @@ Solicitud de envío TestFlight tras reparar defectos observados en la compilaci�
 Base exclusiva: 4d20fd288e76a48d085585bcbc737fde0d6312cb. Verificación preflight #183, run 38625713773: SUCCESS en pruebas estáticas, preparación iOS, compilación Xcode simulador y iPhone sin firma.
 Sin modificar Web ni Android. Cambios: eliminar botón secundario y panel Detalles/Acciones en fichas; asociar rotor UIKit al título y su identificador, acción de cola corregida; Controles botón de navegación real, subcarpetas aisladas, Más acciones operativo y Autoapagado inmediato; crear/abrir/renombrar/eliminar carpetas sin eliminar documentos, guardar y mover libros a carpetas locales.
 Solo destino grupo interno Probadores TifloAcosta; comprobar procesamiento VALID de Apple y asignación al grupo antes de anunciar disponibilidad. El éxito de CI no certifica rotor hasta prueba de VoiceOver en iPhone real.
+
+
+Solicitud de envío experimental al grupo interno, 14/10/2026.
+Base de recuperación confirmada: compilación 400082 (conservar en TestFlight).
+Revisión aprobada: PR #181, SHA d059ae5b61e496ab7c4bbb6808e6b68491ea10d2.
+Verificación sin firma: ejecución 38641233540 SUCCESS, con tests de JavaScript, validación Swift y compilación completa iOS.
+Objetivo: acciones nativas VoiceOver al enfocar títulos de Vídeos, Podcasts y Recursos; conservar Biblioteca y funcionamiento previo.
+Modificaciones exclusivamente iOS: ningún cambio en almacenamiento local, esquema de datos, lector web general o Android.
+Destino: SOLO «Probadores TifloAcosta». La instalación en un iPhone REAL determinará si el rotor funciona.
+No dar la compilación por disponible hasta confirmar resultado de firma/subida a App Store Connect y procesamiento VALID/asignación al grupo.

@@ -67,8 +67,30 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
         // No confundir dos libros con el mismo título ni asociar acciones a
         // elementos ajenos a la biblioteca.
         let normalized = label.trimmingCharacters(in: .whitespacesAndNewlines)
-        let matches = registeredLibraryTitles.filter {
-            ($0["label"] as? String)?.trimmingCharacters(in: .whitespacesAndNewlines) == normalized
+        // WKWebView puede incluir el tipo de control después del nombre.
+        // Coincidencia exclusiva con el título, nunca con una coincidencia parcial.
+        let matches = registeredLibraryTitles.filter { document in
+            let expected = (document["label"] as? String ?? "")
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+            let plain = (document["plainLabel"] as? String ?? "")
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+            guard !expected.isEmpty else { return false }
+            if normalized == expected { return true }
+            // Una etiqueta accesible puede añadir ", botón" o ", button".
+            for suffix in [", botón", ", button", ". botón", ". button"] {
+                if normalized == expected + suffix { return true }
+            }
+            // El título sin prefijo también es válido SOLO si VoiceOver
+            // ha enfocado realmente un botón con ese nombre inequívoco.
+            let buttonFocused: Bool
+            if let element = focused as? UIAccessibilityElement {
+                buttonFocused = element.accessibilityTraits.contains(.button)
+            } else if let view = focused as? UIView {
+                buttonFocused = view.accessibilityTraits.contains(.button)
+            } else {
+                buttonFocused = false
+            }
+            return buttonFocused && !plain.isEmpty && normalized == plain
         }
         guard matches.count == 1, let title = matches.first,
               let id = title["id"] as? String, !id.isEmpty,

@@ -63,7 +63,7 @@ export function createReadingMarksPanel({ root, client, bookId, t, getPosition, 
 
   const returnButton = document.createElement('button');
   returnButton.type = 'button';
-  returnButton.textContent = t('readingBook.returnToReading');
+  returnButton.textContent = document.documentElement.lang === 'en' ? 'Close' : 'Cerrar';
 
   const annotationHeading = document.createElement('h3');
   annotationHeading.textContent = document.documentElement.lang === 'en' ? 'Highlights and notes' : 'Resaltados y notas';

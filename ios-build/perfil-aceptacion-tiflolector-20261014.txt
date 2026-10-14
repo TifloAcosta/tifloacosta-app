@@ -1,0 +1,2 @@
+TifloLector iOS. Criterios de aceptación. 14/10/2026.
+Importar abre Archivos directamente. Pantalla inicial minimalista. Ajustes por submenús con Cerrar y retorno de foco. Controles ajustables por gestos VoiceOver. Biblioteca con acciones de VoiceOver sin activación previa. Diccionario, marcas, PDF, MP3, DAISY y progreso conservados. No publicar hasta superar pruebas de regresión.

@@ -135,3 +135,31 @@ test('iOS Importar abre Archivos directamente y cada título dispone de acciones
   assert.match(bridge, /control\.hidden = true/);
   assert.match(web, /globalThis\.confirm\?\.\(question\) !== true/);
 });
+
+
+test('carpetas iOS independientes desde la compilación 400079', () => {
+  const folders = read('ios-build/ios-reader-folders.js');
+  const prepare = read('ios-build/prepare-web.mjs');
+  assert.match(folders, /old\.replaceWith\(opener, folder\)/);
+  assert.match(folders, /folder\.append\(menu, audio, visual\)/);
+  assert.match(folders, /for \(const el of saved\.keys\(\)\) el\.hidden = true/);
+  assert.match(folders, /for \(const \[el, wasHidden\] of saved\)/);
+  assert.match(folders, /focus\(opener\)/);
+  assert.match(folders, /'ios-reading-general-open'/);
+  assert.match(folders, /options\.append\(audio, visual, more\)/);
+  assert.match(folders, /general\.replaceWith\(generalButton, generalFolder\)/);
+  assert.match(folders, /installDocumentFolders\(\)/);
+  assert.match(folders, /lectura preparada\|reading ready/);
+  assert.match(folders, /labelUnannouncedControls/);
+  assert.match(prepare, /src=\\"ios-reader-folders\.js\\"/);
+});
+
+test('UIKit reconoce la etiqueta VoiceOver exacta sin imponer activación adicional', () => {
+  const swift = read('ios-build/native/TifloReadingAccessibilityPlugin.swift');
+  const bridge = read('ios-build/ios-reader-native.js');
+  assert.match(swift, /UIAccessibility\.elementFocusedNotification/);
+  assert.match(swift, /accessibilityTraits\.contains\(\.button\)/);
+  assert.match(swift, /normalized == expected/);
+  assert.match(bridge, /plainLabel: title\.textContent/);
+  assert.match(bridge, /registerLibraryTitles\(\{ documents \}\)/);
+});

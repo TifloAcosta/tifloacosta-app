@@ -167,8 +167,10 @@ test('library title opens accessible book options and retains an explicit readin
   assert.ok(screen.includes("actionsToggle.setAttribute('aria-controls', details.id)"));
   assert.ok(screen.includes("actionsToggle.setAttribute('aria-expanded', 'false')"));
   assert.ok(screen.includes("details.hidden = !opening;"), 'actions menu must toggle without navigating away');
-  assert.ok(screen.includes("detailsHeading.focus()"), 'opening should focus the panel heading');
-  assert.ok(screen.includes("actionsToggle.focus()"), 'closing should return to its opener');
+  assert.ok(screen.includes("detail.focus()"), 'opening focuses the document information without repeating its title');
+  assert.ok(screen.includes("title.focus()"), 'closing should return to its title');
+  assert.ok(screen.includes("actionsToggle.hidden = true"), 'a second visible actions button would be redundant');
+  assert.ok(screen.includes("title.setAttribute('aria-expanded'"), 'the visible title announces whether options are open');
   assert.ok(screen.includes('client.deleteBook(item.id)'), 'deletion stays behind confirmation');
 });
 

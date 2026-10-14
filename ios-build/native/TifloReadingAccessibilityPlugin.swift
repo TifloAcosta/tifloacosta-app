@@ -13,6 +13,7 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
         CAPPluginMethod(name: "pickDocument", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "setDocumentActions", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "registerLibraryTitles", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "registerAccessibleTargets", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "clearDocumentActions", returnType: CAPPluginReturnPromise)
     ]
 
@@ -22,6 +23,8 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
     private var installedOnElement: UIAccessibilityElement?
     private var installedOnView: UIView?
     private var registeredLibraryTitles: [[String: Any]] = []
+    private var registeredAccessibleTargets: [[String: Any]] = []
+    private var focusedTargetId = ""
 
     public override func load() {
         super.load()
@@ -39,6 +42,53 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
             self.updateFocusedLibraryTitle()
             call.resolve(["registered": self.registeredLibraryTitles.count,
                           "voiceOverEnabled": UIAccessibility.isVoiceOverRunning])
+        }
+    }
+
+
+    // Cross-section actions for web elements, without changing the website or
+    // creating secondary buttons. Only the ACTUAL VoiceOver-focused node is modified.
+    @objc public func registerAccessibleTargets(_ call: CAPPluginCall) {
+        DispatchQueue.main.async {
+            let incoming = call.getArray("targets") as? [[String: Any]] ?? []
+            self.registeredAccessibleTargets = Array(incoming.prefix(250))
+            self.updateFocusedLibraryTitle()
+            call.resolve(["registered": self.registeredAccessibleTargets.count,
+                          "voiceOverEnabled": UIAccessibility.isVoiceOverRunning])
+        }
+    }
+
+    private func updateFocusedGenericTarget(_ focused: Any, label: String) {
+        let matches = registeredAccessibleTargets.filter { target in
+            guard let expected = target["label"] as? String, !expected.isEmpty else { return false }
+            let value = expected.trimmingCharacters(in: .whitespacesAndNewlines)
+            if label == value { return true }
+            // VoiceOver may append a localized role; never use a substring match.
+            return [", botón", ", button", ", encabezamiento", ", heading"].contains {
+                label == value + $0
+            }
+        }
+        // Duplicate labels are ambiguous; failing closed is safer than activating
+        // the wrong episode, video or document.
+        guard matches.count == 1, let target = matches.first,
+              let targetId = target["id"] as? String, !targetId.isEmpty,
+              let entries = target["actions"] as? [[String: Any]] else { return }
+        focusedTargetId = targetId
+        let actions: [UIAccessibilityCustomAction] = entries.compactMap { entry in
+            guard let actionId = entry["id"] as? String, !actionId.isEmpty,
+                  let actionLabel = entry["label"] as? String, !actionLabel.isEmpty else { return nil }
+            return UIAccessibilityCustomAction(name: actionLabel, actionHandler: { [weak self] _ in
+                guard let self = self, self.focusedTargetId == targetId else { return false }
+                self.notifyListeners("targetAction", data: ["targetId": targetId, "action": actionId])
+                return true
+            })
+        }
+        if let element = focused as? UIAccessibilityElement {
+            element.accessibilityCustomActions = actions
+            installedOnElement = element
+        } else if let view = focused as? UIView {
+            view.accessibilityCustomActions = actions
+            installedOnView = view
         }
     }
 
@@ -97,6 +147,7 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
               let entries = title["actions"] as? [[String: Any]] else {
             documentId = ""
             clearInstalledActions()
+            updateFocusedGenericTarget(focused, label: normalized)
             return
         }
         // No vaciar las acciones del título que continúa bajo el foco.
@@ -227,6 +278,7 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
     }
 
     private func clearInstalledActions() {
+        focusedTargetId = ""
         installedOnElement?.accessibilityCustomActions = nil
         installedOnView?.accessibilityCustomActions = nil
         installedOnElement = nil

@@ -1,0 +1,7 @@
+Solicitud expresa de actualización de TifloAcosta iOS a TestFlight, 14-10-2026.
+Destino exclusivo: grupo interno «Probadores TifloAcosta».
+Importar: pulsación única que abre directamente Archivos; sin opciones de galería o cámara ni segundo botón.
+Biblioteca: acciones de VoiceOver por título, sin activación previa; confirmación para eliminar.
+Preservar funciones del lector: PDF, MP3, DAISY ZIP, ajustes, diccionario, marcas, búsqueda y filtros.
+Publicar únicamente si superan los controles preventivos, la firma de Apple y el procesamiento VALID.
+Confirmar al usuario sólo después de verificar la disponibilidad en TestFlight y el grupo interno.

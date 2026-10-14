@@ -189,16 +189,25 @@
       <p id="reading-mark-status" class="muted" role="status" aria-live="polite"></p>
     </section>
 
-    <details id="reading-settings-disclosure" class="panel reading-settings-disclosure">
-      <summary id="reading-settings-summary">Ajustes de lectura</summary>
-      <section id="reading-settings-web" aria-labelledby="reading-settings-heading">
-      <h3 id="reading-settings-heading" tabindex="-1">Tipos de ajustes</h3>
-      <div class="resource-actions" aria-label="Ajustes de TifloLector">
+    <section id="reading-settings-disclosure" class="panel reading-settings-entry">
+      <button id="reading-settings-summary" type="button" data-reading-view="reading-settings-web" aria-controls="reading-settings-web">Ajustes de lectura</button>
+    </section>
+
+    <section id="reading-settings-web" class="panel reading-subview" hidden aria-labelledby="reading-settings-heading">
+      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
+      <h3 id="reading-settings-heading" tabindex="-1">Ajustes de lectura</h3>
+      <div class="resource-actions" aria-label="Categorías de ajustes">
         <button type="button" data-reading-view="reading-audio-view" aria-controls="reading-audio-view">Audio y voz</button>
         <button type="button" data-reading-view="reading-visual-view" aria-controls="reading-visual-view">Presentación visual</button>
+        <button type="button" data-reading-view="reading-general-view" aria-controls="reading-general-view">General</button>
       </div>
-      <details id="reading-general-settings">
-        <summary id="reading-general-settings-summary">General</summary>
+      <p id="reading-settings-status" class="muted" role="status" aria-live="polite" hidden></p>
+    </section>
+
+    <section id="reading-general-view" class="panel reading-subview" hidden aria-labelledby="reading-general-settings-summary">
+      <button type="button" class="reading-subview-back" data-reading-back>Volver a Ajustes</button>
+      <h3 id="reading-general-settings-summary" tabindex="-1">General</h3>
+      <div id="reading-general-settings">
         <label id="reading-default-navigation-label" for="reading-default-navigation">Modo de avance predeterminado para nuevos documentos</label>
         <select id="reading-default-navigation">
           <option value="block">Bloque</option>
@@ -211,18 +220,14 @@
           <option value="tableCell">Celda de tabla</option>
         </select>
         <button id="reading-formats-toggle" type="button" aria-expanded="false" aria-controls="reading-formats-list">Consultar formatos admitidos</button>
-    <p id="reading-formats-list" hidden>TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 e imágenes PNG, JPG y WebP mediante OCR.</p>
-      </details>
-      <p id="reading-settings-status" class="muted" role="status" aria-live="polite"></p>
-      </section>
-    </details>
+        <p id="reading-formats-list" hidden>TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 e imágenes PNG, JPG y WebP mediante OCR.</p>
+      </div>
+    </section>
 
     <section id="reading-audio-view" class="panel reading-subview" hidden aria-labelledby="reading-audio-view-heading">
-      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
+      <button type="button" class="reading-subview-back" data-reading-back>Volver a Ajustes</button>
       <h3 id="reading-audio-view-heading" tabindex="-1">Audio y voz</h3>
-<section id="reading-audio-settings" aria-labelledby="reading-audio-settings-heading">
-        <fieldset>
-          <legend id="reading-audio-settings-heading">Audio y voz</legend>
+<section id="reading-audio-settings">
           <label id="reading-voice-label" for="reading-voice">Voz</label>
           <select id="reading-voice">
             <option value="">Voz predeterminada del navegador</option>
@@ -243,7 +248,6 @@
             <option value="2.5">2,5×</option>
             <option value="3">3×</option>
           </select>
-        </fieldset>
       </section>
 <section id="reading-more-voices-settings" aria-labelledby="reading-more-voices-settings-heading">
         <h4 id="reading-more-voices-settings-heading">Buscar más voces</h4>
@@ -253,15 +257,13 @@
           <p id="reading-external-voices-status" class="muted" role="status" aria-live="polite"></p>
         </section>
       </section>
-      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
+      <button type="button" class="reading-subview-back" data-reading-back>Volver a Ajustes</button>
     </section>
 
     <section id="reading-visual-view" class="panel reading-subview" hidden aria-labelledby="reading-visual-view-heading">
       <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
       <h3 id="reading-visual-view-heading" tabindex="-1">Presentación visual</h3>
-<section id="reading-visual-settings" aria-labelledby="reading-visual-settings-heading">
-        <fieldset>
-          <legend id="reading-visual-settings-heading">Presentación visual</legend>
+<section id="reading-visual-settings">
 
           <label for="reading-text-size">Tamaño del texto</label>
           <select id="reading-text-size">
@@ -321,9 +323,8 @@
             <input id="reading-high-contrast" type="checkbox">
             <label for="reading-high-contrast">Alto contraste</label>
           </div>
-        </fieldset>
       </section>
-      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
+      <button type="button" class="reading-subview-back" data-reading-back>Volver a Ajustes</button>
     </section>
 
     <section id="reading-library-web" class="panel" aria-labelledby="reading-library-heading">
@@ -553,37 +554,46 @@
   'use strict';
 
   const readingSection = document.getElementById('reading-section');
-  const subviews = [...document.querySelectorAll('.reading-subview')];
-  const mainChildren = readingSection
-    ? [...readingSection.children].filter(node => !node.classList?.contains('reading-subview'))
-    : [];
-  let previousHiddenState = new Map();
-  let lastReadingOpener = null;
+  const subviews = [...readingSection.querySelectorAll('.reading-subview')];
+  const mainChildren = [...readingSection.children].filter(node => !node.classList?.contains('reading-subview'));
+  let mainHiddenState = null;
+  const readingViewStack = [];
 
+  // Cada pantalla de ajustes se presenta sola. Volver recupera su pantalla
+  // anterior y el control que la abrió, sin recorrer biblioteca ni otros paneles.
   function showSubview(id, opener = null) {
-    lastReadingOpener = opener;
     const target = document.getElementById(id);
-    if (!target) return;
-
-    previousHiddenState = new Map(mainChildren.map(node => [node, node.hidden]));
-    mainChildren.forEach(node => { node.hidden = true; });
+    if (!target || !target.classList.contains('reading-subview')) return;
+    const current = subviews.find(view => !view.hidden) || null;
+    if (!current) {
+      mainHiddenState = new Map(mainChildren.map(node => [node, node.hidden]));
+      mainChildren.forEach(node => { node.hidden = true; });
+    }
+    readingViewStack.push({ viewId: current?.id || null, opener });
     subviews.forEach(view => { view.hidden = view !== target; });
     target.hidden = false;
-
     const heading = target.querySelector('h3[tabindex="-1"]');
     queueMicrotask(() => heading?.focus());
   }
 
   function showReadingMain() {
+    const previous = readingViewStack.pop();
     subviews.forEach(view => { view.hidden = true; });
-    mainChildren.forEach(node => {
-      node.hidden = previousHiddenState.has(node) ? previousHiddenState.get(node) : node.hidden;
-    });
-    previousHiddenState = new Map();
-
-    const target = lastReadingOpener?.isConnected ? lastReadingOpener : document.getElementById('reading-heading');
-    lastReadingOpener = null;
-    queueMicrotask(() => target?.focus());
+    if (previous?.viewId) {
+      const parent = document.getElementById(previous.viewId);
+      if (parent) parent.hidden = false;
+    } else if (mainHiddenState) {
+      mainChildren.forEach(node => {
+        node.hidden = mainHiddenState.has(node) ? mainHiddenState.get(node) : node.hidden;
+      });
+      mainHiddenState = null;
+    }
+    const focusTarget = previous?.opener?.isConnected
+      ? previous.opener
+      : (previous?.viewId
+          ? document.getElementById(previous.viewId)?.querySelector('h3[tabindex="-1"]')
+          : document.getElementById('reading-heading'));
+    queueMicrotask(() => focusTarget?.focus());
   }
 
   document.addEventListener('click', event => {

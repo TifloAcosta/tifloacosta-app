@@ -26,3 +26,10 @@ Validación iOS sin firma número 162: SUCCESS (simulador, iPhone, tests estáti
 Correcciones exclusivamente iOS: Ajustes como botón de entrada a carpeta aislada; subcarpetas Audio y voz, Presentación visual y General con Cerrar y retorno de foco; aviso ocioso «Lectura preparada» oculto; controles por documento reunidos; etiquetas y correspondencia de acciones VoiceOver de títulos mejoradas.
 No restaurar builds anteriores ni modificar Android/Web. Mantener Importar directo, PDF, MP3, DAISY, diccionario, marcas y contenido local.
 Solicitar solo un nuevo build TestFlight interno y comprobar procesamiento Apple y asignación al grupo antes de anunciarlo como disponible.
+
+
+Solicitud de TestFlight tras reparaciones de Biblioteca y Controles, 14/10/2026.
+Base validada exclusivamente iOS: SHA b721643131d3409f2ca5b4571751ca732fd0029a.
+CI #168: pruebas estáticas SUCCESS y dos BUILD SUCCEEDED comprobados en los logs del workflow 38615055648 (simulador e iPhone sin firma).
+Alcance: filtros independientes, biblioteca sin personalizaciones repetidas, avance/posición/autoapagado directos, exportación/cambio de título/eliminación dentro del libro, refuerzo de acciones de VoiceOver y pruebas.
+Preservar datos locales, Importar Archivos y todas las secciones anteriores. Destino: TestFlight interno Probadores TifloAcosta. Confirmar Apple VALID antes de decir disponible.

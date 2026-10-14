@@ -322,7 +322,11 @@
       const action = document.createElement('button');
       action.type = 'button';
       action.textContent = localized('Reconocer imagen o PDF con OCR', 'Recognize an image or PDF with OCR');
-      action.addEventListener('click', () => fileInput.click());
+      action.addEventListener('click', () => {
+        const nativeImport = document.getElementById('ios-reading-import');
+        if (nativeImport) nativeImport.click();
+        else fileInput.click();
+      });
       entry.append(description, action);
       fileLabel.before(entry);
     }

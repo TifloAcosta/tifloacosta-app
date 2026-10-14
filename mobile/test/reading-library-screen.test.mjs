@@ -155,11 +155,12 @@ test('import control explicitly lists every supported document family', async ()
 });
 
 
-test('library retains direct reading and offers an accessible per-document actions panel', async () => {
+test('library title opens accessible book options and retains an explicit reading action', async () => {
   const screen = await read('src/screens/reading-library.mjs');
-  assert.ok(screen.includes("() => onOpenBook?.(item.id)"), 'title continues to open the book');
+  assert.ok(screen.includes("() => actionsToggle.click()"), 'touching the title opens book options');
+  assert.ok(screen.includes("() => onOpenBook?.(item.id)"), 'Open for reading stays available inside the options');
   assert.ok(screen.includes("'reading-library-title'"));
-  assert.ok(screen.includes('Abrir para leer:'));
+  assert.ok(screen.includes('Opciones de:'));
   assert.ok(screen.includes('article.append(title);'));
   assert.ok(screen.includes('article.append(actionsToggle, details);'), 'additional actions must be reachable');
   assert.ok(screen.includes('Acciones de'), 'accessibility actions menu needs a discernible label');

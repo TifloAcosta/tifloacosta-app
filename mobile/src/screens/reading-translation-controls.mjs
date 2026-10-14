@@ -95,15 +95,11 @@ export function createReadingTranslationControls({
   const readerContainer = root?.parentElement?.querySelector?.('.reading-reader') || null;
   const actions = document.createElement('div');
   actions.className = 'reading-translation-actions';
-  actions.setAttribute('role', 'group');
-  actions.setAttribute('aria-label', text(t, 'readingBook.translationHeading', 'Traducción', 'Translation'));
+  // Do not add an extra VoiceOver group/region before the labelled buttons.
 
   const translateButton = document.createElement('button');
   translateButton.type = 'button';
   translateButton.textContent = text(t, 'readingBook.translate', 'Traducir', 'Translate');
-
-  const viewLabel = document.createElement('span');
-  viewLabel.textContent = text(t, 'readingBook.translationView', 'Versión', 'Version');
 
   const originalButton = document.createElement('button');
   originalButton.type = 'button';
@@ -123,7 +119,7 @@ export function createReadingTranslationControls({
   status.setAttribute('aria-live', 'polite');
   status.setAttribute('aria-atomic', 'true');
 
-  actions.append(translateButton, viewLabel, originalButton, translatedButton, status);
+  actions.append(translateButton, originalButton, translatedButton, status);
   root.prepend(actions);
 
   const translationClient = createReadingTranslationClient(TifloReadingLanguage);

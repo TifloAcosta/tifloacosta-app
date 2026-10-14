@@ -39,7 +39,7 @@ permissions:
 # Serializar las publicaciones de Actualidad y YouTube en GitHub Pages.
 # Ambos flujos escriben mobile-content.json; sin bloqueo compiten por main.
 concurrency:
-  group: pages
+  group: catalog-sync
   cancel-in-progress: false
 
 jobs:

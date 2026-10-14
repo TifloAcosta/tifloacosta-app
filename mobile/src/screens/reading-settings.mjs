@@ -119,7 +119,7 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
 
   const voiceReturn = document.createElement('button');
   voiceReturn.type = 'button';
-  voiceReturn.textContent = t('readingBook.returnToReading');
+  voiceReturn.textContent = document.documentElement.lang === 'en' ? 'Close' : 'Cerrar';
 
 
   const dictionary = document.createElement('details');
@@ -304,7 +304,7 @@ export function createReadingSettingsPanel({ root, readerContainer, client, book
 
   const visualReturn = document.createElement('button');
   visualReturn.type = 'button';
-  visualReturn.textContent = t('readingBook.returnToReading');
+  visualReturn.textContent = document.documentElement.lang === 'en' ? 'Close' : 'Cerrar';
   visualSection.append(visualReturn);
 
   root.append(voiceSection, visualSection);

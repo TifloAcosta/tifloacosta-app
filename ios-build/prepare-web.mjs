@@ -531,4 +531,36 @@ for (const file of ['app.js', 'videos.js', 'actualidad.js', 'actualidad-media.js
 }
 console.log('Validación sintáctica de scripts iOS completada');
 
+// Puerta de aceptación mínima antes de firmar o subir a TestFlight:
+ // verificamos la COPIA EMPAQUETADA y no solo el árbol de origen.
+ const iosIndex = await readFile(join(output, 'index.html'), 'utf8');
+ const iosMinimal = await readFile(join(output, 'ios-reader-minimal.js'), 'utf8');
+ const iosSelects = await readFile(join(output, 'ios-reader-selects.js'), 'utf8');
+ const iosParity = await readFile(join(output, 'ios-parity.js'), 'utf8');
+ const iosBridge = await readFile(join(output, 'ios-reader-native.js'), 'utf8');
+ const mustAdjust = [
+   'reading-navigation-unit', 'reading-document-progress-percent',
+   'reading-default-navigation', 'reading-library-filter',
+   'reading-voice', 'reading-voice-language', 'reading-text-size',
+   'reading-font-family', 'reading-font-weight', 'reading-line-spacing',
+   'reading-paragraph-spacing', 'reading-width', 'reading-theme',
+   'reading-document-voice', 'reading-document-text-size',
+   'reading-document-font-family', 'reading-document-line-spacing',
+   'reading-document-paragraph-spacing', 'reading-document-width',
+   'reading-document-theme'
+ ];
+ if (!iosIndex.includes('src="ios-reader-minimal.js"')
+     || !iosMinimal.includes("tr('Ajustes', 'Settings')")
+     || !iosMinimal.includes("tr('Cerrar', 'Close')")
+     || !iosSelects.includes('aria-valuetext')
+     || mustAdjust.some(id => !iosSelects.includes("'" + id + "'"))
+     || iosParity.includes('more.before(wrapper);')
+     || !iosBridge.includes('const picked = await plugin.pickDocument()')
+     || !iosBridge.includes("list.addEventListener('focusin'")
+     || !iosIndex.includes('id="reading-marks-new-type"')
+     || !iosIndex.includes('id="reading-pronunciation-settings"')) {
+   throw new Error('BLOQUEO PREVENTIVO iOS: regresión en diseño minimalista, controles VoiceOver, importación o marcas.');
+ }
+ console.log('Contrato mínimo de accesibilidad TifloLector iOS verificado en el paquete.');
+ 
 console.log('Archivos preparados para iOS:',copied);

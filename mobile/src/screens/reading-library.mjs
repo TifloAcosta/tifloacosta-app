@@ -635,24 +635,28 @@ export function renderReadingLibrary({
         const opening = details.hidden;
         details.hidden = !opening;
         actionsToggle.setAttribute('aria-expanded', String(opening));
+        title.setAttribute('aria-expanded', String(opening));
         if (opening) {
           if (!timeLoaded) void loadEstimatedTimes();
-          queueMicrotask(() => detailsHeading.focus());
+          queueMicrotask(() => detail.focus());
         } else {
-          actionsToggle.focus();
+          title.focus();
         }
       },
       'reading-library-actions-toggle'
     );
     actionsToggle.id = `reading-library-actions-${String(item.id).replace(/[^a-zA-Z0-9_-]/g, '-')}`;
+    // The title is the sole visible control for this book's options.
+    // Keep an internal toggle for native actions, but do not expose a duplicate button.
+    actionsToggle.hidden = true;
+    title.setAttribute('aria-controls', details.id);
+    title.setAttribute('aria-expanded', 'false');
     actionsToggle.setAttribute('aria-controls', details.id);
     actionsToggle.setAttribute('aria-expanded', 'false');
-    const detailsHeading = document.createElement('h3');
-    detailsHeading.tabIndex = -1;
-    detailsHeading.textContent = item.title || t('readingLibrary.untitled');
 
     const detail = document.createElement('p');
     detail.className = 'muted';
+    detail.tabIndex = -1;
     const author = item.author ? `${item.author}. ` : '';
     detail.textContent = `${author}${formatLabel(item.format)}. ${stateLabel(item, t)}. ${progressLabel(item, t)}`;
 
@@ -983,12 +987,12 @@ export function renderReadingLibrary({
       () => {
         details.hidden = true;
         actionsToggle.setAttribute('aria-expanded', 'false');
-        actionsToggle.focus();
+        title.setAttribute('aria-expanded', 'false');
+        title.focus();
       }
     );
 
     details.append(
-      detailsHeading,
       detail,
       progressLabelElement,
       progress,

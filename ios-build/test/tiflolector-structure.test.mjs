@@ -35,9 +35,11 @@ test('library renders document title AND the settings/actions panel', () => {
   assert.match(web, /remove\.addEventListener\('click', \(\) => \{ void deleteSavedBook\(book\.id\); \}\)/);
 });
 
-test('reading settings are collapsed initially; paste is not an active entry point', () => {
-  assert.match(html, /<details id="reading-settings-disclosure"/);
-  assert.doesNotMatch(html, /<details id="reading-settings-disclosure"[^>]+open(?:\s|>)/);
+test('reading settings open in an isolated accessible view; paste is not an active entry point', () => {
+  assert.match(html, /<section id="reading-settings-disclosure"/);
+  assert.match(html, /id="reading-settings-summary"[^>]*data-reading-view="reading-settings-web"/);
+  assert.match(html, /id="reading-settings-web"[^>]*hidden/);
+  assert.match(html, /data-reading-view="reading-general-view"/);
   assert.match(html, /<div hidden aria-hidden="true">\s*<label id="reading-paste-label"/);
 });
 

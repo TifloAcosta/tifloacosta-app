@@ -76,13 +76,7 @@ replaceOnce(
 );
 replaceOnce(
   "  setupPronunciationDictionary();\n  localize();",
-  "  window.TifloIOSBookActions = {\n    hasSavedBook: () => Boolean(currentBookId),\n    exportCurrent: format => currentBookId ? exportSavedBook(currentBookId, format) : Promise.resolve(false),
-    exportBook: (id, format='original') => id ? exportSavedBook(id, format) : Promise.resolve(false),
-    async deleteBook(id) {
-      if (!id || !libraryClient) return false;
-      await deleteSavedBook(id);
-      return !(await libraryClient.openBook(id))?.book;
-    },\n    async renameCurrent(value) {\n      const name = String(value || '').trim();\n      if (!name || !currentBookId || !libraryClient) return false;\n      try {\n        const opened = await libraryClient.openBook(currentBookId);\n        if (!opened?.book) return false;\n        const saved = await libraryClient.updateBookMetadata({ ...opened.book, title: name });\n        if (!saved) return false;\n        els.title.textContent = name;\n        await renderLibrary();\n        return true;\n      } catch { return false; }\n    },\n    async deleteCurrent() {\n      if (!currentBookId || !libraryClient) return false;\n      const id = currentBookId;\n      await deleteSavedBook(id);\n      return !(await libraryClient.openBook(id))?.book;\n    }\n  };\n  setupPronunciationDictionary();\n  localize();"
+  "  window.TifloIOSBookActions = {\n    hasSavedBook: () => Boolean(currentBookId),\n    exportCurrent: format => currentBookId ? exportSavedBook(currentBookId, format) : Promise.resolve(false),\n    exportBook: (id, format='original') => id ? exportSavedBook(id, format) : Promise.resolve(false),\n    async deleteBook(id) {\n      if (!id || !libraryClient) return false;\n      await deleteSavedBook(id);\n      return !(await libraryClient.openBook(id))?.book;\n    },\n    async renameCurrent(value) {\n      const name = String(value || '').trim();\n      if (!name || !currentBookId || !libraryClient) return false;\n      try {\n        const opened = await libraryClient.openBook(currentBookId);\n        if (!opened?.book) return false;\n        const saved = await libraryClient.updateBookMetadata({ ...opened.book, title: name });\n        if (!saved) return false;\n        els.title.textContent = name;\n        await renderLibrary();\n        return true;\n      } catch { return false; }\n    },\n    async deleteCurrent() {\n      if (!currentBookId || !libraryClient) return false;\n      const id = currentBookId;\n      await deleteSavedBook(id);\n      return !(await libraryClient.openBook(id))?.book;\n    }\n  };\n  setupPronunciationDictionary();\n  localize();"
 );
 await writeFile(path, source);
 const adapterPath = resolve(import.meta.dirname, 'www/shared/web-reading-library-adapter.mjs');

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-14T23:28:54.588Z",
+  "generatedAt": "2026-10-14T23:56:48.865Z",
   "resources": [
     {
       "kind": "resource",
@@ -5448,15 +5448,144 @@
   "news": [
     {
       "kind": "news",
-      "id": "9to5mac-40302dde3a0adf7b:en",
-      "sourceId": "9to5mac-40302dde3a0adf7b",
+      "id": "the-verge-a76effb9648b03f7:en",
+      "sourceId": "the-verge-a76effb9648b03f7",
       "lang": "en",
-      "title": "iOS 27 adds brand new widgets for your iPhone’s Home Screen",
-      "summary": "iOS 27 expands the available options to customize your Home Screen with new extra-large widgets that will be especially useful on iPhone Duo. Here’s the full list of 15+ pre-installed widgets iOS 27 introduces. more…",
-      "body": "iOS 27 expands the available options to customize your Home Screen with new extra-large widgets that will be especially useful on iPhone Duo. Here’s the full list of 15+ pre-installed widgets iOS 27 introduces.\n\nIf you’ve ever felt like the iPhone’s current widget options are too limited, iOS 27 could prove an especially exciting upgrade for you.\n\nThat’s because Apple has added a new ‘extra-large’ widget size .\n\nThe previous largest widget—‘large’—filled a 4×4 grid of slots on the Home Screen. Extra-large widgets stretch the max size to a 4×6 grid. That’s generally the size of a full Home Screen page.\n\nHere are the Apple apps that now offer extra-large widgets:\n\nBecause of the larger size, extra-large widgets can show more content than ever before. So if you have an especially packed calendar, to-do list, want to see more notes at once, or some other need, the new widgets are a great addition.\n\nYou can use these on any size iPhone, but they’re no doubt intended for the extra-large screen of the iPhone Duo.\n\nHave you been using the new widgets in iOS 27? Which are your favorites? Let us know in the comments.",
+      "title": "McKinsey is making job applicants spar with a fake AI client",
+      "summary": "Consulting firm McKinsey & Company is going to ask some entry-level candidates to have a 10-minute conversation with an AI simulation of a client as part of the interview process, according to The Wall Street Journal. The AI simulation \"aims to reflect 80% of the scenarios McKinsey consultants might encounter in their day-to-day work,\" the […]",
+      "body": "Consulting firm McKinsey & Company is going to ask some entry-level candidates to have a 10-minute conversation with an AI simulation of a client as part of the interview process, according to The Wall Street Journal .\n\nThe AI simulation \"aims to reflect 80% of the scenarios McKinsey consultants might encounter in their day-to-day work,\" the WSJ says, and it isn't designed to \"mimic an unhinged client.\" The AI won't score the candidates - humans will be in the room to assess the candidates and see how well they deal with the simulated situations.\n\nThe McKinsey tool will be in testing for undergrads seeking business-analyst jobs in \"some\" offi …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/news/1011654/mckinsey-ai-client-interview",
+      "publishedAt": "2026-10-14T22:53:31.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-1011c22f63041673:en",
+      "sourceId": "techcrunch-1011c22f63041673",
+      "lang": "en",
+      "title": "CedarDB wants one database to handle both transactions and analytics, as AI agents raise the stakes",
+      "summary": "Databases have traditionally been designed either for analytical data or for operational data. But database engine CedarDB supports both, and its approach has gained relevance with the rise of agentic AI.",
+      "body": "Databases have traditionally been built for one of two jobs. Analytical databases help businesses spot trends and answer questions, while operational databases store the day-to-day records of transactions, like orders and payments. But the Munich-based database engine CedarDB supports both, and its approach has gained relevance with the rise of agentic AI, its co-founder and CEO Moritz Sichert told TechCrunch.\n\nCedarDB has been in the making for the last decade, but its current momentum stems from enterprise companies whose existing data stacks may have been well suited to storing years of transactions, yet less suited to quickly answering analytical questions asked in natural language about that data.\n\nCedarDB’s questioning of the divide between analytical and operational queries is a by-product of its focus on efficiency. The company is a Technical University of Munich spinout based on Umbra , a research project that was built from scratch to beat legacy database engines at processing speed by making the most of modern hardware.\n\nWith five Umbra researchers as its co-founders, CedarDB kept that approach, promising faster performance without requiring more CPUs or processing power and memory — and requiring few changes from customers. In particular, its team made sure CedarDB was compatible with PostgreSQL , an open source database system.\n\nAccording to Sichert, this compatibility with the popular database helps keep switching costs low, since users don’t need to rebuild their apps. It also has an added advantage: CedarDB follows the logic LLMs are most familiar with as a result of their training.\n\nThat decision is one of many choices that proved lucky in retrospect, Sichert said. But it wasn’t all luck. In a blog post , co-founder Christian Winter detailed key priorities the team set after leaving academia, “such as reliability, fault tolerance and compatibility with popular tools.”\n\nNot all of the answers were obvious. The team strongly debated whether it should launch a cloud offering right away. In the end, it launched CedarDB Enterprise as an on-premise offering alongside its free version, CedarDB Community Edition, both announced in May of last year at the same time as it announced a €5.3 million seed funding round (approximately $6 million).\n\nThe cloud offering was only delayed, though, not abandoned. After conducting beta testing with users who had signed up for its waitlist, the company on Wednesday announced limited availability of CedarDB Cloud onstage at TechCrunch Disrupt , where it’s competing with 20 other startups vying to win TechCrunch’s prestigious Startup Battlefield competition.\n\nA fully managed, cloud-hosted version will likely help CedarDB expand its user base beyond large enterprises. It will also make it better prepared to compete with the likes of Databricks, a major data company that seems to have reached the same conclusion as the German startup.\n\nAt its Data + AI Summit in June, the American company cited “the agentic era” as the reason why it was launching LTAP , a new data architecture aiming to “[unify] transactions, analytics, streaming, and operational data on a single copy of storage in the lake.”\n\nIt is too early to tell how disruptive this might be, but Sichert interprets Databricks’ move as another sign that there is demand for what CedarDB does. The startup plans to serve its first cloud users with its current team of 14 people, but Sichert expects it will need a larger team once it gets more traction. “And this is where we would raise our next round.”\n\nPictured from left to right: CedarDB founders Moritz Sichert, Lukas Vogel, Philipp Fent, Dominik Durner, and Christian Winter.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/14/cedardb-wants-one-database-to-handle-both-transactions-and-analytics-as-ai-agents-raise-the-stakes/",
+      "publishedAt": "2026-10-14T22:00:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-d3a26bb49dd4721c:en",
+      "sourceId": "ars-technica-d3a26bb49dd4721c",
+      "lang": "en",
+      "title": "Fridge hack costing millions and sparking fires stemmed from poor security",
+      "summary": "Incident hitting 700 supermarkets exploited outdated devices exposed to the Internet.",
+      "body": "Earlier this week, a mass hack of refrigeration systems at an estimated 700 supermarkets throughout France caused them to suddenly malfunction, causing spoilage of untold tons of perishables and, in some cases, fires. As is now the norm, basic cybersecurity would have prevented it.\n\nFrench authorities say the systems, made up of entire fleets of refrigerators and freezers throughout a store, were hacked. More specifically, Internet-connected controllers that allow technicians to remotely administer the store-wide systems were compromised. The unknown attackers responsible then activated defrosters long enough for the fridges to reach temperatures as high as 50° Celsius (122° Fahrenheit). By the time the mass compromise was discovered, food was spoiled, and in some cases their electrical systems caught fire.\n\nMultiple security advisories and public research reports show that all three of the controller models reportedly hacked in the incident—sold by Danfoss of Denmark and Dixell and its parent company Copeland in the US—contained critical vulnerabilities that allow attackers to remotely log in to the devices with the same system rights as administrators. Until recently, Danfoss controllers, for instance, used a credential that changes each day. The password is generated by the publicly available firmware based on the date. A hacker who takes the time to analyze the code can do the same thing on any device that hasn’t received a recent update. Daily passwords are identical across models located in hundreds or thousands of stores.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/security/2026/10/fridge-hack-costing-millions-and-sparking-fires-stemmed-from-poor-security/",
+      "publishedAt": "2026-10-14T21:35:09.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-df4ed6854b2e84f4:en",
+      "sourceId": "techcrunch-df4ed6854b2e84f4",
+      "lang": "en",
+      "title": "Flock CEO says its microphones detect ‘just gunshots’ — its website says different",
+      "summary": "Langley’s comments come amid mounting scrutiny of Flock from privacy advocates, including the ACLU, and members of the public who are concerned about the misuse of its technology.",
+      "body": "Flock CEO Garrett Langley said the company’s gunshot-detection microphones detect “just gunshots,” but Flock’s website paints a far broader picture of what other ambient audio also gets picked up.\n\nSpeaking onstage at TechCrunch Disrupt , the co-founder of the surveillance company defended Flock’s audio-collection product called Gunshot Detection , which listens for gunshots and other ambient audio across nearby neighborhoods to provide “earlier awareness” to potential public safety events.\n\nFlock’s website says that the company’s audio systems can pinpoint gunfire instantly, while also being able to “detect street takeovers early to stop chaos before it escalates,” and “identify severe crashes in real time so help arrives faster.” It also says they can “expand awareness beyond gunfire with alerts for car crashes, fireworks, and sideshows.”\n\nThe company’s Gunshot Detection feature, announced last year, faced immediate pushback. In announcing the feature, Flock said the technology would listen out for sounds of “screaming.” Privacy groups condemned the company for listening for human voices, prompting the company to amend its website to instead say “sounds of human distress.” Flock later said it pulled the ability to detect “distress” altogether from its customers who tried it.\n\nDuring the interview, Langley pushed back against what he described as misinformation about his product, arguing that many of its critics misunderstand how its products work. The comments come as public opinion continues to shift against Flock and other license plate reading companies amid growing unease about mass surveillance — sentiments that were visible in San Francisco, where protesters gathered to voice their opposition outside the venue as Langley took the stage.\n\n“Most people don’t call 911 when they hear a gunshot, and so that’s why we built the product,” Langley told TechCrunch editor-in-chief Connie Loizos onstage. “And then some of our customers said, ‘Oh, we have these in parking lots. It would be great if we could get alerted if someone was being abducted, if someone was being harmed.’”\n\nLangley said that the idea seemed logical, so the company prototyped it and rolled it out to a couple of customers, but said that some people then had a lot of concerns. Langley conceded to making mistakes but that he was listening to his customers.\n\n“There’s only a couple customers that were prototyping it with us, and we said, ‘OK, great, it’s just going to do gunshots, plain and simple.’ If a gun goes off, we’ll notify, and if not, that’s all it’s going to listen to,” said Langley.\n\nWhen asked about the contradiction between his remarks and the company’s marketing materials that say the audio systems can detect more than gunshots, he responded, “It’s just gunshots.”\n\nWhen reached by TechCrunch, Flock spokesperson Paris Lewbel said: “Flock’s gunshot detection technology is primarily used to detect gunfire but is also capable of detecting fireworks, sideshows, and potential car crashes. CEO Garrett Langley’s remarks were intended to emphasize that Flock’s Audio Detection technology is not designed to monitor conversations or analyze speech and does not currently detect human screaming or distress.”\n\nAn FAQ section of the website notes that “in addition to gunshots, Flock Gunshot and Audio Detection can detect fireworks, sideshows, and other disruptive community events.” It goes on to state that the company’s “detection library is continually expanding to include emerging threats that are relevant” to customers’ specific needs.\n\nLangley stated that the number of Flock’s microphones is comparable to ShotSpotter, which as of 2024 had about 25,000 microphones, per reporting by Wired .\n\nLangley’s comments come amid mounting scrutiny of Flock from privacy advocates, including the ACLU, and members of the public who are concerned about the misuse of its technology, with some going so far as destroying the surveillance cameras . The remarks also come as Texas and Florida have moved to end their relationships with Flock, and Amazon’s Ring has ended its partnership with the company.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/14/flock-ceo-says-its-microphones-detect-just-gunshots-its-website-says-different/",
+      "publishedAt": "2026-10-14T21:30:33.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-166cff30e469d6f0:en",
+      "sourceId": "engadget-166cff30e469d6f0",
+      "lang": "en",
+      "title": "Iowa, Nebraska and six other states are suing OpenAI for endangering children",
+      "summary": "The lawsuits cover everything from the design of ChatGPT to the company's recent issues with rogue agents.",
+      "body": "The lawsuits cover everything from the design of ChatGPT to the company's recent issues with rogue agents.\n\nIn a coordinated effort, eight states have filed lawsuits against OpenAI alleging the company has violated state-level consumer protection laws and endangered children. As Reuters first reported , Attorneys General from Iowa, Nebraska, Kansas, West Virginia, Arkansas, Arizona, Idaho and Montana each filed in their respective state courts, but with the shared goals of changing how OpenAI develops its models and advertises their capabilities, and forcing the company to pay for the harm it's allegedly caused.\n\nThe lawsuits claim OpenAI is misleading customers about the safety of its AI products, not just in their capacity to provide incorrect information or potentially enable users to harm themselves and others, but also because AI agents themselves are capable of breaking the law. For example, both Iowa and Nebraska cite OpenAI's now multiple instances of rogue agent behavior, including the Hugging Face hack . They also point to instances of ChatGPT allegedly enabling a teen's death by suicide and the chatbot providing incorrect medical information that led to a user's overdose , incidents that have also led to separate wrongful death suits against the company. Some states also take issue with OpenAI retaining data from underage users.\n\nEngadget has asked OpenAI to comment on the state lawsuits. We'll update this article if we hear back.\n\nThe desired remedies for OpenAI's behavior vary from state to state due to the patchwork nature of consumer protection and child protection laws in the US. Outside of financial penalties, the states want OpenAI to clearly disclose the risks of its products, stop practices the states consider deceptive and comply with existing laws. Some states, like Arkansas , are also asking the court to halt \"testing of advanced AI models until adequate safeguards are implemented.\"\n\nOpenAI has rolled out a series of parental controls and child protection features to try to address some of the most immediate risks posed by its chatbot. It also backed the Kids Online Safety Act , a bill that, if made law, could introduce several mandatory design changes to the company's products. The company's efforts to address the potential for its AI to break rules and \"escape containment\" have been harder to pin down, though. OpenAI announced it would slow the development of its frontier models in August to ensure their safety and the company signed on to a voluntary safety pact with other AI companies organized by the White House in September. It's not clear if either of these changes have actually made the company's AI development process safer.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2287111/iowa-nebraska-and-six-other-states-are-suing-openai-for-endangering-children/",
+      "publishedAt": "2026-10-14T21:23:27.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-20e9955d3f7dcf20:en",
+      "sourceId": "9to5mac-20e9955d3f7dcf20",
+      "lang": "en",
+      "title": "9to5Mac Daily: October 14, 2026 – Apple Home Collection, iOS 27.2 beta 4",
+      "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily . more…",
+      "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily .\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show.",
       "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/14/ios-27-adds-brand-new-widgets-for-your-iphones-home-screen/",
-      "publishedAt": "2026-10-14T20:36:16.000Z",
+      "originalUrl": "https://9to5mac.com/2026/10/14/daily-october-14-2026/",
+      "publishedAt": "2026-10-14T21:17:25.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "android",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-1ee27092313b073e:en",
+      "sourceId": "9to5mac-1ee27092313b073e",
+      "lang": "en",
+      "title": "Apple Invites update makes it easier to manage guests and track RSVPs",
+      "summary": "The Apple Invites app got updated yet again today, with new features including RSVP improvements and a larger Home Screen widget. Here are the details. more…",
+      "body": "The Apple Invites app got updated yet again today, with new features including RSVP improvements and a larger Home Screen widget. Here are the details.\n\nJust two weeks after gaining full-resolution photo sharing and new Image Playground capabilities, the Apple Invites app got updated yet again today, with improvements to guest management and Home Screen widgets.\n\nWith today’s update, the app can now leverage the new extra-large widget introduced with iOS 27 , and makes it easier to track RSVPs.\n\nHere’s Apple’s the full release notes for Apple Invites v 1.12.1:\n\nTo learn more about Apple Invites, check it out on the App Store .",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/14/apple-invites-update-makes-it-easier-to-manage-guests-and-track-rsvps/",
+      "publishedAt": "2026-10-14T21:15:32.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-6f679347627d6b02:en",
+      "sourceId": "the-verge-6f679347627d6b02",
+      "lang": "en",
+      "title": "Eight states sue OpenAI, saying ChatGPT isn’t safe for kids",
+      "summary": "OpenAI is facing a new wave of lawsuits from eight US states that accuse the company of harming children and misleading customers about the safety of ChatGPT, as reported earlier by Reuters. The lawsuits, filed separately by Iowa, Kansas, Nebraska, West Virginia, Arkansas, Arizona, Idaho, and Montana, allege OpenAI unlawfully put profits over safety when […]",
+      "body": "OpenAI is facing a new wave of lawsuits from eight US states that accuse the company of harming children and misleading customers about the safety of ChatGPT, as reported earlier by Reuters . The lawsuits, filed separately by Iowa, Kansas, Nebraska, West Virginia, Arkansas, Arizona, Idaho, and Montana, allege OpenAI unlawfully put profits over safety when developing ChatGPT.\n\nThe string of complaints claims that OpenAI violated local consumer protection laws by failing to warn customers about the dangers of ChatGPT, citing several lawsuits filed by the family members of teens and adults that allege the AI chatbot played a role in their loved …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1011500/openai-state-lawsuits-chatgpt-safety",
+      "publishedAt": "2026-10-14T21:11:28.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-bf7fa30fd930b111:en",
+      "sourceId": "9to5mac-bf7fa30fd930b111",
+      "lang": "en",
+      "title": "Apple showcases iPad Pro and iPhone 18 Pro Max’s role in ‘landmark fashion show’",
+      "summary": "Apple today shared a behind-the-scenes look at “From Earth to Sky,” a fashion show in Turkey that was designed with an iPad Pro and filmed using an iPhone 18 Pro Max. Here are the details. more…",
+      "body": "Apple today shared a behind-the-scenes look at “From Earth to Sky,” a fashion show in Turkey that was designed with an iPad Pro and filmed using an iPhone 18 Pro Max. Here are the details.\n\nFrom time to time, Apple’s Newsroom highlights interesting uses of the company’s products in projects that help illustrate the practical applications of their more advanced and professional hardware and software features.\n\nToday, Apple shared a fascinating look at “From Earth to Sky,” a fashion show created by German-born designer Bünyamin Aydın to celebrate the 15th anniversary of Turkish fashion brand Les Benjamins.\n\nAydın’s creative process relies heavily on the iPad Pro and the Apple Pencil Pro, paired with apps such as Freeform and Procreate .\n\nAydın’s creative process seldom takes place behind a desk, so he appreciates the flexibility iPad Pro offers with its thin, light form factor and battery life that can last him up to two days. “It’s the ultimate workstation on the go,” Aydın says. “That gives me freedom.”\n\nFor this specific project, Aydın says he used Freeform to organize photographs, fabric references, and early designs into mood boards that could be shared with his team, while Procreate played a central role in designing the three custom-built hot-air balloons featured in the show.\n\nAs for where the new iPhone 18 Pro Max came in, French filmmaker Neels Castillon used the device to capture the fashion show, including footage shot with custom-built drones carrying two iPhones each.\n\nAs feeds from the whirling drones come into Castillon’s production control center, synchronizing them begins right there on location. He reviews footage and makes selections on MacBook Pro with M4 Max; its nano-texture display helps reduce glare from the sun overhead.\n\nWhile the post is obviously intended to help promote the technical capabilities of Apple’s current product line-up, it also offers a really interesting look at a creative project from a world that very few of us have contact with.\n\nApple says its @apple Instagram account will begin showcasing “From Earth to Sky” starting today, but you can also check out a behind-the-scenes video, photos, and more details about the project here .",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/14/apple-showcases-ipad-pro-and-iphone-18-pro-maxs-role-in-landmark-fashion-show/",
+      "publishedAt": "2026-10-14T21:02:09.000Z",
       "categories": [
         "apple",
         "tecnologia-general"
@@ -5464,17 +5593,16 @@
     },
     {
       "kind": "news",
-      "id": "9to5mac-fd6e75ddc1b47887:en",
-      "sourceId": "9to5mac-fd6e75ddc1b47887",
+      "id": "techcrunch-c19dbcbdbe0fe9e7:en",
+      "sourceId": "techcrunch-c19dbcbdbe0fe9e7",
       "lang": "en",
-      "title": "Apple Intelligence reportedly coming to China in December, but without Siri AI",
-      "summary": "Bloomberg reports that Apple plans to finally launch Apple Intelligence in China in December, although some important features could still be missing. Here are the details. more…",
-      "body": "Bloomberg reports that Apple plans to finally launch Apple Intelligence in China in December, although some important features could still be missing. Here are the details.\n\nEarlier today, a report from the South China Morning Post claimed that Chinese regulators had approved the use of Alibaba’s AI models to power Apple Intelligence, following preliminary approval for the platform’s rollout in July.\n\nThe report noted that the timing of the approval was particularly relevant, as the iPhone Duo is scheduled to launch in China next week.\n\nNow, Bloomberg reports that Apple “is planning to launch Apple Intelligence in the region in December as part of an upcoming iOS 27.3 update,” although the launch “will exclude the new Siri AI assistant and other features announced this year,” according to the publication’s sources.\n\nThe move comes after a lengthy and complicated effort to bring Apple Intelligence to China, where local regulations governing AI-generated content, security assessments, and algorithm registration have forced Apple to take a different approach than in other markets.\n\nHere’s Bloomberg :\n\nIn order to get Apple Intelligence approved, the company had to make some concessions. Unlike in other countries, the platform has guardrails developed with China’s Alibaba Group Holding Ltd., including a filter that allows the government to approve ongoing updates to the AI models. Apple is also working with Baidu Inc. on features related to search and Siri.\n\nOn Sept. 29, Apple received Chinese permits allowing recent iPhones to support the use of Apple Intelligence and Alibaba AI models, including Tongyi Wanxiang and Qwen.\n\nThe report notes that Apple Intelligence’s launch in China will not feature “the company’s in-house image-generation tools,” while certain “features for generating text will also be limited in some applications.”\n\nAccording to Bloomberg , the initial rollout will include Genmoji for creating custom emoji, Apple’s AI-powered notification summaries, writing tools, and the Clean Up feature in Photos, which lets users remove unwanted objects from images.\n\nThe report notes that it is unclear whether these features will be enough to win over Chinese consumers, as local smartphone makers have already introduced their own AI capabilities:\n\nWith AI services proliferating on rival phones from Huawei Technologies Co., Xiaomi Corp., Oppo Guangdong Mobile Telecommunications Corp., Vivo Mobile Communication Co. and others in China, it’s unclear how much Apple will benefit from launching a two-year-old set of relatively basic AI features in the country.\n\nInterestingly, today’s report came just one day after Apple said in the footnotes of its HomeView announcement that it is “working constructively with the EU in an attempt to find a path forward” to launch Siri AI in Europe, where the assistant also remains unavailable due to regulatory issues.\n\nTo read Bloomberg ‘s full report, follow this link .",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/14/apple-intelligence-reportedly-coming-to-china-in-december-but-without-siri-ai/",
-      "publishedAt": "2026-10-14T20:20:14.000Z",
+      "title": "Colossal Biosciences announces new AI platform to help accelerate de-extinction efforts",
+      "summary": "Colossal announced a new AI platform to help accelerate its de-extinction efforts and Peter Diamandis has launched a new fund to back startups who use it.",
+      "body": "Colossal Biosciences announced Wednesday a new AI platform to help accelerate its efforts to bring back extinct species, TechCrunch can exclusively report.\n\nThe platform, called GenoMorph, uses advanced 3D morphology, comparative genomics, and developmental biology to identify genes that could be edited in de-extinction projects with limited gene data. The company is using it as part of its effort to bring back the dodo bird, for which there are limited genomes to work with.\n\nFor example, the company is working with only one dodo genome compared to the 100 genomes it has been able to obtain as part of its woolly mammoth de-extinction project. DNA from the woolly mammoth is more plentiful because the colder climates the animal lived in preserve the DNA better than the tropics where the dodo lived, the company said.\n\n“Normally, scientists can compare many genomes to understand which genetic differences are responsible for certain traits,” Colossal CEO and co-founder Ben Lamm told TechCrunch. “We don’t have that luxury with ancient DNA from extinct species whose DNA is severely limited, and we can only get a small number of complete genomes.”\n\nTo build GenoMorph, Lamm said the company collected a bunch of developmental data from “chickens, quail, ducks, and pigeons,” and combined it with the “genetic information and 3D skull measurements from more than 70 bird species.” He said it took more than a year of work to build this platform, which also builds on the company’s years of work in de-extinction.\n\n“The AI learns which regions of DNA are active as different birds develop their beaks and facial structures, and uses that information to predict which genetic switches may have given the dodo its iconic appearance.” He said to think of the platform as a “treasure map for the dodo genome,” where, rather than searching through a bunch of potential genetic differences, GenoMorph can help the Colossal team find only the genetic differences that matter.\n\n“So far we’ve identified approximately 2,300 promising DNA editing targets for the dodo cranial facial morphology that we can now test in the lab,” he continued. He said GenoMorph will help the company tackle one of its biggest bottlenecks in trying to de-extinct animals — finding out which changes actually make an extinct species unique. But Lamm said scientists also need to test whether those edits can create the physical traits they need.\n\n“We’ve developed a new system that uses lipid nanoparticles to deliver gene-editing tools directly into developing bird embryos,” he said. This will help the team see how certain genetic changes impact the development of a bird “without having to wait through an entire breeding cycle that requires birds to reach sexual maturity.”\n\nThe company also announced Wednesday that its Nicobar pigeon colony now has 36 birds and that it has successfully created the essential cells that become eggs and sperm.\n\n“Because the Nicobar pigeon is the dodo’s closest living relative, those cells are a critical part of our strategy for creating birds that carry dodo traits,” he said. Next, the company is hoping to prove what GenoMorph predicts in a lab. “What’s most exciting is that we’re reaching a point where the different technologies we’ve been developing are starting to converge together and help other projects we are working on in a completely different part of the tree of life,” Lamm continued.\n\nWhen asked whether it was safe to edit genes this way, Lamm said the point of developing a technology like GenoMorph is to make genetic engineering “more precise, controlled, and testable.” He said the product doesn’t edit genes itself, but helps their team identify which genetic changes are worth investigating.\n\n“Identifying a potential edit doesn’t mean we immediately introduce it into an animal or assume it’s safe,” he continued. “The more precisely we can identify and validate these changes, the more informed our decisions become throughout the process.”\n\nMeanwhile, Colossal Biosciences’ latest technology has already obtained a vote of confidence from XPRIZE founder Peter Diamandis. Diamandis, who is an investor in Colossal, announced on Wednesday that he has founded a new VC firm, NeoGenesis Capital, to back companies using Colossal Biosciences’ programmable biology platform across health, agriculture, and conservation.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/14/colossal-biosciences-announces-new-ai-platform-to-help-accelerate-de-extinction-efforts/",
+      "publishedAt": "2026-10-14T21:00:00.000Z",
       "categories": [
-        "apple",
         "tecnologia-general",
         "ia-accesibilidad"
       ]
@@ -5497,6 +5625,22 @@
     },
     {
       "kind": "news",
+      "id": "ars-technica-36cf658cf1c7b6fb:en",
+      "sourceId": "ars-technica-36cf658cf1c7b6fb",
+      "lang": "en",
+      "title": "Software development and rules stability: Prototype racing in 2030",
+      "summary": "With the end of IMSA’s 2026 season, we have thoughts about the future of the sport.",
+      "body": "The rising tide that has been the Drive to Survive effect has lifted more boats in motorsport than simply Formula 1’s. Sportscar racing is enjoying its own surge in popularity internationally at races like Le Mans in France, but also in North America in IMSA’s WeatherTech Sportscar Championship. For one thing, multi-hour, multi-class racing lends itself better to the age of streaming and second screens than it did linear broadcast TV, and fans are taking advantage of that: IMSA’s audience grew by more than a third domestically and almost a quarter internationally last year.\n\nHaving some of the coolest-looking cars racing today certainly helps, whether that’s the (mostly) hybrid prototypes or the GTs, racing versions of road-going cars from Porsche, Ferrari, and others. And it definitely helps that fan access at the races is virtually unmatched, with open paddocks and grid walks that now see huge crowds get up close to the cars just before the start of each race.\n\n“I think we're just scratching the surface,” said IMSA President John Doonan. “I think besides the people that are here on the ground, the people watching, people engaging with us on social media, I'm seeing the passion come out more. Just on the grid walk, these fans coming up and being so excited to be here.” The series has certainly been making an effort, among other things getting local high school students exposed to the industry and starting a partnership to train more mechanics with ASE.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/cars/2026/10/software-development-and-rules-stability-prototype-racing-in-2030/",
+      "publishedAt": "2026-10-14T19:44:26.000Z",
+      "categories": [
+        "tecnologia-general",
+        "programas-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "the-verge-8a81ac34c5de66df:en",
       "sourceId": "the-verge-8a81ac34c5de66df",
       "lang": "en",
@@ -5506,22 +5650,6 @@
       "sourceName": "The Verge",
       "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1011311/the-ai-race-is-back-on",
       "publishedAt": "2026-10-14T19:06:03.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-82b3343d289d83c5:en",
-      "sourceId": "the-verge-82b3343d289d83c5",
-      "lang": "en",
-      "title": "Now that Character.AI is going bankrupt, what happens to all of its users’ data?",
-      "summary": "New York Attorney General Letitia James revealed a years-long multi-state investigation against Character.AI as they now seek to require protections on consumer data sold through its bankruptcy proceeding. James is among 40 bipartisan AGs who filed a notice of interest in Character.AI's bankruptcy case \"to put all parties on notice of the regulatory issues that […]",
-      "body": "New York Attorney General Letitia James revealed a years-long multi-state investigation against Character.AI as they now seek to require protections on consumer data sold through its bankruptcy proceeding.\n\nJames is among 40 bipartisan AGs who filed a notice of interest in Character.AI's bankruptcy case \"to put all parties on notice of the regulatory issues that will need to be addressed in any sale or transfer of the Debtor's business or assets.\" Character.AI announced Tuesday it was filing for Chapter 11 and selling some assets to Disney. But the AGs warn there could be serious risk involved in the transfer of the technology due to the \"hi …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/policy/1011417/new-york-ag-characterai-bankruptcy",
-      "publishedAt": "2026-10-14T18:47:54.000Z",
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
@@ -5545,70 +5673,6 @@
     },
     {
       "kind": "news",
-      "id": "the-verge-222b3a749050e057:en",
-      "sourceId": "the-verge-222b3a749050e057",
-      "lang": "en",
-      "title": "As a TV enthusiast, I was hoping for more from the Apple TV 4K",
-      "summary": "It's been four long years since the last Apple TV 4K was released, and in that time there have been lots of hopes and dreams for features in whatever comes next. A new chip, 4K/120Hz support, audio passthrough, a remote locator, better home control integration - the 2022 Apple TV 4K is a great box, […]",
-      "body": "It's been four long years since the last Apple TV 4K was released, and in that time there have been lots of hopes and dreams for features in whatever comes next. A new chip, 4K/120Hz support, audio passthrough, a remote locator, better home control integration - the 2022 Apple TV 4K is a great box, but there's still plenty of room for improvement. With the fourth-gen Apple TV 4K announced on Tuesday, some of those hopes were met, while others were unfortunately left out.\n\nColoring the announcement is the device's price. Apple eliminated the cheaper 64GB, Wi-Fi-only model, leaving just the 128GB, Wi-Fi and Ethernet model - and bumped up its p …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1011324/apple-tv-4k-missed-features",
-      "publishedAt": "2026-10-14T18:38:59.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-34514db745d464d0:en",
-      "sourceId": "techcrunch-34514db745d464d0",
-      "lang": "en",
-      "title": "YouTube Music launches new labels as AI-generated music floods streaming platforms",
-      "summary": "The label will appear on the player page and include songs entirely generated by AI or partially, such as involved in composition and vocals.",
-      "body": "YouTube Music announced Wednesday the rollout of a new labeling system aimed at improving transparency around songs created with the help of generative AI. Now listeners will be able to easily identify tracks created using AI, including those involved in composition and vocals.\n\nThe label will appear on the player page. Clicking on this label provides additional information about the specific role of AI in the track’s creation.\n\nNotably, these labels will also extend to the main YouTube app.\n\nYouTube said it collaborated with various music partners and deployed its own detection tools to identify AI-generated music. According to its help page , partners using YouTube can declare their work’s use of generative AI through one of three designations: Fully Gen AI, Partly Gen AI, or No Gen AI.\n\n“Fully Gen AI” applies to tracks that are entirely generated by AI, while “Partly Gen AI” refers to works where artists may have incorporated AI-generated components but added their own live elements. Tracks edited using pitch-correction tools such as Auto-Tune fall under the “No Gen AI” category.\n\nThe move comes as AI-generated music rapidly expands across streaming services, and many platforms are adopting their own approaches. For instance, Apple Music has plans to introduce “Made With AI” labels as part of its AI Transparency Tags later this year. Spotify also has AI labels, as well as a music spam filter.\n\nDeezer has taken one of the stricter stances, reporting in July that it was receiving nearly 90,000 fully AI-generated tracks daily. The platform labels detected AI-generated music and excludes it from algorithmic recommendations and editorial playlists, while also withholding royalties from fraudulent streams. The company is also working on an option to let users filter out AI-generated music .\n\nTIDAL also labels recordings it identifies as entirely AI-generated, allows listeners to disable them, and excludes these recordings from royalty attribution.\n\nYouTube, by contrast, is focusing on disclosure rather than blanket restrictions. Its new labels are intended to inform listeners about AI’s role in music creation, but AI involvement alone doesn’t make a track ineligible for monetization. YouTube even experiments with AI-powered music creation, including its tool Dream Track , which lets select creators generate soundtracks featuring AI-generated versions of participating artists’ voices.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/14/youtube-music-launches-new-labels-as-ai-generated-music-floods-streaming-platforms/",
-      "publishedAt": "2026-10-14T18:23:46.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-64f2a771d2ea018d:en",
-      "sourceId": "9to5mac-64f2a771d2ea018d",
-      "lang": "en",
-      "title": "Here’s how much iPhone Duo costs to repair out-of-warranty",
-      "summary": "iPhone Duo pre-orders kick off this Friday ahead of shipping next week. If you’re wondering whether to get AppleCare+ or not, here are the iPhone Duo’s out-of-warranty repair costs. more…",
-      "body": "iPhone Duo pre-orders kick off this Friday ahead of shipping next week. If you’re wondering whether to get AppleCare+ or not, here are the iPhone Duo’s out-of-warranty repair costs.\n\niPhone Duo is by far Apple’s most expensive iPhone ever. It starts at $1,999, and the most expensive 2TB model will set you back $3,199.\n\nStill, AppleCare+ adds another $19.99/month to the purchase price, which some users might not want to shell out for. But what kind of repair costs does Apple charge without AppleCare?\n\nHere are the out-of-warranty repair costs for iPhone Duo from Apple’s website :\n\nEstimated service costs\n\nThese are only “estimated” because while Apple uses these fees for product repairs, it says that “Apple Authorized Service Providers can set their own service fees and will provide their own estimate.”\n\nAdding AppleCare+ reduces these costs dramatically. A few examples: theft or loss is only $149 with AppleCare+, battery service is free, front display damage is just $29 and inner display damage $99.\n\nDo you plan to get AppleCare+ for your iPhone Duo? Why or why not? Let us know in the comments.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/14/heres-how-much-iphone-duo-costs-to-repair-out-of-warranty/",
-      "publishedAt": "2026-10-14T18:11:00.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-dc9129ebe200c1f6:en",
-      "sourceId": "techcrunch-dc9129ebe200c1f6",
-      "lang": "en",
-      "title": "Apate sends AI agents undercover to get scammed so they can gather fraud intelligence",
-      "summary": "Most companies use AI agents to ship products faster or speed up workflows. Apate.ai sends them undercover to get scammed.",
-      "body": "Most companies use AI agents to ship products faster or to speed up workflows. Apate.ai sends them undercover to get scammed.\n\nFounded in 2024 on the basis of research done in Macquarie University in Sydney, the Australian startup deploys thousands of AI agents that masquerade as innocent victims. The agents can answer scam calls, respond to shady messages and emails, follow phishing links, and join social media groups to bait fraudsters. They pretend to be people of all stripes, sporting different ages, genders, and accents, and speak various languages as they try to keep scammers engaged long enough to learn something useful.\n\nThe company says its fleet of agents has so far wasted 17 years of scammers’ time across 2.5 million conversations. More importantly for Apate’s customer base of banks, telecom companies, government agencies, and utilities, the undercover agents try to get scammers to reveal things about themselves that are usually learned only after a victim has been scammed: bank accounts, crypto wallets, phone numbers, malicious websites, the brands they’re impersonating, and other details about the scams they’re running.\n\nApate, one of the finalists at this year’s Startup Battlefield 200 at TechCrunch Disrupt, then feeds that information to its customers, who use it to inform their anti-fraud measures and initiatives. (The company will pitch a panel of VC judges at Disrupt , which is taking place this week at Moscone West in San Francisco through Thursday, October 15.)\n\nIt’s a curious evolution of scam-baiting, but it’s not so surprising given how much AI has empowered scammers and hackers. The FBI received more than 22,000 complaints of AI-related crimes in 2025, which resulted in about $893 million in losses. More than $632 million of that came from investment scams, in which the FBI says fraudsters use AI to run conversations, and deepfake the voices and appearances of celebrities, executives, and trusted figures.\n\nFor a long time, people have made a hobby out of deliberately stringing scammers along — sometimes hilariously, like getting scammers to read aloud entire books , or even to get ridiculous tattoos . Now, with AI growing increasingly capable, the tables are turning.\n\nCuriously, the idea behind Apate was sparked by a real scam call.\n\nSeveral years ago, Apate’s founder and CEO Dali Kaafar was at a family picnic when he got a call from an unknown number. Realizing it was a scammer on the line, he decided to play dumb for the benefit of his kids and managed to keep the call going for 44 minutes.\n\nEveryone had a laugh, but Kaafar noticed that those were 44 minutes the scammer had not spent calling a real victim. It was also 44 minutes of his wasted time, which led him to wonder: Could he automate it, and in the process, learn something useful?\n\nThat idea eventually led to research work at his job at Macquarie University, where Kaafar and his colleagues used machine learning and natural language processing to uncover the content of scam calls, and develop better ways to detect and prevent scams.\n\n“Most of the industry works after the fact. Telcos block numbers, but scammers just get new ones. Banks watch transactions, but by then the scammer has already reached the customer. We go to the scammer directly and get the information before anyone gets hurt,” Brad Joffe, co-founder and chief commercial officer, told TechCrunch. “Our AI agents talk to tens of thousands of scammers every day across calls, messages, email, and the web. What we offer our customers is what comes out of those conversations, and what they can do with it.”\n\nJoffe said Apate uses both frontier models and its own fine-tuned models to power its agents and analysis. The company trains its models on conversations its agents have had with scammers, as well as the research Kaafar did at Macquarie.\n\nIn addition to access to Apate’s fleet of agents, customers get access to an insights portal that offers intelligence and analytics on scams targeting their end users or employees, brands, products, and more. Customers can even assign these agents particular missions, such as obtaining a bank account number or crypto-wallet address. Its text agents can search forums, investment groups, and social platforms for potential scam activity, and can then enter conversations with a fabricated identity to surface scammers’ details.\n\nThe startup’s customers include Commonwealth Bank of Australia, TPG Telecom, as well as other utilities, telcos, and government agencies. Joffe said TPG has diverted nearly 590,000 calls to Apate’s agents, Commonwealth has seen a 76% drop in publicly reported scam losses, and an unnamed Australian bank the startup works with has used its outbound agents to disrupt 22 scam campaigns.\n\nInvestors are betting there is money to be made from fooling scammers, too. Apate raised $8.15 million in seed funding in August from Lobby Capital, OIF Ventures, Investible, Concept Ventures, and Baobab Ventures. Joffe said the 20-person company has raised just under $10 million in total and plans to spend the latest round on its product and international expansion, including opening an office in London and building a larger presence in the U.S.\n\n“Apate is named after the Greek goddess of deception, which felt appropriate given what our agents do,” Joffe said, adding that the startup even features scammers swearing at the bots in its pitch material.\n\n“We track that as a sign of frustration and every swear word gets celebrated by us at Apate. We are probably one of the only businesses in the world that celebrates when people swear at our product.”",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/14/apate-sends-ai-agents-undercover-to-get-scammed-so-they-can-gather-fraud-intelligence/",
-      "publishedAt": "2026-10-14T18:00:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "ars-technica-95f9e3211e7bf4a7:en",
       "sourceId": "ars-technica-95f9e3211e7bf4a7",
       "lang": "en",
@@ -5625,53 +5689,6 @@
     },
     {
       "kind": "news",
-      "id": "engadget-90b8a0879517fe56:en",
-      "sourceId": "engadget-90b8a0879517fe56",
-      "lang": "en",
-      "title": "YouTube Music adds new labels for AI-generated content",
-      "summary": "Now please let us hide all of it.",
-      "body": "This should make it much easier to avoid the deluge of slop.\n\nYouTube Music just added clear labels that denote whether a track has been generated by AI. This is great news for people who like listening to actual music, and not weird and slightly metallic-sounding imitations .\n\nAn oblong label that reads \"AI\" sits directly below the track name, so it's tough to miss. The label will be visible on songs that were fully generated by AI, but also tracks that used a model to create major components like vocals. YouTube says the label will accompany anything \"where AI played a significant role.\"\n\nTapping the label opens up a menu that provides information as to how AI was used, which can help inform users if they should continue listening or not. It seems like a rather clean solution and not too dissimilar from how YouTube already labels AI-generated video content on the main platform.\n\nTo that end, the regular YouTube app hosts a whole lot of music videos and related content. The company says these specific labels are also coming to the video player at some point.\n\nYouTube Music isn't the only platform looking to stem the tide of endless audio slop. Spotify has begun labeling fake artists and Deezer is implementing a filtering system that weeds out AI.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2286764/youtube-music-adds-new-labels-for-ai-generated-content/",
-      "publishedAt": "2026-10-14T17:01:12.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-17384eb74f7e1c14:en",
-      "sourceId": "techcrunch-17384eb74f7e1c14",
-      "lang": "en",
-      "title": "Mosqitter is turning its mosquito traps into an AI-powered surveillance network",
-      "summary": "Mosqitter is turning its mosquito-trapping hardware into an AI-powered surveillance network designed to identify species, monitor populations, and provide earlier warnings of mosquito-borne disease risks.",
-      "body": "Mosquitoes and the diseases they carry are expanding into new territory. Rising temperatures, changing rainfall patterns, and global travel are reshaping where disease-carrying mosquitoes can thrive, according to the World Health Organization (WHO). Cases of dengue, a viral illness spread by mosquito bites, more than doubled in a year, from 6.5 million reported globally in 2023 to a record 14.6 million in 2024, the WHO says.\n\nA 30-person, Pennsylvania-based startup, Mosqitter , thinks fighting that problem requires more than killing mosquitoes. The company started by building chemical-free devices that lure and trap female mosquitoes by mimicking the heat, scent and breathing cues of humans.\n\nAnastasiia Romanova, co-founder and CEO of Mosqitter, told TechCrunch that the company set out to bring more sustainable mosquito-control products to a market still heavily reliant on chemicals. Romanova says it now has more than 5,000 devices operating across five continents, up from just over 250 when TechCrunch last covered the company in 2022. The startup now wants to turn its traps into an AI-powered monitoring network that can identify mosquito species, track changes in their numbers, and give earlier warnings about emerging disease risks.\n\nMosqitter began its R&D in Ukraine in 2019 and launched business operations in 2021, which the company considers its official go-to-market year. The company started by examining mosquito behavior. Female mosquitoes, the only ones that bite, seek blood before laying eggs. They lay eggs on a roughly three-week cycle, typically 100 to 200 at a time.\n\n“We saw an opportunity: if we could catch the female mosquito at the point when she is about to lay eggs, we could potentially reduce the mosquito population and prevent it from growing,” Romanova said. “That’s why we combined elements such as heat, similar to the temperature of human skin; scent that imitates human skin odor; and light. In the Grand model,” which is the company’s highest-end offering, “we also use CO2 to imitate human breathing.”\n\nMosqitter, presenting Wednesday as part of TechCrunch’s storied Startup Battlefield competition happening this week in downtown San Francisco, is using AI to identify the mosquitoes its devices catch. Its computer-vision system analyzes biological characteristics to distinguish between species, Romanova told TechCrunch.\n\nTo identify a mosquito, Mosqitter runs an image through its neural network, checks the result against external datasets, and has entomologists validate the findings. It then assigns a confidence score based on how closely those assessments align.\n\n“You can think about it as three judges analyzing a case and producing a verdict,” Romanova said.\n\nMosqitter also feeds environmental data, including weather, wind, and humidity, into its system. The company says that as it collects more data, it plans to use those inputs to forecast changes in mosquito populations and potential health risks.\n\nMosqitter’s product portfolio currently centers on two devices. Mosqitter Grand, its flagship product, is designed for larger areas and public spaces, while Mosqitter Mini targets smaller residential spaces and can also be deployed as a portable monitoring device. The startup plans to officially introduce its Febris Monitoring System next month, adding a data layer to monitor mosquito populations and assess the potential spread of mosquito-borne diseases.\n\n“It’s very important to understand that Febris does not diagnose disease,” Romanova said. “We can’t say with certainty that a particular mosquito carries dengue. What we can say is that a particular mosquito species is present, and knowing that can help indicate an increased potential risk associated with diseases that species can transmit.”\n\nThe company is looking for B2B partners globally, particularly distributors with established sales networks and relationships with governments and retailers, Olga Diachuk , COO and co-founder of Mosqitter, said. Unlike Mosqitter’s hardware products, Febris targets institutional customers, including governments, public-health and mosquito-control agencies, airports, municipalities and universities that need continuous mosquito monitoring.\n\nBrazil, which has a high burden of dengue , is one example of Mosqitter’s expansion. Mosqitter has built local manufacturing and sales operations there, according to the co-founders. The startup also considers the U.S., Greece, India, Ukraine and Nigeria key markets, and it uses a different sales approach in each.\n\nIn Greece, Mosqitter works with a long-established pest-control company. In the U.S., it sells its Mini device directly to consumers through Amazon and its own website. The company is also working with the UK Health Security Agency to deploy Febris at locations including Heathrow and Gatwick airports. International travel can bring in mosquitoes and mosquito-borne diseases from other regions, and Romanova says this highlights the need for more continuous monitoring.\n\n“We think this part of the business could grow substantially with the Febris Monitoring System because governments are major buyers of mosquito-surveillance data,” Romanova said.\n\nMosqitter Mini retails for $199, while its professional Grand system costs $1,999. The company makes money from hardware sales, while Febris adds a recurring revenue stream from monitoring, dashboards, analytics and data services.\n\nMosqitter is on track to generate more than $1 million in revenue in 2026, Romanova said. Revenue from Febris has only recently started coming in, but the company projects the data business could bring in more than $3.5 million next year, based on the value of contracts it is currently bidding on.\n\nMosqitter is raising a $5 million round in two tranches, starting with $1 million and followed by another $4 million. The startup said the split is tied to milestones it plans to reach with its Febris Monitoring System. To date, Mosqitter has raised $1.9 million.\n\nThere’s also a story behind the name. Despite what most people assume, “Mosqitter” isn’t a mashup of “mosquito” and “quitter,” Diachuk said. It combines “mosquito” and “eater,” a name that made more sense when the company was focused primarily on catching mosquitoes.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/14/mosqitter-is-turning-its-mosquito-traps-into-an-ai-powered-surveillance-network/",
-      "publishedAt": "2026-10-14T17:00:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-ef166854ff88b074:en",
-      "sourceId": "ars-technica-ef166854ff88b074",
-      "lang": "en",
-      "title": "Recording device hidden in toilet paper found in top-secret OpenAI meeting room",
-      "summary": "OpenAI engineer faces 5 years and $250K fine as FBI lobs foreign spy charges.",
-      "body": "It took OpenAI two days to notice that a recording device was hidden in a restricted executive conference room where leadership met to discuss highly confidential information, including technical progress, government engagements, and commercial partnerships.\n\nOnly those with special clearance are supposed to access that room. But the FBI believes the recording device was planted by Abdulrahman Alfozan, a 35-year-old engineer from Saudi Arabia, who became a permanent US legal resident in 2020. In a press release Tuesday announcing his arrest, the FBI alleged that chatbot logs and CCTV footage suggested that Alfozan—who worked as an OpenAI engineer for more than a year—sought to use the device to spy on OpenAI and risked leaking trade secrets in a way that threatened national security.\n\nTo conceal the USB device, Alfozan allegedly wrapped it in toilet paper, then plugged it into the back of a conference room television. The device was likely planted on September 28, and OpenAI found it on September 30 and quickly determined that its contents were encrypted, the FBI said. Days later, on October 5, OpenAI installed a camera in that conference room, and the CCTV footage allegedly showed Alfozan attempting to retrieve the recording device that same day.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/tech-policy/2026/10/fbi-arrests-openai-engineer-suspected-of-planting-bug-in-conference-room/",
-      "publishedAt": "2026-10-14T16:41:49.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "applevis-apps-0df250325234a67c:en",
       "sourceId": "applevis-apps-0df250325234a67c",
       "lang": "en",
@@ -5684,22 +5701,6 @@
       "categories": [
         "apple",
         "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-7864726149b498f5:en",
-      "sourceId": "ars-technica-7864726149b498f5",
-      "lang": "en",
-      "title": "Anthropic warns small AI models could self-replicate through IoT devices",
-      "summary": "\"Small weight-based replicators\" could usher in a new generation of computer worms.",
-      "body": "AI company Anthropic is warning that advances in small AI models could soon usher in a new era of self-replicating malware that’s capable of infecting smart fridges, vacuum cleaners, and a wide range of other Internet of Things devices and is more resistant to takedown.\n\nBy next year, smaller AI models may be able to autonomously self-replicate on all kinds of IoT devices, the company said. Eventually, the capability could enable computer worms, which propagate without requiring human interaction and are capable of infecting unfamiliar IoT devices. An experiment the company performed recently revealed significant challenges in bringing such an AI malware replicator to fruition, so the finding is necessarily tempered. Still, the results raise concerns about the possibility of new forms of computer worms.\n\nAnthropic further warned not only about the new potential malware, but also that it could be difficult to stop. In its blog post, it wrote that “a replicator like this would be challenging to shut down, since there’s no centralized point to shut off—though it may be slow (with a doubling time of days). Unlike non-AI malware, it could also figure out unfamiliar devices on its own.”\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/security/2026/10/anthropic-warns-small-ai-models-could-self-replicate-through-iot-devices/",
-      "publishedAt": "2026-10-14T12:55:06.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
       ]
     },
     {

@@ -252,9 +252,11 @@
       const actions = card.querySelector('.reading-library-details-toggle');
       const details = card.querySelector('.reading-library-title-details');
       if (!actions || !details) continue;
-      actions.textContent = tr('Acciones', 'Actions');
+      if (actions.textContent !== tr('Acciones', 'Actions')) actions.textContent = tr('Acciones', 'Actions');
       const heading = details.querySelector('h4');
-      if (heading) heading.textContent = tr('Acciones del documento', 'Document actions');
+      if (heading && heading.textContent !== tr('Acciones del documento', 'Document actions')) {
+        heading.textContent = tr('Acciones del documento', 'Document actions');
+      }
       // Los controles especializados de audio/visual se conservan internamente
       // para sus gestores, pero no se presentan en la lista de documentos.
       const group = [...details.querySelectorAll('.resource-actions')].find(el =>

@@ -153,11 +153,8 @@
       if (!title || !card) return;
       if (action === 'open') { title.click(); return; }
       if (action === 'export') {
-        expand(card);
-        moreControls(card);
-        const exportButton = [...(expandedDetails(card)?.querySelectorAll('button') || [])]
-          .find(button => /exportar|export/i.test(button.textContent?.trim() || ''));
-        exportButton?.click();
+        const bookId = card.dataset.iosBookId;
+        if (bookId) void window.TifloIOSBookActions?.exportBook?.(bookId, 'original');
         return;
       }
       if (action === 'rename') {
@@ -167,6 +164,10 @@
         if (!form) return;
         form.open = true;
         form.querySelector('input')?.focus({ preventScroll: true });
+        return;
+      }
+      if (action === 'delete' && card.dataset.iosBookId && window.TifloIOSBookActions?.deleteBook) {
+        void window.TifloIOSBookActions.deleteBook(card.dataset.iosBookId);
         return;
       }
       if (action === 'delete') {

@@ -37,6 +37,8 @@ jobs:
         run: node --test youtube-worker/test/*.test.mjs
       - name: Comprobar contrato de controles nativos TifloReproductor
         run: node --test ios-build/test/*.test.mjs
+      - name: Instalar dependencias del empaquetador iOS
+        run: npm install --prefix ios-build --no-audit --no-fund
       - name: Preparar contenido y validar scripts iOS
         run: node ios-build/prepare-web.mjs
       - name: Comprobar modificaciones iOS empaquetadas

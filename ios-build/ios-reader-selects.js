@@ -18,9 +18,19 @@
       'reading-document-progress-percent',
       'ios-reading-default-unit',
       'reading-default-navigation',
-      'reading-audio-speed'
+      'reading-audio-speed', 'reading-audio-file-speed',
+      'reading-daisy-chapter-select', 'reading-library-filter',
+      'reading-voice-language', 'reading-voice', 'reading-external-voice-language',
+      'reading-default-navigation', 'reading-text-size', 'reading-font-family',
+      'reading-font-weight', 'reading-line-spacing', 'reading-paragraph-spacing',
+      'reading-width', 'reading-theme', 'reading-document-voice-language',
+      'reading-document-voice', 'reading-document-text-size',
+      'reading-document-font-family', 'reading-document-font-weight',
+      'reading-document-line-spacing', 'reading-document-paragraph-spacing',
+      'reading-document-width', 'reading-document-theme', 'reading-document-timer',
+      'reading-translation-source', 'reading-translation-target', 'reading-marks-new-type'
     ]);
-    if (adjustableIds.has(select.id) && select.options.length >= 2) {
+    if (adjustableIds.has(select.id)) {
       const slider = document.createElement('input');
       slider.type = 'range';
       slider.className = 'ios-reader-adjustable';

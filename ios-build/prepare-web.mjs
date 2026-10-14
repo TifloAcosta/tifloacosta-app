@@ -235,6 +235,7 @@ const iosLanguage = `<script id="tiflo-ios-settings">
 await writeFile(join(output, 'ios-choice-groups.js'), "(() => {\n  'use strict';\n  // WKWebView/VoiceOver: bypass the native select popup in frequently used\n  // navigation and filtering controls. Preserve the original change events.\n  const ids = [\n    'video-sort', 'news-category', 'apps-platform',\n    'download-type-filter', 'setting-text-size', 'setting-theme',\n    'setting-spacing', 'sound-category', 'sound-provider'\n  ];\n  for (const id of ids) {\n    const select = document.getElementById(id);\n    if (!(select instanceof HTMLSelectElement)) continue;\n    const label = document.querySelector('label[for=\"' + id + '\"]');\n    const group = document.createElement('div');\n    group.className = 'resource-actions ios-choice-buttons';\n    group.setAttribute('role', 'group');\n    group.setAttribute('aria-label', label?.textContent?.trim() || id);\n    select.insertAdjacentElement('afterend', group);\n    function markActive() {\n      for (const button of group.querySelectorAll('button')) {\n        button.setAttribute('aria-pressed', String(button.dataset.value === select.value));\n      }\n    }\n    function repaint() {\n      const options = [...select.options];\n      if (options.length < 2 || options.length > 40) {\n        group.hidden = true;\n        select.hidden = false;\n        if (label) label.hidden = false;\n        return;\n      }\n      select.hidden = true;\n      if (label) label.hidden = true;\n      group.hidden = false;\n      group.setAttribute('aria-label', label?.textContent?.trim() || id);\n      group.replaceChildren();\n      for (const option of options) {\n        const button = document.createElement('button');\n        button.type = 'button';\n        button.dataset.value = option.value;\n        button.textContent = option.textContent;\n        button.disabled = option.disabled;\n        button.addEventListener('click', () => {\n          select.value = option.value;\n          select.dispatchEvent(new Event('change', { bubbles: true }));\n          markActive();\n        });\n        group.append(button);\n      }\n      markActive();\n    }\n    new MutationObserver(repaint).observe(select, { childList: true, subtree: true });\n    select.addEventListener('change', markActive);\n    repaint();\n  }\n})();\n");
 await cp(join(root, 'ios-build/ios-choice-collapse.js'), join(output, 'ios-choice-collapse.js'));
 await cp(join(root, 'ios-build/ios-reader-selects.js'), join(output, 'ios-reader-selects.js'));
+await cp(join(root, 'ios-build/ios-reader-minimal.js'), join(output, 'ios-reader-minimal.js'));
 await cp(join(root, 'ios-build/ios-reader-native.js'), join(output, 'ios-reader-native.js'));
 
 const commitSha = String(process.env.GITHUB_SHA ||
@@ -255,7 +256,7 @@ await writeFile(join(output, 'tiflo-build-identity.js'), [
   '    if (!label) return;',
   "    label.textContent = 'TifloLector iOS · compilación ' + build.buildCode +",
   "      ' · código ' + build.sourceSha.slice(0, 12);",
-  '    label.hidden = false;',
+  '    label.hidden = true;',
   '  }, { once: true });',
   '})();',
   ''
@@ -298,7 +299,7 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
   if (name === 'index.html') {
     html = html.replace('</head>', '<script src="ios-reader-native.js"></script>\n</head>');
     html = html.replace('</head>', '<script src="tiflo-build-identity.js"></script>\n</head>');
-    html = html.replace('</body>', '<script src="ios-reader-selects.js"></script>' + '\n</body>');
+    html = html.replace('</body>', '<script src="ios-reader-selects.js"></script><script src="ios-reader-minimal.js"></script>' + '\n</body>');
   }
   if (name === 'podcast.html') {
     html = html.replace('</body>', '<script>requestAnimationFrame(() => { const heading = document.getElementById("podcast-heading"); heading?.setAttribute("tabindex", "-1"); heading?.focus({preventScroll:true}); });</script>' + '\n</body>');
@@ -525,9 +526,41 @@ await writeFile(iosActualidadPath, iosActualidad);
 await import('./patch-reading-native.mjs');
 
 // Fail before signing or uploading if an injected iOS-only script is invalid.
-for (const file of ['app.js', 'videos.js', 'actualidad.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-choice-groups.js', 'ios-videos-fallback.js', 'ios-actualidad-media-fallback.js', 'ios-choice-collapse.js', 'ios-reader-selects.js', 'ios-reader-native.js', 'web-reading.js', 'ios-parity.js', 'news-videos.js']) {
+for (const file of ['app.js', 'videos.js', 'actualidad.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-choice-groups.js', 'ios-videos-fallback.js', 'ios-actualidad-media-fallback.js', 'ios-choice-collapse.js', 'ios-reader-selects.js', 'ios-reader-minimal.js', 'ios-reader-native.js', 'web-reading.js', 'ios-parity.js', 'news-videos.js']) {
   execFileSync(process.execPath, ['--check', join(output, file)], { stdio: 'pipe' });
 }
 console.log('Validación sintáctica de scripts iOS completada');
 
+// Puerta de aceptación mínima antes de firmar o subir a TestFlight:
+ // verificamos la COPIA EMPAQUETADA y no solo el árbol de origen.
+ const packagedReaderMarkup = await readFile(join(output, 'index.html'), 'utf8');
+ const iosMinimal = await readFile(join(output, 'ios-reader-minimal.js'), 'utf8');
+ const iosSelects = await readFile(join(output, 'ios-reader-selects.js'), 'utf8');
+ const iosParity = await readFile(join(output, 'ios-parity.js'), 'utf8');
+ const iosBridge = await readFile(join(output, 'ios-reader-native.js'), 'utf8');
+ const mustAdjust = [
+   'reading-navigation-unit', 'reading-document-progress-percent',
+   'reading-default-navigation', 'reading-library-filter',
+   'reading-voice', 'reading-voice-language', 'reading-text-size',
+   'reading-font-family', 'reading-font-weight', 'reading-line-spacing',
+   'reading-paragraph-spacing', 'reading-width', 'reading-theme',
+   'reading-document-voice', 'reading-document-text-size',
+   'reading-document-font-family', 'reading-document-line-spacing',
+   'reading-document-paragraph-spacing', 'reading-document-width',
+   'reading-document-theme'
+ ];
+ if (!packagedReaderMarkup.includes('src="ios-reader-minimal.js"')
+     || !iosMinimal.includes("tr('Ajustes', 'Settings')")
+     || !iosMinimal.includes("tr('Cerrar', 'Close')")
+     || !iosSelects.includes('aria-valuetext')
+     || mustAdjust.some(id => !iosSelects.includes("'" + id + "'"))
+     || iosParity.includes('more.before(wrapper);')
+     || !iosBridge.includes('const picked = await plugin.pickDocument()')
+     || !iosBridge.includes("list.addEventListener('focusin'")
+     || !packagedReaderMarkup.includes('id="reading-marks-new-type"')
+     || !packagedReaderMarkup.includes('id="reading-pronunciation-settings"')) {
+   throw new Error('BLOQUEO PREVENTIVO iOS: regresión en diseño minimalista, controles VoiceOver, importación o marcas.');
+ }
+ console.log('Contrato mínimo de accesibilidad TifloLector iOS verificado en el paquete.');
+ 
 console.log('Archivos preparados para iOS:',copied);

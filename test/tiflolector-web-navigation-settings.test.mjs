@@ -156,3 +156,36 @@ test('TifloLector separates settings and preserves VoiceOver focus through neste
   for (const id of ['reading-default-navigation','reading-playback-mode','reading-voice-language','reading-document-voice-language'])
     assert.ok(native.includes("'" + id + "'"), 'Missing adjustable VoiceOver control: ' + id);
 });
+
+test('every TifloLector submenu has one final Cerrar and restores VoiceOver focus', async () => {
+  const html = await read('index.html');
+  const pairs = [
+    ['reading-settings-web', 'reading-general-view'],
+    ['reading-general-view', 'reading-audio-view'],
+    ['reading-audio-view', 'reading-visual-view'],
+    ['reading-visual-view', 'reading-library-web'],
+    ['reading-queue-web', 'reading-marks-web'],
+    ['reading-marks-web', null]
+  ];
+  for (const [view, next] of pairs) {
+    const start = html.indexOf('<section id="' + view + '"');
+    const endMarker = next
+      ? '<section id="' + next + '"'
+      : '<p><a class="button-link back-link" href="#home"';
+    const end = html.indexOf(endMarker, start + 1);
+    assert.ok(start >= 0 && end > start, 'Missing subview boundary: ' + view);
+    const contents = html.slice(start, end);
+    assert.equal((contents.match(/data-reading-close>Cerrar<\/button>/g) || []).length, 1,
+      'One Cerrar per subview: ' + view);
+    assert.match(contents, /data-reading-close>Cerrar<\/button>\s*<\/section>\s*$/,
+      'Cerrar should be at the bottom: ' + view);
+    assert.ok(!contents.includes('data-reading-back'), 'No redundant Volver: ' + view);
+  }
+  assert.equal((html.match(/data-reading-close>Cerrar<\/button>/g) || []).length, 6);
+  assert.ok(!html.includes('data-reading-back'));
+  assert.match(html, /function closeReadingSubview\(\)/);
+  assert.match(html, /readingViewStack\.push\(/);
+  assert.match(html, /const previous = readingViewStack\.pop\(\)/);
+  assert.match(html, /previous\?\.opener\?\.isConnected/);
+  assert.match(html, /queueMicrotask\(\(\) => focusTarget\?\.focus\(\)\)/);
+});

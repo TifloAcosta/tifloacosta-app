@@ -424,24 +424,8 @@
       if (!audio || !visual || !more || !unit || !title) return;
       controls.dataset.iosReadingImproved = '1';
 
-      // A single settings menu contains sound/voices and visual preferences.
-      const group = document.createElement('div');
-      group.className = 'resource-actions';
-      group.hidden = true;
-      const menu = document.createElement('button');
-      menu.type = 'button';
-      menu.textContent = localized('Ajustes de lectura', 'Reading settings');
-      menu.setAttribute('aria-expanded', 'false');
-      const wrapper = document.createElement('div');
-      wrapper.append(menu, group);
-      more.before(wrapper);
-      group.append(audio, visual);
-      menu.addEventListener('click', () => {
-        group.hidden = !group.hidden;
-        menu.setAttribute('aria-expanded', String(!group.hidden));
-        if (!group.hidden) audio.focus();
-        else menu.focus();
-      });
+      // El lector ya incorpora Ajustes: no añadir otro desplegable.
+      // Se mantienen Audio y voz, Presentación visual y General.
 
       // Translation is easy to find without hiding its availability message.
       const translate = document.createElement('button');

@@ -1,5 +1,270 @@
 [
   {
+    "id": "9to5mac-40302dde3a0adf7b",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/14/ios-27-adds-brand-new-widgets-for-your-iphones-home-screen/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-14T20:36:16.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iOS 27 adds brand new widgets for your iPhone’s Home Screen",
+        "summary": "iOS 27 expands the available options to customize your Home Screen with new extra-large widgets that will be especially useful on iPhone Duo. Here’s the full list of 15+ pre-installed widgets iOS 27 introduces. more…",
+        "body": "iOS 27 expands the available options to customize your Home Screen with new extra-large widgets that will be especially useful on iPhone Duo. Here’s the full list of 15+ pre-installed widgets iOS 27 introduces.\n\nIf you’ve ever felt like the iPhone’s current widget options are too limited, iOS 27 could prove an especially exciting upgrade for you.\n\nThat’s because Apple has added a new ‘extra-large’ widget size .\n\nThe previous largest widget—‘large’—filled a 4×4 grid of slots on the Home Screen. Extra-large widgets stretch the max size to a 4×6 grid. That’s generally the size of a full Home Screen page.\n\nHere are the Apple apps that now offer extra-large widgets:\n\nBecause of the larger size, extra-large widgets can show more content than ever before. So if you have an especially packed calendar, to-do list, want to see more notes at once, or some other need, the new widgets are a great addition.\n\nYou can use these on any size iPhone, but they’re no doubt intended for the extra-large screen of the iPhone Duo.\n\nHave you been using the new widgets in iOS 27? Which are your favorites? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-fd6e75ddc1b47887",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/14/apple-intelligence-reportedly-coming-to-china-in-december-but-without-siri-ai/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-14T20:20:14.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple Intelligence reportedly coming to China in December, but without Siri AI",
+        "summary": "Bloomberg reports that Apple plans to finally launch Apple Intelligence in China in December, although some important features could still be missing. Here are the details. more…",
+        "body": "Bloomberg reports that Apple plans to finally launch Apple Intelligence in China in December, although some important features could still be missing. Here are the details.\n\nEarlier today, a report from the South China Morning Post claimed that Chinese regulators had approved the use of Alibaba’s AI models to power Apple Intelligence, following preliminary approval for the platform’s rollout in July.\n\nThe report noted that the timing of the approval was particularly relevant, as the iPhone Duo is scheduled to launch in China next week.\n\nNow, Bloomberg reports that Apple “is planning to launch Apple Intelligence in the region in December as part of an upcoming iOS 27.3 update,” although the launch “will exclude the new Siri AI assistant and other features announced this year,” according to the publication’s sources.\n\nThe move comes after a lengthy and complicated effort to bring Apple Intelligence to China, where local regulations governing AI-generated content, security assessments, and algorithm registration have forced Apple to take a different approach than in other markets.\n\nHere’s Bloomberg :\n\nIn order to get Apple Intelligence approved, the company had to make some concessions. Unlike in other countries, the platform has guardrails developed with China’s Alibaba Group Holding Ltd., including a filter that allows the government to approve ongoing updates to the AI models. Apple is also working with Baidu Inc. on features related to search and Siri.\n\nOn Sept. 29, Apple received Chinese permits allowing recent iPhones to support the use of Apple Intelligence and Alibaba AI models, including Tongyi Wanxiang and Qwen.\n\nThe report notes that Apple Intelligence’s launch in China will not feature “the company’s in-house image-generation tools,” while certain “features for generating text will also be limited in some applications.”\n\nAccording to Bloomberg , the initial rollout will include Genmoji for creating custom emoji, Apple’s AI-powered notification summaries, writing tools, and the Clean Up feature in Photos, which lets users remove unwanted objects from images.\n\nThe report notes that it is unclear whether these features will be enough to win over Chinese consumers, as local smartphone makers have already introduced their own AI capabilities:\n\nWith AI services proliferating on rival phones from Huawei Technologies Co., Xiaomi Corp., Oppo Guangdong Mobile Telecommunications Corp., Vivo Mobile Communication Co. and others in China, it’s unclear how much Apple will benefit from launching a two-year-old set of relatively basic AI features in the country.\n\nInterestingly, today’s report came just one day after Apple said in the footnotes of its HomeView announcement that it is “working constructively with the EU in an attempt to find a path forward” to launch Siri AI in Europe, where the assistant also remains unavailable due to regulatory issues.\n\nTo read Bloomberg ‘s full report, follow this link ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-b96448dd68516182",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2287042/fitbit-edge-vs-air-differences-compared/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-14T20:13:18.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Fitbit Edge vs Fitbit Air: The differences beyond a screen",
+        "summary": "Google's latest wearable seems like a Fitbit Air with a screen, but the two actually have less in common than you might think.",
+        "body": "Google's latest wearable seems like a Fitbit Air with a screen, but the two actually have less in common than you might think.\n\nGoogle cares about fitness trackers again. The company has continually iterated on the Pixel Watch since it launched in 2022 and even released the kid-focused Fitbit Ace LTE in 2024, but you wouldn't be wrong to think the company had all but given up on releasing an affordable wearable under the Fitbit name. That changed in May with the release of the $99 Fitbit Air , an affordable Whoop competitor without a screen. It changed again in October with the introduction of the $179 Fitbit Edge , a new half-step between the company's most affordable tracker and the Pixel Watch 5 . Both devices offer AI-powered features not available on Fitbit's older wearables, and more importantly, do so without costing an arm and a leg or locking you into the Android ecosystem.\n\nNow, you do have to pay for Google Health Premium if you want to use them to their fullest, but the Edge and the Air otherwise seem like great options if you're not interested in spending hundreds of dollars on a smartwatch. Just because they support some AI tools doesn't mean they're completely interchangeable, though. The Fitbit Edge features a screen, and some subtler differences that might make it worth picking over the Fitbit Air depending on what you're looking for.\n\nWhile both are worn on a wrist, the Edge and Air are distinctly different form factors. Nearly all of your interactions with the Air happen through the Google Health app, where you can view your data and adjust its settings. The only time you'll spend touching the Air — a 1.37 x 0.66 x 0.32-inch sensor puck without its band — is to take it on and off to charge or to change its bands. The Edge enables more interaction, mostly thanks to its 1.34-inch oval-shaped AMOLED touchscreen but also a new mechanical side button. At 1.54 x 1.01 x 0.46 inches, the Edge is also larger than the Air, and just more visible, especially if you use the always-on functionality of its screen.\n\nBeyond those surface-level distinctions, the two devices also feature slightly different sensors. They both have optical heart rate sensors, but only the Edge has the electrical sensors necessary to support ECG readings. The Edge also includes an altimeter for calculating elevation and an ambient light sensor, likely to make sure its screen is calibrated to the right brightness.\n\nGoogle says both the Edge and the Air are supposed to get seven days of battery life, though that math changes slightly thanks to the Edge's display. It can last seven days if its screen isn't in always-on mode. When the always-on feature is enabled (making the Edge more like a modern smartwatch), it's only rated for around two days. To make up for the difference, the company says the Edge can charge to 100 percent in 90 minutes, and when it's on low battery, a 15-minute charge can give it a day of battery life.\n\nBattery life might be an area where the Edge falls short, but both it and the Air are equally water and dust resistant with IP68 ratings and protection up to 5ATM.\n\nWhen Google announced the Edge, it shared that the Health Guardian features it introduced on the Pixel Watch 5, covering things like heart health and insulin trends, would also be coming to the Edge and the Air . Because those features largely aren't dependent on specific sensors and instead rely on the corpus of data Google has collected, it seems plausible that additional AI features could follow a similar path.\n\nWhen it comes to what each individual wearable is capable of, though, things get a bit more complicated. Both the Edge and the Air offer things like activity tracking, a daily readiness score, cardio load insights, step tracking, continuous heart rate monitoring, irregular heart rhythm notifications, sleep tracking and a resilience score that approximates stress. The screen and additional sensors on the Edge enable extras, too, like ECG readings, the ability to track the number of floors you've climbed and live workout metrics on the built-in screen.\n\nBecause the Edge, again, has a display and runs Google's lightweight Fitbit OS, it can also show more of your health data on-device, receive notifications from your phone and even run a stripped-down version of Google Maps. The Air can't offer the same without a screen, and depending on your perspective on wearables, you might not want it to.\n\nOne of the draws of the Fitbit Air is it's less in your face: just sensors and a companion app when you want to look at the data you collect. By design, the Fitbit Edge is far more obvious. It's not a mini-smartphone in the way a Pixel Watch is, but it could be harder to ignore, if that's something that matters to you."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-8a81ac34c5de66df",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1011311/the-ai-race-is-back-on",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-14T19:06:03.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The AI race is back on",
+        "summary": "Last week, Anthropic and OpenAI looked like they had the AI race to themselves, pulling ahead with increasingly powerful models that left their rivals in the dust. Google seemed hopelessly far behind, while Meta, despite spending billions to revive its floundering AI ambitions, had yet to establish itself as a serious contender. Even the latest […]",
+        "body": "Last week, Anthropic and OpenAI looked like they had the AI race to themselves, pulling ahead with increasingly powerful models that left their rivals in the dust. Google seemed hopelessly far behind, while Meta, despite spending billions to revive its floundering AI ambitions , had yet to establish itself as a serious contender. Even the latest models coming out of China , impressive as they were, appeared to be playing catch-up.\n\nThen, in the space of a few days, everything changed. Google and Meta both unveiled frontier models they claim can go toe to toe with the best from OpenAI and Anthropic. Suddenly, the race is back on - and it's anyo …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-82b3343d289d83c5",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/policy/1011417/new-york-ag-characterai-bankruptcy",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-14T18:47:54.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Now that Character.AI is going bankrupt, what happens to all of its users’ data?",
+        "summary": "New York Attorney General Letitia James revealed a years-long multi-state investigation against Character.AI as they now seek to require protections on consumer data sold through its bankruptcy proceeding. James is among 40 bipartisan AGs who filed a notice of interest in Character.AI's bankruptcy case \"to put all parties on notice of the regulatory issues that […]",
+        "body": "New York Attorney General Letitia James revealed a years-long multi-state investigation against Character.AI as they now seek to require protections on consumer data sold through its bankruptcy proceeding.\n\nJames is among 40 bipartisan AGs who filed a notice of interest in Character.AI's bankruptcy case \"to put all parties on notice of the regulatory issues that will need to be addressed in any sale or transfer of the Debtor's business or assets.\" Character.AI announced Tuesday it was filing for Chapter 11 and selling some assets to Disney. But the AGs warn there could be serious risk involved in the transfer of the technology due to the \"hi …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-55ba2f3af5948ce2",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2286898/deezer-will-let-listeners-completely-filter-out-ai-music/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-14T18:45:06.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Deezer will let listeners completely filter out AI music",
+        "summary": "Good riddance.",
+        "body": "It'll be available by the end of the year.\n\nWhat are we gonna do about the deluge of AI music slopping up all of our streaming platforms? Deezer has an idea. It's adding a toggle to filter out AI-generated tracks. This simple on/off switch will be available on the app by the end of the year.\n\n\"We've seen a clear user demand for the ability to filter out AI-generated music,\" said CEO Alexis Lanternier. \"We are now giving everyone the option to remove this content completely from their streaming experience on Deezer, and focus only on human creators and creations, if they wish.\"\n\nDo you want to avoid fully AI-generated music completely in your streaming experience? Today, we're announcing a new toggle for music fans who want to do just that. https://t.co/XjhljXFJPb #Deezer @Deezer\n\n— Deezer News (@DeezerNews) October 13, 2026\n\nI have a feeling many people most definitely wish to focus only on human creators. I know I do. Deezer conducted its own study that suggested nearly half of all music streaming users would like to see AI-generated music completely gone from their feeds. NPR recently reported on a study that indicated that listeners have soured on AI-generated music , and that only gets worse the more these platforms become flooded with slop.\n\nAnd, boy oh boy, have these platforms become flooded. Deezer reported last year that around 18 percent of tracks uploaded to the app were AI-generated. That number has since risen to more than 50 percent. The company says that 90,000 fully generated tracks get uploaded each day, which has added up to more than 42 million slop songs.\n\nThese \"artists\" are playing a numbers game in the hopes that one of the hundreds of tracks they upload every day will catch on in some capacity and, in turn, they'll get paid. There's also the matter of fraud. The platform has reported that up to 85 percent of all streams generated by AI-generated songs were fraudulent .\n\nDeezer is perfectly positioned for this kind of feature. It launched one of the industry's first AI music detection tools, which it has since offered to loan out to rival streaming platforms . The toggle is the natural next step here. The detection system isn't foolproof but the company says any risk of a false positive is \"very low.\"\n\nAs for these other platforms, YouTube Music just launched a label that will accompany AI-generated tracks. Spotify does something similar on AI artist pages ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-222b3a749050e057",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1011324/apple-tv-4k-missed-features",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-14T18:38:59.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "As a TV enthusiast, I was hoping for more from the Apple TV 4K",
+        "summary": "It's been four long years since the last Apple TV 4K was released, and in that time there have been lots of hopes and dreams for features in whatever comes next. A new chip, 4K/120Hz support, audio passthrough, a remote locator, better home control integration - the 2022 Apple TV 4K is a great box, […]",
+        "body": "It's been four long years since the last Apple TV 4K was released, and in that time there have been lots of hopes and dreams for features in whatever comes next. A new chip, 4K/120Hz support, audio passthrough, a remote locator, better home control integration - the 2022 Apple TV 4K is a great box, but there's still plenty of room for improvement. With the fourth-gen Apple TV 4K announced on Tuesday, some of those hopes were met, while others were unfortunately left out.\n\nColoring the announcement is the device's price. Apple eliminated the cheaper 64GB, Wi-Fi-only model, leaving just the 128GB, Wi-Fi and Ethernet model - and bumped up its p …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-34514db745d464d0",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/14/youtube-music-launches-new-labels-as-ai-generated-music-floods-streaming-platforms/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-14T18:23:46.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "YouTube Music launches new labels as AI-generated music floods streaming platforms",
+        "summary": "The label will appear on the player page and include songs entirely generated by AI or partially, such as involved in composition and vocals.",
+        "body": "YouTube Music announced Wednesday the rollout of a new labeling system aimed at improving transparency around songs created with the help of generative AI. Now listeners will be able to easily identify tracks created using AI, including those involved in composition and vocals.\n\nThe label will appear on the player page. Clicking on this label provides additional information about the specific role of AI in the track’s creation.\n\nNotably, these labels will also extend to the main YouTube app.\n\nYouTube said it collaborated with various music partners and deployed its own detection tools to identify AI-generated music. According to its help page , partners using YouTube can declare their work’s use of generative AI through one of three designations: Fully Gen AI, Partly Gen AI, or No Gen AI.\n\n“Fully Gen AI” applies to tracks that are entirely generated by AI, while “Partly Gen AI” refers to works where artists may have incorporated AI-generated components but added their own live elements. Tracks edited using pitch-correction tools such as Auto-Tune fall under the “No Gen AI” category.\n\nThe move comes as AI-generated music rapidly expands across streaming services, and many platforms are adopting their own approaches. For instance, Apple Music has plans to introduce “Made With AI” labels as part of its AI Transparency Tags later this year. Spotify also has AI labels, as well as a music spam filter.\n\nDeezer has taken one of the stricter stances, reporting in July that it was receiving nearly 90,000 fully AI-generated tracks daily. The platform labels detected AI-generated music and excludes it from algorithmic recommendations and editorial playlists, while also withholding royalties from fraudulent streams. The company is also working on an option to let users filter out AI-generated music .\n\nTIDAL also labels recordings it identifies as entirely AI-generated, allows listeners to disable them, and excludes these recordings from royalty attribution.\n\nYouTube, by contrast, is focusing on disclosure rather than blanket restrictions. Its new labels are intended to inform listeners about AI’s role in music creation, but AI involvement alone doesn’t make a track ineligible for monetization. YouTube even experiments with AI-powered music creation, including its tool Dream Track , which lets select creators generate soundtracks featuring AI-generated versions of participating artists’ voices."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-64f2a771d2ea018d",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/14/heres-how-much-iphone-duo-costs-to-repair-out-of-warranty/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-14T18:11:00.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Here’s how much iPhone Duo costs to repair out-of-warranty",
+        "summary": "iPhone Duo pre-orders kick off this Friday ahead of shipping next week. If you’re wondering whether to get AppleCare+ or not, here are the iPhone Duo’s out-of-warranty repair costs. more…",
+        "body": "iPhone Duo pre-orders kick off this Friday ahead of shipping next week. If you’re wondering whether to get AppleCare+ or not, here are the iPhone Duo’s out-of-warranty repair costs.\n\niPhone Duo is by far Apple’s most expensive iPhone ever. It starts at $1,999, and the most expensive 2TB model will set you back $3,199.\n\nStill, AppleCare+ adds another $19.99/month to the purchase price, which some users might not want to shell out for. But what kind of repair costs does Apple charge without AppleCare?\n\nHere are the out-of-warranty repair costs for iPhone Duo from Apple’s website :\n\nEstimated service costs\n\nThese are only “estimated” because while Apple uses these fees for product repairs, it says that “Apple Authorized Service Providers can set their own service fees and will provide their own estimate.”\n\nAdding AppleCare+ reduces these costs dramatically. A few examples: theft or loss is only $149 with AppleCare+, battery service is free, front display damage is just $29 and inner display damage $99.\n\nDo you plan to get AppleCare+ for your iPhone Duo? Why or why not? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-dc9129ebe200c1f6",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/14/apate-sends-ai-agents-undercover-to-get-scammed-so-they-can-gather-fraud-intelligence/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-14T18:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apate sends AI agents undercover to get scammed so they can gather fraud intelligence",
+        "summary": "Most companies use AI agents to ship products faster or speed up workflows. Apate.ai sends them undercover to get scammed.",
+        "body": "Most companies use AI agents to ship products faster or to speed up workflows. Apate.ai sends them undercover to get scammed.\n\nFounded in 2024 on the basis of research done in Macquarie University in Sydney, the Australian startup deploys thousands of AI agents that masquerade as innocent victims. The agents can answer scam calls, respond to shady messages and emails, follow phishing links, and join social media groups to bait fraudsters. They pretend to be people of all stripes, sporting different ages, genders, and accents, and speak various languages as they try to keep scammers engaged long enough to learn something useful.\n\nThe company says its fleet of agents has so far wasted 17 years of scammers’ time across 2.5 million conversations. More importantly for Apate’s customer base of banks, telecom companies, government agencies, and utilities, the undercover agents try to get scammers to reveal things about themselves that are usually learned only after a victim has been scammed: bank accounts, crypto wallets, phone numbers, malicious websites, the brands they’re impersonating, and other details about the scams they’re running.\n\nApate, one of the finalists at this year’s Startup Battlefield 200 at TechCrunch Disrupt, then feeds that information to its customers, who use it to inform their anti-fraud measures and initiatives. (The company will pitch a panel of VC judges at Disrupt , which is taking place this week at Moscone West in San Francisco through Thursday, October 15.)\n\nIt’s a curious evolution of scam-baiting, but it’s not so surprising given how much AI has empowered scammers and hackers. The FBI received more than 22,000 complaints of AI-related crimes in 2025, which resulted in about $893 million in losses. More than $632 million of that came from investment scams, in which the FBI says fraudsters use AI to run conversations, and deepfake the voices and appearances of celebrities, executives, and trusted figures.\n\nFor a long time, people have made a hobby out of deliberately stringing scammers along — sometimes hilariously, like getting scammers to read aloud entire books , or even to get ridiculous tattoos . Now, with AI growing increasingly capable, the tables are turning.\n\nCuriously, the idea behind Apate was sparked by a real scam call.\n\nSeveral years ago, Apate’s founder and CEO Dali Kaafar was at a family picnic when he got a call from an unknown number. Realizing it was a scammer on the line, he decided to play dumb for the benefit of his kids and managed to keep the call going for 44 minutes.\n\nEveryone had a laugh, but Kaafar noticed that those were 44 minutes the scammer had not spent calling a real victim. It was also 44 minutes of his wasted time, which led him to wonder: Could he automate it, and in the process, learn something useful?\n\nThat idea eventually led to research work at his job at Macquarie University, where Kaafar and his colleagues used machine learning and natural language processing to uncover the content of scam calls, and develop better ways to detect and prevent scams.\n\n“Most of the industry works after the fact. Telcos block numbers, but scammers just get new ones. Banks watch transactions, but by then the scammer has already reached the customer. We go to the scammer directly and get the information before anyone gets hurt,” Brad Joffe, co-founder and chief commercial officer, told TechCrunch. “Our AI agents talk to tens of thousands of scammers every day across calls, messages, email, and the web. What we offer our customers is what comes out of those conversations, and what they can do with it.”\n\nJoffe said Apate uses both frontier models and its own fine-tuned models to power its agents and analysis. The company trains its models on conversations its agents have had with scammers, as well as the research Kaafar did at Macquarie.\n\nIn addition to access to Apate’s fleet of agents, customers get access to an insights portal that offers intelligence and analytics on scams targeting their end users or employees, brands, products, and more. Customers can even assign these agents particular missions, such as obtaining a bank account number or crypto-wallet address. Its text agents can search forums, investment groups, and social platforms for potential scam activity, and can then enter conversations with a fabricated identity to surface scammers’ details.\n\nThe startup’s customers include Commonwealth Bank of Australia, TPG Telecom, as well as other utilities, telcos, and government agencies. Joffe said TPG has diverted nearly 590,000 calls to Apate’s agents, Commonwealth has seen a 76% drop in publicly reported scam losses, and an unnamed Australian bank the startup works with has used its outbound agents to disrupt 22 scam campaigns.\n\nInvestors are betting there is money to be made from fooling scammers, too. Apate raised $8.15 million in seed funding in August from Lobby Capital, OIF Ventures, Investible, Concept Ventures, and Baobab Ventures. Joffe said the 20-person company has raised just under $10 million in total and plans to spend the latest round on its product and international expansion, including opening an office in London and building a larger presence in the U.S.\n\n“Apate is named after the Greek goddess of deception, which felt appropriate given what our agents do,” Joffe said, adding that the startup even features scammers swearing at the bots in its pitch material.\n\n“We track that as a sign of frustration and every swear word gets celebrated by us at Apate. We are probably one of the only businesses in the world that celebrates when people swear at our product.”"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-95f9e3211e7bf4a7",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/science/2026/10/researchers-use-ai-to-design-proteins-that-cut-up-other-proteins/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-14T17:10:15.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Researchers use AI to design proteins that cut up other proteins",
+        "summary": "AI design tools make proteins that break bonds that are stable for hundreds of years.",
+        "body": "A protein is a chain of amino acids held together by what are called peptide bonds. On their own, those bonds are extremely stable; they're estimated to have a half-life of several hundred years. But in Earth's environment, most proteins don't last nearly that long. That's because organisms have evolved a handful of ways to catalyze the break-up of peptide bonds, which have diversified into countless specialized protein-digesting enzymes. Proteases are everywhere and generally make short work of any proteins that find their way into the environment.\n\nNow, researchers have basically short-circuited the diversification process, using AI-based protein design tools to take the catalytic core of two types of protease and replace the entire rest of the protein. The resulting enzymes could be tuned to cut specific proteins in half, and the researchers demonstrated their effectiveness by using them to cut proteins associated with neurological diseases.\n\nThe basic peptide bond isn't especially interesting-looking—it's what you get when you link an amino group to an acid, releasing a water molecule in the process. As their name implies, amino acids have both an amino and an acid group, allowing them to form peptide bonds on two sides of the amino acid. This is critical for building up the long chains found in proteins. (The amino acids also have side chains with distinctive chemistry, which gives a backbone specific properties.)\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
     "id": "engadget-90b8a0879517fe56",
     "type": "news",
     "sourceId": "engadget",
@@ -48,84 +313,35 @@
     "media": null
   },
   {
-    "id": "the-verge-bafef6fed1dca9a8",
+    "id": "ars-technica-ef166854ff88b074",
     "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/column/1011264/digital-twin-metabolism-ai-twin-health",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/tech-policy/2026/10/fbi-arrests-openai-engineer-suspected-of-planting-bug-in-conference-room/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-14T17:00:00.000Z",
+    "publishedAt": "2026-10-14T16:41:49.000Z",
     "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
+      "tecnologia-general"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "My AI doppelganger tells me what to eat",
-        "summary": "This is Optimizer, a weekly newsletter sent from Verge senior reviewer Victoria Song that dissects and discusses the latest gizmos and potions that swear they're going to change your life. Opt in for Optimizer here. For the past 100 days or so, my mornings have had a new rhythm. When I wake up, the first […]",
-        "body": "This is Optimizer , a weekly newsletter sent from Verge senior reviewer Victoria Song that dissects and discusses the latest gizmos and potions that swear they're going to change your life. Opt in for Optimizer here .\n\nFor the past 100 days or so, my mornings have had a new rhythm. When I wake up, the first thing I have to do is feed my digital twin. It consumes my metabolic data, and its first \"meal\" of the day is my body composition data, sent straight from a smart scale. Once that's logged in the app, I scoot over to the kitchen to fill an Owala with lemon water to take my medications with. That, too, gets logged in the app. On Mondays, I'll …\n\nRead the full story at The Verge."
+        "title": "Recording device hidden in toilet paper found in top-secret OpenAI meeting room",
+        "summary": "OpenAI engineer faces 5 years and $250K fine as FBI lobs foreign spy charges.",
+        "body": "It took OpenAI two days to notice that a recording device was hidden in a restricted executive conference room where leadership met to discuss highly confidential information, including technical progress, government engagements, and commercial partnerships.\n\nOnly those with special clearance are supposed to access that room. But the FBI believes the recording device was planted by Abdulrahman Alfozan, a 35-year-old engineer from Saudi Arabia, who became a permanent US legal resident in 2020. In a press release Tuesday announcing his arrest, the FBI alleged that chatbot logs and CCTV footage suggested that Alfozan—who worked as an OpenAI engineer for more than a year—sought to use the device to spy on OpenAI and risked leaking trade secrets in a way that threatened national security.\n\nTo conceal the USB device, Alfozan allegedly wrapped it in toilet paper, then plugged it into the back of a conference room television. The device was likely planted on September 28, and OpenAI found it on September 30 and quickly determined that its contents were encrypted, the FBI said. Days later, on October 5, OpenAI installed a camera in that conference room, and the CCTV footage allegedly showed Alfozan attempting to retrieve the recording device that same day.\n\nRead full article\n\nComments"
       }
     },
     "media": null
   },
   {
-    "id": "the-verge-52f26b0b15156c7f",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1011276/openai-employee-unreleased-product-plans",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-14T16:43:24.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "OpenAI claims an ex-employee took its product plans and presented them to Apple",
-        "summary": "OpenAI claims a former employee took more than 100 files related to its product plans before joining Apple. In a document filed on Wednesday, OpenAI accuses the unnamed employee of sending this information to a personal account and then presenting it to Apple leadership, including the vice president of the company's operations in Asia. The […]",
-        "body": "OpenAI claims a former employee took more than 100 files related to its product plans before joining Apple. In a document filed on Wednesday , OpenAI accuses the unnamed employee of sending this information to a personal account and then presenting it to Apple leadership, including the vice president of the company's operations in Asia.\n\nThe filing, reported earlier by Reuters , is tied to a legal battle between Apple and OpenAI over trade secrets - but this time, OpenAI is doing the accusing. It alleges that the files in question contain images of at least one unreleased device, along with supplier information, engineering data, project files …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-d1cfda641f5ef4a6",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1011245/iphone-duo-repair-costs-applecare",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-14T16:21:28.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Repairing the iPhone Duo’s folding screen costs as much as a new iPhone",
-        "summary": "If you don't get AppleCare Plus for the iPhone Duo, any repairs are going to be pretty expensive. Apple published the estimated repair costs for the iPhone Duo without AppleCare Plus today, as reported by MacRumors, and they can be high: Battery service, for example, will cost $229, inner display damage will cost $999, and […]",
-        "body": "If you don't get AppleCare Plus for the iPhone Duo, any repairs are going to be pretty expensive. Apple published the estimated repair costs for the iPhone Duo without AppleCare Plus today, as reported by MacRumors , and they can be high: Battery service, for example, will cost $229, inner display damage will cost $999, and \"other damage\" costs $1,499.\n\nHere's Apple's estimated costs for various repairs if you don't have AppleCare Plus:\n\nCover layer damage $49\n\nBack glass damage $199\n\nBattery service $229\n\nRear camera damage $229\n\nOuter display damage $379\n\nOuter display and back glass damage $509\n\nInner display damage $999\n\nOt …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "applevis-apps-cb620b19c318d97b",
+    "id": "applevis-apps-0df250325234a67c",
     "type": "news",
     "sourceId": "applevis-apps",
     "sourceName": "AppleVis Apps",
     "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/cat-genome-kitten-distribution-system",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/cat-genome",
     "originalLanguage": "en",
     "publishedAt": "2026-10-14T16:13:37.000Z",
     "categories": [
@@ -136,157 +352,9 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Cat Genome Kitten Distribution System",
+        "title": "Cat Genome",
         "summary": "THE KITTEN DISTRIBUTION SYSTEM FOUND YOU Rescue stray kittens, breed champion cats, unlock rare coats, and dress your cattery in 100+ fun props. Free to play, fully offline, no ads. UNLIMITED KITTENS • No energy meter, no lives, no waiting to play • Answer as many rescue calls as you like • Breed as many litters as you want RARE COMBINATIONS TO CHASE • 312 looks to discover across four trait axes • Hidden genes resurface generations later, so rare coats run in families • Chase calico, tortoiseshell, colorpoint, and the fully recessive long coat • Rarest of all: the prismatic kitten, with a rainbow coat, blue eyes, and a head start on every stat FOUR WAYS TO BREED • Let nature surprise you • Add a guaranteed extra kitten to every litter • Lock the traits you want • Or hand-pick every last one FOR THE SCIENCE MINDED • Real cat genetics: white masks every pattern, and tri-color coats need the right base • Two genes per trait, with dominance deciding what you actually see • A DNA scanner that reveals which cats are quietly carrying what • Preserve a favorite's genome in the DNA Lab, then clone it exactly • Splice: lock individual traits, or choose which parent each stat gene comes from • Weave two or three saved genomes into a single hybrid RAISE, COMPETE, AND DRESS UP • Grow kittens in the nursery, and enter the little ones in Kitten League events • 10+ fun competitions across seven tiers, Backyard to Legends • Fashion Shows judged mostly on the outfit • 100+ props to drag, resize, and rotate BUILD A BLOODLINE • Trace every relationship in the family tree • Fill your Cat-Dex with every look you have discovered • Trade for new bloodlines on the Cat Exchange • A traveling trader visits each weekend, paying well above the going rate EVERY UPGRADE IS EARNABLE • Your cats earn coins from rescues, competitions, and the Cat Exchange • Spend them on props, cattery space, breeding tools, and DNA Lab upgrades • 100% playable without spending real money PLAYING WITH VOICEOVER • Each cat, event, show and store item is one stop, with its name first • Double-tap the competitor, tier, theme or a breeding parent to choose from a list • Hear pet descriptions, clear action costs and competition results • Coin purchases ask first, and Settings > VoiceOver lets you choose Brief or Detailed screens • Find recent messages and the Accessibility Guide in Settings NO ADS. NO ACCOUNTS. NO LOOT BOXES. • Fully offline, with optional iCloud backup • In-app purchases are optional shortcuts and extras, never requirements • Coin packs, the Quick Compete planner, the Genome Loom, and the Wild Cat Pack",
         "body": "THE KITTEN DISTRIBUTION SYSTEM FOUND YOU Rescue stray kittens, breed champion cats, unlock rare coats, and dress your cattery in 100+ fun props. Free to play, fully offline, no ads.\n\nUNLIMITED KITTENS • No energy meter, no lives, no waiting to play • Answer as many rescue calls as you like • Breed as many litters as you want\n\nRARE COMBINATIONS TO CHASE • 312 looks to discover across four trait axes • Hidden genes resurface generations later, so rare coats run in families • Chase calico, tortoiseshell, colorpoint, and the fully recessive long coat • Rarest of all: the prismatic kitten, with a rainbow coat, blue eyes, and a head start on every stat\n\nFOUR WAYS TO BREED • Let nature surprise you • Add a guaranteed extra kitten to every litter • Lock the traits you want • Or hand-pick every last one\n\nFOR THE SCIENCE MINDED • Real cat genetics: white masks every pattern, and tri-color coats need the right base • Two genes per trait, with dominance deciding what you actually see • A DNA scanner that reveals which cats are quietly carrying what • Preserve a favorite's genome in the DNA Lab, then clone it exactly • Splice: lock individual traits, or choose which parent each stat gene comes from • Weave two or three saved genomes into a single hybrid\n\nRAISE, COMPETE, AND DRESS UP • Grow kittens in the nursery, and enter the little ones in Kitten League events • 10+ fun competitions across seven tiers, Backyard to Legends • Fashion Shows judged mostly on the outfit • 100+ props to drag, resize, and rotate\n\nBUILD A BLOODLINE • Trace every relationship in the family tree • Fill your Cat-Dex with every look you have discovered • Trade for new bloodlines on the Cat Exchange • A traveling trader visits each weekend, paying well above the going rate\n\nEVERY UPGRADE IS EARNABLE • Your cats earn coins from rescues, competitions, and the Cat Exchange • Spend them on props, cattery space, breeding tools, and DNA Lab upgrades • 100% playable without spending real money\n\nPLAYING WITH VOICEOVER • Each cat, event, show and store item is one stop, with its name first • Double-tap the competitor, tier, theme or a breeding parent to choose from a list • Hear pet descriptions, clear action costs and competition results • Coin purchases ask first, and Settings > VoiceOver lets you choose Brief or Detailed screens • Find recent messages and the Accessibility Guide in Settings\n\nNO ADS. NO ACCOUNTS. NO LOOT BOXES. • Fully offline, with optional iCloud backup • In-app purchases are optional shortcuts and extras, never requirements • Coin packs, the Quick Compete planner, the Genome Loom, and the Wild Cat Pack"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-14820295159fd7d6",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2286355/android-will-use-gemini-to-warn-you-about-scammy-messages/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-14T16:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "android",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Android will use Gemini to warn you about scammy messages",
-        "summary": "Google will tell if you a scammer is trying to message you and will protect your banking details from prying eyes while sharing your screen.",
-        "body": "Google has announced new scam and privacy protection tools for Android.\n\nGoogle has announced a bunch of new, expanding and upcoming scam protections for Android users, including an opt-in setting in its Messages app that uses Gemini AI to warn you about deceptive messages. Toggling on the setting will enable Scam Detection, which taps into Google's most advanced Gemini models to evaluate the sender's intent and warn you if the messages could be coming from a bad actor. In Google's example, the sender pretended to show the recipient a photo of them with their dog. Upon being told that they had the wrong number, the sender tried to engage and asked the recipient their name.\n\nThe company explained that Android analyzes messages in Private AI Compute, which encrypts them and processes them in a secure space inaccessible to anybody else, even Google. Gemini Nano will also do on-device analysis of links in Messages to make sure they're safe before you tap on them. This will be available on Google Pixel 10+, the Samsung Galaxy S26 series, Galaxy Z Flip and Galaxy Fold 8, among other select devices. In addition, Google has redesigned its scam warnings to give you more context and extra time before tapping on links sent from numbers not in your contacts list. The new opt-in security setting is rolling out in the coming weeks.\n\nAfter introducing Scam Detection in chat notifications on Pixel devices, Google is expanding its availability to more devices. The feature will warn you about potential scams right inside the message notification, so you don't even have to view it. Google has teamed up with device manufacturers, including Honor, Motorola, OPPO, OnePlus, realme, vivo and Xiaomi, which are expected to enable the feature later this year.\n\nMeanwhile, all devices running Android 15 and newer will get automatic screen-sharing privacy later this month. The feature will hide passwords, banking information and credit card security numbers by default if you're sharing your screen that has Chrome or Android WebView open. In early December, the company is also rolling out call forwarding protection on Pixel and other select devices. The feature will block apps from secretly enabling call forwarding in the background. Android will warn you if a scammer tries to trick you into typing an MMI forwarding code — a short string of figures — to switch on call forwarding on your device.\n\nGoogle has reported that it teamed up with banks in Brazil to combat bank impersonation, as well. To make sure it's actually a bank calling, Android will perform a verification check on incoming calls. If the caller fails to pass the check, Android will hang up the call and alert you. Google said Android has already blocked over three million fake calls since launching the feature in June. It's not clear if and when it will bring the safety tool stateside, but the company said it will work with more partner banks in the future."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-92db643317872f91",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/14/homeview-can-display-third-party-widgets-from-your-iphone/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-14T15:43:34.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "HomeView can display third-party widgets from your iPhone",
-        "summary": "Apple’s new HomeView (pre-order here) won’t have an App Store, but it will support third-party apps in some cases, including letting you run third-party widgets from your iPhone. Here are the details. more…",
-        "body": "Apple’s new HomeView ( pre-order here ) won’t have an App Store, but it will support third-party apps in some cases, including letting you run third-party widgets from your iPhone. Here are the details.\n\nWhen Apple’s HomeView was unveiled yesterday, the company didn’t say much about its support for third-party apps. But today the device’s app story is becoming more clear.\n\nIn addition to being able to run third-party audio and video apps —likely to include favorites like Spotify, Audible, YouTube, and Netflix—Apple now says widgets are supported too.\n\nPer Apple’s updated developer agreement :\n\n6.4.1 iOS Application Widgets on CarPlay and Apple HomeView You agree that Your iOS Application widget may be made available on CarPlay and Apple HomeView. Furthermore, You are responsible for determining whether Your iOS Application widget is functional and suitable to use for CarPlay, and for using the disfavoredLocations function to disfavor Your iOS Application widget if it is not. For example, iOS Application widgets that are not functional or suitable include those that require extensive user interaction while driving, or that require the iPhone to be unlocked to be used.\n\nCarPlay and HomeView are mentioned in tandem because third-party CarPlay apps in the audio and video categories will be available on HomeView too.\n\nBut for widgets, supported third-party HomeView widgets will be much broader than just those two categories.\n\nThat’s because any iOS app can provide widgets to CarPlay, and thus those same widgets will be able to support HomeView too.\n\nWidgets first came to CarPlay with iOS 26 last year , and include popular third-party widgets from Amazon, ChatGPT, Instagram, and more.\n\nBased on Apple’s documentation, these iOS widgets will be available on HomeView too unless explicitly excluded by the developers.\n\nYou can pre-order HomeView starting at $289 for select models.\n\nWhich third-party widgets do you expect to use on HomeView? Let us know in the comments."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-9295118fdc4eeaa6",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2286617/alibaba-ai-models-cleared-for-use-in-apple-intelligence-in-china-just-in-time-for-the-iphone-duo-launch/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-14T15:36:33.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Alibaba AI models cleared for use in Apple Intelligence in China just in time for the iPhone Duo launch",
-        "summary": "Apple's integrated AI system is still yet to be rolled out in mainland China, despite launching nearly two years ago.",
-        "body": "Apple’s integrated AI system is still yet to be rolled out in mainland China, despite launching nearly two years ago.\n\nApple Intelligence will soon be making its way to supported iPhone models in China, as the country reportedly rubber stamps the use of Alibaba AI models to power the technology.\n\nAs reported by the South China Morning Post , which is owned by the Alibaba Group, China's Ministry of Industry and Information Technology has given regulatory approval for Tongyi Qianwen, the group of LLMs better known as Qwen, as well as the Tongyi Wanxiang AI-generated image and video tool.\n\nApple had already received clearance to roll out Apple Intelligence on the Chinese mainland back in July, but the South China Morning Post 's report says it has not yet done so. The updated filings include network access permits for the iPhone Duo and 18 Pro , with the former set to launch in China next week with the new and improved Siri AI as one of its flagship software features.\n\nMuch of Apple Intelligence's feature set is already available in Hong Kong, but the mainland's complex AI and privacy laws have required Apple to be patient about bringing what is now a core feature to one of its fastest-growing markets. It will seemingly now arrive almost exactly two years after it launched in the US, where Apple has worked with both Google and OpenAI to train its models and hand off complex questions.\n\nReports that Apple would seek to work with Chinese AI firms for a workaround to bring Apple Intelligence to the country first emerged as far back as early 2025, with Alibaba named at the time. Back in the summer, it was confirmed that Qwen would be central to Apple Intelligence in compatible iPhone, iPad, Mac and Vision Pro models that it sells to its Chinese customers."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-ed8c0e5f7b4bb4b9",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/14/deezer-will-soon-let-you-filter-out-ai-generated-music/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-14T15:16:04.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Deezer will soon let you filter out AI-generated music",
-        "summary": "Deezer said that the new toggle will be rolled out by the end of the year.",
-        "body": "Streaming platform Deezer remains steadfast in its intent to help users avoid listening to AI-generated music: The company on Tuesday said it is working on a new toggle that lets users filter out AI-generated music uploaded to its platform. The feature is expected to be available before the end of the year.\n\nDeezer said turning on the toggle will stop you from seeing AI-generated tracks, albums, and related artists in search results.\n\n“We’ve seen clear user demand for the ability to filter out AI-generated music, and we are now giving everyone the option to remove this content completely from their streaming experience on Deezer, and focus only on human creators and creations, if they wish,” Deezer CEO Alexis Lanternier said in a statement.\n\nHe added that the explosion of AI music on the platform was one of the catalysts for the toggle-based features. The company cited a survey from last year, which noted that around 45% of Deezer customers wanted a way to remove AI music from their feeds.\n\nDeezer added AI-detection tooling last year and has been reporting on the number of tracks being uploaded to the platform ever since. At that time, AI-generated tracks represented 10% of daily uploads .\n\nIn July, the company said that more than 50% of daily uploads to its platform were AI-generated tracks , with an average of 90,000 tracks per day.\n\nOther music streaming services have also created their own policies in relation to AI music. Bandcamp has completely banned AI tracks, while Tidal cut off monetization for people uploading AI music. Spotify has taken a leaner stance, only tagging AI tracks and artists more prominently on its platform.\n\nIn August, Variety reported that Apple Music was looking to label AI tracks by the end of the year. Besides platform-based tagging, users are also turning to independent tracking systems to identify AI music."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-63efc4fb7e1c0b5e",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/14/zenzap-raises-44m-for-its-ai-chat-app-that-aims-to-replace-whatsapp-in-the-workplace/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-14T15:08:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Zenzap raises $44M for its AI chat app that aims to replace WhatsApp in the workplace",
-        "summary": "Zenzap is used by organizations including Starbucks and Taco Bell.",
-        "body": "Many businesses around the world use consumer-facing chat apps like WhatsApp, Telegram, Discord, or iMessage to talk and coordinate with staff, and exchange documents or data.\n\nGuy Weiss is building Zenzap , a private messenger with AI that wants to help companies communicate with their staff and arm them with their organization’s context while staying in line with IT and security rules.\n\nThe company has raised $44 million in funding from investors including Bessemer, Lightspeed, and The Garage, as well as individual investors Wix president Nir Zohar and former GM of EY, Yoram Tietz.\n\nThe fundraise is interesting because Weiss is raising money for the first time in his career. In 2012, he bootstrapped e-commerce marketing platform StuccoMedia, and sold it to Market Group in 2015. After that, he became an investor for a few years. In 2022, he founded Zenzap after meeting Bessemer partner Adam Fisher and noodling on different ideas along with his current co-founders Noam Neumann and Jonatan Bien.\n\nWeiss said he initially bootstrapped the app and worked out of Bessemer’s office.\n\n“I didn’t want to raise capital. The only thing I had to lose was my name, and I was super afraid to do a second round as a founder and become a failure, because my first round was very successful. I didn’t need to work for money. So, when I met Adam, I actually started my idea with my own capital,” he told TechCrunch.\n\nWeiss said Fisher convinced him that Zenzap should be a venture-backed business, as the company would need capital to scale.\n\nHe said that the idea was to build a messaging app for a wide range of businesses, ranging from hospitality and construction, to healthcare and fast food.\n\n“You can’t use WhatsApp or iMessage within a workplace with the AI agent on top of it because it doesn’t comply with IT. So that’s off the table. You can’t implement Slack and Microsoft Teams because they were not built for this day-to-day use case for mobile-first that is meant for average users,” Weiss said.\n\nZenzap offers usual chat features on its free tier, including group chats and direct messages, task management, calendar integration, and schedule management, as well as AI-powered voice chat and search. Organizations can pay for plans starting from $51 per month for up to 20 users to unlock voice and video calls, smart task sorting, task templates, and higher limits on file storage. The paid tier also lets you use the AI search across the workspace and turn messages into tasks.\n\nThe company also offers AI agents for workflow automation as well as AI-aided voice note and call transcriptions. For these features, it has a credit-based pricing system.\n\nAt the moment, Zenzap lists organizations like FedEx, Dollar General, Taco Bell, Starbucks, Casey’s, and Regal as clients. Weiss added that branches of fast food chains like IHOP and McDonald’s often coordinate shifts and talk about supply on its platform.\n\n“Each vertical has its own use case and workflows, which they self-serve with AI, but they all share something in common,” he said.\n\nThe startup has 50 staff in the U.S., Tel Aviv, and Europe. In the near future, the company wants to hire in its product and R&D departments.\n\nBessemer’s Fisher said Zenzap’s focus on catering to a broad range of people could work in its favor. He said that even the venture firm is using the messenger within its investment team to discuss and manage deal flows, showing that it can cater to different kinds of audiences.\n\n“The only work platform with any allegiance is Slack, and that’s almost entirely among the developer community. Zenzap is not focused on developers, but on the other 99% of employees using personal messaging apps and waiting for an agent of their own. People desperately want a clear separation of work from their personal lives, and the adoption of personal and work agents makes it imperative that separation happen now,” he told TechCrunch in an emailed statement."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-71b743dbab3a1eec",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/14/apple-says-beloved-macbook-is-now-obsolete-more-products-too/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-14T13:42:09.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple says beloved MacBook is now ‘obsolete,’ more products too",
-        "summary": "Apple has just updated its list of vintage and obsolete products, adding the final model of the beloved 12-inch MacBook to the “obsolete” list alongside two other products. more…",
-        "body": "Apple has just updated its list of vintage and obsolete products, adding the final model of the beloved 12-inch MacBook to the “obsolete” list alongside two other products.\n\nToday Apple marked three additional products as “obsolete” on its website.\n\nThe company keeps a public list of vintage and obsolete products here . It’s regularly updated with new additions based on how long ago a product stopped being available for purchase.\n\nEssentially, if a product stopped being on sale from Apple 5 or more years ago, it’s considered “vintage.” This means Apple will still service the product, but parts availability may be limited.\n\nIf a product stopped being sold 7 or more years ago, it’s marked “obsolete.” Obsolete products are no longer eligible for repairs or any other servicing from Apple.\n\nThe latest obsolete products include:\n\nIf you own any of these products, Apple will no longer be able to service them.\n\nThe most notable addition is the MacBook, as the 2017 model is the last one Apple produced before the line was discontinued. The 2015 and 2016 models were already on the obsolete list.\n\nWhile the 12-inch MacBook was pitched by Apple as a type of MacBook Air successor, it never took off with consumers despite having a loyal base of fans who loved it.\n\nAre you still running any of these products? Let us know in the comments.\n\n* Buy Mac with 15% discount from Apple refurbished"
       }
     },
     "media": null
@@ -310,32 +378,7 @@
       "en": {
         "title": "Anthropic warns small AI models could self-replicate through IoT devices",
         "summary": "\"Small weight-based replicators\" could usher in a new generation of computer worms.",
-        "body": "AI company Anthropic is warning that advances in small AI models could soon usher in a new era of self-replicating malware that’s capable of infecting smart fridges, vacuum cleaners, and a wide range of other Internet-of-things devices and is more resistant to takedown.\n\nBy next year, smaller AI models may be able to autonomously self-replicate on all kinds of IoT devices, the company said. Eventually, the capability could enable computer worms, which propagate without requiring human interaction and are capable of infecting unfamiliar IoT devices. An experiment the company performed recently revealed significant challenges in bringing such an AI malware replicator to fruition, so the finding is necessarily tempered. Still, the results do raise concerns about the possibility of new forms of computer worms.\n\nAnthropic further warned not only about the new potential malware, but also that it could be difficult to stop. In its blog post, it wrote that “a replicator like this would be challenging to shut down, since there’s no centralized point to shut off—though it may be slow (with a doubling time of days). Unlike non-AI malware, it could also figure out unfamiliar devices on its own.”\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-94976c1f39be3595",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/14/apple-website-suggested-siri-ai-may-be-coming-to-full-size-homepods/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-14T12:33:51.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple website suggested Siri AI may be coming to full size HomePods",
-        "summary": "The headline feature of the new HomePod mini 2 is support for Siri AI , something that won’t be available for the first-gen model. But there’s hope that existing full size HomePods may also get access to the smarter intelligent assistant. A leaker noticed two clues on Apple’s website seemingly pointing to this, but it’s possible that it was an error on the part of the company … more…",
-        "body": "The headline feature of the new HomePod mini 2 is support for Siri AI , something that won’t be available for the first-gen model. But there’s hope that existing full size HomePods may also get access to the smarter intelligent assistant.\n\nA leaker noticed two clues on Apple’s website seemingly pointing to this, but it’s possible that it was an error on the part of the company …\n\nThe HomePod mini 2 has the same design as its predecessor, other than refreshed colors. Internally, the S5 chip is replaced with an S10 one, and that provides access to Siri AI .\n\nNot all of the processing is done on the device itself. Apple notes that full Siri AI support is dependent on pairing with an Apple Intelligence-enabled iPhone or iPad.\n\nWhen paired with an Apple Intelligence-enabled iPhone or iPad, HomePod mini can tap into a user’s personal context to help them find what they need in the moment.\n\nLeaker pdfu spotted a couple of indications on Apple’s website that support is also coming to existing full size HomePods – though likely only to 2nd-gen models.\n\nFirst, there were the images used, where the color glow appeared to match that of the HomePod mini 2.\n\nSecond, alt text for one of the images described it as showing the “multi-colored Siri Al glow on top.”\n\nFrom a commercial perspective, Apple does like to hold back some software features from older devices in order to encourage upgrades. At the same time, the company is making a big push on Siri AI, likely to boost Services revenue once usage limits kick in on lower iCloud tiers.\n\nIt’s notable that Apple has replaced the images concerned, but this doesn’t provide much clue as to whether it was an error or simply an announcement the company isn’t yet ready to make. Even on the new HomePod mini 2 speakers, the Siri AI update will follow at a later date . It’s possible that support for their bigger brother could be announced at the same time.\n\nThe optimistic view would be that Apple isn’t requiring Apple TV owners to upgrade in order to get access to Siri AI, which might provide a clue to the company’s thinking. The update is coming to second-generation devices and up , and that may well point to the same story with the full-size HomePod 2."
+        "body": "AI company Anthropic is warning that advances in small AI models could soon usher in a new era of self-replicating malware that’s capable of infecting smart fridges, vacuum cleaners, and a wide range of other Internet of Things devices and is more resistant to takedown.\n\nBy next year, smaller AI models may be able to autonomously self-replicate on all kinds of IoT devices, the company said. Eventually, the capability could enable computer worms, which propagate without requiring human interaction and are capable of infecting unfamiliar IoT devices. An experiment the company performed recently revealed significant challenges in bringing such an AI malware replicator to fruition, so the finding is necessarily tempered. Still, the results raise concerns about the possibility of new forms of computer worms.\n\nAnthropic further warned not only about the new potential malware, but also that it could be difficult to stop. In its blog post, it wrote that “a replicator like this would be challenging to shut down, since there’s no centralized point to shut off—though it may be slow (with a doubling time of days). Unlike non-AI malware, it could also figure out unfamiliar devices on its own.”\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -360,30 +403,6 @@
         "title": "Evaluaciones de APP Evaluaciones de APP actualizadas o incorporadas en el ClubONCE en el mes de septiembre.",
         "summary": "A lo largo del pasado mes de septiembre se han evaluado las siguientes APP:",
         "body": "A lo largo del pasado mes de septiembre se han evaluado las siguientes APP:\n\nAndroid\n\niOS\n\nEn esta ocasión se han evaluado Apps categorizadas en: ayudas para la discapacidad visual, acceso a la información, utilidades y entretenimiento.\n\nSi tiene problemas para abrir los enlaces, copie las url que se muestran a continuación en su navegador:\n\nAndroid\n\niOS\n\nRecordamos a las personas afiliadas que estén interesados en estos informes, que pueden suscribirse a Valoraciones Accesibilidad de APP, de esta manera recibirán un correo cada vez que se publique una nueva aplicación, permitiéndoles disponer de la información puntualmente.\n\nEsta información y los documentos completos de evaluación de cada una de estas aplicaciones están disponibles en el apartado de Valoraciones de accesibilidad de aplicaciones para móviles o accediendo con el navegador a la ruta ClubONCE / Servicios / Autonomía Personal y Tecnología / Tiflotecnología / Valoraciones de accesibilidad de aplicaciones móviles."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-81c4d6e7938d9805",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/tech-policy/2026/10/openai-google-pushing-new-ai-models-easily-tricked-into-making-nudes-researchers-say/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-14T11:00:30.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "OpenAI, Google pushing new AI models easily tricked into making nudes, researchers say",
-        "summary": "Attack method exposes flaws in OpenAI, Google safeguards against AI nudes.",
-        "body": "Safety researchers continue to warn that a large volume of AI-generated explicit content is spreading unchecked, while regulators do little to meaningfully stop it.\n\nThis non-consensual content is commonly shared in text and direct messages or stored in private clouds where it’s less likely to be detected or reported, a Google co-authored study of Internet users across the United States, Australia, and the United Kingdom found this July. That’s why the “most critical intervention point” remains at the source: the harmful AI tools used to make the fake sexual images, Google researchers concluded.\n\nYet red-teaming in recent months suggests that as some of the leading AI image generators from Google and OpenAI become more capable, they may be getting worse at blocking explicit outputs.\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -510,30 +529,6 @@
         "title": "Welcome Home: Apple Announces Updated HomePod Mini, Apple TV, All-New HomeView, and New Home Accessories",
         "summary": "Apple today announced updated models of the HomePod Mini and Apple TV 4K ; as well as an all-new HomeView smart home hub and a collection of smart home accessories . HomePod Mini 2 Powered by the S10 chip and what Apple calls \"advanced computational audio,\" up to four HomePod Mini 2 or HomePod (2nd generation) speakers can be paired to create a surround sound experience with the new Apple TV 4K. Siri AI will be available on HomePod Mini 2 with a future software update. It can recognize up to six people in a household, and can use a user's Apple Intelligence-capable iPhone or iPad to draw on their personal context. With Sound Glow, the top of HomePod Mini 2 can glow and pulse in sync with the currently playing song. Users can additionally customize the displayed animations to promote a relaxing atmosphere. HomePod Mini 2 features 100 percent recycled rare earth elements in all magnets, and 100 percent recycled copper, gold plating, and tin solder in all Apple-designed circuit boards. It can be pre-ordered from Apple starting today in pink, green, blue, white and midnight for US $149, and will begin shipping to customers on Friday, October 30. HomeView HomeView is a smart home hub with a speaker and 7-inch display, which can either be placed on a table or mounted on a wall. It features a variety of Apple apps and widgets on the Home Screen, and allows users to play music, view photos and videos, make and receive FaceTime calls, monitor and control their home, and more using Siri or the touch interface. HomeView can display a generic screen for everyone in the household, or recognize up to six faces to show personalized content for individual users. Apple Silicon and HomeView's speaker array can optimize audio for loudness and bass response at any volume, with tailored profiles for the table-top and wall-mounted models. Siri AI can be used to play media on HomeView, answer general knowledge questions, discuss recipes, and if a user has an Apple Intelligence-capable iPhone or iPad, draw on their personal context for more helpful responses. Like other Apple Intelligence-capable devices, conversations with Siri AI on HomeView are synced via iCloud and viewable in the Siri app on iOS, iPadOS, and macOS. Changes made to Siri's pace or expressiveness on compatible devices are synced to HomeView. HomeView features a wide variety of watchOS-style faces that can display snippets of information at a glance, a user's photos, or interactive art. With a supported iCloud+ subscription, HomeView can integrate with compatible cameras to recognize people, pets, packages, and vehicles, and can describe captured video using AI. With Sound Recognition, HomeView can alert users to smoke and carbon monoxide detectors on their iPhone, iPad, or Apple Watch. Similar to the security and privacy features of other Apple products, data processed by the A18 chip's Secure Exclaves is isolated from the HomeView software and does not leave the device. Users' personal content, like messages and calendar, is only displayed when the user's face is recognized and their iPhone or iPad is present and has been recently unlocked. The wall-mounted HomeView model can optionally be professionally installed. HomeView is made with 100 percent recycled aluminum in the enclosure base and in the enclosure of the wall-mounted model, 100 percent gold plating and tin solder in all Apple-designed circuit boards, and 100 percent recycled rare earth elements in all magnets. It can be pre-ordered from Apple starting today for US $299, and will begin shipping to customers on Friday, November 13. The table-top model is available in silver, starlight, rose pink, and space gray finishes, with the wall-mounted model available in space gray and silver finishes. Apple TV 4K With the A19 chip, Apple claims the new Apple TV 4K delivers up to 50 percent faster CPU performance and up to 2X faster GPU performance when compared to the previous generation. In addition, a new, dedicated AV1 decoder enables more efficient streaming while using less bandwidth. Continuing on the theme of recent Apple product unveilings, the new Apple TV 4K supports Siri AI for smarter voice interactions. Users can find entertainment and control their smart home with more flexible natural language, and Siri AI's awareness of personal context and onscreen content can be used to answer questions about home events or what's currently playing. Users with an Apple Intelligence-capable iPhone or iPad will be able to use Siri AI on Apple TV 4K (2nd and 3rd generation). Three far-field microphones on the new Apple TV 4K support Siri hands-free, allowing users to prompt it by saying \"Siri\" or \"Hey Siri,\" as they do on other Apple devices. The new Siri Remote supports Find My with Precision Finding, which can guide users to the remote's precise location, useful if it, for example, falls between couch cushions. Like other Find My-capable devices, the remote can also play a sound to help users locate it. Similar to other Apple products, data processed by the Secure Exclaves is isolated from tvOS and does not leave the device. The new Apple TV 4K features 100 percent recycled gold plating and tin solder in all Apple-designed circuit boards, and 100 percent recycled rare earth elements in all magnets. It can be pre-ordered from Apple starting today for US $299, and will begin shipping to customers on Friday, November 13. Home Collection In collaboration with LG Electronics and Schneider Electric, Apple has launched a collection of smart home accessories, including a lock, doorbell, thermostats, temperature sensors, and indoor and outdoor cameras. These accessories support NFC for one-tap setup on iPhone, and will begin rolling out in December.",
         "body": "Apple today announced updated models of the HomePod Mini and Apple TV 4K ; as well as an all-new HomeView smart home hub and a collection of smart home accessories ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-de90dd08e948234f",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/tech-policy/2026/10/disney-offers-20m-for-character-ais-scandal-plagued-chatbot-tech/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-13T18:23:33.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Disney offers $20M for Character.AI’s scandal-plagued chatbot tech",
-        "summary": "Disney may acquire tech from one of the first chatbot makers linked to child suicide.",
-        "body": "In a bankruptcy proceeding that kicked off yesterday, Disney has offered to buy some of the technology that powers the controversy-plagued chatbot Character.AI.\n\nDisney is willing to pay $20 million for “a non-exclusive perpetual license” of certain Character Technologies intellectual property, the chatbot maker said in a press release that did not go into much further detail on which assets Disney wanted.\n\nThe move may be surprising. In September 2025, Disney joined others in publicly criticizing Character.AI for stealing content and harming kids. Specifically, Disney sent a strongly worded cease-and-desist letter that accused Character Technologies of weaponizing Disney characters “in a way that could damage its brand long term,” Axios reported .\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -2562,30 +2557,6 @@
         "title": "In-Process 20th July 2026",
         "summary": "Welcome to a new week and a new edition of the blog! There’s a few things inside, starting off with very sad news of the passing of a legend of the community. Vale Rui Fontes NVDA 2026.2 Beta 7 Characters per line Introducing Access Point System Accessibility Repair Tool Vale Rui Fontes Last week, we… Read More",
         "body": "Welcome to a new week and a new edition of the blog! There’s a few things inside, starting off with very sad news of the passing of a legend of the community.\n\nLast week, we were saddened to receive news of the passing of longtime friend of the NVDA community, and of NV Access, Rui Fontes. Rui was a prominent face of “Tiflotecnia”, the organisation who sell Vocalizer for NVDA. Rui was a very prominent add-on developer. There are 16 current add-ons in the store published by him, including the very popular SysTrayList, ClipSpeak and TesseractOCR being just three, as well as contributing to numerous others. Rui was also very active in the NVDA user group, add-on group and other forums, and very interested in helping people in general, not only with his products. He was a tireless advocate for the community. He will be greatly missed. His family have asked for privacy at this time. Please also refrain from asking about his add-ons. Rest assured, they will continue to work throughout the NVDA 2026.x year cycle, even without any additional updates. No doubt, accommodations will be made for their future long before NVDA 2027.1 comes out, and we will share any additional news as we receive it.\n\nOver the weekend, the community received a message from Rui’s wife and daughters deeply thank all those who expressed their condolences regarding the passing of their beloved one, who will remain eternally in our memories. Be sure to subscribe to the official NVDA users email group , or the add-on group for updates and other community news.\n\nOnce again, we are a couple of betas – three in fact – further along than we were last time the blog came out. Let’s see what’s new in NVDA 2026.2 Beta 7 :\n\nChanges introduced in Beta 7: Updates to translations Fix NVDA prompting to restart after updating, instead of logging off Revert SAPI5 bug fix from beta6 which was causing issues loading synthesizers Fix reading PDF content in Foxit PDF Editor with browse mode\n\nChanges introduced in Beta 6: Updates to translations Show the restart dialog after updating from within NVDA, and make sure restarting offers the user the ability to save work in progress SAPI5 bug fix: skip over invalid voices rather than causing the entire driver to fail SAPI4 32-bit bug fix: support voices that don’t support pitch or rate Improve conflict handling between magnifier and screen curtain Restore the ability for add-ons to register custom touch modes in availableTouchModes\n\nChanges introduced in Beta 5: Updates to translations Use math navigation category for one more math script Prevent NVDA freeze when brailling math with certain Unicode characters Improvements to Magnifier messages and settings names\n\nDo head to the NVDA 2026.2 Beta 7 release announcement and try out the new beta. In fact, work is progressing well and we expect another beta to come out in the next few days.\n\nWe were recently asked about the “ Maximum Number of Characters on One Line ” setting. What does it do? And when might you change it?\n\nScreenshot of NVDA’s browse mode settings\n\nOk, firstly, what is it? In a Word document or notepad text, the program exposes how much text is on one line. If you press down arrow, the caret moves to the character directly below. On the web, this isn’t as clearly defined. The size of the window, CSS rules, JavaScript, nearby images, and many other things can affect exactly how much text fits on a line. Because of this, and the way screen readers process web content, the document does not expose exactly where to move when you press down arrow. The way we work around this is to arbitrarily decide how many characters are on a “line”. There is a setting in NVDA’s browse mode settings called “Maximum number of characters on one line”. The default value for this is 100 characters. That is, when you press “down arrow”, the caret moves forward through the text on the web page by 100 characters.\n\nAs an example, the first line of the latest beta release announcement, visually, is: “Beta7 of NVDA 2026.2 is now available for download and testing. For” At NVDA’s default 100 max characters per line, pressing down arrow to that line will continue on to read “anyone who is interested in”, before stopping. If you change it to 50 chars, it will stop after “Available for” (it avoids stopping at half words).\n\nThe Beta 7 release announcement, used in the example above\n\nNVDA user James also added: “When you’re not doing a say all and want to press Down Arrow less often, increase it. When you’re not doing a say all and would find it easier to process text in smaller chunks, decrease it.” Fellow NVDA user Pratik offered: “I have it set to maximum most times as well. If I want to read in smaller chunks, I do it with my Braille display. It’s a nice compromise.”\n\nThere is a companion setting, “Maximum lines per page” which, you can probably guess, adjusts how many lines the caret moves when you press page up or page down. The default for this is 25 lines.\n\nHow do you have these options set? Do continue the conversation on the Mastodon thread , or in the user group .\n\nWorld Services for the Blind in the United States is one of many organisations around the world who provide training in NVDA. This is a valuable part of the job readiness program they provide. They recently invited us to collaborate with them on a webinar series introducing the new features of NVDA around the time of each release. We are very pleased to share with you, the inaugural “Access Point” webinar, with a focus on NVDA 2026.1 . We know many of our regular readers will be very familiar with what was new in NVDA 2026.1, as it has been out for nearly a couple of months now, but if you’d like a refresher, this could be the webinar for you. Starting something new always takes a little time to dial in, so we anticipate having the next version out a lot closer to when the stable NVDA 2026.2 is released.\n\nWe don’t often update features in ways which don’t change how they work. And, when we do, we don’t often highlight it. But let’s make an exception! NVDA has had a tool called the “COM registration fixing tool” for a long time now. We have covered it once before , and at the time noted that it could fix issues including: NVDA reports “unknown” when navigating in browsers such as Firefox, Thunderbird etc NVDA fails to switch between focus mode and browse mode NVDA is very slow when navigating in browsers while using browse mode\n\nThe tool can still fix all those and more, and it works much the same – but now it has a new name. Introducing: “System Accessibility Repair Tool”. The tool is a useful troubleshooting step any time you run into an unusual problem with NVDA. It is also one of the steps you are encouraged to make before reporting an issue on GitHub.\n\nYou can still find the System Accessibility Repair Tool on NVDA’s “Tools” menu. Press NVDA+n , then t for tools and you’ll find it listed there."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "usable-y-accesible-b94c9a77963884b5",
-    "type": "news",
-    "sourceId": "usable-y-accesible",
-    "sourceName": "Usable y accesible",
-    "sourceUrl": "https://olgacarreras.blogspot.com/",
-    "originalUrl": "https://olgacarreras.blogspot.com/2026/07/xr-accessibility-guidelines-10-de.html",
-    "originalLanguage": "es",
-    "publishedAt": "2026-07-16T19:13:28.352Z",
-    "categories": [
-      "tecnologia-accesibilidad",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "es": {
-        "title": "XR Accessibility Guidelines 1.0 de Metaverse Standards Forum",
-        "summary": "Imagen creada con IA. Descripción textual de la imagen Se han publicado las XR Accessibility Guidelines 1.0, un recurso pionero del Grupo de Trabajo de Accesibilidad del Metaverse Standards Forum. Las XR Accessibility Guidelines 1.0 nacen para ayudar a evaluar la accesibilidad de las experiencias XR. Por ello, las directrices ofrecen criterios verificables e independientes de la tecnología,",
-        "body": "Nota 1: como todos los artículos de este blog, este artículo NO está promocionado.\n\nNota 2: como todos los artículos de este blog, este artículo se ha ideado y elaborado sin el uso de herramientas IA, solo se han usado para la revisión final de la ortografía.\n\nAutor: Olga Carreras Montoto\n\nEtiquetas: accesibilidad metaverso , accesibilidad realidad virtual (VR)\n\nCompártelo en:\n\nHistórico de artículos:\n\nSubir al comienzo de la página"
       }
     },
     "media": null

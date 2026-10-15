@@ -165,11 +165,11 @@
         const title = card.querySelector('h3');
         const play = card.querySelector('.video-play-button');
         if (!title || !play) return;
-        const keys = ['open'];
+        const keys = ['play'];
         const videoId = play.dataset.videoId || '';
         if (/^[a-zA-Z0-9_-]{11}$/.test(videoId)) keys.push('youtube');
         makeEntry(title, 'video', title.textContent?.trim(), keys, selected => {
-          if (selected === 'open') play.click();
+          if (selected === 'play') play.click();
           else if (selected === 'youtube' && /^[a-zA-Z0-9_-]{11}$/.test(videoId))
             window.open('https://www.youtube.com/watch?v=' + encodeURIComponent(videoId),
               '_blank', 'noopener,noreferrer');
@@ -182,9 +182,9 @@
         if (!title || !play) return;
         const description = card.querySelector('p:not(.resource-meta)');
         makeEntry(title, 'podcast', title.textContent?.trim(),
-          description ? ['open', 'description'] : ['open'],
+          description ? ['play', 'description'] : ['play'],
           selected => {
-            if (selected === 'open') play.click();
+            if (selected === 'play') play.click();
             if (selected === 'description' && description) {
               description.tabIndex = -1;
               description.focus({ preventScroll: true });

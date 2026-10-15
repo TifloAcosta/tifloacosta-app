@@ -215,7 +215,7 @@ private final class TifloTenPercentSeekSlider: UISlider {
     }
 }
 
-private final class TifloYouTubeViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
+final class TifloYouTubeViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
     private let videoId: String
     private let videoTitle: String
     private let videoDescription: String

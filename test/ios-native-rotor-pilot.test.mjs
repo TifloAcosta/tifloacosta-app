@@ -85,3 +85,23 @@ test('every principal actionable iOS collection has an explicit native route', (
   assert.match(appwide, /VoiceOver/);
   assert.doesNotMatch(appwide, /Probar acciones nativas de VoiceOver/);
 });
+
+test('long press and VoiceOver use the same per-item action model', () => {
+  assert.match(plugin, /CAPPluginMethod\(name: "showNativeContextMenu"/);
+  assert.match(plugin, /UIAlertController\(title: label, message: nil, preferredStyle: \.actionSheet\)/);
+  assert.match(plugin, /nativeListAction/);
+  assert.match(appwide, /addEventListener\('contextmenu'/);
+  assert.match(appwide, /api\.showNativeContextMenu\(/);
+  assert.match(appwide, /menuItems\.set\(id, item\)/);
+  assert.match(controller, /contextMenuConfigurationForRowAt/);
+});
+
+test('native app-wide overlay is explicitly VoiceOver-gated and has HTML fallback', () => {
+  assert.match(appwide, /if \(!status\?\.enabled\) return/);
+  assert.match(appwide, /getVoiceOverStatus/);
+  assert.match(appwide, /showNativeActionList/);
+  assert.match(appwide, /lastPresentedKey = key/);
+  assert.match(appwide, /lastPresentedKey = ''/);
+  assert.match(appwide, /nativeOpen = true/);
+  assert.match(appwide, /collection\.get\(String\(itemId \|\| ''\)\)/);
+});

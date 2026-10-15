@@ -176,6 +176,7 @@
       window.TifloVideoPlayer.open({
         id: video.id,
         title: video.title,
+        channelTitle: video.channelTitle,
         description: video.description,
         fullDescription: video.description,
         publishedAt: video.publishedAt,

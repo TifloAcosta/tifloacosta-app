@@ -189,9 +189,84 @@
     observer.observe(list, { childList: true, subtree: true, attributes: true, attributeFilter: ['aria-label'] });
   }
 
+  // Temporary experiment: genuine native rows, without replacing the HTML
+  // library or changing Android/the website. Remove this button after validation.
+  function installNativeActionPilot() {
+    const plugin = accessibility();
+    const list = document.getElementById('reading-library-list');
+    if (!plugin?.showNativeActionList || !list ||
+        document.getElementById('ios-voiceover-native-action-pilot')) return;
+    const button = document.createElement('button');
+    button.id = 'ios-voiceover-native-action-pilot';
+    button.type = 'button';
+    button.className = 'button-link';
+    button.textContent = iosText('Probar acciones nativas de VoiceOver', 'Test native VoiceOver actions');
+    list.parentElement?.insertBefore(button, list);
+    let pilotedIds = new Set();
+    const actionForTitle = (id, selected) => {
+      if (!pilotedIds.has(id)) return;
+      pilotedIds.clear();
+      const title = document.getElementById(id);
+      const bookId = title?.closest('.reading-library-title-card')?.dataset.iosBookId;
+      const api = window.TifloIOSBookActions;
+      if (!title || !bookId || !api) return;
+      if (selected === 'open' || selected === 'continue') { title.click(); return; }
+      if (selected === 'queue') { void api.queueBook(bookId); return; }
+      if (selected === 'info') { void api.infoBook(bookId); return; }
+      if (selected === 'move') { window.TifloIOSFolders?.promptAssignment?.(bookId); return; }
+      if (selected === 'export') { void api.exportBook(bookId, 'original'); return; }
+      if (selected === 'rename') { void api.renameBook(bookId); return; }
+      if (selected === 'delete') { void api.deleteBook(bookId); }
+    };
+    void plugin.addListener('nativeListAction', ({ itemId, action }) => {
+      actionForTitle(String(itemId || ''), String(action || ''));
+    }).catch(() => {});
+    void plugin.addListener('nativeListClosed', () => {
+      pilotedIds.clear();
+      if (button.isConnected) button.focus({ preventScroll: true });
+    }).catch(() => {});
+    button.addEventListener('click', async () => {
+      const items = [...list.querySelectorAll('.reading-library-title')]
+        .filter(title => title.id && title.closest('.reading-library-title-card'))
+        .slice(0, 10)
+        .map(title => ({
+          id: title.id,
+          label: title.textContent?.trim() || title.id,
+          actions: voiceOverActions.map(([id, es, en]) => ({ id, label: iosText(es, en) }))
+        }));
+      if (!items.length) {
+        const status = document.getElementById('reading-library-status');
+        if (status) status.textContent = iosText(
+          'No hay documentos para esta prueba.',
+          'There are no documents to test.'
+        );
+        return;
+      }
+      pilotedIds = new Set(items.map(item => item.id));
+      button.disabled = true;
+      try {
+        await plugin.showNativeActionList({
+          language: document.documentElement.lang === 'en' ? 'en' : 'es',
+          title: iosText('Biblioteca nativa: prueba de VoiceOver', 'Native library: VoiceOver pilot'),
+          items
+        });
+      } catch {
+        pilotedIds.clear();
+        const status = document.getElementById('reading-library-status');
+        if (status) status.textContent = iosText(
+          'No se pudo abrir la prueba nativa. La biblioteca habitual sigue disponible.',
+          'The native pilot could not open. Your regular library is still available.'
+        );
+      } finally {
+        button.disabled = false;
+      }
+    });
+  }
+
   function installIOSReadingBridges() {
     installNativeFilesImport();
     installLibraryNativeActions();
+    installNativeActionPilot();
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', installIOSReadingBridges, { once: true });

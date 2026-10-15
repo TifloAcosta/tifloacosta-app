@@ -7,8 +7,9 @@ import AppKit
 guard CommandLine.arguments.count == 3 else {
     fatalError("Uso: swift make-app-icon.swift origen destino")
 }
-guard let logo = NSImage(contentsOfFile: CommandLine.arguments[1]),
-      let bitmap = NSBitmapImageRep(contentsOfFile: CommandLine.arguments[1]) else {
+let inputData = try Data(contentsOf: URL(fileURLWithPath: CommandLine.arguments[1]))
+guard let logo = NSImage(data: inputData),
+      let bitmap = NSBitmapImageRep(data: inputData) else {
     fatalError("Icono TifloAcosta no encontrado")
 }
 let dimension = 1024
@@ -28,7 +29,7 @@ func sample(_ x: Int, _ y: Int) -> Sample {
     let safeX = max(0, min(originalWidth - 1, x))
     let safeY = max(0, min(originalHeight - 1, y))
     let color = bitmap.colorAt(x: safeX, y: safeY)?
-        .usingColorSpace(.deviceRGB) ?? NSColor.clear
+        .usingColorSpace(NSColorSpace.deviceRGB) ?? NSColor.clear
     return Sample(r: color.redComponent, g: color.greenComponent,
                   b: color.blueComponent, a: color.alphaComponent)
 }
@@ -47,12 +48,15 @@ let transparentBackground = corners.allSatisfy { $0.a < 0.22 }
 let opaqueBackground = corners.allSatisfy { $0.a > 0.98 }
 let uniformBackground = opaqueBackground &&
     corners.allSatisfy { difference($0, corners[0]) < 0.10 }
-let background = uniformBackground
-    ? Sample(r: corners.map(\.r).reduce(0, +) / 4,
-             g: corners.map(\.g).reduce(0, +) / 4,
-             b: corners.map(\.b).reduce(0, +) / 4,
-             a: 1)
-    : Sample(r: 13 / 255, g: 43 / 255, b: 69 / 255, a: 1)
+let background: Sample
+if uniformBackground {
+    let totalR: CGFloat = corners[0].r + corners[1].r + corners[2].r + corners[3].r
+    let totalG: CGFloat = corners[0].g + corners[1].g + corners[2].g + corners[3].g
+    let totalB: CGFloat = corners[0].b + corners[1].b + corners[2].b + corners[3].b
+    background = Sample(r: totalR / 4, g: totalG / 4, b: totalB / 4, a: 1)
+} else {
+    background = Sample(r: 13.0 / 255.0, g: 43.0 / 255.0, b: 69.0 / 255.0, a: 1)
+}
 
 var minX = originalWidth, minY = originalHeight, maxX = -1, maxY = -1
 if transparentBackground || uniformBackground {

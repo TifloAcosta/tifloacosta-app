@@ -293,14 +293,18 @@ export async function searchVideos(apiKey, searchTerm, pageToken = '', fetchImpl
     .filter(id => VIDEO_ID_RE.test(id));
 
   let durations = new Map();
+  let viewCounts = new Map();
   if (ids.length) {
     const details = await youtubeKeyFetch(query('videos', [
-      ['part', 'contentDetails'],
+      ['part', 'contentDetails,statistics'],
       ['id', ids.join(',')]
     ]), apiKey, fetchImpl);
     durations = new Map((Array.isArray(details?.items) ? details.items : []).map(item => [
       String(item?.id || ''),
       parseIsoDuration(item?.contentDetails?.duration)
+    ]));
+    viewCounts = new Map((Array.isArray(details?.items) ? details.items : []).map(item => [
+      String(item?.id || ''), Number(item?.statistics?.viewCount || 0)
     ]));
   }
 
@@ -316,7 +320,8 @@ export async function searchVideos(apiKey, searchTerm, pageToken = '', fetchImpl
         publishedAt: String(snippet.publishedAt || ''),
         description: String(snippet.description || ''),
         thumbnail: String(snippet?.thumbnails?.medium?.url || snippet?.thumbnails?.default?.url || ''),
-        durationSeconds: durations.get(id) || 0
+        durationSeconds: durations.get(id) || 0,
+        viewCount: viewCounts.get(id) || 0
       }];
     }),
     nextPageToken: String(searchData?.nextPageToken || '')

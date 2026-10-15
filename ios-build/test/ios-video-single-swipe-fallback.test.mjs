@@ -23,7 +23,7 @@ test('Una entrada a videos.html vuelve a intentar abrir el listado nativo con Vo
   assert.match(bridge, /endsWith\('\/videos\.html'\)/);
   assert.match(bridge, /getVoiceOverStatus\(\)/);
   assert.match(bridge, /showNativeVideoSection\(\{ videos, theme: videoTheme\(\) \}\)/);
-  assert.match(bridge, /location\.replace\('index\.html'\)/);
+  assert.match(bridge, /location\.assign\('index\.html'\)/);
 });
 
 test('No se modifica la página de vídeos pública ni el listado de Android', () => {

@@ -150,10 +150,29 @@ if transparentBackground && maxX >= minX && maxY >= minY &&
             width: CGFloat(dimension) * 0.976,
             height: CGFloat(dimension) * 0.976
         )
+        // Isolate the white/red TA mark from the interior navy source.
+        // Copying the old navy square into a new solid background would show
+        // faint rectangular seams against Apple's rounded icon mask.
+        guard let isolated = NSBitmapImageRep(
+            bitmapDataPlanes: nil, pixelsWide: originalWidth, pixelsHigh: originalHeight,
+            bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false,
+            colorSpaceName: .deviceRGB, bytesPerRow: 0, bitsPerPixel: 0
+        ) else { fatalError("No se pudo aislar el símbolo TA") }
+        for y in 0..<originalHeight {
+            for x in 0..<originalWidth {
+                let pixel = sample(x, y)
+                let diff = difference(pixel, leftNavy)
+                let alpha = min(1, max(0, (diff - 0.09) / 0.19)) * pixel.a
+                isolated.setColor(NSColor(calibratedRed: pixel.r, green: pixel.g,
+                                          blue: pixel.b, alpha: alpha), atX: x, y: y)
+            }
+        }
+        let mark = NSImage(size: logo.size)
+        mark.addRepresentation(isolated)
         NSColor(calibratedRed: leftNavy.r, green: leftNavy.g,
                 blue: leftNavy.b, alpha: 1).setFill()
         area.fill()
-        logo.draw(in: markTarget, from: markSource,
+        mark.draw(in: markTarget, from: markSource,
                   operation: .sourceOver, fraction: 1)
         print("AppIcon: marco interior duplicado eliminado y símbolo TA ajustado al contorno de iOS")
     } else {

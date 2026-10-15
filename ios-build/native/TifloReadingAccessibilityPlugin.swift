@@ -16,7 +16,8 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
         CAPPluginMethod(name: "registerAccessibleTargets", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "clearDocumentActions", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "showNativeActionList", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "getVoiceOverStatus", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "getVoiceOverStatus", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "showNativeContextMenu", returnType: CAPPluginReturnPromise)
     ]
 
     private var pendingPicker: CAPPluginCall?
@@ -302,6 +303,60 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
     @objc public func getVoiceOverStatus(_ call: CAPPluginCall) {
         DispatchQueue.main.async {
             call.resolve(["enabled": UIAccessibility.isVoiceOverRunning])
+        }
+    }
+
+    // Long press on a web-backed title opens a system action sheet immediately.
+    // The same item/action identifier is used by UIKit rotor custom actions.
+    @objc public func showNativeContextMenu(_ call: CAPPluginCall) {
+        DispatchQueue.main.async {
+            guard let presenter = self.bridge?.viewController,
+                  presenter.presentedViewController == nil,
+                  let item = call.getObject("item"),
+                  let itemId = item["id"] as? String, !itemId.isEmpty, itemId.count <= 256,
+                  let label = item["label"] as? String, !label.isEmpty, label.count <= 500,
+                  let definitions = item["actions"] as? [[String: Any]],
+                  !definitions.isEmpty, definitions.count <= 12 else {
+                call.reject("Invalid item or another native screen is open")
+                return
+            }
+            let allowed = Set([
+                "open", "continue", "read", "translate", "queue", "info", "move",
+                "export", "rename", "delete", "play", "youtube", "description",
+                "download", "share", "favorite", "options", "copy", "original",
+                "readmore", "mark", "remove", "pause", "listen"
+            ])
+            let sheet = UIAlertController(title: label, message: nil, preferredStyle: .actionSheet)
+            var seen = Set<String>()
+            for definition in definitions {
+                guard let actionId = definition["id"] as? String, allowed.contains(actionId),
+                      seen.insert(actionId).inserted,
+                      let title = definition["label"] as? String,
+                      !title.isEmpty, title.count <= 100 else {
+                    call.reject("Invalid or duplicated context action")
+                    return
+                }
+                sheet.addAction(UIAlertAction(
+                    title: title,
+                    style: actionId == "delete" ? .destructive : .default
+                ) { [weak self] _ in
+                    self?.notifyListeners("nativeListAction", data: [
+                        "itemId": itemId, "action": actionId
+                    ])
+                })
+            }
+            sheet.addAction(UIAlertAction(
+                title: call.getString("language") == "en" ? "Cancel" : "Cancelar",
+                style: .cancel
+            ))
+            if let popover = sheet.popoverPresentationController {
+                popover.sourceView = presenter.view
+                popover.sourceRect = CGRect(x: presenter.view.bounds.midX,
+                                            y: presenter.view.bounds.midY, width: 1, height: 1)
+            }
+            presenter.present(sheet, animated: true) {
+                call.resolve(["presented": true])
+            }
         }
     }
 

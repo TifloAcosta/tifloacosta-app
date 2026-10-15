@@ -262,9 +262,9 @@
     const enterSearch = () => {
       const input = searchField;
       if (input) {
-        input.focus({ preventScroll: false });
         announceVideo(txt('Escribe un título y pulsa Buscar en YouTube.',
           'Enter a title and press Search YouTube.'));
+        input.focus({ preventScroll: false });
       }
     };
     if (!isSearch && available(searchField)) makeEntry(searchField, 'video-control',

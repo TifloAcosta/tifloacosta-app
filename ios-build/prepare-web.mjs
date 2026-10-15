@@ -333,6 +333,7 @@ await cp(join(root, 'ios-build/ios-reader-minimal.js'), join(output, 'ios-reader
 await cp(join(root, 'ios-build/ios-reader-folders.js'), join(output, 'ios-reader-folders.js'));
 await cp(join(root, 'ios-build/ios-reader-native.js'), join(output, 'ios-reader-native.js'));
 await cp(join(root, 'ios-build/ios-accessible-actions.js'), join(output, 'ios-accessible-actions.js'));
+await cp(join(root, 'ios-build/ios-appwide-native-actions.js'), join(output, 'ios-appwide-native-actions.js'));
 
 const commitSha = String(process.env.GITHUB_SHA ||
   execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim());
@@ -400,7 +401,7 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
   if (name === 'podcast.html') {
     html = html.replace('</body>', '<script>requestAnimationFrame(() => { const heading = document.getElementById("podcast-heading"); heading?.setAttribute("tabindex", "-1"); heading?.focus({preventScroll:true}); });</script>' + '\n</body>');
   }
-  html = html.replace('</body>', '<script src="ios-accessible-actions.js"></script>\n</body>');
+  html = html.replace('</body>', '<script src="ios-accessible-actions.js"></script><script src="ios-appwide-native-actions.js"></script>\n</body>');
   await writeFile(path, html);
 }
 
@@ -623,7 +624,7 @@ await writeFile(iosActualidadPath, iosActualidad);
 await import('./patch-reading-native.mjs');
 
 // Fail before signing or uploading if an injected iOS-only script is invalid.
-for (const file of ['app.js', 'videos.js', 'actualidad.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-choice-groups.js', 'ios-videos-fallback.js', 'ios-actualidad-media-fallback.js', 'ios-choice-collapse.js', 'ios-reader-selects.js', 'ios-reader-minimal.js', 'ios-reader-folders.js', 'ios-reader-native.js', 'ios-accessible-actions.js', 'web-reading.js', 'ios-parity.js', 'news-videos.js']) {
+for (const file of ['app.js', 'videos.js', 'actualidad.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-choice-groups.js', 'ios-videos-fallback.js', 'ios-actualidad-media-fallback.js', 'ios-choice-collapse.js', 'ios-reader-selects.js', 'ios-reader-minimal.js', 'ios-reader-folders.js', 'ios-reader-native.js', 'ios-accessible-actions.js', 'ios-appwide-native-actions.js', 'web-reading.js', 'ios-parity.js', 'news-videos.js']) {
   execFileSync(process.execPath, ['--check', join(output, file)], { stdio: 'pipe' });
 }
 console.log('Validación sintáctica de scripts iOS completada');

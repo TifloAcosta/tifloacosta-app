@@ -1,0 +1,34 @@
+PILOTO iOS: acciones nativas de VoiceOver
+Fecha: 15 de octubre de 2026
+
+PROPÓSITO
+Comprobar directamente en el iPhone si el rotor de VoiceOver ofrece las acciones sobre cada título de una lista real UIKit. No se intenta rediseñar TifloLector ni corregir todas las secciones antes de verificar la causa.
+
+VERSIÓN DE PARTIDA / REGRESO
+La compilación de TestFlight procede de la rama preparacion-ios, NO de main/mobile.
+Referencia antes de modificar: commit 1b4f5d62789944909bfca03f8c1154c2f459e44a.
+Rama de recuperación: backup/ios-testflight-before-native-2026-10-15.
+Rama de experimento: feature/ios-testflight-voiceover-native-pilot-2026-10-15.
+Código de la app web, Android, almacenamiento, importación, progreso y ajustes no se alteran. El piloto solo se incorpora al paquete iOS.
+
+FUNCIONAMIENTO DE LA PRUEBA
+En Biblioteca aparece temporalmente "Probar acciones nativas de VoiceOver".
+Al pulsarlo se abre una lista UIKit con hasta diez títulos de la página visible; los títulos permanecen en la biblioteca habitual. Cada título es un elemento de accesibilidad real con ocho acciones personalizadas. En el rotor, seleccionar Acciones, hacer flic arriba o abajo para recorrerlas, y doble toque para ejecutar la seleccionada. El toque normal sobre el título intenta abrirlo. Cerrar regresa sin modificar datos.
+Las acciones delegan en las mismas funciones existentes; Eliminar sigue dependiendo de la confirmación de la biblioteca.
+La pantalla HTML anterior sigue siendo accesible inmediatamente después de cerrar el piloto.
+
+PRUEBAS PREVIAS OBLIGATORIAS
+1. Test aislado de contrato de filas/actions, etiquetas y puente.
+2. Generación de proyecto Capacitor iOS de la rama preparacion-ios.
+3. Compilación Xcode 26 para iOS sin firma: error => NO subir.
+4. Verificar en iPhone físico que VoiceOver anuncia acciones para el título enfocado y no para el contiguo.
+5. Probar Abrir, Información, Cambiar título, Cola y Eliminar (confirmación previa). Si algo no funciona, no expandir la implementación.
+6. Comprobar que la lista HTML, el lector, el progreso y el foco vuelven a funcionar como antes.
+
+REVERSIÓN
+Antes de subir: no integrar el PR experimental ni alterar preparacion-ios.
+Si la beta falla y se hubiera integrado el cambio: revertir por commit los archivos de piloto, o tomar como fuente la rama backup/ios-testflight-before-native-2026-10-15 y publicar una compilación NUEVA con número superior mediante el flujo TestFlight existente. No cambiar la base de datos ni borrar documentos.
+La beta anterior continúa existiendo en el historial de TestFlight mientras Apple la conserve y autorice volver a ella. No afirmar que un retroceso por simple instalación esté disponible sin verificarlo.
+
+CRITERIO DE PUBLICACIÓN
+El CI sin firma verifica compilación, NO el funcionamiento del rotor. Para probar en el iPhone se necesita una beta etiquetada como experimental, sin activación general ni publicación Android/web. La subida no se hará por un push ordinario; el flujo de TestFlight requiere una solicitud de publicación explícita.

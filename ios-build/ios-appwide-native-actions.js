@@ -27,6 +27,7 @@
     && !node.closest('[hidden], [aria-hidden="true"]')
     && node.getClientRects().length);
   const collection = new Map();
+  const menuItems = new Map();
   let sequence = 0;
   let listenerReady = false;
   let nativeOpen = false;
@@ -101,6 +102,7 @@
     const id = idFor(node, kind);
     const item = { id, label: title.slice(0, 450), actions: keys.map(action) };
     list.push(item);
+    menuItems.set(id, item);
     collection.set(id, { node, kind, handler });
   }
 
@@ -146,6 +148,7 @@
 
   function gather(info) {
     collection.clear();
+    menuItems.clear();
     const list = [];
     const root = info.node;
     if (info.kind === 'library') {
@@ -307,6 +310,27 @@
     lastPresentedKey = '';
     schedule();
   }
+
+  // Touch users get a one-step native contextual action sheet on long press.
+  // The menu is generated from the exact same registered actions as VoiceOver.
+  document.addEventListener('contextmenu', event => {
+    const target = event.target?.closest?.(
+      '[data-tiflo-native-action-id], .reading-library-title'
+    );
+    if (!target) return;
+    const id = target.classList.contains('reading-library-title')
+      ? target.id : target.dataset.tifloNativeActionId;
+    const item = menuItems.get(id);
+    const api = native();
+    if (!item || !api?.showNativeContextMenu) return;
+    event.preventDefault();
+    void ensureListeners(api).then(() => {
+      if (!listenerReady) return;
+      return api.showNativeContextMenu({
+        item, language: english() ? 'en' : 'es'
+      });
+    }).catch(() => {});
+  }, true);
 
   // A navigation opens the actual UIKit list once; changes to filters/pages
   // may reopen it on request. No temporary test button is installed.

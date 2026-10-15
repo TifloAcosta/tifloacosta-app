@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-15T17:47:20.931Z",
+  "generatedAt": "2026-10-15T19:11:37.736Z",
   "resources": [
     {
       "kind": "resource",
@@ -5448,6 +5448,231 @@
   "news": [
     {
       "kind": "news",
+      "id": "9to5mac-927f14e578f39994:en",
+      "sourceId": "9to5mac-927f14e578f39994",
+      "lang": "en",
+      "title": "Sonos adds iPhone Duo support with latest app update",
+      "summary": "Sonos is getting ready for Apple’s first foldable iPhone. The company has released Sonos 27.2, which brings support for the upcoming iPhone Duo ahead of its launch later this month. more…",
+      "body": "Sonos is getting ready for Apple’s first foldable iPhone. The company has released Sonos 27.2, which brings support for the upcoming iPhone Duo ahead of its launch later this month.\n\nAs announced in a post on Reddit , Sonos 27.2 brings version 90.1 of the Sonos app to iOS. The update adds support for iPhone Duo in both folded and unfolded configurations. The update is available now through the App Store, and users can install it manually.\n\nThe Sonos 27.2 update follows the company’s broader Sonos 27 software release , which introduced a redesigned app experience alongside new features for its speaker lineup.\n\nWill you be picking up an iPhone Duo? Let us know in the comments below.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/15/sonos-adds-iphone-duo-support-with-latest-app-update/",
+      "publishedAt": "2026-10-15T19:05:24.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-4d984158e3a58148:en",
+      "sourceId": "9to5mac-4d984158e3a58148",
+      "lang": "en",
+      "title": "Apple execs talk Samsung’s role in creating iPhone Duo display",
+      "summary": "Apple is widely reported to have Samsung as its key supplier in building the iPhone Duo’s folding display. As a result, some have claimed that Apple is just “using a Samsung display.” Here’s how Apple addressed that question in a new interview . more…",
+      "body": "Apple is widely reported to have Samsung as its key supplier in building the iPhone Duo’s folding display. As a result, some have claimed that Apple is just “using a Samsung display.” Here’s how Apple addressed that question in a new interview .\n\nLast month, YouTuber MrMobile (Michael Fisher) had the chance to interview a trio of key Apple staff who were involved in iPhone Duo’s development.\n\nThe sit-down took place following the iPhone Duo introduction, but the interview just went live on YouTube yesterday.\n\nIt’s a great video that’s well worth watching if you’re interested in the iPhone Duo. But one noteworthy portion involves the question of Samsung’s involvement in building the Duo’s display.\n\nHere’s what Rich Dinh (VP of Hardware Engineering) and JP Guillou (Senior Director of Display Technology for iPhone) had to say:\n\nMichael Fisher : What on the iPhone do is like straight out of the Samsung factory and what is Apple designed?\n\nRich Dinh : Everything that we design internally comes from the place of servicing the experience at the end of the day. And so whether it’s the display, whether it’s the hinge, whether it’s the enclosure, the chip, there are manufacturers that we work with, a number of them, incredible manufacturers that we work with. But at the end of the day, we start with, “What are we trying to accomplish?” And we start internally with, “What are we trying to accomplish in the design? What are some of the challenges we’re trying to solve for?” And then we work with our manufacturers to help us develop those parts.\n\nFisher then presents a contrast between the display and hinge, He suggests that Apple gets shipped a pallet of “display things” from Samsung to make the iPhone Duo, then says, “That doesn’t include the hinge, right? The hinge is not in that thing. You guys whip that up yourselves.” Here’s how Apple responds:\n\nJP Guillou : Maybe I can say: the display doesn’t exist at the vendor until we start working on it.\n\nFisher : They don’t start working on it until you make an order with your specifications.\n\nDinh : Yeah, there’s not a, unfortunately [laughter] there’s not a pre-cooked shelf of components that we can go to.\n\nGuillou : And certainly not ones that would meet our demands, expectations, requirements, specifications.\n\nFisher : Everything is a custom order for you guys.\n\nGuillou : Everything is, everything is.\n\nDinh : We really did start from the ground up. Now, there’s partners that we work with out there that are incredible partners in helping us to manufacture these designs, but it always starts with, like, we customize down to the nanometer.\n\nOther key topics addressed in the video include iPhone Duo’s durability, the choice to use an under-display camera on the folding screen, how Apple approaches product design, and more.\n\nWhat are your takeaways from MrMobile’s interview? Let us know in the comments.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/15/apple-execs-talk-samsungs-role-in-creating-iphone-duo-display/",
+      "publishedAt": "2026-10-15T19:00:14.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-7a7e3a49ea7eb00b:en",
+      "sourceId": "engadget-7a7e3a49ea7eb00b",
+      "lang": "en",
+      "title": "Alexa Tablet 12 Pro review: Amazon's premium tablet gets almost everything right",
+      "summary": "This tablet is a great value, even if Android apps still aren't great on a big screen.",
+      "body": "This tablet is a great value, even if Android apps still aren't great on a big screen.\n\nAmazon has long followed the same formula for its tablets. Fire tablets are known to be cheap, durable devices good for watching video and doing casual tasks like browsing, playing basic games and checking out Facebook. They're more limited than the average Android tablet, without access to the Google Play Store and its wealth of apps. Amazon's own app store has received plenty of support from developers over the years, but it's still missing plenty of crucial options like Whatsapp and YouTube, just to name a few.\n\nThis year, however, Amazon is changing up its strategy. Its new series of Alexa tablets may highlight the company's services and assistant first and foremost, but they're also full-fledged Android tablets with plenty of Google's own apps and access to the Play Store. The Alexa Tablet Pro 12 is easily the most intriguing of the new lineup (which also includes non-pro 8- and 11-inch options). While Fire tablets have always focused on media consumption, the Tablet Pro 12 is clearly squaring off with the iPad Air and Pro. At first glance, it looks nearly identical to Apple's tablets, with a fairly thin bezel surrounding a lovely and large display, and an aluminum unibody design that's relatively thin (6.5mm) and light (1.21 pounds).\n\nIts optional keyboard and stylus accessories complete the look and signify that the Alexa Tablet Pro 12 isn't just meant for watching videos. This is a tablet meant for getting things done — and while it isn't quite as capable as Apple's iPad lineup, mostly due to software limitations, its $499 starting price means it's much easier to forgive the places it falls short.\n\nYou'll be forgiven if you mistake the Alexa Tablet Pro 12 (from here out I'll just call it the Alexa Tablet) for a recent iPad Air or Pro, because they look very similar. The shorter sides of the Alexa Tablet have speakers on them; one end has a power button with a fingerprint sensor for unlocking the tablet, while the other has a lone USB-C port for charging and data transfer (it recognized my SD card reader and a USB-C flash drive without issue). I'm bummed not to see a headphone jack anywhere, but not surprised.\n\nOn the Alexa Tablet's top edge, you'll find volume up and down buttons as well as a groove where you can magnetically attach the Alexa Tablet Pro Pen for charging and storage. The bottom side meanwhile has a four-pin port where the Alexa Tablet's keyboard connects. The back of the not-quite-pitch-black tablet has a single 13-megapixel camera and the word \"alexa\" in a charming cursive font — the word Amazon doesn't appear anywhere on the device.\n\nThe Alexa Tablet sits comfortably between the 11- and 13-inch iPad Air in terms of thickness and weight. It's slightly thicker at 6.5mm (compared to 6.1mm) and a bit heavier than the 11-inch iPad Air (1.21 pounds compared to 1.02 pounds). Regardless of these minute differences, the Alexa Tablet's aluminum unibody design feels study, premium and well-balanced. It's a huge step forward from most Fire tablets I've tried over the years.\n\nAs with all tablets, the Alexa Tablet Pro 12 is dominated by its screen. The 12-inch screen may not be an OLED, but it's still a very nice display with 500 nits of brightness and a 2,800 x 1,840 resolution. That works out to a very dense 280 pixels per inch, and the 3:2 aspect ratio is definitely preferable on a tablet to something like 16:9. The tablet is primarily designed to be used in landscape mode, but the on-screen keyboard is a bit cramped from a vertical space perspective. And when you use the Alexa Tablet in portrait, it feels just a bit too tall to be comfortable. Apple's tablets have always used a 4:3 aspect ratio, and that just feels right to me at this point. But 3:2 still offers a decent amount of vertical height while still giving widescreen movies plenty of space.\n\nAnd while I might prefer the iPad's aspect ratio, the Alexa Tablet's screen is superior to what you'll get on an iPad Air in a few significant ways. First, it has a 120Hz refresh rate – to get that on an iPad, you'll need to spend at least $1,199 for an 11-inch iPad Pro. Unfortunately, the Alexa Tablet software isn't as well optimized as iPadOS, so things often felt jerkier than you'd expect given that high refresh rate. More on performance in a bit.\n\nWhile the higher refresh rate is nice, the Alexa Tablet really sets itself apart from basically every other tablet out there with its so-called nanomatte display finish. This is an optional feature that adds $50 to the tablet's price — but it is well worth it. Nanomatte is Amazon's term for the anti-reflective etching that does a remarkable job of minimizing glare. Placing the Alexa Tablet next to my iPad Pro (with its standard front glass) on my desk in the early morning light made it immediately obvious how effective the nanomatte display is at reducing glare from strong light sources to nearly nothing.\n\nNot to harp on the pricing, but the cheapest iPad that Apple sells with its nano-texture glass is the 11-inch Pro with 1TB of storage, which costs $1,799. iPad Pro prices, which were already hard to stomach, hit the positively bonkers level over the summer when Apple jacked up prices on nearly all its products. This makes the Alexa Tablet look all that much more compelling by comparison. Yes, the iPad Pro's tandem OLED screen is one of the nicest screens I've ever seen , but Amazon has done a seriously excellent job with the screen on the Alexa Tablet considering its price.\n\nMy only real complaint about the nanomatte screen is that colors feel a bit washed out when there's a strong light source shining on it. It's still much easier to use than it would be without the nanomatte texture, but things don't look quite as vibrant. Of course, having this option makes a ton of sense, given the inherent portability of a tablet. You're likely to use this screen in a wide variety of places with shifting and unpredictable lighting conditions, and the nanomatte option means you see the screen clearly in nearly all settings.\n\nThe nanomatte display feels particularly well-suited to a few of the Alexa Tablet's more noteworthy features. The first is a new Kindle app experience that makes this probably the best tablet with an LCD display to read on. The Alexa Tablet has dark mode on by default, and I typically haven't loved reading books with a black background and white text, but it looks great on this device. There are some smart software tricks here to enhance the reading experience, as well. Amazon says the Kindle app automatically reduces blue light from the display when you open a book and notifications are muted while you're reading (assuming you turn these features on).\n\nThere are also three different display profiles for when you're reading. \"Standard\" makes the display warmer while keeping bright colors (if you're reading a book with images), while \"color paper\" makes everything a lot less saturated. Finally, \"ink paper\" is purely greyscale. I don't have many books with color to test this with, but the cover and first few drawings in a Sailor Moon collection I downloaded looked great in the \"color paper\" theme — the reduced vibrance seems like it would definitely be easier on the eyes for long reading sessions.\n\nCombine these features with the extremely sharp display and lack of glare and you've got a tablet worth reading on for long periods of time. It doesn't match the comfort of an E Ink Kindle — but it provides a great reading experience for people who prefer a multi-function device over a dedicated e-reader.\n\nWhen you first start up the Alexa Tablet, it's obvious that this is an Amazon-first affair. The home screen has shortcuts to a variety of the company's apps like Kindle, Luna, Prime Video, Audible and Amazon's own Silk browser. But there's also a folder with a bunch of Google apps like Gmail, Maps, Meet, YouTube and more ready to go. And as a full-fledged Android tablet, I was able to quickly download Chrome and a variety of other apps from the Play Store. So while Amazon's services are right up front, it's easy enough to swap them out with your apps of choice.\n\nThere are a few other UI tweaks that make this tablet more Amazon than Android, as well. There are two widgets on the home screen; one in the upper-left corner shows content you've interacted with recently on Amazon's apps. I can quickly tap to resume reading my last Kindle book or playing an album on Amazon Music, for example, or continue searches that I was doing with the Alexa+ app. Speaking of Alexa+, there's a widget in the bottom right corner of the home screen that automatically pulls up a chat window with Amazon's virtual assistant. Naturally, you can also say \"Hey Alexa\" to initiative requests with your voice, as well. Surprisingly, there's also a Google search widget in the top-right corner of the home screen, too. So while Amazon clearly wants to feature Alexa+, it's not against giving Google some screen real estate too.\n\nGoing beyond the reading experience I described earlier, the Alexa Tablet is more than capable of doing most things people expect from a tablet. The lovely screen makes it an excellent choice for watching movies or binging YouTube, and the speakers support Dolby Atmos. That only means so much on a small device, but I definitely got a semblance of dialog moving through physical space in a few of the movies I checked out. Music sounds surprisingly solid as well, certainly good enough for casual listening sessions in a small space. I generally prefer to use headphones or a more capable speaker, but the audio quality certainly beats many tinny laptop speakers I've heard over the years.\n\nOther apps I installed from the Play Store worked well, for the most part. The inescapable fact that has always held Android tablets back is that not many developers optimize apps for larger screens, and that's still the case here. So while something like Slack is functional enough, it doesn't have multiple columns so you can see your channels on the left and a chat window on the right, for example. There's no other way to say it: It still feels like a blown-up phone app rather than something designed to use the entirety of a large screen.\n\nWhile that's certainly a bummer, plenty of the most popular apps people use work just fine. Adobe's Lightroom is nicely optimized for tablets at this point, as is my go-to task manager Todoist. And Google's apps were all redesigned for bigger screens back when the company tried to make the Pixel Tablet a thing of the past, so using things like Gmail, Keep, Docs and other essential apps works nicely on the Alexa Tablet.\n\nAmazon built in some pretty solid multitasking capabilities here, as well. When an app is in fullscreen mode, you can tap a bar at the top of the screen to put it in a split view with a second app, or send it to the \"desktop.\" The desktop view lets you resize and overlap multiple apps however you like — I've had a half-dozen open at once with no real issues, but the Alexa Tablet's screen isn't so large that it makes a lot of sense to run more than a handful at a time.\n\nThe MediaTake Dimensity 8400 processor powering the Alexa Tablet was more than capable of keeping up with everything I did, as well. The model I'm testing has 8GB of RAM and 128GB of storage, but you can double both of those if you think you'll need it. I'd personally choose to upgrade to the nanomatte display before maxing out RAM or storage, but that's just me. That said, there were a handful of times apps went unresponsive on me, and alt-tabbing through different apps was a bit laggier than I'd like.\n\nAs for the battery, I haven't had time yet to test Amazon's claims of 16 hours of video playback, but I'm getting closer to eight hours off the charger when using it for a variety of work-related tasks like editing stories, chattering away in Slack, browsing with Chrome and writing this review in Google Docs. I'll update this story with more concrete battery benchmarks soon.\n\nA big part of what makes the Alexa Tablet 12 Pro \"pro\" are its optional keyboard and pen. On their own the Pro Keyboard and Pro Pen cost $150 and $90 respectively, but you can save money by bundling the pen and keyboard (or just the keyboard) with the tablet when you buy it. The Alexa Tablet I tested with 8GB RAM, 128GB of storage and the nanomatte display costs $550 on its own, but you can bundle it with the keyboard for $650 or the keyboard and pen for $700. (That's less than an iPad Air on its own, if you were keeping count.)\n\nThe keyboard folio is a two-piece accessory — there's a kickstand that attaches to the tablet's back, while the keyboard itself snaps to the bottom side. I don't love the tablet/ keyboard/kickstand combo personally, as it's very difficult to use on your lap. But for the cost, I will absolutely cut Amazon some slack. Apple sells its two-piece keyboard folio for the basic iPad for $249; chopping $100 off that price, or more if you get a bundle, makes its wobbly nature more forgivable. The combo feels fine on a sturdy surface like a desk.\n\nThe keyboard itself is compact but not cramped, with most of the main keys being close to the same size as what you'll find on a typical laptop. The main issue is that the key travel is rather shallow, an unavoidable compromise with such a thin keyboard. So while it wouldn't be my first choice for extensive writing sessions, it still feels quite nice for such a small keyboard. I wrote this entire review on it without any major issues.\n\nThe biggest problem I had was the prominent Alexa key where I'd usually expect a control key — I found myself frequently trying to use it for standard keyboard shortcuts only to bring up the Alexa+ chat window instead. I get Amazon's thinking here, but Alexa is already easily accessible throughout the tablet. There's also a search key on the left of the space bar; I would have preferred this be where the Alexa key was placed, but that's just me. The search key could have gone in the top row of function keys instead of a \"find\" key that doesn't work in a lot of apps. And while the trackpad is unsurprisingly rather narrow, it's otherwise smooth and responsive.\n\nThe Pro Pen is a capable accessory, as well. I'm no visual artist, but the Alexa Tablet picked up my scribbles from the Pro Pen in apps like Keep and Concepts. The Pro Pen has both pressure and tilt sensitivity, which should make it a pretty capable drawing tool. And Amazon put an \"eraser\" on the other end, so if you want to clean things up you can just flip the pen around. That's a trick I wouldn't mind Apple stealing for its own stylus.\n\nThe Alexa Tablet 12 Pro is not a perfect device. While the hardware is well-designed and the nanomatte screen is outstanding, the inherent limitations of Android on a large screen hold the device back a bit. I can't say I expect that to change — Google and its partners have repeatedly tried to make Android into a proper tablet OS that can rival the iPad, and it just hasn't happened.\n\nHowever, it's far easier to forgive this when you consider the things that the Alexa Tablet does well and its price. For $550, the Alexa Tablet is a great couch computer and travel companion. I wouldn't use it to do my job for 10 hours a day, but I'd happily work on a story draft or bang out some emails for a few hours. And the nanomatte screen makes it an excellent reading tablet and a solid option for watching movies on a flight.\n\nI think most people who want a tablet will still probably be happier with an iPad, but Apple's entry-level tablet is sorely in need of an update. Plus, it only costs $50 less than the Alexa Tablet. Stepping up to an iPad Air will cost you at least $750 before buying accessories — and for that kind of money you need to be really committed to getting as much as you can out of it. The Alexa Tablet, on the other hand, sits in a sweet spot of price and capability, even if I wish the Android app situation was better. At a time when hardware prices are going through the roof, Amazon's Alexa Tablet is a compelling option.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2287955/amazon-alexa-tablet-12-pro-review/",
+      "publishedAt": "2026-10-15T18:30:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "android",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-bc9df70017bcd5da:en",
+      "sourceId": "the-verge-bc9df70017bcd5da",
+      "lang": "en",
+      "title": "Meta and Apple team up to make Muse AI models run better on Macs",
+      "summary": "Meta announced the Muse Spark Open AI model today, claiming that it's the \"most capable US open-weight model to date.\" But the company also says that it's the \"the first model in its class\" that can \"run on your desktop using two Apple M5 Ultra Mac Studios with the latest MLX framework.\" Meta and Apple, […]",
+      "body": "Meta announced the Muse Spark Open AI model today , claiming that it's the \"most capable US open-weight model to date.\" But the company also says that it's the \"the first model in its class\" that can \"run on your desktop using two Apple M5 Ultra Mac Studios with the latest MLX framework.\"\n\nMeta and Apple, typically rivals , worked together on the launch and are publicly supporting each other.\n\n\"Muse Spark Open - weights releasing today - runs great on new Mac Studios thanks to work with @johnternus and Apple,\" Meta CEO Mark Zuckerberg said on X .\n\n\"Congrats to the team!\" new Apple CEO John Ternus said in a reply . \"Amazing to run a model of Muse …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/news/1012293/meta-apple-muse-spark-open-ai-model-mlx",
+      "publishedAt": "2026-10-15T18:15:36.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-4a5cb646ad3d3ed9:en",
+      "sourceId": "9to5mac-4a5cb646ad3d3ed9",
+      "lang": "en",
+      "title": "Apple is about to kick off four weeks straight of new product launches",
+      "summary": "Apple’s busiest product launch month is usually September. But despite a packed event last month, many more products remain ahead this fall. Next week’s iPhone Duo launch kicks off what’s shaping up to be four straight weeks of new products. more…",
+      "body": "Apple’s busiest product launch month is usually September. But despite a packed event last month, many more products remain ahead this fall. Next week’s iPhone Duo launch kicks off what’s shaping up to be four straight weeks of new products.\n\nApple just unveiled three new products this week, and four more are expected later this month. With release dates spread out for each product, Apple appears set to have four straight weeks of new products hitting stores.\n\nWe already know that iPhone Duo will be available next Friday, October 23, HomePod mini 2 on October 30, and HomeView and Apple TV 4K on November 13.\n\nThe only gap between them is Friday, November 6. But today on his new Power On podcast , Mark Gurman said that’s when the new touchscreen MacBook Pro is expected to go on sale. He explains: “Apple retail stores are going to have a big floor reset on the evening of Thursday, November 5 into Friday, November 6.”\n\nGurman believes the forthcoming touchscreen MacBook Pro redesign, M6 iMac and MacBook Pro, and OLED iPad mini will all be available in stores starting November 6. He reported earlier today that those product unveilings are set for October 28.\n\nApple would then launch the following products in four successive weeks:\n\nIt’s a packed lineup, and especially impressive considering last month we got iPhone 18 Pro and Pro Max, Apple Watch Series 12 and Ultra 4, and AirPods 5.\n\nFollowing these releases, Apple’s product lineup will be locked in for the rest of 2026. No additional product launches are expected until early 2027.\n\nWhich upcoming Apple products do you plan to buy? Let us know in the comments.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/15/apple-is-about-to-kick-off-four-weeks-straight-of-new-product-launches/",
+      "publishedAt": "2026-10-15T17:58:48.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-f72734e938ccfa8c:en",
+      "sourceId": "techcrunch-f72734e938ccfa8c",
+      "lang": "en",
+      "title": "Volvo makes a bigger bet on Nvidia",
+      "summary": "Volvo is leveling up its automated driving system through an expansion of its nearly decade-long partnership with Nvidia that will extend beyond its battery electric vehicles.",
+      "body": "Volvo is leveling up its automated driving system through an expansion of its nearly decade-long partnership with Nvidia. The companies announced on Thursday that Volvo will use three pieces of Nvidia hardware and software in its future vehicles to provide an automated driving system that can navigate urban streets and highways.\n\nUnder the expanded partnership, Volvo will combine its vehicle safety systems and engineering with Nvidia’s Hyperion sensor and compute architecture, Alpamayo driving software stack, and Halos safety evaluation layer.\n\nThe Alpamayo stack is redundant and diverse, according to Ali Kani, who heads up Nvidia’s automotive division. It combines Alpamayo, a family of AI models, datasets, and simulation and development tools used to build autonomous-driving software, with classical software that uses machine learning and camera and radar perception, he said.\n\n“The point is we run these two stacks at the same time, and we have multimodal sensors in our philosophy because it’s a safer product that way,” Kani said, adding that the open source Alpamayo software has now been downloaded by more than 650,000 developers.\n\nVolvo didn’t reveal the value of the partnership or which vehicle model would be the first to use this new Nvidia tech stack. But Alwin Bakkenes, Volvo’s head of software development, hinted at the scale of the deal and how it represents the automaker’s evolution toward developing a full-tech stack designed for its electric vehicles as well as its plug-in hybrids and gas-powered vehicles.\n\n“Automakers used to be very much like car-line-based development and working with various suppliers, etc. and we have completely changed and migrated into being a full-tech stack company,” Bakkenes said, adding that Volvo will start this partnership with a brand new vehicle that “will come in the not-too-near future.”\n\nHe said the first vehicle with this new Nvidia tech stack will debut within the decade, and “then of course the technology can go beyond that.”\n\nWhile Volvo’s relationship with Nvidia isn’t new, the expanded partnership represents the automaker’s effort to bring the latest automated driving software to all of its vehicles — not just its EVs.\n\nAll of Volvo’s battery-electric vehicles use Nvidia’s Orin computer chip, which processes information from cameras, radar, and other sensors to help a vehicle understand its surroundings and make driving decisions.\n\n“What we’re going to do in the future is actually standardize more on Hyperion — also from a sensor set perspective — to really open up the stack for the wider partnership with Nvidia,” Bakkenes said.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/15/volvo-makes-a-bigger-bet-on-nvidia/",
+      "publishedAt": "2026-10-15T17:34:40.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-3a3609a662c0f170:en",
+      "sourceId": "the-verge-3a3609a662c0f170",
+      "lang": "en",
+      "title": "Volvo will use Nvidia’s tech for hands-free, point-to-point driving",
+      "summary": "Volvo plans to launch hands-free, point-to-point driving by 2030, powered by Nvidia's latest AI technology. The Chinese-owned, Swedish-designed automaker said Thursday it would use Nvidia's autonomous driving stack to power a new partially automated driving system similar to Tesla's Full Self-Driving (Supervised). Volvo says the new point-to-point system will be Level 2++, meaning it can […]",
+      "body": "Volvo plans to launch hands-free, point-to-point driving by 2030, powered by Nvidia's latest AI technology. The Chinese-owned, Swedish-designed automaker said Thursday it would use Nvidia's autonomous driving stack to power a new partially automated driving system similar to Tesla's Full Self-Driving (Supervised).\n\nVolvo says the new point-to-point system will be Level 2++, meaning it can handle complex urban environments, including traffic lights, stop signs, and unprotected left turns without explicit driver control. In addition to Tesla's FSD, it will also resemble the Nvidia-powered system that Mercedes-Benz recently rolled out for the …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/transportation/1011653/volvo-nvidia-autonomous-driving-level-2-hands-free-urban",
+      "publishedAt": "2026-10-15T17:30:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-8e7049fc96a0f8b5:en",
+      "sourceId": "the-verge-8e7049fc96a0f8b5",
+      "lang": "en",
+      "title": "Google is making inline links more prominent in AI responses",
+      "summary": "Google is updating its AI search results to make inline links appear \"higher up in responses more frequently,\" according to a blog post. The company's search results from AI Overviews and AI Mode give you answers in a customized view instead of the traditional list of links, but there are concerns that the format reduces […]",
+      "body": "Google is updating its AI search results to make inline links appear \"higher up in responses more frequently,\" according to a blog post . The company's search results from AI Overviews and AI Mode give you answers in a customized view instead of the traditional list of links, but there are concerns that the format reduces traffic to publishers . Google says it's been making \"continued and substantial increases to the presence of inline links in our AI experiences,\" and this new change will help ensure \"ensure key sources are easily clickable right when you need them.\"\n\nThe company is announcing several other changes to highlight links an …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1012206/google-ai-mode-overview-inline-links",
+      "publishedAt": "2026-10-15T17:22:15.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "applevis-apps-aef93ab730feefe4:en",
+      "sourceId": "applevis-apps-aef93ab730feefe4",
+      "lang": "en",
+      "title": "Decant: Color Sort Puzzle",
+      "summary": "Pour a little color. Make a little order. Decant is a color-sort puzzle with luminous glass vessels and a simple goal: leave each filled vessel with just one color. Tap a vessel, choose a matching color or an empty space, and pour the top group. Two spare vessels give you room to think—not a shortcut to buy. NO ADS. ROOM TO PLAY. - 180 puzzles across four difficulty levels, each checked for a solution. - A fresh, always-free Daily, with the same ranked board and rules for everyone. - Practice puzzles generated and checked before you play. - Satisfying glass pours—or instant pours when you prefer to skip the animation. - Liquid symbols, a high-contrast palette, and sound, haptic, handedness, and motion controls. - Free restarts. No lives, energy, timers, or extra vessels for sale. Find a solution, then try to make it cleaner. A Perfect clear uses the fewest possible pours. Older archived Daily puzzles may show a Target instead; that is a reference solution, not a promise of the minimum. START FREE. UNLOCK MORE IF YOU LIKE. The first 30 puzzles, today's Daily, and three practice puzzles per day are free, with three undos per board. The Daily does not count against your practice allowance. A one-time Decant Full Game Unlock opens all 180 puzzles, unlimited practice and undos outside the ranked Daily, the full Daily archive for unranked practice, and advanced records. Or choose the StackForge Play Pass for Pro access across StackForge games and One Good Thing. Prices are shown before purchase. Play Pass subscriptions renew automatically unless canceled. Today's ranked Daily gives every player the same three undos, whether free or Pro. No ads in either tier. Optional account sync keeps your progress and Play Pass connected. Terms: https://stackforgestudios.com/terms Privacy: https://stackforgestudios.com/privacy Terms of Use (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+      "body": "Pour a little color. Make a little order.\n\nDecant is a color-sort puzzle with luminous glass vessels and a simple goal: leave each filled vessel with just one color. Tap a vessel, choose a matching color or an empty space, and pour the top group. Two spare vessels give you room to think—not a shortcut to buy.\n\nNO ADS. ROOM TO PLAY.\n\n- 180 puzzles across four difficulty levels, each checked for a solution. - A fresh, always-free Daily, with the same ranked board and rules for everyone. - Practice puzzles generated and checked before you play. - Satisfying glass pours—or instant pours when you prefer to skip the animation. - Liquid symbols, a high-contrast palette, and sound, haptic, handedness, and motion controls. - Free restarts. No lives, energy, timers, or extra vessels for sale.\n\nFind a solution, then try to make it cleaner. A Perfect clear uses the fewest possible pours. Older archived Daily puzzles may show a Target instead; that is a reference solution, not a promise of the minimum.\n\nSTART FREE. UNLOCK MORE IF YOU LIKE.\n\nThe first 30 puzzles, today's Daily, and three practice puzzles per day are free, with three undos per board. The Daily does not count against your practice allowance.\n\nA one-time Decant Full Game Unlock opens all 180 puzzles, unlimited practice and undos outside the ranked Daily, the full Daily archive for unranked practice, and advanced records. Or choose the StackForge Play Pass for Pro access across StackForge games and One Good Thing. Prices are shown before purchase. Play Pass subscriptions renew automatically unless canceled.\n\nToday's ranked Daily gives every player the same three undos, whether free or Pro. No ads in either tier.\n\nOptional account sync keeps your progress and Play Pass connected.\n\nTerms: https://stackforgestudios.com/terms\n\nPrivacy: https://stackforgestudios.com/privacy\n\nTerms of Use (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+      "sourceName": "AppleVis Apps",
+      "originalUrl": "https://www.applevis.com/apps/ios/games/decant-color-sort-puzzle",
+      "publishedAt": "2026-10-15T17:06:19.000Z",
+      "categories": [
+        "apple",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-508f63181603d864:en",
+      "sourceId": "engadget-508f63181603d864",
+      "lang": "en",
+      "title": "Meta built a huge open-weight AI model for Macs, but you'll need 1TB of RAM to run it",
+      "summary": "Muse Spark Open is \"the most capable US open-weight model to date,\" the company says.",
+      "body": "Muse Spark Open is \"the most capable US open-weight model to date,\" the company says.\n\nIn case there was still any doubt about Meta's commitment to open models, the company is open-sourcing Muse Spark with a new open-weight model called Muse Spark Open. The 800-billion parameter model was optimized for Apple Silicon, but you'll need a staggering 1TB of RAM to run it locally.\n\nMeta, which has said it believes the US should not allow Chinese labs to lead on open-source AI, calls Muse Spark Open \"the most capable US open-weight model to date.\" Benchmarks released by the company suggest Meta's model outperforms two leading Chinese models, GLM 5.3 and Kimi K3, on agentic tasks and visual reasoning.\n\nIt's also the first model optimized to run locally on Apple's M5 Ultra-equipped Mac Studio machines. \"Apple's unified memory architecture lets the M5 Ultra's integrated GPU use up to 512 GB per Mac Studio, so two machines can hold an entire model,\" Meta explains. \"The result is two Mac Studios behave like one supercomputer with a terabyte of unified memory.\"\n\nMuse Spark Open — weights releasing today — runs great on new Mac Studios thanks to work with @johnternus and Apple. pic.twitter.com/U2wJNrKBOg\n\n— Mark Zuckerberg (@finkd) October 15, 2026\n\nApple still hasn't announced specific pricing or a ship date for the 512GB Mac Studio — just that it will be available in \"late October\" — any setup that can run Muse Spark Open will require a hefty investment. Muse Spark Open can also run on four 256GB M5 Ultra Mac Studios, which will cost roughly $38,000. That amount of compute is pretty squarely out of reach for the typical vibe coder. But if you're a larger organization that's been burning through your token budget, investing in a few Mac Studios might seem like a pretty good deal, provided Meta's model performs as well as the company suggests.\n\nMuse Spark Open is available to download now from Hugging Face .",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2287833/meta-built-a-huge-open-weight-ai-model-for-macs-but-youll-need-1tb-of-ram-to-run-it/",
+      "publishedAt": "2026-10-15T17:02:48.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-01af3fab90a219b4:en",
+      "sourceId": "techcrunch-01af3fab90a219b4",
+      "lang": "en",
+      "title": "SK Hynix bargains for chip equipment exports to its China facility in return for building a factory in US",
+      "summary": "SK Hynix’s Solidigm is reportedly seeking U.S. approval to send more chipmaking equipment to China as it weighs building a new NAND chip factory in America.",
+      "body": "SK Hynix appears to be navigating choppy U.S.-China chipmaking waters. The company’s flash memory unit, Solidigm, is seeking U.S. approval to send American chipmaking equipment to its factory in Dalian, China, as a condition to continue building a semiconductor factory in the U.S., Reuters reported , citing anonymous sources.\n\nSolidigm has been reportedly chalking up plans to build a NAND flash memory chip factory in the U.S. and is considering upstate New York as a potential location for the facility.\n\nNAND flash chips are primarily used in solid-state storage drives, which are employed in everything from laptops and smartphones to AI data centers. But the global component shortage, thanks to skyrocketing demand for AI data centers, has driven up prices for everything that goes into data centers, including high-speed RAM chips and SSDs. Research firm TrendForce expects NAND prices to rise 15% to 20% in the fourth quarter.\n\nReuters cited its sources as saying that Solidigm wants to install more chipmaking equipment in spare space at SK Hynix’s Dalian factory in China to boost NAND chip production.\n\nSK Hynix told TechCrunch it is not seeking to expand capacity at its Dalian Mod B facility, which was completed in 2023. The chip giant added that the equipment installation is being carried out in consultation with and under authorization from the U.S. government.\n\nWashington first imposed sweeping restrictions on advanced chips and chipmaking equipment exports to China in October 2022, citing national security concerns, and further tightened the rules in 2023 . Then in September 2025, the Trump administration revoked special export exemptions for certain SK Hynix, Samsung, and Intel facilities in China. The U.S. has since granted an annual license to Samsung and SK Hynix for sending chipmaking equipment to their plants in China.\n\nThe U.S. has also been pushing foreign chipmakers to build and expand their manufacturing facilities in America. In July, Commerce Secretary Howard Lutnick said he wanted Samsung and SK Hynix to build chip plants in the country and that he was in talks with both companies.\n\nSolidigm is said to be preparing for a 2027 U.S. IPO that could raise around $10 billion and value it at up to $100 billion.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/15/sk-hynix-bargains-for-chip-equipment-exports-to-its-china-facility-in-return-for-building-a-factory-in-us/",
+      "publishedAt": "2026-10-15T16:45:37.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-6d9893679297e687:en",
+      "sourceId": "engadget-6d9893679297e687",
+      "lang": "en",
+      "title": "Microsoft says it made Windows 11 zippier, especially on PCs with less RAM",
+      "summary": "The whole RAM price thing is partly Microsoft's fault so it's the least it can do.",
+      "body": "The company also unveiled a revamped Photos app that testers can try now.\n\nMicrosoft has been working on some Windows 11 updates that it's starting to bring to all users after testing them with Windows Insiders. Among other things, the company said it made the operating system up to 20 percent more responsive, in part by improving memory efficiency and management. For instance, Windows 11 \"can now keep up to 2GB more of your active data in memory instead of moving it to slower storage, helping your PC stay responsive as you open more apps or browser tabs,\" Navjot Virk, Microsoft's corporate vice president of Windows Experiences, wrote in a blog post .\n\nVirk noted that PCs with 8GB of memory may see \"an especially meaningful difference.\" That's welcome, given that it's increasingly expensive to upgrade RAM in a PC . You can largely blame AI data centers for gobbling up as much memory as possible and jacking up prices for normal people. Microsoft, of course, is heavily involved in that, so improved memory management and efficiency feels like the least the company can do to mitigate the RAM crisis.\n\nOne thing Windows 11 will do on PCs with 8GB or less of RAM is to only load widgets when users actually open them. Microsoft says that'll free up over 200MB of memory for other tasks.\n\nMicrosoft says it should also be faster to pair AirPods with PCs as part of improvements to Bluetooth headphone reliability. Windows Hello logins are said to be easier, faster and more reliable too.\n\nWindows Insider testers can now try out the revamped, AI-powered Search that the company unveiled last week. They can carry out thousands of actions directly through Search, which Microsoft is effectively turning into a chatbot .\n\nOther updates for Insiders include a new Photos app with a revamped gallery that can pull together snaps from local storage, OneDrive and iCloud. The built-in editor is said to load 25 percent faster. The native viewer loads 30 percent quicker too, Microsoft claims.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2287714/microsoft-says-it-made-windows-11-zippier-especially-on-pcs-with-less-ram/",
+      "publishedAt": "2026-10-15T16:01:18.000Z",
+      "categories": [
+        "tecnologia-general",
+        "windows"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-35a9fb993f22b974:en",
+      "sourceId": "ars-technica-35a9fb993f22b974",
+      "lang": "en",
+      "title": "Report: FTC probes Anthropic, OpenAI after Trump dismissed AI fears as “hoax”",
+      "summary": "FTC may fine AI firms on par with companies that delay data breach reports.",
+      "body": "Following a string of incidents where AI models hacked websites and breached government systems during testing phases, the Federal Trade Commission is officially probing Anthropic and OpenAI over consumer harms, an insider told Axios .\n\nOn Wednesday, the FTC sent out civil investigative demands seeking a wide range of information from the AI firms on recent safety incidents.\n\nThe FTC did not respond to Ars’ request to review the subpoena demands. However, Axios’ source said the requests spanned more than 50 pages of questions and sought documents related to the incidents, internal security measures taken, and marketing materials that may suggest consumers were misled.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/tech-policy/2026/10/ftc-probes-if-openai-anthropic-security-incidents-harmed-americans-report-says/",
+      "publishedAt": "2026-10-15T15:43:24.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-54dbd05596b52916:en",
+      "sourceId": "ars-technica-54dbd05596b52916",
+      "lang": "en",
+      "title": "Singer or clanker? YouTube Music will tell you with new gen AI labeling.",
+      "summary": "The AI music labels are rolling out now in YouTube Music and will come to YouTube soon.",
+      "body": "Genuine human creativity takes time, but you know what doesn't? AI slop. There are countless AI models out there that can make something that passes for music, and you might come across those tracks on streaming services without realizing it. Google says it will begin labeling that content in YouTube Music, building on similar disclosures in the main YouTube app.\n\nGoogle is not outright banning AI music or even speaking ill of it. \"Generative AI is opening up new ways for artists to create, experiment, and share music,\" the company says in a blog post.\n\nHowever, the company also acknowledges that people want to know if a song was created with generative AI tools. A new label for AI content on YouTube Music is now rolling out in the app and on the website, which looks a lot like a label Google began adding to AI-generated videos on YouTube earlier this year.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/ai/2026/10/youtube-music-begins-labeling-ai-songs/",
+      "publishedAt": "2026-10-15T15:12:58.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "techcrunch-0a7ea874925a3f07:en",
       "sourceId": "techcrunch-0a7ea874925a3f07",
       "lang": "en",
@@ -5457,183 +5682,6 @@
       "sourceName": "TechCrunch",
       "originalUrl": "https://techcrunch.com/2026/10/15/ai-agents-are-coming-to-rivians-cars/",
       "publishedAt": "2026-10-15T15:02:36.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-90b6dd225e03a730:en",
-      "sourceId": "the-verge-90b6dd225e03a730",
-      "lang": "en",
-      "title": "Shelly’s new presence sensor simultaneously detects up to ten people without a camera",
-      "summary": "Following the launch of its $50 subscription-free security camera last month, Shelly announced another new accessory for smart home automation today that can keep track of multiple people as they move through rooms or large spaces without recording them. The Shelly Presence Gen4 sensor uses mmWave radar technology instead of a camera to detect the […]",
-      "body": "Following the launch of its $50 subscription-free security camera last month , Shelly announced another new accessory for smart home automation today that can keep track of multiple people as they move through rooms or large spaces without recording them. The Shelly Presence Gen4 sensor uses mmWave radar technology instead of a camera to detect the presence, motions, and activities of people and pets. It's available starting today for $84.99 through Shelly's online store and is expected to hit other retailers like Amazon and Best Buy soon.\n\nThe Presence Gen4 can be perched on a shelf or a table using its built-in stand or permanently mounted …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1011967/shellys-new-presence-sensor-simultaneously-detects-up-to-ten-people-without-a-camera",
-      "publishedAt": "2026-10-15T15:00:00.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-e3f4c6e1e1c471eb:en",
-      "sourceId": "the-verge-e3f4c6e1e1c471eb",
-      "lang": "en",
-      "title": "Microsoft’s new Photos app combines your PC, OneDrive, and iCloud galleries",
-      "summary": "Microsoft has redesigned its Photos app for Windows 11, overhauling the editor and image viewer, and combining photos and videos from your PC, OneDrive, and iCloud into a single space. The new combined gallery experience aims to make it easier to manage and view your photos without jumping between apps or devices, while also improving […]",
-      "body": "Microsoft has redesigned its Photos app for Windows 11, overhauling the editor and image viewer, and combining photos and videos from your PC, OneDrive, and iCloud into a single space. The new combined gallery experience aims to make it easier to manage and view your photos without jumping between apps or devices, while also improving app launch and scrolling performance in Photos.\n\nTo combine your galleries in the Windows 11 Photos app, you'll need to turn on Camera Backup in the OneDrive mobile app on iOS or Android, and follow Apple's guide to set up iCloud for Windows. Once combined in the Windows 11 Photos app, you can browse by date, o …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1012003/microsoft-windows-11-new-photos-app-onedrive-icloud",
-      "publishedAt": "2026-10-15T14:53:38.000Z",
-      "categories": [
-        "tecnologia-general",
-        "windows",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-02e9a57a18464e13:en",
-      "sourceId": "the-verge-02e9a57a18464e13",
-      "lang": "en",
-      "title": "How Windows is being optimized for Nvidia’s RTX Spark laptops",
-      "summary": "Microsoft and Nvidia held a launch party for the first wave of RTX Spark laptops last week in San Francisco, where a new wave of AI PCs took center stage amid a packed crowd and a lively hands-on area. A day after the media event, I was invited to a quieter Nvidia event to hear […]",
-      "body": "Microsoft and Nvidia held a launch party for the first wave of RTX Spark laptops last week in San Francisco, where a new wave of AI PCs took center stage amid a packed crowd and a lively hands-on area. A day after the media event, I was invited to a quieter Nvidia event to hear a lot more about the new RTX Spark computing platform. While Nvidia's new laptops might look like regular Windows machines, the chips inside are Arm-based, instead of the traditional x64 architecture used by AMD and Intel. Combined with a powerful GPU, RTX Spark is designed for the future of AI, and it means a lot of work has gone into getting these laptops ready for …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1011996/microsoft-windows-rtx-spark-platform-changes-notepad",
-      "publishedAt": "2026-10-15T14:30:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "windows",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-fd32ac3a72fe2de1:en",
-      "sourceId": "techcrunch-fd32ac3a72fe2de1",
-      "lang": "en",
-      "title": "Google’s Universal Cart shopping tool launches in the US",
-      "summary": "The new shopping tool is available in the U.S. across Google Search and the Gemini app.",
-      "body": "Google on Thursday said “Universal Cart,” a tool that lets users collect and monitor products they find across search and in the Gemini app, is now available to U.S. users. The company first previewed the tool at Google I/O in May.\n\nThe idea is to make online shopping easier to manage. Find something you like, save it to your cart, and move on. When you return later, your items and shopping progress are still there, so you don’t have to hunt down the same products or start over. Universal Cart can collect items from multiple retailers, turning it into a central hub for browsing and keeping track of potential purchases.\n\nGoogle says the cart can also help shoppers stay on top of deals and availability. The tool can send notifications when a saved product’s price drops or when an out-of-stock item becomes available again.\n\nThe tool is also designed to offer more tailored help during the shopping process. Google says it can take credit card perks into account when helping users choose how to pay, and also surface relevant promo codes.\n\nCheckout is tied to Google’s Universal Commerce Protocol, or UCP, an open standard the company introduced earlier this year. UCP is designed to help AI agents and retailers work together across different parts of the shopping journey, including checkout.\n\nGoogle is already deeply invested in AI-powered shopping, and Universal Cart is its latest effort to make the experience more convenient. It joins features such as conversational product discovery in Search’s AI Mode and Google’s “Let Google Call” tool, which uses an AI agent to contact nearby stores and check whether an item is in stock.\n\nGoogle isn’t the only company bringing AI into e-commerce. Amazon , OpenAI , and other rivals have added agentic commerce features as companies look for ways to make chatbots useful beyond answering questions.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/15/googles-universal-cart-shopping-tool-launches-in-the-us/",
-      "publishedAt": "2026-10-15T14:29:33.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apps-accesibles",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-a5edab0d0d1fa66d:en",
-      "sourceId": "engadget-a5edab0d0d1fa66d",
-      "lang": "en",
-      "title": "Opera's lightweight Air browser is back, unbothered, moisturized, in its lane",
-      "summary": "Namaste.",
-      "body": "New soundtracks and breathing exercises are designed to encourage mindful browsing.\n\nOpera has relaunched its very mindful Air browser with a host of new anti-distraction features. The audiovisual makeover is designed to help you focus better on what you're actually supposed to be doing, rather than encouraging you to wander into yet another free time-draining Reddit rabbit hole.\n\nThe first new addition is music. Opera seemingly knows that people turn to ambient playlists when they're trying to concentrate, so it's built its own. Air Soundscapes give the browser a soundtrack split into four moods: Focus, Relax, Work and Ambience. Pick the latter and you'll be treated to the tranquil sounds of forests and the sea.\n\nOpera Air also now has built-in breathing exercises, which you can schedule to pop up at your chosen intervals, as well as neck stretches you can follow along to.\n\nThe Air browser is purposefully streamlined, so you have to manually add any apps you want to the sidebar. Opera has added new wallpapers that it says incorporate \"open spaces, perspective and natural textures\" to make your browsing experience as serene as possible. It also now has an automatic dark mode.\n\nGiven its resistance to the many distractions of the web, Air naturally has a built-in ad blocker, and you even get a free VPN. It does interface with ChatGPT but that sidebar option is unchecked by default. The resigned user experience builds on the first version of Air that Opera introduced in early 2025 as a mindful antidote to the chaos of the internet.\n\nOpera Air remains free to download on Windows and macOS.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2287546/operas-lightweight-air-browser-is-back-unbothered-moisturized-in-its-lane/",
-      "publishedAt": "2026-10-15T14:17:22.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-c9ce7e030b970f70:en",
-      "sourceId": "9to5mac-c9ce7e030b970f70",
-      "lang": "en",
-      "title": "John Ternus talks iPhone Duo, ‘cheap and crappy’ foldables in new interview",
-      "summary": "TIME has just published its list of the best inventions of 2026, and iPhone Duo made the list with John Ternus featured on the magazine cover. Here’s what Ternus said in his interview with TIME . more…",
-      "body": "TIME has just published its list of the best inventions of 2026, and iPhone Duo made the list with John Ternus featured on the magazine cover. Here’s what Ternus said in his interview with TIME .\n\nJohn Ternus sat down with TIME for a wide-ranging interview centered on iPhone Duo, but also covering a variety of other topics, including AI.\n\nRegarding the iPhone Duo, which is hitting the market nearly a decade after other foldables, Ternus was involved in early foldable work at Apple all the way back in 2011.\n\nIn 2011, when many people still carried around flip phones, Ternus and five other engineers filed a patent application for foldable electronic devices, exploring what kind of batteries and circuit boards might be needed for such an idea. “It felt clear that we were going to eventually get to a place where OLED displays were going to be flexible,” Ternus says.\n\nTernus wasn’t a fan of early attempts at foldables from other companies in the 2010s. He says, “The other examples in the world felt kind of cheap and crappy.”\n\nThe drive to achieve a foldable unlike its competitors is evidenced by a story from Richard Dinh, Apple’s VP of Product Design.\n\nAlong the way, Ternus encouraged the team to invest more time and effort in the project, even as other foldables beat them to market. Dinh says that at one point, he asked Ternus whether his team should proceed with a top surface material similar to those of its competitors, which Dinh felt had flaws but was potentially good enough.\n\n“And he was like, ‘Look, Rich, you’ll know when it’s the right thing.’ And that gave us the confidence to really push the boundaries on innovation and manufacturing, and fly worldwide to connect our suppliers together and come up with the nanotexture [a surface technology],” Dinh says. The result—a surface made from a custom polymer and built atop a hinge with more than 100 tiny interior precision components—has impressed its first users, who have said they can barely detect a crease at all.\n\nThe story also mentions that Ternus “has devoted much of his early tenure as CEO to obsessing over design, spending multiple days a week in the studio with the industrial-design and human-interface teams.” This echoes previous Bloomberg reporting around Ternus’s early priorities.\n\nOther topics Ternus addresses in the interview include:\n\nThe full TIME article is well worth a read, available here .\n\nWhat are your takeaways from the latest John Ternus interview? Let us know in the comments.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/15/john-ternus-talks-iphone-duo-cheap-and-crappy-foldables-in-new-interview/",
-      "publishedAt": "2026-10-15T14:11:18.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-544ef1eef2a82966:en",
-      "sourceId": "9to5mac-544ef1eef2a82966",
-      "lang": "en",
-      "title": "Apple sets cutoff time for getting fastest iPhone Duo pre-order",
-      "summary": "iPhone Duo pre-orders start tomorrow, and if you want the fastest checkout possible, Apple just set the deadline for completing its ‘Get Ready’ process. more…",
-      "body": "iPhone Duo pre-orders start tomorrow, and if you want the fastest checkout possible, Apple just set the deadline for completing its ‘Get Ready’ process.\n\nRumors indicate the iPhone Duo could be in short supply when it first launches. So if you’re hoping to get an iPhone Duo on day one, you’ll want to pre-order tomorrow morning.\n\niPhone Duo pre-orders open Friday, October 16 at 8:00 a.m. ET / 5:00 a.m. PT .\n\nAnd like Apple did for iPhone 18 Pro, there’s a window of time during which you can start the pre-order process in advance for the fastest checkout possible.\n\nApple knows it can be frustrating when your pre-order takes too long and you miss out on day-one delivery. So with its ‘Get Ready’ process, you can make all your pre-order selections in advance.\n\nInside the Apple Store app or on Apple’s website , you’ll find the option to start the iPhone Duo pre-order process now. Once you save all your selections, completing the pre-order will go much faster tomorrow morning.\n\nBut there’s a deadline for making your selections in advance. Apple just announced that iPhone Duo shoppers need to complete the ‘Get Ready’ process before 9 p.m. PT on Thursday, October 15 .\n\nSo if you’re in the Eastern time zone, you have until midnight tonight.\n\nIf you’re still trying to decide between Star White or Night Sky, or unsure on storage needs, or whether you plan to purchase or lease, it’s time to make those decisions now.\n\nAfter completing the ‘Get Ready’ process, you’ll be able to complete checkout in mere seconds once pre-orders go live tomorrow.\n\nDo you plan to buy an iPhone Duo? Why or why not? Let us know in the comments.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/15/apple-sets-cutoff-time-for-getting-fastest-iphone-duo-pre-order/",
-      "publishedAt": "2026-10-15T13:36:55.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-0075af6384ce44ea:en",
-      "sourceId": "engadget-0075af6384ce44ea",
-      "lang": "en",
-      "title": "NVIDIA's RTX Spark is good for Windows, even if you don't need local AI",
-      "summary": "NVIDIA's RTX Spark is meant for AI fiends, but it could end up helping Windows PCs in general",
-      "body": "Windows PCs may finally catch up to Apple Silicon.\n\nLast week, I spent two days hearing how Microsoft and NVIDIA are \"reinventing the PC\" with RTX Spark, the new system-on-a-chip powering the Surface Laptop Ultra and several other Windows PCs this fall. It's the first time we've seen powerful Arm CPUs joined together with NVIDIA's Blackwell GPU technology and up to 128GB of ultra-fast unified memory on a single chip. Theoretically, RTX Spark should allow for thin-yet-powerful laptops (and a few small desktops) that can handle AI tasks locally, as well as tackling content creation and gaming. So sure, I suppose NVIDIA and Microsoft have a reason to gloat a bit.\n\nBut, just like the launch of Snapdragon-powered Copilot+ systems two years ago, it was hard to ignore the elephant in the room: RTX Spark is clearly a response to Apple Silicon and the transformational changes it brought to Macs six years ago . Apple's chips are also made up of a powerful Arm CPU, capable GPU and fast unified memory, and they span the company's lineup from the tiny Mac mini to the super-powerful Mac Studio and 16-inch MacBook Pro. With RTX Spark, Windows users finally have a way to see the benefits of an efficient Arm-based SoC on high-end PCs, while the recent batch of Qualcomm chips covers the low-end and mid-range.\n\nThere weren't many surprises at Microsoft's AI launch event (featuring the Surface Laptop Ultra), or at NVIDIA's RTX Spark Editor's Day, which I attended alongside other media and analysts. Both companies want to sell us a future where we can run AI models and agents right from an RTX Spark-powered Windows laptop, something that seemed clear since the chip was announced at Computex . But even if that future doesn't come to pass, RTX Spark could still lead to some intriguing changes in the PC world.\n\nThe RTX Spark SoC is powered by up to 20 NVIDIA Grace Arm CPU cores (10 performance cores and 10 efficiency cores), a Blackwell GPU with up to 6,144 CUDA cores, and up to 128GB of unified LPDDR5x memory running at 9,400 Mbps. There's also a slightly less powerful configuration with 18 CPU cores and 5,120 GPU cores. RTX Spark also includes much of what you'd find on NVIDIA's latest GPUs, including fifth-gen tensor cores, fourth-gen ray tracing cores, and a Blackwell video engine (with support of AV1 UHQ and 4:2:2 encoding and decoding).\n\nBy shoving all of this hardware onto a single chip, NVIDIA claims the RTX Spark is twice as efficient as a laptop powered by an Intel Core Ultra 9 285H and RTX 5070 dedicated GPU, while gaming at 60 watts. NVIDIA has previously said RTX Spark systems should be similarly powerful to RTX 5070 laptops, though as you can tell from the chart below, those dedicated GPU systems can also draw a lot more energy for better performance.\n\nIf you plan to be connected to power most of the time and don't need to travel with your laptop, you may see little benefit from choosing an RTX Spark system. But if you need to do serious creative work on the go, RTX Spark's improved efficiency allows PCs to work as fast on battery as they are while plugged in, according to NVIDIA. From my brief time with the Surface Laptop Ultra, I didn't notice any performance drops while playing Gears of War: E-Day on battery power. The game still looked silky smooth in 1440p with high graphics settings.\n\nWith its support for tons of unified RAM, RTX Spark systems should appeal to AI developers and researchers who need as much memory as they can to run large AI models locally, like the 125B parameter Qwen3.8-Flash-Next . An RTX Spark system could significantly reduce the amount of money spent on cloud AI tokens, or replace that demand entirely. One researcher I spoke with was jealous that his colleagues were able to easily run AI models on modern Mac laptops, and he was excited about the possibility of doing the same on a Windows notebook. RTX Spark is also coming along as Microsoft is adding more support in Windows 11 for on-device AI tools like Perplexity , as well as simplified ways to set up AI agents like OpenClaw and GitHub Copilot.\n\nNot surprisingly, NVIDIA is also touting RTX Spark's gaming capabilities. Since it features a Blackwell GPU front and center, it'll deliver all of the features you'd expect from RTX 50-series cards, including support for DLSS 5. As I mentioned before, you can expect performance similar to an RTX 5070 — NVIDIA is specifically touting 1440p as the intended resolution for RTX Spark systems, though I'd be interested to see how they perform in 4K with DLSS. A new performance mode for DLSS Frame Generation can push Cyberpunk 2077 up to 280fps with 6x frame gen, compared 213fps without performance mode. (It's unclear what you lose to achieve that frame bump, though.)\n\nSince RTX Spark is Arm-based, it won't natively run every game on Windows, but NVIDIA claims recent titles like Control Resonant and the aforementioned Gears of War: E-Day will be supported at launch thanks to Microsoft's Prism emulator for x86 software. NBA 2K27 , the main DLSS 5 launch game, will also be supported, alongside World of Warcraft: Forever . NVIDIA says it's also working with major anti-cheat providers to support their products, something that's prevented multiplayer games from working on Arm Windows systems in the past.\n\nI'll have to spend more time with RTX Spark systems to see how well they actually handle gaming, beyond my minutes with Gears of War: E-Day. But if playing games is a priority, you'd still be better off with an Intel or AMD system with a dedicated GPU. At least then you wouldn't have to worry about potential emulation issues.\n\nRTX Spark systems will also be useful content creation — again, as you'd expect from PCs with RTX Blackwell GPUs. You can lean on hardware acceleration in tools like Blender, and notably, Adobe is re-architecting Photoshop and Premiere specifically for NVIDIA's platform. That's a major sign of faith from one of the biggest software companies around, though I suppose Adobe is also reading the tea leaves and seeing a bright future for Arm-based Windows systems in general.\n\nNVIDIA isn't targeting casual consumers with RTX Spark, not with a starting price of $2,600 for 18-core systems, or an eye-bleeding $3,700 for the full-powered 20-core models. Both NVIDIA and Microsoft are targeting AI developers and researchers who have the money to spend on insane amounts of RAM. And they should be prepared to open their wallets — a Surface Laptop Ultra with 128GB of RAM will cost a smooth $5.900. Still, that's a good deal cheaper than a fully-equipped M5 Max 16-inch MacBook Pro with 128GB of RAM, which costs $7,000.\n\nSimply by existing, the RTX Spark platform will likely push Intel and AMD in creative new directions. AMD is trying to accomplish something similar with its Ryzen AI Max 400 chips , which can also house a ton of unified memory, but can also run existing x86 software without any emulation. And Intel has been eager to prove itself against AMD for the last few years, which has resulted in its powerful Core Ultra Series 3 chips . As always, competition is great for consumers.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2287239/nvidia-rtx-spark-good-for-windows-even-if-you-do-not-need-local-ai/",
-      "publishedAt": "2026-10-15T13:00:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "windows",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-a68d6b5a54aef67c:en",
-      "sourceId": "engadget-a68d6b5a54aef67c",
-      "lang": "en",
-      "title": "Xreal's new flagship One Pro+ AR glasses offer better brightness and increased comfort",
-      "summary": "There's still no camera here, so they won't be confused for pervert specs.",
-      "body": "There's still no camera here, so they won't be confused for pervert specs.\n\nXreal just released an upgrade of its popular One Pro AR glasses . The One Pro+ is a minor refresh, but offers some welcome quality of life improvements.\n\nFirst of all, it's brighter than ever before. The One Pro+ reaches 1,200 nits of peak brightness, compared to 700 nits for the standard One Pro. It also includes AI HDR upscaling tech to improve the visuals.The company has upgraded its 2D-to-3D conversion algorithm from 30Hz to 60Hz. This is for adding depth to 2D content, which is similar to the spatial imaging system available with the Apple Vision Pro .\n\nFinally, there's a newly designed nose pad to maximize long-term comfort. The company promises this pad will improve overall stability, but not at the expense of field of view. This is actually the feature I'm most excited about because there's a huge difference between wearing AR glasses for 20 minutes and hunkering down for two or three hours of work. They tend to get uncomfortable pretty fast.\n\nOther than that, these are still Xreal One Pro glasses. They offer the same X1 spatial computing chip and a 57-degree field of view. This is not a bad thing, as we enjoyed the original One Pro. They are great for productivity, via screen mirroring, and watching stuff. We actually said they intrigued us in ways that Meta's glasses never did.\n\nTo that end, there's one missing feature here that's a mainstay with Meta. The Xreal One Pro+ AR glasses do not have a camera, so people are unlikely to suspect you are wearing pervert glasses . Xreal's new specs are available right now and cost $600, which is the same price as last year's One Pro.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2286631/xreals-new-flagship-one-pro-ar-glasses-offer-better-brightness-and-increased-comfort/",
-      "publishedAt": "2026-10-15T13:00:00.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-1cee7c191d90754d:en",
-      "sourceId": "9to5mac-1cee7c191d90754d",
-      "lang": "en",
-      "title": "Half of United flights have Starlink Wi-Fi – here’s how to check yours",
-      "summary": "United Airlines first introduced Starlink Wi-Fi on its flights starting early in 2025, the airline says nearly half of its flights currently offer the high-speed satellite internet service. It’s now introduced a new way to let you check whether your flight has the service … more…",
-      "body": "United Airlines first introduced Starlink Wi-Fi on its flights starting early in 2025, the airline says nearly half of its flights currently offer the high-speed satellite internet service. It’s now introduced a new way to let you check whether your flight has the service …\n\nThe airline says that it intends to hit 100% Starlink coverage by the end of next year, while current installation rates depend on the fleet. For mainline aircraft flying long distance routes, the current figure is 37%, while United Express regional jets have significantly greater coverage at 68%.\n\nUnited already has more Starlink-equipped planes than any other airline in the world and is installing it on about 20 aircraft per week with plans to complete installations by the end of 2027. More than 250,000 United customers on average fly on a Starlink-equipped plane every day onboard more than 2,500 flights – nearly half the airline’s daily departures.\n\nStarlink is now active on more than 635 United mainline and United Express aircraft and the airline has already flown more than 37.7 million passengers on Starlink-powered aircraft across more than 538,000 flights, powering 14 million devices.\n\nUnited already notifies you about the availability of Starlink Wi-Fi in preflight emails and texts, but it’s now introduced a tracker in case of any equipment changes on your route. Airlines do sometimes need to swap aircraft at relatively short notice to account for issues like technical faults and flight cancellations that leave planes incorrectly positioned for their next scheduled flight.\n\nSimply go to this tracking link within two days of your departure, entering your flight number and departure date. If you check further ahead, the tracker will show you the percentage likelihood based on recent flights on the same route, but it’s only within 48 hours that you’ll get a generally reliable answer.\n\nPhoto: United",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/15/half-of-united-flights-have-starlink-wi-fi-heres-how-to-check-yours/",
-      "publishedAt": "2026-10-15T12:52:16.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-1475fd2f7c825956:en",
-      "sourceId": "techcrunch-1475fd2f7c825956",
-      "lang": "en",
-      "title": "Ricursive Intelligence is betting on AI-designed chips to help solve the compute crisis",
-      "summary": "The founders detailed how their startup is developing AI that can design chips, learn from each iteration, and improve subsequent designs, all with the goal of automating and accelerating the chip design process.",
-      "body": "Ricursive Intelligence founders Anna Goldie and Azalia Mirhoseini believe more efficient AI chip design could help solve the compute crisis. The founders took the stage at TechCrunch Disrupt on Wednesday to detail how their startup is developing AI that can design chips, learn from each iteration, and improve subsequent designs, all with the goal of automating and accelerating the chip design process.\n\n“There is this understanding that in the next five years we are going to have at least 10,000x more demand for compute, and that’s somewhat potentially conservative,” Goldie said on stage. “So we don’t want to build 10,000 times more data centers. We think that we need to help by making chips that are more efficient, that use the bandwidth in those data centers more efficiently, that use the wafers and fabs more efficiently, because even if we make [data centers] in space or something, I don’t know, you won’t see the sun anymore.”\n\nWhile some may be scared by the thought of AI designing its own chips, Goldie argues that letting AI handle chip design will allow humans can focus on developing applications and exploring new possibilities that can expand what they can accomplish with computing.\n\n“I think the way everything is shifting is that humans come bring their great ideas and creative thoughts, and execution is handled by AI,” Goldie said. “And this is happening in chip design, software development, and other places. And that’s something that recursive does for chip design.”\n\nThe founders say AI is challenging traditional chip design methods by discovering unconventional layouts that can outperform traditional ones. For example, AlphaChip, the AI system the founders previously developed, produced a circular, “donut-shaped” arrangement of chip components that initially surprised engineers but ultimately proved to be successful.\n\nThey explained that they are optimizing entire chips rather than following the traditional approach of partitioning them into dozens of smaller blocks. This approach allows AI to create intricate patterns, including wave-like designs, which the pair said they plan to share more about in the future.\n\nThe founders also argued that AI-designed chips will make it possible to create all sorts of chips that might not have been possible before.\n\n“If it takes six months or a year or two years to design a new chip, then you really have to be extremely selective about the chips that you design,” Goldie said. “But if you can design a chip in like a week, and then say for manufacturing, you can design custom chips for all sorts of different types of applications in like space and AR, VR, and you biological computing, and it makes sense financially to do that, and we can be more energy efficient.”",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/14/ricursive-intelligence-is-betting-on-ai-designed-chips-to-help-solve-the-compute-crisis/",
-      "publishedAt": "2026-10-15T01:01:32.000Z",
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
@@ -5652,38 +5700,6 @@
       "publishedAt": "2026-10-14T21:35:09.000Z",
       "categories": [
         "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-36cf658cf1c7b6fb:en",
-      "sourceId": "ars-technica-36cf658cf1c7b6fb",
-      "lang": "en",
-      "title": "Software development and rules stability: Prototype racing in 2030",
-      "summary": "With the end of IMSA’s 2026 season, we have thoughts about the future of the sport.",
-      "body": "The rising tide that has been the Drive to Survive effect has lifted more boats in motorsport than simply Formula 1’s. Sportscar racing is enjoying its own surge in popularity internationally at races like Le Mans in France, but also in North America in IMSA’s WeatherTech Sportscar Championship. For one thing, multi-hour, multi-class racing lends itself better to the age of streaming and second screens than it did linear broadcast TV, and fans are taking advantage of that: IMSA’s audience grew by more than a third domestically and almost a quarter internationally last year.\n\nHaving some of the coolest-looking cars racing today certainly helps, whether that’s the (mostly) hybrid prototypes or the GTs, racing versions of road-going cars from Porsche, Ferrari, and others. And it definitely helps that fan access at the races is virtually unmatched, with open paddocks and grid walks that now see huge crowds get up close to the cars just before the start of each race.\n\n“I think we're just scratching the surface,” said IMSA President John Doonan. “I think besides the people that are here on the ground, the people watching, people engaging with us on social media, I'm seeing the passion come out more. Just on the grid walk, these fans coming up and being so excited to be here.” The series has certainly been making an effort, among other things getting local high school students exposed to the industry and starting a partnership to train more mechanics with ASE.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/cars/2026/10/software-development-and-rules-stability-prototype-racing-in-2030/",
-      "publishedAt": "2026-10-14T19:44:26.000Z",
-      "categories": [
-        "tecnologia-general",
-        "programas-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-95f9e3211e7bf4a7:en",
-      "sourceId": "ars-technica-95f9e3211e7bf4a7",
-      "lang": "en",
-      "title": "Researchers use AI to design proteins that cut up other proteins",
-      "summary": "AI design tools make proteins that break bonds that are stable for hundreds of years.",
-      "body": "A protein is a chain of amino acids held together by what are called peptide bonds. On their own, those bonds are extremely stable; they're estimated to have a half-life of several hundred years. But in Earth's environment, most proteins don't last nearly that long. That's because organisms have evolved a handful of ways to catalyze the break-up of peptide bonds, which have diversified into countless specialized protein-digesting enzymes. Proteases are everywhere and generally make short work of any proteins that find their way into the environment.\n\nNow, researchers have basically short-circuited the diversification process, using AI-based protein design tools to take the catalytic core of two types of protease and replace the entire rest of the protein. The resulting enzymes could be tuned to cut specific proteins in half, and the researchers demonstrated their effectiveness by using them to cut proteins associated with neurological diseases.\n\nThe basic peptide bond isn't especially interesting-looking—it's what you get when you link an amino group to an acid, releasing a water molecule in the process. As their name implies, amino acids have both an amino and an acid group, allowing them to form peptide bonds on two sides of the amino acid. This is critical for building up the long chains found in proteins. (The amino acids also have side chains with distinctive chemistry, which gives a backbone specific properties.)\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/science/2026/10/researchers-use-ai-to-design-proteins-that-cut-up-other-proteins/",
-      "publishedAt": "2026-10-14T17:10:15.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
       ]
     },
     {
@@ -6000,22 +6016,6 @@
         "windows",
         "tecnologia-accesibilidad",
         "jaws"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "applevis-apps-4bdcc9691bb56455:en",
-      "sourceId": "applevis-apps-4bdcc9691bb56455",
-      "lang": "en",
-      "title": "SortFlow",
-      "summary": "SortFlow is a relaxing water-sort puzzle. Pour colored liquids between tubes until each tube holds a single color. • Four ways to play: Standard, Classic (the traditional rules), Time Attack and Zen • Hundreds of handcrafted puzzles across eight difficulty tiers, up to Legendary • A new Daily Challenge every day, with streaks and trophy celebrations • Weekly Leagues: earn XP in any mode, climb from Bronze to Diamond, and claim coins every Monday • Leaderboards in the app for every mode and difficulty, Global or Friends, plus Game Center achievements • Daily and weekly quests with coins to claim • Challenge a friend: share a puzzle and see who scores higher on the same board • Level up, earn coins, and unlock themes, tube skins, sound packs and win celebrations • Leave any puzzle and resume right where you left off — all modes save automatically • Build combo streaks with a burning combo counter and sound effects • Play offline, anytime No pressure, no clutter — just satisfying, colorful logic.",
-      "body": "SortFlow is a relaxing water-sort puzzle. Pour colored liquids between tubes until each tube holds a single color.\n\n• Four ways to play: Standard, Classic (the traditional rules), Time Attack and Zen • Hundreds of handcrafted puzzles across eight difficulty tiers, up to Legendary • A new Daily Challenge every day, with streaks and trophy celebrations • Weekly Leagues: earn XP in any mode, climb from Bronze to Diamond, and claim coins every Monday • Leaderboards in the app for every mode and difficulty, Global or Friends, plus Game Center achievements • Daily and weekly quests with coins to claim • Challenge a friend: share a puzzle and see who scores higher on the same board • Level up, earn coins, and unlock themes, tube skins, sound packs and win celebrations • Leave any puzzle and resume right where you left off — all modes save automatically • Build combo streaks with a burning combo counter and sound effects • Play offline, anytime\n\nNo pressure, no clutter — just satisfying, colorful logic.",
-      "sourceName": "AppleVis Apps",
-      "originalUrl": "https://www.applevis.com/apps/ios/games/sortflow",
-      "publishedAt": "2026-10-08T20:55:49.000Z",
-      "categories": [
-        "apple",
-        "apps-accesibles"
       ]
     },
     {

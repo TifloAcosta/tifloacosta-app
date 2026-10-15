@@ -120,6 +120,18 @@
     "publishedAt": null
   },
   {
+    "id": "applevis-apps-aef93ab730feefe4",
+    "title": "Decant: Color Sort Puzzle",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/decant-color-sort-puzzle",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "Pour a little color. Make a little order. Decant is a color-sort puzzle with luminous glass vessels and a simple goal: leave each filled vessel with just one color. Tap a vessel, choose a matching color or an empty space, and pour the top group. Two spare vessels give you room to think—not a shortcut to buy. NO ADS. ROOM TO PLAY. - 180 puzzles across four difficulty levels, each checked for a solution. - A fresh, always-free Daily, with the same ranked board and rules for everyone. - Practice puzzles generated and checked before you play. - Satisfying glass pours—or instant pours when you prefer to skip the animation. - Liquid symbols, a high-contrast palette, and sound, haptic, handedness, and motion controls. - Free restarts. No lives, energy, timers, or extra vessels for sale. Find a solution, then try to make it cleaner. A Perfect clear uses the fewest possible pours. Older archived Daily puzzles may show a Target instead; that is a reference solution, not a promise of the minimum. START FREE. UNLOCK MORE IF YOU LIKE. The first 30 puzzles, today's Daily, and three practice puzzles per day are free, with three undos per board. The Daily does not count against your practice allowance. A one-time Decant Full Game Unlock opens all 180 puzzles, unlimited practice and undos outside the ranked Daily, the full Daily archive for unranked practice, and advanced records. Or choose the StackForge Play Pass for Pro access across StackForge games and One Good Thing. Prices are shown before purchase. Play Pass subscriptions renew automatically unless canceled. Today's ranked Daily gives every player the same three undos, whether free or Pro. No ads in either tier. Optional account sync keeps your progress and Play Pass connected. Terms: https://stackforgestudios.com/terms Privacy: https://stackforgestudios.com/privacy Terms of Use (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+    "publishedAt": "2026-10-15T17:06:19.000Z"
+  },
+  {
     "id": "applevis-apps-0df250325234a67c",
     "title": "Cat Genome",
     "sourceId": "applevis-apps",
@@ -226,17 +238,5 @@
     "platform": "Apple",
     "summary": "Quintra brings poker hands to a shared board. Place cards to build pairs, straights, flushes, and more across rows and columns. Connect with cards already in play, find the right opening, and turn one card into points in two directions. ONE BOARD. SO MANY POSSIBILITIES. Build on what's there, line up bonus spaces, and watch for opportunities where hands cross. Your best move could also give your opponent something to work with. PLAY FRIENDS AT YOUR PACE Trade turns through Game Center whenever you're ready. Match Play spans two rounds with the same deal and swapped seats, giving both players a chance to make the most of each hand. A FRESH PUZZLE EVERY DAY Fit the cards to match every marked poker hand. Choose Easy, Medium, or Hard, then see how your completion time stacks up on the daily puzzle leaderboards. EIGHT TURNS. MAKE EACH ONE COUNT. Take on the Daily Challenge: a daily deal, eight solo turns, and a leaderboard to climb. Find the connections that turn a good score into a great one. PLAY SOLO Learn the board in Practice or take on the computer in Match Play. Choose your difficulty and try new approaches at your own pace. MAKE IT YOURS Earn XP, level up, and chase goals and achievements as you play. Unlock new card decks and board looks to make Quintra feel like yours. Every poker hand changes the game.",
     "publishedAt": "2026-10-09T00:39:30.000Z"
-  },
-  {
-    "id": "applevis-apps-4bdcc9691bb56455",
-    "title": "SortFlow",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/sortflow",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "SortFlow is a relaxing water-sort puzzle. Pour colored liquids between tubes until each tube holds a single color. • Four ways to play: Standard, Classic (the traditional rules), Time Attack and Zen • Hundreds of handcrafted puzzles across eight difficulty tiers, up to Legendary • A new Daily Challenge every day, with streaks and trophy celebrations • Weekly Leagues: earn XP in any mode, climb from Bronze to Diamond, and claim coins every Monday • Leaderboards in the app for every mode and difficulty, Global or Friends, plus Game Center achievements • Daily and weekly quests with coins to claim • Challenge a friend: share a puzzle and see who scores higher on the same board • Level up, earn coins, and unlock themes, tube skins, sound packs and win celebrations • Leave any puzzle and resume right where you left off — all modes save automatically • Build combo streaks with a burning combo counter and sound effects • Play offline, anytime No pressure, no clutter — just satisfying, colorful logic.",
-    "publishedAt": "2026-10-08T20:55:49.000Z"
   }
 ]

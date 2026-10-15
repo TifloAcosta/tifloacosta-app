@@ -99,10 +99,10 @@ if maxX >= minX && maxY >= minY &&
         visibleRect = NSRect(x: cropX,
                              y: CGFloat(originalHeight) - cropY - cropSide,
                              width: cropSide, height: cropSide)
-        print("AppIcon: contenido original \\(Int(occupancy * 100))%, " +
+        print("AppIcon: contenido original \(Int(occupancy * 100))%, " +
               "ajustado proporcionalmente para ocupar ~84%")
     } else {
-        print("AppIcon: contenido original \\(Int(occupancy * 100))%; no se amplía")
+        print("AppIcon: contenido original \(Int(occupancy * 100))%; no se amplía")
     }
 } else {
     print("AppIcon: fondo no uniforme o insignia no aislable; se respeta el origen")

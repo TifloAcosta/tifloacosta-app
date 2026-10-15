@@ -218,6 +218,7 @@ final class TifloNativeVideosController: UITableViewController, UISearchBarDeleg
         var request = URLRequest(url: target)
         request.timeoutInterval = 18
         request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("capacitor://localhost", forHTTPHeaderField: "Origin")
         URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
             DispatchQueue.main.async {
                 guard let self = self else { return }

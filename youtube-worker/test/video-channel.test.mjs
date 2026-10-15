@@ -4,6 +4,8 @@ import {
   resolveVideoChannel,
   getAccountVideoStateForVideo,
   subscribeToVideoChannel,
+  unsubscribeFromVideoChannel,
+  unlike,
   commentOnVideoChannel
 } from '../src/youtube-api.js';
 import { handleRequest } from '../src/index.js';
@@ -35,8 +37,10 @@ function fakeApi({ subscribed = false } = {}) {
       } }] });
     }
     if (target.includes('/videos/getRating?')) return json({ items: [{ rating: 'like' }] });
+    if (target.includes('/videos/rate?')) return new Response(null, { status: 204 });
     if (target.includes('/subscriptions?')) {
       if (method === 'POST') return json({ id: 'subscription-new' });
+      if (method === 'DELETE') return new Response(null, { status: 204 });
       return json({ items: subscribed ? [{ id: 'subscription-existing' }] : [] });
     }
     if (target.includes('/commentThreads?')) return json({ id: 'comment-new' });
@@ -79,6 +83,24 @@ test('la suscripción del vídeo se envía solo al canal resuelto, con protecci�
   const already = fakeApi({ subscribed: true });
   assert.deepEqual(await subscribeToVideoChannel('token', videoId, already.fetchImpl), { subscribed: true, changed: false });
   assert.ok(already.calls.every(c => c.method === 'GET'));
+});
+test('cancelar suscripción elimina exclusivamente la del canal comprobado', async () => {
+  const subscribed = fakeApi({ subscribed: true });
+  assert.deepEqual(await unsubscribeFromVideoChannel('token', videoId, subscribed.fetchImpl),
+    { subscribed: false, changed: true });
+  const deletion = subscribed.calls.find(call => call.method === 'DELETE');
+  assert.equal(deletion.target, 'https://www.googleapis.com/youtube/v3/subscriptions?id=subscription-existing');
+  const absent = fakeApi();
+  assert.deepEqual(await unsubscribeFromVideoChannel('token', videoId, absent.fetchImpl),
+    { subscribed: false, changed: false });
+  assert.ok(absent.calls.every(call => call.method === 'GET'));
+});
+test('quitar Me gusta usa la valoración none del vídeo seleccionado', async () => {
+  const api = fakeApi();
+  assert.deepEqual(await unlike('token', videoId, api.fetchImpl), { rating: 'none' });
+  assert.deepEqual(api.calls.map(call => call.method), ['POST']);
+  assert.equal(api.calls[0].target,
+    'https://www.googleapis.com/youtube/v3/videos/rate?id=' + videoId + '&rating=none');
 });
 test('el comentario enlaza el vídeo con su canal real', async () => {
   const api = fakeApi();

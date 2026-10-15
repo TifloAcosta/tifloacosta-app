@@ -20,6 +20,8 @@ final class TifloYouTubeAccountControls: UIView {
     private let accountStatus = UILabel()
     private var expanded = false
     private var editorVisible = false
+    private var isSubscribed = false
+    private var hasLiked = false
 
     init(videoId: String, spanish: Bool, presenter: UIViewController) {
         self.videoId = videoId
@@ -145,15 +147,21 @@ final class TifloYouTubeAccountControls: UIView {
                 let channel = data["channelTitle"] as? String ?? ""
                 let subscribed = data["subscribed"] as? Bool ?? false
                 let liked = (data["rating"] as? String) == "like"
-                self.subscribeButton.isHidden = subscribed
-                self.likeButton.isHidden = liked
-                if !subscribed {
-                    self.subscribeButton.setTitle(
-                        self.spanish ? "Suscribirme al canal " + channel
-                                     : "Subscribe to " + channel,
-                        for: .normal
-                    )
-                }
+                self.isSubscribed = subscribed
+                self.hasLiked = liked
+                self.subscribeButton.isHidden = false
+                self.likeButton.isHidden = false
+                self.subscribeButton.setTitle(
+                    subscribed
+                        ? (self.spanish ? "Cancelar suscripción al canal " : "Unsubscribe from ") + channel
+                        : (self.spanish ? "Suscribirme al canal " : "Subscribe to ") + channel,
+                    for: .normal
+                )
+                self.likeButton.setTitle(
+                    liked ? (self.spanish ? "Quitar Me gusta" : "Remove like")
+                          : (self.spanish ? "Me gusta este vídeo" : "Like this video"),
+                    for: .normal
+                )
                 var items: [String] = []
                 if !channel.isEmpty {
                     items.append((self.spanish ? "Canal: " : "Channel: ") + channel)
@@ -232,11 +240,17 @@ final class TifloYouTubeAccountControls: UIView {
     }
 
     @objc private func subscribe() {
-        execute("subscribe", success: spanish ? "Suscripción realizada." : "Subscribed.")
+        let action = isSubscribed ? "unsubscribe" : "subscribe"
+        execute(action, success: isSubscribed
+            ? (spanish ? "Suscripción cancelada." : "Unsubscribed.")
+            : (spanish ? "Suscripción realizada." : "Subscribed."))
     }
 
     @objc private func like() {
-        execute("like", success: spanish ? "Has marcado Me gusta." : "Video liked.")
+        let action = hasLiked ? "unlike" : "like"
+        execute(action, success: hasLiked
+            ? (spanish ? "Se retiró Me gusta." : "Like removed.")
+            : (spanish ? "Has marcado Me gusta." : "Video liked."))
     }
 
     @objc private func openEditor() {

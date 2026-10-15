@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - feature/ios-testflight-voiceover-native-pilot-2026-10-15
+      - feature/ios-direct-native-rotor-2026-10-15
     paths:
       - 'ios-build/**'
       - 'test/ios-native-rotor-pilot.test.mjs'

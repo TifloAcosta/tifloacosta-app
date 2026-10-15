@@ -110,3 +110,11 @@ Las opciones de suscripción y valoración consultan el estado de la cuenta y pr
 Icono: se conserva imagen de origen, se quita marco interior duplicado, se amplía TA con proporción y fondo azul RGB uniforme. Comprobación real macOS/icono 38800025452 SUCCESS y Xcode iOS sin firma 38800309261 SUCCESS; las pruebas de integración de cada función son obligatorias antes de firma.
 No modificar Android, web, datos, TifloLector ni otras secciones.
 Destino EXCLUSIVO: TestFlight interno «Probadores TifloAcosta». Confirmar solo si Apple procesa VALID y asigna esta compilación al grupo.
+
+SOLICITUD EXPRESA DE NUEVA COMPILACIÓN — PRESENTACIÓN DE VÍDEOS, 15/10/2026.
+Base consolidada PR #189, integración 134977dc2085f9f772373db55046ceff0bd8b091.
+Respaldo anterior protegido: backup/ios-before-videos-visual-integration-20261015 (0b6ef4dfa7f2ae60d9af15568e43a53cc727de70).
+Fallo visual informado: Vídeos se percibe como un submenú modal ajeno a TifloAcosta; VoiceOver y acciones nativas por cada título YA funcionan y no deben regresar a HTML.
+Corrección exclusiva iOS: Vista Vídeos integrada como controlador hijo UIKit en la app, no ventana modal. Diseño visual con tarjetas redondeadas color TifloAcosta, bordes discretos, etiquetas legibles, información visible del canal/fecha/duración/visualizaciones, un solo elemento y un flic VoiceOver por vídeo. Buscador y ordenación mantienen apariencia de la marca. Acción Volver al inicio retira correctamente la vista nativa.
+Pruebas sin firma CI 38805293277: SUCCESS; consultas YouTube y OAuth validadas. No alterar reproductor, acciones, biblioteca, sección Actualidad, almacenamiento ni Android/web. Icono TA confirmado CORRECTO por usuario; NO modificarlo.
+Publicación exclusivamente en TestFlight interno grupo «Probadores TifloAcosta». Solo declarar disponible tras firma, subida, procesamiento VALID y asignación verificada del build por Apple. Prueba visual definitiva y acciones VoiceOver requieren instalarlo en un iPhone real.

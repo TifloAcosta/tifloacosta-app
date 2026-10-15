@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - feature/ios-icon-proportion-2026-10-15
+      - fix/ios-videos-unified-screen-icon-20261015
     paths:
       - 'ios-build/make-app-icon.swift'
       - '.github/workflows/ios-icon-proportion-check.yml'

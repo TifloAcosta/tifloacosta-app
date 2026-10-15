@@ -375,18 +375,33 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
                 call.reject("El catálogo de vídeos todavía no está disponible")
                 return
             }
+            // Videos is a real child section of the Capacitor root, not a
+            // temporary modal action menu. The UIKit table and VoiceOver
+            // custom actions stay native; only its hosting changes.
             let screen = TifloNativeVideosController(videos: videos)
-            screen.onClosed = { [weak self] in
+            let navigation = UINavigationController(rootViewController: screen)
+            screen.onClosed = { [weak self, weak navigation] in
+                if let navigation = navigation {
+                    navigation.willMove(toParent: nil)
+                    navigation.view.removeFromSuperview()
+                    navigation.removeFromParent()
+                }
                 self?.nativePilotPresented = false
                 self?.notifyListeners("nativeVideoClosed", data: [:])
             }
             self.clearInstalledActions()
             self.nativePilotPresented = true
-            let navigation = UINavigationController(rootViewController: screen)
-            navigation.modalPresentationStyle = .fullScreen
-            presenter.present(navigation, animated: true) {
-                call.resolve(["presented": true, "count": videos.count])
-            }
+            presenter.addChild(navigation)
+            navigation.view.translatesAutoresizingMaskIntoConstraints = false
+            presenter.view.addSubview(navigation.view)
+            NSLayoutConstraint.activate([
+                navigation.view.leadingAnchor.constraint(equalTo: presenter.view.leadingAnchor),
+                navigation.view.trailingAnchor.constraint(equalTo: presenter.view.trailingAnchor),
+                navigation.view.topAnchor.constraint(equalTo: presenter.view.topAnchor),
+                navigation.view.bottomAnchor.constraint(equalTo: presenter.view.bottomAnchor)
+            ])
+            navigation.didMove(toParent: presenter)
+            call.resolve(["presented": true, "count": videos.count])
         }
     }
 

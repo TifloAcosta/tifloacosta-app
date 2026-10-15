@@ -275,10 +275,14 @@ final class TifloNativeVideosController: UITableViewController, UISearchBarDeleg
     }
 
     @objc private func closeToHome() {
-        // Keep the completion alive even if UIKit releases this controller
-        // as soon as dismissal finishes; never reveal the old HTML Videos page.
+        // When embedded as an app section, there is no modal to dismiss.
+        // Release the native section before returning to the web app home.
         let completion = onClosed
-        dismiss(animated: true, completion: completion)
+        if presentingViewController != nil {
+            dismiss(animated: true, completion: completion)
+        } else {
+            completion?()
+        }
     }
 
     @objc private func changeOrder() {

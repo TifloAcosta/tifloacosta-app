@@ -151,7 +151,10 @@ final class TifloNativeVideosController: UITableViewController, UISearchBarDeleg
     }
 
     @objc private func closeToHome() {
-        dismiss(animated: true) { [weak self] in self?.onClosed?() }
+        // Keep the completion alive even if UIKit releases this controller
+        // as soon as dismissal finishes; never reveal the old HTML Videos page.
+        let completion = onClosed
+        dismiss(animated: true, completion: completion)
     }
 
     @objc private func changeOrder() {

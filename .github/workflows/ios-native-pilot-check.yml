@@ -1,0 +1,48 @@
+name: Validar piloto nativo VoiceOver iOS (sin publicar)
+on:
+  push:
+    branches:
+      - feature/ios-testflight-voiceover-native-pilot-2026-10-15
+    paths:
+      - 'ios-build/**'
+      - 'test/ios-native-rotor-pilot.test.mjs'
+      - '.github/workflows/ios-native-pilot-check.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  unsigned-ios-build:
+    runs-on: macos-15
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Select installed Xcode 26
+        run: |
+          set -euo pipefail
+          XCODE="$(find /Applications -maxdepth 1 -type d -name 'Xcode_26*.app' -print | sort | tail -n 1)"
+          test -n "$XCODE"
+          sudo xcode-select --switch "$XCODE/Contents/Developer"
+          xcodebuild -version
+      - name: Validate native pilot contract and JavaScript syntax
+        run: |
+          node --test test/ios-native-rotor-pilot.test.mjs
+          node --check ios-build/ios-reader-native.js
+          node --check ios-build/install-native-video.mjs
+      - name: Prepare existing iOS web and Capacitor project
+        working-directory: ios-build
+        run: |
+          npm install --no-audit --no-fund
+          npm run prepare:web
+          npx cap add ios
+          node install-native-video.mjs
+          ruby configure-ios-compliance.rb
+          (cd ios/App && pod install)
+      - name: Xcode unsigned iOS device compilation
+        working-directory: ios-build
+        run: |
+          xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build
+      - name: Device acceptance remains mandatory
+        run: echo 'CI does not prove real VoiceOver rotor behaviour. Test on a physical iPhone before replacing the HTML view.'

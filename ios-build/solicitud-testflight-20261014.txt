@@ -127,3 +127,13 @@ Prueba de PR iOS sin firma run 38811314590 SUCCESS. Prueba de rama final compila
 Nueva ruta: desde el botón Vídeos de inicio abrir directamente UNA sección nativa accesible, sin cargar videos.html como pantalla intermedia ni mostrar barra de UINavigationController/submenú. Las tarjetas y cabecera leen los colores actuales del tema CSS TifloAcosta. Un vídeo por flic, acciones de rotor reproducir, YouTube, me gusta, suscripción, compartir, comentar y cuentas existentes. Buscador global de YouTube, ordenar y carga de diez más. Al volver, retornar al enlace del inicio sin navegar a otra pantalla.
 Si el puente nativo falla o VoiceOver está desactivado, conservar navegación HTML anterior. Las demás secciones, TifloLector, datos, app Android, web e icono TA NO se modifican.
 Enviar exclusivamente al grupo interno «Probadores TifloAcosta». No afirmar listo hasta validar Apple estado VALID y asignación al grupo de esta nueva compilación. La comprobación estética y gestual definitiva exige prueba en dispositivo.
+
+
+Solicitud nueva, 15-10-2026. Corrección de Vídeos tras prueba real con VoiceOver.
+Origen: captura IMG_0989.PNG en Google Drive. Fallo comprobado: vista HTML de Vídeos con focos separados para título, publicación, descripción y botón, sin acciones VoiceOver esperadas.
+Corrección integrada PR #191. Base de publicación: rama preparacion-ios, merge commit 7cb11d059eba64c266e9183111af7c66bc5d6e65.
+Validación preventiva iOS sin firma: run 38814782116, conclusion SUCCESS (incluye compilación iOS).
+Objetivo: recuperar la lista nativa UIKit para usuarios VoiceOver al entrar en Vídeos; si hay fallback, un solo foco accesible por vídeo y doble toque sobre título para reproductor. Mantener orden, buscador YouTube único y páginas de diez.
+Conservar las demás secciones de la app, datos, contenidos, TifloLector, Android y web pública sin cambios.
+Publicar únicamente en TestFlight interno, grupo Probadores TifloAcosta. Exigir compilación firmada, envío y comprobación de Apple VALID e internalBuildState habilitado. No confirmar al usuario hasta que TestFlight esté disponible.
+Una vez procesada, probar en iPhone real que cada vídeo es un solo foco y que las acciones de VoiceOver se anuncian con flic arriba/abajo.

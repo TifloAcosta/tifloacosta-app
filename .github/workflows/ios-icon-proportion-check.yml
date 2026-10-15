@@ -1,0 +1,45 @@
+name: Validar proporciones del icono iOS sin publicar
+on:
+  push:
+    branches:
+      - feature/ios-icon-proportion-2026-10-15
+    paths:
+      - 'ios-build/make-app-icon.swift'
+      - '.github/workflows/ios-icon-proportion-check.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check-ios-icon:
+    runs-on: macos-15
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Seleccionar Xcode para AppKit
+        run: |
+          set -euo pipefail
+          XCODE="$(find /Applications -maxdepth 1 -type d -name 'Xcode_26*.app' -print | sort | tail -n 1)"
+          test -n "$XCODE"
+          sudo xcode-select --switch "$XCODE/Contents/Developer"
+          swift --version
+      - name: Generar icono oficial con proporción normalizada
+        run: |
+          set -euo pipefail
+          swift ios-build/make-app-icon.swift tifloacosta-icon-512.png "$RUNNER_TEMP/icon-1024.png"
+          test -s "$RUNNER_TEMP/icon-1024.png"
+          sips -g pixelWidth -g pixelHeight -g format "$RUNNER_TEMP/icon-1024.png"
+      - name: Verificar imagen opaca de 1024 píxeles e imagen de origen intacta
+        run: |
+          set -euo pipefail
+          export ICON_PATH="$RUNNER_TEMP/icon-1024.png"
+          python3 - <<'PY'
+          import os, struct
+          path=os.environ['ICON_PATH']
+          with open(path,'rb') as f:
+              data=f.read(30)
+          assert data[:8] == bytes.fromhex('89504e470d0a1a0a')
+          width,height=struct.unpack('>II',data[16:24])
+          assert (width,height)==(1024,1024), (width,height)
+          assert data[25] == 2, 'Expected RGB, no alpha'
+          print('AppIcon verificado: 1024x1024 RGB sin alfa')
+          PY

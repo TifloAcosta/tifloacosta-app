@@ -163,13 +163,13 @@ if transparentBackground && maxX >= minX && maxY >= minY &&
                 let pixel = sample(x, y)
                 let diff = difference(pixel, leftNavy)
                 let alpha = min(1, max(0, (diff - 0.09) / 0.19)) * pixel.a
-                isolated.setColor(NSColor(calibratedRed: pixel.r, green: pixel.g,
+                isolated.setColor(NSColor(deviceRed: pixel.r, green: pixel.g,
                                           blue: pixel.b, alpha: alpha), atX: x, y: y)
             }
         }
         let mark = NSImage(size: logo.size)
         mark.addRepresentation(isolated)
-        NSColor(calibratedRed: leftNavy.r, green: leftNavy.g,
+        NSColor(deviceRed: leftNavy.r, green: leftNavy.g,
                 blue: leftNavy.b, alpha: 1).setFill()
         area.fill()
         mark.draw(in: markTarget, from: markSource,

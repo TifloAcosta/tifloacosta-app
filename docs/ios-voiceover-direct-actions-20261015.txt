@@ -1,0 +1,35 @@
+CONTROL DE CAMBIOS — ROTOR VOICEOVER iOS
+15 de octubre de 2026
+
+ORIGEN
+Compilación anterior: 400084, preparada el 15/10/2026.
+Rama segura anterior: backup/ios-testflight-400084-2026-10-15.
+Commit anterior: 71f9b0c8401123ea172a0da8f1c585216647fb87.
+Rama de cambios: feature/ios-direct-native-rotor-2026-10-15.
+
+CAUSA CONTRASTADA
+La compilación 400084 mostraba la lista HTML de títulos y el botón adicional de piloto; la lista real UIKit solo se abría tras pulsar ese botón. Las acciones anunciadas en el título HTML eran mayoritariamente del sistema y no las acciones de documentos esperadas.
+El puente de iOS referenciaba TifloIOSBookActions sin implementación en la versión web-reading.js empaquetada. Algunas acciones personalizadas podían no realizar ninguna operación.
+
+INTERVENCIÓN
+Eliminar botón de prueba.
+Al situarse VoiceOver sobre un título de biblioteca reconocido, abrir la lista nativa UITableView automáticamente y enfocar la fila del título elegido. Cada celda expone UIAccessibilityCustomAction con id único por título.
+Acciones: Abrir para leer, Leer, Traducir (abre selector de idioma del lector, sin comenzar traducción), Cola, Información, Mover a carpeta, Exportar, Cambiar título y Eliminar (confirmación obligatoria).
+Puente real entre las acciones nativas y el cliente de documentos de TifloLector, inyectado únicamente al paquete iOS. No modificar la web, Android, fuentes originales, ni esquema de datos local.
+Al cerrar, regresar al título y bloquear la reapertura inmediata al mismo foco. Mantener biblioteca HTML original como reserva.
+
+LIMITACIONES DE ESTA FASE
+La lista nativa aparece al llegar al título, como pantalla nativa independiente, NO es todavía una sustitución en línea del listado web completo.
+Es una primera intervención en Biblioteca. No acreditar funcionamiento en Vídeos, Recursos ni Podcasts hasta validarlos específicamente.
+La prueba automatizada valida código y compilación. Solo VoiceOver en un iPhone confirma los gestos.
+
+VERIFICACIONES ANTES DE TESTFLIGHT
+1. Pruebas Node de contrato y acciones reales.
+2. Validación de los controles previos de TifloLector.
+3. Preparación correcta del paquete iOS sin cambiar el código público.
+4. Compilación Xcode sin firma y preflight iOS completos.
+5. Solo entonces crear una nueva compilación para TestFlight interno, grupo «Probadores TifloAcosta».
+
+RESTAURACIÓN
+Si una verificación falla: no fusionar cambios experimentales.
+Si en iPhone fracasa: usar la rama backup/ios-testflight-400084-2026-10-15 como referencia, revertir los cambios mediante commit y generar otra compilación de número superior para Apple. Nunca borrar la biblioteca del usuario ni aplicar cambios al almacenamiento. Mantener 400084 identificada para recuperación si TestFlight permite reinstalarla.

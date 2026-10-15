@@ -13,7 +13,8 @@ test('un solo controlador de Vídeos y retorno al inicio, sin pantalla duplicada
   assert.match(bridge, /if \(path\.endsWith\('\/videos\.html'\)\) return null/);
   assert.match(bridge, /showNativeVideoSection\(\{[\s\S]*videos: rows, theme: videoTheme\(\)/);
   assert.match(bridge, /nativeVideoClosed/);
-  assert.match(bridge, /openVideosFromHome\(link\.href, link\)/);\n  assert.doesNotMatch(bridge, /location\.replace\('index\.html'\)/);
+  assert.match(bridge, /openVideosFromHome\(link\.href, link\)/);
+  assert.doesNotMatch(bridge, /location\.replace\('index\.html'\)/);
   assert.match(plugin, /CAPPluginMethod\(name: "showNativeVideoSection"/);
   assert.match(plugin, /TifloNativeVideosController\(videos: videos, theme: webTheme\)/);
   assert.match(view, /title = "Vídeos de TifloAcosta"/);

@@ -24,6 +24,32 @@ private struct TifloVideoRecord {
         self.views = max(0, (raw["viewCount"] as? NSNumber)?.intValue ?? 0)
     }
 
+    // Visible metadata is intentionally subordinate to the title. VoiceOver
+    // reads the entire record as ONE accessible row, regardless of line wraps.
+    var visualMetadata: String {
+        var parts: [String] = []
+        if !channel.isEmpty { parts.append(channel) }
+        if !published.isEmpty {
+            let formatter = ISO8601DateFormatter()
+            if let dateValue = formatter.date(from: published) {
+                let style = DateFormatter()
+                style.locale = Locale(identifier: "es_ES")
+                style.dateStyle = .medium
+                parts.append(style.string(from: dateValue))
+            } else { parts.append(String(published.prefix(10))) }
+        }
+        if duration > 0 {
+            let total = Int(duration)
+            parts.append(total >= 3600
+                ? String(format: "%d:%02d:%02d", total / 3600, (total % 3600) / 60, total % 60)
+                : String(format: "%d:%02d", total / 60, total % 60))
+        }
+        if views > 0 {
+            parts.append("\(views.formatted(.number)) visualizaciones")
+        }
+        return parts.joined(separator: " · ")
+    }
+
     var speech: String {
         var parts = [title]
         if !channel.isEmpty { parts.append("Canal: " + channel) }
@@ -60,6 +86,77 @@ private final class TifloVideoRotorAction: NSObject {
     }
 }
 
+// Real UIKit cells keep UIAccessibilityCustomAction on the focused video.
+// These decorations are NOT extra VoiceOver stops: the whole cell is one
+// accessible element, while the visible hierarchy follows TifloAcosta.
+private final class TifloBrandedVideoCell: UITableViewCell {
+    static let reuseId = "TifloBrandedVideoCell"
+    let heading = UILabel()
+    let metadata = UILabel()
+    private let panel = UIView()
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        backgroundColor = .clear
+        contentView.backgroundColor = .clear
+        selectionStyle = .none
+
+        panel.backgroundColor = UIColor(red: 0.10, green: 0.065, blue: 0.068, alpha: 1)
+        panel.layer.cornerRadius = 18
+        panel.layer.borderWidth = 1
+        panel.layer.borderColor = UIColor(red: 0.48, green: 0.32, blue: 0.33, alpha: 1).cgColor
+        panel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(panel)
+
+        heading.font = UIFont.preferredFont(forTextStyle: .body)
+        heading.adjustsFontForContentSizeCategory = true
+        heading.textColor = .white
+        heading.numberOfLines = 0
+        metadata.font = UIFont.preferredFont(forTextStyle: .footnote)
+        metadata.adjustsFontForContentSizeCategory = true
+        metadata.textColor = UIColor(white: 0.80, alpha: 1)
+        metadata.numberOfLines = 0
+
+        let text = UIStackView(arrangedSubviews: [heading, metadata])
+        text.axis = .vertical
+        text.alignment = .fill
+        text.spacing = 5
+        text.translatesAutoresizingMaskIntoConstraints = false
+        panel.addSubview(text)
+        NSLayoutConstraint.activate([
+            panel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6),
+            panel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6),
+            panel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 14),
+            panel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -14),
+            text.topAnchor.constraint(equalTo: panel.topAnchor, constant: 14),
+            text.bottomAnchor.constraint(equalTo: panel.bottomAnchor, constant: -14),
+            text.leadingAnchor.constraint(equalTo: panel.leadingAnchor, constant: 16),
+            text.trailingAnchor.constraint(equalTo: panel.trailingAnchor, constant: -16)
+        ])
+        isAccessibilityElement = true
+        accessibilityTraits = [.button]
+    }
+
+    required init?(coder: NSCoder) { return nil }
+
+    func configure(title: String, info: String?, isMore: Bool = false) {
+        heading.text = title
+        heading.font = UIFont.preferredFont(forTextStyle: isMore ? .headline : .body)
+        metadata.text = info
+        metadata.isHidden = info?.isEmpty ?? true
+        panel.layer.borderColor = (isMore
+            ? UIColor(red: 0.72, green: 0.15, blue: 0.16, alpha: 1)
+            : UIColor(red: 0.48, green: 0.32, blue: 0.33, alpha: 1)).cgColor
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        accessibilityCustomActions = []
+        accessibilityHint = nil
+        accessibilityLabel = nil
+    }
+}
+
 final class TifloNativeVideosController: UITableViewController, UISearchBarDelegate {
     var onClosed: (() -> Void)?
     private let startingVideos: [TifloVideoRecord]
@@ -77,7 +174,6 @@ final class TifloNativeVideosController: UITableViewController, UISearchBarDeleg
     private let stateLabel = UILabel()
     private var retainedActions = [IndexPath: [TifloVideoRotorAction]]()
     private let brandRed = UIColor(red: 0.65, green: 0.10, blue: 0.11, alpha: 1)
-    private let cardColor = UIColor(red: 0.115, green: 0.075, blue: 0.075, alpha: 1)
 
     init(videos: [[String: Any]]) {
         let parsed = videos.compactMap(TifloVideoRecord.init)
@@ -107,23 +203,32 @@ final class TifloNativeVideosController: UITableViewController, UISearchBarDeleg
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             title: "Volver al inicio", style: .plain, target: self, action: #selector(closeToHome))
-        view.backgroundColor = .black
-        tableView.backgroundColor = .black
-        tableView.separatorColor = UIColor(white: 0.42, alpha: 1)
+        view.backgroundColor = UIColor(red: 0.045, green: 0.041, blue: 0.043, alpha: 1)
+        tableView.backgroundColor = view.backgroundColor
+        tableView.separatorStyle = .none
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 70
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TifloVideoTitle")
+        tableView.estimatedRowHeight = 94
+        tableView.register(TifloBrandedVideoCell.self, forCellReuseIdentifier: TifloBrandedVideoCell.reuseId)
 
         searchBar.placeholder = "Buscar vídeos públicos en YouTube"
         searchBar.searchBarStyle = .minimal
         searchBar.searchTextField.textColor = .white
-        searchBar.searchTextField.backgroundColor = UIColor(white: 0.16, alpha: 1)
+        searchBar.searchTextField.backgroundColor = UIColor(red: 0.08, green: 0.065, blue: 0.067, alpha: 1)
+        searchBar.searchTextField.layer.cornerRadius = 12
+        searchBar.searchTextField.layer.masksToBounds = true
+        searchBar.searchTextField.layer.borderWidth = 1
+        searchBar.searchTextField.layer.borderColor = brandRed.cgColor
+        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(
+            string: "Buscar vídeos públicos en YouTube",
+            attributes: [.foregroundColor: UIColor(white: 0.77, alpha: 1)]
+        )
         searchBar.delegate = self
         searchBar.returnKeyType = .search
         searchBar.accessibilityIdentifier = "tiflo-youtube-search-native"
 
         order.selectedSegmentIndex = 0
         order.selectedSegmentTintColor = brandRed
+        order.backgroundColor = UIColor(red: 0.12, green: 0.10, blue: 0.11, alpha: 1)
         order.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
         order.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
         order.accessibilityLabel = "Orden de vídeos del canal"
@@ -138,9 +243,12 @@ final class TifloNativeVideosController: UITableViewController, UISearchBarDeleg
         header.axis = .vertical
         header.spacing = 8
         header.isLayoutMarginsRelativeArrangement = true
-        header.layoutMargins = UIEdgeInsets(top: 10, left: 12, bottom: 12, right: 12)
-        header.backgroundColor = .black
-        header.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 160)
+        header.layoutMargins = UIEdgeInsets(top: 14, left: 18, bottom: 16, right: 18)
+        header.backgroundColor = UIColor(red: 0.10, green: 0.065, blue: 0.068, alpha: 1)
+        header.layer.cornerRadius = 18
+        header.layer.borderWidth = 1
+        header.layer.borderColor = UIColor(red: 0.48, green: 0.32, blue: 0.33, alpha: 1).cgColor
+        header.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 170)
         tableView.tableHeaderView = header
         updateState()
     }
@@ -266,22 +374,16 @@ final class TifloNativeVideosController: UITableViewController, UISearchBarDeleg
         visible.count + (canShowMore ? 1 : 0)
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TifloVideoTitle", for: indexPath)
-        cell.backgroundColor = cardColor
-        cell.textLabel?.textColor = .white
-        cell.textLabel?.numberOfLines = 0
-        cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
-        cell.textLabel?.adjustsFontForContentSizeCategory = true
-        cell.accessoryType = .none
-        cell.isAccessibilityElement = true
-        cell.accessibilityTraits = [.button]
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: TifloBrandedVideoCell.reuseId, for: indexPath
+        ) as? TifloBrandedVideoCell else { return UITableViewCell() }
         if indexPath.row == visible.count {
-            cell.textLabel?.text = "Mostrar diez vídeos más"
+            cell.configure(title: showingSearch ? "Mostrar diez resultados más" : "Mostrar diez vídeos más", info: nil, isMore: true)
             cell.accessibilityLabel = showingSearch ? "Mostrar diez resultados más" : "Mostrar diez vídeos más"
             cell.accessibilityCustomActions = []
         } else {
             let video = visible[indexPath.row]
-            cell.textLabel?.text = video.title
+            cell.configure(title: video.title, info: video.visualMetadata)
             cell.accessibilityLabel = video.speech
             let actions: [(String, String)] = [
                 ("play", "Reproducir"),

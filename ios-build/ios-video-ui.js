@@ -100,14 +100,82 @@
     }
   }
 
+  // WKWebView is a fallback when UIKit cannot be presented. The fallback
+  // must still expose precisely one VoiceOver stop per channel video.
+  function describeChannelVideos() {
+    const list = byId('video-list');
+    if (!list) return;
+    for (const card of list.querySelectorAll('.video-card')) {
+      if (card.dataset.iosSingleRow === '1') continue;
+      const title = card.querySelector('h3');
+      const play = card.querySelector('.video-play-button');
+      if (!title || !play) continue;
+      const videoTitle = title.textContent.trim();
+      const date = card.querySelector('.video-meta')?.textContent?.trim() || '';
+      if (!videoTitle) continue;
+
+      // Preserve the original click handler. Do not build a second player.
+      play.textContent = videoTitle;
+      play.setAttribute('aria-label', [videoTitle, date].filter(Boolean).join('. '));
+      play.setAttribute('aria-description', tr(
+        'Doble toque para abrir el reproductor.',
+        'Double tap to open the video player.'
+      ));
+      play.classList.add('ios-video-row-action');
+
+      // The visual metadata can remain on the card, but must not create
+      // extra swipe stops in VoiceOver.
+      title.hidden = true;
+      title.setAttribute('aria-hidden', 'true');
+      for (const node of card.querySelectorAll('.video-thumbnail, .video-description')) {
+        node.hidden = true;
+        node.setAttribute('aria-hidden', 'true');
+      }
+      const metadata = card.querySelector('.video-meta');
+      if (metadata) metadata.setAttribute('aria-hidden', 'true');
+      card.dataset.iosSingleRow = '1';
+    }
+  }
+
+  const iosListStyle = document.createElement('style');
+  iosListStyle.textContent = `
+    #video-list .video-card[data-ios-single-row="1"] {
+      padding: 0.35rem 0.6rem;
+      border-width: 0 0 1px;
+      border-radius: 0;
+    }
+    #video-list .video-card .ios-video-row-action {
+      display: block;
+      width: 100%;
+      padding: 0.8rem;
+      text-align: left;
+      line-height: 1.45;
+      font-weight: 600;
+      white-space: normal;
+    }
+    #video-list .video-card .ios-video-row-action:focus-visible {
+      outline: 3px solid currentColor;
+      outline-offset: 2px;
+    }
+  `;
+  document.head.append(iosListStyle);
+
   function setup() {
     arrange();
     describeSearchResults();
-    const list = byId('youtube-accessible-results');
-    if (list) new MutationObserver(describeSearchResults)
-      .observe(list, { childList: true, subtree: true });
-    byId('lang-es')?.addEventListener('click', () => setTimeout(arrange, 0));
-    byId('lang-en')?.addEventListener('click', () => setTimeout(arrange, 0));
+    describeChannelVideos();
+    const searchList = byId('youtube-accessible-results');
+    if (searchList) new MutationObserver(describeSearchResults)
+      .observe(searchList, { childList: true, subtree: true });
+    const channelList = byId('video-list');
+    if (channelList) new MutationObserver(describeChannelVideos)
+      .observe(channelList, { childList: true });
+    byId('lang-es')?.addEventListener('click', () => {
+      setTimeout(() => { arrange(); describeChannelVideos(); }, 0);
+    });
+    byId('lang-en')?.addEventListener('click', () => {
+      setTimeout(() => { arrange(); describeChannelVideos(); }, 0);
+    });
   }
   if (document.readyState === 'loading')
     document.addEventListener('DOMContentLoaded', setup, { once: true });

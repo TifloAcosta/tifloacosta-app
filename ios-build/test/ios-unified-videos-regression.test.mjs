@@ -11,13 +11,13 @@ test('un solo controlador de Vídeos y retorno al inicio, sin pantalla duplicada
   const plugin = read('native/TifloReadingAccessibilityPlugin.swift');
   const view = read('native/TifloNativeVideosController.swift');
   assert.match(bridge, /if \(path\.endsWith\('\/videos\.html'\)\) return null/);
-  assert.match(bridge, /showNativeVideoSection\(\{ videos: items\.slice\(0, 600\) \}\)/);
+  assert.match(bridge, /showNativeVideoSection\(\{[\s\S]*videos: rows, theme: videoTheme\(\)/);
   assert.match(bridge, /nativeVideoClosed/);
-  assert.match(bridge, /location\.replace\('index\.html'\)/);
+  assert.match(bridge, /openVideosFromHome\(link\.href, link\)/);\n  assert.doesNotMatch(bridge, /location\.replace\('index\.html'\)/);
   assert.match(plugin, /CAPPluginMethod\(name: "showNativeVideoSection"/);
-  assert.match(plugin, /TifloNativeVideosController\(videos: videos\)/);
+  assert.match(plugin, /TifloNativeVideosController\(videos: videos, theme: webTheme\)/);
   assert.match(view, /title = "Vídeos de TifloAcosta"/);
-  assert.match(view, /title: "Volver al inicio"/);
+  assert.match(view, /backButton\.setTitle\("Volver al inicio", for: \.normal\)/);
   assert.doesNotMatch(view, /title: "Cerrar"/);
 });
 

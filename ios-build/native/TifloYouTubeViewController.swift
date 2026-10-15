@@ -367,7 +367,10 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
         controls.axis = .horizontal
         controls.distribution = .fillEqually
         controls.spacing = 8
-        let detailsRow = UIStackView(arrangedSubviews: [detailsButton, progressLabel])
+        let shareButton = UIButton(type: .system)
+        shareButton.setTitle(spanish ? "Compartir" : "Share", for: .normal)
+        shareButton.addTarget(self, action: #selector(shareVideo), for: .touchUpInside)
+        let detailsRow = UIStackView(arrangedSubviews: [detailsButton, shareButton, progressLabel])
         detailsRow.axis = .vertical
         detailsRow.spacing = 6
 
@@ -739,6 +742,17 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
         webView.loadHTMLString("", baseURL: nil)
         let completion = onClose
         dismiss(animated: true, completion: completion)
+    }
+
+    @objc private func shareVideo() {
+        guard let url = URL(string: "https://www.youtube.com/watch?v=" + videoId) else { return }
+        let sheet = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        if let popover = sheet.popoverPresentationController {
+            popover.sourceView = view
+            popover.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.midY,
+                                        width: 1, height: 1)
+        }
+        present(sheet, animated: true)
     }
 
     @objc private func openOriginal() {

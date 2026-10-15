@@ -473,6 +473,11 @@ if (!iosVideos.includes(iosVideoOpen)) throw new Error('No se encuentra openPlay
 iosVideos = iosVideos.replace(iosVideoOpen, "  function openPlayer(video) {\n    lastPlayerTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;\n    const nativeId = videoId(video);\n    const native = window.Capacitor?.Plugins?.TifloYouTube;\n    if (native && /^[A-Za-z0-9_-]{11}$/.test(nativeId)) {\n      void native.open({ videoId: nativeId, title: String(video.title || ''), description: String(video.fullDescription || video.description || ''), channel: String(video.channelTitle || video.channel || 'TifloAcosta'), publishedAt: String(video.publishedAt || '') }).then(() => {\n        if (lastPlayerTrigger?.isConnected) lastPlayerTrigger.focus({ preventScroll: true });\n      }).catch(() => {\n        window.open(youtubeUrl(video), '_blank', 'noopener');\n      });\n      return;\n    }\n    // Do not retry the embedded WKWebView iframe that gave YouTube error 153.\n    window.open(youtubeUrl(video), '_blank', 'noopener');\n    return;\n    lastPlayerTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;");
 // On iPhone, "Mostrar diez más" appends another ten instead of replacing
 // the previous page. The Android and web pagers retain their current behavior.
+const catalogAssigned = "      catalogLoaded = true;\n      render();";
+if (!iosVideos.includes(catalogAssigned)) throw new Error('No se encuentra señal de carga del catálogo iOS');
+iosVideos = iosVideos.replace(catalogAssigned,
+  "      catalogLoaded = true;\\n      window.TIFLO_NATIVE_VIDEO_CATALOG = catalog;\\n      render();\\n      window.dispatchEvent(new Event('tiflo-ios-catalog-ready'));".replaceAll('\\n', '\n'));
+
 const iosPageMarker = '    const pageData = core.paginate(filtered, currentPage, PAGE_SIZE);';
 if (!iosVideos.includes(iosPageMarker)) throw new Error('Paginación de vídeos iOS no encontrada');
 iosVideos = iosVideos.replace(iosPageMarker,

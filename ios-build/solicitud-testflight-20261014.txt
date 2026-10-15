@@ -91,3 +91,12 @@ Enviar solo tras firma válida, procesamiento VALID y asignación confirmada.
 Esta compilación NO certifica el funcionamiento de los gestos: deberá
 comprobarse con VoiceOver en un iPhone real antes de extender o dar por resuelto
 el trabajo.
+
+SOLICITUD EXPLÍCITA TESTFLIGHT — VÍDEOS ACCESIBLES, 15/10/2026.
+PR #187 integrado en preparacion-ios, commit 440647646bcc5aa8d7e35957624170cbe059fa1e.
+Se preserva la compilación estable 400086 y el símbolo TA ampliado; no sobrescribir backup.
+Preflight integral iOS validado antes de integración, run 38791168039: SUCCESS; generación Xcode sin firma. Verificación del Worker OAuth YouTube y despliegue de nuevas acciones run 38791260642: SUCCESS.
+Nueva pantalla Vídeos: UN SOLO buscador global de YouTube; diez títulos accesibles por página, cada flic un vídeo con fecha/canal/duración/visualizaciones; cargar otros diez conservando anteriores; sección de vídeos del canal con ordenación VoiceOver.
+Reproductor nativo: pausa/reproducción, ±30 segundos, posición ajustable ±10 % en VoiceOver, compartir, detalles, conexión/desconexión de YouTube y acciones sociales reversibles mediante API autorizada. Acciones contextuales desde títulos sin duplicar botones visibles.
+No cambiar Android, página pública, datos locales, TifloLector ni restantes secciones; TestFlight SOLO grupo interno «Probadores TifloAcosta».
+Comprobar firma, procesamiento VALID de Apple y disponibilidad real en TestFlight; no confirmar instalación hasta que dichos pasos se completen.

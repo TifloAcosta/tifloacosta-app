@@ -144,7 +144,7 @@ console.log('Prechequeos de estructura, DAISY y accesibilidad completados; queda
 // Real document-action handlers exist inside web-reading.js's closure. Expose
 // them ONLY in the packaged iPhone copy. This repairs the old iOS bridge,
 // which previously referenced TifloIOSBookActions without defining it.
-const iosBookActionGlue = String.raw\`
+const iosBookActionGlue = String.raw`
   window.TifloIOSBookActions = {
     currentId: () => currentBookId || '',
     hasSavedBook: () => Boolean(currentBookId),
@@ -210,7 +210,7 @@ const iosBookActionGlue = String.raw\`
       return Boolean(changed);
     }
   };
-\`;
+`;
 if (!readerScript.includes("card.className = 'resource-card reading-library-title-card';") ||
     !readerScript.trimEnd().endsWith('})();') ||
     readerScript.includes('window.TifloIOSBookActions =')) {
@@ -218,13 +218,13 @@ if (!readerScript.includes("card.className = 'resource-card reading-library-titl
 }
 const withNativeIds = readerScript.replace(
   "card.className = 'resource-card reading-library-title-card';",
-  "card.className = 'resource-card reading-library-title-card';\\n        card.dataset.iosBookId = String(book.id);"
+  "card.className = 'resource-card reading-library-title-card';\n        card.dataset.iosBookId = String(book.id);"
 );
-const packagedReader = withNativeIds.replace(/\\}\\)\\(\\);\\s*$/, iosBookActionGlue + '\\n})();\\n')
-  .replace('if (globalThis.confirm?.(question) !== true) return;\\n    const deleted = await libraryClient.deleteBook(id);',
-    'if (globalThis.confirm?.(question) !== true) return false;\\n    const deleted = await libraryClient.deleteBook(id);')
-  .replace('await Promise.all([renderLibrary(), renderQueue(), renderMarks()]);\\n  }\\n\\n  function updateQueueToggle()',
-    'await Promise.all([renderLibrary(), renderQueue(), renderMarks()]);\\n    return Boolean(deleted);\\n  }\\n\\n  function updateQueueToggle()');
+const packagedReader = withNativeIds.replace(/\}\)\(\);\s*$/, iosBookActionGlue + '\n})();\n')
+  .replace('if (globalThis.confirm?.(question) !== true) return;\n    const deleted = await libraryClient.deleteBook(id);',
+    'if (globalThis.confirm?.(question) !== true) return false;\n    const deleted = await libraryClient.deleteBook(id);')
+  .replace('await Promise.all([renderLibrary(), renderQueue(), renderMarks()]);\n  }\n\n  function updateQueueToggle()',
+    'await Promise.all([renderLibrary(), renderQueue(), renderMarks()]);\n    return Boolean(deleted);\n  }\n\n  function updateQueueToggle()');
 if (!packagedReader.includes('window.TifloIOSBookActions =') ||
     !packagedReader.includes('card.dataset.iosBookId = String(book.id);') ||
     !packagedReader.includes('return Boolean(deleted);')) {

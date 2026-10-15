@@ -87,7 +87,7 @@ test('iOS conserva General global cerrado y elimina el General redundante del li
 test('acciones de biblioteca vinculadas al foco REAL de UIKit sin activación previa', () => {
   const bridge = read('ios-build/ios-reader-native.js');
   const swift = read('ios-build/native/TifloReadingAccessibilityPlugin.swift');
-  assert.match(bridge, /registerLibraryTitles\(\{ documents \}\)/);
+  assert.match(bridge, /registerLibraryTitles\(\{ documents, nativeRowsOnFocus: true \}\)/);
   assert.match(bridge, /title\?\.closest\('\.reading-library-title-card'\)/);
   assert.match(swift, /UIAccessibility\.elementFocusedNotification/);
   assert.match(swift, /func updateFocusedLibraryTitle/);

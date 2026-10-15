@@ -15,7 +15,8 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
         CAPPluginMethod(name: "registerLibraryTitles", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "registerAccessibleTargets", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "clearDocumentActions", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "showNativeActionList", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "showNativeActionList", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "getVoiceOverStatus", returnType: CAPPluginReturnPromise)
     ]
 
     private var pendingPicker: CAPPluginCall?
@@ -293,6 +294,14 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
         navigation.modalPresentationStyle = .fullScreen
         presenter.present(navigation, animated: true) {
             onPresented?(entries.count)
+        }
+    }
+
+    // Read-only state query; unlike registerAccessibleTargets this does not
+    // replace another screen's current accessibility action registrations.
+    @objc public func getVoiceOverStatus(_ call: CAPPluginCall) {
+        DispatchQueue.main.async {
+            call.resolve(["enabled": UIAccessibility.isVoiceOverRunning])
         }
     }
 

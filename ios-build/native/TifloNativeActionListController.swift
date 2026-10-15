@@ -118,11 +118,34 @@ final class TifloNativeActionListController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let entry = entries[indexPath.row]
-        guard let action = entry.actions.first(where: { $0.id == "open" }) else {
+        guard let action = entry.actions.first(where: { ["open", "play", "read"].contains($0.id) })
+            ?? entry.actions.first else {
             tableView.deselectRow(at: indexPath, animated: true)
             return
         }
         select(itemId: entry.id, actionId: action.id)
+    }
+
+    // A genuine UIKit context menu for touch users, with the exact same
+    // operations that VoiceOver exposes through UIAccessibilityCustomAction.
+    override func tableView(
+        _ tableView: UITableView,
+        contextMenuConfigurationForRowAt indexPath: IndexPath,
+        point: CGPoint
+    ) -> UIContextMenuConfiguration? {
+        let item = entries[indexPath.row]
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] _ in
+            let choices: [UIAction] = item.actions.map { action in
+                let isDestructive = action.id == "delete"
+                return UIAction(
+                    title: action.label,
+                    attributes: isDestructive ? .destructive : []
+                ) { [weak self] _ in
+                    self?.select(itemId: item.id, actionId: action.id)
+                }
+            }
+            return UIMenu(title: "", children: choices)
+        }
     }
 
     private func select(itemId: String, actionId: String) {

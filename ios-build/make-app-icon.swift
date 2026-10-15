@@ -124,6 +124,51 @@ NSColor(calibratedRed: background.r, green: background.g,
         blue: background.b, alpha: 1).setFill()
 area.fill()
 logo.draw(in: area, from: visibleRect, operation: .sourceOver, fraction: 1)
+
+// The official TA artwork has a rounded outlined FRAME that legitimately
+// reaches all four edges. Its foreground logo is smaller inside that frame;
+// treating the full border as "content" cannot correct that inner balance.
+// Enlarge ONLY the centre mark by ~11%, leaving the navy frame and white
+// rounded border at their original positions. If colours differ from the
+// known uniform navy background, refuse the edit rather than damage art.
+if transparentBackground && maxX >= minX && maxY >= minY &&
+   CGFloat(max(maxX - minX, maxY - minY)) / CGFloat(originalWidth) > 0.92 {
+    let leftNavy = sample(Int(Double(originalWidth) * 0.09),
+                          originalHeight / 2)
+    let rightNavy = sample(Int(Double(originalWidth) * 0.91),
+                           originalHeight / 2)
+    let navyConsistent = leftNavy.a > 0.98 && rightNavy.a > 0.98 &&
+        difference(leftNavy, rightNavy) < 0.045
+    if navyConsistent {
+        // Never touch the outlined outer border (roughly the outer 4%).
+        let centerSource = NSRect(
+            x: CGFloat(originalWidth) * 0.10,
+            y: CGFloat(originalHeight) * 0.09,
+            width: CGFloat(originalWidth) * 0.80,
+            height: CGFloat(originalHeight) * 0.82
+        )
+        let centerTarget = NSRect(
+            x: CGFloat(dimension) * 0.055,
+            y: CGFloat(dimension) * 0.044,
+            width: CGFloat(dimension) * 0.89,
+            height: CGFloat(dimension) * 0.912
+        )
+        let innerPaint = NSRect(
+            x: CGFloat(dimension) * 0.095,
+            y: CGFloat(dimension) * 0.085,
+            width: CGFloat(dimension) * 0.81,
+            height: CGFloat(dimension) * 0.83
+        )
+        NSColor(calibratedRed: leftNavy.r, green: leftNavy.g,
+                blue: leftNavy.b, alpha: 1).setFill()
+        innerPaint.fill()
+        logo.draw(in: centerTarget, from: centerSource,
+                  operation: .sourceOver, fraction: 1)
+        print("AppIcon: símbolo TA ampliado ~11%; marco y contorno intactos")
+    } else {
+        print("AppIcon: fondo interior desigual; ajuste central omitido por seguridad")
+    }
+}
 context.flushGraphics()
 NSGraphicsContext.restoreGraphicsState()
 

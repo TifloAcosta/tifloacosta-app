@@ -27,6 +27,9 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
     private var registeredAccessibleTargets: [[String: Any]] = []
     private var focusedTargetId = ""
     private var nativePilotPresented = false
+    private var autoNativeLibraryEnabled = false
+    private var suppressAutoNativeTitleId = ""
+    private var presentingAutoNativeTitleId = ""
 
     public override func load() {
         super.load()
@@ -41,6 +44,11 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
     @objc public func registerLibraryTitles(_ call: CAPPluginCall) {
         DispatchQueue.main.async {
             self.registeredLibraryTitles = call.getArray("documents") as? [[String: Any]] ?? []
+            self.autoNativeLibraryEnabled = call.getBool("nativeRowsOnFocus") ?? false
+            if !self.autoNativeLibraryEnabled {
+                self.suppressAutoNativeTitleId = ""
+                self.presentingAutoNativeTitleId = ""
+            }
             self.updateFocusedLibraryTitle()
             call.resolve(["registered": self.registeredLibraryTitles.count,
                           "voiceOverEnabled": UIAccessibility.isVoiceOverRunning])
@@ -152,7 +160,32 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
               let entries = title["actions"] as? [[String: Any]] else {
             documentId = ""
             clearInstalledActions()
+            suppressAutoNativeTitleId = ""
             updateFocusedGenericTarget(focused, label: normalized)
+            return
+        }
+        if autoNativeLibraryEnabled {
+            // VoiceOver is focusing a DOM title; give it a real UIKit row with
+            // native Actions instead of decorating an inaccessible WKWebView node.
+            if suppressAutoNativeTitleId == id || presentingAutoNativeTitleId == id { return }
+            guard !nativePilotPresented, bridge?.viewController?.presentedViewController == nil else { return }
+            presentingAutoNativeTitleId = id
+            let snapshot = registeredLibraryTitles
+            let isEnglish = (title["label"] as? String ?? "").hasPrefix("Open ")
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.presentingAutoNativeTitleId = ""
+                guard self.autoNativeLibraryEnabled, !self.nativePilotPresented,
+                      self.suppressAutoNativeTitleId != id else { return }
+                self.presentNativeActionList(
+                    rawItems: snapshot,
+                    title: isEnglish ? "Library" : "Biblioteca",
+                    isEnglish: isEnglish,
+                    preferredFocusId: id,
+                    onFailure: nil,
+                    onPresented: nil
+                )
+            }
             return
         }
         // No vaciar las acciones del título que continúa bajo el foco.
@@ -185,69 +218,91 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
         }
     }
 
-    /// An opt-in UIKit pilot, independent from the existing HTML library.
-    /// Each row is a real accessibility element; no actions are attached to WKWebView.
+    /// The native list is opened automatically when VoiceOver reaches a library
+    /// title, without requiring a separate "test" button. The HTML list remains
+    /// the normal fallback when VoiceOver is off or presentation fails.
+    private func presentNativeActionList(
+        rawItems: [[String: Any]],
+        title: String,
+        isEnglish: Bool,
+        preferredFocusId: String?,
+        onFailure: ((String) -> Void)?,
+        onPresented: ((Int) -> Void)?
+    ) {
+        guard let presenter = bridge?.viewController,
+              !nativePilotPresented,
+              presenter.presentedViewController == nil else {
+            onFailure?("Another native screen is already open")
+            return
+        }
+        guard !rawItems.isEmpty, rawItems.count <= 30 else {
+            onFailure?("Provide between 1 and 30 list items")
+            return
+        }
+        var seen = Set<String>()
+        let allowed = Set(["open", "continue", "translate", "queue", "info", "move", "export", "rename", "delete"])
+        let entries: [TifloNativeListItem] = rawItems.compactMap { raw in
+            guard let id = raw["id"] as? String, !id.isEmpty,
+                  id.count <= 256, !seen.contains(id),
+                  let label = (raw["plainLabel"] as? String ?? raw["label"] as? String),
+                  !label.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+                  label.count <= 500 else { return nil }
+            seen.insert(id)
+            let actions = (raw["actions"] as? [[String: Any]] ?? []).prefix(10).compactMap { entry -> TifloNativeListAction? in
+                guard let key = entry["id"] as? String, allowed.contains(key),
+                      let title = entry["label"] as? String,
+                      !title.isEmpty, title.count <= 100 else { return nil }
+                return TifloNativeListAction(id: key, label: title)
+            }
+            guard !actions.isEmpty else { return nil }
+            return TifloNativeListItem(id: id, title: label, actions: actions)
+        }
+        guard entries.count == rawItems.count else {
+            onFailure?("Invalid list items or action identifiers")
+            return
+        }
+        let controller = TifloNativeActionListController(
+            title: title,
+            entries: entries,
+            closeLabel: isEnglish ? "Close" : "Cerrar",
+            actionHint: isEnglish
+                ? "VoiceOver Actions: swipe up or down to choose an action, then double tap."
+                : "Acciones de VoiceOver: deslice arriba o abajo para elegir y toque dos veces.",
+            initialItemId: preferredFocusId
+        )
+        controller.onSelected = { [weak self] itemId, actionId in
+            self?.nativePilotPresented = false
+            self?.suppressAutoNativeTitleId = itemId
+            self?.notifyListeners("nativeListAction", data: ["itemId": itemId, "action": actionId])
+        }
+        controller.onClosed = { [weak self] in
+            self?.nativePilotPresented = false
+            self?.suppressAutoNativeTitleId = preferredFocusId ?? ""
+            self?.notifyListeners("nativeListClosed", data: ["itemId": preferredFocusId ?? ""])
+        }
+        clearInstalledActions()
+        documentId = ""
+        focusedTargetId = ""
+        nativePilotPresented = true
+        let navigation = UINavigationController(rootViewController: controller)
+        navigation.modalPresentationStyle = .fullScreen
+        presenter.present(navigation, animated: true) {
+            onPresented?(entries.count)
+        }
+    }
+
     @objc public func showNativeActionList(_ call: CAPPluginCall) {
         DispatchQueue.main.async {
-            guard let presenter = self.bridge?.viewController,
-                  presenter.presentedViewController == nil else {
-                call.reject("Another native screen is already open")
-                return
-            }
-            guard let rawItems = call.getArray("items") as? [[String: Any]],
-                  !rawItems.isEmpty, rawItems.count <= 30 else {
-                call.reject("Provide between 1 and 30 list items")
-                return
-            }
-            var seen = Set<String>()
-            let allowed = Set(["open", "continue", "queue", "info", "move", "export", "rename", "delete"])
-            let entries: [TifloNativeListItem] = rawItems.compactMap { raw in
-                guard let id = raw["id"] as? String, !id.isEmpty,
-                      id.count <= 256, !seen.contains(id),
-                      let label = raw["label"] as? String,
-                      !label.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
-                      label.count <= 500 else { return nil }
-                seen.insert(id)
-                let actions = (raw["actions"] as? [[String: Any]] ?? []).prefix(8).compactMap { entry -> TifloNativeListAction? in
-                    guard let key = entry["id"] as? String, allowed.contains(key),
-                          let title = entry["label"] as? String,
-                          !title.isEmpty, title.count <= 100 else { return nil }
-                    return TifloNativeListAction(id: key, label: title)
-                }
-                guard !actions.isEmpty else { return nil }
-                return TifloNativeListItem(id: id, title: label, actions: actions)
-            }
-            guard entries.count == rawItems.count else {
-                call.reject("Invalid list items or action identifiers")
-                return
-            }
+            let raw = call.getArray("items") as? [[String: Any]] ?? []
             let isEnglish = call.getString("language") == "en"
-            let title = call.getString("title") ?? (isEnglish ? "Native library test" : "Prueba de biblioteca nativa")
-            let controller = TifloNativeActionListController(
-                title: title,
-                entries: entries,
-                closeLabel: isEnglish ? "Close" : "Cerrar",
-                actionHint: isEnglish
-                    ? "Choose Actions in the VoiceOver rotor, then swipe up or down."
-                    : "Seleccione Acciones en el rotor de VoiceOver y deslice arriba o abajo."
+            self.presentNativeActionList(
+                rawItems: raw,
+                title: call.getString("title") ?? (isEnglish ? "Library" : "Biblioteca"),
+                isEnglish: isEnglish,
+                preferredFocusId: call.getString("focusedItemId"),
+                onFailure: { call.reject($0) },
+                onPresented: { call.resolve(["presented": true, "count": $0]) }
             )
-            controller.onSelected = { [weak self] itemId, actionId in
-                self?.nativePilotPresented = false
-                self?.notifyListeners("nativeListAction", data: ["itemId": itemId, "action": actionId])
-            }
-            controller.onClosed = { [weak self] in
-                self?.nativePilotPresented = false
-                self?.notifyListeners("nativeListClosed", data: [:])
-            }
-            self.clearInstalledActions()
-            self.documentId = ""
-            self.focusedTargetId = ""
-            self.nativePilotPresented = true
-            let navigation = UINavigationController(rootViewController: controller)
-            navigation.modalPresentationStyle = .fullScreen
-            presenter.present(navigation, animated: true) {
-                call.resolve(["presented": true, "count": entries.count])
-            }
         }
     }
 

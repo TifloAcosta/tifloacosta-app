@@ -386,6 +386,9 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
     html = html.replace('</body>', downloadScripts + '\n' + iosLanguage + '\n</body>');
   }
   if (name === 'videos.html') html = html.replace('<script src="videos.js?v=2.5"></script>', '<script src="ios-videos-fallback.js"></script>\n<script src="videos.js?v=2.5"></script>');
+  // The same bundled catalogue is available from the home screen so videos
+  // can open directly, without loading videos.html as an intermediate page.
+  if (name === 'index.html') html = html.replace('</body>', '<script src="ios-videos-fallback.js"></script>\n</body>');
   if (name === 'actualidad.html') {
     const script = '<script src="actualidad-media.js?v=1.1"></script>';
     if (!html.includes(script)) throw new Error('No se encuentra el script de multimedia en Actualidad');

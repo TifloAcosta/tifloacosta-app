@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-15T07:29:01.861Z",
+  "generatedAt": "2026-10-15T09:58:48.621Z",
   "resources": [
     {
       "kind": "resource",
@@ -6108,21 +6108,6 @@
       "categories": [
         "nvda",
         "windows",
-        "tecnologia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "conticgo-6f4c37587f2fed67:es",
-      "sourceId": "conticgo-6f4c37587f2fed67",
-      "lang": "es",
-      "title": "Nueva formación gratuita: repaso de atajos básicos para la intercomunicación con smartphones de personas con baja visión",
-      "summary": "Desde Conticgo ponemos en marcha una nueva formación gratuita dirigida a repasar atajos básicos que facilitan la intercomunicación y el manejo de smartphones. La sesión tendrá lugar este martes 6 de octubre a las 11:00 h y podrá seguirse de forma presencial o online a través de Jitsi Meet. Sesión online También será posible participar […] La entrada Nueva formación gratuita: repaso de atajos básicos para la intercomunicación con smartphones de personas con baja visión se publicó primero en Conticgo .",
-      "body": "Desde Conticgo ponemos en marcha una nueva formación gratuita dirigida a repasar atajos básicos que facilitan la intercomunicación y el manejo de smartphones.\n\nLa sesión tendrá lugar este martes 6 de octubre a las 11:00 h y podrá seguirse de forma presencial o online a través de Jitsi Meet .\n\nTambién será posible participar online a través de Jitsi Meet , en la sala de grupo, el mismo martes 6 de octubre a las 11:00 h.\n\nPara acceder a la sesión online, puedes hacerlo haciendo click en el siguiente enlace el mismo día 6 de octubre a las 11:00:\n\nEnlace directo a sala de grupo JitsiMeet\n\nLa formación presencial se realizará a las 11:00 h en nuestra sede de Avilés:\n\nAvda. Gijón, 7 Centro Municipal de Asociaciones El Arbolón Sala de Actividades 3\n\nUna vez termine la formación, estará disponible en nuestro canal de YouTube para todos aquellos que no os hayáis podido concectar.\n\n¡Os esperamos!",
-      "sourceName": "Conticgo",
-      "originalUrl": "https://conticgo.net/nueva-formacion-gratuita-repaso-de-atajos-basicos-para-la-intercomunicacion-con-smartphones-de-personas-con-baja-vision/",
-      "publishedAt": "2026-10-05T09:41:09.000Z",
-      "categories": [
         "tecnologia-accesibilidad"
       ]
     }

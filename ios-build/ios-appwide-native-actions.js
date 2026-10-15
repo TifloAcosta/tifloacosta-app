@@ -537,7 +537,7 @@
   // try the native UIKit list again. Otherwise users see the verbose web
   // catalog and its WKWebView descendants have no reliable rotor actions.
   function recoverNativeVideosPage() {
-    if (!/\\/videos\\.html$/i.test(location.pathname)) return;
+    if (!location.pathname.toLowerCase().endsWith('/videos.html')) return;
     const recover = async () => {
       const api = native();
       if (!api?.showNativeVideoSection || !api?.getVoiceOverStatus) return;

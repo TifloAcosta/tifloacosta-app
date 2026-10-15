@@ -49,3 +49,14 @@ Objetivo: acciones nativas VoiceOver al enfocar títulos de Vídeos, Podcasts y 
 Modificaciones exclusivamente iOS: ningún cambio en almacenamiento local, esquema de datos, lector web general o Android.
 Destino: SOLO «Probadores TifloAcosta». La instalación en un iPhone REAL determinará si el rotor funciona.
 No dar la compilación por disponible hasta confirmar resultado de firma/subida a App Store Connect y procesamiento VALID/asignación al grupo.
+SOLICITUD EXPERIMENTAL DE TESTFLIGHT — 15 DE OCTUBRE DE 2026.
+Origen: PR #183, integración 6410e2696858e4166d0d65984e467e558deb947b en preparacion-ios.
+Base de regreso segura: backup/ios-testflight-before-native-2026-10-15; commit inicial 1b4f5d62789944909bfca03f8c1154c2f459e44a.
+Validación Xcode sin firma del piloto UIKit #38760138148: SUCCESS.
+Validación de preparación iOS #38760148235: SUCCESS.
+Nuevo componente nativo UIAccessibilityCustomAction asignado a cada celda UITableView real, no a la vista WKWebView.
+Entrada temporal de prueba «Probar acciones nativas de VoiceOver» solo en Biblioteca iOS, con hasta diez títulos y sus acciones. No sustituir ni reestructurar la biblioteca anterior.
+Prevención de interferencia del puente WKWebView mientras esté visible la lista nativa.
+No migrar datos, no modificar web, Android, servicios, importar archivos, TifloLector ni funciones ya aprobadas.
+Destino EXCLUSIVO: TestFlight interno, grupo «Probadores TifloAcosta».
+Publicar solo si la compilación, firma, procesamiento de Apple y habilitación del grupo se completan. No afirmar que las acciones funcionan hasta verificarlas con VoiceOver en iPhone real.

@@ -45,18 +45,9 @@
     const path = location.pathname.toLowerCase();
     const hash = decodeURIComponent(location.hash || '');
     const byId = id => document.getElementById(id);
-    if (path.endsWith('/videos.html')) {
-      if (videoMode === 'results') {
-        const results = byId('youtube-accessible-results');
-        if (available(results) && results.querySelector('.youtube-search-card'))
-          return { key: 'videos:results:' + results.children.length, node: results,
-            heading: txt('Resultados de YouTube', 'YouTube results'), kind: 'video-search' };
-      }
-      const node = byId('video-list');
-      return available(node) && available(byId('video-results-section'))
-        ? { key: 'videos:channel:' + node.children.length + ':' + (byId('video-sort')?.value || ''),
-            node, heading: txt('Vídeos de TifloAcosta', 'TifloAcosta videos'), kind: 'video' } : null;
-    }
+    // Videos has one complete native screen with its own search and catalog.
+    // Never stack the generic pilot above the branded Videos experience.
+    if (path.endsWith('/videos.html')) return null;
     if (path.endsWith('/podcast.html')) {
       const node = byId('podcast-episodes');
       return available(node)
@@ -459,6 +450,38 @@
     lastPresentedKey = '';
     schedule();
   }
+
+
+  // A dedicated native page is shown only to VoiceOver users; all video
+  // operations, search, pagination and playback stay on that single page.
+  // Its Close control returns HOME, not a second, larger Videos interface.
+  let launchingVideos = false;
+  let videosPresented = false;
+  let videoLaunchAttempted = false;
+  async function showUnifiedVideos() {
+    if (!location.pathname.toLowerCase().endsWith('/videos.html') ||
+        launchingVideos || videosPresented || videoLaunchAttempted) return;
+    const items = window.TIFLO_NATIVE_VIDEO_CATALOG;
+    if (!Array.isArray(items) || !items.length) return;
+    const api = native();
+    if (!api?.showNativeVideoSection || !api?.getVoiceOverStatus) return;
+    launchingVideos = true;
+    try {
+      if (!(await api.getVoiceOverStatus())?.enabled) return;
+      videoLaunchAttempted = true;
+      await api.addListener('nativeVideoClosed', () => {
+        videosPresented = false;
+        location.replace('index.html');
+      });
+      const response = await api.showNativeVideoSection({ videos: items.slice(0, 600) });
+      videosPresented = response?.presented === true;
+    } catch (error) {
+      // No automatic modal retry loop; the accessible HTML screen stays usable.
+      videosPresented = false;
+    } finally { launchingVideos = false; }
+  }
+  window.addEventListener('tiflo-ios-catalog-ready', () => { void showUnifiedVideos(); });
+  if (window.TIFLO_NATIVE_VIDEO_CATALOG) void showUnifiedVideos();
 
   // Touch users get a one-step native contextual action sheet on long press.
   // The menu is generated from the exact same registered actions as VoiceOver.

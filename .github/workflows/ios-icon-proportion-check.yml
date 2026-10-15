@@ -34,10 +34,10 @@ jobs:
           sips -Z 128 tifloacosta-icon-512.png --out "$RUNNER_TEMP/original-128.png" > /dev/null
           sips -Z 128 "$RUNNER_TEMP/icon-1024.png" --out "$RUNNER_TEMP/result-128.png" > /dev/null
           printf 'ICON_ORIGINAL_THUMB_BEGIN'
-          base64 -i "$RUNNER_TEMP/original-128.png" | tr -d '\\n'
+          base64 -i "$RUNNER_TEMP/original-128.png" | awk '{printf "%s", $0}'
           printf 'ICON_ORIGINAL_THUMB_END\\n'
           printf 'ICON_RESULT_THUMB_BEGIN'
-          base64 -i "$RUNNER_TEMP/result-128.png" | tr -d '\\n'
+          base64 -i "$RUNNER_TEMP/result-128.png" | awk '{printf "%s", $0}'
           printf 'ICON_RESULT_THUMB_END\\n'
       - name: Verificar imagen opaca de 1024 píxeles e imagen de origen intacta
         run: |

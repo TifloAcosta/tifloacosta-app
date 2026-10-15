@@ -68,6 +68,9 @@
       '#favorites': ['favorites-list', 'Favoritos', 'Favorites', 'resource'],
       '#news': ['news-list', 'Novedades', 'News', 'article'],
       '#guide': ['guide-chapters', 'Guía', 'Guide', 'article'],
+      '#book': ['book-section', 'Mi libro', 'My book', 'article'],
+      '#contact': ['contact-section', 'Contacto y redes', 'Contact and social', 'article'],
+      '#privacy': ['privacy-section', 'Privacidad y accesibilidad', 'Privacy and accessibility', 'article'],
       '#downloads': ['downloads-list', 'Descargas', 'Downloads', 'article']
     };
     let info = screens[key];
@@ -106,7 +109,7 @@
     // actual existing links/buttons; never invent destructive operations.
     const seen = new Set();
     const nodes = root.querySelectorAll(
-      '.news-card, .resource-card, article, li, .news-item, .app-card, .media-card, h3'
+      '.news-card, .resource-card, article, li, .news-item, .app-card, .media-card, h3, a[href]'
     );
     for (const card of nodes) {
       const link = card.matches('a[href]') ? card : card.querySelector('a[href], button');

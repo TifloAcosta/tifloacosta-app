@@ -71,6 +71,7 @@ final class TifloNativeVideosController: UITableViewController, UISearchBarDeleg
     private var nextToken = ""
     private var query = ""
     private var loading = false
+    private var needsInitialFocus = true
     private let searchBar = UISearchBar()
     private let order = UISegmentedControl(items: ["Recientes", "Antiguos"])
     private let stateLabel = UILabel()
@@ -146,7 +147,8 @@ final class TifloNativeVideosController: UITableViewController, UISearchBarDeleg
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        guard UIAccessibility.isVoiceOverRunning else { return }
+        guard needsInitialFocus && UIAccessibility.isVoiceOverRunning else { return }
+        needsInitialFocus = false
         UIAccessibility.post(notification: .screenChanged, argument: navigationItem.leftBarButtonItem)
     }
 

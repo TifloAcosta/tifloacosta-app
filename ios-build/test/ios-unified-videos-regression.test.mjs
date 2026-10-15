@@ -42,7 +42,7 @@ test('un solo título por flic, acciones independientes, OAuth al actuar y repro
   for (const action of ['play', 'youtube', 'like', 'subscribe', 'share', 'comment'])
     assert.ok(view.includes('("' + action + '",'), action);
   assert.match(view, /TifloYouTubeViewController\(/);
-  assert.match(view, /TifloNativeYouTubeAccount\.shared\.signIn\(from: self\)/);
+  assert.match(view, /account\.signIn\(from: self\)/);
   assert.match(view, /TifloNativeYouTubeAccount\.shared\.state\(videoId: video\.id\)/);
   assert.match(view, /"unlike" : "like"/);
   assert.match(view, /"unsubscribe" : "subscribe"/);

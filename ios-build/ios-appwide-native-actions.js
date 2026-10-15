@@ -20,7 +20,10 @@
     queue: ['Añadir o quitar de cola', 'Add or remove from queue'],
     export: ['Exportar', 'Export'], translate: ['Traducir', 'Translate'],
     continue: ['Continuar lectura', 'Continue reading'],
-    readmore: ['Leer noticia', 'Read story'], mark: ['Ir a marca', 'Go to bookmark']
+    readmore: ['Leer noticia', 'Read story'], mark: ['Ir a marca', 'Go to bookmark'],
+    like: ['Me gusta o quitar Me gusta', 'Like or remove like'],
+    subscribe: ['Suscribirse o cancelar suscripción', 'Subscribe or unsubscribe'],
+    comment: ['Comentar', 'Comment']
   };
   const action = id => ({ id, label: txt(...translations[id]) });
   const available = node => Boolean(node && node.isConnected
@@ -36,15 +39,23 @@
   let scheduled = false;
   let refreshing = false;
   let currentSource = null;
+  let videoMode = 'channel';
 
   function scope() {
     const path = location.pathname.toLowerCase();
     const hash = decodeURIComponent(location.hash || '');
     const byId = id => document.getElementById(id);
     if (path.endsWith('/videos.html')) {
+      if (videoMode === 'results') {
+        const results = byId('youtube-accessible-results');
+        if (available(results) && results.querySelector('.youtube-search-card'))
+          return { key: 'videos:results:' + results.children.length, node: results,
+            heading: txt('Resultados de YouTube', 'YouTube results'), kind: 'video-search' };
+      }
       const node = byId('video-list');
       return available(node) && available(byId('video-results-section'))
-        ? { key: 'videos:' + (hash || 'list'), node, heading: txt('Vídeos', 'Videos'), kind: 'video' } : null;
+        ? { key: 'videos:channel:' + node.children.length + ':' + (byId('video-sort')?.value || ''),
+            node, heading: txt('Vídeos de TifloAcosta', 'TifloAcosta videos'), kind: 'video' } : null;
     }
     if (path.endsWith('/podcast.html')) {
       const node = byId('podcast-episodes');
@@ -146,6 +157,157 @@
     await copyURL(url);
   }
 
+  const yt = () => window.Capacitor?.Plugins?.TifloYouTube;
+  const videoLink = id => 'https://www.youtube.com/watch?v=' + encodeURIComponent(id);
+
+  function announceVideo(message) {
+    let status = document.getElementById('ios-video-action-status');
+    if (!status) {
+      status = document.createElement('p');
+      status.id = 'ios-video-action-status';
+      status.setAttribute('role', 'status');
+      status.setAttribute('aria-live', 'polite');
+      document.querySelector('#youtube-accessible-section')?.prepend(status);
+    }
+    if (status) { status.textContent = message; status.tabIndex = -1; status.focus(); }
+  }
+
+  async function authorizedAccount() {
+    const api = yt();
+    if (!api?.authStatus || !api?.signIn) {
+      announceVideo(txt('El acceso a YouTube no está disponible.', 'YouTube account access is unavailable.'));
+      return false;
+    }
+    const status = await api.authStatus();
+    if (status?.authenticated) return true;
+    const signed = await api.signIn();
+    return signed?.authenticated === true;
+  }
+
+  async function runVideoSocial(operation, videoId, title) {
+    if (!/^[a-zA-Z0-9_-]{11}$/.test(videoId)) return;
+    const api = yt();
+    if (!api) return;
+    try {
+      if (!(await authorizedAccount())) return;
+      if (operation === 'comment') {
+        showVideoCommentEditor(videoId, title);
+        return;
+      }
+      const state = await api.accountState({ videoId });
+      const actionName = operation === 'like'
+        ? (state.rating === 'like' ? 'unlike' : 'like')
+        : (state.subscribed ? 'unsubscribe' : 'subscribe');
+      await api.accountAction({ videoId, action: actionName });
+      announceVideo(txt(
+        actionName === 'unlike' ? 'Se retiró Me gusta.' :
+          actionName === 'like' ? 'Me gusta registrado.' :
+          actionName === 'unsubscribe' ? 'Suscripción cancelada.' : 'Suscripción realizada.',
+        actionName === 'unlike' ? 'Like removed.' :
+          actionName === 'like' ? 'Video liked.' :
+          actionName === 'unsubscribe' ? 'Subscription canceled.' : 'Subscribed.'
+      ));
+    } catch {
+      announceVideo(txt('No se pudo completar la acción. Comprueba la sesión de YouTube.',
+        'Could not complete the action. Check your YouTube session.'));
+    }
+  }
+
+  function showVideoCommentEditor(videoId, title) {
+    const dialog = document.createElement('dialog');
+    dialog.setAttribute('aria-label', txt('Comentar vídeo', 'Comment on video'));
+    const heading = document.createElement('h2');
+    heading.textContent = txt('Comentar: ', 'Comment: ') + title;
+    const label = document.createElement('label');
+    label.textContent = txt('Comentario', 'Comment');
+    const field = document.createElement('textarea');
+    field.rows = 5;
+    field.maxLength = 8000;
+    const submit = document.createElement('button');
+    submit.type = 'button';
+    submit.textContent = txt('Publicar comentario', 'Publish comment');
+    const cancel = document.createElement('button');
+    cancel.type = 'button';
+    cancel.textContent = txt('Cancelar', 'Cancel');
+    label.append(field);
+    dialog.append(heading, label, submit, cancel);
+    document.body.append(dialog);
+    const close = () => { dialog.close(); dialog.remove(); };
+    cancel.addEventListener('click', close);
+    dialog.addEventListener('cancel', event => { event.preventDefault(); close(); });
+    submit.addEventListener('click', async () => {
+      const message = field.value.trim();
+      if (!message) { field.focus(); return; }
+      submit.disabled = true;
+      try {
+        await yt().accountAction({ videoId, action: 'comment', text: message });
+        close();
+        announceVideo(txt('Comentario publicado.', 'Comment published.'));
+      } catch {
+        submit.disabled = false;
+        announceVideo(txt('No se pudo publicar el comentario.', 'Could not publish the comment.'));
+      }
+    });
+    dialog.showModal();
+    field.focus();
+  }
+
+  function gatherVideoRows(root, list, isSearch) {
+    const searchField = document.getElementById('youtube-accessible-search');
+    const channelSearch = () => {
+      videoMode = 'channel';
+      lastPresentedKey = '';
+      schedule();
+    };
+    const enterSearch = () => {
+      const input = searchField;
+      if (input) {
+        announceVideo(txt('Escribe un título y pulsa Buscar en YouTube.',
+          'Enter a title and press Search YouTube.'));
+        input.focus({ preventScroll: false });
+      }
+    };
+    if (!isSearch && available(searchField)) makeEntry(searchField, 'video-control',
+      txt('Buscar en YouTube', 'Search YouTube'), ['open'], enterSearch, list);
+    const rows = root.querySelectorAll(isSearch ? '.youtube-search-card' : '.video-card');
+    rows.forEach(card => {
+      const title = card.querySelector('h3');
+      const play = card.querySelector('.video-play-button');
+      if (!title || !play) return;
+      const videoId = String(play.dataset.videoId || '');
+      if (!/^[a-zA-Z0-9_-]{11}$/.test(videoId)) return;
+      const metas = [...card.querySelectorAll('.video-meta')].map(x => x.textContent.trim()).filter(Boolean);
+      const label = [title.textContent?.trim(), ...metas].filter(Boolean).join('. ');
+      const keys = ['play', 'youtube', 'like', 'subscribe', 'share', 'comment'];
+      makeEntry(play, 'video-row', label, keys, selected => {
+        if (selected === 'play') { play.click(); return; }
+        if (selected === 'youtube') {
+          window.open(videoLink(videoId), '_blank', 'noopener');
+          return;
+        }
+        if (selected === 'share') { void shareURL(videoLink(videoId), title.textContent.trim()); return; }
+        if (['like', 'subscribe', 'comment'].includes(selected))
+          void runVideoSocial(selected, videoId, title.textContent.trim());
+      }, list);
+    });
+    if (isSearch) {
+      const more = document.getElementById('youtube-accessible-more');
+      if (available(more) && !more.hidden)
+        makeEntry(more, 'video-control', txt('Mostrar diez resultados más', 'Show ten more results'),
+          ['open'], () => more.click(), list);
+      if (available(root)) makeEntry(root, 'video-control',
+        txt('Vídeos de TifloAcosta', 'TifloAcosta videos'), ['open'], channelSearch, list);
+    } else {
+      const sort = document.getElementById('ios-video-order-adjustable');
+      if (available(sort)) makeEntry(sort, 'video-control',
+        sort.textContent.trim(), ['open'], () => { sort.focus(); sort.click(); allowReshow(); }, list);
+      const next = document.getElementById('video-next');
+      if (available(next) && !next.hidden)
+        makeEntry(next, 'video-control', txt('Mostrar diez vídeos más', 'Show ten more videos'),
+          ['open'], () => next.click(), list);
+    }
+  }
+
   function gather(info) {
     collection.clear();
     menuItems.clear();
@@ -160,21 +322,8 @@
         // exact DOM title IDs and keeps its deletion confirmation.
         makeEntry(title, 'library', title.textContent?.trim(), keys, null, list);
       }
-    } else if (info.kind === 'video') {
-      root.querySelectorAll('.video-card').forEach(card => {
-        const title = card.querySelector('h3');
-        const play = card.querySelector('.video-play-button');
-        if (!title || !play) return;
-        const keys = ['play'];
-        const videoId = play.dataset.videoId || '';
-        if (/^[a-zA-Z0-9_-]{11}$/.test(videoId)) keys.push('youtube');
-        makeEntry(title, 'video', title.textContent?.trim(), keys, selected => {
-          if (selected === 'play') play.click();
-          else if (selected === 'youtube' && /^[a-zA-Z0-9_-]{11}$/.test(videoId))
-            window.open('https://www.youtube.com/watch?v=' + encodeURIComponent(videoId),
-              '_blank', 'noopener,noreferrer');
-        }, list);
-      });
+    } else if (info.kind === 'video' || info.kind === 'video-search') {
+      gatherVideoRows(root, list, info.kind === 'video-search');
     } else if (info.kind === 'podcast') {
       root.querySelectorAll('.podcast-episode-card').forEach(card => {
         const title = card.querySelector('h3');
@@ -330,6 +479,14 @@
         item, language: english() ? 'en' : 'es'
       });
     }).catch(() => {});
+  }, true);
+
+  document.getElementById('youtube-accessible-form')?.addEventListener('submit', () => {
+    videoMode = 'results';
+    lastPresentedKey = '';
+  }, true);
+  document.getElementById('youtube-accessible-more')?.addEventListener('click', () => {
+    videoMode = 'results'; allowReshow();
   }, true);
 
   // A navigation opens the actual UIKit list once; changes to filters/pages

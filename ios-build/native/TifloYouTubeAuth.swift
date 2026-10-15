@@ -218,7 +218,7 @@ final class TifloNativeYouTubeAccount: NSObject, ASWebAuthenticationPresentation
 
     func perform(action: String, videoId: String, text: String = "",
                  completion: @escaping (Result<[String: Any], Error>) -> Void) {
-        guard ["subscribe", "like", "comment"].contains(action),
+        guard ["subscribe", "unsubscribe", "like", "unlike", "comment"].contains(action),
               let id = checkedVideoId(videoId) else {
             completion(.failure(accountError("Acción de YouTube no permitida.")))
             return

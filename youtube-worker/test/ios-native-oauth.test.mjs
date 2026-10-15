@@ -103,7 +103,7 @@ test('redeem protegido habilita acciones por bearer sin cookies ni CORS indiscri
   ), env, { fetchImpl: fakeGoogle });
   assert.deepEqual(await video.json(), { authenticated: true,
     channelId: 'UC_real_channel', channelTitle: 'Canal real', subscribed: false, rating: 'none' });
-  for (const [action, content] of [['subscribe', {videoId}], ['like', {videoId}], ['comment', {videoId, text:'Prueba'}]]) {
+  for (const [action, content] of [['subscribe', {videoId}], ['unsubscribe', {videoId}], ['like', {videoId}], ['unlike', {videoId}], ['comment', {videoId, text:'Prueba'}]]) {
     const result = await handleRequest(new Request(
       'https://youtube-auth.tifloacosta.com/native/' + action,
       { method: 'POST', headers, body: JSON.stringify(content) }
@@ -139,7 +139,7 @@ test('iOS puede comprobar sin credenciales si está disponible la identificació
   assert.equal(response.status, 200);
   assert.deepEqual(await response.json(), {
     nativeAuth: true,
-    youtubeActions: ['like', 'subscribe', 'comment'],
+    youtubeActions: ['like', 'unlike', 'subscribe', 'unsubscribe', 'comment'],
     protocol: 1
   });
   assert.equal(response.headers.get('Access-Control-Allow-Origin'), null);

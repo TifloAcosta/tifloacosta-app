@@ -76,7 +76,10 @@ test('TifloReproductor usa la API oficial de YouTube para desplazarse y consulta
   assert.match(html, /enablejsapi: 1/);
   assert.match(player, /private let rewindButton = UIButton/);
   assert.match(player, /private let forwardButton = UIButton/);
-  assert.match(player, /private let positionSlider = UISlider/);
+  assert.match(player, /private let positionSlider = TifloTenPercentSeekSlider/);
+  assert.match(player, /override func accessibilityIncrement\(\)/);
+  assert.match(player, /override func accessibilityDecrement\(\)/);
+  assert.match(player, /\* 0\.1/);
   assert.match(player, /Retroceder 30 segundos/);
   assert.match(player, /Avanzar 30 segundos/);
   assert.match(player, /positionSlider\.isContinuous = false/);

@@ -334,6 +334,7 @@ await cp(join(root, 'ios-build/ios-reader-folders.js'), join(output, 'ios-reader
 await cp(join(root, 'ios-build/ios-reader-native.js'), join(output, 'ios-reader-native.js'));
 await cp(join(root, 'ios-build/ios-accessible-actions.js'), join(output, 'ios-accessible-actions.js'));
 await cp(join(root, 'ios-build/ios-appwide-native-actions.js'), join(output, 'ios-appwide-native-actions.js'));
+await cp(join(root, 'ios-build/ios-video-ui.js'), join(output, 'ios-video-ui.js'));
 
 const commitSha = String(process.env.GITHUB_SHA ||
   execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim());
@@ -401,7 +402,7 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
   if (name === 'podcast.html') {
     html = html.replace('</body>', '<script>requestAnimationFrame(() => { const heading = document.getElementById("podcast-heading"); heading?.setAttribute("tabindex", "-1"); heading?.focus({preventScroll:true}); });</script>' + '\n</body>');
   }
-  html = html.replace('</body>', '<script src="ios-accessible-actions.js"></script><script src="ios-appwide-native-actions.js"></script>\n</body>');
+  html = html.replace('</body>', '<script src="ios-accessible-actions.js"></script><script src="ios-appwide-native-actions.js"></script><script src="ios-video-ui.js"></script>\n</body>');
   await writeFile(path, html);
 }
 
@@ -469,7 +470,17 @@ iosVideos = iosVideos.replace(iosReadyCode,
   "    youtubePlayer = event.target;\\n    els.playerNote?.removeAttribute('role');\\n    playerReady = true;".replaceAll('\\n', '\n'));
 const iosVideoOpen = "  function openPlayer(video) {\n    lastPlayerTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;";
 if (!iosVideos.includes(iosVideoOpen)) throw new Error('No se encuentra openPlayer de Vídeos');
-iosVideos = iosVideos.replace(iosVideoOpen, "  function openPlayer(video) {\n    lastPlayerTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;\n    const nativeId = videoId(video);\n    const native = window.Capacitor?.Plugins?.TifloYouTube;\n    if (native && /^[A-Za-z0-9_-]{11}$/.test(nativeId)) {\n      void native.open({ videoId: nativeId, title: String(video.title || ''), description: String(video.fullDescription || video.description || ''), channel: 'TifloAcosta', publishedAt: String(video.publishedAt || '') }).then(() => {\n        if (lastPlayerTrigger?.isConnected) lastPlayerTrigger.focus({ preventScroll: true });\n      }).catch(() => {\n        window.open(youtubeUrl(video), '_blank', 'noopener');\n      });\n      return;\n    }\n    // Do not retry the embedded WKWebView iframe that gave YouTube error 153.\n    window.open(youtubeUrl(video), '_blank', 'noopener');\n    return;\n    lastPlayerTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;");
+iosVideos = iosVideos.replace(iosVideoOpen, "  function openPlayer(video) {\n    lastPlayerTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;\n    const nativeId = videoId(video);\n    const native = window.Capacitor?.Plugins?.TifloYouTube;\n    if (native && /^[A-Za-z0-9_-]{11}$/.test(nativeId)) {\n      void native.open({ videoId: nativeId, title: String(video.title || ''), description: String(video.fullDescription || video.description || ''), channel: String(video.channelTitle || video.channel || 'TifloAcosta'), publishedAt: String(video.publishedAt || '') }).then(() => {\n        if (lastPlayerTrigger?.isConnected) lastPlayerTrigger.focus({ preventScroll: true });\n      }).catch(() => {\n        window.open(youtubeUrl(video), '_blank', 'noopener');\n      });\n      return;\n    }\n    // Do not retry the embedded WKWebView iframe that gave YouTube error 153.\n    window.open(youtubeUrl(video), '_blank', 'noopener');\n    return;\n    lastPlayerTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;");
+// On iPhone, "Mostrar diez más" appends another ten instead of replacing
+// the previous page. The Android and web pagers retain their current behavior.
+const iosPageMarker = '    const pageData = core.paginate(filtered, currentPage, PAGE_SIZE);';
+if (!iosVideos.includes(iosPageMarker)) throw new Error('Paginación de vídeos iOS no encontrada');
+iosVideos = iosVideos.replace(iosPageMarker,
+  iosPageMarker + '\n    pageData.items = filtered.slice(0, currentPage * PAGE_SIZE);\n    pageData.start = pageData.totalItems ? 1 : 0;');
+const iosNextMarker = '    els.next.hidden = pageData.page >= pageData.totalPages;';
+if (!iosVideos.includes(iosNextMarker)) throw new Error('Falta botón de paginación iOS');
+iosVideos = iosVideos.replace(iosNextMarker, iosNextMarker +
+  "\n    els.next.textContent = lang === 'es' ? 'Mostrar diez vídeos más' : 'Show ten more videos';");
 await writeFile(iosVideosPath, iosVideos);
 
 // In iOS, category pages already identify the category in the result status.

@@ -246,6 +246,7 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
             "open", "continue", "read", "translate", "queue", "info", "move",
             "export", "rename", "delete", "play", "youtube", "description",
             "download", "share", "favorite", "options", "copy", "original",
+            "like", "subscribe", "comment",
             "readmore", "mark", "remove", "pause", "listen"
         ])
         let entries: [TifloNativeListItem] = rawItems.compactMap { raw in

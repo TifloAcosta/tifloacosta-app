@@ -177,7 +177,7 @@ test('searchVideos returns normalized public video results and durations', async
     }
     if (target.includes('/videos?')) {
       return jsonResponse({
-        items: [{ id: 'abcDEF123_-', contentDetails: { duration: 'PT1H2M3S' } }]
+        items: [{ id: 'abcDEF123_-', contentDetails: { duration: 'PT1H2M3S' }, statistics: { viewCount: '1532' } }]
       });
     }
     throw new Error(`unexpected URL ${target}`);
@@ -191,7 +191,8 @@ test('searchVideos returns normalized public video results and durations', async
       publishedAt: '2026-10-01T12:00:00Z',
       description: 'Description',
       thumbnail: 'https://img.example/video.jpg',
-      durationSeconds: 3723
+      durationSeconds: 3723,
+      viewCount: 1532
     }],
     nextPageToken: 'NEXT_TOKEN'
   });

@@ -60,14 +60,18 @@ function query(resource, entries) {
   return `${resource}?${params.toString()}`;
 }
 
-async function subscriptionState(accessToken, channelId, fetchImpl) {
+async function subscriptionId(accessToken, channelId, fetchImpl) {
   const data = await youtubeFetch(query('subscriptions', [
     ['part', 'id'],
     ['mine', 'true'],
     ['forChannelId', channelId],
     ['maxResults', '1']
   ]), { accessToken, fetchImpl });
-  return Array.isArray(data?.items) && data.items.length > 0;
+  return String(Array.isArray(data?.items) ? (data.items[0]?.id || '') : '');
+}
+
+async function subscriptionState(accessToken, channelId, fetchImpl) {
+  return Boolean(await subscriptionId(accessToken, channelId, fetchImpl));
 }
 
 function normalizeRating(value) {
@@ -128,6 +132,24 @@ async function subscribeToChannelId(accessToken, channelId, fetchImpl) {
     fetchImpl
   });
   return { subscribed: true, changed: true };
+}
+
+export async function unsubscribeFromVideoChannel(accessToken, videoId, fetchImpl = fetch) {
+  const { channelId } = await resolveVideoChannel(accessToken, videoId, fetchImpl);
+  const id = await subscriptionId(accessToken, channelId, fetchImpl);
+  if (!id) return { subscribed: false, changed: false };
+  await youtubeFetch(query('subscriptions', [['id', id]]), {
+    accessToken, method: 'DELETE', fetchImpl
+  });
+  return { subscribed: false, changed: true };
+}
+
+export async function unlike(accessToken, videoId, fetchImpl = fetch) {
+  const id = validVideoId(videoId);
+  await youtubeFetch(query('videos/rate', [
+    ['id', id], ['rating', 'none']
+  ]), { accessToken, method: 'POST', fetchImpl });
+  return { rating: 'none' };
 }
 
 export async function commentOnVideoChannel(accessToken, videoId, text, fetchImpl = fetch) {
@@ -271,14 +293,18 @@ export async function searchVideos(apiKey, searchTerm, pageToken = '', fetchImpl
     .filter(id => VIDEO_ID_RE.test(id));
 
   let durations = new Map();
+  let viewCounts = new Map();
   if (ids.length) {
     const details = await youtubeKeyFetch(query('videos', [
-      ['part', 'contentDetails'],
+      ['part', 'contentDetails,statistics'],
       ['id', ids.join(',')]
     ]), apiKey, fetchImpl);
     durations = new Map((Array.isArray(details?.items) ? details.items : []).map(item => [
       String(item?.id || ''),
       parseIsoDuration(item?.contentDetails?.duration)
+    ]));
+    viewCounts = new Map((Array.isArray(details?.items) ? details.items : []).map(item => [
+      String(item?.id || ''), Number(item?.statistics?.viewCount || 0)
     ]));
   }
 
@@ -294,7 +320,8 @@ export async function searchVideos(apiKey, searchTerm, pageToken = '', fetchImpl
         publishedAt: String(snippet.publishedAt || ''),
         description: String(snippet.description || ''),
         thumbnail: String(snippet?.thumbnails?.medium?.url || snippet?.thumbnails?.default?.url || ''),
-        durationSeconds: durations.get(id) || 0
+        durationSeconds: durations.get(id) || 0,
+        viewCount: viewCounts.get(id) || 0
       }];
     }),
     nextPageToken: String(searchData?.nextPageToken || '')

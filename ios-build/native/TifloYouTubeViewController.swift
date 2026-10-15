@@ -193,6 +193,28 @@ private final class TifloVoiceOverAudioMix {
 
 /// Uses Google's documented WKWebView loadRequest with an app-ID Referer.
 /// It does not pretend to originate from youtube.com and does not proxy media.
+// VoiceOver's adjustable swipes seek exactly ten percent of the complete video.
+// Unlike an arbitrary slider step, this remains stable for videos of any length.
+private final class TifloTenPercentSeekSlider: UISlider {
+    override func accessibilityIncrement() {
+        moveByTenPercent(direction: 1)
+    }
+
+    override func accessibilityDecrement() {
+        moveByTenPercent(direction: -1)
+    }
+
+    private func moveByTenPercent(direction: Float) {
+        guard isEnabled, maximumValue > minimumValue else { return }
+        let step = (maximumValue - minimumValue) * 0.1
+        let next = min(maximumValue, max(minimumValue, value + direction * step))
+        value = next
+        let percentage = Int(round((next - minimumValue) / (maximumValue - minimumValue) * 100))
+        accessibilityValue = "\(percentage) %"
+        sendActions(for: .valueChanged)
+    }
+}
+
 private final class TifloYouTubeViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
     private let videoId: String
     private let videoTitle: String
@@ -204,7 +226,7 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
     private let playbackButton = UIButton(type: .system)
     private let rewindButton = UIButton(type: .system)
     private let forwardButton = UIButton(type: .system)
-    private let positionSlider = UISlider()
+    private let positionSlider = TifloTenPercentSeekSlider()
     private let progressLabel = UILabel()
     private let detailsButton = UIButton(type: .system)
     private let audioCompatibilityButton = UIButton(type: .system)
@@ -345,7 +367,10 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
         controls.axis = .horizontal
         controls.distribution = .fillEqually
         controls.spacing = 8
-        let detailsRow = UIStackView(arrangedSubviews: [detailsButton, progressLabel])
+        let shareButton = UIButton(type: .system)
+        shareButton.setTitle(spanish ? "Compartir" : "Share", for: .normal)
+        shareButton.addTarget(self, action: #selector(shareVideo), for: .touchUpInside)
+        let detailsRow = UIStackView(arrangedSubviews: [detailsButton, shareButton, progressLabel])
         detailsRow.axis = .vertical
         detailsRow.spacing = 6
 
@@ -717,6 +742,17 @@ private final class TifloYouTubeViewController: UIViewController, WKNavigationDe
         webView.loadHTMLString("", baseURL: nil)
         let completion = onClose
         dismiss(animated: true, completion: completion)
+    }
+
+    @objc private func shareVideo() {
+        guard let url = URL(string: "https://www.youtube.com/watch?v=" + videoId) else { return }
+        let sheet = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        if let popover = sheet.popoverPresentationController {
+            popover.sourceView = view
+            popover.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.midY,
+                                        width: 1, height: 1)
+        }
+        present(sheet, animated: true)
     }
 
     @objc private func openOriginal() {

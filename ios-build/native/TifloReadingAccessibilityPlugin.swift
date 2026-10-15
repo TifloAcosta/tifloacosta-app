@@ -378,7 +378,8 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
             // Videos is a real child section of the Capacitor root, not a
             // temporary modal action menu. The UIKit table and VoiceOver
             // custom actions stay native; only its hosting changes.
-            let screen = TifloNativeVideosController(videos: videos)
+            let webTheme = call.getObject("theme") as? [String: String] ?? [:]
+            let screen = TifloNativeVideosController(videos: videos, theme: webTheme)
             let navigation = UINavigationController(rootViewController: screen)
             screen.onClosed = { [weak self, weak navigation] in
                 if let navigation = navigation {

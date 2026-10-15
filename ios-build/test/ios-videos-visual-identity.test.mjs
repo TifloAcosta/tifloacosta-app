@@ -27,9 +27,9 @@ test('TifloAcosta recupera sus tarjetas y controles sin pasos extras de VoiceOve
   assert.match(videos, /panel\.layer\.cornerRadius = 18/);
   assert.match(videos, /panel\.layer\.borderWidth = 1/);
   assert.match(videos, /tableView\.separatorStyle = \.none/);
-  assert.match(videos, /header\.layer\.cornerRadius = 18/);
-  assert.match(videos, /searchBar\.searchTextField\.layer\.borderColor = brandRed\.cgColor/);
-  assert.match(videos, /cell\.configure\(title: video\.title, info: video\.visualMetadata\)/);
+  assert.match(videos, /header\.layer\.cornerRadius = 16/);
+  assert.match(videos, /searchBar\.searchTextField\.layer\.borderColor = theme\.border\.cgColor/);
+  assert.match(videos, /cell\.configure\(title: video\.title, info: video\.visualMetadata, theme: theme\)/);
   assert.match(videos, /cell\.accessibilityLabel = video\.speech/);
   assert.match(videos, /cell\.accessibilityCustomActions = handlers\.map/);
   assert.match(videos, /isAccessibilityElement = true/);

@@ -139,6 +139,9 @@
     const list = document.getElementById('reading-library-list');
     if (!plugin?.setDocumentActions || !list || list.dataset.iosNativeActions) return;
     list.dataset.iosNativeActions = '1';
+    let voiceOverEnabled = false;
+    let nativeOpening = false;
+    let suppressedDomFocusId = '';
 
     function dispatch(id, action) {
       const title = document.getElementById(id);
@@ -187,13 +190,17 @@
       // Native UIKit cells send the action for their own document ID.
       void plugin.addListener('nativeListAction', ({ itemId, action }) => {
         const id = String(itemId || '');
+        nativeOpening = false;
+        suppressedDomFocusId = id;
         const title = document.getElementById(id);
         if (title?.closest('.reading-library-title-card')) {
           dispatch(id, String(action || ''));
         }
       }).catch(() => {});
       void plugin.addListener('nativeListClosed', ({ itemId }) => {
-        const title = document.getElementById(String(itemId || ''));
+        nativeOpening = false;
+        suppressedDomFocusId = String(itemId || '');
+        const title = document.getElementById(suppressedDomFocusId);
         if (title?.isConnected) title.focus({ preventScroll: true });
       }).catch(() => {});
     }
@@ -214,8 +221,37 @@
       const next = JSON.stringify(documents);
       if (next === lastRegistered) return;
       lastRegistered = next;
-      void plugin.registerLibraryTitles({ documents, nativeRowsOnFocus: true }).catch(() => {});
+      void plugin.registerLibraryTitles({ documents, nativeRowsOnFocus: true })
+        .then(reply => { voiceOverEnabled = reply?.voiceOverEnabled === true; })
+        .catch(() => { voiceOverEnabled = false; });
     };
+    // DOM focus is a secondary path for WebKit versions that do not send the
+    // native accessibility-focus notification. The native Swift observer is
+    // the primary path. Neither adds a button nor changes the web library.
+    list.addEventListener('focusout', event => {
+      if (event.target?.id === suppressedDomFocusId) suppressedDomFocusId = '';
+    });
+    list.addEventListener('focusin', event => {
+      const title = event.target?.closest?.('.reading-library-title');
+      if (!title || !voiceOverEnabled || nativeOpening ||
+          title.id === suppressedDomFocusId || !plugin.showNativeActionList) return;
+      const items = [...list.querySelectorAll('.reading-library-title')]
+        .filter(node => node.id && node.closest('.reading-library-title-card'))
+        .slice(0, 30)
+        .map(node => ({
+          id: node.id,
+          label: node.textContent?.trim() || node.id,
+          actions: voiceOverActions.map(([id, es, en]) => ({ id, label: iosText(es, en) }))
+        }));
+      if (!items.some(item => item.id === title.id)) return;
+      nativeOpening = true;
+      void plugin.showNativeActionList({
+        title: iosText('Biblioteca', 'Library'),
+        language: document.documentElement.lang === 'en' ? 'en' : 'es',
+        focusedItemId: title.id,
+        items
+      }).catch(() => { nativeOpening = false; });
+    });
     registerVisibleTitles();
     const observer = new MutationObserver(registerVisibleTitles);
     observer.observe(list, { childList: true, subtree: true, attributes: true, attributeFilter: ['aria-label'] });

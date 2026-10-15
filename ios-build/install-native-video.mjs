@@ -9,6 +9,7 @@ const actionSource = resolve(root, 'native/TifloYouTubeAccountControls.swift');
 const speechSource = resolve(root, 'native/TifloReadingTtsPlugin.swift');
 const translationSource = resolve(root, 'native/TifloReadingLanguagePlugin.swift');
 const accessibilitySource = resolve(root, 'native/TifloReadingAccessibilityPlugin.swift');
+const nativeListSource = resolve(root, 'native/TifloNativeActionListController.swift');
 const iframeSource = resolve(root, 'native/tiflo-youtube-player.html');
 const iframeTarget = resolve(root, 'ios/App/App/public/tiflo-youtube-player.html');
 const infoPath = resolve(root, 'ios/App/App/Info.plist');
@@ -23,6 +24,7 @@ const actions = await readFile(actionSource, 'utf8');
 const speech = await readFile(speechSource, 'utf8');
 const translation = await readFile(translationSource, 'utf8');
 const accessibility = await readFile(accessibilitySource, 'utf8');
+const nativeList = await readFile(nativeListSource, 'utf8');
 if (!appDelegate.includes('import Capacitor') ||
     !storyboard.includes('customClass="CAPBridgeViewController"')) {
   throw new Error('No se reconoce el proyecto nativo Capacitor: no se modifica la compilación');
@@ -53,13 +55,14 @@ const actionsBody = actions.replace(/^import UIKit\n/, '');
 const speechBody = speech.replace(/^import (?:Foundation|AVFAudio|Capacitor)\n/gm, '').trim();
 const translationBody = translation.replace(/^import (?:Foundation|NaturalLanguage|Capacitor|SwiftUI|UIKit|Translation)\n/gm, '').trim();
 const accessibilityBody = accessibility.replace(/^import (?:Foundation|UIKit|UniformTypeIdentifiers|Capacitor)\n/gm, '').trim();
+const nativeListBody = nativeList.replace(/^import (?:Foundation|UIKit)\n/gm, '').trim();
 const delegateWithTranslation = delegateWithAudio.includes('import Translation')
   ? delegateWithAudio
   : delegateWithAudio.replace('import UIKit', 'import UIKit\nimport SwiftUI\nimport NaturalLanguage\nimport Translation');
 const delegateWithAccessibility = delegateWithTranslation.includes('import UniformTypeIdentifiers')
   ? delegateWithTranslation
   : delegateWithTranslation.replace('import UIKit', 'import UIKit\nimport UniformTypeIdentifiers');
-await writeFile(appDelegatePath, delegateWithAccessibility.trimEnd() + '\n\n' + swiftBody + '\n\n' + authBody + '\n\n' + actionsBody + '\n\n' + speechBody + '\n\n' + translationBody + '\n\n' + accessibilityBody + '\n');
+await writeFile(appDelegatePath, delegateWithAccessibility.trimEnd() + '\n\n' + swiftBody + '\n\n' + authBody + '\n\n' + actionsBody + '\n\n' + speechBody + '\n\n' + translationBody + '\n\n' + accessibilityBody + '\n\n' + nativeListBody + '\n');
 await copyFile(iframeSource, iframeTarget);
 
 // The Capacitor starter storyboard creates the default bridge by class name.

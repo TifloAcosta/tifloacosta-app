@@ -125,12 +125,10 @@ NSColor(calibratedRed: background.r, green: background.g,
 area.fill()
 logo.draw(in: area, from: visibleRect, operation: .sourceOver, fraction: 1)
 
-// The official TA artwork has a rounded outlined FRAME that legitimately
-// reaches all four edges. Its foreground logo is smaller inside that frame;
-// treating the full border as "content" cannot correct that inner balance.
-// Enlarge ONLY the centre mark by ~11%, leaving the navy frame and white
-// rounded border at their original positions. If colours differ from the
-// known uniform navy background, refuse the edit rather than damage art.
+// Remove the artificial inset frame of the original source when rendering
+// the iOS Home Screen icon. The actual iOS icon mask is the rounded frame;
+// preserving the source's white perimeter created a smaller square and a
+// visible double border. The original asset remains untouched.
 if transparentBackground && maxX >= minX && maxY >= minY &&
    CGFloat(max(maxX - minX, maxY - minY)) / CGFloat(originalWidth) > 0.92 {
     let leftNavy = sample(Int(Double(originalWidth) * 0.09),
@@ -140,52 +138,26 @@ if transparentBackground && maxX >= minX && maxY >= minY &&
     let navyConsistent = leftNavy.a > 0.98 && rightNavy.a > 0.98 &&
         difference(leftNavy, rightNavy) < 0.045
     if navyConsistent {
-        // Never touch the outlined outer border (roughly the outer 4%).
-        let centerSource = NSRect(
+        let markSource = NSRect(
             x: CGFloat(originalWidth) * 0.10,
             y: CGFloat(originalHeight) * 0.09,
             width: CGFloat(originalWidth) * 0.80,
             height: CGFloat(originalHeight) * 0.82
         )
-        let centerTarget = NSRect(
-            x: CGFloat(dimension) * 0.055,
-            y: CGFloat(dimension) * 0.044,
-            width: CGFloat(dimension) * 0.89,
-            height: CGFloat(dimension) * 0.912
-        )
-        let innerPaint = NSRect(
-            x: CGFloat(dimension) * 0.095,
-            y: CGFloat(dimension) * 0.085,
-            width: CGFloat(dimension) * 0.81,
-            height: CGFloat(dimension) * 0.83
+        let markTarget = NSRect(
+            x: CGFloat(dimension) * 0.012,
+            y: CGFloat(dimension) * 0.012,
+            width: CGFloat(dimension) * 0.976,
+            height: CGFloat(dimension) * 0.976
         )
         NSColor(calibratedRed: leftNavy.r, green: leftNavy.g,
                 blue: leftNavy.b, alpha: 1).setFill()
-        innerPaint.fill()
-        logo.draw(in: centerTarget, from: centerSource,
+        area.fill()
+        logo.draw(in: markTarget, from: markSource,
                   operation: .sourceOver, fraction: 1)
-        // Repaint the OUTER 8% from the untouched original, clipped to
-        // four strips. This prevents even partial overlap with the rounded
-        // white outline at the corners while keeping the enlarged TA mark.
-        let edge = CGFloat(dimension) * 0.08
-        let perimeter = [
-            NSRect(x: 0, y: 0, width: CGFloat(dimension), height: edge),
-            NSRect(x: 0, y: CGFloat(dimension) - edge,
-                   width: CGFloat(dimension), height: edge),
-            NSRect(x: 0, y: edge, width: edge,
-                   height: CGFloat(dimension) - 2 * edge),
-            NSRect(x: CGFloat(dimension) - edge, y: edge, width: edge,
-                   height: CGFloat(dimension) - 2 * edge)
-        ]
-        for strip in perimeter {
-            canvas.saveGState()
-            canvas.clip(to: strip)
-            logo.draw(in: area, from: .zero, operation: .sourceOver, fraction: 1)
-            canvas.restoreGState()
-        }
-        print("AppIcon: símbolo TA ampliado ~11%, contorno exterior restaurado desde el original")
+        print("AppIcon: marco interior duplicado eliminado y símbolo TA ajustado al contorno de iOS")
     } else {
-        print("AppIcon: fondo interior desigual; ajuste central omitido por seguridad")
+        print("AppIcon: comprobación de fondo fallida; se conserva el original")
     }
 }
 context.flushGraphics()

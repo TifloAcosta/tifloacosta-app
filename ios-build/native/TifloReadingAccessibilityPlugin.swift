@@ -26,6 +26,7 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
     private var registeredLibraryTitles: [[String: Any]] = []
     private var registeredAccessibleTargets: [[String: Any]] = []
     private var focusedTargetId = ""
+    private var nativePilotPresented = false
 
     public override func load() {
         super.load()
@@ -94,11 +95,14 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
     }
 
     @objc private func voiceOverFocusChanged(_ notification: Notification) {
+        // The UIKit pilot owns its own focused cells and rotor actions.
+        guard !nativePilotPresented else { return }
         let focused = notification.userInfo?[UIAccessibility.focusedElementUserInfoKey]
         updateFocusedLibraryTitle(focused)
     }
 
     private func updateFocusedLibraryTitle(_ focusedCandidate: Any? = nil) {
+        guard !nativePilotPresented else { return }
         guard UIAccessibility.isVoiceOverRunning else {
             documentId = ""
             clearInstalledActions()
@@ -228,11 +232,17 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
                     : "Seleccione Acciones en el rotor de VoiceOver y deslice arriba o abajo."
             )
             controller.onSelected = { [weak self] itemId, actionId in
+                self?.nativePilotPresented = false
                 self?.notifyListeners("nativeListAction", data: ["itemId": itemId, "action": actionId])
             }
             controller.onClosed = { [weak self] in
+                self?.nativePilotPresented = false
                 self?.notifyListeners("nativeListClosed", data: [:])
             }
+            self.clearInstalledActions()
+            self.documentId = ""
+            self.focusedTargetId = ""
+            self.nativePilotPresented = true
             let navigation = UINavigationController(rootViewController: controller)
             navigation.modalPresentationStyle = .fullScreen
             presenter.present(navigation, animated: true) {

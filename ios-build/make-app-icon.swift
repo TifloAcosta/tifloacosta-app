@@ -164,7 +164,26 @@ if transparentBackground && maxX >= minX && maxY >= minY &&
         innerPaint.fill()
         logo.draw(in: centerTarget, from: centerSource,
                   operation: .sourceOver, fraction: 1)
-        print("AppIcon: símbolo TA ampliado ~11%; marco y contorno intactos")
+        // Repaint the OUTER 8% from the untouched original, clipped to
+        // four strips. This prevents even partial overlap with the rounded
+        // white outline at the corners while keeping the enlarged TA mark.
+        let edge = CGFloat(dimension) * 0.08
+        let perimeter = [
+            NSRect(x: 0, y: 0, width: CGFloat(dimension), height: edge),
+            NSRect(x: 0, y: CGFloat(dimension) - edge,
+                   width: CGFloat(dimension), height: edge),
+            NSRect(x: 0, y: edge, width: edge,
+                   height: CGFloat(dimension) - 2 * edge),
+            NSRect(x: CGFloat(dimension) - edge, y: edge, width: edge,
+                   height: CGFloat(dimension) - 2 * edge)
+        ]
+        for strip in perimeter {
+            canvas.saveGState()
+            canvas.clip(to: strip)
+            logo.draw(in: area, from: .zero, operation: .sourceOver, fraction: 1)
+            canvas.restoreGState()
+        }
+        print("AppIcon: símbolo TA ampliado ~11%, contorno exterior restaurado desde el original")
     } else {
         print("AppIcon: fondo interior desigual; ajuste central omitido por seguridad")
     }

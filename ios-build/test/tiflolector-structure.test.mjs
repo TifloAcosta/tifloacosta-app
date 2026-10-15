@@ -161,7 +161,7 @@ test('UIKit reconoce la etiqueta VoiceOver exacta sin imponer activación adicio
   assert.match(swift, /accessibilityTraits\.contains\(\.button\)/);
   assert.match(swift, /normalized == expected/);
   assert.match(bridge, /plainLabel: title\.textContent/);
-  assert.match(bridge, /registerLibraryTitles\(\{ documents, nativeRowsOnFocus: true \}\)/);
+  assert.match(bridge, /registerLibraryTitles\(\{ documents, nativeRowsOnFocus: false \}\)/);
 });
 
 

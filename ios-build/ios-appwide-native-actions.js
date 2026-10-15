@@ -452,36 +452,86 @@
   }
 
 
-  // A dedicated native page is shown only to VoiceOver users; all video
-  // operations, search, pagination and playback stay on that single page.
-  // Its Close control returns HOME, not a second, larger Videos interface.
+  // Videos starts DIRECTLY from the user's section selection. Never
+  // navigate to videos.html to load data only to cover it with UIKit.
+  // Android and the public site retain their normal HTML navigation.
   let launchingVideos = false;
   let videosPresented = false;
-  let videoLaunchAttempted = false;
-  async function showUnifiedVideos() {
-    if (!location.pathname.toLowerCase().endsWith('/videos.html') ||
-        launchingVideos || videosPresented || videoLaunchAttempted) return;
-    const items = window.TIFLO_NATIVE_VIDEO_CATALOG;
-    if (!Array.isArray(items) || !items.length) return;
+  let videoListenerReady = false;
+  let videoOrigin = null;
+  const videoCatalog = () => {
+    const rows = window.TIFLO_NATIVE_VIDEO_CATALOG
+      || window.TIFLO_IOS_VIDEOS?.videos;
+    return Array.isArray(rows) ? rows.filter(x => x && typeof x.id === 'string').slice(0, 600) : [];
+  };
+  const videoTheme = () => {
+    const style = getComputedStyle(document.documentElement);
+    const prop = name => style.getPropertyValue('--' + name).trim();
+    return {
+      background: prop('bg'),
+      surface: prop('surface'),
+      text: prop('text'),
+      muted: prop('muted'),
+      border: prop('border'),
+      brand: prop('brand-red')
+    };
+  };
+  async function openVideosFromHome(fallbackURL, sourceLink) {
+    if (launchingVideos || videosPresented) return;
     const api = native();
-    if (!api?.showNativeVideoSection || !api?.getVoiceOverStatus) return;
+    if (!api?.showNativeVideoSection || !api?.getVoiceOverStatus) {
+      location.assign(fallbackURL);
+      return;
+    }
     launchingVideos = true;
     try {
-      if (!(await api.getVoiceOverStatus())?.enabled) return;
-      videoLaunchAttempted = true;
-      await api.addListener('nativeVideoClosed', () => {
-        videosPresented = false;
-        location.replace('index.html');
+      const enabled = (await api.getVoiceOverStatus())?.enabled;
+      if (!enabled) {
+        location.assign(fallbackURL);
+        return;
+      }
+      const rows = videoCatalog();
+      if (!rows.length) {
+        location.assign(fallbackURL);
+        return;
+      }
+      if (!videoListenerReady) {
+        await api.addListener('nativeVideoClosed', () => {
+          videosPresented = false;
+          const previous = videoOrigin;
+          videoOrigin = null;
+          // The original app screen is still in place underneath the native
+          // video cells; no second navigation or reload is necessary.
+          if (previous?.isConnected) previous.focus({ preventScroll: true });
+        });
+        videoListenerReady = true;
+      }
+      videoOrigin = sourceLink;
+      const response = await api.showNativeVideoSection({
+        videos: rows, theme: videoTheme()
       });
-      const response = await api.showNativeVideoSection({ videos: items.slice(0, 600) });
       videosPresented = response?.presented === true;
-    } catch (error) {
-      // No automatic modal retry loop; the accessible HTML screen stays usable.
-      videosPresented = false;
-    } finally { launchingVideos = false; }
+      if (!videosPresented) location.assign(fallbackURL);
+    } catch {
+      location.assign(fallbackURL);
+    } finally {
+      launchingVideos = false;
+    }
   }
-  window.addEventListener('tiflo-ios-catalog-ready', () => { void showUnifiedVideos(); });
-  if (window.TIFLO_NATIVE_VIDEO_CATALOG) void showUnifiedVideos();
+  // Capture only section links. Links inside videos.html or external YouTube
+  // URLs are not intercepted. Do not alter modifiers or new-tab gestures.
+  document.addEventListener('click', event => {
+    const link = event.target?.closest?.('a[href]');
+    if (!link || !/^(?:\.\/)?videos\.html(?:[#?].*)?$/i.test(
+      link.getAttribute('href') || ''
+    )) return;
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey ||
+        event.ctrlKey || event.shiftKey || event.altKey) return;
+    if (!document.getElementById('home-blocks')) return;
+    if (!native()?.showNativeVideoSection) return;
+    event.preventDefault();
+    void openVideosFromHome(link.href, link);
+  }, true);
 
   // Touch users get a one-step native contextual action sheet on long press.
   // The menu is generated from the exact same registered actions as VoiceOver.

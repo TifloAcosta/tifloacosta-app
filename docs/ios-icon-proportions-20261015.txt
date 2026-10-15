@@ -1,0 +1,15 @@
+15 de octubre de 2026 — PROPORCIONES DE LOGOTIPO EN ICONO iOS
+
+Incidencia: una persona vidente informa que el símbolo central «TA» se ve demasiado pequeño dentro del icono de TifloAcosta que aparece antes de abrir la app (pantalla de inicio del iPhone).
+
+Origen contrastado: ios-build/install-native-video.mjs empaqueta tifloacosta-icon-512.png y lo transforma en un PNG RGB de 1024x1024 mediante ios-build/make-app-icon.swift. El contorno blanco y el marco azul oscuro llegan hasta los bordes del icono; por eso no procede ampliar la imagen completa o recortar sus esquinas, sino equilibrar el tamaño del motivo central.
+
+Intervención: el generador preserva el archivo PNG de origen, rellena la zona interior con el mismo azul de fondo si ambas muestras laterales coinciden, y vuelve a dibujar allí el símbolo del centro con una ampliación proporcional de alrededor del 11 %. Respeta el marco, el contorno blanco y la paleta de la marca. Un control preventivo bloquea la transformación especial si el fondo interior no es uniforme, para impedir daños en futuras versiones del logo.
+
+El ajuste se aplica SOLAMENTE a la copia compilada de la app nativa iOS. No se cambian ni TifloLector, ni VoiceOver, ni el Android, ni la PWA, ni el icono original de la web. No se modifican documentos ni datos del usuario.
+
+Comprobación: ejecución de prueba específica en un Mac con AppKit; verificación estricta PNG 1024x1024 RGB opaco sin canal alfa y comparación visual de miniaturas original/resultado. Comprobar TestFlight en iPhone cuando esta corrección se incluya en una compilación.
+
+Copia de recuperación: backup/ios-400086-before-icon-2026-10-15; commit cb874e160447ba18d55caa2ef42989b868c715df. Para restaurar, revertir la modificación del generador Swift desde esta rama y generar una nueva compilación con numeración posterior. La 400086 sigue siendo la compilación distribuida mientras no se solicite una nueva actualización de TestFlight.
+
+Criterio de publicación: este cambio estético no puede interferir con el parte pendiente de la actualización de acciones de VoiceOver. NO disparar inmediatamente otra beta únicamente para este ajuste; consolidarlo en la próxima actualización tras su informe.

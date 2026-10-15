@@ -1,0 +1,75 @@
+TIFLOACOSTA iOS — ACCIONES NATIVAS EN TODAS LAS SECCIONES DE CONTENIDO
+15/10/2026
+
+BASE CONSERVADA
+Código anterior: a32ffb810997033e81b013dbeed1c9310f99401a.
+Compilación TestFlight anterior verificada: 400085.
+Rama de seguridad: backup/ios-400085-before-appwide-actions-2026-10-15.
+Rama de desarrollo: feature/ios-appwide-native-actions-2026-10-15.
+No se modifica Android, la web pública, el almacenamiento de libros ni migraciones.
+
+RAZÓN DE LA INTERVENCIÓN
+Los elementos HTML de una WKWebView no adoptan de forma fiable acciones
+UIAccessibilityCustomAction añadidas tras los cambios de foco.
+Las acciones del rotor y el menú contextual han de pertenecer al elemento
+nativo exacto que recibe el foco.
+
+IMPLEMENTACIÓN
+Se conserva Capacitor y toda la lógica compartida de TifloAcosta.
+Para las colecciones con acciones concretas se presenta directamente, al
+entrar en la sección usando VoiceOver, una lista de filas UIKit. No hay botón
+"Probar acciones". Cada fila tiene UIAccessibilityCustomAction reales y
+UIContextMenuConfiguration para ofrecer el mismo menú al mantener pulsado.
+
+ÁREAS REGISTRADAS
+- Biblioteca de TifloLector: abrir, leer, traducir, cola, información, mover,
+  exportar, cambiar título, eliminar con confirmación.
+- Vídeos: reproducir en TifloAcosta o abrir en YouTube cuando hay ID válido.
+- Podcasts: reproducir y consultar la descripción cuando existe.
+- Recursos y Favoritos: abrir, descargar, compartir, cambiar favorito, opciones.
+- Novedades, noticias, apps accesibles y Escuchar y ver de Actualidad:
+  acceder, compartir y copiar dirección cuando existe una dirección válida.
+- Mi libro, Contacto y redes, Privacidad y Guía: operaciones sobre enlaces.
+- Cola de lectura y Marcas: acceso mediante controles ya existentes.
+
+Los ajustes de valor en Configuración siguen usando sus controles ajustables:
+no se inventan acciones para valores que se modifican directamente con flic.
+No se inventan operaciones de borrado, descargas o guardado cuando una
+sección no dispone de ellas.
+
+FUNCIONAMIENTO
+Al entrar con VoiceOver en una sección de contenido con elementos disponibles,
+la pantalla de títulos se presenta con filas nativas y el foco queda en una
+fila. Las acciones del rotor se recorren con flic arriba/abajo y doble toque.
+Al elegir una acción, la pantalla nativa se cierra y se ejecuta la operación
+real existente. Cerrar devuelve los filtros y controles HTML para continuar.
+El menú contextual de las filas es nativo. Para uso táctil de enlaces que
+permanecen en HTML, la pulsación prolongada abre una hoja de acciones nativa
+sobre los elementos registrados.
+
+VALIDACIONES
+El compilador comprueba UIKit, Swift, Capacitor y el paquete para dispositivo.
+Los tests Node comprueban el registro de contenidos, etiquetas, eventos y
+controles de retorno. Es necesario probar con VoiceOver en un iPhone REAL
+porque Xcode CI no permite verificar el rotor físico.
+Comprobar: navegación por títulos sin saltos, acciones de cada sección,
+enlaces a sus contenidos correctos, reproducción, descarga, confirmación
+de eliminación, regreso a filtros/búsqueda, datos guardados y estabilidad.
+
+REGRESO
+Si los controles de CI fallan, NO distribuir.
+Si el usuario detecta una regresión en TestFlight:
+- Mantener la compilación 400085 como punto conocido.
+- Revertir los commits de este cambio, o reconstruir exactamente desde
+  backup/ios-400085-before-appwide-actions-2026-10-15.
+- Enviar nuevo build con número superior; no forzar una migración inversa ni
+  borrar documentos, IndexedDB, progreso, marcas o configuración.
+- No afirmar que una compilación antigua pueda reinstalarse si Apple no la
+  ofrece en TestFlight; la recuperación fiable es recompilar la fuente anterior.
+
+LIMITACIÓN HONESTA
+La solución cubre las colecciones identificadas y ofrece un registro
+ampliable para otras operaciones que se añadan en el futuro. No convierte
+todas las pantallas de TifloAcosta a SwiftUI; controles sin menú específico
+siguen funcionando en la web incrustada. Una compilación correcta no prueba
+por sí misma que el gesto del rotor se comporte bien en un dispositivo.

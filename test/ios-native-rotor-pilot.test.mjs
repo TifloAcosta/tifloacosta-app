@@ -9,6 +9,7 @@ const installer = read('ios-build/install-native-video.mjs');
 const bridge = read('ios-build/ios-reader-native.js');
 const website = read('web-reading.js');
 const packager = read('ios-build/prepare-web.mjs');
+const appwide = read('ios-build/ios-appwide-native-actions.js');
 
 test('native UIKit actions belong to the focused row, not the WKWebView container', () => {
   assert.match(controller, /UITableViewController/);
@@ -27,11 +28,13 @@ test('production iOS build includes the native controller and its Capacitor brid
   assert.match(plugin, /navigation\.modalPresentationStyle = \.fullScreen/);
 });
 
-test('native action list opens automatically upon VoiceOver focus, never via pilot button', () => {
+test('app-wide native action lists open upon section entry, without a pilot button', () => {
   assert.match(plugin, /self\.autoNativeLibraryEnabled = call\.getBool\("nativeRowsOnFocus"\) \?\? false/);
   assert.match(plugin, /if autoNativeLibraryEnabled \{/);
   assert.match(plugin, /preferredFocusId: id/);
-  assert.match(bridge, /registerLibraryTitles\(\{ documents, nativeRowsOnFocus: true \}\)/);
+  assert.match(appwide, /showNativeActionList/);
+  assert.match(appwide, /getVoiceOverStatus/);
+  assert.match(bridge, /registerLibraryTitles\(\{ documents, nativeRowsOnFocus: false \}\)/);
   assert.doesNotMatch(bridge, /installNativeActionPilot|ios-voiceover-native-action-pilot|Probar acciones nativas de VoiceOver/);
   assert.doesNotMatch(website, /ios-voiceover-native-action-pilot/);
 });
@@ -65,4 +68,20 @@ test('the real document operations are injected only into the packaged iOS reade
   assert.match(packager, /queueBook: async id =>/);
   assert.match(packager, /return Boolean\(deleted\)/);
   assert.doesNotMatch(website, /window\.TifloIOSBookActions =/);
+});
+
+test('every principal actionable iOS collection has an explicit native route', () => {
+  for (const selector of [
+    'video-list', 'podcast-episodes', 'reading-library-list',
+    'resource-results', 'favorites-list', 'news-list',
+    'apps-list', 'media-accessibility-list', 'media-technology-list',
+    'reading-queue-list', 'reading-marks-list'
+  ]) assert.ok(appwide.includes(selector), selector);
+  assert.match(controller, /contextMenuConfigurationForRowAt/);
+  assert.match(controller, /UIAction\(/);
+  assert.match(packager, /ios-appwide-native-actions\.js/);
+  assert.match(plugin, /CAPPluginMethod\(name: "getVoiceOverStatus"/);
+  assert.match(appwide, /nativeListAction/);
+  assert.match(appwide, /VoiceOver/);
+  assert.doesNotMatch(appwide, /Probar acciones nativas de VoiceOver/);
 });

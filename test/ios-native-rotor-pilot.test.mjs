@@ -8,6 +8,7 @@ const controller = read('ios-build/native/TifloNativeActionListController.swift'
 const installer = read('ios-build/install-native-video.mjs');
 const bridge = read('ios-build/ios-reader-native.js');
 const website = read('web-reading.js');
+const packager = read('ios-build/prepare-web.mjs');
 
 test('native UIKit actions belong to the focused row, not the WKWebView container', () => {
   assert.match(controller, /UITableViewController/);
@@ -54,4 +55,14 @@ test('focus re-entrance is prevented and the existing HTML library remains a fal
   assert.match(bridge, /installLibraryNativeActions\(\)/);
   assert.match(bridge, /installNativeFilesImport\(\)/);
   assert.match(website, /card\.append\(title, detailsToggle, details\)/);
+});
+
+test('the real document operations are injected only into the packaged iOS reader', () => {
+  assert.match(packager, /window\.TifloIOSBookActions =/);
+  assert.match(packager, /card\.dataset\.iosBookId = String\(book\.id\)/);
+  assert.match(packager, /deleteBook: id => deleteSavedBook\(id\)/);
+  assert.match(packager, /renameBook: id =>/);
+  assert.match(packager, /queueBook: async id =>/);
+  assert.match(packager, /return Boolean\(deleted\)/);
+  assert.doesNotMatch(website, /window\.TifloIOSBookActions =/);
 });

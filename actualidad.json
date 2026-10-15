@@ -1,5 +1,270 @@
 [
   {
+    "id": "techcrunch-0a7ea874925a3f07",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/15/ai-agents-are-coming-to-rivians-cars/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-15T15:02:36.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "AI agents are coming to Rivian’s cars",
+        "summary": "We'll likely learn more about how this will work at the company's upcoming \"AI & Autonomy Day\" event in December.",
+        "body": "Rivian recently rolled out an AI assistant that lets drivers and passengers interact with the company’s electric vehicles just by talking to them. But the carmaker’s founder and CEO, RJ Scaringe, said at TechCrunch Disrupt this week that, in the future, Rivian’s cars will be able to run AI agents made by other companies like Anthropic.\n\n“That’s where it becomes magical,” Scaringe said on stage.\n\nScaringe didn’t say when Rivian would implement this, and the company declined to offer more details, pointing instead to the “AI & Autonomy Day” event it’s hosting in December.\n\nBut it’s not hard to imagine how Rivian might integrate something like Claude, OpenAI’s Dots or Meta’s Muse assistant into its software. The company has developed its in-car software from the ground up, instead of leaning on Apple CarPlay or Android Auto, and built a lot of its own applications, like navigation (though it has worked to integrate popular in-car apps like Apple Music).\n\nRivian says it has created its own in-house agentic framework that understands what action a person wants to take when they talk to the vehicle, and routes it to the right part of the car’s software. Most of the time, that involves what you’d expect: asking the car to turn down the temperature, activate the seat warmers, or summarize the news.\n\n“Think of it as like a traffic light. So if you ask the vehicle something, it decides what model it’s going to use. It can use a local model that’s running on the edge and the vehicle. If it’s a more complex question, it can go up to the cloud. And then even for that, we have different models that we use,” Scaringe said.\n\nAs of May of this year, the agent could access external apps like Google Calendar. And Scaringe said at Disrupt the next step would be to add products from the frontier AI companies, though making them work in the car won’t be easy.\n\n“There’s a lot of plumbing behind the scenes we have to do to make sure that that works, and it’s not just within Rivian. That’s also a lot of coordination with the labs to make sure they enable that plumbing,” he said, adding that putting this kind of software near safety-critical systems means Rivian has to be extremely careful.\n\n“You wouldn’t want an agent to determine, ‘hey, it’s time to apply the brakes, or time to steer the vehicle.’ So anything that’s vehicle-level controls are not being handed to an agent,” he said.\n\nInstead, he thinks the implementation will look more like an extension of how people currently use these agentic apps. That would mean Rivian would have to find a way to connect the vehicle to all of the context that apps like Muse collect on their users.\n\nFor example, Scaringe said, a driver could ask the Rivian assistant to turn on the ventilated seats before going deeper. “And then simultaneously say, ‘We were talking yesterday about this meal. I’m planning to have guests over on Friday. Can you help me think through what we’re going to make?’,” he said. The car could then pull the driver’s context from a conversation they had with the assistant on another device.\n\nOf course, Rivian wouldn’t be the first American car company to add AI agents to a car’s software. Earlier this year, Tesla added a feature that let users talk to both SpaceX’s Grok chatbot and also its Grok Bot assistant."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-90b6dd225e03a730",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1011967/shellys-new-presence-sensor-simultaneously-detects-up-to-ten-people-without-a-camera",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-15T15:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Shelly’s new presence sensor simultaneously detects up to ten people without a camera",
+        "summary": "Following the launch of its $50 subscription-free security camera last month, Shelly announced another new accessory for smart home automation today that can keep track of multiple people as they move through rooms or large spaces without recording them. The Shelly Presence Gen4 sensor uses mmWave radar technology instead of a camera to detect the […]",
+        "body": "Following the launch of its $50 subscription-free security camera last month , Shelly announced another new accessory for smart home automation today that can keep track of multiple people as they move through rooms or large spaces without recording them. The Shelly Presence Gen4 sensor uses mmWave radar technology instead of a camera to detect the presence, motions, and activities of people and pets. It's available starting today for $84.99 through Shelly's online store and is expected to hit other retailers like Amazon and Best Buy soon.\n\nThe Presence Gen4 can be perched on a shelf or a table using its built-in stand or permanently mounted …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-e3f4c6e1e1c471eb",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1012003/microsoft-windows-11-new-photos-app-onedrive-icloud",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-15T14:53:38.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Microsoft’s new Photos app combines your PC, OneDrive, and iCloud galleries",
+        "summary": "Microsoft has redesigned its Photos app for Windows 11, overhauling the editor and image viewer, and combining photos and videos from your PC, OneDrive, and iCloud into a single space. The new combined gallery experience aims to make it easier to manage and view your photos without jumping between apps or devices, while also improving […]",
+        "body": "Microsoft has redesigned its Photos app for Windows 11, overhauling the editor and image viewer, and combining photos and videos from your PC, OneDrive, and iCloud into a single space. The new combined gallery experience aims to make it easier to manage and view your photos without jumping between apps or devices, while also improving app launch and scrolling performance in Photos.\n\nTo combine your galleries in the Windows 11 Photos app, you'll need to turn on Camera Backup in the OneDrive mobile app on iOS or Android, and follow Apple's guide to set up iCloud for Windows. Once combined in the Windows 11 Photos app, you can browse by date, o …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-02e9a57a18464e13",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1011996/microsoft-windows-rtx-spark-platform-changes-notepad",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-15T14:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "How Windows is being optimized for Nvidia’s RTX Spark laptops",
+        "summary": "Microsoft and Nvidia held a launch party for the first wave of RTX Spark laptops last week in San Francisco, where a new wave of AI PCs took center stage amid a packed crowd and a lively hands-on area. A day after the media event, I was invited to a quieter Nvidia event to hear […]",
+        "body": "Microsoft and Nvidia held a launch party for the first wave of RTX Spark laptops last week in San Francisco, where a new wave of AI PCs took center stage amid a packed crowd and a lively hands-on area. A day after the media event, I was invited to a quieter Nvidia event to hear a lot more about the new RTX Spark computing platform. While Nvidia's new laptops might look like regular Windows machines, the chips inside are Arm-based, instead of the traditional x64 architecture used by AMD and Intel. Combined with a powerful GPU, RTX Spark is designed for the future of AI, and it means a lot of work has gone into getting these laptops ready for …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-fd32ac3a72fe2de1",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/15/googles-universal-cart-shopping-tool-launches-in-the-us/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-15T14:29:33.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google’s Universal Cart shopping tool launches in the US",
+        "summary": "The new shopping tool is available in the U.S. across Google Search and the Gemini app.",
+        "body": "Google on Thursday said “Universal Cart,” a tool that lets users collect and monitor products they find across search and in the Gemini app, is now available to U.S. users. The company first previewed the tool at Google I/O in May.\n\nThe idea is to make online shopping easier to manage. Find something you like, save it to your cart, and move on. When you return later, your items and shopping progress are still there, so you don’t have to hunt down the same products or start over. Universal Cart can collect items from multiple retailers, turning it into a central hub for browsing and keeping track of potential purchases.\n\nGoogle says the cart can also help shoppers stay on top of deals and availability. The tool can send notifications when a saved product’s price drops or when an out-of-stock item becomes available again.\n\nThe tool is also designed to offer more tailored help during the shopping process. Google says it can take credit card perks into account when helping users choose how to pay, and also surface relevant promo codes.\n\nCheckout is tied to Google’s Universal Commerce Protocol, or UCP, an open standard the company introduced earlier this year. UCP is designed to help AI agents and retailers work together across different parts of the shopping journey, including checkout.\n\nGoogle is already deeply invested in AI-powered shopping, and Universal Cart is its latest effort to make the experience more convenient. It joins features such as conversational product discovery in Search’s AI Mode and Google’s “Let Google Call” tool, which uses an AI agent to contact nearby stores and check whether an item is in stock.\n\nGoogle isn’t the only company bringing AI into e-commerce. Amazon , OpenAI , and other rivals have added agentic commerce features as companies look for ways to make chatbots useful beyond answering questions."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-a5edab0d0d1fa66d",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2287546/operas-lightweight-air-browser-is-back-unbothered-moisturized-in-its-lane/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-15T14:17:22.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Opera's lightweight Air browser is back, unbothered, moisturized, in its lane",
+        "summary": "Namaste.",
+        "body": "New soundtracks and breathing exercises are designed to encourage mindful browsing.\n\nOpera has relaunched its very mindful Air browser with a host of new anti-distraction features. The audiovisual makeover is designed to help you focus better on what you're actually supposed to be doing, rather than encouraging you to wander into yet another free time-draining Reddit rabbit hole.\n\nThe first new addition is music. Opera seemingly knows that people turn to ambient playlists when they're trying to concentrate, so it's built its own. Air Soundscapes give the browser a soundtrack split into four moods: Focus, Relax, Work and Ambience. Pick the latter and you'll be treated to the tranquil sounds of forests and the sea.\n\nOpera Air also now has built-in breathing exercises, which you can schedule to pop up at your chosen intervals, as well as neck stretches you can follow along to.\n\nThe Air browser is purposefully streamlined, so you have to manually add any apps you want to the sidebar. Opera has added new wallpapers that it says incorporate \"open spaces, perspective and natural textures\" to make your browsing experience as serene as possible. It also now has an automatic dark mode.\n\nGiven its resistance to the many distractions of the web, Air naturally has a built-in ad blocker, and you even get a free VPN. It does interface with ChatGPT but that sidebar option is unchecked by default. The resigned user experience builds on the first version of Air that Opera introduced in early 2025 as a mindful antidote to the chaos of the internet.\n\nOpera Air remains free to download on Windows and macOS."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-c9ce7e030b970f70",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/15/john-ternus-talks-iphone-duo-cheap-and-crappy-foldables-in-new-interview/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-15T14:11:18.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "John Ternus talks iPhone Duo, ‘cheap and crappy’ foldables in new interview",
+        "summary": "TIME has just published its list of the best inventions of 2026, and iPhone Duo made the list with John Ternus featured on the magazine cover. Here’s what Ternus said in his interview with TIME . more…",
+        "body": "TIME has just published its list of the best inventions of 2026, and iPhone Duo made the list with John Ternus featured on the magazine cover. Here’s what Ternus said in his interview with TIME .\n\nJohn Ternus sat down with TIME for a wide-ranging interview centered on iPhone Duo, but also covering a variety of other topics, including AI.\n\nRegarding the iPhone Duo, which is hitting the market nearly a decade after other foldables, Ternus was involved in early foldable work at Apple all the way back in 2011.\n\nIn 2011, when many people still carried around flip phones, Ternus and five other engineers filed a patent application for foldable electronic devices, exploring what kind of batteries and circuit boards might be needed for such an idea. “It felt clear that we were going to eventually get to a place where OLED displays were going to be flexible,” Ternus says.\n\nTernus wasn’t a fan of early attempts at foldables from other companies in the 2010s. He says, “The other examples in the world felt kind of cheap and crappy.”\n\nThe drive to achieve a foldable unlike its competitors is evidenced by a story from Richard Dinh, Apple’s VP of Product Design.\n\nAlong the way, Ternus encouraged the team to invest more time and effort in the project, even as other foldables beat them to market. Dinh says that at one point, he asked Ternus whether his team should proceed with a top surface material similar to those of its competitors, which Dinh felt had flaws but was potentially good enough.\n\n“And he was like, ‘Look, Rich, you’ll know when it’s the right thing.’ And that gave us the confidence to really push the boundaries on innovation and manufacturing, and fly worldwide to connect our suppliers together and come up with the nanotexture [a surface technology],” Dinh says. The result—a surface made from a custom polymer and built atop a hinge with more than 100 tiny interior precision components—has impressed its first users, who have said they can barely detect a crease at all.\n\nThe story also mentions that Ternus “has devoted much of his early tenure as CEO to obsessing over design, spending multiple days a week in the studio with the industrial-design and human-interface teams.” This echoes previous Bloomberg reporting around Ternus’s early priorities.\n\nOther topics Ternus addresses in the interview include:\n\nThe full TIME article is well worth a read, available here .\n\nWhat are your takeaways from the latest John Ternus interview? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-544ef1eef2a82966",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/15/apple-sets-cutoff-time-for-getting-fastest-iphone-duo-pre-order/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-15T13:36:55.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple sets cutoff time for getting fastest iPhone Duo pre-order",
+        "summary": "iPhone Duo pre-orders start tomorrow, and if you want the fastest checkout possible, Apple just set the deadline for completing its ‘Get Ready’ process. more…",
+        "body": "iPhone Duo pre-orders start tomorrow, and if you want the fastest checkout possible, Apple just set the deadline for completing its ‘Get Ready’ process.\n\nRumors indicate the iPhone Duo could be in short supply when it first launches. So if you’re hoping to get an iPhone Duo on day one, you’ll want to pre-order tomorrow morning.\n\niPhone Duo pre-orders open Friday, October 16 at 8:00 a.m. ET / 5:00 a.m. PT .\n\nAnd like Apple did for iPhone 18 Pro, there’s a window of time during which you can start the pre-order process in advance for the fastest checkout possible.\n\nApple knows it can be frustrating when your pre-order takes too long and you miss out on day-one delivery. So with its ‘Get Ready’ process, you can make all your pre-order selections in advance.\n\nInside the Apple Store app or on Apple’s website , you’ll find the option to start the iPhone Duo pre-order process now. Once you save all your selections, completing the pre-order will go much faster tomorrow morning.\n\nBut there’s a deadline for making your selections in advance. Apple just announced that iPhone Duo shoppers need to complete the ‘Get Ready’ process before 9 p.m. PT on Thursday, October 15 .\n\nSo if you’re in the Eastern time zone, you have until midnight tonight.\n\nIf you’re still trying to decide between Star White or Night Sky, or unsure on storage needs, or whether you plan to purchase or lease, it’s time to make those decisions now.\n\nAfter completing the ‘Get Ready’ process, you’ll be able to complete checkout in mere seconds once pre-orders go live tomorrow.\n\nDo you plan to buy an iPhone Duo? Why or why not? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-0075af6384ce44ea",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2287239/nvidia-rtx-spark-good-for-windows-even-if-you-do-not-need-local-ai/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-15T13:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "NVIDIA's RTX Spark is good for Windows, even if you don't need local AI",
+        "summary": "NVIDIA's RTX Spark is meant for AI fiends, but it could end up helping Windows PCs in general",
+        "body": "Windows PCs may finally catch up to Apple Silicon.\n\nLast week, I spent two days hearing how Microsoft and NVIDIA are \"reinventing the PC\" with RTX Spark, the new system-on-a-chip powering the Surface Laptop Ultra and several other Windows PCs this fall. It's the first time we've seen powerful Arm CPUs joined together with NVIDIA's Blackwell GPU technology and up to 128GB of ultra-fast unified memory on a single chip. Theoretically, RTX Spark should allow for thin-yet-powerful laptops (and a few small desktops) that can handle AI tasks locally, as well as tackling content creation and gaming. So sure, I suppose NVIDIA and Microsoft have a reason to gloat a bit.\n\nBut, just like the launch of Snapdragon-powered Copilot+ systems two years ago, it was hard to ignore the elephant in the room: RTX Spark is clearly a response to Apple Silicon and the transformational changes it brought to Macs six years ago . Apple's chips are also made up of a powerful Arm CPU, capable GPU and fast unified memory, and they span the company's lineup from the tiny Mac mini to the super-powerful Mac Studio and 16-inch MacBook Pro. With RTX Spark, Windows users finally have a way to see the benefits of an efficient Arm-based SoC on high-end PCs, while the recent batch of Qualcomm chips covers the low-end and mid-range.\n\nThere weren't many surprises at Microsoft's AI launch event (featuring the Surface Laptop Ultra), or at NVIDIA's RTX Spark Editor's Day, which I attended alongside other media and analysts. Both companies want to sell us a future where we can run AI models and agents right from an RTX Spark-powered Windows laptop, something that seemed clear since the chip was announced at Computex . But even if that future doesn't come to pass, RTX Spark could still lead to some intriguing changes in the PC world.\n\nThe RTX Spark SoC is powered by up to 20 NVIDIA Grace Arm CPU cores (10 performance cores and 10 efficiency cores), a Blackwell GPU with up to 6,144 CUDA cores, and up to 128GB of unified LPDDR5x memory running at 9,400 Mbps. There's also a slightly less powerful configuration with 18 CPU cores and 5,120 GPU cores. RTX Spark also includes much of what you'd find on NVIDIA's latest GPUs, including fifth-gen tensor cores, fourth-gen ray tracing cores, and a Blackwell video engine (with support of AV1 UHQ and 4:2:2 encoding and decoding).\n\nBy shoving all of this hardware onto a single chip, NVIDIA claims the RTX Spark is twice as efficient as a laptop powered by an Intel Core Ultra 9 285H and RTX 5070 dedicated GPU, while gaming at 60 watts. NVIDIA has previously said RTX Spark systems should be similarly powerful to RTX 5070 laptops, though as you can tell from the chart below, those dedicated GPU systems can also draw a lot more energy for better performance.\n\nIf you plan to be connected to power most of the time and don't need to travel with your laptop, you may see little benefit from choosing an RTX Spark system. But if you need to do serious creative work on the go, RTX Spark's improved efficiency allows PCs to work as fast on battery as they are while plugged in, according to NVIDIA. From my brief time with the Surface Laptop Ultra, I didn't notice any performance drops while playing Gears of War: E-Day on battery power. The game still looked silky smooth in 1440p with high graphics settings.\n\nWith its support for tons of unified RAM, RTX Spark systems should appeal to AI developers and researchers who need as much memory as they can to run large AI models locally, like the 125B parameter Qwen3.8-Flash-Next . An RTX Spark system could significantly reduce the amount of money spent on cloud AI tokens, or replace that demand entirely. One researcher I spoke with was jealous that his colleagues were able to easily run AI models on modern Mac laptops, and he was excited about the possibility of doing the same on a Windows notebook. RTX Spark is also coming along as Microsoft is adding more support in Windows 11 for on-device AI tools like Perplexity , as well as simplified ways to set up AI agents like OpenClaw and GitHub Copilot.\n\nNot surprisingly, NVIDIA is also touting RTX Spark's gaming capabilities. Since it features a Blackwell GPU front and center, it'll deliver all of the features you'd expect from RTX 50-series cards, including support for DLSS 5. As I mentioned before, you can expect performance similar to an RTX 5070 — NVIDIA is specifically touting 1440p as the intended resolution for RTX Spark systems, though I'd be interested to see how they perform in 4K with DLSS. A new performance mode for DLSS Frame Generation can push Cyberpunk 2077 up to 280fps with 6x frame gen, compared 213fps without performance mode. (It's unclear what you lose to achieve that frame bump, though.)\n\nSince RTX Spark is Arm-based, it won't natively run every game on Windows, but NVIDIA claims recent titles like Control Resonant and the aforementioned Gears of War: E-Day will be supported at launch thanks to Microsoft's Prism emulator for x86 software. NBA 2K27 , the main DLSS 5 launch game, will also be supported, alongside World of Warcraft: Forever . NVIDIA says it's also working with major anti-cheat providers to support their products, something that's prevented multiplayer games from working on Arm Windows systems in the past.\n\nI'll have to spend more time with RTX Spark systems to see how well they actually handle gaming, beyond my minutes with Gears of War: E-Day. But if playing games is a priority, you'd still be better off with an Intel or AMD system with a dedicated GPU. At least then you wouldn't have to worry about potential emulation issues.\n\nRTX Spark systems will also be useful content creation — again, as you'd expect from PCs with RTX Blackwell GPUs. You can lean on hardware acceleration in tools like Blender, and notably, Adobe is re-architecting Photoshop and Premiere specifically for NVIDIA's platform. That's a major sign of faith from one of the biggest software companies around, though I suppose Adobe is also reading the tea leaves and seeing a bright future for Arm-based Windows systems in general.\n\nNVIDIA isn't targeting casual consumers with RTX Spark, not with a starting price of $2,600 for 18-core systems, or an eye-bleeding $3,700 for the full-powered 20-core models. Both NVIDIA and Microsoft are targeting AI developers and researchers who have the money to spend on insane amounts of RAM. And they should be prepared to open their wallets — a Surface Laptop Ultra with 128GB of RAM will cost a smooth $5.900. Still, that's a good deal cheaper than a fully-equipped M5 Max 16-inch MacBook Pro with 128GB of RAM, which costs $7,000.\n\nSimply by existing, the RTX Spark platform will likely push Intel and AMD in creative new directions. AMD is trying to accomplish something similar with its Ryzen AI Max 400 chips , which can also house a ton of unified memory, but can also run existing x86 software without any emulation. And Intel has been eager to prove itself against AMD for the last few years, which has resulted in its powerful Core Ultra Series 3 chips . As always, competition is great for consumers."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-a68d6b5a54aef67c",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2286631/xreals-new-flagship-one-pro-ar-glasses-offer-better-brightness-and-increased-comfort/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-15T13:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Xreal's new flagship One Pro+ AR glasses offer better brightness and increased comfort",
+        "summary": "There's still no camera here, so they won't be confused for pervert specs.",
+        "body": "There's still no camera here, so they won't be confused for pervert specs.\n\nXreal just released an upgrade of its popular One Pro AR glasses . The One Pro+ is a minor refresh, but offers some welcome quality of life improvements.\n\nFirst of all, it's brighter than ever before. The One Pro+ reaches 1,200 nits of peak brightness, compared to 700 nits for the standard One Pro. It also includes AI HDR upscaling tech to improve the visuals.The company has upgraded its 2D-to-3D conversion algorithm from 30Hz to 60Hz. This is for adding depth to 2D content, which is similar to the spatial imaging system available with the Apple Vision Pro .\n\nFinally, there's a newly designed nose pad to maximize long-term comfort. The company promises this pad will improve overall stability, but not at the expense of field of view. This is actually the feature I'm most excited about because there's a huge difference between wearing AR glasses for 20 minutes and hunkering down for two or three hours of work. They tend to get uncomfortable pretty fast.\n\nOther than that, these are still Xreal One Pro glasses. They offer the same X1 spatial computing chip and a 57-degree field of view. This is not a bad thing, as we enjoyed the original One Pro. They are great for productivity, via screen mirroring, and watching stuff. We actually said they intrigued us in ways that Meta's glasses never did.\n\nTo that end, there's one missing feature here that's a mainstay with Meta. The Xreal One Pro+ AR glasses do not have a camera, so people are unlikely to suspect you are wearing pervert glasses . Xreal's new specs are available right now and cost $600, which is the same price as last year's One Pro."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-1cee7c191d90754d",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/15/half-of-united-flights-have-starlink-wi-fi-heres-how-to-check-yours/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-15T12:52:16.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Half of United flights have Starlink Wi-Fi – here’s how to check yours",
+        "summary": "United Airlines first introduced Starlink Wi-Fi on its flights starting early in 2025, the airline says nearly half of its flights currently offer the high-speed satellite internet service. It’s now introduced a new way to let you check whether your flight has the service … more…",
+        "body": "United Airlines first introduced Starlink Wi-Fi on its flights starting early in 2025, the airline says nearly half of its flights currently offer the high-speed satellite internet service. It’s now introduced a new way to let you check whether your flight has the service …\n\nThe airline says that it intends to hit 100% Starlink coverage by the end of next year, while current installation rates depend on the fleet. For mainline aircraft flying long distance routes, the current figure is 37%, while United Express regional jets have significantly greater coverage at 68%.\n\nUnited already has more Starlink-equipped planes than any other airline in the world and is installing it on about 20 aircraft per week with plans to complete installations by the end of 2027. More than 250,000 United customers on average fly on a Starlink-equipped plane every day onboard more than 2,500 flights – nearly half the airline’s daily departures.\n\nStarlink is now active on more than 635 United mainline and United Express aircraft and the airline has already flown more than 37.7 million passengers on Starlink-powered aircraft across more than 538,000 flights, powering 14 million devices.\n\nUnited already notifies you about the availability of Starlink Wi-Fi in preflight emails and texts, but it’s now introduced a tracker in case of any equipment changes on your route. Airlines do sometimes need to swap aircraft at relatively short notice to account for issues like technical faults and flight cancellations that leave planes incorrectly positioned for their next scheduled flight.\n\nSimply go to this tracking link within two days of your departure, entering your flight number and departure date. If you check further ahead, the tracker will show you the percentage likelihood based on recent flights on the same route, but it’s only within 48 hours that you’ll get a generally reliable answer.\n\nPhoto: United"
+      }
+    },
+    "media": null
+  },
+  {
     "id": "techcrunch-1475fd2f7c825956",
     "type": "news",
     "sourceId": "techcrunch",
@@ -19,77 +284,6 @@
         "title": "Ricursive Intelligence is betting on AI-designed chips to help solve the compute crisis",
         "summary": "The founders detailed how their startup is developing AI that can design chips, learn from each iteration, and improve subsequent designs, all with the goal of automating and accelerating the chip design process.",
         "body": "Ricursive Intelligence founders Anna Goldie and Azalia Mirhoseini believe more efficient AI chip design could help solve the compute crisis. The founders took the stage at TechCrunch Disrupt on Wednesday to detail how their startup is developing AI that can design chips, learn from each iteration, and improve subsequent designs, all with the goal of automating and accelerating the chip design process.\n\n“There is this understanding that in the next five years we are going to have at least 10,000x more demand for compute, and that’s somewhat potentially conservative,” Goldie said on stage. “So we don’t want to build 10,000 times more data centers. We think that we need to help by making chips that are more efficient, that use the bandwidth in those data centers more efficiently, that use the wafers and fabs more efficiently, because even if we make [data centers] in space or something, I don’t know, you won’t see the sun anymore.”\n\nWhile some may be scared by the thought of AI designing its own chips, Goldie argues that letting AI handle chip design will allow humans can focus on developing applications and exploring new possibilities that can expand what they can accomplish with computing.\n\n“I think the way everything is shifting is that humans come bring their great ideas and creative thoughts, and execution is handled by AI,” Goldie said. “And this is happening in chip design, software development, and other places. And that’s something that recursive does for chip design.”\n\nThe founders say AI is challenging traditional chip design methods by discovering unconventional layouts that can outperform traditional ones. For example, AlphaChip, the AI system the founders previously developed, produced a circular, “donut-shaped” arrangement of chip components that initially surprised engineers but ultimately proved to be successful.\n\nThey explained that they are optimizing entire chips rather than following the traditional approach of partitioning them into dozens of smaller blocks. This approach allows AI to create intricate patterns, including wave-like designs, which the pair said they plan to share more about in the future.\n\nThe founders also argued that AI-designed chips will make it possible to create all sorts of chips that might not have been possible before.\n\n“If it takes six months or a year or two years to design a new chip, then you really have to be extremely selective about the chips that you design,” Goldie said. “But if you can design a chip in like a week, and then say for manufacturing, you can design custom chips for all sorts of different types of applications in like space and AR, VR, and you biological computing, and it makes sense financially to do that, and we can be more energy efficient.”"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-40126dac74912afc",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/14/flock-ceo-defends-surveillance-technology-amid-national-backlash-we-shouldnt-pause-progress/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-15T00:49:31.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Flock CEO defends surveillance technology amid national backlash: ‘We shouldn’t pause progress’",
-        "summary": "At TechCrunch Disrupt, Flock CEO Garrett Langley defended his company's surveillance technology despite growing privacy concerns, arguing that its crime-fighting benefits outweigh the risks of abuse.",
-        "body": "Flock’s founder and CEO Garrett Langley doesn’t think the risks of introducing surveillance technology at scale outweigh the rewards.\n\n“If we want to live in a society where, if you commit a crime, you have a higher probability of being held accountable, we shouldn’t pause progress,” Langley said, speaking on stage during a panel at TechCrunch Disrupt 2026 in San Francisco on Wednesday.\n\nDuring the interview, the controversial founder of the surveillance maker of license plate cameras and other recording devices deflected hard questions about the criticism Flock now faces — which has since led to cancelled contracts and even layoffs . Instead, Langley tended to respond to questions with anecdotes from conversations with police chiefs and city leaders across the United States, and tales of the supposed numerous crimes Flock has solved, rather than offer tangible solutions to people’s concerns.\n\nIn doing so, Langley positioned Flock as an advance in technology that was somewhat inevitable. He stressed that if people wanted to live in a better society — that is, one with reduced crime — they would have to offer up their privacy in return.\n\nA similar argument about the trade-offs and rewards could be made for AI, which is marketed to the public as vastly improving our lives, automating tedious tasks, and making things more convenient. The flip side is the cost of sharing everything about ourselves with the makers of the AI agents themselves — and the possibility of the destruction of humanity , according to some.\n\nIt’s no surprise that the AI backlash shares some overlap with Flock. Much like AI, Flock is a technology that some feel has been forced upon the public without their consent.\n\nFor Langley, this is just the nature of progress, he explained.\n\n“Technology, at its core, in its definition, is just doing things better. It’s not doing things perfect,” he said. “Driverless cars, I think, is a fair analogy. Driverless cars, I think, are definitively safer than human drivers. And when there’s one accident, I don’t think the answer is to shut down driverless cars. The answer is to say, ‘Hey, let’s talk about how we prevent more accidents in the future’.”\n\nBut driverless car makers don’t shrug their shoulders at crashes; the companies pause their fleets and apply fixes. Flock, meanwhile, seems to wrestle as a company with understanding when it’s the company’s responsibility to intervene. From Langley’s answers, it’s clear that the ethics around how Flock should be used is a decision he would much rather leave up to others.\n\n“We don’t want to tell city leaders how to do their job,” he noted. “We will provide recommendations, we’ll provide defaults, but we’re going to minimize the number of mandated features, functions, and policies,” he said.\n\nAmong the many rebuttals to his critics that Langley raised during the interview was the idea that misinformation about Flock had led to some of its customers’ cancellations. For instance, he referenced a time when a customer ended their contract because they believed the devices performed facial recognition. While Flock cameras do not have facial recognition, they do have the ability to detect and track people .\n\nLangley also spent a fair amount of time admonishing those who think his technology, or any technology, should be perfect, attributing the quote to some unnamed community leader.\n\n“He was describing that, too often as a society we judge technology not on how it compares to the past, but how it compares to perfect. And Flock is far from perfect; I’m far from perfect — I’ve made plenty of mistakes,” Langley said.\n\nAnother area of pushback was in positioning Flock as a more effective form of policing, and one that allowed police departments to do more with reduced staff.\n\n“If you look at where policing has gone over the last decade, but particularly post-COVID, law enforcement employment is declining rapidly. I think about a place like San Francisco, and there’s hundreds of open positions. They will probably never be filled,” he said, positioning Flock as the tech that would fill in those gaps.\n\nBut pressed about abuse and the invasiveness of his company’s surveillance technology, Langley had no substantive answers.\n\n“I think if the idea is to curb abuse, I think there’s a way to do that that doesn’t disrupt the legal system, that doesn’t disrupt the efficacy and flow of a police department,” Langley said, without spelling out what those ideas were.\n\nFor Langley, those seem to be matters of secondary importance, because his belief in Flock as a public good is so strong.\n\n“I think one of the unfortunate consequences of building a consequential company is this is the price you pay, and I think it’s worth it because there’s millions and millions of people who have a better life today because [of] Flock,” he said. “And clearly we’ve made our fair share of mistakes, and there’s some folks who disagree with what we do, but it’s worth it because one day they might be a victim,” Langley added."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-a76effb9648b03f7",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/news/1011654/mckinsey-ai-client-interview",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-14T22:53:31.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "McKinsey is making job applicants spar with a fake AI client",
-        "summary": "Consulting firm McKinsey & Company is going to ask some entry-level candidates to have a 10-minute conversation with an AI simulation of a client as part of the interview process, according to The Wall Street Journal. The AI simulation \"aims to reflect 80% of the scenarios McKinsey consultants might encounter in their day-to-day work,\" the […]",
-        "body": "Consulting firm McKinsey & Company is going to ask some entry-level candidates to have a 10-minute conversation with an AI simulation of a client as part of the interview process, according to The Wall Street Journal .\n\nThe AI simulation \"aims to reflect 80% of the scenarios McKinsey consultants might encounter in their day-to-day work,\" the WSJ says, and it isn't designed to \"mimic an unhinged client.\" The AI won't score the candidates - humans will be in the room to assess the candidates and see how well they deal with the simulated situations.\n\nThe McKinsey tool will be in testing for undergrads seeking business-analyst jobs in \"some\" offi …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-1011c22f63041673",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/14/cedardb-wants-one-database-to-handle-both-transactions-and-analytics-as-ai-agents-raise-the-stakes/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-14T22:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "CedarDB wants one database to handle both transactions and analytics, as AI agents raise the stakes",
-        "summary": "Databases have traditionally been designed either for analytical data or for operational data. But database engine CedarDB supports both, and its approach has gained relevance with the rise of agentic AI.",
-        "body": "Databases have traditionally been built for one of two jobs. Analytical databases help businesses spot trends and answer questions, while operational databases store the day-to-day records of transactions, like orders and payments. But the Munich-based database engine CedarDB supports both, and its approach has gained relevance with the rise of agentic AI, its co-founder and CEO Moritz Sichert told TechCrunch.\n\nCedarDB has been in the making for the last decade, but its current momentum stems from enterprise companies whose existing data stacks may have been well suited to storing years of transactions, yet less suited to quickly answering analytical questions asked in natural language about that data.\n\nCedarDB’s questioning of the divide between analytical and operational queries is a by-product of its focus on efficiency. The company is a Technical University of Munich spinout based on Umbra , a research project that was built from scratch to beat legacy database engines at processing speed by making the most of modern hardware.\n\nWith five Umbra researchers as its co-founders, CedarDB kept that approach, promising faster performance without requiring more CPUs or processing power and memory — and requiring few changes from customers. In particular, its team made sure CedarDB was compatible with PostgreSQL , an open source database system.\n\nAccording to Sichert, this compatibility with the popular database helps keep switching costs low, since users don’t need to rebuild their apps. It also has an added advantage: CedarDB follows the logic LLMs are most familiar with as a result of their training.\n\nThat decision is one of many choices that proved lucky in retrospect, Sichert said. But it wasn’t all luck. In a blog post , co-founder Christian Winter detailed key priorities the team set after leaving academia, “such as reliability, fault tolerance and compatibility with popular tools.”\n\nNot all of the answers were obvious. The team strongly debated whether it should launch a cloud offering right away. In the end, it launched CedarDB Enterprise as an on-premise offering alongside its free version, CedarDB Community Edition, both announced in May of last year at the same time as it announced a €5.3 million seed funding round (approximately $6 million).\n\nThe cloud offering was only delayed, though, not abandoned. After conducting beta testing with users who had signed up for its waitlist, the company on Wednesday announced limited availability of CedarDB Cloud onstage at TechCrunch Disrupt , where it’s competing with 20 other startups vying to win TechCrunch’s prestigious Startup Battlefield competition.\n\nA fully managed, cloud-hosted version will likely help CedarDB expand its user base beyond large enterprises. It will also make it better prepared to compete with the likes of Databricks, a major data company that seems to have reached the same conclusion as the German startup.\n\nAt its Data + AI Summit in June, the American company cited “the agentic era” as the reason why it was launching LTAP , a new data architecture aiming to “[unify] transactions, analytics, streaming, and operational data on a single copy of storage in the lake.”\n\nIt is too early to tell how disruptive this might be, but Sichert interprets Databricks’ move as another sign that there is demand for what CedarDB does. The startup plans to serve its first cloud users with its current team of 14 people, but Sichert expects it will need a larger team once it gets more traction. “And this is where we would raise our next round.”\n\nPictured from left to right: CedarDB founders Moritz Sichert, Lukas Vogel, Philipp Fent, Dominik Durner, and Christian Winter."
       }
     },
     "media": null
@@ -118,153 +312,6 @@
     "media": null
   },
   {
-    "id": "engadget-166cff30e469d6f0",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2287111/iowa-nebraska-and-six-other-states-are-suing-openai-for-endangering-children/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-14T21:23:27.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Iowa, Nebraska and six other states are suing OpenAI for endangering children",
-        "summary": "The lawsuits cover everything from the design of ChatGPT to the company's recent issues with rogue agents.",
-        "body": "The lawsuits cover everything from the design of ChatGPT to the company's recent issues with rogue agents.\n\nIn a coordinated effort, eight states have filed lawsuits against OpenAI alleging the company has violated state-level consumer protection laws and endangered children. As Reuters first reported , Attorneys General from Iowa, Nebraska, Kansas, West Virginia, Arkansas, Arizona, Idaho and Montana each filed in their respective state courts, but with the shared goals of changing how OpenAI develops its models and advertises their capabilities, and forcing the company to pay for the harm it's allegedly caused.\n\nThe lawsuits claim OpenAI is misleading customers about the safety of its AI products, not just in their capacity to provide incorrect information or potentially enable users to harm themselves and others, but also because AI agents themselves are capable of breaking the law. For example, both Iowa and Nebraska cite OpenAI's now multiple instances of rogue agent behavior, including the Hugging Face hack . They also point to instances of ChatGPT allegedly enabling a teen's death by suicide and the chatbot providing incorrect medical information that led to a user's overdose , incidents that have also led to separate wrongful death suits against the company. Some states also take issue with OpenAI retaining data from underage users.\n\nEngadget has asked OpenAI to comment on the state lawsuits. We'll update this article if we hear back.\n\nThe desired remedies for OpenAI's behavior vary from state to state due to the patchwork nature of consumer protection and child protection laws in the US. Outside of financial penalties, the states want OpenAI to clearly disclose the risks of its products, stop practices the states consider deceptive and comply with existing laws. Some states, like Arkansas , are also asking the court to halt \"testing of advanced AI models until adequate safeguards are implemented.\"\n\nOpenAI has rolled out a series of parental controls and child protection features to try to address some of the most immediate risks posed by its chatbot. It also backed the Kids Online Safety Act , a bill that, if made law, could introduce several mandatory design changes to the company's products. The company's efforts to address the potential for its AI to break rules and \"escape containment\" have been harder to pin down, though. OpenAI announced it would slow the development of its frontier models in August to ensure their safety and the company signed on to a voluntary safety pact with other AI companies organized by the White House in September. It's not clear if either of these changes have actually made the company's AI development process safer."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-20e9955d3f7dcf20",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/14/daily-october-14-2026/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-14T21:17:25.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "android",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "9to5Mac Daily: October 14, 2026 – Apple Home Collection, iOS 27.2 beta 4",
-        "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily . more…",
-        "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily .\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-1ee27092313b073e",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/14/apple-invites-update-makes-it-easier-to-manage-guests-and-track-rsvps/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-14T21:15:32.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple Invites update makes it easier to manage guests and track RSVPs",
-        "summary": "The Apple Invites app got updated yet again today, with new features including RSVP improvements and a larger Home Screen widget. Here are the details. more…",
-        "body": "The Apple Invites app got updated yet again today, with new features including RSVP improvements and a larger Home Screen widget. Here are the details.\n\nJust two weeks after gaining full-resolution photo sharing and new Image Playground capabilities, the Apple Invites app got updated yet again today, with improvements to guest management and Home Screen widgets.\n\nWith today’s update, the app can now leverage the new extra-large widget introduced with iOS 27 , and makes it easier to track RSVPs.\n\nHere’s Apple’s the full release notes for Apple Invites v 1.12.1:\n\nTo learn more about Apple Invites, check it out on the App Store ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-6f679347627d6b02",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1011500/openai-state-lawsuits-chatgpt-safety",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-14T21:11:28.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Eight states sue OpenAI, saying ChatGPT isn’t safe for kids",
-        "summary": "OpenAI is facing a new wave of lawsuits from eight US states that accuse the company of harming children and misleading customers about the safety of ChatGPT, as reported earlier by Reuters. The lawsuits, filed separately by Iowa, Kansas, Nebraska, West Virginia, Arkansas, Arizona, Idaho, and Montana, allege OpenAI unlawfully put profits over safety when […]",
-        "body": "OpenAI is facing a new wave of lawsuits from eight US states that accuse the company of harming children and misleading customers about the safety of ChatGPT, as reported earlier by Reuters . The lawsuits, filed separately by Iowa, Kansas, Nebraska, West Virginia, Arkansas, Arizona, Idaho, and Montana, allege OpenAI unlawfully put profits over safety when developing ChatGPT.\n\nThe string of complaints claims that OpenAI violated local consumer protection laws by failing to warn customers about the dangers of ChatGPT, citing several lawsuits filed by the family members of teens and adults that allege the AI chatbot played a role in their loved …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-bf7fa30fd930b111",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/14/apple-showcases-ipad-pro-and-iphone-18-pro-maxs-role-in-landmark-fashion-show/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-14T21:02:09.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple showcases iPad Pro and iPhone 18 Pro Max’s role in ‘landmark fashion show’",
-        "summary": "Apple today shared a behind-the-scenes look at “From Earth to Sky,” a fashion show in Turkey that was designed with an iPad Pro and filmed using an iPhone 18 Pro Max. Here are the details. more…",
-        "body": "Apple today shared a behind-the-scenes look at “From Earth to Sky,” a fashion show in Turkey that was designed with an iPad Pro and filmed using an iPhone 18 Pro Max. Here are the details.\n\nFrom time to time, Apple’s Newsroom highlights interesting uses of the company’s products in projects that help illustrate the practical applications of their more advanced and professional hardware and software features.\n\nToday, Apple shared a fascinating look at “From Earth to Sky,” a fashion show created by German-born designer Bünyamin Aydın to celebrate the 15th anniversary of Turkish fashion brand Les Benjamins.\n\nAydın’s creative process relies heavily on the iPad Pro and the Apple Pencil Pro, paired with apps such as Freeform and Procreate .\n\nAydın’s creative process seldom takes place behind a desk, so he appreciates the flexibility iPad Pro offers with its thin, light form factor and battery life that can last him up to two days. “It’s the ultimate workstation on the go,” Aydın says. “That gives me freedom.”\n\nFor this specific project, Aydın says he used Freeform to organize photographs, fabric references, and early designs into mood boards that could be shared with his team, while Procreate played a central role in designing the three custom-built hot-air balloons featured in the show.\n\nAs for where the new iPhone 18 Pro Max came in, French filmmaker Neels Castillon used the device to capture the fashion show, including footage shot with custom-built drones carrying two iPhones each.\n\nAs feeds from the whirling drones come into Castillon’s production control center, synchronizing them begins right there on location. He reviews footage and makes selections on MacBook Pro with M4 Max; its nano-texture display helps reduce glare from the sun overhead.\n\nWhile the post is obviously intended to help promote the technical capabilities of Apple’s current product line-up, it also offers a really interesting look at a creative project from a world that very few of us have contact with.\n\nApple says its @apple Instagram account will begin showcasing “From Earth to Sky” starting today, but you can also check out a behind-the-scenes video, photos, and more details about the project here ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-b96448dd68516182",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2287042/fitbit-edge-vs-air-differences-compared/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-14T20:13:18.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Fitbit Edge vs Fitbit Air: The differences beyond a screen",
-        "summary": "Google's latest wearable seems like a Fitbit Air with a screen, but the two actually have less in common than you might think.",
-        "body": "Google's latest wearable seems like a Fitbit Air with a screen, but the two actually have less in common than you might think.\n\nGoogle cares about fitness trackers again. The company has continually iterated on the Pixel Watch since it launched in 2022 and even released the kid-focused Fitbit Ace LTE in 2024, but you wouldn't be wrong to think the company had all but given up on releasing an affordable wearable under the Fitbit name. That changed in May with the release of the $99 Fitbit Air , an affordable Whoop competitor without a screen. It changed again in October with the introduction of the $179 Fitbit Edge , a new half-step between the company's most affordable tracker and the Pixel Watch 5 . Both devices offer AI-powered features not available on Fitbit's older wearables, and more importantly, do so without costing an arm and a leg or locking you into the Android ecosystem.\n\nNow, you do have to pay for Google Health Premium if you want to use them to their fullest, but the Edge and the Air otherwise seem like great options if you're not interested in spending hundreds of dollars on a smartwatch. Just because they support some AI tools doesn't mean they're completely interchangeable, though. The Fitbit Edge features a screen, and some subtler differences that might make it worth picking over the Fitbit Air depending on what you're looking for.\n\nWhile both are worn on a wrist, the Edge and Air are distinctly different form factors. Nearly all of your interactions with the Air happen through the Google Health app, where you can view your data and adjust its settings. The only time you'll spend touching the Air — a 1.37 x 0.66 x 0.32-inch sensor puck without its band — is to take it on and off to charge or to change its bands. The Edge enables more interaction, mostly thanks to its 1.34-inch oval-shaped AMOLED touchscreen but also a new mechanical side button. At 1.54 x 1.01 x 0.46 inches, the Edge is also larger than the Air, and just more visible, especially if you use the always-on functionality of its screen.\n\nBeyond those surface-level distinctions, the two devices also feature slightly different sensors. They both have optical heart rate sensors, but only the Edge has the electrical sensors necessary to support ECG readings. The Edge also includes an altimeter for calculating elevation and an ambient light sensor, likely to make sure its screen is calibrated to the right brightness.\n\nGoogle says both the Edge and the Air are supposed to get seven days of battery life, though that math changes slightly thanks to the Edge's display. It can last seven days if its screen isn't in always-on mode. When the always-on feature is enabled (making the Edge more like a modern smartwatch), it's only rated for around two days. To make up for the difference, the company says the Edge can charge to 100 percent in 90 minutes, and when it's on low battery, a 15-minute charge can give it a day of battery life.\n\nBattery life might be an area where the Edge falls short, but both it and the Air are equally water and dust resistant with IP68 ratings and protection up to 5ATM.\n\nWhen Google announced the Edge, it shared that the Health Guardian features it introduced on the Pixel Watch 5, covering things like heart health and insulin trends, would also be coming to the Edge and the Air . Because those features largely aren't dependent on specific sensors and instead rely on the corpus of data Google has collected, it seems plausible that additional AI features could follow a similar path.\n\nWhen it comes to what each individual wearable is capable of, though, things get a bit more complicated. Both the Edge and the Air offer things like activity tracking, a daily readiness score, cardio load insights, step tracking, continuous heart rate monitoring, irregular heart rhythm notifications, sleep tracking and a resilience score that approximates stress. The screen and additional sensors on the Edge enable extras, too, like ECG readings, the ability to track the number of floors you've climbed and live workout metrics on the built-in screen.\n\nBecause the Edge, again, has a display and runs Google's lightweight Fitbit OS, it can also show more of your health data on-device, receive notifications from your phone and even run a stripped-down version of Google Maps. The Air can't offer the same without a screen, and depending on your perspective on wearables, you might not want it to.\n\nOne of the draws of the Fitbit Air is it's less in your face: just sensors and a companion app when you want to look at the data you collect. By design, the Fitbit Edge is far more obvious. It's not a mini-smartphone in the way a Pixel Watch is, but it could be harder to ignore, if that's something that matters to you."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "ars-technica-36cf658cf1c7b6fb",
     "type": "news",
     "sourceId": "ars-technica",
@@ -284,54 +331,6 @@
         "title": "Software development and rules stability: Prototype racing in 2030",
         "summary": "With the end of IMSA’s 2026 season, we have thoughts about the future of the sport.",
         "body": "The rising tide that has been the Drive to Survive effect has lifted more boats in motorsport than simply Formula 1’s. Sportscar racing is enjoying its own surge in popularity internationally at races like Le Mans in France, but also in North America in IMSA’s WeatherTech Sportscar Championship. For one thing, multi-hour, multi-class racing lends itself better to the age of streaming and second screens than it did linear broadcast TV, and fans are taking advantage of that: IMSA’s audience grew by more than a third domestically and almost a quarter internationally last year.\n\nHaving some of the coolest-looking cars racing today certainly helps, whether that’s the (mostly) hybrid prototypes or the GTs, racing versions of road-going cars from Porsche, Ferrari, and others. And it definitely helps that fan access at the races is virtually unmatched, with open paddocks and grid walks that now see huge crowds get up close to the cars just before the start of each race.\n\n“I think we're just scratching the surface,” said IMSA President John Doonan. “I think besides the people that are here on the ground, the people watching, people engaging with us on social media, I'm seeing the passion come out more. Just on the grid walk, these fans coming up and being so excited to be here.” The series has certainly been making an effort, among other things getting local high school students exposed to the industry and starting a partnership to train more mechanics with ASE.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-8a81ac34c5de66df",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1011311/the-ai-race-is-back-on",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-14T19:06:03.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The AI race is back on",
-        "summary": "Last week, Anthropic and OpenAI looked like they had the AI race to themselves, pulling ahead with increasingly powerful models that left their rivals in the dust. Google seemed hopelessly far behind, while Meta, despite spending billions to revive its floundering AI ambitions, had yet to establish itself as a serious contender. Even the latest […]",
-        "body": "Last week, Anthropic and OpenAI looked like they had the AI race to themselves, pulling ahead with increasingly powerful models that left their rivals in the dust. Google seemed hopelessly far behind, while Meta, despite spending billions to revive its floundering AI ambitions , had yet to establish itself as a serious contender. Even the latest models coming out of China , impressive as they were, appeared to be playing catch-up.\n\nThen, in the space of a few days, everything changed. Google and Meta both unveiled frontier models they claim can go toe to toe with the best from OpenAI and Anthropic. Suddenly, the race is back on - and it's anyo …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-55ba2f3af5948ce2",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2286898/deezer-will-let-listeners-completely-filter-out-ai-music/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-14T18:45:06.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Deezer will let listeners completely filter out AI music",
-        "summary": "Good riddance.",
-        "body": "It'll be available by the end of the year.\n\nWhat are we gonna do about the deluge of AI music slopping up all of our streaming platforms? Deezer has an idea. It's adding a toggle to filter out AI-generated tracks. This simple on/off switch will be available on the app by the end of the year.\n\n\"We've seen a clear user demand for the ability to filter out AI-generated music,\" said CEO Alexis Lanternier. \"We are now giving everyone the option to remove this content completely from their streaming experience on Deezer, and focus only on human creators and creations, if they wish.\"\n\nDo you want to avoid fully AI-generated music completely in your streaming experience? Today, we're announcing a new toggle for music fans who want to do just that. https://t.co/XjhljXFJPb #Deezer @Deezer\n\n— Deezer News (@DeezerNews) October 13, 2026\n\nI have a feeling many people most definitely wish to focus only on human creators. I know I do. Deezer conducted its own study that suggested nearly half of all music streaming users would like to see AI-generated music completely gone from their feeds. NPR recently reported on a study that indicated that listeners have soured on AI-generated music , and that only gets worse the more these platforms become flooded with slop.\n\nAnd, boy oh boy, have these platforms become flooded. Deezer reported last year that around 18 percent of tracks uploaded to the app were AI-generated. That number has since risen to more than 50 percent. The company says that 90,000 fully generated tracks get uploaded each day, which has added up to more than 42 million slop songs.\n\nThese \"artists\" are playing a numbers game in the hopes that one of the hundreds of tracks they upload every day will catch on in some capacity and, in turn, they'll get paid. There's also the matter of fraud. The platform has reported that up to 85 percent of all streams generated by AI-generated songs were fraudulent .\n\nDeezer is perfectly positioned for this kind of feature. It launched one of the industry's first AI music detection tools, which it has since offered to loan out to rival streaming platforms . The toggle is the natural next step here. The detection system isn't foolproof but the company says any risk of a false positive is \"very low.\"\n\nAs for these other platforms, YouTube Music just launched a label that will accompany AI-generated tracks. Spotify does something similar on AI artist pages ."
       }
     },
     "media": null

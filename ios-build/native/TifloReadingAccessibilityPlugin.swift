@@ -16,6 +16,7 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
         CAPPluginMethod(name: "registerAccessibleTargets", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "clearDocumentActions", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "showNativeActionList", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "showNativeVideoSection", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "getVoiceOverStatus", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "showNativeContextMenu", returnType: CAPPluginReturnPromise)
     ]
@@ -357,6 +358,34 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
             }
             presenter.present(sheet, animated: true) {
                 call.resolve(["presented": true])
+            }
+        }
+    }
+
+    @objc public func showNativeVideoSection(_ call: CAPPluginCall) {
+        DispatchQueue.main.async {
+            guard let presenter = self.bridge?.viewController,
+                  !self.nativePilotPresented,
+                  presenter.presentedViewController == nil else {
+                call.reject("No se puede abrir Vídeos mientras otra pantalla está abierta")
+                return
+            }
+            let videos = call.getArray("videos") as? [[String: Any]] ?? []
+            guard !videos.isEmpty && videos.count <= 600 else {
+                call.reject("El catálogo de vídeos todavía no está disponible")
+                return
+            }
+            let screen = TifloNativeVideosController(videos: videos)
+            screen.onClosed = { [weak self] in
+                self?.nativePilotPresented = false
+                self?.notifyListeners("nativeVideoClosed", data: [:])
+            }
+            self.clearInstalledActions()
+            self.nativePilotPresented = true
+            let navigation = UINavigationController(rootViewController: screen)
+            navigation.modalPresentationStyle = .fullScreen
+            presenter.present(navigation, animated: true) {
+                call.resolve(["presented": true, "count": videos.count])
             }
         }
     }

@@ -30,7 +30,7 @@ test('native list routes only known current document actions to existing JS hand
   assert.match(library, /nativePilotItemIds\.has\(id\)/);
   assert.match(library, /nativeActionsByDocument\.get\(id\)\?\.\(action\)/);
   assert.match(bridge, /let allowed = Set\(\["open", "details", "rename", "delete"/);
-  assert.match(nativeList, /action\.id == "open"/);
+  assert.match(nativeList, /\$0\.id == "open"/);
   assert.match(bridge, /nativeListClosed/);
 });
 

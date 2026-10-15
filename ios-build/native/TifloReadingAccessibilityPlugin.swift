@@ -15,7 +15,9 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
         CAPPluginMethod(name: "registerLibraryTitles", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "registerAccessibleTargets", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "clearDocumentActions", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "showNativeActionList", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "showNativeActionList", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "getVoiceOverStatus", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "showNativeContextMenu", returnType: CAPPluginReturnPromise)
     ]
 
     private var pendingPicker: CAPPluginCall?
@@ -235,12 +237,17 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
             onFailure?("Another native screen is already open")
             return
         }
-        guard !rawItems.isEmpty, rawItems.count <= 30 else {
-            onFailure?("Provide between 1 and 30 list items")
+        guard !rawItems.isEmpty, rawItems.count <= 200 else {
+            onFailure?("Provide between 1 and 200 list items")
             return
         }
         var seen = Set<String>()
-        let allowed = Set(["open", "continue", "translate", "queue", "info", "move", "export", "rename", "delete"])
+        let allowed = Set([
+            "open", "continue", "read", "translate", "queue", "info", "move",
+            "export", "rename", "delete", "play", "youtube", "description",
+            "download", "share", "favorite", "options", "copy", "original",
+            "readmore", "mark", "remove", "pause", "listen"
+        ])
         let entries: [TifloNativeListItem] = rawItems.compactMap { raw in
             guard let id = raw["id"] as? String, !id.isEmpty,
                   id.count <= 256, !seen.contains(id),
@@ -248,7 +255,7 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
                   !label.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
                   label.count <= 500 else { return nil }
             seen.insert(id)
-            let actions = (raw["actions"] as? [[String: Any]] ?? []).prefix(10).compactMap { entry -> TifloNativeListAction? in
+            let actions = (raw["actions"] as? [[String: Any]] ?? []).prefix(12).compactMap { entry -> TifloNativeListAction? in
                 guard let key = entry["id"] as? String, allowed.contains(key),
                       let title = entry["label"] as? String,
                       !title.isEmpty, title.count <= 100 else { return nil }
@@ -288,6 +295,68 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
         navigation.modalPresentationStyle = .fullScreen
         presenter.present(navigation, animated: true) {
             onPresented?(entries.count)
+        }
+    }
+
+    // Read-only state query; unlike registerAccessibleTargets this does not
+    // replace another screen's current accessibility action registrations.
+    @objc public func getVoiceOverStatus(_ call: CAPPluginCall) {
+        DispatchQueue.main.async {
+            call.resolve(["enabled": UIAccessibility.isVoiceOverRunning])
+        }
+    }
+
+    // Long press on a web-backed title opens a system action sheet immediately.
+    // The same item/action identifier is used by UIKit rotor custom actions.
+    @objc public func showNativeContextMenu(_ call: CAPPluginCall) {
+        DispatchQueue.main.async {
+            guard let presenter = self.bridge?.viewController,
+                  presenter.presentedViewController == nil,
+                  let item = call.getObject("item"),
+                  let itemId = item["id"] as? String, !itemId.isEmpty, itemId.count <= 256,
+                  let label = item["label"] as? String, !label.isEmpty, label.count <= 500,
+                  let definitions = item["actions"] as? [[String: Any]],
+                  !definitions.isEmpty, definitions.count <= 12 else {
+                call.reject("Invalid item or another native screen is open")
+                return
+            }
+            let allowed = Set([
+                "open", "continue", "read", "translate", "queue", "info", "move",
+                "export", "rename", "delete", "play", "youtube", "description",
+                "download", "share", "favorite", "options", "copy", "original",
+                "readmore", "mark", "remove", "pause", "listen"
+            ])
+            let sheet = UIAlertController(title: label, message: nil, preferredStyle: .actionSheet)
+            var seen = Set<String>()
+            for definition in definitions {
+                guard let actionId = definition["id"] as? String, allowed.contains(actionId),
+                      seen.insert(actionId).inserted,
+                      let title = definition["label"] as? String,
+                      !title.isEmpty, title.count <= 100 else {
+                    call.reject("Invalid or duplicated context action")
+                    return
+                }
+                sheet.addAction(UIAlertAction(
+                    title: title,
+                    style: actionId == "delete" ? .destructive : .default
+                ) { [weak self] _ in
+                    self?.notifyListeners("nativeListAction", data: [
+                        "itemId": itemId, "action": actionId
+                    ])
+                })
+            }
+            sheet.addAction(UIAlertAction(
+                title: call.getString("language") == "en" ? "Cancel" : "Cancelar",
+                style: .cancel
+            ))
+            if let popover = sheet.popoverPresentationController {
+                popover.sourceView = presenter.view
+                popover.sourceRect = CGRect(x: presenter.view.bounds.midX,
+                                            y: presenter.view.bounds.midY, width: 1, height: 1)
+            }
+            presenter.present(sheet, animated: true) {
+                call.resolve(["presented": true])
+            }
         }
     }
 

@@ -60,3 +60,13 @@ Prevención de interferencia del puente WKWebView mientras esté visible la list
 No migrar datos, no modificar web, Android, servicios, importar archivos, TifloLector ni funciones ya aprobadas.
 Destino EXCLUSIVO: TestFlight interno, grupo «Probadores TifloAcosta».
 Publicar solo si la compilación, firma, procesamiento de Apple y habilitación del grupo se completan. No afirmar que las acciones funcionan hasta verificarlas con VoiceOver en iPhone real.
+
+SOLICITUD DE ACTUALIZACIÓN INTERNA VOICEOVER — 15/10/2026.
+Base anterior preservada: TestFlight 400084, backup/ios-testflight-400084-2026-10-15 (71f9b0c8401123ea172a0da8f1c585216647fb87).
+PR #184 integrado en preparacion-ios: 7e6d705725e0b50bea26e9f7019e72d4f2b9f381.
+Verificación específica de compilación nativa: ejecución 38764696251 SUCCESS.
+Preflight integral de iOS: ejecución 38764709528 SUCCESS.
+Se retira el botón «Probar acciones nativas de VoiceOver» de la biblioteca. Al enfocar el título en iPhone con VoiceOver, se presenta automáticamente una lista de UIKit, con foco en el documento y acciones propias: Abrir, Leer, Traducir (abrir controles, elegir idioma), Cola, Información, Mover a carpeta, Exportar, Cambiar título y Eliminar con confirmación.
+Se incorpora en la copia iOS del lector el puente operativo para funciones de biblioteca que antes faltaba, sin cambiar la web, Android ni los datos guardados.
+No declarar terminado el fallo de gestos hasta prueba real en el iPhone; no expandir a otras secciones sin comprobarlo. Mantener la biblioteca HTML como salida alternativa.
+Envío EXCLUSIVO a grupo interno «Probadores TifloAcosta», con firma, procesado Apple VALID y asignación confirmada antes de comunicar disponibilidad.

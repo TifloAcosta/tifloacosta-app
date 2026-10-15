@@ -118,3 +118,12 @@ Fallo visual informado: Vídeos se percibe como un submenú modal ajeno a TifloA
 Corrección exclusiva iOS: Vista Vídeos integrada como controlador hijo UIKit en la app, no ventana modal. Diseño visual con tarjetas redondeadas color TifloAcosta, bordes discretos, etiquetas legibles, información visible del canal/fecha/duración/visualizaciones, un solo elemento y un flic VoiceOver por vídeo. Buscador y ordenación mantienen apariencia de la marca. Acción Volver al inicio retira correctamente la vista nativa.
 Pruebas sin firma CI 38805293277: SUCCESS; consultas YouTube y OAuth validadas. No alterar reproductor, acciones, biblioteca, sección Actualidad, almacenamiento ni Android/web. Icono TA confirmado CORRECTO por usuario; NO modificarlo.
 Publicación exclusivamente en TestFlight interno grupo «Probadores TifloAcosta». Solo declarar disponible tras firma, subida, procesamiento VALID y asignación verificada del build por Apple. Prueba visual definitiva y acciones VoiceOver requieren instalarlo en un iPhone real.
+
+SOLICITUD EXPRESA DE ACTUALIZACIÓN TESTFLIGHT — INTEGRACIÓN DEFINITIVA DE VÍDEOS, 16/10/2026.
+Solicitada por el usuario tras auditoría de IMG_0988.PNG y el comportamiento de submenú visual.
+PR #190 integrado en preparacion-ios, commit 916f15467eea66ef9965d49e171fc08f3f67bc7e.
+Respaldo reversible: backup/ios-before-videos-direct-integration-20261016 (fd120ddb9c8b80f4a5cbe80a6df5fa70b105155b).
+Prueba de PR iOS sin firma run 38811314590 SUCCESS. Prueba de rama final compilación iOS sin firma run 38811682430 SUCCESS. Servicio YouTube OAuth/acciones SUCCESS.
+Nueva ruta: desde el botón Vídeos de inicio abrir directamente UNA sección nativa accesible, sin cargar videos.html como pantalla intermedia ni mostrar barra de UINavigationController/submenú. Las tarjetas y cabecera leen los colores actuales del tema CSS TifloAcosta. Un vídeo por flic, acciones de rotor reproducir, YouTube, me gusta, suscripción, compartir, comentar y cuentas existentes. Buscador global de YouTube, ordenar y carga de diez más. Al volver, retornar al enlace del inicio sin navegar a otra pantalla.
+Si el puente nativo falla o VoiceOver está desactivado, conservar navegación HTML anterior. Las demás secciones, TifloLector, datos, app Android, web e icono TA NO se modifican.
+Enviar exclusivamente al grupo interno «Probadores TifloAcosta». No afirmar listo hasta validar Apple estado VALID y asignación al grupo de esta nueva compilación. La comprobación estética y gestual definitiva exige prueba en dispositivo.

@@ -118,16 +118,18 @@ final class TifloNativeActionListController: UITableViewController {
     private func select(itemId: String, actionId: String) {
         guard !isClosing else { return }
         isClosing = true
-        dismiss(animated: true) { [weak self] in
-            self?.onSelected?(itemId, actionId)
+        let callback = onSelected
+        dismiss(animated: true) {
+            callback?(itemId, actionId)
         }
     }
 
     @objc private func close() {
         guard !isClosing else { return }
         isClosing = true
-        dismiss(animated: true) { [weak self] in
-            self?.onClosed?()
+        let callback = onClosed
+        dismiss(animated: true) {
+            callback?()
         }
     }
 }

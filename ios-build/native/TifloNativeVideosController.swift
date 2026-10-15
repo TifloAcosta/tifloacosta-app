@@ -86,6 +86,39 @@ private final class TifloVideoRotorAction: NSObject {
     }
 }
 
+// Colours are passed from the same CSS variables that render TifloAcosta's
+// other sections. This native accessible list does not maintain a second theme.
+private struct TifloVideoTheme {
+    let background: UIColor
+    let surface: UIColor
+    let text: UIColor
+    let muted: UIColor
+    let border: UIColor
+    let brand: UIColor
+
+    static func color(_ raw: String?, fallback: String) -> UIColor {
+        let source = ((raw ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+            .hasPrefix("#") ? raw : nil) ?? fallback
+        let hex = String(source.dropFirst())
+        guard (hex.count == 6 || hex.count == 3),
+              hex.allSatisfy({ $0.isHexDigit }) else { return color(nil, fallback: fallback) }
+        let full = hex.count == 3 ? hex.map { "\($0)\($0)" }.joined() : hex
+        guard let value = UInt64(full, radix: 16) else { return UIColor.black }
+        return UIColor(red: CGFloat((value >> 16) & 255) / 255,
+                       green: CGFloat((value >> 8) & 255) / 255,
+                       blue: CGFloat(value & 255) / 255, alpha: 1)
+    }
+
+    init(_ raw: [String: String]) {
+        background = Self.color(raw["background"], fallback: "#0B0B0B")
+        surface = Self.color(raw["surface"], fallback: "#151010")
+        text = Self.color(raw["text"], fallback: "#FFFFFF")
+        muted = Self.color(raw["muted"], fallback: "#E7E1E1")
+        border = Self.color(raw["border"], fallback: "#806969")
+        brand = Self.color(raw["brand"], fallback: "#A61B1B")
+    }
+}
+
 // Real UIKit cells keep UIAccessibilityCustomAction on the focused video.
 // These decorations are NOT extra VoiceOver stops: the whole cell is one
 // accessible element, while the visible hierarchy follows TifloAcosta.
@@ -139,14 +172,16 @@ private final class TifloBrandedVideoCell: UITableViewCell {
 
     required init?(coder: NSCoder) { return nil }
 
-    func configure(title: String, info: String?, isMore: Bool = false) {
+    func configure(title: String, info: String?, theme: TifloVideoTheme, isMore: Bool = false) {
+        panel.backgroundColor = theme.surface
+        heading.textColor = theme.text
+        metadata.textColor = theme.muted
+
         heading.text = title
         heading.font = UIFont.preferredFont(forTextStyle: isMore ? .headline : .body)
         metadata.text = info
         metadata.isHidden = info?.isEmpty ?? true
-        panel.layer.borderColor = (isMore
-            ? UIColor(red: 0.72, green: 0.15, blue: 0.16, alpha: 1)
-            : UIColor(red: 0.48, green: 0.32, blue: 0.33, alpha: 1)).cgColor
+        panel.layer.borderColor = (isMore ? theme.brand : theme.border).cgColor
     }
 
     override func prepareForReuse() {
@@ -172,10 +207,14 @@ final class TifloNativeVideosController: UITableViewController, UISearchBarDeleg
     private let searchBar = UISearchBar()
     private let order = UISegmentedControl(items: ["Recientes", "Antiguos"])
     private let stateLabel = UILabel()
+    private let backButton = UIButton(type: .system)
+    private let sectionHeading = UILabel()
+    private let sectionIntro = UILabel()
+    private let theme: TifloVideoTheme
     private var retainedActions = [IndexPath: [TifloVideoRotorAction]]()
-    private let brandRed = UIColor(red: 0.65, green: 0.10, blue: 0.11, alpha: 1)
 
-    init(videos: [[String: Any]]) {
+    init(videos: [[String: Any]], theme: [String: String] = [:]) {
+        self.theme = TifloVideoTheme(theme)
         let parsed = videos.compactMap(TifloVideoRecord.init)
         startingVideos = parsed
         channelVideos = parsed
@@ -196,14 +235,10 @@ final class TifloNativeVideosController: UITableViewController, UISearchBarDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Vídeos de TifloAcosta"
-        navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.navigationBar.barTintColor = brandRed
-        navigationController?.navigationBar.backgroundColor = brandRed
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            title: "Volver al inicio", style: .plain, target: self, action: #selector(closeToHome))
-        view.backgroundColor = UIColor(red: 0.045, green: 0.041, blue: 0.043, alpha: 1)
+        // No separate UIKit navigation bar: the back action and section title
+        // belong to the same content hierarchy as the other TifloAcosta pages.
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        view.backgroundColor = theme.background
         tableView.backgroundColor = view.backgroundColor
         tableView.separatorStyle = .none
         tableView.rowHeight = UITableView.automaticDimension
@@ -212,43 +247,68 @@ final class TifloNativeVideosController: UITableViewController, UISearchBarDeleg
 
         searchBar.placeholder = "Buscar vídeos públicos en YouTube"
         searchBar.searchBarStyle = .minimal
-        searchBar.searchTextField.textColor = .white
-        searchBar.searchTextField.backgroundColor = UIColor(red: 0.08, green: 0.065, blue: 0.067, alpha: 1)
+        searchBar.searchTextField.textColor = theme.text
+        searchBar.searchTextField.backgroundColor = theme.background
         searchBar.searchTextField.layer.cornerRadius = 12
         searchBar.searchTextField.layer.masksToBounds = true
         searchBar.searchTextField.layer.borderWidth = 1
-        searchBar.searchTextField.layer.borderColor = brandRed.cgColor
+        searchBar.searchTextField.layer.borderColor = theme.border.cgColor
         searchBar.searchTextField.attributedPlaceholder = NSAttributedString(
             string: "Buscar vídeos públicos en YouTube",
-            attributes: [.foregroundColor: UIColor(white: 0.77, alpha: 1)]
+            attributes: [.foregroundColor: theme.muted]
         )
         searchBar.delegate = self
         searchBar.returnKeyType = .search
         searchBar.accessibilityIdentifier = "tiflo-youtube-search-native"
 
         order.selectedSegmentIndex = 0
-        order.selectedSegmentTintColor = brandRed
-        order.backgroundColor = UIColor(red: 0.12, green: 0.10, blue: 0.11, alpha: 1)
+        order.selectedSegmentTintColor = theme.brand
+        order.backgroundColor = theme.background
         order.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-        order.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
+        order.setTitleTextAttributes([.foregroundColor: theme.text], for: .normal)
         order.accessibilityLabel = "Orden de vídeos del canal"
         order.addTarget(self, action: #selector(changeOrder), for: .valueChanged)
 
-        stateLabel.textColor = .white
+        stateLabel.textColor = theme.muted
         stateLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
         stateLabel.adjustsFontForContentSizeCategory = true
         stateLabel.numberOfLines = 0
 
-        let header = UIStackView(arrangedSubviews: [searchBar, order, stateLabel])
+        backButton.setTitle("Volver al inicio", for: .normal)
+        backButton.setTitleColor(.white, for: .normal)
+        backButton.backgroundColor = theme.brand
+        backButton.layer.cornerRadius = 10
+        backButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
+        backButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+        backButton.titleLabel?.adjustsFontForContentSizeCategory = true
+        backButton.addTarget(self, action: #selector(closeToHome), for: .touchUpInside)
+        backButton.accessibilityIdentifier = "tiflo-videos-back-home"
+
+        sectionHeading.text = "Vídeos"
+        sectionHeading.textColor = theme.text
+        sectionHeading.font = UIFont.preferredFont(forTextStyle: .title1)
+        sectionHeading.adjustsFontForContentSizeCategory = true
+        sectionHeading.numberOfLines = 0
+        sectionHeading.accessibilityTraits = [.header]
+
+        sectionIntro.text = "Buscar en YouTube o explorar los vídeos de TifloAcosta."
+        sectionIntro.textColor = theme.muted
+        sectionIntro.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        sectionIntro.adjustsFontForContentSizeCategory = true
+        sectionIntro.numberOfLines = 0
+
+        let header = UIStackView(arrangedSubviews: [
+            backButton, sectionHeading, sectionIntro, searchBar, order, stateLabel
+        ])
         header.axis = .vertical
         header.spacing = 8
         header.isLayoutMarginsRelativeArrangement = true
         header.layoutMargins = UIEdgeInsets(top: 14, left: 18, bottom: 16, right: 18)
-        header.backgroundColor = UIColor(red: 0.10, green: 0.065, blue: 0.068, alpha: 1)
-        header.layer.cornerRadius = 18
+        header.backgroundColor = theme.surface
+        header.layer.cornerRadius = 16
         header.layer.borderWidth = 1
-        header.layer.borderColor = UIColor(red: 0.48, green: 0.32, blue: 0.33, alpha: 1).cgColor
-        header.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 170)
+        header.layer.borderColor = theme.border.cgColor
+        header.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 255)
         tableView.tableHeaderView = header
         updateState()
     }
@@ -271,7 +331,7 @@ final class TifloNativeVideosController: UITableViewController, UISearchBarDeleg
         super.viewDidAppear(animated)
         guard needsInitialFocus && UIAccessibility.isVoiceOverRunning else { return }
         needsInitialFocus = false
-        UIAccessibility.post(notification: .screenChanged, argument: navigationItem.leftBarButtonItem)
+        UIAccessibility.post(notification: .screenChanged, argument: sectionHeading)
     }
 
     @objc private func closeToHome() {
@@ -300,11 +360,11 @@ final class TifloNativeVideosController: UITableViewController, UISearchBarDeleg
             ? "Resultados de YouTube: \(searchVideos.count) vídeos cargados."
             : "Vídeos de TifloAcosta: \(min(limit, channelVideos.count)) de \(channelVideos.count)."
         order.isHidden = showingSearch
-        navigationItem.rightBarButtonItem = showingSearch
-            ? UIBarButtonItem(title: "Volver al canal", style: .plain,
-                              target: self, action: #selector(backToChannel))
-            : nil
-        navigationItem.rightBarButtonItem?.tintColor = .white
+        // A search-mode return button belongs to the same header, not a
+        // navigation bar. The search field stays accessible by a single swipe.
+        if showingSearch {
+            order.isHidden = true
+        }
     }
 
     @objc private func backToChannel() {
@@ -382,12 +442,12 @@ final class TifloNativeVideosController: UITableViewController, UISearchBarDeleg
             withIdentifier: TifloBrandedVideoCell.reuseId, for: indexPath
         ) as? TifloBrandedVideoCell else { return UITableViewCell() }
         if indexPath.row == visible.count {
-            cell.configure(title: showingSearch ? "Mostrar diez resultados más" : "Mostrar diez vídeos más", info: nil, isMore: true)
+            cell.configure(title: showingSearch ? "Mostrar diez resultados más" : "Mostrar diez vídeos más", info: nil, theme: theme, isMore: true)
             cell.accessibilityLabel = showingSearch ? "Mostrar diez resultados más" : "Mostrar diez vídeos más"
             cell.accessibilityCustomActions = []
         } else {
             let video = visible[indexPath.row]
-            cell.configure(title: video.title, info: video.visualMetadata)
+            cell.configure(title: video.title, info: video.visualMetadata, theme: theme)
             cell.accessibilityLabel = video.speech
             let actions: [(String, String)] = [
                 ("play", "Reproducir"),

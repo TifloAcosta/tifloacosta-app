@@ -100,3 +100,13 @@ Nueva pantalla Vídeos: UN SOLO buscador global de YouTube; diez títulos accesi
 Reproductor nativo: pausa/reproducción, ±30 segundos, posición ajustable ±10 % en VoiceOver, compartir, detalles, conexión/desconexión de YouTube y acciones sociales reversibles mediante API autorizada. Acciones contextuales desde títulos sin duplicar botones visibles.
 No cambiar Android, página pública, datos locales, TifloLector ni restantes secciones; TestFlight SOLO grupo interno «Probadores TifloAcosta».
 Comprobar firma, procesamiento VALID de Apple y disponibilidad real en TestFlight; no confirmar instalación hasta que dichos pasos se completen.
+
+SOLICITUD EXPRESA — CORRECCIÓN UNIFICADA DE VÍDEOS E ICONO, 15/10/2026.
+Informe basado en Drive IMG_0985.PNG (lista UIKit negra que tapa la app) e IMG_0986.PNG (pantalla web TifloAcosta con estilo pero sin rotor por título).
+PR #188 integrado con la corrección 1a84d9fb02b5ac9f2c92b864a900e26c889a6840.
+Respaldo intacto: backup/ios-before-video-unification-20261015 (5245822e0aa15355b45476228e0a578c9ebcf0b6).
+La página Vídeos de iOS con VoiceOver abre UNA SOLA pantalla UIKit con identidad cromática TifloAcosta, buscador público global YouTube, orden reciente/antiguo, diez vídeos visibles desde la entrada, añadir diez más, título y metadatos anunciados conjuntamente, rotor real en cada fila: Reproducir, Abrir YouTube, Me gusta, Suscripción, Compartir y Comentar.
+Las opciones de suscripción y valoración consultan el estado de la cuenta y presentan la acción concreta para confirmar; solo entonces puede solicitarse OAuth Google. Reproducción y búsqueda no exigen iniciar sesión. Al cerrar la sección regresar a inicio, no a la página de Vídeos oculta. Al cerrar el reproductor conservar el foco del título.
+Icono: se conserva imagen de origen, se quita marco interior duplicado, se amplía TA con proporción y fondo azul RGB uniforme. Comprobación real macOS/icono 38800025452 SUCCESS y Xcode iOS sin firma 38800309261 SUCCESS; las pruebas de integración de cada función son obligatorias antes de firma.
+No modificar Android, web, datos, TifloLector ni otras secciones.
+Destino EXCLUSIVO: TestFlight interno «Probadores TifloAcosta». Confirmar solo si Apple procesa VALID y asigna esta compilación al grupo.

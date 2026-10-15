@@ -235,12 +235,17 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
             onFailure?("Another native screen is already open")
             return
         }
-        guard !rawItems.isEmpty, rawItems.count <= 30 else {
-            onFailure?("Provide between 1 and 30 list items")
+        guard !rawItems.isEmpty, rawItems.count <= 200 else {
+            onFailure?("Provide between 1 and 200 list items")
             return
         }
         var seen = Set<String>()
-        let allowed = Set(["open", "continue", "translate", "queue", "info", "move", "export", "rename", "delete"])
+        let allowed = Set([
+            "open", "continue", "read", "translate", "queue", "info", "move",
+            "export", "rename", "delete", "play", "youtube", "description",
+            "download", "share", "favorite", "options", "copy", "original",
+            "readmore", "mark", "remove", "pause", "listen"
+        ])
         let entries: [TifloNativeListItem] = rawItems.compactMap { raw in
             guard let id = raw["id"] as? String, !id.isEmpty,
                   id.count <= 256, !seen.contains(id),
@@ -248,7 +253,7 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
                   !label.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
                   label.count <= 500 else { return nil }
             seen.insert(id)
-            let actions = (raw["actions"] as? [[String: Any]] ?? []).prefix(10).compactMap { entry -> TifloNativeListAction? in
+            let actions = (raw["actions"] as? [[String: Any]] ?? []).prefix(12).compactMap { entry -> TifloNativeListAction? in
                 guard let key = entry["id"] as? String, allowed.contains(key),
                       let title = entry["label"] as? String,
                       !title.isEmpty, title.count <= 100 else { return nil }

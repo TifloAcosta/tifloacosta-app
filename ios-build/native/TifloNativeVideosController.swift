@@ -97,11 +97,13 @@ private struct TifloVideoTheme {
     let brand: UIColor
 
     static func color(_ raw: String?, fallback: String) -> UIColor {
-        let source = ((raw ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
-            .hasPrefix("#") ? raw : nil) ?? fallback
+        let source = (raw ?? fallback).trimmingCharacters(in: .whitespacesAndNewlines)
         let hex = String(source.dropFirst())
-        guard (hex.count == 6 || hex.count == 3),
-              hex.allSatisfy({ $0.isHexDigit }) else { return color(nil, fallback: fallback) }
+        guard source.hasPrefix("#"), (hex.count == 6 || hex.count == 3),
+              hex.allSatisfy({ $0.isHexDigit }) else {
+            if raw != nil { return color(nil, fallback: fallback) }
+            return UIColor.black
+        }
         let full = hex.count == 3 ? hex.map { "\($0)\($0)" }.joined() : hex
         guard let value = UInt64(full, radix: 16) else { return UIColor.black }
         return UIColor(red: CGFloat((value >> 16) & 255) / 255,
@@ -208,6 +210,7 @@ final class TifloNativeVideosController: UITableViewController, UISearchBarDeleg
     private let order = UISegmentedControl(items: ["Recientes", "Antiguos"])
     private let stateLabel = UILabel()
     private let backButton = UIButton(type: .system)
+    private let backToChannelButton = UIButton(type: .system)
     private let sectionHeading = UILabel()
     private let sectionIntro = UILabel()
     private let theme: TifloVideoTheme
@@ -291,6 +294,16 @@ final class TifloNativeVideosController: UITableViewController, UISearchBarDeleg
         sectionHeading.numberOfLines = 0
         sectionHeading.accessibilityTraits = [.header]
 
+        backToChannelButton.setTitle("Volver a los vídeos del canal", for: .normal)
+        backToChannelButton.setTitleColor(theme.text, for: .normal)
+        backToChannelButton.backgroundColor = theme.background
+        backToChannelButton.layer.cornerRadius = 10
+        backToChannelButton.layer.borderWidth = 1
+        backToChannelButton.layer.borderColor = theme.border.cgColor
+        backToChannelButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
+        backToChannelButton.addTarget(self, action: #selector(backToChannel), for: .touchUpInside)
+        backToChannelButton.isHidden = true
+
         sectionIntro.text = "Buscar en YouTube o explorar los vídeos de TifloAcosta."
         sectionIntro.textColor = theme.muted
         sectionIntro.font = UIFont.preferredFont(forTextStyle: .subheadline)
@@ -298,7 +311,7 @@ final class TifloNativeVideosController: UITableViewController, UISearchBarDeleg
         sectionIntro.numberOfLines = 0
 
         let header = UIStackView(arrangedSubviews: [
-            backButton, sectionHeading, sectionIntro, searchBar, order, stateLabel
+            backButton, sectionHeading, sectionIntro, searchBar, backToChannelButton, order, stateLabel
         ])
         header.axis = .vertical
         header.spacing = 8
@@ -360,11 +373,8 @@ final class TifloNativeVideosController: UITableViewController, UISearchBarDeleg
             ? "Resultados de YouTube: \(searchVideos.count) vídeos cargados."
             : "Vídeos de TifloAcosta: \(min(limit, channelVideos.count)) de \(channelVideos.count)."
         order.isHidden = showingSearch
-        // A search-mode return button belongs to the same header, not a
-        // navigation bar. The search field stays accessible by a single swipe.
-        if showingSearch {
-            order.isHidden = true
-        }
+        // Search and channel use the same section and accessibility tree.
+        backToChannelButton.isHidden = !showingSearch
     }
 
     @objc private func backToChannel() {

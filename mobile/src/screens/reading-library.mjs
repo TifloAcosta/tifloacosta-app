@@ -1,6 +1,6 @@
 import { READING_SETTING_DEFAULTS, resolveReadingSettings } from '../core/reading-settings.mjs';
 import { TifloReading } from '../native/reading-library-plugin.mjs';
-import { registerPlugin } from '@capacitor/core';
+import { Capacitor, registerPlugin } from '@capacitor/core';
 
 import { renderReadingQueue } from './reading-queue.mjs';
 import { addScreenHeader, clearScreen } from './shared.mjs';
@@ -110,10 +110,23 @@ export function renderReadingLibrary({
   let focusedDocumentId = '';
   let documentActionGeneration = 0;
   const nativeActionsByDocument = new Map();
+  let nativePilotButton = null;
+  let visibleBooks = [];
+  let nativePilotItemIds = new Set();
   // Native UIKit actions are advisory: normal HTML buttons remain fully functional.
   void NativeDocumentAccessibility.addListener('documentAction', ({ documentId, action }) => {
     if (String(documentId) !== focusedDocumentId) return;
     nativeActionsByDocument.get(focusedDocumentId)?.(action);
+  }).catch(() => {});
+  // A test-only native screen places actions on each real UIKit row, not on WKWebView.
+  void NativeDocumentAccessibility.addListener('nativeListAction', ({ itemId, action }) => {
+    const id = String(itemId || '');
+    if (!nativePilotButton?.isConnected || !nativePilotItemIds.has(id)) return;
+    nativeActionsByDocument.get(id)?.(action);
+  }).catch(() => {});
+  void NativeDocumentAccessibility.addListener('nativeListClosed', () => {
+    nativePilotItemIds.clear();
+    if (nativePilotButton?.isConnected) nativePilotButton.focus();
   }).catch(() => {});
 
   const liveStatus = document.createElement('p');
@@ -550,6 +563,46 @@ export function renderReadingLibrary({
   const libraryHeading = document.createElement('h2');
   libraryHeading.textContent = t('readingLibrary.myLibrary');
   librarySection.append(libraryHeading);
+
+  // The production HTML library is untouched. Only iOS sees this explicit pilot.
+  // If the native view is unavailable, the normal list remains fully usable.
+  if (Capacitor.getPlatform() === 'ios') {
+    nativePilotButton = makeButton(
+      fallback(t, 'nativePilot.button', 'Probar acciones nativas de VoiceOver', 'Test native VoiceOver actions'),
+      async () => {
+        const items = visibleBooks.slice(0, PAGE_SIZE).map(item => ({
+          id: String(item.id),
+          label: item.title || t('readingLibrary.untitled'),
+          actions: [
+            { id: 'open', label: fallback(t, 'readingLibrary.open', 'Abrir', 'Open') },
+            { id: 'details', label: fallback(t, 'readingLibrary.actions', 'Más acciones', 'More actions') },
+            { id: 'rename', label: fallback(t, 'readingLibrary.rename', 'Cambiar título', 'Rename') },
+            { id: 'delete', label: fallback(t, 'readingLibrary.delete', 'Eliminar', 'Delete') }
+          ]
+        }));
+        if (!items.length) {
+          liveStatus.textContent = fallback(t, 'nativePilot.empty', 'No hay documentos para probar.', 'There are no documents to test.');
+          return;
+        }
+        nativePilotItemIds = new Set(items.map(item => item.id));
+        nativePilotButton.disabled = true;
+        try {
+          await NativeDocumentAccessibility.showNativeActionList({
+            language: document.documentElement.lang === 'en' ? 'en' : 'es',
+            title: fallback(t, 'nativePilot.title', 'Biblioteca nativa: prueba de VoiceOver', 'Native library: VoiceOver test'),
+            items
+          });
+        } catch {
+          nativePilotItemIds.clear();
+          liveStatus.textContent = fallback(t, 'nativePilot.failed', 'No se pudo abrir la prueba nativa. La biblioteca habitual sigue disponible.', 'Native test unavailable. The usual library remains available.');
+        } finally {
+          nativePilotButton.disabled = false;
+        }
+      },
+      'reading-library-native-pilot'
+    );
+    librarySection.append(nativePilotButton);
+  }
 
   const list = document.createElement('div');
   list.className = 'content-list reading-library-list';
@@ -1063,6 +1116,8 @@ export function renderReadingLibrary({
       sort: sortSelect
     });
     if (generation !== listGeneration) return;
+    visibleBooks = Array.isArray(result.items) ? result.items : [];
+    nativePilotItemIds.clear();
 
     nativeActionsByDocument.clear();
     ++documentActionGeneration;

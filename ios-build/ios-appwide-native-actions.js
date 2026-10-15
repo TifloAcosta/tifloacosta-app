@@ -547,7 +547,7 @@
         if (!videos.length) return;
         await api.addListener('nativeVideoClosed', () => {
           // The fallback route is never an extra screen the user must visit.
-          location.replace('index.html');
+          location.assign('index.html');
         });
         await api.showNativeVideoSection({ videos, theme: videoTheme() });
       } catch {

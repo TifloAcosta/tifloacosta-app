@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-15T04:44:28.463Z",
+  "generatedAt": "2026-10-15T07:29:01.861Z",
   "resources": [
     {
       "kind": "resource",
@@ -6124,23 +6124,6 @@
       "publishedAt": "2026-10-05T09:41:09.000Z",
       "categories": [
         "tecnologia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "conticgo-5fc888b270a2cdbd:es",
-      "sourceId": "conticgo-5fc888b270a2cdbd",
-      "lang": "es",
-      "title": "Monarch 2.0 lleva la IA al braille y los gráficos táctiles",
-      "summary": "HumanWare ha lanzado Monarch 2.0, una importante actualización de su dispositivo de braille multilineal y gráficos táctiles, con nuevas funciones de inteligencia artificial y mejoras para explorar matemáticas, gráficos y contenidos digitales. El Monarch combina 10 líneas de braille con gráficos táctiles dinámicos en una misma superficie, permitiendo acceder mediante el tacto a información que […] La entrada Monarch 2.0 lleva la IA al braille y los gráficos táctiles se publicó primero en Conticgo .",
-      "body": "HumanWare ha lanzado Monarch 2.0, una importante actualización de su dispositivo de braille multilineal y gráficos táctiles, con nuevas funciones de inteligencia artificial y mejoras para explorar matemáticas, gráficos y contenidos digitales.\n\nEl Monarch combina 10 líneas de braille con gráficos táctiles dinámicos en una misma superficie , permitiendo acceder mediante el tacto a información que tradicionalmente se presenta de forma visual. La actualización 2.0 fue anunciada por HumanWare el 14 de septiembre de 2026.\n\nMonarch es un dispositivo de tecnología de apoyo desarrollado por HumanWare en colaboración con la American Printing House for the Blind (APH) y la National Federation of the Blind (NFB) .\n\nSu característica principal es combinar braille multilineal y gráficos táctiles en una única pantalla dinámica. El dispositivo cuenta con 10 líneas de 32 celdas de braille , además de una superficie formada por miles de puntos que permite representar información gráfica mediante el tacto.\n\nDe esta forma, una persona puede explorar mediante el tacto textos, diagramas, mapas, gráficos y contenidos matemáticos , sin depender exclusivamente de materiales impresos o gráficos táctiles estáticos.\n\nUna de las novedades de Monarch 2.0 es Describe with AI , una función capaz de generar una descripción verbal de una imagen .\n\nEsta herramienta se incorpora al visor de gráficos táctiles y permite obtener información mediante una descripción generada por inteligencia artificial.\n\nLa función puede resultar especialmente interesante cuando se trabaja con contenidos que contienen información visual y puede complementar la exploración táctil.\n\nNo obstante, HumanWare no presenta Describe with AI como un sustituto de la representación táctil . Se trata de una función de descripción de imágenes integrada en el dispositivo.\n\nMonarch 2.0 también incorpora mejoras destinadas a facilitar el acceso a información matemática y gráfica.\n\nEl visor de gráficos KeyMath ha sido rediseñado para ofrecer más detalle y simplificar la exploración de gráficos. Además, la integración de MathCAT mejora la conversión de contenidos matemáticos entre la representación impresa y el braille.\n\nPor otro lado, Tactile Viewer incorpora nuevos niveles de zoom para determinados gráficos, incluidos los archivos SVG .\n\nEsto permite ampliar las posibilidades de exploración de diagramas y otros contenidos gráficos mediante el tacto.\n\nLas nuevas funciones pueden tener especial interés en el ámbito educativo.\n\nEl Monarch está diseñado para que estudiantes ciegos y con baja visión puedan acceder a contenidos que tradicionalmente presentan importantes barreras de accesibilidad, como gráficos, mapas, diagramas, ecuaciones o libros de texto digitales .\n\nLa actualización también incorpora un modo examen , que permite al personal educativo seleccionar qué aplicaciones y herramientas puede utilizar el estudiante durante una evaluación.\n\nDe esta manera, el alumno puede seguir utilizando las capacidades de braille y gráficos táctiles del Monarch mientras se restringe el acceso a determinadas herramientas durante una prueba.\n\nMonarch 2.0 introduce mejoras en el intercambio y la colaboración mediante KeyDrive y añade estilos integrados para archivos eBraille en VictorReader.\n\nEstas mejoras buscan facilitar el acceso a documentos digitales y ampliar las posibilidades de trabajo con contenidos en braille electrónico.\n\nLa evolución del Monarch muestra cómo diferentes tecnologías de apoyo pueden combinarse en un mismo dispositivo.\n\nHasta ahora, acceder a determinados contenidos visuales podía requerir disponer de un gráfico táctil específicamente preparado. Con Monarch, los usuarios pueden explorar gráficos dinámicos y braille en una misma superficie, mientras que Describe with AI añade una vía adicional para obtener información verbal sobre imágenes .\n\nPara ámbitos como la educación, las matemáticas, la lectura de gráficos o el acceso a información visual, esta combinación puede abrir nuevas posibilidades de interacción con contenidos digitales.\n\nLa actualización Monarch 2.0 ya ha sido anunciada por HumanWare y amplía las funciones del dispositivo con herramientas centradas en braille, gráficos táctiles, matemáticas e inteligencia artificial.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuentes: Human Ware , Human Ware .",
-      "sourceName": "Conticgo",
-      "originalUrl": "https://conticgo.net/monarch-2-0-lleva-la-ia-al-braille-y-los-graficos-tactiles/",
-      "publishedAt": "2026-10-05T06:00:22.000Z",
-      "categories": [
-        "tecnologia-accesibilidad",
-        "ia-accesibilidad",
-        "braille"
       ]
     }
   ]

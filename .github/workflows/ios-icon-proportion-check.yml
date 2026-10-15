@@ -28,6 +28,17 @@ jobs:
           swift ios-build/make-app-icon.swift tifloacosta-icon-512.png "$RUNNER_TEMP/icon-1024.png"
           test -s "$RUNNER_TEMP/icon-1024.png"
           sips -g pixelWidth -g pixelHeight -g format "$RUNNER_TEMP/icon-1024.png"
+      - name: Comparar miniaturas del icono original y del generado
+        run: |
+          set -euo pipefail
+          sips -Z 128 tifloacosta-icon-512.png --out "$RUNNER_TEMP/original-128.png" > /dev/null
+          sips -Z 128 "$RUNNER_TEMP/icon-1024.png" --out "$RUNNER_TEMP/result-128.png" > /dev/null
+          printf 'ICON_ORIGINAL_THUMB_BEGIN'
+          base64 -i "$RUNNER_TEMP/original-128.png" | tr -d '\\n'
+          printf 'ICON_ORIGINAL_THUMB_END\\n'
+          printf 'ICON_RESULT_THUMB_BEGIN'
+          base64 -i "$RUNNER_TEMP/result-128.png" | tr -d '\\n'
+          printf 'ICON_RESULT_THUMB_END\\n'
       - name: Verificar imagen opaca de 1024 píxeles e imagen de origen intacta
         run: |
           set -euo pipefail

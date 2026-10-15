@@ -533,6 +533,33 @@
     void openVideosFromHome(link.href, link);
   }, true);
 
+  // When any route, older navigation handler or fallback opens videos.html,
+  // try the native UIKit list again. Otherwise users see the verbose web
+  // catalog and its WKWebView descendants have no reliable rotor actions.
+  function recoverNativeVideosPage() {
+    if (!location.pathname.toLowerCase().endsWith('/videos.html')) return;
+    const recover = async () => {
+      const api = native();
+      if (!api?.showNativeVideoSection || !api?.getVoiceOverStatus) return;
+      try {
+        if (!(await api.getVoiceOverStatus())?.enabled) return;
+        const videos = videoCatalog();
+        if (!videos.length) return;
+        await api.addListener('nativeVideoClosed', () => {
+          // The fallback route is never an extra screen the user must visit.
+          location.assign('index.html');
+        });
+        await api.showNativeVideoSection({ videos, theme: videoTheme() });
+      } catch {
+        // The compact, one-focus-per-video HTML fallback remains usable.
+      }
+    };
+    if (document.readyState === 'loading')
+      document.addEventListener('DOMContentLoaded', () => { void recover(); }, { once: true });
+    else void recover();
+  }
+  recoverNativeVideosPage();
+
   // Touch users get a one-step native contextual action sheet on long press.
   // The menu is generated from the exact same registered actions as VoiceOver.
   document.addEventListener('contextmenu', event => {

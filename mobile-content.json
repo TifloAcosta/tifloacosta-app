@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-15T21:25:50.382Z",
+  "generatedAt": "2026-10-15T22:22:42.375Z",
   "resources": [
     {
       "kind": "resource",
@@ -5448,15 +5448,49 @@
   "news": [
     {
       "kind": "news",
-      "id": "9to5mac-927f14e578f39994:en",
-      "sourceId": "9to5mac-927f14e578f39994",
+      "id": "9to5mac-276afe290854f4f7:en",
+      "sourceId": "9to5mac-276afe290854f4f7",
       "lang": "en",
-      "title": "Sonos adds iPhone Duo support with latest app update",
-      "summary": "Sonos is getting ready for Apple’s first foldable iPhone. The company has released Sonos 27.2, which brings support for the upcoming iPhone Duo ahead of its launch later this month. more…",
-      "body": "Sonos is getting ready for Apple’s first foldable iPhone. The company has released Sonos 27.2, which brings support for the upcoming iPhone Duo ahead of its launch later this month.\n\nAs announced in a post on Reddit , Sonos 27.2 brings version 90.1 of the Sonos app to iOS. The update adds support for iPhone Duo in both folded and unfolded configurations. The update is available now through the App Store, and users can install it manually.\n\nThe Sonos 27.2 update follows the company’s broader Sonos 27 software release , which introduced a redesigned app experience alongside new features for its speaker lineup.\n\nWill you be picking up an iPhone Duo? Let us know in the comments below.",
+      "title": "9to5Mac Daily: October 15, 2026 – OpenAI vs Apple, iPhone Duo details",
+      "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily . more…",
+      "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily .\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show.",
       "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/15/sonos-adds-iphone-duo-support-with-latest-app-update/",
-      "publishedAt": "2026-10-15T19:05:24.000Z",
+      "originalUrl": "https://9to5mac.com/2026/10/15/daily-october-15-2026/",
+      "publishedAt": "2026-10-15T21:25:15.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "android",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-cd1262daf47c9d24:en",
+      "sourceId": "the-verge-cd1262daf47c9d24",
+      "lang": "en",
+      "title": "Trump posts AI-edited photo to brag about White House restoration work",
+      "summary": "President Donald Trump posted a series of photos on Truth Social showing off renovations to the White House - but one of them appears to be modified with AI. The picture, which compares an old White House column to a \"restored\" one, has several discrepancies and was flagged by Google's AI detector as \"made or […]",
+      "body": "President Donald Trump posted a series of photos on Truth Social showing off renovations to the White House - but one of them appears to be modified with AI. The picture, which compares an old White House column to a \"restored\" one, has several discrepancies and was flagged by Google's AI detector as \"made or edited with OpenAI.\"\n\nAs pointed out by users on Reddit , the picture of the \"restored\" column has an uneven number of steps on both sides of the structure. The number of steps also doesn't match up with the ones in the \"before\" photo. Additionally, the before and after photos appear nearly identical in angle and detail; the reflection i …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/policy/1012445/donald-trump-ai-photo-white-house-rennovation-column",
+      "publishedAt": "2026-10-15T21:09:33.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-9f023d6b02cdf7b9:en",
+      "sourceId": "9to5mac-9f023d6b02cdf7b9",
+      "lang": "en",
+      "title": "Apple Sports update improves Live Activity support, adds soccer leagues from around the world",
+      "summary": "Apple updated its Apple Sports app today with improvements to Live Activities and support for five additional soccer leagues. Here are the details. more…",
+      "body": "Apple updated its Apple Sports app today with improvements to Live Activities and support for five additional soccer leagues. Here are the details.\n\nThe Apple Sports app has been receiving updates at a steady pace lately, bringing support for more leagues and sports, along with deeper integration with iOS features.\n\nToday’s update to version 4.5 continues that trend, adding support for five soccer competitions from around the world:\n\nAdditionally, the app’s Live Activities can now display key game statistics during breaks in the action across leagues, which Apple says will help users “stay even closer to the game at a glance.”\n\nHere’s Apple’s full release notes for Apple Sports 4.5:\n\nTo check out and download Apple Sports from the App Store, follow this link .",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/15/apple-sports-update-improves-live-activity-support-adds-soccer-leagues-from-around-the-world/",
+      "publishedAt": "2026-10-15T20:48:00.000Z",
       "categories": [
         "apple",
         "tecnologia-general",
@@ -5465,18 +5499,84 @@
     },
     {
       "kind": "news",
-      "id": "9to5mac-4d984158e3a58148:en",
-      "sourceId": "9to5mac-4d984158e3a58148",
+      "id": "9to5mac-76df682d70de1dd8:en",
+      "sourceId": "9to5mac-76df682d70de1dd8",
       "lang": "en",
-      "title": "Apple execs talk Samsung’s role in creating iPhone Duo display",
-      "summary": "Apple is widely reported to have Samsung as its key supplier in building the iPhone Duo’s folding display. As a result, some have claimed that Apple is just “using a Samsung display.” Here’s how Apple addressed that question in a new interview . more…",
-      "body": "Apple is widely reported to have Samsung as its key supplier in building the iPhone Duo’s folding display. As a result, some have claimed that Apple is just “using a Samsung display.” Here’s how Apple addressed that question in a new interview .\n\nLast month, YouTuber MrMobile (Michael Fisher) had the chance to interview a trio of key Apple staff who were involved in iPhone Duo’s development.\n\nThe sit-down took place following the iPhone Duo introduction, but the interview just went live on YouTube yesterday.\n\nIt’s a great video that’s well worth watching if you’re interested in the iPhone Duo. But one noteworthy portion involves the question of Samsung’s involvement in building the Duo’s display.\n\nHere’s what Rich Dinh (VP of Hardware Engineering) and JP Guillou (Senior Director of Display Technology for iPhone) had to say:\n\nMichael Fisher : What on the iPhone do is like straight out of the Samsung factory and what is Apple designed?\n\nRich Dinh : Everything that we design internally comes from the place of servicing the experience at the end of the day. And so whether it’s the display, whether it’s the hinge, whether it’s the enclosure, the chip, there are manufacturers that we work with, a number of them, incredible manufacturers that we work with. But at the end of the day, we start with, “What are we trying to accomplish?” And we start internally with, “What are we trying to accomplish in the design? What are some of the challenges we’re trying to solve for?” And then we work with our manufacturers to help us develop those parts.\n\nFisher then presents a contrast between the display and hinge, He suggests that Apple gets shipped a pallet of “display things” from Samsung to make the iPhone Duo, then says, “That doesn’t include the hinge, right? The hinge is not in that thing. You guys whip that up yourselves.” Here’s how Apple responds:\n\nJP Guillou : Maybe I can say: the display doesn’t exist at the vendor until we start working on it.\n\nFisher : They don’t start working on it until you make an order with your specifications.\n\nDinh : Yeah, there’s not a, unfortunately [laughter] there’s not a pre-cooked shelf of components that we can go to.\n\nGuillou : And certainly not ones that would meet our demands, expectations, requirements, specifications.\n\nFisher : Everything is a custom order for you guys.\n\nGuillou : Everything is, everything is.\n\nDinh : We really did start from the ground up. Now, there’s partners that we work with out there that are incredible partners in helping us to manufacture these designs, but it always starts with, like, we customize down to the nanometer.\n\nOther key topics addressed in the video include iPhone Duo’s durability, the choice to use an under-display camera on the folding screen, how Apple approaches product design, and more.\n\nWhat are your takeaways from MrMobile’s interview? Let us know in the comments.",
+      "title": "IDC: Apple closes in on Samsung as global smartphone shipments see record decline in Q3",
+      "summary": "In a report published today, IDC says Apple saw a 4% year-over-year decline in global iPhone shipments during Q3 2026, but its share of worldwide smartphone shipments increased 23.1% over the same period last year. Here’s why. more…",
+      "body": "In a report published today, IDC says Apple saw a 4% year-over-year decline in global iPhone shipments during Q3 2026, but its share of worldwide smartphone shipments increased 23.1% over the same period last year. Here’s why.\n\nIDC says its preliminary data on global smartphone shipments for Q3 2026 show a 22% drop compared to Q3 2025, which is in line with other regional and global trends reported recently.\n\nThe culprit, as even occasional 9to5Mac readers are likely well aware by now, is the ongoing memory shortage, which has sent component costs soaring and squeezed device manufacturers, particularly those competing in lower-end markets.\n\nAccording to IDC, Samsung remained atop the ranking with 57.8 million units shipped and a 22.6% share, down 5.8% from the year-ago period. Apple came in second with 57.3 million shipped units, followed by Xiaomi, OPPO, and vivo.\n\nThe report shows OPPO seeing the biggest drop among the top five, with shipments down 34.5% year over year, and Apple recording the smallest decline at 4%. This left Apple just 500,000 units behind Samsung, with a gap of only 0.2 percentage points in shipment share.\n\nCommenting on these numbers, Nabila Popal, IDC’s senior research director for Worldwide Devices, said things might get worse before they get better:\n\n“The sharp downturn the industry has been bracing for finally materialized in the third quarter this year, with shipments declining a record 22% YoY. However, the worst is yet to come. […] Current indicators suggest that the market has not yet reached the bottom. Memory costs have surged approximately 350% since last year and are still rising, creating substantial pressure on vendor margins and shipments. While memory inflation is beginning to slow down, with a low double-digit sequential increase in Q3 compared to roughly 50%-100% sequential growth in prior quarters, costs remain elevated across other critical components as well, compounding the crunch.”\n\nToday’s report came just two days after IDC released preliminary results for the Chinese smartphone market, where Apple’s share of shipments increased from 15.8% to 17.8%, despite a 4.3% year-over-year decline in iPhone shipments.\n\nTo read IDC’s full report on global smartphone shipments for Q3 2026, follow this link .",
       "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/15/apple-execs-talk-samsungs-role-in-creating-iphone-duo-display/",
-      "publishedAt": "2026-10-15T19:00:14.000Z",
+      "originalUrl": "https://9to5mac.com/2026/10/15/idc-apple-closes-in-on-samsung-as-global-smartphone-shipments-see-record-decline-in-q3/",
+      "publishedAt": "2026-10-15T20:35:49.000Z",
       "categories": [
         "apple",
         "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-a5589a3dea4edafe:en",
+      "sourceId": "techcrunch-a5589a3dea4edafe",
+      "lang": "en",
+      "title": "Meta launches an open-weight AI model that runs on Macs",
+      "summary": "Meta and Apple have teamed up for the launch of the social media giant's newest model, Muse Spark Open, which will run locally on Apple silicon.",
+      "body": "Meta has launched what it calls the “most capable” open-weight model in the United States. Dubbed Muse Spark Open, the model also has the distinction of having been designed to work with Macs.\n\nThe new model, which leverages 816 billion parameters and a 1 million token context window, claims to offer superior performance to other popular open-weight models, according to evaluation results released by Meta on Thursday.\n\nMuse Spark Open is natively multimodal and built for complex coding tasks and agentic labor. It has also been designed to run locally on Apple’s computers. However, you will still need a lot of power to run the model locally, with a requirement of at least 1 terabyte of RAM, per Engadget . The model will run best via the Mac Studio that comes equipped with the M5 Ultra chip.\n\nStill, if you can muster the memory, Muse Spark Open may prove a significant work horse for coding and other desktop tasks. Meta says that it paired the model with Muse Code, its AI coding terminal, and deployed it to various agentic workflows, including coding fixes for a Mastodon client that included “bug fixes, new features, [and] full build.”\n\nThe company says it also deployed it in the service of running DaVinci Resolve, the high-end video editing software, revealing that the model was capable of reviewing and cropping footage.\n\nOpen-weight models provide a number of distinct industry advantages that aren’t afforded by closed and proprietary models. Open-weight models can be significantly more cost-efficient and can also offer transparency and flexibility that closed source models don’t allow.\n\nMeta is making the new model available now through a number of different API platforms.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/15/meta-launches-an-open-weight-model-that-runs-on-macs/",
+      "publishedAt": "2026-10-15T20:04:53.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-08cbc03f83a223bf:en",
+      "sourceId": "techcrunch-08cbc03f83a223bf",
+      "lang": "en",
+      "title": "Amazon devices chief Panos Panay sees a future where AI devices replace the need to use apps",
+      "summary": "Speaking at TechCrunch Disrupt, Amazon devices chief Panos Panay described a future where ambient AI devices work in the background, anticipating users' needs instead of waiting for commands.",
+      "body": "Amazon is placing its bets on ambient computing, not apps, as the future of personal AI.\n\nAlongside the launch of the company’s new AI wearables from Bee , Panos Panay, who serves as Amazon’s SVP of Devices, Alexa & Leo, took the stage at TechCrunch Disrupt on Thursday to talk more in depth about where he sees personal computing headed.\n\n“A lot of times, what you’re doing right now — what we all do right now — is we have to remember what we’re asking our tool to do for us,” Panay began, explaining that this is how we engage with our modern smartphones. “It’s like point, shoot, return,” Panay continued. “I think where we’re headed is a world [that] starts with ambient devices.”\n\nBy “ambient devices,” he means those that work quietly in the background, using sensors and AI to help you figure out what needs to be done, instead of the other way around, where you’re telling the device what you need to do.\n\n“As it works in the background, you’re able to stay more present. You’re able to get more done. You’re about to spend more time with people … you’re not afraid if you miss something. It’s incredibly powerful,” Panay said.\n\nAmazon’s biggest entry into this space is the set of new Bee devices it introduced on Thursday, which include a band you can wear on your wrist or detach to wear as a pendant, as well as a new credit-card-sized device that attaches magnetically to the back of your smartphone.\n\nThese gadgets passively record audio and take notes about your day, finding the to-dos, reminders, and insights you may later need to refer back to. To balance the need to be useful with user privacy, Bee’s devices don’t actually store the raw audio from your conversations; they process the audio in real time and then delete it when done. Transcripts of conversations are encrypted using keys that your device creates and controls. That means no one else, including Amazon employees, can access those files unless you intentionally share them.\n\nPanay said that privacy was a key consideration for how these new ambient devices should work.\n\n“You have to give customers that control,” he said. “Every product is different, but for Bee specifically, as an example in the ambient space like that, you have to design with privacy in mind. And that’s what we do. That’s critical.”\n\nThe executive, who came to Amazon after 19 years at Microsoft where he oversaw the development of Surface devices, has spent a lot of his life thinking about how personal computing will evolve. With Bee — and ambient computing more generally — Panay also envisioned a future where the idea of interacting with apps becomes less important, as more tasks are handled via AI.\n\n“Do I think we have a future where there’s a bit of a balance — a whole generation that doesn’t say ‘give me the app’ for that, but says it should just understand what I need? Yeah, I do. I think that transformation is coming. I think that is the next generation,” he said.\n\nThat doesn’t necessarily mean the smartphone itself won’t continue to be an important personal computing device (as much as Amazon would like it to be an Alexa tablet or Echo smart speaker), Panay pointed out. Rather, he believes a new crop of devices will emerge that use sensors to understand users better, and to bring intelligence to the world around you.\n\n“I’m not a proponent that says one form factor is going to replace another. I don’t think that’s the case,” he clarified. “I think there’s an intelligence layer that connects it all … and it has to be useful.”",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/15/amazon-devices-chief-panos-panay-sees-a-future-where-ai-devices-replace-the-need-to-use-apps/",
+      "publishedAt": "2026-10-15T19:55:25.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apps-accesibles",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-4276aa2470e5a86c:en",
+      "sourceId": "engadget-4276aa2470e5a86c",
+      "lang": "en",
+      "title": "FTC subpoenas OpenAI and Anthropic following safety failures",
+      "summary": "The FTC is investigating possible consumer harms at two major AI companies.",
+      "body": "The department is investigating possible consumer harms at the major AI companies.\n\nThe US Federal Trade Commission has subpoenaed OpenAI and Anthropic for information about recent safety incidents with both businesses' AI models. Axios first reported that agency had sent civil subpoenas to the companies, and a spokesperson from the FTC confirmed the action to CBS News .\n\nAxios ' source said that the FTC is exploring possible consumer protection violations at Anthropic and OpenAI. The subpoenas are looking for documents regarding security incidents and safeguards, as well as some of the companies' marketing materials and content about their privacy policies. The individual also claimed the FTC plans to seek testimony from the top executives at both businesses. The department will allegedly send investigative demands to third-party AI companies at a later time.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2288104/ftc-subpoenas-open-ai-and-anthropic-following-safety-failures/",
+      "publishedAt": "2026-10-15T19:28:53.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-aaac5f2508642cb2:en",
+      "sourceId": "techcrunch-aaac5f2508642cb2",
+      "lang": "en",
+      "title": "Anthropic is letting METR researchers look under the hood with employee-level access",
+      "summary": "METR will publish its own assessments of Anthropic’s risks, incidents, and practices, and the frontier AI model maker has given up the right to block them.",
+      "body": "Anthropic is giving employee-level access to six researchers from METR , a nonprofit that tests frontier AI models, to independently assess Anthropic’s models, safety practices, and risk management, the company said in a blog post on Thursday.\n\nThe arrangement comes at a time where incidents of AI agents acting outside their instructions have been disclosed every week or two since late August. The incidents have sharpened calls for independent checks on AI companies.\n\n“We want to be publicly accountable for the decisions we’re making,” Anthropic said in the blog post. “We aim to close the gap between what evaluators understand about a frontier AI company’s systems and what the company itself understands.”\n\nUnder the new arrangement, the METR team has Anthropic-issued company laptops, office space, and access to internal tools roughly on par with what Anthropic’s own risk assessment teams use. “Anthropic employees are encouraged to share information with them just as they would with a fellow employee working on alignment risk” the company said.\n\nAnthropic compared the arrangement to banking, similar to how regulators place resident examiners inside the largest banks.\n\nMETR will publish its own assessments of Anthropic’s risks, incidents, and practices, and the company has given up the right to block them.\n\n“Anthropic can’t veto publication, but we can require them to redact information if it falls into narrow, pre-defined categories,” the company said, such as customer data, anything attorney-client privileged, or relating to information about its model architectures. “METR is free to characterize our redactions publicly, and say whether it believes the redactions were justified, as long as it does so without revealing the redacted information” Anthropic added.\n\nMETR is the only evaluator so far at the top of a three-tier system Anthropic is building. Evaluators in the bottom tier, like biosecurity nonprofit SecureBio, run narrow reviews and require Anthropic’s approval to publish. The middle tier gets more information and can publish without approval, while the top tier adds METR’s employee-level access.\n\nThursday’s announcement makes good on a promise Anthropic CEO Dario Amodei made in a September essay , where he proposed embedding outside evaluators inside AI labs as a first step toward slowing the technology’s development. OpenAI quickly pledged the same , and both companies, along with Google, Meta, Nvidia, and xAI, have since signed a White House accord committing to independent review.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/15/anthropic-is-letting-metr-researchers-look-under-the-hood-with-employee-level-access/",
+      "publishedAt": "2026-10-15T19:14:26.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
       ]
     },
     {
@@ -5515,37 +5615,6 @@
     },
     {
       "kind": "news",
-      "id": "9to5mac-4a5cb646ad3d3ed9:en",
-      "sourceId": "9to5mac-4a5cb646ad3d3ed9",
-      "lang": "en",
-      "title": "Apple is about to kick off four weeks straight of new product launches",
-      "summary": "Apple’s busiest product launch month is usually September. But despite a packed event last month, many more products remain ahead this fall. Next week’s iPhone Duo launch kicks off what’s shaping up to be four straight weeks of new products. more…",
-      "body": "Apple’s busiest product launch month is usually September. But despite a packed event last month, many more products remain ahead this fall. Next week’s iPhone Duo launch kicks off what’s shaping up to be four straight weeks of new products.\n\nApple just unveiled three new products this week, and four more are expected later this month. With release dates spread out for each product, Apple appears set to have four straight weeks of new products hitting stores.\n\nWe already know that iPhone Duo will be available next Friday, October 23, HomePod mini 2 on October 30, and HomeView and Apple TV 4K on November 13.\n\nThe only gap between them is Friday, November 6. But today on his new Power On podcast , Mark Gurman said that’s when the new touchscreen MacBook Pro is expected to go on sale. He explains: “Apple retail stores are going to have a big floor reset on the evening of Thursday, November 5 into Friday, November 6.”\n\nGurman believes the forthcoming touchscreen MacBook Pro redesign, M6 iMac and MacBook Pro, and OLED iPad mini will all be available in stores starting November 6. He reported earlier today that those product unveilings are set for October 28.\n\nApple would then launch the following products in four successive weeks:\n\nIt’s a packed lineup, and especially impressive considering last month we got iPhone 18 Pro and Pro Max, Apple Watch Series 12 and Ultra 4, and AirPods 5.\n\nFollowing these releases, Apple’s product lineup will be locked in for the rest of 2026. No additional product launches are expected until early 2027.\n\nWhich upcoming Apple products do you plan to buy? Let us know in the comments.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/15/apple-is-about-to-kick-off-four-weeks-straight-of-new-product-launches/",
-      "publishedAt": "2026-10-15T17:58:48.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-f72734e938ccfa8c:en",
-      "sourceId": "techcrunch-f72734e938ccfa8c",
-      "lang": "en",
-      "title": "Volvo makes a bigger bet on Nvidia",
-      "summary": "Volvo is leveling up its automated driving system through an expansion of its nearly decade-long partnership with Nvidia that will extend beyond its battery electric vehicles.",
-      "body": "Volvo is leveling up its automated driving system through an expansion of its nearly decade-long partnership with Nvidia. The companies announced on Thursday that Volvo will use three pieces of Nvidia hardware and software in its future vehicles to provide an automated driving system that can navigate urban streets and highways.\n\nUnder the expanded partnership, Volvo will combine its vehicle safety systems and engineering with Nvidia’s Hyperion sensor and compute architecture, Alpamayo driving software stack, and Halos safety evaluation layer.\n\nThe Alpamayo stack is redundant and diverse, according to Ali Kani, who heads up Nvidia’s automotive division. It combines Alpamayo, a family of AI models, datasets, and simulation and development tools used to build autonomous-driving software, with classical software that uses machine learning and camera and radar perception, he said.\n\n“The point is we run these two stacks at the same time, and we have multimodal sensors in our philosophy because it’s a safer product that way,” Kani said, adding that the open source Alpamayo software has now been downloaded by more than 650,000 developers.\n\nVolvo didn’t reveal the value of the partnership or which vehicle model would be the first to use this new Nvidia tech stack. But Alwin Bakkenes, Volvo’s head of software development, hinted at the scale of the deal and how it represents the automaker’s evolution toward developing a full-tech stack designed for its electric vehicles as well as its plug-in hybrids and gas-powered vehicles.\n\n“Automakers used to be very much like car-line-based development and working with various suppliers, etc. and we have completely changed and migrated into being a full-tech stack company,” Bakkenes said, adding that Volvo will start this partnership with a brand new vehicle that “will come in the not-too-near future.”\n\nHe said the first vehicle with this new Nvidia tech stack will debut within the decade, and “then of course the technology can go beyond that.”\n\nWhile Volvo’s relationship with Nvidia isn’t new, the expanded partnership represents the automaker’s effort to bring the latest automated driving software to all of its vehicles — not just its EVs.\n\nAll of Volvo’s battery-electric vehicles use Nvidia’s Orin computer chip, which processes information from cameras, radar, and other sensors to help a vehicle understand its surroundings and make driving decisions.\n\n“What we’re going to do in the future is actually standardize more on Hyperion — also from a sensor set perspective — to really open up the stack for the wider partnership with Nvidia,” Bakkenes said.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/15/volvo-makes-a-bigger-bet-on-nvidia/",
-      "publishedAt": "2026-10-15T17:34:40.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "the-verge-3a3609a662c0f170:en",
       "sourceId": "the-verge-3a3609a662c0f170",
       "lang": "en",
@@ -5555,22 +5624,6 @@
       "sourceName": "The Verge",
       "originalUrl": "https://www.theverge.com/transportation/1011653/volvo-nvidia-autonomous-driving-level-2-hands-free-urban",
       "publishedAt": "2026-10-15T17:30:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-8e7049fc96a0f8b5:en",
-      "sourceId": "the-verge-8e7049fc96a0f8b5",
-      "lang": "en",
-      "title": "Google is making inline links more prominent in AI responses",
-      "summary": "Google is updating its AI search results to make inline links appear \"higher up in responses more frequently,\" according to a blog post. The company's search results from AI Overviews and AI Mode give you answers in a customized view instead of the traditional list of links, but there are concerns that the format reduces […]",
-      "body": "Google is updating its AI search results to make inline links appear \"higher up in responses more frequently,\" according to a blog post . The company's search results from AI Overviews and AI Mode give you answers in a customized view instead of the traditional list of links, but there are concerns that the format reduces traffic to publishers . Google says it's been making \"continued and substantial increases to the presence of inline links in our AI experiences,\" and this new change will help ensure \"ensure key sources are easily clickable right when you need them.\"\n\nThe company is announcing several other changes to highlight links an …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1012206/google-ai-mode-overview-inline-links",
-      "publishedAt": "2026-10-15T17:22:15.000Z",
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
@@ -5610,37 +5663,6 @@
     },
     {
       "kind": "news",
-      "id": "techcrunch-01af3fab90a219b4:en",
-      "sourceId": "techcrunch-01af3fab90a219b4",
-      "lang": "en",
-      "title": "SK Hynix bargains for chip equipment exports to its China facility in return for building a factory in US",
-      "summary": "SK Hynix’s Solidigm is reportedly seeking U.S. approval to send more chipmaking equipment to China as it weighs building a new NAND chip factory in America.",
-      "body": "SK Hynix appears to be navigating choppy U.S.-China chipmaking waters. The company’s flash memory unit, Solidigm, is seeking U.S. approval to send American chipmaking equipment to its factory in Dalian, China, as a condition to continue building a semiconductor factory in the U.S., Reuters reported , citing anonymous sources.\n\nSolidigm has been reportedly chalking up plans to build a NAND flash memory chip factory in the U.S. and is considering upstate New York as a potential location for the facility.\n\nNAND flash chips are primarily used in solid-state storage drives, which are employed in everything from laptops and smartphones to AI data centers. But the global component shortage, thanks to skyrocketing demand for AI data centers, has driven up prices for everything that goes into data centers, including high-speed RAM chips and SSDs. Research firm TrendForce expects NAND prices to rise 15% to 20% in the fourth quarter.\n\nReuters cited its sources as saying that Solidigm wants to install more chipmaking equipment in spare space at SK Hynix’s Dalian factory in China to boost NAND chip production.\n\nSK Hynix told TechCrunch it is not seeking to expand capacity at its Dalian Mod B facility, which was completed in 2023. The chip giant added that the equipment installation is being carried out in consultation with and under authorization from the U.S. government.\n\nWashington first imposed sweeping restrictions on advanced chips and chipmaking equipment exports to China in October 2022, citing national security concerns, and further tightened the rules in 2023 . Then in September 2025, the Trump administration revoked special export exemptions for certain SK Hynix, Samsung, and Intel facilities in China. The U.S. has since granted an annual license to Samsung and SK Hynix for sending chipmaking equipment to their plants in China.\n\nThe U.S. has also been pushing foreign chipmakers to build and expand their manufacturing facilities in America. In July, Commerce Secretary Howard Lutnick said he wanted Samsung and SK Hynix to build chip plants in the country and that he was in talks with both companies.\n\nSolidigm is said to be preparing for a 2027 U.S. IPO that could raise around $10 billion and value it at up to $100 billion.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/15/sk-hynix-bargains-for-chip-equipment-exports-to-its-china-facility-in-return-for-building-a-factory-in-us/",
-      "publishedAt": "2026-10-15T16:45:37.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-6d9893679297e687:en",
-      "sourceId": "engadget-6d9893679297e687",
-      "lang": "en",
-      "title": "Microsoft says it made Windows 11 zippier, especially on PCs with less RAM",
-      "summary": "The whole RAM price thing is partly Microsoft's fault so it's the least it can do.",
-      "body": "The company also unveiled a revamped Photos app that testers can try now.\n\nMicrosoft has been working on some Windows 11 updates that it's starting to bring to all users after testing them with Windows Insiders. Among other things, the company said it made the operating system up to 20 percent more responsive, in part by improving memory efficiency and management. For instance, Windows 11 \"can now keep up to 2GB more of your active data in memory instead of moving it to slower storage, helping your PC stay responsive as you open more apps or browser tabs,\" Navjot Virk, Microsoft's corporate vice president of Windows Experiences, wrote in a blog post .\n\nVirk noted that PCs with 8GB of memory may see \"an especially meaningful difference.\" That's welcome, given that it's increasingly expensive to upgrade RAM in a PC . You can largely blame AI data centers for gobbling up as much memory as possible and jacking up prices for normal people. Microsoft, of course, is heavily involved in that, so improved memory management and efficiency feels like the least the company can do to mitigate the RAM crisis.\n\nOne thing Windows 11 will do on PCs with 8GB or less of RAM is to only load widgets when users actually open them. Microsoft says that'll free up over 200MB of memory for other tasks.\n\nMicrosoft says it should also be faster to pair AirPods with PCs as part of improvements to Bluetooth headphone reliability. Windows Hello logins are said to be easier, faster and more reliable too.\n\nWindows Insider testers can now try out the revamped, AI-powered Search that the company unveiled last week. They can carry out thousands of actions directly through Search, which Microsoft is effectively turning into a chatbot .\n\nOther updates for Insiders include a new Photos app with a revamped gallery that can pull together snaps from local storage, OneDrive and iCloud. The built-in editor is said to load 25 percent faster. The native viewer loads 30 percent quicker too, Microsoft claims.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2287714/microsoft-says-it-made-windows-11-zippier-especially-on-pcs-with-less-ram/",
-      "publishedAt": "2026-10-15T16:01:18.000Z",
-      "categories": [
-        "tecnologia-general",
-        "windows"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "ars-technica-35a9fb993f22b974:en",
       "sourceId": "ars-technica-35a9fb993f22b974",
       "lang": "en",
@@ -5666,22 +5688,6 @@
       "sourceName": "Ars Technica",
       "originalUrl": "https://arstechnica.com/ai/2026/10/youtube-music-begins-labeling-ai-songs/",
       "publishedAt": "2026-10-15T15:12:58.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-0a7ea874925a3f07:en",
-      "sourceId": "techcrunch-0a7ea874925a3f07",
-      "lang": "en",
-      "title": "AI agents are coming to Rivian’s cars",
-      "summary": "We'll likely learn more about how this will work at the company's upcoming \"AI & Autonomy Day\" event in December.",
-      "body": "Rivian recently rolled out an AI assistant that lets drivers and passengers interact with the company’s electric vehicles just by talking to them. But the carmaker’s founder and CEO, RJ Scaringe, said at TechCrunch Disrupt this week that, in the future, Rivian’s cars will be able to run AI agents made by other companies like Anthropic.\n\n“That’s where it becomes magical,” Scaringe said on stage.\n\nScaringe didn’t say when Rivian would implement this, and the company declined to offer more details, pointing instead to the “AI & Autonomy Day” event it’s hosting in December.\n\nBut it’s not hard to imagine how Rivian might integrate something like Claude, OpenAI’s Dots or Meta’s Muse assistant into its software. The company has developed its in-car software from the ground up, instead of leaning on Apple CarPlay or Android Auto, and built a lot of its own applications, like navigation (though it has worked to integrate popular in-car apps like Apple Music).\n\nRivian says it has created its own in-house agentic framework that understands what action a person wants to take when they talk to the vehicle, and routes it to the right part of the car’s software. Most of the time, that involves what you’d expect: asking the car to turn down the temperature, activate the seat warmers, or summarize the news.\n\n“Think of it as like a traffic light. So if you ask the vehicle something, it decides what model it’s going to use. It can use a local model that’s running on the edge and the vehicle. If it’s a more complex question, it can go up to the cloud. And then even for that, we have different models that we use,” Scaringe said.\n\nAs of May of this year, the agent could access external apps like Google Calendar. And Scaringe said at Disrupt the next step would be to add products from the frontier AI companies, though making them work in the car won’t be easy.\n\n“There’s a lot of plumbing behind the scenes we have to do to make sure that that works, and it’s not just within Rivian. That’s also a lot of coordination with the labs to make sure they enable that plumbing,” he said, adding that putting this kind of software near safety-critical systems means Rivian has to be extremely careful.\n\n“You wouldn’t want an agent to determine, ‘hey, it’s time to apply the brakes, or time to steer the vehicle.’ So anything that’s vehicle-level controls are not being handed to an agent,” he said.\n\nInstead, he thinks the implementation will look more like an extension of how people currently use these agentic apps. That would mean Rivian would have to find a way to connect the vehicle to all of the context that apps like Muse collect on their users.\n\nFor example, Scaringe said, a driver could ask the Rivian assistant to turn on the ventilated seats before going deeper. “And then simultaneously say, ‘We were talking yesterday about this meal. I’m planning to have guests over on Friday. Can you help me think through what we’re going to make?’,” he said. The car could then pull the driver’s context from a conversation they had with the assistant on another device.\n\nOf course, Rivian wouldn’t be the first American car company to add AI agents to a car’s software. Earlier this year, Tesla added a feature that let users talk to both SpaceX’s Grok chatbot and also its Grok Bot assistant.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/15/ai-agents-are-coming-to-rivians-cars/",
-      "publishedAt": "2026-10-15T15:02:36.000Z",
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"

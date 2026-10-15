@@ -39,6 +39,7 @@
       channel: name => `Canal: ${name}`,
       published: value => `Publicado: ${value}`,
       duration: value => `Duración: ${value}`,
+      views: value => `Visualizaciones: ${value}`, 
       play: 'Reproducir',
       playLabel: title => `Reproducir: ${title}`,
       youtube: 'Abrir en YouTube'
@@ -61,6 +62,7 @@
       channel: name => `Channel: ${name}`,
       published: value => `Published: ${value}`,
       duration: value => `Duration: ${value}`,
+      views: value => `Views: ${value}`, 
       play: 'Play',
       playLabel: title => `Play: ${title}`,
       youtube: 'Open on YouTube'
@@ -150,6 +152,14 @@
       durationP.className = 'video-meta';
       durationP.textContent = c.duration(duration);
       article.append(durationP);
+    }
+
+    const views = Number(video.viewCount || 0);
+    if (Number.isFinite(views) && views > 0) {
+      const viewsP = document.createElement('p');
+      viewsP.className = 'video-meta';
+      viewsP.textContent = c.views(new Intl.NumberFormat(language() === 'es' ? 'es-ES' : 'en-US').format(views));
+      article.append(viewsP);
     }
 
     const descriptionText = String(video.description || '').trim();

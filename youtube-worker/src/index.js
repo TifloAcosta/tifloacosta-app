@@ -22,6 +22,8 @@ import {
   like,
   subscribe,
   subscribeToVideoChannel,
+  unsubscribeFromVideoChannel,
+  unlike,
   searchVideos
 } from './youtube-api.js';
 
@@ -229,7 +231,7 @@ export async function handleRequest(request, env, deps = {}) {
   if (url.pathname === '/native/capabilities' && request.method === 'GET') {
     return json({
       nativeAuth: Boolean(env.GOOGLE_CLIENT_ID && env.GOOGLE_CLIENT_SECRET && env.YOUTUBE_SESSION_SECRET),
-      youtubeActions: ['like', 'subscribe', 'comment'],
+      youtubeActions: ['like', 'unlike', 'subscribe', 'unsubscribe', 'comment'],
       protocol: 1
     }, 200, {});
   }
@@ -366,7 +368,7 @@ export async function handleRequest(request, env, deps = {}) {
     }
   }
 
-  if (['/native/subscribe', '/native/like', '/native/comment'].includes(url.pathname) && request.method === 'POST') {
+  if (['/native/subscribe', '/native/unsubscribe', '/native/like', '/native/unlike', '/native/comment'].includes(url.pathname) && request.method === 'POST') {
     try {
       const { accessToken } = await iosAuthenticatedContext(request, env, fetchImpl);
       const body = await readJson(request);
@@ -374,8 +376,14 @@ export async function handleRequest(request, env, deps = {}) {
       if (url.pathname === '/native/subscribe') {
         return json(await subscribeToVideoChannel(accessToken, videoId, fetchImpl));
       }
+      if (url.pathname === '/native/unsubscribe') {
+        return json(await unsubscribeFromVideoChannel(accessToken, videoId, fetchImpl));
+      }
       if (url.pathname === '/native/like') {
         return json(await like(accessToken, videoId, fetchImpl));
+      }
+      if (url.pathname === '/native/unlike') {
+        return json(await unlike(accessToken, videoId, fetchImpl));
       }
       return json(await commentOnVideoChannel(accessToken, videoId, body.text, fetchImpl));
     } catch (error) {

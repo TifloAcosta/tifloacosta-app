@@ -122,7 +122,8 @@
   let focusSequence = 0;
   const voiceOverActions = [
     ['open', 'Abrir para leer', 'Open for reading'],
-    ['continue', 'Continuar lectura', 'Continue reading'],
+    ['continue', 'Leer', 'Read'],
+    ['translate', 'Traducir', 'Translate'],
     ['queue', 'Añadir o quitar de cola', 'Add or remove from queue'],
     ['info', 'Información', 'Information'],
     ['move', 'Mover a carpeta', 'Move to folder'],
@@ -146,6 +147,27 @@
       const api = window.TifloIOSBookActions;
       if (!title || !bookId || !api) return;
       if (action === 'open' || action === 'continue') { title.click(); return; }
+      if (action === 'translate') {
+        // Open the existing reader and move focus to its translation language
+        // selector. Never launch a translation without a target language.
+        const reader = document.getElementById('reading-reader');
+        const translation = document.getElementById('reading-translation-web');
+        const target = document.getElementById('reading-translation-target');
+        const focusLanguages = () => {
+          if (!reader || reader.hidden || !translation || translation.hidden || !target) return false;
+          target.focus({ preventScroll: true });
+          return true;
+        };
+        title.click();
+        if (!focusLanguages() && reader) {
+          const observer = new MutationObserver(() => {
+            if (focusLanguages()) observer.disconnect();
+          });
+          observer.observe(reader, { attributes: true, attributeFilter: ['hidden'] });
+          setTimeout(() => observer.disconnect(), 12000);
+        }
+        return;
+      }
       if (action === 'export') { void api.exportBook(bookId, 'original'); return; }
       if (action === 'rename') { void api.renameBook(bookId); return; }
       if (action === 'delete') { void api.deleteBook(bookId); return; }
@@ -157,12 +179,22 @@
     if (!nativeDocumentListenerInstalled) {
       nativeDocumentListenerInstalled = true;
       void plugin.addListener('documentAction', ({ documentId, action }) => {
-        // El evento nativo puede venir del foco de VoiceOver sin un focusin
-        // del DOM; solo actuar si el título aún pertenece a la biblioteca.
         const title = document.getElementById(String(documentId));
         if (title?.closest('.reading-library-title-card')) {
           dispatch(String(documentId), String(action));
         }
+      }).catch(() => {});
+      // Native UIKit cells send the action for their own document ID.
+      void plugin.addListener('nativeListAction', ({ itemId, action }) => {
+        const id = String(itemId || '');
+        const title = document.getElementById(id);
+        if (title?.closest('.reading-library-title-card')) {
+          dispatch(id, String(action || ''));
+        }
+      }).catch(() => {});
+      void plugin.addListener('nativeListClosed', ({ itemId }) => {
+        const title = document.getElementById(String(itemId || ''));
+        if (title?.isConnected) title.focus({ preventScroll: true });
       }).catch(() => {});
     }
 
@@ -182,91 +214,16 @@
       const next = JSON.stringify(documents);
       if (next === lastRegistered) return;
       lastRegistered = next;
-      void plugin.registerLibraryTitles({ documents }).catch(() => {});
+      void plugin.registerLibraryTitles({ documents, nativeRowsOnFocus: true }).catch(() => {});
     };
     registerVisibleTitles();
     const observer = new MutationObserver(registerVisibleTitles);
     observer.observe(list, { childList: true, subtree: true, attributes: true, attributeFilter: ['aria-label'] });
   }
 
-  // Temporary experiment: genuine native rows, without replacing the HTML
-  // library or changing Android/the website. Remove this button after validation.
-  function installNativeActionPilot() {
-    const plugin = accessibility();
-    const list = document.getElementById('reading-library-list');
-    if (!plugin?.showNativeActionList || !list ||
-        document.getElementById('ios-voiceover-native-action-pilot')) return;
-    const button = document.createElement('button');
-    button.id = 'ios-voiceover-native-action-pilot';
-    button.type = 'button';
-    button.className = 'button-link';
-    button.textContent = iosText('Probar acciones nativas de VoiceOver', 'Test native VoiceOver actions');
-    list.parentElement?.insertBefore(button, list);
-    let pilotedIds = new Set();
-    const actionForTitle = (id, selected) => {
-      if (!pilotedIds.has(id)) return;
-      pilotedIds.clear();
-      const title = document.getElementById(id);
-      const bookId = title?.closest('.reading-library-title-card')?.dataset.iosBookId;
-      const api = window.TifloIOSBookActions;
-      if (!title || !bookId || !api) return;
-      if (selected === 'open' || selected === 'continue') { title.click(); return; }
-      if (selected === 'queue') { void api.queueBook(bookId); return; }
-      if (selected === 'info') { void api.infoBook(bookId); return; }
-      if (selected === 'move') { window.TifloIOSFolders?.promptAssignment?.(bookId); return; }
-      if (selected === 'export') { void api.exportBook(bookId, 'original'); return; }
-      if (selected === 'rename') { void api.renameBook(bookId); return; }
-      if (selected === 'delete') { void api.deleteBook(bookId); }
-    };
-    void plugin.addListener('nativeListAction', ({ itemId, action }) => {
-      actionForTitle(String(itemId || ''), String(action || ''));
-    }).catch(() => {});
-    void plugin.addListener('nativeListClosed', () => {
-      pilotedIds.clear();
-      if (button.isConnected) button.focus({ preventScroll: true });
-    }).catch(() => {});
-    button.addEventListener('click', async () => {
-      const items = [...list.querySelectorAll('.reading-library-title')]
-        .filter(title => title.id && title.closest('.reading-library-title-card'))
-        .slice(0, 10)
-        .map(title => ({
-          id: title.id,
-          label: title.textContent?.trim() || title.id,
-          actions: voiceOverActions.map(([id, es, en]) => ({ id, label: iosText(es, en) }))
-        }));
-      if (!items.length) {
-        const status = document.getElementById('reading-library-status');
-        if (status) status.textContent = iosText(
-          'No hay documentos para esta prueba.',
-          'There are no documents to test.'
-        );
-        return;
-      }
-      pilotedIds = new Set(items.map(item => item.id));
-      button.disabled = true;
-      try {
-        await plugin.showNativeActionList({
-          language: document.documentElement.lang === 'en' ? 'en' : 'es',
-          title: iosText('Biblioteca nativa: prueba de VoiceOver', 'Native library: VoiceOver pilot'),
-          items
-        });
-      } catch {
-        pilotedIds.clear();
-        const status = document.getElementById('reading-library-status');
-        if (status) status.textContent = iosText(
-          'No se pudo abrir la prueba nativa. La biblioteca habitual sigue disponible.',
-          'The native pilot could not open. Your regular library is still available.'
-        );
-      } finally {
-        button.disabled = false;
-      }
-    });
-  }
-
   function installIOSReadingBridges() {
     installNativeFilesImport();
     installLibraryNativeActions();
-    installNativeActionPilot();
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', installIOSReadingBridges, { once: true });

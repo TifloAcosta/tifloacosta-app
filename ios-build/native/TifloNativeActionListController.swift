@@ -40,17 +40,19 @@ final class TifloNativeActionListController: UITableViewController {
     private let entries: [TifloNativeListItem]
     private let closeLabel: String
     private let actionHint: String
+    private let initialItemId: String?
     private var rowActionHandlers: [[TifloNativeRowActionHandler]] = []
     private var isClosing = false
 
     var onSelected: ((String, String) -> Void)?
     var onClosed: (() -> Void)?
 
-    init(title: String, entries: [TifloNativeListItem], closeLabel: String, actionHint: String) {
+    init(title: String, entries: [TifloNativeListItem], closeLabel: String, actionHint: String, initialItemId: String? = nil) {
         self.screenTitle = title
         self.entries = entries
         self.closeLabel = closeLabel
         self.actionHint = actionHint
+        self.initialItemId = initialItemId
         super.init(style: .plain)
         rowActionHandlers = entries.map { entry in
             entry.actions.map { action in
@@ -82,8 +84,16 @@ final class TifloNativeActionListController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if UIAccessibility.isVoiceOverRunning {
-            let first = tableView.cellForRow(at: IndexPath(row: 0, section: 0))
-            UIAccessibility.post(notification: .screenChanged, argument: first ?? tableView)
+            let position = entries.firstIndex(where: { $0.id == initialItemId }) ?? 0
+            if !entries.isEmpty {
+                let indexPath = IndexPath(row: position, section: 0)
+                tableView.scrollToRow(at: indexPath, at: .middle, animated: false)
+                tableView.layoutIfNeeded()
+                let focused = tableView.cellForRow(at: indexPath)
+                UIAccessibility.post(notification: .screenChanged, argument: focused ?? tableView)
+            } else {
+                UIAccessibility.post(notification: .screenChanged, argument: tableView)
+            }
         }
     }
 

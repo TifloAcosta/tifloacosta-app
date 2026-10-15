@@ -8,45 +8,61 @@ const controller = read('ios-build/native/TifloNativeActionListController.swift'
 const installer = read('ios-build/install-native-video.mjs');
 const bridge = read('ios-build/ios-reader-native.js');
 const website = read('web-reading.js');
+const packager = read('ios-build/prepare-web.mjs');
 
-test('native rotor actions belong to the actual VoiceOver-focused UIKit cell', () => {
+test('native UIKit actions belong to the focused row, not the WKWebView container', () => {
   assert.match(controller, /UITableViewController/);
   assert.match(controller, /cell\.accessibilityCustomActions = rowActionHandlers\[indexPath\.row\]/);
   assert.match(controller, /cell\.accessibilityLabel = entry\.title/);
-  assert.match(controller, /UIAccessibilityCustomAction\(/);
-  assert.match(controller, /accessibilityTraits = \[\.button\]/);
+  assert.match(controller, /initialItemId: String\?/);
+  assert.match(controller, /scrollToRow\(at: indexPath/);
+  assert.match(controller, /UIAccessibility\.post\(notification: \.screenChanged/);
 });
 
-test('signed-app preparation includes source and registers pilot method', () => {
+test('production iOS build includes the native controller and its Capacitor bridge', () => {
   assert.match(installer, /native\/TifloNativeActionListController\.swift/);
-  assert.match(installer, /nativeListBody/);
   assert.match(installer, /accessibilityBody \+ '\\n\\n' \+ nativeListBody/);
   assert.match(plugin, /CAPPluginMethod\(name: "showNativeActionList"/);
-  assert.match(plugin, /controller\.onSelected =/);
+  assert.match(plugin, /func presentNativeActionList\(/);
   assert.match(plugin, /navigation\.modalPresentationStyle = \.fullScreen/);
 });
 
-test('pilot is opt-in, only in the iOS bundle, with unmodified web reader', () => {
-  assert.match(bridge, /function installNativeActionPilot\(/);
-  assert.match(bridge, /ios-voiceover-native-action-pilot/);
-  assert.match(bridge, /plugin\.showNativeActionList\(/);
-  assert.match(bridge, /installLibraryNativeActions\(\)/);
-  assert.match(bridge, /installNativeFilesImport\(\)/);
+test('native action list opens automatically upon VoiceOver focus, never via pilot button', () => {
+  assert.match(plugin, /self\.autoNativeLibraryEnabled = call\.getBool\("nativeRowsOnFocus"\) \?\? false/);
+  assert.match(plugin, /if autoNativeLibraryEnabled \{/);
+  assert.match(plugin, /preferredFocusId: id/);
+  assert.match(bridge, /registerLibraryTitles\(\{ documents, nativeRowsOnFocus: true \}\)/);
+  assert.doesNotMatch(bridge, /installNativeActionPilot|ios-voiceover-native-action-pilot|Probar acciones nativas de VoiceOver/);
   assert.doesNotMatch(website, /ios-voiceover-native-action-pilot/);
 });
 
-test('native action selected on a specific row is routed to existing app controls', () => {
-  assert.match(bridge, /pilotedIds\.has\(id\)/);
+test('actions are tied to document identity and reuse existing app capabilities', () => {
+  assert.match(bridge, /addListener\('nativeListAction'/);
+  assert.match(bridge, /getElementById\(id\)/);
   assert.match(bridge, /TifloIOSBookActions/);
-  for (const a of ['open', 'continue', 'queue', 'info', 'move', 'export', 'rename', 'delete']) {
-    assert.ok(bridge.includes(`selected === '${a}'`), a);
+  for (const key of ['open', 'continue', 'translate', 'queue', 'info', 'move', 'export', 'rename', 'delete']) {
+    assert.ok(bridge.includes(`action === '${key}'`), key);
   }
+  assert.match(bridge, /reading-translation-target/);
   assert.match(bridge, /nativeListClosed/);
-  assert.match(plugin, /nativeListAction/);
 });
 
-test('current HTML document actions stay available as a fallback', () => {
-  assert.match(bridge, /plugin\.registerLibraryTitles\(\{ documents \}\)/);
-  assert.match(bridge, /nativeDocumentListenerInstalled/);
+test('focus re-entrance is prevented and the existing HTML library remains a fallback', () => {
+  assert.match(plugin, /guard !nativePilotPresented else \{ return \}/);
+  assert.match(plugin, /suppressAutoNativeTitleId == id/);
+  assert.match(plugin, /presentingAutoNativeTitleId == id/);
+  assert.match(plugin, /suppressAutoNativeTitleId = preferredFocusId \?\? ""/);
+  assert.match(bridge, /installLibraryNativeActions\(\)/);
+  assert.match(bridge, /installNativeFilesImport\(\)/);
   assert.match(website, /card\.append\(title, detailsToggle, details\)/);
+});
+
+test('the real document operations are injected only into the packaged iOS reader', () => {
+  assert.match(packager, /window\.TifloIOSBookActions =/);
+  assert.match(packager, /card\.dataset\.iosBookId = String\(book\.id\)/);
+  assert.match(packager, /deleteBook: id => deleteSavedBook\(id\)/);
+  assert.match(packager, /renameBook: id =>/);
+  assert.match(packager, /queueBook: async id =>/);
+  assert.match(packager, /return Boolean\(deleted\)/);
+  assert.doesNotMatch(website, /window\.TifloIOSBookActions =/);
 });

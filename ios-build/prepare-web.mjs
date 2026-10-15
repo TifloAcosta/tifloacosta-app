@@ -140,6 +140,98 @@ if (!daisyZipSupported || !nativeAccessibleDocumentActions) {
 }
 console.log('Prechequeos de estructura, DAISY y accesibilidad completados; queda validación real en dispositivo.');
 
+
+// Real document-action handlers exist inside web-reading.js's closure. Expose
+// them ONLY in the packaged iPhone copy. This repairs the old iOS bridge,
+// which previously referenced TifloIOSBookActions without defining it.
+const iosBookActionGlue = String.raw\`
+  window.TifloIOSBookActions = {
+    currentId: () => currentBookId || '',
+    hasSavedBook: () => Boolean(currentBookId),
+    openBook: id => openSavedBook(id),
+    exportBook: (id, format = 'original') => exportSavedBook(id, format),
+    exportCurrent: format => currentBookId ? exportSavedBook(currentBookId, format) : Promise.resolve(false),
+    deleteBook: id => deleteSavedBook(id),
+    deleteCurrent: () => currentBookId ? deleteSavedBook(currentBookId) : Promise.resolve(false),
+    renameCurrent: async value => {
+      if (!libraryClient || !currentBookId || !String(value || '').trim()) return false;
+      const existing = await libraryClient.openBook(currentBookId);
+      if (!existing?.book) return false;
+      const saved = await libraryClient.updateBookMetadata({
+        ...existing.book, title: String(value).trim()
+      });
+      if (saved) {
+        els.title.textContent = String(value).trim();
+        await renderLibrary();
+      }
+      return Boolean(saved);
+    },
+    renameBook: id => {
+      const card = [...els.libraryList.querySelectorAll('.reading-library-title-card')]
+        .find(node => node.dataset.iosBookId === String(id));
+      if (!card) return false;
+      const toggle = card.querySelector('.reading-library-details-toggle');
+      const details = card.querySelector('.reading-library-title-details');
+      if (details?.hidden) toggle?.click();
+      const more = [...details.querySelectorAll('button')]
+        .find(node => node.textContent?.trim() === (language() === 'en' ? 'More actions' : 'Más acciones'));
+      more?.click();
+      const form = details.querySelector('details');
+      if (!form) return false;
+      form.open = true;
+      form.querySelector('input')?.focus({ preventScroll: true });
+      return true;
+    },
+    infoBook: id => {
+      const card = [...els.libraryList.querySelectorAll('.reading-library-title-card')]
+        .find(node => node.dataset.iosBookId === String(id));
+      if (!card) return false;
+      const toggle = card.querySelector('.reading-library-details-toggle');
+      const details = card.querySelector('.reading-library-title-details');
+      if (details?.hidden) toggle?.click();
+      details?.querySelector('h4')?.focus({ preventScroll: true });
+      return true;
+    },
+    queueBook: async id => {
+      if (!libraryClient) return false;
+      const queued = await libraryClient.listQueue();
+      const present = queued.some(item => String(item.id) === String(id));
+      const changed = present
+        ? await libraryClient.removeFromQueue(id)
+        : await libraryClient.addToQueue(id);
+      if (changed) {
+        if (String(currentBookId) === String(id)) {
+          currentQueued = !present;
+          updateQueueToggle();
+        }
+        await renderQueue();
+        await renderLibrary();
+      }
+      return Boolean(changed);
+    }
+  };
+\`;
+if (!readerScript.includes("card.className = 'resource-card reading-library-title-card';") ||
+    !readerScript.trimEnd().endsWith('})();') ||
+    readerScript.includes('window.TifloIOSBookActions =')) {
+  throw new Error('iOS: no se pueden instalar acciones de documentos sin tocar web/Android');
+}
+const withNativeIds = readerScript.replace(
+  "card.className = 'resource-card reading-library-title-card';",
+  "card.className = 'resource-card reading-library-title-card';\\n        card.dataset.iosBookId = String(book.id);"
+);
+const packagedReader = withNativeIds.replace(/\\}\\)\\(\\);\\s*$/, iosBookActionGlue + '\\n})();\\n')
+  .replace('if (globalThis.confirm?.(question) !== true) return;\\n    const deleted = await libraryClient.deleteBook(id);',
+    'if (globalThis.confirm?.(question) !== true) return false;\\n    const deleted = await libraryClient.deleteBook(id);')
+  .replace('await Promise.all([renderLibrary(), renderQueue(), renderMarks()]);\\n  }\\n\\n  function updateQueueToggle()',
+    'await Promise.all([renderLibrary(), renderQueue(), renderMarks()]);\\n    return Boolean(deleted);\\n  }\\n\\n  function updateQueueToggle()');
+if (!packagedReader.includes('window.TifloIOSBookActions =') ||
+    !packagedReader.includes('card.dataset.iosBookId = String(book.id);') ||
+    !packagedReader.includes('return Boolean(deleted);')) {
+  throw new Error('iOS: falló la instalación del puente real de acciones de documentos');
+}
+await writeFile(join(output, 'web-reading.js'), packagedReader, 'utf8');
+
 // Only the packaged iOS copy receives episode enclosures: no change to the
 // published website, Android resources, or repository source catalogue.
 const mediaPath = join(output, 'actualidad-media.json');

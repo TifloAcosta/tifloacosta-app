@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - 'feature/youtube-actions'
+      - 'feature/ios-videos-accesibles-2026-10-15'
       - 'main'
     paths:
       - 'youtube-worker/**'

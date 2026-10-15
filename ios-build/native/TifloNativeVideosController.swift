@@ -270,8 +270,8 @@ final class TifloNativeVideosController: UITableViewController, UISearchBarDeleg
             let actions: [(String, String)] = [
                 ("play", "Reproducir"),
                 ("youtube", "Abrir en YouTube"),
-                ("like", "Me gusta o quitar Me gusta"),
-                ("subscribe", "Suscribirse o cancelar suscripción"),
+                ("like", "Me gusta"),
+                ("subscribe", "Suscripción"),
                 ("share", "Compartir"),
                 ("comment", "Comentar")
             ]
@@ -304,7 +304,7 @@ final class TifloNativeVideosController: UITableViewController, UISearchBarDeleg
         let video = visible[indexPath.row]
         let options: [(String, String)] = [
             ("play", "Reproducir"), ("youtube", "Abrir en YouTube"),
-            ("like", "Me gusta o quitar Me gusta"), ("subscribe", "Suscribirse o cancelar suscripción"),
+            ("like", "Me gusta"), ("subscribe", "Suscripción"),
             ("share", "Compartir"), ("comment", "Comentar")
         ]
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] _ in

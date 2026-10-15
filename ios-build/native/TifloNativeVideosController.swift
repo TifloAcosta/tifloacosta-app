@@ -145,6 +145,20 @@ final class TifloNativeVideosController: UITableViewController, UISearchBarDeleg
         updateState()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        guard let header = tableView.tableHeaderView, tableView.bounds.width > 0 else { return }
+        let size = header.systemLayoutSizeFitting(
+            CGSize(width: tableView.bounds.width, height: UIView.layoutFittingCompressedSize.height),
+            withHorizontalFittingPriority: .required,
+            verticalFittingPriority: .fittingSizeLevel
+        )
+        if size.height > 0 && abs(size.height - header.frame.height) > 1 {
+            header.frame.size.height = size.height
+            tableView.tableHeaderView = header
+        }
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         guard needsInitialFocus && UIAccessibility.isVoiceOverRunning else { return }

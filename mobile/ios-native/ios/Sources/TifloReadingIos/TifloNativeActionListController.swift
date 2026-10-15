@@ -16,15 +16,17 @@ struct TifloNativeListItem {
 
 private final class TifloNativeRowActionHandler: NSObject {
     private let invoke: () -> Void
-    let accessibilityAction: UIAccessibilityCustomAction
+    private(set) var accessibilityAction: UIAccessibilityCustomAction!
 
     init(label: String, invoke: @escaping () -> Void) {
         self.invoke = invoke
-        // UIKit accessibility actions target this retained, row-specific object.
-        self.accessibilityAction = UIAccessibilityCustomAction(name: label)
         super.init()
-        self.accessibilityAction.target = self
-        self.accessibilityAction.selector = #selector(run(_:))
+        // The custom action targets the retained handler of this exact row.
+        self.accessibilityAction = UIAccessibilityCustomAction(
+            name: label,
+            target: self,
+            selector: #selector(run(_:))
+        )
     }
 
     @objc private func run(_ action: UIAccessibilityCustomAction) -> Bool {

@@ -153,3 +153,10 @@ Incidencia informada tras actualización de hoy: al entrar en Vídeos, VoiceOver
 Reparación exclusiva iOS: PR #193 integrado, merge 4b4fcd0fdf9931ef29d3b069ea277d63c19ce700. Restaurar visibilidad de UIKit sin ocultar el WKWebView que puede actuar como su contenedor; pantalla nativa opaca y prioritaria, gestión de accesibilidad sin esconder ancestros, restaurar foco al salir.
 Preflight y compilación Xcode sin firma CI 38869439467: SUCCESS. Respaldo previo backup/ios-before-videos-blank-fix-20261016. No modificar TifloLector, biblioteca, datos, Android, web ni las funciones de Vídeos ya aceptadas.
 Publicar SOLO para grupo interno «Probadores TifloAcosta». No comunicar actualización al usuario hasta verificar compilación firmada enviada, procesamiento Apple VALID y asignación al grupo interno. Cuando esté disponible enviar aviso por correo a tonytenerife@gmail.com; no dar por resuelto VoiceOver sin nueva prueba real del iPhone.
+
+
+SOLICITUD ÚNICA DE TESTFLIGHT INTERNO — TIFLOLECTOR + COMPARTIR — 16/10/2026.
+Origen verificado: rama preparacion-ios, integración PR #196, merge fb8228f2e56d23ff6cca1101b9a920a53d0628ac.
+Contenidos: control ajustable por VoiceOver con etiqueta y valor visibles; biblioteca en filas compactas con un solo título accionable; ajustes de lectura sin alterar web ni Android; Share Extension nativa para enlaces, texto y documentos recibidos mediante App Group group.com.tifloacosta.app, más bandeja de entrada de TifloLector.
+Seguridad y firma: comprobación de App Groups real 38913977894 SUCCESS (ambos identificadores autorizados); preflight 38913976528 SUCCESS; compilación Share Extension sin firma 38913977296 SUCCESS. Las firmas y perfiles definitivos se generan y comprueban al publicar; abortar si falta autorización o extensión embebida.
+Preservar datos y preferencias; no desinstalar la versión actual. Enviar exclusivamente a Probadores TifloAcosta. No afirmar que se ha corregido la presentación de Vídeos hasta comprobarla físicamente en el iPhone. Confirmar Apple VALID y asignación interna antes de notificar por correo a tonytenerife@gmail.com.

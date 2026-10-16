@@ -59,8 +59,8 @@ test('La recepción del sistema no elimina archivos antes de la importación', (
   const inbox = readFileSync(new URL('../ios-build/ios-share-inbox.js', import.meta.url), 'utf8');
   const host = readFileSync(new URL('../ios-build/native/TifloShareInboxPlugin.swift', import.meta.url), 'utf8');
   const extension = readFileSync(new URL('../ios-build/share-extension/ShareViewController.swift', import.meta.url), 'utf8');
-  assert.match(inbox, /if \(!imported \|\| reader\.hasSavedBook\?\.\(\) !== true\)/);
-  assert.match(inbox, /await plugin\(\)\.acknowledge\(\{ id: item\.id \}\)/);
+  assert.match(inbox, /if \(!imported \|\| actions\.hasSavedBook\?\.\(\) !== true\)/);
+  assert.match(inbox, /await native\(\)\.acknowledge\(\{id:item\.id\}\)/);
   assert.match(host, /func acknowledge\(/);
   assert.match(extension, /maxBytes: Int64 = 100 \* 1024 \* 1024/);
 });

@@ -39,5 +39,27 @@
     }
   }
 
-  window.TifloIOSShare = Object.freeze({ shareURL });
+  async function shareBlob({ blob, name } = {}) {
+    const transfer = window.Capacitor?.Plugins?.TifloShareInbox;
+    if (!transfer?.shareData || !(blob instanceof Blob) || blob.size === 0 ||
+        blob.size > 15 * 1024 * 1024) return 'unavailable';
+    const filename = String(name || 'documento.txt').replace(/[\\/:*?"<>|]/g, '-').slice(0, 160);
+    const base64 = await new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.onerror = () => reject(new Error('file-read-failed'));
+      fileReader.onload = () => {
+        const value = String(fileReader.result || '');
+        resolve(value.substring(value.indexOf(',') + 1));
+      };
+      fileReader.readAsDataURL(blob);
+    });
+    try {
+      const result = await transfer.shareData({ name: filename, base64 });
+      return result?.completed ? 'completed' : 'cancelled';
+    } catch {
+      return 'failed';
+    }
+  }
+
+  window.TifloIOSShare = Object.freeze({ shareURL, shareBlob });
 })();

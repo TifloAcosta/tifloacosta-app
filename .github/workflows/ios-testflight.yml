@@ -313,8 +313,8 @@ jobs:
           const extProfile=extCreated.data;
           fs.writeFileSync(path.join(dir,extProfile.attributes.uuid+'.mobileprovision'),
             Buffer.from(extProfile.attributes.profileContent,'base64'),{mode:0o600});
-          fs.appendFileSync(process.env.GITHUB_ENV,'IOS_SHARE_PROFILE_NAME='+extProfileName+'\\n');
-          fs.appendFileSync(process.env.GITHUB_ENV,'IOS_SHARE_PROFILE_UUID='+extProfile.attributes.uuid+'\\n');
+          fs.appendFileSync(process.env.GITHUB_ENV,'IOS_SHARE_PROFILE_NAME='+extProfileName+'\n');
+          fs.appendFileSync(process.env.GITHUB_ENV,'IOS_SHARE_PROFILE_UUID='+extProfile.attributes.uuid+'\n');
           console.log('Perfil de distribución App Store generado e instalado.');
           NODE
       - name: Validar App Group en los dos perfiles Apple

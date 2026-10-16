@@ -195,12 +195,23 @@ const iosBookActionGlue = String.raw`
       }
     },
     importSharedFile: async file => {
-      if (!(file instanceof File) || !els.file || !file.name) return false;
+      if (!(file instanceof File) || !els.file || !file.name || !libraryClient) {
+        return { saved:false, reason:'invalid-source' };
+      }
+      // Opening the reader is not proof of persistence. Never acknowledge a
+      // Share Extension item until the exact imported book can be read back.
       const transfer = new DataTransfer();
       transfer.items.add(file);
       els.file.value = '';
       els.file.files = transfer.files;
-      return Boolean(await importSelectedFile());
+      const imported = await importSelectedFile();
+      const id = String(currentBookId || '');
+      if (!imported || !id) return { saved:false, reason:'not-saved' };
+      const persisted = await libraryClient.openBook(id).catch(() => null);
+      if (!persisted?.book || String(persisted.book.id) !== id) {
+        return { saved:false, reason:'readback-failed' };
+      }
+      return { saved:true, id };
     },
     exportCurrent: format => currentBookId ? exportSavedBook(currentBookId, format) : Promise.resolve(false),
     deleteBook: id => deleteSavedBook(id),

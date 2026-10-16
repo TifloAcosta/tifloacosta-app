@@ -420,6 +420,25 @@
     if (key === lastPresentedKey) return;
     refreshing = true;
     try {
+      // A queued EPUB/link must remain reachable in the HTML reader.
+      // Do not cover its Share inbox with the generic full-screen Library.
+      if (info.kind === 'library') {
+        const shared = window.Capacitor?.Plugins?.TifloShareInbox;
+        if (shared?.pending) {
+          try {
+            const staged = await shared.pending();
+            if (Array.isArray(staged?.items) && staged.items.length) {
+              await window.TifloIOSShareInbox?.refresh?.();
+              return;
+            }
+          } catch {
+            // Show the diagnostic from the inbox rather than masking it
+            // with an empty modal when the App Group cannot be read.
+            await window.TifloIOSShareInbox?.refresh?.();
+            return;
+          }
+        }
+      }
       const items = gather(info);
       if (!items.length) return;
       const status = await api.getVoiceOverStatus();
@@ -602,6 +621,7 @@
   // A navigation opens the actual UIKit list once; changes to filters/pages
   // may reopen it on request. No temporary test button is installed.
   window.addEventListener('hashchange', allowReshow);
+  window.addEventListener('tiflo-share-inbox-changed', allowReshow);
   window.addEventListener('pageshow', schedule);
   window.addEventListener('focus', schedule);
   document.addEventListener('visibilitychange', () => {

@@ -24,17 +24,30 @@ const unsigned=head+'.'+claims;
 const signature=crypto.sign('sha256',Buffer.from(unsigned),{key,dsaEncoding:'ieee-p1363'}).toString('base64url');
 const auth='Bearer '+unsigned+'.'+signature;
 async function api(path,options={}){
-  const reply=await fetch('https://api.appstoreconnect.apple.com/v1/'+path,{
-    ...options,
-    headers:{Authorization:auth,'Content-Type':'application/json',...(options.headers||{})}
-  });
-  const raw=await reply.text();
-  const data=raw?JSON.parse(raw):{};
-  if(!reply.ok){
+  // Apple's certificate/profile reads sometimes fail with transient 500s.
+  // Retry ONLY safe GET requests; repeating profile creation or deletion
+  // could create duplicates or hide a failed cleanup.
+  const method=String(options.method||'GET').toUpperCase();
+  const retryable=new Set([429,500,502,503,504]);
+  const attempts=method==='GET'?3:1;
+  for(let attempt=0;attempt<attempts;attempt++){
+    const reply=await fetch('https://api.appstoreconnect.apple.com/v1/'+path,{
+      ...options,
+      headers:{Authorization:auth,'Content-Type':'application/json',...(options.headers||{})}
+    });
+    const raw=await reply.text();
+    let data;
+    try { data=raw?JSON.parse(raw):{}; }
+    catch { throw Error('Respuesta JSON inválida de Apple API '+reply.status); }
+    if(reply.ok) return data;
     const codes=(data.errors||[]).map(x=>x.code||x.title).filter(Boolean).join(', ');
+    if(method==='GET'&&retryable.has(reply.status)&&attempt+1<attempts){
+      console.log('Apple API temporalmente no disponible; reintentando consulta segura ('+(attempt+1)+'/'+attempts+').');
+      await new Promise(resolve=>setTimeout(resolve,1500*(attempt+1)));
+      continue;
+    }
     throw Error('Apple API '+reply.status+(codes?': '+codes:''));
   }
-  return data;
 }
 const ids=['com.tifloacosta.app','com.tifloacosta.app.ShareExtension'];
 const profiles=[];

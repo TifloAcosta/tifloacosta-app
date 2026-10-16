@@ -375,8 +375,8 @@ jobs:
             <key>teamID</key><string>3A8G8A62YZ</string>
           </dict></plist>
           PLIST
-          sed -i '' "s/PROFILE_REPLACEME/$IOS_PROFILE_NAME/g" "$RUNNER_TEMP/ExportOptions.plist"
           sed -i '' "s/SHARE_PROFILE_REPLACEME/$IOS_SHARE_PROFILE_NAME/g" "$RUNNER_TEMP/ExportOptions.plist"
+          sed -i '' "s/PROFILE_REPLACEME/$IOS_PROFILE_NAME/g" "$RUNNER_TEMP/ExportOptions.plist"
       - name: Exportar IPA firmada
         env:
           API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}

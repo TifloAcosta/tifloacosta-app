@@ -499,7 +499,7 @@ let iosPodcast = await readFile(iosPodcastPath, 'utf8');
 const podcastCardAnchor = "      article.className = 'podcast-episode-card';";
 if (!iosPodcast.includes(podcastCardAnchor)) throw new Error('No se encuentra tarjeta de podcast');
 iosPodcast = iosPodcast.replace(podcastCardAnchor, podcastCardAnchor +
-  "\\n      article.dataset.tifloShareUrl = /^https?:/i.test(episode.audioUrl) ? episode.audioUrl : '';");
+  "\n      article.dataset.tifloShareUrl = /^https?:/i.test(episode.audioUrl) ? episode.audioUrl : '';");
 await writeFile(iosPodcastPath, iosPodcast);
 
 // In iOS, category pages already identify the category in the result status.

@@ -205,7 +205,8 @@ test('Compartir distribuye archivos, YouTube y otros enlaces sin superponer pant
   assert.ok(inbox.includes('await youtube().open({videoId:id'));
   assert.ok(inbox.includes('await native().openURL({url:address})'));
   assert.ok(inbox.includes('await importDocument(item, opened, targetStatus)'));
-  assert.ok(inbox.includes("actions.hasSavedBook?.() !== true"));
+  assert.ok(inbox.includes("imported?.saved !== true || !imported.id"));
+  assert.ok(prepare.includes("libraryClient.openBook(id)"));
   assert.ok(inbox.includes("window.addEventListener('hashchange'"));
   assert.ok(inbox.includes('await accessibility()?.dismissNativeActionList?.()'));
   assert.ok(nativeActions.includes('CAPPluginMethod(name: "dismissNativeActionList"'));

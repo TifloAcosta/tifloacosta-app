@@ -112,4 +112,4 @@ await writeFile(resolve(appIconSet, 'Contents.json'), JSON.stringify({
 }, null, 2) + '\n');
 console.log('Icono nativo iOS de TifloAcosta instalado: 1024x1024, sin transparencia');
 
-console.log('Reproductor y autorización Google iOS instalados con retorno seguro');
+// The generated Capacitor Xcode project never contains the extension by default.\nexecFileSync('/usr/bin/ruby', [resolve(root, 'configure-share-extension.rb')], { stdio: 'inherit' });\nconsole.log('Reproductor y autorización Google iOS instalados con retorno seguro');

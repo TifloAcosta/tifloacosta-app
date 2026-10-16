@@ -42,6 +42,10 @@ app.build_configurations.each do |config|
 end
 ext.build_configurations.each do |config|
   settings = config.build_settings
+  settings['PRODUCT_NAME'] = 'TifloShareExtension'
+  settings['PRODUCT_MODULE_NAME'] = 'TifloShareExtension'
+  settings['EXECUTABLE_NAME'] = 'TifloShareExtension'
+  settings['MACH_O_TYPE'] = 'mh_execute'
   settings['PRODUCT_BUNDLE_IDENTIFIER'] = 'com.tifloacosta.app.ShareExtension'
   settings['INFOPLIST_FILE'] = 'TifloShareExtension/Info.plist'
   settings['GENERATE_INFOPLIST_FILE'] = 'NO'

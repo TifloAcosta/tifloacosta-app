@@ -44,6 +44,24 @@
       register(card.querySelector('h3'), 'podcast', actions);
       register(card.querySelector('button'), 'podcast', actions);
     });
+    // Existing news, guide, book and download links keep their own visual
+    // presentation. Add focus-bound rotor actions instead of full-screen lists.
+    const contentLinks = [
+      '#news-list a[href]', '#guide-chapters a[href]',
+      '#actualidad-home-list a[href]', '#downloads-list a[href]',
+      '#book-section a[href]', '#contact-section a[href]',
+      '#privacy-section a[href]'
+    ];
+    document.querySelectorAll(contentLinks.join(',')).forEach(link => {
+      const href = String(link.href || '');
+      const actions = [action('open', 'Abrir', 'Open')];
+      if (/^https?:\/\//i.test(href)) {
+        actions.push(action('share', 'Compartir enlace', 'Share link'));
+        actions.push(action('copy', 'Copiar enlace', 'Copy link'));
+      }
+      register(link, 'article', actions);
+    });
+
     // The app already provides working document operations in a dialog.
     // The rotor invokes those exact existing actions without additional UI.
     document.querySelectorAll('.resource-card h3 a[aria-haspopup="dialog"]').forEach(link => {
@@ -85,6 +103,21 @@
           paragraph.tabIndex = -1;
           paragraph.focus({ preventScroll: true });
         }
+      }
+      return;
+    }
+    if (target.kind === 'article') {
+      const link = element.closest('a[href]');
+      if (!link) return;
+      if (choice === 'open') { link.click(); return; }
+      const href = String(link.href || '');
+      if (!/^https?:\/\//i.test(href)) return;
+      if (choice === 'share') {
+        void window.TifloIOSShare?.shareURL?.({ url:href,
+          title:String(link.textContent || '').trim() });
+      }
+      if (choice === 'copy') {
+        void navigator.clipboard?.writeText?.(href);
       }
       return;
     }

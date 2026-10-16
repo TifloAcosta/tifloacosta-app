@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 import Capacitor
 
 // Host-side, read-only preview of the App Group inbox. The shared item is
@@ -10,8 +11,58 @@ public final class TifloShareInboxPlugin: CAPPlugin, CAPBridgedPlugin {
     public let pluginMethods: [CAPPluginMethod] = [
         CAPPluginMethod(name: "pending", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "openItem", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "acknowledge", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "acknowledge", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "shareData", returnType: CAPPluginReturnPromise)
     ]
+
+    // File-based native Share Sheet for originals stored only in the Web reader.
+    // Limited to 15 MB because the Capacitor bridge passes base64 in memory.
+    @objc public func shareData(_ call: CAPPluginCall) {
+        guard let raw = call.getString("base64"),
+              raw.count <= 21_000_000,
+              let data = Data(base64Encoded: raw), data.count <= 15 * 1024 * 1024,
+              !data.isEmpty else {
+            call.reject("Archivo demasiado grande o no válido para Compartir")
+            return
+        }
+        let untrusted = call.getString("name") ?? "documento.txt"
+        let name = URL(fileURLWithPath: untrusted).lastPathComponent
+        guard !name.isEmpty, name != ".", name != ".." else {
+            call.reject("Nombre de archivo no válido")
+            return
+        }
+        let folder = FileManager.default.temporaryDirectory
+            .appendingPathComponent("tiflo-share-" + UUID().uuidString, isDirectory: true)
+        do {
+            try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+            let target = folder.appendingPathComponent(name)
+            try data.write(to: target, options: [.atomic])
+            DispatchQueue.main.async {
+                guard let controller = self.bridge?.viewController,
+                      controller.presentedViewController == nil else {
+                    try? FileManager.default.removeItem(at: folder)
+                    call.reject("Ya hay una ventana abierta")
+                    return
+                }
+                let sheet = UIActivityViewController(activityItems: [target], applicationActivities: nil)
+                if let popover = sheet.popoverPresentationController {
+                    popover.sourceView = controller.view
+                    popover.sourceRect = CGRect(x: controller.view.bounds.midX,
+                        y: controller.view.bounds.midY, width: 1, height: 1)
+                }
+                sheet.completionWithItemsHandler = { _, completed, _, error in
+                    try? FileManager.default.removeItem(at: folder)
+                    if error != nil { call.reject("No se pudo compartir el documento") }
+                    else { call.resolve(["completed": completed]) }
+                }
+                controller.present(sheet, animated: true)
+            }
+        } catch {
+            try? FileManager.default.removeItem(at: folder)
+            call.reject("No se pudo preparar el archivo para compartir")
+        }
+    }
+
     private let group = "group.com.tifloacosta.app"
 
     private func inbox() -> URL? {

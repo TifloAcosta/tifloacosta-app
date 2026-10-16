@@ -174,3 +174,27 @@
   outline: 3px solid var(--focus);
   outline-offset: 2px;
 }
+
+/* iOS-only safe areas and overflow. The packaged viewport opts in to
+   viewport-fit=cover; these insets keep content away from the clock,
+   camera island, rounded sides and Home indicator without fixed heights. */
+html, body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+body {
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+#home-blocks, #reading-section, #reading-library-web,
+#reading-library-list, #ios-shared-received, #ios-share-inbox {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+#home-blocks button, #reading-section button {
+  max-width: 100%;
+}

@@ -315,7 +315,7 @@
       const entries = [...root.querySelectorAll('.reading-library-title')];
       for (const title of entries) {
         if (!available(title)) continue;
-        const keys = ['open', 'continue', 'translate', 'queue', 'info', 'move', 'export', 'rename', 'delete'];
+        const keys = ['open', 'continue', 'translate', 'queue', 'info', 'move', 'export', 'share', 'rename', 'delete'];
         // The iOS reading bridge already dispatches nativeListAction for these
         // exact DOM title IDs and keeps its deletion confirmation.
         makeEntry(title, 'library', title.textContent?.trim(), keys, null, list);

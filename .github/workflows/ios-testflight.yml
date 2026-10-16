@@ -281,13 +281,10 @@ jobs:
             }})});
             extBundle=created.data;
           }
-          for(const entry of [bundle,extBundle]){
-            const capabilities=await api('bundleIds/'+entry.id+'/bundleIdCapabilities');
-            if(!capabilities.data.some(item=>item.attributes.capabilityType==='APP_GROUPS')) {
-              throw Error('Es necesario asociar group.com.tifloacosta.app en Apple Developer para '+
-                entry.attributes.identifier+'. No se enviará un IPA sin ese permiso.');
-            }
-          }
+          // The next step verifies the actual signed App Group entitlements
+          // in both provisioning profiles, which is stronger than a capability
+          // flag reported by the Bundle ID API.
+
           const profileName='TifloAcosta AppStore '+process.env.GITHUB_RUN_ID;
           const created=await api('profiles',{method:'POST',body:JSON.stringify({data:{
             type:'profiles',attributes:{name:profileName,profileType:'IOS_APP_STORE'},

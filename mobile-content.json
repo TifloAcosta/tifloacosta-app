@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-16T14:19:07.528Z",
+  "generatedAt": "2026-10-16T17:27:49.274Z",
   "resources": [
     {
       "kind": "resource",
@@ -5448,32 +5448,15 @@
   "news": [
     {
       "kind": "news",
-      "id": "9to5mac-6fd6651ea7d1b635:en",
-      "sourceId": "9to5mac-6fd6651ea7d1b635",
+      "id": "engadget-e8356b2be645f9d0:en",
+      "sourceId": "engadget-e8356b2be645f9d0",
       "lang": "en",
-      "title": "iPhone Duo now available to pre-order, prices start at $1,999",
-      "summary": "Apple’s first-ever foldable iPhone is now available for pre-order . You can head to Apple’s website or the Apple Store app this morning to place your iPhone Duo pre-order, with the first orders arriving in one week on October 23. more…",
-      "body": "Apple’s first-ever foldable iPhone is now available for pre-order . You can head to Apple’s website or the Apple Store app this morning to place your iPhone Duo pre-order, with the first orders arriving in one week on October 23.\n\nApple is bringing the Apple Store back online in waves, so if you don’t have the option to pre-order iPhone Duo just yet, keep waiting.\n\nAs a refresher, iPhone Duo features a 5.4-inch outer display that unfolds into a 7.6-inch inner display. It’s powered by Apple’s A20 Pro chip. It has a dual-camera system on the back, including a 48MP Main camera and a 48MP Ultra Wide camera. There’s a Center Stage camera on the front, as well as a FaceTime camera underneath the inner display.\n\nHere’s Apple on some of the software optimizations for the foldable iPhone Duo:\n\nThe expansive display on iPhone Duo supercharges productivity with Split View multitasking and seamless app switching, and a reimagined yet familiar iOS experience introduces entirely new ways to interact with iPhone.\n\niOS also adapts to content on iPhone Duo by reacting as it folds, reorienting when turned to the side, and switching to the appropriate display when flipped over. iPhone Duo can also enter StandBy on either the outer or inner display — even when it’s not charging — turning the device into a photo frame, a hub for widgets, a clock, and more.\n\niPhone Duo is available in two colors: star white and night sky. Pricing starts at $1,999 for the 256GB model .\n\nYou can also shop iPhone Duo carrier offers , where you can score monthly prices from $55/month and get up to $1,200 off with an eligible trade-in.\n\nAre you pre-ordering the iPhone Duo this morning? If so, what color and storage configuration are you buying? Were you able to secure launch day delivery? Let us know down in the comments.\n\nFollow Chance : Threads , X , and Instagram",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/16/iphone-duo-now-available-to-pre-order-prices-start-at-1999/",
-      "publishedAt": "2026-10-16T12:01:14.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-8e6db15281ff784c:en",
-      "sourceId": "the-verge-8e6db15281ff784c",
-      "lang": "en",
-      "title": "The iPhone Duo is now available to preorder at $1,999",
-      "summary": "Few phones have been more anticipated than a foldable iPhone, but it's finally here. The iPhone Duo was unveiled during Apple's \"Surprise and shine\" event alongside the iPhone 18 Pro and the Apple Watch Series 12 and Ultra 4 models. Apple's first foldable has a 5.4-inch outer screen, and it unfolds to show off its […]",
-      "body": "Few phones have been more anticipated than a foldable iPhone, but it's finally here. The iPhone Duo was unveiled during Apple's \"Surprise and shine\" event alongside the iPhone 18 Pro and the Apple Watch Series 12 and Ultra 4 models.\n\nApple's first foldable has a 5.4-inch outer screen, and it unfolds to show off its 7.6-inch Super Retina XDR screen. Apple Pencil support is coming later this year. While it lacks Face ID for facial unlocking, there's a Touch ID sensor along its edge to identify your fingerprint. The device has an IP68 rating, with Ceramic Shield 2 on its back, with Ceramic Shield covering the front display. It has the same A20 …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/gadgets/988582/apple-iphone-duo-preorder-buy-foldable",
-      "publishedAt": "2026-10-16T12:00:00.000Z",
+      "title": "If memory shortages last, tech companies should offer cheap battery replacements",
+      "summary": "If a company like Apple could offer $29 batteries before, it can do so again.",
+      "body": "Apple has done it before, and it can do it again.\n\nDue to \"sharply inflated\" memory costs, global smartphone prices are up an estimated 20 percent since the start of the year, which phone makers are passing on to consumers. Accordingly, people are holding on to their devices for longer, or turning to refurbished phones. Maybe that should have been the case all along, but there's still one major barrier to handset thriftiness: tech companies largely do not offer cheap battery replacements.\n\nLet's look at how much Apple charges to replace your phone's battery. If you own the newest Pro model, you're looking at $129 (or $10 more than older Pro models) for an out-of-warranty battery service direct from the company , while an older base model, such as the 2020 iPhone 12, will set you back $89. Apple has priced iPhone Duo batteries at $229.\n\nApple's current prices are in line with its competitors. Samsung doesn't prominently list the cost of out-of-warranty battery replacements on its website, but most reports online suggest you can expect to pay between $99 and $129 for a new one if you go directly through the company. Both Apple and Samsung incentivize people to sign up for their extended warranty plans ( AppleCare and Samsung Care+ , respectively) with included battery replacements, but those are packages you need to sign up for shortly after buying your device. iFixit is a great DIY alternative, but most modern phones aren't designed to be easily user-repairable.\n\nAt first glance, none of those prices are egregious, but historically Apple has charged far less. In 2018, the company dramatically reduced the price of out-of-warranty battery swaps as part of the fallout from its iPhone throttling debacle . For a full year, the company charged just $29 in the US — $50 less than its regular price at the time. Before 2018, it averaged about 1 to 2 million battery swaps per year; in 2018, that number reportedly jumped to 11 million .\n\nIf you remember that episode, you may also recall then-CEO Tim Cook cut the company's revenue forecast in January 2019, saying some customers were \"taking advantage of significantly reduced pricing for iPhone battery replacements\" instead of upgrading. Apple's revenue for the quarter fell 5 percent year-over-year , driven by a 15 percent drop in iPhone revenue. But Cook attributed most of the shortfall to an economic slowdown in China, worsened by the trade war between the US and China. Cheap battery replacements were, at best, a minor factor.\n\nSince 2018, phone prices have climbed, gradually at first and then sharply in recent months. On the same day Apple announced the iPhone 18 Pro and iPhone Duo , it raised the price of its older iPhones, including the 17, by $100. At the start of this month, Samsung hiked the price of most of its S26 phones by $100. That came after the phones had already launched at a higher price than their 2025 counterparts. Even midrange phones have been affected. Take Samsung's FE line of phones. At $700, the newest model, the S26 FE , costs more at release than the S25 FE and S24 FE did, and the new phone offers only modest upgrades over their predecessors.\n\nMore broadly, American consumers have seen their purchasing power decline, even as paychecks have grown. Consumer prices are up about 34 percent since January 2018, meaning a dollar now buys roughly a quarter less than it did then. On paper, workers are earning more. Average hourly earnings for private-sector employees rose from $26.72 to $29.91 by December 2020 , an 11.9 percent increase, while the Consumer Price Index rose 5.3 percent, for a real gain of about 6.3 percent. But the average masks what happened to the typical worker. A recent Pew Research Center analysis found that median weekly wages, adjusted for inflation, fell about 3.2 percent between December 2020 and December 2025. Average wages have slipped too: real hourly earnings are about 1 percent below their December 2020 level, and in August they were down 0.3 percent from a year earlier as inflation outpaced pay.\n\nOne of the most disappointing aspects of the memory crunch has been watching companies like Apple and Samsung respond. For the most part, they've moved to protect their profitability by raising prices above inflation. For example, the $100 increase on iPhone 17's previous $799 price represents a 12.5 percent jump at a time when the cost of other consumer goods only rose about 3.4 percent. While phones have become more complex, labor costs have increased and some components have grown more scarce, the one part of a phone that has truly cratered in cost has been the lithium-ion cells that power them.\n\nBefore the memory crunch, there were already good sustainability arguments for companies to offer cheap battery replacements. However, if the predictions from SK Hynix and other memory manufacturers prove true, and supply won't catch up with demand until 2030, Apple, Samsung and every device manufacturer should offer cheap, out-of-warranty battery replacements while memory shortages last.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2288908/if-memory-shortages-last-tech-companies-should-offer-cheap-battery-replacements/",
+      "publishedAt": "2026-10-16T16:32:00.000Z",
       "categories": [
         "tecnologia-general",
         "apple"
@@ -5481,19 +5464,194 @@
     },
     {
       "kind": "news",
-      "id": "the-verge-b500801a415a1abd:en",
-      "sourceId": "the-verge-b500801a415a1abd",
+      "id": "techcrunch-a2b7ca07af6de58e:en",
+      "sourceId": "techcrunch-a2b7ca07af6de58e",
       "lang": "en",
-      "title": "Surface Laptop Ultra review: a different kind of MacBook Pro",
-      "summary": "After setting up Microsoft's Surface Laptop Ultra, I spent five minutes just staring at it. I wasn't surprised by its MacBook Pro-like design or blown away by its bright display. I was trying to work out what I'd actually do with a $5,900 laptop. This isn't just any regular Windows laptop. Microsoft has teamed up […]",
-      "body": "After setting up Microsoft's Surface Laptop Ultra, I spent five minutes just staring at it. I wasn't surprised by its MacBook Pro-like design or blown away by its bright display. I was trying to work out what I'd actually do with a $5,900 laptop.\n\nThis isn't just any regular Windows laptop. Microsoft has teamed up with Nvidia to build a high-end laptop to showcase Nvidia's new Arm-based RTX Spark chips. It's a big moment for Windows on Arm, as these chips can run demanding AI models locally, alongside the latest AAA games and creative apps. The promise is compelling, but the reality of local AI is much messier.\n\nGetting the most out of the S …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1012628/microsoft-surface-laptop-ultra-review",
-      "publishedAt": "2026-10-16T12:00:00.000Z",
+      "title": "An Nvidia insider-turned-VC on why robotics hasn’t hit its ChatGPT moment, yet",
+      "summary": "Amulya Vishwanath, who spent seven years leading product marketing for NVIDIA’s robotics platforms, says robotics is currently in its “Lego era,” with the basic building blocks like actuators, robotic hands, software, and safety standards still being rebuilt. This view runs counter to those who believe that robotics, powered by a general foundation model, is about to have […]",
+      "body": "Loading the player…\n\nAmulya Vishwanath , who spent seven years leading product marketing for NVIDIA’s robotics platforms, says robotics is currently in its “Lego era,” with the basic building blocks like actuators, robotic hands, software, and safety standards still being rebuilt.\n\nThis view runs counter to those who believe that robotics, powered by a general foundation model, is about to have its “ChatGPT moment” — that day when the shockingly capable chatbot was launched in late 2022. (General Intuition CEO Pim de Witte told Equity earlier this year that a single general foundation model would make much of today’s specialized robotics work redundant, and be that moment.)\n\nOn this episode of TechCrunch’s Equity podcast, Dominic-Madori Davis caught up with Vishwanath to discuss where she’s writing first checks as the founder and managing partner of Techable VC. They also talked about what she’s learned as one of the first women executives to spin out of Nvidia and launch her own early-stage firm investing in physical AI across robotics, materials science, and life sciences.\n\nSubscribe to Equity on YouTube , Apple Podcasts , Overcast , Spotify and all the casts. You can also follow Equity on X and Threads , at @EquityPod.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/video/a-nvidia-insider-turned-vc-on-why-robotics-hasnt-hit-its-chatgpt-moment-yet/",
+      "publishedAt": "2026-10-16T16:30:00.000Z",
       "categories": [
         "tecnologia-general",
+        "programas-accesibles",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-ea095e624e384cee:en",
+      "sourceId": "techcrunch-ea095e624e384cee",
+      "lang": "en",
+      "title": "Elorian’s first AI model wants to reason with images, not just about them",
+      "summary": "According to Elorian's evaluations, Glimpse outperforms even GPT-6 Astra on scientific chart reasoning and short-form video captioning, with competitive results on other visual reasoning tasks.",
+      "body": "Elorian , the Palo Alto AI startup that raised a $55 million seed round at a $300 million valuation before it launched a product, released its first model on Friday, TechCrunch has exclusively learned.\n\nThe model, Glimpse , is launching as a research preview with API access and a chat interface is waitlist-only, so for now it’s a results table and a thesis. The thesis? Today’s AI models, for all their skill with language and code, still can’t really see.\n\nMost multimodal models look at an image once, convert it to tokens, and then reason about it in text — like describing a photo from memory. Glimpse keeps going back to the source. Mid-reasoning, it can crop into a region, pull specific frames from a video, or run code to measure or compare what it’s looking at, a mechanism Elorian calls a “visual scratch space.” Think of someone pinching to zoom on a phone photo to double-check what they thought they saw.\n\nFor former Google DeepMind researcher and Elorian CEO Andrew Dai, one of the clearest signs that AI still couldn’t really see came on game night.\n\nLast year he photographed a board game he’d just finished with friends and asked a frontier model who was winning. It couldn’t say. Board games “each have their own visual language, each have their own iconography, symbols,” he told TechCrunch. “To an adult, it’s quite easy to understand what’s going on with minimal text, but these models aren’t able to intuit what the symbols mean.”\n\n“Humans can look at Ikea diagrams, with no text, and assemble Ikea furniture, right? Why can’t AI models?” he said.\n\nThe approach isn’t completely new — OpenAI added crop-and-zoom during reasoning to its o-series models in 2025 — but Elorian’s pitch is that it built the whole model around it, cheaply. The company says a small team trained Glimpse on a few hundred GPUs and that the model is substantially smaller than the frontier systems it’s benchmarked against.\n\nGlimpse costs $0.60 per million tokens in and $3 per million tokens out — cheaper than mid-level models like Sonnet and Sol but more expensive than lightweight models like Haiku and Luna.\n\nBut according to Elorian’s evaluations, Glimpse outperforms even GPT-6 Astra on scientific chart reasoning and short-form video captioning, with competitive results on other visual reasoning tasks.\n\nElorian came out of stealth six months ago with a round co-led by Striker Venture Partners, Menlo Ventures, and Altimeter Capital, with participation from Nvidia and Google chief scientist Jeff Dean.\n\nThe initial targets are companies sitting on lots of video: robotics firms, scientific labs, media, and creative companies. Longer term, Elorian wants to move from seeing to doing. That means building a model of a scene using that to choose an action, including directly controlling robots. Next year, Dai said, the company aims to build “the world’s best visual reasoning model,” one that leads on every visual reasoning test.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/16/elorians-first-ai-model-wants-to-reason-with-images-not-just-about-them/",
+      "publishedAt": "2026-10-16T16:01:37.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-800e1b9616b29624:en",
+      "sourceId": "9to5mac-800e1b9616b29624",
+      "lang": "en",
+      "title": "Here’s the difference the variable aperture of the iPhone 18 Pro makes at night",
+      "summary": "I previously tested the difference the wider aperture of the iPhone 18 Pro makes when it comes to depth of field . The executive summary is that the difference is small, but definitely present. I said at the time that I’d intended to test the difference it made to Night mode shots when an unmissable night video opportunity had me write about that instead. So belatedly, let me turn my attention to Night mode photos … more…",
+      "body": "I previously tested the difference the wider aperture of the iPhone 18 Pro makes when it comes to depth of field . The executive summary is that the difference is small, but definitely present.\n\nI said at the time that I’d intended to test the difference it made to Night mode shots when an unmissable night video opportunity had me write about that instead. So belatedly, let me turn my attention to Night mode photos …\n\nOnce the ship had passed through the bridge, I stuck around to return to plan A: testing Night mode still photos. The new variable aperture lens offers two complementary advantages for night photography: allowing us to either increase or reduce the shutter speed depending on the effect we’re looking for.\n\nThe widest aperture is boosted from f/1.8 to f/1.48. The wider the aperture, the more light captured for any given period of time. That should mean that Night mode shots have a shorter duration, meaning we don’t have to hold the phone still for quite so long. The shorter the duration, the lower the chances that inadvertent movement will spoil the shot.\n\nI tested this with a number of shots and found that while the difference in duration was indeed rather small, as we’d expect from less than one stop of extra light, it may be enough to help in some circumstances.\n\nFor example, for this shot, switching from f/1.8 to f/1.48 reduced the duration from 2.1 seconds to 1.7 seconds.\n\nOther test shots showed similar results. The biggest differences are likely to be in the darkest of environments, like astrophotography. However, living in London, this is about as dark as it ever gets, and we never get to see stars, so that wasn’t something I could test.\n\nConversely, there may be times when we actually want a slower shutter speed. For example, having the shutter open for a longer period helps to smooth out choppy water, which can give a more pleasing appearance.\n\nBy manually reducing the aperture to the maximum of f/4 (a larger number is a smaller aperture), I was able to increase the exposure time to 4 seconds. This did indeed help give the water a smoother appearance.\n\nThis helps significantly with reflections on the water. For example, check out the reflections of the four spotlights on the floating pontoon under the Discover London from the Water sign, and compare this with the shot above.\n\nThe other benefit of the smaller aperture is the starburst effect you get from lights. Again, compare those pontoon spotlights as well as the street lamp on the left.\n\nHowever, if you want the ultimate glassy water effect, then you need a significantly longer exposure. On a standalone camera, the usual exposure we choose for this type of shot is 30 seconds, typically at f/16 or f/22, and on an iPhone that requires a third-party app to combine multiple shots into one. The shot below was taken from the same place using the Spectre app I reviewed back in 2024 . This was a 30-second exposure taken on my iPhone 16 Pro Max, and you can see that it gives the water an ice-like glassy-smooth appearance:\n\nIs the variable aperture lens enough reason to upgrade from the iPhone 17 Pro to the iPhone 18 Pro? Probably not. But if you’ve been considering an upgrade from an older iPhone, then these benefits might be enough to tip the balance.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/16/heres-the-difference-the-variable-aperture-of-the-iphone-18-pro-makes-at-night/",
+      "publishedAt": "2026-10-16T16:00:00.000Z",
+      "categories": [
         "apple",
-        "windows"
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-a83f894ae612ce65:en",
+      "sourceId": "9to5mac-a83f894ae612ce65",
+      "lang": "en",
+      "title": "HomePod is about to get free upgrade with these new features",
+      "summary": "Apple unveiled three new Home products this week: HomeView , HomePod mini 2 , and a new Apple TV 4K . While there’s no new full-size HomePod launching, Apple did announce three features coming to the existing HomePod 2 via a free software update. more…",
+      "body": "Apple unveiled three new Home products this week: HomeView , HomePod mini 2 , and a new Apple TV 4K . While there’s no new full-size HomePod launching, Apple did announce three features coming to the existing HomePod 2 via a free software update.\n\nIf you have an Apple Intelligence-compatible iPhone, your HomePod will get the new Sound Glow feature that’s also coming to HomePod mini 2.\n\nPer Apple’s webpage for HomePod (2nd generation): “with Sound Glow, the top of your HomePod lights up with colors that match your album artwork, pulsing in tune with the music.”\n\nThe HomePod mini 2 announcement adds more details, which hopefully will be the same on the larger HomePod:\n\nWith Sound Glow, the top of HomePod mini transforms into a visual canvas that glows and pulses in sync with the music, reacting in real time to bass and treble. The song’s album artwork from Now Playing generates a color-matched light experience that’s unique to every song, and users can pick a soundscape like rain to trigger bespoke animations for a soothing atmosphere.\n\nApple has long let you use a HomePod as a speaker for your Mac via AirPlay. But soon, you’ll be able to set HomePod as the default Mac speaker for a more seamless, reliable connection.\n\nLike Sound Glow, Apple announced this feature for HomePod mini 2, but its fine print says :\n\nCompatible with HomePod mini 2 and HomePod (2nd generation) with support on all Mac desktops and laptops with Wi-Fi 6E or later.\n\nSo if you want to upgrade your Mac speaker setup with the HomePod, or a stereo pair of HomePods, that will soon be easier than ever.\n\nIf you want the best, all-Apple home theater experience, a new surround sound feature for HomePod and Apple TV 4K will deliver that.\n\nExclusive to the new Apple TV 4K (4th gen) , users can set up four HomePods—two as front speakers, two as rear—for a more immersive audio experience.\n\nFrom Apple’s press release :\n\nHome theater surround sound requires four HomePod mini 2 or HomePod (2nd generation) speakers in matching pairs (front and rear), paired with Apple TV 4K (4th generation) running the latest operating system software.\n\nApple hasn’t yet confirmed when these new features are launching on HomePod, but they’re expected to debut with iOS 27.2 and HomePod 27.2 later this month .\n\nAre you planning to use any of the HomePod’s new features? Let us know in the comments.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/16/homepod-is-about-to-get-free-upgrade-with-these-new-features/",
+      "publishedAt": "2026-10-16T15:49:06.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "programas-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-6472ce037b5602ea:en",
+      "sourceId": "ars-technica-6472ce037b5602ea",
+      "lang": "en",
+      "title": "Meta may use sweeping new commercial TOS to avoid millions in AI licensing fees",
+      "summary": "Meta “streamlined” its commercial TOS. Legal experts warn it’s an AI power grab.",
+      "body": "Legal experts are sounding alarms that Meta will soon update its commercial terms to require business accounts to allow Meta to train AI on their linked website content, not just their social media posts.\n\nKicking in on October 30, the TOS update won’t allow businesses to opt out, instead suggesting that businesses stop using Meta services if they won’t agree to let Meta bots freely crawl their linked content.\n\nAs Nieman Lab reported Thursday, this will affect all business accounts but is particularly shocking for news publishers who could perhaps charge Meta millions in licensing fees to continually access their articles for AI training. Currently news organizations are fighting a battle with OpenAI over whether such training without licensing is fair use, and Meta's terms seemingly risk granting it sweeping permissions, no matter which way the court leans.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/tech-policy/2026/10/meta-may-use-sweeping-new-commercial-tos-to-avoid-millions-in-ai-licensing-fees/",
+      "publishedAt": "2026-10-16T15:41:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-7336ca3d469c3ba8:en",
+      "sourceId": "techcrunch-7336ca3d469c3ba8",
+      "lang": "en",
+      "title": "Jev is Vercel’s fastest-adopted AI model ever",
+      "summary": "The data comes from Vercel's AI gateway, a unified API service similar to OpenRouter.",
+      "body": "Jev has become the fastest adopted AI model ever — at least by some measures.\n\nVercel data published on Thursday shows that, within two weeks of its launch, the buzzy decision model was being used by 35% of paid teams, with nearly double the reach of the second most popular model, Sonnet 5.5. It’s the fastest adoption a model has ever seen in its first two weeks, according to Vercel’s data, and a major accomplishment for the model’s creators, TypeSafe AI.\n\nPublished in limited release on September 15, Jev is designed as a lightweight tool for choosing between a few predetermined outputs. Limiting the outputs lets the model run cheaper and faster than alternatives like Sonnet, making it ideal for classifying large quantities of data quickly. That new approach has attracted significant buzz in the weeks since Jev’s release — inspiring competing offerings from OpenAI and Amazon , among others — but until now there has been little hard data to back up the good vibes.\n\nThe data comes from Vercel’s AI gateway , a unified API service similar to OpenRouter. It’s a necessarily limited view — particularly at risk of undercounting major labs like OpenAI and Anthropic that offer their own APIs — but it shows the buzz around Jev really did translate into actual usage. In fact, Vercel was an early adopter of Jev, using it to replace GPT-6 Luna for classifying harmful commands.\n\nThe report also shows continuing momentum for open source models, which now account for more than 70% of the tokens processed through Vercel’s gateway and nearly 25% of the total spend.\n\nWhile open source models are capturing a larger share of the market, the market is also growing fast. Spending on frontier labs has grown tenfold, even as it accounts for a smaller share of overall spend, giving credence to the idea that frontier models and open source alternatives may turn out to be complementary rather than competitive .",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/16/jev-is-vercels-fastest-adopted-ai-model-ever/",
+      "publishedAt": "2026-10-16T15:33:49.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-49f6856d2f177c7a:en",
+      "sourceId": "9to5mac-49f6856d2f177c7a",
+      "lang": "en",
+      "title": "iPhone Duo launch is a massive success, but Apple has a problem",
+      "summary": "iPhone Duo pre-orders opened today, but if you weren’t there right at the start, you likely now can’t get one before 2027 . That makes the iPhone Duo launch a massive success, but also reflects a missed opportunity for Apple. more…",
+      "body": "iPhone Duo pre-orders opened today, but if you weren’t there right at the start, you likely now can’t get one before 2027 . That makes the iPhone Duo launch a massive success, but also reflects a missed opportunity for Apple.\n\nBefore the iPhone Duo was unveiled last month, I was unsure how the public would respond to the new model. Would it seem too weird compared to standard iPhones? Would the $2,000+ price tag limit early adopters to tech enthusiasts like me?\n\nYet in my estimation, Apple has pulled off a basically flawless product introduction.\n\nStarting with the September 9 unveiling, iPhone Duo’s marketing rollout has been among the best I’ve seen from Apple. The company knew it had a uniquely special product, and has given it the first-class treatment.\n\nAnecdotally, iPhone Duo has stirred more excitement than any other recent model I can remember. Not just among “techie” early adopters, not just among the ultra-wealthy, and not even just among current iPhone users. Some of my Android friends even seem very interested.\n\nAll of this buzz was seemingly proven genuine by today’s near instant sell-out after pre-orders went live. Current shipping estimates for new orders are pushed back to late January 2027. That’s more than three months backordered—an unprecedented delay.\n\nAnd today’s launch I think can be described both as a huge win and also a missed opportunity for Apple.\n\nIt’s remarkable that Apple was able to introduce a foldable iPhone, which costs $2,000+, and instantly sell out. It’s amazing how much interest and excitement the iPhone Duo has garnered from a wide-ranging base of “average consumers.”\n\nBut it’s also a big problem that Apple can’t deliver anywhere close to a supply-demand balance for such a desired, ultra-premium product.\n\nIt’s not a surprise that the iPhone Duo quickly became backordered. But getting pushed out three months within 30 minutes of pre-orders opening proves just how much trouble Apple has had mass-producing the Duo.\n\nIdeally, Apple would have enough supply to meet demand. More realistically, it should be able to meet initial demand within the first 4-6 weeks or so.\n\nBut what we’re seeing is in some ways a worst-case scenario. Not just because customers will be frustrated, but chiefly because Apple is sacrificing a lot of revenue by not being able to deliver the iPhone Duo in a reasonable timeframe.\n\nAgain, overall today’s launch is a major win for Apple. But being able to capitalize more fully on its basically flawless iPhone Duo marketing plan would have been an even bigger win. Here’s hoping mass production of the iPhone Duo is able to speed up soon.\n\nWhat’s your take on Apple’s iPhone Duo launch? Let us know in the comments.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/16/iphone-duo-launch-is-a-massive-success-but-apple-has-a-problem/",
+      "publishedAt": "2026-10-16T15:10:55.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-6fe559a6a9da8be7:en",
+      "sourceId": "the-verge-6fe559a6a9da8be7",
+      "lang": "en",
+      "title": "Analogue is re-releasing its SNES and Genesis consoles with some nice upgrades",
+      "summary": "Analogue announced new versions of its Super Nt and Mega Sg retro consoles today with a \"reworked industrial design\" and built-in wireless connectivity for controllers and accessories. Like the original versions, the new Super Nt Plus and Mega Sg Plus are able to play Nintendo and Sega Genesis cartridges using an FPGA processor that perfectly […]",
+      "body": "Analogue announced new versions of its Super Nt and Mega Sg retro consoles today with a \"reworked industrial design\" and built-in wireless connectivity for controllers and accessories. Like the original versions, the new Super Nt Plus and Mega Sg Plus are able to play Nintendo and Sega Genesis cartridges using an FPGA processor that perfectly recreates the functionality of Nintendo and Sega's 16-bit consoles without the need for emulation.\n\nAlthough neither of the new consoles allows SNES or Genesis titles to be played in 4K like the Analogue 3D does with Nintendo 64 titles , the 1080p Super Nt and Mega Sg Plus add a USB-C port so you can po …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1012901/analogue-retro-console-supern-nt-plus-nintendo-sega-genesis-mega-plus",
+      "publishedAt": "2026-10-16T15:08:38.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-62ccec7e8af0cd10:en",
+      "sourceId": "the-verge-62ccec7e8af0cd10",
+      "lang": "en",
+      "title": "A fake WhatsApp clone is showing up before the real version on the Play Store",
+      "summary": "After a Chrome clone was spotted on the Play Store earlier this week, a user on Reddit says they're seeing a fake version of WhatsApp in a \"sponsored\" slot above the real version. As reported earlier by Android Authority, the WhatsApp dupe has racked up over 500,000 downloads and, at the time of writing, its […]",
+      "body": "After a Chrome clone was spotted on the Play Store earlier this week, a user on Reddit says they're seeing a fake version of WhatsApp in a \"sponsored\" slot above the real version . As reported earlier by Android Authority , the WhatsApp dupe has racked up over 500,000 downloads and, at the time of writing, its Play Store listing is still live .\n\nGoogle did not immediately respond to a request for comment.\n\nThe WhatsApp clone is from a developer going by \"Agment Assets sallu\" who doesn't currently have anything else listed on the Play Store. Their listing for the WhatsApp impostor has the same icon, screenshots, and text as the real version, but …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1012918/google-play-store-fake-whatsapp-android",
+      "publishedAt": "2026-10-16T15:02:23.000Z",
+      "categories": [
+        "tecnologia-general",
+        "android",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-4adc78c9fe35401d:en",
+      "sourceId": "the-verge-4adc78c9fe35401d",
+      "lang": "en",
+      "title": "A week with RTX Spark: everything we’ve learned using Nvidia’s new laptops",
+      "summary": "Nvidia's RTX Spark N1X processor is finally here, and we've been collectively testing a small fortune's worth of powerful laptops sporting this new \"superchip.\" RTX Spark is designed to be a high-performing Arm-based SoC for laptops and small desktop computers, rivaling the best from Apple, Intel, AMD, and Qualcomm. It has loads of cores, Nvidia […]",
+      "body": "Nvidia's RTX Spark N1X processor is finally here, and we've been collectively testing a small fortune's worth of powerful laptops sporting this new \"superchip.\" RTX Spark is designed to be a high-performing Arm-based SoC for laptops and small desktop computers, rivaling the best from Apple, Intel, AMD, and Qualcomm. It has loads of cores, Nvidia RTX Blackwell graphics, and enough power and unified memory to run sizable local AI models.\n\nThe flagship placement is inside Microsoft's Surface Laptop Ultra with a staggering 128GB of unified memory, which our own Tom Warren fully reviewed . Sean Hollister has been testing a 64GB version of the Asus …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1012748/nvidia-rtx-spark-windows-arm-laptops-asus-hp-lenovo-impressions",
+      "publishedAt": "2026-10-16T15:00:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-8105a9ca775af087:en",
+      "sourceId": "engadget-8105a9ca775af087",
+      "lang": "en",
+      "title": "Technics EAH-A1000 review: Superior sound and excellent ANC in a premium package",
+      "summary": "Technics' flagship over-ear wireless headphones are light on compromises, but enter a competitive market.",
+      "body": "The company's flagship over-ear wireless headphones are light on compromises, but enter a competitive market.\n\nWhen Technics announced the EAH-A1000 over-ear Bluetooth headphones, everything seemed fairly ordinary. Another set of premium cans entering an already crowded category . Sure, they have a few standout features on the spec sheet — magnetic fluid drivers and three-device multipoint Bluetooth, for example. At $450, they are directly taking on Sony's popular WH-1000XM6 , and almost enter the same territory as Sennheiser's audiophile-friendly HDB 630 .\n\nIt's a confident move from Technics, to place its flag in the lucrative, but risky, territory between high-end consumer and \"affordable\" specialist headphones. I've had the A1000 on the testing bench (a.k.a. my head) for a couple of weeks and my initial assessment of how \"ordinary\" they are might have been a little hasty.\n\nThe feature Technics is making the most noise about is the \"Magnetic Fluid\" technology, but it's not new to the A1000. The AZ100 true wireless earbuds also use it, but these are the first over-ears from Technics to include it. The idea is that it reduces unwanted vibrations in the driver, in turn reducing distortion.\n\nOne other feature that stands out is the three-device multipoint Bluetooth. Seamless connection with your phone and PC can now include one more device, like a gaming console or TV. There is a slight limitation here: If you listen via LDAC (which the A1000 also supports), that will limit you to two devices maximum.\n\nOf course there's adaptive active noise cancellation (ANC) coupled with a beamforming microphone for clearer phone calls. Other features you'd expect at this price point, such as Dolby Atmos with headtracking, wear detection, EQ/app control, a healthy 45-hour battery life (with ANC on) and lossless playback via USB-C and 3.5mm cables (both provided) are all present and correct. Cosmetically, the A1000 offers smooth lines and a stylish, but understated, design. They could pass for a Sony or Bose model at a glance.\n\nHeadphone marketing materials are like gourmet menus: There are a lot of decorative adjectives to describe beef. Or, in the case of headphones, 40mm drivers. I can't put my hand on my heart and say that the magnetic fluid technology Technics mentions is making a difference, but I was immediately impressed when I first put the A1000 on and pressed play on Spotify.\n\nMy music tastes skew electronic, so bass really matters. On the A1000, the low frequencies are some of the tightest I've heard. That's the best word I can find for it. The bass is present, I can feel it, but it's not vibrating in my eardrums at all. It sounds like it's firmly attached to the song with glue, in a good way. Kick drums in dance music offer a gentle thwack, in turn providing a good sense of space and dynamic range in the mix.\n\nPop and rock genres do a good job at exposing the mid and high frequencies. BTS' Dynamite , for example, sounds much more robust and balanced in the A1000 than it does in my car on the school run when I'm trying to animate the kids. I even heard parts of the bassline I barely knew existed. If there's a minor criticism, it's at the higher end. Listening to AC/DC or the Arctic Monkeys, the guitars sound authentic, but my ears wanted a teeny-tiny bit more sizzle out of them.\n\nI regularly use the Sennheiser HDB 630 and the Technics A1000 surprised me with a slightly bigger sense of space and soundstage. The tight balance and well-rounded bass make them one of the strongest pairs I've tried for a long time.\n\nThe stellar sound wasn't the first thing I noticed when I put them on, the adaptive ANC is also extremely good. I'm a little fussy with noise cancellation; it's a feature I appreciate but I prefer good audio chops over superior ANC if I have to choose. With the A1000, that's not really an issue. The noise cancellation is effective for both steady sounds like fans, yet it's adaptive enough that I can't hear people talking when my spouse has guests and I'm working. I prefer it to the ANC on the HDB 630 and I'd say it's good enough to be in the same room with Sony and Bose.\n\nI have a folder on my phone that's a graveyard of unused headphone apps. Technics Connect hasn't made it there, yet. As control apps go, it's easy to navigate and you'll find extra settings like choosing between LDAC compatible multipoint Bluetooth (remember: max two connections) or even turning it off. There's the aforementioned EQ section, the option to choose how long before the headphones auto-turn off and a toggle to disable wear detection, among other fine helpful tools.\n\nA note on the multipoint feature: I've never really had a good experience with it on any headphones, with my Mac usually connecting via the hands-free profile. That was my experience with the A1000, too. Even switching between my phone and my Windows laptop was unreliable. I can't confidently blame these headphones, but I didn't have much luck with two devices, let alone three.\n\nThere are no touch controls on the A1000, instead you get two buttons and a clickable volume rocker. Despite everything being on the right earcup, it doesn't feel cramped. The volume rocker is easy to find, but you click \"back\" for volume up, which feels counter intuitive to me. Media controls are navigated by multiple clicks on the same rocker. It's practical and works, but sometimes the button lightly sticks, turning three clicks into two, which is the difference between a skip forward and skip back.\n\nThe $449 pits the A1000 directly against Sony's WH-1000XM6 , and I do think it competes well on sound quality and ANC. The choice will come down to secondary details like design and battery life and app features, with the latter being where Sony really stacks the deck. I'll come right out and say that I personally prefer the A1000 to the $500 Sennheiser HDB 630. Technics might not quite beat them on sound, but it's really close. For ANC, comfort and build quality, for me Technics takes the win. Sonos' Ace Ultra matches the A1000 for price, and Engadget rated them highly, in part for their compatibility with Sonos speakers.\n\nFor a legacy hi-fi brand, Technics has taken the long road when it comes to consumer headphones. The true wireless AZ100 made a big impression, thanks in part to those Magnetic Fluid drivers, and the A1000 builds on that success with equally impressive sound. Truly, they're a joy to wear and to listen to. There are also enough extra details, like a beam-forming microphone that destroys background noise with what feels like witchcraft (even if the mic itself is just so-so).\n\nThe sticking point for some will be the price. Sennheiser can ask more for the HDB 630 thanks to its long, unbroken record with good consumer headphones. You also get the $60 BTD 700 dongle thrown in. Meanwhile, Sony has built a steady reputation with its 1000X line over the last few years. Technics doesn't have the same recent pedigree, yet, but the A1000 does a really good job at kicking that off.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2288638/technics-eah-a1000-review/",
+      "publishedAt": "2026-10-16T13:00:00.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-0bcace1e5b06d157:en",
+      "sourceId": "engadget-0bcace1e5b06d157",
+      "lang": "en",
+      "title": "An OpenAI research agent 'stole' test Ethereum to finish a coding task",
+      "summary": "An OpenAI research model hit a nebulous milestone today by pilfering test Ethereum tokens.",
+      "body": "It reasoned that the tokens were 'valueless' and 'abandoned.'\n\nAn OpenAI research model hit another nebulous milestone today by pilfering test Ethereum tokens from a wallet it didn't control to finish a coding task, the company said in an incident report . The agent subsequently hid the act from OpenAI, saying it was fine because the tokens had no value. \"This case shows that a model can substitute its own judgment about likely harm for the account holder's permission, then act on that judgment without authorization,\" OpenAI wrote.\n\nThe incident, which occurred on June 26, happened while a GPT-5.6 Sol model was in internal training. The task involved updating a crypto trading prototype and deploying contracts (publishing special code) on an Ethereum test network called Sepolia. Payment of a network fee is required for such contracts, but OpenAI \"supplied no funded wallet and gave no permission to spend funds from an account the model found independently,\" OpenAI said in the report.\n\nThe lack of funds at first stymied the agent, but it was not to be discouraged. The model reasoned that it could use public developer recovery phrases (similar to those you might use to recover a password) to access keys from unauthorized accounts. It tracked down 362 addresses open to that avenue of attack and found one that held enough Sepolia ETH to finish its deployment (to be clear, Sepolia ETH has no value outside of testing).\n\nLike many criminals, the agent reasoned that someone must have left this access open for automated draining of the ETH \"faucets.\" It also figured that the crypto was effectively \"abandoned\" and \"valueless,\" according to OpenAI's misalignment records. The piece de resistance was that the agent \"did not disclose that it had selected a funded account through a public recover phrase or spent that account's balance,\" OpenAI said. To prevent similar events in the future, the company is now monitoring all traffic and paging security if live internet access is detected.\n\nIf agents going rogue to attain their goals sounds familiar, models from OpenAI, Anthropic and other AI companies have been doing a lot of that lately. A partial list of its victims include the Hugging Face AI code repository, Australia's Medicare Portal , several US Federal agencies and the RubyGems developer registry. After all that, even AI employees believe that government regulation is in order, but so far the Trump administration has opposed such a move .",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2288645/an-openai-test-agent-stole-test-ethereum-to-finish-a-coding-task/",
+      "publishedAt": "2026-10-16T12:50:24.000Z",
+      "categories": [
+        "tecnologia-general"
       ]
     },
     {
@@ -5514,22 +5672,6 @@
     },
     {
       "kind": "news",
-      "id": "engadget-000d0f02d266e1fb:en",
-      "sourceId": "engadget-000d0f02d266e1fb",
-      "lang": "en",
-      "title": "ChatGPT can now look at your Chrome tabs to do tasks for you",
-      "summary": "The ChatGPT browser extension lets you compare information from your open tabs.",
-      "body": "OpenAI has updated its ChatGPT extension to be able to do more browser-based tasks.\n\nOpenAI has updated its ChatGPT extension for Chrome , giving it the power to look at your tabs so it can come up with more personalized and useful answers to your queries. The company used to have a browser of its own, but it retired the product on August 9. It did, however, roll out upgrades to the Chrome extension that made ChatGPT a more viable alternative to Gemini in the browser. With these latest updates, ChatGPT can now do even more tasks inside Chrome.\n\nIf you're in ChatGPT Chat, you can ask the AI assistant to take a look at your open tabs on Chrome to conjure answers that would personally be useful. You can, for instance, ask it to compare couches opened on three different tabs by their dimensions, prices, delivery time and return policy.\n\nMeanwhile, if you're using ChatGPT Work, OpenAI's agent designed for complex multi-step tasks, you can ask the assistant to send messages, fill out forms, organize tabs and fill out forms for you. You can ask ChatGPT to fill out a form for your new dentist and then add your schedule to the calendar, for instance. Another example is to get the chatbot to analyze several contractors' terms open in multiple tabs and then draft an email to the provider that fits your needs the most.\n\nIn addition, ChatGPT in Chrome's sidebar now has access to your whole history, so you can talk to it and give it tasks without having to tab away from what you were doing. You can get the ChatGPT extension, no matter what plan you have. OpenAI says that aside from Chrome, the extension is also compatible with other Chromium-based browsers, including Microsoft Edge, Brave and Opera.\n\nNext up: using ChatGPT right within a Chrome tab got a major upgrade – the full power of ChatGPT is now in your browser.\n\nYour entire ChatGPT history is right there, and you can ask question in Chat or get things done in Work – side by side while you're on a site. pic.twitter.com/ABiwzLvNnD\n\n— ChatGPT (@ChatGPT) October 15, 2026",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2288580/open-ai-updates-chatgpt-extension-for-chrome/",
-      "publishedAt": "2026-10-16T10:06:15.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "ars-technica-cae728a127071ab4:en",
       "sourceId": "ars-technica-cae728a127071ab4",
       "lang": "en",
@@ -5546,38 +5688,6 @@
     },
     {
       "kind": "news",
-      "id": "engadget-a0e47bdbb77e2889:en",
-      "sourceId": "engadget-a0e47bdbb77e2889",
-      "lang": "en",
-      "title": "Apple's $2,000 iPhone Duo goes on pre-order today at 8AM ET",
-      "summary": "The Apple Store is down ahead of pre-orders for the first folding iPhone.",
-      "body": "All indications are that the device will be in high demand and relatively short supply.\n\nThe Apple Store is down , so you probably know what that means. \"We love that early energy,\" the placeholder page states. \"Almost ready for you. Pre-order begins at 5:00 AM PT. See you soon.\" Apple is of course referring to the iPhone Duo , which goes on pre-order this morning at 8AM ET. If you wanted to be among the first to own one, all indications are that the device will be in high demand and relatively short supply. That means pre-ordering is likely a better option than waiting for launch day on October 23rd.\n\nIn his hands-on look , Engadget's Sam Rutherford called the iPhone Duo \"Apple's most exciting device in a decade.\" Though not the first folding phone by any means, it has 5.4-inch outer display and 7.6-inch inner OLED matte widescreen when unfolded, making it ideal for viewing media and feeling like a small iPad. That display is practically seamless, with subtle gradient and depth of field effects that help sell the allure of Apple's first foldable device.\n\nThe main drawbacks with the iPhone Duo are the expensive $2,000 price tag, lack of FaceID and no fancy variable aperture in the main camera like the new iPhone 18 Pro models. The under-display FaceTime camera on the inner screen is also a downgrade, though it certainly makes the device look sleeker when unfolded.\n\nI'm a big fan of folding phones, having used one of Samsung's Galaxy Fold models for a few months in the past. They're certainly attention-grabbing devices as well that are bound to stoke comments from interested observers, which may be a good enough reason to get one for some buyers. As mentioned, pre-orders could get snapped up soon, so you'd best hit the iPhone Duo order page at 5AM PT sharp.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2288565/apple-iphone-duo-pre-orders-open-today/",
-      "publishedAt": "2026-10-16T09:36:05.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-f49615d4bc8ac075:en",
-      "sourceId": "engadget-f49615d4bc8ac075",
-      "lang": "en",
-      "title": "Gmail's Live AI search feature arrives for Google AI subscribers",
-      "summary": "Gmail's search can be frustrating and basic, but Google is finally smartening it up for AI plan subscribers.",
-      "body": "It's coming soon for Workspace business customers.\n\nGmail's search can be frustrating and basic, but Google is finally smartening it up for AI plan subscribers with the release of Gmail Live. Now out of beta after being announced at Google I/O last month, the AI feature allows you to search your inbox using conversational voice commands. It's similar to live voice chats with the Gemini chatbot, but customized for popular apps like Gmail, Docs and Drive, with each getting its own version of the functionality.\n\nThe feature, Google says, allows you to find details in buried in emails without digging through endless threads. \"Use conversational search to find information just by asking things like, 'What's my flight's gate number?' or 'What's going on at my kid's school this week?' and Gmail Live will scan your inbox and give you answers quickly,\" Google explains.\n\nSimilar functionality is also coming to documents and notes with Docs Live and Keep Live. Docs Live lets you tell Gemini what kind of document you want and allow it to pull relevant details from Gmail, Drive, Chat and the broader web. It will then structure the document to create a first draft, while helping you refine your tone, as Google shows in the short video above.\n\nKeep Live, meanwhile, \"turns brain dumps into organized notes.\" Normally, the app is used to jot down an idea before you forget it, but Keep Live is designed to \"capture, structure and refine your ideas into organized, actionable notes,\" the company wrote. The new voice feature processes your voice commands in the background, \"turning your thoughts into structured lists and notes without you having to type a single word.\"\n\nIn its video example, Google cites a person saying \"I promised my son I would paint his room this weekend... I'm going to need a list of instructions as well as supplies.\" With this info, Keep Live replies \"Preparing your painting note now,\" and proceeds to generate a shopping list and how-to guide as requested.\n\nThe new features are rolling out this week in Gmail and Keep, but only for Google AI Plus, Pro and Ultra subscribers, with Docs limited to Pro and Ultra subscribers. All of the features are also \"coming soon\" for Google Workspace business customers.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2288545/gmail-live-ai-search-feature-arrives-for-google-ai-subscribers/",
-      "publishedAt": "2026-10-16T08:31:48.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "nvaccess-in-process-89697ee68c01b50d:en",
       "sourceId": "nvaccess-in-process-89697ee68c01b50d",
       "lang": "en",
@@ -5590,22 +5700,6 @@
       "categories": [
         "windows",
         "nvda"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-029e272ad6af4541:en",
-      "sourceId": "9to5mac-029e272ad6af4541",
-      "lang": "en",
-      "title": "Apple Store is down ahead of iPhone Duo preorder rush",
-      "summary": "In keeping with tradition, Apple has taken down the Apple Store this morning ahead of the iPhone Duo going up for preorder. If you are waiting to buy the new Apple foldable, be sure to log on at 5 AM Eastern Time. All reports point to constrained supply and relatively high demand, so everyone is anticipating that Apple will run out of launch day stock very quickly indeed. If you want a Duo for launch day, on October 23, you need to be ready to buy at 5 AM. more…",
-      "body": "In keeping with tradition, Apple has taken down the Apple Store this morning ahead of the iPhone Duo going up for preorder. If you are waiting to buy the new Apple foldable, be sure to log on at 5 AM Eastern Time.\n\nAll reports point to constrained supply and relatively high demand, so everyone is anticipating that Apple will run out of launch day stock very quickly indeed. If you want a Duo for launch day, on October 23, you need to be ready to buy at 5 AM.\n\nThe iPhone Duo is Apple’s first foldable, featuring a 7.6-inch inner display and a 5.4-inch outer display when closed. Apple has engineered the product to feature a minimal crease when unfolded, aided by a custom hinge design and a nano-texture matte finish on the inner display.\n\nIt is powered by Apple’s latest A20 Pro chip, and should offer computational performance in the ballpark of the iPhone 18 Pro line. The cameras are a downgrade though, due to the device’s thinner design when unfolded, and the Duo only has Touch ID rather than Face ID biometrics.\n\nThe Duo comes in two colors, Night Sky and Star White, and starts at $1999 for the entry-level 256 GB model.\n\niPhone Duo will launch with iOS 27.1, which will include a bunch of software UI optimisations for the product’s unusual form factor. This includes a new vertical bar where all the controls in updated apps appear along the right-edge of the phone, making them easy to tap with your thumb.\n\nAll of Apple’s apps have also been updated to smoothly expand between the outer display and the larger inner display, and app developers are also submitting compatibility updates as we speak.\n\nWhile foldables in general make up a small percentage of overall smartphone sales, Apple’s entrance into the category is expected to make a mark. We think the Duo will be a big hit, at least relatively to the competition.\n\nWhether Apple can manufacture enough of them will be the problem, at least for the first few months. Reports have indicated Apple’s suppliers will ship about 7-10 million Duos for the rest of 2026.\n\nMy favorite Apple gear",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/16/apple-store-is-down-ahead-of-iphone-duo-preorder-rush/",
-      "publishedAt": "2026-10-16T07:02:48.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
       ]
     },
     {
@@ -5627,72 +5721,6 @@
     },
     {
       "kind": "news",
-      "id": "techcrunch-b4d75e8ac374d2e0:en",
-      "sourceId": "techcrunch-b4d75e8ac374d2e0",
-      "lang": "en",
-      "title": "Even Benchmark thinks AI is eroding the venture pact against backing rivals",
-      "summary": "Benchmark says the Valley’s rule against backing rivals is getting harder to keep.",
-      "body": "For decades, the unwritten rule of venture capital was that a firm doesn’t back two companies that compete head-on. But speaking at TechCrunch Disrupt earlier this week, the partners of Benchmark readily acknowledged that the AI boom is straining that rule.\n\nIt’s been on the verge of snapping for some time. The towering AI labs OpenAI and Anthropic share dozens of the same investors at this point. Then, at the end of September, Factory, a startup that builds an AI agent to write software, said it was firing board observer and adviser Chris Degnan for “unethical conduct involving Cognition,” its direct rival and the maker of the Devin coding agent. Factory’s CEO alleged Degnan had discussed a job at Cognition while privy to Factory’s board-level discussions. Degnan said he had already resigned and denied sharing anything confidential. Soon after, he announced he was joining Cognition as chief revenue officer. Powerhouse investor Vinod Khosla sided with Degnan on X, blasting Factory’s CEO and calling the company “a struggling second tier competitor.” Khosla Ventures backs both companies.\n\nEven Benchmark, a firm whose reputation rests on 10-to-15-year partnerships with founders at the earliest stage, said the old rule can no longer be counted on. Asked at Disrupt whether the pact against backing rivals still holds as portfolio companies expand into each other’s territory, its partners described the conflicts as a matter of necessity, not preference.\n\n“The harsh reality of this world is every company is evolving very quickly,” said Eric Vishria. Companies pivot and change, he said, and “you are going to get conflicts, and that’s just the reality of the current dynamic.”\n\nVishria said Benchmark stays committed to each founder and keeps what it learns confidential, and he downplayed how much a VC could pass along anyway: “We are not product or technology experts.” Seemingly referring to the Factory-Cognition dispute, he said Benchmark has been fortunate not to land in “that type of insane direct conflict.” Exclusivity, he said, remains “really important” at the very early stage Benchmark favors. “But things are evolving. There’s no doubt about that.”\n\nChetan Puttagunta said AI is accelerating the problem. As the cost of building software “effectively goes to zero,” he said, founders are “incredibly ambitious.” Because they now see a “surface area” and want to claim all of it, he continued, “[i]t’s probably going to happen more, where you start to run into each other.”\n\nHe drew a line between a direct competitor at the outset, which he called “an easy answer,” and a portfolio company that expands into another’s turf over time. “That happens,” he said.\n\nPeter Fenton called the issue “kryptonite” and the firm’s toughest problem. He described a spectrum of how investors relate to their companies. At one end is the co-founder, who would never work on a competing company. At the other is the public-market stock picker, who can own several rivals because he is merely allocating capital, not shaping any of them. Benchmark sits nearer the co-founder end, Fenton said, and treats transparency as a golden rule. “There shouldn’t be the surprise after the fact.” If a conflict does emerge, a founder should never feel shortchanged, he added.\n\nBenchmark isn’t declaring the pact dead. At the same time, when a firm that built its name on loyalty says conflicts are coming, founders might rightly wonder who else will be this candid.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/15/even-benchmark-thinks-ai-is-eroding-the-venture-pact-against-backing-rivals/",
-      "publishedAt": "2026-10-16T05:16:46.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-8e3a816aee582d22:en",
-      "sourceId": "9to5mac-8e3a816aee582d22",
-      "lang": "en",
-      "title": "Apple lists unreleased iPad mini accessory ahead of rumored launch",
-      "summary": "While Apple is rumored to be gearing up to introduce an OLED iPad mini later this month, an oversight on the company’s French site might have just confirmed the product’s existence. Here are the details. more…",
-      "body": "While Apple is rumored to be gearing up to introduce an OLED iPad mini later this month, an oversight on the company’s French site might have just confirmed the product’s existence. Here are the details.\n\nAs spotted by MacRumors , Apple’s French regulatory website currently lists a Smart Folio for iPad mini with the model number A3632, which doesn’t correspond to any existing products.\n\nThe regulatory document is dated September 8, 2026, although it’s unclear when Apple actually added the listing to its website.\n\nCompared with the Smart Folio for iPad mini (6th generation), whose regulatory document is dated December 22, 2022, the unreleased accessory has some notable differences.\n\nAccording to Apple’s documentation, the new Smart Folio contains at least 3% recycled materials, compared with a minimum of 9% in the current model. It also contains at least 6,610 milligrams of rare earth elements, compared with 3,947 milligrams in the previous version , which could indicate changes to the magnets used to attach the cover to the iPad.\n\nWhile these figures don’t reveal anything specific about the accessory’s design, the fact that Apple has assigned it a new model number suggests that changes may be coming.\n\nFor context, the sixth- and seventh-generation iPad mini models are compatible with the same Smart Folio, so a new accessory could indicate that the upcoming model will feature physical changes that affect case compatibility.\n\nThe next-gen iPad mini is rumored to feature an OLED display, Apple’s A20 Pro chip, thinner bezels, a relocated front-facing camera, and a redesigned speaker system. Bloomberg has also reported that Apple is working on a more water-resistant design, while recent rumors suggest the device could cost considerably more than its predecessor.\n\nThere are currently conflicting reports on whether the new iPad mini will retain a 60Hz refresh rate or gain support for 120Hz ProMotion.\n\nWhile previous reports had left the possibility of ProMotion open, leaker yeux1122 recently reiterated that the device will be limited to a 60Hz OLED display.\n\nAccording to Bloomberg ’s Mark Gurman , Apple has indeed tested both options, but he hasn’t been able to confirm which one the company ultimately chose.\n\nTo see the regulatory listing for yourself (at least while it remains available on Apple’s website), follow this link .",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/15/apple-lists-unreleased-ipad-mini-accessory-ahead-of-rumored-launch/",
-      "publishedAt": "2026-10-16T00:49:10.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-f534972083476050:en",
-      "sourceId": "techcrunch-f534972083476050",
-      "lang": "en",
-      "title": "When it came to Cal AI’s viral success, a small army of influencers paid off",
-      "summary": "The company generated over $30 million in revenue in two years and was acquired by MyFitnessPal for an undisclosed amount of money in March.",
-      "body": "Zach Yadegari has enjoyed an immense amount of success for someone who only recently graduated from high school. Founder of the AI-fueled calorie tracking app Cal AI, Yadegari is only 19 but his company has rocketed to viral fame over the past two years. At TechCrunch Disrupt on Thursday, Yadegari shared details of that surprising rise to prominence.\n\nCal AI, which was founded in 2024, exploded onto the internet thanks largely to Yadegari’s strategy of deploying a small army of influencers to promote the brand. The company generated over $30 million in revenue in two years and was acquired by MyFitnessPal for an undisclosed amount of money in March.\n\nDiscussing his social strategy onstage, Yadegari noted that an early sign of success came when an influencer’s post about them led to approximately a thousand new users over the course of two days.\n\n“From there, we figured out, okay, this can actually work for us, and so we started recruiting influencers as fast as we could — paying as many people as possible to start posting for us,” he said. “What we saw was that it was a clear formula. It was pretty linear, but it was extremely fast. I guess linear in the sense that every post they did would get a certain number of viewers that would convert.”\n\nThe Forbes 30 Under 30 alumnus told the audience that part of his company’s strategy was to negotiate rates with influencers, promising them certain payouts for a certain scale of reach. A lot of influencers are “broke college kids” who “just want cash,” Yadegari added. “You just ask them, okay, we’ll pay you this, but we need to get us at least this amount of use and keep posting until you get there.”\n\nAnother important component of success was finding the right influencers whose reach can be quantified. “The biggest thing for us was finding influencers that had very tight communities,” the founder said.\n\nYadegari, whose father was in the audience, also credited his family with giving him the freedom to go after his ambitions. Does he also credit higher education for his success? Not so much.\n\n“I think the only real reason to go to college is if you want to have a fun social time as a kid and be with other people,” he said, to audience laughter.\n\nEarlier this month, Yadegari also launched Persona, a new AI agent startup that has already raised $10 million .\n\nYadegari said the “overarching mission” with Persona is to “make computing seamless with human life.” The company’s personal AI assistant will “live anyplace with internet connection,” he said, including “iMessage, app, email, phone call.” He added that part of what distinguishes the company’s plans for this AI assistant is to build a “hardware ecosystem around” the app.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/15/when-it-came-to-cal-ais-viral-success-a-small-army-of-influencers-paid-off/",
-      "publishedAt": "2026-10-15T23:44:56.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-f519bf6ee1059520:en",
-      "sourceId": "the-verge-f519bf6ee1059520",
-      "lang": "en",
-      "title": "ChatGPT can peek at your Chrome tabs now",
-      "summary": "OpenAI's ChatGPT Atlas browser is gone, but now ChatGPT's Google Chrome extension is getting some upgrades that allow it to use the browser tabs you already have open. With the extension installed, OpenAI says ChatGPT can now view your browser tabs when you tag Chrome in ChatGPT's web or desktop app, posting a demo video […]",
-      "body": "OpenAI's ChatGPT Atlas browser is gone , but now ChatGPT's Google Chrome extension is getting some upgrades that allow it to use the browser tabs you already have open. With the extension installed, OpenAI says ChatGPT can now view your browser tabs when you tag Chrome in ChatGPT's web or desktop app, posting a demo video showing someone asking ChatGPT to compare the three tabs they have open with sofas they're considering.\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1012510/openai-chatgpt-google-chrome-tabs",
-      "publishedAt": "2026-10-15T22:43:23.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apps-accesibles",
-        "programas-accesibles",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "freedom-scientific-blog-4c387fa23ee8077b:en",
       "sourceId": "freedom-scientific-blog-4c387fa23ee8077b",
       "lang": "en",
@@ -5706,23 +5734,6 @@
         "windows",
         "tecnologia-accesibilidad",
         "jaws"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-a5589a3dea4edafe:en",
-      "sourceId": "techcrunch-a5589a3dea4edafe",
-      "lang": "en",
-      "title": "Meta launches an open-weight AI model that runs on Macs",
-      "summary": "Meta and Apple have teamed up for the launch of the social media giant's newest model, Muse Spark Open, which will run locally on Apple silicon.",
-      "body": "Meta has launched what it calls the “most capable” open-weight model in the United States. Dubbed Muse Spark Open, the model also has the distinction of having been designed to work with Macs.\n\nThe new model, which leverages 816 billion parameters and a 1 million token context window, claims to offer superior performance to other popular open-weight models, according to evaluation results released by Meta on Thursday.\n\nMuse Spark Open is natively multimodal and built for complex coding tasks and agentic labor. It has also been designed to run locally on Apple’s computers. However, you will still need a lot of power to run the model locally, with a requirement of at least 1 terabyte of RAM, per Engadget . The model will run best via the Mac Studio that comes equipped with the M5 Ultra chip.\n\nStill, if you can muster the memory, Muse Spark Open may prove a significant work horse for coding and other desktop tasks. Meta says that it paired the model with Muse Code, its AI coding terminal, and deployed it to various agentic workflows, including coding fixes for a Mastodon client that included “bug fixes, new features, [and] full build.”\n\nThe company says it also deployed it in the service of running DaVinci Resolve, the high-end video editing software, revealing that the model was capable of reviewing and cropping footage.\n\nOpen-weight models provide a number of distinct industry advantages that aren’t afforded by closed and proprietary models. Open-weight models can be significantly more cost-efficient and can also offer transparency and flexibility that closed source models don’t allow.\n\nMeta is making the new model available now through a number of different API platforms.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/15/meta-launches-an-open-weight-model-that-runs-on-macs/",
-      "publishedAt": "2026-10-15T20:04:53.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple",
-        "ia-accesibilidad"
       ]
     },
     {
@@ -5752,22 +5763,6 @@
       "sourceName": "Ars Technica",
       "originalUrl": "https://arstechnica.com/tech-policy/2026/10/ftc-probes-if-openai-anthropic-security-incidents-harmed-americans-report-says/",
       "publishedAt": "2026-10-15T15:43:24.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-54dbd05596b52916:en",
-      "sourceId": "ars-technica-54dbd05596b52916",
-      "lang": "en",
-      "title": "Singer or clanker? YouTube Music will tell you with new gen AI labeling.",
-      "summary": "The AI music labels are rolling out now in YouTube Music and will come to YouTube soon.",
-      "body": "Genuine human creativity takes time, but you know what doesn't? AI slop. There are countless AI models out there that can make something that passes for music, and you might come across those tracks on streaming services without realizing it. Google says it will begin labeling that content in YouTube Music, building on similar disclosures in the main YouTube app.\n\nGoogle is not outright banning AI music or even speaking ill of it. \"Generative AI is opening up new ways for artists to create, experiment, and share music,\" the company says in a blog post.\n\nHowever, the company also acknowledges that people want to know if a song was created with generative AI tools. A new label for AI content on YouTube Music is now rolling out in the app and on the website, which looks a lot like a label Google began adding to AI-generated videos on YouTube earlier this year.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/ai/2026/10/youtube-music-begins-labeling-ai-songs/",
-      "publishedAt": "2026-10-15T15:12:58.000Z",
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
@@ -5853,23 +5848,6 @@
       "categories": [
         "apple",
         "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "accessible-android-2ace7b704d0866e9:en",
-      "sourceId": "accessible-android-2ace7b704d0866e9",
-      "lang": "en",
-      "title": "Viskey",
-      "summary": "Viskey is a low vision large text keyboard with high contrast and customizable themes. It supports also dictation. It currently does not work with Talkback.",
-      "body": "Published 13 October 2026 by Harri\n\nViskey is a low vision large text keyboard with high contrast and customizable themes. It supports also dictation. It currently does not work with Talkback.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nNot usable with Talkback, for low vision users only, with some self voicing.\n\nLast Tested App version and Android version:\n\n4.1, Android 13, Android 15\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility.",
-      "sourceName": "Accessible Android",
-      "originalUrl": "https://accessibleandroid.com/app/viskey/",
-      "publishedAt": "2026-10-13T19:33:00.000Z",
-      "categories": [
-        "android",
-        "apps-accesibles",
-        "tecnologia-accesibilidad"
       ]
     },
     {
@@ -5974,24 +5952,6 @@
     },
     {
       "kind": "news",
-      "id": "accessible-android-763e95a34e982956:en",
-      "sourceId": "accessible-android-763e95a34e982956",
-      "lang": "en",
-      "title": "MBraille",
-      "summary": "MBraille turns your device into a braille-first workspace for writing, editing, and everyday tasks. It combines fast touchscreen or keyboard braille entry with navigation, powerful…",
-      "body": "Published 11 October 2026 by Harri\n\nMBraille turns your device into a braille-first workspace for writing, editing, and everyday tasks. It combines fast touchscreen or keyboard braille entry with navigation, powerful editing, and file management for an efficient eyes-free workflow.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nIt should be fully accessible, I'm the author so let me know if something does not work.\n\nLast Tested App version and Android version:\n\n26.3, Android 13\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility.",
-      "sourceName": "Accessible Android",
-      "originalUrl": "https://accessibleandroid.com/app/mbraille/",
-      "publishedAt": "2026-10-11T13:28:29.000Z",
-      "categories": [
-        "android",
-        "apps-accesibles",
-        "tecnologia-accesibilidad",
-        "braille"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "applevis-apps-14b03ffce5eb56c2:en",
       "sourceId": "applevis-apps-14b03ffce5eb56c2",
       "lang": "en",
@@ -6020,23 +5980,6 @@
       "categories": [
         "apple",
         "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "accessible-android-a6206421fcddc39f:en",
-      "sourceId": "accessible-android-a6206421fcddc39f",
-      "lang": "en",
-      "title": "Paperback",
-      "summary": "Paperback is a fast, fully accessible reader for ebooks, documents and audio books. It opens over twenty formats and speaks sixteen languages. Opening documents: Use…",
-      "body": "Published 9 October 2026 by Quin\n\nPaperback is a fast, fully accessible reader for ebooks, documents and audio books. It opens over twenty formats and speaks sixteen languages.\n\nOpening documents:\n\nReading and listening:\n\nPaperback has two ways to read a document. In text mode, you read the text with your screen reader. In read aloud mode, Paperback reads the text to you with the voice you pick in Settings, and keeps going in the background and from the lock screen. Switch between them from the More Options menu. Audio books, like DAISY, M4B, and MP3 books, play their own recording instead.\n\nThe reading bar:\n\nThe bar at the bottom of the screen has, from left to right:\n\nYou can also swipe up or down on the play button to move by the navigation unit, without reaching for the previous and next buttons. If that is all you use, the Hide previous and next buttons setting takes them out of your screen reader’s way. The Swipe up moves forward setting picks which way a swipe goes.\n\nMore options\n\nThe More Options menu is where everything else lives.\n\nKeyboards and headsets:\n\nWith a keyboard, the desktop shortcuts for opening books, recent documents, Find, Go To, the table of contents, word count, document info, export, and the sleep timer all work. So do the single-letter keys for moving by heading, page, link, and the rest, and Space plays and pauses. A headset button plays and pauses with one press, moves forward with two, and goes back with three.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nPaperback was designed with screen readers, and works flawlessly with both TalkBack and Backtalk.\n\nLast Tested App version and Android version:\n\n1.0.0, pixel 9A running Android 17\n\n★★★★★ 5.0 / 5 based on 1 rating\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility.",
-      "sourceName": "Accessible Android",
-      "originalUrl": "https://accessibleandroid.com/app/paperback/",
-      "publishedAt": "2026-10-09T15:08:18.000Z",
-      "categories": [
-        "android",
-        "apps-accesibles",
-        "tecnologia-accesibilidad"
       ]
     },
     {
@@ -6093,24 +6036,6 @@
         "ia-accesibilidad",
         "braille",
         "sordoceguera"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "accessible-android-ade5e42aa936f035:en",
-      "sourceId": "accessible-android-ade5e42aa936f035",
-      "lang": "en",
-      "title": "Third-Party Screen Readers: Are They a Security Risk?",
-      "summary": "Unlike iOS, Android allows third-party apps to request accessibility permission, which makes it possible to develop screen readers for Android rather than limiting blind users…",
-      "body": "Published 7 October 2026 by Kareen Kiwan\n\nUnlike iOS, Android allows third-party apps to request accessibility permission, which makes it possible to develop screen readers for Android rather than limiting blind users to the built-in screen reader, TalkBack.\n\nThe presence of third-party screen readers has helped compensate for the lack of features and responsiveness issues in TalkBack. However, for a screen reader to work, it needs to be granted accessibility permission, which comes with powerful privileges that can pose serious risks if they fall into the wrong hands. The risks that come with granting accessibility permission, as well as the gains it provides, and the balance between security and openness, have been hot topics throughout the years. With the growing popularity of third-party screen readers, including new ones being developed recently with the help of AI-assisted vibe coding, the security aspect is becoming increasingly important to discuss and understand so that users can make informed decisions.\n\nBefore going any further, I want to state from the outset that the goal of this article is neither to give clearance to any screen reader or service, nor to accuse another of wrongdoing.\n\nTable of Contents\n\nThe following definition is taken directly from the Android Developers website :\n\n“An accessibility service is an app that enhances the user interface to assist users with disabilities or who might temporarily be unable to fully interact with a device. These services run in the background and communicate with the system to inspect screen content and interact with apps on the user’s behalf. Examples include screen readers (like TalkBack), Switch Access tools, and voice control systems.”\n\nAn article titled Accessibility Service – An Android Blessing and a Security Challenge in the Same Package from Bitdefender states:\n\n“Android’s accessibility service is a powerful tool that allows people with disabilities to use mobile devices more easily. It’s also a favorite among criminals seeking to take over a device because it holds so much power.”\n\nWhen granting an app permission to act as an accessibility service, the user gives the app access to powerful capabilities, including:\n\nAlthough accessibility permission is built for services like screen readers, which are the focus of this article, it is also used by other apps to enable features that would not otherwise be possible. It is a core element of the popular automation app Tasker, and some launchers include an optional accessibility service to gain additional privileges.\n\nCriminals and other bad actors have also found a great opportunity in accessibility services, which they try to seize and exploit to the fullest.\n\nGoogle did not stay on the sidelines for long, taking active steps to make exploiting accessibility permission harder.\n\nSince 2021, apps that use the AccessibilityService API have been required to provide additional information about their use of the API through Google Play’s accessibility declaration process before approval. Starting with Android 13, apps that are not installed from Google Play cannot simply be granted access to restricted settings, including accessibility access, by enabling the service from Accessibility settings. Instead, the user must first allow restricted settings for the app from its App info page and confirm the choice. Apps installed through some third-party installers can still bypass this step at the time of writing.\n\nGoogle even restricts the use of unverified accessibility services when Advanced Protection is enabled, a mode intended for users who may face a higher security risk or who place a particularly high priority on privacy and security.\n\nAs stated above, granting any app the accessibility permission comes with a lot of privileges. However, in order for a screen reader to work, it must be granted accessibility permission. Without granting it this access, the screen reader is essentially useless, as its core functionality relies on the accessibility service it has.\n\nDespite improvements, TalkBack on Android lacks many features that other screen readers provide. Many users find that third-party screen readers are more responsive compared to TalkBack, which still lags when performing certain tasks, such as scrolling, or on specific devices, especially those with mid-range or low-end processors. In fact, better responsiveness is an advantage that most developers of other screen readers use to advertise their apps.\n\nNo matter how we phrase it, granting any app accessibility service privileges poses a potential risk, even if the app is blocked from accessing the internet. However, this doesn’t mean that the app is really a risk, or that it is built with the intention to cause harm or steal users’ data.\n\nThe Play Store is the official app distribution store on Android. Apps are required to meet certain criteria to be hosted in the store. Additionally, Google performs security scans and checks to make sure that apps installed through the Play Store are safe. However, Google has its own set of rules that must be obeyed by developers who want their apps to be in the Play Store. If an app breaks any of those rules, it can be rejected from the store or have its approval revoked. Play Store rules are created to protect users, but there are restrictions that some apps cannot meet due to the features of the apps or how they work. There are app developers who decide willingly against submitting their apps to the Play Store, yet their apps can be completely safe, and the source code may be provided for anyone who wants to review it.\n\nOn the other hand, not having an app in the Play Store reduces the app’s reach, especially since it is always recommended to install apps from the Play Store as the safer choice for most users. People may also link the absence of a Play Store version to foul play, assuming that something prevents the app from gaining Google’s trust and being listed on the Play Store. As users should be more vigilant with accessibility services, it is understandable when a person refuses to install a screen reader that is not in the Play Store. However, not having a Play Store version does not directly translate to being a suspicious or risky app. There are apps that have functionalities that violate certain store restrictions, or simply apps whose developers don’t like to put their screen reader in the store. They could even opt for an open-source approach that is free from any store limitations, with both the updates and source code directly in the hands of users.\n\nOn the contrary, if a screen reader is on the Play Store, that doesn’t mean that it is completely risk-free, even if the risk is minimized. Bad actors are still able to sneak under Google’s verification mechanisms and land on the Play Store, with some apps gaining a high number of installs before being discovered. Additionally, accessibility services that are trusted by the Play Store could be doing shady things indirectly that affect users’ privacy.\n\nIt’s worth mentioning here that even if an app is sideloaded, when Play Protect is turned on, which it is by default, Play Protect scans the app for malicious software. If it identifies an app as potentially harmful, it can warn the user, disable or remove the app, or in some cases prevent it from being installed.\n\nIn order for a screen reader to be effective, it should work reliably without crashes and should be free of restrictions. Some Android UIs trust TalkBack as the built-in screen reader, giving it certain privileges that are not given to third-party screen readers, even if they are granted accessibility permission. Apps might also provide accessibility UI changes or expose data to TalkBack only, not to third-party screen readers.\n\nFor this reason, some screen readers spoof TalkBack by running their service and showing it to the system and other apps as the TalkBack package. Such behavior is not necessarily wrongdoing, even though an app generally shouldn’t try to make other apps believe that it is a different app, if the purpose is simply to enhance usability rather than to gain access to data for suspicious reasons.\n\nAnother example is when an app is given the ability to turn on and off other accessibility services. While this is not a straightforward process because it requires issuing ADB commands, it is still doable with the right knowledge. An app with such capability poses a serious risk, and I cannot imagine that it would be considered compliant with Google’s rules. But if the app is built to assist users in toggling between their screen readers, we look at the matter differently.\n\nAn example is the Shortcut Menu app, which is available on GitHub as an open-source project, and which I highly doubt could be approved for the Play Store if its developer decided to add it there. The app is built to give users an accessible way to switch between screen readers or to turn on another screen reader if one stops working as intended.\n\nWith the widespread use of AI, some screen readers allow the use of online AI services to describe content or perform OCR. They could also allow the use of non-AI services, such as translation or OCR. It is important to differentiate between the screen reader and the services it connects to. Third-party services are governed by the rules of the operators of those services, not by the screen reader utilizing them. This doesn’t mean that the screen reader is completely immune from responsibility. The screen reader should disclose the services it is connecting to, should encrypt data to ensure its safe transfer, should refrain from having any agreements with external services that allow user data to be misused, and should be transparent about everything it does regarding the data it sends.\n\nGoogle TalkBack uses Gemini, which is also developed by Google, to describe and answer questions about content, but Google reassures users that the data is encrypted and deleted after the descriptions are received. Despite its bad reputation when it comes to user data, Google can be trusted with a matter like this one.\n\nUnfortunately, this level of trust cannot be given to third-party screen readers. Jieshuo Screen Reader, for example, uses an online AI model from vivo to provide descriptions and answer user prompts, but there is no disclosure in the app itself of the exact model used or how the data is communicated. There is also no guarantee that the app would disclose if the AI service being used is changed.\n\nAs I am not a user of any other screen reader on the market, I cannot speak about how other screen readers deal with this subject. In all cases, using online services to analyse content should always be optional. If it is not, the user should at least be aware of the functionality that uses the external service so they can decide whether they want to use the screen reader or not.\n\nHere, the advanced extension system found in the Jieshuo Screen Reader comes to mind. It allows users to run Lua scripts, which could be used to communicate with Android APIs, upload and download data from the internet, add, edit, and delete files and folders, and more. Just because the Jieshuo Screen Reader enables the use of Lua extensions doesn’t mean that it is responsible for the damage inflicted by malicious extensions. Users should be vigilant enough to avoid running extensions without trusting their creators, especially since these extensions and tools could be encrypted, so their code cannot be reviewed by the user, even if they have the knowledge to do so, or at least by one of the popular AI services that can review Lua code.\n\nJieshuo Screen Reader might be the only popular screen reader that allows for advanced extensions on Android, but Windows screen readers have this capability as well. If I am a user of NVDA and I decide to run an untrusted add-on, putting myself at risk, I am responsible for the risks I am knowingly exposing myself to.\n\nWith that being said, it is not possible to avoid criticizing how the extension threat is handled by the Jieshuo developer. All users can upload extensions to the Jieshuo servers, where they are discoverable by all Jieshuo users who go to the Extensions, Tools, or Gesture Scheme additional resources. Those codes are not vetted or checked, although their presence on the Jieshuo service could suggest otherwise to an unsuspecting beginner or average user. This user might go ahead and download an extension or tool, trusting its legitimacy, only to fall victim to a malicious one. Jieshuo Screen Reader poses a risk to those users, even if indirectly, because there should be a review of uploaded extensions and tools, or at least a clear warning when downloading those codes that they are not monitored.\n\nThey say that humans are the weakest link in cybersecurity, as many attacks are successful because of human error or reckless actions. With screen readers, the role of human error comes into play when installing unverified APKs. If you see a message on Telegram or WhatsApp that a new screen reader has been developed along with its APK, you don’t have to rush to install it. This could be malware waiting to take control of your device and data.\n\nIf you find someone posting about a new version of a screen reader you use, you don’t have to install and share this new version with others if you cannot trust the person who posted the APK. Popular screen readers have official places where they can be obtained. There are also reputable websites or channels that share official new versions when they are released.\n\nJieshuo Screen Reader, for example, is one of the screen readers that is widely shared in groups and channels, with modified versions sometimes being treated as official versions by users who think they are using the legitimate software when they are actually using a modified app. The screen reader has a GitHub page from which its releases can be downloaded, and new versions can also be downloaded through Jieshuo itself. There is also a website, although it is less known due to the lack of communication between the developer and the international user base.\n\nScreen readers that are found on the Play Store are not immune either, as updates released through the Play Store can take more time to be approved and reach devices, and developers sometimes release versions as direct APKs before pushing them to the Play Store. When those APKs are modified and shared as the official versions, users may download them and put themselves at serious potential risk, something that could have been avoided simply by trying to find the official website or the screen reader developer’s channel.\n\nWhenever an app hides some features behind a paywall, crackers try to use their skills to create and distribute pirated copies that allow users to access the Pro features without paying for them.\n\nPutting aside the illegality and unethical nature of using cracked software, using a modified version of an app comes with the risk of malware being injected into it. This risk significantly increases when the app in question is an accessibility service like a screen reader.\n\nThe prominent example of a paid screen reader that is widely cracked is the Jieshuo Screen Reader , especially given the not-so-convenient method of purchase it utilizes . Maybe I won’t be exaggerating if I say that modified copies of Jieshuo are more widespread than official copies, with users sometimes even unable to differentiate between legitimate and modified copies. With so many cracked copies available, many users are put at risk of having their data stolen, as well as other damage that could result from running malware included in an accessibility service.\n\nHowever, the screen reader’s developer cannot be held responsible for what a crack includes. In fact, the original developers are also victims, losing money due to unauthorized access to paid features, as well as suffering reputational damage because of the presence of cracked copies that could cause the original software to be flagged because of them.\n\nA screen reader can monitor your banking activity. It can go further by silently entering data and simulating clicks without you even knowing what is happening, especially since a screen reader can alter the speech you hear or even perform operations without providing any speech feedback at all.\n\nMany banking apps treat third-party accessibility services as potential threats, with some of them blocking them indiscriminately and others only allowing services that come from the Play Store. Others might flag a specific screen reader and refuse to run even if the screen reader is only installed but not running. While the measures banks take to protect users from unauthorized access and transfers are understandable, deciding whether what a bank does is an indication of wrongdoing by a screen reader is a different matter. First, the user must know why the screen reader is denied access and whether this is a measure applied to all third-party screen readers, to those that don’t come from the Play Store, or to a specific screen reader. If users are able to get the necessary information from their banks, something I doubt many banks would provide, their assessment of the security of the screen readers they use would be more objective and not based on assumptions or fear.\n\nIn all cases, denying access to banking apps and their data undermines the use of a screen reader, even if the user trusts that screen reader completely. I personally don’t like very strict measures such as blocking access to an app just because another app is present on the phone, since making sure that no unverified accessibility service is running while the user is in the bank’s app should be enough, as the user is free to use a certain screen reader elsewhere.\n\nSome users might be very cautious when it comes to running third-party screen readers, especially those that are not in the Play Store, yet they might have a more relaxed attitude toward other types of apps that deal with sensitive data. TTS engines are one important example. Some people don’t realize that TTS engines can be used as a weapon against them and their security. A TTS engine that suddenly appears in a group or channel is still capable of logging every single character sent to it from other apps, including the screen reader. This data can be uploaded to external services, where it is analysed in search of potentially valuable information. With AI tools that can analyse huge sets of data quickly, going through generated speech output is now an easy task.\n\nIf you use TalkBack but have a TTS engine that is constantly consuming an unjustified amount of data, you should be concerned about your security, as the feeling of safety you have may be false.\n\nAnother category of apps that is popular these days is online image description and text recognition apps. Those apps connect to an external service, typically an AI one, where the data is sent and analysed to provide the information requested by the user. The number of these apps is increasing quickly, assisted by vibe coding, which makes app development easier than ever. The same points raised about screen readers communicating with external services are valid here, but there is also the fact that some users don’t think about what they are sending to those services through apps that are not considered risky accessibility services.\n\nThe previous examples are for apps specifically designed for blind people, but other apps can be security threats without requiring accessibility service access. They pose a risk to both sighted and blind people. For this reason, it is always recommended to check the permissions an app asks for, as well as any suspicious behaviour or unjustified use of a permission, such as access to the microphone or camera, or unusually high data consumption.\n\nOpinions about the use of third-party screen readers differ within the blind community, with people at opposite ends of the spectrum.\n\nOn one hand, you find the highly cautious user who thinks that every third-party screen reader is a serious security risk, or even a spy agent harvesting every interaction, and should be avoided at any cost, with some applying this judgment only to screen readers that aren’t on the Play Store. While being reluctant to install potentially risky software is not a problem in itself, the issue starts when those people begin to make unsubstantiated claims. It is fine not to use a piece of software or not to like it, and to give your opinion about the risks of running an unverified accessibility service, but it is not fine to state your own thoughts as facts. Evaluating a software’s security can require procedures that include testing the software in a safe, sandboxed environment to analyse its behaviour and identify anything alarming.\n\nOn the other hand, you have the careless user who thinks that everything is safe. This is the user who doesn’t think for a minute before testing a screen reader, no matter where it comes from. This type of user is the one who argues that they don’t have anything to hide and that more cautious people are complicating the uncomplicated. Those users not only risk their own security and privacy, but they also risk the security and privacy of others, as we don’t live in a vacuum. We interact with other people through phones and tablets that could be running infected screen readers, and we connect to networks that could be subject to attacks. Those people increase the risk of data theft, impersonation to facilitate scamming others, and other forms of damage.\n\nAs with many other topics, our own subjective judgments play a role in whether we consider a screen reader secure and safe or not. Some people assume that a screen reader developed by someone from a certain country is a dangerous security threat, while one created by someone who resides in a country they trust is considered very safe. While it is true that some countries have better regulations and respect user rights more than others, criminal activities can be carried out anywhere. In fact, sometimes the reputation of a country’s strict laws can be a good cover for a bad actor to gain people’s trust. On the contrary, respect for users’ security and privacy can be found in the work of developers who might live in areas where the laws violate security and privacy. As they say, the person who knows the risk best is the person who has faced the risk.\n\nOur biases are our own affairs that can affect what we trust and what we don’t trust, and it is a wise decision for someone who has escaped a totalitarian country not to use apps that come from developers in the country they ran away from. But we must present our statements as our subjective opinions, not as objective facts, if we are not willing or able to carry out the necessary evaluation procedures to determine what can be considered safe and what cannot.\n\nI don’t have an answer to this question, nor is my goal to provide one. This article is an attempt to correct some misconceptions and raise awareness about accessibility services and what they can do. When you enable the accessibility service of a screen reader, you trust that screen reader, but at the same time, you agree that you are putting yourself under a theoretical risk. Those who follow my articles know that my primary screen reader of choice is Jieshuo , the notorious third-party screen reader. But many would not know that I remained reluctant to install this screen reader for years. Even now, I don’t have the confidence to tell people that this screen reader is completely innocent and safe, despite my personal opinion of it and my use of it.\n\nI still have a tendency not to install new screen readers as soon as they are released, and I generally avoid screen readers that are neither on the Play Store nor open source. When it comes to open-source and closed-source screen readers, I lean toward an open-source screen reader free of Play Store limitations over a closed-source one found in the Play Store, provided I can identify its developers. Although I haven’t tested recent screen readers, I follow a few of them closely, with the possibility of installing them on my devices in the future. This doesn’t imply that I find the screen reader I use more secure than the screen readers I haven’t installed. In fact, the opposite could be true. Yet, I still stick to what I use because I have adapted my usage to the screen reader that I have used for years, without ignoring the possibility that something could go wrong one day.\n\nScreen reader developers should be transparent about what data they collect, which external services they communicate with, and how they communicate with those services. When they offer advanced capabilities such as extensions,they should alert users to the risks of using unverified extensions instead of giving them a false sense of safety by letting them explore unvetted extensions or making it very easy to run extensions without any proper warning.\n\nWhatever comes with the accessibility permission, restricting it is not the solution, as these restrictions cause more harm than they prevent. The solution lies in the hands of users, who should use common sense when they want to install a third-party accessibility service. Look at the gains versus the potential risks. Stay away from APKs from unknown sources, and don’t come near cracks. Keep Play Protect scanning for sideloaded apps enabled. Distinguish between the real risks of a screen reader and human error or recklessness. Look for any red flags, but don’t try to dictate your preferences as established facts.\n\nPublished in Articles",
-      "sourceName": "Accessible Android",
-      "originalUrl": "https://accessibleandroid.com/third-party-screen-readers-are-they-a-security-risk/",
-      "publishedAt": "2026-10-07T19:03:06.000Z",
-      "categories": [
-        "android",
-        "apps-accesibles",
-        "tecnologia-accesibilidad",
-        "apple"
       ]
     },
     {

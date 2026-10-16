@@ -150,6 +150,14 @@ const iosBookActionGlue = String.raw`
     hasSavedBook: () => Boolean(currentBookId),
     openBook: id => openSavedBook(id),
     exportBook: (id, format = 'original') => exportSavedBook(id, format),
+    importSharedFile: async file => {
+      if (!(file instanceof File) || !els.file || !file.name) return false;
+      const transfer = new DataTransfer();
+      transfer.items.add(file);
+      els.file.value = '';
+      els.file.files = transfer.files;
+      return Boolean(await importSelectedFile());
+    },
     exportCurrent: format => currentBookId ? exportSavedBook(currentBookId, format) : Promise.resolve(false),
     deleteBook: id => deleteSavedBook(id),
     deleteCurrent: () => currentBookId ? deleteSavedBook(currentBookId) : Promise.resolve(false),
@@ -227,7 +235,8 @@ const packagedReader = withNativeIds.replace(/\}\)\(\);\s*$/, iosBookActionGlue 
     'await Promise.all([renderLibrary(), renderQueue(), renderMarks()]);\n    return Boolean(deleted);\n  }\n\n  function updateQueueToggle()');
 if (!packagedReader.includes('window.TifloIOSBookActions =') ||
     !packagedReader.includes('card.dataset.iosBookId = String(book.id);') ||
-    !packagedReader.includes('return Boolean(deleted);')) {
+    !packagedReader.includes('return Boolean(deleted);')
+    || !packagedReader.includes('importSharedFile: async file =>')) {
   throw new Error('iOS: falló la instalación del puente real de acciones de documentos');
 }
 await writeFile(join(output, 'web-reading.js'), packagedReader, 'utf8');
@@ -335,6 +344,7 @@ await cp(join(root, 'ios-build/ios-reader-native.js'), join(output, 'ios-reader-
 await cp(join(root, 'ios-build/ios-accessible-actions.js'), join(output, 'ios-accessible-actions.js'));
 await cp(join(root, 'ios-build/ios-appwide-native-actions.js'), join(output, 'ios-appwide-native-actions.js'));
 await cp(join(root, 'ios-build/ios-share.js'), join(output, 'ios-share.js'));
+await cp(join(root, 'ios-build/ios-share-inbox.js'), join(output, 'ios-share-inbox.js'));
 await cp(join(root, 'ios-build/ios-video-ui.js'), join(output, 'ios-video-ui.js'));
 
 const commitSha = String(process.env.GITHUB_SHA ||
@@ -400,6 +410,7 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
   if (name === 'index.html' || name === 'actualidad.html' || name === 'videos.html') html = html.replace('</body>', '<script src="ios-parity.js"></script>' + '\n</body>');
   if (name === 'index.html') {
     html = html.replace('</head>', '<script src="ios-reader-native.js"></script>\n</head>');
+    html = html.replace('</body>', '<script src="ios-share-inbox.js"></script>\n</body>');
     html = html.replace('</head>', '<script src="tiflo-build-identity.js"></script>\n</head>');
     html = html.replace('</body>', '<script src="ios-reader-selects.js"></script><script src="ios-reader-minimal.js"></script><script src="ios-reader-folders.js"></script>' + '\n</body>');
   }
@@ -673,7 +684,7 @@ await writeFile(iosActualidadPath, iosActualidad);
 await import('./patch-reading-native.mjs');
 
 // Fail before signing or uploading if an injected iOS-only script is invalid.
-for (const file of ['app.js', 'videos.js', 'actualidad.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-choice-groups.js', 'ios-videos-fallback.js', 'ios-actualidad-media-fallback.js', 'ios-choice-collapse.js', 'ios-reader-selects.js', 'ios-reader-minimal.js', 'ios-reader-folders.js', 'ios-reader-native.js', 'ios-accessible-actions.js', 'ios-appwide-native-actions.js', 'ios-share.js', 'web-reading.js', 'ios-parity.js', 'news-videos.js']) {
+for (const file of ['app.js', 'videos.js', 'actualidad.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-choice-groups.js', 'ios-videos-fallback.js', 'ios-actualidad-media-fallback.js', 'ios-choice-collapse.js', 'ios-reader-selects.js', 'ios-reader-minimal.js', 'ios-reader-folders.js', 'ios-reader-native.js', 'ios-accessible-actions.js', 'ios-appwide-native-actions.js', 'ios-share.js', 'ios-share-inbox.js', 'web-reading.js', 'ios-parity.js', 'news-videos.js']) {
   execFileSync(process.execPath, ['--check', join(output, file)], { stdio: 'pipe' });
 }
 console.log('Validación sintáctica de scripts iOS completada');

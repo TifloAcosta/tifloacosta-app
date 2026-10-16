@@ -60,7 +60,7 @@ const speechBody = speech.replace(/^import (?:Foundation|AVFAudio|Capacitor)\n/g
 const translationBody = translation.replace(/^import (?:Foundation|NaturalLanguage|Capacitor|SwiftUI|UIKit|Translation)\n/gm, '').trim();
 const accessibilityBody = accessibility.replace(/^import (?:Foundation|UIKit|UniformTypeIdentifiers|Capacitor)\n/gm, '').trim();
 const nativeListBody = nativeList.replace(/^import (?:Foundation|UIKit)\n/gm, '').trim();
-const shareInboxBody = shareInbox.replace(/^import (?:Foundation|Capacitor)\n/gm, '').trim();
+const shareInboxBody = shareInbox.replace(/^import (?:Foundation|UIKit|Capacitor)\n/gm, '').trim();
 const videosBody = nativeVideos.replace(/^import (?:Foundation|UIKit)\n/gm, '').trim();
 const delegateWithTranslation = delegateWithAudio.includes('import Translation')
   ? delegateWithAudio

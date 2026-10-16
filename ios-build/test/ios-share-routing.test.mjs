@@ -8,6 +8,7 @@ const src = readFileSync(new URL('../ios-share-inbox.js', import.meta.url), 'utf
 function fakeElement() {
   return {
     hidden: false, id: '', nextElementSibling: null,
+    classList: {add() {}},
     setAttribute() {}, append() {}, after() {}, before() {},
     addEventListener() {}, replaceChildren() {}, focus() {},
     querySelector() { return null; },
@@ -69,4 +70,115 @@ test('El controlador nativo expone vista previa local y apertura HTTP segura', (
   assert.match(host, /@objc public func openURL/);
   assert.match(host, /UIApplication\.shared\.open\(url, options: \[:\]\)/);
   assert.match(host, /url\.user == nil, url\.password == nil/);
+});
+
+function sharedFileHarness({canSave = true} = {}) {
+  const created = [];
+  const element = () => {
+    const node = {
+      hidden: false, id: '', children: [], textContent: '', handlers: {},
+      classNames: [], nextElementSibling: null,
+      classList: {add(name) { node.classNames.push(name); }},
+      setAttribute() {}, after() {}, before() {}, focus() {},
+      append(...items) { node.children.push(...items); },
+      replaceChildren(...items) { node.children = items; },
+      addEventListener(event, fn) { node.handlers[event] = fn; },
+      querySelector(name) { return name === 'nav' ? nav : null; }
+    };
+    created.push(node);
+    return node;
+  };
+  const nav = element();
+  const reader = element();
+  reader.hidden = true;
+  const home = element();
+  const importAnchor = element();
+  const readingDocument = element();
+  readingDocument.hidden = true;
+  const map = {
+    'reading-section': reader, 'home-blocks': home,
+    'ios-reading-import': importAnchor,
+    'reading-reader': readingDocument
+  };
+  const document = {
+    readyState: 'complete', documentElement: {lang:'es'},
+    createElement: element, addEventListener() {},
+    getElementById(id) { return map[id] || null; }
+  };
+  const files = [
+    {id:'123e4567-e89b-12d3-a456-426614174001',name:'Contenido.epub',
+      kind:'file', preview:''}
+  ];
+  let imports = 0;
+  let acknowledgements = 0;
+  let done;
+  const completion = new Promise(resolve => { done = resolve; });
+  const native = {
+    async pending() { return {items:files.slice()}; },
+    async openItem() { return {kind:'file', name:'Contenido.epub', uri:'file:///epub'}; },
+    async acknowledge({id}) {
+      acknowledgements++;
+      const i = files.findIndex(x => x.id === id);
+      if (i >= 0) files.splice(i,1);
+      done();
+    }
+  };
+  const location = {
+    _hash:'',
+    get hash() { return this._hash; },
+    set hash(next) { this._hash = next; reader.hidden = next !== '#reading'; }
+  };
+  const window = {
+    Capacitor: {Plugins:{TifloShareInbox:native},
+      convertFileSrc: uri => 'https://local.example/epub'},
+    TifloIOSBookActions: {
+      async importSharedFile() {
+        imports++;
+        if (!canSave) done();
+        return canSave;
+      },
+      hasSavedBook() { return canSave; }
+    },
+    addEventListener() {}, dispatchEvent() {}
+  };
+  runInNewContext(src, {
+    window, document, location, URL, Event, Blob, File, MutationObserver: class {
+      observe() {} disconnect() {}
+    },
+    fetch: async () => ({ok:true, blob:async () => new Blob(['EPUB sample'])}),
+    setTimeout() {return 1;}, clearTimeout() {}
+  });
+  const region = created.find(x => x.id === 'ios-shared-received');
+  return {
+    async tap() {
+      // Wait for initial asynchronous native pending() -> draw().
+      await new Promise(resolve => setImmediate(resolve));
+      const control = region.children[1].children[0];
+      assert.ok(control, 'La portada debe mostrar el EPUB pendiente');
+      assert.match(control.textContent, /Importar en TifloLector/);
+      control.handlers.click();
+      await completion;
+      await new Promise(resolve => setImmediate(resolve));
+      return {control};
+    },
+    state() {return {imports, acknowledgements, remaining:files.length, hash:location.hash};},
+    reader, region
+  };
+}
+
+test('un toque en portada navega, importa EPUB y confirma guardado antes de retirar el pendiente', async () => {
+  const app = sharedFileHarness();
+  await app.tap();
+  assert.deepEqual(app.state(), {
+    imports:1, acknowledgements:1, remaining:0, hash:'#reading'
+  });
+  assert.ok(app.region.classNames.includes('ios-share-inbox'));
+});
+
+test('si falla el guardado EPUB, conserva la entrada en la bandeja y no confirma éxito', async () => {
+  const app = sharedFileHarness({canSave:false});
+  await app.tap();
+  assert.deepEqual(app.state(), {
+    imports:1, acknowledgements:0, remaining:1, hash:'#reading'
+  });
 });

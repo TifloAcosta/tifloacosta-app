@@ -8,6 +8,7 @@
   let refreshing = false;
   let items = [];
   let previousItems = '';
+  let renderedItems = null;
   let hadQueryError = false;
 
   const region = document.createElement('section');
@@ -103,9 +104,15 @@
   }
 
   function draw() {
-    region.hidden = items.length === 0;
+    const fingerprint = items.map(item => item.id + ':' + item.name).join('|');
+    const shouldHide = items.length === 0;
+    // Rebuilding an unchanged inbox triggered the app-wide mutation observer
+    // and could repeatedly reopen the generic native Library.
+    if (renderedItems === fingerprint && region.hidden === shouldHide) return;
+    renderedItems = fingerprint;
+    region.hidden = shouldHide;
     list.replaceChildren();
-    if (!items.length) return;
+    if (shouldHide) return;
     header.textContent = translate(
       'Recibidos por Compartir: ' + items.length,
       'Received via Share: ' + items.length
@@ -144,6 +151,7 @@
       await exposeInbox();
     } catch {
       hadQueryError = true;
+      renderedItems = null;
       mount();
       region.hidden = false;
       header.textContent = translate('Recibidos por Compartir', 'Received via Share');

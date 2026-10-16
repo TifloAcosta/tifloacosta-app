@@ -32,6 +32,26 @@
       'reading-translation-source', 'reading-translation-target', 'reading-marks-new-type'
     ]);
     if (adjustableIds.has(select.id)) {
+      // Accessibility and visual presentation are one component. A range is
+      // adjustable with VoiceOver, but it also needs a visible name and value.
+      // Do not use the browser's generic unlabelled slider appearance.
+      const names = {
+        'reading-library-filter': document.documentElement.lang === 'en' ? 'Filter' : 'Filtro',
+        'ios-reading-library-sort': document.documentElement.lang === 'en' ? 'Sort by' : 'Ordenar por'
+      };
+      const displayName = names[select.id] || name;
+      const field = document.createElement('div');
+      field.className = 'ios-reader-adjustable-field';
+      field.dataset.iosAdjustableFor = select.id || '';
+      const caption = document.createElement('div');
+      caption.className = 'ios-reader-adjustable-caption';
+      caption.setAttribute('aria-hidden', 'true');
+      const visibleName = document.createElement('span');
+      visibleName.className = 'ios-reader-adjustable-name';
+      visibleName.textContent = displayName;
+      const visibleValue = document.createElement('span');
+      visibleValue.className = 'ios-reader-adjustable-value';
+      caption.append(visibleName, visibleValue);
       const slider = document.createElement('input');
       slider.type = 'range';
       slider.className = 'ios-reader-adjustable';
@@ -43,8 +63,10 @@
         slider.max = String(Math.max(0, select.options.length - 1));
         slider.value = String(Math.max(0, select.selectedIndex));
         const choice = select.selectedOptions[0];
-        slider.setAttribute('aria-valuetext', choice?.textContent?.trim() || '');
-        slider.title = name + ': ' + (choice?.textContent?.trim() || '');
+        const value = choice?.textContent?.trim() || '';
+        slider.setAttribute('aria-valuetext', value);
+        slider.title = displayName + ': ' + value;
+        visibleValue.textContent = value;
       }
       function selectBySlider() {
         const index = Math.max(0, Math.min(select.options.length - 1, Number(slider.value) || 0));
@@ -62,8 +84,11 @@
       select.style.display = 'none';
       select.tabIndex = -1;
       select.setAttribute('aria-hidden', 'true');
+      // The original label belongs to the hidden <select>; the visible
+      // caption is part of this single component, not another VoiceOver stop.
       if (label) label.hidden = true;
-      select.insertAdjacentElement('afterend', slider);
+      select.insertAdjacentElement('afterend', field);
+      field.append(caption, slider);
       syncFromSelect();
       return;
     }

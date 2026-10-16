@@ -7,6 +7,8 @@
   let active = false;
   let refreshing = false;
   let items = [];
+  let previousItems = '';
+  let hadQueryError = false;
 
   const region = document.createElement('section');
   region.id = 'ios-share-inbox';
@@ -22,7 +24,26 @@
   function mount() {
     const anchor = document.getElementById('ios-reading-import')
       || document.getElementById('reading-file-label');
-    if (anchor && region.parentElement !== section) anchor.after(region);
+    // The import controls live inside a panel, not directly in reading-section.
+    // Checking against the section moved this region on every refresh.
+    if (anchor && anchor.nextElementSibling !== region) anchor.after(region);
+  }
+
+  function readerVisible() {
+    return !section.hidden && document.getElementById('reading-reader')?.hidden !== false;
+  }
+
+  async function exposeInbox() {
+    if (!readerVisible() || !items.length) return;
+    const accessibility = window.Capacitor?.Plugins?.TifloReadingAccessibility;
+    try {
+      const result = await accessibility?.dismissNativeActionList?.();
+      if (result?.dismissed) {
+        list.querySelector('button')?.focus({ preventScroll: true });
+      }
+    } catch {
+      // The HTML inbox remains present even if the native modal cannot close.
+    }
   }
 
   function safeName(value) {
@@ -99,23 +120,45 @@
   }
 
   async function refresh() {
-    if (refreshing || active || !plugin()?.pending) return;
+    if (refreshing || active) return;
+    const inbox = plugin();
+    if (!inbox?.pending) return;
     refreshing = true;
     try {
-      const result = await plugin().pending();
+      const result = await inbox.pending();
       items = Array.isArray(result?.items) ? result.items.filter(
         item => item && /^[0-9a-f-]{36}$/i.test(item.id) &&
           ['file','text','url'].includes(item.kind)
       ) : [];
       mount();
+      if (hadQueryError) {
+        status.textContent = '';
+        hadQueryError = false;
+      }
       draw();
+      const fingerprint = items.map(item => item.id).join('|');
+      if (fingerprint !== previousItems) {
+        previousItems = fingerprint;
+        window.dispatchEvent(new Event('tiflo-share-inbox-changed'));
+      }
+      await exposeInbox();
     } catch {
-      // A missing group/extension must not leave an inert or misleading button.
+      hadQueryError = true;
+      mount();
+      region.hidden = false;
+      header.textContent = translate('Recibidos por Compartir', 'Received via Share');
+      list.replaceChildren();
+      status.textContent = translate(
+        'No se pudo consultar los documentos recibidos. Comprueba que TifloAcosta esté actualizada e inténtalo de nuevo.',
+        'Could not check received documents. Check that TifloAcosta is updated and try again.'
+      );
+      // Do not acknowledge or delete staged files on a failed query.
     } finally {
       refreshing = false;
     }
   }
 
+  window.TifloIOSShareInbox = Object.freeze({ refresh });
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => { mount(); void refresh(); }, { once: true });
   } else {
@@ -125,6 +168,11 @@
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') void refresh();
   });
+  window.addEventListener('hashchange', () => { void refresh(); });
   window.addEventListener('pageshow', () => { void refresh(); });
   window.addEventListener('focus', () => { void refresh(); });
+  // Capacitor may finish registering plugins after the first DOMContentLoaded.
+  window.addEventListener('load', () => { void refresh(); });
+  setTimeout(() => { void refresh(); }, 450);
+  setTimeout(() => { void refresh(); }, 1600);
 })();

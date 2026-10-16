@@ -32,7 +32,8 @@ unless ext
   embed ||= app.new_copy_files_build_phase('Embed App Extensions')
   embed.dst_subfolder_spec = '13'
   embed.dst_path = ''
-  embed.add_file_reference(ext.product_reference, true)
+  embedded_file = embed.add_file_reference(ext.product_reference, true)
+  embedded_file.settings = { 'ATTRIBUTES' => ['RemoveHeadersOnCopy', 'CodeSignOnCopy'] }
   app.add_dependency(ext)
 end
 

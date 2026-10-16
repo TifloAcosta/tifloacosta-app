@@ -60,7 +60,10 @@ final class ShareViewController: UIViewController {
         let dir = try inbox()
         let id = UUID().uuidString
         var data: [String: String] = ["id": id, "kind": kind, "name": String(name.prefix(200))]
-        if let value { data["text"] = String(value.prefix(100_000)) }
+        if let value {
+            guard value.count <= 100_000 else { throw NSError(domain: "TifloAcostaShare", code: 4) }
+            data["text"] = value
+        }
         if let file {
             let attrs = try FileManager.default.attributesOfItem(atPath: file.path)
             let size = (attrs[.size] as? NSNumber)?.int64Value ?? 0
@@ -114,7 +117,11 @@ final class ShareViewController: UIViewController {
                         lock.lock(); accepted += 1; lock.unlock()
                     }
                 }
-            } else if let type = types.first(where: { provider.hasItemConformingToTypeIdentifier($0) && $0 != "public.plain-text" }) {
+            } else if let type = types.first(where: {
+                $0 != "public.plain-text" &&
+                ($0 != "public.data" || !provider.hasItemConformingToTypeIdentifier(UTType.plainText.identifier)) &&
+                provider.hasItemConformingToTypeIdentifier($0)
+            }) {
                 group.enter()
                 provider.loadFileRepresentation(forTypeIdentifier: type) { [weak self] url, _ in
                     defer { group.leave() }

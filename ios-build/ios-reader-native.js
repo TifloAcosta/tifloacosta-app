@@ -223,7 +223,7 @@
       const next = JSON.stringify(documents);
       if (next === lastRegistered) return;
       lastRegistered = next;
-      void plugin.registerLibraryTitles({ documents, nativeRowsOnFocus: false })
+      void plugin.registerLibraryTitles({ documents, nativeRowsOnFocus: true })
         .then(reply => { voiceOverEnabled = reply?.voiceOverEnabled === true; })
         .catch(() => { voiceOverEnabled = false; });
     };

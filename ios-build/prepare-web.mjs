@@ -195,12 +195,23 @@ const iosBookActionGlue = String.raw`
       }
     },
     importSharedFile: async file => {
-      if (!(file instanceof File) || !els.file || !file.name) return false;
+      if (!(file instanceof File) || !els.file || !file.name || !libraryClient) {
+        return { saved:false, reason:'invalid-source' };
+      }
+      // Opening the reader is not proof of persistence. Never acknowledge a
+      // Share Extension item until the exact imported book can be read back.
       const transfer = new DataTransfer();
       transfer.items.add(file);
       els.file.value = '';
       els.file.files = transfer.files;
-      return Boolean(await importSelectedFile());
+      const imported = await importSelectedFile();
+      const id = String(currentBookId || '');
+      if (!imported || !id) return { saved:false, reason:'not-saved' };
+      const persisted = await libraryClient.openBook(id).catch(() => null);
+      if (!persisted?.book || String(persisted.book.id) !== id) {
+        return { saved:false, reason:'readback-failed' };
+      }
+      return { saved:true, id };
     },
     exportCurrent: format => currentBookId ? exportSavedBook(currentBookId, format) : Promise.resolve(false),
     deleteBook: id => deleteSavedBook(id),
@@ -428,6 +439,10 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
   const path = join(output, name);
   let html = await readFile(path, 'utf8');
   if (!html.includes('</head>')) throw new Error('Falta el cierre de cabecera: ' + name);
+  // iPhone: take charge of status bar and home indicator safe areas only
+  // inside the packaged iOS shell, never on the public website.
+  html = html.replace('width=device-width, initial-scale=1',
+    'width=device-width, initial-scale=1, viewport-fit=cover');
   html = html.replace('</head>', iosOverrides + '\n</head>');
   if (name === 'index.html') {
     html = html.replace('</head>', '<link rel="stylesheet" href="ios-reader-presentation.css">\n</head>');

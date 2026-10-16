@@ -66,8 +66,10 @@
     root.id = id;
     root.hidden = true;
     root.setAttribute('aria-label', label);
+    root.classList.add('ios-share-inbox');
     const heading = document.createElement('h3');
     const list = document.createElement('div');
+    list.classList.add('ios-share-inbox-items');
     const status = document.createElement('p');
     status.setAttribute('role', 'status');
     status.setAttribute('aria-live', 'polite');
@@ -109,6 +111,30 @@
           'Could not complete this action. The content remains available to retry.');
     dest.textContent = label;
   }
+  // A single activation from Home must complete the import, not merely navigate.
+  // Wait for the actual router to expose the reader instead of guessing a delay.
+  async function enterReaderSection() {
+    if (!reader.hidden) return;
+    if (location.hash !== '#reading') location.hash = '#reading';
+    if (!reader.hidden) return;
+    await new Promise((resolve, reject) => {
+      let settled = false;
+      let timer;
+      const finish = error => {
+        if (settled) return;
+        settled = true;
+        observer.disconnect();
+        clearTimeout(timer);
+        if (error) reject(error); else resolve();
+      };
+      const observer = new MutationObserver(() => {
+        if (!reader.hidden) finish();
+      });
+      observer.observe(reader, {attributes:true, attributeFilter:['hidden']});
+      timer = setTimeout(() => finish(new Error('reader-navigation-unavailable')), 8000);
+      if (!reader.hidden) finish();
+    });
+  }
   async function importDocument(item, opened, targetStatus) {
     let file;
     if (opened.kind === 'file') {
@@ -129,7 +155,9 @@
     const actions = window.TifloIOSBookActions;
     if (!actions?.importSharedFile) throw new Error('reader-unavailable');
     const imported = await actions.importSharedFile(file);
-    if (!imported || actions.hasSavedBook?.() !== true) throw new Error('import-not-persisted');
+    // The reader must return the persisted book ID after reading it back.
+    // A boolean from a temporary/open-only import must never delete the source.
+    if (imported?.saved !== true || !imported.id) throw new Error('import-not-persisted');
     await native().acknowledge({id:item.id});
     targetStatus.textContent = tr('Documento incorporado a TifloLector.',
       'Document saved in TifloLector.');
@@ -164,15 +192,8 @@
         await native().acknowledge({id:item.id});
         targetStatus.textContent = tr('Enlace abierto.', 'Link opened.');
       } else {
-        if (readerVisible()) {
-          await importDocument(item, opened, targetStatus);
-        } else {
-          // A shared book must be imported from its own reader section.
-          location.hash = '#reading';
-          targetStatus.textContent = tr('Abre el documento en TifloLector.',
-            'Open the document in TifloLector.');
-          await exposeInbox();
-        }
+        await enterReaderSection();
+        await importDocument(item, opened, targetStatus);
       }
     } catch (error) {
       explain(error, targetStatus);
@@ -185,6 +206,7 @@
   function buttonFor(item, mode, target) {
     const control = document.createElement('button');
     control.type = 'button';
+    control.classList.add('ios-share-inbox-item');
     const name = safeName(item.name);
     control.textContent = mode === 'youtube'
       ? tr('Reproducir vídeo compartido', 'Play shared video')

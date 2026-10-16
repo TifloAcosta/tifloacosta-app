@@ -121,3 +121,80 @@
   border-bottom: 1px solid var(--border);
   overflow-wrap: anywhere;
 }
+
+/* One compact native Share inbox presentation on Home and TifloLector.
+ * These selectors target the actual dynamically generated elements. */
+#home-blocks #ios-shared-received,
+#reading-section #ios-share-inbox {
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+  padding: .65rem;
+  margin: .65rem 0;
+  border: 1px solid var(--border);
+  border-radius: .65rem;
+  background: var(--surface-alt);
+}
+#home-blocks #ios-shared-received h3,
+#reading-section #ios-share-inbox h3 {
+  margin: 0 0 .45rem;
+  line-height: 1.35;
+  font-size: 1rem;
+}
+#home-blocks #ios-shared-received .ios-share-inbox-items,
+#reading-section #ios-share-inbox .ios-share-inbox-items {
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  width: 100%;
+}
+#home-blocks #ios-shared-received button.ios-share-inbox-item,
+#reading-section #ios-share-inbox button.ios-share-inbox-item {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: auto;
+  min-height: 2.75rem;
+  margin: 0;
+  padding: .65rem .75rem;
+  border: 1px solid var(--border);
+  border-radius: .45rem;
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1.4;
+  font-weight: 600;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+#home-blocks #ios-shared-received button.ios-share-inbox-item:focus-visible,
+#reading-section #ios-share-inbox button.ios-share-inbox-item:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* iOS-only safe areas and overflow. The packaged viewport opts in to
+   viewport-fit=cover; these insets keep content away from the clock,
+   camera island, rounded sides and Home indicator without fixed heights. */
+html, body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+body {
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+#home-blocks, #reading-section, #reading-library-web,
+#reading-library-list, #ios-shared-received, #ios-share-inbox {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+#home-blocks button, #reading-section button {
+  max-width: 100%;
+}

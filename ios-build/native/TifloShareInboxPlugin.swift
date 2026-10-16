@@ -131,6 +131,10 @@ public final class TifloShareInboxPlugin: CAPPlugin, CAPBridgedPlugin {
         do {
             try FileManager.default.createDirectory(at: destination, withIntermediateDirectories: true)
             let filename = URL(fileURLWithPath: value["name"] ?? "documento.bin").lastPathComponent
+            guard !filename.isEmpty, filename != ".", filename != ".." else {
+                call.reject("Nombre recibido no válido")
+                return
+            }
             let copy = destination.appendingPathComponent(filename)
             if FileManager.default.fileExists(atPath: copy.path) {
                 try FileManager.default.removeItem(at: copy)

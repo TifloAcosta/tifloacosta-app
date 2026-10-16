@@ -66,8 +66,10 @@
     root.id = id;
     root.hidden = true;
     root.setAttribute('aria-label', label);
+    root.classList.add('ios-share-inbox');
     const heading = document.createElement('h3');
     const list = document.createElement('div');
+    list.classList.add('ios-share-inbox-items');
     const status = document.createElement('p');
     status.setAttribute('role', 'status');
     status.setAttribute('aria-live', 'polite');
@@ -108,6 +110,30 @@
       : tr('No se pudo completar esta operación. El contenido sigue disponible para reintentar.',
           'Could not complete this action. The content remains available to retry.');
     dest.textContent = label;
+  }
+  // A single activation from Home must complete the import, not merely navigate.
+  // Wait for the actual router to expose the reader instead of guessing a delay.
+  async function enterReaderSection() {
+    if (!reader.hidden) return;
+    if (location.hash !== '#reading') location.hash = '#reading';
+    if (!reader.hidden) return;
+    await new Promise((resolve, reject) => {
+      let settled = false;
+      let timer;
+      const finish = error => {
+        if (settled) return;
+        settled = true;
+        observer.disconnect();
+        clearTimeout(timer);
+        if (error) reject(error); else resolve();
+      };
+      const observer = new MutationObserver(() => {
+        if (!reader.hidden) finish();
+      });
+      observer.observe(reader, {attributes:true, attributeFilter:['hidden']});
+      timer = setTimeout(() => finish(new Error('reader-navigation-unavailable')), 8000);
+      if (!reader.hidden) finish();
+    });
   }
   async function importDocument(item, opened, targetStatus) {
     let file;
@@ -164,15 +190,8 @@
         await native().acknowledge({id:item.id});
         targetStatus.textContent = tr('Enlace abierto.', 'Link opened.');
       } else {
-        if (readerVisible()) {
-          await importDocument(item, opened, targetStatus);
-        } else {
-          // A shared book must be imported from its own reader section.
-          location.hash = '#reading';
-          targetStatus.textContent = tr('Abre el documento en TifloLector.',
-            'Open the document in TifloLector.');
-          await exposeInbox();
-        }
+        await enterReaderSection();
+        await importDocument(item, opened, targetStatus);
       }
     } catch (error) {
       explain(error, targetStatus);
@@ -185,6 +204,7 @@
   function buttonFor(item, mode, target) {
     const control = document.createElement('button');
     control.type = 'button';
+    control.classList.add('ios-share-inbox-item');
     const name = safeName(item.name);
     control.textContent = mode === 'youtube'
       ? tr('Reproducir vídeo compartido', 'Play shared video')

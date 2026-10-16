@@ -54,3 +54,25 @@ test('La integración se limita al empaquetado iOS', () => {
   assert.ok(prepare.includes("const oldResourceShare"));
   assert.ok(prepare.includes("article.dataset.tifloShareUrl"));
 });
+
+test('La recepción del sistema no elimina archivos antes de la importación', () => {
+  const inbox = readFileSync(new URL('../ios-build/ios-share-inbox.js', import.meta.url), 'utf8');
+  const host = readFileSync(new URL('../ios-build/native/TifloShareInboxPlugin.swift', import.meta.url), 'utf8');
+  const extension = readFileSync(new URL('../ios-build/share-extension/ShareViewController.swift', import.meta.url), 'utf8');
+  assert.match(inbox, /if \(!imported\) throw new Error\('import-failed'\)/);
+  assert.match(inbox, /await plugin\(\)\.acknowledge\(\{ id: item\.id \}\)/);
+  assert.match(host, /func acknowledge\(/);
+  assert.match(extension, /maxBytes: Int64 = 100 \* 1024 \* 1024/);
+});
+
+test('Compartir iOS incorpora la extensión y exige permisos App Group', () => {
+  const installer = readFileSync(new URL('../ios-build/install-share-extension.rb', import.meta.url), 'utf8');
+  const workflow = readFileSync(new URL('../.github/workflows/ios-testflight.yml', import.meta.url), 'utf8');
+  const plist = readFileSync(new URL('../ios-build/share-extension/Info.plist', import.meta.url), 'utf8');
+  assert.ok(installer.includes("project.new_target(:app_extension"));
+  assert.ok(installer.includes("group.com.tifloacosta.app") === false);
+  assert.ok(workflow.includes("ruby install-share-extension.rb"));
+  assert.ok(workflow.includes("Validar App Group en los dos perfiles Apple"));
+  assert.ok(plist.includes('com.apple.share-services'));
+  assert.ok(plist.includes('NSExtensionActivationSupportsWebURLWithMaxCount'));
+});

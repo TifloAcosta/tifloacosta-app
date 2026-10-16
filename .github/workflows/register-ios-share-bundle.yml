@@ -4,10 +4,16 @@ on:
     branches: [feature/ios-compartir-nativo-20261016]
     paths:
       - 'ios-build/apple-share-registration-20261016.request'
+  pull_request:
+    branches: [preparacion-ios]
+    paths:
+      - 'ios-build/apple-share-registration-20261016.request'
+      - '.github/workflows/register-ios-share-bundle.yml'
 permissions:
   contents: read
 jobs:
   apple-identifier:
+    if: github.event_name == 'push' || (github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'feature/ios-compartir-nativo-20261016')
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:

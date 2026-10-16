@@ -203,6 +203,7 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
         documentId = id
         let selectors: [String: Selector] = [
             "open": #selector(openDocument(_:)), "continue": #selector(continueDocument(_:)),
+            "translate": #selector(translateDocument(_:)), "share": #selector(shareDocument(_:)),
             "queue": #selector(queueDocument(_:)), "info": #selector(infoDocument(_:)),
             "move": #selector(moveDocument(_:)), "export": #selector(exportDocument(_:)),
             "rename": #selector(renameDocument(_:)), "delete": #selector(deleteDocument(_:))
@@ -587,6 +588,7 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
 
     @objc private func openDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("open") }
     @objc private func continueDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("continue") }
+    @objc private func translateDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("translate") }
     @objc private func queueDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("queue") }
     @objc private func infoDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("info") }
     @objc private func moveDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("move") }

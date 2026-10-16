@@ -150,6 +150,50 @@ const iosBookActionGlue = String.raw`
     hasSavedBook: () => Boolean(currentBookId),
     openBook: id => openSavedBook(id),
     exportBook: (id, format = 'original') => exportSavedBook(id, format),
+    shareBook: async id => {
+      try {
+        if (!libraryClient || !window.TifloIOSShare?.shareBlob) return false;
+        const opened = await libraryClient.openBook(id);
+        if (!opened?.book) return false;
+        const fmt = String(opened.book.format || 'txt').toLowerCase();
+        const title = safeExportFilename(opened.book.title || 'Documento');
+        const source = String(opened.content || '');
+        const binaries = new Set(['docx', 'pptx', 'xlsx', 'epub', 'odt']);
+        let blob, ext = fmt;
+        if (fmt === 'audio') {
+          blob = (await libraryAdapter?.openAudioFile?.(id))?.blob;
+          ext = 'mp3';
+        } else if (fmt === 'daisy2.02' || fmt === 'daisy3') {
+          blob = (await libraryAdapter?.openDaisyArchive?.(id))?.blob;
+          ext = 'zip';
+        } else if (binaries.has(fmt)) {
+          if (source.length > 65000000) throw new Error('too-large');
+          blob = new Blob([Uint8Array.from(source.split(',').filter(Boolean).map(Number))]);
+        } else if (fmt === 'pdf') {
+          // PDF source has been extracted to text, so never pretend it is the
+          // original PDF. Share an explicitly named accessible text version.
+          const model = await modelForSavedBook(opened);
+          blob = new Blob([accessibleTextFromModel(model)], {type:'text/plain;charset=utf-8'});
+          ext = 'txt';
+        } else {
+          blob = new Blob([source], {type:'text/plain;charset=utf-8'});
+          if (fmt === 'markdown') ext = 'md';
+        }
+        if (!blob) throw new Error('no-original');
+        const result = await window.TifloIOSShare.shareBlob({blob, name: title + '.' + ext});
+        if (result === 'unavailable' || result === 'failed') {
+          els.libraryStatus.textContent = language() === 'en'
+            ? 'File cannot be shared directly (maximum 15 MB). Use Export instead.'
+            : 'No se puede compartir directamente este archivo (máximo 15 MB). Utiliza Exportar.';
+        }
+        return result === 'completed' || result === 'cancelled';
+      } catch {
+        els.libraryStatus.textContent = language() === 'en'
+          ? 'Could not prepare the document for sharing.'
+          : 'No se pudo preparar el documento para compartir.';
+        return false;
+      }
+    },
     importSharedFile: async file => {
       if (!(file instanceof File) || !els.file || !file.name) return false;
       const transfer = new DataTransfer();

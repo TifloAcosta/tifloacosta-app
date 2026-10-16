@@ -507,6 +507,14 @@ await writeFile(iosPodcastPath, iosPodcast);
 // global search results and other contexts where the category adds information.
 const iosAppPath = join(output, 'app.js');
 let iosApp = await readFile(iosAppPath, 'utf8');
+// In the first stage a public document URL is shared, not its binary data.
+// Name that action accurately until the actual file export passes testing.
+for (const [before, after] of [
+  ["share: 'Compartir documento',", "share: 'Compartir enlace',"],
+  ["share: 'Share document',", "share: 'Share link',"]]) {
+  if (!iosApp.includes(before)) throw new Error('No se encuentra etiqueta Compartir de Recursos');
+  iosApp = iosApp.replace(before, after);
+}
 const oldResourceShare = "    if(!sourceUrl||!navigator.share) {";
 if (!iosApp.includes(oldResourceShare)) throw new Error('No se encuentra la acción Compartir documento');
 iosApp = iosApp.replace(oldResourceShare, `    if (sourceUrl && window.TifloIOSShare?.shareURL) {

@@ -64,7 +64,6 @@
       await plugin().acknowledge({ id: item.id });
       status.textContent = translate('Contenido importado en TifloLector.',
         'Content imported into TifloLector.');
-      await refresh();
     } catch {
       status.textContent = translate(
         'No se pudo importar. El contenido continúa disponible para reintentar.',
@@ -73,6 +72,7 @@
     } finally {
       button.disabled = false;
       active = false;
+      await refresh();
     }
   }
 

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-16T04:35:36.777Z",
+  "generatedAt": "2026-10-16T07:13:39.993Z",
   "resources": [
     {
       "kind": "resource",
@@ -5448,6 +5448,55 @@
   "news": [
     {
       "kind": "news",
+      "id": "9to5mac-029e272ad6af4541:en",
+      "sourceId": "9to5mac-029e272ad6af4541",
+      "lang": "en",
+      "title": "Apple Store is down ahead of iPhone Duo preorder rush",
+      "summary": "In keeping with tradition, Apple has taken down the Apple Store this morning ahead of the iPhone Duo going up for preorder. If you are waiting to buy the new Apple foldable, be sure to log on at 5 AM Eastern Time. All reports point to constrained supply and relatively high demand, so everyone is anticipating that Apple will run out of launch day stock very quickly indeed. If you want a Duo for launch day, on October 23, you need to be ready to buy at 5 AM. more…",
+      "body": "In keeping with tradition, Apple has taken down the Apple Store this morning ahead of the iPhone Duo going up for preorder. If you are waiting to buy the new Apple foldable, be sure to log on at 5 AM Eastern Time.\n\nAll reports point to constrained supply and relatively high demand, so everyone is anticipating that Apple will run out of launch day stock very quickly indeed. If you want a Duo for launch day, on October 23, you need to be ready to buy at 5 AM.\n\nThe iPhone Duo is Apple’s first foldable, featuring a 7.6-inch inner display and a 5.4-inch outer display when closed. Apple has engineered the product to feature a minimal crease when unfolded, aided by a custom hinge design and a nano-texture matte finish on the inner display.\n\nIt is powered by Apple’s latest A20 Pro chip, and should offer computational performance in the ballpark of the iPhone 18 Pro line. The cameras are a downgrade though, due to the device’s thinner design when unfolded, and the Duo only has Touch ID rather than Face ID biometrics.\n\nThe Duo comes in two colors, Night Sky and Star White, and starts at $1999 for the entry-level 256 GB model.\n\niPhone Duo will launch with iOS 27.1, which will include a bunch of software UI optimisations for the product’s unusual form factor. This includes a new vertical bar where all the controls in updated apps appear along the right-edge of the phone, making them easy to tap with your thumb.\n\nAll of Apple’s apps have also been updated to smoothly expand between the outer display and the larger inner display, and app developers are also submitting compatibility updates as we speak.\n\nWhile foldables in general make up a small percentage of overall smartphone sales, Apple’s entrance into the category is expected to make a mark. We think the Duo will be a big hit, at least relatively to the competition.\n\nWhether Apple can manufacture enough of them will be the problem, at least for the first few months. Reports have indicated Apple’s suppliers will ship about 7-10 million Duos for the rest of 2026.\n\nMy favorite Apple gear",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/16/apple-store-is-down-ahead-of-iphone-duo-preorder-rush/",
+      "publishedAt": "2026-10-16T07:02:48.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "conticgo-1060fe9b11944837:es",
+      "sourceId": "conticgo-1060fe9b11944837",
+      "lang": "es",
+      "title": "Un nuevo prototipo busca llevar el Braille electrónico a restaurantes museos y puntos de información",
+      "summary": "Un equipo de estudiantes de Shawnee State University ha desarrollado una línea Braille electrónica actualizable para facilitar el acceso a la información en espacios públicos. El proyecto continúa en desarrollo y sus creadores trabajan para mejorar el dispositivo y reducir sus costes de fabricación. Una línea Braille para consultar información en espacios públicos Dos estudiantes […] La entrada Un nuevo prototipo busca llevar el Braille electrónico a restaurantes museos y puntos de información se publicó primero en Conticgo .",
+      "body": "Un equipo de estudiantes de Shawnee State University ha desarrollado una línea Braille electrónica actualizable para facilitar el acceso a la información en espacios públicos. El proyecto continúa en desarrollo y sus creadores trabajan para mejorar el dispositivo y reducir sus costes de fabricación.\n\nDos estudiantes de Ingeniería Informática y Tecnologías de Computación de Shawnee State University, en Estados Unidos, han creado un prototipo de línea Braille electrónica que podría facilitar el acceso a información en lugares como restaurantes, museos y puntos de información.\n\nLos estudiantes Parker Lauders y Kade Dancy desarrollaron el dispositivo como proyecto final de sus estudios universitarios. Su objetivo es ofrecer una alternativa a los materiales en Braille impresos, especialmente en espacios donde la información cambia con frecuencia.\n\nLa propuesta utiliza tecnología Braille actualizable. En lugar de recurrir a textos impresos de forma permanente, el dispositivo emplea puntos mecánicos que suben y bajan para representar diferentes caracteres. Así, el contenido puede modificarse electrónicamente sin tener que producir un nuevo material en relieve cada vez que cambia la información.\n\nUno de los ejemplos que plantean sus creadores es el de los restaurantes. Los menús pueden cambiar varias veces al año, por lo que mantenerlos disponibles en Braille requiere actualizar e imprimir nuevos materiales.\n\nCon una pantalla electrónica como esta, el establecimiento podría cargar el contenido actualizado en el dispositivo. De este modo, las personas ciegas podrían consultar la información en Braille sin depender exclusivamente de cartas impresas que pueden quedarse desactualizadas.\n\nLa misma idea podría aplicarse a museos, quioscos informativos y otros espacios públicos en los que se ofrecen datos sobre servicios, exposiciones o indicaciones.\n\nEl planteamiento busca que la información accesible sea más fácil de mantener y actualizar. No obstante, su utilidad real dependerá de cómo se implemente el sistema en cada entorno y de que el contenido esté disponible en un formato adecuado para las personas usuarias.\n\nLa idea surgió cuando Parker Lauders era estudiante de primer año. Tras varios años de formación práctica, él y Kade Dancy consiguieron diseñar, construir y programar un prototipo funcional como parte de su proyecto final.\n\nEl trabajo combina componentes electrónicos, programación y piezas mecánicas fabricadas específicamente para el dispositivo. Según la documentación académica del proyecto, el sistema incorpora 20 celdas Braille personalizadas y un microcontrolador STM32.\n\nAunque el proyecto ha permitido desarrollar y probar distintos componentes del sistema, todavía existen aspectos técnicos que deben mejorarse, especialmente en el mecanismo encargado de accionar los puntos Braille.\n\nPor ello, sus creadores continúan trabajando en el hardware, la funcionalidad y la reducción de los costes de fabricación. También prevén explorar la protección mediante patente y las posibilidades de llevar la tecnología al mercado.\n\nEl proyecto se ha presentado en el Capitolio del Estado de Ohio, una oportunidad para mostrar su potencial más allá del entorno universitario.\n\nPor el momento, no se ha anunciado que el dispositivo esté disponible comercialmente . Se trata de un prototipo universitario en fase de desarrollo, no de un producto que pueda comprarse e instalarse actualmente en restaurantes o museos.\n\nSu evolución será interesante para el ámbito de la accesibilidad, ya que plantea una posible forma de facilitar la actualización de información en Braille en espacios públicos.\n\nSi consigue resolver los retos técnicos pendientes y alcanzar un coste de fabricación asumible, podría abrir nuevas posibilidades para que establecimientos y entidades ofrezcan información accesible de manera más flexible.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuentes: Noticia original , descripción del proyecto ,",
+      "sourceName": "Conticgo",
+      "originalUrl": "https://conticgo.net/un-nuevo-prototipo-busca-llevar-el-braille-electronico-a-restaurantes-museos-y-puntos-de-informacion/",
+      "publishedAt": "2026-10-16T06:00:25.000Z",
+      "categories": [
+        "tecnologia-accesibilidad",
+        "proyectos-prototipos",
+        "braille"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-b4d75e8ac374d2e0:en",
+      "sourceId": "techcrunch-b4d75e8ac374d2e0",
+      "lang": "en",
+      "title": "Even Benchmark thinks AI is eroding the venture pact against backing rivals",
+      "summary": "Benchmark says the Valley’s rule against backing rivals is getting harder to keep.",
+      "body": "For decades, the unwritten rule of venture capital was that a firm doesn’t back two companies that compete head-on. But speaking at TechCrunch Disrupt earlier this week, the partners of Benchmark readily acknowledged that the AI boom is straining that rule.\n\nIt’s been on the verge of snapping for some time. The towering AI labs OpenAI and Anthropic share dozens of the same investors at this point. Then, at the end of September, Factory, a startup that builds an AI agent to write software, said it was firing board observer and adviser Chris Degnan for “unethical conduct involving Cognition,” its direct rival and the maker of the Devin coding agent. Factory’s CEO alleged Degnan had discussed a job at Cognition while privy to Factory’s board-level discussions. Degnan said he had already resigned and denied sharing anything confidential. Soon after, he announced he was joining Cognition as chief revenue officer. Powerhouse investor Vinod Khosla sided with Degnan on X, blasting Factory’s CEO and calling the company “a struggling second tier competitor.” Khosla Ventures backs both companies.\n\nEven Benchmark, a firm whose reputation rests on 10-to-15-year partnerships with founders at the earliest stage, said the old rule can no longer be counted on. Asked at Disrupt whether the pact against backing rivals still holds as portfolio companies expand into each other’s territory, its partners described the conflicts as a matter of necessity, not preference.\n\n“The harsh reality of this world is every company is evolving very quickly,” said Eric Vishria. Companies pivot and change, he said, and “you are going to get conflicts, and that’s just the reality of the current dynamic.”\n\nVishria said Benchmark stays committed to each founder and keeps what it learns confidential, and he downplayed how much a VC could pass along anyway: “We are not product or technology experts.” Seemingly referring to the Factory-Cognition dispute, he said Benchmark has been fortunate not to land in “that type of insane direct conflict.” Exclusivity, he said, remains “really important” at the very early stage Benchmark favors. “But things are evolving. There’s no doubt about that.”\n\nChetan Puttagunta said AI is accelerating the problem. As the cost of building software “effectively goes to zero,” he said, founders are “incredibly ambitious.” Because they now see a “surface area” and want to claim all of it, he continued, “[i]t’s probably going to happen more, where you start to run into each other.”\n\nHe drew a line between a direct competitor at the outset, which he called “an easy answer,” and a portfolio company that expands into another’s turf over time. “That happens,” he said.\n\nPeter Fenton called the issue “kryptonite” and the firm’s toughest problem. He described a spectrum of how investors relate to their companies. At one end is the co-founder, who would never work on a competing company. At the other is the public-market stock picker, who can own several rivals because he is merely allocating capital, not shaping any of them. Benchmark sits nearer the co-founder end, Fenton said, and treats transparency as a golden rule. “There shouldn’t be the surprise after the fact.” If a conflict does emerge, a founder should never feel shortchanged, he added.\n\nBenchmark isn’t declaring the pact dead. At the same time, when a firm that built its name on loyalty says conflicts are coming, founders might rightly wonder who else will be this candid.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/15/even-benchmark-thinks-ai-is-eroding-the-venture-pact-against-backing-rivals/",
+      "publishedAt": "2026-10-16T05:16:46.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "9to5mac-8e3a816aee582d22:en",
       "sourceId": "9to5mac-8e3a816aee582d22",
       "lang": "en",
@@ -5549,23 +5598,6 @@
     },
     {
       "kind": "news",
-      "id": "9to5mac-9f023d6b02cdf7b9:en",
-      "sourceId": "9to5mac-9f023d6b02cdf7b9",
-      "lang": "en",
-      "title": "Apple Sports update improves Live Activity support, adds soccer leagues from around the world",
-      "summary": "Apple updated its Apple Sports app today with improvements to Live Activities and support for five additional soccer leagues. Here are the details. more…",
-      "body": "Apple updated its Apple Sports app today with improvements to Live Activities and support for five additional soccer leagues. Here are the details.\n\nThe Apple Sports app has been receiving updates at a steady pace lately, bringing support for more leagues and sports, along with deeper integration with iOS features.\n\nToday’s update to version 4.5 continues that trend, adding support for five soccer competitions from around the world:\n\nAdditionally, the app’s Live Activities can now display key game statistics during breaks in the action across leagues, which Apple says will help users “stay even closer to the game at a glance.”\n\nHere’s Apple’s full release notes for Apple Sports 4.5:\n\nTo check out and download Apple Sports from the App Store, follow this link .",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/15/apple-sports-update-improves-live-activity-support-adds-soccer-leagues-from-around-the-world/",
-      "publishedAt": "2026-10-15T20:48:00.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "techcrunch-a5589a3dea4edafe:en",
       "sourceId": "techcrunch-a5589a3dea4edafe",
       "lang": "en",
@@ -5578,23 +5610,6 @@
       "categories": [
         "tecnologia-general",
         "apple",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-08cbc03f83a223bf:en",
-      "sourceId": "techcrunch-08cbc03f83a223bf",
-      "lang": "en",
-      "title": "Amazon devices chief Panos Panay sees a future where AI devices replace the need to use apps",
-      "summary": "Speaking at TechCrunch Disrupt, Amazon devices chief Panos Panay described a future where ambient AI devices work in the background, anticipating users' needs instead of waiting for commands.",
-      "body": "Amazon is placing its bets on ambient computing, not apps, as the future of personal AI.\n\nAlongside the launch of the company’s new AI wearables from Bee , Panos Panay, who serves as Amazon’s SVP of Devices, Alexa & Leo, took the stage at TechCrunch Disrupt on Thursday to talk more in depth about where he sees personal computing headed.\n\n“A lot of times, what you’re doing right now — what we all do right now — is we have to remember what we’re asking our tool to do for us,” Panay began, explaining that this is how we engage with our modern smartphones. “It’s like point, shoot, return,” Panay continued. “I think where we’re headed is a world [that] starts with ambient devices.”\n\nBy “ambient devices,” he means those that work quietly in the background, using sensors and AI to help you figure out what needs to be done, instead of the other way around, where you’re telling the device what you need to do.\n\n“As it works in the background, you’re able to stay more present. You’re able to get more done. You’re about to spend more time with people … you’re not afraid if you miss something. It’s incredibly powerful,” Panay said.\n\nAmazon’s biggest entry into this space is the set of new Bee devices it introduced on Thursday, which include a band you can wear on your wrist or detach to wear as a pendant, as well as a new credit-card-sized device that attaches magnetically to the back of your smartphone.\n\nThese gadgets passively record audio and take notes about your day, finding the to-dos, reminders, and insights you may later need to refer back to. To balance the need to be useful with user privacy, Bee’s devices don’t actually store the raw audio from your conversations; they process the audio in real time and then delete it when done. Transcripts of conversations are encrypted using keys that your device creates and controls. That means no one else, including Amazon employees, can access those files unless you intentionally share them.\n\nPanay said that privacy was a key consideration for how these new ambient devices should work.\n\n“You have to give customers that control,” he said. “Every product is different, but for Bee specifically, as an example in the ambient space like that, you have to design with privacy in mind. And that’s what we do. That’s critical.”\n\nThe executive, who came to Amazon after 19 years at Microsoft where he oversaw the development of Surface devices, has spent a lot of his life thinking about how personal computing will evolve. With Bee — and ambient computing more generally — Panay also envisioned a future where the idea of interacting with apps becomes less important, as more tasks are handled via AI.\n\n“Do I think we have a future where there’s a bit of a balance — a whole generation that doesn’t say ‘give me the app’ for that, but says it should just understand what I need? Yeah, I do. I think that transformation is coming. I think that is the next generation,” he said.\n\nThat doesn’t necessarily mean the smartphone itself won’t continue to be an important personal computing device (as much as Amazon would like it to be an Alexa tablet or Echo smart speaker), Panay pointed out. Rather, he believes a new crop of devices will emerge that use sensors to understand users better, and to bring intelligence to the world around you.\n\n“I’m not a proponent that says one form factor is going to replace another. I don’t think that’s the case,” he clarified. “I think there’s an intelligence layer that connects it all … and it has to be useful.”",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/15/amazon-devices-chief-panos-panay-sees-a-future-where-ai-devices-replace-the-need-to-use-apps/",
-      "publishedAt": "2026-10-15T19:55:25.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apps-accesibles",
         "ia-accesibilidad"
       ]
     },
@@ -6116,23 +6131,6 @@
         "ia-accesibilidad",
         "movilidad",
         "productos-disponibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "nvda-es-4824d343899e5a64:es",
-      "sourceId": "nvda-es-4824d343899e5a64",
-      "lang": "es",
-      "title": "Ya disponible la cuarta beta de NVDA 2026.3",
-      "summary": "Tal y como ha anunciado NV Access mediante esta publicación, la beta 4 de NVDA 2026.3 ya se encuentra disponible para descarga y pruebas. Si quieres saber qué ofrece la próxima versión de NVDA antes de que se libere oficialmente, no dudes en descargar esta beta y proporcionar comentarios por los canales de la comunidad, … Continuar leyendo \"Ya disponible la cuarta beta de NVDA 2026.3\" La entrada Ya disponible la cuarta beta de NVDA 2026.3 se publicó primero en NVDA en español .",
-      "body": "Tal y como ha anunciado NV Access mediante esta publicación , la beta 4 de NVDA 2026.3 ya se encuentra disponible para descarga y pruebas. Si quieres saber qué ofrece la próxima versión de NVDA antes de que se libere oficialmente, no dudes en descargar esta beta y proporcionar comentarios por los canales de la comunidad, o por el sistema de informe de fallos de NV Access . Esta versión no es apta para entornos de producción. Al instalar esta beta te unirás al canal beta, y sólo recibirás avisos de actualización de compilaciones beta y candidatas a liberación (rc). El canal beta/rc siempre te mantendrá al día con la versión más reciente de NVDA. La última rc de un ciclo de liberación es idéntica a la última versión estable. Para regresar al canal de versiones estables, instala a mano la última versión estable.\n\nEsta versión incorpora importantes mejoras de rendimiento, mejoras en los diálogos de NVDA, y entrada expandida por la pantalla táctil. Se han hecho varias mejoras para reducir los retrasos y aumentar el rendimiento. Ahora NVDA recupera y captura más información sobre los controles en segundo plano, mejorando el rendimiento en controles como cuadros combinados y el explorador de archivos. NVDA ya no hace que se rompan el explorador de archivos u otras aplicaciones al cerrarlo o reiniciarlo. NVDA se recupera ahora más rápido cuando una aplicación deja de responder, y ya no se colgará ni inundará el registro con errores en aplicaciones que no responden. En regiones vivas de texto, como las terminales, NVDA ya no se cuelga cuando se vuelcan en pantalla importantes cantidades de texto. Se han añadido menús de contexto y atajos de teclado a los diálogos de perfiles de configuración, gestos de entrada y diccionarios del habla, haciendo que estos diálogos sean más fáciles de usar con el teclado. Ahora también es posible cambiar directamente un gesto existente en el diálogo Gestos de entrada. Se ha modernizado el diálogo que presenta mensajes explorables y ahora soporta mejor cambiar su tamaño, maximizarlo y minimizarlo. Se ha expandido significativamente la entrada por pantalla táctil. Los gestos de dos deslizamientos secuenciales ahora combinan dos deslizamientos en rápida sucesión en un solo gesto, incrementando enormemente la cantidad de gestos asociables. También se soportan ahora los gestos de borde, permitiendo que los gestos que comiencen a 15 mm de cualquier borde de la pantalla se asocien independientemente de los mismos gestos realizados en el centro de la pantalla. Se ha añadido una nueva orden sin asignar para mover el cursor del ratón al centro de la vista ampliada. Se puede usar el OCR de Windows con la lupa o la cortina de pantalla activadas. Se ha actualizado Liblouis con nuevas tablas braille en Elfdaliano, sami, maorí, braille unificado inglés de Nueva Zelanda, y aitiano criollo, una tabla noruega para texto en español, y variantes adicionales de sueco de 6 y 8 puntos. Se ha actualizado Espeak NG añadiendo soporte para liguriano y abkhaz. Para instalar esta beta, puedes configurar el canal «rc y beta» en el complemento Selector del canal de actualización y buscar actualizaciones desde el menú Ayuda de NVDA, o actualizar desde una beta anterior. Y como siempre, también puedes descargar manualmente el instalador de NVDA 2026.3 beta 4 . Su suma de comprobación SHA256, que te permitirá garantizar la integridad del archivo descargado, es 8be91476179710c4abffe5094459df9be1696d92e5d6cd0ace47d52321bb87ab. ¡Feliz martes!\n\nLa entrada Ya disponible la cuarta beta de NVDA 2026.3 se publicó primero en NVDA en español .",
-      "sourceName": "NVDA en español",
-      "originalUrl": "https://nvda.es/2026/10/06/ya-disponible-la-cuarta-beta-de-nvda-2026-3/",
-      "publishedAt": "2026-10-06T05:37:22.000Z",
-      "categories": [
-        "nvda",
-        "windows",
-        "tecnologia-accesibilidad"
       ]
     }
   ]

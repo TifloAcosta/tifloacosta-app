@@ -11,6 +11,7 @@ public final class TifloShareInboxPlugin: CAPPlugin, CAPBridgedPlugin {
     public let pluginMethods: [CAPPluginMethod] = [
         CAPPluginMethod(name: "pending", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "openItem", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "openURL", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "acknowledge", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "shareData", returnType: CAPPluginReturnPromise)
     ]
@@ -100,7 +101,9 @@ public final class TifloShareInboxPlugin: CAPPlugin, CAPBridgedPlugin {
                     "id": id,
                     "kind": info["kind"] ?? "file",
                     "name": info["name"] ?? "Contenido",
-                    "createdAt": info["createdAt"] ?? ""
+                    "createdAt": info["createdAt"] ?? "",
+                    // Small preview only; files stay as private App Group bytes.
+                    "preview": String((info["value"] ?? "").prefix(2000))
                 ]
             }.sorted { ($0["createdAt"] ?? "") < ($1["createdAt"] ?? "") }
             call.resolve(["items": Array(items.prefix(30))])
@@ -145,6 +148,23 @@ public final class TifloShareInboxPlugin: CAPPlugin, CAPBridgedPlugin {
             ])
         } catch {
             call.reject("No se puede preparar el archivo")
+        }
+    }
+
+    // Open real HTTPS URLs without reclassifying them as text documents.
+    @objc public func openURL(_ call: CAPPluginCall) {
+        guard let raw = call.getString("url"),
+              let url = URL(string: raw),
+              ["https", "http"].contains(url.scheme?.lowercased() ?? ""),
+              url.user == nil, url.password == nil, url.host != nil else {
+            call.reject("Enlace recibido no válido")
+            return
+        }
+        DispatchQueue.main.async {
+            UIApplication.shared.open(url, options: [:]) { succeeded in
+                if succeeded { call.resolve(["opened": true]) }
+                else { call.reject("No se pudo abrir el enlace") }
+            }
         }
     }
 

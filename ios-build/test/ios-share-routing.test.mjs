@@ -19,6 +19,7 @@ function router() {
   const home = fakeElement();
   const window = { Capacitor: {}, addEventListener() {} };
   const document = {
+    documentElement: {lang:'es'},
     readyState: 'loading',
     createElement: fakeElement,
     addEventListener() {},

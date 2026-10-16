@@ -330,6 +330,7 @@ await writeFile(join(output, 'ios-choice-groups.js'), "(() => {\n  'use strict';
 await cp(join(root, 'ios-build/ios-choice-collapse.js'), join(output, 'ios-choice-collapse.js'));
 await cp(join(root, 'ios-build/ios-reader-selects.js'), join(output, 'ios-reader-selects.js'));
 await cp(join(root, 'ios-build/ios-reader-minimal.js'), join(output, 'ios-reader-minimal.js'));
+await cp(join(root, 'ios-build/ios-reader-presentation.css'), join(output, 'ios-reader-presentation.css'));
 await cp(join(root, 'ios-build/ios-reader-folders.js'), join(output, 'ios-reader-folders.js'));
 await cp(join(root, 'ios-build/ios-reader-native.js'), join(output, 'ios-reader-native.js'));
 await cp(join(root, 'ios-build/ios-accessible-actions.js'), join(output, 'ios-accessible-actions.js'));
@@ -398,6 +399,7 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
   if (name === 'actualidad.html') html = html.replace('</body>', '<script src="ios-choice-collapse.js"></script>' + '\n</body>');
   if (name === 'index.html' || name === 'actualidad.html' || name === 'videos.html') html = html.replace('</body>', '<script src="ios-parity.js"></script>' + '\n</body>');
   if (name === 'index.html') {
+    html = html.replace('</head>', '<link rel="stylesheet" href="ios-reader-presentation.css">\n</head>');
     html = html.replace('</head>', '<script src="ios-reader-native.js"></script>\n</head>');
     html = html.replace('</head>', '<script src="tiflo-build-identity.js"></script>\n</head>');
     html = html.replace('</body>', '<script src="ios-reader-selects.js"></script><script src="ios-reader-minimal.js"></script><script src="ios-reader-folders.js"></script>' + '\n</body>');

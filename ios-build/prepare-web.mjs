@@ -461,7 +461,7 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
   if (name === 'podcast.html') {
     html = html.replace('</body>', '<script>requestAnimationFrame(() => { const heading = document.getElementById("podcast-heading"); heading?.setAttribute("tabindex", "-1"); heading?.focus({preventScroll:true}); });</script>' + '\n</body>');
   }
-  html = html.replace('</body>', '<script src="ios-share.js"></script>\\n</body>');
+  html = html.replace('</body>', '<script src="ios-share.js"></script>\n</body>');
   html = html.replace('</body>', '<script src="ios-accessible-actions.js"></script><script src="ios-appwide-native-actions.js"></script><script src="ios-video-ui.js"></script>\n</body>');
   await writeFile(path, html);
 }

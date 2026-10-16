@@ -35,8 +35,11 @@ jobs:
         run: node --test test/actualidad-media-*.test.mjs test/actualidad-feed.test.mjs
       - name: Comprobar OAuth y acciones de YouTube sin cuentas reales
         run: node --test youtube-worker/test/*.test.mjs
-      - name: Comprobar sintaxis Swift de acciones VoiceOver (sin firmar)
-        run: swiftc -frontend -parse ios-build/native/TifloReadingAccessibilityPlugin.swift
+      - name: Comprobar Swift nativo y sintaxis Ruby de la extensión Compartir
+        run: |
+          swiftc -frontend -parse ios-build/native/TifloReadingAccessibilityPlugin.swift
+          swiftc -frontend -parse ios-build/share-extension/ShareViewController.swift
+          ruby -c ios-build/configure-share-extension.rb
       - name: Comprobar contrato de controles nativos TifloReproductor
         run: node --test ios-build/test/*.test.mjs
       - name: Instalar dependencias del empaquetador iOS

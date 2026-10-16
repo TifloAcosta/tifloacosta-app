@@ -137,3 +137,12 @@ Objetivo: recuperar la lista nativa UIKit para usuarios VoiceOver al entrar en V
 Conservar las demás secciones de la app, datos, contenidos, TifloLector, Android y web pública sin cambios.
 Publicar únicamente en TestFlight interno, grupo Probadores TifloAcosta. Exigir compilación firmada, envío y comprobación de Apple VALID e internalBuildState habilitado. No confirmar al usuario hasta que TestFlight esté disponible.
 Una vez procesada, probar en iPhone real que cada vídeo es un solo foco y que las acciones de VoiceOver se anuncian con flic arriba/abajo.
+
+
+Solicitud de nueva compilación interna de TestFlight, 16-10-2026.
+Captura de referencia correcta: IMG_0990.PNG (16 de octubre); descartar IMG_0989.PNG para la superposición actual.
+Cambio integrado: PR #192, SHA cb75d883d8fbccda93ce9ce859f9afc4a90f8f44, exclusivo de iOS.
+Objetivo: cuando la sección UIKit de Vídeos esté visible, ocultar el WKWebView inferior tanto visualmente como a VoiceOver; restaurar su estado original antes de devolver el foco al inicio. Preservar acciones del rotor, buscador único YouTube, orden, diez más y reproducción. No modificar Android, web, TifloLector ni datos.
+Copia reversible anterior: backup/ios-before-videos-layer-fix-20261016.
+Preflight de PR #192: GitHub Actions 38866583060 SUCCESS, compilación Xcode sin firma incluida.
+Enviar únicamente al grupo interno «Probadores TifloAcosta». Confirmar a la persona usuaria mediante correo a tonytenerife@gmail.com SOLO después de verificar Apple VALID, estado de pruebas internas disponible y asignación al grupo. La revisión visual y de VoiceOver definitiva se hará en el iPhone.

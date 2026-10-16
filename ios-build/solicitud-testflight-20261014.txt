@@ -146,3 +146,10 @@ Objetivo: cuando la sección UIKit de Vídeos esté visible, ocultar el WKWebVie
 Copia reversible anterior: backup/ios-before-videos-layer-fix-20261016.
 Preflight de PR #192: GitHub Actions 38866583060 SUCCESS, compilación Xcode sin firma incluida.
 Enviar únicamente al grupo interno «Probadores TifloAcosta». Confirmar a la persona usuaria mediante correo a tonytenerife@gmail.com SOLO después de verificar Apple VALID, estado de pruebas internas disponible y asignación al grupo. La revisión visual y de VoiceOver definitiva se hará en el iPhone.
+
+
+SOLICITUD EXPRESA TESTFLIGHT — RECUPERAR PANTALLA VÍDEOS CON VOICEOVER — 16/10/2026.
+Incidencia informada tras actualización de hoy: al entrar en Vídeos, VoiceOver permanece en barra de estado y no lee títulos ni controles; captura correcta IMG_0991.PNG.
+Reparación exclusiva iOS: PR #193 integrado, merge 4b4fcd0fdf9931ef29d3b069ea277d63c19ce700. Restaurar visibilidad de UIKit sin ocultar el WKWebView que puede actuar como su contenedor; pantalla nativa opaca y prioritaria, gestión de accesibilidad sin esconder ancestros, restaurar foco al salir.
+Preflight y compilación Xcode sin firma CI 38869439467: SUCCESS. Respaldo previo backup/ios-before-videos-blank-fix-20261016. No modificar TifloLector, biblioteca, datos, Android, web ni las funciones de Vídeos ya aceptadas.
+Publicar SOLO para grupo interno «Probadores TifloAcosta». No comunicar actualización al usuario hasta verificar compilación firmada enviada, procesamiento Apple VALID y asignación al grupo interno. Cuando esté disponible enviar aviso por correo a tonytenerife@gmail.com; no dar por resuelto VoiceOver sin nueva prueba real del iPhone.

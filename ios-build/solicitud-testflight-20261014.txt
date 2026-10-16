@@ -177,3 +177,14 @@ Publicar únicamente en grupo interno Probadores TifloAcosta tras firma, procesa
 Esta subida no equivale a demostrar lectura real de un EPUB de WhatsApp en el iPhone; se verificará tras instalar.
 Mantener pendiente auditoría de la presentación normal de Biblioteca cuando no hay contenido compartido.
 Confirmar disponibilidad con correo a tonytenerife@gmail.com solamente tras verificar Apple TestFlight realmente disponible.
+
+
+PUBLICACIÓN INTERNA iOS — 16/10/2026 — ENRUTAMIENTO COMPARTIR Y PRESENTACIÓN.
+Incidencias reproducidas en 400095/400096: EPUB enviado desde WhatsApp muestra guardado pero no se encuentra en el lector; un enlace YouTube compartido recibe el mensaje genérico de importación a Biblioteca.
+Corrección: recepción App Group muestra los elementos pendientes en Inicio y, para archivos/texto, en TifloLector; EPUB/PDF/archivos se importan únicamente al lector con guardado verificado; enlaces de YouTube (watch, youtu.be, shorts, live) se envían al reproductor nativo accesible; otros enlaces se abren como URL HTTP(S), nunca como notas TXT por defecto; texto sin enlace sí se puede importar como documento.
+Se preservan los datos y archivos temporales hasta confirmar la acción. Textos informativos de la Share Extension diferenciados por tipo. Ruta de incorporación sin necesidad de reinstalar.
+Presentación: no abrir automáticamente la ventana UIKit genérica que cubría Biblioteca, Recursos, Novedades y otras secciones; mantener la pantalla específica nativa de Vídeos y añadir acciones del rotor al elemento enfocado en la interfaz original. Mantener Traducir y Compartir en el rotor de documentos.
+Control de calidad: ios-check ejecución #229 (38941934041) completada con éxito en auditoría estática, pruebas de tipos de enlace, sintaxis Swift, compilación de simulador y compilación iPhone sin firma.
+Publicar en grupo interno Probadores TifloAcosta solamente tras confirmación VALID + IN_BETA_TESTING + target group asignado. No tocar Android ni web pública, no borrar archivos previos, no desinstalar la app.
+La prueba final con VoiceOver y documentos/enlaces compartidos depende del iPhone: no declarar funcionamiento real hasta comprobarlo.
+Tras disponibilidad verificada, enviar correo a tonytenerife@gmail.com para indicar que se puede instalar la nueva compilación de prueba.

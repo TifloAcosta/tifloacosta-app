@@ -128,8 +128,9 @@ final class ShareViewController: UIViewController {
         let manager = FileManager.default
         let inbox = group.appendingPathComponent("ShareInbox", isDirectory: true)
         let id = UUID().uuidString
-        let clean = URL(fileURLWithPath: title).lastPathComponent
-            .replacingOccurrences(of: "/", with: "-")
+        let basename = URL(fileURLWithPath: title).lastPathComponent
+        let clean = (basename == "." || basename == ".." || basename.isEmpty)
+            ? "Contenido.txt" : basename.replacingOccurrences(of: "/", with: "-")
         do {
             try manager.createDirectory(at: inbox, withIntermediateDirectories: true)
             var message: [String: String] = [

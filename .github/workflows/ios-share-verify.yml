@@ -1,0 +1,54 @@
+name: Verificar Compartir nativo de TifloAcosta iOS (sin publicar)
+on:
+  pull_request:
+    branches: [preparacion-ios]
+    paths:
+      - 'ios-build/**'
+      - 'test/ios-share.test.mjs'
+      - '.github/workflows/ios-share-verify.yml'
+permissions:
+  contents: read
+jobs:
+  share-unsigned:
+    runs-on: macos-15
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verificar código y pruebas aisladas
+        run: |
+          node --check ios-build/ios-share.js
+          node --check ios-build/ios-share-inbox.js
+          node --check ios-build/ios-appwide-native-actions.js
+          node --check ios-build/prepare-web.mjs
+          node --test test/ios-share.test.mjs
+      - name: Seleccionar Xcode 26
+        run: |
+          XCODE="$(find /Applications -maxdepth 1 -type d -name 'Xcode_26*.app' -print | sort | tail -n 1)"
+          test -n "$XCODE" || { echo "::error::No existe Xcode 26"; exit 1; }
+          sudo xcode-select --switch "$XCODE/Contents/Developer"
+          xcodebuild -version
+      - name: Generar aplicación y extensión sin firma
+        working-directory: ios-build
+        run: |
+          npm install --no-audit --no-fund
+          npm run prepare:web
+          npx cap add ios
+          node install-native-video.mjs
+          ruby install-share-extension.rb
+          ruby configure-ios-compliance.rb
+          cd ios/App
+          pod install
+      - name: Verificar que existen los dos targets
+        working-directory: ios-build
+        run: |
+          xcodebuild -list -project ios/App/App.xcodeproj | grep -q TifloShareExtension
+          grep -q 'com.apple.share-services' ios/App/TifloShareExtension/Info.plist
+          grep -q 'group.com.tifloacosta.app' ios/App/App/App.entitlements
+          grep -q 'group.com.tifloacosta.app' ios/App/TifloShareExtension/ShareExtension.entitlements
+      - name: Compilación Xcode sin firma ni subida
+        working-directory: ios-build
+        run: |
+          xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build

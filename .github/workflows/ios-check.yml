@@ -32,8 +32,12 @@ jobs:
           node --check shared/web-reading-navigation.mjs
           node --check ios-build/ios-parity.js
           node --check tifloacosta-guide.js
-      - name: Probar controles y contratos de TifloLector sin publicar
-        run: node --test ios-build/test/tiflolector-structure.test.mjs ios-build/test/tiflolector-regresiones-20261014.test.mjs
+      - name: Probar controles, recepción compartida y contratos VoiceOver sin publicar
+        run: |
+          node --test ios-build/test/tiflolector-structure.test.mjs ios-build/test/tiflolector-regresiones-20261014.test.mjs ios-build/test/ios-share-routing.test.mjs test/ios-share.test.mjs
+          node --check ios-build/ios-share-inbox.js
+          node --check ios-build/ios-appwide-native-actions.js
+          node --check ios-build/ios-accessible-actions.js
       - name: Ejecutar las pruebas existentes del lector web
         run: node --test test/web-reading*.test.mjs
   ios-unsigned-build:
@@ -51,6 +55,11 @@ jobs:
       - name: Preparar contenido web
         working-directory: ios-build
         run: npm run prepare:web
+      - name: Verificar sintaxis Swift de extensión, puente de compartir y accesibilidad
+        run: |
+          swiftc -frontend -parse ios-build/share-extension/ShareViewController.swift
+          swiftc -frontend -parse ios-build/native/TifloShareInboxPlugin.swift
+          swiftc -frontend -parse ios-build/native/TifloReadingAccessibilityPlugin.swift
       - name: Generar y configurar plataforma iOS
         working-directory: ios-build
         run: |

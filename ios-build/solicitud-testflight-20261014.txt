@@ -188,3 +188,10 @@ Control de calidad: ios-check ejecución #229 (38941934041) completada con éxit
 Publicar en grupo interno Probadores TifloAcosta solamente tras confirmación VALID + IN_BETA_TESTING + target group asignado. No tocar Android ni web pública, no borrar archivos previos, no desinstalar la app.
 La prueba final con VoiceOver y documentos/enlaces compartidos depende del iPhone: no declarar funcionamiento real hasta comprobarlo.
 Tras disponibilidad verificada, enviar correo a tonytenerife@gmail.com para indicar que se puede instalar la nueva compilación de prueba.
+
+Solicitud de compilación de aceptación iOS, 16-10-2026 (PR #200).
+Integración: 36edc134bec384e9add2d704c2504483161f731f.
+Correcciones: acciones por fila UIKit integrada en Biblioteca de TifloLector, conservación del flujo de Compartir con importación verificada de EPUB, YouTube separado de documentos y presentación con safe areas iPhone.
+Validación sin firma: Auditoría #22 SUCCESS, verificación Compartir #48 SUCCESS y preflight iOS #292 SUCCESS; pendiente aceptar en dispositivo.
+Acción autorizada: generar, firmar y subir UNA compilación al grupo interno de TestFlight «Probadores TifloAcosta» para pruebas del autor. NO distribuir públicamente ni declarar funcionamiento comprobado hasta la prueba real con VoiceOver.
+

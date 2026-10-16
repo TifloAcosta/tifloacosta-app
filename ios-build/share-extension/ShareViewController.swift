@@ -68,27 +68,24 @@ final class ShareViewController: UIViewController {
             return
         }
         let name = provider.suggestedName ?? "Contenido"
-        if provider.hasItemConformingToTypeIdentifier(UTType.url.identifier) {
-            provider.loadItem(forTypeIdentifier: UTType.url.identifier, options: nil) { [weak self] item, _ in
-                guard let self = self else { return }
-                if let url = item as? URL, ["http", "https"].contains(url.scheme?.lowercased() ?? "") {
-                    self.store(kind: "url", title: name, value: url.absoluteString, file: nil)
-                } else {
-                    self.finish("El enlace no es válido.")
-                }
-            }
-            return
-        }
         // Files retain their exact bytes. The provider's temporary URL is only
         // valid inside this callback, so copy before returning.
         let supported = ["pdf", "txt", "html", "htm", "md", "docx", "pptx",
                          "xlsx", "epub", "odt", "mp3", "zip"]
         let types = provider.registeredTypeIdentifiers
+        // Prioritize real documents over URLs. Files can also advertise a
+        // file:// URL, which must NOT be mistaken for a Safari web link.
+        let explicitlyNamedFile = supported.contains(URL(fileURLWithPath: name)
+            .pathExtension.lowercased())
         let selected = types.first { identifier in
             guard let type = UTType(identifier) else { return false }
-            return supported.contains(type.preferredFilenameExtension?.lowercased() ?? "") ||
-                type.conforms(to: .pdf) || type.conforms(to: .plainText) ||
-                type.conforms(to: .html) || type.conforms(to: .mp3)
+            let known = supported.contains(type.preferredFilenameExtension?.lowercased() ?? "")
+                || type.conforms(to: .pdf) || type.conforms(to: .html)
+                || type.conforms(to: .mp3)
+            guard known else { return false }
+            // Unnamed plain text is content, not a document attachment.
+            if type.conforms(to: .plainText) && !explicitlyNamedFile { return false }
+            return true
         }
         if let identifier = selected {
             provider.loadFileRepresentation(forTypeIdentifier: identifier) { [weak self] url, _ in
@@ -103,6 +100,18 @@ final class ShareViewController: UIViewController {
                     fileName += "." + suffix
                 }
                 self.store(kind: "file", title: fileName, value: nil, file: url)
+            }
+            return
+        }
+        if provider.hasItemConformingToTypeIdentifier(UTType.url.identifier) {
+            provider.loadItem(forTypeIdentifier: UTType.url.identifier, options: nil) { [weak self] item, _ in
+                guard let self = self else { return }
+                let url = (item as? URL) ?? (item as? String).flatMap(URL.init(string:))
+                if let url = url, ["http", "https"].contains(url.scheme?.lowercased() ?? "") {
+                    self.store(kind: "url", title: name, value: url.absoluteString, file: nil)
+                } else {
+                    self.finish("El enlace no es válido.")
+                }
             }
             return
         }

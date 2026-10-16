@@ -161,7 +161,7 @@ test('UIKit reconoce la etiqueta VoiceOver exacta sin imponer activación adicio
   assert.match(swift, /accessibilityTraits\.contains\(\.button\)/);
   assert.match(swift, /normalized == expected/);
   assert.match(bridge, /plainLabel: title\.textContent/);
-  assert.match(bridge, /registerLibraryTitles\(\{ documents, nativeRowsOnFocus: false \}\)/);
+  assert.match(bridge, /registerLibraryTitles\(\{ documents, nativeRowsOnFocus: true \}\)/);
 });
 
 
@@ -210,7 +210,7 @@ test('Compartir distribuye archivos, YouTube y otros enlaces sin superponer pant
   assert.ok(inbox.includes("window.addEventListener('hashchange'"));
   assert.ok(inbox.includes('await accessibility()?.dismissNativeActionList?.()'));
   assert.ok(nativeActions.includes('CAPPluginMethod(name: "dismissNativeActionList"'));
-  assert.ok(nativeActions.includes('navigation.topViewController is TifloNativeActionListController'));
+  assert.ok(nativeActions.includes('as? TifloNativeActionListController'));
   assert.ok(nativeActions.includes('"translate": #selector(translateDocument(_:))'));
   assert.ok(nativeActions.includes('"share": #selector(shareDocument(_:))'));
   assert.ok(appwide.includes('const inlineNativeCollections = true'));

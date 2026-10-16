@@ -16,6 +16,7 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
         CAPPluginMethod(name: "registerAccessibleTargets", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "clearDocumentActions", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "showNativeActionList", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "dismissNativeActionList", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "showNativeVideoSection", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "getVoiceOverStatus", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "showNativeContextMenu", returnType: CAPPluginReturnPromise)
@@ -421,6 +422,25 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
             }
             navigation.didMove(toParent: presenter)
             call.resolve(["presented": true, "count": videos.count])
+        }
+    }
+
+    // The shared-inbox controls live in the existing reader UI. If an EPUB
+    // arrives while the generic VoiceOver Library modal is open, uncover them
+    // without closing an unrelated picker or the native Videos experience.
+    @objc public func dismissNativeActionList(_ call: CAPPluginCall) {
+        DispatchQueue.main.async {
+            guard let presenter = self.bridge?.viewController,
+                  let navigation = presenter.presentedViewController as? UINavigationController,
+                  navigation.topViewController is TifloNativeActionListController else {
+                call.resolve(["dismissed": false])
+                return
+            }
+            navigation.dismiss(animated: false) {
+                self.nativePilotPresented = false
+                self.notifyListeners("nativeListClosed", data: ["itemId": ""])
+                call.resolve(["dismissed": true])
+            }
         }
     }
 

@@ -1,123 +1,15 @@
 [
   {
-    "id": "buscaapps-55e2d4169e03c286",
-    "title": "SPG BW",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1251",
-    "lang": "es",
-    "platform": "Windows",
-    "summary": "Sintetizador musical VST para Windows mediante archivo DLL",
-    "publishedAt": null
-  },
-  {
-    "id": "buscaapps-340a79d460e20512",
-    "title": "ImageType | Accessible Editor",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1249",
-    "lang": "es",
-    "platform": "Android",
-    "summary": "Editor de imágenes accesible para añadir texto y estilos personalizados a tus fotos de forma perfecta.",
-    "publishedAt": null
-  },
-  {
-    "id": "buscaapps-99bef765dd708e48",
-    "title": "Afinador de guitarra Victoria",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1248",
-    "lang": "es",
-    "platform": "Web",
-    "summary": "afinador de guitarra gratuito y accesible desarrollado siguiendo los principios del diseño universal",
-    "publishedAt": null
-  },
-  {
-    "id": "buscaapps-6ecc16af0394397c",
-    "title": "Youtube-downloader",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1247",
-    "lang": "es",
-    "platform": "Windows",
-    "summary": "Descarga y reproduce vídeos y listas de Youtube",
-    "publishedAt": null
-  },
-  {
-    "id": "buscaapps-21944859a6200ffe",
-    "title": "Reconocedor de Ciudades",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1246",
-    "lang": "es",
-    "platform": "Windows",
-    "summary": "Explora la ciudad virtualmente, planifica rutas, simula trayectos y crea un mapa mental antes de recorrerla físicamente",
-    "publishedAt": null
-  },
-  {
-    "id": "buscaapps-dd759c58258b4f45",
-    "title": "Foreca Weather",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1245",
-    "lang": "es",
-    "platform": "iOS",
-    "summary": "App del tiempo con alertas meteorológicas",
-    "publishedAt": null
-  },
-  {
-    "id": "buscaapps-544e573da359d046",
-    "title": "Foreca Weather",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1244",
-    "lang": "es",
-    "platform": "Android",
-    "summary": "App del tiempo con alertas meteorológicas",
-    "publishedAt": null
-  },
-  {
-    "id": "buscaapps-7fa0d7323d75c31d",
-    "title": "EasyWeather - Tiempo Accesible",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1243",
-    "lang": "es",
-    "platform": "iOS",
-    "summary": "Una app del tiempo precisa, privada y accesible.",
-    "publishedAt": null
-  },
-  {
-    "id": "buscaapps-ee92cae77de6709d",
-    "title": "SonicRoom",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1242",
-    "lang": "es",
-    "platform": "Web",
-    "summary": "Una plataforma de comunicación audiovisual accesible y de baja latencia",
-    "publishedAt": null
-  },
-  {
-    "id": "buscaapps-d01041ec11d31697",
-    "title": "El Panel de Hoy",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1241",
-    "lang": "es",
-    "platform": "Web",
-    "summary": "Web app de juegos de palabras",
-    "publishedAt": null
+    "id": "applevis-apps-542bc1657eb1c8c3",
+    "title": "Sortalis",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/sortalis",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "Sortalis is a dice-building roguelike inspired by Farkle. Roll, score, and decide how far you’re willing to push your luck—then spend your winnings on Charms and upgrades that transform your dice, strengthen your strategy, and rewrite the rules. Every run becomes a new engine to build, exploit, and inevitably push a little too far. **What’s in the game?** • Endless challenges that grow tougher and demand new strategies • Over 150 upgrades to discover and combine into powerful builds • Rewards, unlocks, achievements, Dice Bags, and challenges to master **Roll, Set, or Bank** Roll and select scoring combos carefully. Roll again to make it bigger—or Farkle and lose the lot. Bank before your luck runs out. **Spend It in The Shop** Between Bouts, spend your winnings on Charms, Packs, Action Cards, and other upgrades. Don’t like what’s on the shelf? Redraw it and hunt for the piece your build needs. **Face The House** Every night ends with a boss that changes the rules. THE MISER, for example, won’t let you Bank until your Pot reaches 500. **Then Do It All Again** Every Bank and Farkle adds to your final score. Unlock 14 Dice Bags, tabletops, discover new combinations, and see how far you can push your next run.",
+    "publishedAt": "2026-10-16T10:36:52.000Z"
   },
   {
     "id": "applevis-apps-aef93ab730feefe4",
@@ -226,17 +118,5 @@
     "platform": "Apple",
     "summary": "Cards don't line up politely here. They're stacked in layers — the way mahjong tiles are stacked, except these are playing cards, and one of the maps is on fire. Which means there are two games sitting on top of each other: getting a card out of the pile, and knowing what to do with it once you have it. HOW IT WORKS · The map is a layered formation. Anything underneath is locked until you clear what's covering it, so every card you take decides what you're allowed to take next. That half is solitaire. · Play up to five of the cards you've taken as a poker hand. A pair is fine. A Flush is better. A Straight Flush means you planned ahead — or got lucky and will claim you planned ahead. That half is poker. · Beat the stage's target score, spend what you earned in the Shop, and do it again. And again. Until the target has grown a couple of digits and you're no longer certain which of your trinkets is doing the heavy lifting. WHAT'S IN IT · Every map is built around exactly one idea. Ice Lake freezes cards. Furnace sets them alight. Dark Pool turns the lights off and invites you to feel your way out. · Clear a map and its Twist unlocks: the same map, in a considerably worse mood. · Trinkets. Some add points. Some quietly rewrite a rule you'd assumed was permanent. The legendary ones turn up rarely enough that finding the right one feels like the run has decided to help you, just this once. · A Shop between stages, because a roguelite without a shop is just a difficult puzzle. · A tutorial that leaves quickly and waits in Settings in case you ever want it back. WHAT'S NOT IN IT · Ads. · In-app purchases. · A season pass, a battle pass, or a little bar that refills while you sleep. · An internet connection. This app has never phoned home and wouldn't know who to call. Buy it once and own all of it — every map, every trinket, every Twist. There is nothing else to sell you, and we are not going to think of anything. One deck, thirteen languages. Good luck.",
     "publishedAt": "2026-10-10T09:23:54.000Z"
-  },
-  {
-    "id": "applevis-apps-5a0a43f780341ef5",
-    "title": "Quintra",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/quintra",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Quintra brings poker hands to a shared board. Place cards to build pairs, straights, flushes, and more across rows and columns. Connect with cards already in play, find the right opening, and turn one card into points in two directions. ONE BOARD. SO MANY POSSIBILITIES. Build on what's there, line up bonus spaces, and watch for opportunities where hands cross. Your best move could also give your opponent something to work with. PLAY FRIENDS AT YOUR PACE Trade turns through Game Center whenever you're ready. Match Play spans two rounds with the same deal and swapped seats, giving both players a chance to make the most of each hand. A FRESH PUZZLE EVERY DAY Fit the cards to match every marked poker hand. Choose Easy, Medium, or Hard, then see how your completion time stacks up on the daily puzzle leaderboards. EIGHT TURNS. MAKE EACH ONE COUNT. Take on the Daily Challenge: a daily deal, eight solo turns, and a leaderboard to climb. Find the connections that turn a good score into a great one. PLAY SOLO Learn the board in Practice or take on the computer in Match Play. Choose your difficulty and try new approaches at your own pace. MAKE IT YOURS Earn XP, level up, and chase goals and achievements as you play. Unlock new card decks and board looks to make Quintra feel like yours. Every poker hand changes the game.",
-    "publishedAt": "2026-10-09T00:39:30.000Z"
   }
 ]

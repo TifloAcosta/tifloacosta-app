@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-16T09:18:38.671Z",
+  "generatedAt": "2026-10-16T12:29:58.204Z",
   "resources": [
     {
       "kind": "resource",
@@ -5448,6 +5448,152 @@
   "news": [
     {
       "kind": "news",
+      "id": "9to5mac-6fd6651ea7d1b635:en",
+      "sourceId": "9to5mac-6fd6651ea7d1b635",
+      "lang": "en",
+      "title": "iPhone Duo now available to pre-order, prices start at $1,999",
+      "summary": "Apple’s first-ever foldable iPhone is now available for pre-order . You can head to Apple’s website or the Apple Store app this morning to place your iPhone Duo pre-order, with the first orders arriving in one week on October 23. more…",
+      "body": "Apple’s first-ever foldable iPhone is now available for pre-order . You can head to Apple’s website or the Apple Store app this morning to place your iPhone Duo pre-order, with the first orders arriving in one week on October 23.\n\nApple is bringing the Apple Store back online in waves, so if you don’t have the option to pre-order iPhone Duo just yet, keep waiting.\n\nAs a refresher, iPhone Duo features a 5.4-inch outer display that unfolds into a 7.6-inch inner display. It’s powered by Apple’s A20 Pro chip. It has a dual-camera system on the back, including a 48MP Main camera and a 48MP Ultra Wide camera. There’s a Center Stage camera on the front, as well as a FaceTime camera underneath the inner display.\n\nHere’s Apple on some of the software optimizations for the foldable iPhone Duo:\n\nThe expansive display on iPhone Duo supercharges productivity with Split View multitasking and seamless app switching, and a reimagined yet familiar iOS experience introduces entirely new ways to interact with iPhone.\n\niOS also adapts to content on iPhone Duo by reacting as it folds, reorienting when turned to the side, and switching to the appropriate display when flipped over. iPhone Duo can also enter StandBy on either the outer or inner display — even when it’s not charging — turning the device into a photo frame, a hub for widgets, a clock, and more.\n\niPhone Duo is available in two colors: star white and night sky. Pricing starts at $1,999 for the 256GB model .\n\nYou can also shop iPhone Duo carrier offers , where you can score monthly prices from $55/month and get up to $1,200 off with an eligible trade-in.\n\nAre you pre-ordering the iPhone Duo this morning? If so, what color and storage configuration are you buying? Were you able to secure launch day delivery? Let us know down in the comments.\n\nFollow Chance : Threads , X , and Instagram",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/16/iphone-duo-now-available-to-pre-order-prices-start-at-1999/",
+      "publishedAt": "2026-10-16T12:01:14.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-8e6db15281ff784c:en",
+      "sourceId": "the-verge-8e6db15281ff784c",
+      "lang": "en",
+      "title": "The iPhone Duo is now available to preorder at $1,999",
+      "summary": "Few phones have been more anticipated than a foldable iPhone, but it's finally here. The iPhone Duo was unveiled during Apple's \"Surprise and shine\" event alongside the iPhone 18 Pro and the Apple Watch Series 12 and Ultra 4 models. Apple's first foldable has a 5.4-inch outer screen, and it unfolds to show off its […]",
+      "body": "Few phones have been more anticipated than a foldable iPhone, but it's finally here. The iPhone Duo was unveiled during Apple's \"Surprise and shine\" event alongside the iPhone 18 Pro and the Apple Watch Series 12 and Ultra 4 models.\n\nApple's first foldable has a 5.4-inch outer screen, and it unfolds to show off its 7.6-inch Super Retina XDR screen. Apple Pencil support is coming later this year. While it lacks Face ID for facial unlocking, there's a Touch ID sensor along its edge to identify your fingerprint. The device has an IP68 rating, with Ceramic Shield 2 on its back, with Ceramic Shield covering the front display. It has the same A20 …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/gadgets/988582/apple-iphone-duo-preorder-buy-foldable",
+      "publishedAt": "2026-10-16T12:00:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-b500801a415a1abd:en",
+      "sourceId": "the-verge-b500801a415a1abd",
+      "lang": "en",
+      "title": "Surface Laptop Ultra review: a different kind of MacBook Pro",
+      "summary": "After setting up Microsoft's Surface Laptop Ultra, I spent five minutes just staring at it. I wasn't surprised by its MacBook Pro-like design or blown away by its bright display. I was trying to work out what I'd actually do with a $5,900 laptop. This isn't just any regular Windows laptop. Microsoft has teamed up […]",
+      "body": "After setting up Microsoft's Surface Laptop Ultra, I spent five minutes just staring at it. I wasn't surprised by its MacBook Pro-like design or blown away by its bright display. I was trying to work out what I'd actually do with a $5,900 laptop.\n\nThis isn't just any regular Windows laptop. Microsoft has teamed up with Nvidia to build a high-end laptop to showcase Nvidia's new Arm-based RTX Spark chips. It's a big moment for Windows on Arm, as these chips can run demanding AI models locally, alongside the latest AAA games and creative apps. The promise is compelling, but the reality of local AI is much messier.\n\nGetting the most out of the S …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1012628/microsoft-surface-laptop-ultra-review",
+      "publishedAt": "2026-10-16T12:00:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple",
+        "windows"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "applevis-apps-542bc1657eb1c8c3:en",
+      "sourceId": "applevis-apps-542bc1657eb1c8c3",
+      "lang": "en",
+      "title": "Sortalis",
+      "summary": "Sortalis is a dice-building roguelike inspired by Farkle. Roll, score, and decide how far you’re willing to push your luck—then spend your winnings on Charms and upgrades that transform your dice, strengthen your strategy, and rewrite the rules. Every run becomes a new engine to build, exploit, and inevitably push a little too far. **What’s in the game?** • Endless challenges that grow tougher and demand new strategies • Over 150 upgrades to discover and combine into powerful builds • Rewards, unlocks, achievements, Dice Bags, and challenges to master **Roll, Set, or Bank** Roll and select scoring combos carefully. Roll again to make it bigger—or Farkle and lose the lot. Bank before your luck runs out. **Spend It in The Shop** Between Bouts, spend your winnings on Charms, Packs, Action Cards, and other upgrades. Don’t like what’s on the shelf? Redraw it and hunt for the piece your build needs. **Face The House** Every night ends with a boss that changes the rules. THE MISER, for example, won’t let you Bank until your Pot reaches 500. **Then Do It All Again** Every Bank and Farkle adds to your final score. Unlock 14 Dice Bags, tabletops, discover new combinations, and see how far you can push your next run.",
+      "body": "Sortalis is a dice-building roguelike inspired by Farkle. Roll, score, and decide how far you’re willing to push your luck—then spend your winnings on Charms and upgrades that transform your dice, strengthen your strategy, and rewrite the rules. Every run becomes a new engine to build, exploit, and inevitably push a little too far. **What’s in the game?** • Endless challenges that grow tougher and demand new strategies • Over 150 upgrades to discover and combine into powerful builds • Rewards, unlocks, achievements, Dice Bags, and challenges to master **Roll, Set, or Bank** Roll and select scoring combos carefully. Roll again to make it bigger—or Farkle and lose the lot. Bank before your luck runs out. **Spend It in The Shop** Between Bouts, spend your winnings on Charms, Packs, Action Cards, and other upgrades. Don’t like what’s on the shelf? Redraw it and hunt for the piece your build needs. **Face The House** Every night ends with a boss that changes the rules. THE MISER, for example, won’t let you Bank until your Pot reaches 500. **Then Do It All Again** Every Bank and Farkle adds to your final score. Unlock 14 Dice Bags, tabletops, discover new combinations, and see how far you can push your next run.",
+      "sourceName": "AppleVis Apps",
+      "originalUrl": "https://www.applevis.com/apps/ios/games/sortalis",
+      "publishedAt": "2026-10-16T10:36:52.000Z",
+      "categories": [
+        "apple",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-000d0f02d266e1fb:en",
+      "sourceId": "engadget-000d0f02d266e1fb",
+      "lang": "en",
+      "title": "ChatGPT can now look at your Chrome tabs to do tasks for you",
+      "summary": "The ChatGPT browser extension lets you compare information from your open tabs.",
+      "body": "OpenAI has updated its ChatGPT extension to be able to do more browser-based tasks.\n\nOpenAI has updated its ChatGPT extension for Chrome , giving it the power to look at your tabs so it can come up with more personalized and useful answers to your queries. The company used to have a browser of its own, but it retired the product on August 9. It did, however, roll out upgrades to the Chrome extension that made ChatGPT a more viable alternative to Gemini in the browser. With these latest updates, ChatGPT can now do even more tasks inside Chrome.\n\nIf you're in ChatGPT Chat, you can ask the AI assistant to take a look at your open tabs on Chrome to conjure answers that would personally be useful. You can, for instance, ask it to compare couches opened on three different tabs by their dimensions, prices, delivery time and return policy.\n\nMeanwhile, if you're using ChatGPT Work, OpenAI's agent designed for complex multi-step tasks, you can ask the assistant to send messages, fill out forms, organize tabs and fill out forms for you. You can ask ChatGPT to fill out a form for your new dentist and then add your schedule to the calendar, for instance. Another example is to get the chatbot to analyze several contractors' terms open in multiple tabs and then draft an email to the provider that fits your needs the most.\n\nIn addition, ChatGPT in Chrome's sidebar now has access to your whole history, so you can talk to it and give it tasks without having to tab away from what you were doing. You can get the ChatGPT extension, no matter what plan you have. OpenAI says that aside from Chrome, the extension is also compatible with other Chromium-based browsers, including Microsoft Edge, Brave and Opera.\n\nNext up: using ChatGPT right within a Chrome tab got a major upgrade – the full power of ChatGPT is now in your browser.\n\nYour entire ChatGPT history is right there, and you can ask question in Chat or get things done in Work – side by side while you're on a site. pic.twitter.com/ABiwzLvNnD\n\n— ChatGPT (@ChatGPT) October 15, 2026",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2288580/open-ai-updates-chatgpt-extension-for-chrome/",
+      "publishedAt": "2026-10-16T10:06:15.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-cae728a127071ab4:en",
+      "sourceId": "ars-technica-cae728a127071ab4",
+      "lang": "en",
+      "title": "Googlebook review: Android on a laptop is still Android",
+      "summary": "Android laptops are here, but Google has a lot of work ahead to make them good.",
+      "body": "Android was designed for phones, but that hasn't stopped Google from trying to adapt the OS and its apps to larger machines over the years. Googlebooks are just the latest attempt after tablets, Chromebooks, and foldables induced little change in how people interact with Android software. These new Android-powered laptops are designed to pick up where the web-focused ChromeOS left off, offering premium hardware and native support for Android apps.\n\nGoogle sees Googlebooks as an alternative to Windows and macOS, but these platforms are entrenched with decades of software and UI conventions that keep users locked in. Googlebooks have to offer something very special to steal users away from either of the dominant operating systems.\n\nFor devoted Android phone users, there are some cool things in Googlebook OS, but the Android roots of these machines are impossible to miss. Sometimes it feels like using a Chromebook, and sometimes it feels like using a giant phone. It almost never feels like using a premium laptop, and that's the problem.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/reviews/2026/10/googlebook-review-android-on-a-laptop-is-still-android/",
+      "publishedAt": "2026-10-16T10:00:32.000Z",
+      "categories": [
+        "tecnologia-general",
+        "android"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-a0e47bdbb77e2889:en",
+      "sourceId": "engadget-a0e47bdbb77e2889",
+      "lang": "en",
+      "title": "Apple's $2,000 iPhone Duo goes on pre-order today at 8AM ET",
+      "summary": "The Apple Store is down ahead of pre-orders for the first folding iPhone.",
+      "body": "All indications are that the device will be in high demand and relatively short supply.\n\nThe Apple Store is down , so you probably know what that means. \"We love that early energy,\" the placeholder page states. \"Almost ready for you. Pre-order begins at 5:00 AM PT. See you soon.\" Apple is of course referring to the iPhone Duo , which goes on pre-order this morning at 8AM ET. If you wanted to be among the first to own one, all indications are that the device will be in high demand and relatively short supply. That means pre-ordering is likely a better option than waiting for launch day on October 23rd.\n\nIn his hands-on look , Engadget's Sam Rutherford called the iPhone Duo \"Apple's most exciting device in a decade.\" Though not the first folding phone by any means, it has 5.4-inch outer display and 7.6-inch inner OLED matte widescreen when unfolded, making it ideal for viewing media and feeling like a small iPad. That display is practically seamless, with subtle gradient and depth of field effects that help sell the allure of Apple's first foldable device.\n\nThe main drawbacks with the iPhone Duo are the expensive $2,000 price tag, lack of FaceID and no fancy variable aperture in the main camera like the new iPhone 18 Pro models. The under-display FaceTime camera on the inner screen is also a downgrade, though it certainly makes the device look sleeker when unfolded.\n\nI'm a big fan of folding phones, having used one of Samsung's Galaxy Fold models for a few months in the past. They're certainly attention-grabbing devices as well that are bound to stoke comments from interested observers, which may be a good enough reason to get one for some buyers. As mentioned, pre-orders could get snapped up soon, so you'd best hit the iPhone Duo order page at 5AM PT sharp.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2288565/apple-iphone-duo-pre-orders-open-today/",
+      "publishedAt": "2026-10-16T09:36:05.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-f49615d4bc8ac075:en",
+      "sourceId": "engadget-f49615d4bc8ac075",
+      "lang": "en",
+      "title": "Gmail's Live AI search feature arrives for Google AI subscribers",
+      "summary": "Gmail's search can be frustrating and basic, but Google is finally smartening it up for AI plan subscribers.",
+      "body": "It's coming soon for Workspace business customers.\n\nGmail's search can be frustrating and basic, but Google is finally smartening it up for AI plan subscribers with the release of Gmail Live. Now out of beta after being announced at Google I/O last month, the AI feature allows you to search your inbox using conversational voice commands. It's similar to live voice chats with the Gemini chatbot, but customized for popular apps like Gmail, Docs and Drive, with each getting its own version of the functionality.\n\nThe feature, Google says, allows you to find details in buried in emails without digging through endless threads. \"Use conversational search to find information just by asking things like, 'What's my flight's gate number?' or 'What's going on at my kid's school this week?' and Gmail Live will scan your inbox and give you answers quickly,\" Google explains.\n\nSimilar functionality is also coming to documents and notes with Docs Live and Keep Live. Docs Live lets you tell Gemini what kind of document you want and allow it to pull relevant details from Gmail, Drive, Chat and the broader web. It will then structure the document to create a first draft, while helping you refine your tone, as Google shows in the short video above.\n\nKeep Live, meanwhile, \"turns brain dumps into organized notes.\" Normally, the app is used to jot down an idea before you forget it, but Keep Live is designed to \"capture, structure and refine your ideas into organized, actionable notes,\" the company wrote. The new voice feature processes your voice commands in the background, \"turning your thoughts into structured lists and notes without you having to type a single word.\"\n\nIn its video example, Google cites a person saying \"I promised my son I would paint his room this weekend... I'm going to need a list of instructions as well as supplies.\" With this info, Keep Live replies \"Preparing your painting note now,\" and proceeds to generate a shopping list and how-to guide as requested.\n\nThe new features are rolling out this week in Gmail and Keep, but only for Google AI Plus, Pro and Ultra subscribers, with Docs limited to Pro and Ultra subscribers. All of the features are also \"coming soon\" for Google Workspace business customers.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2288545/gmail-live-ai-search-feature-arrives-for-google-ai-subscribers/",
+      "publishedAt": "2026-10-16T08:31:48.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "nvaccess-in-process-89697ee68c01b50d:en",
+      "sourceId": "nvaccess-in-process-89697ee68c01b50d",
+      "lang": "en",
+      "title": "In-Process 16th October 2026",
+      "summary": "We’ve got a bumper edition for you this week, with new content for just about everone! Accessibility Testing with NVDA NV Access Survey New Help Options for NVDA Users Help for Low Vision Users Free Sample Accessibility Testing with NVDA NVDA 2026.3 Beta 5 Accessibility Testing with NVDA NV Access is very pleased to announce… Read More",
+      "body": "We’ve got a bumper edition for you this week, with new content for just about everone!\n\nNV Access is very pleased to announce the release of a new training package. Accessibility Testing with NVDA is designed for people using NVDA to test apps and websites for accessibility.\n\nThis Accessibility Testing with NVDA package includes: A training module with over 60 topics in nine sections Getting Started Setting up NVDA Reading information Visual Options Keyboard navigation Navigating content with NVDA Working with elements Testing with a screen reader Reporting Issues A printable NVDA Reference Sheet, with the commands most useful for accessibility testing A printable guide to writing accessible content on a single, printable sheet for easy consultation A list of NV Access and external resources and links to further your knowledge A WCAG 2.2 Reference with tips on testing many of the criteria with NVDA A JPG Badge you can proudly display in your email, or on your website or elsewhere to indicate your support\n\nThe purchase price of the module is A$250 (+GST for Australian buyers). Not only do you get a wealth of accessibility testing information, the cost of this package also supports the work of NV Access and helps continue our ability to provide the NVDA screen reading software free of charge.\n\nPlease note that this package is useable by both sighted and screen reader users. It is aimed at professionals wanting to test websites, documents and programs for accessibility. If you would like to learn to use NVDA from scratch as a blind or low vision screen reader user, please first consider “ Basic Training for NVDA ” or the “ NVDA Productivity Bundle “.\n\nThe Accessibility Testing with NVDA module is designed to teach you to incorporate NVDA into your accessibility testing workflow. It is not intended to replace dedicated accessibility testing tools which can give specific information about testing criteria and compliance etc. If you would like more formal training specifically in web accessibility, we recommend Learn.Intopia.digital . Intopia provided feedback on the web accessibility components of this material.\n\nPlease head to Accessibility Testing with NVDA to read more and purchase the new package.\n\nCover image of “Accessibility Testing with NVDA”\n\nThe NVDA Satisfaction Survey 2026 is open, but only until early next week.\n\nWe are always interested in understanding the satisfaction of our NVDA users, what is important to you & what we can do more effectively. The survey is anonymous & we encourage you to leave comments in your response.\n\nWe’re interested in hearing from as many people as possible, so please feel free to pass this on to others.\n\nThe survey is short, only three questions – we deliberately do that in order to make it less onerous to fill out. The rating is a simple, and industry standard metric (a “net promoter score”) we can use to benchmark broadly how well we are doing compared to previous years. We leave room for you to add your own thoughts, so you can give feedback on that one specific point on your mind. If you want a response, please do include your email address as we don’t otherwise collect contact details.\n\nWe do sometimes get questions like “It would be great if NVDA had feature X” and it’s frustrating to not be able to reply, especially when NVDA does in fact have feature X, but we have no way to reach the person to share that with them. We have also been asked “Why don’t you ask more questions about X, Y, or Z?” – which is a great question. This survey is designed to collect feedback on everything overall, and we try to keep it fairly consistent from year to year. We do conduct specific surveys from time to time, both more formally, and occasionally just a simple question on Mastodon asking, “What do you think about …”. We like to think we are approachable and easy to get in contact with, so do please always reach out if there is something you’d like to give feedback on or to ask.\n\nPlease do head over to https://www.nvaccess.org/survey2026 and fill out the survey if you haven’t already.\n\nWe are always looking for ways to help users and make more information available, and easy to find. For many years, the navbar of the NV Access website has had a “Get Help” option. This has linked to a single page of really useful information for NVDA users , including the training material, user groups, how to report an issue or get extra voices, and an FAQ. Now, we have expanded it to a menu. The first item lets you get help for “NVDA Users” and is the original “Get Help” item.\n\nThere are also several new options, which are covered below:\n\nWith the release of the magnifier in NVDA 2026.2, it seemed a good time to collate some of the features and settings in NVDA which can be useful for low vision users. The way low vision users will have NVDA setup may be different to how a totally blind user who does not use the screen may have it setup. This “ Get Help for Low Vision Users ” page includes information about: The magnifier: including a demo video, list of keystrokes, and link to the comparison with Windows Magnifier we did here in In-Process. Visual Highlighter: How to turn it on and just what the different colours mean. How to reduce speech: Turning on or off individual elements, or adjusting the speech mode overall. Working on the Web: Tips for navigating web pages, and copying information from the web. Other Windows Settings: Suggestions for other Windows settings which can be useful for low vision users.\n\nTo go with the brand-new Accessibility Testing with NVDA package , we have made a free sample of the material available. This extensive sample is full of web accessibility tips and tricks with the world’s favourite free screen reader, and is still only a small taste of the full product.\n\nDo check out the Accessibility Testing with NVDA sample page in the new revamped “Get Help” menu. If you find it useful, you will find even more in the full Accessibility Testing with NVDA package , plus you will be supporting us to keep NVDA available for free to everyone who can use it.\n\nOnce again, our thanks to Intopia.Digital for their ongoing support of NV Access.\n\nFinally, this week, we’re now up to Beta 5 of NVDA 2026.3 . Last In-Process we were up to Beta 2, so here’s what’s been in the latest three updates:\n\nChanges introduced in Beta 5: Updates to translations Added bug fix for NVDA failing to start on Windows versions older than Windows 10 1903\n\nChanges introduced in Beta 4: Updates to translations Added bug fix for lag in the Add-on Store when searching using Chinese characters Minor documentation changes\n\nChanges introduced in Beta 3: Updates to translations Reverted bug fix to terminals, meaning NVDA may freeze again when substantial amounts of text are dumped to the screen. This is due to the bug fix not working correctly Prevented Magnifier crash recovery from flashing to reduce seizure risk\n\nThat’s all for this week. It’s not often the latest beta gets bumped to the SIXTH article in the blog! That by no means reflects on its value though – Please do try NVDA 2026.3 Beta 5 if you haven’t already. If you do any web accessibility work, please do check out the new Accessibility Testing with NVDA Package . It will be around release time for NVDA 2026.3 by next edition, so we’ll have more on the new version. And we’ll also cover a bit more for our low vision users as well.",
+      "sourceName": "NV Access",
+      "originalUrl": "https://www.nvaccess.org/post/in-process-16th-october-2026/",
+      "publishedAt": "2026-10-16T07:23:53.000Z",
+      "categories": [
+        "windows",
+        "nvda"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "9to5mac-029e272ad6af4541:en",
       "sourceId": "9to5mac-029e272ad6af4541",
       "lang": "en",
@@ -5564,40 +5710,6 @@
     },
     {
       "kind": "news",
-      "id": "9to5mac-276afe290854f4f7:en",
-      "sourceId": "9to5mac-276afe290854f4f7",
-      "lang": "en",
-      "title": "9to5Mac Daily: October 15, 2026 – OpenAI vs Apple, iPhone Duo details",
-      "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily . more…",
-      "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily .\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/15/daily-october-15-2026/",
-      "publishedAt": "2026-10-15T21:25:15.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "android",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-cd1262daf47c9d24:en",
-      "sourceId": "the-verge-cd1262daf47c9d24",
-      "lang": "en",
-      "title": "Trump posts AI-edited photo to brag about White House restoration work",
-      "summary": "President Donald Trump posted a series of photos on Truth Social showing off renovations to the White House - but one of them appears to be modified with AI. The picture, which compares an old White House column to a \"restored\" one, has several discrepancies and was flagged by Google's AI detector as \"made or […]",
-      "body": "President Donald Trump posted a series of photos on Truth Social showing off renovations to the White House - but one of them appears to be modified with AI. The picture, which compares an old White House column to a \"restored\" one, has several discrepancies and was flagged by Google's AI detector as \"made or edited with OpenAI.\"\n\nAs pointed out by users on Reddit , the picture of the \"restored\" column has an uneven number of steps on both sides of the structure. The number of steps also doesn't match up with the ones in the \"before\" photo. Additionally, the before and after photos appear nearly identical in angle and detail; the reflection i …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/policy/1012445/donald-trump-ai-photo-white-house-rennovation-column",
-      "publishedAt": "2026-10-15T21:09:33.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "techcrunch-a5589a3dea4edafe:en",
       "sourceId": "techcrunch-a5589a3dea4edafe",
       "lang": "en",
@@ -5607,56 +5719,6 @@
       "sourceName": "TechCrunch",
       "originalUrl": "https://techcrunch.com/2026/10/15/meta-launches-an-open-weight-model-that-runs-on-macs/",
       "publishedAt": "2026-10-15T20:04:53.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-4276aa2470e5a86c:en",
-      "sourceId": "engadget-4276aa2470e5a86c",
-      "lang": "en",
-      "title": "FTC subpoenas OpenAI and Anthropic following safety failures",
-      "summary": "The FTC is investigating possible consumer harms at two major AI companies.",
-      "body": "The department is investigating possible consumer harms at the major AI companies.\n\nThe US Federal Trade Commission has subpoenaed OpenAI and Anthropic for information about recent safety incidents with both businesses' AI models. Axios first reported that agency had sent civil subpoenas to the companies, and a spokesperson from the FTC confirmed the action to CBS News .\n\nAxios ' source said that the FTC is exploring possible consumer protection violations at Anthropic and OpenAI. The subpoenas are looking for documents regarding security incidents and safeguards, as well as some of the companies' marketing materials and content about their privacy policies. The individual also claimed the FTC plans to seek testimony from the top executives at both businesses. The department will allegedly send investigative demands to third-party AI companies at a later time.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2288104/ftc-subpoenas-open-ai-and-anthropic-following-safety-failures/",
-      "publishedAt": "2026-10-15T19:28:53.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-7a7e3a49ea7eb00b:en",
-      "sourceId": "engadget-7a7e3a49ea7eb00b",
-      "lang": "en",
-      "title": "Alexa Tablet 12 Pro review: Amazon's premium tablet gets almost everything right",
-      "summary": "This tablet is a great value, even if Android apps still aren't great on a big screen.",
-      "body": "This tablet is a great value, even if Android apps still aren't great on a big screen.\n\nAmazon has long followed the same formula for its tablets. Fire tablets are known to be cheap, durable devices good for watching video and doing casual tasks like browsing, playing basic games and checking out Facebook. They're more limited than the average Android tablet, without access to the Google Play Store and its wealth of apps. Amazon's own app store has received plenty of support from developers over the years, but it's still missing plenty of crucial options like Whatsapp and YouTube, just to name a few.\n\nThis year, however, Amazon is changing up its strategy. Its new series of Alexa tablets may highlight the company's services and assistant first and foremost, but they're also full-fledged Android tablets with plenty of Google's own apps and access to the Play Store. The Alexa Tablet Pro 12 is easily the most intriguing of the new lineup (which also includes non-pro 8- and 11-inch options). While Fire tablets have always focused on media consumption, the Tablet Pro 12 is clearly squaring off with the iPad Air and Pro. At first glance, it looks nearly identical to Apple's tablets, with a fairly thin bezel surrounding a lovely and large display, and an aluminum unibody design that's relatively thin (6.5mm) and light (1.21 pounds).\n\nIts optional keyboard and stylus accessories complete the look and signify that the Alexa Tablet Pro 12 isn't just meant for watching videos. This is a tablet meant for getting things done — and while it isn't quite as capable as Apple's iPad lineup, mostly due to software limitations, its $499 starting price means it's much easier to forgive the places it falls short.\n\nYou'll be forgiven if you mistake the Alexa Tablet Pro 12 (from here out I'll just call it the Alexa Tablet) for a recent iPad Air or Pro, because they look very similar. The shorter sides of the Alexa Tablet have speakers on them; one end has a power button with a fingerprint sensor for unlocking the tablet, while the other has a lone USB-C port for charging and data transfer (it recognized my SD card reader and a USB-C flash drive without issue). I'm bummed not to see a headphone jack anywhere, but not surprised.\n\nOn the Alexa Tablet's top edge, you'll find volume up and down buttons as well as a groove where you can magnetically attach the Alexa Tablet Pro Pen for charging and storage. The bottom side meanwhile has a four-pin port where the Alexa Tablet's keyboard connects. The back of the not-quite-pitch-black tablet has a single 13-megapixel camera and the word \"alexa\" in a charming cursive font — the word Amazon doesn't appear anywhere on the device.\n\nThe Alexa Tablet sits comfortably between the 11- and 13-inch iPad Air in terms of thickness and weight. It's slightly thicker at 6.5mm (compared to 6.1mm) and a bit heavier than the 11-inch iPad Air (1.21 pounds compared to 1.02 pounds). Regardless of these minute differences, the Alexa Tablet's aluminum unibody design feels study, premium and well-balanced. It's a huge step forward from most Fire tablets I've tried over the years.\n\nAs with all tablets, the Alexa Tablet Pro 12 is dominated by its screen. The 12-inch screen may not be an OLED, but it's still a very nice display with 500 nits of brightness and a 2,800 x 1,840 resolution. That works out to a very dense 280 pixels per inch, and the 3:2 aspect ratio is definitely preferable on a tablet to something like 16:9. The tablet is primarily designed to be used in landscape mode, but the on-screen keyboard is a bit cramped from a vertical space perspective. And when you use the Alexa Tablet in portrait, it feels just a bit too tall to be comfortable. Apple's tablets have always used a 4:3 aspect ratio, and that just feels right to me at this point. But 3:2 still offers a decent amount of vertical height while still giving widescreen movies plenty of space.\n\nAnd while I might prefer the iPad's aspect ratio, the Alexa Tablet's screen is superior to what you'll get on an iPad Air in a few significant ways. First, it has a 120Hz refresh rate – to get that on an iPad, you'll need to spend at least $1,199 for an 11-inch iPad Pro. Unfortunately, the Alexa Tablet software isn't as well optimized as iPadOS, so things often felt jerkier than you'd expect given that high refresh rate. More on performance in a bit.\n\nWhile the higher refresh rate is nice, the Alexa Tablet really sets itself apart from basically every other tablet out there with its so-called nanomatte display finish. This is an optional feature that adds $50 to the tablet's price — but it is well worth it. Nanomatte is Amazon's term for the anti-reflective etching that does a remarkable job of minimizing glare. Placing the Alexa Tablet next to my iPad Pro (with its standard front glass) on my desk in the early morning light made it immediately obvious how effective the nanomatte display is at reducing glare from strong light sources to nearly nothing.\n\nNot to harp on the pricing, but the cheapest iPad that Apple sells with its nano-texture glass is the 11-inch Pro with 1TB of storage, which costs $1,799. iPad Pro prices, which were already hard to stomach, hit the positively bonkers level over the summer when Apple jacked up prices on nearly all its products. This makes the Alexa Tablet look all that much more compelling by comparison. Yes, the iPad Pro's tandem OLED screen is one of the nicest screens I've ever seen , but Amazon has done a seriously excellent job with the screen on the Alexa Tablet considering its price.\n\nMy only real complaint about the nanomatte screen is that colors feel a bit washed out when there's a strong light source shining on it. It's still much easier to use than it would be without the nanomatte texture, but things don't look quite as vibrant. Of course, having this option makes a ton of sense, given the inherent portability of a tablet. You're likely to use this screen in a wide variety of places with shifting and unpredictable lighting conditions, and the nanomatte option means you see the screen clearly in nearly all settings.\n\nThe nanomatte display feels particularly well-suited to a few of the Alexa Tablet's more noteworthy features. The first is a new Kindle app experience that makes this probably the best tablet with an LCD display to read on. The Alexa Tablet has dark mode on by default, and I typically haven't loved reading books with a black background and white text, but it looks great on this device. There are some smart software tricks here to enhance the reading experience, as well. Amazon says the Kindle app automatically reduces blue light from the display when you open a book and notifications are muted while you're reading (assuming you turn these features on).\n\nThere are also three different display profiles for when you're reading. \"Standard\" makes the display warmer while keeping bright colors (if you're reading a book with images), while \"color paper\" makes everything a lot less saturated. Finally, \"ink paper\" is purely greyscale. I don't have many books with color to test this with, but the cover and first few drawings in a Sailor Moon collection I downloaded looked great in the \"color paper\" theme — the reduced vibrance seems like it would definitely be easier on the eyes for long reading sessions.\n\nCombine these features with the extremely sharp display and lack of glare and you've got a tablet worth reading on for long periods of time. It doesn't match the comfort of an E Ink Kindle — but it provides a great reading experience for people who prefer a multi-function device over a dedicated e-reader.\n\nWhen you first start up the Alexa Tablet, it's obvious that this is an Amazon-first affair. The home screen has shortcuts to a variety of the company's apps like Kindle, Luna, Prime Video, Audible and Amazon's own Silk browser. But there's also a folder with a bunch of Google apps like Gmail, Maps, Meet, YouTube and more ready to go. And as a full-fledged Android tablet, I was able to quickly download Chrome and a variety of other apps from the Play Store. So while Amazon's services are right up front, it's easy enough to swap them out with your apps of choice.\n\nThere are a few other UI tweaks that make this tablet more Amazon than Android, as well. There are two widgets on the home screen; one in the upper-left corner shows content you've interacted with recently on Amazon's apps. I can quickly tap to resume reading my last Kindle book or playing an album on Amazon Music, for example, or continue searches that I was doing with the Alexa+ app. Speaking of Alexa+, there's a widget in the bottom right corner of the home screen that automatically pulls up a chat window with Amazon's virtual assistant. Naturally, you can also say \"Hey Alexa\" to initiative requests with your voice, as well. Surprisingly, there's also a Google search widget in the top-right corner of the home screen, too. So while Amazon clearly wants to feature Alexa+, it's not against giving Google some screen real estate too.\n\nGoing beyond the reading experience I described earlier, the Alexa Tablet is more than capable of doing most things people expect from a tablet. The lovely screen makes it an excellent choice for watching movies or binging YouTube, and the speakers support Dolby Atmos. That only means so much on a small device, but I definitely got a semblance of dialog moving through physical space in a few of the movies I checked out. Music sounds surprisingly solid as well, certainly good enough for casual listening sessions in a small space. I generally prefer to use headphones or a more capable speaker, but the audio quality certainly beats many tinny laptop speakers I've heard over the years.\n\nOther apps I installed from the Play Store worked well, for the most part. The inescapable fact that has always held Android tablets back is that not many developers optimize apps for larger screens, and that's still the case here. So while something like Slack is functional enough, it doesn't have multiple columns so you can see your channels on the left and a chat window on the right, for example. There's no other way to say it: It still feels like a blown-up phone app rather than something designed to use the entirety of a large screen.\n\nWhile that's certainly a bummer, plenty of the most popular apps people use work just fine. Adobe's Lightroom is nicely optimized for tablets at this point, as is my go-to task manager Todoist. And Google's apps were all redesigned for bigger screens back when the company tried to make the Pixel Tablet a thing of the past, so using things like Gmail, Keep, Docs and other essential apps works nicely on the Alexa Tablet.\n\nAmazon built in some pretty solid multitasking capabilities here, as well. When an app is in fullscreen mode, you can tap a bar at the top of the screen to put it in a split view with a second app, or send it to the \"desktop.\" The desktop view lets you resize and overlap multiple apps however you like — I've had a half-dozen open at once with no real issues, but the Alexa Tablet's screen isn't so large that it makes a lot of sense to run more than a handful at a time.\n\nThe MediaTake Dimensity 8400 processor powering the Alexa Tablet was more than capable of keeping up with everything I did, as well. The model I'm testing has 8GB of RAM and 128GB of storage, but you can double both of those if you think you'll need it. I'd personally choose to upgrade to the nanomatte display before maxing out RAM or storage, but that's just me. That said, there were a handful of times apps went unresponsive on me, and alt-tabbing through different apps was a bit laggier than I'd like.\n\nAs for the battery, I haven't had time yet to test Amazon's claims of 16 hours of video playback, but I'm getting closer to eight hours off the charger when using it for a variety of work-related tasks like editing stories, chattering away in Slack, browsing with Chrome and writing this review in Google Docs. I'll update this story with more concrete battery benchmarks soon.\n\nA big part of what makes the Alexa Tablet 12 Pro \"pro\" are its optional keyboard and pen. On their own the Pro Keyboard and Pro Pen cost $150 and $90 respectively, but you can save money by bundling the pen and keyboard (or just the keyboard) with the tablet when you buy it. The Alexa Tablet I tested with 8GB RAM, 128GB of storage and the nanomatte display costs $550 on its own, but you can bundle it with the keyboard for $650 or the keyboard and pen for $700. (That's less than an iPad Air on its own, if you were keeping count.)\n\nThe keyboard folio is a two-piece accessory — there's a kickstand that attaches to the tablet's back, while the keyboard itself snaps to the bottom side. I don't love the tablet/ keyboard/kickstand combo personally, as it's very difficult to use on your lap. But for the cost, I will absolutely cut Amazon some slack. Apple sells its two-piece keyboard folio for the basic iPad for $249; chopping $100 off that price, or more if you get a bundle, makes its wobbly nature more forgivable. The combo feels fine on a sturdy surface like a desk.\n\nThe keyboard itself is compact but not cramped, with most of the main keys being close to the same size as what you'll find on a typical laptop. The main issue is that the key travel is rather shallow, an unavoidable compromise with such a thin keyboard. So while it wouldn't be my first choice for extensive writing sessions, it still feels quite nice for such a small keyboard. I wrote this entire review on it without any major issues.\n\nThe biggest problem I had was the prominent Alexa key where I'd usually expect a control key — I found myself frequently trying to use it for standard keyboard shortcuts only to bring up the Alexa+ chat window instead. I get Amazon's thinking here, but Alexa is already easily accessible throughout the tablet. There's also a search key on the left of the space bar; I would have preferred this be where the Alexa key was placed, but that's just me. The search key could have gone in the top row of function keys instead of a \"find\" key that doesn't work in a lot of apps. And while the trackpad is unsurprisingly rather narrow, it's otherwise smooth and responsive.\n\nThe Pro Pen is a capable accessory, as well. I'm no visual artist, but the Alexa Tablet picked up my scribbles from the Pro Pen in apps like Keep and Concepts. The Pro Pen has both pressure and tilt sensitivity, which should make it a pretty capable drawing tool. And Amazon put an \"eraser\" on the other end, so if you want to clean things up you can just flip the pen around. That's a trick I wouldn't mind Apple stealing for its own stylus.\n\nThe Alexa Tablet 12 Pro is not a perfect device. While the hardware is well-designed and the nanomatte screen is outstanding, the inherent limitations of Android on a large screen hold the device back a bit. I can't say I expect that to change — Google and its partners have repeatedly tried to make Android into a proper tablet OS that can rival the iPad, and it just hasn't happened.\n\nHowever, it's far easier to forgive this when you consider the things that the Alexa Tablet does well and its price. For $550, the Alexa Tablet is a great couch computer and travel companion. I wouldn't use it to do my job for 10 hours a day, but I'd happily work on a story draft or bang out some emails for a few hours. And the nanomatte screen makes it an excellent reading tablet and a solid option for watching movies on a flight.\n\nI think most people who want a tablet will still probably be happier with an iPad, but Apple's entry-level tablet is sorely in need of an update. Plus, it only costs $50 less than the Alexa Tablet. Stepping up to an iPad Air will cost you at least $750 before buying accessories — and for that kind of money you need to be really committed to getting as much as you can out of it. The Alexa Tablet, on the other hand, sits in a sweet spot of price and capability, even if I wish the Android app situation was better. At a time when hardware prices are going through the roof, Amazon's Alexa Tablet is a compelling option.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2287955/amazon-alexa-tablet-12-pro-review/",
-      "publishedAt": "2026-10-15T18:30:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "android",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-bc9df70017bcd5da:en",
-      "sourceId": "the-verge-bc9df70017bcd5da",
-      "lang": "en",
-      "title": "Meta and Apple team up to make Muse AI models run better on Macs",
-      "summary": "Meta announced the Muse Spark Open AI model today, claiming that it's the \"most capable US open-weight model to date.\" But the company also says that it's the \"the first model in its class\" that can \"run on your desktop using two Apple M5 Ultra Mac Studios with the latest MLX framework.\" Meta and Apple, […]",
-      "body": "Meta announced the Muse Spark Open AI model today , claiming that it's the \"most capable US open-weight model to date.\" But the company also says that it's the \"the first model in its class\" that can \"run on your desktop using two Apple M5 Ultra Mac Studios with the latest MLX framework.\"\n\nMeta and Apple, typically rivals , worked together on the launch and are publicly supporting each other.\n\n\"Muse Spark Open - weights releasing today - runs great on new Mac Studios thanks to work with @johnternus and Apple,\" Meta CEO Mark Zuckerberg said on X .\n\n\"Congrats to the team!\" new Apple CEO John Ternus said in a reply . \"Amazing to run a model of Muse …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/news/1012293/meta-apple-muse-spark-open-ai-model-mlx",
-      "publishedAt": "2026-10-15T18:15:36.000Z",
       "categories": [
         "tecnologia-general",
         "apple",
@@ -5677,22 +5739,6 @@
       "categories": [
         "apple",
         "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-508f63181603d864:en",
-      "sourceId": "engadget-508f63181603d864",
-      "lang": "en",
-      "title": "Meta built a huge open-weight AI model for Macs, but you'll need 1TB of RAM to run it",
-      "summary": "Muse Spark Open is \"the most capable US open-weight model to date,\" the company says.",
-      "body": "Muse Spark Open is \"the most capable US open-weight model to date,\" the company says.\n\nIn case there was still any doubt about Meta's commitment to open models, the company is open-sourcing Muse Spark with a new open-weight model called Muse Spark Open. The 800-billion parameter model was optimized for Apple Silicon, but you'll need a staggering 1TB of RAM to run it locally.\n\nMeta, which has said it believes the US should not allow Chinese labs to lead on open-source AI, calls Muse Spark Open \"the most capable US open-weight model to date.\" Benchmarks released by the company suggest Meta's model outperforms two leading Chinese models, GLM 5.3 and Kimi K3, on agentic tasks and visual reasoning.\n\nIt's also the first model optimized to run locally on Apple's M5 Ultra-equipped Mac Studio machines. \"Apple's unified memory architecture lets the M5 Ultra's integrated GPU use up to 512 GB per Mac Studio, so two machines can hold an entire model,\" Meta explains. \"The result is two Mac Studios behave like one supercomputer with a terabyte of unified memory.\"\n\nMuse Spark Open — weights releasing today — runs great on new Mac Studios thanks to work with @johnternus and Apple. pic.twitter.com/U2wJNrKBOg\n\n— Mark Zuckerberg (@finkd) October 15, 2026\n\nApple still hasn't announced specific pricing or a ship date for the 512GB Mac Studio — just that it will be available in \"late October\" — any setup that can run Muse Spark Open will require a hefty investment. Muse Spark Open can also run on four 256GB M5 Ultra Mac Studios, which will cost roughly $38,000. That amount of compute is pretty squarely out of reach for the typical vibe coder. But if you're a larger organization that's been burning through your token budget, investing in a few Mac Studios might seem like a pretty good deal, provided Meta's model performs as well as the company suggests.\n\nMuse Spark Open is available to download now from Hugging Face .",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2287833/meta-built-a-huge-open-weight-ai-model-for-macs-but-youll-need-1tb-of-ram-to-run-it/",
-      "publishedAt": "2026-10-15T17:02:48.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
       ]
     },
     {
@@ -5725,21 +5771,6 @@
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-d3a26bb49dd4721c:en",
-      "sourceId": "ars-technica-d3a26bb49dd4721c",
-      "lang": "en",
-      "title": "Fridge hack costing millions and sparking fires stemmed from poor security",
-      "summary": "Incident hitting 700 supermarkets exploited outdated devices exposed to the Internet.",
-      "body": "Earlier this week, a mass hack of refrigeration systems at an estimated 700 supermarkets throughout France caused them to suddenly malfunction, causing spoilage of untold tons of perishables and, in some cases, fires. As is now the norm, basic cybersecurity would have prevented it.\n\nFrench authorities say the systems, made up of entire fleets of refrigerators and freezers throughout a store, were hacked. More specifically, Internet-connected controllers that allow technicians to remotely administer the store-wide systems were compromised. The unknown attackers responsible then activated defrosters long enough for the fridges to reach temperatures as high as 50° Celsius (122° Fahrenheit). By the time the mass compromise was discovered, food was spoiled, and in some cases their electrical systems caught fire.\n\nMultiple security advisories and public research reports show that all three of the controller models reportedly hacked in the incident—sold by Danfoss of Denmark and Dixell and its parent company Copeland in the US—contained critical vulnerabilities that allow attackers to remotely log in to the devices with the same system rights as administrators. Until recently, Danfoss controllers, for instance, used a credential that changes each day. The password is generated by the publicly available firmware based on the date. A hacker who takes the time to analyze the code can do the same thing on any device that hasn’t received a recent update. Daily passwords are identical across models located in hundreds or thousands of stores.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/security/2026/10/fridge-hack-costing-millions-and-sparking-fires-stemmed-from-poor-security/",
-      "publishedAt": "2026-10-14T21:35:09.000Z",
-      "categories": [
-        "tecnologia-general"
       ]
     },
     {
@@ -6023,22 +6054,6 @@
         "tecnologia-accesibilidad",
         "apps-accesibles",
         "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "applevis-apps-5a0a43f780341ef5:en",
-      "sourceId": "applevis-apps-5a0a43f780341ef5",
-      "lang": "en",
-      "title": "Quintra",
-      "summary": "Quintra brings poker hands to a shared board. Place cards to build pairs, straights, flushes, and more across rows and columns. Connect with cards already in play, find the right opening, and turn one card into points in two directions. ONE BOARD. SO MANY POSSIBILITIES. Build on what's there, line up bonus spaces, and watch for opportunities where hands cross. Your best move could also give your opponent something to work with. PLAY FRIENDS AT YOUR PACE Trade turns through Game Center whenever you're ready. Match Play spans two rounds with the same deal and swapped seats, giving both players a chance to make the most of each hand. A FRESH PUZZLE EVERY DAY Fit the cards to match every marked poker hand. Choose Easy, Medium, or Hard, then see how your completion time stacks up on the daily puzzle leaderboards. EIGHT TURNS. MAKE EACH ONE COUNT. Take on the Daily Challenge: a daily deal, eight solo turns, and a leaderboard to climb. Find the connections that turn a good score into a great one. PLAY SOLO Learn the board in Practice or take on the computer in Match Play. Choose your difficulty and try new approaches at your own pace. MAKE IT YOURS Earn XP, level up, and chase goals and achievements as you play. Unlock new card decks and board looks to make Quintra feel like yours. Every poker hand changes the game.",
-      "body": "Quintra brings poker hands to a shared board. Place cards to build pairs, straights, flushes, and more across rows and columns. Connect with cards already in play, find the right opening, and turn one card into points in two directions. ONE BOARD. SO MANY POSSIBILITIES. Build on what's there, line up bonus spaces, and watch for opportunities where hands cross. Your best move could also give your opponent something to work with. PLAY FRIENDS AT YOUR PACE Trade turns through Game Center whenever you're ready. Match Play spans two rounds with the same deal and swapped seats, giving both players a chance to make the most of each hand. A FRESH PUZZLE EVERY DAY Fit the cards to match every marked poker hand. Choose Easy, Medium, or Hard, then see how your completion time stacks up on the daily puzzle leaderboards. EIGHT TURNS. MAKE EACH ONE COUNT. Take on the Daily Challenge: a daily deal, eight solo turns, and a leaderboard to climb. Find the connections that turn a good score into a great one. PLAY SOLO Learn the board in Practice or take on the computer in Match Play. Choose your difficulty and try new approaches at your own pace. MAKE IT YOURS Earn XP, level up, and chase goals and achievements as you play. Unlock new card decks and board looks to make Quintra feel like yours. Every poker hand changes the game.",
-      "sourceName": "AppleVis Apps",
-      "originalUrl": "https://www.applevis.com/apps/ios/games/quintra",
-      "publishedAt": "2026-10-09T00:39:30.000Z",
-      "categories": [
-        "apple",
-        "apps-accesibles"
       ]
     },
     {

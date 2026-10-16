@@ -24,8 +24,9 @@
     ]) hide(id);
 
     // El encabezado "Abrir documento" no debe preceder al único botón Importar.
-    document.getElementById('reading-start-heading')
-      ?.closest('.panel')?.removeAttribute('aria-labelledby');
+    const importPanel = document.getElementById('reading-start-heading')?.closest('.panel');
+    importPanel?.removeAttribute('aria-labelledby');
+    importPanel?.classList.add('ios-reader-import-panel');
 
     const settings = document.getElementById('reading-settings-web');
     settings?.removeAttribute('aria-labelledby');
@@ -97,11 +98,13 @@
       const label = select && document.querySelector('label[for="' + id + '"]');
       if (!select || !label) return;
       const companion = select.nextElementSibling;
-      const adjusted = companion?.classList.contains('ios-reader-adjustable') ||
-        companion?.classList.contains('ios-reader-choice');
+      const field = companion?.classList.contains('ios-reader-adjustable-field') ? companion : null;
+      const adjusted = companion?.classList.contains('ios-reader-choice');
       const choices = adjusted && companion.nextElementSibling?.classList.contains('ios-reader-choice-options')
         ? companion.nextElementSibling : null;
-      for (const node of [label, select, adjusted ? companion : null, choices].filter(Boolean)) {
+      // Move the accessible control and its visual caption as ONE component.
+      // Moving only the hidden select leaves orphaned bars in the old panel.
+      for (const node of [label, select, field, adjusted ? companion : null, choices].filter(Boolean)) {
         if (before) target.insertBefore(node, before);
         else target.append(node);
       }

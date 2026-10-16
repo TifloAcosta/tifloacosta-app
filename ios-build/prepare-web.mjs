@@ -150,6 +150,58 @@ const iosBookActionGlue = String.raw`
     hasSavedBook: () => Boolean(currentBookId),
     openBook: id => openSavedBook(id),
     exportBook: (id, format = 'original') => exportSavedBook(id, format),
+    shareBook: async id => {
+      try {
+        if (!libraryClient || !window.TifloIOSShare?.shareBlob) return false;
+        const opened = await libraryClient.openBook(id);
+        if (!opened?.book) return false;
+        const fmt = String(opened.book.format || 'txt').toLowerCase();
+        const title = safeExportFilename(opened.book.title || 'Documento');
+        const source = String(opened.content || '');
+        const binaries = new Set(['docx', 'pptx', 'xlsx', 'epub', 'odt']);
+        let blob, ext = fmt;
+        if (fmt === 'audio') {
+          blob = (await libraryAdapter?.openAudioFile?.(id))?.blob;
+          ext = 'mp3';
+        } else if (fmt === 'daisy2.02' || fmt === 'daisy3') {
+          blob = (await libraryAdapter?.openDaisyArchive?.(id))?.blob;
+          ext = 'zip';
+        } else if (binaries.has(fmt)) {
+          if (source.length > 65000000) throw new Error('too-large');
+          blob = new Blob([Uint8Array.from(source.split(',').filter(Boolean).map(Number))]);
+        } else if (fmt === 'pdf') {
+          // PDF source has been extracted to text, so never pretend it is the
+          // original PDF. Share an explicitly named accessible text version.
+          const model = await modelForSavedBook(opened);
+          blob = new Blob([accessibleTextFromModel(model)], {type:'text/plain;charset=utf-8'});
+          ext = 'txt';
+        } else {
+          blob = new Blob([source], {type:'text/plain;charset=utf-8'});
+          if (fmt === 'markdown') ext = 'md';
+        }
+        if (!blob) throw new Error('no-original');
+        const result = await window.TifloIOSShare.shareBlob({blob, name: title + '.' + ext});
+        if (result === 'unavailable' || result === 'failed') {
+          els.libraryStatus.textContent = language() === 'en'
+            ? 'File cannot be shared directly (maximum 15 MB). Use Export instead.'
+            : 'No se puede compartir directamente este archivo (máximo 15 MB). Utiliza Exportar.';
+        }
+        return result === 'completed' || result === 'cancelled';
+      } catch {
+        els.libraryStatus.textContent = language() === 'en'
+          ? 'Could not prepare the document for sharing.'
+          : 'No se pudo preparar el documento para compartir.';
+        return false;
+      }
+    },
+    importSharedFile: async file => {
+      if (!(file instanceof File) || !els.file || !file.name) return false;
+      const transfer = new DataTransfer();
+      transfer.items.add(file);
+      els.file.value = '';
+      els.file.files = transfer.files;
+      return Boolean(await importSelectedFile());
+    },
     exportCurrent: format => currentBookId ? exportSavedBook(currentBookId, format) : Promise.resolve(false),
     deleteBook: id => deleteSavedBook(id),
     deleteCurrent: () => currentBookId ? deleteSavedBook(currentBookId) : Promise.resolve(false),
@@ -227,7 +279,8 @@ const packagedReader = withNativeIds.replace(/\}\)\(\);\s*$/, iosBookActionGlue 
     'await Promise.all([renderLibrary(), renderQueue(), renderMarks()]);\n    return Boolean(deleted);\n  }\n\n  function updateQueueToggle()');
 if (!packagedReader.includes('window.TifloIOSBookActions =') ||
     !packagedReader.includes('card.dataset.iosBookId = String(book.id);') ||
-    !packagedReader.includes('return Boolean(deleted);')) {
+    !packagedReader.includes('return Boolean(deleted);')
+    || !packagedReader.includes('importSharedFile: async file =>')) {
   throw new Error('iOS: falló la instalación del puente real de acciones de documentos');
 }
 await writeFile(join(output, 'web-reading.js'), packagedReader, 'utf8');
@@ -330,10 +383,13 @@ await writeFile(join(output, 'ios-choice-groups.js'), "(() => {\n  'use strict';
 await cp(join(root, 'ios-build/ios-choice-collapse.js'), join(output, 'ios-choice-collapse.js'));
 await cp(join(root, 'ios-build/ios-reader-selects.js'), join(output, 'ios-reader-selects.js'));
 await cp(join(root, 'ios-build/ios-reader-minimal.js'), join(output, 'ios-reader-minimal.js'));
+await cp(join(root, 'ios-build/ios-reader-presentation.css'), join(output, 'ios-reader-presentation.css'));
 await cp(join(root, 'ios-build/ios-reader-folders.js'), join(output, 'ios-reader-folders.js'));
 await cp(join(root, 'ios-build/ios-reader-native.js'), join(output, 'ios-reader-native.js'));
 await cp(join(root, 'ios-build/ios-accessible-actions.js'), join(output, 'ios-accessible-actions.js'));
 await cp(join(root, 'ios-build/ios-appwide-native-actions.js'), join(output, 'ios-appwide-native-actions.js'));
+await cp(join(root, 'ios-build/ios-share.js'), join(output, 'ios-share.js'));
+await cp(join(root, 'ios-build/ios-share-inbox.js'), join(output, 'ios-share-inbox.js'));
 await cp(join(root, 'ios-build/ios-video-ui.js'), join(output, 'ios-video-ui.js'));
 
 const commitSha = String(process.env.GITHUB_SHA ||
@@ -374,6 +430,7 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
   if (!html.includes('</head>')) throw new Error('Falta el cierre de cabecera: ' + name);
   html = html.replace('</head>', iosOverrides + '\n</head>');
   if (name === 'index.html') {
+    html = html.replace('</head>', '<link rel="stylesheet" href="ios-reader-presentation.css">\n</head>');
     // Build the actual download screens in the packaged app. Previously the
     // route existed but none of the scripts mounting its content were loaded.
     html = html.replace('</head>', '<link rel="stylesheet" href="downloads.css?v=1.1">\n</head>');
@@ -399,12 +456,14 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
   if (name === 'index.html' || name === 'actualidad.html' || name === 'videos.html') html = html.replace('</body>', '<script src="ios-parity.js"></script>' + '\n</body>');
   if (name === 'index.html') {
     html = html.replace('</head>', '<script src="ios-reader-native.js"></script>\n</head>');
+    html = html.replace('</body>', '<script src="ios-share-inbox.js"></script>\n</body>');
     html = html.replace('</head>', '<script src="tiflo-build-identity.js"></script>\n</head>');
     html = html.replace('</body>', '<script src="ios-reader-selects.js"></script><script src="ios-reader-minimal.js"></script><script src="ios-reader-folders.js"></script>' + '\n</body>');
   }
   if (name === 'podcast.html') {
     html = html.replace('</body>', '<script>requestAnimationFrame(() => { const heading = document.getElementById("podcast-heading"); heading?.setAttribute("tabindex", "-1"); heading?.focus({preventScroll:true}); });</script>' + '\n</body>');
   }
+  html = html.replace('</body>', '<script src="ios-share.js"></script>\n</body>');
   html = html.replace('</body>', '<script src="ios-accessible-actions.js"></script><script src="ios-appwide-native-actions.js"></script><script src="ios-video-ui.js"></script>\n</body>');
   await writeFile(path, html);
 }
@@ -491,11 +550,40 @@ iosVideos = iosVideos.replace(iosNextMarker, iosNextMarker +
   "\n    els.next.textContent = lang === 'es' ? 'Mostrar diez vídeos más' : 'Show ten more videos';");
 await writeFile(iosVideosPath, iosVideos);
 
+// Podcast cards receive a real episode URL for their native VoiceOver
+// Share action. The public web markup and Android remain unchanged.
+const iosPodcastPath = join(output, 'podcast.js');
+let iosPodcast = await readFile(iosPodcastPath, 'utf8');
+const podcastCardAnchor = "      article.className = 'podcast-episode-card';";
+if (!iosPodcast.includes(podcastCardAnchor)) throw new Error('No se encuentra tarjeta de podcast');
+iosPodcast = iosPodcast.replace(podcastCardAnchor, podcastCardAnchor +
+  "\n      article.dataset.tifloShareUrl = /^https?:/i.test(episode.audioUrl) ? episode.audioUrl : '';");
+await writeFile(iosPodcastPath, iosPodcast);
+
 // In iOS, category pages already identify the category in the result status.
 // Avoid announcing that same label after every title, while retaining it for
 // global search results and other contexts where the category adds information.
 const iosAppPath = join(output, 'app.js');
 let iosApp = await readFile(iosAppPath, 'utf8');
+// In the first stage a public document URL is shared, not its binary data.
+// Name that action accurately until the actual file export passes testing.
+for (const [before, after] of [
+  ["share: 'Compartir documento',", "share: 'Compartir enlace',"],
+  ["share: 'Share document',", "share: 'Share link',"]]) {
+  if (!iosApp.includes(before)) throw new Error('No se encuentra etiqueta Compartir de Recursos');
+  iosApp = iosApp.replace(before, after);
+}
+const oldResourceShare = "    if(!sourceUrl||!navigator.share) {";
+if (!iosApp.includes(oldResourceShare)) throw new Error('No se encuentra la acción Compartir documento');
+iosApp = iosApp.replace(oldResourceShare, `    if (sourceUrl && window.TifloIOSShare?.shareURL) {
+      const nativeResult = await window.TifloIOSShare.shareURL({ title: item.title, url: sourceUrl });
+      if (nativeResult !== 'unavailable') {
+        status.textContent = nativeResult === 'failed' ? labels.shareUnavailable : '';
+        return nativeResult;
+      }
+    }
+` + oldResourceShare);
+
 const iosCategoryRender = 'showResults(items,c.categoryFound(cat,items.length),c.noResults);';
 if (!iosApp.includes(iosCategoryRender)) throw new Error('No se encuentra el renderizado por categoría');
 iosApp = iosApp.replace(iosCategoryRender,
@@ -643,7 +731,7 @@ await writeFile(iosActualidadPath, iosActualidad);
 await import('./patch-reading-native.mjs');
 
 // Fail before signing or uploading if an injected iOS-only script is invalid.
-for (const file of ['app.js', 'videos.js', 'actualidad.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-choice-groups.js', 'ios-videos-fallback.js', 'ios-actualidad-media-fallback.js', 'ios-choice-collapse.js', 'ios-reader-selects.js', 'ios-reader-minimal.js', 'ios-reader-folders.js', 'ios-reader-native.js', 'ios-accessible-actions.js', 'ios-appwide-native-actions.js', 'web-reading.js', 'ios-parity.js', 'news-videos.js']) {
+for (const file of ['app.js', 'videos.js', 'actualidad.js', 'actualidad-media.js', 'actualidad-core.js', 'ios-choice-groups.js', 'ios-videos-fallback.js', 'ios-actualidad-media-fallback.js', 'ios-choice-collapse.js', 'ios-reader-selects.js', 'ios-reader-minimal.js', 'ios-reader-folders.js', 'ios-reader-native.js', 'ios-accessible-actions.js', 'ios-appwide-native-actions.js', 'ios-share.js', 'ios-share-inbox.js', 'web-reading.js', 'ios-parity.js', 'news-videos.js']) {
   execFileSync(process.execPath, ['--check', join(output, file)], { stdio: 'pipe' });
 }
 console.log('Validación sintáctica de scripts iOS completada');

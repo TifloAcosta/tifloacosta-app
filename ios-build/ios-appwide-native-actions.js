@@ -142,8 +142,15 @@
 
   async function shareURL(url, title) {
     if (!/^https?:/i.test(url)) return;
+    const ios = window.TifloIOSShare;
+    if (ios?.shareURL) {
+      const result = await ios.shareURL({ title, url });
+      // Cancellation and failure should never silently copy a different item.
+      if (result !== 'unavailable') return;
+    }
     if (navigator.share) {
-      try { await navigator.share({ title, url }); return; } catch {}
+      try { await navigator.share({ title, url }); return; }
+      catch (error) { if (error?.name === 'AbortError') return; }
     }
     await copyURL(url);
   }
@@ -308,7 +315,7 @@
       const entries = [...root.querySelectorAll('.reading-library-title')];
       for (const title of entries) {
         if (!available(title)) continue;
-        const keys = ['open', 'continue', 'translate', 'queue', 'info', 'move', 'export', 'rename', 'delete'];
+        const keys = ['open', 'continue', 'translate', 'queue', 'info', 'move', 'export', 'share', 'rename', 'delete'];
         // The iOS reading bridge already dispatches nativeListAction for these
         // exact DOM title IDs and keeps its deletion confirmation.
         makeEntry(title, 'library', title.textContent?.trim(), keys, null, list);
@@ -321,10 +328,13 @@
         const play = card.querySelector('button');
         if (!title || !play) return;
         const description = card.querySelector('p:not(.resource-meta)');
-        makeEntry(title, 'podcast', title.textContent?.trim(),
-          description ? ['play', 'description'] : ['play'],
+        const episodeURL = card.dataset.tifloShareUrl || '';
+        const keys = description ? ['play', 'description'] : ['play'];
+        if (/^https?:/i.test(episodeURL)) keys.push('share');
+        makeEntry(title, 'podcast', title.textContent?.trim(), keys,
           selected => {
             if (selected === 'play') play.click();
+            if (selected === 'share') void shareURL(episodeURL, title.textContent?.trim());
             if (selected === 'description' && description) {
               description.tabIndex = -1;
               description.focus({ preventScroll: true });

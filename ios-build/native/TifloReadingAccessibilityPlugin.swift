@@ -501,6 +501,7 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
                 "info": #selector(self.infoDocument(_:)),
                 "move": #selector(self.moveDocument(_:)),
                 "export": #selector(self.exportDocument(_:)),
+                "share": #selector(self.shareDocument(_:)),
                 "rename": #selector(self.renameDocument(_:)),
                 "delete": #selector(self.deleteDocument(_:))
             ]
@@ -570,6 +571,7 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
     @objc private func infoDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("info") }
     @objc private func moveDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("move") }
     @objc private func exportDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("export") }
+    @objc private func shareDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("share") }
     @objc private func renameDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("rename") }
     @objc private func deleteDocument(_ action: UIAccessibilityCustomAction) -> Bool { emit("delete") }
 }

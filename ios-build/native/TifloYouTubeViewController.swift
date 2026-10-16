@@ -12,6 +12,7 @@ class ViewController: CAPBridgeViewController {
         bridge?.registerPluginInstance(TifloReadingTtsPlugin())
         bridge?.registerPluginInstance(TifloReadingLanguagePlugin())
         bridge?.registerPluginInstance(TifloReadingAccessibilityPlugin())
+        bridge?.registerPluginInstance(TifloShareInboxPlugin())
     }
 }
 

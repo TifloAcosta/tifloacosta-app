@@ -189,7 +189,7 @@ test('iOS ordena recientes y cola sin romper la separación entre Mostrar y Orde
 });
 
 
-test('EPUB recibido no puede quedar escondido detrás de la Biblioteca nativa', () => {
+test('Compartir distribuye archivos, YouTube y otros enlaces sin superponer pantallas', () => {
   const inbox = read('ios-build/ios-share-inbox.js');
   const appwide = read('ios-build/ios-appwide-native-actions.js');
   const nativeActions = read('ios-build/native/TifloReadingAccessibilityPlugin.swift');
@@ -201,16 +201,22 @@ test('EPUB recibido no puede quedar escondido detrás de la Biblioteca nativa', 
   assert.ok(host.includes('registerPluginInstance(TifloShareInboxPlugin())'));
   assert.ok(extension.includes('group.com.tifloacosta.app'));
   assert.ok(nativeInbox.includes('group.com.tifloacosta.app'));
-  assert.ok(inbox.includes('if (anchor && anchor.nextElementSibling !== region) anchor.after(region)'));
+  assert.ok(inbox.includes("const id = youtubeId(raw)"));
+  assert.ok(inbox.includes('await youtube().open({videoId:id'));
+  assert.ok(inbox.includes('await native().openURL({url:address})'));
+  assert.ok(inbox.includes('await importDocument(item, opened, targetStatus)'));
+  assert.ok(inbox.includes("actions.hasSavedBook?.() !== true"));
   assert.ok(inbox.includes("window.addEventListener('hashchange'"));
-  assert.ok(inbox.includes('await accessibility?.dismissNativeActionList?.()'));
+  assert.ok(inbox.includes('await accessibility()?.dismissNativeActionList?.()'));
   assert.ok(nativeActions.includes('CAPPluginMethod(name: "dismissNativeActionList"'));
   assert.ok(nativeActions.includes('navigation.topViewController is TifloNativeActionListController'));
-  assert.ok(appwide.includes("if (info.kind === 'library')"));
-  assert.ok(appwide.includes('const staged = await shared.pending()'));
-  assert.ok(appwide.includes('if (Array.isArray(staged?.items) && staged.items.length)'));
-  assert.ok(appwide.includes('await window.TifloIOSShareInbox?.refresh?.()'));
-  assert.ok(inbox.includes('reader.hasSavedBook?.() !== true'));
-  assert.ok(inbox.includes('await plugin().acknowledge({ id: item.id })'));
-  assert.ok(inbox.includes('No se pudo consultar los documentos recibidos.'));
+  assert.ok(nativeActions.includes('"translate": #selector(translateDocument(_:))'));
+  assert.ok(nativeActions.includes('"share": #selector(shareDocument(_:))'));
+  assert.ok(appwide.includes('const inlineNativeCollections = true'));
+  assert.ok(appwide.includes('if (inlineNativeCollections)'));
+  assert.ok(appwide.includes('showNativeVideoSection'));
+  assert.ok(nativeInbox.includes('func openURL('));
+  assert.ok(extension.includes('if kind == "file"'));
+  assert.ok(extension.includes('if !explicitlyNamedFile &&'));
+  assert.ok(inbox.includes('await native().acknowledge({id:item.id})'));
 });

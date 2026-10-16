@@ -56,10 +56,8 @@ if (!extension) {
 } else {
   console.log('Identificador de extensión ya registrado en Apple Developer.');
 }
-for(const item of [main,extension]) {
-  const capabilities=await apple('bundleIds/'+encodeURIComponent(item.id)+'/bundleIdCapabilities?limit=100');
-  const appGroups=(capabilities.data||[]).filter(x=>x.attributes?.capabilityType==='APP_GROUPS');
-  console.log(item.attributes.identifier+': App Groups capability '+(appGroups.length?'activada':'sin activar')+'.');
-}
+// The public identifier API confirms both IDs. It does NOT confirm the
+// assignment of the concrete App Group; Apple Developer Portal must do so.
+console.log('Identificadores verificados: '+mainId+' y '+shareId+'.');
 console.log('PASO MANUAL: registrar group.com.tifloacosta.app y asociarlo a los dos App IDs en Apple Developer.');
 console.log('Este proceso no genera perfiles ni sube ningún IPA.');

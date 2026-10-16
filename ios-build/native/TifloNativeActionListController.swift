@@ -152,17 +152,17 @@ final class TifloNativeActionListController: UITableViewController {
         guard !isClosing else { return }
         isClosing = true
         let callback = onSelected
-        dismiss(animated: true) {
-            callback?(itemId, actionId)
-        }
+        // The hosting iOS section owns presentation and teardown. Never
+        // dismiss a non-modal child and leave an inaccessible cover behind.
+        callback?(itemId, actionId)
     }
+
+    func closeFromHost() { close() }
 
     @objc private func close() {
         guard !isClosing else { return }
         isClosing = true
         let callback = onClosed
-        dismiss(animated: true) {
-            callback?()
-        }
+        callback?()
     }
 }

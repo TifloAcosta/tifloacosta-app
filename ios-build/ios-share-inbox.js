@@ -20,6 +20,7 @@
   const status = document.createElement('p');
   status.setAttribute('role', 'status');
   status.setAttribute('aria-live', 'polite');
+  status.tabIndex = -1;
   region.append(header, list, status);
 
   function mount() {
@@ -34,13 +35,13 @@
     return !section.hidden && document.getElementById('reading-reader')?.hidden !== false;
   }
 
-  async function exposeInbox() {
-    if (!readerVisible() || !items.length) return;
+  async function exposeInbox(showDiagnostic = false) {
+    if (!readerVisible() || (!items.length && !showDiagnostic)) return;
     const accessibility = window.Capacitor?.Plugins?.TifloReadingAccessibility;
     try {
       const result = await accessibility?.dismissNativeActionList?.();
       if (result?.dismissed) {
-        list.querySelector('button')?.focus({ preventScroll: true });
+        (list.querySelector('button') || status)?.focus({ preventScroll: true });
       }
     } catch {
       // The HTML inbox remains present even if the native modal cannot close.
@@ -129,7 +130,19 @@
   async function refresh() {
     if (refreshing || active) return;
     const inbox = plugin();
-    if (!inbox?.pending) return;
+    if (!inbox?.pending) {
+      if (readerVisible()) {
+        mount();
+        region.hidden = false;
+        header.textContent = translate('Recibidos por Compartir', 'Received via Share');
+        status.textContent = translate(
+          'La recepción de Compartir no está disponible. Es necesario actualizar TifloAcosta.',
+          'Share reception is unavailable. TifloAcosta needs an update.'
+        );
+        await exposeInbox(true);
+      }
+      return;
+    }
     refreshing = true;
     try {
       const result = await inbox.pending();
@@ -161,6 +174,7 @@
         'Could not check received documents. Check that TifloAcosta is updated and try again.'
       );
       // Do not acknowledge or delete staged files on a failed query.
+      await exposeInbox(true);
     } finally {
       refreshing = false;
     }

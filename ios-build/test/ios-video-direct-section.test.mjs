@@ -50,22 +50,27 @@ test('Acciones nativas permanecen en un solo elemento por vídeo y vuelven al co
     assert.ok(native.includes(key),key);
 });
 
-test('Vídeos UIKit oculta la pantalla web inferior y restaura foco y estado al cerrar', () => {
+test('Vídeos UIKit permanece visible y aísla VoiceOver sin ocultar su contenedor WebKit', () => {
   const plugin = source('native/TifloReadingAccessibilityPlugin.swift');
   const start = plugin.indexOf('@objc public func showNativeVideoSection');
   const end = plugin.indexOf('@objc public func showNativeActionList', start);
   assert.ok(start !== -1 && end > start, 'Se encontró el método de vídeos');
   const block = plugin.slice(start, end);
-  assert.match(block, /let webWasHidden = self\.webView\?\.isHidden \?\? false/);
   assert.match(block, /let webAccessibilityWasHidden = self\.webView\?\.accessibilityElementsHidden \?\? false/);
+  assert.match(block, /navigation\.view\.backgroundColor = screen\.view\.backgroundColor \?\? \.black/);
+  assert.match(block, /navigation\.view\.isOpaque = true/);
   assert.match(block, /navigation\.view\.accessibilityViewIsModal = true/);
-  assert.match(block, /self\.webView\?\.accessibilityElementsHidden = true/);
-  assert.match(block, /self\.webView\?\.isHidden = true/);
-  assert.match(block, /self\?\.webView\?\.isHidden = webWasHidden/);
+  assert.match(block, /presenter\.view\.bringSubviewToFront\(navigation\.view\)/);
+  assert.match(block, /!navigation\.view\.isDescendant\(of: web\)/);
+  assert.match(block, /web\.accessibilityElementsHidden = true/);
   assert.match(block, /self\?\.webView\?\.accessibilityElementsHidden = webAccessibilityWasHidden/);
-  assert.ok(block.indexOf('self?.webView?.isHidden = webWasHidden')
+  assert.doesNotMatch(block, /webView\?\.isHidden\s*=\s*true/, 'No ocultar el WKWebView que puede contener UIKit');
+  assert.doesNotMatch(block, /self\.webView\?\.accessibilityElementsHidden\s*=\s*true/, 'No ocultar accesibilidad de un posible ancestro UIKit');
+  assert.ok(block.indexOf('self?.webView?.accessibilityElementsHidden = webAccessibilityWasHidden')
     < block.indexOf('self?.notifyListeners("nativeVideoClosed"'),
-    'El visor web debe restaurarse antes de notificar el cierre a JavaScript');
+    'Restaurar accesibilidad antes de devolver el foco al inicio');
   assert.match(block, /presenter\.addChild\(navigation\)/);
   assert.match(block, /navigation\.removeFromParent\(\)/);
+  assert.ok(block.indexOf('presenter.view.bringSubviewToFront(navigation.view)')
+    < block.indexOf('navigation.didMove(toParent: presenter)'));
 });

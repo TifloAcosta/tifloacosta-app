@@ -49,3 +49,23 @@ test('Acciones nativas permanecen en un solo elemento por vídeo y vuelven al co
   for(const key of ['"play"','"youtube"','"like"','"subscribe"','"share"','"comment"'])
     assert.ok(native.includes(key),key);
 });
+
+test('Vídeos UIKit oculta la pantalla web inferior y restaura foco y estado al cerrar', () => {
+  const plugin = source('native/TifloReadingAccessibilityPlugin.swift');
+  const start = plugin.indexOf('@objc public func showNativeVideoSection');
+  const end = plugin.indexOf('@objc public func showNativeActionList', start);
+  assert.ok(start !== -1 && end > start, 'Se encontró el método de vídeos');
+  const block = plugin.slice(start, end);
+  assert.match(block, /let webWasHidden = self\.webView\?\.isHidden \?\? false/);
+  assert.match(block, /let webAccessibilityWasHidden = self\.webView\?\.accessibilityElementsHidden \?\? false/);
+  assert.match(block, /navigation\.view\.accessibilityViewIsModal = true/);
+  assert.match(block, /self\.webView\?\.accessibilityElementsHidden = true/);
+  assert.match(block, /self\.webView\?\.isHidden = true/);
+  assert.match(block, /self\?\.webView\?\.isHidden = webWasHidden/);
+  assert.match(block, /self\?\.webView\?\.accessibilityElementsHidden = webAccessibilityWasHidden/);
+  assert.ok(block.indexOf('self?.webView?.isHidden = webWasHidden')
+    < block.indexOf('self?.notifyListeners("nativeVideoClosed"'),
+    'El visor web debe restaurarse antes de notificar el cierre a JavaScript');
+  assert.match(block, /presenter\.addChild\(navigation\)/);
+  assert.match(block, /navigation\.removeFromParent\(\)/);
+});

@@ -14,7 +14,5 @@ test('Actualidad cache busts all corrected iPhone assets and PWA shell', async (
   assert.match(sw, /actualidad-core\.js\?v=1\.6/);
   assert.match(sw, /actualidad\.js\?v=1\.3/);
   assert.match(sw, /actualidad-media\.js\?v=1\.1/);
-  const cache = sw.match(/const CACHE = 'tifloacosta-app-v2-(\d+)-([^']+)'/);
-  assert.ok(cache && Number(cache[1]) >= 46 && /^reader-/.test(cache[2]),
-    'La caché PWA debe conservar una generación nueva del lector');
+  assert.match(sw, /tifloacosta-app-v2-46-reader-chrome-voices/);
 });

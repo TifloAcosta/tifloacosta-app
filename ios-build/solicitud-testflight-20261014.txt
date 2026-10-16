@@ -167,3 +167,13 @@ La ejecución de publicación #94 (38914391011) falló en la API de Apple, códi
 El código iOS de TifloLector, interfaz y Compartir aprobado previamente se conserva. Se corrigió exclusivamente el flujo de firma/publicación: consultar ambos Bundle IDs en una lectura documentada y reintentar de forma limitada las consultas GET ante errores temporales, sin repetir operaciones de creación.
 Autorización: enviar la misma actualización al grupo interno «Probadores TifloAcosta», con número de compilación nuevo. No alterar Android, web ni datos locales, ni afirmar disponibilidad antes de Apple VALID y asignación interna.
 Avisar por correo a tonytenerife@gmail.com solo tras confirmación de disponibilidad real en TestFlight.
+
+
+SOLICITUD DE REPARACIÓN TESTFLIGHT — EPUB DESDE WHATSAPP — 16/10/2026.
+Incidencia confirmada por el usuario con IMG_0996.PNG: Share Extension muestra «Contenido guardado» pero EPUB no aparece en TifloLector. No exigir al usuario que repita pruebas sobre 400095.
+Base iOS preservada y revalidada en rama preparacion-ios. Cambios exclusivos iOS: bandeja recibida junto a Importar; notificación accesible y errores explícitos; evitar que la lista modal Biblioteca impida llegar a la bandeja; permitir cerrar solo el modal genérico cuando existe contenido pendiente; consultar de nuevo al regresar de WhatsApp; no eliminar la copia original del App Group hasta guardar realmente el documento en Biblioteca; evitar bucles de repintado. Mantener acciones del rotor y compartir nativo.
+No borrar ni reinstalar la aplicación, no alterar biblioteca/datos previos, ni modificar Android o web pública.
+Publicar únicamente en grupo interno Probadores TifloAcosta tras firma, procesamiento Apple VALID y comprobación de asignación.
+Esta subida no equivale a demostrar lectura real de un EPUB de WhatsApp en el iPhone; se verificará tras instalar.
+Mantener pendiente auditoría de la presentación normal de Biblioteca cuando no hay contenido compartido.
+Confirmar disponibilidad con correo a tonytenerife@gmail.com solamente tras verificar Apple TestFlight realmente disponible.

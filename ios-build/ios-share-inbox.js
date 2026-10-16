@@ -155,7 +155,9 @@
     const actions = window.TifloIOSBookActions;
     if (!actions?.importSharedFile) throw new Error('reader-unavailable');
     const imported = await actions.importSharedFile(file);
-    if (!imported || actions.hasSavedBook?.() !== true) throw new Error('import-not-persisted');
+    // The reader must return the persisted book ID after reading it back.
+    // A boolean from a temporary/open-only import must never delete the source.
+    if (imported?.saved !== true || !imported.id) throw new Error('import-not-persisted');
     await native().acknowledge({id:item.id});
     targetStatus.textContent = tr('Documento incorporado a TifloLector.',
       'Document saved in TifloLector.');

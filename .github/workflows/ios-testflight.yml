@@ -255,12 +255,22 @@ jobs:
           }).toString('base64url');
           const token = input+'.'+signature;
           const api = async (endpoint,options={}) => {
-            const response=await fetch('https://api.appstoreconnect.apple.com/v1/'+endpoint,{
-              ...options,headers:{Authorization:'Bearer '+token,'Content-Type':'application/json',...options.headers}
-            });
-            const body=await response.json();
-            if(!response.ok) throw Error('API de Apple '+response.status+': '+JSON.stringify(body.errors||body).slice(0,700));
-            return body;
+            const method=String(options.method||'GET').toUpperCase();
+            const retryable=new Set([429,500,502,503,504]);
+            const attempts=method==='GET'?5:1;
+            for(let attempt=1;attempt<=attempts;attempt++){
+              const response=await fetch('https://api.appstoreconnect.apple.com/v1/'+endpoint,{
+                ...options,headers:{Authorization:'Bearer '+token,'Content-Type':'application/json',...options.headers}
+              });
+              const body=await response.json();
+              if(response.ok) return body;
+              if(method==='GET' && retryable.has(response.status) && attempt<attempts){
+                console.log('Consulta Apple API temporalmente fallida (HTTP '+response.status+'); reintento '+attempt+'/'+attempts);
+                await new Promise(resolve=>setTimeout(resolve,2000*attempt));
+                continue;
+              }
+              throw Error('API de Apple '+response.status+': '+JSON.stringify(body.errors||body).slice(0,700));
+            }
           };
           const certs=await api('certificates?limit=200');
           const sha=process.env.SIGNING_SHA.replaceAll(':','').toUpperCase();
@@ -270,11 +280,12 @@ jobs:
             return new crypto.X509Certificate(Buffer.from(content,'base64')).fingerprint.replaceAll(':','').toUpperCase()===sha;
           });
           if(!cert) throw Error('El certificado P12 importado no coincide con ningún certificado vigente de Apple Developer.');
-          const bundles=await api('bundleIds?filter[identifier]=com.tifloacosta.app');
+          // Evitar la consulta filtrada que Apple devolvió como HTTP 500.
+          // Hay dos identificadores registrados: obtenerlos en una sola lectura.
+          const bundles=await api('bundleIds?limit=200');
           const bundle=bundles.data.find(x=>x.attributes.identifier==='com.tifloacosta.app');
           if(!bundle) throw Error('No existe el identificador com.tifloacosta.app en Apple Developer');
-          let extBundles=await api('bundleIds?filter[identifier]=com.tifloacosta.app.ShareExtension');
-          let extBundle=extBundles.data.find(x=>x.attributes.identifier==='com.tifloacosta.app.ShareExtension');
+          let extBundle=bundles.data.find(x=>x.attributes.identifier==='com.tifloacosta.app.ShareExtension');
           if(!extBundle) {
             const created=await api('bundleIds',{method:'POST',body:JSON.stringify({data:{
               type:'bundleIds',attributes:{name:'TifloAcosta Compartir',platform:'IOS',identifier:'com.tifloacosta.app.ShareExtension'}

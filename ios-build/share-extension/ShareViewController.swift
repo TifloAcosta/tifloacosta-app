@@ -87,6 +87,22 @@ final class ShareViewController: UIViewController {
             if type.conforms(to: .plainText) && !explicitlyNamedFile { return false }
             return true
         }
+        // WhatsApp/Safari can advertise HTML or text alongside a real web URL.
+        // Only a named document takes precedence over the source URL.
+        if !explicitlyNamedFile &&
+           provider.hasItemConformingToTypeIdentifier(UTType.url.identifier) {
+            provider.loadItem(forTypeIdentifier: UTType.url.identifier, options: nil) { [weak self] item, _ in
+                guard let self = self else { return }
+                let url = (item as? URL) ?? (item as? String).flatMap(URL.init(string:))
+                if let url = url, ["http", "https"].contains(url.scheme?.lowercased() ?? ""),
+                   url.host != nil {
+                    self.store(kind: "url", title: name, value: url.absoluteString, file: nil)
+                } else {
+                    self.finish("El enlace compartido no es válido.")
+                }
+            }
+            return
+        }
         if let identifier = selected {
             provider.loadFileRepresentation(forTypeIdentifier: identifier) { [weak self] url, _ in
                 guard let self = self else { return }
@@ -166,7 +182,13 @@ final class ShareViewController: UIViewController {
             let manifest = inbox.appendingPathComponent(id + ".json")
             let data = try JSONSerialization.data(withJSONObject: message, options: [.sortedKeys])
             try data.write(to: manifest, options: [.atomic])
-            finish("Contenido guardado. Abre TifloAcosta para importarlo a la Biblioteca.")
+            if kind == "file" {
+                finish("Documento recibido. Abre TifloAcosta y entra en TifloLector para importarlo.")
+            } else if kind == "url" {
+                finish("Enlace recibido. Abre TifloAcosta para abrirlo en la sección correspondiente.")
+            } else {
+                finish("Texto recibido. Abre TifloAcosta para decidir cómo utilizarlo.")
+            }
         } catch {
             try? manager.removeItem(at: inbox.appendingPathComponent(id + ".data"))
             finish("No se pudo guardar el contenido. Puedes volver a intentarlo.")

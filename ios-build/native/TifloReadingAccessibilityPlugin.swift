@@ -281,13 +281,31 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
                 : "Acciones de VoiceOver: deslice arriba o abajo para elegir y toque dos veces.",
             initialItemId: preferredFocusId
         )
-        controller.onSelected = { [weak self] itemId, actionId in
+        // Match the proven Videos architecture: one opaque, integrated
+        // UIKit child, not a fullscreen modal above a second accessible page.
+        // Do not hide WKWebView itself: Capacitor may host native children
+        // under its view hierarchy.
+        let navigation = UINavigationController(rootViewController: controller)
+        let previousWebAccessibility = webView?.accessibilityElementsHidden ?? false
+        navigation.view.backgroundColor = .systemBackground
+        navigation.view.isOpaque = true
+        navigation.view.accessibilityViewIsModal = true
+        let removeChild: () -> Void = { [weak self, weak navigation] in
+            if let child = navigation {
+                child.willMove(toParent: nil)
+                child.view.removeFromSuperview()
+                child.removeFromParent()
+            }
+            self?.webView?.accessibilityElementsHidden = previousWebAccessibility
             self?.nativePilotPresented = false
+        }
+        controller.onSelected = { [weak self] itemId, actionId in
+            removeChild()
             self?.suppressAutoNativeTitleId = itemId
             self?.notifyListeners("nativeListAction", data: ["itemId": itemId, "action": actionId])
         }
         controller.onClosed = { [weak self] in
-            self?.nativePilotPresented = false
+            removeChild()
             self?.suppressAutoNativeTitleId = preferredFocusId ?? ""
             self?.notifyListeners("nativeListClosed", data: ["itemId": preferredFocusId ?? ""])
         }
@@ -295,11 +313,21 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
         documentId = ""
         focusedTargetId = ""
         nativePilotPresented = true
-        let navigation = UINavigationController(rootViewController: controller)
-        navigation.modalPresentationStyle = .fullScreen
-        presenter.present(navigation, animated: true) {
-            onPresented?(entries.count)
+        presenter.addChild(navigation)
+        navigation.view.translatesAutoresizingMaskIntoConstraints = false
+        presenter.view.addSubview(navigation.view)
+        NSLayoutConstraint.activate([
+            navigation.view.leadingAnchor.constraint(equalTo: presenter.view.leadingAnchor),
+            navigation.view.trailingAnchor.constraint(equalTo: presenter.view.trailingAnchor),
+            navigation.view.topAnchor.constraint(equalTo: presenter.view.topAnchor),
+            navigation.view.bottomAnchor.constraint(equalTo: presenter.view.bottomAnchor)
+        ])
+        presenter.view.bringSubviewToFront(navigation.view)
+        if let web = webView, !navigation.view.isDescendant(of: web) {
+            web.accessibilityElementsHidden = true
         }
+        navigation.didMove(toParent: presenter)
+        onPresented?(entries.count)
     }
 
     // Read-only state query; unlike registerAccessibleTargets this does not
@@ -432,16 +460,15 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
     @objc public func dismissNativeActionList(_ call: CAPPluginCall) {
         DispatchQueue.main.async {
             guard let presenter = self.bridge?.viewController,
-                  let navigation = presenter.presentedViewController as? UINavigationController,
-                  navigation.topViewController is TifloNativeActionListController else {
+                  let list = presenter.children.compactMap({
+                      ($0 as? UINavigationController)?.topViewController
+                          as? TifloNativeActionListController
+                  }).first else {
                 call.resolve(["dismissed": false])
                 return
             }
-            navigation.dismiss(animated: false) {
-                self.nativePilotPresented = false
-                self.notifyListeners("nativeListClosed", data: ["itemId": ""])
-                call.resolve(["dismissed": true])
-            }
+            list.closeFromHost()
+            call.resolve(["dismissed": true])
         }
     }
 

@@ -134,8 +134,12 @@ function sharedFileHarness({canSave = true} = {}) {
     TifloIOSBookActions: {
       async importSharedFile() {
         imports++;
-        if (!canSave) done();
-        return canSave;
+        if (canSave !== true) done();
+        return canSave === true
+          ? {saved:true, id:'new-saved-epub'}
+          : canSave === 'unverified'
+            ? true
+            : {saved:false, reason:'readback-failed'};
       },
       hasSavedBook() { return canSave; }
     },
@@ -181,4 +185,19 @@ test('si falla el guardado EPUB, conserva la entrada en la bandeja y no confirma
   assert.deepEqual(app.state(), {
     imports:1, acknowledgements:0, remaining:1, hash:'#reading'
   });
+});
+
+test('el retorno antiguo de importación sin ID verificable no elimina el EPUB', async () => {
+  const app = sharedFileHarness({canSave:'unverified'});
+  await app.tap();
+  assert.deepEqual(app.state(), {
+    imports:1, acknowledgements:0, remaining:1, hash:'#reading'
+  });
+});
+
+test('el puente iOS comprueba lectura real del libro después de importar', () => {
+  const packer = readFileSync(new URL('../prepare-web.mjs', import.meta.url), 'utf8');
+  assert.match(packer, /const imported = await importSelectedFile\(\)/);
+  assert.match(packer, /const persisted = await libraryClient\.openBook\(id\)/);
+  assert.match(packer, /return \{ saved:true, id \}/);
 });

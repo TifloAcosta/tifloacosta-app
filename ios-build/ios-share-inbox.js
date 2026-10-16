@@ -59,8 +59,13 @@
       const reader = window.TifloIOSBookActions;
       if (!reader?.importSharedFile) throw new Error('reader-unavailable');
       const imported = await reader.importSharedFile(file);
-      if (!imported) throw new Error('import-failed');
-      // Never acknowledge on a failed or interrupted import.
+      // Importing into the reader is not the same as saving in the Library.
+      // The reader can open a file temporarily when local storage is full.
+      // Keep the App Group original until the reader reports a saved book.
+      if (!imported || reader.hasSavedBook?.() !== true) {
+        throw new Error('import-not-persisted');
+      }
+      // Only remove the staging copy after the Library has persisted the book.
       await plugin().acknowledge({ id: item.id });
       status.textContent = translate('Contenido importado en TifloLector.',
         'Content imported into TifloLector.');

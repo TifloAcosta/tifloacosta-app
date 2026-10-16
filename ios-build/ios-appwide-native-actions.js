@@ -407,7 +407,19 @@
     }
   }
 
+  // Generic full-screen UIKit lists obscured the real design of TifloLector,
+  // Recursos and other sections. Keep only the dedicated branded Videos screen.
+  // Existing HTML focus targets retain their native VoiceOver custom actions.
+  const inlineNativeCollections = true;
   async function refresh() {
+    if (inlineNativeCollections) {
+      const info = scope();
+      menuItems.clear();
+      collection.clear();
+      currentSource = info;
+      if (info) gather(info); // Preserve optional native context menus on touch.
+      return;
+    }
     if (refreshing || nativeOpen || awaitingNative) return;
     const api = native();
     if (!api?.showNativeActionList || !api?.getVoiceOverStatus) return;

@@ -160,3 +160,10 @@ Origen verificado: rama preparacion-ios, integración PR #196, merge fb8228f2e56
 Contenidos: control ajustable por VoiceOver con etiqueta y valor visibles; biblioteca en filas compactas con un solo título accionable; ajustes de lectura sin alterar web ni Android; Share Extension nativa para enlaces, texto y documentos recibidos mediante App Group group.com.tifloacosta.app, más bandeja de entrada de TifloLector.
 Seguridad y firma: comprobación de App Groups real 38913977894 SUCCESS (ambos identificadores autorizados); preflight 38913976528 SUCCESS; compilación Share Extension sin firma 38913977296 SUCCESS. Las firmas y perfiles definitivos se generan y comprueban al publicar; abortar si falta autorización o extensión embebida.
 Preservar datos y preferencias; no desinstalar la versión actual. Enviar exclusivamente a Probadores TifloAcosta. No afirmar que se ha corregido la presentación de Vídeos hasta comprobarla físicamente en el iPhone. Confirmar Apple VALID y asignación interna antes de notificar por correo a tonytenerife@gmail.com.
+
+
+REINTENTO EXPRESO DE PUBLICACIÓN — FALLO TEMPORAL DE APPLE API — 16/10/2026.
+La ejecución de publicación #94 (38914391011) falló en la API de Apple, código 500, al consultar bundleIds; el segundo intento también falló en la misma consulta.
+El código iOS de TifloLector, interfaz y Compartir aprobado previamente se conserva. Se corrigió exclusivamente el flujo de firma/publicación: consultar ambos Bundle IDs en una lectura documentada y reintentar de forma limitada las consultas GET ante errores temporales, sin repetir operaciones de creación.
+Autorización: enviar la misma actualización al grupo interno «Probadores TifloAcosta», con número de compilación nuevo. No alterar Android, web ni datos locales, ni afirmar disponibilidad antes de Apple VALID y asignación interna.
+Avisar por correo a tonytenerife@gmail.com solo tras confirmación de disponibilidad real en TestFlight.

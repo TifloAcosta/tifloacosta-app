@@ -11,6 +11,8 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
     public let jsName = "TifloReadingAccessibility"
     public let pluginMethods: [CAPPluginMethod] = [
         CAPPluginMethod(name: "pickDocument", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "listSharedItems", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "acknowledgeSharedItem", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "setDocumentActions", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "registerLibraryTitles", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "registerAccessibleTargets", returnType: CAPPluginReturnPromise),
@@ -20,6 +22,62 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
         CAPPluginMethod(name: "getVoiceOverStatus", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "showNativeContextMenu", returnType: CAPPluginReturnPromise)
     ]
+
+    // The Share Extension stores a small, private queue in the App Group.
+    // Never delete incoming data until JavaScript confirms successful import.
+    private func shareInbox() -> URL? {
+        guard let root = FileManager.default.containerURL(
+            forSecurityApplicationGroupIdentifier: "group.com.tifloacosta.app") else { return nil }
+        return root.appendingPathComponent("TifloInbox", isDirectory: true)
+    }
+
+    @objc public func listSharedItems(_ call: CAPPluginCall) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            guard let dir = self.shareInbox() else {
+                call.reject("El grupo de aplicaciones compartido no está habilitado.")
+                return
+            }
+            let entries = (try? FileManager.default.contentsOfDirectory(
+                at: dir, includingPropertiesForKeys: nil)) ?? []
+            var items: [[String: String]] = []
+            for url in entries.filter({ $0.pathExtension == "json" }).sorted(by: {
+                $0.lastPathComponent < $1.lastPathComponent
+            }).prefix(30) {
+                guard let bytes = try? Data(contentsOf: url),
+                      let item = try? JSONSerialization.jsonObject(with: bytes) as? [String: String],
+                      let id = item["id"], UUID(uuidString: id) != nil,
+                      id + ".json" == url.lastPathComponent,
+                      let kind = item["kind"], ["file", "text", "url"].contains(kind) else { continue }
+                var result: [String: String] = ["id": id, "kind": kind, "name": item["name"] ?? "Compartido"]
+                if let value = item["text"] { result["text"] = value }
+                if let name = item["file"], name.hasPrefix(id + "."),
+                   !name.contains("/") && !name.contains("\\"),
+                   FileManager.default.fileExists(atPath: dir.appendingPathComponent(name).path) {
+                    result["uri"] = dir.appendingPathComponent(name).absoluteString
+                    result["filename"] = name
+                }
+                if kind != "file" || result["uri"] != nil { items.append(result) }
+            }
+            call.resolve(["items": items])
+        }
+    }
+
+    @objc public func acknowledgeSharedItem(_ call: CAPPluginCall) {
+        guard let id = call.getString("id"), UUID(uuidString: id) != nil,
+              let dir = shareInbox() else { call.reject("Invalid item"); return }
+        let manifest = dir.appendingPathComponent(id + ".json")
+        guard let data = try? Data(contentsOf: manifest),
+              let metadata = try? JSONSerialization.jsonObject(with: data) as? [String: String],
+              metadata["id"] == id else { call.reject("Unknown shared item"); return }
+        if let name = metadata["file"], name.hasPrefix(id + "."),
+           !name.contains("/") && !name.contains("\\") {
+            try? FileManager.default.removeItem(at: dir.appendingPathComponent(name))
+        }
+        do {
+            try FileManager.default.removeItem(at: manifest)
+            call.resolve(["acknowledged": true])
+        } catch { call.reject("Could not acknowledge shared item") }
+    }
 
     private var pendingPicker: CAPPluginCall?
     private var lastPickedCopy: URL?

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { runInNewContext } from 'node:vm';
 
-const script = readFileSync('ios-build/ios-share.js', 'utf8');
+const script = readFileSync(new URL('../ios-build/ios-share.js', import.meta.url), 'utf8');
 function bridge(plugin) {
   const window = { Capacitor: plugin ? { Plugins: { Share: plugin } } : {} };
   runInNewContext(script, { window, URL });
@@ -46,8 +46,8 @@ test('Errores y ausencia de componente nativo se notifican sin simular éxito', 
 });
 
 test('La integración se limita al empaquetado iOS', () => {
-  const prepare = readFileSync('ios-build/prepare-web.mjs', 'utf8');
-  const dependencies = JSON.parse(readFileSync('ios-build/package.json', 'utf8'));
+  const prepare = readFileSync(new URL('../ios-build/prepare-web.mjs', import.meta.url), 'utf8');
+  const dependencies = JSON.parse(readFileSync(new URL('../ios-build/package.json', import.meta.url), 'utf8'));
   assert.equal(dependencies.dependencies['@capacitor/share'], '^7.0.0');
   assert.ok(prepare.includes("join(root, 'ios-build/ios-share.js')"));
   assert.ok(prepare.includes('<script src="ios-share.js"></script>'));

@@ -381,12 +381,21 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
             let webTheme = call.getObject("theme") as? [String: String] ?? [:]
             let screen = TifloNativeVideosController(videos: videos, theme: webTheme)
             let navigation = UINavigationController(rootViewController: screen)
+            // The HTML WKWebView remains alive as the app's stateful root,
+            // but must NOT be a second visible/accessible screen behind UIKit.
+            let webWasHidden = self.webView?.isHidden ?? false
+            let webAccessibilityWasHidden = self.webView?.accessibilityElementsHidden ?? false
+            navigation.view.accessibilityViewIsModal = true
             screen.onClosed = { [weak self, weak navigation] in
                 if let navigation = navigation {
                     navigation.willMove(toParent: nil)
                     navigation.view.removeFromSuperview()
                     navigation.removeFromParent()
                 }
+                // Restore precisely the previous web state before notifying JS;
+                // it restores focus to the Videos entry on the home screen.
+                self?.webView?.isHidden = webWasHidden
+                self?.webView?.accessibilityElementsHidden = webAccessibilityWasHidden
                 self?.nativePilotPresented = false
                 self?.notifyListeners("nativeVideoClosed", data: [:])
             }
@@ -395,6 +404,9 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
             presenter.addChild(navigation)
             navigation.view.translatesAutoresizingMaskIntoConstraints = false
             presenter.view.addSubview(navigation.view)
+            // A single accessibility and visual hierarchy while Videos is open.
+            self.webView?.accessibilityElementsHidden = true
+            self.webView?.isHidden = true
             NSLayoutConstraint.activate([
                 navigation.view.leadingAnchor.constraint(equalTo: presenter.view.leadingAnchor),
                 navigation.view.trailingAnchor.constraint(equalTo: presenter.view.trailingAnchor),

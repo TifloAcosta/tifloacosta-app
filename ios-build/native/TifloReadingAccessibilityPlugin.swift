@@ -381,10 +381,12 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
             let webTheme = call.getObject("theme") as? [String: String] ?? [:]
             let screen = TifloNativeVideosController(videos: videos, theme: webTheme)
             let navigation = UINavigationController(rootViewController: screen)
-            // The HTML WKWebView remains alive as the app's stateful root,
-            // but must NOT be a second visible/accessible screen behind UIKit.
-            let webWasHidden = self.webView?.isHidden ?? false
+            // Capacitor may host this UIKit child beneath its WKWebView.
+            // Hiding the web view can also hide Videos, leaving only the status bar.
+            // Keep the underlying web screen alive and cover it with opaque UIKit.
             let webAccessibilityWasHidden = self.webView?.accessibilityElementsHidden ?? false
+            navigation.view.backgroundColor = screen.view.backgroundColor ?? .black
+            navigation.view.isOpaque = true
             navigation.view.accessibilityViewIsModal = true
             screen.onClosed = { [weak self, weak navigation] in
                 if let navigation = navigation {
@@ -392,9 +394,8 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
                     navigation.view.removeFromSuperview()
                     navigation.removeFromParent()
                 }
-                // Restore precisely the previous web state before notifying JS;
-                // it restores focus to the Videos entry on the home screen.
-                self?.webView?.isHidden = webWasHidden
+                // Restore the previous WebKit accessibility state before JS
+                // moves VoiceOver back to the Videos link on the home screen.
                 self?.webView?.accessibilityElementsHidden = webAccessibilityWasHidden
                 self?.nativePilotPresented = false
                 self?.notifyListeners("nativeVideoClosed", data: [:])
@@ -404,15 +405,20 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
             presenter.addChild(navigation)
             navigation.view.translatesAutoresizingMaskIntoConstraints = false
             presenter.view.addSubview(navigation.view)
-            // A single accessibility and visual hierarchy while Videos is open.
-            self.webView?.accessibilityElementsHidden = true
-            self.webView?.isHidden = true
             NSLayoutConstraint.activate([
                 navigation.view.leadingAnchor.constraint(equalTo: presenter.view.leadingAnchor),
                 navigation.view.trailingAnchor.constraint(equalTo: presenter.view.trailingAnchor),
                 navigation.view.topAnchor.constraint(equalTo: presenter.view.topAnchor),
                 navigation.view.bottomAnchor.constraint(equalTo: presenter.view.bottomAnchor)
             ])
+            // The opaque native child must cover the HTML page, not hide the
+            // WKWebView hosting it. Bring it in front of other root subviews.
+            presenter.view.bringSubviewToFront(navigation.view)
+            // Do not hide accessibility on an ancestor of navigation.view;
+            // doing so would also remove every native Videos rotor action.
+            if let web = self.webView, !navigation.view.isDescendant(of: web) {
+                web.accessibilityElementsHidden = true
+            }
             navigation.didMove(toParent: presenter)
             call.resolve(["presented": true, "count": videos.count])
         }

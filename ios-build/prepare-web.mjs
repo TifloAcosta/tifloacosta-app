@@ -439,6 +439,10 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
   const path = join(output, name);
   let html = await readFile(path, 'utf8');
   if (!html.includes('</head>')) throw new Error('Falta el cierre de cabecera: ' + name);
+  // iPhone: take charge of status bar and home indicator safe areas only
+  // inside the packaged iOS shell, never on the public website.
+  html = html.replace('width=device-width, initial-scale=1',
+    'width=device-width, initial-scale=1, viewport-fit=cover');
   html = html.replace('</head>', iosOverrides + '\n</head>');
   if (name === 'index.html') {
     html = html.replace('</head>', '<link rel="stylesheet" href="ios-reader-presentation.css">\n</head>');

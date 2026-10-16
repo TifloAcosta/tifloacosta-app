@@ -1,5 +1,17 @@
 [
   {
+    "id": "buscaapps-55e2d4169e03c286",
+    "title": "SPG BW",
+    "sourceId": "buscaapps",
+    "sourceName": "BuscaApps",
+    "sourceUrl": "https://www.buscaapps.com/",
+    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1251",
+    "lang": "es",
+    "platform": "Windows",
+    "summary": "Sintetizador musical VST para Windows mediante archivo DLL",
+    "publishedAt": null
+  },
+  {
     "id": "buscaapps-340a79d460e20512",
     "title": "ImageType | Accessible Editor",
     "sourceId": "buscaapps",
@@ -108,18 +120,6 @@
     "publishedAt": null
   },
   {
-    "id": "buscaapps-60e7e1e4b4f55b2e",
-    "title": "PingKit - Network Tools",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1240",
-    "lang": "es",
-    "platform": "iOS",
-    "summary": "Analizador de red y Wi-Fi para iPhone, iPad y Apple Watch",
-    "publishedAt": null
-  },
-  {
     "id": "applevis-apps-aef93ab730feefe4",
     "title": "Decant: Color Sort Puzzle",
     "sourceId": "applevis-apps",
@@ -212,7 +212,7 @@
     "originalUrl": "https://www.applevis.com/apps/ios/games/word-tack",
     "lang": "en",
     "platform": "Apple",
-    "summary": "Sort scattered words into their hidden groups in Word Tack, a cozy word puzzle with a handmade feel: washi tape, typewriter labels and paper tiles that look cut out by hand. Every puzzle hides eight groups of five words. Drag tiles between rows, and when a row holds all five words of a group, it's sealed and its category is revealed. There's no timer and no penalty for a wrong guess, so take your time. PLAY YOUR WAY • A growing campaign of handcrafted levels, from everyday categories to clever wordplay and real head-scratchers, with more added in updates • Every level is marked easy, medium or hard • A Daily Puzzle to play each day, with shareable emoji results and a streak to keep GENTLE HELP WHEN YOU'RE STUCK • Inklings link two words from the same group • Clues reveal the names of up to three groups • Solve a puzzle without help to earn all three stars MAKE THE DESK YOUR OWN • Earn stamps as you play • Spend them in the shop on washi tape, tile styles, row seals, desk backgrounds and confetti, including dazzling gold and holographic finishes MADE WITH CARE • Satisfying sounds, gentle haptics and a soft soundtrack, each with its own setting • Statistics, star ratings and daily streaks to track your progress • Works with VoiceOver: hear when rows are solved and where each tile sits on the board • A Reduce Motion setting for calmer play • No ads, no in-app purchases and no account needed. Works offline.",
+    "summary": "Sort scattered words into their hidden groups in Word Tack, a cozy word puzzle with a handmade feel: washi tape, typewriter labels and paper tiles that look cut out by hand. Every puzzle hides eight groups of five words. Drag tiles between rows, or tap two tiles to swap them. When a row holds all five words of a group, it’s sealed and its category is revealed. There’s no timer and no penalty for a wrong guess, so take your time. PLAY YOUR WAY • A growing campaign of handcrafted levels, from everyday categories to clever wordplay and real head-scratchers, with more added in updates • Every level is marked easy, medium or hard • A Daily Puzzle to play each day, with shareable emoji results and a streak to keep GENTLE HELP WHEN YOU’RE STUCK • Inklings link two words from the same group • Clues reveal the names of up to three groups • Solve a puzzle without help to earn all three stars MAKE THE DESK YOUR OWN • Earn stamps as you play • Spend them in the shop on washi tape, tile styles, row seals, desk backgrounds and confetti, including dazzling gold and holographic finishes MADE WITH CARE • Satisfying sounds, gentle haptics and a soft soundtrack, each with its own setting • Statistics, star ratings and daily streaks to track your progress • Works with VoiceOver: double-tap two cards to swap them, and hear when rows are solved and where each card sits on the board • A Reduce Motion setting for calmer play • No ads, no in-app purchases and no account needed. Works offline.",
     "publishedAt": "2026-10-11T06:14:34.000Z"
   },
   {

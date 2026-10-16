@@ -1,5 +1,104 @@
 [
   {
+    "id": "9to5mac-8e3a816aee582d22",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/15/apple-lists-unreleased-ipad-mini-accessory-ahead-of-rumored-launch/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-16T00:49:10.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple lists unreleased iPad mini accessory ahead of rumored launch",
+        "summary": "While Apple is rumored to be gearing up to introduce an OLED iPad mini later this month, an oversight on the company’s French site might have just confirmed the product’s existence. Here are the details. more…",
+        "body": "While Apple is rumored to be gearing up to introduce an OLED iPad mini later this month, an oversight on the company’s French site might have just confirmed the product’s existence. Here are the details.\n\nAs spotted by MacRumors , Apple’s French regulatory website currently lists a Smart Folio for iPad mini with the model number A3632, which doesn’t correspond to any existing products.\n\nThe regulatory document is dated September 8, 2026, although it’s unclear when Apple actually added the listing to its website.\n\nCompared with the Smart Folio for iPad mini (6th generation), whose regulatory document is dated December 22, 2022, the unreleased accessory has some notable differences.\n\nAccording to Apple’s documentation, the new Smart Folio contains at least 3% recycled materials, compared with a minimum of 9% in the current model. It also contains at least 6,610 milligrams of rare earth elements, compared with 3,947 milligrams in the previous version , which could indicate changes to the magnets used to attach the cover to the iPad.\n\nWhile these figures don’t reveal anything specific about the accessory’s design, the fact that Apple has assigned it a new model number suggests that changes may be coming.\n\nFor context, the sixth- and seventh-generation iPad mini models are compatible with the same Smart Folio, so a new accessory could indicate that the upcoming model will feature physical changes that affect case compatibility.\n\nThe next-gen iPad mini is rumored to feature an OLED display, Apple’s A20 Pro chip, thinner bezels, a relocated front-facing camera, and a redesigned speaker system. Bloomberg has also reported that Apple is working on a more water-resistant design, while recent rumors suggest the device could cost considerably more than its predecessor.\n\nThere are currently conflicting reports on whether the new iPad mini will retain a 60Hz refresh rate or gain support for 120Hz ProMotion.\n\nWhile previous reports had left the possibility of ProMotion open, leaker yeux1122 recently reiterated that the device will be limited to a 60Hz OLED display.\n\nAccording to Bloomberg ’s Mark Gurman , Apple has indeed tested both options, but he hasn’t been able to confirm which one the company ultimately chose.\n\nTo see the regulatory listing for yourself (at least while it remains available on Apple’s website), follow this link ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-f534972083476050",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/15/when-it-came-to-cal-ais-viral-success-a-small-army-of-influencers-paid-off/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-15T23:44:56.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "When it came to Cal AI’s viral success, a small army of influencers paid off",
+        "summary": "The company generated over $30 million in revenue in two years and was acquired by MyFitnessPal for an undisclosed amount of money in March.",
+        "body": "Zach Yadegari has enjoyed an immense amount of success for someone who only recently graduated from high school. Founder of the AI-fueled calorie tracking app Cal AI, Yadegari is only 19 but his company has rocketed to viral fame over the past two years. At TechCrunch Disrupt on Thursday, Yadegari shared details of that surprising rise to prominence.\n\nCal AI, which was founded in 2024, exploded onto the internet thanks largely to Yadegari’s strategy of deploying a small army of influencers to promote the brand. The company generated over $30 million in revenue in two years and was acquired by MyFitnessPal for an undisclosed amount of money in March.\n\nDiscussing his social strategy onstage, Yadegari noted that an early sign of success came when an influencer’s post about them led to approximately a thousand new users over the course of two days.\n\n“From there, we figured out, okay, this can actually work for us, and so we started recruiting influencers as fast as we could — paying as many people as possible to start posting for us,” he said. “What we saw was that it was a clear formula. It was pretty linear, but it was extremely fast. I guess linear in the sense that every post they did would get a certain number of viewers that would convert.”\n\nThe Forbes 30 Under 30 alumnus told the audience that part of his company’s strategy was to negotiate rates with influencers, promising them certain payouts for a certain scale of reach. A lot of influencers are “broke college kids” who “just want cash,” Yadegari added. “You just ask them, okay, we’ll pay you this, but we need to get us at least this amount of use and keep posting until you get there.”\n\nAnother important component of success was finding the right influencers whose reach can be quantified. “The biggest thing for us was finding influencers that had very tight communities,” the founder said.\n\nYadegari, whose father was in the audience, also credited his family with giving him the freedom to go after his ambitions. Does he also credit higher education for his success? Not so much.\n\n“I think the only real reason to go to college is if you want to have a fun social time as a kid and be with other people,” he said, to audience laughter.\n\nEarlier this month, Yadegari also launched Persona, a new AI agent startup that has already raised $10 million .\n\nYadegari said the “overarching mission” with Persona is to “make computing seamless with human life.” The company’s personal AI assistant will “live anyplace with internet connection,” he said, including “iMessage, app, email, phone call.” He added that part of what distinguishes the company’s plans for this AI assistant is to build a “hardware ecosystem around” the app."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-f519bf6ee1059520",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1012510/openai-chatgpt-google-chrome-tabs",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-15T22:43:23.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apps-accesibles",
+      "programas-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "ChatGPT can peek at your Chrome tabs now",
+        "summary": "OpenAI's ChatGPT Atlas browser is gone, but now ChatGPT's Google Chrome extension is getting some upgrades that allow it to use the browser tabs you already have open. With the extension installed, OpenAI says ChatGPT can now view your browser tabs when you tag Chrome in ChatGPT's web or desktop app, posting a demo video […]",
+        "body": "OpenAI's ChatGPT Atlas browser is gone , but now ChatGPT's Google Chrome extension is getting some upgrades that allow it to use the browser tabs you already have open. With the extension installed, OpenAI says ChatGPT can now view your browser tabs when you tag Chrome in ChatGPT's web or desktop app, posting a demo video showing someone asking ChatGPT to compare the three tabs they have open with sofas they're considering.\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "freedom-scientific-blog-4c387fa23ee8077b",
+    "type": "news",
+    "sourceId": "freedom-scientific-blog",
+    "sourceName": "Freedom Scientific",
+    "sourceUrl": "https://blog.freedomscientific.com/",
+    "originalUrl": "https://training.vispero.com/from-word-to-teams-using-zoomtext-and-fusion-across-your-workday/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-15T22:42:48.000Z",
+    "categories": [
+      "windows",
+      "tecnologia-accesibilidad",
+      "jaws"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "From Word to Teams: Using ZoomText and Fusion Across Your Workday",
+        "summary": "ZoomText and Fusion are powerful accessibility tools designed for people with low vision. ZoomText is a screen magnifier and reader, while Fusion combines all of ZoomText’s features with the full JAWS screen reader, offering both magnification and speech. Since October is National Disability Employment Awareness Month, we want to take this opportunity to spotlight powerful …",
+        "body": "ZoomText and Fusion are powerful accessibility tools designed for people with low vision. ZoomText is a screen magnifier and reader, while Fusion combines all of ZoomText’s features with the full JAWS screen reader, offering both magnification and speech.\n\nSince October is National Disability Employment Awareness Month, we want to take this opportunity to spotlight powerful features of ZoomText and Fusion that will help you be more productive in the workplace. This blog series will run throughout October, with a new post every Thursday featuring helpful information and practical tips to make the most of ZoomText and Fusion as you work.\n\nFor many professionals, the workday is a journey through Microsoft Office and a variety of collaboration tools. Whether you’re writing, analyzing data, managing emails, or joining virtual meetings, having ZoomText or Fusion set up to support your workflow can make all the difference. This week, we’ll look at how these tools can help you work more efficiently and comfortably, from your first document to your last video call.\n\nDrafting reports or editing proposals is easier when you can see exactly what you need. With ZoomText, you can quickly adjust your magnification level or switch between different zoom window types—like Lens or Line view—to focus on the text that matters most. For longer documents, AppReader is a helpful feature: just press CAPS LOCK+ALT+A to have the text read aloud, letting you follow along visually or simply listen and rest your eyes.\n\nFusion users can also take advantage of JAWS navigation commands, such as jumping between headings or moving by paragraph, to quickly scan and organize content. To jump by heading, first turn on Quick Navigation keys by pressing CAPS LOCK+Z , then press H to navigate forward through headings or SHIFT+H to navigate backward. Press P to navigate forward by paragraph and SHIFT+P to navigate backward. Press CAPS LOCK+Z to toggle Quick Navigation keys off again so you can continue editing your document.\n\nKeyboard Echo is another useful feature, giving you spoken feedback as you type, so you can be sure your edits are accurate.\n\nTo cycle through the different Keyboard Echo settings, press CAPS LOCK+ALT+K . The setting No Echo disables all keyboard echo. Keys will echo your keystrokes as you type. Words will echo individual words as you type them. And Keys and Words will echo both keystrokes and words as you type.\n\nSpreadsheets can be intimidating, but ZoomText’s magnification tools help you zero in on the data you need. Adjust your zoom to see more or less of your sheet and use Reading Zones to mark important areas—like totals or headers—so you can return to them instantly.\n\nA reading zone is a defined area of an application window that ZoomText can display, speak, or both, at the press of a hotkey. To create a reading zone, press CAPS LOCK+ALT+C , then drag a rectangle over the area of the application window you want the zone to cover. To trigger a reading zone, press CAPS LOCK+ALT+ the zone’s number (1 through 9, or 0 for zone 10).\n\nFusion users can rely on JAWS table navigation to move efficiently through rows and columns, with commands like CAPS LOCK+C to read the current cell, helping you keep your place in complex data.\n\nStaying on top of emails and appointments is simple with the right tools. AppReader lets you listen to long emails, while Focus Enhancements in ZoomText highlight your current selection, making it easier to track where you are.\n\nAppReader reads documents, web pages, and email aloud while you follow along or rest your eyes. It can read from beginning to end, skim forward and backward, or read just the text you select with the mouse. AppReader reads text aloud in three modes: App View reads directly in the source application without changing your view, Text View reformats the text with your choice of fonts, colors, and magnification for easier reading, and the SpeakIt Tool reads any text on the screen that you select by clicking and dragging. Press CAPS LOCK+ALT+A to launch App View. Press CAPS LOCK+ALT+T to launch Text View. Press CAPS LOCK+ALT+S to launch the SpeakIt Tool.\n\nFocus enhancements highlight the item you are on as you navigate using the Tab and arrow keys through menus, dialogs, and toolbars, making it easy to keep your place. Press CAPS LOCK+F to toggle focus enhancements on and off.\n\nFusion users can use commands like CTRL+N to create a new message, CTRL+R to reply to a message, or CTRL+F to forward a message. You can also switch to different areas in Outlook with quick shortcuts like CTRL+1 to go to your current mail folder, CTRL+2 to navigate to the calendar, and CTRL+3 to go to Contacts.\n\nWhether you’re building slides or presenting to your team, ZoomText’s flexible magnification ensures you can see every detail. AppReader can read slide content aloud, making it easier to review your work or follow along during a presentation. Fusion users can use the arrow keys with JAWS to navigate slides and read speaker notes, so you’re always prepared and in control. Press F6 in PowerPoint to navigate the different areas of your presentation.\n\nToday’s workplace relies on video conferencing apps like Microsoft Teams, Zoom, and Google Meet. With ZoomText and Fusion, you can adjust your magnification to follow chat messages, participant panels, and shared screens during meetings. AppReader and JAWS speech help you keep up with notifications and chat without missing a beat.\n\nA standout feature for video calls is Face-in-View . Before joining a meeting, open the Face-in-View tool in Fusion by pressing INSERT+SPACE, F , then O . This feature uses your webcam to show you a live preview and provides feedback to help you center your face and check your lighting—so you can join every call looking your best and feeling confident.\n\nJoin us next week as we explore how ZoomText and Fusion can help you access more online, making web browsing and digital resources easier and more accessible. Stay tuned for more tips to help you thrive in your workplace!\n\nHave questions? Email training@vispero.com .\n\nWith the right setup and a few helpful features, ZoomText and Fusion can empower you to work smarter and more comfortably, every step of the way."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "9to5mac-276afe290854f4f7",
     "type": "news",
     "sourceId": "9to5mac",
@@ -70,30 +169,6 @@
         "title": "Apple Sports update improves Live Activity support, adds soccer leagues from around the world",
         "summary": "Apple updated its Apple Sports app today with improvements to Live Activities and support for five additional soccer leagues. Here are the details. more…",
         "body": "Apple updated its Apple Sports app today with improvements to Live Activities and support for five additional soccer leagues. Here are the details.\n\nThe Apple Sports app has been receiving updates at a steady pace lately, bringing support for more leagues and sports, along with deeper integration with iOS features.\n\nToday’s update to version 4.5 continues that trend, adding support for five soccer competitions from around the world:\n\nAdditionally, the app’s Live Activities can now display key game statistics during breaks in the action across leagues, which Apple says will help users “stay even closer to the game at a glance.”\n\nHere’s Apple’s full release notes for Apple Sports 4.5:\n\nTo check out and download Apple Sports from the App Store, follow this link ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-76df682d70de1dd8",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/15/idc-apple-closes-in-on-samsung-as-global-smartphone-shipments-see-record-decline-in-q3/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-15T20:35:49.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "IDC: Apple closes in on Samsung as global smartphone shipments see record decline in Q3",
-        "summary": "In a report published today, IDC says Apple saw a 4% year-over-year decline in global iPhone shipments during Q3 2026, but its share of worldwide smartphone shipments increased 23.1% over the same period last year. Here’s why. more…",
-        "body": "In a report published today, IDC says Apple saw a 4% year-over-year decline in global iPhone shipments during Q3 2026, but its share of worldwide smartphone shipments increased 23.1% over the same period last year. Here’s why.\n\nIDC says its preliminary data on global smartphone shipments for Q3 2026 show a 22% drop compared to Q3 2025, which is in line with other regional and global trends reported recently.\n\nThe culprit, as even occasional 9to5Mac readers are likely well aware by now, is the ongoing memory shortage, which has sent component costs soaring and squeezed device manufacturers, particularly those competing in lower-end markets.\n\nAccording to IDC, Samsung remained atop the ranking with 57.8 million units shipped and a 22.6% share, down 5.8% from the year-ago period. Apple came in second with 57.3 million shipped units, followed by Xiaomi, OPPO, and vivo.\n\nThe report shows OPPO seeing the biggest drop among the top five, with shipments down 34.5% year over year, and Apple recording the smallest decline at 4%. This left Apple just 500,000 units behind Samsung, with a gap of only 0.2 percentage points in shipment share.\n\nCommenting on these numbers, Nabila Popal, IDC’s senior research director for Worldwide Devices, said things might get worse before they get better:\n\n“The sharp downturn the industry has been bracing for finally materialized in the third quarter this year, with shipments declining a record 22% YoY. However, the worst is yet to come. […] Current indicators suggest that the market has not yet reached the bottom. Memory costs have surged approximately 350% since last year and are still rising, creating substantial pressure on vendor margins and shipments. While memory inflation is beginning to slow down, with a low double-digit sequential increase in Q3 compared to roughly 50%-100% sequential growth in prior quarters, costs remain elevated across other critical components as well, compounding the crunch.”\n\nToday’s report came just two days after IDC released preliminary results for the Chinese smartphone market, where Apple’s share of shipments increased from 15.8% to 17.8%, despite a 4.3% year-over-year decline in iPhone shipments.\n\nTo read IDC’s full report on global smartphone shipments for Q3 2026, follow this link ."
       }
     },
     "media": null
@@ -173,30 +248,6 @@
     "media": null
   },
   {
-    "id": "techcrunch-aaac5f2508642cb2",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/15/anthropic-is-letting-metr-researchers-look-under-the-hood-with-employee-level-access/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-15T19:14:26.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Anthropic is letting METR researchers look under the hood with employee-level access",
-        "summary": "METR will publish its own assessments of Anthropic’s risks, incidents, and practices, and the frontier AI model maker has given up the right to block them.",
-        "body": "Anthropic is giving employee-level access to six researchers from METR , a nonprofit that tests frontier AI models, to independently assess Anthropic’s models, safety practices, and risk management, the company said in a blog post on Thursday.\n\nThe arrangement comes at a time where incidents of AI agents acting outside their instructions have been disclosed every week or two since late August. The incidents have sharpened calls for independent checks on AI companies.\n\n“We want to be publicly accountable for the decisions we’re making,” Anthropic said in the blog post. “We aim to close the gap between what evaluators understand about a frontier AI company’s systems and what the company itself understands.”\n\nUnder the new arrangement, the METR team has Anthropic-issued company laptops, office space, and access to internal tools roughly on par with what Anthropic’s own risk assessment teams use. “Anthropic employees are encouraged to share information with them just as they would with a fellow employee working on alignment risk” the company said.\n\nAnthropic compared the arrangement to banking, similar to how regulators place resident examiners inside the largest banks.\n\nMETR will publish its own assessments of Anthropic’s risks, incidents, and practices, and the company has given up the right to block them.\n\n“Anthropic can’t veto publication, but we can require them to redact information if it falls into narrow, pre-defined categories,” the company said, such as customer data, anything attorney-client privileged, or relating to information about its model architectures. “METR is free to characterize our redactions publicly, and say whether it believes the redactions were justified, as long as it does so without revealing the redacted information” Anthropic added.\n\nMETR is the only evaluator so far at the top of a three-tier system Anthropic is building. Evaluators in the bottom tier, like biosecurity nonprofit SecureBio, run narrow reviews and require Anthropic’s approval to publish. The middle tier gets more information and can publish without approval, while the top tier adds METR’s employee-level access.\n\nThursday’s announcement makes good on a promise Anthropic CEO Dario Amodei made in a September essay , where he proposed embedding outside evaluators inside AI labs as a first step toward slowing the technology’s development. OpenAI quickly pledged the same , and both companies, along with Google, Meta, Nvidia, and xAI, have since signed a White House accord committing to independent review."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "engadget-7a7e3a49ea7eb00b",
     "type": "news",
     "sourceId": "engadget",
@@ -242,30 +293,6 @@
         "title": "Meta and Apple team up to make Muse AI models run better on Macs",
         "summary": "Meta announced the Muse Spark Open AI model today, claiming that it's the \"most capable US open-weight model to date.\" But the company also says that it's the \"the first model in its class\" that can \"run on your desktop using two Apple M5 Ultra Mac Studios with the latest MLX framework.\" Meta and Apple, […]",
         "body": "Meta announced the Muse Spark Open AI model today , claiming that it's the \"most capable US open-weight model to date.\" But the company also says that it's the \"the first model in its class\" that can \"run on your desktop using two Apple M5 Ultra Mac Studios with the latest MLX framework.\"\n\nMeta and Apple, typically rivals , worked together on the launch and are publicly supporting each other.\n\n\"Muse Spark Open - weights releasing today - runs great on new Mac Studios thanks to work with @johnternus and Apple,\" Meta CEO Mark Zuckerberg said on X .\n\n\"Congrats to the team!\" new Apple CEO John Ternus said in a reply . \"Amazing to run a model of Muse …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-3a3609a662c0f170",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/transportation/1011653/volvo-nvidia-autonomous-driving-level-2-hands-free-urban",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-15T17:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Volvo will use Nvidia’s tech for hands-free, point-to-point driving",
-        "summary": "Volvo plans to launch hands-free, point-to-point driving by 2030, powered by Nvidia's latest AI technology. The Chinese-owned, Swedish-designed automaker said Thursday it would use Nvidia's autonomous driving stack to power a new partially automated driving system similar to Tesla's Full Self-Driving (Supervised). Volvo says the new point-to-point system will be Level 2++, meaning it can […]",
-        "body": "Volvo plans to launch hands-free, point-to-point driving by 2030, powered by Nvidia's latest AI technology. The Chinese-owned, Swedish-designed automaker said Thursday it would use Nvidia's autonomous driving stack to power a new partially automated driving system similar to Tesla's Full Self-Driving (Supervised).\n\nVolvo says the new point-to-point system will be Level 2++, meaning it can handle complex urban environments, including traffic lights, stop signs, and unprotected left turns without explicit driver control. In addition to Tesla's FSD, it will also resemble the Nvidia-powered system that Mercedes-Benz recently rolled out for the …\n\nRead the full story at The Verge."
       }
     },
     "media": null
@@ -728,7 +755,7 @@
     "locales": {
       "en": {
         "title": "Word Tack",
-        "summary": "Sort scattered words into their hidden groups in Word Tack, a cozy word puzzle with a handmade feel: washi tape, typewriter labels and paper tiles that look cut out by hand. Every puzzle hides eight groups of five words. Drag tiles between rows, and when a row holds all five words of a group, it's sealed and its category is revealed. There's no timer and no penalty for a wrong guess, so take your time. PLAY YOUR WAY • A growing campaign of handcrafted levels, from everyday categories to clever wordplay and real head-scratchers, with more added in updates • Every level is marked easy, medium or hard • A Daily Puzzle to play each day, with shareable emoji results and a streak to keep GENTLE HELP WHEN YOU'RE STUCK • Inklings link two words from the same group • Clues reveal the names of up to three groups • Solve a puzzle without help to earn all three stars MAKE THE DESK YOUR OWN • Earn stamps as you play • Spend them in the shop on washi tape, tile styles, row seals, desk backgrounds and confetti, including dazzling gold and holographic finishes MADE WITH CARE • Satisfying sounds, gentle haptics and a soft soundtrack, each with its own setting • Statistics, star ratings and daily streaks to track your progress • Works with VoiceOver: hear when rows are solved and where each tile sits on the board • A Reduce Motion setting for calmer play • No ads, no in-app purchases and no account needed. Works offline.",
+        "summary": "Sort scattered words into their hidden groups in Word Tack, a cozy word puzzle with a handmade feel: washi tape, typewriter labels and paper tiles that look cut out by hand. Every puzzle hides eight groups of five words. Drag tiles between rows, or tap two tiles to swap them. When a row holds all five words of a group, it’s sealed and its category is revealed. There’s no timer and no penalty for a wrong guess, so take your time. PLAY YOUR WAY • A growing campaign of handcrafted levels, from everyday categories to clever wordplay and real head-scratchers, with more added in updates • Every level is marked easy, medium or hard • A Daily Puzzle to play each day, with shareable emoji results and a streak to keep GENTLE HELP WHEN YOU’RE STUCK • Inklings link two words from the same group • Clues reveal the names of up to three groups • Solve a puzzle without help to earn all three stars MAKE THE DESK YOUR OWN • Earn stamps as you play • Spend them in the shop on washi tape, tile styles, row seals, desk backgrounds and confetti, including dazzling gold and holographic finishes MADE WITH CARE • Satisfying sounds, gentle haptics and a soft soundtrack, each with its own setting • Statistics, star ratings and daily streaks to track your progress • Works with VoiceOver: double-tap two cards to swap them, and hear when rows are solved and where each card sits on the board • A Reduce Motion setting for calmer play • No ads, no in-app purchases and no account needed. Works offline.",
         "body": "Sort scattered words into their hidden groups in Word Tack, a cozy word puzzle with a handmade feel: washi tape, typewriter labels and paper tiles that look cut out by hand.\n\nEvery puzzle hides eight groups of five words. Drag tiles between rows, and when a row holds all five words of a group, it's sealed and its category is revealed. There's no timer and no penalty for a wrong guess, so take your time.\n\nPLAY YOUR WAY • A growing campaign of handcrafted levels, from everyday categories to clever wordplay and real head-scratchers, with more added in updates • Every level is marked easy, medium or hard • A Daily Puzzle to play each day, with shareable emoji results and a streak to keep\n\nGENTLE HELP WHEN YOU'RE STUCK • Inklings link two words from the same group • Clues reveal the names of up to three groups • Solve a puzzle without help to earn all three stars\n\nMAKE THE DESK YOUR OWN • Earn stamps as you play • Spend them in the shop on washi tape, tile styles, row seals, desk backgrounds and confetti, including dazzling gold and holographic finishes\n\nMADE WITH CARE • Satisfying sounds, gentle haptics and a soft soundtrack, each with its own setting • Statistics, star ratings and daily streaks to track your progress • Works with VoiceOver: hear when rows are solved and where each tile sits on the board • A Reduce Motion setting for calmer play • No ads, no in-app purchases and no account needed. Works offline."
       }
     },
@@ -2097,32 +2124,6 @@
         "title": "iTest",
         "summary": "iTest is a hardware diagnostic and specification testing utility developed by Hugh Jeffreys. It allows users to easily test device components—including audio, display, sensors, cameras,…",
         "body": "Published 6 September 2026 by Quin\n\niTest is a hardware diagnostic and specification testing utility developed by Hugh Jeffreys. It allows users to easily test device components—including audio, display, sensors, cameras, and connectivity—through either a guided semi-automatic testing mode or individual manual tests, helping users verify device condition and hardware integrity.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nThe application was tested using Google TalkBack. The interface is fully accessible, all interactive controls and buttons are properly labeled, and navigation functions smoothly across all test screens with no accessibility barriers or issues found.\n\nLast Tested App version and Android version:\n\nGoogle Pixel 9a running Android 16 and Android 17 (iTest version 1.3.0)\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nRate accessibility only — not the app’s features, price, or overall quality.\n\nPlease log in to rate this app’s accessibility."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "freedom-scientific-blog-47d6926d08cd969b",
-    "type": "news",
-    "sourceId": "freedom-scientific-blog",
-    "sourceName": "Freedom Scientific",
-    "sourceUrl": "https://blog.freedomscientific.com/",
-    "originalUrl": "https://training.vispero.com/temporary-issue-affecting-some-jaws-and-fusion-features/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-04T21:34:13.000Z",
-    "categories": [
-      "windows",
-      "tecnologia-accesibilidad",
-      "jaws",
-      "braille"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Temporary Issue Affecting Some JAWS and Fusion Features",
-        "summary": "A recent Microsoft update is changing how accessibility support is enabled for applications that use certain Microsoft web technologies. As a result, JAWS may not receive the information it needs from these applications, causing some features to provide no speech or braille. This may affect: The issue is not currently observed in web browsers such …",
-        "body": "A recent Microsoft update is changing how accessibility support is enabled for applications that use certain Microsoft web technologies. As a result, JAWS may not receive the information it needs from these applications, causing some features to provide no speech or braille.\n\nThis may affect:\n\nThe issue is not currently observed in web browsers such as Chrome, Edge, and Firefox.\n\nIf you find that JAWS is not working as expected in web-based apps, toggle the Touch Cursor on and off again for JAWS to resume speaking normally. To enable the Touch Cursor, press SHIFT+NUM PAD PLUS if using Desktop keyboard layout and CAPS LOCK+SHIFT+SEMICOLON if using Laptop keyboard layout. To toggle it off and return to the Virtual PC Cursor, press NUM PAD PLUS twice quickly (in Desktop layout) or hold CAPS LOCK and press SEMICOLON twice quickly in Laptop layout.\n\nIf the content still does not respond as expected, press F5 to refresh the page or application content.\n\nVispero is working directly with Microsoft to investigate the issue and determine the appropriate fix. We will provide additional information when it becomes available."
       }
     },
     "media": null

@@ -1,37 +1,91 @@
 [
   {
-    "id": "9to5mac-dc7f3940205a0abc",
+    "id": "the-verge-abdd45ca19b342aa",
     "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/16/report-apple-gains-ground-on-rivals-but-iphone-18-pro-and-iphone-duo-face-challenges/",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1013314/apple-app-store-nudify-ai-apps-harassment",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-16T21:06:13.000Z",
+    "publishedAt": "2026-10-16T22:51:22.000Z",
     "categories": [
+      "tecnologia-general",
       "apple",
-      "tecnologia-general"
+      "apps-accesibles",
+      "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Report: Apple gains ground on rivals, but iPhone 18 Pro and iPhone Duo face challenges",
-        "summary": "In a new investor note sent out this week, GF Securities’ Jeff Pu and Henry Huang project that Apple will be the only major smartphone manufacturer to grow shipments in 2026, even as the global market is expected to shrink by more than 14%. Here are the details. more…",
-        "body": "In a new investor note sent out this week, GF Securities’ Jeff Pu and Henry Huang project that Apple will be the only major smartphone manufacturer to grow shipments in 2026, even as the global market is expected to shrink by more than 14%. Here are the details.\n\nFor the past few weeks, several reports from IDC and Counterpoint Research have been mapping out the impact of rising memory costs on smartphone sales.\n\nAnd while the numbers may vary slightly, it is increasingly clear that Apple has been able to weather the downturn better than its competitors.\n\nThis week, Pu and Huang released a new investor note reinforcing that trend, projecting that Apple will gain significant market share in 2026 as most of its major competitors see shipments decline.\n\nAccording to the report, Apple is on track to close out 2026 as the only major smartphone manufacturer to increase shipments, with a projected 4% year-over-year gain to 257 million units.\n\nThat would keep Apple ahead of Samsung, which is expected to ship 241 million smartphones, essentially unchanged from 2025. Apple also topped the rankings in 2024 and 2025.\n\nApple’s share of global smartphone shipments is also projected to climb to 24% in 2026, compared to 20% in 2025 and 19% in 2024.\n\nMarket-wide, the report projects a 14.2% drop in total shipments to 1.08 billion shipped smartphones for 2026, and further pegs 2026-2027 as “one of the most challenging periods for the industry, driven primarily by sharply higher memory prices, which have already pushed OEMs to reduce shipments and raise device prices.”\n\nBack to Apple, the report reiterates that the iPhone 18 Pro and iPhone 18 Pro Max have received a relatively lukewarm reception, which the analysts partly attribute to competition from the iPhone Duo and criticism of their weight. The analysts also cite production constraints affecting both the iPhone Duo and the iPhone 18 Pro lineup:\n\nDue to hinge constraints, we are reducing the iPhone Duo EMS build plan from 7m to 6m units in 2026. We also lower the iPhone 18 Pro/Pro Max build plan to 72m units given the constraints associated with the adjustable‑aperture camera.\n\nThe iPhone Duo went up for pre-order earlier today and is already showing delivery estimates stretching into late January in the US and even further in other countries.\n\nWith all of that in mind, the report maintained its “Hold” rating on Apple stock, with a price target of $369. Apple shares closed at $343.46, up 0.43% on the day, making it the only major tech stock to finish in the green amid the ongoing sector-wide sell-off."
+        "title": "Apple’s updated App Store rules go after ‘nudify’ AI apps",
+        "summary": "Apple's App Store rules now more explicitly ban so-called \"nudify\" apps that generate intimate images of people without their consent using AI tools. The rule changes follow significant criticism toward Apple after X users used Grok earlier this year to make nonconsensual, sexualized deepfakes, including minors. Apple didn't pull X or Grok from the App […]",
+        "body": "Apple's App Store rules now more explicitly ban so-called \"nudify\" apps that generate intimate images of people without their consent using AI tools.\n\nThe rule changes follow significant criticism toward Apple after X users used Grok earlier this year to make nonconsensual, sexualized deepfakes, including minors . Apple didn't pull X or Grok from the App Store, though it told senators that it threatened to yank Grok . At Apple's WWDC event in June, protestors also called on Apple to \"remove Grok, X, and all nudify technology from the App Store,\" and in July, a San Francisco city attorney ordered Apple to remove 13 \"nudify\" apps, which it said …\n\nRead the full story at The Verge."
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-5feb2ccb37d6cf29",
+    "id": "9to5mac-5079220b1a16eea4",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/16/9to5mac-overtime-086-apples-smart-home-reboot/",
+    "originalUrl": "https://9to5mac.com/2026/10/16/apples-new-app-store-rules-crack-down-on-ai-nudification-and-bait-and-switch-apps/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-16T20:32:53.000Z",
+    "publishedAt": "2026-10-16T22:17:07.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple’s new App Store rules crack down on AI nudification and ‘bait-and-switch’ apps",
+        "summary": "Apple updated its App Review Guidelines today with a series of changes meant to strengthen protections against harmful content and deceptive app review practices. Here are the details. more…",
+        "body": "Apple updated its App Review Guidelines today with a series of changes meant to strengthen protections against harmful content and deceptive app review practices. Here are the details.\n\nOver the past year alone, there has been no shortage of reports and controversies involving apps that skirt Apple’s App Review Guidelines and expose users, including minors, to harmful or inappropriate content.\n\nIn January, the Tech Transparency Project (TTP) identified dozens of AI-powered “nudify” apps on the App Store.\n\nThe group published a follow-up investigation in April , revealing that Apple’s App Store search suggestions and advertisements were also directing users to such apps. In July, San Francisco officials ordered Apple to remove eight apps capable of generating nonconsensual intimate imagery.\n\nAlso in July, a 9to5Mac investigation uncovered dozens of apps disguising gambling platforms as simple games and utilities to evade App Store review, many of which were available to children.\n\nThese apps behaved as advertised when accessed from outside Brazil, but revealed hidden betting platforms when opened from Brazilian IP addresses.\n\nAnd then there was the Grok controversy , which saw Elon Musk’s AI chatbot used to generate nonconsensual sexualized images of women and minors, prompting lawmakers and advocacy groups to call on Apple to remove X and Grok from the App Store. Apple later confirmed that it had privately warned xAI that Grok could be removed unless the company addressed the issue.\n\nToday, Apple updated its App Review Guidelines in an attempt to address problems such as these.\n\nUnder Section 1.2, which covers user-generated content, the guidelines now read (changes in bold):\n\nApps that enable users to create, generate, upload, share, or otherwise contribute content present particular challenges, including intellectual property infringement, nonconsensual intimate imagery, and anonymous bullying.\n\nApple’s new terms add that “Developers who fail to implement appropriate safeguards or fail to remediate identified violations after notice may be considered in violation of the Developer Code of Conduct.”\n\nIn another particularly important change, Apple strengthened its rules against so-called ‘bait-and-switch’ apps, which “misrepresent their purpose during review and only reveal harmful capabilities — such as “nudification” — after approval,” as the company puts it.\n\nThe newly created section 2.5.19 reads:\n\nDon’t include any hidden, dormant, or undocumented features in your app; your app’s functionality should be clear to end users and App Review. Attempting to hide undocumented features in your app binary, such as through code obfuscation or other methods, is grounds for removal of your app from the App Store and termination of your developer account.\n\nWhile the prohibition on hidden functionality was already present in Section 2.3.1, Apple has now made the rule more explicit, specifically calling out code obfuscation and emphasizing that violations can lead to an app’s removal and the termination of the developer’s account.\n\nFinally, under Section 5 (Legal), Apple also strengthened its language around apps that facilitate human trafficking or the exploitation of children, explicitly stating that they “will be removed from the App Store and blocked from alternative distribution.”\n\nTo read Apple’s updated App Review Guidelines, follow this link ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-415f25c36c556615",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/16/daily-october-16-2026/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-16T21:56:25.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "android",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "9to5Mac Daily: October 16, 2026 – iPhone Duo pre-orders, more",
+        "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily . more…",
+        "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily .\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-39747f930cd5453f",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/16/apple-calls-iphone-duo-pre-order-demand-extraordinary-as-shipping-dates-slip/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-16T21:33:28.000Z",
     "categories": [
       "apple",
       "tecnologia-general"
@@ -40,9 +94,32 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "9to5Mac Overtime 086: Apple’s smart home reboot",
-        "summary": "Jeff and Fernando discuss Apple’s smart home reboot, including the new $299 Apple HomeView, HomePod mini 2, Apple TV 4K, and Apple Home Collection lineup. Sponsored by Rokform : Get your iPhone 18 Pro and iPhone Duo cases today for 20% off when using code MAC2026. more…",
-        "body": "Jeff and Fernando discuss Apple’s smart home reboot, including the new $299 Apple HomeView, HomePod mini 2, Apple TV 4K, and Apple Home Collection lineup.\n\nSponsored by Rokform : Get your iPhone 18 Pro and iPhone Duo cases today for 20% off when using code MAC2026.\n\nApple's budget MacBook, the cheapest way to experience macOS on the go.\n\n9to5Mac Overtime is a weekly video-first podcast exploring fun and interesting observations in the Apple ecosystem, featuring 9to5Mac’s Fernando Silva & Jeff Benjamin. Subscribe to Overtime via Apple Podcasts and our YouTube channel for more."
+        "title": "Apple calls iPhone Duo pre-order demand ‘extraordinary’ as shipping dates slip",
+        "summary": "Apple has issued a short statement following strong initial demand for the iPhone Duo, with shipping estimates already slipping into next year. Here’s what the company said. more…",
+        "body": "Apple has issued a short statement following strong initial demand for the iPhone Duo, with shipping estimates already slipping into next year. Here’s what the company said.\n\nAs soon as iPhone Duo pre-orders opened today , shipping estimates began slipping from late October into November, then December, and eventually January. In some countries, including Brazil, estimated deliveries have already been pushed into early February.\n\nWhile there had been reports warning that initial iPhone Duo supplies could be limited, the speed and extent of the shipping delays still caught many by surprise.\n\nApple, meanwhile, is putting a positive spin on the strong initial response. In a statement shared with CNBC , the company described pre-order demand as “nothing short of extraordinary”, and added:\n\n“We are working hard to get this revolutionary new product into customers’ hands as quickly as possible, and we will continue accepting orders online.”\n\nWith shipping dates slipping well into next year, scalpers on eBay and X are already looking to cash in, with asking prices reaching as high as $10,000.\n\nThis has led to criticism of Apple’s handling of pre-orders, with some calling on the company to identify and cancel orders placed by scalpers.\n\nWhat’s your take on how Apple has handled the iPhone Duo pre-orders so far? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-b1a999023b3fd875",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/16/replit-is-no-longer-working-with-anthropic-ceo-says/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-16T21:22:28.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Replit is no longer working with Anthropic, CEO says",
+        "summary": "Masad said the decision was made for a number of different reasons, including cost. Replit announced a partnership with OpenAI in August, but there was never any indication that it was no longer with Anthropic.",
+        "body": "Replit, the AI coding platform that has become a favorite of startup founders and developers, is no longer working with Anthropic, the company’s CEO and co-founder Amjad Masad said Thursday while onstage at TechCrunch Disrupt .\n\nMasad said the decision was made for a number of different reasons, including cost. Replit announced a partnership with OpenAI in August, but there was never any indication that it was no longer with Anthropic.\n\n“I think ChatGPT is better now,” Masad said, adding that the company uses an internal benchmark to help assess metrics like performance. “We publish a public benchmark as well, and consistently, Sol and Astra perform better on building vibe-coded applications from scratch. It was a decision based on both cost, partnership, and performance. And for all these reasons, we just felt like they were a better partner for now.”\n\nReplit sells a cloud-based software development platform where users can develop and deploy apps directly from inside their browser. Under its partnership with Anthropic, Replit used the AI lab’s Claude models to run its platform. That partnership was said to have helped the company grow its revenue significantly.\n\nMasad’s comments were rejected by insiders familiar with the partnership between the Anthropic and Replit, however. One person familiar, who asked not to be named, said the partnership was still in place.\n\nThere is evidence on the company’s website , blog posts, and social media posts that Replit was using Anthropic products as recently as a few weeks ago. For instance, a blog post in late September cites Anthropic’s Claude Fable 5 and Claude Fable 5.1 as models running in Replit Agent’s production environment. Around the same time, one of Replit’s product employees posted on X about using Anthropic’s flagship model Opus 5.5 and promoting its capabilities.\n\nTechCrunch reached back out to Replit for clarification and will update this story if we hear back.\n\nMasad shared insights about the company’s growth while onstage at Disrupt, noting that enterprise is starting to provide a larger slice of revenue.\n\n“We’re not sharing ARR numbers just yet, but in terms of growth, like, I would say, enterprise was like 2% of revenue last year,” Masad said. “This year, I would say like 15% of our revenue is enterprise contracts, and more than 50% of our revenue is B2B.”\n\nMasad also commented on the necessity for good AI safety measures.\n\n“In the same way that us humans need a certain environment to work — you need a nice office, maybe nice good food in the office, air-conditioning, computer — agents need a habitat for them to exist and do good work,” he said. “So that habitat has good orchestration, good error recovery, good safety and security and sandboxing, good networking, good identity and authorization. And once you figure all of that out, then you can deploy AI safely.”\n\nThis article was updated to article to include more context on Replit using Anthropic’s models."
       }
     },
     "media": null
@@ -67,30 +144,6 @@
         "title": "“thegentlemanpervert” producing AI CSAM is a NJ prosecutor, say cops",
         "summary": "Discord user flagged AI CSAM, triggering arrest of New Jersey deputy AG.",
         "body": "New Jersey’s deputy attorney general, Brian Richard Fitzgerald, was arrested on “felony charges related to AI-generated child sexual abuse material (CSAM),” Bucks County Detectives said in a press release Thursday.\n\nIn the US, cops have vowed to crack down on AI CSAM since at least 2024, when the Department of Justice made one of the earliest arrests . After charging a Wisconsin man with spreading “thousands of realistic images of prepubescent minors” across Telegram and Instagram, the DOJ clarified to law enforcement that “CSAM generated by AI is still CSAM.”\n\nOn Thursday, New Jersey officials accused 51-year-old Fitzgerald of using AI to make photos from social media of real minors into sexualized images that he then distributed on social media.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-b9cc30df14919df2",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/16/iphone-18-pro-vs-iphone-duo-heres-every-key-difference/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-16T19:55:17.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iPhone Duo vs iPhone 18 Pro: Here’s every key difference",
-        "summary": "Apple has strong pitches for all of its flagship iPhones this fall, but which model is right for you? Here’s an overview of the key differences between iPhone Duo and iPhone 18 Pro. more…",
-        "body": "Apple has strong pitches for all of its flagship iPhones this fall, but which model is right for you? Here’s an overview of the key differences between iPhone Duo and iPhone 18 Pro.\n\nIt’s the most obvious difference, but should be stated regardless. With iPhone Duo you get a very different form factor: it’s a foldable device. With iPhone 18 Pro, you get a traditional iPhone experience.\n\nIf you’ve never used a foldable, it’s hard to explain the difference in how each model might feel in practice. But generally speaking, with iPhone Duo you get essentially an iPhone and iPad in one device. The displays are unique shapes and sizes compared to a traditional iPhone though, which may take some adjustment.\n\nHere is how each model’s dimensions compare:\n\niPhone Duo might seem more sleek than iPhone 18 Pro Max, but it ultimately weighs slightly more.\n\niPhone Duo has two displays: a 5.4-inch outer display and a 7.6-inch folding display.\n\nWith iPhone 18 Pro, you can choose from the standard 6.3-inch size or 6.9-inch Pro Max model.\n\nSo with the Duo, you can enjoy a “small iPhone” experience while also having the option of a larger inner screen than what iPhone 18 Pro Max offers.\n\niPhone Duo’s folding display also comes with a nano-texture finish, a first in an iPhone.\n\nCameras are one of the most important iPhone features. And in this department, iPhone 18 Pro is the clear winner.\n\niPhone 18 Pro has the new 48MP Main camera with variable aperture. iPhone Duo lacks the variable aperture feature, so its Main camera lags behind the Pro line.\n\nWith iPhone 18 Pro, you also get the Telephoto camera that’s missing from iPhone Duo.\n\nIn terms of software features, each model has its own unique exclusives:\n\niPhone 18 Pro also exclusively supports ProRes video recording up to 4K at 60 fps with external recording, a “studio-quality four-mic array,” Spatial video recording at 1080p at 30 fps, Spatial photos, ProRes RAW, Genlock, and more.\n\nBecause iPhone Duo has two displays, its quoted battery life varies depending on which display you’re using. But overall, Apple is promising strong battery life on both the Duo as well as iPhone 18 Pro.\n\nHere are Apple’s quoted numbers:\n\nEveryone’s use patterns will differ, but if you split the difference between the two iPhone Duo battery estimates, you’re looking at around 38 hours in average video playback.\n\nAuthentication differs between iPhone Duo and iPhone 18 Pro, with the former using Touch ID and the latter Face ID.\n\niPhone Duo does not have an Action button, but does offer Camera Control.\n\niPhone Duo comes with several multitasking advantages in iOS 27, like the ability to use apps in Split View and have unique landscape views. It also has other fun software additions like a partially-folded StandBy mode.\n\nApple Pencil (USB-C model) will be supported on iPhone Duo later this year, another advantage over iPhone 18 Pro.\n\nA new C2 modem is included in both iPhone Duo and iPhone 18 Pro, but iPhone 18 Pro Max uses a Qualcomm modem.\n\nColors for iPhone 18 Pro are Burgundy, Glacier, Black, and Silver. iPhone Duo only offers two colors: Star White and Night Sky.\n\nFinally, design materials differ: iPhone 18 Pro has an aluminum unibody design, while iPhone Duo uses titanium.\n\nPricing is another major difference between Apple’s new models. Here are starting prices for 256GB models:\n\niPhone 18 Pro has been available for nearly a month, while iPhone Duo pre-orders just went live today. However, if you haven’t ordered one yet, shipping estimates are already delayed into 2027 . So if you need a new iPhone sooner, iPhone 18 Pro is the way to go.\n\nWhich new iPhone model did you choose this year? Let us know in the comments."
       }
     },
     "media": null
@@ -192,31 +245,6 @@
     "media": null
   },
   {
-    "id": "techcrunch-a2b7ca07af6de58e",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/video/a-nvidia-insider-turned-vc-on-why-robotics-hasnt-hit-its-chatgpt-moment-yet/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-16T16:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "programas-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "An Nvidia insider-turned-VC on why robotics hasn’t hit its ChatGPT moment, yet",
-        "summary": "Amulya Vishwanath, who spent seven years leading product marketing for NVIDIA’s robotics platforms, says robotics is currently in its “Lego era,” with the basic building blocks like actuators, robotic hands, software, and safety standards still being rebuilt. This view runs counter to those who believe that robotics, powered by a general foundation model, is about to have […]",
-        "body": "Loading the player…\n\nAmulya Vishwanath , who spent seven years leading product marketing for NVIDIA’s robotics platforms, says robotics is currently in its “Lego era,” with the basic building blocks like actuators, robotic hands, software, and safety standards still being rebuilt.\n\nThis view runs counter to those who believe that robotics, powered by a general foundation model, is about to have its “ChatGPT moment” — that day when the shockingly capable chatbot was launched in late 2022. (General Intuition CEO Pim de Witte told Equity earlier this year that a single general foundation model would make much of today’s specialized robotics work redundant, and be that moment.)\n\nOn this episode of TechCrunch’s Equity podcast, Dominic-Madori Davis caught up with Vishwanath to discuss where she’s writing first checks as the founder and managing partner of Techable VC. They also talked about what she’s learned as one of the first women executives to spin out of Nvidia and launch her own early-stage firm investing in physical AI across robotics, materials science, and life sciences.\n\nSubscribe to Equity on YouTube , Apple Podcasts , Overcast , Spotify and all the casts. You can also follow Equity on X and Threads , at @EquityPod."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "ars-technica-6472ce037b5602ea",
     "type": "news",
     "sourceId": "ars-technica",
@@ -284,30 +312,6 @@
         "title": "A fake WhatsApp clone is showing up before the real version on the Play Store",
         "summary": "After a Chrome clone was spotted on the Play Store earlier this week, a user on Reddit says they're seeing a fake version of WhatsApp in a \"sponsored\" slot above the real version. As reported earlier by Android Authority, the WhatsApp dupe has racked up over 500,000 downloads and, at the time of writing, its […]",
         "body": "After a Chrome clone was spotted on the Play Store earlier this week, a user on Reddit says they're seeing a fake version of WhatsApp in a \"sponsored\" slot above the real version . As reported earlier by Android Authority , the WhatsApp dupe has racked up over 500,000 downloads and, at the time of writing, its Play Store listing is still live .\n\nGoogle did not immediately respond to a request for comment.\n\nThe WhatsApp clone is from a developer going by \"Agment Assets sallu\" who doesn't currently have anything else listed on the Play Store. Their listing for the WhatsApp impostor has the same icon, screenshots, and text as the real version, but …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-4adc78c9fe35401d",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1012748/nvidia-rtx-spark-windows-arm-laptops-asus-hp-lenovo-impressions",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-16T15:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "A week with RTX Spark: everything we’ve learned using Nvidia’s new laptops",
-        "summary": "Nvidia's RTX Spark N1X processor is finally here, and we've been collectively testing a small fortune's worth of powerful laptops sporting this new \"superchip.\" RTX Spark is designed to be a high-performing Arm-based SoC for laptops and small desktop computers, rivaling the best from Apple, Intel, AMD, and Qualcomm. It has loads of cores, Nvidia […]",
-        "body": "Nvidia's RTX Spark N1X processor is finally here, and we've been collectively testing a small fortune's worth of powerful laptops sporting this new \"superchip.\" RTX Spark is designed to be a high-performing Arm-based SoC for laptops and small desktop computers, rivaling the best from Apple, Intel, AMD, and Qualcomm. It has loads of cores, Nvidia RTX Blackwell graphics, and enough power and unified memory to run sizable local AI models.\n\nThe flagship placement is inside Microsoft's Surface Laptop Ultra with a staggering 128GB of unified memory, which our own Tom Warren fully reviewed . Sean Hollister has been testing a 64GB version of the Asus …\n\nRead the full story at The Verge."
       }
     },
     "media": null

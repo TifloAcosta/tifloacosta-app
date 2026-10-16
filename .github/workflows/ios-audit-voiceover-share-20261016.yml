@@ -1,0 +1,42 @@
+name: Auditoria iOS Compartir y VoiceOver (sin publicar)
+on:
+  push:
+    branches:
+      - audit/ios-sharing-voiceover-integral-20261016
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  tests-logic-and-contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Comprobar sintaxis de los puentes iOS
+        run: |
+          node --check ios-build/ios-share-inbox.js
+          node --check ios-build/ios-reader-native.js
+          node --check ios-build/ios-reader-selects.js
+          node --check ios-build/ios-appwide-native-actions.js
+          node --check ios-build/ios-accessible-actions.js
+          node --check ios-build/prepare-web.mjs
+      - name: Ejecutar pruebas de comportamiento y regresiones iOS
+        run: |
+          node --test ios-build/test/ios-share-routing.test.mjs ios-build/test/ios-global-voiceover-actions.test.mjs ios-build/test/ios-reader-presentation.test.mjs ios-build/test/tiflolector-regresiones-20261014.test.mjs ios-build/test/ios-unified-videos-regression.test.mjs test/ios-share.test.mjs
+      - name: Proteger archivos originales y rama de produccion
+        run: |
+          test "$(git branch --show-current)" = "audit/ios-sharing-voiceover-integral-20261016"
+          test -f ios-build/DIAGNOSTICO-ESTRUCTURAL-2026-10-16.md
+  swift-syntax:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validar sintaxis de los componentes nativos (sin firmar ni publicar)
+        run: |
+          swiftc -frontend -parse ios-build/native/TifloReadingAccessibilityPlugin.swift
+          swiftc -frontend -parse ios-build/native/TifloNativeActionListController.swift
+          swiftc -frontend -parse ios-build/native/TifloNativeVideosController.swift
+          swiftc -frontend -parse ios-build/native/TifloShareInboxPlugin.swift
+          swiftc -frontend -parse ios-build/share-extension/ShareViewController.swift

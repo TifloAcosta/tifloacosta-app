@@ -50,12 +50,7 @@ test('el cambio de color conserva el marco fluido y los ajustes de lectura', () 
 });
 
 test('la PWA fuerza una generación nueva del tema y usa el rojo de identidad', () => {
-  // An incremented service-worker generation must not fail a theme test.
-  // Require a revision at least as new as the original themed reader.
-  const cache = worker.match(/const CACHE = 'tifloacosta-app-v2-(\d+)-([^']+)'/);
-  assert.ok(cache, 'Falta la versión de caché PWA');
-  assert.ok(Number(cache[1]) >= 46, 'La caché PWA retrocedió de versión');
-  assert.match(cache[2], /^reader-/);
+  assert.match(worker, /tifloacosta-app-v2-46-reader-chrome-voices/);
   assert.match(worker, /\.\/styles\.css\?v=1\.3/);
   assert.equal(manifest.theme_color, '#A61B1B');
   assert.equal(manifest.background_color, '#FFFFFF');

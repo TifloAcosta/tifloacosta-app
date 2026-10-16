@@ -149,13 +149,17 @@ jobs:
           project = Xcodeproj::Project.open('ios/App/App.xcodeproj')
           app = project.targets.find { |target| target.name == 'App' }
           abort 'No se encontró el target App' unless app
-          app.build_configurations.each do |config|
-            config.build_settings['CURRENT_PROJECT_VERSION'] = build_number
+          %w[App TifloAcostaShare].each do |target_name|
+            target = project.targets.find { |item| item.name == target_name }
+            abort "No se encontró el target #{target_name}" unless target
+            target.build_configurations.each do |config|
+              config.build_settings['CURRENT_PROJECT_VERSION'] = build_number
+            end
           end
           project.save
           puts "Número de compilación TestFlight: #{build_number}"
           RUBY
-      - name: Configurar firma de distribución solo para App
+      - name: Configurar firma de distribución para App y Compartir
         working-directory: ios-build
         run: |
           ruby <<'RUBY'
@@ -163,12 +167,16 @@ jobs:
           project = Xcodeproj::Project.open('ios/App/App.xcodeproj')
           app = project.targets.find { |target| target.name == 'App' }
           abort 'No se encontró el target App' unless app
-          app.build_configurations.each do |config|
-            next unless config.name == 'Release'
-            config.build_settings['DEVELOPMENT_TEAM'] = '3A8G8A62YZ'
-            config.build_settings['CODE_SIGN_STYLE'] = 'Manual'
-            config.build_settings['CODE_SIGN_IDENTITY'] = 'Apple Distribution'
-            config.build_settings['CODE_SIGN_IDENTITY[sdk=iphoneos*]'] = 'Apple Distribution'
+          %w[App TifloAcostaShare].each do |target_name|
+            target = project.targets.find { |item| item.name == target_name }
+            abort "No existe #{target_name}" unless target
+            target.build_configurations.each do |config|
+              next unless config.name == 'Release'
+              config.build_settings['DEVELOPMENT_TEAM'] = '3A8G8A62YZ'
+              config.build_settings['CODE_SIGN_STYLE'] = 'Manual'
+              config.build_settings['CODE_SIGN_IDENTITY'] = 'Apple Distribution'
+              config.build_settings['CODE_SIGN_IDENTITY[sdk=iphoneos*]'] = 'Apple Distribution'
+            end
           end
           project.save
           pods = Xcodeproj::Project.open('ios/App/Pods/Pods.xcodeproj')
@@ -264,25 +272,48 @@ jobs:
             return new crypto.X509Certificate(Buffer.from(content,'base64')).fingerprint.replaceAll(':','').toUpperCase()===sha;
           });
           if(!cert) throw Error('El certificado P12 importado no coincide con ningún certificado vigente de Apple Developer.');
-          const bundles=await api('bundleIds?filter[identifier]=com.tifloacosta.app');
-          const bundle=bundles.data.find(x=>x.attributes.identifier==='com.tifloacosta.app');
-          if(!bundle) throw Error('No existe el identificador com.tifloacosta.app en Apple Developer');
-          const profileName='TifloAcosta AppStore '+process.env.GITHUB_RUN_ID;
-          const created=await api('profiles',{method:'POST',body:JSON.stringify({data:{
-            type:'profiles',attributes:{name:profileName,profileType:'IOS_APP_STORE'},
-            relationships:{
-              bundleId:{data:{type:'bundleIds',id:bundle.id}},
-              certificates:{data:[{type:'certificates',id:cert.id}]}
-            }
-          }})});
-          const profile=created.data;
+          const targets=[
+            {identifier:'com.tifloacosta.app', env:'IOS_PROFILE_NAME', name:'App'},
+            {identifier:'com.tifloacosta.app.ShareExtension', env:'IOS_SHARE_PROFILE_NAME', name:'Compartir'}
+          ];
           const dir=path.join(process.env.HOME,'Library/MobileDevice/Provisioning Profiles');
           fs.mkdirSync(dir,{recursive:true});
-          fs.writeFileSync(path.join(dir,profile.attributes.uuid+'.mobileprovision'),Buffer.from(profile.attributes.profileContent,'base64'),{mode:0o600});
-          fs.appendFileSync(process.env.GITHUB_ENV,'IOS_PROFILE_NAME='+profileName+'\n');
-          console.log('Perfil de distribución App Store generado e instalado.');
+          for(const target of targets) {
+            const bundles=await api('bundleIds?filter[identifier]='+encodeURIComponent(target.identifier));
+            const bundle=bundles.data.find(x=>x.attributes.identifier===target.identifier);
+            if(!bundle) throw Error('Falta el identificador de Apple Developer '+target.identifier);
+            const profileName='TifloAcosta '+target.name+' '+process.env.GITHUB_RUN_ID;
+            const created=await api('profiles',{method:'POST',body:JSON.stringify({data:{
+              type:'profiles',attributes:{name:profileName,profileType:'IOS_APP_STORE'},
+              relationships:{
+                bundleId:{data:{type:'bundleIds',id:bundle.id}},
+                certificates:{data:[{type:'certificates',id:cert.id}]}
+              }
+            }})});
+            const profile=created.data;
+            const file=path.join(dir,profile.attributes.uuid+'.mobileprovision');
+            fs.writeFileSync(file,Buffer.from(profile.attributes.profileContent,'base64'),{mode:0o600});
+            fs.appendFileSync(process.env.GITHUB_ENV,target.env+'='+profileName+'\n');
+            fs.appendFileSync(process.env.GITHUB_ENV,target.env+'_FILE='+file+'\n');
+            console.log('Perfil '+target.name+' creado: '+profile.attributes.uuid);
+          }
           NODE
-      - name: Asignar perfil manual únicamente a la app
+      - name: Verificar grupos de aplicaciones en ambos perfiles de firma
+        shell: bash
+        run: |
+          set -euo pipefail
+          for PROFILE in "$IOS_PROFILE_NAME_FILE" "$IOS_SHARE_PROFILE_NAME_FILE"; do
+            PLIST="$(mktemp)"
+            security cms -D -i "$PROFILE" > "$PLIST"
+            if ! /usr/libexec/PlistBuddy -c 'Print :Entitlements:com.apple.security.application-groups' "$PLIST" | grep -Fq 'group.com.tifloacosta.app'; then
+              echo "::error::El perfil de Apple Developer no contiene el App Group group.com.tifloacosta.app. Asignar el grupo a App y ShareExtension antes de publicar."
+              rm -f "$PLIST"
+              exit 1
+            fi
+            rm -f "$PLIST"
+          done
+          echo "App Group confirmado en los dos perfiles de Apple."
+      - name: Asignar perfiles manuales a App y extensión
         working-directory: ios-build
         run: |
           ruby <<'RUBY'
@@ -290,13 +321,17 @@ jobs:
           project = Xcodeproj::Project.open('ios/App/App.xcodeproj')
           app = project.targets.find { |target| target.name == 'App' }
           abort 'No existe target App' unless app
-          app.build_configurations.each do |config|
-            next unless config.name == 'Release'
-            config.build_settings['CODE_SIGN_STYLE'] = 'Manual'
-            config.build_settings['DEVELOPMENT_TEAM'] = '3A8G8A62YZ'
-            config.build_settings['CODE_SIGN_IDENTITY'] = 'Apple Distribution'
-            config.build_settings['CODE_SIGN_IDENTITY[sdk=iphoneos*]'] = 'Apple Distribution'
-            config.build_settings['PROVISIONING_PROFILE_SPECIFIER'] = ENV.fetch('IOS_PROFILE_NAME')
+          {'App' => 'IOS_PROFILE_NAME', 'TifloAcostaShare' => 'IOS_SHARE_PROFILE_NAME'}.each do |name, variable|
+            target = project.targets.find { |item| item.name == name }
+            abort "No existe el target #{name}" unless target
+            target.build_configurations.each do |config|
+              next unless config.name == 'Release'
+              config.build_settings['CODE_SIGN_STYLE'] = 'Manual'
+              config.build_settings['DEVELOPMENT_TEAM'] = '3A8G8A62YZ'
+              config.build_settings['CODE_SIGN_IDENTITY'] = 'Apple Distribution'
+              config.build_settings['CODE_SIGN_IDENTITY[sdk=iphoneos*]'] = 'Apple Distribution'
+              config.build_settings['PROVISIONING_PROFILE_SPECIFIER'] = ENV.fetch(variable)
+            end
           end
           project.save
           RUBY
@@ -318,6 +353,10 @@ jobs:
           EXPECTED_BUILD="$((400000 + GITHUB_RUN_NUMBER))"
           LOCATION_PURPOSE="$(/usr/libexec/PlistBuddy -c 'Print :NSLocationWhenInUseUsageDescription' "$APP_PLIST")"
           test "$ENCRYPTION" = false || { echo "::error::Falta declaración de cifrado exento"; exit 1; }
+          SHARE_PLIST="$RUNNER_TEMP/TifloAcosta.xcarchive/Products/Applications/App.app/PlugIns/TifloAcostaShare.appex/Info.plist"
+          test -f "$SHARE_PLIST" || { echo "::error::No se ha incorporado la Share Extension a la app archivada"; exit 1; }
+          /usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "$SHARE_PLIST" | grep -Fxq 'com.tifloacosta.app.ShareExtension'
+          test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "$SHARE_PLIST")" = "$EXPECTED_BUILD" || { echo "::error::Las versiones de app y extensión no coinciden"; exit 1; }
           test "$MIN_IOS" = 15.0 || { echo "::error::iOS mínimo incorrecto: $MIN_IOS"; exit 1; }
           test "$BUILD_VERSION" = "$EXPECTED_BUILD" || { echo "::error::Número de compilación incorrecto: $BUILD_VERSION (esperado $EXPECTED_BUILD)"; exit 1; }
           test -n "$LOCATION_PURPOSE" || { echo "::error::Falta explicación de uso de ubicación en Info.plist"; exit 1; }
@@ -332,11 +371,12 @@ jobs:
             <key>destination</key><string>export</string>
             <key>signingStyle</key><string>manual</string> 
             <key>signingCertificate</key><string>Apple Distribution</string> 
-            <key>provisioningProfiles</key><dict><key>com.tifloacosta.app</key><string>PROFILE_REPLACEME</string></dict>
+            <key>provisioningProfiles</key><dict><key>com.tifloacosta.app</key><string>PROFILE_REPLACEME</string><key>com.tifloacosta.app.ShareExtension</key><string>SHARE_PROFILE_REPLACEME</string></dict>
             <key>teamID</key><string>3A8G8A62YZ</string>
           </dict></plist>
           PLIST
           sed -i '' "s/PROFILE_REPLACEME/$IOS_PROFILE_NAME/g" "$RUNNER_TEMP/ExportOptions.plist"
+          sed -i '' "s/SHARE_PROFILE_REPLACEME/$IOS_SHARE_PROFILE_NAME/g" "$RUNNER_TEMP/ExportOptions.plist"
       - name: Exportar IPA firmada
         env:
           API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}

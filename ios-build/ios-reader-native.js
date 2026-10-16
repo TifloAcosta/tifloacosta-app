@@ -128,6 +128,7 @@
     ['info', 'Información', 'Information'],
     ['move', 'Mover a carpeta', 'Move to folder'],
     ['export', 'Exportar', 'Export'],
+    ['share', 'Compartir', 'Share'],
     ['rename', 'Cambiar título', 'Rename document'],
     ['delete', 'Eliminar', 'Delete']
   ];
@@ -172,6 +173,7 @@
         return;
       }
       if (action === 'export') { void api.exportBook(bookId, 'original'); return; }
+      if (action === 'share') { void api.shareBook(bookId); return; }
       if (action === 'rename') { void api.renameBook(bookId); return; }
       if (action === 'delete') { void api.deleteBook(bookId); return; }
       if (action === 'queue') { void api.queueBook(bookId); return; }

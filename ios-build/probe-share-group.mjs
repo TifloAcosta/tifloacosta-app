@@ -88,3 +88,5 @@ try{
   }
   fs.rmSync(tmp,{recursive:true,force:true});
 }
+
+// Segundo control tras habilitar la capacidad APP_GROUPS de ambos App IDs.

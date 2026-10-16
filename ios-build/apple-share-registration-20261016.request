@@ -1,0 +1,5 @@
+Petición única, 16 de octubre de 2026.
+Registrar el identificador com.tifloacosta.app.ShareExtension mediante
+la API pública de Apple Developer, sin crear una app nueva en App Store,
+sin habilitar automáticamente grupos desconocidos,
+sin compilar ni publicar TestFlight.

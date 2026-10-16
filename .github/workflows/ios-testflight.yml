@@ -301,6 +301,7 @@ jobs:
           fs.mkdirSync(dir,{recursive:true});
           fs.writeFileSync(path.join(dir,profile.attributes.uuid+'.mobileprovision'),Buffer.from(profile.attributes.profileContent,'base64'),{mode:0o600});
           fs.appendFileSync(process.env.GITHUB_ENV,'IOS_PROFILE_NAME='+profileName+'\n');
+          fs.appendFileSync(process.env.GITHUB_ENV,'IOS_APP_PROFILE_UUID='+profile.attributes.uuid+'\n');
           const extProfileName='TifloAcosta Share AppStore '+process.env.GITHUB_RUN_ID;
           const extCreated=await api('profiles',{method:'POST',body:JSON.stringify({data:{
             type:'profiles',attributes:{name:extProfileName,profileType:'IOS_APP_STORE'},
@@ -313,8 +314,27 @@ jobs:
           fs.writeFileSync(path.join(dir,extProfile.attributes.uuid+'.mobileprovision'),
             Buffer.from(extProfile.attributes.profileContent,'base64'),{mode:0o600});
           fs.appendFileSync(process.env.GITHUB_ENV,'IOS_SHARE_PROFILE_NAME='+extProfileName+'\\n');
+          fs.appendFileSync(process.env.GITHUB_ENV,'IOS_SHARE_PROFILE_UUID='+extProfile.attributes.uuid+'\\n');
           console.log('Perfil de distribución App Store generado e instalado.');
           NODE
+      - name: Validar App Group en los dos perfiles Apple
+        run: |
+          python3 - <<'PY'
+          import os, subprocess, plistlib
+          from pathlib import Path
+          folder = Path.home() / 'Library/MobileDevice/Provisioning Profiles'
+          for key in ('IOS_APP_PROFILE_UUID', 'IOS_SHARE_PROFILE_UUID'):
+              profile = folder / (os.environ[key] + '.mobileprovision')
+              if not profile.is_file():
+                  raise SystemExit('Falta perfil: ' + key)
+              decoded = subprocess.check_output(['security', 'cms', '-D', '-i', str(profile)])
+              metadata = plistlib.loads(decoded)
+              groups = metadata.get('Entitlements', {}).get('com.apple.security.application-groups', [])
+              if 'group.com.tifloacosta.app' not in groups:
+                  raise SystemExit('Apple no asoció el App Group a ' + key +
+                                   '. Revisar Apple Developer antes de TestFlight.')
+          print('Los perfiles de app y extensión incluyen el App Group.')
+          PY
       - name: Asignar perfiles de firma de app y extensión
         working-directory: ios-build
         run: |

@@ -188,3 +188,54 @@ body {
 #home-blocks button, #reading-section button {
   max-width: 100%;
 }
+
+
+/*
+ * iOS screen-layout guardrails: these constrain size, not semantics.
+ * The app retains its normal 100% base font; users' saved larger text choices
+ * continue to work through html[data-text-size] and the reader controls.
+ * No fixed heights or hiding of actionable content.
+ */
+body > .wrap,
+.wrap,
+main,
+main > section,
+main > section > *,
+.panel,
+.resource-card,
+.video-card,
+.news-item,
+.global-search-card,
+#home-blocks,
+#reading-section,
+#ios-received-section {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+.wrap {
+  /* Account for iPhone landscape safe-area padding on the body. */
+  inline-size: min(94vw, 100%);
+}
+:is(.resource-list, .video-list, .news-list, .global-search-list,
+    .resource-actions, .book-actions, .search-row, .settings-form) > * {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+:is(.resource-card, .video-card, .news-item, .global-search-card,
+    .panel, .reading-library-title, .ios-received-item, .ios-received-item-status) {
+  overflow-wrap: anywhere;
+}
+:is(button, .button-link, input, select, textarea) {
+  max-inline-size: 100%;
+}
+:is(button, .button-link) {
+  min-inline-size: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+/* Long EPUB names and shared links can otherwise expand flex/grid tracks. */
+:is(.resource-list, .video-list, .news-list, .global-search-list,
+    #reading-library-list, #ios-received-list) {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}

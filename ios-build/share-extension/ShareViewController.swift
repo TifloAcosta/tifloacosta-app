@@ -71,7 +71,7 @@ final class ShareViewController: UIViewController {
         let supported: Set<String> = [
             "pdf", "txt", "html", "htm", "md", "docx", "pptx", "xlsx",
             "epub", "odt", "rtf", "fb2", "mp3", "m4a", "aac", "wav",
-            "aiff", "flac", "zip"
+            "aiff", "flac", "zip", "png", "jpg", "jpeg", "webp"
         ]
         let providers = incoming.flatMap { $0.attachments ?? [] }
         // A WhatsApp share can attach a preview as well as the original.

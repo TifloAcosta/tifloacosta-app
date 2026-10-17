@@ -245,3 +245,11 @@ Se mantiene el tamaño predeterminado normal (100%); las preferencias de texto g
 Pruebas de regresión añadidas para tamaño normal, ampliaciones opcionales, ajustes visuales, áreas seguras y límites de anchura. Mantener las reparaciones anteriores de Recibidos, Biblioteca y enlaces de YouTube y todos los datos guardados.
 Destino único: TestFlight interno, grupo «Probadores TifloAcosta», sin distribución pública y sin probadores externos.
 Requiere tras la firma: Apple VALID, comprobación de beta habilitada y grupo asociado. No afirmar que la presentación está validada físicamente hasta que Tony la compruebe con VoiceOver en iPhone.
+
+
+Solicitud expresa de nueva compilación CORRECTORA iOS — 17 de octubre de 2026.
+Origen de la corrección de búsquedas: revisión en preparacion-ios 1d9baada2ba8508ecabbdd0acb47281aeae4e2e8.
+Cambios autorizados por el autor: simplificar el texto del buscador global a «Busca aquí lo que quieras en TifloAcosta.» y quitar su ejemplo largo; retirar exclusivamente el cuadro redundante «Buscar» de Mi biblioteca de TifloLector, conservando sin cambios los filtros Mostrar, el selector Ordenar, las carpetas, la lista de documentos, los marcadores, la cola, los archivos recibidos y la búsqueda dentro del documento.
+Se han actualizado los controles de regresión y los anclajes de ordenación, y la auditoría estática del lector iOS ha pasado antes de solicitar el envío.
+Destino exclusivo: TestFlight interno, grupo «Probadores TifloAcosta». No publicar en App Store ni invitar a otros probadores. Preservar documentos y preferencias existentes.
+No afirmar que la nueva compilación está disponible hasta que el proceso verifique el estado VALID y la pertenencia al grupo interno de Apple. La prueba visual y con VoiceOver en el iPhone sigue a cargo del autor.

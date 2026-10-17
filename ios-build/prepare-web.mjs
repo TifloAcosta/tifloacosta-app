@@ -213,6 +213,27 @@ const iosBookActionGlue = String.raw`
       }
       return { saved:true, id };
     },
+    // Open an incoming document immediately without writing it to the library.
+    // Users may choose Guardar from the existing reader afterwards.
+    readSharedFile: async file => {
+      if (!(file instanceof File) || !file.name || !els.reader) {
+        return { opened:false, reason:'invalid-source' };
+      }
+      try {
+        const prepared = await documentFromFile(file);
+        if (prepared.daisyPackage) {
+          return { opened:false, reason:'daisy-temporary-not-supported' };
+        }
+        await useDocument(prepared.model, file.name, {
+          source: prepared.source, format: prepared.format, autoSaveImported: false
+        });
+        return {
+          opened: !els.reader.hidden && documentModel === prepared.model && !currentBookId
+        };
+      } catch {
+        return { opened:false, reason:'reader-unavailable' };
+      }
+    },
     exportCurrent: format => currentBookId ? exportSavedBook(currentBookId, format) : Promise.resolve(false),
     deleteBook: id => deleteSavedBook(id),
     deleteCurrent: () => currentBookId ? deleteSavedBook(currentBookId) : Promise.resolve(false),

@@ -58,7 +58,7 @@ test('My library stays visible with filters and sorting, without redundant searc
   }
   assert.match(web, /els\.libraryFilter\?\.addEventListener\('change'/);
   assert.doesNotMatch(html, /id="reading-library-query"|id="reading-library-query-label"/);
-  assert.match(folders, /refreshButton\.before\(label, select\)/);
+  assert.match(read('ios-build/ios-reader-folders.js'), /refreshButton\.before\(label, select\)/);
   assert.match(web, /sort: isRecentView \? 'imported' : 'lastRead'/);
   assert.doesNotMatch(html, /id="reading-management-web"/);
 });

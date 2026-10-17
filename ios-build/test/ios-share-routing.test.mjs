@@ -110,6 +110,7 @@ function sharedFileHarness({canSave = true} = {}) {
       kind:'file', preview:''}
   ];
   let imports = 0;
+  let opens = 0;
   let acknowledgements = 0;
   let done;
   const completion = new Promise(resolve => { done = resolve; });
@@ -132,6 +133,7 @@ function sharedFileHarness({canSave = true} = {}) {
     Capacitor: {Plugins:{TifloShareInbox:native},
       convertFileSrc: uri => 'https://local.example/epub'},
     TifloIOSBookActions: {
+      async openBook() { opens++; return true; },
       async importSharedFile() {
         imports++;
         if (canSave !== true) done();
@@ -154,18 +156,19 @@ function sharedFileHarness({canSave = true} = {}) {
   });
   const region = created.find(x => x.id === 'ios-shared-received');
   return {
-    async tap() {
-      // Wait for initial asynchronous native pending() -> draw().
+    async tap(choice = 'save') {
+      // The arrival panel has two contextual actions, but the home layout
+      // never contains the full list of old incoming documents.
       await new Promise(resolve => setImmediate(resolve));
-      const control = region.children[1].children[0];
-      assert.ok(control, 'La portada debe mostrar el EPUB pendiente');
-      assert.match(control.textContent, /Importar en TifloLector/);
+      const control = region.children[1].children[choice === 'read' ? 0 : 1];
+      assert.ok(control, 'La portada debe mostrar una acción del EPUB recibido');
+      assert.match(control.textContent, choice === 'read' ? /Leer ahora/ : /Guardar en biblioteca/);
       control.handlers.click();
       await completion;
       await new Promise(resolve => setImmediate(resolve));
       return {control};
     },
-    state() {return {imports, acknowledgements, remaining:files.length, hash:location.hash};},
+    state() {return {imports, opens, acknowledgements, remaining:files.length, hash:location.hash};},
     reader, region
   };
 }
@@ -174,7 +177,7 @@ test('un toque en portada navega, importa EPUB y confirma guardado antes de reti
   const app = sharedFileHarness();
   await app.tap();
   assert.deepEqual(app.state(), {
-    imports:1, acknowledgements:1, remaining:0, hash:'#reading'
+    imports:1, opens:0, acknowledgements:1, remaining:0, hash:'#reading'
   });
   assert.ok(app.region.classNames.includes('ios-share-inbox'));
 });
@@ -183,7 +186,7 @@ test('si falla el guardado EPUB, conserva la entrada en la bandeja y no confirma
   const app = sharedFileHarness({canSave:false});
   await app.tap();
   assert.deepEqual(app.state(), {
-    imports:1, acknowledgements:0, remaining:1, hash:'#reading'
+    imports:1, opens:0, acknowledgements:0, remaining:1, hash:'#reading'
   });
 });
 
@@ -191,7 +194,7 @@ test('el retorno antiguo de importación sin ID verificable no elimina el EPUB',
   const app = sharedFileHarness({canSave:'unverified'});
   await app.tap();
   assert.deepEqual(app.state(), {
-    imports:1, acknowledgements:0, remaining:1, hash:'#reading'
+    imports:1, opens:0, acknowledgements:0, remaining:1, hash:'#reading'
   });
 });
 
@@ -200,4 +203,27 @@ test('el puente iOS comprueba lectura real del libro después de importar', () =
   assert.match(packer, /const imported = await importSelectedFile\(\)/);
   assert.match(packer, /const persisted = await libraryClient\.openBook\(id\)/);
   assert.match(packer, /return \{ saved:true, id \}/);
+});
+
+
+test('la lectura inmediata de EPUB abre el libro tras confirmar persistencia', async () => {
+  const app = sharedFileHarness();
+  await app.tap('read');
+  assert.deepEqual(app.state(), {
+    imports:1, opens:1, acknowledgements:1, remaining:0, hash:'#reading'
+  });
+});
+
+test('el contenido nuevo se presenta fuera de la navegación permanente', () => {
+  assert.match(src, /home\.before\(homeRegion\.root\)/);
+  assert.doesNotMatch(src, /nav\.before\(homeRegion\.root\)/);
+  assert.match(src, /const newest = items\.at\(-1\)/);
+  assert.match(src, /homeRegion\.list\.append\(buttonFor\(newest, mode, 'home', 'read'\)\)/);
+});
+
+test('un enlace compartido ofrece el analizador existente sin eliminar prematuramente el original', () => {
+  assert.match(src, /location\.hash = '#downloads-link'/);
+  assert.match(src, /form\.dispatchEvent\(new Event\('submit'/);
+  assert.match(src, /if \(choice === 'analyze'\)/);
+  assert.match(src, /Do not delete the source before the user has completed the download/);
 });

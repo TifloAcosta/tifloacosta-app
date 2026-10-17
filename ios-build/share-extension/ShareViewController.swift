@@ -126,8 +126,11 @@ final class ShareViewController: UIViewController {
                         }
                         let suffix = UTType(identifier)?.preferredFilenameExtension?.lowercased() ?? ""
                         var fallbackName = suggested.isEmpty ? "Contenido" : suggested
-                        if URL(fileURLWithPath: fallbackName).pathExtension.isEmpty &&
-                           supported.contains(suffix) {
+                        let fallbackSuffix = URL(fileURLWithPath: fallbackName).pathExtension.lowercased()
+                        if !supported.contains(fallbackSuffix) && supported.contains(suffix) {
+                            if !fallbackSuffix.isEmpty {
+                                fallbackName = String(fallbackName.dropLast(fallbackSuffix.count + 1))
+                            }
                             fallbackName += "." + suffix
                         }
                         let temporary = FileManager.default.temporaryDirectory
@@ -146,12 +149,17 @@ final class ShareViewController: UIViewController {
                 let typeSuffix = UTType(identifier)?.preferredFilenameExtension?.lowercased() ?? ""
                 let sourceName = source.lastPathComponent
                 var name = suggested.isEmpty ? sourceName : suggested
-                if URL(fileURLWithPath: name).pathExtension.isEmpty {
-                    if !URL(fileURLWithPath: sourceName).pathExtension.isEmpty {
-                        name += "." + source.pathExtension
-                    } else if supported.contains(typeSuffix) {
-                        name += "." + typeSuffix
+                let nameSuffix = URL(fileURLWithPath: name).pathExtension.lowercased()
+                // NSItemProvider may expose an arbitrary ".tmp" filename.
+                // The real format declared by UniformTypeIdentifiers wins
+                // whenever the suggested name has no usable extension.
+                if !supported.contains(nameSuffix) && supported.contains(typeSuffix) {
+                    if !nameSuffix.isEmpty {
+                        name = String(name.dropLast(nameSuffix.count + 1))
                     }
+                    name += "." + typeSuffix
+                } else if nameSuffix.isEmpty && supported.contains(source.pathExtension.lowercased()) {
+                    name += "." + source.pathExtension.lowercased()
                 }
                 self.store(kind: "file", title: name, value: nil, file: source,
                            typeIdentifier: identifier)

@@ -45,18 +45,20 @@ jobs:
           name: ios-single-mobile-ui-proof
           path: ios-build/www/tiflo-ios-ui-identity.json
           if-no-files-found: error
-      - name: Instalar dependencias para proyecto nativo iOS
-        working-directory: ios-build
-        run: npm install --no-audit --no-fund
-      - name: Construir contenedor nativo en simulador (sin firma)
-        working-directory: ios-build
+      - name: Construir Capacitor 8 y extensiones sobre la unica interfaz movil (sin firma)
+        working-directory: mobile
+        env:
+          TIFLO_IOS_NATIVE_ROOT: ${{ github.workspace }}/mobile/ios
         run: |
           npx cap add ios
-          node install-native-video.mjs
-          ruby install-share-extension.rb
-          ruby configure-ios-compliance.rb
+          node ../ios-build/install-native-video.mjs
+          ruby ../ios-build/install-share-extension.rb
+          ruby ../ios-build/configure-ios-compliance.rb
           (cd ios/App && pod install)
           test -s ios/App/App/public/tiflo-ios-ui-identity.json
+          test -s ios/App/App/public/app.js
+          test ! -f ios/App/App/public/videos.html
+          test ! -f ios/App/App/public/actualidad.html
           xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build
 
   parity-blocker:

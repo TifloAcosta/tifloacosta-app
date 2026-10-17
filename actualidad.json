@@ -1,5 +1,124 @@
 [
   {
+    "id": "engadget-cb7f698df5a67ced",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2284034/samsung-galaxy-feature-protects-from-untrustworth-apps-auto-blocker/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-17T16:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "android",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "This Samsung Galaxy feature can protect you from untrustworthy apps",
+        "summary": "Samsung's Auto Blocker protects your Galaxy phone from security threats, but it does have drawbacks. Here's what it does and when you might want to turn it off.",
+        "body": "Samsung's Auto Blocker keeps threats at bay, but it can also get in your way.\n\nIf you own a Samsung Galaxy phone running One UI 6.0 or later, you may have a built-in security feature called Auto Blocker working in the background without even realizing it. Enabled by default on devices that ship with One UI 6.1.1 or later, it filters out apps, USB commands and messages that could put your device at risk without you even having to lift a finger. For most people, that's a super useful layer of protection in a world where threats are extremely common and can come from apps, a public charging cable or images you get in a text.\n\nBut Auto Blocker isn't without its complications, especially for users who like to sideload apps, work with developer tools or install software from outside the Google Play Store or the Samsung Galaxy Store. Epic Games even filed a lawsuit against Samsung a couple of years ago, arguing that this very feature made downloading third-party apps unnecessarily difficult.\n\nUnderstanding what Auto Blocker actually does and what it doesn't can help you make a smarter decision about whether to keep it on, turn it off or somewhere in between. Let's see what this feature does, how you can enable or disable it and what's the best thing to do.\n\nAuto Blocker is a built-in security feature available on Galaxy devices using One UI 6 or higher. Its main job is to stop app installation from outside the Google Play Store or Samsung's Galaxy Store, efficiently closing off one of the most common ways malware ends up on a phone. It also takes things a step further and blocks malicious commands sent through a USB cable, which matters if you've ever charged your phone using a public cable. Beyond that, Auto Blocker filters images suspected of containing malicious code in messaging apps like Samsung Messages, Google Messages, Messenger, WhatsApp or Telegram.\n\nFor users who want even stronger protections, Samsung offers another mode called \"Maximum restrictions,\" which adds extra safeguards, such as blocking device admin apps and work profiles, disabling 2G network connections, preventing auto-reconnection to unsecured Wi-Fi and stripping location data from shared photos. It's definitely a more aggressive setting, increasing security at the expense of convenience.\n\nEpic Games sued Google and Samsung back in 2024. The feature, they said, combined with existing Play Store and Galaxy Store flows, forced users to take over 20 steps just to download the Epic Games Store. The lawsuit was eventually dropped after Epic reached an agreement with Samsung , but the Auto Blocker stayed on.\n\nIf you need to sideload an app or run a developer tool, you can turn Auto Blocker off by going to Settings > Security and privacy > Auto Blocker and tapping the toggle. You'll need to authenticate before switching it off, which is a great feature that can protect you if someone gets their hands on your phone and tries to install some malware. The same path lets you turn it back on.\n\nOn phones running One UI 8.5 or later, you can also enable an option that automatically turns Auto Blocker back on 30 minutes after it's disabled. This lets you temporarily disable the protection to install an app without having to remember to reactivate it. You can find this extra toggle by tapping on the Auto Blocker feature in the menu.\n\nAs you'd expect, Samsung recommends keeping Auto Blocker on, and for most users, that's sound advice. The feature is efficient in guarding against malicious apps, unauthorized USB access and tampered software updates; threats that are easy to overlook until something goes wrong.\n\nThe trade-offs are real, though, because Auto Blocker intentionally blocks APK installs from outside the Play Store and Galaxy Store, which affects anyone who relies on open-source apps or sideloaded tools. The most balanced approach is to leave Auto Blocker enabled by default and disable it only when you have a specific reason to install something from outside official app stores. Once you're done, you turn it back on, or, if you're running One UI 8.5 or later, you can have it automatically turn back on after 30 minutes.\n\nIf you're an advanced user who sideloads often, the auto re-enable option can feel like a nuisance. Just keep in mind that disabling Auto Blocker removes an additional layer of security. Other protections, including Google Play Protect , can still help guard against malicious apps, but it's important to verify the source of anything you install from outside official app stores. For people who want the opposite approach, Samsung's Maximum restrictions mode adds plenty of extra protections."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-dcf91359be5f4c33",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/17/iphone-handoff-pricing-details-ee-uk/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-17T15:54:02.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "EE announces iPhone Handoff pricing details for UK customers",
+        "summary": "As part of its iPhone Duo preorder announcement, UK carrier EE has announced pricing details for iPhone Handoff – making it the first carrier in the UK to do so. Here are the details. more…",
+        "body": "As part of its iPhone Duo preorder announcement, UK carrier EE has announced pricing details for iPhone Handoff – making it the first carrier in the UK to do so. Here are the details.\n\nAt its September keynote, Apple announced iPhone Handoff, a feature that allows users to use their same eSIM across multiple iPhones. It requires support from carriers, and at the keynote, Apple announced T-Mobile, Verizon, EE, and Deutsche Telekom would support it. T-Mobile said it’d be available for $5/month as an add-on for your line, and Verizon just announced it’d be $10/month .\n\nNow, EE is announcing that iPhone Handoff will be available for free as part of its Full Works Plus plan, and available for £5/month on its other plans:\n\niPhone Handoff allows customers to easily switch back and forth between two iPhone models with the same mobile number. It means customers can choose the iPhone that’s right for the moment, without worrying about missing a call, message or notification.\n\nWhether you’re heading to a festival, going for a run, tackling an all-day hike or simply travelling lighter, your contacts, calls and messages move seamlessly with you.\n\nIncluded with EE’s Full Works Plus plan which includes Fast Lane, or available for £5 per month on a rolling contract, iPhone Handoff is coming soon and offers a level of flexibility and convenience that isn’t available anywhere else in the UK.\n\nIt’s worth noting that it’s still “coming soon,” though Apple did announce that it’ll be available by the end of the year.\n\nMy favorite Apple accessory recommendations:\n\nFollow Michael: X/Twitter , Bluesky , Instagram"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-a0016625ac47af18",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2284032/why-some-places-blurry-google-maps/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-17T15:30:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Why are some locations blurred out on Google Maps?",
+        "summary": "When using Google Maps, it isn't rare to see blurred locations. Why does this happen? The answer is simple, and it has everything to do with security.",
+        "body": "Want more privacy? Opt in to blur your home on Googe Maps Street View.\n\nWe live in a world of permanent blur — at least on Street View in Google Maps, where locations once blurred cannot be unblurred. So why are some locations blurred on Google Maps, and what is it for?\n\nGoogle can mask locations by blurring them on Street View. It does this in response to requests from government entities, digital privacy campaigners, and its own customers. It's all a matter of protecting the privacy of key people and places. The locations that tend to be blurred include:\n\nIn some nations, including the Netherlands and Germany, people have a legal right to request that their home is blurred on these services, which is why so many properties there have been given that treatment.\n\nThe issue is that Google Street View provides detailed information on locations that can provide insight into property layout, value, and security protection. Police, criminals, open-source investigators, and journalists may potentially use Street View in their line of work. The blurring of this data on Street View reduces your digital footprint, which may protect you.\n\nGoogle's Street View service already blurs people's faces and license plates by default using automated tools. If those tools fail to redact something, you can request removal of those items. You can also use the same process to request that your home be blurred.\n\nGoogle does not offer a way to undo the blurring of a location once it is applied. It's a permanent measure. That means that while blurring a property may help harden your security, it's not something you should do without thought. Not only does doing so prevent neighbors from exploring the entire street in Street View, but it also means potential future buyers and owners of the property will be unable to see the building.\n\nThere is also the counterintuitive argument that burglars studying an area for potential targets may see a blurred property as an attractive target, because that blurring suggests there may be something or someone valuable inside it.\n\nWherever you stand on the blur or not to blur argument, it is important to recognize that blurring a property on Google Maps Street View does not blur that location on any other mapping services. To blur a property on Apple Maps, you should write to MapsImageCollection@apple.com including your name, address, and request details. Other mapping services, including Baidu Maps , Mapillary , and Karta View , may offer some form of street-level imaging service in your region. These may enable the blurring of specific locations on request. Microsoft removed its Streetside imagery from Bing Maps as part of its transition to Azure Maps."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-5049974f137246ab",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1013409/meta-removes-language-that-may-have-allowed-it-to-scrape-news-sites",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-17T15:04:36.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Meta removes language that may have allowed it to scrape news sites",
+        "summary": "After backlash, Meta is updating its terms again to remove language that suggested it could scrape content from sites, including news sites, to train its AI. Specifically, the following language no longer appears on the commercial terms page: … Meta may use any content from such domains, web pages, or URLs to provide, develop, improve, […]",
+        "body": "After backlash, Meta is updating its terms again to remove language that suggested it could scrape content from sites, including news sites, to train its AI. Specifically, the following language no longer appears on the commercial terms page :\n\n… Meta may use any content from such domains, web pages, or URLs to provide, develop, improve, research, train, and maintain the integrity of, the Meta Company Products, services, and features provided under these Commercial Terms and any other applicable supplemental terms.\n\nMany, including Neiman Lab and James Grimmelmann, a professor of digital and information law at Cornell, interpreted it as an …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-3945d45163f6618c",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2284029/both-ethernet-and-wifi-for-home/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-17T14:30:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Should you have both Ethernet and Wi-Fi for your home?",
+        "summary": "Ethernet will keep your devices connecting online in record time, while Wi-Fi keeps them untethered. But how well can they both work together?",
+        "body": "Wi-Fi and Ethernet work together for a great blend of convenience and reliability.\n\nEven though so many devices use wireless connections, Ethernet still has a place in your home network. The latest Wi-Fi standards make big improvements, but a wireless connection often can't compete with a cable. You probably don't mind the speed sacrifice when you're scrolling Instagram on your phone in bed, but it makes a difference when downloading game updates or uploading large files.\n\nEthernet might fall short compared to Wi-Fi depending on your internet service provider (ISP) and hardware. But a general guideline is that Wi-Fi is fine when convenience is most important, while Ethernet is superior for any device where you need full speed and top reliability. Having a setup equipped for both makes for a healthy home network where everyone is happy.\n\nIf you've done a home internet speed test , you've likely noticed that the speeds you get on Wi-Fi don't match what you pay your ISP for. Wireless setups are typically slower than wired ones for several reasons. Wi-Fi signals suffer from overhead in managing their connections, especially when many devices are sharing the limited bandwidth at once. They also degrade as they travel, and they have trouble passing through thick obstacles like metal walls or concrete. Other wireless signals from devices like microwaves and baby monitors can interfere with older 2.4GHz Wi-Fi signals, and nearby Wi-Fi networks can cause interference, too.\n\nDespite all this, Wi-Fi still has a place. It wouldn't be feasible to connect all your smart home devices (appliances, cameras, plugs, and more) to your router with a cable, especially since many of them lack Ethernet ports. Plus, most of what these devices do — along with what most people do on phones, tablets, and even laptops — works perfectly fine with Wi-Fi's limitations. Unless you have a terrible router or extremely low internet speeds, you're not going to notice slightly higher latency or slower downloads while watching YouTube.\n\nIf you just want to get a device online, especially if it moves around the house regularly, connect it to Wi-Fi. Barring any compatibility issues with Wi-Fi security standards or wireless bands, it should work just fine. And if you want uniform coverage across your home, the best Mesh Wi-Fi systems can help with that, especially if you're forced to put your router behind thick walls.\n\nNot all wireless connections are exactly the same. For wireless, the two most important factors are whether it's dual-band or tri-band and what generations of Wi-Fi your router and devices support. For a long time, Wi-Fi ran over two bands: 2.4GHz and 5GHz. The 2.4GHz band is the oldest; it reaches far but offers slower speeds, and it's more susceptible to interference. Meanwhile, the 5GHz band doesn't go as far, but it's faster and less interference-prone. The latest standards add the 6GHz band, which supports even faster speeds but has the lowest effective range. Not all devices work with 6GHz connections, but those that do experience much less interference.\n\nThe Wi-Fi generation of your router affects which bands it broadcasts on. Wi-Fi 5 started rolling out in 2013, so it's time to replace your router if you're still using one from then. Wi-Fi 6 arrived in 2020-2021 alongside Wi-Fi 6E. These are identical, except that Wi-Fi 6E supports the 6GHz band. And the latest, Wi-Fi 7, uses the 6GHz band in addition to other speed and performance improvements.\n\nA dual-band router operates at both 2.4GHz and 5GHz. Depending on the generation, a \"tri-band\" router either means two 5GHz bands (Wi-Fi 6 devices) or 2.4GHz, 5GHz, and 6GHz (Wi-Fi 6E and Wi-Fi 7 routers). Some high-end routers are quad-band, offering two 5GHz bands alongside 6GHz. Having a second 5GHz band provides a dedicated line for mesh network nodes to communicate with each other without affecting your devices on the other band. Without that, there's a higher chance of congestion. If you're reliant on Wi-Fi, that 6GHz band will make a difference for nearby devices, but check to make sure yours are compatible. For example, the PS5 Pro is the only PS5 model compatible with 6GHz Wi-Fi.\n\nEthernet sidesteps most of Wi-Fi's issues. It's a direct connection that doesn't suffer from interference in the air, meaning you'll see lower latency (ping) and speeds closer to what comes into your house from your ISP. Ethernet is full-duplex, which means it can send and receive information at the same time. In contrast, Wi-Fi is half-duplex, meaning it can only send or receive data at a given moment. If you use a desktop (or laptop) PC for network-heavy work, you'll appreciate an Ethernet connection. Video calls will be more stable, cloud storage will sync your files faster, downloads will be quicker, and everything should feel a bit snappier.\n\nWired connections also make a big difference in gaming. While you might think that fast speeds are crucial for online games, low latency is what's most important. With high ping, what you see on the screen is delayed from what's happening on the game's server. You're more likely to have problems here when Wi-Fi is dropping packets, suffering from interference, or cutting out entirely.\n\nWired connections can still be inconvenient, especially in larger homes where longer cables are needed to connect to routers. But there are ways to use Ethernet without running cables . And if you're out of Ethernet ports on your router, a network switch is an affordable, simple way to add more .\n\nEthernet standards aren't terribly difficult to process, either. On both the router and device you want to connect, check the standard in the manual or online specs to find its maximum connection speed. While \"Fast Ethernet\" (100 Mbps) is obsolete, some smart TVs and security cameras are still limited to this speed. On a computer or router, the lowest you're likely to see is 1 Gbps, which is sufficient if your internet plan is slower or equal to that speed. Higher standards include 2.5 Gbps, 5 Gbps, 10 Gbps, and beyond for wildly fast speeds.\n\nThe Ethernet cable you use can also become a bottleneck. Cat5e is the oldest standard in regular use. Officially, it supports 1 Gbps speeds at up to 330 feet, though it can be faster in ideal conditions. Cat6 can handle up to 10 Gbps at 180 feet, or it can match Cat5e speeds at longer distances . Cat6a handles the full 10 Gbps at the 330-foot range. Meanwhile, Cat7 is an unofficial standard that isn't recognized by major organizations like the others, making Cat8 the latest version. It supports up to 40 Gbps but only works at around 100 feet or less, and it's designed for data centers.\n\nIf you're taking the time to run cable through your walls, then it makes sense to choose the newest standard for future-proofing. However, Cat6a is sufficient for most simple tasks like connecting your game console to your router. And if you use it in conjunction with better Wi-Fi bands, you shouldn't ever have much trouble with online connections."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "9to5mac-773fec8d379ec418",
     "type": "news",
     "sourceId": "9to5mac",
@@ -73,30 +192,6 @@
     "media": null
   },
   {
-    "id": "engadget-1685e966594fde08",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2283983/how-to-create-iphone-shortcuts-with-apple-intelligence-and-why-you-should/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-17T13:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "How to create iPhone Shortcuts with Apple Intelligence (and why you should)",
-        "summary": "When it works, it works!",
-        "body": "One of the few places where Apple Intelligence actually makes a difference.\n\nShortcuts has been around since 2018 but has only recently been supercharged with AI. I'm not the biggest fan of Apple Intelligence, but its functionality in the Shortcuts app is one of the few instances where I think AI actually makes a meaningful difference to the user experience. You can already load up custom shortcuts created by other users, but Apple Intelligence now lets you create your own through natural language prompts.\n\nIf you're running iOS 27 and own an iPhone that supports Apple Intelligence, you can simply describe a shortcut and let AI do the heavy lifting for you. Launch the Shortcuts app on your iPhone. It should come preinstalled, but you can grab it from the App Store if you accidentally deleted it before. Tap on the big + icon at the bottom — this will bring up a text box where you can describe what you want the shortcut to do in plain English. Once your shortcut is assembled, tap on the play button to test it out.\n\nThere is a lot you can do with the Shortcuts app on the iPhone. Theoretically, everything the app allows you to automate, Apple Intelligence should be able to help you build. In practice, however, this doesn't always work and might require a bit of trial and error or manual adjustments to get the shortcut working exactly as intended. Fortunately, shortcuts created using Apple Intelligence can be edited as usual.\n\nFor instance, I described a shortcut that would switch my screen to grayscale whenever I launched Instagram and back to color when I quit the app. It did fine for the first half of the shortcut but failed to disable color filters when I exited Instagram. I went back and forth with Apple Intelligence but ended up creating two shortcuts instead.\n\nI had fun testing the limits of the Shortcuts app and Apple Intelligence , and in my experience, the app rarely refuses to generate a shortcut altogether, even if this means putting together a solution that doesn't actually do what I asked it to.\n\nOn some occasions when I fed it an impossible prompt, the Shortcuts app acknowledged that the requested task isn't possible. Most of the time, though, it strings together actions that it thinks are good enough for the shortcut. For example, I prompted it to \"turn my iPhone off when the battery goes below 20 percent,\" and instead it simply locked the screen. Close, but not what I was looking for.\n\nBeing able to create shortcuts using natural language is helpful, but it isn't the only improvement Apple has made to the Shortcuts app. You can also create a shortcut that leverages Apple Intelligence to generate text and make sense of data, for instance. When creating a shortcut manually, select Apple Intelligence to access the Use Model action that can send requests to an AI model, process them and generate a response. You can also use the generated response in subsequent actions within your shortcut.\n\nYou can pick between the Cloud , Cloud Pro and On-Device AI models to handle your requests. You can also choose ChatGPT to take advantage of OpenAI's models. Apple Intelligence models seem to handle text generation quite well. I described a shortcut that would fetch an article from a URL, summarize it and save it to the Notes app. You can make it so the shortcut appears as an action when you tap the Share button anywhere. To do this, launch the Shortcuts app, select your shortcut, tap on the i button and turn the Show in Share Sheet toggle on.\n\nOnce again, results can be hit or miss and depend on how well Apple Intelligence is able to understand your request and put together the necessary actions to make it work. A simple yet effective shortcut I created saved photos I took using my iPhone's telephoto camera into a separate album.\n\nWhen it works, the Apple Intelligence integration within the Shortcuts app is a godsend. Just be sure to tap on Edit after generating a shortcut and double-check the actions it has put together before relying on it to do its job."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "the-verge-8288e1d041548716",
     "type": "news",
     "sourceId": "the-verge",
@@ -116,129 +211,6 @@
         "title": "Websites are closing their doors to AI agents",
         "summary": "Autonomous agents are the hottest thing in AI. OpenAI, Meta, Google, Instinct, and others promise their agents can scour the internet on your behalf, doing anything from booking a dinner reservation and cleaning out your inbox to buying new shoes. But what happens when the rest of the internet won't play nice? In recent weeks, […]",
         "body": "Autonomous agents are the hottest thing in AI. OpenAI, Meta, Google, Instinct, and others promise their agents can scour the internet on your behalf, doing anything from booking a dinner reservation and cleaning out your inbox to buying new shoes. But what happens when the rest of the internet won't play nice?\n\nIn recent weeks, users of services like Meta's Muse, xAI's Grok, OpenAI's Dots, and Instinct have reported blocks preventing their AI agents from performing tasks across top websites. Yelp told TechCrunch that it only allows AI agents that pay for its data licensing program, while Delta Air Lines is preventing them from booking ticket …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-83cde211fc5985af",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2283982/common-changing-habits-degrading-ev-battery/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-17T12:45:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "These common charging habits could be degrading your EV battery",
-        "summary": "EVs, with their enormous batteries, can suffer if they're charged in the wrong way. Here's what you should keep in mind when you next juice your vehicle.",
-        "body": "Simple limits and slower charges could make an instant difference.\n\nAlthough EVs are still pricier than they should be, once you've gone electric , it's hard to go back. They're quieter than combustion engines, cost less to maintain, and most importantly, electricity is a lot cheaper than gas. Many drivers can charge at home , although battery capacities have evolved past the point where you can (realistically) top up using the same outlet you use for your Shop-Vac.\n\nSomething auto dealers don't prepare you for is the necessity of treating your car like a smartphone. If you want to maintain reasonable range several years down the road, you shouldn't just charge however you feel like it. Abusing a car's battery can legitimately mean the difference between making an intercity trip in one shot or having to stop halfway for safety's sake.\n\nIdeal practices boil down to what percentages you should charge at, what temperatures are acceptable, and when it's okay to use high-speed Level 3 charging . You don't need to be rigid about them. Avoiding bad habits, however, can certainly pay off in the long run.\n\nThe easiest habit to ditch is charging to 100 percent every time. There are plenty of circumstances in which a full charge is unavoidable, say if you're working at a remote job site, or heading out on a cross-country trip. If possible, however, lithium iron phosphate (LFP) batteries should only be fully topped up once per week, while nickel manganese cobalt (NMC) systems should be left around 80 to 90 percent most of the time. You'll need to research what sort of battery your car is equipped with. The good news is that modern EVs and chargers let you set fixed percentage caps, so there's no need to constantly check the state of charging on your phone.\n\nWhen in doubt, try to keep your car between 20 and 80 percent , as running on fumes (sparks?) is also harmful to longevity. There's a convenience benefit to holding at that 80 percent limit, too — beyond that point, charging is usually throttled dramatically, so there's no point waiting if you're not on a really long trip.\n\nNext, let's talk temperature. You're probably already aware of the need to precondition a battery before charging in the cold, since frigid temperatures make charging inefficient. Worse than that, however, is charging in high heat, meaning temperatures approaching 104 Fahrenheit (40 Celsius). That can actively accelerate degradation. Avoiding that is a challenge in places like Texas or Arizona, yet some workarounds include early morning or overnight sessions, or simply charging in a garage space. When you return home from a long trip, let your car settle down for a while before plugging in.\n\nLast but hardly least is avoiding Level 3 chargers — or DC fast chargers — unless you're on the road, low on charge and can't afford to wait a few hours, assuming a Level 2 charger is even available. While the long-term degradation caused by Level 3 systems appears to be minor, it's not insignificant. You are after all pumping dozens or hundreds of kilowatts into your battery, and that generates a lot of waste heat. There's only so much an EV can do to keep itself cool.\n\nIt's obvious when you think about it, but one of the best things you can do is minimize how hard you drive your car. All EVs have a finite number of full (0 to 100 percent) charge cycles, typically between 1,000 and 2,000. You're inevitably performing fractional charges — nevertheless, the fewer times you have to charge your battery, the longer it's going to operate, and stay closer to its original capacity. Stick to speed limits using cruise control, and use your car or phone's EV routing options to pick maximally efficient routes.\n\nIt's also wise to keep your vehicle sheltered from the elements. Batteries have an optimal temperature even at rest, and when it's time to get going, a vehicle closer to the sweet spot (68 to 86 Fahrenheit, or 20 to 30 Celsius) will either spend less energy on preconditioning or suffer less if you have to leave immediately. While not everyone has access to a garage or carport where they park, relocating to the shade or out of the wind could make a difference. In hot climates, you may need to stick a reflective visor in your windshield.\n\nRemember again that you shouldn't stress about stepping outside the bounds of these rules. EVs are meant to be driven, and designed to withstand most of what you throw at them. Their battery health won't collapse if you charge to 100 percent twice per week. If you do push them to the limit, it's going to be several years before you lose a noticeable amount of mileage."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-14199a98e91894f2",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2289567/apple-updates-app-store-rules-ai-nudify-apps/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-17T12:35:56.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple updates App Store rules to ensure it doesn't offer AI nudify apps",
-        "summary": "Apple has tightened the App Store's rules against AI-generated nonconsensual intimate imagery.",
-        "body": "Developers are now required to filter nonconsensual intimate imagery.\n\nApple has updated its moderation policy for the App Store to make sure people aren't using applications, including those that use AI tools, to \"nudify\" or turn normal images into sexually explicit content. The company has long prohibited pornographic materials in the App Store, and apps that were specifically made to generate sexually explicit imagery haven't been allowed for a long time. Now, Apple also wants developers to proactively police the use of their applications.\n\nDevelopers with apps that host user-generated content are now required to filter nonconsensual intimate imagery, including those generated using AI tools. They must give users a way to report offensive content and block abusive accounts. They must also prevent users from being able to upload those kinds of images, and they must remove any that slip through their filters. If they fail to implement adequate safeguards of fail to remedy any violation after they had been notified, they risk being removed from the store.\n\nIn addition, it clarified its rules for apps that use bait-and-switch tactics on the company. If Apple finds that an app has misrepresented its purpose during review and that it actually has \"nudification\" capabilities, it will remove the app from the store and its creator from the Apple Developer Program."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-f7f5e7038e07ad88",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/16/verizon-confirms-10-monthly-fee-for-new-iphone-handoff-feature/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-17T00:01:38.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Verizon confirms $10 monthly fee for new iPhone Handoff feature",
-        "summary": "Following T-Mobile and Deutsche Telekom, Verizon has now confirmed how much it will charge customers to use Apple’s new iPhone Handoff feature. Here are the details. more…",
-        "body": "Following T-Mobile and Deutsche Telekom, Verizon has now confirmed how much it will charge customers to use Apple’s new iPhone Handoff feature. Here are the details.\n\nDuring Apple’s “Surprise and Shine” event last month, the company shared more details about iPhone Handoff, a new iOS 27 feature first previewed at WWDC that lets users share a single phone number across two iPhones.\n\nApple announced that the feature would initially be supported by T-Mobile and Deutsche Telekom, with Verizon and EE expected to follow before the end of the year.\n\nShortly after the event, T-Mobile confirmed a $5 monthly fee for iPhone Handoff, while Deutsche Telekom made the feature available through its existing MultiSIM service, which costs €6.95 per month unless already included in the customer’s plan.\n\nToday, as spotted by MacRumors , Verizon also confirmed its pricing for iPhone Handoff, announcing that it will charge $10 per month, twice as much as T-Mobile.\n\nHere’s Verizon :\n\nVerizon will support iPhone Handoff, giving customers the flexibility to use a single Verizon phone number seamlessly across two compatible iPhone models. Whether using the pocketable iPhone Duo on the go or iPhone 18 Pro for work, customers can switch active status between devices at any time while keeping full access to Verizon’s 5G network. iPhone Handoff will be available from Verizon for $10/month on compatible iPhones models running iOS 27.\n\nAT&T, meanwhile, seemingly has no plans to support Apple’s new iPhone Handoff feature. When CNET asked about it last month, the carrier acknowledged its potential benefits but said it was focused on its existing eSIM activation and transfer options instead.\n\nTo learn more about iPhone Handoff, follow this link ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-7ff0e98a8b3b1f6c",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1010131/apple-iphone-duo-news-announcements",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-16T23:36:26.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "All the news about the iPhone Duo",
-        "summary": "Apple has finally announced its long-rumored foldable: the iPhone Duo. The new phone has a 5.4-inch outer display and a 7.6-inch inner display, a “nano‑texture” finish on the inner screen, and barely any visible crease. Instead of Face ID, it uses Touch ID on the power button. It has two cameras, a main lens and […]",
-        "body": "Apple has finally announced its long-rumored foldable: the iPhone Duo .\n\nThe new phone has a 5.4-inch outer display and a 7.6-inch inner display, a “nano‑texture” finish on the inner screen, and barely any visible crease. Instead of Face ID, it uses Touch ID on the power button. It has two cameras, a main lens and a wide-angle lens. Apple completely revamped iOS 27’s controls and apps for the foldable, including putting the dock on the side of the phone. And it has a flashy opening animation when you unfold the phone.\n\nThe iPhone Duo a big new bet from Apple, though one that’s a little late to the game compared to competitors like Samsung and Google. The phone isn’t cheap: it starts at $1,999 for the base 256GB model, and the prices only go up from there. Still, Apple said that preorder demand was “extraordinary,” so it could have a hit on its hands.\n\nHere’s everything unfolding about the iPhone Duo."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-abdd45ca19b342aa",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1013314/apple-app-store-nudify-ai-apps-harassment",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-16T22:51:22.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple’s updated App Store rules go after ‘nudify’ AI apps",
-        "summary": "Apple's App Store rules now more explicitly ban so-called \"nudify\" apps that generate intimate images of people without their consent using AI tools. The rule changes follow significant criticism toward Apple after X users used Grok earlier this year to make nonconsensual, sexualized deepfakes, including minors. Apple didn't pull X or Grok from the App […]",
-        "body": "Apple's App Store rules now more explicitly ban so-called \"nudify\" apps that generate intimate images of people without their consent using AI tools.\n\nThe rule changes follow significant criticism toward Apple after X users used Grok earlier this year to make nonconsensual, sexualized deepfakes, including minors . Apple didn't pull X or Grok from the App Store, though it told senators that it threatened to yank Grok . At Apple's WWDC event in June, protestors also called on Apple to \"remove Grok, X, and all nudify technology from the App Store,\" and in July, a San Francisco city attorney ordered Apple to remove 13 \"nudify\" apps, which it said …\n\nRead the full story at The Verge."
       }
     },
     "media": null

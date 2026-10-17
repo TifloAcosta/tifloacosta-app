@@ -7,6 +7,7 @@ on:
     paths:
       - 'mobile/**'
       - 'ios-build/prepare-mobile-ui.mjs'
+      - 'ios-build/staging-onesignal-platform.mjs'
       - 'ios-build/test/ios-mobile-ui-source.test.mjs'
       - 'ios-build/native/**'
       - 'ios-build/share-extension/**'
@@ -37,6 +38,7 @@ jobs:
         working-directory: mobile
         run: |
           npm ci
+          node ../ios-build/staging-onesignal-platform.mjs
           npm test
           npm run build
       - name: Crear interfaz iOS desde unica raiz movil
@@ -54,6 +56,10 @@ jobs:
         env:
           TIFLO_IOS_NATIVE_ROOT: ${{ github.workspace }}/mobile/ios
         run: |
+          XCODE="$(find /Applications -maxdepth 1 -type d -name 'Xcode_26*.app' -print | sort | tail -n 1)"
+          test -n "$XCODE" || { echo "::error::Falta Xcode 26"; exit 1; }
+          sudo xcode-select --switch "$XCODE/Contents/Developer"
+          xcodebuild -version
           npx cap add ios
           node ../ios-build/install-native-video.mjs
           ruby ../ios-build/install-share-extension.rb

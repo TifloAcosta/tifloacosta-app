@@ -6,9 +6,10 @@ require 'xcodeproj'
 require 'open3'
 
 root = File.expand_path(__dir__)
-project_path = File.join(root, 'ios/App/App.xcodeproj')
-plist_path = File.join(root, 'ios/App/App/Info.plist')
-podfile_path = File.join(root, 'ios/App/Podfile')
+native_root = ENV.fetch('TIFLO_IOS_NATIVE_ROOT', File.join(root, 'ios'))
+project_path = File.join(native_root, 'App/App.xcodeproj')
+plist_path = File.join(native_root, 'App/App/Info.plist')
+podfile_path = File.join(native_root, 'App/Podfile')
 min_ios = '15.0'
 plist_buddy = '/usr/libexec/PlistBuddy'
 

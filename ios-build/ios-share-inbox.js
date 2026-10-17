@@ -171,7 +171,7 @@
   async function makeFile(opened, itemId = '') {
     if (opened?.kind === 'file') {
       let blob = null;
-      const url = window.Capacitor?.convertFileSrc?.(opened.uri);
+      const url = opened.uri ? window.Capacitor?.convertFileSrc?.(opened.uri) : '';
       if (url) {
         try {
           const response = await fetch(url);

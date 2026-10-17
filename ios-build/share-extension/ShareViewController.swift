@@ -64,18 +64,37 @@ final class ShareViewController: UIViewController {
     // is never a broken HTTPS link: it is an attachment to copy into App Group.
     private func receiveFirstAttachment() {
         guard let context = extensionContext,
-              let item = (context.inputItems as? [NSExtensionItem])?.first,
-              let provider = item.attachments?.first else {
+              let incoming = context.inputItems as? [NSExtensionItem] else {
             finish("No se ha recibido contenido compatible.")
             return
         }
-
-        let suggested = provider.suggestedName ?? ""
         let supported: Set<String> = [
             "pdf", "txt", "html", "htm", "md", "docx", "pptx", "xlsx",
             "epub", "odt", "rtf", "fb2", "mp3", "m4a", "aac", "wav",
             "aiff", "flac", "zip"
         ]
+        let providers = incoming.flatMap { $0.attachments ?? [] }
+        // A WhatsApp share can attach a preview as well as the original.
+        // Prefer the named book/audio/document over a thumbnail or web URL.
+        let provider = providers.first(where: { candidate in
+            supported.contains(URL(fileURLWithPath: candidate.suggestedName ?? "")
+                .pathExtension.lowercased())
+        }) ?? providers.first(where: { candidate in
+            candidate.registeredTypeIdentifiers.contains(where: { identifier in
+                guard let type = UTType(identifier) else { return false }
+                return !type.conforms(to: .url) && !type.conforms(to: .plainText)
+                    && !type.conforms(to: .image)
+                    && (type.conforms(to: .audio) || type.conforms(to: .data)
+                        || type.conforms(to: .content)
+                        || supported.contains(type.preferredFilenameExtension?.lowercased() ?? ""))
+            })
+        }) ?? providers.first
+        guard let provider = provider else {
+            finish("No se ha recibido contenido compatible.")
+            return
+        }
+
+        let suggested = provider.suggestedName ?? ""
         let namedExtension = URL(fileURLWithPath: suggested).pathExtension.lowercased()
         let namedFile = supported.contains(namedExtension)
         let identifiers = provider.registeredTypeIdentifiers

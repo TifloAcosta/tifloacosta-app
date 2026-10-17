@@ -215,3 +215,13 @@ La batería general theme falla en pruebas del código web y contratos antiguos 
 Destino autorizado exclusivamente: grupo interno «Probadores TifloAcosta», SIN App Store pública ni probadores externos.
 Compilar, firmar, subir y confirmar VALIDA para TestFlight, después probar personalmente en iPhone: WhatsApp EPUB real, texto, enlace YouTube, audio, persistencia y eliminación, presentación y rotor de acciones en títulos. No declarar resuelto el rotor de la biblioteca sin la comprobación física.
 Notificar por correo solo cuando la nueva compilación esté efectivamente disponible para el probador interno.
+
+
+Solicitud de nueva compilación interna de aceptación iOS (17/10/2026): reparación de MP3 recibidos, PR #203.
+Commit integrado en preparacion-ios: f6c2fdc2985561daf99f9a9adbda00f3a2e154da.
+Incidencia real del probador: al pulsar «Guardar audio en biblioteca» en Recibidos, un MP3 compartido puede no verse en Mi biblioteca. Causa identificada: WKWebView puede servir su archivo local como application/octet-stream, pero el almacén de audio sólo acepta audio/mpeg o audio/mp3.
+Corrección: inferir audio/mpeg únicamente para fichero .mp3, conservar el nombre original y comprobar la existencia de bytes de audio en IndexedDB tras la importación. Si falla o el audio es de un formato no admitido para guardar, se conserva el contenido recibido y se informa del error.
+Validación técnica sin firma superada: compartir iOS ejecución 39039443339, preflight iOS ejecución 39039443287, rotor/compilación nativa ejecución 39039443386, todas SUCCESS.
+Enviar UNA compilación únicamente a «Probadores TifloAcosta» en TestFlight interno. No App Store pública ni participantes externos. No borrar los MP3 de la bandeja, bibliotecas, ajustes ni carpetas.
+Aceptación física requerida en iPhone: compartir un MP3 por WhatsApp; guardarlo desde Recibidos; comprobar título en Mi biblioteca con filtro «Importados recientemente» y búsqueda vacía; abrirlo y reproducirlo; comprobar que un fallo deja su original en Recibidos.
+No anunciar la actualización como instalable hasta obtener VALID y asignación real al grupo interno de Apple.

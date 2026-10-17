@@ -17,6 +17,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ios-mobile-ui-audit-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   staged-mobile-ui:
     name: Paquete y pruebas de interfaz sin publicar

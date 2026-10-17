@@ -146,8 +146,8 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     const copyByLanguage = {
       es: {
         heading: 'Buscar en TifloAcosta',
-        label: 'Título, descripción o tema',
-        placeholder: 'Por ejemplo: VoiceOver, Android, WhatsApp…',
+        label: 'Buscar por título o tema',
+        placeholder: '',
         button: 'Buscar',
         clear: 'Borrar búsqueda',
         loading: 'Buscando en TifloAcosta…',
@@ -173,8 +173,8 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       },
       en: {
         heading: 'Search TifloAcosta',
-        label: 'Title, description, or topic',
-        placeholder: 'For example: VoiceOver, Android, WhatsApp…',
+        label: 'Search by title or topic',
+        placeholder: '',
         button: 'Search',
         clear: 'Clear search',
         loading: 'Searching TifloAcosta…',

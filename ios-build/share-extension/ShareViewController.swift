@@ -74,20 +74,28 @@ final class ShareViewController: UIViewController {
             "aiff", "flac", "zip", "png", "jpg", "jpeg", "webp"
         ]
         let providers = incoming.flatMap { $0.attachments ?? [] }
-        // A WhatsApp share can attach a preview as well as the original.
-        // Prefer the named book/audio/document over a thumbnail or web URL.
+        let imageExtensions: Set<String> = ["png", "jpg", "jpeg", "webp"]
+        // WhatsApp may put an image preview before the original EPUB.
+        // A named document/audio always beats an image; a standalone image
+        // remains available for the reader's existing OCR.
         let provider = providers.first(where: { candidate in
-            supported.contains(URL(fileURLWithPath: candidate.suggestedName ?? "")
-                .pathExtension.lowercased())
+            let suffix = URL(fileURLWithPath: candidate.suggestedName ?? "")
+                .pathExtension.lowercased()
+            return supported.contains(suffix) && !imageExtensions.contains(suffix)
         }) ?? providers.first(where: { candidate in
             candidate.registeredTypeIdentifiers.contains(where: { identifier in
                 guard let type = UTType(identifier) else { return false }
+                let suffix = type.preferredFilenameExtension?.lowercased() ?? ""
                 return !type.conforms(to: .url) && !type.conforms(to: .plainText)
                     && !type.conforms(to: .image)
                     && (type.conforms(to: .audio) || type.conforms(to: .data)
                         || type.conforms(to: .content)
-                        || supported.contains(type.preferredFilenameExtension?.lowercased() ?? ""))
+                        || (supported.contains(suffix) && !imageExtensions.contains(suffix)))
             })
+        }) ?? providers.first(where: { candidate in
+            let suffix = URL(fileURLWithPath: candidate.suggestedName ?? "")
+                .pathExtension.lowercased()
+            return imageExtensions.contains(suffix)
         }) ?? providers.first
         guard let provider = provider else {
             finish("No se ha recibido contenido compatible.")

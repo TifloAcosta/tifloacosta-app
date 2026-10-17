@@ -204,3 +204,14 @@ Objetivo: comprobar en iPhone con VoiceOver acciones de rotor por elemento en to
 Compartir: un único contexto transitorio para recibido, lectura sin guardado, guardado verificable, apertura de YouTube y análisis de enlaces descargables con el analizador existente; conservar los datos y los pendientes ante fallos.
 DESTINO EXCLUSIVO: TestFlight interno, grupo Probadores TifloAcosta; NO publicar en App Store ni activar pruebas externas.
 Esta compilación es para aceptación en dispositivo: NO afirmar que el rotor de VoiceOver funciona hasta comprobarlo físicamente. Confirmar disponibilidad solo tras Apple VALID y asignación a probador interno.
+
+
+Solicitud de compilación interna de aceptación, 17/10/2026: PR #202.
+Integración confirmada en preparacion-ios: 33a1977f324a0ff8fd7b7aa38873bb017fefd263.
+Reparación: Recibidos es una sección iOS real y discreta, sin superposición ni carpetas ajenas en portada o TifloLector. Clasifica documentos EPUB/PDF, audio, OCR de imágenes, texto y enlaces; gestiona origen file://; elige documentos antes de miniaturas y conserva extensiones si el proveedor presenta nombres temporales.
+Seguridad de los datos: leer, escuchar o abrir un enlace NO elimina la entrada de Recibidos; guardar confirma ID persistido mediante lectura de biblioteca antes de retirar el original; eliminar exige confirmación. Conservar todos los libros y carpetas previos.
+Verificaciones automatizadas del SHA 79ab31a15cff9dad9b04911636e2bf0f6672d98e: Compartir nativo (39032564246) SUCCESS; preflight de empaquetado (39032564215) SUCCESS; rotor/compilación iOS sin firma (39032564254) SUCCESS.
+La batería general theme falla en pruebas del código web y contratos antiguos no modificados por PR #202; no ocultar ni confundir estos fallos con aceptación en iPhone.
+Destino autorizado exclusivamente: grupo interno «Probadores TifloAcosta», SIN App Store pública ni probadores externos.
+Compilar, firmar, subir y confirmar VALIDA para TestFlight, después probar personalmente en iPhone: WhatsApp EPUB real, texto, enlace YouTube, audio, persistencia y eliminación, presentación y rotor de acciones en títulos. No declarar resuelto el rotor de la biblioteca sin la comprobación física.
+Notificar por correo solo cuando la nueva compilación esté efectivamente disponible para el probador interno.

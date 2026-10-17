@@ -368,8 +368,8 @@
 
   function installLibrarySort() {
     const selection = document.getElementById('reading-library-filter');
-    const search = document.getElementById('reading-library-query-label');
-    if (!selection || !search || document.getElementById('ios-reading-library-sort')) return;
+    const refreshButton = document.getElementById('reading-library-refresh');
+    if (!selection || !refreshButton || document.getElementById('ios-reading-library-sort')) return;
     const label = document.createElement('label');
     label.htmlFor = 'ios-reading-library-sort';
     label.textContent = tr('Ordenar por', 'Sort by');
@@ -388,7 +388,7 @@
       select.append(option);
     }
     select.value = 'lastRead';
-    search.before(label, select);
+    refreshButton.before(label, select);
   }
 
   function installBookManagement(options) {

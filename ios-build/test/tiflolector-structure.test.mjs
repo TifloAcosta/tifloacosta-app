@@ -50,14 +50,15 @@ test('iOS native speech and translation are registered and bridged', () => {
 });
 
 
-test('My library is always a visible reader section with search and status filters', () => {
+test('My library stays visible with filters and sorting, without redundant search', () => {
   assert.match(html, /<section id="reading-library-web" class="panel" aria-labelledby="reading-library-heading">/);
   assert.doesNotMatch(html, /<section id="reading-library-web"[^>]*hidden/);
-  for (const id of ['reading-library-filter','reading-library-query','reading-library-list']) {
+  for (const id of ['reading-library-filter','reading-library-list']) {
     assert.ok(html.includes('id="' + id + '"'));
   }
   assert.match(web, /els\.libraryFilter\?\.addEventListener\('change'/);
-  assert.match(web, /els\.libraryQuery\?\.addEventListener\('input'/);
+  assert.doesNotMatch(html, /id="reading-library-query"|id="reading-library-query-label"/);
+  assert.match(folders, /refreshButton\.before\(label, select\)/);
   assert.match(web, /sort: isRecentView \? 'imported' : 'lastRead'/);
   assert.doesNotMatch(html, /id="reading-management-web"/);
 });
@@ -105,7 +106,7 @@ test('iOS packages its own local ZIP engine instead of fetching CDN JSZip', () =
 test('the iOS bundler rejects accidental loss of restored reader features', () => {
   const prepare = read('ios-build/prepare-web.mjs');
   for (const token of [
-    'reading-library-filter', 'reading-library-query', 'reading-library-pager',
+    'reading-library-filter', 'reading-library-pager',
     'reading-marks-new-type', 'shared.adjacentWebReadingStructure(',
     'setReaderAudioOnlyMode(true)', 'setReaderAudioOnlyMode(false)',
     'card.append(title, detailsToggle, details)', 'tifloacosta-guide.js'

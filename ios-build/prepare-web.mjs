@@ -41,7 +41,6 @@ const mandatoryReaderMarkup = [
   'id="reading-default-navigation"',
   'id="reading-reader"',
   'id="reading-library-filter"',
-  'id="reading-library-query"',
   'id="reading-library-pager"',
   'id="reading-marks-new-type"',
   'id="reading-play"',

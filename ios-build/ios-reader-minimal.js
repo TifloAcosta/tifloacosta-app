@@ -32,7 +32,6 @@
     settings?.removeAttribute('aria-labelledby');
     setText(document.getElementById('reading-settings-summary'), tr('Ajustes', 'Settings'));
     setText(document.getElementById('reading-library-filter-label'), tr('Filtro', 'Filter'));
-    setText(document.getElementById('reading-library-query-label'), tr('Buscar', 'Search'));
 
     // No repetir Audio y voz ni Presentación visual como encabezado y leyenda.
     hide('reading-audio-settings-heading');

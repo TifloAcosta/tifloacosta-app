@@ -101,78 +101,68 @@
   #reading-section .reading-library-title { transition: none; }
 }
 
-/* A compact, opt-in destination for native Share Extension items. */
-#reading-section .ios-share-inbox {
-  margin: .6rem 0 1rem;
-  padding: .8rem;
-  border: 1px solid var(--border);
-  border-radius: .65rem;
-  background: var(--surface-alt);
-}
-#reading-section .ios-share-inbox-items {
-  display: flex;
-  flex-direction: column;
-  gap: .6rem;
-}
-#reading-section .ios-share-inbox-item {
-  display: grid;
-  gap: .3rem;
-  padding: .45rem 0;
-  border-bottom: 1px solid var(--border);
+/* Recibidos uses the app's ordinary section and typography. It must never
+ * render floating cards in Home or introduce a second library in TifloLector.
+ * Closed details offer one VoiceOver stop per incoming item.
+ */
+#ios-received-section {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   overflow-wrap: anywhere;
 }
-
-/* Only a temporary incoming-content panel before Secciones. The existing
- * reader and Home navigation keep their original layout and styles. */
-#ios-shared-received,
-#reading-section #ios-share-inbox {
-  box-sizing: border-box;
-  max-width: 100%;
-  min-width: 0;
-  padding: .65rem;
-  margin: .65rem 0;
-  border: 1px solid var(--border);
-  border-radius: .65rem;
-  background: var(--surface-alt);
-}
-#ios-shared-received h3,
-#reading-section #ios-share-inbox h3 {
-  margin: 0 0 .45rem;
-  line-height: 1.35;
-  font-size: 1rem;
-}
-#ios-shared-received .ios-share-inbox-items,
-#reading-section #ios-share-inbox .ios-share-inbox-items {
+#ios-received-list {
   display: flex;
   flex-direction: column;
-  gap: .35rem;
+  gap: 0;
   width: 100%;
-}
-#ios-shared-received button.ios-share-inbox-item,
-#reading-section #ios-share-inbox button.ios-share-inbox-item {
-  display: block;
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 100%;
   min-width: 0;
-  height: auto;
-  min-height: 2.75rem;
+}
+#ios-received-list .ios-received-summary {
+  color: var(--muted);
+  margin: .35rem 0 .55rem;
+}
+#ios-received-list .ios-received-item {
   margin: 0;
-  padding: .65rem .75rem;
-  border: 1px solid var(--border);
-  border-radius: .45rem;
-  font: inherit;
+  padding: 0;
+  min-width: 0;
+  border-bottom: 1px solid var(--border);
+}
+#ios-received-list .ios-received-item summary {
+  box-sizing: border-box;
+  display: list-item;
+  min-height: 2.75rem;
+  padding: .78rem .55rem;
   font-size: 1rem;
-  line-height: 1.4;
   font-weight: 600;
-  text-align: left;
+  line-height: 1.4;
   white-space: normal;
   overflow-wrap: anywhere;
+  cursor: pointer;
 }
-#ios-shared-received button.ios-share-inbox-item:focus-visible,
-#reading-section #ios-share-inbox button.ios-share-inbox-item:focus-visible {
+#ios-received-list .ios-received-item summary:focus-visible {
   outline: 3px solid var(--focus);
-  outline-offset: 2px;
+  outline-offset: -3px;
+}
+#ios-received-list .ios-received-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  padding: .45rem .55rem .75rem;
+}
+#ios-received-list .ios-received-actions button,
+#ios-received-list .ios-received-more {
+  box-sizing: border-box;
+  max-width: 100%;
+  min-height: 2.75rem;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  font: inherit;
+}
+#ios-received-list .ios-received-item-status {
+  padding: 0 .55rem;
+  margin: 0 0 .6rem;
 }
 
 /* iOS-only safe areas and overflow. The packaged viewport opts in to
@@ -190,7 +180,7 @@ body {
   padding-right: env(safe-area-inset-right, 0px);
 }
 #home-blocks, #reading-section, #reading-library-web,
-#reading-library-list, #ios-shared-received, #ios-share-inbox {
+#reading-library-list, #ios-received-section, #ios-received-list {
   min-width: 0;
   max-width: 100%;
   overflow-wrap: anywhere;

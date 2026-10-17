@@ -60,92 +60,175 @@ final class ShareViewController: UIViewController {
         extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
     }
 
+    // A provider may publish BOTH a local file and a URL. A file:// URL
+    // is never a broken HTTPS link: it is an attachment to copy into App Group.
     private func receiveFirstAttachment() {
         guard let context = extensionContext,
-              let item = (context.inputItems as? [NSExtensionItem])?.first,
-              let provider = item.attachments?.first else {
+              let incoming = context.inputItems as? [NSExtensionItem] else {
             finish("No se ha recibido contenido compatible.")
             return
         }
-        let name = provider.suggestedName ?? "Contenido"
-        // Files retain their exact bytes. The provider's temporary URL is only
-        // valid inside this callback, so copy before returning.
-        let supported = ["pdf", "txt", "html", "htm", "md", "docx", "pptx",
-                         "xlsx", "epub", "odt", "mp3", "zip"]
-        let types = provider.registeredTypeIdentifiers
-        // Prioritize real documents over URLs. Files can also advertise a
-        // file:// URL, which must NOT be mistaken for a Safari web link.
-        let explicitlyNamedFile = supported.contains(URL(fileURLWithPath: name)
-            .pathExtension.lowercased())
-        let selected = types.first { identifier in
-            guard let type = UTType(identifier) else { return false }
-            let known = supported.contains(type.preferredFilenameExtension?.lowercased() ?? "")
-                || type.conforms(to: .pdf) || type.conforms(to: .html)
-                || type.conforms(to: .mp3)
-            guard known else { return false }
-            // Unnamed plain text is content, not a document attachment.
-            if type.conforms(to: .plainText) && !explicitlyNamedFile { return false }
-            return true
-        }
-        // WhatsApp/Safari can advertise HTML or text alongside a real web URL.
-        // Only a named document takes precedence over the source URL.
-        if !explicitlyNamedFile &&
-           provider.hasItemConformingToTypeIdentifier(UTType.url.identifier) {
-            provider.loadItem(forTypeIdentifier: UTType.url.identifier, options: nil) { [weak self] item, _ in
-                guard let self = self else { return }
-                let url = (item as? URL) ?? (item as? String).flatMap(URL.init(string:))
-                if let url = url, ["http", "https"].contains(url.scheme?.lowercased() ?? ""),
-                   url.host != nil {
-                    self.store(kind: "url", title: name, value: url.absoluteString, file: nil)
-                } else {
-                    self.finish("El enlace compartido no es válido.")
-                }
-            }
+        let supported: Set<String> = [
+            "pdf", "txt", "html", "htm", "md", "docx", "pptx", "xlsx",
+            "epub", "odt", "rtf", "fb2", "mp3", "m4a", "aac", "wav",
+            "aiff", "flac", "zip", "png", "jpg", "jpeg", "webp"
+        ]
+        let providers = incoming.flatMap { $0.attachments ?? [] }
+        let imageExtensions: Set<String> = ["png", "jpg", "jpeg", "webp"]
+        // WhatsApp may put an image preview before the original EPUB.
+        // A named document/audio always beats an image; a standalone image
+        // remains available for the reader's existing OCR.
+        let provider = providers.first(where: { candidate in
+            let suffix = URL(fileURLWithPath: candidate.suggestedName ?? "")
+                .pathExtension.lowercased()
+            return supported.contains(suffix) && !imageExtensions.contains(suffix)
+        }) ?? providers.first(where: { candidate in
+            candidate.registeredTypeIdentifiers.contains(where: { identifier in
+                guard let type = UTType(identifier) else { return false }
+                let suffix = type.preferredFilenameExtension?.lowercased() ?? ""
+                return !type.conforms(to: .url) && !type.conforms(to: .plainText)
+                    && !type.conforms(to: .image)
+                    && (type.conforms(to: .audio) || type.conforms(to: .data)
+                        || type.conforms(to: .content)
+                        || (supported.contains(suffix) && !imageExtensions.contains(suffix)))
+            })
+        }) ?? providers.first(where: { candidate in
+            let suffix = URL(fileURLWithPath: candidate.suggestedName ?? "")
+                .pathExtension.lowercased()
+            return imageExtensions.contains(suffix)
+        }) ?? providers.first
+        guard let provider = provider else {
+            finish("No se ha recibido contenido compatible.")
             return
         }
-        if let identifier = selected {
-            provider.loadFileRepresentation(forTypeIdentifier: identifier) { [weak self] url, _ in
+
+        let suggested = provider.suggestedName ?? ""
+        let namedExtension = URL(fileURLWithPath: suggested).pathExtension.lowercased()
+        let namedFile = supported.contains(namedExtension)
+        let identifiers = provider.registeredTypeIdentifiers
+        let fileIdentifier = identifiers.first { identifier in
+            guard let type = UTType(identifier) else { return false }
+            if type.conforms(to: .url) || type.conforms(to: .fileURL) { return false }
+            if type.conforms(to: .plainText) && !namedFile { return false }
+            if type.conforms(to: .html) && !namedFile &&
+                provider.hasItemConformingToTypeIdentifier(UTType.url.identifier) { return false }
+            return type.conforms(to: .audio) || type.conforms(to: .data) ||
+                type.conforms(to: .content) ||
+                supported.contains(type.preferredFilenameExtension?.lowercased() ?? "")
+        }
+
+        // Prefer file bytes, including unnamed data provided by Files/WhatsApp.
+        // Never coerce binary data to a URL or text.
+        if let identifier = fileIdentifier {
+            provider.loadFileRepresentation(forTypeIdentifier: identifier) { [weak self] source, error in
                 guard let self = self else { return }
-                guard let url = url else {
-                    self.finish("No se pudo abrir el archivo recibido.")
+                guard let source = source else {
+                    // Some third-party apps provide raw bytes but no temporary
+                    // file representation. Accept that data without converting
+                    // it into a misleading web link or discarding the original.
+                    provider.loadDataRepresentation(forTypeIdentifier: identifier) { [weak self] data, _ in
+                        guard let self = self, let data = data, !data.isEmpty,
+                              Int64(data.count) <= self.maxBytes else {
+                            self?.finish("No se pudo recibir el archivo. Inténtalo de nuevo desde la aplicación de origen.")
+                            return
+                        }
+                        let suffix = UTType(identifier)?.preferredFilenameExtension?.lowercased() ?? ""
+                        var fallbackName = suggested.isEmpty ? "Contenido" : suggested
+                        let fallbackSuffix = URL(fileURLWithPath: fallbackName).pathExtension.lowercased()
+                        if !supported.contains(fallbackSuffix) && supported.contains(suffix) {
+                            if !fallbackSuffix.isEmpty {
+                                fallbackName = String(fallbackName.dropLast(fallbackSuffix.count + 1))
+                            }
+                            fallbackName += "." + suffix
+                        }
+                        let temporary = FileManager.default.temporaryDirectory
+                            .appendingPathComponent(UUID().uuidString + "-" + fallbackName)
+                        do {
+                            try data.write(to: temporary, options: [.atomic])
+                            self.store(kind: "file", title: fallbackName, value: nil,
+                                       file: temporary, typeIdentifier: identifier)
+                        } catch {
+                            self.finish("No se pudo conservar el archivo recibido.")
+                        }
+                        try? FileManager.default.removeItem(at: temporary)
+                    }
                     return
                 }
-                let suffix = UTType(identifier)?.preferredFilenameExtension ?? ""
-                var fileName = name
-                if URL(fileURLWithPath: fileName).pathExtension.isEmpty && !suffix.isEmpty {
-                    fileName += "." + suffix
+                let typeSuffix = UTType(identifier)?.preferredFilenameExtension?.lowercased() ?? ""
+                let sourceName = source.lastPathComponent
+                var name = suggested.isEmpty ? sourceName : suggested
+                let nameSuffix = URL(fileURLWithPath: name).pathExtension.lowercased()
+                // NSItemProvider may expose an arbitrary ".tmp" filename.
+                // The real format declared by UniformTypeIdentifiers wins
+                // whenever the suggested name has no usable extension.
+                if !supported.contains(nameSuffix) && supported.contains(typeSuffix) {
+                    if !nameSuffix.isEmpty {
+                        name = String(name.dropLast(nameSuffix.count + 1))
+                    }
+                    name += "." + typeSuffix
+                } else if nameSuffix.isEmpty && supported.contains(source.pathExtension.lowercased()) {
+                    name += "." + source.pathExtension.lowercased()
                 }
-                self.store(kind: "file", title: fileName, value: nil, file: url)
+                self.store(kind: "file", title: name, value: nil, file: source,
+                           typeIdentifier: identifier)
             }
             return
         }
-        if provider.hasItemConformingToTypeIdentifier(UTType.url.identifier) {
-            provider.loadItem(forTypeIdentifier: UTType.url.identifier, options: nil) { [weak self] item, _ in
+
+        if provider.hasItemConformingToTypeIdentifier(UTType.fileURL.identifier) {
+            provider.loadItem(forTypeIdentifier: UTType.fileURL.identifier, options: nil) { [weak self] value, _ in
                 guard let self = self else { return }
-                let url = (item as? URL) ?? (item as? String).flatMap(URL.init(string:))
-                if let url = url, ["http", "https"].contains(url.scheme?.lowercased() ?? "") {
-                    self.store(kind: "url", title: name, value: url.absoluteString, file: nil)
+                if let url = (value as? URL) ?? (value as? String).flatMap(URL.init(string:)),
+                   url.isFileURL {
+                    let filename = suggested.isEmpty ? url.lastPathComponent : suggested
+                    self.store(kind: "file", title: filename, value: nil, file: url)
                 } else {
-                    self.finish("El enlace no es válido.")
+                    self.finish("No se pudo acceder al archivo compartido.")
                 }
             }
             return
         }
-        if provider.hasItemConformingToTypeIdentifier(UTType.plainText.identifier) {
-            provider.loadItem(forTypeIdentifier: UTType.plainText.identifier, options: nil) { [weak self] item, _ in
+
+        if provider.hasItemConformingToTypeIdentifier(UTType.url.identifier) {
+            provider.loadItem(forTypeIdentifier: UTType.url.identifier, options: nil) { [weak self] value, _ in
                 guard let self = self else { return }
-                if let string = item as? String, !string.isEmpty {
-                    self.store(kind: "text", title: name, value: String(string.prefix(200_000)), file: nil)
+                let address = (value as? URL) ?? (value as? String).flatMap(URL.init(string:))
+                guard let address = address else {
+                    self.finish("No se pudo leer el contenido compartido.")
+                    return
+                }
+                if address.isFileURL {
+                    self.store(kind: "file",
+                               title: suggested.isEmpty ? address.lastPathComponent : suggested,
+                               value: nil, file: address)
+                } else if ["http", "https"].contains(address.scheme?.lowercased() ?? ""),
+                          address.host != nil {
+                    self.store(kind: "url", title: suggested.isEmpty ? "Enlace" : suggested,
+                               value: address.absoluteString, file: nil)
+                } else {
+                    self.finish("El contenido recibido no es un enlace web ni un archivo accesible.")
+                }
+            }
+            return
+        }
+
+        if provider.hasItemConformingToTypeIdentifier(UTType.plainText.identifier) {
+            provider.loadItem(forTypeIdentifier: UTType.plainText.identifier, options: nil) { [weak self] value, _ in
+                guard let self = self else { return }
+                if let string = value as? String, !string.isEmpty {
+                    self.store(kind: "text", title: suggested.isEmpty ? "Texto" : suggested,
+                               value: String(string.prefix(200_000)), file: nil)
                 } else {
                     self.finish("No se pudo leer el texto compartido.")
                 }
             }
-        } else {
-            finish("Formato no compatible con TifloLector.")
+            return
         }
+        finish("Formato no compatible con TifloAcosta.")
     }
 
-    private func store(kind: String, title: String, value: String?, file: URL?) {
+    private func store(kind: String, title: String, value: String?, file: URL?,
+                       typeIdentifier: String? = nil) {
         guard let group = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupId) else {
             finish("Falta configurar el grupo compartido de Apple.")
             return
@@ -162,6 +245,11 @@ final class ShareViewController: UIViewController {
                 "id": id, "kind": kind,
                 "name": String(clean.prefix(170)), "createdAt": ISO8601DateFormatter().string(from: Date())
             ]
+            if kind == "file" {
+                let detected = typeIdentifier.flatMap { UTType($0) }
+                    ?? UTType(filenameExtension: URL(fileURLWithPath: clean).pathExtension)
+                message["contentType"] = detected?.preferredMIMEType ?? ""
+            }
             if let file = file {
                 let size = try file.resourceValues(forKeys: [.fileSizeKey]).fileSize ?? 0
                 guard size >= 0 && Int64(size) <= maxBytes else {

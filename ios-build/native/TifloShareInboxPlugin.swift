@@ -101,12 +101,13 @@ public final class TifloShareInboxPlugin: CAPPlugin, CAPBridgedPlugin {
                     "id": id,
                     "kind": info["kind"] ?? "file",
                     "name": info["name"] ?? "Contenido",
+                    "contentType": info["contentType"] ?? "",
                     "createdAt": info["createdAt"] ?? "",
                     // Small preview only; files stay as private App Group bytes.
                     "preview": String((info["value"] ?? "").prefix(2000))
                 ]
-            }.sorted { ($0["createdAt"] ?? "") < ($1["createdAt"] ?? "") }
-            call.resolve(["items": Array(items.prefix(30))])
+            }.sorted { ($0["createdAt"] ?? "") > ($1["createdAt"] ?? "") }
+            call.resolve(["items": Array(items.prefix(100))])
         }
     }
 

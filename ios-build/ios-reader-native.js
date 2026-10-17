@@ -223,12 +223,12 @@
       const next = JSON.stringify(documents);
       if (next === lastRegistered) return;
       lastRegistered = next;
-      void plugin.registerLibraryTitles({ documents, nativeRowsOnFocus: true })
+      void plugin.registerLibraryTitles({ documents, nativeRowsOnFocus: false })
         .then(reply => { voiceOverEnabled = reply?.voiceOverEnabled === true; })
         .catch(() => { voiceOverEnabled = false; });
     };
-    // The application-wide UIKit catalogue owns native title focus. Do not
-    // reopen a second UIKit screen merely because WKWebView sends focusin.
+    // Keep the existing HTML library onscreen. Native actions belong to the
+    // actual VoiceOver-focused title, not an additional UIKit catalogue.
     registerVisibleTitles();
     const observer = new MutationObserver(registerVisibleTitles);
     observer.observe(list, { childList: true, subtree: true, attributes: true, attributeFilter: ['aria-label'] });

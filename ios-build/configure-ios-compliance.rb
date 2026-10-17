@@ -52,7 +52,7 @@ end
 
 verified = Xcodeproj::Project.open(project_path).targets.find { |target| target.name == 'App' }
 raise 'iOS 15.0 target check failed' unless verified.build_configurations.all? { |config| config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] == min_ios }
-raise 'Podfile iOS 15.0 check failed' unless File.read(podfile_path).match?(/^\s*platform\s+:ios,\s*'15\.0'/)
+raise 'Podfile iOS 15.0 check failed' if has_podfile && !File.read(podfile_path).match?(/^\s*platform\s+:ios,\s*'15\.0'/)
 
 puts "App Store encryption compliance declared: ITSAppUsesNonExemptEncryption = false"
 puts "Minimum iOS target for App#{has_podfile ? ' and CocoaPods' : ' (Swift Package Manager)'}: #{min_ios}"

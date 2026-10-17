@@ -15,10 +15,12 @@
   const action = (id, es, english) => ({ id, label: tr(es, english) });
   function findTargets() {
     const targets = [];
+    const registeredElements = new Set();
     targetsById.clear();
 
     const register = (element, kind, actions) => {
-      if (!element || !visible(element)) return;
+      if (!element || !visible(element) || registeredElements.has(element)) return;
+      registeredElements.add(element);
       const label = (element.getAttribute('aria-label') || element.textContent || '').trim();
       if (!label || !actions.length) return;
       if (!element.dataset.iosRotorTarget) element.dataset.iosRotorTarget = 'ios-rotor-' + (++counter);
@@ -49,10 +51,15 @@
     const contentLinks = [
       '#news-list a[href]', '#guide-chapters a[href]',
       '#actualidad-home-list a[href]', '#downloads-list a[href]',
+      '#apps-list a[href]', '#media-accessibility-list a[href]',
+      '#media-technology-list a[href]', '#favorites-list a[href]',
+      '#reading-queue-list a[href]', '#reading-marks-list a[href]',
       '#book-section a[href]', '#contact-section a[href]',
       '#privacy-section a[href]'
     ];
     document.querySelectorAll(contentLinks.join(',')).forEach(link => {
+      // Resource links have richer domain-specific actions below.
+      if (link.closest('.resource-card')) return;
       const href = String(link.href || '');
       const actions = [action('open', 'Abrir', 'Open')];
       if (/^https?:\/\//i.test(href)) {
@@ -61,6 +68,15 @@
       }
       register(link, 'article', actions);
     });
+
+    // Existing collection controls remain visually unchanged. Each control
+    // only exposes a native action that activates its own existing handler.
+    document.querySelectorAll([
+      '#reading-queue-list button', '#reading-marks-list button',
+      '#favorites-list button', '#apps-list button'
+    ].join(',')).forEach(button => register(button, 'button', [
+      action('activate', 'Activar', 'Activate')
+    ]));
 
     // The app already provides working document operations in a dialog.
     // The rotor invokes those exact existing actions without additional UI.
@@ -81,6 +97,10 @@
     const target = targetsById.get(id);
     const element = target?.element;
     if (!element || !visible(element)) return;
+    if (target.kind === 'button') {
+      if (choice === 'activate') element.click();
+      return;
+    }
     if (target.kind === 'video') {
       const card = element.closest('.video-card');
       const play = card?.querySelector('.video-play-button');

@@ -208,7 +208,10 @@ test('Compartir distribuye archivos, YouTube y otros enlaces sin superponer pant
   assert.ok(inbox.includes("imported?.saved !== true || !imported.id"));
   assert.ok(prepare.includes("libraryClient.openBook(id)"));
   assert.ok(inbox.includes("window.addEventListener('hashchange'"));
-  assert.ok(inbox.includes('await accessibility()?.dismissNativeActionList?.()'));
+  // No superposed native library to dismiss; preserve the original screen.
+  assert.ok(!inbox.includes('await accessibility()?.dismissNativeActionList?.()'));
+  assert.ok(!inbox.includes('anchor.after(documentRegion.root)'));
+  assert.ok(inbox.includes('home.before(homeRegion.root)'));
   assert.ok(nativeActions.includes('CAPPluginMethod(name: "dismissNativeActionList"'));
   assert.ok(nativeActions.includes('as? TifloNativeActionListController'));
   assert.ok(nativeActions.includes('"translate": #selector(translateDocument(_:))'));

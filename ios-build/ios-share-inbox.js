@@ -3,7 +3,6 @@
   // Installed only in TifloAcosta iOS. Never put a YouTube link in My Library.
   const native = () => window.Capacitor?.Plugins?.TifloShareInbox;
   const youtube = () => window.Capacitor?.Plugins?.TifloYouTube;
-  const accessibility = () => window.Capacitor?.Plugins?.TifloReadingAccessibility;
   const tr = (es, en) => document.documentElement.lang === 'en' ? en : es;
   const reader = document.getElementById('reading-section');
   const home = document.getElementById('home-blocks');
@@ -13,7 +12,7 @@
   let items = [];
   let previousItems = '';
   let hadQueryError = false;
-  let renderedItems = '';
+  let selectedShareId = '';
   let renderedHome = '';
 
   // Exact host names only: no lookalikes such as youtube.com.example.
@@ -58,9 +57,6 @@
     if (externalURL(item.preview || '')) return 'link';
     return 'document';
   }
-  function readerVisible() {
-    return !reader.hidden && document.getElementById('reading-reader')?.hidden !== false;
-  }
   function region(id, label) {
     const root = document.createElement('section');
     root.id = id;
@@ -77,31 +73,14 @@
     root.append(heading, list, status);
     return {root, heading, list, status};
   }
-  const documentRegion = region('ios-share-inbox', tr('Documentos recibidos por Compartir', 'Documents received via Share'));
   const homeRegion = region('ios-shared-received', tr('Contenido recibido por Compartir', 'Content received via Share'));
-  const status = documentRegion.status;
-  const list = documentRegion.list;
 
   function mount() {
-    const anchor = document.getElementById('ios-reading-import') ||
-      document.getElementById('reading-file-label');
-    if (anchor && anchor.nextElementSibling !== documentRegion.root) {
-      anchor.after(documentRegion.root);
-    }
     // Incoming content belongs to its own temporary context, never inside
     // the permanent Secciones navigation list.
     if (homeRegion.root.nextElementSibling !== home) {
       home.before(homeRegion.root);
     }
-  }
-  async function exposeInbox(showDiagnostic = false) {
-    if (!readerVisible() || (!items.some(item => kindOf(item) === 'document') && !showDiagnostic)) return;
-    try {
-      const result = await accessibility()?.dismissNativeActionList?.();
-      if (result?.dismissed) {
-        (list.querySelector('button') || status).focus({preventScroll: true});
-      }
-    } catch {}
   }
   function explain(error, dest) {
     const message = String(error?.message || error || '');
@@ -250,44 +229,53 @@
       : choice === 'read'
       ? tr('Leer ahora: ', 'Read now: ') + name
       : tr('Guardar en biblioteca: ', 'Save to library: ') + name;
-    const dest = target === 'home' ? homeRegion.status : documentRegion.status;
+    const dest = homeRegion.status;
     control.addEventListener('click', () => { void execute(item, control, dest, choice); });
     return control;
   }
+  function selectPending(direction) {
+    if (items.length < 2) return;
+    let index = items.findIndex(item => item.id === selectedShareId);
+    if (index < 0) index = items.length - 1;
+    selectedShareId = items[(index + direction + items.length) % items.length].id;
+    renderedHome = '';
+    draw();
+  }
   function draw() {
     mount();
-    const docs = items.filter(item => kindOf(item) === 'document');
-    const readerKey = docs.map(i => i.id + ':' + i.kind + ':' + i.name).join('|');
     const allKey = items.map(i => i.id + ':' + i.kind + ':' + i.name + ':' + kindOf(i)).join('|');
-    if (renderedItems !== readerKey || documentRegion.root.hidden !== (docs.length === 0)) {
-      renderedItems = readerKey;
-      documentRegion.root.hidden = docs.length === 0;
-      documentRegion.heading.textContent = tr('Recibidos por Compartir: ', 'Received via Share: ') + docs.length;
-      documentRegion.list.replaceChildren();
-      for (const item of docs) documentRegion.list.append(buttonFor(item, 'document', 'reader'));
-    }
-    // The transient arrival context must never follow the user into other
-    // original sections when the application changes the URL hash.
+    const current = items.find(item => item.id === selectedShareId) || items.at(-1);
+    selectedShareId = current?.id || '';
+    // A received file never creates a second library panel or a screen-wide
+    // native list. Only this one contextual home section can appear.
     const onHome = !location.hash || location.hash === '#home';
     const hideHomeContext = items.length === 0 || !onHome;
     if (renderedHome !== allKey || homeRegion.root.hidden !== hideHomeContext) {
       renderedHome = allKey;
       homeRegion.root.hidden = hideHomeContext;
-      homeRegion.heading.textContent = tr('Contenido compartido pendiente', 'Pending shared content');
+      homeRegion.heading.textContent = tr('Contenido compartido pendiente: ', 'Pending shared content: ') + items.length;
       homeRegion.list.replaceChildren();
-      // A single contextual item is visible. Historical pending items remain
-      // safely recoverable in the reader, but never crowd the home navigation.
-      const newest = items.at(-1);
-      if (newest) {
-        const mode = kindOf(newest);
+      if (current) {
+        const mode = kindOf(current);
         if (mode === 'document') {
-          homeRegion.list.append(buttonFor(newest, mode, 'home', 'read'));
-          homeRegion.list.append(buttonFor(newest, mode, 'home', 'default'));
+          homeRegion.list.append(buttonFor(current, mode, 'home', 'read'));
+          homeRegion.list.append(buttonFor(current, mode, 'home', 'default'));
         } else if (mode === 'link') {
-          homeRegion.list.append(buttonFor(newest, mode, 'home', 'analyze'));
-          homeRegion.list.append(buttonFor(newest, mode, 'home', 'default'));
+          homeRegion.list.append(buttonFor(current, mode, 'home', 'analyze'));
+          homeRegion.list.append(buttonFor(current, mode, 'home', 'default'));
         } else {
-          homeRegion.list.append(buttonFor(newest, mode, 'home'));
+          homeRegion.list.append(buttonFor(current, mode, 'home'));
+        }
+        if (items.length > 1) {
+          const previous = document.createElement('button');
+          previous.type = 'button';
+          previous.textContent = tr('Contenido anterior', 'Previous item');
+          previous.addEventListener('click', () => selectPending(-1));
+          const next = document.createElement('button');
+          next.type = 'button';
+          next.textContent = tr('Contenido siguiente', 'Next item');
+          next.addEventListener('click', () => selectPending(1));
+          homeRegion.list.append(previous, next);
         }
       }
     }
@@ -303,7 +291,6 @@
         item && /^[0-9a-f-]{36}$/i.test(item.id) &&
         ['file','url','text'].includes(item.kind));
       if (hadQueryError) {
-        documentRegion.status.textContent = '';
         homeRegion.status.textContent = '';
         hadQueryError = false;
       }
@@ -313,14 +300,13 @@
         previousItems = fingerprint;
         window.dispatchEvent(new Event('tiflo-share-inbox-changed'));
       }
-      await exposeInbox();
     } catch (error) {
       hadQueryError = true;
       mount();
-      documentRegion.root.hidden = false;
-      documentRegion.heading.textContent = tr('Recibidos por Compartir', 'Received via Share');
-      explain(error, documentRegion.status);
-      await exposeInbox(true);
+      mount();
+      homeRegion.root.hidden = Boolean(location.hash && location.hash !== '#home');
+      homeRegion.heading.textContent = tr('Compartir no disponible', 'Sharing unavailable');
+      explain(error, homeRegion.status);
     } finally {
       refreshing = false;
     }

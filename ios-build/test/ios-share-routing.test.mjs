@@ -133,7 +133,7 @@ function sharedFileHarness({canSave = true} = {}) {
     Capacitor: {Plugins:{TifloShareInbox:native},
       convertFileSrc: uri => 'https://local.example/epub'},
     TifloIOSBookActions: {
-      async openBook() { opens++; return true; },
+      async readSharedFile() { opens++; return {opened:true}; },
       async importSharedFile() {
         imports++;
         if (canSave !== true) done();
@@ -210,7 +210,7 @@ test('la lectura inmediata de EPUB abre el libro tras confirmar persistencia', a
   const app = sharedFileHarness();
   await app.tap('read');
   assert.deepEqual(app.state(), {
-    imports:1, opens:1, acknowledgements:1, remaining:0, hash:'#reading'
+    imports:0, opens:1, acknowledgements:1, remaining:0, hash:'#reading'
   });
 });
 
@@ -226,4 +226,15 @@ test('un enlace compartido ofrece el analizador existente sin eliminar prematura
   assert.match(src, /form\.dispatchEvent\(new Event\('submit'/);
   assert.match(src, /if \(choice === 'analyze'\)/);
   assert.match(src, /Do not delete the source before the user has completed the download/);
+});
+
+
+test('leer EPUB desde Compartir no implica guardarlo en Mi biblioteca', () => {
+  const packer = readFileSync(new URL('../prepare-web.mjs', import.meta.url), 'utf8');
+  assert.match(packer, /readSharedFile: async file =>/);
+  assert.match(packer, /autoSaveImported: false/);
+  const bridge = readFileSync(new URL('../ios-share-inbox.js', import.meta.url), 'utf8');
+  assert.match(bridge, /const result = await book\.readSharedFile\(file\)/);
+  assert.match(bridge, /if \(result\?\.opened !== true\) throw/);
+  assert.match(bridge, /await native\(\)\.acknowledge\(\{id:item\.id\}\)/);
 });

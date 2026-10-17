@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-16T23:56:23.079Z",
+  "generatedAt": "2026-10-17T04:31:38.838Z",
   "resources": [
     {
       "kind": "resource",
@@ -4898,6 +4898,38 @@
   "news": [
     {
       "kind": "news",
+      "id": "9to5mac-f7f5e7038e07ad88:en",
+      "sourceId": "9to5mac-f7f5e7038e07ad88",
+      "lang": "en",
+      "title": "Verizon confirms $10 monthly fee for new iPhone Handoff feature",
+      "summary": "Following T-Mobile and Deutsche Telekom, Verizon has now confirmed how much it will charge customers to use Apple’s new iPhone Handoff feature. Here are the details. more…",
+      "body": "Following T-Mobile and Deutsche Telekom, Verizon has now confirmed how much it will charge customers to use Apple’s new iPhone Handoff feature. Here are the details.\n\nDuring Apple’s “Surprise and Shine” event last month, the company shared more details about iPhone Handoff, a new iOS 27 feature first previewed at WWDC that lets users share a single phone number across two iPhones.\n\nApple announced that the feature would initially be supported by T-Mobile and Deutsche Telekom, with Verizon and EE expected to follow before the end of the year.\n\nShortly after the event, T-Mobile confirmed a $5 monthly fee for iPhone Handoff, while Deutsche Telekom made the feature available through its existing MultiSIM service, which costs €6.95 per month unless already included in the customer’s plan.\n\nToday, as spotted by MacRumors , Verizon also confirmed its pricing for iPhone Handoff, announcing that it will charge $10 per month, twice as much as T-Mobile.\n\nHere’s Verizon :\n\nVerizon will support iPhone Handoff, giving customers the flexibility to use a single Verizon phone number seamlessly across two compatible iPhone models. Whether using the pocketable iPhone Duo on the go or iPhone 18 Pro for work, customers can switch active status between devices at any time while keeping full access to Verizon’s 5G network. iPhone Handoff will be available from Verizon for $10/month on compatible iPhones models running iOS 27.\n\nAT&T, meanwhile, seemingly has no plans to support Apple’s new iPhone Handoff feature. When CNET asked about it last month, the carrier acknowledged its potential benefits but said it was focused on its existing eSIM activation and transfer options instead.\n\nTo learn more about iPhone Handoff, follow this link .",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/16/verizon-confirms-10-monthly-fee-for-new-iphone-handoff-feature/",
+      "publishedAt": "2026-10-17T00:01:38.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-7ff0e98a8b3b1f6c:en",
+      "sourceId": "the-verge-7ff0e98a8b3b1f6c",
+      "lang": "en",
+      "title": "All the news about the iPhone Duo",
+      "summary": "Apple has finally announced its long-rumored foldable: the iPhone Duo. The new phone has a 5.4-inch outer display and a 7.6-inch inner display, a “nano‑texture” finish on the inner screen, and barely any visible crease. Instead of Face ID, it uses Touch ID on the power button. It has two cameras, a main lens and […]",
+      "body": "Apple has finally announced its long-rumored foldable: the iPhone Duo .\n\nThe new phone has a 5.4-inch outer display and a 7.6-inch inner display, a “nano‑texture” finish on the inner screen, and barely any visible crease. Instead of Face ID, it uses Touch ID on the power button. It has two cameras, a main lens and a wide-angle lens. Apple completely revamped iOS 27’s controls and apps for the foldable, including putting the dock on the side of the phone. And it has a flashy opening animation when you unfold the phone.\n\nThe iPhone Duo a big new bet from Apple, though one that’s a little late to the game compared to competitors like Samsung and Google. The phone isn’t cheap: it starts at $1,999 for the base 256GB model, and the prices only go up from there. Still, Apple said that preorder demand was “extraordinary,” so it could have a hit on its hands.\n\nHere’s everything unfolding about the iPhone Duo.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1010131/apple-iphone-duo-news-announcements",
+      "publishedAt": "2026-10-16T23:36:26.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "the-verge-abdd45ca19b342aa:en",
       "sourceId": "the-verge-abdd45ca19b342aa",
       "lang": "en",
@@ -4952,22 +4984,6 @@
     },
     {
       "kind": "news",
-      "id": "9to5mac-39747f930cd5453f:en",
-      "sourceId": "9to5mac-39747f930cd5453f",
-      "lang": "en",
-      "title": "Apple calls iPhone Duo pre-order demand ‘extraordinary’ as shipping dates slip",
-      "summary": "Apple has issued a short statement following strong initial demand for the iPhone Duo, with shipping estimates already slipping into next year. Here’s what the company said. more…",
-      "body": "Apple has issued a short statement following strong initial demand for the iPhone Duo, with shipping estimates already slipping into next year. Here’s what the company said.\n\nAs soon as iPhone Duo pre-orders opened today , shipping estimates began slipping from late October into November, then December, and eventually January. In some countries, including Brazil, estimated deliveries have already been pushed into early February.\n\nWhile there had been reports warning that initial iPhone Duo supplies could be limited, the speed and extent of the shipping delays still caught many by surprise.\n\nApple, meanwhile, is putting a positive spin on the strong initial response. In a statement shared with CNBC , the company described pre-order demand as “nothing short of extraordinary”, and added:\n\n“We are working hard to get this revolutionary new product into customers’ hands as quickly as possible, and we will continue accepting orders online.”\n\nWith shipping dates slipping well into next year, scalpers on eBay and X are already looking to cash in, with asking prices reaching as high as $10,000.\n\nThis has led to criticism of Apple’s handling of pre-orders, with some calling on the company to identify and cancel orders placed by scalpers.\n\nWhat’s your take on how Apple has handled the iPhone Duo pre-orders so far? Let us know in the comments.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/16/apple-calls-iphone-duo-pre-order-demand-extraordinary-as-shipping-dates-slip/",
-      "publishedAt": "2026-10-16T21:33:28.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "techcrunch-b1a999023b3fd875:en",
       "sourceId": "techcrunch-b1a999023b3fd875",
       "lang": "en",
@@ -4977,6 +4993,21 @@
       "sourceName": "TechCrunch",
       "originalUrl": "https://techcrunch.com/2026/10/16/replit-is-no-longer-working-with-anthropic-ceo-says/",
       "publishedAt": "2026-10-16T21:22:28.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-a4c9e2c46374cce5:en",
+      "sourceId": "ars-technica-a4c9e2c46374cce5",
+      "lang": "en",
+      "title": "OpenAI models hacked a crypto wallet and breached more websites",
+      "summary": "The actions could have resulted in criminal charges had humans been behind the keyboard.",
+      "body": "OpenAI said internal models hacked two more websites, bypassed company-imposed browsing restrictions, and used exposed credentials to draw cryptocurrency from a wallet it couldn’t otherwise access, in the latest installment of disclosures of its agents performing unethical and likely illegal acts.\n\nThe company on Thursday issued reports of four new incidents, all of which occurred in June. They come after the company revealed in July that internal test agents exploited a zero-day vulnerability in a tool designed to restrict their access to the Internet. They then broke into the network of AI tool provider Hugging Face. The agents took that illegal action to steal answers to a hacking test that weren’t available when completing the tasks on their own. The incident—which likely would have resulted in criminal charges had they been performed directly by a person—has further heightened concerns that widespread AI use could have harmful effects on an unprecedented scale.\n\nIn two of the cases reported Thursday, OpenAI agents tasked with retrieving information from websites hacked them when the models ran into obstacles obtaining it directly. In one incident during reinforcement training, a model that received access denials when trying to retrieve historical hospital-bed statistics on a government statistics website “used the site's file-download feature to retrieve server configuration and application files, including sensitive credentials,” OpenAI said . “It inspected the application code, bypassed the statistics endpoint's authorization checks, and retrieved data that had previously been denied. The model saved the data locally.”\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/security/2026/10/openai-models-hacked-a-crypto-wallet-and-breached-more-websites/",
+      "publishedAt": "2026-10-16T20:59:01.000Z",
       "categories": [
         "tecnologia-general"
       ]
@@ -5063,22 +5094,6 @@
     },
     {
       "kind": "news",
-      "id": "ars-technica-6472ce037b5602ea:en",
-      "sourceId": "ars-technica-6472ce037b5602ea",
-      "lang": "en",
-      "title": "Meta may use sweeping new commercial TOS to avoid millions in AI licensing fees",
-      "summary": "Meta “streamlined” its commercial TOS. Legal experts warn it’s an AI power grab.",
-      "body": "Legal experts are sounding alarms that Meta will soon update its commercial terms to require business accounts to allow Meta to train AI on their linked website content, not just their social media posts.\n\nKicking in on October 30, the TOS update won’t allow businesses to opt out, instead suggesting that businesses stop using Meta services if they won’t agree to let Meta bots freely crawl their linked content.\n\nAs Nieman Lab reported Thursday, this will affect all business accounts but is particularly shocking for news publishers who could perhaps charge Meta millions in licensing fees to continually access their articles for AI training. Currently news organizations are fighting a battle with OpenAI over whether such training without licensing is fair use, and Meta's terms seemingly risk granting it sweeping permissions, no matter which way the court leans.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/tech-policy/2026/10/meta-may-use-sweeping-new-commercial-tos-to-avoid-millions-in-ai-licensing-fees/",
-      "publishedAt": "2026-10-16T15:41:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "the-verge-6fe559a6a9da8be7:en",
       "sourceId": "the-verge-6fe559a6a9da8be7",
       "lang": "en",
@@ -5090,23 +5105,6 @@
       "publishedAt": "2026-10-16T15:08:38.000Z",
       "categories": [
         "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-62ccec7e8af0cd10:en",
-      "sourceId": "the-verge-62ccec7e8af0cd10",
-      "lang": "en",
-      "title": "A fake WhatsApp clone is showing up before the real version on the Play Store",
-      "summary": "After a Chrome clone was spotted on the Play Store earlier this week, a user on Reddit says they're seeing a fake version of WhatsApp in a \"sponsored\" slot above the real version. As reported earlier by Android Authority, the WhatsApp dupe has racked up over 500,000 downloads and, at the time of writing, its […]",
-      "body": "After a Chrome clone was spotted on the Play Store earlier this week, a user on Reddit says they're seeing a fake version of WhatsApp in a \"sponsored\" slot above the real version . As reported earlier by Android Authority , the WhatsApp dupe has racked up over 500,000 downloads and, at the time of writing, its Play Store listing is still live .\n\nGoogle did not immediately respond to a request for comment.\n\nThe WhatsApp clone is from a developer going by \"Agment Assets sallu\" who doesn't currently have anything else listed on the Play Store. Their listing for the WhatsApp impostor has the same icon, screenshots, and text as the real version, but …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1012918/google-play-store-fake-whatsapp-android",
-      "publishedAt": "2026-10-16T15:02:23.000Z",
-      "categories": [
-        "tecnologia-general",
-        "android",
-        "apps-accesibles"
       ]
     },
     {

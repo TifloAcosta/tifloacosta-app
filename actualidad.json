@@ -1,5 +1,53 @@
 [
   {
+    "id": "9to5mac-f7f5e7038e07ad88",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/16/verizon-confirms-10-monthly-fee-for-new-iphone-handoff-feature/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-17T00:01:38.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Verizon confirms $10 monthly fee for new iPhone Handoff feature",
+        "summary": "Following T-Mobile and Deutsche Telekom, Verizon has now confirmed how much it will charge customers to use Apple’s new iPhone Handoff feature. Here are the details. more…",
+        "body": "Following T-Mobile and Deutsche Telekom, Verizon has now confirmed how much it will charge customers to use Apple’s new iPhone Handoff feature. Here are the details.\n\nDuring Apple’s “Surprise and Shine” event last month, the company shared more details about iPhone Handoff, a new iOS 27 feature first previewed at WWDC that lets users share a single phone number across two iPhones.\n\nApple announced that the feature would initially be supported by T-Mobile and Deutsche Telekom, with Verizon and EE expected to follow before the end of the year.\n\nShortly after the event, T-Mobile confirmed a $5 monthly fee for iPhone Handoff, while Deutsche Telekom made the feature available through its existing MultiSIM service, which costs €6.95 per month unless already included in the customer’s plan.\n\nToday, as spotted by MacRumors , Verizon also confirmed its pricing for iPhone Handoff, announcing that it will charge $10 per month, twice as much as T-Mobile.\n\nHere’s Verizon :\n\nVerizon will support iPhone Handoff, giving customers the flexibility to use a single Verizon phone number seamlessly across two compatible iPhone models. Whether using the pocketable iPhone Duo on the go or iPhone 18 Pro for work, customers can switch active status between devices at any time while keeping full access to Verizon’s 5G network. iPhone Handoff will be available from Verizon for $10/month on compatible iPhones models running iOS 27.\n\nAT&T, meanwhile, seemingly has no plans to support Apple’s new iPhone Handoff feature. When CNET asked about it last month, the carrier acknowledged its potential benefits but said it was focused on its existing eSIM activation and transfer options instead.\n\nTo learn more about iPhone Handoff, follow this link ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-7ff0e98a8b3b1f6c",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1010131/apple-iphone-duo-news-announcements",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-16T23:36:26.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "All the news about the iPhone Duo",
+        "summary": "Apple has finally announced its long-rumored foldable: the iPhone Duo. The new phone has a 5.4-inch outer display and a 7.6-inch inner display, a “nano‑texture” finish on the inner screen, and barely any visible crease. Instead of Face ID, it uses Touch ID on the power button. It has two cameras, a main lens and […]",
+        "body": "Apple has finally announced its long-rumored foldable: the iPhone Duo .\n\nThe new phone has a 5.4-inch outer display and a 7.6-inch inner display, a “nano‑texture” finish on the inner screen, and barely any visible crease. Instead of Face ID, it uses Touch ID on the power button. It has two cameras, a main lens and a wide-angle lens. Apple completely revamped iOS 27’s controls and apps for the foldable, including putting the dock on the side of the phone. And it has a flashy opening animation when you unfold the phone.\n\nThe iPhone Duo a big new bet from Apple, though one that’s a little late to the game compared to competitors like Samsung and Google. The phone isn’t cheap: it starts at $1,999 for the base 256GB model, and the prices only go up from there. Still, Apple said that preorder demand was “extraordinary,” so it could have a hit on its hands.\n\nHere’s everything unfolding about the iPhone Duo."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "the-verge-abdd45ca19b342aa",
     "type": "news",
     "sourceId": "the-verge",
@@ -78,30 +126,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-39747f930cd5453f",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/16/apple-calls-iphone-duo-pre-order-demand-extraordinary-as-shipping-dates-slip/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-16T21:33:28.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple calls iPhone Duo pre-order demand ‘extraordinary’ as shipping dates slip",
-        "summary": "Apple has issued a short statement following strong initial demand for the iPhone Duo, with shipping estimates already slipping into next year. Here’s what the company said. more…",
-        "body": "Apple has issued a short statement following strong initial demand for the iPhone Duo, with shipping estimates already slipping into next year. Here’s what the company said.\n\nAs soon as iPhone Duo pre-orders opened today , shipping estimates began slipping from late October into November, then December, and eventually January. In some countries, including Brazil, estimated deliveries have already been pushed into early February.\n\nWhile there had been reports warning that initial iPhone Duo supplies could be limited, the speed and extent of the shipping delays still caught many by surprise.\n\nApple, meanwhile, is putting a positive spin on the strong initial response. In a statement shared with CNBC , the company described pre-order demand as “nothing short of extraordinary”, and added:\n\n“We are working hard to get this revolutionary new product into customers’ hands as quickly as possible, and we will continue accepting orders online.”\n\nWith shipping dates slipping well into next year, scalpers on eBay and X are already looking to cash in, with asking prices reaching as high as $10,000.\n\nThis has led to criticism of Apple’s handling of pre-orders, with some calling on the company to identify and cancel orders placed by scalpers.\n\nWhat’s your take on how Apple has handled the iPhone Duo pre-orders so far? Let us know in the comments."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "techcrunch-b1a999023b3fd875",
     "type": "news",
     "sourceId": "techcrunch",
@@ -120,6 +144,29 @@
         "title": "Replit is no longer working with Anthropic, CEO says",
         "summary": "Masad said the decision was made for a number of different reasons, including cost. Replit announced a partnership with OpenAI in August, but there was never any indication that it was no longer with Anthropic.",
         "body": "Replit, the AI coding platform that has become a favorite of startup founders and developers, is no longer working with Anthropic, the company’s CEO and co-founder Amjad Masad said Thursday while onstage at TechCrunch Disrupt .\n\nMasad said the decision was made for a number of different reasons, including cost. Replit announced a partnership with OpenAI in August, but there was never any indication that it was no longer with Anthropic.\n\n“I think ChatGPT is better now,” Masad said, adding that the company uses an internal benchmark to help assess metrics like performance. “We publish a public benchmark as well, and consistently, Sol and Astra perform better on building vibe-coded applications from scratch. It was a decision based on both cost, partnership, and performance. And for all these reasons, we just felt like they were a better partner for now.”\n\nReplit sells a cloud-based software development platform where users can develop and deploy apps directly from inside their browser. Under its partnership with Anthropic, Replit used the AI lab’s Claude models to run its platform. That partnership was said to have helped the company grow its revenue significantly.\n\nMasad’s comments were rejected by insiders familiar with the partnership between the Anthropic and Replit, however. One person familiar, who asked not to be named, said the partnership was still in place.\n\nThere is evidence on the company’s website , blog posts, and social media posts that Replit was using Anthropic products as recently as a few weeks ago. For instance, a blog post in late September cites Anthropic’s Claude Fable 5 and Claude Fable 5.1 as models running in Replit Agent’s production environment. Around the same time, one of Replit’s product employees posted on X about using Anthropic’s flagship model Opus 5.5 and promoting its capabilities.\n\nTechCrunch reached back out to Replit for clarification and will update this story if we hear back.\n\nMasad shared insights about the company’s growth while onstage at Disrupt, noting that enterprise is starting to provide a larger slice of revenue.\n\n“We’re not sharing ARR numbers just yet, but in terms of growth, like, I would say, enterprise was like 2% of revenue last year,” Masad said. “This year, I would say like 15% of our revenue is enterprise contracts, and more than 50% of our revenue is B2B.”\n\nMasad also commented on the necessity for good AI safety measures.\n\n“In the same way that us humans need a certain environment to work — you need a nice office, maybe nice good food in the office, air-conditioning, computer — agents need a habitat for them to exist and do good work,” he said. “So that habitat has good orchestration, good error recovery, good safety and security and sandboxing, good networking, good identity and authorization. And once you figure all of that out, then you can deploy AI safely.”\n\nThis article was updated to article to include more context on Replit using Anthropic’s models."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-a4c9e2c46374cce5",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/security/2026/10/openai-models-hacked-a-crypto-wallet-and-breached-more-websites/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-16T20:59:01.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "OpenAI models hacked a crypto wallet and breached more websites",
+        "summary": "The actions could have resulted in criminal charges had humans been behind the keyboard.",
+        "body": "OpenAI said internal models hacked two more websites, bypassed company-imposed browsing restrictions, and used exposed credentials to draw cryptocurrency from a wallet it couldn’t otherwise access, in the latest installment of disclosures of its agents performing unethical and likely illegal acts.\n\nThe company on Thursday issued reports of four new incidents, all of which occurred in June. They come after the company revealed in July that internal test agents exploited a zero-day vulnerability in a tool designed to restrict their access to the Internet. They then broke into the network of AI tool provider Hugging Face. The agents took that illegal action to steal answers to a hacking test that weren’t available when completing the tasks on their own. The incident—which likely would have resulted in criminal charges had they been performed directly by a person—has further heightened concerns that widespread AI use could have harmful effects on an unprecedented scale.\n\nIn two of the cases reported Thursday, OpenAI agents tasked with retrieving information from websites hacked them when the models ran into obstacles obtaining it directly. In one incident during reinforcement training, a model that received access denials when trying to retrieve historical hospital-bed statistics on a government statistics website “used the site's file-download feature to retrieve server configuration and application files, including sensitive credentials,” OpenAI said . “It inspected the application code, bypassed the statistics endpoint's authorization checks, and retrieved data that had previously been denied. The model saved the data locally.”\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -245,30 +292,6 @@
     "media": null
   },
   {
-    "id": "ars-technica-6472ce037b5602ea",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/tech-policy/2026/10/meta-may-use-sweeping-new-commercial-tos-to-avoid-millions-in-ai-licensing-fees/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-16T15:41:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta may use sweeping new commercial TOS to avoid millions in AI licensing fees",
-        "summary": "Meta “streamlined” its commercial TOS. Legal experts warn it’s an AI power grab.",
-        "body": "Legal experts are sounding alarms that Meta will soon update its commercial terms to require business accounts to allow Meta to train AI on their linked website content, not just their social media posts.\n\nKicking in on October 30, the TOS update won’t allow businesses to opt out, instead suggesting that businesses stop using Meta services if they won’t agree to let Meta bots freely crawl their linked content.\n\nAs Nieman Lab reported Thursday, this will affect all business accounts but is particularly shocking for news publishers who could perhaps charge Meta millions in licensing fees to continually access their articles for AI training. Currently news organizations are fighting a battle with OpenAI over whether such training without licensing is fair use, and Meta's terms seemingly risk granting it sweeping permissions, no matter which way the court leans.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "the-verge-6fe559a6a9da8be7",
     "type": "news",
     "sourceId": "the-verge",
@@ -287,31 +310,6 @@
         "title": "Analogue is re-releasing its SNES and Genesis consoles with some nice upgrades",
         "summary": "Analogue announced new versions of its Super Nt and Mega Sg retro consoles today with a \"reworked industrial design\" and built-in wireless connectivity for controllers and accessories. Like the original versions, the new Super Nt Plus and Mega Sg Plus are able to play Nintendo and Sega Genesis cartridges using an FPGA processor that perfectly […]",
         "body": "Analogue announced new versions of its Super Nt and Mega Sg retro consoles today with a \"reworked industrial design\" and built-in wireless connectivity for controllers and accessories. Like the original versions, the new Super Nt Plus and Mega Sg Plus are able to play Nintendo and Sega Genesis cartridges using an FPGA processor that perfectly recreates the functionality of Nintendo and Sega's 16-bit consoles without the need for emulation.\n\nAlthough neither of the new consoles allows SNES or Genesis titles to be played in 4K like the Analogue 3D does with Nintendo 64 titles , the 1080p Super Nt and Mega Sg Plus add a USB-C port so you can po …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-62ccec7e8af0cd10",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1012918/google-play-store-fake-whatsapp-android",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-16T15:02:23.000Z",
-    "categories": [
-      "tecnologia-general",
-      "android",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "A fake WhatsApp clone is showing up before the real version on the Play Store",
-        "summary": "After a Chrome clone was spotted on the Play Store earlier this week, a user on Reddit says they're seeing a fake version of WhatsApp in a \"sponsored\" slot above the real version. As reported earlier by Android Authority, the WhatsApp dupe has racked up over 500,000 downloads and, at the time of writing, its […]",
-        "body": "After a Chrome clone was spotted on the Play Store earlier this week, a user on Reddit says they're seeing a fake version of WhatsApp in a \"sponsored\" slot above the real version . As reported earlier by Android Authority , the WhatsApp dupe has racked up over 500,000 downloads and, at the time of writing, its Play Store listing is still live .\n\nGoogle did not immediately respond to a request for comment.\n\nThe WhatsApp clone is from a developer going by \"Agment Assets sallu\" who doesn't currently have anything else listed on the Play Store. Their listing for the WhatsApp impostor has the same icon, screenshots, and text as the real version, but …\n\nRead the full story at The Verge."
       }
     },
     "media": null

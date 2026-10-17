@@ -78,7 +78,8 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
             let value = expected.trimmingCharacters(in: .whitespacesAndNewlines)
             if label == value { return true }
             // VoiceOver may append a localized role; never use a substring match.
-            return [", botón", ", button", ", encabezamiento", ", heading"].contains {
+            return [", botón", ", button", ", encabezamiento", ", heading",
+                    ", enlace", ", link", ", imagen", ", image"].contains {
                 label == value + $0
             }
         }
@@ -574,9 +575,9 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
                 attachedToFocusedTitle = true
                 view.accessibilityCustomActions = actions
                 self.installedOnView = view
-            } else {
-                self.webView?.accessibilityCustomActions = actions
             }
+            // Never attach title actions to the global WKWebView container.
+            // A custom rotor action must belong to the focused accessible item.
             call.resolve([
                 "configured": !actions.isEmpty && attachedToFocusedTitle,
                 "count": actions.count,

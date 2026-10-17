@@ -32,9 +32,9 @@ test('bundle identity pins every included entrypoint and forbids remote web shel
     const sha = createHash('sha256').update(await readFile(join(folder, filename))).digest('hex');
     assert.equal(identity.fileHashes[filename], sha);
   }
-  const config = JSON.parse(await readFile(fileURLToPath(new URL('../capacitor.config.json', import.meta.url)), 'utf8'));
+  const config = JSON.parse(await readFile(fileURLToPath(new URL('../../mobile/capacitor.config.json', import.meta.url)), 'utf8'));
   assert.equal(config.server?.url, undefined);
-  assert.equal(config.webDir, 'www');
+  assert.equal(config.webDir, 'dist');
 });
 test('mobile screens are single-root and navigation never loads the public web home', async () => {
   const app = await readFile(join(source, 'app.mjs'), 'utf8');

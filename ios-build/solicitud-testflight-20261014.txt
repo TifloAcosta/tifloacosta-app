@@ -195,3 +195,12 @@ Correcciones: acciones por fila UIKit integrada en Biblioteca de TifloLector, co
 Validación sin firma: Auditoría #22 SUCCESS, verificación Compartir #48 SUCCESS y preflight iOS #292 SUCCESS; pendiente aceptar en dispositivo.
 Acción autorizada: generar, firmar y subir UNA compilación al grupo interno de TestFlight «Probadores TifloAcosta» para pruebas del autor. NO distribuir públicamente ni declarar funcionamiento comprobado hasta la prueba real con VoiceOver.
 
+
+
+Solicitud de compilación INTERNA de verificación, 17/10/2026.
+Reparación integrada mediante PR #201, commit 2190afbbd610bdf312b5bb2ee500ef8525bbca9f.
+Pruebas y compilación completa sin firma superadas: ejecución GitHub Actions 39021146014; pruebas de PR también correctas.
+Objetivo: comprobar en iPhone con VoiceOver acciones de rotor por elemento en todas las secciones, sin paneles UIKit superpuestos ni cambios en la presentación normal.
+Compartir: un único contexto transitorio para recibido, lectura sin guardado, guardado verificable, apertura de YouTube y análisis de enlaces descargables con el analizador existente; conservar los datos y los pendientes ante fallos.
+DESTINO EXCLUSIVO: TestFlight interno, grupo Probadores TifloAcosta; NO publicar en App Store ni activar pruebas externas.
+Esta compilación es para aceptación en dispositivo: NO afirmar que el rotor de VoiceOver funciona hasta comprobarlo físicamente. Confirmar disponibilidad solo tras Apple VALID y asignación a probador interno.

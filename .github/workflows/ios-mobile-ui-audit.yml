@@ -1,0 +1,70 @@
+name: Auditar interfaz unica iOS (sin TestFlight)
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - migration/ios-single-mobile-ui-20261017
+    paths:
+      - 'mobile/**'
+      - 'ios-build/prepare-mobile-ui.mjs'
+      - 'ios-build/test/ios-mobile-ui-source.test.mjs'
+      - 'ios-build/native/**'
+      - 'ios-build/share-extension/**'
+      - 'ios-build/install-native-video.mjs'
+      - 'ios-build/install-share-extension.rb'
+      - '.github/workflows/ios-mobile-ui-audit.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  staged-mobile-ui:
+    name: Paquete y pruebas de interfaz sin publicar
+    runs-on: macos-15
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+      - name: Instalar dependencias y comprobar pantallas
+        working-directory: mobile
+        run: |
+          npm ci
+          npm test
+          npm run build
+      - name: Crear interfaz iOS desde unica raiz movil
+        run: |
+          node ios-build/prepare-mobile-ui.mjs
+          node --test ios-build/test/ios-mobile-ui-source.test.mjs
+      - name: Subir huella de procedencia de la interfaz movil
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-single-mobile-ui-proof
+          path: ios-build/www/tiflo-ios-ui-identity.json
+          if-no-files-found: error
+      - name: Instalar dependencias para proyecto nativo iOS
+        working-directory: ios-build
+        run: npm install --no-audit --no-fund
+      - name: Construir contenedor nativo en simulador (sin firma)
+        working-directory: ios-build
+        run: |
+          npx cap add ios
+          node install-native-video.mjs
+          ruby install-share-extension.rb
+          ruby configure-ios-compliance.rb
+          (cd ios/App && pod install)
+          test -s ios/App/App/public/tiflo-ios-ui-identity.json
+          xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build
+
+  parity-blocker:
+    name: Paridad funcional y persistencia pendiente
+    runs-on: ubuntu-latest
+    steps:
+      - name: No aprobar ni publicar hasta completar migracion de biblioteca y funciones nativas
+        run: |
+          echo 'Este flujo SOLO valida el montaje tecnico de la nueva interfaz.'
+          echo 'Quedan pendientes: datos del lector, recepcion completa App Group, plugins nativos, acciones VoiceOver y pruebas en iPhone.'
+          echo 'Se prohibe activar TestFlight desde esta rama.'

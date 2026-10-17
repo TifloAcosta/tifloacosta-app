@@ -41,8 +41,8 @@ async function validateShell() {
       !css.includes('--safe-top')) {
     throw new Error('Rejected iPhone bundle: mobile router or unified design system is incomplete');
   }
-  const config = JSON.parse(await readFile(resolve(repository, 'ios-build/capacitor.config.json'), 'utf8'));
-  if (config.appId !== 'com.tifloacosta.app' || config.webDir !== 'www' || config.server?.url) {
+  const config = JSON.parse(await readFile(resolve(repository, 'mobile/capacitor.config.json'), 'utf8'));
+  if (config.appId !== 'com.tifloacosta.app' || config.webDir !== 'dist' || config.server?.url) {
     throw new Error('Rejected iPhone configuration: app identity, local bundle, or URL does not match');
   }
   return { entryPoint: 'mobile/src/index.html', navigation: 'mobile/src/app.mjs' };

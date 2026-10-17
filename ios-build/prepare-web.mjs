@@ -339,6 +339,22 @@ for (const [before, after] of [
   packagedReader = packagedReader.replace(before, after);
 }
 
+// Preserve EPUB OPF <dc:title> in My Library rather than storing the generic
+// NSItemProvider filename (often just "epub") as the book title. The existing
+// parser already reads this metadata: only iOS's packaged entrypoint changes.
+const iosOriginalArchiveImport = `      await useDocument(prepared.model, file.name, {
+        source: prepared.source, format: prepared.format, autoSaveImported: true
+      });`;
+const iosTitledArchiveImport = `      await useDocument(prepared.model,
+        prepared.format === 'epub' && String(prepared.model?.title || '').trim()
+          ? prepared.model.title : file.name, {
+        source: prepared.source, format: prepared.format, autoSaveImported: true
+      });`;
+if (!packagedReader.includes(iosOriginalArchiveImport)) {
+  throw new Error('iOS: no se pudo conservar el título de EPUB en la biblioteca.');
+}
+packagedReader = packagedReader.replace(iosOriginalArchiveImport, iosTitledArchiveImport);
+
 if (!packagedReader.includes('window.TifloIOSBookActions =') ||
     !packagedReader.includes('card.dataset.iosBookId = String(book.id);') ||
     !packagedReader.includes('return Boolean(deleted);')

@@ -36,3 +36,28 @@ test('el empaquetado iOS incluye la extensión sin tocar la web ni Android', () 
   assert.match(prep, /nativeAccessibilitySource\.includes\('registerAccessibleTargets'\)/);
   assert.match(prep, /nativeAccessibilitySource\.includes\('notifyListeners\("targetAction"'/);
 });
+
+
+test('las acciones no alteran la presentacion ni se aplican al contenedor WKWebView', () => {
+  const bridge = source('ios-build/ios-reader-native.js');
+  const swift = source('ios-build/native/TifloReadingAccessibilityPlugin.swift');
+  const global = source('ios-build/ios-appwide-native-actions.js');
+  assert.match(bridge, /nativeRowsOnFocus: false/);
+  assert.match(swift, /element\.accessibilityCustomActions = actions/);
+  assert.match(swift, /view\.accessibilityCustomActions = actions/);
+  assert.doesNotMatch(swift, /self\.webView\?\.accessibilityCustomActions = actions/);
+  assert.match(global, /const inlineNativeCollections = true/);
+});
+
+test('el rotor registra enlaces y controles de las secciones originales sin botones extra', () => {
+  const js = source('ios-build/ios-accessible-actions.js');
+  for (const selector of [
+    '#apps-list a[href]', '#media-accessibility-list a[href]',
+    '#media-technology-list a[href]', '#favorites-list a[href]',
+    '#reading-queue-list a[href]', '#reading-marks-list a[href]',
+    '#reading-queue-list button', '#reading-marks-list button'
+  ]) assert.ok(js.includes(selector), selector);
+  assert.match(js, /registeredElements\.has\(element\)/);
+  assert.match(js, /if \(target\.kind === 'button'\)/);
+  assert.doesNotMatch(js, /document\.createElement\('button'\)/);
+});

@@ -41,18 +41,15 @@ test('moving a document selector also moves its caption and slider', () => {
   assert.match(minimal, /ios-reader-import-panel/);
 });
 
-test('VoiceOver library rows use an integrated UIKit child, not a modal overlay', () => {
+test('VoiceOver library titles keep the original web presentation without native screens', () => {
   const bridge = read('ios-build/ios-reader-native.js');
   const plugin = read('ios-build/native/TifloReadingAccessibilityPlugin.swift');
   const list = read('ios-build/native/TifloNativeActionListController.swift');
-  assert.match(bridge, /nativeRowsOnFocus: true/);
-  assert.match(plugin, /presenter\.addChild\(navigation\)/);
-  assert.match(plugin, /presenter\.view\.bringSubviewToFront\(navigation\.view\)/);
-  assert.match(plugin, /navigation\.view\.accessibilityViewIsModal = true/);
-  assert.match(plugin, /web\.accessibilityElementsHidden = true/);
-  assert.match(plugin, /navigation\.view\.removeFromSuperview\(\)/);
-  assert.match(plugin, /navigation\.removeFromParent\(\)/);
-  assert.doesNotMatch(plugin.slice(plugin.indexOf('private func presentNativeActionList'), plugin.indexOf('// Read-only state query')), /presenter\.present\(navigation/);
+  assert.match(bridge, /nativeRowsOnFocus: false/);
+  assert.match(plugin, /element\.accessibilityCustomActions = actions/);
+  assert.match(plugin, /view\.accessibilityCustomActions = actions/);
+  assert.match(plugin, /if autoNativeLibraryEnabled/);
+  assert.doesNotMatch(bridge, /nativeRowsOnFocus: true/);
   assert.match(list, /cell\.accessibilityCustomActions = rowActionHandlers\[indexPath\.row\]/);
   assert.match(list, /func closeFromHost\(\)/);
 });

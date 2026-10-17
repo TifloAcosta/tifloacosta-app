@@ -3,7 +3,6 @@
   // Installed only in TifloAcosta iOS. Never put a YouTube link in My Library.
   const native = () => window.Capacitor?.Plugins?.TifloShareInbox;
   const youtube = () => window.Capacitor?.Plugins?.TifloYouTube;
-  const accessibility = () => window.Capacitor?.Plugins?.TifloReadingAccessibility;
   const tr = (es, en) => document.documentElement.lang === 'en' ? en : es;
   const reader = document.getElementById('reading-section');
   const home = document.getElementById('home-blocks');
@@ -13,7 +12,7 @@
   let items = [];
   let previousItems = '';
   let hadQueryError = false;
-  let renderedItems = '';
+  let selectedShareId = '';
   let renderedHome = '';
 
   // Exact host names only: no lookalikes such as youtube.com.example.
@@ -58,9 +57,6 @@
     if (externalURL(item.preview || '')) return 'link';
     return 'document';
   }
-  function readerVisible() {
-    return !reader.hidden && document.getElementById('reading-reader')?.hidden !== false;
-  }
   function region(id, label) {
     const root = document.createElement('section');
     root.id = id;
@@ -77,30 +73,14 @@
     root.append(heading, list, status);
     return {root, heading, list, status};
   }
-  const documentRegion = region('ios-share-inbox', tr('Documentos recibidos por Compartir', 'Documents received via Share'));
   const homeRegion = region('ios-shared-received', tr('Contenido recibido por Compartir', 'Content received via Share'));
-  const status = documentRegion.status;
-  const list = documentRegion.list;
 
   function mount() {
-    const anchor = document.getElementById('ios-reading-import') ||
-      document.getElementById('reading-file-label');
-    if (anchor && anchor.nextElementSibling !== documentRegion.root) {
-      anchor.after(documentRegion.root);
+    // Incoming content belongs to its own temporary context, never inside
+    // the permanent Secciones navigation list.
+    if (homeRegion.root.nextElementSibling !== home) {
+      home.before(homeRegion.root);
     }
-    const nav = home.querySelector('nav');
-    if (nav && homeRegion.root.nextElementSibling !== nav) {
-      nav.before(homeRegion.root);
-    }
-  }
-  async function exposeInbox(showDiagnostic = false) {
-    if (!readerVisible() || (!items.some(item => kindOf(item) === 'document') && !showDiagnostic)) return;
-    try {
-      const result = await accessibility()?.dismissNativeActionList?.();
-      if (result?.dismissed) {
-        (list.querySelector('button') || status).focus({preventScroll: true});
-      }
-    } catch {}
   }
   function explain(error, dest) {
     const message = String(error?.message || error || '');
@@ -135,7 +115,7 @@
       if (!reader.hidden) finish();
     });
   }
-  async function importDocument(item, opened, targetStatus) {
+  async function prepareSharedFile(opened) {
     let file;
     if (opened.kind === 'file') {
       const uri = window.Capacitor?.convertFileSrc?.(opened.uri);
@@ -152,6 +132,10 @@
       const name = safeName(opened.name).replace(/\.txt$/i, '');
       file = new File([content], name + '.txt', {type:'text/plain;charset=utf-8'});
     }
+    return file;
+  }
+  async function importDocument(item, opened, targetStatus) {
+    const file = await prepareSharedFile(opened);
     const actions = window.TifloIOSBookActions;
     if (!actions?.importSharedFile) throw new Error('reader-unavailable');
     const imported = await actions.importSharedFile(file);
@@ -161,8 +145,18 @@
     await native().acknowledge({id:item.id});
     targetStatus.textContent = tr('Documento incorporado a TifloLector.',
       'Document saved in TifloLector.');
+    return imported.id;
   }
-  async function execute(item, button, targetStatus) {
+  async function analyzeSharedLink(address) {
+    // Reuse the existing Downloads screen and analyzer, never invent a second downloader.
+    const form = document.getElementById('download-form');
+    const input = document.getElementById('download-url');
+    if (!form || !input) throw new Error('download-analyzer-unavailable');
+    location.hash = '#downloads-link';
+    input.value = address;
+    form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  }
+  async function execute(item, button, targetStatus, choice = 'default') {
     if (busy) return;
     busy = true;
     button.disabled = true;
@@ -186,14 +180,32 @@
         targetStatus.textContent = tr('Vídeo abierto en el reproductor accesible.',
           'Video opened in the accessible player.');
       } else if (address) {
-        if (!native()?.openURL) throw new Error('url-opener-unavailable');
-        const result = await native().openURL({url:address});
-        if (!result?.opened) throw new Error('url-not-opened');
-        await native().acknowledge({id:item.id});
-        targetStatus.textContent = tr('Enlace abierto.', 'Link opened.');
+        if (choice === 'analyze') {
+          await analyzeSharedLink(address);
+          // Do not delete the source before the user has completed the download.
+          targetStatus.textContent = tr('Enlace enviado al analizador de descargas.',
+            'Link sent to the download analyzer.');
+        } else {
+          if (!native()?.openURL) throw new Error('url-opener-unavailable');
+          const result = await native().openURL({url:address});
+          if (!result?.opened) throw new Error('url-not-opened');
+          await native().acknowledge({id:item.id});
+          targetStatus.textContent = tr('Enlace abierto.', 'Link opened.');
+        }
       } else {
         await enterReaderSection();
-        await importDocument(item, opened, targetStatus);
+        if (choice === 'read') {
+          const book = window.TifloIOSBookActions;
+          if (!book?.readSharedFile) throw new Error('reader-open-unavailable');
+          const file = await prepareSharedFile(opened);
+          const result = await book.readSharedFile(file);
+          if (result?.opened !== true) throw new Error('reader-open-failed');
+          await native().acknowledge({id:item.id});
+          targetStatus.textContent = tr('Documento abierto sin guardarlo. Puedes guardarlo desde el lector.',
+            'Document opened without saving. You can save it from the reader.');
+        } else {
+          await importDocument(item, opened, targetStatus);
+        }
       }
     } catch (error) {
       explain(error, targetStatus);
@@ -203,40 +215,69 @@
       await refresh();
     }
   }
-  function buttonFor(item, mode, target) {
+  function buttonFor(item, mode, target, choice = 'default') {
     const control = document.createElement('button');
     control.type = 'button';
     control.classList.add('ios-share-inbox-item');
     const name = safeName(item.name);
     control.textContent = mode === 'youtube'
       ? tr('Reproducir vídeo compartido', 'Play shared video')
+      : mode === 'link' && choice === 'analyze'
+      ? tr('Analizar para descargar', 'Analyze for download')
       : mode === 'link'
       ? tr('Abrir enlace compartido', 'Open shared link')
-      : target === 'home'
-      ? tr('Importar en TifloLector: ', 'Import in TifloLector: ') + name
-      : tr('Importar ', 'Import ') + name;
-    const dest = target === 'home' ? homeRegion.status : documentRegion.status;
-    control.addEventListener('click', () => { void execute(item, control, dest); });
+      : choice === 'read'
+      ? tr('Leer ahora: ', 'Read now: ') + name
+      : tr('Guardar en biblioteca: ', 'Save to library: ') + name;
+    const dest = homeRegion.status;
+    control.addEventListener('click', () => { void execute(item, control, dest, choice); });
     return control;
+  }
+  function selectPending(direction) {
+    if (items.length < 2) return;
+    let index = items.findIndex(item => item.id === selectedShareId);
+    if (index < 0) index = items.length - 1;
+    selectedShareId = items[(index + direction + items.length) % items.length].id;
+    renderedHome = '';
+    draw();
   }
   function draw() {
     mount();
-    const docs = items.filter(item => kindOf(item) === 'document');
-    const readerKey = docs.map(i => i.id + ':' + i.kind + ':' + i.name).join('|');
     const allKey = items.map(i => i.id + ':' + i.kind + ':' + i.name + ':' + kindOf(i)).join('|');
-    if (renderedItems !== readerKey || documentRegion.root.hidden !== (docs.length === 0)) {
-      renderedItems = readerKey;
-      documentRegion.root.hidden = docs.length === 0;
-      documentRegion.heading.textContent = tr('Recibidos por Compartir: ', 'Received via Share: ') + docs.length;
-      documentRegion.list.replaceChildren();
-      for (const item of docs) documentRegion.list.append(buttonFor(item, 'document', 'reader'));
-    }
-    if (renderedHome !== allKey || homeRegion.root.hidden !== (items.length === 0)) {
+    const current = items.find(item => item.id === selectedShareId) || items.at(-1);
+    selectedShareId = current?.id || '';
+    // A received file never creates a second library panel or a screen-wide
+    // native list. Only this one contextual home section can appear.
+    const onHome = !location.hash || location.hash === '#home';
+    const hideHomeContext = items.length === 0 || !onHome;
+    if (renderedHome !== allKey || homeRegion.root.hidden !== hideHomeContext) {
       renderedHome = allKey;
-      homeRegion.root.hidden = items.length === 0;
-      homeRegion.heading.textContent = tr('Recibidos por Compartir: ', 'Received via Share: ') + items.length;
+      homeRegion.root.hidden = hideHomeContext;
+      homeRegion.heading.textContent = tr('Contenido compartido pendiente: ', 'Pending shared content: ') + items.length;
       homeRegion.list.replaceChildren();
-      for (const item of items) homeRegion.list.append(buttonFor(item, kindOf(item), 'home'));
+      if (current) {
+        const mode = kindOf(current);
+        if (mode === 'document') {
+          homeRegion.list.append(buttonFor(current, mode, 'home', 'read'));
+          homeRegion.list.append(buttonFor(current, mode, 'home', 'default'));
+        } else if (mode === 'link') {
+          homeRegion.list.append(buttonFor(current, mode, 'home', 'analyze'));
+          homeRegion.list.append(buttonFor(current, mode, 'home', 'default'));
+        } else {
+          homeRegion.list.append(buttonFor(current, mode, 'home'));
+        }
+        if (items.length > 1) {
+          const previous = document.createElement('button');
+          previous.type = 'button';
+          previous.textContent = tr('Contenido anterior', 'Previous item');
+          previous.addEventListener('click', () => selectPending(-1));
+          const next = document.createElement('button');
+          next.type = 'button';
+          next.textContent = tr('Contenido siguiente', 'Next item');
+          next.addEventListener('click', () => selectPending(1));
+          homeRegion.list.append(previous, next);
+        }
+      }
     }
   }
   async function refresh() {
@@ -250,7 +291,6 @@
         item && /^[0-9a-f-]{36}$/i.test(item.id) &&
         ['file','url','text'].includes(item.kind));
       if (hadQueryError) {
-        documentRegion.status.textContent = '';
         homeRegion.status.textContent = '';
         hadQueryError = false;
       }
@@ -260,14 +300,13 @@
         previousItems = fingerprint;
         window.dispatchEvent(new Event('tiflo-share-inbox-changed'));
       }
-      await exposeInbox();
     } catch (error) {
       hadQueryError = true;
       mount();
-      documentRegion.root.hidden = false;
-      documentRegion.heading.textContent = tr('Recibidos por Compartir', 'Received via Share');
-      explain(error, documentRegion.status);
-      await exposeInbox(true);
+      mount();
+      homeRegion.root.hidden = Boolean(location.hash && location.hash !== '#home');
+      homeRegion.heading.textContent = tr('Compartir no disponible', 'Sharing unavailable');
+      explain(error, homeRegion.status);
     } finally {
       refreshing = false;
     }

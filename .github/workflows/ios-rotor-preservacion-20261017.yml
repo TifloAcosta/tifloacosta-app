@@ -1,0 +1,75 @@
+name: Validar rotor contextual iOS sin publicar
+on:
+  push:
+    branches:
+      - fix/ios-rotor-inline-20261017
+  pull_request:
+    branches:
+      - preparacion-ios
+    paths:
+      - 'ios-build/**'
+      - '.github/workflows/ios-rotor-preservacion-20261017.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rotor-contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Comprobar sintaxis de puentes sin cambiar las pantallas
+        run: |
+          node --check ios-build/ios-reader-native.js
+          node --check ios-build/ios-accessible-actions.js
+          node --check ios-build/ios-appwide-native-actions.js
+          node --check ios-build/ios-share-inbox.js
+      - name: Ejecutar regresiones de interfaz y acciones de VoiceOver
+        run: |
+          node --test ios-build/test/ios-global-voiceover-actions.test.mjs ios-build/test/ios-reader-presentation.test.mjs ios-build/test/tiflolector-regresiones-20261014.test.mjs ios-build/test/tiflolector-structure.test.mjs ios-build/test/ios-share-routing.test.mjs ios-build/test/ios-video-direct-section.test.mjs
+  swift-parse:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comprobar sintaxis nativa
+        run: |
+          swiftc -frontend -parse ios-build/native/TifloReadingAccessibilityPlugin.swift
+          swiftc -frontend -parse ios-build/native/TifloNativeVideosController.swift
+          swiftc -frontend -parse ios-build/native/TifloNativeActionListController.swift
+          swiftc -frontend -parse ios-build/native/TifloShareInboxPlugin.swift
+
+  ios-unsigned-native-build:
+    runs-on: macos-15
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Seleccionar Xcode compatible con iOS 26
+        run: |
+          set -euo pipefail
+          XCODE="$(find /Applications -maxdepth 1 -type d -name 'Xcode_26*.app' -print | sort | tail -n 1)"
+          test -n "$XCODE"
+          sudo xcode-select --switch "$XCODE/Contents/Developer"
+          xcodebuild -version
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Instalar dependencias iOS
+        working-directory: ios-build
+        run: npm install --no-audit --no-fund
+      - name: Preparar exactamente la interfaz de TestFlight
+        working-directory: ios-build
+        run: |
+          npm run prepare:web
+          npx cap add ios
+          node install-native-video.mjs
+          ruby install-share-extension.rb
+          ruby configure-ios-compliance.rb
+          (cd ios/App && pod install)
+      - name: Compilar iOS y extensión sin firma y sin distribución
+        working-directory: ios-build
+        run: |
+          xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -sdk iphoneos -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build

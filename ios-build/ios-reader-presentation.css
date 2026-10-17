@@ -122,9 +122,9 @@
   overflow-wrap: anywhere;
 }
 
-/* One compact native Share inbox presentation on Home and TifloLector.
- * These selectors target the actual dynamically generated elements. */
-#home-blocks #ios-shared-received,
+/* Only a temporary incoming-content panel before Secciones. The existing
+ * reader and Home navigation keep their original layout and styles. */
+#ios-shared-received,
 #reading-section #ios-share-inbox {
   box-sizing: border-box;
   max-width: 100%;
@@ -135,20 +135,20 @@
   border-radius: .65rem;
   background: var(--surface-alt);
 }
-#home-blocks #ios-shared-received h3,
+#ios-shared-received h3,
 #reading-section #ios-share-inbox h3 {
   margin: 0 0 .45rem;
   line-height: 1.35;
   font-size: 1rem;
 }
-#home-blocks #ios-shared-received .ios-share-inbox-items,
+#ios-shared-received .ios-share-inbox-items,
 #reading-section #ios-share-inbox .ios-share-inbox-items {
   display: flex;
   flex-direction: column;
   gap: .35rem;
   width: 100%;
 }
-#home-blocks #ios-shared-received button.ios-share-inbox-item,
+#ios-shared-received button.ios-share-inbox-item,
 #reading-section #ios-share-inbox button.ios-share-inbox-item {
   display: block;
   box-sizing: border-box;
@@ -169,7 +169,7 @@
   white-space: normal;
   overflow-wrap: anywhere;
 }
-#home-blocks #ios-shared-received button.ios-share-inbox-item:focus-visible,
+#ios-shared-received button.ios-share-inbox-item:focus-visible,
 #reading-section #ios-share-inbox button.ios-share-inbox-item:focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 2px;

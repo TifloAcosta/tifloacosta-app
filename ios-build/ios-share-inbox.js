@@ -88,9 +88,10 @@
     if (anchor && anchor.nextElementSibling !== documentRegion.root) {
       anchor.after(documentRegion.root);
     }
-    const nav = home.querySelector('nav');
-    if (nav && homeRegion.root.nextElementSibling !== nav) {
-      nav.before(homeRegion.root);
+    // Incoming content belongs to its own temporary context, never inside
+    // the permanent Secciones navigation list.
+    if (homeRegion.root.nextElementSibling !== home) {
+      home.before(homeRegion.root);
     }
   }
   async function exposeInbox(showDiagnostic = false) {
@@ -161,8 +162,18 @@
     await native().acknowledge({id:item.id});
     targetStatus.textContent = tr('Documento incorporado a TifloLector.',
       'Document saved in TifloLector.');
+    return imported.id;
   }
-  async function execute(item, button, targetStatus) {
+  async function analyzeSharedLink(address) {
+    // Reuse the existing Downloads screen and analyzer, never invent a second downloader.
+    const form = document.getElementById('download-form');
+    const input = document.getElementById('download-url');
+    if (!form || !input) throw new Error('download-analyzer-unavailable');
+    location.hash = '#downloads-link';
+    input.value = address;
+    form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  }
+  async function execute(item, button, targetStatus, choice = 'default') {
     if (busy) return;
     busy = true;
     button.disabled = true;
@@ -186,14 +197,26 @@
         targetStatus.textContent = tr('Vídeo abierto en el reproductor accesible.',
           'Video opened in the accessible player.');
       } else if (address) {
-        if (!native()?.openURL) throw new Error('url-opener-unavailable');
-        const result = await native().openURL({url:address});
-        if (!result?.opened) throw new Error('url-not-opened');
-        await native().acknowledge({id:item.id});
-        targetStatus.textContent = tr('Enlace abierto.', 'Link opened.');
+        if (choice === 'analyze') {
+          await analyzeSharedLink(address);
+          // Do not delete the source before the user has completed the download.
+          targetStatus.textContent = tr('Enlace enviado al analizador de descargas.',
+            'Link sent to the download analyzer.');
+        } else {
+          if (!native()?.openURL) throw new Error('url-opener-unavailable');
+          const result = await native().openURL({url:address});
+          if (!result?.opened) throw new Error('url-not-opened');
+          await native().acknowledge({id:item.id});
+          targetStatus.textContent = tr('Enlace abierto.', 'Link opened.');
+        }
       } else {
         await enterReaderSection();
-        await importDocument(item, opened, targetStatus);
+        const savedId = await importDocument(item, opened, targetStatus);
+        if (choice === 'read') {
+          const book = window.TifloIOSBookActions;
+          if (!book?.openBook) throw new Error('reader-open-unavailable');
+          await book.openBook(savedId);
+        }
       }
     } catch (error) {
       explain(error, targetStatus);
@@ -203,20 +226,22 @@
       await refresh();
     }
   }
-  function buttonFor(item, mode, target) {
+  function buttonFor(item, mode, target, choice = 'default') {
     const control = document.createElement('button');
     control.type = 'button';
     control.classList.add('ios-share-inbox-item');
     const name = safeName(item.name);
     control.textContent = mode === 'youtube'
       ? tr('Reproducir vídeo compartido', 'Play shared video')
+      : mode === 'link' && choice === 'analyze'
+      ? tr('Analizar para descargar', 'Analyze for download')
       : mode === 'link'
       ? tr('Abrir enlace compartido', 'Open shared link')
-      : target === 'home'
-      ? tr('Importar en TifloLector: ', 'Import in TifloLector: ') + name
-      : tr('Importar ', 'Import ') + name;
+      : choice === 'read'
+      ? tr('Leer ahora: ', 'Read now: ') + name
+      : tr('Guardar en biblioteca: ', 'Save to library: ') + name;
     const dest = target === 'home' ? homeRegion.status : documentRegion.status;
-    control.addEventListener('click', () => { void execute(item, control, dest); });
+    control.addEventListener('click', () => { void execute(item, control, dest, choice); });
     return control;
   }
   function draw() {
@@ -234,9 +259,23 @@
     if (renderedHome !== allKey || homeRegion.root.hidden !== (items.length === 0)) {
       renderedHome = allKey;
       homeRegion.root.hidden = items.length === 0;
-      homeRegion.heading.textContent = tr('Recibidos por Compartir: ', 'Received via Share: ') + items.length;
+      homeRegion.heading.textContent = tr('Contenido compartido pendiente', 'Pending shared content');
       homeRegion.list.replaceChildren();
-      for (const item of items) homeRegion.list.append(buttonFor(item, kindOf(item), 'home'));
+      // A single contextual item is visible. Historical pending items remain
+      // safely recoverable in the reader, but never crowd the home navigation.
+      const newest = items.at(-1);
+      if (newest) {
+        const mode = kindOf(newest);
+        if (mode === 'document') {
+          homeRegion.list.append(buttonFor(newest, mode, 'home', 'read'));
+          homeRegion.list.append(buttonFor(newest, mode, 'home', 'default'));
+        } else if (mode === 'link') {
+          homeRegion.list.append(buttonFor(newest, mode, 'home', 'analyze'));
+          homeRegion.list.append(buttonFor(newest, mode, 'home', 'default'));
+        } else {
+          homeRegion.list.append(buttonFor(newest, mode, 'home'));
+        }
+      }
     }
   }
   async function refresh() {

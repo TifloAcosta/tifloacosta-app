@@ -69,7 +69,10 @@ const marker = {
   fileHashes: hashes,
   includedFiles: files
 };
-await writeFile(join(destination, 'tiflo-ios-ui-identity.json'),
-  JSON.stringify(marker, null, 2) + '\n', 'utf8');
+const identityText = JSON.stringify(marker, null, 2) + '\n';
+await Promise.all([
+  writeFile(join(destination, 'tiflo-ios-ui-identity.json'), identityText, 'utf8'),
+  writeFile(join(mobileDist, 'tiflo-ios-ui-identity.json'), identityText, 'utf8')
+]);
 console.log('Single mobile iPhone UI staged (NOT distributable without native/data parity):');
 console.log(JSON.stringify(marker, null, 2));

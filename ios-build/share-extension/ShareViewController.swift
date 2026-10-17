@@ -96,7 +96,32 @@ final class ShareViewController: UIViewController {
             provider.loadFileRepresentation(forTypeIdentifier: identifier) { [weak self] source, error in
                 guard let self = self else { return }
                 guard let source = source else {
-                    self.finish("No se pudo recibir el archivo. Inténtalo de nuevo desde la aplicación de origen.")
+                    // Some third-party apps provide raw bytes but no temporary
+                    // file representation. Accept that data without converting
+                    // it into a misleading web link or discarding the original.
+                    provider.loadDataRepresentation(forTypeIdentifier: identifier) { [weak self] data, _ in
+                        guard let self = self, let data = data, !data.isEmpty,
+                              Int64(data.count) <= self.maxBytes else {
+                            self?.finish("No se pudo recibir el archivo. Inténtalo de nuevo desde la aplicación de origen.")
+                            return
+                        }
+                        let suffix = UTType(identifier)?.preferredFilenameExtension?.lowercased() ?? ""
+                        var fallbackName = suggested.isEmpty ? "Contenido" : suggested
+                        if URL(fileURLWithPath: fallbackName).pathExtension.isEmpty &&
+                           supported.contains(suffix) {
+                            fallbackName += "." + suffix
+                        }
+                        let temporary = FileManager.default.temporaryDirectory
+                            .appendingPathComponent(UUID().uuidString + "-" + fallbackName)
+                        do {
+                            try data.write(to: temporary, options: [.atomic])
+                            self.store(kind: "file", title: fallbackName, value: nil,
+                                       file: temporary, typeIdentifier: identifier)
+                        } catch {
+                            self.finish("No se pudo conservar el archivo recibido.")
+                        }
+                        try? FileManager.default.removeItem(at: temporary)
+                    }
                     return
                 }
                 let typeSuffix = UTType(identifier)?.preferredFilenameExtension?.lowercased() ?? ""

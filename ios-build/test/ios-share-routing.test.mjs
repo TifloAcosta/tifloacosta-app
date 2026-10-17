@@ -6,7 +6,7 @@ import { runInNewContext } from 'node:vm';
 const source = readFileSync(new URL('../ios-share-inbox.js', import.meta.url), 'utf8');
 const prep = readFileSync(new URL('../prepare-web.mjs', import.meta.url), 'utf8');
 
-function createHarness({ contents, saveOK = true, confirmation = true } = {}) {
+function createHarness({ contents, saveOK = true, confirmation = true, fetchedMime = '', } = {}) {
   const create = (tag = 'div') => {
     const element = {
       tag, id: '', hidden: false, children: [], className: '', textContent: '',
@@ -45,6 +45,7 @@ function createHarness({ contents, saveOK = true, confirmation = true } = {}) {
     kind: 'file', name: 'Libro.epub', preview: '', createdAt: '2026-10-17T10:00:00Z'
   }];
   const events = [];
+  let savedFile = null;
   const native = {
     async pending() { return { items: files.slice() }; },
     async openItem({ id }) {
@@ -52,7 +53,7 @@ function createHarness({ contents, saveOK = true, confirmation = true } = {}) {
       const item = files.find(value => value.id === id);
       return {
         id, kind: item.kind, name: item.name,
-        uri: 'file:///received', value: item.preview || ''
+        uri: 'file:///received', contentType: item.contentType || '', value: item.preview || ''
       };
     },
     async acknowledge({ id }) {
@@ -82,7 +83,8 @@ function createHarness({ contents, saveOK = true, confirmation = true } = {}) {
     confirm() { events.push('confirm'); return confirmation; },
     TifloIOSBookActions: {
       async readSharedFile() { events.push('read'); return { opened: true }; },
-      async importSharedFile() {
+      async importSharedFile(file) {
+        savedFile = file;
         events.push('save');
         return saveOK ? { saved: true, id: 'persisted-id' } : { saved: false };
       }
@@ -92,7 +94,7 @@ function createHarness({ contents, saveOK = true, confirmation = true } = {}) {
   runInNewContext(source, {
     window, document, location, URL, File, Blob, Event,
     MutationObserver: class { observe() {} disconnect() {} },
-    fetch: async () => ({ ok: true, blob: async () => new Blob(['file bytes']) }),
+    fetch: async () => ({ ok: true, blob: async () => new Blob(['file bytes'], { type: fetchedMime }) }),
     setTimeout: () => 1, clearTimeout() {}
   });
   async function settle() {
@@ -108,7 +110,7 @@ function createHarness({ contents, saveOK = true, confirmation = true } = {}) {
     button.handlers.click();
     await settle();
   }
-  return { window, location, files, events, list, status, settle, tap };
+  return { window, location, files, events, list, status, settle, tap, savedFile: () => savedFile };
 }
 
 test('Clasificación: audio no es enlace, EPUB no es vídeo, YouTube no es TXT', () => {
@@ -154,6 +156,46 @@ test('Audio: Escuchar utiliza lector existente sin importar ni borrar', async ()
   await h.tap('Escuchar');
   assert.deepEqual(h.events, ['open', 'read']);
   assert.equal(h.files.length, 1);
+});
+
+test('MP3 real compartido: conserva audio/mpeg aunque la ruta local anuncie binario genérico', async () => {
+  const h = createHarness({ fetchedMime: 'application/octet-stream', contents: [{
+    id: '123e4567-e89b-12d3-a456-426614174001',
+    kind: 'file', name: 'Potaje en audio.mp3',
+    contentType: 'application/octet-stream', createdAt: '2026-10-17T10:00:00Z'
+  }] });
+  await h.tap('Guardar audio en biblioteca');
+  assert.equal(h.savedFile()?.name, 'Potaje en audio.mp3');
+  assert.equal(h.savedFile()?.type, 'audio/mpeg');
+  assert.deepEqual(h.events, ['open', 'save', 'ack']);
+  assert.equal(h.files.length, 0);
+});
+
+test('MP3: sin guardado verificable el original permanece en Recibidos', async () => {
+  const h = createHarness({ saveOK: false, fetchedMime: 'application/octet-stream', contents: [{
+    id: '123e4567-e89b-12d3-a456-426614174001',
+    kind: 'file', name: 'Prueba.mp3', createdAt: '2026-10-17T10:00:00Z'
+  }] });
+  await h.tap('Guardar audio en biblioteca');
+  assert.equal(h.savedFile()?.type, 'audio/mpeg');
+  assert.deepEqual(h.events, ['open', 'save']);
+  assert.equal(h.files.length, 1);
+});
+
+test('Audio distinto de MP3: no declara guardado compatible sin soporte real', async () => {
+  const h = createHarness({ contents: [{
+    id: '123e4567-e89b-12d3-a456-426614174001',
+    kind: 'file', name: 'Nota.m4a', createdAt: '2026-10-17T10:00:00Z'
+  }] });
+  await h.tap('Guardar audio en biblioteca');
+  assert.equal(h.savedFile(), null);
+  assert.equal(h.files.length, 1);
+  assert.match(h.status.textContent, /aún no se puede guardar/i);
+});
+
+test('La confirmación de guardado MP3 comprueba los bytes reales además del libro', () => {
+  assert.match(prep, /libraryAdapter\?\.openAudioFile\?\.\(id\)/);
+  assert.match(prep, /stored\.blob\.size !== file\.size/);
 });
 
 test('YouTube: se reproduce en controlador y el enlace sigue disponible', async () => {

@@ -211,6 +211,15 @@ const iosBookActionGlue = String.raw`
       if (!persisted?.book || String(persisted.book.id) !== id) {
         return { saved:false, reason:'readback-failed' };
       }
+      // Audio metadata alone does not prove that playable bytes survived
+      // the IndexedDB transaction. Read the compressed recording back.
+      if (persisted.book.format === 'audio') {
+        const stored = await libraryAdapter?.openAudioFile?.(id).catch(() => null);
+        if (!(stored?.blob instanceof Blob) || !stored.blob.size ||
+            stored.blob.size !== file.size) {
+          return { saved:false, reason:'media-readback-failed' };
+        }
+      }
       return { saved:true, id };
     },
     // Open an incoming document immediately without writing it to the library.

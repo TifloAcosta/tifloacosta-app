@@ -1,25 +1,119 @@
 [
   {
-    "id": "engadget-cb7f698df5a67ced",
+    "id": "techcrunch-f20a6d63a693920c",
     "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2284034/samsung-galaxy-feature-protects-from-untrustworth-apps-auto-blocker/",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/17/replit-is-no-longer-working-with-anthropic-ceo-says/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-17T16:00:00.000Z",
+    "publishedAt": "2026-10-17T18:48:08.000Z",
     "categories": [
-      "tecnologia-general",
-      "android",
-      "apps-accesibles"
+      "tecnologia-general"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "This Samsung Galaxy feature can protect you from untrustworthy apps",
-        "summary": "Samsung's Auto Blocker protects your Galaxy phone from security threats, but it does have drawbacks. Here's what it does and when you might want to turn it off.",
-        "body": "Samsung's Auto Blocker keeps threats at bay, but it can also get in your way.\n\nIf you own a Samsung Galaxy phone running One UI 6.0 or later, you may have a built-in security feature called Auto Blocker working in the background without even realizing it. Enabled by default on devices that ship with One UI 6.1.1 or later, it filters out apps, USB commands and messages that could put your device at risk without you even having to lift a finger. For most people, that's a super useful layer of protection in a world where threats are extremely common and can come from apps, a public charging cable or images you get in a text.\n\nBut Auto Blocker isn't without its complications, especially for users who like to sideload apps, work with developer tools or install software from outside the Google Play Store or the Samsung Galaxy Store. Epic Games even filed a lawsuit against Samsung a couple of years ago, arguing that this very feature made downloading third-party apps unnecessarily difficult.\n\nUnderstanding what Auto Blocker actually does and what it doesn't can help you make a smarter decision about whether to keep it on, turn it off or somewhere in between. Let's see what this feature does, how you can enable or disable it and what's the best thing to do.\n\nAuto Blocker is a built-in security feature available on Galaxy devices using One UI 6 or higher. Its main job is to stop app installation from outside the Google Play Store or Samsung's Galaxy Store, efficiently closing off one of the most common ways malware ends up on a phone. It also takes things a step further and blocks malicious commands sent through a USB cable, which matters if you've ever charged your phone using a public cable. Beyond that, Auto Blocker filters images suspected of containing malicious code in messaging apps like Samsung Messages, Google Messages, Messenger, WhatsApp or Telegram.\n\nFor users who want even stronger protections, Samsung offers another mode called \"Maximum restrictions,\" which adds extra safeguards, such as blocking device admin apps and work profiles, disabling 2G network connections, preventing auto-reconnection to unsecured Wi-Fi and stripping location data from shared photos. It's definitely a more aggressive setting, increasing security at the expense of convenience.\n\nEpic Games sued Google and Samsung back in 2024. The feature, they said, combined with existing Play Store and Galaxy Store flows, forced users to take over 20 steps just to download the Epic Games Store. The lawsuit was eventually dropped after Epic reached an agreement with Samsung , but the Auto Blocker stayed on.\n\nIf you need to sideload an app or run a developer tool, you can turn Auto Blocker off by going to Settings > Security and privacy > Auto Blocker and tapping the toggle. You'll need to authenticate before switching it off, which is a great feature that can protect you if someone gets their hands on your phone and tries to install some malware. The same path lets you turn it back on.\n\nOn phones running One UI 8.5 or later, you can also enable an option that automatically turns Auto Blocker back on 30 minutes after it's disabled. This lets you temporarily disable the protection to install an app without having to remember to reactivate it. You can find this extra toggle by tapping on the Auto Blocker feature in the menu.\n\nAs you'd expect, Samsung recommends keeping Auto Blocker on, and for most users, that's sound advice. The feature is efficient in guarding against malicious apps, unauthorized USB access and tampered software updates; threats that are easy to overlook until something goes wrong.\n\nThe trade-offs are real, though, because Auto Blocker intentionally blocks APK installs from outside the Play Store and Galaxy Store, which affects anyone who relies on open-source apps or sideloaded tools. The most balanced approach is to leave Auto Blocker enabled by default and disable it only when you have a specific reason to install something from outside official app stores. Once you're done, you turn it back on, or, if you're running One UI 8.5 or later, you can have it automatically turn back on after 30 minutes.\n\nIf you're an advanced user who sideloads often, the auto re-enable option can feel like a nuisance. Just keep in mind that disabling Auto Blocker removes an additional layer of security. Other protections, including Google Play Protect , can still help guard against malicious apps, but it's important to verify the source of anything you install from outside official app stores. For people who want the opposite approach, Samsung's Maximum restrictions mode adds plenty of extra protections."
+        "title": "Replit is no longer working with Anthropic, CEO says",
+        "summary": "Over the weekend, Masad clarified that OpenAI would replace Anthropic as its default model provider. Claude will still be available to customers on the platform.",
+        "body": "Replit, the AI coding platform that has become a favorite of startup founders and developers, is no longer working with Anthropic, the company’s CEO and co-founder Amjad Masad said Thursday while onstage at TechCrunch Disrupt .\n\nMasad said the decision was made for a number of different reasons, including cost. Replit announced a partnership with OpenAI in August, but there was never any indication that it was no longer partnering with Anthropic.\n\n“I think ChatGPT is better now,” Masad said, adding that the company uses an internal benchmark to help assess metrics like performance. “We publish a public benchmark as well, and consistently, Sol and Astra perform better on building vibe-coded applications from scratch. It was a decision based on both cost, partnership, and performance. And for all these reasons, we just felt like they were a better partner for now.”\n\nIt seems, however, that Anthropic hasn’t been completely cut out of Replit, which sells a cloud-based software development platform where users can develop and deploy apps directly from inside their browser.\n\nAfter Disrupt, Masad clarified that customers can still access Anthropic models on the platform, but that OpenAI’s ChatGPT is now the default. This shift could significantly reduce Replit’s spend with Anthropic since most customers stick with the default rather than selecting a model themselves.\n\nPrior to striking a deal with OpenAI, Replit relied on Anthropic’s Claude models to run its platform. That partnership was said to have helped the company grow its revenue significantly, and Masad noted on stage that Replit had been, until recently, a top-five customer of Anthropic’s.\n\n“Replit remains model agnostic,” Masad told TechCrunch over the weekend. “Our users can choose Anthropic’s Claude or other supported models…OpenAI is now our preferred partner for powering Replit Agent, based on performance, economics, and the strength of our partnership.”\n\nMasad’s comments on stage were rejected by insiders familiar with the partnership between the Anthropic and Replit, however. One person familiar, who asked not to be named, said the partnership was still in place.\n\nThere is evidence on the company’s website , blog posts, and social media posts that Replit was promoting Anthropic products as recently as a few weeks ago. For instance, a blog post in late September cites Anthropic’s Claude Fable 5 and Claude Fable 5.1 as models running in Replit Agent’s production environment. Around the same time, one of Replit’s product employees posted on X about using Anthropic’s flagship model Opus 5.5 and promoting its capabilities.\n\nMasad also shared insights about the company’s growth while onstage at Disrupt, noting that enterprise is starting to provide a larger slice of revenue.\n\n“We’re not sharing ARR numbers just yet, but in terms of growth, like, I would say, enterprise was like 2% of revenue last year,” Masad said. “This year, I would say like 15% of our revenue is enterprise contracts, and more than 50% of our revenue is B2B.”\n\nBackstage, Masad told TechCrunch that he expects more than half of Replit’s revenue to come from enterprise and government customers in 2027.\n\nMasad also commented on the necessity for good AI safety measures.\n\n“In the same way that us humans need a certain environment to work — you need a nice office, maybe nice good food in the office, air-conditioning, computer — agents need a habitat for them to exist and do good work,” he said. “So that habitat has good orchestration, good error recovery, good safety and security and sandboxing, good networking, good identity and authorization. And once you figure all of that out, then you can deploy AI safely.”\n\nThis article was originally published on October 16 at 2:22 pm PT. It has been updated to include more context around Replit’s partnerships with Anthropic and OpenAI."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-27edfd41e8e0344f",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2284102/how-android-auto-used-outside-of-car/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-17T18:45:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "android"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Android Auto can be used outside of your car: Here's how",
+        "summary": "It might sound weird to use Android Auto outside of a vehicle, but doing so has unexpected productivity benefits.",
+        "body": "A spare tablet, USB cable and $4 app can bring Android Auto to your desk or kitchen counter.\n\nMy old Samsung Galaxy Tab had poor battery life, but still had enough juice to be a Google Home control panel. Then I came across an unusual use for it: Android Auto. Yes, the software intended for car dashboards can be used elsewhere with the right app.\n\nAndroid Auto runs on your phone and projects a simplified interface for maps, music and messaging onto a compatible car display. If you instead install a third-party receiver app on a tablet, it can act as the \"car's screen\" without a vehicle in sight. And because your phone does the processing, it's great for an aging tablet that has trouble running apps.\n\nWith this, it's possible to repurpose an old Android tablet as an Android Auto display in your car. But the same hack can be used on a desk or kitchen counter, where keeping a screen in view may help prevent you from picking up your phone every five minutes. Just don't mistake it for an official Google Home dashboard mode.\n\nFor a wired setup, you'll need an Android phone running Android 11 or newer, a spare Android tablet or phone and a data-capable USB cable. Android Auto is already integrated into compatible phones, so you just need to install a receiver app on the second device.\n\nOne of them is Open Headunit (formerly Headunit Revived), available for $3.99 on Google Play. It's compatible with Android 5.0 or newer on the receiving device, so older tablets may be worth a shot. However, you'll still need a compatible USB connection, which not all older tablets will play nice with. Another option is Headunit Reloaded , which costs $4.99.\n\nInstall Open Headunit on the tablet, then:\n\nAndroid Auto should then appear on the tablet. If you'd rather avoid keeping your phone connected, both apps also offer Self-Mode, which runs Android Auto on the same device. However, this requires the device to have a working Android Auto installation of its own, which isn't guaranteed on older tablets.\n\nOpen Headunit's developer says Android Auto 17.4 and later may require starting the head unit server through Android Auto's developer settings before Self-Mode works. Wireless connections between the two devices are possible, but take more setup. While USB is easier, it occupies the tablet's charging port, which is a problem when the battery is already worn-out.\n\nAndroid Auto's driving-friendly design is also a distraction filter. With big controls, you can pause Spotify or skip a podcast without unlocking your phone. Plus, your messages can be read aloud and answered by voice. On compatible systems, Gemini can respond to queries and even manage smart home gadgets via Google Home, although this is not always reliable.\n\nYou also don't have your usual parade of apps in front of you. Android Auto only works with a limited selection of apps, so you won't get sucked into spending half an hour on Instagram when you just wanted to check a song title. A spare tablet can sit next to a monitor or on a kitchen stand, doing a few tasks well without constantly needing your attention.\n\nThere are compromises, though. If all you want is Spotify or Google Home, running those apps directly on the tablet is simpler. The dashboard can be dominated by maps when you aren't on the move, and it won't be running your normal tablet apps when connected to Android Auto. Anyone in the vicinity may be able to see message notifications.\n\nWith both USB and wireless projection, your primary phone has to remain connected, and paid services like Spotify Premium still require their own subscriptions. Google's official setup instructions don't cover using Android Auto on a tablet at home. It's a fun novelty, but expect some quirks."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-050e2182ff0083fa",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2283986/whats-actually-eating-all-the-storage-space-on-your-android-phone/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-17T18:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "android"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "What's actually eating all the storage space on your Android Phone?",
+        "summary": "Android phone running out of space? Here's why and what you can do to get rid of old files.",
+        "body": "And how you can efficiently delete them to claw back storage on your device.\n\nSo, you're running out of storage on your Android phone . It happens, even if you periodically delete files and photos, especially if you've been porting your data from one phone to the next over the past few years. Apps, images, videos and big files you've downloaded and forgotten typically eat up most of your storage space, but there may be some files you don't even know are on your phone. We'll discuss how you can find them and delete them quickly and efficiently.\n\nOne of the most effective ways to free up space is, of course, to uninstall apps. To get an overview of all your apps and to make it easier to decide which ones to delete, go to S ettings > Device Care > Storage > Apps . From there, you can see which applications are taking up the most space. Just tap on the app you want to remove and then hit Uninstall.\n\nThat said, you can can also just archive apps. Go through the same steps above, and instead of tapping Uninstall, tap Archive instead. Doing so deletes its core software files and temporary data from your phone but retains your login info and personal settings, so you can easily start using the app again after redownloading it.\n\nAndroid has a feature called \"auto-archive,\" which can automatically archive apps your rarely use when you run low on storage. If you try to install an app on a phone that has no more space, you'll see a pop-up window telling you about auto-archive and giving you the option to switch it on from there. You can also activate the feature anytime you want by going to the Play Storage and tapping on your profile photo at the top right corner. From there, go to Settings > General and then toggle on Automatically archive apps . Google says auto-archiving can free up \"nearly 60 percent of an app's storage space, without removing the app presence or users' data from the device.\"\n\nIf you don't care about backing up the media saved on your phone, you can go ahead and delete them all or manually select what you want to get rid of. You can do that in your phone's gallery, or by going to Storage in Settings > Images or Videos and selecting the files you want to remove. But if you want to preserve those memories, the easiest way to do that is to use Google Photos . The app can save cloud backups of your images and videos to your Google account.\n\nAll Google accounts come with up to 15GB of free cloud storage, shared across Photos, Drive, Gmail and the company's other services. Since that is, admittedly, tiny and might not be able to accommodate years' worth of images and videos, you may have to pay for a Google One subscription. Google One costs $2 a month for 100GB of storage or $3 a month for 200GB.\n\nOnce your images and videos are backed up on the cloud, you can tidy up your phone. In the Photos app, tap on your profile image and go to Free up space on this device . It will delete the items already backed up on the cloud in the quality you choose . You won't see those images in your other gallery apps anymore, but you can still view them in Google Photos.\n\nYou can also switch on Smart Storage to automatically clear up images that have already been backed up if it's available on your device. Go to your device Settings > Storage > Free up space . Then, tap the hamburger menu, find Settings from the options you see and switch on Smart Storage .\n\nBut what about the other stuff occupying your storage space, the ones that aren't as obvious as apps and images? Head over to Settings > Device Care > Storage again. You'll a section that says Duplicate files and another that says Large files . Tap on them to see a selection of files you can choose and delete. Scroll down, and you might see more suggestions on what to remove, such as old media files, old downloads, pre-edit image backups and app caches. Tap on each one to review the files you can dispose. You can also view your Storage details and tap on Other files to delete stuff you may have forgotten you had.\n\nIf you have streaming and social media apps, don't underestimate what a cache clearing can do. It could free up gigabytes of storage. You should also make it a habit to empty your trash. Go to Settings > Device Care > Storage and find the Trash or the Recycle bin folder to empty out."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-af8b5a8547953c7b",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2289629/iphone-duo-shipping-estimates-have-already-been-pushed-back-to-2027/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-17T18:12:35.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iPhone Duo shipping estimates have already been pushed back to 2027",
+        "summary": "Apple called the early demand \"nothing short of extraordinary.\"",
+        "body": "Apple called the early demand “nothing short of extraordinary.”\n\nWhile preorder buzz isn't a solid indication of a device's lasting success, the iPhone Duo has cleared a major early hurdle. After preorders for Apple's first foldable phone went live on Friday , the company characterized the demand as \"nothing short of extraordinary\" in a statement to CNBC .\n\nSo far, shipping estimates for the latest iPhone Duo preorders in the US have been pushed back as late as January 2027. That's bad news for anyone hoping to secure Apple's foldable for the holiday window, but Apple told CNBC that it's \"working hard to get this revolutionary new product into customers' hands as quickly as possible, and we will continue accepting orders online.\"\n\nAnecdotal evidence from online customers are showing everything from being able to pick up their iPhone Duo orders at an Apple Store as early as October 23 to others receiving shipping estimates for November and December. Those who missed the boat on the earliest waves of preorders are seeing delivery windows for January on the online Apple Store, but also a pickup option that says to \"Check back for availability on 10.24.\" Apple has previously mentioned \"shopping in-store or online for iPhone Duo,\" but hasn't confirmed if its physical locations or other authorized retailers would have in-store stock. As for third-party options, Best Buy's website is currently showing iPhone Duo shipping estimates for November as of the time of the article's publishing."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-4d00d1d25945285e",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/17/ugreen-25w-magsafe-liquid-cooling-battery-bank/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-17T17:52:00.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Hands-on: UGREEN’s new 25W MagSafe battery for iPhone features liquid cooling",
+        "summary": "Last month, UGREEN introduced a new Qi2.2 25W 10000mAh MagSafe battery bank for iPhone. There have been plenty of these, but this one has an interesting new twist: liquid cooling. more…",
+        "body": "Last month, UGREEN introduced a new Qi2.2 25W 10000mAh MagSafe battery bank for iPhone. There have been plenty of these, but this one has an interesting new twist: liquid cooling.\n\nOn the back of the battery , there’s a window that showcases the liquid within the battery bank moving throughout it. This should help keep it a little bit cooler than most MagSafe battery banks.\n\nUGREEN says that it’ll be around 18 degrees cooler than usual, and while that’s probably true – it’s worth nothing that it still isn’t a cold battery bank, it’s just cooler than usual. It’ll still feel warm in your hand.\n\nOn the bottom of the battery bank, UGREEN integrates a USB-C cable for charging your phone or any other USB-C device that can’t (or you prefer not to) charge wirelessly. I found it a bit handy at times, since of course wireless charging is never as energy efficient as wired charging.\n\nI will admit, the battery bank is a little bit thick, and the lack of a kickstand is somewhat bothersome at this price point, especially when so many others offer one. That said, if heat is a concern of yours with MagSafe battery banks , this one will definitely solve that for you.\n\nOn the side, it offers a small display for showing battery percentage and charging speed.\n\nOne last thing of note: if you’re buying an iPhone Duo, this will stick out from the bottom of the phone, based on case dimensions I’ve tested it with. This is true for most MagSafe accessories on iPhone Duo, though.\n\nThe UGREEN MagFlow battery bank comes in at $149, which is quite pricey for a MagSafe battery of any kind. That said, UGREEN currently has it on sale for $95 on Amazon , making it much more palatable if you’re looking for a MagSafe battery bank that doesn’t get as hot as the competition.\n\nMy favorite Apple accessory recommendations:\n\nFollow Michael: X/Twitter , Bluesky , Instagram"
       }
     },
     "media": null
@@ -49,29 +143,6 @@
     "media": null
   },
   {
-    "id": "engadget-a0016625ac47af18",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2284032/why-some-places-blurry-google-maps/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-17T15:30:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Why are some locations blurred out on Google Maps?",
-        "summary": "When using Google Maps, it isn't rare to see blurred locations. Why does this happen? The answer is simple, and it has everything to do with security.",
-        "body": "Want more privacy? Opt in to blur your home on Googe Maps Street View.\n\nWe live in a world of permanent blur — at least on Street View in Google Maps, where locations once blurred cannot be unblurred. So why are some locations blurred on Google Maps, and what is it for?\n\nGoogle can mask locations by blurring them on Street View. It does this in response to requests from government entities, digital privacy campaigners, and its own customers. It's all a matter of protecting the privacy of key people and places. The locations that tend to be blurred include:\n\nIn some nations, including the Netherlands and Germany, people have a legal right to request that their home is blurred on these services, which is why so many properties there have been given that treatment.\n\nThe issue is that Google Street View provides detailed information on locations that can provide insight into property layout, value, and security protection. Police, criminals, open-source investigators, and journalists may potentially use Street View in their line of work. The blurring of this data on Street View reduces your digital footprint, which may protect you.\n\nGoogle's Street View service already blurs people's faces and license plates by default using automated tools. If those tools fail to redact something, you can request removal of those items. You can also use the same process to request that your home be blurred.\n\nGoogle does not offer a way to undo the blurring of a location once it is applied. It's a permanent measure. That means that while blurring a property may help harden your security, it's not something you should do without thought. Not only does doing so prevent neighbors from exploring the entire street in Street View, but it also means potential future buyers and owners of the property will be unable to see the building.\n\nThere is also the counterintuitive argument that burglars studying an area for potential targets may see a blurred property as an attractive target, because that blurring suggests there may be something or someone valuable inside it.\n\nWherever you stand on the blur or not to blur argument, it is important to recognize that blurring a property on Google Maps Street View does not blur that location on any other mapping services. To blur a property on Apple Maps, you should write to MapsImageCollection@apple.com including your name, address, and request details. Other mapping services, including Baidu Maps , Mapillary , and Karta View , may offer some form of street-level imaging service in your region. These may enable the blurring of specific locations on request. Microsoft removed its Streetside imagery from Bing Maps as part of its transition to Azure Maps."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "the-verge-5049974f137246ab",
     "type": "news",
     "sourceId": "the-verge",
@@ -91,29 +162,6 @@
         "title": "Meta removes language that may have allowed it to scrape news sites",
         "summary": "After backlash, Meta is updating its terms again to remove language that suggested it could scrape content from sites, including news sites, to train its AI. Specifically, the following language no longer appears on the commercial terms page: … Meta may use any content from such domains, web pages, or URLs to provide, develop, improve, […]",
         "body": "After backlash, Meta is updating its terms again to remove language that suggested it could scrape content from sites, including news sites, to train its AI. Specifically, the following language no longer appears on the commercial terms page :\n\n… Meta may use any content from such domains, web pages, or URLs to provide, develop, improve, research, train, and maintain the integrity of, the Meta Company Products, services, and features provided under these Commercial Terms and any other applicable supplemental terms.\n\nMany, including Neiman Lab and James Grimmelmann, a professor of digital and information law at Cornell, interpreted it as an …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-3945d45163f6618c",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2284029/both-ethernet-and-wifi-for-home/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-17T14:30:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Should you have both Ethernet and Wi-Fi for your home?",
-        "summary": "Ethernet will keep your devices connecting online in record time, while Wi-Fi keeps them untethered. But how well can they both work together?",
-        "body": "Wi-Fi and Ethernet work together for a great blend of convenience and reliability.\n\nEven though so many devices use wireless connections, Ethernet still has a place in your home network. The latest Wi-Fi standards make big improvements, but a wireless connection often can't compete with a cable. You probably don't mind the speed sacrifice when you're scrolling Instagram on your phone in bed, but it makes a difference when downloading game updates or uploading large files.\n\nEthernet might fall short compared to Wi-Fi depending on your internet service provider (ISP) and hardware. But a general guideline is that Wi-Fi is fine when convenience is most important, while Ethernet is superior for any device where you need full speed and top reliability. Having a setup equipped for both makes for a healthy home network where everyone is happy.\n\nIf you've done a home internet speed test , you've likely noticed that the speeds you get on Wi-Fi don't match what you pay your ISP for. Wireless setups are typically slower than wired ones for several reasons. Wi-Fi signals suffer from overhead in managing their connections, especially when many devices are sharing the limited bandwidth at once. They also degrade as they travel, and they have trouble passing through thick obstacles like metal walls or concrete. Other wireless signals from devices like microwaves and baby monitors can interfere with older 2.4GHz Wi-Fi signals, and nearby Wi-Fi networks can cause interference, too.\n\nDespite all this, Wi-Fi still has a place. It wouldn't be feasible to connect all your smart home devices (appliances, cameras, plugs, and more) to your router with a cable, especially since many of them lack Ethernet ports. Plus, most of what these devices do — along with what most people do on phones, tablets, and even laptops — works perfectly fine with Wi-Fi's limitations. Unless you have a terrible router or extremely low internet speeds, you're not going to notice slightly higher latency or slower downloads while watching YouTube.\n\nIf you just want to get a device online, especially if it moves around the house regularly, connect it to Wi-Fi. Barring any compatibility issues with Wi-Fi security standards or wireless bands, it should work just fine. And if you want uniform coverage across your home, the best Mesh Wi-Fi systems can help with that, especially if you're forced to put your router behind thick walls.\n\nNot all wireless connections are exactly the same. For wireless, the two most important factors are whether it's dual-band or tri-band and what generations of Wi-Fi your router and devices support. For a long time, Wi-Fi ran over two bands: 2.4GHz and 5GHz. The 2.4GHz band is the oldest; it reaches far but offers slower speeds, and it's more susceptible to interference. Meanwhile, the 5GHz band doesn't go as far, but it's faster and less interference-prone. The latest standards add the 6GHz band, which supports even faster speeds but has the lowest effective range. Not all devices work with 6GHz connections, but those that do experience much less interference.\n\nThe Wi-Fi generation of your router affects which bands it broadcasts on. Wi-Fi 5 started rolling out in 2013, so it's time to replace your router if you're still using one from then. Wi-Fi 6 arrived in 2020-2021 alongside Wi-Fi 6E. These are identical, except that Wi-Fi 6E supports the 6GHz band. And the latest, Wi-Fi 7, uses the 6GHz band in addition to other speed and performance improvements.\n\nA dual-band router operates at both 2.4GHz and 5GHz. Depending on the generation, a \"tri-band\" router either means two 5GHz bands (Wi-Fi 6 devices) or 2.4GHz, 5GHz, and 6GHz (Wi-Fi 6E and Wi-Fi 7 routers). Some high-end routers are quad-band, offering two 5GHz bands alongside 6GHz. Having a second 5GHz band provides a dedicated line for mesh network nodes to communicate with each other without affecting your devices on the other band. Without that, there's a higher chance of congestion. If you're reliant on Wi-Fi, that 6GHz band will make a difference for nearby devices, but check to make sure yours are compatible. For example, the PS5 Pro is the only PS5 model compatible with 6GHz Wi-Fi.\n\nEthernet sidesteps most of Wi-Fi's issues. It's a direct connection that doesn't suffer from interference in the air, meaning you'll see lower latency (ping) and speeds closer to what comes into your house from your ISP. Ethernet is full-duplex, which means it can send and receive information at the same time. In contrast, Wi-Fi is half-duplex, meaning it can only send or receive data at a given moment. If you use a desktop (or laptop) PC for network-heavy work, you'll appreciate an Ethernet connection. Video calls will be more stable, cloud storage will sync your files faster, downloads will be quicker, and everything should feel a bit snappier.\n\nWired connections also make a big difference in gaming. While you might think that fast speeds are crucial for online games, low latency is what's most important. With high ping, what you see on the screen is delayed from what's happening on the game's server. You're more likely to have problems here when Wi-Fi is dropping packets, suffering from interference, or cutting out entirely.\n\nWired connections can still be inconvenient, especially in larger homes where longer cables are needed to connect to routers. But there are ways to use Ethernet without running cables . And if you're out of Ethernet ports on your router, a network switch is an affordable, simple way to add more .\n\nEthernet standards aren't terribly difficult to process, either. On both the router and device you want to connect, check the standard in the manual or online specs to find its maximum connection speed. While \"Fast Ethernet\" (100 Mbps) is obsolete, some smart TVs and security cameras are still limited to this speed. On a computer or router, the lowest you're likely to see is 1 Gbps, which is sufficient if your internet plan is slower or equal to that speed. Higher standards include 2.5 Gbps, 5 Gbps, 10 Gbps, and beyond for wildly fast speeds.\n\nThe Ethernet cable you use can also become a bottleneck. Cat5e is the oldest standard in regular use. Officially, it supports 1 Gbps speeds at up to 330 feet, though it can be faster in ideal conditions. Cat6 can handle up to 10 Gbps at 180 feet, or it can match Cat5e speeds at longer distances . Cat6a handles the full 10 Gbps at the 330-foot range. Meanwhile, Cat7 is an unofficial standard that isn't recognized by major organizations like the others, making Cat8 the latest version. It supports up to 40 Gbps but only works at around 100 feet or less, and it's designed for data centers.\n\nIf you're taking the time to run cable through your walls, then it makes sense to choose the newest standard for future-proofing. However, Cat6a is sufficient for most simple tasks like connecting your game console to your router. And if you use it in conjunction with better Wi-Fi bands, you shouldn't ever have much trouble with online connections."
       }
     },
     "media": null
@@ -167,31 +215,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-b8fe9bd7ac7cc5a5",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/17/how-im-preparing-my-fleet-for-rosettas-removal-in-macos-27/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-17T13:00:00.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "programas-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple @ Work: How I’m preparing my fleet for Rosetta’s removal in macOS 27",
-        "summary": "Apple @ Work is exclusively brought to you by Mosyle , the only Apple Unified Platform. Mosyle is the only solution that integrates in a single professional grade platform all the solutions necessary to seamlessly and automatically deploy, manage, and protect Apple devices at work. Over 45,000 organizations trust Mosyle to make millions of Apple devices work ready with no effort and at an affordable cost. Request your EXTENDED TRIAL today and understand why Mosyle is everything you need to work with Apple . When installing macOS 27 (Golden Gate), Rosetta is automatically removed. If you manage a fleet with any legacy Intel-only software still in use, you need a plan in place before your users start experiencing issues. Here is what I’m doing, and I have some thoughts on vendors who are waiting until the last minute to deploy Apple Silicon-native tools. more…",
-        "body": "Apple @ Work is exclusively brought to you by Mosyle , the only Apple Unified Platform. Mosyle is the only solution that integrates in a single professional grade platform all the solutions necessary to seamlessly and automatically deploy, manage, and protect Apple devices at work. Over 45,000 organizations trust Mosyle to make millions of Apple devices work ready with no effort and at an affordable cost. Request your EXTENDED TRIAL today and understand why Mosyle is everything you need to work with Apple .\n\nWhen installing macOS 27 (Golden Gate), Rosetta is automatically removed. If you manage a fleet with any legacy Intel-only software still in use, you need a plan in place before your users start experiencing issues. Here is what I’m doing, and I have some thoughts on vendors who are waiting until the last minute to deploy Apple Silicon-native tools.\n\nAbout Apple @ Work: Bradley Chambers has been an Apple IT admin since 2009. Through his experience deploying and managing firewalls, switches, a mobile device management system, enterprise grade WiFi, 1000s of Macs, and 1000s of iPads, Bradley will highlight ways in which Apple IT managers deploy Apple devices, build networks to support them, train users, share stories from the trenches of IT management, and ways Apple could improve its products for IT departments.\n\nOne thing I need to clarify is that macOS 27 removes it, but macOS 28 will no longer support it. For traditional apps, macOS 27 will prompt the user to reinstall it with an easy-to-follow GUI prompt. That’s actually the workable scenario, because at least the user knows something is wrong, and macOS reinstalls it. The tools I’m worried about are the ones that won’t do that. I have a handful of menu bar utilities from vendors who haven’t shipped a native Apple Silicon build yet, and in my testing this summer, they are just silently failing. There’s no error prompt. It just fails to work. That makes auditing your fleet before macOS 27 rolls out more important than it might seem at first glance.\n\nMy short-term fix is to automatically push a Rosetta reinstallation script to every Mac that joins my macOS 27 Dynamic Device Group. In Mosyle, the setup is really straightforward. You create a new script profile, name it something obvious like “Rosetta Install macOS 27,” and enter the following command in the script tab:\n\nUnder Execution Settings, pick your preferred trigger, then assign the profile to your macOS 27 Dynamic Device Group and save. When a device appears in that group, Mosyle automatically pushes the script, and Rosetta (hopefully) gets installed before the user ever runs into a problem. It’s not a permanent fix, but it buys time while I work on the real solution: getting vendors to ship native builds.\n\nI want to be direct about this. Apple Silicon shipped in late 2020. We are now in late 2026. Any vendor still telling customers that a native Apple Silicon build is “on the roadmap” before Rosetta stops working in macOS 28 has had five-plus years to solve this problem and has chosen not to. That is not a resource issue or a technical challenge at this point. It is a prioritization choice, and one that falls squarely on the IT teams managing their software. Even if these vendors ship Apple Silicon-native versions before macOS 28, the shipping delay makes me question their commitment to macOS.\n\nIf you haven’t audited your fleet for Rosetta-dependent software yet, do it now while there’s still time to either push a script workaround or have the harder vendor conversations before users start running into problems. Most enterprise fleets are likely doing a 90 day block on Golden Gate for final testing/QA, so now is the time to work on your final plan. The script fix in Mosyle takes about five minutes to set up. Vendor conversations will take longer, and migrating to new solutions will take a bit longer.\n\nApple @ Work is exclusively brought to you by Mosyle , the only Apple Unified Platform. Mosyle is the only solution that integrates in a single professional grade platform all the solutions necessary to seamlessly and automatically deploy, manage, and protect Apple devices at work. Over 45,000 organizations trust Mosyle to make millions of Apple devices work ready with no effort and at an affordable cost. Request your EXTENDED TRIAL today and understand why Mosyle is everything you need to work with Apple ."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "the-verge-8288e1d041548716",
     "type": "news",
     "sourceId": "the-verge",
@@ -211,29 +234,6 @@
         "title": "Websites are closing their doors to AI agents",
         "summary": "Autonomous agents are the hottest thing in AI. OpenAI, Meta, Google, Instinct, and others promise their agents can scour the internet on your behalf, doing anything from booking a dinner reservation and cleaning out your inbox to buying new shoes. But what happens when the rest of the internet won't play nice? In recent weeks, […]",
         "body": "Autonomous agents are the hottest thing in AI. OpenAI, Meta, Google, Instinct, and others promise their agents can scour the internet on your behalf, doing anything from booking a dinner reservation and cleaning out your inbox to buying new shoes. But what happens when the rest of the internet won't play nice?\n\nIn recent weeks, users of services like Meta's Muse, xAI's Grok, OpenAI's Dots, and Instinct have reported blocks preventing their AI agents from performing tasks across top websites. Yelp told TechCrunch that it only allows AI agents that pay for its data licensing program, while Delta Air Lines is preventing them from booking ticket …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-b1a999023b3fd875",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/16/replit-is-no-longer-working-with-anthropic-ceo-says/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-16T21:22:28.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Replit is no longer working with Anthropic, CEO says",
-        "summary": "Masad said the decision was made for a number of different reasons, including cost. Replit announced a partnership with OpenAI in August, but there was never any indication that it was no longer with Anthropic.",
-        "body": "Replit, the AI coding platform that has become a favorite of startup founders and developers, is no longer working with Anthropic, the company’s CEO and co-founder Amjad Masad said Thursday while onstage at TechCrunch Disrupt .\n\nMasad said the decision was made for a number of different reasons, including cost. Replit announced a partnership with OpenAI in August, but there was never any indication that it was no longer with Anthropic.\n\n“I think ChatGPT is better now,” Masad said, adding that the company uses an internal benchmark to help assess metrics like performance. “We publish a public benchmark as well, and consistently, Sol and Astra perform better on building vibe-coded applications from scratch. It was a decision based on both cost, partnership, and performance. And for all these reasons, we just felt like they were a better partner for now.”\n\nReplit sells a cloud-based software development platform where users can develop and deploy apps directly from inside their browser. Under its partnership with Anthropic, Replit used the AI lab’s Claude models to run its platform. That partnership was said to have helped the company grow its revenue significantly.\n\nMasad’s comments were rejected by insiders familiar with the partnership between the Anthropic and Replit, however. One person familiar, who asked not to be named, said the partnership was still in place.\n\nThere is evidence on the company’s website , blog posts, and social media posts that Replit was using Anthropic products as recently as a few weeks ago. For instance, a blog post in late September cites Anthropic’s Claude Fable 5 and Claude Fable 5.1 as models running in Replit Agent’s production environment. Around the same time, one of Replit’s product employees posted on X about using Anthropic’s flagship model Opus 5.5 and promoting its capabilities.\n\nTechCrunch reached back out to Replit for clarification and will update this story if we hear back.\n\nMasad shared insights about the company’s growth while onstage at Disrupt, noting that enterprise is starting to provide a larger slice of revenue.\n\n“We’re not sharing ARR numbers just yet, but in terms of growth, like, I would say, enterprise was like 2% of revenue last year,” Masad said. “This year, I would say like 15% of our revenue is enterprise contracts, and more than 50% of our revenue is B2B.”\n\nMasad also commented on the necessity for good AI safety measures.\n\n“In the same way that us humans need a certain environment to work — you need a nice office, maybe nice good food in the office, air-conditioning, computer — agents need a habitat for them to exist and do good work,” he said. “So that habitat has good orchestration, good error recovery, good safety and security and sandboxing, good networking, good identity and authorization. And once you figure all of that out, then you can deploy AI safely.”\n\nThis article was updated to article to include more context on Replit using Anthropic’s models."
       }
     },
     "media": null

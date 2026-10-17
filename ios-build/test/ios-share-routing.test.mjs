@@ -6,7 +6,7 @@ import { runInNewContext } from 'node:vm';
 const source = readFileSync(new URL('../ios-share-inbox.js', import.meta.url), 'utf8');
 const prep = readFileSync(new URL('../prepare-web.mjs', import.meta.url), 'utf8');
 
-function createHarness({ contents, saveOK = true, confirmation = true, fetchedMime = '', } = {}) {
+function createHarness({ contents, saveOK = true, confirmation = true, fetchedMime = '', fetchFails = false, videoTitle = '' } = {}) {
   const create = (tag = 'div') => {
     const element = {
       tag, id: '', hidden: false, children: [], className: '', textContent: '',
@@ -46,6 +46,7 @@ function createHarness({ contents, saveOK = true, confirmation = true, fetchedMi
   }];
   const events = [];
   let savedFile = null;
+  const bytes = Buffer.from('file bytes');
   const native = {
     async pending() { return { items: files.slice() }; },
     async openItem({ id }) {
@@ -62,7 +63,14 @@ function createHarness({ contents, saveOK = true, confirmation = true, fetchedMi
       if (index >= 0) files.splice(index, 1);
       return { acknowledged: true };
     },
-    async openURL() { events.push('web'); return { opened: true }; }
+    async openURL() { events.push('web'); return { opened: true }; },
+    async readItemChunk({ offset }) {
+      events.push('chunk');
+      const part = bytes.subarray(offset);
+      return { data: part.toString('base64'), nextOffset: bytes.length,
+        size: bytes.length, done: true, contentType: fetchedMime };
+    },
+    async resolveYouTubeTitle() { return { title: videoTitle }; }
   };
   const youtube = {
     async open() { events.push('youtube'); }
@@ -92,9 +100,12 @@ function createHarness({ contents, saveOK = true, confirmation = true, fetchedMi
     addEventListener() {}
   };
   runInNewContext(source, {
-    window, document, location, URL, File, Blob, Event,
+    window, document, location, URL, File, Blob, Event, atob,
     MutationObserver: class { observe() {} disconnect() {} },
-    fetch: async () => ({ ok: true, blob: async () => new Blob(['file bytes'], { type: fetchedMime }) }),
+    fetch: async () => {
+      if (fetchFails) throw new Error('Failed to fetch local file');
+      return { ok: true, blob: async () => new Blob(['file bytes'], { type: fetchedMime }) };
+    },
     setTimeout: () => 1, clearTimeout() {}
   });
   async function settle() {
@@ -180,6 +191,47 @@ test('MP3: sin guardado verificable el original permanece en Recibidos', async (
   assert.equal(h.savedFile()?.type, 'audio/mpeg');
   assert.deepEqual(h.events, ['open', 'save']);
   assert.equal(h.files.length, 1);
+});
+
+test('MP3 existente: el puente nativo recupera los bytes cuando WKWebView rechaza file://', async () => {
+  const h = createHarness({ fetchFails: true, contents: [{
+    id: '123e4567-e89b-12d3-a456-426614174001',
+    kind: 'file', name: 'Grabación original.mp3',
+    createdAt: '2026-10-17T10:00:00Z'
+  }] });
+  await h.tap('Guardar audio en biblioteca');
+  assert.equal(h.savedFile()?.type, 'audio/mpeg');
+  assert.equal(h.savedFile()?.size, Buffer.byteLength('file bytes'));
+  assert.deepEqual(h.events, ['open', 'chunk', 'save', 'ack']);
+  assert.equal(h.files.length, 0);
+});
+
+test('YouTube: el identificador sigue visible si no se obtiene un título público', async () => {
+  const h = createHarness({ contents: [{
+    id: '123e4567-e89b-12d3-a456-426614174001',
+    kind: 'url', name: 'Enlace',
+    preview: 'https://youtu.be/dQw4w9WgXcQ', createdAt: '2026-10-17T10:00:00Z'
+  }] });
+  await h.settle();
+  const summary = h.list.children.find(node => node.className === 'ios-received-item')?.children[0].children[0];
+  assert.match(summary.textContent, /dQw4w9WgXcQ/);
+});
+
+test('YouTube: se puede resolver un título público sin afectar la reproducción', async () => {
+  const h = createHarness({ videoTitle: 'Título original del vídeo', contents: [{
+    id: '123e4567-e89b-12d3-a456-426614174001',
+    kind: 'url', name: 'Enlace',
+    preview: 'https://youtu.be/dQw4w9WgXcQ', createdAt: '2026-10-17T10:00:00Z'
+  }] });
+  await h.settle();
+  await h.tap('Reproducir vídeo');
+  assert.deepEqual(h.events, ['open', 'youtube']);
+});
+
+test('El EPUB almacena el título del paquete OPF, no el nombre temporal epub', () => {
+  assert.match(prep, /prepared\.format === 'epub' && String\(prepared\.model\?\.title/);
+  assert.match(source, /META-INF\/container\.xml/);
+  assert.match(source, /getElementsByTagNameNS\('\*', 'title'\)/);
 });
 
 test('Audio distinto de MP3: no declara guardado compatible sin soporte real', async () => {

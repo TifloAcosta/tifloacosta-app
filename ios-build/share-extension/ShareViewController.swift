@@ -109,7 +109,8 @@ final class ShareViewController: UIViewController {
                         name += "." + typeSuffix
                     }
                 }
-                self.store(kind: "file", title: name, value: nil, file: source)
+                self.store(kind: "file", title: name, value: nil, file: source,
+                           typeIdentifier: identifier)
             }
             return
         }
@@ -166,7 +167,8 @@ final class ShareViewController: UIViewController {
         finish("Formato no compatible con TifloAcosta.")
     }
 
-    private func store(kind: String, title: String, value: String?, file: URL?) {
+    private func store(kind: String, title: String, value: String?, file: URL?,
+                       typeIdentifier: String? = nil) {
         guard let group = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupId) else {
             finish("Falta configurar el grupo compartido de Apple.")
             return
@@ -183,6 +185,11 @@ final class ShareViewController: UIViewController {
                 "id": id, "kind": kind,
                 "name": String(clean.prefix(170)), "createdAt": ISO8601DateFormatter().string(from: Date())
             ]
+            if kind == "file" {
+                let detected = typeIdentifier.flatMap { UTType($0) }
+                    ?? UTType(filenameExtension: URL(fileURLWithPath: clean).pathExtension)
+                message["contentType"] = detected?.preferredMIMEType ?? ""
+            }
             if let file = file {
                 let size = try file.resourceValues(forKeys: [.fileSizeKey]).fileSize ?? 0
                 guard size >= 0 && Int64(size) <= maxBytes else {

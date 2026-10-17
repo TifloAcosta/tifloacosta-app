@@ -20,7 +20,7 @@ test('Android holds the screen only while a visible YouTube video is playing', a
   assert.match(plugin, /WindowManager\.LayoutParams\.FLAG_KEEP_SCREEN_ON/);
   assert.match(plugin, /activity\.getWindow\(\)\.clearFlags\(WindowManager\.LayoutParams\.FLAG_KEEP_SCREEN_ON\)/);
   assert.match(activity, /registerPlugin\(TifloVideoScreenPlugin\.class\)/);
-  assert.match(activity, /protected void onPause\(\)/);
+  assert.match(activity, /public void onPause\(\)/);
   assert.match(activity, /clearFlags\(WindowManager\.LayoutParams\.FLAG_KEEP_SCREEN_ON\)/);
 });
 

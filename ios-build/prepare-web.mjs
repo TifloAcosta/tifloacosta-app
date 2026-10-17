@@ -221,7 +221,7 @@ const iosBookActionGlue = String.raw`
       }
       try {
         // A temporary audio preview must not silently save in My library.
-        if (/\.(mp3|m4a|aac|wav|aiff)$/iu.test(file.name) ||
+        if (/\.(mp3|m4a|aac|wav|aiff|flac)$/iu.test(file.name) ||
             String(file.type || '').toLowerCase().startsWith('audio/')) {
           await useMp3File(file, { saveImported: false });
           return { opened: !els.reader.hidden && !currentBookId && Boolean(activeAudio) };
@@ -324,7 +324,7 @@ for (const [before, after] of [
   ["if (!savedBook && libraryAdapter?.importAudioFile) {",
    "if (!savedBook && saveImported && libraryAdapter?.importAudioFile) {"],
   ["if (/\\.mp3$/iu.test(file.name) || String(file.type || '').toLowerCase() === 'audio/mpeg') {",
-   "if (/\\.(mp3|m4a|aac|wav|aiff)$/iu.test(file.name) || String(file.type || '').toLowerCase().startsWith('audio/')) {"]
+   "if (/\\.(mp3|m4a|aac|wav|aiff|flac)$/iu.test(file.name) || String(file.type || '').toLowerCase().startsWith('audio/')) {"]
 ]) {
   if (!packagedReader.includes(before)) throw new Error('iOS: falta la ruta de audio recibido: ' + before);
   packagedReader = packagedReader.replace(before, after);

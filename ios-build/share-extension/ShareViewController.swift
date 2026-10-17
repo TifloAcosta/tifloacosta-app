@@ -14,7 +14,7 @@ final class ShareViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         let heading = UILabel()
-        heading.text = "Guardar en TifloAcosta"
+        heading.text = "Enviar a TifloAcosta"
         heading.font = .preferredFont(forTextStyle: .title2)
         heading.adjustsFontForContentSizeCategory = true
         heading.textAlignment = .center
@@ -183,11 +183,11 @@ final class ShareViewController: UIViewController {
             let data = try JSONSerialization.data(withJSONObject: message, options: [.sortedKeys])
             try data.write(to: manifest, options: [.atomic])
             if kind == "file" {
-                finish("Documento recibido. Abre TifloAcosta y entra en TifloLector para importarlo.")
+                finish("Documento recibido. Abre TifloAcosta para leerlo directamente o guardarlo.")
             } else if kind == "url" {
-                finish("Enlace recibido. Abre TifloAcosta para abrirlo en la sección correspondiente.")
+                finish("Enlace recibido. Abre TifloAcosta para reproducirlo, abrirlo o analizar descargas.")
             } else {
-                finish("Texto recibido. Abre TifloAcosta para decidir cómo utilizarlo.")
+                finish("Texto recibido. Abre TifloAcosta para elegir la acción adecuada.")
             }
         } catch {
             try? manager.removeItem(at: inbox.appendingPathComponent(id + ".data"))

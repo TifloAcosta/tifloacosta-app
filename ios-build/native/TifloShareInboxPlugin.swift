@@ -147,7 +147,8 @@ public final class TifloShareInboxPlugin: CAPPlugin, CAPBridgedPlugin {
             }
             try FileManager.default.copyItem(at: source, to: copy)
             call.resolve([
-                "id": id, "kind": "file", "name": filename, "uri": copy.absoluteString
+                "id": id, "kind": "file", "name": filename,
+                "contentType": value["contentType"] ?? "", "uri": copy.absoluteString
             ])
         } catch {
             call.reject("No se puede preparar el archivo")

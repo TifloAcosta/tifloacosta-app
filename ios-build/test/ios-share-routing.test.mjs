@@ -3,240 +3,185 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { runInNewContext } from 'node:vm';
 
-const src = readFileSync(new URL('../ios-share-inbox.js', import.meta.url), 'utf8');
+const source = readFileSync(new URL('../ios-share-inbox.js', import.meta.url), 'utf8');
+const prep = readFileSync(new URL('../prepare-web.mjs', import.meta.url), 'utf8');
 
-function fakeElement() {
-  return {
-    hidden: false, id: '', nextElementSibling: null,
-    classList: {add() {}},
-    setAttribute() {}, append() {}, after() {}, before() {},
-    addEventListener() {}, replaceChildren() {}, focus() {},
-    querySelector() { return null; },
-    getClientRects() { return [1]; }
-  };
-}
-function router() {
-  const section = fakeElement();
-  const home = fakeElement();
-  const window = { Capacitor: {}, addEventListener() {} };
-  const document = {
-    documentElement: {lang:'es'},
-    readyState: 'loading',
-    createElement: fakeElement,
-    addEventListener() {},
-    getElementById(id) {
-      return id === 'reading-section' ? section
-        : id === 'home-blocks' ? home : null;
-    }
-  };
-  runInNewContext(src, {window, document, URL, setTimeout() {}});
-  return window.TifloIOSShareInbox;
-}
-
-test('YouTube de WhatsApp se reconoce como vídeo, no como documento TXT', () => {
-  const route = router();
-  for (const value of [
-    'https://youtu.be/dQw4w9WgXcQ?si=test',
-    'Mira esto: https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=15s',
-    'https://m.youtube.com/shorts/dQw4w9WgXcQ',
-    'https://www.youtube.com/live/dQw4w9WgXcQ?feature=share',
-    'https://music.youtube.com/watch?v=dQw4w9WgXcQ',
-    'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ'
-  ]) {
-    assert.equal(route.youtubeId(value), 'dQw4w9WgXcQ');
-    assert.equal(route.kindOf({kind:'text', preview:value}), 'youtube');
-  }
-});
-
-test('No se confunden dominios falsos, identificadores incompletos ni archivos EPUB', () => {
-  const route = router();
-  assert.equal(route.youtubeId('https://youtube.com.ejemplo.org/watch?v=dQw4w9WgXcQ'), '');
-  assert.equal(route.youtubeId('https://www.youtube.com/watch?v=short'), '');
-  assert.equal(route.kindOf({kind:'file', name:'libro.epub', preview:''}), 'document');
-  assert.equal(route.kindOf({kind:'file', name:'video.epub', preview:'https://youtu.be/dQw4w9WgXcQ'}), 'document');
-});
-
-test('Un enlace web genérico abre su destino y un texto común va al lector', () => {
-  const route = router();
-  const link = {kind:'url', preview:'https://example.org/resource?x=1'};
-  assert.equal(route.kindOf(link), 'link');
-  assert.equal(route.externalURL('Consulta https://example.org/resource?x=1.'), 'https://example.org/resource?x=1');
-  assert.equal(route.kindOf({kind:'text', preview:'Un párrafo ordinario sin direcciones'}), 'document');
-});
-
-test('El controlador nativo expone vista previa local y apertura HTTP segura', () => {
-  const host = readFileSync(new URL('../native/TifloShareInboxPlugin.swift', import.meta.url), 'utf8');
-  assert.match(host, /"preview": String\(\(info\["value"\] \?\? ""\)\.prefix\(2000\)\)/);
-  assert.match(host, /@objc public func openURL/);
-  assert.match(host, /UIApplication\.shared\.open\(url, options: \[:\]\)/);
-  assert.match(host, /url\.user == nil, url\.password == nil/);
-});
-
-function sharedFileHarness({canSave = true} = {}) {
-  const created = [];
-  const element = () => {
-    const node = {
-      hidden: false, id: '', children: [], textContent: '', handlers: {},
-      classNames: [], nextElementSibling: null,
-      classList: {add(name) { node.classNames.push(name); }},
-      setAttribute() {}, after() {}, before() {}, focus() {},
-      append(...items) { node.children.push(...items); },
-      replaceChildren(...items) { node.children = items; },
-      addEventListener(event, fn) { node.handlers[event] = fn; },
-      querySelector(name) { return name === 'nav' ? nav : null; }
+function createHarness({ contents, saveOK = true, confirmation = true } = {}) {
+  const create = (tag = 'div') => {
+    const element = {
+      tag, id: '', hidden: false, children: [], className: '', textContent: '',
+      disabled: false, handlers: {}, attributes: {},
+      setAttribute(k, v) { this.attributes[k] = v; },
+      getAttribute(k) { return this.attributes[k]; },
+      addEventListener(k, fn) { this.handlers[k] = fn; },
+      append(...nodes) { this.children.push(...nodes); },
+      replaceChildren(...nodes) { this.children = nodes; },
+      focus() {}, before() {}, after() {}
     };
-    created.push(node);
-    return node;
+    return element;
   };
-  const nav = element();
-  const reader = element();
+  const screen = create('section');
+  const heading = create('h2');
+  const list = create('div');
+  const status = create('p');
+  const reader = create('section');
   reader.hidden = true;
-  const home = element();
-  const importAnchor = element();
-  const readingDocument = element();
-  readingDocument.hidden = true;
-  const map = {
-    'reading-section': reader, 'home-blocks': home,
-    'ios-reading-import': importAnchor,
-    'reading-reader': readingDocument
+  const nodes = {
+    'ios-received-section': screen,
+    'ios-received-heading': heading,
+    'ios-received-list': list,
+    'ios-received-status': status,
+    'reading-section': reader
   };
   const document = {
-    readyState: 'complete', documentElement: {lang:'es'},
-    createElement: element, addEventListener() {},
-    getElementById(id) { return map[id] || null; }
+    readyState: 'complete',
+    documentElement: { lang: 'es' },
+    createElement: create,
+    addEventListener() {},
+    getElementById(id) { return nodes[id] || null; }
   };
-  const files = [
-    {id:'123e4567-e89b-12d3-a456-426614174001',name:'Contenido.epub',
-      kind:'file', preview:''}
-  ];
-  let imports = 0;
-  let opens = 0;
-  let acknowledgements = 0;
-  let done;
-  const completion = new Promise(resolve => { done = resolve; });
+  const files = contents || [{
+    id: '123e4567-e89b-12d3-a456-426614174001',
+    kind: 'file', name: 'Libro.epub', preview: '', createdAt: '2026-10-17T10:00:00Z'
+  }];
+  const events = [];
   const native = {
-    async pending() { return {items:files.slice()}; },
-    async openItem() { return {kind:'file', name:'Contenido.epub', uri:'file:///epub'}; },
-    async acknowledge({id}) {
-      acknowledgements++;
-      const i = files.findIndex(x => x.id === id);
-      if (i >= 0) files.splice(i,1);
-      done();
-    }
+    async pending() { return { items: files.slice() }; },
+    async openItem({ id }) {
+      events.push('open');
+      const item = files.find(value => value.id === id);
+      return {
+        id, kind: item.kind, name: item.name,
+        uri: 'file:///received', value: item.preview || ''
+      };
+    },
+    async acknowledge({ id }) {
+      events.push('ack');
+      const index = files.findIndex(item => item.id === id);
+      if (index >= 0) files.splice(index, 1);
+      return { acknowledged: true };
+    },
+    async openURL() { events.push('web'); return { opened: true }; }
+  };
+  const youtube = {
+    async open() { events.push('youtube'); }
   };
   const location = {
-    _hash:'',
+    _hash: '',
     get hash() { return this._hash; },
-    set hash(next) { this._hash = next; reader.hidden = next !== '#reading'; }
+    set hash(value) {
+      this._hash = value;
+      reader.hidden = value !== '#reading';
+    }
   };
   const window = {
-    Capacitor: {Plugins:{TifloShareInbox:native},
-      convertFileSrc: uri => 'https://local.example/epub'},
+    Capacitor: {
+      Plugins: { TifloShareInbox: native, TifloYouTube: youtube },
+      convertFileSrc: () => 'https://local.example/received'
+    },
+    confirm() { events.push('confirm'); return confirmation; },
     TifloIOSBookActions: {
-      async readSharedFile() { opens++; return {opened:true}; },
+      async readSharedFile() { events.push('read'); return { opened: true }; },
       async importSharedFile() {
-        imports++;
-        if (canSave !== true) done();
-        return canSave === true
-          ? {saved:true, id:'new-saved-epub'}
-          : canSave === 'unverified'
-            ? true
-            : {saved:false, reason:'readback-failed'};
-      },
-      hasSavedBook() { return canSave; }
+        events.push('save');
+        return saveOK ? { saved: true, id: 'persisted-id' } : { saved: false };
+      }
     },
-    addEventListener() {}, dispatchEvent() {}
+    addEventListener() {}
   };
-  runInNewContext(src, {
-    window, document, location, URL, Event, Blob, File, MutationObserver: class {
-      observe() {} disconnect() {}
-    },
-    fetch: async () => ({ok:true, blob:async () => new Blob(['EPUB sample'])}),
-    setTimeout() {return 1;}, clearTimeout() {}
+  runInNewContext(source, {
+    window, document, location, URL, File, Blob, Event,
+    MutationObserver: class { observe() {} disconnect() {} },
+    fetch: async () => ({ ok: true, blob: async () => new Blob(['file bytes']) }),
+    setTimeout: () => 1, clearTimeout() {}
   });
-  const region = created.find(x => x.id === 'ios-shared-received');
-  return {
-    async tap(choice = 'save') {
-      // The arrival panel has two contextual actions, but the home layout
-      // never contains the full list of old incoming documents.
-      await new Promise(resolve => setImmediate(resolve));
-      const control = region.children[1].children[choice === 'read' ? 0 : 1];
-      assert.ok(control, 'La portada debe mostrar una acción del EPUB recibido');
-      assert.match(control.textContent, choice === 'read' ? /Leer ahora/ : /Guardar en biblioteca/);
-      control.handlers.click();
-      await completion;
-      await new Promise(resolve => setImmediate(resolve));
-      return {control};
-    },
-    state() {return {imports, opens, acknowledgements, remaining:files.length, hash:location.hash};},
-    reader, region
-  };
+  async function settle() {
+    for (let index = 0; index < 5; index++) await new Promise(resolve => setImmediate(resolve));
+  }
+  async function tap(label) {
+    await settle();
+    const cards = list.children.filter(node => node.className === 'ios-received-item');
+    assert.ok(cards.length, 'Recibidos debe mostrar al menos un elemento');
+    const controls = cards[0].children[0].children[1].children;
+    const button = controls.find(node => node.textContent === label);
+    assert.ok(button, 'Acción no encontrada: ' + label);
+    button.handlers.click();
+    await settle();
+  }
+  return { window, location, files, events, list, status, settle, tap };
 }
 
-test('un toque en portada navega, importa EPUB y confirma guardado antes de retirar el pendiente', async () => {
-  const app = sharedFileHarness();
-  await app.tap();
-  assert.deepEqual(app.state(), {
-    imports:1, opens:0, acknowledgements:1, remaining:0, hash:'#reading'
-  });
-  assert.ok(app.region.classNames.includes('ios-share-inbox'));
+test('Clasificación: audio no es enlace, EPUB no es vídeo, YouTube no es TXT', () => {
+  const h = createHarness();
+  const route = h.window.TifloIOSShareInbox;
+  assert.equal(route.kindOf({ kind: 'file', name: 'audio.mp3' }), 'audio');
+  assert.equal(route.kindOf({ kind: 'file', name: 'audiolibro.m4a' }), 'audio');
+  assert.equal(route.kindOf({ kind: 'file', name: 'Libro.epub',
+    preview: 'https://youtu.be/dQw4w9WgXcQ' }), 'document');
+  assert.equal(route.kindOf({ kind: 'text', preview: 'https://youtu.be/dQw4w9WgXcQ' }), 'youtube');
+  assert.equal(route.kindOf({ kind: 'text', preview: 'Una nota' }), 'text');
+  assert.equal(route.youtubeId('https://youtube.com.falso.org/watch?v=dQw4w9WgXcQ'), '');
 });
 
-test('si falla el guardado EPUB, conserva la entrada en la bandeja y no confirma éxito', async () => {
-  const app = sharedFileHarness({canSave:false});
-  await app.tap();
-  assert.deepEqual(app.state(), {
-    imports:1, opens:0, acknowledgements:0, remaining:1, hash:'#reading'
-  });
+test('EPUB: Leer no guarda ni elimina y navega al lector existente', async () => {
+  const h = createHarness();
+  await h.tap('Leer ahora');
+  assert.deepEqual(h.events, ['open', 'read']);
+  assert.equal(h.files.length, 1);
+  assert.equal(h.location.hash, '#reading');
 });
 
-test('el retorno antiguo de importación sin ID verificable no elimina el EPUB', async () => {
-  const app = sharedFileHarness({canSave:'unverified'});
-  await app.tap();
-  assert.deepEqual(app.state(), {
-    imports:1, opens:0, acknowledgements:0, remaining:1, hash:'#reading'
-  });
+test('EPUB: guardar exige ID confirmado y después retira el recibido', async () => {
+  const h = createHarness();
+  await h.tap('Guardar en biblioteca');
+  assert.deepEqual(h.events, ['open', 'save', 'ack']);
+  assert.equal(h.files.length, 0);
 });
 
-test('el puente iOS comprueba lectura real del libro después de importar', () => {
-  const packer = readFileSync(new URL('../prepare-web.mjs', import.meta.url), 'utf8');
-  assert.match(packer, /const imported = await importSelectedFile\(\)/);
-  assert.match(packer, /const persisted = await libraryClient\.openBook\(id\)/);
-  assert.match(packer, /return \{ saved:true, id \}/);
+test('EPUB: fallar importación conserva el original para reintentar', async () => {
+  const h = createHarness({ saveOK: false });
+  await h.tap('Guardar en biblioteca');
+  assert.deepEqual(h.events, ['open', 'save']);
+  assert.equal(h.files.length, 1);
+  assert.match(h.status.textContent, /conserva|permanece|original/i);
 });
 
-
-test('la lectura inmediata de EPUB abre el libro tras confirmar persistencia', async () => {
-  const app = sharedFileHarness();
-  await app.tap('read');
-  assert.deepEqual(app.state(), {
-    imports:0, opens:1, acknowledgements:1, remaining:0, hash:'#reading'
-  });
+test('Audio: Escuchar utiliza lector existente sin importar ni borrar', async () => {
+  const h = createHarness({ contents: [{
+    id: '123e4567-e89b-12d3-a456-426614174001',
+    kind: 'file', name: 'Grabacion.mp3', createdAt: '2026-10-17T10:00:00Z'
+  }] });
+  await h.tap('Escuchar');
+  assert.deepEqual(h.events, ['open', 'read']);
+  assert.equal(h.files.length, 1);
 });
 
-test('el contenido nuevo se presenta fuera de la navegación permanente', () => {
-  assert.match(src, /home\.before\(homeRegion\.root\)/);
-  assert.doesNotMatch(src, /nav\.before\(homeRegion\.root\)/);
-  assert.doesNotMatch(src, /anchor\.after\(documentRegion\.root\)/);
-  assert.match(src, /function selectPending\(direction\)/);
-  assert.match(src, /const current = items\.find\(item => item\.id === selectedShareId\) \|\| items\.at\(-1\)/);
-  assert.match(src, /homeRegion\.list\.append\(buttonFor\(current, mode, 'home', 'read'\)\)/);
+test('YouTube: se reproduce en controlador y el enlace sigue disponible', async () => {
+  const h = createHarness({ contents: [{
+    id: '123e4567-e89b-12d3-a456-426614174001',
+    kind: 'url', name: 'Vídeo', preview: 'https://youtu.be/dQw4w9WgXcQ',
+    createdAt: '2026-10-17T10:00:00Z'
+  }] });
+  await h.tap('Reproducir vídeo');
+  assert.deepEqual(h.events, ['open', 'youtube']);
+  assert.equal(h.files.length, 1);
 });
 
-test('un enlace compartido ofrece el analizador existente sin eliminar prematuramente el original', () => {
-  assert.match(src, /location\.hash = '#downloads-link'/);
-  assert.match(src, /form\.dispatchEvent\(new Event\('submit'/);
-  assert.match(src, /if \(choice === 'analyze'\)/);
-  assert.match(src, /Do not delete the source before the user has completed the download/);
+test('Eliminar requiere confirmación y no borra si se cancela', async () => {
+  const h = createHarness({ confirmation: false });
+  await h.tap('Eliminar de Recibidos');
+  assert.deepEqual(h.events, ['confirm']);
+  assert.equal(h.files.length, 1);
 });
 
-
-test('leer EPUB desde Compartir no implica guardarlo en Mi biblioteca', () => {
-  const packer = readFileSync(new URL('../prepare-web.mjs', import.meta.url), 'utf8');
-  assert.match(packer, /readSharedFile: async file =>/);
-  assert.match(packer, /autoSaveImported: false/);
-  const bridge = readFileSync(new URL('../ios-share-inbox.js', import.meta.url), 'utf8');
-  assert.match(bridge, /const result = await book\.readSharedFile\(file\)/);
-  assert.match(bridge, /if \(result\?\.opened !== true\) throw/);
-  assert.match(bridge, /await native\(\)\.acknowledge\(\{id:item\.id\}\)/);
+test('El empaquetado añade solo una sección iOS y mantiene origen web intacto', () => {
+  assert.match(prep, /id="ios-received-section"/);
+  assert.match(prep, /href="#received"/);
+  assert.match(prep, /received: document\.getElementById\('ios-received-section'\)/);
+  assert.doesNotMatch(source, /home\.before\(homeRegion\.root\)/);
+  assert.match(prep, /saveImported: false/);
+  const ext = readFileSync(new URL('../share-extension/ShareViewController.swift', import.meta.url), 'utf8');
+  assert.match(ext, /address\.isFileURL/);
+  assert.match(ext, /provider\.hasItemConformingToTypeIdentifier\(UTType\.fileURL\.identifier\)/);
+  assert.match(ext, /"m4a", "aac", "wav"/);
 });

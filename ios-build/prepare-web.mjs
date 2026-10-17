@@ -220,6 +220,12 @@ const iosBookActionGlue = String.raw`
         return { opened:false, reason:'invalid-source' };
       }
       try {
+        // A temporary audio preview must not silently save in My library.
+        if (/\.(mp3|m4a|aac|wav|aiff)$/iu.test(file.name) ||
+            String(file.type || '').toLowerCase().startsWith('audio/')) {
+          await useMp3File(file, { saveImported: false });
+          return { opened: !els.reader.hidden && !currentBookId && Boolean(activeAudio) };
+        }
         const prepared = await documentFromFile(file);
         if (prepared.daisyPackage) {
           return { opened:false, reason:'daisy-temporary-not-supported' };
@@ -304,11 +310,26 @@ const withNativeIds = readerScript.replace(
   "card.className = 'resource-card reading-library-title-card';",
   "card.className = 'resource-card reading-library-title-card';\n        card.dataset.iosBookId = String(book.id);"
 );
-const packagedReader = withNativeIds.replace(/\}\)\(\);\s*$/, iosBookActionGlue + '\n})();\n')
+let packagedReader = withNativeIds.replace(/\}\)\(\);\s*$/, iosBookActionGlue + '\n})();\n')
   .replace('if (globalThis.confirm?.(question) !== true) return;\n    const deleted = await libraryClient.deleteBook(id);',
     'if (globalThis.confirm?.(question) !== true) return false;\n    const deleted = await libraryClient.deleteBook(id);')
   .replace('await Promise.all([renderLibrary(), renderQueue(), renderMarks()]);\n  }\n\n  function updateQueueToggle()',
     'await Promise.all([renderLibrary(), renderQueue(), renderMarks()]);\n    return Boolean(deleted);\n  }\n\n  function updateQueueToggle()');
+
+// Change only the iOS-packaged copy of TifloLector: the native audio player
+// already handles MP3 and iOS-decodable audio. Reading does not imply saving.
+for (const [before, after] of [
+  ["async function useMp3File(file, { existingBook = null, requestedPercent = null } = {}) {",
+   "async function useMp3File(file, { existingBook = null, requestedPercent = null, saveImported = true } = {}) {"],
+  ["if (!savedBook && libraryAdapter?.importAudioFile) {",
+   "if (!savedBook && saveImported && libraryAdapter?.importAudioFile) {"],
+  ["if (/\\.mp3$/iu.test(file.name) || String(file.type || '').toLowerCase() === 'audio/mpeg') {",
+   "if (/\\.(mp3|m4a|aac|wav|aiff)$/iu.test(file.name) || String(file.type || '').toLowerCase().startsWith('audio/')) {"]
+]) {
+  if (!packagedReader.includes(before)) throw new Error('iOS: falta la ruta de audio recibido: ' + before);
+  packagedReader = packagedReader.replace(before, after);
+}
+
 if (!packagedReader.includes('window.TifloIOSBookActions =') ||
     !packagedReader.includes('card.dataset.iosBookId = String(book.id);') ||
     !packagedReader.includes('return Boolean(deleted);')
@@ -493,6 +514,32 @@ for (const name of ['index.html','videos.html','podcast.html','actualidad.html']
   if (name === 'index.html') {
     html = html.replace('</head>', '<script src="ios-reader-native.js"></script>\n</head>');
     html = html.replace('</body>', '<script src="ios-share-inbox.js"></script>\n</body>');
+
+    // iOS-only: a real, normally routed Received screen in the established
+    // Secciones menu; no temporary layers in Home or duplicate reader folders.
+    const entry = '<a class="button-link" id="home-open-received" href="#received">Recibidos</a>';
+    const screen = [
+      '<section id="ios-received-section" hidden tabindex="-1" aria-labelledby="ios-received-heading">',
+      '<p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>',
+      '<h2 id="ios-received-heading" tabindex="-1">Recibidos</h2>',
+      '<div id="ios-received-list"></div>',
+      '<p id="ios-received-status" role="status" aria-live="polite"></p>',
+      '</section>'
+    ].join('\n');
+    const existing = '<a class="button-link" id="home-open-reading" href="#reading">TifloLector</a>';
+    if (!html.includes(existing) || !html.includes("    reading: document.getElementById('reading-section'),")) {
+      throw new Error('iOS: no se encuentra el punto de montaje de Recibidos');
+    }
+    html = html.replace(existing, existing + '\n' + entry);
+    html = html.replace('  <section id="reading-section"',
+      screen + '\n  <section id="reading-section"');
+    html = html.replace("    reading: document.getElementById('reading-section'),",
+      "    reading: document.getElementById('reading-section'),\n" +
+      "    received: document.getElementById('ios-received-section'),");
+    html = html.replace("    document.getElementById('home-open-reading').textContent = text.reading;",
+      "    document.getElementById('home-open-reading').textContent = text.reading;\n" +
+      "    document.getElementById('home-open-received').textContent = language === 'en' ? 'Received' : 'Recibidos';");
+
     html = html.replace('</head>', '<script src="tiflo-build-identity.js"></script>\n</head>');
     html = html.replace('</body>', '<script src="ios-reader-selects.js"></script><script src="ios-reader-minimal.js"></script><script src="ios-reader-folders.js"></script>' + '\n</body>');
   }

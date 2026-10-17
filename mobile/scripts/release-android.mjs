@@ -57,16 +57,30 @@ export async function runRelease({
 
   const resolvedAabPath = typeof aabPath === 'function' ? aabPath() : aabPath;
   if (!resolvedAabPath) throw new Error('Signed AAB path is required for publication');
-  await play.uploadBundle(editId, resolvedAabPath);
-  await play.updateTrack(editId, request.track, {
+
+  // Stage labels are deliberately public and contain no tokens or account
+  // identifiers. Google Play can return the same generic HTTP 403 for very
+  // different missing permissions; identify the rejected operation precisely.
+  async function playStep(label, operation) {
+    console.log('Google Play publishing stage: ' + label);
+    try {
+      return await operation();
+    } catch (error) {
+      throw new Error('Google Play stage ' + label + ' failed: ' +
+        String(error?.message || error).slice(0, 380));
+    }
+  }
+
+  await playStep('upload signed bundle', () => play.uploadBundle(editId, resolvedAabPath));
+  await playStep('update ' + request.track + ' track', () => play.updateTrack(editId, request.track, {
     versionName: request.versionName,
     versionCode,
     status: request.status,
     priority: request.priority,
     notes: request.notes
-  });
-  await play.validateEdit(editId);
-  await play.commitEdit(editId);
+  }));
+  await playStep('validate edition', () => play.validateEdit(editId));
+  await playStep('commit edition', () => play.commitEdit(editId));
 
   if (request.notifyUpdate) {
     if (typeof oneSignal !== 'function') throw new Error('OneSignal sender is required for update notification');

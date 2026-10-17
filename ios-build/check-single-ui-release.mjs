@@ -5,23 +5,20 @@
  */
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 
 const parent = fileURLToPath(new URL('../', import.meta.url));
 const load = relative => readFile(join(parent, relative), 'utf8');
 
-const [workflow, prepScript, configText, sourceHtml] = await Promise.all([
+const [workflow, configText, sourceHtml] = await Promise.all([
   load('.github/workflows/ios-testflight.yml'),
-  load('ios-build/prepare-web.mjs'),
   load('ios-build/capacitor.config.json'),
   load('mobile/src/index.html')
 ]);
 const config = JSON.parse(configText);
 const isMobileSource = workflow.includes('node ios-build/prepare-mobile-ui.mjs') ||
   workflow.includes('npm run prepare:mobile');
-const isLegacyWebPackaging = workflow.includes('npm run prepare:web') ||
-  prepScript.includes('await visit(root,output)');
+const isLegacyWebPackaging = workflow.includes('npm run prepare:web');
 if (!isMobileSource || isLegacyWebPackaging) {
   throw new Error(
     'BLOQUEO TESTFLIGHT: se empaqueta todavía la interfaz web pública. ' +

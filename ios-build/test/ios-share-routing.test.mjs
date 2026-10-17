@@ -217,8 +217,10 @@ test('la lectura inmediata de EPUB abre el libro tras confirmar persistencia', a
 test('el contenido nuevo se presenta fuera de la navegación permanente', () => {
   assert.match(src, /home\.before\(homeRegion\.root\)/);
   assert.doesNotMatch(src, /nav\.before\(homeRegion\.root\)/);
-  assert.match(src, /const newest = items\.at\(-1\)/);
-  assert.match(src, /homeRegion\.list\.append\(buttonFor\(newest, mode, 'home', 'read'\)\)/);
+  assert.doesNotMatch(src, /anchor\.after\(documentRegion\.root\)/);
+  assert.match(src, /function selectPending\(direction\)/);
+  assert.match(src, /const current = items\.find\(item => item\.id === selectedShareId\) \|\| items\.at\(-1\)/);
+  assert.match(src, /homeRegion\.list\.append\(buttonFor\(current, mode, 'home', 'read'\)\)/);
 });
 
 test('un enlace compartido ofrece el analizador existente sin eliminar prematuramente el original', () => {

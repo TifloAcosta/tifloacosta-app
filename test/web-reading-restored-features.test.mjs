@@ -6,11 +6,12 @@ const read = path => readFileSync(new URL('../' + path, import.meta.url), 'utf8'
 const html = read('index.html');
 const reader = read('web-reading.js');
 
-test('reader library has pagination that follows filter/search state', () => {
+test('reader library has pagination that follows filters without a redundant search field', () => {
   for (const id of [
-    'reading-library-filter','reading-library-query','reading-library-pager',
+    'reading-library-filter','reading-library-pager',
     'reading-library-page-status','reading-library-prev-page','reading-library-next-page'
   ]) assert.ok(html.includes('id="' + id + '"'), 'Missing ' + id);
+  assert.doesNotMatch(html, /id="reading-library-query"/);
   assert.match(reader, /let libraryPage = 1/);
   assert.match(reader, /page: libraryPage, pageSize, query, status/);
   assert.match(reader, /sort: isRecentView \? 'imported' : 'lastRead'/);

@@ -251,7 +251,13 @@
         resolved = String((await native()?.resolveYouTubeTitle?.({ videoId }))?.title || '').trim();
         if (resolved && /^(Enlace|Link)$/i.test(resolved)) resolved = '';
       } else {
-        const opened = await native().openItem({ id: item.id });
+        let opened;
+        try {
+          opened = await native().openItem({ id: item.id });
+        } catch {
+          opened = { id: item.id, kind: 'file', name: item.name,
+            contentType: item.contentType || '', uri: '' };
+        }
         const file = await makeFile(opened, item.id);
         resolved = await epubTitle(file);
       }
@@ -289,7 +295,16 @@
         await refresh(true);
         return;
       }
-      const opened = await native().openItem({ id: item.id });
+      let opened = null;
+      try {
+        opened = await native().openItem({ id: item.id });
+      } catch (error) {
+        if (item.kind !== 'file' || !native()?.readItemChunk) throw error;
+        // A failed temporary copy must not block native reading of the
+        // original App Group bytes; older already-received items work too.
+        opened = { id: item.id, kind: 'file', name: item.name,
+          contentType: item.contentType || '', uri: '' };
+      }
       if (!opened || opened.id !== item.id) throw new Error('missing-item');
       const url = opened.kind === 'file' ? '' : externalURL(opened.value);
       const videoId = opened.kind === 'file' ? '' : youtubeId(opened.value);

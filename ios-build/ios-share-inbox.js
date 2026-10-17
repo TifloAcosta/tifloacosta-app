@@ -205,6 +205,9 @@
         }
       }
     } catch (error) {
+      // If an import failed after navigation, return to the still-intact
+      // Received item so VoiceOver can announce the recoverable error.
+      if (location.hash === '#reading') location.hash = '#received';
       setError(error, localStatus);
     } finally {
       busy = false;

@@ -11,8 +11,8 @@
 }
 
 #app {
-  width: min(94vw, 60rem);
-  padding-block-start: calc(env(safe-area-inset-top, 0px) + clamp(1.5rem, 5vh, 3.25rem));
+  width: min(calc(100% - 2rem), 60rem);
+  padding-block-start: var(--safe-top);
   padding-block-end: var(--safe-bottom);
 }
 

@@ -237,3 +237,11 @@ Pruebas de PR #204 en la revisión b7a27048c1a3dac5dbdcfb74dd44e51bf5793a42: com
 Destino único: TestFlight interno, grupo «Probadores TifloAcosta», sin publicar ni invitar a personas externas.
 Aceptación final del autor: reabrir el MP3 original pendiente; comprobar que se reproduce y guarda de verdad; enviar EPUB con metadatos dc:title y verificar título en Recibidos y en Mi biblioteca; reproducir y comprobar nombre de YouTube; verificar diseño y rotor en VoiceOver. No declarar corregido en dispositivo hasta esa prueba.
 Confirmar Apple VALID, beta interna habilitada y grupo asignado antes de avisar; enviar correo al autor sólo después de dicha confirmación.
+
+
+Solicitud de compilación interna iOS del 17/10/2026: estabilidad visual y tamaño de texto normal.
+Código integrado en preparacion-ios: bc38406e29c5397d4a7e952983625c13761f2d81 y 59873072ebc569fa1a28b72c9d73ac0d7697d474.
+Se mantiene el tamaño predeterminado normal (100%); las preferencias de texto grande y los ajustes visuales del lector no se alteran. Las nuevas reglas CSS de iOS evitan que listas, controles, títulos largos de EPUB/MP3, enlaces compartidos, tarjetas y secciones se salgan del ancho útil incluso con texto ampliado y zonas seguras del iPhone. No se modifica la web pública ni Android.
+Pruebas de regresión añadidas para tamaño normal, ampliaciones opcionales, ajustes visuales, áreas seguras y límites de anchura. Mantener las reparaciones anteriores de Recibidos, Biblioteca y enlaces de YouTube y todos los datos guardados.
+Destino único: TestFlight interno, grupo «Probadores TifloAcosta», sin distribución pública y sin probadores externos.
+Requiere tras la firma: Apple VALID, comprobación de beta habilitada y grupo asociado. No afirmar que la presentación está validada físicamente hasta que Tony la compruebe con VoiceOver en iPhone.

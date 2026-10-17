@@ -1,0 +1,43 @@
+name: Validar rotor contextual iOS sin publicar
+on:
+  push:
+    branches:
+      - fix/ios-rotor-inline-20261017
+  pull_request:
+    branches:
+      - preparacion-ios
+    paths:
+      - 'ios-build/**'
+      - '.github/workflows/ios-rotor-preservacion-20261017.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rotor-contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Comprobar sintaxis de puentes sin cambiar las pantallas
+        run: |
+          node --check ios-build/ios-reader-native.js
+          node --check ios-build/ios-accessible-actions.js
+          node --check ios-build/ios-appwide-native-actions.js
+          node --check ios-build/ios-share-inbox.js
+      - name: Ejecutar regresiones de interfaz y acciones de VoiceOver
+        run: |
+          node --test ios-build/test/ios-global-voiceover-actions.test.mjs ios-build/test/ios-reader-presentation.test.mjs ios-build/test/tiflolector-regresiones-20261014.test.mjs ios-build/test/tiflolector-structure.test.mjs ios-build/test/ios-share-routing.test.mjs ios-build/test/ios-video-direct-section.test.mjs
+  swift-parse:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comprobar sintaxis nativa
+        run: |
+          swiftc -frontend -parse ios-build/native/TifloReadingAccessibilityPlugin.swift
+          swiftc -frontend -parse ios-build/native/TifloNativeVideosController.swift
+          swiftc -frontend -parse ios-build/native/TifloNativeActionListController.swift
+          swiftc -frontend -parse ios-build/native/TifloShareInboxPlugin.swift

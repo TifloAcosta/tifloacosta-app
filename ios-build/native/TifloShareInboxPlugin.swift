@@ -11,6 +11,8 @@ public final class TifloShareInboxPlugin: CAPPlugin, CAPBridgedPlugin {
     public let pluginMethods: [CAPPluginMethod] = [
         CAPPluginMethod(name: "pending", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "openItem", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "readItemChunk", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "resolveYouTubeTitle", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "openURL", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "acknowledge", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "shareData", returnType: CAPPluginReturnPromise)
@@ -150,6 +152,83 @@ public final class TifloShareInboxPlugin: CAPPlugin, CAPBridgedPlugin {
         } catch {
             call.reject("No se puede preparar el archivo")
         }
+    }
+
+    // When WKWebView cannot fetch a local file:// URL, stream its original
+    // App Group bytes over the Capacitor bridge in bounded chunks. This also
+    // works for older pending receipts, without editing their manifests.
+    @objc public func readItemChunk(_ call: CAPPluginCall) {
+        guard let id = validated(call.getString("id") ?? ""),
+              let folder = inbox(),
+              let record = manifest(id, in: folder),
+              record["kind"] == "file",
+              record["storedName"] == id + ".data" else {
+            call.reject("Archivo recibido no encontrado")
+            return
+        }
+        let offset = call.getInt("offset") ?? 0
+        let requested = call.getInt("length") ?? 524288
+        guard offset >= 0, offset <= 100 * 1024 * 1024,
+              requested > 0, requested <= 524288 else {
+            call.reject("Rango de lectura no válido")
+            return
+        }
+        DispatchQueue.global(qos: .userInitiated).async {
+            let url = folder.appendingPathComponent(id + ".data")
+            do {
+                let handle = try FileHandle(forReadingFrom: url)
+                defer { try? handle.close() }
+                let size = Int(try handle.seekToEnd())
+                guard size > 0, size <= 100 * 1024 * 1024, offset <= size else {
+                    call.reject("Archivo vacío o demasiado grande")
+                    return
+                }
+                try handle.seek(toOffset: UInt64(offset))
+                let data = try handle.read(upToCount: requested) ?? Data()
+                let next = offset + data.count
+                call.resolve([
+                    "data": data.base64EncodedString(),
+                    "nextOffset": next,
+                    "size": size,
+                    "done": next == size,
+                    "name": record["name"] ?? "Contenido",
+                    "contentType": record["contentType"] ?? ""
+                ])
+            } catch {
+                call.reject("No se pudieron recuperar los bytes del archivo recibido")
+            }
+        }
+    }
+
+    // YouTube oEmbed exposes the video's public title without OAuth.
+    // A failure must never prevent playback or invent a misleading title.
+    @objc public func resolveYouTubeTitle(_ call: CAPPluginCall) {
+        guard let id = call.getString("videoId"),
+              id.range(of: "^[A-Za-z0-9_-]{11}$", options: .regularExpression) != nil else {
+            call.reject("Identificador de vídeo inválido")
+            return
+        }
+        let watch = "https://www.youtube.com/watch?v=" + id
+        var parts = URLComponents(string: "https://www.youtube.com/oembed")
+        parts?.queryItems = [URLQueryItem(name: "url", value: watch),
+                             URLQueryItem(name: "format", value: "json")]
+        guard let url = parts?.url else {
+            call.resolve(["title": ""])
+            return
+        }
+        var request = URLRequest(url: url)
+        request.timeoutInterval = 8
+        URLSession.shared.dataTask(with: request) { data, response, _ in
+            guard let http = response as? HTTPURLResponse, http.statusCode == 200,
+                  let data = data, data.count <= 131072,
+                  let object = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any],
+                  let title = object["title"] as? String else {
+                call.resolve(["title": ""])
+                return
+            }
+            let clean = title.trimmingCharacters(in: .whitespacesAndNewlines)
+            call.resolve(["title": String(clean.prefix(240))])
+        }.resume()
     }
 
     // Open real HTTPS URLs without reclassifying them as text documents.

@@ -256,9 +256,13 @@
       documentRegion.list.replaceChildren();
       for (const item of docs) documentRegion.list.append(buttonFor(item, 'document', 'reader'));
     }
-    if (renderedHome !== allKey || homeRegion.root.hidden !== (items.length === 0)) {
+    // The transient arrival context must never follow the user into other
+    // original sections when the application changes the URL hash.
+    const onHome = !location.hash || location.hash === '#home';
+    const hideHomeContext = items.length === 0 || !onHome;
+    if (renderedHome !== allKey || homeRegion.root.hidden !== hideHomeContext) {
       renderedHome = allKey;
-      homeRegion.root.hidden = items.length === 0;
+      homeRegion.root.hidden = hideHomeContext;
       homeRegion.heading.textContent = tr('Contenido compartido pendiente', 'Pending shared content');
       homeRegion.list.replaceChildren();
       // A single contextual item is visible. Historical pending items remain

@@ -225,3 +225,15 @@ Validación técnica sin firma superada: compartir iOS ejecución 39039443339, p
 Enviar UNA compilación únicamente a «Probadores TifloAcosta» en TestFlight interno. No App Store pública ni participantes externos. No borrar los MP3 de la bandeja, bibliotecas, ajustes ni carpetas.
 Aceptación física requerida en iPhone: compartir un MP3 por WhatsApp; guardarlo desde Recibidos; comprobar título en Mi biblioteca con filtro «Importados recientemente» y búsqueda vacía; abrirlo y reproducirlo; comprobar que un fallo deja su original en Recibidos.
 No anunciar la actualización como instalable hasta obtener VALID y asignación real al grupo interno de Apple.
+
+
+Solicitud de compilación INTERNA de verificación iOS, 17/10/2026 (PR #204).
+Cambios integrados en preparacion-ios SHA a94dec3b335c5e5235d145759cc1dab305329b89.
+Incidencias notificadas tras probar compilación 400101 en iPhone: MP3 se conserva en Recibidos pero dice que no puede abrirse; un EPUB importado aparece como «epub» en biblioteca; los EPUB y enlaces YouTube de Recibidos muestran títulos genéricos.
+Solución: lectura por fragmentos de los bytes originales guardados en App Group cuando falla la copia temporal nativa o WKWebView no puede abrir la URL de fichero. Valida tamaño y offsets, no elimina originales hasta confirmar guardado. Archivo MP3 ya recibido debe poder reintentarse sin reenviarlo.
+Los EPUB utilizan el dc:title de OPF para el título de biblioteca, y en Recibidos recuperan el título interno de EPUB cuando el proveedor sólo suministra un nombre genérico. Los enlaces YouTube toman el título original proporcionado por la aplicación de origen o consultan oEmbed; si no hay respuesta, muestran al menos ID real, sin inventar nombres ni bloquear la reproducción.
+Mantener intactos los documentos ya guardados, carpetas, marcadores, ajustes y pantalla principal; no modificar web pública ni Android.
+Pruebas de PR #204 en la revisión b7a27048c1a3dac5dbdcfb74dd44e51bf5793a42: compartir sin firma 39041342687 SUCCESS, preflight iOS 39041342682 SUCCESS, compilación nativa/acciones VoiceOver 39041342679 SUCCESS.
+Destino único: TestFlight interno, grupo «Probadores TifloAcosta», sin publicar ni invitar a personas externas.
+Aceptación final del autor: reabrir el MP3 original pendiente; comprobar que se reproduce y guarda de verdad; enviar EPUB con metadatos dc:title y verificar título en Recibidos y en Mi biblioteca; reproducir y comprobar nombre de YouTube; verificar diseño y rotor en VoiceOver. No declarar corregido en dispositivo hasta esa prueba.
+Confirmar Apple VALID, beta interna habilitada y grupo asignado antes de avisar; enviar correo al autor sólo después de dicha confirmación.

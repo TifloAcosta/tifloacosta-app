@@ -37,6 +37,12 @@ html.theme-dark {
   box-sizing: border-box;
 }
 
+/* A layout rule such as display:grid can otherwise override the browser's
+   default [hidden] styling and expose collapsed panels in the iOS WebView. */
+[hidden]:not([hidden="until-found"]) {
+  display: none !important;
+}
+
 html {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color-scheme: light dark;
@@ -450,3 +456,39 @@ select:focus-visible {
 .reading-reader .reading-annotated-highlight { background: #fff1a8; color: #171717; border-radius: .2rem; }
 .reading-reader[data-reading-theme="dark"] .reading-annotated-highlight { background: #665000; color: #fff; }
 .reading-reader .reading-annotation-note { border-inline-start: .2rem solid currentColor; padding-inline-start: .75rem; margin-block: .8rem; white-space: pre-wrap; }
+
+
+/* Keep every screen inside the iPhone viewport, including with larger text
+   and long imported file names/URLs. These rules do not affect VoiceOver actions. */
+#app,
+#app > *,
+#app section,
+#app article,
+#app nav,
+#app form,
+#app .screen-header > *,
+#app .content-list > *,
+#app .result-list > * {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+
+#app :is(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
+  inline-size: 100%;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+
+#app :is(button, progress, img, video, iframe, canvas) {
+  max-inline-size: 100%;
+}
+
+#app :is(.content-card, .result-card, .reading-library-title, .reading-reader, .action-link, .screen-header h1) {
+  overflow-wrap: anywhere;
+}
+
+/* The grid already provides separation; do not add another card margin. */
+.content-list > .content-card + .content-card,
+.result-list > .result-card + .result-card {
+  margin-block-start: 0;
+}

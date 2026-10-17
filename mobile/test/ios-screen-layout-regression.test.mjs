@@ -7,10 +7,10 @@ const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 test('collapsed iOS controls stay hidden even when their class uses grid or flex', async () => {
   const css = await read('src/styles.css');
   assert.match(css, /\[hidden\]:not\(\[hidden="until-found"\]\)\s*\{\s*display:\s*none\s*!important;/);
-  assert.match(css, /\\.reading-book-controls\\s*\\{[\\s\\S]*?display:\\s*grid;/);
-  assert.match(css, /\\.reading-library-pagination\\s*\\{[\\s\\S]*?display:\\s*grid;/);
-  assert.match(css, /\\.search-form,[\\s\\S]*?\\.reading-library-search\\s*\\{[\\s\\S]*?display:\\s*grid;/);
-  assert.match(css, /\\.home-menu,[\\s\\S]*?\\.content-list,[\\s\\S]*?\\.result-list\\s*\\{[\\s\\S]*?display:\\s*grid;/);
+  assert.match(css, /\.reading-book-controls\s*\{[\s\S]*?display:\s*grid;/);
+  assert.match(css, /\.reading-library-pagination\s*\{[\s\S]*?display:\s*grid;/);
+  assert.match(css, /\.search-form,[\s\S]*?\.reading-library-search\s*\{[\s\S]*?display:\s*grid;/);
+  assert.match(css, /\.home-menu,[\s\S]*?\.content-list,[\s\S]*?\.result-list\s*\{[\s\S]*?display:\s*grid;/);
 });
 
 test('screens, imported book titles and controls cannot widen beyond iPhone viewport', async () => {

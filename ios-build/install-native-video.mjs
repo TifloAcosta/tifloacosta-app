@@ -3,6 +3,8 @@ import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 
 const root = resolve(import.meta.dirname);
+// Staging can install the existing iOS native bridges on Capacitor 8's mobile project.
+const nativeProject = resolve(process.env.TIFLO_IOS_NATIVE_ROOT || resolve(root, 'ios'));
 const source = resolve(root, 'native/TifloYouTubeViewController.swift');
 const authSource = resolve(root, 'native/TifloYouTubeAuth.swift');
 const actionSource = resolve(root, 'native/TifloYouTubeAccountControls.swift');
@@ -13,10 +15,10 @@ const nativeListSource = resolve(root, 'native/TifloNativeActionListController.s
 const shareInboxSource = resolve(root, 'native/TifloShareInboxPlugin.swift');
 const videosSource = resolve(root, 'native/TifloNativeVideosController.swift');
 const iframeSource = resolve(root, 'native/tiflo-youtube-player.html');
-const iframeTarget = resolve(root, 'ios/App/App/public/tiflo-youtube-player.html');
-const infoPath = resolve(root, 'ios/App/App/Info.plist');
-const appDelegatePath = resolve(root, 'ios/App/App/AppDelegate.swift');
-const storyboardPath = resolve(root, 'ios/App/App/Base.lproj/Main.storyboard');
+const iframeTarget = resolve(nativeProject, 'App/App/public/tiflo-youtube-player.html');
+const infoPath = resolve(nativeProject, 'App/App/Info.plist');
+const appDelegatePath = resolve(nativeProject, 'App/App/AppDelegate.swift');
+const storyboardPath = resolve(nativeProject, 'App/App/Base.lproj/Main.storyboard');
 
 const appDelegate = await readFile(appDelegatePath, 'utf8');
 const storyboard = await readFile(storyboardPath, 'utf8');
@@ -90,7 +92,7 @@ execFileSync('/usr/libexec/PlistBuddy', ['-c', 'Add :CFBundleURLTypes:0:CFBundle
 // Keep the iPhone Home Screen icon aligned with the published TifloAcosta
 // identity, not Capacitor's generated default. This Xcode project is
 // regenerated during every CI run, so the asset must be installed here.
-const appIconSet = resolve(root, 'ios/App/App/Assets.xcassets/AppIcon.appiconset');
+const appIconSet = resolve(nativeProject, 'App/App/Assets.xcassets/AppIcon.appiconset');
 const appIconSource = resolve(root, '../tifloacosta-icon-512.png');
 const appIconTarget = resolve(appIconSet, 'TifloAcosta-1024.png');
 await rm(appIconSet, { recursive: true, force: true });

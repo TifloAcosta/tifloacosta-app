@@ -19,6 +19,9 @@ jobs:
     runs-on: macos-15
     timeout-minutes: 95
     steps:
+      - uses: actions/checkout@v4
+      - name: Bloquear distribución de una segunda interfaz web en iOS
+        run: node ios-build/check-single-ui-release.mjs
       - name: Seleccionar Xcode 26 y SDK iOS 26 requerido por Apple
         run: |
           set -euo pipefail

@@ -120,6 +120,18 @@
     "publishedAt": null
   },
   {
+    "id": "applevis-apps-511a23be0198e599",
+    "title": "TheJournal.ie News",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/news/thejournalie-news",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "#1 Free News App in Ireland The Journal is Ireland’s most popular online news source. Our multi-award winning team delivers breaking news, hard-hitting investigations and smart commentary on the issues that matter to you. We explain, we factcheck, we listen through interactive and multimedia storytelling, all in a user-friendly format. You can choose to use The Journal for free or you can support our independent journalism with a subscription. As a subscriber you also get The Journal ad-free. Check out our Terms of Use for all details on using The Journal ( https://www.thejournal.ie/terms/ ). ********************************************************* Awards for our journalism: Daphne Caruana Galizia Prize 2024 The Mary Raftery Prize for outstanding social affairs journalism 2019, 2020, 2021, 2022, 2023 Media Literacy Ireland, Media Champion 2023 The Irish Red Cross Humanitarian Journalism Award 2022, 2021, 2020 New York Festival of Radio, Gold medallist, Best Documentary Podcast 2020 Celtic Media Festival, Best Radio Documentary 2020 Justice Media Awards, multiple, 2016-2025 *********** “Really impressed by The Journal …and its focus on citizen storytelling” - Mark Little, founder of Storyful, Kinzen \"Best Addition to Irish Media\" - Ian Dempsey “A valuable public service” - John FitzGerald, ESRI ********** > Download now for Free FEATURES: - Trustworthy breaking news and opinion from Ireland and beyond - Get only the most important news alerts straight to your phone - Clear-sighted analysis and explainers to guide you through hot topics - Submit photos, video and tips directly to our journalists from your device - Listen to award-winning podcasts such as The Explainer, Stardust and The Candidate in-app - Vote in our daily topical polls - Send a question to Ireland’s only verified FactCheck team - Submit story ideas to The Journal Investigates - Hear the diverse stories of a modern Ireland in our Voices opinion section - Contribute to and read our popular Money Diaries, Sitdown Sunday and other weekly features - Test out our fun and informative news quizzes - Join our comments community - Share articles directly from the app to your social networks, to email and your messaging apps - Sign up for our behind-the-scenes newsletters on the climate crisis, public health, misinformation and more - Find brilliant sports storytelling from our sister publication The42 Follow us on instagram.com/thejournal_ie, facebook.com/thejournal.ie, tiktok.com/@thejournal_ie, X.com/thejournal_ie, for latest updates",
+    "publishedAt": "2026-10-17T13:33:00.000Z"
+  },
+  {
     "id": "applevis-apps-542bc1657eb1c8c3",
     "title": "Sortalis",
     "sourceId": "applevis-apps",
@@ -226,17 +238,5 @@
     "platform": "Apple",
     "summary": "Sort scattered words into their hidden groups in Word Tack, a cozy word puzzle with a handmade feel: washi tape, typewriter labels and paper tiles that look cut out by hand. Every puzzle hides eight groups of five words. Drag tiles between rows, or tap two tiles to swap them. When a row holds all five words of a group, it’s sealed and its category is revealed. There’s no timer and no penalty for a wrong guess, so take your time. PLAY YOUR WAY • A growing campaign of handcrafted levels, from everyday categories to clever wordplay and real head-scratchers, with more added in updates • Every level is marked easy, medium or hard • A Daily Puzzle to play each day, with shareable emoji results and a streak to keep GENTLE HELP WHEN YOU’RE STUCK • Inklings link two words from the same group • Clues reveal the names of up to three groups • Solve a puzzle without help to earn all three stars MAKE THE DESK YOUR OWN • Earn stamps as you play • Spend them in the shop on washi tape, tile styles, row seals, desk backgrounds and confetti, including dazzling gold and holographic finishes MADE WITH CARE • Satisfying sounds, gentle haptics and a soft soundtrack, each with its own setting • Statistics, star ratings and daily streaks to track your progress • Works with VoiceOver: double-tap two cards to swap them, and hear when rows are solved and where each card sits on the board • A Reduce Motion setting for calmer play • No ads, no in-app purchases and no account needed. Works offline.",
     "publishedAt": "2026-10-11T06:14:34.000Z"
-  },
-  {
-    "id": "applevis-apps-8738c066fab145d1",
-    "title": "ArcFlush: Roguelike Solitaire",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/arcflush-roguelike-solitaire",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Cards don't line up politely here. They're stacked in layers — the way mahjong tiles are stacked, except these are playing cards, and one of the maps is on fire. Which means there are two games sitting on top of each other: getting a card out of the pile, and knowing what to do with it once you have it. HOW IT WORKS · The map is a layered formation. Anything underneath is locked until you clear what's covering it, so every card you take decides what you're allowed to take next. That half is solitaire. · Play up to five of the cards you've taken as a poker hand. A pair is fine. A Flush is better. A Straight Flush means you planned ahead — or got lucky and will claim you planned ahead. That half is poker. · Beat the stage's target score, spend what you earned in the Shop, and do it again. And again. Until the target has grown a couple of digits and you're no longer certain which of your trinkets is doing the heavy lifting. WHAT'S IN IT · Every map is built around exactly one idea. Ice Lake freezes cards. Furnace sets them alight. Dark Pool turns the lights off and invites you to feel your way out. · Clear a map and its Twist unlocks: the same map, in a considerably worse mood. · Trinkets. Some add points. Some quietly rewrite a rule you'd assumed was permanent. The legendary ones turn up rarely enough that finding the right one feels like the run has decided to help you, just this once. · A Shop between stages, because a roguelite without a shop is just a difficult puzzle. · A tutorial that leaves quickly and waits in Settings in case you ever want it back. WHAT'S NOT IN IT · Ads. · In-app purchases. · A season pass, a battle pass, or a little bar that refills while you sleep. · An internet connection. This app has never phoned home and wouldn't know who to call. Buy it once and own all of it — every map, every trinket, every Twist. There is nothing else to sell you, and we are not going to think of anything. One deck, thirteen languages. Good luck.",
-    "publishedAt": "2026-10-10T09:23:54.000Z"
   }
 ]

@@ -1,5 +1,22 @@
 [
   {
+    "id": "migue-baena-ia:https://www.youtube.com/watch?v=9aAu-hfvoME",
+    "type": "video",
+    "section": "technology",
+    "sourceId": "migue-baena-ia",
+    "sourceName": "Migue Baena IA",
+    "sourceUrl": "https://www.youtube.com/@MigueBaenaIA",
+    "originalUrl": "https://www.youtube.com/watch?v=9aAu-hfvoME",
+    "originalLanguage": "es",
+    "publishedAt": "2026-10-17T13:05:10.000Z",
+    "title": "3 herramientas para mejorar el SEO de tu web 🌐",
+    "summary": "¿Quieres mejorar el SEO de tu web usando inteligencia artificial? Prueba estas 3 herramientas. 🤩\nEl SEO está evolucionando y puedes apoyarte en la inteligencia artificial para analizar datos, encontrar oportunidades y preparar tu contenido para las nuevas formas de búsqueda. 🔍\n•\nEstas son 3 herramientas que vale la pena conocer. 🙂‍↕️\nLa idea es aprovechar los datos y la automatización para encontrar oportunidades de mejora sin depender desde el principio de herramientas costosas.\n•\n👉🏻 Puedes configurar estas 3 herramientas de SEO con inteligencia artificial desde aquí:\n1. GSC MCP: https://github.com/AminForou/mcp-gsc\n2. GEO Optimizer Skill: https://github.com/Auriti-Labs/geo-optimizer-skill\n3. OpenSEO: https://github.com/every-app/open-seo\nWeb oficial de OpenSEO: https://openseo.so/\n📲 Visita el enlace de mi bio para unirte a mi comunidad exclusiva y aprender a aplicar la IA en tus proyectos. 🤖\n•\n#SEO #InteligenciaArtificial #ClaudeAI #GoogleSearchConsole #MarketingDigital #PosicionamientoWeb #HerramientasIA",
+    "mediaUrl": null,
+    "embedUrl": "https://www.youtube.com/embed/9aAu-hfvoME",
+    "platform": "youtube",
+    "categories": []
+  },
+  {
     "id": "xataka:https://www.youtube.com/watch?v=c2ll7eZLUEM",
     "type": "video",
     "section": "technology",
@@ -608,23 +625,6 @@
     "summary": "Linus goes hands on with the new NVIDIA RTX Spark and the MSI Prestige N16 Flip AI+ to share his first impressions!\n\nThanks MSI for sponsoring this short!",
     "mediaUrl": null,
     "embedUrl": "https://www.youtube.com/embed/qqhIp0OaZWI",
-    "platform": "youtube",
-    "categories": []
-  },
-  {
-    "id": "migue-baena-ia:https://www.youtube.com/watch?v=FkszVTJKEpE",
-    "type": "video",
-    "section": "technology",
-    "sourceId": "migue-baena-ia",
-    "sourceName": "Migue Baena IA",
-    "sourceUrl": "https://www.youtube.com/@MigueBaenaIA",
-    "originalUrl": "https://www.youtube.com/watch?v=FkszVTJKEpE",
-    "originalLanguage": "es",
-    "publishedAt": "2026-10-15T14:08:32.000Z",
-    "title": "La alternativa Open Source a Claude Design 🤩",
-    "summary": "Esta alternativa Open Source te permite crear prototipos con IA desde tu ordenador. 💻\n📌 Se llama Open Code Design y puedes conectarla con modelos de IA compatibles para trabajar en diferentes proyectos.\nTambién puedes guardar tus proyectos localmente y adaptar el código porque es un proyecto de código abierto. 🔓\n•\n⚠️ Eso sí, aunque la herramienta sea gratuita, el uso de algunos modelos o APIs puede generar costes.\n👉🏻 Si quieres probarla, ingresa al link https://certain-open-design-hub.base44.app/\n😎 Y si quieres descubrir más herramientas de Inteligencia Artificial, programación y diseño, visita el enlace de mi bio.\n•\n#OpenSource #InteligenciaArtificial #DiseñoWeb #ClaudeAI #DesarrolloWeb #Prototipado #HerramientasIA #Programacion",
-    "mediaUrl": null,
-    "embedUrl": "https://www.youtube.com/embed/FkszVTJKEpE",
     "platform": "youtube",
     "categories": []
   },

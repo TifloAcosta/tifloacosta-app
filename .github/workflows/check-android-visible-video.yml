@@ -1,0 +1,45 @@
+name: Verify Android foreground video screen handling
+
+on:
+  pull_request:
+    paths:
+      - 'mobile/src/screens/video-player.mjs'
+      - 'mobile/android/app/src/main/java/com/tifloacosta/app/MainActivity.java'
+      - 'mobile/android/app/src/main/java/com/tifloacosta/app/TifloVideoScreenPlugin.java'
+      - 'mobile/test/video-screen-awake.test.mjs'
+      - '.github/workflows/check-android-visible-video.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  video-screen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Install Android app dependencies
+        working-directory: mobile
+        run: npm ci
+      - name: Validate accessible video and screen-awake contracts
+        working-directory: mobile
+        run: node --test test/video-screen-awake.test.mjs test/videos-accessible-player.test.mjs
+      - name: Build mobile UI and synchronize Capacitor
+        working-directory: mobile
+        run: |
+          npm run build
+          npx cap sync android
+      - name: Compile unsigned Android APK
+        working-directory: mobile/android
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon assembleDebug --stacktrace

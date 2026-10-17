@@ -6,7 +6,7 @@ import { runInNewContext } from 'node:vm';
 const source = readFileSync(new URL('../ios-share-inbox.js', import.meta.url), 'utf8');
 const prep = readFileSync(new URL('../prepare-web.mjs', import.meta.url), 'utf8');
 
-function createHarness({ contents, saveOK = true, confirmation = true, fetchedMime = '', fetchFails = false, videoTitle = '' } = {}) {
+function createHarness({ contents, saveOK = true, confirmation = true, fetchedMime = '', fetchFails = false, openFails = false, videoTitle = '' } = {}) {
   const create = (tag = 'div') => {
     const element = {
       tag, id: '', hidden: false, children: [], className: '', textContent: '',
@@ -51,6 +51,7 @@ function createHarness({ contents, saveOK = true, confirmation = true, fetchedMi
     async pending() { return { items: files.slice() }; },
     async openItem({ id }) {
       events.push('open');
+      if (openFails) throw new Error('No se puede preparar el archivo');
       const item = files.find(value => value.id === id);
       return {
         id, kind: item.kind, name: item.name,
@@ -203,6 +204,19 @@ test('MP3 existente: el puente nativo recupera los bytes cuando WKWebView rechaz
   assert.equal(h.savedFile()?.type, 'audio/mpeg');
   assert.equal(h.savedFile()?.size, Buffer.byteLength('file bytes'));
   assert.deepEqual(h.events, ['open', 'chunk', 'save', 'ack']);
+  assert.equal(h.files.length, 0);
+});
+
+test('MP3 ya recibido: si falla copiar a temporal, se lee App Group por fragmentos', async () => {
+  const h = createHarness({ openFails: true, contents: [{
+    id: '123e4567-e89b-12d3-a456-426614174001',
+    kind: 'file', name: 'Audio de prueba.mp3',
+    createdAt: '2026-10-17T10:00:00Z'
+  }] });
+  await h.tap('Guardar audio en biblioteca');
+  assert.deepEqual(h.events, ['open', 'chunk', 'save', 'ack']);
+  assert.equal(h.savedFile()?.name, 'Audio de prueba.mp3');
+  assert.equal(h.savedFile()?.type, 'audio/mpeg');
   assert.equal(h.files.length, 0);
 });
 

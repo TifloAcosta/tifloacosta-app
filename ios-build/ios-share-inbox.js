@@ -136,7 +136,7 @@
       if (!reader.hidden) finish();
     });
   }
-  async function importDocument(item, opened, targetStatus) {
+  async function prepareSharedFile(opened) {
     let file;
     if (opened.kind === 'file') {
       const uri = window.Capacitor?.convertFileSrc?.(opened.uri);
@@ -153,6 +153,10 @@
       const name = safeName(opened.name).replace(/\.txt$/i, '');
       file = new File([content], name + '.txt', {type:'text/plain;charset=utf-8'});
     }
+    return file;
+  }
+  async function importDocument(item, opened, targetStatus) {
+    const file = await prepareSharedFile(opened);
     const actions = window.TifloIOSBookActions;
     if (!actions?.importSharedFile) throw new Error('reader-unavailable');
     const imported = await actions.importSharedFile(file);
@@ -211,11 +215,17 @@
         }
       } else {
         await enterReaderSection();
-        const savedId = await importDocument(item, opened, targetStatus);
         if (choice === 'read') {
           const book = window.TifloIOSBookActions;
-          if (!book?.openBook) throw new Error('reader-open-unavailable');
-          await book.openBook(savedId);
+          if (!book?.readSharedFile) throw new Error('reader-open-unavailable');
+          const file = await prepareSharedFile(opened);
+          const result = await book.readSharedFile(file);
+          if (result?.opened !== true) throw new Error('reader-open-failed');
+          await native().acknowledge({id:item.id});
+          targetStatus.textContent = tr('Documento abierto sin guardarlo. Puedes guardarlo desde el lector.',
+            'Document opened without saving. You can save it from the reader.');
+        } else {
+          await importDocument(item, opened, targetStatus);
         }
       }
     } catch (error) {

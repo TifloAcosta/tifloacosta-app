@@ -1,11 +1,12 @@
 {
-  "versionName": "1.3.6",
-  "track": "alpha",
+  "versionName": "1.3.7",
+  "track": "production",
   "status": "completed",
+  "confirmProduction": true,
   "priority": 2,
   "notifyUpdate": true,
   "notes": {
-    "es": "Actualización centrada en accesibilidad y estabilidad: mejoras en TifloLector, navegación y foco, exploración táctil, Descargas, Podcast, controles de vídeo, categorías dinámicas, identidad visual, importación de formatos, compartición de archivos y gestión de recursos sin depender de Google Drive.",
-    "en": "Accessibility and stability update: improvements to TifloReader, navigation and focus, touch exploration, Downloads, Podcast, video controls, dynamic categories, visual identity, format imports, file sharing, and resource handling without relying on Google Drive."
+    "es": "Mejora del reproductor accesible de YouTube: la pantalla permanece encendida durante la reproducción visible y vuelve al bloqueo normal al pausar o cerrar el vídeo. Correcciones de estabilidad y accesibilidad.",
+    "en": "Accessible YouTube player improvement: the display stays awake during visible playback and returns to normal screen timeout when the video is paused or closed. Stability and accessibility fixes."
   }
 }

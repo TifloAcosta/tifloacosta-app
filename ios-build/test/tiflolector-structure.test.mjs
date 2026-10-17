@@ -222,6 +222,7 @@ test('Compartir distribuye archivos, YouTube y otros enlaces sin superponer pant
   assert.ok(appwide.includes('showNativeVideoSection'));
   assert.ok(nativeInbox.includes('func openURL('));
   assert.ok(extension.includes('if kind == "file"'));
-  assert.ok(extension.includes('if !explicitlyNamedFile &&'));
-  assert.ok(inbox.includes('await native().acknowledge({id:item.id})'));
+  assert.ok(extension.includes('if let identifier = fileIdentifier {'));
+  assert.ok(inbox.includes('await native().acknowledge({ id: item.id })'));
+  assert.ok(inbox.includes("operation === 'delete'"));
 });

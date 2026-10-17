@@ -58,12 +58,16 @@ jobs:
           node ../ios-build/install-native-video.mjs
           ruby ../ios-build/install-share-extension.rb
           ruby ../ios-build/configure-ios-compliance.rb
-          (cd ios/App && pod install)
+          if [ -f ios/App/Podfile ]; then (cd ios/App && pod install); fi
           test -s ios/App/App/public/tiflo-ios-ui-identity.json
           test -s ios/App/App/public/app.js
           test ! -f ios/App/App/public/videos.html
           test ! -f ios/App/App/public/actualidad.html
-          xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build
+          if [ -d ios/App/App.xcworkspace ]; then
+            xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build
+          else
+            xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build
+          fi
 
   parity-blocker:
     name: Paridad funcional y persistencia pendiente

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-17T09:25:02.620Z",
+  "generatedAt": "2026-10-17T12:59:28.571Z",
   "resources": [
     {
       "kind": "resource",
@@ -6107,23 +6107,6 @@
         "apps-accesibles",
         "tecnologia-accesibilidad",
         "apple"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "freedom-scientific-blog-f16fdfd64cd266d1:en",
-      "sourceId": "freedom-scientific-blog-f16fdfd64cd266d1",
-      "lang": "en",
-      "title": "Join Us for Our October 2026 Training Events",
-      "summary": "The Freedom Scientific training team offers ongoing opportunities for you to join us in live training sessions and advance your skills. We’re excited to announce our jam-packed October training schedule, where you’re sure to find something that will help you at work, school, or play. If you have questions or need assistance with registration, email …",
-      "body": "The Freedom Scientific training team offers ongoing opportunities for you to join us in live training sessions and advance your skills. We’re excited to announce our jam-packed October training schedule, where you’re sure to find something that will help you at work, school, or play.\n\nIf you have questions or need assistance with registration, email training@vispero.com . We also welcome your suggestions for future training events. Check the Freedom Scientific Training schedule for additional events we may post throughout the month.",
-      "sourceName": "Freedom Scientific",
-      "originalUrl": "https://training.vispero.com/join-us-for-our-october-2026-training-events/",
-      "publishedAt": "2026-10-07T12:28:47.000Z",
-      "categories": [
-        "windows",
-        "tecnologia-accesibilidad",
-        "jaws"
       ]
     }
   ]

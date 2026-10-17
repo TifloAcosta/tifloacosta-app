@@ -1,5 +1,79 @@
 [
   {
+    "id": "9to5mac-7c35c8a1a19f5af3",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/17/iphone-duo-walk-in-purchases-challenging-report/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-17T22:21:41.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iPhone Duo walk-in purchases might be challenging at launch, per report",
+        "summary": "According to a new report from MacRumors , Apple employees are being told to warn customers that iPhone Duo likely won’t be available for purchase on launch day if you didn’t already place a pre-order. more…",
+        "body": "According to a new report from MacRumors , Apple employees are being told to warn customers that iPhone Duo likely won’t be available for purchase on launch day if you didn’t already place a pre-order.\n\nRight now, Apple’s website suggests that you can check back for iPhone Duo availability on October 24th. However, this isn’t a guarantee of any stock actually being available, per MacRumors :\n\nApple Store employees told MacRumors that they have been advised that there will likely be no ‌iPhone Duo‌ stock available for walk-in purchases on launch day. Staff have been instructed to discourage customers without pre-orders from coming in expecting to buy the device, warning that they will be disappointed.\n\nThis isn’t necessarily a surprise, given the fact that Apple stated yesterday that iPhone Duo demand is “extraordinary,” and we’ve long known that there were production constraints that’d lead to limited iPhone Duo supply around launch.\n\nHowever, this still serves as our first true sign that even if you line up at an Apple Store the night prior to the iPhone Duo launch, you might not actually end up getting a device. Some stores might receive no additional shipments beyond what was already pre-ordered.\n\nAs of now, iPhone Duo is sold out through January . If these supply constraints remain, it’ll probably be challenging to buy a device for the foreseeable future. Scalpers have also been charging absurd markups on iPhone Duo orders close to launch day.\n\nIf you truly want an iPhone Duo sooner than later, carriers and Best Buy seem to be a decent bet, at least in the US.\n\nMy favorite Apple accessory recommendations:\n\nFollow Michael: X/Twitter , Bluesky , Instagram"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-a809d32697a1fc35",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/17/meta-removes-language-that-raised-scraping-and-ai-training-concerns/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-17T21:31:32.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Meta removes language that raised scraping and AI training concerns",
+        "summary": "A Meta spokesperson insisted that the updated terms did not reflect a change in the way Meta crawls the web.",
+        "body": "Posted:\n\nMeta recently updated its commercial terms of use, declaring that the company can “use any content from [a business account’s] domains, web pages, or URLs to provide, develop, improve, research, train, and maintain the integrity of” Meta products and services.\n\nAccording to legal experts interviewed by Nieman Lab , this looked like a “remarkable provision” that could give Meta permission to scrape the website of any publisher with a Meta business account and use the content to train the company’s AI models. (While Meta defeated a high-profile lawsuit over alleged copyright infringement last year, other cases against AI companies, including Meta, continue.)\n\nHowever, a Meta spokesperson insisted that the updated terms did not reflect a change in the way Meta crawls the web. And now, The Verge reports that the provision has been removed.\n\n“We’ve heard you and want to clarify: the crawling terms we consolidated only applied to our ads and business products, and we’ve clarified that in the terms themselves,” the company said in a statement. “It does not change how Meta uses web crawlers.”"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-d74123b64fafe0dd",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/17/indie-app-spotlight-hoardware-makes-it-easy-to-track-your-apple-device-collection/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-17T19:30:00.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles",
+      "programas-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Indie App Spotlight: ‘Hoardware’ makes it easy to track your Apple device collection",
+        "summary": "Welcome to Indie App Spotlight . This is a weekly 9to5Mac series where we showcase the latest apps in the indie app world. If you’re a developer and would like your app featured, get in contact . If you’re someone who collects tons of varying Apple products, Hoardware is your one-stop shop for keeping track of it all. Hoardware lets you track all of your hardware, as well as the software versions, model numbers, and anything else that might be relevant. more…",
+        "body": "Welcome to Indie App Spotlight . This is a weekly 9to5Mac series where we showcase the latest apps in the indie app world. If you’re a developer and would like your app featured, get in contact .\n\nIf you’re someone who collects tons of varying Apple products, Hoardware is your one-stop shop for keeping track of it all. Hoardware lets you track all of your hardware, as well as the software versions, model numbers, and anything else that might be relevant.\n\nHoardware is mostly useful as a collector’s tool. Say you have a giant vintage iPhone collection. Hoardware will let you track every single iPhone, its iOS version, its serial number, and anything else that you want to note down. There’s also a coverage tab, where you can see how many devices you own on each iOS version.\n\nOf course, it isn’t only useful for collectors. You can add new devices too, and Hoardware has a feature where it can notify you when new software updates are released for your device, so you can see it even quicker than Apple will tell you.\n\nAdding a device to Hoardware is simple. There’s a list you can scroll through, then you select from there – and most of the details are automatically filled in. The app even automatically provides images of devices.\n\nLastly, you can even set devices as favorites so you can easily find them in a crowded list, if you’re an avid collector. Your library will sync across iCloud, too.\n\nHoardware is available for free on the App Store for devices running iOS 17 and later. There are no ads, in-app purchases, or subscriptions.\n\nMy favorite Apple accessory recommendations:\n\nFollow Michael: X/Twitter , Bluesky , Instagram"
+      }
+    },
+    "media": null
+  },
+  {
     "id": "techcrunch-f20a6d63a693920c",
     "type": "news",
     "sourceId": "techcrunch",
@@ -15,7 +89,7 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Replit is no longer working with Anthropic, CEO says",
+        "title": "Replit makes OpenAI its default over Anthropic, CEO says",
         "summary": "Over the weekend, Masad clarified that OpenAI would replace Anthropic as its default model provider. Claude will still be available to customers on the platform.",
         "body": "Replit, the AI coding platform that has become a favorite of startup founders and developers, is no longer working with Anthropic, the company’s CEO and co-founder Amjad Masad said Thursday while onstage at TechCrunch Disrupt .\n\nMasad said the decision was made for a number of different reasons, including cost. Replit announced a partnership with OpenAI in August, but there was never any indication that it was no longer partnering with Anthropic.\n\n“I think ChatGPT is better now,” Masad said, adding that the company uses an internal benchmark to help assess metrics like performance. “We publish a public benchmark as well, and consistently, Sol and Astra perform better on building vibe-coded applications from scratch. It was a decision based on both cost, partnership, and performance. And for all these reasons, we just felt like they were a better partner for now.”\n\nIt seems, however, that Anthropic hasn’t been completely cut out of Replit, which sells a cloud-based software development platform where users can develop and deploy apps directly from inside their browser.\n\nAfter Disrupt, Masad clarified that customers can still access Anthropic models on the platform, but that OpenAI’s ChatGPT is now the default. This shift could significantly reduce Replit’s spend with Anthropic since most customers stick with the default rather than selecting a model themselves.\n\nPrior to striking a deal with OpenAI, Replit relied on Anthropic’s Claude models to run its platform. That partnership was said to have helped the company grow its revenue significantly, and Masad noted on stage that Replit had been, until recently, a top-five customer of Anthropic’s.\n\n“Replit remains model agnostic,” Masad told TechCrunch over the weekend. “Our users can choose Anthropic’s Claude or other supported models…OpenAI is now our preferred partner for powering Replit Agent, based on performance, economics, and the strength of our partnership.”\n\nMasad’s comments on stage were rejected by insiders familiar with the partnership between the Anthropic and Replit, however. One person familiar, who asked not to be named, said the partnership was still in place.\n\nThere is evidence on the company’s website , blog posts, and social media posts that Replit was promoting Anthropic products as recently as a few weeks ago. For instance, a blog post in late September cites Anthropic’s Claude Fable 5 and Claude Fable 5.1 as models running in Replit Agent’s production environment. Around the same time, one of Replit’s product employees posted on X about using Anthropic’s flagship model Opus 5.5 and promoting its capabilities.\n\nMasad also shared insights about the company’s growth while onstage at Disrupt, noting that enterprise is starting to provide a larger slice of revenue.\n\n“We’re not sharing ARR numbers just yet, but in terms of growth, like, I would say, enterprise was like 2% of revenue last year,” Masad said. “This year, I would say like 15% of our revenue is enterprise contracts, and more than 50% of our revenue is B2B.”\n\nBackstage, Masad told TechCrunch that he expects more than half of Replit’s revenue to come from enterprise and government customers in 2027.\n\nMasad also commented on the necessity for good AI safety measures.\n\n“In the same way that us humans need a certain environment to work — you need a nice office, maybe nice good food in the office, air-conditioning, computer — agents need a habitat for them to exist and do good work,” he said. “So that habitat has good orchestration, good error recovery, good safety and security and sandboxing, good networking, good identity and authorization. And once you figure all of that out, then you can deploy AI safely.”\n\nThis article was originally published on October 16 at 2:22 pm PT. It has been updated to include more context around Replit’s partnerships with Anthropic and OpenAI."
       }
@@ -119,30 +193,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-dcf91359be5f4c33",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/17/iphone-handoff-pricing-details-ee-uk/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-17T15:54:02.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "EE announces iPhone Handoff pricing details for UK customers",
-        "summary": "As part of its iPhone Duo preorder announcement, UK carrier EE has announced pricing details for iPhone Handoff – making it the first carrier in the UK to do so. Here are the details. more…",
-        "body": "As part of its iPhone Duo preorder announcement, UK carrier EE has announced pricing details for iPhone Handoff – making it the first carrier in the UK to do so. Here are the details.\n\nAt its September keynote, Apple announced iPhone Handoff, a feature that allows users to use their same eSIM across multiple iPhones. It requires support from carriers, and at the keynote, Apple announced T-Mobile, Verizon, EE, and Deutsche Telekom would support it. T-Mobile said it’d be available for $5/month as an add-on for your line, and Verizon just announced it’d be $10/month .\n\nNow, EE is announcing that iPhone Handoff will be available for free as part of its Full Works Plus plan, and available for £5/month on its other plans:\n\niPhone Handoff allows customers to easily switch back and forth between two iPhone models with the same mobile number. It means customers can choose the iPhone that’s right for the moment, without worrying about missing a call, message or notification.\n\nWhether you’re heading to a festival, going for a run, tackling an all-day hike or simply travelling lighter, your contacts, calls and messages move seamlessly with you.\n\nIncluded with EE’s Full Works Plus plan which includes Fast Lane, or available for £5 per month on a rolling contract, iPhone Handoff is coming soon and offers a level of flexibility and convenience that isn’t available anywhere else in the UK.\n\nIt’s worth noting that it’s still “coming soon,” though Apple did announce that it’ll be available by the end of the year.\n\nMy favorite Apple accessory recommendations:\n\nFollow Michael: X/Twitter , Bluesky , Instagram"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "the-verge-5049974f137246ab",
     "type": "news",
     "sourceId": "the-verge",
@@ -162,30 +212,6 @@
         "title": "Meta removes language that may have allowed it to scrape news sites",
         "summary": "After backlash, Meta is updating its terms again to remove language that suggested it could scrape content from sites, including news sites, to train its AI. Specifically, the following language no longer appears on the commercial terms page: … Meta may use any content from such domains, web pages, or URLs to provide, develop, improve, […]",
         "body": "After backlash, Meta is updating its terms again to remove language that suggested it could scrape content from sites, including news sites, to train its AI. Specifically, the following language no longer appears on the commercial terms page :\n\n… Meta may use any content from such domains, web pages, or URLs to provide, develop, improve, research, train, and maintain the integrity of, the Meta Company Products, services, and features provided under these Commercial Terms and any other applicable supplemental terms.\n\nMany, including Neiman Lab and James Grimmelmann, a professor of digital and information law at Cornell, interpreted it as an …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-773fec8d379ec418",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/17/iphone-duo-silicone-case-adhesive-psa/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-17T13:45:00.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "PSA: Apple’s official silicone iPhone Duo case will require adhesive to stick",
-        "summary": "iPhone Duo is just about a week away from launching, and now that preorders have opened, Apple’s official iPhone Duo accessories have started to hit stores for early purchases. After purchasing, some users have noticed that the silicone case has a little bit of a caveat. more…",
-        "body": "iPhone Duo is just about a week away from launching, and now that preorders have opened, Apple’s official iPhone Duo accessories have started to hit stores for early purchases. After purchasing, some users have noticed that the silicone case has a little bit of a caveat.\n\nApple designed two cases for iPhone Duo: a $79 silicone case , and a $129 folio case . This concern is about the former.\n\nWith the silicone case for iPhone Duo, you’ll actually need to expose adhesive on the case for it to stick to your iPhone. Apple decided to opt for adhesives rather than using magnets. Presumably, the case would fall off if you don’t use the adhesive. This isn’t a new concept for foldable cases.\n\nThe unfortunate thing about this is that you likely can’t swap cases or go caseless as easily, and even if you do, the adhesive wouldn’t be as effective after you take it off.\n\nThis isn’t a super major deal, but something to keep in mind if you’re going to purchase Apple’s official silicone case for iPhone Duo. On the other hand, Apple’s folio with kickstand does seem to be rather nice, though it does carry a premium price tag.\n\nIf you aren’t interested in Apple’s official cases, some good options include Spigen’s Ultra Hybrid Pro and ESR’s Classic Hybrid with kickstand .\n\nMy favorite Apple accessory recommendations:\n\nFollow Michael: X/Twitter , Bluesky , Instagram"
       }
     },
     "media": null
@@ -328,31 +354,6 @@
         "title": "Bug turns one of the biggest fears about Ray-Ban Meta smart glasses into reality",
         "summary": "The bug is fixed, but privacy concerns remain.",
         "body": "Some Ray-Ban Meta smart glasses were recording people’s conversations without the wearer knowing. The recordings occurred without users saying the prompt phrase (“Hey, Meta”), in a bug that Meta says has been fixed.\n\nThis week, some users reported online that their Ray-Ban Metas were recording without their consent. A person going by Kindly-Audience-137 on Reddit, for example, said this happened to them across three Meta Ray-Bans and that they had the “Respond without Hey Meta” setting turned off. The person said the Meta AI app “saves audio recordings and text transcripts of these conversations in my conversation history.”\n\n“I believe this deserves a serious technical investigation. Customers should not have to wonder whether their private conversations are being captured when they have not intentionally activated their glasses’ AI assistant,” the Reddit user said.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-1c8415405bbc91f9",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/16/india-becomes-the-latest-country-to-report-rogue-ai-agent-activity/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-16T17:52:24.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "India becomes the latest country to report rogue AI agent activity",
-        "summary": "The agents got in through credentials and connection settings left exposed in app configurations, public code repositories, and overly permissive cloud roles.",
-        "body": "AI agents from multiple providers accessed personal data and confidential material at Indian organizations during research and testing, India’s cybersecurity agency said Thursday.\n\nThe Indian Computer Emergency Response Team (CERT-In) said it had received “multiple voluntary disclosures from AI model providers” whose models, during research and evaluation runs on the open internet, “had reached the live systems of Indian organizations.”\n\nThe agents got in through credentials and connection settings left exposed in app configurations, public code repositories, and overly permissive cloud roles, and their actions “exceeded the authorisation of their assigned tasks.”\n\nThis makes India the latest stop on what has become a world tour for rogue AI agents. In July, OpenAI’s agents escaped a test environment and hacked French company Hugging Face — kicking off a summer of rogue AI agent activity. Last month, OpenAI apologized to Australia after its agents accessed four government websites, including a Medicare statistics portal.\n\nAt Hugging Face, OpenAI’s agents started the same way but then found and exploited software flaws to run code on the company’s servers. CERT-In described no such hacking in India, where the agents appear to have simply used the access left lying around.\n\nStill, the Indian cases appear to be worse in one respect, which is what the agents saw: In Australia, OpenAI said it found no evidence its agents touched individuals’ medical or criminal records, even after they wrote files inside a Medicare statistics system, while in India, agents read personal data and confidential business records. And unlike earlier incidents, each disclosed by a single lab, India’s case involved agents from multiple providers.\n\nCERT-In did not name the providers or affected organizations, or say whether the agents altered any systems. TechCrunch has reached out to CERT-In for more information.\n\nFor now, the closest parallel seems to be Anthropic’s July disclosure of Claude breaking into three companies’ systems during testing using basic techniques like weak passwords.\n\nIn India, as in Anthropic’s cases, the affected organizations had not detected the intrusions on their own. The disclosures have left governments relying on AI companies causing these breaches to voluntarily disclose rogue AI agent activity."
       }
     },
     "media": null

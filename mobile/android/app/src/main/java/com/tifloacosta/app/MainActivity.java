@@ -1,6 +1,7 @@
 package com.tifloacosta.app;
 
 import android.os.Bundle;
+import android.view.WindowManager;
 
 import com.getcapacitor.BridgeActivity;
 
@@ -18,8 +19,16 @@ public class MainActivity extends BridgeActivity {
         registerPlugin(TifloReadingLanguagePlugin.class);
         registerPlugin(TifloReadingAudioPlugin.class);
         registerPlugin(TifloReadingAudioGroupPlugin.class);
+        registerPlugin(TifloVideoScreenPlugin.class);
         registerPlugin(TifloWebFetchPlugin.class);
         registerPlugin(TifloUpdatePlugin.class);
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onPause() {
+        // Never keep the display awake after leaving the visible player.
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        super.onPause();
     }
 }

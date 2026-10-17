@@ -4,7 +4,7 @@ import test from 'node:test';
 
 const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
-test('reading library screen keeps import, search, paging and delete actions explicit', async () => {
+test('reading library keeps import, paging and delete actions explicit without a redundant search', async () => {
   const screen = await read('src/screens/reading-library.mjs');
 
   assert.match(screen, /export function renderReadingLibrary/);
@@ -12,8 +12,8 @@ test('reading library screen keeps import, search, paging and delete actions exp
   assert.match(screen, /client\.pickDocuments\(\)/);
   assert.match(screen, /const PAGE_SIZE\s*=\s*10/);
   assert.match(screen, /client\.listBooks\(\{[\s\S]*pageSize:\s*PAGE_SIZE[\s\S]*query/);
-  assert.match(screen, /addEventListener\(['"]submit['"]/);
-  assert.doesNotMatch(screen, /addEventListener\(['"]input['"][\s\S]{0,120}listBooks/);
+  assert.doesNotMatch(screen, /reading-library-query|reading-library-search|readingLibrary\.searchLabel/);
+  assert.match(screen, /query:\s*''/);
   assert.match(screen, /aria-live['"],\s*['"]polite['"]/);
   assert.match(screen, /readingLibrary\.confirmDelete/);
   assert.match(screen, /client\.deleteBook\(/);
@@ -22,10 +22,9 @@ test('reading library screen keeps import, search, paging and delete actions exp
   assert.match(screen, /readingLibrary\.pageStatus/);
 });
 
-test('reading library follows the approved accessible order and complete filter contract', async () => {
+test('reading library follows the simplified accessible order and complete filter contract', async () => {
   const screen = await read('src/screens/reading-library.mjs');
 
-  const search = screen.indexOf("t('readingLibrary.searchLabel')");
   const continueReading = screen.indexOf("t('readingLibrary.continueReading')");
   const queue = screen.indexOf("t('readingLibrary.queue')");
   const importAction = screen.indexOf("t('readingLibrary.import')");
@@ -33,8 +32,7 @@ test('reading library follows the approved accessible order and complete filter 
   const settings = screen.indexOf("t('readingLibrary.settings')");
   const library = screen.indexOf("t('readingLibrary.myLibrary')");
 
-  assert.ok(search >= 0, 'search must be present');
-  assert.ok(search < continueReading, 'search comes before Continue');
+  assert.doesNotMatch(screen, /readingLibrary\.searchLabel/);
   assert.ok(continueReading < queue, 'Continue comes before Queue');
   assert.ok(queue < importAction, 'Queue comes before Import');
   assert.ok(importAction < filters, 'Import comes before Filters');

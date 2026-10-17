@@ -100,7 +100,6 @@ export function renderReadingLibrary({
   });
 
   let page = 1;
-  let query = '';
   let statusFilter = 'all';
   let formatFilter = '';
   let sortSelect = 'lastRead';
@@ -123,30 +122,8 @@ export function renderReadingLibrary({
   liveStatus.setAttribute('aria-atomic', 'true');
   if (batchHasResults(currentImportBatch)) liveStatus.textContent = importSummary(currentImportBatch, t);
 
-  // Search is deliberately first in the reading-library flow.
-  const searchForm = document.createElement('form');
-  searchForm.className = 'reading-library-search';
-  const searchLabel = document.createElement('label');
-  searchLabel.htmlFor = 'reading-library-query';
-  searchLabel.textContent = t('readingLibrary.searchLabel');
-  const searchInput = document.createElement('input');
-  searchInput.id = 'reading-library-query';
-  searchInput.type = 'search';
-  searchInput.autocomplete = 'off';
-  searchInput.placeholder = t('readingLibrary.searchPlaceholder');
-  const searchButton = document.createElement('button');
-  searchButton.type = 'submit';
-  searchButton.textContent = t('readingLibrary.searchSubmit');
-  searchForm.append(searchLabel, searchInput, searchButton);
-  searchForm.addEventListener('submit', event => {
-    event.preventDefault();
-    query = searchInput.value.trim();
-    page = 1;
-    void refreshList();
-  });
-  root.append(searchForm);
-
-  // Continue reading follows search.
+  // Keep library navigation compact: filters and sort provide the catalog controls.
+  // Continue reading remains available before the reading queue.
   const continueSection = document.createElement('section');
   continueSection.className = 'reading-library-continue';
   const continueHeading = document.createElement('h2');
@@ -1057,7 +1034,7 @@ export function renderReadingLibrary({
     const result = await client.listBooks({
       page,
       pageSize: PAGE_SIZE,
-      query,
+      query: '',
       status: statusFilter,
       format: formatFilter,
       sort: sortSelect

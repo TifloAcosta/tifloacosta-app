@@ -12,7 +12,7 @@ const DICTIONARIES = {
     },
     common: { empty: 'No hay contenido disponible en este momento.', open: 'Abrir', share: 'Compartir' },
     search: {
-      label: 'Título o palabra clave', placeholder: 'Por ejemplo: VoiceOver, Android, WhatsApp…', submit: 'Buscar',
+      label: 'Busca aquí lo que quieras en TifloAcosta.', placeholder: '', submit: 'Buscar',
       results: '{count} resultados', none: 'No se encontraron resultados.', resultsRegion: 'Resultados de búsqueda'
     },
     reader: {
@@ -187,7 +187,7 @@ const DICTIONARIES = {
     },
     common: { empty: 'No content is available right now.', open: 'Open', share: 'Share' },
     search: {
-      label: 'Title or keyword', placeholder: 'For example: VoiceOver, Android, WhatsApp…', submit: 'Search',
+      label: 'Search for anything in TifloAcosta.', placeholder: '', submit: 'Search',
       results: '{count} results', none: 'No results found.', resultsRegion: 'Search results'
     },
     reader: {

@@ -103,6 +103,12 @@ final class ShareViewController: UIViewController {
         }
 
         let suggested = provider.suggestedName ?? ""
+        // Prefer a meaningful title supplied by the originating app.
+        let itemTitle = incoming.compactMap { $0.attributedTitle?.string }
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .first(where: { !$0.isEmpty && !$0.hasPrefix("http") &&
+                $0.count <= 240 && $0.lowercased() != "link" &&
+                $0.lowercased() != "enlace" }) ?? ""
         let namedExtension = URL(fileURLWithPath: suggested).pathExtension.lowercased()
         let namedFile = supported.contains(namedExtension)
         let identifiers = provider.registeredTypeIdentifiers
@@ -203,7 +209,7 @@ final class ShareViewController: UIViewController {
                                value: nil, file: address)
                 } else if ["http", "https"].contains(address.scheme?.lowercased() ?? ""),
                           address.host != nil {
-                    self.store(kind: "url", title: suggested.isEmpty ? "Enlace" : suggested,
+                    self.store(kind: "url", title: itemTitle.isEmpty ? (suggested.isEmpty ? "Enlace" : suggested) : itemTitle,
                                value: address.absoluteString, file: nil)
                 } else {
                     self.finish("El contenido recibido no es un enlace web ni un archivo accesible.")

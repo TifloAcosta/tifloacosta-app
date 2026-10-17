@@ -16,6 +16,9 @@
   let busy = false;
   let refreshing = false;
   let limit = 10;
+  const titles = new Map();
+  const titleRequests = new Set();
+  let zipPromise = null;
 
   const hosts = new Set([
     'youtube.com', 'www.youtube.com', 'm.youtube.com', 'music.youtube.com',
@@ -74,7 +77,7 @@
       return tr('El almacenamiento compartido de iOS no está disponible. No se ha borrado ningún contenido.',
         'The iOS shared storage is unavailable. No content was deleted.');
     }
-    if (/file-unavailable|missing-file-url|No se puede preparar el archivo/i.test(code)) {
+    if (/file-unavailable|missing-file-url|invalid-native-chunk|No se puede preparar el archivo/i.test(code)) {
       return tr('No se ha podido abrir este archivo. Se conserva en Recibidos para reintentarlo.',
         'This file could not be opened. It remains in Received for another attempt.');
     }
@@ -130,21 +133,59 @@
       if (!reader.hidden) finish();
     });
   }
-  async function makeFile(opened) {
+  async function nativeFile(itemId) {
+    if (!native()?.readItemChunk || !itemId) throw new Error('file-unavailable');
+    const parts = [];
+    let offset = 0;
+    let total = -1;
+    let contentType = '';
+    do {
+      const chunk = await native().readItemChunk({ id: itemId, offset, length: 524288 });
+      const size = Number(chunk?.size);
+      const next = Number(chunk?.nextOffset);
+      if (!Number.isInteger(size) || size <= 0 || size > 100 * 1024 * 1024 ||
+          !Number.isInteger(next) || next <= offset || next > size ||
+          (total >= 0 && total !== size) || typeof chunk?.data !== 'string') {
+        throw new Error('invalid-native-chunk');
+      }
+      total = size;
+      contentType = String(chunk.contentType || contentType);
+      const raw = atob(chunk.data);
+      if (raw.length !== next - offset) throw new Error('invalid-native-chunk');
+      const bytes = new Uint8Array(raw.length);
+      for (let i = 0; i < raw.length; i++) bytes[i] = raw.charCodeAt(i);
+      parts.push(bytes);
+      offset = next;
+      if (chunk.done === true && offset !== total) throw new Error('invalid-native-chunk');
+    } while (offset < total);
+    return new Blob(parts, { type: contentType || 'application/octet-stream' });
+  }
+  function properFilename(raw, mime) {
+    const name = safeName(raw);
+    const suffix = extensionOf(name);
+    if (suffix) return name;
+    if (mime === 'application/epub+zip' || /^epub$/i.test(name)) return name + '.epub';
+    if (/^audio\/(mpeg|mp3)/i.test(mime)) return name + '.mp3';
+    return name;
+  }
+  async function makeFile(opened, itemId = '') {
     if (opened?.kind === 'file') {
-      const url = window.Capacitor?.convertFileSrc?.(opened.uri);
-      if (!url) throw new Error('missing-file-url');
-      const response = await fetch(url);
-      if (!response.ok) throw new Error('file-unavailable');
-      const blob = await response.blob();
-      const name = safeName(opened.name);
+      let blob = null;
+      const url = opened.uri ? window.Capacitor?.convertFileSrc?.(opened.uri) : '';
+      if (url) {
+        try {
+          const response = await fetch(url);
+          if (response.ok) {
+            const candidate = await response.blob();
+            if (candidate.size > 0) blob = candidate;
+          }
+        } catch { /* Some WKWebView file URLs are unreadable despite existing bytes. */ }
+      }
+      if (!blob) blob = await nativeFile(itemId);
       const reported = String(opened.contentType || blob.type || '').toLowerCase();
-      // WKWebView's local-file server can return application/octet-stream
-      // for a valid MP3. The audio library rejects that generic MIME type.
-      // Infer MPEG only from an explicit MP3 extension; never relabel
-      // unrelated recordings, EPUBs or other formats as MP3.
-      const type = extensionOf(name) === 'mp3'
-        ? 'audio/mpeg'
+      const name = properFilename(opened.name, reported);
+      const type = extensionOf(name) === 'mp3' ? 'audio/mpeg'
+        : extensionOf(name) === 'epub' ? 'application/epub+zip'
         : reported || 'application/octet-stream';
       return new File([blob], name, { type });
     }
@@ -152,6 +193,83 @@
     if (!value.trim()) throw new Error('missing-text');
     const name = safeName(opened.name).replace(/\.txt$/i, '');
     return new File([value], name + '.txt', { type: 'text/plain;charset=utf-8' });
+  }
+  function genericEpubName(item) {
+    const name = safeName(item?.name || '').toLowerCase().trim();
+    return /^(epub|epub\.epub|contenido(?:\s*\(\d+\))?\.epub|content\.epub|documento\.epub)$/.test(name) ||
+      (name === 'contenido' && String(item?.contentType || '').includes('epub'));
+  }
+  function epubItem(item) {
+    return extensionOf(item?.name) === 'epub' ||
+      String(item?.contentType || '').toLowerCase() === 'application/epub+zip' ||
+      /^epub$/i.test(safeName(item?.name));
+  }
+  async function zipEngine() {
+    if (window.JSZip?.loadAsync) return window.JSZip;
+    if (zipPromise) return zipPromise;
+    zipPromise = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = 'ios-jszip.min.js';
+      script.onload = () => window.JSZip?.loadAsync ? resolve(window.JSZip) : reject(new Error('zip-unavailable'));
+      script.onerror = () => reject(new Error('zip-unavailable'));
+      document.head.append(script);
+    });
+    return zipPromise;
+  }
+  async function epubTitle(file) {
+    if (!file?.size || file.size > 100 * 1024 * 1024) return '';
+    try {
+      const Zip = await zipEngine();
+      const zip = await Zip.loadAsync(await file.arrayBuffer());
+      const container = zip.file('META-INF/container.xml');
+      if (!container) return '';
+      const doc = new DOMParser().parseFromString(await container.async('string'), 'application/xml');
+      const path = doc.getElementsByTagNameNS('*', 'rootfile')[0]?.getAttribute('full-path');
+      if (!path || path.includes('..') || path.startsWith('/')) return '';
+      const opf = zip.file(path);
+      if (!opf) return '';
+      const xml = new DOMParser().parseFromString(await opf.async('string'), 'application/xml');
+      const value = xml.getElementsByTagNameNS('*', 'title')[0]?.textContent?.trim() || '';
+      return value.slice(0, 240);
+    } catch { return ''; }
+  }
+  function displayTitle(item) {
+    const resolved = titles.get(item.id);
+    if (resolved) return resolved;
+    if (kindOf(item) === 'youtube') return tr('Vídeo de YouTube: ', 'YouTube video: ') + youtubeId(item.preview);
+    return safeName(item.name);
+  }
+  async function enrichTitle(item, target) {
+    if (titles.has(item.id) || titleRequests.has(item.id)) return;
+    const videoId = kindOf(item) === 'youtube' ? youtubeId(item.preview) : '';
+    const needsEpub = epubItem(item) && genericEpubName(item);
+    if (!videoId && !needsEpub) return;
+    titleRequests.add(item.id);
+    try {
+      let resolved = '';
+      if (videoId) {
+        resolved = String((await native()?.resolveYouTubeTitle?.({ videoId }))?.title || '').trim();
+        if (resolved && /^(Enlace|Link)$/i.test(resolved)) resolved = '';
+      } else {
+        let opened;
+        try {
+          opened = await native().openItem({ id: item.id });
+        } catch {
+          opened = { id: item.id, kind: 'file', name: item.name,
+            contentType: item.contentType || '', uri: '' };
+        }
+        const file = await makeFile(opened, item.id);
+        resolved = await epubTitle(file);
+      }
+      if (resolved && items.some(current => current.id === item.id)) {
+        titles.set(item.id, resolved);
+        if (target.isConnected) target.textContent = displayTitle(item) + ' — ' + {
+          youtube: tr('Vídeo de YouTube', 'YouTube video'),
+          document: tr('Documento o libro', 'Document or book')
+        }[kindOf(item)];
+      }
+    } catch { /* A missing optional title never prevents access to content. */ }
+    finally { titleRequests.delete(item.id); }
   }
   async function analyzeLink(url) {
     const form = document.getElementById('download-form');
@@ -177,7 +295,16 @@
         await refresh(true);
         return;
       }
-      const opened = await native().openItem({ id: item.id });
+      let opened = null;
+      try {
+        opened = await native().openItem({ id: item.id });
+      } catch (error) {
+        if (item.kind !== 'file' || !native()?.readItemChunk) throw error;
+        // A failed temporary copy must not block native reading of the
+        // original App Group bytes; older already-received items work too.
+        opened = { id: item.id, kind: 'file', name: item.name,
+          contentType: item.contentType || '', uri: '' };
+      }
       if (!opened || opened.id !== item.id) throw new Error('missing-item');
       const url = opened.kind === 'file' ? '' : externalURL(opened.value);
       const videoId = opened.kind === 'file' ? '' : youtubeId(opened.value);
@@ -198,7 +325,7 @@
             'Link opened. It remains in Received.');
         }
       } else {
-        const file = await makeFile(opened);
+        const file = await makeFile(opened, item.id);
         await enterReader();
         const actions = window.TifloIOSBookActions;
         if (operation === 'save') {
@@ -247,7 +374,10 @@
     // Native disclosure semantics: one VoiceOver stop per collapsed item.
     const details = document.createElement('details');
     const summary = document.createElement('summary');
-    summary.textContent = safeName(item.name) + ' — ' + labels[kind];
+    summary.textContent = displayTitle(item) + ' — ' + labels[kind];
+    if (kind === 'youtube' || (epubItem(item) && genericEpubName(item))) {
+      void enrichTitle(item, summary);
+    }
     details.append(summary);
     card.append(details);
     const actions = document.createElement('div');
@@ -300,8 +430,9 @@
         .filter(item => item && /^[0-9a-f-]{36}$/i.test(item.id) &&
           ['file', 'url', 'text'].includes(item.kind))
         .sort((a, b) => String(b.createdAt || '').localeCompare(String(a.createdAt || '')));
-      const next = pending.map(item => [item.id, item.name, item.kind, item.contentType].join(':')).join('|');
+      const next = pending.map(item => [item.id, item.name, item.kind, item.contentType, item.preview].join(':')).join('|');
       items = pending;
+      for (const id of titles.keys()) if (!pending.some(item => item.id === id)) titles.delete(id);
       if (force || next !== fingerprint) {
         fingerprint = next;
         render();

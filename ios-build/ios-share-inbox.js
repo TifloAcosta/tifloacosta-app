@@ -215,12 +215,7 @@
   function renderItem(item) {
     const card = document.createElement('article');
     card.className = 'ios-received-item';
-    const name = document.createElement('h3');
-    name.textContent = safeName(item.name);
-    card.append(name);
     const kind = kindOf(item);
-    const detail = document.createElement('p');
-    detail.className = 'ios-received-type';
     const labels = {
       document: tr('Documento o libro', 'Document or book'),
       audio: tr('Archivo de audio', 'Audio file'),
@@ -228,12 +223,16 @@
       link: tr('Enlace web', 'Web link'),
       text: tr('Texto', 'Text')
     };
-    detail.textContent = labels[kind];
-    card.append(detail);
+    // Native disclosure semantics: one VoiceOver stop per collapsed item.
+    const details = document.createElement('details');
+    const summary = document.createElement('summary');
+    summary.textContent = safeName(item.name) + ' — ' + labels[kind];
+    details.append(summary);
+    card.append(details);
     const actions = document.createElement('div');
     actions.className = 'ios-received-actions';
-    card.append(actions);
-    const localStatus = itemStatus(card);
+    details.append(actions);
+    const localStatus = itemStatus(details);
     const action = (label, operation) => {
       let button = null;
       button = makeButton(actions, label, () => { void act(item, operation, button, localStatus); });

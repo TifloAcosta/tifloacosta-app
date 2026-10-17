@@ -78,7 +78,11 @@
       return tr('No se ha podido abrir este archivo. Se conserva en Recibidos para reintentarlo.',
         'This file could not be opened. It remains in Received for another attempt.');
     }
-    if (/import-not-persisted|not-saved|readback-failed/i.test(code)) {
+    if (/unsupported-audio-format/i.test(code)) {
+      return tr('Este formato de audio aún no se puede guardar en la biblioteca. El original permanece en Recibidos.',
+        'This audio format cannot yet be saved to the library. The original remains in Received.');
+    }
+    if (/import-not-persisted|not-saved|readback-failed|media-readback-failed/i.test(code)) {
       return tr('No se ha confirmado el guardado en la biblioteca. El original sigue en Recibidos.',
         'The library save could not be verified. The original remains in Received.');
     }
@@ -133,7 +137,16 @@
       const response = await fetch(url);
       if (!response.ok) throw new Error('file-unavailable');
       const blob = await response.blob();
-      return new File([blob], safeName(opened.name), { type: blob.type || 'application/octet-stream' });
+      const name = safeName(opened.name);
+      const reported = String(opened.contentType || blob.type || '').toLowerCase();
+      // WKWebView's local-file server can return application/octet-stream
+      // for a valid MP3. The audio library rejects that generic MIME type.
+      // Infer MPEG only from an explicit MP3 extension; never relabel
+      // unrelated recordings, EPUBs or other formats as MP3.
+      const type = extensionOf(name) === 'mp3'
+        ? 'audio/mpeg'
+        : reported || 'application/octet-stream';
+      return new File([blob], name, { type });
     }
     const value = String(opened?.value || '');
     if (!value.trim()) throw new Error('missing-text');
@@ -189,6 +202,11 @@
         await enterReader();
         const actions = window.TifloIOSBookActions;
         if (operation === 'save') {
+          // The current library stores only MPEG/MP3 audio. Offer listening
+          // for other compatible formats, but never show a false save.
+          if (kindOf(item) === 'audio' && extensionOf(file.name) !== 'mp3') {
+            throw new Error('unsupported-audio-format');
+          }
           const saved = await actions?.importSharedFile?.(file);
           if (saved?.saved !== true || !saved.id) throw new Error('import-not-persisted');
           // Never delete the original until the reader verifies persisted bytes.

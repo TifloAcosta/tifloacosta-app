@@ -139,6 +139,7 @@ export function createAccessibleVideoPlayer({
   let opened = false;
   let detailsOpen = false;
   let positionTimer = null;
+  let displayAwake = false;
 
   const section = document.createElement('section');
   section.className = 'video-player-section';
@@ -212,6 +213,23 @@ export function createAccessibleVideoPlayer({
   section.append(heading, title, frameWrap, controls, positionWrap, status, detailsButton, detailsPanel, fallback, closeButton);
   parent.append(section);
 
+  // Only the visible, actively playing embedded player holds the display on.
+  // YouTube itself remains responsible for playback: this is NOT background audio.
+  function syncScreenAwake() {
+    const shouldStayOn = !disposed && opened && playerReady && playerIsPlaying &&
+      document.visibilityState !== 'hidden';
+    if (displayAwake === shouldStayOn) return;
+    displayAwake = shouldStayOn;
+    try {
+      const set = window.Capacitor?.Plugins?.TifloVideoScreen?.setKeepScreenOn;
+      if (typeof set === 'function') {
+        void Promise.resolve(set({ enabled: shouldStayOn })).catch(() => {});
+      }
+    } catch {}
+  }
+  function onVisibilityChange() { syncScreenAwake(); }
+  document.addEventListener('visibilitychange', onVisibilityChange);
+
   function setControlsEnabled(enabled) {
     rewind.disabled = !enabled;
     toggle.disabled = !enabled;
@@ -261,6 +279,7 @@ export function createAccessibleVideoPlayer({
   function markUnavailable() {
     playerReady = false;
     playerIsPlaying = false;
+    syncScreenAwake();
     stopPositionTimer();
     setControlsEnabled(false);
     updateToggleLabel();
@@ -269,6 +288,7 @@ export function createAccessibleVideoPlayer({
   }
   function markReady() {
     playerReady = true;
+    syncScreenAwake();
     setControlsEnabled(true);
     status.textContent = t('videos.ready');
     fallback.hidden = true;
@@ -279,6 +299,7 @@ export function createAccessibleVideoPlayer({
   function handlePlayerStateChange(event) {
     const playingState = window.YT?.PlayerState?.PLAYING;
     playerIsPlaying = playingState !== undefined && event?.data === playingState;
+    syncScreenAwake();
     updateToggleLabel();
     updatePosition();
   }
@@ -294,6 +315,7 @@ export function createAccessibleVideoPlayer({
       if (youtubePlayer && playerReady) {
         youtubePlayer.cueVideoById(id);
         playerIsPlaying = false;
+        syncScreenAwake();
         markReady();
         return;
       }
@@ -318,6 +340,7 @@ export function createAccessibleVideoPlayer({
     status.textContent = t('videos.preparing');
     fallback.hidden = true;
     playerIsPlaying = false;
+    syncScreenAwake();
     position.value = '0';
     position.max = '0';
     position.setAttribute('aria-valuetext', `${formatTime(0)} / ${formatTime(0)}`);
@@ -364,6 +387,8 @@ export function createAccessibleVideoPlayer({
     try { youtubePlayer?.pauseVideo?.(); } catch {}
     opened = false;
     detailsOpen = false;
+    playerIsPlaying = false;
+    syncScreenAwake();
     stopPositionTimer();
     section.hidden = true;
     playerIsPlaying = false;
@@ -380,6 +405,9 @@ export function createAccessibleVideoPlayer({
   function destroy() {
     disposed = true;
     opened = false;
+    playerIsPlaying = false;
+    syncScreenAwake();
+    document.removeEventListener('visibilitychange', onVisibilityChange);
     stopPositionTimer();
     try { youtubePlayer?.destroy?.(); } catch {}
     youtubePlayer = null;

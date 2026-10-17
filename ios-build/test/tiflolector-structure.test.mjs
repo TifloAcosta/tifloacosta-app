@@ -201,17 +201,18 @@ test('Compartir distribuye archivos, YouTube y otros enlaces sin superponer pant
   assert.ok(host.includes('registerPluginInstance(TifloShareInboxPlugin())'));
   assert.ok(extension.includes('group.com.tifloacosta.app'));
   assert.ok(nativeInbox.includes('group.com.tifloacosta.app'));
-  assert.ok(inbox.includes("const id = youtubeId(raw)"));
-  assert.ok(inbox.includes('await youtube().open({videoId:id'));
-  assert.ok(inbox.includes('await native().openURL({url:address})'));
-  assert.ok(inbox.includes('await importDocument(item, opened, targetStatus)'));
-  assert.ok(inbox.includes("imported?.saved !== true || !imported.id"));
+  assert.ok(inbox.includes('const videoId = opened.kind'));
+  assert.ok(inbox.includes('await youtube().open({ videoId, title:'));
+  assert.ok(inbox.includes('native()?.openURL?.({ url }'));
+  assert.ok(inbox.includes('actions?.importSharedFile?.(file)'));
+  assert.ok(inbox.includes("saved?.saved !== true || !saved.id"));
   assert.ok(prepare.includes("libraryClient.openBook(id)"));
   assert.ok(inbox.includes("window.addEventListener('hashchange'"));
   // No superposed native library to dismiss; preserve the original screen.
   assert.ok(!inbox.includes('await accessibility()?.dismissNativeActionList?.()'));
   assert.ok(!inbox.includes('anchor.after(documentRegion.root)'));
-  assert.ok(inbox.includes('home.before(homeRegion.root)'));
+  assert.ok(prepare.includes('href="#received"'));
+  assert.ok(!inbox.includes('home.before(homeRegion.root)'));
   assert.ok(nativeActions.includes('CAPPluginMethod(name: "dismissNativeActionList"'));
   assert.ok(nativeActions.includes('as? TifloNativeActionListController'));
   assert.ok(nativeActions.includes('"translate": #selector(translateDocument(_:))'));

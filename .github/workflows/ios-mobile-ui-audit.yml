@@ -81,6 +81,25 @@ jobs:
           if [ -f ios/App/Podfile ]; then (cd ios/App && pod install); fi
           test -s ios/App/App/public/tiflo-ios-ui-identity.json
           test -s ios/App/App/public/app.js
+          # Compare every source asset with the copy actually embedded by Capacitor.
+          # The native YouTube wrapper may be an additional asset, but a missing or
+          # changed mobile script, stylesheet or icon must fail before compilation.
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { createHash } from 'node:crypto';
+          import { readFile } from 'node:fs/promises';
+          const src = '../ios-build/www/';
+          const app = 'ios/App/App/public/';
+          const identity = JSON.parse(await readFile(src + 'tiflo-ios-ui-identity.json', 'utf8'));
+          const copied = JSON.parse(await readFile(app + 'tiflo-ios-ui-identity.json', 'utf8'));
+          assert.deepEqual(copied, identity, 'Mobile identity differs inside the native iOS app');
+          for (const [filename, expected] of Object.entries(identity.fileHashes)) {
+            const bytes = await readFile(app + filename);
+            assert.equal(createHash('sha256').update(bytes).digest('hex'), expected,
+              'Changed or missing embedded iOS file: ' + filename);
+          }
+          console.log('Every staged mobile asset matches the native App/public bundle.');
+          NODE
           test ! -f ios/App/App/public/videos.html
           test ! -f ios/App/App/public/actualidad.html
           if [ -d ios/App/App.xcworkspace ]; then

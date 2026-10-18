@@ -1271,6 +1271,7 @@ export function renderReadingBook({
           await initializeOpenedAudioBook(mixedDaisySource);
         } else {
           await audioView?.destroy?.();
+          await client.stopAudio?.();
           audioView = null;
           daisyAudioMode = false;
           const fresh = await client.openBook(bookId);

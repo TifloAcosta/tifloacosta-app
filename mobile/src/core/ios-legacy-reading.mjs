@@ -1,0 +1,126 @@
+/**
+ * iOS staging bridge: reuse the existing, on-device TifloLector IndexedDB
+ * (tifloacosta-reading-web, version 2). No export/delete/copy/migration runs
+ * on startup. The original five stores retain their IDs, marks and blobs.
+ *
+ * This is NOT a release-complete iOS reading engine: PDF/EPUB/DAISY import,
+ * audio playback, native rotor controls and receipt transfer require separate
+ * acceptance before the TestFlight gate can be opened.
+ */
+import { createWebReadingLibraryAdapter } from '../../../shared/web-reading-library-adapter.mjs';
+
+const TEXT_EXTENSIONS = new Set(['txt', 'html', 'htm', 'md', 'markdown', 'rtf', 'fb2']);
+const MAX_IMPORT_BYTES = 32 * 1024 * 1024;
+
+function emptyBatch(cancelled = false) {
+  return { cancelled, audioChoiceRequired: false, selectionId: '',
+    selectedNames: [], imported: [], duplicates: [], rejected: [] };
+}
+
+function extension(name) {
+  const value = String(name || '').trim().toLowerCase();
+  return value.includes('.') ? value.split('.').at(-1) : '';
+}
+
+function resultError(name, reason) {
+  return { ...emptyBatch(), rejected: [{ name: String(name || 'Archivo'), reason }] };
+}
+
+/**
+ * Dependencies are injectable so regression tests cannot access a real device.
+ * Constructing this bridge does not open or modify IndexedDB.
+ */
+export function createIosLegacyReadingBridge({
+  library = createWebReadingLibraryAdapter(),
+  accessibility = null,
+  capacitor = null,
+  nativeTts = null,
+  readFile = globalThis.fetch
+} = {}) {
+  async function pickDocuments() {
+    if (typeof accessibility?.pickDocument !== 'function' ||
+        typeof capacitor?.convertFileSrc !== 'function') {
+      return resultError('Archivos', 'El selector nativo de iOS no está disponible.');
+    }
+    let picked;
+    try { picked = await accessibility.pickDocument(); }
+    catch { return resultError('Archivos', 'No se pudo abrir el selector de archivos.'); }
+    if (picked?.cancelled) return emptyBatch(true);
+    const name = String(picked?.name || '').trim();
+    const uri = String(picked?.uri || '').trim();
+    if (!name || !uri || !uri.startsWith('file://')) {
+      return resultError(name, 'El documento elegido no tiene una dirección local válida.');
+    }
+    const ext = extension(name);
+    if (!TEXT_EXTENSIONS.has(ext) && ext !== 'mp3') {
+      // Do NOT pretend to have imported EPUB/PDF/DAISY or silently overwrite them.
+      return resultError(name, 'Este formato aún no está integrado en el nuevo lector para iOS.');
+    }
+    try {
+      const localUrl = capacitor.convertFileSrc(uri);
+      if (!localUrl || typeof readFile !== 'function') throw Error('file-url-unavailable');
+      const response = await readFile(localUrl);
+      if (!response?.ok) throw Error('file-read-failed');
+      const blob = await response.blob();
+      if (!blob?.size || blob.size > MAX_IMPORT_BYTES) {
+        return resultError(name, 'Archivo vacío o superior al límite de 32 MB.');
+      }
+      let imported;
+      if (ext === 'mp3') {
+        const audio = blob.slice(0, blob.size, 'audio/mpeg');
+        imported = await library.importAudioFile({
+          file: audio, title: name.replace(/\.mp3$/i, '')
+        });
+      } else {
+        imported = await library.importDocument({
+          title: name.replace(/\.[^.]+$/, ''),
+          format: ext,
+          content: await blob.text(),
+          sizeBytes: blob.size
+        });
+      }
+      return imported ? { ...emptyBatch(), selectedNames: [name], imported: [imported] }
+        : resultError(name, 'No se han podido guardar los datos del archivo.');
+    } catch {
+      return resultError(name, 'La lectura o el guardado ha fallado; el original no se ha eliminado.');
+    }
+  }
+
+  async function listTtsVoices() {
+    if (typeof nativeTts?.listTtsVoices !== 'function') return { voices: [] };
+    try { return await nativeTts.listTtsVoices(); }
+    catch { return { voices: [] }; }
+  }
+
+  async function openTtsVoiceInstaller() {
+    return { opened: false, destination: 'none' };
+  }
+
+  async function addListener(eventName, listener) {
+    if (String(eventName).startsWith('tts') && typeof nativeTts?.addListener === 'function' &&
+        typeof listener === 'function') {
+      try { return await nativeTts.addListener(eventName, listener); }
+      catch { /* optional */ }
+    }
+    return { remove: async () => {} };
+  }
+
+  const passthrough = [
+    'listBooks', 'openBook', 'saveProgress', 'getLatestInProgress',
+    'listQueue', 'addToQueue', 'removeFromQueue', 'moveQueueItem',
+    'updateBookMetadata', 'listMarks', 'addMark', 'deleteMark',
+    'getReadingSettings', 'setReadingSetting', 'resetBookReadingSettings',
+    'saveDerivedContent', 'getDerivedContent', 'listDerivedContent',
+    'deleteDerivedContent', 'getActiveBookId'
+  ];
+  const result = { pickDocuments, listTtsVoices, openTtsVoiceInstaller,
+    addListener, consumeInitialSharedDocuments: async () => emptyBatch() };
+  for (const name of passthrough) {
+    result[name] = (...args) => library[name](...args);
+  }
+  // The staged reader can show, search and continue existing documents using
+  // their ORIGINAL IDs. Unsupported native operations remain explicitly absent
+  // rather than being presented as successfully migrated.
+  result.deleteBook = id => library.deleteBook(id);
+  return result;
+}

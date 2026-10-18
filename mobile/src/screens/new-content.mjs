@@ -1,10 +1,53 @@
 import { addExternalLink, addParagraph, addScreenHeader, clearScreen } from './shared.mjs';
 
-export function renderNewContent({ root, router, content, preferences, nativeActions, t }) {
+export function renderNewContent({ root, router, content, preferences, nativeActions, onRefreshContent, t }) {
   clearScreen(root);
   addScreenHeader(root, { router, title: t('screen.newContent'), backLabel: t('nav.back') });
 
   const lang = preferences?.lang === 'en' ? 'en' : 'es';
+  const refreshButton = document.createElement('button');
+  refreshButton.type = 'button';
+  refreshButton.id = 'new-content-refresh';
+  refreshButton.textContent = lang === 'en' ? 'Refresh what is new' : 'Actualizar novedades';
+  const refreshStatus = document.createElement('p');
+  refreshStatus.className = 'muted';
+  refreshStatus.setAttribute('role', 'status');
+  refreshStatus.setAttribute('aria-live', 'polite');
+  refreshStatus.setAttribute('aria-atomic', 'true');
+  const generatedAt = Date.parse(content?.generatedAt || '');
+  if (Number.isFinite(generatedAt)) {
+    const formatted = new Intl.DateTimeFormat(lang, { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(generatedAt));
+    refreshStatus.textContent = lang === 'en'
+      ? `Catalog last generated: ${formatted}. The date of the newest publication can be earlier.`
+      : `Catálogo generado por última vez: ${formatted}. La última publicación puede tener una fecha anterior.`;
+  }
+  let refreshPending = false;
+  refreshButton.addEventListener('click', async () => {
+    if (refreshPending) return;
+    refreshPending = true;
+    refreshStatus.textContent = lang === 'en' ? 'Checking for updates…' : 'Buscando nuevas publicaciones…';
+    try {
+      const result = await onRefreshContent?.();
+      // When a new feed is found, app.mjs refreshes this entire screen.
+      if (!root.contains(refreshButton)) return;
+      refreshStatus.textContent = result?.status === 'fresh'
+        ? (lang === 'en'
+            ? 'Checked successfully. There are no additional catalog publications at this time.'
+            : 'Comprobación realizada. No hay publicaciones adicionales en el catálogo por ahora.')
+        : (lang === 'en'
+            ? 'Could not get an updated catalog. Showing the last saved content.'
+            : 'No se pudo obtener un catálogo actualizado. Se mantiene el contenido guardado.');
+    } catch {
+      if (root.contains(refreshButton)) {
+        refreshStatus.textContent = lang === 'en'
+          ? 'The connection failed. Saved content remains available.'
+          : 'Falló la conexión. El contenido guardado sigue disponible.';
+      }
+    } finally {
+      refreshPending = false;
+    }
+  });
+  root.append(refreshButton, refreshStatus);
   const resources = (Array.isArray(content?.resources) ? content.resources : [])
     .filter(item => item?.isNew === true && (!item.lang || item.lang === lang))
     .sort((a, b) => (Date.parse(b.newsDate || '') || 0) - (Date.parse(a.newsDate || '') || 0));

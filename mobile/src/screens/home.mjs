@@ -47,6 +47,14 @@ export function renderHome({ root, router, content, preferences = { lang: 'es' }
   intro.textContent = HOME_INTRO[preferences.lang] || HOME_INTRO.es;
   root.append(intro);
 
+  const guide = document.createElement('button');
+  guide.type = 'button';
+  guide.id = 'home-guide';
+  guide.className = 'home-entry guide-entry';
+  guide.textContent = preferences.lang === 'en' ? 'TifloAcosta user guide' : 'Guía de uso de TifloAcosta';
+  guide.addEventListener('click', () => router.navigate('guide', { originId: guide.id }));
+  root.append(guide);
+
   const nav = document.createElement('nav');
   nav.className = 'home-menu section-stack';
   nav.setAttribute('aria-label', t('app.title'));

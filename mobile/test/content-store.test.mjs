@@ -98,6 +98,27 @@ test('invalid cached payload is ignored and storage exceptions do not crash load
   assert.deepEqual(result.content, payload);
 });
 
+test('request bypasses stale CDN query caches and older feeds cannot overwrite saved content', async () => {
+  const cached = validContent('newer');
+  cached.generatedAt = '2026-10-12T10:00:00.000Z';
+  const incoming = validContent('older');
+  let requested = '';
+  const storage = memoryStorage({ 'tiflo-mobile-content-v1': JSON.stringify(cached) });
+  const store = createContentStore({
+    fetchFn: async (url, options) => {
+      requested = url;
+      assert.equal(options.cache, 'no-store');
+      return { ok: true, json: async () => incoming };
+    },
+    storage
+  });
+  const result = await store.load();
+  assert.match(requested, /[?&]refresh=\d+/);
+  assert.equal(result.status, 'cached');
+  assert.deepEqual(result.content, cached);
+  assert.deepEqual(JSON.parse(storage.value('tiflo-mobile-content-v1')), cached);
+});
+
 test('non-ok HTTP responses use cache rather than treating error bodies as content', async () => {
   const cached = validContent('cached');
   const storage = memoryStorage({ 'tiflo-mobile-content-v1': JSON.stringify(cached) });

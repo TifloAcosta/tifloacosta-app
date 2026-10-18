@@ -784,7 +784,9 @@ export function renderReadingLibrary({
     moreHeading.textContent = moreButton.textContent;
 
     const openBook = makeButton(
-      fallback(t, 'readingLibrary.open', 'Abrir para leer', 'Open for reading'),
+      Number(item.percent) > 0 && Number(item.percent) < 100
+        ? (document.documentElement.lang === 'en' ? 'Resume reading' : 'Continuar lectura')
+        : fallback(t, 'readingLibrary.open', 'Abrir para leer', 'Open for reading'),
       () => onOpenBook?.(item.id)
     );
 

@@ -8,7 +8,7 @@ struct TifloAcostaNativeApp: App {
     }
 }
 
-private enum Section: String, CaseIterable, Identifiable {
+private enum NativeDestination: String, CaseIterable, Identifiable {
     case novedades = "Novedades"
     case actualidad = "Actualidad"
     case recursos = "Recursos"
@@ -21,10 +21,10 @@ private enum Section: String, CaseIterable, Identifiable {
 }
 
 struct NativeHomeView: View {
-    @State private var selected: Section?
+    @State private var selected: NativeDestination??
     var body: some View {
         NavigationStack {
-            List(Section.allCases) { section in
+            List(NativeDestination.allCases) { section in
                 NavigationLink(value: section) {
                     Text(section.rawValue)
                 }

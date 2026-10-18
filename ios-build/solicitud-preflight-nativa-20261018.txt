@@ -1,4 +1,8 @@
-Verificación segura de empaquetado SwiftUI nativo, firmada y sin publicar.
-Fuente: 9eb035517f7a9350b32b3dd7d410ac12dff4b514.
-Objetivo: comprobar Info.plist de extensión, firma de iOS, IPA y App Group sin enviar compilación a Apple ni sustituir la beta.
+Preflight firmado del proyecto SwiftUI nativo destinado a TestFlight interno.
 Fecha: 2026-10-18.
+Fuente verificada: 107cbabff368ecd67d511a26b023a2f0f04c2e3b
+Alcance de esta fase: pantalla Inicio, buscador interno, orden de secciones, identidad visual y Recursos con selección ajustable VoiceOver.
+Modo: generar y validar IPA firmada SIN subirla a Apple.
+Mantener la beta actual intacta hasta que el preflight termine correctamente.
+No se certifica paridad funcional de TifloLector, Vídeos ni de las secciones nativas aún pendientes.
+Solicitud autorizada por usuario para avanzar hasta la prueba física de iPhone.

@@ -18,6 +18,25 @@ function isWebAddress(value) {
   } catch { return false; }
 }
 
+export function youtubeIdFromReceivedText(value) {
+  const candidates = String(value || '').match(/https?:\\/\\/[^\\s<>"']+/gi) || [];
+  for (const candidate of candidates) {
+    try {
+      const url = new URL(candidate.replace(/[)\\]},;.!?]+$/, ''));
+      const host = url.hostname.toLowerCase();
+      if (!['https:', 'http:'].includes(url.protocol) ||
+          !['youtube.com', 'www.youtube.com', 'm.youtube.com', 'music.youtube.com',
+            'youtu.be', 'www.youtu.be'].includes(host)) continue;
+      const segments = url.pathname.split('/').filter(Boolean);
+      const id = host.includes('youtu.be') ? segments[0]
+        : segments[0] === 'watch' ? url.searchParams.get('v')
+        : ['shorts', 'live', 'embed'].includes(segments[0]) ? segments[1] : null;
+      if (/^[a-z0-9_-]{11}$/i.test(id || '')) return id;
+    } catch { /* Ignore non-URL text. */ }
+  }
+  return '';
+}
+
 export function createIosReceivedInbox({ native = null, library = null, decodeBase64 = globalThis.atob,
   BlobType = globalThis.Blob } = {}) {
   async function pending() {
@@ -95,11 +114,20 @@ export function createIosReceivedInbox({ native = null, library = null, decodeBa
     } catch { return { opened: false }; }
   }
 
+  async function resolveYouTubeTitle(item) {
+    const videoId = youtubeIdFromReceivedText(item?.preview || '');
+    if (!videoId || typeof native?.resolveYouTubeTitle !== 'function') return '';
+    try {
+      const response = await native.resolveYouTubeTitle({ videoId });
+      return String(response?.title || '').trim().slice(0, 240);
+    } catch { return ''; }
+  }
+
   async function deleteConfirmed(item) {
     if (!isReceipt(item?.id) || !native?.acknowledge) return false;
     try { return (await native.acknowledge({ id: item.id }))?.acknowledged === true; }
     catch { return false; }
   }
 
-  return { pending, readFile, saveFile, openLink, deleteConfirmed };
+  return { pending, readFile, saveFile, openLink, resolveYouTubeTitle, deleteConfirmed };
 }

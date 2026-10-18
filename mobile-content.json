@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T23:15:59.154Z",
+  "generatedAt": "2026-10-18T23:17:08.208Z",
   "resources": [
     {
       "kind": "resource",
@@ -5448,6 +5448,38 @@
   "news": [
     {
       "kind": "news",
+      "id": "the-verge-c1d66f5c1ddb9950:en",
+      "sourceId": "the-verge-c1d66f5c1ddb9950",
+      "lang": "en",
+      "title": "A Savannah police officer gave her Flock login to her ICE agent husband",
+      "summary": "Now, former Savannah police officer Amber Harpe was fired in August following a department investigation that found she had shared her Flock login information with her husband, Tyler Harpe, an ICE agent. SPD does not share its Flock data with ICE and said sharing access to the system violated the department's security protocols. While he […]",
+      "body": "Now, former Savannah police officer Amber Harpe was fired in August following a department investigation that found she had shared her Flock login information with her husband, Tyler Harpe, an ICE agent. SPD does not share its Flock data with ICE and said sharing access to the system violated the department's security protocols.\n\nWhile he had unauthorized access to the system, Tyler Harpe conducted 983 searches related to 97 license plates, which were overwhelmingly registered to Hispanic drivers, according to Savannah's local ABC affiliate, WJCL . The Harpes defended their actions, saying they didn't use access for personal reasons and that …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/policy/1013573/spd-officer-fired-flock-ice-husband",
+      "publishedAt": "2026-10-18T22:20:53.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-229ce74868954f6a:en",
+      "sourceId": "9to5mac-229ce74868954f6a",
+      "lang": "en",
+      "title": "Apple keeps making the Phone app better; here’s how",
+      "summary": "9to5Mac is brought to you by Tello Mobile. Switching to Tello Mobile can bring the cost of your plan down to as little as $5 a month, or an unlimited plan for just $25 a month, all on America’s largest 5G network. See all of the available plans at tello.com . You might not think about it often, but the Phone app on your iPhone keeps getting more powerful. Here are two features you can use today, plus one coming next month in iOS 27. more…",
+      "body": "9to5Mac is brought to you by Tello Mobile. Switching to Tello Mobile can bring the cost of your plan down to as little as $5 a month, or an unlimited plan for just $25 a month, all on America’s largest 5G network. See all of the available plans at tello.com .\n\nYou might not think about it often, but the Phone app on your iPhone keeps getting more powerful. Here are two features you can use today, plus one coming next month in iOS 27.\n\nWith iOS 26 last year, Apple added a new feature called Hold Assist to the Phone app. When you’re on a call, the feature can detect when you’ve been placed on hold. Then you’ll see a pop-up you can tap to enable Hold Assist.\n\nWhen the person on the other end of the call returns, your iPhone will notify you.\n\nHere’s how Apple describes Hold Assist: “Automatically detect when you are placed on hold, so you can step away. iPhone will then notify you when it’s time to pick up.”\n\nYou can enable Hold Assist by going to the Settings app, scrolling down to Apps, then choosing Phone. In this menu, you’ll see a toggle: “Hold Assist Detection” that you can turn on.\n\nCall Screening is another new feature in the Phone app, introduced as part of iOS 26 last year. Here’s how Apple describes it: “Calls from unsaved numbers will be asked for more information before iPhone rings.”\n\nWhen someone from an unsaved number calls you, Call Screening kicks in and asks who they are and why they are calling. You can then view their explanation right on your iPhone’s Lock Screen and choose to answer or send them to voicemail.\n\nIn an age of ever-increasing spam calls, Call Screening is a must-enable feature. You can find it in Settings ⇾ Apps ⇾ Phone.\n\nFinally, Call Context is a new feature coming to the Phone app with iOS 27. It’s an Apple Intelligence feature that proactively surfaces relevant information when you call a business.\n\nFor example, if you call an airline to change your flight, Call Context will automatically find your confirmation code in Mail and show it on the screen while you’re on the call. If you call a company about a recent order you placed, it will proactively surface the order number and other relevant details.\n\nCall Context is a well-done feature that uses AI to proactively help you during what is often a frustrating process. It also does so with privacy in mind, and only looks at who you’re calling, not what you’re saying, to show the necessary information.\n\nCall Context is available on iPhone 15 Pro and later. iOS 27 is currently in testing with developers and public beta users. It will be released to everyone in September.\n\nI try to avoid using the Phone app at all costs, but unfortunately it’s a necessary evil. These new Phone app features at least make the experience more enjoyable. In particular, I’m a huge fan of Call Screening. I get an absurd number of spam calls every day, and Call Screening really helps me preserve my sanity.\n\nWhat are your favorite Phone app features? Do you use any of the new options? Let us know down in the comments.\n\n9to5Mac is brought to you by Tello Mobile. Switching to Tello Mobile can bring the cost of your plan down to as little as $5 a month, or an unlimited plan for just $25 a month, all on America’s largest 5G network. See all of the available plans at tello.com .",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/18/apple-keeps-making-the-phone-app-better-heres-how/",
+      "publishedAt": "2026-10-18T21:19:49.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "engadget-c50ec74cf2ec00ee:en",
       "sourceId": "engadget-c50ec74cf2ec00ee",
       "lang": "en",
@@ -5621,22 +5653,6 @@
       "categories": [
         "tecnologia-general",
         "apple"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-e486eb72d32962cc:en",
-      "sourceId": "9to5mac-e486eb72d32962cc",
-      "lang": "en",
-      "title": "Apple’s next HomeView could debut as soon as next year with a robotic arm: report",
-      "summary": "Apple just announced its long awaited smart home display: HomeView, and it’s available for $299. That said, the product has been in development for quite some time, being held back by all of the delays with developing a smarter Siri. Now that it’s on the market, some customers have had concern about the fact that you have to move the HomeView around yourself if its on a table with multiple people surrounding it. According to the Power On newsletter , it might not be too long before Apple has a solution. more…",
-      "body": "Apple just announced its long awaited smart home display: HomeView , and it’s available for $299. That said, the product has been in development for quite some time, being held back by all of the delays with developing a smarter Siri.\n\nNow that it’s on the market, some customers have had concern about the fact that you have to move the HomeView around yourself if its on a table with multiple people surrounding it. According to the Power On newsletter , it might not be too long before Apple has a solution.\n\nWe’ve known that Apple has been working on robotic products of sorts for quite some time, but now we have a clear release window. According to Bloomberg’s Mark Gurman , the company might debut a better HomeView , perhaps HomeView Pro – as soon as next year:\n\nThe good news is that Apple is on track to solve that problem with a souped-up version of the HomeView planned for release in 2027 or 2028. Code-named J595, this version looks like the current HomeView but has a roughly 9-inch screen (up from 7 inches) and a motorized robotic arm that lets the display swivel a full 360 degrees. Using voice recognition, the machine is designed to identify who’s speaking and automatically turn toward that person.\n\nThis version will have a larger display, and be capable of turning full-circle, rather than just a little bit of tilt. This won’t replace the HomeView , and will instead serve as a higher end model in the lineup. So, don’t expect it at the same $299 price point.\n\nApple reportedly also plans to use voice recognition to figure out how to pivot the robotic arm towards the right person. Think about the Center Stage camera on some newer Apple products, but leveled up.\n\nMy favorite Apple accessory recommendations:\n\nFollow Michael: X/Twitter , Bluesky , Instagram",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/18/apples-next-homeview-could-debut-as-soon-as-next-year-with-a-robotic-arm-report/",
-      "publishedAt": "2026-10-18T14:17:21.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
       ]
     },
     {

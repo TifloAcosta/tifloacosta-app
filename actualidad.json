@@ -1,5 +1,53 @@
 [
   {
+    "id": "the-verge-c1d66f5c1ddb9950",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/policy/1013573/spd-officer-fired-flock-ice-husband",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-18T22:20:53.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "A Savannah police officer gave her Flock login to her ICE agent husband",
+        "summary": "Now, former Savannah police officer Amber Harpe was fired in August following a department investigation that found she had shared her Flock login information with her husband, Tyler Harpe, an ICE agent. SPD does not share its Flock data with ICE and said sharing access to the system violated the department's security protocols. While he […]",
+        "body": "Now, former Savannah police officer Amber Harpe was fired in August following a department investigation that found she had shared her Flock login information with her husband, Tyler Harpe, an ICE agent. SPD does not share its Flock data with ICE and said sharing access to the system violated the department's security protocols.\n\nWhile he had unauthorized access to the system, Tyler Harpe conducted 983 searches related to 97 license plates, which were overwhelmingly registered to Hispanic drivers, according to Savannah's local ABC affiliate, WJCL . The Harpes defended their actions, saying they didn't use access for personal reasons and that …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-229ce74868954f6a",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/18/apple-keeps-making-the-phone-app-better-heres-how/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-18T21:19:49.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple keeps making the Phone app better; here’s how",
+        "summary": "9to5Mac is brought to you by Tello Mobile. Switching to Tello Mobile can bring the cost of your plan down to as little as $5 a month, or an unlimited plan for just $25 a month, all on America’s largest 5G network. See all of the available plans at tello.com . You might not think about it often, but the Phone app on your iPhone keeps getting more powerful. Here are two features you can use today, plus one coming next month in iOS 27. more…",
+        "body": "9to5Mac is brought to you by Tello Mobile. Switching to Tello Mobile can bring the cost of your plan down to as little as $5 a month, or an unlimited plan for just $25 a month, all on America’s largest 5G network. See all of the available plans at tello.com .\n\nYou might not think about it often, but the Phone app on your iPhone keeps getting more powerful. Here are two features you can use today, plus one coming next month in iOS 27.\n\nWith iOS 26 last year, Apple added a new feature called Hold Assist to the Phone app. When you’re on a call, the feature can detect when you’ve been placed on hold. Then you’ll see a pop-up you can tap to enable Hold Assist.\n\nWhen the person on the other end of the call returns, your iPhone will notify you.\n\nHere’s how Apple describes Hold Assist: “Automatically detect when you are placed on hold, so you can step away. iPhone will then notify you when it’s time to pick up.”\n\nYou can enable Hold Assist by going to the Settings app, scrolling down to Apps, then choosing Phone. In this menu, you’ll see a toggle: “Hold Assist Detection” that you can turn on.\n\nCall Screening is another new feature in the Phone app, introduced as part of iOS 26 last year. Here’s how Apple describes it: “Calls from unsaved numbers will be asked for more information before iPhone rings.”\n\nWhen someone from an unsaved number calls you, Call Screening kicks in and asks who they are and why they are calling. You can then view their explanation right on your iPhone’s Lock Screen and choose to answer or send them to voicemail.\n\nIn an age of ever-increasing spam calls, Call Screening is a must-enable feature. You can find it in Settings ⇾ Apps ⇾ Phone.\n\nFinally, Call Context is a new feature coming to the Phone app with iOS 27. It’s an Apple Intelligence feature that proactively surfaces relevant information when you call a business.\n\nFor example, if you call an airline to change your flight, Call Context will automatically find your confirmation code in Mail and show it on the screen while you’re on the call. If you call a company about a recent order you placed, it will proactively surface the order number and other relevant details.\n\nCall Context is a well-done feature that uses AI to proactively help you during what is often a frustrating process. It also does so with privacy in mind, and only looks at who you’re calling, not what you’re saying, to show the necessary information.\n\nCall Context is available on iPhone 15 Pro and later. iOS 27 is currently in testing with developers and public beta users. It will be released to everyone in September.\n\nI try to avoid using the Phone app at all costs, but unfortunately it’s a necessary evil. These new Phone app features at least make the experience more enjoyable. In particular, I’m a huge fan of Call Screening. I get an absurd number of spam calls every day, and Call Screening really helps me preserve my sanity.\n\nWhat are your favorite Phone app features? Do you use any of the new options? Let us know down in the comments.\n\n9to5Mac is brought to you by Tello Mobile. Switching to Tello Mobile can bring the cost of your plan down to as little as $5 a month, or an unlimited plan for just $25 a month, all on America’s largest 5G network. See all of the available plans at tello.com ."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "engadget-c50ec74cf2ec00ee",
     "type": "news",
     "sourceId": "engadget",
@@ -260,30 +308,6 @@
         "title": "iOS 27's new CarPlay features are great, but only these iPhones can actually use them",
         "summary": "With the release of iOS 27, car owners with CarPlay support can enjoy lots of cool new features. However, not all iPhone models are able to support them all.",
         "body": "If your iPhone is less than three years old, you're in luck.\n\nApple's iOS 27 update doesn't just bring new features for iPhone users — it also adds a bunch of new options to CarPlay for a better in-car experience. The upgrades aren't huge, but they definitely make CarPlay easier and more enjoyable to use.\n\nFor starters, the Now Playing screen has finally got a progress bar and a persistent mini-player, while navigation apps can share route data with the car. There are also new wallpapers, performance improvements and the long-awaited Siri AI right inside your vehicle. But there's a catch: these features require an iPhone running iOS 27, and even if you have one, you might need one of the newer models to unlock all of what's possible.\n\nA major upgrade to CarPlay with iOS 27 is support for video apps. Until now, CarPlay's entertainment support was limited to audio services like Apple Music and Spotify, but drivers can now watch videos on their vehicle's display.\n\nThat doesn't mean you can watch a movie while driving, though. The feature detects when the car is in motion and, for safety reasons, only becomes available once the vehicle is parked. If you're watching something and start driving, playback automatically switches to audio-only until you come to a stop. Still, it's a nice option to have. One thing to keep in mind is that vehicle manufacturers need to implement support for this new feature, which might mean apps like YouTube or Netflix might not work inside your car right now.\n\nAudio playback has also improved, with Now Playing having a mini-player that includes the album artwork, playback controls and a long-awaited progress bar. Just swipe to skip forward or backward through a song or podcast without having to reach for your iPhone. Speaking of improvements, Apple claims that CarPlay has become much more reliable in iOS 27. Not only can you expect a more consistent wireless connection, but also more accurate GPS location reporting.\n\nThere are also new wallpapers to choose from and the ability for apps to share route data with your vehicle to include information such as EV charging stops. This allows your vehicle to cross-check arrival times with Google Maps and Apple Maps and suggest locations to juice up along the route.\n\nSiri AI, the updated version of Apple's virtual assistant, is also available in CarPlay with iOS 27. It works pretty much the same way as it does on other Apple devices — it can answer general knowledge questions or even use personal context to find answers in your emails, messages and calendar. For example, you can ask Siri to get directions to a restaurant that someone recommended to you during a conversation. You can also use more natural language to search for directions in Apple Maps — like asking Siri to avoid tolls on your route.\n\nYou can only take advantage of these features if you have an iPhone compatible with Siri AI . That means an iPhone 15 Pro or an iPhone 16 or later. Since CarPlay runs entirely on your iPhone, an older iPhone doesn't have the hardware required to power Siri AI in your car. An iPhone 14 owner, for example, still gets the mini-player, the progress bar and the new wallpapers, but not the new Siri experience.\n\nStill, you'll need to update your iPhone to iOS 27 first. The update is available for the iPhone 11 and later , so if you have an older iPhone, you're out of luck. Your CarPlay will continue to operate, just with the features it already supports.\n\nSiri AI also isn't available in the European Union due to local regulations, so that's something to keep in mind. If you live in Europe and own a compatible iPhone, you'll still get the new CarPlay features, but not Siri AI.\n\nIf you've already prepared and updated your iPhone to iOS 27 , it's worth checking out a few settings that can help improve your CarPlay experience ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-e486eb72d32962cc",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/18/apples-next-homeview-could-debut-as-soon-as-next-year-with-a-robotic-arm-report/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-18T14:17:21.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple’s next HomeView could debut as soon as next year with a robotic arm: report",
-        "summary": "Apple just announced its long awaited smart home display: HomeView, and it’s available for $299. That said, the product has been in development for quite some time, being held back by all of the delays with developing a smarter Siri. Now that it’s on the market, some customers have had concern about the fact that you have to move the HomeView around yourself if its on a table with multiple people surrounding it. According to the Power On newsletter , it might not be too long before Apple has a solution. more…",
-        "body": "Apple just announced its long awaited smart home display: HomeView , and it’s available for $299. That said, the product has been in development for quite some time, being held back by all of the delays with developing a smarter Siri.\n\nNow that it’s on the market, some customers have had concern about the fact that you have to move the HomeView around yourself if its on a table with multiple people surrounding it. According to the Power On newsletter , it might not be too long before Apple has a solution.\n\nWe’ve known that Apple has been working on robotic products of sorts for quite some time, but now we have a clear release window. According to Bloomberg’s Mark Gurman , the company might debut a better HomeView , perhaps HomeView Pro – as soon as next year:\n\nThe good news is that Apple is on track to solve that problem with a souped-up version of the HomeView planned for release in 2027 or 2028. Code-named J595, this version looks like the current HomeView but has a roughly 9-inch screen (up from 7 inches) and a motorized robotic arm that lets the display swivel a full 360 degrees. Using voice recognition, the machine is designed to identify who’s speaking and automatically turn toward that person.\n\nThis version will have a larger display, and be capable of turning full-circle, rather than just a little bit of tilt. This won’t replace the HomeView , and will instead serve as a higher end model in the lineup. So, don’t expect it at the same $299 price point.\n\nApple reportedly also plans to use voice recognition to figure out how to pivot the robotic arm towards the right person. Think about the Center Stage camera on some newer Apple products, but leveled up.\n\nMy favorite Apple accessory recommendations:\n\nFollow Michael: X/Twitter , Bluesky , Instagram"
       }
     },
     "media": null

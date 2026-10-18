@@ -70,6 +70,17 @@ final class NativeReaderLibrary: ObservableObject {
         try save()
     }
 
+    func importSharedText(_ text: String, title: String) throws {
+        guard !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            throw NativeReaderImportError.noReadableText(title)
+        }
+        documents.insert(
+            NativeReadingDocument(id: UUID(), title: title, body: text, importedAt: .now),
+            at: 0
+        )
+        try save()
+    }
+
     func rename(_ document: NativeReadingDocument, to proposedTitle: String) {
         let title = proposedTitle.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !title.isEmpty, let index = documents.firstIndex(where: { $0.id == document.id }) else { return }
@@ -182,10 +193,6 @@ struct NativeReaderLibraryScreen: View {
                     }
                     .accessibilityLabel(document.title)
                     .accessibilityHint("Doble toque para abrir. Acciones disponibles.")
-                    .accessibilityAction(named: Text("Abrir")) {
-                        // La activación primaria del título abre el documento.
-                        // Se conserva el enlace de navegación nativo para VoiceOver.
-                    }
                     .accessibilityAction(named: Text("Reproducir")) {
                         speech.play(document.body)
                     }
@@ -282,7 +289,6 @@ struct NativeReadingScreen: View {
     @AppStorage("native-reading-text-size") private var textSize = 20.0
     @State private var rateIndex = 2
     @State private var showSettings = false
-    @State private var showText = true
     private let speechRates: [Double] = [0.75, 0.9, 1.0, 1.25, 1.5]
 
     var body: some View {

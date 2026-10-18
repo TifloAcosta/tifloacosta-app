@@ -6,12 +6,15 @@ import SwiftUI
 struct TifloAcostaNativeApp: App {
     @StateObject private var catalog = NativeCatalogStore()
     @StateObject private var library = NativeReaderLibrary()
+    @StateObject private var inbox = NativeShareInbox()
 
     var body: some Scene {
         WindowGroup {
             NativeHomeScreen()
                 .environmentObject(catalog)
                 .environmentObject(library)
+                .environmentObject(inbox)
+                .onAppear { inbox.refresh() }
                 .task { await catalog.refresh() }
                 .tint(Color(red: 0.70, green: 0.18, blue: 0.18))
         }

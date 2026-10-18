@@ -116,8 +116,13 @@ export function createIosReceivedInbox({ native = null, library = null, decodeBa
     try {
       const entry = await native.openItem({ id: item.id });
       const value = String(entry?.value || '').trim();
-      if (!isWebAddress(value)) return { opened: false };
-      const opened = await native.openURL({ url: value });
+      // Many apps share explanatory text followed by a URL. Keep the message
+      // intact in Received but open only a verified HTTP(S) destination.
+      const candidates = [value, ...(value.match(/https?:\/\/[^\s<>"']+/gi) || [])];
+      const target = candidates.map(url => url.replace(/[)\]},;.!?]+$/, ''))
+        .find(isWebAddress);
+      if (!target) return { opened: false };
+      const opened = await native.openURL({ url: target });
       // Opening a link is not permission to delete it from Received.
       return { opened: opened?.opened === true };
     } catch { return { opened: false }; }

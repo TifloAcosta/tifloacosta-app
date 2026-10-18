@@ -241,6 +241,8 @@ final class TifloYouTubeViewController: UIViewController, WKNavigationDelegate, 
     private var durationSeconds: Double = 0
     private var positionSeconds: Double = 0
     private var playerError = false
+    private var preventingAutoLock = false
+    private var priorIdleTimerDisabled = false
     private var needsInitialVoiceOverFocus = true
     private var pendingMixRefresh: DispatchWorkItem?
     private var shouldMixAudio: Bool {
@@ -263,6 +265,10 @@ final class TifloYouTubeViewController: UIViewController, WKNavigationDelegate, 
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(appWillResignActive),
+                                               name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(appDidBecomeActive),
+                                               name: UIApplication.didBecomeActiveNotification, object: nil)
         if shouldMixAudio && !audioMix.activate() {
             statusLabel.text = spanish
                 ? "No se ha podido activar la compatibilidad de audio."
@@ -279,6 +285,9 @@ final class TifloYouTubeViewController: UIViewController, WKNavigationDelegate, 
     }
 
     override func viewWillDisappear(_ animated: Bool) {
+        setScreenAwake(false)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
         pendingMixRefresh?.cancel()
         pendingMixRefresh = nil
         audioMix.restore()
@@ -585,10 +594,35 @@ final class TifloYouTubeViewController: UIViewController, WKNavigationDelegate, 
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(450), execute: refresh)
     }
 
+    // Visible video may keep the display from timing out. Never continue
+    // YouTube playback in the background or override manual screen locking.
+    private func setScreenAwake(_ requested: Bool) {
+        let enable = requested && isViewLoaded && view.window != nil
+            && UIApplication.shared.applicationState == .active
+        if enable == preventingAutoLock { return }
+        if enable {
+            priorIdleTimerDisabled = UIApplication.shared.isIdleTimerDisabled
+            UIApplication.shared.isIdleTimerDisabled = true
+            preventingAutoLock = true
+        } else {
+            UIApplication.shared.isIdleTimerDisabled = priorIdleTimerDisabled
+            preventingAutoLock = false
+        }
+    }
+
+    @objc private func appWillResignActive() {
+        setScreenAwake(false)
+    }
+
+    @objc private func appDidBecomeActive() {
+        setScreenAwake(playerState == 1 && !playerError)
+    }
+
     private func updatePlaybackState(_ state: Int) {
         guard !playerError else { return }
         let playbackJustStarted = state == 1 && playerState != 1
         playerState = state
+        setScreenAwake(state == 1)
         if playbackJustStarted { refreshAudioMixAfterPlaybackBegins() }
         // YouTube state 1 = playing; 2 = paused; 0 = ended; 3 = buffering.
         let playing = state == 1 || state == 3
@@ -600,6 +634,7 @@ final class TifloYouTubeViewController: UIViewController, WKNavigationDelegate, 
     }
 
     private func presentPlayerError(_ code: Int) {
+        setScreenAwake(false)
         playerError = true
         playerReady = false
         playbackButton.isEnabled = false

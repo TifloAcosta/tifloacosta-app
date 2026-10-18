@@ -41,7 +41,7 @@ jobs:
                   changed.update(commit.get("modified", []))
               send = "ios-build/solicitud-testflight-nativa-20261018.txt" in changed
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
-              out.write("send=" + ("true" if send else "false") + "\\n")
+              out.write("send=" + ("true" if send else "false") + "\n")
           print("Modo: " + ("envío a TestFlight" if send else "preflight: solo archivar/exportar; NO subir a Apple"))
           PY
       - name: Seleccionar Xcode 26 y SDK iOS 26 requerido por Apple

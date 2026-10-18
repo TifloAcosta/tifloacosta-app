@@ -17,6 +17,23 @@ async function fileBytes(name) {
   return readFile(join(destination, name));
 }
 
+// Inventory every packaged file, including future nested assets, so a
+// successful UI entrypoint check cannot conceal an incomplete native bundle.
+async function listBundledFiles(directory = destination, prefix = '') {
+  const entries = await readdir(directory, { withFileTypes: true });
+  const files = [];
+  for (const entry of entries) {
+    const name = prefix ? `${prefix}/${entry.name}` : entry.name;
+    if (entry.isSymbolicLink()) {
+      throw new Error(`Rejected iPhone bundle: unexpected symlink ${name}`);
+    }
+    if (entry.isDirectory()) files.push(...await listBundledFiles(join(directory, entry.name), name));
+    else if (entry.isFile()) files.push(name);
+    else throw new Error(`Rejected iPhone bundle: unexpected filesystem entry ${name}`);
+  }
+  return files.sort();
+}
+
 async function validateShell() {
   const html = (await fileBytes('index.html')).toString('utf8');
   const script = (await fileBytes('app.js')).toString('utf8');
@@ -56,9 +73,9 @@ await rm(destination, { recursive: true, force: true });
 await mkdir(destination, { recursive: true });
 await cp(mobileDist, destination, { recursive: true });
 const metadata = await validateShell();
-const files = (await readdir(destination)).sort();
+const files = await listBundledFiles();
 const hashes = {};
-for (const filename of ['index.html', 'app.js', 'app.css']) {
+for (const filename of files) {
   hashes[filename] = sha256(await fileBytes(filename));
 }
 const marker = {

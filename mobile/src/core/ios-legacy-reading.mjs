@@ -9,9 +9,12 @@
  */
 import { createWebReadingLibraryAdapter } from '../../../shared/web-reading-library-adapter.mjs';
 import { createIosLocalAudio } from './ios-local-audio.mjs';
+import { decodeIosArchive, decodeIosPdf } from './ios-document-decoders.mjs';
 
 const TEXT_EXTENSIONS = new Set(['txt', 'html', 'htm', 'md', 'markdown', 'rtf', 'fb2']);
-const MAX_IMPORT_BYTES = 32 * 1024 * 1024;
+const MAX_IMPORT_BYTES = 256 * 1024 * 1024;
+const BINARY_EXTENSIONS = new Set(['epub', 'pdf', 'zip', 'daisy']);
+const MAX_PDF_BYTES = 32 * 1024 * 1024;
 
 function emptyBatch(cancelled = false) {
   return { cancelled, audioChoiceRequired: false, selectionId: '',
@@ -37,28 +40,93 @@ export function createIosLegacyReadingBridge({
   capacitor = null,
   nativeTts = null,
   readFile = globalThis.fetch,
-  audioPlayback = null
+  audioPlayback = null,
+  decodeArchive = decodeIosArchive,
+  decodePdf = decodeIosPdf
 } = {}) {
   // Local audio is lazy; construction never opens or alters the old database.
   const player = audioPlayback || createIosLocalAudio({ library });
 
-  // A file received from Files is only reported as successfully imported after
-  // its persisted content is opened again. Never trust a successful write alone.
-  // In particular, size equality does not prove MP3 binary integrity.
-  async function importedBytesAreIntact(imported, ext, originalBlob, originalText = '') {
-    const id = String(imported?.id || '');
-    if (!id || typeof library.openBook !== 'function') return false;
-    const reopened = await library.openBook(id);
-    if (reopened?.book?.id !== id) return false;
-    if (ext !== 'mp3') return reopened.content === originalText;
-    if (typeof library.openAudioFile !== 'function') return false;
-    const media = await library.openAudioFile(id);
-    if (media?.book?.id !== id || media?.blob?.size !== originalBlob.size) return false;
-    const original = new Uint8Array(await originalBlob.arrayBuffer());
-    const stored = new Uint8Array(await media.blob.arrayBuffer());
-    return original.length === stored.length &&
-      original.every((byte, index) => byte === stored[index]);
+  // A file is confirmed only when reopening the ORIGINAL IndexedDB key and
+  // comparing every byte against the supplied document. No destructive reset.
+  async function equalBlobs(a, b) {
+    if (!(a instanceof Blob) || !(b instanceof Blob) || a.size !== b.size) return false;
+    const chunkSize = 1024 * 1024;
+    for (let offset = 0; offset < a.size; offset += chunkSize) {
+      const [first, second] = await Promise.all([
+        a.slice(offset, offset + chunkSize).arrayBuffer(),
+        b.slice(offset, offset + chunkSize).arrayBuffer()
+      ]);
+      const x = new Uint8Array(first), y = new Uint8Array(second);
+      if (x.length !== y.length || x.some((byte, i) => byte !== y[i])) return false;
+    }
+    return true;
   }
+  async function verifySaved(imported, format, sourceBlob, textContent = '') {
+    if (!imported?.id) return false;
+    const opened = await library.openBook(imported.id);
+    if (opened?.book?.id !== imported.id) return false;
+    if (format === 'audio' || format === 'pdf' || format === 'epub' ||
+        format === 'daisy2.02' || format === 'daisy3') {
+      const binary = format === 'audio' ? await library.openAudioFile?.(imported.id)
+        : format.startsWith('daisy') ? await library.openDaisyArchive?.(imported.id)
+        : await library.openBinaryDocument?.(imported.id);
+      return binary?.book?.id === imported.id && await equalBlobs(sourceBlob, binary.blob);
+    }
+    return opened.content === textContent;
+  }
+
+  async function importBlob({ name, blob }) {
+    const filename = String(name || '').trim();
+    const ext = extension(filename);
+    if (!filename || !(blob instanceof Blob) || !blob.size ||
+        blob.size > MAX_IMPORT_BYTES) return { saved: false, reason: 'unsupported-or-empty' };
+    if (!TEXT_EXTENSIONS.has(ext) && ext !== 'mp3' && !BINARY_EXTENSIONS.has(ext)) {
+      return { saved: false, reason: 'unsupported-format' };
+    }
+    const title = filename.replace(/\\.[^.]+$/, '');
+    try {
+      let imported, format = ext, textContent = '';
+      if (ext === 'mp3') {
+        format = 'audio';
+        imported = await library.importAudioFile({ file: blob.slice(0, blob.size, 'audio/mpeg'), title });
+      } else if (ext === 'pdf') {
+        if (blob.size > MAX_PDF_BYTES) return { saved: false, reason: 'pdf-too-large' };
+        // Parsing before persistence avoids "success" for a damaged PDF.
+        await decodePdf(blob);
+        imported = await library.importBinaryDocument?.({
+          file: blob.slice(0, blob.size, 'application/pdf'), title, format: 'pdf'
+        });
+      } else if (ext === 'epub' || ext === 'zip' || ext === 'daisy') {
+        const decoded = await decodeArchive(blob, { kind: ext === 'epub' ? 'epub' : 'daisy', title });
+        format = decoded.format;
+        if (format === 'epub') {
+          imported = await library.importBinaryDocument?.({
+            file: blob.slice(0, blob.size, 'application/epub+zip'),
+            title: decoded.title || title, author: decoded.author, language: decoded.language,
+            format, content: decoded.content
+          });
+        } else {
+          imported = await library.importDaisyArchive?.({
+            file: blob.slice(0, blob.size, 'application/zip'),
+            title: decoded.title || title, language: decoded.language, format
+          });
+        }
+      } else {
+        textContent = await blob.text();
+        imported = await library.importDocument({
+          title, format, content: textContent, sizeBytes: blob.size
+        });
+      }
+      if (!await verifySaved(imported, format, blob, textContent)) {
+        return { saved: false, reason: 'readback-integrity-failed' };
+      }
+      return { saved: true, id: imported.id, title: imported.title, imported };
+    } catch (error) {
+      return { saved: false, reason: error?.code || 'import-or-readback-failed' };
+    }
+  }
+
   async function pickDocuments() {
     if (typeof accessibility?.pickDocument !== 'function' ||
         typeof capacitor?.convertFileSrc !== 'function') {
@@ -74,8 +142,7 @@ export function createIosLegacyReadingBridge({
       return resultError(name, 'El documento elegido no tiene una dirección local válida.');
     }
     const ext = extension(name);
-    if (!TEXT_EXTENSIONS.has(ext) && ext !== 'mp3') {
-      // Do NOT pretend to have imported EPUB/PDF/DAISY or silently overwrite them.
+    if (!TEXT_EXTENSIONS.has(ext) && ext !== 'mp3' && !BINARY_EXTENSIONS.has(ext)) {
       return resultError(name, 'Este formato aún no está integrado en el nuevo lector para iOS.');
     }
     try {
@@ -84,71 +151,17 @@ export function createIosLegacyReadingBridge({
       const response = await readFile(localUrl);
       if (!response?.ok) throw Error('file-read-failed');
       const blob = await response.blob();
-      if (!blob?.size || blob.size > MAX_IMPORT_BYTES) {
-        return resultError(name, 'Archivo vacío o superior al límite de 32 MB.');
-      }
-      const textContent = ext === 'mp3' ? '' : await blob.text();
-      let imported;
-      if (ext === 'mp3') {
-        const audio = blob.slice(0, blob.size, 'audio/mpeg');
-        imported = await library.importAudioFile({
-          file: audio, title: name.replace(/\.mp3$/i, '')
-        });
-      } else {
-        imported = await library.importDocument({
-          title: name.replace(/\.[^.]+$/, ''),
-          format: ext,
-          content: textContent,
-          sizeBytes: blob.size
-        });
-      }
-      if (!imported?.id) return resultError(name, 'No se han podido guardar los datos del archivo.');
-      if (!await importedBytesAreIntact(imported, ext, blob, textContent)) {
-        return resultError(name, 'El archivo guardado no coincide con el original; revisa la importación.');
-      }
-      return { ...emptyBatch(), selectedNames: [name], imported: [imported] };
+      const result = await importBlob({ name, blob });
+      if (!result.saved) return resultError(name, 'La importación no se ha completado: ' + result.reason);
+      return { ...emptyBatch(), selectedNames: [name], imported: [result.imported] };
     } catch {
       return resultError(name, 'La lectura o el guardado ha fallado; el original no se ha eliminado.');
     }
   }
 
-  // Shared file receipts are acknowledged ONLY after the original IndexedDB
-  // record and, where relevant, its actual binary media have been read back.
   async function importReceivedBlob({ name = '', blob = null } = {}) {
-    const filename = String(name || '').trim();
-    const ext = extension(filename);
-    if (!filename || !blob || !blob.size || blob.size > MAX_IMPORT_BYTES ||
-        (!TEXT_EXTENSIONS.has(ext) && ext !== 'mp3')) {
-      return { saved: false, reason: 'unsupported-or-empty' };
-    }
-    try {
-      const title = filename.replace(/\.[^.]+$/, '');
-      const textContent = ext === 'mp3' ? '' : await blob.text();
-      const incoming = ext === 'mp3'
-        ? await library.importAudioFile({ file: blob.slice(0, blob.size, 'audio/mpeg'), title })
-        : await library.importDocument({ title, format: ext, content: textContent, sizeBytes: blob.size });
-      if (!incoming?.id) return { saved: false, reason: 'import-failed' };
-      const reopened = await library.openBook(incoming.id);
-      if (reopened?.book?.id !== incoming.id) {
-        return { saved: false, reason: 'readback-failed' };
-      }
-      if (ext === 'mp3') {
-        const media = await library.openAudioFile(incoming.id);
-        if (media?.blob?.size !== blob.size) return { saved: false, reason: 'media-readback-failed' };
-        // Checking only length could silently acknowledge a damaged receipt.
-        const original = new Uint8Array(await blob.arrayBuffer());
-        const savedBytes = new Uint8Array(await media.blob.arrayBuffer());
-        if (original.length !== savedBytes.length ||
-            original.some((byte, index) => byte !== savedBytes[index])) {
-          return { saved: false, reason: 'media-byte-integrity-failed' };
-        }
-      } else if (reopened.content !== textContent) {
-        return { saved: false, reason: 'text-readback-failed' };
-      }
-      return { saved: true, id: incoming.id, title: incoming.title };
-    } catch {
-      return { saved: false, reason: 'import-or-readback-failed' };
-    }
+    const { saved, id, title, reason } = await importBlob({ name, blob });
+    return saved ? { saved, id, title } : { saved: false, reason };
   }
 
   async function listTtsVoices() {
@@ -199,24 +212,45 @@ export function createIosLegacyReadingBridge({
   // store. The mobile reading client expects a PDF page payload, not a plain
   // `content` string. Adapt that legacy record only at read time: never rewrite
   // its ID, text, page progress, marks, or IndexedDB schema on app startup.
-  result.openBook = async id => {
+  result.openBook = async (id, options = {}) => {
     const opened = await library.openBook(id);
-    if (opened?.book?.format !== 'pdf' || opened.pdf || opened.pdfNoText ||
-        opened.passwordRequired) return opened;
-    const content = String(opened.content ?? '');
-    if (!content.trim()) return { ...opened, pdfNoText: true, pageCount: 0 };
-    const pages = content.split(String.fromCharCode(12)).map((text, index) => ({ number: index + 1, text }));
-    return {
-      ...opened,
-      pdf: {
-        title: String(opened.book.title || ''),
-        author: String(opened.book.author || ''),
-        language: String(opened.book.language || ''),
-        pageCount: pages.length,
-        orderReliable: false,
-        pages
+    if (!opened?.book) return opened;
+    const kind = opened.book.format;
+    // New PDFs hold the exact original file in media. Old text-only PDFs keep
+    // their original content and legacy paragraph/page positions untouched.
+    if (kind === 'pdf') {
+      const binary = await library.openBinaryDocument?.(id);
+      if (binary?.blob) {
+        try {
+          return { ...opened, ...await decodePdf(binary.blob, { password: options?.password || '' }) };
+        } catch {
+          return { ...opened, pdfUnavailable: true, pdfNoText: true, pageCount: 0 };
+        }
       }
-    };
+      if (opened.pdf || opened.pdfNoText || opened.passwordRequired) return opened;
+      const content = String(opened.content ?? '');
+      if (!content.trim()) return { ...opened, pdfNoText: true, pageCount: 0 };
+      const pages = content.split(String.fromCharCode(12)).map((text, index) => ({ number: index + 1, text }));
+      return { ...opened, pdf: { title: opened.book.title || '',
+        author: opened.book.author || '', language: opened.book.language || '',
+        pageCount: pages.length, orderReliable: false, pages } };
+    }
+    if (kind === 'daisy2.02' || kind === 'daisy3') {
+      const archive = await library.openDaisyArchive?.(id);
+      if (archive?.blob) {
+        const decoded = await decodeArchive(archive.blob, { kind: 'daisy', title: opened.book.title });
+        return { ...opened, content: decoded.content };
+      }
+    }
+    if (kind === 'epub' && opened.content &&
+        !String(opened.content).trimStart().startsWith('{')) {
+      // Compatibility read-only adapter for older EPUB content saved as text.
+      return { ...opened, content: JSON.stringify({
+        title: opened.book.title, blocks: [{ id: 'legacy-epub-text',
+          type: 'paragraph', text: String(opened.content) }]
+      }) };
+    }
+    return opened;
   };
   // The staged reader can show, search and continue existing documents using
   // their ORIGINAL IDs. Unsupported native operations remain explicitly absent

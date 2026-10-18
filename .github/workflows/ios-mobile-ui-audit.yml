@@ -1,6 +1,20 @@
 name: Auditar interfaz unica iOS (sin TestFlight)
 on:
   workflow_dispatch:
+  # Verify the exact code proposed for merging, not only the feature branch.
+  pull_request:
+    branches:
+      - preparacion-ios
+    paths:
+      - 'mobile/**'
+      - 'ios-build/prepare-mobile-ui.mjs'
+      - 'ios-build/staging-onesignal-platform.mjs'
+      - 'ios-build/test/ios-mobile-ui-source.test.mjs'
+      - 'ios-build/native/**'
+      - 'ios-build/share-extension/**'
+      - 'ios-build/install-native-video.mjs'
+      - 'ios-build/install-share-extension.rb'
+      - '.github/workflows/ios-mobile-ui-audit.yml'
   push:
     branches:
       - migration/ios-single-mobile-ui-20261017

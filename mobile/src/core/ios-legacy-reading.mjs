@@ -84,7 +84,7 @@ export function createIosLegacyReadingBridge({
     if (!TEXT_EXTENSIONS.has(ext) && ext !== 'mp3' && !BINARY_EXTENSIONS.has(ext)) {
       return { saved: false, reason: 'unsupported-format' };
     }
-    const title = filename.replace(/\\.[^.]+$/, '');
+    const title = filename.replace(/\.[^.]+$/, '');
     try {
       let imported, format = ext, textContent = '';
       if (ext === 'mp3') {

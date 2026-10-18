@@ -146,10 +146,6 @@ struct NativeReaderLibraryScreen: View {
                     }
                     .accessibilityLabel(document.title)
                     .accessibilityHint("Doble toque para abrir. Acciones disponibles.")
-                    .accessibilityAction(named: Text("Abrir")) {
-                        // Opening is already the native NavigationLink's default action.
-                        // Use the default activation rather than a second navigation stack.
-                    }
                     .accessibilityAction(named: Text("Reproducir")) {
                         speech.play(document.body)
                     }

@@ -1,5 +1,22 @@
 [
   {
+    "id": "marcianotech:https://www.youtube.com/watch?v=PoNJ4Zh4PdE",
+    "type": "video",
+    "section": "technology",
+    "sourceId": "marcianotech",
+    "sourceName": "MarcianoTech",
+    "sourceUrl": "https://www.youtube.com/@marcianotech",
+    "originalUrl": "https://www.youtube.com/watch?v=PoNJ4Zh4PdE",
+    "originalLanguage": "es",
+    "publishedAt": "2026-10-17T23:06:46.000Z",
+    "title": "Mi vida después del iPhone Dúo.",
+    "summary": "",
+    "mediaUrl": null,
+    "embedUrl": "https://www.youtube.com/embed/PoNJ4Zh4PdE",
+    "platform": "youtube",
+    "categories": []
+  },
+  {
     "id": "topes-de-gama:https://www.youtube.com/watch?v=e9x-f8cDbio",
     "type": "video",
     "section": "technology",
@@ -353,23 +370,6 @@
     "summary": "👉 Recupera archivos de un disco duro formateado de forma rápida con 4DDiG: https://x.gd/5hSKO\n\n¿Has borrado un archivo importante o formateado el disco equivocado? Tranquilo: lo más probable es que tus archivos sigan ahí y puedas recuperarlos. Te cuento como...\n\nEn este vídeo te enseño cómo recuperar archivos borrados en Windows, paso a paso y desde el método más sencillo y oficial al más profesional. Pongo a prueba un pendrive formateado con fotos, vídeos y documentos y compruebo qué se puede recuperar con las herramientas gratuitas de Windows, con Windows File Recovery (la app oficial y gratuita de Microsoft) y con 4DDiG Data Recovery. Además te explico qué pasa realmente cuando borras o formateas un disco duro, un SSD, un USB o una tarjeta SD, por qué los datos se pueden recuperar y qué errores debes evitar para no perderlos para siempre.\n\nEn este vídeo verás:\n- Qué pasa realmente al borrar o formatear un disco (y por qué tus archivos siguen ahí)\n- Por qué en un SSD es mucho más difícil recuperar datos (TRIM)\n- Los errores que debes evitar para no sobrescribir tus archivos\n- Cómo recuperar archivos con copias de seguridad, el Historial de archivos y OneDrive\n- Cómo usar Windows File Recovery, la herramienta gratuita de Microsoft\n- Cómo recuperar archivos de un disco o USB formateado con 4DDiG paso a paso\n- Comparativa final: qué método recupera más y cuál es más fácil\n\n#RecuperarArchivos #Windows11 #4DDiG\n\nhttps://youtu.be/LxlABXmQJAY\nhttps://youtu.be/eWK3rph0ivs\n\n🔵 Ayúdanos uniéndote como miembro VIP y accede a ventajas exclusivas: https://www.youtube.com/channel/UCx_lYLRAnOwYFWrbfwAs0iA/join\n\n🔥 Aquí tienes acceso exclusivo 30 días gratis a SETAPP,  con 250+ apps geniales para Mac, iPhone y iPad de altísima calidad: https://setapp.sjv.io/c/3096883/2853695/5114\n\n🔥 Vitamina CarPlay con Ottocast y hazlo inalámbrico: https://t.co/Kx5GWFLyQr\n\n🔥 Este es mi accesorio favorito del iPhone (Grip magsafe): https://tidd.ly/4aJAUjU\n\n🔥 Aquí te dejo un descuento para CleanMyMac, la app más imprescindible para Mac (macOS): https://macpaw.audw.net/c/2674826/3075566/1733\n\n🔥 Aquí tienes un descuento para NordVPN, la mejor VPN para dispositivos Apple con máxima privacidad y seguridad: https://go.nordvpn.net/aff_c?offer_id=266&aff_id=123076&url_id=6299\n\n🔥 Estas son mis listas de tecnología con lo mejor para iPhone, Mac y mucho más: https://amzn.to/4cKLTL8\n\nhttps://twitter.com/iSenaCode https://instagram.com/iSenaCode_ https://www.facebook.com/isenacode https://www.tiktok.com/@isenacode_\n\n💬 Telegram https://telegram.me/iSenaCode\n💬 WhatsApp https://bit.ly/3yNLwxx\n\n📩 Contacto → sergio@isenacode.net",
     "mediaUrl": null,
     "embedUrl": "https://www.youtube.com/embed/hGg0MdaPRdA",
-    "platform": "youtube",
-    "categories": []
-  },
-  {
-    "id": "marcianotech:https://www.youtube.com/watch?v=x91UcsTL7gU",
-    "type": "video",
-    "section": "technology",
-    "sourceId": "marcianotech",
-    "sourceName": "MarcianoTech",
-    "sourceUrl": "https://www.youtube.com/@marcianotech",
-    "originalUrl": "https://www.youtube.com/watch?v=x91UcsTL7gU",
-    "originalLanguage": "es",
-    "publishedAt": "2026-10-16T15:55:16.000Z",
-    "title": "GEMINI 4 ARGON ES RARO... #GEMINI #MUSE",
-    "summary": "",
-    "mediaUrl": null,
-    "embedUrl": "https://www.youtube.com/embed/x91UcsTL7gU",
     "platform": "youtube",
     "categories": []
   },

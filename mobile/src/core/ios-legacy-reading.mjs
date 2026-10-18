@@ -8,6 +8,7 @@
  * acceptance before the TestFlight gate can be opened.
  */
 import { createWebReadingLibraryAdapter } from '../../../shared/web-reading-library-adapter.mjs';
+import { createIosLocalAudio } from './ios-local-audio.mjs';
 
 const TEXT_EXTENSIONS = new Set(['txt', 'html', 'htm', 'md', 'markdown', 'rtf', 'fb2']);
 const MAX_IMPORT_BYTES = 32 * 1024 * 1024;
@@ -35,8 +36,11 @@ export function createIosLegacyReadingBridge({
   accessibility = null,
   capacitor = null,
   nativeTts = null,
-  readFile = globalThis.fetch
+  readFile = globalThis.fetch,
+  audioPlayback = null
 } = {}) {
+  // Local audio is lazy; construction never opens or alters the old database.
+  const player = audioPlayback || createIosLocalAudio({ library });
   async function pickDocuments() {
     if (typeof accessibility?.pickDocument !== 'function' ||
         typeof capacitor?.convertFileSrc !== 'function') {
@@ -109,6 +113,13 @@ export function createIosLegacyReadingBridge({
       if (ext === 'mp3') {
         const media = await library.openAudioFile(incoming.id);
         if (media?.blob?.size !== blob.size) return { saved: false, reason: 'media-readback-failed' };
+        // Checking only length could silently acknowledge a damaged receipt.
+        const original = new Uint8Array(await blob.arrayBuffer());
+        const savedBytes = new Uint8Array(await media.blob.arrayBuffer());
+        if (original.length !== savedBytes.length ||
+            original.some((byte, index) => byte !== savedBytes[index])) {
+          return { saved: false, reason: 'media-byte-integrity-failed' };
+        }
       } else if (reopened.content !== textContent) {
         return { saved: false, reason: 'text-readback-failed' };
       }
@@ -129,6 +140,9 @@ export function createIosLegacyReadingBridge({
   }
 
   async function addListener(eventName, listener) {
+    if (String(eventName).startsWith('audio')) {
+      return player.addListener(eventName, listener);
+    }
     if (String(eventName).startsWith('tts') && typeof nativeTts?.addListener === 'function' &&
         typeof listener === 'function') {
       try { return await nativeTts.addListener(eventName, listener); }
@@ -146,7 +160,16 @@ export function createIosLegacyReadingBridge({
     'deleteDerivedContent', 'getActiveBookId'
   ];
   const result = { pickDocuments, importReceivedBlob, listTtsVoices, openTtsVoiceInstaller,
-    addListener, consumeInitialSharedDocuments: async () => emptyBatch() };
+    addListener, consumeInitialSharedDocuments: async () => emptyBatch(),
+    listAudioTracks: player.listAudioTracks,
+    prepareAudio: player.prepareAudio,
+    playAudio: player.playAudio,
+    pauseAudio: player.pauseAudio,
+    seekAudio: player.seekAudio,
+    skipAudio: player.skipAudio,
+    setAudioSpeed: player.setAudioSpeed,
+    getAudioState: player.getAudioState,
+    stopAudio: player.stopAudio };
   for (const name of passthrough) {
     result[name] = (...args) => library[name](...args);
   }

@@ -22,3 +22,17 @@ for (const value of ['catalog.resources','catalog.news','catalog.videos','Native
 assert.ok(!/WKWebView|UIWebView|index\.html|import Capacitor/.test(screens + search), 'Unexpected HTML shell');
 assert.equal((screens.match(/struct NativeHomeScreen\s*:/g) ?? []).length, 1, 'Duplicate home view');
 console.log('OK: real native home, global catalog search and preserved feature routes');
+
+const resourcesStart = screens.indexOf('struct NativeResourcesScreen: View {');
+const resourcesEnd = screens.indexOf('struct NativeVideosScreen: View {', resourcesStart);
+assert.ok(resourcesStart >= 0 && resourcesEnd > resourcesStart, 'Missing native Resources screen');
+const resources = screens.slice(resourcesStart, resourcesEnd);
+assert.match(resources, /@State private var chosenCategory: String\?/);
+assert.match(resources, /"Selecciona un apartado"\] \+ categories/);
+assert.match(resources, /selectedIndex: categorySelection/);
+assert.match(resources, /if let chosenCategory, categories\.contains\(chosenCategory\) \{\s*Section\(chosenCategory\)/);
+assert.match(resources, /guard let chosenCategory, categories\.contains\(chosenCategory\) else \{\s*return \[\]/);
+assert.doesNotMatch(resources, /"Todas"\] \+ categories/);
+assert.match(screens, /\.accessibilityAdjustableAction \{ direction in/);
+assert.match(resources, /\.accessibilityAction\(named: Text\("Compartir"\)\)/);
+console.log('OK: Resources stays empty until user selects a category with VoiceOver');

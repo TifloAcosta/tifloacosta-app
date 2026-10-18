@@ -68,3 +68,61 @@ test('MP3 bridge cannot claim ready if media is missing or corrupted', async () 
   assert.equal(await backend.prepareAudio({ bookId: 'bad-id' }), null);
   assert.equal(await backend.playAudio(), null);
 });
+
+test('last MP3 selection wins when an older IndexedDB read finishes later', async () => {
+  let resolveFirst;
+  const library = {
+    openAudioFile: id => id === 'old'
+      ? new Promise(resolve => { resolveFirst = resolve; })
+      : Promise.resolve({ book: { id }, blob: new Blob([new Uint8Array([2])]) })
+  };
+  const urls = { createObjectURL: () => 'blob:local', revokeObjectURL: () => {} };
+  const backend = createIosLocalAudio({ library, urls, createAudio: () => new FakeAudio() });
+  const first = backend.prepareAudio({ bookId: 'old' });
+  const second = await backend.prepareAudio({ bookId: 'new', positionMs: 4000 });
+  resolveFirst({ book: { id: 'old' }, blob: new Blob([new Uint8Array([1])]) });
+  assert.equal(await first, null);
+  assert.equal(second.bookId, 'new');
+  assert.equal((await backend.getAudioState()).bookId, 'new');
+  assert.equal((await backend.getAudioState()).positionMs, 4000);
+  await backend.stopAudio();
+});
+
+test('late MP3 metadata error cannot interrupt a newly prepared track', async () => {
+  const oldElement = new FakeAudio();
+  oldElement.load = () => {}; // Wait for an explicit late metadata/error event.
+  let count = 0;
+  const backend = createIosLocalAudio({
+    library: { openAudioFile: async id => ({
+      book: { id }, blob: new Blob([new Uint8Array([1, 2])])
+    }) },
+    urls: { createObjectURL: () => 'blob:local', revokeObjectURL: () => {} },
+    createAudio: () => ++count === 1 ? oldElement : new FakeAudio()
+  });
+  const oldPreparation = backend.prepareAudio({ bookId: 'old' });
+  await Promise.resolve();
+  const latest = await backend.prepareAudio({ bookId: 'new' });
+  oldElement.emit('error');
+  assert.equal(await oldPreparation, null);
+  assert.equal(latest.bookId, 'new');
+  assert.equal((await backend.getAudioState()).prepared, true);
+  assert.equal((await backend.getAudioState()).bookId, 'new');
+  await backend.stopAudio();
+});
+
+test('stop during MP3 preparation prevents a later metadata callback from restarting audio', async () => {
+  const delayed = new FakeAudio();
+  delayed.load = () => {};
+  const backend = createIosLocalAudio({
+    library: { openAudioFile: async id => ({ book: { id }, blob: new Blob(['audio']) }) },
+    urls: { createObjectURL: () => 'blob:local', revokeObjectURL: () => {} },
+    createAudio: () => delayed
+  });
+  const inFlight = backend.prepareAudio({ bookId: 'track' });
+  await Promise.resolve();
+  await backend.stopAudio();
+  delayed.emit('loadedmetadata');
+  assert.equal(await inFlight, null);
+  assert.equal((await backend.getAudioState()).prepared, false);
+  assert.equal((await backend.getAudioState()).bookId, '');
+});

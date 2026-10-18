@@ -10,6 +10,7 @@ private enum NativeDestination: String, CaseIterable, Hashable, Identifiable {
     case podcasts = "Podcasts"
     case novedades = "Novedades"
     case configuracion = "Configuración"
+    case descargas = "Descargas"
 
     var id: String { rawValue }
 }
@@ -52,6 +53,7 @@ struct NativeHomeScreen: View {
                 case .podcasts: NativePodcastScreen()
                 case .novedades: NativeUpdatesScreen()
                 case .configuracion: NativeSettingsScreen()
+                case .descargas: NativeDownloadsScreen()
                 }
             }
         }

@@ -1,0 +1,25 @@
+name: TifloAcostaNative
+options:
+  developmentLanguage: es
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+targets:
+  TifloAcostaNative:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - Sources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.tifloacosta.nativeprototype
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: "TifloAcosta Nativa"
+        TARGETED_DEVICE_FAMILY: "1"
+        CODE_SIGNING_ALLOWED: NO
+        ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS: NO
+    scheme:
+      testTargets: []

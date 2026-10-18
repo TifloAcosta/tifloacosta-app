@@ -24,6 +24,8 @@ const bundledCss = `${baseCss.trim()}\n\n${brandRefreshCss.trim()}\n`;
 await writeFile(`${distDir}app.css`, bundledCss, 'utf8');
 await writeFile(`${distDir}styles.css`, bundledCss, 'utf8');
 await copyFile(brandSymbol, `${distDir}tifloacosta-simbolo-blanco.svg`);
+// PDF.js must run offline in the installed iPhone bundle, never from a CDN.
+await copyFile(`${mobileDir}node_modules/pdfjs-dist/build/pdf.worker.min.mjs`, `${distDir}pdf.worker.min.mjs`);
 
 await build({
   entryPoints: {

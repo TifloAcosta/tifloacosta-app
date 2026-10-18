@@ -30,6 +30,7 @@ export function collectIosVoiceOverTargets(root, { lang = 'es' } = {}) {
   const targets = [];
   const handlers = new Map();
   const seen = new Set();
+  const seenIds = new Set();
   for (const element of root?.querySelectorAll?.('[data-vo-target="true"]') || []) {
     if (!isVisible(element)) continue;
     const card = element.closest?.('article') || element.closest?.('[data-vo-card]') || element.parentElement;
@@ -37,7 +38,7 @@ export function collectIosVoiceOverTargets(root, { lang = 'es' } = {}) {
     const label = String(element.getAttribute?.('aria-label') || element.textContent || '').trim();
     if (!label || seen.has(label)) continue; // Never target an ambiguous VoiceOver label.
     const id = String(element.id || '').trim();
-    if (!id) continue; // IDs are assigned by the owner of the rendered screen.
+    if (!id || seenIds.has(id)) continue; // Screen owns its stable, unique IDs.
     const actions = [];
     const localHandlers = new Map();
     for (const control of card.querySelectorAll?.('[data-vo-action]') || []) {
@@ -50,6 +51,7 @@ export function collectIosVoiceOverTargets(root, { lang = 'es' } = {}) {
     }
     if (!actions.length) continue;
     seen.add(label);
+    seenIds.add(id);
     targets.push({ id, label, actions });
     handlers.set(id, localHandlers);
     if (targets.length >= MAX_TARGETS) break;
@@ -64,6 +66,7 @@ export function createIosContextActions({ root, plugin, lang = () => 'es',
   let currentHandlers = new Map();
   let lastSignature = '';
   let generation = 0;
+  let updates = Promise.resolve();
   let subscription = null;
   let observer = null;
 
@@ -74,22 +77,22 @@ export function createIosContextActions({ root, plugin, lang = () => 'es',
     return true;
   }
 
-  async function refresh() {
-    if (disposed) return;
+  function refresh() {
+    if (disposed) return updates;
     const current = ++generation;
     const { targets, handlers } = collectIosVoiceOverTargets(root, { lang: lang() });
     currentHandlers = handlers;
     const signature = JSON.stringify(targets);
-    if (lastSignature === signature) return;
+    if (lastSignature === signature) return updates;
     lastSignature = signature;
-    try {
-      if (!disposed && plugin?.registerAccessibleTargets) {
-        await plugin.registerAccessibleTargets({ targets });
-      }
-    } catch {
-      // Failing to decorate a WebKit element never disables its normal button.
-    }
-    if (disposed || generation !== current) return;
+    // Serialize bridge updates. A delayed response from a prior screen must
+    // never overwrite the currently visible screen's VoiceOver action list.
+    updates = updates.catch(() => {}).then(async () => {
+      if (disposed || generation !== current) return;
+      try { await plugin?.registerAccessibleTargets?.({ targets }); }
+      catch { /* Existing accessible controls remain available. */ }
+    });
+    return updates;
   }
 
   function schedule() {
@@ -116,6 +119,7 @@ export function createIosContextActions({ root, plugin, lang = () => 'es',
     observer?.disconnect?.();
     currentHandlers.clear();
     await subscription?.remove?.();
+    await updates.catch(() => {});
     try { await plugin?.registerAccessibleTargets?.({ targets: [] }); } catch {}
   }
 

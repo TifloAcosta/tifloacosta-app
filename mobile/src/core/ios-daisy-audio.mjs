@@ -11,8 +11,8 @@ async function defaultOpenArchive(blob) {
   return { zip, model: await parseDaisyArchive(zip) };
 }
 const toInt = value => Math.max(0, Math.round(Number(value) || 0));
-const clipMime = path => /\\.(m4a|mp4)$/i.test(path) ? 'audio/mp4'
-  : /\\.aac$/i.test(path) ? 'audio/aac' : 'audio/mpeg';
+const clipMime = path => /\.(m4a|mp4)$/i.test(path) ? 'audio/mp4'
+  : /\.aac$/i.test(path) ? 'audio/aac' : 'audio/mpeg';
 
 export function createIosDaisyAudio({
   library,

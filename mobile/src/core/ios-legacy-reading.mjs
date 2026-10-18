@@ -160,7 +160,7 @@ export function createIosLegacyReadingBridge({
         opened.passwordRequired) return opened;
     const content = String(opened.content ?? '');
     if (!content.trim()) return { ...opened, pdfNoText: true, pageCount: 0 };
-    const pages = content.split('\\f').map((text, index) => ({ number: index + 1, text }));
+    const pages = content.split(String.fromCharCode(12)).map((text, index) => ({ number: index + 1, text }));
     return {
       ...opened,
       pdf: {

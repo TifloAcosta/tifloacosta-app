@@ -24,6 +24,9 @@ jobs:
     runs-on: macos-15
     timeout-minutes: 95
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
       - name: Decidir entre preflight seguro y envío a TestFlight
         id: release_mode
         run: |
@@ -35,11 +38,23 @@ jobs:
           if os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch":
               send = event.get("inputs", {}).get("enviar_a_testflight") == "true"
           elif os.environ.get("GITHUB_EVENT_NAME") == "push":
-              changed = set()
-              for commit in event.get("commits", []):
-                  changed.update(commit.get("added", []))
-                  changed.update(commit.get("modified", []))
-              send = "ios-build/solicitud-testflight-nativa-20261018.txt" in changed
+              import subprocess
+              # GitHub may omit commits[].modified in push payloads from the contents API.
+              # Inspect the checked-out commit instead; fail closed on unexpected changes.
+              changed = set(subprocess.check_output(
+                  ["git", "diff", "--name-only", "HEAD^", "HEAD"], text=True
+              ).splitlines())
+              release_request = "ios-build/solicitud-testflight-nativa-20261018.txt"
+              preflight_request = "ios-build/solicitud-preflight-nativa-20261018.txt"
+              if release_request in changed and preflight_request in changed:
+                  raise SystemExit("Ambiguous iOS trigger: release and preflight requests changed together.")
+              if release_request in changed:
+                  send = True
+              elif preflight_request in changed:
+                  send = False
+              else:
+                  raise SystemExit("iOS workflow started without an explicit request file changed.")
+              print("Verified changed files: " + ", ".join(sorted(changed)))
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
               out.write("send=" + ("true" if send else "false") + "\n")
           print("Modo: " + ("envío a TestFlight" if send else "preflight: solo archivar/exportar; NO subir a Apple"))
@@ -53,7 +68,6 @@ jobs:
           xcodebuild -version
           SDK_VERSION="$(xcrun --sdk iphoneos --show-sdk-version)"
           case "$SDK_VERSION" in 26.*|27.*|28.*) echo "SDK válido: $SDK_VERSION";; *) echo "::error::SDK iOS antiguo: $SDK_VERSION"; exit 1;; esac
-      - uses: actions/checkout@v4
       - name: Obtener versión SwiftUI nativa comprobada
         uses: actions/checkout@v4
         with:

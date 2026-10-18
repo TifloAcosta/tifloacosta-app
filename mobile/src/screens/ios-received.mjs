@@ -112,7 +112,12 @@ export function renderIosReceived({
         } else if (intent.type === 'youtube') {
           if (typeof inbox.resolveYouTubeTitle === 'function') {
             void inbox.resolveYouTubeTitle({ ...source, preview: source.value || source.preview })
-              .then(title => { if (!disposed && title && heading.isConnected) heading.textContent = title; })
+              .then(title => {
+                if (disposed || !title || !heading.isConnected) return;
+                heading.textContent = title;
+                const primary = actions.querySelector('[data-vo-target="true"]');
+                if (primary) primary.setAttribute('aria-label', `${primary.textContent}: ${title}`);
+              })
               .catch(() => {});
           }
           makeAction(actions,

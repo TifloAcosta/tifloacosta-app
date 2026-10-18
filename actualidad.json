@@ -1,5 +1,52 @@
 [
   {
+    "id": "engadget-c50ec74cf2ec00ee",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2283988/slate-truck-no-infotainment-over-the-air-sofware-updates/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-18T18:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "programas-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Here's how the Slate truck gets software updates without built-in infotainment",
+        "summary": "Basically, it's on you.",
+        "body": "Using your phone to phone home.\n\nThe Slate truck doesn't just lack an infotainment system. The base version of the EV also skips a radio, speakers, power windows and even a paint job (hello, vinyl ). But without built-in cellular, the truck can still get over-the-air (OTA) software updates. It does so by piggybacking on your device.\n\nSlate Auto's approach to minimalism isn't just a design choice. It's also the core of the company's business model: it reaches its sub-$25,000 entry price by slashing everything unrelated to driving and safety.\n\nOf course, the company will still be happy to sell you a long list of add-ons to fill those missing pieces. These include speakers, an iPad mount (to turn it into something more like a traditional infotainment system), a kit that transforms it into a five-seat SUV and a telematics module that enables in-app door unlocking. All that can add up, with a fully loaded version of the modular vehicle surpassing $45,000. The upsell temptation could be strong.\n\nThe EV has an estimated 205 miles of range, a 1,550-pound maximum payload and a 2,000-pound tow rating. It's designed more for short-run hauling and errands than long road trips, so it isn't an apples-to-apples comparison with other electric trucks . Still, the company is betting that a surprisingly affordable vehicle that cuts corners on luxuries will find its niche.\n\nTypically, OTA software updates use cellular or Wi-Fi. But the Slate truck's lack of tech means it needs a workaround.\n\nThe process happens through the Slate app on your phone. When an update is available, the app downloads it onto your device. Plug your phone into the truck's USB port on the dash, and wait for the initial file transfer (the part where your phone needs to be connected). That takes about a minute. Then the truck finishes installing on its own, a step that can take around 45 minutes.\n\nThe company says the updates will stick to bug fixes and small improvements, so don't expect big, flashy new features to arrive after installation. And the same app you use for updates also helps with other common tasks, like displaying range, helping you find chargers and passing those directions to Google Maps, Apple Maps or Waze.\n\nA truck that doesn't phone home could attract buyers tired of the techification of all things. So it probably helps Slate's case that it says it won't sell app data and only collects what it needs for things like diagnostics, service and update status. Those familiar with the recent GM data selling debacle could see the allure here.\n\nWhether enough buyers want an electric pickup that scales back on so much is an open question. But at least the software will still stay up-to-date for those who do."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-a738a0cfb53a903e",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1013541/a-woman-was-arrested-in-philly-for-blocking-a-delivery-robot",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-18T18:28:10.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "A woman was arrested in Philly for blocking a delivery robot",
+        "summary": "Carolyn Marvin was arrested and charged with disorderly conduct after blocking the path of an Uber delivery robot and refusing to get out of the way. Marvin told Philadelphia's ABC13 \"I know they're taking the jobs of human delivery workers and so, I have been protesting them whenever I saw them by standing in front […]",
+        "body": "Carolyn Marvin was arrested and charged with disorderly conduct after blocking the path of an Uber delivery robot and refusing to get out of the way. Marvin told Philadelphia's ABC13 \"I know they're taking the jobs of human delivery workers and so, I have been protesting them whenever I saw them by standing in front of them and preventing them from going forward.\"\n\nPolice responded to the scene and asked Marvin to move out of the robot's way. When she refused, they placed her in cuffs and arrested her. The incident was captured on video and has now garnered considerable media attention.\n\nThe delivery robots have become a common sight on the …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "engadget-eabbc4a2a60112b8",
     "type": "news",
     "sourceId": "engadget",
@@ -69,6 +116,30 @@
         "title": "CoreAI Zoo",
         "summary": "CoreAI Zoo puts the open-weight AI model zoo on your iPhone, iPad and Mac. Pick a model, download it once, and run it entirely on your device. No account, no server, and nothing you type, say or photograph ever leaves the device. CHAT Stream answers from open language models such as Qwen3, Gemma, LFM2.5, Granite and Mistral, from 0.6B to 30B+ parameters depending on your device's memory. Vision-language models (Qwen3-VL, MiniCPM-V, LFM2.5-VL) answer questions about your photos. VISION Ask questions about an image, read text with on-device OCR, and describe what the camera sees. AUDIO Transcribe speech with Whisper large-v3-turbo, Parakeet and Qwen3-ASR. Talk to an audio-understanding model, generate speech with Kokoro and VoxCPM, and try on-device music generation. CAMERA Live depth estimation, object detection (YOLOX, RF-DETR), action recognition and super-resolution on the camera feed. TOOLS Experimental models such as diffusion-based language models. BENCH Measure load time, tokens per second and memory for any chat model on your own hardware. HOW IT WORKS Every model runs through Core ML on Apple silicon. Weights are downloaded from the Hugging Face Hub on first use over HTTPS, then cached, so the app works offline afterwards. One model is resident at a time to stay within memory limits. New models arrive through a live catalog without an app update. GETTING STARTED Start with Qwen3-0.6B (454 MB) for the fastest first run. Larger models state the free space and memory they need; a recent iPhone Pro or an Apple silicon Mac runs the mid-size ones comfortably. Model weights follow their own licenses, listed on each model's Hugging Face page. The app itself is BSD-3-Clause and part of the open CoreAI model zoo. Report issues and request models at github.com/john-rocky/coreai-model-zoo.",
         "body": "CoreAI Zoo puts the open-weight AI model zoo on your iPhone, iPad and Mac. Pick a model, download it once, and run it entirely on your device. No account, no server, and nothing you type, say or photograph ever leaves the device.\n\nCHAT Stream answers from open language models such as Qwen3, Gemma, LFM2.5, Granite and Mistral, from 0.6B to 30B+ parameters depending on your device's memory. Vision-language models (Qwen3-VL, MiniCPM-V, LFM2.5-VL) answer questions about your photos.\n\nVISION Ask questions about an image, read text with on-device OCR, and describe what the camera sees.\n\nAUDIO Transcribe speech with Whisper large-v3-turbo, Parakeet and Qwen3-ASR. Talk to an audio-understanding model, generate speech with Kokoro and VoxCPM, and try on-device music generation.\n\nCAMERA Live depth estimation, object detection (YOLOX, RF-DETR), action recognition and super-resolution on the camera feed.\n\nTOOLS Experimental models such as diffusion-based language models.\n\nBENCH Measure load time, tokens per second and memory for any chat model on your own hardware.\n\nHOW IT WORKS Every model runs through Core ML on Apple silicon. Weights are downloaded from the Hugging Face Hub on first use over HTTPS, then cached, so the app works offline afterwards. One model is resident at a time to stay within memory limits. New models arrive through a live catalog without an app update.\n\nGETTING STARTED Start with Qwen3-0.6B (454 MB) for the fastest first run. Larger models state the free space and memory they need; a recent iPhone Pro or an Apple silicon Mac runs the mid-size ones comfortably.\n\nModel weights follow their own licenses, listed on each model's Hugging Face page. The app itself is BSD-3-Clause and part of the open CoreAI model zoo. Report issues and request models at github.com/john-rocky/coreai-model-zoo."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-feb0c5109e8ba810",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/18/disney-agrees-to-hire-the-majority-of-character-ais-workforce/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-18T16:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Disney agrees to hire the majority of Character.AI’s workforce",
+        "summary": "The filing also says that the “vast majority” of Character.AI employees who were offered jobs at Disney accepted them. However, this is a stalking horse bid, so another company could come forward with a higher offer.",
+        "body": "Posted:\n\nAfter chatbot startup Character.AI filed for bankruptcy earlier this week, many of its employees will have the opportunity to take jobs at Disney.\n\nCharacter.AI’s former CEO Karandeep Anand recently became the entertainment giant’s first CTO , and the startup previously said that Disney had agreed to acquire some of its assets for $20 million.\n\nA legal filing spotted by Bloomberg revealed more details about the agreement between Character.AI and Disney, with Disney agreeing to make employment offers to at least 60 Character.AI employees — the majority of the workforce — paying them an estimated $60 million in annual compensation.\n\nThe filing also says that the “vast majority” of Character.AI employees who were offered jobs at Disney accepted them. However, this is a stalking horse bid, so another company could come forward with a higher offer.\n\nThe filing says that despite its “large and engaged user base,” Character.AI has been hobbled by high costs and “potential litigation-related liabilities and regulatory engagement.” (The company was sued by the mother of a 14-year-old boy who said her son became obsessed with one of Character.AI’s chatbots before committing suicide; it also faces government investigations over child safety concerns .)"
       }
     },
     "media": null
@@ -218,30 +289,6 @@
     "media": null
   },
   {
-    "id": "engadget-57e4ebc144f93ade",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2285327/how-to-use-windows-pc-make-receive-phone-calls/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-18T13:15:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "How to use your Windows PC to make and receive phone calls",
-        "summary": "Windows 11 can connect to your phone to make calls, letting you manage them in one place instead of picking up your phone.",
-        "body": "When you need to make an old-fashioned call, Windows can help you avoid reaching for your phone.\n\nIt's easy to go days or even weeks without using your phone to make an actual call. But when you need to call an organization or person who doesn't use alternative chat platforms, you might prefer to talk on your computer instead of picking up your phone. This makes for easier multitasking, especially if you wear headphones at your desk all the time.\n\nOn Windows 11, the Phone Link app is the solution for this. On top of running phone calls through your computer, it can also streamline your setup by enabling texting and notification sync. You have to leap through a few hurdles, and iPhone functionality is more limited compared to Android, but it's still worth using.\n\nThere are other options, such as desktop versions of chat apps like WhatsApp for voice calls , or Google Voice for making calls from a separate number. But if you're set on making standard calls using your existing number, Phone Link is the best choice.\n\nPhone Link is included in recent versions of Windows 11. Before you continue, open the Microsoft Store app and click the Downloads tab on the left. Hit Check for updates , then Update Phone Link to the latest release if needed. You may also want to head over to Settings > Windows Update if it's been a while since you patched Windows in general.\n\nTo get started with pairing an iPhone, open the Phone Link app on your computer by searching for it via the Start menu, then select iPhone . You'll be prompted to scan a QR code with your phone, which will guide you through that side of the process, including installing the Link to Windows iOS app and pairing your phone via Bluetooth. Unsurprisingly, Bluetooth needs to be enabled on both your phone and PC for this to complete.\n\nBack in Phone Link on your PC, remember to click Pair when the pairing code is displayed. On your iPhone, visit Settings > Bluetooth and tap the info icon next to your PC's name to change options, including syncing contacts.\n\nThe process is largely similar with Android. While Android devices pair to Windows over Wi-Fi or cellular, Bluetooth is still required to make calls. You can begin the process in the Link to Windows Android app if you like, but the results are ultimately the same. Remember to grant any permissions the app asks for if you want to use those features.\n\nOnce you've done all this, making a phone call through Phone Link's Calls tab is simple. Search for a synced contact to dial them quickly, or use the dial pad for one-off calls. You shouldn't have to do anything else to receive incoming calls on on your computer, though it's always best to keep your phone nearby to ensure a clean signal.\n\nIf you plan to take calls on your computer often, grabbing a gaming headset or similar can be a good option to avoid those around you hearing the call while also having a mic always ready.\n\nIf you have an iPhone, Phone Link is limited to calling and texting, as well as viewing and dismissing your phone's notifications. That's plenty for a lot of people. To enable or disable any of these functions, open Phone Link on your PC, then click Settings (the gear icon) and choose Features .\n\nAndroid users get additional power, including the ability to view and copy the last 2,000 photos in their camera roll. That might not sound like much, but it avoids having to sync your Google Photos library directly to your storage drive. If you want to copy a single image into a document or your personal stash, this is a simpler method — once you've got Phone Link configured, that is.\n\nOther Android-exclusive tricks include putting your phone into Do Not Disturb, muting your device when it's playing sound and Now Playing controls for music. It feels like a much more robust solution compared to the basic implementation for iPhone.\n\nRegardless of the phone you're using, it's worth going into Phone Link and visiting the options under Settings > General . There, you're able to adjust the amount of private data displayed in banners, and whether numbered badges are displayed for unread messages and notifications. Those can be irritating, sometimes giving the impression there's new info to view when it's actually the same material that's been sitting on your phone's lock screen for hours. Phone Link labels everything \"unread\" until you specifically check or dismiss it.\n\nMeanwhile, you can fight back against spam calls if they're disrupting you while you work."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "accessible-android-f05349ee801bbdda",
     "type": "news",
     "sourceId": "accessible-android",
@@ -311,29 +358,6 @@
         "title": "Meta removes language that raised scraping and AI training concerns",
         "summary": "A Meta spokesperson insisted that the updated terms did not reflect a change in the way Meta crawls the web.",
         "body": "Posted:\n\nMeta recently updated its commercial terms of use, declaring that the company can “use any content from [a business account’s] domains, web pages, or URLs to provide, develop, improve, research, train, and maintain the integrity of” Meta products and services.\n\nAccording to legal experts interviewed by Nieman Lab , this looked like a “remarkable provision” that could give Meta permission to scrape the website of any publisher with a Meta business account and use the content to train the company’s AI models. (While Meta defeated a high-profile lawsuit over alleged copyright infringement last year, other cases against AI companies, including Meta, continue.)\n\nHowever, a Meta spokesperson insisted that the updated terms did not reflect a change in the way Meta crawls the web. And now, The Verge reports that the provision has been removed.\n\n“We’ve heard you and want to clarify: the crawling terms we consolidated only applied to our ads and business products, and we’ve clarified that in the terms themselves,” the company said in a statement. “It does not change how Meta uses web crawlers.”"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-f20a6d63a693920c",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/17/replit-is-no-longer-working-with-anthropic-ceo-says/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-17T18:48:08.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Replit makes OpenAI its default over Anthropic, CEO says",
-        "summary": "Over the weekend, Masad clarified that OpenAI would replace Anthropic as its default model provider. Claude will still be available to customers on the platform.",
-        "body": "Replit, the AI coding platform that has become a favorite of startup founders and developers, is no longer working with Anthropic, the company’s CEO and co-founder Amjad Masad said Thursday while onstage at TechCrunch Disrupt .\n\nMasad said the decision was made for a number of different reasons, including cost. Replit announced a partnership with OpenAI in August, but there was never any indication that it was no longer partnering with Anthropic.\n\n“I think ChatGPT is better now,” Masad said, adding that the company uses an internal benchmark to help assess metrics like performance. “We publish a public benchmark as well, and consistently, Sol and Astra perform better on building vibe-coded applications from scratch. It was a decision based on both cost, partnership, and performance. And for all these reasons, we just felt like they were a better partner for now.”\n\nIt seems, however, that Anthropic hasn’t been completely cut out of Replit, which sells a cloud-based software development platform where users can develop and deploy apps directly from inside their browser.\n\nAfter Disrupt, Masad clarified that customers can still access Anthropic models on the platform, but that OpenAI’s ChatGPT is now the default. This shift could significantly reduce Replit’s spend with Anthropic since most customers stick with the default rather than selecting a model themselves.\n\nPrior to striking a deal with OpenAI, Replit relied on Anthropic’s Claude models to run its platform. That partnership was said to have helped the company grow its revenue significantly, and Masad noted on stage that Replit had been, until recently, a top-five customer of Anthropic’s.\n\n“Replit remains model agnostic,” Masad told TechCrunch over the weekend. “Our users can choose Anthropic’s Claude or other supported models…OpenAI is now our preferred partner for powering Replit Agent, based on performance, economics, and the strength of our partnership.”\n\nMasad’s comments on stage were rejected by insiders familiar with the partnership between the Anthropic and Replit, however. One person familiar, who asked not to be named, said the partnership was still in place.\n\nThere is evidence on the company’s website , blog posts, and social media posts that Replit was promoting Anthropic products as recently as a few weeks ago. For instance, a blog post in late September cites Anthropic’s Claude Fable 5 and Claude Fable 5.1 as models running in Replit Agent’s production environment. Around the same time, one of Replit’s product employees posted on X about using Anthropic’s flagship model Opus 5.5 and promoting its capabilities.\n\nMasad also shared insights about the company’s growth while onstage at Disrupt, noting that enterprise is starting to provide a larger slice of revenue.\n\n“We’re not sharing ARR numbers just yet, but in terms of growth, like, I would say, enterprise was like 2% of revenue last year,” Masad said. “This year, I would say like 15% of our revenue is enterprise contracts, and more than 50% of our revenue is B2B.”\n\nBackstage, Masad told TechCrunch that he expects more than half of Replit’s revenue to come from enterprise and government customers in 2027.\n\nMasad also commented on the necessity for good AI safety measures.\n\n“In the same way that us humans need a certain environment to work — you need a nice office, maybe nice good food in the office, air-conditioning, computer — agents need a habitat for them to exist and do good work,” he said. “So that habitat has good orchestration, good error recovery, good safety and security and sandboxing, good networking, good identity and authorization. And once you figure all of that out, then you can deploy AI safely.”\n\nThis article was originally published on October 16 at 2:22 pm PT. It has been updated to include more context around Replit’s partnerships with Anthropic and OpenAI."
       }
     },
     "media": null

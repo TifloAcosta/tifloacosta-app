@@ -102,6 +102,11 @@ export function renderIosReceived({ root, router, inbox, onOpenBook = null, t } 
         });
         article.append(local);
         list.append(article);
+        if (item.kind !== 'file' && typeof inbox.resolveYouTubeTitle === 'function') {
+          void inbox.resolveYouTubeTitle(item).then(title => {
+            if (title && heading.isConnected) heading.textContent = title;
+          }).catch(() => {});
+        }
       }
     } catch {
       status.textContent = language('No se pudo consultar Recibidos. Los elementos se conservan.',

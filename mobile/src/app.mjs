@@ -21,6 +21,8 @@ import { createReaderSession } from './core/reader-session.mjs';
 import { createReadingLibraryClient } from './core/reading-library-client.mjs';
 import { createIosLegacyReadingBridge } from './core/ios-legacy-reading.mjs';
 import { createIosReceivedInbox } from './core/ios-received-inbox.mjs';
+import { freshestUnseenReceipt } from './core/ios-share-intent.mjs';
+import { createIosContextActions } from './core/ios-context-actions.mjs';
 import { loadReadableTarget, readablePageFromNewsItem } from './core/readable-loader.mjs';
 import { searchResultAction } from './core/search.mjs';
 import { TifloSave } from './core/save-plugin.mjs';
@@ -102,6 +104,13 @@ const readingBackend = Capacitor.getPlatform() === 'ios'
 const readingClient = createReadingLibraryClient(readingBackend);
 const iosReceivedInbox = Capacitor.getPlatform() === 'ios'
   ? createIosReceivedInbox({ native: registerPlugin('TifloShareInbox'), library: readingBackend })
+  : null;
+const iosContextActions = iosReceivedInbox
+  ? createIosContextActions({
+      root,
+      plugin: registerPlugin('TifloReadingAccessibility'),
+      lang: () => preferencesStore.getCurrent().lang
+    })
   : null;
 const nativeActions = createNativeActions({
   appPlugin: App,
@@ -507,7 +516,13 @@ function render(route) {
   switch (route.name) {
     case 'home': renderHome(context); break;
     case 'received': {
-      if (iosReceivedInbox) renderIosReceived({ ...context, inbox: iosReceivedInbox });
+      if (iosReceivedInbox) renderIosReceived({
+        ...context, inbox: iosReceivedInbox, onOpenBook: openReadingBook,
+        onOpenVideo: classification => openDirectVideo(classification),
+        onReadWeb: (url, title) => openReadableFromApp({ url, title, allowOriginalFallback: true }),
+        onAnalyzeDownload: url => openNormalDownload(url),
+        onSearchText: text => openSharedSearch(text)
+      });
       else renderHome(context);
       break;
     }
@@ -724,6 +739,33 @@ function onPreferencesChange(changes, { reset = false } = {}) {
 }
 
 router.start('home');
+void iosContextActions?.install();
+
+// A recent, unseen item received through the native iOS Share Extension gets
+// a contextual Received screen on next foreground entry. No autoplay,
+// destructive import or App Group acknowledgement occurs on arrival.
+const receivedAttentionKey = 'tiflo-ios-last-attended-receipt';
+let lastAttendedReceipt = '';
+try { lastAttendedReceipt = String(storage?.getItem(receivedAttentionKey) || ''); } catch {}
+let checkingNewReceipt = false;
+async function presentRecentIosReceipt() {
+  if (!iosReceivedInbox || checkingNewReceipt ||
+      preferencesStore.needsLanguageChoice() || router.current()?.name !== 'home') return;
+  checkingNewReceipt = true;
+  try {
+    const result = await iosReceivedInbox.pending();
+    if (!result.available) return;
+    const newest = freshestUnseenReceipt(result.items, { lastSeenId: lastAttendedReceipt });
+    if (!newest || router.current()?.name !== 'home') return;
+    lastAttendedReceipt = newest.id;
+    try { storage?.setItem(receivedAttentionKey, newest.id); } catch {}
+    router.navigate('received');
+  } finally { checkingNewReceipt = false; }
+}
+void presentRecentIosReceipt();
+if (iosReceivedInbox) {
+  void App.addListener('resume', () => { void presentRecentIosReceipt(); }).catch(() => {});
+}
 void installShareReceiver();
 void installReadingDocumentReceiver();
 void loadAppInfo(App).then(info => {

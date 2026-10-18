@@ -6,7 +6,14 @@ on:
     branches: [preparacion-ios]
     paths:
       - 'ios-build/solicitud-testflight-nativa-20261018.txt'
+      - 'ios-build/solicitud-preflight-nativa-20261018.txt'
   workflow_dispatch:
+    inputs:
+      enviar_a_testflight:
+        description: 'Enviar a Apple en lugar de comprobar la IPA solamente'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -17,6 +24,26 @@ jobs:
     runs-on: macos-15
     timeout-minutes: 95
     steps:
+      - name: Decidir entre preflight seguro y envío a TestFlight
+        id: release_mode
+        run: |
+          python3 - <<'PY'
+          import json, os
+          with open(os.environ["GITHUB_EVENT_PATH"], encoding="utf-8") as source:
+              event = json.load(source)
+          send = False
+          if os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch":
+              send = event.get("inputs", {}).get("enviar_a_testflight") == "true"
+          elif os.environ.get("GITHUB_EVENT_NAME") == "push":
+              changed = set()
+              for commit in event.get("commits", []):
+                  changed.update(commit.get("added", []))
+                  changed.update(commit.get("modified", []))
+              send = "ios-build/solicitud-testflight-nativa-20261018.txt" in changed
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+              out.write("send=" + ("true" if send else "false") + "\\n")
+          print("Modo: " + ("envío a TestFlight" if send else "preflight: solo archivar/exportar; NO subir a Apple"))
+          PY
       - name: Seleccionar Xcode 26 y SDK iOS 26 requerido por Apple
         run: |
           set -euo pipefail
@@ -389,6 +416,7 @@ jobs:
           }
           echo "Paquete IPA verificado antes de su envío a Apple."
       - name: Enviar compilación a App Store Connect para TestFlight
+        if: steps.release_mode.outputs.send == 'true'
         env:
           API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
           API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
@@ -403,6 +431,7 @@ jobs:
             exit 1
           fi
       - name: Confirmar disponibilidad real en Apple TestFlight
+        if: steps.release_mode.outputs.send == 'true'
         timeout-minutes: 26
         env:
           APPSTORE_API_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}

@@ -164,6 +164,36 @@ export function createIosLegacyReadingBridge({
     return saved ? { saved, id, title } : { saved: false, reason };
   }
 
+  async function recognizePdfPage({ bookId = '', pageIndex = 0, password = '', script = 'latin' } = {}) {
+    if (typeof accessibility?.recognizePdfPage !== 'function' ||
+        typeof library.openBinaryDocument !== 'function' ||
+        !Number.isInteger(pageIndex) || pageIndex < 0) {
+      return { status: 'model-unavailable', text: '', blocks: [] };
+    }
+    try {
+      const stored = await library.openBinaryDocument(String(bookId));
+      if (!stored?.blob || stored.book?.id !== String(bookId) ||
+          stored.blob.size > 12 * 1024 * 1024) {
+        return { status: 'model-unavailable', text: '', blocks: [] };
+      }
+      const bytes = new Uint8Array(await stored.blob.arrayBuffer());
+      const chunks = [];
+      for (let index = 0; index < bytes.length; index += 32768) {
+        chunks.push(String.fromCharCode(...bytes.subarray(index, index + 32768)));
+      }
+      // Capacitor sends these bytes only across the local JS/Swift boundary.
+      const recognized = await accessibility.recognizePdfPage({
+        pdfBase64: btoa(chunks.join('')), pageIndex, password, script
+      });
+      return ['ok', 'empty'].includes(recognized?.status)
+        ? { status: recognized.status, text: String(recognized.text || ''),
+          blocks: Array.isArray(recognized.blocks) ? recognized.blocks : [] }
+        : { status: recognized?.status || 'error', text: '', blocks: [] };
+    } catch {
+      return { status: 'error', text: '', blocks: [] };
+    }
+  }
+
   async function listTtsVoices() {
     if (typeof nativeTts?.listTtsVoices !== 'function') return { voices: [] };
     try { return await nativeTts.listTtsVoices(); }
@@ -194,7 +224,7 @@ export function createIosLegacyReadingBridge({
     'saveDerivedContent', 'getDerivedContent', 'listDerivedContent',
     'deleteDerivedContent', 'getActiveBookId'
   ];
-  const result = { pickDocuments, importReceivedBlob, listTtsVoices, openTtsVoiceInstaller,
+  const result = { pickDocuments, importReceivedBlob, recognizePdfPage, listTtsVoices, openTtsVoiceInstaller,
     addListener, consumeInitialSharedDocuments: async () => emptyBatch(),
     listAudioTracks: player.listAudioTracks,
     prepareAudio: player.prepareAudio,

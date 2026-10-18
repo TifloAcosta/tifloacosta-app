@@ -61,10 +61,12 @@ test('Android Back is consumed by Share before normal router navigation', async 
 
 test('normal content refresh never replaces an active Share screen or steals focus from text input', async () => {
   const app = await read('src/app.mjs');
-  assert.match(
-    app,
-    /if\s*\(!shareMode\s*&&\s*!textInputIsActive\(\)\)\s*\{[\s\S]{0,220}render\(router\.current\(\)\)[\s\S]{0,220}focusScreenHeading\(root\)/
-  );
+  // Remote catalog updates may refresh Home only; never replace Share,
+  // an active TifloLector document or the native Videos accessibility tree.
+  assert.match(app, /if \(!shareMode && router\.current\(\)\?\.name === 'home'/);
+  assert.match(app, /!nativeVideosActive && !textInputIsActive\(\)/);
+  assert.match(app, /render\(router\.current\(\)\)/);
+  assert.match(app, /if \(focusedId\) restoreOriginFocus\(root, focusedId\)/);
 });
 
 

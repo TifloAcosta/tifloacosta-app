@@ -21,7 +21,7 @@ export const HOME_ITEMS = [
   'settings'
 ];
 
-export function renderHome({ root, router, content, preferences = { lang: 'es' }, iosInboxAvailable = false, t }) {
+export function renderHome({ root, router, content, preferences = { lang: 'es' }, iosInboxAvailable = false, t, onOpenVideos = null }) {
   root.replaceChildren();
 
   const brandHeader = document.createElement('header');
@@ -68,7 +68,17 @@ export function renderHome({ root, router, content, preferences = { lang: 'es' }
     } else {
       button.textContent = t(`home.${key}`);
     }
-    button.addEventListener('click', () => router.navigate(key, { originId: button.id }));
+    button.addEventListener('click', () => {
+      if (key === 'videos' && typeof onOpenVideos === 'function') {
+        // iOS UIKit owns the Videos screen. The web view stays on the home
+        // screen underneath, so there is no duplicate accessibility tree.
+        void Promise.resolve().then(() => onOpenVideos()).then(opened => {
+          if (!opened) router.navigate(key, { originId: button.id });
+        }).catch(() => router.navigate(key, { originId: button.id }));
+        return;
+      }
+      router.navigate(key, { originId: button.id });
+    });
     nav.append(button);
   }
 

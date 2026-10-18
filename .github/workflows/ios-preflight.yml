@@ -26,7 +26,8 @@ jobs:
     # migration has its own unsigned iOS audit, which builds the new shell and
     # checks its bundle hashes. Running these legacy checks against a mobile
     # staging tree yields misleading ENOENT errors before staging exists.
-    if: github.event_name != 'pull_request' || github.head_ref != 'migration/ios-single-mobile-ui-20261017'
+    # Old web staging is superseded by the signed-source mobile UI audit.
+    if: github.event_name != 'pull_request' || (github.head_ref != 'migration/ios-single-mobile-ui-20261017' && github.head_ref != 'fix/ios-resources-tiflolector-layout-20261018')
     runs-on: macos-15
     timeout-minutes: 40
     steps:

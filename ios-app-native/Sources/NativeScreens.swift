@@ -7,6 +7,7 @@ private enum NativeDestination: String, CaseIterable, Hashable, Identifiable {
     case tifloLector = "TifloLector"
     case videos = "Vídeos"
     case recibidos = "Recibidos"
+    case podcasts = "Podcasts"
 
     var id: String { rawValue }
 }
@@ -46,6 +47,7 @@ struct NativeHomeScreen: View {
                 case .tifloLector: NativeReaderLibraryScreen()
                 case .videos: NativeVideosScreen()
                 case .recibidos: NativeInboxScreen()
+                case .podcasts: NativePodcastScreen()
                 }
             }
         }

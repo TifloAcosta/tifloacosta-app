@@ -36,3 +36,12 @@ assert.doesNotMatch(resources, /"Todas"\] \+ categories/);
 assert.match(screens, /\.accessibilityAdjustableAction \{ direction in/);
 assert.match(resources, /\.accessibilityAction\(named: Text\("Compartir"\)\)/);
 console.log('OK: Resources stays empty until user selects a category with VoiceOver');
+
+assert.match(screens, /private struct NativeBrandMark: View/);
+assert.match(screens, /Canvas \{ context, size in/);
+assert.match(screens, /dynamicTypeSize\.isAccessibilitySize/);
+assert.match(screens, /RoundedRectangle\(cornerRadius: 14\)\.fill\(NativeHomePalette\.deepRed\)/);
+assert.match(screens, /foregroundStyle\(\.primary\)/);
+assert.match(screens, /systemGroupedBackground/);
+assert.ok(!screens.includes('AsyncImage(url:'), 'The brand header must not rely on remote image loading');
+console.log('OK: native logo, dynamic layout, branded and system-adaptive colors');

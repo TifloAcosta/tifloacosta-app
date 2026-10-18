@@ -8,6 +8,10 @@ on:
     paths:
       - 'mobile/**'
       - 'ios-build/prepare-mobile-ui.mjs'
+      - 'ios-build/check-single-ui-release.mjs'
+      - 'ios-build/staging-onesignal-platform.mjs'
+      - 'ios-build/test/ios-testflight-mobile-workflow.test.mjs'
+      - '.github/workflows/ios-testflight.yml'
       - 'ios-build/staging-onesignal-platform.mjs'
       - 'ios-build/test/ios-mobile-ui-source.test.mjs'
       - 'ios-build/native/**'
@@ -21,6 +25,10 @@ on:
     paths:
       - 'mobile/**'
       - 'ios-build/prepare-mobile-ui.mjs'
+      - 'ios-build/check-single-ui-release.mjs'
+      - 'ios-build/staging-onesignal-platform.mjs'
+      - 'ios-build/test/ios-testflight-mobile-workflow.test.mjs'
+      - '.github/workflows/ios-testflight.yml'
       - 'ios-build/staging-onesignal-platform.mjs'
       - 'ios-build/test/ios-mobile-ui-source.test.mjs'
       - 'ios-build/native/**'
@@ -59,6 +67,9 @@ jobs:
         run: |
           node ios-build/prepare-mobile-ui.mjs
           node --test ios-build/test/ios-mobile-ui-source.test.mjs
+          node --check ios-build/check-single-ui-release.mjs
+          node --test ios-build/test/ios-testflight-mobile-workflow.test.mjs
+          ruby -e "require 'yaml'; YAML.load_file('.github/workflows/ios-testflight.yml')"
       - name: Subir huella de procedencia de la interfaz movil
         uses: actions/upload-artifact@v4
         with:

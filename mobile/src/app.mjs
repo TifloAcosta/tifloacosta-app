@@ -65,6 +65,7 @@ let currentNewNewsIds = new Set();
 let appInfo = { version: '', build: '' };
 let activeScreenCleanup = null;
 let screenBackHandler = null;
+let nativeVideosActive = false;
 let readerController = null;
 let shareController = null;
 let shareMode = false;
@@ -136,6 +137,7 @@ function t(key) {
 // rows own the VoiceOver rotor actions; never overlay a second web Videos UI.
 async function openNativeVideos() {
   if (!iosAccessibilityPlugin?.showNativeVideoSection) return false;
+  if (nativeVideosActive) return true;
   const videos = (Array.isArray(currentContent?.videos) ? currentContent.videos : [])
     .map(item => ({ ...item, id: videoId(item) }))
     .filter(item => /^[A-Za-z0-9_-]{11}$/.test(item.id) && String(item.title || '').trim())
@@ -146,6 +148,7 @@ async function openNativeVideos() {
     const value = css.getPropertyValue(variable).trim();
     return /^#[A-Fa-f0-9]{3}(?:[A-Fa-f0-9]{3})?$/.test(value) ? value : fallback;
   };
+  nativeVideosActive = true;
   try {
     const result = await iosAccessibilityPlugin.showNativeVideoSection({
       videos,
@@ -158,8 +161,11 @@ async function openNativeVideos() {
         brand: color('--brand', '#A61B1B')
       }
     });
-    return result?.presented === true;
+    const presented = result?.presented === true;
+    if (!presented) nativeVideosActive = false;
+    return presented;
   } catch {
+    nativeVideosActive = false;
     return false;
   }
 }
@@ -782,6 +788,7 @@ router.start('home');
 void iosContextActions?.install();
 if (iosAccessibilityPlugin?.addListener) {
   void iosAccessibilityPlugin.addListener('nativeVideoClosed', () => {
+    nativeVideosActive = false;
     // Restore focus only after UIKit has removed its isolated Videos screen.
     if (router.current()?.name === 'home')
       queueMicrotask(() => restoreOriginFocus(root, 'home-videos'));
@@ -828,9 +835,17 @@ const contentStore = createContentStore({
 contentStore.load().then(result => {
   currentContent = result.content || EMPTY_CONTENT;
   currentNewNewsIds = newsSeenStore.compare(currentContent.news);
-  if (!shareMode && !textInputIsActive()) {
+  // A background catalog refresh must not replace a reading screen, interrupt
+  // an active native UIKit controller, or move VoiceOver to an unrelated menu.
+  if (!shareMode && router.current()?.name === 'home' &&
+      !nativeVideosActive && !textInputIsActive()) {
+    const focusedId = rememberFocusedId(root);
     render(router.current());
-    queueMicrotask(() => focusScreenHeading(root));
+    queueMicrotask(() => {
+      if (router.current()?.name !== 'home' || nativeVideosActive) return;
+      if (focusedId) restoreOriginFocus(root, focusedId);
+      else focusScreenHeading(root);
+    });
   }
   void notificationCoordinator.markReady();
 });

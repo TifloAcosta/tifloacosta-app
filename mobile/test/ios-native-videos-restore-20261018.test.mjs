@@ -13,6 +13,9 @@ test('iOS Videos uses the existing native UIKit section, not a stacked web scree
   assert.match(app, /onOpenVideos: iosAccessibilityPlugin \? openNativeVideos : null/);
   assert.match(app, /videoId\(item\)/);
   assert.match(app, /nativeVideoClosed/);
+  assert.match(app, /nativeVideosActive = false/);
+  assert.match(app, /router\.current\(\)\?\.name === 'home'/);
+  assert.match(app, /if \(focusedId\) restoreOriginFocus\(root, focusedId\)/);
   assert.match(home, /if \(key === 'videos' && typeof onOpenVideos === 'function'\)/);
   assert.match(home, /if \(!opened\) router\.navigate\(key/);
   assert.match(plugin, /navigation\.view\.accessibilityViewIsModal = true/);

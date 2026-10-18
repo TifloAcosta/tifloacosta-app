@@ -11,6 +11,7 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
     public let jsName = "TifloReadingAccessibility"
     public let pluginMethods: [CAPPluginMethod] = [
         CAPPluginMethod(name: "pickDocument", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "recognizePdfPage", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "setDocumentActions", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "registerLibraryTitles", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "registerAccessibleTargets", returnType: CAPPluginReturnPromise),
@@ -485,6 +486,81 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
                 onFailure: { call.reject($0) },
                 onPresented: { call.resolve(["presented": true, "count": $0]) }
             )
+        }
+    }
+
+
+    /// On-device Apple Vision OCR; never sends document data over the network.
+    /// PDF bytes are supplied only for the requested page operation. Large
+    /// documents are refused to avoid exhausting the Capacitor JS bridge.
+    @objc public func recognizePdfPage(_ call: CAPPluginCall) {
+        let encoded = call.getString("pdfBase64") ?? ""
+        let pageIndex = call.getInt("pageIndex") ?? -1
+        let password = call.getString("password") ?? ""
+        guard !encoded.isEmpty, encoded.count <= 17_000_000,
+              pageIndex >= 0, pageIndex < 2000 else {
+            call.resolve(["status": "model-unavailable", "text": "", "blocks": []])
+            return
+        }
+        DispatchQueue.global(qos: .userInitiated).async {
+            guard let data = Data(base64Encoded: encoded), data.count <= 12 * 1024 * 1024,
+                  let pdf = PDFDocument(data: data) else {
+                call.resolve(["status": "error", "text": "", "blocks": []])
+                return
+            }
+            if pdf.isEncrypted && !pdf.unlock(withPassword: password) {
+                call.resolve(["status": "error", "text": "", "blocks": []])
+                return
+            }
+            guard let page = pdf.page(at: pageIndex) else {
+                call.resolve(["status": "error", "text": "", "blocks": []])
+                return
+            }
+            let bounds = page.bounds(for: .mediaBox)
+            guard bounds.width > 0, bounds.height > 0 else {
+                call.resolve(["status": "error", "text": "", "blocks": []])
+                return
+            }
+            let scale = min(2200 / max(bounds.width, bounds.height), 3.0)
+            let width = max(1, Int(bounds.width * scale))
+            let height = max(1, Int(bounds.height * scale))
+            guard width <= 2200, height <= 2200,
+                  let context = CGContext(data: nil, width: width, height: height,
+                                          bitsPerComponent: 8, bytesPerRow: 0,
+                                          space: CGColorSpaceCreateDeviceRGB(),
+                                          bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue) else {
+                call.resolve(["status": "error", "text": "", "blocks": []])
+                return
+            }
+            context.setFillColor(CGColor(gray: 1, alpha: 1))
+            context.fill(CGRect(x: 0, y: 0, width: width, height: height))
+            context.translateBy(x: 0, y: CGFloat(height))
+            context.scaleBy(x: CGFloat(scale), y: -CGFloat(scale))
+            page.draw(with: .mediaBox, to: context)
+            guard let image = context.makeImage() else {
+                call.resolve(["status": "error", "text": "", "blocks": []])
+                return
+            }
+            let request = VNRecognizeTextRequest()
+            request.recognitionLevel = .accurate
+            request.usesLanguageCorrection = true
+            request.automaticallyDetectsLanguage = true
+            do {
+                try VNImageRequestHandler(cgImage: image).perform([request])
+                let observations = (request.results ?? []).sorted {
+                    if abs($0.boundingBox.midY - $1.boundingBox.midY) > 0.025 {
+                        return $0.boundingBox.midY > $1.boundingBox.midY
+                    }
+                    return $0.boundingBox.minX < $1.boundingBox.minX
+                }
+                let blocks = observations.compactMap { $0.topCandidates(1).first?.string }
+                    .filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+                let output = blocks.joined(separator: "\\n")
+                call.resolve(["status": blocks.isEmpty ? "empty" : "ok",
+                              "text": output, "blocks": blocks])
+            } catch {
+                call.resolve(["status": "model-unavailable", "text": "", "blocks": []])
+            }
         }
     }
 

@@ -8,7 +8,7 @@ on:
       - 'ios-app-native/**'
       - '.github/workflows/ios-native-swiftui-build.yml'
   pull_request:
-    branches: [main]
+    branches: [main, 'ios/swiftui-native-separation-20261018']
     paths:
       - 'ios-app-native/**'
       - '.github/workflows/ios-native-swiftui-build.yml'
@@ -29,6 +29,8 @@ jobs:
             echo 'Native screen source must not contain a Capacitor / WebView UI.'
             exit 1
           fi
+      - name: Check native home and catalog search
+        run: node ios-app-native/tests/home-contract.test.mjs
       - name: Install XcodeGen
         run: brew install xcodegen
       - name: Generate independent iOS project

@@ -28,6 +28,11 @@ jobs:
           npm ci
           npm test
           npm run build
+      - name: Audit native-only release readiness (informational for legacy hybrid build)
+        working-directory: mobile
+        run: |
+          node scripts/check-ios-native-readiness.mjs
+          echo 'This workflow verifies the existing hybrid app only. It must not be used as evidence of a native-only iOS release.'
       - name: Generate iOS Capacitor project
         working-directory: mobile
         run: |

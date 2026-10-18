@@ -37,7 +37,7 @@ targets:
       path: ShareExtension/ShareExtension.entitlements
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.tifloacosta.app.ShareExtension
+        PRODUCT_BUNDLE_IDENTIFIER: com.tifloacosta.nativeprototype.ShareExtension
         INFOPLIST_FILE: ShareExtension/Info.plist
         GENERATE_INFOPLIST_FILE: NO
         CODE_SIGNING_ALLOWED: NO

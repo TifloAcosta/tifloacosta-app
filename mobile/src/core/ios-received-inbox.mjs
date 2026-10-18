@@ -48,6 +48,15 @@ export function createIosReceivedInbox({ native = null, library = null, decodeBa
     } catch { return { available: false, items: [] }; }
   }
 
+  async function details(item) {
+    if (!isReceipt(item?.id) || !native?.openItem || item.kind === 'file') return null;
+    try {
+      const opened = await native.openItem({ id: item.id });
+      if (opened?.id !== item.id || opened.kind === 'file') return null;
+      return { ...item, kind: opened.kind, value: String(opened.value || '') };
+    } catch { return null; }
+  }
+
   async function readFile(item) {
     if (!isReceipt(item?.id) || item?.kind !== 'file' || !native?.readItemChunk) {
       throw Error('invalid-received-file');
@@ -129,5 +138,5 @@ export function createIosReceivedInbox({ native = null, library = null, decodeBa
     catch { return false; }
   }
 
-  return { pending, readFile, saveFile, openLink, resolveYouTubeTitle, deleteConfirmed };
+  return { pending, details, readFile, saveFile, openLink, resolveYouTubeTitle, deleteConfirmed };
 }

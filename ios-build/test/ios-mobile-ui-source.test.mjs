@@ -34,6 +34,9 @@ test('bundle identity pins every included entrypoint and forbids remote web shel
   }
   const config = JSON.parse(await readFile(fileURLToPath(new URL('../../mobile/capacitor.config.json', import.meta.url)), 'utf8'));
   assert.equal(config.server?.url, undefined);
+  // WebKit's origin must not move: legacy IndexedDB lives at capacitor://localhost.
+  assert.equal(config.server?.iosScheme, 'capacitor');
+  assert.equal(config.server?.hostname, 'localhost');
   assert.equal(config.webDir, 'dist');
 });
 test('mobile screens are single-root and navigation never loads the public web home', async () => {

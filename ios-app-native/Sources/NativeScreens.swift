@@ -1,62 +1,144 @@
 import SwiftUI
 import UIKit
 
+// Orden acordado de la portada TifloAcosta, con navegación SwiftUI.
 private enum NativeDestination: String, CaseIterable, Hashable, Identifiable {
     case actualidad = "Actualidad"
     case recursos = "Recursos"
     case tifloLector = "TifloLector"
-    case videos = "Vídeos"
     case recibidos = "Recibidos"
-    case podcasts = "Podcasts"
     case novedades = "Novedades"
+    case descargas = "Descargar desde un enlace"
+    case favoritos = "Favoritos"
+    case videos = "Vídeos"
+    case podcasts = "Podcast"
+    case libro = "Mi libro"
+    case contacto = "Contacto y redes"
+    case privacidad = "Privacidad y accesibilidad"
     case configuracion = "Configuración"
-    case descargas = "Descargas"
 
     var id: String { rawValue }
 }
 
+private enum NativeHomePalette {
+    static let red = Color(red: 166.0 / 255.0, green: 27.0 / 255.0, blue: 27.0 / 255.0)
+    static let deepRed = Color(red: 127.0 / 255.0, green: 20.0 / 255.0, blue: 20.0 / 255.0)
+}
+
 struct NativeHomeScreen: View {
     @EnvironmentObject private var catalog: NativeCatalogStore
+    @State private var searchText = ""
+    @State private var submittedSearch = ""
+    @State private var showingSearch = false
+
+    private func search() {
+        let term = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !term.isEmpty else { return }
+        submittedSearch = term
+        showingSearch = true
+    }
 
     var body: some View {
         NavigationStack {
             List {
                 Section {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("TifloAcosta App")
+                            .font(.title2.bold())
+                            .accessibilityAddTraits(.isHeader)
+                        Text("Recursos de accesibilidad y tecnología, organizados para llegar a ellos sin perderse por el camino.")
+                            .font(.subheadline)
+                    }
+                    .foregroundStyle(.white)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(16)
+                    .background(
+                        RoundedRectangle(cornerRadius: 14).fill(NativeHomePalette.deepRed)
+                    )
+                    .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                    .listRowBackground(Color.clear)
+                }
+
+                Section("Buscar con TifloAcosta") {
+                    TextField("Introduce tu búsqueda", text: $searchText)
+                        .submitLabel(.search)
+                        .textInputAutocapitalization(.sentences)
+                        .onSubmit(search)
+                        .accessibilityLabel("Introduce tu búsqueda")
+                    Button(action: search) {
+                        Text("Buscar")
+                            .frame(maxWidth: .infinity, minHeight: 44)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(NativeHomePalette.red)
+                    .disabled(searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                }
+
+                Section("Secciones") {
                     ForEach(NativeDestination.allCases) { destination in
                         NavigationLink(value: destination) {
-                            Text(destination.rawValue)
-                                .font(.body)
-                                .frame(minHeight: 44, alignment: .leading)
+                            HStack(spacing: 12) {
+                                RoundedRectangle(cornerRadius: 2)
+                                    .fill(NativeHomePalette.red)
+                                    .frame(width: 4, height: 30)
+                                    .accessibilityHidden(true)
+                                Text(destination.rawValue)
+                                    .font(.body)
+                                    .foregroundStyle(.primary)
+                            }
+                            .frame(maxWidth: .infinity, minHeight: 48, alignment: .leading)
                         }
+                        .accessibilityLabel(destination.rawValue)
                     }
-                } header: {
-                    Text("TifloAcosta")
                 }
 
                 if let error = catalog.error {
                     Section {
-                        Text(error).accessibilityAddTraits(.updatesFrequently)
+                        Text(error).foregroundStyle(.secondary)
                         Button("Actualizar contenido") {
                             Task { await catalog.refresh() }
                         }
                     }
                 }
             }
-            .navigationTitle("TifloAcosta")
+            .listStyle(.insetGrouped)
+            .scrollContentBackground(.hidden)
+            .background(Color(uiColor: .systemGroupedBackground))
+            .navigationTitle("Inicio")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(isPresented: $showingSearch) {
+                NativeSearchResultsScreen(query: submittedSearch)
+            }
             .navigationDestination(for: NativeDestination.self) { destination in
                 switch destination {
                 case .actualidad: NativeNewsScreen()
                 case .recursos: NativeResourcesScreen()
                 case .tifloLector: NativeReaderLibraryScreen()
-                case .videos: NativeVideosScreen()
                 case .recibidos: NativeInboxScreen()
-                case .podcasts: NativePodcastScreen()
                 case .novedades: NativeUpdatesScreen()
-                case .configuracion: NativeSettingsScreen()
                 case .descargas: NativeDownloadsScreen()
+                case .videos: NativeVideosScreen()
+                case .podcasts: NativePodcastScreen()
+                case .configuracion: NativeSettingsScreen()
+                case .favoritos, .libro, .contacto, .privacidad:
+                    NativePendingSectionScreen(title: destination.rawValue)
                 }
             }
         }
+    }
+}
+
+private struct NativePendingSectionScreen: View {
+    let title: String
+
+    var body: some View {
+        ContentUnavailableView(
+            "Sección en preparación",
+            systemImage: "square.stack",
+            description: Text("La versión nativa de esta sección todavía no está terminada.")
+        )
+        .navigationTitle(title)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

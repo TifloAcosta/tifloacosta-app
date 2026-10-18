@@ -138,8 +138,8 @@ struct NativeResourcesScreen: View {
                     Text("No hay recursos en la categoría elegida.")
                 }
                 ForEach(filtered) { item in
-                    Button {
-                        if let url = item.resourceURL { openURL(url) }
+                    NavigationLink {
+                        NativeRemoteResourceScreen(item: item)
                     } label: {
                         VStack(alignment: .leading, spacing: 4) {
                             Text(item.title).font(.body)
@@ -148,9 +148,8 @@ struct NativeResourcesScreen: View {
                             }
                         }
                     }
-                    .disabled(item.resourceURL == nil)
                     .accessibilityLabel(item.title)
-                    .accessibilityHint("Abre el recurso seleccionado.")
+                    .accessibilityHint("Doble toque para leer el recurso dentro de TifloAcosta.")
                     .accessibilityAction(named: Text("Compartir")) {
                         if let url = item.resourceURL { NativeShare.present(url: url) }
                     }

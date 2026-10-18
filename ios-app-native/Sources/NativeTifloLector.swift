@@ -49,6 +49,8 @@ final class NativeReaderLibrary: ObservableObject {
             let text: String
             if url.pathExtension.lowercased() == "pdf" {
                 text = PDFDocument(data: data)?.string ?? ""
+            } else if ["html", "htm", "rtf"].contains(url.pathExtension.lowercased()) {
+                text = NativeDocumentText.extract(data, from: url)
             } else {
                 text = String(data: data, encoding: .utf8)
                     ?? String(data: data, encoding: .utf16)
@@ -229,7 +231,7 @@ struct NativeReaderLibraryScreen: View {
         }
         .fileImporter(
             isPresented: $importPresented,
-            allowedContentTypes: [.plainText, .pdf],
+            allowedContentTypes: [.plainText, .pdf, .html, .rtf],
             allowsMultipleSelection: true
         ) { result in
             switch result {

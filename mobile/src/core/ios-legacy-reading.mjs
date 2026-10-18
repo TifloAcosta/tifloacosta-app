@@ -41,6 +41,24 @@ export function createIosLegacyReadingBridge({
 } = {}) {
   // Local audio is lazy; construction never opens or alters the old database.
   const player = audioPlayback || createIosLocalAudio({ library });
+
+  // A file received from Files is only reported as successfully imported after
+  // its persisted content is opened again. Never trust a successful write alone.
+  // In particular, size equality does not prove MP3 binary integrity.
+  async function importedBytesAreIntact(imported, ext, originalBlob, originalText = '') {
+    const id = String(imported?.id || '');
+    if (!id || typeof library.openBook !== 'function') return false;
+    const reopened = await library.openBook(id);
+    if (reopened?.book?.id !== id) return false;
+    if (ext !== 'mp3') return reopened.content === originalText;
+    if (typeof library.openAudioFile !== 'function') return false;
+    const media = await library.openAudioFile(id);
+    if (media?.book?.id !== id || media?.blob?.size !== originalBlob.size) return false;
+    const original = new Uint8Array(await originalBlob.arrayBuffer());
+    const stored = new Uint8Array(await media.blob.arrayBuffer());
+    return original.length === stored.length &&
+      original.every((byte, index) => byte === stored[index]);
+  }
   async function pickDocuments() {
     if (typeof accessibility?.pickDocument !== 'function' ||
         typeof capacitor?.convertFileSrc !== 'function') {
@@ -69,6 +87,7 @@ export function createIosLegacyReadingBridge({
       if (!blob?.size || blob.size > MAX_IMPORT_BYTES) {
         return resultError(name, 'Archivo vacío o superior al límite de 32 MB.');
       }
+      const textContent = ext === 'mp3' ? '' : await blob.text();
       let imported;
       if (ext === 'mp3') {
         const audio = blob.slice(0, blob.size, 'audio/mpeg');
@@ -79,12 +98,15 @@ export function createIosLegacyReadingBridge({
         imported = await library.importDocument({
           title: name.replace(/\.[^.]+$/, ''),
           format: ext,
-          content: await blob.text(),
+          content: textContent,
           sizeBytes: blob.size
         });
       }
-      return imported ? { ...emptyBatch(), selectedNames: [name], imported: [imported] }
-        : resultError(name, 'No se han podido guardar los datos del archivo.');
+      if (!imported?.id) return resultError(name, 'No se han podido guardar los datos del archivo.');
+      if (!await importedBytesAreIntact(imported, ext, blob, textContent)) {
+        return resultError(name, 'El archivo guardado no coincide con el original; revisa la importación.');
+      }
+      return { ...emptyBatch(), selectedNames: [name], imported: [imported] };
     } catch {
       return resultError(name, 'La lectura o el guardado ha fallado; el original no se ha eliminado.');
     }

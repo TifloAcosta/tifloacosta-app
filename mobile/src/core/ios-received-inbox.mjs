@@ -19,10 +19,10 @@ function isWebAddress(value) {
 }
 
 export function youtubeIdFromReceivedText(value) {
-  const candidates = String(value || '').match(/https?:\\/\\/[^\\s<>"']+/gi) || [];
+  const candidates = String(value || '').match(/https?:\/\/[^\s<>"']+/gi) || [];
   for (const candidate of candidates) {
     try {
-      const url = new URL(candidate.replace(/[)\\]},;.!?]+$/, ''));
+      const url = new URL(candidate.replace(/[)\]},;.!?]+$/, ''));
       const host = url.hostname.toLowerCase();
       if (!['https:', 'http:'].includes(url.protocol) ||
           !['youtube.com', 'www.youtube.com', 'm.youtube.com', 'music.youtube.com',

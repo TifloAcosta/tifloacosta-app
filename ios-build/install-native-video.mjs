@@ -67,9 +67,12 @@ const videosBody = nativeVideos.replace(/^import (?:Foundation|UIKit)\n/gm, '').
 const delegateWithTranslation = delegateWithAudio.includes('import Translation')
   ? delegateWithAudio
   : delegateWithAudio.replace('import UIKit', 'import UIKit\nimport SwiftUI\nimport NaturalLanguage\nimport Translation');
-const delegateWithAccessibility = delegateWithTranslation.includes('import UniformTypeIdentifiers')
+const delegateWithVision = delegateWithTranslation.includes('import Vision')
   ? delegateWithTranslation
-  : delegateWithTranslation.replace('import UIKit', 'import UIKit\nimport UniformTypeIdentifiers');
+  : delegateWithTranslation.replace('import UIKit', 'import UIKit\nimport Vision\nimport PDFKit');
+const delegateWithAccessibility = delegateWithVision.includes('import UniformTypeIdentifiers')
+  ? delegateWithVision
+  : delegateWithVision.replace('import UIKit', 'import UIKit\nimport UniformTypeIdentifiers');
 await writeFile(appDelegatePath, delegateWithAccessibility.trimEnd() + '\n\n' + swiftBody + '\n\n' + authBody + '\n\n' + actionsBody + '\n\n' + speechBody + '\n\n' + translationBody + '\n\n' + accessibilityBody + '\n\n' + shareInboxBody + '\n\n' + nativeListBody + '\n\n' + videosBody + '\n');
 await copyFile(iframeSource, iframeTarget);
 

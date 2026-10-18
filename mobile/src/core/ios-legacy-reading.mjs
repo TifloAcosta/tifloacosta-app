@@ -86,6 +86,38 @@ export function createIosLegacyReadingBridge({
     }
   }
 
+  // Shared file receipts are acknowledged ONLY after the original IndexedDB
+  // record and, where relevant, its actual binary media have been read back.
+  async function importReceivedBlob({ name = '', blob = null } = {}) {
+    const filename = String(name || '').trim();
+    const ext = extension(filename);
+    if (!filename || !blob || !blob.size || blob.size > MAX_IMPORT_BYTES ||
+        (!TEXT_EXTENSIONS.has(ext) && ext !== 'mp3')) {
+      return { saved: false, reason: 'unsupported-or-empty' };
+    }
+    try {
+      const title = filename.replace(/\\.[^.]+$/, '');
+      const textContent = ext === 'mp3' ? '' : await blob.text();
+      const incoming = ext === 'mp3'
+        ? await library.importAudioFile({ file: blob.slice(0, blob.size, 'audio/mpeg'), title })
+        : await library.importDocument({ title, format: ext, content: textContent, sizeBytes: blob.size });
+      if (!incoming?.id) return { saved: false, reason: 'import-failed' };
+      const reopened = await library.openBook(incoming.id);
+      if (reopened?.book?.id !== incoming.id) {
+        return { saved: false, reason: 'readback-failed' };
+      }
+      if (ext === 'mp3') {
+        const media = await library.openAudioFile(incoming.id);
+        if (media?.blob?.size !== blob.size) return { saved: false, reason: 'media-readback-failed' };
+      } else if (reopened.content !== textContent) {
+        return { saved: false, reason: 'text-readback-failed' };
+      }
+      return { saved: true, id: incoming.id, title: incoming.title };
+    } catch {
+      return { saved: false, reason: 'import-or-readback-failed' };
+    }
+  }
+
   async function listTtsVoices() {
     if (typeof nativeTts?.listTtsVoices !== 'function') return { voices: [] };
     try { return await nativeTts.listTtsVoices(); }
@@ -113,7 +145,7 @@ export function createIosLegacyReadingBridge({
     'saveDerivedContent', 'getDerivedContent', 'listDerivedContent',
     'deleteDerivedContent', 'getActiveBookId'
   ];
-  const result = { pickDocuments, listTtsVoices, openTtsVoiceInstaller,
+  const result = { pickDocuments, importReceivedBlob, listTtsVoices, openTtsVoiceInstaller,
     addListener, consumeInitialSharedDocuments: async () => emptyBatch() };
   for (const name of passthrough) {
     result[name] = (...args) => library[name](...args);

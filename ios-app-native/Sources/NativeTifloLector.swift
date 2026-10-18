@@ -70,6 +70,13 @@ final class NativeReaderLibrary: ObservableObject {
         try save()
     }
 
+    func rename(_ document: NativeReadingDocument, to proposedTitle: String) {
+        let title = proposedTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !title.isEmpty, let index = documents.firstIndex(where: { $0.id == document.id }) else { return }
+        documents[index].title = title
+        try? save()
+    }
+
     func delete(_ document: NativeReadingDocument) {
         documents.removeAll { $0.id == document.id }
         try? save()
@@ -122,6 +129,21 @@ struct NativeReaderLibraryScreen: View {
     @State private var documentToDelete: NativeReadingDocument?
     @State private var confirmDeletion = false
     @State private var importError: String?
+    @State private var documentToRename: NativeReadingDocument?
+    @State private var proposedTitle = ""
+    @State private var searchText = ""
+    @State private var showSettings = false
+    @State private var filterIndex = 0
+    @State private var sortIndex = 0
+
+    private var shownDocuments: [NativeReadingDocument] {
+        let current = library.documents.filter {
+            searchText.isEmpty || $0.title.localizedCaseInsensitiveContains(searchText)
+        }
+        return sortIndex == 0 ? current : current.sorted {
+            $0.title.localizedStandardCompare($1.title) == .orderedAscending
+        }
+    }
 
     var body: some View {
         List {
@@ -129,16 +151,30 @@ struct NativeReaderLibraryScreen: View {
                 Button("Importar documento", systemImage: "square.and.arrow.down") {
                     importPresented = true
                 }
-                Text("Importación nativa inicial: TXT y PDF con texto. La biblioteca anterior permanece intacta.")
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
+            }
+
+            Section {
+                DisclosureGroup("Ajustes", isExpanded: $showSettings) {
+                    Text("Tamaño y velocidad de voz se ajustan al abrir cada documento.")
+                        .font(.footnote)
+                }
+                NativeAdjustableChoice(
+                    title: "Filtro de documentos",
+                    choices: ["Todos", "Documentos de la biblioteca"],
+                    selectedIndex: $filterIndex
+                )
+                NativeAdjustableChoice(
+                    title: "Ordenar documentos",
+                    choices: ["Más recientes", "Por título"],
+                    selectedIndex: $sortIndex
+                )
             }
 
             Section("Mi biblioteca") {
-                if library.documents.isEmpty {
-                    Text("Todavía no hay documentos importados en esta versión nativa.")
+                if shownDocuments.isEmpty {
+                    Text("No hay documentos con el filtro actual.")
                 }
-                ForEach(library.documents) { document in
+                ForEach(shownDocuments) { document in
                     NavigationLink {
                         NativeReadingScreen(document: document, speech: speech)
                     } label: {
@@ -146,11 +182,19 @@ struct NativeReaderLibraryScreen: View {
                     }
                     .accessibilityLabel(document.title)
                     .accessibilityHint("Doble toque para abrir. Acciones disponibles.")
+                    .accessibilityAction(named: Text("Abrir")) {
+                        // La activación primaria del título abre el documento.
+                        // Se conserva el enlace de navegación nativo para VoiceOver.
+                    }
                     .accessibilityAction(named: Text("Reproducir")) {
                         speech.play(document.body)
                     }
                     .accessibilityAction(named: Text("Información")) {
                         information = document
+                    }
+                    .accessibilityAction(named: Text("Cambiar título")) {
+                        documentToRename = document
+                        proposedTitle = document.title
                     }
                     .accessibilityAction(named: Text("Eliminar")) {
                         documentToDelete = document
@@ -160,6 +204,22 @@ struct NativeReaderLibraryScreen: View {
             }
         }
         .navigationTitle("TifloLector")
+        .searchable(text: $searchText, prompt: "Buscar en mi biblioteca")
+        .alert("Cambiar título", isPresented: Binding(
+            get: { documentToRename != nil },
+            set: { if !$0 { documentToRename = nil } }
+        )) {
+            TextField("Título", text: $proposedTitle)
+            Button("Guardar") {
+                if let documentToRename {
+                    library.rename(documentToRename, to: proposedTitle)
+                }
+                documentToRename = nil
+            }
+            Button("Cancelar", role: .cancel) { documentToRename = nil }
+        } message: {
+            Text("Escribe el nuevo título del documento.")
+        }
         .fileImporter(
             isPresented: $importPresented,
             allowedContentTypes: [.plainText, .pdf],
@@ -221,6 +281,8 @@ struct NativeReadingScreen: View {
 
     @AppStorage("native-reading-text-size") private var textSize = 20.0
     @State private var rateIndex = 2
+    @State private var showSettings = false
+    @State private var showText = true
     private let speechRates: [Double] = [0.75, 0.9, 1.0, 1.25, 1.5]
 
     var body: some View {
@@ -246,21 +308,23 @@ struct NativeReadingScreen: View {
                 .buttonStyle(.bordered)
                 .controlSize(.small)
 
-                NativeAdjustableChoice(
-                    title: "Velocidad de lectura",
-                    choices: ["0,75×", "0,9×", "1×", "1,25×", "1,5×"],
-                    selectedIndex: $rateIndex
-                )
+                DisclosureGroup("Ajustes de lectura", isExpanded: $showSettings) {
+                    NativeAdjustableChoice(
+                        title: "Velocidad de lectura",
+                        choices: ["0,75×", "0,9×", "1×", "1,25×", "1,5×"],
+                        selectedIndex: $rateIndex
+                    )
 
-                Slider(value: $textSize, in: 14...40, step: 2) {
-                    Text("Tamaño del texto")
-                } minimumValueLabel: {
-                    Text("A").font(.caption)
-                } maximumValueLabel: {
-                    Text("A").font(.headline)
+                    Slider(value: $textSize, in: 14...40, step: 2) {
+                        Text("Tamaño del texto")
+                    } minimumValueLabel: {
+                        Text("A").font(.caption)
+                    } maximumValueLabel: {
+                        Text("A").font(.headline)
+                    }
+                    .accessibilityLabel("Tamaño del texto")
+                    .accessibilityValue("\(Int(textSize)) puntos")
                 }
-                .accessibilityLabel("Tamaño del texto")
-                .accessibilityValue("\(Int(textSize)) puntos")
             }
             .padding()
             .background(.regularMaterial)

@@ -9,3 +9,4 @@ Solo pantallas SwiftUI nativas, sin interfaz HTML ni Capacitor en la aplicación
 ALCANCE DE PRUEBA: vídeos abren YouTube externamente por ahora; reproductor accesible nativo y otras funciones deben completarse después de instalar y verificar esta base. No se debe afirmar paridad funcional en esta compilación.
 No desinstalar la beta anterior, no eliminar datos ni tocar Android ni web. Exigir subida real, procesamiento y grupo interno confirmado antes de afirmar disponibilidad.
 Referencia auditoría: https://github.com/TifloAcosta/tifloacosta-app/issues/215
+Reintento de envío (2026-10-18): corregido el fallo de detección del archivo modificado en el evento GitHub; workflow ahora lo valida con git diff HEAD^ HEAD. Activación explícita del modo envío a Apple.

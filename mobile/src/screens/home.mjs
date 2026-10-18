@@ -11,6 +11,7 @@ export const HOME_ITEMS = [
   'actualidad',
   'library',
   'reading-library',
+  'received',
   'downloads',
   'favorites',
   'videos',
@@ -21,7 +22,7 @@ export const HOME_ITEMS = [
   'settings'
 ];
 
-export function renderHome({ root, router, content, preferences = { lang: 'es' }, t }) {
+export function renderHome({ root, router, content, preferences = { lang: 'es' }, iosInboxAvailable = false, t }) {
   root.replaceChildren();
 
   const brandHeader = document.createElement('header');
@@ -52,6 +53,7 @@ export function renderHome({ root, router, content, preferences = { lang: 'es' }
   nav.setAttribute('aria-label', t('app.title'));
 
   for (const key of HOME_ITEMS) {
+    if (key === 'received' && !iosInboxAvailable) continue;
     const button = document.createElement('button');
     button.type = 'button';
     button.id = `home-${key}`;

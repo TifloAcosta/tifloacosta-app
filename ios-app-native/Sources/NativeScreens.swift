@@ -23,10 +23,57 @@ private enum NativeDestination: String, CaseIterable, Hashable, Identifiable {
 private enum NativeHomePalette {
     static let red = Color(red: 166.0 / 255.0, green: 27.0 / 255.0, blue: 27.0 / 255.0)
     static let deepRed = Color(red: 127.0 / 255.0, green: 20.0 / 255.0, blue: 20.0 / 255.0)
+    static let logoRed = Color(red: 229.0 / 255.0, green: 57.0 / 255.0, blue: 53.0 / 255.0)
+}
+
+// Símbolo dibujado con trazos nativos, siguiendo las proporciones del
+// emblema vectorial oficial, sin cargar imágenes web ni introducir WebView.
+private struct NativeBrandMark: View {
+    var body: some View {
+        Canvas { context, size in
+            let factor = min(size.width, size.height) / 290.88
+            context.scaleBy(x: factor, y: factor)
+
+            var glyph = Path()
+            glyph.addRect(CGRect(x: 32.0832, y: 63.9936, width: 139.392, height: 32.9472))
+            glyph.addRect(CGRect(x: 70.0992, y: 86.8032, width: 35.4816, height: 136.8576))
+            glyph.move(to: CGPoint(x: 95.4432, y: 223.6608))
+            glyph.addLine(to: CGPoint(x: 130.9248, y: 223.6608))
+            glyph.addLine(to: CGPoint(x: 166.4064, y: 96.9408))
+            glyph.addLine(to: CGPoint(x: 146.1312, y: 96.9408))
+            glyph.closeSubpath()
+            glyph.move(to: CGPoint(x: 166.4064, y: 96.9408))
+            glyph.addLine(to: CGPoint(x: 227.232, y: 223.6608))
+            glyph.addLine(to: CGPoint(x: 189.216, y: 223.6608))
+            glyph.addLine(to: CGPoint(x: 156.2688, y: 140.0256))
+            glyph.closeSubpath()
+            glyph.addRect(CGRect(x: 130.9248, y: 167.904, width: 58.2912, height: 20.2752))
+            context.fill(glyph, with: .color(.white))
+
+            // Ondas curvas del emblema; el trazado queda dentro de Canvas.
+            for (radius, color) in [
+                (71.0, NativeHomePalette.logoRed),
+                (51.0, Color.white),
+                (32.0, NativeHomePalette.logoRed)
+            ] {
+                var wave = Path()
+                wave.addArc(
+                    center: CGPoint(x: 151, y: 101),
+                    radius: radius,
+                    startAngle: .degrees(-78),
+                    endAngle: .degrees(-7),
+                    clockwise: false
+                )
+                context.stroke(wave, with: .color(color), lineWidth: 12)
+            }
+        }
+        .accessibilityHidden(true)
+    }
 }
 
 struct NativeHomeScreen: View {
     @EnvironmentObject private var catalog: NativeCatalogStore
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var searchText = ""
     @State private var submittedSearch = ""
     @State private var showingSearch = false
@@ -42,12 +89,20 @@ struct NativeHomeScreen: View {
         NavigationStack {
             List {
                 Section {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("TifloAcosta App")
-                            .font(.title2.bold())
-                            .accessibilityAddTraits(.isHeader)
-                        Text("Recursos de accesibilidad y tecnología, organizados para llegar a ellos sin perderse por el camino.")
-                            .font(.subheadline)
+                    AnyLayout(
+                        dynamicTypeSize.isAccessibilitySize
+                            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8))
+                            : AnyLayout(HStackLayout(alignment: .center, spacing: 12))
+                    ) {
+                        NativeBrandMark()
+                            .frame(width: 56, height: 56)
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text("TifloAcosta App")
+                                .font(.title2.bold())
+                                .accessibilityAddTraits(.isHeader)
+                            Text("Recursos de accesibilidad y tecnología, organizados para llegar a ellos sin perderse por el camino.")
+                                .font(.subheadline)
+                        }
                     }
                     .foregroundStyle(.white)
                     .frame(maxWidth: .infinity, alignment: .leading)

@@ -262,3 +262,17 @@ Pruebas CI superadas: 39129516019, 39129516010, 39129515910 y 39129515907.
 Se autoriza firmar y subir a TestFlight exclusivamente para el grupo interno de probadores con objeto de verificar en iPhone real y VoiceOver.
 No publicar aún en App Store ni afirmar aceptación funcional en iPhone. Preservar datos existentes, identificadores, marcas, ajustes, porcentajes y archivos originales. No borrar la aplicación instalada.
 Exigir verificación de App Group y perfiles, compilación Release, exportación de IPA, subida a Apple y procesamiento real antes de confirmar disponibilidad.
+
+
+SOLICITUD EXPRESA DE COMPILACIÓN CORRECTORA iOS — 18/10/2026 — PR #212.
+Integración final en preparacion-ios: 47bbdbb0f9873a86757fcf4ccb9b93e2a8b7b89c.
+Pruebas verificadas sobre 00d27ba542ce44e1676f74346c6a52488c4e3bdd:
+- Test mobile foundation: SUCCESS, GitHub Actions 39134056341.
+- Validar preparación iOS sin publicar: SUCCESS, 39134056333.
+- Verificar Compartir nativo de TifloAcosta iOS: SUCCESS, 39134056343.
+- Validar rotor contextual iOS: SUCCESS, 39134056390.
+- Auditar interfaz única iOS con Xcode sin firma: SUCCESS, 39134056378.
+Alcance corrector: recuperar «Recursos» diferenciándolo de Mi biblioteca de TifloLector; devolver Importar, Ajustes y Filtros al orden acordado sin duplicar pantallas ni alterar IndexedDB, títulos o documentos; recuperar pantalla nativa UIKit de Vídeos con acciones VoiceOver por título y el reproductor, sin volver a incrustar vídeos.html; retirar el menú contextual duplicado y conservar la alternativa accesible si falla el controlador nativo; preservar foco, reproducción y pantalla activa durante refrescos de catálogo.
+No modificar Android, web pública, icono, identificador de app, base de datos, libros, marcas, carpeta Recibidos ni App Group.
+Se autoriza UNA nueva compilación firmada de beta INTERNA para el grupo «Probadores TifloAcosta», nunca App Store ni testers externos. No declarar funcionamiento en VoiceOver ni ausencia definitiva de «Business context menu» hasta la prueba con el iPhone real.
+Comprobar firma, compilación IPA, Apple processing VALID y asignación al grupo antes de comunicar disponibilidad. Conservar instalada la versión anterior y los datos al actualizar.

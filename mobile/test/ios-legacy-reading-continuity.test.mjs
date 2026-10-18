@@ -63,7 +63,8 @@ test('iPhone Files imports TXT into original storage, preserving its full text',
       importDocument: async payload => {
         imported = payload;
         return { id: 'web-book-new', title: payload.title, format: payload.format };
-      }
+      },
+      openBook: async id => ({ book: { id }, content: imported.content })
     },
     accessibility: picker('Mi documento.txt'),
     capacitor: { convertFileSrc: uri => 'capacitor://localhost/local/' + encodeURIComponent(uri) },
@@ -83,7 +84,9 @@ test('iOS MP3 stores Blob bytes through original media database without string c
       importAudioFile: async payload => {
         imported = payload;
         return { id: 'web-audio-existing-format', title: payload.title, format: 'audio' };
-      }
+      },
+      openBook: async id => ({ book: { id }, content: '' }),
+      openAudioFile: async id => ({ book: { id }, blob: imported.file })
     },
     accessibility: picker('Grabación.mp3'),
     capacitor: { convertFileSrc: uri => uri },
@@ -154,4 +157,52 @@ test('empty legacy PDF does not masquerade as successfully extracted text or cha
   assert.equal(opened.book.id, 'web-book-pdf-scan');
   assert.equal(opened.pdfNoText, true);
   assert.equal(opened.pageCount, 0);
+});
+
+test('iOS Files never claims a successful text import when readback differs', async () => {
+  const bridge = createIosLegacyReadingBridge({
+    library: {
+      importDocument: async () => ({ id: 'web-book-truncated' }),
+      openBook: async id => ({ book: { id }, content: 'Texto fallido' })
+    },
+    accessibility: picker('Documento.txt'),
+    capacitor: { convertFileSrc: uri => uri },
+    readFile: fromBlob(new Blob(['Texto original']))
+  });
+  const batch = await bridge.pickDocuments();
+  assert.equal(batch.imported.length, 0);
+  assert.equal(batch.rejected[0].name, 'Documento.txt');
+});
+
+test('iOS Files detects corrupt MP3 even when readback size matches', async () => {
+  const original = new Blob([new Uint8Array([10, 20, 30, 40])]);
+  const damaged = new Blob([new Uint8Array([10, 99, 30, 40])]);
+  const bridge = createIosLegacyReadingBridge({
+    library: {
+      importAudioFile: async () => ({ id: 'web-audio-damaged' }),
+      openBook: async id => ({ book: { id } }),
+      openAudioFile: async id => ({ book: { id }, blob: damaged })
+    },
+    accessibility: picker('Grabación.mp3'),
+    capacitor: { convertFileSrc: uri => uri },
+    readFile: fromBlob(original)
+  });
+  const batch = await bridge.pickDocuments();
+  assert.deepEqual(batch.imported, []);
+  assert.equal(batch.rejected[0].name, 'Grabación.mp3');
+});
+
+test('iOS Files cannot claim success when the imported book cannot be reopened', async () => {
+  const bridge = createIosLegacyReadingBridge({
+    library: {
+      importDocument: async () => ({ id: 'web-book-incomplete' }),
+      openBook: async () => null
+    },
+    accessibility: picker('Anotaciones.txt'),
+    capacitor: { convertFileSrc: uri => uri },
+    readFile: fromBlob(new Blob(['Conservar']))
+  });
+  const batch = await bridge.pickDocuments();
+  assert.deepEqual(batch.imported, []);
+  assert.equal(batch.rejected.length, 1);
 });

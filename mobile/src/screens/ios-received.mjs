@@ -8,7 +8,13 @@ function makeAction(parent, label, operation, handler, { primary = false } = {})
   button.type = 'button';
   button.textContent = label;
   button.dataset.voAction = operation;
-  if (primary) button.dataset.voTarget = 'true';
+  if (primary) {
+    const article = parent.closest('article');
+    const receiptId = article?.dataset.receiptId || '';
+    button.id = `vo-received-${receiptId}`;
+    button.setAttribute('aria-label', `${label}: ${article?.querySelector('h2')?.textContent || receiptId}`);
+    button.dataset.voTarget = 'true';
+  }
   button.addEventListener('click', handler);
   parent.append(button);
   return button;
@@ -58,6 +64,7 @@ export function renderIosReceived({
       for (const item of items) {
         const article = document.createElement('article');
         article.className = 'content-card';
+        article.dataset.receiptId = String(item.id || '');
         const heading = document.createElement('h2');
         heading.textContent = String(item.name || bilingual('Contenido recibido', 'Received item'));
         const actions = document.createElement('div');

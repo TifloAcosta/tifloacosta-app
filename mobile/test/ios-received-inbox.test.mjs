@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createIosReceivedInbox } from '../src/core/ios-received-inbox.mjs';
+import { createIosReceivedInbox, youtubeIdFromReceivedText } from '../src/core/ios-received-inbox.mjs';
 import { createIosLegacyReadingBridge } from '../src/core/ios-legacy-reading.mjs';
 
 const ID = 'f499d05d-9e01-4fcd-9de8-333333333333';
@@ -118,4 +118,25 @@ test('an explicit deletion requires the caller to supply a valid original item I
   assert.equal(deletions, 0);
   assert.equal(await inbox.deleteConfirmed({ id: ID }), true);
   assert.equal(deletions, 1);
+});
+
+test('YouTube title is resolved for a real received link without deleting or guessing', async () => {
+  const videoId = youtubeIdFromReceivedText('Ver https://youtu.be/abcdefghijk');
+  assert.equal(videoId, 'abcdefghijk');
+  assert.equal(youtubeIdFromReceivedText('https://example.com/watch?v=abcdefghijk'), '');
+  let resolved = '';
+  const inbox = createIosReceivedInbox({
+    native: {
+      resolveYouTubeTitle: async ({ videoId: requested }) => {
+        resolved = requested;
+        return { title: 'Título público del vídeo' };
+      },
+      acknowledge: async () => { throw Error('must not delete'); }
+    }
+  });
+  const title = await inbox.resolveYouTubeTitle({
+    id: ID, kind: 'url', preview: 'https://www.youtube.com/watch?v=abcdefghijk'
+  });
+  assert.equal(resolved, 'abcdefghijk');
+  assert.equal(title, 'Título público del vídeo');
 });

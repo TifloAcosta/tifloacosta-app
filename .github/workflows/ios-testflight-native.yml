@@ -30,7 +30,7 @@ jobs:
       - name: Obtener versión SwiftUI nativa comprobada
         uses: actions/checkout@v4
         with:
-          ref: 4b9178f76bbe8fe8c2a9fc9b5c0c232c196ab1d1
+          ref: 2db7cf39d817f189d04c05cf64d29dc88853fd05
           path: native-source
       - name: Comprobar separación total de pantallas HTML
         run: |
@@ -332,6 +332,16 @@ jobs:
           API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
         run: |
           xcodebuild -project TifloAcostaNative.xcodeproj -scheme TifloAcostaNative -configuration Release -destination 'generic/platform=iOS' -archivePath "$RUNNER_TEMP/TifloAcosta.xcarchive" -allowProvisioningUpdates -authenticationKeyPath "$ASC_KEY_PATH" -authenticationKeyID "$API_ID" -authenticationKeyIssuerID "$API_ISSUER" archive
+      - name: Verificar que la extensión Compartir archivada sea válida para Apple
+        run: |
+          set -euo pipefail
+          PLIST="$RUNNER_TEMP/TifloAcosta.xcarchive/Products/Applications/TifloAcostaNative.app/PlugIns/TifloAcostaShare.appex/Info.plist"
+          test -f "$PLIST" || { echo "::error::No se incluyó la extensión Compartir"; exit 1; }
+          IDENTIFIER=$(/usr/libexec/PlistBuddy -c 'Print :NSExtension:NSExtensionPointIdentifier' "$PLIST")
+          test "$IDENTIFIER" = "com.apple.share-services" || {
+            echo "::error::Extensión sin NSExtensionPointIdentifier correcto"; exit 1;
+          }
+          echo "Extensión Compartir archivada con metadatos correctos."
       - name: Verificar identidad, versión y privacidad de la app archivada
         run: |
           set -euo pipefail
@@ -365,14 +375,33 @@ jobs:
           API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
         run: |
           xcodebuild -exportArchive -archivePath "$RUNNER_TEMP/TifloAcosta.xcarchive" -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist" -exportPath "$RUNNER_TEMP/ios-export" -allowProvisioningUpdates -authenticationKeyPath "$ASC_KEY_PATH" -authenticationKeyID "$API_ID" -authenticationKeyIssuerID "$API_ISSUER"
+      - name: Verificar metadatos reales de la IPA exportada
+        run: |
+          set -euo pipefail
+          IPA=$(find "$RUNNER_TEMP/ios-export" -maxdepth 1 -name '*.ipa' -print -quit)
+          test -n "$IPA" || { echo "::error::Falta el paquete IPA"; exit 1; }
+          PLIST="$RUNNER_TEMP/ShareExported-Info.plist"
+          unzip -p "$IPA" "Payload/TifloAcostaNative.app/PlugIns/TifloAcostaShare.appex/Info.plist" > "$PLIST"
+          test -s "$PLIST" || { echo "::error::Falta el Info.plist dentro de la IPA"; exit 1; }
+          IDENTIFIER=$(/usr/libexec/PlistBuddy -c 'Print :NSExtension:NSExtensionPointIdentifier' "$PLIST")
+          test "$IDENTIFIER" = "com.apple.share-services" || {
+            echo "::error::Apple rechazaría esta IPA porque NSExtensionPointIdentifier no es válido"; exit 1;
+          }
+          echo "Paquete IPA verificado antes de su envío a Apple."
       - name: Enviar compilación a App Store Connect para TestFlight
         env:
           API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
           API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
         run: |
+          set -euo pipefail
           IPA=$(find "$RUNNER_TEMP/ios-export" -maxdepth 1 -name '*.ipa' -print -quit)
           test -n "$IPA" || { echo "No se ha generado IPA"; exit 1; }
-          xcrun altool --upload-app --type ios --file "$IPA" --apiKey "$API_ID" --apiIssuer "$API_ISSUER"
+          UPLOAD_LOG="$RUNNER_TEMP/altool-upload.log"
+          xcrun altool --upload-app --type ios --file "$IPA" --apiKey "$API_ID" --apiIssuer "$API_ISSUER" 2>&1 | tee "$UPLOAD_LOG"
+          if grep -Eiq 'UPLOAD FAILED|Failed to upload package|Validation failed|STATE_ERROR.VALIDATION_ERROR' "$UPLOAD_LOG"; then
+            echo "::error::App Store Connect ha rechazado la subida. No se marcará como exitosa."
+            exit 1
+          fi
       - name: Confirmar disponibilidad real en Apple TestFlight
         timeout-minutes: 26
         env:

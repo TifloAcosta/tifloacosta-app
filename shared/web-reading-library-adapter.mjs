@@ -164,6 +164,43 @@ export function createWebReadingLibraryAdapter({
 
   // Store real binary data in IndexedDB, never a temporary object: URL or a
   // base64-encoded string. Older document records are preserved unchanged.
+
+  // Additive binary document storage. Keep the v2 database and all legacy keys
+  // unchanged. The new book's media is written first and never removes an older
+  // book or bookmark. PDF content can be empty because the PDF bytes are kept.
+  async function importBinaryDocument({
+    file, title = '', author = '', language = '', format = 'pdf', content = ''
+  } = {}) {
+    const kind = clean(format).toLowerCase();
+    if (!['pdf', 'epub'].includes(kind) ||
+        typeof Blob === 'undefined' || !(file instanceof Blob) || !file.size) return null;
+    const book = normalizeBook({
+      id: createId('web-binary'), title: clean(title) || 'Documento',
+      author, language, format: kind, state: 'not-read',
+      importedAt: now(), sizeBytes: file.size, content: String(content ?? '')
+    });
+    await put('media', { id: book.id, blob: file.slice(0, file.size, file.type || 'application/octet-stream'),
+      mime: file.type || 'application/octet-stream' });
+    try {
+      await put('books', book);
+    } catch (error) {
+      await remove('media', book.id).catch(() => {});
+      throw error;
+    }
+    const { content: storedContent, ...metadata } = book;
+    return metadata;
+  }
+
+  async function openBinaryDocument(id) {
+    const book = normalizeBook(await get('books', clean(id)));
+    if (!book || !['pdf', 'epub'].includes(book.format)) return null;
+    const media = await get('media', book.id);
+    if (typeof Blob === 'undefined' || !(media?.blob instanceof Blob) || !media.blob.size) return null;
+    activeBookId = book.id;
+    const { content, ...metadata } = book;
+    return { book: metadata, blob: media.blob };
+  }
+
   async function importAudioFile({ file, title = '', language = '' } = {}) {
     if (typeof Blob === 'undefined' || !(file instanceof Blob) ||
         !file.size || !/^audio\/(mpeg|mp3)$/i.test(file.type || 'audio/mpeg')) return null;
@@ -480,6 +517,8 @@ export function createWebReadingLibraryAdapter({
 
   return {
     importDocument,
+    importBinaryDocument,
+    openBinaryDocument,
     importAudioFile,
     openAudioFile,
     importDaisyArchive,

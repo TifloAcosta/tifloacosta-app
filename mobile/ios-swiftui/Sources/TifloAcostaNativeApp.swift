@@ -8,27 +8,144 @@ struct TifloAcostaNativeApp: App {
     }
 }
 
-private enum NativeDestination: String, CaseIterable, Identifiable {
-    case novedades = "Novedades"
+// Pantalla de inicio nativa. Orden acordado para TifloAcosta, sin componentes HTML.
+private enum NativeDestination: String, CaseIterable, Identifiable, Hashable {
     case actualidad = "Actualidad"
     case recursos = "Recursos"
-    case videos = "Vídeos"
-    case podcasts = "Podcasts"
     case lector = "TifloLector"
+    case recibidos = "Recibidos"
+    case novedades = "Novedades"
+    case descarga = "Descargar desde un enlace"
+    case favoritos = "Favoritos"
+    case videos = "Vídeos"
+    case podcast = "Podcast"
+    case libro = "Mi libro"
+    case contacto = "Contacto y redes"
+    case privacidad = "Privacidad y accesibilidad"
     case configuracion = "Configuración"
 
     var id: String { rawValue }
+
+    // Vocabulario de navegación. No equivale todavía a buscar en los contenidos.
+    var searchKeywords: String {
+        switch self {
+        case .actualidad: return "noticias información actualidad rss tecnología"
+        case .recursos: return "recursos guías cursos tutoriales documentos aplicaciones"
+        case .lector: return "leer lectura tiflolector lector pdf epub txt documentos audiolibros"
+        case .recibidos: return "recibidos compartir compartidos archivos enlaces"
+        case .novedades: return "novedades publicaciones nuevos artículos"
+        case .descarga: return "descargar desde enlace url descarga"
+        case .favoritos: return "favoritos guardados"
+        case .videos: return "vídeos videos youtube canal reproductor"
+        case .podcast: return "podcast podcasts episodios audio"
+        case .libro: return "mi libro reflexiones la vida vista desde donde estoy"
+        case .contacto: return "contacto redes whatsapp correo facebook youtube"
+        case .privacidad: return "privacidad accesibilidad política datos"
+        case .configuracion: return "configuración ajustes idioma visual voz tamaño texto"
+        }
+    }
+}
+
+private enum NativeHomeStyle {
+    static let red = Color(red: 166.0 / 255.0, green: 27.0 / 255.0, blue: 27.0 / 255.0)
+    static let deepRed = Color(red: 127.0 / 255.0, green: 20.0 / 255.0, blue: 20.0 / 255.0)
 }
 
 struct NativeHomeView: View {
+    @State private var searchText = ""
+    @State private var submittedQuery = ""
+
+    private var matchingSections: [NativeDestination] {
+        let words = normalized(submittedQuery)
+            .split(whereSeparator: { $0.isWhitespace })
+            .map(String.init)
+        guard !words.isEmpty else { return [] }
+        return NativeDestination.allCases.filter { section in
+            let searchable = normalized(section.rawValue + " " + section.searchKeywords)
+            return words.allSatisfy { searchable.contains($0) }
+        }
+    }
+
+    private func normalized(_ text: String) -> String {
+        text.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: Locale(identifier: "es_ES"))
+    }
+
+    private func submitSearch() {
+        submittedQuery = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
     var body: some View {
         NavigationStack {
-            List(NativeDestination.allCases) { section in
-                NavigationLink(value: section) {
-                    Text(section.rawValue)
+            List {
+                Section {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("TifloAcosta App")
+                            .font(.title2.bold())
+                            .accessibilityAddTraits(.isHeader)
+                        Text("Recursos de accesibilidad y tecnología, organizados para llegar a ellos sin perderse por el camino.")
+                            .font(.subheadline)
+                    }
+                    .foregroundStyle(.white)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(16)
+                    .background(
+                        RoundedRectangle(cornerRadius: 14)
+                            .fill(NativeHomeStyle.deepRed)
+                    )
+                    .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                    .listRowBackground(Color.clear)
+                }
+
+                Section("Buscar con TifloAcosta") {
+                    TextField("Introduce tu búsqueda", text: $searchText)
+                        .textInputAutocapitalization(.sentences)
+                        .submitLabel(.search)
+                        .onSubmit(submitSearch)
+                        .accessibilityLabel("Introduce tu búsqueda")
+                    Button(action: submitSearch) {
+                        Text("Buscar")
+                            .frame(maxWidth: .infinity, minHeight: 44)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(NativeHomeStyle.red)
+                    .disabled(searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                }
+
+                if !submittedQuery.isEmpty {
+                    Section("Accesos relacionados") {
+                        if matchingSections.isEmpty {
+                            Text("No hay secciones relacionadas con esa búsqueda.")
+                                .foregroundStyle(.secondary)
+                        } else {
+                            ForEach(matchingSections) { destination in
+                                NavigationLink(value: destination) {
+                                    Text(destination.rawValue)
+                                        .frame(minHeight: 44, alignment: .leading)
+                                }
+                            }
+                        }
+                        Text("La búsqueda dentro de recursos, noticias y vídeos se conectará al completar esas secciones. Por ahora se buscan accesos de la aplicación.")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+
+                Section("Secciones") {
+                    ForEach(NativeDestination.allCases) { destination in
+                        NavigationLink(value: destination) {
+                            Text(destination.rawValue)
+                                .font(.body)
+                                .frame(maxWidth: .infinity, minHeight: 48, alignment: .leading)
+                        }
+                        .accessibilityLabel(destination.rawValue)
+                    }
                 }
             }
-            .navigationTitle("TifloAcosta")
+            .listStyle(.insetGrouped)
+            .scrollContentBackground(.hidden)
+            .background(Color(uiColor: .systemGroupedBackground))
+            .navigationTitle("Inicio")
+            .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(for: NativeDestination.self) { section in
                 switch section {
                 case .lector: NativeReaderView()

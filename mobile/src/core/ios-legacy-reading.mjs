@@ -138,7 +138,7 @@ export function createIosLegacyReadingBridge({
   }
 
   const passthrough = [
-    'listBooks', 'openBook', 'saveProgress', 'getLatestInProgress',
+    'listBooks', 'saveProgress', 'getLatestInProgress',
     'listQueue', 'addToQueue', 'removeFromQueue', 'moveQueueItem',
     'updateBookMetadata', 'listMarks', 'addMark', 'deleteMark',
     'getReadingSettings', 'setReadingSetting', 'resetBookReadingSettings',
@@ -150,6 +150,29 @@ export function createIosLegacyReadingBridge({
   for (const name of passthrough) {
     result[name] = (...args) => library[name](...args);
   }
+  // Previous versions stored already-extracted PDF text in the original books
+  // store. The mobile reading client expects a PDF page payload, not a plain
+  // `content` string. Adapt that legacy record only at read time: never rewrite
+  // its ID, text, page progress, marks, or IndexedDB schema on app startup.
+  result.openBook = async id => {
+    const opened = await library.openBook(id);
+    if (opened?.book?.format !== 'pdf' || opened.pdf || opened.pdfNoText ||
+        opened.passwordRequired) return opened;
+    const content = String(opened.content ?? '');
+    if (!content.trim()) return { ...opened, pdfNoText: true, pageCount: 0 };
+    const pages = content.split('\\f').map((text, index) => ({ number: index + 1, text }));
+    return {
+      ...opened,
+      pdf: {
+        title: String(opened.book.title || ''),
+        author: String(opened.book.author || ''),
+        language: String(opened.book.language || ''),
+        pageCount: pages.length,
+        orderReliable: false,
+        pages
+      }
+    };
+  };
   // The staged reader can show, search and continue existing documents using
   // their ORIGINAL IDs. Unsupported native operations remain explicitly absent
   // rather than being presented as successfully migrated.

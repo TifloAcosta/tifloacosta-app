@@ -14,6 +14,7 @@ struct NativeCatalogItem: Decodable, Identifiable {
     let excerpt: String?
     let summary: String?
     let body: String?
+    let isNew: Bool?
 
     var resourceURL: URL? {
         URL(string: openUrl ?? url ?? "")

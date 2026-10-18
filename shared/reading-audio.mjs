@@ -68,6 +68,22 @@ export function audiobookPercent(tracks, trackIndex, positionMs, currentDuration
   return total ? Math.min(100, Math.max(0, (completed / total) * 100)) : previous;
 }
 
+// A percentage is trustworthy only if every track and its duration are known.
+// Return null instead of presenting the current clip's percent as the whole book.
+export function verifiedAudiobookPercent(tracks, trackIndex, positionMs, currentDurationMs, trackCount) {
+  const declaredCount = nonNegativeInteger(trackCount, Array.isArray(tracks) ? tracks.length : 0);
+  if (declaredCount === 1) {
+    return currentDurationMs > 0 ? percentFor(positionMs, currentDurationMs) : null;
+  }
+  if (declaredCount <= 0 || !Array.isArray(tracks) || tracks.length !== declaredCount) return null;
+  const ordered = normalizeTracks(tracks);
+  if (ordered.some((track, index) => track.trackIndex !== index)) return null;
+  const durations = ordered.map(track => track.trackIndex === trackIndex && currentDurationMs > 0
+    ? nonNegativeInteger(currentDurationMs, 0) : track.durationMs);
+  if (durations.some(duration => duration <= 0)) return null;
+  return audiobookPercent(ordered, trackIndex, positionMs, currentDurationMs, 0, declaredCount);
+}
+
 function defaultTimers() {
   return {
     setTimeout: (callback, delayMs) => globalThis.setTimeout(callback, delayMs),

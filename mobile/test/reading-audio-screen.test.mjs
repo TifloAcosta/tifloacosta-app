@@ -96,3 +96,13 @@ test('audio reader lets one book override speed and the configured 10 30 or 60 s
   assert.match(screen, /controller\.skip\(-1\)/);
   assert.match(screen, /controller\.skip\(1\)/);
 });
+
+test('audio progress distinguishes current track time from verified entire audiobook percent', async () => {
+  const screen = await read('src/screens/reading-audio.mjs');
+  assert.match(screen, /verifiedAudiobookPercent\(audioTracks, trackIndex, positionMs, durationMs, trackCount\)/);
+  assert.match(screen, /Pista \$\{trackIndex \+ 1\} de \$\{trackCount\}/);
+  assert.match(screen, /Progreso total del audiolibro no disponible/);
+  assert.match(screen, /Progreso total del audiolibro:/);
+  assert.match(screen, /status\.setAttribute\('aria-live', snapshot\.playing \? 'off' : 'polite'\)/);
+  assert.doesNotMatch(screen, /Elegir capítulo o archivo de audio/);
+});

@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// A separate, truly native entry point. It does not instantiate Capacitor or WKWebView.
+/// A separate, truly native application entry point with no browser-based presentation.
 /// The existing TestFlight application keeps its original bundle identifier until feature parity.
 @main
 struct TifloAcostaNativeApp: App {

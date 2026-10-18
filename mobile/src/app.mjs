@@ -20,6 +20,7 @@ import { createShareSession } from './core/share-session.mjs';
 import { createReaderSession } from './core/reader-session.mjs';
 import { createReadingLibraryClient } from './core/reading-library-client.mjs';
 import { createIosLegacyReadingBridge } from './core/ios-legacy-reading.mjs';
+import { createIosNativeTtsBridge } from './core/ios-native-tts.mjs';
 import { createIosReceivedInbox } from './core/ios-received-inbox.mjs';
 import { freshestUnseenReceipt } from './core/ios-share-intent.mjs';
 import { createIosContextActions } from './core/ios-context-actions.mjs';
@@ -94,11 +95,14 @@ const shareSession = createShareSession();
 // On iPhone use the existing WebKit IndexedDB (books/media/marks/settings/derived)
 // instead of Android-only TifloReading native plugins; this staging bridge
  // preserves the original on-device library and never purges it on startup.
+const iosNativeTts = Capacitor.getPlatform() === 'ios'
+  ? createIosNativeTtsBridge(registerPlugin('TifloReadingTts'))
+  : null;
 const readingBackend = Capacitor.getPlatform() === 'ios'
   ? createIosLegacyReadingBridge({
       accessibility: registerPlugin('TifloReadingAccessibility'),
       capacitor: Capacitor,
-      nativeTts: registerPlugin('TifloReadingTts')
+      nativeTts: iosNativeTts
     })
   : TifloReading;
 const readingClient = createReadingLibraryClient(readingBackend);
@@ -584,6 +588,7 @@ function render(route) {
         client: readingClient,
         bookId: pendingReadingBookId,
         initialPercent,
+        iosNativeTts,
         onOpenBook: openReadingBook,
         onOpenQueue: () => router.navigate('reading-queue')
       });

@@ -1,4 +1,5 @@
 import { App } from '@capacitor/app';
+import { Capacitor, registerPlugin } from '@capacitor/core';
 import { Browser } from '@capacitor/browser';
 import { Share } from '@capacitor/share';
 import OneSignal from '@onesignal/capacitor-plugin';
@@ -18,6 +19,7 @@ import { classifySharedText } from './core/share-classifier.mjs';
 import { createShareSession } from './core/share-session.mjs';
 import { createReaderSession } from './core/reader-session.mjs';
 import { createReadingLibraryClient } from './core/reading-library-client.mjs';
+import { createIosLegacyReadingBridge } from './core/ios-legacy-reading.mjs';
 import { loadReadableTarget, readablePageFromNewsItem } from './core/readable-loader.mjs';
 import { searchResultAction } from './core/search.mjs';
 import { TifloSave } from './core/save-plugin.mjs';
@@ -85,7 +87,17 @@ const favoritesStore = createFavoritesStore(storage);
 const newsSeenStore = createNewsSeenStore(storage);
 const readerSession = createReaderSession();
 const shareSession = createShareSession();
-const readingClient = createReadingLibraryClient(TifloReading);
+// On iPhone use the existing WebKit IndexedDB (books/media/marks/settings/derived)
+// instead of Android-only TifloReading native plugins; this staging bridge
+ // preserves the original on-device library and never purges it on startup.
+const readingBackend = Capacitor.getPlatform() === 'ios'
+  ? createIosLegacyReadingBridge({
+      accessibility: registerPlugin('TifloReadingAccessibility'),
+      capacitor: Capacitor,
+      nativeTts: registerPlugin('TifloReadingTts')
+    })
+  : TifloReading;
+const readingClient = createReadingLibraryClient(readingBackend);
 const nativeActions = createNativeActions({
   appPlugin: App,
   sharePlugin: Share,

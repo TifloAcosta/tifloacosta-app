@@ -154,3 +154,32 @@ test('shared explanatory text opens only its verified HTTPS link and retains the
   assert.equal(url, 'https://example.org/guia?lang=es');
   assert.equal(acknowledged, false);
 });
+
+test('same-sized but corrupted MP3 cannot be acknowledged or silently lost', async () => {
+  let acknowledgementCount = 0;
+  const original = Uint8Array.from([0, 1, 2, 3]);
+  const corrupt = Uint8Array.from([0, 1, 3, 2]);
+  const bridge = createIosLegacyReadingBridge({
+    library: {
+      importAudioFile: async () => ({ id: 'web-audio-same-size', title: 'Audio' }),
+      openBook: async id => ({ book: { id } }),
+      openAudioFile: async id => ({ book: { id },
+        blob: new Blob([corrupt], { type: 'audio/mpeg' }) })
+    }
+  });
+  const inbox = createIosReceivedInbox({
+    library: bridge,
+    native: {
+      readItemChunk: async () => ({
+        size: original.length, nextOffset: original.length,
+        data: Buffer.from(original).toString('base64'),
+        done: true, contentType: 'audio/mpeg'
+      }),
+      acknowledge: async () => { acknowledgementCount += 1; return { acknowledged: true }; }
+    }
+  });
+  const received = await inbox.saveFile({ id: ID, kind: 'file', name: 'Audio.mp3' });
+  assert.equal(received.saved, false);
+  assert.equal(received.acknowledged, false);
+  assert.equal(acknowledgementCount, 0);
+});

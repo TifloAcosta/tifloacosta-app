@@ -130,7 +130,7 @@ test('existing iOS PDF text remains readable through new mobile PDF page contrac
     openBook: async id => {
       operations.push(['openBook', id]);
       return { book: { id, format: 'pdf', title: 'PDF antiguo', percent: 57,
-        author: 'Autor', language: 'es' }, content: 'Página inicial\\fPágina final' };
+        author: 'Autor', language: 'es' }, content: 'Página inicial' + String.fromCharCode(12) + 'Página final' };
     }
   };
   const client = createReadingLibraryClient(createIosLegacyReadingBridge({ library: legacy }));

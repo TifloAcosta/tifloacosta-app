@@ -30,7 +30,7 @@ jobs:
       - name: Obtener versión SwiftUI nativa comprobada
         uses: actions/checkout@v4
         with:
-          ref: 2db7cf39d817f189d04c05cf64d29dc88853fd05
+          ref: 9eb035517f7a9350b32b3dd7d410ac12dff4b514
           path: native-source
       - name: Comprobar separación total de pantallas HTML
         run: |

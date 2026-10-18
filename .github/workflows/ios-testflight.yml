@@ -29,6 +29,8 @@ jobs:
           SDK_VERSION="$(xcrun --sdk iphoneos --show-sdk-version)"
           case "$SDK_VERSION" in 26.*|27.*|28.*) echo "SDK válido: $SDK_VERSION";; *) echo "::error::SDK iOS antiguo: $SDK_VERSION"; exit 1;; esac
       - uses: actions/checkout@v4
+      - name: Comprobar que no se envía una interfaz web ni una migración no autorizada
+        run: node ios-build/check-single-ui-release.mjs
       - uses: actions/setup-node@v4
         with:
           node-version: '22'

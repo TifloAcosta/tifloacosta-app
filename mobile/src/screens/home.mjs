@@ -11,7 +11,6 @@ export const HOME_ITEMS = [
   'actualidad',
   'library',
   'reading-library',
-  'received',
   'downloads',
   'favorites',
   'videos',
@@ -52,8 +51,12 @@ export function renderHome({ root, router, content, preferences = { lang: 'es' }
   nav.className = 'home-menu section-stack';
   nav.setAttribute('aria-label', t('app.title'));
 
-  for (const key of HOME_ITEMS) {
-    if (key === 'received' && !iosInboxAvailable) continue;
+  // Keep the Android/general home order unchanged. Received exists only in
+  // the iPhone App Group navigation and does not duplicate any Web page.
+  const entries = iosInboxAvailable
+    ? HOME_ITEMS.flatMap(key => key === 'reading-library' ? [key, 'received'] : [key])
+    : HOME_ITEMS;
+  for (const key of entries) {
     const button = document.createElement('button');
     button.type = 'button';
     button.id = `home-${key}`;

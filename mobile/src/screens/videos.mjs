@@ -17,6 +17,7 @@ function addFavoriteButton(parent, item, favoritesStore, t) {
     update();
   });
   update();
+  button.dataset.voAction = 'favorite';
   parent.append(button);
 }
 
@@ -198,13 +199,16 @@ export function renderVideos({
       url: `https://www.youtube.com/watch?v=${encodeURIComponent(video.id || '')}`
     };
     playButton.addEventListener('click', () => { void openVideo(item, playButton); });
+    playButton.id = `vo-search-play-${String(video.id || '').replace(/[^a-zA-Z0-9_-]/g, '')}`;
+    playButton.dataset.voTarget = 'true';
+    playButton.dataset.voAction = 'play';
     article.append(playButton);
 
     addExternalLink(article, {
       href: item.url,
       label: copy.open,
       onOpen: nativeActions?.openExternal
-    });
+    }).dataset.voAction = 'youtube';
     return article;
   }
 
@@ -303,6 +307,8 @@ export function renderVideos({
         playButton.id = `video-play-${String(item.id || id)}`;
         playButton.textContent = `${t('videos.play')}: ${item.title || ''}`;
         playButton.addEventListener('click', () => { void openVideo(item, playButton); });
+        playButton.dataset.voTarget = 'true';
+        playButton.dataset.voAction = 'play';
         article.append(playButton);
         if (matchesInitialVideo(item, initialVideoId)) initialTarget = { item, button: playButton };
       }
@@ -312,14 +318,15 @@ export function renderVideos({
           href: url,
           label: t('videos.openYouTube'),
           onOpen: nativeActions?.openExternal
-        });
-        addShareButton(article, {
+        }).dataset.voAction = 'youtube';
+        const shareButton = addShareButton(article, {
           label: t('common.share'),
           title: item.title || '',
           text: item.excerpt || item.description || '',
           url,
           onShare: nativeActions?.share
         });
+        if (shareButton) shareButton.dataset.voAction = 'share';
       }
       if (item.id) addFavoriteButton(article, item, favoritesStore, t);
       list.append(article);

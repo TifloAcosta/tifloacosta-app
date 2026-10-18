@@ -5,7 +5,7 @@ require 'fileutils'
 require 'xcodeproj'
 
 root = File.expand_path(__dir__)
-ios_root = File.join(root, 'ios', 'App')
+ios_root = File.join(ENV.fetch('TIFLO_IOS_NATIVE_ROOT', File.join(root, 'ios')), 'App')
 project_path = File.join(ios_root, 'App.xcodeproj')
 abort 'Missing generated Capacitor project' unless File.exist?(project_path)
 project = Xcodeproj::Project.open(project_path)

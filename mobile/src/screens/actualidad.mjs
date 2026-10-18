@@ -16,6 +16,7 @@ function addFavoriteButton(parent, item, favoritesStore, t) {
     update();
   });
   update();
+  button.dataset.voAction = 'favorite';
   parent.append(button);
 }
 
@@ -89,6 +90,8 @@ export function renderActualidad({
       openButton.addEventListener('click', () => {
         onOpenNews?.(item, openButton.id);
       });
+      openButton.dataset.voTarget = 'true';
+      openButton.dataset.voAction = 'read';
       heading.append(openButton);
     } else {
       heading.textContent = item.title || '';

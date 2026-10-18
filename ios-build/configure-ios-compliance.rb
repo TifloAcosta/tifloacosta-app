@@ -6,14 +6,15 @@ require 'xcodeproj'
 require 'open3'
 
 root = File.expand_path(__dir__)
-project_path = File.join(root, 'ios/App/App.xcodeproj')
-plist_path = File.join(root, 'ios/App/App/Info.plist')
-podfile_path = File.join(root, 'ios/App/Podfile')
+native_root = ENV.fetch('TIFLO_IOS_NATIVE_ROOT', File.join(root, 'ios'))
+project_path = File.join(native_root, 'App/App.xcodeproj')
+plist_path = File.join(native_root, 'App/App/Info.plist')
+podfile_path = File.join(native_root, 'App/Podfile')
 min_ios = '15.0'
 plist_buddy = '/usr/libexec/PlistBuddy'
 
 raise 'Missing generated Info.plist' unless File.file?(plist_path)
-raise 'Missing generated Podfile' unless File.file?(podfile_path)
+has_podfile = File.file?(podfile_path) # Capacitor 8 can use Swift Package Manager only
 
 # Set the correct declaration: no *non-exempt* encryption. Standard HTTPS
 # through Apple/OS networking remains allowed. Reassess if crypto changes.
@@ -42,14 +43,16 @@ app_target.build_configurations.each do |configuration|
 end
 project.save
 
-podfile = File.read(podfile_path)
-updated_podfile = podfile.sub(/^\s*platform\s+:ios,\s*['"][^'"]+['"]/, "platform :ios, '#{min_ios}'")
-raise 'Podfile iOS platform not found' if updated_podfile == podfile && !podfile.include?("platform :ios, '#{min_ios}'")
-File.write(podfile_path, updated_podfile) unless updated_podfile == podfile
+if has_podfile
+  podfile = File.read(podfile_path)
+  updated_podfile = podfile.sub(/^\s*platform\s+:ios,\s*['"][^'"]+['"]/, "platform :ios, '#{min_ios}'")
+  raise 'Podfile iOS platform not found' if updated_podfile == podfile && !podfile.include?("platform :ios, '#{min_ios}'")
+  File.write(podfile_path, updated_podfile) unless updated_podfile == podfile
+end
 
 verified = Xcodeproj::Project.open(project_path).targets.find { |target| target.name == 'App' }
 raise 'iOS 15.0 target check failed' unless verified.build_configurations.all? { |config| config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] == min_ios }
-raise 'Podfile iOS 15.0 check failed' unless File.read(podfile_path).match?(/^\s*platform\s+:ios,\s*'15\.0'/)
+raise 'Podfile iOS 15.0 check failed' if has_podfile && !File.read(podfile_path).match?(/^\s*platform\s+:ios,\s*'15\.0'/)
 
 puts "App Store encryption compliance declared: ITSAppUsesNonExemptEncryption = false"
-puts "Minimum iOS target for App and CocoaPods: #{min_ios}"
+puts "Minimum iOS target for App#{has_podfile ? ' and CocoaPods' : ' (Swift Package Manager)'}: #{min_ios}"

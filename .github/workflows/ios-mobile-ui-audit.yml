@@ -1,0 +1,134 @@
+name: Auditar interfaz unica iOS (sin TestFlight)
+on:
+  workflow_dispatch:
+  # Verify the exact code proposed for merging, not only the feature branch.
+  pull_request:
+    branches:
+      - preparacion-ios
+    paths:
+      - 'mobile/**'
+      - 'ios-build/prepare-mobile-ui.mjs'
+      - 'ios-build/check-single-ui-release.mjs'
+      - 'ios-build/staging-onesignal-platform.mjs'
+      - 'ios-build/test/ios-testflight-mobile-workflow.test.mjs'
+      - '.github/workflows/ios-testflight.yml'
+      - 'ios-build/staging-onesignal-platform.mjs'
+      - 'ios-build/test/ios-mobile-ui-source.test.mjs'
+      - 'ios-build/native/**'
+      - 'ios-build/share-extension/**'
+      - 'ios-build/install-native-video.mjs'
+      - 'ios-build/install-share-extension.rb'
+      - '.github/workflows/ios-mobile-ui-audit.yml'
+  push:
+    branches:
+      - migration/ios-single-mobile-ui-20261017
+    paths:
+      - 'mobile/**'
+      - 'ios-build/prepare-mobile-ui.mjs'
+      - 'ios-build/check-single-ui-release.mjs'
+      - 'ios-build/staging-onesignal-platform.mjs'
+      - 'ios-build/test/ios-testflight-mobile-workflow.test.mjs'
+      - '.github/workflows/ios-testflight.yml'
+      - 'ios-build/staging-onesignal-platform.mjs'
+      - 'ios-build/test/ios-mobile-ui-source.test.mjs'
+      - 'ios-build/native/**'
+      - 'ios-build/share-extension/**'
+      - 'ios-build/install-native-video.mjs'
+      - 'ios-build/install-share-extension.rb'
+      - '.github/workflows/ios-mobile-ui-audit.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ios-mobile-ui-audit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  staged-mobile-ui:
+    name: Paquete y pruebas de interfaz sin publicar
+    runs-on: macos-15
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+      - name: Instalar dependencias y comprobar pantallas
+        working-directory: mobile
+        run: |
+          npm ci
+          node ../ios-build/staging-onesignal-platform.mjs
+          npm test
+          npm run build
+      - name: Crear interfaz iOS desde unica raiz movil
+        run: |
+          node ios-build/prepare-mobile-ui.mjs
+          node --test ios-build/test/ios-mobile-ui-source.test.mjs
+          node --check ios-build/check-single-ui-release.mjs
+          node --test ios-build/test/ios-testflight-mobile-workflow.test.mjs
+          ruby -e "require 'yaml'; YAML.load_file('.github/workflows/ios-testflight.yml')"
+      - name: Subir huella de procedencia de la interfaz movil
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-single-mobile-ui-proof
+          path: ios-build/www/tiflo-ios-ui-identity.json
+          if-no-files-found: error
+      - name: Construir Capacitor 8 y extensiones sobre la unica interfaz movil (sin firma)
+        working-directory: mobile
+        env:
+          TIFLO_IOS_NATIVE_ROOT: ${{ github.workspace }}/mobile/ios
+        run: |
+          XCODE="$(find /Applications -maxdepth 1 -type d -name 'Xcode_26*.app' -print | sort | tail -n 1)"
+          test -n "$XCODE" || { echo "::error::Falta Xcode 26"; exit 1; }
+          sudo xcode-select --switch "$XCODE/Contents/Developer"
+          xcodebuild -version
+          npx cap add ios
+          node ../ios-build/install-native-video.mjs
+          ruby ../ios-build/install-share-extension.rb
+          ruby ../ios-build/configure-ios-compliance.rb
+          if [ -f ios/App/Podfile ]; then (cd ios/App && pod install); fi
+          test -s ios/App/App/public/tiflo-ios-ui-identity.json
+          test -s ios/App/App/public/app.js
+          # Compare every source asset with the copy actually embedded by Capacitor.
+          # The native YouTube wrapper may be an additional asset, but a missing or
+          # changed mobile script, stylesheet or icon must fail before compilation.
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { createHash } from 'node:crypto';
+          import { readFile } from 'node:fs/promises';
+          const src = '../ios-build/www/';
+          const app = 'ios/App/App/public/';
+          const identity = JSON.parse(await readFile(src + 'tiflo-ios-ui-identity.json', 'utf8'));
+          const copied = JSON.parse(await readFile(app + 'tiflo-ios-ui-identity.json', 'utf8'));
+          assert.deepEqual(copied, identity, 'Mobile identity differs inside the native iOS app');
+          for (const [filename, expected] of Object.entries(identity.fileHashes)) {
+            const bytes = await readFile(app + filename);
+            assert.equal(createHash('sha256').update(bytes).digest('hex'), expected,
+              'Changed or missing embedded iOS file: ' + filename);
+          }
+          console.log('Every staged mobile asset matches the native App/public bundle.');
+          NODE
+          test ! -f ios/App/App/public/videos.html
+          test ! -f ios/App/App/public/actualidad.html
+          if [ -d ios/App/App.xcworkspace ]; then
+            xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build
+            # The App Store build uses Release and the physical-device SDK.
+            # Verify that configuration, without signing or uploading an IPA.
+            xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build
+          else
+            xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build
+            xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Release -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build
+          fi
+
+  parity-blocker:
+    name: Paridad funcional y persistencia pendiente
+    runs-on: ubuntu-latest
+    steps:
+      - name: No aprobar ni publicar hasta completar migracion de biblioteca y funciones nativas
+        run: |
+          echo 'Este flujo SOLO valida el montaje tecnico de la nueva interfaz.'
+          echo 'Quedan pendientes: datos del lector, recepcion completa App Group, plugins nativos, acciones VoiceOver y pruebas en iPhone.'
+          echo 'Se prohibe activar TestFlight desde esta rama.'

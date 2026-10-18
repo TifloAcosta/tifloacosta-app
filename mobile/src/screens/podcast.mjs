@@ -179,6 +179,9 @@ export function renderPodcast({ root, router, nativeActions, t, setScreenCleanup
         listen.type = 'button';
         listen.textContent = lang === 'en' ? `Play: ${episode.title}` : `Escuchar: ${episode.title}`;
         listen.addEventListener('click', () => loadEpisode(episode, listen));
+        listen.dataset.voTarget = 'true';
+        listen.dataset.voAction = 'listen';
+        listen.id = `vo-episode-${String(episode.id || '').replace(/[^a-zA-Z0-9_-]/g, '-').slice(0, 160)}`;
         article.append(listen);
         episodeList.append(article);
       }

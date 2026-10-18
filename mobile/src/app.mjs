@@ -1,4 +1,5 @@
 import { App } from '@capacitor/app';
+import { Capacitor, registerPlugin } from '@capacitor/core';
 import { Browser } from '@capacitor/browser';
 import { Share } from '@capacitor/share';
 import OneSignal from '@onesignal/capacitor-plugin';
@@ -18,6 +19,11 @@ import { classifySharedText } from './core/share-classifier.mjs';
 import { createShareSession } from './core/share-session.mjs';
 import { createReaderSession } from './core/reader-session.mjs';
 import { createReadingLibraryClient } from './core/reading-library-client.mjs';
+import { createIosLegacyReadingBridge } from './core/ios-legacy-reading.mjs';
+import { createIosNativeTtsBridge } from './core/ios-native-tts.mjs';
+import { createIosReceivedInbox } from './core/ios-received-inbox.mjs';
+import { freshestUnseenReceipt } from './core/ios-share-intent.mjs';
+import { createIosContextActions } from './core/ios-context-actions.mjs';
 import { loadReadableTarget, readablePageFromNewsItem } from './core/readable-loader.mjs';
 import { searchResultAction } from './core/search.mjs';
 import { TifloSave } from './core/save-plugin.mjs';
@@ -46,6 +52,7 @@ import { renderPrivacy } from './screens/privacy.mjs';
 import { renderSettings } from './screens/settings.mjs';
 import { renderShare } from './screens/share.mjs';
 import { renderReader } from './screens/reader.mjs';
+import { renderIosReceived } from './screens/ios-received.mjs';
 import { createAccessibleVideoPlayer, createSharedVideoItem } from './screens/video-player.mjs';
 
 const root = document.querySelector('#app');
@@ -85,7 +92,30 @@ const favoritesStore = createFavoritesStore(storage);
 const newsSeenStore = createNewsSeenStore(storage);
 const readerSession = createReaderSession();
 const shareSession = createShareSession();
-const readingClient = createReadingLibraryClient(TifloReading);
+// On iPhone use the existing WebKit IndexedDB (books/media/marks/settings/derived)
+// instead of Android-only TifloReading native plugins; this staging bridge
+ // preserves the original on-device library and never purges it on startup.
+const iosNativeTts = Capacitor.getPlatform() === 'ios'
+  ? createIosNativeTtsBridge(registerPlugin('TifloReadingTts'))
+  : null;
+const readingBackend = Capacitor.getPlatform() === 'ios'
+  ? createIosLegacyReadingBridge({
+      accessibility: registerPlugin('TifloReadingAccessibility'),
+      capacitor: Capacitor,
+      nativeTts: iosNativeTts
+    })
+  : TifloReading;
+const readingClient = createReadingLibraryClient(readingBackend);
+const iosReceivedInbox = Capacitor.getPlatform() === 'ios'
+  ? createIosReceivedInbox({ native: registerPlugin('TifloShareInbox'), library: readingBackend })
+  : null;
+const iosContextActions = iosReceivedInbox
+  ? createIosContextActions({
+      root,
+      plugin: registerPlugin('TifloReadingAccessibility'),
+      lang: () => preferencesStore.getCurrent().lang
+    })
+  : null;
 const nativeActions = createNativeActions({
   appPlugin: App,
   sharePlugin: Share,
@@ -476,6 +506,7 @@ function render(route) {
     preferences,
     favoritesStore,
     nativeActions,
+    iosInboxAvailable: Boolean(iosReceivedInbox),
     notificationService,
     appInfo,
     t,
@@ -488,6 +519,17 @@ function render(route) {
 
   switch (route.name) {
     case 'home': renderHome(context); break;
+    case 'received': {
+      if (iosReceivedInbox) renderIosReceived({
+        ...context, inbox: iosReceivedInbox, onOpenBook: openReadingBook,
+        onOpenVideo: classification => openDirectVideo(classification),
+        onReadWeb: (url, title) => openReadableFromApp({ url, title, allowOriginalFallback: true }),
+        onAnalyzeDownload: url => openNormalDownload(url),
+        onSearchText: text => openSharedSearch(text)
+      });
+      else renderHome(context);
+      break;
+    }
     case 'new-content': renderNewContent(context); break;
     case 'actualidad': {
       renderActualidad({
@@ -546,6 +588,7 @@ function render(route) {
         client: readingClient,
         bookId: pendingReadingBookId,
         initialPercent,
+        iosNativeTts,
         onOpenBook: openReadingBook,
         onOpenQueue: () => router.navigate('reading-queue')
       });
@@ -701,6 +744,33 @@ function onPreferencesChange(changes, { reset = false } = {}) {
 }
 
 router.start('home');
+void iosContextActions?.install();
+
+// A recent, unseen item received through the native iOS Share Extension gets
+// a contextual Received screen on next foreground entry. No autoplay,
+// destructive import or App Group acknowledgement occurs on arrival.
+const receivedAttentionKey = 'tiflo-ios-last-attended-receipt';
+let lastAttendedReceipt = '';
+try { lastAttendedReceipt = String(storage?.getItem(receivedAttentionKey) || ''); } catch {}
+let checkingNewReceipt = false;
+async function presentRecentIosReceipt() {
+  if (!iosReceivedInbox || checkingNewReceipt ||
+      preferencesStore.needsLanguageChoice() || router.current()?.name !== 'home') return;
+  checkingNewReceipt = true;
+  try {
+    const result = await iosReceivedInbox.pending();
+    if (!result.available) return;
+    const newest = freshestUnseenReceipt(result.items, { lastSeenId: lastAttendedReceipt });
+    if (!newest || router.current()?.name !== 'home') return;
+    lastAttendedReceipt = newest.id;
+    try { storage?.setItem(receivedAttentionKey, newest.id); } catch {}
+    router.navigate('received');
+  } finally { checkingNewReceipt = false; }
+}
+void presentRecentIosReceipt();
+if (iosReceivedInbox) {
+  void App.addListener('resume', () => { void presentRecentIosReceipt(); }).catch(() => {});
+}
 void installShareReceiver();
 void installReadingDocumentReceiver();
 void loadAppInfo(App).then(info => {

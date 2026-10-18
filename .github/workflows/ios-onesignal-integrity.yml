@@ -1,0 +1,37 @@
+name: Verificar integridad de OneSignal para iOS
+on:
+  push:
+    branches:
+      - migration/ios-single-mobile-ui-20261017
+    paths:
+      - '.github/workflows/ios-onesignal-integrity.yml'
+      - 'mobile/package.json'
+      - 'mobile/package-lock.json'
+permissions:
+  contents: read
+jobs:
+  integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Comprobar SHA-512 publicado y el lockfile
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const packageJson = JSON.parse(readFileSync('mobile/package.json','utf8'));
+          const lock = JSON.parse(readFileSync('mobile/package-lock.json','utf8'));
+          const version = packageJson.dependencies['@onesignal/capacitor-plugin'];
+          const entry = lock.packages['node_modules/@onesignal/capacitor-plugin'];
+          if (version !== '1.2.0') { console.log('Versión en preparación:', version); process.exit(0); }
+          const response = await fetch('https://registry.npmjs.org/@onesignal%2Fcapacitor-plugin/1.2.0');
+          if (!response.ok) throw Error('No se pudo consultar el paquete de NPM');
+          const upstream = await response.json();
+          console.log('OneSignal integrity oficial:', upstream.dist.integrity);
+          if (entry.version !== version || entry.resolved !== upstream.dist.tarball) throw Error('Versión o URL del paquete incorrectas');
+          if (entry.integrity !== upstream.dist.integrity) throw Error('Falta fijar la huella oficial SHA-512 en el lockfile');
+          console.log('Dependencia oficial de OneSignal verificada');
+          NODE

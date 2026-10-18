@@ -7,7 +7,7 @@ const repoRead = path => readFile(new URL(`../../${path}`, import.meta.url), 'ut
 
 test('mobile pins the OneSignal Capacitor plugin used for Android push', async () => {
   const pkg = JSON.parse(await mobileRead('package.json'));
-  assert.equal(pkg.dependencies['@onesignal/capacitor-plugin'], '1.1.6');
+  assert.equal(pkg.dependencies['@onesignal/capacitor-plugin'], '1.2.0');
 });
 
 test('Android CI disables the unused OneSignal location module', async () => {

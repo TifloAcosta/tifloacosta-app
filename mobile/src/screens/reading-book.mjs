@@ -182,7 +182,8 @@ export function renderReadingBook({
   nativeActions,
   setScreenCleanup,
   onOpenBook,
-  onOpenQueue
+  onOpenQueue,
+  iosNativeTts = null
 }) {
   clearScreen(root);
 
@@ -196,6 +197,12 @@ export function renderReadingBook({
   heading.dataset.screenHeading = '';
   heading.tabIndex = -1;
   heading.textContent = t('readingBook.loading');
+
+  const daisyModeButton = document.createElement('button');
+  daisyModeButton.type = 'button';
+  daisyModeButton.hidden = true;
+  daisyModeButton.textContent = document.documentElement.lang === 'en'
+    ? 'Listen to DAISY audio' : 'Escuchar audio DAISY';
 
   const status = document.createElement('p');
   status.className = 'reading-book-status';
@@ -465,6 +472,7 @@ export function renderReadingBook({
   root.append(
     back,
     heading,
+    daisyModeButton,
     status,
     orderWarning,
     pdfPasswordForm,
@@ -481,6 +489,8 @@ export function renderReadingBook({
   let documentModel = null;
   let speech = null;
   let audioView = null;
+  let mixedDaisySource = null;
+  let daisyAudioMode = false;
   let ocrPanel = null;
   let currentPosition = { blockIndex: 0, unitIndex: 0 };
   let noteReturnPosition = null;
@@ -1147,6 +1157,8 @@ export function renderReadingBook({
 
     speech = createReadingSpeechController({
       client,
+      book: activeBook,
+      fallbackTts: iosNativeTts || {},
       document: documentModel,
       initialPosition: {
         blockIndex: currentPosition.blockIndex,
@@ -1239,6 +1251,41 @@ export function renderReadingBook({
     if (!destroyed) queueMicrotask(() => playButton.focus());
   }
 
+  // A mixed text-and-audio DAISY stays in the same screen. The accessible
+  // mode switch is a single button; no duplicate navigation or web overlay.
+  daisyModeButton.addEventListener('click', () => {
+    void (async () => {
+      if (!mixedDaisySource || destroyed || daisyModeButton.disabled) return;
+      daisyModeButton.disabled = true;
+      try {
+        if (!daisyAudioMode) {
+          await speech?.destroy?.();
+          speech = null;
+          searchPanel?.destroy(); searchPanel = null;
+          marksPanel?.destroy(); marksPanel = null;
+          settingsPanel?.destroy(); settingsPanel = null;
+          translationControls?.destroy?.(); translationControls = null;
+          panels.replaceChildren();
+          moreActions.hidden = true;
+          daisyAudioMode = true;
+          await initializeOpenedAudioBook(mixedDaisySource);
+        } else {
+          await audioView?.destroy?.();
+          await client.stopAudio?.();
+          audioView = null;
+          daisyAudioMode = false;
+          const fresh = await client.openBook(bookId);
+          if (fresh?.book) await initializeOpenedBook(fresh);
+        }
+        daisyModeButton.textContent = daisyAudioMode
+          ? (document.documentElement.lang === 'en' ? 'Read DAISY text' : 'Leer texto DAISY')
+          : (document.documentElement.lang === 'en' ? 'Listen to DAISY audio' : 'Escuchar audio DAISY');
+      } finally {
+        if (!destroyed) daisyModeButton.disabled = false;
+      }
+    })();
+  });
+
   async function loadBook(password = null) {
     let opened;
     try {
@@ -1255,6 +1302,10 @@ export function renderReadingBook({
       return;
     }
 
+    mixedDaisySource = ['daisy2.02', 'daisy3'].includes(opened.book.format)
+      && opened.daisyHasAudio && opened.daisyHasText ? opened : null;
+    daisyModeButton.hidden = !mixedDaisySource;
+    daisyAudioMode = false;
     const daisyAudioOnly = ['daisy2.02', 'daisy3'].includes(opened.book.format)
       && opened.daisyHasAudio
       && !opened.daisyHasText;

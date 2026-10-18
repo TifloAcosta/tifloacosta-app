@@ -1,7 +1,8 @@
 /**
- * Fail-closed TestFlight gate. A native build can have any number of reusable
- * web libraries, but must contain exactly ONE mobile presentation source.
- * Do not weaken this gate to silence CI: port the native/data dependencies.
+ * Fail-closed iOS release gate.
+ * Internal TestFlight is a restricted technical acceptance stage, NOT App Store
+ * approval. Physical-device VoiceOver acceptance is required for production,
+ * but cannot logically precede installing a TestFlight build on the tester's iPhone.
  */
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
@@ -9,39 +10,45 @@ import { join } from 'node:path';
 
 const parent = fileURLToPath(new URL('../', import.meta.url));
 const load = relative => readFile(join(parent, relative), 'utf8');
-
 const [workflow, configText, sourceHtml] = await Promise.all([
   load('.github/workflows/ios-testflight.yml'),
-  load('ios-build/capacitor.config.json'),
+  load('mobile/capacitor.config.json'),
   load('mobile/src/index.html')
 ]);
 const config = JSON.parse(configText);
-const isMobileSource = workflow.includes('node ios-build/prepare-mobile-ui.mjs') ||
-  workflow.includes('npm run prepare:mobile');
-const isLegacyWebPackaging = workflow.includes('npm run prepare:web');
-if (!isMobileSource || isLegacyWebPackaging) {
-  throw new Error(
-    'BLOQUEO TESTFLIGHT: se empaqueta todavía la interfaz web pública. ' +
-    'Se exige una única UI móvil y paridad nativa/datos antes de distribuir. ' +
-    'Seguimiento: issue #210.'
-  );
+const mobileOnly = workflow.includes('node ../ios-build/prepare-mobile-ui.mjs') &&
+                   !workflow.includes('npm run prepare:web') &&
+                   !workflow.includes('tiflo-build-identity.json');
+if (!mobileOnly || !/<main id="app" tabindex="-1"><\/main>/.test(sourceHtml) ||
+    config.appId !== 'com.tifloacosta.app' || config.webDir !== 'dist' ||
+    config.server?.url || config.server?.iosScheme !== 'capacitor' ||
+    config.server?.hostname !== 'localhost') {
+  throw new Error('BLOQUEO TESTFLIGHT: interfaz móvil única, identidad o origen persistente incompatibles.');
 }
-if (!/<main id="app" tabindex="-1"><\/main>/.test(sourceHtml) ||
-    config.appId !== 'com.tifloacosta.app' ||
-    config.server?.url) {
-  throw new Error('La interfaz móvil o la configuración iOS no cumplen el contrato de origen local.');
+const isRestrictedBeta = process.env.TIFLO_INTERNAL_BETA === '1';
+if (isRestrictedBeta) {
+  if (process.env.GITHUB_REF_NAME !== 'preparacion-ios' ||
+      !workflow.includes("branches: [preparacion-ios]") ||
+      !workflow.includes("'ios-build/solicitud-testflight-20261014.txt'")) {
+    throw new Error('BLOQUEO TESTFLIGHT: beta interna sólo desde rama y solicitud explícitas.');
+  }
+  // This stage is only an internal, reversible testing delivery. Remaining
+  // build checks, native checks, signing, Apple upload and device acceptance
+  // occur *after* this preflight. Never claim device acceptance here.
+  console.log('TESTFLIGHT INTERNO: empaquetado móvil permitido para pruebas reales; NO aprobación App Store.');
+  process.exit(0);
 }
+// An actual public release (or an ungated signed workflow) must still have
+// evidence of VoiceOver checks and continuity of the existing iPhone library.
 const approval = await load('ios-build/MOBILE-PARITY-ACCEPTED.json').catch(() => '');
-if (!approval) {
-  throw new Error('BLOQUEO TESTFLIGHT: falta aceptación técnica verificable de funciones iOS y datos del lector.');
+if (!approval) throw new Error('BLOQUEO: falta aceptación completa de accesibilidad y datos en iPhone real.');
+const verified = JSON.parse(approval);
+if (verified.status !== 'approved' ||
+    verified.nativeShare !== true ||
+    verified.nativeReader !== true ||
+    verified.existingLibraryPreserved !== true ||
+    verified.voiceOverDeviceVerified !== true ||
+    verified.mobileUiBuildVerified !== true) {
+  throw new Error('BLOQUEO: la paridad móvil y la persistencia real aún no están certificadas.');
 }
-const checkpoint = JSON.parse(approval);
-if (checkpoint.status !== 'approved' ||
-    checkpoint.nativeShare !== true ||
-    checkpoint.nativeReader !== true ||
-    checkpoint.existingLibraryPreserved !== true ||
-    checkpoint.voiceOverDeviceVerified !== true ||
-    checkpoint.mobileUiBuildVerified !== true) {
-  throw new Error('BLOQUEO TESTFLIGHT: la paridad móvil iOS y sus datos no están verificados.');
-}
-console.log('Preflight iOS de interfaz móvil única: superado.');
+console.log('Validación completa de iOS verificada para distribución.');

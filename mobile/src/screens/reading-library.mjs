@@ -524,6 +524,9 @@ export function renderReadingLibrary({
         ? `Open for reading: ${item.title || t('readingLibrary.untitled')}`
         : `Abrir para leer: ${item.title || t('readingLibrary.untitled')}`
     );
+    title.dataset.voTarget = 'true';
+    title.dataset.voAction = 'open';
+    title.id = `vo-reading-title-${String(item.id).replace(/[^a-zA-Z0-9_-]/g, '-')}`;
     article.append(title);
 
     const details = document.createElement('section');

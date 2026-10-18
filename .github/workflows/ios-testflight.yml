@@ -29,11 +29,13 @@ jobs:
           SDK_VERSION="$(xcrun --sdk iphoneos --show-sdk-version)"
           case "$SDK_VERSION" in 26.*|27.*|28.*) echo "SDK válido: $SDK_VERSION";; *) echo "::error::SDK iOS antiguo: $SDK_VERSION"; exit 1;; esac
       - uses: actions/checkout@v4
+      - name: Comprobar origen único y acceso restringido a TestFlight interno
+        env:
+          TIFLO_INTERNAL_BETA: '1'
+        run: node ios-build/check-single-ui-release.mjs
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Comprobar origen único de interfaz antes de distribuir
-        run: node ios-build/check-single-ui-release.mjs
       - name: Comprobar credenciales sin revelarlas
         env:
           API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
@@ -69,36 +71,41 @@ jobs:
           Path(os.environ['TARGET_KEY']).write_text(raw.strip() + '\n')
           PY
           echo "ASC_KEY_PATH=$TARGET_KEY" >> "$GITHUB_ENV"
-      - name: Preparar proyecto iOS
-        working-directory: ios-build
+      - name: Preparar proyecto iOS con una única interfaz móvil
+        working-directory: mobile
         run: |
-          npm install --no-audit --no-fund
-          npm run prepare:web
-          node --check www/app.js
-          node --check www/videos.js
-          node --check www/actualidad-media.js
-          node --input-type=module <<'NODE'
-          import fs from 'node:fs';
-          import assert from 'node:assert/strict';
-          const identity = JSON.parse(fs.readFileSync('www/tiflo-build-identity.json', 'utf8'));
-          assert.equal(identity.sourceSha, process.env.GITHUB_SHA);
-          assert.equal(identity.buildCode, String(400000 + Number(process.env.GITHUB_RUN_NUMBER)));
-          assert.equal(identity.reader, 'web-reading.js');
-          const reader = fs.readFileSync('www/web-reading.js', 'utf8');
-          for (const marker of ['useDaisyAudioFile(', 'persistDaisyPosition(', 'ensureNativeLibraryActions(']) {
-            assert.ok(reader.includes(marker), 'Missing TifloLector recovery '+marker);
-          }
-          console.log('TifloLector iOS source confirmed: '+identity.sourceSha.slice(0,12)+
-            '; build '+identity.buildCode);
-          NODE
+          set -euo pipefail
+          npm ci
+          node ../ios-build/staging-onesignal-platform.mjs
+          npm test
+          npm run build
+          node ../ios-build/prepare-mobile-ui.mjs
           npx cap add ios
-          test -s ios/App/App/public/tiflo-build-identity.js
-          test -s ios/App/App/public/shared/web-reading-daisy-adapter.mjs
-          node install-native-video.mjs
-          ruby install-share-extension.rb
-          grep -q 'registerPluginInstance(TifloYouTubePlugin())' ios/App/App/AppDelegate.swift
-          ruby configure-ios-compliance.rb
-          (cd ios/App && pod install)
+          export TIFLO_IOS_NATIVE_ROOT="$GITHUB_WORKSPACE/mobile/ios"
+          node ../ios-build/install-native-video.mjs
+          ruby ../ios-build/install-share-extension.rb
+          ruby ../ios-build/configure-ios-compliance.rb
+          if [ -f ios/App/Podfile ]; then (cd ios/App && pod install); fi
+          test -s ios/App/App/public/tiflo-ios-ui-identity.json
+          test ! -f ios/App/App/public/videos.html
+          test ! -f ios/App/App/public/actualidad.html
+          test ! -e ../ios-build/ios
+          ln -s ../mobile/ios ../ios-build/ios
+          node --input-type=module <<'NODE'
+          import { readFile } from 'node:fs/promises';
+          import assert from 'node:assert/strict';
+          import { createHash } from 'node:crypto';
+          const from = JSON.parse(await readFile('dist/tiflo-ios-ui-identity.json','utf8'));
+          const native = JSON.parse(await readFile('ios/App/App/public/tiflo-ios-ui-identity.json','utf8'));
+          assert.deepEqual(native,from,'Source UI and installed native UI differ');
+          assert.equal(from.sourceCommit,process.env.GITHUB_SHA);
+          for (const [file,hash] of Object.entries(from.fileHashes)) {
+            const bytes = await readFile('ios/App/App/public/'+file);
+            assert.equal(createHash('sha256').update(bytes).digest('hex'),hash,
+              'Native iOS UI changed or lost: '+file);
+          }
+          console.log('Signed release source: one complete mobile UI with matching hashes');
+          NODE
           test "$(/usr/libexec/PlistBuddy -c 'Print :ITSAppUsesNonExemptEncryption' ios/App/App/Info.plist)" = false
       - name: Verificar que la API YouTube para iOS está desplegada
         shell: bash
@@ -179,18 +186,20 @@ jobs:
             end
           end
           project.save
-          pods = Xcodeproj::Project.open('ios/App/Pods/Pods.xcodeproj')
-          pods.targets.each do |target|
-            target.build_configurations.each do |config|
-              config.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'
+          if File.exist?('ios/App/Pods/Pods.xcodeproj')
+            pods = Xcodeproj::Project.open('ios/App/Pods/Pods.xcodeproj')
+            pods.targets.each do |target|
+              target.build_configurations.each do |config|
+                config.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'
+              end
             end
+            pods.save
           end
-          pods.save
           RUBY
       - name: Verificar que la aplicación compila sin firma
         working-directory: ios-build
         run: |
-          xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build
+          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Release -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build
       - name: Recuperar o regenerar firma de distribución protegida
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -373,7 +382,7 @@ jobs:
           API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
           API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
         run: |
-          xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Release -destination 'generic/platform=iOS' -archivePath "$RUNNER_TEMP/TifloAcosta.xcarchive" -allowProvisioningUpdates -authenticationKeyPath "$ASC_KEY_PATH" -authenticationKeyID "$API_ID" -authenticationKeyIssuerID "$API_ISSUER" archive
+          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Release -destination 'generic/platform=iOS' -archivePath "$RUNNER_TEMP/TifloAcosta.xcarchive" -allowProvisioningUpdates -authenticationKeyPath "$ASC_KEY_PATH" -authenticationKeyID "$API_ID" -authenticationKeyIssuerID "$API_ISSUER" archive
       - name: Verificar cifrado exento e iOS 15 en la app archivada
         run: |
           set -euo pipefail

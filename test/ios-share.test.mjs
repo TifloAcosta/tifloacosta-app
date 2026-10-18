@@ -74,7 +74,7 @@ test('Compartir iOS incorpora la extensión y exige permisos App Group', () => {
   assert.ok(installer.includes("project.new_target(:app_extension"));
   const entitlements = readFileSync(new URL('../ios-build/share-extension/ShareExtension.entitlements', import.meta.url), 'utf8');
   assert.ok(entitlements.includes('group.com.tifloacosta.app'));
-  assert.ok(workflow.includes("ruby install-share-extension.rb"));
+  assert.match(workflow, /ruby (?:\.\.\/ios-build\/)?install-share-extension\.rb/);
   assert.ok(workflow.includes("Validar App Group en los dos perfiles Apple"));
   assert.ok(plist.includes('com.apple.share-services'));
   assert.ok(plist.includes('NSExtensionActivationSupportsWebURLWithMaxCount'));

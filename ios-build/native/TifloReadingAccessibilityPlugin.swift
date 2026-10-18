@@ -555,7 +555,7 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
                 }
                 let blocks = observations.compactMap { $0.topCandidates(1).first?.string }
                     .filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
-                let output = blocks.joined(separator: "\\n")
+                let output = blocks.joined(separator: "\n")
                 call.resolve(["status": blocks.isEmpty ? "empty" : "ok",
                               "text": output, "blocks": blocks])
             } catch {

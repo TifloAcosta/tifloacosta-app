@@ -31,13 +31,15 @@ targets:
     deploymentTarget: "17.0"
     sources:
       - path: ShareExtension/ShareViewController.swift
-    info:
-      path: ShareExtension/Info.plist
+    # Keep the source-controlled plist intact: XcodeGen info.path would regenerate it,
+    # removing NSExtensionPointIdentifier and making App Store Connect reject the IPA.
     entitlements:
       path: ShareExtension/ShareExtension.entitlements
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.tifloacosta.app.ShareExtension
+        INFOPLIST_FILE: ShareExtension/Info.plist
+        GENERATE_INFOPLIST_FILE: NO
         CODE_SIGNING_ALLOWED: NO
         SWIFT_VERSION: "5.9"
         INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO

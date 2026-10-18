@@ -1,29 +1,33 @@
+import { classifyIosReceived } from '../core/ios-share-intent.mjs';
 import { addScreenHeader, clearScreen } from './shared.mjs';
 
-function language(es, en) {
-  return document.documentElement.lang === 'en' ? en : es;
-}
+const bilingual = (es, en) => document.documentElement.lang === 'en' ? en : es;
 
-function action(parent, label, handler) {
+function makeAction(parent, label, operation, handler, { primary = false } = {}) {
   const button = document.createElement('button');
   button.type = 'button';
   button.textContent = label;
+  button.dataset.voAction = operation;
+  if (primary) button.dataset.voTarget = 'true';
   button.addEventListener('click', handler);
   parent.append(button);
   return button;
 }
 
 /**
- * A normal mobile route, not a second web page, overlay, or UIKit modal.
- * Native receipts remain inside the App Group until verified import or an
- * explicitly confirmed deletion.
+ * Received is ONE route in the native iPhone app. Opening, reading or playing
+ * never silently acknowledges or deletes its App Group source. Only a
+ * verified library save or a confirmed Remove may acknowledge the receipt.
  */
-export function renderIosReceived({ root, router, inbox, onOpenBook = null, t } = {}) {
+export function renderIosReceived({
+  root, router, inbox, onOpenBook = null, onOpenVideo = null,
+  onReadWeb = null, onAnalyzeDownload = null, onSearchText = null,
+  setScreenCleanup = null, t
+} = {}) {
   clearScreen(root);
   addScreenHeader(root, {
-    router, title: language('Recibidos', 'Received'), backLabel: t('nav.back')
+    router, title: bilingual('Recibidos', 'Received'), backLabel: t('nav.back')
   });
-
   const status = document.createElement('p');
   status.setAttribute('role', 'status');
   status.setAttribute('aria-live', 'polite');
@@ -31,85 +35,117 @@ export function renderIosReceived({ root, router, inbox, onOpenBook = null, t } 
   const list = document.createElement('div');
   list.className = 'section-stack';
   root.append(status, list);
-
   let refreshing = false;
+  let disposed = false;
+  setScreenCleanup?.(() => { disposed = true; });
+
   async function refresh() {
-    if (refreshing) return;
+    if (refreshing || disposed) return;
     refreshing = true;
-    status.textContent = language('Consultando Recibidos…', 'Checking Received…');
+    status.textContent = bilingual('Consultando Recibidos…', 'Checking Received…');
     try {
       const { items, available } = await inbox.pending();
+      if (disposed) return;
       if (!available) {
-        status.textContent = language('El buzón compartido de iOS no está disponible.',
+        status.textContent = bilingual('El buzón compartido de iOS no está disponible.',
           'The iOS shared inbox is unavailable.');
         return;
       }
       list.replaceChildren();
       status.textContent = items.length
-        ? language(`${items.length} elementos recibidos.`, `${items.length} received items.`)
-        : language('No hay elementos en Recibidos.', 'No received items.');
+        ? bilingual(`${items.length} elementos recibidos.`, `${items.length} received items.`)
+        : bilingual('No hay elementos en Recibidos.', 'No received items.');
       for (const item of items) {
         const article = document.createElement('article');
         article.className = 'content-card';
         const heading = document.createElement('h2');
-        heading.textContent = String(item.name || 'Contenido recibido');
-        article.append(heading);
+        heading.textContent = String(item.name || bilingual('Contenido recibido', 'Received item'));
+        const actions = document.createElement('div');
+        actions.className = 'action-group';
         const local = document.createElement('p');
         local.setAttribute('role', 'status');
         local.setAttribute('aria-live', 'polite');
-
-        if (item.kind === 'file') {
-          const save = action(article,
-            language('Guardar en TifloLector', 'Save to TifloLector'), async () => {
-              save.disabled = true;
-              local.textContent = language('Comprobando el archivo…', 'Checking the file…');
-              try {
-                const outcome = await inbox.saveFile(item);
-                if (!outcome.saved) {
-                  local.textContent = language('No se ha guardado. El original sigue en Recibidos.',
-                    'Not saved. The original is still in Received.');
-                } else if (!outcome.acknowledged) {
-                  local.textContent = language(
-                    'Guardado, pero el original sigue en Recibidos porque no se pudo retirarlo.',
-                    'Saved, but the original remains in Received because it could not be cleared.');
-                } else {
-                  await refresh();
-                  return;
-                }
-              } finally { save.disabled = false; }
-            });
-        } else {
-          const content = document.createElement('p');
-          content.textContent = String(item.preview || '');
-          article.append(content);
-          action(article, language('Abrir enlace', 'Open link'), async () => {
-            const response = await inbox.openLink(item);
-            local.textContent = response.opened
-              ? language('Enlace abierto. Se conserva en Recibidos.', 'Link opened. Saved in Received.')
-              : language('No se pudo abrir. El elemento se conserva.', 'Could not open. Item retained.');
-          });
-        }
-
-        action(article, language('Eliminar de Recibidos', 'Remove from Received'), async () => {
-          if (!window.confirm(language(
-            '¿Eliminar este elemento de Recibidos? Solo se elimina tras tu confirmación.',
-            'Remove this item from Received? Only your confirmation deletes it.'
-          ))) return;
-          const deleted = await inbox.deleteConfirmed(item);
-          if (deleted) await refresh();
-          else local.textContent = language('No se pudo eliminar. El elemento se conserva.',
-            'Could not remove. The item remains.');
-        });
-        article.append(local);
+        article.append(heading, actions, local);
         list.append(article);
-        if (item.kind !== 'file' && typeof inbox.resolveYouTubeTitle === 'function') {
-          void inbox.resolveYouTubeTitle(item).then(title => {
-            if (title && heading.isConnected) heading.textContent = title;
-          }).catch(() => {});
+
+        async function saveInLibrary({ open = false } = {}) {
+          const response = await inbox.saveFile(item);
+          if (!response.saved) {
+            local.textContent = bilingual(
+              'No se pudo importar. El original permanece en Recibidos.',
+              'Could not import. The original remains in Received.');
+            return;
+          }
+          if (open && typeof onOpenBook === 'function') {
+            onOpenBook(response.id);
+            return;
+          }
+          if (response.acknowledged) await refresh();
+          else local.textContent = bilingual(
+            'Archivo guardado. La copia de Recibidos se conserva porque no se pudo retirar.',
+            'File saved. The Received copy is retained because it could not be cleared.');
         }
+
+        const source = item.kind === 'file'
+          ? item
+          : await inbox.details(item).catch(() => null) || item;
+        if (disposed) return;
+        const intent = classifyIosReceived(source, source.value || '');
+        if (intent.type === 'document' && intent.canImport) {
+          makeAction(actions, bilingual('Guardar y leer en TifloLector', 'Save and read in TifloLector'),
+            'read', async () => { await saveInLibrary({ open: true }); }, { primary: true });
+        } else if (intent.type === 'audio' && intent.canImport) {
+          makeAction(actions, bilingual('Guardar audio en TifloLector', 'Save audio in TifloLector'),
+            'download', async () => { await saveInLibrary(); }, { primary: true });
+        } else if (source.kind === 'file') {
+          // Do not misleadingly offer playback for binary formats not yet ported.
+          local.textContent = bilingual(
+            'Archivo conservado en Recibidos. Su importación en el nuevo lector iOS está pendiente.',
+            'File kept in Received. Its new iOS reader import is not yet available.');
+        } else if (intent.type === 'youtube') {
+          if (typeof inbox.resolveYouTubeTitle === 'function') {
+            void inbox.resolveYouTubeTitle({ ...source, preview: source.value || source.preview })
+              .then(title => { if (!disposed && title && heading.isConnected) heading.textContent = title; })
+              .catch(() => {});
+          }
+          makeAction(actions,
+            bilingual('Reproducir en YouTube accesible', 'Play in accessible YouTube'),
+            'play', () => onOpenVideo?.({
+              videoId: intent.videoId, url: intent.url, title: heading.textContent
+            }), { primary: true });
+          makeAction(actions, bilingual('Abrir en YouTube', 'Open on YouTube'),
+            'youtube', async () => { await inbox.openLink(item); });
+        } else if (intent.type === 'web') {
+          makeAction(actions, bilingual('Leer página de forma accesible', 'Read accessible page'),
+            'read', () => onReadWeb?.(intent.url, heading.textContent), { primary: true });
+          makeAction(actions, bilingual('Analizar descarga', 'Analyze download'),
+            'download', () => onAnalyzeDownload?.(intent.url));
+          makeAction(actions, bilingual('Abrir enlace original', 'Open original link'),
+            'original', async () => { await inbox.openLink(item); });
+        } else {
+          if (intent.text) {
+            const preview = document.createElement('p');
+            preview.textContent = intent.text.slice(0, 2000);
+            article.insertBefore(preview, actions);
+          }
+          makeAction(actions, bilingual('Buscar texto compartido', 'Search shared text'),
+            'read', () => onSearchText?.(intent.text), { primary: true });
+        }
+        makeAction(actions, bilingual('Eliminar de Recibidos', 'Remove from Received'),
+          'delete', async () => {
+            if (!window.confirm(bilingual(
+              '¿Eliminar este elemento de Recibidos? No se borrará ninguna copia ya guardada.',
+              'Remove this Received item? Any saved library copy will remain.'))) return;
+            const removed = await inbox.deleteConfirmed(item);
+            if (removed) await refresh();
+            else local.textContent = bilingual(
+              'No se pudo eliminar. El original sigue en Recibidos.',
+              'Could not remove. The original remains in Received.');
+          });
       }
     } catch {
-      status.textContent = language('No se pudo consultar Recibidos. Los elementos se conservan.',
+      if (!disposed) status.textContent = bilingual(
+        'No se pudo consultar Recibidos. Los elementos se conservan.',
         'Unable to list Received. Items were retained.');
     } finally { refreshing = false; }
   }

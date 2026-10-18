@@ -42,11 +42,13 @@ export function renderIosReceived({
   list.className = 'section-stack';
   root.append(status, list);
   let refreshing = false;
+  let reloadRequested = false;
   let disposed = false;
   setScreenCleanup?.(() => { disposed = true; });
 
   async function refresh() {
-    if (refreshing || disposed) return;
+    if (disposed) return;
+    if (refreshing) { reloadRequested = true; return; }
     refreshing = true;
     status.textContent = bilingual('Consultando Recibidos…', 'Checking Received…');
     try {
@@ -75,8 +77,13 @@ export function renderIosReceived({
         article.append(heading, actions, local);
         list.append(article);
 
+        let itemBusy = false;
         async function saveInLibrary({ open = false } = {}) {
-          const response = await inbox.saveFile(item);
+          if (itemBusy) return;
+          itemBusy = true;
+          let response;
+          try { response = await inbox.saveFile(item); }
+          finally { itemBusy = false; }
           if (!response.saved) {
             local.textContent = bilingual(
               'No se pudo importar. El original permanece en Recibidos.',
@@ -145,6 +152,7 @@ export function renderIosReceived({
         }
         makeAction(actions, bilingual('Eliminar de Recibidos', 'Remove from Received'),
           'delete', async () => {
+            if (itemBusy) return;
             if (!window.confirm(bilingual(
               '¿Eliminar este elemento de Recibidos? No se borrará ninguna copia ya guardada.',
               'Remove this Received item? Any saved library copy will remain.'))) return;
@@ -159,7 +167,13 @@ export function renderIosReceived({
       if (!disposed) status.textContent = bilingual(
         'No se pudo consultar Recibidos. Los elementos se conservan.',
         'Unable to list Received. Items were retained.');
-    } finally { refreshing = false; }
+    } finally {
+      refreshing = false;
+      if (reloadRequested && !disposed) {
+        reloadRequested = false;
+        void refresh();
+      }
+    }
   }
 
   void refresh();

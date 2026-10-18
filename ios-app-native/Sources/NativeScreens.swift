@@ -189,8 +189,7 @@ struct NativeAdjustableChoice: View {
 
 struct NativeResourcesScreen: View {
     @EnvironmentObject private var catalog: NativeCatalogStore
-    @Environment(\.openURL) private var openURL
-    @State private var categoryIndex = 0
+    @State private var chosenCategory: String?
 
     private var spanishResources: [NativeCatalogItem] {
         catalog.resources.filter { $0.lang == "es" }
@@ -202,13 +201,33 @@ struct NativeResourcesScreen: View {
         }
     }
 
-    private var categoryChoices: [String] { ["Todas"] + categories }
+    // La opción inicial no selecciona ningún apartado y evita mostrar
+    // todo el catálogo al entrar. El gesto de VoiceOver cambia la categoría.
+    private var categoryChoices: [String] {
+        ["Selecciona un apartado"] + categories
+    }
+
+    // Guardar el nombre evita que una actualización del catálogo cambie
+    // accidentalmente la categoría seleccionada al reordenar las opciones.
+    private var categorySelection: Binding<Int> {
+        Binding(
+            get: {
+                guard let chosenCategory else { return 0 }
+                return categoryChoices.firstIndex(of: chosenCategory) ?? 0
+            },
+            set: { index in
+                chosenCategory = index > 0 && categoryChoices.indices.contains(index)
+                    ? categoryChoices[index]
+                    : nil
+            }
+        )
+    }
 
     private var filtered: [NativeCatalogItem] {
-        guard categoryIndex > 0, categoryChoices.indices.contains(categoryIndex) else {
-            return spanishResources
+        guard let chosenCategory, categories.contains(chosenCategory) else {
+            return []
         }
-        return spanishResources.filter { $0.category == categoryChoices[categoryIndex] }
+        return spanishResources.filter { $0.category == chosenCategory }
     }
 
     var body: some View {
@@ -217,29 +236,33 @@ struct NativeResourcesScreen: View {
                 NativeAdjustableChoice(
                     title: "Categoría",
                     choices: categoryChoices,
-                    selectedIndex: $categoryIndex
+                    selectedIndex: categorySelection
                 )
             }
 
-            Section("Recursos disponibles") {
-                if filtered.isEmpty {
-                    Text("No hay recursos en la categoría elegida.")
-                }
-                ForEach(filtered) { item in
-                    NavigationLink {
-                        NativeRemoteResourceScreen(item: item)
-                    } label: {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(item.title).font(.body)
-                            if let category = item.category {
-                                Text(category).font(.caption).foregroundStyle(.secondary)
+            // No se crea la lista de documentos hasta elegir un apartado.
+            // Volver a "Selecciona un apartado" deja la pantalla limpia.
+            if let chosenCategory, categories.contains(chosenCategory) {
+                Section(chosenCategory) {
+                    if filtered.isEmpty {
+                        Text("No hay recursos en la categoría elegida.")
+                    }
+                    ForEach(filtered) { item in
+                        NavigationLink {
+                            NativeRemoteResourceScreen(item: item)
+                        } label: {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(item.title).font(.body)
+                                if let category = item.category {
+                                    Text(category).font(.caption).foregroundStyle(.secondary)
+                                }
                             }
                         }
-                    }
-                    .accessibilityLabel(item.title)
-                    .accessibilityHint("Doble toque para leer el recurso dentro de TifloAcosta.")
-                    .accessibilityAction(named: Text("Compartir")) {
-                        if let url = item.resourceURL { NativeShare.present(url: url) }
+                        .accessibilityLabel(item.title)
+                        .accessibilityHint("Doble toque para leer el recurso dentro de TifloAcosta.")
+                        .accessibilityAction(named: Text("Compartir")) {
+                            if let url = item.resourceURL { NativeShare.present(url: url) }
+                        }
                     }
                 }
             }

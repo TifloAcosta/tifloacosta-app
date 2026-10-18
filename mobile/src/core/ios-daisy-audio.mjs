@@ -21,7 +21,8 @@ export function createIosDaisyAudio({
   urls = globalThis.URL
 } = {}) {
   let loaded = null, audio = null, objectUrl = '', activeId = '';
-  let trackIndex = 0, ready = false, rate = 1, generation = 0, advancing = false;
+  let trackIndex = 0, ready = false, rate = 1, generation = 0, advancing = null;
+  let playbackIntent = 0;
   const listeners = new Map();
   const currentClip = () => loaded?.model?.audioClips?.[trackIndex] || null;
   const trackCount = () => loaded?.model?.audioClips?.length || 0;
@@ -69,8 +70,8 @@ export function createIosDaisyAudio({
     if (!stored?.blob || stored.book?.id !== bookId) return null;
     const parsed = await openArchive(stored.blob);
     if (!Array.isArray(parsed?.model?.audioClips)) return null;
-    loaded = { ...parsed, bookId };
-    return loaded;
+    // Listing another DAISY book must never replace the archive of the active player.
+    return { ...parsed, bookId };
   }
   async function listAudioTracks({ bookId } = {}) {
     try {
@@ -96,6 +97,7 @@ export function createIosDaisyAudio({
       const bytes = await data.zip.file(clip.audioHref)?.async('uint8array');
       if (request !== generation || !bytes?.length) return null;
       releasePlayer();
+      loaded = data;
       activeId = bookId;
       trackIndex = index;
       const element = createAudio();
@@ -106,7 +108,8 @@ export function createIosDaisyAudio({
       element.playbackRate = rate;
       const valid = () => request === generation && element === audio;
       element.addEventListener('timeupdate', () => {
-        if (!valid() || advancing) return;
+        // Seeking while paused is not permission to jump to and play the next clip.
+        if (!valid() || advancing === request || element.paused) return;
         emit('audioPosition');
         const end = toInt(currentClip()?.clipEndMs);
         if (end && toInt(element.currentTime * 1000) >= end - 100) void advanceAutomatically(request);
@@ -146,31 +149,48 @@ export function createIosDaisyAudio({
     }
   }
   async function advanceAutomatically(request) {
-    if (request !== generation || advancing) return;
-    advancing = true;
+    if (request !== generation || advancing === request) return;
+    advancing = request;
+    const intent = playbackIntent;
     try {
       const next = trackIndex + 1;
       if (next >= trackCount()) {
+        if (request !== generation) return;
         audio?.pause();
         emit('audioEnded');
         emit('audioState');
       } else {
         const bookId = activeId;
         const result = await prepareAudio({ bookId, trackIndex: next, positionMs: 0 });
-        if (result) await playAudio();
+        // A pause, Stop, or a different selection while metadata is loading
+        // revokes the old clip's permission to automatically start playback.
+        if (result && generation === request + 1 && playbackIntent === intent &&
+            activeId === bookId && trackIndex === next) await playAudio();
       }
-    } finally { advancing = false; }
+    } finally {
+      if (advancing === request) advancing = null;
+    }
   }
   async function playAudio() {
     if (!ready || !audio) return null;
     const element = audio;
-    try { await element.play(); return audio === element ? state() : null; }
-    catch {
-      if (audio === element) emit('audioInterrupted', { reason: 'playback-error' });
+    const request = generation, intent = playbackIntent;
+    try {
+      await element.play();
+      if (audio !== element || request !== generation) return null;
+      if (intent !== playbackIntent) {
+        element.pause();
+        return state();
+      }
+      return state();
+    } catch {
+      if (audio === element && request === generation)
+        emit('audioInterrupted', { reason: 'playback-error' });
       return null;
     }
   }
   async function pauseAudio() {
+    playbackIntent += 1;
     if (!ready || !audio) return null;
     audio.pause();
     emit('audioState');
@@ -203,6 +223,7 @@ export function createIosDaisyAudio({
   }
   async function stopAudio() {
     generation += 1;
+    playbackIntent += 1;
     releasePlayer();
     loaded = null; activeId = ''; trackIndex = 0;
     return state();

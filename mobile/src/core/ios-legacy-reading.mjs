@@ -96,7 +96,7 @@ export function createIosLegacyReadingBridge({
       return { saved: false, reason: 'unsupported-or-empty' };
     }
     try {
-      const title = filename.replace(/\\.[^.]+$/, '');
+      const title = filename.replace(/\.[^.]+$/, '');
       const textContent = ext === 'mp3' ? '' : await blob.text();
       const incoming = ext === 'mp3'
         ? await library.importAudioFile({ file: blob.slice(0, blob.size, 'audio/mpeg'), title })

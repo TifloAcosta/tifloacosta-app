@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createIosLegacyReadingBridge } from '../src/core/ios-legacy-reading.mjs';
+import { createReadingLibraryClient } from '../../shared/reading-library-client.mjs';
 
 function picker(filename = 'ejemplo.txt') {
   return {
@@ -120,4 +121,37 @@ test('cancelled iOS Files sheet does not import, delete or create books', async 
   assert.equal(batch.cancelled, true);
   assert.deepEqual(batch.imported, []);
   assert.deepEqual(batch.rejected, []);
+});
+
+
+test('existing iOS PDF text remains readable through new mobile PDF page contract without storage changes', async () => {
+  const operations = [];
+  const legacy = {
+    openBook: async id => {
+      operations.push(['openBook', id]);
+      return { book: { id, format: 'pdf', title: 'PDF antiguo', percent: 57,
+        author: 'Autor', language: 'es' }, content: 'Página inicial\\fPágina final' };
+    }
+  };
+  const client = createReadingLibraryClient(createIosLegacyReadingBridge({ library: legacy }));
+  const result = await client.openBook('web-book-pdf-old');
+  assert.equal(result.book.id, 'web-book-pdf-old');
+  assert.equal(result.book.percent, 57);
+  assert.equal(result.pdf.pageCount, 2);
+  assert.equal(result.pdf.orderReliable, false);
+  assert.deepEqual(result.pdf.pages, [
+    { number: 1, text: 'Página inicial' },
+    { number: 2, text: 'Página final' }
+  ]);
+  assert.deepEqual(operations, [['openBook', 'web-book-pdf-old']]);
+});
+
+test('empty legacy PDF does not masquerade as successfully extracted text or change data', async () => {
+  const client = createReadingLibraryClient(createIosLegacyReadingBridge({
+    library: { openBook: async id => ({ book: { id, format: 'pdf', title: 'Escaneado' }, content: '' }) }
+  }));
+  const opened = await client.openBook('web-book-pdf-scan');
+  assert.equal(opened.book.id, 'web-book-pdf-scan');
+  assert.equal(opened.pdfNoText, true);
+  assert.equal(opened.pageCount, 0);
 });

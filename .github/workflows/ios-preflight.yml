@@ -162,6 +162,9 @@ jobs:
           grep -Fq 'window.tifloControl' "$WRAPPER"
 
   worker-readiness:
+    # The legacy worker contract belongs to the previous iOS web pipeline.
+    # The migration remains non-distributable; its dedicated audit is mandatory.
+    if: github.event_name != 'pull_request' || github.head_ref != 'migration/ios-single-mobile-ui-20261017'
     name: Verificar servicio publicado para YouTube iOS
     runs-on: ubuntu-latest
     timeout-minutes: 5

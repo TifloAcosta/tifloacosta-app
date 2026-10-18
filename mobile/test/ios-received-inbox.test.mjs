@@ -140,3 +140,17 @@ test('YouTube title is resolved for a real received link without deleting or gue
   assert.equal(resolved, 'abcdefghijk');
   assert.equal(title, 'Título público del vídeo');
 });
+
+test('shared explanatory text opens only its verified HTTPS link and retains the receipt', async () => {
+  let url = '';
+  let acknowledged = false;
+  const native = {
+    openItem: async () => ({ id: ID, kind: 'text', value: 'Mira este recurso: https://example.org/guia?lang=es' }),
+    openURL: async options => { url = options.url; return { opened: true }; },
+    acknowledge: async () => { acknowledged = true; }
+  };
+  const response = await createIosReceivedInbox({ native }).openLink({ id: ID, kind: 'text' });
+  assert.equal(response.opened, true);
+  assert.equal(url, 'https://example.org/guia?lang=es');
+  assert.equal(acknowledged, false);
+});

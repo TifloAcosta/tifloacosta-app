@@ -1,0 +1,32 @@
+name: Native SwiftUI iOS compilation check
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'mobile/ios-swiftui/**'
+      - '.github/workflows/ios-native-swiftui-check.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compile-native:
+    runs-on: macos-15
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Generate native Xcode project
+        working-directory: mobile/ios-swiftui
+        run: xcodegen generate
+      - name: Compile for iOS simulator without signing
+        working-directory: mobile/ios-swiftui
+        run: |
+          xcodebuild -project TifloAcostaNative.xcodeproj -scheme TifloAcostaNative -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build
+      - name: Confirm source is native-only
+        working-directory: mobile/ios-swiftui
+        run: |
+          if find Sources -type f \( -iname '*.html' -o -iname '*.js' -o -iname '*.css' \) | grep -q .; then
+            echo 'Web source is not allowed in native app.'
+            exit 1
+          fi

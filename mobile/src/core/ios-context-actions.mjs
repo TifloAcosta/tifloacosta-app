@@ -111,7 +111,8 @@ export function createIosContextActions({ root, plugin, lang = () => 'es',
     if (disposed) { await subscription?.remove?.(); return; }
     observer = observerFactory(schedule);
     observer?.observe?.(root, { childList:true, subtree:true });
-    schedule();
+    // Ensure first screen is registered before the asynchronous install ends.
+    await refresh();
   }
 
   async function destroy() {

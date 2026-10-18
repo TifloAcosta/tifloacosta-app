@@ -68,6 +68,7 @@ function addSaveButton(parent, item, url, nativeActions, t) {
   button.addEventListener('click', () => {
     void nativeActions?.saveFile({ url: targetUrl, filename, mimeType });
   });
+  button.dataset.voAction = 'download';
   parent.append(button);
 }
 
@@ -94,6 +95,7 @@ function addFileShareButton(parent, item, url, nativeActions, t) {
     button.disabled = false;
     status.textContent = shared ? '' : t('share.errorHeading');
   });
+  button.dataset.voAction = 'share';
   parent.append(button, status);
 }
 
@@ -118,11 +120,14 @@ function renderResource(parent, item, favoritesStore, nativeActions, t, headingL
   const openUrl = item.openUrl || item.url || '';
   const downloadUrl = item.url || item.openUrl || '';
   if (openUrl) {
-    addExternalLink(article, {
+    const open = addExternalLink(article, {
       href: openUrl,
       label: `${t('library.open')}: ${item.title || ''}`,
       onOpen: nativeActions?.openExternal
     });
+    open.dataset.voTarget = 'true';
+    open.dataset.voAction = 'open';
+    open.id = `vo-resource-${String(item.id || item.title || '').replace(/[^a-zA-Z0-9_-]/g, '-')}`;
   }
   if (downloadUrl) {
     addSaveButton(article, item, downloadUrl, nativeActions, t);

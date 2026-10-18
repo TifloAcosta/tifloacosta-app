@@ -182,7 +182,8 @@ export function renderReadingBook({
   nativeActions,
   setScreenCleanup,
   onOpenBook,
-  onOpenQueue
+  onOpenQueue,
+  iosNativeTts = null
 }) {
   clearScreen(root);
 
@@ -1147,6 +1148,8 @@ export function renderReadingBook({
 
     speech = createReadingSpeechController({
       client,
+      book: activeBook,
+      fallbackTts: iosNativeTts || {},
       document: documentModel,
       initialPosition: {
         blockIndex: currentPosition.blockIndex,

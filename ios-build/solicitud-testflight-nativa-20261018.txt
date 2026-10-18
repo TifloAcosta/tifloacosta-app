@@ -1,7 +1,11 @@
-Solicitud exclusiva de compilación SwiftUI nativa para TestFlight interno.
+Solicitud explícita de ENVÍO A TESTFLIGHT INTERNO de la compilación SwiftUI nativa de prueba.
 Fecha: 2026-10-18.
-Código fuente comprobado: 4b9178f76bbe8fe8c2a9fc9b5c0c232c196ab1d1.
+Motivo: comprobar primero la instalación y la interfaz nativa en el iPhone; iterar posteriormente las funciones incompletas.
+Consentimiento del probador: TifloLector no tiene aún documentos, marcas ni progreso guardados que requieran migración. No condicionar esta primera prueba a migrar una biblioteca vacía.
+Fuente REAL que el workflow ios-testflight-native.yml compila: 9eb035517f7a9350b32b3dd7d410ac12dff4b514.
 Aplicación: com.tifloacosta.app. Extensión: com.tifloacosta.app.ShareExtension.
-Destino: grupo interno Probadores TifloAcosta. Sin App Store pública.
-La compilación debe contener sólo pantallas SwiftUI nativas, no Capacitor ni interfaz WKWebView.
-La base nativa está en fase de pruebas; se conserva el código de la versión anterior y no se desinstala ni borra la app.
+Destino: grupo interno Probadores TifloAcosta. No publicar en la App Store.
+Solo pantallas SwiftUI nativas, sin interfaz HTML ni Capacitor en la aplicación resultante.
+ALCANCE DE PRUEBA: vídeos abren YouTube externamente por ahora; reproductor accesible nativo y otras funciones deben completarse después de instalar y verificar esta base. No se debe afirmar paridad funcional en esta compilación.
+No desinstalar la beta anterior, no eliminar datos ni tocar Android ni web. Exigir subida real, procesamiento y grupo interno confirmado antes de afirmar disponibilidad.
+Referencia auditoría: https://github.com/TifloAcosta/tifloacosta-app/issues/215

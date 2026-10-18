@@ -20,6 +20,7 @@ import { createShareSession } from './core/share-session.mjs';
 import { createReaderSession } from './core/reader-session.mjs';
 import { createReadingLibraryClient } from './core/reading-library-client.mjs';
 import { createIosLegacyReadingBridge } from './core/ios-legacy-reading.mjs';
+import { createIosReceivedInbox } from './core/ios-received-inbox.mjs';
 import { loadReadableTarget, readablePageFromNewsItem } from './core/readable-loader.mjs';
 import { searchResultAction } from './core/search.mjs';
 import { TifloSave } from './core/save-plugin.mjs';
@@ -48,6 +49,7 @@ import { renderPrivacy } from './screens/privacy.mjs';
 import { renderSettings } from './screens/settings.mjs';
 import { renderShare } from './screens/share.mjs';
 import { renderReader } from './screens/reader.mjs';
+import { renderIosReceived } from './screens/ios-received.mjs';
 import { createAccessibleVideoPlayer, createSharedVideoItem } from './screens/video-player.mjs';
 
 const root = document.querySelector('#app');
@@ -98,6 +100,9 @@ const readingBackend = Capacitor.getPlatform() === 'ios'
     })
   : TifloReading;
 const readingClient = createReadingLibraryClient(readingBackend);
+const iosReceivedInbox = Capacitor.getPlatform() === 'ios'
+  ? createIosReceivedInbox({ native: registerPlugin('TifloShareInbox'), library: readingBackend })
+  : null;
 const nativeActions = createNativeActions({
   appPlugin: App,
   sharePlugin: Share,
@@ -488,6 +493,7 @@ function render(route) {
     preferences,
     favoritesStore,
     nativeActions,
+    iosInboxAvailable: Boolean(iosReceivedInbox),
     notificationService,
     appInfo,
     t,
@@ -500,6 +506,11 @@ function render(route) {
 
   switch (route.name) {
     case 'home': renderHome(context); break;
+    case 'received': {
+      if (iosReceivedInbox) renderIosReceived({ ...context, inbox: iosReceivedInbox });
+      else renderHome(context);
+      break;
+    }
     case 'new-content': renderNewContent(context); break;
     case 'actualidad': {
       renderActualidad({

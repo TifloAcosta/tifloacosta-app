@@ -49,6 +49,7 @@ export function createIosLegacyReadingBridge({
   const mp3Player = audioPlayback || createIosLocalAudio({ library });
   const daisyPlayer = createIosDaisyAudio({ library });
   let player = mp3Player;
+  let audioRequest = 0;
   async function backendForBook(bookId) {
     const opened = await library.openBook(String(bookId || ''));
     return ['daisy2.02', 'daisy3'].includes(opened?.book?.format) ? daisyPlayer : mp3Player;
@@ -59,8 +60,14 @@ export function createIosLegacyReadingBridge({
   }
   // Changing between MP3 and DAISY must never leave two audio engines active.
   async function prepareAudio(options = {}) {
+    const ticket = ++audioRequest;
     const selected = await backendForBook(options.bookId);
-    if (selected !== player) await player.stopAudio();
+    // Never let a slower IndexedDB lookup start a previously selected track.
+    if (ticket !== audioRequest) return null;
+    if (selected !== player) {
+      await player.stopAudio();
+      if (ticket !== audioRequest) return null;
+    }
     player = selected;
     return player.prepareAudio(options);
   }
@@ -260,7 +267,10 @@ export function createIosLegacyReadingBridge({
     nextAudioTrack: (...args) => player.nextAudioTrack?.(...args) || player.getAudioState(),
     setAudioSpeed: (...args) => player.setAudioSpeed(...args),
     getAudioState: (...args) => player.getAudioState(...args),
-    stopAudio: (...args) => player.stopAudio(...args) };
+    stopAudio: (...args) => {
+      audioRequest += 1;
+      return player.stopAudio(...args);
+    } };
   for (const name of passthrough) {
     result[name] = (...args) => library[name](...args);
   }

@@ -489,24 +489,8 @@ final class TifloNativeVideosController: UITableViewController, UISearchBarDeleg
         } else { perform(action: "play", video: visible[indexPath.row]) }
     }
 
-    override func tableView(_ tableView: UITableView,
-                            contextMenuConfigurationForRowAt indexPath: IndexPath,
-                            point: CGPoint) -> UIContextMenuConfiguration? {
-        guard indexPath.row < visible.count else { return nil }
-        let video = visible[indexPath.row]
-        let options: [(String, String)] = [
-            ("play", "Reproducir"), ("youtube", "Abrir en YouTube"),
-            ("like", "Me gusta"), ("subscribe", "Suscripción"),
-            ("share", "Compartir"), ("comment", "Comentar")
-        ]
-        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] _ in
-            UIMenu(children: options.map { pair in
-                UIAction(title: pair.1) { [weak self] _ in
-                    self?.perform(action: pair.0, video: video)
-                }
-            })
-        }
-    }
+    // VoiceOver Custom Actions belong to the focused cell. Avoid a duplicate
+    // UIKit context menu that appears as an unrelated menu in the rotor.
 
     private func perform(action: String, video: TifloVideoRecord) {
         guard let url = URL(string: "https://www.youtube.com/watch?v=" + video.id) else { return }

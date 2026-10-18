@@ -53,7 +53,7 @@ import { renderSettings } from './screens/settings.mjs';
 import { renderShare } from './screens/share.mjs';
 import { renderReader } from './screens/reader.mjs';
 import { renderIosReceived } from './screens/ios-received.mjs';
-import { createAccessibleVideoPlayer, createSharedVideoItem } from './screens/video-player.mjs';
+import { createAccessibleVideoPlayer, createSharedVideoItem, videoId } from './screens/video-player.mjs';
 
 const root = document.querySelector('#app');
 if (!root) throw new Error('Missing mobile app root');
@@ -98,9 +98,11 @@ const shareSession = createShareSession();
 const iosNativeTts = Capacitor.getPlatform() === 'ios'
   ? createIosNativeTtsBridge(registerPlugin('TifloReadingTts'))
   : null;
+const iosAccessibilityPlugin = Capacitor.getPlatform() === 'ios'
+  ? registerPlugin('TifloReadingAccessibility') : null;
 const readingBackend = Capacitor.getPlatform() === 'ios'
   ? createIosLegacyReadingBridge({
-      accessibility: registerPlugin('TifloReadingAccessibility'),
+      accessibility: iosAccessibilityPlugin,
       capacitor: Capacitor,
       nativeTts: iosNativeTts
     })
@@ -112,7 +114,7 @@ const iosReceivedInbox = Capacitor.getPlatform() === 'ios'
 const iosContextActions = iosReceivedInbox
   ? createIosContextActions({
       root,
-      plugin: registerPlugin('TifloReadingAccessibility'),
+      plugin: iosAccessibilityPlugin,
       lang: () => preferencesStore.getCurrent().lang
     })
   : null;
@@ -128,6 +130,38 @@ applyPreferences(document.documentElement, preferencesStore.getCurrent());
 
 function t(key) {
   return text(preferencesStore.getCurrent().lang, key);
+}
+
+// Reuse the proven native, single-screen Videos controller. Its real UIKit
+// rows own the VoiceOver rotor actions; never overlay a second web Videos UI.
+async function openNativeVideos() {
+  if (!iosAccessibilityPlugin?.showNativeVideoSection) return false;
+  const videos = (Array.isArray(currentContent?.videos) ? currentContent.videos : [])
+    .map(item => ({ ...item, id: videoId(item) }))
+    .filter(item => /^[A-Za-z0-9_-]{11}$/.test(item.id) && String(item.title || '').trim())
+    .slice(0, 600);
+  if (!videos.length) return false;
+  const css = getComputedStyle(document.documentElement);
+  const color = (variable, fallback) => {
+    const value = css.getPropertyValue(variable).trim();
+    return /^#[A-Fa-f0-9]{3}(?:[A-Fa-f0-9]{3})?$/.test(value) ? value : fallback;
+  };
+  try {
+    const result = await iosAccessibilityPlugin.showNativeVideoSection({
+      videos,
+      theme: {
+        background: color('--background', '#0B0B0B'),
+        surface: color('--surface', '#151010'),
+        text: color('--text', '#FFFFFF'),
+        muted: color('--muted-text', '#D7CACA'),
+        border: color('--border', '#6E5555'),
+        brand: color('--brand', '#A61B1B')
+      }
+    });
+    return result?.presented === true;
+  } catch {
+    return false;
+  }
 }
 
 function onAppResume(handler) {
@@ -510,6 +544,7 @@ function render(route) {
     notificationService,
     appInfo,
     t,
+    onOpenVideos: iosAccessibilityPlugin ? openNativeVideos : null,
     onPreferencesChange,
     onAppResume,
     setScreenCleanup(cleanup) {
@@ -745,6 +780,13 @@ function onPreferencesChange(changes, { reset = false } = {}) {
 
 router.start('home');
 void iosContextActions?.install();
+if (iosAccessibilityPlugin?.addListener) {
+  void iosAccessibilityPlugin.addListener('nativeVideoClosed', () => {
+    // Restore focus only after UIKit has removed its isolated Videos screen.
+    if (router.current()?.name === 'home')
+      queueMicrotask(() => restoreOriginFocus(root, 'home-videos'));
+  }).catch(() => {});
+}
 
 // A recent, unseen item received through the native iOS Share Extension gets
 // a contextual Received screen on next foreground entry. No autoplay,

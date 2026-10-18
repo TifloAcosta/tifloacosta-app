@@ -228,6 +228,14 @@ select:focus-visible {
   margin-block-start: var(--space-4);
 }
 
+/* Keep every TifloLector filter label, selector and action in its own row.
+   This rule is scoped to the reader and does not change other app screens. */
+.reading-library-filters {
+  display: grid;
+  gap: var(--space-3);
+  margin-block: var(--space-4);
+}
+
 .search-form,
 .reading-library-search {
   display: grid;

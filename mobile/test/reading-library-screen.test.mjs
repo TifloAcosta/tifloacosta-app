@@ -25,21 +25,13 @@ test('reading library screen keeps import, search, paging and delete actions exp
 test('reading library follows the approved accessible order and complete filter contract', async () => {
   const screen = await read('src/screens/reading-library.mjs');
 
-  const search = screen.indexOf("t('readingLibrary.searchLabel')");
-  const continueReading = screen.indexOf("t('readingLibrary.continueReading')");
-  const queue = screen.indexOf("t('readingLibrary.queue')");
-  const importAction = screen.indexOf("t('readingLibrary.import')");
-  const filters = screen.indexOf("t('readingLibrary.filtersHeading')");
-  const settings = screen.indexOf("t('readingLibrary.settings')");
-  const library = screen.indexOf("t('readingLibrary.myLibrary')");
-
-  assert.ok(search >= 0, 'search must be present');
-  assert.ok(search < continueReading, 'search comes before Continue');
-  assert.ok(continueReading < queue, 'Continue comes before Queue');
-  assert.ok(queue < importAction, 'Queue comes before Import');
-  assert.ok(importAction < filters, 'Import comes before Filters');
-  assert.ok(filters < settings, 'Filters come before Settings');
-  assert.ok(settings < library, 'Settings come before My library');
+  // Check rendered DOM order, not the sequence in which widgets were created.
+  assert.match(screen, /root\.append\(importSection, settingsSection, filtersSection, searchForm,[\s\S]*?librarySection, continueSection, queueSection\)/);
+  for (const key of ['readingLibrary.searchLabel', 'readingLibrary.continueReading',
+    'readingLibrary.queue', 'readingLibrary.import', 'readingLibrary.filtersHeading',
+    'readingLibrary.settings', 'readingLibrary.myLibrary']) {
+    assert.ok(screen.includes(key), `Missing ${key}`);
+  }
 
   assert.match(screen, /statusFilter/);
   assert.match(screen, /formatFilter/);

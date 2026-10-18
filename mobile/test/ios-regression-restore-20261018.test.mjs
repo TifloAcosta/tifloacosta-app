@@ -16,14 +16,14 @@ test('iOS labels Recursos independently of TifloLector personal library', () => 
 
 test('TifloLector filters lay out each label and control on a separate row', async () => {
   const css = await read('src/styles.css');
-  assert.match(css, /\\.reading-library-filters\\s*\\{\\s*display:\\s*grid;/);
+  assert.match(css, /\.reading-library-filters\s*\{\s*display:\s*grid;/);
   const view = await read('src/screens/reading-library.mjs');
-  assert.match(view, /filterForm\\.append\\(statusLabel, statusSelect, formatFilterLabel, formatSelect, sortLabel, sortControl, applyFilters\\)/);
+  assert.match(view, /filterForm\.append\(statusLabel, statusSelect, formatFilterLabel, formatSelect, sortLabel, sortControl, applyFilters\)/);
 });
 
 test('iOS single reader screen opens with Import, Settings, Filters before the library', async () => {
   const view = await read('src/screens/reading-library.mjs');
-  assert.match(view, /root\\.append\\(importSection, settingsSection, filtersSection, searchForm,[\\s\\S]*?librarySection, continueSection, queueSection\\)/);
+  assert.match(view, /root\.append\(importSection, settingsSection, filtersSection, searchForm,[\s\S]*?librarySection, continueSection, queueSection\)/);
   assert.match(view, /renderReadingQueue/);
-  assert.match(view, /client\\.pickDocuments\\(\\)/);
+  assert.match(view, /client\.pickDocuments\(\)/);
 });

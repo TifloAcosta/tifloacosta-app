@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T18:08:18.601Z",
+  "generatedAt": "2026-10-18T18:09:39.420Z",
   "resources": [
     {
       "kind": "resource",
@@ -5448,6 +5448,136 @@
   "news": [
     {
       "kind": "news",
+      "id": "engadget-eabbc4a2a60112b8:en",
+      "sourceId": "engadget-eabbc4a2a60112b8",
+      "lang": "en",
+      "title": "From the Royole FlexPai to the iPhone Duo: How the modern foldable phone has evolved",
+      "summary": "Apple's iPhone Duo likely forecasts a shift in the market toward foldables becoming more common. But it took a while to get here.",
+      "body": "Are foldables finally ready to go mainstream?\n\nTechnological advances often come with growing pains. This is no less true of phones. The 1984 \"brick\" phone (DynaTAC 8000X) required users to carry over 1.7 pounds of weight for only half an hour of talk time, at a hefty price tag of $3,995. Foldable phones are not so troublesome, but I still struggled to fit the Samsung Galaxy Z Fold 4 in my pocket when I first got it. What's more, the size of it kept prompting friends to ask why I was carrying two phones around. I wish I had been, for at least it would mean one would have a decent camera. Still, the moment when the phone unfolded and the screen adjusted to the larger size was as awe-inspiring back then as it is now.\n\nToday, after having gotten my hands on some newer models, I have become very impressed by the lengths foldable technology has reached. Models including the Google Pixel 11 Pro Fold and the Samsung Galaxy Z Fold 8 have propelled the technology forward. Even Apple has decided to enter the market, with the iPhone Duo launch that has everyone talking. Suddenly, the future uptake of foldable phones is almost a certainty. Apple might well end up having everything to do with this change, but it would not have been possible without the long list of breakthroughs — and failures — that came before it.\n\nTrend pieces declared 2019 the \"year of the foldable.\" It was not, though those 12 months did provide the first meaningful strides in the technology. The first device of this type to make a splash in the headlines was designed by an unknown Chinese display manufacturer: Royole. The company presented the FlexPai at CES 2019, with all the pomp and circumstance that \"the world's first commercially available foldable smartphone\" required. It was a feat of technology. It captivated the audience, if only momentarily. For all its charms, Engadget's reporters at the time found the Royole FlexPai to be \" rough around the edges ,\" strangely sized and, overall, \" janky .\" Regardless, it demonstrated that flexible OLED could ship in a real product.\n\nLater that year came a second attempt. Samsung's first Galaxy Fold was released in February 2019, kick-starting a series of unfortunate events for the phone manufacturer. If you were there, you might remember the influx of terrible reviews that followed. Despite a high price (just under $2,000), many reviewers complained that their phone screens had broken after little use, and it was revealed that most of them had peeled off a layer of plastic that was acting as a screen protector. The phone's fragility forced Samsung to delay the public launch and recall all units sent to reviewers so it could re-engineer the product. The new version was, however, only \"somewhat\" more sturdy. Overall, those first Samsung phones showed the importance of perfecting the crease, hinge durability and screen resistance as key to the success of foldable phones.\n\nThe next step showed the route not taken. Huawei's Mate X , presented at MWC 2019, folded outward instead of inward. It used a single high-resolution display that wrapped around the outside of the phone. The resulting design was extremely elegant. The problem? The screen could easily be scratched and damaged. On top of that, the phone was never sold in the United States due to the sanctions imposed by then-President Donald Trump on Chinese technologies. Still, for as striking as the Mate X was, the company's next foldable, the Mate X2, used the inward fold introduced by Royole and Samsung, showing that different does not necessarily mean better.\n\nThe years between 2020 and 2025 gave way to an avalanche of foldable phone models, pushed by Android phone makers. Almost every phone released over these years came with a significant advance. It was all this hard work that has made the foldable phone viable. Still, no specific model achieved what the manufacturers truly wanted: to make the foldable phone mainstream.\n\nAt first, foldable phone makers were mainly concerned with protecting the screens against pressure, water and dust. In 2020, Samsung's Galaxy Z Flip introduced ultra-thin glass in the inner screen, making it more robust. The Z Fold 3 and Z Flip 3, released in 2021, came with IPX8 water resistance. Dust was harder to protect against than water, but still the Fold 6 came with partial dust protection (IP48). In 2025, Google's Pixel 10 Pro Fold reached full IP68. The other big battle was how to address the crease. It was Oppo, with its 2021 Find N, that achieved a near-invisible crease . After that, Honor's Magic V series kept cutting thickness until Samsung answered with the slim Galaxy Z Fold 7.\n\nThe other element that needed to change for the technology to be widespread was pricing. Over this period, clamshell phones like the rebooted Motorola Razr and the $999 Galaxy Z Flip 3 brought prices down to regular flagship levels, making foldable phones better for everyone's physical and figurative pockets.\n\nCan Apple make the final push that will take foldable phones into the mainstream? It has done it before and could, no doubt, do it again if the iPhone Duo is everything that has been promised.\n\nDuring its history, Apple has mastered the ability to wait until the first hiccups of a technology have passed before entering a market and disrupting it. The company did it with touchscreens, and again with foldable phones, waiting until the crease problem that Samsung struggled with had been resolved before putting out its own model. In 2026, the announcement finally arrived in the form of the iPhone Duo. Folded, the phone is passport-sized. It has a 7.6-inch internal display and a 5.4-inch external display, at a starting price of $1,999. Overall, it has all the ingredients to be a huge success, with reviewers deeming the iPhone Duo Apple's \" most exciting device in a decade .\" Counterpoint even told Bloomberg the phone's sales are expected to reach 6 million units in 2026 alone. Taking Apple's history as a guide, we could be about to witness the exact moment when foldable phones finally become fashionable.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2286505/how-modern-foldable-phone-evolved-from-royole-flexpai-to-iphone-duo/",
+      "publishedAt": "2026-10-18T18:00:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-182be430bbcaed85:en",
+      "sourceId": "9to5mac-182be430bbcaed85",
+      "lang": "en",
+      "title": "Apple Watch Series 12 is excellent, but I find myself missing this one software feature",
+      "summary": "Apple Watch Series 12 has been a marvel of an upgrade, at least for me. I’ve written about it WHOOP. That said, in my past month testing it, there’s one WHOOP feature I’ve found myself missing. more…",
+      "body": "Apple Watch Series 12 has been a marvel of an upgrade, at least for me. I’ve written about it many times , and personally – I have found that the Apple Watch Series 12 is a competent replacement for the WHOOP . That said, in my past month testing it, there’s one WHOOP feature I’ve found myself missing.\n\nYes, I know – the Series 12 is old news, and there are much cooler things to think about, like iPhone Duo and HomeView . That said, the Apple Watch Series 12 was quite charming to me, primarily because it felt like a little bit of a surprise.\n\nWe knew we’d be getting an always-on heart rate monitor, and we knew Apple was working on a new Health app, though we didn’t know when it would ship. Seeing the two together actually felt like quite a novel launch. That’s besides the point, though. Let’s talk about the redesigned Health app and what I feel it’s missing.\n\nFrankly, Apple did a lot really well here. For one, there’s the fact that the interface actually feels easy to read and navigate. On top of that, the new features like Readiness and Health Age make it feel like a much more meaningful app. Plus, existing features like Vitals and Sleep being integrated means I’ll actually go look at it daily.\n\nThis Health app isn’t shipping yet. It was available in iOS 27.2 for a little while, but has since been removed . Apple says it’ll come back in a later iOS beta prior to releasing it later this year. In all likelihood, this means iOS 27.3, which should enter beta before the end of the month and ship before the end of December.\n\nFor me, and this is more of a small personal preference than a true flaw with the app or how it’s designed, I’d really like to see Apple copy WHOOP’s approach to measuring days: sleep.\n\nWith WHOOP , your days aren’t measured on a fixed 24 hour clock, they’re based on when you go to sleep. That means if you do a workout past midnight, it still counts for the existing day. Or, if you were out late at night, your walk home counts towards the day that you started on, rather than counting towards the next day. I personally prefer this concept of tracking fitness goals.\n\nOf course, it could be an option, though I do think fixing peoples “days” to their sleep is a little more sensible than basing it on a normal clock, especially when it comes to tracking exercise.\n\nWhat do you think of this concept? How do you feel about the new Apple Health app ? Let us know in the comments.\n\nMy favorite Apple accessory recommendations:\n\nFollow Michael: X/Twitter , Bluesky , Instagram",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/18/apple-redesigned-health-app-one-suggestion-series-12/",
+      "publishedAt": "2026-10-18T17:56:43.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "programas-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "applevis-apps-b151a03570dc02f3:en",
+      "sourceId": "applevis-apps-b151a03570dc02f3",
+      "lang": "en",
+      "title": "CoreAI Zoo",
+      "summary": "CoreAI Zoo puts the open-weight AI model zoo on your iPhone, iPad and Mac. Pick a model, download it once, and run it entirely on your device. No account, no server, and nothing you type, say or photograph ever leaves the device. CHAT Stream answers from open language models such as Qwen3, Gemma, LFM2.5, Granite and Mistral, from 0.6B to 30B+ parameters depending on your device's memory. Vision-language models (Qwen3-VL, MiniCPM-V, LFM2.5-VL) answer questions about your photos. VISION Ask questions about an image, read text with on-device OCR, and describe what the camera sees. AUDIO Transcribe speech with Whisper large-v3-turbo, Parakeet and Qwen3-ASR. Talk to an audio-understanding model, generate speech with Kokoro and VoxCPM, and try on-device music generation. CAMERA Live depth estimation, object detection (YOLOX, RF-DETR), action recognition and super-resolution on the camera feed. TOOLS Experimental models such as diffusion-based language models. BENCH Measure load time, tokens per second and memory for any chat model on your own hardware. HOW IT WORKS Every model runs through Core ML on Apple silicon. Weights are downloaded from the Hugging Face Hub on first use over HTTPS, then cached, so the app works offline afterwards. One model is resident at a time to stay within memory limits. New models arrive through a live catalog without an app update. GETTING STARTED Start with Qwen3-0.6B (454 MB) for the fastest first run. Larger models state the free space and memory they need; a recent iPhone Pro or an Apple silicon Mac runs the mid-size ones comfortably. Model weights follow their own licenses, listed on each model's Hugging Face page. The app itself is BSD-3-Clause and part of the open CoreAI model zoo. Report issues and request models at github.com/john-rocky/coreai-model-zoo.",
+      "body": "CoreAI Zoo puts the open-weight AI model zoo on your iPhone, iPad and Mac. Pick a model, download it once, and run it entirely on your device. No account, no server, and nothing you type, say or photograph ever leaves the device.\n\nCHAT Stream answers from open language models such as Qwen3, Gemma, LFM2.5, Granite and Mistral, from 0.6B to 30B+ parameters depending on your device's memory. Vision-language models (Qwen3-VL, MiniCPM-V, LFM2.5-VL) answer questions about your photos.\n\nVISION Ask questions about an image, read text with on-device OCR, and describe what the camera sees.\n\nAUDIO Transcribe speech with Whisper large-v3-turbo, Parakeet and Qwen3-ASR. Talk to an audio-understanding model, generate speech with Kokoro and VoxCPM, and try on-device music generation.\n\nCAMERA Live depth estimation, object detection (YOLOX, RF-DETR), action recognition and super-resolution on the camera feed.\n\nTOOLS Experimental models such as diffusion-based language models.\n\nBENCH Measure load time, tokens per second and memory for any chat model on your own hardware.\n\nHOW IT WORKS Every model runs through Core ML on Apple silicon. Weights are downloaded from the Hugging Face Hub on first use over HTTPS, then cached, so the app works offline afterwards. One model is resident at a time to stay within memory limits. New models arrive through a live catalog without an app update.\n\nGETTING STARTED Start with Qwen3-0.6B (454 MB) for the fastest first run. Larger models state the free space and memory they need; a recent iPhone Pro or an Apple silicon Mac runs the mid-size ones comfortably.\n\nModel weights follow their own licenses, listed on each model's Hugging Face page. The app itself is BSD-3-Clause and part of the open CoreAI model zoo. Report issues and request models at github.com/john-rocky/coreai-model-zoo.",
+      "sourceName": "AppleVis Apps",
+      "originalUrl": "https://www.applevis.com/apps/ios/developer-tools/coreai-zoo",
+      "publishedAt": "2026-10-18T17:29:21.000Z",
+      "categories": [
+        "apple",
+        "apps-accesibles",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-cbc97e83a832120a:en",
+      "sourceId": "ars-technica-cbc97e83a832120a",
+      "lang": "en",
+      "title": "Anthropic gives outside AI watchdog “employee-like” access",
+      "summary": "The outside watchdog can publish its findings without Anthropic's approval.",
+      "body": "Anthropic has granted external evaluators “employee-like access” to assess the risks of its models, following through on a commitment to increase safeguards over concerns the technology could run catastrophically out of control.\n\nMETR, a nonprofit that has worked with leading labs including OpenAI, Anthropic, Google and Meta, now has a team embedded in the Claude maker’s office with access to its hardware and internal systems.\n\nA greater role for third-party evaluators is among the main concrete steps the labs have proposed in response to rising concern about the dangers more capable AI systems could pose to the economy, cyber security and humanity at large.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/ai/2026/10/anthropic-gives-outside-ai-watchdog-employee-like-access/",
+      "publishedAt": "2026-10-18T16:25:19.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-4e6d3c78b0f7d8de:en",
+      "sourceId": "techcrunch-4e6d3c78b0f7d8de",
+      "lang": "en",
+      "title": "TechCrunch Mobility: Rivian’s next act",
+      "summary": "Welcome back to TechCrunch Mobility, your hub for the future of transportation and now, more than ever, the role AI is playing in it.",
+      "body": "Welcome back to TechCrunch Mobility , your hub for the future of transportation and now, more than ever, the role AI is playing in it. To get this in your inbox, sign up here for free — just click TechCrunch Mobility !\n\nAs I wrapped my TechCrunch Disrupt interview with Rivian CEO and founder RJ Scaringe , I kept circling back to one question: What does Scaringe want Rivian to become? If you look at Rivian’s moves over the past year, it’s clear that Scaringe wants the company to be much more than an EV maker. But he doesn’t want to stray completely from that mission either.\n\nRivian is far more vertically integrated than it was just a couple of years ago. It has developed its own AI models to power its in-vehicle assistant and is building an end-to-end automated driving stack for its passenger vehicles and future robotaxis through a partnership with Uber. It’s even developing custom silicon , a 5 nm processor in collaboration with Arm and TSMC. And then there is its $5.8 billion joint technology venture with VW Group focused on electric architecture and software.\n\nScaringe’s ambitions extend beyond Rivian as well, although there is always a link back. He created a micromobility skunkworks program that has since spun out into a startup called Also. And he founded an industrial robotics startup called Mind Robotics, which is now 31% owned by Rivian and counts the automaker as a prospective customer. (Scaringe announced onstage that former Ford, Apple, and Tesla executive Doug Field has been hired as president of Mind Robotics.)\n\nScaringe’s aspirations were on display as he talked of not only expanding the joint venture with VW to cover AI and autonomy, but also licensing Rivian’s tech to “many different brands.”\n\nSo what does Rivian look like at the end of the decade? Certainly not just a maker of electric trucks and SUVs. The term I kept coming back to was “tech supplier.”\n\nHear me out. Rivian is clearing a path toward licensing its electric architecture and software as well as its AI models and autonomy stack. Meanwhile, the Mind Robotics startup it partially owns is building industrial robots to not only be used in Rivian factories, but also sold to other companies. Then there’s the robotaxi business. A successful launch with Uber could open the door to more deals.\n\nAnd Scaringe is already imagining how autonomy could reshape Rivian’s own vehicles.\n\n“Where it gets really interesting is then you think beyond R2 and R3 and start to imagine the form factors that you want to build for a personally owned autonomous vehicle. You know, it opens up all kinds of design opportunities. It can create dramatically different experiences,” he said in an interview with TechCrunch. “I’m wildly excited about what the next 10 years look like in transportation because of what this enables us to dream and think about.”\n\nBedrock Robotics , a startup developing autonomous driving tech for construction vehicles, is raising $600 million , Axios reported, citing sources.\n\nDot Ai completed its acquisition of electric vehicle car-sharing business Envoy Technologies in a $65 million all-stock transaction, according to a regulatory filing .\n\nEvos , a startup that developed AI agents to automate work for industrial businesses, including freight brokerages, raised $9 million in a pre-seed round co-led by Uncork Capital and Field Ventures.\n\nMana Battery, a Colorado-based startup developing anode-free sodium batteries, raised $10.15 million in a round led by Voyager Ventures.\n\nPlusAI , the autonomous trucking developer, and Texas Ventures Acquisition III filed a Form S-4 registration statement with the Securities and Exchange Commission —advancing its previously announced agreement to go public via a merger with a blank-check company.\n\nVolvo is leveling up its automated driving system through an expansion of its nearly decade-long partnership with Nvidia. Neither company shared financial terms of the deal. The automaker plans to use a trio of Nvidia products to be able to offer hands-free, point-to-point driving on highways and surface streets.\n\nWaabi , a startup developing self-driving trucks, landed a commercial partnership with carrier Warrior Logistics. Under the deal, Waabi’s self-driving trucks will move freight between Dallas and Houston.\n\nElectric vehicle sales in the United States are showing signs of life .\n\nLaplace Intelligence , one of 20 startups that competed in TechCrunch’s Startup Battlefield 200, is building automated red-teaming that stress-tests robots and self-driving cars.\n\nMIT startup LNK Energies says it has created a way to convert existing heavy-duty trucks from diesel to hydrogen , slashing pollution and costs while shielding operators from price spikes.\n\nThe Paris Auto Show puts Chinese cars on center stage.\n\nTesla showcased its SpaceX-powered Roadster with a theatrical kickflip stunt. The Roadster used a mix of high-powered fans and thrusters to drive up an inverted ramp, spin around, and stick a landing on the pavement below. CEO Elon Musk claims the vehicle will be on the road by 2028. But will future owners be allowed to legally deploy these maneuvers on public streets? I don’t see how.\n\nWaymo is expanding into Canada — specifically, Toronto — after receiving approval to participate in an automated vehicle pilot program. Waymo has also opened up its robotaxi service to everyone, meaning no more waitlists, in San Antonio, San Diego, and Tampa.\n\nTechCrunch reporter Tim De Chant recently test drove the 2026Porsche Macan Turbo EV . His week with the EV has him questioning what a sports car is supposed to be. Read the full review.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/18/techcrunch-mobility-rivians-next-act/",
+      "publishedAt": "2026-10-18T16:05:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-08c0b2900c546dfa:en",
+      "sourceId": "the-verge-08c0b2900c546dfa",
+      "lang": "en",
+      "title": "Lenovo’s fast, comfy SteamOS handheld is hundreds off",
+      "summary": "The Legion Go S with SteamOS is a pretty solid alternative to the $789 Steam Deck OLED. It runs identical software, but ships in a design with two-stage triggers, a bigger eight-inch IPS screen (1080p and up to 120Hz versus 800p and 90Hz in the Deck OLED), and it’s got double the RAM and storage […]",
+      "body": "The Legion Go S with SteamOS is a pretty solid alternative to the $789 Steam Deck OLED. It runs identical software, but ships in a design with two-stage triggers, a bigger eight-inch IPS screen (1080p and up to 120Hz versus 800p and 90Hz in the Deck OLED), and it’s got double the RAM and storage (32GB and 1TB, respectively), not to mention a slightly faster processor in the Ryzen Z1 Extreme.\n\nAt $999.99, its current discounted price at Best Buy , it’s worth considering if you’re deciding on a handheld. The Legion Go S is not as powerful as the $1,299.99 Asus ROG Xbox Ally X20 that just launched, which has the Z2 Extreme and a OLED screen, but it’s no slouch, either.\n\nThis model launched with Windows 11 and the Ryzen Z2 Go. Despite being a newer chip, it’s less powerful than the Z1 Extreme in the discounted model. SteamOS and the faster internals within this configuration will provide a better experience. Check out my colleague Sean Hollister’s review of multiple configs of the Go S, and see how it stacks up in his benchmarks.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/gadgets/1013436/lenovo-legion-go-s-steamos-handheld-deal-sale",
+      "publishedAt": "2026-10-18T15:00:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "programas-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-f815b099926a14ce:en",
+      "sourceId": "9to5mac-f815b099926a14ce",
+      "lang": "en",
+      "title": "Apple’s first touchscreen MacBook could debut on November 6: Here’s what to expect",
+      "summary": "After over a decade of not adopting touch displays on its Mac notebook lineup, Apple will finally be releasing its first touchscreen MacBook as early as November 6th, after announcing it as early as October 27th . more…",
+      "body": "After over a decade of not adopting touch displays on its Mac notebook lineup, Apple will finally be releasing its first touchscreen MacBook as early as November 6th, after announcing it as early as October 27th .\n\nOf course, rumors are rumors – though essentially every reputable source has aligned on the idea of the MacBook Pro gaining support for touch very shortly. Apple even left a few hints in macOS 27: Touch Support in Sidecar, pull to refresh support, and slightly bigger menu bar items.\n\nOne could call all of this a mere coincidence, but it’s probably exactly what it looks like. Regardless, here’s what the first touchscreen MacBook will have to offer.\n\nOn the display panel side of things, the redesigned MacBook Pro will come with a Tandem OLED display. This will be similar to the iPad Pro , which is often touted as one of the best mobile displays on the market. Tandem OLED comprises of stacked OLED panels, which allows for incredible colors, strong contrast, and increased brightness.\n\nReports also suggest it’ll come with a Dynamic Island , and it’ll be a bit smaller than the one on the iPhone. It won’t, however, come with support for Face ID.\n\nAccording to Bloomberg’s Mark Gurman , Apple will have some special optimizations for the first touchscreen MacBook Pro , beyond what’s already visible in the betas of macOS 27:\n\n“For instance, if users touch a button or control, the interface will bring up a new type of menu surrounding their finger that provides more relevant options for touch commands.\n\nThe software will also display the most appropriate set of controls based on users’ prior interaction. And if a person taps an item in the menu bar at the top of the screen, the set of controls will enlarge to be more easily selectable with a finger.”\n\nDespite initial reporting suggesting that we’ll be seeing the debut of the M6 Pro and Max in the redesigned MacBook Pro , Apple is now skipping the release of those chips to accelerate the M7. This means that the first iteration of 2nm chips won’t be making their way to the redesigned MacBook Pros, and they’ll instead offer the existing M5 Pro and M5 Max chips .\n\nThere won’t be a base model version of this computer quite yet, though rumors suggest that Apple will be launching a base version of the redesigned MacBook Pro with an M7 chip as early as next spring .\n\nOne design rumor for the new MacBook Pro is the fact that it’ll be slightly slimmer and lighter – though it’s unclear how meaningful this will be. The last MacBook Pro iteration made the computers look and feel quite chunky, so a bit of progress here would likely be welcome – so long as it doesn’t come at the compromise of thermals.\n\nBloomberg has also reported that these computers will be ‘significantly lighter,’ thanks to re-engineering of internal components.\n\nAccording to the Power On newsletter , Apple will potentially release these new MacBook Pro models on November 6th, making a straight four weeks of new Apple launches with iPhone Duo, HomePod mini 2, the new MacBook Pro , and HomeView + Apple TV 4K .\n\nAs of now, there’s no Apple release scheduled for November 6th, so it would make sense to be the new MacBook Pro :\n\nNow, I have a little more to share: Apple is planning to hold a “reset” at its retail stores on the evening of Thursday, Nov. 5, into Friday, Nov. 6, that implies new signage and products will be placed on store tables. Given that this Friday is a week after the Mac announcements (when Apple would typically release products), it would make sense that this is the date when at least some of the new items become available to customers.\n\nMy favorite Apple accessory recommendations:\n\nFollow Michael: X/Twitter , Bluesky , Instagram",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/18/new-macbook-pro-with-touchscreen-and-oled-november-6-release/",
+      "publishedAt": "2026-10-18T14:48:53.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-88ee9b766e761910:en",
+      "sourceId": "engadget-88ee9b766e761910",
+      "lang": "en",
+      "title": "iOS 27's new CarPlay features are great, but only these iPhones can actually use them",
+      "summary": "With the release of iOS 27, car owners with CarPlay support can enjoy lots of cool new features. However, not all iPhone models are able to support them all.",
+      "body": "If your iPhone is less than three years old, you're in luck.\n\nApple's iOS 27 update doesn't just bring new features for iPhone users — it also adds a bunch of new options to CarPlay for a better in-car experience. The upgrades aren't huge, but they definitely make CarPlay easier and more enjoyable to use.\n\nFor starters, the Now Playing screen has finally got a progress bar and a persistent mini-player, while navigation apps can share route data with the car. There are also new wallpapers, performance improvements and the long-awaited Siri AI right inside your vehicle. But there's a catch: these features require an iPhone running iOS 27, and even if you have one, you might need one of the newer models to unlock all of what's possible.\n\nA major upgrade to CarPlay with iOS 27 is support for video apps. Until now, CarPlay's entertainment support was limited to audio services like Apple Music and Spotify, but drivers can now watch videos on their vehicle's display.\n\nThat doesn't mean you can watch a movie while driving, though. The feature detects when the car is in motion and, for safety reasons, only becomes available once the vehicle is parked. If you're watching something and start driving, playback automatically switches to audio-only until you come to a stop. Still, it's a nice option to have. One thing to keep in mind is that vehicle manufacturers need to implement support for this new feature, which might mean apps like YouTube or Netflix might not work inside your car right now.\n\nAudio playback has also improved, with Now Playing having a mini-player that includes the album artwork, playback controls and a long-awaited progress bar. Just swipe to skip forward or backward through a song or podcast without having to reach for your iPhone. Speaking of improvements, Apple claims that CarPlay has become much more reliable in iOS 27. Not only can you expect a more consistent wireless connection, but also more accurate GPS location reporting.\n\nThere are also new wallpapers to choose from and the ability for apps to share route data with your vehicle to include information such as EV charging stops. This allows your vehicle to cross-check arrival times with Google Maps and Apple Maps and suggest locations to juice up along the route.\n\nSiri AI, the updated version of Apple's virtual assistant, is also available in CarPlay with iOS 27. It works pretty much the same way as it does on other Apple devices — it can answer general knowledge questions or even use personal context to find answers in your emails, messages and calendar. For example, you can ask Siri to get directions to a restaurant that someone recommended to you during a conversation. You can also use more natural language to search for directions in Apple Maps — like asking Siri to avoid tolls on your route.\n\nYou can only take advantage of these features if you have an iPhone compatible with Siri AI . That means an iPhone 15 Pro or an iPhone 16 or later. Since CarPlay runs entirely on your iPhone, an older iPhone doesn't have the hardware required to power Siri AI in your car. An iPhone 14 owner, for example, still gets the mini-player, the progress bar and the new wallpapers, but not the new Siri experience.\n\nStill, you'll need to update your iPhone to iOS 27 first. The update is available for the iPhone 11 and later , so if you have an older iPhone, you're out of luck. Your CarPlay will continue to operate, just with the features it already supports.\n\nSiri AI also isn't available in the European Union due to local regulations, so that's something to keep in mind. If you live in Europe and own a compatible iPhone, you'll still get the new CarPlay features, but not Siri AI.\n\nIf you've already prepared and updated your iPhone to iOS 27 , it's worth checking out a few settings that can help improve your CarPlay experience .",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2286246/ios-27-carplay-features-not-available-older-iphones/",
+      "publishedAt": "2026-10-18T14:45:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "9to5mac-e486eb72d32962cc:en",
       "sourceId": "9to5mac-e486eb72d32962cc",
       "lang": "en",
@@ -5514,54 +5644,6 @@
     },
     {
       "kind": "news",
-      "id": "engadget-7f8de039a2d21046:en",
-      "sourceId": "engadget-7f8de039a2d21046",
-      "lang": "en",
-      "title": "OpenAI is building a humanoid robot, but the body isn't the real challenge",
-      "summary": "OpenAI CEO Sam Altman wants a humanoid that can operate in a world designed for people, though the CEO says a robot 'brain' is a much bigger challenge.",
-      "body": "Figuring out how the 'brain' will work will take a lot of time.\n\nWhile OpenAI is already busy with the development of AI models and new consumer hardware , CEO Sam Altman and his team apparently have time for one more project: a humanoid robot.\n\nOn the Sources podcast , Altman explained that the human form is logical because \"the world is very much designed for people.\" Doors, keyboards and tools are all designed around a certain type of body, and a robot that can move around in the same spaces should probably have a similar form factor. As Altman put it, \"matching that form factor seems good.\"\n\nWhen asked if OpenAI will actually build one, his response was much more succinct: \"We will.\" However, Altman isn't so concerned with the nitty-gritty details of what that robot looks like. Those questions are \"less important than really figuring out ... the brain that makes the robot work,\" he said. Basically, giving a machine two arms and two legs doesn't get you very far if it doesn't know what to do with them.\n\nThis is still some distance from becoming a product. Altman told Fortune : \"I think we'll have a cool demo in 2027 ... I don't think there will be robots walking the streets for a few years longer.\" OpenAI hasn't disclosed what that demo will showcase, what its humanoid will look like or when anyone outside the company will get close to one.\n\nCalling it a robot \"brain\" almost makes the problem sound neat, but it isn't.\n\nA capable humanoid must be able to understand what its cameras and sensors are seeing, interpret an instruction, decide how to carry it out, coordinate its body and then correct itself when the real world introduces something inconvenient. When picking up a mug, for instance, it needs to identify the mug, find the handle, estimate the grip and exert the correct amount of force to lift it. Otherwise, you're left with a coffee spill and a floor-cleaning job.\n\nOpenAI is already recruiting people to address those issues. Its robotics roles span motion control, state estimation, actuator control and whole-robot behavior, as well as the machine-learning infrastructure to train physical AI systems.\n\nThere's a bit of history here as well. OpenAI's Dactyl research project taught a robotic hand how to manipulate real objects, with its training done entirely in simulation. The company later applied the technique to a Rubik's Cube, an early example of the same headache that plagues robotics companies to this day: a model can learn what should happen through its software, but physics has the final say.\n\nAltman's focus on intelligence shouldn't be mistaken for OpenAI treating the hardware as an afterthought. The company's robotics job listings indicate it is working on custom electromechanical actuators that include motors, transmissions, sensing and thermal systems, while other positions cover manufacturing and the supply chain needed to eventually produce hardware at scale. That's quite a bit of work for the \"less important\" half of the robot.\n\nOpenAI is also not entering uncharted territory. Tesla has been working on Optimus for years , and XPENG recently had its IRON humanoid autonomously walk off the production line after being assembled. Both are good reminders that even smart software has to coax a very complex set of motors and joints into action.\n\nOpenAI's own plans seem to begin at a more down-to-earth level than placing a robotic roommate in every home. One of its robotics job postings states that the company's short-term objective is to create general-purpose robots that can help skilled workers build infrastructure, and its long-term goal is to develop a personal robot that can help with a much wider variety of tasks.\n\nIf you're already imagining a physical form of ChatGPT with knees doing the dishes, you may not need to remove your dishwasher just yet. OpenAI hasn't announced an actual robot yet, or a consumer price, subscription model, release date or robot-specific privacy framework. Those questions get a bit more real-world if a future OpenAI machine is equipped with cameras and microphones and allowed to roam around someone's house.\n\nThat said, OpenAI's careers page currently lists 27 robotics openings.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2285040/openai-humanoid-robot-sam-altman-statement-real-challenge/",
-      "publishedAt": "2026-10-17T23:45:00.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-9ddeac6809dc2425:en",
-      "sourceId": "engadget-9ddeac6809dc2425",
-      "lang": "en",
-      "title": "These Samsung Galaxy tablets are in their last year of software support",
-      "summary": "Samsung's latest software update commitment for its tablets is great, but older devices can't take advantage of it.",
-      "body": "These tablets are the last ones released before Samsung's more generous support policy.\n\nBack in the TouchWiz era, Samsung's reputation for timely software updates wasn't exactly the best. It's thus great to see how far the brand has come in delivering faster updates and providing longer software support for its devices. Samsung is now one of the few Android manufacturers that offers a generously long software support policy, with its recent Galaxy Tab S12 Ultra benefiting from seven years of OS and security updates. Not every tablet Samsung has sold in previous years enjoys that kind of longevity, though.\n\n2026 marks the final release of major Android updates for the Galaxy Tab S9, S9+, S9 Ultra, S9 FE and S9 FE+. These tablets will receive the One UI 9 update , which is based on Android 17. The Galaxy Tab S9 series arrived in 2023 running One UI 5.1 (Android 13), with Samsung promising four generations of major OS updates and five years of security patches for these devices. They should continue to receive security updates until sometime in 2028.\n\nThe Galaxy Tab S8, S8+ and S8 Ultra (released in February 2022) have already received their final major OS upgrade with One UI 8, which is based on Android 16. Security updates should continue until February 2027. Android 16 is also the last major update for the Galaxy Tab A9 and A9+, which were released in October 2023. Despite being a bit newer, the Galaxy Tab A9 series has already received its final major OS update, likely because it was a budget-oriented offering. It will still receive another year of security updates.\n\nFortunately, newer Galaxy Tab models come with longer software support cycles. Samsung began its seven-year software update policy with the Galaxy Tab S10 series that launched in 2024. The newer Galaxy Tab S11 and S12 models offer the same commitment. Surprisingly, even Samsung's budget Galaxy Tab A11 and A11+ devices, which released in 2025, are eligible for seven years of Android and security updates. If you're buying from Samsung's current catalog of tablets, you don't have to worry about having software updates dropped anytime soon.\n\nSamsung also sells rugged tablets under its Galaxy Tab Active lineup, which are marketed primarily towards business and enterprise customers. These devices have different software update policies. The Galaxy Tab Active5 was launched in 2024 with a four-year commitment to Android OS updates and five years of security updates. Since it shipped with Android 14, it should be good for updates through Android 18, with security patches continuing until 2029.\n\nBe aware that not every device from Samsung receives OS updates at the same time. Rollout schedules vary depending on your tablet's model and region. So if you aren't seeing the One UI 9 update on your Galaxy Tab yet, it doesn't mean you've been left out. Check for Android or security updates on your Samsung tablet by navigating to Settings > Software update > Download and install . If there's a pending update available, tap Install now .",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2284679/samsung-galaxy-tablets-last-year-software-support/",
-      "publishedAt": "2026-10-17T23:30:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "android",
-        "programas-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-7c35c8a1a19f5af3:en",
-      "sourceId": "9to5mac-7c35c8a1a19f5af3",
-      "lang": "en",
-      "title": "iPhone Duo walk-in purchases might be challenging at launch, per report",
-      "summary": "According to a new report from MacRumors , Apple employees are being told to warn customers that iPhone Duo likely won’t be available for purchase on launch day if you didn’t already place a pre-order. more…",
-      "body": "According to a new report from MacRumors , Apple employees are being told to warn customers that iPhone Duo likely won’t be available for purchase on launch day if you didn’t already place a pre-order.\n\nRight now, Apple’s website suggests that you can check back for iPhone Duo availability on October 24th. However, this isn’t a guarantee of any stock actually being available, per MacRumors :\n\nApple Store employees told MacRumors that they have been advised that there will likely be no ‌iPhone Duo‌ stock available for walk-in purchases on launch day. Staff have been instructed to discourage customers without pre-orders from coming in expecting to buy the device, warning that they will be disappointed.\n\nThis isn’t necessarily a surprise, given the fact that Apple stated yesterday that iPhone Duo demand is “extraordinary,” and we’ve long known that there were production constraints that’d lead to limited iPhone Duo supply around launch.\n\nHowever, this still serves as our first true sign that even if you line up at an Apple Store the night prior to the iPhone Duo launch, you might not actually end up getting a device. Some stores might receive no additional shipments beyond what was already pre-ordered.\n\nAs of now, iPhone Duo is sold out through January . If these supply constraints remain, it’ll probably be challenging to buy a device for the foreseeable future. Scalpers have also been charging absurd markups on iPhone Duo orders close to launch day.\n\nIf you truly want an iPhone Duo sooner than later, carriers and Best Buy seem to be a decent bet, at least in the US.\n\nMy favorite Apple accessory recommendations:\n\nFollow Michael: X/Twitter , Bluesky , Instagram",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/17/iphone-duo-walk-in-purchases-challenging-report/",
-      "publishedAt": "2026-10-17T22:21:41.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "techcrunch-a809d32697a1fc35:en",
       "sourceId": "techcrunch-a809d32697a1fc35",
       "lang": "en",
@@ -5578,24 +5660,6 @@
     },
     {
       "kind": "news",
-      "id": "9to5mac-d74123b64fafe0dd:en",
-      "sourceId": "9to5mac-d74123b64fafe0dd",
-      "lang": "en",
-      "title": "Indie App Spotlight: ‘Hoardware’ makes it easy to track your Apple device collection",
-      "summary": "Welcome to Indie App Spotlight . This is a weekly 9to5Mac series where we showcase the latest apps in the indie app world. If you’re a developer and would like your app featured, get in contact . If you’re someone who collects tons of varying Apple products, Hoardware is your one-stop shop for keeping track of it all. Hoardware lets you track all of your hardware, as well as the software versions, model numbers, and anything else that might be relevant. more…",
-      "body": "Welcome to Indie App Spotlight . This is a weekly 9to5Mac series where we showcase the latest apps in the indie app world. If you’re a developer and would like your app featured, get in contact .\n\nIf you’re someone who collects tons of varying Apple products, Hoardware is your one-stop shop for keeping track of it all. Hoardware lets you track all of your hardware, as well as the software versions, model numbers, and anything else that might be relevant.\n\nHoardware is mostly useful as a collector’s tool. Say you have a giant vintage iPhone collection. Hoardware will let you track every single iPhone, its iOS version, its serial number, and anything else that you want to note down. There’s also a coverage tab, where you can see how many devices you own on each iOS version.\n\nOf course, it isn’t only useful for collectors. You can add new devices too, and Hoardware has a feature where it can notify you when new software updates are released for your device, so you can see it even quicker than Apple will tell you.\n\nAdding a device to Hoardware is simple. There’s a list you can scroll through, then you select from there – and most of the details are automatically filled in. The app even automatically provides images of devices.\n\nLastly, you can even set devices as favorites so you can easily find them in a crowded list, if you’re an avid collector. Your library will sync across iCloud, too.\n\nHoardware is available for free on the App Store for devices running iOS 17 and later. There are no ads, in-app purchases, or subscriptions.\n\nMy favorite Apple accessory recommendations:\n\nFollow Michael: X/Twitter , Bluesky , Instagram",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/17/indie-app-spotlight-hoardware-makes-it-easy-to-track-your-apple-device-collection/",
-      "publishedAt": "2026-10-17T19:30:00.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "apps-accesibles",
-        "programas-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "techcrunch-f20a6d63a693920c:en",
       "sourceId": "techcrunch-f20a6d63a693920c",
       "lang": "en",
@@ -5607,22 +5671,6 @@
       "publishedAt": "2026-10-17T18:48:08.000Z",
       "categories": [
         "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-5049974f137246ab:en",
-      "sourceId": "the-verge-5049974f137246ab",
-      "lang": "en",
-      "title": "Meta removes language that may have allowed it to scrape news sites",
-      "summary": "After backlash, Meta is updating its terms again to remove language that suggested it could scrape content from sites, including news sites, to train its AI. Specifically, the following language no longer appears on the commercial terms page: … Meta may use any content from such domains, web pages, or URLs to provide, develop, improve, […]",
-      "body": "After backlash, Meta is updating its terms again to remove language that suggested it could scrape content from sites, including news sites, to train its AI. Specifically, the following language no longer appears on the commercial terms page :\n\n… Meta may use any content from such domains, web pages, or URLs to provide, develop, improve, research, train, and maintain the integrity of, the Meta Company Products, services, and features provided under these Commercial Terms and any other applicable supplemental terms.\n\nMany, including Neiman Lab and James Grimmelmann, a professor of digital and information law at Cornell, interpreted it as an …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1013409/meta-removes-language-that-may-have-allowed-it-to-scrape-news-sites",
-      "publishedAt": "2026-10-17T15:04:36.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
       ]
     },
     {
@@ -5670,37 +5718,6 @@
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-fd90a84c9840be26:en",
-      "sourceId": "techcrunch-fd90a84c9840be26",
-      "lang": "en",
-      "title": "Porsche’s electric Macan Turbo is an automotive existential crisis",
-      "summary": "The 2026 Porsche Macan Turbo EV is a two-row crossover with 630 horsepower and a 100-kilowatt-hour battery.",
-      "body": "Maybe it was the grey color, the slightly bulbous roofline, or the vaguely SUV-like proportions of the electric Porsche Macan, but as I shuttled kids and groceries around city and suburban streets, I never once noticed a longing stare from other drivers. Unlike with other cars I’ve tested, no enthusiasts stopped to ask me questions.\n\nThe 2026 Porsche Macan Turbo simply blended in, leaving in its wake a raft of existential questions. What is a sports car, anyway? Does it need to be overwhelmingly extroverted? Should it match the leaner, lighter look of its gas-powered sibling?\n\nDrive one and the questions cease. Maybe that’s because the acceleration makes it hard to breathe? Or maybe it’s because, by the numbers, the Macan is a sports car at heart despite its rather humdrum crossover body style.\n\nMy passengers would agree. The kids I drove to soccer practice, both my own and others, gave the punchy acceleration high marks. The G-forces it reports on the head-up display ($2,660) can easily mimic the pull of gravity. Stab the accelerator at 70 mph and it lurches as though it were standing still. (Don’t worry, fellow parents. I did not try that with children on board.)\n\nOn winding roads, the car comes alive, thanks in part to the four-wheel steering ($2,150). Drop it into Sport Plus mode, and the car literally drops on its air suspension. Are we sure this is another anonymous crossover? Maybe anonymity is a useful trait in a car this responsive and powerful.\n\nUnlike most two-row crossovers, you get the feeling of sitting in the Macan, not on it. The wheel extends far enough to make a sporty driving position possible, and the classic Porsche chronometer ($1,040) perched atop the dash ticks off the seconds it takes to get the kid to soccer practice.\n\nThe 2026 Porsche Macan Turbo EV is a two-row crossover with 630 horsepower and a 100-kilowatt-hour battery. The EV, which the automaker provided to me for a week, starts at $112,700. However, the one I drove rang up at $149,610, including destination fees. Yes, the options alone could buy a nicely equipped Chevy Bolt . With Porsche and options, if you have to ask…well, it’s better not to.\n\nThe Porsche Macan Turbo EV I drove came in Slate Grey Neo (a $2,620 upgrade), which was really well executed and among the best greys I’ve seen. If you crave luxurious anonymity, then this grey is your color.\n\nThere were a slew of other options, and in my view, not all of them are worth it. I’d skip the passenger display ($1,710); my kids liked that it could play YouTube videos, but they can’t ride up front, and my wife was underwhelmed. “Our washing machine can play YouTube videos,” she said.\n\nI’d also forgo the illuminated Porsche wordmark on the front seatbacks ($690), puddle lamps that shine “PORSCHE” onto the pavement ($420), Porsche crests on the headrests ($640), and an illuminated Turbo badge on the door sills ($1,230).\n\nThat Turbo badge became a point of contention for some of my friends, who were quick to point out that EVs technically can’t have turbos. That is true, though automotive names have long been divorced from reality. Almost every Porsche these days has a turbo, even those not labeled as such.\n\nIt’s not just Porsche: BMW’s model numbers, for example, stopped reflecting engine displacement decades ago, and the Ford Galaxie never traveled between star systems using its hyperdrive. Sorry, friends, I’m not taking the bait.\n\nAt least the Macan Turbo’s EV qualities don’t raise too many questions. It charges fast — exactly 20 minutes from 19% to 80% on a 350-kilowatt charger — and gets about 285 miles of highway range. Those big wheels ($4,110) and sticky tires ($660) sapped some range, but it was still more than enough to get from New York to Boston with charge to spare.\n\nThe advanced driver assistance system ($1,140) works well enough, even if it hunts a bit in the lane. The AI-powered voice assistant did a solid job of interpreting my queries and commands. For a while, I thought it was the only way to turn on the heated steering wheel ($720), which was actually fine because it worked so well. (Surprise! There’s a small button hidden on the inner rim of the steering wheel between two spokes. IYKYK, I guess.)\n\nWhen it’s time to leave the Macan, you can just open the door and walk away. The Burmester sound system ($4,960) will keep bumpin’ until you lock the door, which is a helpful reminder. If you’re a Porsche traditionalist, you can also hit the vestigial power button to the left of the driver’s display. Good to have choices, I guess? At least Porsche doesn’t charge you for that.\n\nThe navigation system, and specifically how it integrates with the EV, was underwhelming.\n\nWhen the car was at a 22% state of charge, I asked it to find the nearest fast charger. It directed me to two. Not two different options, but two chargers that I was supposed to use sequentially. The first was a 50-kilowatt charger in a mall parking lot 10 minutes away. There, I was supposed to add a few percentage points before unplugging and driving across the street to another mall’s parking lot, where I would finish at a 350-kilowatt charger.\n\nWait, what? I ignored the machine and drove straight to the 350-kilowatt charger, arriving at 19%. As I backed into the stall, the car was still commanding me to drive to the slower charger. I guess it didn’t want the battery to dip below 20%? Too late. There’s probably a setting to change that somewhere, but it wasn’t obvious. At least the charge rate peaked at 245 kilowatts, close to the 270-kilowatt maximum.\n\nThe electric Macan is like the answer to an esoteric Jeopardy! question: What does an identity crisis look like in the automotive industry? I’ll take a Porsche Macan Turbo for $150,000, Alex.\n\nFor anyone with deep enough pockets, EVs have blurred the line between sports cars and everything else. True gear heads will have another car to race, but if you want to spend a few hours carving corners, the Macan will do just fine. As a bonus, you can also use it in real life and won’t pay through the nose to keep it filled up.\n\nActually, that raises another question, this one for my editor: Can I get a fatter paycheck?",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/16/porsches-electric-macan-turbo-is-an-automotive-existential-crisis/",
-      "publishedAt": "2026-10-16T19:40:00.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-c3d8de84ffecdf57:en",
-      "sourceId": "ars-technica-c3d8de84ffecdf57",
-      "lang": "en",
-      "title": "Bug turns one of the biggest fears about Ray-Ban Meta smart glasses into reality",
-      "summary": "The bug is fixed, but privacy concerns remain.",
-      "body": "Some Ray-Ban Meta smart glasses were recording people’s conversations without the wearer knowing. The recordings occurred without users saying the prompt phrase (“Hey, Meta”), in a bug that Meta says has been fixed.\n\nThis week, some users reported online that their Ray-Ban Metas were recording without their consent. A person going by Kindly-Audience-137 on Reddit, for example, said this happened to them across three Meta Ray-Bans and that they had the “Respond without Hey Meta” setting turned off. The person said the Meta AI app “saves audio recordings and text transcripts of these conversations in my conversation history.”\n\n“I believe this deserves a serious technical investigation. Customers should not have to wonder whether their private conversations are being captured when they have not intentionally activated their glasses’ AI assistant,” the Reddit user said.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/gadgets/2026/10/ray-ban-meta-smart-glasses-found-recording-audio-without-wearers-consent/",
-      "publishedAt": "2026-10-16T19:11:50.000Z",
-      "categories": [
-        "tecnologia-general",
-        "gafas-inteligentes"
       ]
     },
     {
@@ -6000,22 +6017,6 @@
         "apps-accesibles",
         "tecnologia-accesibilidad",
         "braille"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "applevis-apps-14b03ffce5eb56c2:en",
-      "sourceId": "applevis-apps-14b03ffce5eb56c2",
-      "lang": "en",
-      "title": "Word Tack",
-      "summary": "Sort scattered words into their hidden groups in Word Tack, a cozy word puzzle with a handmade feel: washi tape, typewriter labels and paper tiles that look cut out by hand. Every puzzle hides eight groups of five words. Drag tiles between rows, or tap two tiles to swap them. When a row holds all five words of a group, it’s sealed and its category is revealed. There’s no timer and no penalty for a wrong guess, so take your time. PLAY YOUR WAY • A growing campaign of handcrafted levels, from everyday categories to clever wordplay and real head-scratchers, with more added in updates • Every level is marked easy, medium or hard • A Daily Puzzle to play each day, with shareable emoji results and a streak to keep GENTLE HELP WHEN YOU’RE STUCK • Inklings link two words from the same group • Clues reveal the names of up to three groups • Solve a puzzle without help to earn all three stars MAKE THE DESK YOUR OWN • Earn stamps as you play • Spend them in the shop on washi tape, tile styles, row seals, desk backgrounds and confetti, including dazzling gold and holographic finishes MADE WITH CARE • Satisfying sounds, gentle haptics and a soft soundtrack, each with its own setting • Statistics, star ratings and daily streaks to track your progress • Works with VoiceOver: double-tap two cards to swap them, and hear when rows are solved and where each card sits on the board • A Reduce Motion setting for calmer play • No ads, no in-app purchases and no account needed. Works offline.",
-      "body": "Sort scattered words into their hidden groups in Word Tack, a cozy word puzzle with a handmade feel: washi tape, typewriter labels and paper tiles that look cut out by hand.\n\nEvery puzzle hides eight groups of five words. Drag tiles between rows, and when a row holds all five words of a group, it's sealed and its category is revealed. There's no timer and no penalty for a wrong guess, so take your time.\n\nPLAY YOUR WAY • A growing campaign of handcrafted levels, from everyday categories to clever wordplay and real head-scratchers, with more added in updates • Every level is marked easy, medium or hard • A Daily Puzzle to play each day, with shareable emoji results and a streak to keep\n\nGENTLE HELP WHEN YOU'RE STUCK • Inklings link two words from the same group • Clues reveal the names of up to three groups • Solve a puzzle without help to earn all three stars\n\nMAKE THE DESK YOUR OWN • Earn stamps as you play • Spend them in the shop on washi tape, tile styles, row seals, desk backgrounds and confetti, including dazzling gold and holographic finishes\n\nMADE WITH CARE • Satisfying sounds, gentle haptics and a soft soundtrack, each with its own setting • Statistics, star ratings and daily streaks to track your progress • Works with VoiceOver: hear when rows are solved and where each tile sits on the board • A Reduce Motion setting for calmer play • No ads, no in-app purchases and no account needed. Works offline.",
-      "sourceName": "AppleVis Apps",
-      "originalUrl": "https://www.applevis.com/apps/ios/games/word-tack",
-      "publishedAt": "2026-10-11T06:14:34.000Z",
-      "categories": [
-        "apple",
-        "apps-accesibles"
       ]
     },
     {

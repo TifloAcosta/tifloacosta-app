@@ -544,7 +544,9 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
             let request = VNRecognizeTextRequest()
             request.recognitionLevel = .accurate
             request.usesLanguageCorrection = true
-            request.automaticallyDetectsLanguage = true
+            if #available(iOS 16.0, *) {
+                request.automaticallyDetectsLanguage = true
+            }
             do {
                 try VNImageRequestHandler(cgImage: image, options: [:]).perform([request])
                 let observations = (request.results ?? []).sorted {

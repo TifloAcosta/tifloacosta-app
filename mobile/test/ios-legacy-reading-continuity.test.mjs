@@ -98,20 +98,106 @@ test('iOS MP3 stores Blob bytes through original media database without string c
   assert.deepEqual([...new Uint8Array(await imported.file.arrayBuffer())], [0, 255, 4, 254]);
 });
 
-test('unsupported EPUB is rejected before any read, never acknowledged or silently saved', async () => {
-  let fileRead = false;
+test('invalid EPUB is rejected after inspection without creating a book', async () => {
   let fileWritten = false;
   const bridge = createIosLegacyReadingBridge({
-    library: { importDocument: async () => { fileWritten = true; } },
+    library: { importBinaryDocument: async () => { fileWritten = true; } },
     accessibility: picker('Libro.epub'),
     capacitor: { convertFileSrc: uri => uri },
-    readFile: async () => { fileRead = true; throw Error('unreachable'); }
+    readFile: fromBlob(new Blob(['invalid epub archive'])),
+    decodeArchive: async () => { throw Object.assign(Error('invalid'), { code: 'invalid-epub' }); }
   });
   const batch = await bridge.pickDocuments();
   assert.deepEqual(batch.imported, []);
   assert.equal(batch.rejected[0].name, 'Libro.epub');
-  assert.equal(fileRead, false);
   assert.equal(fileWritten, false);
+});
+
+test('iOS EPUB keeps original ZIP bytes and exposes decoded chapters to the reader', async () => {
+  const original = new Blob([new Uint8Array([0x50, 0x4b, 0x03, 0x04, 65])]);
+  let stored;
+  const library = {
+    importBinaryDocument: async value => {
+      stored = value;
+      return { id: 'web-binary-epub', title: value.title, format: 'epub' };
+    },
+    openBook: async id => ({ book: { id, format: 'epub', title: 'Libro' }, content: stored.content }),
+    openBinaryDocument: async id => ({ book: { id }, blob: stored.file })
+  };
+  const bridge = createIosLegacyReadingBridge({
+    library, accessibility: picker('Libro.epub'), capacitor: { convertFileSrc: uri => uri },
+    readFile: fromBlob(original),
+    decodeArchive: async () => ({ format: 'epub', title: 'Libro', language: 'es',
+      content: JSON.stringify({ blocks: [{ type: 'paragraph', text: 'Capítulo primero' }] }) })
+  });
+  const batch = await bridge.pickDocuments();
+  assert.equal(batch.imported[0].id, 'web-binary-epub');
+  assert.equal(JSON.parse((await bridge.openBook(batch.imported[0].id)).content).blocks[0].text, 'Capítulo primero');
+  assert.deepEqual([...new Uint8Array(await stored.file.arrayBuffer())],
+    [...new Uint8Array(await original.arrayBuffer())]);
+});
+
+test('PDF scan retains all pages and offers OCR without changing prior records', async () => {
+  const pdf = new Blob(['%PDF-1.7\\nresto']);
+  let saved;
+  const bridge = createIosLegacyReadingBridge({
+    library: {
+      importBinaryDocument: async value => { saved = value; return { id: 'web-pdf-1', format: 'pdf', title: 'Escaneado' }; },
+      openBook: async id => ({ book: { id, format: 'pdf', title: 'Escaneado' }, content: '' }),
+      openBinaryDocument: async id => ({ book: { id }, blob: saved.file })
+    },
+    accessibility: { ...picker('Escaneado.pdf'),
+      recognizePdfPage: async payload => ({ status: 'ok', text: 'Texto reconocido', blocks: ['Texto reconocido'] }) },
+    capacitor: { convertFileSrc: uri => uri }, readFile: fromBlob(pdf),
+    decodePdf: async () => ({ pdfNoText: true, pageCount: 3 })
+  });
+  const batch = await bridge.pickDocuments();
+  assert.equal(batch.imported[0].id, 'web-pdf-1');
+  const opened = await bridge.openBook('web-pdf-1');
+  assert.equal(opened.pdfNoText, true);
+  assert.equal(opened.pageCount, 3);
+  const recognized = await bridge.recognizePdfPage({ bookId: 'web-pdf-1', pageIndex: 1 });
+  assert.equal(recognized.status, 'ok');
+  assert.equal(recognized.text, 'Texto reconocido');
+});
+
+test('DAISY archive is persisted with bytes intact and reopens as structured reading text', async () => {
+  const archive = new Blob([new Uint8Array([80, 75, 3, 4, 88])]);
+  let stored;
+  const decodeArchive = async () => ({ format: 'daisy2.02', title: 'Audio y texto',
+    content: JSON.stringify({ blocks: [{ type: 'heading', text: 'Capítulo 1' }], containsAudio: true }) });
+  const bridge = createIosLegacyReadingBridge({
+    library: {
+      importDaisyArchive: async value => { stored = value; return { id: 'web-daisy-1', title: value.title, format: value.format }; },
+      openBook: async id => ({ book: { id, title: 'Audio y texto', format: 'daisy2.02' }, content: '' }),
+      openDaisyArchive: async id => ({ book: { id }, blob: stored.file })
+    },
+    accessibility: picker('Libro.zip'), capacitor: { convertFileSrc: uri => uri },
+    readFile: fromBlob(archive), decodeArchive
+  });
+  const batch = await bridge.pickDocuments();
+  assert.equal(batch.imported[0].format, 'daisy2.02');
+  assert.equal(stored.format, 'daisy2.02');
+  const opened = await bridge.openBook('web-daisy-1');
+  assert.equal(JSON.parse(opened.content).blocks[0].text, 'Capítulo 1');
+});
+
+test('binary EPUB with damaged stored bytes is not acknowledged', async () => {
+  const good = new Blob([new Uint8Array([80, 75, 11, 12])]);
+  const bad = new Blob([new Uint8Array([80, 75, 11, 99])]);
+  const bridge = createIosLegacyReadingBridge({
+    library: {
+      importBinaryDocument: async () => ({ id: 'web-damaged', format: 'epub' }),
+      openBook: async id => ({ book: { id, format: 'epub' }, content: '{}' }),
+      openBinaryDocument: async id => ({ book: { id }, blob: bad })
+    },
+    accessibility: picker('Novela.epub'), capacitor: { convertFileSrc: uri => uri },
+    readFile: fromBlob(good),
+    decodeArchive: async () => ({ format: 'epub', content: '{"blocks":[{"text":"X"}]}' })
+  });
+  const result = await bridge.pickDocuments();
+  assert.equal(result.imported.length, 0);
+  assert.match(result.rejected[0].reason, /readback-integrity-failed/);
 });
 
 test('cancelled iOS Files sheet does not import, delete or create books', async () => {

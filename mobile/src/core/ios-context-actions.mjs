@@ -110,7 +110,8 @@ export function createIosContextActions({ root, plugin, lang = () => 'es',
     catch { return; }
     if (disposed) { await subscription?.remove?.(); return; }
     observer = observerFactory(schedule);
-    observer?.observe?.(root, { childList:true, subtree:true });
+    observer?.observe?.(root, { childList:true, subtree:true,
+      attributes:true, attributeFilter:['aria-label', 'hidden'] });
     // Ensure first screen is registered before the asynchronous install ends.
     await refresh();
   }

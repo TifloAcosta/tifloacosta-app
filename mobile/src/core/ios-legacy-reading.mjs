@@ -9,6 +9,7 @@
  */
 import { createWebReadingLibraryAdapter } from '../../../shared/web-reading-library-adapter.mjs';
 import { createIosLocalAudio } from './ios-local-audio.mjs';
+import { createIosDaisyAudio } from './ios-daisy-audio.mjs';
 import { decodeIosArchive, decodeIosPdf } from './ios-document-decoders.mjs';
 
 const TEXT_EXTENSIONS = new Set(['txt', 'html', 'htm', 'md', 'markdown', 'rtf', 'fb2']);
@@ -45,7 +46,24 @@ export function createIosLegacyReadingBridge({
   decodePdf = decodeIosPdf
 } = {}) {
   // Local audio is lazy; construction never opens or alters the old database.
-  const player = audioPlayback || createIosLocalAudio({ library });
+  const mp3Player = audioPlayback || createIosLocalAudio({ library });
+  const daisyPlayer = createIosDaisyAudio({ library });
+  let player = mp3Player;
+  async function backendForBook(bookId) {
+    const opened = await library.openBook(String(bookId || ''));
+    return ['daisy2.02', 'daisy3'].includes(opened?.book?.format) ? daisyPlayer : mp3Player;
+  }
+  async function listAudioTracks({ bookId } = {}) {
+    const backend = await backendForBook(bookId);
+    return backend.listAudioTracks({ bookId });
+  }
+  // Changing between MP3 and DAISY must never leave two audio engines active.
+  async function prepareAudio(options = {}) {
+    const selected = await backendForBook(options.bookId);
+    if (selected !== player) await player.stopAudio();
+    player = selected;
+    return player.prepareAudio(options);
+  }
 
   // A file is confirmed only when reopening the ORIGINAL IndexedDB key and
   // comparing every byte against the supplied document. No destructive reset.
@@ -206,7 +224,14 @@ export function createIosLegacyReadingBridge({
 
   async function addListener(eventName, listener) {
     if (String(eventName).startsWith('audio')) {
-      return player.addListener(eventName, listener);
+      const [mp3Handle, daisyHandle] = await Promise.all([
+        mp3Player.addListener(eventName, listener),
+        daisyPlayer.addListener(eventName, listener)
+      ]);
+      return { remove: async () => {
+        await mp3Handle?.remove?.();
+        await daisyHandle?.remove?.();
+      } };
     }
     if (String(eventName).startsWith('tts') && typeof nativeTts?.addListener === 'function' &&
         typeof listener === 'function') {
@@ -226,15 +251,16 @@ export function createIosLegacyReadingBridge({
   ];
   const result = { pickDocuments, importReceivedBlob, recognizePdfPage, listTtsVoices, openTtsVoiceInstaller,
     addListener, consumeInitialSharedDocuments: async () => emptyBatch(),
-    listAudioTracks: player.listAudioTracks,
-    prepareAudio: player.prepareAudio,
-    playAudio: player.playAudio,
-    pauseAudio: player.pauseAudio,
-    seekAudio: player.seekAudio,
-    skipAudio: player.skipAudio,
-    setAudioSpeed: player.setAudioSpeed,
-    getAudioState: player.getAudioState,
-    stopAudio: player.stopAudio };
+    listAudioTracks, prepareAudio,
+    playAudio: (...args) => player.playAudio(...args),
+    pauseAudio: (...args) => player.pauseAudio(...args),
+    seekAudio: (...args) => player.seekAudio(...args),
+    skipAudio: (...args) => player.skipAudio(...args),
+    previousAudioTrack: (...args) => player.previousAudioTrack?.(...args) || player.getAudioState(),
+    nextAudioTrack: (...args) => player.nextAudioTrack?.(...args) || player.getAudioState(),
+    setAudioSpeed: (...args) => player.setAudioSpeed(...args),
+    getAudioState: (...args) => player.getAudioState(...args),
+    stopAudio: (...args) => player.stopAudio(...args) };
   for (const name of passthrough) {
     result[name] = (...args) => library[name](...args);
   }
@@ -269,7 +295,12 @@ export function createIosLegacyReadingBridge({
       const archive = await library.openDaisyArchive?.(id);
       if (archive?.blob) {
         const decoded = await decodeArchive(archive.blob, { kind: 'daisy', title: opened.book.title });
-        return { ...opened, content: decoded.content };
+        const model = JSON.parse(decoded.content);
+        const hasAudio = Boolean(model.containsAudio && model.audioClips?.length);
+        const hasText = Boolean(model.blocks?.some(block =>
+          !String(block?.id || '').startsWith('daisy-audio-')));
+        return { ...opened, content: decoded.content, daisyHasAudio: hasAudio,
+          daisyHasText: hasText, daisySynchronized: hasAudio && hasText };
       }
     }
     if (kind === 'epub' && opened.content &&

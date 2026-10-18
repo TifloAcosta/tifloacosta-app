@@ -533,7 +533,7 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
                 return
             }
             context.setFillColor(CGColor(gray: 1, alpha: 1))
-            context.fill(CGRect(x: 0, y: 0, width: width, height: height))
+            context.fill(CGRect(x: 0, y: 0, width: CGFloat(width), height: CGFloat(height)))
             context.translateBy(x: 0, y: CGFloat(height))
             context.scaleBy(x: CGFloat(scale), y: -CGFloat(scale))
             page.draw(with: .mediaBox, to: context)
@@ -546,7 +546,7 @@ public final class TifloReadingAccessibilityPlugin: CAPPlugin, CAPBridgedPlugin,
             request.usesLanguageCorrection = true
             request.automaticallyDetectsLanguage = true
             do {
-                try VNImageRequestHandler(cgImage: image).perform([request])
+                try VNImageRequestHandler(cgImage: image, options: [:]).perform([request])
                 let observations = (request.results ?? []).sorted {
                     if abs($0.boundingBox.midY - $1.boundingBox.midY) > 0.025 {
                         return $0.boundingBox.midY > $1.boundingBox.midY

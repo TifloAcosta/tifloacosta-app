@@ -487,7 +487,11 @@ export function renderReadingLibrary({
   pagination.className = 'reading-library-pagination';
   pagination.setAttribute('aria-label', t('readingLibrary.pagination'));
   librarySection.append(pagination);
-  root.append(librarySection);
+  // Final DOM order restores the compact reader entrance: Import, Settings,
+  // Filters, catalog search and document list. Existing queue and continuation
+  // remain available without preceding the Import action.
+  root.append(importSection, settingsSection, filtersSection, searchForm,
+    librarySection, continueSection, queueSection);
 
   async function refreshLatest() {
     const book = await client.getLatestInProgress();

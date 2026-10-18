@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFile, stat } from 'node:fs/promises';
+import { readFile, readdir, stat } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
@@ -23,15 +23,35 @@ test('staged mobile JavaScript originates from the unified mobile router', async
   assert.match(app, /renderVideos/);
   assert.match(app, /renderHome/);
 });
-test('bundle identity pins every included entrypoint and forbids remote web shell', async () => {
+async function listPackagedFiles(directory = folder, prefix = '') {
+  const entries = await readdir(directory, { withFileTypes: true });
+  const files = [];
+  for (const entry of entries) {
+    const name = prefix ? `${prefix}/${entry.name}` : entry.name;
+    if (entry.isDirectory()) files.push(...await listPackagedFiles(join(directory, entry.name), name));
+    else if (entry.isFile() && name !== 'tiflo-ios-ui-identity.json') files.push(name);
+    else if (!entry.isFile()) assert.fail(`Unexpected packaged item: ${name}`);
+  }
+  return files.sort();
+}
+
+test('bundle identity pins every file, including auxiliary scripts and assets, and forbids remote web shell', async () => {
   const identity = JSON.parse(await load('tiflo-ios-ui-identity.json'));
   assert.equal(identity.mobileUiOnly, true);
   assert.equal(identity.publicWebUiExcluded, true);
   assert.equal(identity.entryPoint, 'mobile/src/index.html');
-  for (const filename of ['index.html', 'app.js', 'app.css']) {
+  const files = await listPackagedFiles();
+  assert.deepEqual(identity.includedFiles, files, 'The manifest must enumerate the exact staged files');
+  assert.deepEqual(Object.keys(identity.fileHashes).sort(), files,
+    'All assets and scripts must be hashed; no extra or missing files');
+  for (const filename of files) {
     const sha = createHash('sha256').update(await readFile(join(folder, filename))).digest('hex');
-    assert.equal(identity.fileHashes[filename], sha);
+    assert.equal(identity.fileHashes[filename], sha, `Package integrity: ${filename}`);
   }
+  for (const critical of ['index.html', 'app.js', 'app.css', 'update-bootstrap.js']) {
+    assert.ok(files.includes(critical), `Missing iPhone entrypoint: ${critical}`);
+  }
+  if (process.env.GITHUB_SHA) assert.equal(identity.sourceCommit, process.env.GITHUB_SHA);
   const config = JSON.parse(await readFile(fileURLToPath(new URL('../../mobile/capacitor.config.json', import.meta.url)), 'utf8'));
   assert.equal(config.server?.url, undefined);
   // WebKit's origin must not move: legacy IndexedDB lives at capacitor://localhost.

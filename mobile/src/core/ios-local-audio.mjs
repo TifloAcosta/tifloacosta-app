@@ -10,6 +10,8 @@ export function createIosLocalAudio({ library, createAudio = () => new Audio(),
   let activeBookId = '';
   let ready = false;
   let speed = 1;
+  // A late metadata/error event from an older track must not replace a newer one.
+  let preparation = 0;
   const listeners = new Map();
 
   function snapshot() {
@@ -36,15 +38,18 @@ export function createIosLocalAudio({ library, createAudio = () => new Audio(),
   }
 
   function attachEvents(element) {
-    element.addEventListener('timeupdate', () => emit('audioPosition'));
-    element.addEventListener('play', () => emit('audioState'));
-    element.addEventListener('pause', () => emit('audioState'));
-    element.addEventListener('ratechange', () => emit('audioState'));
+    const emitIfActive = (name, additional = {}) => {
+      if (audio === element) emit(name, additional);
+    };
+    element.addEventListener('timeupdate', () => emitIfActive('audioPosition'));
+    element.addEventListener('play', () => emitIfActive('audioState'));
+    element.addEventListener('pause', () => emitIfActive('audioState'));
+    element.addEventListener('ratechange', () => emitIfActive('audioState'));
     element.addEventListener('ended', () => {
-      emit('audioEnded');
-      emit('audioState');
+      emitIfActive('audioEnded');
+      emitIfActive('audioState');
     });
-    element.addEventListener('error', () => emit('audioInterrupted', { reason: 'playback-error' }));
+    element.addEventListener('error', () => emitIfActive('audioInterrupted', { reason: 'playback-error' }));
   }
   function release() {
     ready = false;
@@ -67,44 +72,58 @@ export function createIosLocalAudio({ library, createAudio = () => new Audio(),
       title: stored.book.title || 'Audio MP3', sizeBytes: stored.blob.size, durationMs: 0 }] };
   }
   async function prepareAudio({ bookId, positionMs = 0 } = {}) {
+    const currentPreparation = ++preparation;
     if (!bookId) return null;
     try {
       const stored = await library?.openAudioFile?.(bookId);
+      if (currentPreparation !== preparation) return null;
       if (stored?.book?.id !== bookId || !stored.blob?.size) return null;
       release();
       activeBookId = bookId;
       objectUrl = urls.createObjectURL(stored.blob);
-      audio = createAudio();
-      attachEvents(audio);
-      audio.preload = 'metadata';
-      audio.src = objectUrl;
-      audio.playbackRate = speed;
+      const element = createAudio();
+      audio = element;
+      attachEvents(element);
+      element.preload = 'metadata';
+      element.src = objectUrl;
+      element.playbackRate = speed;
       // Metadata is asynchronous on WKWebView. Playback remains a user action.
+      // Use the captured element: a subsequent prepare may replace audio.
       await new Promise((resolve, reject) => {
-        const done = () => { clearTimeout(timer); audio?.removeEventListener('loadedmetadata', loaded); audio?.removeEventListener('error', failed); };
+        const done = () => {
+          clearTimeout(timer);
+          element.removeEventListener('loadedmetadata', loaded);
+          element.removeEventListener('error', failed);
+        };
         const loaded = () => { done(); resolve(); };
         const failed = () => { done(); reject(Error('mp3-metadata-error')); };
         const timer = setTimeout(() => { done(); reject(Error('mp3-metadata-timeout')); }, 10000);
-        audio.addEventListener('loadedmetadata', loaded);
-        audio.addEventListener('error', failed);
-        audio.load();
-        if (audio.readyState >= 1) loaded();
+        element.addEventListener('loadedmetadata', loaded);
+        element.addEventListener('error', failed);
+        element.load();
+        if (element.readyState >= 1) loaded();
       });
-      if (!audio || activeBookId !== bookId) return null;
-      const duration = Number.isFinite(audio.duration) ? audio.duration : 0;
-      audio.currentTime = Math.min(duration, Math.max(0, Number(positionMs) / 1000 || 0));
+      if (currentPreparation !== preparation || audio !== element) return null;
+      const duration = Number.isFinite(element.duration) ? element.duration : 0;
+      element.currentTime = Math.min(duration, Math.max(0, Number(positionMs) / 1000 || 0));
       ready = true;
       emit('audioState');
       return snapshot();
     } catch {
-      release();
+      if (currentPreparation === preparation) release();
       return null;
     }
   }
   async function playAudio() {
     if (!ready || !audio) return null;
-    try { await audio.play(); return snapshot(); }
-    catch { emit('audioInterrupted', { reason: 'playback-error' }); return null; }
+    const element = audio;
+    try {
+      await element.play();
+      return audio === element && ready ? snapshot() : null;
+    } catch {
+      if (audio === element) emit('audioInterrupted', { reason: 'playback-error' });
+      return null;
+    }
   }
   async function pauseAudio() {
     if (!ready || !audio) return null;
@@ -128,6 +147,7 @@ export function createIosLocalAudio({ library, createAudio = () => new Audio(),
     return snapshot();
   }
   async function stopAudio() {
+    preparation += 1;
     if (audio) audio.pause();
     release();
     return snapshot();

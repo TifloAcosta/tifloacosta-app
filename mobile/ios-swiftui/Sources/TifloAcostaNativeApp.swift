@@ -21,7 +21,6 @@ private enum NativeDestination: String, CaseIterable, Identifiable {
 }
 
 struct NativeHomeView: View {
-    @State private var selected: NativeDestination??
     var body: some View {
         NavigationStack {
             List(NativeDestination.allCases) { section in
@@ -30,7 +29,7 @@ struct NativeHomeView: View {
                 }
             }
             .navigationTitle("TifloAcosta")
-            .navigationDestination(for: Section.self) { section in
+            .navigationDestination(for: NativeDestination.self) { section in
                 switch section {
                 case .lector: NativeReaderView()
                 case .configuracion: NativeSettingsView()

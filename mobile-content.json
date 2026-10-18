@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T06:37:27.773Z",
+  "generatedAt": "2026-10-18T11:11:10.443Z",
   "resources": [
     {
       "kind": "resource",
@@ -5446,6 +5446,23 @@
     }
   ],
   "news": [
+    {
+      "kind": "news",
+      "id": "accessible-android-0d64f675eb52b788:en",
+      "sourceId": "accessible-android-0d64f675eb52b788",
+      "lang": "en",
+      "title": "Chimege Sonur",
+      "summary": "Chimege Sonur is a Mongolian text reader for smartphones, developed to make Mongolian text accessible to visually impaired users. It provides Mongolian text-to-speech support so…",
+      "body": "Published 18 October 2026 by Delgerbayar\n\nChimege Sonur is a Mongolian text reader for smartphones, developed to make Mongolian text accessible to visually impaired users. It provides Mongolian text-to-speech support so users can read on Android devices using speech output.\n\nThe project was developed by Chimege Systems as part of an initiative supporting the participation and access to services of people with disabilities in Mongolia.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nChimege Sonur is designed for visually impaired Mongolian users and provides Mongolian text-to-speech support.\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility.",
+      "sourceName": "Accessible Android",
+      "originalUrl": "https://accessibleandroid.com/app/chimege-sonur/",
+      "publishedAt": "2026-10-18T09:31:41.000Z",
+      "categories": [
+        "android",
+        "apps-accesibles",
+        "tecnologia-accesibilidad"
+      ]
+    },
     {
       "kind": "news",
       "id": "engadget-7f8de039a2d21046:en",

@@ -194,7 +194,7 @@ export function createIosDaisyAudio({
     const playing = state().playing;
     const result = await prepareAudio({ bookId, trackIndex: index, positionMs: 0 });
     if (result && playing) await playAudio();
-    return result || state();
+    return state();
   }
   async function setAudioSpeed({ speed = 1 } = {}) {
     rate = Math.max(0.5, Math.min(3, Number(speed) || 1));

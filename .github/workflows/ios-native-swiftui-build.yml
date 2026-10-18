@@ -8,7 +8,7 @@ on:
       - 'ios-app-native/**'
       - '.github/workflows/ios-native-swiftui-build.yml'
   pull_request:
-    branches: [main]
+    branches: [main, 'ios/swiftui-native-separation-20261018']
     paths:
       - 'ios-app-native/**'
       - '.github/workflows/ios-native-swiftui-build.yml'
@@ -29,6 +29,8 @@ jobs:
             echo 'Native screen source must not contain a Capacitor / WebView UI.'
             exit 1
           fi
+      - name: Check native home and catalog search
+        run: node ios-app-native/tests/home-contract.test.mjs
       - name: Install XcodeGen
         run: brew install xcodegen
       - name: Generate independent iOS project
@@ -64,3 +66,36 @@ jobs:
             echo "::error::Missing NSExtensionPointIdentifier in built extension"; exit 1;
           }
           echo "Native .appex metadata verified"
+
+      - name: Capture simulator home for visual review (non-blocking)
+        continue-on-error: true
+        run: |
+          SIM_ID="$(python3 - <<'PY'
+          import json, subprocess
+          result = json.loads(subprocess.check_output(
+              ["xcrun", "simctl", "list", "-j", "devices", "available"], text=True
+          ))
+          phones = [d for values in result["devices"].values()
+                    for d in values if "iPhone" in d.get("name", "") and d.get("isAvailable", True)]
+          if not phones:
+              raise SystemExit("No iPhone simulator available")
+          print(phones[0]["udid"])
+          PY
+          )"
+          xcrun simctl boot "$SIM_ID"
+          xcrun simctl bootstatus "$SIM_ID" -b
+          xcrun simctl install "$SIM_ID" "$RUNNER_TEMP/TifloNativeDerivedData/Build/Products/Debug-iphonesimulator/TifloAcostaNative.app"
+          xcrun simctl launch "$SIM_ID" com.tifloacosta.nativeprototype
+          sleep 8
+          mkdir -p "$RUNNER_TEMP/native-preview"
+          xcrun simctl io "$SIM_ID" screenshot "$RUNNER_TEMP/native-preview/home.png"
+          xcrun simctl shutdown "$SIM_ID"
+      - name: Archive native home preview
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tifloacosta-ios-native-home-preview
+          path: ${{ runner.temp }}/native-preview/home.png
+          if-no-files-found: ignore
+          retention-days: 14
+

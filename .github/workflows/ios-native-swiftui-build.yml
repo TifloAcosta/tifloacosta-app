@@ -1,0 +1,45 @@
+name: iOS native SwiftUI compilation
+on:
+  push:
+    branches:
+      - main
+      - 'ios/**'
+    paths:
+      - 'ios-app-native/**'
+      - '.github/workflows/ios-native-swiftui-build.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'ios-app-native/**'
+      - '.github/workflows/ios-native-swiftui-build.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-native:
+    runs-on: macos-15
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check native-only source boundary
+        run: |
+          if grep -R -E 'WKWebView|CAPBridgeViewController|import Capacitor' ios-app-native/Sources; then
+            echo 'Native screen source must not contain a Capacitor / WebView UI.'
+            exit 1
+          fi
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Generate independent iOS project
+        working-directory: ios-app-native
+        run: xcodegen generate --spec project.yml
+      - name: Compile for iPhone simulator (no signing)
+        working-directory: ios-app-native
+        run: |
+          xcodebuild -project TifloAcostaNative.xcodeproj \
+            -scheme TifloAcostaNative \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO build

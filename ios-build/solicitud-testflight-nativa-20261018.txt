@@ -1,0 +1,7 @@
+Solicitud exclusiva de compilación SwiftUI nativa para TestFlight interno.
+Fecha: 2026-10-18.
+Código fuente comprobado: 4b9178f76bbe8fe8c2a9fc9b5c0c232c196ab1d1.
+Aplicación: com.tifloacosta.app. Extensión: com.tifloacosta.app.ShareExtension.
+Destino: grupo interno Probadores TifloAcosta. Sin App Store pública.
+La compilación debe contener sólo pantallas SwiftUI nativas, no Capacitor ni interfaz WKWebView.
+La base nativa está en fase de pruebas; se conserva el código de la versión anterior y no se desinstala ni borra la app.

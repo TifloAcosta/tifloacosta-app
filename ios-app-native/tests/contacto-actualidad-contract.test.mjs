@@ -12,11 +12,11 @@ const web = readFileSync(new URL('../../index.html', import.meta.url), 'utf8');
 test('Contacto y redes existe como sección nativa operativa, no provisional', () => {
   assert.match(screens, /case \.contacto: NativeContactScreen\(\)/);
   assert.doesNotMatch(screens, /case \.favoritos, \.libro, \.contacto, \.privacidad/);
-  for (const heading of ['Sobre TifloAcosta', 'Contacto directo', 'Redes sociales', 'Escucha el podcast', 'Web oficial']) {
+  for (const heading of ['Sobre TifloAcosta', 'Contacto directo', 'Redes sociales', 'Web oficial']) {
     assert.ok(contact.includes('Section("' + heading + '")'), 'Sección omitida: ' + heading);
   }
   assert.match(contact, /Link\(destination: url\)/);
-  assert.match(contact, /\.accessibilityLabel\(item\.title\)/);
+  assert.match(contact, /\.accessibilityLabel\(Text\(LocalizedStringKey\(item\.title\)\)\)/);
   assert.match(contact, /\.accessibilityAction\(named: Text\("Compartir enlace"\)\)/);
   assert.match(contact, /\.listRowBackground\(TifloVisual\.surfaceRaised\)/);
   assert.match(contact, /\.tifloScreenSurface\(\)/);
@@ -31,16 +31,19 @@ test('Los enlaces de Contacto y redes coinciden con los enlaces oficiales de la 
     'https://www.instagram.com/tifloacosta/',
     'https://www.facebook.com/profile.php?id=61586738581998',
     'https://facebook.com/tony.acostaacosta',
-    'https://open.spotify.com/show/6z5BbrUhRuMANB5BFJfdfB',
-    'https://podcasts.apple.com/es/podcast/canal-tifloacosta/id1567846456',
-    'https://www.ivoox.com/podcast-canal-tifloacosta_sq_f11282163_1.html',
-    'https://podimo.com/es/shows/canal-tifloacosta',
-    'https://www.radio.es/podcast/canal-tifloacosta',
   ];
   for (const url of urls) {
     assert.ok(contact.includes(url), 'Falta enlace en iOS: ' + url);
     assert.ok(web.includes(url), 'El enlace iOS no está respaldado por la web: ' + url);
   }
+  const podcast = native('NativePodcasts.swift');
+  const platforms = ['Spotify', 'Apple Podcasts', 'iVoox', 'Podimo', 'radio.es'];
+  for (const platform of platforms) {
+    assert.ok(podcast.includes('name: "' + platform + '"'), 'Falta plataforma en Podcast: ' + platform);
+    assert.ok(!contact.includes('title: "' + platform + '"'), 'Podcast filtrado a Contacto: ' + platform);
+  }
+  assert.ok(!contact.includes('Escucha el podcast'));
+  assert.ok(podcast.includes('Section("Escuchar en otras plataformas")'));
 });
 
 test('Actualidad muestra selector de formatos multimedia antes de los resultados de noticias', () => {

@@ -236,6 +236,7 @@ struct NativeNewsScreen: View {
                 }
             }
         }
+        .tifloScreenSurface()
         .navigationTitle("Actualidad")
         .searchable(text: $query, prompt: "Buscar noticias")
         .onChange(of: query) { _, _ in visibleCount = 10 }
@@ -344,6 +345,7 @@ struct NativeNewsArticleScreen: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
         }
+        .tifloScreenSurface()
         .navigationTitle("Noticia")
         .navigationBarTitleDisplayMode(.inline)
     }

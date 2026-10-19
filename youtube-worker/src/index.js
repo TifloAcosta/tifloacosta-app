@@ -93,6 +93,7 @@ function safeError(error) {
   if (code === 'INVALID_COMMENT') return appError('INVALID_COMMENT', 400);
   if (code === 'NATIVE_AUTH_INVALID') return appError('NATIVE_AUTH_INVALID', 401);
   if (code === 'INVALID_SEARCH') return appError('INVALID_SEARCH', 400);
+  if (code === 'INVALID_CHANNEL') return appError('INVALID_CHANNEL', 400);
   if (code === 'SEARCH_UNAVAILABLE') return appError('SEARCH_UNAVAILABLE', 503);
   if (code === 'COMMENTS_DISABLED') return appError('COMMENTS_DISABLED', error.status || 403);
   if (code === 'VIDEO_NOT_FOUND') return appError('VIDEO_NOT_FOUND', 404);

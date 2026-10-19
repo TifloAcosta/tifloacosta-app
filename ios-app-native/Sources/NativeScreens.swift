@@ -132,13 +132,13 @@ struct NativeHomeScreen: View {
                                     .fill(TifloVisual.brandRed)
                                     .frame(width: 4, height: 30)
                                     .accessibilityHidden(true)
-                                Text(destination.rawValue)
+                                Text(LocalizedStringKey(destination.rawValue))
                                     .font(.body)
                                     .foregroundStyle(.primary)
                             }
                             .frame(maxWidth: .infinity, minHeight: 48, alignment: .leading)
                         }
-                        .accessibilityLabel(destination.rawValue)
+                        .accessibilityLabel(Text(LocalizedStringKey(destination.rawValue)))
                     }
                 }
                 .listRowBackground(TifloVisual.surfaceRaised)
@@ -219,10 +219,10 @@ struct NativeAdjustableChoice: View {
         } label: {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(title)
+                    Text(LocalizedStringKey(title))
                         .font(.subheadline)
                         .foregroundStyle(TifloVisual.secondaryText)
-                    Text(currentValue)
+                    Text(LocalizedStringKey(currentValue))
                         .font(.body).bold()
                         .foregroundStyle(TifloVisual.primaryText)
                 }
@@ -235,8 +235,8 @@ struct NativeAdjustableChoice: View {
         }
         .disabled(choices.isEmpty)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(title)
-        .accessibilityValue(currentValue)
+        .accessibilityLabel(Text(LocalizedStringKey(title)))
+        .accessibilityValue(Text(LocalizedStringKey(currentValue)))
         .accessibilityHint("Desliza arriba o abajo para cambiar. Doble toque para la siguiente opción.")
         .accessibilityAdjustableAction { direction in
             switch direction {
@@ -252,13 +252,14 @@ struct NativeResourcesScreen: View {
     @EnvironmentObject private var catalog: NativeCatalogStore
     @EnvironmentObject private var library: NativeReaderLibrary
     @EnvironmentObject private var resourceService: NativeResourceService
+    @AppStorage("native-ios-language") private var languageIndex = 0
     @State private var chosenCategory: String?
     @State private var resourceToOpen: NativeCatalogItem?
     @State private var presentingResource = false
     @State private var actionStatus: String?
 
     private var spanishResources: [NativeCatalogItem] {
-        catalog.resources.filter { $0.lang == "es" }
+        catalog.resources.filter { $0.lang == (languageIndex == 1 ? "en" : "es") }
     }
 
     private var categories: [String] {

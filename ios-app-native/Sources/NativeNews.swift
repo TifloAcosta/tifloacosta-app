@@ -171,6 +171,17 @@ struct NativeNewsScreen: View {
 
     var body: some View {
         List {
+            Section("Escuchar y ver") {
+                NavigationLink {
+                    NativeMediaScreen()
+                } label: {
+                    Label("Buscar podcasts y canales de YouTube", systemImage: "play.rectangle")
+                        .foregroundStyle(TifloVisual.primaryText)
+                }
+                .accessibilityHint("Abre un selector de formatos y fuentes multimedia.")
+            }
+            .listRowBackground(TifloVisual.surfaceRaised)
+
             Section {
                 NativeAdjustableChoice(
                     title: "Categoría",
@@ -178,10 +189,12 @@ struct NativeNewsScreen: View {
                     selectedIndex: $categoryIndex
                 )
             }
+            .listRowBackground(TifloVisual.surfaceRaised)
 
             if categoryIndex == 0 && query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 Text("Selecciona una categoría o escribe una búsqueda para consultar noticias.")
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(TifloVisual.secondaryText)
+                    .listRowBackground(TifloVisual.surfaceRaised)
             } else {
                 Section("Noticias") {
                     Text("\(matchingNews.count) noticias encontradas")
@@ -195,20 +208,26 @@ struct NativeNewsScreen: View {
                         NavigationLink {
                             NativeNewsArticleScreen(item: item)
                         } label: {
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text(item.title).font(.headline)
-                                Text("Medio: \(NativeNewsMetadata.source(item))")
-                                    .font(.subheadline).foregroundStyle(.secondary)
-                                if let published = NativeNewsMetadata.publication(item.publishedAt) {
-                                    Text("Publicado: \(published)")
-                                        .font(.subheadline).foregroundStyle(.secondary)
-                                }
-                                if let summary = item.summary, !summary.isEmpty {
-                                    Text(summary)
-                                        .font(.subheadline)
-                                        .foregroundStyle(.secondary)
-                                        .lineLimit(2)
-                                        .accessibilityHidden(true)
+                            HStack(alignment: .top, spacing: 12) {
+                                RoundedRectangle(cornerRadius: 2)
+                                    .fill(TifloVisual.brandRed)
+                                    .frame(width: 4, height: 48)
+                                    .accessibilityHidden(true)
+                                VStack(alignment: .leading, spacing: 5) {
+                                    Text(item.title).font(.headline)
+                                    Text("Medio: \(NativeNewsMetadata.source(item))")
+                                        .font(.subheadline).foregroundStyle(TifloVisual.secondaryText)
+                                    if let published = NativeNewsMetadata.publication(item.publishedAt) {
+                                        Text("Publicado: \(published)")
+                                            .font(.subheadline).foregroundStyle(TifloVisual.secondaryText)
+                                    }
+                                    if let summary = item.summary, !summary.isEmpty {
+                                        Text(summary)
+                                            .font(.subheadline)
+                                            .foregroundStyle(TifloVisual.secondaryText)
+                                            .lineLimit(2)
+                                            .accessibilityHidden(true)
+                                    }
                                 }
                             }
                         }
@@ -224,6 +243,7 @@ struct NativeNewsScreen: View {
                         Button("Mostrar diez más") { visibleCount += 10 }
                     }
                 }
+                .listRowBackground(TifloVisual.surfaceRaised)
             }
 
             if let status {

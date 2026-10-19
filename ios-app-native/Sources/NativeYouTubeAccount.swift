@@ -217,8 +217,8 @@ final class NativeYouTubeAccountStore: NSObject, ObservableObject {
                 guard let self else { return }
                 self.browserSession = nil
                 self.presentationContext = nil
-                self.busy = false
                 if let error {
+                    self.busy = false
                     let code = (error as NSError).code
                     let canceled = (error as NSError).domain == ASWebAuthenticationSessionError.errorDomain
                         && code == ASWebAuthenticationSessionError.Code.canceledLogin.rawValue
@@ -230,10 +230,12 @@ final class NativeYouTubeAccountStore: NSObject, ObservableObject {
                 guard let callback, callback.scheme == "tifloacosta",
                       callback.host == "youtube-auth",
                       let query = URLComponents(url: callback, resolvingAgainstBaseURL: false)?.queryItems else {
+                    self.busy = false
                     self.announce("Google no devolvió una respuesta válida a TifloAcosta.")
                     return
                 }
                 if let reason = query.first(where: { $0.name == "error" })?.value {
+                    self.busy = false
                     switch reason {
                     case "denied":
                         self.announce("No se han concedido los permisos solicitados por YouTube. Revisa el consentimiento de Google.")
@@ -246,6 +248,7 @@ final class NativeYouTubeAccountStore: NSObject, ObservableObject {
                 }
                 guard let ticket = query.first(where: { $0.name == "ticket" })?.value,
                       !ticket.isEmpty else {
+                    self.busy = false
                     self.announce("La respuesta de Google no contiene la autorización esperada.")
                     return
                 }

@@ -523,6 +523,7 @@ struct NativeReadingScreen: View {
     @State private var showAudioSettings = false
     @State private var showVisualSettings = false
     @State private var showDocumentActions = false
+    @State private var programmaticFocusRequest = false
     @State private var actionMessage: String?
     @AccessibilityFocusState private var focusedFragment: Int?
 
@@ -630,6 +631,7 @@ struct NativeReadingScreen: View {
         currentPercent = min(100, Int((ratio * 100).rounded()))
         persistPosition()
         let index = textLayout.fragmentIndex(for: readingOffset)
+        programmaticFocusRequest = true
         focusedFragment = index
         if speech.isPlaying {
             speech.play(String(document.body.dropFirst(readingOffset)),
@@ -742,7 +744,12 @@ struct NativeReadingScreen: View {
                 .padding()
             }
             .onChange(of: focusedFragment) { _, index in
-                if let index { proxy.scrollTo(index, anchor: .center) }
+                // Never recenter the reading view on ordinary VoiceOver swipes.
+                // Scroll only after an explicit "Unidad anterior/siguiente" action.
+                if let index, programmaticFocusRequest {
+                    proxy.scrollTo(index, anchor: .center)
+                    programmaticFocusRequest = false
+                }
             }
         }
     }

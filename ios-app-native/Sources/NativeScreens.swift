@@ -292,22 +292,51 @@ struct NativeAdjustableChoice: View {
         Button {
             advance(1)
         } label: {
-            HStack {
-                VStack(alignment: .leading, spacing: 4) {
+            HStack(alignment: .center, spacing: 12) {
+                RoundedRectangle(cornerRadius: 3)
+                    .fill(TifloVisual.actionTint)
+                    .frame(width: 4, height: 46)
+                    .accessibilityHidden(true)
+
+                VStack(alignment: .leading, spacing: 7) {
                     Text(LocalizedStringKey(title))
-                        .font(.subheadline)
-                        .foregroundStyle(TifloVisual.secondaryText)
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(TifloVisual.actionTint)
                     Text(LocalizedStringKey(currentValue))
-                        .font(.body).bold()
+                        .font(.body.weight(.semibold))
                         .foregroundStyle(TifloVisual.primaryText)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 6)
+                        .background(
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(TifloVisual.surface)
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .strokeBorder(TifloVisual.border, lineWidth: 1)
+                        )
                 }
-                Spacer()
-                Image(systemName: "arrow.up.arrow.down")
+                Spacer(minLength: 4)
+                Image(systemName: "arrow.up.arrow.down.circle.fill")
+                    .font(.title3)
                     .foregroundStyle(TifloVisual.actionTint)
                     .accessibilityHidden(true)
             }
-            .frame(minHeight: 44)
+            .padding(.horizontal, 14)
+            .padding(.vertical, 12)
+            .frame(maxWidth: .infinity, minHeight: 68, alignment: .leading)
+            .background(
+                RoundedRectangle(cornerRadius: TifloVisual.controlCornerRadius)
+                    .fill(TifloVisual.selectorSurface)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: TifloVisual.controlCornerRadius)
+                    .strokeBorder(TifloVisual.selectorBorder, lineWidth: 1.5)
+            )
+            .contentShape(RoundedRectangle(cornerRadius: TifloVisual.controlCornerRadius))
         }
+        .buttonStyle(.plain)
         .disabled(choices.isEmpty)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(Text(LocalizedStringKey(title)))
@@ -649,26 +678,84 @@ private struct NativeYouTubeTitleActions: ViewModifier {
     }
 }
 
+/// Miniatura meramente visual: la fila conserva un solo elemento accesible,
+/// con las mismas acciones de VoiceOver, sin introducir paradas adicionales.
+private struct NativeYouTubeThumbnail: View {
+    let video: NativeYouTubeVideo
+
+    private var fallback: some View {
+        ZStack {
+            TifloVisual.surfaceRaised
+            Image(systemName: "play.rectangle.fill")
+                .font(.title2)
+                .foregroundStyle(TifloVisual.actionTint)
+        }
+    }
+
+    var body: some View {
+        AsyncImage(url: video.thumbnailURL) { phase in
+            switch phase {
+            case .success(let image):
+                image.resizable().scaledToFill()
+            case .empty, .failure:
+                fallback
+            @unknown default:
+                fallback
+            }
+        }
+        .frame(width: 112, height: 63)
+        .clipped()
+        .clipShape(RoundedRectangle(cornerRadius: 9))
+        .overlay(
+            RoundedRectangle(cornerRadius: 9)
+                .strokeBorder(TifloVisual.border, lineWidth: 1)
+        )
+        .accessibilityHidden(true)
+    }
+}
+
 private struct NativeYouTubeVideoRow: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     let video: NativeYouTubeVideo
     let onPlay: (NativeYouTubeVideo) -> Void
     let onComment: (NativeYouTubeVideo) -> Void
 
-    var body: some View {
-        Button { onPlay(video) } label: {
-            VStack(alignment: .leading, spacing: 4) {
-                Text(video.title).font(.headline)
-                Text("Canal: \(video.channelTitle)")
+    private var details: some View {
+        VStack(alignment: .leading, spacing: 5) {
+            Text(video.title)
+                .font(.headline)
+                .foregroundStyle(TifloVisual.primaryText)
+            Text("Canal: \(video.channelTitle)")
+                .font(.subheadline)
+                .foregroundStyle(TifloVisual.secondaryText)
+            if let date = NativeNewsMetadata.publication(video.publishedAt) {
+                Text("Publicado: \(date)")
                     .font(.subheadline)
                     .foregroundStyle(TifloVisual.secondaryText)
-                if let date = NativeNewsMetadata.publication(video.publishedAt) {
-                    Text("Publicado: \(date)")
-                        .font(.subheadline)
-                        .foregroundStyle(TifloVisual.secondaryText)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    var body: some View {
+        Button { onPlay(video) } label: {
+            Group {
+                if dynamicTypeSize.isAccessibilitySize {
+                    VStack(alignment: .leading, spacing: 10) {
+                        NativeYouTubeThumbnail(video: video)
+                        details
+                    }
+                } else {
+                    HStack(alignment: .top, spacing: 12) {
+                        NativeYouTubeThumbnail(video: video)
+                        details
+                    }
                 }
             }
+            .padding(.vertical, 5)
             .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .buttonStyle(.plain)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("\(video.title). Canal: \(video.channelTitle)")
         .accessibilityHint("Doble toque para reproducir. Desliza arriba o abajo para más acciones.")

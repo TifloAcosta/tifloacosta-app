@@ -4,7 +4,9 @@ import {
   resolveChannelId,
   getAccountVideoState,
   subscribe,
+  unsubscribe,
   like,
+  unlike,
   comment,
   searchVideos
 } from '../src/youtube-api.js';
@@ -36,11 +38,13 @@ test('getAccountVideoState returns normalized subscription and rating', async ()
   const state = await getAccountVideoState(token, videoId, async (url, options) => {
     calls.push({ url: String(url), options });
     if (String(url).includes('/channels?')) return jsonResponse({ items: [{ id: 'CHANNEL_ID' }] });
+    if (String(url).includes('/videos?')) return jsonResponse({ items: [{ snippet: { channelId: 'CHANNEL_ID' } }] });
     if (String(url).includes('/subscriptions?')) return jsonResponse({ items: [{ id: 'sub-1' }] });
     if (String(url).includes('/videos/getRating?')) return jsonResponse({ items: [{ videoId, rating: 'like' }] });
     throw new Error(`unexpected URL ${url}`);
   });
   assert.deepEqual(state, { subscribed: true, rating: 'like' });
+  assert.equal(calls[0].url, `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}`);
   assert.equal(calls[1].url, 'https://www.googleapis.com/youtube/v3/subscriptions?part=id&mine=true&forChannelId=CHANNEL_ID&maxResults=1');
   assert.equal(calls[2].url, `https://www.googleapis.com/youtube/v3/videos/getRating?id=${videoId}`);
 });
@@ -94,7 +98,7 @@ test('like rates only the requested valid video as like', async () => {
   assert.equal(seen.options.method, 'POST');
 });
 
-test('comment resolves the TifloAcosta channel and includes channelId in a top-level comment', async () => {
+test('comment resolves the selected video channel and includes channelId in a top-level comment', async () => {
   const calls = [];
   const result = await comment(token, videoId, 'Texto del comentario', async (url, options) => {
     calls.push({ url: String(url), options });
@@ -102,7 +106,7 @@ test('comment resolves the TifloAcosta channel and includes channelId in a top-l
     return jsonResponse({ id: 'thread-1' });
   });
   assert.deepEqual(result, { commented: true });
-  assert.equal(calls[0].url, 'https://www.googleapis.com/youtube/v3/channels?part=id&forHandle=%40tifloacosta');
+  assert.equal(calls[0].url, `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}`);
   const insert = calls[1];
   assert.equal(insert.url, 'https://www.googleapis.com/youtube/v3/commentThreads?part=snippet');
   assert.equal(insert.options.method, 'POST');
@@ -210,4 +214,49 @@ test('searchVideos validates the query before calling YouTube', async () => {
     error => error?.code === 'INVALID_SEARCH' && error?.status === 400
   );
   assert.equal(called, false);
+});
+
+
+test('Native subscriber actions target the actual channel of each selected video', async () => {
+  const calls = [];
+  const fetchImpl = async (url, options) => {
+    const target = String(url);
+    calls.push({ target, method: options.method || 'GET', body: options.body });
+    if (target.includes('/videos?')) return jsonResponse({ items: [{ snippet: { channelId: 'UC_OTHER_CHANNEL' } }] });
+    if (target.includes('/subscriptions?') && options.method === 'GET') return jsonResponse({ items: [] });
+    if (target.includes('/subscriptions?') && options.method === 'POST') return jsonResponse({ id: 'created' });
+    throw new Error('unexpected request ' + target);
+  };
+  const result = await subscribe(token, videoId, fetchImpl);
+  assert.deepEqual(result, { subscribed: true, changed: true });
+  assert.equal(JSON.parse(calls.at(-1).body).snippet.resourceId.channelId, 'UC_OTHER_CHANNEL');
+  assert.equal(calls.some(call => call.target.includes('/channels?')), false);
+});
+
+test('Cancel subscription uses subscription ID and unlike uses rating none', async () => {
+  const calls = [];
+  const fetchImpl = async (url, options) => {
+    const target = String(url);
+    calls.push({ target, method: options.method || 'GET' });
+    if (target.includes('/videos?')) return jsonResponse({ items: [{ snippet: { channelId: 'UC_VIDEO' } }] });
+    if (target.includes('/subscriptions?') && options.method === 'GET') return jsonResponse({ items: [{ id: 'sub-123' }] });
+    if (options.method === 'DELETE') return new Response(null, { status: 204 });
+    if (target.includes('/videos/rate?')) return new Response(null, { status: 204 });
+    throw new Error('unexpected ' + target);
+  };
+  assert.deepEqual(await unsubscribe(token, videoId, fetchImpl), { subscribed: false, changed: true });
+  assert.ok(calls.some(x => x.method === 'DELETE' && x.target.endsWith('/subscriptions?id=sub-123')));
+  assert.deepEqual(await unlike(token, videoId, fetchImpl), { rating: 'none' });
+  assert.ok(calls.some(x => x.method === 'POST' && x.target.endsWith('rating=none')));
+});
+
+test('Missing video or incorrect video ID does not guess channel identity', async () => {
+  await assert.rejects(
+    () => subscribe(token, videoId, async () => jsonResponse({ items: [] })),
+    error => error?.code === 'VIDEO_NOT_FOUND'
+  );
+  await assert.rejects(
+    () => unsubscribe(token, 'bad', async () => { throw new Error('should not fetch'); }),
+    error => error?.code === 'INVALID_VIDEO_ID'
+  );
 });

@@ -534,116 +534,128 @@ struct NativeReadingScreen: View {
         currentPercent = min(100, Int((Double(next) / Double(max(1, body.count)) * 100).rounded()))
     }
 
-    var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 12) {
-                if isAudioOnly {
-                    Text("Audiolibro: \(tracks.count) pistas")
-                    Text("Pista \(trackIndex + 1) de \(tracks.count)")
-                }
-                if !latest.body.isEmpty {
-                    Group {
-                        if #available(iOS 18.0, *) {
-                            Text(latest.body)
-                                .translationPresentation(isPresented: $showTranslation,
-                                                         text: currentExcerpt)
-                        } else {
-                            Text(latest.body)
-                        }
-                    }
+    @ViewBuilder
+    private var readingContent: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            if isAudioOnly {
+                Text("Audiolibro: \(tracks.count) pistas")
+                Text("Pista \(trackIndex + 1) de \(tracks.count)")
+            }
+            if !latest.body.isEmpty {
+                translatedReadingText
                     .font(.system(size: textSize))
                     .fontWeight(strongText ? .bold : .regular)
                     .lineSpacing(CGFloat(lineSpacingIndex) * 4)
                     .textSelection(.enabled)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                }
-                if let actionMessage {
-                    Text(actionMessage).font(.footnote)
-                        .accessibilityAddTraits(.updatesFrequently)
-                }
             }
-            .padding()
-        }
-        .tifloScreenSurface()
-        .navigationTitle(document.title)
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            Menu("Acciones") {
-                Button("Añadir marca") { addBookmark() }
-                Button(latest.isFavorite == true ? "Quitar de favoritos" : "Añadir a favoritos") {
-                    library.toggleFavorite(document)
-                }
-                if !latest.body.isEmpty {
-                    Button("Exportar texto") { shareText() }
-                    if #available(iOS 18.0, *) {
-                        Button("Traducir párrafo actual") { showTranslation = true }
-                    }
-                    Button("Unidad anterior") { moveUnit(-1) }
-                    Button("Unidad siguiente") { moveUnit(1) }
-                }
-                if let track = tracks.first,
-                   let url = NativeReaderFormats.storedURL(for: track) {
-                    ShareLink("Compartir archivo de audio", item: url)
-                }
+            if let actionMessage {
+                Text(actionMessage).font(.footnote)
+                    .accessibilityAddTraits(.updatesFrequently)
             }
         }
-        .safeAreaInset(edge: .bottom) {
-            VStack(alignment: .leading, spacing: 8) {
-                HStack {
-                    Button(speech.isPlaying ? "Pausar" : "Reproducir") {
-                        speech.isPlaying ? speech.pause() : play()
-                    }
-                    Button("Detener") { speech.stop() }
-                    if !tracks.isEmpty {
-                        Button("Pista anterior") { changeTrack(-1) }
-                            .disabled(trackIndex == 0)
-                        Button("Pista siguiente") { changeTrack(1) }
-                            .disabled(trackIndex == tracks.count - 1)
-                    }
-                }
-                .buttonStyle(.bordered)
-                .controlSize(.small)
-                NativeAdjustableChoice(
-                    title: "Ir a posición",
-                    choices: (0...100).map { "\($0) por ciento" },
-                    selectedIndex: $currentPercent
-                )
-                if speech.hasAudio {
-                    Text("Tiempo realizado: \(Int(speech.audioElapsed)) segundos. " +
-                         "Tiempo faltante: \(max(0, Int(speech.audioDuration - speech.audioElapsed))) segundos.")
-                        .font(.caption)
-                }
+        .padding()
+    }
+
+    @ViewBuilder
+    private var translatedReadingText: some View {
+        if #available(iOS 18.0, *) {
+            Text(latest.body).translationPresentation(
+                isPresented: $showTranslation, text: currentExcerpt
+            )
+        } else {
+            Text(latest.body)
+        }
+    }
+
+    private var actionMenu: some View {
+        Menu("Acciones") {
+            Button("Añadir marca") { addBookmark() }
+            Button(latest.isFavorite == true ? "Quitar de favoritos" : "Añadir a favoritos") {
+                library.toggleFavorite(document)
             }
-            .padding()
-            .background(.regularMaterial)
-        }
-        .onAppear {
-            currentPercent = max(0, min(100,
-                startPercent > 0 ? startPercent : (latest.lastPercent ?? 0)))
-        }
-        .onChange(of: currentPercent) { _, value in
-            library.savePosition(document, percent: value)
-            if speech.hasAudio { speech.seek(to: value) }
-        }
-        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
-            speech.refresh()
-            if speech.hasAudio && speech.isPlaying {
-                let updated = speech.audioPercent
-                if abs(updated - currentPercent) >= 2 {
-                    currentPercent = updated
+            if !latest.body.isEmpty {
+                Button("Exportar texto") { shareText() }
+                if #available(iOS 18.0, *) {
+                    Button("Traducir párrafo actual") { showTranslation = true }
                 }
+                Button("Unidad anterior") { moveUnit(-1) }
+                Button("Unidad siguiente") { moveUnit(1) }
+            }
+            if let track = tracks.first,
+               let url = NativeReaderFormats.storedURL(for: track) {
+                ShareLink("Compartir archivo de audio", item: url)
             }
         }
-        .onDisappear {
-            library.savePosition(document, percent: currentPercent)
-            speech.stop()
+    }
+
+    private var playbackControls: some View {
+        HStack {
+            Button(speech.isPlaying ? "Pausar" : "Reproducir") {
+                speech.isPlaying ? speech.pause() : play()
+            }
+            Button("Detener") { speech.stop() }
+            if !tracks.isEmpty {
+                Button("Pista anterior") { changeTrack(-1) }
+                    .disabled(trackIndex == 0)
+                Button("Pista siguiente") { changeTrack(1) }
+                    .disabled(trackIndex >= tracks.count - 1)
+            }
         }
-        .accessibilityAction(named: Text("Añadir marca")) { addBookmark() }
-        .accessibilityAction(named: Text("Avanzar diez por ciento")) {
-            currentPercent = min(100, currentPercent + 10)
+        .buttonStyle(.bordered)
+        .controlSize(.small)
+    }
+
+    private var playbackFooter: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            playbackControls
+            NativeAdjustableChoice(
+                title: "Ir a posición",
+                choices: (0...100).map { "\($0) por ciento" },
+                selectedIndex: $currentPercent
+            )
+            if speech.hasAudio {
+                Text("Tiempo realizado: \(Int(speech.audioElapsed)) segundos. " +
+                     "Tiempo faltante: \(max(0, Int(speech.audioDuration - speech.audioElapsed))) segundos.")
+                    .font(.caption)
+            }
         }
-        .accessibilityAction(named: Text("Retroceder diez por ciento")) {
-            currentPercent = max(0, currentPercent - 10)
-        }
+        .padding()
+        .background(.regularMaterial)
+    }
+
+    var body: some View {
+        ScrollView { readingContent }
+            .tifloScreenSurface()
+            .navigationTitle(document.title)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar { ToolbarItem(placement: .topBarTrailing) { actionMenu } }
+            .safeAreaInset(edge: .bottom) { playbackFooter }
+            .onAppear {
+                currentPercent = max(0, min(100,
+                    startPercent > 0 ? startPercent : (latest.lastPercent ?? 0)))
+            }
+            .onChange(of: currentPercent) { _, value in
+                library.savePosition(document, percent: value)
+                if speech.hasAudio { speech.seek(to: value) }
+            }
+            .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
+                speech.refresh()
+                if speech.hasAudio && speech.isPlaying {
+                    let updated = speech.audioPercent
+                    if abs(updated - currentPercent) >= 2 { currentPercent = updated }
+                }
+            }
+            .onDisappear {
+                library.savePosition(document, percent: currentPercent)
+                speech.stop()
+            }
+            .accessibilityAction(named: Text("Añadir marca")) { addBookmark() }
+            .accessibilityAction(named: Text("Avanzar diez por ciento")) {
+                currentPercent = min(100, currentPercent + 10)
+            }
+            .accessibilityAction(named: Text("Retroceder diez por ciento")) {
+                currentPercent = max(0, currentPercent - 10)
+            }
     }
 }

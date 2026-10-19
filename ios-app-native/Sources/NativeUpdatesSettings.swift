@@ -35,6 +35,7 @@ struct NativeUpdatesScreen: View {
                 }
             }
         }
+        .tifloScreenSurface()
         .navigationTitle("Novedades")
     }
 }
@@ -70,6 +71,7 @@ struct NativeSettingsScreen: View {
                 }
             }
         }
+        .tifloScreenSurface()
         .navigationTitle("Configuración")
     }
 }

@@ -214,7 +214,7 @@ struct NativeRemoteResourceScreen: View {
                         Button("Descargar en Archivos") { download() }
                             .disabled(busy)
                     }
-                    .buttonStyle(.bordered)
+                    .buttonStyle(TifloSecondaryActionStyle())
 
                     // Thousands of paragraphs must not become one oversized Text view.
                     LazyVStack(alignment: .leading, spacing: 12) {
@@ -233,6 +233,7 @@ struct NativeRemoteResourceScreen: View {
             }
             .padding()
         }
+        .tifloScreenSurface()
         .navigationTitle(item.title)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {

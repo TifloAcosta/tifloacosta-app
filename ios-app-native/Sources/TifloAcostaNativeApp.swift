@@ -21,7 +21,8 @@ struct TifloAcostaNativeApp: App {
                 .environmentObject(podcasts)
                 .onAppear { inbox.refresh() }
                 .task { await catalog.refresh(); await podcasts.refresh() }
-                .tint(Color(red: 0.70, green: 0.18, blue: 0.18))
+                .tint(TifloVisual.actionTint)
+                .environment(\.defaultMinListRowHeight, 48)
                 .preferredColorScheme(schemeIndex == 1 ? .light : schemeIndex == 2 ? .dark : nil)
         }
     }

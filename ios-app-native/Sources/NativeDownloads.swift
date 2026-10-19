@@ -120,6 +120,7 @@ struct NativeDownloadsScreen: View {
                 }
             }
         }
+        .tifloScreenSurface()
         .navigationTitle("Descargas")
         .alert("No se pudo importar", isPresented: Binding(
             get: { alertText != nil },

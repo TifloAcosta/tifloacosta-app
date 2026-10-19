@@ -212,6 +212,7 @@ struct NativeReaderLibraryScreen: View {
                 }
             }
         }
+        .tifloScreenSurface()
         .navigationTitle("TifloLector")
         .searchable(text: $searchText, prompt: "Buscar en mi biblioteca")
         .alert("Cambiar título", isPresented: Binding(
@@ -275,7 +276,8 @@ struct NativeReaderLibraryScreen: View {
                         value: document.importedAt.formatted(date: .abbreviated, time: .shortened)
                     )
                 }
-                .navigationTitle("Información")
+                .tifloScreenSurface()
+        .navigationTitle("Información")
                 .toolbar {
                     Button("Cerrar") { information = nil }
                 }
@@ -301,6 +303,7 @@ struct NativeReadingScreen: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
         }
+        .tifloScreenSurface()
         .navigationTitle(document.title)
         .navigationBarTitleDisplayMode(.inline)
         .safeAreaInset(edge: .bottom) {

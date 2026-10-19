@@ -69,6 +69,8 @@ struct TifloSecondaryActionStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(.body.weight(.semibold))
+            .fixedSize(horizontal: false, vertical: true)
+            .multilineTextAlignment(.leading)
             .foregroundStyle(TifloVisual.primaryText)
             .padding(.horizontal, 16)
             .padding(.vertical, 12)

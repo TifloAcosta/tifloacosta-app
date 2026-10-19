@@ -53,3 +53,12 @@ test('Recursos conserva acciones nativas, con contraste y controles ajustables',
   assert.match(visual, /foregroundStyle\(TifloVisual\.primaryText\)/);
   assert.doesNotMatch(screens + documents, /WKWebView|UIWebView/);
 });
+
+test('Los botones del reproductor respetan la distribución vertical con letra grande', () => {
+  const player = source('NativeYouTubePlayer.swift');
+  assert.match(player, /dynamicTypeSize\.isAccessibilitySize/);
+  assert.match(player, /VStackLayout\(alignment: \.leading, spacing: 8\)/);
+  assert.match(player, /Retroceder 30 segundos/);
+  assert.match(player, /Avanzar 30 segundos/);
+  assert.match(visual, /fixedSize\(horizontal: false, vertical: true\)/);
+});

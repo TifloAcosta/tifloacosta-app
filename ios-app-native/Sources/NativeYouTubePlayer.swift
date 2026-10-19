@@ -273,6 +273,7 @@ private struct NativeYouTubeOfficialPlayer: UIViewRepresentable {
 
 struct NativeYouTubePlayerScreen: View {
     @EnvironmentObject private var account: NativeYouTubeAccountStore
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var editingComment = false
     @State private var commentText = ""
     let video: NativeYouTubeVideo
@@ -306,13 +307,41 @@ struct NativeYouTubePlayerScreen: View {
                     Text(error).foregroundStyle(TifloVisual.secondaryText)
                 }
 
-                HStack(spacing: 8) {
-                    Button(engine.playing ? "Pausar" : "Reproducir") { engine.toggle() }
+                // Los tres controles en una fila reducían la palabra «Reproducir»
+                // a varias líneas en el iPhone. Los ajustes de accesibilidad
+                // apilan los saltos de 30 segundos sin perder acciones de VoiceOver.
+                VStack(spacing: 8) {
+                    Button {
+                        engine.toggle()
+                    } label: {
+                        Text(engine.playing ? "Pausar" : "Reproducir")
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .disabled(!engine.ready)
+
+                    AnyLayout(
+                        dynamicTypeSize.isAccessibilitySize
+                            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8))
+                            : AnyLayout(HStackLayout(spacing: 8))
+                    ) {
+                        Button {
+                            engine.seek(seconds: -30)
+                        } label: {
+                            Text("Retroceder 30 s")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        .accessibilityLabel("Retroceder 30 segundos")
                         .disabled(!engine.ready)
-                    Button("Retroceder 30 segundos") { engine.seek(seconds: -30) }
+
+                        Button {
+                            engine.seek(seconds: 30)
+                        } label: {
+                            Text("Avanzar 30 s")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        .accessibilityLabel("Avanzar 30 segundos")
                         .disabled(!engine.ready)
-                    Button("Avanzar 30 segundos") { engine.seek(seconds: 30) }
-                        .disabled(!engine.ready)
+                    }
                 }
                 .buttonStyle(TifloSecondaryActionStyle())
 

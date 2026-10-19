@@ -53,7 +53,7 @@ for (const [identifier,envName,slug] of bundles) {
   if(!bundle) throw Error('Falta identificador Apple Developer: '+identifier);
   // El grupo debe estar activado para los DOS App IDs, no solo declarado
   // en entitlements. El perfil firmado es la fuente de verdad.
-  let capabilities = await api('bundleIds/'+bundle.id+'/bundleIdCapabilities?limit=200');
+  let capabilities = await api('bundleIds/'+bundle.id+'/bundleIdCapabilities');
   const hasAppGroups = capabilities.data.some(
     x => x.attributes?.capabilityType === 'APP_GROUPS'
   );
@@ -62,7 +62,7 @@ for (const [identifier,envName,slug] of bundles) {
       data:{type:'bundleIdCapabilities',attributes:{capabilityType:'APP_GROUPS'},
         relationships:{bundleId:{data:{type:'bundleIds',id:bundle.id}}}}
     })});
-    capabilities = await api('bundleIds/'+bundle.id+'/bundleIdCapabilities?limit=200');
+    capabilities = await api('bundleIds/'+bundle.id+'/bundleIdCapabilities');
     if (!capabilities.data.some(x => x.attributes?.capabilityType === 'APP_GROUPS')) {
       throw Error('No se habilitó APP_GROUPS en Apple Developer: '+identifier);
     }

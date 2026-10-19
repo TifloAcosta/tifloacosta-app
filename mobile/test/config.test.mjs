@@ -14,7 +14,7 @@ test('Capacitor config uses the official TifloAcosta identity and bundled web ou
   assert.equal(config.plugins?.CapacitorHttp?.enabled, true, 'native HTTP must be enabled for the remote content feed');
 });
 
-test('mobile package pins Capacitor 8 native dependencies and builds before platform sync', async () => {
+test('Android mobile pins Capacitor 8 and no longer offers a second iOS build route', async () => {
   const pkg = JSON.parse(await read('package.json'));
   assert.equal(pkg.private, true);
   assert.equal(pkg.type, 'module');
@@ -29,7 +29,8 @@ test('mobile package pins Capacitor 8 native dependencies and builds before plat
   assert.equal(pkg.scripts?.test, 'node --test test/*.test.mjs');
   assert.equal(pkg.scripts?.build, 'node scripts/build.mjs');
   assert.equal(pkg.scripts?.['sync:android'], 'npm run build && npx cap sync android');
-  assert.equal(pkg.scripts?.['sync:ios'], 'npm run build && npx cap sync ios');
+  assert.equal(pkg.scripts?.['sync:ios'], undefined, 'iOS solo se compila desde ios-app-native');
+  assert.equal(pkg.scripts?.['check:ios-native'], undefined, 'no quedan verificaciones del prototipo híbrido');
 });
 
 test('mobile shell stays accessible and source entry remains bundle-ready', async () => {

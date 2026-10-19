@@ -1,27 +1,31 @@
-import AppKit
 import Foundation
+import AppKit
 
-guard CommandLine.arguments.count == 3,
-      let source = NSImage(contentsOfFile: CommandLine.arguments[1]) else {
-    fatalError("Falta el icono oficial de TifloAcosta")
-}
+// Use an RGBA Core Graphics canvas. Convert through opaque JPEG to an RGB PNG.
+guard CommandLine.arguments.count == 3 else {fatalError("Uso: swift make-app-icon.swift origen destino")}
+guard let logo = NSImage(contentsOfFile: CommandLine.arguments[1]) else {fatalError("Icono TifloAcosta no encontrado")}
 let dimension = 1024
-guard let bitmap = NSBitmapImageRep(
-    bitmapDataPlanes: nil, pixelsWide: dimension, pixelsHigh: dimension,
-    bitsPerSample: 8, samplesPerPixel: 3, hasAlpha: false,
-    isPlanar: false, colorSpaceName: .deviceRGB,
-    bytesPerRow: 0, bitsPerPixel: 0
-), let context = NSGraphicsContext(bitmapImageRep: bitmap) else {
-    fatalError("No se pudo crear el icono opaco de 1024 píxeles")
-}
+guard let canvas = CGContext(data: nil, width: dimension, height: dimension,
+                              bitsPerComponent: 8, bytesPerRow: dimension * 4,
+                              space: CGColorSpaceCreateDeviceRGB(),
+                              bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)
+else {fatalError("No se pudo crear el lienzo de icono")}
+let context = NSGraphicsContext(cgContext: canvas, flipped: false)
 NSGraphicsContext.saveGraphicsState()
 NSGraphicsContext.current = context
-NSColor.white.setFill()
-NSRect(x: 0, y: 0, width: dimension, height: dimension).fill()
-source.draw(in: NSRect(x: 0, y: 0, width: dimension, height: dimension))
+context.imageInterpolation = .high
+context.shouldAntialias = true
+let area = NSRect(x:0, y:0, width: dimension, height: dimension)
+NSColor(calibratedRed: 13.0 / 255.0, green: 43.0 / 255.0, blue: 69.0 / 255.0, alpha: 1).setFill()
+area.fill()
+logo.draw(in: area, from: .zero, operation: .sourceOver, fraction: 1)
 context.flushGraphics()
 NSGraphicsContext.restoreGraphicsState()
-guard let data = bitmap.representation(using: .png, properties: [:]) else {
-    fatalError("No se pudo generar el icono PNG")
-}
-try data.write(to: URL(fileURLWithPath: CommandLine.arguments[2]))
+guard let image=canvas.makeImage() else {fatalError("No se pudo renderizar el icono")}
+let raw=NSBitmapImageRep(cgImage:image)
+guard let jpeg=raw.representation(using:.jpeg,properties:[.compressionFactor:1.0]),
+      let opaque=NSBitmapImageRep(data:jpeg),
+      let png=opaque.representation(using:.png,properties:[:])
+else {fatalError("No se pudo convertir el icono a PNG RGB")}
+try png.write(to:URL(fileURLWithPath:CommandLine.arguments[2]),options:.atomic)
+print("AppIcon TifloAcosta: 1024x1024 RGB")

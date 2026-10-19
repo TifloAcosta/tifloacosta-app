@@ -134,7 +134,7 @@ enum NativeDriveTransfer {
         // Algunas respuestas de Drive muestran un enlace de descarga en
         // vez de un formulario. Nunca seguimos vínculos arbitrarios: deben
         // ser HTTPS oficiales, contener el ID original y confirmación.
-        let linkPattern = #"<a\\b[^>]*\\bhref\\s*=\\s*["']([^"']+)["'][^>]*>"#
+        let linkPattern = #"<a\b[^>]*\bhref\s*=\s*["']([^"']+)["'][^>]*>"#
         if let links = try? NSRegularExpression(pattern: linkPattern, options: [.caseInsensitive]) {
             for match in links.matches(in: html, range: NSRange(html.startIndex..., in: html)) {
                 guard match.numberOfRanges > 1,

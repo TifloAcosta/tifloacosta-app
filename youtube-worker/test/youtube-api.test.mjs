@@ -190,6 +190,7 @@ test('searchVideos returns normalized public video results and durations', async
 
   assert.deepEqual(result, {
     items: [{
+      kind: 'video',
       id: 'abcDEF123_-',
       title: 'Accessible video',
       channelTitle: 'Example channel',
@@ -260,4 +261,64 @@ test('Missing video or incorrect video ID does not guess channel identity', asyn
     () => unsubscribe(token, 'bad', async () => { throw new Error('should not fetch'); }),
     error => error?.code === 'INVALID_VIDEO_ID'
   );
+});
+
+
+test('search by channel returns native channel results without asking for video durations', async () => {
+  const channelId = 'UC' + 'a'.repeat(22);
+  const calls = [];
+  const page = await searchVideos('api-key', 'accesibilidad', '', async url => {
+    calls.push(String(url));
+    return jsonResponse({ items: [{
+      id: { channelId },
+      snippet: { title: 'Canal accesible', channelTitle: 'Canal accesible', description: 'Canal de prueba' }
+    }] });
+  }, { filter: 'channel' });
+  assert.equal(page.items.length, 1);
+  assert.equal(page.items[0].kind, 'channel');
+  assert.equal(page.items[0].channelId, channelId);
+  assert.equal(calls.length, 1);
+  assert.match(calls[0], /type=channel/);
+});
+
+test('short videos use the official duration filter, not a fictitious Shorts API', async () => {
+  const requests = [];
+  const page = await searchVideos('api-key', 'accesibilidad', '', async url => {
+    requests.push(String(url));
+    return jsonResponse({ items: [] });
+  }, { filter: 'short' });
+  assert.deepEqual(page.items, []);
+  assert.ok(requests[0].includes('videoDuration=short'));
+});
+
+test('authenticated subscription list returns channel IDs, titles and pagination only', async () => {
+  const channelId = 'UC' + 'b'.repeat(22);
+  const { listMySubscriptions } = await import('../src/youtube-api.js');
+  let request;
+  const page = await listMySubscriptions('auth-token', 'NEXT_TOKEN', async (url, options) => {
+    request = { url: String(url), options };
+    return jsonResponse({
+      nextPageToken: 'MORE',
+      items: [{ snippet: { resourceId: { channelId }, title: 'Mi canal', description: 'Descripción' } }]
+    });
+  });
+  assert.deepEqual(page, {
+    items: [{ id: channelId, title: 'Mi canal', description: 'Descripción' }],
+    nextPageToken: 'MORE'
+  });
+  assert.match(request.url, /mine=true/);
+  assert.match(request.url, /pageToken=NEXT_TOKEN/);
+  assert.equal(request.options.headers.Authorization, 'Bearer auth-token');
+});
+
+test('channel videos browse does not require entering a search phrase', async () => {
+  const channelId = 'UC' + 'c'.repeat(22);
+  let firstURL = '';
+  await searchVideos('api-key', '', '', async url => {
+    firstURL ||= String(url);
+    return jsonResponse({ items: [] });
+  }, { channelId });
+  assert.match(firstURL, /channelId=UC/);
+  assert.match(firstURL, /order=date/);
+  assert.doesNotMatch(firstURL, /q=/);
 });

@@ -50,7 +50,7 @@ test('YouTube usa exclusivamente iframe oficial y mandos nativos VoiceOver', () 
   assert.match(player, /onYouTubeIframeAPIReady/);
   assert.match(player, /controls:1/);
   assert.match(player, /height: 225/);
-  assert.match(player, /Button\(engine\.playing \? "Pausar" : "Reproducir"\)/);
+  assert.match(player, /Text\(engine\.playing \? "Pausar" : "Reproducir"\)/);\n  assert.match(player, /dynamicTypeSize\.isAccessibilitySize/);\n  assert.match(player, /VStackLayout\(alignment: \.leading, spacing: 8\)/);
   assert.match(player, /Retroceder 30 segundos/);
   assert.match(player, /Avanzar 30 segundos/);
   assert.match(player, /\.accessibilityAdjustableAction/);

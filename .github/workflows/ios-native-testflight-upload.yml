@@ -5,6 +5,7 @@ on:
     paths:
       - 'ios-app-native/Sources/**'
       - 'ios-app-native/ShareExtension/**'
+      - 'ios-app-native/scripts/**'
       - 'ios-app-native/project.yml'
       - '.github/workflows/ios-native-testflight-upload.yml'
   workflow_dispatch:

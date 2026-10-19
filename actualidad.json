@@ -1,5 +1,102 @@
 [
   {
+    "id": "conticgo-cfa49f04c69cb83e",
+    "type": "news",
+    "sourceId": "conticgo",
+    "sourceName": "Conticgo",
+    "sourceUrl": "https://conticgo.net/",
+    "originalUrl": "https://conticgo.net/navilens-llega-al-transporte-publico-de-melbourne-para-mejorar-la-accesibilidad-de-las-personas-ciegas/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-10-19T06:00:28.000Z",
+    "categories": [
+      "tecnologia-accesibilidad",
+      "movilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "NaviLens llega al transporte público de Melbourne para mejorar la accesibilidad de las personas ciegas",
+        "summary": "Vision Australia ha destacado el uso de NaviLens en la red de tranvías de Melbourne. Esta tecnología permite localizar señalización mediante el móvil y recibir información del transporte en audio, texto y respuesta háptica. La iniciativa toma como referencia la ruta 96 y abre el debate sobre cómo mejorar la orientación de las personas con […] La entrada NaviLens llega al transporte público de Melbourne para mejorar la accesibilidad de las personas ciegas se publicó primero en Conticgo .",
+        "body": "Vision Australia ha destacado el uso de NaviLens en la red de tranvías de Melbourne. Esta tecnología permite localizar señalización mediante el móvil y recibir información del transporte en audio, texto y respuesta háptica.\n\nLa iniciativa toma como referencia la ruta 96 y abre el debate sobre cómo mejorar la orientación de las personas con discapacidad visual en el transporte público.\n\nVision Australia incluyó NaviLens en su boletín de tecnología de septiembre de 2026. La organización explica que el sistema ayuda a las personas ciegas o con baja visión a orientarse en la red de tranvías de Melbourne mediante códigos instalados en las paradas.\n\nEstos códigos tienen un diseño visual distintivo y pueden detectarse con la cámara del teléfono móvil. A través de la aplicación, el usuario recibe información sobre el servicio en formatos adaptados a sus necesidades.\n\nEl sistema puede proporcionar información mediante audio, texto y respuesta háptica, como vibraciones del teléfono. De esta manera, la persona puede acceder a información del entorno sin depender exclusivamente de los carteles convencionales.\n\nLa tecnología no requiere que el usuario enfoque el código como haría con un código QR tradicional. Está diseñada para detectarlo a distancia y mientras se mueve, lo que puede facilitar la localización de señales en espacios concurridos.\n\nLa utilidad de NaviLens va más allá de identificar una parada. En el proyecto de Melbourne, los códigos se integran con los sistemas de información de Yarra Trams para ofrecer datos dinámicos sobre los servicios.\n\nEntre sus aplicaciones se encuentran:\n\nEstas posibilidades pueden contribuir a que las personas con discapacidad visual planifiquen sus desplazamientos con mayor autonomía. Sin embargo, NaviLens es una herramienta de apoyo: no sustituye la necesidad de contar con itinerarios accesibles, información fiable y asistencia cuando sea necesaria.\n\nEl despliegue de NaviLens en el transporte público de Victoria comenzó en agosto de 2023. Según la documentación del propio sistema, el primer código se instaló en la parada 9, en el cruce de Bourke Street y Spring Street.\n\nLa ruta 96, que conecta Brunswick East con St Kilda Beach, fue la primera línea piloto. NaviLens documenta la instalación de más de 3.000 códigos en sus marquesinas y en la flota de tranvías E-Class.\n\nPosteriormente, Yarra Trams anunció la ampliación de la tecnología a más paradas y vehículos de su red. La compañía explicó que el objetivo era mejorar el acceso a la información para los pasajeros ciegos o con baja visión.\n\nNo obstante, existe una diferencia entre las fuentes consultadas: el boletín de Vision Australia de septiembre de 2026 indica que el servicio está disponible actualmente en la ruta 96 y que se espera extenderlo a otras rutas. Por su parte, la documentación de NaviLens y Yarra Trams describe una ampliación de los códigos a más vehículos y servicios.\n\nPor este motivo, no conviene afirmar que toda la red dispone actualmente de la misma cobertura. La información disponible confirma el despliegue inicial en la ruta 96 y la extensión a determinados vehículos, pero el alcance actual completo requiere una confirmación más específica del operador.\n\nLa tecnología no es nueva en España. NaviLens ya se utiliza en distintos sistemas de transporte público, con aplicaciones adaptadas a las necesidades de cada red.\n\nEn Barcelona, Transports Metropolitans de Barcelona (TMB) utiliza estos códigos en estaciones de metro y paradas de autobús. La información puede incluir el nombre y el código de la parada, las líneas disponibles, el destino de los autobuses, los tiempos de llegada y las posibles incidencias.\n\nEn las estaciones de metro, los códigos también pueden describir distintos espacios y servicios, como accesos, vestíbulos, ascensores, andenes y puntos de embarque. Esta información ayuda a las personas con discapacidad visual a orientarse durante sus desplazamientos.\n\nEl caso de Melbourne resulta interesante porque muestra cómo la tecnología puede integrarse en la señalización del transporte y conectarse con información operativa actualizada. No se trata únicamente de identificar un lugar, sino de facilitar información útil para tomar decisiones durante el viaje.\n\nLa experiencia de Melbourne permite reflexionar sobre una cuestión importante: para que el transporte público sea accesible, no basta con disponer de vehículos adaptados o recorridos sin barreras físicas. También es necesario que las personas puedan localizar las paradas, identificar los servicios y consultar los cambios que se producen durante el trayecto.\n\nLos códigos NaviLens pueden contribuir a cubrir parte de esa necesidad al añadir información digital accesible a la señalización física existente. Además, su uso mediante teléfonos móviles permite ofrecer diferentes formatos de información desde un mismo punto.\n\nPara valorar su impacto real, también es importante analizar la cobertura de los códigos, la actualización de los datos, la facilidad de uso de la aplicación y la experiencia de las propias personas ciegas o con baja visión.\n\nLa accesibilidad del transporte público depende de soluciones que funcionen en situaciones reales. Iniciativas como la de Melbourne y las implantaciones españolas muestran cómo la tecnología puede ayudar a reducir las barreras de información y favorecer desplazamientos más autónomos.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuentes: Vision Australia , Navilens ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "nvda-es-e50d3841f1502ed5",
+    "type": "news",
+    "sourceId": "nvda-es",
+    "sourceName": "NVDA en español",
+    "sourceUrl": "https://nvda.es/",
+    "originalUrl": "https://nvda.es/2026/10/19/ya-disponible-la-sexta-beta-de-nvda-2026-3/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-10-19T05:29:40.000Z",
+    "categories": [
+      "nvda",
+      "windows",
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "Ya disponible la sexta beta de NVDA 2026.3",
+        "summary": "Tal y como ha anunciado NV Access mediante esta publicación, la beta 6 de NVDA 2026.3 ya se encuentra disponible para descarga y pruebas. Si quieres saber qué ofrece la próxima versión de NVDA antes de que se libere oficialmente, no dudes en descargar esta beta y proporcionar comentarios por los canales de la comunidad, … Continuar leyendo \"Ya disponible la sexta beta de NVDA 2026.3\" La entrada Ya disponible la sexta beta de NVDA 2026.3 se publicó primero en NVDA en español .",
+        "body": "Tal y como ha anunciado NV Access mediante esta publicación , la beta 6 de NVDA 2026.3 ya se encuentra disponible para descarga y pruebas. Si quieres saber qué ofrece la próxima versión de NVDA antes de que se libere oficialmente, no dudes en descargar esta beta y proporcionar comentarios por los canales de la comunidad, o por el sistema de informe de fallos de NV Access . Esta versión no es apta para entornos de producción. Al instalar esta beta te unirás al canal beta, y sólo recibirás avisos de actualización de compilaciones beta y candidatas a liberación (rc). El canal beta/rc siempre te mantendrá al día con la versión más reciente de NVDA. La última rc de un ciclo de liberación es idéntica a la última versión estable. Para regresar al canal de versiones estables, instala a mano la última versión estable.\n\nEsta versión incorpora importantes mejoras de rendimiento, mejoras en los diálogos de NVDA, y entrada expandida por la pantalla táctil. Se han hecho varias mejoras para reducir los retrasos y aumentar el rendimiento. Ahora NVDA recupera y captura más información sobre los controles en segundo plano, mejorando el rendimiento en controles como cuadros combinados y el explorador de archivos. NVDA ya no hace que se rompan el explorador de archivos u otras aplicaciones al cerrarlo o reiniciarlo. NVDA se recupera ahora más rápido cuando una aplicación deja de responder, y ya no se colgará ni inundará el registro con errores en aplicaciones que no responden. En regiones vivas de texto, como las terminales, NVDA ya no se cuelga cuando se vuelcan en pantalla importantes cantidades de texto. Se han añadido menús de contexto y atajos de teclado a los diálogos de perfiles de configuración, gestos de entrada y diccionarios del habla, haciendo que estos diálogos sean más fáciles de usar con el teclado. Ahora también es posible cambiar directamente un gesto existente en el diálogo Gestos de entrada. Se ha modernizado el diálogo que presenta mensajes explorables y ahora soporta mejor cambiar su tamaño, maximizarlo y minimizarlo. Se ha expandido significativamente la entrada por pantalla táctil. Los gestos de dos deslizamientos secuenciales ahora combinan dos deslizamientos en rápida sucesión en un solo gesto, incrementando enormemente la cantidad de gestos asociables. También se soportan ahora los gestos de borde, permitiendo que los gestos que comiencen a 15 mm de cualquier borde de la pantalla se asocien independientemente de los mismos gestos realizados en el centro de la pantalla. Se ha añadido una nueva orden sin asignar para mover el cursor del ratón al centro de la vista ampliada. Se puede usar el OCR de Windows con la lupa o la cortina de pantalla activadas. Se ha actualizado Liblouis con nuevas tablas braille en Elfdaliano, sami, maorí, braille unificado inglés de Nueva Zelanda, y aitiano criollo, una tabla noruega para texto en español, y variantes adicionales de sueco de 6 y 8 puntos. Se ha actualizado Espeak NG añadiendo soporte para liguriano y abkhaz. Para instalar esta beta, puedes configurar el canal «rc y beta» en el complemento Selector del canal de actualización y buscar actualizaciones desde el menú Ayuda de NVDA, o actualizar desde una beta anterior. Y como siempre, también puedes descargar manualmente el instalador de NVDA 2026.3 beta 6 . Su suma de comprobación SHA256, que te permitirá garantizar la integridad del archivo descargado, es 407cd4afb19d72b533c7a88a7eda86fb38d8aa753134b1000a4b6f6275fc172d. ¡Feliz lunes!\n\nLa entrada Ya disponible la sexta beta de NVDA 2026.3 se publicó primero en NVDA en español ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-81fe3dc7307d08ac",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/18/new-revamped-iphone-lineup-coming-in-2027/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-19T02:16:00.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Not upgrading to iPhone 18 Pro or Duo? Here’s what’s coming next year",
+        "summary": "iPhone Duo preorders just begun, and iPhone 18 Pro has been on the market for about a month. Of course, iPhone Duo is backordered through January right now, so whether or not you’re considering buying these phones – it makes it really easy to think about what’s coming next. more…",
+        "body": "iPhone Duo preorders just begun, and iPhone 18 Pro has been on the market for about a month. Of course, iPhone Duo is backordered through January right now, so whether or not you’re considering buying these phones – it makes it really easy to think about what’s coming next.\n\n2027 is going to be a relatively big iPhone release year for Apple. First, the company will be continuing the iPhone 18 lineup after it introduced a split release schedule last month. Then, in the fall, the company will debut a new round of flagships in celebration of the 20th anniversary of the iPhone. Here’s what to expect.\n\nFor the first time, Apple will be introducing its base iPhone in the spring . Upgrades for the iPhone 18 aren’t quite clear, though more RAM is one of the key rumors. Thermal upgrades will likely happen as well, as well as the new Apple C2 modem.\n\nIt’s possible Apple will update the design to fall more in line with the iPhone 17 Pro and iPhone 18 Pro, though we don’t yet know.\n\nThis phone will of course equip the A20 chip, and it’ll probably start at the same $899 price point that iPhone 17 currently sits at – after it was increased from $799 last month .\n\nThis phone will most likely just end up being a chip bump from the A19 to A20 chip, and debut in the Spring alongside the iPhone 18. Earlier this year, reports indicated that Apple would share many components between the iPhone 18 and iPhone 18e, though it isn’t quite clear what that could mean for the devices.\n\nOut of all of the spring iPhone releases, this one is the one to look forward to. After receiving a lukewarm reception with the initial iPhone Air model, Apple went back to the drawing board and decided to modify the design to fit an ultrawide camera into the device. This meant the phone couldn’t be released last month.\n\nPersonally, I don’t think an ultrawide camera is too important – though many people will see one camera on the back of the phone and immediately assume it’s less premium, so it’ll probably end up being an important upgrade for the sake of sales. Plus, ultrawide photos can be fun at times.\n\nWhile not confirmed, I wouldn’t be surprised if it integrates a smaller Dynamic Island, similar to iPhone 18 Pro. iPhone Air 2 will likely also jump from Apples C1X modem to the C2.\n\nIt should also have a larger battery, reportedly as large as 3500mAh. That’s a roughly 10% improvement from the original iPhone Air.\n\nFor the 20th anniversary of the iPhone, Apple is expected to debut a fully redesigned iPhone to celebrate. It’ll reportedly be much more glassy , feature significantly slimmer bezels, and ditch the flat edge design of the iPhone 12 and later. It should also offer a much smaller Dynamic Island, likely with a hole punch selfie camera and under-display Face ID.\n\nPersonally, I’m slightly skeptical that this’ll truly be a replacement to the “Pro” phone for thermal reasons, but time will tell. iPhone Duo seemingly has strong thermals while not featuring an aluminum unibody, so my concern might not be relevant.\n\nIf you’re holding out for iPhone 18 Pro, this “iPhone 20” is definitely the phone to wait out for.\n\nLastly, Apple will release a successor to its just-announced iPhone Duo next fall. There aren’t many substantial rumors for this phone, though one could hope Face ID and better cameras are in the pipeline. Of course, you can expect next-generation Apple Silicon with the A21 Pro chip next year.\n\nMy favorite Apple accessory recommendations:\n\nFollow Michael: X/Twitter , Bluesky , Instagram"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-fba506cf5eb1b5f1",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/18/iphone-duo-battery-capacity-comparison/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-19T01:32:09.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Here’s how iPhone Duo’s battery capacity compares to other iPhones",
+        "summary": "After pre-orders for iPhone Duo opened, Apple uploaded an EU regulatory document that finally revealed the true battery capacity for iPhone Duo: 4883mAh. Here’s how that compares to other iPhones. more…",
+        "body": "After pre-orders for iPhone Duo opened, Apple uploaded an EU regulatory document that finally revealed the true battery capacity for iPhone Duo: 4883mAh. Here’s how that compares to other iPhones.\n\n4883mAh definitely falls towards the high-end of the battery spectrum, though it’s by no means the best.\n\niPhone Duo features two battery cells: one 2962mAh and another 1921mAh cell, totaling 4883mAh. This places it pretty much exactly in between the iPhone 18 Pro and iPhone 18 Pro Max, which offer 4288mAh and 5567mAh batteries, respectively.\n\nCompared to the rest of the recent iPhone lineup (eSIM versions, which feature larger battery cells than the physical SIM versions), here’s where iPhone Duo ranks:\n\nOverall, iPhone Duo has one of the largest battery capacities in an iPhone, only being bested by the two most recent Pro Max iPhones. Compared to anything else, the Duo will have a physically larger battery – though it’s worth noting that you’ll get less battery life if you use the larger inside display very frequently.\n\nAre you buying an iPhone Duo? Are you excited to receive yours, or did you also have an unfortunate pre-order experience? Let us know in the comments.\n\nMy favorite Apple accessory recommendations:\n\nFollow Michael: X/Twitter , Bluesky , Instagram"
+      }
+    },
+    "media": null
+  },
+  {
     "id": "engadget-5290ff461fd32800",
     "type": "news",
     "sourceId": "engadget",
@@ -142,31 +239,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-182be430bbcaed85",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/18/apple-redesigned-health-app-one-suggestion-series-12/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-18T17:56:43.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "programas-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple Watch Series 12 is excellent, but I find myself missing this one software feature",
-        "summary": "Apple Watch Series 12 has been a marvel of an upgrade, at least for me. I’ve written about it WHOOP. That said, in my past month testing it, there’s one WHOOP feature I’ve found myself missing. more…",
-        "body": "Apple Watch Series 12 has been a marvel of an upgrade, at least for me. I’ve written about it many times , and personally – I have found that the Apple Watch Series 12 is a competent replacement for the WHOOP . That said, in my past month testing it, there’s one WHOOP feature I’ve found myself missing.\n\nYes, I know – the Series 12 is old news, and there are much cooler things to think about, like iPhone Duo and HomeView . That said, the Apple Watch Series 12 was quite charming to me, primarily because it felt like a little bit of a surprise.\n\nWe knew we’d be getting an always-on heart rate monitor, and we knew Apple was working on a new Health app, though we didn’t know when it would ship. Seeing the two together actually felt like quite a novel launch. That’s besides the point, though. Let’s talk about the redesigned Health app and what I feel it’s missing.\n\nFrankly, Apple did a lot really well here. For one, there’s the fact that the interface actually feels easy to read and navigate. On top of that, the new features like Readiness and Health Age make it feel like a much more meaningful app. Plus, existing features like Vitals and Sleep being integrated means I’ll actually go look at it daily.\n\nThis Health app isn’t shipping yet. It was available in iOS 27.2 for a little while, but has since been removed . Apple says it’ll come back in a later iOS beta prior to releasing it later this year. In all likelihood, this means iOS 27.3, which should enter beta before the end of the month and ship before the end of December.\n\nFor me, and this is more of a small personal preference than a true flaw with the app or how it’s designed, I’d really like to see Apple copy WHOOP’s approach to measuring days: sleep.\n\nWith WHOOP , your days aren’t measured on a fixed 24 hour clock, they’re based on when you go to sleep. That means if you do a workout past midnight, it still counts for the existing day. Or, if you were out late at night, your walk home counts towards the day that you started on, rather than counting towards the next day. I personally prefer this concept of tracking fitness goals.\n\nOf course, it could be an option, though I do think fixing peoples “days” to their sleep is a little more sensible than basing it on a normal clock, especially when it comes to tracking exercise.\n\nWhat do you think of this concept? How do you feel about the new Apple Health app ? Let us know in the comments.\n\nMy favorite Apple accessory recommendations:\n\nFollow Michael: X/Twitter , Bluesky , Instagram"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "applevis-apps-b151a03570dc02f3",
     "type": "news",
     "sourceId": "applevis-apps",
@@ -283,30 +355,6 @@
         "title": "Lenovo’s fast, comfy SteamOS handheld is hundreds off",
         "summary": "The Legion Go S with SteamOS is a pretty solid alternative to the $789 Steam Deck OLED. It runs identical software, but ships in a design with two-stage triggers, a bigger eight-inch IPS screen (1080p and up to 120Hz versus 800p and 90Hz in the Deck OLED), and it’s got double the RAM and storage […]",
         "body": "The Legion Go S with SteamOS is a pretty solid alternative to the $789 Steam Deck OLED. It runs identical software, but ships in a design with two-stage triggers, a bigger eight-inch IPS screen (1080p and up to 120Hz versus 800p and 90Hz in the Deck OLED), and it’s got double the RAM and storage (32GB and 1TB, respectively), not to mention a slightly faster processor in the Ryzen Z1 Extreme.\n\nAt $999.99, its current discounted price at Best Buy , it’s worth considering if you’re deciding on a handheld. The Legion Go S is not as powerful as the $1,299.99 Asus ROG Xbox Ally X20 that just launched, which has the Z2 Extreme and a OLED screen, but it’s no slouch, either.\n\nThis model launched with Windows 11 and the Ryzen Z2 Go. Despite being a newer chip, it’s less powerful than the Z1 Extreme in the discounted model. SteamOS and the faster internals within this configuration will provide a better experience. Check out my colleague Sean Hollister’s review of multiple configs of the Go S, and see how it stacks up in his benchmarks."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-f815b099926a14ce",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/18/new-macbook-pro-with-touchscreen-and-oled-november-6-release/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-18T14:48:53.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple’s first touchscreen MacBook could debut on November 6: Here’s what to expect",
-        "summary": "After over a decade of not adopting touch displays on its Mac notebook lineup, Apple will finally be releasing its first touchscreen MacBook as early as November 6th, after announcing it as early as October 27th . more…",
-        "body": "After over a decade of not adopting touch displays on its Mac notebook lineup, Apple will finally be releasing its first touchscreen MacBook as early as November 6th, after announcing it as early as October 27th .\n\nOf course, rumors are rumors – though essentially every reputable source has aligned on the idea of the MacBook Pro gaining support for touch very shortly. Apple even left a few hints in macOS 27: Touch Support in Sidecar, pull to refresh support, and slightly bigger menu bar items.\n\nOne could call all of this a mere coincidence, but it’s probably exactly what it looks like. Regardless, here’s what the first touchscreen MacBook will have to offer.\n\nOn the display panel side of things, the redesigned MacBook Pro will come with a Tandem OLED display. This will be similar to the iPad Pro , which is often touted as one of the best mobile displays on the market. Tandem OLED comprises of stacked OLED panels, which allows for incredible colors, strong contrast, and increased brightness.\n\nReports also suggest it’ll come with a Dynamic Island , and it’ll be a bit smaller than the one on the iPhone. It won’t, however, come with support for Face ID.\n\nAccording to Bloomberg’s Mark Gurman , Apple will have some special optimizations for the first touchscreen MacBook Pro , beyond what’s already visible in the betas of macOS 27:\n\n“For instance, if users touch a button or control, the interface will bring up a new type of menu surrounding their finger that provides more relevant options for touch commands.\n\nThe software will also display the most appropriate set of controls based on users’ prior interaction. And if a person taps an item in the menu bar at the top of the screen, the set of controls will enlarge to be more easily selectable with a finger.”\n\nDespite initial reporting suggesting that we’ll be seeing the debut of the M6 Pro and Max in the redesigned MacBook Pro , Apple is now skipping the release of those chips to accelerate the M7. This means that the first iteration of 2nm chips won’t be making their way to the redesigned MacBook Pros, and they’ll instead offer the existing M5 Pro and M5 Max chips .\n\nThere won’t be a base model version of this computer quite yet, though rumors suggest that Apple will be launching a base version of the redesigned MacBook Pro with an M7 chip as early as next spring .\n\nOne design rumor for the new MacBook Pro is the fact that it’ll be slightly slimmer and lighter – though it’s unclear how meaningful this will be. The last MacBook Pro iteration made the computers look and feel quite chunky, so a bit of progress here would likely be welcome – so long as it doesn’t come at the compromise of thermals.\n\nBloomberg has also reported that these computers will be ‘significantly lighter,’ thanks to re-engineering of internal components.\n\nAccording to the Power On newsletter , Apple will potentially release these new MacBook Pro models on November 6th, making a straight four weeks of new Apple launches with iPhone Duo, HomePod mini 2, the new MacBook Pro , and HomeView + Apple TV 4K .\n\nAs of now, there’s no Apple release scheduled for November 6th, so it would make sense to be the new MacBook Pro :\n\nNow, I have a little more to share: Apple is planning to hold a “reset” at its retail stores on the evening of Thursday, Nov. 5, into Friday, Nov. 6, that implies new signage and products will be placed on store tables. Given that this Friday is a week after the Mac announcements (when Apple would typically release products), it would make sense that this is the date when at least some of the new items become available to customers.\n\nMy favorite Apple accessory recommendations:\n\nFollow Michael: X/Twitter , Bluesky , Instagram"
       }
     },
     "media": null
@@ -1102,29 +1150,6 @@
         "title": "Ya disponible la cuarta beta de NVDA 2026.3",
         "summary": "Tal y como ha anunciado NV Access mediante esta publicación, la beta 4 de NVDA 2026.3 ya se encuentra disponible para descarga y pruebas. Si quieres saber qué ofrece la próxima versión de NVDA antes de que se libere oficialmente, no dudes en descargar esta beta y proporcionar comentarios por los canales de la comunidad, … Continuar leyendo \"Ya disponible la cuarta beta de NVDA 2026.3\" La entrada Ya disponible la cuarta beta de NVDA 2026.3 se publicó primero en NVDA en español .",
         "body": "Tal y como ha anunciado NV Access mediante esta publicación , la beta 4 de NVDA 2026.3 ya se encuentra disponible para descarga y pruebas. Si quieres saber qué ofrece la próxima versión de NVDA antes de que se libere oficialmente, no dudes en descargar esta beta y proporcionar comentarios por los canales de la comunidad, o por el sistema de informe de fallos de NV Access . Esta versión no es apta para entornos de producción. Al instalar esta beta te unirás al canal beta, y sólo recibirás avisos de actualización de compilaciones beta y candidatas a liberación (rc). El canal beta/rc siempre te mantendrá al día con la versión más reciente de NVDA. La última rc de un ciclo de liberación es idéntica a la última versión estable. Para regresar al canal de versiones estables, instala a mano la última versión estable.\n\nEsta versión incorpora importantes mejoras de rendimiento, mejoras en los diálogos de NVDA, y entrada expandida por la pantalla táctil. Se han hecho varias mejoras para reducir los retrasos y aumentar el rendimiento. Ahora NVDA recupera y captura más información sobre los controles en segundo plano, mejorando el rendimiento en controles como cuadros combinados y el explorador de archivos. NVDA ya no hace que se rompan el explorador de archivos u otras aplicaciones al cerrarlo o reiniciarlo. NVDA se recupera ahora más rápido cuando una aplicación deja de responder, y ya no se colgará ni inundará el registro con errores en aplicaciones que no responden. En regiones vivas de texto, como las terminales, NVDA ya no se cuelga cuando se vuelcan en pantalla importantes cantidades de texto. Se han añadido menús de contexto y atajos de teclado a los diálogos de perfiles de configuración, gestos de entrada y diccionarios del habla, haciendo que estos diálogos sean más fáciles de usar con el teclado. Ahora también es posible cambiar directamente un gesto existente en el diálogo Gestos de entrada. Se ha modernizado el diálogo que presenta mensajes explorables y ahora soporta mejor cambiar su tamaño, maximizarlo y minimizarlo. Se ha expandido significativamente la entrada por pantalla táctil. Los gestos de dos deslizamientos secuenciales ahora combinan dos deslizamientos en rápida sucesión en un solo gesto, incrementando enormemente la cantidad de gestos asociables. También se soportan ahora los gestos de borde, permitiendo que los gestos que comiencen a 15 mm de cualquier borde de la pantalla se asocien independientemente de los mismos gestos realizados en el centro de la pantalla. Se ha añadido una nueva orden sin asignar para mover el cursor del ratón al centro de la vista ampliada. Se puede usar el OCR de Windows con la lupa o la cortina de pantalla activadas. Se ha actualizado Liblouis con nuevas tablas braille en Elfdaliano, sami, maorí, braille unificado inglés de Nueva Zelanda, y aitiano criollo, una tabla noruega para texto en español, y variantes adicionales de sueco de 6 y 8 puntos. Se ha actualizado Espeak NG añadiendo soporte para liguriano y abkhaz. Para instalar esta beta, puedes configurar el canal «rc y beta» en el complemento Selector del canal de actualización y buscar actualizaciones desde el menú Ayuda de NVDA, o actualizar desde una beta anterior. Y como siempre, también puedes descargar manualmente el instalador de NVDA 2026.3 beta 4 . Su suma de comprobación SHA256, que te permitirá garantizar la integridad del archivo descargado, es 8be91476179710c4abffe5094459df9be1696d92e5d6cd0ace47d52321bb87ab. ¡Feliz martes!\n\nLa entrada Ya disponible la cuarta beta de NVDA 2026.3 se publicó primero en NVDA en español ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "conticgo-6f4c37587f2fed67",
-    "type": "news",
-    "sourceId": "conticgo",
-    "sourceName": "Conticgo",
-    "sourceUrl": "https://conticgo.net/",
-    "originalUrl": "https://conticgo.net/nueva-formacion-gratuita-repaso-de-atajos-basicos-para-la-intercomunicacion-con-smartphones-de-personas-con-baja-vision/",
-    "originalLanguage": "es",
-    "publishedAt": "2026-10-05T09:41:09.000Z",
-    "categories": [
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "es": {
-        "title": "Nueva formación gratuita: repaso de atajos básicos para la intercomunicación con smartphones de personas con baja visión",
-        "summary": "Desde Conticgo ponemos en marcha una nueva formación gratuita dirigida a repasar atajos básicos que facilitan la intercomunicación y el manejo de smartphones. La sesión tendrá lugar este martes 6 de octubre a las 11:00 h y podrá seguirse de forma presencial o online a través de Jitsi Meet. Sesión online También será posible participar […] La entrada Nueva formación gratuita: repaso de atajos básicos para la intercomunicación con smartphones de personas con baja visión se publicó primero en Conticgo .",
-        "body": "Desde Conticgo ponemos en marcha una nueva formación gratuita dirigida a repasar atajos básicos que facilitan la intercomunicación y el manejo de smartphones.\n\nLa sesión tendrá lugar este martes 6 de octubre a las 11:00 h y podrá seguirse de forma presencial o online a través de Jitsi Meet .\n\nTambién será posible participar online a través de Jitsi Meet , en la sala de grupo, el mismo martes 6 de octubre a las 11:00 h.\n\nPara acceder a la sesión online, puedes hacerlo haciendo click en el siguiente enlace el mismo día 6 de octubre a las 11:00:\n\nEnlace directo a sala de grupo JitsiMeet\n\nLa formación presencial se realizará a las 11:00 h en nuestra sede de Avilés:\n\nAvda. Gijón, 7 Centro Municipal de Asociaciones El Arbolón Sala de Actividades 3\n\nUna vez termine la formación, estará disponible en nuestro canal de YouTube para todos aquellos que no os hayáis podido concectar.\n\n¡Os esperamos!"
       }
     },
     "media": null
@@ -2287,31 +2312,6 @@
         "title": "Ya disponible la versión final de NVDA 2026.2",
         "summary": "Tras 11 versiones beta y 2 candidatas a liberación, NV Access ha anunciado mediante esta publicación que ya se encuentra disponible para su descarga la versión final de NVDA 2026.2, el lector de pantalla gratuito y de código abierto para Microsoft Windows. Se recomienda a todos los usuarios actualizar a esta nueva versión, cuyo uso … Continuar leyendo \"Ya disponible la versión final de NVDA 2026.2\" La entrada Ya disponible la versión final de NVDA 2026.2 se publicó primero en NVDA en español .",
         "body": "Tras 11 versiones beta y 2 candidatas a liberación, NV Access ha anunciado mediante esta publicación que ya se encuentra disponible para su descarga la versión final de NVDA 2026.2, el lector de pantalla gratuito y de código abierto para Microsoft Windows. Se recomienda a todos los usuarios actualizar a esta nueva versión, cuyo uso se considera apto también en entornos de producción.\n\nEsta versión incluye una nueva función de magnificador integrado, mejoras en los gestos táctiles y la navegación, y una ampliación de funciones de voz y braille. El magnificador ofrece opciones de aumentos y de filtrado de colores para ayudar a los usuarios con discapacidad visual. Actualmente, el Magnificador solo es compatible con el modo a pantalla completa, aunque en una futura actualización se prevé la incorporación de modos acoplados. Se ha ampliado considerablemente la compatibilidad táctil con nuevos gestos de pellizco y la navegación por el contenido web mediante el modo táctil. Ahora puedes desplazarte entre enlaces, encabezados, campos de formulario y otros elementos mediante gestos táctiles. Se han mejorado las funciones de voz con la compatibilidad con diccionarios de voz personalizados que pueden proporcionarse mediante complementos, así como con nuevos tipos de entradas de diccionario que permiten un control más preciso. Se ha añadido una nueva configuración de voz para las voces de OneCore con el fin de controlar las pausas tras los signos de puntuación. Una nueva orden permite repetir la última información verbalizada, con la posibilidad de mostrarla en un mensaje que se pueda leer. El gesto predeterminado para repetir la última información leída en voz alta es NVDA+x, que se puede modificar en el cuadro de diálogo «Gestos de entrada». Ahora, la pantalla braille puede desplazarse automáticamente y los dispositivos DotPad admiten combinaciones de varios botones. El atajo predeterminado para activar o desactivar el desplazamiento automático es NVDA+Alt+k. Liblouis se ha actualizado con nuevas tablas de braille en italiano y estonio. Al restablecer las opciones predeterminadas de fábrica de NVDA, ahora hay disponible un botón «Deshacer» para recuperar la configuración anterior. Consulta todas las novedades aquí Tan pronto como actualices NVDA, no olvides reiniciar el equipo. El reinicio garantiza que se pueden actualizar archivos que antes no se podían modificar porque estaban abiertos para escritura. En la práctica, al reiniciar vuelven a funcionar aplicaciones basadas en Electron, tales como Teams, Dropbox o Google Drive, y dejan de producirse comportamientos extraños con el explorador de archivos, Thunderbird, Office y algunos navegadores. Reiniciar es lo primero que debes hacer antes de informar de cualquier fallo. Hazlo pulsando windows+d para ir al escritorio, alt+f4, e intro sobre la opción Reiniciar. Puedes descargar NVDA 2026.2, así como las últimas versiones compatibles con sistemas antiguos y material útil para desarrolladores, desde nuestra página de descargas . La suma SHA256 de NVDA 2026.2, que se usa para garantizar la integridad de la descarga, es f3f8d29974a88d687b3c4809be192219ec579c5bdabcda5aaf53635288bca824. Si tienes una versión estable anterior, también puedes actualizar automáticamente desde el menú Ayuda. Y desde la rc2, con el complemento Selector del canal de actualización, se puede hacer del mismo modo configurando previamente el canal estable. Si todavía no conoces NVDA y quieres leer algo más sobre él antes de probarlo, te recomendamos consultar la guía de usuario y la referencia rápida de órdenes . Si te gustan nuestros proyectos y el contenido que ofrecemos, plantéate contribuir mensualmente con una pequeña cantidad. Tan sólo un euro es capaz de marcar la diferencia y ayudarnos a mejorar. Visita la página de donaciones para obtener más información, o la tienda para hacerte con libros de formación traducidos y sintetizadores de voz de alta calidad. ¡Feliz lunes!\n\nLa entrada Ya disponible la versión final de NVDA 2026.2 se publicó primero en NVDA en español ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "nvda-es-bb27678f657c9586",
-    "type": "news",
-    "sourceId": "nvda-es",
-    "sourceName": "NVDA en español",
-    "sourceUrl": "https://nvda.es/",
-    "originalUrl": "https://nvda.es/2026/08/26/ya-disponible-la-segunda-candidata-a-liberacion-de-nvda-2026-2/",
-    "originalLanguage": "es",
-    "publishedAt": "2026-08-26T06:18:11.000Z",
-    "categories": [
-      "nvda",
-      "windows",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "es": {
-        "title": "Ya disponible la segunda candidata a liberación de NVDA 2026.2",
-        "summary": "Tal y como ha anunciado NV Access mediante esta publicación, la rc 2 de NVDA 2026.2 ya se encuentra disponible para descarga y pruebas. Se recomienda a todos los usuarios descargar esta versión y proporcionar comentarios por los canales de la comunidad, o por el sistema de informe de fallos de NV Access. A menos … Continuar leyendo \"Ya disponible la segunda candidata a liberación de NVDA 2026.2\" La entrada Ya disponible la segunda candidata a liberación de NVDA 2026.2 se publicó primero en NVDA en español .",
-        "body": "Tal y como ha anunciado NV Access mediante esta publicación , la rc 2 de NVDA 2026.2 ya se encuentra disponible para descarga y pruebas. Se recomienda a todos los usuarios descargar esta versión y proporcionar comentarios por los canales de la comunidad, o por el sistema de informe de fallos de NV Access . A menos que se detecten fallos críticos de última hora, esta versión será idéntica a la versión final de NVDA 2026.2. Esta versión no es apta para entornos de producción.\n\nEsta versión incluye una nueva función de ampliación, mejoras en los gestos táctiles y la navegación, y capacidades mejoradas de voz y braille. El ampliador proporciona opciones de zoom y filtro de color para asistir a usuarios con baja visión. Actualmente, el ampliador sólo soporta el modo a pantalla completa, dejando los modos acoplados planificados para una futura versión. Se ha expandido significativamente el soporte táctil con nuevos gestos de pellizcar y con navegación en modo exploración táctil en contenido web. Ahora se puede navegar por enlaces, encabezados, campos de formulario y otros elementos usando deslizamientos táctiles. Se han mejorado las funciones de voz con soporte de diccionarios del habla personalizados que pueden proporcionarse en complementos y nuevos tipos de entradas de diccionario que proporcionan un control más granular. Se ha añadido una nueva opción en las voces OneCore para controlar las pausas después de la puntuación. Una nueva orden permite repetir la última información verbalizada, con la capacidad de mostrarla en un mensaje explorable. El gesto predeterminado para repetir la última información verbalizada es NVDA+x, y se puede cambiar desde el diálogo Gestos de entrada. La pantalla braille ahora puede desplazarse automáticamente, y los dispositivos DotPad soportan combinaciones multibotón. Liblouis se ha actualizado con nuevas tablas braille en italiano y estonio. Al restablecer NVDA a los valores de fábrica, ahora hay disponible un botón de deshacer para restaurar la configuración anterior. Para instalar esta candidata a liberación, puedes configurar el canal «rc y beta» en el complemento Selector del canal de actualización y buscar actualizaciones desde el menú Ayuda de NVDA, o actualizar desde una beta anterior. Y como siempre, también puedes descargar manualmente el instalador de NVDA 2026.2 rc 2 . Su suma de comprobación SHA256, que te permitirá garantizar la integridad del archivo descargado, es 3e956809bf8ea2812ceb26748d7d49cf869b1023fb8ce94d99589e20af1d7ba1. ¡Feliz miércoles!\n\nLa entrada Ya disponible la segunda candidata a liberación de NVDA 2026.2 se publicó primero en NVDA en español ."
       }
     },
     "media": null

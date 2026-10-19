@@ -78,83 +78,149 @@ struct NativeHomeScreen: View {
         showingSearch = true
     }
 
-    var body: some View {
-        NavigationStack {
-            List {
-                Section {
-                    AnyLayout(
-                        dynamicTypeSize.isAccessibilitySize
-                            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8))
-                            : AnyLayout(HStackLayout(alignment: .center, spacing: 12))
-                    ) {
-                        NativeBrandMark()
-                            .frame(width: 56, height: 56)
-                        VStack(alignment: .leading, spacing: 6) {
-                            Text("TifloAcosta App")
-                                .font(.title2.bold())
-                                .accessibilityAddTraits(.isHeader)
-                            Text("Recursos de accesibilidad y tecnología, organizados para llegar a ellos sin perderse por el camino.")
-                                .font(.subheadline)
-                        }
-                    }
-                    .foregroundStyle(.white)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(16)
+    // Una portada compacta y adaptable. ScrollView evita los márgenes y
+    // alturas automáticas de List(.insetGrouped) en tamaños de accesibilidad.
+    // No se limita Dynamic Type ni se cambia el recorrido de VoiceOver.
+    private var brandHeader: some View {
+        AnyLayout(
+            dynamicTypeSize.isAccessibilitySize
+                ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8))
+                : AnyLayout(HStackLayout(alignment: .center, spacing: 12))
+        ) {
+            NativeBrandMark()
+                .frame(width: 48, height: 48)
+            VStack(alignment: .leading, spacing: 4) {
+                Text("TifloAcosta App")
+                    .font(.title3.bold())
+                    .accessibilityAddTraits(.isHeader)
+                Text("Recursos de accesibilidad y tecnología, organizados para llegar a ellos sin perderse por el camino.")
+                    .font(.subheadline)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .foregroundStyle(.white)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(16)
+        .background(
+            RoundedRectangle(cornerRadius: TifloVisual.cornerRadius)
+                .fill(TifloVisual.brandDeepRed)
+        )
+    }
+
+    private var searchPanel: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Buscar con TifloAcosta")
+                .font(.headline)
+                .foregroundStyle(TifloVisual.primaryText)
+                .accessibilityAddTraits(.isHeader)
+
+            AnyLayout(
+                dynamicTypeSize.isAccessibilitySize
+                    ? AnyLayout(VStackLayout(alignment: .leading, spacing: 10))
+                    : AnyLayout(HStackLayout(alignment: .center, spacing: 10))
+            ) {
+                TextField("Introduce tu búsqueda", text: $searchText)
+                    .textFieldStyle(.plain)
+                    .font(.body)
+                    .submitLabel(.search)
+                    .textInputAutocapitalization(.sentences)
+                    .onSubmit(search)
+                    .padding(.horizontal, 14)
+                    .frame(maxWidth: .infinity, minHeight: 48)
                     .background(
-                        RoundedRectangle(cornerRadius: TifloVisual.cornerRadius).fill(TifloVisual.brandDeepRed)
+                        RoundedRectangle(cornerRadius: TifloVisual.controlCornerRadius)
+                            .fill(TifloVisual.surfaceRaised)
                     )
-                    .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
-                    .listRowBackground(Color.clear)
-                }
+                    .overlay(
+                        RoundedRectangle(cornerRadius: TifloVisual.controlCornerRadius)
+                            .strokeBorder(TifloVisual.border, lineWidth: 1)
+                    )
 
-                Section("Buscar con TifloAcosta") {
-                    TextField("Introduce tu búsqueda", text: $searchText)
-                        .submitLabel(.search)
-                        .textInputAutocapitalization(.sentences)
-                        .onSubmit(search)
-                    Button(action: search) {
-                        Text("Buscar")
-                            .frame(maxWidth: .infinity, minHeight: 44)
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .tint(TifloVisual.brandRed)
-                    .disabled(searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                Button(action: search) {
+                    Text("Buscar")
+                        .font(.body.weight(.semibold))
+                        .frame(minHeight: 48)
+                        .padding(.horizontal, 12)
                 }
-                .listRowBackground(TifloVisual.surfaceRaised)
+                .buttonStyle(.borderedProminent)
+                .tint(TifloVisual.brandRed)
+                .disabled(searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+            }
+        }
+    }
 
-                Section("Secciones") {
-                    ForEach(NativeDestination.allCases) { destination in
-                        NavigationLink(value: destination) {
-                            HStack(spacing: 12) {
-                                RoundedRectangle(cornerRadius: 2)
-                                    .fill(TifloVisual.brandRed)
-                                    .frame(width: 4, height: 30)
-                                    .accessibilityHidden(true)
-                                Text(LocalizedStringKey(destination.rawValue))
-                                    .font(.body)
-                                    .foregroundStyle(.primary)
-                            }
-                            .frame(maxWidth: .infinity, minHeight: 48, alignment: .leading)
+    private var destinationsPanel: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Secciones")
+                .font(.headline)
+                .foregroundStyle(TifloVisual.primaryText)
+                .accessibilityAddTraits(.isHeader)
+
+            LazyVStack(spacing: 0) {
+                ForEach(NativeDestination.allCases) { destination in
+                    NavigationLink(value: destination) {
+                        HStack(spacing: 12) {
+                            RoundedRectangle(cornerRadius: 2)
+                                .fill(TifloVisual.brandRed)
+                                .frame(width: 4, height: 28)
+                                .accessibilityHidden(true)
+                            Text(LocalizedStringKey(destination.rawValue))
+                                .font(.body)
+                                .foregroundStyle(.primary)
+                                .fixedSize(horizontal: false, vertical: true)
+                            Spacer(minLength: 8)
+                            Image(systemName: "chevron.right")
+                                .font(.subheadline.weight(.semibold))
+                                .foregroundStyle(TifloVisual.secondaryText)
+                                .accessibilityHidden(true)
                         }
-                        .accessibilityLabel(Text(LocalizedStringKey(destination.rawValue)))
+                        .frame(maxWidth: .infinity, minHeight: 48, alignment: .leading)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 6)
+                        .contentShape(Rectangle())
                     }
-                }
-                .listRowBackground(TifloVisual.surfaceRaised)
+                    .buttonStyle(.plain)
+                    .accessibilityLabel(Text(LocalizedStringKey(destination.rawValue)))
 
-                if let error = catalog.error {
-                    Section {
-                        Text(error).foregroundStyle(.secondary)
-                        Button("Actualizar contenido") {
-                            Task { await catalog.refresh() }
-                        }
+                    if destination != NativeDestination.allCases.last {
+                        Divider()
+                            .padding(.leading, 32)
+                            .accessibilityHidden(true)
                     }
                 }
             }
-            .listStyle(.insetGrouped)
-            .scrollContentBackground(.hidden)
+            .background(
+                RoundedRectangle(cornerRadius: TifloVisual.cornerRadius)
+                    .fill(TifloVisual.surfaceRaised)
+            )
+        }
+    }
+
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: TifloVisual.sectionSpacing) {
+                    brandHeader
+                    searchPanel
+                    destinationsPanel
+
+                    if let error = catalog.error {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text(error).foregroundStyle(TifloVisual.secondaryText)
+                            Button("Actualizar contenido") {
+                                Task { await catalog.refresh() }
+                            }
+                        }
+                    }
+                }
+                .frame(maxWidth: 680)
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 16)
+            }
             .background(TifloVisual.canvas)
             .tifloScreenSurface()
-        .navigationTitle("Inicio")
+            .navigationTitle("Inicio")
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(isPresented: $showingSearch) {
                 NativeSearchResultsScreen(query: submittedSearch)

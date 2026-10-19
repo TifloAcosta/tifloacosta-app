@@ -14,6 +14,8 @@ struct NativeYouTubeVideo: Identifiable {
     let durationSeconds: Int
 
     var url: URL { URL(string: "https://www.youtube.com/watch?v=" + id)! }
+    /// ID validado al crear el modelo; URL pública para la miniatura del vídeo.
+    var thumbnailURL: URL { URL(string: "https://i.ytimg.com/vi/" + id + "/mqdefault.jpg")! }
 
     static func validID(_ value: String) -> Bool {
         value.range(of: "^[A-Za-z0-9_-]{11}$", options: .regularExpression) != nil

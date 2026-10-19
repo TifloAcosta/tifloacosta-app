@@ -30,6 +30,13 @@ enum TifloVisual {
     static let actionTint = adaptive(light: 0xA61B1B, dark: 0xFF9D9D,
                                      contrastLight: 0x8B1717, contrastDark: 0xFFFFFF)
 
+    /// Los controles de selección se distinguen como elementos accionables,
+    /// sin introducir saturación ni sacrificar el contraste reforzado.
+    static let selectorSurface = adaptive(light: 0xFFF0F0, dark: 0x302020,
+                                          contrastLight: 0xFFFFFF, contrastDark: 0x000000)
+    static let selectorBorder = adaptive(light: 0xB14545, dark: 0xF7B0B0,
+                                         contrastLight: 0x000000, contrastDark: 0xFFFFFF)
+
     static let cornerRadius: CGFloat = 14
     static let controlCornerRadius: CGFloat = 12
     static let controlMinimumHeight: CGFloat = 44
@@ -100,6 +107,7 @@ private struct TifloScreenSurface: ViewModifier {
             .scrollContentBackground(.hidden)
             .background(TifloVisual.canvas)
             .tint(TifloVisual.actionTint)
+            .listRowSeparatorTint(TifloVisual.border)
             .toolbarBackground(TifloVisual.brandDeepRed, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbarColorScheme(.dark, for: .navigationBar)

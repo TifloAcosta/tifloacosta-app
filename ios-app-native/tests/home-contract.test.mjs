@@ -45,7 +45,9 @@ assert.match(screens, /foregroundStyle\(\.primary\)/);
 assert.match(screens, /TifloVisual\.canvas/);
 assert.match(screens, /TifloVisual\.primaryText/);
 assert.match(screens, /tifloScreenSurface\(\)/);
-assert.ok(!screens.includes('AsyncImage(url:'), 'The brand header must not rely on remote image loading');
+const brandHeader = screens.split('private struct NativeBrandMark: View {')[1]
+  .split('struct NativeHomeScreen: View {')[0];
+assert.ok(!brandHeader.includes('AsyncImage(url:'), 'The brand header must not rely on remote image loading');
 console.log('OK: native logo, dynamic layout, branded and system-adaptive colors');
 
 assert.ok(!screens.includes('case libro = "Mi libro"'), 'Mi libro debe estar dentro de Contacto y no en el inicio');

@@ -272,6 +272,9 @@ private struct NativeYouTubeOfficialPlayer: UIViewRepresentable {
 }
 
 struct NativeYouTubePlayerScreen: View {
+    @EnvironmentObject private var account: NativeYouTubeAccountStore
+    @State private var editingComment = false
+    @State private var commentText = ""
     let video: NativeYouTubeVideo
     @Environment(\.openURL) private var openURL
     @Environment(\.dismiss) private var dismiss
@@ -351,6 +354,73 @@ struct NativeYouTubePlayerScreen: View {
                         .textSelection(.enabled)
                         .foregroundStyle(TifloVisual.primaryText)
                 }
+                Divider()
+                Text("Interacción con YouTube")
+                    .font(.headline)
+                    .foregroundStyle(TifloVisual.primaryText)
+                    .accessibilityAddTraits(.isHeader)
+                if let message = account.message {
+                    Text(message)
+                        .foregroundStyle(TifloVisual.secondaryText)
+                        .accessibilityAddTraits(.updatesFrequently)
+                }
+                if !account.authenticated {
+                    Text("Para indicar Me gusta, suscribirte o comentar, debes iniciar sesión en Google. Buscar y reproducir vídeos no requiere una cuenta.")
+                        .foregroundStyle(TifloVisual.secondaryText)
+                    Button(account.busy ? "Conectando con Google" : "Iniciar sesión con Google") {
+                        account.signIn(videoID: video.id)
+                    }
+                    .disabled(account.busy)
+                    .buttonStyle(TifloSecondaryActionStyle())
+                } else {
+                    if let subscribed = account.subscribed {
+                        Button(subscribed ? "Cancelar suscripción al canal" : "Suscribirse al canal") {
+                            Task { await account.setSubscribed(!subscribed, videoID: video.id) }
+                        }
+                        .disabled(account.busy)
+                        .buttonStyle(TifloSecondaryActionStyle())
+                    }
+                    if let rating = account.rating {
+                        Button(rating == "like" ? "Quitar Me gusta" : "Me gusta") {
+                            Task { await account.setLiked(rating != "like", videoID: video.id) }
+                        }
+                        .disabled(account.busy)
+                        .buttonStyle(TifloSecondaryActionStyle())
+                    }
+                    Button("Comentar") {
+                        editingComment.toggle()
+                    }
+                    .disabled(account.busy)
+                    .buttonStyle(TifloSecondaryActionStyle())
+                    if editingComment {
+                        Text("Comentario público en el vídeo: \(video.title)")
+                            .foregroundStyle(TifloVisual.secondaryText)
+                        TextEditor(text: $commentText)
+                            .frame(minHeight: 120)
+                            .overlay(RoundedRectangle(cornerRadius: 8).stroke(TifloVisual.border))
+                            .accessibilityLabel("Escribir comentario en YouTube")
+                        Button("Publicar comentario") {
+                            Task {
+                                if await account.publishComment(commentText, videoID: video.id) {
+                                    commentText = ""
+                                    editingComment = false
+                                }
+                            }
+                        }
+                        .disabled(commentText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || account.busy)
+                        .buttonStyle(TifloSecondaryActionStyle())
+                        Button("Cancelar comentario") {
+                            editingComment = false
+                        }
+                        .buttonStyle(TifloSecondaryActionStyle())
+                    }
+                    Button("Cerrar sesión de YouTube") {
+                        account.signOut()
+                        editingComment = false
+                        commentText = ""
+                    }
+                    .buttonStyle(TifloSecondaryActionStyle())
+                }
                 Button("Compartir vídeo") { NativeShare.present(url: video.url) }
                     .buttonStyle(TifloSecondaryActionStyle())
                 Button("Abrir en YouTube") { openURL(video.url) }
@@ -365,6 +435,10 @@ struct NativeYouTubePlayerScreen: View {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Cerrar") { engine.stop(); dismiss() }
             }
+        }
+        .task(id: video.id) {
+            await account.verifySession()
+            await account.loadState(videoID: video.id)
         }
         .onDisappear { engine.stop() }
     }

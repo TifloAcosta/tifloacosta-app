@@ -122,6 +122,7 @@ struct NativeInboxScreen: View {
                 .accessibilityHint(item.kind == "url" ? "Abre el enlace recibido." : "Importa el archivo o texto a TifloLector.")
             }
         }
+        .tifloScreenSurface()
         .navigationTitle("Recibidos")
         .toolbar { Button("Actualizar") { inbox.refresh() } }
         .onAppear { inbox.refresh() }

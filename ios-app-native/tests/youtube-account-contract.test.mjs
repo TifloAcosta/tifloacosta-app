@@ -60,3 +60,13 @@ test('La sesión nativa distingue cancelación, permisos y retorno del navegador
   assert.match(account, /Google no devolvió una respuesta válida/);
   assert.match(worker, /tifloacosta:\/\/youtube-auth\?error=missing_refresh_token/);
 });
+
+
+test('La consulta del estado de YouTube codifica el vídeo como parámetro URL, no como parte de la ruta', () => {
+  assert.match(account, /private func endpoint\(_ path: String, queryItems: \[URLQueryItem\] = \[\]\)/);
+  assert.match(account, /components\.queryItems = queryItems\.isEmpty \? nil : queryItems/);
+  assert.match(account, /URLRequest\(url: endpoint\(path, queryItems: queryItems\)\)/);
+  assert.match(account, /call\(\s*"state",\s*queryItems: \[URLQueryItem\(name: "videoId", value: videoID\)\]/);
+  assert.doesNotMatch(account, /call\("state\?videoId=/);
+  assert.match(player, /Reintentar consulta de Me gusta y suscripciones/);
+});

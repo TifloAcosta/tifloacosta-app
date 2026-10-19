@@ -201,3 +201,23 @@
 "Vídeo" = "Video";
 "Vídeos del canal" = "Channel videos";
 "Windows" = "Windows";
+
+"Analizar enlace" = "Analyze link";
+"Analizando enlace" = "Analyzing link";
+"El servidor se comprobará al descargar." = "Server access will be checked on download.";
+"Enlace HTTPS" = "HTTPS link";
+"Dirección del archivo" = "File address";
+"Contenido" = "Content";
+"Abrir enlace original" = "Open original link";
+"Abre el enlace fuera de TifloAcosta para revisar permisos." = "Opens the link outside TifloAcosta to review access.";
+"Descargando" = "Downloading";
+"Descargando archivo" = "Downloading file";
+"Doble toque para importar en TifloLector. Otras acciones: Compartir y Eliminar." = "Double-tap to import into TifloReader. Other actions: Share and Delete.";
+"Los archivos descargados se guardan en esta sección hasta que los elimines. Importarlos en TifloLector añade una copia a su biblioteca." = "Downloaded files stay in this section until you delete them. Importing them into TifloReader adds a copy to its library.";
+"Resultado" = "Result";
+"Eliminar descarga" = "Delete download";
+"Este archivo se eliminará de Mis descargas, pero no de TifloLector si ya lo importaste." = "This file will be deleted from Downloads but not from TifloReader if you already imported it.";
+"Doble toque para conocer el libro y consultar las ediciones disponibles." = "Double-tap to learn about the book and see available editions.";
+"Mi libro: La vida vista desde donde estoy" = "My book: La vida vista desde donde estoy";
+"Archivo de Google Drive" = "Google Drive file";
+"Documento de Google (PDF)" = "Google document (PDF)";

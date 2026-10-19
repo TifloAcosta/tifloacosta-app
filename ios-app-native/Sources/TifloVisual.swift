@@ -2,6 +2,7 @@ import SwiftUI
 import UIKit
 
 /// Identidad visual de TifloAcosta, compartida por todas las pantallas SwiftUI.
+/// El diseño responsive es global; cada pantalla adapta sus controles al espacio disponible.
 /// Mantener sincronizados los colores de marca con styles.css y mobile/src/styles.css.
 /// El rojo corporativo sobre blanco es legible; como texto sobre fondo oscuro NO lo es.
 enum TifloVisual {

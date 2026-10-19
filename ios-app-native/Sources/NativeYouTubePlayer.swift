@@ -114,6 +114,9 @@ final class NativeYouTubeSearchStore: ObservableObject {
             var request = URLRequest(url: components.url!)
             request.timeoutInterval = 20
             request.setValue("application/json", forHTTPHeaderField: "Accept")
+            // El Worker solo acepta búsquedas del origen TifloAcosta.
+            // URLSession no añade Origin automáticamente como un navegador.
+            request.setValue("https://tifloacosta.com", forHTTPHeaderField: "Origin")
             let (data, response) = try await URLSession.shared.data(for: request)
             let status = (response as? HTTPURLResponse)?.statusCode ?? 0
             guard (200...299).contains(status) else {

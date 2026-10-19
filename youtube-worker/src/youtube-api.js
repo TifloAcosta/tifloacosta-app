@@ -60,14 +60,18 @@ function query(resource, entries) {
   return `${resource}?${params.toString()}`;
 }
 
-async function subscriptionState(accessToken, channelId, fetchImpl) {
+async function subscriptionRecord(accessToken, channelId, fetchImpl) {
   const data = await youtubeFetch(query('subscriptions', [
     ['part', 'id'],
     ['mine', 'true'],
     ['forChannelId', channelId],
     ['maxResults', '1']
   ]), { accessToken, fetchImpl });
-  return Array.isArray(data?.items) && data.items.length > 0;
+  return Array.isArray(data?.items) ? data.items[0] || null : null;
+}
+
+async function subscriptionState(accessToken, channelId, fetchImpl) {
+  return Boolean(await subscriptionRecord(accessToken, channelId, fetchImpl));
 }
 
 function normalizeRating(value) {
@@ -84,68 +88,93 @@ export async function resolveChannelId(accessToken, fetchImpl = fetch) {
   return channelId;
 }
 
-export async function getAccountVideoState(accessToken, videoId, fetchImpl = fetch) {
+// Resolver el canal propietario de cada vídeo; buscar en todo YouTube no
+// debe suscribir automáticamente a TifloAcosta.
+async function videoChannelId(accessToken, videoId, fetchImpl) {
   const id = validVideoId(videoId);
-  const channelId = await resolveChannelId(accessToken, fetchImpl);
-  const subscribed = await subscriptionState(accessToken, channelId, fetchImpl);
-  const ratingData = await youtubeFetch(query('videos/getRating', [['id', id]]), {
-    accessToken,
-    fetchImpl
-  });
-  return {
-    subscribed,
-    rating: normalizeRating(ratingData?.items?.[0]?.rating)
-  };
+  const details = await youtubeFetch(query('videos', [
+    ['part', 'snippet'],
+    ['id', id]
+  ]), { accessToken, fetchImpl });
+  const channelId = String(details?.items?.[0]?.snippet?.channelId || '').trim();
+  if (!channelId) throw typedError('VIDEO_NOT_FOUND', 404);
+  return channelId;
 }
 
-export async function subscribe(accessToken, fetchImpl = fetch) {
-  const channelId = await resolveChannelId(accessToken, fetchImpl);
-  if (await subscriptionState(accessToken, channelId, fetchImpl)) {
+async function targetChannelId(accessToken, videoId, fetchImpl) {
+  return videoId ? videoChannelId(accessToken, videoId, fetchImpl)
+    : resolveChannelId(accessToken, fetchImpl);
+}
+
+export async function getAccountVideoState(accessToken, videoId, fetchImpl = fetch) {
+  const id = validVideoId(videoId);
+  const channelId = await targetChannelId(accessToken, id, fetchImpl);
+  const subscribed = await subscriptionState(accessToken, channelId, fetchImpl);
+  const ratingData = await youtubeFetch(query('videos/getRating', [['id', id]]), {
+    accessToken, fetchImpl
+  });
+  return { subscribed, rating: normalizeRating(ratingData?.items?.[0]?.rating) };
+}
+
+// Compatibilidad: la antigua web invoca subscribe(token, fetchImpl) y
+// suscribe a TifloAcosta. iOS indica explícitamente el vídeo seleccionado.
+export async function subscribe(accessToken, videoIdOrFetchImpl = '', fetchImpl = fetch) {
+  const legacy = typeof videoIdOrFetchImpl === 'function';
+  const videoId = legacy ? '' : videoIdOrFetchImpl;
+  const client = legacy ? videoIdOrFetchImpl : fetchImpl;
+  const channelId = await targetChannelId(accessToken, videoId, client);
+  if (await subscriptionState(accessToken, channelId, client)) {
     return { subscribed: true, changed: false };
   }
   await youtubeFetch(query('subscriptions', [['part', 'snippet']]), {
-    accessToken,
-    method: 'POST',
-    body: {
-      snippet: {
-        resourceId: {
-          kind: 'youtube#channel',
-          channelId
-        }
-      }
-    },
-    fetchImpl
+    accessToken, method: 'POST', body: {
+      snippet: { resourceId: { kind: 'youtube#channel', channelId } }
+    }, fetchImpl: client
   });
   return { subscribed: true, changed: true };
 }
 
+export async function unsubscribe(accessToken, videoId, fetchImpl = fetch) {
+  const channelId = await targetChannelId(accessToken, videoId, fetchImpl);
+  const record = await subscriptionRecord(accessToken, channelId, fetchImpl);
+  if (!record) return { subscribed: false, changed: false };
+  const subscriptionId = String(record.id || '').trim();
+  if (!subscriptionId) throw typedError('YOUTUBE_ERROR', 502);
+  await youtubeFetch(query('subscriptions', [['id', subscriptionId]]), {
+    accessToken, method: 'DELETE', fetchImpl
+  });
+  return { subscribed: false, changed: true };
+}
+
 export async function like(accessToken, videoId, fetchImpl = fetch) {
+  return rate(accessToken, videoId, 'like', fetchImpl);
+}
+
+export async function unlike(accessToken, videoId, fetchImpl = fetch) {
+  return rate(accessToken, videoId, 'none', fetchImpl);
+}
+
+async function rate(accessToken, videoId, rating, fetchImpl) {
   const id = validVideoId(videoId);
-  await youtubeFetch(query('videos/rate', [
-    ['id', id],
-    ['rating', 'like']
-  ]), { accessToken, method: 'POST', fetchImpl });
-  return { rating: 'like' };
+  await youtubeFetch(query('videos/rate', [['id', id], ['rating', rating]]), {
+    accessToken, method: 'POST', fetchImpl
+  });
+  return { rating };
 }
 
 export async function comment(accessToken, videoId, text, fetchImpl = fetch) {
   const id = validVideoId(videoId);
   const cleanText = String(text || '').trim();
   if (!cleanText) throw typedError('INVALID_COMMENT', 400);
-  const channelId = await resolveChannelId(accessToken, fetchImpl);
+  if (cleanText.length > 10000) throw typedError('COMMENT_TOO_LONG', 400);
+  const channelId = await targetChannelId(accessToken, id, fetchImpl);
   await youtubeFetch(query('commentThreads', [['part', 'snippet']]), {
-    accessToken,
-    method: 'POST',
-    body: {
+    accessToken, method: 'POST', body: {
       snippet: {
-        channelId,
-        videoId: id,
-        topLevelComment: {
-          snippet: { textOriginal: cleanText }
-        }
+        channelId, videoId: id,
+        topLevelComment: { snippet: { textOriginal: cleanText } }
       }
-    },
-    fetchImpl
+    }, fetchImpl
   });
   return { commented: true };
 }

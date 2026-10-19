@@ -680,6 +680,7 @@ private struct NativeYouTubeCommentScreen: View {
                     .frame(minHeight: 130)
                     .accessibilityLabel("Escribir comentario en YouTube")
             }
+            .listRowBackground(TifloVisual.surfaceRaised)
             Button("Publicar comentario") {
                 Task {
                     if await account.publishComment(commentText, videoID: video.id) {
@@ -715,6 +716,7 @@ private struct NativeYouTubeSubscriptionsScreen: View {
                     Button("Iniciar sesión con Google") { account.signIn() }
                         .disabled(account.busy)
                 }
+                .listRowBackground(TifloVisual.surfaceRaised)
             } else {
                 Section("Canales a los que estás suscrito") {
                     ForEach(account.subscriptions) { channel in
@@ -743,6 +745,7 @@ private struct NativeYouTubeSubscriptionsScreen: View {
                         }
                     }
                 }
+                .listRowBackground(TifloVisual.surfaceRaised)
             }
         }
         .tifloScreenSurface()

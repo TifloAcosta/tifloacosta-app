@@ -139,7 +139,7 @@ final class NativeYouTubeAccountStore: NSObject, ObservableObject {
         request.httpMethod = method
         request.timeoutInterval = 25
         request.setValue("application/json", forHTTPHeaderField: "Accept")
-        if let bearer = bearer ?? credential {
+        if let bearer = bearer ?? credential, !bearer.isEmpty {
             request.setValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
         }
         if let body {
@@ -265,9 +265,6 @@ final class NativeYouTubeAccountStore: NSObject, ObservableObject {
         rating = nil
         guard authenticated else { return }
         do {
-            var components = URLComponents(url: endpoint("state"), resolvingAgainstBaseURL: false)!
-            components.queryItems = [URLQueryItem(name: "videoId", value: videoID)]
-            guard let path = components.url else { return }
             let state: VideoState = try await call("state?videoId=\(videoID)")
             guard activeVideoID == videoID else { return }
             subscribed = state.subscribed

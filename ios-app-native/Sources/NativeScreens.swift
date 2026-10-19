@@ -65,6 +65,10 @@ private struct NativeBrandMark: View {
 }
 
 struct NativeHomeScreen: View {
+    @EnvironmentObject private var inbox: NativeShareInbox
+    @EnvironmentObject private var library: NativeReaderLibrary
+    @Environment(\.scenePhase) private var scenePhase
+    @StateObject private var sharedReadingSpeech = NativeReadingSpeech()
     @EnvironmentObject private var catalog: NativeCatalogStore
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var searchText = ""
@@ -222,6 +226,15 @@ struct NativeHomeScreen: View {
             .tifloScreenSurface()
             .navigationTitle("Inicio")
             .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(item: $inbox.readyToRead) { document in
+                NativeReadingScreen(document: document, speech: sharedReadingSpeech)
+            }
+            .onAppear { inbox.importPendingReaderContent(into: library) }
+            .onChange(of: scenePhase) { _, phase in
+                if phase == .active {
+                    inbox.importPendingReaderContent(into: library)
+                }
+            }
             .navigationDestination(isPresented: $showingSearch) {
                 NativeSearchResultsScreen(query: submittedSearch)
             }

@@ -387,21 +387,81 @@ struct NativeVideosScreen: View {
     @EnvironmentObject private var catalog: NativeCatalogStore
     @EnvironmentObject private var favorites: NativeFavoritesStore
     @Environment(\.openURL) private var openURL
-    @State private var query = ""
+    @StateObject private var youtubeSearch = NativeYouTubeSearchStore()
+    @State private var searchText = ""
     @State private var sortIndex = 0
     @State private var visibleCount = 10
+    @State private var selectedVideo: NativeYouTubeVideo?
 
     private var ordered: [NativeCatalogItem] {
-        let source = sortIndex == 0 ? catalog.videos : Array(catalog.videos.reversed())
-        guard !query.isEmpty else { return source }
-        return source.filter {
-            $0.title.localizedCaseInsensitiveContains(query)
-                || ($0.description?.localizedCaseInsensitiveContains(query) ?? false)
-        }
+        sortIndex == 0 ? catalog.videos : Array(catalog.videos.reversed())
+    }
+
+    private func play(_ video: NativeYouTubeVideo) {
+        selectedVideo = video
     }
 
     var body: some View {
         List {
+            Section("YouTube accesible") {
+                TextField("Buscar en todo YouTube", text: $searchText)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                    .submitLabel(.search)
+                    .onSubmit { Task { await youtubeSearch.search(searchText) } }
+                    .accessibilityLabel("Buscar en todo YouTube")
+                Button("Buscar en YouTube") {
+                    Task { await youtubeSearch.search(searchText) }
+                }
+                .disabled(youtubeSearch.isLoading)
+                if youtubeSearch.isLoading {
+                    ProgressView("Buscando vídeos")
+                }
+                if let message = youtubeSearch.message {
+                    Text(message)
+                        .font(.subheadline)
+                        .foregroundStyle(TifloVisual.secondaryText)
+                        .accessibilityAddTraits(.updatesFrequently)
+                }
+            }
+            .listRowBackground(TifloVisual.surfaceRaised)
+
+            if youtubeSearch.hasSearched {
+                Section("Resultados de YouTube") {
+                    ForEach(youtubeSearch.videos) { video in
+                        Button { play(video) } label: {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(video.title).font(.headline)
+                                Text("Canal: \(video.channelTitle)")
+                                    .font(.subheadline)
+                                    .foregroundStyle(TifloVisual.secondaryText)
+                                if let date = NativeNewsMetadata.publication(video.publishedAt) {
+                                    Text("Publicado: \(date)")
+                                        .font(.subheadline)
+                                        .foregroundStyle(TifloVisual.secondaryText)
+                                }
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel("\(video.title). Canal: \(video.channelTitle)")
+                        .accessibilityHint("Doble toque para reproducir en TifloAcosta. Acciones: Reproducir, Abrir en YouTube y Compartir.")
+                        .accessibilityAction(named: Text("Reproducir")) { play(video) }
+                        .accessibilityAction(named: Text("Abrir en YouTube")) { openURL(video.url) }
+                        .accessibilityAction(named: Text("Compartir")) {
+                            NativeShare.present(url: video.url)
+                        }
+                    }
+                    if !youtubeSearch.nextPageToken.isEmpty {
+                        Button("Mostrar diez resultados más") {
+                            Task { await youtubeSearch.search(searchText, loadMore: true) }
+                        }
+                        .disabled(youtubeSearch.isLoading)
+                    }
+                }
+                .listRowBackground(TifloVisual.surfaceRaised)
+            }
+
             Section {
                 NativeAdjustableChoice(
                     title: "Orden",
@@ -409,20 +469,25 @@ struct NativeVideosScreen: View {
                     selectedIndex: $sortIndex
                 )
             }
+            .listRowBackground(TifloVisual.surfaceRaised)
 
-            Section("Vídeos del canal") {
+            Section("Vídeos del canal TifloAcosta") {
                 if ordered.isEmpty {
-                    Text("No hay vídeos para esta búsqueda.")
+                    Text("No hay vídeos del canal disponibles.")
+                        .foregroundStyle(TifloVisual.secondaryText)
                 }
                 ForEach(Array(ordered.prefix(visibleCount))) { item in
                     Button {
-                        if let url = item.videoURL { openURL(url) }
+                        if let video = NativeYouTubeVideo(catalog: item) { play(video) }
                     } label: {
-                        Text(item.title)
+                        Text(item.title).font(.headline)
                     }
-                    .disabled(item.videoURL == nil)
+                    .disabled(NativeYouTubeVideo(catalog: item) == nil)
                     .accessibilityLabel(item.title)
-                    .accessibilityHint("Abre el vídeo en YouTube. El reproductor interno nativo sigue pendiente de migración.")
+                    .accessibilityHint("Doble toque para reproducir dentro de TifloAcosta. Acciones: Reproducir, Abrir en YouTube, Compartir y Favoritos.")
+                    .accessibilityAction(named: Text("Reproducir")) {
+                        if let video = NativeYouTubeVideo(catalog: item) { play(video) }
+                    }
                     .accessibilityAction(named: Text("Abrir en YouTube")) {
                         if let url = item.videoURL { openURL(url) }
                     }
@@ -434,16 +499,19 @@ struct NativeVideosScreen: View {
                         _ = favorites.toggle(.video, item: item)
                     }
                 }
-
                 if visibleCount < ordered.count {
                     Button("Mostrar diez más") { visibleCount += 10 }
                 }
             }
+            .listRowBackground(TifloVisual.surfaceRaised)
         }
         .tifloScreenSurface()
         .navigationTitle("Vídeos")
-        .searchable(text: $query, prompt: "Buscar en los vídeos del canal")
-        .onChange(of: query) { _, _ in visibleCount = 10 }
+        .sheet(item: $selectedVideo) { video in
+            NavigationStack {
+                NativeYouTubePlayerScreen(video: video)
+            }
+        }
         .onChange(of: sortIndex) { _, _ in visibleCount = 10 }
     }
 }

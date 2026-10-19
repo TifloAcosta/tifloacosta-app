@@ -72,6 +72,7 @@ struct NativeFavoritesScreen: View {
     @EnvironmentObject private var catalog: NativeCatalogStore
     @Environment(\.openURL) private var openURL
     @State private var status: String?
+    @State private var selectedVideo: NativeYouTubeVideo?
 
     private var entries: [NativeFavoriteDisplay] {
         let resources = catalog.resources.map { (NativeFavoriteKind.resource, $0) }
@@ -140,7 +141,7 @@ struct NativeFavoritesScreen: View {
 
                     case .video:
                         Button {
-                            if let url = entry.item.videoURL { openURL(url) }
+                            selectedVideo = NativeYouTubeVideo(catalog: entry.item)
                         } label: {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(entry.item.title)
@@ -151,7 +152,10 @@ struct NativeFavoritesScreen: View {
                         }
                         .accessibilityElement(children: .ignore)
                         .accessibilityLabel("\(entry.item.title), vídeo favorito")
-                        .accessibilityHint("Doble toque para abrir en YouTube. Acción: Quitar de favoritos.")
+                        .accessibilityHint("Doble toque para reproducir en TifloAcosta. Acciones: Abrir en YouTube y Quitar de favoritos.")
+                        .accessibilityAction(named: Text("Abrir en YouTube")) {
+                            if let url = entry.item.videoURL { openURL(url) }
+                        }
                         .accessibilityAction(named: Text("Quitar de favoritos")) { remove(entry) }
                     }
                 }
@@ -167,5 +171,8 @@ struct NativeFavoritesScreen: View {
         .tifloScreenSurface()
         .navigationTitle("Favoritos")
         .navigationBarTitleDisplayMode(.inline)
+        .sheet(item: $selectedVideo) { video in
+            NavigationStack { NativeYouTubePlayerScreen(video: video) }
+        }
     }
 }

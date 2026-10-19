@@ -215,16 +215,55 @@ async function youtubeKeyFetch(path, apiKey, fetchImpl = fetch) {
   return response.json();
 }
 
-export async function searchVideos(apiKey, searchTerm, pageToken = '', fetchImpl = fetch) {
-  const q = validSearchTerm(searchTerm);
+export async function listMySubscriptions(accessToken, pageToken = '', fetchImpl = fetch) {
   const token = validPageToken(pageToken);
   const entries = [
     ['part', 'snippet'],
-    ['type', 'video'],
+    ['mine', 'true'],
     ['maxResults', '10'],
-    ['safeSearch', 'moderate'],
-    ['q', q]
+    ['order', 'alphabetical']
   ];
+  if (token) entries.push(['pageToken', token]);
+  const data = await youtubeFetch(query('subscriptions', entries), { accessToken, fetchImpl });
+  return {
+    items: (Array.isArray(data?.items) ? data.items : []).flatMap(item => {
+      const id = String(item?.snippet?.resourceId?.channelId || '').trim();
+      if (!/^UC[A-Za-z0-9_-]{22}$/.test(id)) return [];
+      return [{
+        id,
+        title: String(item?.snippet?.title || ''),
+        description: String(item?.snippet?.description || '')
+      }];
+    }),
+    nextPageToken: String(data?.nextPageToken || '')
+  };
+}
+
+// El filtro "short" aplica el filtro oficial de duración (<4 minutos),
+// que NO equivale a la categoría Shorts de la aplicación de YouTube.
+export async function searchVideos(apiKey, searchTerm, pageToken = '', fetchImpl = fetch, options = {}) {
+  const channelId = String(options.channelId || '').trim();
+  if (channelId && !/^UC[A-Za-z0-9_-]{22}$/.test(channelId)) {
+    throw typedError('INVALID_CHANNEL', 400);
+  }
+  const allowed = new Set(['video', 'all', 'channel', 'short', 'live', 'captions']);
+  const filter = String(options.filter || 'video');
+  if (!allowed.has(filter)) throw typedError('INVALID_SEARCH', 400);
+  const q = channelId ? '' : validSearchTerm(searchTerm);
+  const token = validPageToken(pageToken);
+  const entries = [
+    ['part', 'snippet'],
+    ['type', channelId ? 'video' : filter === 'all' ? 'video,channel' : filter === 'channel' ? 'channel' : 'video'],
+    ['maxResults', '10'],
+    ['safeSearch', 'moderate']
+  ];
+  if (q) entries.push(['q', q]);
+  if (channelId) {
+    entries.push(['channelId', channelId], ['order', 'date']);
+  }
+  if (filter === 'short') entries.push(['videoDuration', 'short']);
+  if (filter === 'live') entries.push(['eventType', 'live']);
+  if (filter === 'captions') entries.push(['videoCaption', 'closedCaption']);
   if (token) entries.push(['pageToken', token]);
 
   const searchData = await youtubeKeyFetch(query('search', entries), apiKey, fetchImpl);
@@ -247,18 +286,21 @@ export async function searchVideos(apiKey, searchTerm, pageToken = '', fetchImpl
 
   return {
     items: searchItems.flatMap(item => {
-      const id = String(item?.id?.videoId || '').trim();
-      if (!VIDEO_ID_RE.test(id)) return [];
       const snippet = item?.snippet || {};
-      return [{
-        id,
+      const id = String(item?.id?.videoId || '').trim();
+      const result = {
         title: String(snippet.title || ''),
         channelTitle: String(snippet.channelTitle || ''),
         publishedAt: String(snippet.publishedAt || ''),
-        description: String(snippet.description || ''),
-        thumbnail: String(snippet?.thumbnails?.medium?.url || snippet?.thumbnails?.default?.url || ''),
-        durationSeconds: durations.get(id) || 0
-      }];
+        description: String(snippet.description || '')
+      };
+      if (VIDEO_ID_RE.test(id)) {
+        return [{ ...result, kind: 'video', id, durationSeconds: durations.get(id) || 0 }];
+      }
+      const channel = String(item?.id?.channelId || '').trim();
+      return /^UC[A-Za-z0-9_-]{22}$/.test(channel)
+        ? [{ ...result, kind: 'channel', channelId: channel }]
+        : [];
     }),
     nextPageToken: String(searchData?.nextPageToken || '')
   };

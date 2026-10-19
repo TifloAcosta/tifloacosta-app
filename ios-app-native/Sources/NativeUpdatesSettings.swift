@@ -45,7 +45,7 @@ struct NativeUpdatesScreen: View {
     @State private var actionStatus: String?
 
     // Seleccionar las tres publicaciones propias más recientes, ya sean recursos
-    // marcados como nuevos o vídeos del canal. No consultar catalog.news.
+    // marcados como nuevos o vídeos del canal, sin noticias externas.
     private var latestUpdates: [NativeUpdateEntry] {
         let resources = catalog.resources
             .filter { $0.lang == "es" && $0.isNew == true && $0.resourceURL != nil }

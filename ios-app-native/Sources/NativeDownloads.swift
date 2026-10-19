@@ -70,6 +70,17 @@ final class NativeDownloadStore: ObservableObject {
                     note = "El servidor ha respondido correctamente."
                 }
             } catch let error as NativeDownloadLinkError {
+                if item.isGoogleDrive {
+                    switch error {
+                    case .accessDenied, .webPageInsteadOfFile:
+                        // Google Drive may refuse HEAD while allowing a normal
+                        // download. Only the actual GET can confirm its access.
+                        canDownload = true
+                        message = "Enlace de Google Drive reconocido, pero no se pudo verificar el acceso previamente. Prueba Descargar. Si falla, abre el enlace original y revisa sus permisos."
+                        return
+                    default: break
+                    }
+                }
                 message = error.localizedDescription
                 return
             } catch {

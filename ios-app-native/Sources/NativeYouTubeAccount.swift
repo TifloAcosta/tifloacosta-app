@@ -15,6 +15,10 @@ final class NativeYouTubeAccountStore: NSObject, ObservableObject {
     @Published private(set) var subscribed: Bool?
     @Published private(set) var rating: String?
     @Published private(set) var message: String?
+    @Published private(set) var subscriptions: [NativeYouTubeChannel] = []
+    @Published private(set) var subscriptionsNextPageToken = ""
+    @Published private(set) var subscriptionsBusy = false
+    @Published private(set) var subscriptionsMessage: String?
 
     private let baseURL = URL(string: "https://youtube-auth.tifloacosta.com")!
     private let keychainService = "com.tifloacosta.app.youtube-account"
@@ -181,6 +185,9 @@ final class NativeYouTubeAccountStore: NSObject, ObservableObject {
         authenticated = false
         subscribed = nil
         rating = nil
+        subscriptions = []
+        subscriptionsNextPageToken = ""
+        subscriptionsMessage = nil
     }
 
     func signOut() {
@@ -204,9 +211,9 @@ final class NativeYouTubeAccountStore: NSObject, ObservableObject {
         }
     }
 
-    func signIn(videoID: String) {
+    func signIn(videoID: String = "") {
         guard !busy, browserSession == nil else { return }
-        activeVideoID = videoID
+        activeVideoID = videoID.isEmpty ? nil : videoID
         var bytes = Data(count: 32)
         let result = bytes.withUnsafeMutableBytes { ptr in
             SecRandomCopyBytes(kSecRandomDefault, 32, ptr.baseAddress!)
@@ -340,6 +347,32 @@ final class NativeYouTubeAccountStore: NSObject, ObservableObject {
         } catch {
             handle(error)
             return false
+        }
+    }
+
+    func loadSubscriptions(loadMore: Bool = false) async {
+        guard authenticated, !subscriptionsBusy else { return }
+        if loadMore && subscriptionsNextPageToken.isEmpty { return }
+        subscriptionsBusy = true
+        subscriptionsMessage = nil
+        defer { subscriptionsBusy = false }
+        do {
+            let page: NativeYouTubeSubscriptionPage = try await call(
+                "subscriptions",
+                queryItems: loadMore
+                    ? [URLQueryItem(name: "pageToken", value: subscriptionsNextPageToken)] : []
+            )
+            if !loadMore { subscriptions = [] }
+            let previous = Set(subscriptions.map(\.id))
+            subscriptions += page.items.filter { !previous.contains($0.id) }
+            subscriptionsNextPageToken = page.nextPageToken
+            if subscriptions.isEmpty {
+                subscriptionsMessage = "No hay canales suscritos en esta cuenta."
+            }
+        } catch {
+            let code = (error as? YouTubeFailure)?.code ?? "NETWORK"
+            if code == "SESSION_EXPIRED" { forget() }
+            subscriptionsMessage = errorText(code)
         }
     }
 

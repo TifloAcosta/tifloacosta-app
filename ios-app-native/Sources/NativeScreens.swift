@@ -452,36 +452,48 @@ struct NativeResourcesScreen: View {
 struct NativeVideosScreen: View {
     @EnvironmentObject private var catalog: NativeCatalogStore
     @EnvironmentObject private var favorites: NativeFavoritesStore
-    @Environment(\.openURL) private var openURL
+    @EnvironmentObject private var account: NativeYouTubeAccountStore
     @StateObject private var youtubeSearch = NativeYouTubeSearchStore()
     @State private var searchText = ""
+    @State private var filterIndex = 0
     @State private var sortIndex = 0
     @State private var visibleCount = 10
     @State private var selectedVideo: NativeYouTubeVideo?
+    @State private var commentingOnVideo: NativeYouTubeVideo?
+
+    private let searchFilters = [
+        "Todos", "Vídeos", "Canales", "Vídeos cortos, menos de cuatro minutos",
+        "En directo", "Con subtítulos"
+    ]
+    private let filterValues = ["all", "video", "channel", "short", "live", "captions"]
 
     private var ordered: [NativeCatalogItem] {
         sortIndex == 0 ? catalog.videos : Array(catalog.videos.reversed())
     }
 
-    private func play(_ video: NativeYouTubeVideo) {
-        selectedVideo = video
+    private func search(loadMore: Bool = false) {
+        let filter = filterValues[filterIndex]
+        Task { await youtubeSearch.search(searchText, filter: filter, loadMore: loadMore) }
     }
 
     var body: some View {
         List {
             Section("YouTube accesible") {
+                // La indicación del campo aparece una sola vez en VoiceOver.
                 TextField("Buscar en todo YouTube", text: $searchText)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
                     .submitLabel(.search)
-                    .onSubmit { Task { await youtubeSearch.search(searchText) } }
-                    .accessibilityLabel("Buscar en todo YouTube")
-                Button("Buscar en YouTube") {
-                    Task { await youtubeSearch.search(searchText) }
-                }
-                .disabled(youtubeSearch.isLoading)
+                    .onSubmit { search() }
+                NativeAdjustableChoice(
+                    title: "Tipo de resultados",
+                    choices: searchFilters,
+                    selectedIndex: $filterIndex
+                )
+                Button("Buscar en YouTube") { search() }
+                    .disabled(youtubeSearch.isLoading)
                 if youtubeSearch.isLoading {
-                    ProgressView("Buscando vídeos")
+                    ProgressView("Buscando en YouTube")
                 }
                 if let message = youtubeSearch.message {
                     Text(message)
@@ -494,39 +506,49 @@ struct NativeVideosScreen: View {
 
             if youtubeSearch.hasSearched {
                 Section("Resultados de YouTube") {
-                    ForEach(youtubeSearch.videos) { video in
-                        Button { play(video) } label: {
+                    ForEach(youtubeSearch.channels) { channel in
+                        NavigationLink {
+                            NativeYouTubeChannelVideosScreen(channel: channel)
+                        } label: {
                             VStack(alignment: .leading, spacing: 4) {
-                                Text(video.title).font(.headline)
-                                Text("Canal: \(video.channelTitle)")
+                                Text(channel.title).font(.headline)
+                                Text("Canal de YouTube")
                                     .font(.subheadline)
                                     .foregroundStyle(TifloVisual.secondaryText)
-                                if let date = NativeNewsMetadata.publication(video.publishedAt) {
-                                    Text("Publicado: \(date)")
-                                        .font(.subheadline)
-                                        .foregroundStyle(TifloVisual.secondaryText)
-                                }
                             }
-                            .frame(maxWidth: .infinity, alignment: .leading)
                         }
                         .accessibilityElement(children: .ignore)
-                        .accessibilityLabel("\(video.title). Canal: \(video.channelTitle)")
-                        .accessibilityHint("Doble toque para reproducir en TifloAcosta. Acciones: Reproducir, Abrir en YouTube y Compartir.")
-                        .accessibilityAction(named: Text("Reproducir")) { play(video) }
-                        .accessibilityAction(named: Text("Abrir en YouTube")) { openURL(video.url) }
-                        .accessibilityAction(named: Text("Compartir")) {
-                            NativeShare.present(url: video.url)
+                        .accessibilityLabel("\(channel.title). Canal de YouTube")
+                        .accessibilityHint("Doble toque para consultar sus vídeos en TifloAcosta.")
+                        .accessibilityAction(named: Text("Compartir canal")) {
+                            NativeShare.present(url: channel.url)
                         }
                     }
+                    ForEach(youtubeSearch.videos) { video in
+                        NativeYouTubeVideoRow(
+                            video: video, onPlay: { selectedVideo = $0 },
+                            onComment: { commentingOnVideo = $0 }
+                        )
+                    }
                     if !youtubeSearch.nextPageToken.isEmpty {
-                        Button("Mostrar diez resultados más") {
-                            Task { await youtubeSearch.search(searchText, loadMore: true) }
-                        }
-                        .disabled(youtubeSearch.isLoading)
+                        Button("Mostrar diez resultados más") { search(loadMore: true) }
+                            .disabled(youtubeSearch.isLoading)
                     }
                 }
                 .listRowBackground(TifloVisual.surfaceRaised)
             }
+
+            Section("Cuenta de YouTube") {
+                NavigationLink("Mis suscripciones de YouTube") {
+                    NativeYouTubeSubscriptionsScreen()
+                }
+                if !account.authenticated {
+                    Text("Puedes buscar y reproducir sin iniciar sesión. Las suscripciones requieren acceso con Google.")
+                        .font(.subheadline)
+                        .foregroundStyle(TifloVisual.secondaryText)
+                }
+            }
+            .listRowBackground(TifloVisual.surfaceRaised)
 
             Section {
                 NativeAdjustableChoice(
@@ -543,26 +565,18 @@ struct NativeVideosScreen: View {
                         .foregroundStyle(TifloVisual.secondaryText)
                 }
                 ForEach(Array(ordered.prefix(visibleCount))) { item in
-                    Button {
-                        if let video = NativeYouTubeVideo(catalog: item) { play(video) }
-                    } label: {
-                        Text(item.title).font(.headline)
-                    }
-                    .disabled(NativeYouTubeVideo(catalog: item) == nil)
-                    .accessibilityLabel(item.title)
-                    .accessibilityHint("Doble toque para reproducir dentro de TifloAcosta. Acciones: Reproducir, Abrir en YouTube, Compartir y Favoritos.")
-                    .accessibilityAction(named: Text("Reproducir")) {
-                        if let video = NativeYouTubeVideo(catalog: item) { play(video) }
-                    }
-                    .accessibilityAction(named: Text("Abrir en YouTube")) {
-                        if let url = item.videoURL { openURL(url) }
-                    }
-                    .accessibilityAction(named: Text("Compartir")) {
-                        if let url = item.videoURL { NativeShare.present(url: url) }
-                    }
-                    .accessibilityAction(named: Text(favorites.contains(.video, item: item)
-                        ? "Quitar de favoritos" : "Añadir a favoritos")) {
-                        _ = favorites.toggle(.video, item: item)
+                    if let video = NativeYouTubeVideo(catalog: item) {
+                        NativeYouTubeVideoRow(
+                            video: video, onPlay: { selectedVideo = $0 },
+                            onComment: { commentingOnVideo = $0 }
+                        )
+                        .accessibilityAction(named: Text(favorites.contains(.video, item: item)
+                            ? "Quitar de favoritos" : "Añadir a favoritos")) {
+                            _ = favorites.toggle(.video, item: item)
+                        }
+                    } else {
+                        Text(item.title)
+                            .foregroundStyle(TifloVisual.secondaryText)
                     }
                 }
                 if visibleCount < ordered.count {
@@ -574,11 +588,222 @@ struct NativeVideosScreen: View {
         .tifloScreenSurface()
         .navigationTitle("Vídeos")
         .sheet(item: $selectedVideo) { video in
-            NavigationStack {
-                NativeYouTubePlayerScreen(video: video)
-            }
+            NavigationStack { NativeYouTubePlayerScreen(video: video) }
+        }
+        .sheet(item: $commentingOnVideo) { video in
+            NavigationStack { NativeYouTubeCommentScreen(video: video) }
         }
         .onChange(of: sortIndex) { _, _ in visibleCount = 10 }
+    }
+}
+
+// Una sola definición de gestos para títulos en búsquedas, canal y suscripciones.
+private struct NativeYouTubeTitleActions: ViewModifier {
+    @EnvironmentObject private var account: NativeYouTubeAccountStore
+    @Environment(\.openURL) private var openURL
+    let video: NativeYouTubeVideo
+    let onPlay: (NativeYouTubeVideo) -> Void
+    let onComment: (NativeYouTubeVideo) -> Void
+
+    @ViewBuilder func body(content: Content) -> some View {
+        let basic = content
+            .accessibilityAction(named: Text("Reproducir")) { onPlay(video) }
+            .accessibilityAction(named: Text("Abrir en YouTube")) { openURL(video.url) }
+            .accessibilityAction(named: Text("Compartir")) {
+                NativeShare.present(url: video.url)
+            }
+        if account.authenticated {
+            basic
+                .accessibilityAction(named: Text("Me gusta")) {
+                    Task { await account.setLiked(true, videoID: video.id) }
+                }
+                .accessibilityAction(named: Text("Quitar Me gusta")) {
+                    Task { await account.setLiked(false, videoID: video.id) }
+                }
+                .accessibilityAction(named: Text("Suscribirse al canal")) {
+                    Task { await account.setSubscribed(true, videoID: video.id) }
+                }
+                .accessibilityAction(named: Text("Cancelar suscripción al canal")) {
+                    Task { await account.setSubscribed(false, videoID: video.id) }
+                }
+                .accessibilityAction(named: Text("Comentar")) { onComment(video) }
+        } else {
+            basic
+                .accessibilityAction(named: Text("Iniciar sesión con Google")) {
+                    account.signIn(videoID: video.id)
+                }
+        }
+    }
+}
+
+private struct NativeYouTubeVideoRow: View {
+    let video: NativeYouTubeVideo
+    let onPlay: (NativeYouTubeVideo) -> Void
+    let onComment: (NativeYouTubeVideo) -> Void
+
+    var body: some View {
+        Button { onPlay(video) } label: {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(video.title).font(.headline)
+                Text("Canal: \(video.channelTitle)")
+                    .font(.subheadline)
+                    .foregroundStyle(TifloVisual.secondaryText)
+                if let date = NativeNewsMetadata.publication(video.publishedAt) {
+                    Text("Publicado: \(date)")
+                        .font(.subheadline)
+                        .foregroundStyle(TifloVisual.secondaryText)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(video.title). Canal: \(video.channelTitle)")
+        .accessibilityHint("Doble toque para reproducir. Desliza arriba o abajo para más acciones.")
+        .modifier(NativeYouTubeTitleActions(
+            video: video, onPlay: onPlay, onComment: onComment
+        ))
+    }
+}
+
+private struct NativeYouTubeCommentScreen: View {
+    @EnvironmentObject private var account: NativeYouTubeAccountStore
+    @Environment(\.dismiss) private var dismiss
+    let video: NativeYouTubeVideo
+    @State private var commentText = ""
+
+    var body: some View {
+        Form {
+            Section("Comentario público") {
+                Text(video.title)
+                    .font(.headline)
+                TextEditor(text: $commentText)
+                    .frame(minHeight: 130)
+                    .accessibilityLabel("Escribir comentario en YouTube")
+            }
+            .listRowBackground(TifloVisual.surfaceRaised)
+            Button("Publicar comentario") {
+                Task {
+                    if await account.publishComment(commentText, videoID: video.id) {
+                        dismiss()
+                    }
+                }
+            }
+            .disabled(!account.authenticated || account.busy ||
+                      commentText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+            if let message = account.message {
+                Text(message).foregroundStyle(TifloVisual.secondaryText)
+            }
+        }
+        .tifloScreenSurface()
+        .navigationTitle("Comentar en YouTube")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button("Cancelar") { dismiss() }
+            }
+        }
+    }
+}
+
+private struct NativeYouTubeSubscriptionsScreen: View {
+    @EnvironmentObject private var account: NativeYouTubeAccountStore
+
+    var body: some View {
+        List {
+            if !account.authenticated {
+                Section {
+                    Text("Inicia sesión con Google para consultar los canales a los que estás suscrito.")
+                    Button("Iniciar sesión con Google") { account.signIn() }
+                        .disabled(account.busy)
+                }
+                .listRowBackground(TifloVisual.surfaceRaised)
+            } else {
+                Section("Canales a los que estás suscrito") {
+                    ForEach(account.subscriptions) { channel in
+                        NavigationLink {
+                            NativeYouTubeChannelVideosScreen(channel: channel)
+                        } label: {
+                            Text(channel.title).font(.headline)
+                        }
+                        .accessibilityAction(named: Text("Compartir canal")) {
+                            NativeShare.present(url: channel.url)
+                        }
+                    }
+                    if !account.subscriptionsNextPageToken.isEmpty {
+                        Button("Mostrar diez canales más") {
+                            Task { await account.loadSubscriptions(loadMore: true) }
+                        }
+                        .disabled(account.subscriptionsBusy)
+                    }
+                    if account.subscriptionsBusy {
+                        ProgressView("Cargando suscripciones")
+                    }
+                    if let message = account.subscriptionsMessage {
+                        Text(message).foregroundStyle(TifloVisual.secondaryText)
+                        Button("Reintentar") {
+                            Task { await account.loadSubscriptions() }
+                        }
+                    }
+                }
+                .listRowBackground(TifloVisual.surfaceRaised)
+            }
+        }
+        .tifloScreenSurface()
+        .navigationTitle("Mis suscripciones")
+        .task(id: account.authenticated) {
+            if account.authenticated {
+                await account.verifySession()
+                if account.authenticated { await account.loadSubscriptions() }
+            }
+        }
+    }
+}
+
+private struct NativeYouTubeChannelVideosScreen: View {
+    let channel: NativeYouTubeChannel
+    @StateObject private var youtubeSearch = NativeYouTubeSearchStore()
+    @State private var selectedVideo: NativeYouTubeVideo?
+    @State private var commentingOnVideo: NativeYouTubeVideo?
+
+    var body: some View {
+        List {
+            Section("Vídeos del canal") {
+                if youtubeSearch.isLoading {
+                    ProgressView("Cargando vídeos")
+                }
+                if let message = youtubeSearch.message {
+                    Text(message)
+                        .font(.subheadline)
+                        .foregroundStyle(TifloVisual.secondaryText)
+                }
+                ForEach(youtubeSearch.videos) { video in
+                    NativeYouTubeVideoRow(
+                        video: video, onPlay: { selectedVideo = $0 },
+                        onComment: { commentingOnVideo = $0 }
+                    )
+                }
+                if !youtubeSearch.nextPageToken.isEmpty {
+                    Button("Mostrar diez vídeos más") {
+                        Task { await youtubeSearch.search(
+                            "", channelID: channel.id, loadMore: true
+                        ) }
+                    }
+                    .disabled(youtubeSearch.isLoading)
+                }
+            }
+            .listRowBackground(TifloVisual.surfaceRaised)
+        }
+        .tifloScreenSurface()
+        .navigationTitle(channel.title)
+        .sheet(item: $selectedVideo) { video in
+            NavigationStack { NativeYouTubePlayerScreen(video: video) }
+        }
+        .sheet(item: $commentingOnVideo) { video in
+            NavigationStack { NativeYouTubeCommentScreen(video: video) }
+        }
+        .task(id: channel.id) {
+            await youtubeSearch.search("", channelID: channel.id)
+        }
     }
 }
 

@@ -21,6 +21,7 @@ import {
   unlike,
   subscribe,
   unsubscribe,
+  listMySubscriptions,
   searchVideos
 } from './youtube-api.js';
 
@@ -38,7 +39,7 @@ function corsHeaders(request, env) {
   const origin = request.headers.get('Origin') || '';
   const url = new URL(request.url);
   const allowed = origin === env.ALLOWED_ORIGIN ||
-    (url.pathname === '/search' && PUBLIC_SEARCH_ORIGINS.has(origin));
+    (['/search', '/channel-videos'].includes(url.pathname) && PUBLIC_SEARCH_ORIGINS.has(origin));
   if (!allowed) return {};
   return {
     'Access-Control-Allow-Origin': origin,
@@ -92,6 +93,7 @@ function safeError(error) {
   if (code === 'INVALID_COMMENT') return appError('INVALID_COMMENT', 400);
   if (code === 'NATIVE_AUTH_INVALID') return appError('NATIVE_AUTH_INVALID', 401);
   if (code === 'INVALID_SEARCH') return appError('INVALID_SEARCH', 400);
+  if (code === 'INVALID_CHANNEL') return appError('INVALID_CHANNEL', 400);
   if (code === 'SEARCH_UNAVAILABLE') return appError('SEARCH_UNAVAILABLE', 503);
   if (code === 'COMMENTS_DISABLED') return appError('COMMENTS_DISABLED', error.status || 403);
   if (code === 'VIDEO_NOT_FOUND') return appError('VIDEO_NOT_FOUND', 404);
@@ -330,7 +332,7 @@ export async function handleRequest(request, env, deps = {}) {
     }
   }
 
-  if (url.pathname === '/search' && request.method === 'GET') {
+  if (['/search', '/channel-videos'].includes(url.pathname) && request.method === 'GET') {
     if (!searchOriginAllowed(request, env)) {
       return json({ error: 'ORIGIN_NOT_ALLOWED' }, 403, cors);
     }
@@ -339,7 +341,9 @@ export async function handleRequest(request, env, deps = {}) {
         env.YOUTUBE_API_KEY,
         url.searchParams.get('q') || '',
         url.searchParams.get('pageToken') || '',
-        fetchImpl
+        fetchImpl,
+        { filter: url.searchParams.get('filter') || 'video',
+          channelId: url.pathname === '/channel-videos' ? url.searchParams.get('channelId') || '' : '' }
       );
       return json(result, 200, cors);
     } catch (error) {
@@ -360,6 +364,16 @@ export async function handleRequest(request, env, deps = {}) {
     return session
       ? json({ authenticated: true, csrf: session.csrf }, 200, cors)
       : json({ authenticated: false }, 200, cors);
+  }
+
+  if (url.pathname === '/subscriptions' && request.method === 'GET') {
+    try {
+      const { accessToken } = await authenticatedContext(request, env, fetchImpl);
+      const page = await listMySubscriptions(accessToken, url.searchParams.get('pageToken') || '', fetchImpl);
+      return json(page, 200, cors);
+    } catch (error) {
+      return errorResponse(error, cors);
+    }
   }
 
   if (url.pathname === '/state' && request.method === 'GET') {

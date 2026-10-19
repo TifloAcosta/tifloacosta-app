@@ -331,3 +331,81 @@ test('Invalid and browser-origin native authorization attempts are denied', asyn
   }), env, { fetchImpl: mockFetch() });
   assert.equal(unauth.status, 401);
 });
+
+
+test('GET /subscriptions requires a valid Google session', async () => {
+  const unauthenticated = await handleRequest(new Request(
+    'https://youtube-auth.tifloacosta.com/subscriptions',
+    { headers: { Origin: env.ALLOWED_ORIGIN } }
+  ), env, { fetchImpl: mockFetch() });
+  assert.equal(unauthenticated.status, 401);
+  assert.deepEqual(await unauthenticated.json(), { error: 'SESSION_EXPIRED' });
+});
+
+test('GET /subscriptions returns only the channels of the authenticated account', async () => {
+  const cookie = await authCookie();
+  const channelId = 'UC' + 'x'.repeat(22);
+  const calls = [];
+  const fetchImpl = async (url, options) => {
+    calls.push(String(url));
+    if (String(url).includes('oauth2.googleapis.com/token')) {
+      return jsonResponse({ access_token: 'test-access', expires_in: 3600 });
+    }
+    if (String(url).includes('/subscriptions?')) {
+      assert.equal(options.headers.Authorization, 'Bearer test-access');
+      return jsonResponse({
+        nextPageToken: 'NEXT_PAGE',
+        items: [{ snippet: {
+          resourceId: { channelId }, title: 'Mis pruebas', description: 'Suscripción real'
+        } }]
+      });
+    }
+    throw new Error('Unexpected ' + String(url));
+  };
+  const response = await handleRequest(new Request(
+    'https://youtube-auth.tifloacosta.com/subscriptions',
+    { headers: { Origin: env.ALLOWED_ORIGIN, Cookie: cookie } }
+  ), env, { fetchImpl });
+  assert.equal(response.status, 200);
+  assert.deepEqual(await response.json(), {
+    items: [{ id: channelId, title: 'Mis pruebas', description: 'Suscripción real' }],
+    nextPageToken: 'NEXT_PAGE'
+  });
+  assert.ok(calls.some(x => x.includes('mine=true')));
+});
+
+test('GET /search filter=short forwards official video duration to YouTube', async () => {
+  const calls = [];
+  const response = await handleRequest(new Request(
+    'https://youtube-auth.tifloacosta.com/search?q=VoiceOver&filter=short',
+    { headers: { Origin: env.ALLOWED_ORIGIN } }
+  ), env, { fetchImpl: async url => {
+    calls.push(String(url));
+    if (String(url).includes('/search?')) return jsonResponse({ items: [] });
+    throw new Error('Unexpected ' + String(url));
+  } });
+  assert.equal(response.status, 200);
+  assert.match(calls[0], /videoDuration=short/);
+});
+
+test('GET /channel-videos is restricted to the TifloAcosta origin and valid channel IDs', async () => {
+  const channelId = 'UC' + 'z'.repeat(22);
+  const response = await handleRequest(new Request(
+    'https://youtube-auth.tifloacosta.com/channel-videos?channelId=' + channelId,
+    { headers: { Origin: env.ALLOWED_ORIGIN } }
+  ), env, { fetchImpl: async url => {
+    if (String(url).includes('/search?')) return jsonResponse({ items: [] });
+    throw new Error('Unexpected ' + String(url));
+  } });
+  assert.equal(response.status, 200);
+  const invalid = await handleRequest(new Request(
+    'https://youtube-auth.tifloacosta.com/channel-videos?channelId=bad',
+    { headers: { Origin: env.ALLOWED_ORIGIN } }
+  ), env, { fetchImpl: mockFetch() });
+  assert.equal(invalid.status, 400);
+  const disallowed = await handleRequest(new Request(
+    'https://youtube-auth.tifloacosta.com/channel-videos?channelId=' + channelId,
+    { headers: { Origin: 'https://example.com' } }
+  ), env, { fetchImpl: mockFetch() });
+  assert.equal(disallowed.status, 403);
+});

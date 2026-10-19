@@ -244,7 +244,12 @@ struct NativeAdjustableChoice: View {
 
 struct NativeResourcesScreen: View {
     @EnvironmentObject private var catalog: NativeCatalogStore
+    @EnvironmentObject private var library: NativeReaderLibrary
+    @EnvironmentObject private var resourceService: NativeResourceService
     @State private var chosenCategory: String?
+    @State private var resourceToOpen: NativeCatalogItem?
+    @State private var presentingResource = false
+    @State private var actionStatus: String?
 
     private var spanishResources: [NativeCatalogItem] {
         catalog.resources.filter { $0.lang == "es" }
@@ -256,14 +261,11 @@ struct NativeResourcesScreen: View {
         }
     }
 
-    // La opción inicial no selecciona ningún apartado y evita mostrar
-    // todo el catálogo al entrar. El gesto de VoiceOver cambia la categoría.
     private var categoryChoices: [String] {
         ["Selecciona un apartado"] + categories
     }
 
-    // Guardar el nombre evita que una actualización del catálogo cambie
-    // accidentalmente la categoría seleccionada al reordenar las opciones.
+    // Preserve the native adjustable selector and its currently chosen category.
     private var categorySelection: Binding<Int> {
         Binding(
             get: {
@@ -285,6 +287,38 @@ struct NativeResourcesScreen: View {
         return spanishResources.filter { $0.category == chosenCategory }
     }
 
+    private func announce(_ message: String) {
+        actionStatus = message
+        UIAccessibility.post(notification: .announcement, argument: message)
+    }
+
+    private func read(_ item: NativeCatalogItem) {
+        resourceToOpen = item
+        presentingResource = true
+    }
+
+    private func save(_ item: NativeCatalogItem) {
+        Task {
+            do {
+                try await resourceService.saveInReader(item, library: library)
+                announce("«\(item.title)» guardado en TifloLector.")
+            } catch {
+                announce("No se pudo guardar «\(item.title)»: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    private func download(_ item: NativeCatalogItem) {
+        Task {
+            do {
+                try await resourceService.exportToFiles(item)
+                announce("Selecciona una carpeta en Archivos para descargar «\(item.title)».")
+            } catch {
+                announce("No se pudo descargar «\(item.title)»: \(error.localizedDescription)")
+            }
+        }
+    }
+
     var body: some View {
         List {
             Section {
@@ -295,8 +329,6 @@ struct NativeResourcesScreen: View {
                 )
             }
 
-            // No se crea la lista de documentos hasta elegir un apartado.
-            // Volver a "Selecciona un apartado" deja la pantalla limpia.
             if let chosenCategory, categories.contains(chosenCategory) {
                 Section(chosenCategory) {
                     if filtered.isEmpty {
@@ -314,15 +346,30 @@ struct NativeResourcesScreen: View {
                             }
                         }
                         .accessibilityLabel(item.title)
-                        .accessibilityHint("Doble toque para leer el recurso dentro de TifloAcosta.")
+                        .accessibilityHint("Doble toque para leer. Acciones: Leer, Guardar, Descargar y Compartir.")
+                        .accessibilityAction(named: Text("Leer")) { read(item) }
+                        .accessibilityAction(named: Text("Guardar")) { save(item) }
+                        .accessibilityAction(named: Text("Descargar")) { download(item) }
                         .accessibilityAction(named: Text("Compartir")) {
                             if let url = item.resourceURL { NativeShare.present(url: url) }
                         }
                     }
                 }
             }
+            if let actionStatus {
+                Section {
+                    Text(actionStatus)
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
+            }
         }
         .navigationTitle("Recursos")
+        .navigationDestination(isPresented: $presentingResource) {
+            if let resourceToOpen {
+                NativeRemoteResourceScreen(item: resourceToOpen)
+            }
+        }
     }
 }
 

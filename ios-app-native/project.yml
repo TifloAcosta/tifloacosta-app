@@ -40,6 +40,7 @@ targets:
     deploymentTarget: "17.0"
     sources:
       - path: ShareExtension/ShareViewController.swift
+      - path: ShareExtension/ShareReadingPreview.swift
     # Keep the source-controlled plist intact: XcodeGen info.path would regenerate it,
     # removing NSExtensionPointIdentifier and making App Store Connect reject the IPA.
     entitlements:
@@ -56,3 +57,5 @@ targets:
         SWIFT_VERSION: "5.9"
         INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO
         ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS: NO
+    dependencies:
+      - package: ZIPFoundation

@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 import assert from 'node:assert/strict';
 const screens = readFileSync(fileURLToPath(new URL('../Sources/NativeScreens.swift', import.meta.url)), 'utf8');
 const search = readFileSync(fileURLToPath(new URL('../Sources/NativeSearch.swift', import.meta.url)), 'utf8');
-const order = ['Actualidad','Recursos','TifloLector','Novedades','Descargar desde un enlace','Vídeos','Podcast','Mi libro','Contacto y redes','Privacidad y accesibilidad','Configuración'];
+const order = ['Actualidad','Recursos','TifloLector','Novedades','Descargar desde un enlace','Vídeos','Podcast','Contacto y redes','Privacidad y accesibilidad','Configuración'];
 let previous = -1;
 for (const label of order) {
   const found = screens.indexOf('= "' + label + '"');
@@ -47,3 +47,5 @@ assert.match(screens, /TifloVisual\.primaryText/);
 assert.match(screens, /tifloScreenSurface\(\)/);
 assert.ok(!screens.includes('AsyncImage(url:'), 'The brand header must not rely on remote image loading');
 console.log('OK: native logo, dynamic layout, branded and system-adaptive colors');
+
+assert.ok(!screens.includes('case libro = "Mi libro"'), 'Mi libro debe estar dentro de Contacto y no en el inicio');

@@ -10,6 +10,7 @@ struct NativeCatalogItem: Decodable, Identifiable {
     let categories: [String]?
     let sourceName: String?
     let publishedAt: String?
+    let newsDate: String?
     let url: String?
     let openUrl: String?
     let originalUrl: String?

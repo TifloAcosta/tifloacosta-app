@@ -76,8 +76,11 @@ enum NativeNewsMetadata {
 struct NativeNewsScreen: View {
     @EnvironmentObject private var catalog: NativeCatalogStore
     @EnvironmentObject private var library: NativeReaderLibrary
+    @EnvironmentObject private var favorites: NativeFavoritesStore
+    @AppStorage("native-ios-language") private var languageIndex = 0
     @Environment(\.openURL) private var openURL
 
+    @State private var mediaKindIndex = 0
     @State private var categoryIndex = 0
     @State private var query = ""
     @State private var visibleCount = 10
@@ -86,7 +89,7 @@ struct NativeNewsScreen: View {
     @State private var status: String?
 
     private var spanishNews: [NativeCatalogItem] {
-        catalog.news.filter { $0.lang == "es" }
+        catalog.news.filter { $0.lang == (languageIndex == 1 ? "en" : "es") }
     }
 
     private var categories: [String] {
@@ -171,14 +174,32 @@ struct NativeNewsScreen: View {
 
     var body: some View {
         List {
-            Section("Escuchar y ver") {
-                NavigationLink {
-                    NativeMediaScreen()
-                } label: {
-                    Label("Buscar podcasts y canales de YouTube", systemImage: "play.rectangle")
-                        .foregroundStyle(TifloVisual.primaryText)
+            Section("Podcasts y canales de YouTube") {
+                NativeAdjustableChoice(
+                    title: "Seleccionar contenidos multimedia",
+                    choices: [
+                        "Selecciona un formato",
+                        "Podcasts",
+                        "Canales de YouTube",
+                        "Todos los formatos"
+                    ],
+                    selectedIndex: $mediaKindIndex
+                )
+
+                if mediaKindIndex > 0 {
+                    NavigationLink {
+                        NativeMediaScreen(
+                            initialFormatIndex: mediaKindIndex == 1 ? 2
+                                : mediaKindIndex == 2 ? 3 : 1
+                        )
+                    } label: {
+                        Label("Buscar fuentes y contenidos multimedia", systemImage: "play.rectangle")
+                            .foregroundStyle(TifloVisual.primaryText)
+                            .frame(minHeight: 44)
+                    }
+                    .accessibilityLabel("Buscar fuentes y contenidos multimedia")
+                    .accessibilityHint("Doble toque para elegir la fuente, idioma y búsqueda del formato seleccionado.")
                 }
-                .accessibilityHint("Abre un selector de formatos y fuentes multimedia.")
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 
@@ -238,6 +259,11 @@ struct NativeNewsScreen: View {
                         .accessibilityAction(named: Text("Guardar en TifloLector")) { save(item) }
                         .accessibilityAction(named: Text("Compartir")) { share(item) }
                         .accessibilityAction(named: Text("Abrir fuente original")) { openOriginal(item) }
+                        .accessibilityAction(named: Text(favorites.contains(.news, item: item)
+                            ? "Quitar de favoritos" : "Añadir a favoritos")) {
+                            let added = favorites.toggle(.news, item: item)
+                            announce(added ? "Añadido a Favoritos" : "Eliminado de Favoritos")
+                        }
                     }
                     if visibleCount < matchingNews.count {
                         Button("Mostrar diez más") { visibleCount += 10 }

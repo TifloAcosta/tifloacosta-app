@@ -12,7 +12,6 @@ private enum NativeDestination: String, CaseIterable, Hashable, Identifiable {
     case favoritos = "Favoritos"
     case videos = "Vídeos"
     case podcasts = "Podcast"
-    case libro = "Mi libro"
     case contacto = "Contacto y redes"
     case privacidad = "Privacidad y accesibilidad"
     case configuracion = "Configuración"
@@ -113,7 +112,6 @@ struct NativeHomeScreen: View {
                         .submitLabel(.search)
                         .textInputAutocapitalization(.sentences)
                         .onSubmit(search)
-                        .accessibilityLabel("Introduce tu búsqueda")
                     Button(action: search) {
                         Text("Buscar")
                             .frame(maxWidth: .infinity, minHeight: 44)
@@ -132,13 +130,13 @@ struct NativeHomeScreen: View {
                                     .fill(TifloVisual.brandRed)
                                     .frame(width: 4, height: 30)
                                     .accessibilityHidden(true)
-                                Text(destination.rawValue)
+                                Text(LocalizedStringKey(destination.rawValue))
                                     .font(.body)
                                     .foregroundStyle(.primary)
                             }
                             .frame(maxWidth: .infinity, minHeight: 48, alignment: .leading)
                         }
-                        .accessibilityLabel(destination.rawValue)
+                        .accessibilityLabel(Text(LocalizedStringKey(destination.rawValue)))
                     }
                 }
                 .listRowBackground(TifloVisual.surfaceRaised)
@@ -172,8 +170,9 @@ struct NativeHomeScreen: View {
                 case .videos: NativeVideosScreen()
                 case .podcasts: NativePodcastScreen()
                 case .configuracion: NativeSettingsScreen()
-                case .favoritos, .libro, .contacto, .privacidad:
-                    NativePendingSectionScreen(title: destination.rawValue)
+                case .contacto: NativeContactScreen()
+                case .favoritos: NativeFavoritesScreen()
+                case .privacidad: NativePrivacyAccessibilityScreen()
                 }
             }
         }
@@ -216,10 +215,10 @@ struct NativeAdjustableChoice: View {
         } label: {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(title)
+                    Text(LocalizedStringKey(title))
                         .font(.subheadline)
                         .foregroundStyle(TifloVisual.secondaryText)
-                    Text(currentValue)
+                    Text(LocalizedStringKey(currentValue))
                         .font(.body).bold()
                         .foregroundStyle(TifloVisual.primaryText)
                 }
@@ -232,8 +231,8 @@ struct NativeAdjustableChoice: View {
         }
         .disabled(choices.isEmpty)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(title)
-        .accessibilityValue(currentValue)
+        .accessibilityLabel(Text(LocalizedStringKey(title)))
+        .accessibilityValue(Text(LocalizedStringKey(currentValue)))
         .accessibilityHint("Desliza arriba o abajo para cambiar. Doble toque para la siguiente opción.")
         .accessibilityAdjustableAction { direction in
             switch direction {
@@ -249,13 +248,15 @@ struct NativeResourcesScreen: View {
     @EnvironmentObject private var catalog: NativeCatalogStore
     @EnvironmentObject private var library: NativeReaderLibrary
     @EnvironmentObject private var resourceService: NativeResourceService
+    @EnvironmentObject private var favorites: NativeFavoritesStore
+    @AppStorage("native-ios-language") private var languageIndex = 0
     @State private var chosenCategory: String?
     @State private var resourceToOpen: NativeCatalogItem?
     @State private var presentingResource = false
     @State private var actionStatus: String?
 
     private var spanishResources: [NativeCatalogItem] {
-        catalog.resources.filter { $0.lang == "es" }
+        catalog.resources.filter { $0.lang == (languageIndex == 1 ? "en" : "es") }
     }
 
     private var categories: [String] {
@@ -356,6 +357,11 @@ struct NativeResourcesScreen: View {
                         .accessibilityAction(named: Text("Compartir")) {
                             if let url = item.resourceURL { NativeShare.present(url: url) }
                         }
+                        .accessibilityAction(named: Text(favorites.contains(.resource, item: item)
+                            ? "Quitar de favoritos" : "Añadir a favoritos")) {
+                            let added = favorites.toggle(.resource, item: item)
+                            announce(added ? "Añadido a Favoritos" : "Eliminado de Favoritos")
+                        }
                     }
                 }
             }
@@ -379,6 +385,7 @@ struct NativeResourcesScreen: View {
 
 struct NativeVideosScreen: View {
     @EnvironmentObject private var catalog: NativeCatalogStore
+    @EnvironmentObject private var favorites: NativeFavoritesStore
     @Environment(\.openURL) private var openURL
     @State private var query = ""
     @State private var sortIndex = 0
@@ -421,6 +428,10 @@ struct NativeVideosScreen: View {
                     }
                     .accessibilityAction(named: Text("Compartir")) {
                         if let url = item.videoURL { NativeShare.present(url: url) }
+                    }
+                    .accessibilityAction(named: Text(favorites.contains(.video, item: item)
+                        ? "Quitar de favoritos" : "Añadir a favoritos")) {
+                        _ = favorites.toggle(.video, item: item)
                     }
                 }
 

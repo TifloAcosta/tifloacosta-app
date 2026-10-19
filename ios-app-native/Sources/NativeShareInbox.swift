@@ -48,6 +48,25 @@ final class NativeShareInbox: ObservableObject {
         return root.appendingPathComponent(storedName)
     }
 
+    // Los EPUB se reciben y se conservan sin fingir que el lector nativo
+    // ya puede interpretar su contenido. El usuario puede exportar el archivo.
+    func exportURL(for item: NativeShareMessage) -> URL? {
+        guard item.kind == "file", let source = fileURL(for: item) else { return nil }
+        let safeName = URL(fileURLWithPath: item.name).lastPathComponent
+        let directory = FileManager.default.urls(for: .cachesDirectory,
+            in: .userDomainMask)[0].appendingPathComponent("SharedExports", isDirectory: true)
+        do {
+            try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+            let destination = directory.appendingPathComponent(item.id + "-" + safeName)
+            if !FileManager.default.fileExists(atPath: destination.path) {
+                try FileManager.default.copyItem(at: source, to: destination)
+            }
+            return destination
+        } catch {
+            return nil
+        }
+    }
+
     func complete(_ item: NativeShareMessage) {
         guard let root = inboxURL else { return }
         try? FileManager.default.removeItem(at: root.appendingPathComponent(item.id + ".json"))
@@ -72,6 +91,15 @@ struct NativeInboxScreen: View {
                     throw CocoaError(.fileNoSuchFile)
                 }
                 let fileName = URL(fileURLWithPath: item.name).lastPathComponent
+                if URL(fileURLWithPath: fileName).pathExtension.lowercased() == "epub" {
+                    guard let exported = inbox.exportURL(for: item) else {
+                        throw CocoaError(.fileNoSuchFile)
+                    }
+                    // La compatibilidad de lectura EPUB se abordará en TifloLector.
+                    // Compartir/exportar el original no lo elimina de Recibidos.
+                    NativeShare.present(url: exported)
+                    return
+                }
                 // Use a temporary copy with the original extension so the reader
                 // can detect PDF/text correctly; never reinterpret a binary as text.
                 let temporary = FileManager.default.temporaryDirectory
@@ -119,7 +147,18 @@ struct NativeInboxScreen: View {
                     }
                 }
                 .accessibilityLabel(item.name)
-                .accessibilityHint(item.kind == "url" ? "Abre el enlace recibido." : "Importa el archivo o texto a TifloLector.")
+                .accessibilityHint(item.kind == "url" ? "Abre el enlace recibido." :
+                    item.name.lowercased().hasSuffix(".epub")
+                        ? "Doble toque para compartir o guardar el EPUB original. Se conserva en Recibidos hasta que lo elimines."
+                        : "Importa el archivo o texto a TifloLector.")
+                .accessibilityAction(named: Text("Compartir archivo")) {
+                    if let exported = inbox.exportURL(for: item) {
+                        NativeShare.present(url: exported)
+                    }
+                }
+                .accessibilityAction(named: Text("Eliminar de Recibidos")) {
+                    inbox.complete(item)
+                }
             }
         }
         .tifloScreenSurface()

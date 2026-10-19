@@ -146,7 +146,23 @@ final class NativePodcastPlayer: ObservableObject {
     }
 }
 
+private struct NativePodcastPlatform: Identifiable {
+    let name: String
+    let address: String
+
+    var id: String { name }
+    var url: URL? { URL(string: address) }
+}
+
 struct NativePodcastScreen: View {
+    private let podcastPlatforms = [
+        NativePodcastPlatform(name: "Spotify", address: "https://open.spotify.com/show/6z5BbrUhRuMANB5BFJfdfB"),
+        NativePodcastPlatform(name: "Apple Podcasts", address: "https://podcasts.apple.com/es/podcast/canal-tifloacosta/id1567846456"),
+        NativePodcastPlatform(name: "iVoox", address: "https://www.ivoox.com/podcast-canal-tifloacosta_sq_f11282163_1.html"),
+        NativePodcastPlatform(name: "Podimo", address: "https://podimo.com/es/shows/canal-tifloacosta"),
+        NativePodcastPlatform(name: "radio.es", address: "https://www.radio.es/podcast/canal-tifloacosta")
+    ]
+
     @EnvironmentObject private var store: NativePodcastStore
     @StateObject private var player = NativePodcastPlayer()
     @State private var visible = 10
@@ -204,6 +220,18 @@ struct NativePodcastScreen: View {
                     Task { await store.refresh() }
                 }
             }
+            Section("Escuchar en otras plataformas") {
+                ForEach(podcastPlatforms) { platform in
+                    if let url = platform.url {
+                        Link(platform.name, destination: url)
+                            .accessibilityHint("Abre el podcast de TifloAcosta en la plataforma seleccionada.")
+                            .accessibilityAction(named: Text("Compartir enlace")) {
+                                NativeShare.present(url: url)
+                            }
+                    }
+                }
+            }
+            .listRowBackground(TifloVisual.surfaceRaised)
         }
         .tifloScreenSurface()
         .navigationTitle("Podcasts")

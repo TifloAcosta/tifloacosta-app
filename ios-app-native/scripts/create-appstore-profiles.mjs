@@ -51,6 +51,22 @@ for (const [identifier,envName,slug] of bundles) {
   const found = await api('bundleIds?filter%5Bidentifier%5D='+encodeURIComponent(identifier));
   const bundle=found.data.find(x=>x.attributes.identifier===identifier);
   if(!bundle) throw Error('Falta identificador Apple Developer: '+identifier);
+  // El grupo debe estar activado para los DOS App IDs, no solo declarado
+  // en entitlements. El perfil firmado es la fuente de verdad.
+  let capabilities = await api('bundleIds/'+bundle.id+'/bundleIdCapabilities?limit=200');
+  const hasAppGroups = capabilities.data.some(
+    x => x.attributes?.capabilityType === 'APP_GROUPS'
+  );
+  if (!hasAppGroups) {
+    await api('bundleIdCapabilities', {method:'POST',body:JSON.stringify({
+      data:{type:'bundleIdCapabilities',attributes:{capabilityType:'APP_GROUPS'},
+        relationships:{bundleId:{data:{type:'bundleIds',id:bundle.id}}}}
+    })});
+    capabilities = await api('bundleIds/'+bundle.id+'/bundleIdCapabilities?limit=200');
+    if (!capabilities.data.some(x => x.attributes?.capabilityType === 'APP_GROUPS')) {
+      throw Error('No se habilitó APP_GROUPS en Apple Developer: '+identifier);
+    }
+  }
   const name=slug+'-TestFlight-'+process.env.GITHUB_RUN_ID;
   const created=await api('profiles',{method:'POST',body:JSON.stringify({
     data:{type:'profiles',attributes:{name,profileType:'IOS_APP_STORE'},
@@ -63,8 +79,19 @@ for (const [identifier,envName,slug] of bundles) {
   const profile=created.data;
   if(!profile?.attributes?.profileContent || !profile.attributes.uuid)
     throw Error('Apple no devolvió el perfil '+identifier);
-  fs.writeFileSync(path.join(outputDirectory,profile.attributes.uuid+'.mobileprovision'),
+  const profilePath=path.join(outputDirectory,profile.attributes.uuid+'.mobileprovision');
+  fs.writeFileSync(profilePath,
     Buffer.from(profile.attributes.profileContent,'base64'),{mode:0o600});
+  const decoded=execFileSync('security',['cms','-D','-i',profilePath]);
+  const entitlements=JSON.parse(execFileSync('python3',['-c',
+    'import plistlib,json,sys; print(json.dumps(plistlib.loads(sys.stdin.buffer.read()).get("Entitlements", {})))'
+  ],{input:decoded,encoding:'utf8'}));
+  const allowedGroups=entitlements['com.apple.security.application-groups'] || [];
+  if(!allowedGroups.includes('group.com.tifloacosta.app')) {
+    throw Error('El perfil Apple de '+identifier+
+      ' no autoriza group.com.tifloacosta.app. Debe estar asociado al identificador en Apple Developer antes de subir la app.');
+  }
+  console.log('App Group autorizado en perfil de '+identifier);
   fs.appendFileSync(process.env.GITHUB_ENV,envName+'='+name+'\n');
   console.log('Perfil de distribución válido instalado para '+identifier);
 }

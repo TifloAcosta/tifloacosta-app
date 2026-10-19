@@ -78,7 +78,12 @@ struct NativeMediaScreen: View {
     @EnvironmentObject private var store: NativeMediaStore
     @Environment(\.openURL) private var openURL
 
-    @State private var formatIndex = 0
+    // Al entrar desde Actualidad, conservar el tipo elegido mediante VoiceOver.
+    init(initialFormatIndex: Int = 0) {
+        _formatIndex = State(initialValue: min(max(0, initialFormatIndex), 3))
+    }
+
+    @State private var formatIndex: Int
     @State private var sourceIndex = 0
     @State private var languageIndex = 0
     @State private var query = ""

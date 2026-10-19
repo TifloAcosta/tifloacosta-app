@@ -431,66 +431,213 @@ struct NativeReaderLibraryScreen: View {
     }
 }
 
+/// Split long documents once at import-display time. Avoid putting a complete
+/// EPUB/Office/PDF body into a single enormous SwiftUI Text accessibility node.
+private struct NativeReaderTextLayout {
+    let fragments: [String]
+    let fragmentStarts: [Int]
+    let paragraphStarts: [Int]
+    let sentenceStarts: [Int]
+    let totalCharacters: Int
+
+    init(_ body: String) {
+        totalCharacters = body.count
+        var sections: [String] = []
+        var offsets: [Int] = []
+        var paragraphs: [Int] = [0]
+        var characterOffset = 0
+
+        for paragraph in body.components(separatedBy: "\n\n") {
+            if !paragraph.isEmpty {
+                var cursor = paragraph.startIndex
+                var localOffset = 0
+                while cursor < paragraph.endIndex {
+                    let end = paragraph.index(cursor, offsetBy: 1800,
+                                              limitedBy: paragraph.endIndex) ?? paragraph.endIndex
+                    sections.append(String(paragraph[cursor..<end]))
+                    offsets.append(characterOffset + localOffset)
+                    localOffset += paragraph.distance(from: cursor, to: end)
+                    cursor = end
+                }
+            }
+            characterOffset += paragraph.count + 2
+            paragraphs.append(min(totalCharacters, characterOffset))
+        }
+        fragments = sections
+        fragmentStarts = offsets
+        paragraphStarts = Array(Set(paragraphs + [totalCharacters])).sorted()
+
+        var sentences: [Int] = [0]
+        for (index, character) in body.enumerated() where
+            character == "." || character == "!" || character == "?" || character == "\n" {
+            sentences.append(index + 1)
+        }
+        sentences.append(totalCharacters)
+        sentenceStarts = Array(Set(sentences)).sorted()
+    }
+
+    func nearbyOffset(_ offset: Int, direction: Int, unit: Int) -> Int? {
+        let boundaries: [Int]
+        switch unit {
+        case 2: boundaries = sentenceStarts
+        case 1: boundaries = paragraphStarts
+        default: boundaries = fragmentStarts + [totalCharacters]
+        }
+        return direction > 0
+            ? boundaries.first(where: { $0 > offset })
+            : boundaries.last(where: { $0 < offset })
+    }
+
+    func fragmentIndex(for offset: Int) -> Int {
+        guard !fragmentStarts.isEmpty else { return 0 }
+        var low = 0
+        var high = fragmentStarts.count
+        while low < high {
+            let middle = (low + high) / 2
+            if fragmentStarts[middle] <= offset { low = middle + 1 }
+            else { high = middle }
+        }
+        return max(0, low - 1)
+    }
+}
+
 struct NativeReadingScreen: View {
     let document: NativeReadingDocument
     @ObservedObject var speech: NativeReadingSpeech
     var startPercent: Int = 0
+
     @EnvironmentObject private var library: NativeReaderLibrary
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @AppStorage("native-reading-text-size") private var textSize = 20.0
     @AppStorage("native-reading-speed-index") private var speedIndex = 2
     @AppStorage("native-reading-voice-id") private var voiceID = ""
     @AppStorage("native-reading-line-spacing-index") private var lineSpacingIndex = 0
     @AppStorage("native-reading-strong-text") private var strongText = false
     @AppStorage("native-reader-navigation-unit") private var navigationUnit = 0
-    @AppStorage("native-reader-sleep-index") private var sleepIndex = 0
+    @State private var sleepIndex = 0 // Each open document starts with timer disabled.
     @State private var currentPercent = 0
+    @State private var readingOffset = 0
+    @State private var lastSavedPercent = -1
     @State private var trackIndex = 0
     @State private var showTranslation = false
+    @State private var showAudioSettings = false
+    @State private var showVisualSettings = false
+    @State private var showDocumentActions = false
     @State private var actionMessage: String?
+    @AccessibilityFocusState private var focusedFragment: Int?
+
+    private let textLayout: NativeReaderTextLayout
+    private static let percentages = (0...100).map { "\($0) por ciento" }
+    private static let sleepChoices = [
+        "Desactivado", "5 minutos", "10 minutos", "15 minutos",
+        "30 minutos", "45 minutos", "60 minutos"
+    ]
     private let speeds: [Double] = [0.75, 0.9, 1.0, 1.25, 1.5]
-    private let sleepMinutes = [0, 5, 10, 15, 30, 45, 60]
+    private let sleepMinutes: [Int] = [0, 5, 10, 15, 30, 45, 60]
+
+    init(document: NativeReadingDocument, speech: NativeReadingSpeech,
+         startPercent: Int = 0) {
+        self.document = document
+        self.speech = speech
+        self.startPercent = startPercent
+        self.textLayout = NativeReaderTextLayout(document.body)
+    }
 
     private var latest: NativeReadingDocument { library.latest(document) }
     private var tracks: [String] { latest.trackPaths ?? [] }
     private var speed: Double { speeds[max(0, min(4, speedIndex))] }
     private var isAudioOnly: Bool { latest.body.isEmpty && !tracks.isEmpty }
-    private var currentExcerpt: String {
-        let paragraphs = latest.body.components(separatedBy: "\n\n").filter { !$0.isEmpty }
-        guard !paragraphs.isEmpty else { return "" }
-        let index = min(paragraphs.count - 1,
-            Int(Double(paragraphs.count) * Double(currentPercent) / 100))
-        return String(paragraphs[index].prefix(1500))
+    private var excerpt: String {
+        guard !textLayout.fragments.isEmpty else { return "" }
+        return textLayout.fragments[textLayout.fragmentIndex(for: readingOffset)]
+    }
+
+    private func persistPosition() {
+        library.savePosition(document, percent: currentPercent)
+        lastSavedPercent = currentPercent
+    }
+
+    private func move(to percent: Int) {
+        let value = max(0, min(100, percent))
+        currentPercent = value
+        readingOffset = Int(Double(textLayout.totalCharacters) * Double(value) / 100)
+        if speech.hasAudio { speech.seek(to: value) }
+        persistPosition()
+    }
+
+    private var positionBinding: Binding<Int> {
+        Binding(get: { currentPercent }, set: { move(to: $0) })
     }
 
     private func play() {
-        if speech.isPaused { speech.resume(); return }
-        if !tracks.isEmpty {
+        if speech.isPaused {
+            speech.resume()
+        } else if !tracks.isEmpty {
             playTrack()
         } else {
-            let from = Int(Double(document.body.count) * Double(currentPercent) / 100)
-            speech.play(String(document.body.dropFirst(from)), speed: speed,
+            speech.play(String(document.body.dropFirst(readingOffset)),
+                        speed: speed,
                         language: AVSpeechSynthesisVoice(identifier: voiceID)?.language ?? "es-ES",
                         voiceIdentifier: voiceID)
         }
-        speech.sleep(after: sleepMinutes[max(0, min(6, sleepIndex))])
+        applySleepTimer()
+    }
+
+    private func applySleepTimer() {
+        let index = max(0, min(sleepMinutes.count - 1, sleepIndex))
+        speech.sleep(after: speech.isPlaying ? sleepMinutes[index] : 0)
     }
 
     private func playTrack() {
         guard tracks.indices.contains(trackIndex),
-              let url = NativeReaderFormats.storedURL(for: tracks[trackIndex]) else { return }
+              let url = NativeReaderFormats.storedURL(for: tracks[trackIndex]) else {
+            actionMessage = "No se encuentra la pista de audio."
+            return
+        }
         do {
             try speech.playAudio(url, speed: speed, at: currentPercent)
             actionMessage = nil
         } catch {
-            actionMessage = "No se pudo reproducir el archivo: \(error.localizedDescription)"
+            actionMessage = "No se pudo reproducir: \(error.localizedDescription)"
         }
+    }
+
+    private func pausePlayback() {
+        speech.pause()
+        persistPosition()
+    }
+
+    private func stopPlayback() {
+        speech.stop()
+        persistPosition()
     }
 
     private func changeTrack(_ delta: Int) {
         guard tracks.indices.contains(trackIndex + delta) else { return }
         trackIndex += delta
-        currentPercent = 0
+        move(to: 0)
         playTrack()
+        applySleepTimer()
+    }
+
+    private func moveUnit(_ direction: Int) {
+        guard !document.body.isEmpty,
+              let next = textLayout.nearbyOffset(readingOffset,
+                                                  direction: direction, unit: navigationUnit)
+        else { return }
+        readingOffset = max(0, min(textLayout.totalCharacters, next))
+        let ratio = Double(readingOffset) / Double(max(1, textLayout.totalCharacters))
+        currentPercent = min(100, Int((ratio * 100).rounded()))
+        persistPosition()
+        let index = textLayout.fragmentIndex(for: readingOffset)
+        focusedFragment = index
+        if speech.isPlaying {
+            speech.play(String(document.body.dropFirst(readingOffset)),
+                        speed: speed,
+                        language: AVSpeechSynthesisVoice(identifier: voiceID)?.language ?? "es-ES",
+                        voiceIdentifier: voiceID)
+            applySleepTimer()
+        }
     }
 
     private func addBookmark() {
@@ -498,7 +645,7 @@ struct NativeReadingScreen: View {
         actionMessage = "Marca guardada en \(currentPercent) por ciento."
     }
 
-    private func shareText() {
+    private func exportText() {
         guard !latest.body.isEmpty else { return }
         let name = latest.title.replacingOccurrences(
             of: #"[^A-Za-z0-9 _.-]"#, with: "_", options: .regularExpression
@@ -513,153 +660,183 @@ struct NativeReadingScreen: View {
         }
     }
 
-    private func moveUnit(_ direction: Int) {
-        let body = latest.body
-        guard !body.isEmpty else { return }
-        let boundary: [Int] = {
-            var result = [0]
-            var previous: Character = " "
-            for (offset, character) in body.enumerated() {
-                if navigationUnit == 2 {
-                    if ".!?\n".contains(character) { result.append(offset + 1) }
-                } else if character == "\n" && previous == "\n" {
-                    result.append(offset + 1)
-                }
-                previous = character
-            }
-            result.append(body.count)
-            return Array(Set(result)).sorted()
-        }()
-        let location = Int(Double(body.count) * Double(currentPercent) / 100)
-        let next = direction > 0
-            ? boundary.first(where: { $0 > location })
-            : boundary.last(where: { $0 < location })
-        guard let next else { return }
-        currentPercent = min(100, Int((Double(next) / Double(max(1, body.count)) * 100).rounded()))
-    }
-
-    @ViewBuilder
-    private var readingContent: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            if isAudioOnly {
-                Text("Audiolibro: \(tracks.count) pistas")
-                Text("Pista \(trackIndex + 1) de \(tracks.count)")
-            }
-            if !latest.body.isEmpty {
-                translatedReadingText
-                    .font(.system(size: textSize))
-                    .fontWeight(strongText ? .bold : .regular)
-                    .lineSpacing(CGFloat(lineSpacingIndex) * 4)
-                    .textSelection(.enabled)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
-            if let actionMessage {
-                Text(actionMessage).font(.footnote)
-                    .accessibilityAddTraits(.updatesFrequently)
-            }
-        }
-        .padding()
-    }
-
-    @ViewBuilder
-    private var translatedReadingText: some View {
-        if #available(iOS 18.0, *) {
-            Text(latest.body).translationPresentation(
-                isPresented: $showTranslation, text: currentExcerpt
-            )
-        } else {
-            Text(latest.body)
-        }
-    }
-
-    private var actionMenu: some View {
-        Menu("Acciones") {
-            Button("Añadir marca") { addBookmark() }
-            Button(latest.isFavorite == true ? "Quitar de favoritos" : "Añadir a favoritos") {
-                library.toggleFavorite(document)
-            }
-            if !latest.body.isEmpty {
-                Button("Exportar texto") { shareText() }
-                if #available(iOS 18.0, *) {
-                    Button("Traducir párrafo actual") { showTranslation = true }
-                }
-                Button("Unidad anterior") { moveUnit(-1) }
-                Button("Unidad siguiente") { moveUnit(1) }
-            }
-            if let track = tracks.first,
-               let url = NativeReaderFormats.storedURL(for: track) {
-                ShareLink("Compartir archivo de audio", item: url)
-            }
-        }
-    }
-
-    private var playbackControls: some View {
-        HStack {
+    private var playbackRow: some View {
+        AnyLayout(
+            dynamicTypeSize.isAccessibilitySize
+                ? AnyLayout(VStackLayout(alignment: .leading, spacing: 6))
+                : AnyLayout(HStackLayout(spacing: 8))
+        ) {
             Button(speech.isPlaying ? "Pausar" : "Reproducir") {
-                speech.isPlaying ? speech.pause() : play()
+                speech.isPlaying ? pausePlayback() : play()
             }
-            Button("Detener") { speech.stop() }
-            if !tracks.isEmpty {
-                Button("Pista anterior") { changeTrack(-1) }
-                    .disabled(trackIndex == 0)
-                Button("Pista siguiente") { changeTrack(1) }
-                    .disabled(trackIndex >= tracks.count - 1)
-            }
+            Button("Detener") { stopPlayback() }
+            Button("Audio") { showAudioSettings = true }
+                .accessibilityHint("Abre velocidad, voz e idioma de lectura.")
+            Button("Visual") { showVisualSettings = true }
+                .accessibilityHint("Abre tamaño de letra y presentación visual.")
         }
         .buttonStyle(.bordered)
         .controlSize(.small)
     }
 
-    private var playbackFooter: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            playbackControls
+    @ViewBuilder
+    private var trackButtons: some View {
+        if tracks.count > 1 {
+            HStack {
+                Button("Pista anterior") { changeTrack(-1) }
+                    .disabled(trackIndex == 0)
+                Button("Pista siguiente") { changeTrack(1) }
+                    .disabled(trackIndex == tracks.count - 1)
+            }
+            .buttonStyle(.bordered)
+            .controlSize(.small)
+        }
+    }
+
+    private var quickControls: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            playbackRow
+            trackButtons
+            NativeAdjustableChoice(
+                title: "Apagado automático",
+                choices: Self.sleepChoices,
+                selectedIndex: $sleepIndex
+            )
             NativeAdjustableChoice(
                 title: "Ir a posición",
-                choices: (0...100).map { "\($0) por ciento" },
-                selectedIndex: $currentPercent
+                choices: Self.percentages,
+                selectedIndex: positionBinding
             )
-            if speech.hasAudio {
-                Text("Tiempo realizado: \(Int(speech.audioElapsed)) segundos. " +
-                     "Tiempo faltante: \(max(0, Int(speech.audioDuration - speech.audioElapsed))) segundos.")
-                    .font(.caption)
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 8)
+        .background(TifloVisual.surfaceRaised)
+    }
+
+    private func readerFragment(at index: Int) -> some View {
+        Text(textLayout.fragments[index])
+            .font(.system(size: textSize))
+            .fontWeight(strongText ? .bold : .regular)
+            .lineSpacing(CGFloat(lineSpacingIndex) * 4)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .textSelection(.enabled)
+            .accessibilityFocused($focusedFragment, equals: index)
+    }
+
+    private var readingContent: some View {
+        ScrollViewReader { proxy in
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: 12) {
+                    if isAudioOnly {
+                        Text("Audiolibro, \(tracks.count) pistas. Pista \(trackIndex + 1).")
+                    }
+                    ForEach(textLayout.fragments.indices, id: \.self) { index in
+                        readerFragment(at: index).id(index)
+                    }
+                    if let actionMessage {
+                        Text(actionMessage)
+                            .font(.footnote)
+                            .accessibilityAddTraits(.updatesFrequently)
+                    }
+                }
+                .padding()
+            }
+            .onChange(of: focusedFragment) { _, index in
+                if let index { proxy.scrollTo(index, anchor: .center) }
             }
         }
-        .padding()
-        .background(.regularMaterial)
+    }
+
+    @ViewBuilder
+    private var translatedReadingContent: some View {
+        if #available(iOS 18.0, *) {
+            readingContent.translationPresentation(
+                isPresented: $showTranslation, text: excerpt
+            )
+        } else {
+            readingContent
+        }
+    }
+
+    @ViewBuilder
+    private var documentActions: some View {
+        Button("Añadir marca") { addBookmark() }
+        Button(latest.isFavorite == true ? "Quitar de favoritos" : "Añadir a favoritos") {
+            library.toggleFavorite(document)
+        }
+        if !latest.body.isEmpty {
+            Button("Exportar texto") { exportText() }
+            if #available(iOS 18.0, *) {
+                Button("Traducir fragmento actual") { showTranslation = true }
+            }
+            Button("Unidad anterior") { moveUnit(-1) }
+            Button("Unidad siguiente") { moveUnit(1) }
+        }
+        if let track = tracks.first,
+           let url = NativeReaderFormats.storedURL(for: track) {
+            Button("Compartir archivo de audio") { NativeShare.present(url: url) }
+        }
+        Button("Cancelar", role: .cancel) {}
     }
 
     var body: some View {
-        ScrollView { readingContent }
-            .tifloScreenSurface()
-            .navigationTitle(document.title)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar { ToolbarItem(placement: .topBarTrailing) { actionMenu } }
-            .safeAreaInset(edge: .bottom) { playbackFooter }
-            .onAppear {
-                currentPercent = max(0, min(100,
-                    startPercent > 0 ? startPercent : (latest.lastPercent ?? 0)))
+        VStack(spacing: 0) {
+            quickControls
+            Divider().accessibilityHidden(true)
+            translatedReadingContent
+        }
+        .tifloScreenSurface()
+        .navigationTitle(document.title)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button("Acciones") { showDocumentActions = true }
+                    .accessibilityHint("Marcas, favoritos, traducción, exportación y navegación.")
             }
-            .onChange(of: currentPercent) { _, value in
-                library.savePosition(document, percent: value)
-                if speech.hasAudio { speech.seek(to: value) }
-            }
-            .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
-                speech.refresh()
-                if speech.hasAudio && speech.isPlaying {
-                    let updated = speech.audioPercent
-                    if abs(updated - currentPercent) >= 2 { currentPercent = updated }
+        }
+        .confirmationDialog("Acciones del documento",
+                            isPresented: $showDocumentActions,
+                            titleVisibility: .visible) {
+            documentActions
+        }
+        .sheet(isPresented: $showAudioSettings) {
+            NativeReaderAudioSettingsScreen()
+        }
+        .sheet(isPresented: $showVisualSettings) {
+            NativeReaderVisualSettingsScreen()
+        }
+        .onAppear {
+            let initial = max(0, min(100,
+                startPercent > 0 ? startPercent : (latest.lastPercent ?? 0)))
+            currentPercent = initial
+            readingOffset = Int(Double(textLayout.totalCharacters) * Double(initial) / 100)
+            lastSavedPercent = initial
+        }
+        .onChange(of: sleepIndex) { _, _ in
+            applySleepTimer()
+        }
+        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
+            // Poll only audio playback. Updating the position from playback must
+            // NEVER call seek again or write JSON every second.
+            speech.refresh()
+            if speech.hasAudio && speech.isPlaying {
+                let updated = speech.audioPercent
+                if abs(updated - currentPercent) >= 2 {
+                    currentPercent = updated
                 }
+                if abs(updated - lastSavedPercent) >= 5 { persistPosition() }
             }
-            .onDisappear {
-                library.savePosition(document, percent: currentPercent)
-                speech.stop()
-            }
-            .accessibilityAction(named: Text("Añadir marca")) { addBookmark() }
-            .accessibilityAction(named: Text("Avanzar diez por ciento")) {
-                currentPercent = min(100, currentPercent + 10)
-            }
-            .accessibilityAction(named: Text("Retroceder diez por ciento")) {
-                currentPercent = max(0, currentPercent - 10)
-            }
+        }
+        .onDisappear {
+            persistPosition()
+            speech.stop()
+        }
+        .accessibilityAction(named: Text("Añadir marca")) { addBookmark() }
+        .accessibilityAction(named: Text("Avanzar diez por ciento")) {
+            move(to: min(100, currentPercent + 10))
+        }
+        .accessibilityAction(named: Text("Retroceder diez por ciento")) {
+            move(to: max(0, currentPercent - 10))
+        }
     }
 }

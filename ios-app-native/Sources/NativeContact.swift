@@ -24,14 +24,6 @@ struct NativeContactScreen: View {
         NativeContactLink(title: "Facebook — Tony Acosta", address: "https://facebook.com/tony.acostaacosta")
     ]
 
-    private let podcasts = [
-        NativeContactLink(title: "Spotify", address: "https://open.spotify.com/show/6z5BbrUhRuMANB5BFJfdfB"),
-        NativeContactLink(title: "Apple Podcasts", address: "https://podcasts.apple.com/es/podcast/canal-tifloacosta/id1567846456"),
-        NativeContactLink(title: "iVoox", address: "https://www.ivoox.com/podcast-canal-tifloacosta_sq_f11282163_1.html"),
-        NativeContactLink(title: "Podimo", address: "https://podimo.com/es/shows/canal-tifloacosta"),
-        NativeContactLink(title: "radio.es", address: "https://www.radio.es/podcast/canal-tifloacosta")
-    ]
-
     private func contactRow(_ item: NativeContactLink) -> some View {
         Group {
             if let url = item.url {
@@ -72,13 +64,6 @@ struct NativeContactScreen: View {
 
             Section("Redes sociales") {
                 ForEach(social) { item in
-                    contactRow(item)
-                }
-            }
-            .listRowBackground(TifloVisual.surfaceRaised)
-
-            Section("Escucha el podcast") {
-                ForEach(podcasts) { item in
                     contactRow(item)
                 }
             }

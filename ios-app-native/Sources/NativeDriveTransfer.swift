@@ -24,6 +24,15 @@ enum NativeDriveTransfer {
                 direct.queryItems?.append(key)
             }
             if let url = direct.url { candidates.append(url) }
+
+            // Algunos archivos grandes requieren confirm=t también en /uc;
+            // no es un método para acceder a archivos privados.
+            var confirmedOriginal = URLComponents(url: item.downloadURL, resolvingAgainstBaseURL: false)!
+            var query = confirmedOriginal.queryItems ?? []
+            query.removeAll { $0.name == "confirm" }
+            query.append(URLQueryItem(name: "confirm", value: "t"))
+            confirmedOriginal.queryItems = query
+            if let url = confirmedOriginal.url { candidates.append(url) }
         }
 
         var lastError: Error = NativeDownloadLinkError.webPageInsteadOfFile
@@ -68,7 +77,7 @@ enum NativeDriveTransfer {
               let expectedID = URLComponents(url: item.downloadURL, resolvingAgainstBaseURL: false)?
                 .queryItems?.first(where: { $0.name == "id" })?.value,
               let size = try? temporary.resourceValues(forKeys: [.fileSizeKey]).fileSize,
-              size > 0 && size <= 512 * 1024,
+              size > 0 && size <= 1024 * 1024,
               let data = try? Data(contentsOf: temporary),
               let html = String(data: data, encoding: .utf8) else { return nil }
 
@@ -95,7 +104,7 @@ enum NativeDriveTransfer {
                     guard let r = Range(input.range, in: form) else { continue }
                     let attrs = attributesOf(String(form[r]))
                     if let name = attrs["name"], let value = attrs["value"],
-                       ["id", "export", "confirm", "uuid", "resourcekey"].contains(name.lowercased()) {
+                       ["id", "export", "confirm", "uuid", "resourcekey", "at", "authuser"].contains(name.lowercased()) {
                         query.removeAll { $0.name == name }
                         query.append(URLQueryItem(name: name, value: value))
                     }

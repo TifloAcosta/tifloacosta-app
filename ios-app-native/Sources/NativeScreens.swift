@@ -173,7 +173,9 @@ struct NativeHomeScreen: View {
                 case .podcasts: NativePodcastScreen()
                 case .configuracion: NativeSettingsScreen()
                 case .contacto: NativeContactScreen()
-                case .favoritos, .libro, .privacidad:
+                case .libro: NativeBookScreen()
+                case .privacidad: NativePrivacyAccessibilityScreen()
+                case .favoritos:
                     NativePendingSectionScreen(title: destination.rawValue)
                 }
             }

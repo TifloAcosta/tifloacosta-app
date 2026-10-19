@@ -5,7 +5,7 @@ import AVFoundation
 import Translation
 import UniformTypeIdentifiers
 
-struct NativeReadingDocument: Codable, Identifiable {
+struct NativeReadingDocument: Codable, Identifiable, Hashable {
     let id: UUID
     var title: String
     let body: String

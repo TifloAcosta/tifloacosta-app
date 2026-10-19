@@ -10,7 +10,9 @@ const settings = read('NativeUpdatesSettings.swift');
 const english = read('en.lproj/Localizable.strings');
 
 test('Mi libro y Privacidad son pantallas nativas completas, no provisionales', () => {
-  assert.match(screens, /case \.libro: NativeBookScreen\(\)/);
+  assert.match(read('NativeContact.swift'), /NavigationLink\s*\{\s*NativeBookScreen\(\)/);
+  assert.doesNotMatch(screens, /case \.libro: NativeBookScreen\(\)/);
+  assert.doesNotMatch(screens, /case libro = "Mi libro"/);
   assert.match(screens, /case \.privacidad: NativePrivacyAccessibilityScreen\(\)/);
   assert.doesNotMatch(screens, /case \.favoritos, \.libro, \.privacidad/);
   assert.match(bookPrivacy, /struct NativeBookScreen: View/);

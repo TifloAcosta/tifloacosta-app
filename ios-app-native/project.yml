@@ -1,0 +1,46 @@
+name: TifloAcostaNative
+options:
+  developmentLanguage: es
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+targets:
+  TifloAcostaNative:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - Sources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.tifloacosta.nativeprototype
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: "TifloAcosta Nativa"
+        TARGETED_DEVICE_FAMILY: "1"
+        CODE_SIGNING_ALLOWED: NO
+        INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO
+    entitlements:
+      path: Sources/App.entitlements
+    dependencies:
+      - target: TifloAcostaShare
+  TifloAcostaShare:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: ShareExtension/ShareViewController.swift
+    # Keep the source-controlled plist intact: XcodeGen info.path would regenerate it,
+    # removing NSExtensionPointIdentifier and making App Store Connect reject the IPA.
+    entitlements:
+      path: ShareExtension/ShareExtension.entitlements
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.tifloacosta.nativeprototype.ShareExtension
+        INFOPLIST_FILE: ShareExtension/Info.plist
+        GENERATE_INFOPLIST_FILE: NO
+        CODE_SIGNING_ALLOWED: NO
+        SWIFT_VERSION: "5.9"
+        INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO
+        ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS: NO

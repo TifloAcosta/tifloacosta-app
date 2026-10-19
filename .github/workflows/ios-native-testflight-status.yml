@@ -1,0 +1,22 @@
+name: Comprobar TifloAcosta nativa en TestFlight Apple
+on:
+  push:
+    branches: [ios/testflight-integracion-20261019]
+    paths:
+      - '.github/workflows/ios-native-testflight-status.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Esperar procesamiento de Apple y habilitar el grupo interno
+        env:
+          API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+          API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+          API_PRIVATE: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+          TARGET_BUILD: "500002"
+        run: node .github/scripts/verify-native-testflight.mjs

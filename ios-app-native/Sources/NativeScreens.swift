@@ -12,7 +12,6 @@ private enum NativeDestination: String, CaseIterable, Hashable, Identifiable {
     case favoritos = "Favoritos"
     case videos = "Vídeos"
     case podcasts = "Podcast"
-    case libro = "Mi libro"
     case contacto = "Contacto y redes"
     case privacidad = "Privacidad y accesibilidad"
     case configuracion = "Configuración"
@@ -173,7 +172,6 @@ struct NativeHomeScreen: View {
                 case .podcasts: NativePodcastScreen()
                 case .configuracion: NativeSettingsScreen()
                 case .contacto: NativeContactScreen()
-                case .libro: NativeBookScreen()
                 case .privacidad: NativePrivacyAccessibilityScreen()
                 case .favoritos:
                     NativePendingSectionScreen(title: destination.rawValue)

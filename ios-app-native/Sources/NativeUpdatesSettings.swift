@@ -42,6 +42,7 @@ struct NativeUpdatesScreen: View {
 
 struct NativeSettingsScreen: View {
     @AppStorage("native-ios-color-scheme") private var schemeIndex = 0
+    @AppStorage("native-ios-language") private var languageIndex = 0
     @Environment(\.openURL) private var openURL
 
     private var version: String {
@@ -53,6 +54,18 @@ struct NativeSettingsScreen: View {
 
     var body: some View {
         Form {
+            Section("Idioma") {
+                NativeAdjustableChoice(
+                    title: "Idioma de la aplicación",
+                    choices: ["Español", "English"],
+                    selectedIndex: $languageIndex
+                )
+                Text("El idioma elegido se conserva. El cambio se aplica a la interfaz nativa; los títulos y contenidos de fuentes externas mantienen su idioma original.")
+                    .font(.footnote)
+                    .foregroundStyle(TifloVisual.secondaryText)
+            }
+            .listRowBackground(TifloVisual.surfaceRaised)
+
             Section("Aspecto") {
                 NativeAdjustableChoice(
                     title: "Interfaz",
@@ -60,8 +73,10 @@ struct NativeSettingsScreen: View {
                     selectedIndex: $schemeIndex
                 )
                 Text("Se respetan el tamaño del texto, el contraste y VoiceOver de iOS.")
-                    .font(.footnote).foregroundStyle(.secondary)
+                    .font(.footnote).foregroundStyle(TifloVisual.secondaryText)
             }
+            .listRowBackground(TifloVisual.surfaceRaised)
+
             Section("Aplicación") {
                 LabeledContent("Versión", value: version)
                 Text("TifloAcosta para iOS utiliza pantallas nativas.")
@@ -70,6 +85,7 @@ struct NativeSettingsScreen: View {
                     if let url = URL(string: "https://tifloacosta.com") { openURL(url) }
                 }
             }
+            .listRowBackground(TifloVisual.surfaceRaised)
         }
         .tifloScreenSurface()
         .navigationTitle("Configuración")

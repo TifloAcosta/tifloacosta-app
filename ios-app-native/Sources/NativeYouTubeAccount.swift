@@ -121,21 +121,33 @@ final class NativeYouTubeAccountStore: NSObject, ObservableObject {
         case "COMMENT_TOO_LONG": return "El comentario es demasiado largo."
         case "YOUTUBE_FORBIDDEN": return "YouTube no permite esta operación con esta cuenta."
         case "CHANNEL_NOT_FOUND": return "No se encuentra el canal de YouTube."
-        default: return "No se pudo completar la operación con YouTube."
+        case "NOT_FOUND": return "El servicio no reconoce la consulta del vídeo. Revisa la versión de TifloAcosta."
+        case "YOUTUBE_ERROR": return "YouTube no ha podido responder a la consulta del vídeo. Vuelve a intentarlo."
+        case "NETWORK": return "No se pudo conectar con el servicio de YouTube. Comprueba la conexión."
+        default: return "No se pudo completar la operación con YouTube (\(code))."
         }
     }
 
-    private func endpoint(_ path: String) -> URL {
-        baseURL.appendingPathComponent(path)
+    /// Las consultas se pasan como URLQueryItem, nunca dentro de un componente
+    /// de ruta: appendingPathComponent("state?videoId=...") codifica ? como %3F
+    /// y el servidor devuelve NOT_FOUND aunque Google haya autorizado la cuenta.
+    private func endpoint(_ path: String, queryItems: [URLQueryItem] = []) -> URL {
+        var components = URLComponents(
+            url: baseURL.appendingPathComponent(path),
+            resolvingAgainstBaseURL: false
+        )!
+        components.queryItems = queryItems.isEmpty ? nil : queryItems
+        return components.url!
     }
 
     private func call<T: Decodable>(
         _ path: String,
         method: String = "GET",
         body: [String: String]? = nil,
+        queryItems: [URLQueryItem] = [],
         bearer: String? = nil
     ) async throws -> T {
-        var request = URLRequest(url: endpoint(path))
+        var request = URLRequest(url: endpoint(path, queryItems: queryItems))
         request.httpMethod = method
         request.timeoutInterval = 25
         request.setValue("application/json", forHTTPHeaderField: "Accept")
@@ -291,7 +303,10 @@ final class NativeYouTubeAccountStore: NSObject, ObservableObject {
         rating = nil
         guard authenticated else { return }
         do {
-            let state: VideoState = try await call("state?videoId=\(videoID)")
+            let state: VideoState = try await call(
+                "state",
+                queryItems: [URLQueryItem(name: "videoId", value: videoID)]
+            )
             guard activeVideoID == videoID else { return }
             subscribed = state.subscribed
             rating = state.rating

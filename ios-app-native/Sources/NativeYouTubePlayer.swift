@@ -393,6 +393,13 @@ struct NativeYouTubePlayerScreen: View {
                         .foregroundStyle(TifloVisual.secondaryText)
                         .accessibilityAddTraits(.updatesFrequently)
                 }
+                if account.authenticated && (account.subscribed == nil || account.rating == nil) {
+                    Button("Reintentar consulta de Me gusta y suscripciones") {
+                        Task { await account.loadState(videoID: video.id) }
+                    }
+                    .disabled(account.busy)
+                    .buttonStyle(TifloSecondaryActionStyle())
+                }
                 if !account.authenticated {
                     Text("Para indicar Me gusta, suscribirte o comentar, debes iniciar sesión en Google. Buscar y reproducir vídeos no requiere una cuenta.")
                         .foregroundStyle(TifloVisual.secondaryText)

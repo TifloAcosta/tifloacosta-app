@@ -52,6 +52,7 @@ test('getAccountVideoState returns normalized subscription and rating', async ()
 test('getAccountVideoState normalizes unknown or absent ratings to none', async () => {
   const state = await getAccountVideoState(token, videoId, async url => {
     if (String(url).includes('/channels?')) return jsonResponse({ items: [{ id: 'CHANNEL_ID' }] });
+    if (String(url).includes('/videos?')) return jsonResponse({ items: [{ snippet: { channelId: 'CHANNEL_ID' } }] });
     if (String(url).includes('/subscriptions?')) return jsonResponse({ items: [] });
     return jsonResponse({ items: [{ videoId, rating: 'unspecified-value' }] });
   });
@@ -102,7 +103,7 @@ test('comment resolves the selected video channel and includes channelId in a to
   const calls = [];
   const result = await comment(token, videoId, 'Texto del comentario', async (url, options) => {
     calls.push({ url: String(url), options });
-    if (String(url).includes('/channels?')) return jsonResponse({ items: [{ id: 'CHANNEL_ID' }] });
+    if (String(url).includes('/videos?')) return jsonResponse({ items: [{ snippet: { channelId: 'CHANNEL_ID' } }] });
     return jsonResponse({ id: 'thread-1' });
   });
   assert.deepEqual(result, { commented: true });
@@ -124,7 +125,7 @@ test('comment preserves safe YouTube rejection reasons for diagnosis', async () 
   await assert.rejects(
     () => comment(token, videoId, 'hello', async url => {
       calls += 1;
-      if (String(url).includes('/channels?')) return jsonResponse({ items: [{ id: 'CHANNEL_ID' }] });
+      if (String(url).includes('/videos?')) return jsonResponse({ items: [{ snippet: { channelId: 'CHANNEL_ID' } }] });
       return jsonResponse({
         error: { message: 'private Google body', errors: [{ reason: 'ineligibleAccount' }] }
       }, 403);
@@ -145,7 +146,7 @@ test('invalid video IDs are rejected before any request', async () => {
 test('YouTube errors are normalized without exposing response bodies', async () => {
   await assert.rejects(
     () => comment(token, videoId, 'hello', async url => {
-      if (String(url).includes('/channels?')) return jsonResponse({ items: [{ id: 'CHANNEL_ID' }] });
+      if (String(url).includes('/videos?')) return jsonResponse({ items: [{ snippet: { channelId: 'CHANNEL_ID' } }] });
       return jsonResponse({
         error: { message: 'private Google body', errors: [{ reason: 'commentsDisabled' }] }
       }, 403);

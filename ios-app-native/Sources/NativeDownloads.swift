@@ -13,6 +13,7 @@ struct NativeDownload: Identifiable {
 final class NativeDownloadStore: ObservableObject {
     @Published private(set) var downloads: [NativeDownload] = []
     @Published private(set) var analysis: NativeAnalyzedDownload?
+    @Published private(set) var canDownload = false
     @Published var checking = false
     @Published var busy = false
     @Published var message: String?
@@ -41,6 +42,7 @@ final class NativeDownloadStore: ObservableObject {
 
     func clearAnalysis() {
         analysis = nil
+        canDownload = false
         message = nil
     }
 
@@ -48,11 +50,13 @@ final class NativeDownloadStore: ObservableObject {
     // server where possible without saving a page as a document.
     func analyze(_ raw: String) async {
         analysis = nil
+        canDownload = false
         message = nil
         checking = true
         defer { checking = false }
         do {
             let item = try NativeAnalyzedDownload.inspect(raw)
+            analysis = item
             var note = "El servidor se comprobará al descargar."
             var request = URLRequest(url: item.downloadURL)
             request.httpMethod = "HEAD"
@@ -73,7 +77,7 @@ final class NativeDownloadStore: ObservableObject {
                 // successful accessibility check when none was possible.
                 note = "No se pudo verificar el acceso previo. Se comprobará al descargar."
             }
-            analysis = item
+            canDownload = true
             message = "\(item.type) reconocido. \(note)"
         } catch {
             message = error.localizedDescription
@@ -185,7 +189,7 @@ struct NativeDownloadsScreen: View {
                             announce()
                         }
                     }
-                    .disabled(store.busy || store.checking)
+                    .disabled(store.busy || store.checking || !store.canDownload)
                     Link("Abrir enlace original", destination: analysis.sourceURL)
                         .accessibilityHint("Abre el enlace fuera de TifloAcosta para revisar permisos.")
                 }

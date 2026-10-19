@@ -217,16 +217,36 @@ final class NativeYouTubeAccountStore: NSObject, ObservableObject {
                 guard let self else { return }
                 self.browserSession = nil
                 self.presentationContext = nil
-                guard error == nil, let callback,
-                      callback.scheme == "tifloacosta", callback.host == "youtube-auth",
-                      let ticket = URLComponents(url: callback, resolvingAgainstBaseURL: false)?
-                        .queryItems?.first(where: { $0.name == "ticket" })?.value else {
-                    self.busy = false
-                    if error != nil {
-                        self.announce("Inicio de sesión cancelado o no autorizado.")
-                    } else {
-                        self.announce("Google no pudo completar la autorización.")
+                self.busy = false
+                if let error {
+                    let code = (error as NSError).code
+                    let canceled = (error as NSError).domain == ASWebAuthenticationSessionError.errorDomain
+                        && code == ASWebAuthenticationSessionError.Code.canceledLogin.rawValue
+                    self.announce(canceled
+                        ? "Se ha cancelado el inicio de sesión con Google."
+                        : "No se pudo abrir o completar la identificación segura de Google. Comprueba la conexión e inténtalo de nuevo.")
+                    return
+                }
+                guard let callback, callback.scheme == "tifloacosta",
+                      callback.host == "youtube-auth",
+                      let query = URLComponents(url: callback, resolvingAgainstBaseURL: false)?.queryItems else {
+                    self.announce("Google no devolvió una respuesta válida a TifloAcosta.")
+                    return
+                }
+                if let reason = query.first(where: { $0.name == "error" })?.value {
+                    switch reason {
+                    case "denied":
+                        self.announce("No se han concedido los permisos solicitados por YouTube. Revisa el consentimiento de Google.")
+                    case "missing_refresh_token":
+                        self.announce("Google no ha facilitado la autorización necesaria para mantener la sesión. Repite el acceso y acepta los permisos.")
+                    default:
+                        self.announce("Google no pudo completar la autorización. Comprueba los permisos de la aplicación de TifloAcosta en Google.")
                     }
+                    return
+                }
+                guard let ticket = query.first(where: { $0.name == "ticket" })?.value,
+                      !ticket.isEmpty else {
+                    self.announce("La respuesta de Google no contiene la autorización esperada.")
                     return
                 }
                 await self.exchange(ticket: ticket, verifier: verifier)
@@ -255,7 +275,10 @@ final class NativeYouTubeAccountStore: NSObject, ObservableObject {
             announce("Sesión de YouTube iniciada.")
             if let videoID = activeVideoID { await loadState(videoID: videoID) }
         } catch {
-            announce("No se pudo completar la autorización de Google.")
+            let code = (error as? YouTubeFailure)?.code ?? "NETWORK"
+            announce(code == "NATIVE_AUTH_INVALID"
+                ? "La autorización recibida por TifloAcosta ha caducado o no es válida. Inicia sesión nuevamente."
+                : "No se pudo validar la sesión de Google con el servicio de YouTube. Comprueba la conexión e inténtalo de nuevo.")
         }
     }
 

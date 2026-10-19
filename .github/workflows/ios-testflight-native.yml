@@ -71,8 +71,10 @@ jobs:
       - name: Obtener versión SwiftUI nativa comprobada
         uses: actions/checkout@v4
         with:
-          ref: 107cbabff368ecd67d511a26b023a2f0f04c2e3b
+          ref: b991246560bbed42961d59f530f231c80af1f57b
           path: native-source
+      - name: Probar contratos de Recursos en interfaz SwiftUI
+        run: node --test native-source/ios-app-native/tests/*.test.mjs
       - name: Comprobar separación total de pantallas HTML
         run: |
           set -euo pipefail

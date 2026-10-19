@@ -292,7 +292,8 @@ export async function searchVideos(apiKey, searchTerm, pageToken = '', fetchImpl
         title: String(snippet.title || ''),
         channelTitle: String(snippet.channelTitle || ''),
         publishedAt: String(snippet.publishedAt || ''),
-        description: String(snippet.description || '')
+        description: String(snippet.description || ''),
+        thumbnail: String(snippet?.thumbnails?.medium?.url || snippet?.thumbnails?.default?.url || '')
       };
       if (VIDEO_ID_RE.test(id)) {
         return [{ ...result, kind: 'video', id, durationSeconds: durations.get(id) || 0 }];

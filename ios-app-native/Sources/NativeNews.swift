@@ -78,6 +78,7 @@ struct NativeNewsScreen: View {
     @EnvironmentObject private var library: NativeReaderLibrary
     @Environment(\.openURL) private var openURL
 
+    @State private var mediaKindIndex = 0
     @State private var categoryIndex = 0
     @State private var query = ""
     @State private var visibleCount = 10
@@ -171,14 +172,32 @@ struct NativeNewsScreen: View {
 
     var body: some View {
         List {
-            Section("Escuchar y ver") {
-                NavigationLink {
-                    NativeMediaScreen()
-                } label: {
-                    Label("Buscar podcasts y canales de YouTube", systemImage: "play.rectangle")
-                        .foregroundStyle(TifloVisual.primaryText)
+            Section("Podcasts y canales de YouTube") {
+                NativeAdjustableChoice(
+                    title: "Seleccionar contenidos multimedia",
+                    choices: [
+                        "Selecciona un formato",
+                        "Podcasts",
+                        "Canales de YouTube",
+                        "Todos los formatos"
+                    ],
+                    selectedIndex: $mediaKindIndex
+                )
+
+                if mediaKindIndex > 0 {
+                    NavigationLink {
+                        NativeMediaScreen(
+                            initialFormatIndex: mediaKindIndex == 1 ? 2
+                                : mediaKindIndex == 2 ? 3 : 1
+                        )
+                    } label: {
+                        Label("Buscar fuentes y contenidos multimedia", systemImage: "play.rectangle")
+                            .foregroundStyle(TifloVisual.primaryText)
+                            .frame(minHeight: 44)
+                    }
+                    .accessibilityLabel("Buscar fuentes y contenidos multimedia")
+                    .accessibilityHint("Doble toque para elegir la fuente, idioma y búsqueda del formato seleccionado.")
                 }
-                .accessibilityHint("Abre un selector de formatos y fuentes multimedia.")
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 

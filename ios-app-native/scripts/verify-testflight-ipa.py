@@ -52,7 +52,7 @@ with zipfile.ZipFile(files[0]) as z:
                                  ' carece del App Group ' + group)
             try:
                 signed = subprocess.check_output(
-                    ['codesign', '-d', '--entitlements', '-', str(bundle)],
+                    ['codesign', '-d', '--entitlements', '-', '--xml', str(bundle)],
                     stderr=subprocess.DEVNULL
                 )
                 entitlements = plistlib.loads(signed)

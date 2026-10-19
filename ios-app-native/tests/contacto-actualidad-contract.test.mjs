@@ -7,6 +7,7 @@ const contact = native('NativeContact.swift');
 const screens = native('NativeScreens.swift');
 const news = native('NativeNews.swift');
 const media = native('NativeMedia.swift');
+const inline = native('NativeMediaInline.swift');
 const web = readFileSync(new URL('../../index.html', import.meta.url), 'utf8');
 
 test('Contacto y redes existe como sección nativa operativa, no provisional', () => {
@@ -53,9 +54,9 @@ test('Actualidad muestra selector de formatos multimedia antes de los resultados
   for (const choice of ['Selecciona un formato','Podcasts','Canales de YouTube','Todos los formatos']) {
     assert.ok(news.includes('"' + choice + '"'));
   }
-  assert.match(news, /NativeMediaScreen\(\s*initialFormatIndex:/);
+  assert.match(news, /NativeMediaInlineContent\(formatIndex: mediaKindIndex\)/);
   assert.match(media, /_formatIndex = State\(initialValue:/);
-  assert.match(media, /title: "Fuente o canal"/);
-  assert.match(media, /title: "Idioma"/);
-  assert.match(media, /prompt: "Buscar podcasts y canales"/);
+  assert.match(inline, /title: "Fuente o canal"/);
+  assert.match(inline, /title: "Idioma"/);
+  assert.match(inline, /TextField\("Buscar podcasts y vídeos"/);
 });

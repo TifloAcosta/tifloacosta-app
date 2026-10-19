@@ -186,99 +186,90 @@ struct NativeNewsScreen: View {
                     selectedIndex: $mediaKindIndex
                 )
 
-                if mediaKindIndex > 0 {
-                    NavigationLink {
-                        NativeMediaScreen(
-                            initialFormatIndex: mediaKindIndex == 1 ? 2
-                                : mediaKindIndex == 2 ? 3 : 1
-                        )
-                    } label: {
-                        Label("Buscar fuentes y contenidos multimedia", systemImage: "play.rectangle")
-                            .foregroundStyle(TifloVisual.primaryText)
-                            .frame(minHeight: 44)
-                    }
-                    .accessibilityLabel("Buscar fuentes y contenidos multimedia")
-                    .accessibilityHint("Doble toque para elegir la fuente, idioma y búsqueda del formato seleccionado.")
-                }
+
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 
-            Section {
-                NativeAdjustableChoice(
-                    title: "Categoría",
-                    choices: categoryChoices,
-                    selectedIndex: $categoryIndex
-                )
-            }
-            .listRowBackground(TifloVisual.surfaceRaised)
-
-            if categoryIndex == 0 && query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                Text("Selecciona una categoría o escribe una búsqueda para consultar noticias.")
-                    .foregroundStyle(TifloVisual.secondaryText)
-                    .listRowBackground(TifloVisual.surfaceRaised)
+            if mediaKindIndex > 0 {
+                NativeMediaInlineContent(formatIndex: mediaKindIndex)
             } else {
-                Section("Noticias") {
-                    Text("\(matchingNews.count) noticias encontradas")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                    if matchingNews.isEmpty {
-                        Text("No hay noticias que coincidan con esta selección.")
+                Section {
+                    NativeAdjustableChoice(
+                        title: "Categoría",
+                        choices: categoryChoices,
+                        selectedIndex: $categoryIndex
+                    )
+                }
+                .listRowBackground(TifloVisual.surfaceRaised)
+
+                if categoryIndex == 0 && query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    Text("Selecciona una categoría o escribe una búsqueda para consultar noticias.")
+                        .foregroundStyle(TifloVisual.secondaryText)
+                        .listRowBackground(TifloVisual.surfaceRaised)
+                } else {
+                    Section("Noticias") {
+                        Text("\(matchingNews.count) noticias encontradas")
+                            .font(.subheadline)
                             .foregroundStyle(.secondary)
-                    }
-                    ForEach(Array(matchingNews.prefix(visibleCount))) { item in
-                        NavigationLink {
-                            NativeNewsArticleScreen(item: item)
-                        } label: {
-                            HStack(alignment: .top, spacing: 12) {
-                                RoundedRectangle(cornerRadius: 2)
-                                    .fill(TifloVisual.brandRed)
-                                    .frame(width: 4, height: 48)
-                                    .accessibilityHidden(true)
-                                VStack(alignment: .leading, spacing: 5) {
-                                    Text(item.title).font(.headline)
-                                    Text("Medio: \(NativeNewsMetadata.source(item))")
-                                        .font(.subheadline).foregroundStyle(TifloVisual.secondaryText)
-                                    if let published = NativeNewsMetadata.publication(item.publishedAt) {
-                                        Text("Publicado: \(published)")
+                        if matchingNews.isEmpty {
+                            Text("No hay noticias que coincidan con esta selección.")
+                                .foregroundStyle(.secondary)
+                        }
+                        ForEach(Array(matchingNews.prefix(visibleCount))) { item in
+                            NavigationLink {
+                                NativeNewsArticleScreen(item: item)
+                            } label: {
+                                HStack(alignment: .top, spacing: 12) {
+                                    RoundedRectangle(cornerRadius: 2)
+                                        .fill(TifloVisual.brandRed)
+                                        .frame(width: 4, height: 48)
+                                        .accessibilityHidden(true)
+                                    VStack(alignment: .leading, spacing: 5) {
+                                        Text(item.title).font(.headline)
+                                        Text("Medio: \(NativeNewsMetadata.source(item))")
                                             .font(.subheadline).foregroundStyle(TifloVisual.secondaryText)
-                                    }
-                                    if let summary = item.summary, !summary.isEmpty {
-                                        Text(summary)
-                                            .font(.subheadline)
-                                            .foregroundStyle(TifloVisual.secondaryText)
-                                            .lineLimit(2)
-                                            .accessibilityHidden(true)
+                                        if let published = NativeNewsMetadata.publication(item.publishedAt) {
+                                            Text("Publicado: \(published)")
+                                                .font(.subheadline).foregroundStyle(TifloVisual.secondaryText)
+                                        }
+                                        if let summary = item.summary, !summary.isEmpty {
+                                            Text(summary)
+                                                .font(.subheadline)
+                                                .foregroundStyle(TifloVisual.secondaryText)
+                                                .lineLimit(2)
+                                                .accessibilityHidden(true)
+                                        }
                                     }
                                 }
                             }
+                            .accessibilityElement(children: .ignore)
+                            .accessibilityLabel(NativeNewsMetadata.accessibilitySummary(item))
+                            .accessibilityHint("Doble toque para leer. Acciones: Leer, Guardar en TifloLector, Compartir y Abrir fuente original.")
+                            .accessibilityAction(named: Text("Leer")) { read(item) }
+                            .accessibilityAction(named: Text("Guardar en TifloLector")) { save(item) }
+                            .accessibilityAction(named: Text("Compartir")) { share(item) }
+                            .accessibilityAction(named: Text("Abrir fuente original")) { openOriginal(item) }
+                            .accessibilityAction(named: Text(favorites.contains(.news, item: item)
+                                ? "Quitar de favoritos" : "Añadir a favoritos")) {
+                                let added = favorites.toggle(.news, item: item)
+                                announce(added ? "Añadido a Favoritos" : "Eliminado de Favoritos")
+                            }
                         }
-                        .accessibilityElement(children: .ignore)
-                        .accessibilityLabel(NativeNewsMetadata.accessibilitySummary(item))
-                        .accessibilityHint("Doble toque para leer. Acciones: Leer, Guardar en TifloLector, Compartir y Abrir fuente original.")
-                        .accessibilityAction(named: Text("Leer")) { read(item) }
-                        .accessibilityAction(named: Text("Guardar en TifloLector")) { save(item) }
-                        .accessibilityAction(named: Text("Compartir")) { share(item) }
-                        .accessibilityAction(named: Text("Abrir fuente original")) { openOriginal(item) }
-                        .accessibilityAction(named: Text(favorites.contains(.news, item: item)
-                            ? "Quitar de favoritos" : "Añadir a favoritos")) {
-                            let added = favorites.toggle(.news, item: item)
-                            announce(added ? "Añadido a Favoritos" : "Eliminado de Favoritos")
+                        if visibleCount < matchingNews.count {
+                            Button("Mostrar diez más") { visibleCount += 10 }
                         }
                     }
-                    if visibleCount < matchingNews.count {
-                        Button("Mostrar diez más") { visibleCount += 10 }
-                    }
+                    .listRowBackground(TifloVisual.surfaceRaised)
                 }
-                .listRowBackground(TifloVisual.surfaceRaised)
-            }
 
-            if let status {
-                Text(status).font(.footnote).foregroundStyle(.secondary)
-            }
-            if let error = catalog.error {
-                Text(error).foregroundStyle(.secondary)
-                Button("Actualizar noticias") {
-                    Task { await catalog.refresh() }
+                if let status {
+                    Text(status).font(.footnote).foregroundStyle(.secondary)
+                }
+                if let error = catalog.error {
+                    Text(error).foregroundStyle(.secondary)
+                    Button("Actualizar noticias") {
+                        Task { await catalog.refresh() }
+                    }
                 }
             }
         }

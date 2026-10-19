@@ -251,7 +251,7 @@ struct NativeMediaScreen: View {
     }
 }
 
-private struct NativeMediaDetailScreen: View {
+struct NativeMediaDetailScreen: View {
     let item: NativeMediaItem
     @Environment(\.openURL) private var openURL
 

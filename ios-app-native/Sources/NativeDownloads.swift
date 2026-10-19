@@ -101,7 +101,7 @@ final class NativeDownloadStore: ObservableObject {
         defer { busy = false }
         message = "Descargando archivo…"
         do {
-            let (temporary, response) = try await URLSession.shared.download(from: item.downloadURL)
+            let (temporary, response) = try await NativeDriveTransfer.download(item)
             try NativeAnalyzedDownload.verifyResponse(response, for: item)
             let size = (try? temporary.resourceValues(forKeys: [.fileSizeKey]).fileSize) ?? 0
             guard size > 0 else { throw NativeDownloadLinkError.emptyFile }

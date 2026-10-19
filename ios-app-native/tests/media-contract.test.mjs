@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 
 const source = name => readFileSync(new URL('../Sources/' + name, import.meta.url), 'utf8');
 const media = source('NativeMedia.swift');
+const inline = source('NativeMediaInline.swift');
 const news = source('NativeNews.swift');
 const app = source('TifloAcostaNativeApp.swift');
 const home = source('NativeScreens.swift');
@@ -11,8 +12,10 @@ const home = source('NativeScreens.swift');
 test('Actualidad enlaza Escuchar y ver sin reemplazar el selector de noticias', () => {
   assert.match(news, /NativeAdjustableChoice\(\s*title: "Seleccionar contenidos multimedia"/);
   assert.match(news, /selectedIndex: \$mediaKindIndex/);
-  assert.match(news, /NavigationLink\s*\{\s*NativeMediaScreen\(\s*initialFormatIndex:/);
-  assert.match(media, /init\(initialFormatIndex: Int = 0\)/);
+  assert.match(news, /NativeMediaInlineContent\(formatIndex: mediaKindIndex\)/);
+  assert.doesNotMatch(news, /NativeMediaScreen\(\s*initialFormatIndex:/);
+  assert.match(inline, /\.task \{ await store\.refresh\(\) \}/);
+  assert.match(inline, /TextField\("Buscar podcasts y vídeos"/);
   assert.match(news, /NativeAdjustableChoice\(\s*title: "Categoría"/);
   assert.match(news, /accessibilityLabel\(NativeNewsMetadata\.accessibilitySummary\(item\)\)/);
   assert.match(news, /\.accessibilityAction\(named: Text\("Guardar en TifloLector"\)\)/);
@@ -51,4 +54,17 @@ test('El catálogo editorial multimedia contiene podcasts y canales de vídeo', 
   const snapshot = JSON.parse(readFileSync(new URL('../../actualidad-media.json', import.meta.url), 'utf8'));
   assert.ok(snapshot.some(item => item.type === 'audio' && item.sourceName && item.originalUrl));
   assert.ok(snapshot.some(item => item.type === 'video' && item.sourceName && item.originalUrl));
+});
+
+test('Los contenidos multimedia aparecen directamente en Actualidad con filtros y diez resultados', () => {
+  assert.match(inline, /Section\("Filtrar contenidos multimedia"\)/);
+  assert.match(inline, /title: "Fuente o canal"/);
+  assert.match(inline, /title: "Idioma"/);
+  assert.match(inline, /Section\("Escuchar y ver"\)/);
+  assert.match(inline, /filteredItems\.prefix\(visibleCount\)/);
+  assert.match(inline, /Button\("Mostrar diez más"\)/);
+  assert.match(inline, /accessibilityAction\(named: Text\(item\.openLabel\)\)/);
+  assert.match(inline, /if let error = store\.error/);
+  assert.match(inline, /Actualizar contenidos multimedia/);
+  assert.match(news, /if mediaKindIndex > 0 \{/);
 });

@@ -1,0 +1,126 @@
+import Foundation
+
+/// Descarga archivos públicos de Drive sin confundir las páginas HTML de confirmación
+/// con documentos. No salta permisos ni intenta acceder a archivos privados.
+enum NativeDriveTransfer {
+    static func download(_ item: NativeAnalyzedDownload) async throws -> (URL, URLResponse) {
+        guard item.isGoogleDrive else {
+            return try await URLSession.shared.download(from: item.downloadURL)
+        }
+
+        var candidates = [item.downloadURL]
+        // Drive puede servir el archivo desde su dominio de contenidos en lugar de /uc.
+        if item.downloadURL.host == "drive.google.com",
+           let id = URLComponents(url: item.downloadURL, resolvingAgainstBaseURL: false)?
+               .queryItems?.first(where: { $0.name == "id" })?.value {
+            var direct = URLComponents(string: "https://drive.usercontent.google.com/download")!
+            direct.queryItems = [
+                URLQueryItem(name: "id", value: id),
+                URLQueryItem(name: "export", value: "download"),
+                URLQueryItem(name: "confirm", value: "t")
+            ]
+            if let key = URLComponents(url: item.downloadURL, resolvingAgainstBaseURL: false)?
+                .queryItems?.first(where: { $0.name == "resourcekey" }) {
+                direct.queryItems?.append(key)
+            }
+            if let url = direct.url { candidates.append(url) }
+        }
+
+        var lastError: Error = NativeDownloadLinkError.webPageInsteadOfFile
+        for candidate in candidates {
+            do {
+                let (temporary, response) = try await URLSession.shared.download(from: candidate)
+                do {
+                    try NativeAnalyzedDownload.verifyResponse(response, for: item)
+                    return (temporary, response)
+                } catch NativeDownloadLinkError.webPageInsteadOfFile {
+                    // Algunos archivos grandes requieren aceptar la confirmación de Drive.
+                    // Solo seguimos formularios de descarga HTTPS en dominios oficiales.
+                    if let confirmation = confirmationURL(temporary, response: response, item: item) {
+                        let (file, confirmedResponse) = try await URLSession.shared.download(from: confirmation)
+                        try NativeAnalyzedDownload.verifyResponse(confirmedResponse, for: item)
+                        return (file, confirmedResponse)
+                    }
+                    lastError = NativeDownloadLinkError.webPageInsteadOfFile
+                }
+            } catch {
+                lastError = error
+                if let linkError = error as? NativeDownloadLinkError {
+                    switch linkError {
+                    case .accessDenied, .notFound:
+                        // No convertir un rechazo explícito en un resultado falso.
+                        throw error
+                    default: break
+                    }
+                }
+            }
+        }
+        throw lastError
+    }
+
+    private static func confirmationURL(
+        _ temporary: URL, response: URLResponse, item: NativeAnalyzedDownload
+    ) -> URL? {
+        guard item.downloadURL.host == "drive.google.com",
+              let expectedID = URLComponents(url: item.downloadURL, resolvingAgainstBaseURL: false)?
+                .queryItems?.first(where: { $0.name == "id" })?.value,
+              let size = try? temporary.resourceValues(forKeys: [.fileSizeKey]).fileSize,
+              size > 0 && size <= 512 * 1024,
+              let data = try? Data(contentsOf: temporary),
+              let html = String(data: data, encoding: .utf8) else { return nil }
+
+        let pattern = #"<form\b[^>]*>[\s\S]*?</form>"#
+        guard let forms = try? NSRegularExpression(pattern: pattern, options: [.caseInsensitive]) else {
+            return nil
+        }
+        let matches = forms.matches(in: html, range: NSRange(html.startIndex..., in: html))
+        for match in matches {
+            guard let range = Range(match.range, in: html) else { continue }
+            let form = String(html[range])
+            guard let opening = form.range(of: ">", options: .literal) else { continue }
+            let attributes = attributesOf(String(form[..<opening.upperBound]))
+            guard let action = attributes["action"],
+                  let url = URL(string: action.replacingOccurrences(of: "&amp;", with: "&"),
+                                relativeTo: response.url)?.absoluteURL,
+                  var components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+                  validHost(components.host), components.scheme == "https" else { continue }
+
+            var query = components.queryItems ?? []
+            let inputPattern = #"<input\b[^>]*>"#
+            if let inputs = try? NSRegularExpression(pattern: inputPattern, options: [.caseInsensitive]) {
+                for input in inputs.matches(in: form, range: NSRange(form.startIndex..., in: form)) {
+                    guard let r = Range(input.range, in: form) else { continue }
+                    let attrs = attributesOf(String(form[r]))
+                    if let name = attrs["name"], let value = attrs["value"],
+                       ["id", "export", "confirm", "uuid", "resourcekey"].contains(name.lowercased()) {
+                        query.removeAll { $0.name == name }
+                        query.append(URLQueryItem(name: name, value: value))
+                    }
+                }
+            }
+            guard query.first(where: { $0.name == "id" })?.value == expectedID,
+                  query.contains(where: { $0.name == "confirm" }) else { continue }
+            components.queryItems = query
+            if let confirmed = components.url { return confirmed }
+        }
+        return nil
+    }
+
+    private static func validHost(_ host: String?) -> Bool {
+        guard let host = host?.lowercased() else { return false }
+        return host == "drive.google.com" || host == "drive.usercontent.google.com"
+    }
+
+    private static func attributesOf(_ tag: String) -> [String: String] {
+        let pattern = #"([A-Za-z_-]+)\s*=\s*["']([^"']*)["']"#
+        guard let regex = try? NSRegularExpression(pattern: pattern) else { return [:] }
+        var attributes: [String: String] = [:]
+        for match in regex.matches(in: tag, range: NSRange(tag.startIndex..., in: tag)) {
+            guard match.numberOfRanges == 3,
+                  let name = Range(match.range(at: 1), in: tag),
+                  let value = Range(match.range(at: 2), in: tag) else { continue }
+            attributes[String(tag[name]).lowercased()] = String(tag[value])
+        }
+        return attributes
+    }
+}

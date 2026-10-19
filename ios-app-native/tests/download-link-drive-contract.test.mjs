@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 const read = name => readFileSync(new URL('../Sources/' + name, import.meta.url), 'utf8');
 const home = read('NativeScreens.swift'), contact = read('NativeContact.swift');
 const downloads = read('NativeDownloads.swift'), drive = read('NativeDownloadLink.swift');
+const transfer = read('NativeDriveTransfer.swift');
 
 test('Mi libro se abre desde Contacto y no aparece en Inicio', () => {
   assert.ok(!home.includes('case libro = "Mi libro"'));
@@ -37,4 +38,15 @@ test('Mis descargas conserva importar, compartir y eliminar accesibles', () => {
     assert.ok(downloads.includes('.accessibilityAction(named: Text("' + label + '"))'));
   }
   assert.ok(downloads.includes('confirmationDialog('));
+});
+
+test('Descargas gestiona la confirmación de Drive y no guarda una página HTML', () => {
+  assert.match(downloads, /NativeDriveTransfer\.download\(item\)/);
+  assert.match(transfer, /https:\/\/drive\.usercontent\.google\.com\/download/);
+  assert.match(transfer, /confirmationURL\(temporary, response: response, item: item\)/);
+  assert.match(transfer, /verifyResponse\(confirmedResponse, for: item\)/);
+  assert.match(transfer, /size <= 512 \* 1024/);
+  assert.match(transfer, /validHost\(components\.host\)/);
+  assert.match(transfer, /components\.scheme == "https"/);
+  assert.match(transfer, /query\.first\(where: \{ \$0\.name == "id" \}\)\?\.value == expectedID/);
 });

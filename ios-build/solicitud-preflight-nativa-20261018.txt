@@ -6,3 +6,9 @@ Modo: generar y validar IPA firmada SIN subirla a Apple.
 Mantener la beta actual intacta hasta que el preflight termine correctamente.
 No se certifica paridad funcional de TifloLector, Vídeos ni de las secciones nativas aún pendientes.
 Solicitud autorizada por usuario para avanzar hasta la prueba física de iPhone.
+
+PRE-FLIGHT RECURSOS DEL 19-10-2026
+Fuente nativa: b991246560bbed42961d59f530f231c80af1f57b.
+Alcance exclusivo: acciones Leer, Guardar en TifloLector, Descargar en Archivos, Compartir; renderizado de documentos HTML extensos con párrafos nativos.
+Conservar selector de categorías y estética SwiftUI aprobada. Mantener Android y web intactos.
+Verificar tests y compilación firmada sin distribuir; publicación posterior por solicitud de envío separada.

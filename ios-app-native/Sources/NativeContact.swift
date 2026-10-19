@@ -55,6 +55,19 @@ struct NativeContactScreen: View {
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 
+            Section("Mi libro") {
+                NavigationLink {
+                    NativeBookScreen()
+                } label: {
+                    Label("La vida vista desde donde estoy", systemImage: "book.closed")
+                        .foregroundStyle(TifloVisual.primaryText)
+                        .frame(minHeight: 44)
+                }
+                .accessibilityLabel("Mi libro: La vida vista desde donde estoy")
+                .accessibilityHint("Doble toque para conocer el libro y consultar las ediciones disponibles.")
+            }
+            .listRowBackground(TifloVisual.surfaceRaised)
+
             Section("Contacto directo") {
                 ForEach(direct) { item in
                     contactRow(item)

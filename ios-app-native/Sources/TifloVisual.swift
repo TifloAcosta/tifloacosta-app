@@ -58,6 +58,39 @@ enum TifloVisual {
     }
 }
 
+/// Preferencias globales de la app, con Dynamic Type leído en la jerarquía
+/// de vistas (y no en App) para no perder la escala de Accesibilidad de iOS.
+private struct TifloReadableContent: ViewModifier {
+    @Environment(\.dynamicTypeSize) private var systemTextSize
+    @AppStorage("native-ios-text-size") private var textSizeIndex = 0
+    @AppStorage("native-ios-line-spacing") private var lineSpacingIndex = 0
+    @AppStorage("native-ios-strong-text") private var strongText = false
+
+    private var effectiveTextSize: DynamicTypeSize {
+        let minimum: DynamicTypeSize
+        switch textSizeIndex {
+        case 1: minimum = .xxLarge
+        case 2: minimum = .accessibility1
+        case 3: minimum = .accessibility3
+        default: return systemTextSize
+        }
+        return max(systemTextSize, minimum)
+    }
+
+    func body(content: Content) -> some View {
+        content
+            .dynamicTypeSize(effectiveTextSize)
+            .lineSpacing(lineSpacingIndex == 1 ? 6 : lineSpacingIndex == 2 ? 12 : 0)
+            .fontWeight(strongText ? .semibold : nil)
+    }
+}
+
+extension View {
+    func tifloVisualPreferences() -> some View {
+        modifier(TifloReadableContent())
+    }
+}
+
 /// Un mismo fondo y color de acciones en Recursos, Inicio, Descargas,
 /// Actualidad, Vídeos, Podcasts, TifloLector y pantallas interiores.
 /// No introduce nodos, gestos, rotors ni cambios en el orden de VoiceOver.

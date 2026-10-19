@@ -40,7 +40,7 @@ console.log('OK: Resources stays empty until user selects a category with VoiceO
 assert.match(screens, /private struct NativeBrandMark: View/);
 assert.match(screens, /Canvas \{ context, size in/);
 assert.match(screens, /dynamicTypeSize\.isAccessibilitySize/);
-assert.match(screens, /RoundedRectangle\(cornerRadius: TifloVisual\.cornerRadius\)\.fill\(TifloVisual\.brandDeepRed\)/);
+assert.match(screens, /RoundedRectangle\(cornerRadius: TifloVisual\.cornerRadius\)\s*\.fill\(TifloVisual\.brandDeepRed\)/);
 assert.match(screens, /foregroundStyle\(\.primary\)/);
 assert.match(screens, /TifloVisual\.canvas/);
 assert.match(screens, /TifloVisual\.primaryText/);

@@ -17,6 +17,7 @@ struct NativeShareMessage: Decodable, Identifiable {
 final class NativeShareInbox: ObservableObject {
     @Published private(set) var items: [NativeShareMessage] = []
     @Published private(set) var error: String?
+    @Published var readyToRead: NativeReadingDocument?
 
     private var inboxURL: URL? {
         FileManager.default.containerURL(
@@ -48,8 +49,7 @@ final class NativeShareInbox: ObservableObject {
         return root.appendingPathComponent(storedName)
     }
 
-    // Los EPUB se reciben y se conservan sin fingir que el lector nativo
-    // ya puede interpretar su contenido. El usuario puede exportar el archivo.
+    /// A copy is only for the optional explicit 'Compartir archivo' action.
     func exportURL(for item: NativeShareMessage) -> URL? {
         guard item.kind == "file", let source = fileURL(for: item) else { return nil }
         let safeName = URL(fileURLWithPath: item.name).lastPathComponent
@@ -64,6 +64,69 @@ final class NativeShareInbox: ObservableObject {
             return destination
         } catch {
             return nil
+        }
+    }
+
+    /// Import a file into the REAL reader, keeping its original extension.
+    /// The manifest id doubles as the library id to prevent duplicate imports
+    /// after an interruption between library saving and inbox cleanup.
+    @discardableResult
+    func importToReader(_ item: NativeShareMessage, library: NativeReaderLibrary) throws -> NativeReadingDocument {
+        guard let sharingID = UUID(uuidString: item.id) else {
+            throw CocoaError(.fileReadCorruptFile)
+        }
+        if let existing = library.documents.first(where: { $0.id == sharingID }) {
+            complete(item)
+            return existing
+        }
+        switch item.kind {
+        case "file":
+            guard let source = fileURL(for: item) else { throw CocoaError(.fileNoSuchFile) }
+            let originalName = URL(fileURLWithPath: item.name).lastPathComponent
+            guard !originalName.isEmpty && originalName != "." && originalName != ".." else {
+                throw CocoaError(.fileReadInvalidFileName)
+            }
+            let temp = FileManager.default.temporaryDirectory
+                .appendingPathComponent("SharedReader-" + item.id, isDirectory: true)
+            try FileManager.default.createDirectory(
+                at: temp, withIntermediateDirectories: true
+            )
+            defer { try? FileManager.default.removeItem(at: temp) }
+            let named = temp.appendingPathComponent(originalName)
+            try FileManager.default.copyItem(at: source, to: named)
+            try library.importDocuments(from: [named], sharingID: sharingID)
+        case "text":
+            try library.importSharedText(item.value ?? "", title: item.name,
+                                         sharingID: sharingID)
+        default:
+            throw CocoaError(.fileReadUnsupportedScheme)
+        }
+        guard let document = library.documents.first(where: { $0.id == sharingID }) else {
+            throw CocoaError(.fileReadUnknown)
+        }
+        complete(item)
+        return document
+    }
+
+    /// Share files are queued by the iOS share extension without launching our app.
+    /// On the next foreground activation, they join the reader automatically.
+    /// Only true files/text are consumed. URLs remain in Recibidos for URL actions.
+    func importPendingReaderContent(into library: NativeReaderLibrary) {
+        refresh()
+        let oldToNew = items.reversed()
+        var lastImported: NativeReadingDocument?
+        var failures: [String] = []
+        for item in oldToNew where item.kind == "file" || item.kind == "text" {
+            do {
+                lastImported = try importToReader(item, library: library)
+            } catch {
+                failures.append("«\(item.name)»: \(error.localizedDescription)")
+            }
+        }
+        if let lastImported { readyToRead = lastImported }
+        if !failures.isEmpty {
+            error = "Algunos elementos no se pudieron importar y permanecen en Recibidos. " +
+                failures.joined(separator: " ")
         }
     }
 
@@ -85,44 +148,18 @@ struct NativeInboxScreen: View {
 
     private func perform(_ item: NativeShareMessage) {
         do {
-            switch item.kind {
-            case "file":
-                guard let url = inbox.fileURL(for: item) else {
-                    throw CocoaError(.fileNoSuchFile)
-                }
-                let fileName = URL(fileURLWithPath: item.name).lastPathComponent
-                if URL(fileURLWithPath: fileName).pathExtension.lowercased() == "epub" {
-                    guard let exported = inbox.exportURL(for: item) else {
-                        throw CocoaError(.fileNoSuchFile)
-                    }
-                    // La compatibilidad de lectura EPUB se abordará en TifloLector.
-                    // Compartir/exportar el original no lo elimina de Recibidos.
-                    NativeShare.present(url: exported)
-                    return
-                }
-                // Use a temporary copy with the original extension so the reader
-                // can detect PDF/text correctly; never reinterpret a binary as text.
-                let temporary = FileManager.default.temporaryDirectory
-                    .appendingPathComponent(UUID().uuidString, isDirectory: true)
-                try FileManager.default.createDirectory(at: temporary, withIntermediateDirectories: true)
-                let named = temporary.appendingPathComponent(fileName)
-                try FileManager.default.copyItem(at: url, to: named)
-                defer { try? FileManager.default.removeItem(at: temporary) }
-                try library.importDocuments(from: [named])
-            case "text":
-                try library.importSharedText(item.value ?? "", title: item.name)
-            case "url":
+            if item.kind == "url" {
                 guard let value = item.value, let url = URL(string: value),
                       ["https", "http"].contains(url.scheme?.lowercased() ?? "") else {
                     throw URLError(.badURL)
                 }
-                // This opens in a supported browser/app rather than loading an
-                // HTML interface or hiding a web view underneath native screens.
                 openURL(url)
-            default:
-                throw CocoaError(.fileReadUnsupportedScheme)
+                inbox.complete(item)
+            } else {
+                // EPUB, Office, audio and text all use the same real import path.
+                // The hosting NavigationStack opens the imported document directly.
+                inbox.readyToRead = try inbox.importToReader(item, library: library)
             }
-            inbox.complete(item)
         } catch {
             importError = "No se pudo abrir «\(item.name)»: \(error.localizedDescription). El elemento permanece en Recibidos."
         }
@@ -148,9 +185,7 @@ struct NativeInboxScreen: View {
                 }
                 .accessibilityLabel(item.name)
                 .accessibilityHint(item.kind == "url" ? "Abre el enlace recibido." :
-                    item.name.lowercased().hasSuffix(".epub")
-                        ? "Doble toque para compartir o guardar el EPUB original. Se conserva en Recibidos hasta que lo elimines."
-                        : "Importa el archivo o texto a TifloLector.")
+                    "Importa y abre el archivo o texto en TifloLector.")
                 .accessibilityAction(named: Text("Compartir archivo")) {
                     if let exported = inbox.exportURL(for: item) {
                         NativeShare.present(url: exported)

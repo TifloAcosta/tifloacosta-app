@@ -45,7 +45,9 @@ test('Descargas gestiona la confirmación de Drive y no guarda una página HTML'
   assert.match(transfer, /https:\/\/drive\.usercontent\.google\.com\/download/);
   assert.match(transfer, /confirmationURL\(temporary, response: response, item: item\)/);
   assert.match(transfer, /verifyResponse\(confirmedResponse, for: item\)/);
-  assert.match(transfer, /size <= 512 \* 1024/);
+  assert.match(transfer, /size <= 1024 \* 1024/);
+  assert.match(transfer, /"at", "authuser"/);
+  assert.match(transfer, /URLQueryItem\(name: "confirm", value: "t"\)/);
   assert.match(transfer, /validHost\(components\.host\)/);
   assert.match(transfer, /components\.scheme == "https"/);
   assert.match(transfer, /query\.first\(where: \{ \$0\.name == "id" \}\)\?\.value == expectedID/);

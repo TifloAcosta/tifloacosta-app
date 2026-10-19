@@ -31,6 +31,8 @@ jobs:
           fi
       - name: Check native home and catalog search
         run: node ios-app-native/tests/home-contract.test.mjs
+      - name: Check corporate identity, contrast and native screen consistency
+        run: node --test ios-app-native/tests/visual-identity-contract.test.mjs
       - name: Install XcodeGen
         run: brew install xcodegen
       - name: Generate independent iOS project

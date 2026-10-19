@@ -48,8 +48,11 @@ enum NativeDriveTransfer {
                 if let linkError = error as? NativeDownloadLinkError {
                     switch linkError {
                     case .accessDenied, .notFound:
-                        // No convertir un rechazo explícito en un resultado falso.
-                        throw error
+                        // Un punto de descarga de Google puede rechazar el
+                        // acceso anónimo mientras el otro sí sirve el archivo
+                        // público. Comprobar ambas URLs antes de darlo por denegado.
+                        // Nunca se eluden permisos ni se guarda una página HTML.
+                        continue
                     default: break
                     }
                 }

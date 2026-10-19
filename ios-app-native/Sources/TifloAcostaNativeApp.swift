@@ -6,6 +6,7 @@ import SwiftUI
 struct TifloAcostaNativeApp: App {
     @StateObject private var catalog = NativeCatalogStore()
     @StateObject private var library = NativeReaderLibrary()
+    @StateObject private var resourceService = NativeResourceService()
     @StateObject private var inbox = NativeShareInbox()
     @StateObject private var podcasts = NativePodcastStore()
     @AppStorage("native-ios-color-scheme") private var schemeIndex = 0
@@ -15,6 +16,7 @@ struct TifloAcostaNativeApp: App {
             NativeHomeScreen()
                 .environmentObject(catalog)
                 .environmentObject(library)
+                .environmentObject(resourceService)
                 .environmentObject(inbox)
                 .environmentObject(podcasts)
                 .onAppear { inbox.refresh() }

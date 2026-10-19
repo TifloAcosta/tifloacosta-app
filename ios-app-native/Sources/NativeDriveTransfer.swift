@@ -46,9 +46,24 @@ enum NativeDriveTransfer {
                     // Algunos archivos grandes requieren aceptar la confirmación de Drive.
                     // Solo seguimos formularios de descarga HTTPS en dominios oficiales.
                     if let confirmation = confirmationURL(temporary, response: response, item: item) {
-                        let (file, confirmedResponse) = try await URLSession.shared.download(from: confirmation)
-                        try NativeAnalyzedDownload.verifyResponse(confirmedResponse, for: item)
-                        return (file, confirmedResponse)
+                        // Algunos enlaces públicos exigen más de una pantalla
+                        // de confirmación. Se admiten como máximo tres saltos,
+                        // siempre en dominios oficiales y con el mismo ID.
+                        var nextURL = confirmation
+                        var visited = Set([candidate.absoluteString])
+                        for _ in 0..<3 {
+                            guard visited.insert(nextURL.absoluteString).inserted else { break }
+                            let (file, confirmedResponse) = try await URLSession.shared.download(from: nextURL)
+                            do {
+                                try NativeAnalyzedDownload.verifyResponse(confirmedResponse, for: item)
+                                return (file, confirmedResponse)
+                            } catch NativeDownloadLinkError.webPageInsteadOfFile {
+                                guard let following = confirmationURL(
+                                    file, response: confirmedResponse, item: item
+                                ) else { break }
+                                nextURL = following
+                            }
+                        }
                     }
                     lastError = NativeDownloadLinkError.webPageInsteadOfFile
                 }
@@ -114,6 +129,28 @@ enum NativeDriveTransfer {
                   query.contains(where: { $0.name == "confirm" }) else { continue }
             components.queryItems = query
             if let confirmed = components.url { return confirmed }
+        }
+
+        // Algunas respuestas de Drive muestran un enlace de descarga en
+        // vez de un formulario. Nunca seguimos vínculos arbitrarios: deben
+        // ser HTTPS oficiales, contener el ID original y confirmación.
+        let linkPattern = #"<a\\b[^>]*\\bhref\\s*=\\s*["']([^"']+)["'][^>]*>"#
+        if let links = try? NSRegularExpression(pattern: linkPattern, options: [.caseInsensitive]) {
+            for match in links.matches(in: html, range: NSRange(html.startIndex..., in: html)) {
+                guard match.numberOfRanges > 1,
+                      let range = Range(match.range(at: 1), in: html) else { continue }
+                let raw = String(html[range])
+                    .replacingOccurrences(of: "&amp;", with: "&")
+                guard let url = URL(string: raw, relativeTo: response.url)?.absoluteURL,
+                      let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+                      components.scheme == "https",
+                      validHost(components.host),
+                      components.queryItems?.first(where: { $0.name == "id" })?.value == expectedID,
+                      components.queryItems?.contains(where: { $0.name == "confirm" }) == true else {
+                    continue
+                }
+                return url
+            }
         }
         return nil
     }

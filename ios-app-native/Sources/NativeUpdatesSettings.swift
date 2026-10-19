@@ -209,6 +209,7 @@ struct NativeSettingsScreen: View {
     @AppStorage("native-ios-strong-text") private var strongText = false
     @AppStorage("native-ios-language") private var languageIndex = 0
     @Environment(\.openURL) private var openURL
+    @State private var showVisualSettings = false
 
     private var version: String {
         let dictionary = Bundle.main.infoDictionary
@@ -231,49 +232,41 @@ struct NativeSettingsScreen: View {
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 
-            Section("Color y contraste") {
-                NativeAdjustableChoice(
-                    title: "Perfil de contraste",
-                    choices: ["Seguir el sistema", "Alto contraste claro", "Alto contraste oscuro"],
-                    selectedIndex: $schemeIndex
-                )
-                Text("El perfil elegido se aplica a todas las secciones y mantiene el encabezado rojo de TifloAcosta.")
-                    .font(.footnote)
-                    .foregroundStyle(TifloVisual.secondaryText)
-            }
-            .listRowBackground(TifloVisual.surfaceRaised)
-
-            Section("Tamaño del texto") {
-                NativeAdjustableChoice(
-                    title: "Tamaño",
-                    choices: ["Predeterminado", "Grande", "Muy grande", "Máximo"],
-                    selectedIndex: $textSizeIndex
-                )
-                Text("El tamaño nunca será inferior al configurado en Accesibilidad de iOS.")
-                    .font(.footnote)
-                    .foregroundStyle(TifloVisual.secondaryText)
-            }
-            .listRowBackground(TifloVisual.surfaceRaised)
-
-            Section("Espaciado") {
-                NativeAdjustableChoice(
-                    title: "Separación entre líneas",
-                    choices: ["Normal", "Cómoda", "Amplia"],
-                    selectedIndex: $lineSpacingIndex
-                )
-            }
-            .listRowBackground(TifloVisual.surfaceRaised)
-
-            Section("Legibilidad") {
-                Toggle("Usar texto reforzado", isOn: $strongText)
-                    .tint(TifloVisual.actionTint)
-                Button("Restablecer ajustes visuales") {
-                    schemeIndex = 0
-                    textSizeIndex = 0
-                    lineSpacingIndex = 0
-                    strongText = false
-                    UIAccessibility.post(notification: .announcement, argument: "Ajustes visuales restablecidos.")
+            Section {
+                DisclosureGroup("Ajustes visuales", isExpanded: $showVisualSettings) {
+                    Text("Color y contraste").font(.headline)
+                    NativeAdjustableChoice(
+                        title: "Perfil de contraste",
+                        choices: ["Seguir el sistema", "Alto contraste claro", "Alto contraste oscuro"],
+                        selectedIndex: $schemeIndex
+                    )
+                    Text("Tamaño del texto").font(.headline)
+                    NativeAdjustableChoice(
+                        title: "Tamaño",
+                        choices: ["Predeterminado", "Grande", "Muy grande", "Máximo"],
+                        selectedIndex: $textSizeIndex
+                    )
+                    Text("El tamaño nunca será inferior al configurado en Accesibilidad de iOS.")
+                        .font(.footnote)
+                        .foregroundStyle(TifloVisual.secondaryText)
+                    Text("Espaciado").font(.headline)
+                    NativeAdjustableChoice(
+                        title: "Separación entre líneas",
+                        choices: ["Normal", "Cómoda", "Amplia"],
+                        selectedIndex: $lineSpacingIndex
+                    )
+                    Text("Legibilidad").font(.headline)
+                    Toggle("Usar texto reforzado", isOn: $strongText)
+                        .tint(TifloVisual.actionTint)
+                    Button("Restablecer ajustes visuales") {
+                        schemeIndex = 0
+                        textSizeIndex = 0
+                        lineSpacingIndex = 0
+                        strongText = false
+                        UIAccessibility.post(notification: .announcement, argument: "Ajustes visuales restablecidos.")
+                    }
                 }
+                .accessibilityHint("Abre este menú para modificar la presentación de TifloAcosta.")
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 

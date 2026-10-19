@@ -10,8 +10,10 @@ const downloads = source('NativeDownloads.swift');
 const transfer = source('NativeDriveTransfer.swift');
 
 test('Configuración conserva las cuatro opciones visuales de la web', () => {
+  assert.match(settings, /DisclosureGroup\("Ajustes visuales", isExpanded: \$showVisualSettings\)/);
+  assert.match(settings, /@State private var showVisualSettings = false/);
   for (const title of ['Tamaño del texto', 'Color y contraste', 'Espaciado', 'Legibilidad']) {
-    assert.ok(settings.includes('Section("' + title + '")'), title);
+    assert.ok(settings.includes('Text("' + title + '")'), title);
   }
   for (const key of ['native-ios-color-scheme','native-ios-text-size','native-ios-line-spacing','native-ios-strong-text']) {
     assert.ok(settings.includes('@AppStorage("' + key + '")'), key);

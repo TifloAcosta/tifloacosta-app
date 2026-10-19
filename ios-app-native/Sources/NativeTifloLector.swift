@@ -109,10 +109,11 @@ final class NativeReaderLibrary: ObservableObject {
 final class NativeReadingSpeech: ObservableObject {
     private let synthesizer = AVSpeechSynthesizer()
 
-    func play(_ text: String, speed: Double = 1.0) {
+    func play(_ text: String, speed: Double = 1.0, language: String = "es-ES", voiceIdentifier: String = "") {
         synthesizer.stopSpeaking(at: .immediate)
         let utterance = AVSpeechUtterance(string: text)
-        utterance.voice = AVSpeechSynthesisVoice(language: "es-ES")
+        utterance.voice = (voiceIdentifier.isEmpty ? nil : AVSpeechSynthesisVoice(identifier: voiceIdentifier))
+            ?? AVSpeechSynthesisVoice(language: language)
         utterance.rate = min(
             AVSpeechUtteranceMaximumSpeechRate,
             max(AVSpeechUtteranceMinimumSpeechRate,
@@ -148,13 +149,44 @@ struct NativeReaderLibraryScreen: View {
     @State private var showSettings = false
     @State private var filterIndex = 0
     @State private var sortIndex = 0
+    @State private var showFilters = false
+    @State private var showAudioSettings = false
+    @State private var showVisualSettings = false
+    @AppStorage("native-reading-speed-index") private var readerRateIndex = 2
+    @AppStorage("native-reading-language-index") private var readerLanguageIndex = 0
+    @AppStorage("native-reading-voice-id") private var readerVoiceID = ""
+    @AppStorage("native-reading-text-size") private var readerTextSize = 20.0
+    @AppStorage("native-reading-line-spacing-index") private var readerLineSpacingIndex = 0
+    @AppStorage("native-reading-strong-text") private var readerStrongText = false
+    private let speechRates: [Double] = [0.75, 0.9, 1.0, 1.25, 1.5]
+    private let languages = ["es-ES", "en-US"]
+
+    private var availableVoices: [AVSpeechSynthesisVoice] {
+        let prefix = readerLanguageIndex == 1 ? "en" : "es"
+        return AVSpeechSynthesisVoice.speechVoices()
+            .filter { $0.language.lowercased().hasPrefix(prefix) }
+            .sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
+    }
 
     private var shownDocuments: [NativeReadingDocument] {
-        let current = library.documents.filter {
+        var current = library.documents.filter {
             searchText.isEmpty || $0.title.localizedCaseInsensitiveContains(searchText)
         }
-        return sortIndex == 0 ? current : current.sorted {
+        let calendar = Calendar.current
+        if filterIndex == 1 {
+            current = current.filter { calendar.isDateInToday($0.importedAt) }
+        } else if filterIndex == 2, let weekAgo = calendar.date(byAdding: .day, value: -7, to: .now) {
+            current = current.filter { $0.importedAt >= weekAgo }
+        }
+        switch sortIndex {
+        case 1: return current.sorted { $0.importedAt < $1.importedAt }
+        case 2: return current.sorted {
             $0.title.localizedStandardCompare($1.title) == .orderedAscending
+        }
+        case 3: return current.sorted {
+            $0.title.localizedStandardCompare($1.title) == .orderedDescending
+        }
+        default: return current.sorted { $0.importedAt > $1.importedAt }
         }
     }
 
@@ -168,19 +200,51 @@ struct NativeReaderLibraryScreen: View {
 
             Section {
                 DisclosureGroup("Ajustes", isExpanded: $showSettings) {
-                    Text("Tamaño y velocidad de voz se ajustan al abrir cada documento.")
-                        .font(.footnote)
+                    DisclosureGroup("Audio y voz", isExpanded: $showAudioSettings) {
+                        NativeAdjustableChoice(
+                            title: "Idioma de lectura",
+                            choices: ["Español", "Inglés"],
+                            selectedIndex: $readerLanguageIndex
+                        )
+                        NativeAdjustableChoice(
+                            title: "Velocidad de voz",
+                            choices: ["0,75×", "0,9×", "1×", "1,25×", "1,5×"],
+                            selectedIndex: $readerRateIndex
+                        )
+                        Picker("Voz", selection: $readerVoiceID) {
+                            Text("Voz predeterminada del sistema").tag("")
+                            ForEach(availableVoices, id: \.identifier) { voice in
+                                Text("\(voice.name), \(voice.language)").tag(voice.identifier)
+                            }
+                        }
+                        .onChange(of: readerLanguageIndex) { _, _ in readerVoiceID = "" }
+                    }
+                    DisclosureGroup("Presentación visual", isExpanded: $showVisualSettings) {
+                        Slider(value: $readerTextSize, in: 14...40, step: 2) {
+                            Text("Tamaño del texto")
+                        }
+                        .accessibilityValue("\(Int(readerTextSize)) puntos")
+                        NativeAdjustableChoice(
+                            title: "Espacio entre líneas",
+                            choices: ["Normal", "Cómodo", "Amplio"],
+                            selectedIndex: $readerLineSpacingIndex
+                        )
+                        Toggle("Texto reforzado", isOn: $readerStrongText)
+                            .tint(TifloVisual.actionTint)
+                    }
                 }
-                NativeAdjustableChoice(
-                    title: "Filtro de documentos",
-                    choices: ["Todos", "Documentos de la biblioteca"],
-                    selectedIndex: $filterIndex
-                )
-                NativeAdjustableChoice(
-                    title: "Ordenar documentos",
-                    choices: ["Más recientes", "Por título"],
-                    selectedIndex: $sortIndex
-                )
+                DisclosureGroup("Filtrar y ordenar", isExpanded: $showFilters) {
+                    NativeAdjustableChoice(
+                        title: "Filtro de documentos",
+                        choices: ["Todos", "Importados hoy", "Importados en los últimos siete días"],
+                        selectedIndex: $filterIndex
+                    )
+                    NativeAdjustableChoice(
+                        title: "Ordenar documentos",
+                        choices: ["Más recientes", "Más antiguos", "Título A a Z", "Título Z a A"],
+                        selectedIndex: $sortIndex
+                    )
+                }
             }
 
             Section("Mi biblioteca") {
@@ -196,7 +260,7 @@ struct NativeReaderLibraryScreen: View {
                     .accessibilityLabel(document.title)
                     .accessibilityHint("Doble toque para abrir. Acciones disponibles.")
                     .accessibilityAction(named: Text("Reproducir")) {
-                        speech.play(document.body)
+                        speech.play(document.body, speed: speechRates[readerRateIndex], language: languages[readerLanguageIndex], voiceIdentifier: readerVoiceID)
                     }
                     .accessibilityAction(named: Text("Información")) {
                         information = document
@@ -291,7 +355,11 @@ struct NativeReadingScreen: View {
     @ObservedObject var speech: NativeReadingSpeech
 
     @AppStorage("native-reading-text-size") private var textSize = 20.0
-    @State private var rateIndex = 2
+    @AppStorage("native-reading-speed-index") private var rateIndex = 2
+    @AppStorage("native-reading-language-index") private var languageIndex = 0
+    @AppStorage("native-reading-voice-id") private var voiceIdentifier = ""
+    @AppStorage("native-reading-line-spacing-index") private var lineSpacingIndex = 0
+    @AppStorage("native-reading-strong-text") private var strongText = false
     @State private var showSettings = false
     private let speechRates: [Double] = [0.75, 0.9, 1.0, 1.25, 1.5]
 
@@ -299,6 +367,8 @@ struct NativeReadingScreen: View {
         ScrollView {
             Text(document.body)
                 .font(.system(size: textSize))
+                .fontWeight(strongText ? .bold : .regular)
+                .lineSpacing(CGFloat(lineSpacingIndex) * 4)
                 .textSelection(.enabled)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
@@ -310,7 +380,9 @@ struct NativeReadingScreen: View {
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
                     Button("Reproducir") {
-                        speech.play(document.body, speed: speechRates[rateIndex])
+                        speech.play(document.body, speed: speechRates[rateIndex],
+                                    language: languageIndex == 1 ? "en-US" : "es-ES",
+                                    voiceIdentifier: voiceIdentifier)
                     }
                     Button("Pausar") { speech.pause() }
                     Button("Continuar") { speech.resume() }

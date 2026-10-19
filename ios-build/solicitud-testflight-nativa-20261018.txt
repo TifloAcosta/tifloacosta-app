@@ -16,3 +16,12 @@ Primer bloque: Inicio, buscador del catálogo TifloAcosta, diseño corporativo y
 Preflight firmado EXITOSO: GitHub Actions 39168171456, con la fuente 107cbabff368ecd67d511a26b023a2f0f04c2e3b.
 La nueva versión es parcial: TifloLector y el reproductor accesible aún no tienen paridad. El usuario desea instalar esta base para comprobarla y continuar por etapas.
 No ejecutar ninguna publicación a App Store; exclusivamente TestFlight del grupo de pruebas interno.
+
+ACTUALIZACIÓN RECURSOS — TESTFLIGHT INTERNO — 2026-10-19
+Usuario solicita publicar únicamente al grupo interno de TestFlight para probar en iPhone.
+Código nativo verificado: b991246560bbed42961d59f530f231c80af1f57b.
+Preflight firmado completado con éxito: GitHub Actions 39218104249.
+Acciones por título: Leer, Guardar, Descargar, Compartir mediante VoiceOver.
+Vista de lectura: extracción de documentos HTML largos como texto nativo por párrafos, lectura en voz alta, guardar en TifloLector y exportar mediante selector de Archivos.
+Mantener sin cambios los selectores ajustables de categoría, diseño visual, Android, web y otras secciones. No publicar App Store.
+No afirmar disponibilidad hasta que Apple procese la compilación y confirme el grupo interno.

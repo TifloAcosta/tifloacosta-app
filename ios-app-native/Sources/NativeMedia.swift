@@ -67,7 +67,7 @@ final class NativeMediaStore: ObservableObject {
             try? data.write(to: cacheURL, options: .atomic)
             error = nil
         } catch {
-            error = items.isEmpty
+            self.error = items.isEmpty
                 ? "No se pudieron cargar los podcasts y canales de YouTube."
                 : "Sin conexión. Se muestran los contenidos multimedia guardados."
         }

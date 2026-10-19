@@ -21,9 +21,23 @@ test('Favoritos tiene almacén persistente, pantalla nativa y acciones VoiceOver
   assert.ok(news.includes('favorites.toggle(.news, item: item)'));
   assert.ok(favorites.includes('Text("Quitar de favoritos")'));
 });
-test('Recibidos conserva EPUB y permite compartir sin prometer lectura nativa', () => {
-  assert.ok(share.includes('exportURL(for item: NativeShareMessage)'));
-  assert.ok(share.includes('pathExtension.lowercased() == "epub"'));
-  assert.ok(share.includes('NativeShare.present(url: exported)'));
-  assert.ok(share.includes('Eliminar de Recibidos'));
+test('Compartir EPUB importa en lector y no obliga a volver a compartir', () => {
+  assert.ok(share.includes('func importToReader(_ item: NativeShareMessage'));
+  assert.ok(share.includes('library.importDocuments(from: [named], sharingID: sharingID)'));
+  assert.ok(share.includes('func importPendingReaderContent(into library: NativeReaderLibrary)'));
+  assert.ok(share.includes('inbox.readyToRead = try inbox.importToReader(item, library: library)'));
+  assert.ok(!share.includes('pathExtension.lowercased() == "epub"'));
+  assert.ok(share.includes('Eliminar de Recibidos')); // delete remains optional
+  assert.ok(home.includes('.navigationDestination(item: $inbox.readyToRead)'));
+  assert.ok(home.includes('inbox.importPendingReaderContent(into: library)'));
+});
+test('Extensión Compartir ofrece vista previa accesible sin abrir la app', () => {
+  const fs = readFileSync(new URL('../ShareExtension/ShareViewController.swift', import.meta.url), 'utf8');
+  const preview = readFileSync(new URL('../ShareExtension/ShareReadingPreview.swift', import.meta.url), 'utf8');
+  assert.ok(fs.includes('previewButton.setTitle("Leer ahora"'));
+  assert.ok(fs.includes('UITextView()'));
+  assert.ok(fs.includes('AVSpeechSynthesizer()'));
+  assert.ok(preview.includes('case "epub"'));
+  assert.ok(preview.includes('Archive(url: url, accessMode: .read)'));
+  assert.ok(!fs.includes('UIApplication.shared.open'));
 });

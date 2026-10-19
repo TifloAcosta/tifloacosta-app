@@ -140,6 +140,7 @@ struct NativeSearchResultsScreen: View {
                     .foregroundStyle(.secondary)
             }
         }
+        .tifloScreenSurface()
         .navigationTitle("Resultados de búsqueda")
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -169,6 +170,7 @@ private struct NativeSearchVideoDetailScreen: View {
                 }
             }
         }
+        .tifloScreenSurface()
         .navigationTitle("Vídeo")
         .navigationBarTitleDisplayMode(.inline)
     }

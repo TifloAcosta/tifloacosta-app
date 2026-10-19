@@ -20,12 +20,6 @@ private enum NativeDestination: String, CaseIterable, Hashable, Identifiable {
     var id: String { rawValue }
 }
 
-private enum NativeHomePalette {
-    static let red = Color(red: 166.0 / 255.0, green: 27.0 / 255.0, blue: 27.0 / 255.0)
-    static let deepRed = Color(red: 127.0 / 255.0, green: 20.0 / 255.0, blue: 20.0 / 255.0)
-    static let logoRed = Color(red: 229.0 / 255.0, green: 57.0 / 255.0, blue: 53.0 / 255.0)
-}
-
 // Símbolo dibujado con trazos nativos, siguiendo las proporciones del
 // emblema vectorial oficial, sin cargar imágenes web ni introducir WebView.
 private struct NativeBrandMark: View {
@@ -52,9 +46,9 @@ private struct NativeBrandMark: View {
 
             // Ondas curvas del emblema; el trazado queda dentro de Canvas.
             for (radius, color) in [
-                (71.0, NativeHomePalette.logoRed),
+                (71.0, TifloVisual.brandMarkHighlight),
                 (51.0, Color.white),
-                (32.0, NativeHomePalette.logoRed)
+                (32.0, TifloVisual.brandMarkHighlight)
             ] {
                 var wave = Path()
                 wave.addArc(
@@ -108,7 +102,7 @@ struct NativeHomeScreen: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(16)
                     .background(
-                        RoundedRectangle(cornerRadius: 14).fill(NativeHomePalette.deepRed)
+                        RoundedRectangle(cornerRadius: TifloVisual.cornerRadius).fill(TifloVisual.brandDeepRed)
                     )
                     .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
                     .listRowBackground(Color.clear)
@@ -125,7 +119,7 @@ struct NativeHomeScreen: View {
                             .frame(maxWidth: .infinity, minHeight: 44)
                     }
                     .buttonStyle(.borderedProminent)
-                    .tint(NativeHomePalette.red)
+                    .tint(TifloVisual.brandRed)
                     .disabled(searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 }
 
@@ -134,7 +128,7 @@ struct NativeHomeScreen: View {
                         NavigationLink(value: destination) {
                             HStack(spacing: 12) {
                                 RoundedRectangle(cornerRadius: 2)
-                                    .fill(NativeHomePalette.red)
+                                    .fill(TifloVisual.brandRed)
                                     .frame(width: 4, height: 30)
                                     .accessibilityHidden(true)
                                 Text(destination.rawValue)
@@ -158,8 +152,9 @@ struct NativeHomeScreen: View {
             }
             .listStyle(.insetGrouped)
             .scrollContentBackground(.hidden)
-            .background(Color(uiColor: .systemGroupedBackground))
-            .navigationTitle("Inicio")
+            .background(TifloVisual.canvas)
+            .tifloScreenSurface()
+        .navigationTitle("Inicio")
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(isPresented: $showingSearch) {
                 NativeSearchResultsScreen(query: submittedSearch)
@@ -192,6 +187,7 @@ private struct NativePendingSectionScreen: View {
             systemImage: "square.stack",
             description: Text("La versión nativa de esta sección todavía no está terminada.")
         )
+        .tifloScreenSurface()
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -218,11 +214,16 @@ struct NativeAdjustableChoice: View {
         } label: {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(title).font(.subheadline)
-                    Text(currentValue).font(.body).bold()
+                    Text(title)
+                        .font(.subheadline)
+                        .foregroundStyle(TifloVisual.secondaryText)
+                    Text(currentValue)
+                        .font(.body).bold()
+                        .foregroundStyle(TifloVisual.primaryText)
                 }
                 Spacer()
                 Image(systemName: "arrow.up.arrow.down")
+                    .foregroundStyle(TifloVisual.actionTint)
                     .accessibilityHidden(true)
             }
             .frame(minHeight: 44)
@@ -364,6 +365,7 @@ struct NativeResourcesScreen: View {
                 }
             }
         }
+        .tifloScreenSurface()
         .navigationTitle("Recursos")
         .navigationDestination(isPresented: $presentingResource) {
             if let resourceToOpen {
@@ -425,6 +427,7 @@ struct NativeVideosScreen: View {
                 }
             }
         }
+        .tifloScreenSurface()
         .navigationTitle("Vídeos")
         .searchable(text: $query, prompt: "Buscar en los vídeos del canal")
         .onChange(of: query) { _, _ in visibleCount = 10 }
@@ -455,6 +458,7 @@ struct NativeNewsScreen: View {
         .overlay {
             if articles.isEmpty { ContentUnavailableView("Sin noticias", systemImage: "newspaper") }
         }
+        .tifloScreenSurface()
         .navigationTitle("Actualidad")
     }
 }
@@ -475,6 +479,7 @@ struct NativeNewsArticleScreen: View {
             }
             .padding()
         }
+        .tifloScreenSurface()
         .navigationTitle("Noticia")
         .navigationBarTitleDisplayMode(.inline)
     }

@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import worker, { handleRequest } from '../src/index.js';
 import { createSessionCookie } from '../src/session.js';
+import { randomToken, pkceChallenge } from '../src/security.js';
 
 const env = {
   ALLOWED_ORIGIN: 'https://tifloacosta.com',
@@ -40,6 +41,7 @@ function mockFetch({ subscribed = true, rating = 'like', calls = [] } = {}) {
       return jsonResponse({ items: subscribed ? [{ id: 'sub-1' }] : [] });
     }
     if (target.includes('/subscriptions?') && method === 'POST') return jsonResponse({ id: 'sub-new' });
+    if (target.includes('/subscriptions?') && method === 'DELETE') return new Response(null, { status: 204 });
     if (target.includes('/videos/getRating?')) return jsonResponse({ items: [{ rating }] });
     if (target.includes('/videos/rate?')) return new Response(null, { status: 204 });
     if (target.includes('/commentThreads?')) return jsonResponse({ id: 'comment-1' });
@@ -59,7 +61,7 @@ function mockFetch({ subscribed = true, rating = 'like', calls = [] } = {}) {
       });
     }
     if (target.includes('/videos?')) {
-      return jsonResponse({ items: [{ id: 'abcDEF123_-', contentDetails: { duration: 'PT8M5S' } }] });
+      return jsonResponse({ items: [{ id: 'abcDEF123_-', snippet: { channelId: 'UC_VIDEO_CHANNEL' }, contentDetails: { duration: 'PT8M5S' } }] });
     }
     throw new Error(`Unexpected fetch ${target}`);
   };
@@ -175,6 +177,7 @@ test('POST /comment returns a safe specific YouTube rejection code', async () =>
     const target = String(url);
     if (target === 'https://oauth2.googleapis.com/token') return jsonResponse({ access_token: 'test-access', expires_in: 3600 });
     if (target.includes('/channels?')) return jsonResponse({ items: [{ id: 'UC_TIFLOACOSTA' }] });
+    if (target.includes('/videos?')) return jsonResponse({ items: [{ snippet: { channelId: 'UC_VIDEO_CHANNEL' } }] });
     if (target.includes('/commentThreads?')) {
       return jsonResponse({ error: { message: 'private Google body', errors: [{ reason: 'ineligibleAccount' }] } }, 403);
     }
@@ -244,4 +247,87 @@ test('GET /search reports unavailable when the Worker has no API key', async () 
   ), noKeyEnv, { fetchImpl: mockFetch() });
   assert.equal(response.status, 503);
   assert.deepEqual(await response.json(), { error: 'SEARCH_UNAVAILABLE' });
+});
+
+
+test('Native Google OAuth exchanges a PKCE-bound short-lived ticket for an encrypted iOS session', async () => {
+  const verifier = randomToken(32);
+  const challenge = await pkceChallenge(verifier);
+  const start = await handleRequest(new Request(
+    'https://youtube-auth.tifloacosta.com/auth/native/start?challenge=' + challenge
+  ), env);
+  assert.equal(start.status, 302);
+  const google = new URL(start.headers.get('Location'));
+  assert.equal(google.hostname, 'accounts.google.com');
+  assert.equal(google.searchParams.get('code_challenge_method'), 'S256');
+  const cookie = start.headers.get('Set-Cookie').split(';', 1)[0];
+  const callback = await handleRequest(new Request(
+    'https://youtube-auth.tifloacosta.com/auth/callback?code=code-example&state=' + google.searchParams.get('state'),
+    { headers: { Cookie: cookie } }
+  ), env, { fetchImpl: async url => {
+    assert.equal(String(url), 'https://oauth2.googleapis.com/token');
+    return jsonResponse({ access_token: 'google-access', refresh_token: 'google-refresh', expires_in: 3600 });
+  }});
+  assert.equal(callback.status, 302);
+  const returned = new URL(callback.headers.get('Location'));
+  assert.equal(returned.protocol, 'tifloacosta:');
+  assert.equal(returned.hostname, 'youtube-auth');
+  const ticket = returned.searchParams.get('ticket');
+  assert.ok(ticket);
+  assert.doesNotMatch(callback.headers.get('Location'), /google-refresh|google-access/);
+
+  const bad = await handleRequest(new Request('https://youtube-auth.tifloacosta.com/auth/native/exchange', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ticket, verifier: randomToken(32) })
+  }), env);
+  assert.equal(bad.status, 401);
+
+  const exchange = await handleRequest(new Request('https://youtube-auth.tifloacosta.com/auth/native/exchange', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ticket, verifier })
+  }), env);
+  assert.equal(exchange.status, 200);
+  const session = await exchange.json();
+  assert.ok(session.authenticated);
+  assert.ok(session.token);
+  assert.ok(session.expiresAt > Date.now());
+  assert.doesNotMatch(session.token, /google-access|google-refresh/);
+
+  const connected = await handleRequest(new Request('https://youtube-auth.tifloacosta.com/session', {
+    headers: { Authorization: 'Bearer ' + session.token }
+  }), env, { fetchImpl: mockFetch() });
+  assert.deepEqual(await connected.json(), { authenticated: true });
+
+  const liked = await handleRequest(new Request('https://youtube-auth.tifloacosta.com/like', {
+    method: 'POST', headers: {
+      Authorization: 'Bearer ' + session.token, 'Content-Type': 'application/json'
+    }, body: JSON.stringify({ videoId: 'abcDEF123_-' })
+  }), env, { fetchImpl: mockFetch() });
+  assert.equal(liked.status, 200);
+  assert.deepEqual(await liked.json(), { rating: 'like' });
+
+  const blocked = await handleRequest(new Request('https://youtube-auth.tifloacosta.com/like', {
+    method: 'POST', headers: {
+      Authorization: 'Bearer ' + session.token, Origin: 'https://malicious.example',
+      'Content-Type': 'application/json'
+    }, body: JSON.stringify({ videoId: 'abcDEF123_-' })
+  }), env, { fetchImpl: mockFetch() });
+  assert.equal(blocked.status, 403);
+});
+
+test('Invalid and browser-origin native authorization attempts are denied', async () => {
+  const invalid = await handleRequest(new Request(
+    'https://youtube-auth.tifloacosta.com/auth/native/start?challenge=wrong'
+  ), env);
+  assert.equal(invalid.status, 400);
+  const browser = await handleRequest(new Request(
+    'https://youtube-auth.tifloacosta.com/auth/native/exchange',
+    { method: 'POST', headers: { Origin: 'https://example.com' } }
+  ), env);
+  assert.equal(browser.status, 403);
+  const unauth = await handleRequest(new Request('https://youtube-auth.tifloacosta.com/unsubscribe', {
+    method: 'POST', headers: { Origin: env.ALLOWED_ORIGIN },
+    body: JSON.stringify({ videoId: 'abcDEF123_-' })
+  }), env, { fetchImpl: mockFetch() });
+  assert.equal(unauth.status, 403);
 });

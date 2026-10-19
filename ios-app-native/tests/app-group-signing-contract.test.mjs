@@ -27,3 +27,11 @@ test('La IPA se inspecciona para rechazar firmas sin el App Group', () => {
   assert.ok(python.includes('com.apple.security.application-groups'));
   assert.ok(python.includes('group.com.tifloacosta.app'));
 });
+
+test('XcodeGen escribe el App Group de forma explícita al regenerar los dos entitlements', () => {
+  const project = f('project.yml');
+  assert.equal((project.match(/com\\.apple\\.security\\.application-groups:/g) || []).length, 2);
+  assert.equal((project.match(/- group\\.com\\.tifloacosta\\.app/g) || []).length, 2);
+  assert.ok(project.includes('path: Sources/App.entitlements'));
+  assert.ok(project.includes('path: ShareExtension/ShareExtension.entitlements'));
+});

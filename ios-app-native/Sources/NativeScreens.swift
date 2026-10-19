@@ -112,7 +112,6 @@ struct NativeHomeScreen: View {
                         .submitLabel(.search)
                         .textInputAutocapitalization(.sentences)
                         .onSubmit(search)
-                        .accessibilityLabel("Introduce tu búsqueda")
                     Button(action: search) {
                         Text("Buscar")
                             .frame(maxWidth: .infinity, minHeight: 44)

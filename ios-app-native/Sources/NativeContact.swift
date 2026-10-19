@@ -29,7 +29,7 @@ struct NativeContactScreen: View {
             if let url = item.url {
                 Link(destination: url) {
                     HStack(alignment: .center, spacing: 12) {
-                        Text(item.title)
+                        Text(LocalizedStringKey(item.title))
                             .foregroundStyle(TifloVisual.primaryText)
                         Spacer(minLength: 8)
                         Image(systemName: "arrow.up.right")
@@ -38,7 +38,7 @@ struct NativeContactScreen: View {
                     }
                     .frame(minHeight: 44)
                 }
-                .accessibilityLabel(item.title)
+                .accessibilityLabel(Text(LocalizedStringKey(item.title)))
                 .accessibilityHint("Doble toque para abrir el enlace externo.")
                 .accessibilityAction(named: Text("Compartir enlace")) {
                     NativeShare.present(url: url)

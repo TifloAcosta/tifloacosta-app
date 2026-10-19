@@ -1,4 +1,4 @@
-import { pkceChallenge, randomToken } from './security.js';
+import { pkceChallenge, randomToken, seal, unseal } from './security.js';
 import {
   OAUTH_COOKIE,
   SESSION_COOKIE,
@@ -18,7 +18,9 @@ import {
   comment,
   getAccountVideoState,
   like,
+  unlike,
   subscribe,
+  unsubscribe,
   searchVideos
 } from './youtube-api.js';
 
@@ -88,6 +90,7 @@ function safeError(error) {
   const code = String(error?.code || 'YOUTUBE_ERROR');
   if (code === 'INVALID_VIDEO_ID') return appError('INVALID_VIDEO', 400);
   if (code === 'INVALID_COMMENT') return appError('INVALID_COMMENT', 400);
+  if (code === 'NATIVE_AUTH_INVALID') return appError('NATIVE_AUTH_INVALID', 401);
   if (code === 'INVALID_SEARCH') return appError('INVALID_SEARCH', 400);
   if (code === 'SEARCH_UNAVAILABLE') return appError('SEARCH_UNAVAILABLE', 503);
   if (code === 'COMMENTS_DISABLED') return appError('COMMENTS_DISABLED', error.status || 403);
@@ -120,14 +123,38 @@ async function readJson(request) {
   }
 }
 
+function nativeCredential(request) {
+  const match = (request.headers.get('Authorization') || '').match(/^Bearer ([A-Za-z0-9_.-]{20,8192})$/);
+  return match ? match[1] : '';
+}
+
 async function authenticatedContext(request, env, fetchImpl) {
-  const session = await readSession(request, env.YOUTUBE_SESSION_SECRET);
+  let session;
+  let native = false;
+  const credential = nativeCredential(request);
+  if (credential) {
+    // Cookies web y credenciales iOS usan distintos contextos cifrados.
+    // El token nativo solo es válido con su audiencia y caducidad.
+    try {
+      const decoded = await unseal(credential, env.YOUTUBE_SESSION_SECRET);
+      if (decoded?.kind !== 'ios-session' || decoded?.exp <= Date.now() ||
+          typeof decoded?.refreshToken !== 'string' || !decoded.refreshToken) {
+        throw new Error('invalid native session');
+      }
+      session = decoded;
+      native = true;
+    } catch {
+      throw appError('SESSION_EXPIRED', 401);
+    }
+  } else {
+    session = await readSession(request, env.YOUTUBE_SESSION_SECRET);
+  }
   if (!session) throw appError('SESSION_EXPIRED', 401);
 
-  if (typeof session.accessToken === 'string' && session.accessToken && Number(session.accessExp) > Date.now() + 60_000) {
-    return { session, accessToken: session.accessToken };
+  if (typeof session.accessToken === 'string' && session.accessToken &&
+      Number(session.accessExp) > Date.now() + 60_000) {
+    return { session, accessToken: session.accessToken, native };
   }
-
   try {
     const token = await refreshAccessToken({
       refreshToken: session.refreshToken,
@@ -135,13 +162,16 @@ async function authenticatedContext(request, env, fetchImpl) {
       clientSecret: env.GOOGLE_CLIENT_SECRET,
       fetchImpl
     });
-    return { session, accessToken: token.access_token };
+    return { session, accessToken: token.access_token, native };
   } catch {
-    throw appError('SESSION_EXPIRED', 401, true);
+    throw appError('SESSION_EXPIRED', 401, !native);
   }
 }
 
 function actionOriginAllowed(request, env) {
+  // El navegador conserva comprobación estricta de origen + CSRF.
+  // El cliente iOS aporta una sesión Bearer cifrada en Keychain.
+  if (nativeCredential(request)) return !request.headers.has('Origin');
   return request.headers.get('Origin') === env.ALLOWED_ORIGIN;
 }
 
@@ -170,6 +200,60 @@ export async function handleRequest(request, env, deps = {}) {
         'Access-Control-Allow-Headers': 'Content-Type, X-CSRF-Token'
       }
     });
+  }
+
+  // Autorización nativa con ASWebAuthenticationSession y doble PKCE:
+  // Google autentica el flujo web habitual del Worker; el segundo
+  // desafío vincula el ticket de regreso al iPhone iniciador.
+  if (url.pathname === '/auth/native/start' && request.method === 'GET') {
+    const challenge = url.searchParams.get('challenge') || '';
+    if (!/^[A-Za-z0-9_-]{43}$/.test(challenge) ||
+        !env.GOOGLE_CLIENT_ID || !env.YOUTUBE_SESSION_SECRET) {
+      return json({ error: 'NATIVE_AUTH_INVALID' }, 400, cors);
+    }
+    const verifier = randomToken(48);
+    const state = randomToken(32);
+    const oauthCookie = await createOauthCookie({
+      state, verifier, nativeChallenge: challenge,
+      exp: Date.now() + 10 * 60 * 1000
+    }, env.YOUTUBE_SESSION_SECRET);
+    const authorization = buildAuthorizationUrl({
+      clientId: env.GOOGLE_CLIENT_ID,
+      redirectUri: redirectUri(request, env),
+      state, challenge: await pkceChallenge(verifier)
+    });
+    return redirect(authorization.toString(), [oauthCookie]);
+  }
+
+  if (url.pathname === '/auth/native/exchange' && request.method === 'POST') {
+    if (request.headers.has('Origin')) {
+      return json({ error: 'NATIVE_AUTH_INVALID' }, 403, cors);
+    }
+    const { ticket, verifier } = await readJson(request);
+    if (typeof ticket !== 'string' || ticket.length > 8192 ||
+        typeof verifier !== 'string' || !/^[A-Za-z0-9_-]{43,128}$/.test(verifier)) {
+      return json({ error: 'NATIVE_AUTH_INVALID' }, 401, cors);
+    }
+    try {
+      const decoded = await unseal(ticket, env.YOUTUBE_SESSION_SECRET);
+      if (decoded?.kind !== 'ios-ticket' || decoded?.exp <= Date.now() ||
+          decoded?.exp > Date.now() + 60_000 ||
+          decoded?.challenge !== await pkceChallenge(verifier) ||
+          typeof decoded?.refreshToken !== 'string' || !decoded.refreshToken) {
+        throw new Error('invalid code verifier or expired ticket');
+      }
+      const session = {
+        kind: 'ios-session', refreshToken: decoded.refreshToken,
+        accessToken: decoded.accessToken, accessExp: decoded.accessExp,
+        exp: Date.now() + 7 * 24 * 60 * 60 * 1000
+      };
+      return json({
+        authenticated: true, token: await seal(session, env.YOUTUBE_SESSION_SECRET),
+        expiresAt: session.exp
+      }, 200, cors);
+    } catch {
+      return json({ error: 'NATIVE_AUTH_INVALID' }, 401, cors);
+    }
   }
 
   if (url.pathname === '/auth/start' && request.method === 'GET') {
@@ -201,7 +285,9 @@ export async function handleRequest(request, env, deps = {}) {
     const denied = url.searchParams.has('error');
 
     if (denied || !oauthState || !code || !state || oauthState.state !== state) {
-      return redirect(oauthFailure(env), [clearOauth]);
+      return redirect(oauthState?.nativeChallenge
+        ? 'tifloacosta://youtube-auth?error=denied'
+        : oauthFailure(env), [clearOauth]);
     }
 
     try {
@@ -225,10 +311,20 @@ export async function handleRequest(request, env, deps = {}) {
         csrf: randomToken(32),
         exp: Date.now() + 30 * 24 * 60 * 60 * 1000
       };
+      if (oauthState.nativeChallenge) {
+        const ticket = await seal({
+          kind: 'ios-ticket', challenge: oauthState.nativeChallenge,
+          refreshToken: session.refreshToken, accessToken: session.accessToken,
+          accessExp: session.accessExp, exp: Date.now() + 60_000
+        }, env.YOUTUBE_SESSION_SECRET);
+        return redirect('tifloacosta://youtube-auth?ticket=' + encodeURIComponent(ticket), [clearOauth]);
+      }
       const sessionCookie = await createSessionCookie(session, env.YOUTUBE_SESSION_SECRET);
       return redirect(oauthSuccess(env), [sessionCookie, clearOauth]);
     } catch {
-      return redirect(oauthFailure(env), [clearOauth]);
+      return redirect(oauthState?.nativeChallenge
+        ? 'tifloacosta://youtube-auth?error=failed'
+        : oauthFailure(env), [clearOauth]);
     }
   }
 
@@ -250,6 +346,14 @@ export async function handleRequest(request, env, deps = {}) {
   }
 
   if (url.pathname === '/session' && request.method === 'GET') {
+    if (nativeCredential(request)) {
+      try {
+        await authenticatedContext(request, env, fetchImpl);
+        return json({ authenticated: true }, 200, cors);
+      } catch {
+        return json({ authenticated: false }, 200, cors);
+      }
+    }
     const session = await readSession(request, env.YOUTUBE_SESSION_SECRET);
     return session
       ? json({ authenticated: true, csrf: session.csrf }, 200, cors)
@@ -266,8 +370,14 @@ export async function handleRequest(request, env, deps = {}) {
     }
   }
 
-  if (['/subscribe', '/like', '/comment', '/logout'].includes(url.pathname) && request.method === 'POST') {
+  if (['/subscribe', '/unsubscribe', '/like', '/unlike', '/comment', '/logout'].includes(url.pathname) && request.method === 'POST') {
     if (!actionOriginAllowed(request, env)) return json({ error: 'CSRF_INVALID' }, 403, cors);
+  }
+
+  if (url.pathname === '/logout' && request.method === 'POST' && nativeCredential(request)) {
+    // Sin sesión servidor persistente: la app borra el token de Keychain.
+    // El token protegido caduca por sí solo a los 7 días.
+    return json({ authenticated: false }, 200, cors);
   }
 
   if (url.pathname === '/logout' && request.method === 'POST') {
@@ -283,17 +393,23 @@ export async function handleRequest(request, env, deps = {}) {
     return json({ authenticated: false }, 200, headers);
   }
 
-  if (['/subscribe', '/like', '/comment'].includes(url.pathname) && request.method === 'POST') {
+  if (['/subscribe', '/unsubscribe', '/like', '/unlike', '/comment'].includes(url.pathname) && request.method === 'POST') {
     try {
-      const { session, accessToken } = await authenticatedContext(request, env, fetchImpl);
-      assertCsrf(request, session);
+      const { session, accessToken, native } = await authenticatedContext(request, env, fetchImpl);
+      if (!native) assertCsrf(request, session);
       const body = await readJson(request);
 
       if (url.pathname === '/subscribe') {
-        return json(await subscribe(accessToken, fetchImpl), 200, cors);
+        return json(await subscribe(accessToken, body.videoId || '', fetchImpl), 200, cors);
+      }
+      if (url.pathname === '/unsubscribe') {
+        return json(await unsubscribe(accessToken, body.videoId, fetchImpl), 200, cors);
       }
       if (url.pathname === '/like') {
         return json(await like(accessToken, body.videoId, fetchImpl), 200, cors);
+      }
+      if (url.pathname === '/unlike') {
+        return json(await unlike(accessToken, body.videoId, fetchImpl), 200, cors);
       }
       return json(await comment(accessToken, body.videoId, body.text, fetchImpl), 200, cors);
     } catch (error) {

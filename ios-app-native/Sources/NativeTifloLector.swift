@@ -53,11 +53,12 @@ final class NativeReaderLibrary: ObservableObject {
         }
     }
 
-    func importDocuments(from urls: [URL]) throws {
+    func importDocuments(from urls: [URL], sharingID: UUID? = nil) throws {
         for url in urls {
             let accessed = url.startAccessingSecurityScopedResource()
             defer { if accessed { url.stopAccessingSecurityScopedResource() } }
-            let identifier = UUID()
+            let identifier = sharingID ?? UUID()
+            if documents.contains(where: { $0.id == identifier }) { continue }
             do {
                 let payload = try NativeReaderFormats.read(url, documentID: identifier)
                 documents.insert(
@@ -78,12 +79,14 @@ final class NativeReaderLibrary: ObservableObject {
         }
     }
 
-    func importSharedText(_ text: String, title: String) throws {
+    func importSharedText(_ text: String, title: String, sharingID: UUID? = nil) throws {
         guard !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             throw NativeReaderImportError.noReadableText(title)
         }
+        let identifier = sharingID ?? UUID()
+        if documents.contains(where: { $0.id == identifier }) { return }
         documents.insert(
-            NativeReadingDocument(id: UUID(), title: title, body: text, importedAt: .now),
+            NativeReadingDocument(id: identifier, title: title, body: text, importedAt: .now),
             at: 0
         )
         try save()

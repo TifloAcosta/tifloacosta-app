@@ -31,6 +31,7 @@ struct TifloAcostaNativeApp: App {
                 .tint(TifloVisual.actionTint)
                 .environment(\.defaultMinListRowHeight, 48)
                 .environment(\.locale, Locale(identifier: languageIndex == 1 ? "en" : "es"))
+                .tifloVisualPreferences()
                 .preferredColorScheme(schemeIndex == 1 ? .light : schemeIndex == 2 ? .dark : nil)
         }
     }

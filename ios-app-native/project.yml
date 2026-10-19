@@ -23,6 +23,9 @@ targets:
         INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO
     entitlements:
       path: Sources/App.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.tifloacosta.app
     dependencies:
       - target: TifloAcostaShare
   TifloAcostaShare:
@@ -35,6 +38,9 @@ targets:
     # removing NSExtensionPointIdentifier and making App Store Connect reject the IPA.
     entitlements:
       path: ShareExtension/ShareExtension.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.tifloacosta.app
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.tifloacosta.app.ShareExtension

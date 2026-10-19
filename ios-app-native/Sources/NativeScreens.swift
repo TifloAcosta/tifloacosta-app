@@ -122,6 +122,7 @@ struct NativeHomeScreen: View {
                     .tint(TifloVisual.brandRed)
                     .disabled(searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 }
+                .listRowBackground(TifloVisual.surfaceRaised)
 
                 Section("Secciones") {
                     ForEach(NativeDestination.allCases) { destination in
@@ -140,6 +141,7 @@ struct NativeHomeScreen: View {
                         .accessibilityLabel(destination.rawValue)
                     }
                 }
+                .listRowBackground(TifloVisual.surfaceRaised)
 
                 if let error = catalog.error {
                     Section {

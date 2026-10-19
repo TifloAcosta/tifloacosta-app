@@ -49,6 +49,9 @@ private struct TifloScreenSurface: ViewModifier {
             .scrollContentBackground(.hidden)
             .background(TifloVisual.canvas)
             .tint(TifloVisual.actionTint)
+            .toolbarBackground(TifloVisual.brandDeepRed, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbarColorScheme(.dark, for: .navigationBar)
     }
 }
 

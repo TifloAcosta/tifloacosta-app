@@ -329,5 +329,5 @@ test('Invalid and browser-origin native authorization attempts are denied', asyn
     method: 'POST', headers: { Origin: env.ALLOWED_ORIGIN },
     body: JSON.stringify({ videoId: 'abcDEF123_-' })
   }), env, { fetchImpl: mockFetch() });
-  assert.equal(unauth.status, 403);
+  assert.equal(unauth.status, 401);
 });

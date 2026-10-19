@@ -300,7 +300,9 @@ export async function handleRequest(request, env, deps = {}) {
         fetchImpl
       });
       if (typeof tokens.refresh_token !== 'string' || !tokens.refresh_token) {
-        return redirect(oauthFailure(env), [clearOauth]);
+        return redirect(oauthState?.nativeChallenge
+          ? 'tifloacosta://youtube-auth?error=missing_refresh_token'
+          : oauthFailure(env), [clearOauth]);
       }
 
       const expiresIn = Number(tokens.expires_in);

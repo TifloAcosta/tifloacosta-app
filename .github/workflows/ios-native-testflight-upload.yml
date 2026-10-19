@@ -32,8 +32,14 @@ jobs:
         run: |
           set -euo pipefail
           node --test ios-app-native/tests/*.test.mjs
-          if grep -R -E 'WKWebView|CAPBridgeViewController|import Capacitor' ios-app-native/Sources; then
-            echo "::error::La app nativa contiene una interfaz web"
+          # Única excepción: YouTube exige su reproductor oficial dentro de WebKit.
+          # No permitir pantallas web ni Capacitor en el resto de SwiftUI.
+          if find ios-app-native/Sources -name '*.swift' ! -name 'NativeYouTubePlayer.swift' -print0 | xargs -0 grep -nE 'WKWebView|CAPBridgeViewController|import Capacitor'; then
+            echo "::error::Se ha detectado una interfaz híbrida fuera del reproductor oficial"
+            exit 1
+          fi
+          if grep -nE 'CAPBridgeViewController|import Capacitor' ios-app-native/Sources/NativeYouTubePlayer.swift; then
+            echo "::error::El reproductor de YouTube contiene código híbrido"
             exit 1
           fi
       - name: Seleccionar Xcode 26 y preparar herramientas

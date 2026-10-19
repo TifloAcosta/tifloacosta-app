@@ -9,7 +9,10 @@ const app = source('TifloAcostaNativeApp.swift');
 const home = source('NativeScreens.swift');
 
 test('Actualidad enlaza Escuchar y ver sin reemplazar el selector de noticias', () => {
-  assert.match(news, /NavigationLink\s*\{\s*NativeMediaScreen\(\)/);
+  assert.match(news, /NativeAdjustableChoice\(\s*title: "Seleccionar contenidos multimedia"/);
+  assert.match(news, /selectedIndex: \$mediaKindIndex/);
+  assert.match(news, /NavigationLink\s*\{\s*NativeMediaScreen\(\s*initialFormatIndex:/);
+  assert.match(media, /init\(initialFormatIndex: Int = 0\)/);
   assert.match(news, /NativeAdjustableChoice\(\s*title: "Categoría"/);
   assert.match(news, /accessibilityLabel\(NativeNewsMetadata\.accessibilitySummary\(item\)\)/);
   assert.match(news, /\.accessibilityAction\(named: Text\("Guardar en TifloLector"\)\)/);

@@ -171,9 +171,8 @@ struct NativeHomeScreen: View {
                 case .podcasts: NativePodcastScreen()
                 case .configuracion: NativeSettingsScreen()
                 case .contacto: NativeContactScreen()
+                case .favoritos: NativeFavoritesScreen()
                 case .privacidad: NativePrivacyAccessibilityScreen()
-                case .favoritos:
-                    NativePendingSectionScreen(title: destination.rawValue)
                 }
             }
         }
@@ -249,6 +248,7 @@ struct NativeResourcesScreen: View {
     @EnvironmentObject private var catalog: NativeCatalogStore
     @EnvironmentObject private var library: NativeReaderLibrary
     @EnvironmentObject private var resourceService: NativeResourceService
+    @EnvironmentObject private var favorites: NativeFavoritesStore
     @AppStorage("native-ios-language") private var languageIndex = 0
     @State private var chosenCategory: String?
     @State private var resourceToOpen: NativeCatalogItem?
@@ -357,6 +357,11 @@ struct NativeResourcesScreen: View {
                         .accessibilityAction(named: Text("Compartir")) {
                             if let url = item.resourceURL { NativeShare.present(url: url) }
                         }
+                        .accessibilityAction(named: Text(favorites.contains(.resource, item: item)
+                            ? "Quitar de favoritos" : "Añadir a favoritos")) {
+                            let added = favorites.toggle(.resource, item: item)
+                            announce(added ? "Añadido a Favoritos" : "Eliminado de Favoritos")
+                        }
                     }
                 }
             }
@@ -380,6 +385,7 @@ struct NativeResourcesScreen: View {
 
 struct NativeVideosScreen: View {
     @EnvironmentObject private var catalog: NativeCatalogStore
+    @EnvironmentObject private var favorites: NativeFavoritesStore
     @Environment(\.openURL) private var openURL
     @State private var query = ""
     @State private var sortIndex = 0
@@ -422,6 +428,10 @@ struct NativeVideosScreen: View {
                     }
                     .accessibilityAction(named: Text("Compartir")) {
                         if let url = item.videoURL { NativeShare.present(url: url) }
+                    }
+                    .accessibilityAction(named: Text(favorites.contains(.video, item: item)
+                        ? "Quitar de favoritos" : "Añadir a favoritos")) {
+                        _ = favorites.toggle(.video, item: item)
                     }
                 }
 

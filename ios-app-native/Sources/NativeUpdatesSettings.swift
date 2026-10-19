@@ -1,42 +1,204 @@
 import Foundation
 import SwiftUI
+import UIKit
 
-/// Native SwiftUI lists: resources and published news are content, never web screens.
-struct NativeUpdatesScreen: View {
-    @EnvironmentObject private var catalog: NativeCatalogStore
+// Novedades solo contiene incorporaciones propias del catálogo de TifloAcosta.
+// Las noticias de fuentes externas pertenecen exclusivamente a Actualidad.
+private enum NativeUpdateEntry: Identifiable {
+    case resource(NativeCatalogItem)
+    case video(NativeCatalogItem)
 
-    private var recentResources: [NativeCatalogItem] {
-        catalog.resources.filter { $0.lang == "es" && $0.isNew == true }
+    var item: NativeCatalogItem {
+        switch self {
+        case .resource(let item): return item
+        case .video(let item): return item
+        }
     }
 
-    private var recentNews: [NativeCatalogItem] {
-        catalog.news.filter { $0.lang == "es" }
+    var id: String {
+        switch self {
+        case .resource(let item): return "resource:" + item.id
+        case .video(let item): return "video:" + item.id
+        }
+    }
+
+    var publication: String {
+        item.newsDate ?? item.publishedAt ?? ""
+    }
+
+    var kind: String {
+        switch self {
+        case .resource: return "Recurso de TifloAcosta"
+        case .video: return "Vídeo del canal TifloAcosta"
+        }
+    }
+}
+
+struct NativeUpdatesScreen: View {
+    @EnvironmentObject private var catalog: NativeCatalogStore
+    @EnvironmentObject private var library: NativeReaderLibrary
+    @EnvironmentObject private var resourceService: NativeResourceService
+    @EnvironmentObject private var favorites: NativeFavoritesStore
+    @AppStorage("native-ios-language") private var languageIndex = 0
+    @Environment(\.openURL) private var openURL
+
+    @State private var selectedResource: NativeCatalogItem?
+    @State private var showingResource = false
+    @State private var actionStatus: String?
+
+    // Seleccionar las tres publicaciones propias más recientes, ya sean recursos
+    // marcados como nuevos o vídeos del canal, sin noticias externas.
+    private var latestUpdates: [NativeUpdateEntry] {
+        let resources = catalog.resources
+            .filter { $0.lang == (languageIndex == 1 ? "en" : "es") && $0.isNew == true && $0.resourceURL != nil }
+            .map(NativeUpdateEntry.resource)
+        let videos = catalog.videos
+            .filter { $0.videoURL != nil }
+            .map(NativeUpdateEntry.video)
+
+        return Array((resources + videos)
+            .filter { !$0.publication.isEmpty }
+            .sorted {
+                if $0.publication != $1.publication {
+                    return $0.publication > $1.publication
+                }
+                return $0.id < $1.id
+            }
+            .prefix(3))
+    }
+
+    private func announce(_ message: String) {
+        actionStatus = message
+        UIAccessibility.post(notification: .announcement, argument: message)
+    }
+
+    private func read(_ item: NativeCatalogItem) {
+        selectedResource = item
+        showingResource = true
+    }
+
+    private func save(_ item: NativeCatalogItem) {
+        Task {
+            do {
+                try await resourceService.saveInReader(item, library: library)
+                announce("«\(item.title)» guardado en TifloLector.")
+            } catch {
+                announce("No se pudo guardar «\(item.title)»: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    private func download(_ item: NativeCatalogItem) {
+        Task {
+            do {
+                try await resourceService.exportToFiles(item)
+                announce("Selecciona una carpeta en Archivos para descargar «\(item.title)».")
+            } catch {
+                announce("No se pudo descargar «\(item.title)»: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    private func openVideo(_ item: NativeCatalogItem) {
+        if let url = item.videoURL {
+            openURL(url)
+        } else {
+            announce("El enlace del vídeo no está disponible.")
+        }
+    }
+
+    private func share(_ item: NativeCatalogItem, isVideo: Bool) {
+        let url = isVideo ? item.videoURL : item.resourceURL
+        if let url {
+            NativeShare.present(url: url)
+        } else {
+            announce("No hay un enlace disponible para compartir.")
+        }
+    }
+
+    private func titleLabel(_ entry: NativeUpdateEntry) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(entry.item.title)
+                .font(.body)
+                .foregroundStyle(TifloVisual.primaryText)
+            Text(entry.kind)
+                .font(.subheadline)
+                .foregroundStyle(TifloVisual.secondaryText)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     var body: some View {
         List {
-            Section("Recursos nuevos") {
-                if recentResources.isEmpty { Text("No hay recursos nuevos.") }
-                ForEach(recentResources) { item in
-                    NavigationLink {
-                        NativeRemoteResourceScreen(item: item)
-                    } label: {
-                        Text(item.title).font(.body)
+            Section("Últimas incorporaciones de TifloAcosta") {
+                if latestUpdates.isEmpty {
+                    Text("No hay incorporaciones recientes disponibles.")
+                        .foregroundStyle(TifloVisual.secondaryText)
+                }
+                ForEach(latestUpdates) { entry in
+                    switch entry {
+                    case .resource(let item):
+                        NavigationLink {
+                            NativeRemoteResourceScreen(item: item)
+                        } label: {
+                            titleLabel(entry)
+                        }
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel("\(item.title). Recurso de TifloAcosta")
+                        .accessibilityHint("Doble toque para leer. Acciones: Leer, Guardar, Descargar y Compartir.")
+                        .accessibilityAction(named: Text("Leer")) { read(item) }
+                        .accessibilityAction(named: Text("Guardar")) { save(item) }
+                        .accessibilityAction(named: Text("Descargar")) { download(item) }
+                        .accessibilityAction(named: Text("Compartir")) {
+                            share(item, isVideo: false)
+                        }
+                        .accessibilityAction(named: Text(favorites.contains(.resource, item: item) ? "Quitar de favoritos" : "Añadir a favoritos")) {
+                            _ = favorites.toggle(.resource, item: item)
+                        }
+
+                    case .video(let item):
+                        Button {
+                            openVideo(item)
+                        } label: {
+                            titleLabel(entry)
+                        }
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel("\(item.title). Vídeo del canal TifloAcosta")
+                        .accessibilityHint("Doble toque para abrir el vídeo. Acciones: Abrir en YouTube y Compartir.")
+                        .accessibilityAction(named: Text("Abrir en YouTube")) {
+                            openVideo(item)
+                        }
+                        .accessibilityAction(named: Text("Compartir")) {
+                            share(item, isVideo: true)
+                        }
+                        .accessibilityAction(named: Text(favorites.contains(.video, item: item) ? "Quitar de favoritos" : "Añadir a favoritos")) {
+                            _ = favorites.toggle(.video, item: item)
+                        }
                     }
                 }
             }
-            Section("Últimas noticias") {
-                ForEach(Array(recentNews.prefix(10))) { item in
-                    NavigationLink {
-                        NativeNewsArticleScreen(item: item)
-                    } label: {
-                        Text(item.title).font(.body)
-                    }
+            .listRowBackground(TifloVisual.surfaceRaised)
+
+            if let actionStatus {
+                Text(actionStatus)
+                    .font(.footnote)
+                    .foregroundStyle(TifloVisual.secondaryText)
+                    .listRowBackground(TifloVisual.surfaceRaised)
+            }
+            if let error = catalog.error {
+                Text(error).foregroundStyle(TifloVisual.secondaryText)
+                Button("Actualizar novedades") {
+                    Task { await catalog.refresh() }
                 }
             }
         }
         .tifloScreenSurface()
         .navigationTitle("Novedades")
+        .navigationDestination(isPresented: $showingResource) {
+            if let selectedResource {
+                NativeRemoteResourceScreen(item: selectedResource)
+            }
+        }
     }
 }
 

@@ -76,6 +76,7 @@ enum NativeNewsMetadata {
 struct NativeNewsScreen: View {
     @EnvironmentObject private var catalog: NativeCatalogStore
     @EnvironmentObject private var library: NativeReaderLibrary
+    @AppStorage("native-ios-language") private var languageIndex = 0
     @Environment(\.openURL) private var openURL
 
     @State private var mediaKindIndex = 0
@@ -87,7 +88,7 @@ struct NativeNewsScreen: View {
     @State private var status: String?
 
     private var spanishNews: [NativeCatalogItem] {
-        catalog.news.filter { $0.lang == "es" }
+        catalog.news.filter { $0.lang == (languageIndex == 1 ? "en" : "es") }
     }
 
     private var categories: [String] {

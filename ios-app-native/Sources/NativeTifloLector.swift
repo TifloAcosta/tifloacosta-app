@@ -2,6 +2,7 @@ import SwiftUI
 import PDFKit
 import UIKit
 import AVFoundation
+import Translation
 import UniformTypeIdentifiers
 
 struct NativeReadingDocument: Codable, Identifiable {

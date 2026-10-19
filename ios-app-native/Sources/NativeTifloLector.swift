@@ -256,9 +256,7 @@ struct NativeReaderLibraryScreen: View {
     @AppStorage("native-reading-sort") private var sortIndex = 0
     @AppStorage("native-reading-speed-index") private var speedIndex = 2
     @AppStorage("native-reading-voice-id") private var voiceID = ""
-    @AppStorage("native-reader-sleep-index") private var sleepIndex = 0
     private let speeds: [Double] = [0.75, 0.9, 1.0, 1.25, 1.5]
-    private let sleepMinutes = [0, 5, 10, 15, 30, 45, 60]
 
     private var shownDocuments: [NativeReadingDocument] {
         let calendar = Calendar.current
@@ -302,7 +300,6 @@ struct NativeReaderLibraryScreen: View {
                 language: AVSpeechSynthesisVoice(identifier: voiceID)?.language ?? "es-ES",
                 voiceIdentifier: voiceID)
         }
-        speech.sleep(after: sleepMinutes[max(0, min(6, sleepIndex))])
     }
 
     var body: some View {

@@ -76,6 +76,7 @@ enum NativeNewsMetadata {
 struct NativeNewsScreen: View {
     @EnvironmentObject private var catalog: NativeCatalogStore
     @EnvironmentObject private var library: NativeReaderLibrary
+    @EnvironmentObject private var favorites: NativeFavoritesStore
     @AppStorage("native-ios-language") private var languageIndex = 0
     @Environment(\.openURL) private var openURL
 
@@ -258,6 +259,11 @@ struct NativeNewsScreen: View {
                         .accessibilityAction(named: Text("Guardar en TifloLector")) { save(item) }
                         .accessibilityAction(named: Text("Compartir")) { share(item) }
                         .accessibilityAction(named: Text("Abrir fuente original")) { openOriginal(item) }
+                        .accessibilityAction(named: Text(favorites.contains(.news, item: item)
+                            ? "Quitar de favoritos" : "Añadir a favoritos")) {
+                            let added = favorites.toggle(.news, item: item)
+                            announce(added ? "Añadido a Favoritos" : "Eliminado de Favoritos")
+                        }
                     }
                     if visibleCount < matchingNews.count {
                         Button("Mostrar diez más") { visibleCount += 10 }

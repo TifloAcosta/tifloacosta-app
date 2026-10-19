@@ -3,12 +3,11 @@ on:
   push:
     branches:
       - main
-      - 'ios/**'
     paths:
       - 'ios-app-native/**'
       - '.github/workflows/ios-native-swiftui-build.yml'
   pull_request:
-    branches: [main, 'ios/swiftui-native-separation-20261018']
+    branches: [main]
     paths:
       - 'ios-app-native/**'
       - '.github/workflows/ios-native-swiftui-build.yml'
@@ -31,8 +30,6 @@ jobs:
           fi
       - name: Check native home and catalog search
         run: node --test ios-app-native/tests/*.test.mjs
-      - name: Check corporate identity, contrast and native screen consistency
-        run: node --test ios-app-native/tests/visual-identity-contract.test.mjs
       - name: Install XcodeGen
         run: brew install xcodegen
       - name: Generate independent iOS project
@@ -87,7 +84,7 @@ jobs:
           xcrun simctl boot "$SIM_ID"
           xcrun simctl bootstatus "$SIM_ID" -b
           xcrun simctl install "$SIM_ID" "$RUNNER_TEMP/TifloNativeDerivedData/Build/Products/Debug-iphonesimulator/TifloAcostaNative.app"
-          xcrun simctl launch "$SIM_ID" com.tifloacosta.nativeprototype
+          xcrun simctl launch "$SIM_ID" com.tifloacosta.app
           sleep 8
           mkdir -p "$RUNNER_TEMP/native-preview"
           xcrun simctl io "$SIM_ID" screenshot "$RUNNER_TEMP/native-preview/home.png"

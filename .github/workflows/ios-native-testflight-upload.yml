@@ -1,9 +1,11 @@
 name: TifloAcosta iOS nativa - enviar a TestFlight
 on:
   push:
-    branches: [ios/testflight-integracion-20261019]
+    branches: [main]
     paths:
-      - 'ios-app-native/**'
+      - 'ios-app-native/Sources/**'
+      - 'ios-app-native/ShareExtension/**'
+      - 'ios-app-native/project.yml'
       - '.github/workflows/ios-native-testflight-upload.yml'
   workflow_dispatch:
 permissions:
@@ -108,6 +110,11 @@ jobs:
           test -f "$IPA"
           xcrun altool --upload-app --type ios --file "$IPA" --apiKey "$API_ID" --apiIssuer "$API_ISSUER"
           echo "Compilación enviada. Apple debe completar su procesamiento antes de verla en TestFlight."
+      - name: Confirmar beta disponible para probadores internos con Apple
+        timeout-minutes: 18
+        env:
+          TARGET_BUILD: ${{ env.IOS_BUILD_VERSION }}
+        run: node .github/scripts/verify-native-testflight.mjs
       - name: Limpiar claves y llavero temporal
         if: always()
         run: |

@@ -1,29 +1,37 @@
-# TifloAcosta iOS: aplicación NATIVA, sin interfaz HTML
+# TifloAcosta iOS — PROYECTO OFICIAL ÚNICO (SwiftUI)
 
-Este proyecto es una aplicación iOS **independiente** de la app Capacitor de `mobile/`. Su punto de entrada es `TifloAcostaNativeApp` y su interfaz se construye con SwiftUI.
+## Arquitectura y ruta única
 
-- **No** carga `mobile/src/index.html`, **no** presenta WKWebView, **no** combina dos capas de pantallas ni usa controles HTML.
-- **No** modifica las aplicaciones web ni Android.
-- Usa el catálogo público existente `https://tifloacosta.com/mobile-content.json`; recursos, vídeos y actualidad se muestran como listas nativas y se guardan en caché cuando es posible.
-- Presenta los títulos mediante controles accesibles nativos, acciones de accesibilidad SwiftUI y selectores `.accessibilityAdjustableAction` para filtros y orden.
-- TifloLector empieza a migrarse con biblioteca nativa separada, importación TXT/PDF con texto, lectura por síntesis de voz, confirmación antes de borrar y regulador de tamaño.
+- **Rama base:** `main`.
+- **Proyecto iOS:** `ios-app-native/`, generado con XcodeGen a partir de `ios-app-native/project.yml`.
+- **Interfaz:** SwiftUI nativa. El archivo de entrada único es `Sources/TifloAcostaNativeApp.swift`; no se cargan pantallas HTML, WKWebView, Capacitor ni interfaces superpuestas.
+- **Identificador de aplicación:** `com.tifloacosta.app`.
+- **Extensión Compartir:** `com.tifloacosta.app.ShareExtension`.
+- **Grupo de intercambio:** `group.com.tifloacosta.app`.
+- **Identidad:** `Sources/TifloVisual.swift`, común a todas las pantallas.
+- **Contenido:** catálogo compartido `https://tifloacosta.com/mobile-content.json` (datos, nunca interfaz web).
+- **Compatibilidad:** `mobile/` queda como proyecto Android; la web continúa en la raíz.
 
-## NO publicar como reemplazo de TestFlight todavía
+## Una sola publicación iOS
 
-El identificador temporal `com.tifloacosta.nativeprototype` **impide reemplazar por accidente** `com.tifloacosta.app` antes de alcanzar paridad funcional y migración de datos.
+- Validación: `.github/workflows/ios-native-swiftui-build.yml` (tests y compilación de simulador, no publica).
+- Envío: `.github/workflows/ios-native-testflight-upload.yml`, **exclusivamente desde main**, a la aplicación existente en App Store Connect. Firma ambos objetivos y valida que la compilación aparezca en el grupo interno.
+- Nuevos cambios en SwiftUI, extensión o configuración de iOS en `main` generan una compilación para TestFlight, después de pruebas de arquitectura. También puede ejecutarse manualmente el flujo de envío.
+- La numeración interna aumenta con el número de ejecución; nunca reutilizar una compilación distribuida.
+- Antes de anunciar disponibilidad, confirmar que Apple indique **VALID**, estado interno **IN_BETA_TESTING** o **READY_FOR_BETA_TESTING** y grupo interno autorizado.
 
-### Faltan funcionalidades antes de sustituir la beta
+Los directorios `mobile/ios-swiftui` y sus compilaciones experimentales han sido retirados; el antiguo flujo iOS híbrido de Capacitor se desactiva. `mobile/ios-native` conserva únicamente código de plugin heredado referenciado por el paquete móvil/Android; **no es una app ni se usa para construir iOS**. No reactivar su compilación como una segunda vía de publicación.
 
-1. Migrar los documentos, ajustes, marcas y progreso de la biblioteca iOS anterior preservando los datos y sin vaciarla.
-2. TifloLector: DOCX, PPTX, XLSX, EPUB, HTML, DAISY, OCR, audio, marcadores, búsqueda, cola, soporte completo de voces y lectura en segundo plano.
-3. Vídeos: reproductor interno accesible y funcional, búsqueda general en YouTube, acciones avanzadas y paginación real de resultados; por ahora la reproducción abre la aplicación/sitio YouTube externo.
-4. Implementar como pantallas nativas las secciones restantes (Recibidos, Descargas, Favoritos, Podcasts, Mi libro, Contacto, Configuración, búsqueda y compartir).
-5. Integrar la extensión de compartir iOS nativa con rutas correctas para archivos y enlaces, notificaciones y accesibilidad del ciclo completo.
-6. Verificar en dispositivo real VoiceOver y todos los gestos del rotor. Compilar en simulador **no** acredita compatibilidad del rotor.
-7. Cuando todo funcione y el usuario valide la nueva app, configurar firma y publicación con `com.tifloacosta.app`, retirando del lanzamiento iOS la compilación Capacitor.
+## Funciones todavía por terminar
 
-### Compilación de prueba
+La unificación de la arquitectura no equivale a completar todas las funcionalidades. Recursos y Actualidad usan vistas y acciones nativas de VoiceOver; otras secciones todavía pueden estar incompletas. Hay que comprobar las acciones reales del rotor con VoiceOver en el iPhone. Vídeos y TifloLector requieren completar reproducción, lectura, formatos, configuración y funciones pendientes. La extensión Compartir precisa pruebas con apps externas y formatos reales.
 
-La acción de GitHub `iOS native SwiftUI compilation` genera un proyecto Xcode con XcodeGen y lo compila sin firma para simulador. La compilación *no* envía nada a Apple.
+Las compilaciones que sustituyen a la beta híbrida previa pueden necesitar migración explícita de ajustes o documentos antes de una distribución general; no se debe prometer recuperación automática de datos antiguos. La versión 500002 ya se distribuyó para pruebas internas como SwiftUI nativa. **La única fuente para futuras correcciones es este proyecto de main.**
 
-**Criterio de arquitectura:** una sola interfaz nativa para cada sección; el contenido remoto puede ser texto o documentos, pero nunca una segunda interfaz web superpuesta.
+## Reglas obligatorias
+
+1. No añadir nuevos puntos de entrada iOS, prototipos de aplicación ni pantallas HTML.
+2. No aplicar una corrección exclusivamente en ramas de experimento; integrar a `main` y comprobar CI.
+3. No usar `npx cap add ios`, `npx cap sync ios` ni el paquete móvil híbrido para preparar versiones Apple.
+4. No afectar al código Android, web ni al catálogo de contenidos salvo encargo separado.
+5. Comprobar los controles con VoiceOver real tras la instalación; una compilación de simulador no valida por sí sola gestos.

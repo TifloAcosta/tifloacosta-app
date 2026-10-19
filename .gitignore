@@ -8,3 +8,11 @@ mobile/*.jks
 mobile/*.keystore
 mobile/keystore.properties
 .DS_Store
+
+# Proyecto iOS oficial: únicamente SwiftUI bajo ios-app-native/
+ios-app-native/*.xcodeproj/
+ios-app-native/*.xcworkspace/
+ios-app-native/build/
+ios-app-native/DerivedData/
+ios-app-native/*.xcarchive/
+ios-app-native/*.ipa

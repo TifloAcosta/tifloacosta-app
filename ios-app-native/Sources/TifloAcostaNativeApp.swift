@@ -1,7 +1,7 @@
 import SwiftUI
 
-/// A separate, truly native application entry point with no browser-based presentation.
-/// The existing TestFlight application keeps its original bundle identifier until feature parity.
+/// Entrada única y oficial de TifloAcosta para iOS; SwiftUI sin WebView ni Capacitor.
+/// Se publica con com.tifloacosta.app en TestFlight y posteriormente App Store.
 @main
 struct TifloAcostaNativeApp: App {
     @StateObject private var catalog = NativeCatalogStore()

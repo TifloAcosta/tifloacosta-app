@@ -15,9 +15,9 @@ targets:
       - Sources
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.tifloacosta.nativeprototype
+        PRODUCT_BUNDLE_IDENTIFIER: com.tifloacosta.app
         GENERATE_INFOPLIST_FILE: YES
-        INFOPLIST_KEY_CFBundleDisplayName: "TifloAcosta Nativa"
+        INFOPLIST_KEY_CFBundleDisplayName: "TifloAcosta"
         TARGETED_DEVICE_FAMILY: "1"
         CODE_SIGNING_ALLOWED: NO
         INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO
@@ -37,7 +37,7 @@ targets:
       path: ShareExtension/ShareExtension.entitlements
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.tifloacosta.nativeprototype.ShareExtension
+        PRODUCT_BUNDLE_IDENTIFIER: com.tifloacosta.app.ShareExtension
         INFOPLIST_FILE: ShareExtension/Info.plist
         GENERATE_INFOPLIST_FILE: NO
         CODE_SIGNING_ALLOWED: NO

@@ -1,5 +1,5 @@
-// Only the protected GitHub Actions copy of project.yml is changed.
-// The source-controlled prototype and the released Android/web apps are untouched.
+// Sólo prepara firma y numeración de la app oficial SwiftUI en el entorno temporal.
+// No transforma prototipos ni compila aplicaciones web/Capacitor para iOS.
 import fs from 'node:fs';
 import path from 'node:path';
 const root = path.resolve('ios-app-native');
@@ -8,14 +8,14 @@ let yaml=fs.readFileSync(config,'utf8');
 for (const name of ['IOS_PROFILE_APP_NAME','IOS_PROFILE_EXTENSION_NAME','GITHUB_RUN_NUMBER']) {
   if(!process.env[name]) throw Error('Falta variable: '+name);
 }
-const version=String(500000+Number(process.env.GITHUB_RUN_NUMBER));
+const version=String(Math.max(500003,500000+Number(process.env.GITHUB_RUN_NUMBER)));
 if(!/^\d+$/.test(version))throw Error('Número de compilación inválido');
 function replaceUnique(oldValue,newValue){
   if(yaml.split(oldValue).length!==2)throw Error('No se encuentra unívocamente '+oldValue);
   yaml=yaml.replace(oldValue,newValue);
 }
 replaceUnique(
-  'PRODUCT_BUNDLE_IDENTIFIER: com.tifloacosta.nativeprototype\n',
+  'PRODUCT_BUNDLE_IDENTIFIER: com.tifloacosta.app\n',
   [
     'PRODUCT_BUNDLE_IDENTIFIER: com.tifloacosta.app',
     '        DEVELOPMENT_TEAM: "3A8G8A62YZ"',
@@ -29,7 +29,7 @@ replaceUnique(
   ].join('\n')
 );
 replaceUnique(
-  'PRODUCT_BUNDLE_IDENTIFIER: com.tifloacosta.nativeprototype.ShareExtension\n',
+  'PRODUCT_BUNDLE_IDENTIFIER: com.tifloacosta.app.ShareExtension\n',
   [
     'PRODUCT_BUNDLE_IDENTIFIER: com.tifloacosta.app.ShareExtension',
     '        DEVELOPMENT_TEAM: "3A8G8A62YZ"',
@@ -41,8 +41,6 @@ replaceUnique(
     ''
   ].join('\n')
 );
-yaml=yaml.replace('INFOPLIST_KEY_CFBundleDisplayName: "TifloAcosta Nativa"',
-                  'INFOPLIST_KEY_CFBundleDisplayName: "TifloAcosta"');
 if((yaml.match(/CODE_SIGNING_ALLOWED: NO/g)||[]).length!==2)
  throw Error('No están presentes los dos objetivos firmables');
 yaml=yaml.replaceAll('CODE_SIGNING_ALLOWED: NO','CODE_SIGNING_ALLOWED: YES');

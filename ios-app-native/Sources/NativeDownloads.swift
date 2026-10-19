@@ -123,7 +123,7 @@ final class NativeDownloadStore: ObservableObject {
             let destination = folder.appendingPathComponent(UUID().uuidString + "-" + String(name.prefix(120)))
             try FileManager.default.copyItem(at: temporary, to: destination)
             refresh()
-            message = "Archivo descargado: \(name). Puedes importarlo a TifloLector o compartirlo desde Mis descargas."
+            message = "Archivo descargado en TifloAcosta: \(name). Está disponible en Mis descargas para importar a TifloLector o compartir."
         } catch let error as NativeDownloadLinkError {
             message = error.localizedDescription
         } catch let error as URLError {
@@ -194,7 +194,7 @@ struct NativeDownloadsScreen: View {
                     Text("Contenido: \(analysis.type)")
                         .font(.subheadline)
                         .foregroundStyle(TifloVisual.secondaryText)
-                    Button(store.busy ? "Descargando" : "Descargar") {
+                    Button(store.busy ? "Descargando en TifloAcosta" : "Descargar en TifloAcosta") {
                         Task {
                             await store.download(analysis)
                             announce()

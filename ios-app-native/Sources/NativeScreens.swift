@@ -432,53 +432,7 @@ struct NativeVideosScreen: View {
     }
 }
 
-struct NativeNewsScreen: View {
-    @EnvironmentObject private var catalog: NativeCatalogStore
-
-    private var articles: [NativeCatalogItem] {
-        catalog.news.filter { $0.lang == "es" }
-    }
-
-    var body: some View {
-        List(articles) { item in
-            NavigationLink {
-                NativeNewsArticleScreen(item: item)
-            } label: {
-                VStack(alignment: .leading, spacing: 5) {
-                    Text(item.title).font(.headline)
-                    if let excerpt = item.summary {
-                        Text(excerpt).font(.subheadline).foregroundStyle(.secondary).lineLimit(3)
-                    }
-                }
-            }
-        }
-        .overlay {
-            if articles.isEmpty { ContentUnavailableView("Sin noticias", systemImage: "newspaper") }
-        }
-        .navigationTitle("Actualidad")
-    }
-}
-
-struct NativeNewsArticleScreen: View {
-    let item: NativeCatalogItem
-    @Environment(\.openURL) private var openURL
-
-    var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 18) {
-                Text(item.title).font(.title2).bold()
-                Text(item.body ?? item.summary ?? "")
-                    .textSelection(.enabled)
-                if let url = item.articleURL {
-                    Button("Abrir fuente original") { openURL(url) }
-                }
-            }
-            .padding()
-        }
-        .navigationTitle("Noticia")
-        .navigationBarTitleDisplayMode(.inline)
-    }
-}
+// Las pantallas de Actualidad y lectura de noticias se definen en NativeNews.swift.
 
 @MainActor
 enum NativeShare {

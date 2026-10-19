@@ -76,6 +76,7 @@ struct NativeYouTubeChannel: Identifiable, Decodable {
     let id: String
     let title: String
     let description: String
+    var url: URL { URL(string: "https://www.youtube.com/channel/" + id)! }
 
     init?(search item: NativeYouTubeSearchItem) {
         guard let channelId = item.channelId, channelId.hasPrefix("UC"),

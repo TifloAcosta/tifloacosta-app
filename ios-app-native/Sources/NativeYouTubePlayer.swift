@@ -51,8 +51,8 @@ struct NativeYouTubeVideo: Identifiable {
     }
 
     init?(result: NativeYouTubeSearchItem) {
-        guard Self.validID(result.id) else { return nil }
-        id = result.id
+        guard let id = result.id, Self.validID(id) else { return nil }
+        self.id = id
         title = result.title
         channelTitle = result.channelTitle
         description = result.description
@@ -62,12 +62,33 @@ struct NativeYouTubeVideo: Identifiable {
 }
 
 struct NativeYouTubeSearchItem: Decodable {
-    let id: String
+    let id: String?
+    let kind: String?
+    let channelId: String?
     let title: String
     let channelTitle: String
     let description: String
     let publishedAt: String?
     let durationSeconds: Int?
+}
+
+struct NativeYouTubeChannel: Identifiable, Decodable {
+    let id: String
+    let title: String
+    let description: String
+
+    init?(search item: NativeYouTubeSearchItem) {
+        guard let channelId = item.channelId, channelId.hasPrefix("UC"),
+              channelId.count == 24 else { return nil }
+        id = channelId
+        title = item.title
+        description = item.description
+    }
+}
+
+struct NativeYouTubeSubscriptionPage: Decodable {
+    let items: [NativeYouTubeChannel]
+    let nextPageToken: String
 }
 private struct NativeYouTubeSearchPage: Decodable {
     let items: [NativeYouTubeSearchItem]
@@ -80,34 +101,48 @@ private struct NativeYouTubeSearchFailure: Decodable {
 @MainActor
 final class NativeYouTubeSearchStore: ObservableObject {
     @Published private(set) var videos: [NativeYouTubeVideo] = []
+    @Published private(set) var channels: [NativeYouTubeChannel] = []
     @Published private(set) var nextPageToken = ""
     @Published private(set) var isLoading = false
     @Published private(set) var message: String?
     @Published private(set) var hasSearched = false
 
     private var currentQuery = ""
+    private var currentFilter = "video"
+    private var currentChannelID: String?
     private let endpoint = URL(string: "https://youtube-auth.tifloacosta.com/search")!
 
-    func search(_ text: String, loadMore: Bool = false) async {
+    func search(_ text: String, filter: String = "video", channelID: String? = nil,
+                loadMore: Bool = false) async {
         guard !isLoading else { return }
         let cleanQuery = text.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !loadMore && cleanQuery.count < 2 {
+        if !loadMore && channelID == nil && cleanQuery.count < 2 {
             message = "Escribe al menos dos caracteres para buscar en YouTube."
             return
         }
         if loadMore && nextPageToken.isEmpty { return }
         if !loadMore {
             currentQuery = cleanQuery
+            currentFilter = filter
+            currentChannelID = channelID
             nextPageToken = ""
             videos = []
+            channels = []
             hasSearched = true
         }
         isLoading = true
         message = "Buscando en YouTube."
         defer { isLoading = false }
         do {
-            var components = URLComponents(url: endpoint, resolvingAgainstBaseURL: false)!
+            let target = currentChannelID == nil
+                ? endpoint : endpoint.deletingLastPathComponent().appendingPathComponent("channel-videos")
+            var components = URLComponents(url: target, resolvingAgainstBaseURL: false)!
             components.queryItems = [URLQueryItem(name: "q", value: currentQuery)]
+            if let channelID = currentChannelID {
+                components.queryItems?.append(URLQueryItem(name: "channelId", value: channelID))
+            } else {
+                components.queryItems?.append(URLQueryItem(name: "filter", value: currentFilter))
+            }
             if loadMore {
                 components.queryItems?.append(URLQueryItem(name: "pageToken", value: nextPageToken))
             }
@@ -133,9 +168,13 @@ final class NativeYouTubeSearchStore: ObservableObject {
             let newVideos = page.items.compactMap(NativeYouTubeVideo.init(result:))
             let previousIDs = Set(videos.map(\.id))
             videos += newVideos.filter { !previousIDs.contains($0.id) }
+            let newChannels = page.items.compactMap(NativeYouTubeChannel.init(search:))
+            let previousChannelIDs = Set(channels.map(\.id))
+            channels += newChannels.filter { !previousChannelIDs.contains($0.id) }
             nextPageToken = page.nextPageToken
-            message = videos.isEmpty ? "No se encontraron vídeos."
-                : "\(videos.count) vídeos encontrados hasta el momento."
+            let count = videos.count + channels.count
+            message = count == 0 ? "No se encontraron resultados."
+                : "\(count) resultados encontrados hasta el momento."
         } catch {
             message = (error as? SearchError)?.localizedDescription
                 ?? "No se pudo conectar con la búsqueda de YouTube."

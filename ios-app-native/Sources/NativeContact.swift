@@ -49,9 +49,7 @@ struct NativeContactScreen: View {
                 .accessibilityLabel(item.title)
                 .accessibilityHint("Doble toque para abrir el enlace externo.")
                 .accessibilityAction(named: Text("Compartir enlace")) {
-                    if url.scheme == "https" {
-                        NativeShare.present(url: url)
-                    }
+                    NativeShare.present(url: url)
                 }
             }
         }

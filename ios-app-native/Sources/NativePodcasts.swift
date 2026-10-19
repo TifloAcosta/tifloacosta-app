@@ -205,6 +205,7 @@ struct NativePodcastScreen: View {
                 }
             }
         }
+        .tifloScreenSurface()
         .navigationTitle("Podcasts")
         .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
             if player.episode != nil { player.updatePosition() }

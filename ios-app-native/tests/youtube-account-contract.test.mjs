@@ -53,3 +53,10 @@ test('Acciones protegidas requieren sesión y el Worker no devuelve contraseñas
   assert.match(worker, /unlike/);
   assert.doesNotMatch(worker, /json\(\{.*refreshToken:/);
 });
+
+test('La sesión nativa distingue cancelación, permisos y retorno del navegador', () => {
+  assert.match(account, /ASWebAuthenticationSessionError\.Code\.canceledLogin/);
+  assert.match(account, /missing_refresh_token/);
+  assert.match(account, /Google no devolvió una respuesta válida/);
+  assert.match(worker, /tifloacosta:\/\/youtube-auth\?error=missing_refresh_token/);
+});

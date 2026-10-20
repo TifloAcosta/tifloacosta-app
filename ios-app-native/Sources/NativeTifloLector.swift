@@ -424,7 +424,8 @@ struct NativeReaderLibraryScreen: View {
 
     private func play(_ document: NativeReadingDocument) {
         let latest = library.latest(document)
-        let speed = speeds[max(0, min(speeds.count - 1, speedIndex))]
+        let chosenSpeed = latest.readerPreferences?.speedIndex ?? speedIndex
+        let speed = speeds[max(0, min(speeds.count - 1, chosenSpeed))]
         if let track = latest.trackPaths?.first,
            let url = NativeReaderFormats.storedURL(for: track) {
             do { try speech.playAudio(url, speed: speed, at: latest.lastPercent ?? 0) }
@@ -432,8 +433,8 @@ struct NativeReaderLibraryScreen: View {
         } else {
             let offset = Int(Double(latest.body.count) * Double(latest.lastPercent ?? 0) / 100)
             speech.play(String(latest.body.dropFirst(offset)), speed: speed,
-                language: AVSpeechSynthesisVoice(identifier: voiceID)?.language ?? "es-ES",
-                voiceIdentifier: voiceID)
+                language: AVSpeechSynthesisVoice(identifier: latest.readerPreferences?.voiceID ?? voiceID)?.language ?? "es-ES",
+                voiceIdentifier: latest.readerPreferences?.voiceID ?? voiceID)
         }
     }
 
@@ -697,7 +698,7 @@ private struct NativeReaderTextLayout {
         }
         // Sin marcas de página explícitas, los fragmentos hacen de páginas virtuales.
         pageStarts = Array(Set((pages.count > 1 ? pages : offsets) + [0, totalCharacters])).sorted()
-        headingStarts = Array(Set(headings + [totalCharacters])).sorted()
+        headingStarts = headings.count > 1 ? Array(Set(headings)).sorted() : []
     }
 
     func nearbyOffset(_ offset: Int, direction: Int, unit: Int) -> Int? {

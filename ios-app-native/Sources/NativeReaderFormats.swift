@@ -36,7 +36,7 @@ struct NativeReaderFormatGroup: Identifiable {
 enum NativeReaderFormats {
     static let supportedFormatGroups: [NativeReaderFormatGroup] = [
         .init(title: "Textos", details: "TXT, TEXT, MD, MARKDOWN, CSV, JSON, XML, LOG y SRT."),
-        .init(title: "Documentos y publicaciones", details: "PDF con texto o escaneado mediante OCR; EPUB; HTML, HTM y RTF; DOCX."),
+        .init(title: "Documentos y publicaciones", details: "PDF con texto o escaneado mediante OCR; EPUB; HTML, HTM y RTF; DOCX, ODT y FB2 (texto sin imágenes incrustadas)."),
         .init(title: "Presentaciones", details: "PPTX, PPSX y PPTM: lectura por diapositivas. Las presentaciones PPS y PPT antiguas todavía no están admitidas."),
         .init(title: "Hojas de cálculo", details: "XLSX y XLSM: lectura por hojas, filas y columnas, incluidas cadenas compartidas. Los archivos XLS antiguos todavía no están admitidos."),
         .init(title: "Imágenes con OCR", details: "JPG, JPEG, PNG, HEIC, HEIF, TIF y TIFF."),
@@ -58,7 +58,7 @@ enum NativeReaderFormats {
             let saved = try storeMedia(url, documentID: documentID)
             return .init(body: "", fileExtension: ext, trackPaths: [saved])
         }
-        if ["epub", "docx", "pptx", "ppsx", "pptm", "xlsx", "xlsm", "zip", "daisy"].contains(ext) {
+        if ["epub", "docx", "odt", "pptx", "ppsx", "pptm", "xlsx", "xlsm", "zip", "daisy"].contains(ext) {
             return try readPackage(url, documentID: documentID, ext: ext)
         }
 
@@ -88,6 +88,19 @@ enum NativeReaderFormats {
             text = try recognizeText(in: data)
         case "html", "htm", "rtf":
             text = NativeDocumentText.extract(data, from: url)
+        case "fb2":
+            let source = String(data: data, encoding: .utf8)
+                ?? String(data: data, encoding: .utf16) ?? ""
+            // FictionBook embeds images as base64; never speak those binary blocks.
+            let clean = source.replacingOccurrences(
+                of: "(?is)<binary\\b[^>]*>.*?</binary>", with: " ",
+                options: .regularExpression
+            ).replacingOccurrences(
+                of: "(?i)</?(?:section|title|subtitle|stanza|v)\\b[^>]*>",
+                with: "\n", options: .regularExpression
+            )
+            text = NativeDocumentText.extract(Data(clean.utf8),
+                                              from: URL(fileURLWithPath: "book.html"))
         default:
             guard textExtensions.contains(ext) else { throw NativeReaderFormatError.unsupported(ext) }
             text = String(data: data, encoding: .utf8)
@@ -196,7 +209,7 @@ enum NativeReaderFormats {
             // Normalize XML namespaced paragraph/line tags before HTML text extraction.
             let raw = String(data: data, encoding: .utf8) ?? ""
             let normalized = raw.replacingOccurrences(
-                of: "(?i)</(?:a:p|w:p|text:p|row|c|p)>", with: "\n",
+                of: "(?i)</(?:a:p|w:p|text:p|text:h|row|c|p)>", with: "\n",
                 options: .regularExpression
             ).replacingOccurrences(
                 of: "(?i)<h[1-6]\\b[^>]*>", with: "\n# ",
@@ -217,6 +230,9 @@ enum NativeReaderFormats {
         case "docx":
             body = joined(all.filter { $0 == "word/document.xml" })
             format = "docx"
+        case "odt":
+            body = joined(all.filter { $0 == "content.xml" })
+            format = "odt"
         case "pptx", "ppsx", "pptm":
             body = NativeOfficeText.slides(all, text: extractedText)
             format = ext
@@ -239,8 +255,15 @@ enum NativeReaderFormats {
                 return lower.hasSuffix("ncc.html") || lower.hasSuffix(".smil")
                     || lower.hasSuffix(".ncx")
             }
-            let audioFiles = all.filter {
-                audioExtensions.contains(URL(fileURLWithPath: $0).pathExtension.lowercased())
+            let audioFiles = all.filter { path in
+                // Mac ZIP metadata (._name.mp3 in __MACOSX) is NOT playable audio.
+                let components = path.split(separator: "/")
+                guard !components.contains(where: {
+                    $0 == "__MACOSX" || $0.hasPrefix("._")
+                }) else { return false }
+                return audioExtensions.contains(
+                    URL(fileURLWithPath: path).pathExtension.lowercased()
+                )
             }
             guard isDaisy || (ext == "zip" && !audioFiles.isEmpty) else {
                 throw NativeReaderFormatError.invalidArchive

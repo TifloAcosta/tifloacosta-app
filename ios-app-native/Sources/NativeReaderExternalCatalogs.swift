@@ -407,7 +407,7 @@ private struct NativeReaderOPDSFeedScreen: View {
         page = nil
         defer { loading = false }
         do { page = try await NativeOPDSService.fetch(currentURL) }
-        catch { error = error.localizedDescription }
+        catch { self.error = error.localizedDescription }
     }
 
     private func searchGutenberg() {
@@ -419,64 +419,83 @@ private struct NativeReaderOPDSFeedScreen: View {
         if let url = components.url { currentURL = url }
     }
 
-    var body: some View {
-        List {
-            Section("Buscar") {
-                TextField("Título o autor", text: $searchText)
-                    .submitLabel(.search)
-                    .onSubmit { if isGutenberg { searchGutenberg() } }
-                if isGutenberg {
-                    Button("Buscar en todo Proyecto Gutenberg") { searchGutenberg() }
+    private var searchSection: some View {
+        Section("Buscar") {
+            TextField("Título o autor", text: $searchText)
+                .submitLabel(.search)
+                .onSubmit {
+                    if isGutenberg { searchGutenberg() }
+                }
+            if isGutenberg {
+                Button("Buscar en todo Proyecto Gutenberg") { searchGutenberg() }
+            } else {
+                Text("La búsqueda filtra los resultados de esta página del catálogo.")
+                    .font(.footnote)
+            }
+        }
+    }
+
+    private func importEntry(_ item: NativeOPDSEntry, link: NativeOPDSLink) {
+        importing = item.id
+        Task {
+            defer { importing = nil }
+            do {
+                try await NativeOPDSService.importBook(link, title: item.title, into: library)
+                message = "«\(item.title)» se ha guardado en tu biblioteca."
+            } catch {
+                self.error = error.localizedDescription
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func itemRow(_ item: NativeOPDSEntry) -> some View {
+        if let url = item.navigationURL, item.acquisition == nil {
+            NavigationLink {
+                NativeReaderOPDSFeedScreen(heading: item.title, initialURL: url,
+                                           isGutenberg: isGutenberg)
+            } label: {
+                VStack(alignment: .leading) {
+                    Text(item.title)
+                    if !item.author.isEmpty { Text(item.author).font(.footnote) }
+                }
+            }
+            .accessibilityHint("Abrir sección del catálogo.")
+        } else {
+            VStack(alignment: .leading, spacing: 6) {
+                Text(item.title)
+                if !item.author.isEmpty { Text(item.author).font(.footnote) }
+                if let link = item.acquisition {
+                    Button(importing == item.id ? "Importando" : "Importar a mi biblioteca") {
+                        importEntry(item, link: link)
+                    }
+                    .disabled(importing != nil)
+                    .accessibilityHint("Descarga la obra y la incorpora a TifloLector.")
                 } else {
-                    Text("La búsqueda filtra los resultados de esta página del catálogo.")
+                    Text("Esta entrada no ofrece descarga directa compatible.")
                         .font(.footnote)
                 }
             }
-            if loading { ProgressView("Consultando biblioteca") }
-            if let message { Text(message).accessibilityAddTraits(.updatesFrequently) }
-            Section("Resultados") {
-                if !loading && filtered.isEmpty {
-                    Text("No se encontraron obras en esta página.")
-                }
-                ForEach(filtered) { item in
-                    if let url = item.navigationURL, item.acquisition == nil {
-                        NavigationLink {
-                            NativeReaderOPDSFeedScreen(heading: item.title,
-                                                       initialURL: url,
-                                                       isGutenberg: isGutenberg)
-                        } label: {
-                            VStack(alignment: .leading) {
-                                Text(item.title)
-                                if !item.author.isEmpty { Text(item.author).font(.footnote) }
-                            }
-                        }
-                        .accessibilityHint("Abrir sección del catálogo.")
-                    } else {
-                        VStack(alignment: .leading, spacing: 6) {
-                            Text(item.title)
-                            if !item.author.isEmpty { Text(item.author).font(.footnote) }
-                            if let link = item.acquisition {
-                                Button(importing == item.id ? "Importando" : "Importar a mi biblioteca") {
-                                    importing = item.id
-                                    Task {
-                                        defer { importing = nil }
-                                        do {
-                                            try await NativeOPDSService.importBook(link, title: item.title,
-                                                                                    into: library)
-                                            message = "«\(item.title)» se ha guardado en tu biblioteca."
-                                        } catch { error = error.localizedDescription }
-                                    }
-                                }
-                                .disabled(importing != nil)
-                                .accessibilityHint("Descarga la obra y la incorpora a TifloLector.")
-                            } else {
-                                Text("Esta entrada no ofrece descarga directa compatible.")
-                                    .font(.footnote)
-                            }
-                        }
-                    }
-                }
+        }
+    }
+
+    private var resultsSection: some View {
+        Section("Resultados") {
+            if !loading && filtered.isEmpty {
+                Text("No se encontraron obras en esta página.")
             }
+            ForEach(filtered) { item in itemRow(item) }
+        }
+    }
+
+    var body: some View {
+        List {
+            searchSection
+            if loading { ProgressView("Consultando biblioteca") }
+            if let message {
+                Text(message).accessibilityAddTraits(.updatesFrequently)
+            }
+            resultsSection
             if let next = page?.nextURL {
                 Section {
                     Button("Mostrar más resultados") { currentURL = next }

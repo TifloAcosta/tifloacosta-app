@@ -35,7 +35,9 @@ test('Las miniaturas no añaden elementos a VoiceOver y funcionan con letra gran
     .split('private struct NativeYouTubeCommentScreen: View {')[0];
   for (const token of [
     'NativeYouTubeThumbnail(video: video)', 'dynamicTypeSize.isAccessibilitySize',
-    '.accessibilityElement(children: .ignore)', 'NativeYouTubeTitleActions',
+    '.accessibilityAction(.default)', 'NativeYouTubeTitleActions',
     'Button { onPlay(video) }'
   ]) assert.ok(row.includes(token), token);
+  // El botón real debe recibir el doble toque; un elemento sintético lo intercepta.
+  assert.ok(!row.includes('.accessibilityElement(children: .ignore)'));
 });

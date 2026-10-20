@@ -52,5 +52,5 @@ test('Supported formats screen is tied to actual decoders and does not claim leg
   assert.match(formats, /PPTX/);
   assert.match(formats, /XLSX/);
   assert.match(settings, /PPS, PPT y XLS todavía necesitan/);
-  assert.match(formats, /"pptx", "xlsx"/);
+  assert.match(formats, /"pptx", "ppsx", "pptm", "xlsx", "xlsm"/);
 });

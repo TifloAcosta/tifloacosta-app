@@ -821,6 +821,10 @@ struct NativeReadingScreen: View {
     }
 
     private func startTextSpeech() {
+        if readingOffset >= document.body.count {
+            readingOffset = 0
+            currentPercent = 0
+        }
         let remainder = String(document.body.dropFirst(readingOffset))
         guard !remainder.isEmpty else { return }
         speech.play(remainder, speed: speed,
@@ -929,6 +933,9 @@ struct NativeReadingScreen: View {
         // La lectura de voz sintetizada no tiene duración real antes de comenzar.
         // Distinguir siempre el tiempo medido de la estimación.
         let position = "Leído \(currentPercent) por ciento. Falta \(100 - currentPercent) por ciento."
+        if !tracks.isEmpty && !speech.hasAudio {
+            return "\(position) La duración de audio se mostrará al iniciar la pista."
+        }
         if speech.hasAudio {
             let elapsed = Int(speech.audioElapsed)
             let remaining = max(0, Int(speech.audioDuration) - elapsed)
@@ -1188,7 +1195,7 @@ struct NativeReadingScreen: View {
                 playbackTick += 1
                 if !speech.hasAudio { elapsedSpeakingSeconds += 1 }
             }
-            if speech.hasAudio && speech.isPlaying {
+            if speech.hasAudio {
                 let updated = speech.audioPercent
                 if updated != currentPercent { currentPercent = updated }
                 if abs(updated - lastSavedPercent) >= 5 { persistPosition() }

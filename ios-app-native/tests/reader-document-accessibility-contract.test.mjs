@@ -38,7 +38,7 @@ test('Long text is lazily segmented and VoiceOver is not force-recentered', () =
 
 test('Audio polling never rewinds on each 2-percent progress increment', () => {
   assert.match(reader, /private var positionBinding: Binding<Int>/);
-  assert.match(reader, /if speech\.hasAudio \{ speech\.seek\(to: value\) \}/);
+  assert.match(reader, /if speech\.hasAudio \{\s*speech\.seek\(to: value\)/);
   assert.match(reader, /if abs\(updated - lastSavedPercent\) >= 5/);
   assert.doesNotMatch(reader, /\.onChange\(of: currentPercent\)/);
 });

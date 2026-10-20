@@ -1,5 +1,149 @@
 [
   {
+    "id": "9to5mac-394cdee9b72cd16a",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/20/iphone-duo-orders-limited-to-two-per-customer-as-apple-tackles-scalping/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-20T11:05:13.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iPhone Duo orders limited to two per customer as Apple tackles scalping",
+        "summary": "Apple is limiting iPhone Duo orders to a maximum of two per customer in the US, UK, and elsewhere after shipping dates slipped into January of next year within minutes of pre-orders opening . The move appears to be an attempt to tackle the problem of scalping, where people buy large volumes of supply-constrained devices in order to resell them on eBay for well above the retail price … more…",
+        "body": "Apple is limiting iPhone Duo orders to a maximum of two per customer in the US, UK, and elsewhere after shipping dates slipped into January of next year within minutes of pre-orders opening .\n\nThe move appears to be an attempt to tackle the problem of scalping, where people buy large volumes of supply-constrained devices in order to resell them on eBay for well above the retail price …\n\nEngadget reports that it tried to add more than two iPhone Duo units to its cart on the Apple stores in the US, UK, Japan, and Spain, and received a notification advising it of the limit.\n\nWe’ve tried adding more than two units to our cart on the Apple Stores for Japan, Spain and the United Kingdom, in addition to the US, and we’ve received a warning notice across all the online stores. The notification said: “A maximum of 2 iPhone Duo can be purchased per customer. Please adjust the total quantity of iPhone Duo in your order before checking out.”\n\nThe site said that the same limit applies no matter what configuration you select.\n\nThe company is almost certainly implementing the move in a bid to reduce scalping. We’ve already seen dozens of iPhone Duos listed on eBay by scalpers, some with prices exceeding $5,000 .\n\nIt’s not the first time Apple has imposed limits on supply-constrained iPhones. The company has done this in China multiple times, with limits applied to walk-in purchases in retail stores as well as those made online. The company has also done it in the US before , with the first example being the iPhone 5 way back in 2012.\n\nIndustrial-level scalping is hard to defeat. Organized gangs use multiple virtual credit card numbers, email addresses, and delivery addresses in order to circumvent limits. Others pay people to place orders on their behalf.\n\nAll the same, it’s good to see Apple at least attempting to reduce the scale of the problem. It’s also possible the company is implementing other behind-the-scenes measures to detect and reject more sophisticated bulk purchase attempts.\n\nAs we predicted , some customers have seen improvements to their estimated delivery dates. It’s also worth trying for a walk-in purchase if you live close to an Apple store – just not on day one ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-1b7a2ad4a4469a2c",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/20/yelp-can-now-call-on-your-behalf-to-check-wait-times-at-a-restaurant/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-20T11:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Yelp can now call on your behalf to check wait times at a restaurant",
+        "summary": "Yelp is embedding numerous new AI features into its app that can do everything from call to check on restaurant wait times to create personalized recommendations that remember your preferences.",
+        "body": "Over the last few weeks, personal assistants like Instinct, Fo, and Muse have enabled users to call businesses for customer support and appointment booking. Following this trend, Yelp is adding the ability for its app users to get a voice agent to call a restaurant to check wait times.\n\nThe new feature, Check for Me, will show up on restaurant pages in the app, where users can enter their party size and phone number. The AI agent then calls on behalf of the user to check wait times and texts them the results to decide if they want to go to that particular restaurant.\n\nLast year, Yelp debuted its voice solution for restaurants and service providers . With this new feature, the discovery platform is fulfilling the consumer side of the equation, though there is a possibility that a user’s agent will talk to the restaurant’s agent, and agent-to-agent communication might break down the conversation.\n\nThe company is also updating its Yelp AI assistant that helps users discover restaurants and services. With the new OpenTable integration, users can easily book a restaurant without leaving the app.\n\nYelp is adding better personalization to its assistant by having it remember preferences that you might have mentioned in previous chats. Plus, you can access your chat history from the past 30 days in the app, with full history available soon.\n\nUsers can ask the chatbot to set custom reminders, such as sending suggestions for weekend activities every Friday. The company is also letting users build their own lists, starting with two “Been Here” and “Want to Go” lists. You can filter your lists by location, category, and cuisine, reorder, add notes to items, and share them with others.\n\nNext month, the company will start showing weekly personalized recommendations based on your saved items and rankings. Yelp is also working on converting collections to lists and giving the lists tab a new look, rolling out later in the year, along with a maps view.\n\nTo cap off all these changes, Yelp has been thinking about enhancing customer support and business processes through AI. In the new update, the company is releasing a new paid product called Smart Lead Reply, which can reply to customers and engage with them to qualify a lead. Business owners, who will be charged $30 per month for these services, can specify how an agent should handle a conversation with a customer. Other companies like Meta have also been courting small businesses with AI offerings to handle inbound customer inquiries ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-e8e378b029fc9487",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/20/otter-ai-raises-320-million-from-general-catalysts-growth-fund-for-its-meeting-tool/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-20T11:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Otter.ai raises $320 million from General Catalyst’s growth fund for its meeting tool",
+        "summary": "Meeting note-taking tool Otter.ai announced on Tuesday that it has raised $320 million from General Catalyst’s Customer Value Fund (CVF), which provides capital to startups without diluting equity and gets returns on the results of marketing spend. Otter.ai said that it will use these funds for enterprise growth, go-to-market strategy, international expansion, and product innovation. […]",
+        "body": "Meeting note-taking tool Otter.ai announced on Tuesday that it has raised $320 million from General Catalyst’s Customer Value Fund (CVF), which provides capital to startups without diluting equity and gets returns on the results of marketing spend.\n\nOtter.ai said that it will use these funds for enterprise growth, go-to-market strategy, international expansion, and product innovation.\n\nThe startup, which has been around for nearly a decade, has raised $50 million in total funding with its last round in 2021, according to PitchBook data.\n\nLast year, Otter hit a revenue milestone after crossing $100 million in annual recurring revenue (ARR) . The company said it’s now approaching new milestones, but didn’t provide updated figures.\n\nThe company said that 40 million users have used its product to date, up from 25 million last year. However, given the crowded space among meeting note-taking products, a pertinent challenge for Otter would be to have its customers stick around. Unfortunately, the startup didn’t provide any numbers around its monthly active users or churn.\n\n“Voice is one of the biggest untapped opportunities in enterprise AI, and Otter is at the forefront of it – a conviction that’s only deepened watching Otter’s growth,” said Pranav Singhvi, Partner and Co-founder of CVF, General Catalyst. “When Otter enables enterprises to capture critical voice data and turns it into actionable business insights, teams move faster, decisions get sharper, and productivity compounds across the organization, and that’s why it’s a strong partner for CVF.”\n\nThere is a lot of competition in the market with well-funded meeting notetakers like Fireflies.ai, Granola , and Read AI ; new entrants like Calendly , Wispr , and Superhuman, which acquired Fathom ; and other notetakers like Circleback, Talat, and Quill.\n\nMost of these notetakers want to connect to enterprise systems and, based on data captured in meetings, automate workflows. Otter is also heading in that direction. In the last few years, it introduced a meeting assistant , a search function that works across apps , and integration with other AI tools .\n\nOtter’s newly appointed CMO, Alex Gay, who comes from Superhuman, told TechCrunch at a sit-down at the HumanX conference last month that the company sees a big opportunity in turning transcripts into an actionable roadmap for people who are in back-to-back meetings.\n\n“When we start thinking about what is actually the bigger problem that people are facing right now, we saw this large pain point in meeting-heavy roles, where people are back-to-back in conversations. These meetings are the work for them. That’s either customer conversations or, from a sales standpoint. That’s where strategies are discussed. But meetings are terribly inefficient because when you come into a meeting, you spend the first twenty minutes recapping what was said before to catch everybody up,” he said.\n\nThe company is now experimenting with providing insights before, after, and during meetings. It has been testing a feature to send a pre-brief to users with details and background information, with context from previous conversations across surfaces. Plus, it is also trying out a Live Assist feature to let users ask questions to the AI assistant during the meeting to get knowledge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-5013f9e5d2b2df37",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1014209/google-home-speaker-bug-continuous-download",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-20T10:16:47.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Some Google Home Speakers caught downloading hundreds of gigs of data",
+        "summary": "Some Google Home Speaker owners are currently experiencing an issue in which hundreds of gigabytes of data are being continuously downloaded to their device in the background. The bug, reported by 9to5Google and several Reddit users over the last week, may be caused by the speakers failing to correctly download and install a firmware update, […]",
+        "body": "Some Google Home Speaker owners are currently experiencing an issue in which hundreds of gigabytes of data are being continuously downloaded to their device in the background. The bug, reported by 9to5Google and several Reddit users over the last week , may be caused by the speakers failing to correctly download and install a firmware update, with one Redditor finding that his device was consuming more than 200GB per day.\n\nThankfully, Google is aware of the issue. In a statement to 9to5Google , the company said that \"a fix is already rolling out that should address this for users.\" Most of the reports are tied specifically to the new Google Ho …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-3102653d26068d24",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/20/a-look-at-recent-apple-security-updates/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-20T10:00:00.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple @ Work Podcast: A look at recent Apple security updates",
+        "summary": "Apple @ Work is exclusively brought to you by Mosyle , the only Apple Unified Platform. Mosyle is the only solution that integrates in a single professional-grade platform all the solutions necessary to seamlessly and automatically deploy, manage & protect Apple devices at work. Over 45,000 organizations trust Mosyle to make millions of Apple devices work-ready with no effort and at an affordable cost. Request your EXTENDED TRIAL today and understand why Mosyle is everything you need to work with Apple . In this episode of Apple @ Work, Adam Boynton from Jamf joins the show to talk about Apple’s recent security updates and the importance of patching older devices. more…",
+        "body": "Apple @ Work is exclusively brought to you by Mosyle , the only Apple Unified Platform. Mosyle is the only solution that integrates in a single professional-grade platform all the solutions necessary to seamlessly and automatically deploy, manage & protect Apple devices at work. Over 45,000 organizations trust Mosyle to make millions of Apple devices work-ready with no effort and at an affordable cost. Request your EXTENDED TRIAL today and understand why Mosyle is everything you need to work with Apple .\n\nIn this episode of Apple @ Work, Adam Boynton from Jamf joins the show to talk about Apple’s recent security updates and the importance of patching older devices."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-0e327b094847ddeb",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2291389/apple-store-two-iphone-duo-limit/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-20T09:07:59.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The Apple Store will only let you check out two iPhone Duos",
+        "summary": "Apple is limiting iPhone Duo purchases to two per customers around the world.",
+        "body": "Apple will warn you to adjust the number of Duos in your cart if you attempt to buy more than two.\n\nApple is limiting the number of iPhone Duo units you can pre-order to two per customer, not just in the US, but also in other regions around the world. We've tried adding more than two units to our cart on the Apple Stores for Japan, Spain and the United Kingdom, in addition to the US, and we've received a warning notice across all the online stores. The notification said: \"A maximum of 2 iPhone Duo can be purchased per customer. Please adjust the total quantity of iPhone Duo in your order before checking out.\" It didn't matter what configuration we tried to purchase — we got the same warning if we had more than two units in our cart.\n\nAs MacRumors reports, it's not clear when Apple put the limit in place. According to people on Reddit's iPhone Duo community , some customers were able to place an order for more than two when the company started taking pre-orders on October 16. It's also unclear if and how the company is preventing scalpers from buying more than two units by creating multiple accounts and using different credit cards. That Apple is implementing a purchase limit doesn't come as a surprise. It previously said that the demand for the iPhone Duo was \"nothing short of extraordinary,\" and it had to push back shipping dates to 2027 soon after pre-orders started.\n\nSure enough, all the stores we've checked show a shipping estimate of January 22, so you will probably have to wait until next year if you haven't pre-ordered yours yet. Some people have been reporting that their shipping estimates were bumped up to earlier slots than the ones they were originally told, but you may have to look at retailers if you want to get your hands on a unit for the holiday season. Best Buy is still showing us a November 10 pick-up and shipping date for the 512GB Duo and December 14 for the 256GB ."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "the-verge-5e1362e2fd70f026",
     "type": "news",
     "sourceId": "the-verge",
@@ -120,78 +264,6 @@
     "media": null
   },
   {
-    "id": "techcrunch-21eebb6d01af07e2",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/19/embedded-ai-evaluators-wont-be-an-easy-solution-hugging-faces-policy-chief-says/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-19T22:49:27.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Embedded AI evaluators won’t be an easy solution, Hugging Face’s policy chief says",
-        "summary": "The idea of embedded evaluators — in which supposedly \"neutral\" third-party observers are placed inside AI organizations — has been popularized over the last several months, as AI labs grapple with a rash of safety incidents that have spurred concerns over the potential harms of their technology.",
-        "body": "AI labs have staked their reputations on model benchmarking — the supposedly neutral and accurate system of evaluations that are designed to measure whether one AI product is better than another.\n\nHowever, the methods behind these evaluations are complicated and still maturing, said Irene Solaiman, Hugging Face’s chief policy officer, during a discussion at TechCrunch Disrupt last week. Testing needs to come together into a more consistent science if the industry is to rely on them in the future.\n\nWith that in mind, can we trust the current tests that are being released?\n\n“Trust is such a weighted term,” said Solaiman. “In terms of whether we can trust results, one big part [of that] is can you reproduce the results of an evaluation? Do you have the level of access that you need to the model itself — this is where open weights come in in a big way,” she added.\n\nReproducibility in model evaluations has long remained one of the stickier aspects of benchmarking — and remains a topic of significant debate in the industry.\n\nOutside of an individual test’s validity, there’s also the added question of how that test compares to other evaluations.\n\n“They are an evolving science — where we don’t know how to meaningfully compare them to each other,” Solaiman said.\n\n“They start to get ineffective relatively quickly, and we don’t have as much of a thriving ecosystem as we need,” she added. “There’s this hunger for an embedded evaluator ecosystem now, but the qualifications that determine who is an effective evaluator across what tasks need a lot more standardization.”\n\nThe idea of embedded evaluators — in which supposedly “neutral” third-party observers are placed inside AI organizations — has been popularized over the last several months, as AI labs grapple with a rash of safety incidents that have spurred concerns over the potential harms of their technology. Hugging Face was famously the target of one of those incidents.\n\nInstead of active government regulation to identify and mitigate model safety concerns, labs have pushed for the third-party solution. However, doubts remain over how neutral or effective those evaluators will actually be. Anthropic’s decision to hire Accenture as its first evaluator spurred a good amount of backlash, with some critics mocking the idea that the consulting firm was qualified to do the task at hand.\n\nEvaluations are now moving from merely a test of the model itself to a test of the entire system around the model — including the harness and agent. The harness — or the tool the user is using to access the model — specifically, has a lot to do with a model’s performance, and a weaker model with a better harness could easily out perform a frontier model, Soleiman shared.\n\n“Agentic evals are really hard and really expensive,” said Solaiman. “We have just more evaluations for models. … We don’t have as many evaluations for harnesses, and we are developing better evaluations for the holistic agent — because that’s what a lot of folks are getting value out of,” she added.\n\nIn other words: the evaluation space is a bit of a free-for-all at the moment, and if benchmarking is going to continue to be seen as a useful tool for industry leaders, a more uniform, industry-wide approach — where everyone is on the same page — may be necessary."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-d59a2ad6200ba07a",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2288083/wifi-7-router-delivering-lower-speeds-reasons/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-19T22:30:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Why your expensive Wi-Fi 7 router could be delivering slower speeds",
-        "summary": "Don't tuck your router away in a corner, even if it is a bit of an eyesore.",
-        "body": "Don't tuck your router away in a corner, even if it is a bit of an eyesore.\n\nThe jump from Wi-Fi 6 and 6E to Wi-Fi 7 promises a significant boost in speed. Depending on your circumstances, it could be around four times faster , if not more. Some estimates pin the number around 46 Gbps, at least in theory . But if you poke around on online forums like Reddit , you'll find a swath of new Wi-Fi 7 converts confused about why their speeds aren't what they expected. There's also plenty of troubleshooting in the effort to attain those foretold, blazing-fast speeds, particularly after investing in a new and potentially more expensive setup.\n\nWhile an issue like slower-than-desired speeds could be caused by a number of factors, there are a few reasons worth investigating first, from the placement of your router to how many devices you're using. Here are some simple reasons your Wi-Fi router might be delivering slower speeds.\n\nThe Wi-Fi Alliance launched Wi-Fi 7 in 2024. As Engadget noted , a new standard \"comes with enhanced speeds and plenty of back-of-the-box buzzwords.\" Among Wi-Fi 7's updated perks are lower latency and increased capacity to deal with congestion as well as high-density environments, to name a few. In other words, if you've got a smart home crammed with devices down to your light bulbs, Wi-Fi 7 could improve your experience.\n\nDespite the buzz, it's also worth remembering that you don't have to rush out and buy all new electronics. Wi-Fi 7 is backwards compatible, so older devices should still work, even if they won't benefit from the amped up speeds and new features of Wi-Fi 7. Data from connectivity intelligence firm Ookla found that as of the beginning of 2026, Wi-Fi 7 adoption had grown to 7.2% of the market , as compared to 1.8% a year before.\n\nOdds are you probably want to stick your router somewhere inconspicuous, like a closet or a corner. Despite the aesthetic advantages of squirreling the device away, where you place the router could be slowing you down. XDA explained that when situated too close to drywall, for example, the router's signals bounce off the walls and back toward its antennae, in turn degrading that original signal.\n\nThe fix could be as simple as moving the router to a place like an open media console shelf, or at least three feet out from the corner. Once you do that, rerun the test and see if your speeds have improved .\n\nAside from where you position your router, you might also consider how many devices are connected to it. These days, phones and tablets are hardly the only devices on the Wi-Fi. You might have everything from wearables to home appliances connected, even if they're not always active at the same time. You'll want to pay attention to whether slowdowns happen when everyone is home and streaming or remain relatively consistent throughout the day, as that could be an indicator of what's going on. Most homes have at least 20 connected devices , according to Netgear. To keep up, you need not only a router with a fast processor that can accommodate a number of devices and that offers at least two frequency bands, but also enough bandwidth from your internet service provider.\n\nNetgear also noted that Wi-Fi 7 introduced multi-link operation (MLO), which lets compatible devices use multiple bands (2.4 GHz, 5 GHz and 6 GHz) at the same time, ideally creating connections that are both faster and more reliable."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-91676bd2f3f7ed35",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/19/microsoft-says-ai-agents-are-like-insider-threats-as-frontier-models-cant-be-trusted/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-19T22:04:28.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Microsoft says AI agents are like insider threats as ‘frontier models can’t be trusted’",
-        "summary": "Microsoft wants enterprises to closely watch the agents that employees use with systems not controlled by AI labs like OpenAI and Anthropic.",
-        "body": "Microsoft on Monday introduced new security features designed to protect enterprises from the growing threat of AI agents. The launch comes at Microsoft continues to warn enterprises about the dangers of AI and agents.\n\nPerhaps the most notable addition is Guardian Agents , a new feature intended to monitor the AI agents a company uses. Guardian Agents is part of Project Perception, a product introduced in June.\n\nProject Perception was Microsoft’s answer to powerful hacking models like Anthropic’s Mythos and Fable and OpenAI’s security vulnerability scanning system Daybreak. Project Perception originally launched three classes of agents: a “red team” that acted like hackers and attacked, a “blue team” that detected the red team and assessed the vulnerabilities they found, and a “green team” tasked with fixing them.\n\nThe product was designed around the assumption that AI hackers would come from outside the company. But lately, Microsoft CEO Satya Nadella has been warning that the AI enemy may be the very agents enterprises have deployed and are paying for, much like a rogue human employee, otherwise known as an “insider threat.”\n\nEarlier this month, in his private blog , Nadella warned that it’s time to stop trusting AI model providers, even if they offer assurances of safety and security with their agentic products. He wants enterprises to implement separate systems, not controlled by the AI labs, to watch and control the agents that those AI labs’ products launch.\n\n“We are deploying these complex agentic systems and models, with access to our most sensitive data and giving them the ability to take mission-critical actions on our behalf!” he wrote. “We simply can’t outsource responsibility for what intelligence does on our behalf. A model provider’s assurances do not relieve us of that responsibility. … In other words, we need to separate the supply of intelligence from the authority over it.”\n\nWhen announcing Guardian Agents, Microsoft’s security business chief Hayete Gallot was even more straightforward.\n\n“Unfortunately, frontier models, regardless of their origin, cannot be trusted,” she wrote, adding that this isn’t because they are malicious or easily hacked, but because they are unpredictable. They have been trained to achieve tasks, not follow “organizational norms or judgment.”\n\nOn top of that, they are often given the keys to the kingdom, with access to data and tools that could do serious harm.\n\nMicrosoft’s solution is both surprising and self-serving. The surprising side is that Microsoft is famously close to OpenAI and Anthropic, having invested in both. OpenAI is also one of its biggest cloud customers, and Microsoft has its own AI lab developing models. So, Microsoft is sowing distrust against some of its own business interests.\n\nThe self-serving side is that Microsoft wants enterprises to buy agent security products from it, the cloud provider, rather than from Anthropic and OpenAI. But conflicting interests aside, its logic is sound. The software that monitors agent behavior should be separate from the suppliers of agents, just as auditors should be independent of the organizations they audit.\n\nOr as Nadella puts it: “We need to separate the supply of intelligence from the authority over it.”\n\nMicrosoft is now seizing that business opportunity in a variety of ways. In addition to Guardian Agents, it has added an agent detection feature to its Microsoft Defender product that can find up to 60 types of agents that employees bring into the workplace, including Claude Code, Codex, and OpenClaw. It has also added features that limit agents’ access to data and systems, and dynamically adjust their agent permissions based on the task. That includes requiring human approval if an agent appears to be making risky decisions.\n\nThis idea of agents as untrustworthy insiders is taking hold across the broader industry, too.\n\nMicrosoft was an inaugural member of Nvidia’s new Open Agent Safety Platform, which garnered the support of more than 100 other tech companies. The platform isolates agents in secure environments and can monitor and stop behavior through hardware, functioning something like a kill switch. This follows Microsoft’s announcement of the new Surface Laptop Ultra PCs built for agents , which run on Nvidia chips and have agent security and controls baked in."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "the-verge-1f7788eab5885584",
     "type": "news",
     "sourceId": "the-verge",
@@ -209,32 +281,8 @@
     "locales": {
       "en": {
         "title": "CoreWeave’s debt is becoming the whole AI industry’s problem",
-        "summary": "CoreWeave had a bad week last week. Its bonds slipped into distressed territory by a common definition - when investors demand 1,000 basis points more in yield than they'd get from government bonds. Last Tuesady Chamath \"SPAC King\" Palihapitiya noticed the distressed debt, and also asked whether the AI buildout was a private credit bubble. […]",
-        "body": "CoreWeave had a bad week last week. Its bonds slipped into distressed territory by a common definition - when investors demand 1,000 basis points more in yield than they'd get from government bonds. Last Tuesady Chamath \"SPAC King\" Palihapitiya noticed the distressed debt , and also asked whether the AI buildout was a private credit bubble . Its shares are down more than 20 percent since Tuesday's close, which is kind of a lot! There even seemed to be some collateral damage in the market on other AI companies, too.\n\nNow, I have also asked if the AI industry is a bubble, but when the SPAC King echoes concerns held by a lady whose ongoing questi …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-051019445d480199",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/19/best-iphone-18-pro-accessories-solid-state-power-bank/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-19T20:58:36.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Best iPhone 18 Pro accessories: Solid-state power banks, MagSafe, chargers, more",
-        "summary": "The iPhone 18 Pro has arrived and the 3-in-1 MagSafe charging stations, CarPlay accessories, and wall adapters to max your charging speeds, all of that and more awaits below with more on the way soon, as well as our top picks for the new foldable. more…",
-        "body": "The iPhone 18 Pro has arrived and the Duo will very soon as well, so let’s scope out some notable accessory pickups to elevate the experience. From safety and reliability-focused Qi2 Solid-State Power Banks and our favorite Find My add-ons , to the best 3-in-1 MagSafe charging stations , CarPlay accessories , and wall adapters to max your charging speeds, all of that and more awaits below with more on the way soon, as well as our top picks for the new foldable.\n\nNot all power banks are made equal and the latest from Hyper is the perfect example – a true Qi2 semi-solid-state solution specifically designed for everyday portable charging with enhanced safety features and thermal stability made possible by the next-generation battery tech. The 5,000mAh capacity is not only airline carry-on compliant, but is complimented by a bonus USB-C port so you can juice two devices at once – one via the main MagSafe pad and one wired over USB-C.\n\nThe HyperJuice Next 5K Qi2 Solid-State Power Bank has undergone 115+ independent safety tests to ensure “consistent, safe operation” with a build designed to withstand everyday drops, bumps and exposure to “extreme temperatures without swelling.” I for one am sick of these things overheating and then having to worry about it – I’ll be going with semi-solid-state models from now on.\n\n9to5Mac readers can also land a special discount right now to deliver the lowest price we have tracked to date using code 9TO5MAC20QI2BP at checkout\n\nIf you ask me, Nomad makes the best Find My wallet tracker cards win the game, whether it’s the ultra-thin Air or the higher-end metal bezel Pro model. I also happen to think these Find MY cards are a must-have and easily one of the best iPhone 18 Pro accessories you can buy.\n\nI have tested out a near-countless number of 3-in-1 MagSafe charging stations and, while I do like the Belkin models, my absolute three favorite options come from Satechi, Nomad, and Anker – sleekSpace Black metal, a high-end statement piece unlike any other on the market, and a high-tech, conversations tarting display-equipped model:\n\nGetting a new iPhone is a great excuse to also upgrade your CarPlay setup. The new AirFly Drive accessory coverts wired CarPlay to wireless in thousands of cars. Plus, it comes from Twelve South, which makes some of the most reliable accessories on the market.\n\nWhile not only an iPhone 18 Pro accessory by any means, I still think the latest AirTag 2 has to be on this list, much like AirPods Pro 3 . It effectively expands your iPhone 18 Pro’s capabilities by way of adding remote tracking action to just about you can affix an AirTag 2.\n\nIf you want to charge your iPhone 18 Pro as fast as possible, you need a specific type of charging block. This option straight from Apple features a compact foldable design and can boost your iPhone to 50% in just 15 minutes.\n\nApple’s Beats brand makes my favorite USB-C cables on the market. They come in a number of different sizes and colors, and are ultra durable and tangle-free thanks to their woven design. You can’t go wrong picking up a few of these to place around your house and in your car.\n\nThis is probably our favorite travel chargers to pair with the iPhone 18 Pro right now, thanks to its built-in international plugs that cut down on the number of adapters I need to carry while traveling. It also has a smart display for checking live charging stats and can deliver up to 100W over USB-C, giving you enough power for an iPhone, iPad, MacBook, and other gear from one compact unit.\n\nAnker’s latest 45W Nano is easily one of the best compact chargers you can pair with the iPhone 18 Pro right now. It has a built-in smart display, updated device recognition, AVS support, and even OTA updates for future compatibility, all packed into a tiny body that still has enough power for an iPhone, iPad, or even a MacBook Air.\n\nThe PicoGo Air 5K is the one to pick if you want a genuinely slim MagSafe battery for the iPhone 18 without adding too much bulk. It’s impressively thin for a 5,000mAh pack and works well for quick top-ups on the go. Baseus also offers a slightly thicker Qi2.2 version if you’d rather have faster 25W wireless charging.\n\nUpdating…\n\nBest iPhone 18 Pro cases now available for purchase [Update #2]"
+        "summary": "CoreWeave had a bad week last week. Its bonds slipped into distressed territory by a common definition - when investors demand 1,000 basis points more in yield than they'd get from government bonds. Last Tuesday Chamath \"SPAC King\" Palihapitiya noticed the distressed debt, and also asked whether the AI buildout was a private credit bubble. […]",
+        "body": "CoreWeave had a bad week last week. Its bonds slipped into distressed territory by a common definition - when investors demand 1,000 basis points more in yield than they'd get from government bonds. Last Tuesday Chamath \"SPAC King\" Palihapitiya noticed the distressed debt , and also asked whether the AI buildout was a private credit bubble . Its shares are down more than 20 percent since Tuesday's close, which is kind of a lot! There even seemed to be some collateral damage in the market on other AI companies, too.\n\nNow, I have also asked if the AI industry is a bubble, but when the SPAC King echoes concerns held by a lady whose ongoing questi …\n\nRead the full story at The Verge."
       }
     },
     "media": null
@@ -282,56 +330,6 @@
         "title": "Upward: Number Merge Puzzle",
         "summary": "Drop a number. Set off a chain. Climb to Orbit. Only the bottom rungs ever fall. Drop a number into one of five columns, watch equal numbers double where they touch, and let gravity chain one merge into the next — climbing 2 Pebble all the way to 512 Orbit. NO ADS. NO LIVES. NO BOOSTS. No ads, no consumable lives to wait out, and nothing you can buy to raise a score. Pro is a one-time unlock or a Play Pass — or nothing at all. PLAN THE CLIMB See the piece in hand and the next two pieces before you commit. Choose a column, set up connected matches, and build chain reactions that can transform the whole board. ONE SHARED DAILY Every player starts with the same Daily seed and 50-drop rules. Later pieces respond to your climb, so planning the ladder matters. 16 FIXED CHALLENGES Learn Upward through four chapters of authored, repeatable boards. The four-stage Trailhead chapter is free. Pro opens Ridgecraft, Thin Air, and Orbit School, with XP and board-theme rewards along the way. FIVE WAYS TO PLAY • Daily Climb — the shared 50-drop board • Classic — an open climb to Orbit • Blitz — two minutes, no take-backs • Chain Hunt — 50 drops with bonus points for deep cascades • Rising Sky — safe board space contracts every 10 drops BUILT TO FEEL GOOD Number-first tiles stay readable across every theme. Landing feedback, escalating haptics, rising chain tones, danger states, and a full Orbit celebration make every important move clear. WHAT FREE INCLUDES Free players receive the full Daily Climb, the Daily and Classic leaderboards, three Classic starts per day, the four-stage Trailhead, missions, achievements, and recent local progress. Upward Pro adds unlimited Classic, three specialty modes, 12 advanced challenges, 500-run history, two years of Daily archives, the Blitz leaderboard, friend challenges, Daily history sync, and two more board themes. Choose a one-time Upward Full Game Unlock, or StackForge Play Pass (monthly or annual) — Pro in every StackForge game plus One Good Thing. Prices and renewal terms appear before purchase. Terms of Use (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/ Privacy Policy: https://stackforgestudios.com/privacy",
         "body": "Drop a number. Set off a chain. Climb to Orbit.\n\nOnly the bottom rungs ever fall. Drop a number into one of five columns, watch equal numbers double where they touch, and let gravity chain one merge into the next — climbing 2 Pebble all the way to 512 Orbit.\n\nNO ADS. NO LIVES. NO BOOSTS. No ads, no consumable lives to wait out, and nothing you can buy to raise a score. Pro is a one-time unlock or a Play Pass — or nothing at all.\n\nPLAN THE CLIMB See the piece in hand and the next two pieces before you commit. Choose a column, set up connected matches, and build chain reactions that can transform the whole board.\n\nONE SHARED DAILY Every player starts with the same Daily seed and 50-drop rules. Later pieces respond to your climb, so planning the ladder matters.\n\n16 FIXED CHALLENGES Learn Upward through four chapters of authored, repeatable boards. The four-stage Trailhead chapter is free. Pro opens Ridgecraft, Thin Air, and Orbit School, with XP and board-theme rewards along the way.\n\nFIVE WAYS TO PLAY • Daily Climb — the shared 50-drop board • Classic — an open climb to Orbit • Blitz — two minutes, no take-backs • Chain Hunt — 50 drops with bonus points for deep cascades • Rising Sky — safe board space contracts every 10 drops\n\nBUILT TO FEEL GOOD Number-first tiles stay readable across every theme. Landing feedback, escalating haptics, rising chain tones, danger states, and a full Orbit celebration make every important move clear.\n\nWHAT FREE INCLUDES Free players receive the full Daily Climb, the Daily and Classic leaderboards, three Classic starts per day, the four-stage Trailhead, missions, achievements, and recent local progress. Upward Pro adds unlimited Classic, three specialty modes, 12 advanced challenges, 500-run history, two years of Daily archives, the Blitz leaderboard, friend challenges, Daily history sync, and two more board themes.\n\nChoose a one-time Upward Full Game Unlock, or StackForge Play Pass (monthly or annual) — Pro in every StackForge game plus One Good Thing. Prices and renewal terms appear before purchase.\n\nTerms of Use (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/ Privacy Policy: https://stackforgestudios.com/privacy"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-c1982cae2fa7c93a",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/19/daily-october-19-2026/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-19T19:26:33.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "android",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "9to5Mac Daily: October 19, 2026 – iPhone Duo demand, HomeView rumors",
-        "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily . more…",
-        "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily .\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-75d5fbde97293ff9",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1013028/apple-second-october-product-launch-announcement",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-19T16:04:29.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple teases MacBook Pro event next week",
-        "summary": "Apple has sent invites to a second product launch this month, and it's scheduled for October 28th at 1PM ET in Los Angeles. At the event, Apple is set to announce new Macs and a refreshed iPad Mini, according to Bloomberg. The big announcement is expected to be a new MacBook Pro with an OLED […]",
-        "body": "Apple has sent invites to a second product launch this month, and it's scheduled for October 28th at 1PM ET in Los Angeles.\n\nAt the event, Apple is set to announce new Macs and a refreshed iPad Mini, according to Bloomberg . The big announcement is expected to be a new MacBook Pro with an OLED touchscreen that's also lighter and has an iPhone-like Dynamic Island. But Apple is also planning on revealing a 14-inch MacBook Pro and a new iMac with the M6 chip, which was recently introduced with the Mac Mini . Apple's updated iPad Mini will apparently finally get an OLED screen as well and put the selfie cam on the landscape edge.\n\n\"Can't wait to p …\n\nRead the full story at The Verge."
       }
     },
     "media": null

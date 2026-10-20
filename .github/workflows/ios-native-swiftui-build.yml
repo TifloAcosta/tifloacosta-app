@@ -38,6 +38,14 @@ jobs:
         run: node --test ios-app-native/tests/*.test.mjs
       - name: Install XcodeGen
         run: brew install xcodegen
+      - name: Verificar icono oficial iOS sin bordes blancos
+        run: |
+          set -euo pipefail
+          ASSETS="ios-app-native/Sources/Assets.xcassets/AppIcon.appiconset"
+          mkdir -p "$ASSETS"
+          swift ios-app-native/scripts/make-app-icon.swift tifloacosta-icon-512.png "$ASSETS/AppIcon.png"
+          test -s "$ASSETS/AppIcon.png"
+          printf '%s\n' '{"images":[{"filename":"AppIcon.png","idiom":"universal","platform":"ios","size":"1024x1024"}],"info":{"author":"xcode","version":1}}' > "$ASSETS/Contents.json"
       - name: Generate independent iOS project
         working-directory: ios-app-native
         run: xcodegen generate --spec project.yml

@@ -21,7 +21,7 @@ enum NativeReaderFormatError: LocalizedError {
         switch self {
         case .unsupported(let ext): return "El formato \(ext) todavía no dispone de un lector compatible."
         case .empty(let name): return "No se ha encontrado contenido legible en «\(name)»."
-        case .invalidArchive: return "El ZIP no contiene un libro DAISY ni pistas de audio reconocibles."
+        case .invalidArchive: return "No se ha podido abrir el paquete o el ZIP no contiene un libro DAISY ni pistas de audio reconocibles."
         case .oversizedArchive: return "El archivo comprimido supera los límites de seguridad de tamaño o cantidad de ficheros."
         }
     }
@@ -37,8 +37,8 @@ enum NativeReaderFormats {
     static let supportedFormatGroups: [NativeReaderFormatGroup] = [
         .init(title: "Textos", details: "TXT, TEXT, MD, MARKDOWN, CSV, JSON, XML, LOG y SRT."),
         .init(title: "Documentos y publicaciones", details: "PDF con texto o escaneado mediante OCR; EPUB; HTML, HTM y RTF; DOCX."),
-        .init(title: "Presentaciones", details: "PPTX: lectura en orden numérico de las diapositivas. Las presentaciones PPS y PPT antiguas todavía no están admitidas."),
-        .init(title: "Hojas de cálculo", details: "XLSX: lectura por hojas, filas y columnas, incluidas cadenas compartidas. Los archivos XLS antiguos todavía no están admitidos."),
+        .init(title: "Presentaciones", details: "PPTX, PPSX y PPTM: lectura por diapositivas. Los formatos binarios PPS y PPT antiguos todavía no están admitidos."),
+        .init(title: "Hojas de cálculo", details: "XLSX y XLSM: lectura por hojas, filas y columnas, incluidas cadenas compartidas. Los archivos XLS antiguos todavía no están admitidos."),
         .init(title: "Imágenes con OCR", details: "JPG, JPEG, PNG, HEIC, HEIF, TIF y TIFF."),
         .init(title: "Audiolibros y audio", details: "MP3, M4A, M4B, AAC, WAV, AIF, AIFF y CAF. Pistas consecutivas dentro de un ZIP de audiolibro, ordenadas naturalmente por sus nombres."),
         .init(title: "DAISY", details: "Libros DAISY empaquetados en ZIP o con extensión DAISY. Lectura de texto y pistas de audio; la navegación SMIL completa sigue en desarrollo."),
@@ -58,7 +58,7 @@ enum NativeReaderFormats {
             let saved = try storeMedia(url, documentID: documentID)
             return .init(body: "", fileExtension: ext, trackPaths: [saved])
         }
-        if ["epub", "docx", "pptx", "xlsx", "zip", "daisy"].contains(ext) {
+        if ["epub", "docx", "pptx", "ppsx", "pptm", "xlsx", "xlsm", "zip", "daisy"].contains(ext) {
             return try readPackage(url, documentID: documentID, ext: ext)
         }
 
@@ -217,14 +217,14 @@ enum NativeReaderFormats {
         case "docx":
             body = joined(all.filter { $0 == "word/document.xml" })
             format = "docx"
-        case "pptx":
+        case "pptx", "ppsx", "pptm":
             body = NativeOfficeText.slides(all, text: extractedText)
-            format = "pptx"
-        case "xlsx":
+            format = ext
+        case "xlsx", "xlsm":
             body = NativeOfficeText.spreadsheet(all) { path in
                 try? Data(contentsOf: directory.appendingPathComponent(path))
             }
-            format = "xlsx"
+            format = ext
         case "epub":
             let pages = all.filter {
                 ($0.hasSuffix(".xhtml") || $0.hasSuffix(".html") || $0.hasSuffix(".htm"))

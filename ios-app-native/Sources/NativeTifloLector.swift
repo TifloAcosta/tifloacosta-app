@@ -753,6 +753,8 @@ struct NativeReadingScreen: View {
     @State private var showAudioSettings = false
     @State private var showVisualSettings = false
     @State private var showDocumentActions = false
+    @State private var showDocumentInformation = false
+    @State private var showSavedMarks = false
     @State private var programmaticFocusRequest = false
     @State private var actionMessage: String?
     @AccessibilityFocusState private var focusedFragment: Int?
@@ -1060,6 +1062,8 @@ struct NativeReadingScreen: View {
 
     @ViewBuilder
     private var documentActions: some View {
+        Button("Información de la obra") { showDocumentInformation = true }
+        Button("Marcas guardadas") { showSavedMarks = true }
         Button("Añadir marca") { addBookmark() }
         Button(latest.isFavorite == true ? "Quitar de favoritos" : "Añadir a favoritos") {
             library.toggleFavorite(document)
@@ -1098,6 +1102,46 @@ struct NativeReadingScreen: View {
                             isPresented: $showDocumentActions,
                             titleVisibility: .visible) {
             documentActions
+        }
+        .sheet(isPresented: $showDocumentInformation) {
+            NavigationStack {
+                List {
+                    LabeledContent("Título", value: latest.title)
+                    LabeledContent("Formato", value: latest.formatLabel)
+                    LabeledContent("Importado", value:
+                        latest.importedAt.formatted(date: .abbreviated, time: .shortened))
+                    LabeledContent("Carpeta", value: latest.folderName ?? "Sin carpeta")
+                    LabeledContent("Marcas", value: "\(latest.bookmarks.count)")
+                    Text(progressDescription)
+                    if !tracks.isEmpty {
+                        LabeledContent("Pistas de audio", value: "\(tracks.count)")
+                    }
+                }
+                .tifloScreenSurface()
+                .navigationTitle("Información de la obra")
+                .toolbar { Button("Cerrar") { showDocumentInformation = false } }
+            }
+        }
+        .sheet(isPresented: $showSavedMarks) {
+            NavigationStack {
+                List {
+                    if latest.bookmarks.isEmpty {
+                        Text("Esta obra todavía no tiene marcas.")
+                    }
+                    ForEach(latest.bookmarks, id: \.self) { percent in
+                        Button("Ir a \(percent) por ciento") {
+                            move(to: percent)
+                            showSavedMarks = false
+                        }
+                        .accessibilityAction(named: Text("Eliminar esta marca")) {
+                            library.removeBookmark(document, at: percent)
+                        }
+                    }
+                }
+                .tifloScreenSurface()
+                .navigationTitle("Marcas guardadas")
+                .toolbar { Button("Cerrar") { showSavedMarks = false } }
+            }
         }
         .sheet(isPresented: $showAudioSettings) {
             NativeReaderDocumentAudioSettingsScreen(document: document)

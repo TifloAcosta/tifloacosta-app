@@ -136,7 +136,7 @@ final class NativeReaderLibrary: ObservableObject {
     @discardableResult
     func createFolder(named rawName: String) -> Bool {
         let name = rawName.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !name.isEmpty, name.count <= 80,
+        guard !name.isEmpty, name.count <= 80, name != "__unfiled__",
               !folders.contains(where: { $0.localizedCaseInsensitiveCompare(name) == .orderedSame })
         else { return false }
         folders.append(name)
@@ -146,8 +146,8 @@ final class NativeReaderLibrary: ObservableObject {
     }
 
     func move(_ document: NativeReadingDocument, to folder: String?) {
-        guard folder == nil || folders.contains(folder!),
-              let index = documents.firstIndex(where: { $0.id == document.id }) else { return }
+        if let folder, !folders.contains(folder) { return }
+        guard let index = documents.firstIndex(where: { $0.id == document.id }) else { return }
         documents[index].folderName = folder
         try? save()
     }
@@ -161,6 +161,12 @@ final class NativeReaderLibrary: ObservableObject {
         try? save()
         folders.removeAll { $0 == folder }
         UserDefaults.standard.set(folders, forKey: folderStorageKey)
+    }
+
+    func resetPreferences(_ document: NativeReadingDocument) {
+        guard let index = documents.firstIndex(where: { $0.id == document.id }) else { return }
+        documents[index].readerPreferences = nil
+        try? save()
     }
 
     func addBookmark(_ document: NativeReadingDocument, at percent: Int) {

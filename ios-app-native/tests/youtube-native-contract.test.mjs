@@ -34,7 +34,7 @@ test('Todo título del canal o de resultados abre el mismo reproductor accesible
   assert.match(row, /Button\s*\{\s*onPlay\(video\)\s*\}/);
   assert.doesNotMatch(row, /\.accessibilityElement\(children: \.ignore\)/);
   assert.match(row, /\.accessibilityAction\(\.default\)\s*\{\s*onPlay\(video\)/);
-  const favoriteVideo = favorites.split('case .video:')[1].split('\n                    }')[0];
+  const favoriteVideo = favorites.split('                    case .video:')[1].split('\n                    }')[0];
   assert.doesNotMatch(favoriteVideo, /\.accessibilityElement\(children: \.ignore\)/);
   assert.match(favoriteVideo, /\.accessibilityAction\(\.default\)/);
   assert.match(favorites, /NativeYouTubeVideo\(catalog: entry\.item\)/);

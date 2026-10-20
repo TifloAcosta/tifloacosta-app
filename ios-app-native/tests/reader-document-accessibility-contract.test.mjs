@@ -31,7 +31,8 @@ test('Long text is lazily segmented and VoiceOver is not force-recentered', () =
   assert.match(reader, /LazyVStack\(alignment: \.leading/);
   assert.match(reader, /ForEach\(textLayout\.fragments\.indices/);
   assert.match(reader, /programmaticFocusRequest/);
-  assert.match(reader, /if let index, programmaticFocusRequest/);
+  assert.match(reader, /if programmaticFocusRequest/);
+  assert.match(reader, /else if !speech\.isPlaying/);
   assert.doesNotMatch(reader, /Text\(latest\.body\)/);
   assert.doesNotMatch(reader, /Text\(document\.body\)/);
 });

@@ -248,6 +248,7 @@ private enum NativeOPDSService {
         return NativeOPDSPage(entries: entries, nextURL: next)
     }
 
+    @MainActor
     static func importBook(_ link: NativeOPDSLink, title: String,
                            into library: NativeReaderLibrary) async throws {
         guard secureURL(link.url.absoluteString) != nil,

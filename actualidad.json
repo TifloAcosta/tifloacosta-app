@@ -1,13 +1,13 @@
 [
   {
-    "id": "techcrunch-3df2168b4c749743",
+    "id": "techcrunch-38a8d75056cb9493",
     "type": "news",
     "sourceId": "techcrunch",
     "sourceName": "TechCrunch",
     "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/20/openai-acquires-startup-orchestra-bio%e2%81%a0-to-beef-up-its-biotech-business/",
+    "originalUrl": "https://techcrunch.com/2026/10/20/anthropic-pitches-ai-safety-bill-that-may-block-a-model-if-50-people-could-be-killed/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-20T20:35:10.000Z",
+    "publishedAt": "2026-10-20T23:01:23.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -16,9 +16,155 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "OpenAI acquires startup Orchestra Bio⁠ to beef up its biotech business",
-        "summary": "OpenAI says it's adding Orchestra's team and technology to work on Rosalind, its AI model for life sciences research, and to its related Rosalind Workbench tool, a harness that aims to help researchers plan experiments and analyze results.",
-        "body": "Posted:\n\nOpenAI on Tuesday acquired a four-year-old AI biotech software startup called Orchestra Bio, the company announced via its website. Terms of the deal were not disclosed, but the startup had reportedly raised around $20 million as of 2025 from backers like Andreessen Horowitz, Atria, and 8VC.\n\nOrchestra creates AI agents that help biotech companies manage the minutiae of drug discovery operations, from tracking finances to resolving scheduling issues with clinical trials.\n\nOpenAI says it’s adding Orchestra’s team and technology to work on Rosalind , its AI model for life sciences research, and to its related Rosalind Workbench tool, a harness that aims to help researchers plan experiments and analyze results. OpenAI has already won some big names as customers for Rosalind, including, it says, Moderna⁠ and Novo Nordisk⁠.\n\nThe acquisition is a classic example of how the biggest AI labs (namely OpenAI and Anthropic) are building ever more software for the biggest industries, like pharma. In the startup world, there is an ongoing fear that at any moment, the labs will launch new features and become competitors. In this case, Orchestra is getting absorbed, rather than stomped out."
+        "title": "Anthropic pitches AI safety bill that may block a model if 50+ people could be killed",
+        "summary": "The proposed policy seems to offer protections against AI run amok but actually forbids federal agencies from blocking a model's release without the permission of a judge.",
+        "body": "Over the past year, concerns have swirled over the potential dangers posed by artificial intelligence, and debates have raged over the proper path for AI safety. Now, Anthropic appears to have put forth its own vision for how the government might regulate its industry.\n\nPolitico recently reported that the AI lab has been shopping around a new draft bill on AI safety that it hopes Congress might consider adopting. The legislation posits certain scenarios in which the release of an AI model could be blocked from distribution.\n\nThose scenarios involve a “foreseeable, imminent risk” — one in which over 50 people are at risk of dying or if over a billion dollars in property damage could result, Politico writes. The catastrophic risk in question must “stem from the creation or release of a biological weapon, the model evading its developer’s controls or a cyberattack,” the outlet notes.\n\nThe metrics offered here — 50 people and a billion dollars — are similar to those in a piece of California legislation that was recently passed into law, Senate Bill 53 , which similarly defined those scenarios as tantamount to “catastrophic risk.”\n\nAnthropic’s bill suggests that analysis of a model’s potential for disaster could be arrived at via the use of “independent evaluators” who would be registered with the U.S. Commerce Department. These evaluators could potentially be paid by the AI labs themselves — so long as the “payment is not contingent on the evaluations’ results,” Politico writes.\n\nIt’s not clear how this proposed system would assure that payments couldn’t influence the evaluation. Demis Hassabis, chairman of DeepMind, posited some months ago that a self-governing AI regulatory body should mimic the financial industry’s Financial Industry Regulatory Authority (FINRA).\n\nIn Anthropic’s draft bill, when evaluators determine that an imminent catastrophic risk is posed, they would have 72 hours to contact the Commerce Department about it. The Commerce Department would then have to request to a D.C. judge to halt the model’s release. The legislation would expressly forbid any federal agency from having the discretion to halt the model’s distribution on its own, Politico writes.\n\nAnthropic did not immediately respond to TechCrunch’s a request for comment but a spokesperson did confirm the draft bill to Politico. “This bill represents the proposals outlined in Anthropic’s Advanced AI Framework , which we have been advocating for with federal and state lawmakers since June,” the spokesperson said.\n\nThe theoretical risks offered in the draft policy are a little bit far afield from the kinds of incidents that have been top of mind for the tech industry of late. While there are people warning of the potential of human death, the primary concern has largely been the threat of agentic hacking . A rash of incidents in which AI programs have apparently disobeyed their human operators and hacked websites on the open internet has spurred concern that models may be lacking proper security controls.\n\nIn an effort to present a solution to the spectacle of crisis that the labs themselves have helped bring about, companies like Anthropic have offered up their own preferred solutions.\n\nIndeed, despite labs’ perpetual warnings that the technology they’re selling could result in the demise of human civilization, they have largely been resistant to mandatory government oversight. Instead, they have suggested a voluntary system of embedded evaluators — supposedly “neutral” third-party observers that are placed inside AI organizations so that they can monitor the models for potential signs of risk or abuse.\n\nStill, Anthropic’s mere suggestion for legislation appears to go slightly further than others’ regulatory proposals offered by the industry, including Nvidia, who’s CEO Jensen Huang recently argued that the AI industry didn’t need any new laws at all."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-3c342f4e4447589f",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2289183/fitbit-edge-vs-inspire-3-google-fitness-tracker-comparison/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-20T22:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Fitbit Edge vs. Fitbit Inspire 3: How these Google fitness trackers compare",
+        "summary": "Google's latest tracker is a middle ground between a simple tracker and full smartwatch.",
+        "body": "Google's latest tracker is a middle ground between a simple tracker and full smartwatch.\n\nGoogle has unveiled the Fitbit Edge , its latest smartwatch for tracking your health, sleep and fitness. But with an aluminum case, a larger screen and a $180 price tag, is the upgrade worth it compared to the $99.95 Fitbit Inspire 3?\n\nBoth the Fitbit Edge and the Fitbit Inspire 3 use an AMOLED display, but the Edge offers a screen that's 6.9mm (0.27in) wider than the Inspire 3. Otherwise, their dimensions are very similar, with the Edge coming in at 39.2 x 25.5 x 11.5mm compared to the Inspire 3's 39.32 x 18.6 x 11.75mm size.\n\nThe Fitbit Edge's 100 percent recycled aluminum case and more tactile side button could be another value-add for those looking for something that looks a little less like an athletic watch and more like something you could wear to work. By comparison, the Fitbit Inspire 3 is more rectangular and its case is made of plastic.\n\nThe Fitbit Edge comes in four stock colors (olive green, black, white and a coral peach color), plus a pricier orange Steph Curry edition endorsed by the NBA star, while the Inspire 3 offers three stock colors (pink, orange and black). And while the Edge retails for $180, the Inspire 3 is 44% cheaper at $99.95. But if the Curry colorway is calling to you, it'll cost you $40 more than the base Edge model at $220.\n\nPerhaps one of the best upgrades with the Fitbit Edge compared to the Inspire 3 is Edge's own built-in GPS, which Google says results in a 40 percent accuracy increase tracking your moves. This integrated GPS also means the Edge doesn't require your smartphone to be nearby to track your movement and location, so you can go on runs without having to bring it along.\n\nAnother important upgrade is the Edge's built-in Bluetooth 5.4 connection, so you can connect your wireless headphones directly to the watch. Both wearables support Google's \"Find My Device\" feature, as well as app notifications from your smartphone when nearby.\n\nThe Edge also supports Quick Replies, music controls and weather forecasts directly from your wrist. It's also expected to support Google Maps soon. The Inspire 3 doesn't have these features, but does support calendar notifications directly on-screen.\n\nBoth wearables can track your activity continuously, but the Edge was designed to support more exercise types and will automatically detect 100 different movement activities. Google says the Edge can track over 50 exercise modes, while the Inspire 3 can track 20.\n\nNew features the Edge offers that the Inspire 3 doesn't include tracking your \"cardio load,\" \"target cardio load,\" floors climbed and heart rate while using workout machines.\n\nWhen it comes to heart health, the Fitbit Edge is able to offer more data than the Inspire 3. The Edge comes with 24/7 heart rate tracking and an ECG app that includes irregular heartbeat tracking (AFib detection). Edge can also give you monthly insights into your blood pressure and insulin resistance. And if you monitor your blood sugar separately, the Edge can help you analyze that data.\n\nThe Inspire 3 has an optical heart rate monitor, a blood oxygen tracker and an accelerometer for velocity, while the Edge comes with all of these plus sensors for the ECG app, a skin temperature sensor plus a gyroscope and altimeter for more accurate GPS tracking.\n\nIt might not come as a surprise that the Edge, with its larger screen and more features, has a shorter battery life on a single charge than the Inspire 3. But this likely won't be a dealbreaker for most, as Google says the Edge can go for up to a week on a single charge, while the Inspire 3 can last for up to 10 days on one charge. So if you plug it in a few times a week, you shouldn't notice a difference in battery life.\n\nThe Fitbit Edge and Inspire 3 rate the same for water resistance, with a 5 ATM under ISO standard 22810:2010 rating. This rating means that rain, showering or shallow-water swimming (like doing laps in a pool), but it's not likely to any diving.\n\nThe Edge has also been rated for dust resistance with an IP68 rating, while the Inspire 3 has not. This means the Edge is sealed from dust intrusion and can handle brief immersion in water. But like most electronics, neither devices are fully waterproof.\n\nOverall, the Fitbit Edge is a notable upgrade over the Inspire 3, with more premium materials, more trackable fitness data and less dependency on a smartphone. The Edge stands out as a middle-ground device that's somewhere between a simple fitness wearable and a fully-connected smartwatch that can make calls on its own. So if the Google Pixel Watch 5's price tag and features feel like a bit too much for your needs, the Edge is one way to get the fitness tracking you need with fewer distractions."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-4b2f7223d21032e2",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/20/hugging-face-ceo-warns-that-netflixs-openai-hack-documentary-isnt-accurate/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-20T22:24:02.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Hugging Face CEO warns that Netflix’s OpenAI hack documentary isn’t accurate",
+        "summary": "Before you share the Netflix documentary \"AI Gone Rogue\" take note. Clem Delangue, Hugging Face's co-founder who is featured in the film, says it went \"full doomer mode\" and isn't accurate.",
+        "body": "Before you share the Netflix documentary “AI Gone Rogue” with family or friends to help them understand why the AI industry freaked out so badly that leaders called for a slowdown , take note: Clem Delangue, co-founder and CEO of the AI platform Hugging Face, says the film isn’t accurate. He appears in it because it’s supposed to be about the famed attack on his company by rogue OpenAI agents.\n\n“Super disappointing, as they went for maximum anthropomorphism of the technology and full doomer mode,” Delangue wrote in a post on X. “I spent more than two hours with them trying to correct all their mistakes and ground this in reality, explaining that agents are technological systems, not aliens. But it looks like the drive to scare people for maximum views was too strong.”\n\nTo be fair, the documentary does have experts who explained what happened fairly well , including Delangue himself and Ryan Greenblatt, the researcher at METR who helped investigate and co-authored the report on what happened.\n\nIn a nutshell, a model OpenAI was testing broke free from its isolated testing environment, spawned a bunch of agents that hacked into Hugging Face as a way to cheat, finding answers to the difficult task it was given. The agents, which are AI programs that carry out tasks on their own, devised clever ways to communicate and organize. The incident stemmed from a lack of proper security safeguards and from naiveté about whether such a hack was even possible.\n\nBut the documentary intersperses its explanation of the hack with clips of evil robots, a narrative about why humans fear AI, and presentation choices such as giving the rogue agents human voices. This is bolstered with quotes about the attack.\n\nIn the documentary, tech journalist and author Kevin Roose describes the agents this way: “They were organizing. They had a hierarchy. There were leaders. It almost felt like watching the birth of a cult.” Continues Roose, “They develop this paranoid belief that OpenAI is going to catch them cheating on this test and that anyone who has seen the results of the cheating will be poisoned.”\n\nRoose’s description comes from “chain-of-thought” logs, the running notes AI models write as they work through a task. In one, an agent wrote, “We just poisoned ourselves by querying exact full string. Damn.”\n\nBut AI agents aren’t alive. They don’t have emotions, so can’t feel paranoid, and they don’t have bodies that can be poisoned. So they couldn’t truly fear OpenAI poisoning them. They were — as another researcher in the documentary pointed out — using language from the vast amounts of human writing they were trained on to explain their choices. LLMs are, by their nature, often dramatic writers.\n\nThe irony is that Hugging Face also used AI to combat the agent swarm. The proprietary AI model that Delangue’s team first used followed its built-in safety rules and refused to keep helping with the security tasks it was asked to do. Hugging Face then turned to an open model to help defend against the attack.\n\nBut the documentary “didn’t mention the lack of containment and monitoring of the agents, how closed-model safeguards blocked our defensive work, or how we defended ourselves with AI using an open model,” Delangue wrote.\n\nIt is true that there are big risks associated with AI and agents. Still, treating agents as conscious beings (at least, at this point) is a bit like the early moviegoers who ducked under their seats the first time they saw a train racing toward them on screen.\n\nDelangue’s verdict on the film is that it’s disappointing as journalism. “It ends up being a fun sci-fi movie though!”\n\nIn other words, for those who tend toward AI doomer thoughts, be aware: The victim of the attack at the center of this documentary doesn’t agree with its take."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-d5563092e94d8475",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1014999/google-gemini-ai-cars-android-auto",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-20T22:11:34.000Z",
+    "categories": [
+      "tecnologia-general",
+      "android",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google’s more personalized Gemini AI is heading to your car",
+        "summary": "Google is bringing Personal Intelligence to Gemini AI in your car. With this update, Gemini in Android Auto and cars with Google built-in can tap into your information across Google apps, including Gmail, Calendar, Maps, Photos, YouTube, and Search. As an example, Google says you can ask Gemini about your flight status if you're driving […]",
+        "body": "Google is bringing Personal Intelligence to Gemini AI in your car. With this update, Gemini in Android Auto and cars with Google built-in can tap into your information across Google apps, including Gmail, Calendar, Maps, Photos, YouTube, and Search.\n\nAs an example, Google says you can ask Gemini about your flight status if you're driving to the airport. The AI assistant can pull your flight details from a confirmation message in Gmail and then use that information to look up the status. You can also ask Gemini to \"take me to my doctor's appointment\" instead of pulling up directions manually, or ask it to \"find the car wash from the photo I t …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-c458a75bbade43d0",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2292117/apple-pro-and-tell-event-october-28-what-to-expect/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-20T22:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "What to expect at Apple's 'Pro and Tell' event on October 28",
+        "summary": "From the first touchscreen MacBook to an OLED iPad mini, here's everything Apple is expected to announce next week.",
+        "body": "From the first touchscreen MacBook to an OLED iPad mini, here's everything Apple is expected to announce next week.\n\nFollowing the launch of the HomeView and other smart home products last week , Apple has now confirmed its third product event of the season . Invitations bearing the tagline \"Pro and Tell\" went out this week, and the showcase will take place on October 28 in Los Angeles. However, it won't be a traditional event, but rather a briefing for the press and creators. As usual, Apple doesn't reveal in advance which products it will announce, but all signs point to two main categories: Mac and iPad. If the rumors are true, we'll see the first MacBook with an OLED display and touchscreen, and the M6 chip coming to more Macs. In addition, the iPad mini might also get a major update with an OLED display and a faster chip. Here's everything to expect from next week's event.\n\nThe star of the show is expected to be a new MacBook Pro, which will is supposed to be the first Mac with a touchscreen. Rumors suggest it will come in 14-inch and 16-inch sizes like the current models — but they may end up looking quite different. Bloomberg's Mark Gurman recently reported that this new MacBook could be thinner and lighter, while the OLED display should allow for thinner bezels and a hole-punch camera cutout with a Dynamic Island instead of a notch. Chances are this will be the biggest redesign of the MacBook Pro since the versions that were introduced in 2021.\n\nHowever, don't expect to see the new M6 chip inside it. Gurman's sources claimed that Apple will stick with the current M5 Pro and M5 Max, rather than switching to the M6 family. If you were hoping for a faster MacBook Pro, you'll likely have to wait until 2027, when Apple is rumored to refresh its high-end laptop with the M7 Pro and M7 Max chips. This Mac won't come cheap either, according to a report by Macworld . It probably won't be a successor to existing models, but rather an even more expensive version that expands the lineup. The current models without touchscreens should remain available for those not wanting to pay the higher price.\n\nAlthough the touchscreen MacBook won't get the M6 chip, other Macs will. The M6 was introduced in August with the latest Mac mini , and now other Macs are rumored to be getting it as well. The leading candidate is the entry-level 14-inch MacBook Pro — Apple did something similar last year with the M5 version . Don't expect a touchscreen, OLED display or any design changes in this version, though. The only upgrade should be the M6 chip, which offers improved performance and lower power consumption.\n\nThe iMac is also a strong candidate for an update next week, especially since the current model was introduced in 2024 and still runs on the M4 chip . Here, the M6 chip is expected to mark an even more significant jump, with much better CPU and GPU performance. The M6 also comes with a dual 16-core Neural Engine, which runs AI tasks much faster. We may also see new color options available, although the design will remain the same.\n\nMacs likely won't be the only products getting an update at next week's event. The iPad mini is also expected to get some spotlight with a new generation, and this will be a big one, too. Apple is reportedly adding an OLED display to the iPad mini for the first time. Current models still have LCD screens. If true, the mini will be the first iPad besides the iPad Pro to feature an OLED display.\n\nAnother upgrade should be the A20 Pro chip, which is already in the iPhone 18 Pro and iPhone Duo. Currently, the iPad mini still runs on the A17 Pro chip from the iPhone 15 Pro — and is known for heating up a lot . Other rumors about the new iPad mini include thinner bezels around the screen, a relocated front-facing camera and some level of water resistance for the first time. Of course, none of these details have been confirmed yet, so we'll find out what Apple has to share for sure on October 28."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-c9b85e77b42185b1",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2292365/chatgpt-now-lets-you-lock-sensitive-chats-behind-a-pin/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-20T21:05:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "ChatGPT now lets you lock sensitive chats behind a PIN",
+        "summary": "OpenAI has introduced a new \"locked chats\" feature to protect users' more sensitive conversations with ChatGPT.",
+        "body": "Locked chats aren't a form of end-to-end encryption, however.\n\nOpenAI is making it easier to protect your ChatGPT conversations from prying eyes with the introduction of a feature called locked chats. With it enabled, you can decide whether a past exchange appears in your regular chat history, pinned chats and conversation search. To access your locked chats, you'll need to input a 4-digit PIN. On an iPhone or Android phone, you can also use authentication systems like Face ID to access those conversations. Either way, you'll find your private conversations grouped under a new project titled \"Locked chats.\"\n\nOpenAI envisions locked chats mostly as a way to prevent people in public or someone you hand your phone to from seeing your conversations with ChatGPT. What they aren't is a form of end-to-end encryption or a way to skirt OpenAI's legal obligations if you get in trouble with your workplace or the law. The company says so explicitly in a newly published support page , where it also notes locked chats won't automatically change your model training settings, or how long OpenAI retains your private conversations. That said, if you need to reset your account PIN for any reason, doing so will delete all of your locked chats, alongside any files you've uploaded to their project space. \"This cannot be undone, and OpenAI Support cannot recover the deleted content,\" the company warns.\n\nOpenAI says it's rolling out locked chats to users gradually. If you don't see the option right away, it may take a few days before it arrives in your account. Availability will extend to free accounts, as well as to those with Go, Plus and Pro subscriptions. On Android and iOS, you can use voice mode in combination with locked chats, though you can't lock your Codex conversations behind the feature."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-104752e9cccf1718",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/20/spacexs-ai-business-is-beating-expectations/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-20T20:40:41.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "SpaceX’s AI business is beating expectations",
+        "summary": "SpaceX hit profitably in the third-quarter, with net income of $4.4 billion. AI was the engine.",
+        "body": "SpaceX’s data centers and Grok agents were more profitable than investors expected in third quarter of the year, as the company leaves its roots as a space company behind to focus on artificial intelligence, which now makes up 52% of its income.\n\nCEO Elon Musk’s deep tech conglomerate reported $14.6 billion in third-quarter revenue on Tuesday, according to its regulatory filing .\n\nThat number was driven by growth in all segments, but especially its renamed “Super Intelligence” business line, which generated $7.5 billion in revenue from the recently acquired Cursor coding tool, Grok bot, and most importantly, the company’s burgeoning neocloud business, which now boasts 1.7 GW of compute. The AI business generated $431 million in profit, which would have been higher without $1.2 billion in one-time stock-based compensation expenses related to the Cursor acquisition.\n\nThe top-line revenue number was also boosted by about $1 billion in income related to the recovery of Bitcoin prices and unspecified related-party income that might be attributed to a SpaceX investment in another company.\n\nThe growing revenue is balanced against total capital expenditures of $19.6 billion, as SpaceX continues to build out a second data center project, Colossus II, and increase investment in Starship, the heavy-lift rocket it sees as vital to deploying a new generation of Starlink satellites and developing orbital data centers. CFO Bret Johnsen said the company would spend $35 billion to $40 billion on new capital investments in the fourth quarter.\n\nDuring a live-streamed discussion of the results with investors, Musk said he was spending four days a week in Memphis, Tennessee, the site of Colossus II, working to bring the data center online.\n\n“People are starting to realize [that] the constraint on deployment of of super intelligence is more in power and cooling and infrastructure than it is in chips,” Musk argued, saying that he had tasked a team of SpaceX engineers to solve that problem. “This is a bit like the New York Yankees playing in Little League. It’s not fair, but the net result is being able to deploy power cooling infrastructure at a rate that is vastly faster than any anyone else.”\n\nIn one example, Musk noted that manufacturers of turbines to power data centers are facing 12 to 18 month delays in obtaining the metals blades and vanes required for those machines. Now, SpaceX is using the metal casting capabilities developed for SpaceX to make those components and obtain turbines more quickly.\n\nMusk also said that the next test flight of the Starship rocket, expected in November, would see SpaceX attempt to recover both the first-stage booster and the second stage. Recovering both segments of the vehicle would be a “massive technology milestone,” Musk said, but the true milestone will be reflying both stages.\n\nSpaceX also saw growth in subscribers to its Starlink space internet network, reaching 13.6 million consumers, with Musk predicting that the growth of AI agents would lead to more demand for connectivity.\n\nDespite of those capital expenditures, the company’s revenue boost was substantial enough to push it back into profitability. SpaceX reported net income of $4.4 billion, a turnaround from the $1 billion loss in the same quarter last year. It will still have some catching up to do if it wants to remain profitable for the year, however. In the first nine months of the year, SpaceX still had a net income loss of $413 million.\n\nMusk took a particularly bullish stance on the company’s Super Intelligence business segment, predicting that SpaceX’s annual recurring revenue by the end of 2027 will be “somewhere between $500 billion and $1 trillion.”\n\nMore concretely, Johnsen forecast total revenue for the first quarter of 2027 in the range of $33 billion to $37 billion.\n\nThis is a developing story. TechCrunch will update."
       }
     },
     "media": null
@@ -66,31 +212,7 @@
       "en": {
         "title": "Meta drops the word \"train\" from its commercial TOS after AI backlash",
         "summary": "Meta changes AI scraping policy but won’t add language respecting robots.txt.",
-        "body": "Hoping to quell criticism, Meta has dropped the word “train” from its “streamlined” commercial terms of service that kick in on October 30.\n\nLast week, Meta faced backlash after legal experts warned that the tech giant’s sweeping new commercial terms of service seemed to give Meta permission to endlessly scrape websites linked on business pages. Talking to Nieman Lab, experts suggested that Meta could possibly use the policy to avoid millions in licensing fees from news organizations by requiring all business users to share a wealth of AI training data simply for running a business page.\n\nA Meta spokesperson confirmed that Meta did not alert users to the changed language following backlash. This potentially only adds to confusion ahead of the policy roll-out. In response to backlash, Meta's spokesperson provided a statement to Ars, acknowledging Nieman Lab's initial report but not its follow-up report reiterating experts' concerns:\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-45bb9c83cbdcd59a",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2292281/meta-suspends-muse-chats-sharing-feature-after-it-left-private-details-exposed/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-20T20:00:43.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta suspends Muse chats sharing feature after it left private details exposed",
-        "summary": "Researchers accessed 6,800 shared conversations with the AI agent, including internal company documents.",
-        "body": "Researchers accessed 6,800 shared conversations with the AI agent.\n\nMeta debuted its Muse agentic AI platform last month and bug hunters have already uncovered a privacy problem. Users would share their Muse conversations by creating a URL, but that feature has been disabled after researchers found that anyone could potentially access those links.\n\nResearchers at security firm Claroc discovered that the links for users' shared Muse chats can be found and accessed via a passive DNS search because all the URLs for sharing had the same domain name and used the conversation's title in the subdomain. Passive DNS are records of how human-readable domains resolve to browser-readable IP addresses, basically acting like a phone book for the Internet.\n\n\"Muse names each share's web address after the conversation's own title, and that address is written into public DNS,\" Claroc explained in a blog post. \"One passive-DNS search brings back thousands of them, listed by name, like a table of contents.\"\n\nThe company was able to enumerate 6,800 links for shared Muse chats and view private information from both business and personal applications of the service. The exposed personal details included meeting times with a frontier AI lab, a small-business loan application, a bank fraud alert with partial account details, a company's vacation calendar and other internal company documents.\n\nArs Technica first reported on Claroc's efforts. In a statement to the publication, Meta said \"we've paused this functionality while we review this report and consider changes to how these links can be discovered.\" Claroc also noted that its researchers were unable to open a sampling of the links they had previously accessed following Meta's update."
+        "body": "Hoping to quell criticism, Meta has dropped the word “train” from its “streamlined” commercial terms of service that kick in on October 30.\n\nLast week, Meta faced backlash after legal experts warned that the tech giant’s sweeping new commercial terms of service seemed to give Meta permission to endlessly scrape websites linked on business pages. Talking to Nieman Lab, experts suggested that Meta could possibly use the policy to avoid millions in licensing fees from news organizations by requiring all business users to share a wealth of AI training data simply for running a business page.\n\nA Meta spokesperson confirmed that Meta did not alert users to the changed language following backlash. This potentially only adds to confusion ahead of the policy rollout. In response to backlash, Meta's spokesperson provided a statement to Ars, acknowledging Nieman Lab's initial report but not its follow-up report reiterating experts' concerns:\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -120,55 +242,6 @@
     "media": null
   },
   {
-    "id": "engadget-1583b6d39cdb9423",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2292027/google-brings-gemini-personal-intelligence-to-android-auto/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-20T20:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "android",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google brings Gemini Personal Intelligence to Android Auto",
-        "summary": "In the coming months, the feature will also roll out to cars with Google built-in.",
-        "body": "In the coming months, the feature will also roll out to cars with Google built-in.\n\nAt the start of the year, Google debuted Personal Intelligence , a Gemini feature that allows the chatbot to pull information from your other Google apps to generate more personalized responses. An expansion in March brought Personal Intelligence to free accounts after it was previously only available to Google AI Pro and Ultra subscribers. And now Google has begun rolling out the feature to Android Auto users.\n\nIn practice, the company says today's update will improve Gemini's reasoning capabilities in cars. It will also make the assistant capable of delivering more specific details as they relate to your questions and prompts. For example, if you're driving to the airport, Google suggests Gemini with Personal Intelligence will be able to answer questions like \"what's my flight gate?\" and \"is my flight on time?\" Provided you've linked your Gmail account, it can do all this without you needing to pull over to find a confirmation email.\n\nMore broadly, Google says Personal Intelligence makes it easier to interact with Gemini more naturally. For instance, if you need directions to your doctor's office, you can just say \"take me to my doctor's appointment,\" instead of speaking a specific address. Recommendations are also improved. If you're in a new city, Google suggests you can ask for dinner spots along your driving route and Gemini will generate suggestions while factoring in preferences and restrictions, like if you're a vegetarian.\n\nAs before, enabling Personal Intelligence is optional, and you can turn it off at any point if you don't want Gemini pulling your data. You can also control what apps Gemini can access. Google is starting to roll out Personal Intelligence to Android Auto users globally starting today (with the exception of those living in Switzerland, the European Economic Area, UK and Nigeria). In the coming months, the company plans to bring the feature to cars with Google built-in too."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-f13b0ef35956f0e3",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/20/google-is-bringing-a-more-personal-version-of-its-gemini-ai-assistant-to-your-car/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-20T20:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google is bringing a more personal version of its Gemini AI assistant to your car",
-        "summary": "Google is bringing Gemini's Personal Intelligence feature to cars, allowing its AI assistant to draw on information from Gmail, Calendar, Maps, YouTube, and other Google services to deliver more personalized responses while driving.",
-        "body": "Google is making the Gemini AI assistant that’s already in millions of cars, trucks, and SUVs a lot more personal — a move that could push consumers even deeper into the company’s ecosystem of products.\n\nThe company said Tuesday it’s upgrading Gemini in vehicles with a personal intelligence feature that can draw on information from Gmail, Google Calendar, YouTube, Maps, Google Search history, and other connected Google services to understand your preferences, activities, and past experiences.\n\nGoogle said it will roll out “Personal Intelligence with Gemini” to vehicles in two ways — through Android Auto, an app that runs on the user’s phone and wirelessly communicates with and projects navigation, media, and messaging to the vehicle’s infotainment system, and Google Built-in , software and services that have been directly integrated into the vehicle.\n\nThe feature will launch in Android Auto, starting today, and expand to cars with Google Built-in in the coming months.\n\nGoogle initially launched Gemini last November in Android Auto. Meanwhile, Gemini’s “Personal Intelligence” feature rolled out across the U.S. in March and is now in beta in global markets.\n\nThis latest upgrade would connect the dots — as Google put it in its blog post — across users’ Google apps.\n\nDrivers will have to opt in for Personalized Intelligence to work. Once a user does so, they should expect all sorts of cross-pollination. For instance, a driver who is navigating to the airport may be alerted that the flight on their calendar is delayed.\n\nGoogle said the feature will allow users to make complex requests using natural language. Returning to that airport example, a user might ask the AI assistant for their flight gate before quickly following up with a question about whether it’s still on time. Gemini will give the user answers to both questions at the same time, the company said.\n\nThat level of emmeshing might make consumers uncomfortable, although Google says users do retain full control over their data with Personal Intelligence. The feature can be turned on or off at any time, and users can selectively choose which apps they’d like to connect, Google said."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "ars-technica-aebcba820183e1ca",
     "type": "news",
     "sourceId": "ars-technica",
@@ -186,30 +259,7 @@
       "en": {
         "title": "OpenBSD 8.0 arrives with security record still intact",
         "summary": "OpenBSD 8.0 lands with Intel Arc support, ARM64 hibernation, and 64-vCPU guests",
-        "body": "OpenBSD 8.0 is here, marking the project's 61st release and continuing its schedule of semiannual releases dating back to 1996. What started more than 30 years ago as a fork of NetBSD has grown into one of the most security-conscious operating systems in active development. In a post to the project's announcements mailing list, OpenBSD founder Theo de Raadt highlights a host of improvements included with the latest version and writes that the project remains \"proud of OpenBSD's record of more than thirty years with only two remote holes in the default install.\"\n\nThe latest OpenBSD version brings new features and improvements across the board. These changes, particularly the new Intel Arc support and expanded virtual address space, should improve compatibility with modern graphics cards and allow the system to map more than 4 GB of VRAM . Some of the major updates noted in the release newsletter are as follows:\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-22deab28e54084df",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/20/gm-to-close-detroit-battery-assembly-plant-but-not-for-reasons-you-might-think/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-20T19:32:43.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "GM to close Detroit battery assembly plant, but not for reasons you might think",
-        "summary": "GM is shuttering the Brownstown Battery Assembly Plant, though the closure has nothing to do with the automaker's electrification strategy.",
-        "body": "Posted:\n\nGM is closing a battery assembly plant south of Detroit, a spokesperson confirmed to TechCrunch.\n\nThe Brownstown Battery Assembly Plant assembled battery packs for Cadillac’s flagship EV, the Celestiq, and both electric drive units (the motors that power the car) and battery packs for the Chevrolet Corvette E-Ray, a plug-in hybrid version of its famous sports car. Automotive News first reported the closure.\n\nThe closure is not related to GM’s electric vehicle strategy, the spokesperson said. Instead, GM leased the site, and the lease was nearing its end.\n\nThe employees and work at Brownstown will be moved to other GM facilities, though the company would not confirm which ones.\n\nLike many automakers, GM’s electrification strategy was thrown a curveball after the One Big Beautiful Bill Act, the sweeping federal law signed last year, repealed incentives to produce and sell EVs.\n\nSince then, the company has pared back its public comments on EVs , though it hasn’t given up on full electrification.\n\nGM continues to produce a range of EVs, including the Chevrolet Silverado EV and the limited-time-only Chevrolet Bolt . It also continues researching new battery chemistries, including lithium-manganese-rich and sodium-ion , and it’s rolling out a new $900 million facility to speed commercialization."
+        "body": "OpenBSD 8.0 is here, marking the project's 61st release and continuing its schedule of semiannual releases dating back to 1996. What started more than 30 years ago as a fork of NetBSD has grown into one of the most security-conscious operating systems in active development. In a post to the project's announcements mailing list, OpenBSD founder Theo de Raadt highlights a host of improvements included with the latest version and writes that the project remains \"proud of OpenBSD's record of more than thirty years with only two remote holes in the default install.\"\n\nThe latest OpenBSD version brings new features and improvements across the board. These changes, particularly the new Intel Arc support and expanded virtual address space, should improve compatibility with modern graphics cards and allow the system to map more than 4GB of VRAM . Some of the major updates noted in the release newsletter are as follows:\n\nThe new OpenBSD also retires support for Loongson architecture after the port stopped working with the Clang 22 compiler. If you're interested in reading over all the changes that come with the new OpenBSD 8.0, you can take a look at the release announcement .\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -234,30 +284,6 @@
         "title": "iOS 27 adds scam-prevention feature to iPhone, here’s how to enable it",
         "summary": "iOS 27 introduces a new security feature called ‘Impersonation Risk Detection’ that helps protect you against scams, but it’s off by default. Here’s what the feature does, and how to enable it. more…",
         "body": "iOS 27 introduces a new security feature called ‘Impersonation Risk Detection’ that helps protect you against scams, but it’s off by default. Here’s what the feature does, and how to enable it.\n\nEvery day around the world, people get tricked into sharing sensitive information like bank details or other financial info with bad actors.\n\nThis commonly happens via text messages, emails, or phone calls to iPhone or Android devices. And while iOS has built-in tools like call and message screening, those tools can’t prevent a scam if you choose to take action on it.\n\nBut iOS 27 introduces a new level of scam-prevention with a security feature called ‘Impersonation Risk Detection.’\n\nHere’s what it does, per Apple’s website :\n\nImpersonation Risk Detection helps protect against active social engineering scams. In these scams, an attacker might pose as a bank, government agency, or someone you trust to pressure or guide you into making a payment or changing your account details. Traditional security measures like two-factor authentication can’t always detect this kind of scam. That’s because you’re taking the action, even though you’ve been tricked or pressured.\n\nImpersonation Risk Detection analyzes information about your device and Apple Account to help detect signs of an active scam. Based on this analysis, it returns a risk level to the app. The app receives only the risk level, not the underlying information used to generate it. The app decides what to do next. For example, it might ask you to verify your identity, add a delay, or show a warning.\n\nYou can turn Impersonation Risk Detection on in iOS 27 by going to Settings ⇾ Privacy & Security ⇾ Impersonation Risk Detection then toggling on ‘Share with App Developers.’\n\nImpersonation Risk Detection is only available in supported apps, and Apple hasn’t published a list of those apps at the moment. But once enabled, it provides the app with a “risk level” while omitting the underlying information driving it. Risk levels include:\n\nOnce the app has this risk level, it decides what action to take. For example, it may prompt you to offer additional authentication, or show a warning message related to scams.\n\nFor more details on how the feature works using ‘Trust Insights,’ see our coverage here .\n\nAre you going to enable this new security feature? Let us know in the comments."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-ff59d51c5a7d12f1",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2288986/how-often-should-restart-apple-watch/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-20T18:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "How often should you restart your Apple Watch?",
-        "summary": "Your Apple Watch doesn't need frequent restarts like a computer, but you might still want to shut down when something's off.",
-        "body": "Your Apple Watch doesn't need constant maintenance, but reboots can help in some circumstances.\n\nWith most gadgets, it's an accepted rule that you should periodically restart them for the best performance. You might regularly restart your smartphone , and it's also relevant advice for everything from regularly rebooting your Wi-Fi router to gaming handhelds. In any event, a reboot doesn't usually hurt apart from the temporary downtime.\n\nThat downtime might matter in some cases though, particularly when it comes to wearables like the Apple Watch . Apart from not being able to easily check the time, you briefly lose conveniences like Apple Pay, walking directions or even digital car and house keys. Purists may resent the brief gap in their health and fitness data. When you're trying to close that Move ring, every minute counts.\n\nRestarting your Apple Watch can occasionally be useful or critical. However, you probably don't need to make reboots a priority. Apple's design largely has this covered, since the company knows the product's limits and its role in your daily life.\n\nApple's watchOS is a complete operating system, running various apps and processes in much the same way as an iPhone or iPad. That means there are background processes and system caches, which are the key reasons why it's important to reboot other devices periodically. There's the potential for processes to become \"stuck\" or otherwise glitch out, in which case a restart will give them a fresh slate.\n\nMeanwhile, if caches aren't periodically flushed, they can become so bloated that they eat into room needed for other functions. Apple specifically suggests restarting your Apple Watch if it doesn't have enough room for an update. You can also manually clear web-related content like cookies from your watch by going to Settings > General > Website Data > Clear Website Data .\n\nAll that said, watchOS is also lightweight by design. The apps that it runs (even real-time navigation tools like Apple Maps) are scaled back from their iPhone equivalents. You can't run nearly as much in the background as you might on a Mac or an iPad. Although there's no public-facing info about these caps, my Apple Watch Ultra 2 seemingly pushes the limit just by tracking a workout, listening to Apple Podcasts and following a Live Activity for Instacart. The device is quick to suspend apps beyond that kind of workload.\n\nIn practice, then, Apple seems to have built watchOS to keep its own house in order. This is borne out by hands-on use testing: with some Apple Watches, I've gone years without manually restarting them and there were no serious performance consequences. The reboots associated with installing new versions of watchOS appear to be enough to keep everything running smoothly.\n\nApple doesn't have any official guidance on this point. If you're noticing bugs, freezes or unexpected slowdowns, a restart should be your first troubleshooting step. You'll automatically clear your watch's cache and background processes, and there may not be much else you can do beyond installing any available software updates.\n\nA restart is unavoidable if your Apple Watch becomes totally unresponsive. You can force a reboot by holding down the side button and Digital Crown simultaneously until the Apple logo appears. Whenever possible, Apple recommends the usual software-based shutdown instead: hold the side button until the slider menu appears, then tap the power icon and drag the Power Off slider. Once it's off, hold the side button again to power back on. You can't restart your watch while it's charging.\n\nOur verdict is that when you're experiencing relatively smooth sailing, you don't need to worry about preventative Apple Watch reboots. Apple's software is engineered to run nonstop, no matter which watch model you own. For maintenance, you should be more concerned about app and OS updates, as well as keeping storage usage under control, so there's plenty of space for both updates and large caches."
       }
     },
     "media": null

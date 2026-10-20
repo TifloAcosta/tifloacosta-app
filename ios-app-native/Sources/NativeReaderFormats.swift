@@ -27,7 +27,23 @@ enum NativeReaderFormatError: LocalizedError {
     }
 }
 
+struct NativeReaderFormatGroup: Identifiable {
+    let title: String
+    let details: String
+    var id: String { title }
+}
+
 enum NativeReaderFormats {
+    static let supportedFormatGroups: [NativeReaderFormatGroup] = [
+        .init(title: "Textos", details: "TXT, TEXT, MD, MARKDOWN, CSV, JSON, XML, LOG y SRT."),
+        .init(title: "Documentos y publicaciones", details: "PDF con texto o escaneado mediante OCR; EPUB; HTML, HTM y RTF; DOCX."),
+        .init(title: "Presentaciones", details: "PPTX: extracción del texto de las diapositivas. Las presentaciones PPS y PPT antiguas todavía no están admitidas."),
+        .init(title: "Hojas de cálculo", details: "XLSX: extracción de texto de las hojas. Los archivos XLS antiguos todavía no están admitidos."),
+        .init(title: "Imágenes con OCR", details: "JPG, JPEG, PNG, HEIC, HEIF, TIF y TIFF."),
+        .init(title: "Audiolibros y audio", details: "MP3, M4A, M4B, AAC, WAV, AIF, AIFF y CAF."),
+        .init(title: "DAISY", details: "Libros DAISY empaquetados en ZIP o con extensión DAISY. Lectura de texto y pistas de audio; la navegación SMIL completa sigue en desarrollo.")
+    ]
+
     private static let audioExtensions: Set<String> = [
         "mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff", "caf"
     ]

@@ -5,6 +5,14 @@ import AVFoundation
 import Translation
 import UniformTypeIdentifiers
 
+struct NativeReaderPreferences: Codable, Hashable {
+    var speedIndex: Int? = nil
+    var voiceID: String? = nil
+    var textSize: Double? = nil
+    var lineSpacingIndex: Int? = nil
+    var strongText: Bool? = nil
+}
+
 struct NativeReadingDocument: Codable, Identifiable, Hashable {
     let id: UUID
     var title: String
@@ -16,6 +24,8 @@ struct NativeReadingDocument: Codable, Identifiable, Hashable {
     var markedPositions: [Int]? = nil
     var isFavorite: Bool? = nil
     var lastPercent: Int? = nil
+    var folderName: String? = nil
+    var readerPreferences: NativeReaderPreferences? = nil
 
     var hasAudio: Bool { !(trackPaths ?? []).isEmpty }
     var bookmarks: [Int] { markedPositions ?? [] }
@@ -38,6 +48,8 @@ private enum NativeReaderImportError: LocalizedError {
 @MainActor
 final class NativeReaderLibrary: ObservableObject {
     @Published private(set) var documents: [NativeReadingDocument] = []
+    @Published private(set) var folders: [String] = []
+    private let folderStorageKey = "native-reader-folders"
 
     private static var storageURL: URL {
         let directory = FileManager.default.urls(
@@ -47,6 +59,7 @@ final class NativeReaderLibrary: ObservableObject {
     }
 
     init() {
+        folders = UserDefaults.standard.stringArray(forKey: folderStorageKey) ?? []
         if let data = try? Data(contentsOf: Self.storageURL),
            let stored = try? JSONDecoder().decode([NativeReadingDocument].self, from: data) {
             documents = stored
@@ -108,6 +121,51 @@ final class NativeReaderLibrary: ObservableObject {
     func toggleFavorite(_ document: NativeReadingDocument) {
         guard let i = documents.firstIndex(where: { $0.id == document.id }) else { return }
         documents[i].isFavorite = !(documents[i].isFavorite ?? false)
+        try? save()
+    }
+
+    func updatePreferences(_ document: NativeReadingDocument,
+                           _ edit: (inout NativeReaderPreferences) -> Void) {
+        guard let index = documents.firstIndex(where: { $0.id == document.id }) else { return }
+        var preferences = documents[index].readerPreferences ?? NativeReaderPreferences()
+        edit(&preferences)
+        documents[index].readerPreferences = preferences
+        try? save()
+    }
+
+    @discardableResult
+    func createFolder(named rawName: String) -> Bool {
+        let name = rawName.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !name.isEmpty, name.count <= 80, name != "__unfiled__",
+              !folders.contains(where: { $0.localizedCaseInsensitiveCompare(name) == .orderedSame })
+        else { return false }
+        folders.append(name)
+        folders.sort { $0.localizedStandardCompare($1) == .orderedAscending }
+        UserDefaults.standard.set(folders, forKey: folderStorageKey)
+        return true
+    }
+
+    func move(_ document: NativeReadingDocument, to folder: String?) {
+        if let folder, !folders.contains(folder) { return }
+        guard let index = documents.firstIndex(where: { $0.id == document.id }) else { return }
+        documents[index].folderName = folder
+        try? save()
+    }
+
+    func deleteFolder(_ folder: String) {
+        guard folders.contains(folder) else { return }
+        // Removing a folder never deletes the books inside it.
+        for index in documents.indices where documents[index].folderName == folder {
+            documents[index].folderName = nil
+        }
+        try? save()
+        folders.removeAll { $0 == folder }
+        UserDefaults.standard.set(folders, forKey: folderStorageKey)
+    }
+
+    func resetPreferences(_ document: NativeReadingDocument) {
+        guard let index = documents.firstIndex(where: { $0.id == document.id }) else { return }
+        documents[index].readerPreferences = nil
         try? save()
     }
 
@@ -252,15 +310,40 @@ struct NativeReaderLibraryScreen: View {
     @State private var importError: String?
     @State private var documentToRename: NativeReadingDocument?
     @State private var proposedTitle = ""
+    @State private var newFolderName = ""
+    @State private var showCreateFolder = false
+    @State private var folderToDelete: String?
+    @State private var folderForDocument: NativeReadingDocument?
+    @State private var documentToConfigure: NativeReadingDocument?
+    @AppStorage("native-reading-folder-filter") private var selectedFolder = ""
     @AppStorage("native-reading-filter") private var filterIndex = 0
     @AppStorage("native-reading-sort") private var sortIndex = 0
     @AppStorage("native-reading-speed-index") private var speedIndex = 2
     @AppStorage("native-reading-voice-id") private var voiceID = ""
     private let speeds: [Double] = [0.75, 0.9, 1.0, 1.25, 1.5]
 
+    private var folderFilterIndex: Binding<Int> {
+        let names = library.folders
+        return Binding(
+            get: {
+                if selectedFolder == "" { return 0 }
+                if selectedFolder == "__unfiled__" { return 1 }
+                return names.firstIndex(of: selectedFolder).map { $0 + 2 } ?? 0
+            },
+            set: { value in
+                if value == 0 { selectedFolder = "" }
+                else if value == 1 { selectedFolder = "__unfiled__" }
+                else if names.indices.contains(value - 2) { selectedFolder = names[value - 2] }
+            }
+        )
+    }
+
     private var shownDocuments: [NativeReadingDocument] {
         let calendar = Calendar.current
         var items = library.documents.filter { doc in
+            if selectedFolder == "__unfiled__" && doc.folderName != nil { return false }
+            if selectedFolder != "" && selectedFolder != "__unfiled__"
+                && doc.folderName != selectedFolder { return false }
             let ext = (doc.fileExtension ?? "txt").lowercased()
             switch filterIndex {
             case 1: return ["txt", "text", "md", "markdown", "html", "htm", "rtf",
@@ -325,6 +408,22 @@ struct NativeReaderLibraryScreen: View {
                     selectedIndex: $sortIndex
                 )
             }
+            Section("Carpetas") {
+                NativeAdjustableChoice(
+                    title: "Mostrar carpeta",
+                    choices: ["Todas", "Sin carpeta"] + library.folders,
+                    selectedIndex: folderFilterIndex
+                )
+                Button("Crear carpeta") { newFolderName = ""; showCreateFolder = true }
+                ForEach(library.folders, id: \.self) { folder in
+                    Button(folder) { selectedFolder = folder }
+                        .accessibilityLabel("Carpeta \(folder)")
+                        .accessibilityHint("Filtra la biblioteca por esta carpeta.")
+                        .accessibilityAction(named: Text("Eliminar carpeta")) {
+                            folderToDelete = folder
+                        }
+                }
+            }
             Section("Mi biblioteca") {
                 if shownDocuments.isEmpty { Text("No hay documentos con el filtro actual.") }
                 ForEach(shownDocuments) { document in
@@ -335,6 +434,12 @@ struct NativeReaderLibraryScreen: View {
                     .accessibilityHint("Doble toque para abrir. Hay acciones de accesibilidad.")
                     .accessibilityAction(named: Text("Reproducir")) { play(document) }
                     .accessibilityAction(named: Text("Información")) { information = document }
+                    .accessibilityAction(named: Text("Ajustes del documento")) {
+                        documentToConfigure = document
+                    }
+                    .accessibilityAction(named: Text("Mover a carpeta")) {
+                        folderForDocument = document
+                    }
                     .accessibilityAction(named: Text("Añadir a favoritos")) {
                         library.toggleFavorite(document)
                     }
@@ -382,6 +487,51 @@ struct NativeReaderLibraryScreen: View {
                 importError = error.localizedDescription
             }
         }
+        .alert("Crear carpeta", isPresented: $showCreateFolder) {
+            TextField("Nombre de la carpeta", text: $newFolderName)
+            Button("Crear") {
+                if !library.createFolder(named: newFolderName) {
+                    importError = "El nombre de la carpeta está vacío, repetido o es demasiado largo."
+                }
+            }
+            Button("Cancelar", role: .cancel) {}
+        } message: {
+            Text("Crea una carpeta para organizar las obras sin mover ni borrar archivos del sistema.")
+        }
+        .confirmationDialog("Mover a carpeta",
+                            isPresented: Binding(
+                                get: { folderForDocument != nil },
+                                set: { if !$0 { folderForDocument = nil } }),
+                            titleVisibility: .visible) {
+            Button("Sin carpeta") {
+                if let doc = folderForDocument { library.move(doc, to: nil) }
+                folderForDocument = nil
+            }
+            ForEach(library.folders, id: \.self) { folder in
+                Button(folder) {
+                    if let doc = folderForDocument { library.move(doc, to: folder) }
+                    folderForDocument = nil
+                }
+            }
+            Button("Cancelar", role: .cancel) { folderForDocument = nil }
+        }
+        .confirmationDialog("Eliminar carpeta",
+                            isPresented: Binding(
+                                get: { folderToDelete != nil },
+                                set: { if !$0 { folderToDelete = nil } }),
+                            titleVisibility: .visible) {
+            Button("Eliminar la carpeta, conservar las obras", role: .destructive) {
+                if let folder = folderToDelete {
+                    library.deleteFolder(folder)
+                    if selectedFolder == folder { selectedFolder = "" }
+                }
+                folderToDelete = nil
+            }
+            Button("Cancelar", role: .cancel) { folderToDelete = nil }
+        }
+        .sheet(item: $documentToConfigure) { doc in
+            NativeReaderDocumentSettingsScreen(document: doc)
+        }
         .alert("Cambiar título", isPresented: Binding(
             get: { documentToRename != nil },
             set: { if !$0 { documentToRename = nil } }
@@ -419,6 +569,9 @@ struct NativeReaderLibraryScreen: View {
                     LabeledContent("Importado", value:
                         document.importedAt.formatted(date: .abbreviated, time: .shortened))
                     LabeledContent("Marcas", value: "\(library.latest(document).bookmarks.count)")
+                    LabeledContent("Carpeta", value: library.latest(document).folderName ?? "Sin carpeta")
+                    LabeledContent("Leído", value: "\(library.latest(document).lastPercent ?? 0) por ciento")
+                    LabeledContent("Pendiente", value: "\(100 - (library.latest(document).lastPercent ?? 0)) por ciento")
                 }
                 .tifloScreenSurface()
                 .navigationTitle("Información")
@@ -511,6 +664,8 @@ struct NativeReadingScreen: View {
     @AppStorage("native-reading-line-spacing-index") private var lineSpacingIndex = 0
     @AppStorage("native-reading-strong-text") private var strongText = false
     @AppStorage("native-reader-navigation-unit") private var navigationUnit = 0
+    @AppStorage("native-reader-reading-mode") private var readingMode = 0
+    @State private var didApplyOpeningMode = false
     @State private var sleepIndex = 0 // Each open document starts with timer disabled.
     @State private var currentPercent = 0
     @State private var readingOffset = 0
@@ -543,7 +698,12 @@ struct NativeReadingScreen: View {
 
     private var latest: NativeReadingDocument { library.latest(document) }
     private var tracks: [String] { latest.trackPaths ?? [] }
-    private var speed: Double { speeds[max(0, min(4, speedIndex))] }
+    private var effectiveSpeedIndex: Int { latest.readerPreferences?.speedIndex ?? speedIndex }
+    private var effectiveVoiceID: String { latest.readerPreferences?.voiceID ?? voiceID }
+    private var effectiveTextSize: Double { latest.readerPreferences?.textSize ?? textSize }
+    private var effectiveLineSpacing: Int { latest.readerPreferences?.lineSpacingIndex ?? lineSpacingIndex }
+    private var effectiveStrongText: Bool { latest.readerPreferences?.strongText ?? strongText }
+    private var speed: Double { speeds[max(0, min(4, effectiveSpeedIndex))] }
     private var isAudioOnly: Bool { latest.body.isEmpty && !tracks.isEmpty }
     private var excerpt: String {
         guard !textLayout.fragments.isEmpty else { return "" }
@@ -575,8 +735,8 @@ struct NativeReadingScreen: View {
         } else {
             speech.play(String(document.body.dropFirst(readingOffset)),
                         speed: speed,
-                        language: AVSpeechSynthesisVoice(identifier: voiceID)?.language ?? "es-ES",
-                        voiceIdentifier: voiceID)
+                        language: AVSpeechSynthesisVoice(identifier: effectiveVoiceID)?.language ?? "es-ES",
+                        voiceIdentifier: effectiveVoiceID)
         }
         applySleepTimer()
     }
@@ -633,8 +793,8 @@ struct NativeReadingScreen: View {
         if speech.isPlaying {
             speech.play(String(document.body.dropFirst(readingOffset)),
                         speed: speed,
-                        language: AVSpeechSynthesisVoice(identifier: voiceID)?.language ?? "es-ES",
-                        voiceIdentifier: voiceID)
+                        language: AVSpeechSynthesisVoice(identifier: effectiveVoiceID)?.language ?? "es-ES",
+                        voiceIdentifier: effectiveVoiceID)
             applySleepTimer()
         }
     }
@@ -714,9 +874,9 @@ struct NativeReadingScreen: View {
 
     private func readerFragment(at index: Int) -> some View {
         Text(textLayout.fragments[index])
-            .font(.system(size: textSize))
-            .fontWeight(strongText ? .bold : .regular)
-            .lineSpacing(CGFloat(lineSpacingIndex) * 4)
+            .font(.system(size: effectiveTextSize))
+            .fontWeight(effectiveStrongText ? .bold : .regular)
+            .lineSpacing(CGFloat(effectiveLineSpacing) * 4)
             .frame(maxWidth: .infinity, alignment: .leading)
             .textSelection(.enabled)
             .accessibilityFocused($focusedFragment, equals: index)
@@ -804,10 +964,10 @@ struct NativeReadingScreen: View {
             documentActions
         }
         .sheet(isPresented: $showAudioSettings) {
-            NativeReaderAudioSettingsScreen()
+            NativeReaderDocumentAudioSettingsScreen(document: document)
         }
         .sheet(isPresented: $showVisualSettings) {
-            NativeReaderVisualSettingsScreen()
+            NativeReaderDocumentVisualSettingsScreen(document: document)
         }
         .onAppear {
             let initial = max(0, min(100,
@@ -815,6 +975,10 @@ struct NativeReadingScreen: View {
             currentPercent = initial
             readingOffset = Int(Double(textLayout.totalCharacters) * Double(initial) / 100)
             lastSavedPercent = initial
+            if !didApplyOpeningMode {
+                didApplyOpeningMode = true
+                if readingMode == 1 { play() }
+            }
         }
         .onChange(of: sleepIndex) { _, _ in
             applySleepTimer()

@@ -5,6 +5,14 @@ import AVFoundation
 import Translation
 import UniformTypeIdentifiers
 
+struct NativeReaderPreferences: Codable, Hashable {
+    var speedIndex: Int? = nil
+    var voiceID: String? = nil
+    var textSize: Double? = nil
+    var lineSpacingIndex: Int? = nil
+    var strongText: Bool? = nil
+}
+
 struct NativeReadingDocument: Codable, Identifiable, Hashable {
     let id: UUID
     var title: String
@@ -16,6 +24,8 @@ struct NativeReadingDocument: Codable, Identifiable, Hashable {
     var markedPositions: [Int]? = nil
     var isFavorite: Bool? = nil
     var lastPercent: Int? = nil
+    var folderName: String? = nil
+    var readerPreferences: NativeReaderPreferences? = nil
 
     var hasAudio: Bool { !(trackPaths ?? []).isEmpty }
     var bookmarks: [Int] { markedPositions ?? [] }
@@ -38,6 +48,8 @@ private enum NativeReaderImportError: LocalizedError {
 @MainActor
 final class NativeReaderLibrary: ObservableObject {
     @Published private(set) var documents: [NativeReadingDocument] = []
+    @Published private(set) var folders: [String] = []
+    private let folderStorageKey = "native-reader-folders"
 
     private static var storageURL: URL {
         let directory = FileManager.default.urls(
@@ -47,6 +59,7 @@ final class NativeReaderLibrary: ObservableObject {
     }
 
     init() {
+        folders = UserDefaults.standard.stringArray(forKey: folderStorageKey) ?? []
         if let data = try? Data(contentsOf: Self.storageURL),
            let stored = try? JSONDecoder().decode([NativeReadingDocument].self, from: data) {
             documents = stored
@@ -109,6 +122,45 @@ final class NativeReaderLibrary: ObservableObject {
         guard let i = documents.firstIndex(where: { $0.id == document.id }) else { return }
         documents[i].isFavorite = !(documents[i].isFavorite ?? false)
         try? save()
+    }
+
+    func updatePreferences(_ document: NativeReadingDocument,
+                           _ edit: (inout NativeReaderPreferences) -> Void) {
+        guard let index = documents.firstIndex(where: { $0.id == document.id }) else { return }
+        var preferences = documents[index].readerPreferences ?? NativeReaderPreferences()
+        edit(&preferences)
+        documents[index].readerPreferences = preferences
+        try? save()
+    }
+
+    @discardableResult
+    func createFolder(named rawName: String) -> Bool {
+        let name = rawName.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !name.isEmpty, name.count <= 80,
+              !folders.contains(where: { $0.localizedCaseInsensitiveCompare(name) == .orderedSame })
+        else { return false }
+        folders.append(name)
+        folders.sort { $0.localizedStandardCompare($1) == .orderedAscending }
+        UserDefaults.standard.set(folders, forKey: folderStorageKey)
+        return true
+    }
+
+    func move(_ document: NativeReadingDocument, to folder: String?) {
+        guard folder == nil || folders.contains(folder!),
+              let index = documents.firstIndex(where: { $0.id == document.id }) else { return }
+        documents[index].folderName = folder
+        try? save()
+    }
+
+    func deleteFolder(_ folder: String) {
+        guard folders.contains(folder) else { return }
+        // Removing a folder never deletes the books inside it.
+        for index in documents.indices where documents[index].folderName == folder {
+            documents[index].folderName = nil
+        }
+        try? save()
+        folders.removeAll { $0 == folder }
+        UserDefaults.standard.set(folders, forKey: folderStorageKey)
     }
 
     func addBookmark(_ document: NativeReadingDocument, at percent: Int) {

@@ -1,6 +1,5 @@
 import SwiftUI
 import Foundation
-import FoundationXML
 
 /// Bibliotecas públicas y catálogos añadidos por la persona usuaria.
 /// No se guardan contraseñas ni se transmiten los libros de la biblioteca local.

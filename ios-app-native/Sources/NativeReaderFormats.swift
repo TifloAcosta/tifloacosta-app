@@ -37,8 +37,8 @@ enum NativeReaderFormats {
     static let supportedFormatGroups: [NativeReaderFormatGroup] = [
         .init(title: "Textos", details: "TXT, TEXT, MD, MARKDOWN, CSV, JSON, XML, LOG y SRT."),
         .init(title: "Documentos y publicaciones", details: "PDF con texto o escaneado mediante OCR; EPUB; HTML, HTM y RTF; DOCX."),
-        .init(title: "Presentaciones", details: "PPTX: extracción del texto de las diapositivas. Las presentaciones PPS y PPT antiguas todavía no están admitidas."),
-        .init(title: "Hojas de cálculo", details: "XLSX: extracción de texto de las hojas. Los archivos XLS antiguos todavía no están admitidos."),
+        .init(title: "Presentaciones", details: "PPTX: lectura en orden numérico de las diapositivas. Las presentaciones PPS y PPT antiguas todavía no están admitidas."),
+        .init(title: "Hojas de cálculo", details: "XLSX: lectura por hojas, filas y columnas, incluidas cadenas compartidas. Los archivos XLS antiguos todavía no están admitidos."),
         .init(title: "Imágenes con OCR", details: "JPG, JPEG, PNG, HEIC, HEIF, TIF y TIFF."),
         .init(title: "Audiolibros y audio", details: "MP3, M4A, M4B, AAC, WAV, AIF, AIFF y CAF."),
         .init(title: "DAISY", details: "Libros DAISY empaquetados en ZIP o con extensión DAISY. Lectura de texto y pistas de audio; la navegación SMIL completa sigue en desarrollo.")
@@ -66,8 +66,13 @@ enum NativeReaderFormats {
         switch ext {
         case "pdf":
             let pdf = PDFDocument(data: data)
-            let extracted = pdf?.string?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-            text = !extracted.isEmpty ? extracted : try ocrPDF(pdf)
+            let pages = (0..<(pdf?.pageCount ?? 0)).compactMap { index -> String? in
+                guard let pageText = pdf?.page(at: index)?.string?
+                    .trimmingCharacters(in: .whitespacesAndNewlines),
+                      !pageText.isEmpty else { return nil }
+                return "Página \(index + 1)\n\n\(pageText)"
+            }
+            text = !pages.isEmpty ? pages.joined(separator: "\n\n") : try ocrPDF(pdf)
         case "jpg", "jpeg", "png", "heic", "heif", "tif", "tiff":
             text = try recognizeText(in: data)
         case "html", "htm", "rtf":
@@ -131,7 +136,7 @@ enum NativeReaderFormats {
             let text = (request.results ?? []).compactMap {
                 $0.topCandidates(1).first?.string
             }.joined(separator: "\n")
-            if !text.isEmpty { output.append(text) }
+            if !text.isEmpty { output.append("Página \(index + 1)\n\n\(text)") }
         }
         return output.joined(separator: "\n\n")
     }
@@ -195,14 +200,12 @@ enum NativeReaderFormats {
             body = joined(all.filter { $0 == "word/document.xml" })
             format = "docx"
         case "pptx":
-            body = joined(all.filter {
-                $0.range(of: #"^ppt/slides/slide[0-9]+\.xml$"#, options: .regularExpression) != nil
-            })
+            body = NativeOfficeText.slides(all, text: extractedText)
             format = "pptx"
         case "xlsx":
-            body = joined(all.filter {
-                $0.hasPrefix("xl/worksheets/sheet") && $0.hasSuffix(".xml")
-            })
+            body = NativeOfficeText.spreadsheet(all) { path in
+                try? Data(contentsOf: directory.appendingPathComponent(path))
+            }
             format = "xlsx"
         case "epub":
             let pages = all.filter {

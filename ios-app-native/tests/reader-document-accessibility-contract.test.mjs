@@ -31,14 +31,15 @@ test('Long text is lazily segmented and VoiceOver is not force-recentered', () =
   assert.match(reader, /LazyVStack\(alignment: \.leading/);
   assert.match(reader, /ForEach\(textLayout\.fragments\.indices/);
   assert.match(reader, /programmaticFocusRequest/);
-  assert.match(reader, /if let index, programmaticFocusRequest/);
+  assert.match(reader, /if programmaticFocusRequest/);
+  assert.match(reader, /else if !speech\.isPlaying/);
   assert.doesNotMatch(reader, /Text\(latest\.body\)/);
   assert.doesNotMatch(reader, /Text\(document\.body\)/);
 });
 
 test('Audio polling never rewinds on each 2-percent progress increment', () => {
   assert.match(reader, /private var positionBinding: Binding<Int>/);
-  assert.match(reader, /if speech\.hasAudio \{ speech\.seek\(to: value\) \}/);
+  assert.match(reader, /if speech\.hasAudio \{\s*speech\.seek\(to: value\)/);
   assert.match(reader, /if abs\(updated - lastSavedPercent\) >= 5/);
   assert.doesNotMatch(reader, /\.onChange\(of: currentPercent\)/);
 });

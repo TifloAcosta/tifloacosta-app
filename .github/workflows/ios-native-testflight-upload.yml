@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - 'ios-app-native/Sources/**'
+      - 'ios-app-native/tests/**'
       - 'ios-app-native/ShareExtension/**'
       - 'ios-app-native/scripts/**'
       - 'ios-app-native/project.yml'

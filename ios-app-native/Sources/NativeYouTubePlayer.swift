@@ -262,11 +262,16 @@ private struct NativeYouTubeOfficialPlayer: UIViewRepresentable {
         engine.webView = view
         // No reproducir automáticamente. Mantener el iframe completo, controles,
         // marca y enlaces oficiales de YouTube, sin superposiciones visuales.
+        // Modo de privacidad mejorada: incrustar el vídeo desde youtube-nocookie.com.
+        // La API oficial de controles continúa cargando su script desde youtube.com.
         let html = """
         <!doctype html><html lang="es"><head><meta name="viewport" content="width=device-width,initial-scale=1">
         <meta name="referrer" content="strict-origin-when-cross-origin">
         <style>html,body,#player{margin:0;width:100%;height:100%;background:#000;overflow:hidden}</style></head>
-        <body><div id="player"></div><script src="https://www.youtube.com/iframe_api"></script>
+        <body><iframe id="player" title="Reproductor oficial de YouTube"
+          src="https://www.youtube-nocookie.com/embed/\(videoID)?enablejsapi=1&amp;origin=https%3A%2F%2Ftifloacosta.com&amp;playsinline=1&amp;controls=1"
+          allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen
+          style="border:0"></iframe><script src="https://www.youtube.com/iframe_api"></script>
         <script>
         window.tifloPlayer=null;
         function sendState(){
@@ -278,9 +283,6 @@ private struct NativeYouTubeOfficialPlayer: UIViewRepresentable {
         }
         function onYouTubeIframeAPIReady(){
           window.tifloPlayer=new YT.Player('player',{
-            videoId:'\(videoID)',
-            width:'100%',height:'100%',
-            playerVars:{playsinline:1,controls:1,enablejsapi:1,origin:'https://tifloacosta.com'},
             events:{onReady:sendState,onStateChange:sendState,
               onError:function(event){
                 window.webkit.messageHandlers.tifloPlayerEvents.postMessage({error:event.data});

@@ -67,7 +67,8 @@ final class NativeReaderLibrary: ObservableObject {
         }
     }
 
-    func importDocuments(from urls: [URL], sharingID: UUID? = nil) throws {
+    func importDocuments(from urls: [URL], sharingID: UUID? = nil,
+                         preferredTitle: String? = nil) throws {
         for url in urls {
             let accessed = url.startAccessingSecurityScopedResource()
             defer { if accessed { url.stopAccessingSecurityScopedResource() } }
@@ -78,7 +79,8 @@ final class NativeReaderLibrary: ObservableObject {
                 documents.insert(
                     NativeReadingDocument(
                         id: identifier,
-                        title: url.deletingPathExtension().lastPathComponent,
+                        title: (preferredTitle?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false
+                                ? preferredTitle! : url.deletingPathExtension().lastPathComponent),
                         body: payload.body,
                         importedAt: .now,
                         fileExtension: payload.fileExtension,
@@ -358,6 +360,8 @@ struct NativeReaderLibraryScreen: View {
     @EnvironmentObject private var library: NativeReaderLibrary
     @StateObject private var speech = NativeReadingSpeech()
     @State private var importPresented = false
+    @State private var importSourcesPresented = false
+    @State private var externalCatalogPresented = false
     @State private var information: NativeReadingDocument?
     @State private var documentToDelete: NativeReadingDocument?
     @State private var confirmDeletion = false
@@ -448,7 +452,7 @@ struct NativeReaderLibraryScreen: View {
         List {
             Section {
                 Button("Importar", systemImage: "square.and.arrow.down") {
-                    importPresented = true
+                    importSourcesPresented = true
                 }
                 NavigationLink("Ajustes") { NativeReaderSettingsScreen() }
             }
@@ -533,6 +537,19 @@ struct NativeReaderLibraryScreen: View {
         .tifloScreenSurface()
         .navigationTitle("TifloLector")
         .onDisappear { speech.stop() }
+        .confirmationDialog("Importar", isPresented: $importSourcesPresented,
+                            titleVisibility: .visible) {
+            Button("Desde Archivos") { importPresented = true }
+            Button("Bibliotecas en línea") { externalCatalogPresented = true }
+            Button("Cancelar", role: .cancel) {}
+        }
+        .sheet(isPresented: $externalCatalogPresented) {
+            NavigationStack {
+                NativeReaderCatalogsScreen()
+                    .environmentObject(library)
+                    .toolbar { Button("Cerrar") { externalCatalogPresented = false } }
+            }
+        }
         .fileImporter(
             isPresented: $importPresented,
             allowedContentTypes: [.item],

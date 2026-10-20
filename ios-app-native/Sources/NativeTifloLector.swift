@@ -207,9 +207,51 @@ final class NativeReaderLibrary: ObservableObject {
     }
 }
 
+/// Informacion de avance de voz sin depender del ritmo de refresco de SwiftUI.
+private final class NativeSpeechProgressDelegate: NSObject, AVSpeechSynthesizerDelegate {
+    var onWord: ((NSRange) -> Void)?
+    var onFinish: (() -> Void)?
+
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
+                           willSpeakRangeOfSpeechString characterRange: NSRange,
+                           utterance: AVSpeechUtterance) {
+        onWord?(characterRange)
+    }
+
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
+                           didFinish utterance: AVSpeechUtterance) {
+        onFinish?()
+    }
+}
+
 @MainActor
 final class NativeReadingSpeech: ObservableObject {
     private let synthesizer = AVSpeechSynthesizer()
+    private let progressDelegate = NativeSpeechProgressDelegate()
+    private var baseUTF16 = 0
+    private var totalUTF16 = 0
+    @Published private(set) var textPercent = 0
+
+    init() {
+        progressDelegate.onWord = { [weak self] range in
+            Task { @MainActor [weak self] in
+                guard let self, self.isPlaying, self.player == nil,
+                      self.totalUTF16 > 0 else { return }
+                let count = self.baseUTF16 + range.location + range.length
+                self.textPercent = max(0, min(100,
+                    Int(Double(count) * 100 / Double(self.totalUTF16))))
+            }
+        }
+        progressDelegate.onFinish = { [weak self] in
+            Task { @MainActor [weak self] in
+                guard let self, self.player == nil else { return }
+                self.textPercent = 100
+                self.isPlaying = false
+                self.isPaused = false
+            }
+        }
+        synthesizer.delegate = progressDelegate
+    }
     private var player: AVAudioPlayer?
     private var sleepTask: Task<Void, Never>?
     @Published private(set) var isPlaying = false
@@ -223,9 +265,18 @@ final class NativeReadingSpeech: ObservableObject {
         return max(0, min(100, Int(audioElapsed / audioDuration * 100)))
     }
 
-    func play(_ text: String, speed: Double = 1.0, language: String = "es-ES", voiceIdentifier: String = "") {
+    func play(_ text: String, speed: Double = 1.0, language: String = "es-ES",
+              voiceIdentifier: String = "", baseUTF16: Int = 0,
+              totalUTF16: Int? = nil) {
         stop()
         guard !text.isEmpty else { return }
+        self.baseUTF16 = baseUTF16
+        self.totalUTF16 = max(1, totalUTF16 ?? text.utf16.count)
+        textPercent = max(0, min(100,
+            Int(Double(baseUTF16) * 100 / Double(self.totalUTF16))))
+        // La voz sigue sonando con la pantalla bloqueada y otras apps abiertas.
+        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio)
+        try? AVAudioSession.sharedInstance().setActive(true)
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = (voiceIdentifier.isEmpty ? nil : AVSpeechSynthesisVoice(identifier: voiceIdentifier))
             ?? AVSpeechSynthesisVoice(language: language)
@@ -264,6 +315,7 @@ final class NativeReadingSpeech: ObservableObject {
 
     func pause() {
         if let player { player.pause() } else { synthesizer.pauseSpeaking(at: .word) }
+        sleep(after: 0) // Al pausar no sigue corriendo la cuenta del apagado.
         isPlaying = false
         isPaused = true
     }
@@ -588,6 +640,8 @@ private struct NativeReaderTextLayout {
     let fragmentStarts: [Int]
     let paragraphStarts: [Int]
     let sentenceStarts: [Int]
+    let pageStarts: [Int]
+    let headingStarts: [Int]
     let totalCharacters: Int
 
     init(_ body: String) {
@@ -624,11 +678,33 @@ private struct NativeReaderTextLayout {
         }
         sentences.append(totalCharacters)
         sentenceStarts = Array(Set(sentences)).sorted()
+
+        var pages: [Int] = [0]
+        var headings: [Int] = [0]
+        var lineOffset = 0
+        for line in body.components(separatedBy: "\n") {
+            let normalized = line.trimmingCharacters(in: .whitespaces).lowercased()
+            if normalized.range(of: #"^(página|pagina|diapositiva|hoja)\s+[0-9]+"#,
+                                options: .regularExpression) != nil {
+                pages.append(lineOffset)
+                headings.append(lineOffset)
+            } else if normalized.hasPrefix("# ") || normalized.hasPrefix("## ")
+                        || normalized.hasPrefix("capítulo ") || normalized.hasPrefix("capitulo ")
+                        || normalized.hasPrefix("sección ") || normalized.hasPrefix("seccion ") {
+                headings.append(lineOffset)
+            }
+            lineOffset += line.count + 1
+        }
+        // Sin marcas de página explícitas, los fragmentos hacen de páginas virtuales.
+        pageStarts = Array(Set((pages.count > 1 ? pages : offsets) + [0, totalCharacters])).sorted()
+        headingStarts = Array(Set(headings + [totalCharacters])).sorted()
     }
 
     func nearbyOffset(_ offset: Int, direction: Int, unit: Int) -> Int? {
         let boundaries: [Int]
         switch unit {
+        case 4: boundaries = headingStarts
+        case 3: boundaries = pageStarts
         case 2: boundaries = sentenceStarts
         case 1: boundaries = paragraphStarts
         default: boundaries = fragmentStarts + [totalCharacters]
@@ -671,6 +747,8 @@ struct NativeReadingScreen: View {
     @State private var readingOffset = 0
     @State private var lastSavedPercent = -1
     @State private var trackIndex = 0
+    @State private var elapsedSpeakingSeconds = 0
+    @State private var playbackTick = 0
     @State private var showTranslation = false
     @State private var showAudioSettings = false
     @State private var showVisualSettings = false
@@ -680,6 +758,7 @@ struct NativeReadingScreen: View {
     @AccessibilityFocusState private var focusedFragment: Int?
 
     private let textLayout: NativeReaderTextLayout
+    private let wordCount: Int
     private static let percentages = (0...100).map { "\($0) por ciento" }
     private static let sleepChoices = [
         "Desactivado", "5 minutos", "10 minutos", "15 minutos",
@@ -694,6 +773,7 @@ struct NativeReadingScreen: View {
         self.speech = speech
         self.startPercent = startPercent
         self.textLayout = NativeReaderTextLayout(document.body)
+        self.wordCount = document.body.split(whereSeparator: \.isWhitespace).count
     }
 
     private var latest: NativeReadingDocument { library.latest(document) }
@@ -719,12 +799,32 @@ struct NativeReadingScreen: View {
         let value = max(0, min(100, percent))
         currentPercent = value
         readingOffset = Int(Double(textLayout.totalCharacters) * Double(value) / 100)
-        if speech.hasAudio { speech.seek(to: value) }
+        if speech.hasAudio {
+            speech.seek(to: value)
+        } else if speech.isPlaying || speech.isPaused {
+            let wasPaused = speech.isPaused
+            if value == 100 { speech.stop() }
+            else {
+                startTextSpeech()
+                if wasPaused { speech.pause() }
+                else { applySleepTimer() }
+            }
+        }
         persistPosition()
     }
 
     private var positionBinding: Binding<Int> {
         Binding(get: { currentPercent }, set: { move(to: $0) })
+    }
+
+    private func startTextSpeech() {
+        let remainder = String(document.body.dropFirst(readingOffset))
+        guard !remainder.isEmpty else { return }
+        speech.play(remainder, speed: speed,
+                    language: AVSpeechSynthesisVoice(identifier: effectiveVoiceID)?.language ?? "es-ES",
+                    voiceIdentifier: effectiveVoiceID,
+                    baseUTF16: String(document.body.prefix(readingOffset)).utf16.count,
+                    totalUTF16: document.body.utf16.count)
     }
 
     private func play() {
@@ -733,10 +833,7 @@ struct NativeReadingScreen: View {
         } else if !tracks.isEmpty {
             playTrack()
         } else {
-            speech.play(String(document.body.dropFirst(readingOffset)),
-                        speed: speed,
-                        language: AVSpeechSynthesisVoice(identifier: effectiveVoiceID)?.language ?? "es-ES",
-                        voiceIdentifier: effectiveVoiceID)
+            startTextSpeech()
         }
         applySleepTimer()
     }
@@ -790,12 +887,11 @@ struct NativeReadingScreen: View {
         let index = textLayout.fragmentIndex(for: readingOffset)
         programmaticFocusRequest = true
         focusedFragment = index
-        if speech.isPlaying {
-            speech.play(String(document.body.dropFirst(readingOffset)),
-                        speed: speed,
-                        language: AVSpeechSynthesisVoice(identifier: effectiveVoiceID)?.language ?? "es-ES",
-                        voiceIdentifier: effectiveVoiceID)
-            applySleepTimer()
+        if speech.isPlaying || speech.isPaused {
+            let wasPaused = speech.isPaused
+            startTextSpeech()
+            if wasPaused { speech.pause() }
+            else { applySleepTimer() }
         }
     }
 
@@ -817,6 +913,27 @@ struct NativeReadingScreen: View {
         } catch {
             actionMessage = "No se pudo exportar: \(error.localizedDescription)"
         }
+    }
+
+    private func formatDuration(_ seconds: Int) -> String {
+        let value = max(0, seconds)
+        return value >= 3600
+            ? String(format: "%d:%02d:%02d", value / 3600, value / 60 % 60, value % 60)
+            : String(format: "%d:%02d", value / 60, value % 60)
+    }
+
+    private var progressDescription: String {
+        // La lectura de voz sintetizada no tiene duración real antes de comenzar.
+        // Distinguir siempre el tiempo medido de la estimación.
+        let position = "Leído \(currentPercent) por ciento. Falta \(100 - currentPercent) por ciento."
+        if speech.hasAudio {
+            let elapsed = Int(speech.audioElapsed)
+            let remaining = max(0, Int(speech.audioDuration) - elapsed)
+            return "\(position) Tiempo realizado \(formatDuration(elapsed)). Tiempo restante \(formatDuration(remaining))."
+        }
+        let estimate = Int(Double(max(1, wordCount)) * 60.0 / (165.0 * speed))
+        let remaining = Int(Double(estimate) * Double(100 - currentPercent) / 100.0)
+        return "\(position) Voz reproducida \(formatDuration(elapsedSpeakingSeconds)). Tiempo restante estimado \(formatDuration(remaining))."
     }
 
     private var playbackRow: some View {
@@ -856,6 +973,25 @@ struct NativeReadingScreen: View {
         VStack(alignment: .leading, spacing: 6) {
             playbackRow
             trackButtons
+            Text(progressDescription)
+                .font(.footnote)
+                .accessibilityLabel(progressDescription)
+            if speech.hasAudio {
+                HStack(spacing: 12) {
+                    Button("Retroceder 30 segundos") {
+                        speech.skip(seconds: -30)
+                        currentPercent = speech.audioPercent
+                        persistPosition()
+                    }
+                    Button("Avanzar 30 segundos") {
+                        speech.skip(seconds: 30)
+                        currentPercent = speech.audioPercent
+                        persistPosition()
+                    }
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.small)
+            }
             NativeAdjustableChoice(
                 title: "Apagado automático",
                 choices: Self.sleepChoices,
@@ -983,15 +1119,26 @@ struct NativeReadingScreen: View {
         .onChange(of: sleepIndex) { _, _ in
             applySleepTimer()
         }
+        .onReceive(speech.$textPercent) { percentage in
+            // AVSpeechSynthesizer reports each spoken word; no artificial timer
+            // advances the text cursor while paused or reading visually.
+            guard !speech.hasAudio, speech.isPlaying else { return }
+            if percentage != currentPercent {
+                currentPercent = percentage
+                readingOffset = Int(Double(textLayout.totalCharacters) *
+                                    Double(percentage) / 100)
+                if abs(percentage - lastSavedPercent) >= 5 { persistPosition() }
+            }
+        }
         .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
-            // Poll only audio playback. Updating the position from playback must
-            // NEVER call seek again or write JSON every second.
             speech.refresh()
+            if speech.isPlaying {
+                playbackTick += 1
+                if !speech.hasAudio { elapsedSpeakingSeconds += 1 }
+            }
             if speech.hasAudio && speech.isPlaying {
                 let updated = speech.audioPercent
-                if abs(updated - currentPercent) >= 2 {
-                    currentPercent = updated
-                }
+                if updated != currentPercent { currentPercent = updated }
                 if abs(updated - lastSavedPercent) >= 5 { persistPosition() }
             }
         }

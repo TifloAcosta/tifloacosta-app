@@ -32,7 +32,7 @@ Revisión del código SwiftUI nativo, el importador de archivos, los controles d
 - Múltiples variantes de audio de terceros: OGG/Vorbis, Opus, WMA, FLAC, AMR, y conversiones de audio no soportadas por decodificador nativo; no prometerlas sin decodificador y pruebas de dispositivo.
 - Audiolibros ZIP con listas de reproducción internas M3U/PLS o estructura de capítulos no alfabética.
 - RAR y 7Z; CBR/CBZ y otros archivos arbitrarios; formatos Braille BRF, BRL y PEF.
-- Office antiguo PPT, PPS, XLS, así como PPSX/PPTM/XLSM (revisar técnicamente y seguridad), ODT/ODS/ODP (LibreOffice), formatos propietarios.
+- Office binario antiguo PPT, PPS y XLS; ODT/ODS/ODP (LibreOffice) y formatos propietarios. PPSX/PPTM/XLSM se procesan como Office XML sin ejecutar macros, pero necesitan pruebas reales.
 - Audio de múltiples pistas con metadatos de capítulos, duración total de la obra, carátulas o velocidad fina, controles de la pantalla bloqueada / auriculares (MPRemoteCommandCenter), y control continuo desde la biblioteca sin abrir la obra.
 - Importación desde catálogos restringidos sin API, préstamos con DRM, audiolibros de servicios de suscripción o aplicaciones externas.
 - Restauración del punto exacto en la pista a nivel de segundos (la persistencia es porcentual), y reproducción sin huecos exacta entre archivos; AVAudioPlayer encadena al finalizar con una transición, no audio gapless.

@@ -510,7 +510,7 @@ struct NativeReaderLibraryScreen: View {
                              "csv", "json", "xml", "log", "srt"].contains(ext)
             case 2: return ext == "pdf"
             case 3: return ext == "epub"
-            case 4: return ["docx", "pptx", "xlsx"].contains(ext)
+            case 4: return ["docx", "pptx", "ppsx", "pptm", "xlsx", "xlsm"].contains(ext)
             case 5: return doc.hasAudio || ext == "daisy"
             case 6: return doc.hasBookmarks
             case 7: return doc.isFavorite == true

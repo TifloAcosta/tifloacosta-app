@@ -14,6 +14,11 @@ struct NativeReaderPreferences: Codable, Hashable {
     var strongText: Bool? = nil
 }
 
+struct NativeAudioBookmark: Codable, Hashable {
+    let track: Int
+    let percent: Int
+}
+
 struct NativeReadingDocument: Codable, Identifiable, Hashable {
     let id: UUID
     var title: String
@@ -25,11 +30,15 @@ struct NativeReadingDocument: Codable, Identifiable, Hashable {
     var markedPositions: [Int]? = nil
     var isFavorite: Bool? = nil
     var lastPercent: Int? = nil
+    var lastTrackIndex: Int? = nil
+    var audioBookmarks: [NativeAudioBookmark]? = nil
     var folderName: String? = nil
     var readerPreferences: NativeReaderPreferences? = nil
 
     var hasAudio: Bool { !(trackPaths ?? []).isEmpty }
     var bookmarks: [Int] { markedPositions ?? [] }
+    var savedAudioBookmarks: [NativeAudioBookmark] { audioBookmarks ?? [] }
+    var hasBookmarks: Bool { !bookmarks.isEmpty || !savedAudioBookmarks.isEmpty }
     var formatLabel: String { (fileExtension ?? "txt").uppercased() }
 }
 
@@ -181,6 +190,24 @@ final class NativeReaderLibrary: ObservableObject {
         try? save()
     }
 
+    func addAudioBookmark(_ document: NativeReadingDocument, track: Int, percent: Int) {
+        guard let i = documents.firstIndex(where: { $0.id == document.id }), track >= 0 else { return }
+        let mark = NativeAudioBookmark(track: track, percent: max(0, min(100, percent)))
+        var saved = documents[i].audioBookmarks ?? []
+        guard !saved.contains(mark) else { return }
+        saved.append(mark)
+        documents[i].audioBookmarks = saved.sorted {
+            $0.track == $1.track ? $0.percent < $1.percent : $0.track < $1.track
+        }
+        try? save()
+    }
+
+    func removeAudioBookmark(_ document: NativeReadingDocument, mark: NativeAudioBookmark) {
+        guard let i = documents.firstIndex(where: { $0.id == document.id }) else { return }
+        documents[i].audioBookmarks?.removeAll { $0 == mark }
+        try? save()
+    }
+
     func removeBookmark(_ document: NativeReadingDocument, at percent: Int) {
         guard let i = documents.firstIndex(where: { $0.id == document.id }) else { return }
         documents[i].markedPositions?.removeAll { $0 == percent }
@@ -191,6 +218,16 @@ final class NativeReaderLibrary: ObservableObject {
         guard let i = documents.firstIndex(where: { $0.id == document.id }) else { return }
         let value = max(0, min(100, percent))
         if documents[i].lastPercent != value {
+            documents[i].lastPercent = value
+            try? save()
+        }
+    }
+
+    func saveAudioPosition(_ document: NativeReadingDocument, track: Int, percent: Int) {
+        guard let i = documents.firstIndex(where: { $0.id == document.id }), track >= 0 else { return }
+        let value = max(0, min(100, percent))
+        if documents[i].lastTrackIndex != track || documents[i].lastPercent != value {
+            documents[i].lastTrackIndex = track
             documents[i].lastPercent = value
             try? save()
         }
@@ -227,10 +264,23 @@ private final class NativeSpeechProgressDelegate: NSObject, AVSpeechSynthesizerD
     }
 }
 
+private final class NativeAudioFinishDelegate: NSObject, AVAudioPlayerDelegate {
+    var onFinish: ((AVAudioPlayer, Bool) -> Void)?
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        onFinish?(player, flag)
+    }
+}
+
 @MainActor
 final class NativeReadingSpeech: ObservableObject {
     private let synthesizer = AVSpeechSynthesizer()
     private let progressDelegate = NativeSpeechProgressDelegate()
+    private let audioDelegate = NativeAudioFinishDelegate()
+    private var playlistURLs: [URL] = []
+    private var playlistIndex = 0
+    private var playlistSpeed = 1.0
+    private var onTrackChanged: ((Int) -> Void)?
+    private var onAudioError: ((String) -> Void)?
     private var baseUTF16 = 0
     private var totalUTF16 = 0
     @Published private(set) var textPercent = 0
@@ -254,6 +304,25 @@ final class NativeReadingSpeech: ObservableObject {
             }
         }
         synthesizer.delegate = progressDelegate
+        audioDelegate.onFinish = { [weak self] completed, success in
+            Task { @MainActor [weak self] in
+                guard let self, self.player === completed else { return }
+                self.isPlaying = false
+                self.isPaused = false
+                guard success, self.playlistURLs.indices.contains(self.playlistIndex + 1) else {
+                    return
+                }
+                let next = self.playlistIndex + 1
+                do {
+                    try self.startAudio(self.playlistURLs[next], speed: self.playlistSpeed, at: 0)
+                    self.playlistIndex = next
+                    self.onTrackChanged?(next)
+                } catch {
+                    self.onAudioError?(error.localizedDescription)
+                    self.stop()
+                }
+            }
+        }
     }
     private var player: AVAudioPlayer?
     private var sleepTask: Task<Void, Never>?
@@ -292,11 +361,13 @@ final class NativeReadingSpeech: ObservableObject {
         isPaused = false
     }
 
-    func playAudio(_ url: URL, speed: Double = 1.0, at percent: Int = 0) throws {
-        stop()
+    private func startAudio(_ url: URL, speed: Double, at percent: Int) throws {
+        player?.stop()
+        player = nil
         try AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio)
         try AVAudioSession.sharedInstance().setActive(true)
         let audio = try AVAudioPlayer(contentsOf: url)
+        audio.delegate = audioDelegate
         audio.enableRate = true
         audio.rate = Float(max(0.5, min(2.0, speed)))
         audio.prepareToPlay()
@@ -305,6 +376,31 @@ final class NativeReadingSpeech: ObservableObject {
         player = audio
         isPlaying = true
         isPaused = false
+    }
+
+    func playAudio(_ url: URL, speed: Double = 1.0, at percent: Int = 0) throws {
+        stop()
+        try startAudio(url, speed: speed, at: percent)
+    }
+
+    func playPlaylist(_ urls: [URL], speed: Double, track: Int, at percent: Int,
+                      onTrackChanged: @escaping (Int) -> Void,
+                      onError: @escaping (String) -> Void) throws {
+        guard urls.indices.contains(track) else {
+            throw NativeReaderFormatError.unsupported("pista de audio no disponible")
+        }
+        stop()
+        playlistURLs = urls
+        playlistIndex = track
+        playlistSpeed = speed
+        self.onTrackChanged = onTrackChanged
+        self.onAudioError = onError
+        do {
+            try startAudio(urls[track], speed: speed, at: percent)
+        } catch {
+            stop()
+            throw error
+        }
     }
 
     func seek(to percent: Int) {
@@ -350,6 +446,10 @@ final class NativeReadingSpeech: ObservableObject {
         sleepTask = nil
         player?.stop()
         player = nil
+        playlistURLs = []
+        playlistIndex = 0
+        onTrackChanged = nil
+        onAudioError = nil
         synthesizer.stopSpeaking(at: .immediate)
         isPlaying = false
         isPaused = false
@@ -410,9 +510,9 @@ struct NativeReaderLibraryScreen: View {
                              "csv", "json", "xml", "log", "srt"].contains(ext)
             case 2: return ext == "pdf"
             case 3: return ext == "epub"
-            case 4: return ["docx", "pptx", "xlsx"].contains(ext)
+            case 4: return ["docx", "pptx", "ppsx", "pptm", "xlsx", "xlsm"].contains(ext)
             case 5: return doc.hasAudio || ext == "daisy"
-            case 6: return !doc.bookmarks.isEmpty
+            case 6: return doc.hasBookmarks
             case 7: return doc.isFavorite == true
             case 8: return calendar.isDateInToday(doc.importedAt)
             case 9: return doc.importedAt >= (calendar.date(byAdding: .day, value: -7, to: .now) ?? .now)
@@ -436,10 +536,22 @@ struct NativeReaderLibraryScreen: View {
         let speed = speeds[max(0, min(speeds.count - 1, chosenSpeed))]
         let chosenPitch = latest.readerPreferences?.pitchIndex ?? pitchIndex
         let pitch = pitches[max(0, min(pitches.count - 1, chosenPitch))]
-        if let track = latest.trackPaths?.first,
-           let url = NativeReaderFormats.storedURL(for: track) {
-            do { try speech.playAudio(url, speed: speed, at: latest.lastPercent ?? 0) }
-            catch { importError = error.localizedDescription }
+        if let paths = latest.trackPaths, !paths.isEmpty {
+            let urls = paths.compactMap { NativeReaderFormats.storedURL(for: $0) }
+            guard !urls.isEmpty, urls.count == paths.count else {
+                importError = "Faltan archivos de audio de esta obra."
+                return
+            }
+            let startingTrack = min(max(0, latest.lastTrackIndex ?? 0), urls.count - 1)
+            let targetLibrary = library
+            do {
+                try speech.playPlaylist(urls, speed: speed, track: startingTrack,
+                    at: latest.lastPercent ?? 0,
+                    onTrackChanged: { [weak targetLibrary] index in
+                        targetLibrary?.saveAudioPosition(document, track: index, percent: 0)
+                    },
+                    onError: { error in importError = "No se pudo reproducir: " + error })
+            } catch { importError = error.localizedDescription }
         } else {
             let offset = Int(Double(latest.body.count) * Double(latest.lastPercent ?? 0) / 100)
             speech.play(String(latest.body.dropFirst(offset)), speed: speed, pitch: pitch,
@@ -517,7 +629,7 @@ struct NativeReaderLibraryScreen: View {
                 }
             }
             Section("Marcas") {
-                let marked = library.documents.filter { !$0.bookmarks.isEmpty }
+                let marked = library.documents.filter { $0.hasBookmarks }
                 if marked.isEmpty { Text("Todavía no hay marcas guardadas.") }
                 ForEach(marked) { document in
                     ForEach(document.bookmarks, id: \.self) { percent in
@@ -529,6 +641,17 @@ struct NativeReaderLibraryScreen: View {
                         }
                         .accessibilityAction(named: Text("Eliminar marca")) {
                             library.removeBookmark(document, at: percent)
+                        }
+                    }
+                    ForEach(document.savedAudioBookmarks, id: \.self) { mark in
+                        NavigationLink {
+                            NativeReadingScreen(document: document, speech: speech,
+                                                startPercent: mark.percent, startTrack: mark.track)
+                        } label: {
+                            Text("\(document.title), pista \(mark.track + 1), \(mark.percent) por ciento")
+                        }
+                        .accessibilityAction(named: Text("Eliminar marca")) {
+                            library.removeAudioBookmark(document, mark: mark)
                         }
                     }
                 }
@@ -773,7 +896,8 @@ private struct NativeReaderTextLayout {
 struct NativeReadingScreen: View {
     let document: NativeReadingDocument
     @ObservedObject var speech: NativeReadingSpeech
-    var startPercent: Int = 0
+    var startPercent: Int? = nil
+    var startTrack: Int? = nil
 
     @EnvironmentObject private var library: NativeReaderLibrary
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
@@ -816,10 +940,11 @@ struct NativeReadingScreen: View {
     private let sleepMinutes: [Int] = [0, 5, 10, 15, 30, 45, 60]
 
     init(document: NativeReadingDocument, speech: NativeReadingSpeech,
-         startPercent: Int = 0) {
+         startPercent: Int? = nil, startTrack: Int? = nil) {
         self.document = document
         self.speech = speech
         self.startPercent = startPercent
+        self.startTrack = startTrack
         self.textLayout = NativeReaderTextLayout(document.body)
         self.wordCount = document.body.split(whereSeparator: \.isWhitespace).count
     }
@@ -841,7 +966,11 @@ struct NativeReadingScreen: View {
     }
 
     private func persistPosition() {
-        library.savePosition(document, percent: currentPercent)
+        if tracks.isEmpty {
+            library.savePosition(document, percent: currentPercent)
+        } else {
+            library.saveAudioPosition(document, track: trackIndex, percent: currentPercent)
+        }
         lastSavedPercent = currentPercent
     }
 
@@ -899,12 +1028,24 @@ struct NativeReadingScreen: View {
 
     private func playTrack() {
         guard tracks.indices.contains(trackIndex),
-              let url = NativeReaderFormats.storedURL(for: tracks[trackIndex]) else {
+              NativeReaderFormats.storedURL(for: tracks[trackIndex]) != nil else {
             actionMessage = "No se encuentra la pista de audio."
             return
         }
+        let urls = tracks.compactMap { NativeReaderFormats.storedURL(for: $0) }
+        guard urls.count == tracks.count else {
+            actionMessage = "Faltan archivos de audio de esta obra."
+            return
+        }
         do {
-            try speech.playAudio(url, speed: speed, at: currentPercent)
+            try speech.playPlaylist(urls, speed: speed, track: trackIndex, at: currentPercent,
+                onTrackChanged: { next in
+                    trackIndex = next
+                    currentPercent = 0
+                    persistPosition()
+                    applySleepTimer()
+                },
+                onError: { error in actionMessage = "No se pudo reproducir: " + error })
             actionMessage = nil
         } catch {
             actionMessage = "No se pudo reproducir: \(error.localizedDescription)"
@@ -957,8 +1098,13 @@ struct NativeReadingScreen: View {
     }
 
     private func addBookmark() {
-        library.addBookmark(document, at: currentPercent)
-        actionMessage = "Marca guardada en \(currentPercent) por ciento."
+        if tracks.isEmpty {
+            library.addBookmark(document, at: currentPercent)
+            actionMessage = "Marca guardada en \(currentPercent) por ciento."
+        } else {
+            library.addAudioBookmark(document, track: trackIndex, percent: currentPercent)
+            actionMessage = "Marca guardada en la pista \(trackIndex + 1), \(currentPercent) por ciento."
+        }
     }
 
     private func exportText() {
@@ -986,7 +1132,9 @@ struct NativeReadingScreen: View {
     private var progressDescription: String {
         // La lectura de voz sintetizada no tiene duración real antes de comenzar.
         // Distinguir siempre el tiempo medido de la estimación.
-        let position = "Leído \(currentPercent) por ciento. Falta \(100 - currentPercent) por ciento."
+        let position = tracks.isEmpty
+            ? "Leído \(currentPercent) por ciento. Falta \(100 - currentPercent) por ciento."
+            : "Pista \(trackIndex + 1) de \(tracks.count). Escuchado \(currentPercent) por ciento de esta pista; falta \(100 - currentPercent) por ciento."
         if !tracks.isEmpty && !speech.hasAudio {
             return "\(position) La duración de audio se mostrará al iniciar la pista."
         }
@@ -1022,14 +1170,31 @@ struct NativeReadingScreen: View {
     @ViewBuilder
     private var trackButtons: some View {
         if tracks.count > 1 {
-            HStack {
-                Button("Pista anterior") { changeTrack(-1) }
-                    .disabled(trackIndex == 0)
-                Button("Pista siguiente") { changeTrack(1) }
-                    .disabled(trackIndex == tracks.count - 1)
+            VStack(alignment: .leading, spacing: 4) {
+                NativeAdjustableChoice(
+                    title: "Seleccionar pista",
+                    choices: tracks.indices.map { "Pista \($0 + 1) de \(tracks.count)" },
+                    selectedIndex: Binding(
+                        get: { trackIndex },
+                        set: { index in
+                            guard tracks.indices.contains(index), index != trackIndex else { return }
+                            trackIndex = index
+                            currentPercent = 0
+                            playTrack()
+                            persistPosition()
+                            applySleepTimer()
+                        }
+                    )
+                )
+                HStack {
+                    Button("Pista anterior") { changeTrack(-1) }
+                        .disabled(trackIndex == 0)
+                    Button("Pista siguiente") { changeTrack(1) }
+                        .disabled(trackIndex == tracks.count - 1)
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.small)
             }
-            .buttonStyle(.bordered)
-            .controlSize(.small)
         }
     }
 
@@ -1185,7 +1350,7 @@ struct NativeReadingScreen: View {
                     LabeledContent("Importado", value:
                         latest.importedAt.formatted(date: .abbreviated, time: .shortened))
                     LabeledContent("Carpeta", value: latest.folderName ?? "Sin carpeta")
-                    LabeledContent("Marcas", value: "\(latest.bookmarks.count)")
+                    LabeledContent("Marcas", value: "\(latest.bookmarks.count + latest.savedAudioBookmarks.count)")
                     Text(progressDescription)
                     if !tracks.isEmpty {
                         LabeledContent("Pistas de audio", value: "\(tracks.count)")
@@ -1199,7 +1364,7 @@ struct NativeReadingScreen: View {
         .sheet(isPresented: $showSavedMarks) {
             NavigationStack {
                 List {
-                    if latest.bookmarks.isEmpty {
+                    if !latest.hasBookmarks {
                         Text("Esta obra todavía no tiene marcas.")
                     }
                     ForEach(latest.bookmarks, id: \.self) { percent in
@@ -1209,6 +1374,20 @@ struct NativeReadingScreen: View {
                         }
                         .accessibilityAction(named: Text("Eliminar esta marca")) {
                             library.removeBookmark(document, at: percent)
+                        }
+                    }
+                    ForEach(latest.savedAudioBookmarks, id: \.self) { mark in
+                        Button("Ir a pista \(mark.track + 1), \(mark.percent) por ciento") {
+                            trackIndex = mark.track
+                            currentPercent = mark.percent
+                            readingOffset = 0
+                            playTrack()
+                            persistPosition()
+                            applySleepTimer()
+                            showSavedMarks = false
+                        }
+                        .accessibilityAction(named: Text("Eliminar esta marca")) {
+                            library.removeAudioBookmark(document, mark: mark)
                         }
                     }
                 }
@@ -1252,8 +1431,9 @@ struct NativeReadingScreen: View {
             NativeReaderDocumentVisualSettingsScreen(document: document)
         }
         .onAppear {
-            let initial = max(0, min(100,
-                startPercent > 0 ? startPercent : (latest.lastPercent ?? 0)))
+            let initial = max(0, min(100, startPercent ?? latest.lastPercent ?? 0))
+            trackIndex = min(max(0, startTrack ?? latest.lastTrackIndex ?? 0),
+                             max(0, tracks.count - 1))
             currentPercent = initial
             readingOffset = Int(Double(textLayout.totalCharacters) * Double(initial) / 100)
             lastSavedPercent = initial

@@ -140,7 +140,7 @@ private enum NativeOPDSService {
     static let bookLimit = 80 * 1024 * 1024
     static let supported = Set([
         "epub", "pdf", "txt", "text", "html", "htm", "rtf", "docx",
-        "pptx", "xlsx", "daisy", "zip", "mp3", "m4a", "m4b",
+        "pptx", "ppsx", "pptm", "xlsx", "xlsm", "daisy", "zip", "mp3", "m4a", "m4b",
         "jpg", "jpeg", "png", "md"
     ])
 

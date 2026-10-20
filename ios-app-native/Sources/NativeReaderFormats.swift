@@ -21,8 +21,8 @@ enum NativeReaderFormatError: LocalizedError {
         switch self {
         case .unsupported(let ext): return "El formato \(ext) todavía no dispone de un lector compatible."
         case .empty(let name): return "No se ha encontrado contenido legible en «\(name)»."
-        case .invalidArchive: return "El archivo comprimido no es un EPUB ni un libro DAISY reconocible."
-        case .oversizedArchive: return "El paquete supera el límite de seguridad de 250 MB descomprimidos."
+        case .invalidArchive: return "No se ha podido abrir el paquete o el ZIP no contiene un libro DAISY ni pistas de audio reconocibles."
+        case .oversizedArchive: return "El archivo comprimido supera los límites de seguridad de tamaño o cantidad de ficheros."
         }
     }
 }
@@ -37,11 +37,12 @@ enum NativeReaderFormats {
     static let supportedFormatGroups: [NativeReaderFormatGroup] = [
         .init(title: "Textos", details: "TXT, TEXT, MD, MARKDOWN, CSV, JSON, XML, LOG y SRT."),
         .init(title: "Documentos y publicaciones", details: "PDF con texto o escaneado mediante OCR; EPUB; HTML, HTM y RTF; DOCX."),
-        .init(title: "Presentaciones", details: "PPTX: lectura en orden numérico de las diapositivas. Las presentaciones PPS y PPT antiguas todavía no están admitidas."),
-        .init(title: "Hojas de cálculo", details: "XLSX: lectura por hojas, filas y columnas, incluidas cadenas compartidas. Los archivos XLS antiguos todavía no están admitidos."),
+        .init(title: "Presentaciones", details: "PPTX, PPSX y PPTM: lectura por diapositivas. Las presentaciones PPS y PPT antiguas todavía no están admitidas."),
+        .init(title: "Hojas de cálculo", details: "XLSX y XLSM: lectura por hojas, filas y columnas, incluidas cadenas compartidas. Los archivos XLS antiguos todavía no están admitidos."),
         .init(title: "Imágenes con OCR", details: "JPG, JPEG, PNG, HEIC, HEIF, TIF y TIFF."),
-        .init(title: "Audiolibros y audio", details: "MP3, M4A, M4B, AAC, WAV, AIF, AIFF y CAF."),
-        .init(title: "DAISY", details: "Libros DAISY empaquetados en ZIP o con extensión DAISY. Lectura de texto y pistas de audio; la navegación SMIL completa sigue en desarrollo.")
+        .init(title: "Audiolibros y audio", details: "MP3, M4A, M4B, AAC, WAV, AIF, AIFF y CAF. Pistas consecutivas dentro de un ZIP de audiolibro, ordenadas naturalmente por sus nombres."),
+        .init(title: "DAISY", details: "Libros DAISY empaquetados en ZIP o con extensión DAISY. Lectura de texto y pistas de audio; la navegación SMIL completa sigue en desarrollo."),
+        .init(title: "Archivos comprimidos", details: "ZIP con pistas de audio o libros DAISY. No se admiten ZIP arbitrarios, RAR, 7Z ni CBR/CBZ.")
     ]
 
     private static let audioExtensions: Set<String> = [
@@ -57,7 +58,7 @@ enum NativeReaderFormats {
             let saved = try storeMedia(url, documentID: documentID)
             return .init(body: "", fileExtension: ext, trackPaths: [saved])
         }
-        if ["epub", "docx", "pptx", "xlsx", "zip", "daisy"].contains(ext) {
+        if ["epub", "docx", "pptx", "ppsx", "pptm", "xlsx", "xlsm", "zip", "daisy"].contains(ext) {
             return try readPackage(url, documentID: documentID, ext: ext)
         }
 
@@ -171,12 +172,16 @@ enum NativeReaderFormats {
         defer { try? FileManager.default.removeItem(at: directory) }
         var paths: [String] = []
         var total: Int64 = 0
+        var entries = 0
+        let sizeLimit: Int64 = ext == "zip" ? 750_000_000 : 250_000_000
         for entry in archive {
             let path = entry.path.replacingOccurrences(of: "\\", with: "/")
             guard !path.hasPrefix("/"), !path.split(separator: "/").contains(".."),
                   !path.contains(":"), entry.type == .file else { continue }
+            entries += 1
+            guard entries <= 4000 else { throw NativeReaderFormatError.oversizedArchive }
             total += Int64(entry.uncompressedSize)
-            guard total <= 250_000_000 else { throw NativeReaderFormatError.oversizedArchive }
+            guard total <= sizeLimit else { throw NativeReaderFormatError.oversizedArchive }
             let target = directory.appendingPathComponent(path)
             try FileManager.default.createDirectory(
                 at: target.deletingLastPathComponent(), withIntermediateDirectories: true
@@ -212,14 +217,14 @@ enum NativeReaderFormats {
         case "docx":
             body = joined(all.filter { $0 == "word/document.xml" })
             format = "docx"
-        case "pptx":
+        case "pptx", "ppsx", "pptm":
             body = NativeOfficeText.slides(all, text: extractedText)
-            format = "pptx"
-        case "xlsx":
+            format = ext
+        case "xlsx", "xlsm":
             body = NativeOfficeText.spreadsheet(all) { path in
                 try? Data(contentsOf: directory.appendingPathComponent(path))
             }
-            format = "xlsx"
+            format = ext
         case "epub":
             let pages = all.filter {
                 ($0.hasSuffix(".xhtml") || $0.hasSuffix(".html") || $0.hasSuffix(".htm"))
@@ -234,7 +239,12 @@ enum NativeReaderFormats {
                 return lower.hasSuffix("ncc.html") || lower.hasSuffix(".smil")
                     || lower.hasSuffix(".ncx")
             }
-            guard isDaisy else { throw NativeReaderFormatError.invalidArchive }
+            let audioFiles = all.filter {
+                audioExtensions.contains(URL(fileURLWithPath: $0).pathExtension.lowercased())
+            }
+            guard isDaisy || (ext == "zip" && !audioFiles.isEmpty) else {
+                throw NativeReaderFormatError.invalidArchive
+            }
             let pages = all.filter {
                 ($0.hasSuffix(".html") || $0.hasSuffix(".xhtml") || $0.hasSuffix(".xml"))
                     && !$0.lowercased().hasSuffix("ncc.html")
@@ -242,11 +252,9 @@ enum NativeReaderFormats {
                     && !$0.lowercased().hasSuffix(".ncx")
                     && !$0.lowercased().hasSuffix(".opf")
             }
-            body = joined(pages)
-            format = "daisy"
-            for path in all where audioExtensions.contains(
-                URL(fileURLWithPath: path).pathExtension.lowercased()
-            ) {
+            body = isDaisy ? joined(pages) : ""
+            format = isDaisy ? "daisy" : "zip"
+            for path in audioFiles {
                 let copy = try storeMedia(directory.appendingPathComponent(path), documentID: documentID)
                 media.append(copy)
             }

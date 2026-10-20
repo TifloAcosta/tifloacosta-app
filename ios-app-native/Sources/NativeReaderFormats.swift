@@ -194,7 +194,7 @@ enum NativeReaderFormats {
                 of: "(?i)</(?:a:p|w:p|text:p|row|c|p)>", with: "\n",
                 options: .regularExpression
             ).replacingOccurrences(
-                of: "(?i)<h[1-6]\b[^>]*>", with: "\n# ",
+                of: "(?i)<h[1-6]\\b[^>]*>", with: "\n# ",
                 options: .regularExpression
             )
             let text = NativeDocumentText.extract(

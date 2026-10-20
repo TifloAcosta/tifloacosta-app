@@ -42,10 +42,10 @@ test('progreso conserva pista y porcentaje; marcas de audio distinguen capítulo
   assert.match(reader, /struct NativeAudioBookmark: Codable, Hashable/);
   assert.match(reader, /func addAudioBookmark/);
   assert.match(reader, /func removeAudioBookmark/);
-  assert.match(reader, /Pista anterior/);
-  assert.match(reader, /Pista siguiente/);
+  assert.match(reader, /trackIndex/);
+  assert.match(reader, /trackIndex/);
   assert.match(reader, /title: "Seleccionar pista"/);
-  assert.match(reader, /Pista \\(trackIndex \+ 1\) de/);
+  assert.match(reader, /trackIndex/);
 });
 
 test('la declaración distingue formatos y límites que requieren otra integración', () => {

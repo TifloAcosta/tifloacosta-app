@@ -47,10 +47,14 @@ test('YouTube usa exclusivamente iframe oficial y mandos nativos VoiceOver', () 
   const player = source('NativeYouTubePlayer.swift');
   assert.match(player, /WKWebView/);
   assert.match(player, /youtube\.com\/iframe_api/);
-  assert.match(player, /youtube-nocookie\.com\/embed/);
+  assert.match(player, /<div id="player"><\/div>/);
+  assert.doesNotMatch(player, /<iframe id="player"/);
+  assert.match(player, /view\.isAccessibilityElement\s*=\s*false/);
+  assert.match(player, /view\.accessibilityElementsHidden\s*=\s*true/);
+  assert.match(player, /NativeYouTubeOfficialPlayer\(videoID: video\.id, engine: engine\)[\s\S]{0,220}\.accessibilityHidden\(true\)/);
   assert.match(player, /onYouTubeIframeAPIReady/);
-  // Un iframe existente lleva controles en la URL, no necesariamente en playerVars.
-  assert.match(player, /controls=1/);
+  // Reproductor creado con la API IFrame y sus controles nativos SwiftUI.
+  assert.match(player, /playerVars:\{playsinline:1,controls:1,enablejsapi:1/);
   assert.match(player, /height: 225/);
   assert.match(player, /Text\(engine\.playing \? "Pausar" : "Reproducir"\)/);
   assert.match(player, /dynamicTypeSize\.isAccessibilitySize/);

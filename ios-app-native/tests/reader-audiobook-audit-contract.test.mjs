@@ -54,4 +54,6 @@ test('la declaración distingue formatos y límites que requieren otra integraci
   assert.match(formats, /PPS y PPT antiguas todavía no están admitidas/);
   assert.match(formats, /XLS antiguos todavía no están admitidos/);
   assert.match(settings, /NativeReaderFormats\.supportedFormatGroups/);
+  assert.match(formats, /"ppsx", "pptm"/);
+  assert.match(formats, /"xlsx", "xlsm"/);
 });

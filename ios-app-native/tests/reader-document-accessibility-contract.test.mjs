@@ -9,8 +9,8 @@ const settings = read('NativeReaderSettings.swift');
 test('The open document exposes usable Audio and Visual controls', () => {
   assert.match(reader, /Button\("Audio"\) \{ showAudioSettings = true \}/);
   assert.match(reader, /Button\("Visual"\) \{ showVisualSettings = true \}/);
-  assert.match(reader, /NativeReaderAudioSettingsScreen\(\)/);
-  assert.match(reader, /NativeReaderVisualSettingsScreen\(\)/);
+  assert.match(reader, /NativeReaderDocumentAudioSettingsScreen\(document: document\)/);
+  assert.match(reader, /NativeReaderDocumentVisualSettingsScreen\(document: document\)/);
   assert.match(settings, /NativeReaderAudioControls\(\)/);
   assert.match(settings, /NativeReaderVisualControls\(\)/);
   assert.doesNotMatch(reader, /Menu\("Acciones"\)/);

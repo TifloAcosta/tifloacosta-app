@@ -7,6 +7,7 @@ import UniformTypeIdentifiers
 
 struct NativeReaderPreferences: Codable, Hashable {
     var speedIndex: Int? = nil
+    var pitchIndex: Int? = nil
     var voiceID: String? = nil
     var textSize: Double? = nil
     var lineSpacingIndex: Int? = nil
@@ -265,8 +266,8 @@ final class NativeReadingSpeech: ObservableObject {
         return max(0, min(100, Int(audioElapsed / audioDuration * 100)))
     }
 
-    func play(_ text: String, speed: Double = 1.0, language: String = "es-ES",
-              voiceIdentifier: String = "", baseUTF16: Int = 0,
+    func play(_ text: String, speed: Double = 1.0, pitch: Float = 1.0,
+              language: String = "es-ES", voiceIdentifier: String = "", baseUTF16: Int = 0,
               totalUTF16: Int? = nil) {
         stop()
         guard !text.isEmpty else { return }
@@ -283,6 +284,7 @@ final class NativeReadingSpeech: ObservableObject {
         utterance.rate = min(AVSpeechUtteranceMaximumSpeechRate,
             max(AVSpeechUtteranceMinimumSpeechRate,
                 AVSpeechUtteranceDefaultSpeechRate * Float(speed)))
+        utterance.pitchMultiplier = max(0.5, min(2, pitch))
         synthesizer.speak(utterance)
         isPlaying = true
         isPaused = false
@@ -371,7 +373,9 @@ struct NativeReaderLibraryScreen: View {
     @AppStorage("native-reading-filter") private var filterIndex = 0
     @AppStorage("native-reading-sort") private var sortIndex = 0
     @AppStorage("native-reading-speed-index") private var speedIndex = 2
+    @AppStorage("native-reading-pitch-index") private var pitchIndex = 2
     @AppStorage("native-reading-voice-id") private var voiceID = ""
+    private let pitches: [Float] = [0.8, 0.9, 1.0, 1.1, 1.2]
     private let speeds: [Double] = [0.75, 0.9, 1.0, 1.25, 1.5]
 
     private var folderFilterIndex: Binding<Int> {
@@ -426,13 +430,15 @@ struct NativeReaderLibraryScreen: View {
         let latest = library.latest(document)
         let chosenSpeed = latest.readerPreferences?.speedIndex ?? speedIndex
         let speed = speeds[max(0, min(speeds.count - 1, chosenSpeed))]
+        let chosenPitch = latest.readerPreferences?.pitchIndex ?? pitchIndex
+        let pitch = pitches[max(0, min(pitches.count - 1, chosenPitch))]
         if let track = latest.trackPaths?.first,
            let url = NativeReaderFormats.storedURL(for: track) {
             do { try speech.playAudio(url, speed: speed, at: latest.lastPercent ?? 0) }
             catch { importError = error.localizedDescription }
         } else {
             let offset = Int(Double(latest.body.count) * Double(latest.lastPercent ?? 0) / 100)
-            speech.play(String(latest.body.dropFirst(offset)), speed: speed,
+            speech.play(String(latest.body.dropFirst(offset)), speed: speed, pitch: pitch,
                 language: AVSpeechSynthesisVoice(identifier: latest.readerPreferences?.voiceID ?? voiceID)?.language ?? "es-ES",
                 voiceIdentifier: latest.readerPreferences?.voiceID ?? voiceID)
         }
@@ -636,6 +642,12 @@ struct NativeReaderLibraryScreen: View {
 
 /// Split long documents once at import-display time. Avoid putting a complete
 /// EPUB/Office/PDF body into a single enormous SwiftUI Text accessibility node.
+private struct NativeReaderNavigationPoint: Identifiable {
+    let offset: Int
+    let title: String
+    var id: Int { offset }
+}
+
 private struct NativeReaderTextLayout {
     let fragments: [String]
     let fragmentStarts: [Int]
@@ -643,6 +655,9 @@ private struct NativeReaderTextLayout {
     let sentenceStarts: [Int]
     let pageStarts: [Int]
     let headingStarts: [Int]
+    let namedHeadings: [NativeReaderNavigationPoint]
+    let namedPages: [NativeReaderNavigationPoint]
+    let hasRealPages: Bool
     let totalCharacters: Int
 
     init(_ body: String) {
@@ -682,6 +697,8 @@ private struct NativeReaderTextLayout {
 
         var pages: [Int] = [0]
         var headings: [Int] = [0]
+        var pageEntries: [NativeReaderNavigationPoint] = []
+        var headingEntries: [NativeReaderNavigationPoint] = []
         var lineOffset = 0
         for line in body.components(separatedBy: "\n") {
             let normalized = line.trimmingCharacters(in: .whitespaces).lowercased()
@@ -689,16 +706,24 @@ private struct NativeReaderTextLayout {
                                 options: .regularExpression) != nil {
                 pages.append(lineOffset)
                 headings.append(lineOffset)
-            } else if normalized.hasPrefix("# ") || normalized.hasPrefix("## ")
-                        || normalized.hasPrefix("capítulo ") || normalized.hasPrefix("capitulo ")
-                        || normalized.hasPrefix("sección ") || normalized.hasPrefix("seccion ") {
+                pageEntries.append(.init(offset: lineOffset, title: line.trimmingCharacters(in: .whitespaces)))
+            } else if normalized.range(
+                of: #"^(#{1,6}\s+|capítulo\s+|capitulo\s+|sección\s+|seccion\s+)"#,
+                options: .regularExpression) != nil {
                 headings.append(lineOffset)
+                headingEntries.append(.init(offset: lineOffset,
+                    title: line.trimmingCharacters(in: .whitespaces)))
             }
             lineOffset += line.count + 1
         }
         // Sin marcas de página explícitas, los fragmentos hacen de páginas virtuales.
         pageStarts = Array(Set((pages.count > 1 ? pages : offsets) + [0, totalCharacters])).sorted()
         headingStarts = headings.count > 1 ? Array(Set(headings)).sorted() : []
+        namedHeadings = headingEntries
+        hasRealPages = !pageEntries.isEmpty
+        namedPages = pageEntries.isEmpty
+            ? offsets.enumerated().map { .init(offset: $0.element, title: "Bloque \($0.offset + 1)") }
+            : pageEntries
     }
 
     func nearbyOffset(_ offset: Int, direction: Int, unit: Int) -> Int? {
@@ -737,6 +762,7 @@ struct NativeReadingScreen: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @AppStorage("native-reading-text-size") private var textSize = 20.0
     @AppStorage("native-reading-speed-index") private var speedIndex = 2
+    @AppStorage("native-reading-pitch-index") private var pitchIndex = 2
     @AppStorage("native-reading-voice-id") private var voiceID = ""
     @AppStorage("native-reading-line-spacing-index") private var lineSpacingIndex = 0
     @AppStorage("native-reading-strong-text") private var strongText = false
@@ -751,6 +777,8 @@ struct NativeReadingScreen: View {
     @State private var elapsedSpeakingSeconds = 0
     @State private var playbackTick = 0
     @State private var showTranslation = false
+    @State private var showStructure = false
+    @State private var showWordTools = false
     @State private var showAudioSettings = false
     @State private var showVisualSettings = false
     @State private var showDocumentActions = false
@@ -782,6 +810,8 @@ struct NativeReadingScreen: View {
     private var latest: NativeReadingDocument { library.latest(document) }
     private var tracks: [String] { latest.trackPaths ?? [] }
     private var effectiveSpeedIndex: Int { latest.readerPreferences?.speedIndex ?? speedIndex }
+    private var effectivePitchIndex: Int { latest.readerPreferences?.pitchIndex ?? pitchIndex }
+    private var pitch: Float { [0.8, 0.9, 1.0, 1.1, 1.2][max(0, min(4, effectivePitchIndex))] }
     private var effectiveVoiceID: String { latest.readerPreferences?.voiceID ?? voiceID }
     private var effectiveTextSize: Double { latest.readerPreferences?.textSize ?? textSize }
     private var effectiveLineSpacing: Int { latest.readerPreferences?.lineSpacingIndex ?? lineSpacingIndex }
@@ -827,7 +857,7 @@ struct NativeReadingScreen: View {
         }
         let remainder = String(document.body.dropFirst(readingOffset))
         guard !remainder.isEmpty else { return }
-        speech.play(remainder, speed: speed,
+        speech.play(remainder, speed: speed, pitch: pitch,
                     language: AVSpeechSynthesisVoice(identifier: effectiveVoiceID)?.language ?? "es-ES",
                     voiceIdentifier: effectiveVoiceID,
                     baseUTF16: String(document.body.prefix(readingOffset)).utf16.count,
@@ -882,12 +912,8 @@ struct NativeReadingScreen: View {
         applySleepTimer()
     }
 
-    private func moveUnit(_ direction: Int) {
-        guard !document.body.isEmpty,
-              let next = textLayout.nearbyOffset(readingOffset,
-                                                  direction: direction, unit: navigationUnit)
-        else { return }
-        readingOffset = max(0, min(textLayout.totalCharacters, next))
+    private func jump(to offset: Int) {
+        readingOffset = max(0, min(textLayout.totalCharacters, offset))
         let ratio = Double(readingOffset) / Double(max(1, textLayout.totalCharacters))
         currentPercent = min(100, Int((ratio * 100).rounded()))
         persistPosition()
@@ -896,10 +922,21 @@ struct NativeReadingScreen: View {
         focusedFragment = index
         if speech.isPlaying || speech.isPaused {
             let wasPaused = speech.isPaused
-            startTextSpeech()
-            if wasPaused { speech.pause() }
-            else { applySleepTimer() }
+            if readingOffset >= textLayout.totalCharacters { speech.stop() }
+            else {
+                startTextSpeech()
+                if wasPaused { speech.pause() }
+                else { applySleepTimer() }
+            }
         }
+    }
+
+    private func moveUnit(_ direction: Int) {
+        guard !document.body.isEmpty,
+              let next = textLayout.nearbyOffset(readingOffset,
+                                                  direction: direction, unit: navigationUnit)
+        else { return }
+        jump(to: next)
     }
 
     private func addBookmark() {
@@ -1079,12 +1116,17 @@ struct NativeReadingScreen: View {
     private var documentActions: some View {
         Button("Información de la obra") { showDocumentInformation = true }
         Button("Marcas guardadas") { showSavedMarks = true }
+        if !latest.body.isEmpty { Button("Índice y navegación estructurada") { showStructure = true } }
         Button("Añadir marca") { addBookmark() }
         Button(latest.isFavorite == true ? "Quitar de favoritos" : "Añadir a favoritos") {
             library.toggleFavorite(document)
         }
         if !latest.body.isEmpty {
             Button("Exportar texto") { exportText() }
+            Button("Diccionario y pronunciación") {
+                if speech.isPlaying { pausePlayback() }
+                showWordTools = true
+            }
             if #available(iOS 18.0, *) {
                 Button("Traducir fragmento actual") { showTranslation = true }
             }
@@ -1157,6 +1199,34 @@ struct NativeReadingScreen: View {
                 .navigationTitle("Marcas guardadas")
                 .toolbar { Button("Cerrar") { showSavedMarks = false } }
             }
+        }
+        .sheet(isPresented: $showStructure) {
+            NavigationStack {
+                List {
+                    Section("Encabezados") {
+                        if textLayout.namedHeadings.isEmpty {
+                            Text("No se han identificado encabezados en este documento.")
+                        }
+                        ForEach(textLayout.namedHeadings) { point in
+                            Button(point.title) { jump(to: point.offset); showStructure = false }
+                        }
+                    }
+                    Section(textLayout.hasRealPages ? "Páginas, diapositivas y hojas" : "Bloques de lectura") {
+                        if textLayout.namedPages.isEmpty {
+                            Text("No hay divisiones reconocibles en este documento.")
+                        }
+                        ForEach(textLayout.namedPages) { point in
+                            Button(point.title) { jump(to: point.offset); showStructure = false }
+                        }
+                    }
+                }
+                .tifloScreenSurface()
+                .navigationTitle("Índice de la obra")
+                .toolbar { Button("Cerrar") { showStructure = false } }
+            }
+        }
+        .sheet(isPresented: $showWordTools) {
+            NativeReaderWordToolsScreen(voiceIdentifier: effectiveVoiceID, pitch: pitch)
         }
         .sheet(isPresented: $showAudioSettings) {
             NativeReaderDocumentAudioSettingsScreen(document: document)

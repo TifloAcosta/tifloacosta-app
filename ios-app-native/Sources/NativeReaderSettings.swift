@@ -5,17 +5,21 @@ import AVFoundation
 /// bindings; the general settings keep using the existing AppStorage keys.
 struct NativeReaderAudioControls: View {
     @AppStorage("native-reading-speed-index") private var generalSpeed = 2
+    @AppStorage("native-reading-pitch-index") private var generalPitch = 2
     @AppStorage("native-reading-voice-id") private var generalVoiceID = ""
     let speedSelection: Binding<Int>?
+    let pitchSelection: Binding<Int>?
     let voiceSelection: Binding<String>?
     let allowVoiceDownloads: Bool
     @State private var filterIndex = 0
     @State private var systemVoices: [AVSpeechSynthesisVoice] = []
     @State private var showVoiceHelp = false
+    @State private var personalVoiceStatus = AVSpeechSynthesizer.personalVoiceAuthorizationStatus
 
-    init(speedSelection: Binding<Int>? = nil, voiceSelection: Binding<String>? = nil,
-         allowVoiceDownloads: Bool = true) {
+    init(speedSelection: Binding<Int>? = nil, pitchSelection: Binding<Int>? = nil,
+         voiceSelection: Binding<String>? = nil, allowVoiceDownloads: Bool = true) {
         self.speedSelection = speedSelection
+        self.pitchSelection = pitchSelection
         self.voiceSelection = voiceSelection
         self.allowVoiceDownloads = allowVoiceDownloads
     }
@@ -34,7 +38,9 @@ struct NativeReaderAudioControls: View {
         ["Predeterminada del sistema"] + voices.map { voice in
             let language = Locale(identifier: "es")
                 .localizedString(forIdentifier: voice.language) ?? voice.language
-            return "\(voice.name), \(language), \(voice.quality == .enhanced ? "mejorada" : "estándar")"
+            let quality = voice.voiceTraits.contains(.isPersonalVoice) ? "Voz personal" :
+                (voice.quality == .enhanced ? "mejorada" : "estándar")
+            return "\(voice.name), \(language), \(quality)"
         }
     }
 
@@ -69,6 +75,11 @@ struct NativeReaderAudioControls: View {
             selectedIndex: speedSelection ?? $generalSpeed
         )
         NativeAdjustableChoice(
+            title: "Tono de lectura",
+            choices: ["Más grave", "Grave", "Normal", "Agudo", "Más agudo"],
+            selectedIndex: pitchSelection ?? $generalPitch
+        )
+        NativeAdjustableChoice(
             title: "Mostrar voces",
             choices: ["Todos los idiomas", "Español", "Inglés"],
             selectedIndex: $filterIndex
@@ -78,8 +89,28 @@ struct NativeReaderAudioControls: View {
             choices: voiceChoices,
             selectedIndex: selectedVoiceIndex
         )
-        .onAppear(perform: refreshVoices)
+        .onAppear {
+            personalVoiceStatus = AVSpeechSynthesizer.personalVoiceAuthorizationStatus
+            refreshVoices()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: AVSpeechSynthesizer.availableVoicesDidChangeNotification)) { _ in
+            refreshVoices()
+        }
         if allowVoiceDownloads {
+            if personalVoiceStatus == .notDetermined {
+                Button("Permitir mi Voz personal") {
+                    Task {
+                        personalVoiceStatus = await AVSpeechSynthesizer.requestPersonalVoiceAuthorization()
+                        refreshVoices()
+                    }
+                }
+                .accessibilityHint("Solicita permiso al sistema para utilizar una Voz personal ya creada.")
+            } else if personalVoiceStatus == .denied {
+                Text("Voz personal no autorizada. El permiso puede cambiarse en Ajustes del iPhone.")
+            } else if personalVoiceStatus == .unsupported {
+                Text("Este dispositivo no admite el uso de Voz personal en TifloLector.")
+            }
+            Text("El tono modifica la voz sintetizada, no los audiolibros grabados.").font(.footnote)
             Button("Buscar más voces") { showVoiceHelp = true }
                 .accessibilityHint("Indica dónde descargar voces adicionales de iOS.")
                 .alert("Buscar más voces", isPresented: $showVoiceHelp) {
@@ -180,6 +211,7 @@ struct NativeReaderDocumentAudioControls: View {
     let document: NativeReadingDocument
     @EnvironmentObject private var library: NativeReaderLibrary
     @AppStorage("native-reading-speed-index") private var defaultSpeed = 2
+    @AppStorage("native-reading-pitch-index") private var defaultPitch = 2
     @AppStorage("native-reading-voice-id") private var defaultVoiceID = ""
 
     var body: some View {
@@ -187,6 +219,10 @@ struct NativeReaderDocumentAudioControls: View {
             speedSelection: Binding(
                 get: { library.latest(document).readerPreferences?.speedIndex ?? defaultSpeed },
                 set: { value in library.updatePreferences(document) { $0.speedIndex = value } }
+            ),
+            pitchSelection: Binding(
+                get: { library.latest(document).readerPreferences?.pitchIndex ?? defaultPitch },
+                set: { value in library.updatePreferences(document) { $0.pitchIndex = value } }
             ),
             voiceSelection: Binding(
                 get: { library.latest(document).readerPreferences?.voiceID ?? defaultVoiceID },
@@ -313,6 +349,7 @@ struct NativeReaderSettingsScreen: View {
                 .navigationTitle("Modo de lectura")
             }
             NavigationLink("Ajustes visuales") { NativeReaderVisualSettingsScreen() }
+            NavigationLink("OCR y reconocimiento") { NativeReaderOCRSettingsScreen() }
             NavigationLink("Navegación y avances") {
                 List {
                     Section("Desplazamiento") {

@@ -65,14 +65,24 @@ enum NativeReaderFormats {
         let text: String
         switch ext {
         case "pdf":
-            let pdf = PDFDocument(data: data)
-            let pages = (0..<(pdf?.pageCount ?? 0)).compactMap { index -> String? in
-                guard let pageText = pdf?.page(at: index)?.string?
-                    .trimmingCharacters(in: .whitespacesAndNewlines),
-                      !pageText.isEmpty else { return nil }
-                return "Página \(index + 1)\n\n\(pageText)"
+            guard let pdf = PDFDocument(data: data) else {
+                throw NativeReaderFormatError.empty(url.lastPathComponent)
             }
-            text = !pages.isEmpty ? pages.joined(separator: "\n\n") : try ocrPDF(pdf)
+            var pages: [String] = []
+            var scannedPages = 0
+            for index in 0..<pdf.pageCount {
+                var pageText = pdf.page(at: index)?.string?
+                    .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+                if pageText.isEmpty {
+                    scannedPages += 1
+                    guard scannedPages <= 150 else {
+                        throw NativeReaderFormatError.unsupported("PDF con más de 150 páginas escaneadas; divide el archivo para realizar OCR")
+                    }
+                    pageText = try ocrPDFPage(pdf, at: index)
+                }
+                if !pageText.isEmpty { pages.append("Página \(index + 1)\n\n\(pageText)") }
+            }
+            text = pages.joined(separator: "\n\n")
         case "jpg", "jpeg", "png", "heic", "heif", "tif", "tiff":
             text = try recognizeText(in: data)
         case "html", "htm", "rtf":
@@ -118,33 +128,33 @@ enum NativeReaderFormats {
         return "ReaderMedia/\(documentID.uuidString)/\(name)"
     }
 
-    private static func ocrPDF(_ pdf: PDFDocument?) throws -> String {
-        guard let pdf, pdf.pageCount > 0 else { return "" }
-        var output: [String] = []
-        // An explicit cap prevents inadvertently freezing the app on enormous scans.
-        guard pdf.pageCount <= 150 else {
-            throw NativeReaderFormatError.unsupported("PDF escaneado de más de 150 páginas; divide el documento para aplicar OCR")
+    private static func makeOCRRequest() -> VNRecognizeTextRequest {
+        let request = VNRecognizeTextRequest()
+        request.recognitionLevel = UserDefaults.standard.integer(
+            forKey: "native-reader-ocr-accuracy-index") == 1 ? .fast : .accurate
+        request.usesLanguageCorrection = true
+        switch UserDefaults.standard.integer(forKey: "native-reader-ocr-language-index") {
+        case 1: request.recognitionLanguages = ["es-ES"]
+        case 2: request.recognitionLanguages = ["en-US"]
+        case 3: request.recognitionLanguages = ["es-ES", "en-US"]
+        default: request.automaticallyDetectsLanguage = true
         }
-        for index in 0..<pdf.pageCount {
-            guard let image = pdf.page(at: index)?
-                .thumbnail(of: CGSize(width: 1700, height: 2200), for: .mediaBox).cgImage
-            else { continue }
-            let request = VNRecognizeTextRequest()
-            request.recognitionLevel = .accurate
-            request.usesLanguageCorrection = true
-            try VNImageRequestHandler(cgImage: image, options: [:]).perform([request])
-            let text = (request.results ?? []).compactMap {
-                $0.topCandidates(1).first?.string
-            }.joined(separator: "\n")
-            if !text.isEmpty { output.append("Página \(index + 1)\n\n\(text)") }
-        }
-        return output.joined(separator: "\n\n")
+        return request
+    }
+
+    private static func ocrPDFPage(_ pdf: PDFDocument, at index: Int) throws -> String {
+        guard let image = pdf.page(at: index)?
+            .thumbnail(of: CGSize(width: 1700, height: 2200), for: .mediaBox).cgImage
+        else { return "" }
+        let request = makeOCRRequest()
+        try VNImageRequestHandler(cgImage: image, options: [:]).perform([request])
+        return (request.results ?? []).compactMap {
+            $0.topCandidates(1).first?.string
+        }.joined(separator: "\n")
     }
 
     private static func recognizeText(in data: Data) throws -> String {
-        let request = VNRecognizeTextRequest()
-        request.recognitionLevel = .accurate
-        request.usesLanguageCorrection = true
+        let request = makeOCRRequest()
         try VNImageRequestHandler(data: data, options: [:]).perform([request])
         return (request.results ?? []).compactMap {
             $0.topCandidates(1).first?.string
@@ -182,6 +192,9 @@ enum NativeReaderFormats {
             let raw = String(data: data, encoding: .utf8) ?? ""
             let normalized = raw.replacingOccurrences(
                 of: "(?i)</(?:a:p|w:p|text:p|row|c|p)>", with: "\n",
+                options: .regularExpression
+            ).replacingOccurrences(
+                of: "(?i)<h[1-6]\b[^>]*>", with: "\n# ",
                 options: .regularExpression
             )
             let text = NativeDocumentText.extract(

@@ -267,11 +267,19 @@ private struct NativeYouTubeOfficialPlayer: UIViewRepresentable {
         view.isAccessibilityElement = false
         view.accessibilityElementsHidden = true
         engine.webView = view
+        // En WKWebView el vídeo usa su propia sesión de audio, distinta de la
+        // sesión nativa. Al activar VoiceOver, solicitar a WebKit audio mezclable
+        // también dentro de la página que aloja el iframe oficial.
+        // El modo ambiente respeta el interruptor de silencio de iOS.
+        let voiceOverAudioPolicy = UIAccessibility.isVoiceOverRunning
+            ? "try { if (navigator.audioSession) { navigator.audioSession.type = 'ambient'; } } catch(e) {}"
+            : ""
         // No reproducir automáticamente. Mantener el iframe completo, controles,
         // marca y enlaces oficiales de YouTube, sin superposiciones visuales.
         let html = """
         <!doctype html><html lang="es"><head><meta name="viewport" content="width=device-width,initial-scale=1">
         <meta name="referrer" content="strict-origin-when-cross-origin">
+        <script>\(voiceOverAudioPolicy)</script>
         <style>html,body,#player{margin:0;width:100%;height:100%;background:#000;overflow:hidden}</style></head>
         <body><div id="player"></div><script src="https://www.youtube.com/iframe_api"></script>
         <script>

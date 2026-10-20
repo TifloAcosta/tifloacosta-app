@@ -67,6 +67,12 @@ test('YouTube usa exclusivamente iframe oficial y mandos nativos VoiceOver', () 
   assert.match(player, /import AVFoundation/);
   assert.match(player, /session\.setCategory\(\.playback, mode: \.moviePlayback, options: \[\.mixWithOthers\]\)/);
   assert.match(player, /coordinator\.restoreAudioConfiguration\(\)/);
+  // Audio mezclable en WebKit, no solo en el proceso nativo; sin alterar el iframe de YouTube.
+  assert.match(player, /UIAccessibility\.isVoiceOverRunning/);
+  assert.match(player, /navigator\.audioSession\.type = 'ambient'/);
+  assert.ok(player.includes('<script>\\(voiceOverAudioPolicy)</script>'));
+  assert.match(player, /\.mixWithOthers/);
+  assert.doesNotMatch(player, /isUserInteractionEnabled = false/);
   assert.match(player, /height: 225/);
   assert.match(player, /Text\(engine\.playing \? "Pausar" : "Reproducir"\)/);
   assert.match(player, /dynamicTypeSize\.isAccessibilitySize/);

@@ -47,8 +47,10 @@ test('YouTube usa exclusivamente iframe oficial y mandos nativos VoiceOver', () 
   const player = source('NativeYouTubePlayer.swift');
   assert.match(player, /WKWebView/);
   assert.match(player, /youtube\.com\/iframe_api/);
+  assert.match(player, /youtube-nocookie\.com\/embed/);
   assert.match(player, /onYouTubeIframeAPIReady/);
-  assert.match(player, /controls:1/);
+  // Un iframe existente lleva controles en la URL, no necesariamente en playerVars.
+  assert.match(player, /controls=1/);
   assert.match(player, /height: 225/);
   assert.match(player, /Text\(engine\.playing \? "Pausar" : "Reproducir"\)/);
   assert.match(player, /dynamicTypeSize\.isAccessibilitySize/);

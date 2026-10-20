@@ -1,38 +1,13 @@
 [
   {
-    "id": "techcrunch-bab470212ffac0ba",
+    "id": "techcrunch-3df2168b4c749743",
     "type": "news",
     "sourceId": "techcrunch",
     "sourceName": "TechCrunch",
     "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/20/metas-muse-hits-10m-u-s-downloads-in-40-days-a-milestone-reached-by-only-11-other-apps/",
+    "originalUrl": "https://techcrunch.com/2026/10/20/openai-acquires-startup-orchestra-bio%e2%81%a0-to-beef-up-its-biotech-business/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-20T17:12:48.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta’s Muse hits 10M U.S. downloads in 40 days, a milestone reached by only 11 other apps",
-        "summary": "Meta's AI companion Muse has surpassed 10 million U.S. downloads in its first 40 days, joining an exclusive group of apps that includes Threads. New data also shows Muse is retaining users at higher rates than its AI rivals.",
-        "body": "Meta’s AI companion, Muse, is now one of only a dozen mobile apps to have reached 10 million U.S. downloads in its first 40 days on the market. According to new data from market intelligence provider Sensor Tower, Muse has seen 10.9 million downloads since its September debut, 10.2 million of which were in the United States.\n\nOnly 11 other apps to date have reached this type of post-launch milestone, said Sensor Tower’s Senior Insights Analyst Kara Lee. The most recent of these was Meta’s Threads, back in July 2023. Other apps that saw this kind of scale were largely mobile games, Lee noted.\n\nMeta’s success is tied to the company’s ability to scale its new apps by marketing them across its other services, which it has done with both Threads and Muse. Threads was built on top of Instagram’s social graph, and its content has been integrated into both Facebook and Instagram. However, Muse isn’t only benefiting from Meta’s ability to market the AI agent across its family of apps, which today includes 3.6 billion daily active users; the company is also heavily investing in advertising to drive new users to Muse.\n\nPer Sensor Tower’s data, Meta has allocated 39% of its total advertising spend to market Muse in October, up from 23% last month. In addition, Muse now ranks as the 21st largest brand in the U.S. by advertising impressions this month, up from 73rd in September.\n\nStill, marketing an app and retaining users after the initial shine wears off are two different things. In this case, Muse is seeing better retention rates than its AI competitors like ChatGPT, Claude, and Grok.\n\nIn the U.S., the app had a 30% retention rate after 7 days and a 23% retention rate after 14 days. By comparison, its rivals saw an average of a 19% 7-day retention rate and a 16% 14-day retention rate, according to the firm’s data.\n\nMuse also hit another milestone that demonstrates active engagement with the AI app. Its daily active users reached 2.5 million for the first time on October 16, a 15% week-over-week increase.\n\nMeta’s latest AI app, which can handle various tasks on users’ behalf, has seen breakout success since its debut. It shot up to No. 1 on the App Store, and, at one point, even outpaced some of the metrics ChatGPT saw following its launch. Its latest milestone sees it topping its rivals again, as ChatGPT saw 3.7 million U.S. downloads in its first 40 days on the market. Grok and Claude saw only 500,000 and 200,000 U.S. downloads, respectively, in their first 40 days.\n\nGlobally, ChatGPT beat out Muse, having scaled to around 15 million global downloads in its first 40 days. But this isn’t a fair comparison, as ChatGPT benefited from a wider reach. Muse is only available in the U.S. and Canada for now, while ChatGPT’s app attracted attention from markets like Japan, Brazil, and Germany, too. (Japan, for instance, accounted for 25% of its global installs during its first 40 days.)\n\nSince launching, Muse has retained its No. 1 rank on the U.S. App Store for all days except October 19, when streaming app Kick briefly beat it out. It has since reclaimed the top spot as of Tuesday. Muse has also been No. 1 on Google Play over the past 30 days."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-fc1329ae921f1d6e",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2291954/spotify-is-dancing-around-its-ai-slop-and-spam-problem/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-20T17:11:26.000Z",
+    "publishedAt": "2026-10-20T20:35:10.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -41,22 +16,167 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Spotify is dancing around its AI 'slop and spam' problem",
-        "summary": "The company said it removed 50 million such tracks from recommendations, but hasn't necessarily wiped them entirely.",
-        "body": "The company said it removed 50 million tracks, but hasn't necessarily wiped them entirely.\n\nJust over a year ago, Spotify announced policy changes to address the tidal wave of AI-generated audio that has flooded its platform. In a blog post on Tuesday , the company provided an update on the initiative, but it's still not going far enough to help users avoid genAI trash.\n\nSo far in 2026, Spotify says it has yanked 50 million tracks it categorized as \"slop and spam\" from recommendations. Over the last six months, it made several updates to the recommendation system to instead promote more tracks from \"authentic, human artists.\" The company's editors don't include tracks identified as slop or spam in curated playlists either.\n\nThese updates follow Spotify taking a close look at songs users \"were skipping, ignoring or telling us they didn't want to hear.\" It determined there was a clear pattern of users rejecting tracks that were identified as slop or spam. \"Since we made these changes, we've seen a marked decrease in listener concerns about this content showing up in recommendations,\" Spotify said.\n\nThe company added it will have to keep updating its systems to stay on top of spammers, who will inevitably keep changing tactics to evade the rules as long as possible. Spotify said it uses many signals to help it detect slop and spam, such as metadata, user feedback, upload patterns and third-party AI detection tools. It noted that the latter tech has limitations and it'll become harder for those tools to detect slop as generative AI systems advance.\n\nBut here's the rub: Spotify says it has removed more than 75 million \"spammy tracks\" from its platform due to \"serious or repeated violations of our rules.\" That's the same figure it offered up in September 2025, when it announced the AI policy changes .\n\nA spokesperson told Music Business Worldwide that Spotify has continued to delete content that \"seriously or repeatedly breaks our rules.\" However, it's not providing an update on that 75 million figure. (In fairness, it's technically still true that the company has removed more than that number of spam tracks.)\n\nIt feels like Spotify is trying to have its cake and eat it here. It says it's pulling slop and spam from recommendations at the same time that it's been adding genAI features to its platform . Spotify allows users to remix and cover songs with AI tools , for instance.\n\nSome \"artists\" that are widely believed to be fake — such as Sienna Rose and The Velvet Sundown — have more than 100,000 monthly listeners on the platform. Another called Breaking Rust topped a Billboard digital downloads chart last year and currently has around 700,000 monthly listeners. A report in July stated that the top 10 most-listened-to AI artists on Spotify had raked in about $2.4 million , siphoning money away from the human musicians that Spotify claims it's trying to promote.\n\nThe company is aware that a significant proportion of its users do not want to hear genAI garbage , but it only confirmed that it removed \"slop and spam\" tracks from recommendations, not necessarily the platform as a whole. Deleting all of that crap should be an easy decision if your aim is genuinely to put \"human artistry first.\"\n\nNor does Spotify offer users an easy way to block this gunk. This month, Deezer said it would give users an option to filter out genAI audio (I bristle at the idea of calling it music) entirely by the end of the year. Great! Bandcamp largely forbids genAI audio , while Tidal doesn't pay royalties for tracks that are entirely AI generated.\n\nIt would be nice to see Spotify giving users a way to opt out of hearing AI-generated audio. However, a spokesperson told the BBC earlier this year its \"priority is addressing harmful uses [of AI] like spam and impersonation, rather than trying to filter music based on how it was made.\" Still, it could at least offer users a toggle to entirely block tracks identified as slop and spam, and a way to filter out those that have disclosed AI use in the credits.\n\nSpeaking of which, Spotify says artists are submitting tens of thousands of AI credits per day to clarify what role the technology played in their uploads. It added that users can see these credits in the Now Playing view on mobile and it's adding more ways for them to \"quickly and easily see when an artist has disclosed AI use as part of the song's creative process.\" Thousands of virtual artists now have an AI Persona label too, and tracks from these phonies won't appear in editor-curated playlists or, by default, in your recommendations (unless you follow them, for instance).\n\nSpotify claims its threshold of 1,000 streams before it pays royalties on a track is helping to stem the flood. \"Tracks with indicators showing a high probability of being AI-generated are 10 times more likely to fall below the threshold, making it harder for bad actors to attempt to siphon royalties away from real artists by generating music at scale,\" it said.\n\nIn addition, the company noted more than 300,000 human artists are now verified on the platform , covering more than 99 percent of those that users actually search for. Spotify is also expanding a tool that lets musicians approve what songs appear on their profile and list them as an artist. It will be available to all artists by the end of the year."
+        "title": "OpenAI acquires startup Orchestra Bio⁠ to beef up its biotech business",
+        "summary": "OpenAI says it's adding Orchestra's team and technology to work on Rosalind, its AI model for life sciences research, and to its related Rosalind Workbench tool, a harness that aims to help researchers plan experiments and analyze results.",
+        "body": "Posted:\n\nOpenAI on Tuesday acquired a four-year-old AI biotech software startup called Orchestra Bio, the company announced via its website. Terms of the deal were not disclosed, but the startup had reportedly raised around $20 million as of 2025 from backers like Andreessen Horowitz, Atria, and 8VC.\n\nOrchestra creates AI agents that help biotech companies manage the minutiae of drug discovery operations, from tracking finances to resolving scheduling issues with clinical trials.\n\nOpenAI says it’s adding Orchestra’s team and technology to work on Rosalind , its AI model for life sciences research, and to its related Rosalind Workbench tool, a harness that aims to help researchers plan experiments and analyze results. OpenAI has already won some big names as customers for Rosalind, including, it says, Moderna⁠ and Novo Nordisk⁠.\n\nThe acquisition is a classic example of how the biggest AI labs (namely OpenAI and Anthropic) are building ever more software for the biggest industries, like pharma. In the startup world, there is an ongoing fear that at any moment, the labs will launch new features and become competitors. In this case, Orchestra is getting absorbed, rather than stomped out."
       }
     },
     "media": null
   },
   {
-    "id": "the-verge-99c8fc5876dc4b63",
+    "id": "the-verge-1d8f52d4a79ddf31",
     "type": "news",
     "sourceId": "the-verge",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1014446/google-chrome-suspicious-website-warning",
+    "originalUrl": "https://www.theverge.com/science/1014150/spacex-q3-2026-earnings",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-20T17:00:00.000Z",
+    "publishedAt": "2026-10-20T20:26:58.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "SpaceX says big AI growth fueled revenue jump",
+        "summary": "SpaceX announced revenues of $14.6 billion in its Q3 earnings on Tuesday, which it says was a growth of 161 percent year-over-year \"fueled by our Super Intelligence (SI) segment and accelerated growth in Connectivity.\" While its Space division posted a $7 million loss in income from operations, its Connectivity group posted income from operations $2.4 […]",
+        "body": "SpaceX announced revenues of $14.6 billion in its Q3 earnings on Tuesday , which it says was a growth of 161 percent year-over-year \"fueled by our Super Intelligence (SI) segment and accelerated growth in Connectivity.\" While its Space division posted a $7 million loss in income from operations, its Connectivity group posted income from operations $2.4 billion and its SI group posted $431 million.\n\nThe company's so-called \"SI\" business saw revenues of $7.6 billion, which were up 830 percent year-over-year, \"primarily driven\" by \"the activation of new cloud services agreements, the acquisition of Cursor, and increased Grok adoption across ente …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-dd321fe776e4b133",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/tech-policy/2026/10/meta-drops-the-word-train-from-its-commercial-tos-after-ai-backlash/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-20T20:07:58.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Meta drops the word \"train\" from its commercial TOS after AI backlash",
+        "summary": "Meta changes AI scraping policy but won’t add language respecting robots.txt.",
+        "body": "Hoping to quell criticism, Meta has dropped the word “train” from its “streamlined” commercial terms of service that kick in on October 30.\n\nLast week, Meta faced backlash after legal experts warned that the tech giant’s sweeping new commercial terms of service seemed to give Meta permission to endlessly scrape websites linked on business pages. Talking to Nieman Lab, experts suggested that Meta could possibly use the policy to avoid millions in licensing fees from news organizations by requiring all business users to share a wealth of AI training data simply for running a business page.\n\nA Meta spokesperson confirmed that Meta did not alert users to the changed language following backlash. This potentially only adds to confusion ahead of the policy roll-out. In response to backlash, Meta's spokesperson provided a statement to Ars, acknowledging Nieman Lab's initial report but not its follow-up report reiterating experts' concerns:\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-45bb9c83cbdcd59a",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2292281/meta-suspends-muse-chats-sharing-feature-after-it-left-private-details-exposed/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-20T20:00:43.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Meta suspends Muse chats sharing feature after it left private details exposed",
+        "summary": "Researchers accessed 6,800 shared conversations with the AI agent, including internal company documents.",
+        "body": "Researchers accessed 6,800 shared conversations with the AI agent.\n\nMeta debuted its Muse agentic AI platform last month and bug hunters have already uncovered a privacy problem. Users would share their Muse conversations by creating a URL, but that feature has been disabled after researchers found that anyone could potentially access those links.\n\nResearchers at security firm Claroc discovered that the links for users' shared Muse chats can be found and accessed via a passive DNS search because all the URLs for sharing had the same domain name and used the conversation's title in the subdomain. Passive DNS are records of how human-readable domains resolve to browser-readable IP addresses, basically acting like a phone book for the Internet.\n\n\"Muse names each share's web address after the conversation's own title, and that address is written into public DNS,\" Claroc explained in a blog post. \"One passive-DNS search brings back thousands of them, listed by name, like a table of contents.\"\n\nThe company was able to enumerate 6,800 links for shared Muse chats and view private information from both business and personal applications of the service. The exposed personal details included meeting times with a frontier AI lab, a small-business loan application, a bank fraud alert with partial account details, a company's vacation calendar and other internal company documents.\n\nArs Technica first reported on Claroc's efforts. In a statement to the publication, Meta said \"we've paused this functionality while we review this report and consider changes to how these links can be discovered.\" Claroc also noted that its researchers were unable to open a sampling of the links they had previously accessed following Meta's update."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-d3e77b1c3f8a0d62",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/google/2026/10/geminis-personal-intelligence-is-coming-to-cars/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-20T20:00:33.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Gemini's Personal Intelligence is coming to cars",
+        "summary": "It's probably time to audit your Gemini settings.",
+        "body": "Google kicked off 2026 with the addition of Personal Intelligence to Gemini, allowing its AI to pull in more of your data to formulate answers. It started as a paid feature but eventually came to all Gemini users. However, this feature wasn't available in the car until now. Google is rolling out Personal Intelligence to Android Auto and Google Built-in, and it is still, thankfully, an optional feature.\n\nAs Google points out , a generative AI's outputs are better \"when it knows the world and knows you,\" which is correct in an uncomfortable sort of way. The more context you can provide to a model, the better the output will be at the end of the token shuffle. Since Google has so much of your data already, it sees Personal Intelligence as a differentiator versus other AI systems. You don't have to provide the AI context because it already has it from apps like Gmail and Calendar.\n\nPersonal Intelligence is beginning its rollout in Android Auto today, and it will come to vehicles with Google built-in in the next few months. As an aside, \"Google built-in\" is questionable branding, but it refers to cars that run Google software in the infotainment system rather than projecting an interface from your phone. Very few vehicles have Google built-in, but Google often releases new car features on them first. This time, it's the other way around.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-1583b6d39cdb9423",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2292027/google-brings-gemini-personal-intelligence-to-android-auto/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-20T20:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "android",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google brings Gemini Personal Intelligence to Android Auto",
+        "summary": "In the coming months, the feature will also roll out to cars with Google built-in.",
+        "body": "In the coming months, the feature will also roll out to cars with Google built-in.\n\nAt the start of the year, Google debuted Personal Intelligence , a Gemini feature that allows the chatbot to pull information from your other Google apps to generate more personalized responses. An expansion in March brought Personal Intelligence to free accounts after it was previously only available to Google AI Pro and Ultra subscribers. And now Google has begun rolling out the feature to Android Auto users.\n\nIn practice, the company says today's update will improve Gemini's reasoning capabilities in cars. It will also make the assistant capable of delivering more specific details as they relate to your questions and prompts. For example, if you're driving to the airport, Google suggests Gemini with Personal Intelligence will be able to answer questions like \"what's my flight gate?\" and \"is my flight on time?\" Provided you've linked your Gmail account, it can do all this without you needing to pull over to find a confirmation email.\n\nMore broadly, Google says Personal Intelligence makes it easier to interact with Gemini more naturally. For instance, if you need directions to your doctor's office, you can just say \"take me to my doctor's appointment,\" instead of speaking a specific address. Recommendations are also improved. If you're in a new city, Google suggests you can ask for dinner spots along your driving route and Gemini will generate suggestions while factoring in preferences and restrictions, like if you're a vegetarian.\n\nAs before, enabling Personal Intelligence is optional, and you can turn it off at any point if you don't want Gemini pulling your data. You can also control what apps Gemini can access. Google is starting to roll out Personal Intelligence to Android Auto users globally starting today (with the exception of those living in Switzerland, the European Economic Area, UK and Nigeria). In the coming months, the company plans to bring the feature to cars with Google built-in too."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-f13b0ef35956f0e3",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/20/google-is-bringing-a-more-personal-version-of-its-gemini-ai-assistant-to-your-car/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-20T20:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google is bringing a more personal version of its Gemini AI assistant to your car",
+        "summary": "Google is bringing Gemini's Personal Intelligence feature to cars, allowing its AI assistant to draw on information from Gmail, Calendar, Maps, YouTube, and other Google services to deliver more personalized responses while driving.",
+        "body": "Google is making the Gemini AI assistant that’s already in millions of cars, trucks, and SUVs a lot more personal — a move that could push consumers even deeper into the company’s ecosystem of products.\n\nThe company said Tuesday it’s upgrading Gemini in vehicles with a personal intelligence feature that can draw on information from Gmail, Google Calendar, YouTube, Maps, Google Search history, and other connected Google services to understand your preferences, activities, and past experiences.\n\nGoogle said it will roll out “Personal Intelligence with Gemini” to vehicles in two ways — through Android Auto, an app that runs on the user’s phone and wirelessly communicates with and projects navigation, media, and messaging to the vehicle’s infotainment system, and Google Built-in , software and services that have been directly integrated into the vehicle.\n\nThe feature will launch in Android Auto, starting today, and expand to cars with Google Built-in in the coming months.\n\nGoogle initially launched Gemini last November in Android Auto. Meanwhile, Gemini’s “Personal Intelligence” feature rolled out across the U.S. in March and is now in beta in global markets.\n\nThis latest upgrade would connect the dots — as Google put it in its blog post — across users’ Google apps.\n\nDrivers will have to opt in for Personalized Intelligence to work. Once a user does so, they should expect all sorts of cross-pollination. For instance, a driver who is navigating to the airport may be alerted that the flight on their calendar is delayed.\n\nGoogle said the feature will allow users to make complex requests using natural language. Returning to that airport example, a user might ask the AI assistant for their flight gate before quickly following up with a question about whether it’s still on time. Gemini will give the user answers to both questions at the same time, the company said.\n\nThat level of emmeshing might make consumers uncomfortable, although Google says users do retain full control over their data with Personal Intelligence. The feature can be turned on or off at any time, and users can selectively choose which apps they’d like to connect, Google said."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-aebcba820183e1ca",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/gadgets/2026/10/openbsd-8-0-lands-with-intel-arc-graphics-support/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-20T19:57:18.000Z",
     "categories": [
       "tecnologia-general"
     ],
@@ -64,57 +184,80 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Chrome will now show a warning before you visit ‘suspicious’ sites",
-        "summary": "Google is launching a new browser safety feature for Chrome that aims to keep you better informed about how malicious a website might be before you open it. The new suspicious site warnings, available when Chrome's Enhanced Protection is on, build on a similar two-stage system introduced for Chrome file downloads in 2024, which provides […]",
-        "body": "Google is launching a new browser safety feature for Chrome that aims to keep you better informed about how malicious a website might be before you open it. The new suspicious site warnings, available when Chrome's Enhanced Protection is on, build on a similar two-stage system introduced for Chrome file downloads in 2024 , which provides visually different notifications for blocked files based on whether they're determined to be \"suspicious\" or \"dangerous.\"\n\nFor the Chrome site warnings, the feature will flag a website as suspicious if it detects that it has similar qualities to other sites associated with phishing, malware, and scams. Google …\n\nRead the full story at The Verge."
+        "title": "OpenBSD 8.0 arrives with security record still intact",
+        "summary": "OpenBSD 8.0 lands with Intel Arc support, ARM64 hibernation, and 64-vCPU guests",
+        "body": "OpenBSD 8.0 is here, marking the project's 61st release and continuing its schedule of semiannual releases dating back to 1996. What started more than 30 years ago as a fork of NetBSD has grown into one of the most security-conscious operating systems in active development. In a post to the project's announcements mailing list, OpenBSD founder Theo de Raadt highlights a host of improvements included with the latest version and writes that the project remains \"proud of OpenBSD's record of more than thirty years with only two remote holes in the default install.\"\n\nThe latest OpenBSD version brings new features and improvements across the board. These changes, particularly the new Intel Arc support and expanded virtual address space, should improve compatibility with modern graphics cards and allow the system to map more than 4 GB of VRAM . Some of the major updates noted in the release newsletter are as follows:\n\nRead full article\n\nComments"
       }
     },
     "media": null
   },
   {
-    "id": "the-verge-7ac73f8961169afa",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/news/1014455/amd-fsr-4-1-xbox-consoles-handhelds-laptops",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-20T16:21:18.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "AMD is bringing FSR 4.1 to Xbox consoles and handhelds",
-        "summary": "AMD has just revealed that it's bringing its latest upscaling technology, FSR 4.1, to the Xbox Series S and X consoles, as well as laptops, 6000-series GPUs, and handhelds like the Xbox Ally X devices. FSR 4.1 will start appearing for Radeon RX 6000-series GPUs today, as well as Ryzen AI Max 300 and 400 […]",
-        "body": "AMD has just revealed that it's bringing its latest upscaling technology, FSR 4.1, to the Xbox Series S and X consoles, as well as laptops, 6000-series GPUs, and handhelds like the Xbox Ally X devices. FSR 4.1 will start appearing for Radeon RX 6000-series GPUs today, as well as Ryzen AI Max 300 and 400 series devices, and Ryzen AI 9 300 and 400 series devices.\n\nAMD launched its FSR 4.1 update for Radeon RX 9000-series graphics cards in March, and promised to bring the technology to older GPUs and handhelds this year. FSR 4.1 can improve performance in more than 300 supported games , including Cyberpunk 2077 , Battlefield 6 , and Assassin's Cre …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-2544ad9aa59415a4",
+    "id": "techcrunch-22deab28e54084df",
     "type": "news",
     "sourceId": "techcrunch",
     "sourceName": "TechCrunch",
     "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/20/ex-nvidia-turned-vc-amulya-vishwanath-physical-ai-is-in-its-lego-era/",
+    "originalUrl": "https://techcrunch.com/2026/10/20/gm-to-close-detroit-battery-assembly-plant-but-not-for-reasons-you-might-think/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-20T16:20:06.000Z",
+    "publishedAt": "2026-10-20T19:32:43.000Z",
     "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
+      "tecnologia-general"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Ex-Nvidia-turned-VC Amulya Vishwanath: ‘Physical AI is in it’s LEGO era’",
-        "summary": "It’s the moment everyone is waiting for — the ChatGPT moment for robotics, Amulya Vishwanath explained to TechCrunch’s Equity.",
-        "body": "It’s the moment everyone is waiting for — the ChatGPT moment for robotics, Amulya Vishwanath explained to TechCrunch’s Equity.\n\nShe is the founder and managing partner of Techable Ventures, a VC firm focused on physical AI, which she started after spending nearly seven years as a product marketer at Nvidia. Before that, she held the same role at a company that was later bought by Intel and was a digital signal processing engineer at Interconnect Systems, which was later bought by the electronics manufacturer Molex.\n\nShe stopped by Equity to talk about the future of physical AI — one of the industry’s latest buzzwords. “\n\nA lot of companies and experts have been talking about the ChatGPT moment for robotics,” she said, adding that right now the industry was more in a “LEGO era.”\n\n“There are a lot of foundational software and building blocks for robotics that are being rethought right now as we speak, and it’s super important in order for innovation to scale,” she continued.\n\nRight now, people are building the basics — the robotic hands or the actuators — that can one day come together and build that big-ticket-item, like a bunch of LEGOs coming together. There’s general- and special-purpose robots being built right now too, and eventually, as people continue building them, they will get better and more advanced.\n\n“We’ve done this during the internet era,” she said. “We’ve done this long, long time ago with the Industrial Revolution. I think it’s just a matter of time before things fall into place.”\n\n“Talent is also going to be very critical,” she continued, adding elsewhere in the convo that talent is still a key definer of the U.S. market. This is one of the “moats” of her firm, she said, helping connect founders to top talent so they can stay competitive right now, as so much talent is going to big companies like Anthropic and Nvidia. She pointed out that she’s built up a strong network to help founders from her years of working in this space.\n\n“This just make sit a lot more easier for me to be the strength or the first call for founders,” she said."
+        "title": "GM to close Detroit battery assembly plant, but not for reasons you might think",
+        "summary": "GM is shuttering the Brownstown Battery Assembly Plant, though the closure has nothing to do with the automaker's electrification strategy.",
+        "body": "Posted:\n\nGM is closing a battery assembly plant south of Detroit, a spokesperson confirmed to TechCrunch.\n\nThe Brownstown Battery Assembly Plant assembled battery packs for Cadillac’s flagship EV, the Celestiq, and both electric drive units (the motors that power the car) and battery packs for the Chevrolet Corvette E-Ray, a plug-in hybrid version of its famous sports car. Automotive News first reported the closure.\n\nThe closure is not related to GM’s electric vehicle strategy, the spokesperson said. Instead, GM leased the site, and the lease was nearing its end.\n\nThe employees and work at Brownstown will be moved to other GM facilities, though the company would not confirm which ones.\n\nLike many automakers, GM’s electrification strategy was thrown a curveball after the One Big Beautiful Bill Act, the sweeping federal law signed last year, repealed incentives to produce and sell EVs.\n\nSince then, the company has pared back its public comments on EVs , though it hasn’t given up on full electrification.\n\nGM continues to produce a range of EVs, including the Chevrolet Silverado EV and the limited-time-only Chevrolet Bolt . It also continues researching new battery chemistries, including lithium-manganese-rich and sodium-ion , and it’s rolling out a new $900 million facility to speed commercialization."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-24ed2229d85a4ef7",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/20/ios-27-adds-scam-prevention-feature-to-iphone-heres-how-to-enable-it/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-20T18:56:15.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iOS 27 adds scam-prevention feature to iPhone, here’s how to enable it",
+        "summary": "iOS 27 introduces a new security feature called ‘Impersonation Risk Detection’ that helps protect you against scams, but it’s off by default. Here’s what the feature does, and how to enable it. more…",
+        "body": "iOS 27 introduces a new security feature called ‘Impersonation Risk Detection’ that helps protect you against scams, but it’s off by default. Here’s what the feature does, and how to enable it.\n\nEvery day around the world, people get tricked into sharing sensitive information like bank details or other financial info with bad actors.\n\nThis commonly happens via text messages, emails, or phone calls to iPhone or Android devices. And while iOS has built-in tools like call and message screening, those tools can’t prevent a scam if you choose to take action on it.\n\nBut iOS 27 introduces a new level of scam-prevention with a security feature called ‘Impersonation Risk Detection.’\n\nHere’s what it does, per Apple’s website :\n\nImpersonation Risk Detection helps protect against active social engineering scams. In these scams, an attacker might pose as a bank, government agency, or someone you trust to pressure or guide you into making a payment or changing your account details. Traditional security measures like two-factor authentication can’t always detect this kind of scam. That’s because you’re taking the action, even though you’ve been tricked or pressured.\n\nImpersonation Risk Detection analyzes information about your device and Apple Account to help detect signs of an active scam. Based on this analysis, it returns a risk level to the app. The app receives only the risk level, not the underlying information used to generate it. The app decides what to do next. For example, it might ask you to verify your identity, add a delay, or show a warning.\n\nYou can turn Impersonation Risk Detection on in iOS 27 by going to Settings ⇾ Privacy & Security ⇾ Impersonation Risk Detection then toggling on ‘Share with App Developers.’\n\nImpersonation Risk Detection is only available in supported apps, and Apple hasn’t published a list of those apps at the moment. But once enabled, it provides the app with a “risk level” while omitting the underlying information driving it. Risk levels include:\n\nOnce the app has this risk level, it decides what action to take. For example, it may prompt you to offer additional authentication, or show a warning message related to scams.\n\nFor more details on how the feature works using ‘Trust Insights,’ see our coverage here .\n\nAre you going to enable this new security feature? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-ff59d51c5a7d12f1",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2288986/how-often-should-restart-apple-watch/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-20T18:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "How often should you restart your Apple Watch?",
+        "summary": "Your Apple Watch doesn't need frequent restarts like a computer, but you might still want to shut down when something's off.",
+        "body": "Your Apple Watch doesn't need constant maintenance, but reboots can help in some circumstances.\n\nWith most gadgets, it's an accepted rule that you should periodically restart them for the best performance. You might regularly restart your smartphone , and it's also relevant advice for everything from regularly rebooting your Wi-Fi router to gaming handhelds. In any event, a reboot doesn't usually hurt apart from the temporary downtime.\n\nThat downtime might matter in some cases though, particularly when it comes to wearables like the Apple Watch . Apart from not being able to easily check the time, you briefly lose conveniences like Apple Pay, walking directions or even digital car and house keys. Purists may resent the brief gap in their health and fitness data. When you're trying to close that Move ring, every minute counts.\n\nRestarting your Apple Watch can occasionally be useful or critical. However, you probably don't need to make reboots a priority. Apple's design largely has this covered, since the company knows the product's limits and its role in your daily life.\n\nApple's watchOS is a complete operating system, running various apps and processes in much the same way as an iPhone or iPad. That means there are background processes and system caches, which are the key reasons why it's important to reboot other devices periodically. There's the potential for processes to become \"stuck\" or otherwise glitch out, in which case a restart will give them a fresh slate.\n\nMeanwhile, if caches aren't periodically flushed, they can become so bloated that they eat into room needed for other functions. Apple specifically suggests restarting your Apple Watch if it doesn't have enough room for an update. You can also manually clear web-related content like cookies from your watch by going to Settings > General > Website Data > Clear Website Data .\n\nAll that said, watchOS is also lightweight by design. The apps that it runs (even real-time navigation tools like Apple Maps) are scaled back from their iPhone equivalents. You can't run nearly as much in the background as you might on a Mac or an iPad. Although there's no public-facing info about these caps, my Apple Watch Ultra 2 seemingly pushes the limit just by tracking a workout, listening to Apple Podcasts and following a Live Activity for Instacart. The device is quick to suspend apps beyond that kind of workload.\n\nIn practice, then, Apple seems to have built watchOS to keep its own house in order. This is borne out by hands-on use testing: with some Apple Watches, I've gone years without manually restarting them and there were no serious performance consequences. The reboots associated with installing new versions of watchOS appear to be enough to keep everything running smoothly.\n\nApple doesn't have any official guidance on this point. If you're noticing bugs, freezes or unexpected slowdowns, a restart should be your first troubleshooting step. You'll automatically clear your watch's cache and background processes, and there may not be much else you can do beyond installing any available software updates.\n\nA restart is unavoidable if your Apple Watch becomes totally unresponsive. You can force a reboot by holding down the side button and Digital Crown simultaneously until the Apple logo appears. Whenever possible, Apple recommends the usual software-based shutdown instead: hold the side button until the slider menu appears, then tap the power icon and drag the Power Off slider. Once it's off, hold the side button again to power back on. You can't restart your watch while it's charging.\n\nOur verdict is that when you're experiencing relatively smooth sailing, you don't need to worry about preventative Apple Watch reboots. Apple's software is engineered to run nonstop, no matter which watch model you own. For maintenance, you should be more concerned about app and OS updates, as well as keeping storage usage under control, so there's plenty of space for both updates and large caches."
       }
     },
     "media": null
@@ -140,102 +283,6 @@
         "title": "iOS 27.2 adds new features in six iPhone apps, here’s what’s coming",
         "summary": "iOS 27.2 launches next week with new features for iPhone users, including improvements across six Apple apps. Here’s what’s coming. more…",
         "body": "iOS 27.2 launches next week with new features for iPhone users, including improvements across six Apple apps. Here’s what’s coming.\n\nOne of my favorite additions to Messages this year, Suggested Actions, debuts in iOS 27.2.\n\nSuggested Actions appear underneath messages in a conversation when relevant. They can suggest creating a calendar event or reminder, adding to a note, and more based on the context of the message.\n\nThe feature was originally part of the iOS 27 beta this summer, but didn’t make the public build. Now it’s back in iOS 27.2, new and improved. There’s also an option to fine-tune which types of suggestions you’ll see.\n\nRead more : iOS 27.2 adds new Messages feature that’s already a favorite\n\nEvery major streaming service has its own profiles feature, letting users on the same account keep their viewing history and recommendations separate. Apple TV has long offered such a feature in tvOS, but now with iOS 27.2 and iPadOS 27.2 it’s coming to iPhone and iPad too.\n\nWhen you launch the TV app in iOS 27.2, you’ll be greeted by a new profile selection screen. You can easily disable it if you don’t want to see if again. But if you ever share your iPhone with kids, the new profiles feature should come in handy.\n\nRead more : iOS 27.2 gives Apple TV a new profiles feature on iPhone\n\nDual Capture is one of FaceTime’s best new features in years. Added in iOS 27, on compatible iPhones it lets you keep your front and rear cameras both active at the same time while on a FaceTime call.\n\niOS 27.2 brings a key upgrade to Dual Capture: it’s now available for Group FaceTime calls.\n\nTo use the feature, just hit the flip camera button like usual, and by default on iPhone 17 and newer you’ll stream both camera feeds simultaneously.\n\nRead more : iOS 27.2 makes FaceTime’s best new feature even better\n\nTimed with its new Home products push, Apple adds a pair of new Home app features in iOS 27.2 for compatible smart locks.\n\n‘ Lock After Closing ’ is a new automation setting that lets you choose how long after a door is closed that it should lock automatically. Previously you could only set a duration based on the time since a door was unlocked, not closed.\n\n‘ Door Left Open ’ tackles a related, but distinct problem: a door being left open too long. With compatible locks, you can configure the Home app to automatically notify you if a door has been left open for a certain period of time.\n\nRead more : iOS 27.2 has three new changes just added this week\n\nApple Podcasts keeps getting better, with AI-powered automatic chapters and transcripts some of my favorite features. And in iOS 27.2, Apple has a welcome change to the Up Next queue on the Home tab.\n\nUp Next is now being split into two separate queues: New Episodes and Continue Playing.\n\nNew Episodes contains only the latest episodes from shows you follow, while Continue Playing is a hub for all the episodes you’ve previously started but haven’t yet finished.\n\nApple’s Games app has a couple smaller upgrades for its Home tab in iOS 27.2 as well.\n\nThe Home tab now shows you recently downloaded games that you haven’t yet played. Previously, you would only see games with some play activity. And Apple says achievement progress and leaderboard scores have been updated in the Home tab to be easier to track.\n\nWhich new iOS 27.2 features are you most excited about? Let us know in the comments."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-b8315c5cbbf12fa5",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/20/plants-can-speak-using-electricity-so-this-startup-built-an-ai-model-to-decipher-their-language/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-20T16:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Plants can speak using electricity, so this startup built an AI model to decipher their language",
-        "summary": "Electric Plant has built an AI-powered translator to help humans listen to what plants are saying with the subtle electricity coursing through their stems.",
-        "body": "Justin Mast’s life was changed by a cyborg plant.\n\nA few years ago, Mast was reading through some scientific literature when he stumbled upon research about a houseplant wired to a motorized stand . When the plant wanted more light, electrical signals flowed through the living tissues. A control board sensed the current and wheeled the plant closer to the light source.\n\n“I’m like, what the heck?” Mast told TechCrunch. “That was the entry to the rabbit hole for me.”\n\nMast wound up partnering with Lee von Kraus, a neuroscientist who has worked with DARPA, to found Electric Plant , which has been spending the past three years collecting data to build a large language model, Bombadil, capable of interpreting the subtle electrical signals coursing through a plant’s stem and relaying details about the plant’s needs to growers.\n\nThe founders believe their model could one day lead to a tool that would let people “speak” to plants. “We’re listening more than we’re speaking, but listening’s the first step,” said Mast, co-founder and CEO of Electric Plant.\n\nTo bring its sensors and Bombadil to market, Electric Plant recently raised an $11.2 million seed round led by Onto Ventures and Climactic, with participation from Ponderosa, Endeavor Catalyst, Ludlow, Michigan Rise, The Fund, Schox VC, and Dug Song.\n\nEven in the most controlled greenhouses, farmers and growers don’t have full visibility of what their plants require, Mast said. Traditionally, farmers, growers, and foresters have relied on coarse tools that react to plants’ demands for water, nutrients, or light. And tools like soil probes, handheld spectroscopes, and satellite imagery work well enough, but they leave much to be desired, Mast said.\n\n“That technology is sophisticated, but its ability to get at the inside of the plant isn’t very sophisticated. Most of that stuff still lags quite a bit behind the real-time needs of the plant,” he said.\n\nElectric Plant had to start somewhere, though, so it used those devices to train its Bombadil model, which is capable of interpreting electrical signals in about 125 different species. “We know the model will surpass a lot of that equipment,” Mast said.\n\nThe startup’s sensors are also significantly cheaper than existing tools, which generally cost thousands of dollars. “This is tens of dollars,” he said.\n\nThe sensors, about the size of a regular iPhone folded lengthwise, are attached to a plant using stainless steel screws. The screws must penetrate the cambium — the layer of living tissue just under the bark — to connect to the microvolt changes occurring within the plant. Data collected from these sensors is sent to a base station via a low-power wireless network.\n\nElectric Plant only needs a couple sensors per acre for accurate results, Mast said. The data gets interpreted by Bombadil in the cloud, and the results are sent back to the customer, who can use it to, for example, adjust their watering or fertilizer schedules. Mast claims such a system can boost yields while reducing water use by 20% or more.\n\nMast wouldn’t disclose who Electric Plant’s initial customers are, but it’s easy to imagine applications in agriculture and forestry.\n\nBombadil’s first hundred-plus species runs the gamut of plant forms, from ferns, redwoods, and tomatoes to dahlias, Mast said.\n\n“This is the most diverse model ever created on biological electrical signals,” he said. “No one’s ever done anything equivalent to this in the animal world.”"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-4dc7e5e14f9d93d5",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2288921/ways-make-old-iphone-feel-faster/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-20T15:45:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "5 ways to make your old iPhone feel faster",
-        "summary": "Your iPhone will slow down over time, but some changes can help it run at its best for longer.",
-        "body": "Slow iPhone? Don't worry. You can make it run like new again.\n\nAn iPhone is built to last , and many people keep using the same phone for years before upgrading. Even so, as the years go by, your iPhone may start to feel slower than usual when the hardware can no longer keep up with the latest software features.\n\nBut before you give up on your current iPhone, there are a few tweaks you should try that might make it feel faster. From cleaning up storage to changing a few settings, here's what you can do to make your iPhone run smoothly again and get more life out of it.\n\nRunning out of storage is a common cause of a slow iPhone. iOS needs free space to store cache, temporary files and updates. Even small bits we don't always think about, like text messages, require available internal storage. When your iPhone runs out of space, it can no longer handle all these processes, and everything slows down. Also, flash memory needs free space to access and move data in a process called \"wear leveling.\" Ideally, you should have at least 10 percent of your total storage available to keep your iPhone running smoothly — so about 12.8GB for a 128GB iPhone.\n\nTo start, open the Settings app and go to General > iPhone Storage . Here you'll see exactly what's taking up space on your device: photos, videos and messages are often the main culprits. Media apps like Spotify or Netflix can also take up lots of storage from music and videos downloaded for offline playback. Your iPhone may offer you some suggestions for freeing up storage, such as offloading unused apps or reviewing large attachments in your messages. Delete anything you no longer use , or move some older data to a computer or external drive.\n\nIf you use iCloud, another good way to free up storage is by enabling optimizing the storage of iCloud Photos on your device. Back on the main Settings screen, tap your name at the top, then go to iCloud and tap Photos . Look for the iPhone Storage menu and switch to the Optimize iPhone storage option. This will make your iPhone automatically offload old photos and videos, keeping only a low-resolution copy of them. But don't worry, as it downloads the full-resolution version when you need it.\n\nSafari also keeps website data you don't need, which you can erase at Settings > Apps > Safari > Clear History and Website Data . This likely won't be huge, but it's worth removing if it's been a while.\n\nDownloading new apps from the App Store is easy, but many people forget to delete ones they no longer use. Chances are, you probably have at least few apps installed that you haven't opened in over a year. The Storage settings page mentioned above shows the last time you used an app, so it's easier to target ones you don't need.\n\nIf you're not ready to give up the data from an app, choose it from this list and tap Offload App . Instead of removing everything, this uninstalls the app while keeping its data and settings. If you decide to use it again, just tap its icon on your Home Screen (offloaded apps are marked with a cloud icon) and everything will be ready to go once it downloads again. Your iPhone can also automatically offload apps you haven't used in a while, saving you time. In Settings , go to Apps > App Store and turn on the Offload Unused Apps toggle.\n\nAnother good idea is disabling Background App Refresh , which allows iPhone apps to silently fetch new content and update their data in the background. While this is convenient, it puts more strain on the hardware and your older iPhone may slow down as a result. You can turn it off entirely or for certain apps by going to Settings > General > Background App Refresh .\n\nApple's iOS is full of neat animations rendered in real time — they happen when you press and hold an icon, swipe to open Control Center or even open or close an app. However, these animations place a heavy load on the GPU, and older iPhones may struggle to render some of them. Disabling some of the visual effects in iOS can help your older iPhone run a bit more smoothly.\n\nTo change this, open Settings again and enter the Accessibility section. From there, go to the Motion menu and turn off Reduce Motion . This will cut the parallax effect on the Home Screen and apps will now fade onto the screen instead of zooming in when you open them.\n\nNext, try turning off the transparency effects in the interface. To do this, go back to the Accessibility menu and open Display & Text Size . Turn on the Reduce Transparency toggle — this will make blurred backgrounds, such as those in the Control Center and Dock, appear solid. You'll lose the sleek Liquid Glass effect, but your iPhone will feel much faster and should also run cooler while you're using it. If you don't like the new look, just revert those toggles. It's also possible to adjust how Liquid Glass looks in iOS 27 .\n\nFinally, in Accessibility > Touch > Haptic Touch , changing the setting to Fast reduces the delay between long-pressing something and its control appearing. This makes Home Screen app shortcuts or other contextual menus feel smoother.\n\nThis is one of the points that makes the biggest difference in phones that are a few years old. As lithium-ion batteries degrade, they can no longer deliver the power needed to keep the phone running normally. As a result, iOS has smart features that limit performance to prevent the phone from shutting down unexpectedly when the battery is in poor condition. The battery in the latest iPhones is designed to retain 80 percent of its original capacity after 1,000 charge cycles . Once it reaches that point, you'll start to notice the battery draining faster, and your phone may run slower.\n\nChecking your iPhone's battery health is as easy as opening the Settings app and entering the Battery menu. Scroll down and tap Battery Health to see if the capacity is below 80 percent. If that's the case, it's time to replace your battery , so you'll likely see a message recommending this. A new battery from Apple costs anywhere from $69 to $129 ($229 for the iPhone Duo), depending on which iPhone you have.\n\nWe recommend that you take your iPhone to an Apple Store or an authorized service provider. Replacing a worn-out battery with a new one will make your iPhone run faster and also help it last longer.\n\nIf nothing else has helped, a clean restore may be your last resort before buying a new phone. After using the same device for years, it tends to get cluttered with a lot of temporary files like updates, leftover files and app data. When you have years' worth of these files stored on your device, they can also cause your iPhone to run slower. In that case, restoring your iPhone may breathe new life into it.\n\nFirst, fully back up your iPhone to iCloud, or to your Mac or PC. Once all your data is safely stored, go to the Settings app , then General , and choose Transfer or Reset iPhone . Select the Erase All Content and Settings option and walk through to confirm the steps — your phone will restart as if it were brand new. You can restore your backup as part of the setup process to get all your apps and settings back, but setting up the device as new may be more effective in improving performance."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-95d78e8b18698be9",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1014252/peter-thiel-antichrist-lectures-analysis",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-20T15:45:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The Gospel according to Peter (Thiel)",
-        "summary": "It's a time of apocalyptic worldviews in Silicon Valley. The latest AI doom cycle is driven by effective altruism, a philosophy that has lurked around the fringes for years but recently burst into the mainstream because its adherents are embedded across the AI industry, from Anthropic to newly appointed AI safety watchdog METR. EA is […]",
-        "body": "It's a time of apocalyptic worldviews in Silicon Valley. The latest AI doom cycle is driven by effective altruism, a philosophy that has lurked around the fringes for years but recently burst into the mainstream because its adherents are embedded across the AI industry, from Anthropic to newly appointed AI safety watchdog METR. EA is a utilitarian approach to charity premised on doing the most good for the most people over the longest time, and EA advocates see halting an AI-induced doomsday as critical to saving as many humans as possible.\n\nBut EA has an important and equally apocalyptic rival in the crosscutting cosmologies of the tech tit …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-67ed20eb09674667",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2291754/perplexity-makes-it-easier-to-run-ai-workflows-entirely-on-your-mac/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-20T15:42:45.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Perplexity makes it easier to run AI workflows entirely on your own Mac",
-        "summary": "A Mac with at least 36GB of RAM can now run Perplexity AI workflows locally.",
-        "body": "You'll need a Mac with at least 36GB of RAM, however.\n\nAt the start of September, Perplexity introduced Hybrid Compute , an update to its Computer app that gave users the option to split their AI workloads across a combination of frontier and local models running on their own machine. In hindsight, it was probably only a matter of time before the company made it possible for people to run the platform entirely on their own device, because that's exactly what it's doing now .\n\nProvided you own a recent Apple Silicon Mac with at least 36GB of RAM, now you can run the entire Computer experience, including the all-important harness and orchestrator, on your own machine. Like Hybrid Compute , Perplexity is pitching this feature as a boon to thrifty users and those who want to keep their data private. For example, with access to your Notes and Mail apps, you could ask Computer to generate a priority to-do list for you, without any of the data in your emails being sent to the cloud. \"As more demanding workflows become practical to run locally, the machines people already own will take on a larger share of their AI work,\" the company explains. \"This gives users more control over sensitive data and credit spend.\"\n\nWith today's release, you can choose one of two models to run Computer locally: Qwen 3.6 or PPLX Pro. The latter is a Perplexity offshoot of Qwen 3.6, which the company did its own post-training for to fine tune it for Computer use. If, at any point, you feel like the task you're running would benefit from a frontier system chipping in, you can authorize the software to call on one of more than 15 models. Any code or tool execution a task might require is done in an isolated sandbox environment. \"These same security protocols persist in the cloud version of Perplexity Computer,\" says Perplexity.\n\nPerplexity Pro, Max and Enterprise subscribers begin using Computer locally starting today. Once you download and install the latest version of the Perplexity Mac app, just follow the in-app instructions to download and install a local model on your machine."
       }
     },
     "media": null
@@ -290,53 +337,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-3f8d82c33214c14b",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/20/apple-says-american-suppliers-make-almost-100-parts-for-iphone-18-pro-and-iphone-duo/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-20T12:24:26.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple says American suppliers make almost 100 parts for iPhone 18 Pro and iPhone Duo",
-        "summary": "Apple says that American companies are supplying “critical materials and components” for both the iPhone 18 Pro and the iPhone Duo . In all, it says that nearly 100 components across the two phones are produced by American companies in more than a dozen states. The company has named two of its US supply chain partners, stating that one of them will be making tech used in the variable aperture camera in the iPhone 18 Pro … more…",
-        "body": "Apple says that American companies are supplying “critical materials and components” for both the iPhone 18 Pro and the iPhone Duo . In all, it says that nearly 100 components across the two phones are produced by American companies in more than a dozen states.\n\nThe company has named two of its US supply chain partners, stating that one of them will be making tech used in the variable aperture camera in the iPhone 18 Pro …\n\nApple today announced one new partnership and a second expanded one through the American Manufacturing Program (AMP).\n\nThrough its American Manufacturing Program (AMP), Apple is partnering with Perryman Company, a Pennsylvania-based titanium producer, to supply titanium for Apple products, including iPhone Duo. Apple is also expanding its partnership with Qnity Electronics, headquartered in Delaware, to produce technology for the new variable aperture in the iPhone 18 Pro camera system — the most advanced Apple has ever made […]\n\n“We’re thrilled to expand our work with companies producing advanced materials and components for our newest iPhone lineup right here in America,” said Sabih Khan, Apple’s chief operating officer. “American ingenuity is vital to all our products, from the titanium crafted for iPhone Duo to breakthrough camera innovations in iPhone 18 Pro. We’re proud to work with Perryman and Qnity Electronics to continue expanding our American Manufacturing Program and support U.S. jobs.”\n\nThe company says it’s committing up to $100 million over the next three years to assist Perryman in making the grade 5 titanium used in the enclosure for the iPhone Duo. It says Qnity Electronics will be making a component used in the variable aperture lens of the iPhone 18 Pro.\n\nQnity, which joined the American Manufacturing Program in March, will produce advanced films essential to the new variable aperture camera system on iPhone 18 Pro.\n\nApple highlighted the work performed by five additional US suppliers:\n\nThe iPhone maker says the new partnerships include increased use of recycled materials, and that all of its direct suppliers are required to power their entire Apple manufacturing operations with renewable energy by the end of the decade."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-5fcb5713e569ebdb",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/tech-policy/2026/10/accused-openai-spy-had-folder-called-saudi-gov-docs-fbi-says/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-19T20:21:53.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Accused OpenAI spy had folder called “Saudi Gov Docs,” FBI says",
-        "summary": "US fears Saudi government will help ex-OpenAI engineer flee spying charges.",
-        "body": "On Monday, a court granted the US government's request to deny release of a former OpenAI engineer accused of bugging a top-secret conference room to steal the frontier lab’s secrets.\n\nIn a court filing Sunday, US attorney Craig Missakian argued that Abdulrahman Alfozan must continue to be detained while the US makes its case that Alfozan brazenly spied on OpenAI, either for his own personal business gain or to benefit the Kingdom of Saudi Arabia.\n\nEvidence showed that Alfozan had been chatting with a member of the KSA royal family on WhatsApp, while pursuing opportunities to permanently move back to Saudi Arabia during the country's biggest AI push yet, the government argued. Shortly before his arrest, the FBI found he accessed a folder called \"Saudi Gov Docs\" on his iPhone, where he also allegedly stored photos of a second bug he planted in the offices.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "applevis-apps-8307d1fac04170e3",
     "type": "news",
     "sourceId": "applevis-apps",
@@ -356,30 +356,6 @@
         "title": "Upward: Number Merge Puzzle",
         "summary": "Drop a number. Set off a chain. Climb to Orbit. Only the bottom rungs ever fall. Drop a number into one of five columns, watch equal numbers double where they touch, and let gravity chain one merge into the next — climbing 2 Pebble all the way to 512 Orbit. NO ADS. NO LIVES. NO BOOSTS. No ads, no consumable lives to wait out, and nothing you can buy to raise a score. Pro is a one-time unlock or a Play Pass — or nothing at all. PLAN THE CLIMB See the piece in hand and the next two pieces before you commit. Choose a column, set up connected matches, and build chain reactions that can transform the whole board. ONE SHARED DAILY Every player starts with the same Daily seed and 50-drop rules. Later pieces respond to your climb, so planning the ladder matters. 16 FIXED CHALLENGES Learn Upward through four chapters of authored, repeatable boards. The four-stage Trailhead chapter is free. Pro opens Ridgecraft, Thin Air, and Orbit School, with XP and board-theme rewards along the way. FIVE WAYS TO PLAY • Daily Climb — the shared 50-drop board • Classic — an open climb to Orbit • Blitz — two minutes, no take-backs • Chain Hunt — 50 drops with bonus points for deep cascades • Rising Sky — safe board space contracts every 10 drops BUILT TO FEEL GOOD Number-first tiles stay readable across every theme. Landing feedback, escalating haptics, rising chain tones, danger states, and a full Orbit celebration make every important move clear. WHAT FREE INCLUDES Free players receive the full Daily Climb, the Daily and Classic leaderboards, three Classic starts per day, the four-stage Trailhead, missions, achievements, and recent local progress. Upward Pro adds unlimited Classic, three specialty modes, 12 advanced challenges, 500-run history, two years of Daily archives, the Blitz leaderboard, friend challenges, Daily history sync, and two more board themes. Choose a one-time Upward Full Game Unlock, or StackForge Play Pass (monthly or annual) — Pro in every StackForge game plus One Good Thing. Prices and renewal terms appear before purchase. Terms of Use (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/ Privacy Policy: https://stackforgestudios.com/privacy",
         "body": "Drop a number. Set off a chain. Climb to Orbit.\n\nOnly the bottom rungs ever fall. Drop a number into one of five columns, watch equal numbers double where they touch, and let gravity chain one merge into the next — climbing 2 Pebble all the way to 512 Orbit.\n\nNO ADS. NO LIVES. NO BOOSTS. No ads, no consumable lives to wait out, and nothing you can buy to raise a score. Pro is a one-time unlock or a Play Pass — or nothing at all.\n\nPLAN THE CLIMB See the piece in hand and the next two pieces before you commit. Choose a column, set up connected matches, and build chain reactions that can transform the whole board.\n\nONE SHARED DAILY Every player starts with the same Daily seed and 50-drop rules. Later pieces respond to your climb, so planning the ladder matters.\n\n16 FIXED CHALLENGES Learn Upward through four chapters of authored, repeatable boards. The four-stage Trailhead chapter is free. Pro opens Ridgecraft, Thin Air, and Orbit School, with XP and board-theme rewards along the way.\n\nFIVE WAYS TO PLAY • Daily Climb — the shared 50-drop board • Classic — an open climb to Orbit • Blitz — two minutes, no take-backs • Chain Hunt — 50 drops with bonus points for deep cascades • Rising Sky — safe board space contracts every 10 drops\n\nBUILT TO FEEL GOOD Number-first tiles stay readable across every theme. Landing feedback, escalating haptics, rising chain tones, danger states, and a full Orbit celebration make every important move clear.\n\nWHAT FREE INCLUDES Free players receive the full Daily Climb, the Daily and Classic leaderboards, three Classic starts per day, the four-stage Trailhead, missions, achievements, and recent local progress. Upward Pro adds unlimited Classic, three specialty modes, 12 advanced challenges, 500-run history, two years of Daily archives, the Blitz leaderboard, friend challenges, Daily history sync, and two more board themes.\n\nChoose a one-time Upward Full Game Unlock, or StackForge Play Pass (monthly or annual) — Pro in every StackForge game plus One Good Thing. Prices and renewal terms appear before purchase.\n\nTerms of Use (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/ Privacy Policy: https://stackforgestudios.com/privacy"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-362b8f88c90b9508",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/tech-policy/2026/10/disney-found-a-way-to-buy-character-ai-without-buying-its-lawsuits/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-19T14:45:43.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Disney found a way to buy Character.AI without buying its lawsuits",
-        "summary": "Character.AI faces claims its bots encouraged minors to self-harm and kill their parents.",
-        "body": "This week, Character.AI declared bankruptcy. While some saw the fall of a chatbot platform as a harbinger for the industry , court filings indicate that the decision was actually a key part of a deal that has let Disney hire most of Character.AI’s staff—including its now former CEO Karandeep Anand —potentially acquire most of Character.AI’s technology , and avoid the beleaguered startup’s many legal liabilities and obligations.\n\nIn the past few years, Character.AI has faced multiple private lawsuits over the safety of its chatbots, as well as investigations from regulators around the world. In a declaration filed as part of the bankruptcy, Character.AI’s newly appointed CEO explained that the goal of the bankruptcy was to reach a “consensual resolution” with personal injury claimants and a group of states investigating the company, while maximizing the value of the company’s assets for shareholders.\n\nThe Disney deal seems to be structured so that whatever is left of Character.AI will retain responsibility for those legal battles, some of which are still ongoing.\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -454,30 +430,6 @@
         "title": "CoreAI Zoo",
         "summary": "CoreAI Zoo puts the open-weight AI model zoo on your iPhone, iPad and Mac. Pick a model, download it once, and run it entirely on your device. No account, no server, and nothing you type, say or photograph ever leaves the device. CHAT Stream answers from open language models such as Qwen3, Gemma, LFM2.5, Granite and Mistral, from 0.6B to 30B+ parameters depending on your device's memory. Vision-language models (Qwen3-VL, MiniCPM-V, LFM2.5-VL) answer questions about your photos. VISION Ask questions about an image, read text with on-device OCR, and describe what the camera sees. AUDIO Transcribe speech with Whisper large-v3-turbo, Parakeet and Qwen3-ASR. Talk to an audio-understanding model, generate speech with Kokoro and VoxCPM, and try on-device music generation. CAMERA Live depth estimation, object detection (YOLOX, RF-DETR), action recognition and super-resolution on the camera feed. TOOLS Experimental models such as diffusion-based language models. BENCH Measure load time, tokens per second and memory for any chat model on your own hardware. HOW IT WORKS Every model runs through Core ML on Apple silicon. Weights are downloaded from the Hugging Face Hub on first use over HTTPS, then cached, so the app works offline afterwards. One model is resident at a time to stay within memory limits. New models arrive through a live catalog without an app update. GETTING STARTED Start with Qwen3-0.6B (454 MB) for the fastest first run. Larger models state the free space and memory they need; a recent iPhone Pro or an Apple silicon Mac runs the mid-size ones comfortably. Model weights follow their own licenses, listed on each model's Hugging Face page. The app itself is BSD-3-Clause and part of the open CoreAI model zoo. Report issues and request models at github.com/john-rocky/coreai-model-zoo.",
         "body": "CoreAI Zoo puts the open-weight AI model zoo on your iPhone, iPad and Mac. Pick a model, download it once, and run it entirely on your device. No account, no server, and nothing you type, say or photograph ever leaves the device.\n\nCHAT Stream answers from open language models such as Qwen3, Gemma, LFM2.5, Granite and Mistral, from 0.6B to 30B+ parameters depending on your device's memory. Vision-language models (Qwen3-VL, MiniCPM-V, LFM2.5-VL) answer questions about your photos.\n\nVISION Ask questions about an image, read text with on-device OCR, and describe what the camera sees.\n\nAUDIO Transcribe speech with Whisper large-v3-turbo, Parakeet and Qwen3-ASR. Talk to an audio-understanding model, generate speech with Kokoro and VoxCPM, and try on-device music generation.\n\nCAMERA Live depth estimation, object detection (YOLOX, RF-DETR), action recognition and super-resolution on the camera feed.\n\nTOOLS Experimental models such as diffusion-based language models.\n\nBENCH Measure load time, tokens per second and memory for any chat model on your own hardware.\n\nHOW IT WORKS Every model runs through Core ML on Apple silicon. Weights are downloaded from the Hugging Face Hub on first use over HTTPS, then cached, so the app works offline afterwards. One model is resident at a time to stay within memory limits. New models arrive through a live catalog without an app update.\n\nGETTING STARTED Start with Qwen3-0.6B (454 MB) for the fastest first run. Larger models state the free space and memory they need; a recent iPhone Pro or an Apple silicon Mac runs the mid-size ones comfortably.\n\nModel weights follow their own licenses, listed on each model's Hugging Face page. The app itself is BSD-3-Clause and part of the open CoreAI model zoo. Report issues and request models at github.com/john-rocky/coreai-model-zoo."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-cbc97e83a832120a",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/10/anthropic-gives-outside-ai-watchdog-employee-like-access/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-18T16:25:19.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Anthropic gives outside AI watchdog “employee-like” access",
-        "summary": "The outside watchdog can publish its findings without Anthropic's approval.",
-        "body": "Anthropic has granted external evaluators “employee-like access” to assess the risks of its models, following through on a commitment to increase safeguards over concerns the technology could run catastrophically out of control.\n\nMETR, a nonprofit that has worked with leading labs including OpenAI, Anthropic, Google, and Meta, now has a team embedded in the Claude maker’s office with access to its hardware and internal systems.\n\nA greater role for third-party evaluators is among the main concrete steps the labs have proposed in response to rising concern about the dangers more capable AI systems could pose to the economy, cyber security, and humanity at large.\n\nRead full article\n\nComments"
       }
     },
     "media": null

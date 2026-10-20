@@ -1,5 +1,4 @@
 import Foundation
-import FoundationXML
 
 /// Extracción lineal y hablable de documentos Office Open XML.
 /// Evita leer XML sin procesar y mantiene el orden lógico de las celdas.

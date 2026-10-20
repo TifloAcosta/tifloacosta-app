@@ -165,13 +165,17 @@ final class ShareViewController: UIViewController {
             finish("No se ha recibido contenido compatible.")
             return
         }
+        // Keep the share sheet aligned with the formats the reader really imports.
         let supported: Set<String> = [
-            "pdf", "txt", "html", "htm", "md", "docx", "pptx", "xlsx",
-            "epub", "odt", "rtf", "fb2", "mp3", "m4a", "aac", "wav",
-            "aiff", "flac", "zip", "png", "jpg", "jpeg", "webp"
+            "pdf", "txt", "text", "html", "htm", "md", "markdown",
+            "csv", "json", "xml", "log", "srt", "rtf", "fb2",
+            "docx", "odt", "pptx", "ppsx", "pptm", "xlsx", "xlsm",
+            "epub", "mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff",
+            "caf", "zip", "daisy", "png", "jpg", "jpeg",
+            "heic", "heif", "tif", "tiff"
         ]
         let providers = incoming.flatMap { $0.attachments ?? [] }
-        let imageExtensions: Set<String> = ["png", "jpg", "jpeg", "webp"]
+        let imageExtensions: Set<String> = ["png", "jpg", "jpeg", "heic", "heif", "tif", "tiff"]
         // WhatsApp may put an image preview before the original EPUB.
         // A named document/audio always beats an image; a standalone image
         // remains available for the reader's existing OCR.

@@ -507,7 +507,7 @@ struct NativeReaderLibraryScreen: View {
             let ext = (doc.fileExtension ?? "txt").lowercased()
             switch filterIndex {
             case 1: return ["txt", "text", "md", "markdown", "html", "htm", "rtf",
-                             "csv", "json", "xml", "log", "srt"].contains(ext)
+                             "csv", "json", "xml", "log", "srt", "fb2", "odt"].contains(ext)
             case 2: return ext == "pdf"
             case 3: return ext == "epub"
             case 4: return ["docx", "pptx", "ppsx", "pptm", "xlsx", "xlsm"].contains(ext)

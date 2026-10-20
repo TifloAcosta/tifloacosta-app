@@ -1039,11 +1039,18 @@ struct NativeReadingScreen: View {
                 .padding()
             }
             .onChange(of: focusedFragment) { _, index in
-                // Never recenter the reading view on ordinary VoiceOver swipes.
-                // Scroll only after an explicit "Unidad anterior/siguiente" action.
-                if let index, programmaticFocusRequest {
+                guard let index, textLayout.fragmentStarts.indices.contains(index) else { return }
+                if programmaticFocusRequest {
+                    // Recentrar exclusivamente al ordenar avanzar o retroceder.
                     proxy.scrollTo(index, anchor: .center)
                     programmaticFocusRequest = false
+                } else if !speech.isPlaying {
+                    // Lectura visual o con VoiceOver: guardar dónde está el lector,
+                    // sin iniciar voz ni mover el foco por nuestra cuenta.
+                    readingOffset = textLayout.fragmentStarts[index]
+                    currentPercent = min(100, Int(Double(readingOffset) * 100 /
+                        Double(max(1, textLayout.totalCharacters))))
+                    if abs(currentPercent - lastSavedPercent) >= 5 { persistPosition() }
                 }
             }
         }

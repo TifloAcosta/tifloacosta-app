@@ -538,12 +538,17 @@ struct NativeReaderLibraryScreen: View {
         let pitch = pitches[max(0, min(pitches.count - 1, chosenPitch))]
         if let paths = latest.trackPaths, !paths.isEmpty {
             let urls = paths.compactMap { NativeReaderFormats.storedURL(for: $0) }
+            guard !urls.isEmpty, urls.count == paths.count else {
+                importError = "Faltan archivos de audio de esta obra."
+                return
+            }
             let startingTrack = min(max(0, latest.lastTrackIndex ?? 0), urls.count - 1)
+            let targetLibrary = library
             do {
                 try speech.playPlaylist(urls, speed: speed, track: startingTrack,
                     at: latest.lastPercent ?? 0,
-                    onTrackChanged: { [weak library] index in
-                        library?.saveAudioPosition(document, track: index, percent: 0)
+                    onTrackChanged: { [weak targetLibrary] index in
+                        targetLibrary?.saveAudioPosition(document, track: index, percent: 0)
                     },
                     onError: { error in importError = "No se pudo reproducir: " + error })
             } catch { importError = error.localizedDescription }
@@ -1023,7 +1028,7 @@ struct NativeReadingScreen: View {
 
     private func playTrack() {
         guard tracks.indices.contains(trackIndex),
-              let url = NativeReaderFormats.storedURL(for: tracks[trackIndex]) else {
+              NativeReaderFormats.storedURL(for: tracks[trackIndex]) != nil else {
             actionMessage = "No se encuentra la pista de audio."
             return
         }
@@ -1165,14 +1170,31 @@ struct NativeReadingScreen: View {
     @ViewBuilder
     private var trackButtons: some View {
         if tracks.count > 1 {
-            HStack {
-                Button("Pista anterior") { changeTrack(-1) }
-                    .disabled(trackIndex == 0)
-                Button("Pista siguiente") { changeTrack(1) }
-                    .disabled(trackIndex == tracks.count - 1)
+            VStack(alignment: .leading, spacing: 4) {
+                NativeAdjustableChoice(
+                    title: "Seleccionar pista",
+                    choices: tracks.indices.map { "Pista \($0 + 1) de \(tracks.count)" },
+                    selectedIndex: Binding(
+                        get: { trackIndex },
+                        set: { index in
+                            guard tracks.indices.contains(index), index != trackIndex else { return }
+                            trackIndex = index
+                            currentPercent = 0
+                            playTrack()
+                            persistPosition()
+                            applySleepTimer()
+                        }
+                    )
+                )
+                HStack {
+                    Button("Pista anterior") { changeTrack(-1) }
+                        .disabled(trackIndex == 0)
+                    Button("Pista siguiente") { changeTrack(1) }
+                        .disabled(trackIndex == tracks.count - 1)
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.small)
             }
-            .buttonStyle(.bordered)
-            .controlSize(.small)
         }
     }
 

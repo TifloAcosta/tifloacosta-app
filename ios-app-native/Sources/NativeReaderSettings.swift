@@ -258,6 +258,7 @@ struct NativeReaderDocumentVisualSettingsScreen: View {
 
 struct NativeReaderDocumentSettingsScreen: View {
     let document: NativeReadingDocument
+    @EnvironmentObject private var library: NativeReaderLibrary
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -275,6 +276,10 @@ struct NativeReaderDocumentSettingsScreen: View {
                 }
                 Text("Estos ajustes se guardan para esta obra. Las demás seguirán los ajustes generales.")
                     .font(.footnote)
+                Button("Usar ajustes generales en esta obra") {
+                    library.resetPreferences(document)
+                }
+                .accessibilityHint("Borra solamente las preferencias de audio y visuales de esta obra; conserva su contenido, posición y marcas.")
             }
             .tifloScreenSurface()
             .navigationTitle("Ajustes del documento")
